@@ -18,58 +18,39 @@ msgstr ""
 "Generated-By: Babel 0.9.5\n"
 
 msgid "label_measure_action_plan"
-msgstr "Elimination or reduction of the risk"
+msgstr "General approach (to eliminate or reduce the risk)"
 
 msgid "report_measure_actionplan"
-msgstr "Elimination or reduction of the risk:"
+msgstr "General approach (to eliminate or reduce the risk):"
 
 msgid "label_measure_prevention_plan"
-msgstr "Specific measure(s) to be implemented"
+msgstr "Specific action(s) required to implement this approach"
 
 msgid "report_measure_preventionplan"
-msgstr "Specific measure(s) to be implemented:"
+msgstr "Specific action(s) required to implement this approach:"
 
 msgid "label_measure_requirements"
-msgstr "Level of expertise required"
+msgstr "Level of expertise and/or requirements needed"
 
 msgid "report_measure_requirements"
-msgstr "Level of expertise required:"
+msgstr "Level of expertise and/or requirements needed:"
 
 msgid "actionplan_measure_tooltip"
 msgstr ""
-"Describe: 1) the solution giving details if it is aiming to eliminate or "
-"reduce the risk, 2) the specific measures (tasks) that have to be carried "
-"out in order to implement the solution, 3) the level of expertise required "
-"to implement the solution. This can be in the range of \"Common sense (no "
-"OSH knowledge required)\", \"No specific OSH expertise, but minimum OSH "
-"knowledge or training and/or consultation of OSH guidance required\", or "
-"\"OSH expert\"."
+"Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any)."
 
 msgid "help_measure_action_plan"
 msgstr ""
-"Describe the solution giving details if it is aiming to eliminate or \n"
-"reduce the risk"
+"Describe your general approach to eliminate or (if the risk is not avoidable) reduce the risk."
 
 msgid "help_measure_prevention_plan"
 msgstr ""
-"Describe the specific measures (tasks) that have to be carried out in order "
-"to implement the solution"
+"Describe the specific action(s) required to implement this approach (to eliminate or to reduce the risk)."
 
 msgid "help_measure_requirements"
 msgstr ""
-"Precise the level of expertise required to implement the solution:\n"
-"\"Common sense (no OSH knowledge required)\", \"No specific OSH expertise, \n"
-"but minimum OSH knowledge or training and/or consultation of OSH guidance \n"
-"required\", or \"OSH expert\"."
+"Describe the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any)."
 
-msgid "header_measure"
-msgstr "Solution ${index}"
-
-msgid "measure_template_title"
-msgstr "Solution 1"
-
-msgid "label_add_measure"
-msgstr "Add another solution"
 
 msgid "navigation_surveys"
 msgstr "Sessions"
@@ -80,4 +61,21 @@ msgstr "Produced by ${EU-OSHA}"
 msgid "appendix_about"
 msgstr "About"
 
+msgid "Solution"
+msgstr "Measure"
+
+#. Default: Common solutions
+#: euphorie/client/templates/risk_actionplan.pt:131
+msgid "header_common_solutions"
+msgstr "Common measures"
+
+#. Default: Standard solutions
+#: euphorie/content/templates/risk_view.pt:62
+msgid "header_solutions"
+msgstr "Standard measures"
+
+#. Default: Solution ${number}
+#: euphorie/content/templates/risk_view.pt:65
+msgid "risk_solution_header"
+msgstr "Measure ${number}"
 

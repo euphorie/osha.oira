@@ -60,7 +60,7 @@
     <p id="appendix">
       <tal:block repeat="page webhelpers/appendix"
       ><a href="${page/url}">${page/title}</a> |</tal:block>
-      <tal:span i18n:translate="appendix_authors">Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_new">EU-OSHA</a>.</tal:span> | <a i18n:translate="appendix_about" href="http://www.oira.osha.europa.eu/about" target="_new">About</a>
+      <tal:span i18n:translate="appendix_authors">Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_new">EU-OSHA</a>.</tal:span> | <a i18n:translate="appendix_about" href="about" tal:attributes="href webhelpers/about_url" target="_new">About</a>
     </p>
   </metal:appendix>
 

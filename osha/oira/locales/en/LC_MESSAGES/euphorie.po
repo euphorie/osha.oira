@@ -182,3 +182,82 @@ msgstr "Please choose a country of which you would like to view or copy an OiRA 
 #: euphorie/content/templates/country_view.pt:13
 msgid "intro_select_sector"
 msgstr "Select a sector for which you would like to view or copy an OiRA Tool."
+
+#. Default: This report was based on the survey '${title}' of revision date
+#. ${date}.
+#: euphorie/client/templates/report_actionplan.pt:189
+msgid "report_survey_revision"
+msgstr "This report was based on the OiRA Tool '${title}' of revision date ${date}."
+
+#. Default: You may enter a name for this survey that will make it easier for
+#. you
+#. to find your session back if you wish to continue at a later time
+#: euphorie/client/templates/sessions.pt:58
+#: euphorie/client/templates/survey_sessions.pt:49
+msgid "label_session_title"
+msgstr ""
+"You may enter a name for this OiRA Tool that will make it easier for you to find your session back if you wish to continue at a later time."
+
+#. Default: This is the title of this survey version. This name is never shown
+#. to
+#. users.
+#: euphorie/content/survey.py:48 euphorie/content/survey.py:167
+msgid "help_survey_title"
+msgstr ""
+"This is the title of this OiRA Tool version. This name is never shown to users."
+
+#. Default: The introduction text is shown when starting a new survey session.
+#. If
+#. no introduction is provided here a standard text will be shown.Please keep
+#. this
+#. text brief so it will easily fit on screens of small devices such as phones
+#. and
+#. PDAs
+#: euphorie/content/survey.py:58
+msgid "help_introduction"
+msgstr ""
+"The introduction text is shown when starting a new OiRA Tool session. If no introduction is provided here a standard text will be shown. Please keep this text brief so it will easily fit on screens of small devices such as phones and PDAs."
+
+#. Default: You can not delete the only survey version.
+#: euphorie/content/survey.py:239
+msgid "message_delete_no_last_survey"
+msgstr "You cannot delete the only OiRA Tool version."
+
+#. Default: Title of imported survey.
+#: euphorie/content/upload.py:74 euphorie/content/upload.py:93
+#: euphorie/content/upload.py:100
+msgid "label_surveygroup_title"
+msgstr "Title of imported OiRA Tool"
+
+#. Default: Succesfully imported the survey
+#: euphorie/content/upload.py:310 euphorie/content/upload.py:341
+msgid "upload_success"
+msgstr "Succesfully imported the OiRA Tool"
+
+#. Default: Import sector and survey
+#: euphorie/content/upload.py:323
+msgid "title_import_sector_survey"
+msgstr "Import sector and OiRA TooL"
+
+#. Default: There are no surveys present. You can ${add_link}.
+#: euphorie/content/templates/sector_view.pt:14
+msgid "no_surveys_present"
+msgstr "There are no OiRA Tools present. You can ${add_link}."
+
+#. Default: The form will allow you to create a new survey revision.
+#: euphorie/content/templates/survey_add.pt:9
+msgid "intro_add_survey"
+msgstr "The form will allow you to create a new OiRA Tool revision."
+
+#. Default: Choose a revision of the selected survey
+#: euphorie/content/templates/surveygroup_add.pt:71
+#: euphorie/content/templates/surveygroup_add.pt:35
+msgid "label_choose_survey"
+msgstr "Choose a revision of the selected OiRA Tool"
+
+#. Default: Choose a survey
+#: euphorie/content/templates/surveygroup_add.pt:52
+#: euphorie/content/templates/surveygroup_add.pt:26
+msgid "label_choose_surveygroup"
+msgstr "Choose an OiRA Tool"
+

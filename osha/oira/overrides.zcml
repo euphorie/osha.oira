@@ -2,4 +2,15 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser">
 
+    <browser:page
+        for="*"
+        layer="euphorie.client.interfaces.IClientSkinLayer"
+        class="euphorie.client.utils.WebHelpers"
+        name="webhelpers"
+        template="templates/webhelpers.pt"
+        permission="zope2.View"
+        />
+
+
+
 </configure>

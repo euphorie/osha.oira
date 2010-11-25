@@ -54,10 +54,9 @@ msgid "help_measure_prevention_plan"
 msgstr ""
 "Describe the specific action(s) required to implement this approach (to eliminate or to reduce the risk)."
 
+## Renaming request ticket #2253
 msgid "help_measure_requirements"
-msgstr ""
-"Describe the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any)."
-
+msgstr "Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance \"common sense (no OSH knowledge required)\", \"no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required\", or \"OSH expert\". You can also describe here any other additional requirement (if any)."
 
 msgid "navigation_surveys"
 msgstr "Sessions"
@@ -206,14 +205,14 @@ msgstr "Select a sector for which you would like to view or copy an OiRA Tool."
 msgid "report_survey_revision"
 msgstr "This report was based on the OiRA Tool '${title}' of revision date ${date}."
 
+## Renaming request ticket #2253
 #. Default: You may enter a name for this survey that will make it easier for
 #. you
 #. to find your session back if you wish to continue at a later time
 #: euphorie/client/templates/sessions.pt:58
 #: euphorie/client/templates/survey_sessions.pt:49
 msgid "label_session_title"
-msgstr ""
-"You may enter a name for this OiRA Tool that will make it easier for you to find your session back if you wish to continue at a later time."
+msgstr "Enter a name for this OiRA Tool that will allow you to find your session if you wish to continue at a later time."
 
 #. Default: This is the title of this survey version. This name is never shown
 #. to
@@ -354,11 +353,11 @@ msgstr "You are free to provide the information below. This information is meant
 
 ####### /end/ Renaming requests from #1737 - 26.8.2010 manuela. #######
 
-## Renaming request ticket #1668 comment 11
+## Renaming request ticket #1668 comment 11, changed again in #2253
 #. Default: Introduction action plan
 #: euphorie/content/module.py:60
 msgid "label_solution_direction"
-msgstr "Overview of solution"
+msgstr "Solution"
 
 #: euphorie/client/publish.py:212
 msgid "Succesfully published the survey"
@@ -377,3 +376,128 @@ msgstr "Publish the selected tool live with its latest changes."
 #: euphorie/deployment/tiles/templates/versions.pt:19
 msgid "help_add_version"
 msgstr "Create a duplicate of the selected tool"
+
+#. Default: This option allows uses to skip the evaluation phase.
+#: euphorie/content/survey.py:68
+msgid "help_evaluation_optional"
+msgstr "The option allows the end-user to skip the Evaluation step."
+
+## Renaming request ticket #2253
+#. Default: If this is to be an "optional" profile question, it must be formulated
+#. as a question and be answerable with YES or NO. If this is to be a "repeatable"
+#. profile question (statement), it must be formulated as a prompt to fill in
+#. multiple values.
+#: euphorie/content/profilequestion.py:36
+msgid "help_profilequestion_question"
+msgstr "If this is to be \"optional\", it must be formulated so that it is answerable with YES (the end-user will have to tick a box) or NO (e.g. “Do you work with the public?”). If this is to be \"repeatable\", it must be formulated as a prompt to fill in multiple values (e.g. “List your different work locations”)."
+
+## Renaming request ticket #2253
+#. Default: The basic architecture of an Online interactive Risk Assessment
+#. consists of: - profile questions (questions defining the company profile) -
+#. modules and potentially sub-modules - risks (positive statements) Profile
+#. questions are used to determine whether particular modules apply to the end user
+#. at all (OPTIONAL), or whether they should be repeated a number of times
+#. (REPEATABLE). Such questions are asked BEFORE starting the risk identification
+#. and evaluation. If the end-user does not confirm that an optional profile
+#. question is relevant (by ticking the box), then the corresponding module will be
+#. skipped entirely. If the end-user enters more than one option to a repeatable
+#. profile question then the corresponding module will be repeated the specified
+#. number of times.
+#: euphorie/content/profiles/default/types/euphorie.profilequestion.xml:8
+msgid "description_profilequestion"
+msgstr "The basic architecture of an Online interactive Risk Assessment consists of: - profile questions (questions defining the company profile) - modules and sub-modules - risks (affirmative statements). Profile questions are used to determine whether particular modules apply to the end user at all (OPTIONAL), or whether they should be repeated a number of times (REPEATABLE). Such questions are asked BEFORE starting the risk identification and evaluation. If the end-user does not confirm that an optional profile question is relevant (by ticking the box), then the corresponding module will be skipped entirely. If the end-user enters more than one option to a repeatable profile question then the corresponding module will be repeated the specified number of times."
+
+## Renaming request ticket #2253
+#. Default: Include any relevant information that may be helpful for users.
+#: euphorie/content/module.py:38 euphorie/content/page.py:20
+#: euphorie/content/profilequestion.py:48 euphorie/content/solution.py:24
+msgid "help_module_description"
+msgstr "Include any relevant information that may be helpful for the end-user."
+
+## Renaming request ticket #2253
+#. Default: Allow users to skip this module and everything inside it.
+#: euphorie/content/module.py:47
+msgid "help_module_optional"
+msgstr "Allows the end-user to skip this module and everything inside it."
+
+## Renaming request ticket #2253
+#. Default: The question to ask users if this module is optional. This has to be a
+#. yes/no question.
+#: euphorie/content/module.py:56
+msgid "help_module_question"
+msgstr "The question to ask the end-user if this module is optional. It must be formulated so that it is answerable with YES (the end-user will have to tick a box) or NO."
+
+## Renaming request ticket #2253
+#. Default: This information will be shown to users when they enter this module
+#. while working on the action plan.
+#: euphorie/content/module.py:70
+msgid "help_solution_direction"
+msgstr "This information will appear in the Action plan step and should include an overview of general solution(s) related to this module."
+
+## Renaming request ticket #2253
+#. Default: Statement
+#: euphorie/content/risk.py:40
+msgid "label_statement"
+msgstr "Affirmative statement"
+
+## Renaming request ticket #2253
+#. Default: Problem description
+#. Default: Inversed statement
+#: euphorie/content/risk.py:48 euphorie/content/templates/risk_view.pt:36
+msgid "label_problem_description"
+msgstr "Negative statement"
+
+## Renaming request ticket #2253
+#. Default: This is a short statement about a possible risk.
+#: euphorie/content/risk.py:41
+msgid "help_statement"
+msgstr "This is a short affirmative statement about a possible risk (e.g. The building is well maintained.)"
+
+## Renaming request ticket #2253
+#. Default: This is the inverse of the statement: a short description of current
+#. (bad) situation.
+#: euphorie/content/risk.py:50
+msgid "help_problem_description"
+msgstr "This is the inverse of the affirmative statement (e.g. The building is not well maintained.)"
+
+## Renaming request ticket #2253
+#. Default: Describe the risk. Include any relevant information that may be helpful
+#. for users.
+#: euphorie/content/risk.py:59
+msgid "help_risk_description"
+msgstr "Describe the risk. Include any relevant information that may be helpful for the end-user."
+
+## Renaming request ticket #2253
+#. Default: Top 5
+#: euphorie/content/risk.py:106
+msgid "risktype_top5"
+msgstr "Priority risk"
+
+## Renaming request ticket #2253
+#. Default: 'Risk' is related to the workplace. 'Policy' is related to agreements,
+#. procedures and management decisions. It can be answered from behind a desk (no
+#. need to examine the workplace). 'Top 5' is one of the top five risks of the
+#. sector.
+#: euphorie/content/risk.py:97
+msgid "help_risk_type"
+msgstr "“Priority risk” is one of the high risks in the sector. “Risk” is related to the workplace or to the work carried out. “Policy” refers to agreements, procedures, and management decisions."
+
+## Renaming request ticket #2253
+#. Default: Select 'estimated' if calcuation is not necessary or not possible.
+#: euphorie/content/risk.py:115
+msgid "help_evaluation_method"
+msgstr "Choose between ESTIMATED (rough estimation) or CALCULATED (combination of probability, frequency and severity) method."
+
+## Renaming request ticket #2253
+#. Default: You can help the user by selecting a default priority. The user can
+#. still change the priority.
+#: euphorie/content/risk.py:129
+msgid "help_default_priority"
+msgstr "You can help the end-user by selecting a default priority. He/she can still change the priority."
+
+## Renaming request ticket #2253
+#. Default: Indicate the severity of the manage if this risk occurs.
+#: euphorie/content/risk.py:177
+msgid "help_default_severity"
+msgstr "Indicate the severity if this risk occurs."
+

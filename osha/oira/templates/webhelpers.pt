@@ -66,6 +66,16 @@
       ><a href="${page/url}">${page/title}</a> |</tal:block>
       <tal:span i18n:translate="appendix_produced_by">Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_new">EU-OSHA</a>.</tal:span> |
       <a href="${webhelpers/about_url}" i18n:translate="appendix_about">About</a>
+      |
+      <a href="http://www.oira.osha.europa.eu/privacy-policy" i18n:translate="appendix_contact">Privacy</a>
+      |
+      <a href="http://www.oira.osha.europa.eu/disclaimer" i18n:translate="appendix_disclaimer">Disclaimer</a>
+      |
+      <a href="http://www.gnu.org/licenses/gpl.html" i18n:translate="appendix_gpl_license">GPL License</a>
+      |
+      <a href="http://creativecommons.org/licenses/by-sa/2.5/" i18n:translate="appendix_cc_license">CC License</a>
+      |
+      <a href="http://www.oira.osha.europa.eu/contact-info" i18n:translate="appendix_contact">Contact</a>
     </p>
   </metal:appendix>
 

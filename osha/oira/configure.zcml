@@ -10,8 +10,7 @@
     <i18n:registerTranslations directory="locales" />
     <include package=".tiles" />
 
-    <include package="five.grok" />
-    <include package="euphorie.client" />
+    <include package="euphorie.deployment" />
     <grok:grok package="." />
 
 </configure>

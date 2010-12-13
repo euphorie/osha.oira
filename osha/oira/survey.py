@@ -1,12 +1,12 @@
 from five import grok
 from z3c.saconfig import Session
 from euphorie.client.survey import ActionPlanReportView
-from euphorie.client.survey import PathGhost
-from euphorie.client.survey import IReportPhaseSkinLayer
 from euphorie.client.update import redirectOnSurveyUpdate
 from euphorie.client.session import SessionManager
 from osha.oira import model
 from sqlalchemy import sql
+
+from interfaces import IOSHAReportPhaseSkinLayer
 
 grok.templatedir("templates")
 
@@ -20,10 +20,8 @@ class OSHAActionPlanReportView(ActionPlanReportView):
 
     Please refer to original for more details.
     """
-    grok.context(PathGhost)
-    grok.require("euphorie.client.ViewSurvey")
     grok.template("report_actionplan")
-    grok.layer(IReportPhaseSkinLayer)
+    grok.layer(IOSHAReportPhaseSkinLayer)
     grok.name("view")
 
     def update(self):

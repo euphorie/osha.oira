@@ -157,11 +157,12 @@
       </tal:risk>
     </tal:block>
 
+    <tal:starred tal:condition="view/nodes">
     <hr/>
-
-    <p tal:condition="view/nodes" id="top5-footnote" class="discrete">*) <tal:span i18n:translate="top5_risk_not_present">
+    <p id="top5-footnote" class="discrete">*) <tal:span i18n:translate="top5_risk_not_present">
     This risk is not present in your organisation, but since the sector organisation considers this one of the top 5 most
     critical risks it must be included in this report.</tal:span></p>
+    </tal:starred>
 
     <ol id="steps" tal:define="survey_url webhelpers/survey_url">
       <li class="complete" id="step-1">

@@ -26,6 +26,12 @@
       <a class="button-medium printButton jsOnly" i18n:translate="button_print">Print</a>
     </div>
 
+    <p class="emphasis" 
+        tal:condition="view/unanswered_nodes" 
+        i18n:translate="warning_unanswered_risks"> 
+            WARNING: There are still unanswered risks. See the list at the bottom of the page. 
+    </p>
+
     <div class="notice introduction">
       <p i18n:translate="plan_report_intro_1">By filling in the list of questions, you have completed a risk assessment. This assessment is used to draw up an action plan. The progress of this action plan must be discussed annually and a small report must be written on the progress. Certain subjects might have been completed and perhaps new subjects need to be added.</p>
       <p i18n:translate="plan_report_intro_2">Your answers and report were <strong i18n:name="automatically_saved"><tal:span i18n:translate="plan_report_intro_2_automatically_saved">automatically saved</tal:span></strong> and may be found back or deleted at any time via the <a href="#" i18n:name="preparation_step" i18n:translate="plan_report_intro_2_preparation_step">preparation step</a>.</p>
@@ -153,7 +159,7 @@
 
     <hr/>
 
-    <p id="top5-footnote" class="discrete">*) <tal:span i18n:translate="top5_risk_not_present">
+    <p tal:condition="view/nodes" id="top5-footnote" class="discrete">*) <tal:span i18n:translate="top5_risk_not_present">
     This risk is not present in your organisation, but since the sector organisation considers this one of the top 5 most
     critical risks it must be included in this report.</tal:span></p>
 
@@ -190,10 +196,12 @@
       </li>
     </ol>
 
+    <tal:if define="risk_not_present_nodes view/risk_not_present_nodes"
+            condition="risk_not_present_nodes">
     <h2 i18n:translate="header_risks_not_present">Risks identified as not being present in you organisation:</h2>
     <tal:block 
             define="identification_url python:webhelpers.survey_url(phase='identification')"
-            repeat="node view/risk_not_present_nodes">
+            repeat="node risk_not_present_nodes">
       <tal:module condition="python:node.type!='risk'">
         <tal:tag replace="structure python:'&lt;h%s id=\'node-%s\'&gt;' % (node.depth+1, node.id)"/><a href="${identification_url}/${python:'/'.join(node.short_path)}">${node/number} ${node/title}</a><tal:tag replace="structure python:'&lt;/h%s&gt;' % (node.depth+1)"/>
       </tal:module>
@@ -232,13 +240,17 @@
         </p></blockquote>
       </tal:risk>
     </tal:block>
+    </tal:if>
 
 
+
+    <tal:if define="unanswered_nodes view/unanswered_nodes"
+            condition="unanswered_nodes">
     <h2 i18n:translate="header_unanswered_risks">Unanswered risks:</h2>
     <p>The following risks have not yet been answered. Please do so at the soonest possibility.</p>
     <tal:block 
             define="identification_url python:webhelpers.survey_url(phase='identification')"
-            repeat="node view/unanswered_nodes">
+            repeat="node unanswered_nodes">
       <tal:module condition="python:node.type!='risk'">
         <tal:tag replace="structure python:'&lt;h%s id=\'node-%s\'&gt;' % (node.depth+1, node.id)"/><a href="${identification_url}/${python:'/'.join(node.short_path)}">${node/number} ${node/title}</a><tal:tag replace="structure python:'&lt;/h%s&gt;' % (node.depth+1)"/>
       </tal:module>
@@ -279,6 +291,7 @@
         </p></blockquote>
       </tal:risk>
     </tal:block>
+    </tal:if>
 
     <hr/>
     <ul class="discrete">

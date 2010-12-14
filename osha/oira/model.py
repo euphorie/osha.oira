@@ -43,7 +43,7 @@ MODULE_WITH_RISKS_NOT_PRESENT_FILTER = \
                    node.session_id==SurveyTreeItem.session_id,
                    node.id==Risk.sql_risk_id,
                    node.type=="risk",
-                   Risk.identification==None,
+                   Risk.identification=='yes',
                    node.depth>SurveyTreeItem.depth,
                    node.path.like(SurveyTreeItem.path+"%")))))
 

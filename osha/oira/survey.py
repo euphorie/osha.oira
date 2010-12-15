@@ -1,14 +1,23 @@
 from five import grok
 from z3c.saconfig import Session
 from euphorie.client.survey import ActionPlanReportView
+from euphorie.client.survey import SurveyPublishTraverser
+from euphorie.client.survey import IdentificationReport
 from euphorie.client.update import redirectOnSurveyUpdate
 from euphorie.client.session import SessionManager
 from osha.oira import model
 from sqlalchemy import sql
-
-from interfaces import IOSHAReportPhaseSkinLayer
+import interfaces
 
 grok.templatedir("templates")
+
+class OSHASurveyPublishTraverser(SurveyPublishTraverser):
+    phases = {
+            "identification": interfaces.IOSHAIdentificationPhaseSkinLayer,
+            "evaluation": interfaces.IOSHAEvaluationPhaseSkinLayer,
+            "actionplan": interfaces.IOSHAActionPlanPhaseSkinLayer,
+            "report": interfaces.IOSHAReportPhaseSkinLayer,
+            }
 
 class OSHAActionPlanReportView(ActionPlanReportView):
     """
@@ -21,7 +30,7 @@ class OSHAActionPlanReportView(ActionPlanReportView):
     Please refer to original for more details.
     """
     grok.template("report_actionplan")
-    grok.layer(IOSHAReportPhaseSkinLayer)
+    grok.layer(interfaces.IOSHAReportPhaseSkinLayer)
     grok.name("view")
 
     def update(self):
@@ -53,4 +62,15 @@ class OSHAActionPlanReportView(ActionPlanReportView):
                                 model.RISK_NOT_PRESENT_FILTER))\
                 .order_by(model.SurveyTreeItem.path)
         self.risk_not_present_nodes=query.all()
+
+
+class OSHAIdentificationReport(IdentificationReport):
+    """
+    Overrides the original IdentificationReport in euphorie.client.survey.py
+    in order to provide a new template.
+
+    Please refer to original for more details.
+    """
+    grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
+    grok.template("report_identification")
 

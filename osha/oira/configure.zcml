@@ -10,6 +10,15 @@
     <five:registerPackage package="." initialize=".initialize" />
     <i18n:registerTranslations directory="locales" />
 
+    <genericsetup:registerProfile
+        name="default"
+        title="osha.oira"
+        directory="profiles/default"
+        description="OSHA OiRA customizations for Euphorie"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
     <configure zcml:condition="installed euphorie.deployment">
         <include package=".tiles" />
         <include package="euphorie.deployment" />

@@ -1,4 +1,4 @@
-#!/opt/python/python-2.6/bin/python2.6
+#!/usr/bin/python
 
 # Author: Wolfgang Thomas <thomas@syslab.com>
 

@@ -179,7 +179,7 @@ msgstr ""
 msgid "nav_surveys"
 msgstr "OiRA Tools"
 
-#. Default: "Surveys"
+#. Default: "OiRA Tools"
 #: euphorie/content/templates/sector_view.pt:12
 msgid "header_sector_survey_list"
 msgstr "OiRA Tools"
@@ -219,72 +219,73 @@ msgstr "OiRA Tool import"
 msgid "Survey version"
 msgstr "OiRA Tool version"
 
-#. Default: "add a new survey"
+#. Default: "add a new OiRA Tool"
 #: euphorie/content/templates/sector_view.pt:31
 #: euphorie/content/templates/sector_view.pt:16
 msgid "add_survey"
 msgstr "add a new OiRA Tool"
 
-#. Default: "The form will allow you to create a new survey."
+#. Default: "The form will allow you to create a new OiRA Tool."
 #: euphorie/content/templates/surveygroup_add.pt:9
 msgid "intro_add_surveygroup"
 msgstr "The form will allow you to create a new OiRA Tool."
 
-#. Default: "Base my new survey on an existing survey of another organisation"
+#. Default: "Base my new OiRA Tool on an existing OiRA Tool of another
+#. organisation"
 #: euphorie/content/templates/surveygroup_add.pt:19
 msgid "survey_source_other"
 msgstr ""
 "Base my new OiRA Tool on an existing OiRA Tool of another organisation."
 
-#. Default: "Base my new survey on an existing survey of my organisation"
+#. Default: "Base my new OiRA Tool on an existing OiRA Tool of my
+#. organisation"
 #: euphorie/content/templates/surveygroup_add.pt:18
 msgid "survey_source_local"
 msgstr "Base my new OiRA Tool on an existing OiRA Tool of my organisation."
 
-#. Default: "Create a new survey from scratch"
+#. Default: "Create a new OiRA Tool from scratch"
 #: euphorie/content/templates/surveygroup_add.pt:17
 msgid "survey_source_scratch"
 msgstr "Create a new OiRA Tool from scratch."
 
-#. Default: "This survey has no modules."
+#. Default: "This OiRA Tool has no modules."
 #: euphorie/content/templates/survey_view.pt:42
 msgid "no_modules"
 msgstr "This OiRA Tool has no modules."
 
-#. Default: "This survey has no profile questions."
+#. Default: "This OiRA Tool has no profile questions."
 #: euphorie/content/templates/survey_view.pt:30
 msgid "no_profile_questions"
 msgstr "This OiRA Tool has no profile questions."
 
-#. Default: "Create new survey"
+#. Default: "Create new OiRA Tool"
 #: euphorie/deployment/tiles/templates/versions.pt:44
 msgid "button_create_new"
 msgstr "Create new OiRA Tool"
 
-#. Default: "Please choose a country of which you would like to view or copy a
-#. survey."
+#. Default: "Please choose a country of which you would like to view or copy
+#. an OiRA Tool."
 #: euphorie/content/templates/sectorcontainer_view.pt:13
 msgid "message_choose_country"
 msgstr ""
 "Please choose a country of which you would like to view or copy an OiRA Tool."
 
-#. Default: "Select a sector for which you would like to view or copy a
-#. survey."
+#. Default: "Select a sector for which you would like to view or copy an
+#. OiRA Tool."
 #: euphorie/content/templates/country_view.pt:13
 msgid "intro_select_sector"
 msgstr "Select a sector for which you would like to view or copy an OiRA Tool."
 
-#. Default: "This report was based on the survey '${title}' of revision date
-#. ${date}."
+#. Default: "This report was based on the OiRA Tool '${title}' of revision
+#. date ${date}."
 #: euphorie/client/templates/report_actionplan.pt:189
 msgid "report_survey_revision"
 msgstr ""
 "This report was based on the OiRA Tool '${title}' of revision date ${date}."
 
 # # Renaming request ticket #2253
-#. Default: "You may enter a name for this survey that will make it easier for
-#. you
-#. to find your session back if you wish to continue at a later time"
+#. Default: "You may enter a name for this OiRA Tool that will make it easier
+#. for you to find your session back if you wish to continue at a later time"
 #: euphorie/client/templates/sessions.pt:58
 #: euphorie/client/templates/survey_sessions.pt:49
 msgid "label_session_title"
@@ -292,24 +293,18 @@ msgstr ""
 "Enter a name for this OiRA Tool that will allow you to find your session if "
 "you wish to continue at a later time."
 
-#. Default: "This is the title of this survey version. This name is never
-#. shown
-#. to
-#. users."
+#. Default: "This is the title of this OiRA Tool version. This name is never
+#. shown to users."
 #: euphorie/content/survey.py:48 euphorie/content/survey.py:167
 msgid "help_survey_title"
 msgstr ""
 "This is the title of this OiRA Tool version. This name is never shown to "
 "users."
 
-#. Default: "The introduction text is shown when starting a new survey
-#. session.
-#. If
-#. no introduction is provided here a standard text will be shown.Please keep
-#. this
-#. text brief so it will easily fit on screens of small devices such as phones
-#. and
-#. PDAs"
+#. Default: "The introduction text is shown when starting a new OiRA Tool
+#. session. If no introduction is provided here a standard text will be shown.
+#. Please keep this text brief so it will easily fit on screens of small
+#. devices such as phones and PDAs."
 #: euphorie/content/survey.py:58
 msgid "help_introduction"
 msgstr ""
@@ -318,44 +313,44 @@ msgstr ""
 "this text brief so it will easily fit on screens of small devices such as "
 "phones and PDAs."
 
-#. Default: "You can not delete the only survey version."
+#. Default: "You can not delete the only OiRA Tool version."
 #: euphorie/content/survey.py:239
 msgid "message_delete_no_last_survey"
 msgstr "You cannot delete the only OiRA Tool version."
 
-#. Default: "Title of imported survey."
+#. Default: "Title of imported OiRA Tool."
 #: euphorie/content/upload.py:74 euphorie/content/upload.py:93
 #: euphorie/content/upload.py:100
 msgid "label_surveygroup_title"
 msgstr "Title of imported OiRA Tool"
 
-#. Default: "Succesfully imported the survey"
+#. Default: "Succesfully imported the OiRA Tool"
 #: euphorie/content/upload.py:310 euphorie/content/upload.py:341
 msgid "upload_success"
 msgstr "Succesfully imported the OiRA Tool"
 
-#. Default: "Import sector and survey"
+#. Default: "Import sector and OiRA Tool"
 #: euphorie/content/upload.py:323
 msgid "title_import_sector_survey"
 msgstr "Import sector and OiRA TooL"
 
-#. Default: "There are no surveys present. You can ${add_link}."
+#. Default: "There are no OiRA Tools present. You can ${add_link}."
 #: euphorie/content/templates/sector_view.pt:14
 msgid "no_surveys_present"
 msgstr "There are no OiRA Tools present. You can ${add_link}."
 
-#. Default: "The form will allow you to create a new survey revision."
+#. Default: "The form will allow you to create a new OiRA Tool revision."
 #: euphorie/content/templates/survey_add.pt:9
 msgid "intro_add_survey"
 msgstr "The form will allow you to create a new OiRA Tool revision."
 
-#. Default: "Choose a revision of the selected survey"
+#. Default: "Choose a revision of the selected OiRA Tool"
 #: euphorie/content/templates/surveygroup_add.pt:71
 #: euphorie/content/templates/surveygroup_add.pt:35
 msgid "label_choose_survey"
 msgstr "Choose a revision of the selected OiRA Tool"
 
-#. Default: "Choose a survey"
+#. Default: "Choose an OiRA Tool"
 #: euphorie/content/templates/surveygroup_add.pt:52
 #: euphorie/content/templates/surveygroup_add.pt:26
 msgid "label_choose_surveygroup"
@@ -476,25 +471,26 @@ msgstr ""
 msgid "label_solution_direction"
 msgstr "Solution"
 
-#. Default: "Succesfully published the tool"
+#. Default: "Succesfully published the OiRA Tool"
 #: euphorie/client/publish.py:212
 msgid "Succesfully published the survey"
 msgstr "Succesfully published the OiRA Tool"
 
-#. Default: "Succesfully created a preview for the tool. It can be accessed at
-#. ${url} ."
+#. Default: "Succesfully created a preview for the OiRA Tool. It can be
+#. accessed at ${url}."
 #: euphorie/client/publish.py:261
 msgid ""
 "Succesfully created a preview for the survey. It can be accessed at ${url} ."
 msgstr ""
-"Succesfully created a preview for the OiRA Tool. It can be accessed at ${url} ."
+"Succesfully created a preview for the OiRA Tool. It can be accessed at "
+"${url} ."
 
-#. Default: "Publish the selected survey live with its latest changes."
+#. Default: "Publish the selected OiRA Tool live with its latest changes."
 #: euphorie/deployment/tiles/templates/versions.pt:20
 msgid "help_publish"
 msgstr "Publish the selected OiRA Tool live with its latest changes."
 
-#. Default: "Create a duplicate of the selected survey"
+#. Default: "Create a duplicate of the selected OiRA Tool"
 #: euphorie/deployment/tiles/templates/versions.pt:19
 msgid "help_add_version"
 msgstr "Create a duplicate of the selected OiRA Tool"
@@ -746,9 +742,9 @@ msgid "help_sessions"
 msgstr "This text should describe the main functions of the OiRA Tool"
 
 # Requested: https://syslab.com/proj/issues/2253#note-3
-#. Default: "Document the first steps in a survey, including how to configure
-#. a
-#. profile (if needed). This page is linked from the survey start page."
+#. Default: "Document the first steps in an OiRA Tool, including how to
+#. configure a profile (if needed). This page is linked from the survey
+#. start page."
 #: euphorie/content/help.py:41
 msgid "help_preparation"
 msgstr "This text should explain the 2 types of profile questions"

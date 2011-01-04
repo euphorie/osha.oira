@@ -17,7 +17,7 @@ import os
 import re
 import polib
 
-patt = re.compile('Default: "(.*)"', re.S)
+patt = re.compile("""Default:.?["\' ](.*?)(["\']|$)""", re.S)
 
 
 def usage(stream, msg=None):

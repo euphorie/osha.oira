@@ -1,4 +1,10 @@
+from zope.interface import Interface
 from euphorie.client import interfaces
+
+class IProductLayer(Interface):
+    """ Marker interface for requests indicating the osha.oira
+        package has been installed.
+    """
 
 class IOSHAClientSkinLayer(interfaces.IClientSkinLayer):
     """Marker interface for the OSHA client skin."""

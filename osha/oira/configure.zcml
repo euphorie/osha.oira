@@ -19,10 +19,16 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+
     <configure zcml:condition="installed euphorie.deployment">
         <include package=".tiles" />
         <include package="euphorie.deployment" />
         <grok:grok package="." />
+
+        <adapter
+            factory=".client.ClientPublishTraverser"
+            provides="zope.publisher.interfaces.IPublishTraverse"
+            />
 
         <adapter
             factory=".survey.OSHASurveyPublishTraverser"

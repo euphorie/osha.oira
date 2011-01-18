@@ -1,6 +1,6 @@
 from five import grok
 from z3c.saconfig import Session
-from euphorie.client.survey import ActionPlanReportView
+from euphorie.client.report import ActionPlanReportView
 from euphorie.client.survey import SurveyPublishTraverser
 from euphorie.client.survey import IdentificationReport
 from euphorie.client.update import redirectOnSurveyUpdate

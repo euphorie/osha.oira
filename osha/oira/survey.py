@@ -1,9 +1,6 @@
 from five import grok
 from z3c.saconfig import Session
-from euphorie.client.report import ActionPlanReportView
-from euphorie.client.survey import SurveyPublishTraverser
-from euphorie.client.survey import IdentificationReport
-from euphorie.client.update import redirectOnSurveyUpdate
+from euphorie.client import survey
 from euphorie.client.session import SessionManager
 from osha.oira import model
 from sqlalchemy import sql
@@ -11,15 +8,14 @@ import interfaces
 
 grok.templatedir("templates")
 
-class OSHASurveyPublishTraverser(SurveyPublishTraverser):
+class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
     phases = {
             "identification": interfaces.IOSHAIdentificationPhaseSkinLayer,
             "evaluation": interfaces.IOSHAEvaluationPhaseSkinLayer,
             "actionplan": interfaces.IOSHAActionPlanPhaseSkinLayer,
-            "report": interfaces.IOSHAReportPhaseSkinLayer,
-            }
+            "report": interfaces.IOSHAReportPhaseSkinLayer, }
 
-class OSHAActionPlanReportView(ActionPlanReportView):
+class OSHAActionPlanReportView(survey.ActionPlanReportView):
     """
     Overrides the original ActionPlanReportView in euphorie.client.survey.py
 
@@ -34,21 +30,22 @@ class OSHAActionPlanReportView(ActionPlanReportView):
     grok.name("view")
 
     def update(self):
-        if redirectOnSurveyUpdate(self.request):
+        """ """
+        super(OSHAActionPlanReportView, self).update()
+        self._extra_updates()
+
+    def _extra_updates(self):
+        """ Provides the following extra attributes (as per #1517, #1518):
+            - unanswered_risk_nodes
+            - not_present_risk_nodes
+
+            Place in a separate method so that OSHAActionPlanReportDownload
+            can call it.
+        """
+        if survey.redirectOnSurveyUpdate(self.request):
             return
 
         session=Session()
-        self.session=SessionManager.session
-        if self.session.company is None:
-            self.session.company=model.Company()
-        query=session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session==self.session)\
-                .filter(sql.not_(model.SKIPPED_PARENTS))\
-                .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
-                                model.RISK_PRESENT_OR_TOP5_FILTER))\
-                .order_by(model.SurveyTreeItem.path)
-        self.nodes=query.all()
-
         query=session.query(model.SurveyTreeItem)\
                 .filter(model.SurveyTreeItem.session==self.session)\
                 .filter(sql.or_(model.MODULE_WITH_UNANSWERED_RISKS_FILTER,
@@ -64,7 +61,7 @@ class OSHAActionPlanReportView(ActionPlanReportView):
         self.risk_not_present_nodes=query.all()
 
 
-class OSHAIdentificationReport(IdentificationReport):
+class OSHAIdentificationReport(survey.IdentificationReport):
     """
     Overrides the original IdentificationReport in euphorie.client.survey.py
     in order to provide a new template.
@@ -73,4 +70,18 @@ class OSHAIdentificationReport(IdentificationReport):
     """
     grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
     grok.template("report_identification")
+
+
+class OSHAActionPlanReportDownload(survey.ActionPlanReportDownload, OSHAActionPlanReportView):
+    """ Generate and download action report.
+    """
+    grok.require("euphorie.client.ViewSurvey")
+    grok.template("report_actionplan")
+    grok.name("download")
+
+    def update(self):
+        survey.ActionPlanReportDownload.update(self)
+        OSHAActionPlanReportView._extra_updates(self)
+        return self
+
 

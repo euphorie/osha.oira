@@ -50,6 +50,8 @@ for entry in po.untranslated_entries():
     default = u""
     if match:
         default = match.group(1).replace('\n', ' ')
+        if "Default:" in default:
+            print "ERROR! There seems to be a duplicate Default entry for msgid '%s'" % entry.msgid
     newpo.append(polib.POEntry(msgid=entry.msgid, msgstr=default,
         comment=entry.comment))
 

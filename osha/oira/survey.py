@@ -1,9 +1,8 @@
 from five import grok
-from z3c.saconfig import Session
-from euphorie.client import survey, report
-from euphorie.client.session import SessionManager
 from osha.oira import model
 from sqlalchemy import sql
+from z3c.saconfig import Session
+from euphorie.client import survey, report
 import interfaces
 
 grok.templatedir("templates")
@@ -80,9 +79,20 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
     grok.name("download")
     download =  True
 
-    # def update(self):
-    #     report.ActionPlanReportDownload.update(self)
-    #     OSHAActionPlanReportView._extra_updates(self)
-    #     return self
+    def getNodes(self):
+        """ Return an orderer list of all relevant tree items for the current
+            survey.
+        """
+        present_risks = super(OSHAActionPlanReportDownload, self).getNodes()
+
+        unanswered_and_non_present_risks = Session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session==self.session)\
+                .filter(sql.or_(model.MODULE_WITH_UNANSWERED_RISKS_FILTER,
+                                model.UNANSWERED_RISKS_FILTER,
+                                model.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
+                                model.RISK_NOT_PRESENT_FILTER)) \
+                .order_by(model.SurveyTreeItem.path).all()
+
+        return present_risks + unanswered_and_non_present_risks
 
 

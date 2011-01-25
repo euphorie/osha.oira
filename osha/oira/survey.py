@@ -28,6 +28,7 @@ class OSHAActionPlanReportView(report.ActionPlanReportView):
     grok.template("report_actionplan")
     grok.layer(interfaces.IOSHAReportPhaseSkinLayer)
     grok.name("view")
+    download = False
 
     def update(self):
         """ """
@@ -72,16 +73,16 @@ class OSHAIdentificationReport(report.IdentificationReport):
     grok.template("report_identification")
 
 
-class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPlanReportView):
+class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
     """ Generate and download action report.
     """
-    grok.require("euphorie.client.ViewSurvey")
-    grok.template("report_actionplan")
+    grok.layer(interfaces.IOSHAReportPhaseSkinLayer)
     grok.name("download")
+    download =  True
 
-    def update(self):
-        report.ActionPlanReportDownload.update(self)
-        OSHAActionPlanReportView._extra_updates(self)
-        return self
+    # def update(self):
+    #     report.ActionPlanReportDownload.update(self)
+    #     OSHAActionPlanReportView._extra_updates(self)
+    #     return self
 
 

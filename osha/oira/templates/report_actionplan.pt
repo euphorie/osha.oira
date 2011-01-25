@@ -21,8 +21,10 @@
                     company view/session/company;">
     <h1>${view/report_title}</h1>
 
-    <div class="buttonBar super" tal:condition="not:view/download">
-      <a class="button-medium" href="${python:view.url(name='download')}" i18n:translate="button_download">Download</a>
+    <div class="buttonBar super">
+      <a class="button-medium" 
+         href="${python:view.url(name='download')}" 
+         i18n:translate="button_download">Download</a>
       <a class="button-medium printButton jsOnly" i18n:translate="button_print">Print</a>
     </div>
 
@@ -298,7 +300,6 @@
     <ul class="discrete">
       <li tal:condition="python:isinstance(getattr(context, 'published', None), tuple)" i18n:translate="report_survey_revision">This report was based on the survey '<tal:span i18n:name="title">${python:context.published[1]}</tal:span>' of revision date <tal:span i18n:name="date">${python:tools.formatDate(context.published[2])}</tal:span>.</li>
     </ul>
-
 
     <ul id="navigation">
       <li><a href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a></li>

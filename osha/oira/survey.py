@@ -1,6 +1,6 @@
 from five import grok
 from z3c.saconfig import Session
-from euphorie.client import survey
+from euphorie.client import survey, report
 from euphorie.client.session import SessionManager
 from osha.oira import model
 from sqlalchemy import sql
@@ -15,7 +15,7 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
             "actionplan": interfaces.IOSHAActionPlanPhaseSkinLayer,
             "report": interfaces.IOSHAReportPhaseSkinLayer, }
 
-class OSHAActionPlanReportView(survey.ActionPlanReportView):
+class OSHAActionPlanReportView(report.ActionPlanReportView):
     """
     Overrides the original ActionPlanReportView in euphorie.client.survey.py
 
@@ -61,7 +61,7 @@ class OSHAActionPlanReportView(survey.ActionPlanReportView):
         self.risk_not_present_nodes=query.all()
 
 
-class OSHAIdentificationReport(survey.IdentificationReport):
+class OSHAIdentificationReport(report.IdentificationReport):
     """
     Overrides the original IdentificationReport in euphorie.client.survey.py
     in order to provide a new template.
@@ -72,7 +72,7 @@ class OSHAIdentificationReport(survey.IdentificationReport):
     grok.template("report_identification")
 
 
-class OSHAActionPlanReportDownload(survey.ActionPlanReportDownload, OSHAActionPlanReportView):
+class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPlanReportView):
     """ Generate and download action report.
     """
     grok.require("euphorie.client.ViewSurvey")
@@ -80,7 +80,7 @@ class OSHAActionPlanReportDownload(survey.ActionPlanReportDownload, OSHAActionPl
     grok.name("download")
 
     def update(self):
-        survey.ActionPlanReportDownload.update(self)
+        report.ActionPlanReportDownload.update(self)
         OSHAActionPlanReportView._extra_updates(self)
         return self
 

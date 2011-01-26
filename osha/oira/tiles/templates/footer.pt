@@ -7,7 +7,13 @@
       meta:interpolation="true"
       i18n:domain="euphorie">
 
-    <p id="nuplone_appendix" style="padding-top: 50px; padding-bottom: 50px; padding-left: 440px;">
+
+    <span style="padding-left:47%; padding-top: 5px; ">
+      <img src="++resource++veldbrand.theme.images/footer_logo.png"/>
+    </span>
+
+    <p id="nuplone_appendix" 
+        style="padding-bottom: 50px; padding-left: 450px;">
       <tal:span i18n:translate="appendix_produced_by">Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_new">EU-OSHA</a>.</tal:span>
       |
       <a href="http://www.oira.osha.europa.eu/about" i18n:translate="appendix_about">About</a>

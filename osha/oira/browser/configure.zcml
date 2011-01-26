@@ -1,0 +1,11 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           i18n_domain="osha.oira">
+
+    <browser:resourceDirectory
+        name="veldbrand.theme.images"
+        directory="images"
+        layer="..interfaces.IProductLayer"
+        />
+
+</configure>

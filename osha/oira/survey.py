@@ -43,6 +43,7 @@ class OSHAActionPlanReportView(report.ActionPlanReportView):
 
 
     def risk_status(self, node, zodbnode):
+        """ """
         if node.postponed or not node.identification:
             return "unanswered"
         elif node.identification in [u"n/a", u"yes"]:
@@ -107,6 +108,8 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
         """
         super(OSHAActionPlanReportDownload, self).update()
 
+        self.nodes = self.getNodes()
+
         session=Session()
         query=session.query(model.SurveyTreeItem)\
                 .filter(model.SurveyTreeItem.session==self.session)\
@@ -123,45 +126,79 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
         self.risk_not_present_nodes=query.all()
 
 
-    def addOtherNodes(self, document, nodes, heading):
+    def addReportNodes(self, document, nodes, heading):
         """ """
         survey=self.request.survey
         t=lambda txt: translate(txt, context=self.request)
         section = report.createSection(document, self.context, self.request)
         section.append(
                     Paragraph( document.StyleSheet.ParagraphStyles.Heading1, 
-                               heading))
+                               heading)
+                    )
 
-        normal_style=document.StyleSheet.ParagraphStyles.Normal
-        comment_style=document.StyleSheet.ParagraphStyles.Comment
-        warning_style=document.StyleSheet.ParagraphStyles.Warning
-        measure_heading_style=document.StyleSheet.ParagraphStyles.MeasureHeading
-        header_styles={
+        normal_style = document.StyleSheet.ParagraphStyles.Normal
+        comment_style = document.StyleSheet.ParagraphStyles.Comment
+        warning_style = document.StyleSheet.ParagraphStyles.Warning
+        measure_heading_style = document.StyleSheet.ParagraphStyles.MeasureHeading
+        header_styles = {
                 0: document.StyleSheet.ParagraphStyles.Heading2,
-                1:  document.StyleSheet.ParagraphStyles.Heading3,
-                2:  document.StyleSheet.ParagraphStyles.Heading4,
-                3:  document.StyleSheet.ParagraphStyles.Heading5,
+                1: document.StyleSheet.ParagraphStyles.Heading3,
+                2: document.StyleSheet.ParagraphStyles.Heading4,
+                3: document.StyleSheet.ParagraphStyles.Heading5,
                 }
 
         for node in nodes:
-            section.append(Paragraph(
+            section.append(
+                    Paragraph(
                         header_styles[node.depth], 
-                        u"%s %s" % (node.number, node.title))
+                        u"%s %s" % (node.number, node.title)
                         )
+                    )
 
             if node.type!="risk":
                 continue
 
-            zodb_node=survey.restrictedTraverse(node.zodb_path.split("/"))
-            if node.postponed or not node.identification:
+            zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
+
+            if node.identification=="no":
+
+                if node.probability == 0:
+                    section.append(Paragraph(warning_style,
+                        t(_("risk_unevaluated", 
+                            default=u"You still need to evaluate this risk."))))
+
+                elif node.action_plans == []:
+                    section.append(Paragraph(warning_style,
+                        t(_("risk_without_actionplan", 
+                            default=u"You still need to provide an action plan for this risk"))))
+            
+                elif not (zodb_node.problem_description and zodb_node.problem_description.strip()):
+                    section.append(Paragraph(warning_style,
+                        t(  _("warn_risk_present", 
+                            default=u"You responded negatively to the above statement."))))
+
+            elif node.postponed or not node.identification:
                 section.append(Paragraph(warning_style,
                     t(_("risk_unanswered", 
                         default=u"This risk still needs to be inventorised."))))
+
             elif node.identification in [u"n/a", u"yes"]:
-                section.append(Paragraph(warning_style,
-                    t(_("risk_not_present", 
-                        default=u"This risk has been identified as not being " \
-                                u"present in your organisation"))))
+                if node.risk_type=="top5":
+                    section.append(Paragraph(warning_style,
+                        t(_("top5_risk_not_present", 
+                            default=u"This risk is not present in your "
+                                    u"organisation, but since the sector "
+                                    u"organisation considers this one of "
+                                    u"the top 5 most critical risks it "
+                                    u"must be included in this report."))))
+
+                else:
+                    section.append(Paragraph(warning_style,
+                        t(_("risk_not_present", 
+                            default=u"This risk has been identified as not being " \
+                                    u"present in your organisation"))))
+
+
 
             if node.priority:
                 if node.priority=="low":
@@ -196,20 +233,27 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
         document=report.createDocument()
         self.addIntroduction(document)
         self.addCompanyInformation(document)
-        self.addActionPlan(document)
+        # XXX: This part is removed
+        # self.addActionPlan(document)
 
-        # XXX: This part is added
+        # XXX: and replaced with this part:
+        heading = translate(
+                _(  "plan_report_plan_header", 
+                    default=u"Action plan"),
+                self.request)
+        self.addReportNodes(document, self.nodes, heading)
+
         heading = translate(
                 _(  "plan_report_unanswered_risks", 
                     default=u"Unanswered Risks"), 
                 self.request)
-        self.addOtherNodes(document, self.unanswered_nodes, heading)
+        self.addReportNodes(document, self.unanswered_nodes, heading)
 
         heading = translate(
                 _(  "plan_report_unanswered_risks",
                     default=u"Positively Answered Risks"), 
                 self.request)
-        self.addOtherNodes(document, self.risk_not_present_nodes, heading)
+        self.addReportNodes(document, self.risk_not_present_nodes, heading)
         # Until here...
 
         renderer=Renderer()

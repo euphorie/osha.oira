@@ -313,7 +313,6 @@
                     tal:condition="python:status=='unanswered'" 
                     i18n:translate="risk_unanswered"> This risk still needs to be inventorised 
             </p>
-
             <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority"
             >This is a <strong i18n:name="priority">
                 <tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low priority risk</tal:span>

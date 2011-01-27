@@ -7,26 +7,30 @@
       meta:interpolation="true"
       i18n:domain="euphorie">
 
-
-    <span style="padding-left:47%; padding-top: 5px; ">
-      <img src="++resource++veldbrand.theme.images/footer_logo.png"/>
-    </span>
-
     <p id="nuplone_appendix" 
         style="padding-bottom: 50px; padding-left: 450px;">
-      <tal:span i18n:translate="appendix_produced_by">Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_new">EU-OSHA</a>.</tal:span>
-      |
-      <a href="http://www.oira.osha.europa.eu/about" i18n:translate="appendix_about">About</a>
-      |
-      <a href="http://www.oira.osha.europa.eu/privacy-policy" i18n:translate="appendix_privacy">Privacy</a>
-      |
-      <a href="http://www.oira.osha.europa.eu/disclaimer" i18n:translate="appendix_disclaimer">Disclaimer</a>
-      |
-      <a href="http://www.gnu.org/licenses/gpl.html" i18n:translate="appendix_gpl_license">GPL License</a>
-      |
-      <a href="http://creativecommons.org/licenses/by-sa/2.5/" i18n:translate="appendix_cc_license">CC License</a>
-      |
-      <a href="http://www.oira.osha.europa.eu/contact-info" i18n:translate="appendix_contact">Contact</a>
+        <tal:span i18n:translate="appendix_produced_by">
+            Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_new">EU-OSHA</a>.
+        </tal:span>
+        |
+        <a href="http://www.oira.osha.europa.eu/about" i18n:translate="appendix_about">About</a>
+        |
+        <a href="http://www.oira.osha.europa.eu/privacy-policy" i18n:translate="appendix_privacy">Privacy</a>
+        |
+        <a href="http://www.oira.osha.europa.eu/disclaimer" i18n:translate="appendix_disclaimer">Disclaimer</a>
+        |
+        <a href="http://www.gnu.org/licenses/gpl.html"
+        i18n:translate="appendix_gpl_license">GPL License</a>
+        |
+        <a href="http://creativecommons.org/licenses/by-sa/2.5/"
+            i18n:attr="alt"
+            alt="CC License">
+            <img src="++resource++veldbrand.theme.images/creative_commons.png"/>
+        </a>
+        |
+        <img src="++resource++veldbrand.theme.images/footer_logo.png"/>
+        |
+        <a href="http://www.oira.osha.europa.eu/contact-info" i18n:translate="appendix_contact">Contact</a>
     </p>
 </div>
 

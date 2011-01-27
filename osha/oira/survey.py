@@ -41,6 +41,20 @@ class OSHAActionPlanReportView(report.ActionPlanReportView):
         super(OSHAActionPlanReportView, self).update()
         self._extra_updates()
 
+
+    def risk_status(self, node, zodbnode):
+        if node.postponed or not node.identification:
+            return "unanswered"
+        elif node.identification in [u"n/a", u"yes"]:
+            return "not-present"
+        elif node.identification == "no":
+            if node.probability == 0:
+                return "no-actionplans"
+            elif node.action_plans == []:
+                return "unevaluated"
+            return "present"
+
+
     def _extra_updates(self):
         """ Provides the following extra attributes (as per #1517, #1518):
             - unanswered_risk_nodes
@@ -77,6 +91,7 @@ class OSHAIdentificationReport(report.IdentificationReport):
     """
     grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
     grok.template("report_identification")
+    download = False
 
 
 class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
@@ -145,7 +160,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
             elif node.identification in [u"n/a", u"yes"]:
                 section.append(Paragraph(warning_style,
                     t(_("risk_not_present", 
-                        default=u"This risk hasbeen identified as not being " \
+                        default=u"This risk has been identified as not being " \
                                 u"present in your organisation"))))
 
             if node.priority:

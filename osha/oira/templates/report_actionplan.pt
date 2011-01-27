@@ -73,6 +73,8 @@
       </tal:node>
     </ol>
 
+    <h2 i18n:translate="header_present_risks">Risks in your organisation:</h2>
+
     <tal:block repeat="node view/nodes">
       <tal:module condition="python:node.type!='risk'">
         <tal:tag replace="structure python:'&lt;h%s id=\'node-%s\'&gt;' % (node.depth+1, node.id)"/><a href="${survey_url}/${python:'/'.join(node.short_path)}">${node/number} ${node/title}</a><tal:tag replace="structure python:'&lt;/h%s&gt;' % (node.depth+1)"/>
@@ -84,28 +86,51 @@
                          images zodbnode/@@images;
                          scale python:images.scale('image', width=150, height=500, direction='thumbnail');
                          status python:view.risk_status(node, zodbnode)">
-        <div class="warning" tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'warning'}[status]"
-                 tal:define="show_negate_warning python:view.show_negate_warning(node, zodbnode)"
-                 tal:omit-tag="python:status=='unanswered'">
-          <h4><strong class="icon warning" tal:condition="python:not show_negate_warning and status=='present'">⚠</strong><a href="${survey_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a> 
-            <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'"><a href="#top5-footnote">*</a></sup></h4>
-
-          <p class="negation" tal:condition="show_negate_warning"><em><strong class="icon warning">⚠</strong><tal:span i18n:translate="warn_risk_present">You responded negative to the above statement.</tal:span></em></p>
-          <p class="emphasis" tal:condition="python:status=='unanswered'" i18n:translate="risk_unanswered"> This risk still needs to be inventorised </p>
-
-            <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority"
-            >This is a <strong i18n:name="priority">
+            <div class="warning" 
+                tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'warning', 'no-actionplans':'warning', 'unevaluated':'warning'}[status]"
+                tal:define="show_negate_warning python:view.show_negate_warning(node, zodbnode)"
+                tal:omit-tag="python:status=='unanswered'">
+            <h4>
+                <strong class="icon warning" tal:condition="python:not show_negate_warning and status=='present'">⚠</strong>
+                <a href="${survey_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a> 
+                <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'"><a href="#top5-footnote">*</a></sup>
+            </h4>
+            <p class="negation" 
+                    tal:condition="show_negate_warning">
+                <em>
+                    <strong class="icon warning">⚠</strong>
+                    <tal:span i18n:translate="warn_risk_present">You responded negatively to the above statement.</tal:span>
+                </em>
+            </p>
+            <p class="emphasis" 
+                tal:condition="python:status=='unevaluated'" 
+                i18n:translate="risk_unevaluated"> 
+                    You still need to evaluate this risk.
+            </p>
+            <p class="emphasis" 
+                tal:condition="python:status=='no-actionplans'" 
+                i18n:translate="risk_without_actionplan"> 
+                    You still need to provide an action plan for this risk
+            </p>
+            <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority">
+                This is a <strong i18n:name="priority">
                 <tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low priority risk</tal:span>
                 <tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium priority risk</tal:span>
-                <tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high priority risk</tal:span
-                ></strong> .</p>
-
-            <img alt="" tal:condition="scale" title="${zodbnode/caption}" src="${scale/url}" width="${scale/width}" height="${scale/height}"  class="${python:'floatBefore' if view.random() else 'floatAfter'}" />
-            <p tal:replace="structure zodbnode/description">
-              This is a description of the risk.
+                <tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high priority risk</tal:span>
+                </strong>.
             </p>
-          </div>
-        </tal:block>
+
+            <img alt="" tal:condition="scale" 
+                    title="${zodbnode/caption}" 
+                    src="${scale/url}" 
+                    width="${scale/width}" 
+                    height="${scale/height}" 
+                    class="${python:'floatBefore' if view.random() else 'floatAfter'}" />
+            <p tal:replace="structure zodbnode/description">
+                This is a description of the risk.
+            </p>
+        </div>
+    </tal:block>
 
         <tal:plan repeat="actionplan node/action_plans">
           <h5 i18n:translate="header_measure">Measure <tal:span i18n:name="index" content="repeat/actionplan/number">1</tal:span></h5>
@@ -218,8 +243,12 @@
         <div class="warning" tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'warning'}[status]"
                  tal:define="show_negate_warning python:view.show_negate_warning(node, zodbnode)"
                  tal:omit-tag="python:status=='unanswered'">
-          <h4><strong class="icon warning" tal:condition="python:not show_negate_warning and status=='present'">⚠</strong><a href="${identification_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a> 
-            <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'"><a href="#top5-footnote">*</a></sup></h4>
+        <h4><strong class="icon warning" tal:condition="python:not show_negate_warning and status=='present'">⚠</strong>
+            <a href="${identification_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a> 
+            <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'">
+                <a href="#top5-footnote">*</a>
+            </sup>
+        </h4>
 
           <p class="negation" tal:condition="show_negate_warning"><em><strong class="icon warning">⚠</strong><tal:span i18n:translate="warn_risk_present">You responded negative to the above statement.</tal:span></em></p>
           <p class="emphasis" tal:condition="python:status=='unanswered'" i18n:translate="risk_unanswered"> This risk still needs to be inventorised </p>
@@ -246,11 +275,12 @@
     </tal:if>
 
 
-
     <tal:if define="unanswered_nodes view/unanswered_nodes"
             condition="unanswered_nodes">
     <h2 i18n:translate="header_unanswered_risks">Unanswered risks:</h2>
-    <p>The following risks have not yet been answered. Please do so at the soonest possibility.</p>
+    <p i18n:translate="desc_unanswered_risks">
+        The following risks have not yet been answered. Please do so at the soonest possibility.
+    </p>
     <tal:block 
             define="identification_url python:webhelpers.survey_url(phase='identification')"
             repeat="node unanswered_nodes">
@@ -272,8 +302,17 @@
           <a href="${identification_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a> 
           <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'"><a href="#top5-footnote">*</a></sup></h4>
 
-          <p class="negation" tal:condition="show_negate_warning"><em><strong class="icon warning">⚠</strong><tal:span i18n:translate="warn_risk_present">You responded negatively to the above statement.</tal:span></em></p>
-          <p class="emphasis" tal:condition="python:status=='unanswered'" i18n:translate="risk_unanswered"> This risk still needs to be inventorised </p>
+            <p class="negation" 
+                tal:condition="show_negate_warning">
+                <em>
+                    <strong class="icon warning">⚠</strong>
+                    <tal:span i18n:translate="warn_risk_present">You responded negatively to the above statement.</tal:span>
+                </em>
+            </p>
+            <p class="emphasis" 
+                    tal:condition="python:status=='unanswered'" 
+                    i18n:translate="risk_unanswered"> This risk still needs to be inventorised 
+            </p>
 
             <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority"
             >This is a <strong i18n:name="priority">

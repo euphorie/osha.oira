@@ -25,6 +25,7 @@ setup(name='osha.oira',
       install_requires=[
           'setuptools',
           'plone.tiles',
+          'collective.alerts',
       ],
       entry_points="""
       [z3c.autoinclude.plugin]

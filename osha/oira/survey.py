@@ -21,6 +21,16 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
             "actionplan": interfaces.IOSHAActionPlanPhaseSkinLayer,
             "report": interfaces.IOSHAReportPhaseSkinLayer, }
 
+
+class OSHAReportView(report.ReportView):
+    """ Override the default view, to add a popup overlay
+        asking the user if they want to participate in a survey. #2558
+
+        See euphorie/client/survey.py for more info
+    """
+    grok.template("report")
+
+
 class OSHAActionPlanReportView(report.ActionPlanReportView):
     """
     Overrides the original ActionPlanReportView in euphorie.client.survey.py

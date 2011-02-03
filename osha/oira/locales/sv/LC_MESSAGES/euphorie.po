@@ -105,6 +105,7 @@ msgstr "Standardlösningar"
 msgid "risk_solution_header"
 msgstr "Lösning ${number}"
 
+# Change request # 2567
 #. Default: "Including the risks to your employees and your equipment?  What
 #. if there is an accident with one of the machines? What if an employee is
 #. exposed to hazardous substances? A risk assessment helps you to define
@@ -116,8 +117,9 @@ msgstr "Lösning ${number}"
 #. allow you to limit the risks to your employees and your company, and
 #. therefore the financial risk."
 msgid "intro_risk_aware"
-msgstr "Inklusive riskerna för dina anställda och din utrustning? Vad händer om det inträffar en olycka med en av maskinerna? Vad händer om en anställd utsätts för farliga ämnen? En riskbedömning hjälper dig att definiera dessa risker och hantera dem direkt. En riskbedömning består av två delar: en <em>lista</em> över alla de risker för ditt företag och en <em>handlingsplan</em> med information för att hantera dem. Dessa två komponenter låter dig begränsa riskerna för dina anställda och ditt företag, och därmed också minska den finansiella risken."
+msgstr "Vad händer om en anställd till exempel utsätts för farliga ämnen?  Att göra en riskbedömning innebär att undersöka och hitta tänkbara risker i arbetsmiljön och sedan värdera hur allvarliga dessa risker är. De risker man inte kan åtgärda på en gång skrivs in i en handlingsplan"
 
+# Change request # 2567
 #. Default: "Complicated? Not really. It just takes a bit of time. However,
 #. the RA is important. So important that it is a legal requirement. This is
 #. for good
@@ -125,12 +127,47 @@ msgstr "Inklusive riskerna för dina anställda och din utrustning? Vad händer 
 #. management process cannot be started and appropriate preventive measures
 #. are
 #. unlikely to be found or put in place."
+#: euphorie/client/templates/start.pt:25
 msgid "intro_not_complicated"
-msgstr "Komplicerat? Inte direkt. Det tar bara lite tid. Dock är RA-instrumentet viktigt. Så viktigt att det är ett rättsligt krav. Detta är av goda skäl. Om riskerna inte bedöms eller behandlas på ett tillfredställande sätt kan en lämplig riskhanteringsprocess inte påbörjas och lämpliga förebyggande åtgärder kommer sannolikt inte att hittas eller införas."
+msgstr "Det är inte svårt att göra en riskbedömning. Men du måste ta dig tid och svara på ett antal frågor om din och dina kollegors arbetsmiljö. Det tar en kort stund och när du är klar har du en färdig handlingsplan att jobba med."
+
+# Change request # 2567
+#. Default: The assessment is not complicated.
+#: euphorie/client/templates/start.pt:24
+msgid "header_not_complicated"
+msgstr "En riskbedömning är inte komplicerad"
+
+# Change request # 2567
+#. Default: You may want to print out the list of risks you cannot immediately
+#. answer and look for the information at the relevant workplace (by walking
+#. around
+#. the workplace and looking at what could cause harm, or by consulting the
+#. workers
+#. about problems they have encountered). Then you can introduce the
+#. information
+#. into the tool.
+#: euphorie/client/templates/identification.pt:19
+msgid "intro_print_identification_1"
+msgstr "Du kanske vill skriva ut listan över risker som du inte omedelbart kan svara på.  Ibland kan det vara viktigt att samråda med personalen över hur de ser på riskerna."
+
+#. Default: You can also distribute the list among the workers and invite them
+#. to
+#. participate in identifying the hazards/problems, evaluating the risks and
+#. deciding on preventive action. Their feedback can be taken into account when
+#. filling in this tool.
+#: euphorie/client/templates/identification.pt:22
+msgid "intro_print_identification_2"
+msgstr "Du kan även distribuera listan bland din personal och uppmana dem att delta i att identifiera risker/problem, för att bedöma risker och besluta om förebyggande åtgärder. Deras synpunkter kan beaktas när du svarar på frågorna i detta verktyg."
 
 #. Default: "Tailor the risk assessment for your organisation"
 msgid "subtitle_profile"
 msgstr "Skräddarsy riskbedömningen för din organisation"
+
+# Change request # 2567
+#. Default: You can print the ${list-of-risks}.
+#: euphorie/client/templates/identification.pt:25
+msgid "intro_identification"
+msgstr "Här skriver du ut ${list-of-risks}."
 
 #. Default: "Read the following statement(s) and tick the box if the issue is
 #. relevant to
@@ -538,3 +575,60 @@ msgstr "Denna text förklarar hur rapporten antingen kan sparas eller skrivas ut
 #. Default: "General final recommendations."
 msgid "help_finalwords"
 msgstr "Allmänna slutliga rekommendationer."
+
+# Change request # 2567
+#. Default: Action Plan
+#: euphorie/client/templates/actionplan.pt:68
+#: euphorie/client/templates/appendix.pt:43
+#: euphorie/client/templates/evaluation.pt:63
+#: euphorie/client/templates/help.pt:79
+#: euphorie/client/templates/identification.pt:55
+#: euphorie/client/templates/module_actionplan.pt:67
+#: euphorie/client/templates/module_evaluation.pt:58
+#: euphorie/client/templates/module_identification.pt:70
+#: euphorie/client/templates/profile.pt:82
+#: euphorie/client/templates/report.pt:63
+#: euphorie/client/templates/report_actionplan.pt:186
+#: euphorie/client/templates/report_company.pt:78
+#: euphorie/client/templates/report_identification.pt:88
+#: euphorie/client/templates/risk_actionplan.pt:257
+#: euphorie/client/templates/risk_evaluation.pt:107
+#: euphorie/client/templates/risk_identification.pt:71
+#: euphorie/client/templates/sessions.pt:83
+#: euphorie/client/templates/start.pt:54 euphorie/client/templates/status.pt:55
+#: euphorie/client/templates/survey_sessions.pt:74
+#: euphorie/client/templates/updated.pt:87
+msgid "iphone_label_action_plan"
+msgstr "Handlingsplan"
+
+# Change request # 2567
+#. Default: Action Plan
+#: euphorie/client/templates/actionplan.pt:67
+#: euphorie/client/templates/appendix.pt:42
+#: euphorie/client/templates/evaluation.pt:62
+#: euphorie/client/templates/help.pt:78
+#: euphorie/client/templates/identification.pt:54
+#: euphorie/client/templates/module_actionplan.pt:66
+#: euphorie/client/templates/module_evaluation.pt:57
+#: euphorie/client/templates/module_identification.pt:69
+#: euphorie/client/templates/profile.pt:81
+#: euphorie/client/templates/report.pt:62
+#: euphorie/client/templates/report_actionplan.pt:185
+#: euphorie/client/templates/report_company.pt:77
+#: euphorie/client/templates/report_identification.pt:87
+#: euphorie/client/templates/risk_actionplan.pt:256
+#: euphorie/client/templates/risk_evaluation.pt:106
+#: euphorie/client/templates/risk_identification.pt:70
+#: euphorie/client/templates/sessions.pt:82
+#: euphorie/client/templates/start.pt:53 euphorie/client/templates/status.pt:54
+#: euphorie/client/templates/survey_sessions.pt:73
+#: euphorie/client/templates/updated.pt:86
+#: euphorie/content/templates/colour-preview.pt:47
+msgid "label_action_plan"
+msgstr "Handelsplan"
+
+# Change request # 2567
+#. Default: Create action plan
+#: euphorie/client/templates/actionplan.pt:42
+msgid "label_create_action_plan"
+msgstr "Skapa handelsplan"

@@ -52,7 +52,7 @@ for entry in po.untranslated_entries():
         default = match.group(1).replace('\n', ' ')
         if "Default:" in default:
             print "ERROR! There seems to be a duplicate Default entry for msgid '%s'" % entry.msgid
-    newpo.append(polib.POEntry(msgid=entry.msgid, msgstr=default,
+    newpo.append(polib.POEntry(msgid=entry.msgid, msgstr=default, occurrences=entry.occurrences,
         comment=entry.comment))
 
 newpo.save(output)

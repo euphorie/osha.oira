@@ -33,6 +33,12 @@
       <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie8.min.css" /> <![endif]-->
     </tal:block>
     <link tal:define="sector_url webhelpers/sector_url" tal:condition="sector_url" rel="stylesheet" type="text/css" media="all" href="${sector_url}/@@sector.css" />
+
+    <style type="text/css" media="all">
+        .report #appendix img {
+            margin-bottom: 0;
+        }
+    </style>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width = 320" />
     <meta name="viewport" content="user-scalable=no" />

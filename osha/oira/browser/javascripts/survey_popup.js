@@ -11,7 +11,7 @@ $("button#report_comment_submit").click(function(event) {
         heading, 
         function(result) {
             if (result == true) {
-                window.location.replace('http://www.surveymonkey.com/s/OiRATool')
+                window.open('http://www.surveymonkey.com/s/OiRATool')
             }
             else {
                 jQuery('form#report_comment_form').submit();

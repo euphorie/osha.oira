@@ -8,7 +8,14 @@
       i18n:domain="euphorie">
 
     <p id="nuplone_appendix" 
-        style="padding-bottom: 50px; padding-left: 450px;">
+        style="
+           position:absolute;
+           bottom:0;
+           padding-bottom: 20px; padding-left: 450px;">
+
+        <img style="margin-right: 15px; cursor: pointer;"
+                src="++resource++osha.oira.images/footer_logo.png"/>
+
         <tal:span i18n:translate="appendix_produced_by">
             Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_new">EU-OSHA</a>.
         </tal:span>
@@ -25,12 +32,9 @@
         <a href="http://creativecommons.org/licenses/by-sa/2.5/"
             i18n:attr="alt"
             alt="CC License">
-            <img src="++resource++osha.oira.images/creative_commons.png"/>
+            <img style="margin-right: 15px; cursor: pointer;"
+                 src="++resource++osha.oira.images/creative_commons.png"/>
         </a>
-        |
-        <img src="++resource++osha.oira.images/footer_logo.png"/>
-        |
-        <a href="http://www.oira.osha.europa.eu/contact-info" i18n:translate="appendix_contact">Contact</a>
     </p>
 </div>
 

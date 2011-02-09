@@ -1,3 +1,4 @@
+from five import grok
 from zope.component import adapts
 from zope.interface import directlyProvidedBy
 from zope.interface import directlyProvides
@@ -6,6 +7,13 @@ from ZPublisher.BaseRequest import DefaultPublishTraverse
 from osha.oira.interfaces import IProductLayer
 from osha.oira.interfaces import IOSHAClientSkinLayer
 from euphorie.client.client import IClient
+
+grok.templatedir("templates")
+
+class View(grok.View):
+    grok.context(IClient)
+    grok.layer(IOSHAClientSkinLayer)
+    grok.template("frontpage")
 
 class ClientPublishTraverser(DefaultPublishTraverse):
     """Publish traverser to setup the skin layer.

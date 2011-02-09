@@ -49,3 +49,38 @@ To extract all untranslated messages from a .po file, you can use the script get
 
 
 
+Updating existing translations
+==============================
+
+Finding dirty translations
+--------------------------
+
+Whenever a default (English) string changes, all translations of it become dirty and need to be re-translated.
+We use the script findDirtyTranslations.py to generate a po file of all dirty entries per language.
+It is compares the "Default" entries to achieve this
+The script takes 3 arguments:
+1) The existing translation po file
+2) A file with updated "Default" translations; usually this will be a newly generated .pot file
+3) A filename for the output .po file. It will contain a subset of 1) and can be sent to the translators.
+
+Propagating translations to existing po-files
+---------------------------------------------
+
+Every so often, we need to send a sub-set of an existing po-file to the translators, either because
+1) new msgids were added and no translation exists yet or
+2) the default translation has changed and a re-translation is necessary.
+
+From the translators, we get back an UPDATE.po which is a subset of the existing ORIG.po. You can use the script
+updatePoWithTranslations.py to propagate the newly translated entries.
+If UPDATE.po contains msgids that are not present in ORIG.po, they will be ignored! The proper way to introduce new
+msgids is by adding them to the .pot file first and propagating them via msgmerge (see above).
+
+A note on formatting
+--------------------
+
+The script updatePoWithTranslations.py uses polib to manipulate ORIG.po. It will format the file in such a way that lines
+don't exceed 80 characters but are filled up as much as possible (optimisation). This is contrary to what babel (used in
+Euphorie) does. Therefore a `svn diff` will be useless after applying the script. But if you run the update_catalog step
+from Euphorie's i18nupdate again, the formatting will be reverted to Euphorie style, and a `svn diff` will only show
+the actual changes.
+

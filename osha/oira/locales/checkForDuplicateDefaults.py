@@ -39,5 +39,7 @@ for entry in po:
         default = match.group(1).replace('\n', ' ')
         if "Default:" in default:
             print "ERROR! There seems to be a duplicate Default entry for msgid '%s'" % entry.msgid
+    else:
+        print "WARNING! No Default translation for msgid '%s'." % entry.msgid
 
 sys.exit('Finished, checked all %d entries.' % counter)

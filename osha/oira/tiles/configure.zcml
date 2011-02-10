@@ -9,12 +9,14 @@
     <include package="plone.tiles" />
 
     <plone:tile
-        name="footer"
+        name="osha.oira.footer"
         title="OiRA Footer"
         add_permission="cmf.ManagePortal"
         class=".tiles.FooterTile"
         template="templates/footer.pt"
         permission="zope.Public"
+        layer="..interfaces.IProductLayer"
+        for="*"
         />
 
 </configure>

@@ -3,8 +3,9 @@
 # Author: Wolfgang Thomas <thomas@syslab.com>
 
 """%(program)s: Extract all untranslated messages from a given po file and
-write them to a new po file. The "Default" translation will be written into the
-msgstr field.
+write them to a new po file.
+The "Default" translation will be written into the msgstr field. This can be
+turned off.
 
 usage:      %(program)s input.po output.po [--noprefill]
 input.po    A po file that already contains some translations and some

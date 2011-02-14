@@ -47,54 +47,76 @@
             href="${client_url}/at/?language=sl-AT">Slovenščina</a>
         <a tal:condition="python:'hu' in sectors_dict.get('at',[])"
             href="${client_url}/at/?language=hu-AT">Magyar nyelv</a>
+        <a tal:condition="python:'en' in sectors_dict.get('bg',[])"
+            href="${client_url}/bg/?language=en-GB">English</a>
       </li>
       <li class="be">
         <a tal:condition="python:'fr' in sectors_dict.get('be',[])"
             href="${client_url}/be/?language=fr-BE">Français</a>
         <a tal:condition="python:'nl' in sectors_dict.get('be',[])"
             href="${client_url}/be/?language=nl-BE">Nederlands</a>
+        <a tal:condition="python:'en' in sectors_dict.get('bg',[])"
+            href="${client_url}/bg/?language=en-GB">English</a>
       </li>
       <li class="bg">
-        <a tal:condition="python:'bg' in sectors_dict"
+        <a tal:condition="python:'bg' in sectors_dict.get('bg',[])"
             href="${client_url}/bg/?language=bg-BG">Български език</a>
+        <a tal:condition="python:'en' in sectors_dict.get('bg',[])"
+            href="${client_url}/bg/?language=en-GB">English</a>
       </li>
       <li class="cy">
         <a tal:condition="python:'el' in sectors_dict.get('cy',[])"
             href="${client_url}/cy/?language=el-CY">Ελληvικά</a>
         <a tal:condition="python:'en' in sectors_dict.get('cy',[])"
-            href="${client_url}/cy/?language=en-CY">English</a>
+            href="${client_url}/cy/?language=en-GB">English</a>
       </li>
       <li class="cz">
         <a tal:condition="python:'cs' in sectors_dict.get('cz',[])"
             href="${client_url}/cz/?language=cs-CZ">Čeština</a>
+        <a tal:condition="python:'en' in sectors_dict.get('cz',[])"
+            href="${client_url}/cz/?language=en-GB">English</a>
       </li>
       <li class="dk">
         <a tal:condition="python:'da' in sectors_dict.get('dk',[])"
             href="${client_url}/dk/?language=da-DK">Dansk</a>
+        <a tal:condition="python:'en' in sectors_dict.get('dk',[])"
+            href="${client_url}/dk/?language=en-GB">English</a>
       </li>
       <li class="ee">
         <a tal:condition="python:'et' in sectors_dict.get('ee',[])"
             href="${client_url}/ee/?language=et-EE">Eesti keel</a>
+        <a tal:condition="python:'en' in sectors_dict.get('ee',[])"
+            href="${client_url}/ee/?language=en-GB">English</a>
       </li>
       <li class="fi">
         <a tal:condition="python:'fi' in sectors_dict.get('fi',[])"
             href="${client_url}/fi/?language=fi-FI">Ελληvικά</a>
+        <a tal:condition="python:'en' in sectors_dict.get('fi',[])"
+            href="${client_url}/fi/?language=en-GB">English</a>
       </li>
       <li class="fr">
         <a tal:condition="python:'fr' in sectors_dict.get('fr',[])"
             href="${client_url}/fr/?language=fr-FR">Français</a>
+        <a tal:condition="python:'en' in sectors_dict.get('fr',[])"
+            href="${client_url}/fr/?language=en-GB">English</a>
       </li>
       <li class="de">
         <a tal:condition="python:'de' in sectors_dict.get('de',[])"
             href="${client_url}/de/?language=de-DE">Deutsch</a>
+        <a tal:condition="python:'en' in sectors_dict.get('de',[])"
+            href="${client_url}/de/?language=en-GB">English</a>
       </li>
       <li class="gr">
         <a tal:condition="python:'el' in sectors_dict.get('gr',[])"
             href="${client_url}/gr/?language=el-EL">Ελληνικά</a>
+        <a tal:condition="python:'en' in sectors_dict.get('gr',[])"
+            href="${client_url}/gr/?language=en-GB">English</a>
       </li>
       <li class="hu">
         <a tal:condition="python:'hu' in sectors_dict.get('hu',[])"
             href="${client_url}/hu/?language=hu-HU">Magyarország</a>
+        <a tal:condition="python:'en' in sectors_dict.get('hu',[])"
+            href="${client_url}/hu/?language=en-GB">English</a>
       </li>
       <li class="ie">
         <a tal:condition="python:'en' in sectors_dict.get('ie',[])"
@@ -103,20 +125,28 @@
       <li class="it">
         <a tal:condition="python:'it' in sectors_dict.get('it',[])"
             href="${client_url}/it/?language=it-IT">Italiano</a>
+        <a tal:condition="python:'en' in sectors_dict.get('it',[])"
+            href="${client_url}/it/?language=en-GB">English</a>
       </li>
       <li class="lv">
         <a tal:condition="python:'lv' in sectors_dict.get('lv',[])"
             href="${client_url}/lv/?language=lv-LV">Latviešu valoda</a>
+        <a tal:condition="python:'en' in sectors_dict.get('lv',[])"
+            href="${client_url}/lv/?language=en-GB">English</a>
       </li>
       <li class="lt">
         <a tal:condition="python:'lt' in sectors_dict.get('lt',[])"
             href="${client_url}/lt/?language=lt-LT">Lietuvių kalba</a>
+        <a tal:condition="python:'en' in sectors_dict.get('lt',[])"
+            href="${client_url}/lt/?language=en-GB">English</a>
       </li>
       <li class="lu">
         <a tal:condition="python:'de' in sectors_dict.get('lu',[])"
             href="${client_url}/lu/?language=de-LU">Deutsch</a>
         <a tal:condition="python:'fr' in sectors_dict.get('lu',[])"
             href="${client_url}/lu/?language=fr-LU">Français</a>
+        <a tal:condition="python:'en' in sectors_dict.get('lu',[])"
+            href="${client_url}/lu/?language=en-GB">English</a>
       </li>
       <li class="mt">
         <a tal:condition="python:'en' in sectors_dict.get('mt',[])"
@@ -127,34 +157,50 @@
       <li class="nl">
         <a tal:condition="python:'nl' in sectors_dict.get('nl',[])"
             href="${client_url}/nl/?language=nl-NL">Nederlands</a>
+        <a tal:condition="python:'en' in sectors_dict.get('nl',[])"
+            href="${client_url}/nl/?language=en-GB">English</a>
       </li>
       <li class="pl">
         <a tal:condition="python:'pl' in sectors_dict.get('pl',[])"
             href="${client_url}/pl/?language=pl-PL">Język Polski</a>
+        <a tal:condition="python:'en' in sectors_dict.get('pl',[])"
+            href="${client_url}/pl/?language=en-GB">English</a>
       </li>
       <li class="pt">
         <a tal:condition="python:'pt' in sectors_dict.get('pt',[])"
             href="${client_url}/pt/?language=pt-PT">Português</a>
+        <a tal:condition="python:'en' in sectors_dict.get('pt',[])"
+            href="${client_url}/pt/?language=en-GB">English</a>
       </li>
       <li class="ro">
         <a tal:condition="python:'ro' in sectors_dict.get('ro',[])"
             href="${client_url}/ro/?language=ro-RO">Limba Română</a>
+        <a tal:condition="python:'en' in sectors_dict.get('ro',[])"
+            href="${client_url}/ro/?language=en-GB">English</a>
       </li>
       <li class="si">
         <a tal:condition="python:'sl' in sectors_dict.get('si',[])"
             href="${client_url}/si/?language=sl-SL">Slovenščina</a>
+        <a tal:condition="python:'en' in sectors_dict.get('si',[])"
+            href="${client_url}/si/?language=en-GB">English</a>
       </li>
       <li class="sk">
         <a tal:condition="python:'sk' in sectors_dict.get('sk',[])"
             href="${client_url}/sk/?language=sk-SK">Slovenský jazyks</a>
+        <a tal:condition="python:'en' in sectors_dict.get('sk',[])"
+            href="${client_url}/sk/?language=en-GB">English</a>
       </li>
       <li class="es">
         <a tal:condition="python:'es' in sectors_dict.get('es',[])"
             href="${client_url}/es/?language=es-ES">Español</a>
+        <a tal:condition="python:'en' in sectors_dict.get('es',[])"
+            href="${client_url}/es/?language=en-GB">English</a>
       </li>
       <li class="se">
         <a tal:condition="python:'sv' in sectors_dict.get('se',[])"
             href="${client_url}/se/?language=sv-SE">Svenska</a>
+        <a tal:condition="python:'en' in sectors_dict.get('se',[])"
+            href="${client_url}/se/?language=en-GB">English</a>
       </li>
       <li class="gb">
         <a tal:condition="python:'en' in sectors_dict.get('gb',[])"
@@ -165,6 +211,7 @@
     <ul id="navigation">
       <metal:home use-macro="webhelpers/macros/homelink"/>
     </ul>
+    <metal:css use-macro="webhelpers/macros/appendix"/>
     <metal:css use-macro="webhelpers/macros/javascript"/>
    <script type="text/javascript">
 // <![CDATA[

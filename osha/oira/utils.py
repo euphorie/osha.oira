@@ -22,9 +22,16 @@ class OSHAWebHelpers(WebHelpers):
         if not sectorsfolder:
             return []
 
+        client = getattr(context, 'client')
+        if not client:
+            return []
+
         resp = {}
         catalog = getToolByName(context, 'portal_catalog')
-        for country in sectorsfolder.objectValues():
+        # Only the countries in the client obj should be considered, as the
+        # others are not accessible
+        for country_id in client.objectIds():
+            country = sectorsfolder._getOb(country_id)
             langs = {}
             surveys = ZCatalog.searchResults(
                         catalog,

@@ -1,5 +1,6 @@
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
+from Products.ZCatalog.ZCatalog import ZCatalog
 from euphorie.client.utils import WebHelpers
 
 class OSHAWebHelpers(WebHelpers):
@@ -22,11 +23,11 @@ class OSHAWebHelpers(WebHelpers):
         catalog = getToolByName(context, 'portal_catalog')
         for country in sectorsfolder.objectValues():
             langs = {}
-            surveys = catalog(
+            surveys = ZCatalog.searchResults(
+                        catalog,
                         portal_type='euphorie.survey',
                         path='/'.join(country.getPhysicalPath())
                         )
-
             if not surveys:
                 continue
 

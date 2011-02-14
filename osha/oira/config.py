@@ -1,0 +1,27 @@
+# -*- coding: iso-8859-15 -*-
+
+lang_dict = {
+    'bg':u'Български език',
+    'cs':u'Čeština',
+    'da':u'Dansk',
+    'de':u'Deutsch',
+    'el':u'Ελληvικά',
+    'en':u'English',
+    'es':u'Español',
+    'et':u'Eesti keel',
+    'fi':u'Ελληvικά',
+    'fr':u'Français',
+    'hu':u'Magyar nyelv',
+    'hu':u'Magyarország',
+    'it':u'Italiano',
+    'lt':u'Lietuvių kalba',
+    'lv':u'Latviešu valoda',
+    'mt':u'Malti',
+    'nl':u'Nederlands',
+    'pl':u'Język Polski',
+    'pt':u'Português',
+    'ro':u'Limba Română',
+    'sk':u'Slovenský jazyks',
+    'sl':u'Slovenščina',
+    'sv':u'Svenska',
+    }

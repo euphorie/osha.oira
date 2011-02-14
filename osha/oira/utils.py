@@ -2,10 +2,14 @@ from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.ZCatalog.ZCatalog import ZCatalog
 from euphorie.client.utils import WebHelpers
+from osha.oira.config import lang_dict # Used in templates...
 
 class OSHAWebHelpers(WebHelpers):
     """ Override Euphorie's webhelpers to add some more utility methods.
     """
+
+    def language_dict(self):
+        return lang_dict
 
     def get_sectors_dict(self):
         """ Returns a dictionary with keys being countries (and int. orgs) that

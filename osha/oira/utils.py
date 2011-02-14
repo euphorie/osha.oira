@@ -12,6 +12,9 @@ class OSHAWebHelpers(WebHelpers):
             have sectors inside them and the values being the available survey
             langauges.
 
+            We use ZCatalog directly to bypass permission checks, otherwise we
+            get zero surveys returned for anon users.
+
             See #2556.
         """ 
         context = aq_inner(self.context)

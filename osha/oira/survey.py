@@ -242,7 +242,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
         """
         document=report.createDocument()
         self.addIntroduction(document)
-        self.addCompanyInformation(document)
+
         # XXX: This part is removed
         # self.addActionPlan(document)
 

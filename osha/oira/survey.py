@@ -57,11 +57,15 @@ class OSHAActionPlanReportView(report.ActionPlanReportView):
     grok.name("view")
     download = False
 
+    def title(self, node, zodbnode):
+        if zodbnode.problem_description and zodbnode.problem_description.strip():
+            return zodbnode.problem_description
+        return node.title
+
     def update(self):
         """ """
         super(OSHAActionPlanReportView, self).update()
         self._extra_updates()
-
 
     def risk_status(self, node, zodbnode):
         """ """
@@ -89,6 +93,25 @@ class OSHAActionPlanReportView(report.ActionPlanReportView):
             return
 
         session=Session()
+        
+        # Note: evaluated nodes refer to nodes that are evaluated and
+        # have action plans.
+        query=session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session==self.session)\
+                .filter(sql.or_(model.MODULE_WITH_UNEVALUATED_RISKS_FILTER,
+                                model.UNEVALUATED_RISKS_FILTER))\
+                .order_by(model.SurveyTreeItem.path)
+        self.evaluated_nodes=query.all()
+
+        # Note: unevaluated nodes refer to nodes that are not evaluated and/or
+        # don't have action plans.
+        query=session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session==self.session)\
+                .filter(sql.or_(model.MODULE_WITH_UNEVALUATED_RISKS_FILTER,
+                                model.UNEVALUATED_RISKS_FILTER))\
+                .order_by(model.SurveyTreeItem.path)
+        self.unevaluated_nodes=query.all()
+
         query=session.query(model.SurveyTreeItem)\
                 .filter(model.SurveyTreeItem.session==self.session)\
                 .filter(sql.or_(model.MODULE_WITH_UNANSWERED_RISKS_FILTER,

@@ -31,6 +31,17 @@ class OSHAReportView(report.ReportView):
     grok.template("report")
 
 
+class OSHAActionPlan(survey.ActionPlan):
+    """
+    Overrides the original ActionPlanReport in euphorie.client.survey.py
+    to provide our own template.
+
+    Please refer to original for more details.
+    """
+    grok.layer(interfaces.IOSHAActionPlanPhaseSkinLayer)
+    grok.template("actionplan")
+
+
 class OSHAActionPlanReportView(report.ActionPlanReportView):
     """
     Overrides the original ActionPlanReportView in euphorie.client.survey.py
@@ -241,7 +252,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
             #1517 and #1518
         """
         document=report.createDocument()
-        self.addIntroduction(document)
 
         # XXX: This part is removed
         # self.addActionPlan(document)

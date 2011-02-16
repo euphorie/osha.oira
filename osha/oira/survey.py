@@ -1,5 +1,4 @@
 from five import grok
-import htmllaundry
 from osha.oira import model
 from sqlalchemy import sql
 from z3c.saconfig import Session
@@ -10,6 +9,7 @@ from zope.i18n import translate
 from cStringIO import StringIO
 from rtfng.document.paragraph import Paragraph
 from rtfng.Renderer import Renderer
+from osha.oira import utils
 from osha.oira import _
 
 grok.templatedir("templates")
@@ -42,7 +42,46 @@ class OSHAActionPlan(survey.ActionPlan):
     grok.template("actionplan")
 
 
-class OSHAActionPlanReportView(report.ActionPlanReportView):
+
+class OSHAActionPlanMixin():
+
+    def _extra_updates(self):
+        """ Provides the following extra attributes (as per #1517, #1518):
+            - unanswered_risk_nodes
+            - not_present_risk_nodes
+            - unevaluated_nodes
+            - evaluated_nodes
+
+            Place in a separate method so that OSHAActionPlanReportDownload
+            can call it.
+        """
+        if survey.redirectOnSurveyUpdate(self.request):
+            return
+
+        # I would have prefered to get the evaluated and unevaluated nodes via 
+        # SQLAlchemy, but querying for action_plans (via any()) didn't seem 
+        # to work, and in any case, a node might have an action plan that 
+        # isn't fully populated yet!
+        self.evaluated_nodes = utils.get_evaluated_nodes(self.nodes) 
+        self.unevaluated_nodes = utils.get_unevaluated_nodes(self.nodes) 
+        
+        session=Session()
+        query=session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session==self.session)\
+                .filter(sql.or_(model.MODULE_WITH_UNANSWERED_RISKS_FILTER,
+                                model.UNANSWERED_RISKS_FILTER))\
+                .order_by(model.SurveyTreeItem.path)
+        self.unanswered_nodes=query.all()
+
+        query=session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session==self.session)\
+                .filter(sql.or_(model.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
+                                model.RISK_NOT_PRESENT_FILTER))\
+                .order_by(model.SurveyTreeItem.path)
+        self.risk_not_present_nodes=query.all()
+
+
+class OSHAActionPlanReportView(report.ActionPlanReportView, OSHAActionPlanMixin):
     """
     Overrides the original ActionPlanReportView in euphorie.client.survey.py
 
@@ -56,7 +95,7 @@ class OSHAActionPlanReportView(report.ActionPlanReportView):
     grok.layer(interfaces.IOSHAReportPhaseSkinLayer)
     grok.name("view")
     download = False
-
+    
     def title(self, node, zodbnode):
         if zodbnode.problem_description and zodbnode.problem_description.strip():
             return zodbnode.problem_description
@@ -81,52 +120,6 @@ class OSHAActionPlanReportView(report.ActionPlanReportView):
             return "present"
 
 
-    def _extra_updates(self):
-        """ Provides the following extra attributes (as per #1517, #1518):
-            - unanswered_risk_nodes
-            - not_present_risk_nodes
-
-            Place in a separate method so that OSHAActionPlanReportDownload
-            can call it.
-        """
-        if survey.redirectOnSurveyUpdate(self.request):
-            return
-
-        session=Session()
-        
-        # Note: evaluated nodes refer to nodes that are evaluated and
-        # have action plans.
-        query=session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session==self.session)\
-                .filter(sql.or_(model.MODULE_WITH_UNEVALUATED_RISKS_FILTER,
-                                model.UNEVALUATED_RISKS_FILTER))\
-                .order_by(model.SurveyTreeItem.path)
-        self.evaluated_nodes=query.all()
-
-        # Note: unevaluated nodes refer to nodes that are not evaluated and/or
-        # don't have action plans.
-        query=session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session==self.session)\
-                .filter(sql.or_(model.MODULE_WITH_UNEVALUATED_RISKS_FILTER,
-                                model.UNEVALUATED_RISKS_FILTER))\
-                .order_by(model.SurveyTreeItem.path)
-        self.unevaluated_nodes=query.all()
-
-        query=session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session==self.session)\
-                .filter(sql.or_(model.MODULE_WITH_UNANSWERED_RISKS_FILTER,
-                                model.UNANSWERED_RISKS_FILTER))\
-                .order_by(model.SurveyTreeItem.path)
-        self.unanswered_nodes=query.all()
-
-        query=session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session==self.session)\
-                .filter(sql.or_(model.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
-                                model.RISK_NOT_PRESENT_FILTER))\
-                .order_by(model.SurveyTreeItem.path)
-        self.risk_not_present_nodes=query.all()
-
-
 class OSHAIdentificationReport(report.IdentificationReport):
     """
     Overrides the original IdentificationReport in euphorie.client.survey.py
@@ -139,7 +132,7 @@ class OSHAIdentificationReport(report.IdentificationReport):
     download = False
 
 
-class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
+class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPlanMixin):
     """ Generate and download action report.
     """
     grok.layer(interfaces.IOSHAReportPhaseSkinLayer)
@@ -151,23 +144,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
             non-present risks.
         """
         super(OSHAActionPlanReportDownload, self).update()
-
-        self.nodes = self.getNodes()
-
-        session=Session()
-        query=session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session==self.session)\
-                .filter(sql.or_(model.MODULE_WITH_UNANSWERED_RISKS_FILTER,
-                                model.UNANSWERED_RISKS_FILTER))\
-                .order_by(model.SurveyTreeItem.path)
-        self.unanswered_nodes=query.all()
-
-        query=session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session==self.session)\
-                .filter(sql.or_(model.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
-                                model.RISK_NOT_PRESENT_FILTER))\
-                .order_by(model.SurveyTreeItem.path)
-        self.risk_not_present_nodes=query.all()
+        self._extra_updates()
 
 
     def addReportNodes(self, document, nodes, heading):
@@ -192,57 +169,20 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
                 }
 
         for node in nodes:
+            zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
+            if node.type == 'risk':
+                title = zodb_node.problem_description
+            else:
+                title = node.title
             section.append(
                     Paragraph(
                         header_styles[node.depth], 
-                        u"%s %s" % (node.number, node.title)
+                        u"%s %s" % (node.number, title)
                         )
                     )
 
             if node.type!="risk":
                 continue
-
-            zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
-
-            if node.identification=="no":
-
-                if node.probability == 0:
-                    section.append(Paragraph(warning_style,
-                        t(_("risk_unevaluated", 
-                            default=u"You still need to evaluate this risk."))))
-
-                elif node.action_plans == []:
-                    section.append(Paragraph(warning_style,
-                        t(_("risk_without_actionplan", 
-                            default=u"You still need to provide an action plan for this risk"))))
-            
-                elif not (zodb_node.problem_description and zodb_node.problem_description.strip()):
-                    section.append(Paragraph(warning_style,
-                        t(  _("warn_risk_present", 
-                            default=u"You responded negatively to the above statement."))))
-
-            elif node.postponed or not node.identification:
-                section.append(Paragraph(warning_style,
-                    t(_("risk_unanswered", 
-                        default=u"This risk still needs to be inventorised."))))
-
-            elif node.identification in [u"n/a", u"yes"]:
-                if node.risk_type=="top5":
-                    section.append(Paragraph(warning_style,
-                        t(_("top5_risk_not_present", 
-                            default=u"This risk is not present in your "
-                                    u"organisation, but since the sector "
-                                    u"organisation considers this one of "
-                                    u"the top 5 most critical risks it "
-                                    u"must be included in this report."))))
-
-                else:
-                    section.append(Paragraph(warning_style,
-                        t(_("risk_not_present", 
-                            default=u"This risk has been identified as not being " \
-                                    u"present in your organisation"))))
-
-
 
             if node.priority:
                 if node.priority=="low":
@@ -254,7 +194,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
                 section.append(Paragraph(normal_style, 
                     t(_("report_priority", default=u"This is a ")), t(level)))
 
-            section.append(Paragraph(normal_style, htmllaundry.StripMarkup(zodb_node.description)))
             if node.comment and node.comment.strip():
                 section.append(Paragraph(comment_style, node.comment))
 
@@ -281,20 +220,26 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
 
         # XXX: and replaced with this part:
         heading = translate(
-                _(  "plan_report_plan_header", 
-                    default=u"Action plan"),
+                _(  "header_present_risks", 
+                    default=u"Risks that have been identified, evaluated and have an Action Plan:"),
                 self.request)
-        self.addReportNodes(document, self.nodes, heading)
+        self.addReportNodes(document, self.evaluated_nodes, heading)
 
         heading = translate(
-                _(  "plan_report_unanswered_risks", 
-                    default=u"Unanswered Risks"), 
+                _(  "header_unevaluated_risks", 
+                    default=u"Risks that have been identified but NOT evaluated and do NOT have an Action Plan:"), 
+                self.request)
+        self.addReportNodes(document, self.unevaluated_nodes, heading)
+
+        heading = translate(
+                _(  "header_unanswered_risks",
+                    default=u'Risks that have been "parked" and are still to be dealt with:'), 
                 self.request)
         self.addReportNodes(document, self.unanswered_nodes, heading)
-
+        
         heading = translate(
-                _(  "plan_report_unanswered_risks",
-                    default=u"Positively Answered Risks"), 
+                _(  "header_risks_not_present",
+                    default=u"Risks that are not present in your organisation:"), 
                 self.request)
         self.addReportNodes(document, self.risk_not_present_nodes, heading)
         # Until here...

@@ -4,6 +4,70 @@ from Products.ZCatalog.ZCatalog import ZCatalog
 from euphorie.client.utils import WebHelpers
 from osha.oira.config import lang_dict # Used in templates...
 
+def remove_empty_modules(ls):
+    """ Takes a list of modules and risks.
+
+        Removes modules that don't have any risks in them.
+        Modules with submodules (with risks) must however be kept.
+    """
+    while ls and ls[-1].type == 'module':
+        ls = ls[:-1]
+
+    for i in range(1, len(ls)):
+        if ls[i].type == 'module':
+            if ls[i-1].type == 'module' and \
+                    ls[i-1].depth >= ls[i].depth:
+                ls[i-1] = None
+    return ls
+
+
+def get_unevaluated_nodes(ls):
+    """ Takes a list of modules and risks and removes all risks that have *not* 
+        been evaluated and actioned.
+
+        Also remove all modules that have lost all their risks in the pocess
+    """
+    unevaluated = []
+    for n in ls:
+        if n.type == 'module':
+            unevaluated.append(n)
+
+        if n.type == 'risk':
+            if n.probability == 0 or not n.action_plans:
+                unevaluated.append(n)
+            elif len(n.action_plans):
+                # It's possible that there is an action plan object, but
+                # it's not yet fully populated
+                plans = [p.action_plan for p in n.action_plans]
+                if plans[0] == None:
+                    unevaluated.append(n)
+
+    unevaluated = remove_empty_modules(unevaluated)
+    return [u for u in unevaluated if u != None]
+
+
+def get_evaluated_nodes(ls):
+    """ Takes a list of modules and risks and removes all risks that have been
+        evaluated and actioned.
+
+        Also remove all modules that have lost all their risks in the pocess
+    """
+    evaluated = []
+    for n in ls:
+        if n.type == 'module':
+            evaluated.append(n)
+
+        if n.type == 'risk' and n.probability != 0 and len(n.action_plans):
+                # It's possible that there is an action plan object, but
+                # it's not yet fully populated
+                plans = [p.action_plan for p in n.action_plans]
+                if plans[0] != None:
+                    evaluated.append(n)
+
+    evaluated = remove_empty_modules(evaluated)
+    return [e for e in evaluated if e != None]
+
+
 class OSHAWebHelpers(WebHelpers):
     """ Override Euphorie's webhelpers to add some more utility methods.
     """

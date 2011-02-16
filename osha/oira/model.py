@@ -17,64 +17,6 @@ RISK_PRESENT_OR_TOP5_FILTER = RISK_PRESENT_OR_TOP5_FILTER
 
 node = orm.aliased(SurveyTreeItem)
 
-# Note: evaluated risks refer to nodes that are evaluated and
-# have action plans.
-MODULE_WITH_EVALUATED_RISKS_FILTER = \
-    sql.and_(SurveyTreeItem.type=="module",
-                SurveyTreeItem.skip_children==False,
-                sql.exists(sql.select([node.id]).where(sql.and_(
-                    node.session_id==SurveyTreeItem.session_id,
-                    node.id==Risk.sql_risk_id,
-                    node.type=="risk",
-                    Risk.identification=='no',
-                    Risk.probability!=0,
-                    sql.not_(Risk.action_plans.any()),
-                    node.depth>SurveyTreeItem.depth,
-                    node.path.like(SurveyTreeItem.path+"%")
-                    )
-                )))
-
-EVALUATED_RISKS_FILTER = \
-      sql.and_(SurveyTreeItem.type=="risk",
-               sql.exists(sql.select([Risk.sql_risk_id]).where(sql.and_(
-                    Risk.sql_risk_id==SurveyTreeItem.id,
-                    Risk.identification=='no',
-                    Risk.identification=='no',
-                    Risk.probability!=0,
-                    )
-                )))
-
-# Note: unevaluated risks refer to nodes that are not evaluated and/or
-# don't have action plans.
-MODULE_WITH_UNEVALUATED_RISKS_FILTER = \
-    sql.and_(SurveyTreeItem.type=="module",
-                SurveyTreeItem.skip_children==False,
-                sql.exists(sql.select([node.id]).where(sql.and_(
-                    node.session_id==SurveyTreeItem.session_id,
-                    node.id==Risk.sql_risk_id,
-                    node.type=="risk",
-                    Risk.identification=='no',
-                    sql.or_(
-                        Risk.probability==0,
-                        Risk.action_plans.any(),
-                        ),
-                    node.depth>SurveyTreeItem.depth,
-                    node.path.like(SurveyTreeItem.path+"%")
-                    )
-                )))
-
-UNEVALUATED_RISKS_FILTER = \
-      sql.and_(SurveyTreeItem.type=="risk",
-               sql.exists(sql.select([Risk.sql_risk_id]).where(sql.and_(
-                    Risk.sql_risk_id==SurveyTreeItem.id,
-                    Risk.identification=='no',
-                    sql.or_(
-                        Risk.probability==0,
-                        Risk.action_plans.any(),
-                        )
-                    )
-                )))
-
 UNANSWERED_RISKS_FILTER = \
       sql.and_(SurveyTreeItem.type=="risk",
                sql.exists(sql.select([Risk.sql_risk_id]).where(sql.and_(

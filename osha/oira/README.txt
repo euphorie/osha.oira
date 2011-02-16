@@ -7,8 +7,8 @@ Overview
 'EU-OSHA customisations for Euphorie/OiRA'
 
 
-Your tests here
+We can add tests here
 ---------------
 
-    >>> 1 + 1
-    3
+    >>> 1 + 1 
+    2

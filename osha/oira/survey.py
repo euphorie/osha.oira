@@ -144,6 +144,18 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             non-present risks.
         """
         super(OSHAActionPlanReportDownload, self).update()
+
+        session=Session()
+        if self.session.company is None:
+            self.session.company=model.Company()
+        query=session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session==self.session)\
+                .filter(sql.not_(model.SKIPPED_PARENTS))\
+                .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
+                                model.RISK_PRESENT_OR_TOP5_FILTER))\
+                .order_by(model.SurveyTreeItem.path)
+        self.nodes=query.all()
+
         self._extra_updates()
 
 
@@ -198,6 +210,9 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 section.append(Paragraph(comment_style, node.comment))
 
             for (idx, measure) in enumerate(node.action_plans):
+                if not measure.action_plan:
+                    continue
+                    
                 if len(node.action_plans)==1:
                     section.append(Paragraph(measure_heading_style,
                         t(_("header_measure_single", default=u"Measure"))))

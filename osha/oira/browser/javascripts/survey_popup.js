@@ -4,6 +4,7 @@ $("button#report_comment_submit").click(function(event) {
     var text = jQuery("#survey_popup_text").text();
     var ok = jQuery("#survey_popup_confirm").text();
     var cancel = jQuery("#survey_popup_deny").text();
+    var url = jQuery("#survey_popup_url").text();
     $.alerts.okButton = '&nbsp;'+ok+'&nbsp;';
     $.alerts.cancelButton = '&nbsp;'+cancel+'&nbsp;';
     jConfirm(
@@ -11,7 +12,7 @@ $("button#report_comment_submit").click(function(event) {
         heading, 
         function(result) {
             if (result == true) {
-                window.open('http://www.surveymonkey.com/s/OiRATool')
+                window.open(url)
             }
             else {
                 jQuery('form#report_comment_form').submit();

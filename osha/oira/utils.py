@@ -109,7 +109,8 @@ class OSHAWebHelpers(WebHelpers):
             if not surveys:
                 continue
 
-            for survey in surveys:
+            for s in surveys:
+                survey = s._unrestrictedGetObject()
                 langs[survey.language.split('-')[0]] = 'dummy'
 
             if langs:

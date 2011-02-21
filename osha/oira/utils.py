@@ -112,7 +112,11 @@ class OSHAWebHelpers(WebHelpers):
             for s in surveys:
                 survey = s._unrestrictedGetObject()
                 langs[survey.language.split('-')[0]] = 'dummy'
-
+                
+            # surveys might exist without a language set.
+            if langs.has_key(''):
+                del langs['']
+            
             if langs:
                 resp[country.id] = langs.keys()
 

@@ -15,8 +15,8 @@
   </head>
   <body class="actionplan ${webhelpers/extra_css}">
     <h1>${context/title}</h1>
-
     <tal:block condition="view/next_url">
+    
       <p i18n:translate="expl_actionplan_1">
         You have identified the magnitude of risk for each of the bottlenecks.
         During the action plan phase you can determine the priority of each of
@@ -30,7 +30,7 @@
         tasks have to be carried out in order for the risk to be removed, as well
         as the knowledge and experience that are needed for those tasks to be
         carried out (prevention plan and requirements).</p>
-        
+       
       <p i18n:translate="expl_actionplan_3">
          <ol>
             <li>
@@ -60,7 +60,8 @@
       <a tal:condition="view/next_url" class="button-medium" href="${view/next_url}" i18n:translate="label_create_action_plan">Create action plan</a>
       <a tal:condition="not:view/next_url" class="button-medium" href="${python:webhelpers.survey_url(phase='report')}" i18n:translate="label_jump_to_report">Go to report</a>
     </p>
-		
+
+    <hr/>
     <ol id="steps" tal:define="survey_url webhelpers/survey_url">
       <li class="complete" id="step-1">
         <a href="${survey_url}/start">
@@ -93,9 +94,8 @@
         </a>
       </li>
     </ol>
-
     <ul id="navigation">
-      <li id="home"><a href="${webhelpers/client_url}">${webhelpers/sector_title}</a></li>
+      <metal:home use-macro="webhelpers/macros/homelink"/>
       <li><a href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a></li>
       <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">Surveys</a></li>
       <li><a href="${webhelpers/help_url}#actionplan" i18n:translate="navigation_help">Help</a></li>

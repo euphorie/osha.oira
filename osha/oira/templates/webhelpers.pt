@@ -177,7 +177,7 @@
         </a>
         <br clear="all"/>
         
-        <span id="legal_reference" 
+        <div id="legal_reference" 
               style="display:none"
               tal:attributes="style python:show_legal and 'display:block' or 'display:none'">
 
@@ -185,7 +185,7 @@
                     The requirements for fridges are defined in section 13.1 section a
                     of the health code.
             </tal:desc> 
-        </span>
+        </div>
     </tal:block>
   </metal:risklegal>
 

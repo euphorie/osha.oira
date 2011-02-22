@@ -24,14 +24,14 @@ $("button#report_comment_submit").click(function(event) {
 $("a#oira_legal_show_hide_anchor").click(function(event) {
     event.preventDefault();
     var anchor = jQuery("a#oira_legal_show_hide_anchor");
-    var span = jQuery("span#legal_reference");
+    var div = jQuery("div#legal_reference");
     var current_txt = anchor.text() 
     if (current_txt == 'Show') {
         anchor.text('Hide');
-        span.show(200);
+        div.show(200);
     }
     else {
         anchor.text('Show');
-        span.hide(700);
+        div.hide(700);
     }
 });

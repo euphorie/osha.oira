@@ -104,7 +104,7 @@
     <metal:appendix     use-macro="webhelpers/macros/appendix"/>
     <metal:javascripts  use-macro="webhelpers/macros/javascript"/>
     <script type="text/javascript" src="++resource++collective.alerts.resources/jquery.alerts.js"></script>
-    <script type="text/javascript" src="++resource++osha.oira.javascripts/survey_popup.js"></script>
+    <script type="text/javascript" src="++resource++osha.oira.javascripts/oira.js"></script>
     <tal:block replace="tile:client-analytics"/>
   </body>
 </html>

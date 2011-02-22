@@ -8,12 +8,12 @@
       meta:interpolation="true"
       i18n:domain="euphorie"
       tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers">
-  <head>
+<head>
     <title i18n:translate="title_tool">OiRA</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <metal:css use-macro="webhelpers/macros/css"/>
-  </head>
-  <body tal:define="risk nocall:view/risk" class="identification ${webhelpers/extra_css}">
+</head>
+<body tal:define="risk nocall:view/risk" class="identification ${webhelpers/extra_css}">
     <h1 tal:content="view/title">The temperature of all fridges is checked daily</h1>
     <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}">
       <fieldset class="comprehensive radioList">

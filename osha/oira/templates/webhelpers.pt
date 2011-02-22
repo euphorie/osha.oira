@@ -151,6 +151,9 @@
       temperature is too high or fluctuates too much food can start
       rotting quickly.
     </p>
+  </metal:riskinfo>
+
+  <metal:risklegal define-macro="risk_legal" meta:interpolation="true" i18n:domain="euphorie">
     <tal:block condition="risk/legal_reference">
       <h4 i18n:translate="header_legal_references">Legal and policy references</h4>
 
@@ -159,5 +162,6 @@
         of the health code.
       </p> 
     </tal:block>
-  </metal:riskinfo>
+  </metal:risklegal>
+
 </html>

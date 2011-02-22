@@ -1,16 +1,27 @@
+import htmllaundry
+from cStringIO import StringIO
+from Acquisition import aq_inner
+
 from five import grok
-from osha.oira import model
 from sqlalchemy import sql
 from z3c.saconfig import Session
-from euphorie.client import survey, report
-import interfaces
 from zope.i18n import translate
+from zExceptions import NotFound
+from plonetheme.nuplone.utils import formatDate
 
-from cStringIO import StringIO
+from rtfng.PropertySets import ParagraphPropertySet, TabPropertySet
+from rtfng.document.section import Section
 from rtfng.document.paragraph import Paragraph
+from rtfng.document.base import TAB
 from rtfng.Renderer import Renderer
+
+from euphorie.client import survey, report
+from euphorie.client.session import SessionManager
+
 from osha.oira import utils
+from osha.oira import model
 from osha.oira import _
+import interfaces
 
 grok.templatedir("templates")
 
@@ -130,6 +141,19 @@ class OSHAIdentificationReport(report.IdentificationReport):
     grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
     grok.template("report_identification")
     download = False
+
+    def title(self, node, zodbnode):
+        return node.title
+
+    def publishTraverse(self, request, name):
+        """Check if the user wants to download this report by checking for a
+        ``download`` URL entry. This uses a little trick: browser views
+        implement `IPublishTraverse`, which allows us to catch traversal steps.
+        """
+        if name=="download":
+            return OSHAIdentificationReportDownload(aq_inner(self.context), request)
+        else:
+            raise NotFound(self, name, request)
 
 
 class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPlanMixin):
@@ -271,4 +295,75 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                             "attachment; filename=\"%s.rtf\"" % filename.encode("utf-8"))
         self.request.response.setHeader("Content-Type", "application/rtf")
         return output.getvalue()
+
+
+class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
+    """Generate identification report in RTF form.
+    """
+    grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
+
+    def addIdentificationResults(self, document):
+        survey=self.request.survey
+        t=lambda txt: translate(txt, context=self.request)
+        section = report.createSection(document, self.context, self.request)
+
+        styles = document.StyleSheet.ParagraphStyles
+
+        normal_style=document.StyleSheet.ParagraphStyles.Normal
+        warning_style=document.StyleSheet.ParagraphStyles.Warning
+        comment_style=document.StyleSheet.ParagraphStyles.Comment
+        header_styles={
+                0: styles.Heading2,
+                1: styles.Heading3,
+                2: styles.Heading4,
+                3: styles.Heading5,
+                }
+
+        for node in self.getNodes():
+            section.append(Paragraph(header_styles[node.depth], u"%s %s" % (node.number, node.title)))
+
+            if node.type!="risk":
+                continue
+
+            zodb_node=survey.restrictedTraverse(node.zodb_path.split("/"))
+            if node.identification=="no" and not (
+                    zodb_node.problem_description and zodb_node.problem_description.strip()):
+                section.append(Paragraph(warning_style,
+                    t(_("warn_risk_present", default=u"You responded negatively to the above statement."))))
+            elif node.postponed or not node.identification:
+                section.append(Paragraph(warning_style,
+                    t(_("risk_unanswered", default=u"This risk still needs to be inventorised."))))
+
+            section.append(Paragraph(normal_style, htmllaundry.StripMarkup(zodb_node.description)))
+
+            tabs = TabPropertySet(
+                section.TwipsToRightMargin(),
+                alignment=TabPropertySet.RIGHT,
+                leader=getattr(TabPropertySet, 'UNDERLINE')
+                )
+            para_props = ParagraphPropertySet(tabs=[tabs])
+            p =  Paragraph(styles.Normal, para_props)
+            p.append(TAB)
+            section.append(p)
+
+            if node.comment and node.comment.strip():
+                section.append(Paragraph(comment_style, node.comment))
+
+def createSection(document, survey, request):
+    t=lambda txt: translate(txt, context=request)
+    footer=t(_("report_survey_revision",
+        default=u"List of risks - OiRA Tool '${title}' of revision date ${date}.",
+        mapping={"title": survey.published[1],
+                 "date": formatDate(request, survey.published[2])}))
+    # rtfng does not like unicode footers
+    footer=Paragraph(document.StyleSheet.ParagraphStyles.Footer,
+            "".join(["\u%s?" % str(ord(e)) for e in footer]))
+    section = Section()
+    section.Header.append(Paragraph(
+        document.StyleSheet.ParagraphStyles.Footer, SessionManager.session.title))
+    section.Footer.append(footer)
+    section.SetBreakType(section.PAGE)
+    document.Sections.append(section)
+    return section
+
 

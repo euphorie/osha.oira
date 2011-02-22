@@ -59,17 +59,23 @@
             <p tal:replace="structure zodbnode/description">
               This is a description of the risk.
             </p>
+
+            <div style="height: 7em;">
+                &nbsp; 
+            </div>
+            <hr/>
+            <br clear="all"/>
+            <br clear="all"/>
           </div>
         </tal:block>
-
-            <!-- Requested to be removed in #2382
+        <!-- Requested to be removed in #2382
             <blockquote class="comments" 
                         tal:condition="python:node.comment and node.comment.strip()">
                 <p tal:content="node/comment">
                     Here are the comments the user has added to this risk.
                 </p>
             </blockquote>
-            -->
+        -->
       </tal:risk>
     </tal:block>
 

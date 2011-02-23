@@ -4,7 +4,9 @@ Changelog
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- during the xml import, langauge values might still include trailing and leading spaces. 
+  For the frontpage langauge detection, we need to strip them.
+  [pilz]
 
 
 0.2 (2011-02-23)

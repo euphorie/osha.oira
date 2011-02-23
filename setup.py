@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.3'
+version = 'ydev'
 
 setup(name='osha.oira',
       version=version,

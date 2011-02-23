@@ -336,13 +336,16 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
 
             section.append(Paragraph(normal_style, htmllaundry.StripMarkup(zodb_node.description)))
 
+            for i in range(0,8):
+                p =  Paragraph(styles.Normal, " ")
+                section.append(p)
+
             tabs = TabPropertySet(
                 section.TwipsToRightMargin(),
                 alignment=TabPropertySet.RIGHT,
                 leader=getattr(TabPropertySet, 'UNDERLINE')
                 )
-            para_props = ParagraphPropertySet(tabs=[tabs])
-            p =  Paragraph(styles.Normal, para_props)
+            p = Paragraph(styles.Normal, ParagraphPropertySet(tabs=[tabs]))
             p.append(TAB)
             section.append(p)
 

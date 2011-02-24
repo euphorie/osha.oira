@@ -34,7 +34,7 @@
         <metal:call use-macro="webhelpers/index/macros/risk_info" />
     </div>
 
-    <div class="emphasis" tal:condition="view/show_info">
+    <div class="emphasis" tal:condition="risk/legal_reference|nothing">
         <metal:call use-macro="webhelpers/index/macros/risk_legal" />
     </div>
 

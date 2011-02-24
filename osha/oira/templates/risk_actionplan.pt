@@ -32,7 +32,7 @@
       </fieldset>
     </div>
 
-    <div class="warning last span-15" tal:define="show_statement python:True">
+    <div class="warning last span-15" tal:condition="risk/legal_reference|nothing">
       <metal:call use-macro="webhelpers/index/macros/risk_legal_collapsible" />
     </div>
 

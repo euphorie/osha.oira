@@ -6,6 +6,7 @@ from five import grok
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.i18n import translate
+from zope.component import getMultiAdapter
 from zExceptions import NotFound
 from plonetheme.nuplone.utils import formatDate
 
@@ -40,6 +41,14 @@ class OSHAReportView(report.ReportView):
         See euphorie/client/survey.py for more info
     """
     grok.template("report")
+    
+    def get_language(self):
+        context = aq_inner(self.context)
+        portal_state = getMultiAdapter(
+                                (context, self.request), 
+                                name=u'plone_portal_state'
+                                )
+        return portal_state.language()
 
 
 class OSHAActionPlan(survey.ActionPlan):

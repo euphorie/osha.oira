@@ -112,6 +112,10 @@ class OSHAWebHelpers(WebHelpers):
 
             for s in surveys:
                 survey = s._unrestrictedGetObject()
+                # XXX: We strip out the country code to keep things simpler.
+                # Otherwise we will have the same language apearing multiple
+                # times on the front page if the surveys are set in different
+                # variants of the same language code.
                 langs[survey.language.split('-')[0].strip()] = 'dummy'
                 
             # surveys might exist without a language set.

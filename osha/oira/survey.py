@@ -314,7 +314,7 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
     def addIdentificationResults(self, document):
         survey=self.request.survey
         t=lambda txt: translate(txt, context=self.request)
-        section = report.createSection(document, self.context, self.request)
+        section = createIdentificationReportSection(document, self.context, self.request)
 
         styles = document.StyleSheet.ParagraphStyles
 
@@ -361,9 +361,9 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
             if node.comment and node.comment.strip():
                 section.append(Paragraph(comment_style, node.comment))
 
-def createSection(document, survey, request):
+def createIdentificationReportSection(document, survey, request):
     t=lambda txt: translate(txt, context=request)
-    footer=t(_("report_survey_revision",
+    footer=t(_("report_identification_revision",
         default=u"List of risks - OiRA Tool '${title}' of revision date ${date}.",
         mapping={"title": survey.published[1],
                  "date": formatDate(request, survey.published[2])}))

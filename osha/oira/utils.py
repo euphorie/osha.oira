@@ -99,6 +99,7 @@ class OSHAWebHelpers(WebHelpers):
         # Only the countries in the client obj should be considered, as the
         # others are not accessible
         for country_id in client.objectIds():
+
             country = sectorsfolder._getOb(country_id)
             langs = {}
             surveys = ZCatalog.searchResults(

@@ -158,7 +158,7 @@
   <metal:risklegal define-macro="risk_legal" meta:interpolation="true" i18n:domain="euphorie">
     <tal:block condition="risk/legal_reference">
       <h4 tal:define="lang view/get_language|nothing;"
-          tal:attributes="class string:oira_header_${lang}"
+          tal:attributes="class string:lang-${lang}"
           i18n:translate="header_legal_references">Legal and policy references</h4>
 
       <p tal:content="structure risk/legal_reference">
@@ -175,7 +175,7 @@
                        toggle_legal python:show_legal and '0' or '1'">
         
         <h4 class="oira_legal_header" 
-            tal:attributes="class string:oira_legal_header oira_header_${lang}"
+            tal:attributes="class string:oira_legal_header lang-${lang}"
             i18n:translate="header_legal_references">Legal and policy references</h4>
         <a id="oira_legal_show_hide_anchor" 
             tal:attributes="href string:${request/ACTUAL_URL}?show_legal=${toggle_legal};"

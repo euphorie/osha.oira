@@ -361,10 +361,12 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
             if node.comment and node.comment.strip():
                 section.append(Paragraph(comment_style, node.comment))
 
+
 def createIdentificationReportSection(document, survey, request):
     t=lambda txt: translate(txt, context=request)
     footer=t(_("report_identification_revision",
-        default=u"List of risks - OiRA Tool '${title}' of revision date ${date}.",
+        default=u"This document was based on the OiRA Tool '${title}' of "
+                u"revision date ${date}.",
         mapping={"title": survey.published[1],
                  "date": formatDate(request, survey.published[2])}))
     # rtfng does not like unicode footers

@@ -18,8 +18,8 @@ class View(grok.View):
 class ClientPublishTraverser(DefaultPublishTraverse):
     """Publish traverser to setup the skin layer.
 
-    This traverser marks the request with ITnoClientSkinLayer when the
-    client is traversed and the tno.euphorie product is installed.
+    This traverser marks the request with IOSHAClientSkinLayer when the
+    client is traversed and the osha.oira product is installed.
     """
     adapts(IClient, IProductLayer)
 

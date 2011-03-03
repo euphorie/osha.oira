@@ -1,7 +1,9 @@
 import datetime
 
 def run(self):
-    """ """
+    """ Update the client survey's timestamps. This will force every user's
+        session to be updated automatically, as soon as it is loaded.
+    """
     ls = []
     # We don't use the catalog here, because it seems some surveys are not
     # catalogged.

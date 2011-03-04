@@ -13,7 +13,7 @@ def run(self):
                 published=getattr(survey, "published", None)
 
                 if published is not None:
-                    survey.published=datetime.datetime.now()
+                    survey.published=(survey.id, survey.title, datetime.datetime.now())
                     ls.append('/'.join(survey.getPhysicalPath()))
             
     return ls

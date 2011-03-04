@@ -50,6 +50,27 @@ class OSHAReportView(report.ReportView):
                                 )
         return portal_state.language()
 
+    def get_survey_url(self):
+        context = aq_inner(self.context)
+        site_properties = context.portal_properties.site_properties
+        sdict = {}
+        if hasattr(site_properties, 'survey_urls'):
+            survey_urls = site_properties.survey_urls
+            for l in survey_urls:
+                t = l.split(" ")
+                if len(t) != 2:
+                    continue
+                lang, url = t
+                sdict[lang] = url
+
+        lang = self.get_language()
+        if sdict.has_key(lang):
+            return sdict[lang]
+        elif sdict.has_key('en'):
+            return sdict['en']
+        else:
+            return 'http://www.surveymonkey.com/s/OiRATool'
+
 
 class OSHAActionPlan(survey.ActionPlan):
     """
@@ -60,7 +81,6 @@ class OSHAActionPlan(survey.ActionPlan):
     """
     grok.layer(interfaces.IOSHAActionPlanPhaseSkinLayer)
     grok.template("actionplan")
-
 
 
 class OSHAActionPlanMixin():

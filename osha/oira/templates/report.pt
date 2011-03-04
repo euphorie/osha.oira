@@ -38,12 +38,9 @@
             </textarea>
         </fieldset>
 
-        <p id="survey_popup_title" style="display:None" i18n:translate="popup_title">Survey</p>
         <p id="survey_popup_url" 
-           tal:define="
-                    lang view/get_language;
-                    url string:http://www.surveymonkey.com/s/OiRATool"
-           style="display:None" tal:content="python:lang == 'en' and url or '%s_%s' % (url, lang)">http://www.surveymonkey.com/s/OiRATool</p>
+           tal:define="url view/get_survey_url|nothing"
+           style="display:None" tal:content="python:url or 'http://www.surveymonkey.com/s/OiRATool'">http://www.surveymonkey.com/s/OiRATool</p>
         <p id="survey_popup_text" 
             style="display:None" 
             i18n:translate="popup_text">Please give us your feedback about this tool: it will take you only 3 minutes! 

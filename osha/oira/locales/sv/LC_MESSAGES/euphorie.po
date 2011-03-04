@@ -11,6 +11,7 @@ msgstr ""
 "PO-Revision-Date: 2011-01-19 12:47+0100\n"
 "Last-Translator: Robert <vansen@hotmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -288,6 +289,11 @@ msgid "report_survey_revision"
 msgstr ""
 "Denna rapport är baserad på OiRA-verktyget '${title}' av reviseringsdatum "
 "${date}."
+
+#. Default: "This document was based on the OiRA Tool '${title}' of revision date ${date}."
+#: osha.oira:/survey.py:366
+msgid "report_identification_revision"
+msgstr ""
 
 #. Default: "You may enter a name for this OiRA Tool that will make it easier
 #. for you to find your session back if you wish to continue at a later time."
@@ -667,7 +673,7 @@ msgid "warning_unanswered_risks"
 msgstr ""
 "Du har fortfarande obesvarade risker. Se listan längst ner på denna sida."
 
-#. Default: "Please note, you still have the following unanswered risks:"
+#. Default: "Risks that have been "parked" and are still to be dealt with:"
 #: osha.oira:/templates/report_actionplan.pt:240
 msgid "header_unanswered_risks"
 msgstr "Obs! Du har fortfarande följande risker som är obesvarade:"
@@ -679,7 +685,7 @@ msgid "description_unanswered_risks"
 msgstr ""
 "Följande risker har ännu inte besvarats. Besvara dem så snart som möjligt."
 
-#. Default: "Risks identified as not being present in you organisation:"
+#. Default: "Risks that are not present in your organisation:"
 #: osha.oira:/templates/report_actionplan.pt:196
 msgid "header_risks_not_present"
 msgstr "Risker som identifierats som inte närvarande inom din organisation:"
@@ -779,4 +785,9 @@ msgstr ""
 #. Default: "No thanks"
 #: osha.oira:/templates/report.pt:49
 msgid "popup_deny"
+msgstr ""
+
+#. Default: Identification report ${title}
+#: euphorie/client/report.py:301
+msgid "filename_report_identification"
 msgstr ""

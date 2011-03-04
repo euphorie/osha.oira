@@ -11,8 +11,9 @@ msgstr ""
 "PO-Revision-Date: 2011-02-20 16:50+0100\n"
 "Last-Translator: cath\n"
 "Language-Team: en <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "Generated-By: Babel 0.9.5\n"
@@ -23,7 +24,8 @@ msgstr "OiRA - Évaluation interactive des risques en ligne"
 
 #. Default: "<strong>OiRA</strong><br/>Online interactive<br/>Risk Assessment"
 msgid "title_logo"
-msgstr "<strong>OiRA</strong><br/>Évaluation interactive des risques<br/>en ligne"
+msgstr ""
+"<strong>OiRA</strong><br/>Évaluation interactive des risques<br/>en ligne"
 
 #. Default: "General approach (to eliminate or reduce the risk)"
 msgid "label_measure_action_plan"
@@ -39,7 +41,8 @@ msgstr "Action(s) spécifique(s) requise(s) pour mettre en place cette approche"
 
 #. Default: "Specific action(s) required to implement this approach:"
 msgid "report_measure_preventionplan"
-msgstr "Action(s) spécifique(s) requise(s) pour mettre en place cette approche :"
+msgstr ""
+"Action(s) spécifique(s) requise(s) pour mettre en place cette approche :"
 
 #. Default: "Level of expertise and/or requirements needed"
 msgid "label_measure_requirements"
@@ -58,17 +61,30 @@ msgstr "Niveau d'expérience et/ou d'exigences nécessaires :"
 #. required”, or “OSH expert”. You can also describe here any other additional
 #. requirement (if any)."
 msgid "actionplan_measure_tooltip"
-msgstr "Décrire : 1) quelle est votre approche générale pour éliminer ou (si le risque ne peut être évité) pour réduire le risque ; 2) l'action / les actions spécifique(s) requise(s) pour mettre en place cette approche (pour éliminer ou réduire le risque) ; 3) le niveau d'expérience nécessaire pour mettre en place la mesure, par exemple \" sens commun \" (aucune connaissance OSH requise) \", \" aucune expérience OSH spécifique, mais une formation ou des connaissances OSH minimums et/ou consultation du guide OSH requise \", ou \" Expert OSH \". Vous pouvez également décrire ici toute autre exigence supplémentaire (le cas échéant)."
+msgstr ""
+"Décrire : 1) quelle est votre approche générale pour éliminer ou (si le "
+"risque ne peut être évité) pour réduire le risque ; 2) l'action / les "
+"actions spécifique(s) requise(s) pour mettre en place cette approche (pour "
+"éliminer ou réduire le risque) ; 3) le niveau d'expérience nécessaire pour "
+"mettre en place la mesure, par exemple \" sens commun \" (aucune "
+"connaissance OSH requise) \", \" aucune expérience OSH spécifique, mais une "
+"formation ou des connaissances OSH minimums et/ou consultation du guide OSH "
+"requise \", ou \" Expert OSH \". Vous pouvez également décrire ici toute "
+"autre exigence supplémentaire (le cas échéant)."
 
 #. Default: "Describe your general approach to eliminate or (if the risk is
 #. not avoidable) reduce the risk."
 msgid "help_measure_action_plan"
-msgstr "Décrire votre approche générale pour éliminer ou (si le risque ne peut être évité) pour réduire le risque."
+msgstr ""
+"Décrire votre approche générale pour éliminer ou (si le risque ne peut être "
+"évité) pour réduire le risque."
 
 #. Default: "Describe the specific action(s) required to implement this
 #. approach (to eliminate or to reduce the risk)."
 msgid "help_measure_prevention_plan"
-msgstr "Décrire l'action / les actions spécifique(s) requise(s) pour mettre en place cette approche (pour éliminer ou réduire le risque)."
+msgstr ""
+"Décrire l'action / les actions spécifique(s) requise(s) pour mettre en place "
+"cette approche (pour éliminer ou réduire le risque)."
 
 #. Default: "Describe: 1) what is your general approach to eliminate or (if
 #. the risk is not avoidable) reduce the risk; 2) the specific action(s)
@@ -79,7 +95,16 @@ msgstr "Décrire l'action / les actions spécifique(s) requise(s) pour mettre en
 #. required", or "OSH expert". You can also describe here any other additional
 #. requirement (if any)."
 msgid "help_measure_requirements"
-msgstr "Décrire : 1) quelle est votre approche générale pour éliminer ou (si le risque ne peut être évité) pour réduire le risque ; 2) l'action / les actions spécifique(s) requise(s) pour mettre en place cette approche (pour éliminer ou pour réduire le risque) ; 3) le niveau d'expérience nécessaire pour mettre en place la mesure, par exemple \"sens commun (aucune connaissance OSH requise)\", \"aucune expérience OSH spécifique mais une formation ou des connaissances OSH minimums et/ou une consultation du guide OSH requise \", ou \"expert OSH\". Vous pouvez également décrire ici toute autre exigence supplémentaire (le cas échéant)."
+msgstr ""
+"Décrire : 1) quelle est votre approche générale pour éliminer ou (si le "
+"risque ne peut être évité) pour réduire le risque ; 2) l'action / les "
+"actions spécifique(s) requise(s) pour mettre en place cette approche (pour "
+"éliminer ou pour réduire le risque) ; 3) le niveau d'expérience nécessaire "
+"pour mettre en place la mesure, par exemple \"sens commun (aucune "
+"connaissance OSH requise)\", \"aucune expérience OSH spécifique mais une "
+"formation ou des connaissances OSH minimums et/ou une consultation du guide "
+"OSH requise \", ou \"expert OSH\". Vous pouvez également décrire ici toute "
+"autre exigence supplémentaire (le cas échéant)."
 
 #. Default: "Sessions"
 msgid "navigation_surveys"
@@ -113,40 +138,52 @@ msgstr "Mesure ${numéro}"
 #. if there is an accident with one of the machines? What if an employee is
 #. exposed to hazardous substances? A risk assessment helps you to define
 #. these risks and tackle them head on. A risk assessment mainly consists of
-#. two parts: a <em>list</em> with all the risks in your company and an
-#. <em>action
-#. plan</em> with details of how to deal with these risks. These two
-#. components
+#. two parts: a <em>list</em> with all the risks in your company and an <em>action
+#. plan</em> with details of how to deal with these risks. These two components
 #. allow you to limit the risks to your employees and your company, and
 #. therefore the financial risk."
 #: euphorie/client/templates/start.pt:22
 msgid "intro_risk_aware"
-msgstr "Comprenant les risques pour vos employés et votre équipement ? Que se passe-t-il en cas d'accident avec l'une des machines ? Que se passe-t-il si un employé est exposé à des substances dangereuses ? Une évaluation du risque vous aide à définir ces risques et à les attaquer de front. Une évaluation du risque se compose principalement de deux parties : une <em>liste</em> avec tous les risques dans votre société et un <em>plan d'action</em> avec des détails sur la façon de gérer ses risques. Ces deux composants vous permettent de limiter les risques pour vos employés et votre société et par conséquent, les risques financiers."
+msgstr ""
+"Comprenant les risques pour vos employés et votre équipement ? Que se passe-"
+"t-il en cas d'accident avec l'une des machines ? Que se passe-t-il si un "
+"employé est exposé à des substances dangereuses ? Une évaluation du risque "
+"vous aide à définir ces risques et à les attaquer de front. Une évaluation "
+"du risque se compose principalement de deux parties : une <em>liste</em> "
+"avec tous les risques dans votre société et un <em>plan d'action</em> avec "
+"des détails sur la façon de gérer ses risques. Ces deux composants vous "
+"permettent de limiter les risques pour vos employés et votre société et par "
+"conséquent, les risques financiers."
 
 #. Default: "Complicated? Not really. It just takes a bit of time. However,
-#. the RA is important. So important that it is a legal requirement. This is
-#. for good
+#. the RA is important. So important that it is a legal requirement. This is for good
 #. reason. If risks are not assessed or properly dealt with, a suitable risk
-#. management process cannot be started and appropriate preventive measures
-#. are
+#. management process cannot be started and appropriate preventive measures are
 #. unlikely to be found or put in place."
 #: euphorie/client/templates/start.pt:25
 msgid "intro_not_complicated"
-msgstr "Compliqué ? Pas vraiment. Cela prend juste un peu de temps. Cependant, l'ER est importante. Tellement importante que c'est une exigence légale. Et pour cause : si les risques ne sont pas évalués ou gérés correctement, un processus de gestion des risques approprié ne peut être lancé et des mesures préventives adaptées ne peuvent être trouvées ou mises en place."
+msgstr ""
+"Compliqué ? Pas vraiment. Cela prend juste un peu de temps. Cependant, l'ER "
+"est importante. Tellement importante que c'est une exigence légale. Et pour "
+"cause : si les risques ne sont pas évalués ou gérés correctement, un "
+"processus de gestion des risques approprié ne peut être lancé et des mesures "
+"préventives adaptées ne peuvent être trouvées ou mises en place."
 
 #. Default: "Tailor the risk assessment for your organisation"
 #: euphorie/content/templates/profile:16
 msgid "subtitle_profile"
 msgstr "Adapter l'évaluation des risques à votre organisation"
 
-#. Default: "Read the following statement(s) and tick the box if the issue is
-#. relevant to
-#. your company/organisation. If it is not, don’t tick the box and you will
-#. not
+#. Default: "Read the following statement(s) and tick the box if the issue is relevant to
+#. your company/organisation. If it is not, don’t tick the box and you will not
 #. be asked about things that do not apply to your situation."
 #: euphorie/content/templates/profile:18
 msgid "description_profile_client"
-msgstr "Lire la / les déclaration(s) suivante(s) et cocher la case si elle est cohérente pour votre société / organisation. Si ce n'est pas le cas, ne pas cocher la case et aucune question ne vous sera posée sur les choses qui ne s'appliquent pas à votre situation."
+msgstr ""
+"Lire la / les déclaration(s) suivante(s) et cocher la case si elle est "
+"cohérente pour votre société / organisation. Si ce n'est pas le cas, ne pas "
+"cocher la case et aucune question ne vous sera posée sur les choses qui ne "
+"s'appliquent pas à votre situation."
 
 #. Default: "OiRA Tools"
 msgid "nav_surveys"
@@ -207,13 +244,16 @@ msgstr "Le formulaire vous permettra de créer un nouvel outil OiRA."
 #. organisation."
 #: euphorie/content/templates/surveygroup_add.pt:19
 msgid "survey_source_other"
-msgstr "Baser mon nouvel Outil OiRA sur un Outil OiRA existant d'une autre organisation."
+msgstr ""
+"Baser mon nouvel Outil OiRA sur un Outil OiRA existant d'une autre "
+"organisation."
 
 #. Default: "Base my new OiRA Tool on an existing OiRA Tool of my
 #. organisation."
 #: euphorie/content/templates/surveygroup_add.pt:18
 msgid "survey_source_local"
-msgstr "Baser mon nouvel Outil OiRA sur un Outil OiRA existant de mon organisation."
+msgstr ""
+"Baser mon nouvel Outil OiRA sur un Outil OiRA existant de mon organisation."
 
 #. Default: "Create a new OiRA Tool from scratch."
 #: euphorie/content/templates/surveygroup_add.pt:17
@@ -239,33 +279,47 @@ msgstr "Créer un nouvel Outil OiRA"
 #. an OiRA Tool."
 #: euphorie/content/templates/sectorcontainer_view.pt:13
 msgid "message_choose_country"
-msgstr "Veuillez choisir un pay pour lequel vous aimeriez visualiser ou copier un Outil OiRA."
+msgstr ""
+"Veuillez choisir un pay pour lequel vous aimeriez visualiser ou copier un "
+"Outil OiRA."
 
 #. Default: "Select a sector for which you would like to view or copy an
 #. OiRA Tool."
 #: euphorie/content/templates/country_view.pt:13
 msgid "intro_select_sector"
-msgstr "Sélectionner un secteur pour lequel vous aimeriez visualiser ou copier un Outil OiRA."
+msgstr ""
+"Sélectionner un secteur pour lequel vous aimeriez visualiser ou copier un "
+"Outil OiRA."
 
 #. Default: "This report was based on the OiRA Tool '${title}' of revision
 #. date ${date}."
 #: euphorie/client/templates/report_actionplan.pt:189
 msgid "report_survey_revision"
-msgstr "Ce rapport s'est basé sur l'Outil OiRA '${titre}' de la date de révision ${date}."
+msgstr ""
+"Ce rapport s'est basé sur l'Outil OiRA '${titre}' de la date de révision "
+"${date}."
+
+#. Default: "This document was based on the OiRA Tool '${title}' of revision date ${date}."
+#: osha.oira:/survey.py:366
+msgid "report_identification_revision"
+msgstr ""
 
 #. Default: "You may enter a name for this OiRA Tool that will make it easier
 #. for you to find your session back if you wish to continue at a later time."
 #: euphorie/client/templates/sessions.pt:58
 #: euphorie/client/templates/survey_sessions.pt:49
 msgid "label_session_title"
-msgstr "Vous pouvez saisir un nom pour cet Outil OiRA qui vous permettra plus facilement de retrouver votre session si vous voulez continuer plus tard."
+msgstr ""
+"Vous pouvez saisir un nom pour cet Outil OiRA qui vous permettra plus "
+"facilement de retrouver votre session si vous voulez continuer plus tard."
 
 #. Default: "This is the title of this OiRA Tool version. This name is never
 #. shown to users."
-#: euphorie/content/survey.py:48
-#: euphorie/content/survey.py:167
+#: euphorie/content/survey.py:48 euphorie/content/survey.py:167
 msgid "help_survey_title"
-msgstr "Ceci est le titre de la version de cet Outil OiRA. Ce nom n'est jamais montré aux utilisateurs."
+msgstr ""
+"Ceci est le titre de la version de cet Outil OiRA. Ce nom n'est jamais "
+"montré aux utilisateurs."
 
 #. Default: "The introduction text is shown when starting a new OiRA Tool
 #. session. If no introduction is provided here a standard text will be shown.
@@ -273,7 +327,12 @@ msgstr "Ceci est le titre de la version de cet Outil OiRA. Ce nom n'est jamais m
 #. devices such as phones and PDAs."
 #: euphorie/content/survey.py:58
 msgid "help_introduction"
-msgstr "Le texte d'introduction apparaît au démarrage d'une nouvelle session d'Outil OiRA. Si aucune introduction n'est fournie ici, un texte standard apparaîtra. Veuillez laisser un texte court pour qu'il puisse facilement apparaître sur les écrans de petits dispositifs tels que les téléphones et les PDA."
+msgstr ""
+"Le texte d'introduction apparaît au démarrage d'une nouvelle session d'Outil "
+"OiRA. Si aucune introduction n'est fournie ici, un texte standard "
+"apparaîtra. Veuillez laisser un texte court pour qu'il puisse facilement "
+"apparaître sur les écrans de petits dispositifs tels que les téléphones et "
+"les PDA."
 
 #. Default: "You cannot delete the only OiRA Tool version."
 #: euphorie/content/survey.py:239
@@ -281,15 +340,13 @@ msgid "message_delete_no_last_survey"
 msgstr "Vous ne pouvez pas effacer la seule version de l'Outil OiRA."
 
 #. Default: "Title of imported OiRA Tool"
-#: euphorie/content/upload.py:74
-#: euphorie/content/upload.py:93
+#: euphorie/content/upload.py:74 euphorie/content/upload.py:93
 #: euphorie/content/upload.py:100
 msgid "label_surveygroup_title"
 msgstr "Titre de l'Outil OiRA importé"
 
 #. Default: "Succesfully imported the OiRA Tool"
-#: euphorie/content/upload.py:310
-#: euphorie/content/upload.py:341
+#: euphorie/content/upload.py:310 euphorie/content/upload.py:341
 msgid "upload_success"
 msgstr "Outil OiRA importé avec succès"
 
@@ -306,7 +363,8 @@ msgstr "Aucun Outil OiRA n'est présent. Vous pouvez ${ajouter_lien}."
 #. Default: "The form will allow you to create a new OiRA Tool revision."
 #: euphorie/content/templates/survey_add.pt:9
 msgid "intro_add_survey"
-msgstr "Le formulaire vous permettra de créer une nouvelle révision de l'Outil OiRA."
+msgstr ""
+"Le formulaire vous permettra de créer une nouvelle révision de l'Outil OiRA."
 
 #. Default: "Choose a revision of the selected OiRA Tool"
 #: euphorie/content/templates/surveygroup_add.pt:71
@@ -321,61 +379,71 @@ msgid "label_choose_surveygroup"
 msgstr "Choisir un Outil OiRA"
 
 #. Default: "Now that you have identified the existing hazards/problems in
-#. your company/organisation you need to evaluate the risks arising from
-#. them."
+#. your company/organisation you need to evaluate the risks arising from them."
 #: euphorie/client/templates/evaluation.pt:19
 msgid "help_risks_present"
-msgstr "Maintenant que vous avez identifié les dangers / problèmes existants dans votre société / organisation, vous devez évaluer les risques en émanant."
+msgstr ""
+"Maintenant que vous avez identifié les dangers / problèmes existants dans "
+"votre société / organisation, vous devez évaluer les risques en émanant."
 
-#. Default: "After having evaluated the risks, you need to put an action plan
-#. in place to manage the risks. To eliminate or reduce risks you need to
-#. determine which preventive and protective measures are to be taken."
+#. Default: "After having evaluated the risks, you need to put an action plan in place to manage the risks. To eliminate or reduce risks you need to determine which preventive and protective measures are to be taken."
 #: euphorie/client/templates/actionplan.pt:19
 msgid "expl_actionplan_1"
-msgstr "Après avoir évalué les risques, vous devez mettre en place un plan d'action pour gérer ces risques. Pour éliminer ou réduire les risques, vous devez déterminer quelles mesures de prévention et de protection doivent être prises."
+msgstr ""
+"Après avoir évalué les risques, vous devez mettre en place un plan d'action "
+"pour gérer ces risques. Pour éliminer ou réduire les risques, vous devez "
+"déterminer quelles mesures de prévention et de protection doivent être "
+"prises."
 
 #. Default: "Among the things to be considered for this step are:"
 #: euphorie/client/templates/actionplan.pt:19
 msgid "expl_actionplan_2"
 msgstr "Parmi les choses à prendre en compte pour cette étape, il y a :"
 
-#. Default: "<ol><li>Is a risk avoidable? Can it be removed entirely? For
-#. example, this could be achieved by:<ul><li>considering whether the task or
-#. job is necessary</li><li>removing the
-#. hazard</li><li>...</li></ul></li><li>If certain risks are not avoidable,
-#. how can they be reduced to a level at which the health and safety of those
-#. exposed is not compromised.</li></ol>"
+#. Default: "<ol><li>Is a risk avoidable? Can it be removed entirely? For example, this could be achieved by:<ul><li>considering whether the task or job is necessary</li><li>removing the hazard</li><li>...</li></ul></li><li>If certain risks are not avoidable, how can they be reduced to a level at which the health and safety of those exposed is not compromised.</li></ol>"
 #: euphorie/client/templates/actionplan.pt:19
 msgid "expl_actionplan_3"
-msgstr "<ol><li>Un risque peut-il être évité ? Peut-il être totalement supprimé ? Par exemple, cela pourrait être obtenu en :<ul><li> considérant si la tâche ou le travail est nécessaire</li><li> supprimant le danger</li><li>...</li></ul></li><li>Si certains risques ne peuvent pas être évités, comment peuvent-ils être diminués à un niveau où la santé et la sécurité des personnes qui y sont exposées n'est pas affectée.</li></ol>"
+msgstr ""
+"<ol><li>Un risque peut-il être évité ? Peut-il être totalement supprimé ? "
+"Par exemple, cela pourrait être obtenu en :<ul><li> considérant si la tâche "
+"ou le travail est nécessaire</li><li> supprimant le danger</li><li>...</li></"
+"ul></li><li>Si certains risques ne peuvent pas être évités, comment peuvent-"
+"ils être diminués à un niveau où la santé et la sécurité des personnes qui y "
+"sont exposées n'est pas affectée.</li></ol>"
 
-#. Default: "Once you have decided how to eliminate or reduce a particular
-#. risk, then you describe the specific action(s) required to achieve this.
-#. You should also include details of the level of expertise and/or other
-#. requirements needed for those actions to be effective."
+#. Default: "Once you have decided how to eliminate or reduce a particular risk, then you describe the specific action(s) required to achieve this. You should also include details of the level of expertise and/or other requirements needed for those actions to be effective."
 #: euphorie/client/templates/actionplan.pt:19
 msgid "expl_actionplan_4"
-msgstr "Une fois que vous aurez décidé comment éliminer ou réduire un risque particulier, vous décrirez alors l'action / les actions spécifique(s) requise(s) pour y arriver. Vous devrez également inclure des détails du niveau d'expérience et/ou les autres exigences nécessaires pour que ces actions soient efficaces."
+msgstr ""
+"Une fois que vous aurez décidé comment éliminer ou réduire un risque "
+"particulier, vous décrirez alors l'action / les actions spécifique(s) requise"
+"(s) pour y arriver. Vous devrez également inclure des détails du niveau "
+"d'expérience et/ou les autres exigences nécessaires pour que ces actions "
+"soient efficaces."
 
-#. Default: "After having identified the risks in your company/organisation
-#. and set up an action plan to manage them, you can generate a report. The
-#. report includes all the input/information provided by you throughout the
-#. risk assessment process. You can add, if you wish, some extra
-#. information/comments to the report by filling in the field below."
+#. Default: "After having identified the risks in your company/organisation and set up an action plan to manage them, you can generate a report. The report includes all the input/information provided by you throughout the risk assessment process. You can add, if you wish, some extra information/comments to the report by filling in the field below."
 #: euphorie/client/templates/report.pt:19
 msgid "report_intro"
-msgstr "Après avoir identifié les risques dans votre société / organisation et mis en place un plan d'action pour les gérer, vous pouvez générer un rapport. Ce rapport inclut toutes les informations / entrées que vous avez données pendant tout le processus d'évaluation des risques. Vous pouvez ajouter, si vous le souhaitez, des informations / commentaires supplémentaires au rapport en complétant les champs ci-dessous."
+msgstr ""
+"Après avoir identifié les risques dans votre société / organisation et mis "
+"en place un plan d'action pour les gérer, vous pouvez générer un rapport. Ce "
+"rapport inclut toutes les informations / entrées que vous avez données "
+"pendant tout le processus d'évaluation des risques. Vous pouvez ajouter, si "
+"vous le souhaitez, des informations / commentaires supplémentaires au "
+"rapport en complétant les champs ci-dessous."
 
 #. Default: "<strong>Some information about you</strong>"
 #: euphorie/client/templates/report_company.pt:19
 msgid "company_details_intro_1"
 msgstr "<strong>Quelques informations sur vous</strong>"
 
-#. Default: "Please consider providing some additional information below. This
-#. is not required, but it does help us to improve our tools and services."
+#. Default: "Please consider providing some additional information below. This is not required, but it does help us to improve our tools and services."
 #: euphorie/client/templates/report_company.pt:19
 msgid "company_details_intro_2"
-msgstr "Veuillez penser à donner certaines informations supplémentaires ci-dessous. Cela n'est pas obligatoire mais peut nous aider à améliorer nos outils et services."
+msgstr ""
+"Veuillez penser à donner certaines informations supplémentaires ci-dessous. "
+"Cela n'est pas obligatoire mais peut nous aider à améliorer nos outils et "
+"services."
 
 #. Default: "This data will not appear in the report."
 #: euphorie/client/templates/report_company.pt:19
@@ -387,28 +455,33 @@ msgstr "Ces informations n'apparaîtront pas dans le rapport."
 #: euphorie/client/templates/risk_actionplan.pt:182
 #: euphorie/client/templates/risk_actionplan.pt:57
 msgid "actionplan_measure_responsible_tooltip"
-msgstr "Nommer quelqu'un dans votre société / organisation responsable de la mise en place de cette mesure."
+msgstr ""
+"Nommer quelqu'un dans votre société / organisation responsable de la mise en "
+"place de cette mesure."
 
 #. Default: "The implementation of preventive or protective measures in most
-#. cases is not cost free, therefore a cost can be calculated and included in
-#. your budget."
+#. cases is not cost free, therefore a cost can be calculated and included in your budget."
 #: euphorie/client/templates/risk_actionplan.pt:187
 #: euphorie/client/templates/risk_actionplan.pt:63
 msgid "actionplan_measure_budget_tooltip"
-msgstr "L'implémentation de mesures de prévention ou de protection n'est pas, dans la plupart des cas, gratuite, par conséquent un coût peut être calculé et inclus dans votre budget."
+msgstr ""
+"L'implémentation de mesures de prévention ou de protection n'est pas, dans "
+"la plupart des cas, gratuite, par conséquent un coût peut être calculé et "
+"inclus dans votre budget."
 
 #. Default: "Some information about you"
 #: euphorie/client/templates/report_company.pt:18
 msgid "hader_company_details"
 msgstr "Quelques informations sur vous"
 
-#. Default: "You are free to provide the information below. This information
-#. is
-#. meant to improve the tools and the services provided. This data will not
-#. appear in the report."
+#. Default: "You are free to provide the information below. This information is
+#. meant to improve the tools and the services provided. This data will not appear in the report."
 #: euphorie/client/templates/report_company.pt:22
 msgid "company_details_intro"
-msgstr "Vous êtes libres de fournir les informations ci-dessous. Ces informations ont pour but d'améliorer les outils et les services fournis. Ces informations n'apparaîtront pas dans le rapport."
+msgstr ""
+"Vous êtes libres de fournir les informations ci-dessous. Ces informations "
+"ont pour but d'améliorer les outils et les services fournis. Ces "
+"informations n'apparaîtront pas dans le rapport."
 
 #. Default: "Solution"
 #: euphorie/content/module.py:60
@@ -423,13 +496,17 @@ msgstr "Outil OiRA publié avec succès"
 #. Default: "Succesfully created a preview for the OiRA Tool. It can be
 #. accessed at ${url}."
 #: euphorie/client/publish.py:261
-msgid "Succesfully created a preview for the survey. It can be accessed at ${url} ."
-msgstr "Un aperçu de l'Outil OiRA a été créé avec succès. Il est possible d'y accéder sur ${url}."
+msgid ""
+"Succesfully created a preview for the survey. It can be accessed at ${url} ."
+msgstr ""
+"Un aperçu de l'Outil OiRA a été créé avec succès. Il est possible d'y "
+"accéder sur ${url}."
 
 #. Default: "Publish the selected OiRA Tool live with its latest changes."
 #: euphorie/deployment/tiles/templates/versions.pt:20
 msgid "help_publish"
-msgstr "Publier l'Outil OiRA sélectionné en direct, avec ses derniers changements."
+msgstr ""
+"Publier l'Outil OiRA sélectionné en direct, avec ses derniers changements."
 
 #. Default: "Create a duplicate of the selected OiRA Tool"
 #: euphorie/deployment/tiles/templates/versions.pt:19
@@ -448,7 +525,12 @@ msgstr "L'option permet à l'utilisateur final de sauter l'étape d'évaluation.
 #. different work locations\")."
 #: euphorie/content/profilequestion.py:36
 msgid "help_profilequestion_question"
-msgstr "Si cela doit être \" optionnell\", il faut le formuler de sorte que l'on puisse y répondre par OUI (l'utilisateur final devra cocher une case) ou NON (par ex. \"Travaillez-vous avec le public ?\"). Si cela doit être \"répétable\", il faut le formuler comme une invitation à remplir plusieurs valeurs (par ex. \"Répertorier vos différents lieux de travail\")."
+msgstr ""
+"Si cela doit être \" optionnell\", il faut le formuler de sorte que l'on "
+"puisse y répondre par OUI (l'utilisateur final devra cocher une case) ou NON "
+"(par ex. \"Travaillez-vous avec le public ?\"). Si cela doit être \"répétable"
+"\", il faut le formuler comme une invitation à remplir plusieurs valeurs "
+"(par ex. \"Répertorier vos différents lieux de travail\")."
 
 #. Default: "The basic architecture of an Online interactive Risk Assessment
 #. consists of: - profile questions (questions defining the company profile) -
@@ -463,35 +545,52 @@ msgstr "Si cela doit être \" optionnell\", il faut le formuler de sorte que l'o
 #. module will be repeated the specified number of times."
 #: euphorie/content/profiles/default/types/euphorie.profilequestion.xml:8
 msgid "description_profilequestion"
-msgstr "L'architecture de base d'une évaluation interactive des risques en ligne se compose de : - questions de profil (questions définissant le profil de la société) - modules et sous-modules - risques (déclarations affirmatives). Les questions de profil sont utilisées pour déterminer si des modules particuliers s'appliquent totalement à l'utilisateur final (EN OPTION), ou s'ils doivent être répétés un certain nombre de fois (RÉPÉTABLE). De telles questions sont posés AVANT de commencer l'évaluation et l'identification du risque. Si l'utilisateur final ne confirme pas qu'une question de profil en option est appropriée (en cochant la case), alors le module correspondant sera totalement sauté. Si l'utilisateur final entre plus d'une option à une question de profil répétable alors le module correspondant sera répété le nombre de fois indiqué."
+msgstr ""
+"L'architecture de base d'une évaluation interactive des risques en ligne se "
+"compose de : - questions de profil (questions définissant le profil de la "
+"société) - modules et sous-modules - risques (déclarations affirmatives). "
+"Les questions de profil sont utilisées pour déterminer si des modules "
+"particuliers s'appliquent totalement à l'utilisateur final (EN OPTION), ou "
+"s'ils doivent être répétés un certain nombre de fois (RÉPÉTABLE). De telles "
+"questions sont posés AVANT de commencer l'évaluation et l'identification du "
+"risque. Si l'utilisateur final ne confirme pas qu'une question de profil en "
+"option est appropriée (en cochant la case), alors le module correspondant "
+"sera totalement sauté. Si l'utilisateur final entre plus d'une option à une "
+"question de profil répétable alors le module correspondant sera répété le "
+"nombre de fois indiqué."
 
-#. Default: "Include any relevant information that may be helpful for the end-
-#. user."
-#: euphorie/content/module.py:38
-#: euphorie/content/page.py:20
-#: euphorie/content/profilequestion.py:48
-#: euphorie/content/solution.py:24
+#. Default: "Include any relevant information that may be helpful for the end-user."
+#: euphorie/content/module.py:38 euphorie/content/page.py:20
+#: euphorie/content/profilequestion.py:48 euphorie/content/solution.py:24
 msgid "help_module_description"
-msgstr "Inclure toutes informations appropriées pouvant être utiles à l'utilisateur final."
+msgstr ""
+"Inclure toutes informations appropriées pouvant être utiles à l'utilisateur "
+"final."
 
-#. Default: "Allows the end-user to skip this module and everything inside
-#. it."
+#. Default: "Allows the end-user to skip this module and everything inside it."
 #: euphorie/content/module.py:47
 msgid "help_module_optional"
-msgstr "Permet à l'utilisateur final de sauter ce module et tout ce qu'il contient."
+msgstr ""
+"Permet à l'utilisateur final de sauter ce module et tout ce qu'il contient."
 
 #. Default: "The question to ask the end-user if this module is optional. It
 #. must be formulated so that it is answerable with YES (the end-user will
 #. have to tick a box) or NO"
 #: euphorie/content/module.py:56
 msgid "help_module_question"
-msgstr "La question à poser à l'utilisateur final si ce module est optionnel. Elle est formulée pour que l'on puisse y répondre par OUI (l'utilisateur final devra cocher une case) ou NON"
+msgstr ""
+"La question à poser à l'utilisateur final si ce module est optionnel. Elle "
+"est formulée pour que l'on puisse y répondre par OUI (l'utilisateur final "
+"devra cocher une case) ou NON"
 
 #. Default: "This information will appear in the Action plan step and should
 #. include an overview of general solution(s) related to this module."
 #: euphorie/content/module.py:70
 msgid "help_solution_direction"
-msgstr "Ces informations apparaîtront dans l'étape de plan d'action et devront inclure un aperçu de la / des solution(s) générale(s) relative(s) à ce module."
+msgstr ""
+"Ces informations apparaîtront dans l'étape de plan d'action et devront "
+"inclure un aperçu de la / des solution(s) générale(s) relative(s) à ce "
+"module."
 
 #. Default: "Affirmative statement"
 #: euphorie/content/risk.py:40
@@ -499,8 +598,7 @@ msgid "label_statement"
 msgstr "Déclaration affirmative"
 
 #. Default: "Negative statement"
-#: euphorie/content/risk.py:48
-#: euphorie/content/templates/risk_view.pt:36
+#: euphorie/content/risk.py:48 euphorie/content/templates/risk_view.pt:36
 msgid "label_problem_description"
 msgstr "Déclaration négative"
 
@@ -508,19 +606,25 @@ msgstr "Déclaration négative"
 #. The building is well maintained.)"
 #: euphorie/content/risk.py:41
 msgid "help_statement"
-msgstr "Ceci est une déclaration affirmative courte concernant un risque éventuel (par ex. Le bâtiment est bien entretenu.)"
+msgstr ""
+"Ceci est une déclaration affirmative courte concernant un risque éventuel "
+"(par ex. Le bâtiment est bien entretenu.)"
 
 #. Default: "This is the inverse of the affirmative statement (e.g.
 #. The building is not well maintained.)"
 #: euphorie/content/risk.py:50
 msgid "help_problem_description"
-msgstr "Ceci est l'inverse d'une déclaration affirmative (par ex. Le bâtiment n'est pas bien entretenu.)"
+msgstr ""
+"Ceci est l'inverse d'une déclaration affirmative (par ex. Le bâtiment n'est "
+"pas bien entretenu.)"
 
 #. Default: "Describe the risk. Include any relevant information that may be
 #. helpful for the end-user."
 #: euphorie/content/risk.py:59
 msgid "help_risk_description"
-msgstr "Décrire le risque. Inclure toutes informations appropriées pouvant être utiles à l'utilisateur final."
+msgstr ""
+"Décrire le risque. Inclure toutes informations appropriées pouvant être "
+"utiles à l'utilisateur final."
 
 #. Default: "Priority risk"
 #: euphorie/content/risk.py:106
@@ -532,19 +636,27 @@ msgstr "Risque prioritaire"
 #. agreements, procedures, and management decisions."
 #: euphorie/content/risk.py:97
 msgid "help_risk_type"
-msgstr "Le “ Risque prioritaire ” est l'un des plus grands risques du secteur. “ Risque ” fait référence au lieu de travail ou au travail effectué. “ Politique ” fait référence aux accords, aux procédures et aux décisions de gestion."
+msgstr ""
+"Le “ Risque prioritaire ” est l'un des plus grands risques du secteur. “ "
+"Risque ” fait référence au lieu de travail ou au travail effectué. “ "
+"Politique ” fait référence aux accords, aux procédures et aux décisions de "
+"gestion."
 
 #. Default: "Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method."
 #: euphorie/content/risk.py:115
 msgid "help_evaluation_method"
-msgstr "Choisir entre méthode ESTIMÉE (estimation grossière) ou CALCULÉE (combinaison de probabilité, fréquence et gravité)."
+msgstr ""
+"Choisir entre méthode ESTIMÉE (estimation grossière) ou CALCULÉE "
+"(combinaison de probabilité, fréquence et gravité)."
 
 #. Default: "You can help the end-user by selecting a default priority.
 #. He/she can still change the priority."
 #: euphorie/content/risk.py:129
 msgid "help_default_priority"
-msgstr "Vous pouvez aider l'utilisateur final en sélectionnant la priorité par défaut. Il / Elle peut toujours changer la priorité."
+msgstr ""
+"Vous pouvez aider l'utilisateur final en sélectionnant la priorité par "
+"défaut. Il / Elle peut toujours changer la priorité."
 
 #. Default: "Indicate the severity if this risk occurs."
 #: euphorie/content/risk.py:177
@@ -580,9 +692,11 @@ msgstr "Contact"
 #. bottom of this page."
 #: osha.oira:/templates/report_actionplan.pt:28
 msgid "warning_unanswered_risks"
-msgstr "Vous avez toujours des risques sans réponse. Veuillez voir la liste en bas de cette page."
+msgstr ""
+"Vous avez toujours des risques sans réponse. Veuillez voir la liste en bas "
+"de cette page."
 
-#. Default: "Please note, you still have the following unanswered risks:"
+#. Default: "Risks that have been "parked" and are still to be dealt with:"
 #: osha.oira:/templates/report_actionplan.pt:240
 msgid "header_unanswered_risks"
 msgstr "Veuillez noter que les risques suivants sont toujours sans réponse :"
@@ -591,9 +705,11 @@ msgstr "Veuillez noter que les risques suivants sont toujours sans réponse :"
 #. the soonest possibility."
 #: osha.oira:/templates/report_actionplan.pt:241
 msgid "description_unanswered_risks"
-msgstr "Les risques suivants n'ont pas encore obtenu de réponse. Veuillez y répondre le plus rapidement possible."
+msgstr ""
+"Les risques suivants n'ont pas encore obtenu de réponse. Veuillez y répondre "
+"le plus rapidement possible."
 
-#. Default: "Risks identified as not being present in you organisation:"
+#. Default: "Risks that are not present in your organisation:"
 #: osha.oira:/templates/report_actionplan.pt:196
 msgid "header_risks_not_present"
 msgstr "Risques identifiés comme absents dans votre organisation :"
@@ -621,7 +737,8 @@ msgstr "Ce texte devrait expliquer les 2 types de questions de profil."
 #. Default: "This text should explain how the risk identification works."
 #: euphorie/content/help.py:50
 msgid "help_identification"
-msgstr "Ce texte devrait expliquer comment fonctionne l'identification des risques."
+msgstr ""
+"Ce texte devrait expliquer comment fonctionne l'identification des risques."
 
 #. Default: "This text should explain how to evaluate the identified risks."
 #: euphorie/content/help.py:58
@@ -633,11 +750,12 @@ msgstr "Ce texte devrait expliquer comment évaluer les risques identifiés."
 msgid "help_actionplan"
 msgstr "Ce texte devrait expliquer comment compléter le plan d'action."
 
-#. Default: "This text should describe how the report can either be saved or
-#. printed."
+#. Default: "This text should describe how the report can either be saved or printed."
 #: euphorie/content/help.py:74
 msgid "help_reports"
-msgstr "Ce texte devrait décrire comment le rapport peut être sauvegardé ou bien imprimé."
+msgstr ""
+"Ce texte devrait décrire comment le rapport peut être sauvegardé ou bien "
+"imprimé."
 
 #. Default: "General final recommendations."
 #: euphorie/content/help.py:82
@@ -645,14 +763,18 @@ msgid "help_finalwords"
 msgstr "Recommandations finales générales."
 
 #. Default: It is possible for you to print out the contents of the tool to
-#. enable you to look for the information at the relevant workplace (by
-#. walking
+#. enable you to look for the information at the relevant workplace (by walking
 #. around and looking at what could cause harm, or by consulting the workers
 #. about problems they have encountered). You can then introduce the
 #. information into the tool.
 #: euphorie/client/templates/identification.pt:19
 msgid "intro_print_identification_1"
-msgstr "Il est possible pour vous d'imprimer le contenu de l'outil afin de rechercher les informations sur le lieu de travail approprié (en vous promenant et en vérifiant ce qui peut causer des blessures, ou en consultant les travailleurs concernant les problèmes qu'ils ont rencontrés). Vous pouvez alors introduire les informations dans l'outil."
+msgstr ""
+"Il est possible pour vous d'imprimer le contenu de l'outil afin de "
+"rechercher les informations sur le lieu de travail approprié (en vous "
+"promenant et en vérifiant ce qui peut causer des blessures, ou en consultant "
+"les travailleurs concernant les problèmes qu'ils ont rencontrés). Vous "
+"pouvez alors introduire les informations dans l'outil."
 
 #. Default: You may also wish to distribute the contents among the workers and
 #. invite them to participate in identifying the hazards/problems, evaluating
@@ -660,7 +782,11 @@ msgstr "Il est possible pour vous d'imprimer le contenu de l'outil afin de reche
 #. into account when filling in this tool.
 #: euphorie/client/templates/identification.pt:22
 msgid "intro_print_identification_2"
-msgstr "Vous pouvez également souhaiter distribuer le contenu aux travailleurs et les inviter à participer à l'identification des dangers / problèmes, à l'évaluation des risques et à décider des actions de prévention. Leur feedback peut être pris en compte lorsque vous remplissez cet outil."
+msgstr ""
+"Vous pouvez également souhaiter distribuer le contenu aux travailleurs et "
+"les inviter à participer à l'identification des dangers / problèmes, à "
+"l'évaluation des risques et à décider des actions de prévention. Leur "
+"feedback peut être pris en compte lorsque vous remplissez cet outil."
 
 #. Default: contents of the tool
 #: euphorie/client/templates/identification.pt:26
@@ -672,12 +798,13 @@ msgstr "contenu de l'outil"
 msgid "popup_title"
 msgstr "Enquête"
 
-#. Default: "Please give us your feedback about this tool: it will take you
-#. only 3 minutes! We really value your contribution during this testing phase
-#. of the OiRA tool."
+#. Default: "Please give us your feedback about this tool: it will take you only 3 minutes! We really value your contribution during this testing phase of the OiRA tool."
 #: osha.oira:/templates/report.pt:42
 msgid "popup_text"
-msgstr "Veuillez nous faire part de votre feedback sur cet outil : cela ne vous prendra que 3 minutes ! Nous apprécions vraiment votre contribution pendant cette phase de test de l'outil OiRA."
+msgstr ""
+"Veuillez nous faire part de votre feedback sur cet outil : cela ne vous "
+"prendra que 3 minutes ! Nous apprécions vraiment votre contribution pendant "
+"cette phase de test de l'outil OiRA."
 
 #. Default: "Take me to the survey"
 #: osha.oira:/templates/report.pt:46
@@ -689,3 +816,7 @@ msgstr "Aller à l'enquête"
 msgid "popup_deny"
 msgstr "Non merci"
 
+#. Default: Identification report ${title}
+#: euphorie/client/report.py:301
+msgid "filename_report_identification"
+msgstr ""

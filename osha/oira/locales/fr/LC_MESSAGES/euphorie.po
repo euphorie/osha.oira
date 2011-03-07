@@ -696,10 +696,25 @@ msgstr ""
 "Vous avez toujours des risques sans réponse. Veuillez voir la liste en bas "
 "de cette page."
 
-#. Default: "Risks that have been "parked" and are still to be dealt with:"
+#. Default: "Risks that have been identified, evaluated and have an Action Plan:"
+#: osha.oira:/survey.py:291
+msgid "header_present_risks"
+msgstr ""
+
+#. Default: "Risks that have been \"parked\" and are still to be dealt with:"
 #: osha.oira:/templates/report_actionplan.pt:240
 msgid "header_unanswered_risks"
 msgstr "Veuillez noter que les risques suivants sont toujours sans réponse :"
+
+#. Default: "Risks that have been identified but NOT evaluated and do NOT have an Action Plan:"
+#: osha.oira:/survey.py:297
+msgid "header_unevaluated_risks"
+msgstr ""
+
+#. Default: "Risks that are not present in your organisation:"
+#: osha.oira:/templates/report_actionplan.pt:196
+msgid "header_risks_not_present"
+msgstr "Risques identifiés comme absents dans votre organisation :"
 
 #. Default: "The following risks have not yet been answered. Please do so at
 #. the soonest possibility."
@@ -708,11 +723,6 @@ msgid "description_unanswered_risks"
 msgstr ""
 "Les risques suivants n'ont pas encore obtenu de réponse. Veuillez y répondre "
 "le plus rapidement possible."
-
-#. Default: "Risks that are not present in your organisation:"
-#: osha.oira:/templates/report_actionplan.pt:196
-msgid "header_risks_not_present"
-msgstr "Risques identifiés comme absents dans votre organisation :"
 
 #. Default: "General information on risk assessment"
 #: euphorie/content/help.py:16
@@ -820,4 +830,3 @@ msgstr "Non merci"
 #: euphorie/client/report.py:301
 msgid "filename_report_identification"
 msgstr ""
-

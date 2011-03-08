@@ -7,6 +7,8 @@ from euphorie.client.utils import RelativePath
 from euphorie.client import profile
 from osha.oira import interfaces
 
+grok.templatedir("templates")
+
 class OSHAUpdate(profile.Update):
     """ Override to add fix for #2583
         The sessiontree is not correctly being updated when it's
@@ -53,4 +55,11 @@ class OSHAUpdate(profile.Update):
             self.setupSession(force_new_session=True)
             self.request.response.redirect(survey.absolute_url()+"/identification")
 
+
+class OSHAProfile(profile.Profile):
+    """ Override the original profile to provide our own template.
+    """
+    grok.layer(interfaces.IOSHAClientSkinLayer)
+    grok.template("profile")
+    grok.name("profile")
 

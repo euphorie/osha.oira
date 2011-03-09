@@ -12,42 +12,24 @@ class Settings(sector.Settings):
     """ 
     grok.template("settings")
 
-    def updateActions(self):
-        if self.fields['main_colour'].field.get(self.context) is None or \
-           self.fields['support_colour'].field.get(self.context) is None:
-
-            appconfig = getUtility(IAppConfig)
-            settings = appconfig.get('euphorie')
-            main_colour  = settings.get('main_colour', "#031c48")
-            support_colour  = settings.get('support_colour', "#996699")
-
-            if self.fields['main_colour'].field.get(self.context) is None:
-                self.fields['main_colour'].field.set(self.context, main_colour)
-
-            if self.fields['support_colour'].field.get(self.context) is None:
-                self.fields['support_colour'].field.set(self.context, support_colour)
-
-        self.fields['main_colour'].field.required = True
-        self.fields['support_colour'].field.required = True
-        return super(Settings, self).updateActions()
-
-
 class SectorAdd(dexterity.AddForm):
     grok.context(sector.ISector)
     grok.name('euphorie.sector')
     grok.require("cmf.ModifyPortalContent")
     grok.layer(NuPloneSkin)
 
-    def updateActions(self):
+    def create(self, data):
+        content = super(SectorAdd, self).create(data)
+
         appconfig = getUtility(IAppConfig)
         settings = appconfig.get('euphorie')
         main_colour  = settings.get('main_colour', "#031c48")
         support_colour  = settings.get('support_colour', "#996699")
+        if content.main_colour is None:
+            content.main_colour = main_colour
 
-        self.fields['main_colour'].field.default = main_colour
-        self.fields['main_colour'].field.required = True
-
-        self.fields['support_colour'].field.default = support_colour
-        self.fields['support_colour'].field.required = True
-        return super(SectorAdd, self).updateActions()
+        if content.support_colour is None:
+            content.support_colour = support_colour
+            
+        return content
 

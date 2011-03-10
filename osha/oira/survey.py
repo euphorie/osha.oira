@@ -346,10 +346,11 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
                 1: styles.Heading3,
                 2: styles.Heading4,
                 3: styles.Heading5,
+                4: styles.Heading6,
                 }
 
         for node in self.getNodes():
-            section.append(Paragraph(header_styles[node.depth], u"%s %s" % (node.number, node.title)))
+            section.append(Paragraph(header_styles.get(node.depth, styles.Heading6), u"%s %s" % (node.number, node.title)))
 
             if node.type!="risk":
                 continue

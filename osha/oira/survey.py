@@ -222,15 +222,17 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                                heading)
                     )
 
-        normal_style = document.StyleSheet.ParagraphStyles.Normal
-        comment_style = document.StyleSheet.ParagraphStyles.Comment
-        warning_style = document.StyleSheet.ParagraphStyles.Warning
-        measure_heading_style = document.StyleSheet.ParagraphStyles.MeasureHeading
-        header_styles = {
-                0: document.StyleSheet.ParagraphStyles.Heading2,
-                1: document.StyleSheet.ParagraphStyles.Heading3,
-                2: document.StyleSheet.ParagraphStyles.Heading4,
-                3: document.StyleSheet.ParagraphStyles.Heading5,
+        styles = document.StyleSheet.ParagraphStyles
+        normal_style = styles.Normal
+        comment_style = styles.Comment
+        warning_style = styles.Warning
+        measure_heading_style = styles.MeasureHeading
+        header_styles={
+                0: styles.Heading2,
+                1: styles.Heading3,
+                2: styles.Heading4,
+                3: styles.Heading5,
+                4: styles.Heading6,
                 }
 
         for node in nodes:
@@ -241,7 +243,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 title = node.title
             section.append(
                     Paragraph(
-                        header_styles[node.depth], 
+                        header_styles.get(node.depth, styles.Heading6),
                         u"%s %s" % (node.number, title)
                         )
                     )
@@ -287,29 +289,33 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         # self.addActionPlan(document)
 
         # XXX: and replaced with this part:
-        heading = translate(
-                _(  "header_present_risks", 
-                    default=u"Risks that have been identified, evaluated and have an Action Plan:"),
-                self.request)
-        self.addReportNodes(document, self.evaluated_nodes, heading)
+        if len(self.evaluated_nodes):
+            heading = translate(
+                    _(  "header_present_risks", 
+                        default=u"Risks that have been identified, evaluated and have an Action Plan:"),
+                    self.request)
+            self.addReportNodes(document, self.evaluated_nodes, heading)
 
-        heading = translate(
-                _(  "header_unevaluated_risks", 
-                    default=u"Risks that have been identified but NOT evaluated and do NOT have an Action Plan:"), 
-                self.request)
-        self.addReportNodes(document, self.unevaluated_nodes, heading)
+        if len(self.unevaluated_nodes):
+            heading = translate(
+                    _(  "header_unevaluated_risks", 
+                        default=u"Risks that have been identified but NOT evaluated and do NOT have an Action Plan:"), 
+                    self.request)
+            self.addReportNodes(document, self.unevaluated_nodes, heading)
 
-        heading = translate(
-                _(  "header_unanswered_risks",
-                    default=u'Risks that have been "parked" and are still to be dealt with:'), 
-                self.request)
-        self.addReportNodes(document, self.unanswered_nodes, heading)
+        if len(self.unanswered_nodes):
+            heading = translate(
+                    _(  "header_unanswered_risks",
+                        default=u'Risks that have been "parked" and are still to be dealt with:'), 
+                    self.request)
+            self.addReportNodes(document, self.unanswered_nodes, heading)
         
-        heading = translate(
-                _(  "header_risks_not_present",
-                    default=u"Risks that are not present in your organisation:"), 
-                self.request)
-        self.addReportNodes(document, self.risk_not_present_nodes, heading)
+        if len(self.risk_not_present_nodes):
+            heading = translate(
+                    _(  "header_risks_not_present",
+                        default=u"Risks that are not present in your organisation:"), 
+                    self.request)
+            self.addReportNodes(document, self.risk_not_present_nodes, heading)
         # Until here...
 
         renderer=Renderer()
@@ -350,7 +356,11 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
                 }
 
         for node in self.getNodes():
-            section.append(Paragraph(header_styles.get(node.depth, styles.Heading6), u"%s %s" % (node.number, node.title)))
+            section.append(
+                    Paragraph(
+                        header_styles.get(node.depth, styles.Heading6), 
+                        u"%s %s" % (node.number, node.title))
+                        )
 
             if node.type!="risk":
                 continue

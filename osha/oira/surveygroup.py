@@ -1,7 +1,6 @@
 from five import grok
 from euphorie.content import surveygroup
 from plonetheme.nuplone.skin.interfaces import NuPloneSkin
-from euphorie.client.sector import IClientSector
 from euphorie.content.survey import ISurvey
 
 grok.templatedir("templates")

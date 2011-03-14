@@ -33,3 +33,8 @@ class SectorAdd(dexterity.AddForm):
             
         return content
 
+class View(sector.View):
+    grok.template("sector_view")
+    grok.name("nuplone-view")
+
+

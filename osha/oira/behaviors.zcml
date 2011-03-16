@@ -1,0 +1,17 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:plone="http://namespaces.plone.org/plone"
+           i18n_domain="euphorie">
+
+    <include package="plone.behavior" file="meta.zcml" />
+    <include package="plone.directives.form" file="meta.zcml" />
+    <include package="plone.directives.form" />
+
+    <plone:behavior
+        title="OSHA Sector fields"
+        description="Provide additional OSHA fields"
+        provides=".sector.IOSHASector"
+        factory=".sector.OSHASector"
+        for="plone.dexterity.interfaces.IDexterityContent"
+        />
+
+</configure>

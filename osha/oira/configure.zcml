@@ -25,6 +25,7 @@
     <configure zcml:condition="installed euphorie.deployment">
         <include package=".tiles" />
         <include package="euphorie.deployment" />
+        <include file="behaviors.zcml" />
         <grok:grok package="." />
 
         <adapter

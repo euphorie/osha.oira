@@ -1,4 +1,5 @@
 from Acquisition import aq_inner
+from zope.component import getMultiAdapter
 from Products.CMFCore.utils import getToolByName
 from Products.ZCatalog.ZCatalog import ZCatalog
 from euphorie.client.utils import WebHelpers
@@ -71,6 +72,15 @@ def get_evaluated_nodes(ls):
 class OSHAWebHelpers(WebHelpers):
     """ Override Euphorie's webhelpers to add some more utility methods.
     """
+
+    def get_language(self):
+        """ """
+        context = aq_inner(self.context)
+        portal_state = getMultiAdapter(
+                                (context, self.request), 
+                                name=u'plone_portal_state'
+                                )
+        return portal_state.language()
 
     def language_dict(self):
         return lang_dict

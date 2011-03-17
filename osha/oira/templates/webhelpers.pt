@@ -34,7 +34,15 @@
       <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie8.min.css" /> <![endif]-->
     </tal:block>
     <link rel="stylesheet" type="text/css" media="all" href="client/++resource++osha.oira.stylesheets/main.css" />
-    <link tal:define="sector_url webhelpers/sector_url" tal:condition="sector_url" rel="stylesheet" type="text/css" media="all" href="${sector_url}/@@sector.css" />
+    <tal:lang define="lang webhelpers/get_language">
+        <link tal:condition="python:lang in ['el', 'el-cy', 'el-gr']"
+              rel="stylesheet" 
+              type="text/css" 
+              media="all" 
+              href="client/++resource++osha.oira.stylesheets/lowercase_headers.css" />
+    </tal:lang>
+    <link tal:define="sector_url webhelpers/sector_url" 
+          tal:condition="sector_url" rel="stylesheet" type="text/css" media="all" href="${sector_url}/@@sector.css" />
 
     <style type="text/css" media="all">
         .report #appendix img {
@@ -157,9 +165,7 @@
 
   <metal:risklegal define-macro="risk_legal" meta:interpolation="true" i18n:domain="euphorie">
     <tal:block condition="risk/legal_reference">
-      <h4 tal:define="lang view/get_language|nothing;"
-          tal:attributes="class string:lang-${lang}"
-          i18n:translate="header_legal_references">Legal and policy references</h4>
+      <h4 i18n:translate="header_legal_references">Legal and policy references</h4>
 
       <p tal:content="structure risk/legal_reference">
         The requirements for fridges are defined in section 13.1 section a
@@ -170,12 +176,11 @@
   
   <metal:risklegal define-macro="risk_legal_collapsible" meta:interpolation="true" i18n:domain="euphorie">
     <tal:block condition="risk/legal_reference"
-               define="lang view/get_language|nothing;
-                       show_legal python:request.get('show_legal') not in ['0', None];
+               define="show_legal python:request.get('show_legal') not in ['0', None];
                        toggle_legal python:show_legal and '0' or '1'">
         
         <h4 class="oira_legal_header" 
-            tal:attributes="class string:oira_legal_header lang-${lang}"
+            tal:attributes="class string:oira_legal_header"
             i18n:translate="header_legal_references">Legal and policy references</h4>
         <a id="oira_legal_show_hide_anchor" 
             tal:attributes="href string:${request/ACTUAL_URL}?show_legal=${toggle_legal};"

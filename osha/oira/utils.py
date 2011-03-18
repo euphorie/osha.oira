@@ -3,6 +3,7 @@ from zope.component import getMultiAdapter
 from Products.CMFCore.utils import getToolByName
 from Products.ZCatalog.ZCatalog import ZCatalog
 from euphorie.client.utils import WebHelpers
+from euphorie.decorators import reify
 from osha.oira.config import lang_dict # Used in templates...
 
 def remove_empty_modules(ls):
@@ -72,6 +73,13 @@ def get_evaluated_nodes(ls):
 class OSHAWebHelpers(WebHelpers):
     """ Override Euphorie's webhelpers to add some more utility methods.
     """
+
+    @reify
+    def privacy_url(self):
+        """Return the URL to the current online help page. If we are in a
+        survey the help page will be located there. Otherwise the country
+        will be used as parent."""
+        return "%s/terms-and-conditions" % self._base_url()
 
     def get_language(self):
         """ """

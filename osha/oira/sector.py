@@ -42,7 +42,7 @@ class Settings(sector.Settings):
     grok.template("settings")
 
 class SectorAdd(dexterity.AddForm):
-    grok.context(IOSHASector)
+    grok.context(sector.ISector)
     grok.name('euphorie.sector')
     grok.require("cmf.ModifyPortalContent")
     grok.layer(NuPloneSkin)

@@ -135,7 +135,7 @@ function UpdatePreview(fb) {
         colour_1 = $("#colour-1").val(),
         colour_2 = $("#colour-2").val(),
 
-        main_background = colour_1 ? colour_1 : "#031c48",
+        main_background = colour_1 ? colour_1 : "#003399",
         main_background_hsl = fb.RGBToHSL(fb.unpack(main_background)),
         main_foreground = fb.pack(fb.HSLToRGB(MatchColour(main_background_hsl, 0.0, 0.60, 0.3))),
                                    
@@ -190,7 +190,7 @@ $("#resetColours").live("click", function() {
         style=$("head style:last", frame.contentDocument),
         body=$("body", frame.contentDocument);
 
-    $.farbtastic("#picker-main").setColor("#031c48");
+    $.farbtastic("#picker-main").setColor("#003399");
     $.farbtastic("#picker-support").setColor("#996699");
 
     body.removeClass("deCornae")
@@ -199,7 +199,7 @@ $("#resetColours").live("click", function() {
       .removeClass("brightSupportColour")
       .removeClass("brightMainColour");
 
-    $("#colour-1").val("#031c48");
+    $("#colour-1").val("#003399");
     $("#colour-2").val("#996699");
 });
 

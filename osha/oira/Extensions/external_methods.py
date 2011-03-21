@@ -26,7 +26,7 @@ def set_sector_colour_values(self):
     """ """
     appconfig = getUtility(IAppConfig)
     settings = appconfig.get('euphorie')
-    main_colour  = settings.get('main_colour', "#031c48")
+    main_colour  = settings.get('main_colour', "#003399")
     support_colour  = settings.get('support_colour', "#996699")
 
     brains = self.portal_catalog(portal_type='euphorie.sector')

@@ -41,6 +41,23 @@ class Settings(sector.Settings):
     """ 
     grok.template("settings")
 
+class FullEdit(dexterity.EditForm):
+    grok.context(sector.ISector)
+    grok.require("cmf.ModifyPortalContent")
+    grok.layer(NuPloneSkin)
+    grok.name("edit-full")
+    grok.template('sector_full_edit')
+
+    def extractData(self):
+        self.fields=self.fields.omit("login", "password")
+        if "login" in self.widgets:
+            del self.widgets["login"]
+
+        if "password" in self.widgets:
+            del self.widgets["password"]
+        return super(FullEdit, self).extractData()
+
+
 class SectorAdd(dexterity.AddForm):
     grok.context(sector.ISector)
     grok.name('euphorie.sector')
@@ -52,7 +69,7 @@ class SectorAdd(dexterity.AddForm):
 
         appconfig = getUtility(IAppConfig)
         settings = appconfig.get('euphorie')
-        main_colour  = settings.get('main_colour', "#031c48")
+        main_colour  = settings.get('main_colour', "#003399")
         support_colour  = settings.get('support_colour', "#996699")
         if content.main_colour is None:
             content.main_colour = main_colour

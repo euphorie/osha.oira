@@ -140,8 +140,8 @@
       <tal:block condition="not:view/risk_present">
         <h2 tal:content="risk/title"></h2>
         <p tal:condition="python:risk.type=='top5'" i18n:translate="top5_risk_not_present">
-        This risk is not present in your organisation, but since the sector organisation considers this one of the priority risks it must be
-        included in this report.
+            This risk is not present in your organisation, but since the sector organisation considers this one of the priority risks it must be
+            included in this report.
         </p>
       </tal:block>
       <tal:block condition="view/risk_present">

@@ -41,12 +41,12 @@ class Settings(sector.Settings):
     """ 
     grok.template("settings")
 
-class FullEdit(dexterity.EditForm):
+class AdminEdit(dexterity.EditForm):
     grok.context(sector.ISector)
-    grok.require("cmf.ModifyPortalContent")
+    grok.require("cmf.ManagePortal")
     grok.layer(NuPloneSkin)
-    grok.name("edit-full")
-    grok.template('sector_full_edit')
+    grok.name("admin-edit")
+    grok.template('sector_admin_edit')
 
     def extractData(self):
         self.fields=self.fields.omit("login", "password")
@@ -55,7 +55,7 @@ class FullEdit(dexterity.EditForm):
 
         if "password" in self.widgets:
             del self.widgets["password"]
-        return super(FullEdit, self).extractData()
+        return super(AdminEdit, self).extractData()
 
 
 class SectorAdd(dexterity.AddForm):

@@ -12,7 +12,7 @@
     <li id="home">
       <a href="${webhelpers/client_url}" tal:condition="python:logo_mode=='alien'">${webhelpers/sector/title}</a>
       <a href="${webhelpers/client_url}" tal:condition="python:logo_mode=='native'">
-        <strong i18n:name="tool_name" i18n:translate="title_tool">OiRA</strong><br/>
+        <strong i18n:translate="title_tool">OiRA</strong><br/>
         <span tal:omit-tag="" i18n:translate="oira_name_line_1">Online interactive</span><br/>
         <span tal:omit-tag="" i18n:translate="oira_name_line_2">Risk Assessment</span></a>
     </li>
@@ -140,8 +140,9 @@
       <tal:block condition="not:view/risk_present">
         <h2 tal:content="risk/title"></h2>
         <p tal:condition="python:risk.type=='top5'" i18n:translate="top5_risk_not_present">
-        This risk is not present in your organisation, but since the sector organisation considers this one of the top 5 most
-        critical risks it must be included in this report.</p>
+        This risk is not present in your organisation, but since the sector organisation considers this one of the priority risks it must be
+        included in this report.
+        </p>
       </tal:block>
       <tal:block condition="view/risk_present">
         <h2 tal:condition="use_problem_description"

@@ -92,8 +92,7 @@ class OSHAActionPlanMixin():
             - unevaluated_nodes
             - evaluated_nodes
 
-            Place in a separate method so that OSHAActionPlanReportDownload
-            can call it.
+            Place in a separate method so that OSHAActionPlanReportDownload can call it.
         """
         if survey.redirectOnSurveyUpdate(self.request):
             return
@@ -136,11 +135,6 @@ class OSHAActionPlanReportView(report.ActionPlanReportView, OSHAActionPlanMixin)
     grok.name("view")
     download = False
     
-    def title(self, node, zodbnode):
-        if zodbnode.problem_description and zodbnode.problem_description.strip():
-            return zodbnode.problem_description
-        return node.title
-
     def update(self):
         """ """
         super(OSHAActionPlanReportView, self).update()
@@ -221,7 +215,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                     Paragraph( document.StyleSheet.ParagraphStyles.Heading1, 
                                heading)
                     )
-
         styles = document.StyleSheet.ParagraphStyles
         normal_style = styles.Normal
         comment_style = styles.Comment
@@ -237,17 +230,20 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
 
         for node in nodes:
             zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
-            if node.type == 'risk':
-                title = zodb_node.problem_description
+
+            if node.type!="risk" or node.identification in [u"n/a", u"yes"]:
+                title =  node.title
+            elif zodb_node.problem_description and zodb_node.problem_description.strip():
+                title =  zodb_node.problem_description
             else:
                 title = node.title
+
             section.append(
                     Paragraph(
                         header_styles.get(node.depth, styles.Heading6),
                         u"%s %s" % (node.number, title)
                         )
                     )
-
             if node.type!="risk":
                 continue
 
@@ -276,7 +272,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                         t(_("header_measure", default=u"Measure ${index}", mapping={"index": idx+1}))))
                 self.addMeasure(document, section, measure)
  
-
 
     def render(self):
         """ Mostly a copy of the render method in euphorie.client, but with

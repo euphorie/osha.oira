@@ -34,14 +34,16 @@ def get_unevaluated_nodes(ls):
         if n.type == 'module':
             unevaluated.append(n)
 
-        if n.type == 'risk':
-            if n.probability == 0 or not n.action_plans:
+        elif n.type == 'risk':
+            # 2924: Policy risks do not get evaluated (but require action plans)
+            if not n.action_plans:
+                unevaluated.append(n)
+            elif n.probability == 0 and n.risk_type != 'policy':
                 unevaluated.append(n)
             elif len(n.action_plans):
                 # It's possible that there is an action plan object, but
                 # it's not yet fully populated
-                plans = [p.action_plan for p in n.action_plans]
-                if plans[0] == None:
+                if n.action_plans[0] == None:
                     unevaluated.append(n)
 
     unevaluated = remove_empty_modules(unevaluated)

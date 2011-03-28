@@ -206,15 +206,10 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         self._extra_updates()
 
 
-    def addReportNodes(self, document, nodes, heading):
+    def addReportNodes(self, document, nodes, section):
         """ """
         survey=self.request.survey
         t=lambda txt: translate(txt, context=self.request)
-        section = report.createSection(document, self.context, self.request)
-        section.append(
-                    Paragraph( document.StyleSheet.ParagraphStyles.Heading1, 
-                               heading)
-                    )
         styles = document.StyleSheet.ParagraphStyles
         normal_style = styles.Normal
         comment_style = styles.Comment
@@ -279,48 +274,65 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             #1517 and #1518
         """
         document=report.createDocument()
-
         # XXX: This part is removed
         # self.addActionPlan(document)
-
         # XXX: and replaced with this part:
+        t = lambda txt: translate(txt, context=self.request)
+        section = report.createSection(document, self.context, self.request)
+        heading = t(_("header_oira_report_download", 
+                    default=u"OiRA Report: \"${title}\"",
+                    mapping=dict(title=self.session.title)))
+        section.append(
+                    Paragraph(
+                        document.StyleSheet.ParagraphStyles.Heading1, 
+                        ParagraphPropertySet(alignment=ParagraphPropertySet.CENTER),
+                        heading 
+                        )
+                    )
         if len(self.evaluated_nodes):
-            heading = translate(
-                    _(  "header_present_risks", 
-                        default=u"Risks that have been identified, evaluated and have an Action Plan:"),
-                    self.request)
-            self.addReportNodes(document, self.evaluated_nodes, heading)
+            heading = t(_("header_present_risks", 
+                        default=u"Risks that have been identified, evaluated and have an Action Plan:"))
+            section.append(
+                        Paragraph( document.StyleSheet.ParagraphStyles.Heading1, 
+                                heading)
+                        )
+            self.addReportNodes(document, self.evaluated_nodes, section)
 
         if len(self.unevaluated_nodes):
-            heading = translate(
-                    _(  "header_unevaluated_risks", 
-                        default=u"Risks that have been identified but NOT evaluated and do NOT have an Action Plan:"), 
-                    self.request)
-            self.addReportNodes(document, self.unevaluated_nodes, heading)
+            heading = t(_("header_unevaluated_risks", 
+                        default=u"Risks that have been identified but NOT evaluated and do NOT have an Action Plan:"))
+            section.append(
+                        Paragraph( document.StyleSheet.ParagraphStyles.Heading1, 
+                                heading)
+                        )
+            self.addReportNodes(document, self.unevaluated_nodes, section)
 
         if len(self.unanswered_nodes):
-            heading = translate(
-                    _(  "header_unanswered_risks",
-                        default=u'Risks that have been "parked" and are still to be dealt with:'), 
-                    self.request)
-            self.addReportNodes(document, self.unanswered_nodes, heading)
+            heading = t(_("header_unanswered_risks",
+                        default=u'Risks that have been "parked" and are still to be dealt with:'))
+            section.append(
+                        Paragraph( document.StyleSheet.ParagraphStyles.Heading1, 
+                                heading)
+                        )
+            self.addReportNodes(document, self.unanswered_nodes, section)
         
         if len(self.risk_not_present_nodes):
-            heading = translate(
-                    _(  "header_risks_not_present",
-                        default=u"Risks that are not present in your organisation:"), 
-                    self.request)
-            self.addReportNodes(document, self.risk_not_present_nodes, heading)
+            heading = t(_("header_risks_not_present",
+                        default=u"Risks that are not present in your organisation:"))
+            section.append(
+                        Paragraph( document.StyleSheet.ParagraphStyles.Heading1, 
+                                heading)
+                        )
+            self.addReportNodes(document, self.risk_not_present_nodes, section)
         # Until here...
 
         renderer=Renderer()
         output=StringIO()
         renderer.Write(document, output)
 
-        filename=_("filename_report_actionplan",
+        filename = t(_("filename_report_actionplan",
                    default=u"Action plan ${title}",
-                   mapping=dict(title=self.session.title))
-        filename=translate(filename, context=self.request)
+                   mapping=dict(title=self.session.title)))
         self.request.response.setHeader("Content-Disposition",
                             "attachment; filename=\"%s.rtf\"" % filename.encode("utf-8"))
         self.request.response.setHeader("Content-Type", "application/rtf")
@@ -334,7 +346,6 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
 
     def addIdentificationResults(self, document):
         survey=self.request.survey
-        t=lambda txt: translate(txt, context=self.request)
         section = createIdentificationReportSection(document, self.context, self.request)
 
         styles = document.StyleSheet.ParagraphStyles

@@ -10,10 +10,13 @@ from zope.component import getMultiAdapter
 from zExceptions import NotFound
 from plonetheme.nuplone.utils import formatDate
 
-from rtfng.PropertySets import ParagraphPropertySet, TabPropertySet
+from rtfng.PropertySets import ParagraphPropertySet
+from rtfng.PropertySets import TabPropertySet
+from rtfng.PropertySets import TextPropertySet 
 from rtfng.document.section import Section
-from rtfng.document.paragraph import Paragraph
+from rtfng.document.paragraph import Paragraph, Table, Cell
 from rtfng.document.base import TAB
+from rtfng.document import character
 from rtfng.Renderer import Renderer
 
 from euphorie.client import survey, report
@@ -206,11 +209,23 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         self._extra_updates()
 
 
-    def addReportNodes(self, document, nodes, section):
+    def addReportNodes(self, document, nodes, heading, toc, body):
         """ """
+        ss = document.StyleSheet
+        toc_props = ParagraphPropertySet()
+        toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH*1)
+        toc_props.SetRightIndent(TabPropertySet.DEFAULT_WIDTH*1)
+        p = Paragraph(ss.ParagraphStyles.Heading6, toc_props)
+        p.append(character.Text(heading, TextPropertySet(italic=True)))
+        toc.append(p)
+        
+        body.append(Paragraph( 
+                        ss.ParagraphStyles.Heading1,
+                        heading.replace(u'\u2019', "'").encode('utf-8')))
+
         survey=self.request.survey
         t=lambda txt: translate(txt, context=self.request)
-        styles = document.StyleSheet.ParagraphStyles
+        styles = ss.ParagraphStyles
         normal_style = styles.Normal
         comment_style = styles.Comment
         warning_style = styles.Warning
@@ -233,10 +248,21 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             else:
                 title = node.title
 
-            section.append(
+            # if 'strain and repetitive' in title:
+            #     import pdb; pdb.set_trace()
+            title = "".join(["\u%s?" % str(ord(e)) for e in title])
+
+            if node.type == "module":
+                p = Paragraph(ss.ParagraphStyles.Normal, toc_props)
+                p.append(character.Text(title, TextPropertySet(italic=True)))
+                # character.Text(title.replace(u'\u2019', "'").encode('utf-8'), TextPropertySet(italic=True)))
+                toc.append(p)
+
+            body.append(
                     Paragraph(
                         header_styles.get(node.depth, styles.Heading6),
-                        u"%s %s" % (node.number, title)
+                        (u"%s %s" % (node.number, title)).replace(u'\u2019', "'").encode('utf-8')
+
                         )
                     )
             if node.type!="risk":
@@ -249,23 +275,23 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                     level=_("report_priority_medium", default=u"medium priority risk")
                 elif node.priority=="high":
                     level=_("report_priority_high", default=u"high priority risk")
-                section.append(Paragraph(normal_style, 
+                body.append(Paragraph(normal_style, 
                     t(_("report_priority", default=u"This is a ")), t(level)))
 
             if node.comment and node.comment.strip():
-                section.append(Paragraph(comment_style, node.comment))
+                body.append(Paragraph(comment_style, node.comment))
 
             for (idx, measure) in enumerate(node.action_plans):
                 if not measure.action_plan:
                     continue
                     
                 if len(node.action_plans)==1:
-                    section.append(Paragraph(measure_heading_style,
+                    body.append(Paragraph(measure_heading_style,
                         t(_("header_measure_single", default=u"Measure"))))
                 else:
-                    section.append(Paragraph(measure_heading_style,
+                    body.append(Paragraph(measure_heading_style,
                         t(_("header_measure", default=u"Measure ${index}", mapping={"index": idx+1}))))
-                self.addMeasure(document, section, measure)
+                self.addMeasure(document, body, measure)
  
 
     def render(self):
@@ -274,56 +300,68 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             #1517 and #1518
         """
         document=report.createDocument()
+        ss = document.StyleSheet
         # XXX: This part is removed
         # self.addActionPlan(document)
         # XXX: and replaced with this part:
+        from rtfng.Styles import ParagraphStyle
+        from rtfng.Styles import TextStyle
+        document.StyleSheet.ParagraphStyles.append(
+                                            ParagraphStyle("Italic",
+                                            TextStyle(TextPropertySet(ss.Fonts.Arial, 22, italic=True)), 
+                                            ParagraphPropertySet(space_before=60, space_after=60)))
+
+
         t = lambda txt: translate(txt, context=self.request)
-        section = report.createSection(document, self.context, self.request)
+        toc = createSection(document, self.context, self.request)
         heading = t(_("header_oira_report_download", 
                     default=u"OiRA Report: \"${title}\"",
                     mapping=dict(title=self.session.title)))
-        section.append(
+
+        toc.append(
                     Paragraph(
-                        document.StyleSheet.ParagraphStyles.Heading1, 
+                        ss.ParagraphStyles.Heading1, 
                         ParagraphPropertySet(alignment=ParagraphPropertySet.CENTER),
-                        heading 
+                        heading,
                         )
                     )
-        if len(self.evaluated_nodes):
-            heading = t(_("header_present_risks", 
-                        default=u"Risks that have been identified, evaluated and have an Action Plan:"))
-            section.append(
-                        Paragraph( document.StyleSheet.ParagraphStyles.Heading1, 
-                                heading)
-                        )
-            self.addReportNodes(document, self.evaluated_nodes, section)
 
-        if len(self.unevaluated_nodes):
-            heading = t(_("header_unevaluated_risks", 
-                        default=u"Risks that have been identified but NOT evaluated and do NOT have an Action Plan:"))
-            section.append(
-                        Paragraph( document.StyleSheet.ParagraphStyles.Heading1, 
-                                heading)
-                        )
-            self.addReportNodes(document, self.unevaluated_nodes, section)
+        # toc = Section()
+        body = Section()
 
-        if len(self.unanswered_nodes):
-            heading = t(_("header_unanswered_risks",
-                        default=u'Risks that have been "parked" and are still to be dealt with:'))
-            section.append(
-                        Paragraph( document.StyleSheet.ParagraphStyles.Heading1, 
-                                heading)
-                        )
-            self.addReportNodes(document, self.unanswered_nodes, section)
-        
-        if len(self.risk_not_present_nodes):
-            heading = t(_("header_risks_not_present",
-                        default=u"Risks that are not present in your organisation:"))
-            section.append(
-                        Paragraph( document.StyleSheet.ParagraphStyles.Heading1, 
-                                heading)
-                        )
-            self.addReportNodes(document, self.risk_not_present_nodes, section)
+        toc_props = ParagraphPropertySet()
+        toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH*1)
+        toc_props.SetRightIndent(TabPropertySet.DEFAULT_WIDTH*1)
+        p = Paragraph(ss.ParagraphStyles.Heading6, toc_props)
+        p.append(character.Text(
+                    t(_("toc_header", default=u"Contents"))))
+        toc.append(p)
+
+        headings = [
+            t(_("header_present_risks", 
+                default=u"Risks that have been identified, evaluated and have an Action Plan:")),
+            t(_("header_unevaluated_risks", 
+                default=u"Risks that have been identified but NOT evaluated and do NOT have an Action Plan:")),
+            t(_("header_unanswered_risks",
+                default=u'Risks that have been "parked" and are still to be dealt with:')),
+            t(_("header_risks_not_present",
+                default=u"Risks that are not present in your organisation:"))
+            ]
+        nodes = [
+            self.evaluated_nodes,
+            self.unevaluated_nodes,
+            self.unanswered_nodes,
+            self.risk_not_present_nodes,
+            ]
+
+        for nodes, heading in zip(nodes, headings):
+            if not nodes:
+                continue
+
+            self.addReportNodes(document, nodes, heading, toc, body)
+
+        # document.Sections.append(toc)
+        document.Sections.append(body)
         # Until here...
 
         renderer=Renderer()
@@ -391,6 +429,7 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
                 section.append(Paragraph(comment_style, node.comment))
 
 
+
 def createIdentificationReportSection(document, survey, request):
     t=lambda txt: translate(txt, context=request)
     footer=t(_("report_identification_revision",
@@ -409,4 +448,35 @@ def createIdentificationReportSection(document, survey, request):
     document.Sections.append(section)
     return section
 
+
+def createSection(document, survey, request):
+    t = lambda txt: translate(txt, context=request)
+    footer = t(_("report_survey_revision",
+        default=u"This report was based on the survey '${title}' of revision date ${date}.",
+        mapping={"title": survey.published[1],
+                 "date": formatDate(request, survey.published[2])}))
+
+    table = Table(4750, 4750)
+    c1 = Cell(Paragraph(
+                document.StyleSheet.ParagraphStyles.Footer, 
+                survey.published[1]))
+
+    toc_props = ParagraphPropertySet()
+    toc_props.SetAlignment(ParagraphPropertySet.RIGHT)
+    c2 = Cell(Paragraph(
+                document.StyleSheet.ParagraphStyles.Footer, 
+                toc_props,
+                formatDate(request, survey.published[2])))
+    table.AddRow(c1, c2)
+
+    # rtfng does not like unicode footers
+    footer=Paragraph(document.StyleSheet.ParagraphStyles.Footer,
+            "".join(["\u%s?" % str(ord(e)) for e in footer]))
+    section=Section()
+    section.Header.append(table)
+
+    section.Footer.append(footer)
+    section.SetBreakType(section.PAGE)
+    document.Sections.append(section)
+    return section
 

@@ -1,4 +1,5 @@
 import htmllaundry
+from datetime import datetime
 from cStringIO import StringIO
 from Acquisition import aq_inner
 
@@ -466,7 +467,7 @@ def createSection(document, survey, request):
     c2 = Cell(Paragraph(
                 document.StyleSheet.ParagraphStyles.Footer, 
                 toc_props,
-                formatDate(request, survey.published[2])))
+                formatDate(request, datetime.today())))
     table.AddRow(c1, c2)
 
     # rtfng does not like unicode footers

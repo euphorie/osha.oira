@@ -14,11 +14,13 @@ from plonetheme.nuplone.utils import formatDate
 from rtfng.PropertySets import ParagraphPropertySet
 from rtfng.PropertySets import TabPropertySet
 from rtfng.PropertySets import TextPropertySet 
-from rtfng.document.section import Section
-from rtfng.document.paragraph import Paragraph, Table, Cell
-from rtfng.document.base import TAB
-from rtfng.document import character
 from rtfng.Renderer import Renderer
+from rtfng.Styles import ParagraphStyle
+from rtfng.Styles import TextStyle
+from rtfng.document import character
+from rtfng.document.base import TAB
+from rtfng.document.paragraph import Paragraph, Table, Cell
+from rtfng.document.section import Section
 
 from euphorie.client import survey, report
 from euphorie.client.session import SessionManager
@@ -195,7 +197,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             non-present risks.
         """
         super(OSHAActionPlanReportDownload, self).update()
-
         session=Session()
         if self.session.company is None:
             self.session.company=model.Company()
@@ -206,7 +207,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                                 model.RISK_PRESENT_OR_TOP5_FILTER))\
                 .order_by(model.SurveyTreeItem.path)
         self.nodes=query.all()
-
         self._extra_updates()
 
 
@@ -227,10 +227,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         survey=self.request.survey
         t=lambda txt: translate(txt, context=self.request)
         styles = ss.ParagraphStyles
-        normal_style = styles.Normal
-        comment_style = styles.Comment
-        warning_style = styles.Warning
-        measure_heading_style = styles.MeasureHeading
         header_styles={
                 0: styles.Heading2,
                 1: styles.Heading3,
@@ -238,7 +234,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 3: styles.Heading5,
                 4: styles.Heading6,
                 }
-
         for node in nodes:
             zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
 
@@ -249,21 +244,17 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             else:
                 title = node.title
 
-            # if 'strain and repetitive' in title:
-            #     import pdb; pdb.set_trace()
+            # XXX: Hack to overcome rtfng's lack of unicode support
             title = "".join(["\u%s?" % str(ord(e)) for e in title])
-
             if node.type == "module":
                 p = Paragraph(ss.ParagraphStyles.Normal, toc_props)
                 p.append(character.Text(title, TextPropertySet(italic=True)))
-                # character.Text(title.replace(u'\u2019', "'").encode('utf-8'), TextPropertySet(italic=True)))
                 toc.append(p)
 
             body.append(
                     Paragraph(
                         header_styles.get(node.depth, styles.Heading6),
                         (u"%s %s" % (node.number, title)).replace(u'\u2019', "'").encode('utf-8')
-
                         )
                     )
             if node.type!="risk":
@@ -276,24 +267,82 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                     level=_("report_priority_medium", default=u"medium priority risk")
                 elif node.priority=="high":
                     level=_("report_priority_high", default=u"high priority risk")
-                body.append(Paragraph(normal_style, 
-                    t(_("report_priority", default=u"This is a ")), t(level)))
 
-            if node.comment and node.comment.strip():
-                body.append(Paragraph(comment_style, node.comment))
+                body.append(Paragraph(
+                                styles.RiskPriority, 
+                                t(_("report_priority", default=u"This is a ")), t(level))
+                            )
+                body.append(
+                        Paragraph(
+                                styles.Normal, 
+                                ParagraphPropertySet(left_indent=300, right_indent=300),
+                                t(_(htmllaundry.StripMarkup(zodb_node.description)))
+                                )
+                            )
+                body.append(Paragraph(""))
+
+            # XXX: #2611 Seems this is not wanted, make sure before removing...
+            # if node.comment and node.comment.strip():
+            #     body.append(Paragraph(styles.Comment, node.comment))
 
             for (idx, measure) in enumerate(node.action_plans):
                 if not measure.action_plan:
                     continue
                     
                 if len(node.action_plans)==1:
-                    body.append(Paragraph(measure_heading_style,
-                        t(_("header_measure_single", default=u"Measure"))))
+                    body.append(
+                        Paragraph(
+                            styles.MeasureHeading,
+                            ParagraphPropertySet(left_indent=300, right_indent=300),
+                            t(_("header_measure_single", default=u"Measure"))))
                 else:
-                    body.append(Paragraph(measure_heading_style,
-                        t(_("header_measure", default=u"Measure ${index}", mapping={"index": idx+1}))))
+                    body.append(
+                        Paragraph(styles.MeasureHeading,
+                            ParagraphPropertySet(left_indent=300, right_indent=300),
+                            t(_("header_measure", default=u"Measure ${index}", mapping={"index": idx+1}))))
+
                 self.addMeasure(document, body, measure)
- 
+
+
+    def addMeasure(self, document, section, measure):
+        """ Requirements for how the measure section should be displayed are 
+            in #2611 
+        """
+        t=lambda txt: translate(txt, context=self.request)
+        ss = document.StyleSheet
+        styles = document.StyleSheet.ParagraphStyles
+        headings = [
+            t(_("label_measure_action_plan")),
+            t(_("label_measure_prevention_plan")),
+            t(_("label_measure_requirements")),
+            t(_("label_action_plan_responsible")),
+            t(_("label_action_plan_budget")),
+            t(_("label_action_plan_start")),
+            t(_("label_action_plan_end")),
+            ]
+        values = [
+            measure.action_plan,
+            measure.prevention_plan,
+            measure.requirements,
+            measure.responsible,
+            str(measure.budget),
+            measure.planning_start,
+            measure.planning_end,
+            ]
+        for heading, value in zip(headings, values):
+            section.append(
+                    Paragraph(
+                        styles.MeasureField,
+                        heading
+                        )
+                    )
+            section.append(
+                        Paragraph(styles.Normal, 
+                        ParagraphPropertySet(left_indent=600, right_indent=600),
+                        value
+                        )
+                    )
+
 
     def render(self):
         """ Mostly a copy of the render method in euphorie.client, but with
@@ -302,23 +351,35 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         """
         document=report.createDocument()
         ss = document.StyleSheet
+
+        # Define some more custom styles
+        document.StyleSheet.ParagraphStyles.append(
+            ParagraphStyle("RiskPriority",
+                    TextStyle(TextPropertySet(
+                                    font=ss.Fonts.Arial, 
+                                    size=22, 
+                                    italic=True,
+                                    colour=ss.Colours.Blue)),
+                    ParagraphPropertySet(left_indent=300, right_indent=300))
+                    )
+        document.StyleSheet.ParagraphStyles.append(
+            ParagraphStyle("MeasureField",
+                    TextStyle(TextPropertySet(
+                                    font=ss.Fonts.Arial, 
+                                    size=18, 
+                                    underline=True)),
+                    ParagraphPropertySet(left_indent=300, right_indent=300))
+                    )
+
         # XXX: This part is removed
         # self.addActionPlan(document)
         # XXX: and replaced with this part:
-        from rtfng.Styles import ParagraphStyle
-        from rtfng.Styles import TextStyle
-        document.StyleSheet.ParagraphStyles.append(
-                                            ParagraphStyle("Italic",
-                                            TextStyle(TextPropertySet(ss.Fonts.Arial, 22, italic=True)), 
-                                            ParagraphPropertySet(space_before=60, space_after=60)))
-
-
         t = lambda txt: translate(txt, context=self.request)
         toc = createSection(document, self.context, self.request)
+        body = Section()
         heading = t(_("header_oira_report_download", 
                     default=u"OiRA Report: \"${title}\"",
                     mapping=dict(title=self.session.title)))
-
         toc.append(
                     Paragraph(
                         ss.ParagraphStyles.Heading1, 
@@ -326,10 +387,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                         heading,
                         )
                     )
-
-        # toc = Section()
-        body = Section()
-
         toc_props = ParagraphPropertySet()
         toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH*1)
         toc_props.SetRightIndent(TabPropertySet.DEFAULT_WIDTH*1)
@@ -358,10 +415,8 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         for nodes, heading in zip(nodes, headings):
             if not nodes:
                 continue
-
             self.addReportNodes(document, nodes, heading, toc, body)
 
-        # document.Sections.append(toc)
         document.Sections.append(body)
         # Until here...
 
@@ -386,13 +441,8 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
     def addIdentificationResults(self, document):
         survey=self.request.survey
         section = createIdentificationReportSection(document, self.context, self.request)
-
         styles = document.StyleSheet.ParagraphStyles
-
-        normal_style=document.StyleSheet.ParagraphStyles.Normal
-        warning_style=document.StyleSheet.ParagraphStyles.Warning
-        comment_style=document.StyleSheet.ParagraphStyles.Comment
-        header_styles={
+        header_styles = {
                 0: styles.Heading2,
                 1: styles.Heading3,
                 2: styles.Heading4,
@@ -411,7 +461,7 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
                 continue
 
             zodb_node=survey.restrictedTraverse(node.zodb_path.split("/"))
-            section.append(Paragraph(normal_style, htmllaundry.StripMarkup(zodb_node.description)))
+            section.append(Paragraph(styles.Normal, htmllaundry.StripMarkup(zodb_node.description)))
 
             for i in range(0,8):
                 p =  Paragraph(styles.Normal, " ")
@@ -427,8 +477,7 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
             section.append(p)
 
             if node.comment and node.comment.strip():
-                section.append(Paragraph(comment_style, node.comment))
-
+                section.append(Paragraph(styles.Comment, node.comment))
 
 
 def createIdentificationReportSection(document, survey, request):

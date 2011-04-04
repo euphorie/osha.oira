@@ -214,7 +214,7 @@ msgstr "OiRA Tools"
 msgid "Survey import"
 msgstr "OiRA Tool import"
 
-#. Default: "Import OiRA Tool version"
+#. Default: "Import OiRA tool version"
 #: euphorie/content/upload.py:293
 msgid "Import survey version"
 msgstr "OiRA Tool import"
@@ -224,13 +224,13 @@ msgstr "OiRA Tool import"
 msgid "Survey version"
 msgstr "OiRA Tool version"
 
-#. Default: "add a new OiRA Tool"
+#. Default: "add a new OiRA tool"
 #: euphorie/content/templates/sector_view.pt:31
 #: euphorie/content/templates/sector_view.pt:16
 msgid "add_survey"
 msgstr "add a new OiRA Tool"
 
-#. Default: "The form will allow you to create a new OiRA Tool."
+#. Default: "The form will allow you to create a new OiRA tool."
 #: euphorie/content/templates/surveygroup_add.pt:9
 msgid "intro_add_surveygroup"
 msgstr "The form will allow you to create a new OiRA Tool."
@@ -476,14 +476,14 @@ msgstr "Solution"
 #. Default: "Succesfully published the OiRA Tool"
 #: euphorie/client/publish.py:212
 msgid "Succesfully published the survey"
-msgstr ""
+msgstr "Sucessfully published the OiRA tool"
 
 #. Default: "Succesfully created a preview for the OiRA Tool. It can be
 #. accessed at ${url}."
 #: euphorie/client/publish.py:261
 msgid ""
 "Succesfully created a preview for the survey. It can be accessed at ${url} ."
-msgstr ""
+msgstr "Succesfully created a new preview for the OiRA tool. It can be accessed at ${url} ."
 
 #. Default: "Publish the selected OiRA Tool live with its latest changes."
 #: euphorie/deployment/tiles/templates/versions.pt:20
@@ -839,12 +839,97 @@ msgstr ""
 "organisation considers this one of the priority risks it must be included in "
 "this report."
 
-#~ msgid "Successfully published the survey"
-#~ msgstr "Successfully published the OiRA Tool"
+#: euphorie/content/profiles/default/types/euphorie.survey.xml:8
+msgid "A version of a survey."
+msgstr "A version of an OiRA tool."
 
-#~ msgid ""
-#~ "Successfully created a preview for the survey. It can be accessed at "
-#~ "${url} ."
-#~ msgstr ""
-#~ "Successfully created a preview for the OiRA Tool. It can be accessed at "
-#~ "${url}."
+#: euphorie/content/profiles/default/types/euphorie.surveygroup.xml:7
+msgid "A survey."
+msgstr "An OiRA Tool."
+
+#. Default: Are you sure you want to unpublish this OiRA tool?
+#: euphorie/content/templates/unpublish.pt:19
+msgid "unpublish_confirm"
+msgstr "Are you sure you want to unpublish this OiRA tool?"
+
+#. Default: Are you sure you want to create a preview of this OiRA tool? You can give
+#. the URL for the preview to others so they can test the OiRA tool. To access the
+#. preview a standard OiRA client login is required.
+#: euphorie/client/templates/preview.pt:17
+msgid "intro_preview"
+msgstr ""
+"Are you sure you want to create a preview of this OiRA tool? You can give"
+"the URL for the preview to others so that they can test the tool. To access the"
+"preview a standard OiRA client login is required."
+
+#. Default: Preview OiRA tool
+#: euphorie/client/templates/preview.pt:14
+msgid "header_preview"
+msgstr "Preview OiRA tool"
+
+#. Default: After publication the OiRA tool will be available at ${url}.
+#: euphorie/client/templates/publish.pt:29
+msgid "help_publish_url"
+msgstr "After publication the OiRA tool will be available at ${url}."
+
+#. Default: Are you sure you want to publish this OiRA tool version? This will replace
+#. the current version.
+#: euphorie/client/templates/publish.pt:24
+msgid "intro_publish_other_survey_published"
+msgstr "Are you sure you want to publish this OiRA tool version? This will replace"
+
+#. Default: Are you sure you want to republish this OiRA tool? This will make all
+#. changes made public.
+#: euphorie/client/templates/publish.pt:21
+msgid "intro_publish_survey_published"
+msgstr "Are you sure you want to republish this OiRA tool? This will make all changes made public."
+
+#. Default: Are you sure you want to publish this OiRA tool? After publication the
+#. tool will appear in the online client and be accessible by all users.
+#: euphorie/client/templates/publish.pt:17
+msgid "intro_publish_first_time"
+msgstr "Are you sure you want to publish this OiRA tool? After publication the tool will appear in the online client and be accessible by all users."
+
+#. Default: Publish OiRA tool
+#: euphorie/client/templates/publish.pt:14
+msgid "header_publish"
+msgstr "Publish OiRA Tool"
+
+#. Default: This OiRA tool has been updated. Before you can continue, any changes made
+#. in the OiRA tool will have to be merged into your session.
+#: euphorie/client/templates/updated.pt:19
+msgid "expl_update"
+msgstr "This OiRA tool has been updated. Before you can continue, any changes made in the tool will have to be merged into your session."
+
+#. Default: The title of this OiRA tool. This title is used in the tool overview in
+#. the clients.
+#: euphorie/content/surveygroup.py:37
+msgid "help_surveygroup_title"
+msgstr "The title of this OiRA tool. This title is used in the tool overview in the clients"
+
+#. Default: This OiRA tool is now no longer available in the client.
+#: euphorie/content/surveygroup.py:222
+msgid "message_unpublish_success"
+msgstr "This OiRA tool is now no longer available in the client."
+
+#. Default: Name for the OiRA tool version
+#: euphorie/content/upload.py:81 euphorie/content/upload.py:100
+msgid "label_upload_survey_title"
+msgstr "Name for OiRA tool version"
+
+#. Default: Import OiRA tool
+#: euphorie/deployment/browser/sitemenu.py:40
+msgid "menu_import"
+msgstr "Import OiRA tool"
+
+#. Default: Start creating a new OiRA tool. You will be asked whether you want to
+#. start off with a copy of an existing OiRA tool.
+#: euphorie/deployment/tiles/templates/versions.pt:45
+msgid "help_create_new_version"
+msgstr "Start creating a new OiRA tool. You will be asked whether you want to start off with a copy of an existing OiRA tool."
+
+#. Default: Remove this OiRA tool from the online client.
+#: euphorie/deployment/tiles/templates/versions.pt:21
+msgid "title_help_unpublished"
+msgstr "Remove this OiRA tool from the online client."
+

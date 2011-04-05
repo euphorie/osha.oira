@@ -14,6 +14,8 @@ from plonetheme.nuplone.utils import formatDate
 from rtfng.PropertySets import ParagraphPropertySet
 from rtfng.PropertySets import TabPropertySet
 from rtfng.PropertySets import TextPropertySet 
+from rtfng.PropertySets import BorderPropertySet
+from rtfng.PropertySets import FramePropertySet
 from rtfng.Renderer import Renderer
 from rtfng.Styles import ParagraphStyle
 from rtfng.Styles import TextStyle
@@ -221,9 +223,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         p.append(character.Text(heading, TextPropertySet(italic=True)))
         toc.append(p)
         
-        body.append(Paragraph( 
-                        ss.ParagraphStyles.Heading1,
-                        heading.replace(u'\u2019', "'").encode('utf-8')))
+        body.append(Paragraph(ss.ParagraphStyles.Heading1, heading))
 
         survey=self.request.survey
         styles = ss.ParagraphStyles
@@ -288,25 +288,34 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                     continue
                     
                 if len(node.action_plans)==1:
-                    body.append(
-                        Paragraph(
-                            styles.MeasureHeading,
-                            ParagraphPropertySet(left_indent=300, right_indent=300),
-                            t(_("header_measure_single", default=u"Measure"))))
+                    heading = t(_("header_measure_single", default=u"Measure"))
                 else:
-                    body.append(
-                        Paragraph(styles.MeasureHeading,
-                            ParagraphPropertySet(left_indent=300, right_indent=300),
-                            t(_("header_measure", default=u"Measure ${index}", mapping={"index": idx+1}))))
+                    heading = t(_("header_measure", 
+                                    default=u"Measure ${index}", 
+                                    mapping={"index": idx+1}))
 
-                self.addMeasure(document, body, measure)
+                self.addMeasure(document, heading, body, measure)
 
 
-    def addMeasure(self, document, section, measure):
+    def addMeasure(self, document, heading, section, measure):
         """ Requirements for how the measure section should be displayed are 
             in #2611 
         """
-        t=lambda txt: translate(txt, context=self.request)
+        t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
+        ss = document.StyleSheet
+        styles = ss.ParagraphStyles
+
+        table = Table(TabPropertySet.DEFAULT_WIDTH*14)
+        thin_edge  = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
+        no_edge = BorderPropertySet(width=0, colour=ss.Colours.White)
+        p = Paragraph(
+                styles.MeasureHeading,
+                ParagraphPropertySet(left_indent=300, right_indent=300),
+                t(_("header_measure_single", default=u"Measure")))
+        c = Cell(p, FramePropertySet(thin_edge, thin_edge, no_edge, thin_edge))
+        table.AddRow(c)
+
+
         ss = document.StyleSheet
         styles = document.StyleSheet.ParagraphStyles
         headings = [
@@ -329,18 +338,25 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             m.planning_end and formatDate(self.request, m.planning_end) or '',
             ]
         for heading, value in zip(headings, values):
-            section.append(
-                    Paragraph(
+            p = Paragraph(
                         styles.MeasureField,
                         heading
                         )
-                    )
-            section.append(
-                        Paragraph(styles.Normal, 
-                        ParagraphPropertySet(left_indent=600, right_indent=600),
-                        value
-                        )
-                    )
+            c = Cell(p, FramePropertySet(no_edge, thin_edge, no_edge, thin_edge))
+            table.AddRow(c)
+
+            if headings.index(heading) == len(headings)-1:
+                frame = FramePropertySet(no_edge, thin_edge, thin_edge, thin_edge)
+            else:
+                frame = FramePropertySet(no_edge, thin_edge, no_edge, thin_edge)
+
+            p = Paragraph(styles.Normal, 
+                    ParagraphPropertySet(left_indent=600, right_indent=600),
+                    value)
+            c = Cell(p, frame)
+            table.AddRow(c)
+
+        section.append(table)
 
 
     def render(self):
@@ -352,7 +368,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         ss = document.StyleSheet
 
         # Define some more custom styles
-        document.StyleSheet.ParagraphStyles.append(
+        ss.ParagraphStyles.append(
             ParagraphStyle("RiskPriority",
                     TextStyle(TextPropertySet(
                                     font=ss.Fonts.Arial, 
@@ -361,13 +377,24 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                                     colour=ss.Colours.Blue)),
                     ParagraphPropertySet(left_indent=300, right_indent=300))
                     )
-        document.StyleSheet.ParagraphStyles.append(
+        ss.ParagraphStyles.append(
             ParagraphStyle("MeasureField",
                     TextStyle(TextPropertySet(
                                     font=ss.Fonts.Arial, 
                                     size=18, 
                                     underline=True)),
                     ParagraphPropertySet(left_indent=300, right_indent=300))
+                    )
+        thin_edge  = BorderPropertySet( width=20, style=BorderPropertySet.SINGLE )
+        thin_frame  = FramePropertySet(thin_edge, thin_edge, thin_edge, thin_edge)
+        ss.ParagraphStyles.Heading2 = \
+            ParagraphStyle("Heading2",
+                    TextStyle(TextPropertySet(
+                                    font=ss.Fonts.Arial, 
+                                    size=22, 
+                                    underline=True)),
+                    ParagraphPropertySet(left_indent=301, right_indent=300),
+                    thin_frame,
                     )
 
         # XXX: This part is removed

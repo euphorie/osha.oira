@@ -212,6 +212,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
 
     def addReportNodes(self, document, nodes, heading, toc, body):
         """ """
+        t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
         ss = document.StyleSheet
         toc_props = ParagraphPropertySet()
         toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH*1)
@@ -225,7 +226,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                         heading.replace(u'\u2019', "'").encode('utf-8')))
 
         survey=self.request.survey
-        t=lambda txt: translate(txt, context=self.request)
         styles = ss.ParagraphStyles
         header_styles={
                 0: styles.Heading2,
@@ -244,12 +244,10 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             else:
                 title = node.title
 
-            # XXX: Hack to overcome rtfng's lack of unicode support
-            title = "".join(["\u%s?" % str(ord(e)) for e in title])
-            if node.type == "module":
-                p = Paragraph(ss.ParagraphStyles.Normal, toc_props)
-                p.append(character.Text(title, TextPropertySet(italic=True)))
-                toc.append(p)
+            # if node.type == "module":
+            #     p = Paragraph(ss.ParagraphStyles.Normal, toc_props)
+            #     p.append(character.Text(title, TextPropertySet(italic=True)))
+            #     toc.append(p)
 
             body.append(
                     Paragraph(
@@ -320,14 +318,15 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             t(_("label_action_plan_start")),
             t(_("label_action_plan_end")),
             ]
+        m = measure
         values = [
-            measure.action_plan,
-            measure.prevention_plan,
-            measure.requirements,
-            measure.responsible,
-            str(measure.budget),
-            measure.planning_start,
-            measure.planning_end,
+            m.action_plan,
+            m.prevention_plan,
+            m.requirements,
+            m.responsible,
+            str(m.budget),
+            m.planning_start and formatDate(self.request, m.planning_start) or '',
+            m.planning_end and formatDate(self.request, m.planning_end) or '',
             ]
         for heading, value in zip(headings, values):
             section.append(
@@ -373,8 +372,9 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
 
         # XXX: This part is removed
         # self.addActionPlan(document)
+
         # XXX: and replaced with this part:
-        t = lambda txt: translate(txt, context=self.request)
+        t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
         toc = createSection(document, self.context, self.request)
         body = Section()
         heading = t(_("header_oira_report_download", 
@@ -391,19 +391,19 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH*1)
         toc_props.SetRightIndent(TabPropertySet.DEFAULT_WIDTH*1)
         p = Paragraph(ss.ParagraphStyles.Heading6, toc_props)
-        p.append(character.Text(
-                    t(_("toc_header", default=u"Contents"))))
+        txt = t(_("toc_header", default=u"Contents"))
+        p.append(character.Text(txt))
         toc.append(p)
 
         headings = [
             t(_("header_present_risks", 
-                default=u"Risks that have been identified, evaluated and have an Action Plan:")),
+                default=u"Risks that have been identified, evaluated and have an Action Plan")),
             t(_("header_unevaluated_risks", 
-                default=u"Risks that have been identified but NOT evaluated and do NOT have an Action Plan:")),
+                default=u"Risks that have been identified but NOT evaluated and do NOT have an Action Plan")),
             t(_("header_unanswered_risks",
-                default=u'Risks that have been "parked" and are still to be dealt with:')),
+                default=u'Hazards/problems that have been "parked" and are still to be dealt with')),
             t(_("header_risks_not_present",
-                default=u"Risks that are not present in your organisation:"))
+                default=u"Hazards/problems that are not present in your organisation"))
             ]
         nodes = [
             self.evaluated_nodes,
@@ -424,9 +424,10 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         output=StringIO()
         renderer.Write(document, output)
 
-        filename = t(_("filename_report_actionplan",
-                   default=u"Action plan ${title}",
-                   mapping=dict(title=self.session.title)))
+        filename = translate(_("filename_report_actionplan",
+                        default=u"Action plan ${title}",
+                        mapping=dict(title=self.session.title)),
+                        context=self.request,)
         self.request.response.setHeader("Content-Disposition",
                             "attachment; filename=\"%s.rtf\"" % filename.encode("utf-8"))
         self.request.response.setHeader("Content-Type", "application/rtf")

@@ -1,3 +1,4 @@
+import logging
 from five import grok
 from zope import schema
 from zope.component import getUtility
@@ -16,6 +17,8 @@ from plonetheme.nuplone.utils import getPortal
 from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.content import sector
 from euphorie.content import MessageFactory as _
+
+log = logging.getLogger('osha.oira/sector.py')
 
 grok.templatedir("templates")
 
@@ -68,6 +71,10 @@ class SectorAdd(dexterity.AddForm):
         content = super(SectorAdd, self).create(data)
 
         appconfig = getUtility(IAppConfig)
+        if not appconfig:
+            log.error("Could not get the IAppConfig utility!")
+            return content
+
         settings = appconfig.get('euphorie')
         main_colour  = settings.get('main_colour', "#003399")
         support_colour  = settings.get('support_colour', "#996699")

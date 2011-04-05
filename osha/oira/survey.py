@@ -11,11 +11,13 @@ from zope.component import getMultiAdapter
 from zExceptions import NotFound
 from plonetheme.nuplone.utils import formatDate
 
+from rtfng.Elements import PAGE_NUMBER
+from rtfng.Elements import SECTION_PAGES
+from rtfng.PropertySets import BorderPropertySet
+from rtfng.PropertySets import FramePropertySet
 from rtfng.PropertySets import ParagraphPropertySet
 from rtfng.PropertySets import TabPropertySet
 from rtfng.PropertySets import TextPropertySet 
-from rtfng.PropertySets import BorderPropertySet
-from rtfng.PropertySets import FramePropertySet
 from rtfng.Renderer import Renderer
 from rtfng.Styles import ParagraphStyle
 from rtfng.Styles import TextStyle
@@ -524,32 +526,36 @@ def createIdentificationReportSection(document, survey, request):
 
 def createSection(document, survey, request):
     t = lambda txt: translate(txt, context=request)
-    footer = t(_("report_survey_revision",
+    section = Section(break_type=Section.PAGE, first_page_number=1 )
+    footer_txt = t(_("report_survey_revision",
         default=u"This report was based on the survey '${title}' of revision date ${date}.",
         mapping={"title": survey.published[1],
                  "date": formatDate(request, survey.published[2])}))
 
-    table = Table(4750, 4750)
+    header = Table(4750, 4750)
     c1 = Cell(Paragraph(
                 document.StyleSheet.ParagraphStyles.Footer, 
                 survey.published[1]))
 
-    toc_props = ParagraphPropertySet()
-    toc_props.SetAlignment(ParagraphPropertySet.RIGHT)
+    pp = ParagraphPropertySet
+
+    header_props = pp(alignment=pp.RIGHT)
     c2 = Cell(Paragraph(
                 document.StyleSheet.ParagraphStyles.Footer, 
-                toc_props,
+                header_props,
                 formatDate(request, datetime.today())))
-    table.AddRow(c1, c2)
+    header.AddRow(c1, c2)
+    section.Header.append(header)
 
+    footer = Table(9000, 500)
     # rtfng does not like unicode footers
-    footer=Paragraph(document.StyleSheet.ParagraphStyles.Footer,
-            "".join(["\u%s?" % str(ord(e)) for e in footer]))
-    section=Section()
-    section.Header.append(table)
+    c1 = Cell(Paragraph(document.StyleSheet.ParagraphStyles.Footer,
+                pp(alignment=pp.LEFT),
+                "".join(["\u%s?" % str(ord(e)) for e in footer_txt])))
 
+    c2 = Cell(Paragraph(pp(alignment=pp.RIGHT), PAGE_NUMBER))
+    footer.AddRow(c1, c2)
     section.Footer.append(footer)
-    section.SetBreakType(section.PAGE)
     document.Sections.append(section)
     return section
 

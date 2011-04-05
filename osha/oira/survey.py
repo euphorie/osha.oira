@@ -227,7 +227,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
 
         survey=self.request.survey
         styles = ss.ParagraphStyles
-        header_styles={
+        header_styles = {
                 0: styles.Heading2,
                 1: styles.Heading3,
                 2: styles.Heading4,
@@ -249,12 +249,18 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             #     p.append(character.Text(title, TextPropertySet(italic=True)))
             #     toc.append(p)
 
-            body.append(
-                    Paragraph(
+            thin_edge  = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
+            if node.depth == 1:
+                p = Paragraph(
                         header_styles.get(node.depth, styles.Heading6),
-                        (u"%s %s" % (node.number, title)).replace(u'\u2019', "'").encode('utf-8')
-                        )
-                    )
+                        FramePropertySet(thin_edge, thin_edge, thin_edge, thin_edge),
+                        u"%s %s" % (node.number, title))
+            else:
+                p = Paragraph(
+                        header_styles.get(node.depth, styles.Heading6),
+                        u"%s %s" % (node.number, title))
+            body.append(p)
+
             if node.type!="risk":
                 continue
 
@@ -305,7 +311,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         ss = document.StyleSheet
         styles = ss.ParagraphStyles
 
-        table = Table(TabPropertySet.DEFAULT_WIDTH*14)
+        table = Table(9500)
         thin_edge  = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
         no_edge = BorderPropertySet(width=0, colour=ss.Colours.White)
         p = Paragraph(
@@ -384,17 +390,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                                     size=18, 
                                     underline=True)),
                     ParagraphPropertySet(left_indent=300, right_indent=300))
-                    )
-        thin_edge  = BorderPropertySet( width=20, style=BorderPropertySet.SINGLE )
-        thin_frame  = FramePropertySet(thin_edge, thin_edge, thin_edge, thin_edge)
-        ss.ParagraphStyles.Heading2 = \
-            ParagraphStyle("Heading2",
-                    TextStyle(TextPropertySet(
-                                    font=ss.Fonts.Arial, 
-                                    size=22, 
-                                    underline=True)),
-                    ParagraphPropertySet(left_indent=301, right_indent=300),
-                    thin_frame,
                     )
 
         # XXX: This part is removed

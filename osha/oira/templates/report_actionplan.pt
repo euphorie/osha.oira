@@ -38,7 +38,7 @@
     <li>
         <em>
         <strong tal:condition="view/evaluated_nodes" 
-            i18n:translate="header_present_risks">Risks that have been identified, evaluated and have an Action Plan:
+            i18n:translate="header_present_risks">Risks that have been identified, evaluated and have an Action Plan
         </strong>
         </em>
     </li>
@@ -48,7 +48,7 @@
     <li>
         <em>
         <strong tal:condition="view/unevaluated_nodes" 
-            i18n:translate="header_unevaluated_risks">Risks that have been identified but NOT evaluated and do NOT have an Action Plan:
+            i18n:translate="header_unevaluated_risks">Risks that have been identified but NOT evaluated and do NOT have an Action Plan
         </strong>
         </em>
     </li>
@@ -58,7 +58,7 @@
     <li>
         <em>
         <strong tal:condition="view/unanswered_nodes" 
-            i18n:translate="header_unanswered_risks">Risks that have been "parked" and are still to be dealt with:
+            i18n:translate="header_unanswered_risks">Hazards/problems that have been "parked" and are still to be dealt with
         </strong>
         </em>
     </li>
@@ -68,7 +68,7 @@
     <li>
         <em>
         <strong tal:condition="view/risk_not_present_nodes" 
-            i18n:translate="header_risks_not_present">Risks that are not present in your organisation:
+            i18n:translate="header_risks_not_present">Hazards/problems that are not present in your organisation
         </strong>
         </em>
     </li>

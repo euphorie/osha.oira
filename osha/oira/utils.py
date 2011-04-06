@@ -78,13 +78,6 @@ class OSHAWebHelpers(WebHelpers):
     """ Override Euphorie's webhelpers to add some more utility methods.
     """
 
-    @reify
-    def privacy_url(self):
-        """Return the URL to the current online help page. If we are in a
-        survey the help page will be located there. Otherwise the country
-        will be used as parent."""
-        return "%s/terms-and-conditions" % self._base_url()
-
     def get_language(self):
         """ """
         context = aq_inner(self.context)

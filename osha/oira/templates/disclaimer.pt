@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      i18n:domain="euphorie"
+      meta:interpolation="true"
+      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers">
+  <head>
+    <title i18n:translate="title_tool">OiRA</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <metal:css use-macro="webhelpers/macros/css"/>
+  </head>
+  <body>
+    <h1 i18n:translate="header_disclaimer">Disclaimer of Liability</h1>
+
+    <p i18n:translate="disclaimer_foreign_websites">
+        This tool contains links to other websites which are not are not under the
+        control of the European Agency for Safety and Health and the organisations
+        involved. The Agency and the organisations involved accept no liability in
+        respect of the content of these websites.
+    </p>
+
+    <p i18n:translate="disclaimer_tool_information">
+        The European Agency for Safety and Health at Work and the organisations
+        involved will not be liable for any false, inaccurate, inappropriate or
+        incomplete information stored in the OiRA tool or any other damages as a result
+        of using the software.
+    </p>
+
+    <p i18n:translate="disclaimer_risk_coverage">
+        Moreover, an OiRA tool is not intended to cover all the risks of every
+        workplace but to help you put the risk assessment process into practice. For
+        the OiRA tool to be fully effective it needs to be adapted to the context of
+        your particular enterprise - some items might need to be added others omitted
+        if they are not relevant. For practical and analytical reasons, the tool presents 
+        problems/hazards separately, but in workplaces they may be intertwined. Therefore 
+        interactions between the different problems or risk factors identified must be taken 
+        into account. Therefore, EU-OSHA does not accept any liability for damages and
+        claims in case a tool does not cover all risks of a given sector or the
+        unavailability of the function of the OiRA tools to print evaluation and action
+        reports. The Agency and the organisations involved in the production of the
+        OiRA tool do not accept any liability for damages and claims arising out of the
+        use or inability to use the tool and the data stored therein. The use of the
+        tool does not exempt the employer from having a written, accurate and up-dated
+        risk assessment to fulfill the relevant obligations under national law.
+    </p>
+
+    <ul id="navigation">
+      <metal:home use-macro="webhelpers/macros/homelink"/>
+      <li><a href="${webhelpers/help_url}#authentication" i18n:translate="navigation_help">Help</a></li>
+    </ul>
+    <metal:css use-macro="webhelpers/macros/appendix"/>
+    <metal:css use-macro="webhelpers/macros/javascript"/>
+    <tal:block replace="tile:client-analytics"/>
+  </body>
+</html>
+

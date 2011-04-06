@@ -1,8 +1,9 @@
 from Acquisition import aq_inner
 from zope.component import getMultiAdapter
 from Products.CMFCore.utils import getToolByName
-from Products.ZCatalog.ZCatalog import ZCatalog
+from euphorie.client.sector import IClientSector
 from euphorie.client.utils import WebHelpers
+from euphorie.content.survey import ISurvey
 from euphorie.decorators import reify
 from osha.oira.config import lang_dict # Used in templates...
 
@@ -119,30 +120,26 @@ class OSHAWebHelpers(WebHelpers):
         catalog = getToolByName(context, 'portal_catalog')
         # Only the countries in the client obj should be considered, as the
         # others are not accessible
-        for country_id in client.objectIds():
-
-            country = sectorsfolder._getOb(country_id)
+        for country in client.objectValues():
             langs = {}
-            surveys = ZCatalog.searchResults(
-                        catalog,
-                        portal_type='euphorie.survey',
-                        path='/'.join(country.getPhysicalPath())
-                        )
-            if not surveys:
-                continue
-
-            for s in surveys:
-                survey = s._unrestrictedGetObject()
-                # XXX: We strip out the country code to keep things simpler.
-                # Otherwise we will have the same language apearing multiple
-                # times on the front page if the surveys are set in different
-                # variants of the same language code.
-                langs[survey.language.split('-')[0].strip()] = 'dummy'
-                
+            for sector in country.objectValues():
+                if not IClientSector.providedBy(sector):
+                    continue
+                for survey in sector.objectValues():
+                    if not ISurvey.providedBy(survey):
+                        continue
+                    if getattr(survey, "preview", False):
+                        continue
+                    # XXX: We strip out the country code to keep things simpler.
+                    # Otherwise we will have the same language apearing multiple
+                    # times on the front page if the surveys are set in different
+                    # variants of the same language code.
+                    langs[survey.language.split('-')[0].strip()] = 'dummy'
+                    
             # surveys might exist without a language set.
             if langs.has_key(''):
                 del langs['']
-            
+        
             if langs:
                 resp[country.id] = langs.keys()
 

@@ -12,7 +12,6 @@ from zExceptions import NotFound
 from plonetheme.nuplone.utils import formatDate
 
 from rtfng.Elements import PAGE_NUMBER
-from rtfng.Elements import SECTION_PAGES
 from rtfng.PropertySets import BorderPropertySet
 from rtfng.PropertySets import FramePropertySet
 from rtfng.PropertySets import ParagraphPropertySet
@@ -22,7 +21,7 @@ from rtfng.Renderer import Renderer
 from rtfng.Styles import ParagraphStyle
 from rtfng.Styles import TextStyle
 from rtfng.document import character
-from rtfng.document.base import TAB
+from rtfng.document.base import TAB, LINE
 from rtfng.document.paragraph import Paragraph, Table, Cell
 from rtfng.document.section import Section
 
@@ -367,6 +366,62 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         section.append(table)
 
 
+    def addConsultationBox(self, section, document):
+        """ Add the consultation box that needs to be signed by the employer
+            and workers.
+        """
+        ss = document.StyleSheet
+        styles = document.StyleSheet.ParagraphStyles
+        thin_edge  = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
+        t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
+
+        table = Table(9500)
+        thin_edge  = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
+        no_edge = BorderPropertySet(width=0, colour=ss.Colours.White)
+        p = Paragraph(
+                styles.Heading3,
+                ParagraphPropertySet(alignment=ParagraphPropertySet.CENTER),
+                t(_("header_oira_report_consultation", 
+                    default="Consultation of workers"))
+                )
+        c = Cell(p, FramePropertySet(thin_edge, thin_edge, no_edge, thin_edge))
+        table.AddRow(c)
+
+        p = Paragraph(
+                styles.Normal,
+                ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
+                t(_("paragraph_oira_consulation_of_workers", 
+                    default="The undersigned hereby declare that the workers " 
+                            "have been consulted on the content of this "
+                            "document.")),
+                LINE
+                )
+        c = Cell(p, FramePropertySet(no_edge, thin_edge, no_edge, thin_edge))
+        table.AddRow(c)
+
+        p = Paragraph(
+                styles.Normal,
+                ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
+                )
+        employer = t(_("oira_consultation_employer", 
+                    default="On the behalf of the employer:"))
+        workers = t(_("oira_consultation_employer", 
+                    default="On the behalf of the workers:"))
+
+        p.append(employer, TAB, TAB, TAB, TAB, workers, LINE, LINE)
+        c = Cell(p, FramePropertySet(no_edge, thin_edge, no_edge, thin_edge))
+        table.AddRow(c)
+
+        p = Paragraph(
+                ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
+                t(_("oira_survey_date", default="Date:")),
+                LINE, LINE
+                )
+        c = Cell(p, FramePropertySet(no_edge, thin_edge, thin_edge, thin_edge))
+        table.AddRow(c)
+        section.append(table)
+
+
     def render(self):
         """ Mostly a copy of the render method in euphorie.client, but with
             some changes to also show unanswered risks and non-present risks.
@@ -441,6 +496,9 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 continue
             self.addReportNodes(document, nodes, heading, toc, body)
 
+        toc.append(Paragraph(LINE))
+        body.append(Paragraph(LINE))
+        self.addConsultationBox(body, document)
         document.Sections.append(body)
         # Until here...
 
@@ -526,7 +584,7 @@ def createIdentificationReportSection(document, survey, request):
 
 def createSection(document, survey, request):
     t = lambda txt: translate(txt, context=request)
-    section = Section(break_type=Section.PAGE, first_page_number=1 )
+    section = Section(break_type=Section.PAGE, first_page_number=1)
     footer_txt = t(_("report_survey_revision",
         default=u"This report was based on the survey '${title}' of revision date ${date}.",
         mapping={"title": survey.published[1],

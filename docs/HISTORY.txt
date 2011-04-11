@@ -1,11 +1,26 @@
 Changelog
 =========
 
-0.10 (unreleased)
+0.10 (2011-04-11)
 -----------------
 
 - #2560 Added a new schema field on the Sector obj, statistics_level.
-
+- #2699 Headers of the Legal boxes and also the risk headings in the evaluation
+        and identification reports must be in lower case for Greek. 
+- #2924 OiRA tools with policy risks that have been actioned, should not
+        appear in the "Risks that have NOT been evaluated and do NOT have action
+        plans", but instead in the top section.
+- #2964 Make sure that the logo is visible on the last report page
+- #2611 Lots of changes to the final download report 
+- #3002 the word "survey" should not be used anymore
+- #2989 Final HTML report headers were dodgy in IE7
+- #2914 The Hairdressers in Cyprus tool must be shown when viewing the Swedish sector in English
+- #2885 String at the bottom of the final report changed.
+        Risks that have been identified as not present should be stated affirmatively. 
+        Risks must have their priorities indicated (if set)
+- #2560 Added admin-edit form and statistics level field on sectors
+- #2752 Fixed default color for published surveys
+- #2623 Empty legal boxes should not be displayed.
 
 0.9 (2011-03-10)
 ----------------

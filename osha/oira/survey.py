@@ -129,6 +129,18 @@ class OSHAActionPlanMixin():
         self.risk_not_present_nodes=query.all()
 
 
+def node_title(node, zodbnode):
+    # 2885: Non-present risks and unanswered risks are shown affirmatively,
+    # i.e 'title'
+    if node.type!="risk" or node.identification in [u"n/a", u"yes", None]:
+        return node.title
+    # The other two groups of risks are shown negatively, i.e
+    # 'problem_description'
+    if zodbnode.problem_description and zodbnode.problem_description.strip():
+        return zodbnode.problem_description
+    return node.title
+
+
 class OSHAActionPlanReportView(report.ActionPlanReportView, OSHAActionPlanMixin):
     """
     Overrides the original ActionPlanReportView in euphorie.client.survey.py
@@ -149,6 +161,9 @@ class OSHAActionPlanReportView(report.ActionPlanReportView, OSHAActionPlanMixin)
         super(OSHAActionPlanReportView, self).update()
         self._extra_updates()
 
+    def title(self, node, zodbnode):
+        return node_title(node, zodbnode)
+
     def risk_status(self, node, zodbnode):
         """ """
         if node.postponed or not node.identification:
@@ -161,6 +176,7 @@ class OSHAActionPlanReportView(report.ActionPlanReportView, OSHAActionPlanMixin)
             elif node.action_plans == []:
                 return "unevaluated"
             return "present"
+
 
 
 class OSHAIdentificationReport(report.IdentificationReport):
@@ -237,19 +253,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 }
         for node in nodes:
             zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
-
-            if node.type!="risk" or node.identification in [u"n/a", u"yes"]:
-                title =  node.title
-            elif zodb_node.problem_description and zodb_node.problem_description.strip():
-                title =  zodb_node.problem_description
-            else:
-                title = node.title
-
-            # if node.type == "module":
-            #     p = Paragraph(ss.ParagraphStyles.Normal, toc_props)
-            #     p.append(character.Text(title, TextPropertySet(italic=True)))
-            #     toc.append(p)
-
+            title = node_title(node, zodb_node)
             thin_edge  = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
             if node.depth == 1:
                 p = Paragraph(
@@ -286,9 +290,8 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                             )
                 body.append(Paragraph(""))
 
-            # XXX: #2611 Seems this is not wanted, make sure before removing...
-            # if node.comment and node.comment.strip():
-            #     body.append(Paragraph(styles.Comment, node.comment))
+            if node.comment and node.comment.strip():
+                body.append(Paragraph(styles.Comment, node.comment))
 
             for (idx, measure) in enumerate(node.action_plans):
                 if not measure.action_plan:

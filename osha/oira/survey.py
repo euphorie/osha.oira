@@ -567,18 +567,26 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
 
 
 def createIdentificationReportSection(document, survey, request):
-    t=lambda txt: translate(txt, context=request)
-    footer=t(_("report_identification_revision",
-        default=u"This document was based on the OiRA Tool '${title}' of "
-                u"revision date ${date}.",
-        mapping={"title": survey.published[1],
-                 "date": formatDate(request, survey.published[2])}))
-    # rtfng does not like unicode footers
-    footer=Paragraph(document.StyleSheet.ParagraphStyles.Footer,
-            "".join(["\u%s?" % str(ord(e)) for e in footer]))
+    t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=request)])
+
+    footer_txt = t(_("report_identification_revision",
+            default=u"This document was based on the OiRA Tool '${title}' of "
+                    u"revision date ${date}.",
+            mapping={"title": survey.published[1],
+                    "date": formatDate(request, survey.published[2])}))
     section = Section()
-    section.Header.append(Paragraph(
-        document.StyleSheet.ParagraphStyles.Footer, SessionManager.session.title))
+    section.Header.append(
+            Paragraph(
+                document.StyleSheet.ParagraphStyles.Footer, 
+                SessionManager.session.title)
+            )
+    pp = ParagraphPropertySet
+    footer = Table(9000, 500)
+    c1 = Cell(Paragraph(document.StyleSheet.ParagraphStyles.Footer,
+                pp(alignment=pp.LEFT),
+                footer_txt))
+    c2 = Cell(Paragraph(pp(alignment=pp.RIGHT), PAGE_NUMBER))
+    footer.AddRow(c1, c2)
     section.Footer.append(footer)
     section.SetBreakType(section.PAGE)
     document.Sections.append(section)
@@ -586,7 +594,7 @@ def createIdentificationReportSection(document, survey, request):
 
 
 def createSection(document, survey, request):
-    t = lambda txt: translate(txt, context=request)
+    t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=request)])
     section = Section(break_type=Section.PAGE, first_page_number=1)
     footer_txt = t(_("report_survey_revision",
         default=u"This report was based on the survey '${title}' of revision date ${date}.",
@@ -599,7 +607,6 @@ def createSection(document, survey, request):
                 survey.published[1]))
 
     pp = ParagraphPropertySet
-
     header_props = pp(alignment=pp.RIGHT)
     c2 = Cell(Paragraph(
                 document.StyleSheet.ParagraphStyles.Footer, 
@@ -612,7 +619,7 @@ def createSection(document, survey, request):
     # rtfng does not like unicode footers
     c1 = Cell(Paragraph(document.StyleSheet.ParagraphStyles.Footer,
                 pp(alignment=pp.LEFT),
-                "".join(["\u%s?" % str(ord(e)) for e in footer_txt])))
+                footer_txt))
 
     c2 = Cell(Paragraph(pp(alignment=pp.RIGHT), PAGE_NUMBER))
     footer.AddRow(c1, c2)

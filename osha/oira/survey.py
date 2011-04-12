@@ -568,19 +568,27 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
 
 def createIdentificationReportSection(document, survey, request):
     t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=request)])
+    section = Section()
 
     footer_txt = t(_("report_identification_revision",
             default=u"This document was based on the OiRA Tool '${title}' of "
                     u"revision date ${date}.",
             mapping={"title": survey.published[1],
                     "date": formatDate(request, survey.published[2])}))
-    section = Section()
-    section.Header.append(
-            Paragraph(
+    header = Table(4750, 4750)
+    c1 = Cell(Paragraph(
                 document.StyleSheet.ParagraphStyles.Footer, 
-                SessionManager.session.title)
-            )
+                SessionManager.session.title))
+
     pp = ParagraphPropertySet
+    header_props = pp(alignment=pp.RIGHT)
+    c2 = Cell(Paragraph(
+                document.StyleSheet.ParagraphStyles.Footer, 
+                header_props,
+                formatDate(request, datetime.today())))
+    header.AddRow(c1, c2)
+    section.Header.append(header)
+
     footer = Table(9000, 500)
     c1 = Cell(Paragraph(document.StyleSheet.ParagraphStyles.Footer,
                 pp(alignment=pp.LEFT),

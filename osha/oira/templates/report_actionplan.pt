@@ -210,7 +210,7 @@
 
 <tal:if define="unanswered_nodes view/unanswered_nodes"
         condition="unanswered_nodes">
-<h2 i18n:translate="header_unanswered_risks">Risks that have been "parked" and are still to be dealt with:</h2>
+<h2 i18n:translate="header_unanswered_risks">Hazards/problems that have been "parked" and are still to be dealt with</h2>
 
 <p i18n:translate="desc_unanswered_risks">
     The following risks have not yet been answered. Please do so at the soonest possibility.
@@ -248,7 +248,7 @@
 
 <tal:if define="risk_not_present_nodes view/risk_not_present_nodes"
         condition="risk_not_present_nodes">
-<h2 i18n:translate="header_risks_not_present">Risks that are not present in your organisation:</h2>
+<h2 i18n:translate="header_risks_not_present">Hazards/problems that are not present in your organisation</h2>
 <tal:block 
         define="identification_url python:webhelpers.survey_url(phase='identification')"
         repeat="node risk_not_present_nodes">

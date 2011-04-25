@@ -48,7 +48,7 @@
     <li>
         <em>
         <strong tal:condition="view/unactioned_nodes" 
-            i18n:translate="header_unevaluated_risks">Risks that have been identified but NOT evaluated and do NOT have an Action Plan
+            i18n:translate="header_unevaluated_risks">Risks that have been identified but do NOT have an Action Plan
         </strong>
         </em>
     </li>
@@ -168,7 +168,7 @@
 </tal:if>
 
 <tal:if condition="view/unactioned_nodes">
-<h2 i18n:translate="header_unevaluated_risks">Risks that have been identified but NOT evaluated and do NOT have an Action Plan:</h2>
+<h2 i18n:translate="header_unevaluated_risks">Risks that have been identified but do NOT have an Action Plan:</h2>
 <tal:block repeat="node view/unactioned_nodes">
     <tal:module condition="python:node.type!='risk'">
         <tal:tag replace="structure python:'&lt;h%s id=\'node-%s\'&gt;' % (node.depth+1, str(node.id)+'-unevaluated')"/>

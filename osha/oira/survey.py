@@ -487,7 +487,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             t(_("header_present_risks", 
                 default=u"Risks that have been identified, evaluated and have an Action Plan")),
             t(_("header_unevaluated_risks", 
-                default=u"Risks that have been identified but NOT evaluated and do NOT have an Action Plan")),
+                default=u"Risks that have been identified but do NOT have an Action Plan")),
             t(_("header_unanswered_risks",
                 default=u'Hazards/problems that have been "parked" and are still to be dealt with')),
             t(_("header_risks_not_present",

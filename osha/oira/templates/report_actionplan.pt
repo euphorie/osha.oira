@@ -37,22 +37,22 @@
 <ol class="toc">
     <li>
         <em>
-        <strong tal:condition="view/evaluated_nodes" 
+        <strong tal:condition="view/actioned_nodes" 
             i18n:translate="header_present_risks">Risks that have been identified, evaluated and have an Action Plan
         </strong>
         </em>
     </li>
-    <tal:node repeat="node view/evaluated_nodes">
+    <tal:node repeat="node view/actioned_nodes">
         <li tal:condition="python:node.depth==1 and node.type!='risk'"><a href="#node-${node/id}-evaluated">${node/title}</a></li>
     </tal:node>
     <li>
         <em>
-        <strong tal:condition="view/unevaluated_nodes" 
+        <strong tal:condition="view/unactioned_nodes" 
             i18n:translate="header_unevaluated_risks">Risks that have been identified but NOT evaluated and do NOT have an Action Plan
         </strong>
         </em>
     </li>
-    <tal:node repeat="node view/unevaluated_nodes">
+    <tal:node repeat="node view/unactioned_nodes">
         <li tal:condition="python:node.depth==1 and node.type!='risk'"><a href="#node-${node/id}-unevaluated">${node/title}</a></li>
     </tal:node>
     <li>
@@ -77,9 +77,9 @@
     </tal:node>
 </ol>
 
-<tal:if condition="view/evaluated_nodes">
+<tal:if condition="view/actioned_nodes">
 <h2 i18n:translate="header_present_risks">Risks that have been identified, evaluated and have an Action Plan:</h2>
-<tal:block repeat="node view/evaluated_nodes">
+<tal:block repeat="node view/actioned_nodes">
     <tal:module condition="python:node.type!='risk'">
         <tal:tag replace="structure python:'&lt;h%s id=\'node-%s\'&gt;' % (node.depth+1, str(node.id)+'-evaluated')"/>
         <a href="${survey_url}/${python:'/'.join(node.short_path)}">${node/number} ${node/title}</a>
@@ -167,9 +167,9 @@
 </tal:block>
 </tal:if>
 
-<tal:if condition="view/unevaluated_nodes">
+<tal:if condition="view/unactioned_nodes">
 <h2 i18n:translate="header_unevaluated_risks">Risks that have been identified but NOT evaluated and do NOT have an Action Plan:</h2>
-<tal:block repeat="node view/unevaluated_nodes">
+<tal:block repeat="node view/unactioned_nodes">
     <tal:module condition="python:node.type!='risk'">
         <tal:tag replace="structure python:'&lt;h%s id=\'node-%s\'&gt;' % (node.depth+1, str(node.id)+'-unevaluated')"/>
         <a href="${survey_url}/${python:'/'.join(node.short_path)}">${node/number} ${node/title}</a>

@@ -108,20 +108,16 @@ class OSHAActionPlanMixin():
         """ Provides the following extra attributes (as per #1517, #1518):
             - unanswered_risk_nodes
             - not_present_risk_nodes
-            - unevaluated_nodes
-            - evaluated_nodes
+            - unactioned_nodes
+            - actioned_nodes
 
             Place in a separate method so that OSHAActionPlanReportDownload can call it.
         """
         if survey.redirectOnSurveyUpdate(self.request):
             return
 
-        # I would have prefered to get the evaluated and unevaluated nodes via 
-        # SQLAlchemy, but querying for action_plans (via any()) didn't seem 
-        # to work, and in any case, a node might have an action plan that 
-        # isn't fully populated yet!
-        self.evaluated_nodes = utils.get_evaluated_nodes(self.nodes) 
-        self.unevaluated_nodes = utils.get_unevaluated_nodes(self.nodes) 
+        self.actioned_nodes = utils.get_actioned_nodes(self.nodes) 
+        self.unactioned_nodes = utils.get_unactioned_nodes(self.nodes) 
         
         session=Session()
         query=session.query(model.SurveyTreeItem)\
@@ -498,8 +494,8 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 default=u"Hazards/problems that are not present in your organisation"))
             ]
         nodes = [
-            self.evaluated_nodes,
-            self.unevaluated_nodes,
+            self.actioned_nodes,
+            self.unactioned_nodes,
             self.unanswered_nodes,
             self.risk_not_present_nodes,
             ]

@@ -24,54 +24,53 @@ def remove_empty_modules(ls):
     return ls
 
 
-def get_unevaluated_nodes(ls):
+def get_unactioned_nodes(ls):
     """ Takes a list of modules and risks and removes all risks that have *not* 
-        been evaluated and actioned.
+        actioned (i.e does not have at least one valid action plan)
+        Also remove all modules that have lost all their risks in the process.
 
-        Also remove all modules that have lost all their risks in the pocess
+        See https://syslab.com/proj/issues/2885
     """
-    unevaluated = []
+    unactioned = []
     for n in ls:
         if n.type == 'module':
-            unevaluated.append(n)
+            unactioned.append(n)
 
         elif n.type == 'risk':
-            # 2924: Policy risks do not get evaluated (but require action plans)
             if not n.action_plans:
-                unevaluated.append(n)
-            elif n.probability == 0 and n.risk_type != 'policy':
-                unevaluated.append(n)
-            elif len(n.action_plans):
+                unactioned.append(n)
+            else:
                 # It's possible that there is an action plan object, but
-                # it's not yet fully populated
+                # that it's not yet fully populated
                 if n.action_plans[0] == None or \
                         n.action_plans[0].action_plan == None:
-                    unevaluated.append(n)
+                    unactioned.append(n)
 
-    unevaluated = remove_empty_modules(unevaluated)
-    return [u for u in unevaluated if u != None]
+    unactioned = remove_empty_modules(unactioned)
+    return [u for u in unactioned if u != None]
 
 
-def get_evaluated_nodes(ls):
+def get_actioned_nodes(ls):
     """ Takes a list of modules and risks and removes all risks that have been
-        evaluated and actioned.
+        actioned (i.e has at least one valid action plan).
+        Also remove all modules that have lost all their risks in the process
 
-        Also remove all modules that have lost all their risks in the pocess
+        See https://syslab.com/proj/issues/2885
     """
-    evaluated = []
+    actioned = []
     for n in ls:
         if n.type == 'module':
-            evaluated.append(n)
+            actioned.append(n)
 
-        if n.type == 'risk' and (n.probability != 0 or n.risk_type == 'policy') and len(n.action_plans):
+        if n.type == 'risk' and len(n.action_plans):
                 # It's possible that there is an action plan object, but
                 # it's not yet fully populated
                 plans = [p.action_plan for p in n.action_plans]
                 if plans[0] != None:
-                    evaluated.append(n)
+                    actioned.append(n)
 
-    evaluated = remove_empty_modules(evaluated)
-    return [e for e in evaluated if e != None]
+    actioned = remove_empty_modules(actioned)
+    return [e for e in actioned if e != None]
 
 
 class OSHAWebHelpers(WebHelpers):

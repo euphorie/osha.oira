@@ -6,9 +6,10 @@ from Acquisition import aq_inner
 from five import grok
 from sqlalchemy import sql
 from z3c.saconfig import Session
-from zope.i18n import translate
-from zope.component import getMultiAdapter
 from zExceptions import NotFound
+from zope.component import getMultiAdapter
+from zope.i18n import translate
+from plonetheme.nuplone.skin.interfaces import NuPloneSkin
 from plonetheme.nuplone.utils import formatDate
 
 from rtfng.Elements import PAGE_NUMBER
@@ -27,6 +28,7 @@ from rtfng.document.section import Section
 
 from euphorie.client import survey, report
 from euphorie.client.session import SessionManager
+from euphorie.content.survey import View as SurveyView
 
 from osha.oira import utils
 from osha.oira import model
@@ -41,6 +43,14 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
             "evaluation": interfaces.IOSHAEvaluationPhaseSkinLayer,
             "actionplan": interfaces.IOSHAActionPlanPhaseSkinLayer,
             "report": interfaces.IOSHAReportPhaseSkinLayer, }
+
+
+class OSHASurveyView(SurveyView):
+    grok.layer(NuPloneSkin)
+    grok.template("survey_view")
+
+    def modules_and_profile_questions(self):
+        return [self._morph(child) for child in self.context.values()] 
 
 
 class OSHAReportView(report.ReportView):

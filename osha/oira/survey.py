@@ -28,6 +28,7 @@ from rtfng.document.section import Section
 
 from euphorie.client import survey, report
 from euphorie.client.session import SessionManager
+from euphorie.content.profilequestion import IProfileQuestion
 from euphorie.content.survey import View as SurveyView
 
 from osha.oira import utils
@@ -51,6 +52,17 @@ class OSHASurveyView(SurveyView):
 
     def modules_and_profile_questions(self):
         return [self._morph(child) for child in self.context.values()] 
+
+    def _morph(self, child):
+        state=getMultiAdapter(
+                    (child, self.request), 
+                    name="plone_context_state")
+
+        return dict(id=child.id,
+                    title=child.title,
+                    url=state.view_url(),
+                    is_profile_question=IProfileQuestion.providedBy(child))
+
 
 
 class OSHAReportView(report.ReportView):

@@ -33,7 +33,11 @@
 
       <tal:children condition="python:children">
         <ol class="${python:'sortable' if can_edit and len(children)&gt;1 else None}" tal:condition="python:children">
-          <li tal:repeat="child children" id="child-${child/id}"><a href="${child/url}">${child/title}</a></li>
+            <li tal:repeat="child children" id="child-${child/id}">
+                <img tal:condition="not:child/is_profile_question" src="++resource++osha.oira.images/folder_icon.png"/>
+                <img tal:condition="child/is_profile_question" src="++resource++osha.oira.images/question.png"/>
+                <a href="${child/url}">${child/title}</a>
+            </li>
         </ol>
       </tal:children>
     </tal:block>

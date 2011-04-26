@@ -1,4 +1,5 @@
 import logging
+import zExceptions
 from five import grok
 from zope import schema
 from zope.component import getUtility
@@ -14,6 +15,7 @@ from plone.autoform.interfaces import IFormFieldProvider
 from plonetheme.nuplone.skin.interfaces import NuPloneSkin
 from plonetheme.nuplone.skin import actions
 from plonetheme.nuplone.utils import getPortal
+from plonetheme.nuplone.utils import checkPermission
 from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.content import sector
 from euphorie.content import MessageFactory as _
@@ -97,6 +99,9 @@ class Delete(actions.Delete):
     grok.context(sector.ISector)
 
     def verify(self, container, context):
+        if not checkPermission(container, "Delete objects"):
+            raise zExceptions.Unauthorized
+
         flash = IStatusMessage(self.request).addStatusMessage
         sector = context
         country = container

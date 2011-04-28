@@ -48,7 +48,6 @@ class Delete(actions.Delete):
         if surveygroup.id not in cl_sector:
             return True
 
-        count = 0
         surveys = [s for s in cl_sector[surveygroup.id].values() if s.id != 'preview']
         if surveys:
             flash(

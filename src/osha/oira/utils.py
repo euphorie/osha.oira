@@ -108,7 +108,6 @@ class OSHAWebHelpers(WebHelpers):
             return []
 
         resp = {}
-        catalog = getToolByName(context, 'portal_catalog')
         # Only the countries in the client obj should be considered, as the
         # others are not accessible
         for country in client.objectValues():

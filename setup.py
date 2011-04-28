@@ -10,9 +10,8 @@ tests_require = [
 setup(name='osha.oira',
       version=version,
       description="'EU-OSHA customisations for Euphorie/OiRA'",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
+      long_description=open("README.rst").read() + "\n" +
+                       open(os.path.join("docs", "changes.rst")).read(),
       classifiers=[
         "Framework :: Plone",
         "License :: OSI Approved :: GNU General Public License (GPL)",

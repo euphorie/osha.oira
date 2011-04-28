@@ -4,7 +4,7 @@ Changelog
 0.12 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Restructure package to faciliate automated tested.
 
 
 0.11 (2011-04-12)

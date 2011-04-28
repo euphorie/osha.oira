@@ -1,9 +1,3 @@
-import unittest
-from unittest import makeSuite
-
-from zope.testing import doctestunit
-from zope.component import testing
-
 from Testing.ZopeTestCase import TestCase
 from osha.oira import utils
 
@@ -97,33 +91,3 @@ class TestUtils(TestCase):
         nodes = [m('1', 1), r('1.1', 2, [ap]), r('1.2', 3, [ap]), m('2', 1), m('3', 2), r('3.1', 3, [ap])]
         actioned_nodes = utils.get_actioned_nodes(nodes)
         self.assertEquals([n.id for n in actioned_nodes], ['1', '1.1', '1.2', '2', '3', '3.1'])
-
-
-
-
-
-def test_suite():
-    suite = unittest.TestSuite([
-        # Unit tests for your API
-        doctestunit.DocFileSuite(
-            'README.txt', package='osha.oira',
-            setUp=testing.setUp, tearDown=testing.tearDown),
-
-        # doctestunit.DocTestSuite(
-        #     module='osha.oira.mymodule',
-        #     setUp=testing.setUp, tearDown=testing.tearDown),
-
-        # Integration tests that use ZopeTestCase
-        #ztc.ZopeDocFileSuite(
-        #    'README.txt', package='osha.oira',
-        #    setUp=testing.setUp, tearDown=testing.tearDown),
-
-        #ztc.FunctionalDocFileSuite(
-        #    'browser.txt', package='osha.oira'),
-
-        ])
-    suite.addTest(makeSuite(TestUtils))
-    return suite
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')

@@ -2,7 +2,7 @@ from Acquisition import aq_inner
 from zope.component import getMultiAdapter
 from five import grok
 from euphorie.client import risk
-import interfaces
+from osha.oira import interfaces
 
 grok.templatedir("templates")
 

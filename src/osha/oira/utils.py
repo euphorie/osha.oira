@@ -4,7 +4,6 @@ from Products.CMFCore.utils import getToolByName
 from euphorie.client.sector import IClientSector
 from euphorie.client.utils import WebHelpers
 from euphorie.content.survey import ISurvey
-from euphorie.decorators import reify
 from osha.oira.config import lang_dict # Used in templates...
 
 def remove_empty_modules(ls):

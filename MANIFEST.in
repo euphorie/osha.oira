@@ -1,0 +1,12 @@
+include *.rst
+recursive-include src/osha/oira *.zcml
+recursive-include src/osha/oira/locales *.mo
+recursive-include src/osha/oira/locales *.po
+graft docs
+prune docs/.build
+graft src/osha/oira/profiles
+graft src/osha/oira/browser/images
+graft src/osha/oira/browser/javascripts
+graft src/osha/oira/browser/stylesheets
+graft src/osha/oira/templates
+graft src/osha/oira/tiles/templates

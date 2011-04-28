@@ -165,8 +165,22 @@ msgstr ""
 "management process cannot be started and appropriate preventive measures are "
 "unlikely to be found or put in place."
 
+#. Default: "In order to tailor the risk assessment to your organisation you may be asked to:"
+#: osha.oira:/templates/profile.pt:18
+msgid "expl_profile"
+msgstr ""
+
+#. Default: "select or skip situation(s) relevant or not to your business activity and tick the box(es) if appropriate"
+#: osha.oira:/templates/profile.pt:23
+msgid "expl_profile_bullet1"
+msgstr ""
+
+#. Default: "list multiple business units, or branches, or stores, etc. These related risks will be repeated for each name you have entered."
+#: osha.oira:/templates/profile.pt:27
+msgid "expl_profile_bullet2"
+msgstr ""
+
 #. Default: "OiRA Tools"
-#: euphorie/deployment/tiles/tabs.py:41
 msgid "nav_surveys"
 msgstr "OiRA Tools"
 
@@ -210,13 +224,13 @@ msgstr "OiRA Tool import"
 msgid "Survey version"
 msgstr "OiRA Tool version"
 
-#. Default: "add a new OiRA tool"
+#. Default: "add a new OiRA Tool"
 #: euphorie/content/templates/sector_view.pt:31
 #: euphorie/content/templates/sector_view.pt:16
 msgid "add_survey"
 msgstr "add a new OiRA Tool"
 
-#. Default: "The form will allow you to create a new OiRA tool."
+#. Default: "The form will allow you to create a new OiRA Tool."
 #: euphorie/content/templates/surveygroup_add.pt:9
 msgid "intro_add_surveygroup"
 msgstr "The form will allow you to create a new OiRA Tool."
@@ -438,10 +452,12 @@ msgstr ""
 "The implementation of preventive or protective measures in most cases is not "
 "cost free, therefore a cost can be calculated and included in your budget."
 
-#. Default: "Some information about you"
+#. Default: "You are about to print the report... please complete the optional form and then proceed."
 #: euphorie/client/templates/report_company.pt:18
 msgid "hader_company_details"
-msgstr "You are about to print the report... please complete the optional form and then proceed."
+msgstr ""
+"You are about to print the report... please complete the optional form and "
+"then proceed."
 
 #. Default: "You are free to provide the information below. This information is
 #. meant to improve the tools and the services provided. This data will not appear in the report."
@@ -469,7 +485,9 @@ msgstr "Sucessfully published the OiRA tool"
 #: euphorie/client/publish.py:261
 msgid ""
 "Succesfully created a preview for the survey. It can be accessed at ${url} ."
-msgstr "Succesfully created a new preview for the OiRA tool. It can be accessed at ${url} ."
+msgstr ""
+"Succesfully created a new preview for the OiRA tool. It can be accessed at "
+"${url} ."
 
 #. Default: "Publish the selected OiRA Tool live with its latest changes."
 #: euphorie/deployment/tiles/templates/versions.pt:20
@@ -674,7 +692,7 @@ msgstr ""
 "You still have unanswered risks. Please see the list at the bottom of this "
 "page."
 
-#. Default: "Risks that have been identified, evaluated and have an Action Plan:"
+#. Default: "Risks that have been identified, evaluated and have an Action Plan"
 #: osha.oira:/survey.py:291
 msgid "header_present_risks"
 msgstr ""
@@ -816,6 +834,16 @@ msgstr ""
 msgid "filename_report_identification"
 msgstr "Tool contents for ${title}"
 
+#. Default: "OiRA Tool versions"
+#: osha.oira:/templates/surveygroup_view.pt:14
+msgid "header_sector_tool_version_list"
+msgstr ""
+
+#. Default: "Statistics Level"
+#: osha.oira:/sector.py:25
+msgid "label_statistics_level"
+msgstr ""
+
 #. Default: "This risk is not present in your organisation, but since the sector organisation considers this one of the priority risks it must be included in this report."
 #: osha.oira:/templates/webhelpers.pt:141
 #: osha.oira:/templates/report_actionplan.pt:322
@@ -825,10 +853,12 @@ msgstr ""
 "organisation considers this one of the priority risks it must be included in "
 "this report."
 
+#. Default: A version of an OiRA tool 
 #: euphorie/content/profiles/default/types/euphorie.survey.xml:8
 msgid "A version of a survey."
 msgstr "A version of an OiRA tool."
 
+#. Default: An OiRA tool 
 #: euphorie/content/profiles/default/types/euphorie.surveygroup.xml:7
 msgid "A survey."
 msgstr "An OiRA Tool."
@@ -838,15 +868,23 @@ msgstr "An OiRA Tool."
 msgid "unpublish_confirm"
 msgstr "Are you sure you want to unpublish this OiRA tool?"
 
+#. Default: Are you sure you want to republish this survey? This will make all
+#. changes made public.
+#: euphorie/client/templates/publish.pt:21
+msgid "intro_publish_survey_published"
+msgstr ""
+"Are you sure you want to republish this OiRA tool? This will make all "
+"changes made public."
+
 #. Default: Are you sure you want to create a preview of this OiRA tool? You can give
 #. the URL for the preview to others so they can test the OiRA tool. To access the
 #. preview a standard OiRA client login is required.
 #: euphorie/client/templates/preview.pt:17
 msgid "intro_preview"
 msgstr ""
-"Are you sure you want to create a preview of this OiRA tool? You can give"
-"the URL for the preview to others so that they can test the tool. To access the"
-"preview a standard OiRA client login is required."
+"Are you sure you want to create a preview of this OiRA tool? You can givethe "
+"URL for the preview to others so that they can test the tool. To access "
+"thepreview a standard OiRA client login is required."
 
 #. Default: Preview OiRA tool
 #: euphorie/client/templates/preview.pt:14
@@ -862,19 +900,24 @@ msgstr "After publication the OiRA tool will be available at ${url}."
 #. the current version.
 #: euphorie/client/templates/publish.pt:24
 msgid "intro_publish_other_survey_published"
-msgstr "Are you sure you want to publish this OiRA tool version? This will replace"
+msgstr ""
+"Are you sure you want to publish this OiRA tool version? This will replace"
 
 #. Default: Are you sure you want to republish this OiRA tool? This will make all
 #. changes made public.
 #: euphorie/client/templates/publish.pt:21
-msgid "intro_publish_survey_published"
-msgstr "Are you sure you want to republish this OiRA tool? This will make all changes made public."
+msgid "intro_publish_OiRA tool_published"
+msgstr ""
+"Are you sure you want to republish this OiRA tool? This will make all "
+"changes made public."
 
 #. Default: Are you sure you want to publish this OiRA tool? After publication the
 #. tool will appear in the online client and be accessible by all users.
 #: euphorie/client/templates/publish.pt:17
 msgid "intro_publish_first_time"
-msgstr "Are you sure you want to publish this OiRA tool? After publication the tool will appear in the online client and be accessible by all users."
+msgstr ""
+"Are you sure you want to publish this OiRA tool? After publication the tool "
+"will appear in the online client and be accessible by all users."
 
 #. Default: Publish OiRA tool
 #: euphorie/client/templates/publish.pt:14
@@ -885,13 +928,17 @@ msgstr "Publish OiRA Tool"
 #. in the OiRA tool will have to be merged into your session.
 #: euphorie/client/templates/updated.pt:19
 msgid "expl_update"
-msgstr "This OiRA tool has been updated. Before you can continue, any changes made in the tool will have to be merged into your session."
+msgstr ""
+"This OiRA tool has been updated. Before you can continue, any changes made "
+"in the tool will have to be merged into your session."
 
 #. Default: The title of this OiRA tool. This title is used in the tool overview in
 #. the clients.
 #: euphorie/content/surveygroup.py:37
 msgid "help_surveygroup_title"
-msgstr "The title of this OiRA tool. This title is used in the tool overview in the clients"
+msgstr ""
+"The title of this OiRA tool. This title is used in the tool overview in the "
+"clients"
 
 #. Default: This OiRA tool is now no longer available in the client.
 #: euphorie/content/surveygroup.py:222
@@ -912,10 +959,46 @@ msgstr "Import OiRA tool"
 #. start off with a copy of an existing OiRA tool.
 #: euphorie/deployment/tiles/templates/versions.pt:45
 msgid "help_create_new_version"
-msgstr "Start creating a new OiRA tool. You will be asked whether you want to start off with a copy of an existing OiRA tool."
+msgstr ""
+"Start creating a new OiRA tool. You will be asked whether you want to start "
+"off with a copy of an existing OiRA tool."
 
 #. Default: Remove this OiRA tool from the online client.
 #: euphorie/deployment/tiles/templates/versions.pt:21
 msgid "title_help_unpublished"
 msgstr "Remove this OiRA tool from the online client."
 
+#. Default: "Disclaimer of Liability"
+#: osha.oira:/templates/disclaimer.pt:17
+msgid "header_disclaimer"
+msgstr ""
+
+#. Default: "This tool contains links to other websites which are not are not under the control of the European Agency for Safety and Health and the organisations involved. The Agency and the organisations involved accept no liability in respect of the content of these websites.\302\240"
+#: osha.oira:/templates/disclaimer.pt:19
+msgid "disclaimer_other_websites"
+msgstr ""
+
+#. Default: "The European Agency for Safety and Health at Work and the organisations involved will not be liable for any false, inaccurate, inappropriate or incomplete information stored in the OiRA tool or any other damages as a result of using the software."
+#: osha.oira:/templates/disclaimer.pt:26
+msgid "disclaimer_tool_information"
+msgstr ""
+
+#. Default: "Moreover, an OiRA tool is not intended to cover all the risks of every workplace but to help you put the risk assessment process into practice. For the OiRA tool to be fully effective it needs to be adapted to the context of your particular enterprise - some items might need to be added others omitted if they are not relevant."
+#: osha.oira:/templates/disclaimer.pt:33
+msgid "disclaimer_risk_coverage"
+msgstr ""
+
+#. Default: "For practical and analytical reasons, the tool presents problems/hazards separately, but in workplaces they may be intertwined. Therefore interactions between the different problems or risk factors identified must be taken into account."
+#: osha.oira:/templates/disclaimer.pt:41
+msgid "disclaimer_interactions"
+msgstr ""
+
+#. Default: "Therefore, EU-OSHA does not accept any liability for damages and claims in case a tool does not cover all risks of a given sector."
+#: osha.oira:/templates/disclaimer.pt:48
+msgid "disclaimer_coverage_liability"
+msgstr ""
+
+#. Default: "Moreover, the Agency and the organisations involved in the production of the OiRA tool do not accept any liability for damages and claims arising out of the use or inability to use the tool and the data stored therein. Similarly, EU-OSHA does not accept any liability in case of unavailability of the function of the OiRA tools to print the report, recording the risk assessment automatically generated by the tool. Therefore, the employer has to make sure, at any time, to be in possession of a printed, accurate and up-dated risk assessment."
+#: osha.oira:/templates/disclaimer.pt:53
+msgid "disclaimer_printed_assesment"
+msgstr ""

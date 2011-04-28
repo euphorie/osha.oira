@@ -3,6 +3,10 @@ import os
 
 version = '0.12dev'
 
+tests_require = [
+          "Euphorie [tests]",
+      ]
+
 setup(name='osha.oira',
       version=version,
       description="'EU-OSHA customisations for Euphorie/OiRA'",
@@ -18,15 +22,21 @@ setup(name='osha.oira',
       author_email='thomas@syslab.com',
       url="'http://www.oira.osha.europa.eu/'",
       license='GPL',
-      packages=find_packages(exclude=['ez_setup']),
+      packages=find_packages('src'),
+      package_dir={"": "src"},
       namespace_packages=['osha'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'Euphorie',
           'plone.tiles',
           'collective.alerts',
       ],
+      tests_require=tests_require,
+      extras_require={
+        "tests" : tests_require,
+      },
       entry_points="""
       [z3c.autoinclude.plugin]
       target = plone

@@ -34,7 +34,7 @@ from euphorie.content.survey import View as SurveyView
 from osha.oira import utils
 from osha.oira import model
 from osha.oira import _
-from oisha.oira import interfaces
+from osha.oira import interfaces
 
 grok.templatedir("templates")
 

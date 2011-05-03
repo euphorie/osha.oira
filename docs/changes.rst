@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.12dev1 (2011-05-03)
----------------------
+0.12 (2011-05-03)
+-----------------
 
 - Restructure package to faciliate automated tested.
 - #2556 Backported the frontpage fixes from Cornelis.

@@ -19,35 +19,61 @@
   <body tal:define="client_url webhelpers/client_url">
     <h1 class="carousel">
       <span lang="bg" xml:lang="bg">Добре дошли</span><br />
-      <span lang="es" xml:lang="es">Benvenida</span><br />
       <span lang="cs" xml:lang="cs">Vítáme vás</span><br />
       <span lang="da" xml:lang="da">Velkommen</span><br />
       <span lang="de" xml:lang="de">Wilkommen</span><br />
       <span lang="el" xml:lang="el">Καλώς Ορίσατε</span><br />
       <span lang="en" xml:lang="en">Welcome</span><br />
+      <span lang="es" xml:lang="es">Benvenida</span><br />
+      <span lang="fi" xml:lang="fi">Tervetuloa</span><br />
       <span lang="fr" xml:lang="fr">Bienvenue</span><br />
-      <span lang="it" xml:lang="it">Benvenuto</span><br />
-      <span lang="lv" xml:lang="lv">Laipni lūdzam</span><br />
-      <span lang="lt" xml:lang="lt">Sveiki atvykę</span><br />
+      <span lang="hr" xml:lang="hr">Dobrodošli</span><br />
       <span lang="hu" xml:lang="hu">Üdvözlet</span><br />
+      <span lang="is" xml:lang="is">Velkomin</span><br />
+      <span lang="it" xml:lang="it">Benvenuto</span><br />
+      <span lang="lt" xml:lang="lt">Sveiki atvykę</span><br />
+      <span lang="lv" xml:lang="lv">Laipni lūdzam</span><br />
+      <span lang="mk" xml:lang="mk">Добредојдовте</span><br />
       <span lang="mt" xml:lang="mt">Merħba</span><br />
       <span lang="nl" xml:lang="nl">Welkom</span><br />
+      <span lang="nn" xml:lang="nn">Velkommen</span><br />
+      <span lang="no" xml:lang="no">Velkommen</span><br />
       <span lang="pl" xml:lang="pl">Witamy</span><br />
       <span lang="pt" xml:lang="pt">Bem-vindos</span><br />
       <span lang="ro" xml:lang="ro">Ghini vinit</span><br />
       <span lang="sk" xml:lang="sk">Vitajte</span><br />
       <span lang="sl" xml:lang="sl">Pozdravljeni</span>
-      <span lang="fi" xml:lang="fi">Tervetuloa</span><br />
+      <span lang="sq" xml:lang="sq">Mirë se vini</span><br />
+      <span lang="sr" xml:lang="sr">Добродошли</span><br />
       <span lang="sv" xml:lang="sv">Välkommen</span><br />
+      <span lang="tr" xml:lang="tr">Hoşgeldin</span><br />
     </h1>
+    <tal:block replace="tile:statusmessages"/>
+
+    <h2 class="fade">
+      <span lang="bg" xml:lang="bg">Държави, членки на ЕС</span><br />
+      <span lang="es" xml:lang="es">Estados miembros de la UE</span><br />
+      <span lang="cs" xml:lang="cs">Členské státy EU</span><br />
+      <span lang="da" xml:lang="da">EU medlemsstater</span><br />
+      <span lang="de" xml:lang="de">EU-Mitgliedstaaten</span><br />
+      <span lang="el" xml:lang="el">Κράτη μέλη της ΕΕ</span><br />
+      <span lang="en" xml:lang="en">EU Member States</span><br />
+      <span lang="fr" xml:lang="fr">États membres de l'UE</span><br />
+      <span lang="it" xml:lang="it">Stati membri dell'UE</span><br />
+      <span lang="lv" xml:lang="lv">ES dalībvalstis</span><br />
+      <span lang="lt" xml:lang="lt">ES valstybės narės</span><br />
+      <span lang="hu" xml:lang="hu">EU-tagállamok</span><br />
+      <span lang="mt" xml:lang="mt">L-Istati Membri ta' l-UE</span><br />
+      <span lang="nl" xml:lang="nl">EU-lidstaten</span><br />
+      <span lang="pl" xml:lang="pl">Państwa Członkowskie UE</span><br />
+      <span lang="pt" xml:lang="pt">Estados-Membros da UE</span><br />
+      <span lang="ro" xml:lang="ro">Statele membre ale UE</span><br />
+      <span lang="sk" xml:lang="sk">Členské štáty EÚ</span><br />
+      <span lang="sl" xml:lang="sl">Države članice EU</span><br />
+      <span lang="fi" xml:lang="fi">EU:n jäsenvaltiot</span><br />
+      <span lang="sv" xml:lang="sv">EU:s medlemsländer</span><br />
+    </h2>
     <ul class="countries">
-      <li class="at"
-          tal:attributes="class python: sectors_dict.get('at') and 'at' or 'at disabled'">
-        <tal:loop repeat="lang_code python:sectors_dict.get('at',[])">
-            <a href="${client_url}/at/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
-        </tal:loop>
-      </li>
       <li class="be"
           tal:attributes="class python: sectors_dict.get('be') and 'be' or 'be disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('be',[])">
@@ -59,13 +85,6 @@
           tal:attributes="class python: sectors_dict.get('bg') and 'bg' or 'bg disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('bg',[])">
             <a href="${client_url}/bg/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
-        </tal:loop>
-      </li>
-      <li class="cy"
-          tal:attributes="class python: sectors_dict.get('cy') and 'cy' or 'cy disabled'">
-        <tal:loop repeat="lang_code python:sectors_dict.get('cy',[])">
-            <a href="${client_url}/cy/?language=${lang_code}"
                tal:content="python:lang_dict.get(lang_code)">Language Name</a>
         </tal:loop>
       </li>
@@ -83,27 +102,6 @@
                tal:content="python:lang_dict.get(lang_code)">Language Name</a>
         </tal:loop>
       </li>
-      <li class="ee"
-          tal:attributes="class python: sectors_dict.get('ee') and 'ee' or 'ee disabled'">
-        <tal:loop repeat="lang_code python:sectors_dict.get('ee',[])">
-            <a href="${client_url}/ee/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
-        </tal:loop>
-      </li>
-      <li class="fi"
-          tal:attributes="class python: sectors_dict.get('fi') and 'fi' or 'fi disabled'">
-        <tal:loop repeat="lang_code python:sectors_dict.get('fi',[])">
-            <a href="${client_url}/fi/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
-        </tal:loop>
-      </li>
-      <li class="fr"
-          tal:attributes="class python: sectors_dict.get('fr') and 'fr' or 'fr disabled'">
-        <tal:loop repeat="lang_code python:sectors_dict.get('fr',[])">
-            <a href="${client_url}/fr/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
-        </tal:loop>
-      </li>
       <li class="de"
           tal:attributes="class python: sectors_dict.get('de') and 'de' or 'de disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('de',[])">
@@ -111,17 +109,10 @@
                tal:content="python:lang_dict.get(lang_code)">Language Name</a>
         </tal:loop>
       </li>
-      <li class="gr"
-          tal:attributes="class python: sectors_dict.get('gr') and 'gr' or 'gr disabled'">
-        <tal:loop repeat="lang_code python:sectors_dict.get('gr',[])">
-            <a href="${client_url}/gr/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
-        </tal:loop>
-      </li>
-      <li class="hu"
-          tal:attributes="class python: sectors_dict.get('hu') and 'hu' or 'hu disabled'">
-        <tal:loop repeat="lang_code python:sectors_dict.get('hu',[])">
-            <a href="${client_url}/hu/?language=${lang_code}"
+      <li class="ee"
+          tal:attributes="class python: sectors_dict.get('ee') and 'ee' or 'ee disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('ee',[])">
+            <a href="${client_url}/ee/?language=${lang_code}"
                tal:content="python:lang_dict.get(lang_code)">Language Name</a>
         </tal:loop>
       </li>
@@ -132,10 +123,38 @@
                tal:content="python:lang_dict.get(lang_code)">Language Name</a>
         </tal:loop>
       </li>
+      <li class="gr"
+          tal:attributes="class python: sectors_dict.get('gr') and 'gr' or 'gr disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('gr',[])">
+            <a href="${client_url}/gr/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li class="es"
+          tal:attributes="class python: sectors_dict.get('es') and 'es' or 'es disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('es',[])">
+            <a href="${client_url}/es/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li class="fr"
+          tal:attributes="class python: sectors_dict.get('fr') and 'fr' or 'fr disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('fr',[])">
+            <a href="${client_url}/fr/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
       <li class="it"
           tal:attributes="class python: sectors_dict.get('it') and 'it' or 'it disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('it',[])">
             <a href="${client_url}/it/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li class="cy"
+          tal:attributes="class python: sectors_dict.get('cy') and 'cy' or 'cy disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('cy',[])">
+            <a href="${client_url}/cy/?language=${lang_code}"
                tal:content="python:lang_dict.get(lang_code)">Language Name</a>
         </tal:loop>
       </li>
@@ -160,6 +179,13 @@
                tal:content="python:lang_dict.get(lang_code)">Language Name</a>
         </tal:loop>
       </li>
+      <li class="hu"
+          tal:attributes="class python: sectors_dict.get('hu') and 'hu' or 'hu disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('hu',[])">
+            <a href="${client_url}/hu/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
       <li class="mt"
           tal:attributes="class python: sectors_dict.get('mt') and 'mt' or 'mt disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('mt',[])">
@@ -171,6 +197,13 @@
           tal:attributes="class python: sectors_dict.get('nl') and 'nl' or 'nl disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('nl',[])">
             <a href="${client_url}/nl/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li class="at"
+          tal:attributes="class python: sectors_dict.get('at') and 'at' or 'at disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('at',[])">
+            <a href="${client_url}/at/?language=${lang_code}"
                tal:content="python:lang_dict.get(lang_code)">Language Name</a>
         </tal:loop>
       </li>
@@ -209,10 +242,10 @@
                tal:content="python:lang_dict.get(lang_code)">Language Name</a>
         </tal:loop>
       </li>
-      <li class="es"
-          tal:attributes="class python: sectors_dict.get('es') and 'es' or 'es disabled'">
-        <tal:loop repeat="lang_code python:sectors_dict.get('es',[])">
-            <a href="${client_url}/es/?language=${lang_code}"
+      <li class="fi"
+          tal:attributes="class python: sectors_dict.get('fi') and 'fi' or 'fi disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('fi',[])">
+            <a href="${client_url}/fi/?language=${lang_code}"
                tal:content="python:lang_dict.get(lang_code)">Language Name</a>
         </tal:loop>
       </li>
@@ -231,28 +264,185 @@
         </tal:loop>
       </li>
     </ul>
-<br/>
+
+    <h2>EFTA Countries</h2>
+    <ul class="countries">
+      <li class="is"
+          tal:attributes="class python: sectors_dict.get('is') and 'is' or 'is disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('is',[])">
+            <a href="${client_url}/is/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li class="li"
+          tal:attributes="class python: sectors_dict.get('li') and 'li' or 'li disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('li',[])">
+            <a href="${client_url}/li/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li class="no"
+          tal:attributes="class python: sectors_dict.get('no') and 'no' or 'no disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('no',[])">
+            <a href="${client_url}/no/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li class="ch"
+          tal:attributes="class python: sectors_dict.get('ch') and 'ch' or 'ch disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('ch',[])">
+            <a href="${client_url}/ch/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+    </ul>
+
+    <h2 class="fade">
+      <span lang="bg" xml:lang="bg">Страни кандидатки</span><br />
+      <span lang="es" xml:lang="es">Países candidatos</span><br />
+      <span lang="cs" xml:lang="cs">Kandidátské země</span><br />
+      <span lang="da" xml:lang="da">Kandidatlande</span><br />
+      <span lang="de" xml:lang="de">Kandidatenländer</span><br />
+      <span lang="el" xml:lang="el">Υποψήφιες χώρες</span><br />
+      <span lang="en" xml:lang="en">Candidate Countries</span><br />
+      <span lang="fr" xml:lang="fr">Pays candidats</span><br />
+      <span lang="it" xml:lang="it">Paesi candidati</span><br />
+      <span lang="lv" xml:lang="lv">Kandidātvalstis</span><br />
+      <span lang="lt" xml:lang="lt">Šalys kandidatės</span><br />
+      <span lang="hu" xml:lang="hu">Tagjelölt országok</span><br />
+      <span lang="mt" xml:lang="mt">Pajjiżi kandidati</span><br />
+      <span lang="nl" xml:lang="nl">Kandidaat-lidstaten</span><br />
+      <span lang="pl" xml:lang="pl">Kraje kandydujące</span><br />
+      <span lang="pt" xml:lang="pt">Países candidatos</span><br />
+      <span lang="ro" xml:lang="ro">Ţări candidate</span><br />
+      <span lang="sk" xml:lang="sk">Kandidátske krajiny</span><br />
+      <span lang="sl" xml:lang="sl">Države kandidatke</span><br />
+      <span lang="fi" xml:lang="fi">Ehdokasmaat</span><br />
+      <span lang="sv" xml:lang="sv">Kandidatländer</span><br />
+    </h2>
+    <ul class="countries">
+      <li tal:attributes="class python: sectors_dict.get('hr') and 'hr' or 'hr disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('hr',[])">
+            <a href="${client_url}/hr/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li tal:attributes="class python: sectors_dict.get('is') and 'is' or 'is disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('is',[])">
+            <a href="${client_url}/is/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li tal:attributes="class python: sectors_dict.get('mk') and 'mk' or 'mk disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('mk',[])">
+            <a href="${client_url}/mk/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li tal:attributes="class python: sectors_dict.get('me') and 'me' or 'me disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('me',[])">
+            <a href="${client_url}/me/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li tal:attributes="class python: sectors_dict.get('tr') and 'tr' or 'tr disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('tr',[])">
+            <a href="${client_url}/tr/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+    </ul>
+
+    <h2 class="fade">
+      <span lang="bg" xml:lang="bg">Потенциални кандидати</span><br />
+      <span lang="es" xml:lang="es">Candidatos potenciales</span><br />
+      <span lang="cs" xml:lang="cs">Potenciální kandidáti</span><br />
+      <span lang="da" xml:lang="da">Potentielle kandidater</span><br />
+      <span lang="de" xml:lang="de">Potenzielle Kandidatenländer</span><br />
+      <span lang="el" xml:lang="el">Potentsiaalsed kandidaadid</span><br />
+      <span lang="en" xml:lang="en">Potential Candidate Countries</span><br />
+      <span lang="fr" xml:lang="fr">Candidats potentiels</span><br />
+      <span lang="it" xml:lang="it">Potenziali candidati</span><br />
+      <span lang="lv" xml:lang="lv">Iespējamie kandidāti</span><br />
+      <span lang="lt" xml:lang="lt">Galimos kandidatės</span><br />
+      <span lang="hu" xml:lang="hu">Potenciális tagjelöltek</span><br />
+      <span lang="mt" xml:lang="mt">Kandidati potenzjali</span><br />
+      <span lang="nl" xml:lang="nl">Potentiële kandidaten</span><br />
+      <span lang="pl" xml:lang="pl">Potencjalni kandydaci do członkostwa</span><br />
+      <span lang="pt" xml:lang="pt">Candidatos potenciais</span><br />
+      <span lang="ro" xml:lang="ro">Ţări potenţial candidate</span><br />
+      <span lang="sk" xml:lang="sk">Potenciálni kandidáti</span><br />
+      <span lang="sl" xml:lang="sl">Morebitne kandidatke za širitev</span><br />
+      <span lang="fi" xml:lang="fi">Mahdolliset ehdokkaat</span><br />
+      <span lang="sv" xml:lang="sv">Potentiella kandidater</span><br />
+    </h2>
+    <ul class="countries">
+      <li tal:attributes="class python: sectors_dict.get('al') and 'al' or 'al disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('al',[])">
+            <a href="${client_url}/al/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li tal:attributes="class python: sectors_dict.get('ba') and 'ba' or 'ba disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('ba',[])">
+            <a href="${client_url}/ba/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li tal:attributes="class python: sectors_dict.get('cs') and 'cs' or 'cs disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('cs',[])">
+            <a href="${client_url}/cs/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+      <li tal:attributes="class python: sectors_dict.get('rs') and 'rs' or 'rs disabled'">
+        <tal:loop repeat="lang_code python:sectors_dict.get('rs',[])">
+            <a href="${client_url}/rs/?language=${lang_code}"
+               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+        </tal:loop>
+      </li>
+    </ul>
+    <!--[if lte IE 7]> <br/> <![endif]-->
+
     <ul id="navigation">
       <metal:home use-macro="webhelpers/macros/homelink"/>
     </ul>
     <metal:css use-macro="webhelpers/macros/appendix"/>
     <metal:css use-macro="webhelpers/macros/javascript"/>
-   <script type="text/javascript">
-// <![CDATA[
-    $(document).ready(function() {
-      $("h1")
-          .wrapInner("<div/>")
-          .jCarouselLite({auto: 1000,
-                          speed: 800,
-                          circular: true,
-                          visible: 1,
-                          listSelector: "div",
-                          itemSelector: "span",
-                          easing: "easeOutElastic"
-                          });
-    });
-// ]]>
-  </script>
+    <script type="text/javascript" meta:interpolation="false">
+    // <![CDATA[
+        $(document).ready(function() {
+            var h2_visible = 1,
+                h2_total = $("h2.fade:first span").size();
+
+            function swapH2() {
+                h2_visible = (h2_visible+1) % h2_total;
+
+                $("h2.fade").each(function() {
+                    var $headers = $("span", this),
+                        $next_visible = $headers.eq(h2_visible);
+                    $headers = $headers.not($next_visible);
+
+                    $headers.animate({opacity: 0});
+                    $next_visible.animate({opacity: 1});
+                });
+            }
+
+            $("h2.fade span:not(:first-child)").css({opacity: 0});
+            $("h1")
+                .wrapInner("<div/>")
+                .jCarouselLite({auto: 1000,
+                                speed: 800,
+                                circular: true,
+                                visible: 1,
+                                listSelector: "div",
+                                itemSelector: "span",
+                                easing: "easeOutElastic",
+                                beforeStart: swapH2
+                                });
+        });
+    // ]]>
+    </script>
   <tal:block replace="tile:client-analytics"/>
   </body>
 </html>

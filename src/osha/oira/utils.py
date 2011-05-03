@@ -1,6 +1,5 @@
 from Acquisition import aq_inner
 from zope.component import getMultiAdapter
-from Products.CMFCore.utils import getToolByName
 from euphorie.client.sector import IClientSector
 from euphorie.client.utils import WebHelpers
 from euphorie.content.survey import ISurvey

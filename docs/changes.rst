@@ -1,19 +1,23 @@
 Changelog
 =========
 
-0.12 (2011-05-03)
+0.12 (2011-05-05)
 -----------------
 
-- Restructure package to faciliate automated tested.
-- #2556 Backported the frontpage fixes from Cornelis.
+- Restructure package to faciliate automated tested. 
+- #2556 Backported the frontpage fixes from Cornelis. [jcbrand]
+- #2754 Modules should be movable before profile questions. [jcbrand]
+- #2611 Changed headings in the final report [jcbrand]
+- #2885 Risks that are not evaluated but do have action plans must be shown as
+  finalised. [jcbrand]
 
 
 0.11 (2011-04-12)
 -----------------
 
 - #2611 The identification report should also have page numbers in the bottom
-        right and the download date in the top right of each page.
-- #2885 Parked risks must also be shown affirmatively
+        right and the download date in the top right of each page. [jcbrand]
+- #2885 Parked risks must also be shown affirmatively [jcbrand]
 
 
 0.10 (2011-04-11)

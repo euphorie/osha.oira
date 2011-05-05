@@ -411,7 +411,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         p = Paragraph(
                 styles.Normal,
                 ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
-                t(_("paragraph_oira_consulation_of_workers", 
+                t(_("paragraph_oira_consultation_of_workers", 
                     default="The undersigned hereby declare that the workers " 
                             "have been consulted on the content of this "
                             "document.")),
@@ -426,7 +426,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 )
         employer = t(_("oira_consultation_employer", 
                     default="On the behalf of the employer:"))
-        workers = t(_("oira_consultation_employer", 
+        workers = t(_("oira_consultation_workers", 
                     default="On the behalf of the workers:"))
 
         p.append(employer, TAB, TAB, TAB, TAB, workers, LINE, LINE)

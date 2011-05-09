@@ -4,15 +4,15 @@
 
 """%(program)s: Extract all untranslated messages from a given po file and
 write them to a new po file.
-The "Default" translation will be written into the msgstr field. This can be
-turned off.
+The "Default" translation will be written into the msgstr field, or the msgid
+itself if not default is present. This can be optionally turned off.
 
 usage:      %(program)s input.po output.po [--noprefill]
-input.po    A po file that already contains some translations and some
-            untranslated messages.
+input.po    A po file that contains untranslated messages and potentially
+            some tranlated ones.
 output.po   The name of a po file that will be created by this script.
 --noprefill With this option you can prevent the "msgstr" field being filled
-            with the default translation
+            with the default translation.
 """
 
 import sys

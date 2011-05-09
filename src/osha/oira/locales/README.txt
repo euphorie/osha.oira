@@ -19,6 +19,27 @@ Adding new translations
 
 Since these .po files are used to override existing translations in the same domain, we cannot use any automatic extraction mechanism to find new msgids. The automatic extraction is done solely in the Euphorie package (see there). That means all msgids will be added manually as the need arises.
 
+We cannot use infrae.i18nextract to extract messages for osha.oira's
+euphorie.pot because it will look in all the packages containing the *euphorie*
+domain, and we only want the strings from osha.oira.
+
+Additionally, apparently it cannot properly parse Chameleon templates.
+
+We can however use osha.oira's setup.py. It's however important to have
+*lingua* installed, it's a package (hosted on GitHub by Wichert) containing helpers for parsing *Chameleon*
+templates.
+
+There is no *lingua* egg on pypi, but I released one to syslabcom.
+
+So, to update the euphorie.pot file in osha.oira, do this:
+
+* python setup.py extract_messages
+
+If lingua is installed via buildout (which development.cfg does), then use this:
+
+* ~/${buildout:dir}/bin/zopepy setup.py extract_messages
+
+
 General rules
 -------------
 

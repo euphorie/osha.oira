@@ -97,14 +97,11 @@
                 <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'"><a href="#top5-footnote">*</a></sup>
             </h4>
             <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority">
-                This is a <strong i18n:name="priority">
-                <tal:span tal:condition="python:node.priority=='low'" 
-                            i18n:translate="risk_priority_low">low priority risk</tal:span>
-                <tal:span tal:condition="python:node.priority=='medium'" 
-                            i18n:translate="risk_priority_medium">medium priority risk</tal:span>
-                <tal:span tal:condition="python:node.priority=='high'" 
-                            i18n:translate="risk_priority_high">high priority risk</tal:span>
-                </strong>.
+                This is a <strong i18n:name="priority_value">
+                <tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low</tal:span>
+                <tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium</tal:span>
+                <tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high</tal:span>
+                </strong> priority risk.
             </p>
         </div>
     </tal:block>
@@ -184,15 +181,12 @@
                 <a href="${survey_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a> 
                 <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'"><a href="#top5-footnote">*</a></sup>
             </h4>
-
             <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority">
-                This is a <strong i18n:name="priority">
-                <tal:span tal:condition="python:node.priority=='low'" 
-                            i18n:translate="risk_priority_low">low priority risk</tal:span>
-                <tal:span tal:condition="python:node.priority=='medium'" 
-                            i18n:translate="risk_priority_medium">medium priority risk</tal:span>
-                <tal:span tal:condition="python:node.priority=='high'" 
-                            i18n:translate="risk_priority_high">high priority risk</tal:span></strong>.
+                This is a <strong i18n:name="priority_value">
+                <tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low</tal:span>
+                <tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium</tal:span>
+                <tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high</tal:span>
+                </strong> priority risk.
             </p>
         </div>
     </tal:block>
@@ -269,11 +263,11 @@
         </h4>
 
         <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority">
-            This is a <strong i18n:name="priority">
-                <tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low priority risk</tal:span>
-                <tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium priority risk</tal:span>
-                <tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high priority risk</tal:span>
-            </strong>.
+        This is a <strong i18n:name="priority_value">
+        <tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low</tal:span>
+        <tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium</tal:span>
+        <tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high</tal:span>
+        </strong> priority risk.
         </p>
     </tal:block>
 

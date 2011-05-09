@@ -361,7 +361,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             m.prevention_plan,
             m.requirements,
             m.responsible,
-            str(m.budget),
+            m.budget and str(m.budget) or '',
             m.planning_start and formatDate(self.request, m.planning_start) or '',
             m.planning_end and formatDate(self.request, m.planning_end) or '',
             ]

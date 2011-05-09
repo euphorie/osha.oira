@@ -17,8 +17,6 @@ As usual, there is one .pot file (euphorie.pot), plus one directory for every re
 Adding new translations
 =======================
 
-Since these .po files are used to override existing translations in the same domain, we cannot use any automatic extraction mechanism to find new msgids. The automatic extraction is done solely in the Euphorie package (see there). That means all msgids will be added manually as the need arises.
-
 We cannot use infrae.i18nextract to extract messages for osha.oira's
 euphorie.pot because it will look in all the packages containing the *euphorie*
 domain, and we only want the strings from osha.oira.

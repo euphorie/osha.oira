@@ -28,8 +28,7 @@
         <option value="low" selected="${python:'selected' if value=='low' else None}" i18n:translate="risk_priority_low">low</option>
         <option value="medium" selected="${python:'selected' if value=='medium' else None}" i18n:translate="risk_priority_medium">medium</option>
         <option value="high" selected="${python:'selected' if value=='high' else None}" i18n:translate="risk_priority_high">high</option>
-        </select> priority risk.
-        </label>
+        </select> priority risk.</label>
       </fieldset>
     </div>
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.13dev\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2011-05-11 11:57+0200\n"
+"POT-Creation-Date: 2011-05-11 17:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,104 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+
+#. Default: Describe your general approach to eliminate or (if the risk is not
+#. avoidable) reduce the risk.
+#: src/osha/oira/manual_translations.py:6
+msgid "help_measure_action_plan"
+msgstr ""
+
+#. Default: Describe the specific action(s) required to implement this approach (to
+#. eliminate or to reduce the risk).
+#: src/osha/oira/manual_translations.py:8
+msgid "help_measure_prevention_plan"
+msgstr ""
+
+#. Default: Describe: 1) what is your general approach to eliminate or (if  the
+#. risk is not avoidable) reduce the risk; 2) the specific action(s) required to
+#. implement this approach (to eliminate or to reduce the risk); 3) the level of
+#. expertise needed to implement the measure, for instance "common sense (no OSH
+#. knowledge required)", "no specific OSH expertise, but minimum OSH knowledge or
+#. training and/or consultation of OSH guidance required", or "OSH expert". You can
+#. also describe here any other additional requirement (if any).
+#: src/osha/oira/manual_translations.py:11
+msgid "help_measure_requirements"
+msgstr ""
+
+#. Default: Measure
+#: src/osha/oira/manual_translations.py:20
+msgid "Solution"
+msgstr ""
+
+#. Default: A standard measure for a risk.
+#: src/osha/oira/manual_translations.py:21
+msgid "A solution."
+msgstr ""
+
+#. Default: Standard measures
+#: src/osha/oira/manual_translations.py:22
+msgid "header_solutions"
+msgstr ""
+
+#. Default: Measure ${number}
+#: src/osha/oira/manual_translations.py:23
+msgid "risk_solution_header"
+msgstr ""
+
+#. Default: OiRA Tools
+#: src/osha/oira/manual_translations.py:24
+msgid "nav_surveys"
+msgstr ""
+
+#. Default: OiRA Tool
+#: src/osha/oira/manual_translations.py:25
+msgid "Survey"
+msgstr ""
+
+#. Default: OiRA Tools
+#: src/osha/oira/manual_translations.py:26
+msgid "help_header_sessions"
+msgstr ""
+
+#. Default: OiRA Tools
+#: src/osha/oira/manual_translations.py:27
+msgid "label_sessions"
+msgstr ""
+
+#. Default: OiRA Tool import
+#: src/osha/oira/manual_translations.py:28
+msgid "Survey import"
+msgstr ""
+
+#. Default: Import OiRA tool version
+#: src/osha/oira/manual_translations.py:29
+msgid "Import survey version"
+msgstr ""
+
+#. Default: OiRA Tool version
+#: src/osha/oira/manual_translations.py:30
+msgid "Survey version"
+msgstr ""
+
+#. Default: The form will allow you to create a new OiRA Tool.
+#: src/osha/oira/manual_translations.py:31
+msgid "intro_add_surveygroup"
+msgstr ""
+
+#. Default: Base my new OiRA Tool on an existing OiRA Tool of another organisation.
+#: src/osha/oira/manual_translations.py:33
+msgid "survey_source_other"
+msgstr ""
+
+#. Default: Base my new OiRA Tool on an existing OiRA Tool of my organisation.
+#: src/osha/oira/manual_translations.py:35
+msgid "survey_source_local"
+msgstr ""
+
+#. Default: Create a new OiRA Tool from scratch.
+#: src/osha/oira/manual_translations.py:37
+msgid "survey_source_scratch"
+msgstr ""
 
 #: src/osha/oira/module.py:17 src/osha/oira/module.py:30 src/osha/oira/module.py:45
 msgid "Submodule"
@@ -40,37 +138,36 @@ msgid "message_not_delete_published_sector"
 msgstr ""
 
 #. Default: low
-#: src/osha/oira/survey.py:292 src/osha/oira/templates/report_actionplan.pt:266
-#: src/osha/oira/templates/report_actionplan.pt:227
-#: src/osha/oira/templates/report_actionplan.pt:186
+#: src/osha/oira/survey.py:292 src/osha/oira/templates/report_actionplan.pt:263
+#: src/osha/oira/templates/report_actionplan.pt:225
+#: src/osha/oira/templates/report_actionplan.pt:185
 #: src/osha/oira/templates/report_actionplan.pt:101
 #: src/osha/oira/templates/risk_actionplan.pt:28
 msgid "risk_priority_low"
 msgstr ""
 
 #. Default: medium
-#: src/osha/oira/survey.py:294 src/osha/oira/templates/report_actionplan.pt:267
-#: src/osha/oira/templates/report_actionplan.pt:228
-#: src/osha/oira/templates/report_actionplan.pt:187
+#: src/osha/oira/survey.py:294 src/osha/oira/templates/report_actionplan.pt:264
+#: src/osha/oira/templates/report_actionplan.pt:226
+#: src/osha/oira/templates/report_actionplan.pt:186
 #: src/osha/oira/templates/report_actionplan.pt:102
 #: src/osha/oira/templates/risk_actionplan.pt:29
 msgid "risk_priority_medium"
 msgstr ""
 
 #. Default: high
-#: src/osha/oira/survey.py:296 src/osha/oira/templates/report_actionplan.pt:268
-#: src/osha/oira/templates/report_actionplan.pt:229
-#: src/osha/oira/templates/report_actionplan.pt:188
+#: src/osha/oira/survey.py:296 src/osha/oira/templates/report_actionplan.pt:265
+#: src/osha/oira/templates/report_actionplan.pt:227
+#: src/osha/oira/templates/report_actionplan.pt:187
 #: src/osha/oira/templates/report_actionplan.pt:103
 #: src/osha/oira/templates/risk_actionplan.pt:30
 msgid "risk_priority_high"
 msgstr ""
 
 #. Default: This is a ${priority_value} priority risk.
-#. Default: This is a ${priority_value} priority risk.
-#: src/osha/oira/survey.py:298 src/osha/oira/templates/report_actionplan.pt:264
-#: src/osha/oira/templates/report_actionplan.pt:225
-#: src/osha/oira/templates/report_actionplan.pt:184
+#: src/osha/oira/survey.py:298 src/osha/oira/templates/report_actionplan.pt:261
+#: src/osha/oira/templates/report_actionplan.pt:223
+#: src/osha/oira/templates/report_actionplan.pt:183
 #: src/osha/oira/templates/report_actionplan.pt:99
 #: src/osha/oira/templates/risk_actionplan.pt:26
 msgid "risk_priority"
@@ -82,129 +179,128 @@ msgid "header_measure_single"
 msgstr ""
 
 #. Default: Measure ${index}
-#: src/osha/oira/survey.py:325 src/osha/oira/templates/report_actionplan.pt:110
-#: src/osha/oira/templates/risk_actionplan.pt:42
+#: src/osha/oira/survey.py:325 src/osha/oira/templates/report_actionplan.pt:109
+#: src/osha/oira/templates/risk_actionplan.pt:41
 msgid "header_measure"
 msgstr ""
 
-#. Default: Action plan
-#: src/osha/oira/survey.py:354 src/osha/oira/templates/risk_actionplan.pt:183
-#: src/osha/oira/templates/risk_actionplan.pt:50
+#. Default: General approach (to eliminate or reduce the risk)
+#: src/osha/oira/survey.py:354 src/osha/oira/templates/risk_actionplan.pt:182
+#: src/osha/oira/templates/risk_actionplan.pt:49
 msgid "label_measure_action_plan"
 msgstr ""
 
-#. Default: Prevention plan
-#: src/osha/oira/survey.py:355 src/osha/oira/templates/risk_actionplan.pt:186
-#: src/osha/oira/templates/risk_actionplan.pt:53
+#. Default: Specific action(s) required to implement this approach
+#: src/osha/oira/survey.py:356 src/osha/oira/templates/risk_actionplan.pt:185
+#: src/osha/oira/templates/risk_actionplan.pt:52
 msgid "label_measure_prevention_plan"
 msgstr ""
 
 #. Default: Requirements
-#: src/osha/oira/survey.py:356 src/osha/oira/templates/risk_actionplan.pt:189
-#: src/osha/oira/templates/risk_actionplan.pt:56
+#: src/osha/oira/survey.py:358 src/osha/oira/templates/risk_actionplan.pt:188
+#: src/osha/oira/templates/risk_actionplan.pt:55
 msgid "label_measure_requirements"
 msgstr ""
 
 #. Default: Who is responsible?
-#: src/osha/oira/survey.py:357 src/osha/oira/templates/risk_actionplan.pt:195
-#: src/osha/oira/templates/risk_actionplan.pt:62
+#: src/osha/oira/survey.py:359 src/osha/oira/templates/risk_actionplan.pt:194
+#: src/osha/oira/templates/risk_actionplan.pt:61
 msgid "label_action_plan_responsible"
 msgstr ""
 
 #. Default: Budget (in Euro)
-#: src/osha/oira/survey.py:358 src/osha/oira/templates/risk_actionplan.pt:200
-#: src/osha/oira/templates/risk_actionplan.pt:68
+#: src/osha/oira/survey.py:361 src/osha/oira/templates/risk_actionplan.pt:199
+#: src/osha/oira/templates/risk_actionplan.pt:67
 msgid "label_action_plan_budget"
 msgstr ""
 
 #. Default: Planning start
-#: src/osha/oira/survey.py:359 src/osha/oira/templates/risk_actionplan.pt:205
-#: src/osha/oira/templates/risk_actionplan.pt:79
+#: src/osha/oira/survey.py:362 src/osha/oira/templates/risk_actionplan.pt:204
+#: src/osha/oira/templates/risk_actionplan.pt:78
 msgid "label_action_plan_start"
 msgstr ""
 
 #. Default: Planning end
-#: src/osha/oira/survey.py:360 src/osha/oira/templates/risk_actionplan.pt:222
-#: src/osha/oira/templates/risk_actionplan.pt:109
+#: src/osha/oira/survey.py:363 src/osha/oira/templates/risk_actionplan.pt:221
+#: src/osha/oira/templates/risk_actionplan.pt:108
 msgid "label_action_plan_end"
 msgstr ""
 
 #. Default: Consultation of workers
-#: src/osha/oira/survey.py:409
+#: src/osha/oira/survey.py:412
 msgid "header_oira_report_consultation"
 msgstr ""
 
 #. Default: The undersigned hereby declare that the workers have been consulted on
 #. the content of this document.
-#: src/osha/oira/survey.py:418
+#: src/osha/oira/survey.py:421
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
 
 #. Default: On the behalf of the employer:
-#: src/osha/oira/survey.py:431
+#: src/osha/oira/survey.py:434
 msgid "oira_consultation_employer"
 msgstr ""
 
 #. Default: On the behalf of the workers:
-#: src/osha/oira/survey.py:433
+#: src/osha/oira/survey.py:436
 msgid "oira_consultation_workers"
 msgstr ""
 
 #. Default: Date:
-#: src/osha/oira/survey.py:442
+#: src/osha/oira/survey.py:445
 msgid "oira_survey_date"
 msgstr ""
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/survey.py:484
+#: src/osha/oira/survey.py:487
 msgid "header_oira_report_download"
 msgstr ""
 
 #. Default: Contents
-#: src/osha/oira/survey.py:498 src/osha/oira/templates/report_actionplan.pt:17
+#: src/osha/oira/survey.py:501 src/osha/oira/templates/report_actionplan.pt:17
 #: src/osha/oira/templates/report_identification.pt:16
 msgid "toc_header"
 msgstr ""
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/survey.py:503 src/osha/oira/templates/report_actionplan.pt:77
+#: src/osha/oira/survey.py:506 src/osha/oira/templates/report_actionplan.pt:77
 #: src/osha/oira/templates/report_actionplan.pt:40
 msgid "header_present_risks"
 msgstr ""
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/survey.py:505 src/osha/oira/templates/report_actionplan.pt:164
+#: src/osha/oira/survey.py:508 src/osha/oira/templates/report_actionplan.pt:163
 #: src/osha/oira/templates/report_actionplan.pt:49
 msgid "header_unevaluated_risks"
 msgstr ""
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt with
-#. Default: Hazards/problems that have been "parked" and are still to be dealt with
-#: src/osha/oira/survey.py:507 src/osha/oira/templates/report_actionplan.pt:203
+#: src/osha/oira/survey.py:510 src/osha/oira/templates/report_actionplan.pt:201
 #: src/osha/oira/templates/report_actionplan.pt:58
 msgid "header_unanswered_risks"
 msgstr ""
 
 #. Default: Hazards/problems that are not present in your organisation
-#: src/osha/oira/survey.py:509 src/osha/oira/templates/report_actionplan.pt:242
+#: src/osha/oira/survey.py:512 src/osha/oira/templates/report_actionplan.pt:239
 #: src/osha/oira/templates/report_actionplan.pt:67
 msgid "header_risks_not_present"
 msgstr ""
 
 #. Default: Action plan ${title}
-#: src/osha/oira/survey.py:534
+#: src/osha/oira/survey.py:537
 msgid "filename_report_actionplan"
 msgstr ""
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/survey.py:595
+#: src/osha/oira/survey.py:598
 msgid "report_identification_revision"
 msgstr ""
 
 #. Default: This report was based on the survey '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/survey.py:629 src/osha/oira/templates/report_actionplan.pt:327
+#: src/osha/oira/survey.py:632 src/osha/oira/templates/report_actionplan.pt:323
 msgid "report_survey_revision"
 msgstr ""
 
@@ -214,18 +310,18 @@ msgid "message_not_delete_published_surveygroup"
 msgstr ""
 
 #. Default: Settings
-#: src/osha/oira/templates/actionplan.pt:106 src/osha/oira/templates/report.pt:103
-#: src/osha/oira/templates/report_actionplan.pt:336
+#: src/osha/oira/templates/actionplan.pt:106 src/osha/oira/templates/report.pt:102
+#: src/osha/oira/templates/report_actionplan.pt:332
 #: src/osha/oira/templates/report_identification.pt:121
 #: src/osha/oira/templates/sessions.pt:112
 msgid "navigation_settings"
 msgstr ""
 
 #. Default: Status
-#: src/osha/oira/templates/actionplan.pt:105 src/osha/oira/templates/report.pt:102
-#: src/osha/oira/templates/report_actionplan.pt:335
+#: src/osha/oira/templates/actionplan.pt:105 src/osha/oira/templates/report.pt:101
+#: src/osha/oira/templates/report_actionplan.pt:331
 #: src/osha/oira/templates/report_identification.pt:120
-#: src/osha/oira/templates/risk_actionplan.pt:283
+#: src/osha/oira/templates/risk_actionplan.pt:282
 #: src/osha/oira/templates/risk_evaluation.pt:127
 #: src/osha/oira/templates/risk_identification.pt:90
 msgid "navigation_status"
@@ -234,10 +330,10 @@ msgstr ""
 #. Default: Help
 #: src/osha/oira/templates/actionplan.pt:104
 #: src/osha/oira/templates/disclaimer.pt:67 src/osha/oira/templates/profile.pt:104
-#: src/osha/oira/templates/register.pt:41 src/osha/oira/templates/report.pt:101
-#: src/osha/oira/templates/report_actionplan.pt:334
+#: src/osha/oira/templates/register.pt:41 src/osha/oira/templates/report.pt:100
+#: src/osha/oira/templates/report_actionplan.pt:330
 #: src/osha/oira/templates/report_identification.pt:119
-#: src/osha/oira/templates/risk_actionplan.pt:282
+#: src/osha/oira/templates/risk_actionplan.pt:281
 #: src/osha/oira/templates/risk_evaluation.pt:126
 #: src/osha/oira/templates/risk_identification.pt:89
 #: src/osha/oira/templates/sessions.pt:111 src/osha/oira/templates/start.pt:70
@@ -246,10 +342,10 @@ msgstr ""
 
 #. Default: Surveys
 #: src/osha/oira/templates/actionplan.pt:103 src/osha/oira/templates/profile.pt:103
-#: src/osha/oira/templates/report.pt:100
-#: src/osha/oira/templates/report_actionplan.pt:333
+#: src/osha/oira/templates/report.pt:99
+#: src/osha/oira/templates/report_actionplan.pt:329
 #: src/osha/oira/templates/report_identification.pt:118
-#: src/osha/oira/templates/risk_actionplan.pt:281
+#: src/osha/oira/templates/risk_actionplan.pt:280
 #: src/osha/oira/templates/risk_evaluation.pt:125
 #: src/osha/oira/templates/risk_identification.pt:88
 #: src/osha/oira/templates/start.pt:69
@@ -258,10 +354,10 @@ msgstr ""
 
 #. Default: Logout
 #: src/osha/oira/templates/actionplan.pt:102 src/osha/oira/templates/profile.pt:102
-#: src/osha/oira/templates/report.pt:99
-#: src/osha/oira/templates/report_actionplan.pt:332
+#: src/osha/oira/templates/report.pt:98
+#: src/osha/oira/templates/report_actionplan.pt:328
 #: src/osha/oira/templates/report_identification.pt:117
-#: src/osha/oira/templates/risk_actionplan.pt:280
+#: src/osha/oira/templates/risk_actionplan.pt:279
 #: src/osha/oira/templates/risk_evaluation.pt:124
 #: src/osha/oira/templates/risk_identification.pt:87
 #: src/osha/oira/templates/sessions.pt:110 src/osha/oira/templates/start.pt:68
@@ -270,10 +366,10 @@ msgstr ""
 
 #. Default: Report
 #: src/osha/oira/templates/actionplan.pt:96 src/osha/oira/templates/profile.pt:96
-#: src/osha/oira/templates/report.pt:92
-#: src/osha/oira/templates/report_actionplan.pt:320
+#: src/osha/oira/templates/report.pt:91
+#: src/osha/oira/templates/report_actionplan.pt:316
 #: src/osha/oira/templates/report_identification.pt:110
-#: src/osha/oira/templates/risk_actionplan.pt:273
+#: src/osha/oira/templates/risk_actionplan.pt:272
 #: src/osha/oira/templates/risk_evaluation.pt:117
 #: src/osha/oira/templates/risk_identification.pt:80
 #: src/osha/oira/templates/sessions.pt:104 src/osha/oira/templates/start.pt:62
@@ -282,10 +378,10 @@ msgstr ""
 
 #. Default: Report
 #: src/osha/oira/templates/actionplan.pt:95 src/osha/oira/templates/profile.pt:95
-#: src/osha/oira/templates/report.pt:91
-#: src/osha/oira/templates/report_actionplan.pt:319
+#: src/osha/oira/templates/report.pt:90
+#: src/osha/oira/templates/report_actionplan.pt:315
 #: src/osha/oira/templates/report_identification.pt:109
-#: src/osha/oira/templates/risk_actionplan.pt:272
+#: src/osha/oira/templates/risk_actionplan.pt:271
 #: src/osha/oira/templates/risk_evaluation.pt:116
 #: src/osha/oira/templates/risk_identification.pt:79
 #: src/osha/oira/templates/sessions.pt:103 src/osha/oira/templates/start.pt:61
@@ -294,10 +390,10 @@ msgstr ""
 
 #. Default: Action Plan
 #: src/osha/oira/templates/actionplan.pt:90 src/osha/oira/templates/profile.pt:92
-#: src/osha/oira/templates/report.pt:86
-#: src/osha/oira/templates/report_actionplan.pt:314
+#: src/osha/oira/templates/report.pt:85
+#: src/osha/oira/templates/report_actionplan.pt:310
 #: src/osha/oira/templates/report_identification.pt:104
-#: src/osha/oira/templates/risk_actionplan.pt:264
+#: src/osha/oira/templates/risk_actionplan.pt:263
 #: src/osha/oira/templates/risk_evaluation.pt:111
 #: src/osha/oira/templates/risk_identification.pt:74
 #: src/osha/oira/templates/sessions.pt:100 src/osha/oira/templates/start.pt:58
@@ -306,10 +402,10 @@ msgstr ""
 
 #. Default: Action Plan
 #: src/osha/oira/templates/actionplan.pt:89 src/osha/oira/templates/profile.pt:91
-#: src/osha/oira/templates/report.pt:85
-#: src/osha/oira/templates/report_actionplan.pt:313
+#: src/osha/oira/templates/report.pt:84
+#: src/osha/oira/templates/report_actionplan.pt:309
 #: src/osha/oira/templates/report_identification.pt:103
-#: src/osha/oira/templates/risk_actionplan.pt:263
+#: src/osha/oira/templates/risk_actionplan.pt:262
 #: src/osha/oira/templates/risk_evaluation.pt:110
 #: src/osha/oira/templates/risk_identification.pt:73
 #: src/osha/oira/templates/sessions.pt:99 src/osha/oira/templates/start.pt:57
@@ -318,10 +414,10 @@ msgstr ""
 
 #. Default: Evaluation
 #: src/osha/oira/templates/actionplan.pt:84 src/osha/oira/templates/profile.pt:88
-#: src/osha/oira/templates/report.pt:80
-#: src/osha/oira/templates/report_actionplan.pt:308
+#: src/osha/oira/templates/report.pt:79
+#: src/osha/oira/templates/report_actionplan.pt:304
 #: src/osha/oira/templates/report_identification.pt:98
-#: src/osha/oira/templates/risk_actionplan.pt:258
+#: src/osha/oira/templates/risk_actionplan.pt:257
 #: src/osha/oira/templates/risk_evaluation.pt:102
 #: src/osha/oira/templates/risk_identification.pt:68
 #: src/osha/oira/templates/sessions.pt:96 src/osha/oira/templates/start.pt:54
@@ -330,10 +426,10 @@ msgstr ""
 
 #. Default: Evaluation
 #: src/osha/oira/templates/actionplan.pt:83 src/osha/oira/templates/profile.pt:87
-#: src/osha/oira/templates/report.pt:79
-#: src/osha/oira/templates/report_actionplan.pt:307
+#: src/osha/oira/templates/report.pt:78
+#: src/osha/oira/templates/report_actionplan.pt:303
 #: src/osha/oira/templates/report_identification.pt:97
-#: src/osha/oira/templates/risk_actionplan.pt:257
+#: src/osha/oira/templates/risk_actionplan.pt:256
 #: src/osha/oira/templates/risk_evaluation.pt:101
 #: src/osha/oira/templates/risk_identification.pt:67
 #: src/osha/oira/templates/sessions.pt:95 src/osha/oira/templates/start.pt:53
@@ -342,10 +438,10 @@ msgstr ""
 
 #. Default: Identification
 #: src/osha/oira/templates/actionplan.pt:78 src/osha/oira/templates/profile.pt:84
-#: src/osha/oira/templates/report.pt:74
-#: src/osha/oira/templates/report_actionplan.pt:302
+#: src/osha/oira/templates/report.pt:73
+#: src/osha/oira/templates/report_actionplan.pt:298
 #: src/osha/oira/templates/report_identification.pt:92
-#: src/osha/oira/templates/risk_actionplan.pt:252
+#: src/osha/oira/templates/risk_actionplan.pt:251
 #: src/osha/oira/templates/risk_evaluation.pt:96
 #: src/osha/oira/templates/risk_identification.pt:59
 #: src/osha/oira/templates/sessions.pt:92 src/osha/oira/templates/start.pt:50
@@ -354,10 +450,10 @@ msgstr ""
 
 #. Default: Identification
 #: src/osha/oira/templates/actionplan.pt:77 src/osha/oira/templates/profile.pt:83
-#: src/osha/oira/templates/report.pt:73
-#: src/osha/oira/templates/report_actionplan.pt:301
+#: src/osha/oira/templates/report.pt:72
+#: src/osha/oira/templates/report_actionplan.pt:297
 #: src/osha/oira/templates/report_identification.pt:91
-#: src/osha/oira/templates/risk_actionplan.pt:251
+#: src/osha/oira/templates/risk_actionplan.pt:250
 #: src/osha/oira/templates/risk_evaluation.pt:95
 #: src/osha/oira/templates/risk_identification.pt:58
 #: src/osha/oira/templates/sessions.pt:91 src/osha/oira/templates/start.pt:49
@@ -366,10 +462,10 @@ msgstr ""
 
 #. Default: Preparation
 #: src/osha/oira/templates/actionplan.pt:72 src/osha/oira/templates/profile.pt:79
-#: src/osha/oira/templates/report.pt:68
-#: src/osha/oira/templates/report_actionplan.pt:296
+#: src/osha/oira/templates/report.pt:67
+#: src/osha/oira/templates/report_actionplan.pt:292
 #: src/osha/oira/templates/report_identification.pt:86
-#: src/osha/oira/templates/risk_actionplan.pt:246
+#: src/osha/oira/templates/risk_actionplan.pt:245
 #: src/osha/oira/templates/risk_evaluation.pt:90
 #: src/osha/oira/templates/risk_identification.pt:53
 #: src/osha/oira/templates/sessions.pt:88 src/osha/oira/templates/start.pt:45
@@ -378,10 +474,10 @@ msgstr ""
 
 #. Default: Preparation
 #: src/osha/oira/templates/actionplan.pt:71 src/osha/oira/templates/profile.pt:78
-#: src/osha/oira/templates/report.pt:67
-#: src/osha/oira/templates/report_actionplan.pt:295
+#: src/osha/oira/templates/report.pt:66
+#: src/osha/oira/templates/report_actionplan.pt:291
 #: src/osha/oira/templates/report_identification.pt:85
-#: src/osha/oira/templates/risk_actionplan.pt:245
+#: src/osha/oira/templates/risk_actionplan.pt:244
 #: src/osha/oira/templates/risk_evaluation.pt:89
 #: src/osha/oira/templates/risk_identification.pt:52
 #: src/osha/oira/templates/sessions.pt:87 src/osha/oira/templates/start.pt:44
@@ -597,9 +693,8 @@ msgid "profilequestion_type_optional"
 msgstr ""
 
 #. Default: Next
-#. Default: Next
 #: src/osha/oira/templates/register.pt:35 src/osha/oira/templates/report.pt:53
-#: src/osha/oira/templates/risk_actionplan.pt:158
+#: src/osha/oira/templates/risk_actionplan.pt:157
 #: src/osha/oira/templates/risk_evaluation.pt:74
 #: src/osha/oira/templates/risk_identification.pt:30
 #: src/osha/oira/templates/sessions.pt:81
@@ -608,7 +703,7 @@ msgstr ""
 
 #. Default: Previous
 #: src/osha/oira/templates/register.pt:34
-#: src/osha/oira/templates/risk_actionplan.pt:157
+#: src/osha/oira/templates/risk_actionplan.pt:156
 #: src/osha/oira/templates/risk_evaluation.pt:73
 #: src/osha/oira/templates/risk_identification.pt:29
 #: src/osha/oira/templates/sessions.pt:80 src/osha/oira/templates/start.pt:37
@@ -674,70 +769,70 @@ msgstr ""
 #. Default: This risk is not present in your organisation, but since the sector
 #. organisation considers this one of the priority risks it must be included in
 #. this report.
-#: src/osha/oira/templates/report_actionplan.pt:285
+#: src/osha/oira/templates/report_actionplan.pt:281
 #: src/osha/oira/templates/webhelpers.pt:142
 msgid "top5_risk_not_present"
 msgstr ""
 
 #. Default: The following risks have not yet been answered. Please do so at the
 #. soonest possibility.
-#: src/osha/oira/templates/report_actionplan.pt:205
+#: src/osha/oira/templates/report_actionplan.pt:203
 msgid "desc_unanswered_risks"
 msgstr ""
 
 #. Default: There is a budget of ${amount} for this measure.
-#: src/osha/oira/templates/report_actionplan.pt:150
+#: src/osha/oira/templates/report_actionplan.pt:149
 msgid "report_measure_budget"
 msgstr ""
 
 #. Default: ${responsible} is responsible for this task which starts on ${start}
 #. and ends on ${end}.
-#: src/osha/oira/templates/report_actionplan.pt:146
+#: src/osha/oira/templates/report_actionplan.pt:145
 msgid "report_measure_full"
 msgstr ""
 
 #. Default: This task starts on ${start} and ends on ${end}.
-#: src/osha/oira/templates/report_actionplan.pt:142
+#: src/osha/oira/templates/report_actionplan.pt:141
 msgid "report_measure_start_and_stop"
 msgstr ""
 
 #. Default: This task ends on ${end}.
-#: src/osha/oira/templates/report_actionplan.pt:139
+#: src/osha/oira/templates/report_actionplan.pt:138
 msgid "report_measure_end_only"
 msgstr ""
 
 #. Default: This task starts on ${start}.
-#: src/osha/oira/templates/report_actionplan.pt:136
+#: src/osha/oira/templates/report_actionplan.pt:135
 msgid "report_measure_start_only"
 msgstr ""
 
 #. Default: ${responsible} is responsible for this task which ends on ${end}.
-#: src/osha/oira/templates/report_actionplan.pt:133
+#: src/osha/oira/templates/report_actionplan.pt:132
 msgid "report_measure_responsible_and_end"
 msgstr ""
 
 #. Default: ${responsible} is responsible for this task which starts on ${start}.
-#: src/osha/oira/templates/report_actionplan.pt:130
+#: src/osha/oira/templates/report_actionplan.pt:129
 msgid "report_measure_responsible_and_start"
 msgstr ""
 
 #. Default: ${responsible} is responsible for this task.
-#: src/osha/oira/templates/report_actionplan.pt:128
+#: src/osha/oira/templates/report_actionplan.pt:127
 msgid "report_measure_responsible"
 msgstr ""
 
 #. Default: Level of expertise and/or requirements needed:
-#: src/osha/oira/templates/report_actionplan.pt:121
+#: src/osha/oira/templates/report_actionplan.pt:120
 msgid "report_measure_requirements"
 msgstr ""
 
 #. Default: Specific action(s) required to implement this approach:
-#: src/osha/oira/templates/report_actionplan.pt:117
+#: src/osha/oira/templates/report_actionplan.pt:116
 msgid "report_measure_preventionplan"
 msgstr ""
 
 #. Default: General approach (to eliminate or reduce the risk):
-#: src/osha/oira/templates/report_actionplan.pt:113
+#: src/osha/oira/templates/report_actionplan.pt:112
 msgid "report_measure_actionplan"
 msgstr ""
 
@@ -758,39 +853,39 @@ msgstr ""
 msgid "warn_risk_present"
 msgstr ""
 
-#: src/osha/oira/templates/risk_actionplan.pt:288
+#: src/osha/oira/templates/risk_actionplan.pt:287
 msgid "Are you sure you want to delete this measure? This action can not be reverted."
 msgstr ""
 
 #. Default: Year
-#: src/osha/oira/templates/risk_actionplan.pt:233
-#: src/osha/oira/templates/risk_actionplan.pt:216
-#: src/osha/oira/templates/risk_actionplan.pt:96
+#: src/osha/oira/templates/risk_actionplan.pt:232
+#: src/osha/oira/templates/risk_actionplan.pt:215
+#: src/osha/oira/templates/risk_actionplan.pt:95
 msgid "label_year"
 msgstr ""
 
 #. Default: Month
-#: src/osha/oira/templates/risk_actionplan.pt:228
-#: src/osha/oira/templates/risk_actionplan.pt:211
-#: src/osha/oira/templates/risk_actionplan.pt:119
-#: src/osha/oira/templates/risk_actionplan.pt:89
+#: src/osha/oira/templates/risk_actionplan.pt:227
+#: src/osha/oira/templates/risk_actionplan.pt:210
+#: src/osha/oira/templates/risk_actionplan.pt:118
+#: src/osha/oira/templates/risk_actionplan.pt:88
 msgid "label_month"
 msgstr ""
 
 #. Default: Day
-#: src/osha/oira/templates/risk_actionplan.pt:225
-#: src/osha/oira/templates/risk_actionplan.pt:208
-#: src/osha/oira/templates/risk_actionplan.pt:126
-#: src/osha/oira/templates/risk_actionplan.pt:112
-#: src/osha/oira/templates/risk_actionplan.pt:82
+#: src/osha/oira/templates/risk_actionplan.pt:224
+#: src/osha/oira/templates/risk_actionplan.pt:207
+#: src/osha/oira/templates/risk_actionplan.pt:125
+#: src/osha/oira/templates/risk_actionplan.pt:111
+#: src/osha/oira/templates/risk_actionplan.pt:81
 msgid "label_day"
 msgstr ""
 
 #. Default: Although some measures do not cost any money, most do. The measures
 #. should therefore be budgeted for; include them in the annual budget round if
 #. necessary.
-#: src/osha/oira/templates/risk_actionplan.pt:201
-#: src/osha/oira/templates/risk_actionplan.pt:69
+#: src/osha/oira/templates/risk_actionplan.pt:200
+#: src/osha/oira/templates/risk_actionplan.pt:68
 msgid "actionplan_measure_budget_tooltip"
 msgstr ""
 
@@ -798,76 +893,75 @@ msgstr ""
 #. implementation of this measure. This person will have the authority to take the
 #. steps described in the Plan and/or the responsibility to ensure that they are
 #. carried out.
-#: src/osha/oira/templates/risk_actionplan.pt:196
-#: src/osha/oira/templates/risk_actionplan.pt:63
+#: src/osha/oira/templates/risk_actionplan.pt:195
+#: src/osha/oira/templates/risk_actionplan.pt:62
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
 
-#. Default: You write down in the Plan what measure you will be taking in response
-#. to the risk. Removing the causes (tackling the source) is the preferred method:
-#. that way, the risk can no longer arise. You then write down what tasks have to
-#. be carried out in order for the risk to be removed, as well as the knowledge and
-#. experience that are needed for those tasks to be carried out (prevention plan
-#. and requirements). In most cases, the prevention officer will help in the
-#. implementation of the Plan: however, he must have the capability or have had the
-#. relevant training to do this.
-#: src/osha/oira/templates/risk_actionplan.pt:179
-#: src/osha/oira/templates/risk_actionplan.pt:46
+#. Default: Describe: 1) what is your general approach to eliminate or (if the risk
+#. is not avoidable) reduce the risk; 2) the specific action(s) required to
+#. implement this approach (to eliminate or to reduce the risk); 3) the level of
+#. expertise needed to implement the measure, for instance “common sense (no OSH
+#. knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or
+#. training and/or consultation of OSH guidance required”, or “OSH expert”. You can
+#. also describe here any other additional requirement (if any).
+#: src/osha/oira/templates/risk_actionplan.pt:178
+#: src/osha/oira/templates/risk_actionplan.pt:45
 msgid "actionplan_measure_tooltip"
 msgstr ""
 
 #. Default: Remove
-#: src/osha/oira/templates/risk_actionplan.pt:177
+#: src/osha/oira/templates/risk_actionplan.pt:176
 msgid "label_remove"
 msgstr ""
 
 #. Default: Measure 2
-#: src/osha/oira/templates/risk_actionplan.pt:176
+#: src/osha/oira/templates/risk_actionplan.pt:175
 msgid "measure_template_title"
 msgstr ""
 
 #. Default: Please leave any comments you may have on the question above in this
 #. field. These comments will be used in the action plan.
-#: src/osha/oira/templates/risk_actionplan.pt:162
+#: src/osha/oira/templates/risk_actionplan.pt:161
 #: src/osha/oira/templates/risk_evaluation.pt:78
 #: src/osha/oira/templates/risk_identification.pt:42
 msgid "label_comment"
 msgstr ""
 
-#: src/osha/oira/templates/risk_actionplan.pt:150
+#: src/osha/oira/templates/risk_actionplan.pt:149
 msgid "Use"
 msgstr ""
 
 #. Default: There are known common approaches to this risk. You can create a new
 #. measure based on these approaches.
-#: src/osha/oira/templates/risk_actionplan.pt:145
+#: src/osha/oira/templates/risk_actionplan.pt:144
 msgid "help_common_solutions"
 msgstr ""
 
-#. Default: Common solutions
-#: src/osha/oira/templates/risk_actionplan.pt:144
+#. Default: Common measures
+#: src/osha/oira/templates/risk_actionplan.pt:143
 msgid "header_common_solutions"
 msgstr ""
 
 #. Default: Add another measure
-#: src/osha/oira/templates/risk_actionplan.pt:140
+#: src/osha/oira/templates/risk_actionplan.pt:139
 msgid "label_add_measure"
 msgstr ""
 
 #. Default: Please enter a valid year after 1900
-#: src/osha/oira/templates/risk_actionplan.pt:131
-#: src/osha/oira/templates/risk_actionplan.pt:101
+#: src/osha/oira/templates/risk_actionplan.pt:130
+#: src/osha/oira/templates/risk_actionplan.pt:100
 msgid "error_invalid_year"
 msgstr ""
 
 #. Default: Invalid day
-#: src/osha/oira/templates/risk_actionplan.pt:117
-#: src/osha/oira/templates/risk_actionplan.pt:87
+#: src/osha/oira/templates/risk_actionplan.pt:116
+#: src/osha/oira/templates/risk_actionplan.pt:86
 msgid "error_invalid_day"
 msgstr ""
 
 #. Default: Please enter the budget in whole Euros.
-#: src/osha/oira/templates/risk_actionplan.pt:72
+#: src/osha/oira/templates/risk_actionplan.pt:71
 msgid "error_invalid_budget"
 msgstr ""
 
@@ -975,18 +1069,18 @@ msgstr ""
 msgid "survey_list_footer"
 msgstr ""
 
-#. Default: add a new survey
+#. Default: add a new OiRA Tool
 #: src/osha/oira/templates/sector_view.pt:33
 #: src/osha/oira/templates/sector_view.pt:18
 msgid "add_survey"
 msgstr ""
 
-#. Default: There are no surveys present. You can ${add_link}.
+#. Default: There are no OiRA Tools present. You can ${add_link}.
 #: src/osha/oira/templates/sector_view.pt:16
 msgid "no_surveys_present"
 msgstr ""
 
-#. Default: Surveys
+#. Default: OiRA Tools
 #: src/osha/oira/templates/sector_view.pt:14
 msgid "header_sector_survey_list"
 msgstr ""
@@ -1041,7 +1135,7 @@ msgstr ""
 msgid "header_select_session"
 msgstr ""
 
-#. Default: Session
+#. Default: OiRA Tool
 #: src/osha/oira/templates/sessions.pt:18
 msgid "header_session"
 msgstr ""
@@ -1185,8 +1279,10 @@ msgid "header_oira_tool"
 msgstr ""
 
 #. Default: Complicated? Not really. It just takes a bit of time. However, the RA
-#. is important. So important that the government has made it compulsory for almost
-#. all entrepreneurs with employees.
+#. is important. So important that it is a legal requirement. This is for good
+#. reason. If risks are not assessed or properly dealt with, a suitable risk
+#. management process cannot be started and appropriate preventive measures are
+#. unlikely to be found or put in place.
 #: src/osha/oira/templates/start.pt:25
 msgid "intro_not_complicated"
 msgstr ""
@@ -1199,10 +1295,10 @@ msgstr ""
 #. Default: Including the risks to your employees and your equipment? What if there
 #. is an accident with one of the machines? What if an employee is exposed to
 #. hazardous substances? A risk assessment helps you to define these risks and
-#. tackle them head on. A risk assessment consists of two parts: a with all the
-#. risks to your company and an to deal with them. These two components allow you
-#. to limit the risks to your employees and your company, and therefore also the
-#. financial risk.
+#. tackle them head on. A risk assessment mainly consists of two parts: a with all
+#. the risks in your company and an with details of how to deal with these risks.
+#. These two components allow you to limit the risks to your employees and your
+#. company, and therefore the financial risk.
 #: src/osha/oira/templates/start.pt:22
 msgid "intro_risk_aware"
 msgstr ""
@@ -1212,7 +1308,7 @@ msgstr ""
 msgid "header_risk_aware"
 msgstr ""
 
-#. Default: This survey has no modules.
+#. Default: This OiRA Tool has no modules.
 #: src/osha/oira/templates/survey_view.pt:32
 msgid "no_modules"
 msgstr ""
@@ -1266,29 +1362,28 @@ msgstr ""
 
 #. Default: GPL License
 #: src/osha/oira/templates/webhelpers.pt:114
-#: src/osha/oira/tiles/templates/footer.pt:25
+#: src/osha/oira/tiles/templates/footer.pt:24
 msgid "appendix_gpl_license"
 msgstr ""
 
 #. Default: Disclaimer
 #: src/osha/oira/templates/webhelpers.pt:112
-#: src/osha/oira/tiles/templates/footer.pt:23
+#: src/osha/oira/tiles/templates/footer.pt:22
 msgid "appendix_disclaimer"
 msgstr ""
 
 #. Default: Privacy
 #: src/osha/oira/templates/webhelpers.pt:110
-#: src/osha/oira/tiles/templates/footer.pt:21
+#: src/osha/oira/tiles/templates/footer.pt:20
 msgid "appendix_privacy"
 msgstr ""
 
 #. Default: About
 #: src/osha/oira/templates/webhelpers.pt:108
-#: src/osha/oira/tiles/templates/footer.pt:19
+#: src/osha/oira/tiles/templates/footer.pt:18
 msgid "appendix_about"
 msgstr ""
 
-#. Default: Produced by ${EU-OSHA}.
 #. Default: Produced by ${EU-OSHA}.
 #: src/osha/oira/templates/webhelpers.pt:105
 #: src/osha/oira/tiles/templates/footer.pt:15

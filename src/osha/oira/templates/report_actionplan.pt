@@ -56,7 +56,7 @@
     <li>
         <em>
         <strong tal:condition="view/unanswered_nodes" 
-            i18n:translate="header_unanswered_risks">Hazards/problems that have been "parked" and are still to be dealt with </strong>
+            i18n:translate="header_unanswered_risks">Hazards/problems that have been "parked" and are still to be dealt with</strong>
         </em>
     </li>
     <tal:node repeat="node view/unanswered_nodes">

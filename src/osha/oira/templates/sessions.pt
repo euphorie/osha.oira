@@ -15,7 +15,7 @@
     <metal:css use-macro="webhelpers/macros/css"/>
   </head>
   <body tal:define="sessions view/sessions">
-    <h1 i18n:translate="header_session">Session</h1>
+    <h1 i18n:translate="header_session">OiRA Tool</h1>
     
     <p tal:define="country webhelpers/country" class="country ${country}" id="country">${country}</p>
     

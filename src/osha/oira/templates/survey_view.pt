@@ -29,7 +29,7 @@
     <tal:block define="children view/modules_and_profile_questions">
       <h2 i18n:translate="header_modules_and_profile_questions">Modules and Profile Questions</h2>
 
-      <p tal:condition="not:python:children" i18n:translate="no_modules">This survey has no modules.</p>
+      <p tal:condition="not:python:children" i18n:translate="no_modules">This OiRA Tool has no modules.</p>
 
       <tal:children condition="python:children">
         <ol class="${python:'sortable' if can_edit and len(children)&gt;1 else None}" tal:condition="python:children">

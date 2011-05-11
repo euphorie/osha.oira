@@ -43,14 +43,14 @@
           <dd tal:define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};
                          number repeat/actionplan/number"
              class="${python:'error' if errors else None}">
-            <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip">You write down in the Plan what measure you will be taking in response to the risk. Removing the causes (tackling the source) is the preferred method: that way, the risk can no longer arise. You then write down what tasks have to be carried out in order for the risk to be removed, as well as the knowledge and experience that are needed for those tasks to be carried out (prevention plan and requirements). In most cases, the prevention officer will help in the implementation of the Plan: however, he must have the capability or have had the relevant training to do this.</a>
+            <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</a>
             <div class="span-7 colborder">
               <fieldset class="condensed">
                 <legend>Description of the measure</legend>
-                <label for="actionplan-1" class="superImpose" i18n:translate="label_measure_action_plan">Action plan</label>
+                <label for="actionplan-1" class="superImpose" i18n:translate="label_measure_action_plan">General approach (to eliminate or reduce the risk)</label>
                 <textarea id="actionplan-1" type="text" name="measure.action_plan:utf8:ustring:records" rows="6" tal:content="actionplan/action_plan|nothing"></textarea>
                 <hr/>
-                <label for="preventionplan-1" class="superImpose" i18n:translate="label_measure_prevention_plan">Prevention plan</label>
+                <label for="preventionplan-1" class="superImpose" i18n:translate="label_measure_prevention_plan">Specific action(s) required to implement this approach</label>
                 <textarea id="preventionplan-1" name="measure.prevention_plan:utf8:ustring:records" rows="3" tal:content="actionplan/prevention_plan|nothing"></textarea>
                 <hr/>
                 <label for="requirements-1" class="superImpose" i18n:translate="label_measure_requirements">Requirements</label>
@@ -141,7 +141,7 @@
       </div>
 
       <tal:block condition="python:view.solutions">
-        <h4 i18n:translate="header_common_solutions">Common solutions</h4>
+        <h4 i18n:translate="header_common_solutions">Common measures</h4>
         <p i18n:translate="help_common_solutions">There are known common
         approaches to this risk. You can create a new measure based on these
         approaches.</p>
@@ -176,14 +176,14 @@
       <dt><tal:span i18n:translate="measure_template_title">Measure 2</tal:span>
            <button class="small removeButton" i18n:translate="label_remove">Remove</button></dt>
       <dd>
-        <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip">You write down in the Plan what measure you will be taking in response to the risk. Removing the causes (tackling the source) is the preferred method: that way, the risk can no longer arise. You then write down what tasks have to be carried out in order for the risk to be removed, as well as the knowledge and experience that are needed for those tasks to be carried out (prevention plan and requirements). In most cases, the prevention officer will help in the implementation of the Plan: however, he must have the capability or have had the relevant training to do this.</a>
+        <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</a>
         <div class="span-7 colborder">
           <fieldset class="condensed">
             <legend>Description of the measure</legend>
-            <label for="actionplan-2" class="superImpose" i18n:translate="label_measure_action_plan">Action plan</label>
+            <label for="actionplan-2" class="superImpose" i18n:translate="label_measure_action_plan">General approach (to eliminate or reduce the risk)</label>
             <textarea id="actionplan-2" type="text" name="measure.action_plan:utf8:ustring:records" rows="6" ></textarea>
             <hr/>
-            <label for="preventionplan-2" class="superImpose" i18n:translate="label_measure_prevention_plan">Prevention plan</label>
+            <label for="preventionplan-2" class="superImpose" i18n:translate="label_measure_prevention_plan">Specific action(s) required to implement this approach</label>
             <textarea id="preventionplan-2" name="measure.prevention_plan:utf8:ustring:records" rows="3" ></textarea>
             <hr/>
             <label for="requirements-2" class="superImpose" i18n:translate="label_measure_requirements">Requirements</label>

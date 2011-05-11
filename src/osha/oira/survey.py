@@ -289,16 +289,20 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
 
             if node.priority:
                 if node.priority=="low":
-                    level=_("report_priority_low", default=u"low priority risk")
+                    level=_("risk_priority_low", default=u"low")
                 elif node.priority=="medium":
-                    level=_("report_priority_medium", default=u"medium priority risk")
+                    level=_("risk_priority_medium", default=u"medium")
                 elif node.priority=="high":
-                    level=_("report_priority_high", default=u"high priority risk")
+                    level=_("risk_priority_high", default=u"high")
+
+                msg = _("risk_priority", 
+                    default="This is a ${priority_value} priority risk.",
+                    mapping={'priority_value': level})
 
                 body.append(Paragraph(
                                 styles.RiskPriority, 
-                                t(_("report_priority", default=u"This is a ")), t(level))
-                            )
+                                t(msg)
+                            ))
                 body.append(
                         Paragraph(
                                 styles.Normal, 

@@ -61,7 +61,7 @@ for entry in newpo:
     else:
         print "WARNING! msgid '%s' in 'new' file does not have a default " \
             "translation." % entry.msgid
-        continue
+        default_new = entry.msgid
     # try to find the same message in the existing po file
     target = oldpo.find(entry.msgid)
     if not target:

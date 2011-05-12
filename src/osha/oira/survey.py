@@ -351,13 +351,16 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         ss = document.StyleSheet
         styles = document.StyleSheet.ParagraphStyles
         headings = [
-            t(_("label_measure_action_plan")),
-            t(_("label_measure_prevention_plan")),
-            t(_("label_measure_requirements")),
-            t(_("label_action_plan_responsible")),
-            t(_("label_action_plan_budget")),
-            t(_("label_action_plan_start")),
-            t(_("label_action_plan_end")),
+            t(_("label_measure_action_plan", default=u"General approach (to "
+                u"eliminate or reduce the risk)")),
+            t(_("label_measure_prevention_plan", default=u"Specific action(s) "
+                u"required to implement this approach")),
+            t(_("label_measure_requirements", default=u"Requirements")),
+            t(_("label_action_plan_responsible", default=u"Who is "
+                u"responsible?")),
+            t(_("label_action_plan_budget", default=u"Budget (in Euro)")),
+            t(_("label_action_plan_start", default=u"Planning start")),
+            t(_("label_action_plan_end", default=u"Planning end")),
             ]
         m = measure
         values = [

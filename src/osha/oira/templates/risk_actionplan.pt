@@ -147,7 +147,7 @@
 
         <ul>
           <li tal:repeat="solution view/solutions"><button class="commonMeasureButton small" type="button"
-            value="common-solution-${repeat/solution/number}" i18n:translate="">Use</button>
+            value="common-solution-${repeat/solution/number}" i18n:translate="button_use_measure">Use this measure</button>
             <p tal:replace="structure solution/description">Arrange for a maintenance contract.</p></li>
         </ul>
       </tal:block>

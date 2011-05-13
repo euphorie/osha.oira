@@ -2,7 +2,7 @@
 # Copyright (C) Syslab.com, EU-OSHA
 # This file is distributed under the same license as the Euphorie project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-01-19 08:26+0200\n"
 "Last-Translator: xl <xl@hol.gr>\n"
 "Language-Team: en <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "Generated-By: Babel 0.9.5\n"
+"Language: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #. Default: "OiRA - Online interactive Risk Assessment"
 msgid "title_tool"
@@ -36,7 +36,8 @@ msgstr "Γενική προσέγγιση (για την εξάλειψη ή μ�
 
 #. Default: "Specific action(s) required to implement this approach"
 msgid "label_measure_prevention_plan"
-msgstr "Απαιτείται ειδική ενέργεια(-ες) για την εφαρμογή αυτής της προσέγγισης"
+msgstr ""
+"Απαιτείται ειδική ενέργεια(-ες) για την εφαρμογή αυτής της προσέγγισης"
 
 #. Default: "Specific action(s) required to implement this approach:"
 msgid "report_measure_preventionplan"
@@ -62,14 +63,14 @@ msgstr "Απαιτούμενο επίπεδο τεχνογνωσίας ή/και
 msgid "actionplan_measure_tooltip"
 msgstr ""
 "Περιγράψτε: 1) ποια η γενική σας προσέγγισή για να εξαλείψετε ή (εάν ο "
-"κίνδυνος είναι αναπόφευκτος) να μειώσετε τον κίνδυνο, 2) την ειδική ενέργεια"
-"(-ες) που απαιτείται για να εφαρμόσετε αυτή την προσέγγιση (για να "
+"κίνδυνος είναι αναπόφευκτος) να μειώσετε τον κίνδυνο, 2) την ειδική "
+"ενέργεια(-ες) που απαιτείται για να εφαρμόσετε αυτή την προσέγγιση (για να "
 "εξαλείψετε ή να μειώσετε τον κίνδυνο), 3) το επίπεδο τεχνογνωσίας που "
 "απαιτείται για να εφαρμοστεί το μέτρο, για παράδειγμα “κοινή λογική (δεν "
 "απαιτούνται γνώσεις OSH)”, “δεν απαιτείται συγκεκριμένη τεχνογνωσία OSH, "
 "ωστόσο χρειάζονται οι ελάχιστες γνώσεις ή κατάρτιση OSH ή/και παροχή "
-"συμβουλών για την καθοδήγηση OSH” ή “ειδικός(-ή) σε OSH”. Μπορείτε επίσης να "
-"περιγράψετε εδώ οποιαδήποτε άλλη πρόσθετη απαίτηση (εάν υπάρχει)."
+"συμβουλών για την καθοδήγηση OSH” ή “ειδικός(-ή) σε OSH”. Μπορείτε επίσης να"
+" περιγράψετε εδώ οποιαδήποτε άλλη πρόσθετη απαίτηση (εάν υπάρχει)."
 
 #. Default: "Describe your general approach to eliminate or (if the risk is
 #. not avoidable) reduce the risk."
@@ -95,9 +96,9 @@ msgstr ""
 #. requirement (if any)."
 msgid "help_measure_requirements"
 msgstr ""
-"Περιγράψτε: 1) ποια είναι η γενική σας προσέγγισή για να εξαλείψετε ή (εάν ο "
-"κίνδυνος είναι αναπόφευκτος) να μειώσετε τον κίνδυνο, 2) την ειδική ενέργεια"
-"(-ες) που απαιτείται για να εφαρμόσετε αυτή την προσέγγιση (για να "
+"Περιγράψτε: 1) ποια είναι η γενική σας προσέγγισή για να εξαλείψετε ή (εάν ο"
+" κίνδυνος είναι αναπόφευκτος) να μειώσετε τον κίνδυνο, 2) την ειδική "
+"ενέργεια(-ες) που απαιτείται για να εφαρμόσετε αυτή την προσέγγιση (για να "
 "εξαλείψετε ή να μειώσετε τον κίνδυνο), 3) το επίπεδο τεχνογνωσίας που "
 "απαιτείται για να εφαρμοστεί το μέτρο, για παράδειγμα \"κοινή λογική (δεν "
 "απαιτούνται γνώσεις OSH)\", \"δεν απαιτείται συγκεκριμένη τεχνογνωσία OSH, "
@@ -137,49 +138,56 @@ msgstr "Μέτρο αντιμετώπισης ${number}"
 #. if there is an accident with one of the machines? What if an employee is
 #. exposed to hazardous substances? A risk assessment helps you to define
 #. these risks and tackle them head on. A risk assessment mainly consists of
-#. two parts: a <em>list</em> with all the risks in your company and an <em>action
-#. plan</em> with details of how to deal with these risks. These two components
+#. two parts: a <em>list</em> with all the risks in your company and an
+#. <em>action
+#. plan</em> with details of how to deal with these risks. These two
+#. components
 #. allow you to limit the risks to your employees and your company, and
 #. therefore the financial risk."
 #: euphorie/client/templates/start.pt:22
 msgid "intro_risk_aware"
 msgstr ""
-"Συμπεριλαμβάνονται οι κίνδυνοι για τους υπαλλήλους και τον εξοπλισμό σας; Τι "
-"θα συμβεί εάν προκληθεί ατύχημα με ένα από τα μηχανήματα; Τι θα συμβεί εάν "
+"Συμπεριλαμβάνονται οι κίνδυνοι για τους υπαλλήλους και τον εξοπλισμό σας; Τι"
+" θα συμβεί εάν προκληθεί ατύχημα με ένα από τα μηχανήματα; Τι θα συμβεί εάν "
 "κάποιος από τους υπαλλήλους εκτεθεί σε επιβλαβείς ουσίες; Η αξιολόγηση "
 "κινδύνων σας βοηθά να προσδιορίσετε αυτούς τους κινδύνους και να τους "
-"αντιμετωπίσετε ευθέως. Μια αξιολόγηση κινδύνων αποτελείται από δύο μέρη: μια "
-"<em>λίστα</em> με όλους τους κινδύνους που ενέχει η εταιρεία σας και ένα "
+"αντιμετωπίσετε ευθέως. Μια αξιολόγηση κινδύνων αποτελείται από δύο μέρη: μια"
+" <em>λίστα</em> με όλους τους κινδύνους που ενέχει η εταιρεία σας και ένα "
 "<em>σχέδιο δράσης</em> με λεπτομέρειες για την αντιμετώπισή τους. Αυτά τα "
 "δύο μέρη σας επιτρέπουν να περιορίσετε τους κινδύνους στους υπαλλήλους σας "
 "και την εταιρεία σας και κατά συνέπεια μειώνουν και το οικονομικό κόστος."
 
 #. Default: "Complicated? Not really. It just takes a bit of time. However,
-#. the RA is important. So important that it is a legal requirement. This is for good
+#. the RA is important. So important that it is a legal requirement. This is
+#. for good
 #. reason. If risks are not assessed or properly dealt with, a suitable risk
-#. management process cannot be started and appropriate preventive measures are
+#. management process cannot be started and appropriate preventive measures
+#. are
 #. unlikely to be found or put in place."
 #: euphorie/client/templates/start.pt:25
 msgid "intro_not_complicated"
 msgstr ""
-"Πολύπλοκο; Ουσιαστικά όχι. Απλώς χρειάζεται λίγο χρόνο. Ωστόσο, η αξιολόγηση "
-"κινδύνων είναι σημαντική. Τόσο σημαντική που αποτελεί νομική υποχρέωση. Αυτό "
-"συμβαίνει για κάποιο λόγο. Εάν οι κίνδυνοι δεν αξιολογηθούν ή δεν "
+"Πολύπλοκο; Ουσιαστικά όχι. Απλώς χρειάζεται λίγο χρόνο. Ωστόσο, η αξιολόγηση"
+" κινδύνων είναι σημαντική. Τόσο σημαντική που αποτελεί νομική υποχρέωση. "
+"Αυτό συμβαίνει για κάποιο λόγο. Εάν οι κίνδυνοι δεν αξιολογηθούν ή δεν "
 "αντιμετωπιστούν σωστά, δεν μπορεί να ενεργοποιηθεί η κατάλληλη διαδικασία "
 "αξιολόγησης κινδύνων και τα κατάλληλα προληπτικά μέτρα είναι απίθανο να "
 "βρεθούν ή να τεθούν σε εφαρμογή."
 
-#. Default: "In order to tailor the risk assessment to your organisation you may be asked to:"
+#. Default: "In order to tailor the risk assessment to your organisation you
+#. may be asked to:"
 #: osha.oira:/templates/profile.pt:18
 msgid "expl_profile"
 msgstr ""
 
-#. Default: "select or skip situation(s) relevant or not to your business activity and tick the box(es) if appropriate"
+#. Default: "select or skip situation(s) relevant or not to your business
+#. activity and tick the box(es) if appropriate"
 #: osha.oira:/templates/profile.pt:23
 msgid "expl_profile_bullet1"
 msgstr ""
 
-#. Default: "list multiple business units, or branches, or stores, etc. These related risks will be repeated for each name you have entered."
+#. Default: "list multiple business units, or branches, or stores, etc. These
+#. related risks will be repeated for each name you have entered."
 #: osha.oira:/templates/profile.pt:27
 msgid "expl_profile_bullet2"
 msgstr ""
@@ -299,7 +307,8 @@ msgstr ""
 "Αυτή η αναφορά βασίστηκε στο εργαλείο OiRA '${title}' με ημερομηνία "
 "αναθεώρησης ${date}."
 
-#. Default: "This document was based on the OiRA Tool '${title}' of revision date ${date}."
+#. Default: "This document was based on the OiRA Tool '${title}' of revision
+#. date ${date}."
 #: osha.oira:/survey.py:366
 msgid "report_identification_revision"
 msgstr ""
@@ -379,15 +388,18 @@ msgid "label_choose_surveygroup"
 msgstr "Επιλέξτε ένα εργαλείο OiRA"
 
 #. Default: "Now that you have identified the existing hazards/problems in
-#. your company/organisation you need to evaluate the risks arising from them."
+#. your company/organisation you need to evaluate the risks arising from
+#. them."
 #: euphorie/client/templates/evaluation.pt:19
 msgid "help_risks_present"
 msgstr ""
-"Τώρα που έχετε αναγνωρίσει τους τρέχοντες κινδύνους/προβλήματα στην εταιρεία/"
-"επιχείρησή σας, πρέπει να αξιολογήσετε τους κινδύνους που προκύπτουν από "
-"αυτά."
+"Τώρα που έχετε αναγνωρίσει τους τρέχοντες κινδύνους/προβλήματα στην "
+"εταιρεία/επιχείρησή σας, πρέπει να αξιολογήσετε τους κινδύνους που "
+"προκύπτουν από αυτά."
 
-#. Default: "After having evaluated the risks, you need to put an action plan in place to manage the risks. To eliminate or reduce risks you need to determine which preventive and protective measures are to be taken."
+#. Default: "After having evaluated the risks, you need to put an action plan
+#. in place to manage the risks. To eliminate or reduce risks you need to
+#. determine which preventive and protective measures are to be taken."
 #: euphorie/client/templates/actionplan.pt:19
 msgid "expl_actionplan_1"
 msgstr ""
@@ -402,44 +414,57 @@ msgid "expl_actionplan_2"
 msgstr ""
 "Μεταξύ των πραγμάτων που πρέπει να ληφθούν υπόψη για αυτό το βήμα είναι:"
 
-#. Default: "<ol><li>Is a risk avoidable? Can it be removed entirely? For example, this could be achieved by:<ul><li>considering whether the task or job is necessary</li><li>removing the hazard</li><li>...</li></ul></li><li>If certain risks are not avoidable, how can they be reduced to a level at which the health and safety of those exposed is not compromised.</li></ol>"
+#. Default: "<ol><li>Is a risk avoidable? Can it be removed entirely? For
+#. example, this could be achieved by:<ul><li>considering whether the task or
+#. job is necessary</li><li>removing the
+#. hazard</li><li>...</li></ul></li><li>If certain risks are not avoidable,
+#. how can they be reduced to a level at which the health and safety of those
+#. exposed is not compromised.</li></ol>"
 #: euphorie/client/templates/actionplan.pt:19
 msgid "expl_actionplan_3"
 msgstr ""
 "<ol><li>Μπορεί ένας κίνδυνος να αποφευχθεί; Μπορεί να εξαλειφθεί εντελώς; "
 "Για παράδειγμα, αυτό μπορεί να επιτευχθεί:<ul><li>εξετάζοντας εάν η εργασία "
-"είναι απαραίτητη</li><li>απομακρύνοντας τον κίνδυνο</li><li>...</li></ul></"
-"li><li>Εάν ορισμένοι κίνδυνοι είναι αναπόφευκτοι, πώς μπορούν να "
-"περιοριστούν τόσο, ώστε να μη διακυβευτεί η υγεία και η ασφάλεια όσων "
-"εκτίθενται σε αυτούς;</li></ol>"
+"είναι απαραίτητη</li><li>απομακρύνοντας τον "
+"κίνδυνο</li><li>...</li></ul></li><li>Εάν ορισμένοι κίνδυνοι είναι "
+"αναπόφευκτοι, πώς μπορούν να περιοριστούν τόσο, ώστε να μη διακυβευτεί η "
+"υγεία και η ασφάλεια όσων εκτίθενται σε αυτούς;</li></ol>"
 
-#. Default: "Once you have decided how to eliminate or reduce a particular risk, then you describe the specific action(s) required to achieve this. You should also include details of the level of expertise and/or other requirements needed for those actions to be effective."
+#. Default: "Once you have decided how to eliminate or reduce a particular
+#. risk, then you describe the specific action(s) required to achieve this.
+#. You should also include details of the level of expertise and/or other
+#. requirements needed for those actions to be effective."
 #: euphorie/client/templates/actionplan.pt:19
 msgid "expl_actionplan_4"
 msgstr ""
 "Μόλις αποφασίσετε πώς θα εξαλείψετε ή θα περιορίσετε ένα συγκεκριμένο "
-"κίνδυνο, τότε μπορείτε να περιγράψετε τη συγκεκριμένη ενέργεια (ή ενέργειες) "
-"που απαιτείται για να επιτύχετε κάτι τέτοιο. Πρέπει επίσης να συμπεριλάβετε "
-"λεπτομέρειες για το επίπεδο τεχνογνωσίας ή/και άλλες απαιτήσεις που "
+"κίνδυνο, τότε μπορείτε να περιγράψετε τη συγκεκριμένη ενέργεια (ή ενέργειες)"
+" που απαιτείται για να επιτύχετε κάτι τέτοιο. Πρέπει επίσης να συμπεριλάβετε"
+" λεπτομέρειες για το επίπεδο τεχνογνωσίας ή/και άλλες απαιτήσεις που "
 "απαιτούνται προκειμένου αυτές οι ενέργειες να είναι αποτελεσματικές."
 
-#. Default: "After having identified the risks in your company/organisation and set up an action plan to manage them, you can generate a report. The report includes all the input/information provided by you throughout the risk assessment process. You can add, if you wish, some extra information/comments to the report by filling in the field below."
+#. Default: "After having identified the risks in your company/organisation
+#. and set up an action plan to manage them, you can generate a report. The
+#. report includes all the input/information provided by you throughout the
+#. risk assessment process. You can add, if you wish, some extra
+#. information/comments to the report by filling in the field below."
 #: euphorie/client/templates/report.pt:19
 msgid "report_intro"
 msgstr ""
-"Όταν αναγνωρίσετε τους κινδύνους στην εταιρεία/οργανισμό σας και καταρτίσετε "
-"ένα σχέδιο δράσης για τη διαχείρισή τους, μπορείτε να δημιουργήσετε μια "
-"αναφορά (έκθεση). Η αναφορά περιλαμβάνει όλα τα στοιχεία/τις πληροφορίες που "
-"παρέχετε σε όλη τη διαδικασία αξιολόγησης κινδύνων. Μπορείτε να προσθέσετε, "
-"εάν θέλετε, κάποιες πρόσθετες πληροφορίες/σχόλια στην αναφορά συμπληρώνοντας "
-"το πεδίο παρακάτω."
+"Όταν αναγνωρίσετε τους κινδύνους στην εταιρεία/οργανισμό σας και καταρτίσετε"
+" ένα σχέδιο δράσης για τη διαχείρισή τους, μπορείτε να δημιουργήσετε μια "
+"αναφορά (έκθεση). Η αναφορά περιλαμβάνει όλα τα στοιχεία/τις πληροφορίες που"
+" παρέχετε σε όλη τη διαδικασία αξιολόγησης κινδύνων. Μπορείτε να προσθέσετε,"
+" εάν θέλετε, κάποιες πρόσθετες πληροφορίες/σχόλια στην αναφορά "
+"συμπληρώνοντας το πεδίο παρακάτω."
 
 #. Default: "<strong>Some information about you</strong>"
 #: euphorie/client/templates/report_company.pt:19
 msgid "company_details_intro_1"
 msgstr "<strong>Ορισμένες πληροφορίες για εσάς</strong>"
 
-#. Default: "Please consider providing some additional information below. This is not required, but it does help us to improve our tools and services."
+#. Default: "Please consider providing some additional information below. This
+#. is not required, but it does help us to improve our tools and services."
 #: euphorie/client/templates/report_company.pt:19
 msgid "company_details_intro_2"
 msgstr ""
@@ -462,23 +487,27 @@ msgstr ""
 "μέτρου."
 
 #. Default: "The implementation of preventive or protective measures in most
-#. cases is not cost free, therefore a cost can be calculated and included in your budget."
+#. cases is not cost free, therefore a cost can be calculated and included in
+#. your budget."
 #: euphorie/client/templates/risk_actionplan.pt:187
 #: euphorie/client/templates/risk_actionplan.pt:63
 msgid "actionplan_measure_budget_tooltip"
 msgstr ""
 "Η εφαρμογή των προληπτικών ή προστατευτικών μέτρων στις περισσότερες "
-"περιπτώσεις δεν είναι δωρέαν, και για το λόγο αυτό πρέπει να υπολογιστεί ένα "
-"κόστος και να συμπεριληφθεί στον προϋπολογισμό σας."
+"περιπτώσεις δεν είναι δωρέαν, και για το λόγο αυτό πρέπει να υπολογιστεί ένα"
+" κόστος και να συμπεριληφθεί στον προϋπολογισμό σας."
 
-#. Default: "You are about to print the report... please complete the optional form and then proceed."
+#. Default: "You are about to print the report... please complete the optional
+#. form and then proceed."
 #: euphorie/client/templates/report_company.pt:18
 #, fuzzy
 msgid "hader_company_details"
 msgstr "Ορισμένες πληροφορίες για εσάς"
 
-#. Default: "You are free to provide the information below. This information is
-#. meant to improve the tools and the services provided. This data will not appear in the report."
+#. Default: "You are free to provide the information below. This information
+#. is
+#. meant to improve the tools and the services provided. This data will not
+#. appear in the report."
 #: euphorie/client/templates/report_company.pt:22
 msgid "company_details_intro"
 msgstr ""
@@ -561,10 +590,11 @@ msgstr ""
 "και αξιολόγηση κινδύνου. Εάν ο τελικός χρήστης δεν επιβεβαιώσει ότι μια "
 "προαιρετική ερώτηση προφίλ είναι σχετική (επιλέγοντας το πλαίσιο), τότε η "
 "αντίστοιχη μονάδα θα παρακαμφθεί εντελώς. Εάν ο τελικός χρήστης εισάγει "
-"περισσότερες από μια επιλογές σε μια ερώτηση προφίλ με δυνατότητα επανάληψης "
-"τότε η αντίστοιχη μονάδα θα επαναληφθεί συγκεκριμένες φορές."
+"περισσότερες από μια επιλογές σε μια ερώτηση προφίλ με δυνατότητα επανάληψης"
+" τότε η αντίστοιχη μονάδα θα επαναληφθεί συγκεκριμένες φορές."
 
-#. Default: "Include any relevant information that may be helpful for the end-user."
+#. Default: "Include any relevant information that may be helpful for the end-
+#. user."
 #: euphorie/content/module.py:38 euphorie/content/page.py:20
 #: euphorie/content/profilequestion.py:48 euphorie/content/solution.py:24
 msgid "help_module_description"
@@ -572,7 +602,8 @@ msgstr ""
 "Συμπεριλάβετε όποιες σχετικές πληροφορίες μπορεί να είναι χρήσιμες για τον "
 "τελικό χρήστη"
 
-#. Default: "Allows the end-user to skip this module and everything inside it."
+#. Default: "Allows the end-user to skip this module and everything inside
+#. it."
 #: euphorie/content/module.py:47
 msgid "help_module_optional"
 msgstr ""
@@ -595,8 +626,8 @@ msgstr ""
 msgid "help_solution_direction"
 msgstr ""
 "Αυτές οι πληροφορίες θα εμφανίζονται στο βήμα Σχέδιο δράσης και πρέπει να "
-"συμπεριλαμβάνουν μια προεπισκόπηση των γενικών λύσεων που αφορούν σε αυτή τη "
-"μονάδα."
+"συμπεριλαμβάνουν μια προεπισκόπηση των γενικών λύσεων που αφορούν σε αυτή τη"
+" μονάδα."
 
 #. Default: "Affirmative statement"
 #: euphorie/content/risk.py:40
@@ -613,8 +644,8 @@ msgstr "Αρνητική δήλωση"
 #: euphorie/content/risk.py:41
 msgid "help_statement"
 msgstr ""
-"Αυτή είναι μια σύντομη καταφατική δήλωση για κάποιον πιθανό κίνδυνο (π.χ. Το "
-"κτίριο είναι καλά συντηρημένο.)"
+"Αυτή είναι μια σύντομη καταφατική δήλωση για κάποιον πιθανό κίνδυνο (π.χ. Το"
+" κτίριο είναι καλά συντηρημένο.)"
 
 #. Default: "This is the inverse of the affirmative statement (e.g.
 #. The building is not well maintained.)"
@@ -699,20 +730,24 @@ msgstr "Επικοινωνία"
 #: osha.oira:/templates/report_actionplan.pt:28
 msgid "warning_unanswered_risks"
 msgstr ""
-"Υπάρχουν ακόμη αναπάντητοι κίνδυνοι. Δείτε τη λίστα στο κάτω μέρος αυτής της "
-"σελίδας."
+"Υπάρχουν ακόμη αναπάντητοι κίνδυνοι. Δείτε τη λίστα στο κάτω μέρος αυτής της"
+" σελίδας."
 
-#. Default: "Risks that have been identified, evaluated and have an Action Plan"
+#. Default: "Risks that have been identified, evaluated and have an Action
+#. Plan"
 #: osha.oira:/survey.py:291
 msgid "header_present_risks"
 msgstr ""
 
-#. Default: "Hazards/problems that have been \"parked\" and are still to be dealt with"
+#. Default: "Hazards/problems that have been \"parked\" and are still to be
+#. dealt with"
 #: osha.oira:/templates/report_actionplan.pt:240
 msgid "header_unanswered_risks"
-msgstr "Λάβετε υπόψη σας ότι εκκρεμούν ακόμη οι παρακάτω αναπάντητοι κίνδυνοι:"
+msgstr ""
+"Λάβετε υπόψη σας ότι εκκρεμούν ακόμη οι παρακάτω αναπάντητοι κίνδυνοι:"
 
-#. Default: "Risks that have been identified but NOT evaluated and do NOT have an Action Plan"
+#. Default: "Risks that have been identified but NOT evaluated and do NOT have
+#. an Action Plan"
 #: osha.oira:/survey.py:297
 msgid "header_unevaluated_risks"
 msgstr ""
@@ -773,12 +808,13 @@ msgid "help_actionplan"
 msgstr ""
 "Αυτό το κείμενο πρέπει να επεξηγεί πώς να συμπληρώσετε το Σχέδιο δράσης."
 
-#. Default: "This text should describe how the report can either be saved or printed."
+#. Default: "This text should describe how the report can either be saved or
+#. printed."
 #: euphorie/content/help.py:74
 msgid "help_reports"
 msgstr ""
-"Αυτό το κείμενο πρέπει να περιγράφει πώς να αποθηκεύσετε ή να εκτυπώσετε την "
-"αναφορά."
+"Αυτό το κείμενο πρέπει να περιγράφει πώς να αποθηκεύσετε ή να εκτυπώσετε την"
+" αναφορά."
 
 #. Default: "General final recommendations."
 #: euphorie/content/help.py:82
@@ -786,7 +822,8 @@ msgid "help_finalwords"
 msgstr "Γενικές τελικές συστάσεις."
 
 #. Default: It is possible for you to print out the contents of the tool to
-#. enable you to look for the information at the relevant workplace (by walking
+#. enable you to look for the information at the relevant workplace (by
+#. walking
 #. around and looking at what could cause harm, or by consulting the workers
 #. about problems they have encountered). You can then introduce the
 #. information into the tool.
@@ -802,8 +839,8 @@ msgstr ""
 msgid "intro_print_identification_2"
 msgstr ""
 
-# Requested in https://syslab.com/proj/issues/2555#note-1
 #. Default: contents of the tool
+# Requested in https://syslab.com/proj/issues/2555#note-1
 #: euphorie/client/templates/identification.pt:26
 msgid "list_of_risks"
 msgstr ""
@@ -813,7 +850,9 @@ msgstr ""
 msgid "popup_title"
 msgstr "έρευνα"
 
-#. Default: "Please give us your feedback about this tool: it will take you only 3 minutes! We really value your contribution during this testing phase of the OiRA tool."
+#. Default: "Please give us your feedback about this tool: it will take you
+#. only 3 minutes! We really value your contribution during this testing phase
+#. of the OiRA tool."
 #: osha.oira:/templates/report.pt:42
 msgid "popup_text"
 msgstr ""
@@ -846,18 +885,20 @@ msgstr ""
 msgid "label_statistics_level"
 msgstr ""
 
-#. Default: "This risk is not present in your organisation, but since the sector organisation considers this one of the priority risks it must be included in this report."
+#. Default: "This risk is not present in your organisation, but since the
+#. sector organisation considers this one of the priority risks it must be
+#. included in this report."
 #: osha.oira:/templates/webhelpers.pt:141
 #: osha.oira:/templates/report_actionplan.pt:322
 msgid "top5_risk_not_present"
 msgstr ""
 
-#. Default: A version of an OiRA tool 
+#. Default: A version of an OiRA tool
 #: euphorie/content/profiles/default/types/euphorie.survey.xml:8
 msgid "A version of a survey."
 msgstr ""
 
-#. Default: An OiRA tool 
+#. Default: An OiRA tool
 #: euphorie/content/profiles/default/types/euphorie.surveygroup.xml:7
 msgid "A survey."
 msgstr ""
@@ -873,8 +914,10 @@ msgstr ""
 msgid "intro_publish_survey_published"
 msgstr ""
 
-#. Default: Are you sure you want to create a preview of this OiRA tool? You can give
-#. the URL for the preview to others so they can test the OiRA tool. To access the
+#. Default: Are you sure you want to create a preview of this OiRA tool? You
+#. can give
+#. the URL for the preview to others so they can test the OiRA tool. To access
+#. the
 #. preview a standard OiRA client login is required.
 #: euphorie/client/templates/preview.pt:17
 msgid "intro_preview"
@@ -890,19 +933,22 @@ msgstr ""
 msgid "help_publish_url"
 msgstr ""
 
-#. Default: Are you sure you want to publish this OiRA tool version? This will replace
+#. Default: Are you sure you want to publish this OiRA tool version? This will
+#. replace
 #. the current version.
 #: euphorie/client/templates/publish.pt:24
 msgid "intro_publish_other_survey_published"
 msgstr ""
 
-#. Default: Are you sure you want to republish this OiRA tool? This will make all
+#. Default: Are you sure you want to republish this OiRA tool? This will make
+#. all
 #. changes made public.
 #: euphorie/client/templates/publish.pt:21
 msgid "intro_publish_OiRA tool_published"
 msgstr ""
 
-#. Default: Are you sure you want to publish this OiRA tool? After publication the
+#. Default: Are you sure you want to publish this OiRA tool? After publication
+#. the
 #. tool will appear in the online client and be accessible by all users.
 #: euphorie/client/templates/publish.pt:17
 msgid "intro_publish_first_time"
@@ -913,13 +959,15 @@ msgstr ""
 msgid "header_publish"
 msgstr ""
 
-#. Default: This OiRA tool has been updated. Before you can continue, any changes made
+#. Default: This OiRA tool has been updated. Before you can continue, any
+#. changes made
 #. in the OiRA tool will have to be merged into your session.
 #: euphorie/client/templates/updated.pt:19
 msgid "expl_update"
 msgstr ""
 
-#. Default: The title of this OiRA tool. This title is used in the tool overview in
+#. Default: The title of this OiRA tool. This title is used in the tool
+#. overview in
 #. the clients.
 #: euphorie/content/surveygroup.py:37
 msgid "help_surveygroup_title"
@@ -940,7 +988,8 @@ msgstr ""
 msgid "menu_import"
 msgstr ""
 
-#. Default: Start creating a new OiRA tool. You will be asked whether you want to
+#. Default: Start creating a new OiRA tool. You will be asked whether you want
+#. to
 #. start off with a copy of an existing OiRA tool.
 #: euphorie/deployment/tiles/templates/versions.pt:45
 msgid "help_create_new_version"
@@ -956,32 +1005,53 @@ msgstr ""
 msgid "header_disclaimer"
 msgstr ""
 
-#. Default: "This tool contains links to other websites which are not are not under the control of the European Agency for Safety and Health and the organisations involved. The Agency and the organisations involved accept no liability in respect of the content of these websites.\302\240"
+#. Default: "This tool contains links to other websites which are not are not
+#. under the control of the European Agency for Safety and Health and the
+#. organisations involved. The Agency and the organisations involved accept no
+#. liability in respect of the content of these websites.\302\240"
 #: osha.oira:/templates/disclaimer.pt:19
 msgid "disclaimer_other_websites"
 msgstr ""
 
-#. Default: "The European Agency for Safety and Health at Work and the organisations involved will not be liable for any false, inaccurate, inappropriate or incomplete information stored in the OiRA tool or any other damages as a result of using the software."
+#. Default: "The European Agency for Safety and Health at Work and the
+#. organisations involved will not be liable for any false, inaccurate,
+#. inappropriate or incomplete information stored in the OiRA tool or any
+#. other damages as a result of using the software."
 #: osha.oira:/templates/disclaimer.pt:26
 msgid "disclaimer_tool_information"
 msgstr ""
 
-#. Default: "Moreover, an OiRA tool is not intended to cover all the risks of every workplace but to help you put the risk assessment process into practice. For the OiRA tool to be fully effective it needs to be adapted to the context of your particular enterprise - some items might need to be added others omitted if they are not relevant."
+#. Default: "Moreover, an OiRA tool is not intended to cover all the risks of
+#. every workplace but to help you put the risk assessment process into
+#. practice. For the OiRA tool to be fully effective it needs to be adapted to
+#. the context of your particular enterprise - some items might need to be
+#. added others omitted if they are not relevant."
 #: osha.oira:/templates/disclaimer.pt:33
 msgid "disclaimer_risk_coverage"
 msgstr ""
 
-#. Default: "For practical and analytical reasons, the tool presents problems/hazards separately, but in workplaces they may be intertwined. Therefore interactions between the different problems or risk factors identified must be taken into account."
+#. Default: "For practical and analytical reasons, the tool presents
+#. problems/hazards separately, but in workplaces they may be intertwined.
+#. Therefore interactions between the different problems or risk factors
+#. identified must be taken into account."
 #: osha.oira:/templates/disclaimer.pt:41
 msgid "disclaimer_interactions"
 msgstr ""
 
-#. Default: "Therefore, EU-OSHA does not accept any liability for damages and claims in case a tool does not cover all risks of a given sector."
+#. Default: "Therefore, EU-OSHA does not accept any liability for damages and
+#. claims in case a tool does not cover all risks of a given sector."
 #: osha.oira:/templates/disclaimer.pt:48
 msgid "disclaimer_coverage_liability"
 msgstr ""
 
-#. Default: "Moreover, the Agency and the organisations involved in the production of the OiRA tool do not accept any liability for damages and claims arising out of the use or inability to use the tool and the data stored therein. Similarly, EU-OSHA does not accept any liability in case of unavailability of the function of the OiRA tools to print the report, recording the risk assessment automatically generated by the tool. Therefore, the employer has to make sure, at any time, to be in possession of a printed, accurate and up-dated risk assessment."
+#. Default: "Moreover, the Agency and the organisations involved in the
+#. production of the OiRA tool do not accept any liability for damages and
+#. claims arising out of the use or inability to use the tool and the data
+#. stored therein. Similarly, EU-OSHA does not accept any liability in case of
+#. unavailability of the function of the OiRA tools to print the report,
+#. recording the risk assessment automatically generated by the tool.
+#. Therefore, the employer has to make sure, at any time, to be in possession
+#. of a printed, accurate and up-dated risk assessment."
 #: osha.oira:/templates/disclaimer.pt:53
 msgid "disclaimer_printed_assesment"
 msgstr ""

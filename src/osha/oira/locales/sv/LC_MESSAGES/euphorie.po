@@ -1021,3 +1021,841 @@ msgstr ""
 #: osha.oira:/templates/disclaimer.pt:53
 msgid "disclaimer_printed_assesment"
 msgstr ""
+
+#: src/osha/oira/module.py:17 src/osha/oira/module.py:30
+#: src/osha/oira/module.py:45
+msgid "Submodule"
+msgstr "Delmodul"
+
+#. Default: Measure
+#: src/osha/oira/survey.py:323 src/osha/oira/survey.py:346
+msgid "header_measure_single"
+msgstr "Åtgärd ${index}"
+
+#. Default: Measure ${index}
+#: src/osha/oira/survey.py:325
+#: src/osha/oira/templates/report_actionplan.pt:109
+#: src/osha/oira/templates/risk_actionplan.pt:41
+msgid "header_measure"
+msgstr "Åtgärd ${index}"
+
+#. Default: Who is responsible?
+#: src/osha/oira/survey.py:359 src/osha/oira/templates/risk_actionplan.pt:194
+#: src/osha/oira/templates/risk_actionplan.pt:61
+msgid "label_action_plan_responsible"
+msgstr "Vem är ansvarig?"
+
+#. Default: Budget (in Euro)
+#: src/osha/oira/survey.py:361 src/osha/oira/templates/risk_actionplan.pt:199
+#: src/osha/oira/templates/risk_actionplan.pt:67
+msgid "label_action_plan_budget"
+msgstr "Budget (i euro)"
+
+#. Default: Planning start
+#: src/osha/oira/survey.py:362 src/osha/oira/templates/risk_actionplan.pt:204
+#: src/osha/oira/templates/risk_actionplan.pt:78
+msgid "label_action_plan_start"
+msgstr "Planerad start"
+
+#. Default: Planning end
+#: src/osha/oira/survey.py:363 src/osha/oira/templates/risk_actionplan.pt:221
+#: src/osha/oira/templates/risk_actionplan.pt:108
+msgid "label_action_plan_end"
+msgstr "Planerat slut"
+
+#. Default: Contents
+#: src/osha/oira/survey.py:501 src/osha/oira/templates/report_actionplan.pt:17
+#: src/osha/oira/templates/report_identification.pt:16
+msgid "toc_header"
+msgstr "Innehåll"
+
+#. Default: Action plan ${title}
+#: src/osha/oira/survey.py:537
+msgid "filename_report_actionplan"
+msgstr "Handlingsplan ${title}.doc"
+
+#. Default: Settings
+#: src/osha/oira/templates/actionplan.pt:106
+#: src/osha/oira/templates/report.pt:102
+#: src/osha/oira/templates/report_actionplan.pt:332
+#: src/osha/oira/templates/report_identification.pt:121
+#: src/osha/oira/templates/sessions.pt:112
+msgid "navigation_settings"
+msgstr "Status"
+
+#. Default: Status
+#: src/osha/oira/templates/actionplan.pt:105
+#: src/osha/oira/templates/report.pt:101
+#: src/osha/oira/templates/report_actionplan.pt:331
+#: src/osha/oira/templates/report_identification.pt:120
+#: src/osha/oira/templates/risk_actionplan.pt:282
+#: src/osha/oira/templates/risk_evaluation.pt:127
+#: src/osha/oira/templates/risk_identification.pt:90
+msgid "navigation_status"
+msgstr "Status"
+
+#. Default: Help
+#: src/osha/oira/templates/actionplan.pt:104
+#: src/osha/oira/templates/disclaimer.pt:67
+#: src/osha/oira/templates/profile.pt:104
+#: src/osha/oira/templates/register.pt:41
+#: src/osha/oira/templates/report.pt:100
+#: src/osha/oira/templates/report_actionplan.pt:330
+#: src/osha/oira/templates/report_identification.pt:119
+#: src/osha/oira/templates/risk_actionplan.pt:281
+#: src/osha/oira/templates/risk_evaluation.pt:126
+#: src/osha/oira/templates/risk_identification.pt:89
+#: src/osha/oira/templates/sessions.pt:111 src/osha/oira/templates/start.pt:70
+msgid "navigation_help"
+msgstr "Hjälp"
+
+#. Default: Logout
+#: src/osha/oira/templates/actionplan.pt:102
+#: src/osha/oira/templates/profile.pt:102 src/osha/oira/templates/report.pt:98
+#: src/osha/oira/templates/report_actionplan.pt:328
+#: src/osha/oira/templates/report_identification.pt:117
+#: src/osha/oira/templates/risk_actionplan.pt:279
+#: src/osha/oira/templates/risk_evaluation.pt:124
+#: src/osha/oira/templates/risk_identification.pt:87
+#: src/osha/oira/templates/sessions.pt:110 src/osha/oira/templates/start.pt:68
+msgid "navigation_logout"
+msgstr "Logga ut"
+
+#. Default: Report
+#: src/osha/oira/templates/actionplan.pt:96
+#: src/osha/oira/templates/profile.pt:96 src/osha/oira/templates/report.pt:91
+#: src/osha/oira/templates/report_actionplan.pt:316
+#: src/osha/oira/templates/report_identification.pt:110
+#: src/osha/oira/templates/risk_actionplan.pt:272
+#: src/osha/oira/templates/risk_evaluation.pt:117
+#: src/osha/oira/templates/risk_identification.pt:80
+#: src/osha/oira/templates/sessions.pt:104 src/osha/oira/templates/start.pt:62
+msgid "iphone_report"
+msgstr "Rapport"
+
+#. Default: Report
+#: src/osha/oira/templates/actionplan.pt:95
+#: src/osha/oira/templates/profile.pt:95 src/osha/oira/templates/report.pt:90
+#: src/osha/oira/templates/report_actionplan.pt:315
+#: src/osha/oira/templates/report_identification.pt:109
+#: src/osha/oira/templates/risk_actionplan.pt:271
+#: src/osha/oira/templates/risk_evaluation.pt:116
+#: src/osha/oira/templates/risk_identification.pt:79
+#: src/osha/oira/templates/sessions.pt:103 src/osha/oira/templates/start.pt:61
+msgid "label_report"
+msgstr "Rapport"
+
+#. Default: Action Plan
+#: src/osha/oira/templates/actionplan.pt:90
+#: src/osha/oira/templates/profile.pt:92 src/osha/oira/templates/report.pt:85
+#: src/osha/oira/templates/report_actionplan.pt:310
+#: src/osha/oira/templates/report_identification.pt:104
+#: src/osha/oira/templates/risk_actionplan.pt:263
+#: src/osha/oira/templates/risk_evaluation.pt:111
+#: src/osha/oira/templates/risk_identification.pt:74
+#: src/osha/oira/templates/sessions.pt:100 src/osha/oira/templates/start.pt:58
+msgid "iphone_label_action_plan"
+msgstr "Handlingsplan"
+
+#. Default: Action Plan
+#: src/osha/oira/templates/actionplan.pt:89
+#: src/osha/oira/templates/profile.pt:91 src/osha/oira/templates/report.pt:84
+#: src/osha/oira/templates/report_actionplan.pt:309
+#: src/osha/oira/templates/report_identification.pt:103
+#: src/osha/oira/templates/risk_actionplan.pt:262
+#: src/osha/oira/templates/risk_evaluation.pt:110
+#: src/osha/oira/templates/risk_identification.pt:73
+#: src/osha/oira/templates/sessions.pt:99 src/osha/oira/templates/start.pt:57
+msgid "label_action_plan"
+msgstr "Handlingsplan"
+
+#. Default: Evaluation
+#: src/osha/oira/templates/actionplan.pt:84
+#: src/osha/oira/templates/profile.pt:88 src/osha/oira/templates/report.pt:79
+#: src/osha/oira/templates/report_actionplan.pt:304
+#: src/osha/oira/templates/report_identification.pt:98
+#: src/osha/oira/templates/risk_actionplan.pt:257
+#: src/osha/oira/templates/risk_evaluation.pt:102
+#: src/osha/oira/templates/risk_identification.pt:68
+#: src/osha/oira/templates/sessions.pt:96 src/osha/oira/templates/start.pt:54
+msgid "iphone_label_evaluation"
+msgstr "Utvärdering"
+
+#. Default: Evaluation
+#: src/osha/oira/templates/actionplan.pt:83
+#: src/osha/oira/templates/profile.pt:87 src/osha/oira/templates/report.pt:78
+#: src/osha/oira/templates/report_actionplan.pt:303
+#: src/osha/oira/templates/report_identification.pt:97
+#: src/osha/oira/templates/risk_actionplan.pt:256
+#: src/osha/oira/templates/risk_evaluation.pt:101
+#: src/osha/oira/templates/risk_identification.pt:67
+#: src/osha/oira/templates/sessions.pt:95 src/osha/oira/templates/start.pt:53
+msgid "label_evaluation"
+msgstr "Utvärdering"
+
+#. Default: Identification
+#: src/osha/oira/templates/actionplan.pt:78
+#: src/osha/oira/templates/profile.pt:84 src/osha/oira/templates/report.pt:73
+#: src/osha/oira/templates/report_actionplan.pt:298
+#: src/osha/oira/templates/report_identification.pt:92
+#: src/osha/oira/templates/risk_actionplan.pt:251
+#: src/osha/oira/templates/risk_evaluation.pt:96
+#: src/osha/oira/templates/risk_identification.pt:59
+#: src/osha/oira/templates/sessions.pt:92 src/osha/oira/templates/start.pt:50
+msgid "iphone_label_identification"
+msgstr "Identifiering"
+
+#. Default: Identification
+#: src/osha/oira/templates/actionplan.pt:77
+#: src/osha/oira/templates/profile.pt:83 src/osha/oira/templates/report.pt:72
+#: src/osha/oira/templates/report_actionplan.pt:297
+#: src/osha/oira/templates/report_identification.pt:91
+#: src/osha/oira/templates/risk_actionplan.pt:250
+#: src/osha/oira/templates/risk_evaluation.pt:95
+#: src/osha/oira/templates/risk_identification.pt:58
+#: src/osha/oira/templates/sessions.pt:91 src/osha/oira/templates/start.pt:49
+msgid "label_identification"
+msgstr "Identifiering"
+
+#. Default: Preparation
+#: src/osha/oira/templates/actionplan.pt:72
+#: src/osha/oira/templates/profile.pt:79 src/osha/oira/templates/report.pt:67
+#: src/osha/oira/templates/report_actionplan.pt:292
+#: src/osha/oira/templates/report_identification.pt:86
+#: src/osha/oira/templates/risk_actionplan.pt:245
+#: src/osha/oira/templates/risk_evaluation.pt:90
+#: src/osha/oira/templates/risk_identification.pt:53
+#: src/osha/oira/templates/sessions.pt:88 src/osha/oira/templates/start.pt:45
+msgid "iphone_label_preparation"
+msgstr "Förberedelse"
+
+#. Default: Preparation
+#: src/osha/oira/templates/actionplan.pt:71
+#: src/osha/oira/templates/profile.pt:78 src/osha/oira/templates/report.pt:66
+#: src/osha/oira/templates/report_actionplan.pt:291
+#: src/osha/oira/templates/report_identification.pt:85
+#: src/osha/oira/templates/risk_actionplan.pt:244
+#: src/osha/oira/templates/risk_evaluation.pt:89
+#: src/osha/oira/templates/risk_identification.pt:52
+#: src/osha/oira/templates/sessions.pt:87 src/osha/oira/templates/start.pt:44
+msgid "label_preparation"
+msgstr "Förberedelse"
+
+#. Default: Go to report
+#: src/osha/oira/templates/actionplan.pt:64
+msgid "label_jump_to_report"
+msgstr "Gå till rapport"
+
+#. Default: Create action plan
+#: src/osha/oira/templates/actionplan.pt:63
+msgid "label_create_action_plan"
+msgstr "Skapa handlingsplan"
+
+#. Default: You have identified the magnitude of risk for each of the
+#. bottlenecks.
+#. There are no risks which need require any attention during this phase, so
+#. please
+#. proceed directly to the report.
+#: src/osha/oira/templates/actionplan.pt:56
+msgid "expl_actionplan_empty"
+msgstr ""
+"Du har identifierat riskens omfattning för varje flaskhals. Det finns inga "
+"risker som kräver uppmärksamhet under denna fas, fortsätt vidare till "
+"rapporten."
+
+#. Default: Risks
+#: src/osha/oira/templates/module_view.pt:39
+#: src/osha/oira/templates/profilequestion_view.pt:32
+msgid "header_risks"
+msgstr "Risker"
+
+#. Default: Submodules
+#: src/osha/oira/templates/module_view.pt:32
+msgid "header_submodules"
+msgstr "Delmoduler"
+
+#. Default: Information
+#: src/osha/oira/templates/module_view.pt:22
+#: src/osha/oira/templates/profilequestion_view.pt:20
+#: src/osha/oira/templates/survey_view.pt:15
+msgid "header_information"
+msgstr "Information"
+
+#. Default: Continue
+#: src/osha/oira/templates/profile.pt:71
+msgid "label_continue"
+msgstr "Fortsätt"
+
+#. Default: Add
+#: src/osha/oira/templates/profile.pt:62
+msgid "label_add_profile_module"
+msgstr "Lägg till"
+
+#. Default: Tailor the risk assessment to your organisation
+#: src/osha/oira/templates/profile.pt:16
+msgid "header_profile"
+msgstr "Skräddarsy riskbedömningen för din organisation"
+
+#. Default: Modules
+#: src/osha/oira/templates/profilequestion_view.pt:25
+msgid "header_modules"
+msgstr "Moduler"
+
+#. Default: This is a repeatable profile item.
+#: src/osha/oira/templates/profilequestion_view.pt:22
+msgid "profilequestion_type_repeat"
+msgstr "Detta är en repeterbar post i en profil. "
+
+#. Default: This is an optional profile item.
+#: src/osha/oira/templates/profilequestion_view.pt:21
+msgid "profilequestion_type_optional"
+msgstr "Detta är en post i en profil som är ett tillval."
+
+#. Default: Next
+#: src/osha/oira/templates/register.pt:35 src/osha/oira/templates/report.pt:53
+#: src/osha/oira/templates/risk_actionplan.pt:157
+#: src/osha/oira/templates/risk_evaluation.pt:74
+#: src/osha/oira/templates/risk_identification.pt:30
+#: src/osha/oira/templates/sessions.pt:81
+msgid "label_next"
+msgstr "Nästa"
+
+#. Default: Previous
+#: src/osha/oira/templates/register.pt:34
+#: src/osha/oira/templates/risk_actionplan.pt:156
+#: src/osha/oira/templates/risk_evaluation.pt:73
+#: src/osha/oira/templates/risk_identification.pt:29
+#: src/osha/oira/templates/sessions.pt:80 src/osha/oira/templates/start.pt:37
+msgid "label_previous"
+msgstr "Föregående"
+
+#. Default: Again password
+#: src/osha/oira/templates/register.pt:31
+msgid "label_password_confirm"
+msgstr "Bekräfta lösenord"
+
+#. Default: Desired password
+#: src/osha/oira/templates/register.pt:29
+msgid "label_new_password"
+msgstr "Önskat lösenord"
+
+#. Default: Email address
+#: src/osha/oira/templates/register.pt:27
+msgid "label_email"
+msgstr "E-postadress"
+
+#. Default: Register
+#: src/osha/oira/templates/register.pt:25
+#: src/osha/oira/templates/register.pt:17
+msgid "header_register"
+msgstr "Registrera"
+
+#. Default: Please leave any extra comments that should be included in the
+#. report
+#. in this field.
+#: src/osha/oira/templates/report.pt:29
+msgid "label_report_comment"
+msgstr "Lämna gärna extra kommentarer som bör ingå i denna områdesrapport."
+
+#. Default: Reporting
+#: src/osha/oira/templates/report.pt:18
+msgid "header_reporting"
+msgstr "Rapportering"
+
+#. Default: There is a budget of ${amount} for this measure.
+#: src/osha/oira/templates/report_actionplan.pt:149
+msgid "report_measure_budget"
+msgstr "Det finns en budget på ${amount} för denna åtgärd."
+
+#. Default: ${responsible} is responsible for this task which starts on
+#. ${start}
+#. and ends on ${end}.
+#: src/osha/oira/templates/report_actionplan.pt:145
+msgid "report_measure_full"
+msgstr ""
+"${responsible} ansvarar för denna uppgift som börjar på ${start} och slutar "
+"på ${end}."
+
+#. Default: This task starts on ${start} and ends on ${end}.
+#: src/osha/oira/templates/report_actionplan.pt:141
+msgid "report_measure_start_and_stop"
+msgstr "Denna uppgift börjar på ${start} och slutar på ${end}."
+
+#. Default: This task ends on ${end}.
+#: src/osha/oira/templates/report_actionplan.pt:138
+msgid "report_measure_end_only"
+msgstr "Denna uppgift slutar på ${end}."
+
+#. Default: This task starts on ${start}.
+#: src/osha/oira/templates/report_actionplan.pt:135
+msgid "report_measure_start_only"
+msgstr "Denna uppgift börjar på ${start}."
+
+#. Default: ${responsible} is responsible for this task which ends on ${end}.
+#: src/osha/oira/templates/report_actionplan.pt:132
+msgid "report_measure_responsible_and_end"
+msgstr "${responsible} är ansvarig för denna uppgift som slutar på ${end}."
+
+#. Default: ${responsible} is responsible for this task which starts on
+#. ${start}.
+#: src/osha/oira/templates/report_actionplan.pt:129
+msgid "report_measure_responsible_and_start"
+msgstr "${responsible} är ansvarig för denna uppgift som börjar på ${start}."
+
+#. Default: ${responsible} is responsible for this task.
+#: src/osha/oira/templates/report_actionplan.pt:127
+msgid "report_measure_responsible"
+msgstr "${responsible} är ansvarig för denna uppgift."
+
+#. Default: Print
+#: src/osha/oira/templates/report_actionplan.pt:30
+msgid "button_print"
+msgstr "Skriv ut"
+
+#. Default: Download
+#: src/osha/oira/templates/report_actionplan.pt:27
+#: src/osha/oira/templates/report_identification.pt:24
+msgid "button_download"
+msgstr "Ladda ner"
+
+#: src/osha/oira/templates/risk_actionplan.pt:287
+msgid ""
+"Are you sure you want to delete this measure? This action can not be "
+"reverted."
+msgstr ""
+"Är du säker på att du vill radera denna åtgärd? Denna åtgärd kan inte "
+"återställas."
+
+#. Default: Year
+#: src/osha/oira/templates/risk_actionplan.pt:232
+#: src/osha/oira/templates/risk_actionplan.pt:215
+#: src/osha/oira/templates/risk_actionplan.pt:95
+msgid "label_year"
+msgstr "År"
+
+#. Default: Month
+#: src/osha/oira/templates/risk_actionplan.pt:227
+#: src/osha/oira/templates/risk_actionplan.pt:210
+#: src/osha/oira/templates/risk_actionplan.pt:118
+#: src/osha/oira/templates/risk_actionplan.pt:88
+msgid "label_month"
+msgstr "Månad"
+
+#. Default: Day
+#: src/osha/oira/templates/risk_actionplan.pt:224
+#: src/osha/oira/templates/risk_actionplan.pt:207
+#: src/osha/oira/templates/risk_actionplan.pt:125
+#: src/osha/oira/templates/risk_actionplan.pt:111
+#: src/osha/oira/templates/risk_actionplan.pt:81
+msgid "label_day"
+msgstr "Dag"
+
+#. Default: Remove
+#: src/osha/oira/templates/risk_actionplan.pt:176
+msgid "label_remove"
+msgstr "Radera"
+
+#. Default: Measure 2
+#: src/osha/oira/templates/risk_actionplan.pt:175
+msgid "measure_template_title"
+msgstr "Åtgärd 2"
+
+#. Default: Please leave any comments you may have on the question above in
+#. this
+#. field. These comments will be used in the action plan.
+#: src/osha/oira/templates/risk_actionplan.pt:161
+#: src/osha/oira/templates/risk_evaluation.pt:78
+#: src/osha/oira/templates/risk_identification.pt:42
+msgid "label_comment"
+msgstr ""
+"Lämna gärna synpunkter du kan ha om ovanstående fråga inom detta område. "
+"Dessa kommentarer kommer att användas i handlingsplanen."
+
+#. Default: There are known common approaches to this risk. You can create a
+#. new
+#. measure based on these approaches.
+#: src/osha/oira/templates/risk_actionplan.pt:144
+msgid "help_common_solutions"
+msgstr ""
+"Det finns vanliga strategier för denna risk. Du kan skapa en ny åtgärd som "
+"bygger på dessa strategier."
+
+#. Default: Add another measure
+#: src/osha/oira/templates/risk_actionplan.pt:139
+msgid "label_add_measure"
+msgstr "Lägg till en annan åtgärd"
+
+#. Default: Please enter a valid year after 1900
+#: src/osha/oira/templates/risk_actionplan.pt:130
+#: src/osha/oira/templates/risk_actionplan.pt:100
+msgid "error_invalid_year"
+msgstr "Ange ett giltigt årtal efter år 1900"
+
+#. Default: Invalid day
+#: src/osha/oira/templates/risk_actionplan.pt:116
+#: src/osha/oira/templates/risk_actionplan.pt:86
+msgid "error_invalid_day"
+msgstr "Ogiltig dag"
+
+#. Default: Please enter the budget in whole Euros.
+#: src/osha/oira/templates/risk_actionplan.pt:71
+msgid "error_invalid_budget"
+msgstr "Ange budget i euro (ental)."
+
+#. Default: High
+#: src/osha/oira/templates/risk_evaluation.pt:68
+msgid "priority_high"
+msgstr "Hög"
+
+#. Default: Medium
+#: src/osha/oira/templates/risk_evaluation.pt:66
+msgid "priority_medium"
+msgstr "Medium"
+
+#. Default: Low
+#: src/osha/oira/templates/risk_evaluation.pt:64
+msgid "priority_low"
+msgstr "Låg"
+
+#. Default: Select the priority of this risk
+#: src/osha/oira/templates/risk_evaluation.pt:62
+msgid "header_risk_priority"
+msgstr "Välj prioritet för denna risk"
+
+#. Default: High (very high) severity
+#: src/osha/oira/templates/risk_evaluation.pt:56
+msgid "effect_permanent_damage"
+msgstr "Hög (mycket hög) allvarlighetsgrad"
+
+#. Default: Significant severity
+#: src/osha/oira/templates/risk_evaluation.pt:54
+msgid "effect_injury_with_absence"
+msgstr "Stark allvarlighetsgrad"
+
+#. Default: Weak severity
+#: src/osha/oira/templates/risk_evaluation.pt:52
+msgid "effect_injury_no_absence"
+msgstr "Svag allvarlighetsgrad"
+
+#. Default: What is the severity of the damage ?
+#: src/osha/oira/templates/risk_evaluation.pt:50
+msgid "header_risk_effect"
+msgstr "Vad för slags allvarighetsgrad har skadan?"
+
+#. Default: Constantly
+#: src/osha/oira/templates/risk_evaluation.pt:46
+msgid "frequency_constantly"
+msgstr "Konstant"
+
+#. Default: Regularly
+#: src/osha/oira/templates/risk_evaluation.pt:44
+msgid "frequency_regularly"
+msgstr "Regelbunden"
+
+#. Default: Almost never
+#: src/osha/oira/templates/risk_evaluation.pt:42
+msgid "frequency_almost_never"
+msgstr "Nästan aldrig"
+
+#. Default: How often are people exposed to this risk?
+#: src/osha/oira/templates/risk_evaluation.pt:40
+msgid "header_risk_frequency"
+msgstr "Hur ofta är personer utsatta för denna risk?"
+
+#. Default: Large
+#: src/osha/oira/templates/risk_evaluation.pt:36
+msgid "probability_large"
+msgstr "Stor"
+
+#. Default: Medium
+#: src/osha/oira/templates/risk_evaluation.pt:34
+msgid "probability_medium"
+msgstr "Medium"
+
+#. Default: Small
+#: src/osha/oira/templates/risk_evaluation.pt:32
+msgid "probability_small"
+msgstr "Liten"
+
+#. Default: What is the chance of this risk occurring?
+#: src/osha/oira/templates/risk_evaluation.pt:30
+msgid "header_risk_probability"
+msgstr "Vad är chansen att denna risk uppstår?"
+
+#. Default: Not applicable
+#: src/osha/oira/templates/risk_identification.pt:25
+msgid "label_not_applicable"
+msgstr "Ej tillämpligt"
+
+#. Default: No
+#: src/osha/oira/templates/risk_identification.pt:23
+msgid "label_no"
+msgstr "Nej"
+
+#. Default: Yes
+#: src/osha/oira/templates/risk_identification.pt:22
+msgid "label_yes"
+msgstr "Ja"
+
+#. Default: You can also ${add_link}.
+#: src/osha/oira/templates/sector_view.pt:31
+msgid "survey_list_footer"
+msgstr "Du kan även ${add_link}."
+
+#: src/osha/oira/templates/sessions.pt:117
+msgid ""
+"Are you sure you want to delete this session? This action can not be "
+"reverted."
+msgstr ""
+"Är du säker på att du vill ta bort denna session? Denna åtgärd kan inte "
+"återställas."
+
+#. Default: Start a new session choosing one of the following sectoral tools
+#: src/osha/oira/templates/sessions.pt:53
+msgid "label_select_new_session"
+msgstr "Starta en ny session genom att välja en av följande branschverktyg"
+
+#. Default: or…
+#: src/osha/oira/templates/sessions.pt:47
+msgid "header_or"
+msgstr "eller…"
+
+#. Default: Delete
+#: src/osha/oira/templates/sessions.pt:41
+msgid "label_delete"
+msgstr "Radera"
+
+#. Default: Rename
+#: src/osha/oira/templates/sessions.pt:36
+msgid "label_rename"
+msgstr "Byt namn"
+
+#. Default: saved on ${date}
+#: src/osha/oira/templates/sessions.pt:31
+msgid "lable_session_modified"
+msgstr "Sparad ${date}"
+
+#. Default: Select an earlier session to complete or review
+#: src/osha/oira/templates/sessions.pt:23
+msgid "header_select_session"
+msgstr "Välj en tidigare session för att slutborda eller förhandsgranska"
+
+#. Default: Cancel
+#: src/osha/oira/templates/settings.pt:99
+msgid "button_cancel"
+msgstr "Avbryt"
+
+#. Default: Save changes
+#: src/osha/oira/templates/settings.pt:98
+msgid "button_save_changes"
+msgstr "Spara ändringar"
+
+#: src/osha/oira/templates/settings.pt:89
+#: src/osha/oira/templates/settings.pt:81
+#: src/osha/oira/templates/settings.pt:60
+#: src/osha/oira/templates/settings.pt:33
+msgid "Information"
+msgstr "Information"
+
+#. Default: Give the name of the person responsible for the OiRA tools of this
+#. sector.
+#: src/osha/oira/templates/settings.pt:89
+msgid "help_sector_contactperson"
+msgstr ""
+"Ange namnet på den person som ansvarar för OIRA-verktygen inom denna "
+"bransch."
+
+#. Default: Contact person
+#: src/osha/oira/templates/settings.pt:87
+msgid "label_contact_person"
+msgstr "Kontaktperson"
+
+#. Default: This is the password that you need to log on to this editor
+#. environment.
+#: src/osha/oira/templates/settings.pt:81
+msgid "help_sector_password"
+msgstr ""
+"Detta är det lösenord du behöver för att logga in på denna redaktörsmiljö."
+
+#. Default: Password
+#: src/osha/oira/templates/settings.pt:79
+msgid "label_password"
+msgstr "Lösenord"
+
+#. Default: You may get the best results if you upload a logo as a
+#. ${transparent}
+#. PNG file of at least 100 pixels in height. Uploading larger images is fine,
+#. the
+#. logo will be scaled down to the right size automatically.
+#: src/osha/oira/templates/settings.pt:74
+msgid "logo_instructions"
+msgstr ""
+"Du kan få bäst resultat om du laddar upp en logotyp som ${transparent} PNG-"
+"fil på minst 100 pixlar på höjden. Det är bra att ladda upp större bilder, "
+"logotypen skalas automatiskt ner till rätt storlek."
+
+#. Default: transparent
+#: src/osha/oira/templates/settings.pt:75
+msgid "logo_instructions_transparent"
+msgstr "transparent"
+
+#. Default: My own
+#: src/osha/oira/templates/settings.pt:69
+msgid "logo_my_own"
+msgstr "Min egen"
+
+#. Default: Which logo you would like to display in the top left corner?
+#: src/osha/oira/templates/settings.pt:62
+msgid "label_logo_selection"
+msgstr "Vilken logotyp vill du visa i det övre vänstra hörnet?"
+
+#. Default: The logo will appear on both the client side app that your user
+#. group
+#. will see as well as on this editor environment in the top left corner. Make
+#. sure
+#. your image is of format png, jpg or gif and does not contain any special
+#. characters. The new logo will only become visible after you've saved your
+#. changes.
+#: src/osha/oira/templates/settings.pt:60
+msgid "help_sector_logo"
+msgstr ""
+"Logotypen visas både på applikationen för klientsidan som din användargrupp "
+"kommer att se samt på redaktörsmiljön i det övre vänstra hörnet. Se till att"
+" din bild är i formatet png, jpg eller gif och inte innehåller några "
+"specialtecken. Den nya logotypen blir inte märkbar förrän efter att du har "
+"sparat ändringarna."
+
+#. Default: Logo
+#: src/osha/oira/templates/settings.pt:58
+msgid "label_logo"
+msgstr "Logotyp"
+
+#. Default: Support colour
+#: src/osha/oira/templates/settings.pt:50
+msgid "label_support_colour"
+msgstr "Stödfärg"
+
+#. Default: Main colour
+#: src/osha/oira/templates/settings.pt:41
+msgid "label_main_colour"
+msgstr "Huvudfärg"
+
+#. Default: Please use the colour pickers below to select your organisation's
+#. colours. It's best to use a darker colour for the main colour and a lighter
+#. colour for the support colour.
+#: src/osha/oira/templates/settings.pt:36
+msgid "help_colour_picker"
+msgstr ""
+"Välj bland nedanstående färger för att välja din organisations färger. Det "
+"funkar bäst att välja en mörkare färg för huvudfärgen och en ljusare färg "
+"för stödfärgen."
+
+#. Default: The colours you select here apply only for the client side of the
+#. application. Try to pick colours that have high enough contrast to keep the
+#. text
+#. on each button legible.
+#: src/osha/oira/templates/settings.pt:33
+msgid "help_sector_colours"
+msgstr ""
+"De färger du väljer här gäller endast för klientsidans applikation. Försök "
+"att välja färger som har tillräckligt hög kontrast för att hålla texten på "
+"varje knapp läsbar."
+
+#. Default: Restore to original colours
+#: src/osha/oira/templates/settings.pt:30
+msgid "button_reset_colours"
+msgstr "Återställ till originalfärger"
+
+#. Default: Colour scheme
+#: src/osha/oira/templates/settings.pt:27
+msgid "header_colour_scheme"
+msgstr "Färgschema"
+
+#. Default: Preview
+#: src/osha/oira/templates/settings.pt:20
+msgid "label_preview"
+msgstr "Förhandsgranskning"
+
+#. Default: Please provide a description of your sector
+#: src/osha/oira/templates/settings.pt:16
+msgid "label_sector_description"
+msgstr "Ange en beskrivning av din bransch"
+
+#. Default: Settings
+#: src/osha/oira/templates/settings.pt:12
+msgid "header_settings"
+msgstr "Inställningar"
+
+#. Default: Start
+#: src/osha/oira/templates/start.pt:38
+msgid "label_start_survey"
+msgstr "Starta"
+
+#. Default: The assessment is not complicated.
+#: src/osha/oira/templates/start.pt:24
+msgid "header_not_complicated"
+msgstr "En riskbedömning är inte komplicerad"
+
+#. Default: Are you aware of all the risks?
+#: src/osha/oira/templates/start.pt:21
+msgid "header_risk_aware"
+msgstr "Är du medveten om alla risker?"
+
+#. Default: Not set
+#: src/osha/oira/templates/survey_view.pt:26
+#: src/osha/oira/templates/survey_view.pt:23
+msgid "not_set"
+msgstr "Ej inställt"
+
+#. Default: Language
+#: src/osha/oira/templates/survey_view.pt:24
+msgid "label_language"
+msgstr "Språk"
+
+#. Default: Classification code
+#: src/osha/oira/templates/survey_view.pt:21
+msgid "label_classification_code"
+msgstr "Klassificeringskod"
+
+#. Default: Mandatory
+#: src/osha/oira/templates/survey_view.pt:20
+msgid "mandatory"
+msgstr "Obligatoriskt"
+
+#. Default: Optional
+#: src/osha/oira/templates/survey_view.pt:19
+msgid "optional"
+msgstr "Tillval"
+
+#. Default: Evaluation phase
+#: src/osha/oira/templates/survey_view.pt:18
+msgid "label_evaluation_phase"
+msgstr "Utvärderingsfas"
+
+#. Default: Legal and policy references
+#: src/osha/oira/templates/webhelpers.pt:183
+#: src/osha/oira/templates/webhelpers.pt:169
+msgid "header_legal_references"
+msgstr "rättsliga och politiska referenser"
+
+#. Default: About
+#: src/osha/oira/templates/webhelpers.pt:108
+#: src/osha/oira/tiles/templates/footer.pt:18
+msgid "appendix_about"
+msgstr "Om"
+
+#. Default: Produced by ${EU-OSHA}.
+#: src/osha/oira/templates/webhelpers.pt:105
+#: src/osha/oira/tiles/templates/footer.pt:15
+msgid "appendix_produced_by"
+msgstr "Producerad av ${EU-OSHA}."
+
+#. Default: Risk Assessment
+#: src/osha/oira/templates/webhelpers.pt:17
+msgid "oira_name_line_2"
+msgstr "Riskbedömning"
+
+#. Default: Online interactive
+#: src/osha/oira/templates/webhelpers.pt:16
+msgid "oira_name_line_1"
+msgstr "Interaktiv"

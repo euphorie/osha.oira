@@ -630,7 +630,7 @@ def createSection(document, survey, request):
     t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=request)])
     section = Section(break_type=Section.PAGE, first_page_number=1)
     footer_txt = t(_("report_survey_revision",
-        default=u"This report was based on the survey '${title}' of revision date ${date}.",
+        default=u"This report was based on the OiRA Tool '${title}' of revision date ${date}.",
         mapping={"title": survey.published[1],
                  "date": formatDate(request, survey.published[2])}))
 

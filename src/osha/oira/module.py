@@ -5,6 +5,10 @@ from plone.dexterity.interfaces import IDexterityFTI
 from euphorie.content import MessageFactory as _
 from euphorie.content.module import IModule
 from euphorie.content.module import View as ModuleView
+from euphorie.client.module import IdentificationView as \
+                                        ModuleIdentificationView
+
+from interfaces import IOSHAIdentificationPhaseSkinLayer
 
 grok.templatedir("templates")
 
@@ -19,6 +23,11 @@ class View(ModuleView):
             portal_type = self.context.portal_type
             fti = getUtility(IDexterityFTI, name=portal_type)
             return fti.Title()
+
+
+class IdentificationView(ModuleIdentificationView):
+    grok.layer(IOSHAIdentificationPhaseSkinLayer)
+    grok.template("module_identification")
 
 
 class Edit(dexterity.EditForm):

@@ -17,11 +17,14 @@
     <h1>${module/title}</h1>
     <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}">
         <p class="gallery" tal:define="images module/@@images" tal:condition="python:module.image is not None">
-            <a rel="fancybox" title="${module/caption|nothing}" href="${module/absolute_url}/@@download/image/${module/image/filename}"
-                tal:define="scale python:images.scale('image', width=150, height=500, direction='thumbnail')"
-                tal:condition="scale">
-                <img alt="" class="floatBefore" src="${scale/url}" width="${scale/width}" height="${scale/height}"/>
-            </a>
+            <tal:if tal:define="thumb python:images.scale('image', width=150, height=500, direction='thumbnail')"
+                    tal:condition="thumb">
+                <a  rel="fancybox" title="${module/caption|nothing}" 
+                    tal:define="large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
+                    href="${large/url}">
+                <img alt="" class="floatBefore" src="${thumb/url}" width="${thumb/width}" height="${thumb/height}"/>
+                </a>
+            </tal:if>
         </p>
         <p tal:content="structure module/description">
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem

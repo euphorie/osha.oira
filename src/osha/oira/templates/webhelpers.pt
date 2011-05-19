@@ -123,18 +123,27 @@
 
   <metal:riskinfo define-macro="risk_info" meta:interpolation="true" i18n:domain="euphorie">
     <p class="gallery" tal:define="images risk/@@images" tal:condition="python:risk.image is not None">
-      <a rel="fancybox" title="${risk/caption|nothing}" href="${risk/absolute_url}/@@download/image/${risk/image/filename}"
-        tal:define="scale python:images.scale('image', width=150, height=500, direction='thumbnail')"
-        tal:condition="scale"><img alt="" with="${scale/width}" height="${scale/height}" src="${scale/url}"/></a>
-      <a rel="fancybox" title="${risk/caption2|nothing}" href="${risk/absolute_url}/@@download/image2/${risk/image2/filename}"
-        tal:define="scale python:images.scale('image2', width=120, height=172, direction='thumbnail')"
-        tal:condition="scale"><img alt="" with="${scale/width}" height="${scale/height}" src="${scale/url}"/></a>
-      <a rel="fancybox" title="${risk/caption3|nothing}" href="${risk/absolute_url}/@@download/image3/${risk/image3/filename}"
-        tal:define="scale python:images.scale('image3', width=120, height=172, direction='thumbnail')"
-        tal:condition="scale"><img alt="" with="${scale/width}" height="${scale/height}" src="${scale/url}"/></a>
-      <a rel="fancybox" title="${risk/caption4|nothing}" href="${risk/absolute_url}/@@download/image4/${risk/image4/filename}"
-        tal:define="scale python:images.scale('image4', width=120, height=172, direction='thumbnail')"
-        tal:condition="scale"><img alt="" with="${scale/width}" height="${scale/height}" src="${scale/url}"/></a>
+      <a rel="fancybox" title="${risk/caption|nothing}" 
+            tal:define="thumb python:images.scale('image', width=150, height=500, direction='thumbnail');
+                        large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
+            href="${large/url}"
+            tal:condition="thumb">
+                <img alt="" with="${thumb/width}" height="${thumb/height}" src="${thumb/url}"/></a>
+      <a rel="fancybox" title="${risk/caption2|nothing}"
+            tal:define="thumb python:images.scale('image2', width=120, height=172, direction='thumbnail');
+                        large python:images.scale('image2', width=590, height=1900, direction='thumbnail')"
+            href="${large/url}"
+            tal:condition="thumb"><img alt="" with="${thumb/width}" height="${thumb/height}" src="${thumb/url}"/></a>
+      <a rel="fancybox" title="${risk/caption3|nothing}"
+            tal:define="thumb python:images.scale('image3', width=120, height=172, direction='thumbnail');
+                        large python:images.scale('image3', width=590, height=1900, direction='thumbnail')"
+            href="${large/url}"
+            tal:condition="thumb"><img alt="" with="${thumb/width}" height="${thumb/height}" src="${thumb/url}"/></a>
+      <a rel="fancybox" title="${risk/caption4|nothing}" 
+            tal:define="thumb python:images.scale('image4', width=120, height=172, direction='thumbnail');
+                        large python:images.scale('image4', width=590, height=1900, direction='thumbnail')"
+            href="${large/url}"
+            tal:condition="thumb"><img alt="" with="${thumb/width}" height="${thumb/height}" src="${thumb/url}"/></a>
     </p>
     <tal:block condition="show_statement|nothing" define="use_problem_description view/use_problem_description">
       <tal:block condition="not:view/risk_present">

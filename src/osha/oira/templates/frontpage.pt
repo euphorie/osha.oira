@@ -404,6 +404,17 @@
     </ul>
     <!--[if lte IE 7]> <br/> <![endif]-->
 
+    <h2 i18n:translate="header_regions">Regions</h2>
+    <ul class="countries">
+        <li class="eu"
+            tal:attributes="class python: sectors_dict.get('eu') and 'eu' or 'eu disabled'">
+            <tal:loop repeat="lang_code python:sectors_dict.get('eu',[])">
+                <a href="${client_url}/eu/?language=${lang_code}"
+                tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+            </tal:loop>
+        </li>
+    </ul>
+
     <ul id="navigation">
       <metal:home use-macro="webhelpers/macros/homelink"/>
     </ul>

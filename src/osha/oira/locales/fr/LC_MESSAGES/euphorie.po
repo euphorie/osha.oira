@@ -543,7 +543,6 @@ msgstr ""
 
 #. Default: You can not delete a sector that contains published OiRA tools.
 #: src/osha/oira/sector.py:123
-#, fuzzy
 msgid "message_not_delete_published_sector"
 msgstr ""
 "Vous ne pouvez pas supprimer un secteur qui contient des outils OiRA "
@@ -555,7 +554,6 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:185
 #: src/osha/oira/templates/report_actionplan.pt:101
 #: src/osha/oira/templates/risk_actionplan.pt:28
-#, fuzzy
 msgid "risk_priority_low"
 msgstr "bas"
 
@@ -565,7 +563,6 @@ msgstr "bas"
 #: src/osha/oira/templates/report_actionplan.pt:186
 #: src/osha/oira/templates/report_actionplan.pt:102
 #: src/osha/oira/templates/risk_actionplan.pt:29
-#, fuzzy
 msgid "risk_priority_medium"
 msgstr "moyen"
 
@@ -575,7 +572,6 @@ msgstr "moyen"
 #: src/osha/oira/templates/report_actionplan.pt:187
 #: src/osha/oira/templates/report_actionplan.pt:103
 #: src/osha/oira/templates/risk_actionplan.pt:30
-#, fuzzy
 msgid "risk_priority_high"
 msgstr "élevé"
 
@@ -585,9 +581,8 @@ msgstr "élevé"
 #: src/osha/oira/templates/report_actionplan.pt:183
 #: src/osha/oira/templates/report_actionplan.pt:99
 #: src/osha/oira/templates/risk_actionplan.pt:26
-#, fuzzy
 msgid "risk_priority"
-msgstr "Ceci est un risque prioritaire ${valeur_prioritaire}."
+msgstr "Ceci est un risque prioritaire ${priority_value}."
 
 #. Default: Measure
 #: src/osha/oira/survey.py:323 src/osha/oira/survey.py:346
@@ -644,7 +639,6 @@ msgstr "Date de fin prévue"
 
 #. Default: Consultation of workers
 #: src/osha/oira/survey.py:413
-#, fuzzy
 msgid "header_oira_report_consultation"
 msgstr "Consultation des travailleurs"
 
@@ -669,15 +663,13 @@ msgstr "Pour le compte des travailleurs :"
 
 #. Default: Date:
 #: src/osha/oira/survey.py:446
-#, fuzzy
 msgid "oira_survey_date"
-msgstr "Date :"
+msgstr "Date:"
 
 #. Default: OiRA Report: "${title}"
 #: src/osha/oira/survey.py:488
-#, fuzzy
 msgid "header_oira_report_download"
-msgstr "Rapport OiRA : \"${titre}"
+msgstr "Rapport OiRA : \"${title}\""
 
 #. Default: Contents
 #: src/osha/oira/survey.py:502 src/osha/oira/templates/report_actionplan.pt:17
@@ -734,7 +726,6 @@ msgstr ""
 
 #. Default: You can not delete an OiRA tool that has been published.
 #: src/osha/oira/surveygroup.py:54
-#, fuzzy
 msgid "message_not_delete_published_surveygroup"
 msgstr "Vous ne pouvez pas supprimer un outil OiRA qui a été publié."
 
@@ -747,7 +738,7 @@ msgstr "Vous ne pouvez pas supprimer un outil OiRA qui a été publié."
 #: src/osha/oira/templates/report_identification.pt:121
 #: src/osha/oira/templates/sessions.pt:112
 msgid "navigation_settings"
-msgstr "Statut"
+msgstr "Paramètres"
 
 #. Default: Status
 #: src/osha/oira/templates/actionplan.pt:105
@@ -977,7 +968,6 @@ msgstr ""
 #. needed
 #. for those actions to be effective.
 #: src/osha/oira/templates/actionplan.pt:50
-#, fuzzy
 msgid "expl_actionplan_7"
 msgstr ""
 "Une fois que vous avez décidé comment éliminer ou réduire un risque "
@@ -990,7 +980,6 @@ msgstr ""
 #. level
 #. at which the health and safety of those exposed is not compromised?
 #: src/osha/oira/templates/actionplan.pt:44
-#, fuzzy
 msgid "expl_actionplan_6"
 msgstr ""
 "Si certains risques ne sont pas évitables, comment peuvent-ils être "
@@ -1007,7 +996,6 @@ msgstr ""
 
 #. Default: removing the hazard
 #: src/osha/oira/templates/actionplan.pt:40
-#, fuzzy
 msgid "expl_actionplan_5"
 msgstr "supprimant le risque"
 
@@ -1194,15 +1182,13 @@ msgstr "Sous-modules"
 
 #. Default: This ${number} is optional.
 #: src/osha/oira/templates/module_view.pt:27
-#, fuzzy
 msgid "module_optional"
-msgstr "Ce ${numéro} est optionnel."
+msgstr "Ce ${number} est optionnel."
 
 #. Default: This ${number} is mandatory.
 #: src/osha/oira/templates/module_view.pt:23
-#, fuzzy
 msgid "module_mandatory"
-msgstr "Ce ${numéro} est obligatoire."
+msgstr "Ce ${number} est obligatoire."
 
 #. Default: Information
 #: src/osha/oira/templates/module_view.pt:22
@@ -1345,7 +1331,6 @@ msgstr ""
 #. Default: The following risks have not yet been answered. Please do so at the
 #. soonest possibility.
 #: src/osha/oira/templates/report_actionplan.pt:203
-#, fuzzy
 msgid "desc_unanswered_risks"
 msgstr ""
 "Les risques suivants n'ont pas encore obtenu de réponse. Veuillez y "
@@ -1425,7 +1410,6 @@ msgstr "Télécharger"
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/templates/report_identification.pt:48
 #: src/osha/oira/templates/webhelpers.pt:163
-#, fuzzy
 msgid "warn_risk_present"
 msgstr "Vous avez répondu de façon négative à la déclaration ci-dessus."
 
@@ -1537,7 +1521,6 @@ msgstr ""
 
 #. Default: Use this measure
 #: src/osha/oira/templates/risk_actionplan.pt:149
-#, fuzzy
 msgid "button_use_measure"
 msgstr "Utilisez cette mesure"
 
@@ -1705,7 +1688,6 @@ msgstr ""
 #. close
 #. your Browser. For security reasons it is better to actively log out.
 #: src/osha/oira/templates/sessions.pt:62
-#, fuzzy
 msgid "session_title_tooltip"
 msgstr ""
 "Une fois que vous avez lancé une session d'outil OiRA, vous pourrez "
@@ -1912,7 +1894,7 @@ msgstr "Veuillez fournir une description de votre secteur "
 #. Default: Settings
 #: src/osha/oira/templates/settings.pt:12
 msgid "header_settings"
-msgstr "Paramètres "
+msgstr "Paramètres"
 
 #. Default: Start
 #: src/osha/oira/templates/start.pt:38
@@ -1931,7 +1913,6 @@ msgstr ""
 
 #. Default: The OiRA tool
 #: src/osha/oira/templates/start.pt:27
-#, fuzzy
 msgid "header_oira_tool"
 msgstr "L'outil OiRA"
 
@@ -1990,7 +1971,6 @@ msgstr "Cet Outil OiRA ne possède pas de modules."
 
 #. Default: Modules and Profile Questions
 #: src/osha/oira/templates/survey_view.pt:30
-#, fuzzy
 msgid "header_modules_and_profile_questions"
 msgstr "Questions sur les modules et le profil"
 

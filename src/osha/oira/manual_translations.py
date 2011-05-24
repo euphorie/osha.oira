@@ -1,6 +1,5 @@
 # Dont import this file, it's just for our i18n toolchain
 
-
 from euphorie.content import MessageFactory as _
 
 _("help_measure_action_plan", default=u"Describe your general approach to "
@@ -20,6 +19,15 @@ _("help_measure_requirements", default=u'Describe: 1) what is your general '
 _("Solution", default=u"Measure")
 _("A solution.", default=u"A standard measure for a risk.")
 _("header_solutions", default=u"Standard measures")
+
+# euphorie/client/templates/account-settings.pt
+_("header_account_data", default=u"Account data")
+_("Email address/account name")
+_("Change email address")
+_("Delete Account")
+_("Please bear in mind that by changing the email address, your login name will also change.")
+_("header_password", default=u"Password")
+
 _("risk_solution_header", default=u"Measure ${number}")
 _("nav_surveys", default=u"OiRA Tools")
 _("Survey", default=u"OiRA Tool")

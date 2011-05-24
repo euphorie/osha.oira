@@ -14,12 +14,17 @@ def remove_empty_modules(ls):
     while ls and ls[-1].type == 'module':
         ls = ls[:-1]
 
-    for i in range(1, len(ls)):
-        if ls[i].type == 'module':
+    for i in range(len(ls)-1, 0, -1):
+        if ls[i] is None:
+            if ls[i-1].type == 'module':
+                ls[i-1] = None
+
+        elif ls[i].type == 'module':
             if ls[i-1].type == 'module' and \
                     ls[i-1].depth >= ls[i].depth:
                 ls[i-1] = None
-    return ls
+
+    return [m for m in ls if m is not None]
 
 
 def get_unactioned_nodes(ls):
@@ -44,8 +49,7 @@ def get_unactioned_nodes(ls):
                         n.action_plans[0].action_plan == None:
                     unactioned.append(n)
 
-    unactioned = remove_empty_modules(unactioned)
-    return [u for u in unactioned if u != None]
+    return remove_empty_modules(unactioned)
 
 
 def get_actioned_nodes(ls):
@@ -67,8 +71,7 @@ def get_actioned_nodes(ls):
                 if plans[0] != None:
                     actioned.append(n)
 
-    actioned = remove_empty_modules(actioned)
-    return [e for e in actioned if e != None]
+    return remove_empty_modules(actioned)
 
 
 class OSHAWebHelpers(WebHelpers):

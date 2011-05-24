@@ -2,1030 +2,568 @@
 # Copyright (C) Syslab.com, EU-OSHA
 # This file is distributed under the same license as the Euphorie project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2010-08-10 09:36+0200\n"
+"POT-Creation-Date: 2011-05-24 10:41+0200\n"
 "PO-Revision-Date: 2011-01-19 12:47+0100\n"
 "Last-Translator: Robert <vansen@hotmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.5\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.6\n"
 
-#. Default: "OiRA - Online interactive Risk Assessment"
-msgid "title_tool"
-msgstr "OiRA - Online interactive risk assessment"
-
-#. Default: "<strong>OiRA</strong><br/>Online interactive<br/>Risk Assessment"
-msgid "title_logo"
-msgstr "<strong>OiRA</strong><br/>Online interactive<br/>risk assessment"
-
-#. Default: "General approach (to eliminate or reduce the risk)"
-msgid "label_measure_action_plan"
-msgstr "Standard tillvägagångssätt (för att eliminera eller minska risken)"
-
-#. Default: "General approach (to eliminate or reduce the risk):"
-msgid "report_measure_actionplan"
-msgstr "Standard tillvägagångssätt (för att eliminera eller minska risken):"
-
-#. Default: "Specific action(s) required to implement this approach"
-msgid "label_measure_prevention_plan"
-msgstr ""
-"Särskilda åtgärder som krävs för att genomföra detta tillvägagångssätt"
-
-#. Default: "Specific action(s) required to implement this approach:"
-msgid "report_measure_preventionplan"
-msgstr ""
-"Särskilda åtgärder som krävs för att genomföra detta tillvägagångssätt:"
-
-#. Default: "Level of expertise and/or requirements needed"
-msgid "label_measure_requirements"
-msgstr "Viss kompetens och/eller krav som behövs"
-
-#. Default: "Level of expertise and/or requirements needed:"
-msgid "report_measure_requirements"
-msgstr "Viss kompetens och/eller krav som behövs:"
-
-#. Default: "Describe: 1) what is your general approach to eliminate or (if
-#. the risk is not avoidable) reduce the risk; 2) the specific action(s)
-#. required to implement this approach (to eliminate or to reduce the risk);
-#. 3) the level of expertise needed to implement the measure, for instance
-#. “common sense (no OSH knowledge required)”, “no specific OSH expertise, but
-#. minimum OSH knowledge or training and/or consultation of OSH guidance
-#. required”, or “OSH expert”. You can also describe here any other additional
-#. requirement (if any)."
-msgid "actionplan_measure_tooltip"
-msgstr ""
-"Beskriv: 1) Vilket är ditt normala tillvägagångssätt för att eliminera eller"
-" (om risken inte går att undvika) minska risken, 2) de specifika åtgärder "
-"som krävs för att genomföra detta tillvägagångssätt (för att eliminera eller"
-" minska risken), 3) den kompetens som behövs för att genomföra åtgärden, "
-"till exempel \"sunt förnuft (inga kunskaper om arbetsmiljöfrågor krävs)\", "
-"\"inga särskilda kunskaper om arbetsmiljöfrågor, men minsta möjliga kunskap "
-"om arbetsmiljöfrågor eller utbildning och/eller samråd med arbetsmiljöfrågor"
-" krävs\", eller \"arbetsmiljöexpert\". Du kan också beskriva alla "
-"ytterligare krav här (om några)."
-
-#. Default: "Describe your general approach to eliminate or (if the risk is
-#. not avoidable) reduce the risk."
+#. Default: Describe your general approach to eliminate or (if the risk is not
+#. avoidable) reduce the risk.
+#: src/osha/oira/manual_translations.py:6
 msgid "help_measure_action_plan"
 msgstr ""
-"Beskriv ditt normala tillvägagångssätt för att eliminera eller (om risken "
-"inte går att undvika) minska risken."
+"Beskriv ditt normala tillvägagångssätt för att eliminera eller (om risken"
+" inte går att undvika) minska risken."
 
-#. Default: "Describe the specific action(s) required to implement this
-#. approach (to eliminate or to reduce the risk)."
+#. Default: Describe the specific action(s) required to implement this approach
+#. (to
+#. eliminate or to reduce the risk).
+#: src/osha/oira/manual_translations.py:8
 msgid "help_measure_prevention_plan"
 msgstr ""
 "Beskriv de särskilda åtgärder som krävs för att genomföra detta "
 "tillvägagångssätt (för att eliminera eller minska risken)."
 
-#. Default: "Describe: 1) what is your general approach to eliminate or (if
-#. the risk is not avoidable) reduce the risk; 2) the specific action(s)
-#. required to implement this approach (to eliminate or to reduce the risk);
-#. 3) the level of expertise needed to implement the measure, for instance
-#. "common sense (no OSH knowledge required)", "no specific OSH expertise, but
-#. minimum OSH knowledge or training and/or consultation of OSH guidance
-#. required", or "OSH expert". You can also describe here any other additional
-#. requirement (if any)."
+#. Default: Describe: 1) what is your general approach to eliminate or (if the
+#. risk
+#. is not avoidable) reduce the risk; 2) the specific action(s) required to
+#. implement this approach (to eliminate or to reduce the risk); 3) the level
+#. of
+#. expertise needed to implement the measure, for instance "common sense (no
+#. OSH
+#. knowledge required)", "no specific OSH expertise, but minimum OSH knowledge
+#. or
+#. training and/or consultation of OSH guidance required", or "OSH expert". You
+#. can
+#. also describe here any other additional requirement (if any).
+#: src/osha/oira/manual_translations.py:11
 msgid "help_measure_requirements"
 msgstr ""
-"Beskriv: 1) Vilket är ditt normala tillvägagångssätt för att eliminera eller"
-" (om risken inte går att undvika) minska risken, 2) de specifika åtgärder "
-"som krävs för att genomföra detta tillvägagångssätt (för att eliminera eller"
-" minska risken), 3) den kompetens som behövs för att genomföra åtgärden, "
-"till exempel \"sunt förnuft (inga kunskaper om arbetsmiljöfrågor krävs)\", "
-"\"inga särskilda kunskaper om arbetsmiljöfrågor, men minsta möjliga kunskap "
-"om arbetsmiljöfrågor eller utbildning och/eller samråd med arbetsmiljöfrågor"
-" krävs\", eller \"arbetsmiljöexpert\". Du kan också beskriva alla "
-"ytterligare krav här (om några)."
+"Beskriv: 1) ditt normala förfarande för att eliminera eller (om risken "
+"inte kan undvikas) minska risken, 2) specifika åtgärd(er) som krävs för "
+"att genomföra denna åtgärd (eliminera eller minska risken), 3) "
+"expertisnivån som krävs för att genomföra denna åtgärd, t.ex. \"sunt "
+"förnuft (ingen OSH-kunskap krävs)\", \"ingen särskild OSH-kunskap "
+"krävs), med ett minimum av OSH-kunskap eller träning och/eller "
+"rådgivning behövs\", eller \"OSH-expert\". Du kan även beskriva "
+"ytterligare krav här (om någon)."
 
-#. Default: "Sessions"
-msgid "navigation_surveys"
-msgstr "Sessioner"
-
-#. Default: "Measure"
+#. Default: Measure
+#: src/osha/oira/manual_translations.py:20
 msgid "Solution"
 msgstr "Lösning"
 
-#. Default: "A standard measure for a risk."
-#: euphorie/content/profiles/default/types/euphorie.solution.xml:8
+#. Default: A standard measure for a risk.
+#: src/osha/oira/manual_translations.py:21
 msgid "A solution."
 msgstr "En standardlösning för en risk."
 
-#. Default: "Common measures"
-#: euphorie/client/templates/risk_actionplan.pt:131
-msgid "header_common_solutions"
-msgstr "Vanliga lösningar"
-
-#. Default: "Standard measures"
-#: euphorie/content/templates/risk_view.pt:62
+#. Default: Standard measures
+#: src/osha/oira/manual_translations.py:22
 msgid "header_solutions"
 msgstr "Standardlösningar"
 
-#. Default: "Measure ${number}"
-#: euphorie/content/templates/risk_view.pt:65
+#. Default: Measure ${number}
+#: src/osha/oira/manual_translations.py:23
 msgid "risk_solution_header"
 msgstr "Lösning ${number}"
 
-#. Default: "Including the risks to your employees and your equipment?  What
-#. if there is an accident with one of the machines? What if an employee is
-#. exposed to hazardous substances? A risk assessment helps you to define
-#. these risks and tackle them head on. A risk assessment mainly consists of
-#. two parts: a <em>list</em> with all the risks in your company and an
-#. <em>action
-#. plan</em> with details of how to deal with these risks. These two
-#. components
-#. allow you to limit the risks to your employees and your company, and
-#. therefore the financial risk."
-# Change request # 2567
-#: euphorie/client/templates/start.pt:22
-msgid "intro_risk_aware"
-msgstr ""
-"Vad händer om en anställd till exempel utsätts för farliga ämnen?  Att göra "
-"en riskbedömning innebär att undersöka och hitta tänkbara risker i "
-"arbetsmiljön och sedan värdera hur allvarliga dessa risker är. De risker man"
-" inte kan åtgärda på en gång skrivs in i en handlingsplan."
-
-#. Default: "Complicated? Not really. It just takes a bit of time. However,
-#. the RA is important. So important that it is a legal requirement. This is
-#. for good
-#. reason. If risks are not assessed or properly dealt with, a suitable risk
-#. management process cannot be started and appropriate preventive measures
-#. are
-#. unlikely to be found or put in place."
-# Change request # 2567
-#: euphorie/client/templates/start.pt:25
-msgid "intro_not_complicated"
-msgstr ""
-"Det är inte svårt att göra en riskbedömning. Men du måste ta dig tid och "
-"svara på ett antal frågor om din och dina kollegors arbetsmiljö. Det tar en "
-"kort stund och när du är klar har du en färdig handlingsplan att jobba med."
-
-#. Default: "In order to tailor the risk assessment to your organisation you
-#. may be asked to:"
-#: osha.oira:/templates/profile.pt:18
-msgid "expl_profile"
-msgstr ""
-
-#. Default: "select or skip situation(s) relevant or not to your business
-#. activity and tick the box(es) if appropriate"
-#: osha.oira:/templates/profile.pt:23
-msgid "expl_profile_bullet1"
-msgstr ""
-
-#. Default: "list multiple business units, or branches, or stores, etc. These
-#. related risks will be repeated for each name you have entered."
-#: osha.oira:/templates/profile.pt:27
-msgid "expl_profile_bullet2"
-msgstr ""
-
-#. Default: "OiRA Tools"
+#. Default: OiRA Tools
+#: src/osha/oira/manual_translations.py:24
 msgid "nav_surveys"
 msgstr "OiRA-verktyg"
 
-#. Default: "OiRA Tools"
-#: euphorie/content/templates/sector_view.pt:12
-msgid "header_sector_survey_list"
-msgstr "OiRA-verktyg"
-
-#. Default: "OiRA Tool"
-#: euphorie/content/profiles/default/types/euphorie.surveygroup.xml:6
+#. Default: OiRA Tool
+#: src/osha/oira/manual_translations.py:25
 msgid "Survey"
 msgstr "OiRA-verktyg"
 
-#. Default: "OiRA Tool"
-#: euphorie/client/templates/sessions.pt:18
-#: euphorie/client/templates/survey_sessions.pt:18
-msgid "header_session"
-msgstr "OiRA-verktyg"
-
-#. Default: "OiRA Tools"
+#. Default: OiRA Tools
+#: src/osha/oira/manual_translations.py:26
 msgid "help_header_sessions"
 msgstr "OiRA-verktyg"
 
-#. Default: "OiRA Tools"
-#: euphorie/content/help.py:32
+#. Default: OiRA Tools
+#: src/osha/oira/manual_translations.py:27
 msgid "label_sessions"
 msgstr "OiRA-verktyg"
 
-#. Default: "OiRA Tool import"
-#: euphorie/content/upload.py:101
+#. Default: OiRA Tool import
+#: src/osha/oira/manual_translations.py:28
 msgid "Survey import"
 msgstr "Importera OiRA-verktyg"
 
-#. Default: "Import OiRA tool version"
-#: euphorie/content/upload.py:293
+#. Default: Import OiRA tool version
+#: src/osha/oira/manual_translations.py:29
 msgid "Import survey version"
 msgstr "Importera en version av ett OiRA-verktyg"
 
-#. Default: "OiRA Tool version"
-#: euphorie/content/profiles/default/types/euphorie.survey.xml:7
+#. Default: OiRA Tool version
+#: src/osha/oira/manual_translations.py:30
 msgid "Survey version"
 msgstr "OiRA-verktyg version"
 
-#. Default: "add a new OiRA Tool"
-#: euphorie/content/templates/sector_view.pt:31
-#: euphorie/content/templates/sector_view.pt:16
-msgid "add_survey"
-msgstr "lägg till ett nytt OiRA-verktyg"
-
-#. Default: "The form will allow you to create a new OiRA Tool."
-#: euphorie/content/templates/surveygroup_add.pt:9
+#. Default: The form will allow you to create a new OiRA Tool.
+#: src/osha/oira/manual_translations.py:31
 msgid "intro_add_surveygroup"
 msgstr "Detta formulär låter dig skapa ett nytt OiRA-verktyg."
 
-#. Default: "Base my new OiRA Tool on an existing OiRA Tool of another
-#. organisation."
-#: euphorie/content/templates/surveygroup_add.pt:19
+#. Default: Base my new OiRA Tool on an existing OiRA Tool of another
+#. organisation.
+#: src/osha/oira/manual_translations.py:33
 msgid "survey_source_other"
 msgstr ""
-"Basera mitt nya OiRA-verktyg på ett befintligt OiRA-verktyg från en annan "
-"organisation."
+"Basera mitt nya OiRA-verktyg på ett befintligt OiRA-verktyg från en annan"
+" organisation."
 
-#. Default: "Base my new OiRA Tool on an existing OiRA Tool of my
-#. organisation."
-#: euphorie/content/templates/surveygroup_add.pt:18
+#. Default: Base my new OiRA Tool on an existing OiRA Tool of my organisation.
+#: src/osha/oira/manual_translations.py:35
 msgid "survey_source_local"
 msgstr ""
 "Basera mitt nya OiRA-verktyg på ett befintligt OiRA-verktyg från min "
 "organisation."
 
-#. Default: "Create a new OiRA Tool from scratch."
-#: euphorie/content/templates/surveygroup_add.pt:17
+#. Default: Create a new OiRA Tool from scratch.
+#: src/osha/oira/manual_translations.py:37
 msgid "survey_source_scratch"
 msgstr "Skapa ett nytt OiRA-verktyg från grunden."
 
-#. Default: "This OiRA Tool has no modules."
-#: euphorie/content/templates/survey_view.pt:42
-msgid "no_modules"
-msgstr "Detta OiRA-verktyg har inga moduler."
-
-#. Default: "This OiRA Tool has no profile questions."
-#: euphorie/content/templates/survey_view.pt:30
+#. Default: This OiRA Tool has no profile questions.
+#: src/osha/oira/manual_translations.py:38
 msgid "no_profile_questions"
 msgstr "Detta OiRA-verktyg har inga profilfrågor."
 
-#. Default: "Create new OiRA Tool"
-#: euphorie/deployment/tiles/templates/versions.pt:44
+#. Default: Create new OiRA Tool
+#: src/osha/oira/manual_translations.py:39
 msgid "button_create_new"
 msgstr "Skapa ett nytt OiRA-verktyg"
 
-#. Default: "Please choose a country of which you would like to view or copy
-#. an OiRA Tool."
-#: euphorie/content/templates/sectorcontainer_view.pt:13
+#. Default: Please choose a country of which you would like to view or copy an
+#. OiRA
+#. Tool.
+#: src/osha/oira/manual_translations.py:40
 msgid "message_choose_country"
 msgstr "Välj det land som du vill visa eller kopiera ett  OiRA-verktyg från."
 
-#. Default: "Select a sector for which you would like to view or copy an
-#. OiRA Tool."
-#: euphorie/content/templates/country_view.pt:13
+#. Default: Select a sector for which you would like to view or copy an OiRA
+#. Tool.
+#: src/osha/oira/manual_translations.py:42
 msgid "intro_select_sector"
-msgstr ""
-"Välj den bransch som du vill visa eller kopiera ett  OiRA-verktyg från."
+msgstr "Välj den bransch som du vill visa eller kopiera ett  OiRA-verktyg från."
 
-#. Default: "This report was based on the OiRA Tool '${title}' of revision
-#. date ${date}."
-#: euphorie/client/templates/report_actionplan.pt:189
-msgid "report_survey_revision"
-msgstr ""
-"Denna rapport är baserad på OiRA-verktyget '${title}' av reviseringsdatum "
-"${date}."
-
-#. Default: "This document was based on the OiRA Tool '${title}' of revision
-#. date ${date}."
-#: osha.oira:/survey.py:366
-msgid "report_identification_revision"
-msgstr ""
-
-#. Default: "You may enter a name for this OiRA Tool that will make it easier
-#. for you to find your session back if you wish to continue at a later time."
-#: euphorie/client/templates/sessions.pt:58
-#: euphorie/client/templates/survey_sessions.pt:49
-msgid "label_session_title"
-msgstr ""
-"Du kan ange ett namn för detta OIRA-verktyg för att göra det lättare för dig"
-" att hitta tillbaka till din session om du vill fortsätta vid ett senare "
-"tillfälle."
-
-#. Default: "This is the title of this OiRA Tool version. This name is never
-#. shown to users."
-#: euphorie/content/survey.py:48 euphorie/content/survey.py:167
+#. Default: This is the title of this OiRA Tool version. This name is never
+#. shown
+#. to users.
+#: src/osha/oira/manual_translations.py:44
 msgid "help_survey_title"
 msgstr ""
-"Detta är titeln på det här OIRA-verktygets version. Detta namn visas aldrig "
-"för andra användare."
+"Detta är titeln på det här OIRA-verktygets version. Detta namn visas "
+"aldrig för andra användare."
 
-#. Default: "The introduction text is shown when starting a new OiRA Tool
-#. session. If no introduction is provided here a standard text will be shown.
-#. Please keep this text brief so it will easily fit on screens of small
-#. devices such as phones and PDAs."
-#: euphorie/content/survey.py:58
+#. Default: The introduction text is shown when starting a new OiRA Tool
+#. session.
+#. If no introduction is provided here a standard text will be shown. Please
+#. keep
+#. this text brief so it will easily fit on screens of small devices such as
+#. phones
+#. and PDAs.
+#: src/osha/oira/manual_translations.py:46
 msgid "help_introduction"
 msgstr ""
 "Introduktionstexten visas när man startar en ny OIRA-verktyg session. Om "
-"ingen introduktion anges kommer en standardtext att visas. Tänk på att hålla"
-" texten kort så att den får plats på små enheter som mobiltelefoner och "
-"handdatorer."
+"ingen introduktion anges kommer en standardtext att visas. Tänk på att "
+"hålla texten kort så att den får plats på små enheter som mobiltelefoner "
+"och handdatorer."
 
-#. Default: "You cannot delete the only OiRA Tool version."
-#: euphorie/content/survey.py:239
+#. Default: You cannot delete the only OiRA Tool version.
+#: src/osha/oira/manual_translations.py:50
 msgid "message_delete_no_last_survey"
 msgstr "Du kan inte radera den enda OiRA-verktyg versionen."
 
-#. Default: "Title of imported OiRA Tool"
-#: euphorie/content/upload.py:74 euphorie/content/upload.py:93
-#: euphorie/content/upload.py:100
+#. Default: Title of imported OiRA Tool
+#: src/osha/oira/manual_translations.py:52
 msgid "label_surveygroup_title"
 msgstr "Titel på importerat OiRA-verktyg"
 
-#. Default: "Succesfully imported the OiRA Tool"
-#: euphorie/content/upload.py:310 euphorie/content/upload.py:341
+#. Default: Succesfully imported the OiRA Tool
+#: src/osha/oira/manual_translations.py:53
 msgid "upload_success"
 msgstr "OiRA-verktyget har importerats utan fel"
 
-#. Default: "Import sector and OiRA Tool"
-#: euphorie/content/upload.py:323
+#. Default: Import sector and OiRA Tool
+#: src/osha/oira/manual_translations.py:54
 msgid "title_import_sector_survey"
 msgstr "Importera bransch och OiRA-verktyg"
 
-#. Default: "There are no OiRA Tools present. You can ${add_link}."
-#: euphorie/content/templates/sector_view.pt:14
-msgid "no_surveys_present"
-msgstr "Det finns för närvarande inga OiRA-verktyg. Du kan ${add_link}."
-
-#. Default: "The form will allow you to create a new OiRA Tool revision."
-#: euphorie/content/templates/survey_add.pt:9
+#. Default: The form will allow you to create a new OiRA Tool revision.
+#: src/osha/oira/manual_translations.py:55
 msgid "intro_add_survey"
 msgstr "Detta formulär låter dig skapa en ny OiRA-verktyg revidering."
 
-#. Default: "Choose a revision of the selected OiRA Tool"
-#: euphorie/content/templates/surveygroup_add.pt:71
-#: euphorie/content/templates/surveygroup_add.pt:35
+#. Default: Choose a revision of the selected OiRA Tool
+#: src/osha/oira/manual_translations.py:57
 msgid "label_choose_survey"
 msgstr "Välj en revidering för markerat OiRA-verktyg"
 
-#. Default: "Choose an OiRA Tool"
-#: euphorie/content/templates/surveygroup_add.pt:52
-#: euphorie/content/templates/surveygroup_add.pt:26
+#. Default: Choose an OiRA Tool
+#: src/osha/oira/manual_translations.py:59
 msgid "label_choose_surveygroup"
 msgstr "Välj ett OiRA-verktyg"
 
-#. Default: "Now that you have identified the existing hazards/problems in
-#. your company/organisation you need to evaluate the risks arising from
-#. them."
-#: euphorie/client/templates/evaluation.pt:19
+#. Default: Now that you have identified the existing hazards/problems in your
+#. company/organisation you need to evaluate the risks arising from them.
+#: src/osha/oira/manual_translations.py:60
 msgid "help_risks_present"
 msgstr ""
 "Nu när du har identifierat befintliga risker/problem inom ditt "
 "företag/organisation måste du utvärdera riskerna som uppstår från dem."
 
-#. Default: "After having evaluated the risks, you need to put an action plan
-#. in place to manage the risks. To eliminate or reduce risks you need to
-#. determine which preventive and protective measures are to be taken."
-#: euphorie/client/templates/actionplan.pt:19
-msgid "expl_actionplan_1"
-msgstr ""
-"Efter att riskerna är utvärderade, måste du göra en handlingsplan för att "
-"hantera riskerna. För att eliminera eller minska riskerna måste du avgöra "
-"vilka förebyggande åtgärder och skydd som skall vidtas."
-
-#. Default: "Among the things to be considered for this step are:"
-#: euphorie/client/templates/actionplan.pt:19
-msgid "expl_actionplan_2"
-msgstr "Bland de punkter som skall beaktas för detta steg:"
-
-#. Default: "<ol><li>Is a risk avoidable? Can it be removed entirely? For
-#. example, this could be achieved by:<ul><li>considering whether the task or
-#. job is necessary</li><li>removing the
-#. hazard</li><li>...</li></ul></li><li>If certain risks are not avoidable,
-#. how can they be reduced to a level at which the health and safety of those
-#. exposed is not compromised.</li></ol>"
-#: euphorie/client/templates/actionplan.pt:19
-msgid "expl_actionplan_3"
-msgstr ""
-"<ol><li>Kan en risk undvikas?  Kan den undvikas helt? Till exempel kan detta"
-" uppnås genom att:<ul><li>överväga om uppgiften eller arbetet är "
-"nödvändigt</li><li>ta bort risken</li><li>...</li></ul></li><li>Om vissa "
-"risker inte kan undvikas, hur kan de minskas till en nivå där hälsan och "
-"säkerheten inte äventyras för utsatta personer.</li></ol>"
-
-#. Default: "Once you have decided how to eliminate or reduce a particular
-#. risk, then you describe the specific action(s) required to achieve this.
-#. You should also include details of the level of expertise and/or other
-#. requirements needed for those actions to be effective."
-#: euphorie/client/templates/actionplan.pt:19
-msgid "expl_actionplan_4"
-msgstr ""
-"När du har bestämt dig för hur du ska eliminera eller minska en särskild "
-"risk, beskriver du de särskilda åtgärder som krävs för att uppnå detta. Du "
-"bör också inkludera uppgifter om kompetens och/eller andra krav som behövs "
-"för att dessa åtgärder skall vara effektiva."
-
-#. Default: "After having identified the risks in your company/organisation
-#. and set up an action plan to manage them, you can generate a report. The
-#. report includes all the input/information provided by you throughout the
-#. risk assessment process. You can add, if you wish, some extra
-#. information/comments to the report by filling in the field below."
-#: euphorie/client/templates/report.pt:19
-msgid "report_intro"
-msgstr ""
-"Efter att du har identifierat riskerna inom ditt företag/organisation och "
-"inrätttat en handlingsplan för att hantera dem, kan du skapa en rapport. "
-"Rapporten omfattar all indata/information som förses till dig genom hela "
-"riskbedömningen. Du kan lägga till, om du vill, extra "
-"information/kommentarer till rapporten genom att fylla i fältet nedan."
-
-#. Default: "<strong>Some information about you</strong>"
-#: euphorie/client/templates/report_company.pt:19
-msgid "company_details_intro_1"
-msgstr "<strong>Lite information om dig</strong>"
-
-#. Default: "Please consider providing some additional information below. This
-#. is not required, but it does help us to improve our tools and services."
-#: euphorie/client/templates/report_company.pt:19
-msgid "company_details_intro_2"
-msgstr ""
-"Var vänlig och lämna lite extra personlig information nedan. Detta är inte "
-"ett krav, men det hjälper oss att förbättra våra verktyg och tjänster."
-
-#. Default: "This data will not appear in the report."
-#: euphorie/client/templates/report_company.pt:19
-msgid "company_details_intro_3"
-msgstr "Denna information kommer inte att visas i rapporten."
-
-#. Default: "Appoint someone in your company/organisation to be responsible
-#. for the implementation of this measure."
-#: euphorie/client/templates/risk_actionplan.pt:182
-#: euphorie/client/templates/risk_actionplan.pt:57
-msgid "actionplan_measure_responsible_tooltip"
-msgstr ""
-"Utse någon inom ditt företag/organisation som ansvarar för genomförandet av "
-"denna åtgärd."
-
-#. Default: "The implementation of preventive or protective measures in most
-#. cases is not cost free, therefore a cost can be calculated and included in
-#. your budget."
-#: euphorie/client/templates/risk_actionplan.pt:187
-#: euphorie/client/templates/risk_actionplan.pt:63
-msgid "actionplan_measure_budget_tooltip"
-msgstr ""
-"Genomförandet av förebyggande åtgärder eller skyddsåtgärder är i de flesta "
-"fall inte gratis, därför kan en kostnad beräknas och inkluderas i din "
-"budget."
-
-#. Default: "You are about to print the report... please complete the optional
-#. form and then proceed."
-#: euphorie/client/templates/report_company.pt:18
+#. Default: You are about to print the report... please complete the optional
+#. form
+#. and then proceed.
+#: src/osha/oira/manual_translations.py:63
 msgid "hader_company_details"
 msgstr "Lite information om dig"
 
-#. Default: "You are free to provide the information below. This information
-#. is
+#. Default: You are free to provide the information below. This information is
 #. meant to improve the tools and the services provided. This data will not
-#. appear in the report."
-#: euphorie/client/templates/report_company.pt:22
+#. appear
+#. in the report.
+#: src/osha/oira/manual_translations.py:65
 msgid "company_details_intro"
 msgstr ""
-"Det är valfritt att lämna information nedan. Denna information är avsedd för"
-" att förbättra de verktyg och de tjänster som vi tillhandahåller. Denna "
-"information kommer inte att visas i rapporten."
+"Det är valfritt att lämna information nedan. Denna information är avsedd "
+"för att förbättra de verktyg och de tjänster som vi tillhandahåller. "
+"Denna information kommer inte att visas i rapporten."
 
-#. Default: "Solution"
-#: euphorie/content/module.py:60
+#. Default: Solution
+#: src/osha/oira/manual_translations.py:68
 msgid "label_solution_direction"
 msgstr "Lösning"
 
-#. Default: "Succesfully published the OiRA Tool"
-#: euphorie/client/publish.py:212
+#. Default: Succesfully published the OiRA Tool
+#: src/osha/oira/manual_translations.py:69
 msgid "Succesfully published the survey"
 msgstr "OiRA-verktyget har publicerats utan fel"
 
-#. Default: "Succesfully created a preview for the OiRA Tool. It can be
-#. accessed at ${url}."
-#: euphorie/client/publish.py:261
-msgid ""
-"Succesfully created a preview for the survey. It can be accessed at ${url} ."
-msgstr ""
-"En förhandsgranskning av OiRA-verktygen har skapats utan fel. Den finns på "
-"${url}."
-
-#. Default: "Publish the selected OiRA Tool live with its latest changes."
-#: euphorie/deployment/tiles/templates/versions.pt:20
+#. Default: Publish the selected OiRA Tool live with its latest changes.
+#: src/osha/oira/manual_translations.py:74
 msgid "help_publish"
 msgstr "Publicera markerat OiRA-verktyg direkt med de senaste ändringarna."
 
-#. Default: "Create a duplicate of the selected OiRA Tool"
-#: euphorie/deployment/tiles/templates/versions.pt:19
+#. Default: Create a duplicate of the selected OiRA Tool
+#: src/osha/oira/manual_translations.py:76
 msgid "help_add_version"
 msgstr "Skapa en kopia av markerat OiRA-verktyg"
 
-#. Default: "The option allows the end-user to skip the Evaluation step."
-#: euphorie/content/survey.py:68
+#. Default: The option allows the end-user to skip the Evaluation step.
+#: src/osha/oira/manual_translations.py:77
 msgid "help_evaluation_optional"
 msgstr "Detta alternativ låter användaren hoppa över utvärderingsfasen."
 
-#. Default: "If this is to be \"optional\", it must be formulated so that it
-#. is answerable with YES (the end-user will have to tick a box) or NO (e.g.
-#. \"Do you work with the public?\"). If this is to be \"repeatable\", it must
-#. be formulated as a prompt to fill in multiple values (e.g. \"List your
-#. different work locations\")."
-#: euphorie/content/profilequestion.py:36
+#. Default: If this is to be "optional", it must be formulated so that it is
+#. answerable with YES (the end-user will have to tick a box) or NO (e.g. "Do
+#. you
+#. work with the public?"). If this is to be "repeatable", it must be
+#. formulated as
+#. a prompt to fill in multiple values (e.g. "List your different work
+#. locations").
+#: src/osha/oira/manual_translations.py:79
 msgid "help_profilequestion_question"
 msgstr ""
-"Om detta ska vara en \"tillval\", profilfråga måste den formuleras som en "
-"fråga och kunna besvaras med ett JA (slutanvändaren måste kryssa i en ruta) "
-"eller NEJ (t.ex. \"Arbetar du med allmänheten?\"). Om detta ska vara en "
-"\"repeterbar\" fråga, måste den formuleras som en uppmaning att fylla i "
-"flera värden (t.ex. \"Ange dina olika arbetsplatser\"). "
+"Om detta ska vara en \"tillval\", profilfråga måste den formuleras som en"
+" fråga och kunna besvaras med ett JA (slutanvändaren måste kryssa i en "
+"ruta) eller NEJ (t.ex. \"Arbetar du med allmänheten?\"). Om detta ska "
+"vara en \"repeterbar\" fråga, måste den formuleras som en uppmaning att "
+"fylla i flera värden (t.ex. \"Ange dina olika arbetsplatser\"). "
 
-#. Default: "The basic architecture of an Online interactive Risk Assessment
+#. Default: The basic architecture of an Online interactive Risk Assessment
 #. consists of: - profile questions (questions defining the company profile) -
 #. modules and sub-modules - risks (affirmative statements). Profile questions
-#. are used to determine whether particular modules apply to the end user at
-#. all (OPTIONAL), or whether they should be repeated a number of times
-#. (REPEATABLE). Such questions are asked BEFORE starting the risk
-#. identification and evaluation. If the end-user does not confirm that an
-#. optional profile question is relevant (by ticking the box), then the
-#. corresponding module will be skipped entirely. If the end-user enters more
-#. than one option to a repeatable profile question then the corresponding
-#. module will be repeated the specified number of times."
-#: euphorie/content/profiles/default/types/euphorie.profilequestion.xml:8
+#. are
+#. used to determine whether particular modules apply to the end user at all
+#. (OPTIONAL), or whether they should be repeated a number of times
+#. (REPEATABLE).
+#. Such questions are asked BEFORE starting the risk identification and
+#. evaluation.
+#. If the end-user does not confirm that an optional profile question is
+#. relevant
+#. (by ticking the box), then the corresponding module will be skipped
+#. entirely. If
+#. the end-user enters more than one option to a repeatable profile question
+#. then
+#. the corresponding module will be repeated the specified number of times.
+#: src/osha/oira/manual_translations.py:84
 msgid "description_profilequestion"
 msgstr ""
-"Den grundläggande strukturen för en interaktiv riskbedömning online består "
-"av: - profilfrågor (frågor som definierar företagets profil) - moduler och  "
-"delmoduler - risker (bekräftade uttalanden). Profilfrågor används för att "
-"avgöra om enskilda moduler alls gäller för slutanvändaren (TILLVAL), eller "
-"om de bör upprepas ett antal gånger (REPETERBAR). Sådana frågor ställs INNAN"
-" en riskidentifiering och utvärdering påbörjas. Om slutanvändaren inte "
-"bekräftar att en profilfråga (TILLVALl) är relevant (genom att kryssa i "
-"rutan), då kommer motsvarande modul att hoppas över helt. Om slutanvändaren "
-"anger mer än ett alternativ till en repeterbar profilfråga kommer "
-"motsvarande modul att upprepas ett specificerat antal gånger."
+"Den grundläggande strukturen för en interaktiv riskbedömning online "
+"består av: - profilfrågor (frågor som definierar företagets profil) - "
+"moduler och  delmoduler - risker (bekräftade uttalanden). Profilfrågor "
+"används för att avgöra om enskilda moduler alls gäller för slutanvändaren"
+" (TILLVAL), eller om de bör upprepas ett antal gånger (REPETERBAR). "
+"Sådana frågor ställs INNAN en riskidentifiering och utvärdering påbörjas."
+" Om slutanvändaren inte bekräftar att en profilfråga (TILLVALl) är "
+"relevant (genom att kryssa i rutan), då kommer motsvarande modul att "
+"hoppas över helt. Om slutanvändaren anger mer än ett alternativ till en "
+"repeterbar profilfråga kommer motsvarande modul att upprepas ett "
+"specificerat antal gånger."
 
-#. Default: "Include any relevant information that may be helpful for the end-
-#. user."
-#: euphorie/content/module.py:38 euphorie/content/page.py:20
-#: euphorie/content/profilequestion.py:48 euphorie/content/solution.py:24
+#. Default: Include any relevant information that may be helpful for the
+#. end-user.
+#: src/osha/oira/manual_translations.py:96
 msgid "help_module_description"
 msgstr ""
 "Inkludera alla relevanta uppgifter som kan vara till hjälp för "
 "slutanvändaren."
 
-#. Default: "Allows the end-user to skip this module and everything inside
-#. it."
-#: euphorie/content/module.py:47
+#. Default: Allows the end-user to skip this module and everything inside it.
+#: src/osha/oira/manual_translations.py:98
 msgid "help_module_optional"
 msgstr "Låter slutanvändaren hoppa över denna modul och allt inuti den."
 
-#. Default: "The question to ask the end-user if this module is optional. It
-#. must be formulated so that it is answerable with YES (the end-user will
-#. have to tick a box) or NO"
-#: euphorie/content/module.py:56
+#. Default: The question to ask the end-user if this module is optional. It
+#. must be
+#. formulated so that it is answerable with YES (the end-user will have to tick
+#. a
+#. box) or NO
+#: src/osha/oira/manual_translations.py:100
 msgid "help_module_question"
 msgstr ""
 "Frågan som ställs till slutanvändaren om denna modul är ett tillval. Den "
-"måste formuleras så att den kan besvaras med ett JA (slutanvändaren måste "
-"kryssa i en ruta) eller NEJ"
+"måste formuleras så att den kan besvaras med ett JA (slutanvändaren måste"
+" kryssa i en ruta) eller NEJ"
 
-#. Default: "This information will appear in the Action plan step and should
-#. include an overview of general solution(s) related to this module."
-#: euphorie/content/module.py:70
+#. Default: This information will appear in the Action plan step and should
+#. include
+#. an overview of general solution(s) related to this module.
+#: src/osha/oira/manual_translations.py:103
 msgid "help_solution_direction"
 msgstr ""
 "Denna information visas i handlingsplanens steg och bör innehålla en "
 "översikt över vanliga lösningar i samband med denna modul."
 
-#. Default: "Affirmative statement"
-#: euphorie/content/risk.py:40
+#. Default: Affirmative statement
+#: src/osha/oira/manual_translations.py:106
 msgid "label_statement"
 msgstr "Bekräftat påstående"
 
-#. Default: "Negative statement"
-#: euphorie/content/risk.py:48 euphorie/content/templates/risk_view.pt:36
+#. Default: Negative statement
+#: src/osha/oira/manual_translations.py:107
 msgid "label_problem_description"
 msgstr "Negativt påstående"
 
-#. Default: "This is a short affirmative statement about a possible risk (e.g.
-#. The building is well maintained.)"
-#: euphorie/content/risk.py:41
+#. Default: This is a short affirmative statement about a possible risk (e.g.
+#. The
+#. building is well maintained.)
+#: src/osha/oira/manual_translations.py:108
 msgid "help_statement"
 msgstr ""
 "Detta är en kort och bekräftad redogörelse om en möjlig risk (t.ex. "
 "Byggnaden är väl underhållen.)"
 
-#. Default: "This is the inverse of the affirmative statement (e.g.
-#. The building is not well maintained.)"
-#: euphorie/content/risk.py:50
+#. Default: This is the inverse of the affirmative statement (e.g. The building
+#. is
+#. not well maintained.)
+#: src/osha/oira/manual_translations.py:110
 msgid "help_problem_description"
 msgstr ""
-"Detta är inversen av ett bekräftat påstående (t.ex. Byggnaden är inte väl "
-"underhållen.)"
+"Detta är inversen av ett bekräftat påstående (t.ex. Byggnaden är inte väl"
+" underhållen.)"
 
-#. Default: "Describe the risk. Include any relevant information that may be
-#. helpful for the end-user."
-#: euphorie/content/risk.py:59
+#. Default: Describe the risk. Include any relevant information that may be
+#. helpful
+#. for the end-user.
+#: src/osha/oira/manual_translations.py:112
 msgid "help_risk_description"
 msgstr ""
 "Beskriv risken. Inkludera all relevant information som kan hjälpa "
 "slutanvändaren."
 
-#. Default: "Priority risk"
-#: euphorie/content/risk.py:106
+#. Default: Priority risk
+#: src/osha/oira/manual_translations.py:114
 msgid "risktype_top5"
 msgstr "Prioritet risk"
 
-#. Default: "“Priority risk” is one of the high risks in the sector. “Risk” is
-#. related to the workplace or to the work carried out. “Policy” refers to
-#. agreements, procedures, and management decisions."
-#: euphorie/content/risk.py:97
+#. Default: "Priority risk" is one of the high risks in the sector. "Risk" is
+#. related to the workplace or to the work carried out. "Policy" refers to
+#. agreements, procedures, and management decisions.
+#: src/osha/oira/manual_translations.py:115
 msgid "help_risk_type"
 msgstr ""
-"\"Prioritet risk\" är en av högriskerna inom branschen. \"\"Risk\" är "
+"\"Prioritet risk\" är en av högriskerna inom branschen. \"Risk\" är "
 "relaterad till arbetsplatsen eller det arbete som utförs. \"Policy\" är "
 "relaterat till avtal, förfaranden och ledningens beslut. "
 
-#. Default: "Choose between ESTIMATED (rough estimation) or CALCULATED
-#. (combination of probability, frequency and severity) method."
-#: euphorie/content/risk.py:115
+#. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
+#. (combination
+#. of probability, frequency and severity) method.
+#: src/osha/oira/manual_translations.py:119
 msgid "help_evaluation_method"
 msgstr ""
 "Välj mellan metoderna UPPSKATTAD (grov uppskattning) eller BERÄKNAD ( "
 "kombination av sannolikhet, frekvens och allvarlighetsgrad)."
 
-#. Default: "You can help the end-user by selecting a default priority.
-#. He/she can still change the priority."
-#: euphorie/content/risk.py:129
+#. Default: You can help the end-user by selecting a default priority. He/she
+#. can
+#. still change the priority.
+#: src/osha/oira/manual_translations.py:122
 msgid "help_default_priority"
 msgstr ""
-"Du kan hjälpa slutanvändaren genom att välja en standard prioritet. Han/hon "
-"kan fortfarande ändra prioritet."
+"Du kan hjälpa slutanvändaren genom att välja en standard prioritet. "
+"Han/hon kan fortfarande ändra prioritet."
 
-#. Default: "Indicate the severity if this risk occurs."
-#: euphorie/content/risk.py:177
+#. Default: Indicate the severity if this risk occurs.
+#: src/osha/oira/manual_translations.py:124
 msgid "help_default_severity"
 msgstr "Indikera allvarlighetsgraden om denna risk inträffar."
 
-#. Default: "Privacy"
-#: osha.oira:/tiles/templates/footer.pt:15
-msgid "appendix_privacy"
-msgstr "Sekretess"
-
-#. Default: "Disclaimer"
-#: osha.oira:/tiles/templates/footer.pt:17
-msgid "appendix_disclaimer"
-msgstr "Friskrivningsklausul"
-
-#. Default: "GPL License"
-#: osha.oira:/tiles/templates/footer.pt:19
-msgid "appendix_gpl_license"
-msgstr "GPL-licens"
-
-#. Default: "CC License"
-#: osha.oira:/tiles/templates/footer.pt:21
-msgid "appendix_cc_license"
-msgstr "CC-licens"
-
-#. Default: "Contact"
-#: osha.oira:/tiles/templates/footer.pt:23
-msgid "appendix_contact"
-msgstr "Kontakt"
-
-#. Default: "You still have unanswered risks. Please see the list at the
-#. bottom of this page."
-#: osha.oira:/templates/report_actionplan.pt:28
-msgid "warning_unanswered_risks"
-msgstr ""
-"Du har fortfarande obesvarade risker. Se listan längst ner på denna sida."
-
-#. Default: "Risks that have been identified, evaluated and have an Action
-#. Plan"
-#: osha.oira:/survey.py:291
-msgid "header_present_risks"
-msgstr ""
-
-#. Default: "Hazards/problems that have been \"parked\" and are still to be
-#. dealt with"
-#: osha.oira:/templates/report_actionplan.pt:240
-msgid "header_unanswered_risks"
-msgstr "Obs! Du har fortfarande följande risker som är obesvarade:"
-
-#. Default: "Risks that have been identified but NOT evaluated and do NOT have
-#. an Action Plan"
-#: osha.oira:/survey.py:297
-msgid "header_unevaluated_risks"
-msgstr ""
-
-#. Default: "Hazards/problems that are not present in your organisation"
-#: osha.oira:/templates/report_actionplan.pt:196
-msgid "header_risks_not_present"
-msgstr "Risker som identifierats som inte närvarande inom din organisation:"
-
-#. Default: "The following risks have not yet been answered. Please do so at
-#. the soonest possibility."
-#: osha.oira:/templates/report_actionplan.pt:241
-msgid "description_unanswered_risks"
-msgstr ""
-"Följande risker har ännu inte besvarats. Besvara dem så snart som möjligt."
-
-#. Default: "General information on risk assessment"
-#: euphorie/content/help.py:16
+#. Default: General information on risk assessment
+#: src/osha/oira/manual_translations.py:126
 msgid "help_help_introduction"
 msgstr "Allmän information om riskbehandling"
 
-#. Default: This text should explain how to register and login."
-#: euphorie/content/help.py:24
+#. Default: This text should explain how to register and login.
+#: src/osha/oira/manual_translations.py:127
 msgid "help_authentication"
 msgstr "Denna text beskriver hur du registrerar och loggar in dig."
 
-#. Default: "This text should describe the main functions of the OiRA Tool."
-#: euphorie/content/help.py:33
+#. Default: This text should describe the main functions of the OiRA Tool.
+#: src/osha/oira/manual_translations.py:129
 msgid "help_sessions"
 msgstr "Denna text beskriver OiRA-verktygets huvudfunktioner."
 
-#. Default: "This text should explain the 2 types of profile questions."
-#: euphorie/content/help.py:41
+#. Default: This text should explain the 2 types of profile questions.
+#: src/osha/oira/manual_translations.py:131
 msgid "help_preparation"
 msgstr "Denna text förklarar de två olika typerna av profilfrågor."
 
-#. Default: "This text should explain how the risk identification works."
-#: euphorie/content/help.py:50
+#. Default: This text should explain how the risk identification works.
+#: src/osha/oira/manual_translations.py:133
 msgid "help_identification"
 msgstr "Denna text förklarar hur riskidentifieringen fungerar."
 
-#. Default: "This text should explain how to evaluate the identified risks."
-#: euphorie/content/help.py:58
+#. Default: This text should explain how to evaluate the identified risks.
+#: src/osha/oira/manual_translations.py:135
 msgid "help_evaluation"
 msgstr "Denna text förklarar hur man utvärderar de identifierade riskerna."
 
-#. Default: "This text should explain how to fill in the Action plan."
-#: euphorie/content/help.py:66
+#. Default: This text should explain how to fill in the Action plan.
+#: src/osha/oira/manual_translations.py:137
 msgid "help_actionplan"
 msgstr "Denna text förklarar hur man fyller i handlingsplanen."
 
-#. Default: "This text should describe how the report can either be saved or
-#. printed."
-#: euphorie/content/help.py:74
+#. Default: This text should describe how the report can either be saved or
+#. printed.
+#: src/osha/oira/manual_translations.py:139
 msgid "help_reports"
-msgstr ""
-"Denna text förklarar hur rapporten antingen kan sparas eller skrivas ut."
+msgstr "Denna text förklarar hur rapporten antingen kan sparas eller skrivas ut."
 
-#. Default: "General final recommendations."
-#: euphorie/content/help.py:82
+#. Default: General final recommendations.
+#: src/osha/oira/manual_translations.py:141
 msgid "help_finalwords"
 msgstr "Allmänna slutliga rekommendationer."
 
 #. Default: It is possible for you to print out the contents of the tool to
-#. enable you to look for the information at the relevant workplace (by
-#. walking
-#. around and looking at what could cause harm, or by consulting the workers
-#. about problems they have encountered). You can then introduce the
-#. information into the tool.
-# Change request # 2567
-#: euphorie/client/templates/identification.pt:19
+#. enable
+#. you to look for the information at the relevant workplace (by walking around
+#. and
+#. looking at what could cause harm, or by consulting the workers about
+#. problems
+#. they have encountered). You can then introduce the information into the
+#. tool.
+#: src/osha/oira/manual_translations.py:142
 msgid "intro_print_identification_1"
 msgstr ""
-"Du kanske vill skriva ut listan över risker som du inte omedelbart kan svara"
-" på.  Ibland kan det vara viktigt att samråda med personalen över hur de ser"
-" på riskerna."
+"Du kanske vill skriva ut listan över risker som du inte omedelbart kan "
+"svara på.  Ibland kan det vara viktigt att samråda med personalen över "
+"hur de ser på riskerna."
 
 #. Default: You may also wish to distribute the contents among the workers and
 #. invite them to participate in identifying the hazards/problems, evaluating
-#. the risks and deciding on preventive action. Their feedback can be taken
-#. into account when filling in this tool.
-#: euphorie/client/templates/identification.pt:22
+#. the
+#. risks and deciding on preventive action. Their feedback can be taken into
+#. account when filling in this tool.
+#: src/osha/oira/manual_translations.py:147
 msgid "intro_print_identification_2"
 msgstr ""
-"Du kan även distribuera listan bland din personal och uppmana dem att delta "
-"i att identifiera risker/problem, för att bedöma risker och besluta om "
-"förebyggande åtgärder. Deras synpunkter kan beaktas när du svarar på "
+"Du kan även distribuera listan bland din personal och uppmana dem att "
+"delta i att identifiera risker/problem, för att bedöma risker och besluta"
+" om förebyggande åtgärder. Deras synpunkter kan beaktas när du svarar på "
 "frågorna i detta verktyg."
 
-#. Default: contents of the tool
-# Requested in https://syslab.com/proj/issues/2555#note-1
-#: euphorie/client/templates/identification.pt:26
-msgid "list_of_risks"
-msgstr ""
+#: src/osha/oira/module.py:21 src/osha/oira/module.py:39
+#: src/osha/oira/module.py:54
+msgid "Submodule"
+msgstr "Undermodul"
 
-#. Default: "Survey"
-#: osha.oira:/templates/report.pt:41
-msgid "popup_title"
-msgstr ""
+#: src/osha/oira/module.py:44
+msgid "Edit ${name}"
+msgstr "Redigera ${name}"
 
-#. Default: "Please give us your feedback about this tool: it will take you
-#. only 3 minutes! We really value your contribution during this testing phase
-#. of the OiRA tool."
-#: osha.oira:/templates/report.pt:42
-msgid "popup_text"
-msgstr ""
+#: src/osha/oira/module.py:59
+msgid "Add ${name}"
+msgstr "Lägg till ${name}"
 
-#. Default: "Take me to the survey"
-#: osha.oira:/templates/report.pt:46
-msgid "popup_confirm"
-msgstr ""
-
-#. Default: "No thanks"
-#: osha.oira:/templates/report.pt:49
-msgid "popup_deny"
-msgstr ""
-
-#. Default: Tool contents for ${title}
-#: euphorie/client/report.py:301
-msgid "filename_report_identification"
-msgstr ""
-
-#. Default: "OiRA Tool versions"
-#: osha.oira:/templates/surveygroup_view.pt:14
-msgid "header_sector_tool_version_list"
-msgstr ""
-
-#. Default: "Statistics Level"
-#: osha.oira:/sector.py:25
+#. Default: Statistics Level
+#: src/osha/oira/sector.py:30
 msgid "label_statistics_level"
 msgstr ""
 
-#. Default: "This risk is not present in your organisation, but since the
-#. sector organisation considers this one of the priority risks it must be
-#. included in this report."
-#: osha.oira:/templates/webhelpers.pt:141
-#: osha.oira:/templates/report_actionplan.pt:322
-msgid "top5_risk_not_present"
-msgstr ""
+#. Default: You can not delete a sector that contains published OiRA tools.
+#: src/osha/oira/sector.py:123
+#, fuzzy
+msgid "message_not_delete_published_sector"
+msgstr "Du kan inte radera en sektor som innerhåller publicerade OiRA-verktyg."
 
-#. Default: A version of an OiRA tool
-#: euphorie/content/profiles/default/types/euphorie.survey.xml:8
-msgid "A version of a survey."
-msgstr ""
+#. Default: low
+#: src/osha/oira/survey.py:292 src/osha/oira/templates/report_actionplan.pt:263
+#: src/osha/oira/templates/report_actionplan.pt:225
+#: src/osha/oira/templates/report_actionplan.pt:185
+#: src/osha/oira/templates/report_actionplan.pt:101
+#: src/osha/oira/templates/risk_actionplan.pt:28
+#, fuzzy
+msgid "risk_priority_low"
+msgstr "låg"
 
-#. Default: An OiRA tool
-#: euphorie/content/profiles/default/types/euphorie.surveygroup.xml:7
-msgid "A survey."
-msgstr ""
+#. Default: medium
+#: src/osha/oira/survey.py:294 src/osha/oira/templates/report_actionplan.pt:264
+#: src/osha/oira/templates/report_actionplan.pt:226
+#: src/osha/oira/templates/report_actionplan.pt:186
+#: src/osha/oira/templates/report_actionplan.pt:102
+#: src/osha/oira/templates/risk_actionplan.pt:29
+#, fuzzy
+msgid "risk_priority_medium"
+msgstr "medium"
 
-#. Default: Are you sure you want to unpublish this OiRA tool?
-#: euphorie/content/templates/unpublish.pt:19
-msgid "unpublish_confirm"
-msgstr ""
+#. Default: high
+#: src/osha/oira/survey.py:296 src/osha/oira/templates/report_actionplan.pt:265
+#: src/osha/oira/templates/report_actionplan.pt:227
+#: src/osha/oira/templates/report_actionplan.pt:187
+#: src/osha/oira/templates/report_actionplan.pt:103
+#: src/osha/oira/templates/risk_actionplan.pt:30
+#, fuzzy
+msgid "risk_priority_high"
+msgstr "hög"
 
-#. Default: Are you sure you want to republish this survey? This will make all
-#. changes made public.
-#: euphorie/client/templates/publish.pt:21
-msgid "intro_publish_survey_published"
-msgstr ""
-
-#. Default: Are you sure you want to create a preview of this OiRA tool? You
-#. can give
-#. the URL for the preview to others so they can test the OiRA tool. To access
-#. the
-#. preview a standard OiRA client login is required.
-#: euphorie/client/templates/preview.pt:17
-msgid "intro_preview"
-msgstr ""
-
-#. Default: Preview OiRA tool
-#: euphorie/client/templates/preview.pt:14
-msgid "header_preview"
-msgstr ""
-
-#. Default: After publication the OiRA tool will be available at ${url}.
-#: euphorie/client/templates/publish.pt:29
-msgid "help_publish_url"
-msgstr ""
-
-#. Default: Are you sure you want to publish this OiRA tool version? This will
-#. replace
-#. the current version.
-#: euphorie/client/templates/publish.pt:24
-msgid "intro_publish_other_survey_published"
-msgstr ""
-
-#. Default: Are you sure you want to republish this OiRA tool? This will make
-#. all
-#. changes made public.
-#: euphorie/client/templates/publish.pt:21
-msgid "intro_publish_OiRA tool_published"
-msgstr ""
-
-#. Default: Are you sure you want to publish this OiRA tool? After publication
-#. the
-#. tool will appear in the online client and be accessible by all users.
-#: euphorie/client/templates/publish.pt:17
-msgid "intro_publish_first_time"
-msgstr ""
-
-#. Default: Publish OiRA tool
-#: euphorie/client/templates/publish.pt:14
-msgid "header_publish"
-msgstr ""
-
-#. Default: This OiRA tool has been updated. Before you can continue, any
-#. changes made
-#. in the OiRA tool will have to be merged into your session.
-#: euphorie/client/templates/updated.pt:19
-msgid "expl_update"
-msgstr ""
-
-#. Default: The title of this OiRA tool. This title is used in the tool
-#. overview in
-#. the clients.
-#: euphorie/content/surveygroup.py:37
-msgid "help_surveygroup_title"
-msgstr ""
-
-#. Default: This OiRA tool is now no longer available in the client.
-#: euphorie/content/surveygroup.py:222
-msgid "message_unpublish_success"
-msgstr ""
-
-#. Default: Name for the OiRA tool version
-#: euphorie/content/upload.py:81 euphorie/content/upload.py:100
-msgid "label_upload_survey_title"
-msgstr ""
-
-#. Default: Import OiRA tool
-#: euphorie/deployment/browser/sitemenu.py:40
-msgid "menu_import"
-msgstr ""
-
-#. Default: Start creating a new OiRA tool. You will be asked whether you want
-#. to
-#. start off with a copy of an existing OiRA tool.
-#: euphorie/deployment/tiles/templates/versions.pt:45
-msgid "help_create_new_version"
-msgstr ""
-
-#. Default: Remove this OiRA tool from the online client.
-#: euphorie/deployment/tiles/templates/versions.pt:21
-msgid "title_help_unpublished"
-msgstr ""
-
-#. Default: "Disclaimer of Liability"
-#: osha.oira:/templates/disclaimer.pt:17
-msgid "header_disclaimer"
-msgstr ""
-
-#. Default: "This tool contains links to other websites which are not are not
-#. under the control of the European Agency for Safety and Health and the
-#. organisations involved. The Agency and the organisations involved accept no
-#. liability in respect of the content of these websites.\302\240"
-#: osha.oira:/templates/disclaimer.pt:19
-msgid "disclaimer_other_websites"
-msgstr ""
-
-#. Default: "The European Agency for Safety and Health at Work and the
-#. organisations involved will not be liable for any false, inaccurate,
-#. inappropriate or incomplete information stored in the OiRA tool or any
-#. other damages as a result of using the software."
-#: osha.oira:/templates/disclaimer.pt:26
-msgid "disclaimer_tool_information"
-msgstr ""
-
-#. Default: "Moreover, an OiRA tool is not intended to cover all the risks of
-#. every workplace but to help you put the risk assessment process into
-#. practice. For the OiRA tool to be fully effective it needs to be adapted to
-#. the context of your particular enterprise - some items might need to be
-#. added others omitted if they are not relevant."
-#: osha.oira:/templates/disclaimer.pt:33
-msgid "disclaimer_risk_coverage"
-msgstr ""
-
-#. Default: "For practical and analytical reasons, the tool presents
-#. problems/hazards separately, but in workplaces they may be intertwined.
-#. Therefore interactions between the different problems or risk factors
-#. identified must be taken into account."
-#: osha.oira:/templates/disclaimer.pt:41
-msgid "disclaimer_interactions"
-msgstr ""
-
-#. Default: "Therefore, EU-OSHA does not accept any liability for damages and
-#. claims in case a tool does not cover all risks of a given sector."
-#: osha.oira:/templates/disclaimer.pt:48
-msgid "disclaimer_coverage_liability"
-msgstr ""
-
-#. Default: "Moreover, the Agency and the organisations involved in the
-#. production of the OiRA tool do not accept any liability for damages and
-#. claims arising out of the use or inability to use the tool and the data
-#. stored therein. Similarly, EU-OSHA does not accept any liability in case of
-#. unavailability of the function of the OiRA tools to print the report,
-#. recording the risk assessment automatically generated by the tool.
-#. Therefore, the employer has to make sure, at any time, to be in possession
-#. of a printed, accurate and up-dated risk assessment."
-#: osha.oira:/templates/disclaimer.pt:53
-msgid "disclaimer_printed_assesment"
-msgstr ""
-
-#: src/osha/oira/module.py:17 src/osha/oira/module.py:30
-#: src/osha/oira/module.py:45
-msgid "Submodule"
-msgstr "Delmodul"
+#. Default: This is a ${priority_value} priority risk.
+#: src/osha/oira/survey.py:298 src/osha/oira/templates/report_actionplan.pt:261
+#: src/osha/oira/templates/report_actionplan.pt:223
+#: src/osha/oira/templates/report_actionplan.pt:183
+#: src/osha/oira/templates/report_actionplan.pt:99
+#: src/osha/oira/templates/risk_actionplan.pt:26
+#, fuzzy
+msgid "risk_priority"
+msgstr "Detta är en ${priority_value} prioriterad risk."
 
 #. Default: Measure
 #: src/osha/oira/survey.py:323 src/osha/oira/survey.py:346
@@ -1033,49 +571,151 @@ msgid "header_measure_single"
 msgstr "Åtgärd ${index}"
 
 #. Default: Measure ${index}
-#: src/osha/oira/survey.py:325
-#: src/osha/oira/templates/report_actionplan.pt:109
+#: src/osha/oira/survey.py:325 src/osha/oira/templates/report_actionplan.pt:109
 #: src/osha/oira/templates/risk_actionplan.pt:41
 msgid "header_measure"
 msgstr "Åtgärd ${index}"
 
+#. Default: General approach (to eliminate or reduce the risk)
+#: src/osha/oira/survey.py:354 src/osha/oira/templates/risk_actionplan.pt:182
+#: src/osha/oira/templates/risk_actionplan.pt:49
+msgid "label_measure_action_plan"
+msgstr "Standard tillvägagångssätt (för att eliminera eller minska risken)"
+
+#. Default: Specific action(s) required to implement this approach
+#: src/osha/oira/survey.py:356 src/osha/oira/templates/risk_actionplan.pt:185
+#: src/osha/oira/templates/risk_actionplan.pt:52
+msgid "label_measure_prevention_plan"
+msgstr "Särskilda åtgärder som krävs för att genomföra detta tillvägagångssätt"
+
+#. Default: Level of expertise and/or requirements needed
+#: src/osha/oira/survey.py:358 src/osha/oira/templates/risk_actionplan.pt:188
+#: src/osha/oira/templates/risk_actionplan.pt:55
+msgid "label_measure_requirements"
+msgstr "Krav"
+
 #. Default: Who is responsible?
-#: src/osha/oira/survey.py:359 src/osha/oira/templates/risk_actionplan.pt:194
+#: src/osha/oira/survey.py:360 src/osha/oira/templates/risk_actionplan.pt:194
 #: src/osha/oira/templates/risk_actionplan.pt:61
 msgid "label_action_plan_responsible"
 msgstr "Vem är ansvarig?"
 
 #. Default: Budget (in Euro)
-#: src/osha/oira/survey.py:361 src/osha/oira/templates/risk_actionplan.pt:199
+#: src/osha/oira/survey.py:362 src/osha/oira/templates/risk_actionplan.pt:199
 #: src/osha/oira/templates/risk_actionplan.pt:67
 msgid "label_action_plan_budget"
 msgstr "Budget (i euro)"
 
 #. Default: Planning start
-#: src/osha/oira/survey.py:362 src/osha/oira/templates/risk_actionplan.pt:204
+#: src/osha/oira/survey.py:363 src/osha/oira/templates/risk_actionplan.pt:204
 #: src/osha/oira/templates/risk_actionplan.pt:78
 msgid "label_action_plan_start"
 msgstr "Planerad start"
 
 #. Default: Planning end
-#: src/osha/oira/survey.py:363 src/osha/oira/templates/risk_actionplan.pt:221
+#: src/osha/oira/survey.py:364 src/osha/oira/templates/risk_actionplan.pt:221
 #: src/osha/oira/templates/risk_actionplan.pt:108
 msgid "label_action_plan_end"
 msgstr "Planerat slut"
 
+#. Default: Consultation of workers
+#: src/osha/oira/survey.py:413
+#, fuzzy
+msgid "header_oira_report_consultation"
+msgstr "Samråd med arbetstagare"
+
+#. Default: The undersigned hereby declare that the workers have been consulted
+#. on
+#. the content of this document.
+#: src/osha/oira/survey.py:422
+msgid "paragraph_oira_consultation_of_workers"
+msgstr ""
+"Undertecknad intygar härmed att de anställda har rådfrågats om innehållet"
+" i detta dokument."
+
+#. Default: On the behalf of the employer:
+#: src/osha/oira/survey.py:435
+msgid "oira_consultation_employer"
+msgstr "På uppdrag av arbetsgivaren:"
+
+#. Default: On the behalf of the workers:
+#: src/osha/oira/survey.py:437
+msgid "oira_consultation_workers"
+msgstr "På uppdrag av de anställda:"
+
+#. Default: Date:
+#: src/osha/oira/survey.py:446
+#, fuzzy
+msgid "oira_survey_date"
+msgstr "Datum:"
+
+#. Default: OiRA Report: "${title}"
+#: src/osha/oira/survey.py:488
+#, fuzzy
+msgid "header_oira_report_download"
+msgstr "OiRA-rapport: \"${title}"
+
 #. Default: Contents
-#: src/osha/oira/survey.py:501 src/osha/oira/templates/report_actionplan.pt:17
+#: src/osha/oira/survey.py:502 src/osha/oira/templates/report_actionplan.pt:17
 #: src/osha/oira/templates/report_identification.pt:16
 msgid "toc_header"
 msgstr "Innehåll"
 
+#. Default: Risks that have been identified, evaluated and have an Action Plan
+#: src/osha/oira/survey.py:507 src/osha/oira/templates/report_actionplan.pt:77
+#: src/osha/oira/templates/report_actionplan.pt:40
+msgid "header_present_risks"
+msgstr ""
+
+#. Default: Risks that have been identified but do NOT have an Action Plan
+#: src/osha/oira/survey.py:509 src/osha/oira/templates/report_actionplan.pt:163
+#: src/osha/oira/templates/report_actionplan.pt:49
+msgid "header_unevaluated_risks"
+msgstr "Risker som identifierats men INTE har någon åtgärdsplan"
+
+#. Default: Hazards/problems that have been "parked" and are still to be dealt
+#. with
+#: src/osha/oira/survey.py:511 src/osha/oira/templates/report_actionplan.pt:201
+#: src/osha/oira/templates/report_actionplan.pt:58
+msgid "header_unanswered_risks"
+msgstr "Faror/problem som har \"parkerats\" och ännu måste åtgärdas"
+
+#. Default: Hazards/problems that are not present in your organisation
+#: src/osha/oira/survey.py:513 src/osha/oira/templates/report_actionplan.pt:239
+#: src/osha/oira/templates/report_actionplan.pt:67
+msgid "header_risks_not_present"
+msgstr "Risker som identifierats som inte närvarande inom din organisation:"
+
 #. Default: Action plan ${title}
-#: src/osha/oira/survey.py:537
+#: src/osha/oira/survey.py:538
 msgid "filename_report_actionplan"
 msgstr "Handlingsplan ${title}.doc"
 
+#. Default: This document was based on the OiRA Tool '${title}' of revision
+#. date
+#. ${date}.
+#: src/osha/oira/survey.py:599
+msgid "report_identification_revision"
+msgstr ""
+
+#. Default: This report was based on the OiRA Tool '${title}' of revision date
+#. ${date}.
+#: src/osha/oira/survey.py:633 src/osha/oira/templates/report_actionplan.pt:323
+msgid "report_survey_revision"
+msgstr ""
+"Denna rapport är baserad på OiRA-verktyget '${title}' av reviseringsdatum"
+" ${date}."
+
+#. Default: You can not delete an OiRA tool that has been published.
+#: src/osha/oira/surveygroup.py:54
+#, fuzzy
+msgid "message_not_delete_published_surveygroup"
+msgstr "Du kan inte radera ett OiRA-verktyg som har publicerats."
+
 #. Default: Settings
 #: src/osha/oira/templates/actionplan.pt:106
+#: src/osha/oira/templates/module_actionplan.pt:98
+#: src/osha/oira/templates/module_identification.pt:91
 #: src/osha/oira/templates/report.pt:102
 #: src/osha/oira/templates/report_actionplan.pt:332
 #: src/osha/oira/templates/report_identification.pt:121
@@ -1085,6 +725,8 @@ msgstr "Status"
 
 #. Default: Status
 #: src/osha/oira/templates/actionplan.pt:105
+#: src/osha/oira/templates/module_actionplan.pt:97
+#: src/osha/oira/templates/module_identification.pt:90
 #: src/osha/oira/templates/report.pt:101
 #: src/osha/oira/templates/report_actionplan.pt:331
 #: src/osha/oira/templates/report_identification.pt:120
@@ -1097,9 +739,10 @@ msgstr "Status"
 #. Default: Help
 #: src/osha/oira/templates/actionplan.pt:104
 #: src/osha/oira/templates/disclaimer.pt:67
+#: src/osha/oira/templates/module_actionplan.pt:96
+#: src/osha/oira/templates/module_identification.pt:89
 #: src/osha/oira/templates/profile.pt:104
-#: src/osha/oira/templates/register.pt:41
-#: src/osha/oira/templates/report.pt:100
+#: src/osha/oira/templates/register.pt:41 src/osha/oira/templates/report.pt:100
 #: src/osha/oira/templates/report_actionplan.pt:330
 #: src/osha/oira/templates/report_identification.pt:119
 #: src/osha/oira/templates/risk_actionplan.pt:281
@@ -1109,8 +752,24 @@ msgstr "Status"
 msgid "navigation_help"
 msgstr "Hjälp"
 
+#. Default: OiRA Tools
+#: src/osha/oira/templates/actionplan.pt:103
+#: src/osha/oira/templates/module_actionplan.pt:95
+#: src/osha/oira/templates/module_identification.pt:88
+#: src/osha/oira/templates/profile.pt:103 src/osha/oira/templates/report.pt:99
+#: src/osha/oira/templates/report_actionplan.pt:329
+#: src/osha/oira/templates/report_identification.pt:118
+#: src/osha/oira/templates/risk_actionplan.pt:280
+#: src/osha/oira/templates/risk_evaluation.pt:125
+#: src/osha/oira/templates/risk_identification.pt:88
+#: src/osha/oira/templates/start.pt:69
+msgid "navigation_surveys"
+msgstr "OiRA-verktyg"
+
 #. Default: Logout
 #: src/osha/oira/templates/actionplan.pt:102
+#: src/osha/oira/templates/module_actionplan.pt:94
+#: src/osha/oira/templates/module_identification.pt:87
 #: src/osha/oira/templates/profile.pt:102 src/osha/oira/templates/report.pt:98
 #: src/osha/oira/templates/report_actionplan.pt:328
 #: src/osha/oira/templates/report_identification.pt:117
@@ -1123,6 +782,8 @@ msgstr "Logga ut"
 
 #. Default: Report
 #: src/osha/oira/templates/actionplan.pt:96
+#: src/osha/oira/templates/module_actionplan.pt:87
+#: src/osha/oira/templates/module_identification.pt:80
 #: src/osha/oira/templates/profile.pt:96 src/osha/oira/templates/report.pt:91
 #: src/osha/oira/templates/report_actionplan.pt:316
 #: src/osha/oira/templates/report_identification.pt:110
@@ -1135,6 +796,8 @@ msgstr "Rapport"
 
 #. Default: Report
 #: src/osha/oira/templates/actionplan.pt:95
+#: src/osha/oira/templates/module_actionplan.pt:86
+#: src/osha/oira/templates/module_identification.pt:79
 #: src/osha/oira/templates/profile.pt:95 src/osha/oira/templates/report.pt:90
 #: src/osha/oira/templates/report_actionplan.pt:315
 #: src/osha/oira/templates/report_identification.pt:109
@@ -1147,6 +810,8 @@ msgstr "Rapport"
 
 #. Default: Action Plan
 #: src/osha/oira/templates/actionplan.pt:90
+#: src/osha/oira/templates/module_actionplan.pt:78
+#: src/osha/oira/templates/module_identification.pt:74
 #: src/osha/oira/templates/profile.pt:92 src/osha/oira/templates/report.pt:85
 #: src/osha/oira/templates/report_actionplan.pt:310
 #: src/osha/oira/templates/report_identification.pt:104
@@ -1159,6 +824,8 @@ msgstr "Handlingsplan"
 
 #. Default: Action Plan
 #: src/osha/oira/templates/actionplan.pt:89
+#: src/osha/oira/templates/module_actionplan.pt:77
+#: src/osha/oira/templates/module_identification.pt:73
 #: src/osha/oira/templates/profile.pt:91 src/osha/oira/templates/report.pt:84
 #: src/osha/oira/templates/report_actionplan.pt:309
 #: src/osha/oira/templates/report_identification.pt:103
@@ -1171,6 +838,8 @@ msgstr "Handlingsplan"
 
 #. Default: Evaluation
 #: src/osha/oira/templates/actionplan.pt:84
+#: src/osha/oira/templates/module_actionplan.pt:72
+#: src/osha/oira/templates/module_identification.pt:68
 #: src/osha/oira/templates/profile.pt:88 src/osha/oira/templates/report.pt:79
 #: src/osha/oira/templates/report_actionplan.pt:304
 #: src/osha/oira/templates/report_identification.pt:98
@@ -1183,6 +852,8 @@ msgstr "Utvärdering"
 
 #. Default: Evaluation
 #: src/osha/oira/templates/actionplan.pt:83
+#: src/osha/oira/templates/module_actionplan.pt:71
+#: src/osha/oira/templates/module_identification.pt:67
 #: src/osha/oira/templates/profile.pt:87 src/osha/oira/templates/report.pt:78
 #: src/osha/oira/templates/report_actionplan.pt:303
 #: src/osha/oira/templates/report_identification.pt:97
@@ -1195,6 +866,8 @@ msgstr "Utvärdering"
 
 #. Default: Identification
 #: src/osha/oira/templates/actionplan.pt:78
+#: src/osha/oira/templates/module_actionplan.pt:66
+#: src/osha/oira/templates/module_identification.pt:59
 #: src/osha/oira/templates/profile.pt:84 src/osha/oira/templates/report.pt:73
 #: src/osha/oira/templates/report_actionplan.pt:298
 #: src/osha/oira/templates/report_identification.pt:92
@@ -1207,6 +880,8 @@ msgstr "Identifiering"
 
 #. Default: Identification
 #: src/osha/oira/templates/actionplan.pt:77
+#: src/osha/oira/templates/module_actionplan.pt:65
+#: src/osha/oira/templates/module_identification.pt:58
 #: src/osha/oira/templates/profile.pt:83 src/osha/oira/templates/report.pt:72
 #: src/osha/oira/templates/report_actionplan.pt:297
 #: src/osha/oira/templates/report_identification.pt:91
@@ -1219,6 +894,8 @@ msgstr "Identifiering"
 
 #. Default: Preparation
 #: src/osha/oira/templates/actionplan.pt:72
+#: src/osha/oira/templates/module_actionplan.pt:60
+#: src/osha/oira/templates/module_identification.pt:53
 #: src/osha/oira/templates/profile.pt:79 src/osha/oira/templates/report.pt:67
 #: src/osha/oira/templates/report_actionplan.pt:292
 #: src/osha/oira/templates/report_identification.pt:86
@@ -1231,6 +908,8 @@ msgstr "Förberedelse"
 
 #. Default: Preparation
 #: src/osha/oira/templates/actionplan.pt:71
+#: src/osha/oira/templates/module_actionplan.pt:59
+#: src/osha/oira/templates/module_identification.pt:52
 #: src/osha/oira/templates/profile.pt:78 src/osha/oira/templates/report.pt:66
 #: src/osha/oira/templates/report_actionplan.pt:291
 #: src/osha/oira/templates/report_identification.pt:85
@@ -1259,9 +938,215 @@ msgstr "Skapa handlingsplan"
 #: src/osha/oira/templates/actionplan.pt:56
 msgid "expl_actionplan_empty"
 msgstr ""
-"Du har identifierat riskens omfattning för varje flaskhals. Det finns inga "
-"risker som kräver uppmärksamhet under denna fas, fortsätt vidare till "
-"rapporten."
+"Du har identifierat riskens omfattning för varje flaskhals. Det finns "
+"inga risker som kräver uppmärksamhet under denna fas, fortsätt vidare "
+"till rapporten."
+
+#. Default: Once you have decided how to eliminate or reduce a particular risk,
+#. then you describe the specific action(s) required to achieve this. You
+#. should
+#. also include details of the level of expertise and/or other requirements
+#. needed
+#. for those actions to be effective.
+#: src/osha/oira/templates/actionplan.pt:50
+#, fuzzy
+msgid "expl_actionplan_7"
+msgstr ""
+"När du bestämt dig för hur du ska eliminera eller minska en specifik "
+"risk, beskriv den åtgärd(er) som krävs för att uppnå detta. Du bör även "
+"inkludera uppgifter om den expertisnivå och/eller övriga krav som krävs "
+"för att dessa åtgärder ska vara effektiva."
+
+#. Default: If certain risks are not avoidable, how can they be reduced to a
+#. level
+#. at which the health and safety of those exposed is not compromised?
+#: src/osha/oira/templates/actionplan.pt:44
+#, fuzzy
+msgid "expl_actionplan_6"
+msgstr ""
+"Om vissa risker inte kan undvikas, hur kan de minskas till en nivå där de"
+" utsattas personers hälsa och säkerhet inte äventyras?"
+
+#. Default: Is a risk avoidable? Can it be removed entirely? For example, this
+#. could be achieved by:
+#: src/osha/oira/templates/actionplan.pt:36
+msgid "expl_actionplan_3"
+msgstr ""
+"Kan en risk undvikas? Kan den avlägsnas helt och hållet? T.ex. kan detta "
+"uppnås genom att:"
+
+#. Default: removing the hazard
+#: src/osha/oira/templates/actionplan.pt:40
+#, fuzzy
+msgid "expl_actionplan_5"
+msgstr "avlägsna faran"
+
+#. Default: considering whether the task or job is necessary
+#: src/osha/oira/templates/actionplan.pt:39
+msgid "expl_actionplan_4"
+msgstr "överväga om uppgiften eller arbetet är nödvändigt"
+
+#. Default: Removing the causes (tackling the source) is the preferred method:
+#. that
+#. way, the risk can no longer arise. You then write down what tasks have to be
+#. carried out in order for the risk to be removed, as well as the knowledge
+#. and
+#. experience that are needed for those tasks to be carried out (prevention
+#. plan
+#. and requirements).
+#: src/osha/oira/templates/actionplan.pt:27
+msgid "expl_actionplan_2"
+msgstr ""
+"Ta bort orsakerna (angripa källan) är att föredra: på så sätt kan risken "
+"inte längre uppstå. Du skriver sedan ner vilka åtgärder som måste utföras"
+" för att risken skall kunna avlägsnas, liksom den kunskap och erfarenhet "
+"som skall utföras (plan för förebyggande och krav)."
+
+#. Default: You have identified the magnitude of risk for each of the
+#. bottlenecks.
+#. During the action plan phase you can determine the priority of each of the
+#. bottlenecks and how you are going to tackle the bottleneck. The programme
+#. may
+#. offer a suggestion you can use, or you can add your own measures.
+#: src/osha/oira/templates/actionplan.pt:20
+msgid "expl_actionplan_1"
+msgstr ""
+"Du har identifierat riskens omfattning för varje flaskhals. Under varje "
+"fas av handlingsplanen kan du fastställa prioriteringen för varje "
+"flaskhals och hur du ska hantera dem. Programmet kan föreslå en åtgärd "
+"som du kan använda, eller så kan du lägga till egna åtgärder."
+
+#. Default: OiRA - Online interactive Risk Assessment
+#: src/osha/oira/templates/actionplan.pt:12
+#: src/osha/oira/templates/disclaimer.pt:12
+#: src/osha/oira/templates/frontpage.pt:15
+#: src/osha/oira/templates/module_actionplan.pt:12
+#: src/osha/oira/templates/module_identification.pt:12
+#: src/osha/oira/templates/register.pt:12 src/osha/oira/templates/report.pt:12
+#: src/osha/oira/templates/report_actionplan.pt:13
+#: src/osha/oira/templates/report_identification.pt:12
+#: src/osha/oira/templates/risk_actionplan.pt:12
+#: src/osha/oira/templates/risk_evaluation.pt:12
+#: src/osha/oira/templates/risk_identification.pt:12
+#: src/osha/oira/templates/sessions.pt:13 src/osha/oira/templates/start.pt:12
+#: src/osha/oira/templates/webhelpers.pt:15
+msgid "title_tool"
+msgstr "OiRA - Online interactive risk assessment"
+
+#. Default: Moreover, the Agency and the organisations involved in the
+#. production
+#. of the OiRA tool do not accept any liability for damages and claims arising
+#. out
+#. of the use or inability to use the tool and the data stored therein.
+#. Similarly,
+#. EU-OSHA does not accept any liability in case of unavailability of the
+#. function
+#. of the OiRA tools to print the report, recording the risk assessment
+#. automatically generated by the tool. Therefore, the employer has to make
+#. sure,
+#. at any time, to be in possession of a printed, accurate and up-dated risk
+#. assessment.
+#: src/osha/oira/templates/disclaimer.pt:53
+msgid "disclaimer_printed_assesment"
+msgstr ""
+
+#. Default: Therefore, EU-OSHA does not accept any liability for damages and
+#. claims
+#. in case a tool does not cover all risks of a given sector.
+#: src/osha/oira/templates/disclaimer.pt:48
+msgid "disclaimer_coverage_liability"
+msgstr ""
+
+#. Default: For practical and analytical reasons, the tool presents
+#. problems/hazards separately, but in workplaces they may be intertwined.
+#. Therefore interactions between the different problems or risk factors
+#. identified
+#. must be taken into account.
+#: src/osha/oira/templates/disclaimer.pt:41
+msgid "disclaimer_interactions"
+msgstr ""
+
+#. Default: Moreover, an OiRA tool is not intended to cover all the risks of
+#. every
+#. workplace but to help you put the risk assessment process into practice. For
+#. the
+#. OiRA tool to be fully effective it needs to be adapted to the context of
+#. your
+#. particular enterprise - some items might need to be added others omitted if
+#. they
+#. are not relevant.
+#: src/osha/oira/templates/disclaimer.pt:33
+msgid "disclaimer_risk_coverage"
+msgstr ""
+
+#. Default: The European Agency for Safety and Health at Work and the
+#. organisations
+#. involved will not be liable for any false, inaccurate, inappropriate or
+#. incomplete information stored in the OiRA tool or any other damages as a
+#. result
+#. of using the software.
+#: src/osha/oira/templates/disclaimer.pt:26
+msgid "disclaimer_tool_information"
+msgstr ""
+
+#. Default: This tool contains links to other websites which are not are not
+#. under
+#. the control of the European Agency for Safety and Health and the
+#. organisations
+#. involved. The Agency and the organisations involved accept no liability in
+#. respect of the content of these websites.
+#: src/osha/oira/templates/disclaimer.pt:19
+msgid "disclaimer_other_websites"
+msgstr ""
+"Detta verktyg innehåller länkar till andra webbplatser som inte är under "
+"kontroll av Europeiska byrån för säkerhet och hälsa och deltagande "
+"organisationer. Byrån och de organisationer som deltar accepterar inget "
+"ansvar för innehållet på dessa webbplatser."
+
+#. Default: Disclaimer of Liability
+#: src/osha/oira/templates/disclaimer.pt:17
+msgid "header_disclaimer"
+msgstr ""
+
+#. Default: Regions
+#: src/osha/oira/templates/frontpage.pt:407
+#, fuzzy
+msgid "header_regions"
+msgstr "Registrera"
+
+#. Default: Next
+#: src/osha/oira/templates/module_actionplan.pt:53
+#: src/osha/oira/templates/module_identification.pt:46
+#: src/osha/oira/templates/register.pt:35 src/osha/oira/templates/report.pt:53
+#: src/osha/oira/templates/risk_actionplan.pt:157
+#: src/osha/oira/templates/risk_evaluation.pt:74
+#: src/osha/oira/templates/risk_identification.pt:30
+#: src/osha/oira/templates/sessions.pt:81
+msgid "label_next"
+msgstr "Nästa"
+
+#. Default: Previous
+#: src/osha/oira/templates/module_actionplan.pt:52
+#: src/osha/oira/templates/module_identification.pt:45
+#: src/osha/oira/templates/register.pt:34
+#: src/osha/oira/templates/risk_actionplan.pt:156
+#: src/osha/oira/templates/risk_evaluation.pt:73
+#: src/osha/oira/templates/risk_identification.pt:29
+#: src/osha/oira/templates/sessions.pt:80 src/osha/oira/templates/start.pt:37
+msgid "label_previous"
+msgstr "Föregående"
+
+#. Default: No
+#: src/osha/oira/templates/module_identification.pt:42
+#: src/osha/oira/templates/risk_identification.pt:23
+msgid "label_no"
+msgstr "Nej"
+
+#. Default: Yes
+#: src/osha/oira/templates/module_identification.pt:39
+#: src/osha/oira/templates/risk_identification.pt:22
+msgid "label_yes"
+msgstr "Ja"
 
 #. Default: Risks
 #: src/osha/oira/templates/module_view.pt:39
@@ -1273,6 +1158,18 @@ msgstr "Risker"
 #: src/osha/oira/templates/module_view.pt:32
 msgid "header_submodules"
 msgstr "Delmoduler"
+
+#. Default: This ${number} is optional.
+#: src/osha/oira/templates/module_view.pt:27
+#, fuzzy
+msgid "module_optional"
+msgstr "Detta ${number} är valfritt."
+
+#. Default: This ${number} is mandatory.
+#: src/osha/oira/templates/module_view.pt:23
+#, fuzzy
+msgid "module_mandatory"
+msgstr "Detta ${number} är obligatoriskt."
 
 #. Default: Information
 #: src/osha/oira/templates/module_view.pt:22
@@ -1290,6 +1187,26 @@ msgstr "Fortsätt"
 #: src/osha/oira/templates/profile.pt:62
 msgid "label_add_profile_module"
 msgstr "Lägg till"
+
+#. Default: list multiple business units, or branches, or stores, etc. These
+#. related risks will be repeated for each name you have entered.
+#: src/osha/oira/templates/profile.pt:27
+msgid "expl_profile_bullet2"
+msgstr ""
+
+#. Default: select or skip situation(s) relevant or not to your business
+#. activity
+#. and tick the box(es) if appropriate
+#: src/osha/oira/templates/profile.pt:23
+msgid "expl_profile_bullet1"
+msgstr ""
+
+#. Default: In order to tailor the risk assessment to your organisation you may
+#. be
+#. asked to:
+#: src/osha/oira/templates/profile.pt:18
+msgid "expl_profile"
+msgstr ""
 
 #. Default: Tailor the risk assessment to your organisation
 #: src/osha/oira/templates/profile.pt:16
@@ -1310,24 +1227,6 @@ msgstr "Detta är en repeterbar post i en profil. "
 #: src/osha/oira/templates/profilequestion_view.pt:21
 msgid "profilequestion_type_optional"
 msgstr "Detta är en post i en profil som är ett tillval."
-
-#. Default: Next
-#: src/osha/oira/templates/register.pt:35 src/osha/oira/templates/report.pt:53
-#: src/osha/oira/templates/risk_actionplan.pt:157
-#: src/osha/oira/templates/risk_evaluation.pt:74
-#: src/osha/oira/templates/risk_identification.pt:30
-#: src/osha/oira/templates/sessions.pt:81
-msgid "label_next"
-msgstr "Nästa"
-
-#. Default: Previous
-#: src/osha/oira/templates/register.pt:34
-#: src/osha/oira/templates/risk_actionplan.pt:156
-#: src/osha/oira/templates/risk_evaluation.pt:73
-#: src/osha/oira/templates/risk_identification.pt:29
-#: src/osha/oira/templates/sessions.pt:80 src/osha/oira/templates/start.pt:37
-msgid "label_previous"
-msgstr "Föregående"
 
 #. Default: Again password
 #: src/osha/oira/templates/register.pt:31
@@ -1350,6 +1249,25 @@ msgstr "E-postadress"
 msgid "header_register"
 msgstr "Registrera"
 
+#. Default: No thanks
+#: src/osha/oira/templates/report.pt:51
+msgid "popup_deny"
+msgstr ""
+
+#. Default: Take me to the survey
+#: src/osha/oira/templates/report.pt:48
+msgid "popup_confirm"
+msgstr ""
+
+#. Default: Please give us your feedback about this tool: it will take you only
+#. 3
+#. minutes! We really value your contribution during this testing phase of the
+#. OiRA
+#. tool.
+#: src/osha/oira/templates/report.pt:44
+msgid "popup_text"
+msgstr ""
+
 #. Default: Please leave any extra comments that should be included in the
 #. report
 #. in this field.
@@ -1357,10 +1275,38 @@ msgstr "Registrera"
 msgid "label_report_comment"
 msgstr "Lämna gärna extra kommentarer som bör ingå i denna områdesrapport."
 
+#. Default: Now that you have finished identifying all the risks in your
+#. organisation and created an action plan you can create a report which lists
+#. all
+#. your results. You can, if desired, add some extra comments that should be
+#. included in this report in the field below.
+#: src/osha/oira/templates/report.pt:20
+msgid "report_intro"
+msgstr ""
+"Nu när du har identifierat alla risker inom din organisation och skapat "
+"en handlingsplan kan du skapa en rapport som listar alla dina resultat. "
+"Du kan, om så önskas, lägga till extra kommentarer som bör ingå i denna "
+"rapport i fältet nedan."
+
 #. Default: Reporting
 #: src/osha/oira/templates/report.pt:18
 msgid "header_reporting"
 msgstr "Rapportering"
+
+#. Default: This risk is not present in your organisation, but since the sector
+#. organisation considers this one of the priority risks it must be included in
+#. this report.
+#: src/osha/oira/templates/report_actionplan.pt:281
+#: src/osha/oira/templates/webhelpers.pt:151
+msgid "top5_risk_not_present"
+msgstr ""
+
+#. Default: The following risks have not yet been answered. Please do so at the
+#. soonest possibility.
+#: src/osha/oira/templates/report_actionplan.pt:203
+#, fuzzy
+msgid "desc_unanswered_risks"
+msgstr "Följande risker har ännu inte besvarats. Gör det så snart som möjligt."
 
 #. Default: There is a budget of ${amount} for this measure.
 #: src/osha/oira/templates/report_actionplan.pt:149
@@ -1373,8 +1319,8 @@ msgstr "Det finns en budget på ${amount} för denna åtgärd."
 #: src/osha/oira/templates/report_actionplan.pt:145
 msgid "report_measure_full"
 msgstr ""
-"${responsible} ansvarar för denna uppgift som börjar på ${start} och slutar "
-"på ${end}."
+"${responsible} ansvarar för denna uppgift som börjar på ${start} och "
+"slutar på ${end}."
 
 #. Default: This task starts on ${start} and ends on ${end}.
 #: src/osha/oira/templates/report_actionplan.pt:141
@@ -1407,6 +1353,21 @@ msgstr "${responsible} är ansvarig för denna uppgift som börjar på ${start}.
 msgid "report_measure_responsible"
 msgstr "${responsible} är ansvarig för denna uppgift."
 
+#. Default: Level of expertise and/or requirements needed:
+#: src/osha/oira/templates/report_actionplan.pt:120
+msgid "report_measure_requirements"
+msgstr "Viss kompetens och/eller krav som behövs:"
+
+#. Default: Specific action(s) required to implement this approach:
+#: src/osha/oira/templates/report_actionplan.pt:116
+msgid "report_measure_preventionplan"
+msgstr "Särskilda åtgärder som krävs för att genomföra detta tillvägagångssätt:"
+
+#. Default: General approach (to eliminate or reduce the risk):
+#: src/osha/oira/templates/report_actionplan.pt:112
+msgid "report_measure_actionplan"
+msgstr "Standard tillvägagångssätt (för att eliminera eller minska risken):"
+
 #. Default: Print
 #: src/osha/oira/templates/report_actionplan.pt:30
 msgid "button_print"
@@ -1417,6 +1378,13 @@ msgstr "Skriv ut"
 #: src/osha/oira/templates/report_identification.pt:24
 msgid "button_download"
 msgstr "Ladda ner"
+
+#. Default: You responded negative to the above statement.
+#: src/osha/oira/templates/report_identification.pt:48
+#: src/osha/oira/templates/webhelpers.pt:163
+#, fuzzy
+msgid "warn_risk_present"
+msgstr "Du svarade negativt till ovanstående påstående."
 
 #: src/osha/oira/templates/risk_actionplan.pt:287
 msgid ""
@@ -1450,6 +1418,59 @@ msgstr "Månad"
 msgid "label_day"
 msgstr "Dag"
 
+#. Default: Although some measures do not cost any money, most do. The measures
+#. should therefore be budgeted for; include them in the annual budget round if
+#. necessary.
+#: src/osha/oira/templates/risk_actionplan.pt:200
+#: src/osha/oira/templates/risk_actionplan.pt:68
+msgid "actionplan_measure_budget_tooltip"
+msgstr ""
+"Även om vissa åtgärder inte kostar några pengar, så gör de flesta det. "
+"Åtgärderna bör därför budgeteras, inkludera dem i den årliga budgeten om "
+"nödvändigt."
+
+#. Default: Appoint someone in your company to be responsible for the
+#. implementation of this measure. This person will have the authority to take
+#. the
+#. steps described in the Plan and/or the responsibility to ensure that they
+#. are
+#. carried out.
+#: src/osha/oira/templates/risk_actionplan.pt:195
+#: src/osha/oira/templates/risk_actionplan.pt:62
+msgid "actionplan_measure_responsible_tooltip"
+msgstr ""
+"Utse någon inom ditt företag som ansvarar för genomförandet av denna "
+"åtgärd. Denna person kommer att ha befogenhet för att vidta de åtgärder "
+"som beskrivs i planen och/eller ansvaret för att se till att de "
+"genomförs."
+
+#. Default: Describe: 1) what is your general approach to eliminate or (if the
+#. risk
+#. is not avoidable) reduce the risk; 2) the specific action(s) required to
+#. implement this approach (to eliminate or to reduce the risk); 3) the level
+#. of
+#. expertise needed to implement the measure, for instance “common sense (no
+#. OSH
+#. knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge
+#. or
+#. training and/or consultation of OSH guidance required”, or “OSH expert”. You
+#. can
+#. also describe here any other additional requirement (if any).
+#: src/osha/oira/templates/risk_actionplan.pt:178
+#: src/osha/oira/templates/risk_actionplan.pt:45
+msgid "actionplan_measure_tooltip"
+msgstr ""
+"Beskriv: 1) Vilket är ditt normala tillvägagångssätt för att eliminera "
+"eller (om risken inte går att undvika) minska risken, 2) de specifika "
+"åtgärder som krävs för att genomföra detta tillvägagångssätt (för att "
+"eliminera eller minska risken), 3) den kompetens som behövs för att "
+"genomföra åtgärden, till exempel \"sunt förnuft (inga kunskaper om "
+"arbetsmiljöfrågor krävs)\", \"inga särskilda kunskaper om "
+"arbetsmiljöfrågor, men minsta möjliga kunskap om arbetsmiljöfrågor eller "
+"utbildning och/eller samråd med arbetsmiljöfrågor krävs\", eller "
+"\"arbetsmiljöexpert\". Du kan också beskriva alla ytterligare krav här "
+"(om några)."
+
 #. Default: Remove
 #: src/osha/oira/templates/risk_actionplan.pt:176
 msgid "label_remove"
@@ -1471,14 +1492,25 @@ msgstr ""
 "Lämna gärna synpunkter du kan ha om ovanstående fråga inom detta område. "
 "Dessa kommentarer kommer att användas i handlingsplanen."
 
+#. Default: Use this measure
+#: src/osha/oira/templates/risk_actionplan.pt:149
+#, fuzzy
+msgid "button_use_measure"
+msgstr "Använd denna åtgärd"
+
 #. Default: There are known common approaches to this risk. You can create a
 #. new
 #. measure based on these approaches.
 #: src/osha/oira/templates/risk_actionplan.pt:144
 msgid "help_common_solutions"
 msgstr ""
-"Det finns vanliga strategier för denna risk. Du kan skapa en ny åtgärd som "
-"bygger på dessa strategier."
+"Det finns vanliga strategier för denna risk. Du kan skapa en ny åtgärd "
+"som bygger på dessa strategier."
+
+#. Default: Common measures
+#: src/osha/oira/templates/risk_actionplan.pt:143
+msgid "header_common_solutions"
+msgstr "Vanliga lösningar"
 
 #. Default: Add another measure
 #: src/osha/oira/templates/risk_actionplan.pt:139
@@ -1587,28 +1619,64 @@ msgstr "Vad är chansen att denna risk uppstår?"
 msgid "label_not_applicable"
 msgstr "Ej tillämpligt"
 
-#. Default: No
-#: src/osha/oira/templates/risk_identification.pt:23
-msgid "label_no"
-msgstr "Nej"
-
-#. Default: Yes
-#: src/osha/oira/templates/risk_identification.pt:22
-msgid "label_yes"
-msgstr "Ja"
-
 #. Default: You can also ${add_link}.
 #: src/osha/oira/templates/sector_view.pt:31
 msgid "survey_list_footer"
 msgstr "Du kan även ${add_link}."
+
+#. Default: add a new OiRA Tool
+#: src/osha/oira/templates/sector_view.pt:33
+#: src/osha/oira/templates/sector_view.pt:18
+msgid "add_survey"
+msgstr "lägg till ett nytt OiRA-verktyg"
+
+#. Default: There are no OiRA Tools present. You can ${add_link}.
+#: src/osha/oira/templates/sector_view.pt:16
+msgid "no_surveys_present"
+msgstr "Det finns för närvarande inga OiRA-verktyg. Du kan ${add_link}."
+
+#. Default: OiRA Tools
+#: src/osha/oira/templates/sector_view.pt:14
+msgid "header_sector_survey_list"
+msgstr "OiRA-verktyg"
 
 #: src/osha/oira/templates/sessions.pt:117
 msgid ""
 "Are you sure you want to delete this session? This action can not be "
 "reverted."
 msgstr ""
-"Är du säker på att du vill ta bort denna session? Denna åtgärd kan inte "
+"Är du säker på att du vill radera denna session? Denna åtgärd kan inte "
 "återställas."
+
+#. Default: Once you have started an OiRA tool session, you will be able to
+#. stop
+#. before the end. You can restart it again at a later date by selecting the
+#. title
+#. of the OiRA tool session. You can save more than one session, provided you
+#. have
+#. given them different title names. Please remember your e-mail address,
+#. password
+#. and the title that you have given the OiRA tool session. By clicking on the
+#. Logout button, you are logged out actively. You are also logged out if you
+#. close
+#. your Browser. For security reasons it is better to actively log out.
+#: src/osha/oira/templates/sessions.pt:62
+#, fuzzy
+msgid "session_title_tooltip"
+msgstr ""
+"När du har startat en session med ett OiRA-verktyg kommer du att kunna "
+"stoppa den före slutet. Du kan starta den igen vid ett senare tillfälle "
+"genom att välja titeln för OiRA-verktygets session. Du kan spara mer än "
+"en session, förutsatt att du har gett dem olika namn. Kom ihåg din "
+"e-postadress, lösenord och titeln för OiRA-verktygets session. Genom att "
+"klicka på Logga ut-knappen loggas du ut aktivt. Du loggas även ut om du "
+"stänger din webbläsare. Av säkerhetsskäl är det bättre att logga ut "
+"aktivt."
+
+#. Default: Enter a title for your Risk Assessment
+#: src/osha/oira/templates/sessions.pt:58
+msgid "label_session_title"
+msgstr "Ange en titel för din riskbedömning"
 
 #. Default: Start a new session choosing one of the following sectoral tools
 #: src/osha/oira/templates/sessions.pt:53
@@ -1639,6 +1707,11 @@ msgstr "Sparad ${date}"
 #: src/osha/oira/templates/sessions.pt:23
 msgid "header_select_session"
 msgstr "Välj en tidigare session för att slutborda eller förhandsgranska"
+
+#. Default: OiRA Tool
+#: src/osha/oira/templates/sessions.pt:18
+msgid "header_session"
+msgstr "OiRA-verktyg"
 
 #. Default: Cancel
 #: src/osha/oira/templates/settings.pt:99
@@ -1674,8 +1747,7 @@ msgstr "Kontaktperson"
 #. environment.
 #: src/osha/oira/templates/settings.pt:81
 msgid "help_sector_password"
-msgstr ""
-"Detta är det lösenord du behöver för att logga in på denna redaktörsmiljö."
+msgstr "Detta är det lösenord du behöver för att logga in på denna redaktörsmiljö."
 
 #. Default: Password
 #: src/osha/oira/templates/settings.pt:79
@@ -1690,9 +1762,9 @@ msgstr "Lösenord"
 #: src/osha/oira/templates/settings.pt:74
 msgid "logo_instructions"
 msgstr ""
-"Du kan få bäst resultat om du laddar upp en logotyp som ${transparent} PNG-"
-"fil på minst 100 pixlar på höjden. Det är bra att ladda upp större bilder, "
-"logotypen skalas automatiskt ner till rätt storlek."
+"Du kan få bäst resultat om du laddar upp en logotyp som ${transparent} "
+"PNG-fil på minst 100 pixlar på höjden. Det är bra att ladda upp större "
+"bilder, logotypen skalas automatiskt ner till rätt storlek."
 
 #. Default: transparent
 #: src/osha/oira/templates/settings.pt:75
@@ -1719,11 +1791,11 @@ msgstr "Vilken logotyp vill du visa i det övre vänstra hörnet?"
 #: src/osha/oira/templates/settings.pt:60
 msgid "help_sector_logo"
 msgstr ""
-"Logotypen visas både på applikationen för klientsidan som din användargrupp "
-"kommer att se samt på redaktörsmiljön i det övre vänstra hörnet. Se till att"
-" din bild är i formatet png, jpg eller gif och inte innehåller några "
-"specialtecken. Den nya logotypen blir inte märkbar förrän efter att du har "
-"sparat ändringarna."
+"Logotypen visas både på applikationen för klientsidan som din "
+"användargrupp kommer att se samt på redaktörsmiljön i det övre vänstra "
+"hörnet. Se till att din bild är i formatet png, jpg eller gif och inte "
+"innehåller några specialtecken. Den nya logotypen blir inte märkbar "
+"förrän efter att du har sparat ändringarna."
 
 #. Default: Logo
 #: src/osha/oira/templates/settings.pt:58
@@ -1746,9 +1818,9 @@ msgstr "Huvudfärg"
 #: src/osha/oira/templates/settings.pt:36
 msgid "help_colour_picker"
 msgstr ""
-"Välj bland nedanstående färger för att välja din organisations färger. Det "
-"funkar bäst att välja en mörkare färg för huvudfärgen och en ljusare färg "
-"för stödfärgen."
+"Välj bland nedanstående färger för att välja din organisations färger. "
+"Det funkar bäst att välja en mörkare färg för huvudfärgen och en ljusare "
+"färg för stödfärgen."
 
 #. Default: The colours you select here apply only for the client side of the
 #. application. Try to pick colours that have high enough contrast to keep the
@@ -1757,9 +1829,9 @@ msgstr ""
 #: src/osha/oira/templates/settings.pt:33
 msgid "help_sector_colours"
 msgstr ""
-"De färger du väljer här gäller endast för klientsidans applikation. Försök "
-"att välja färger som har tillräckligt hög kontrast för att hålla texten på "
-"varje knapp läsbar."
+"De färger du väljer här gäller endast för klientsidans applikation. "
+"Försök att välja färger som har tillräckligt hög kontrast för att hålla "
+"texten på varje knapp läsbar."
 
 #. Default: Restore to original colours
 #: src/osha/oira/templates/settings.pt:30
@@ -1791,15 +1863,78 @@ msgstr "Inställningar"
 msgid "label_start_survey"
 msgstr "Starta"
 
+#. Default: This risk assessment tool is mainly intended for micro (less than
+#. 10
+#. workers) and small (less than 50 workers) enterprises/organisations.
+#: src/osha/oira/templates/start.pt:28
+msgid "intro_oira_tool"
+msgstr ""
+"Detta verktyg för riskbedömning är främst avsett för mikroföretag (mindre"
+" än tio anställda) och små (mindre än 50 anställda) "
+"företag/organisationer."
+
+#. Default: The OiRA tool
+#: src/osha/oira/templates/start.pt:27
+#, fuzzy
+msgid "header_oira_tool"
+msgstr "OiRA-verktyget"
+
+#. Default: Complicated? Not really. It just takes a bit of time. However, the
+#. RA
+#. is important. So important that it is a legal requirement. This is for good
+#. reason. If risks are not assessed or properly dealt with, a suitable risk
+#. management process cannot be started and appropriate preventive measures are
+#. unlikely to be found or put in place.
+#: src/osha/oira/templates/start.pt:25
+msgid "intro_not_complicated"
+msgstr ""
+"Det är inte svårt att göra en riskbedömning. Men du måste ta dig tid och "
+"svara på ett antal frågor om din och dina kollegors arbetsmiljö. Det tar "
+"en kort stund och när du är klar har du en färdig handlingsplan att jobba"
+" med."
+
 #. Default: The assessment is not complicated.
 #: src/osha/oira/templates/start.pt:24
 msgid "header_not_complicated"
 msgstr "En riskbedömning är inte komplicerad"
 
+#. Default: Including the risks to your employees and your equipment? What if
+#. there
+#. is an accident with one of the machines? What if an employee is exposed to
+#. hazardous substances? A risk assessment helps you to define these risks and
+#. tackle them head on. A risk assessment mainly consists of two parts: a with
+#. all
+#. the risks in your company and an with details of how to deal with these
+#. risks.
+#. These two components allow you to limit the risks to your employees and your
+#. company, and therefore the financial risk.
+#: src/osha/oira/templates/start.pt:22
+msgid "intro_risk_aware"
+msgstr ""
+"Inklusive riskerna för dina anställda och din utrustning? Vad händer om "
+"det inträffar en olycka vid en av maskinerna? Vad händer om en anställd "
+"utsätts för farliga ämnen? En riskbedömning hjälper dig att definiera "
+"dessa risker och hantera dem direkt. En riskbedömning består "
+"huvudsakligen av två delar: en med alla risker för ditt företag och en "
+"med information för hur man hanterar dessa risker. Dessa två komponenter "
+"låter dig begränsa riskerna för dina anställda och ditt företag och "
+"därmed även den finansiella risken."
+
 #. Default: Are you aware of all the risks?
 #: src/osha/oira/templates/start.pt:21
 msgid "header_risk_aware"
 msgstr "Är du medveten om alla risker?"
+
+#. Default: This OiRA Tool has no modules.
+#: src/osha/oira/templates/survey_view.pt:32
+msgid "no_modules"
+msgstr "Detta OiRA-verktyg har inga moduler."
+
+#. Default: Modules and Profile Questions
+#: src/osha/oira/templates/survey_view.pt:30
+#, fuzzy
+msgid "header_modules_and_profile_questions"
+msgstr "Moduler och profilfrågor"
 
 #. Default: Not set
 #: src/osha/oira/templates/survey_view.pt:26
@@ -1832,11 +1967,34 @@ msgstr "Tillval"
 msgid "label_evaluation_phase"
 msgstr "Utvärderingsfas"
 
+#. Default: OiRA Tool versions
+#: src/osha/oira/templates/surveygroup_view.pt:14
+msgid "header_sector_tool_version_list"
+msgstr ""
+
 #. Default: Legal and policy references
-#: src/osha/oira/templates/webhelpers.pt:183
-#: src/osha/oira/templates/webhelpers.pt:169
+#: src/osha/oira/templates/webhelpers.pt:192
+#: src/osha/oira/templates/webhelpers.pt:178
 msgid "header_legal_references"
 msgstr "rättsliga och politiska referenser"
+
+#. Default: GPL License
+#: src/osha/oira/templates/webhelpers.pt:114
+#: src/osha/oira/tiles/templates/footer.pt:24
+msgid "appendix_gpl_license"
+msgstr "GPL-licens"
+
+#. Default: Disclaimer
+#: src/osha/oira/templates/webhelpers.pt:112
+#: src/osha/oira/tiles/templates/footer.pt:22
+msgid "appendix_disclaimer"
+msgstr "Friskrivningsklausul"
+
+#. Default: Privacy
+#: src/osha/oira/templates/webhelpers.pt:110
+#: src/osha/oira/tiles/templates/footer.pt:20
+msgid "appendix_privacy"
+msgstr "Sekretess"
 
 #. Default: About
 #: src/osha/oira/templates/webhelpers.pt:108
@@ -1859,3 +2017,4 @@ msgstr "Riskbedömning"
 #: src/osha/oira/templates/webhelpers.pt:16
 msgid "oira_name_line_1"
 msgstr "Interaktiv"
+

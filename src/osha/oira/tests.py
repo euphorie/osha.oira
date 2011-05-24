@@ -37,7 +37,6 @@ class TestUtils(TestCase):
         r = risk
         ap = action_plan('dummy')
 
-
         # Test a few variations of unactioned risks:
         nodes = [m('1', 1), r('1.1', 0), r('1.2', 0), m('2', 1), m('2.1', 2), m('2.1.1', 3), r('2.1.1.1', 0, )]
         unactioned_nodes = utils.get_unactioned_nodes(nodes)
@@ -88,6 +87,29 @@ class TestUtils(TestCase):
         actioned_nodes = utils.get_actioned_nodes(nodes)
         self.assertEquals([n.id for n in actioned_nodes], ['1', '1.1', '1.2', '3', '3.1'])
 
-        nodes = [m('1', 1), r('1.1', 2, [ap]), r('1.2', 3, [ap]), m('2', 1), m('3', 2), r('3.1', 3, [ap])]
+        nodes = [m('1', 1), r('1.1', 2, [ap]), r('1.2', 3, [ap]), m('2', 1), m('2.1', 2), r('2.1.1', 3, [ap])]
         actioned_nodes = utils.get_actioned_nodes(nodes)
-        self.assertEquals([n.id for n in actioned_nodes], ['1', '1.1', '1.2', '2', '3', '3.1'])
+        self.assertEquals([n.id for n in actioned_nodes], ['1', '1.1', '1.2', '2', '2.1', '2.1.1'])
+
+        nodes = [m('1', 1), m('1.1', 2), r('1.1.1', 3, [ap]), m('1.2', 2), m('1.2.1', 3), r('1.2.1.1', 4), m('2', 1), m('2.1', 2), m('2.1.1', 3), r('2.1.1.1', 0, [ap])]
+        actioned_nodes = utils.get_actioned_nodes(nodes)
+        self.assertEquals([n.id for n in actioned_nodes], ['1', '1.1', '1.1.1', '2', '2.1', '2.1.1', '2.1.1.1'])
+
+        # Issue 3265
+        nodes = [m('1', 1), m('1.1', '2'), r('1.1.1', 3), m('2', 1), m('2.1', '2'), r('2.1.1', 3, [ap])]
+        actioned_nodes = utils.get_actioned_nodes(nodes)
+        self.assertEquals([n.id for n in actioned_nodes], ['2', '2.1', '2.1.1'])
+
+        nodes = [m('1', 1), m('1.1', '2'), m('1.1.1', 3), m('2', 1), m('2.1', '2'), r('2.1.1', 3, [ap])]
+        actioned_nodes = utils.get_actioned_nodes(nodes)
+        self.assertEquals([n.id for n in actioned_nodes], ['2', '2.1', '2.1.1'])
+
+        nodes = [m('1', 1), m('1.1', '2'), r('1.1.1', 3, [ap]), m('2', 1), m('2.1', '2'), r('2.1.1', 3)]
+        actioned_nodes = utils.get_actioned_nodes(nodes)
+        self.assertEquals([n.id for n in actioned_nodes], ['1', '1.1', '1.1.1'])
+
+        nodes = [m('1', 1), m('1.1', '2'), r('1.1.1', 3), m('2', 1), m('2.1', '2'), r('2.1.1', 3)]
+        actioned_nodes = utils.get_actioned_nodes(nodes)
+        self.assertEquals([n.id for n in actioned_nodes], [])
+
+

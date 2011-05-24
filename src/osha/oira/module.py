@@ -1,14 +1,18 @@
 from five import grok
 from zope.component import getUtility
+
 from plone.directives import dexterity
 from plone.dexterity.interfaces import IDexterityFTI
+
 from euphorie.content import MessageFactory as _
 from euphorie.content.module import IModule
 from euphorie.content.module import View as ModuleView
+from euphorie.client.module import ActionPlanView as ModuleActionPlanView
 from euphorie.client.module import IdentificationView as \
                                         ModuleIdentificationView
 
 from interfaces import IOSHAIdentificationPhaseSkinLayer
+from interfaces import IOSHAActionPlanPhaseSkinLayer
 
 grok.templatedir("templates")
 
@@ -28,6 +32,10 @@ class View(ModuleView):
 class IdentificationView(ModuleIdentificationView):
     grok.layer(IOSHAIdentificationPhaseSkinLayer)
     grok.template("module_identification")
+
+class ActionPlanView(ModuleActionPlanView):
+    grok.layer(IOSHAActionPlanPhaseSkinLayer)
+    grok.template("module_actionplan")
 
 
 class Edit(dexterity.EditForm):

@@ -75,6 +75,8 @@ for entry in newpo:
             default_old = match_old.group(1).replace('\n', ' ')
             if "Default:" in default_old:
                 print "ERROR! There seems to be a duplicate Default entry for msgid '%s'" % entry.msgid
+        else:
+            default_old = target.msgid
         if default_old != default_new:
             outpo.append(polib.POEntry(msgid=entry.msgid, msgstr=default_new,
                 occurrences=entry.occurrences, comment=entry.comment))

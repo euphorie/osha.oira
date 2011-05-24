@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.13dev\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2011-05-23 18:16+0200\n"
+"POT-Creation-Date: 2011-05-24 10:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,8 +29,8 @@ msgstr ""
 msgid "help_measure_prevention_plan"
 msgstr ""
 
-#. Default: Describe: 1) what is your general approach to eliminate or (if  the
-#. risk is not avoidable) reduce the risk; 2) the specific action(s) required to
+#. Default: Describe: 1) what is your general approach to eliminate or (if the risk
+#. is not avoidable) reduce the risk; 2) the specific action(s) required to
 #. implement this approach (to eliminate or to reduce the risk); 3) the level of
 #. expertise needed to implement the measure, for instance "common sense (no OSH
 #. knowledge required)", "no specific OSH expertise, but minimum OSH knowledge or
@@ -378,7 +378,7 @@ msgid "help_finalwords"
 msgstr ""
 
 #. Default: It is possible for you to print out the contents of the tool to enable
-#. you to look for the information at the relevant workplace (by walkink around and
+#. you to look for the information at the relevant workplace (by walking around and
 #. looking at what could cause harm, or by consulting the workers about problems
 #. they have encountered). You can then introduce the information into the tool.
 #: src/osha/oira/manual_translations.py:142
@@ -388,7 +388,7 @@ msgstr ""
 #. Default: You may also wish to distribute the contents among the workers and
 #. invite them to participate in identifying the hazards/problems, evaluating the
 #. risks and deciding on preventive action. Their feedback can be taken into
-#. account when filling in this tool
+#. account when filling in this tool.
 #: src/osha/oira/manual_translations.py:147
 msgid "intro_print_identification_2"
 msgstr ""
@@ -474,111 +474,111 @@ msgstr ""
 msgid "label_measure_prevention_plan"
 msgstr ""
 
-#. Default: Requirements
+#. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/survey.py:358 src/osha/oira/templates/risk_actionplan.pt:188
 #: src/osha/oira/templates/risk_actionplan.pt:55
 msgid "label_measure_requirements"
 msgstr ""
 
 #. Default: Who is responsible?
-#: src/osha/oira/survey.py:359 src/osha/oira/templates/risk_actionplan.pt:194
+#: src/osha/oira/survey.py:360 src/osha/oira/templates/risk_actionplan.pt:194
 #: src/osha/oira/templates/risk_actionplan.pt:61
 msgid "label_action_plan_responsible"
 msgstr ""
 
 #. Default: Budget (in Euro)
-#: src/osha/oira/survey.py:361 src/osha/oira/templates/risk_actionplan.pt:199
+#: src/osha/oira/survey.py:362 src/osha/oira/templates/risk_actionplan.pt:199
 #: src/osha/oira/templates/risk_actionplan.pt:67
 msgid "label_action_plan_budget"
 msgstr ""
 
 #. Default: Planning start
-#: src/osha/oira/survey.py:362 src/osha/oira/templates/risk_actionplan.pt:204
+#: src/osha/oira/survey.py:363 src/osha/oira/templates/risk_actionplan.pt:204
 #: src/osha/oira/templates/risk_actionplan.pt:78
 msgid "label_action_plan_start"
 msgstr ""
 
 #. Default: Planning end
-#: src/osha/oira/survey.py:363 src/osha/oira/templates/risk_actionplan.pt:221
+#: src/osha/oira/survey.py:364 src/osha/oira/templates/risk_actionplan.pt:221
 #: src/osha/oira/templates/risk_actionplan.pt:108
 msgid "label_action_plan_end"
 msgstr ""
 
 #. Default: Consultation of workers
-#: src/osha/oira/survey.py:412
+#: src/osha/oira/survey.py:413
 msgid "header_oira_report_consultation"
 msgstr ""
 
 #. Default: The undersigned hereby declare that the workers have been consulted on
 #. the content of this document.
-#: src/osha/oira/survey.py:421
+#: src/osha/oira/survey.py:422
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
 
 #. Default: On the behalf of the employer:
-#: src/osha/oira/survey.py:434
+#: src/osha/oira/survey.py:435
 msgid "oira_consultation_employer"
 msgstr ""
 
 #. Default: On the behalf of the workers:
-#: src/osha/oira/survey.py:436
+#: src/osha/oira/survey.py:437
 msgid "oira_consultation_workers"
 msgstr ""
 
 #. Default: Date:
-#: src/osha/oira/survey.py:445
+#: src/osha/oira/survey.py:446
 msgid "oira_survey_date"
 msgstr ""
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/survey.py:487
+#: src/osha/oira/survey.py:488
 msgid "header_oira_report_download"
 msgstr ""
 
 #. Default: Contents
-#: src/osha/oira/survey.py:501 src/osha/oira/templates/report_actionplan.pt:17
+#: src/osha/oira/survey.py:502 src/osha/oira/templates/report_actionplan.pt:17
 #: src/osha/oira/templates/report_identification.pt:16
 msgid "toc_header"
 msgstr ""
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/survey.py:506 src/osha/oira/templates/report_actionplan.pt:77
+#: src/osha/oira/survey.py:507 src/osha/oira/templates/report_actionplan.pt:77
 #: src/osha/oira/templates/report_actionplan.pt:40
 msgid "header_present_risks"
 msgstr ""
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/survey.py:508 src/osha/oira/templates/report_actionplan.pt:163
+#: src/osha/oira/survey.py:509 src/osha/oira/templates/report_actionplan.pt:163
 #: src/osha/oira/templates/report_actionplan.pt:49
 msgid "header_unevaluated_risks"
 msgstr ""
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt with
-#: src/osha/oira/survey.py:510 src/osha/oira/templates/report_actionplan.pt:201
+#: src/osha/oira/survey.py:511 src/osha/oira/templates/report_actionplan.pt:201
 #: src/osha/oira/templates/report_actionplan.pt:58
 msgid "header_unanswered_risks"
 msgstr ""
 
 #. Default: Hazards/problems that are not present in your organisation
-#: src/osha/oira/survey.py:512 src/osha/oira/templates/report_actionplan.pt:239
+#: src/osha/oira/survey.py:513 src/osha/oira/templates/report_actionplan.pt:239
 #: src/osha/oira/templates/report_actionplan.pt:67
 msgid "header_risks_not_present"
 msgstr ""
 
 #. Default: Action plan ${title}
-#: src/osha/oira/survey.py:537
+#: src/osha/oira/survey.py:538
 msgid "filename_report_actionplan"
 msgstr ""
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/survey.py:598
+#: src/osha/oira/survey.py:599
 msgid "report_identification_revision"
 msgstr ""
 
 #. Default: This report was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/survey.py:632 src/osha/oira/templates/report_actionplan.pt:323
+#: src/osha/oira/survey.py:633 src/osha/oira/templates/report_actionplan.pt:323
 msgid "report_survey_revision"
 msgstr ""
 

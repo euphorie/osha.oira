@@ -8,14 +8,14 @@ _("help_measure_action_plan", default=u"Describe your general approach to "
 _("help_measure_prevention_plan", default=u"Describe the specific action(s) "
     u"required to implement this approach (to eliminate or to reduce the "
     u"risk).")
-_("help_measure_requirements", default=u"Describe: 1) what is your general "
-    u"approach to eliminate or (if  the risk is not avoidable) reduce the "
+_("help_measure_requirements", default=u'Describe: 1) what is your general '
+    u"approach to eliminate or (if the risk is not avoidable) reduce the "
     u"risk; 2) the specific action(s) required to implement this approach "
     u"(to eliminate or to reduce the risk); 3) the level of expertise needed "
-    u"to implement the measure, for instance \"common sense (no OSH knowledge "
-    u"required)\", \"no specific OSH expertise, but minimum OSH knowledge or "
-    u"training and/or consultation of OSH guidance required\", or \"OSH "
-    u"expert\". You can also describe here any other additional requirement "
+    u'to implement the measure, for instance "common sense (no OSH knowledge '
+    u'required)", "no specific OSH expertise, but minimum OSH knowledge or '
+    u'training and/or consultation of OSH guidance required", or "OSH '
+    u'expert". You can also describe here any other additional requirement '
     u"(if any).")
 _("Solution", default=u"Measure")
 _("A solution.", default=u"A standard measure for a risk.")
@@ -76,11 +76,11 @@ _("help_publish", default=u"Publish the selected OiRA Tool live with its "
 _("help_add_version", default=u"Create a duplicate of the selected OiRA Tool")
 _("help_evaluation_optional", default=u"The option allows the end-user to "
     u"skip the Evaluation step.")
-_("help_profilequestion_question", default=u"If this is to be \"optional\", "
-    u"it must be formulated so that it is answerable with YES (the end-user "
-    u"will have to tick a box) or NO (e.g. \"Do you work with the public?\"). "
-    u"If this is to be \"repeatable\", it must be formulated as a prompt to "
-    u"fill in multiple values (e.g. \"List your different work locations\").")
+_("help_profilequestion_question", default=u'If this is to be "optional", '
+    u'it must be formulated so that it is answerable with YES (the end-user '
+    u'will have to tick a box) or NO (e.g. "Do you work with the public?"). '
+    u'If this is to be "repeatable", it must be formulated as a prompt to '
+    u'fill in multiple values (e.g. "List your different work locations").')
 _("description_profilequestion", default=u"The basic architecture of an "
     u"Online interactive Risk Assessment consists of: - profile questions "
     u"(questions defining the company profile) - modules and sub-modules - "
@@ -112,10 +112,10 @@ _("help_problem_description", default=u"This is the inverse of the "
 _("help_risk_description", default=u"Describe the risk. Include any relevant "
     u"information that may be helpful for the end-user.")
 _("risktype_top5", default=u"Priority risk")
-_("help_risk_type", default=u"\"Priority risk\" is one of the high risks in "
-    u"the sector. \"Risk\" is related to the workplace or to the work carried "
-    u"out. \"Policy\" refers to agreements, procedures, and management "
-    u"decisions.")
+_("help_risk_type", default=u'"Priority risk" is one of the high risks in '
+    u'the sector. "Risk" is related to the workplace or to the work carried '
+    u'out. "Policy" refers to agreements, procedures, and management '
+    u'decisions.')
 _("help_evaluation_method", default=u"Choose between ESTIMATED (rough "
     u"estimation) or CALCULATED (combination of probability, frequency and "
     u"severity) method.")
@@ -141,11 +141,11 @@ _("help_reports", default=u"This text should describe how the report can "
 _("help_finalwords", default=u"General final recommendations.")
 _("intro_print_identification_1", default=u"It is possible for you to print "
     u"out the contents of the tool to enable you to look for the information "
-    u"at the relevant workplace (by walkink around and looking at what could "
+    u"at the relevant workplace (by walking around and looking at what could "
     u"cause harm, or by consulting the workers about problems they have "
     u"encountered). You can then introduce the information into the tool.")
 _("intro_print_identification_2", default=u"You may also wish to distribute "
     u"the contents among the workers and invite them to participate in "
     u"identifying the hazards/problems, evaluating the risks and deciding on "
     u"preventive action. Their feedback can be taken into account when "
-    u"filling in this tool")
+    u"filling in this tool.")

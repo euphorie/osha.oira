@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:meta="http://xml.zope.org/namespaces/meta"
@@ -20,8 +19,11 @@
             <tal:if tal:define="thumb python:images.scale('image', width=150, height=500, direction='thumbnail')"
                     tal:condition="thumb">
                 <a  rel="fancybox" title="${module/caption|nothing}" 
-                    tal:define="large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
-                    href="${large/url}">
+                    tal:define="
+                        has_larger_version python:images.getImageSize('image') > (150*1.5, 500);
+                        large python:has_larger_version and images.scale('image', width=590, height=1900, direction='thumbnail')"
+                    tal:omit-tag="not:has_larger_version"
+                    href="${large/url|nothing}">
                 <img alt="" class="floatBefore" src="${thumb/url}" width="${thumb/width}" height="${thumb/height}"/>
                 </a>
             </tal:if>

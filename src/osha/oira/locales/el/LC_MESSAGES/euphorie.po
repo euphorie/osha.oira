@@ -517,11 +517,11 @@ msgstr "Επιμέρους ενότητα"
 
 #: src/osha/oira/module.py:52
 msgid "Edit ${name}"
-msgstr "Επεξεργασία ${όνομα} "
+msgstr "Επεξεργασία ${name} "
 
 #: src/osha/oira/module.py:67
 msgid "Add ${name}"
-msgstr "Προσθήκη ${όνομα} "
+msgstr "Προσθήκη ${name} "
 
 #. Default: Statistics Level
 #: src/osha/oira/sector.py:30
@@ -578,7 +578,7 @@ msgstr "υψηλή"
 #: src/osha/oira/templates/risk_actionplan.pt:26
 #, fuzzy
 msgid "risk_priority"
-msgstr "Πρόκειται για έκτακτο κίνδυνο ${τιμή_προτεραιότητας}. "
+msgstr "Πρόκειται για έκτακτο κίνδυνο ${priority_value}."
 
 #. Default: Measure
 #: src/osha/oira/survey.py:323 src/osha/oira/survey.py:346
@@ -669,7 +669,7 @@ msgstr "Ημερομηνία: "
 #: src/osha/oira/survey.py:488
 #, fuzzy
 msgid "header_oira_report_download"
-msgstr "Αναφορά OiRA: \"${τίτλος} "
+msgstr "Αναφορά OiRA: \"${title}"
 
 #. Default: Contents
 #: src/osha/oira/survey.py:502 src/osha/oira/templates/report_actionplan.pt:17
@@ -713,7 +713,7 @@ msgstr ""
 #: src/osha/oira/survey.py:538
 #, fuzzy
 msgid "filename_report_actionplan"
-msgstr "Σχέδιο δράσης ${τίτλος}"
+msgstr "Σχέδιο δράσης ${title}"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
@@ -1168,13 +1168,13 @@ msgstr "Υπομονάδες"
 #: src/osha/oira/templates/module_view.pt:27
 #, fuzzy
 msgid "module_optional"
-msgstr "Αυτή η ${αριθμός} είναι προαιρετική."
+msgstr "Αυτή η ${number} είναι προαιρετική."
 
 #. Default: This ${number} is mandatory.
 #: src/osha/oira/templates/module_view.pt:23
 #, fuzzy
 msgid "module_mandatory"
-msgstr "Αυτή η ${αριθμός} είναι υποχρεωτική."
+msgstr "Αυτή η ${number} είναι υποχρεωτική."
 
 #. Default: Information
 #: src/osha/oira/templates/module_view.pt:22

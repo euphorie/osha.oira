@@ -125,24 +125,33 @@
     <p class="gallery" tal:define="images risk/@@images" tal:condition="python:risk.image is not None">
       <a rel="fancybox" title="${risk/caption|nothing}" 
             tal:define="thumb python:images.scale('image', width=150, height=500, direction='thumbnail');
-                        large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
-            href="${large/url}"
+                        has_larger_version python:thumb and images.getImageSize('image') > (150*1.5, 500);
+                        large python:has_larger_version and images.scale('image', width=590, height=1900, direction='thumbnail')"
+            tal:omit-tag="not:has_larger_version"
+            href="${large/url|nothing}"
             tal:condition="thumb">
-                <img alt="" with="${thumb/width}" height="${thumb/height}" src="${thumb/url}"/></a>
+            <img alt="" with="${thumb/width}" height="${thumb/height}" src="${thumb/url}"/>
+        </a>
       <a rel="fancybox" title="${risk/caption2|nothing}"
             tal:define="thumb python:images.scale('image2', width=120, height=172, direction='thumbnail');
-                        large python:images.scale('image2', width=590, height=1900, direction='thumbnail')"
-            href="${large/url}"
+                        has_larger_version python:thumb and images.getImageSize('image2') > (150*1.5, 500);
+                        large python:has_larger_version and images.scale('image2', width=590, height=1900, direction='thumbnail')"
+            tal:omit-tag="not:has_larger_version"
+            href="${large/url|nothing}"
             tal:condition="thumb"><img alt="" with="${thumb/width}" height="${thumb/height}" src="${thumb/url}"/></a>
       <a rel="fancybox" title="${risk/caption3|nothing}"
             tal:define="thumb python:images.scale('image3', width=120, height=172, direction='thumbnail');
-                        large python:images.scale('image3', width=590, height=1900, direction='thumbnail')"
-            href="${large/url}"
+                        has_larger_version python:thumb and images.getImageSize('image3') > (150*1.5, 500);
+                        large python:has_larger_version and images.scale('image3', width=590, height=1900, direction='thumbnail')"
+            tal:omit-tag="not:has_larger_version"
+            href="${large/url|nothing}"
             tal:condition="thumb"><img alt="" with="${thumb/width}" height="${thumb/height}" src="${thumb/url}"/></a>
       <a rel="fancybox" title="${risk/caption4|nothing}" 
             tal:define="thumb python:images.scale('image4', width=120, height=172, direction='thumbnail');
-                        large python:images.scale('image4', width=590, height=1900, direction='thumbnail')"
-            href="${large/url}"
+                        has_larger_version python:thumb and images.getImageSize('image4') > (150*1.5, 500);
+                        large python:has_larger_version and images.scale('image4', width=590, height=1900, direction='thumbnail')"
+            tal:omit-tag="not:has_larger_version"
+            href="${large/url|nothing}"
             tal:condition="thumb"><img alt="" with="${thumb/width}" height="${thumb/height}" src="${thumb/url}"/></a>
     </p>
     <tal:block condition="show_statement|nothing" define="use_problem_description view/use_problem_description">

@@ -28,6 +28,10 @@ class IOSHASector(form.Schema):
     """ """
     statistics_level = schema.Choice(
             title = _("label_statistics_level", default=u"Statistics Level"),
+            description = _("help_statistics_level",
+                default=u"Level 1: Basic statistics about the use of the OiRA "
+                        u"tool. Level 2: More detailed statistics regarding "
+                        u"the risks"),
             required=True,
             vocabulary = SimpleVocabulary([
                             SimpleTerm(1, title=u"1"),

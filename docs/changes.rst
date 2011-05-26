@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.13 (unreleased)
+0.13 (2011-05-26)
 -----------------
 
 - #2223 Add FancyBox image zoom to module images [jcbrand]

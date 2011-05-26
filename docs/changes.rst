@@ -4,7 +4,13 @@ Changelog
 0.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- #2223 Add FancyBox image zoom to module images [jcbrand]
+- #3260 Make European Flag visible on the client homepage. [jcbrand]
+- #3277 Stale quote [pilz]
+- #3221 Priority gone for FR [jcbrand]
+- #3048 Add more translations [jcbrand]
+- #3265 Hide empty modules on final report [jcbrand]
+- #2560 Info bubbles for statistics fields [jcbrand]
 
 
 0.12 (2011-05-05)

@@ -195,22 +195,25 @@
   
   <metal:risklegal define-macro="risk_legal_collapsible" meta:interpolation="true" i18n:domain="euphorie">
     <tal:block condition="risk/legal_reference"
-               define="show_legal python:request.get('show_legal') not in ['0', None];
-                       toggle_legal python:show_legal and '0' or '1'">
+               define="legal_shown python:request.get('show_legal') not in ['0', None];
+                       toggle_legal python:legal_shown and '0' or '1'">
         
         <h4 class="oira_legal_header" 
             tal:attributes="class string:oira_legal_header"
             i18n:translate="header_legal_references">Legal and policy references</h4>
-        <a id="oira_legal_show_hide_anchor" 
-            tal:attributes="href string:${request/ACTUAL_URL}?show_legal=${toggle_legal};"
-            tal:content="python: show_legal and 'Hide' or 'Show'">
-                Show
-        </a>
+        <a id="oira_legal_show_anchor" 
+            tal:attributes="href string:${request/ACTUAL_URL}?show_legal=${toggle_legal};
+                            style python:not legal_shown and 'display: None';"
+            i18n:translate="action_hide">Hide</a>
+        <a id="oira_legal_hide_anchor" 
+            tal:attributes="href string:${request/ACTUAL_URL}?show_legal=${toggle_legal};
+                            style python:legal_shown and 'display: None';"
+            i18n:translate="action_show">Show</a>
         <br clear="all"/>
         
         <div id="legal_reference" 
               style="display:none"
-              tal:attributes="style python:show_legal and 'display:block' or 'display:none'">
+              tal:attributes="style python:legal_shown and 'display:block' or 'display:none'">
 
             <tal:desc tal:replace="structure risk/legal_reference">
                     The requirements for fridges are defined in section 13.1 section a

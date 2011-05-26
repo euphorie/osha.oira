@@ -254,7 +254,6 @@ msgstr ""
 #. Default: You are about to print the report... please complete the optional form
 #. and then proceed.
 #: src/osha/oira/manual_translations.py:71
-#, fuzzy
 msgid "hader_company_details"
 msgstr "Ορισμένες πληροφορίες για εσάς"
 
@@ -517,11 +516,11 @@ msgstr "Επιμέρους ενότητα"
 
 #: src/osha/oira/module.py:52
 msgid "Edit ${name}"
-msgstr "Επεξεργασία ${όνομα} "
+msgstr "Επεξεργασία ${name} "
 
 #: src/osha/oira/module.py:67
 msgid "Add ${name}"
-msgstr "Προσθήκη ${όνομα} "
+msgstr "Προσθήκη ${name} "
 
 #. Default: Statistics Level
 #: src/osha/oira/sector.py:30
@@ -530,7 +529,6 @@ msgstr ""
 
 #. Default: You can not delete a sector that contains published OiRA tools.
 #: src/osha/oira/sector.py:123
-#, fuzzy
 msgid "message_not_delete_published_sector"
 msgstr ""
 "Δεν μπορείτε να διαγράψετε έναν τομέα που περιέχει δημοσιευμένα εργαλεία "
@@ -543,7 +541,6 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:185
 #: src/osha/oira/templates/report_actionplan.pt:101
 #: src/osha/oira/templates/risk_actionplan.pt:28
-#, fuzzy
 msgid "risk_priority_low"
 msgstr "μικρή"
 
@@ -554,7 +551,6 @@ msgstr "μικρή"
 #: src/osha/oira/templates/report_actionplan.pt:186
 #: src/osha/oira/templates/report_actionplan.pt:102
 #: src/osha/oira/templates/risk_actionplan.pt:29
-#, fuzzy
 msgid "risk_priority_medium"
 msgstr "μεσαία "
 
@@ -565,7 +561,6 @@ msgstr "μεσαία "
 #: src/osha/oira/templates/report_actionplan.pt:187
 #: src/osha/oira/templates/report_actionplan.pt:103
 #: src/osha/oira/templates/risk_actionplan.pt:30
-#, fuzzy
 msgid "risk_priority_high"
 msgstr "υψηλή"
 
@@ -576,13 +571,11 @@ msgstr "υψηλή"
 #: src/osha/oira/templates/report_actionplan.pt:183
 #: src/osha/oira/templates/report_actionplan.pt:99
 #: src/osha/oira/templates/risk_actionplan.pt:26
-#, fuzzy
 msgid "risk_priority"
-msgstr "Πρόκειται για έκτακτο κίνδυνο ${τιμή_προτεραιότητας}. "
+msgstr "Πρόκειται για έκτακτο κίνδυνο ${priority_value}. "
 
 #. Default: Measure
 #: src/osha/oira/survey.py:323 src/osha/oira/survey.py:346
-#, fuzzy
 msgid "header_measure_single"
 msgstr "Μέτρο"
 
@@ -637,7 +630,6 @@ msgstr "Τέλος σχεδιασμού"
 
 #. Default: Consultation of workers
 #: src/osha/oira/survey.py:413
-#, fuzzy
 msgid "header_oira_report_consultation"
 msgstr "Παροχή συμβουλών στους εργαζομένους "
 
@@ -661,15 +653,13 @@ msgstr "Εκ μέρους των εργαζομένων: "
 
 #. Default: Date:
 #: src/osha/oira/survey.py:446
-#, fuzzy
 msgid "oira_survey_date"
 msgstr "Ημερομηνία: "
 
 #. Default: OiRA Report: "${title}"
 #: src/osha/oira/survey.py:488
-#, fuzzy
 msgid "header_oira_report_download"
-msgstr "Αναφορά OiRA: \"${τίτλος} "
+msgstr "Αναφορά OiRA: \"${title} "
 
 #. Default: Contents
 #: src/osha/oira/survey.py:502 src/osha/oira/templates/report_actionplan.pt:17
@@ -711,9 +701,8 @@ msgstr ""
 
 #. Default: Action plan ${title}
 #: src/osha/oira/survey.py:538
-#, fuzzy
 msgid "filename_report_actionplan"
-msgstr "Σχέδιο δράσης ${τίτλος}"
+msgstr "Σχέδιο δράσης ${title}"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
@@ -732,7 +721,6 @@ msgstr ""
 
 #. Default: You can not delete an OiRA tool that has been published.
 #: src/osha/oira/surveygroup.py:54
-#, fuzzy
 msgid "message_not_delete_published_surveygroup"
 msgstr "Δεν μπορείτε να διαγράψετε ένα εργαλείο OiRA που έχει δημοσιευτεί."
 
@@ -970,7 +958,6 @@ msgstr ""
 #. also include details of the level of expertise and/or other requirements needed
 #. for those actions to be effective.
 #: src/osha/oira/templates/actionplan.pt:50
-#, fuzzy
 msgid "expl_actionplan_7"
 msgstr ""
 "Μόλις αποφασίσετε πώς θα εξαλείψετε ή θα μειώσετε ένα συγκεκριμένο κίνδυνο, "
@@ -982,7 +969,6 @@ msgstr ""
 #. Default: If certain risks are not avoidable, how can they be reduced to a level
 #. at which the health and safety of those exposed is not compromised?
 #: src/osha/oira/templates/actionplan.pt:44
-#, fuzzy
 msgid "expl_actionplan_6"
 msgstr ""
 "Εάν ορισμένοι κίνδυνοι είναι αναπόφευκτοι, πώς μπορούν να μειωθούν σε "
@@ -999,7 +985,6 @@ msgstr ""
 
 #. Default: removing the hazard
 #: src/osha/oira/templates/actionplan.pt:40
-#, fuzzy
 msgid "expl_actionplan_5"
 msgstr "καταργώντας τον κίνδυνο"
 
@@ -1166,15 +1151,13 @@ msgstr "Υπομονάδες"
 
 #. Default: This ${number} is optional.
 #: src/osha/oira/templates/module_view.pt:27
-#, fuzzy
 msgid "module_optional"
-msgstr "Αυτή η ${αριθμός} είναι προαιρετική."
+msgstr "Αυτή η ${number} είναι προαιρετική."
 
 #. Default: This ${number} is mandatory.
 #: src/osha/oira/templates/module_view.pt:23
-#, fuzzy
 msgid "module_mandatory"
-msgstr "Αυτή η ${αριθμός} είναι υποχρεωτική."
+msgstr "Αυτή η ${number} είναι υποχρεωτική."
 
 #. Default: Information
 #: src/osha/oira/templates/module_view.pt:22
@@ -1310,7 +1293,6 @@ msgstr ""
 #. Default: The following risks have not yet been answered. Please do so at the
 #. soonest possibility.
 #: src/osha/oira/templates/report_actionplan.pt:203
-#, fuzzy
 msgid "desc_unanswered_risks"
 msgstr ""
 "Για τους παρακάτω κινδύνους δεν έχουν ακόμη δοθεί απαντήσεις. Παρακαλώ "
@@ -1393,7 +1375,6 @@ msgstr "Λήψη (Download)"
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/templates/report_identification.pt:48
 #: src/osha/oira/templates/webhelpers.pt:172
-#, fuzzy
 msgid "warn_risk_present"
 msgstr "Απαντήσατε αρνητικά στην παραπάνω φράση."
 
@@ -1496,7 +1477,6 @@ msgstr ""
 
 #. Default: Use this measure
 #: src/osha/oira/templates/risk_actionplan.pt:149
-#, fuzzy
 msgid "button_use_measure"
 msgstr "Χρησιμοποιήστε αυτό το μέτρο"
 
@@ -1657,7 +1637,6 @@ msgstr ""
 #. Logout button, you are logged out actively. You are also logged out if you close
 #. your Browser. For security reasons it is better to actively log out.
 #: src/osha/oira/templates/sessions.pt:62
-#, fuzzy
 msgid "session_title_tooltip"
 msgstr ""
 "Μόλις αρχίσετε μια ενότητα εργαλείου OiRA, θα μπορείτε να σταματήσετε πριν "
@@ -1868,7 +1847,6 @@ msgstr ""
 
 #. Default: The OiRA tool
 #: src/osha/oira/templates/start.pt:27
-#, fuzzy
 msgid "header_oira_tool"
 msgstr "Το εργαλείο OiRA"
 
@@ -1924,7 +1902,6 @@ msgstr "Αυτό το εργαλείο OiRA δεν περιέχει ενότητ
 
 #. Default: Modules and Profile Questions
 #: src/osha/oira/templates/survey_view.pt:30
-#, fuzzy
 msgid "header_modules_and_profile_questions"
 msgstr "Μονάδες και ερωτήσεις προφίλ"
 

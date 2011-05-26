@@ -512,7 +512,6 @@ msgstr ""
 
 #. Default: You can not delete a sector that contains published OiRA tools.
 #: src/osha/oira/sector.py:123
-#, fuzzy
 msgid "message_not_delete_published_sector"
 msgstr "Du kan inte radera en sektor som innerhåller publicerade OiRA-verktyg."
 
@@ -523,7 +522,6 @@ msgstr "Du kan inte radera en sektor som innerhåller publicerade OiRA-verktyg."
 #: src/osha/oira/templates/report_actionplan.pt:185
 #: src/osha/oira/templates/report_actionplan.pt:101
 #: src/osha/oira/templates/risk_actionplan.pt:28
-#, fuzzy
 msgid "risk_priority_low"
 msgstr "låg"
 
@@ -534,7 +532,6 @@ msgstr "låg"
 #: src/osha/oira/templates/report_actionplan.pt:186
 #: src/osha/oira/templates/report_actionplan.pt:102
 #: src/osha/oira/templates/risk_actionplan.pt:29
-#, fuzzy
 msgid "risk_priority_medium"
 msgstr "medium"
 
@@ -545,7 +542,6 @@ msgstr "medium"
 #: src/osha/oira/templates/report_actionplan.pt:187
 #: src/osha/oira/templates/report_actionplan.pt:103
 #: src/osha/oira/templates/risk_actionplan.pt:30
-#, fuzzy
 msgid "risk_priority_high"
 msgstr "hög"
 
@@ -556,7 +552,6 @@ msgstr "hög"
 #: src/osha/oira/templates/report_actionplan.pt:183
 #: src/osha/oira/templates/report_actionplan.pt:99
 #: src/osha/oira/templates/risk_actionplan.pt:26
-#, fuzzy
 msgid "risk_priority"
 msgstr "Detta är en ${priority_value} prioriterad risk."
 
@@ -616,7 +611,6 @@ msgstr "Planerat slut"
 
 #. Default: Consultation of workers
 #: src/osha/oira/survey.py:413
-#, fuzzy
 msgid "header_oira_report_consultation"
 msgstr "Samråd med arbetstagare"
 
@@ -640,13 +634,11 @@ msgstr "På uppdrag av de anställda:"
 
 #. Default: Date:
 #: src/osha/oira/survey.py:446
-#, fuzzy
 msgid "oira_survey_date"
 msgstr "Datum:"
 
 #. Default: OiRA Report: "${title}"
 #: src/osha/oira/survey.py:488
-#, fuzzy
 msgid "header_oira_report_download"
 msgstr "OiRA-rapport: \"${title}"
 
@@ -705,7 +697,6 @@ msgstr ""
 
 #. Default: You can not delete an OiRA tool that has been published.
 #: src/osha/oira/surveygroup.py:54
-#, fuzzy
 msgid "message_not_delete_published_surveygroup"
 msgstr "Du kan inte radera ett OiRA-verktyg som har publicerats."
 
@@ -943,7 +934,6 @@ msgstr ""
 #. also include details of the level of expertise and/or other requirements needed
 #. for those actions to be effective.
 #: src/osha/oira/templates/actionplan.pt:50
-#, fuzzy
 msgid "expl_actionplan_7"
 msgstr ""
 "När du bestämt dig för hur du ska eliminera eller minska en specifik risk, "
@@ -954,7 +944,6 @@ msgstr ""
 #. Default: If certain risks are not avoidable, how can they be reduced to a level
 #. at which the health and safety of those exposed is not compromised?
 #: src/osha/oira/templates/actionplan.pt:44
-#, fuzzy
 msgid "expl_actionplan_6"
 msgstr ""
 "Om vissa risker inte kan undvikas, hur kan de minskas till en nivå där de "
@@ -970,7 +959,6 @@ msgstr ""
 
 #. Default: removing the hazard
 #: src/osha/oira/templates/actionplan.pt:40
-#, fuzzy
 msgid "expl_actionplan_5"
 msgstr "avlägsna faran"
 
@@ -1083,7 +1071,6 @@ msgstr ""
 
 #. Default: Regions
 #: src/osha/oira/templates/frontpage.pt:407
-#, fuzzy
 msgid "header_regions"
 msgstr "Registrera"
 
@@ -1134,13 +1121,11 @@ msgstr "Delmoduler"
 
 #. Default: This ${number} is optional.
 #: src/osha/oira/templates/module_view.pt:27
-#, fuzzy
 msgid "module_optional"
 msgstr "Detta ${number} är valfritt."
 
 #. Default: This ${number} is mandatory.
 #: src/osha/oira/templates/module_view.pt:23
-#, fuzzy
 msgid "module_mandatory"
 msgstr "Detta ${number} är obligatoriskt."
 
@@ -1271,7 +1256,6 @@ msgstr ""
 #. Default: The following risks have not yet been answered. Please do so at the
 #. soonest possibility.
 #: src/osha/oira/templates/report_actionplan.pt:203
-#, fuzzy
 msgid "desc_unanswered_risks"
 msgstr "Följande risker har ännu inte besvarats. Gör det så snart som möjligt."
 
@@ -1348,7 +1332,6 @@ msgstr "Ladda ner"
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/templates/report_identification.pt:48
 #: src/osha/oira/templates/webhelpers.pt:172
-#, fuzzy
 msgid "warn_risk_present"
 msgstr "Du svarade negativt till ovanstående påstående."
 
@@ -1450,7 +1433,6 @@ msgstr ""
 
 #. Default: Use this measure
 #: src/osha/oira/templates/risk_actionplan.pt:149
-#, fuzzy
 msgid "button_use_measure"
 msgstr "Använd denna åtgärd"
 
@@ -1611,7 +1593,6 @@ msgstr ""
 #. Logout button, you are logged out actively. You are also logged out if you close
 #. your Browser. For security reasons it is better to actively log out.
 #: src/osha/oira/templates/sessions.pt:62
-#, fuzzy
 msgid "session_title_tooltip"
 msgstr ""
 "När du har startat en session med ett OiRA-verktyg kommer du att kunna "
@@ -1817,7 +1798,6 @@ msgstr ""
 
 #. Default: The OiRA tool
 #: src/osha/oira/templates/start.pt:27
-#, fuzzy
 msgid "header_oira_tool"
 msgstr "OiRA-verktyget"
 
@@ -1868,7 +1848,6 @@ msgstr "Detta OiRA-verktyg har inga moduler."
 
 #. Default: Modules and Profile Questions
 #: src/osha/oira/templates/survey_view.pt:30
-#, fuzzy
 msgid "header_modules_and_profile_questions"
 msgstr "Moduler och profilfrågor"
 

@@ -1,4 +1,4 @@
-# English texts for Euphorie.
+# Dutch texts for Euphorie.
 # Copyright (C) Syslab.com, EU-OSHA
 # This file is distributed under the same license as the Euphorie project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2011-05-24 21:05+0200\n"
+"POT-Creation-Date: 2011-05-25 09:54+0200\n"
 "PO-Revision-Date: 2011-02-16 12:03+0100\n"
 "Last-Translator: Judith Verschuren <idioom@planet.nl>\n"
 "Language-Team: en <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.5\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Generated-By: Babel 0.9.6\n"
 
 #. Default: Describe your general approach to eliminate or (if the risk is not
 #. avoidable) reduce the risk.
@@ -44,14 +44,18 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:10
 msgid "help_measure_requirements"
 msgstr ""
-"Omschrijven: 1) Wat is uw algemene aanpak voor het verhelpen of (indien het "
-"risico niet te voorkomen is) het verlagen van het risico; 2) De specifieke "
-"actie(s) die voor deze aanpak nodig zijn (om het risico te verhelpen of te "
-"verlagen); 3) Het vereiste expertiseniveau voor de implementatie van de "
-"maatregel, bijvoorbeeld \"gezond verstand (geen OSH-kennis vereist)\", "
-"\"geen specifieke OSH-expertise, maar minimale OSH-kennis of training en/of "
-"raadpleging van OSH-richtlijnen vereist\", of \"OSH-expert\". U kunt hier "
-"ook aanvullende voorwaarden invullen (indien van toepassing)."
+"Omschrijf: 1) wat is uw algemene aanpak om het risico te elimineren of "
+"(indien het risico niet te vermijden is) het te reduceren; 2) de specifieke "
+"actie(s) die vereist zijn om deze aanpak te implementeren (om het risico te "
+"elimineren of te reduceren); 3) het niveau van vakkennis dat nodig is om de "
+"maatregel te implementeren, bijvoorbeeld \"gezond verstand (geen kennis over "
+"gezondheid en veiligheid op het werk vereist)\", \"geen specifieke vakkennis "
+"over gezondheid en veiligheid op het werk, maar toch een minimum aan kennis "
+"over gezondheid en veiligheid op het werk of een opleiding en/of raadpleging "
+"van begeleider gespecialiseerd in gezondheid en veiligheid op het werk "
+"vereist\", of \"expert op het vlak van gezondheid en veiligheid op het werk"
+"\". U kunt hier ook alle andere extra vereisten vermelden (indien die er "
+"zijn)."
 
 #. Default: Measure
 #: src/osha/oira/manual_translations.py:19
@@ -129,12 +133,12 @@ msgstr "OiRA-tool importeren"
 #. Default: Import OiRA tool version
 #: src/osha/oira/manual_translations.py:37
 msgid "Import survey version"
-msgstr "Import versie OiRA-tool "
+msgstr "Import versie OiRA-tool"
 
 #. Default: OiRA Tool version
 #: src/osha/oira/manual_translations.py:38
 msgid "Survey version"
-msgstr "Versie OiRA-tool "
+msgstr "Versie OiRA-tool"
 
 #. Default: The form will allow you to create a new OiRA Tool.
 #: src/osha/oira/manual_translations.py:39
@@ -510,11 +514,11 @@ msgstr "Submodule"
 
 #: src/osha/oira/module.py:52
 msgid "Edit ${name}"
-msgstr ""
+msgstr "Bewerken ${name}"
 
 #: src/osha/oira/module.py:67
 msgid "Add ${name}"
-msgstr ""
+msgstr "Toevoegen ${name}"
 
 #. Default: Statistics Level
 #: src/osha/oira/sector.py:30
@@ -524,7 +528,7 @@ msgstr ""
 #. Default: You can not delete a sector that contains published OiRA tools.
 #: src/osha/oira/sector.py:123
 msgid "message_not_delete_published_sector"
-msgstr ""
+msgstr "U kunt geen sector wissen die gepubliceerde OiRA-tools bevat."
 
 #. Default: low
 #: src/osha/oira/survey.py:292
@@ -534,7 +538,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:101
 #: src/osha/oira/templates/risk_actionplan.pt:28
 msgid "risk_priority_low"
-msgstr ""
+msgstr "laag"
 
 #. Default: medium
 #: src/osha/oira/survey.py:294
@@ -544,7 +548,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:102
 #: src/osha/oira/templates/risk_actionplan.pt:29
 msgid "risk_priority_medium"
-msgstr ""
+msgstr "gemiddeld"
 
 #. Default: high
 #: src/osha/oira/survey.py:296
@@ -554,7 +558,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:103
 #: src/osha/oira/templates/risk_actionplan.pt:30
 msgid "risk_priority_high"
-msgstr ""
+msgstr "hoog"
 
 #. Default: This is a ${priority_value} priority risk.
 #: src/osha/oira/survey.py:298
@@ -564,7 +568,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:99
 #: src/osha/oira/templates/risk_actionplan.pt:26
 msgid "risk_priority"
-msgstr ""
+msgstr "Dit is een ${priority_value} prioriteitsrisico."
 
 #. Default: Measure
 #: src/osha/oira/survey.py:323 src/osha/oira/survey.py:346
@@ -595,7 +599,7 @@ msgstr ""
 #: src/osha/oira/survey.py:358 src/osha/oira/templates/risk_actionplan.pt:188
 #: src/osha/oira/templates/risk_actionplan.pt:55
 msgid "label_measure_requirements"
-msgstr "Vereiste expertiseniveau en/of voorwaarden "
+msgstr "Vereisten"
 
 #. Default: Who is responsible?
 #: src/osha/oira/survey.py:360 src/osha/oira/templates/risk_actionplan.pt:194
@@ -624,33 +628,35 @@ msgstr "Eind datum"
 #. Default: Consultation of workers
 #: src/osha/oira/survey.py:413
 msgid "header_oira_report_consultation"
-msgstr ""
+msgstr "Raadpleging van werknemers"
 
 #. Default: The undersigned hereby declare that the workers have been consulted on
 #. the content of this document.
 #: src/osha/oira/survey.py:422
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
+"Bij dezen verklaart ondergetekende dat de werknemers werden geraadpleegd "
+"inzake de inhoud van dit document."
 
 #. Default: On the behalf of the employer:
 #: src/osha/oira/survey.py:435
 msgid "oira_consultation_employer"
-msgstr ""
+msgstr "In naam van de werkgever:"
 
 #. Default: On the behalf of the workers:
 #: src/osha/oira/survey.py:437
 msgid "oira_consultation_workers"
-msgstr ""
+msgstr "In naam van de werknemers:"
 
 #. Default: Date:
 #: src/osha/oira/survey.py:446
 msgid "oira_survey_date"
-msgstr ""
+msgstr "Datum:"
 
 #. Default: OiRA Report: "${title}"
 #: src/osha/oira/survey.py:488
 msgid "header_oira_report_download"
-msgstr ""
+msgstr "OiRA-rapport: \"${title}"
 
 #. Default: Contents
 #: src/osha/oira/survey.py:502 src/osha/oira/templates/report_actionplan.pt:17
@@ -670,13 +676,15 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:49
 msgid "header_unevaluated_risks"
 msgstr ""
+"Risico's die geïdentificeerd zijn maar waar GEEN Actieplan voor voorhanden is"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt with
 #: src/osha/oira/survey.py:511
 #: src/osha/oira/templates/report_actionplan.pt:201
 #: src/osha/oira/templates/report_actionplan.pt:58
 msgid "header_unanswered_risks"
-msgstr "Let op: de volgende risico's zijn nog niet behandeld:"
+msgstr ""
+"Gevaren/problemen die \"vastgesteld\" zijn en nog moeten worden behandeld"
 
 #. Default: Hazards/problems that are not present in your organisation
 #: src/osha/oira/survey.py:513
@@ -708,7 +716,7 @@ msgstr ""
 #. Default: You can not delete an OiRA tool that has been published.
 #: src/osha/oira/surveygroup.py:54
 msgid "message_not_delete_published_surveygroup"
-msgstr ""
+msgstr "U kunt geen OiRA-tool wissen die is gepubliceerd."
 
 #. Default: Settings
 #: src/osha/oira/templates/actionplan.pt:106
@@ -763,7 +771,7 @@ msgstr "Help"
 #: src/osha/oira/templates/risk_identification.pt:88
 #: src/osha/oira/templates/start.pt:69
 msgid "navigation_surveys"
-msgstr "Sessies"
+msgstr "OiRA-tools"
 
 #. Default: Logout
 #: src/osha/oira/templates/actionplan.pt:102
@@ -949,38 +957,38 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:50
 msgid "expl_actionplan_7"
 msgstr ""
+"Nadat u heeft beslist hoe een bepaald risico kan worden geëlimineerd of "
+"gereduceerd, beschrijft u de specifieke actie(s) die nodig is/zijn om dit te "
+"realiseren. Gelieve ook meer informatie over het niveau van de vakkennis en/"
+"of andere vereisten te vermelden die nodig zijn om de acties effectief te "
+"laten worden."
 
 #. Default: If certain risks are not avoidable, how can they be reduced to a level
 #. at which the health and safety of those exposed is not compromised?
 #: src/osha/oira/templates/actionplan.pt:44
 msgid "expl_actionplan_6"
 msgstr ""
+"Indien bepaalde risico's niet kunnen worden vermeden, hoe kunnen ze dan "
+"worden gereduceerd tot een niveau waarop de gezondheid en veiligheid van "
+"diegene die aan het risico worden blootgesteld niet in gevaar wordt gebracht?"
 
 #. Default: Is a risk avoidable? Can it be removed entirely? For example, this
 #. could be achieved by:
 #: src/osha/oira/templates/actionplan.pt:36
 msgid "expl_actionplan_3"
 msgstr ""
-"<ol><li>Is een risico te vermijden? Kan het volledig worden verholpen? Dit "
-"kan bijvoorbeeld worden gerealiseerd door:<ul><li>bedenken of de taak of "
-"functie nodig is</li><li>verwijderen van het gevaar</li><li>...</li></ul></"
-"li><li>Wanneer bepaalde risico's niet te vermijden zijn, hoe kunnen ze dan "
-"worden verlaagd tot een niveau waarbij de gezondheid en veiligheid van de "
-"betrokkenen niet in gevaar komt.</li></ol>"
+"Kan er een risico vermeden worden? Kan het volledig weggenomen worden? Dit "
+"zou bijvoorbeeld kunnen gerealiseerd worden door het volgende:"
 
 #. Default: removing the hazard
 #: src/osha/oira/templates/actionplan.pt:40
 msgid "expl_actionplan_5"
-msgstr ""
+msgstr "het gevaar wegnemen"
 
 #. Default: considering whether the task or job is necessary
 #: src/osha/oira/templates/actionplan.pt:39
 msgid "expl_actionplan_4"
-msgstr ""
-"Zodra u hebt besloten hoe u een bepaald risico kunt verhelpen of verlagen, "
-"beschrijft u de vereiste specifieke actie(s) om dit te bewerkstelligen. Geef "
-"ook informatie over de expertise en/of andere voorwaarden die voor "
-"effectieve acties noodzakelijk zijn."
+msgstr "nadenken of de taak of opdracht echt nodig is"
 
 #. Default: Removing the causes (tackling the source) is the preferred method: that
 #. way, the risk can no longer arise. You then write down what tasks have to be
@@ -989,7 +997,12 @@ msgstr ""
 #. and requirements).
 #: src/osha/oira/templates/actionplan.pt:27
 msgid "expl_actionplan_2"
-msgstr "U dient bij deze stap o.a. rekening te houden met het volgende:"
+msgstr ""
+"De oorzaken wegnemen (het probleem van bij de oorsprong aanpakken) is de "
+"beste methode: op die manier kan het risico niet meer opduiken. Daarna "
+"schrijft u op welke taken er moeten worden uitgevoerd opdat het risico zou "
+"verdwijnen, alsook de kennis en ervaring die nodig zijn om die taken uit te "
+"voeren (preventieplan en vereisten)."
 
 #. Default: You have identified the magnitude of risk for each of the bottlenecks.
 #. During the action plan phase you can determine the priority of each of the
@@ -998,10 +1011,11 @@ msgstr "U dient bij deze stap o.a. rekening te houden met het volgende:"
 #: src/osha/oira/templates/actionplan.pt:20
 msgid "expl_actionplan_1"
 msgstr ""
-"Nadat u de risico's hebt geëvalueerd, dient u een actieplan op te stellen om "
-"de risico's beheersbaar te houden. Voor het verhelpen of verlagen van de "
-"risico's dient u te bepalen welke preventieve of beschermende maatregelen "
-"moeten worden genomen. "
+"U heeft de omvang van het risico voor elk knelpunt geïdentificeerd. Tijdens "
+"de actieplanfase kunt u de prioriteit van elk knelpunt bepalen en "
+"specificeren hoe u het knelpunt zult aanpakken. Het programma zal u "
+"mogelijkerwijs zelf een voorstel doen dat u dan kunt gebruiken, of u kunt "
+"ook uw eigen maatregelen toevoegen."
 
 #. Default: OiRA - Online interactive Risk Assessment
 #: src/osha/oira/templates/actionplan.pt:12
@@ -1070,6 +1084,10 @@ msgstr ""
 #: src/osha/oira/templates/disclaimer.pt:19
 msgid "disclaimer_other_websites"
 msgstr ""
+"Deze tool bevat links naar andere websites die niet worden beheerd door het "
+"Europees Agentschap voor Veiligheid en Gezondheid en de betrokken "
+"organisaties. Het Agentschap en de betrokken organisaties kunnen niet "
+"aansprakelijk worden gesteld voor de inhoud van deze websites."
 
 #. Default: Disclaimer of Liability
 #: src/osha/oira/templates/disclaimer.pt:17
@@ -1129,12 +1147,12 @@ msgstr "Submodules"
 #. Default: This ${number} is optional.
 #: src/osha/oira/templates/module_view.pt:27
 msgid "module_optional"
-msgstr ""
+msgstr "Dit ${number} is optioneel."
 
 #. Default: This ${number} is mandatory.
 #: src/osha/oira/templates/module_view.pt:23
 msgid "module_mandatory"
-msgstr ""
+msgstr "Dit ${number} is verplicht."
 
 #. Default: Information
 #: src/osha/oira/templates/module_view.pt:22
@@ -1246,11 +1264,11 @@ msgstr ""
 #: src/osha/oira/templates/report.pt:20
 msgid "report_intro"
 msgstr ""
-"Nadat u de risico's in uw bedrijf/organisatie hebt geïdentificeerd en een "
-"actieplan hebt opgezet om ze te beheersen, kunt u een rapport genereren. Het "
-"rapport bevat alle input/informatie die u tijdens de risicobeoordeling hebt "
-"ingevoerd. U kunt indien gewenst aanvullende informatie/opmerkingen aan het "
-"rapport toevoegen door onderstaand veld in te vullen."
+"Nu dat u klaar bent met het identificeren van alle risico's in uw "
+"organisatie en een actieplan heeft gecreëerd, kunt u een rapport opstellen "
+"met een overzicht van al uw resultaten. Indien u dat wenst, kunt u extra "
+"opmerkingen toevoegen die volgens u in het rapport moeten staan door deze in "
+"het onderstaande veld in te vullen."
 
 #. Default: Reporting
 #: src/osha/oira/templates/report.pt:18
@@ -1270,6 +1288,8 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:203
 msgid "desc_unanswered_risks"
 msgstr ""
+"Voor de volgende risico's werd nog geen antwoord gegeven. Gelieve dit zo "
+"vlug mogelijk te doen."
 
 #. Default: There is a budget of ${amount} for this measure.
 #: src/osha/oira/templates/report_actionplan.pt:149
@@ -1348,15 +1368,15 @@ msgstr "Download"
 #: src/osha/oira/templates/report_identification.pt:48
 #: src/osha/oira/templates/webhelpers.pt:172
 msgid "warn_risk_present"
-msgstr ""
+msgstr "U heeft een negatief antwoord gegeven op de bovenstaande stelling."
 
 #: src/osha/oira/templates/risk_actionplan.pt:287
 msgid ""
 "Are you sure you want to delete this measure? This action can not be "
 "reverted."
 msgstr ""
-"Weet u zeker dat u deze maatregel wil verwijderen? Dit kan niet "
-"teruggedraaid worden."
+"Bent u zeker dat u deze maatregel wilt wissen? Deze actie kan niet ongedaan "
+"worden gemaakt."
 
 #. Default: Year
 #: src/osha/oira/templates/risk_actionplan.pt:232
@@ -1389,9 +1409,9 @@ msgstr "Dag"
 #: src/osha/oira/templates/risk_actionplan.pt:68
 msgid "actionplan_measure_budget_tooltip"
 msgstr ""
-"De implementatie van preventieve of beschermende maatregelen gaat in de "
-"meeste gevallen met kosten gepaard. Om deze reden kunnen de kosten worden "
-"berekend en in uw budget worden opgenomen."
+"Hoewel sommige maatregelen gratis zijn, zijn de meeste dat niet. De "
+"maatregelen moeten daarom gefinancierd worden; integreer ze in de jaarlijkse "
+"budgetronde indien nodig."
 
 #. Default: Appoint someone in your company to be responsible for the
 #. implementation of this measure. This person will have the authority to take the
@@ -1401,8 +1421,10 @@ msgstr ""
 #: src/osha/oira/templates/risk_actionplan.pt:62
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
-"Wijs iemand in uw bedrijf/organisatie aan als verantwoordelijke voor de "
-"implementatie van deze maatregel."
+"Stel iemand aan in uw bedrijf die verantwoordelijk is voor de implementatie "
+"van deze maatregel. Deze persoon is dan bevoegd om de stappen beschreven in "
+"het Plan uit te voeren en/of de verantwoordelijkheid op te nemen om ervoor "
+"te zorgen dat de stappen worden uitgevoerd."
 
 #. Default: Describe: 1) what is your general approach to eliminate or (if the risk
 #. is not avoidable) reduce the risk; 2) the specific action(s) required to
@@ -1447,7 +1469,7 @@ msgstr ""
 #. Default: Use this measure
 #: src/osha/oira/templates/risk_actionplan.pt:149
 msgid "button_use_measure"
-msgstr ""
+msgstr "Gebruik deze maatregel"
 
 #. Default: There are known common approaches to this risk. You can create a new
 #. measure based on these approaches.
@@ -1595,8 +1617,8 @@ msgid ""
 "Are you sure you want to delete this session? This action can not be "
 "reverted."
 msgstr ""
-"Weet u zeker dat u deze sessie wil verwijderen? Dit kan niet teruggedraaid "
-"worden."
+"Bent u zeker dat u deze sessie wilt wissen? Deze actie kan niet ongedaan "
+"worden gemaakt."
 
 #. Default: Once you have started an OiRA tool session, you will be able to stop
 #. before the end. You can restart it again at a later date by selecting the title
@@ -1608,13 +1630,19 @@ msgstr ""
 #: src/osha/oira/templates/sessions.pt:62
 msgid "session_title_tooltip"
 msgstr ""
+"Eens u met een OiRA-tool-sessie gestart bent, zult u voor het einde kunnen "
+"stoppen. U kunt de sessie op een later tijdstip opnieuw opstarten door de "
+"titel van de OiRA-tool-sessie te selecteren. U kunt meer dan één sessie "
+"opslaan, op voorwaarde dat u deze verschillende titels heeft toegekend. "
+"Gelieve uw e-mailadres, paswoord en de titel die u aan de OiRA-tool-sessie "
+"heeft gegeven, te onthouden. Door op de logout-knop te klikken, bent u "
+"actief uitgelogd. U kunt ook uitloggen door uw browser te sluiten, maar "
+"omwille van veiligheidsredenen is het beter om actief uit te loggen."
 
 #. Default: Enter a title for your Risk Assessment
 #: src/osha/oira/templates/sessions.pt:58
 msgid "label_session_title"
-msgstr ""
-"U kunt een naam invoeren voor deze OiRA-tool zodat u uw sessie sneller "
-"terugvindt als u op een later tijdstip door wilt gaan."
+msgstr "Een titel ingeven voor uw Risicoanalyse"
 
 #. Default: Start a new session choosing one of the following sectoral tools
 #: src/osha/oira/templates/sessions.pt:53
@@ -1800,11 +1828,14 @@ msgstr "Start"
 #: src/osha/oira/templates/start.pt:28
 msgid "intro_oira_tool"
 msgstr ""
+"Deze tool voor risicoanalyse is hoofdzakelijk bedoeld voor micro- (minder "
+"dan 10 werknemers) en kleine (minder dan 50 werknemers) ondernemingen/"
+"organisaties."
 
 #. Default: The OiRA tool
 #: src/osha/oira/templates/start.pt:27
 msgid "header_oira_tool"
-msgstr ""
+msgstr "De OiRA-tool"
 
 #. Default: Complicated? Not really. It just takes a bit of time. However, the RA
 #. is important. So important that it is a legal requirement. This is for good
@@ -1836,15 +1867,14 @@ msgstr "Een RI&E is niet ingewikkeld"
 #: src/osha/oira/templates/start.pt:22
 msgid "intro_risk_aware"
 msgstr ""
-"Moeten de risico's voor uw medewerkers en apparatuur worden opgenomen?  Wat "
-"als er zich een ongeval met een van de machines voordoet? Wat als een "
-"medewerker wordt blootgesteld aan schadelijke stoffen? Met behulp van een "
-"risicobeoordeling kunt u deze risico's in kaart brengen en ze preventief "
-"aanpakken. Een risicobeoordeling bestaat hoofdzakelijk uit twee delen: een "
-"<em>lijst</em> met alle risico's in uw bedrijf en een <em>actieplan</em> met "
-"informatie over hoe met deze risico's wordt omgegaan. Deze twee componenten "
-"helpen u het risico voor uw medewerkers en uw bedrijf te beperken en zo "
-"blijft dus ook het financiële risico beperkt."
+"U stelt uw werknemers en uw machines bloot aan risico's? Wat als er iets "
+"gebeurt met één van de machines? Wat als een werknemer wordt blootgesteld "
+"aan gevaarlijke substanties? Een risicoanalyse helpt u om deze risico's te "
+"definiëren en hen grondig aan te pakken. Een risicoanalyse bestaat "
+"hoofdzakelijk uit twee onderdelen: een overzicht van alle risico's in uw "
+"bedrijf en meer informatie over hoe u met deze risico's om moet gaan. Deze "
+"twee componenten maken het u mogelijk de risico's voor uw werknemers en uw "
+"bedrijf - en daarmee gepaard gaande het financiële risico - te beperken."
 
 #. Default: Are you aware of all the risks?
 #: src/osha/oira/templates/start.pt:21
@@ -1859,7 +1889,7 @@ msgstr "Deze OiRA-tool heeft geen modules."
 #. Default: Modules and Profile Questions
 #: src/osha/oira/templates/survey_view.pt:30
 msgid "header_modules_and_profile_questions"
-msgstr ""
+msgstr "Modules en profielvragen"
 
 #. Default: Not set
 #: src/osha/oira/templates/survey_view.pt:26

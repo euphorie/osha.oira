@@ -147,13 +147,24 @@ _("help_actionplan", default=u"This text should explain how to fill in the "
 _("help_reports", default=u"This text should describe how the report can "
     u"either be saved or printed.")
 _("help_finalwords", default=u"General final recommendations.")
-_("intro_print_identification_1", default=u"It is possible for you to print "
-    u"out the contents of the tool to enable you to look for the information "
-    u"at the relevant workplace (by walking around and looking at what could "
-    u"cause harm, or by consulting the workers about problems they have "
-    u"encountered). You can then introduce the information into the tool.")
-_("intro_print_identification_2", default=u"You may also wish to distribute "
-    u"the contents among the workers and invite them to participate in "
-    u"identifying the hazards/problems, evaluating the risks and deciding on "
-    u"preventive action. Their feedback can be taken into account when "
-    u"filling in this tool.")
+
+# 3044:
+_("intro_print_identification_1", default=\
+    u"It is possible for you to print out the contents of the tool to enable you to"
+    u"look for the information at the relevant workplace (by walking around and"
+    u"looking at what could cause harm, or by consulting the workers and/or their"
+    u"representatives about problems they have encountered). You can then introduce"
+    u"the information into the tool.")
+
+_("intro_print_identification_2", default=\
+    u"You may also wish to distribute the contents among the workers and/or their"
+    u"representatives and invite them to participate in identifying the"
+    u"hazards/problems, evaluating the risks and deciding on preventive action. Their"
+    u"feedback should be taken into account when filling in this tool.")
+
+_("list_of_risks", default=u"contents of the tool")
+
+_("help_evaluation_empty", default=\
+    u"No hazards or problems were spotted. Please proceed directly to the "
+    u"action plan step.")
+

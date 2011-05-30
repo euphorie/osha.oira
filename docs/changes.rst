@@ -1,11 +1,12 @@
 Changelog
 =========
 
-0.14 (unreleased)
+0.14 (2011-05-30)
 -----------------
 
-- Nothing changed yet.
-
+- #3044 New English copy [jcbrand]
+- #3281 Fix is_region AttributeError when copying countries to the client [jcbrand]
+- #3048 More translation updates
 
 0.13 (2011-05-26)
 -----------------

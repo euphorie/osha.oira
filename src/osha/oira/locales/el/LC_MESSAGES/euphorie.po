@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2011-05-24 21:05+0200\n"
+"POT-Creation-Date: 2011-05-30 10:57+0200\n"
 "PO-Revision-Date: 2011-01-19 08:26+0200\n"
 "Last-Translator: xl <xl@hol.gr>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -495,19 +495,44 @@ msgstr "Γενικές τελικές συστάσεις."
 
 #. Default: It is possible for you to print out the contents of the tool to enable
 #. you to look for the information at the relevant workplace (by walking around and
-#. looking at what could cause harm, or by consulting the workers about problems
-#. they have encountered). You can then introduce the information into the tool.
-#: src/osha/oira/manual_translations.py:150
+#. looking at what could cause harm, or by consulting the workers and/or their
+#. representatives about problems they have encountered). You can then introduce
+#. the information into the tool.
+#: src/osha/oira/manual_translations.py:152
 msgid "intro_print_identification_1"
 msgstr ""
+"Μπορείτε επίσης να εκτυπώσετε τη λίστα με τους κινδύνους στους οποίους δεν "
+"μπορείτε να δώσετε άμεσα απάντηση και να αναζητήσετε πληροφορίες στο σχετικό "
+"χώρο εργασίας (περπατώντας στο χώρο εργασίας και αναζητώντας τι θα μπορούσε "
+"να είναι επικίνδυνο ή συζητώντας με τους εργαζομένους για τα προβλήματα που "
+"έχουν αντιμετωπίσει). Στη συνέχεια, μπορείτε να εισάγετε τις πληροφορίες στο "
+"εργαλείο."
 
-#. Default: You may also wish to distribute the contents among the workers and
-#. invite them to participate in identifying the hazards/problems, evaluating the
-#. risks and deciding on preventive action. Their feedback can be taken into
-#. account when filling in this tool.
-#: src/osha/oira/manual_translations.py:155
+#. Default: You may also wish to distribute the contents among the workers and/or
+#. their representatives and invite them to participate in identifying the
+#. hazards/problems, evaluating the risks and deciding on preventive action. Their
+#. feedback should be taken into account when filling in this tool.
+#: src/osha/oira/manual_translations.py:159
 msgid "intro_print_identification_2"
 msgstr ""
+"Μπορείτε επίσης να διανέμετε τη λίστα στους εργαζομένους και να τους "
+"προσκαλέσετε να συμμετάσχουν στη διαδικασία αναγνώρισης των κινδύνων/"
+"προβλημάτων, στην αξιολόγηση των κινδύνων και τη λήψη απόφασης για τις "
+"προληπτικές ενέργειες. Τα σχόλιά τους μπορούν να ληφθούν υπόψη όταν "
+"συμπληρώνετε αυτό το εργαλείο."
+
+#. Default: contents of the tool
+#: src/osha/oira/manual_translations.py:165
+msgid "list_of_risks"
+msgstr "λίστα με το σύνολο των κινδύνων"
+
+#. Default: No hazards or problems were spotted. Please proceed directly to the
+#. action plan step.
+#: src/osha/oira/manual_translations.py:167
+msgid "help_evaluation_empty"
+msgstr ""
+"Δεν υπάρχουν κίνδυνοι που χρήζουν αξιολόγησης. Μπορείτε να προχωρήσετε "
+"απευθείας στη φάση σχεδίου δράσης"
 
 #: src/osha/oira/module.py:25 src/osha/oira/module.py:47
 #: src/osha/oira/module.py:62
@@ -527,8 +552,14 @@ msgstr "Προσθήκη ${name} "
 msgid "label_statistics_level"
 msgstr ""
 
+#. Default: Level 1: Basic statistics about the use of the OiRA tool. Level 2: More
+#. detailed statistics regarding the risks
+#: src/osha/oira/sector.py:31
+msgid "help_statistics_level"
+msgstr ""
+
 #. Default: You can not delete a sector that contains published OiRA tools.
-#: src/osha/oira/sector.py:123
+#: src/osha/oira/sector.py:127
 msgid "message_not_delete_published_sector"
 msgstr ""
 "Δεν μπορείτε να διαγράψετε έναν τομέα που περιέχει δημοσιευμένα εργαλεία "
@@ -725,7 +756,7 @@ msgid "message_not_delete_published_surveygroup"
 msgstr "Δεν μπορείτε να διαγράψετε ένα εργαλείο OiRA που έχει δημοσιευτεί."
 
 #. Default: Settings
-#: src/osha/oira/templates/actionplan.pt:106
+#: src/osha/oira/templates/actionplan.pt:96
 #: src/osha/oira/templates/module_actionplan.pt:98
 #: src/osha/oira/templates/module_identification.pt:93
 #: src/osha/oira/templates/report.pt:102
@@ -736,7 +767,7 @@ msgid "navigation_settings"
 msgstr "Κατάσταση"
 
 #. Default: Status
-#: src/osha/oira/templates/actionplan.pt:105
+#: src/osha/oira/templates/actionplan.pt:95
 #: src/osha/oira/templates/module_actionplan.pt:97
 #: src/osha/oira/templates/module_identification.pt:92
 #: src/osha/oira/templates/report.pt:101
@@ -749,7 +780,7 @@ msgid "navigation_status"
 msgstr "Κατάσταση"
 
 #. Default: Help
-#: src/osha/oira/templates/actionplan.pt:104
+#: src/osha/oira/templates/actionplan.pt:94
 #: src/osha/oira/templates/disclaimer.pt:67
 #: src/osha/oira/templates/module_actionplan.pt:96
 #: src/osha/oira/templates/module_identification.pt:91
@@ -766,7 +797,7 @@ msgid "navigation_help"
 msgstr "Βοήθεια"
 
 #. Default: OiRA Tools
-#: src/osha/oira/templates/actionplan.pt:103
+#: src/osha/oira/templates/actionplan.pt:93
 #: src/osha/oira/templates/module_actionplan.pt:95
 #: src/osha/oira/templates/module_identification.pt:90
 #: src/osha/oira/templates/profile.pt:103 src/osha/oira/templates/report.pt:99
@@ -780,7 +811,7 @@ msgid "navigation_surveys"
 msgstr "Εργαλεία OiRA"
 
 #. Default: Logout
-#: src/osha/oira/templates/actionplan.pt:102
+#: src/osha/oira/templates/actionplan.pt:92
 #: src/osha/oira/templates/module_actionplan.pt:94
 #: src/osha/oira/templates/module_identification.pt:89
 #: src/osha/oira/templates/profile.pt:102 src/osha/oira/templates/report.pt:98
@@ -794,7 +825,7 @@ msgid "navigation_logout"
 msgstr "Αποσύνδεση"
 
 #. Default: Report
-#: src/osha/oira/templates/actionplan.pt:96
+#: src/osha/oira/templates/actionplan.pt:86
 #: src/osha/oira/templates/module_actionplan.pt:87
 #: src/osha/oira/templates/module_identification.pt:82
 #: src/osha/oira/templates/profile.pt:96 src/osha/oira/templates/report.pt:91
@@ -808,7 +839,7 @@ msgid "iphone_report"
 msgstr "Αναφορά"
 
 #. Default: Report
-#: src/osha/oira/templates/actionplan.pt:95
+#: src/osha/oira/templates/actionplan.pt:85
 #: src/osha/oira/templates/module_actionplan.pt:86
 #: src/osha/oira/templates/module_identification.pt:81
 #: src/osha/oira/templates/profile.pt:95 src/osha/oira/templates/report.pt:90
@@ -822,7 +853,7 @@ msgid "label_report"
 msgstr "Αναφορά"
 
 #. Default: Action Plan
-#: src/osha/oira/templates/actionplan.pt:90
+#: src/osha/oira/templates/actionplan.pt:80
 #: src/osha/oira/templates/module_actionplan.pt:78
 #: src/osha/oira/templates/module_identification.pt:76
 #: src/osha/oira/templates/profile.pt:92 src/osha/oira/templates/report.pt:85
@@ -836,7 +867,7 @@ msgid "iphone_label_action_plan"
 msgstr "Σχέδιο Δράσης"
 
 #. Default: Action Plan
-#: src/osha/oira/templates/actionplan.pt:89
+#: src/osha/oira/templates/actionplan.pt:79
 #: src/osha/oira/templates/module_actionplan.pt:77
 #: src/osha/oira/templates/module_identification.pt:75
 #: src/osha/oira/templates/profile.pt:91 src/osha/oira/templates/report.pt:84
@@ -850,7 +881,7 @@ msgid "label_action_plan"
 msgstr "Σχέδιο Δράσης"
 
 #. Default: Evaluation
-#: src/osha/oira/templates/actionplan.pt:84
+#: src/osha/oira/templates/actionplan.pt:74
 #: src/osha/oira/templates/module_actionplan.pt:72
 #: src/osha/oira/templates/module_identification.pt:70
 #: src/osha/oira/templates/profile.pt:88 src/osha/oira/templates/report.pt:79
@@ -864,7 +895,7 @@ msgid "iphone_label_evaluation"
 msgstr "Αξιολόγηση"
 
 #. Default: Evaluation
-#: src/osha/oira/templates/actionplan.pt:83
+#: src/osha/oira/templates/actionplan.pt:73
 #: src/osha/oira/templates/module_actionplan.pt:71
 #: src/osha/oira/templates/module_identification.pt:69
 #: src/osha/oira/templates/profile.pt:87 src/osha/oira/templates/report.pt:78
@@ -878,7 +909,7 @@ msgid "label_evaluation"
 msgstr "Αξιολόγηση"
 
 #. Default: Identification
-#: src/osha/oira/templates/actionplan.pt:78
+#: src/osha/oira/templates/actionplan.pt:68
 #: src/osha/oira/templates/module_actionplan.pt:66
 #: src/osha/oira/templates/module_identification.pt:61
 #: src/osha/oira/templates/profile.pt:84 src/osha/oira/templates/report.pt:73
@@ -892,7 +923,7 @@ msgid "iphone_label_identification"
 msgstr "Αναγνώριση"
 
 #. Default: Identification
-#: src/osha/oira/templates/actionplan.pt:77
+#: src/osha/oira/templates/actionplan.pt:67
 #: src/osha/oira/templates/module_actionplan.pt:65
 #: src/osha/oira/templates/module_identification.pt:60
 #: src/osha/oira/templates/profile.pt:83 src/osha/oira/templates/report.pt:72
@@ -906,7 +937,7 @@ msgid "label_identification"
 msgstr "Αναγνώριση"
 
 #. Default: Preparation
-#: src/osha/oira/templates/actionplan.pt:72
+#: src/osha/oira/templates/actionplan.pt:62
 #: src/osha/oira/templates/module_actionplan.pt:60
 #: src/osha/oira/templates/module_identification.pt:55
 #: src/osha/oira/templates/profile.pt:79 src/osha/oira/templates/report.pt:67
@@ -920,7 +951,7 @@ msgid "iphone_label_preparation"
 msgstr "Προετοιμασία"
 
 #. Default: Preparation
-#: src/osha/oira/templates/actionplan.pt:71
+#: src/osha/oira/templates/actionplan.pt:61
 #: src/osha/oira/templates/module_actionplan.pt:59
 #: src/osha/oira/templates/module_identification.pt:54
 #: src/osha/oira/templates/profile.pt:78 src/osha/oira/templates/report.pt:66
@@ -934,19 +965,17 @@ msgid "label_preparation"
 msgstr "Προετοιμασία"
 
 #. Default: Go to report
-#: src/osha/oira/templates/actionplan.pt:64
+#: src/osha/oira/templates/actionplan.pt:54
 msgid "label_jump_to_report"
 msgstr "Μεταβείτε στην αναφορά"
 
 #. Default: Create action plan
-#: src/osha/oira/templates/actionplan.pt:63
+#: src/osha/oira/templates/actionplan.pt:53
 msgid "label_create_action_plan"
 msgstr "Δημιουργία σχεδίου δράσης"
 
-#. Default: You have identified the magnitude of risk for each of the bottlenecks.
-#. There are no risks which need require any attention during this phase, so please
-#. proceed directly to the report.
-#: src/osha/oira/templates/actionplan.pt:56
+#. Default: No risks were identified. Please proceed directly to the report.
+#: src/osha/oira/templates/actionplan.pt:47
 msgid "expl_actionplan_empty"
 msgstr ""
 "Έχετε αναγνωρίσει το μέγεθος του κινδύνου για κάθε μια από τις δυσχέρειες. "
@@ -957,7 +986,7 @@ msgstr ""
 #. then you describe the specific action(s) required to achieve this. You should
 #. also include details of the level of expertise and/or other requirements needed
 #. for those actions to be effective.
-#: src/osha/oira/templates/actionplan.pt:50
+#: src/osha/oira/templates/actionplan.pt:42
 msgid "expl_actionplan_7"
 msgstr ""
 "Μόλις αποφασίσετε πώς θα εξαλείψετε ή θα μειώσετε ένα συγκεκριμένο κίνδυνο, "
@@ -968,7 +997,7 @@ msgstr ""
 
 #. Default: If certain risks are not avoidable, how can they be reduced to a level
 #. at which the health and safety of those exposed is not compromised?
-#: src/osha/oira/templates/actionplan.pt:44
+#: src/osha/oira/templates/actionplan.pt:37
 msgid "expl_actionplan_6"
 msgstr ""
 "Εάν ορισμένοι κίνδυνοι είναι αναπόφευκτοι, πώς μπορούν να μειωθούν σε "
@@ -977,28 +1006,24 @@ msgstr ""
 
 #. Default: Is a risk avoidable? Can it be removed entirely? For example, this
 #. could be achieved by:
-#: src/osha/oira/templates/actionplan.pt:36
+#: src/osha/oira/templates/actionplan.pt:29
 msgid "expl_actionplan_3"
 msgstr ""
 "Μπορεί ο κίνδυνος να αποφευχθεί; Μπορεί να εξαλειφθεί εντελώς; Για "
 "παράδειγμα, αυτό μπορεί να επιτευχθεί:"
 
 #. Default: removing the hazard
-#: src/osha/oira/templates/actionplan.pt:40
+#: src/osha/oira/templates/actionplan.pt:33
 msgid "expl_actionplan_5"
 msgstr "καταργώντας τον κίνδυνο"
 
 #. Default: considering whether the task or job is necessary
-#: src/osha/oira/templates/actionplan.pt:39
+#: src/osha/oira/templates/actionplan.pt:32
 msgid "expl_actionplan_4"
 msgstr "εξετάζοντας εάν η συγκεκριμένη εργασία είναι απαραίτητη"
 
-#. Default: Removing the causes (tackling the source) is the preferred method: that
-#. way, the risk can no longer arise. You then write down what tasks have to be
-#. carried out in order for the risk to be removed, as well as the knowledge and
-#. experience that are needed for those tasks to be carried out (prevention plan
-#. and requirements).
-#: src/osha/oira/templates/actionplan.pt:27
+#. Default: Among the things to be considered for this step are:
+#: src/osha/oira/templates/actionplan.pt:24
 msgid "expl_actionplan_2"
 msgstr ""
 "Η εξάλειψη των αιτιών (αντιμετώπιση του προβλήματος στην πηγή του) είναι η "
@@ -1007,11 +1032,10 @@ msgstr ""
 "καταργηθεί, καθώς και τις γνώσεις και την πείρα που απαιτούνται για τη "
 "διεξαγωγή αυτών των ενεργειών (σχέδιο πρόληψης και απαιτήσεις)."
 
-#. Default: You have identified the magnitude of risk for each of the bottlenecks.
-#. During the action plan phase you can determine the priority of each of the
-#. bottlenecks and how you are going to tackle the bottleneck. The programme may
-#. offer a suggestion you can use, or you can add your own measures.
-#: src/osha/oira/templates/actionplan.pt:20
+#. Default: After having identified the risks, you need to put an action plan in
+#. place to manage the risks. To eliminate or reduce risks you need to determine
+#. which preventive and protective measures are to be taken.
+#: src/osha/oira/templates/actionplan.pt:19
 msgid "expl_actionplan_1"
 msgstr ""
 "Έχετε αναγνωρίσει το μέγεθος του κινδύνου για κάθε μία από τις στενωπούς. "
@@ -1939,6 +1963,16 @@ msgstr "Φάση αξιολόγησης"
 #. Default: OiRA Tool versions
 #: src/osha/oira/templates/surveygroup_view.pt:14
 msgid "header_sector_tool_version_list"
+msgstr ""
+
+#. Default: Show
+#: src/osha/oira/templates/webhelpers.pt:208
+msgid "action_show"
+msgstr ""
+
+#. Default: Hide
+#: src/osha/oira/templates/webhelpers.pt:204
+msgid "action_hide"
 msgstr ""
 
 #. Default: Legal and policy references

@@ -150,16 +150,16 @@ _("help_finalwords", default=u"General final recommendations.")
 
 # 3044:
 _("intro_print_identification_1", default=\
-    u"It is possible for you to print out the contents of the tool to enable you to"
-    u"look for the information at the relevant workplace (by walking around and"
-    u"looking at what could cause harm, or by consulting the workers and/or their"
-    u"representatives about problems they have encountered). You can then introduce"
+    u"It is possible for you to print out the contents of the tool to enable you to "
+    u"look for the information at the relevant workplace (by walking around and "
+    u"looking at what could cause harm, or by consulting the workers and/or their "
+    u"representatives about problems they have encountered). You can then introduce "
     u"the information into the tool.")
 
 _("intro_print_identification_2", default=\
-    u"You may also wish to distribute the contents among the workers and/or their"
-    u"representatives and invite them to participate in identifying the"
-    u"hazards/problems, evaluating the risks and deciding on preventive action. Their"
+    u"You may also wish to distribute the contents among the workers and/or their "
+    u"representatives and invite them to participate in identifying the "
+    u"hazards/problems, evaluating the risks and deciding on preventive action. Their "
     u"feedback should be taken into account when filling in this tool.")
 
 _("list_of_risks", default=u"contents of the tool")

@@ -1,10 +1,10 @@
 Changelog
 =========
 
-0.15 (unreleased)
+0.15 (2011-05-31)
 -----------------
 
-- Nothing changed yet.
+- #2223 Add the FancyBox to the module evaluation page [jcbrand]
 
 
 0.14 (2011-05-30)

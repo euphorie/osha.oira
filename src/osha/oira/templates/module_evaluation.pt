@@ -15,6 +15,19 @@
   </head>
   <body tal:define="module nocall:view/module" class="evaluation ${webhelpers/extra_css}">
     <h1>${view/title}</h1>
+    <p class="gallery" tal:define="images module/@@images" tal:condition="python:module.image is not None">
+        <tal:if tal:define="thumb python:images.scale('image', width=150, height=500, direction='thumbnail')"
+                tal:condition="thumb">
+            <a  rel="fancybox" title="${module/caption|nothing}" 
+                tal:define="
+                    has_larger_version python:images.getImageSize('image') > (150*1.5, 500);
+                    large python:has_larger_version and images.scale('image', width=590, height=1900, direction='thumbnail')"
+                tal:omit-tag="not:has_larger_version"
+                href="${large/url|nothing}">
+            <img alt="" class="floatBefore" src="${thumb/url}" width="${thumb/width}" height="${thumb/height}"/>
+            </a>
+        </tal:if>
+    </p>
     <p tal:content="structure module/description">
       Sed ut perspiciatis unde omnis iste natus error sit voluptatem
       accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae

@@ -7,12 +7,12 @@ from plone.dexterity.interfaces import IDexterityFTI
 from euphorie.content import MessageFactory as _
 from euphorie.content.module import IModule
 from euphorie.content.module import View as ModuleView
+from euphorie.client.module import EvaluationView as ModuleEvaluationView
 from euphorie.client.module import ActionPlanView as ModuleActionPlanView
 from euphorie.client.module import IdentificationView as \
                                         ModuleIdentificationView
 
-from interfaces import IOSHAIdentificationPhaseSkinLayer
-from interfaces import IOSHAActionPlanPhaseSkinLayer
+import interfaces
 
 grok.templatedir("templates")
 
@@ -28,13 +28,16 @@ class View(ModuleView):
             fti = getUtility(IDexterityFTI, name=portal_type)
             return fti.Title()
 
+class EvaluationView(ModuleEvaluationView):
+    grok.layer(interfaces.IOSHAEvaluationPhaseSkinLayer)
+    grok.template("module_evaluation")
 
 class IdentificationView(ModuleIdentificationView):
-    grok.layer(IOSHAIdentificationPhaseSkinLayer)
+    grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
     grok.template("module_identification")
 
 class ActionPlanView(ModuleActionPlanView):
-    grok.layer(IOSHAActionPlanPhaseSkinLayer)
+    grok.layer(interfaces.IOSHAActionPlanPhaseSkinLayer)
     grok.template("module_actionplan")
 
 

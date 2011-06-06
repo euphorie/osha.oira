@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.16dev\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2011-06-06 09:43+0200\n"
+"POT-Creation-Date: 2011-06-06 10:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -641,6 +641,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:332
 #: src/osha/oira/templates/report_identification.pt:121
 #: src/osha/oira/templates/risk_actionplan.pt:279
+#: src/osha/oira/templates/risk_evaluation.pt:156
 #: src/osha/oira/templates/sessions.pt:112
 msgid "navigation_settings"
 msgstr ""
@@ -654,7 +655,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:331
 #: src/osha/oira/templates/report_identification.pt:120
 #: src/osha/oira/templates/risk_actionplan.pt:278
-#: src/osha/oira/templates/risk_evaluation.pt:127
+#: src/osha/oira/templates/risk_evaluation.pt:155
 #: src/osha/oira/templates/risk_identification.pt:90
 msgid "navigation_status"
 msgstr ""
@@ -670,14 +671,13 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:330
 #: src/osha/oira/templates/report_identification.pt:119
 #: src/osha/oira/templates/risk_actionplan.pt:277
-#: src/osha/oira/templates/risk_evaluation.pt:126
+#: src/osha/oira/templates/risk_evaluation.pt:154
 #: src/osha/oira/templates/risk_identification.pt:89
 #: src/osha/oira/templates/sessions.pt:111 src/osha/oira/templates/start.pt:70
 msgid "navigation_help"
 msgstr ""
 
 #. Default: OiRA Tools
-#. Default: Surveys
 #: src/osha/oira/templates/actionplan.pt:93
 #: src/osha/oira/templates/module_actionplan.pt:95
 #: src/osha/oira/templates/module_evaluation.pt:80
@@ -686,7 +686,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:329
 #: src/osha/oira/templates/report_identification.pt:118
 #: src/osha/oira/templates/risk_actionplan.pt:276
-#: src/osha/oira/templates/risk_evaluation.pt:125
+#: src/osha/oira/templates/risk_evaluation.pt:153
 #: src/osha/oira/templates/risk_identification.pt:88
 #: src/osha/oira/templates/start.pt:69
 msgid "navigation_surveys"
@@ -701,7 +701,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:328
 #: src/osha/oira/templates/report_identification.pt:117
 #: src/osha/oira/templates/risk_actionplan.pt:275
-#: src/osha/oira/templates/risk_evaluation.pt:124
+#: src/osha/oira/templates/risk_evaluation.pt:152
 #: src/osha/oira/templates/risk_identification.pt:87
 #: src/osha/oira/templates/sessions.pt:110 src/osha/oira/templates/start.pt:68
 msgid "navigation_logout"
@@ -716,7 +716,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:316
 #: src/osha/oira/templates/report_identification.pt:110
 #: src/osha/oira/templates/risk_actionplan.pt:268
-#: src/osha/oira/templates/risk_evaluation.pt:117
+#: src/osha/oira/templates/risk_evaluation.pt:145
 #: src/osha/oira/templates/risk_identification.pt:80
 #: src/osha/oira/templates/sessions.pt:104 src/osha/oira/templates/start.pt:62
 msgid "iphone_report"
@@ -731,7 +731,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:315
 #: src/osha/oira/templates/report_identification.pt:109
 #: src/osha/oira/templates/risk_actionplan.pt:267
-#: src/osha/oira/templates/risk_evaluation.pt:116
+#: src/osha/oira/templates/risk_evaluation.pt:144
 #: src/osha/oira/templates/risk_identification.pt:79
 #: src/osha/oira/templates/sessions.pt:103 src/osha/oira/templates/start.pt:61
 msgid "label_report"
@@ -746,7 +746,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:310
 #: src/osha/oira/templates/report_identification.pt:104
 #: src/osha/oira/templates/risk_actionplan.pt:259
-#: src/osha/oira/templates/risk_evaluation.pt:111
+#: src/osha/oira/templates/risk_evaluation.pt:139
 #: src/osha/oira/templates/risk_identification.pt:74
 #: src/osha/oira/templates/sessions.pt:100 src/osha/oira/templates/start.pt:58
 msgid "iphone_label_action_plan"
@@ -761,7 +761,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:309
 #: src/osha/oira/templates/report_identification.pt:103
 #: src/osha/oira/templates/risk_actionplan.pt:258
-#: src/osha/oira/templates/risk_evaluation.pt:110
+#: src/osha/oira/templates/risk_evaluation.pt:138
 #: src/osha/oira/templates/risk_identification.pt:73
 #: src/osha/oira/templates/sessions.pt:99 src/osha/oira/templates/start.pt:57
 msgid "label_action_plan"
@@ -776,7 +776,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:304
 #: src/osha/oira/templates/report_identification.pt:98
 #: src/osha/oira/templates/risk_actionplan.pt:253
-#: src/osha/oira/templates/risk_evaluation.pt:102
+#: src/osha/oira/templates/risk_evaluation.pt:130
 #: src/osha/oira/templates/risk_identification.pt:68
 #: src/osha/oira/templates/sessions.pt:96 src/osha/oira/templates/start.pt:54
 msgid "iphone_label_evaluation"
@@ -791,7 +791,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:303
 #: src/osha/oira/templates/report_identification.pt:97
 #: src/osha/oira/templates/risk_actionplan.pt:252
-#: src/osha/oira/templates/risk_evaluation.pt:101
+#: src/osha/oira/templates/risk_evaluation.pt:129
 #: src/osha/oira/templates/risk_identification.pt:67
 #: src/osha/oira/templates/sessions.pt:95 src/osha/oira/templates/start.pt:53
 msgid "label_evaluation"
@@ -806,7 +806,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:298
 #: src/osha/oira/templates/report_identification.pt:92
 #: src/osha/oira/templates/risk_actionplan.pt:247
-#: src/osha/oira/templates/risk_evaluation.pt:96
+#: src/osha/oira/templates/risk_evaluation.pt:124
 #: src/osha/oira/templates/risk_identification.pt:59
 #: src/osha/oira/templates/sessions.pt:92 src/osha/oira/templates/start.pt:50
 msgid "iphone_label_identification"
@@ -821,7 +821,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:297
 #: src/osha/oira/templates/report_identification.pt:91
 #: src/osha/oira/templates/risk_actionplan.pt:246
-#: src/osha/oira/templates/risk_evaluation.pt:95
+#: src/osha/oira/templates/risk_evaluation.pt:123
 #: src/osha/oira/templates/risk_identification.pt:58
 #: src/osha/oira/templates/sessions.pt:91 src/osha/oira/templates/start.pt:49
 msgid "label_identification"
@@ -836,7 +836,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:292
 #: src/osha/oira/templates/report_identification.pt:86
 #: src/osha/oira/templates/risk_actionplan.pt:241
-#: src/osha/oira/templates/risk_evaluation.pt:90
+#: src/osha/oira/templates/risk_evaluation.pt:118
 #: src/osha/oira/templates/risk_identification.pt:53
 #: src/osha/oira/templates/sessions.pt:88 src/osha/oira/templates/start.pt:45
 msgid "iphone_label_preparation"
@@ -851,7 +851,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:291
 #: src/osha/oira/templates/report_identification.pt:85
 #: src/osha/oira/templates/risk_actionplan.pt:240
-#: src/osha/oira/templates/risk_evaluation.pt:89
+#: src/osha/oira/templates/risk_evaluation.pt:117
 #: src/osha/oira/templates/risk_identification.pt:52
 #: src/osha/oira/templates/sessions.pt:87 src/osha/oira/templates/start.pt:44
 msgid "label_preparation"
@@ -999,7 +999,7 @@ msgstr ""
 #: src/osha/oira/templates/module_identification.pt:48
 #: src/osha/oira/templates/register.pt:35 src/osha/oira/templates/report.pt:53
 #: src/osha/oira/templates/risk_actionplan.pt:157
-#: src/osha/oira/templates/risk_evaluation.pt:74
+#: src/osha/oira/templates/risk_evaluation.pt:102
 #: src/osha/oira/templates/risk_identification.pt:30
 #: src/osha/oira/templates/sessions.pt:81
 msgid "label_next"
@@ -1011,7 +1011,7 @@ msgstr ""
 #: src/osha/oira/templates/module_identification.pt:47
 #: src/osha/oira/templates/register.pt:34
 #: src/osha/oira/templates/risk_actionplan.pt:156
-#: src/osha/oira/templates/risk_evaluation.pt:73
+#: src/osha/oira/templates/risk_evaluation.pt:101
 #: src/osha/oira/templates/risk_identification.pt:29
 #: src/osha/oira/templates/sessions.pt:80 src/osha/oira/templates/start.pt:37
 msgid "label_previous"
@@ -1320,7 +1320,7 @@ msgstr ""
 #. Default: Please leave any comments you may have on the question above in this
 #. field. These comments will be used in the action plan.
 #: src/osha/oira/templates/risk_actionplan.pt:161
-#: src/osha/oira/templates/risk_evaluation.pt:78
+#: src/osha/oira/templates/risk_evaluation.pt:106
 #: src/osha/oira/templates/risk_identification.pt:42
 msgid "label_comment"
 msgstr ""
@@ -1354,82 +1354,128 @@ msgid ""
 msgstr ""
 
 #. Default: High
-#: src/osha/oira/templates/risk_evaluation.pt:68
+#: src/osha/oira/templates/risk_evaluation.pt:96
 msgid "priority_high"
 msgstr ""
 
 #. Default: Medium
-#: src/osha/oira/templates/risk_evaluation.pt:66
+#: src/osha/oira/templates/risk_evaluation.pt:94
 msgid "priority_medium"
 msgstr ""
 
 #. Default: Low
-#: src/osha/oira/templates/risk_evaluation.pt:64
+#: src/osha/oira/templates/risk_evaluation.pt:92
 msgid "priority_low"
 msgstr ""
 
 #. Default: Select the priority of this risk
-#: src/osha/oira/templates/risk_evaluation.pt:62
+#: src/osha/oira/templates/risk_evaluation.pt:90
 msgid "header_risk_priority"
 msgstr ""
 
+#. Default: Very severe
+#: src/osha/oira/templates/risk_evaluation.pt:83
+msgid "severity_very_severe"
+msgstr ""
+
+#. Default: Severe
+#: src/osha/oira/templates/risk_evaluation.pt:81
+msgid "severity_severe"
+msgstr ""
+
+#. Default: Not very severe
+#: src/osha/oira/templates/risk_evaluation.pt:79
+msgid "severity_not_severe"
+msgstr ""
+
+#. Default: Weak
+#: src/osha/oira/templates/risk_evaluation.pt:77
+msgid "severity_weak"
+msgstr ""
+
+#. Default: What is the severity of the damage ?
+#: src/osha/oira/templates/risk_evaluation.pt:75
+msgid "header_risk_severity"
+msgstr ""
+
+#. Default: Regularly
+#: src/osha/oira/templates/risk_evaluation.pt:71
+msgid "frequency_french_regularly"
+msgstr ""
+
+#. Default: Often
+#: src/osha/oira/templates/risk_evaluation.pt:69
+msgid "frequency_french_often"
+msgstr ""
+
+#. Default: Not very often
+#: src/osha/oira/templates/risk_evaluation.pt:67
+msgid "frequency_french_not_often"
+msgstr ""
+
+#. Default: Rare
+#: src/osha/oira/templates/risk_evaluation.pt:65
+msgid "frequency_french_rare"
+msgstr ""
+
+#. Default: How often are people exposed to this risk?
+#: src/osha/oira/templates/risk_evaluation.pt:63
+#: src/osha/oira/templates/risk_evaluation.pt:42
+msgid "header_risk_frequency"
+msgstr ""
+
 #. Default: High (very high) severity
-#: src/osha/oira/templates/risk_evaluation.pt:56
+#: src/osha/oira/templates/risk_evaluation.pt:58
 msgid "effect_permanent_damage"
 msgstr ""
 
 #. Default: Significant severity
-#: src/osha/oira/templates/risk_evaluation.pt:54
+#: src/osha/oira/templates/risk_evaluation.pt:56
 msgid "effect_injury_with_absence"
 msgstr ""
 
 #. Default: Weak severity
-#: src/osha/oira/templates/risk_evaluation.pt:52
+#: src/osha/oira/templates/risk_evaluation.pt:54
 msgid "effect_injury_no_absence"
 msgstr ""
 
 #. Default: What is the severity of the damage ?
-#: src/osha/oira/templates/risk_evaluation.pt:50
+#: src/osha/oira/templates/risk_evaluation.pt:52
 msgid "header_risk_effect"
 msgstr ""
 
 #. Default: Constantly
-#: src/osha/oira/templates/risk_evaluation.pt:46
+#: src/osha/oira/templates/risk_evaluation.pt:48
 msgid "frequency_constantly"
 msgstr ""
 
 #. Default: Regularly
-#: src/osha/oira/templates/risk_evaluation.pt:44
+#: src/osha/oira/templates/risk_evaluation.pt:46
 msgid "frequency_regularly"
 msgstr ""
 
 #. Default: Almost never
-#: src/osha/oira/templates/risk_evaluation.pt:42
+#: src/osha/oira/templates/risk_evaluation.pt:44
 msgid "frequency_almost_never"
 msgstr ""
 
-#. Default: How often are people exposed to this risk?
-#: src/osha/oira/templates/risk_evaluation.pt:40
-msgid "header_risk_frequency"
-msgstr ""
-
 #. Default: Large
-#: src/osha/oira/templates/risk_evaluation.pt:36
+#: src/osha/oira/templates/risk_evaluation.pt:38
 msgid "probability_large"
 msgstr ""
 
 #. Default: Medium
-#: src/osha/oira/templates/risk_evaluation.pt:34
+#: src/osha/oira/templates/risk_evaluation.pt:36
 msgid "probability_medium"
 msgstr ""
 
 #. Default: Small
-#: src/osha/oira/templates/risk_evaluation.pt:32
+#: src/osha/oira/templates/risk_evaluation.pt:34
 msgid "probability_small"
 msgstr ""
 
 #. Default: What is the chance of this risk occurring?
-#: src/osha/oira/templates/risk_evaluation.pt:30
+#: src/osha/oira/templates/risk_evaluation.pt:32
 msgid "header_risk_probability"
 msgstr ""
 

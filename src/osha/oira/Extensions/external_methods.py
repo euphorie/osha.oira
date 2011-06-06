@@ -59,8 +59,6 @@ def fix_non_catalogged_solutions(self):
     """ Set the description for solutions that are not in the catalog.
     """
     from htmllaundry import StripMarkup
-    i = 0
-
     def update_risks(obj):
         for o in obj.objectValues():
             if o.objectValues():
@@ -70,15 +68,11 @@ def fix_non_catalogged_solutions(self):
                 if description != o.description:
                     log.info("Setting description: %s" % o.absolute_url())
                     o.description = description
-                    i += 1
             
-    client = self.client
-    for country in client:
-        for sector in country:
-            for obj in self.sector.objectValues():
-                update_risks(obj)
+    for obj in self.client.objectValues():
+	update_risks(obj)
 
-    return "Successfully updated %d solutions." % i
+    return "Successfully updated the solutions."
 
 
 

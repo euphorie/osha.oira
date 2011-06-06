@@ -36,7 +36,7 @@
     </div>
 
     <div class="solutions" id="standardSolutions" tal:condition="python:view.solutions">
-    <p class="info" i18n:translate="">Select a standard solution. The main fields of this measure will be populated with the chosen solution.</p>
+    <p class="info" i18n:translate="label_select_measure">Select one or more of the known common measures provided.</p>
     <ol>
         <li tal:repeat="solution view/solutions"><strong class="title">${solution/description}</strong>
         <p class="actionPlan">${solution/action_plan}</p>

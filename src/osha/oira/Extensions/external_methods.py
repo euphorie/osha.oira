@@ -1,7 +1,10 @@
 import datetime
+import logging
 from zope.component import getUtility
 from z3c.appconfig.interfaces import IAppConfig
 from euphorie.client import utils
+
+log = logging.getLogger(__name__)
 
 def touch_surveys(self):
     """ Update the client survey's timestamps. This will force every user's
@@ -51,10 +54,31 @@ def set_sector_colour_values(self):
     return ls
 
 
-def play(self):
-    """ """
-    pass
 
+def fix_non_catalogged_solutions(self):
+    """ Set the description for solutions that are not in the catalog.
+    """
+    from htmllaundry import StripMarkup
+    i = 0
+
+    def update_risks(obj):
+        for o in obj.objectValues():
+            if o.objectValues():
+                update_risks(o)
+            if o.portal_type == "euphorie.solution":
+                description = StripMarkup(o.description)
+                if description != o.description:
+                    log.info("Setting description: %s" % o.absolute_url())
+                    o.description = description
+                    i += 1
+            
+    client = self.client
+    for country in client:
+        for sector in country:
+            for obj in self.sector.objectValues():
+                update_risks(obj)
+
+    return "Successfully updated %d solutions." % i
 
 
 

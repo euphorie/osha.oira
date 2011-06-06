@@ -168,3 +168,6 @@ _("help_evaluation_empty", default=\
     u"No hazards or problems were spotted. Please proceed directly to the "
     u"action plan step.")
 
+_("label_choose_surveygroup", default= u"Choose an OiRA Tool")
+_("label_choose_survey", default= u"Choose a revision of the selected OiRA Tool")
+

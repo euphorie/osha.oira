@@ -58,6 +58,7 @@ def append_entry(pofile, entry, default):
                     occurrences=entry.occurrences,
                     comment=entry.comment)
                 )
+    return pofile
 
 def main():
     if len(sys.argv) < 4:
@@ -90,12 +91,12 @@ def main():
         target = oldpo.find(entry.msgid)
         if not target:
             # not found == new translation
-            append_entry(outpo, entry, default_new)
+            outpo = append_entry(outpo, entry, default_new)
             continue 
 
         default_old = get_default(target)
         if default_old != default_new:
-            append_entry(outpo, entry, default_new)
+            outpo = append_entry(outpo, entry, default_new)
 
     if len(sys.argv) > 4:
         extra_entries = []
@@ -110,7 +111,7 @@ def main():
                 # Remove commented entries
                 continue
             default = get_default(entry)
-            append_entry(outpo, entry, default)
+            outpo = append_entry(outpo, entry, default)
 
     outpo.save(outfile)
     sys.exit('Found %d entries that need to be updated' % len(outpo))

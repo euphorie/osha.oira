@@ -228,8 +228,3 @@ _("unpublish_confirm", default=u"Are you sure you want to unpublish this OiRA To
 
 _("menu_import", default=u"Import OiRA Tool")
 
-_("help_create_new_version", default=u""
-    "Start to write a new OiRA Tool. You will be asked whether you want to start off"
-    " with a copy of an existing OiRA Tool.")
-
-_("title_help_unpublished", default=u"Remove this OiRA Tool from the online client.")

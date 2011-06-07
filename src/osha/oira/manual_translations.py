@@ -150,17 +150,17 @@ _("help_finalwords", default=u"General final recommendations.")
 
 # 3044:
 _("intro_print_identification_1", default=\
-    u"It is possible for you to print out the contents of the tool to enable you to "
-    u"look for the information at the relevant workplace (by walking around and "
-    u"looking at what could cause harm, or by consulting the workers and/or their "
-    u"representatives about problems they have encountered). You can then introduce "
-    u"the information into the tool.")
+    u"It is possible for you to print out the contents of the tool to enable "
+    u"you to look for the information at the relevant workplace (by walking "
+    u"around and looking at what could cause harm, or by consulting the "
+    u"workers and/or their representatives about problems they have "
+    u"encountered). You can then introduce the information into the tool.")
 
 _("intro_print_identification_2", default=\
-    u"You may also wish to distribute the contents among the workers and/or their "
-    u"representatives and invite them to participate in identifying the "
-    u"hazards/problems, evaluating the risks and deciding on preventive action. Their "
-    u"feedback should be taken into account when filling in this tool.")
+    u"You may also wish to distribute the contents among the workers and/or "
+    u"their representatives and invite them to participate in identifying the "
+    u"hazards/problems, evaluating the risks and deciding on preventive action." 
+    u"Their feedback should be taken into account when filling in this tool.")
 
 _("list_of_risks", default=u"contents of the tool")
 
@@ -171,3 +171,65 @@ _("help_evaluation_empty", default=\
 _("label_choose_surveygroup", default= u"Choose an OiRA Tool")
 _("label_choose_survey", default= u"Choose a revision of the selected OiRA Tool")
 
+_("help_create_new_version", default=u"Start to write a new OiRA Tool. You "
+    u"will be asked whether you want to start off with a copy of an existing "
+    u"OiRA Tool..")
+
+_("title_help_unpublished", default=u"Remove this OiRA Tool from the online "
+    u"client.")
+
+_("message_preview_success", default=u"Succesfully created a preview for the "
+    u"OiRA Tool. It can be accessed at ${url} .")
+
+_("warning_account_delete_surveys", default=u""
+    u"Please note that by deleting your account, also all your filled out surveys "
+    u"will be deleted. Please make sure to download your surveys from the reports "
+    u"screen prior to deleting your account if you want to keep any.")
+
+
+_("intro_preview", default=u""
+    u"Are you sure you want to create a preview of this OiRA Tool? You can give the "
+    u"URL for the preview to others so they can test the OiRA Tool. To access the "
+    u"preview a standard OiRA client login is required.")
+
+_("header_preview", default=u"Preview OiRA Tool")
+
+_("help_publish_url", default=u"After publication the OiRA Tool will be available at ${url}.")
+
+_("intro_publish_other_survey_published", default=u""
+    u"Are you sure you want to publish this OiRA Tool version? This will replace the "
+    u"current version.")
+
+_("intro_publish_survey_published", default=u""
+    u"Are you sure you want to republish this OiRA Tool? This will make all changes "
+    u"made public.")
+
+_("intro_publish_first_time", default=u""
+    u"Are you sure you want to publish this OiRA Tool? After publication the OiRA Tool "
+    u"will appear in the online client and be accessible by all users.")
+
+_("header_publish", default="Publish OiRA Tool")
+
+_("expl_update",""
+    u"This OiRA Tool has been updated. Before you can continue any changes made in "
+    u"the OiRA Tool will have to be merged in your session.")
+
+_("title_updated", default="OiRA Tool was updated")
+
+_("help_surveygroup_title", default=u""
+    u"The title of this OiRA Tool. This title is used in the OiRA Tool overview in the "
+    u"clients.")
+
+_("message_unpublish_success", default=u"This OiRA Tool is now no longer available in the client.")
+
+_("label_upload_survey_title", default=u"Name for OiRA Tool version")
+
+_("unpublish_confirm", default=u"Are you sure you want to unpublish this OiRA Tool?")
+
+_("menu_import", default=u"Import OiRA Tool")
+
+_("help_create_new_version", default=u""
+    "Start to write a new OiRA Tool. You will be asked whether you want to start off"
+    " with a copy of an existing OiRA Tool.")
+
+_("title_help_unpublished", default=u"Remove this OiRA Tool from the online client.")

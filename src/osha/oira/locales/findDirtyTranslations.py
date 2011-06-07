@@ -38,6 +38,8 @@ newfile = sys.argv[2]
 outfile = sys.argv[3]
 if len(sys.argv) > 4 and sys.argv[4] == "--include-untranslated":
     include_untranslated = True
+else:
+    include_untranslated = False
 
 if not os.path.isfile(oldfile):
     usage(sys.stderr, "\nERROR: path to 'old' file is not valid")

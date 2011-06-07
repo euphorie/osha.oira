@@ -92,6 +92,27 @@ E.g:
 The output file will contain all "dirty" msgids, as well as all new ones (and
 existing untranslated or fuzzy ones if specified).
 
+
+Finding translations added to the Euphorie mother-package
+---------------------------------------------------------
+
+OSHA is very finnicky about certain terms (i.e OiRA Tool vs Survey). So
+whenever Wichert or someone else upstream adds new entries to the euphorie.po
+in euphorie/deployment, we have to check that these verboten strings/terms are
+not there.
+
+getNewEntries.py is a script that can help. It provides all the entries in a
+po/pot file that is not in another po/pot file.
+
+We can then run this script on osha/oira/locales/euphorie.pot and
+euphorie/deployment/locales/euphorie.pot and get a list of all the entries in
+the second file that are not in the first. Then we can grep for those terms
+that need to be replaced.
+
+E.g:
+./getNewEntries.py euphorie.pot ../../../euphorie/deployment/locales/euphorie.pot newWichert.po
+
+
 Propagating translations to existing po-files
 ---------------------------------------------
 

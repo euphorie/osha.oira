@@ -83,9 +83,14 @@ The script takes 3 arguments:
 3) A filename for the output .po file. It will contain a subset of 1) and can be sent to the translators.
 4) --include-untranslated which specifies whether untranslated entries which
 are already in old.po must also be included in the output file
+5) --include-fuzzy which specifies whether fuzzy entries should also be
+included.
+
+E.g:
+./findDirtyTranslations.py sv/LC_MESSAGES/euphorie.po euphorie.pot  dirtySV.po --include-untranslated --include-fuzzy
 
 The output file will contain all "dirty" msgids, as well as all new ones (and
-existing untranslated ones if --include-untranslated is specified).
+existing untranslated or fuzzy ones if specified).
 
 Propagating translations to existing po-files
 ---------------------------------------------

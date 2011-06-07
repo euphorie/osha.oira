@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-
-# Author: Wolfgang Thomas <thomas@syslab.com>
+# Authors: Wolfgang Thomas <thomas@syslab.com>
+#          JC Brand <brand@syslab.com>
 
 """%(program)s: Compare two .po or .pot files to find entries that need to be
 updated. This is done by comparing the "Default" translations.
@@ -11,8 +11,10 @@ usage:                  %(program)s old.po new.pot out.po
 old.po                  A po file that contains existing, potentially outdated translations
 new.pot                 A po/pot file with updated default translations (e.g. via extraction)
 out.po                  A name for the output po file
---include-untranslated  Optional. Specifies wether untranslated entries from old.po must also be
+--include-untranslated  Optional. Specifies that untranslated entries from old.po must also be
                         included in the out.po file.
+--include-fuzzy         Optional. Specifies that fuzzy entries in old.po must
+                        also be included in the out.po file.
 """
 
 import sys
@@ -22,7 +24,6 @@ import polib
 
 patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
 
-
 def usage(stream, msg=None):
     if msg:
         print >> stream, msg
@@ -31,79 +32,89 @@ def usage(stream, msg=None):
     print >> stream, __doc__ % {"program": program}
     sys.exit(0)
 
-if len(sys.argv) < 4:
-    usage(sys.stderr, "\nERROR: Not enough arguments")
-oldfile = sys.argv[1]
-newfile = sys.argv[2]
-outfile = sys.argv[3]
-if len(sys.argv) > 4 and sys.argv[4] == "--include-untranslated":
-    include_untranslated = True
-else:
-    include_untranslated = False
-
-if not os.path.isfile(oldfile):
-    usage(sys.stderr, "\nERROR: path to 'old' file is not valid")
-
-if not os.path.isfile(newfile):
-    usage(sys.stderr, "\nERROR: path to 'new' file is not valid")
-
-oldpo = polib.pofile(oldfile)
-newpo = polib.pofile(newfile)
-outpo = polib.POFile()
-
-# Copy header and metadata
-outpo.header = newpo.header
-[outpo.metadata.update({key: val}) for (key, val) in newpo.metadata.items()]
-
-counter = 0
-
-# look at every entry in the new (POT) file
-for entry in newpo:
-    default_old = default_new = u''
-    # fist, extract the default translation of the new (POT) file
-    match_new = patt.match(entry.comment)
-    if match_new:
-        default_new = match_new.group(1).replace('\n', ' ')
+def get_default(entry):
+    """ Extract the default translation from the entry (without "Default:")
+    """
+    match = patt.match(entry.comment)
+    # Write the "Default: " text into the msgstr. Reason: Many translators will
+    # not see comments in their translation program.
+    default = entry.msgid
+    if match:
+        default = match.group(1).replace('\n', ' ')
+        if "Default:" in default:
+            print "ERROR! There seems to be a duplicate Default entry for " \
+                "msgid '%s'" % entry.msgid
     else:
         print "WARNING! msgid '%s' in 'new' file does not have a default " \
             "translation." % entry.msgid
-        default_new = entry.msgid
-    # try to find the same message in the existing po file
-    target = oldpo.find(entry.msgid)
-    if not target:
-        # not found == new translation
-        outpo.append(polib.POEntry(msgid=entry.msgid, msgstr=default_new,
-            occurrences=entry.occurrences, comment=entry.comment))
-        counter += 1
-    else:
-        match_old = patt.match(target.comment)
-        if match_old:
-            default_old = match_old.group(1).replace('\n', ' ')
-            if "Default:" in default_old:
-                print "ERROR! There seems to be a duplicate Default entry for msgid '%s'" % entry.msgid
-        else:
-            default_old = target.msgid
-        if default_old != default_new:
-            outpo.append(polib.POEntry(msgid=entry.msgid, msgstr=default_new,
-                occurrences=entry.occurrences, comment=entry.comment))
-            counter += 1
-
-if include_untranslated:
-    # Copy all untranslated messages
-    for entry in oldpo.untranslated_entries():
-        match = patt.match(entry.comment)
-        # Write the "Default: " text into the msgstr. Reason: Many translators will
-        # not see comments in their translation program.
         default = entry.msgid
-        if match:
-            default = match.group(1).replace('\n', ' ')
-            if "Default:" in default:
-                print "ERROR! There seems to be a duplicate Default entry for msgid '%s'" % entry.msgid
+    return default
 
-        outpo.append(polib.POEntry(msgid=entry.msgid, msgstr=default, occurrences=entry.occurrences,
-            comment=entry.comment))
-        counter +=1 
+def append_entry(pofile, entry, default):
+    pofile.append(
+        polib.POEntry(
+                    msgid=entry.msgid, 
+                    msgstr=default, 
+                    occurrences=entry.occurrences,
+                    comment=entry.comment)
+                )
 
-outpo.save(outfile)
+def main():
+    if len(sys.argv) < 4:
+        usage(sys.stderr, "\nERROR: Not enough arguments")
 
-sys.exit('Found %d entries that need to be updated' % counter)
+    oldfile = sys.argv[1]
+    if not os.path.isfile(oldfile):
+        usage(sys.stderr, "\nERROR: path to 'old' file is not valid")
+
+    newfile = sys.argv[2]
+    if not os.path.isfile(newfile):
+        usage(sys.stderr, "\nERROR: path to 'new' file is not valid")
+
+    outfile = sys.argv[3]
+
+    oldpo = polib.pofile(oldfile)
+    newpo = polib.pofile(newfile)
+    outpo = polib.POFile()
+
+    # Copy header and metadata
+    outpo.header = newpo.header
+    [outpo.metadata.update({key: val}) for (key, val) in newpo.metadata.items()]
+
+    for entry in newpo:
+        default_old = default_new = u''
+        # fist, extract the default translation of the new (POT) file
+        default_new = get_default(entry)
+
+        # try to find the same message in the existing po file
+        target = oldpo.find(entry.msgid)
+        if not target:
+            # not found == new translation
+            append_entry(outpo, entry, default_new)
+            continue 
+
+        default_old = get_default(target)
+        if default_old != default_new:
+            append_entry(outpo, entry, default_new)
+
+    if len(sys.argv) > 4:
+        extra_entries = []
+        if "--include-untranslated" in sys.argv[4:]:
+            extra_entries += oldpo.untranslated_entries()
+
+        if "--include-fuzzy" in sys.argv[4:]:
+            extra_entries += oldpo.fuzzy_entries()
+            
+        for entry in extra_entries:
+            if entry.obsolete: 
+                # Remove commented entries
+                continue
+            default = get_default(entry)
+            append_entry(outpo, entry, default)
+
+    outpo.save(outfile)
+    sys.exit('Found %d entries that need to be updated' % len(outpo))
+
+if __name__ == "__main__":
+    main()
+

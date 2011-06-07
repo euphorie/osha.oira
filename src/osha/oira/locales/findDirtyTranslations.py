@@ -7,10 +7,12 @@ updated. This is done by comparing the "Default" translations.
 All entries found in this way are written to a new po file that can be sent
 to translators.
 
-usage:    %(program)s old.po new.pot out.po
-old.po   A po file that contains existing, potentially outdated translations
-new.pot  A po/pot file with updated default translations (e.g. via extraction)
-out.po   A name for the output po file
+usage:                  %(program)s old.po new.pot out.po
+old.po                  A po file that contains existing, potentially outdated translations
+new.pot                 A po/pot file with updated default translations (e.g. via extraction)
+out.po                  A name for the output po file
+--include-untranslated  Optional. Specifies wether untranslated entries from old.po must also be
+                        included in the out.po file.
 """
 
 import sys
@@ -34,6 +36,8 @@ if len(sys.argv) < 4:
 oldfile = sys.argv[1]
 newfile = sys.argv[2]
 outfile = sys.argv[3]
+if len(sys.argv) > 4 and sys.argv[4] == "--include-untranslated":
+    include_untranslated = True
 
 if not os.path.isfile(oldfile):
     usage(sys.stderr, "\nERROR: path to 'old' file is not valid")
@@ -81,6 +85,22 @@ for entry in newpo:
             outpo.append(polib.POEntry(msgid=entry.msgid, msgstr=default_new,
                 occurrences=entry.occurrences, comment=entry.comment))
             counter += 1
+
+if include_untranslated:
+    # Copy all untranslated messages
+    for entry in oldpo.untranslated_entries():
+        match = patt.match(entry.comment)
+        # Write the "Default: " text into the msgstr. Reason: Many translators will
+        # not see comments in their translation program.
+        default = entry.msgid
+        if match:
+            default = match.group(1).replace('\n', ' ')
+            if "Default:" in default:
+                print "ERROR! There seems to be a duplicate Default entry for msgid '%s'" % entry.msgid
+
+        outpo.append(polib.POEntry(msgid=entry.msgid, msgstr=default, occurrences=entry.occurrences,
+            comment=entry.comment))
+        counter +=1 
 
 outpo.save(outfile)
 

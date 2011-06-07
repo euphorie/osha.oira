@@ -81,8 +81,11 @@ The script takes 3 arguments:
 1) The existing translation po file
 2) A file with updated "Default" translations; usually this will be a newly generated .pot file
 3) A filename for the output .po file. It will contain a subset of 1) and can be sent to the translators.
+4) --include-untranslated which specifies whether untranslated entries which
+are already in old.po must also be included in the output file
 
-The output file will contain all "dirty" msgids, as well as all new ones.
+The output file will contain all "dirty" msgids, as well as all new ones (and
+existing untranslated ones if --include-untranslated is specified).
 
 Propagating translations to existing po-files
 ---------------------------------------------

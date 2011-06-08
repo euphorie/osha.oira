@@ -112,6 +112,28 @@ that need to be replaced.
 E.g:
 ./getNewEntries.py euphorie.pot ../../../euphorie/deployment/locales/euphorie.pot newWichert.po
 
+Creating po files for the translators
+-------------------------------------
+
+Disclaimer: This is the method I'm currently using. You might have a
+different/better one. [jcbrand]
+
+For both osha.oira and euphorie.deployment, make sure euphorie.pot and the *.po
+files are updated.
+
+* For *osha.oira*: Now use findDirtyTranslations (with --include-untranslated and --include-fuzzy)
+to generate the *.po files for translators.
+
+E.g: 
+./findDirtyTranslations.py sv/LC_MESSAGES/euphorie.po euphorie.pot  oiraSV.po --include-untranslated --include-fuzzy
+
+* For *euphorie.deployment*: Use getNewEntries (with --ignore-translated) to
+generate *.po files for translators
+
+E.g: 
+/getNewEntries.py el/LC_MESSAGES/euphorie.po ../../../euphorie/deployment/locales/el/LC_MESSAGES/euphorie.po euphorieEL.po --ignore-translated
+
+Now we have oiraSV.po and euphorieSV.po which can be sent to the translators.
 
 Propagating translations to existing po-files
 ---------------------------------------------

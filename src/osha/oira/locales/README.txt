@@ -11,8 +11,11 @@ The basic translations for OiRA are located inside the Euphorie package. Additio
 
 The domain used for the osha.oira .po files is still euphorie!
 
-
 As usual, there is one .pot file (euphorie.pot), plus one directory for every required language.
+
+We also have a directory (and .po file) for English, because the default values
+in euphorie.pot aren't used by default. Instead the default values in
+euphorie/deployment/locales/euphorie.pot gets used!
 
 Adding new translations
 =======================

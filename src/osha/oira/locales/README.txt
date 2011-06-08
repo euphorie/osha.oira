@@ -67,7 +67,6 @@ To extract all untranslated messages from a .po file, you can use the script get
   python getUntranslated.py fr/LC_MESSAGES/euphorie.po send_to_translation.po
 
 
-
 Updating existing translations
 ==============================
 
@@ -115,9 +114,6 @@ E.g:
 Creating po files for the translators
 -------------------------------------
 
-Disclaimer: This is the method I'm currently using. You might have a
-different/better one. [jcbrand]
-
 For both osha.oira and euphorie.deployment, make sure euphorie.pot and the *.po
 files are updated.
 
@@ -155,4 +151,5 @@ don't exceed 80 characters but are filled up as much as possible (optimisation).
 Euphorie) does. Therefore a `svn diff` will be useless after applying the script. But if you run the update_catalog step
 from Euphorie's i18nupdate again, the formatting will be reverted to Euphorie style, and a `svn diff` will only show
 the actual changes.
+
 

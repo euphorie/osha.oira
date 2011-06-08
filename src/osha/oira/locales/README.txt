@@ -114,8 +114,7 @@ E.g:
 Creating po files for the translators
 -------------------------------------
 
-For both osha.oira and euphorie.deployment, make sure euphorie.pot and the *.po
-files are updated.
+For both osha.oira and euphorie.deployment, make sure euphorie.pot is updated.
 
 * For *osha.oira*: Now use findDirtyTranslations (with --include-untranslated and --include-fuzzy)
 to generate the *.po files for translators.
@@ -130,6 +129,7 @@ E.g:
 ./getNewEntries.py el/LC_MESSAGES/euphorie.po ../../../euphorie/deployment/locales/el/LC_MESSAGES/euphorie.po euphorieEL.po --ignore-translated
 
 Now we have oiraSV.po and euphorieSV.po which can be sent to the translators.
+
 
 Propagating translations to existing po-files
 ---------------------------------------------

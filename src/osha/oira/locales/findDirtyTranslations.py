@@ -63,6 +63,8 @@ def append_entry(pofile, entry, default):
 def main():
     if len(sys.argv) < 4:
         usage(sys.stderr, "\nERROR: Not enough arguments")
+    elif len(sys.argv) > 6:
+        usage(sys.stderr, "\nERROR: Too many arguments")
 
     oldfile = sys.argv[1]
     if not os.path.isfile(oldfile):

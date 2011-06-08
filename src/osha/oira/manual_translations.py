@@ -182,10 +182,9 @@ _("message_preview_success", default=u"Succesfully created a preview for the "
     u"OiRA Tool. It can be accessed at ${url} .")
 
 _("warning_account_delete_surveys", default=u""
-    u"Please note that by deleting your account, also all your filled out surveys "
-    u"will be deleted. Please make sure to download your surveys from the reports "
-    u"screen prior to deleting your account if you want to keep any.")
-
+    u"Please note that by deleting your account, you will also delete all your "
+    u"sessions. Please make sure you download your reports from the Report step prior "
+    u"to deleting your account, if you want to keep any. ")
 
 _("intro_preview", default=u""
     u"Are you sure you want to create a preview of this OiRA Tool? You can give the "

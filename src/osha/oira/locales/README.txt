@@ -127,7 +127,7 @@ E.g:
 generate *.po files for translators
 
 E.g: 
-/getNewEntries.py el/LC_MESSAGES/euphorie.po ../../../euphorie/deployment/locales/el/LC_MESSAGES/euphorie.po euphorieEL.po --ignore-translated
+./getNewEntries.py el/LC_MESSAGES/euphorie.po ../../../euphorie/deployment/locales/el/LC_MESSAGES/euphorie.po euphorieEL.po --ignore-translated
 
 Now we have oiraSV.po and euphorieSV.po which can be sent to the translators.
 

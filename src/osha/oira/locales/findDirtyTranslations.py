@@ -116,7 +116,14 @@ def main():
             outpo = append_entry(outpo, entry, default)
 
     outpo.save(outfile)
-    sys.exit('Found %d entries that need to be updated' % len(outpo))
+    print "--------------------------------------------------------"
+    print "SOME STATS TO HELP WITH DOUBLE-CHECKING:"
+    print "Untranslated entries in old.po: %d" % len(oldpo.untranslated_entries())
+    print "Fuzzy entries in old.po: %d" % len(oldpo.fuzzy_entries())
+    print "Found %d entries that need to be updated" % len(outpo)
+    print "--------------------------------------------------------"
+
+    sys.exit('Finished sucessfully')
 
 if __name__ == "__main__":
     main()

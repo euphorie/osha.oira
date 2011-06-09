@@ -46,6 +46,15 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
             "report": interfaces.IOSHAReportPhaseSkinLayer, }
 
 
+class OSHAStart(survey.Start):
+    """ Override the 'start' page to provide our own template.
+    """
+    grok.require("euphorie.client.ViewSurvey")
+    grok.layer(interfaces.IOSHAClientSkinLayer)
+    grok.template("start")
+    grok.name("start")
+
+
 class OSHASurveyView(SurveyView):
     grok.layer(NuPloneSkin)
     grok.template("survey_view")

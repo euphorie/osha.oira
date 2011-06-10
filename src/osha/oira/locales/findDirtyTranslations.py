@@ -84,6 +84,9 @@ def main():
     outpo.header = newpo.header
     [outpo.metadata.update({key: val}) for (key, val) in newpo.metadata.items()]
 
+    new_entries = 0
+    changed_entries = 0
+
     for entry in newpo:
         default_old = default_new = u''
         # fist, extract the default translation of the new (POT) file
@@ -92,12 +95,15 @@ def main():
         # try to find the same message in the existing po file
         target = oldpo.find(entry.msgid)
         if not target:
+            new_entries += 1
             # not found == new translation
             outpo = append_entry(outpo, entry, default_new)
             continue 
 
         default_old = get_default(target)
         if default_old != default_new:
+            # Default value is different between the two files
+            changed_entries += 1
             outpo = append_entry(outpo, entry, default_new)
 
     if len(sys.argv) > 4:
@@ -119,6 +125,8 @@ def main():
     print "--------------------------------------------------------"
     print "SOME STATS TO HELP WITH DOUBLE-CHECKING:"
     print "Untranslated entries in old.po: %d" % len(oldpo.untranslated_entries())
+    print "New entries in new.po: %d" % new_entries
+    print "Changed entries in new.po: %d" % changed_entries
     print "Fuzzy entries in old.po: %d" % len(oldpo.fuzzy_entries())
     print "Found %d entries that need to be updated" % len(outpo)
     print "--------------------------------------------------------"

@@ -1,3 +1,24 @@
+var toggleFade = function() {
+    fadeOut()
+    setTimeout(function() { fadeIn(); }, 300);
+    };
+
+var fadeOut = function() {
+    $("a#standardSolutionsLink").css("background-image", "None");
+    };
+
+var fadeIn = function() {
+    $("a#standardSolutionsLink").css("background-image", "url(++resource++euphorie.style/button-default.png)");
+    };
+
+$("a#standardSolutionsLink").ready(
+    setTimeout( 
+        function () { 
+            toggleFade(); 
+            setTimeout( function () { toggleFade(); }, 1000);
+        }, 1000)
+    );
+    
 $("button#report_comment_submit").click(function(event) {
     event.preventDefault();
     var heading = jQuery("#survey_popup_title").text();

@@ -50,7 +50,7 @@
         <tal:repeat repeat="actionplan data/action_plans">
         <dt class="${python:'error' if exists('actionplan/errors') else None}"><tal:i18n translate="">Measure <tal:span i18n:name="index">${repeat/actionplan/number}</tal:span></tal:i18n>
             <button class="small removeButton">Remove</button>
-            <a href="#standardSolutions" class="button small solutions" tal:condition="python:view.solutions" i18n:translate="">Standard solutions</a> 
+            <a href="#standardSolutions"  id="standardSolutionsLink" class="button small solutions" tal:condition="python:view.solutions" i18n:translate="">Standard solutions</a> 
           </dt>
           <dd tal:define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};
                          number repeat/actionplan/number"

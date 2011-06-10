@@ -7,7 +7,8 @@ Changelog
 - #1537, #2510 Merged changes from Euphorie into osha.oira [jcbrand]
 - #3002 Found and fixed some more instances where survey is being used [jcbrand]
 - #3048 Updated the translations [jcbrand]
-- #3323 Add custom start page and merge old patch into this template [jcbrand]
+- #3323 Add custom start page with new text and merge old patch into this template [jcbrand]
+- #2510 Add js to animate the measures button/link
 
 
 0.15 (2011-05-31)

@@ -1,5 +1,7 @@
 from five import grok
+from zope.site.hooks import getSite
 from Acquisition import aq_parent
+from plone.app.kss.plonekssview import PloneKSSView
 from Products.statusmessages.interfaces import IStatusMessage
 from plonetheme.nuplone.skin.interfaces import NuPloneSkin
 from plonetheme.nuplone.skin import actions
@@ -23,6 +25,29 @@ class View(surveygroup.View):
         return templates
 
 View.render = None
+
+
+class AddForm(surveygroup.AddForm, PloneKSSView):
+    """ """
+    grok.context(surveygroup.ISurveyGroup)
+    grok.name("euphorie.surveygroup")
+    grok.require("euphorie.content.AddNewRIEContent")
+
+    def createAndAdd(self, data):
+        """ #3036: Set a 'default' value on the Survey that was newly created in the
+            SurveyGroup.
+        """
+        obj = super(AddForm, self).createAndAdd(data)
+        try:
+            surveys = obj.objectValues("Dexterity Container")
+        except IndexError:
+            return obj
+
+        macro = getSite().unrestrictedTraverse('default_introduction')()
+        for survey in surveys:
+            survey.introduction = macro
+            survey.reindexObject()
+        return obj
 
 
 class Delete(actions.Delete):

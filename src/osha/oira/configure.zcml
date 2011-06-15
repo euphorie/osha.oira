@@ -49,4 +49,12 @@
 
     </configure>
 
+    <browser:page
+        for="*"
+        name="default_introduction"
+        template="templates/default_introduction.pt"
+        permission="zope2.View"
+        layer=".interfaces.IProductLayer"
+        />
+
 </configure>

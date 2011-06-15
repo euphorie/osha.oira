@@ -1,23 +1,16 @@
 var toggleFade = function() {
     fadeOut()
     setTimeout(function() { fadeIn(); }, 300);
-    };
+};
+var fadeOut = function() { $("a#standardSolutionsLink").css("background-image", "None"); };
+var fadeIn = function() { $("a#standardSolutionsLink").css("background-image", "url(++resource++euphorie.style/button-default.png)"); };
 
-var fadeOut = function() {
-    $("a#standardSolutionsLink").css("background-image", "None");
-    };
-
-var fadeIn = function() {
-    $("a#standardSolutionsLink").css("background-image", "url(++resource++euphorie.style/button-default.png)");
-    };
-
-$("a#standardSolutionsLink").ready(
-    setTimeout( 
-        function () { 
-            toggleFade(); 
-            setTimeout( function () { toggleFade(); }, 1000);
-        }, 1000)
-    );
+$("a#standardSolutionsLink").ready(function () {
+    setTimeout( function () { toggleFade(); }, 1000);
+    setTimeout( function () { toggleFade(); }, 2000);
+    setTimeout( function () { toggleFade(); }, 3000);
+    }
+);
     
 $("button#report_comment_submit").click(function(event) {
     event.preventDefault();

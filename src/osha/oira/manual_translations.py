@@ -36,13 +36,6 @@ _("label_sessions", default=u"OiRA Tools")
 _("Survey import", default=u"OiRA Tool import")
 _("Import survey version", default=u"Import OiRA tool version")
 _("Survey version", default=u"OiRA Tool version")
-_("intro_add_surveygroup", default=u"The form will allow you to create a new "
-    u"OiRA Tool.")
-_("survey_source_other", default=u"Base my new OiRA Tool on an existing OiRA "
-    u"Tool of another organisation.")
-_("survey_source_local", default=u"Base my new OiRA Tool on an existing OiRA "
-    u"Tool of my organisation.")
-_("survey_source_scratch", default=u"Create a new OiRA Tool from scratch.")
 _("no_profile_questions", default=u"This OiRA Tool has no profile questions.")
 _("button_create_new", default=u"Create new OiRA Tool")
 _("message_choose_country", default=u"Please choose a country of which you "
@@ -62,9 +55,6 @@ _("upload_success", default=u"Succesfully imported the OiRA Tool")
 _("title_import_sector_survey", default=u"Import sector and OiRA Tool")
 _("intro_add_survey", default=u"The form will allow you to create a new OiRA "
     u"Tool revision.")
-_("label_choose_survey", default=u"Choose a revision of the selected OiRA "
-    u"Tool")
-_("label_choose_surveygroup", default=u"Choose an OiRA Tool")
 _("help_risks_present", default=u"Now that you have identified the existing "
     u"hazards/problems in your company/organisation you need to evaluate the "
     u"risks arising from them.")
@@ -167,9 +157,6 @@ _("list_of_risks", default=u"contents of the tool")
 _("help_evaluation_empty", default=\
     u"No hazards or problems were spotted. Please proceed directly to the "
     u"action plan step.")
-
-_("label_choose_surveygroup", default= u"Choose an OiRA Tool")
-_("label_choose_survey", default= u"Choose a revision of the selected OiRA Tool")
 
 _("help_create_new_version", default=u"Start to write a new OiRA Tool. You "
     u"will be asked whether you want to start off with a copy of an existing "

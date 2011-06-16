@@ -1,4 +1,5 @@
 from five import grok
+from five.pt.pagetemplate import ViewPageTemplateFile
 from zope.site.hooks import getSite
 from Acquisition import aq_parent
 from plone.app.kss.plonekssview import PloneKSSView
@@ -11,6 +12,7 @@ from euphorie.content import surveygroup
 from euphorie.content.survey import ISurvey
 
 grok.templatedir("templates")
+
 
 class View(surveygroup.View):
     grok.layer(NuPloneSkin)
@@ -32,6 +34,7 @@ class AddForm(surveygroup.AddForm, PloneKSSView):
     grok.context(surveygroup.ISurveyGroup)
     grok.name("euphorie.surveygroup")
     grok.require("euphorie.content.AddNewRIEContent")
+    template = ViewPageTemplateFile("templates/surveygroup_add.pt")
 
     def createAndAdd(self, data):
         """ #3036: Set a 'default' value on the Survey that was newly created in the

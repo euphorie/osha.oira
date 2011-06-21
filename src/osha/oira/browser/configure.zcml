@@ -2,6 +2,12 @@
            xmlns:browser="http://namespaces.zope.org/browser"
            i18n_domain="osha.oira">
 
+    <interface
+        interface="..interfaces.IOSHAContentSkinLayer"
+        type="zope.publisher.interfaces.browser.IBrowserSkinType"
+        name="OiRA"
+        />
+
     <browser:resourceDirectory
         name="osha.oira.images"
         directory="images"

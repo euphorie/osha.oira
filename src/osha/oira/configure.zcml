@@ -21,6 +21,7 @@
         />
 
     <include package=".browser" />
+    <include package=".z3cform" />
 
     <configure zcml:condition="installed euphorie.deployment">
         <include package=".tiles" />

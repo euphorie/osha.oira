@@ -7,11 +7,11 @@
     <include package="plone.directives.form" />
 
     <plone:behavior
-        title="OSHA Sector fields"
+        title="OSHA extra Sector fields"
         description="Provide additional OSHA fields"
         provides=".sector.IOSHASector"
         factory=".sector.OSHASector"
         for="plone.dexterity.interfaces.IDexterityContent"
         />
-
+        
 </configure>

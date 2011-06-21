@@ -1,10 +1,15 @@
 from zope.interface import Interface
 from euphorie.client import interfaces
+from plonetheme.nuplone.skin.interfaces import NuPloneSkin
+from osha.oira.z3cform.interfaces import IOiRAFormLayer
 
 class IProductLayer(Interface):
-    """ Marker interface for requests indicating the osha.oira
-        package has been installed.
+    """Marker interface for requests indicating the osha.oira
+       package has been installed.
     """
+
+class IOSHAContentSkinLayer(IOiRAFormLayer, NuPloneSkin):
+    """Marker interface for the CMS/Content editing skin."""
 
 class IOSHAClientSkinLayer(interfaces.IClientSkinLayer):
     """Marker interface for the OSHA client skin."""

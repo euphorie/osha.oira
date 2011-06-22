@@ -4,7 +4,11 @@ Changelog
 0.16 (unreleased)
 -----------------
 
-- #1537, #2510 Merged changes from Euphorie into osha.oira [jcbrand]
+- #1537 Merged changes from Euphorie. 
+        Use radio buttons instead of dropdown.
+        Add a new InfoBubble on the OiRA tool add page.
+        Make fields required to remove "No Value" option. [jcbrand]
+- #2510 Merged changes from Euphorie into osha.oira [jcbrand]
 - #3002 Found and fixed some more instances where survey is being used [jcbrand]
 - #3048 Updated the translations [jcbrand]
 - #3323 Add custom start page with new text and merge old patch into this template [jcbrand]

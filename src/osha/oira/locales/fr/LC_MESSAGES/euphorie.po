@@ -2189,14 +2189,31 @@ msgstr "Commencer"
 #: src/osha/oira/templates/start.pt:28
 msgid "intro_oira_tool"
 msgstr ""
-"Cet outil d'évaluation des risques est principalement prévu pour les micros "
-"(moins de 10 travailleurs) et les petites (moins de 50 travailleurs) "
+"Cet outil d'évaluation des risques est principalement destiné aux micro/très "
+"petites (moins de 10 travailleurs) et petites (moins de 50 travailleurs) "
 "entreprises / organisations."
 
 #. Default: The OiRA tool
 #: src/osha/oira/templates/start.pt:27
 msgid "header_oira_tool"
 msgstr "L'outil OiRA"
+
+#. Default: Workers or workers' representatives with specific responsibility for
+#. the safety and health of workers shall take part in a balanced way or shall be
+#. consulted in advance and in good time by the employer with regard to risk
+#. assessment
+#: src/osha/oira/templates/default_introduction.pt:13
+msgid "intro_consultation_of_workers"
+msgstr ""
+"Les travailleurs ou les représentants des travailleurs ayant une fonction "
+"spécifique pour la sécurité et la santé des travailleurs, participent de "
+"manière équilibrée ou sont consultés au préalable et en temps utile par "
+"l'employeur pour l'évaluation des risques."
+
+#. Default: Consultation and participation of workers
+#: src/osha/oira/templates/default_introduction.pt:12
+msgid "header_consultation_of_workers"
+msgstr "Consultation et participation des travailleurs."
 
 #. Default: Complicated? Not really. It just takes a bit of time. However, the
 #. RA
@@ -2208,16 +2225,14 @@ msgstr "L'outil OiRA"
 #: src/osha/oira/templates/start.pt:25
 msgid "intro_not_complicated"
 msgstr ""
-"Compliqué ? Pas vraiment. Cela prend juste un peu de temps. Cependant, l'ER "
-"est importante. Tellement importante que c'est une exigence légale. Et pour "
-"cause : si les risques ne sont pas évalués ou gérés correctement, un "
-"processus de gestion des risques approprié ne peut être lancé et des mesures"
-" préventives adaptées ne peuvent être trouvées ou mises en place."
+"Compliquée? Pas vraiment. Il suffit d'un peu de temps. Cependant, l’évaluation "
+"est importante. Si importante que le gouvernement l´a rendue obligatoire pour "
+"toutes les  entreprises avec des salariés."
 
 #. Default: The assessment is not complicated
 #: src/osha/oira/templates/start.pt:24
 msgid "header_not_complicated"
-msgstr "L'estimation n'est pas compliquée"
+msgstr "L'évaluation n'est pas compliquée."
 
 #. Default: Including the risks to your employees and your equipment? What if
 #. there
@@ -2233,20 +2248,19 @@ msgstr "L'estimation n'est pas compliquée"
 #: src/osha/oira/templates/start.pt:22
 msgid "intro_risk_aware"
 msgstr ""
-"Comprenant les risques pour vos employés et votre équipement ? Que se "
-"passe-t-il s'il se produit un accident avec l'une des machines ? Que se "
-"passe-t-il si un employé est exposé à des substances dangereuses ? Une "
-"évaluation des risques vous aide à définir vos risques et à vous y attaquer."
-" Une évaluation des risques se compose principalement de deux parties : une "
-"revue de tous les risques dans votre entreprise et un plan d'action sur la "
-"façon de gérer ces risques. Ces deux composants vous permettent de limiter "
-"les risques pour vos employés et votre société, et par conséquent le risque "
-"financier."
+"Y compris les risques pour vos employés et vos équipements? Que faire s'il y a "
+"un accident avec l'une des machines? Que faire si un salarié est exposé à des "
+"substances dangereuses? Une évaluation des risques vous aide à identifier ces "
+"risques et à  les attaquer de front. Une évaluation des risques se compose de "
+"deux parties: une liste des risques pour votre entreprise et un plan d'action "
+"pour y faire face. Ces deux éléments vous permettent de limiter les risques "
+"auxquels vos salariés sont exposés et ceux de  votre entreprise: donc le risque "
+"financier aussi."
 
 #. Default: Are you aware of all the risks?
 #: src/osha/oira/templates/start.pt:21
 msgid "header_risk_aware"
-msgstr "Êtes-vous bien conscient de tous les risques?"
+msgstr "Êtes-vous conscient de tous les risques?"
 
 #. Default: This OiRA Tool has no modules.
 #: src/osha/oira/templates/survey_view.pt:32

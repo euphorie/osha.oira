@@ -88,6 +88,10 @@ def main():
     changed_entries = 0
 
     for entry in newpo:
+        if entry.obsolete:
+            # Ignore commented out entries
+            continue
+
         default_old = default_new = u''
         # fist, extract the default translation of the new (POT) file
         default_new = get_default(entry)
@@ -95,8 +99,8 @@ def main():
         # try to find the same message in the existing po file
         target = oldpo.find(entry.msgid)
         if not target:
-            new_entries += 1
             # not found == new translation
+            new_entries += 1
             outpo = append_entry(outpo, entry, default_new)
             continue 
 

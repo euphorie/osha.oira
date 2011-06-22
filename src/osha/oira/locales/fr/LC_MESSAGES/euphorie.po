@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2011-06-16 14:09+0200\n"
+"POT-Creation-Date: 2011-06-22 15:54+0200\n"
 "PO-Revision-Date: 2011-02-20 16:50+0100\n"
 "Last-Translator: cath\n"
 "Language-Team: en <LL@li.org>\n"
@@ -21,6 +21,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#. Default: Yes
+#: src/osha/oira/company.py:18
+#: src/osha/oira/templates/module_identification.pt:41
+#: src/osha/oira/templates/risk_identification.pt:22
+msgid "label_yes"
+msgstr "Oui"
+
+#. Default: No
+#: src/osha/oira/company.py:21
+msgid "No"
+msgstr ""
 
 #. Default: Describe your general approach to eliminate or (if the risk is not
 #. avoidable) reduce the risk.
@@ -118,15 +130,15 @@ msgstr "Outils OiRA"
 msgid "Survey"
 msgstr "Outil OiRA"
 
-#. Default: OiRA Tools
+#. Default: Sessions
 #: src/osha/oira/manual_translations.py:34
 msgid "help_header_sessions"
-msgstr "Outils OiRA"
+msgstr "Sessions"
 
-#. Default: OiRA Tools
+#. Default: Sessions
 #: src/osha/oira/manual_translations.py:35
 msgid "label_sessions"
-msgstr "Outils OiRA"
+msgstr "Sessions"
 
 #. Default: OiRA Tool import
 #: src/osha/oira/manual_translations.py:36
@@ -845,7 +857,7 @@ msgid "message_not_delete_published_surveygroup"
 msgstr "Vous ne pouvez pas supprimer un outil OiRA qui a été publié."
 
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:8
-msgid "A sector is national organisation for a specific type of industry."
+msgid "A sector is a national organisation for a specific type of industry."
 msgstr ""
 "Un secteur est une organisation nationale pour un type d’activités "
 "spécifique. "
@@ -1378,12 +1390,6 @@ msgstr "Précédent"
 msgid "label_no"
 msgstr "Non"
 
-#. Default: Yes
-#: src/osha/oira/templates/module_identification.pt:41
-#: src/osha/oira/templates/risk_identification.pt:22
-msgid "label_yes"
-msgstr "Oui"
-
 #. Default: Risks
 #: src/osha/oira/templates/module_view.pt:39
 #: src/osha/oira/templates/profilequestion_view.pt:32
@@ -1780,56 +1786,56 @@ msgstr "Faible"
 msgid "header_risk_priority"
 msgstr "Sélectionnez la priorité de ce risque"
 
-#. Default: Very severe
-#: src/osha/oira/templates/risk_evaluation.pt:83
-msgid "severity_very_severe"
-msgstr "Très grave"
-
-#. Default: Severe
-#: src/osha/oira/templates/risk_evaluation.pt:81
-msgid "severity_severe"
-msgstr "Grave"
-
-#. Default: Not very severe
-#: src/osha/oira/templates/risk_evaluation.pt:79
-msgid "severity_not_severe"
-msgstr "Pas très grave"
-
-#. Default: Weak
-#: src/osha/oira/templates/risk_evaluation.pt:77
-msgid "severity_weak"
-msgstr "Faible"
-
-#. Default: What is the severity of the damage ?
-#: src/osha/oira/templates/risk_evaluation.pt:75
-msgid "header_risk_severity"
-msgstr "Quelle est la gravité du dommage ?"
-
 #. Default: Regularly
-#: src/osha/oira/templates/risk_evaluation.pt:71
+#: src/osha/oira/templates/risk_evaluation.pt:83
 msgid "frequency_french_regularly"
 msgstr "Régulièrement"
 
 #. Default: Often
-#: src/osha/oira/templates/risk_evaluation.pt:69
+#: src/osha/oira/templates/risk_evaluation.pt:81
 msgid "frequency_french_often"
 msgstr "Souvent"
 
 #. Default: Not very often
-#: src/osha/oira/templates/risk_evaluation.pt:67
+#: src/osha/oira/templates/risk_evaluation.pt:79
 msgid "frequency_french_not_often"
 msgstr "Pas très souvent"
 
 #. Default: Rare
-#: src/osha/oira/templates/risk_evaluation.pt:65
+#: src/osha/oira/templates/risk_evaluation.pt:77
 msgid "frequency_french_rare"
 msgstr "Rare"
 
 #. Default: How often are people exposed to this risk?
-#: src/osha/oira/templates/risk_evaluation.pt:63
+#: src/osha/oira/templates/risk_evaluation.pt:75
 #: src/osha/oira/templates/risk_evaluation.pt:42
 msgid "header_risk_frequency"
 msgstr "À quelle fréquence les gens sont-ils exposés à ce risque ?"
+
+#. Default: Very severe
+#: src/osha/oira/templates/risk_evaluation.pt:71
+msgid "severity_very_severe"
+msgstr "Très grave"
+
+#. Default: Severe
+#: src/osha/oira/templates/risk_evaluation.pt:69
+msgid "severity_severe"
+msgstr "Grave"
+
+#. Default: Not very severe
+#: src/osha/oira/templates/risk_evaluation.pt:67
+msgid "severity_not_severe"
+msgstr "Pas très grave"
+
+#. Default: Weak
+#: src/osha/oira/templates/risk_evaluation.pt:65
+msgid "severity_weak"
+msgstr "Faible"
+
+#. Default: What is the severity of the damage ?
+#: src/osha/oira/templates/risk_evaluation.pt:63
+msgid "header_risk_severity"
+msgstr "Quelle est la gravité du dommage ?"
 
 #. Default: High (very high) severity
 #: src/osha/oira/templates/risk_evaluation.pt:58

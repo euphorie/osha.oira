@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.16dev5\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2011-06-16 14:09+0200\n"
+"POT-Creation-Date: 2011-06-22 15:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+
+#. Default: Yes
+#: src/osha/oira/company.py:18 src/osha/oira/templates/module_identification.pt:41
+#: src/osha/oira/templates/risk_identification.pt:22
+msgid "label_yes"
+msgstr ""
+
+#. Default: No
+#: src/osha/oira/company.py:21
+msgid "No"
+msgstr ""
 
 #. Default: Describe your general approach to eliminate or (if the risk is not
 #. avoidable) reduce the risk.
@@ -98,12 +109,12 @@ msgstr ""
 msgid "Survey"
 msgstr ""
 
-#. Default: OiRA Tools
+#. Default: Sessions
 #: src/osha/oira/manual_translations.py:34
 msgid "help_header_sessions"
 msgstr ""
 
-#. Default: OiRA Tools
+#. Default: Sessions
 #: src/osha/oira/manual_translations.py:35
 msgid "label_sessions"
 msgstr ""
@@ -704,7 +715,7 @@ msgid "message_not_delete_published_surveygroup"
 msgstr ""
 
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:8
-msgid "A sector is national organisation for a specific type of industry."
+msgid "A sector is a national organisation for a specific type of industry."
 msgstr ""
 
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
@@ -1163,12 +1174,6 @@ msgstr ""
 msgid "label_no"
 msgstr ""
 
-#. Default: Yes
-#: src/osha/oira/templates/module_identification.pt:41
-#: src/osha/oira/templates/risk_identification.pt:22
-msgid "label_yes"
-msgstr ""
-
 #. Default: Risks
 #: src/osha/oira/templates/module_view.pt:39
 #: src/osha/oira/templates/profilequestion_view.pt:32
@@ -1512,55 +1517,55 @@ msgstr ""
 msgid "header_risk_priority"
 msgstr ""
 
-#. Default: Very severe
-#: src/osha/oira/templates/risk_evaluation.pt:83
-msgid "severity_very_severe"
-msgstr ""
-
-#. Default: Severe
-#: src/osha/oira/templates/risk_evaluation.pt:81
-msgid "severity_severe"
-msgstr ""
-
-#. Default: Not very severe
-#: src/osha/oira/templates/risk_evaluation.pt:79
-msgid "severity_not_severe"
-msgstr ""
-
-#. Default: Weak
-#: src/osha/oira/templates/risk_evaluation.pt:77
-msgid "severity_weak"
-msgstr ""
-
-#. Default: What is the severity of the damage ?
-#: src/osha/oira/templates/risk_evaluation.pt:75
-msgid "header_risk_severity"
-msgstr ""
-
 #. Default: Regularly
-#: src/osha/oira/templates/risk_evaluation.pt:71
+#: src/osha/oira/templates/risk_evaluation.pt:83
 msgid "frequency_french_regularly"
 msgstr ""
 
 #. Default: Often
-#: src/osha/oira/templates/risk_evaluation.pt:69
+#: src/osha/oira/templates/risk_evaluation.pt:81
 msgid "frequency_french_often"
 msgstr ""
 
 #. Default: Not very often
-#: src/osha/oira/templates/risk_evaluation.pt:67
+#: src/osha/oira/templates/risk_evaluation.pt:79
 msgid "frequency_french_not_often"
 msgstr ""
 
 #. Default: Rare
-#: src/osha/oira/templates/risk_evaluation.pt:65
+#: src/osha/oira/templates/risk_evaluation.pt:77
 msgid "frequency_french_rare"
 msgstr ""
 
 #. Default: How often are people exposed to this risk?
-#: src/osha/oira/templates/risk_evaluation.pt:63
+#: src/osha/oira/templates/risk_evaluation.pt:75
 #: src/osha/oira/templates/risk_evaluation.pt:42
 msgid "header_risk_frequency"
+msgstr ""
+
+#. Default: Very severe
+#: src/osha/oira/templates/risk_evaluation.pt:71
+msgid "severity_very_severe"
+msgstr ""
+
+#. Default: Severe
+#: src/osha/oira/templates/risk_evaluation.pt:69
+msgid "severity_severe"
+msgstr ""
+
+#. Default: Not very severe
+#: src/osha/oira/templates/risk_evaluation.pt:67
+msgid "severity_not_severe"
+msgstr ""
+
+#. Default: Weak
+#: src/osha/oira/templates/risk_evaluation.pt:65
+msgid "severity_weak"
+msgstr ""
+
+#. Default: What is the severity of the damage ?
+#: src/osha/oira/templates/risk_evaluation.pt:63
+msgid "header_risk_severity"
 msgstr ""
 
 #. Default: High (very high) severity

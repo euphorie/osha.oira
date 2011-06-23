@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2011-06-22 15:54+0200\n"
+"POT-Creation-Date: 2011-06-23 17:56+0200\n"
 "PO-Revision-Date: 2011-02-20 16:50+0100\n"
 "Last-Translator: cath\n"
 "Language-Team: en <LL@li.org>\n"
@@ -21,18 +21,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-
-#. Default: Yes
-#: src/osha/oira/company.py:18
-#: src/osha/oira/templates/module_identification.pt:41
-#: src/osha/oira/templates/risk_identification.pt:22
-msgid "label_yes"
-msgstr "Oui"
-
-#. Default: No
-#: src/osha/oira/company.py:21
-msgid "No"
-msgstr ""
 
 #. Default: Describe your general approach to eliminate or (if the risk is not
 #. avoidable) reduce the risk.
@@ -1390,6 +1378,12 @@ msgstr "Précédent"
 msgid "label_no"
 msgstr "Non"
 
+#. Default: Yes
+#: src/osha/oira/templates/module_identification.pt:41
+#: src/osha/oira/templates/risk_identification.pt:22
+msgid "label_yes"
+msgstr "Oui"
+
 #. Default: Risks
 #: src/osha/oira/templates/module_view.pt:39
 #: src/osha/oira/templates/profilequestion_view.pt:32
@@ -1786,7 +1780,7 @@ msgstr "Faible"
 msgid "header_risk_priority"
 msgstr "Sélectionnez la priorité de ce risque"
 
-#. Default: Regularly
+#. Default: Very often or regularly
 #: src/osha/oira/templates/risk_evaluation.pt:83
 msgid "frequency_french_regularly"
 msgstr "Très fréquente"

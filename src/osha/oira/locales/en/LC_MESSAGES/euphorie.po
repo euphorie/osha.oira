@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.14dev\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2011-06-22 19:24+0200\n"
+"POT-Creation-Date: 2011-06-23 17:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,18 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-
-#. Default: Yes
-#: src/osha/oira/company.py:18
-#: src/osha/oira/templates/module_identification.pt:41
-#: src/osha/oira/templates/risk_identification.pt:22
-msgid "label_yes"
-msgstr "Yes"
-
-#. Default: No
-#: src/osha/oira/company.py:21
-msgid "No"
-msgstr "No"
 
 #. Default: Describe your general approach to eliminate or (if the risk is not
 #. avoidable) reduce the risk.
@@ -1344,6 +1332,12 @@ msgstr "Previous"
 msgid "label_no"
 msgstr "No"
 
+#. Default: Yes
+#: src/osha/oira/templates/module_identification.pt:41
+#: src/osha/oira/templates/risk_identification.pt:22
+msgid "label_yes"
+msgstr "Yes"
+
 #. Default: Risks
 #: src/osha/oira/templates/module_view.pt:39
 #: src/osha/oira/templates/profilequestion_view.pt:32
@@ -2164,8 +2158,8 @@ msgstr "Standard three criteria"
 msgid "help_survey_evaluation_algorithm_standard"
 msgstr ""
 "This method involves risk assessment by Severity x Exposure x Probability, "
-"whereas these have to be understood as follows; Severity of injury linked to"
-" hazard - Exposure (Frequency) to the hazard - Probability of the hazard "
+"whereas these have to be understood as follows; Severity of injury linked to "
+"hazard - Exposure (Frequency) to the hazard - Probability of the hazard "
 "occuring when exposed"
 
 #. Default: Choose a revision of the selected OiRA Tool
@@ -2188,8 +2182,7 @@ msgstr "Choose a country"
 #. Default: Base my new OiRA Tool on an existing OiRA Tool of another organisation
 #: src/osha/oira/templates/surveygroup_add.pt:25
 msgid "survey_source_other"
-msgstr ""
-"Base my new OiRA Tool on an existing OiRA Tool of another organisation"
+msgstr "Base my new OiRA Tool on an existing OiRA Tool of another organisation"
 
 #. Default: Base my new OiRA Tool on an existing OiRA Tool of my organisation
 #: src/osha/oira/templates/surveygroup_add.pt:24
@@ -2278,3 +2271,6 @@ msgstr "Risk Assessment"
 #: src/osha/oira/templates/webhelpers.pt:16
 msgid "oira_name_line_1"
 msgstr "Online interactive"
+
+#~ msgid "No"
+#~ msgstr "No"

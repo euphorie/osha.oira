@@ -7,14 +7,15 @@ updated. This is done by comparing the "Default" translations.
 All entries found in this way are written to a new po file that can be sent
 to translators.
 
-usage:                  %(program)s old.po new.pot out.po
+usage:                  %(program)s old.po new.pot 
 old.po                  A po file that contains existing, potentially outdated translations
 new.pot                 A po/pot file with updated default translations (e.g. via extraction)
-out.po                  A name for the output po file
 --include-untranslated  Optional. Specifies that untranslated entries from old.po must also be
                         included in the out.po file.
 --include-fuzzy         Optional. Specifies that fuzzy entries in old.po must
                         also be included in the out.po file.
+--debug                 Print debug statistics.
+--output                Specify file to which contents must be written, otherwise stdout is used.
 """
 
 import sys
@@ -61,25 +62,37 @@ def append_entry(pofile, entry, default):
     return pofile
 
 def main():
-    if len(sys.argv) < 4:
-        usage(sys.stderr, "\nERROR: Not enough arguments")
-    elif len(sys.argv) > 6:
-        usage(sys.stderr, "\nERROR: Too many arguments")
 
-    oldfile = sys.argv[1]
-    if not os.path.isfile(oldfile):
-        usage(sys.stderr, "\nERROR: path to 'old' file is not valid")
+    include_untranslated = False
+    include_fuzzy = False
+    debug = False
+    extra_entries = []
+    files = []
+    outfile = None
 
-    newfile = sys.argv[2]
-    if not os.path.isfile(newfile):
-        usage(sys.stderr, "\nERROR: path to 'new' file is not valid")
+    for i in range(1, len(sys.argv)):
+        arg = sys.argv.pop()
+        if arg == "--include-untranslated":
+            include_untranslated = True
+        elif arg == "--include-fuzzy":
+            include_fuzzy = True
+        elif arg == "--debug":
+            debug = True
+        elif "--output=" in arg:
+            outfile = arg.split('=')[1]
+        elif os.path.isfile(arg):
+            files.append(arg)
+        else:
+            usage(sys.stderr, "\nERROR: path to file is not valid")
 
-    outfile = sys.argv[3]
+    if len(files) != 2:
+        usage(sys.stderr, "\nERROR: Too many or too few files specified")
 
+    oldfile, newfile = files
     oldpo = polib.pofile(oldfile)
     newpo = polib.pofile(newfile)
     outpo = polib.POFile()
-
+            
     # Copy header and metadata
     outpo.header = newpo.header
     [outpo.metadata.update({key: val}) for (key, val) in newpo.metadata.items()]
@@ -110,30 +123,32 @@ def main():
             changed_entries += 1
             outpo = append_entry(outpo, entry, default_new)
 
-    if len(sys.argv) > 4:
-        extra_entries = []
-        if "--include-untranslated" in sys.argv[4:]:
-            extra_entries += oldpo.untranslated_entries()
+    if include_untranslated:
+        extra_entries += oldpo.untranslated_entries()
+    if include_fuzzy:
+        extra_entries += oldpo.fuzzy_entries()
 
-        if "--include-fuzzy" in sys.argv[4:]:
-            extra_entries += oldpo.fuzzy_entries()
-            
-        for entry in extra_entries:
-            if entry.obsolete: 
-                # Remove commented entries
-                continue
-            default = get_default(entry)
-            outpo = append_entry(outpo, entry, default)
+    for entry in extra_entries:
+        if entry.obsolete: 
+            # Remove commented entries
+            continue
+        default = get_default(entry)
+        outpo = append_entry(outpo, entry, default)
 
-    outpo.save(outfile)
-    print "--------------------------------------------------------"
-    print "SOME STATS TO HELP WITH DOUBLE-CHECKING:"
-    print "Untranslated entries in old.po: %d" % len(oldpo.untranslated_entries())
-    print "New entries in new.po: %d" % new_entries
-    print "Changed entries in new.po: %d" % changed_entries
-    print "Fuzzy entries in old.po: %d" % len(oldpo.fuzzy_entries())
-    print "Found %d entries that need to be updated" % len(outpo)
-    print "--------------------------------------------------------"
+    if outfile:
+        outpo.save(outfile)
+    else:
+        print outpo 
+
+    if debug:
+        print "--------------------------------------------------------"
+        print "SOME STATS TO HELP WITH DOUBLE-CHECKING:"
+        print "Untranslated entries in old.po: %d" % len(oldpo.untranslated_entries())
+        print "New entries in new.po: %d" % new_entries
+        print "Changed entries in new.po: %d" % changed_entries
+        print "Fuzzy entries in old.po: %d" % len(oldpo.fuzzy_entries())
+        print "Found %d entries that need to be updated" % len(outpo)
+        print "--------------------------------------------------------"
 
     sys.exit('Finished sucessfully')
 

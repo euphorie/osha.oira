@@ -856,7 +856,7 @@ msgstr "Secteur"
 
 #: src/osha/oira/profiles/default/types/euphorie.survey.xml:8
 msgid "A version of an OiRA Tool."
-msgstr ""
+msgstr "Une version d'un outil OiRA."
 
 #: src/osha/oira/profiles/default/types/euphorie.survey.xml:7
 msgid "OiRA Tool version"
@@ -2195,11 +2195,15 @@ msgstr "Cotation calculée simple (2 critères)"
 #: src/osha/oira/templates/surveygroup_add.pt:94
 msgid "help_survey_evaluation_algorithm_simplified"
 msgstr ""
+"Cette méthode implique une évaluation des risques par Gravité x Exposition, "
+"tandis que ceux-ci doivent être compris comme suit ; Gravité des blessures "
+"liée au risque - à l'exposition (fréquence) au risque "
 
 #: src/osha/oira/templates/surveygroup_add.pt:92
 msgid ""
 "This is the recommended evaluation algorithm, based on the Kinney method"
 msgstr ""
+"Ceci est l'algorithme d'évaluation recommandé, basé sur la méthode Kinney"
 
 #. Default: Standard three criteria
 #: src/osha/oira/templates/surveygroup_add.pt:90
@@ -2213,6 +2217,10 @@ msgstr "Trois critères standard par défaut : trois critères standard"
 #: src/osha/oira/templates/surveygroup_add.pt:86
 msgid "help_survey_evaluation_algorithm_standard"
 msgstr ""
+"Cette méthode implique une évaluation des risques par Gravité x Exposition x "
+"Probabilité, tandis que ceux-ci doivent être compris comme suit ; Gravité "
+"des blessures liée au risque - à l'exposition (Fréquence) au risque - "
+"Probabilité du risque survenant pendant l'exposition"
 
 #. Default: Choose a revision of the selected OiRA Tool
 #: src/osha/oira/templates/surveygroup_add.pt:77
@@ -2254,6 +2262,8 @@ msgstr "Créer un nouvel Outil OiRA en partant de zéro."
 #: src/osha/oira/templates/surveygroup_add.pt:20
 msgid "help_survey_source"
 msgstr ""
+"En copiant un outil OiRA existant, vous héritez d'abord de cet algorithme "
+"d'évaluation"
 
 #. Default: How would you like to start
 #: src/osha/oira/templates/surveygroup_add.pt:19

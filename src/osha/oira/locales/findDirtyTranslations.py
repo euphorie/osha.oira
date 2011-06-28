@@ -88,7 +88,7 @@ def main():
     if len(files) != 2:
         usage(sys.stderr, "\nERROR: Too many or too few files specified")
 
-    oldfile, newfile = files
+    newfile, oldfile = files
     oldpo = polib.pofile(oldfile)
     newpo = polib.pofile(newfile)
     outpo = polib.POFile()

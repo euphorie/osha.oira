@@ -5,7 +5,7 @@ Changelog
 -----------------
 
 - #1537 Merged changes from Euphorie. 
-        Use radio buttons instead of dropdown.
+        Use radio buttons instead of dropdown
         Add a new InfoBubble on the OiRA tool add page.
         Make fields required to remove "No Value" option. [jcbrand]
 - #2510 Merged changes from Euphorie into osha.oira [jcbrand]

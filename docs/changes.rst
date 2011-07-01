@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.16 (unreleased)
+0.16 (2011-07-01)
 -----------------
 
 - #1537 Merged changes from Euphorie. 

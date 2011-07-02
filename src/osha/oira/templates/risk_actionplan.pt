@@ -40,7 +40,7 @@
     <ol>
         <li tal:repeat="solution view/solutions"><strong class="title">${solution/description}</strong>
         <p class="actionPlan">${solution/action_plan}</p>
-        <p class="preventionplan">${solution/prevention_plan}</p>
+        <p class="preventionPlan">${solution/prevention_plan}</p>
         <p class="requirements">${solution/requirements}</p>
         </li>
     </ol>

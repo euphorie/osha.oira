@@ -1,10 +1,10 @@
 Changelog
 =========
 
-0.17 (unreleased)
+0.17 (2011-07-02)
 -----------------
 
-- Nothing changed yet.
+- Bugfix, when populating Prevention Plan with standard solution [jcbrand]
 
 
 0.16 (2011-07-01)

@@ -8,6 +8,10 @@
       i18n:domain="euphorie"
       meta:interpolation="true"
       metal:use-macro="context/@@layout/macros/layout">
+
+  <head>
+      <script type="text/javascript" src="${client/++resource++euphorie.content.behaviour}/content.js"></script>
+  </head>
   <body> 
     <metal:title fill-slot="title">${view/group/title}</metal:title>
     <metal:bar fill-slot="buttonbar"><tal:tile replace="tile:euphorie.addbar"/></metal:bar>

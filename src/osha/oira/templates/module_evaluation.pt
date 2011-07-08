@@ -36,7 +36,7 @@
     </p>
     <p class="buttonBar">
       <a class="button-medium floatBefore back" href="${view/previous_url}" i18n:translate="label_previous">Previous</a>
-      <a class="button-medium floatAfter" href="${view/next_url}" i18n:translate="label_next">Next</a>
+      <a class="button-medium floatAfter" href="${view/next_url}" i18n:translate="label_next">Save and continue</a>
     </p>
     <!--[if lte IE 7]> <br/> <![endif]-->
     <ol id="steps" tal:define="survey_url webhelpers/survey_url">

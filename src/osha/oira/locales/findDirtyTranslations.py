@@ -10,9 +10,9 @@ to translators.
 usage:                  %(program)s old.po new.pot 
 old.po                  A po file that contains existing, potentially outdated translations
 new.pot                 A po/pot file with updated default translations (e.g. via extraction)
---include-untranslated  Optional. Specifies that untranslated entries from old.po must also be
+--untranslated  Optional. Specifies that untranslated entries from old.po must also be
                         included in the out.po file.
---include-fuzzy         Optional. Specifies that fuzzy entries in old.po must
+--fuzzy         Optional. Specifies that fuzzy entries in old.po must
                         also be included in the out.po file.
 --debug                 Print debug statistics.
 --output                Specify file to which contents must be written, otherwise stdout is used.
@@ -72,9 +72,9 @@ def main():
 
     for i in range(1, len(sys.argv)):
         arg = sys.argv.pop()
-        if arg == "--include-untranslated":
+        if arg == "--untranslated":
             include_untranslated = True
-        elif arg == "--include-fuzzy":
+        elif arg == "--fuzzy":
             include_fuzzy = True
         elif arg == "--debug":
             debug = True
@@ -143,11 +143,13 @@ def main():
     if debug:
         print "--------------------------------------------------------"
         print "SOME STATS TO HELP WITH DOUBLE-CHECKING:"
-        print "Untranslated entries in old.po: %d" % len(oldpo.untranslated_entries())
-        print "New entries in new.po: %d" % new_entries
-        print "Changed entries in new.po: %d" % changed_entries
-        print "Fuzzy entries in old.po: %d" % len(oldpo.fuzzy_entries())
-        print "Found %d entries that need to be updated" % len(outpo)
+        print "In %s: %d untranslated entries and %d fuzzy entries" \
+                            % ( oldfile, 
+                                len(oldpo.untranslated_entries()), 
+                                len(oldpo.fuzzy_entries())
+                            )
+        print "In %s: %d new entries and %d changed entries" % (newfile, new_entries, changed_entries)
+        print "%d entries were updated" % len(outpo)
         print "--------------------------------------------------------"
 
     sys.exit('Finished sucessfully')

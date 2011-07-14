@@ -7,15 +7,15 @@ updated. This is done by comparing the "Default" translations.
 All entries found in this way are written to a new po file that can be sent
 to translators.
 
-usage:                  %(program)s old.po new.pot 
-old.po                  A po file that contains existing, potentially outdated translations
-new.pot                 A po/pot file with updated default translations (e.g. via extraction)
---untranslated  Optional. Specifies that untranslated entries from old.po must also be
-                        included in the out.po file.
---fuzzy         Optional. Specifies that fuzzy entries in old.po must
-                        also be included in the out.po file.
---debug                 Print debug statistics.
---output                Specify file to which contents must be written, otherwise stdout is used.
+usage:           %(program)s old.po new.pot 
+old.po           A po file that contains existing, potentially outdated translations
+new.pot          A po/pot file with updated default translations (e.g. via extraction)
+--untranslated   Optional. Specifies that untranslated entries from old.po must also be
+                 included in the out.po file.
+--fuzzy          Optional. Specifies that fuzzy entries in old.po must
+                 also be included in the out.po file.
+--debug          Print debug statistics.
+--output         Specify file to which contents must be written, otherwise stdout is used.
 """
 
 import sys

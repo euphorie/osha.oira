@@ -45,11 +45,6 @@ alsoProvides(IOSHASector, IFormFieldProvider)
 class OSHASector(MetadataBase):
     statistics_level = DCFieldProperty(IOSHASector['statistics_level'])
 
-class Settings(sector.Settings):
-    """ Override so that we can use our own template
-    """ 
-    grok.template("settings")
-
 class AdminEdit(dexterity.EditForm):
     grok.context(sector.ISector)
     grok.require("cmf.ManagePortal")

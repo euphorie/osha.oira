@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.18dev\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2011-07-08 13:10+0200\n"
+"POT-Creation-Date: 2011-07-14 19:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -191,14 +191,19 @@ msgstr ""
 
 #. Default: You are about to print the report... please complete the optional form
 #. and then proceed.
+#. Default: Company details
 #: src/osha/oira/manual_translations.py:61
+#: src/osha/oira/templates/report_company.pt:17
 msgid "hader_company_details"
 msgstr ""
 
 #. Default: You are free to provide the information below. This information is
 #. meant to improve the tools and the services provided. This data will not appear
 #. in the report.
+#. Default: Please fill out your company details on this form. The data on this
+#. form will also appear in the report.
 #: src/osha/oira/manual_translations.py:63
+#: src/osha/oira/templates/report_company.pt:19
 msgid "company_details_intro"
 msgstr ""
 
@@ -528,7 +533,7 @@ msgid "help_statistics_level"
 msgstr ""
 
 #. Default: You can not delete a sector that contains published OiRA tools.
-#: src/osha/oira/sector.py:127
+#: src/osha/oira/sector.py:122
 msgid "message_not_delete_published_sector"
 msgstr ""
 
@@ -724,9 +729,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:96
 #: src/osha/oira/templates/module_actionplan.pt:98
 #: src/osha/oira/templates/module_evaluation.pt:83
-#: src/osha/oira/templates/module_identification.pt:93
+#: src/osha/oira/templates/module_identification.pt:101
 #: src/osha/oira/templates/report.pt:101
 #: src/osha/oira/templates/report_actionplan.pt:316
+#: src/osha/oira/templates/report_company.pt:96
 #: src/osha/oira/templates/report_identification.pt:121
 #: src/osha/oira/templates/risk_actionplan.pt:279
 #: src/osha/oira/templates/risk_evaluation.pt:156
@@ -738,9 +744,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:95
 #: src/osha/oira/templates/module_actionplan.pt:97
 #: src/osha/oira/templates/module_evaluation.pt:82
-#: src/osha/oira/templates/module_identification.pt:92
+#: src/osha/oira/templates/module_identification.pt:100
 #: src/osha/oira/templates/report.pt:100
 #: src/osha/oira/templates/report_actionplan.pt:315
+#: src/osha/oira/templates/report_company.pt:95
 #: src/osha/oira/templates/report_identification.pt:120
 #: src/osha/oira/templates/risk_actionplan.pt:278
 #: src/osha/oira/templates/risk_evaluation.pt:155
@@ -753,10 +760,11 @@ msgstr ""
 #: src/osha/oira/templates/disclaimer.pt:67
 #: src/osha/oira/templates/module_actionplan.pt:96
 #: src/osha/oira/templates/module_evaluation.pt:81
-#: src/osha/oira/templates/module_identification.pt:91
+#: src/osha/oira/templates/module_identification.pt:99
 #: src/osha/oira/templates/profile.pt:104 src/osha/oira/templates/register.pt:41
 #: src/osha/oira/templates/report.pt:99
 #: src/osha/oira/templates/report_actionplan.pt:314
+#: src/osha/oira/templates/report_company.pt:94
 #: src/osha/oira/templates/report_identification.pt:119
 #: src/osha/oira/templates/risk_actionplan.pt:277
 #: src/osha/oira/templates/risk_evaluation.pt:154
@@ -766,12 +774,14 @@ msgid "navigation_help"
 msgstr ""
 
 #. Default: Sessions
+#. Default: Surveys
 #: src/osha/oira/templates/actionplan.pt:93
 #: src/osha/oira/templates/module_actionplan.pt:95
 #: src/osha/oira/templates/module_evaluation.pt:80
-#: src/osha/oira/templates/module_identification.pt:90
+#: src/osha/oira/templates/module_identification.pt:98
 #: src/osha/oira/templates/profile.pt:103 src/osha/oira/templates/report.pt:98
 #: src/osha/oira/templates/report_actionplan.pt:313
+#: src/osha/oira/templates/report_company.pt:93
 #: src/osha/oira/templates/report_identification.pt:118
 #: src/osha/oira/templates/risk_actionplan.pt:276
 #: src/osha/oira/templates/risk_evaluation.pt:153
@@ -784,9 +794,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:92
 #: src/osha/oira/templates/module_actionplan.pt:94
 #: src/osha/oira/templates/module_evaluation.pt:79
-#: src/osha/oira/templates/module_identification.pt:89
+#: src/osha/oira/templates/module_identification.pt:97
 #: src/osha/oira/templates/profile.pt:102 src/osha/oira/templates/report.pt:97
 #: src/osha/oira/templates/report_actionplan.pt:312
+#: src/osha/oira/templates/report_company.pt:92
 #: src/osha/oira/templates/report_identification.pt:117
 #: src/osha/oira/templates/risk_actionplan.pt:275
 #: src/osha/oira/templates/risk_evaluation.pt:152
@@ -799,9 +810,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:86
 #: src/osha/oira/templates/module_actionplan.pt:87
 #: src/osha/oira/templates/module_evaluation.pt:73
-#: src/osha/oira/templates/module_identification.pt:82
+#: src/osha/oira/templates/module_identification.pt:90
 #: src/osha/oira/templates/profile.pt:96 src/osha/oira/templates/report.pt:90
 #: src/osha/oira/templates/report_actionplan.pt:300
+#: src/osha/oira/templates/report_company.pt:85
 #: src/osha/oira/templates/report_identification.pt:110
 #: src/osha/oira/templates/risk_actionplan.pt:268
 #: src/osha/oira/templates/risk_evaluation.pt:145
@@ -814,9 +826,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:85
 #: src/osha/oira/templates/module_actionplan.pt:86
 #: src/osha/oira/templates/module_evaluation.pt:72
-#: src/osha/oira/templates/module_identification.pt:81
+#: src/osha/oira/templates/module_identification.pt:89
 #: src/osha/oira/templates/profile.pt:95 src/osha/oira/templates/report.pt:89
 #: src/osha/oira/templates/report_actionplan.pt:299
+#: src/osha/oira/templates/report_company.pt:84
 #: src/osha/oira/templates/report_identification.pt:109
 #: src/osha/oira/templates/risk_actionplan.pt:267
 #: src/osha/oira/templates/risk_evaluation.pt:144
@@ -829,9 +842,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:80
 #: src/osha/oira/templates/module_actionplan.pt:78
 #: src/osha/oira/templates/module_evaluation.pt:67
-#: src/osha/oira/templates/module_identification.pt:76
+#: src/osha/oira/templates/module_identification.pt:84
 #: src/osha/oira/templates/profile.pt:92 src/osha/oira/templates/report.pt:84
 #: src/osha/oira/templates/report_actionplan.pt:294
+#: src/osha/oira/templates/report_company.pt:79
 #: src/osha/oira/templates/report_identification.pt:104
 #: src/osha/oira/templates/risk_actionplan.pt:259
 #: src/osha/oira/templates/risk_evaluation.pt:139
@@ -844,9 +858,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:79
 #: src/osha/oira/templates/module_actionplan.pt:77
 #: src/osha/oira/templates/module_evaluation.pt:66
-#: src/osha/oira/templates/module_identification.pt:75
+#: src/osha/oira/templates/module_identification.pt:83
 #: src/osha/oira/templates/profile.pt:91 src/osha/oira/templates/report.pt:83
 #: src/osha/oira/templates/report_actionplan.pt:293
+#: src/osha/oira/templates/report_company.pt:78
 #: src/osha/oira/templates/report_identification.pt:103
 #: src/osha/oira/templates/risk_actionplan.pt:258
 #: src/osha/oira/templates/risk_evaluation.pt:138
@@ -859,9 +874,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:74
 #: src/osha/oira/templates/module_actionplan.pt:72
 #: src/osha/oira/templates/module_evaluation.pt:58
-#: src/osha/oira/templates/module_identification.pt:70
+#: src/osha/oira/templates/module_identification.pt:78
 #: src/osha/oira/templates/profile.pt:88 src/osha/oira/templates/report.pt:78
 #: src/osha/oira/templates/report_actionplan.pt:288
+#: src/osha/oira/templates/report_company.pt:73
 #: src/osha/oira/templates/report_identification.pt:98
 #: src/osha/oira/templates/risk_actionplan.pt:253
 #: src/osha/oira/templates/risk_evaluation.pt:130
@@ -874,9 +890,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:73
 #: src/osha/oira/templates/module_actionplan.pt:71
 #: src/osha/oira/templates/module_evaluation.pt:57
-#: src/osha/oira/templates/module_identification.pt:69
+#: src/osha/oira/templates/module_identification.pt:77
 #: src/osha/oira/templates/profile.pt:87 src/osha/oira/templates/report.pt:77
 #: src/osha/oira/templates/report_actionplan.pt:287
+#: src/osha/oira/templates/report_company.pt:72
 #: src/osha/oira/templates/report_identification.pt:97
 #: src/osha/oira/templates/risk_actionplan.pt:252
 #: src/osha/oira/templates/risk_evaluation.pt:129
@@ -889,9 +906,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:68
 #: src/osha/oira/templates/module_actionplan.pt:66
 #: src/osha/oira/templates/module_evaluation.pt:52
-#: src/osha/oira/templates/module_identification.pt:61
+#: src/osha/oira/templates/module_identification.pt:69
 #: src/osha/oira/templates/profile.pt:84 src/osha/oira/templates/report.pt:72
 #: src/osha/oira/templates/report_actionplan.pt:282
+#: src/osha/oira/templates/report_company.pt:67
 #: src/osha/oira/templates/report_identification.pt:92
 #: src/osha/oira/templates/risk_actionplan.pt:247
 #: src/osha/oira/templates/risk_evaluation.pt:124
@@ -904,9 +922,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:67
 #: src/osha/oira/templates/module_actionplan.pt:65
 #: src/osha/oira/templates/module_evaluation.pt:51
-#: src/osha/oira/templates/module_identification.pt:60
+#: src/osha/oira/templates/module_identification.pt:68
 #: src/osha/oira/templates/profile.pt:83 src/osha/oira/templates/report.pt:71
 #: src/osha/oira/templates/report_actionplan.pt:281
+#: src/osha/oira/templates/report_company.pt:66
 #: src/osha/oira/templates/report_identification.pt:91
 #: src/osha/oira/templates/risk_actionplan.pt:246
 #: src/osha/oira/templates/risk_evaluation.pt:123
@@ -919,9 +938,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:62
 #: src/osha/oira/templates/module_actionplan.pt:60
 #: src/osha/oira/templates/module_evaluation.pt:46
-#: src/osha/oira/templates/module_identification.pt:55
+#: src/osha/oira/templates/module_identification.pt:63
 #: src/osha/oira/templates/profile.pt:79 src/osha/oira/templates/report.pt:66
 #: src/osha/oira/templates/report_actionplan.pt:276
+#: src/osha/oira/templates/report_company.pt:61
 #: src/osha/oira/templates/report_identification.pt:86
 #: src/osha/oira/templates/risk_actionplan.pt:241
 #: src/osha/oira/templates/risk_evaluation.pt:118
@@ -934,9 +954,10 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:61
 #: src/osha/oira/templates/module_actionplan.pt:59
 #: src/osha/oira/templates/module_evaluation.pt:45
-#: src/osha/oira/templates/module_identification.pt:54
+#: src/osha/oira/templates/module_identification.pt:62
 #: src/osha/oira/templates/profile.pt:78 src/osha/oira/templates/report.pt:65
 #: src/osha/oira/templates/report_actionplan.pt:275
+#: src/osha/oira/templates/report_company.pt:60
 #: src/osha/oira/templates/report_identification.pt:85
 #: src/osha/oira/templates/risk_actionplan.pt:240
 #: src/osha/oira/templates/risk_evaluation.pt:117
@@ -1003,6 +1024,7 @@ msgid "expl_actionplan_1"
 msgstr ""
 
 #. Default: OiRA - Online interactive Risk Assessment
+#. Default: OiRA
 #: src/osha/oira/templates/actionplan.pt:12
 #: src/osha/oira/templates/disclaimer.pt:12 src/osha/oira/templates/frontpage.pt:15
 #: src/osha/oira/templates/module_actionplan.pt:12
@@ -1010,6 +1032,7 @@ msgstr ""
 #: src/osha/oira/templates/module_identification.pt:11
 #: src/osha/oira/templates/register.pt:12 src/osha/oira/templates/report.pt:12
 #: src/osha/oira/templates/report_actionplan.pt:13
+#: src/osha/oira/templates/report_company.pt:12
 #: src/osha/oira/templates/report_identification.pt:12
 #: src/osha/oira/templates/risk_actionplan.pt:12
 #: src/osha/oira/templates/risk_evaluation.pt:12
@@ -1134,28 +1157,35 @@ msgstr ""
 msgid "header_regions"
 msgstr ""
 
-#. Default: Save and continue
+#. Default: Next
 #: src/osha/oira/templates/module_actionplan.pt:53
 #: src/osha/oira/templates/module_evaluation.pt:39
-#: src/osha/oira/templates/module_identification.pt:48
-#: src/osha/oira/templates/register.pt:35 src/osha/oira/templates/report.pt:53
-#: src/osha/oira/templates/risk_actionplan.pt:157
-#: src/osha/oira/templates/risk_evaluation.pt:102
-#: src/osha/oira/templates/risk_identification.pt:30
-#: src/osha/oira/templates/sessions.pt:81
+#: src/osha/oira/templates/module_identification.pt:54
+#: src/osha/oira/templates/register.pt:35 src/osha/oira/templates/sessions.pt:81
 msgid "label_next"
 msgstr ""
 
 #. Default: Previous
 #: src/osha/oira/templates/module_actionplan.pt:52
 #: src/osha/oira/templates/module_evaluation.pt:38
-#: src/osha/oira/templates/module_identification.pt:47
+#: src/osha/oira/templates/module_identification.pt:48
 #: src/osha/oira/templates/register.pt:34
+#: src/osha/oira/templates/report_company.pt:52
 #: src/osha/oira/templates/risk_actionplan.pt:156
 #: src/osha/oira/templates/risk_evaluation.pt:101
 #: src/osha/oira/templates/risk_identification.pt:29
 #: src/osha/oira/templates/sessions.pt:80 src/osha/oira/templates/start.pt:30
 msgid "label_previous"
+msgstr ""
+
+#. Default: Save and continue
+#: src/osha/oira/templates/module_identification.pt:50
+#: src/osha/oira/templates/report.pt:53
+#: src/osha/oira/templates/report_company.pt:53
+#: src/osha/oira/templates/risk_actionplan.pt:157
+#: src/osha/oira/templates/risk_evaluation.pt:102
+#: src/osha/oira/templates/risk_identification.pt:30
+msgid "label_save_and_continue"
 msgstr ""
 
 #. Default: No
@@ -1381,6 +1411,63 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:27
 #: src/osha/oira/templates/report_identification.pt:24
 msgid "button_download"
+msgstr ""
+
+#. Default: other channel
+#: src/osha/oira/templates/report_company.pt:43
+msgid "referer_other"
+msgstr ""
+
+#. Default: health and safety experts
+#: src/osha/oira/templates/report_company.pt:42
+msgid "referer_health_safety_expert"
+msgstr ""
+
+#. Default: The European Agency for Safety and Health at Work, European social
+#. partners, etc.
+#: src/osha/oira/templates/report_company.pt:41
+msgid "info_referer_eu_institution"
+msgstr ""
+
+#. Default: an European institution/administration
+#: src/osha/oira/templates/report_company.pt:40
+msgid "referer_eu_institution"
+msgstr ""
+
+#. Default: Ministry, Labour Inspectorate, National Institute for Safety and Health
+#. at Work, etc.
+#: src/osha/oira/templates/report_company.pt:39
+msgid "info_referer_national_public_institution"
+msgstr ""
+
+#. Default: a national public institution/administration
+#: src/osha/oira/templates/report_company.pt:38
+msgid "referer_national_public_institution"
+msgstr ""
+
+#. Default: a trade union organisation
+#: src/osha/oira/templates/report_company.pt:37
+msgid "referer_trade_union"
+msgstr ""
+
+#. Default: an employers' organisation
+#: src/osha/oira/templates/report_company.pt:36
+msgid "referer_employers_organisation"
+msgstr ""
+
+#. Default: Through which channel did you learn about this tool?
+#: src/osha/oira/templates/report_company.pt:35
+msgid "label_referer"
+msgstr ""
+
+#. Default: Your country
+#: src/osha/oira/templates/report_company.pt:25
+msgid "label_company_country"
+msgstr ""
+
+#. Default: Please fix the indicated errors.
+#: src/osha/oira/templates/report_company.pt:18
+msgid "warn_fix_errors"
 msgstr ""
 
 #. Default: You responded negative to the above statement.
@@ -1700,130 +1787,6 @@ msgstr ""
 msgid "header_session"
 msgstr ""
 
-#. Default: Cancel
-#: src/osha/oira/templates/settings.pt:99
-#: src/osha/oira/templates/surveygroup_add.pt:110
-msgid "button_cancel"
-msgstr ""
-
-#. Default: Save changes
-#: src/osha/oira/templates/settings.pt:98
-msgid "button_save_changes"
-msgstr ""
-
-#: src/osha/oira/templates/settings.pt:89 src/osha/oira/templates/settings.pt:81
-#: src/osha/oira/templates/settings.pt:60 src/osha/oira/templates/settings.pt:33
-#: src/osha/oira/templates/surveygroup_add.pt:20
-msgid "Information"
-msgstr ""
-
-#. Default: Give the name of the person responsible for the OiRA tools of this
-#. sector.
-#: src/osha/oira/templates/settings.pt:89
-msgid "help_sector_contactperson"
-msgstr ""
-
-#. Default: Contact person
-#: src/osha/oira/templates/settings.pt:87
-msgid "label_contact_person"
-msgstr ""
-
-#. Default: This is the password that you need to log on to this editor
-#. environment.
-#: src/osha/oira/templates/settings.pt:81
-msgid "help_sector_password"
-msgstr ""
-
-#. Default: Password
-#: src/osha/oira/templates/settings.pt:79
-msgid "label_password"
-msgstr ""
-
-#. Default: You may get the best results if you upload a logo as a ${transparent}
-#. PNG file of at least 100 pixels in height. Uploading larger images is fine, the
-#. logo will be scaled down to the right size automatically.
-#: src/osha/oira/templates/settings.pt:74
-msgid "logo_instructions"
-msgstr ""
-
-#. Default: transparent
-#: src/osha/oira/templates/settings.pt:75
-msgid "logo_instructions_transparent"
-msgstr ""
-
-#. Default: My own
-#: src/osha/oira/templates/settings.pt:69
-msgid "logo_my_own"
-msgstr ""
-
-#. Default: Which logo you would like to display in the top left corner?
-#: src/osha/oira/templates/settings.pt:62
-msgid "label_logo_selection"
-msgstr ""
-
-#. Default: The logo will appear on both the client side app that your user group
-#. will see as well as on this editor environment in the top left corner. Make sure
-#. your image is of format png, jpg or gif and does not contain any special
-#. characters. The new logo will only become visible after you've saved your
-#. changes.
-#: src/osha/oira/templates/settings.pt:60
-msgid "help_sector_logo"
-msgstr ""
-
-#. Default: Logo
-#: src/osha/oira/templates/settings.pt:58
-msgid "label_logo"
-msgstr ""
-
-#. Default: Support colour
-#: src/osha/oira/templates/settings.pt:50
-msgid "label_support_colour"
-msgstr ""
-
-#. Default: Main colour
-#: src/osha/oira/templates/settings.pt:41
-msgid "label_main_colour"
-msgstr ""
-
-#. Default: Please use the colour pickers below to select your organisation's
-#. colours. It's best to use a darker colour for the main colour and a lighter
-#. colour for the support colour.
-#: src/osha/oira/templates/settings.pt:36
-msgid "help_colour_picker"
-msgstr ""
-
-#. Default: The colours you select here apply only for the client side of the
-#. application. Try to pick colours that have high enough contrast to keep the text
-#. on each button legible.
-#: src/osha/oira/templates/settings.pt:33
-msgid "help_sector_colours"
-msgstr ""
-
-#. Default: Restore to original colours
-#: src/osha/oira/templates/settings.pt:30
-msgid "button_reset_colours"
-msgstr ""
-
-#. Default: Colour scheme
-#: src/osha/oira/templates/settings.pt:27
-msgid "header_colour_scheme"
-msgstr ""
-
-#. Default: Preview
-#: src/osha/oira/templates/settings.pt:20
-msgid "label_preview"
-msgstr ""
-
-#. Default: Please provide a description of your sector
-#: src/osha/oira/templates/settings.pt:16
-msgid "label_sector_description"
-msgstr ""
-
-#. Default: Settings
-#: src/osha/oira/templates/settings.pt:12
-msgid "header_settings"
-msgstr ""
-
 #. Default: Start
 #: src/osha/oira/templates/start.pt:31
 msgid "label_start_survey"
@@ -1868,6 +1831,11 @@ msgstr ""
 #. Default: Evaluation phase
 #: src/osha/oira/templates/survey_view.pt:22
 msgid "label_evaluation_phase"
+msgstr ""
+
+#. Default: Cancel
+#: src/osha/oira/templates/surveygroup_add.pt:110
+msgid "button_cancel"
 msgstr ""
 
 #. Default: Create
@@ -1938,6 +1906,10 @@ msgstr ""
 #. Default: Create a new OiRA Tool from scratch
 #: src/osha/oira/templates/surveygroup_add.pt:23
 msgid "survey_source_scratch"
+msgstr ""
+
+#: src/osha/oira/templates/surveygroup_add.pt:20
+msgid "Information"
 msgstr ""
 
 #. Default: By copying an existing OiRA tool you also inherit its evaluation

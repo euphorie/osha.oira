@@ -43,9 +43,17 @@
             checked="${python:'checked' if (context.postponed is False and context.skip_children) else None}"
             /><tal:span i18n:translate="label_no">No</tal:span></label>
         </fieldset>
+
         <p class="buttonBar">
             <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="previous floatBefore back">Previous</button>
-            <button type="submit" name="next" value="next" i18n:translate="label_next" class="next floatAfter">Save and continue</button>
+
+            <button type="submit" name="next" value="next" class="next floatAfter"
+                tal:condition="module/optional"
+                i18n:translate="label_save_and_continue">Save and continue</button>
+
+            <button type="submit" name="next" value="next" class="next floatAfter"
+                tal:condition="not:module/optional"
+                i18n:translate="label_next">Next</button>
         </p>
     </form>
     <ol id="steps" tal:define="survey_url webhelpers/survey_url">

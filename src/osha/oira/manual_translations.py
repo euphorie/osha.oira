@@ -58,8 +58,6 @@ _("intro_add_survey", default=u"The form will allow you to create a new OiRA "
 _("help_risks_present", default=u"Now that you have identified the existing "
     u"hazards/problems in your company/organisation you need to evaluate the "
     u"risks arising from them.")
-_("hader_company_details", default=u"You are about to print the report... "
-    u"please complete the optional form and then proceed.")
 _("label_solution_direction", default=u"Solution")
 _("Succesfully published the survey", default=u"Succesfully published the "
     u"OiRA Tool")

@@ -60,9 +60,6 @@ _("help_risks_present", default=u"Now that you have identified the existing "
     u"risks arising from them.")
 _("hader_company_details", default=u"You are about to print the report... "
     u"please complete the optional form and then proceed.")
-_("company_details_intro", default=u"You are free to provide the information "
-    u"below. This information is meant to improve the tools and the services "
-    u"provided. This data will not appear in the report.")
 _("label_solution_direction", default=u"Solution")
 _("Succesfully published the survey", default=u"Succesfully published the "
     u"OiRA Tool")

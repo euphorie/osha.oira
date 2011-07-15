@@ -17,7 +17,8 @@
     <h1 i18n:translate="hader_company_details">Company details</h1>
     <p class="message error" tal:condition="view/status" i18n:translate="warn_fix_errors">Please fix the indicated errors.</p>
     <p i18n:translate="company_details_intro">
-        Please fill out your company details on this form. The data on this form will also appear in the report.
+        You are free to provide the information below. This information is meant to improve the tools and the services provided. 
+        This data will not appear in the report.
     </p>
     <form action="${request/getURL}" method="${view/method}" enctype="${view/enctype}" class="concise">
     <fieldset>

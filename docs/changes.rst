@@ -4,8 +4,8 @@ Changelog
 0.18 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- #3386: Rename "Next" and "Continue" buttons to "Save and continue" when on
+         forms. [jcbrand]
 
 0.17 (2011-07-02)
 -----------------

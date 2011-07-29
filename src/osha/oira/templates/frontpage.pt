@@ -402,7 +402,6 @@
         </tal:loop>
       </li>
     </ul>
-    <!--[if lte IE 7]> <br/> <![endif]-->
 
     <h2 i18n:translate="header_regions">Regions</h2>
     <ul class="countries">
@@ -415,6 +414,8 @@
         </li>
     </ul>
 
+    <!-- ACHTUNG! Fixes a weird bug that prevents the OiRA logo from being displayed -->
+    <!--[if lte IE 7]> <br/> <![endif]-->
     <ul id="navigation">
       <metal:home use-macro="webhelpers/macros/homelink"/>
     </ul>

@@ -92,8 +92,7 @@
                 <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'"><a href="#top5-footnote">*</a></sup>
             </h4>
             <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority">
-            This is a <strong i18n:name="priority_value"><tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low</tal:span><tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium</tal:span><tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high</tal:span></strong> priority risk.
-            </p>
+            This is a <strong i18n:name="priority_value"><tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low</tal:span><tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium</tal:span><tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high</tal:span></strong> priority risk.</p>
         </div>
     </tal:block>
 
@@ -173,8 +172,7 @@
             <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'"><a href="#top5-footnote">*</a></sup>
         </h4>
         <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority">
-        This is a <strong i18n:name="priority_value"><tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low</tal:span> <tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium</tal:span> <tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high</tal:span></strong> priority risk.
-        </p>
+        This is a <strong i18n:name="priority_value"><tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low</tal:span> <tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium</tal:span> <tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high</tal:span></strong> priority risk.</p>
     </div>
     </tal:block>
 
@@ -210,8 +208,7 @@
             <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'"><a href="#top5-footnote">*</a></sup>
         </h4>
         <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority">
-        This is a <strong i18n:name="priority_value"><tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low</tal:span><tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium</tal:span><tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high</tal:span></strong> priority risk.
-        </p>
+        This is a <strong i18n:name="priority_value"><tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low</tal:span><tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium</tal:span><tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high</tal:span></strong> priority risk.</p>
     </tal:block>
     <blockquote class="comments" tal:condition="python:node.comment and node.comment.strip()"><p tal:content="node/comment">
         Here are the comments the user has added to this risk.
@@ -246,8 +243,7 @@
         </h4>
         <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority">
         This is a <strong i18n:name="priority_value"><tal:span tal:condition="python:node.priority=='low'" i18n:translate="risk_priority_low">low</tal:span>
-        <tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium</tal:span><tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high</tal:span></strong> priority risk.
-        </p>
+        <tal:span tal:condition="python:node.priority=='medium'" i18n:translate="risk_priority_medium">medium</tal:span><tal:span tal:condition="python:node.priority=='high'" i18n:translate="risk_priority_high">high</tal:span></strong> priority risk.</p>
     </tal:block>
 
     <blockquote class="comments" tal:condition="python:node.comment and node.comment.strip()">

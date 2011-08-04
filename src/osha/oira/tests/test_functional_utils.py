@@ -1,41 +1,36 @@
 from Testing.ZopeTestCase import TestCase
 from osha.oira import utils
 
+class MockActionPlan:
+    def __init__(self, action_plan):
+        self.action_plan = action_plan
+
+class MockModule:
+    type = 'module'
+    def __init__(self, id, depth):
+        self.id = id
+        self.depth = depth
+
+class MockRisk:
+    type = 'risk'
+    def __init__(self, id, probability, action_plans=[]):
+        self.id = id
+        self.probability = probability
+        self.action_plans = action_plans
+
+
 class TestUtils(TestCase):
-    """Base class used for test cases
-    """
+    """ """
 
     def test_utils_methods(self):
-        """ Tests:
+        """ Tests the following methods in osha.oira/utils.py:
                 remove_empty_modules(ls)
                 get_unactioned_nodes(ls)
                 get_actioned_nodes(ls)
         """
-
-        class action_plan:
-
-            def __init__(self, action_plan):
-                self.action_plan = action_plan
-
-
-        class module:
-            type = 'module'
-
-            def __init__(self, id, depth):
-                self.id = id
-                self.depth = depth
-
-        class risk:
-            type = 'risk'
-
-            def __init__(self, id, probability, action_plans=[]):
-                self.id = id
-                self.probability = probability
-                self.action_plans = action_plans
-
-        m = module
-        r = risk
-        ap = action_plan('dummy')
+        m = MockModule 
+        r = MockRisk
+        ap = MockActionPlan('dummy')
 
         # Test a few variations of unactioned risks:
         nodes = [m('1', 1), r('1.1', 0), r('1.2', 0), m('2', 1), m('2.1', 2), m('2.1.1', 3), r('2.1.1.1', 0, )]

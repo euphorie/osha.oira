@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: osha.oira 0.18dev\n"
+"Project-Id-Version: osha.oira 0.18dev2\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2011-07-15 15:43+0200\n"
+"POT-Creation-Date: 2011-08-04 15:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -501,6 +501,18 @@ msgstr ""
 
 #: src/osha/oira/module.py:70
 msgid "Add ${name}"
+msgstr ""
+
+#. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
+#. of probability, frequency and severity) method.
+#: src/osha/oira/risk.py:51
+msgid "help_evaluation_method_kinney"
+msgstr ""
+
+#. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
+#. of frequency and severity) method.
+#: src/osha/oira/risk.py:58
+msgid "help_evaluation_method_french"
 msgstr ""
 
 #. Default: Statistics Level
@@ -1135,7 +1147,7 @@ msgid "header_disclaimer"
 msgstr ""
 
 #. Default: Regions
-#: src/osha/oira/templates/frontpage.pt:407
+#: src/osha/oira/templates/frontpage.pt:406
 msgid "header_regions"
 msgstr ""
 

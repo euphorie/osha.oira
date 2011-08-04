@@ -79,17 +79,17 @@ Finding dirty translations
 Whenever a default (English) string changes, all translations of it become dirty and need to be re-translated.
 We use the script findDirtyTranslations.py to generate a po file of all dirty entries per language.
 It is compares the "Default" entries to achieve this
-The script takes 3 arguments:
+The script takes 2 arguments:
 1) The existing translation po file
 2) A file with updated "Default" translations; usually this will be a newly generated .pot file
-3) A filename for the output .po file. It will contain a subset of 1) and can be sent to the translators.
-4) --include-untranslated which specifies whether untranslated entries which
+3) --output (optional) specifies file to which contents must be written, otherwise stdout is used.
+4) --untranslated which specifies whether untranslated entries which
 are already in old.po must also be included in the output file
-5) --include-fuzzy which specifies whether fuzzy entries should also be
+5) --fuzzy which specifies whether fuzzy entries should also be
 included.
 
 E.g:
-./findDirtyTranslations.py sv/LC_MESSAGES/euphorie.po euphorie.pot  dirtySV.po --include-untranslated --include-fuzzy
+./findDirtyTranslations.py sv/LC_MESSAGES/euphorie.po euphorie.pot  --untranslated --fuzzy --output=dirtySV.po
 
 The output file will contain all "dirty" msgids, as well as all new ones (and
 existing untranslated or fuzzy ones if specified).
@@ -119,11 +119,11 @@ Creating po files for the translators
 
 For both osha.oira and euphorie.deployment, make sure euphorie.pot is updated.
 
-* For *osha.oira*: Now use findDirtyTranslations (with --include-untranslated and --include-fuzzy)
+* For *osha.oira*: Now use findDirtyTranslations (with --untranslated and --fuzzy)
 to generate the *.po files for translators.
 
 E.g: 
-./findDirtyTranslations.py sv/LC_MESSAGES/euphorie.po euphorie.pot  oiraSV.po --include-untranslated --include-fuzzy
+./findDirtyTranslations.py sv/LC_MESSAGES/euphorie.po euphorie.pot --untranslated --fuzzy --output=dirtySV.po
 
 * For *euphorie.deployment*: Use getNewEntries (with --ignore-translated) to
 generate *.po files for translators

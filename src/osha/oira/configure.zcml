@@ -8,8 +8,16 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="euphorie">
 
-    <five:registerPackage package="." />
+    <!-- XXX: osha.oira's translations override Euphorie's, because osha.oira's
+         ZCML slug is loaded first. This is determined in the buildout.cfg 
+         
+        Uncomment the line below when testing Euphorie, otherwise osha.oira's
+        translations will break the tests.
+    -->
     <i18n:registerTranslations directory="locales" />
+
+
+    <five:registerPackage package="." />
 
     <genericsetup:registerProfile
         name="default"
@@ -20,35 +28,36 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <include package="euphorie.deployment" />
     <include package=".browser" />
+    <include package=".tiles" />
     <include package=".z3cform" />
 
-    <configure zcml:condition="installed euphorie.deployment">
-        <include package=".tiles" />
-        <include package="euphorie.deployment" />
-        <include file="behaviors.zcml" />
-        <grok:grok package="." />
+    <!-- XXX: Uncomment the line below when testing Euphorie, to avoid
+         osha.oira's customizations
+    -->
+    <grok:grok package="." />
 
-        <adapter
-            factory=".client.ClientPublishTraverser"
-            provides="zope.publisher.interfaces.IPublishTraverse"
-            />
+    <include file="behaviors.zcml" />
 
-        <adapter
-            factory=".survey.OSHASurveyPublishTraverser"
-            for="euphorie.content.survey.ISurvey .interfaces.IOSHAClientSkinLayer"
-            provides="zope.publisher.interfaces.IPublishTraverse"/>
+    <adapter
+        factory=".client.ClientPublishTraverser"
+        provides="zope.publisher.interfaces.IPublishTraverse"
+        />
 
-        <browser:page
-            for="*"
-            layer=".interfaces.IOSHAClientSkinLayer"
-            class=".utils.OSHAWebHelpers"
-            name="webhelpers"
-            template="templates/webhelpers.pt"
-            permission="zope2.View"
-            />
+    <adapter
+        factory=".survey.OSHASurveyPublishTraverser"
+        for="euphorie.content.survey.ISurvey .interfaces.IOSHAClientSkinLayer"
+        provides="zope.publisher.interfaces.IPublishTraverse"/>
 
-    </configure>
+    <browser:page
+        for="*"
+        layer=".interfaces.IOSHAClientSkinLayer"
+        class=".utils.OSHAWebHelpers"
+        name="webhelpers"
+        template="templates/webhelpers.pt"
+        permission="zope2.View"
+        />
 
     <browser:page
         for="*"

@@ -3,7 +3,7 @@
 #          JC Brand <brand@syslab.com>
 
 """%(program)s: For every untranslated or fuzzy entry, 
-copy its "Default" string for its value. If no default value exists, copy it's
+copy its "Default" string for its value. If no default value exists, copy its
 msgid.
 
 usage:                  %(program)s file.po
@@ -16,11 +16,20 @@ import os
 import re
 import polib
 
-from findDirtyTranslations import usage
 from findDirtyTranslations import get_default
 from findDirtyTranslations import append_entry
 
 patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
+
+
+def usage(stream, msg=None):
+    if msg:
+        print >> stream, msg
+        print >> stream
+    program = os.path.basename(sys.argv[0])
+    print >> stream, __doc__ % {"program": program}
+    sys.exit(0)
+
 
 def main():
     if len(sys.argv) < 3:

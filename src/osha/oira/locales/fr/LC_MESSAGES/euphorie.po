@@ -692,21 +692,21 @@ msgstr "Mesure ${index}"
 #: src/osha/oira/survey.py:363 src/osha/oira/templates/risk_actionplan.pt:178
 #: src/osha/oira/templates/risk_actionplan.pt:62
 msgid "label_measure_action_plan"
-msgstr "Approche générale (pour éliminer ou réduire le risque)"
+msgstr "Décrivez cette mesure"
 
 #. Default: Specific action(s) required to implement this approach
 #: src/osha/oira/survey.py:365 src/osha/oira/templates/risk_actionplan.pt:181
 #: src/osha/oira/templates/risk_actionplan.pt:65
 msgid "label_measure_prevention_plan"
-msgstr "Action(s) spécifique(s) requise(s) pour mettre en place cette approche"
+msgstr "Précisez les actions à mettre en place pour rendre cette mesure effective"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/survey.py:367 src/osha/oira/templates/risk_actionplan.pt:184
 #: src/osha/oira/templates/risk_actionplan.pt:68
 msgid "label_measure_requirements"
 msgstr ""
-"Niveau d'expérience et/ou d'exigence nécessaires / fonction(s) de "
-"l'entreprise concernées par cette mesure"
+"Indiquez quelles compétences spécifiques sont nécessaires pour appliquer cette "
+"mesure ou préciser quelle(s) fonction(s) de l'entreprise est (sont) à mobiliser"
 
 #. Default: Who is responsible?
 #: src/osha/oira/survey.py:369 src/osha/oira/templates/risk_actionplan.pt:190
@@ -793,7 +793,7 @@ msgstr ""
 #: src/osha/oira/templates/report_actionplan.pt:56
 msgid "header_unanswered_risks"
 msgstr ""
-"Risques/problèmes qui ont été \"parqués\" et qui doivent toujours être gérés"
+"Risques/problèmes en attente et qui restent à traiter"
 
 #. Default: Hazards/problems that are not present in your organisation
 #: src/osha/oira/survey.py:522
@@ -1521,9 +1521,7 @@ msgstr ""
 #. in this field.
 #: src/osha/oira/templates/report.pt:29
 msgid "label_report_comment"
-msgstr ""
-"Veuillez saisir tout commentaire devant figurer dans le rapport dans ce "
-"champ."
+msgstr "Vous pouvez saisir ici un commentaire qui apparaîtra dans le rapport"
 
 #. Default: Now that you have finished identifying all the risks in your
 #. organisation and created an action plan you can create a report which lists all
@@ -1536,7 +1534,9 @@ msgstr ""
 "organisation et créé un plan d'action, vous pouvez créer un rapport qui "
 "répertorie tous vos résultats. Vous pouvez, si vous le voulez, ajouter des "
 "commentaires supplémentaires qui seront inclus dans ce rapport dans le champ "
-"ci-dessous."
+"ci-dessous. Vous pouvez également télécharger ce rapport et l'enregistrer sur votre "
+"ordinateur. Vous pourrez ainsi le personnaliser, le compléter et le modifier "
+"comme vous le souhaitez."
 
 #. Default: Reporting
 #: src/osha/oira/templates/report.pt:18
@@ -1611,19 +1611,19 @@ msgstr "${responsible} est responsable de cette tâche."
 #: src/osha/oira/templates/report_actionplan.pt:112
 msgid "report_measure_requirements"
 msgstr ""
-"Niveau d'expérience et/ou d'exigence nécessaires / fonction(s) de "
-"l'entreprise concernées par cette mesure"
+"Indiquez quelles compétences spécifiques sont nécessaires pour appliquer cette "
+"mesure ou préciser quelle(s) fonction(s) de l'entreprise est (sont) à mobiliser"
 
 #. Default: Specific action(s) required to implement this approach:
 #: src/osha/oira/templates/report_actionplan.pt:108
 msgid "report_measure_preventionplan"
 msgstr ""
-"Action(s) spécifique(s) requise(s) pour mettre en place cette approche :"
+"Précisez les actions à mettre en place pour rendre cette mesure effective:"
 
 #. Default: General approach (to eliminate or reduce the risk):
 #: src/osha/oira/templates/report_actionplan.pt:104
 msgid "report_measure_actionplan"
-msgstr "Approche générale (pour éliminer ou réduire le risque) :"
+msgstr "Décrivez cette mesure"
 
 #. Default: Print
 #: src/osha/oira/templates/report_actionplan.pt:30

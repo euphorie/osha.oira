@@ -1,5 +1,3 @@
-from Acquisition import aq_inner
-from zope.component import getMultiAdapter
 from five import grok
 from euphorie.client import risk
 from euphorie.content.risk import Edit as RiskEditForm
@@ -9,28 +7,17 @@ from osha.oira import _
 
 grok.templatedir("templates")
 
-class OSHAMixin():
-
-    def get_language(self):
-        context = aq_inner(self.context)
-        portal_state = getMultiAdapter(
-                                (context, self.request), 
-                                name=u'plone_portal_state'
-                                )
-        return portal_state.language()
-
-
-class OSHAIdentificationView(risk.IdentificationView, OSHAMixin):
+class OSHAIdentificationView(risk.IdentificationView):
     grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
     grok.template("risk_identification")
 
 
-class OSHAEvaluationView(risk.EvaluationView, OSHAMixin):
+class OSHAEvaluationView(risk.EvaluationView):
     grok.layer(interfaces.IOSHAEvaluationPhaseSkinLayer)
     grok.template("risk_evaluation")
 
 
-class OSHAActionPlanView(risk.ActionPlanView, OSHAMixin):
+class OSHAActionPlanView(risk.ActionPlanView):
     grok.layer(interfaces.IOSHAActionPlanPhaseSkinLayer)
     grok.template("risk_actionplan")
 
@@ -42,10 +29,7 @@ class OSHAFormMixin:
             algorithm (Kinney or French)
         """
         evalgroup = self.groups[self.order.index('header_evaluation')]
-        evalfield = evalgroup.fields.get('evaluation_method', None)
-        if not evalfield:
-            return
-
+        evalfield = evalgroup.fields.get('evaluation_method')
         if self.evaluation_algorithm == 'kinney':
             evalfield.field.description = \
                 _("help_evaluation_method_kinney",

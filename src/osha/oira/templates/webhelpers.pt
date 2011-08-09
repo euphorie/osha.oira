@@ -35,13 +35,13 @@
     </tal:block>
     <link tal:define="sector_url webhelpers/sector_url" tal:condition="sector_url" rel="stylesheet" type="text/css" media="all" href="${sector_url}/@@sector.css" />
     <link rel="stylesheet" type="text/css" media="all" href="client/++resource++osha.oira.stylesheets/main.css" />
-    <tal:lang define="lang webhelpers/get_language">
-        <link tal:condition="python:lang in ['el', 'el-cy', 'el-gr']"
-              rel="stylesheet" 
-              type="text/css" 
-              media="all" 
-              href="client/++resource++osha.oira.stylesheets/lowercase_headers.css" />
-    </tal:lang>
+    <link 
+        tal:define="portal_state context/@@plone_portal_state"
+        tal:condition="python:portal_state.language() in ['el', 'el-cy', 'el-gr']"
+            rel="stylesheet" 
+            type="text/css" 
+            media="all" 
+            href="client/++resource++osha.oira.stylesheets/lowercase_headers.css" />
     <style type="text/css" media="all">
         .report #appendix img {
             margin-bottom: 0;

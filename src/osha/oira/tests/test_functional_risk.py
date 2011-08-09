@@ -1,6 +1,13 @@
+import zope.component
+from z3c.form.interfaces import IFieldWidget
+from zope.schema.vocabulary import SimpleVocabulary
+from zope.schema.vocabulary import SimpleTerm
 from zope.interface import alsoProvides
 from osha.oira.tests.base import OiRATestCase
 from osha.oira import interfaces
+
+from z3c.form.browser.select import SelectWidget
+from plonetheme.nuplone.z3cform.widget import SingleRadioWidget
 
 class RiskTest(OiRATestCase):
 
@@ -18,6 +25,10 @@ class RiskTest(OiRATestCase):
                                 evaluation_algorithm=algorithm)
         survey = self._create(surveygroup, "euphorie.survey", "survey")
         return self._create(survey, "euphorie.module", "module")
+
+    def createRisk(self, algorithm='kinney'):
+        module = self.createModule(algorithm)
+        return self._create(module, "euphorie.risk", "risk")
 
     def testDynamicDescription(self):
         """ #3343: Customize infoBubble description according to calculation
@@ -48,4 +59,47 @@ class RiskTest(OiRATestCase):
                     'help_evaluation_method_%s' % risk_type
                     )
             self.portal.sectors.nl.manage_delObjects(['sector'])
+
+
+    def testChoiceWidget(self):
+        """ #1537 The Choice fields must be uniform and all radio buttons.
+        """
+        self.loginAsPortalOwner()
+        module = self.createModule()
+        alsoProvides(self.portal.REQUEST, interfaces.IOSHAContentSkinLayer)
+        form = module.unrestrictedTraverse('++add++euphorie.risk').form_instance
+        form.updateFields()
+
+        # Test with vocabs of different lengths
+        for i in [3, 5, 10]:
+            v = SimpleVocabulary([SimpleTerm("%d" % k) for k in range(0, i)])
+            field = form.schema.get('evaluation_method')
+            field.vocabulary = v
+            form.updateWidgets()
+
+            widget = zope.component.getMultiAdapter(
+                (field, form.request), IFieldWidget)
+
+            if i in [3, 5]:
+                self.assertEqual(type(widget), SingleRadioWidget)
+            else:
+                self.assertEqual(type(widget), SelectWidget)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

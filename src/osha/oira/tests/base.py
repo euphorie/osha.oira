@@ -1,11 +1,11 @@
 import os.path
 from zope.component import getUtility
-from zope.interface import alsoProvides
 from z3c.saconfig import Session
 from z3c.appconfig.interfaces import IAppConfig
 from Testing.ZopeTestCase import installProduct
 from collective.testcaselayer import ptc
 from Products.PloneTestCase import PloneTestCase
+from euphorie.deployment.tests.functional import EuphorieFunctionalTestCase
 from euphorie.client import model
 
 PloneTestCase.setupPloneSite()
@@ -69,4 +69,22 @@ class OiRATestCase(PloneTestCase.PloneTestCase):
     layer = OiRALayer
 
 
+
+class OiRAFunctionalTestCase(EuphorieFunctionalTestCase):
+    layer = OiRATestLayer 
+
+    def runTest(self):
+        pass
+
+    def adminBrowser(self):
+        """Return a browser logged in as the site owner."""
+        from Products.PloneTestCase.setup import portal_owner
+        from Products.PloneTestCase.setup import default_password
+        from Products.Five.testbrowser import Browser
+        browser=Browser()
+        browser.open("%s/@@login" % self.portal.absolute_url())
+        browser.getControl(name="__ac_name").value=portal_owner
+        browser.getControl(name="__ac_password").value=default_password
+        browser.getForm(id="loginForm").submit()
+        return browser
 

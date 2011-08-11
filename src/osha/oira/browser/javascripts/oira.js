@@ -12,6 +12,7 @@ $("a#standardSolutionsLink").ready(function () {
     }
 );
     
+/* See ticket #3398: Disabled temporarily
 $("button#report_comment_submit").click(function(event) {
     event.preventDefault();
     var heading = jQuery("#survey_popup_title").text();
@@ -34,6 +35,7 @@ $("button#report_comment_submit").click(function(event) {
         }
     ); 
 });
+*/
 
 $("a#oira_legal_hide_anchor").click(function(event) {
     event.preventDefault();

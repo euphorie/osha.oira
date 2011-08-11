@@ -51,7 +51,7 @@
       <input type="hidden" name="action" value="new"/>
       <fieldset class="concise">
         <label><tal:span i18n:translate="label_select_new_session">Start a new session choosing one of the following sectoral tools</tal:span>:
-            <select style="position: relative; left: 100%; margin-left: 1em; float: left; margin-right: -100%;" name="survey">
+            <select class="oira_sessions_select" name="survey">
                 <option tal:repeat="survey view/surveys" value="${survey/id}">${survey/title}</option>
             </select>
         </label>

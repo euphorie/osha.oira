@@ -12,9 +12,8 @@
                   default_introduction nocall:context/@@default_introduction">
 <head>
     <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <metal:meta use-macro="webhelpers/macros/headers"/>
     <metal:css use-macro="webhelpers/macros/css"/>
-    <meta name="viewport" content="width=device-width, user-scalable=yes"/>
 </head>
 <body class="start ${webhelpers/extra_css}">
     <h1>${context/title}</h1>

@@ -1,17 +1,20 @@
 Changelog
 =========
 
-0.18 (unreleased)
+0.18 (2011-08-15)
 -----------------
 
-- #3386: Rename "Next" and "Continue" buttons to "Save and continue" when on
-         forms. [jcbrand]
+- #3044 Last wave of English changes [jcbrand]
+- #3049 Design fixes [jcbrand]
+- #3343 Customize InfoBubble description according to calculation method [jcbrand]
+- #3361 Correct position of an info bubble [jcbrand]
+- #3365 Add favicon [jcbrand]  
+- #3386: Rename "Next" and "Continue" buttons to "Save and continue" when on forms. [jcbrand]
 
 0.17 (2011-07-02)
 -----------------
 
 - Bugfix, when populating Prevention Plan with standard solution [jcbrand]
-
 
 0.16 (2011-07-01)
 -----------------

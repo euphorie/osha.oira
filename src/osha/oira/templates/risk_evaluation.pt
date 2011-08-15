@@ -61,24 +61,14 @@
         <tal:french condition="python:algorithm=='french'">
           <fieldset class="comprehensive radioList" tal:define="value context/effect">
             <legend i18n:translate="header_risk_severity">What is the severity of the damage ?</legend>
-            <div class="oira_evaluation_tooltip">
             <label><input type="radio" name="severity:int" value="1" checked="${python:'checked' if value==1 else None}"/>
-                <tal:span i18n:translate="severity_weak">Weak</tal:span>
-                <a class="icon info clicktip oira_evaluation_tooltip" href="${webhelpers/help_url}#sessions" 
-                    i18n:translate="severity_weak_tooltip">No need to stop working</a></label>
+              <tal:span i18n:translate="severity_weak">Weak</tal:span></label>
             <label><input type="radio" name="severity:int" value="5" checked="${python:'checked' if value==5 else None}"/>
-                <tal:span i18n:translate="severity_not_severe">Not very severe</tal:span>
-                <a class="icon info clicktip oira_evaluation_tooltip" href="${webhelpers/help_url}#sessions" 
-                    i18n:translate="severity_not_severe_tooltip">Need to stop working for less than three days</a></label>
+              <tal:span i18n:translate="severity_not_severe">Not very severe</tal:span></label>
             <label><input type="radio" name="severity:int" value="7" checked="${python:'checked' if value==7 else None}"/>
-                <tal:span i18n:translate="severity_severe">Severe</tal:span>
-                <a class="icon info clicktip oira_evaluation_tooltip" href="${webhelpers/help_url}#sessions" 
-                    i18n:translate="severity_severe_tooltip">Need to stop working for more than 3 days</a></label>
+              <tal:span i18n:translate="severity_severe">Severe</tal:span></label>
             <label><input type="radio" name="severity:int" value="10" checked="${python:'checked' if value==10 else None}"/>
-                <tal:span i18n:translate="severity_very_severe">Very severe</tal:span>
-                <a class="icon info clicktip oira_evaluation_tooltip" href="${webhelpers/help_url}#sessions" 
-                    i18n:translate="severity_very_severe_tooltip">Irreversible injury, incurable illness, death</a></label>
-            </div>
+              <tal:span i18n:translate="severity_very_severe">Very severe</tal:span></label>
           </fieldset>
 
           <fieldset class="comprehensive radioList" tal:define="value context/frequency">

@@ -109,9 +109,6 @@ _("help_risk_type", default=u'"Priority risk" is one of the high risks in '
     u'the sector. "Risk" is related to the workplace or to the work carried '
     u'out. "Policy" refers to agreements, procedures, and management '
     u'decisions.')
-_("help_evaluation_method", default=u"Choose between ESTIMATED (rough "
-    u"estimation) or CALCULATED (combination of probability, frequency and "
-    u"severity) method.")
 _("help_default_priority", default=u"You can help the end-user by selecting a "
     u"default priority. He/she can still change the priority.")
 _("help_default_severity", default=u"Indicate the severity if this risk "

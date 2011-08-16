@@ -372,11 +372,19 @@ msgstr ""
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
 #. of probability, frequency and severity) method.
-#: src/osha/oira/manual_translations.py:112
-msgid "help_evaluation_method"
+#: src/osha/oira/risk.py:35
+msgid "help_evaluation_method_kinney"
 msgstr ""
 "Choisir entre méthode ESTIMÉE (estimation grossière) ou CALCULÉE "
 "(combinaison de probabilité, fréquence et gravité)."
+
+#. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
+#. (combination of frequency and severity) method.
+#: src/osha/oira/risk.py:42
+msgid "help_evaluation_method_french"
+msgstr ""
+"Choisir entre méthode ESTIMÉE (estimation grossière) ou CALCULÉE "
+"(combinaison de fréquence et gravité)."
 
 #. Default: You can help the end-user by selecting a default priority. He/she can
 #. still change the priority.
@@ -492,6 +500,11 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:160
 msgid "title_help_unpublished"
 msgstr "Supprimer cet outil OiRA des clients en ligne."
+
+#. Default: Remove
+#: src/osha/oira/templates/risk_actionplan.pt:52
+msgid "Remove"
+msgstr "Supprimer"
 
 #. Default: Succesfully created a preview for the OiRA Tool. It can be accessed at
 #. ${url} .
@@ -667,11 +680,10 @@ msgid "risk_priority_high"
 msgstr "élevé"
 
 #. Default: This is a ${priority_value} priority risk.
-#. Default: This is a ${priority_value} priority risk.
 #: src/osha/oira/survey.py:307
-#: src/osha/oira/templates/report_actionplan.pt:247
-#: src/osha/oira/templates/report_actionplan.pt:212
-#: src/osha/oira/templates/report_actionplan.pt:175
+#: src/osha/oira/templates/report_actionplan.pt:244
+#: src/osha/oira/templates/report_actionplan.pt:210
+#: src/osha/oira/templates/report_actionplan.pt:174
 #: src/osha/oira/templates/report_actionplan.pt:94
 #: src/osha/oira/templates/risk_actionplan.pt:25
 msgid "risk_priority"
@@ -705,8 +717,8 @@ msgstr "Précisez les actions à mettre en place pour rendre cette mesure effect
 #: src/osha/oira/templates/risk_actionplan.pt:68
 msgid "label_measure_requirements"
 msgstr ""
-"Indiquez quelles compétences spécifiques sont nécessaires pour appliquer cette "
-"mesure ou préciser quelle(s) fonction(s) de l'entreprise est (sont) à mobiliser"
+"Indiquez les compétences spécifiques nécessaires ou précisez quelle(s) "
+"fonction(s) de l'entreprise est (sont) à mobiliser."
 
 #. Default: Who is responsible?
 #: src/osha/oira/survey.py:369 src/osha/oira/templates/risk_actionplan.pt:190
@@ -896,19 +908,18 @@ msgid "navigation_help"
 msgstr "Aide"
 
 #. Default: Sessions
-#. Default: Surveys
 #: src/osha/oira/templates/actionplan.pt:93
 #: src/osha/oira/templates/module_actionplan.pt:95
 #: src/osha/oira/templates/module_evaluation.pt:80
 #: src/osha/oira/templates/module_identification.pt:98
 #: src/osha/oira/templates/profile.pt:103 src/osha/oira/templates/report.pt:98
-#: src/osha/oira/templates/report_actionplan.pt:313
+#: src/osha/oira/templates/report_actionplan.pt:309
 #: src/osha/oira/templates/report_company.pt:94
 #: src/osha/oira/templates/report_identification.pt:118
 #: src/osha/oira/templates/risk_actionplan.pt:276
 #: src/osha/oira/templates/risk_evaluation.pt:153
 #: src/osha/oira/templates/risk_identification.pt:88
-#: src/osha/oira/templates/start.pt:62
+#: src/osha/oira/templates/start.pt:61
 msgid "navigation_surveys"
 msgstr "Sessions"
 
@@ -1169,7 +1180,6 @@ msgstr ""
 "utiliser, ou vous pouvez ajouter vos propres mesures."
 
 #. Default: OiRA - Online interactive Risk Assessment
-#. Default: OiRA
 #: src/osha/oira/templates/actionplan.pt:12
 #: src/osha/oira/templates/disclaimer.pt:12
 #: src/osha/oira/templates/frontpage.pt:15
@@ -1184,7 +1194,7 @@ msgstr ""
 #: src/osha/oira/templates/risk_evaluation.pt:12
 #: src/osha/oira/templates/risk_identification.pt:12
 #: src/osha/oira/templates/sessions.pt:13 src/osha/oira/templates/start.pt:14
-#: src/osha/oira/templates/webhelpers.pt:15
+#: src/osha/oira/templates/webhelpers.pt:23
 msgid "title_tool"
 msgstr "OiRA - Évaluation interactive des risques en ligne"
 
@@ -1611,8 +1621,8 @@ msgstr "${responsible} est responsable de cette tâche."
 #: src/osha/oira/templates/report_actionplan.pt:112
 msgid "report_measure_requirements"
 msgstr ""
-"Indiquez quelles compétences spécifiques sont nécessaires pour appliquer cette "
-"mesure ou préciser quelle(s) fonction(s) de l'entreprise est (sont) à mobiliser"
+"Indiquez les compétences spécifiques nécessaires ou précisez quelle(s) "
+"fonction(s) de l'entreprise est (sont) à mobiliser."
 
 #. Default: Specific action(s) required to implement this approach:
 #: src/osha/oira/templates/report_actionplan.pt:108

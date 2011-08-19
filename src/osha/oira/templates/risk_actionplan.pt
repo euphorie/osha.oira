@@ -171,7 +171,6 @@
         <a href="#standardSolutions" class="button small solutions" tal:condition="python:view.solutions" i18n:translate="">Standard solutions</a> 
       </dt>
       <dd>
-        <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</a>
         <div class="span-7 colborder">
           <fieldset class="condensed">
             <legend>Description of the measure</legend>
@@ -188,12 +187,10 @@
         <div class="span-7 last">
           <fieldset class="condensed">
             <label><tal:span i18n:translate="label_action_plan_responsible">Who is responsible?</tal:span>
-              <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_responsible_tooltip">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</a>
               <input type="text" name="measure.responsible:utf8:ustring:records"/>
             </label>
 
             <label><tal:span i18n:translate="label_action_plan_budget">Budget (in Euro)</tal:span>
-              <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_budget_tooltip">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</a>
               <input type="text" name="measure.budget:records"/>
             </label>
             <fieldset class="condensed">

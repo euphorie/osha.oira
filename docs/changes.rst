@@ -1,6 +1,18 @@
 Changelog
 =========
 
+0.20 (2011-08-23)
+-----------------
+
+- Updated Spanish translations [thomas_w]
+- IE 6 fix. Remove the tooltips in AJAX add measure form. [jcbrand] 
+- Stop using minified css for IE6. [jcbrand]
+
+0.19 (2011-08-16)
+-----------------
+
+- Updated French translations [jcbrand]
+
 0.18 (2011-08-15)
 -----------------
 

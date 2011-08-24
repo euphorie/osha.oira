@@ -94,7 +94,7 @@ $("button#report_comment_submit").click(function(event) {
             if (result === true) {
                 usernames.push(username);
                 jQuery.cookie('survey_ignore', usernames.join('|'), {path: tool_url});
-                // window.open(url);
+                window.open(url);
             }
             else {
                 jQuery('form#report_comment_form').submit();

@@ -67,18 +67,18 @@
   <metal:javascript define-macro="javascript" meta:interpolation="true" tal:define="lib_url client/++resource++euphorie.libraries">
     <!--[if lte IE 8]> <script type="text/javascript" src="${lib_url}/excanvas.min.js"></script> <![endif]-->
     <tal:block condition="webhelpers/debug_mode">
-      <script type="text/javascript" src="${lib_url}/jquery-1.4.4.min.js"></script>
-      <script type="text/javascript" src="${lib_url}/jquery-ui-1.7.3.min.js"></script>
-      <script type="text/javascript" src="${lib_url}/css_browser_selector.js"></script>
-      <script type="text/javascript" src="${lib_url}/jquery.hoverIntent.js"></script>
-      <script type="text/javascript" src="${lib_url}/jquery.bt.js"></script>
-      <script type="text/javascript" src="${lib_url}/jcarousellite_1.0.1.js"></script>
-      <script type="text/javascript" src="${lib_url}/jquery.numeric.js"></script>
-      <script type="text/javascript" src="${lib_url}/jquery.scrollTo.js"></script>
-      <script type="text/javascript" src="${lib_url}/jquery.localscroll.js"></script>
-      <script type="text/javascript" src="${lib_url}/fancybox/jquery.fancybox-1.3.1.pack.js"></script>
-      <script type="text/javascript" src="${lib_url}/fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
-      <script type="text/javascript" src="${client/++resource++euphorie.behaviour}/markup.js"></script>
+        <script type="text/javascript" src="${lib_url}/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" src="${lib_url}/jquery-ui-1.7.3.min.js"></script>
+        <script type="text/javascript" src="${lib_url}/css_browser_selector.js"></script>
+        <script type="text/javascript" src="${lib_url}/jquery.hoverIntent.js"></script>
+        <script type="text/javascript" src="${lib_url}/jquery.bt.js"></script>
+        <script type="text/javascript" src="${lib_url}/jcarousellite_1.0.1.js"></script>
+        <script type="text/javascript" src="${lib_url}/jquery.numeric.js"></script>
+        <script type="text/javascript" src="${lib_url}/jquery.scrollTo.js"></script>
+        <script type="text/javascript" src="${lib_url}/jquery.localscroll.js"></script>
+        <script type="text/javascript" src="${lib_url}/fancybox/jquery.fancybox-1.3.1.pack.js"></script>
+        <script type="text/javascript" src="${lib_url}/fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
+        <script type="text/javascript" src="${client/++resource++euphorie.behaviour}/markup.js"></script>
     </tal:block>
     <tal:block condition="not:webhelpers/debug_mode">
       <script type="text/javascript" src="${client/++resource++euphorie.behaviour}/common.min.js"></script>

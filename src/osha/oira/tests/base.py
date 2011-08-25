@@ -73,18 +73,3 @@ class OiRATestCase(PloneTestCase.PloneTestCase):
 class OiRAFunctionalTestCase(EuphorieFunctionalTestCase):
     layer = OiRATestLayer 
 
-    def runTest(self):
-        pass
-
-    def adminBrowser(self):
-        """Return a browser logged in as the site owner."""
-        from Products.PloneTestCase.setup import portal_owner
-        from Products.PloneTestCase.setup import default_password
-        from Products.Five.testbrowser import Browser
-        browser=Browser()
-        browser.open("%s/@@login" % self.portal.absolute_url())
-        browser.getControl(name="__ac_name").value=portal_owner
-        browser.getControl(name="__ac_password").value=default_password
-        browser.getForm(id="loginForm").submit()
-        return browser
-

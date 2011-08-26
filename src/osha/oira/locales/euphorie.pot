@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2011-08-26 14:23+0200\n"
+"POT-Creation-Date: 2011-08-26 18:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -485,6 +485,32 @@ msgstr ""
 msgid "menu_import"
 msgstr ""
 
+#. Default: You cannot delete an OiRA Tool that is published. Please unpublish it
+#. first.
+#: src/osha/oira/manual_translations.py:209
+msgid "message_no_delete_published_survey"
+msgstr ""
+
+#. Default: You can not delete a sector that contains published OiRA Tools.
+#: src/osha/oira/manual_translations.py:211
+msgid "message_not_delete_published_sector"
+msgstr ""
+
+#. Default: add a new OiRA Tool
+#: src/osha/oira/manual_translations.py:213
+msgid "add_survey"
+msgstr ""
+
+#. Default: There are no OiRA Tools present. You can ${add_link}.
+#: src/osha/oira/manual_translations.py:215
+msgid "no_surveys_present"
+msgstr ""
+
+#. Default: OiRA Tools
+#: src/osha/oira/manual_translations.py:217
+msgid "header_sector_survey_list"
+msgstr ""
+
 #: src/osha/oira/module.py:25 src/osha/oira/module.py:50 src/osha/oira/module.py:65
 msgid "Submodule"
 msgstr ""
@@ -510,19 +536,14 @@ msgid "help_evaluation_method_french"
 msgstr ""
 
 #. Default: Statistics Level
-#: src/osha/oira/sector.py:30
+#: src/osha/oira/sector.py:25
 msgid "label_statistics_level"
 msgstr ""
 
 #. Default: Level 1: Basic statistics about the use of the OiRA tool. Level 2: More
 #. detailed statistics regarding the risks
-#: src/osha/oira/sector.py:31
+#: src/osha/oira/sector.py:26
 msgid "help_statistics_level"
-msgstr ""
-
-#. Default: You can not delete a sector that contains published OiRA tools.
-#: src/osha/oira/sector.py:122
-msgid "message_not_delete_published_sector"
 msgstr ""
 
 #. Default: low
@@ -1745,27 +1766,6 @@ msgstr ""
 #. Default: Not applicable
 #: src/osha/oira/templates/risk_identification.pt:25
 msgid "label_not_applicable"
-msgstr ""
-
-#. Default: You can also ${add_link}.
-#: src/osha/oira/templates/sector_view.pt:31
-msgid "survey_list_footer"
-msgstr ""
-
-#. Default: add a new OiRA Tool
-#: src/osha/oira/templates/sector_view.pt:33
-#: src/osha/oira/templates/sector_view.pt:18
-msgid "add_survey"
-msgstr ""
-
-#. Default: There are no OiRA Tools present. You can ${add_link}.
-#: src/osha/oira/templates/sector_view.pt:16
-msgid "no_surveys_present"
-msgstr ""
-
-#. Default: OiRA Tools
-#: src/osha/oira/templates/sector_view.pt:14
-msgid "header_sector_survey_list"
 msgstr ""
 
 #: src/osha/oira/templates/sessions.pt:115

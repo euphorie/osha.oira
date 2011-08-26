@@ -1,5 +1,4 @@
 import logging
-import zExceptions
 from five import grok
 from zope import schema
 from zope.component import getUtility
@@ -13,10 +12,6 @@ from plone.directives import dexterity
 from plone.directives import form
 from plone.autoform.interfaces import IFormFieldProvider
 from plonetheme.nuplone.skin.interfaces import NuPloneSkin
-from plonetheme.nuplone.skin import actions
-from plonetheme.nuplone.utils import getPortal
-from plonetheme.nuplone.utils import checkPermission
-from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.content import sector
 from euphorie.content import MessageFactory as _
 
@@ -86,46 +81,4 @@ class SectorAdd(dexterity.AddForm):
             content.support_colour = support_colour
             
         return content
-
-class View(sector.View):
-    grok.template("sector_view")
-    grok.name("nuplone-view")
-
-
-class Delete(actions.Delete):
-    """ Only delete the sector if it doesn't have any published surveys.
-    """
-    grok.context(sector.ISector)
-
-    def verify(self, container, context):
-        if not checkPermission(container, "Delete objects"):
-            raise zExceptions.Unauthorized
-
-        flash = IStatusMessage(self.request).addStatusMessage
-        sector = context
-        country = container
-        client = getPortal(container).client
-
-        if country.id not in client:
-            return True
-
-        cl_country = client[country.id]
-        if sector.id not in cl_country:
-            return True
-
-        # Look for any published surveys in the client sector, and prevent
-        # deletion if any are found
-        cl_sector = cl_country[sector.id]
-        surveys = [s for s in cl_sector.values() if s.id != 'preview']
-        if surveys:
-            flash(
-                _("message_not_delete_published_sector", 
-                default=u"You can not delete a sector that contains published OiRA tools."), 
-                "error"
-                )
-            self.request.response.redirect(context.absolute_url())
-            return False
-        return True
-
-
 

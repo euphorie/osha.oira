@@ -206,3 +206,13 @@ _("unpublish_confirm", default=u"Are you sure you want to unpublish this OiRA To
 
 _("menu_import", default=u"Import OiRA Tool")
 
+_("message_no_delete_published_survey", default=u"You cannot delete an OiRA Tool that is published. Please unpublish it first.")
+
+_("message_not_delete_published_sector", default=u"You can not delete a sector that contains published OiRA Tools."), 
+
+_("add_survey", default="add a new OiRA Tool")
+
+_("no_surveys_present", default="There are no OiRA Tools present. You can ${add_link}.")
+
+_("header_sector_survey_list", default="OiRA Tools")
+

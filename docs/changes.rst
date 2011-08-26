@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.21 (unreleased)
+0.21 (2011-08-26)
 -----------------
 
 - NB: Depends on Euphorie 3.0syslab19 or higher

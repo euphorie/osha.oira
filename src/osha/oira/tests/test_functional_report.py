@@ -6,8 +6,8 @@ from euphorie.client.tests.utils import registerUserInClient
 
 from osha.oira.tests.base import OiRAFunctionalTestCase
 
-
 class EuphorieReportTests(OiRAFunctionalTestCase):
+
     def testUnicodeReportFilename(self):
         from euphorie.content.tests.utils import BASIC_SURVEY
         # Test for http://code.simplon.biz/tracker/euphorie/ticket/156
@@ -114,5 +114,4 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
         self.assertEqual(browser.getControl(name="form.widgets.conductor").value, ["staff"])
         self.assertEqual(browser.getControl(name="form.widgets.referer").value, ["trade-union"])
         self.assertEqual(browser.getControl(name="form.widgets.workers_participated").value, ["True"])
-
 

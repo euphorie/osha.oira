@@ -4,8 +4,10 @@ Changelog
 0.21 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- NB: Depends on Euphorie 3.0syslab19 or higher
 
+- Refactored @@delete on sector view back to Euphorie. [jcbrand]
+- Depend on zrtresource screen-ie6. [jcbrand]
 
 0.20 (2011-08-23)
 -----------------

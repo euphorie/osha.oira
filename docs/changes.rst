@@ -8,6 +8,8 @@ Changelog
 
 - Refactored @@delete on sector view back to Euphorie. [jcbrand]
 - Depend on zrtresource screen-ie6. [jcbrand]
+- More tests and bugfixes [jcbrand]
+- Move the surveypopup code to survey_popup.js (disabled for now) [jcbrand]
 
 0.20 (2011-08-23)
 -----------------

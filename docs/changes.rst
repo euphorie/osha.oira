@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.22 (Unreleased)
+-----------------
+
+- 3414: Bugfix on _actionplan_ landing page. Add i18n var. [jcbrand]
+- Add SK translations [thomas_w]
+
 0.21 (2011-08-26)
 -----------------
 

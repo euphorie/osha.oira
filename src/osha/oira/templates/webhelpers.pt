@@ -93,7 +93,9 @@
         <a  tal:define="item_class item/class" 
             tal:omit-tag="python:tree['leaf_module'] and not item_class"
             href="${item/url}">
-            <strong class="counter">${item/number}</strong> ${item/title}
+            <tal:if condition="python:not tree['leaf_module']">
+                <strong class="counter">${item/number}</strong> ${item/title}
+            </tal:if>
         </a>
         <tal:subtree condition="python:item['children']" define="tree python:item">
           <metal:call use-macro="webhelpers/index/macros/survey_tree" />

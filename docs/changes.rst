@@ -5,8 +5,9 @@ Changelog
 -----------------
 
 - 3414: Bugfix on _actionplan_ landing page. Add i18n var. [jcbrand]
-- Add SK translations [thomas_w]
+- Add DE, EL, SK translations [thomas_w]
 - Add title attrs on clicktips for IE6/7 [jcbrand]
+- Changed headers for mobile compatibility [jcbrand]
 
 0.21 (2011-08-26)
 -----------------

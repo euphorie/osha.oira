@@ -31,5 +31,29 @@
     #steps li a:hover {
         color: ${colours/main_foreground};
     } 
-}</tal:block>
+}
+<!--[if IE]> 
+    #navigation li a {
+        color: ${colours/main_foreground};
+        background-color: ${colours/main_background};
+    }
+    h1 {
+        background-color: ${colours/main_background};
+    }
+    #steps li.complete,
+    #steps li.current {
+        color: ${colours/support_foreground};
+        background-color: ${colours/support_background};
+    }
+    #steps li.complete a,
+    #steps li.current a {
+        color: ${colours/support_foreground};
+    }
+
+    #steps li a,
+    #steps li a:hover {
+        color: ${colours/main_foreground};
+    } 
+<![endif]-->
+</tal:block>
 </tal:block>

@@ -58,6 +58,7 @@ setup(name='osha.oira',
           'zope.interface',
           'zope.publisher',
           'zope.schema',
+          'mobile.sniffer',
       ],
       tests_require=tests_require,
       extras_require={

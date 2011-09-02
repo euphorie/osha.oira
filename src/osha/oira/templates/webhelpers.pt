@@ -25,22 +25,27 @@
     </li>
   </metal:home>
 
-  <metal:css define-macro="css" meta:interpolation="true" tal:define="base_url client/++resource++euphorie.style">
+  <metal:css define-macro="css" meta:interpolation="true" 
+         tal:define="base_url client/++resource++euphorie.style;
+                     on_mobile webhelpers/on_mobile">
+
     <tal:block condition="webhelpers/debug_mode">
       <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen.css" />
-      <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-osha.css" />
+      <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-osha.css" tal:condition="not:on_mobile" />
       <!--[if lte IE 6]> <link rel="stylesheet" type="text/css" media="all" href="++resource++screen-ie6.css"/> <![endif]-->
       <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie7.css"/> <![endif]-->
       <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie8.css" /> <![endif]-->
     </tal:block>
     <tal:block condition="not:webhelpers/debug_mode">
       <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen.min.css" />
-      <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-osha.min.css" />
+      <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-osha.min.css" tal:condition="not:on_mobile" />
       <!--[if lte IE 6]> <link rel="stylesheet" type="text/css" media="all" href="++resource++screen-ie6.css"/> <![endif]-->
       <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie7.min.css"/> <![endif]-->
       <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie8.min.css" /> <![endif]-->
     </tal:block>
-    <link tal:define="sector_url webhelpers/sector_url" tal:condition="sector_url" rel="stylesheet" type="text/css" media="all" href="${sector_url}/@@sector.css" />
+    <link tal:define="sector_url webhelpers/sector_url" 
+          tal:condition="python:sector_url and not on_mobile" rel="stylesheet" type="text/css" media="all" href="${sector_url}/@@sector.css" />
+    <link rel="stylesheet" type="text/css" media="handheld" href="client/++resource++osha.oira.stylesheets/mobile.css" tal:condition="on_mobile"/>
     <link rel="stylesheet" type="text/css" media="all" href="client/++resource++osha.oira.stylesheets/main.css" />
     <link 
         tal:define="portal_state context/@@plone_portal_state"

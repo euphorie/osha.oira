@@ -85,7 +85,3 @@ class SectorAdd(dexterity.AddForm):
             
         return content
 
-class Style(SectorStyle):
-    grok.template("sector_style")
-    grok.layer(IOSHAClientSkinLayer)
-

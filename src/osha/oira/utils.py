@@ -1,5 +1,6 @@
 from Acquisition import aq_inner
-from zope.component import getMultiAdapter
+from mobile.sniffer.detect import  detect_mobile_browser
+from mobile.sniffer.utilities import get_user_agent
 from euphorie.client.sector import IClientSector
 from euphorie.client.utils import WebHelpers
 from euphorie.content.survey import ISurvey
@@ -81,6 +82,17 @@ class OSHAWebHelpers(WebHelpers):
     def language_dict(self):
         return lang_dict
 
+    def on_mobile(self):
+        """ Return True if the site is being browsed on a mobile phone.
+        """
+        ua = get_user_agent(self.request)
+        if ua:
+            if detect_mobile_browser(ua):
+                return True
+            else:
+                return False
+        return False
+        
     def get_sectors_dict(self):
         """ Returns a dictionary with keys being countries (and int. orgs) that
             have sectors inside them and the values being the available survey

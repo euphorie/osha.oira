@@ -46,8 +46,6 @@
     </tal:block>
     <link tal:define="sector_url webhelpers/sector_url" 
           tal:condition="python:sector_url and not on_mobile" rel="stylesheet" type="text/css" media="all" href="${sector_url}/@@sector.css" />
-    <link rel="stylesheet" type="text/css" media="handheld" href="${oira_base_url}/mobile.css" tal:condition="on_mobile"/>
-    <link rel="stylesheet" type="text/css" media="all" href="${oira_base_url}/non_mobile.css" tal:condition="not:on_mobile" />
     <link rel="stylesheet" type="text/css" media="all" href="${oira_base_url}/main.css" />
     <link 
         tal:define="portal_state context/@@plone_portal_state"

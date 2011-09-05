@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.22 (Unreleased)
+0.22 (2011-09-05)
 -----------------
 
 - 3414: Bugfix on _actionplan_ landing page. Add i18n var. [jcbrand]

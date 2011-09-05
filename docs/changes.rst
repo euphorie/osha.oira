@@ -8,6 +8,7 @@ Changelog
 - Add DE, EL, SK translations [thomas_w]
 - Add title attrs on clicktips for IE6/7 [jcbrand]
 - Changed headers for mobile compatibility [jcbrand]
+- Lots of browser fixes [jcbrand]
 
 0.21 (2011-08-26)
 -----------------

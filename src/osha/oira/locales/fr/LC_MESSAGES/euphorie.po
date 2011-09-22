@@ -1174,11 +1174,11 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:42
 msgid "expl_actionplan_7"
 msgstr ""
-"Pour intégrer une mesure de prévention, vous devez:  décrire cette mesure,  "
-"préciser les actions qui seront à mettre en place pour rendre cette mesure "
-"effective,  indiquer quelles compétences spécifiques sont nécessaires pour "
-"appliquer cette mesure ou préciser quelle(s) fonction(s) de l'entreprise est"
-" (sont) à mobiliser. "
+"Pour intégrer une mesure, vous devez: décrire cette mesure (dans le premier "
+"champs de saisie), préciser les actions à mettre en place pour rendre cette "
+"mesure effective (2ème champs) et indiquer quelles compétences spécifiques sont "
+"nécessaires pour appliquer cette mesure ou préciser quelle(s) fonction(s) de "
+"l'entreprise est (sont) à mobiliser (3ème champs). "
 
 #. Default: If certain risks are not avoidable, how can they be reduced to a
 #. level
@@ -1186,37 +1186,36 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:37
 msgid "expl_actionplan_6"
 msgstr ""
-"Si certains risques ne sont pas évitables, comment peuvent-ils être réduits "
-"à un niveau auquel la santé et la sécurité de ceux exposés ne sont pas "
-"compromises ?"
+"Si certains risques ne sont pas évitables, comment peuvent-ils être réduits à un "
+"niveau auquel la santé et la sécurité des travailleurs exposés ne soient  pas "
+"compromises ? "
 
 #. Default: Is a risk avoidable? Can it be removed entirely? For example, this
 #. could be achieved by: ${expl_actionplan_4_and_5}
 #: src/osha/oira/templates/actionplan.pt:29
 msgid "expl_actionplan_3"
 msgstr ""
-"Un risque est-il évitable ? Peut-il être totalement supprimé ? Par exemple, "
-"cela pourrait être obtenu en : ${expl_actionplan_4_and_5}"
+"Le risque est-il évitable ? Peut-il être totalement supprimé ? Si oui, "
+"comment ? ${expl_actionplan_4_and_5}"
 
 #. Default: removing the hazard
 #: src/osha/oira/templates/actionplan.pt:33
 msgid "expl_actionplan_5"
-msgstr "supprimant le risque"
+msgstr "Le produit dangereux peut-il être remplacé ?"
 
 #. Default: considering whether the task or job is necessary
 #: src/osha/oira/templates/actionplan.pt:32
 msgid "expl_actionplan_4"
-msgstr "vérifiant si la tâche ou le travail est nécessaire"
+msgstr "La tâche dangereuse peut-elle être évitée ?"
 
 #. Default: Among the things to be considered for this step are:
 #: src/osha/oira/templates/actionplan.pt:24
 msgid "expl_actionplan_2"
 msgstr ""
-"Supprimer les causes (s'attaquer à la source) est la méthode préférée : "
-"ainsi, le risque ne peut plus exister. Vous écrirez alors quelles tâches "
-"doivent être effectuées afin de supprimer le risque, ainsi que la "
-"connaissance et l'expérience qui sont nécessaires pour que ces tâches soient"
-" effectuées (plan de prévention et exigences)."
+"Il est recommandé de s'attaquer à la source des problèmes afin de suprimer le "
+"risque. Vous écrirez alors quelles tâches doivent être effectuées afin "
+"d’éliminer le risque, ainsi que les  connaissances et l'expérience qui sont "
+"nécessaires pour que ces tâches soient effectuées. Les questions à se poser : "
 
 #. Default: After having identified the risks, you need to put an action plan
 #. in
@@ -1226,11 +1225,11 @@ msgstr ""
 #: src/osha/oira/templates/actionplan.pt:19
 msgid "expl_actionplan_1"
 msgstr ""
-"Vous avez identifié l'ampleur du risque pour chaque goulet d'étranglement. "
-"Pendant la phase du plan d'action, vous pouvez déterminer la priorité de "
-"chaque goulet d'étranglement et comment vous allez vous attaquer à ce goulet"
-" d'étranglement. Le programme peut proposer une suggestion que vous pouvez "
-"utiliser, ou vous pouvez ajouter vos propres mesures."
+"Vous avez identifié et estimé les risques de votre entreprise. Pendant "
+"l’élaboration du plan d'action, vous pouvez  ajuster la priorité de chaque "
+"situation à risque et définir comment vous allez pouvoir y remédier.  Vous "
+"pouvez  définir vos propres mesures de prévention  ou utiliser, (et "
+"éventuellement adapter), celles qui vous sont proposées dans le logiciel. "
 
 #. Default: OiRA - Online interactive Risk Assessment
 #: src/osha/oira/templates/actionplan.pt:12
@@ -1775,7 +1774,7 @@ msgstr "une organisation syndicale"
 #. Default: an employers' organisation
 #: src/osha/oira/templates/report_company.pt:37
 msgid "referer_employers_organisation"
-msgstr "une organisation d'employeurs"
+msgstr "organisation professionnelle"
 
 #. Default: Through which channel did you learn about this tool?
 #: src/osha/oira/templates/report_company.pt:36

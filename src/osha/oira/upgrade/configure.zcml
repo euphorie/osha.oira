@@ -1,0 +1,21 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+  i18n_domain="plone">
+
+  <genericsetup:upgradeSteps
+    source="1"
+    destination="2"
+    profile="osha.oira:default"
+    >
+
+    <genericsetup:upgradeStep
+      title="renew_survey_published_date"
+      description="Update the published attr of surveys to set the date to now. This will force all surveys to redirect to the @@update page from where users' session trees can be updated."
+      handler=".upgrade.renew_survey_published_date"
+      />
+
+  </genericsetup:upgradeSteps>
+
+</configure>
+

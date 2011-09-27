@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.23 (Unreleased)
+0.23 (2011-09-27)
 -----------------
 
 - 3520: Add upgrade step to renew the 'published' date of all client surveys. [jcbrand]

@@ -1,6 +1,15 @@
 Changelog
 =========
 
+0.23 (Unreleased)
+-----------------
+
+- 3520: Add upgrade step to renew the 'published' date of all client surveys. [jcbrand]
+- 3797: Renamed travailleurs to salaríes and statut to avancement. [jcbrand]
+- Removed the bugfix for 2583, since a more proper bugfix is now in Euphorie [jcbrand]
+- Language changes for 3414 and 3515 [jcbrand]
+- Czech translations [thomas_w]
+
 0.22 (2011-09-05)
 -----------------
 

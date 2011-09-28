@@ -20,9 +20,16 @@ import polib
 
 patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
 
-from findDirtyTranslations import usage
 from findDirtyTranslations import get_default
 from findDirtyTranslations import append_entry
+
+def usage(stream, msg=None):
+    if msg:
+        print >> stream, msg
+        print >> stream
+    program = os.path.basename(sys.argv[0])
+    print >> stream, __doc__ % {"program": program}
+    sys.exit(0)
 
 def main():
     if len(sys.argv) < 4:

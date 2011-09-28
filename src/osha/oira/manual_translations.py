@@ -17,6 +17,7 @@ _("help_measure_requirements", default=u'Describe: 1) what is your general '
     u'expert". You can also describe here any other additional requirement '
     u"(if any).")
 _("Solution", default=u"Measure")
+_("title_common_solution", default="Measure")
 _("A solution.", default=u"A standard measure for a risk.")
 _("header_solutions", default=u"Standard measures")
 
@@ -215,4 +216,6 @@ _("add_survey", default="add a new OiRA Tool")
 _("no_surveys_present", default="There are no OiRA Tools present. You can ${add_link}.")
 
 _("header_sector_survey_list", default="OiRA Tools")
+
+
 

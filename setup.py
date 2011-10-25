@@ -9,7 +9,7 @@ tests_require = [
 
 setup(name='osha.oira',
       version=version,
-      description="'EU-OSHA customisations for Euphorie/OiRA'",
+      description="OiRA is a comprehensive, easy to use and cost-free web application. It helps micro and small organisations to put in place a thorough step-by-step risk assessment process – from the identification and evaluation of workplace risks, through decision making on preventive actions and the completion of these actions, to continued monitoring and reporting.",
       long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "changes.rst")).read(),
       classifiers=[
@@ -23,8 +23,8 @@ setup(name='osha.oira',
         ],
       keywords='euphorie osha oira',
       author='syslab.com',
-      author_email='thomas@syslab.com',
-      url="'http://www.oira.osha.europa.eu/'",
+      author_email='info@syslab.com',
+      url="'http://www.oiraproject.eu/'",
       license='GPL',
       message_extractors = {"src": [
             ("**.py",    "lingua_python", None),

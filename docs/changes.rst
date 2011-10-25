@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.0 (Unreleased)
+----------------
+
+- No changes yet
+
 0.24 (2011-10-07)
 -----------------
 - 3805: Added Slovenian translations. [thomas_w]

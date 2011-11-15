@@ -78,189 +78,189 @@
           tal:attributes="class python: sectors_dict.get('be') and 'be' or 'be disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('be',[])">
             <a href="${client_url}/be/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="bg"
           tal:attributes="class python: sectors_dict.get('bg') and 'bg' or 'bg disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('bg',[])">
             <a href="${client_url}/bg/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="cz"
           tal:attributes="class python: sectors_dict.get('cz') and 'cz' or 'cz disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('cz',[])">
             <a href="${client_url}/cz/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="dk"
           tal:attributes="class python: sectors_dict.get('dk') and 'dk' or 'dk disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('dk',[])">
             <a href="${client_url}/dk/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="de"
           tal:attributes="class python: sectors_dict.get('de') and 'de' or 'de disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('de',[])">
             <a href="${client_url}/de/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="ee"
           tal:attributes="class python: sectors_dict.get('ee') and 'ee' or 'ee disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('ee',[])">
             <a href="${client_url}/ee/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="ie"
           tal:attributes="class python: sectors_dict.get('ie') and 'ie' or 'ie disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('ie',[])">
             <a href="${client_url}/ie/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="gr"
           tal:attributes="class python: sectors_dict.get('gr') and 'gr' or 'gr disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('gr',[])">
             <a href="${client_url}/gr/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="es"
           tal:attributes="class python: sectors_dict.get('es') and 'es' or 'es disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('es',[])">
             <a href="${client_url}/es/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="fr"
           tal:attributes="class python: sectors_dict.get('fr') and 'fr' or 'fr disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('fr',[])">
             <a href="${client_url}/fr/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="it"
           tal:attributes="class python: sectors_dict.get('it') and 'it' or 'it disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('it',[])">
             <a href="${client_url}/it/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="cy"
           tal:attributes="class python: sectors_dict.get('cy') and 'cy' or 'cy disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('cy',[])">
             <a href="${client_url}/cy/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="lv"
           tal:attributes="class python: sectors_dict.get('lv') and 'lv' or 'lv disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('lv',[])">
             <a href="${client_url}/lv/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="lt"
           tal:attributes="class python: sectors_dict.get('lt') and 'lt' or 'lt disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('lt',[])">
             <a href="${client_url}/lt/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="lu"
           tal:attributes="class python: sectors_dict.get('lu') and 'lu' or 'lu disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('lu',[])">
             <a href="${client_url}/lu/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="hu"
           tal:attributes="class python: sectors_dict.get('hu') and 'hu' or 'hu disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('hu',[])">
             <a href="${client_url}/hu/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="mt"
           tal:attributes="class python: sectors_dict.get('mt') and 'mt' or 'mt disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('mt',[])">
             <a href="${client_url}/mt/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="nl"
           tal:attributes="class python: sectors_dict.get('nl') and 'nl' or 'nl disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('nl',[])">
             <a href="${client_url}/nl/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="at"
           tal:attributes="class python: sectors_dict.get('at') and 'at' or 'at disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('at',[])">
             <a href="${client_url}/at/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="pl"
           tal:attributes="class python: sectors_dict.get('pl') and 'pl' or 'pl disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('pl',[])">
             <a href="${client_url}/pl/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="pt"
           tal:attributes="class python: sectors_dict.get('pt') and 'pt' or 'pt disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('pt',[])">
             <a href="${client_url}/pt/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="ro"
           tal:attributes="class python: sectors_dict.get('ro') and 'ro' or 'ro disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('ro',[])">
             <a href="${client_url}/ro/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="si"
           tal:attributes="class python: sectors_dict.get('si') and 'si' or 'si disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('si',[])">
             <a href="${client_url}/si/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="sk"
           tal:attributes="class python: sectors_dict.get('sk') and 'sk' or 'sk disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('sk',[])">
             <a href="${client_url}/sk/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="fi"
           tal:attributes="class python: sectors_dict.get('fi') and 'fi' or 'fi disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('fi',[])">
             <a href="${client_url}/fi/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="se"
           tal:attributes="class python: sectors_dict.get('se') and 'se' or 'se disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('se',[])">
             <a href="${client_url}/se/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="gb"
           tal:attributes="class python: sectors_dict.get('gb') and 'gb' or 'gb disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('gb',[])">
             <a href="${client_url}/gb/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
     </ul>
@@ -271,28 +271,28 @@
           tal:attributes="class python: sectors_dict.get('is') and 'is' or 'is disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('is',[])">
             <a href="${client_url}/is/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="li"
           tal:attributes="class python: sectors_dict.get('li') and 'li' or 'li disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('li',[])">
             <a href="${client_url}/li/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="no"
           tal:attributes="class python: sectors_dict.get('no') and 'no' or 'no disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('no',[])">
             <a href="${client_url}/no/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li class="ch"
           tal:attributes="class python: sectors_dict.get('ch') and 'ch' or 'ch disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('ch',[])">
             <a href="${client_url}/ch/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
     </ul>
@@ -324,31 +324,31 @@
       <li tal:attributes="class python: sectors_dict.get('hr') and 'hr' or 'hr disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('hr',[])">
             <a href="${client_url}/hr/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li tal:attributes="class python: sectors_dict.get('is') and 'is' or 'is disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('is',[])">
             <a href="${client_url}/is/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li tal:attributes="class python: sectors_dict.get('mk') and 'mk' or 'mk disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('mk',[])">
             <a href="${client_url}/mk/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li tal:attributes="class python: sectors_dict.get('me') and 'me' or 'me disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('me',[])">
             <a href="${client_url}/me/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li tal:attributes="class python: sectors_dict.get('tr') and 'tr' or 'tr disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('tr',[])">
             <a href="${client_url}/tr/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
     </ul>
@@ -380,25 +380,25 @@
       <li tal:attributes="class python: sectors_dict.get('al') and 'al' or 'al disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('al',[])">
             <a href="${client_url}/al/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li tal:attributes="class python: sectors_dict.get('ba') and 'ba' or 'ba disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('ba',[])">
             <a href="${client_url}/ba/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li tal:attributes="class python: sectors_dict.get('cs') and 'cs' or 'cs disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('cs',[])">
             <a href="${client_url}/cs/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
       <li tal:attributes="class python: sectors_dict.get('rs') and 'rs' or 'rs disabled'">
         <tal:loop repeat="lang_code python:sectors_dict.get('rs',[])">
             <a href="${client_url}/rs/?language=${lang_code}"
-               tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+               tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
         </tal:loop>
       </li>
     </ul>
@@ -409,7 +409,7 @@
             tal:attributes="class python: sectors_dict.get('eu') and 'eu' or 'eu disabled'">
             <tal:loop repeat="lang_code python:sectors_dict.get('eu',[])">
                 <a href="${client_url}/eu/?language=${lang_code}"
-                tal:content="python:lang_dict.get(lang_code)">Language Name</a>
+                tal:content="python:lang_dict.get(lang_code).get('name')">Language Name</a>
             </tal:loop>
         </li>
     </ul>

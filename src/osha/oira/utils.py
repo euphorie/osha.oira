@@ -1,10 +1,15 @@
-from Acquisition import aq_inner
 from mobile.sniffer.detect import  detect_mobile_browser
 from mobile.sniffer.utilities import get_user_agent
+
+from Acquisition import aq_inner
+
+from zope.app.component.hooks import getSite
+
+from Products.CMFCore.utils import getToolByName
+
 from euphorie.client.sector import IClientSector
 from euphorie.client.utils import WebHelpers
 from euphorie.content.survey import ISurvey
-from osha.oira.config import lang_dict # Used in templates...
 
 def remove_empty_modules(ls):
     """ Takes a list of modules and risks.
@@ -80,7 +85,9 @@ class OSHAWebHelpers(WebHelpers):
     """
 
     def language_dict(self):
-        return lang_dict
+        site = getSite()
+        ltool = getToolByName(site, 'portal_languages')
+        return ltool.getAvailableLanguages()
 
     def on_mobile(self):
         """ Return True if the site is being browsed on a mobile phone.

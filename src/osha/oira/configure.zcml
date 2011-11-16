@@ -15,8 +15,8 @@
         translations will break the tests.
     -->
     <i18n:registerTranslations directory="locales" />
-
     <five:registerPackage package="." />
+
 
     <genericsetup:registerProfile
         name="default"
@@ -37,7 +37,6 @@
          osha.oira's customizations
     -->
     <grok:grok package="." />
-
     <include file="behaviors.zcml" />
 
     <adapter

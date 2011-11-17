@@ -217,5 +217,7 @@ _("no_surveys_present", default="There are no OiRA Tools present. You can ${add_
 
 _("header_sector_survey_list", default="OiRA Tools")
 
+_("expl_error", default="We're sorry, but an unforseen error has occured.")
+
 
 

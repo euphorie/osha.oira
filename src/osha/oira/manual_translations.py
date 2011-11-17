@@ -189,9 +189,9 @@ _("intro_publish_first_time", default=u""
 
 _("header_publish", default="Publish OiRA Tool")
 
-_("expl_update",""
-    u"This OiRA Tool has been updated. Before you can continue any changes made in "
-    u"the OiRA Tool will have to be merged in your session.")
+_("expl_update", default=u""
+    u"This OiRA tool has changed since you last accessed it. Before you can "
+    u"continue, you need to update to these changes.")
 
 _("title_updated", default="OiRA Tool was updated")
 

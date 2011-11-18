@@ -230,6 +230,19 @@ class OSHAIdentificationReport(report.IdentificationReport):
         else:
             raise NotFound(self, name, request)
 
+    def update(self):
+        if survey.redirectOnSurveyUpdate(self.request):
+            return
+
+        # 3813: Include children from optional modules.
+        # Removed this: .filter(sql.not_(model.SKIPPED_PARENTS))\
+        session = Session()
+        dbsession = SessionManager.session
+        query = session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session == dbsession)\
+                .order_by(model.SurveyTreeItem.path)
+        self.nodes = query.all()
+
 
 class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPlanMixin):
     """ Generate and download action report.

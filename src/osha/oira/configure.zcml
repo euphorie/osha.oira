@@ -51,15 +51,6 @@
 
     <browser:page
         for="*"
-        layer=".interfaces.IOSHAClientSkinLayer"
-        class=".utils.OSHAWebHelpers"
-        name="webhelpers"
-        template="templates/webhelpers.pt"
-        permission="zope2.View"
-        />
-
-    <browser:page
-        for="*"
         name="default_introduction"
         template="templates/default_introduction.pt"
         permission="zope2.View"

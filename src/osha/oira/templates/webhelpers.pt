@@ -8,7 +8,7 @@
       meta:interpolation="true"
       i18n:domain="euphorie">
 
-  <metal:headers define-macro="headers" meta-interpolation="true">
+  <metal:headers define-macro="headers">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -129,7 +129,7 @@
         <a href="http://www.gnu.org/licenses/gpl.html" i18n:translate="appendix_gpl_license">GPL License</a>
         |
         <a href="http://creativecommons.org/licenses/by-sa/2.5/"
-            i18n:attr="alt"
+            i18n:attributes="alt"
             alt="CC License">
             <img class="creative_commons_logo" src="++resource++osha.oira.images/creative_commons.png"/>
         </a>

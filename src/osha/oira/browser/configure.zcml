@@ -26,4 +26,18 @@
         layer="..interfaces.IProductLayer"
         />
 
+  <browser:page
+      name="write-statistics"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".statistics.WriteStatistics"
+      permission="cmf.ManagePortal"
+      />
+
+  <!--browser:page
+      name="write-statistics"
+      for="*"
+      class=".statistics.WriteStatistics"
+      permission="zope.Public"
+      /-->
+
 </configure>

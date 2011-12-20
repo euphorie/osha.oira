@@ -92,7 +92,7 @@
   <metal:survey define-macro="survey_tree" meta:interpolation="true">
     <ol tal:condition="exists:tree" class="${python:'microns' if tree['leaf_module'] else None}">
       <li tal:repeat="item tree/children" 
-          title="${python:'%s. %s' % (item.number, item.title) if tree.leaf_module else None}"
+          title="${python:'%s. %s' % (item['number'], item['title']) if tree['leaf_module'] else None}"
           class="${item/class}">
         <a  tal:define="item_class item/class" 
             tal:omit-tag="python:tree['leaf_module'] and not item_class"
@@ -102,7 +102,7 @@
             </tal:if>
         </a>
         <tal:subtree condition="python:item['children']" define="tree python:item">
-          <metal:call use-macro="webhelpers/index/macros/survey_tree" />
+          <metal:call use-macro="webhelpers/macros/survey_tree" />
         </tal:subtree>
       </li>
     </ol>

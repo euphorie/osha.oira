@@ -55,6 +55,14 @@ class OSHAStart(survey.Start):
     grok.name("start")
 
 
+class OSHAIdentification(survey.Identification):
+    """ Override the 'identification' page to provide our own template.
+    """
+    grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
+    grok.template("identification")
+    grok.name("index_html")
+
+
 class OSHASurveyView(SurveyView):
     grok.layer(NuPloneSkin)
     grok.template("survey_view")

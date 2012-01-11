@@ -131,9 +131,9 @@ class OSHAWebHelpers(WebHelpers):
         resp = {}
         # Only the countries in the client obj should be considered, as the
         # others are not accessible
-        for country in client.objectValues():
+        for country in client.values():
             langs = {}
-            for sector in country.objectValues():
+            for sector in country.values():
                 if not IClientSector.providedBy(sector):
                     continue
                 for survey in sector.objectValues():

@@ -4,7 +4,12 @@ Changelog
 1.0 (Unreleased)
 ----------------
 
-- No changes yet
+- #3813 Adjust the Content of tools feature to display ALL risks [jcbrand]    
+- #3811 "Measure" text on accordion not translated. [jcbrand] 
+- #3792 Provide route back to Identification phase from the identification report. [jcbrand]
+- #3779 Privacy not working on client and community sites [jcbrand]
+- #3892 Exchange the OiRA logo in the admin part [jcbrand] 
+- #4071 Integrate Wichert's changes in to osha.oira [jcbrand]
 
 0.24 (2011-10-07)
 -----------------

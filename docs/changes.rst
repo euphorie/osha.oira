@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0 (Unreleased)
+1.0 (2012-12-13)
 ----------------
 
 - #3813 Adjust the Content of tools feature to display ALL risks [jcbrand]    

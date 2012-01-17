@@ -39,7 +39,7 @@
         </fieldset>
         <p id="username" 
            tal:define="member string:${context/portal_membership/getAuthenticatedMember}"
-           style="display:None" tal:content="member/getId">username</p>
+           style="display:None" tal:content="member">username</p>
         <p id="survey_popup_url" 
            tal:define="url view/get_survey_url|nothing"
            style="display:None" tal:content="python:url or 'http://www.surveymonkey.com/s/OiRATool'">http://www.surveymonkey.com/s/OiRATool</p>

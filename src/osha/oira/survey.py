@@ -580,6 +580,17 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
     """
     grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
 
+    def getNodes(self):
+        """ Return an ordered list of all relevant tree items for the current
+            survey.
+        """
+        # 3813: Include children from optional modules.
+        # Removed this: .filter(sql.not_(model.SKIPPED_PARENTS))\
+        query = Session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session == self.session)\
+                .order_by(model.SurveyTreeItem.path)
+        return query.all()
+
     def addIdentificationResults(self, document):
         survey=self.request.survey
         section = createIdentificationReportSection(document, self.context, self.request)

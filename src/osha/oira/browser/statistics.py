@@ -88,7 +88,6 @@ class ShowStatistics(grok.View):
         url = URL + '&member_id=%s' % member.id
 
         page = urllib2.urlopen(url)
-        import ipdb; ipdb.set_trace()
         self.context.REQUEST.response.setHeader('content-type', page.headers.get('content-type') or 'application/pdf')
         self.context.REQUEST.response.setHeader('content-disposition', page.headers.get('content-disposition') or 'inline; filename="report.pdf"')
         return page.read()

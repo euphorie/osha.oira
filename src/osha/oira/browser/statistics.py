@@ -75,7 +75,7 @@ class ShowStatistics(grok.View):
     grok.name('show-statistics')
 
     def render(self):
-        URL = 'http://birt.osha.europa.eu/birt-viewer/frameset?__report=linkstats/linkreportdirect.rptdesign&State=orange%20%20%20%20&ContentType=Document&Category=.%2A&Path=/&Subsite=main'
+        URL = 'http://birt.osha.europa.eu/birt-viewer/frameset?__report=linkstats/linkreportdirect.rptdesign&__format=pdf&State=orange%20%20%20%20&ContentType=Document&Category=.%2A&Path=/&Subsite=main'
         pm = getToolByName(self.context, 'portal_membership')
         if pm.isAnonymousUser():
             raise Unauthorized, 'must be logged in to view statistics'
@@ -88,6 +88,9 @@ class ShowStatistics(grok.View):
         url = URL + '&member_id=%s' % member.id
 
         page = urllib2.urlopen(url)
+        import ipdb; ipdb.set_trace()
+        self.context.REQUEST.response.setHeader('content-type', page.headers.get('content-type') or 'application/pdf')
+        self.context.REQUEST.response.setHeader('content-disposition', page.headers.get('content-disposition') or 'inline; filename="report.pdf"')
         return page.read()
         
         

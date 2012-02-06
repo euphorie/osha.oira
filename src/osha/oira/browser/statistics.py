@@ -22,29 +22,59 @@ class WriteStatistics(grok.View):
     grok.require('cmf.ManagePortal')
     grok.name('write-statistics')
 
+    def _walk(self, root, published=False):
+        info_surveys = []
+        info_modules = []
+        for country in root.objectValues():
+            for sector in country.objectValues():
+                for survey_or_group in sector.objectValues():
+                    if survey_or_group.portal_type == 'euphorie.survey':
+                        surveys = [survey_or_group]
+                        survey_parent_path = '/'.join((country.id, sector.id))
+                    elif survey_or_group.portal_type == 'euphorie.surveygroup':
+                        surveys = survey_or_group.objectValues()
+                        survey_parent_path = '/'.join((country.id, sector.id, survey_or_group.id))
+                    else:
+                        surveys = [] # redundant right now, but in case sth is added below...
+                        logger.info('Object is neither survey nor surveygroup, skipping. %s' % '/'.join(survey_or_group.getPhysicalPath()))
+                        continue
+                    for survey in surveys:
+                        survey_path = '/'.join((survey_parent_path, survey.id))
+                        if not survey.portal_type == 'euphorie.survey':
+                            logger.info('Object is not a survey but inside surveygroup, skipping. %s' % '/'.join(survey.getPhysicalPath()))
+                            continue
+                        info_surveys.append((survey_path, survey.Language(), published))
+                        info_modules = info_modules + map(lambda tup: ('/'.join((survey_parent_path, tup[0])), tup[1]), self._get_modules_info(survey))
+
+        return (info_surveys, info_modules)
+
+    def _get_modules_info(self, obj):
+        no_child_risks = 0 #len(obj.objectIds('euphorie.risk'))
+        info_child_modules = []
+        for module_or_risk in obj.objectValues():
+            if module_or_risk.portal_type in ('euphorie.module', 'euphorie.profilequestion'):
+                info_child_modules += self._get_modules_info(module_or_risk)
+            elif module_or_risk.portal_type == 'euphorie.risk':
+                no_child_risks += 1
+            else:
+                logger.info('Object is neither module nor profile question nor risk, skipping. %s' % '/'.join(module_or_risk.getPhysicalPath()))
+
+        return [(obj.id, no_child_risks)] + map(lambda tup: ('/'.join((obj.id, tup[0])), tup[1]), info_child_modules)
+
     def render(self):
-        cat = getToolByName(self.context, 'portal_catalog')
+        urltool = getToolByName(self.context, 'portal_url')
         dbtable_surveys = 'statistics_surveys'
         dbtable_modules = 'statistics_modules'
         path_re = re.compile('/Plone2/[^/]*/(.*)')
 
-        published_surveys = cat(portal_type='euphorie.survey',path='/Plone2/client',sort_on='path')
-        unpublished_surveys = cat(portal_type='euphorie.survey',path='/Plone2/sectors',sort_on='path')
-        modules = cat(portal_type='euphorie.module',sort_on='path')
+        portal = urltool.getPortalObject()
+        # published surveys under /client
+        info_surveys_client, info_modules_client = self._walk(portal['client'], published=True)
+        # unpublished surveys under /sectors
+        info_surveys_sectors, info_modules_sectors = self._walk(portal['sectors'], published=False)
 
-        # gather info
-        # path, Language, published
-        info_surveys = [(path_re.match(br.getPath()).group(1),
-                 br.getObject().Language(),
-                 #len(cat(portal_type='euphorie.risk', path=br.getPath())),
-                 True) for br in published_surveys]
-        info_surveys = info_surveys + [(path_re.match(br.getPath()).group(1),
-                 br.getObject().Language(),
-                 #len(cat(portal_type='euphorie.risk', path=br.getPath())),
-                 False) for br in unpublished_surveys]
-        # path, number of risks
-        info_modules = [(path_re.match(br.getPath()).group(1),
-                 len(cat(portal_type='euphorie.risk', path=br.getPath()))) for br in modules]
+        info_surveys = info_surveys_client + info_surveys_sectors
+        info_modules = info_modules_client + info_modules_sectors
 
         # write to db
         session = Session()

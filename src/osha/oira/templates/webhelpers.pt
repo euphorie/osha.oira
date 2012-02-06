@@ -8,7 +8,7 @@
       meta:interpolation="true"
       i18n:domain="euphorie">
 
-  <metal:headers define-macro="headers" meta-interpolation="true">
+  <metal:headers define-macro="headers">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -92,7 +92,7 @@
   <metal:survey define-macro="survey_tree" meta:interpolation="true">
     <ol tal:condition="exists:tree" class="${python:'microns' if tree['leaf_module'] else None}">
       <li tal:repeat="item tree/children" 
-          title="${python:'%s. %s' % (item.number, item.title) if tree.leaf_module else None}"
+          title="${python:'%s. %s' % (item['number'], item['title']) if tree['leaf_module'] else None}"
           class="${item/class}">
         <a  tal:define="item_class item/class" 
             tal:omit-tag="python:tree['leaf_module'] and not item_class"
@@ -102,7 +102,7 @@
             </tal:if>
         </a>
         <tal:subtree condition="python:item['children']" define="tree python:item">
-          <metal:call use-macro="webhelpers/index/macros/survey_tree" />
+          <metal:call use-macro="webhelpers/macros/survey_tree" />
         </tal:subtree>
       </li>
     </ol>
@@ -129,7 +129,7 @@
         <a href="http://www.gnu.org/licenses/gpl.html" i18n:translate="appendix_gpl_license">GPL License</a>
         |
         <a href="http://creativecommons.org/licenses/by-sa/2.5/"
-            i18n:attr="alt"
+            i18n:attributes="alt"
             alt="CC License">
             <img class="creative_commons_logo" src="++resource++osha.oira.images/creative_commons.png"/>
         </a>

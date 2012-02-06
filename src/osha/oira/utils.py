@@ -1,6 +1,8 @@
 from mobile.sniffer.detect import  detect_mobile_browser
 from mobile.sniffer.utilities import get_user_agent
 
+from five import grok
+
 from Acquisition import aq_inner
 
 from zope.app.component.hooks import getSite
@@ -10,6 +12,10 @@ from Products.CMFCore.utils import getToolByName
 from euphorie.client.sector import IClientSector
 from euphorie.client.utils import WebHelpers
 from euphorie.content.survey import ISurvey
+
+from osha.oira import interfaces
+
+grok.templatedir('templates')
 
 def remove_empty_modules(ls):
     """ Takes a list of modules and risks.
@@ -83,6 +89,9 @@ def get_actioned_nodes(ls):
 class OSHAWebHelpers(WebHelpers):
     """ Override Euphorie's webhelpers to add some more utility methods.
     """
+    grok.layer(interfaces.IOSHAClientSkinLayer)
+    grok.template('webhelpers')
+    grok.name('webhelpers')
 
     def language_dict(self):
         site = getSite()
@@ -122,9 +131,9 @@ class OSHAWebHelpers(WebHelpers):
         resp = {}
         # Only the countries in the client obj should be considered, as the
         # others are not accessible
-        for country in client.objectValues():
+        for country in client.values():
             langs = {}
-            for sector in country.objectValues():
+            for sector in country.values():
                 if not IClientSector.providedBy(sector):
                     continue
                 for survey in sector.objectValues():

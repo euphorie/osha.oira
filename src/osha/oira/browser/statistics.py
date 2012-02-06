@@ -66,7 +66,7 @@ class WriteStatistics(grok.View):
         transaction.get().commit()
 
         from pprint import pformat
-        return "Written:\n" + pformat(info_surveys) + pformat(info_modules)
+        return "Written:\n" + pformat(info_surveys) + "\n\n" + pformat(info_modules)
 
 
 class ShowStatistics(grok.View):
@@ -75,7 +75,7 @@ class ShowStatistics(grok.View):
     grok.name('show-statistics')
 
     def render(self):
-        URL = 'http://birt.osha.europa.eu/birt-viewer/frameset?__report=linkstats/linkreportdirect.rptdesign&__format=pdf&State=orange%20%20%20%20&ContentType=Document&Category=.%2A&Path=/&Subsite=main'
+        URL = 'http://localhost:8080/birt-viewer/frameset?__report=report/OiRA-Reports/usage_statistics.rptdesign&__sessionId=20120131_180440_301&__format=pdf&__pageoverflow=0&__asattachment=true&__overwrite=false'
         pm = getToolByName(self.context, 'portal_membership')
         if pm.isAnonymousUser():
             raise Unauthorized, 'must be logged in to view statistics'
@@ -85,7 +85,7 @@ class ShowStatistics(grok.View):
         #parsedquery = urlparse.parse_qs(parsedurl.query)
         #parsedquery['member_id'] = member.id
         #url = urlparse.urlunparse(parsedurl[:4] + (urllib.urlencode(parsedquery),) + parsedurl[5:])
-        url = URL + '&member_id=%s' % member.id
+        url = URL + '&sector=%s' % member.id
 
         page = urllib2.urlopen(url)
         self.context.REQUEST.response.setHeader('content-type', page.headers.get('content-type') or 'application/pdf')

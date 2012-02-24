@@ -49,7 +49,7 @@ class OiRARiskTests(OiRATestCase):
             # Merely installing the OiRA skin doesn't set it's layer on the
             # request. This happens during IBeforeTraverseEvent, so we have to do 
             # here manually
-            alsoProvides(self.portal.REQUEST, interfaces.IOSHAContentSkinLayer)
+            alsoProvides(self.portal.REQUEST, interfaces.IOSHAContentFormLayer)
 
             # Test AddForm
             form = module.unrestrictedTraverse('++add++euphorie.risk').form_instance
@@ -75,7 +75,7 @@ class OiRARiskTests(OiRATestCase):
         """
         self.loginAsPortalOwner()
         module = self.createModule()
-        alsoProvides(self.portal.REQUEST, interfaces.IOSHAContentSkinLayer)
+        alsoProvides(self.portal.REQUEST, interfaces.IOSHAContentFormLayer)
         form = module.unrestrictedTraverse('++add++euphorie.risk').form_instance
         form.updateFields()
 

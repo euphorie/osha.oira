@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      i18n:domain="nuplone"
+      metal:use-macro="context/@@layout/macros/layout"
+      meta:interpolation="true">
+  <body>
+    <metal:title metal:fill-slot="title" i18n:translate="title_login">Login</metal:title>
+    <metal:content fill-slot="content">
+      <p tal:condition="not:view/anonymous" class="notice message" i18n:translate="message_already_logged_in">
+        You are already logged in. Please logout first before trying to login again. 
+        </p><p tal:condition="view/failed" class="notice message" i18n:translate="message_invalid_login">Invalid login. If you
+        forgot your password you can <a href="${context/absolute_url}/@@request-password-reset"
+          i18n:name="reset_password" i18n:translate="reset_password">request a password reset</a>.</p>
+
+      <form tal:condition="view/anonymous" class="concise" action="${view/action}" method="post" id="loginForm">
+        <fieldset>
+          <legend i18n:translate="legend_credentials">Credentials</legend>
+          <input type="hidden" name="came_from" value="${view/came_from}"/>
+          <input type="hidden" name="login_attempt" value="1"/>
+          <label><tal:span i18n:translate="label_login">Login</tal:span>
+            <input class="autofocus" id="login_name" name="__ac_name" type="text" value="${request/form/__ac_name|nothing}"/></label>
+          <label><tal:span i18n:translate="label_password">Password</tal:span>
+            <input class="autofocus" id="login_password" name="__ac_password" type="password"/></label>
+        </fieldset>
+
+        <div class="buttonBar">
+          <button type="submit" id="login_submit" i18n:translate="button_login">Login</button>
+        </div>
+      </form>
+
+      <p i18n:translate="message_reset_password">If you forgot your password you can <a href="${context/absolute_url}/@@request-password-reset"
+          i18n:name="reset_password" i18n:translate="reset_password">request a password reset</a>.</p>
+    </metal:content>
+  </body>
+</html>

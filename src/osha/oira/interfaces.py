@@ -11,6 +11,9 @@ class IProductLayer(Interface):
 class IOSHAContentFormLayer(IOiRAFormLayer, NuPloneSkin):
     """Marker interface for the CMS/Content editing skin."""
 
+class IOSHAContentSkinLayer(NuPloneSkin):
+    """Marker interface for the CMS/Content editing skin."""
+
 class IOSHAClientSkinLayer(interfaces.IClientSkinLayer):
     """Marker interface for the OSHA client skin."""
 

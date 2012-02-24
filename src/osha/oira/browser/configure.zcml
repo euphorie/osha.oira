@@ -8,6 +8,12 @@
         name="OiRA"
         />
 
+    <interface
+        interface="..interfaces.IOSHAContentSkinLayer"
+        type="zope.publisher.interfaces.browser.IBrowserSkinType"
+        name="OiRA"
+        />
+
     <browser:resourceDirectory
         name="osha.oira.images"
         directory="images"

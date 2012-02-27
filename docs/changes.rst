@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.2.1 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
 1.2 (2012-02-27)
 ----------------
 - #4249: Restrict the @@contact form and hide links to it. [jcbrand]

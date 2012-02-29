@@ -16,14 +16,10 @@
   <body class="identification ${webhelpers/extra_css}">
     <h1>${context/title}</h1>
 
-    <p i18n:translate="intro_print_identification_1">
-      You may want to print out the list of risks you cannot immediately answer and look for the information at the relevant workplace (by walking around the workplace and looking at what could cause harm, or by consulting the workers about problems they have encountered). Then you can introduce the information into the tool.
-    </p>
-    <p i18n:translate="intro_print_identification_2">
-      You can also distribute the list among the workers and invite them to participate in identifying the hazards/problems, evaluating the risks and deciding on preventive action. Their feedback can be taken into account when filling in this tool.
-    </p>
+    <p i18n:translate="intro_print_identification_1">It is possible for you to print out the contents of the tool to enable you to look for the information at the relevant workplace (by walking around and looking at what could cause harm, or by consulting the workers and/or their representatives about problems they have encountered). You can then introduce the information into the tool.</p>
+    <p i18n:translate="intro_print_identification_2">You may also wish to distribute the contents among the workers and/or their representatives and invite them to participate in identifying the hazards/problems, evaluating the risks and deciding on preventive action.Their feedback should be taken into account when filling in this tool.</p>
     <p i18n:translate="intro_identification">
-    You can print the <tal:span i18n:name="list-of-risks"><a i18n:translate="list_of_risks" href="${python:view.url(name='report')}/download">list of all risks</a></tal:span>.
+    You can print the <tal:span i18n:name="list-of-risks"><a i18n:translate="list_of_risks" href="${python:view.url(name='report')}/download">contents of the tool</a></tal:span>.
     </p>
 
     <p>

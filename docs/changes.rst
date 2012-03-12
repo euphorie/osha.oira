@@ -4,7 +4,7 @@ Changelog
 1.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added Bulgarian translations [thomasw]
 
 
 1.2 (2012-02-27)

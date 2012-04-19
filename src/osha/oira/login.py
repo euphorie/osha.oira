@@ -21,7 +21,7 @@ class Login(login.Login):
     grok.template("login")
 
     def update(self):
-        super(LoginView, self).update()
+        super(Login, self).update()
         member = getSecurityManager().getUser()
         if not member.getId():
             return

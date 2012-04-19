@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      i18n:domain="nuplone"
+      meta:interpolation="true"
+      tal:define="tools context/@@tools"
+      metal:use-macro="context/@@layout/macros/layout">
+  <body>
+    <metal:title fill-slot="title">
+      <tal:title tal:condition="tools/anonymous" i18n:translate="header_login">Login</tal:title><tal:title tal:condition="not:tools/anonymous" i18n:translate="header_error_unauthorized">Unauthorized</tal:title>
+    </metal:title>
+
+    <metal:content fill-slot="content">
+      <p class="message notice" tal:condition="not:tools/anonymous" i18n:translate="message_error_unauthorized">
+        I am afraid you are not authorised to do this.
+      </p>
+
+      <tal:block condition="tools/anonymous">
+        <p class="message notice" i18n:translate="message_error_not_logged_in">
+          You need to be logged in to access this page.
+        </p>
+
+        <form class="concise" action="${tools/portal_url}/@@login" method="post">
+          <fieldset>
+            <legend i18n:translate="legend_credentials">Credentials</legend>
+            <input type="hidden" name="login_attempt" value="1"/>
+            <label><tal:span i18n:translate="label_login">Login</tal:span>
+              <input name="__ac_name" type="text" id="login_name"/></label>
+            <label><tal:span i18n:translate="label_password">Password</tal:span>
+              <input name="__ac_password" type="password" id="login_password"/></label>
+          </fieldset>
+
+          <div class="buttonBar">
+            <button type="submit" id="login_submit" i18n:translate="button_login">Login</button>
+          </div>
+        </form>
+
+      <p i18n:translate="message_reset_password">If you forgot your password you can <a href="${context/absolute_url}/@@request-password-reset"
+          i18n:name="reset_password" i18n:translate="reset_password">request a password reset</a>.</p>
+      </tal:block>
+
+    </metal:content>
+  </body>
+</html>

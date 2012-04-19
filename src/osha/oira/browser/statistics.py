@@ -44,7 +44,9 @@ class WriteStatistics(grok.View):
                             logger.info('Object is not a survey but inside surveygroup, skipping. %s' % '/'.join(survey.getPhysicalPath()))
                             continue
                         info_surveys.append((survey_path, survey.Language(), published))
-                        info_modules = info_modules + map(lambda tup: ('/'.join((survey_parent_path, tup[0])), tup[1]), self._get_modules_info(survey))
+                        # we only need modules info for sessions, i.e. published surveys only
+                        if published:
+                            info_modules = info_modules + map(lambda tup: ('/'.join((survey_parent_path, tup[0])), tup[1]), self._get_modules_info(survey))
 
         return (info_surveys, info_modules)
 

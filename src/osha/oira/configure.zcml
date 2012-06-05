@@ -15,8 +15,8 @@
         translations will break the tests.
     -->
     <i18n:registerTranslations directory="locales" />
-
     <five:registerPackage package="." />
+
 
     <genericsetup:registerProfile
         name="default"
@@ -37,7 +37,6 @@
          osha.oira's customizations
     -->
     <grok:grok package="." />
-
     <include file="behaviors.zcml" />
 
     <adapter
@@ -49,15 +48,6 @@
         factory=".survey.OSHASurveyPublishTraverser"
         for="euphorie.content.survey.ISurvey .interfaces.IOSHAClientSkinLayer"
         provides="zope.publisher.interfaces.IPublishTraverse"/>
-
-    <browser:page
-        for="*"
-        layer=".interfaces.IOSHAClientSkinLayer"
-        class=".utils.OSHAWebHelpers"
-        name="webhelpers"
-        template="templates/webhelpers.pt"
-        permission="zope2.View"
-        />
 
     <browser:page
         for="*"

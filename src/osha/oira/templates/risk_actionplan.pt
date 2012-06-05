@@ -19,7 +19,7 @@
 <h1>${view/title}</h1>
 <form method="post" action="${context/absolute_url}">
     <div class="warning last span-15" tal:define="show_statement python:True">
-    <metal:call use-macro="webhelpers/index/macros/risk_info" />
+    <metal:call use-macro="webhelpers/macros/risk_info" />
     <fieldset tal:define="value data/priority">
         <label i18n:translate="risk_priority">
         This is a <select name="priority" i18n:name="priority_value">
@@ -31,7 +31,7 @@
     </div>
 
     <div class="warning last span-15" tal:condition="risk/legal_reference|nothing">
-      <metal:call use-macro="webhelpers/index/macros/risk_legal_collapsible" />
+      <metal:call use-macro="webhelpers/macros/risk_legal_collapsible" />
     </div>
 
     <div class="solutions" id="standardSolutions" tal:condition="python:view.solutions">
@@ -263,7 +263,7 @@
           <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_action_plan">Action Plan</tal:span>
         </a>
         <tal:block define="tree view/tree">
-          <metal:call use-macro="webhelpers/index/macros/survey_tree" />
+          <metal:call use-macro="webhelpers/macros/survey_tree" />
         </tal:block>
       </li>
       <li id="step-5">

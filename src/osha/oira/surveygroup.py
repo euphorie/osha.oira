@@ -1,9 +1,12 @@
 from five import grok
-from five.pt.pagetemplate import ViewPageTemplateFile
 from zope.site.hooks import getSite
 from Acquisition import aq_parent
-from plone.app.kss.plonekssview import PloneKSSView
+
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
+
+from plone.app.kss.plonekssview import PloneKSSView
+
 from plonetheme.nuplone.skin.interfaces import NuPloneSkin
 from plonetheme.nuplone.skin import actions
 from plonetheme.nuplone.utils import getPortal

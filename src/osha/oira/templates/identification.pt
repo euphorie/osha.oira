@@ -12,54 +12,19 @@
     <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
     <metal:meta use-macro="webhelpers/macros/headers"/>
     <metal:css use-macro="webhelpers/macros/css"/>
-    <link rel="stylesheet" type="text/css" media="all" href="++resource++collective.alerts.resources/jquery.alerts.css" />
   </head>
-  <body class="report ${webhelpers/extra_css}">
-    <h1 i18n:translate="header_reporting">Reporting</h1>
+  <body class="identification ${webhelpers/extra_css}">
+    <h1>${context/title}</h1>
 
-    <p i18n:translate="report_intro">
-    Now that you have finished identifying all the risks in your organisation
-    and created an action plan you can create a report which lists all your
-    results. You can, if desired, add some extra comments that should be
-    included in this report in the field below.
+    <p i18n:translate="intro_print_identification_1">It is possible for you to print out the contents of the tool to enable you to look for the information at the relevant workplace (by walking around and looking at what could cause harm, or by consulting the workers and/or their representatives about problems they have encountered). You can then introduce the information into the tool.</p>
+    <p i18n:translate="intro_print_identification_2">You may also wish to distribute the contents among the workers and/or their representatives and invite them to participate in identifying the hazards/problems, evaluating the risks and deciding on preventive action.Their feedback should be taken into account when filling in this tool.</p>
+    <p i18n:translate="intro_identification">
+    You can print the <tal:span i18n:name="list-of-risks"><a i18n:translate="list_of_risks" href="${python:view.url(name='report')}/download">contents of the tool</a></tal:span>.
     </p>
 
-    <form id="report_comment_form" accept-charset="UTF-8" method="post" action="${request/URL}">
-        <fieldset class="concise" id="comments">
-            <label for="comment" class="superImpose" i18n:translate="label_report_comment">
-                Please leave any extra comments that should be included in the report
-                in this field.
-            </label>
-            <textarea id="comment" 
-                    name="comment:utf8:ustring" 
-                    class="span-15" 
-                    rows="5"
-                    tal:content="view/session/report_comment">
-            </textarea>
-        </fieldset>
-        <p id="username" 
-           tal:define="member string:${context/portal_membership/getAuthenticatedMember}"
-           style="display:None" tal:content="member">username</p>
-        <p id="survey_popup_url" 
-           tal:define="url view/get_survey_url|nothing"
-           style="display:None" tal:content="python:url or 'http://www.surveymonkey.com/s/OiRATool'">http://www.surveymonkey.com/s/OiRATool</p>
-        <p id="survey_popup_text" 
-            style="display:None" 
-            i18n:translate="popup_text">Please give us your feedback about this tool: it will take you only 3 minutes! 
-            We really value your contribution during this testing phase of the OiRA tool.</p>
-        <p id="survey_popup_confirm" 
-            style="display:None" 
-            i18n:translate="popup_confirm">Take me to the survey</p>
-        <p id="survey_popup_deny" style="display:None" i18n:translate="popup_deny">No thanks</p>
-        <p class="buttonBar">
-            <button type="submit" 
-                    name="next" 
-                    value="next" 
-                    id="report_comment_submit"
-                    i18n:translate="label_save_and_continue" 
-                    class="next floatAfter">Save and continue</button>
-        </p>
-    </form>
+    <p>
+      <a i18n:translate="label_start_identification" class="button-medium" href="${view/next_url}">Start Risk Identification</a>
+    </p>
 
     <ol id="steps" tal:define="survey_url webhelpers/survey_url">
       <li class="complete" id="step-1">
@@ -68,25 +33,25 @@
           <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_preparation">Preparation</tal:span>
         </a>
       </li>
-      <li class="complete" id="step-2">
+      <li class="active current" id="step-2">
         <a href="${survey_url}/identification">
           <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_identification">Identification</tal:span>
           <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_identification">Identification</tal:span>
         </a>
       </li>
-      <li class="complete" id="step-3">
+      <li id="step-3">
         <a href="${survey_url}/evaluation">
           <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_evaluation">Evaluation</tal:span>
           <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_evaluation">Evaluation</tal:span>
         </a>
       </li>
-      <li class="complete" id="step-4">
+      <li id="step-4">
         <a href="${survey_url}/actionplan">
           <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_action_plan">Action Plan</tal:span>
           <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_action_plan">Action Plan</tal:span>
         </a>
       </li>
-      <li class="current active" id="step-5">
+      <li id="step-5">
         <a href="${survey_url}/report">
           <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_report">Report</tal:span>
           <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_report">Report</tal:span>
@@ -102,11 +67,8 @@
       <li><a href="${webhelpers/survey_url}/status" i18n:translate="navigation_status">Status</a></li>
       <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>
     </ul>
-
-    <metal:appendix     use-macro="webhelpers/macros/appendix"/>
-    <metal:javascripts  use-macro="webhelpers/macros/javascript"/>
-    <script type="text/javascript" src="++resource++collective.alerts.resources/jquery.alerts.js"></script>
-    <script type="text/javascript" src="++resource++osha.oira.javascripts/oira.js"></script>
+    <metal:css use-macro="webhelpers/macros/appendix"/>
+    <metal:css use-macro="webhelpers/macros/javascript"/>
     <tal:block replace="tile:client-analytics"/>
   </body>
 </html>

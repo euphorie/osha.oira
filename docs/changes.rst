@@ -1,6 +1,32 @@
 Changelog
 =========
 
+1.2.1 (unreleased)
+------------------
+
+- Added Bulgarian translations [thomasw]
+
+
+1.2 (2012-02-27)
+----------------
+- #4249: Restrict the @@contact form and hide links to it. [jcbrand]
+
+1.1 (2012-12-17)
+----------------
+- #3813: Also show children of optional modules in the downloadable report. [jcbrand]
+- #3536: Updated the en translations file. [jcbrand]
+- AttributeError bugfix on the report.pt view. [jcbrand]
+
+1.0 (2012-12-13)
+----------------
+
+- #3813 Adjust the Content of tools feature to display ALL risks [jcbrand]    
+- #3811 "Measure" text on accordion not translated. [jcbrand] 
+- #3792 Provide route back to Identification phase from the identification report. [jcbrand]
+- #3779 Privacy not working on client and community sites [jcbrand]
+- #3892 Exchange the OiRA logo in the admin part [jcbrand] 
+- #4071 Integrate Wichert's changes in to osha.oira [jcbrand]
+
 0.24 (2011-10-07)
 -----------------
 - 3805: Added Slovenian translations. [thomas_w]

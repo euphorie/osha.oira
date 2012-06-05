@@ -55,6 +55,14 @@ class OSHAStart(survey.Start):
     grok.name("start")
 
 
+class OSHAIdentification(survey.Identification):
+    """ Override the 'identification' page to provide our own template.
+    """
+    grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
+    grok.template("identification")
+    grok.name("index_html")
+
+
 class OSHASurveyView(SurveyView):
     grok.layer(NuPloneSkin)
     grok.template("survey_view")
@@ -229,6 +237,19 @@ class OSHAIdentificationReport(report.IdentificationReport):
             return OSHAIdentificationReportDownload(aq_inner(self.context), request)
         else:
             raise NotFound(self, name, request)
+
+    def update(self):
+        if survey.redirectOnSurveyUpdate(self.request):
+            return
+
+        # 3813: Include children from optional modules.
+        # Removed this: .filter(sql.not_(model.SKIPPED_PARENTS))\
+        session = Session()
+        dbsession = SessionManager.session
+        query = session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session == dbsession)\
+                .order_by(model.SurveyTreeItem.path)
+        self.nodes = query.all()
 
 
 class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPlanMixin):
@@ -558,6 +579,17 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
     """Generate identification report in RTF form.
     """
     grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
+
+    def getNodes(self):
+        """ Return an ordered list of all relevant tree items for the current
+            survey.
+        """
+        # 3813: Include children from optional modules.
+        # Removed this: .filter(sql.not_(model.SKIPPED_PARENTS))\
+        query = Session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session == self.session)\
+                .order_by(model.SurveyTreeItem.path)
+        return query.all()
 
     def addIdentificationResults(self, document):
         survey=self.request.survey

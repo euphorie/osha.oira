@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - Added Bulgarian translations [thomasw]
+- change devbox to client.oiraproject.eu fixes #4304 [pilz]
 
 
 1.2 (2012-02-27)

@@ -24,7 +24,7 @@ setup(name='osha.oira',
       keywords='euphorie osha oira',
       author='syslab.com',
       author_email='info@syslab.com',
-      url="'http://www.oiraproject.eu/'",
+      url="http://www.oiraproject.eu/",
       license='GPL',
       message_extractors = {"src": [
             ("**.py",    "lingua_python", None),

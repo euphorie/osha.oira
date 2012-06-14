@@ -107,7 +107,12 @@ class ShowStatistics(grok.View):
     grok.name('show-statistics')
 
     def render(self):
-        URL = 'http://localhost:8080/birt-viewer/frameset?__report=report/OiRA-Reports/usage_statistics.rptdesign&__sessionId=20120131_180440_301&__format=pdf&__pageoverflow=0&__asattachment=true&__overwrite=false'
+        ptool = getToolByName(self.context, 'portal_properties')
+        site_properties = ptool.site_properties
+        URL = site_properties.getProperty('birt_report_url')
+        if not URL:
+            return "birt_report_url not set, please contact an administrator"
+        #URL = 'http://localhost:8080/birt-viewer/frameset?__report=report/OiRA-Reports/usage_statistics.rptdesign&__sessionId=20120131_180440_301&__format=pdf&__pageoverflow=0&__asattachment=true&__overwrite=false'
         pm = getToolByName(self.context, 'portal_membership')
         if pm.isAnonymousUser():
             raise Unauthorized, 'must be logged in to view statistics'

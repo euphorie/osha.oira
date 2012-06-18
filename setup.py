@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.2dev'
+version = '1.2.1'
 
 tests_require = [
           "Euphorie [tests]",
@@ -24,7 +24,7 @@ setup(name='osha.oira',
       keywords='euphorie osha oira',
       author='syslab.com',
       author_email='info@syslab.com',
-      url="'http://www.oiraproject.eu/'",
+      url="http://www.oiraproject.eu/",
       license='GPL',
       message_extractors = {"src": [
             ("**.py",    "lingua_python", None),

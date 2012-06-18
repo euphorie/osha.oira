@@ -9,21 +9,17 @@
       i18n:domain="euphorie"
       tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers">
   <head>
-    <title i18n:translate="title_tool">OiRA</title>
+    <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
     <metal:meta use-macro="webhelpers/macros/headers"/>
     <metal:css use-macro="webhelpers/macros/css"/>
   </head>
   <body class="identification ${webhelpers/extra_css}">
     <h1>${context/title}</h1>
 
-    <p i18n:translate="intro_print_identification_1">
-      You may want to print out the list of risks you cannot immediately answer and look for the information at the relevant workplace (by walking around the workplace and looking at what could cause harm, or by consulting the workers about problems they have encountered). Then you can introduce the information into the tool.
-    </p>
-    <p i18n:translate="intro_print_identification_2">
-      You can also distribute the list among the workers and invite them to participate in identifying the hazards/problems, evaluating the risks and deciding on preventive action. Their feedback can be taken into account when filling in this tool.
-    </p>
+    <p i18n:translate="intro_print_identification_1">It is possible for you to print out the contents of the tool to enable you to look for the information at the relevant workplace (by walking around and looking at what could cause harm, or by consulting the workers and/or their representatives about problems they have encountered). You can then introduce the information into the tool.</p>
+    <p i18n:translate="intro_print_identification_2">You may also wish to distribute the contents among the workers and/or their representatives and invite them to participate in identifying the hazards/problems, evaluating the risks and deciding on preventive action.Their feedback should be taken into account when filling in this tool.</p>
     <p i18n:translate="intro_identification">
-    You can print the <tal:span i18n:name="list-of-risks"><a i18n:translate="list_of_risks" href="${python:view.url(name='report')}/download">list of all risks</a></tal:span>.
+    You can print the <tal:span i18n:name="list-of-risks"><a i18n:translate="list_of_risks" href="${python:view.url(name='report')}/download">contents of the tool</a></tal:span>.
     </p>
 
     <p>
@@ -66,7 +62,7 @@
     <ul id="navigation">
       <metal:home use-macro="webhelpers/macros/homelink"/>
       <li><a href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a></li>
-      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">Surveys</a></li>
+      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">Sessions</a></li>
       <li><a href="${webhelpers/help_url}#identification" i18n:translate="navigation_help">Help</a></li>
       <li><a href="${webhelpers/survey_url}/status" i18n:translate="navigation_status">Status</a></li>
       <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>

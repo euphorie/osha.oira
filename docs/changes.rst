@@ -6,6 +6,7 @@ Changelog
 
 - Added Bulgarian translations [thomasw]
 - Added Czech translations. Ticket #4036. [jcbrand]
+- Updated Greek translations. #4405. [jcbrand]
 - change devbox to client.oiraproject.eu fixes #4304 [pilz]
 
 

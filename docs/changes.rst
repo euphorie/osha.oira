@@ -8,6 +8,7 @@ Changelog
 - Added Czech translations. Ticket #4036. [jcbrand]
 - Updated Greek translations. #4405. [jcbrand]
 - change devbox to client.oiraproject.eu fixes #4304 [pilz]
+- Unescape HTML codes when creating RTF docs. Fixes #4395. [jcbrand]
 
 
 1.2 (2012-02-27)

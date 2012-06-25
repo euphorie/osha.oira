@@ -337,9 +337,10 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                         Paragraph(
                                 styles.Normal, 
                                 ParagraphPropertySet(left_indent=300, right_indent=300),
-                                t(_(htmllaundry.StripMarkup(zodb_node.description)))
-                                )
-                            )
+                                t(_(utils.html_unescape(
+                                        htmllaundry.strip_markup(zodb_node.description))
+                                ))
+                            ))
                 body.append(Paragraph(""))
 
             if node.comment and node.comment.strip():
@@ -486,7 +487,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             some changes to also show unanswered risks and non-present risks.
             #1517 and #1518
         """
-        document=report.createDocument()
+        document = report.createDocument(self.session)
         ss = document.StyleSheet
 
         # Define some more custom styles
@@ -613,8 +614,14 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
             if node.type!="risk":
                 continue
 
-            zodb_node=survey.restrictedTraverse(node.zodb_path.split("/"))
-            section.append(Paragraph(styles.Normal, htmllaundry.StripMarkup(zodb_node.description)))
+            zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
+            section.append(
+                    Paragraph(
+                        styles.Normal, 
+                        utils.html_unescape(
+                            htmllaundry.strip_markup(zodb_node.description))
+                        )
+                    )
 
             for i in range(0,8):
                 p =  Paragraph(styles.Normal, " ")

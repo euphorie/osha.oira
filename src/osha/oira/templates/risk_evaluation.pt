@@ -21,10 +21,6 @@
       <metal:call use-macro="webhelpers/macros/risk_info" />
     </div>
 
-    <div class="notice" tal:condition="risk/legal_reference|nothing">
-      <metal:call use-macro="webhelpers/macros/risk_legal_collapsible" />
-    </div>
-
     <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}">
       <tal:block condition="python:risk.evaluation_method=='calculated'">
         <tal:kinney condition="python:algorithm!='french'">

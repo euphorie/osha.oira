@@ -9,6 +9,7 @@ Changelog
 - Updated Greek translations. #4405. [jcbrand]
 - change devbox to client.oiraproject.eu fixes #4304 [pilz]
 - Unescape HTML codes when creating RTF docs. Fixes #4395. [jcbrand]
+- Hide/Move legal and policy text on evaluation and action plan steps. For #5351. [jcbrand]
 
 
 1.2 (2012-02-27)

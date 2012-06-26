@@ -234,24 +234,19 @@ msgstr "La opción permite al usuario final saltarse el paso de evaluación."
 msgid "help_profilequestion_question"
 msgstr "Si es \"opcional\", se debe formular de forma que se pueda responder con SÍ (el usuario final deberá marcar la casilla) o NO (por ejemplo, \"¿trabaja cara al público?\"). Si es \"repetible\", se debe formular como una orden para rellenar muchos valores (por ejemplo, \"Enumere sus diferentes ubicaciones de trabajo\")."
 
-#. Default: The basic architecture of an Online interactive Risk Assessment
-#. consists of: - profile questions (questions defining the company profile) -
-#. modules and sub-modules - risks (affirmative statements). Profile questions
-#. are
-#. used to determine whether particular modules apply to the end user at all
-#. (OPTIONAL), or whether they should be repeated a number of times
-#. (REPEATABLE).
-#. Such questions are asked BEFORE starting the risk identification and
-#. evaluation.
-#. If the end-user does not confirm that an optional profile question is
-#. relevant
-#. (by ticking the box), then the corresponding module will be skipped
-#. entirely. If
-#. the end-user enters more than one option to a repeatable profile question
-#. then
-#. the corresponding module will be repeated the specified number of times.
-#: src/osha/oira/manual_translations.py:77
-msgid "description_profilequestion"
+#: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:8
+msgid ""
+"The basic architecture of an Online interactive Risk Assessment consists of: "
+"- profile questions (questions defining the company profile) - modules and "
+"potentially sub-modules - risks (positive statements) Profile questions are "
+"used to determine whether particular modules apply to the end user at all "
+"(OPTIONAL), or whether they should be repeated a number of times "
+"(REPEATABLE). Such questions are asked BEFORE starting the risk "
+"identification and evaluation. If the end-user does not confirm that an "
+"optional profile question is relevant (by ticking the box), then the "
+"corresponding module will be skipped entirely. If the end-user enters more "
+"than one option to a repeatable profile question then the corresponding "
+"module will be repeated the specified number of times."
 msgstr "La arquitectura básica de una evaluación de riesgos interactiva online está formada por: - preguntas de perfil (preguntas que definen el perfil de la empresa) - módulos y submódulos - riesgos (declaraciones afirmativas). Las preguntas de perfil se utilizan para determinar si se aplican módulos particulares al  usuario final (OPCIONAL) o si se deben repetir un determinado número de veces (REPETIBLE). Dichas preguntas se realizan ANTES de iniciar la identificación y evaluación de riesgos. Si el usuario final no confirma que una pregunta de perfil opcional es relevante (haciendo clic en la casilla), el módulo correspondiente se omitirá completamente. Si el usuario final introduce más de una opción en un perfil repetible, el módulo correspondiente se repetirá el número de veces especificado."
 
 #. Default: Include any relevant information that may be helpful for the end-

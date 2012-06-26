@@ -274,18 +274,19 @@ msgstr ""
 "\", il faut le formuler comme une invitation à remplir plusieurs valeurs "
 "(par ex. \"Répertorier vos différents lieux de travail\")."
 
-#. Default: The basic architecture of an Online interactive Risk Assessment
-#. consists of: - profile questions (questions defining the company profile) -
-#. modules and sub-modules - risks (affirmative statements). Profile questions are
-#. used to determine whether particular modules apply to the end user at all
-#. (OPTIONAL), or whether they should be repeated a number of times (REPEATABLE).
-#. Such questions are asked BEFORE starting the risk identification and evaluation.
-#. If the end-user does not confirm that an optional profile question is relevant
-#. (by ticking the box), then the corresponding module will be skipped entirely. If
-#. the end-user enters more than one option to a repeatable profile question then
-#. the corresponding module will be repeated the specified number of times.
-#: src/osha/oira/manual_translations.py:78
-msgid "description_profilequestion"
+#: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:8
+msgid ""
+"The basic architecture of an Online interactive Risk Assessment consists of:"
+" - profile questions (questions defining the company profile) - modules and "
+"potentially sub-modules - risks (positive statements) Profile questions are "
+"used to determine whether particular modules apply to the end user at all "
+"(OPTIONAL), or whether they should be repeated a number of times "
+"(REPEATABLE). Such questions are asked BEFORE starting the risk "
+"identification and evaluation. If the end-user does not confirm that an "
+"optional profile question is relevant (by ticking the box), then the "
+"corresponding module will be skipped entirely. If the end-user enters more "
+"than one option to a repeatable profile question then the corresponding "
+"module will be repeated the specified number of times."
 msgstr ""
 "L'architecture de base d'une évaluation interactive des risques en ligne se "
 "compose de : - questions de profil (questions définissant le profil de la "

@@ -264,24 +264,19 @@ msgstr ""
 " musí to být formulováno jako výzva k vyplnění mnoha hodnot (např. "
 "\"Vyjmenujte svá různá pracoviště\")."
 
-#. Default: The basic architecture of an Online interactive Risk Assessment
-#. consists of: - profile questions (questions defining the company profile) -
-#. modules and sub-modules - risks (affirmative statements). Profile questions
-#. are
-#. used to determine whether particular modules apply to the end user at all
-#. (OPTIONAL), or whether they should be repeated a number of times
-#. (REPEATABLE).
-#. Such questions are asked BEFORE starting the risk identification and
-#. evaluation.
-#. If the end-user does not confirm that an optional profile question is
-#. relevant
-#. (by ticking the box), then the corresponding module will be skipped
-#. entirely. If
-#. the end-user enters more than one option to a repeatable profile question
-#. then
-#. the corresponding module will be repeated the specified number of times.
-#: src/osha/oira/manual_translations.py:77
-msgid "description_profilequestion"
+#: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:8
+msgid ""
+"The basic architecture of an Online interactive Risk Assessment consists of:"
+" - profile questions (questions defining the company profile) - modules and "
+"potentially sub-modules - risks (positive statements) Profile questions are "
+"used to determine whether particular modules apply to the end user at all "
+"(OPTIONAL), or whether they should be repeated a number of times "
+"(REPEATABLE). Such questions are asked BEFORE starting the risk "
+"identification and evaluation. If the end-user does not confirm that an "
+"optional profile question is relevant (by ticking the box), then the "
+"corresponding module will be skipped entirely. If the end-user enters more "
+"than one option to a repeatable profile question then the corresponding "
+"module will be repeated the specified number of times."
 msgstr ""
 "Základní architektura Online interaktivního vyhodnocení rizik se skládá: - z"
 " profilových otázek (otázky definující profil společnosti) - moduly a dílčí "
@@ -293,6 +288,7 @@ msgstr ""
 "políčka), pak bude příslušný modul zcela přeskočen. Pokud koncový uživatel "
 "zadá do opakovatelné profilové otázky více než jednu možnost, pak se bude "
 "příslušný modul opakovat tolikrát, kolik opakování bude určeno."
+
 
 #. Default: Include any relevant information that may be helpful for the end-
 #. user.

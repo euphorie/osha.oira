@@ -274,24 +274,19 @@ msgstr ""
 "συμπλήρωσης πολλαπλών τιμών (π.χ. \"Παραθέστε τις διαφορετικές θέσεις "
 "εργασίας σας\")."
 
-#. Default: The basic architecture of an Online interactive Risk Assessment
-#. consists of: - profile questions (questions defining the company profile) -
-#. modules and sub-modules - risks (affirmative statements). Profile questions
-#. are
-#. used to determine whether particular modules apply to the end user at all
-#. (OPTIONAL), or whether they should be repeated a number of times
-#. (REPEATABLE).
-#. Such questions are asked BEFORE starting the risk identification and
-#. evaluation.
-#. If the end-user does not confirm that an optional profile question is
-#. relevant
-#. (by ticking the box), then the corresponding module will be skipped
-#. entirely. If
-#. the end-user enters more than one option to a repeatable profile question
-#. then
-#. the corresponding module will be repeated the specified number of times.
-#: src/osha/oira/manual_translations.py:77
-msgid "description_profilequestion"
+#: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:8
+msgid ""
+"The basic architecture of an Online interactive Risk Assessment consists of:"
+" - profile questions (questions defining the company profile) - modules and "
+"potentially sub-modules - risks (positive statements) Profile questions are "
+"used to determine whether particular modules apply to the end user at all "
+"(OPTIONAL), or whether they should be repeated a number of times "
+"(REPEATABLE). Such questions are asked BEFORE starting the risk "
+"identification and evaluation. If the end-user does not confirm that an "
+"optional profile question is relevant (by ticking the box), then the "
+"corresponding module will be skipped entirely. If the end-user enters more "
+"than one option to a repeatable profile question then the corresponding "
+"module will be repeated the specified number of times."
 msgstr ""
 "Η βασική αρχιτεκτονική μιας Online διαδραστικής Αξιολόγησης Κινδύνων "
 "αποτελείται από: - ερωτήσεις προφίλ (ερωτήσεις που προσδιορίζουν το προφίλ "
@@ -305,6 +300,7 @@ msgstr ""
 "αντίστοιχη μονάδα θα παρακαμφθεί εντελώς. Εάν ο τελικός χρήστης εισάγει "
 "περισσότερες από μια επιλογές σε μια ερώτηση προφίλ με δυνατότητα επανάληψης"
 " τότε η αντίστοιχη μονάδα θα επαναληφθεί συγκεκριμένες φορές."
+
 
 #. Default: Include any relevant information that may be helpful for the end-
 #. user.

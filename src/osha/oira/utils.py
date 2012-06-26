@@ -1,3 +1,4 @@
+import htmllib
 from mobile.sniffer.detect import  detect_mobile_browser
 from mobile.sniffer.utilities import get_user_agent
 
@@ -16,6 +17,12 @@ from euphorie.content.survey import ISurvey
 from osha.oira import interfaces
 
 grok.templatedir('templates')
+
+def html_unescape(s):
+    p = htmllib.HTMLParser(None)
+    p.save_bgn()
+    p.feed(s)
+    return p.save_end()
 
 def remove_empty_modules(ls):
     """ Takes a list of modules and risks.

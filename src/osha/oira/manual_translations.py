@@ -75,18 +75,6 @@ _("help_profilequestion_question", default=u'If this is to be "optional", '
     u'will have to tick a box) or NO (e.g. "Do you work with the public?"). '
     u'If this is to be "repeatable", it must be formulated as a prompt to '
     u'fill in multiple values (e.g. "List your different work locations").')
-_("description_profilequestion", default=u"The basic architecture of an "
-    u"Online interactive Risk Assessment consists of: - profile questions "
-    u"(questions defining the company profile) - modules and sub-modules - "
-    u"risks (affirmative statements). Profile questions are used to determine "
-    u"whether particular modules apply to the end user at all (OPTIONAL), or "
-    u"whether they should be repeated a number of times (REPEATABLE). Such "
-    u"questions are asked BEFORE starting the risk identification and "
-    u"evaluation. If the end-user does not confirm that an optional profile "
-    u"question is relevant (by ticking the box), then the corresponding "
-    u"module will be skipped entirely. If the end-user enters more than one "
-    u"option to a repeatable profile question then the corresponding module "
-    u"will be repeated the specified number of times.")
 _("help_module_description", default=u"Include any relevant information that "
     u"may be helpful for the end-user.")
 _("help_module_optional", default=u"Allows the end-user to skip this module "

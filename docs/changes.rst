@@ -10,7 +10,7 @@ Changelog
 - change devbox to client.oiraproject.eu fixes #4304 [pilz]
 - Unescape HTML codes when creating RTF docs. Fixes #4395. [jcbrand]
 - Hide/Move legal and policy text on evaluation and action plan steps. For #5351. [jcbrand]
-- Added Flemish (Vlaams) translation [thomasw]
+- Added Flemish (Vlaams nl_BE) translation #5150 [thomasw]
 
 
 1.2 (2012-02-27)

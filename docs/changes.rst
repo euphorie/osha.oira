@@ -1,23 +1,29 @@
 Changelog
 =========
 
-1.2.1 (unreleased)
+1.2.2 (2012-06-27)
 ------------------
 
-- Added Bulgarian translations [thomasw]
 - Added Czech translations. Ticket #4036. [jcbrand]
 - Updated Greek translations. #4405. [jcbrand]
-- change devbox to client.oiraproject.eu fixes #4304 [pilz]
 - Unescape HTML codes when creating RTF docs. Fixes #4395. [jcbrand]
 - Hide/Move legal and policy text on evaluation and action plan steps. For #5351. [jcbrand]
 - Added Flemish (Vlaams nl_BE) translation #5150 [thomasw]
 - Added datepicker to the risk action plan view  #3495. [jcbrand]
 
+1.2.1
+-----
+
+- Added Bulgarian translations [thomasw]
+- change devbox to client.oiraproject.eu fixes #4304 [pilz]
+
 1.2 (2012-02-27)
 ----------------
+
 - #4249: Restrict the @@contact form and hide links to it. [jcbrand]
 
 1.1 (2012-12-17)
+
 ----------------
 - #3813: Also show children of optional modules in the downloadable report. [jcbrand]
 - #3536: Updated the en translations file. [jcbrand]

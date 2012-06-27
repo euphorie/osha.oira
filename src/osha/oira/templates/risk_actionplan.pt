@@ -109,7 +109,7 @@
                                 name="measure.planning_start_year:records" 
                                 id="planning-start-year-${number}" 
                                 maxlength="4"
-                                class="numeric year${python:' error' if year_error else ''}"
+                                class="numeric year enablePicker${python:' error' if year_error else ''}"
                                 value="${actionplan/planning_start_year|actionplan/planning_start/year|nothing}"/>
                         <p class="focustip error target-id-planning-start-year-${number}" 
                             tal:condition="year_error" 
@@ -141,8 +141,8 @@
                     <label class="${python:'error' if year_error else None}"
                       for="planning-end-year-${number}" i18n:translate="label_day">Day</label>
                     <input type="text" name="measure.planning_end_year:records" id="planning-end-year-${number}" maxlength="4"
-                      class="numeric year${python:' error' if year_error else ''}"
-                      value="${actionplan/planning_end_year|actionplan/planning_end/year|nothing}"/>
+                        class="numeric year enablePicker${python:' error' if year_error else ''}"
+                        value="${actionplan/planning_end_year|actionplan/planning_end/year|nothing}"/>
                     <p class="focustip error target-id-planning-end-year-${number}" tal:condition="year_error" i18n:translate="error_invalid_year">Please enter a valid year after 1900</p>
                   </fieldset>
                 </fieldset>
@@ -169,7 +169,7 @@
     </form>
 
     <div class="warning last span-15" tal:condition="risk/legal_reference|nothing">
-      <metal:call use-macro="webhelpers/macros/risk_legal_collapsible" />
+    <metal:call use-macro="webhelpers/macros/risk_legal_collapsible" />
     </div>
 
 
@@ -205,16 +205,16 @@
               <legend i18n:translate="label_action_plan_start">Planning start</legend>
 
               <fieldset class="date-eu">
-                <label for="planning-start-day-2" i18n:translate="label_day">Day</label>
-                <input name="measure.planning_start_day:records" id="planning-start-day-2" type="text" maxlength="2" class="day"/>
+                <label i18n:translate="label_day">Day</label>
+                <input name="measure.planning_start_day:records" id="planning-start-day-" type="text" maxlength="2" class="day"/>
 
-                <label for="planning-start-month-2" i18n:translate="label_month">Month</label>
-                <select name="measure.planning_start_month:records" id="planning-start-month-2" class="month">
+                <label i18n:translate="label_month">Month</label>
+                <select name="measure.planning_start_month:records" id="planning-start-month-" class="month">
                   <option tal:repeat="month webhelpers/months" value="${python:month[0]}" >${python:month[1]}</option>
                 </select>
 
-                <label for="planning-start-year-2" i18n:translate="label_year">Year</label>
-                <input type="text" name="measure.planning_start_year:records" id="planning-start-year-2" maxlength="4" class="year"/>
+                <label i18n:translate="label_year">Year</label>
+                <input type="text" name="measure.planning_start_year:records" id="planning-start-year-" maxlength="4" class="year"/>
               </fieldset>
             </fieldset>
 
@@ -222,16 +222,16 @@
               <legend i18n:translate="label_action_plan_end">Planning end</legend>
 
               <fieldset class="date-eu">
-                <label for="planning-end-day-1" i18n:translate="label_day">Day</label>
-                <input name="measure.planning_end_day:records" id="planning-end-day-1" type="text" maxlength="2" class="day"/>
+                <label i18n:translate="label_day">Day</label>
+                <input name="measure.planning_end_day:records" id="planning-end-day-" type="text" maxlength="2" class="day"/>
 
-                <label for="planning-end-month-1" i18n:translate="label_month">Month</label>
-                <select name="measure.planning_end_month:records" id="planning-end-month-1" class="month">
+                <label i18n:translate="label_month">Month</label>
+                <select name="measure.planning_end_month:records" id="planning-end-month-" class="month">
                   <option tal:repeat="month webhelpers/months" value="${python:month[0]}">${python:month[1]}</option>
                 </select>
 
-                <label for="planning-end-year-1" i18n:translate="label_year">Year</label>
-                <input name="measure.planning_end.year:records" id="planning-end-year-1" type="text" maxlength="4" class="year"/>
+                <label i18n:translate="label_year">Year</label>
+                <input name="measure.planning_end_year:records" id="planning-end-year-" type="text" maxlength="4" class="year"/>
               </fieldset>
             </fieldset>
           </fieldset>
@@ -351,38 +351,6 @@ var delete_confirm_text = "<tal:span i18n:translate=''>Are you sure you want to 
         return false;
     };
 
-    function AddMeasurement() {
-        var measures = $("#ActionPlanItemForm");
-        var measures_count = measures.find("dt").length;
-        var active = findActive(measures);
-
-        $("#measureTemplate")
-            .find("> *")
-            .clone(true)
-            .find(".clicktip")
-                .each(function() {
-                    var id = assertId(this);
-                    $(this)
-                        .unbind("click")
-                        .bt({trigger: "click",
-                                fill: "#8293ab",
-                                strokeStyle: "#8293ab",
-                                contentSelector: "$('#" + id + "').html()"
-                                })
-                        .click(function() { return false; });
-                }).end()
-            .appendTo(measures);
-
-        measures
-            .accordion("destroy")
-            .accordion({active: active})
-            .accordion("activate", measures_count);
-
-        EnforceMeasurementStyling();
-        setupEvents();
-        $("label.superImpose", measures).each(setupSuperimpose);
-    }
-
     function MeasureHasData(m) {
         var data = $.map(m.find(":input:not(select)"),
                                    function(i) { return Boolean($(i).val()); });
@@ -414,6 +382,65 @@ var delete_confirm_text = "<tal:span i18n:translate=''>Are you sure you want to 
         }
         return false;
     }
+
+    function AddMeasurement() {
+        var measures = $("#ActionPlanItemForm");
+        var measures_count = measures.find("dt").length;
+        var active = findActive(measures);
+
+        $("#measureTemplate")
+            .find("> *")
+            .clone(true)
+            .find(".clicktip")
+                .each(function() {
+                    var id = assertId(this);
+                    $(this)
+                        .unbind("click")
+                        .bt({trigger: "click",
+                                fill: "#8293ab",
+                                strokeStyle: "#8293ab",
+                                contentSelector: "$('#" + id + "').html()"
+                                })
+                        .click(function() { return false; });
+                }).end()
+            .find('#planning-start-day-').attr('id', 'planning-start-day-'+(measures_count+1)).end()
+            .find('#planning-start-month-').attr('id', 'planning-start-month-'+(measures_count+1)).end()
+            .find('#planning-start-year-').attr('id', 'planning-start-year-'+(measures_count+1)).end()
+            .find("#planning-start-year-"+(measures_count+1)).datepicker({
+                showOn: "button",      
+                buttonImage: "++resource++osha.oira.images/calendar.gif",
+                buttonImageOnly: true,
+                dateFormat: "yy",
+                onSelect: function (dateText, inst) {
+                    $(this).parent().find(".day").val(inst.selectedDay);
+                    $(this).parent().find(".month").val(inst.selectedMonth+1);
+                }
+            }).end()
+            .find('#planning-end-day-').attr('id', 'planning-end-day-'+(measures_count+1)).end()
+            .find('#planning-end-month-').attr('id', 'planning-end-month-'+(measures_count+1)).end()
+            .find('#planning-end-year-').attr('id', 'planning-end-year-'+(measures_count+1)).end()
+            .find("#planning-end-year-"+(measures_count+1)).datepicker({
+                showOn: "button",      
+                buttonImage: "++resource++osha.oira.images/calendar.gif",
+                buttonImageOnly: true,
+                dateFormat: "yy",
+                onSelect: function (dateText, inst) {
+                    $(this).parent().find(".day").val(inst.selectedDay);
+                    $(this).parent().find(".month").val(inst.selectedMonth+1);
+                }
+            }).end()
+            .appendTo(measures);
+
+        measures
+            .accordion("destroy")
+            .accordion({active: active})
+            .accordion("activate", measures_count);
+
+        EnforceMeasurementStyling();
+        setupEvents();
+        $("label.superImpose", measures).each(setupSuperimpose);
+    }
+
 
     function addStandardSolution() {
         toggleSolutionDropdown();
@@ -453,9 +480,22 @@ var delete_confirm_text = "<tal:span i18n:translate=''>Are you sure you want to 
             .bind("click.euphorie", addStandardSolution);
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         setupEvents();
         EnforceMeasurementStyling();
+
+        $('.enablePicker').each(function () {
+            $(this).datepicker({
+                showOn: "button",      
+                buttonImage: "++resource++osha.oira.images/calendar.gif",
+                buttonImageOnly: true,
+                dateFormat: "yy",
+                onSelect: function (dateText, inst) {
+                    $(this).parent().find(".day").val(inst.selectedDay);
+                    $(this).parent().find(".month").val(inst.selectedMonth+1);
+                }
+            });
+        });
     });
 // ]]>
   </script>

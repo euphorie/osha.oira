@@ -11,7 +11,7 @@ Changelog
 - Unescape HTML codes when creating RTF docs. Fixes #4395. [jcbrand]
 - Hide/Move legal and policy text on evaluation and action plan steps. For #5351. [jcbrand]
 - Added Flemish (Vlaams nl_BE) translation #5150 [thomasw]
-
+- Added datepicker to the risk action plan view  #3495. [jcbrand]
 
 1.2 (2012-02-27)
 ----------------

@@ -47,6 +47,7 @@
     <link tal:define="sector_url webhelpers/sector_url" 
           tal:condition="python:sector_url and not on_mobile" rel="stylesheet" type="text/css" media="all" href="${sector_url}/@@sector.css" />
     <link rel="stylesheet" type="text/css" media="all" href="${oira_base_url}/main.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="${oira_base_url}/jquery-ui-1.8.21.custom.css" />
     <link 
         tal:define="portal_state context/@@plone_portal_state"
         tal:condition="python:portal_state.language() in ['el', 'el-cy', 'el-gr']"

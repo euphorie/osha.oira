@@ -45,7 +45,11 @@
         <tal:repeat repeat="actionplan data/action_plans">
         <dt class="${python:'error' if exists('actionplan/errors') else None}"><tal:i18n i18n:translate="header_measure">Measure <tal:span i18n:name="index">${repeat/actionplan/number}</tal:span></tal:i18n>
             <button i18n:translate="Remove" class="small removeButton">Remove</button>
-            <a href="#standardSolutions"  id="standardSolutionsLink" class="button small solutions" tal:condition="python:view.solutions" i18n:translate="">Standard solutions</a> 
+            <a href="#standardSolutions" 
+               id="standardSolutionsLink" 
+               class="button small solutions" 
+               tal:condition="python:view.solutions" 
+               i18n:translate="">Standard solutions</a> 
           </dt>
           <dd tal:define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};
                          number repeat/actionplan/number"
@@ -166,17 +170,20 @@
         </label>
         <textarea id="comment" name="comment:utf8:ustring" class="span-15" rows="5" tal:content="data/comment"></textarea>
       </fieldset>
+
+        <div class="warning last span-15" tal:condition="risk/legal_reference|nothing">
+        <metal:call use-macro="webhelpers/macros/risk_legal_collapsible" />
+        </div>
     </form>
 
-    <div class="warning last span-15" tal:condition="risk/legal_reference|nothing">
-    <metal:call use-macro="webhelpers/macros/risk_legal_collapsible" />
-    </div>
-
-
     <dl style="display: none" id="measureTemplate">
-      <dt class="${python:'error' if exists('actionplan/errors') else None}"><tal:i18n i18n:translate="header_measure">Measure <tal:span i18n:name="index">1</tal:span></tal:i18n>
+      <dt class="${python:'error' if exists('actionplan/errors') else None}">
+        <tal:i18n i18n:translate="header_measure">Measure <tal:span i18n:name="index">1</tal:span></tal:i18n>
         <button i18n:translate="Remove"  class="small removeButton">Remove</button>
-        <a href="#standardSolutions" class="button small solutions" tal:condition="python:view.solutions" i18n:translate="">Standard solutions</a> 
+        <a href="#standardSolutions" 
+            class="button small solutions" 
+            tal:condition="python:view.solutions" 
+            i18n:translate="">Standard solutions</a> 
       </dt>
       <dd>
         <div class="span-7 colborder">

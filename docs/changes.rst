@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.2.4 (2012-06-28)
+------------------
+
+- Bugfix. Revert method name from unreleased htmllaundry. [jcbrand]
+
 1.2.3 (2012-06-28)
 ------------------
 

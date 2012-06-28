@@ -338,7 +338,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                                 styles.Normal, 
                                 ParagraphPropertySet(left_indent=300, right_indent=300),
                                 t(_(utils.html_unescape(
-                                        htmllaundry.strip_markup(zodb_node.description))
+                                        htmllaundry.StripMarkup(zodb_node.description))
                                 ))
                             ))
                 body.append(Paragraph(""))
@@ -619,7 +619,7 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
                     Paragraph(
                         styles.Normal, 
                         utils.html_unescape(
-                            htmllaundry.strip_markup(zodb_node.description))
+                            htmllaundry.StripMarkup(zodb_node.description))
                         )
                     )
 

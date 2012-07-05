@@ -8,10 +8,7 @@ class IProductLayer(Interface):
        package has been installed.
     """
 
-class IOSHAContentFormLayer(IOiRAFormLayer, NuPloneSkin):
-    """Marker interface for the CMS/Content editing skin."""
-
-class IOSHAContentSkinLayer(NuPloneSkin):
+class IOSHAContentSkinLayer(IOiRAFormLayer, NuPloneSkin):
     """Marker interface for the CMS/Content editing skin."""
 
 class IOSHAClientSkinLayer(interfaces.IClientSkinLayer):

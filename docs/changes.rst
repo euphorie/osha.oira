@@ -4,6 +4,7 @@ Changelog
 1.2.5 (Unreleased)
 ------------------
 
+- Renabled links on questions in the sidebar. For #5187. [jcbrand]
 - Implement custom homepage functionality. For #5055. [jcbrand]
 
 1.2.4 (2012-06-28)

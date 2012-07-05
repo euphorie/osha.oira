@@ -97,7 +97,6 @@
           title="${python:'%s. %s' % (item['number'], item['title']) if tree['leaf_module'] else None}"
           class="${item/class}">
         <a  tal:define="item_class item/class" 
-            tal:omit-tag="python:tree['leaf_module'] and not item_class"
             href="${item/url}">
             <tal:if condition="python:not tree['leaf_module']">
                 <strong class="counter">${item/number}</strong> ${item/title}

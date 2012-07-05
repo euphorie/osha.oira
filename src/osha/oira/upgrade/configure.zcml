@@ -14,8 +14,22 @@
       description="Update the published attr of surveys to set the date to now. This will force all surveys to redirect to the @@update page from where users' session trees can be updated."
       handler=".upgrade.renew_survey_published_date"
       />
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="2"
+    destination="3"
+    profile="osha.oira:default"
+    >
+
+    <genericsetup:upgradeStep
+      title="add_custom_homepage"
+      description=" Add a homepage with which allows OSHA to create a custom homepage."
+      handler=".upgrade.add_custom_homepage"
+      />
 
   </genericsetup:upgradeSteps>
+
 
 </configure>
 

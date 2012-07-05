@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="nuplone"
+      meta:interpolation="true"
+      tal:omit-tag="">
+<div class="z3cFieldContainer" tal:attributes="class string:${view/@@dependencies} z3cFieldContainer">
+    <label>${view/label}<sup tal:condition="view/required" class="required">*</sup> 
+    </label>
+    <textarea
+        style="width: 100%; height: 500px;"
+        tal:content="view/value"
+        tal:attributes="id view/id;
+                        name view/name; 
+                        class view/klass;
+                        disabled view/disabled;
+                        readonly view/readonly;
+                        cols view/cols;
+                        rows view/rows" /> <tal:error condition="view/error" replace="structure view/error/render|nothing"/>
+    <dfn class="infoPanel" i18n:attributes="title" title="Information" tal:define="description view/field/description" tal:condition="description" tal:content="description"/>
+</div>
+</html>
+

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      id="homepage">
+  <head>
+<base href="http://client.oiraproject.eu/" />
+    <title>OiRA - Online interactive Risk Assessment</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/png" href="client/++resource++euphorie.media/favicon.png" />
+    <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++euphorie.style/screen.min.css" />
+    <link rel="stylesheet" type="text/css" media="only screen and (min-width:768px)" title="ebc" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++osha.oira.stylesheets/oira.min.css" />
+    <!--[if lte IE 6]> <link rel="stylesheet" type="text/css" media="all" href="++resource++screen-ie6.css"/> <link rel="stylesheet" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
+    <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-ie7.min.css"/> <link rel="stylesheet" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
+    <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-ie8.min.css" /> <link rel="stylesheet" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
+    <style type="text/css" media="all">
+        .report #appendix img {
+            margin-bottom: 0;
+        }
+        .appendix_oira_logo { 
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        .report .creative_commons_logo {
+            cursor: pointer;
+        }
+    </style>
+  
+  </head>
+  <body>
+    <h1 class="carousel">
+      <span lang="bg" xml:lang="bg">Добре дошли</span><br />
+      <span lang="cs" xml:lang="cs">Vítáme vás</span><br />
+      <span lang="da" xml:lang="da">Velkommen</span><br />
+      <span lang="de" xml:lang="de">Wilkommen</span><br />
+      <span lang="el" xml:lang="el">Καλώς Ορίσατε</span><br />
+      <span lang="en" xml:lang="en">Welcome</span><br />
+      <span lang="es" xml:lang="es">Benvenida</span><br />
+      <span lang="fi" xml:lang="fi">Tervetuloa</span><br />
+      <span lang="fr" xml:lang="fr">Bienvenue</span><br />
+      <span lang="hr" xml:lang="hr">Dobrodošli</span><br />
+      <span lang="hu" xml:lang="hu">Üdvözlet</span><br />
+      <span lang="is" xml:lang="is">Velkomin</span><br />
+      <span lang="it" xml:lang="it">Benvenuto</span><br />
+      <span lang="lt" xml:lang="lt">Sveiki atvykę</span><br />
+      <span lang="lv" xml:lang="lv">Laipni lūdzam</span><br />
+      <span lang="mk" xml:lang="mk">Добредојдовте</span><br />
+      <span lang="mt" xml:lang="mt">Merħba</span><br />
+      <span lang="nl" xml:lang="nl">Welkom</span><br />
+      <span lang="nn" xml:lang="nn">Velkommen</span><br />
+      <span lang="no" xml:lang="no">Velkommen</span><br />
+      <span lang="pl" xml:lang="pl">Witamy</span><br />
+      <span lang="pt" xml:lang="pt">Bem-vindos</span><br />
+      <span lang="ro" xml:lang="ro">Ghini vinit</span><br />
+      <span lang="sk" xml:lang="sk">Vitajte</span><br />
+      <span lang="sl" xml:lang="sl">Pozdravljeni</span>
+      <span lang="sq" xml:lang="sq">Mirë se vini</span><br />
+      <span lang="sr" xml:lang="sr">Добродошли</span><br />
+      <span lang="sv" xml:lang="sv">Välkommen</span><br />
+      <span lang="tr" xml:lang="tr">Hoşgeldin</span><br />
+    </h1>
+    
+    <!-- ACHTUNG! Fixes a weird bug that prevents the OiRA logo from being displayed -->
+    <!--[if lte IE 7]> <br/> <![endif]-->
+    <ul id="navigation">
+        <li id="home">
+            <a href="http://client.oiraproject.eu">
+                <strong>OiRA - Online interactive Risk Assessment</strong><br/>
+                Online interactive<br/>
+                Risk Assessment</a>
+        </li>
+    </ul>
+
+    <tal:render content="structure view/render_body"/>
+    
+    <p id="appendix">
+        <a href="http://client.oiraproject.eu"><img class="appendix_oira_logo" src="++resource++osha.oira.images/footer_logo.png"/></a>
+        Produced by <a href="http://osha.europa.eu" target="_new">EU-OSHA</a>. 
+        |
+        <a href="http://client.oiraproject.eu/about">About</a>
+        |
+        <a href="http://client.oiraproject.eu/terms-and-conditions">Privacy</a>
+        |
+        <a href="http://client.oiraproject.eu/disclaimer">Disclaimer</a>
+        |
+        <a href="http://www.gnu.org/licenses/gpl.html">GPL License</a>
+        |
+        <a href="http://creativecommons.org/licenses/by-sa/2.5/"
+            alt="CC License">
+            <img class="creative_commons_logo" src="++resource++osha.oira.images/creative_commons.png"/>
+        </a>
+    </p>
+    <!--[if lte IE 8]> <script type="text/javascript" src="http://client.oiraproject.eu/++resource++euphorie.libraries/excanvas.min.js"></script> <![endif]-->
+    <script type="text/javascript" src="http://client.oiraproject.eu/++resource++euphorie.behaviour/common.min.js"></script>
+    <script type="text/javascript">
+    // <![CDATA[
+        $(document).ready(function() {
+            var h2_visible = 1,
+                h2_total = $("h2.fade:first span").size();
+
+            function swapH2() {
+                h2_visible = (h2_visible+1) % h2_total;
+
+                $("h2.fade").each(function() {
+                    var $headers = $("span", this),
+                        $next_visible = $headers.eq(h2_visible);
+                    $headers = $headers.not($next_visible);
+
+                    $headers.animate({opacity: 0});
+                    $next_visible.animate({opacity: 1});
+                });
+            }
+
+            $("h2.fade span:not(:first-child)").css({opacity: 0});
+            $("h1")
+                .wrapInner("<div/>")
+                .jCarouselLite({auto: 1000,
+                                speed: 800,
+                                circular: true,
+                                visible: 1,
+                                listSelector: "div",
+                                itemSelector: "span",
+                                easing: "easeOutElastic",
+                                beforeStart: swapH2
+                                });
+        });
+    // ]]>
+    </script>
+  </body>
+</html>

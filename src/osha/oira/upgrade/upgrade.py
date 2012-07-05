@@ -1,6 +1,9 @@
+# -*- coding: <utf-8> -*-
 import datetime
 import logging
 from zope.app.component.hooks import getSite
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone.dexterity import utils
 from euphorie.client.sector import IClientSector
 from euphorie.content.survey import ISurvey
 
@@ -31,4 +34,23 @@ def renew_survey_published_date(context):
                     # BBB: Euphorie 1.x did not use a tuple to store extra 
                     # information.
                     published = datetime.datetime.now()
+
+
+def add_custom_homepage(context):
+    """ """
+    site = getSite()
+    try:
+        container = site.unrestrictedTraverse('documents/en') 
+    except [AttributeError, KeyError]:
+        log.error('Could not navigate to documents/en folder. '
+                   'Abort creation of custom homepage.')
+
+    content = utils.createContentInContainer(
+                                container, 'oira.homepage', 
+                                checkConstraints=False, 
+                                id="homepage",
+                                title='OiRA Homepage')
+    content.description = """\
+<!-- The header and footer of the homepage is fixed and cannot be changed.
+     Add here any HTML code that you'd like to be rendered in the body of the homepage.-->"""
 

@@ -12,11 +12,8 @@ from plone.directives import dexterity
 from plone.directives import form
 from plone.autoform.interfaces import IFormFieldProvider
 from plonetheme.nuplone.skin.interfaces import NuPloneSkin
-from euphorie.client.sector import Style as SectorStyle
 from euphorie.content import sector
 from euphorie.content import MessageFactory as _
-
-from osha.oira.interfaces import IOSHAClientSkinLayer
 
 log = logging.getLogger('osha.oira/sector.py')
 

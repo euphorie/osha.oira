@@ -48,7 +48,7 @@ class OSHAFormMixin:
 class Add(RiskAddForm, OSHAFormMixin):
     """ Override to allow us to dynamically set field descriptions
     """
-    grok.layer(interfaces.IOSHAContentFormLayer)
+    grok.layer(interfaces.IOSHAContentSkinLayer)
 
     def updateFields(self):
         super(Add, self).updateFields()
@@ -58,7 +58,7 @@ class Add(RiskAddForm, OSHAFormMixin):
 class Edit(RiskEditForm, OSHAFormMixin):
     """ Override to allow us to dynamically set field descriptions
     """
-    grok.layer(interfaces.IOSHAContentFormLayer)
+    grok.layer(interfaces.IOSHAContentSkinLayer)
 
     def updateFields(self):
         super(Edit, self).updateFields()

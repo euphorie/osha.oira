@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.2.5 (Unreleased)
+------------------
+
+- Implement custom homepage functionality. For #5055. [jcbrand]
+
 1.2.4 (2012-06-28)
 ------------------
 

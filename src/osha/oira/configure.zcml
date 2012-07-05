@@ -57,4 +57,11 @@
         layer=".interfaces.IProductLayer"
         />
 
+    <browser:page
+        for=".homepage.IHomePage"
+        name="edit"
+        class=".homepage.EditView"
+        permission="cmf.ModifyPortalContent"
+        />
+
 </configure>

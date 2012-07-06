@@ -136,29 +136,31 @@ class OSHAWebHelpers(WebHelpers):
             return []
 
         resp = {}
+        ltool = getToolByName(self.context, 'portal_languages')
         # Only the countries in the client obj should be considered, as the
         # others are not accessible
         for country in client.values():
-            langs = {}
+            ldict = {}
             for sector in country.values():
                 if not IClientSector.providedBy(sector):
                     continue
                 for survey in sector.objectValues():
+                    lang = survey.language
+                    if not lang:
+                        continue 
+
                     if not ISurvey.providedBy(survey):
                         continue
                     if getattr(survey, "preview", False):
                         continue
-                    # XXX: We strip out the country code to keep things simpler.
-                    # Otherwise we will have the same language apearing multiple
-                    # times on the front page if the surveys are set in different
-                    # variants of the same language code.
-                    langs[survey.language.split('-')[0].strip()] = 'dummy'
+                    supported_langs = ltool.getSupportedLanguages()
+                    if lang not in supported_langs:
+                        base_lang = lang.split('-')[0].strip()
+                        if base_lang in supported_langs:
+                            ldict[base_lang] = 'dummy'
+                        continue
+                    ldict[lang] = 'dummy'
                     
-            # surveys might exist without a language set.
-            if langs.has_key(''):
-                del langs['']
-        
-            if langs:
-                resp[country.id] = langs.keys()
-
+            if ldict:
+                resp[country.id] = ldict.keys()
         return resp

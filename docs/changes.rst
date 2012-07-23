@@ -1,7 +1,13 @@
 Changelog
 =========
 
-1.2.5 (Unreleased)
+1.2.6 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+1.2.5 (2012-07-23)
 ------------------
 
 - Renabled links on questions in the sidebar. For #5187. [jcbrand]

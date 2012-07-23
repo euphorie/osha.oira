@@ -14,7 +14,8 @@
     <p class="introduction" i18n:translate="intro_documenation">Here you can manage the documentation
     for the <em i18n:name="client" i18n:translate="intro_documenation_client">online client</em>.</p>
 
-    <p i18n:translate="documentation_homepage">
+    <p tal:define="id context/getId|nothing"
+       tal:condition="python:id == 'en'" i18n:translate="documentation_homepage">
         Go to the <a i18n:name="homepage_edit_form" href="${context/absolute_url}/homepage/edit">homepage edit form</a>
         to change the way the homepage appears.
     </p>

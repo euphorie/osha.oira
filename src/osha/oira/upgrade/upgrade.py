@@ -2,7 +2,6 @@
 import datetime
 import logging
 from zope.app.component.hooks import getSite
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.dexterity import utils
 from euphorie.client.sector import IClientSector
 from euphorie.content.survey import ISurvey

@@ -4,7 +4,8 @@ Changelog
 1.2.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Updated Czech translations. [jcbrand]
+- Only show link to custom homepage when on the English docs folder. [jcbrand]
 
 
 1.2.5 (2012-07-23)

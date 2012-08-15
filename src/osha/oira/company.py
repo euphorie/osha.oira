@@ -13,6 +13,6 @@ class Company(GenericCompany):
 
     @button.buttonAndHandler(u"Skip")
     def handleSkip(self, action):
-        url="%s/report" % self.request.survey.absolute_url()
+        url="%s/report/view" % self.request.survey.absolute_url()
         self.request.response.redirect(url)
 

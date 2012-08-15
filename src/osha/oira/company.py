@@ -11,8 +11,24 @@ class Company(GenericCompany):
     grok.layer(IOSHAReportPhaseSkinLayer)
     grok.template("report_company")
 
+    @button.buttonAndHandler(u"Previous")
+    def handlePrevious(self, action):
+        url="%s/report" % self.request.survey.absolute_url()
+        self.request.response.redirect(url)
+
+    @button.buttonAndHandler(u"Next")
+    def handleNext(self, action):
+        (data,errors) = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        self.applyChanges(data)
+        url="%s/report/view" % self.request.survey.absolute_url()
+        self.request.response.redirect(url)
+
     @button.buttonAndHandler(u"Skip")
     def handleSkip(self, action):
         url="%s/report/view" % self.request.survey.absolute_url()
         self.request.response.redirect(url)
+
 

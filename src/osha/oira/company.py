@@ -30,7 +30,7 @@ class Company(GenericCompany):
     def handleSkip(self, action):
         # XXX: This a hack. We need to know if a company report has been
         # skipped but can't add new SQL columns. So we mark the country 'xx'.
-        # (Country field is restricted to 3 chars).
+        # (Country field is restricted to 3 chars). For #4436.
         data = {
             'conductor': None,
             'country': u'xx',

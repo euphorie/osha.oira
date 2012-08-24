@@ -5,6 +5,8 @@ Changelog
 ------------------
 
 - Hide company form after skipped or filled in. #4436 [jcrband]
+- Added Catalan (ca) translations #5463 [thomasw]
+- Added Latvian (lv) translations #5075 [thomasw]
 
 1.2.6 (2012-07-23)
 ------------------

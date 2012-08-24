@@ -1,12 +1,16 @@
 Changelog
 =========
 
-1.2.6 (unreleased)
+1.2.7 (unreleased)
+------------------
+
+- Hide company form after skipped or filled in. #4436 [jcrband]
+
+1.2.6 (2012-07-23)
 ------------------
 
 - Updated Czech translations. [jcbrand]
 - Only show link to custom homepage when on the English docs folder. [jcbrand]
-
 
 1.2.5 (2012-07-23)
 ------------------

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.7 (unreleased)
+1.2.7 (2012-08-28)
 ------------------
 
 - Hide company form after skipped or filled in. #4436 [jcrband]

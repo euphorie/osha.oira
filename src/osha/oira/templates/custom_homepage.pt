@@ -30,51 +30,8 @@
   
   </head>
   <body>
-    <h1 class="carousel">
-      <span lang="bg" xml:lang="bg">Добре дошли</span><br />
-      <span lang="cs" xml:lang="cs">Vítáme vás</span><br />
-      <span lang="da" xml:lang="da">Velkommen</span><br />
-      <span lang="de" xml:lang="de">Wilkommen</span><br />
-      <span lang="el" xml:lang="el">Καλώς Ορίσατε</span><br />
-      <span lang="en" xml:lang="en">Welcome</span><br />
-      <span lang="es" xml:lang="es">Benvenida</span><br />
-      <span lang="fi" xml:lang="fi">Tervetuloa</span><br />
-      <span lang="fr" xml:lang="fr">Bienvenue</span><br />
-      <span lang="hr" xml:lang="hr">Dobrodošli</span><br />
-      <span lang="hu" xml:lang="hu">Üdvözlet</span><br />
-      <span lang="is" xml:lang="is">Velkomin</span><br />
-      <span lang="it" xml:lang="it">Benvenuto</span><br />
-      <span lang="lt" xml:lang="lt">Sveiki atvykę</span><br />
-      <span lang="lv" xml:lang="lv">Laipni lūdzam</span><br />
-      <span lang="mk" xml:lang="mk">Добредојдовте</span><br />
-      <span lang="mt" xml:lang="mt">Merħba</span><br />
-      <span lang="nl" xml:lang="nl">Welkom</span><br />
-      <span lang="nn" xml:lang="nn">Velkommen</span><br />
-      <span lang="no" xml:lang="no">Velkommen</span><br />
-      <span lang="pl" xml:lang="pl">Witamy</span><br />
-      <span lang="pt" xml:lang="pt">Bem-vindos</span><br />
-      <span lang="ro" xml:lang="ro">Ghini vinit</span><br />
-      <span lang="sk" xml:lang="sk">Vitajte</span><br />
-      <span lang="sl" xml:lang="sl">Pozdravljeni</span>
-      <span lang="sq" xml:lang="sq">Mirë se vini</span><br />
-      <span lang="sr" xml:lang="sr">Добродошли</span><br />
-      <span lang="sv" xml:lang="sv">Välkommen</span><br />
-      <span lang="tr" xml:lang="tr">Hoşgeldin</span><br />
-    </h1>
-    
-    <!-- ACHTUNG! Fixes a weird bug that prevents the OiRA logo from being displayed -->
-    <!--[if lte IE 7]> <br/> <![endif]-->
-    <ul id="navigation">
-        <li id="home">
-            <a href="http://client.oiraproject.eu">
-                <strong>OiRA - Online interactive Risk Assessment</strong><br/>
-                Online interactive<br/>
-                Risk Assessment</a>
-        </li>
-    </ul>
-
     <tal:render content="structure view/render_body"/>
-    
+
     <p id="appendix">
         <a href="http://client.oiraproject.eu"><img class="appendix_oira_logo" src="++resource++osha.oira.images/footer_logo.png"/></a>
         Produced by <a href="http://osha.europa.eu" target="_new">EU-OSHA</a>. 

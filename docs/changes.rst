@@ -57,7 +57,6 @@ Changelog
 - #4249: Restrict the @@contact form and hide links to it. [jcbrand]
 
 1.1 (2012-12-17)
-
 ----------------
 - #3813: Also show children of optional modules in the downloadable report. [jcbrand]
 - #3536: Updated the en translations file. [jcbrand]

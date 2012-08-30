@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.8 (unreleased)
+1.2.8 (2012-08-30)
 ------------------
 
 - Remove header and carousel on custom homepage. #5055 [jcbrand] 

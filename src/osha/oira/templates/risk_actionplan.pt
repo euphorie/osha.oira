@@ -47,21 +47,21 @@
 <div class="module-navigation-tabs" id="ActionPlanItemForm">
 <nav class="nav nav-tabs" id="measureTabs">
     <tal:repeat repeat="actionplan data/action_plans">
-        <a href="#measure-1" class="current">Measure 1 
-            <span class="icon delete" title="Delete this measure">Delete</span>
-        </a>
-        <button type="submit" 
-            id="addMeasureButton" 
-            i18n:translate="label_add" 
-            class="small" 
-            title="Add another measure">Add another measure</button>
+        <tal:def define="number repeat/actionplan/number">
+            <a href="#measure-${number}" class="current">Measure ${number}<span class="icon delete" title="Delete this measure">Delete</span></a>
+            <button type="submit" 
+                id="addMeasureButton" 
+                i18n:translate="label_add" 
+                class="small" 
+                title="Add another measure">Add another measure</button>
+        </tal:def>
     </tal:repeat>
 </nav>
 
 <tal:loop_plans repeat repeat="actionplan data/action_plans">
 <tal:def define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};
                         number repeat/actionplan/number">
-<div class="tab-container current" id="string:measure-${number}">
+<div class="tab-container current" id="measure-${number}">
 <div class="column">
     <fieldset class="condensed">
     <legend>Description <a href="#standardSolutions" class="button small solutions">Standard solutions</a>

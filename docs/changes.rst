@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.9 (unreleased)
+1.2.9 (2012-08-31)
 ------------------
 
 - Implemented new design for adding measure in the action plan stage. [jcbrand]

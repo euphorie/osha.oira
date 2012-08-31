@@ -4,7 +4,7 @@ Changelog
 1.2.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Implemented new design for adding measure in the action plan stage. [jcbrand]
 
 
 1.2.8 (2012-08-30)

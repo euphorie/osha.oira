@@ -48,132 +48,132 @@
 <nav class="nav nav-tabs" id="measureTabs">
     <tal:repeat repeat="actionplan data/action_plans">
         <tal:def define="number repeat/actionplan/number">
-            <a href="#measure-${number}" class="current">Measure ${number}<span class="icon delete" title="Delete this measure">Delete</span></a>
-            <button type="submit" 
-                id="addMeasureButton" 
-                i18n:translate="label_add" 
-                class="small" 
-                title="Add another measure">Add another measure</button>
+            <a href="#measure-${number}">Measure ${number}<span class="icon delete" title="Delete this measure">Delete</span></a>
         </tal:def>
     </tal:repeat>
+    <button type="submit" 
+        id="addMeasureButton" 
+        i18n:translate="label_add" 
+        class="small" 
+        title="Add another measure">Add another measure</button>
 </nav>
 
 <tal:loop_plans repeat repeat="actionplan data/action_plans">
 <tal:def define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};
                         number repeat/actionplan/number">
-<div class="tab-container current" id="measure-${number}">
-<div class="column">
-    <fieldset class="condensed">
-    <legend>Description <a href="#standardSolutions" class="button small solutions">Standard solutions</a>
-        <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip" i18n:attributes="title actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</a>
-    </legend> 
-    <label for="actionplan-1" class="superImpose" i18n:translate="label_measure_action_plan">General approach (to eliminate or reduce the risk)</label>
-    <textarea class="actionPlan" id="actionplan-1" 
-        type="text" 
-        name="measure.action_plan:utf8:ustring:records" 
-        rows="6" 
-        tal:content="actionplan/action_plan|nothing">
-    </textarea>
-    
-    <label for="preventionplan-1" class="superImpose" i18n:translate="label_measure_prevention_plan">Specific action(s) required to implement this approach</label>
-    <textarea class="preventionPlan" id="preventionplan-1" name="measure.prevention_plan:utf8:ustring:records" rows="3" tal:content="actionplan/prevention_plan|nothing"></textarea>
-    
-    <label for="requirements-1" class="superImpose" i18n:translate="label_measure_requirements">Level of expertise and/or requirements needed</label>
-    <textarea class="requirements" id="requirements-1" name="measure.requirements:utf8:ustring:records" rows="3" tal:content="actionplan/requirements|nothing"></textarea>
-    </fieldset>
-</div>
+    <div class="tab-container" id="measure-${number}">
+    <div class="column">
+        <fieldset class="condensed">
+        <legend>Description <a href="#standardSolutions" class="button small solutions">Standard solutions</a>
+            <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip" i18n:attributes="title actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</a>
+        </legend> 
+        <label for="actionplan-1" class="superImpose" i18n:translate="label_measure_action_plan">General approach (to eliminate or reduce the risk)</label>
+        <textarea class="actionPlan" id="actionplan-1" 
+            type="text" 
+            name="measure.action_plan:utf8:ustring:records" 
+            rows="6" 
+            tal:content="actionplan/action_plan|nothing">
+        </textarea>
+        
+        <label for="preventionplan-1" class="superImpose" i18n:translate="label_measure_prevention_plan">Specific action(s) required to implement this approach</label>
+        <textarea class="preventionPlan" id="preventionplan-1" name="measure.prevention_plan:utf8:ustring:records" rows="3" tal:content="actionplan/prevention_plan|nothing"></textarea>
+        
+        <label for="requirements-1" class="superImpose" i18n:translate="label_measure_requirements">Level of expertise and/or requirements needed</label>
+        <textarea class="requirements" id="requirements-1" name="measure.requirements:utf8:ustring:records" rows="3" tal:content="actionplan/requirements|nothing"></textarea>
+        </fieldset>
+    </div>
 
-<div class="column">
-    <fieldset class="condensed">
-        <label><tal:span i18n:translate="label_action_plan_responsible">Who is responsible?</tal:span>
-            <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_responsible_tooltip" i18n:attributes="title actionplan_measure_responsible_tooltip">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</a>
-            <input type="text" name="measure.responsible:utf8:ustring:records" value="${actionplan/responsible|nothing}"/>
-        </label>
+    <div class="column">
+        <fieldset class="condensed">
+            <label><tal:span i18n:translate="label_action_plan_responsible">Who is responsible?</tal:span>
+                <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_responsible_tooltip" i18n:attributes="title actionplan_measure_responsible_tooltip">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</a>
+                <input type="text" name="measure.responsible:utf8:ustring:records" value="${actionplan/responsible|nothing}"/>
+            </label>
 
-        <label id="label-budget-${number}" class="${python:'error' if exists('errors/budget') else None}">
-            <tal:span i18n:translate="label_action_plan_budget">Budget (in Euro)</tal:span>
-            <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_budget_tooltip" i18n:attributes="title actionplan_measure_budget_tooltip">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</a>
+            <label id="label-budget-${number}" class="${python:'error' if exists('errors/budget') else None}">
+                <tal:span i18n:translate="label_action_plan_budget">Budget (in Euro)</tal:span>
+                <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_budget_tooltip" i18n:attributes="title actionplan_measure_budget_tooltip">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</a>
 
-            <input type="text" class="numeric" name="measure.budget:records" id="input-budget-${number}" value="${actionplan/budget|nothing}"/>
-            <p class="focustip error target-id-input-budget-${number}" tal:condition="exists:errors/budget" i18n:translate="error_invalid_budget">
-            Please enter the budget in whole Euros.</p>
-        </label>
+                <input type="text" class="numeric" name="measure.budget:records" id="input-budget-${number}" value="${actionplan/budget|nothing}"/>
+                <p class="focustip error target-id-input-budget-${number}" tal:condition="exists:errors/budget" i18n:translate="error_invalid_budget">
+                Please enter the budget in whole Euros.</p>
+            </label>
 
-        <fieldset tal:define="day_error exists:errors/planning_start_day;
-                                year_error exists:errors/planning_start_year;
-                                error python:day_error or year_error"
-                        class="condensed${python:' error' if error else ''}">
-            <legend i18n:translate="label_action_plan_start">Planning start</legend>
-            <fieldset class="date-eu">
-                <label class="${python:'error' if day_error else None}" for="label-planning-start-day-${number}" i18n:translate="label_day">Day</label>
-                <input type="text" 
-                        name="measure.planning_start_day:records" 
-                        id="planning-start-day-${number}" 
-                        maxlength="2"
-                        class="numeric day${python:' error' if day_error else ''}"
-                        value="${actionplan/planning_start_day|actionplan/planning_start/day|nothing}"/>
-                <p class="focustip error target-id-planning-start-day-${number}" 
-                    tal:condition="day_error" 
-                    i18n:translate="error_invalid_day">Invalid day</p>
-                <label for="planning-start-month-${number}" i18n:translate="label_month">Month</label>
-                <select name="measure.planning_start_month:records" 
-                        id="planning-start-month-${number}" 
-                        class="month"
-                        tal:define="value actionplan/planning_start_month|actionplan/planning_start/month|nothing">
-                    <tal:loop_months repeat="month webhelpers/months">
-                        <option value="${python:month[0]}" 
+            <fieldset tal:define="day_error exists:errors/planning_start_day;
+                                    year_error exists:errors/planning_start_year;
+                                    error python:day_error or year_error"
+                            class="condensed${python:' error' if error else ''}">
+                <legend i18n:translate="label_action_plan_start">Planning start</legend>
+                <fieldset class="date-eu">
+                    <label class="${python:'error' if day_error else None}" for="label-planning-start-day-${number}" i18n:translate="label_day">Day</label>
+                    <input type="text" 
+                            name="measure.planning_start_day:records" 
+                            id="planning-start-day-${number}" 
+                            maxlength="2"
+                            class="numeric day${python:' error' if day_error else ''}"
+                            value="${actionplan/planning_start_day|actionplan/planning_start/day|nothing}"/>
+                    <p class="focustip error target-id-planning-start-day-${number}" 
+                        tal:condition="day_error" 
+                        i18n:translate="error_invalid_day">Invalid day</p>
+                    <label for="planning-start-month-${number}" i18n:translate="label_month">Month</label>
+                    <select name="measure.planning_start_month:records" 
+                            id="planning-start-month-${number}" 
+                            class="month"
+                            tal:define="value actionplan/planning_start_month|actionplan/planning_start/month|nothing">
+                        <tal:loop_months repeat="month webhelpers/months">
+                            <option value="${python:month[0]}" 
+                                    selected="${python:'selected' if str(value)==str(month[0]) else None}">${python:month[1]}</option>
+                        </tal:loop_months>
+                    </select>
+                    <label class="${python:'error' if year_error else None}" for="planning-start-year-1" i18n:translate="label_year">Year</label>
+                    <input type="text" 
+                            name="measure.planning_start_year:records" 
+                            id="planning-start-year-${number}" 
+                            maxlength="4"
+                            class="numeric year enablePicker${python:' error' if year_error else ''}"
+                            value="${actionplan/planning_start_year|actionplan/planning_start/year|nothing}"/>
+                    <p class="focustip error target-id-planning-start-year-${number}" 
+                        tal:condition="year_error" 
+                        i18n:translate="error_invalid_year">Please enter a valid year after 1900</p>
+                </fieldset>
+            </fieldset>
+
+            <fieldset tal:define="day_error exists:errors/planning_end_day;
+                                    year_error exists:errors/planning_end_year;
+                                    error python:day_error or year_error"
+                    class="condensed${python:' error' if error else ''}">
+                <legend i18n:translate="label_action_plan_end">Planning end</legend>
+
+
+                <fieldset class="date-eu">
+                    <label class="${python:'error' if day_error else None}"
+                        for="label-planning-end-day-${number}" i18n:translate="label_day">Day</label>
+                    <input type="text" name="measure.planning_end_day:records" id="planning-end-day-${number}" maxlength="2"
+                        class="numeric day ${python:' error' if day_error else ''}"
+                        value="${actionplan/planning_end_day|actionplan/planning_end/day|nothing}"/>
+                    <p class="focustip error target-id-planning-end-day-${number}" tal:condition="day_error" i18n:translate="error_invalid_day">Invalid day</p>
+
+                    <label for="planning-end-month-${number}" i18n:translate="label_month">Month</label>
+
+                    <select name="measure.planning_end_month:records" id="planning-end-month-${number}" class="month"
+                            tal:define="value actionplan/planning_end_month|actionplan/planning_end/month|nothing">
+                        <tal:loop_months repeat="month webhelpers/months">
+                            <option 
+                                value="${python:month[0]}" 
                                 selected="${python:'selected' if str(value)==str(month[0]) else None}">${python:month[1]}</option>
-                    </tal:loop_months>
-                </select>
-                <label class="${python:'error' if year_error else None}" for="planning-start-year-1" i18n:translate="label_year">Year</label>
-                <input type="text" 
-                        name="measure.planning_start_year:records" 
-                        id="planning-start-year-${number}" 
-                        maxlength="4"
+                        </tal:loop_months>
+                    </select>
+
+                    <label class="${python:'error' if year_error else None}"
+                        for="planning-end-year-${number}" i18n:translate="label_day">Day</label>
+                    <input type="text" name="measure.planning_end_year:records" id="planning-end-year-${number}" maxlength="4"
                         class="numeric year enablePicker${python:' error' if year_error else ''}"
-                        value="${actionplan/planning_start_year|actionplan/planning_start/year|nothing}"/>
-                <p class="focustip error target-id-planning-start-year-${number}" 
-                    tal:condition="year_error" 
-                    i18n:translate="error_invalid_year">Please enter a valid year after 1900</p>
+                        value="${actionplan/planning_end_year|actionplan/planning_end/year|nothing}"/>
+                    <p class="focustip error target-id-planning-end-year-${number}" tal:condition="year_error" i18n:translate="error_invalid_year">Please enter a valid year after 1900</p>
+                </fieldset>
             </fieldset>
         </fieldset>
-
-        <fieldset tal:define="day_error exists:errors/planning_end_day;
-                                year_error exists:errors/planning_end_year;
-                                error python:day_error or year_error"
-                class="condensed${python:' error' if error else ''}">
-            <legend i18n:translate="label_action_plan_end">Planning end</legend>
-
-
-            <fieldset class="date-eu">
-                <label class="${python:'error' if day_error else None}"
-                    for="label-planning-end-day-${number}" i18n:translate="label_day">Day</label>
-                <input type="text" name="measure.planning_end_day:records" id="planning-end-day-${number}" maxlength="2"
-                    class="numeric day ${python:' error' if day_error else ''}"
-                    value="${actionplan/planning_end_day|actionplan/planning_end/day|nothing}"/>
-                <p class="focustip error target-id-planning-end-day-${number}" tal:condition="day_error" i18n:translate="error_invalid_day">Invalid day</p>
-
-                <label for="planning-end-month-${number}" i18n:translate="label_month">Month</label>
-
-                <select name="measure.planning_end_month:records" id="planning-end-month-${number}" class="month"
-                        tal:define="value actionplan/planning_end_month|actionplan/planning_end/month|nothing">
-                    <tal:loop_months repeat="month webhelpers/months">
-                        <option 
-                            value="${python:month[0]}" 
-                            selected="${python:'selected' if str(value)==str(month[0]) else None}">${python:month[1]}</option>
-                    </tal:loop_months>
-                </select>
-
-                <label class="${python:'error' if year_error else None}"
-                    for="planning-end-year-${number}" i18n:translate="label_day">Day</label>
-                <input type="text" name="measure.planning_end_year:records" id="planning-end-year-${number}" maxlength="4"
-                    class="numeric year enablePicker${python:' error' if year_error else ''}"
-                    value="${actionplan/planning_end_year|actionplan/planning_end/year|nothing}"/>
-                <p class="focustip error target-id-planning-end-year-${number}" tal:condition="year_error" i18n:translate="error_invalid_year">Please enter a valid year after 1900</p>
-            </fieldset>
-        </fieldset>
-    </fieldset>
-</div>
+    </div>
 </div>
 </tal:def>
 </tal:loop_plans>

@@ -67,19 +67,28 @@
         <legend>Description <a href="#standardSolutions" class="button small solutions">Standard solutions</a>
             <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip" i18n:attributes="title actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</a>
         </legend> 
-        <label for="actionplan-1" class="superImpose" i18n:translate="label_measure_action_plan">General approach (to eliminate or reduce the risk)</label>
         <textarea class="actionPlan" id="actionplan-1" 
             type="text" 
             name="measure.action_plan:utf8:ustring:records" 
             rows="6" 
+            placeholder="General approach (to eliminate or reduce the risk)"
             tal:content="actionplan/action_plan|nothing">
         </textarea>
         
-        <label for="preventionplan-1" class="superImpose" i18n:translate="label_measure_prevention_plan">Specific action(s) required to implement this approach</label>
-        <textarea class="preventionPlan" id="preventionplan-1" name="measure.prevention_plan:utf8:ustring:records" rows="3" tal:content="actionplan/prevention_plan|nothing"></textarea>
+        <textarea 
+            class="preventionPlan" 
+            id="preventionplan-1" 
+            name="measure.prevention_plan:utf8:ustring:records" 
+            rows="3" 
+            placeholder="Specific action(s) required to implement this approach"
+            tal:content="actionplan/prevention_plan|nothing"></textarea>
         
-        <label for="requirements-1" class="superImpose" i18n:translate="label_measure_requirements">Level of expertise and/or requirements needed</label>
-        <textarea class="requirements" id="requirements-1" name="measure.requirements:utf8:ustring:records" rows="3" tal:content="actionplan/requirements|nothing"></textarea>
+        <textarea class="requirements" 
+            id="requirements-1" 
+            name="measure.requirements:utf8:ustring:records" 
+            rows="3" 
+            placeholder="Level of expertise and/or requirements needed"
+            tal:content="actionplan/requirements|nothing"></textarea>
         </fieldset>
     </div>
 
@@ -185,10 +194,11 @@
 </p>
 
 <fieldset class="concise" id="comments">
-    <label for="comment" class="superImpose span-14" i18n:translate="label_comment">
-        Please leave any comments you may have on the question above in this field. These comments will be used in the action plan.
-    </label>
-    <textarea id="comment" name="comment:utf8:ustring" class="span-15" rows="5" tal:content="data/comment"></textarea>
+    <textarea id="comment" name="comment:utf8:ustring" 
+        class="span-15" rows="5" 
+        placeholder="Please leave any comments you may have on the question above in this field"
+        tal:content="data/comment">
+    </textarea>
 </fieldset>
 
 <div class="warning last span-15" tal:condition="risk/legal_reference|nothing">

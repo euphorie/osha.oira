@@ -1,17 +1,10 @@
 Changelog
 =========
 
-1.2.10 (unreleased)
+1.2.10 (2012-09-03)
 -------------------
 
-- Nothing changed yet.
-
-
-1.2.10 (unreleased)
--------------------
-
-- Nothing changed yet.
-
+- Add modernizr.js and some markup changes from Prototype. [jcbrand] 
 
 1.2.9 (2012-08-31)
 ------------------

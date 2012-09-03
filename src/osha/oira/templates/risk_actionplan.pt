@@ -12,6 +12,14 @@
     <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
     <metal:meta use-macro="webhelpers/macros/headers"/>
     <metal:css use-macro="webhelpers/macros/css"/>
+    <metal:js  use-macro="webhelpers/macros/javascript"/>
+    <script type="text/javascript">$("input[placeholder], textarea[placeholder]").placeholder();</script>
+    <script type="text/javascript" src="client/++resource++osha.oira.javascripts/oira.js"></script>
+    <script type="text/javascript">
+        var delete_confirm_text = "Are you sure you want to remove this measure? This action can not be reverted.",
+            replace_confirm_text = "The current text in the fields 'Action plan', 'Prevention plan' and 'Requirements' of this measure will be overwritten. This action cannot be reverted Are you sure you want to continue?";
+        $(document).ready(ActionPlan.init);
+    </script>
 </head>
 <body tal:define="risk nocall:view/risk; data view/data"
     class="actionplan ${webhelpers/extra_css}">
@@ -251,13 +259,6 @@
       <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>
     </ul>
     <metal:css use-macro="webhelpers/macros/appendix"/>
-    <metal:css use-macro="webhelpers/macros/javascript"/>
-    <script type="text/javascript" src="client/++resource++osha.oira.javascripts/oira.js"></script>
-    <script type="text/javascript">
-            var delete_confirm_text = "Are you sure you want to remove this measure? This action can not be reverted.",
-                replace_confirm_text = "The current text in the fields 'Action plan', 'Prevention plan' and 'Requirements' of this measure will be overwritten. This action cannot be reverted Are you sure you want to continue?";
-            ActionPlan.init();
-        </script>
     <tal:block replace="tile:client-analytics"/>
   </body>
 </html>

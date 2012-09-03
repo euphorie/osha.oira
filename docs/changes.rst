@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.11 (unreleased)
+1.2.11 (2012-09-03)
 -------------------
 
 - Use jquery.placeholder.js instead of superimpose. [jcbrand]

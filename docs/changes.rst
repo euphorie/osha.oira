@@ -7,6 +7,12 @@ Changelog
 - Nothing changed yet.
 
 
+1.2.10 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
 1.2.9 (2012-08-31)
 ------------------
 

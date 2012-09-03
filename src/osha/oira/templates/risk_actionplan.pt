@@ -142,7 +142,9 @@
                                     selected="${python:'selected' if str(value)==str(month[0]) else None}">${python:month[1]}</option>
                         </tal:loop_months>
                     </select>
-                    <label class="${python:'error' if year_error else None}" for="planning-start-year-1" i18n:translate="label_year">Year</label>
+                    <label class="${python:'error' if year_error else None}" 
+                            for="planning-start-year-${number}" 
+                            i18n:translate="label_year">Year</label>
                     <input type="text" 
                             name="measure.planning_start_year:records" 
                             id="planning-start-year-${number}" 

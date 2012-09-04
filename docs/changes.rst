@@ -1,10 +1,10 @@
 Changelog
 =========
 
-1.2.12 (unreleased)
+1.2.12 (2012-09-04)
 -------------------
 
-- Nothing changed yet.
+- Action plan page bugfixes. [jcbrand]
 
 
 1.2.11 (2012-09-03)

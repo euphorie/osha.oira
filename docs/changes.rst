@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.13 (unreleased)
+1.2.13 (2012-09-04)
 -------------------
 
 - Action plan page bugfixes. [jcbrand]

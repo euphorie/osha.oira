@@ -328,19 +328,20 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 msg = _("risk_priority", 
                     default="This is a ${priority_value} priority risk.",
                     mapping={'priority_value': level})
-
                 body.append(Paragraph(
                                 styles.RiskPriority, 
                                 t(msg)
                             ))
+
+            if getattr(node, 'identification', None) == 'no':
                 body.append(
-                        Paragraph(
-                                styles.Normal, 
-                                ParagraphPropertySet(left_indent=300, right_indent=300),
-                                t(_(utils.html_unescape(
-                                        htmllaundry.StripMarkup(zodb_node.description))
-                                ))
+                    Paragraph(
+                            styles.Normal, 
+                            ParagraphPropertySet(left_indent=300, right_indent=300),
+                            t(_(utils.html_unescape(
+                                    htmllaundry.StripMarkup(zodb_node.description))
                             ))
+                        ))
                 body.append(Paragraph(""))
 
             if node.comment and node.comment.strip():

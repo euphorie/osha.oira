@@ -49,8 +49,9 @@ _("help_introduction", default=u"The introduction text is shown when starting "
     u"a new OiRA Tool session. If no introduction is provided here a standard "
     u"text will be shown. Please keep this text brief so it will easily fit "
     u"on screens of small devices such as phones and PDAs.")
-_("message_delete_no_last_survey", default=u"You cannot delete the only OiRA "
-    u"Tool version.")
+_("message_delete_no_last_survey", default=u"This is the only version of the "
+    "OiRA Tool and can therefore not be deleted. Did you perhaps want to "
+    "remove the OiRA Tool itself?")
 _("label_surveygroup_title", default=u"Title of imported OiRA Tool")
 _("upload_success", default=u"Succesfully imported the OiRA Tool")
 _("title_import_sector_survey", default=u"Import sector and OiRA Tool")
@@ -190,6 +191,8 @@ _("help_surveygroup_title", default=u""
 _("message_unpublish_success", default=u"This OiRA Tool is now no longer available in the client.")
 
 _("label_upload_survey_title", default=u"Name for OiRA Tool version")
+
+_("label_default_effect", default=u"Default severity")
 
 _("unpublish_confirm", default=u"Are you sure you want to unpublish this OiRA Tool?")
 

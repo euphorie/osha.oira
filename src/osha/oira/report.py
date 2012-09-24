@@ -3,12 +3,14 @@ from euphorie.client import report
 from euphorie.client.session import SessionManager
 from osha.oira.interfaces import IOSHAReportPhaseSkinLayer
 
+grok.templatedir("templates")
 
 class ReportView(report.ReportView):
     """ Override so that skipped or filled in company forms are not shown
     again. For #4436.
     """
     grok.layer(IOSHAReportPhaseSkinLayer)
+    grok.template("report")
 
     def update(self):
         self.session = SessionManager.session

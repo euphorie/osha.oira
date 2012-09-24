@@ -80,8 +80,8 @@
             name="measure.action_plan:utf8:ustring:records" 
             rows="6" 
             placeholder="General approach (to eliminate or reduce the risk)"
-            tal:content="actionplan/action_plan|nothing">
-        </textarea>
+            i18n:attributes="placeholder label_measure_action_plan"
+            tal:content="actionplan/action_plan|nothing"></textarea>
         
         <textarea 
             class="preventionPlan" 
@@ -89,6 +89,7 @@
             name="measure.prevention_plan:utf8:ustring:records" 
             rows="3" 
             placeholder="Specific action(s) required to implement this approach"
+            i18n:attributes="placeholder label_measure_prevention_plan"
             tal:content="actionplan/prevention_plan|nothing"></textarea>
         
         <textarea class="requirements" 
@@ -96,6 +97,7 @@
             name="measure.requirements:utf8:ustring:records" 
             rows="3" 
             placeholder="Level of expertise and/or requirements needed"
+            i18n:attributes="placeholder report_measure_requirements"
             tal:content="actionplan/requirements|nothing"></textarea>
         </fieldset>
     </div>
@@ -199,16 +201,18 @@
 </div>
 
 <p class="buttonBar">
-    <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="previous floatBefore back">Previous</button>
-    <button type="submit" name="next" value="next" i18n:translate="label_save_and_continue" class="next floatAfter">Save and continue</button>
+    <button type="submit" name="next" value="previous" 
+            i18n:translate="label_previous" class="previous floatBefore back">Previous</button>
+    <button type="submit" name="next" value="next" 
+            i18n:translate="label_save_and_continue" class="next floatAfter">Save and continue</button>
 </p>
 
 <fieldset class="concise" id="comments">
     <textarea id="comment" name="comment:utf8:ustring" 
         class="span-15" rows="5" 
         placeholder="Please leave any comments you may have on the question above in this field"
-        tal:content="data/comment">
-    </textarea>
+        i18n:attributes="placeholder label_report_comment"
+        tal:content="data/comment|nothing"></textarea>
 </fieldset>
 
 <div class="warning last span-15" tal:condition="risk/legal_reference|nothing">

@@ -60,8 +60,8 @@
                 <tal:measure i18n:translate="header_measure_single">Measure</tal:measure>
                 <tal:number replace="number">1</tal:number>
                 <span class="icon delete" 
-                    i18n:translate=""
-                    i18n:attributes="title delete_measure" title="Delete this measure">Delete</span></a>
+                    i18n:translate="label_delete"
+                    i18n:attributes="title label_remove_measure" title="Delete this measure">Delete</span></a>
         </tal:def>
     </tal:repeat>
     <button type="submit" 

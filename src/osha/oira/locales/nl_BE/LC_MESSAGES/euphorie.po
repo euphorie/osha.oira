@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.1\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2012-09-06 12:21+0200\n"
+"POT-Creation-Date: 2012-09-25 20:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -631,6 +631,12 @@ msgstr "OiRA-instrumenten"
 msgid "expl_error"
 msgstr "Er is helaas een onverwachte fout opgetreden."
 
+#. Default: Delete this measure
+#: src/osha/oira/manual_translations.py:213
+#, fuzzy
+msgid "label_remove_measure"
+msgstr "Selecteer één of meer van de bekende vaak voorkomende maatregelen."
+
 #: src/osha/oira/module.py:25 src/osha/oira/module.py:50
 #: src/osha/oira/module.py:65
 msgid "Submodule"
@@ -711,6 +717,7 @@ msgstr "Dit is een ${priority_value} prioriteitrisico."
 
 #. Default: Measure
 #: src/osha/oira/survey.py:355 src/osha/oira/survey.py:378
+#: src/osha/oira/templates/risk_actionplan.pt:60
 msgid "header_measure_single"
 msgstr "Maatregel"
 
@@ -1007,12 +1014,12 @@ msgstr "Ga naar rapport"
 #: src/osha/oira/templates/module_actionplan.pt:59
 #: src/osha/oira/templates/module_evaluation.pt:45
 #: src/osha/oira/templates/module_identification.pt:62
-#: src/osha/oira/templates/profile.pt:78 src/osha/oira/templates/report.pt:64
+#: src/osha/oira/templates/profile.pt:78 src/osha/oira/templates/report.pt:50
 #: src/osha/oira/templates/report_actionplan.pt:270
 #: src/osha/oira/templates/report_company.pt:61
 #: src/osha/oira/templates/report_identification.pt:85
 #: src/osha/oira/templates/risk_evaluation.pt:133
-#: src/osha/oira/templates/risk_identification.pt:51
+#: src/osha/oira/templates/risk_identification.pt:52
 #: src/osha/oira/templates/sessions.pt:84 src/osha/oira/templates/start.pt:36
 msgid "label_preparation"
 msgstr "Voorbereiding"
@@ -1023,12 +1030,12 @@ msgstr "Voorbereiding"
 #: src/osha/oira/templates/module_actionplan.pt:60
 #: src/osha/oira/templates/module_evaluation.pt:46
 #: src/osha/oira/templates/module_identification.pt:63
-#: src/osha/oira/templates/profile.pt:79 src/osha/oira/templates/report.pt:65
+#: src/osha/oira/templates/profile.pt:79 src/osha/oira/templates/report.pt:51
 #: src/osha/oira/templates/report_actionplan.pt:271
 #: src/osha/oira/templates/report_company.pt:62
 #: src/osha/oira/templates/report_identification.pt:86
 #: src/osha/oira/templates/risk_evaluation.pt:134
-#: src/osha/oira/templates/risk_identification.pt:52
+#: src/osha/oira/templates/risk_identification.pt:53
 #: src/osha/oira/templates/sessions.pt:85 src/osha/oira/templates/start.pt:37
 msgid "iphone_label_preparation"
 msgstr "Voorbereiding"
@@ -1039,12 +1046,12 @@ msgstr "Voorbereiding"
 #: src/osha/oira/templates/module_actionplan.pt:65
 #: src/osha/oira/templates/module_evaluation.pt:51
 #: src/osha/oira/templates/module_identification.pt:68
-#: src/osha/oira/templates/profile.pt:83 src/osha/oira/templates/report.pt:70
+#: src/osha/oira/templates/profile.pt:83 src/osha/oira/templates/report.pt:56
 #: src/osha/oira/templates/report_actionplan.pt:276
 #: src/osha/oira/templates/report_company.pt:67
 #: src/osha/oira/templates/report_identification.pt:91
 #: src/osha/oira/templates/risk_evaluation.pt:139
-#: src/osha/oira/templates/risk_identification.pt:57
+#: src/osha/oira/templates/risk_identification.pt:58
 #: src/osha/oira/templates/sessions.pt:88 src/osha/oira/templates/start.pt:41
 msgid "label_identification"
 msgstr "Identificatie"
@@ -1055,12 +1062,12 @@ msgstr "Identificatie"
 #: src/osha/oira/templates/module_actionplan.pt:66
 #: src/osha/oira/templates/module_evaluation.pt:52
 #: src/osha/oira/templates/module_identification.pt:69
-#: src/osha/oira/templates/profile.pt:84 src/osha/oira/templates/report.pt:71
+#: src/osha/oira/templates/profile.pt:84 src/osha/oira/templates/report.pt:57
 #: src/osha/oira/templates/report_actionplan.pt:277
 #: src/osha/oira/templates/report_company.pt:68
 #: src/osha/oira/templates/report_identification.pt:92
 #: src/osha/oira/templates/risk_evaluation.pt:140
-#: src/osha/oira/templates/risk_identification.pt:58
+#: src/osha/oira/templates/risk_identification.pt:59
 #: src/osha/oira/templates/sessions.pt:89 src/osha/oira/templates/start.pt:42
 msgid "iphone_label_identification"
 msgstr "Identificatie"
@@ -1071,12 +1078,12 @@ msgstr "Identificatie"
 #: src/osha/oira/templates/module_actionplan.pt:71
 #: src/osha/oira/templates/module_evaluation.pt:57
 #: src/osha/oira/templates/module_identification.pt:77
-#: src/osha/oira/templates/profile.pt:87 src/osha/oira/templates/report.pt:76
+#: src/osha/oira/templates/profile.pt:87 src/osha/oira/templates/report.pt:62
 #: src/osha/oira/templates/report_actionplan.pt:282
 #: src/osha/oira/templates/report_company.pt:73
 #: src/osha/oira/templates/report_identification.pt:97
 #: src/osha/oira/templates/risk_evaluation.pt:145
-#: src/osha/oira/templates/risk_identification.pt:66
+#: src/osha/oira/templates/risk_identification.pt:67
 #: src/osha/oira/templates/sessions.pt:92 src/osha/oira/templates/start.pt:45
 msgid "label_evaluation"
 msgstr "Evaluatie"
@@ -1087,12 +1094,12 @@ msgstr "Evaluatie"
 #: src/osha/oira/templates/module_actionplan.pt:72
 #: src/osha/oira/templates/module_evaluation.pt:58
 #: src/osha/oira/templates/module_identification.pt:78
-#: src/osha/oira/templates/profile.pt:88 src/osha/oira/templates/report.pt:77
+#: src/osha/oira/templates/profile.pt:88 src/osha/oira/templates/report.pt:63
 #: src/osha/oira/templates/report_actionplan.pt:283
 #: src/osha/oira/templates/report_company.pt:74
 #: src/osha/oira/templates/report_identification.pt:98
 #: src/osha/oira/templates/risk_evaluation.pt:146
-#: src/osha/oira/templates/risk_identification.pt:67
+#: src/osha/oira/templates/risk_identification.pt:68
 #: src/osha/oira/templates/sessions.pt:93 src/osha/oira/templates/start.pt:46
 msgid "iphone_label_evaluation"
 msgstr "Evaluatie"
@@ -1103,12 +1110,12 @@ msgstr "Evaluatie"
 #: src/osha/oira/templates/module_actionplan.pt:77
 #: src/osha/oira/templates/module_evaluation.pt:66
 #: src/osha/oira/templates/module_identification.pt:83
-#: src/osha/oira/templates/profile.pt:91 src/osha/oira/templates/report.pt:82
+#: src/osha/oira/templates/profile.pt:91 src/osha/oira/templates/report.pt:68
 #: src/osha/oira/templates/report_actionplan.pt:288
 #: src/osha/oira/templates/report_company.pt:79
 #: src/osha/oira/templates/report_identification.pt:103
 #: src/osha/oira/templates/risk_evaluation.pt:154
-#: src/osha/oira/templates/risk_identification.pt:72
+#: src/osha/oira/templates/risk_identification.pt:73
 #: src/osha/oira/templates/sessions.pt:96 src/osha/oira/templates/start.pt:49
 msgid "label_action_plan"
 msgstr "Actieplan"
@@ -1119,12 +1126,12 @@ msgstr "Actieplan"
 #: src/osha/oira/templates/module_actionplan.pt:78
 #: src/osha/oira/templates/module_evaluation.pt:67
 #: src/osha/oira/templates/module_identification.pt:84
-#: src/osha/oira/templates/profile.pt:92 src/osha/oira/templates/report.pt:83
+#: src/osha/oira/templates/profile.pt:92 src/osha/oira/templates/report.pt:69
 #: src/osha/oira/templates/report_actionplan.pt:289
 #: src/osha/oira/templates/report_company.pt:80
 #: src/osha/oira/templates/report_identification.pt:104
 #: src/osha/oira/templates/risk_evaluation.pt:155
-#: src/osha/oira/templates/risk_identification.pt:73
+#: src/osha/oira/templates/risk_identification.pt:74
 #: src/osha/oira/templates/sessions.pt:97 src/osha/oira/templates/start.pt:50
 msgid "iphone_label_action_plan"
 msgstr "Actieplan"
@@ -1135,12 +1142,12 @@ msgstr "Actieplan"
 #: src/osha/oira/templates/module_actionplan.pt:86
 #: src/osha/oira/templates/module_evaluation.pt:72
 #: src/osha/oira/templates/module_identification.pt:89
-#: src/osha/oira/templates/profile.pt:95 src/osha/oira/templates/report.pt:88
+#: src/osha/oira/templates/profile.pt:95 src/osha/oira/templates/report.pt:74
 #: src/osha/oira/templates/report_actionplan.pt:294
 #: src/osha/oira/templates/report_company.pt:85
 #: src/osha/oira/templates/report_identification.pt:109
 #: src/osha/oira/templates/risk_evaluation.pt:160
-#: src/osha/oira/templates/risk_identification.pt:78
+#: src/osha/oira/templates/risk_identification.pt:79
 #: src/osha/oira/templates/sessions.pt:100 src/osha/oira/templates/start.pt:53
 msgid "label_report"
 msgstr "Rapport"
@@ -1151,12 +1158,12 @@ msgstr "Rapport"
 #: src/osha/oira/templates/module_actionplan.pt:87
 #: src/osha/oira/templates/module_evaluation.pt:73
 #: src/osha/oira/templates/module_identification.pt:90
-#: src/osha/oira/templates/profile.pt:96 src/osha/oira/templates/report.pt:89
+#: src/osha/oira/templates/profile.pt:96 src/osha/oira/templates/report.pt:75
 #: src/osha/oira/templates/report_actionplan.pt:295
 #: src/osha/oira/templates/report_company.pt:86
 #: src/osha/oira/templates/report_identification.pt:110
 #: src/osha/oira/templates/risk_evaluation.pt:161
-#: src/osha/oira/templates/risk_identification.pt:79
+#: src/osha/oira/templates/risk_identification.pt:80
 #: src/osha/oira/templates/sessions.pt:101 src/osha/oira/templates/start.pt:54
 msgid "iphone_report"
 msgstr "Rapport"
@@ -1167,12 +1174,12 @@ msgstr "Rapport"
 #: src/osha/oira/templates/module_actionplan.pt:94
 #: src/osha/oira/templates/module_evaluation.pt:79
 #: src/osha/oira/templates/module_identification.pt:97
-#: src/osha/oira/templates/profile.pt:102 src/osha/oira/templates/report.pt:96
+#: src/osha/oira/templates/profile.pt:102 src/osha/oira/templates/report.pt:82
 #: src/osha/oira/templates/report_actionplan.pt:307
 #: src/osha/oira/templates/report_company.pt:93
 #: src/osha/oira/templates/report_identification.pt:117
 #: src/osha/oira/templates/risk_evaluation.pt:168
-#: src/osha/oira/templates/risk_identification.pt:86
+#: src/osha/oira/templates/risk_identification.pt:87
 #: src/osha/oira/templates/sessions.pt:107 src/osha/oira/templates/start.pt:60
 msgid "navigation_logout"
 msgstr "Uitloggen"
@@ -1183,12 +1190,12 @@ msgstr "Uitloggen"
 #: src/osha/oira/templates/module_actionplan.pt:95
 #: src/osha/oira/templates/module_evaluation.pt:80
 #: src/osha/oira/templates/module_identification.pt:98
-#: src/osha/oira/templates/profile.pt:103 src/osha/oira/templates/report.pt:97
+#: src/osha/oira/templates/profile.pt:103 src/osha/oira/templates/report.pt:83
 #: src/osha/oira/templates/report_actionplan.pt:308
 #: src/osha/oira/templates/report_company.pt:94
 #: src/osha/oira/templates/report_identification.pt:118
 #: src/osha/oira/templates/risk_evaluation.pt:169
-#: src/osha/oira/templates/risk_identification.pt:87
+#: src/osha/oira/templates/risk_identification.pt:88
 #: src/osha/oira/templates/start.pt:61
 msgid "navigation_surveys"
 msgstr "Sessies"
@@ -1201,12 +1208,12 @@ msgstr "Sessies"
 #: src/osha/oira/templates/module_evaluation.pt:81
 #: src/osha/oira/templates/module_identification.pt:99
 #: src/osha/oira/templates/profile.pt:104
-#: src/osha/oira/templates/register.pt:41 src/osha/oira/templates/report.pt:98
+#: src/osha/oira/templates/register.pt:41 src/osha/oira/templates/report.pt:84
 #: src/osha/oira/templates/report_actionplan.pt:309
 #: src/osha/oira/templates/report_company.pt:95
 #: src/osha/oira/templates/report_identification.pt:119
 #: src/osha/oira/templates/risk_evaluation.pt:170
-#: src/osha/oira/templates/risk_identification.pt:88
+#: src/osha/oira/templates/risk_identification.pt:89
 #: src/osha/oira/templates/sessions.pt:108 src/osha/oira/templates/start.pt:62
 msgid "navigation_help"
 msgstr "Help"
@@ -1217,12 +1224,12 @@ msgstr "Help"
 #: src/osha/oira/templates/module_actionplan.pt:97
 #: src/osha/oira/templates/module_evaluation.pt:82
 #: src/osha/oira/templates/module_identification.pt:100
-#: src/osha/oira/templates/report.pt:99
+#: src/osha/oira/templates/report.pt:85
 #: src/osha/oira/templates/report_actionplan.pt:310
 #: src/osha/oira/templates/report_company.pt:96
 #: src/osha/oira/templates/report_identification.pt:120
 #: src/osha/oira/templates/risk_evaluation.pt:171
-#: src/osha/oira/templates/risk_identification.pt:89
+#: src/osha/oira/templates/risk_identification.pt:90
 msgid "navigation_status"
 msgstr "Status"
 
@@ -1232,7 +1239,7 @@ msgstr "Status"
 #: src/osha/oira/templates/module_actionplan.pt:98
 #: src/osha/oira/templates/module_evaluation.pt:83
 #: src/osha/oira/templates/module_identification.pt:101
-#: src/osha/oira/templates/report.pt:100
+#: src/osha/oira/templates/report.pt:86
 #: src/osha/oira/templates/report_actionplan.pt:311
 #: src/osha/oira/templates/report_company.pt:97
 #: src/osha/oira/templates/report_identification.pt:121
@@ -1571,7 +1578,7 @@ msgstr "Nee"
 
 #. Default: Save and continue
 #: src/osha/oira/templates/module_identification.pt:50
-#: src/osha/oira/templates/profile.pt:71 src/osha/oira/templates/report.pt:52
+#: src/osha/oira/templates/profile.pt:71 src/osha/oira/templates/report.pt:38
 #: src/osha/oira/templates/report_company.pt:54
 #: src/osha/oira/templates/risk_evaluation.pt:120
 #: src/osha/oira/templates/risk_identification.pt:30
@@ -1677,7 +1684,7 @@ msgid "label_password_confirm"
 msgstr "Wachtwoord opnieuw invoeren"
 
 #. Default: Reporting
-#: src/osha/oira/templates/report.pt:18
+#: src/osha/oira/templates/report.pt:17
 msgid "header_reporting"
 msgstr "Rapportering"
 
@@ -1685,7 +1692,7 @@ msgstr "Rapportering"
 #. organisation and created an action plan you can create a report which lists all
 #. your results. You can, if desired, add some extra comments that should be
 #. included in this report in the field below.
-#: src/osha/oira/templates/report.pt:20
+#: src/osha/oira/templates/report.pt:19
 msgid "report_intro"
 msgstr ""
 "Nu dat u klaar bent met het identificeren van alle risico's in uw "
@@ -1693,25 +1700,6 @@ msgstr ""
 "met al uw resultaten. Indien u dat wenst, kunt u extra opmerkingen toevoegen "
 "die in het rapport moeten staan door deze in het onderstaande veld in te "
 "vullen."
-
-#. Default: Please give us your feedback about this tool: it will take you only 3
-#. minutes! We really value your contribution during this testing phase of the OiRA
-#. tool.
-#: src/osha/oira/templates/report.pt:43
-msgid "popup_text"
-msgstr ""
-"Geef uw feedback over dit instrument: het duurt slechts 3 minuten! We "
-"stellen uw bijdrage tijdens de testfase van het OiRA-instrument erg op prijs."
-
-#. Default: Take me to the survey
-#: src/osha/oira/templates/report.pt:47
-msgid "popup_confirm"
-msgstr "Ik neem deel aan de enquête"
-
-#. Default: No thanks
-#: src/osha/oira/templates/report.pt:50
-msgid "popup_deny"
-msgstr "Nee, bedankt"
 
 #. Default: Download
 #: src/osha/oira/templates/report_actionplan.pt:27
@@ -1895,8 +1883,14 @@ msgstr "U antwoordde negatief op de bovenstaande stelling."
 msgid "label_select_measure"
 msgstr "Selecteer één of meer van de bekende vaak voorkomende maatregelen."
 
-#. Default: Add another measure
+#. Default: Delete
 #: src/osha/oira/templates/risk_actionplan.pt:62
+#: src/osha/oira/templates/sessions.pt:41
+msgid "label_delete"
+msgstr "Verwijderen"
+
+#. Default: Add another measure
+#: src/osha/oira/templates/risk_actionplan.pt:67
 #, fuzzy
 msgid "label_add"
 msgstr "Dag"
@@ -2091,11 +2085,6 @@ msgstr "opgeslagen op ${date}"
 #: src/osha/oira/templates/sessions.pt:36
 msgid "label_rename"
 msgstr "Hernoemen"
-
-#. Default: Delete
-#: src/osha/oira/templates/sessions.pt:41
-msgid "label_delete"
-msgstr "Verwijderen"
 
 #. Default: or…
 #: src/osha/oira/templates/sessions.pt:47
@@ -2360,6 +2349,18 @@ msgstr "Verbergen"
 #: src/osha/oira/templates/webhelpers.pt:218
 msgid "action_show"
 msgstr "Zichtbaar maken"
+
+#~ msgid "popup_text"
+#~ msgstr ""
+#~ "Geef uw feedback over dit instrument: het duurt slechts 3 minuten! We "
+#~ "stellen uw bijdrage tijdens de testfase van het OiRA-instrument erg op "
+#~ "prijs."
+
+#~ msgid "popup_confirm"
+#~ msgstr "Ik neem deel aan de enquête"
+
+#~ msgid "popup_deny"
+#~ msgstr "Nee, bedankt"
 
 #~ msgid "label_report_comment"
 #~ msgstr ""

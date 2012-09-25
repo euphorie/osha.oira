@@ -56,15 +56,18 @@
 <nav class="nav nav-tabs" id="measureTabs">
     <tal:repeat repeat="actionplan view/get_action_plans">
         <tal:def define="number repeat/actionplan/number">
-            <a href="#measure-${number}" style="padding-right: 10px"
-                i18n:translate="risk_solution_header">Measure 
-                <span tal:replace="number" i18n:name="number">1</span>
-                <span class="icon delete" title="Delete this measure">Delete</span></a>
+            <a href="#measure-${number}">
+                <tal:measure i18n:translate="header_measure_single">Measure</tal:measure>
+                <tal:number replace="number">1</tal:number>
+                <span class="icon delete" 
+                    i18n:translate=""
+                    i18n:attributes="title delete_measure" title="Delete this measure">Delete</span></a>
         </tal:def>
     </tal:repeat>
     <button type="submit" 
         id="addMeasureButton" 
         i18n:translate="label_add" 
+        i18n:attributes="title label_add" 
         class="small" 
         title="Add another measure">Add another measure</button>
 </nav>

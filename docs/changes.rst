@@ -5,6 +5,9 @@ Changelog
 -------------------
 
 - Description content gets lost in report if risk not evaluated. #5660. [jcbrand] 
+- Translation issues on action plan page #5809. [jcbrand]
+- Translations of "skip" button. #4436  [jcbrand]
+- UnicodeDecodeError for sectors. #5174 [jcbrand]
 
 
 1.2.13 (2012-09-04)

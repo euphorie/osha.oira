@@ -24,11 +24,8 @@ msgstr ""
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:26
-#, fuzzy
 msgid "label_module_description"
-msgstr ""
-"Inclure toutes informations appropriées pouvant être utiles à l'utilisateur "
-"final."
+msgstr "Description"
 
 #. Default: Describe your general approach to eliminate or (if the risk is not
 #. avoidable) reduce the risk.
@@ -586,9 +583,8 @@ msgstr "Nom de la version de l'outil OiRA"
 
 #. Default: Default severity
 #: src/osha/oira/manual_translations.py:195
-#, fuzzy
 msgid "label_default_effect"
-msgstr "Supprimer"
+msgstr ""
 
 #. Default: Are you sure you want to unpublish this OiRA Tool?
 #: src/osha/oira/manual_translations.py:197
@@ -629,17 +625,13 @@ msgstr "Outils OiRA"
 
 #. Default: We're sorry, but an unforseen error has occured.
 #: src/osha/oira/manual_translations.py:211
-#, fuzzy
 msgid "expl_error"
-msgstr ""
-"Afin d'adapter l'évaluation des risques à votre organisation, il peut vous "
-"être demandé de :"
+msgstr "Une erreur s'est produite."
 
 #. Default: Delete this measure
 #: src/osha/oira/manual_translations.py:213
-#, fuzzy
 msgid "label_remove_measure"
-msgstr "Sélectionner une ou plusieurs des mesures communes connues fournies."
+msgstr "Effacer cette mesure"
 
 #: src/osha/oira/module.py:25 src/osha/oira/module.py:50
 #: src/osha/oira/module.py:65
@@ -862,9 +854,8 @@ msgid "message_not_delete_published_surveygroup"
 msgstr "Vous ne pouvez pas supprimer un outil OiRA qui a été publié."
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:7
-#, fuzzy
 msgid "Profile question"
-msgstr "Cet Outil OiRA ne possède pas de questions de profil."
+msgstr "Question de profil"
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:8
 msgid ""
@@ -1449,35 +1440,36 @@ msgstr ""
 #. Default: appendix
 #: src/osha/oira/templates/documentation_view.pt:23
 msgid "documentation_appendix_appendix"
-msgstr ""
+msgstr "appendice"
 
 #. Default: Pages created in the ${appendix} folder are available via links in the
 #. footer of the online client.
 #: src/osha/oira/templates/documentation_view.pt:23
 msgid "documentation_appendix"
 msgstr ""
+"Les pages créées dans le dossier ${appendix} sont accessibles via des liens "
+"dans le\n"
+"bas de page du client en ligne. "
 
 #. Default: online help
 #: src/osha/oira/templates/documentation_view.pt:28
 msgid "documentation_online_help_online_help"
-msgstr ""
+msgstr "aide en ligne"
 
 #. Default: The ${online_help} text can also be modified.
 #: src/osha/oira/templates/documentation_view.pt:28
 msgid "documentation_online_help"
-msgstr ""
+msgstr "Le texte d’${online_help} peut également être modifié. "
 
 #. Default: Login
 #: src/osha/oira/templates/error_unauthorized.pt:14
-#, fuzzy
 msgid "header_login"
-msgstr "Régions"
+msgstr "Connexion"
 
 #. Default: Unauthorized
 #: src/osha/oira/templates/error_unauthorized.pt:14
-#, fuzzy
 msgid "header_error_unauthorized"
-msgstr "Mesure ${index}"
+msgstr "Non autorisé"
 
 #. Default: I am afraid you are not authorised to do this.
 #: src/osha/oira/templates/error_unauthorized.pt:18
@@ -1498,9 +1490,8 @@ msgstr ""
 #. Default: Login
 #: src/osha/oira/templates/error_unauthorized.pt:31
 #: src/osha/oira/templates/login.pt:25
-#, fuzzy
 msgid "label_login"
-msgstr "Logo"
+msgstr "Connexion"
 
 #. Default: Password
 #: src/osha/oira/templates/error_unauthorized.pt:33
@@ -1511,9 +1502,8 @@ msgstr "Mot de passe"
 #. Default: Login
 #: src/osha/oira/templates/error_unauthorized.pt:38
 #: src/osha/oira/templates/login.pt:32
-#, fuzzy
 msgid "button_login"
-msgstr "Imprimer"
+msgstr "Connexion"
 
 #. Default: request a password reset
 #: src/osha/oira/templates/error_unauthorized.pt:42
@@ -1549,15 +1539,13 @@ msgstr ""
 
 #. Default: Start Risk Identification
 #: src/osha/oira/templates/identification.pt:26
-#, fuzzy
 msgid "label_start_identification"
-msgstr "Identification"
+msgstr "Commencer l'identification des risques"
 
 #. Default: Login
 #: src/osha/oira/templates/login.pt:12
-#, fuzzy
 msgid "title_login"
-msgstr "OiRA - Évaluation interactive des risques en ligne"
+msgstr "Connexion"
 
 #. Default: You are already logged in. Please logout first before trying to login
 #. again.

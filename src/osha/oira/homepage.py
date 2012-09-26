@@ -23,7 +23,7 @@ class IHomePage(form.Schema, IBasic):
     """ Custom user editable homepage
     """
     description = schema.Text(
-        title = _("label_module_description", u"HTML Source Code"))
+        title = _("label_homepage_description", u"HTML Source Code"))
     form.widget(description=LargeTextAreaFieldWidget)
 
 

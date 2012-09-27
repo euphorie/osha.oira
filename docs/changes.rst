@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.15 (unreleased)
+1.2.15 (2012-09-27)
 -------------------
 
 - Remove special char from changes.rst (breaks uploading to pypi). [jcbrand]

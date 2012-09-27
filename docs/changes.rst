@@ -4,7 +4,7 @@ Changelog
 1.2.15 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Remove special char from changes.rst (breaks uploading to pypi). [jcbrand]
 
 
 1.2.14 (2012-09-27)
@@ -123,7 +123,7 @@ Changelog
 -----------------
 
 - 3520: Add upgrade step to renew the 'published' date of all client surveys. [jcbrand]
-- 3797: Renamed travailleurs to salaríes and statut to avancement. [jcbrand]
+- 3797: Renamed travailleurs to salaries and statut to avancement. [jcbrand]
 - Removed the bugfix for 2583, since a more proper bugfix is now in Euphorie [jcbrand]
 - Language changes for 3414 and 3515 [jcbrand]
 - Czech translations [thomas_w]

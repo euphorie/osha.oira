@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.14 (unreleased)
+1.2.14 (2012-09-27)
 -------------------
 
 - Description content gets lost in report if risk not evaluated. #5660. [jcbrand] 

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.17 (unreleased)
+1.2.17 (2012-09-28)
 -------------------
 
 - Remove country view override. [jcbrand]

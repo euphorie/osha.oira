@@ -4,7 +4,7 @@ Changelog
 1.2.16 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Translation fix for "list of risks" report in FR. [jcbrand]
 
 
 1.2.15 (2012-09-27)

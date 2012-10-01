@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.18 (unreleased)
+1.2.18 (2012-10-01)
 -------------------
 
 - Update webhelpers.pt from Euphorie. Load Modernizr separately. [jcbrand] 

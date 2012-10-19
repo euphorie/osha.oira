@@ -250,6 +250,7 @@ msgstr "Outil OiRA publié avec succès"
 msgid ""
 "Succesfully created a preview for the survey. It can be accessed at ${url} ."
 msgstr ""
+"L’aperçu de l’outil OiRA a été créé avec succès. Il est consultable à l’adresse ${url}."
 
 #. Default: Publish the selected OiRA Tool live with its latest changes.
 #: src/osha/oira/manual_translations.py:69
@@ -601,6 +602,7 @@ msgstr "Importer outil OiRA"
 #: src/osha/oira/manual_translations.py:201
 msgid "message_no_delete_published_survey"
 msgstr ""
+"Vous ne pouvez pas supprimer une version de l’outil OiRA qui a été mise en ligne. Vous devez d’abord la dépublier."
 
 #. Default: You can not delete a sector that contains published OiRA Tools.
 #: src/osha/oira/manual_translations.py:203
@@ -900,7 +902,7 @@ msgstr "Mesure"
 
 #: src/osha/oira/profiles/default/types/euphorie.solution.xml:6
 msgid "A measure that can be taken to mitigate a risk."
-msgstr ""
+msgstr "Mesure de prévention envisageable."
 
 #: src/osha/oira/profiles/default/types/euphorie.survey.xml:7
 msgid "OiRA Tool version"
@@ -1436,6 +1438,7 @@ msgstr ""
 #: src/osha/oira/templates/documentation_view.pt:17
 msgid "documentation_homepage"
 msgstr ""
+"Cliquez sur ${homepage_edit_form} pour modifier les paramètres d’affichage de la page d’accueil."
 
 #. Default: appendix
 #: src/osha/oira/templates/documentation_view.pt:23
@@ -1474,18 +1477,19 @@ msgstr "Non autorisé"
 #. Default: I am afraid you are not authorised to do this.
 #: src/osha/oira/templates/error_unauthorized.pt:18
 msgid "message_error_unauthorized"
-msgstr ""
+msgstr "Désolé, cette action n’est pas autorisée."
 
 #. Default: You need to be logged in to access this page.
 #: src/osha/oira/templates/error_unauthorized.pt:23
 msgid "message_error_not_logged_in"
 msgstr ""
+"Vous devez saisir votre identifiant et votre mot de passe avant de pouvoir accéder à cette page."
 
 #. Default: Credentials
 #: src/osha/oira/templates/error_unauthorized.pt:29
 #: src/osha/oira/templates/login.pt:22
 msgid "legend_credentials"
-msgstr ""
+msgstr "Identification"
 
 #. Default: Login
 #: src/osha/oira/templates/error_unauthorized.pt:31
@@ -1552,11 +1556,13 @@ msgstr "Connexion"
 #: src/osha/oira/templates/login.pt:14
 msgid "message_already_logged_in"
 msgstr ""
+"Vous êtes déjà connecté. Veuillez vous déconnecter avant de réessayer de vous connecter."
 
 #. Default: Invalid login. If you forgot your password you can ${reset_password}.
 #: src/osha/oira/templates/login.pt:16
 msgid "message_invalid_login"
 msgstr ""
+"Mot de passe incorrect. Si vous avez oublié votre mot de passe, cliquez sur ${reset_password}."
 
 #. Default: Previous
 #: src/osha/oira/templates/module_actionplan.pt:52
@@ -2346,7 +2352,7 @@ msgstr "Licence GPL"
 
 #: src/osha/oira/templates/webhelpers.pt:135
 msgid "CC License"
-msgstr ""
+msgstr "Licence CC"
 
 #. Default: Legal and policy references
 #: src/osha/oira/templates/webhelpers.pt:197

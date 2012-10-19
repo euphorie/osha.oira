@@ -4,8 +4,7 @@ Changelog
 1.2.19 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Changed name for language nl-be #5978 [thomasw]
 
 1.2.18 (2012-10-01)
 -------------------

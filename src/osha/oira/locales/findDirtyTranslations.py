@@ -88,7 +88,7 @@ def main():
         elif os.path.isfile(arg):
             files.append(arg)
         else:
-            usage(sys.stderr, "\nERROR: path to file is not valid")
+            usage(sys.stderr, "\nERROR: path to file is not valid: %s" % arg)
 
     if len(files) != 2:
         usage(sys.stderr, "\nERROR: Too many or too few files specified")

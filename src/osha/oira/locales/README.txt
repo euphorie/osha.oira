@@ -123,13 +123,19 @@ For both osha.oira and euphorie.deployment, make sure euphorie.pot is updated.
 to generate the *.po files for translators.
 
 E.g: 
-./findDirtyTranslations.py sv/LC_MESSAGES/euphorie.po euphorie.pot --untranslated --fuzzy --output=dirtySV.po
+./findDirtyTranslations.py sv/LC_MESSAGES/euphorie.po euphorie.pot --untranslated --fuzzy --output=oiraSV.po
 
-* For *euphorie.deployment*: Use getNewEntries (with --ignore-translated) to
-generate *.po files for translators
+* For *euphorie.deployment*: We need two steps. First, we extract the "dirty" translations in euphorie in the way before,
+but with the additional option --noprefill. We save the result to a temporary file, e.g.
 
-E.g: 
-./getNewEntries.py el/LC_MESSAGES/euphorie.po ../../../euphorie/deployment/locales/el/LC_MESSAGES/euphorie.po euphorieEL.po --ignore-translated
+
+./findDirtyTranslations.py ../../../euphorie/deployment/locales/sv/euphorie.po ../../../euphorie/deployment/locales/euphorie.pot  --untranslated --debug --fuzzy --noprefill --output=euphorie_tmpSV.po
+
+This temporary file holds _all_ dirtyy translations from euphorie. But some might not be needed, since they are already present in oira. 
+Therefore, we run a second step using getNewEntries which compares the temp file to the existing translations:
+
+/getNewEntries.py sv/LC_MESSAGES/euphorie.po euphorie_tmpSV.po euphorieSV.po --ignore-translated
+
 
 Now we have oiraSV.po and euphorieSV.po which can be sent to the translators.
 

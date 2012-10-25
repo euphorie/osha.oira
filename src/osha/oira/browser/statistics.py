@@ -3,6 +3,7 @@
 import logging
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.statusmessages.interfaces import IStatusMessage
 from AccessControl import Unauthorized
 from five import grok
 
@@ -12,7 +13,7 @@ import transaction
 
 from Products.CMFPlone.utils import safe_unicode
 import re
-import urlparse, urllib, urllib2
+import urllib2
 
 logger = logging.getLogger("osha.oira/browser.statistics")
 
@@ -111,7 +112,10 @@ class ShowStatistics(grok.View):
         site_properties = ptool.site_properties
         URL = site_properties.getProperty('birt_report_url')
         if not URL:
-            return "birt_report_url not set, please contact an administrator"
+            IStatusMessage(self.request).addStatusMessage(
+                    "birt_report_url not set, please contact an administrator",
+                    type=u'error')
+            return self.request.response.redirect(self.context.absolute_url())
         #URL = 'http://localhost:8080/birt-viewer/frameset?__report=report/OiRA-Reports/usage_statistics.rptdesign&__sessionId=20120131_180440_301&__format=pdf&__pageoverflow=0&__asattachment=true&__overwrite=false'
         pm = getToolByName(self.context, 'portal_membership')
         if pm.isAnonymousUser():
@@ -124,7 +128,13 @@ class ShowStatistics(grok.View):
         #url = urlparse.urlunparse(parsedurl[:4] + (urllib.urlencode(parsedquery),) + parsedurl[5:])
         url = URL + '&sector=%s' % member.id
 
-        page = urllib2.urlopen(url)
+        try:
+            page = urllib2.urlopen(url)
+        except urllib2.URLError:
+            IStatusMessage(self.request).addStatusMessage(
+                    "Statistics server could not be contacted, please try again later",
+                    type=u'error')
+            return self.request.response.redirect(self.context.absolute_url())
         self.context.REQUEST.response.setHeader('content-type', page.headers.get('content-type') or 'application/pdf')
         self.context.REQUEST.response.setHeader('content-disposition', page.headers.get('content-disposition') or 'inline; filename="report.pdf"')
         return page.read()

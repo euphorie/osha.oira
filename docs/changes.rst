@@ -4,8 +4,8 @@ Changelog
 1.2.21 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Added missing i18n:translate statments in risk_actionplan (copied from the
+  Euphorie version) [thomasw] 
 
 1.2.20 (2012-10-29)
 -------------------

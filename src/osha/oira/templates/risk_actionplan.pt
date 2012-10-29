@@ -15,9 +15,9 @@
     <metal:js  use-macro="webhelpers/macros/javascript"/>
     <script type="text/javascript">$("input[placeholder], textarea[placeholder]").placeholder();</script>
     <script type="text/javascript" src="client/++resource++osha.oira.javascripts/oira.js"></script>
-    <script type="text/javascript">
-        var delete_confirm_text = "Are you sure you want to remove this measure? This action can not be reverted.",
-            replace_confirm_text = "The current text in the fields 'Action plan', 'Prevention plan' and 'Requirements' of this measure will be overwritten. This action cannot be reverted Are you sure you want to continue?";
+    <script type="text/javascript" meta:interpolation="false">
+        var delete_confirm_text = "<tal:span i18n:translate=''>Are you sure you want to remove this measure? This action can not be reverted.</tal:span>",
+            replace_confirm_text = "<tal:span i18n:translate=''>The current text in the fields 'Action plan', 'Prevention plan' and 'Requirements' of this measure will be overwritten. This action cannot be reverted Are you sure you want to continue?</tal:span>";
         $(document).ready(ActionPlan.init);
     </script>
     <style type="text/css" media="all">

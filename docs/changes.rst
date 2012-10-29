@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.22 (unreleased)
+1.2.22 (2012-10-29)
 -------------------
 
 - fixed 2 fatal typos (for translation) in risk_actionplan :-( [thomasw]

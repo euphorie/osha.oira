@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.19 (unreleased)
+1.2.19 (2012-10-29)
 -------------------
 
 - Changed name for language nl-be #5978 [thomasw]

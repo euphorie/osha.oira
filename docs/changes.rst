@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.21 (unreleased)
+1.2.21 (2012-10-29)
 -------------------
 
 - Added missing i18n:translate statments in risk_actionplan (copied from the

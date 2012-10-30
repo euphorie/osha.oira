@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Author: JC Brand <brand@syslab.com>
 
-"""%(program)s: Compare to .po or .pot files and find all the entries in the
+"""%(program)s: Compare two .po or .pot files and find all the entries in the
 second file that are not in the first one. These entries are then written to a
 new po file.
 

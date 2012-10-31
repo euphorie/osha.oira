@@ -38,7 +38,7 @@ $(EUPHORIE_PO_FILES): src/osha/oira/locales/euphorie.pot
 $(PLONE_PO_FILES): src/osha/oira/locales/plone.pot
 	msgmerge --update $@ $<
 
-$(CSS_DIR)/oira.min.css: $(CSS_DIR)/main.css $(CSS_DIR)/jquery-ui-1.8.21.custom.css
+$(CSS_DIR)/oira.min.css: $(CSS_DIR)/main.css 
 	set -e ; (for i in $^ ; do $(CSS_PACK) $$i ; done ) > $@~ ; mv $@~ $@
 
 .po.mo:

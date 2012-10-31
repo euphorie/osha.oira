@@ -33,9 +33,9 @@
 
     <tal:block condition="webhelpers/debug_mode">
       <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen.css" />
+      <link rel="stylesheet" type="text/css" media="all" href="${base_url}/datepicker.css" />
       <link rel="stylesheet" type="text/css" media="only screen and (min-width:768px)" title="ebc" href="${base_url}/screen-osha.css" />
       <link rel="stylesheet" type="text/css" media="all" href="${oira_base_url}/main.css" />
-      <link rel="stylesheet" type="text/css" media="all" href="${oira_base_url}/jquery-ui-1.8.21.custom.css" />
       <!--[if lte IE 6]> <link rel="stylesheet" type="text/css" media="all" href="++resource++screen-ie6.css"/> <link rel="stylesheet" href="${base_url}/screen-osha.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
       <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie7.css"/> <link rel="stylesheet" href="${base_url}/screen-osha.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
       <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie8.css" /> <link rel="stylesheet" href="${base_url}/screen-osha.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
@@ -80,7 +80,8 @@
     <tal:block condition="webhelpers/debug_mode">
         <script type="text/javascript" src="${lib_url}/modernizr-2.6.1.min.js"></script>
         <script type="text/javascript" src="${lib_url}/jquery-1.8.0.min.js"></script>
-        <script type="text/javascript" src="${lib_url}/jquery-ui-1.7.3.min.js"></script>
+        <script type="text/javascript" src="${lib_url}/jquery-ui-1.9.1.custom/js/jquery-ui-1.9.1.custom.js"></script>
+        <script type="text/javascript" src="${lib_url}/jquery-ui-1.9.1.custom/development-bundle/ui/i18n/jquery-ui-i18n.js"></script>
         <script type="text/javascript" src="${lib_url}/css_browser_selector.js"></script>
         <script type="text/javascript" src="${lib_url}/jquery.hoverIntent.js"></script>
         <script type="text/javascript" src="${lib_url}/jquery.bt.js"></script>

@@ -81,7 +81,8 @@
     <div class="tab-container" id="measure-${number}">
     <div class="column">
         <fieldset class="condensed">
-        <legend><span i18n:translate="label_description">Description</span><a href="#standardSolutions" class="button small solutions" i18n:translate="">Standard solutions</a>
+        <legend><span i18n:translate="label_description">Description</span>
+        <a href="#standardSolutions" class="button small solutions" tal:condition="python:view.solutions" i18n:translate="">Standard solutions</a>
             <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip" i18n:attributes="title actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</a>
         </legend> 
         <textarea class="actionPlan" id="actionplan-1" 

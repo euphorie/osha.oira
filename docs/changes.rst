@@ -1,10 +1,11 @@
 Changelog
 =========
 
-1.2.23 (unreleased)
+1.2.23 (2012-11-01)
 -------------------
 
-- Nothing changed yet.
+- Added multilingual support to the datepicker [jcbrand]
+- Datepicker CSS and images now moved to the Euphorie Prototype [jcbrand]
 
 
 1.2.22 (2012-10-29)

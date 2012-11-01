@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.24 (unreleased)
+1.2.24 (2012-11-01)
 -------------------
 
 - Include datepicker.min.css when not in debug mode [jcbrand]

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.25 (unreleased)
+1.2.25 (2012-11-01)
 -------------------
 
 - Hide the standard solutions button when there aren't any [jcbrand]

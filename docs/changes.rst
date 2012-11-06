@@ -1,10 +1,29 @@
 Changelog
 =========
 
-1.2.23 (unreleased)
+1.2.26 (unreleased)
 -------------------
 
 - Nothing changed yet.
+
+
+1.2.25 (2012-11-01)
+-------------------
+
+- Hide the standard solutions button when there aren't any [jcbrand]
+
+
+1.2.24 (2012-11-01)
+-------------------
+
+- Include datepicker.min.css when not in debug mode [jcbrand]
+
+
+1.2.23 (2012-11-01)
+-------------------
+
+- Added multilingual support to the datepicker [jcbrand]
+- Datepicker CSS and images now moved to the Euphorie Prototype [jcbrand]
 
 
 1.2.22 (2012-10-29)

@@ -150,6 +150,18 @@ From the translators, we get back an UPDATE.po which is a subset of the existing
 If UPDATE.po contains msgids that are not present in ORIG.po, they will be ignored! The proper way to introduce new
 msgids is by adding them to the .pot file first and propagating them via msgmerge (see above).
 
+
+Beware of fuzzy!
+----------------
+
+There's apparently a problem with "#fuzzy" entries in po files in combination with chameleon.
+In the admin interface, changing to a language in which a fuzzy entry is present **can** lead to a UnicodeDecodeError.
+
+Therefore, before releasing a new egg version for osha.oira, Euphorie or NuPlone, make sure
+
+* that no single .po file contains any #fuzzy entry (grep is your friend)
+* for those eggs in which mo files are included, make sure they are up to date
+
 A note on formatting
 --------------------
 

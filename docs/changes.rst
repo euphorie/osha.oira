@@ -4,7 +4,7 @@ Changelog
 1.2.26 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Removed #fuzzy marker in all po files [thomasw]
 
 
 1.2.25 (2012-11-01)

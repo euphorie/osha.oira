@@ -20,7 +20,7 @@ msgstr ""
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:26
-#, fuzzy
+
 msgid "label_module_description"
 msgstr ""
 "Neem alle relevante informatie op die nuttig kan zijn voor de eindgebruiker."
@@ -71,7 +71,7 @@ msgstr "Maatregel"
 
 #. Default: Measure
 #: src/osha/oira/manual_translations.py:20
-#, fuzzy
+
 msgid "title_common_solution"
 msgstr ""
 "U kunt een standaard oplossing kiezen en vervolgens eventueel aanpassen en "
@@ -560,7 +560,7 @@ msgstr ""
 
 #. Default: Default severity
 #: src/osha/oira/manual_translations.py:195
-#, fuzzy
+
 msgid "label_default_effect"
 msgstr "Verwijder"
 
@@ -577,7 +577,7 @@ msgstr ""
 #. Default: You cannot delete an OiRA Tool version that is published. Please
 #. unpublish it first.
 #: src/osha/oira/manual_translations.py:201
-#, fuzzy
+
 msgid "message_no_delete_published_survey"
 msgstr "U kunt geen OiRA-tool wissen die is gepubliceerd."
 
@@ -608,7 +608,7 @@ msgstr ""
 
 #. Default: Delete this measure
 #: src/osha/oira/manual_translations.py:213
-#, fuzzy
+
 msgid "label_remove_measure"
 msgstr "Nieuwe maatregel toevoegen"
 
@@ -628,7 +628,7 @@ msgstr "Toevoegen ${name}"
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
 #. of probability, frequency and severity) method.
 #: src/osha/oira/risk.py:35
-#, fuzzy
+
 msgid "help_evaluation_method_kinney"
 msgstr ""
 "Kies tussen de methode GESCHAT (ruwe schatting) of BEREKEND (combinatie van "
@@ -637,7 +637,7 @@ msgstr ""
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
 #. of frequency and severity) method.
 #: src/osha/oira/risk.py:42
-#, fuzzy
+
 msgid "help_evaluation_method_french"
 msgstr ""
 "Kies tussen de methode GESCHAT (ruwe schatting) of BEREKEND (combinatie van "
@@ -828,7 +828,7 @@ msgid "message_not_delete_published_surveygroup"
 msgstr "U kunt geen OiRA-tool wissen die is gepubliceerd."
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:7
-#, fuzzy
+
 msgid "Profile question"
 msgstr "Deze OiRA-tool heeft geen profielvragen."
 
@@ -1373,7 +1373,7 @@ msgstr ""
 
 #. Default: Here you can manage the documentation for the ${client}.
 #: src/osha/oira/templates/documentation_view.pt:14
-#, fuzzy
+
 msgid "intro_documenation"
 msgstr ""
 "De introductietekst wordt weergegeven als er een nieuwe OiRA-toolsessie "
@@ -1409,13 +1409,13 @@ msgstr ""
 
 #. Default: Login
 #: src/osha/oira/templates/error_unauthorized.pt:14
-#, fuzzy
+
 msgid "header_login"
 msgstr "of …"
 
 #. Default: Unauthorized
 #: src/osha/oira/templates/error_unauthorized.pt:14
-#, fuzzy
+
 msgid "header_error_unauthorized"
 msgstr "Maatregel ${index}"
 
@@ -1438,7 +1438,7 @@ msgstr ""
 #. Default: Login
 #: src/osha/oira/templates/error_unauthorized.pt:31
 #: src/osha/oira/templates/login.pt:25
-#, fuzzy
+
 msgid "label_login"
 msgstr "Logo"
 
@@ -1451,21 +1451,21 @@ msgstr "Wachtwoord"
 #. Default: Login
 #: src/osha/oira/templates/error_unauthorized.pt:38
 #: src/osha/oira/templates/login.pt:32
-#, fuzzy
+
 msgid "button_login"
 msgstr "Print"
 
 #. Default: request a password reset
 #: src/osha/oira/templates/error_unauthorized.pt:42
 #: src/osha/oira/templates/login.pt:17 src/osha/oira/templates/login.pt:36
-#, fuzzy
+
 msgid "reset_password"
 msgstr "Met dit wachtwoord kunt u inloggen op de beheeromgeving."
 
 #. Default: If you forgot your password you can ${reset_password}.
 #: src/osha/oira/templates/error_unauthorized.pt:42
 #: src/osha/oira/templates/login.pt:36
-#, fuzzy
+
 msgid "message_reset_password"
 msgstr "Met dit wachtwoord kunt u inloggen op de beheeromgeving."
 
@@ -1476,7 +1476,7 @@ msgstr ""
 
 #. Default: You can print the ${list-of-risks}.
 #: src/osha/oira/templates/identification.pt:21
-#, fuzzy
+
 msgid "intro_identification"
 msgstr ""
 "U kunt de inhoud van de tool afdrukken, zodat u de betreffende werkplek met "
@@ -1486,13 +1486,13 @@ msgstr ""
 
 #. Default: Start Risk Identification
 #: src/osha/oira/templates/identification.pt:26
-#, fuzzy
+
 msgid "label_start_identification"
 msgstr "Inventarisatie"
 
 #. Default: Login
 #: src/osha/oira/templates/login.pt:12
-#, fuzzy
+
 msgid "title_login"
 msgstr ""
 "<strong>OiRA</strong><br/>Interactieve onlinetool voor<br/>risicobeoordeling"
@@ -1547,7 +1547,7 @@ msgstr "Nee"
 #: src/osha/oira/templates/report_company.pt:54
 #: src/osha/oira/templates/risk_evaluation.pt:120
 #: src/osha/oira/templates/risk_identification.pt:30
-#, fuzzy
+
 msgid "label_save_and_continue"
 msgstr "Ga verder"
 
@@ -1768,13 +1768,13 @@ msgstr ""
 
 #. Default: Your country
 #: src/osha/oira/templates/report_company.pt:26
-#, fuzzy
+
 msgid "label_company_country"
 msgstr "Hoofdkleur"
 
 #. Default: Through which channel did you learn about this tool?
 #: src/osha/oira/templates/report_company.pt:36
-#, fuzzy
+
 msgid "label_referer"
 msgstr "Rapport"
 
@@ -1817,7 +1817,7 @@ msgstr ""
 
 #. Default: other channel
 #: src/osha/oira/templates/report_company.pt:44
-#, fuzzy
+
 msgid "referer_other"
 msgstr ""
 "Baseer mijn nieuwe OiRA-tool op een bestaande OiRA-tool van een andere "
@@ -1825,7 +1825,7 @@ msgstr ""
 
 #. Default: Skip this step
 #: src/osha/oira/templates/report_company.pt:53
-#, fuzzy
+
 msgid "label_skip"
 msgstr "Ja"
 
@@ -1848,7 +1848,7 @@ msgstr "Verwijder"
 
 #. Default: Add another measure
 #: src/osha/oira/templates/risk_actionplan.pt:67
-#, fuzzy
+
 msgid "label_add"
 msgstr "Dag"
 
@@ -1965,7 +1965,7 @@ msgstr ""
 
 #. Default: Once per year
 #: src/osha/oira/templates/risk_evaluation.pt:85
-#, fuzzy
+
 msgid "frequency_french_rare_help"
 msgstr "Regelmatig"
 
@@ -1986,7 +1986,7 @@ msgstr ""
 
 #. Default: Once per week
 #: src/osha/oira/templates/risk_evaluation.pt:95
-#, fuzzy
+
 msgid "frequency_french_often_help"
 msgstr "Voortdurend"
 
@@ -1997,7 +1997,7 @@ msgstr ""
 
 #. Default: Minimum once per day
 #: src/osha/oira/templates/risk_evaluation.pt:100
-#, fuzzy
+
 msgid "frequency_french_regularly_help"
 msgstr "Regelmatig"
 

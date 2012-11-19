@@ -25,7 +25,9 @@
       }
     </style>
 </head>
-<body tal:define="risk nocall:view/risk; data view/data; lang here/@@plone_portal_state/language" class="actionplan ${webhelpers/extra_css}">
+<body tal:define="risk nocall:view/risk; data view/data; lang here/@@plone_portal_state/language" 
+        tal:attributes="lang lang"
+        class="actionplan ${webhelpers/extra_css}">
 
 <h1>${view/title}</h1>
 <form method="post" action="${context/absolute_url}">
@@ -162,7 +164,6 @@
                             name="measure.planning_start_year:records" 
                             id="planning-start-year-${number}" 
                             maxlength="4"
-                            tal:attributes="lang lang"
                             type="number"
                             class="numeric year enablePicker${python:' error' if year_error else ''}"
                             value="${actionplan/planning_start_year|actionplan/planning_start/year|nothing}"/>
@@ -202,7 +203,6 @@
                     <label class="${python:'error' if year_error else None}"
                         for="planning-end-year-${number}" i18n:translate="label_day">Day</label>
                     <input type="text" name="measure.planning_end_year:records" id="planning-end-year-${number}" maxlength="4"
-                        tal:attributes="lang lang"
                         type="number"
                         class="numeric year enablePicker${python:' error' if year_error else ''}"
                         value="${actionplan/planning_end_year|actionplan/planning_end/year|nothing}"/>

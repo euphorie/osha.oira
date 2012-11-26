@@ -4,7 +4,9 @@ Changelog
 1.2.27 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Regenerate en po file. [jcbrand]
+- Re-add fuzzy entries and just remove the top ones
+(before doc metadata) which cause unicode errors. [jcbrand] 
 
 
 1.2.26 (2012-11-09)

@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.2.27 (unreleased)
--------------------
+1.2.27. (2012-11-26)
+--------------------
 
 - Regenerate en po file. [jcbrand]
 - Re-add fuzzy entries and just remove the top ones

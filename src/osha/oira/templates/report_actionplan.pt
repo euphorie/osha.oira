@@ -27,7 +27,6 @@
     <a class="button-medium" 
         href="${python:view.url(name='download')}" 
         i18n:translate="button_download">Download</a>
-	<a class="button-medium printButton jsOnly" i18n:translate="button_print">Print</a>
 </div>
 
 <div class="notice comments" tal:condition="view/session/report_comment" tal:content="view/session/report_comment">

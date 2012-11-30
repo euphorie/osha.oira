@@ -19,4 +19,14 @@
         for="*"
         />
 
+    <configure package="plonetheme.nuplone.tiles">
+        <plone:tile
+            name="tabs"
+            layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+            class="osha.oira.tiles.tabs.OiRASiteRootTabsTile"
+            template="templates/tabs.pt"
+            permission="zope.Public"
+            />
+    </configure>
+
 </configure>

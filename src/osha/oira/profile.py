@@ -10,4 +10,3 @@ class OSHAProfile(profile.Profile):
     grok.layer(interfaces.IOSHAClientSkinLayer)
     grok.template("profile")
     grok.name("profile")
-

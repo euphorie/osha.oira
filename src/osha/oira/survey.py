@@ -276,7 +276,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         self.nodes=query.all()
         self._extra_updates()
 
-
     def addReportNodes(self, document, nodes, heading, toc, body):
         """ """
         t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
@@ -509,24 +508,29 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                                     underline=True)),
                     ParagraphPropertySet(left_indent=300, right_indent=300))
                     )
-
         # XXX: This part is removed
         # self.addActionPlan(document)
 
         # XXX: and replaced with this part:
         t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
         toc = createSection(document, self.context, self.request)
+
         body = Section()
         heading = t(_("header_oira_report_download", 
                     default=u"OiRA Report: \"${title}\"",
                     mapping=dict(title=self.session.title)))
-        toc.append(
-                    Paragraph(
+
+        toc.append(Paragraph(
                         ss.ParagraphStyles.Heading1, 
                         ParagraphPropertySet(alignment=ParagraphPropertySet.CENTER),
                         heading,
-                        )
-                    )
+                        ))
+
+        if self.session.report_comment:
+            # Add comment. #5985
+            normal_style = document.StyleSheet.ParagraphStyles.Normal
+            toc.append(Paragraph(normal_style, self.session.report_comment))
+
         toc_props = ParagraphPropertySet()
         toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH*1)
         toc_props.SetRightIndent(TabPropertySet.DEFAULT_WIDTH*1)

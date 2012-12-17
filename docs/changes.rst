@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.29 (unreleased)
+1.2.19 (2012-12-17)
 -------------------
 
 - Fixed RST error. [jcbrand]

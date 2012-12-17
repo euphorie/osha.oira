@@ -1,10 +1,10 @@
 Changelog
 =========
 
-y (unreleased)
---------------
+1.2.29 (unreleased)
+-------------------
 
-- Nothing changed yet.
+- Fixed RST error. [jcbrand]
 
 
 1.2.28 (2012-12-17)
@@ -18,8 +18,7 @@ y (unreleased)
 --------------------
 
 - Regenerate en po file. [jcbrand]
-- Re-add fuzzy entries and just remove the top ones
-(before doc metadata) which cause unicode errors. [jcbrand] 
+- Re-add fuzzy entries and just remove the top ones (before doc metadata) which cause unicode errors. [jcbrand] 
 
 
 1.2.26 (2012-11-09)

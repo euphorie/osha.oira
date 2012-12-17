@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.2.28. (unreleased)
---------------------
+1.2.28 (2012-12-17)
+-------------------
 
 - Comments don't appear in the report #5985 [jcbrand]
 - Hide help tab #6071 [jcbrand]

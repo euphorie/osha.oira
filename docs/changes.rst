@@ -1,6 +1,12 @@
 Changelog
 =========
 
+y (unreleased)
+--------------
+
+- Nothing changed yet.
+
+
 1.2.28 (2012-12-17)
 -------------------
 

@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.2.28. (unreleased)
+--------------------
+
+- Comments don't appear in the report #5985 [jcbrand]
+- Hide help tab #6071 [jcbrand]
+- Bump jquery to 1.8.2 [jcbrand]
+
 1.2.27. (2012-11-26)
 --------------------
 

@@ -570,7 +570,6 @@ msgstr "Nombre de la versión de la herramienta OiRA"
 
 #. Default: Default severity
 #: src/osha/oira/manual_translations.py:195
-#, fuzzy
 msgid "label_default_effect"
 msgstr "Severidad por defecto"
 
@@ -588,7 +587,6 @@ msgstr "Importar herramienta OiRA"
 #. Default: You cannot delete an OiRA Tool version that is published. Please
 #. unpublish it first.
 #: src/osha/oira/manual_translations.py:201
-#, fuzzy
 msgid "message_no_delete_published_survey"
 msgstr ""
 "No se puede eliminar una herramienta OiRA que está publicada. Por favor, "
@@ -616,14 +614,12 @@ msgstr "Herramientas OiRA"
 
 #. Default: We're sorry, but an unforseen error has occured.
 #: src/osha/oira/manual_translations.py:211
-#, fuzzy
 msgid "expl_error"
 msgstr "Lo sentimos, ha ocurrido un error inesperado."
 
 #. Default: Delete this measure
 #: src/osha/oira/manual_translations.py:213
 #: src/osha/oira/templates/risk_actionplan.pt:67
-#, fuzzy
 msgid "label_remove_measure"
 msgstr "Borrar esta medida"
 
@@ -643,7 +639,6 @@ msgstr "Agregar ${name}"
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
 #. of probability, frequency and severity) method.
 #: src/osha/oira/risk.py:35
-#, fuzzy
 msgid "help_evaluation_method_kinney"
 msgstr ""
 "Elija entre método ESTIMADO (estimación aproximada) o CALCULADO (combinación "
@@ -652,7 +647,6 @@ msgstr ""
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
 #. of frequency and severity) method.
 #: src/osha/oira/risk.py:42
-#, fuzzy
 msgid "help_evaluation_method_french"
 msgstr ""
 "Elija entre método ESTIMADO (estimación aproximada) o CALCULADO (combinación "
@@ -845,7 +839,6 @@ msgid "message_not_delete_published_surveygroup"
 msgstr "No puede borrar una herramienta OiRA que se ha publicado."
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:7
-#, fuzzy
 msgid "Profile question"
 msgstr "Pregunta perfil"
 
@@ -1405,7 +1398,6 @@ msgstr "Cliente online"
 
 #. Default: Here you can manage the documentation for the ${client}.
 #: src/osha/oira/templates/documentation_view.pt:14
-#, fuzzy
 msgid "intro_documenation"
 msgstr "Aqui puede gestionar la documentación para el ${client}."
 
@@ -1441,13 +1433,11 @@ msgstr "El ${online_help} texto puede ser modificado también."
 
 #. Default: Login
 #: src/osha/oira/templates/error_unauthorized.pt:14
-#, fuzzy
 msgid "header_login"
 msgstr "Usuario"
 
 #. Default: Unauthorized
 #: src/osha/oira/templates/error_unauthorized.pt:14
-#, fuzzy
 msgid "header_error_unauthorized"
 msgstr "No autorizado"
 
@@ -1470,35 +1460,30 @@ msgstr "Credenciales"
 #. Default: Login
 #: src/osha/oira/templates/error_unauthorized.pt:31
 #: src/osha/oira/templates/login.pt:25
-#, fuzzy
 msgid "label_login"
 msgstr "Usuario"
 
 #. Default: Password
 #: src/osha/oira/templates/error_unauthorized.pt:33
 #: src/osha/oira/templates/login.pt:27
-#, fuzzy
 msgid "label_password"
 msgstr "Contraseña"
 
 #. Default: Login
 #: src/osha/oira/templates/error_unauthorized.pt:38
 #: src/osha/oira/templates/login.pt:32
-#, fuzzy
 msgid "button_login"
 msgstr "Usuario"
 
 #. Default: request a password reset
 #: src/osha/oira/templates/error_unauthorized.pt:42
 #: src/osha/oira/templates/login.pt:17 src/osha/oira/templates/login.pt:36
-#, fuzzy
 msgid "reset_password"
 msgstr "Solicitar el restablecimiento de la contraseña"
 
 #. Default: If you forgot your password you can ${reset_password}.
 #: src/osha/oira/templates/error_unauthorized.pt:42
 #: src/osha/oira/templates/login.pt:36
-#, fuzzy
 msgid "message_reset_password"
 msgstr "Si ha olvidado su contraseña, puede ${reset_password}."
 
@@ -1509,19 +1494,16 @@ msgstr "Regiones"
 
 #. Default: You can print the ${list-of-risks}.
 #: src/osha/oira/templates/identification.pt:21
-#, fuzzy
 msgid "intro_identification"
 msgstr "Puede imprimir la ${list-of-risks}."
 
 #. Default: Start Risk Identification
 #: src/osha/oira/templates/identification.pt:26
-#, fuzzy
 msgid "label_start_identification"
 msgstr "Iniciar la identificación de Riesgos"
 
 #. Default: Login
 #: src/osha/oira/templates/login.pt:12
-#, fuzzy
 msgid "title_login"
 msgstr "Usuario"
 
@@ -1865,7 +1847,6 @@ msgstr "otro canal"
 
 #. Default: Skip this step
 #: src/osha/oira/templates/report_company.pt:53
-#, fuzzy
 msgid "label_skip"
 msgstr "Omitir este paso"
 
@@ -1911,7 +1892,6 @@ msgstr "Borrar"
 
 #. Default: Add another measure
 #: src/osha/oira/templates/risk_actionplan.pt:72
-#, fuzzy
 msgid "label_add"
 msgstr "Añadir otra medida"
 
@@ -2048,7 +2028,6 @@ msgstr "Débil"
 
 #. Default: No need to stop working
 #: src/osha/oira/templates/risk_evaluation.pt:63
-#, fuzzy
 msgid "severity_weak_help"
 msgstr "No hay necesidad de parar de trabajar"
 
@@ -2059,7 +2038,6 @@ msgstr "No muy grave"
 
 #. Default: Need to stop working for less than 3 days
 #: src/osha/oira/templates/risk_evaluation.pt:67
-#, fuzzy
 msgid "severity_not_severe_help"
 msgstr "Necesidad de parar de trabajar menos de 3 días"
 
@@ -2070,7 +2048,6 @@ msgstr "Grave"
 
 #. Default: Need to stop working for more than 3 days
 #: src/osha/oira/templates/risk_evaluation.pt:71
-#, fuzzy
 msgid "severity_severe_help"
 msgstr "Necesidad de parar de trabajar mas de 3 días"
 
@@ -2081,7 +2058,6 @@ msgstr "Muy grave"
 
 #. Default: Irreversible injury, incurable illness, death
 #: src/osha/oira/templates/risk_evaluation.pt:76
-#, fuzzy
 msgid "severity_very_severe_help"
 msgstr "Lesión irreversible, enfermedad incurable, muerte"
 
@@ -2092,7 +2068,6 @@ msgstr "Raro"
 
 #. Default: Once per year
 #: src/osha/oira/templates/risk_evaluation.pt:85
-#, fuzzy
 msgid "frequency_french_rare_help"
 msgstr "Una vez al año"
 
@@ -2103,7 +2078,6 @@ msgstr "No muy frecuente"
 
 #. Default: Once per month
 #: src/osha/oira/templates/risk_evaluation.pt:90
-#, fuzzy
 msgid "frequency_french_not_often_help"
 msgstr "Una vez al mes"
 
@@ -2114,7 +2088,6 @@ msgstr "Frecuente"
 
 #. Default: Once per week
 #: src/osha/oira/templates/risk_evaluation.pt:95
-#, fuzzy
 msgid "frequency_french_often_help"
 msgstr "Una vez a la semana"
 
@@ -2125,7 +2098,6 @@ msgstr "Muy frecuente o habitual"
 
 #. Default: Minimum once per day
 #: src/osha/oira/templates/risk_evaluation.pt:100
-#, fuzzy
 msgid "frequency_french_regularly_help"
 msgstr "Mínimo una vez al día"
 

@@ -390,7 +390,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 u"and/or requirements needed")),
             t(_("label_action_plan_responsible", default=u"Who is "
                 u"responsible?")),
-            t(_("label_action_plan_budget", default=u"Budget (in Euro)")),
+            t(_("label_action_plan_budget", default=u"Budget")),
             t(_("label_action_plan_start", default=u"Planning start")),
             t(_("label_action_plan_end", default=u"Planning end")),
             ]

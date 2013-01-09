@@ -122,7 +122,7 @@
             </label>
 
             <label id="label-budget-${number}" class="${python:'error' if exists('errors/budget') else None}">
-                <tal:span i18n:translate="label_action_plan_budget">Budget (in Euro)</tal:span>
+                <tal:span i18n:translate="label_action_plan_budget">Budget</tal:span>
                 <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_budget_tooltip" i18n:attributes="title actionplan_measure_budget_tooltip">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</a>
 
                 <input type="text" class="numeric" name="measure.budget:records" id="input-budget-${number}" value="${actionplan/budget|nothing}"/>

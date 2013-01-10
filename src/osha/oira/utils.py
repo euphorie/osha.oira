@@ -47,9 +47,9 @@ def remove_empty_modules(ls):
 
 
 def get_unactioned_nodes(ls):
-    """ Takes a list of modules and risks and removes all risks that have *not* 
-        actioned (i.e does not have at least one valid action plan)
-        Also remove all modules that have lost all their risks in the process.
+    """ Takes a list of modules and risks and removes all risks that have been
+        actioned (i.e has at least one valid action plan).
+        Also remove all modules that have lost all their risks in the process
 
         See https://syslab.com/proj/issues/2885
     """
@@ -72,9 +72,9 @@ def get_unactioned_nodes(ls):
 
 
 def get_actioned_nodes(ls):
-    """ Takes a list of modules and risks and removes all risks that have been
-        actioned (i.e has at least one valid action plan).
-        Also remove all modules that have lost all their risks in the process
+    """ Takes a list of modules and risks and removes all risks that are *not* 
+        actioned (i.e does not have at least one valid action plan)
+        Also remove all modules that have lost all their risks in the process.
 
         See https://syslab.com/proj/issues/2885
     """

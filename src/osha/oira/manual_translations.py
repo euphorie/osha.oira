@@ -69,8 +69,12 @@ _("Succesfully created a preview for the survey. It can be accessed at "
 _("help_publish", default=u"Publish the selected OiRA Tool live with its "
     u"latest changes.")
 _("help_add_version", default=u"Create a duplicate of the selected OiRA Tool")
-_("help_evaluation_optional", default=u"The option allows the end-user to "
-    u"skip the Evaluation step.")
+_("help_evaluation_optional", default=u"""If enabled, the user will see a message
+on the evaluation page telling them that they may skip the evaluation phase and
+proceed directly to the action plan phase. If NOT enabled, users will not see 
+this message, but they can still skip individual risk evaluations, which is why 
+it's important to always provide default values for the evaluation parameters 
+of a risk.""" u"skip the Evaluation step.")
 _("help_profilequestion_question", default=u'If this is to be "optional", '
     u'it must be formulated so that it is answerable with YES (the end-user '
     u'will have to tick a box) or NO (e.g. "Do you work with the public?"). '

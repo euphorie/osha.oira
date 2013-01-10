@@ -95,7 +95,7 @@
         </div>
     </tal:block>
 
-    <tal:plan repeat="actionplan node/action_plans">
+    <tal:plan repeat="actionplan python:node.action_plans[::-1]">
         <h5 i18n:translate="header_measure">Measure <tal:span i18n:name="index" content="repeat/actionplan/number">1</tal:span></h5>
         <dl tal:condition="python:actionplan.action_plan or actionplan.prevention_plan or actionplan.requirements">
         <tal:block condition="actionplan/action_plan">

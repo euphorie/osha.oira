@@ -14,6 +14,18 @@
     <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-ie7.min.css"/> <link rel="stylesheet" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
     <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-ie8.min.css" /> <link rel="stylesheet" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
     <style type="text/css" media="all">
+        @media only screen and (max-width: 767px) {
+            #homepage h1 span {
+                padding-top: 95px;
+            }
+        }
+
+        #homepage h1 span {
+            padding-left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
         .report #appendix img {
             margin-bottom: 0;
         }

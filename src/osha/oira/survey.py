@@ -3,12 +3,15 @@ from datetime import datetime
 from cStringIO import StringIO
 from Acquisition import aq_inner
 
+import z3c.form
 from five import grok
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zExceptions import NotFound
 from zope.component import getMultiAdapter
 from zope.i18n import translate
+
+from plone.directives import dexterity
 from plonetheme.nuplone.skin.interfaces import NuPloneSkin
 from plonetheme.nuplone.utils import formatDate
 
@@ -30,6 +33,7 @@ from euphorie.client import survey, report
 from euphorie.client.session import SessionManager
 from euphorie.content.profilequestion import IProfileQuestion
 from euphorie.content.survey import View as SurveyView
+from euphorie.content.survey import AddForm as SurveyAddForm
 
 from osha.oira import utils
 from osha.oira import model
@@ -61,6 +65,18 @@ class OSHAIdentification(survey.Identification):
     grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
     grok.template("identification")
     grok.name("index_html")
+
+
+from euphorie.content.survey import ISurvey
+
+class OSHASurveyEditForm(dexterity.EditForm):
+    grok.context(ISurvey)
+
+    def updateWidgets(self):
+        result = super(OSHASurveyEditForm, self).updateWidgets()
+        widget = self.widgets.get('evaluation_optional')
+        widget.mode = z3c.form.interfaces.HIDDEN_MODE
+        return result
 
 
 class OSHASurveyView(SurveyView):

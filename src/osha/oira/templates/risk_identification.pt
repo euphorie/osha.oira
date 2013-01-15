@@ -16,21 +16,20 @@
 <body tal:define="risk nocall:view/risk" class="identification ${webhelpers/extra_css}">
     <h1 tal:content="view/title">The temperature of all fridges is checked daily</h1>
     <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}">
-      <fieldset class="comprehensive radioList">
+      <fieldset class="radioList comprehensive">
         <legend tal:content="risk/title">The temperature of all fridges is checked daily</legend>
         <input type="hidden" name="answer:default" value="postponed"/>
         <label><input type="radio" name="answer" value="yes" checked="${python:'checked' if context.identification=='yes' else None}"/><tal:span i18n:translate="label_yes">Yes</tal:span></label>
         <label><input type="radio" name="answer" value="no" checked="${python:'checked' if context.identification=='no' else None}"/><tal:span i18n:translate="label_no">No</tal:span></label>
-        <label tal:condition="risk/show_notapplicable"><input type="radio" name="answer" value="n/a"
-          checked="${python:'checked' if context.identification=='n/a' else None}"/><tal:span i18n:translate="label_not_applicable">Not applicable</tal:span></label>
+        <label tal:condition="risk/show_notapplicable"><input type="radio" name="answer" value="n/a" checked="${python:'checked' if context.identification=='n/a' else None}"/><tal:span i18n:translate="label_not_applicable">Not applicable</tal:span></label>
       </fieldset>
       
     <p class="buttonBar">
-        <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="previous floatBefore back">Previous</button>
-        <button type="submit" name="next" value="next" i18n:translate="label_save_and_continue" class="next floatAfter">Save and continue</button>
+        <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="floatBefore back">Previous</button>
+        <button type="submit" name="next" value="next" i18n:translate="label_save_and_continue" class="floatAfter">Save and continue</button>
     </p>
       
-    <div class="emphasis" tal:condition="view/show_info">
+    <div class="message emphasis" tal:condition="view/show_info">
         <metal:call use-macro="webhelpers/macros/risk_info" />
     </div>
 

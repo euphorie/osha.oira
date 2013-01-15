@@ -4,8 +4,8 @@ Changelog
 1.2.30 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Added FI translations #6410 [thomasw]
+- Added LT translations #6257 [thomasw]
 
 1.2.29 (2012-12-17)
 -------------------

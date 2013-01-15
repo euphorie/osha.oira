@@ -25,5 +25,16 @@
         handler=".upgrade.add_custom_homepage"/>
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+        source="3"
+        destination="4"
+        profile="osha.oira:default">
+
+    <genericsetup:upgradeStep
+        title="disable skip evaluation flag"
+        description="OiRA does not expose the 'Skip evaluation' flag anymore. Make sure it's unset for all surveys. "
+        handler=".upgrade.reset_evaluation_flag"/>
+  </genericsetup:upgradeSteps>
+
 </configure>
 

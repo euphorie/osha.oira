@@ -20,9 +20,9 @@
         profile="osha.oira:default">
 
     <genericsetup:upgradeStep
-      title="add_custom_homepage"
-      description=" Add a homepage with which allows OSHA to create a custom homepage."
-      handler=".upgrade.add_custom_homepage"/>
+        title="add_custom_homepage"
+        description=" Add a homepage with which allows OSHA to create a custom homepage."
+        handler=".upgrade.add_custom_homepage"/>
   </genericsetup:upgradeSteps>
 
 </configure>

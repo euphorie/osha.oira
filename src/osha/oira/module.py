@@ -12,29 +12,34 @@ from euphorie.client.module import ActionPlanView as ModuleActionPlanView
 from euphorie.client.module import IdentificationView as \
                                         ModuleIdentificationView
 
-import interfaces
+from . import interfaces
 
 grok.templatedir("templates")
 
+
 class View(ModuleView):
     grok.template("module_view")
+    grok.layer(interfaces.IOSHAContentSkinLayer)
 
     @property
     def portal_type(self):
-        if self.context.aq_parent.portal_type  == 'euphorie.module':
+        if self.context.aq_parent.portal_type == 'euphorie.module':
             return _('Submodule')
         else:
             portal_type = self.context.portal_type
             fti = getUtility(IDexterityFTI, name=portal_type)
             return fti.Title()
 
+
 class EvaluationView(ModuleEvaluationView):
     grok.layer(interfaces.IOSHAEvaluationPhaseSkinLayer)
     grok.template("module_evaluation")
 
+
 class IdentificationView(ModuleIdentificationView):
     grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
     grok.template("module_identification")
+
 
 class ActionPlanView(ModuleActionPlanView):
     grok.layer(interfaces.IOSHAActionPlanPhaseSkinLayer)
@@ -46,7 +51,7 @@ class Edit(dexterity.EditForm):
 
     @property
     def label(self):
-        if self.context.aq_parent.portal_type  == 'euphorie.module':
+        if self.context.aq_parent.portal_type == 'euphorie.module':
             type_name = _('Submodule')
         else:
             portal_type = self.context.portal_type
@@ -61,11 +66,10 @@ class Add(dexterity.AddForm):
 
     @property
     def label(self):
-        if self.context.portal_type  == 'euphorie.module':
+        if self.context.portal_type == 'euphorie.module':
             type_name = _('Submodule')
         else:
             portal_type = self.portal_type
             fti = getUtility(IDexterityFTI, name=portal_type)
             type_name = fti.Title()
         return _(u"Add ${name}", mapping={'name': type_name})
-

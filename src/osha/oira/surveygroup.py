@@ -7,18 +7,18 @@ from Products.statusmessages.interfaces import IStatusMessage
 
 from plone.app.kss.plonekssview import PloneKSSView
 
-from plonetheme.nuplone.skin.interfaces import NuPloneSkin
 from plonetheme.nuplone.skin import actions
 from plonetheme.nuplone.utils import getPortal
 from euphorie.content import MessageFactory as _
 from euphorie.content import surveygroup
 from euphorie.content.survey import ISurvey
+from .interfaces import IOSHAContentSkinLayer
 
 grok.templatedir("templates")
 
 
 class View(surveygroup.View):
-    grok.layer(NuPloneSkin)
+    grok.layer(IOSHAContentSkinLayer)
     grok.name("nuplone-view")
     grok.template("surveygroup_view")
 
@@ -36,6 +36,7 @@ class AddForm(surveygroup.AddForm, PloneKSSView):
     grok.context(surveygroup.ISurveyGroup)
     grok.name("euphorie.surveygroup")
     grok.require("euphorie.content.AddNewRIEContent")
+    grok.layer(IOSHAContentSkinLayer)
     template = ViewPageTemplateFile("templates/surveygroup_add.pt")
 
     def createAndAdd(self, data):

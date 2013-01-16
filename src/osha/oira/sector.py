@@ -11,9 +11,9 @@ from plone.app.dexterity.behaviors.metadata import MetadataBase
 from plone.directives import dexterity
 from plone.directives import form
 from plone.autoform.interfaces import IFormFieldProvider
-from plonetheme.nuplone.skin.interfaces import NuPloneSkin
 from euphorie.content import sector
 from euphorie.content import MessageFactory as _
+from .interfaces import IOSHAContentSkinLayer
 
 log = logging.getLogger('osha.oira/sector.py')
 
@@ -46,7 +46,7 @@ class OSHASector(MetadataBase):
 class AdminEdit(dexterity.EditForm):
     grok.context(sector.ISector)
     grok.require("cmf.ManagePortal")
-    grok.layer(NuPloneSkin)
+    grok.layer(IOSHAContentSkinLayer)
     grok.name("admin-edit")
     grok.template('sector_admin_edit')
 
@@ -64,7 +64,7 @@ class SectorAdd(dexterity.AddForm):
     grok.context(sector.ISector)
     grok.name('euphorie.sector')
     grok.require("cmf.ModifyPortalContent")
-    grok.layer(NuPloneSkin)
+    grok.layer(IOSHAContentSkinLayer)
 
     def create(self, data):
         content = super(SectorAdd, self).create(data)

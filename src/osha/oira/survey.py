@@ -12,7 +12,6 @@ from zope.component import getMultiAdapter
 from zope.i18n import translate
 
 from plone.directives import dexterity
-from plonetheme.nuplone.skin.interfaces import NuPloneSkin
 from plonetheme.nuplone.utils import formatDate
 
 from rtfng.Elements import PAGE_NUMBER
@@ -81,7 +80,7 @@ class OSHASurveyEditForm(dexterity.EditForm):
 
 
 class OSHASurveyView(SurveyView):
-    grok.layer(NuPloneSkin)
+    grok.layer(interfaces.IOSHAContentSkinLayer)
     grok.template("survey_view")
 
     def modules_and_profile_questions(self):
@@ -105,6 +104,7 @@ class OSHAReportView(report.ReportView):
         See euphorie/client/survey.py for more info
     """
     grok.template("report")
+    grok.layer(interfaces.IOSHAClientSkinLayer)
 
     def get_language(self):
         context = aq_inner(self.context)

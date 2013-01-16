@@ -32,7 +32,7 @@ check:: bin/test $(MO_FILES)
 	bin/test
 
 jenkins: bin/test $(MO_FILES)
-	bin/test --xml -s tno.euphorie
+	bin/test --xml -s osha.oira
 
 $(JS_DIR)/oira.min.js: $(JS_DIR)/oira.js
 	set -e ; (for i in $^ ; do $(JS_PACK) $$i ; done ) > $@~ ; mv $@~ $@

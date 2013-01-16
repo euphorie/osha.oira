@@ -1,5 +1,6 @@
 from euphorie.deployment.tiles.tabs import SiteRootTabsTile
 
+
 class OiRASiteRootTabsTile(SiteRootTabsTile):
 
     def update(self):
@@ -7,5 +8,3 @@ class OiRASiteRootTabsTile(SiteRootTabsTile):
         for r in self.tabs:
             if r.get('id') == 'help':
                 self.tabs.remove(r)
-
-                

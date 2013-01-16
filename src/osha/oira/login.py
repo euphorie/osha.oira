@@ -11,11 +11,13 @@ import transaction
 
 grok.templatedir("templates")
 
+
 class Register(register.Register):
     grok.require("zope2.View")
     grok.layer(IOSHAClientSkinLayer)
     grok.template("register")
-    
+
+
 class Login(login.Login):
     grok.layer(IOSHAContentSkinLayer)
     grok.template("login")
@@ -38,4 +40,3 @@ class Login(login.Login):
         datamanager.mark_changed(session)
         transaction.get().commit()
         return
-

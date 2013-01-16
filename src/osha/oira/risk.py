@@ -7,6 +7,7 @@ from osha.oira import _
 
 grok.templatedir("templates")
 
+
 class OSHAIdentificationView(risk.IdentificationView):
     grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
     grok.template("risk_identification")
@@ -43,7 +44,7 @@ class OSHAFormMixin:
                 default="Choose between ESTIMATED (rough estimation) or "
                         "CALCULATED (combination of frequency "
                         "and severity) method.")
-                
+
 
 class Add(RiskAddForm, OSHAFormMixin):
     """ Override to allow us to dynamically set field descriptions
@@ -63,4 +64,3 @@ class Edit(RiskEditForm, OSHAFormMixin):
     def updateFields(self):
         super(Edit, self).updateFields()
         self.setDynamicDescriptions()
-

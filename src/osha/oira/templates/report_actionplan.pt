@@ -81,10 +81,10 @@
     <tal:block define="zodbnode python:view.getZodbNode(node);
                         title python:view.title(node, zodbnode);
                         status python:view.risk_status(node, zodbnode)">
-            <div class="warning" 
-                tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'warning', 'no-actionplans':'warning', 'unevaluated':'warning'}[status]"
-                tal:define="show_negate_warning python:view.show_negate_warning(node, zodbnode)"
-                tal:omit-tag="python:status=='unanswered'">
+        <div class="warning" 
+             tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'warning', 'no-actionplans':'warning', 'unevaluated':'warning'}[status]"
+             tal:define="show_negate_warning python:view.show_negate_warning(node, zodbnode)"
+             tal:omit-tag="python:status=='unanswered'">
             <h4>
                 <strong class="icon warning" tal:condition="python:not show_negate_warning and status=='present'">⚠</strong>
                 <a href="${survey_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a> 
@@ -95,7 +95,7 @@
         </div>
     </tal:block>
 
-    <tal:plan repeat="actionplan node/action_plans">
+    <tal:plan repeat="actionplan python:node.action_plans[::-1]">
         <h5 i18n:translate="header_measure">Measure <tal:span i18n:name="index" content="repeat/actionplan/number">1</tal:span></h5>
         <dl tal:condition="python:actionplan.action_plan or actionplan.prevention_plan or actionplan.requirements">
         <tal:block condition="actionplan/action_plan">

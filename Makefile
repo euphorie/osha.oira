@@ -21,6 +21,19 @@ all: ${TARGETS}
 clean:
 	-rm ${TARGETS}
 
+bin/buildout: bootstrap.py
+	$(PYTHON) bootstrap.py
+
+bin/test: bin/buildout buildout.cfg devel.cfg setup.py
+	bin/buildout -c devel.cfg
+	touch bin/test
+
+check:: bin/test $(MO_FILES)
+	bin/test
+
+jenkins: bin/test $(MO_FILES)
+	bin/test --xml -s osha.oira
+
 $(JS_DIR)/oira.min.js: $(JS_DIR)/oira.js
 	set -e ; (for i in $^ ; do $(JS_PACK) $$i ; done ) > $@~ ; mv $@~ $@
 
@@ -38,12 +51,12 @@ $(EUPHORIE_PO_FILES): src/osha/oira/locales/euphorie.pot
 $(PLONE_PO_FILES): src/osha/oira/locales/plone.pot
 	msgmerge --update $@ $<
 
-$(CSS_DIR)/oira.min.css: $(CSS_DIR)/main.css $(CSS_DIR)/jquery-ui-1.8.21.custom.css
+$(CSS_DIR)/oira.min.css: $(CSS_DIR)/main.css 
 	set -e ; (for i in $^ ; do $(CSS_PACK) $$i ; done ) > $@~ ; mv $@~ $@
 
 .po.mo:
 	msgfmt -c --statistics -o $@~ $< && mv $@~ $@
 
-.PHONY: all clean pot
+.PHONY: all clean check jenkins pot
 .SUFFIXES:
 .SUFFIXES: .po .mo .css .min.css

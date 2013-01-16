@@ -1,5 +1,5 @@
 import htmllib
-from mobile.sniffer.detect import  detect_mobile_browser
+from mobile.sniffer.detect import detect_mobile_browser
 from mobile.sniffer.utilities import get_user_agent
 
 from five import grok
@@ -18,11 +18,13 @@ from osha.oira import interfaces
 
 grok.templatedir('templates')
 
+
 def html_unescape(s):
     p = htmllib.HTMLParser(None)
     p.save_bgn()
     p.feed(s)
     return p.save_end()
+
 
 def remove_empty_modules(ls):
     """ Takes a list of modules and risks.
@@ -33,23 +35,23 @@ def remove_empty_modules(ls):
     while ls and ls[-1].type == 'module':
         ls = ls[:-1]
 
-    for i in range(len(ls)-1, 0, -1):
+    for i in range(len(ls) - 1, 0, -1):
         if ls[i] is None:
-            if ls[i-1].type == 'module':
-                ls[i-1] = None
+            if ls[i - 1].type == 'module':
+                ls[i - 1] = None
 
         elif ls[i].type == 'module':
-            if ls[i-1].type == 'module' and \
-                    ls[i-1].depth >= ls[i].depth:
-                ls[i-1] = None
+            if ls[i - 1].type == 'module' and \
+                    ls[i - 1].depth >= ls[i].depth:
+                ls[i - 1] = None
 
     return [m for m in ls if m is not None]
 
 
 def get_unactioned_nodes(ls):
-    """ Takes a list of modules and risks and removes all risks that have *not* 
-        actioned (i.e does not have at least one valid action plan)
-        Also remove all modules that have lost all their risks in the process.
+    """ Takes a list of modules and risks and removes all risks that have been
+        actioned (i.e has at least one valid action plan).
+        Also remove all modules that have lost all their risks in the process
 
         See https://syslab.com/proj/issues/2885
     """
@@ -64,17 +66,17 @@ def get_unactioned_nodes(ls):
             else:
                 # It's possible that there is an action plan object, but
                 # that it's not yet fully populated
-                if n.action_plans[0] == None or \
-                        n.action_plans[0].action_plan == None:
+                if n.action_plans[0] is None or \
+                        n.action_plans[0].action_plan is None:
                     unactioned.append(n)
 
     return remove_empty_modules(unactioned)
 
 
 def get_actioned_nodes(ls):
-    """ Takes a list of modules and risks and removes all risks that have been
-        actioned (i.e has at least one valid action plan).
-        Also remove all modules that have lost all their risks in the process
+    """ Takes a list of modules and risks and removes all risks that are *not*
+        actioned (i.e does not have at least one valid action plan)
+        Also remove all modules that have lost all their risks in the process.
 
         See https://syslab.com/proj/issues/2885
     """
@@ -87,7 +89,7 @@ def get_actioned_nodes(ls):
                 # It's possible that there is an action plan object, but
                 # it's not yet fully populated
                 plans = [p.action_plan for p in n.action_plans]
-                if plans[0] != None:
+                if plans[0] is not None:
                     actioned.append(n)
 
     return remove_empty_modules(actioned)
@@ -115,7 +117,7 @@ class OSHAWebHelpers(WebHelpers):
             else:
                 return False
         return False
-        
+
     def get_sectors_dict(self):
         """ Returns a dictionary with keys being countries (and int. orgs) that
             have sectors inside them and the values being the available survey
@@ -125,7 +127,7 @@ class OSHAWebHelpers(WebHelpers):
             get zero surveys returned for anon users.
 
             See #2556.
-        """ 
+        """
         context = aq_inner(self.context)
         sectorsfolder = getattr(context, 'sectors')
         if not sectorsfolder:
@@ -147,7 +149,7 @@ class OSHAWebHelpers(WebHelpers):
                 for survey in sector.objectValues():
                     lang = survey.language
                     if not lang:
-                        continue 
+                        continue
 
                     if not ISurvey.providedBy(survey):
                         continue
@@ -160,7 +162,7 @@ class OSHAWebHelpers(WebHelpers):
                             ldict[base_lang] = 'dummy'
                         continue
                     ldict[lang] = 'dummy'
-                    
+
             if ldict:
                 resp[country.id] = ldict.keys()
         return resp

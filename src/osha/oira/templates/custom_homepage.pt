@@ -1,21 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       id="homepage">
   <head>
-<base href="http://client.oiraproject.eu/" />
     <title>OiRA - Online interactive Risk Assessment</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="icon" type="image/png" href="client/++resource++euphorie.media/favicon.png" />
-    <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++euphorie.style/screen.min.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++euphorie.style/screen.css" />
     <link rel="stylesheet" type="text/css" media="only screen and (min-width:768px)" title="ebc" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" />
     <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++osha.oira.stylesheets/oira.min.css" />
     <!--[if lte IE 6]> <link rel="stylesheet" type="text/css" media="all" href="++resource++screen-ie6.css"/> <link rel="stylesheet" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
     <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-ie7.min.css"/> <link rel="stylesheet" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
     <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-ie8.min.css" /> <link rel="stylesheet" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
     <style type="text/css" media="all">
+        @media only screen and (max-width: 767px) {
+            #homepage h1 span {
+                padding-top: 95px;
+            }
+        }
+
+        #homepage h1 span {
+            padding-left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
         .report #appendix img {
             margin-bottom: 0;
         }
@@ -31,7 +41,6 @@
   </head>
   <body>
     <tal:render content="structure view/render_body"/>
-
     <p id="appendix">
         <a href="http://client.oiraproject.eu"><img class="appendix_oira_logo" src="++resource++osha.oira.images/footer_logo.png"/></a>
         Produced by <a href="http://osha.europa.eu" target="_new">EU-OSHA</a>. 
@@ -49,41 +58,5 @@
             <img class="creative_commons_logo" src="++resource++osha.oira.images/creative_commons.png"/>
         </a>
     </p>
-    <!--[if lte IE 8]> <script type="text/javascript" src="http://client.oiraproject.eu/++resource++euphorie.libraries/excanvas.min.js"></script> <![endif]-->
-    <script type="text/javascript" src="http://client.oiraproject.eu/++resource++euphorie.behaviour/common.min.js"></script>
-    <script type="text/javascript">
-    // <![CDATA[
-        $(document).ready(function() {
-            var h2_visible = 1,
-                h2_total = $("h2.fade:first span").size();
-
-            function swapH2() {
-                h2_visible = (h2_visible+1) % h2_total;
-
-                $("h2.fade").each(function() {
-                    var $headers = $("span", this),
-                        $next_visible = $headers.eq(h2_visible);
-                    $headers = $headers.not($next_visible);
-
-                    $headers.animate({opacity: 0});
-                    $next_visible.animate({opacity: 1});
-                });
-            }
-
-            $("h2.fade span:not(:first-child)").css({opacity: 0});
-            $("h1")
-                .wrapInner("<div/>")
-                .jCarouselLite({auto: 1000,
-                                speed: 800,
-                                circular: true,
-                                visible: 1,
-                                listSelector: "div",
-                                itemSelector: "span",
-                                easing: "easeOutElastic",
-                                beforeStart: swapH2
-                                });
-        });
-    // ]]>
-    </script>
   </body>
 </html>

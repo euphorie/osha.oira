@@ -15,7 +15,9 @@ new.pot          A po/pot file with updated default translations (e.g. via extra
 --fuzzy          Optional. Specifies that fuzzy entries in old.po must
                  also be included in the out.po file.
 --debug          Print debug statistics.
---output         Specify file to which contents must be written, otherwise stdout is used.
+--output         Specify file to which contents must be written (using =), otherwise stdout is used.
+--noprefill      With this option you can prevent the "msgstr" field being filled
+                 with the default translation.
 """
 
 import sys
@@ -54,8 +56,8 @@ def get_default(entry):
 def append_entry(pofile, entry, default):
     pofile.append(
         polib.POEntry(
-                    msgid=entry.msgid, 
-                    msgstr=default, 
+                    msgid=entry.msgid,
+                    msgstr=default.strip(),
                     occurrences=entry.occurrences,
                     comment=entry.comment)
                 )
@@ -69,6 +71,7 @@ def main():
     extra_entries = []
     files = []
     outfile = None
+    noprefill = False
 
     for i in range(1, len(sys.argv)):
         arg = sys.argv.pop()
@@ -80,10 +83,12 @@ def main():
             debug = True
         elif "--output=" in arg:
             outfile = arg.split('=')[1]
+        elif arg == "--noprefill":
+            noprefill = True
         elif os.path.isfile(arg):
             files.append(arg)
         else:
-            usage(sys.stderr, "\nERROR: path to file is not valid")
+            usage(sys.stderr, "\nERROR: path to file is not valid: %s" % arg)
 
     if len(files) != 2:
         usage(sys.stderr, "\nERROR: Too many or too few files specified")
@@ -108,20 +113,21 @@ def main():
         default_old = default_new = u''
         # fist, extract the default translation of the new (POT) file
         default_new = get_default(entry)
-
+        # string to put as translation:
+        default_msgstr = noprefill and " " or default_new
         # try to find the same message in the existing po file
         target = oldpo.find(entry.msgid)
         if not target:
             # not found == new translation
             new_entries += 1
-            outpo = append_entry(outpo, entry, default_new)
+            outpo = append_entry(outpo, entry, default_msgstr)
             continue 
 
         default_old = get_default(target)
         if default_old != default_new:
             # Default value is different between the two files
             changed_entries += 1
-            outpo = append_entry(outpo, entry, default_new)
+            outpo = append_entry(outpo, entry, default_msgstr)
 
     if include_untranslated:
         extra_entries += oldpo.untranslated_entries()
@@ -132,8 +138,8 @@ def main():
         if entry.obsolete: 
             # Remove commented entries
             continue
-        default = get_default(entry)
-        outpo = append_entry(outpo, entry, default)
+        default_msgstr = noprefill and " " or get_default(entry)
+        outpo = append_entry(outpo, entry, default_msgstr)
 
     if outfile:
         outpo.save(outfile)

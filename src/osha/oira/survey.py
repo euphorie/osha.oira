@@ -3,12 +3,15 @@ from datetime import datetime
 from cStringIO import StringIO
 from Acquisition import aq_inner
 
+import z3c.form
 from five import grok
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zExceptions import NotFound
 from zope.component import getMultiAdapter
 from zope.i18n import translate
+
+from plone.directives import dexterity
 from plonetheme.nuplone.skin.interfaces import NuPloneSkin
 from plonetheme.nuplone.utils import formatDate
 
@@ -17,7 +20,7 @@ from rtfng.PropertySets import BorderPropertySet
 from rtfng.PropertySets import FramePropertySet
 from rtfng.PropertySets import ParagraphPropertySet
 from rtfng.PropertySets import TabPropertySet
-from rtfng.PropertySets import TextPropertySet 
+from rtfng.PropertySets import TextPropertySet
 from rtfng.Renderer import Renderer
 from rtfng.Styles import ParagraphStyle
 from rtfng.Styles import TextStyle
@@ -37,6 +40,7 @@ from osha.oira import _
 from osha.oira import interfaces
 
 grok.templatedir("templates")
+
 
 class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
     phases = {
@@ -63,23 +67,35 @@ class OSHAIdentification(survey.Identification):
     grok.name("index_html")
 
 
+from euphorie.content.survey import ISurvey
+
+
+class OSHASurveyEditForm(dexterity.EditForm):
+    grok.context(ISurvey)
+
+    def updateWidgets(self):
+        result = super(OSHASurveyEditForm, self).updateWidgets()
+        widget = self.widgets.get('evaluation_optional')
+        widget.mode = z3c.form.interfaces.HIDDEN_MODE
+        return result
+
+
 class OSHASurveyView(SurveyView):
     grok.layer(NuPloneSkin)
     grok.template("survey_view")
 
     def modules_and_profile_questions(self):
-        return [self._morph(child) for child in self.context.values()] 
+        return [self._morph(child) for child in self.context.values()]
 
     def _morph(self, child):
-        state=getMultiAdapter(
-                    (child, self.request), 
+        state = getMultiAdapter(
+                    (child, self.request),
                     name="plone_context_state")
 
         return dict(id=child.id,
                     title=child.title,
                     url=state.view_url(),
                     is_profile_question=IProfileQuestion.providedBy(child))
-
 
 
 class OSHAReportView(report.ReportView):
@@ -89,11 +105,11 @@ class OSHAReportView(report.ReportView):
         See euphorie/client/survey.py for more info
     """
     grok.template("report")
-    
+
     def get_language(self):
         context = aq_inner(self.context)
         portal_state = getMultiAdapter(
-                                (context, self.request), 
+                                (context, self.request),
                                 name=u'plone_portal_state'
                                 )
         return portal_state.language()
@@ -112,9 +128,9 @@ class OSHAReportView(report.ReportView):
                 sdict[lang] = url
 
         lang = self.get_language()
-        if sdict.has_key(lang):
+        if lang in sdict:
             return sdict[lang]
-        elif sdict.has_key('en'):
+        elif 'en' in sdict:
             return sdict['en']
         else:
             return 'http://www.surveymonkey.com/s/OiRATool'
@@ -145,29 +161,29 @@ class OSHAActionPlanMixin():
         if survey.redirectOnSurveyUpdate(self.request):
             return
 
-        self.actioned_nodes = utils.get_actioned_nodes(self.nodes) 
-        self.unactioned_nodes = utils.get_unactioned_nodes(self.nodes) 
-        
-        session=Session()
-        query=session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session==self.session)\
+        self.actioned_nodes = utils.get_actioned_nodes(self.nodes)
+        self.unactioned_nodes = utils.get_unactioned_nodes(self.nodes)
+
+        session = Session()
+        query = session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session == self.session)\
                 .filter(sql.or_(model.MODULE_WITH_UNANSWERED_RISKS_FILTER,
                                 model.UNANSWERED_RISKS_FILTER))\
                 .order_by(model.SurveyTreeItem.path)
-        self.unanswered_nodes=query.all()
+        self.unanswered_nodes = query.all()
 
-        query=session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session==self.session)\
+        query = session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session == self.session)\
                 .filter(sql.or_(model.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
                                 model.RISK_NOT_PRESENT_FILTER))\
                 .order_by(model.SurveyTreeItem.path)
-        self.risk_not_present_nodes=query.all()
+        self.risk_not_present_nodes = query.all()
 
 
 def node_title(node, zodbnode):
     # 2885: Non-present risks and unanswered risks are shown affirmatively,
     # i.e 'title'
-    if node.type!="risk" or node.identification in [u"n/a", u"yes", None]:
+    if node.type != "risk" or node.identification in [u"n/a", u"yes", None]:
         return node.title
     # The other two groups of risks are shown negatively, i.e
     # 'problem_description'
@@ -190,7 +206,7 @@ class OSHAActionPlanReportView(report.ActionPlanReportView, OSHAActionPlanMixin)
     grok.layer(interfaces.IOSHAReportPhaseSkinLayer)
     grok.name("view")
     download = False
-    
+
     def update(self):
         """ """
         super(OSHAActionPlanReportView, self).update()
@@ -213,7 +229,6 @@ class OSHAActionPlanReportView(report.ActionPlanReportView, OSHAActionPlanMixin)
             return "present"
 
 
-
 class OSHAIdentificationReport(report.IdentificationReport):
     """
     Overrides the original IdentificationReport in euphorie.client.survey.py
@@ -233,7 +248,7 @@ class OSHAIdentificationReport(report.IdentificationReport):
         ``download`` URL entry. This uses a little trick: browser views
         implement `IPublishTraverse`, which allows us to catch traversal steps.
         """
-        if name=="download":
+        if name == "download":
             return OSHAIdentificationReportDownload(aq_inner(self.context), request)
         else:
             raise NotFound(self, name, request)
@@ -257,40 +272,39 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
     """
     grok.layer(interfaces.IOSHAReportPhaseSkinLayer)
     grok.name("download")
-    download =  True
+    download = True
 
     def update(self):
         """ Perform the super class' update and then get all the unanswered and
             non-present risks.
         """
         super(OSHAActionPlanReportDownload, self).update()
-        session=Session()
+        session = Session()
         if self.session.company is None:
-            self.session.company=model.Company()
-        query=session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session==self.session)\
+            self.session.company = model.Company()
+        query = session.query(model.SurveyTreeItem)\
+                .filter(model.SurveyTreeItem.session == self.session)\
                 .filter(sql.not_(model.SKIPPED_PARENTS))\
                 .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
                                 model.RISK_PRESENT_OR_TOP5_FILTER))\
                 .order_by(model.SurveyTreeItem.path)
-        self.nodes=query.all()
+        self.nodes = query.all()
         self._extra_updates()
-
 
     def addReportNodes(self, document, nodes, heading, toc, body):
         """ """
         t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
         ss = document.StyleSheet
         toc_props = ParagraphPropertySet()
-        toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH*1)
-        toc_props.SetRightIndent(TabPropertySet.DEFAULT_WIDTH*1)
+        toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH * 1)
+        toc_props.SetRightIndent(TabPropertySet.DEFAULT_WIDTH * 1)
         p = Paragraph(ss.ParagraphStyles.Heading6, toc_props)
         p.append(character.Text(heading, TextPropertySet(italic=True)))
         toc.append(p)
-        
+
         body.append(Paragraph(ss.ParagraphStyles.Heading1, heading))
 
-        survey=self.request.survey
+        survey = self.request.survey
         styles = ss.ParagraphStyles
         header_styles = {
                 0: styles.Heading2,
@@ -302,7 +316,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         for node in nodes:
             zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
             title = node_title(node, zodb_node)
-            thin_edge  = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
+            thin_edge = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
             if node.depth == 1:
                 p = Paragraph(
                         header_styles.get(node.depth, styles.Heading6),
@@ -314,29 +328,29 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                         u"%s %s" % (node.number, title))
             body.append(p)
 
-            if node.type!="risk":
+            if node.type != "risk":
                 continue
 
             if node.priority:
-                if node.priority=="low":
-                    level=_("risk_priority_low", default=u"low")
-                elif node.priority=="medium":
-                    level=_("risk_priority_medium", default=u"medium")
-                elif node.priority=="high":
-                    level=_("risk_priority_high", default=u"high")
+                if node.priority == "low":
+                    level = _("risk_priority_low", default=u"low")
+                elif node.priority == "medium":
+                    level = _("risk_priority_medium", default=u"medium")
+                elif node.priority == "high":
+                    level = _("risk_priority_high", default=u"high")
 
-                msg = _("risk_priority", 
+                msg = _("risk_priority",
                     default="This is a ${priority_value} priority risk.",
                     mapping={'priority_value': level})
                 body.append(Paragraph(
-                                styles.RiskPriority, 
+                                styles.RiskPriority,
                                 t(msg)
                             ))
 
             if getattr(node, 'identification', None) == 'no':
                 body.append(
                     Paragraph(
-                            styles.Normal, 
+                            styles.Normal,
                             ParagraphPropertySet(left_indent=300, right_indent=300),
                             t(_(utils.html_unescape(
                                     htmllaundry.StripMarkup(zodb_node.description))
@@ -350,27 +364,26 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             for (idx, measure) in enumerate(node.action_plans):
                 if not measure.action_plan:
                     continue
-                    
-                if len(node.action_plans)==1:
+
+                if len(node.action_plans) == 1:
                     heading = t(_("header_measure_single", default=u"Measure"))
                 else:
-                    heading = t(_("header_measure", 
-                                    default=u"Measure ${index}", 
-                                    mapping={"index": idx+1}))
+                    heading = t(_("header_measure",
+                                    default=u"Measure ${index}",
+                                    mapping={"index": idx + 1}))
 
                 self.addMeasure(document, heading, body, measure)
 
-
     def addMeasure(self, document, heading, section, measure):
-        """ Requirements for how the measure section should be displayed are 
-            in #2611 
+        """ Requirements for how the measure section should be displayed are
+            in #2611
         """
         t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
         ss = document.StyleSheet
         styles = ss.ParagraphStyles
 
         table = Table(9500)
-        thin_edge  = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
+        thin_edge = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
         no_edge = BorderPropertySet(width=0, colour=ss.Colours.White)
         p = Paragraph(
                 styles.MeasureHeading,
@@ -378,7 +391,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 t(_("header_measure_single", default=u"Measure")))
         c = Cell(p, FramePropertySet(thin_edge, thin_edge, no_edge, thin_edge))
         table.AddRow(c)
-
 
         ss = document.StyleSheet
         styles = document.StyleSheet.ParagraphStyles
@@ -391,7 +403,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 u"and/or requirements needed")),
             t(_("label_action_plan_responsible", default=u"Who is "
                 u"responsible?")),
-            t(_("label_action_plan_budget", default=u"Budget (in Euro)")),
+            t(_("label_action_plan_budget", default=u"Budget")),
             t(_("label_action_plan_start", default=u"Planning start")),
             t(_("label_action_plan_end", default=u"Planning end")),
             ]
@@ -413,12 +425,12 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             c = Cell(p, FramePropertySet(no_edge, thin_edge, no_edge, thin_edge))
             table.AddRow(c)
 
-            if headings.index(heading) == len(headings)-1:
+            if headings.index(heading) == len(headings) - 1:
                 frame = FramePropertySet(no_edge, thin_edge, thin_edge, thin_edge)
             else:
                 frame = FramePropertySet(no_edge, thin_edge, no_edge, thin_edge)
 
-            p = Paragraph(styles.Normal, 
+            p = Paragraph(styles.Normal,
                     ParagraphPropertySet(left_indent=600, right_indent=600),
                     value)
             c = Cell(p, frame)
@@ -426,23 +438,22 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
 
         section.append(table)
 
-
     def addConsultationBox(self, section, document):
         """ Add the consultation box that needs to be signed by the employer
             and workers.
         """
         ss = document.StyleSheet
         styles = document.StyleSheet.ParagraphStyles
-        thin_edge  = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
+        thin_edge = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
         t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
 
         table = Table(9500)
-        thin_edge  = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
+        thin_edge = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
         no_edge = BorderPropertySet(width=0, colour=ss.Colours.White)
         p = Paragraph(
                 styles.Heading3,
                 ParagraphPropertySet(alignment=ParagraphPropertySet.CENTER),
-                t(_("header_oira_report_consultation", 
+                t(_("header_oira_report_consultation",
                     default="Consultation of workers"))
                 )
         c = Cell(p, FramePropertySet(thin_edge, thin_edge, no_edge, thin_edge))
@@ -451,8 +462,8 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         p = Paragraph(
                 styles.Normal,
                 ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
-                t(_("paragraph_oira_consultation_of_workers", 
-                    default="The undersigned hereby declare that the workers " 
+                t(_("paragraph_oira_consultation_of_workers",
+                    default="The undersigned hereby declare that the workers "
                             "have been consulted on the content of this "
                             "document.")),
                 LINE
@@ -464,9 +475,9 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 styles.Normal,
                 ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
                 )
-        employer = t(_("oira_consultation_employer", 
+        employer = t(_("oira_consultation_employer",
                     default="On the behalf of the employer:"))
-        workers = t(_("oira_consultation_workers", 
+        workers = t(_("oira_consultation_workers",
                     default="On the behalf of the workers:"))
 
         p.append(employer, TAB, TAB, TAB, TAB, workers, LINE, LINE)
@@ -482,7 +493,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         table.AddRow(c)
         section.append(table)
 
-
     def render(self):
         """ Mostly a copy of the render method in euphorie.client, but with
             some changes to also show unanswered risks and non-present risks.
@@ -495,8 +505,8 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         ss.ParagraphStyles.append(
             ParagraphStyle("RiskPriority",
                     TextStyle(TextPropertySet(
-                                    font=ss.Fonts.Arial, 
-                                    size=22, 
+                                    font=ss.Fonts.Arial,
+                                    size=22,
                                     italic=True,
                                     colour=ss.Colours.Blue)),
                     ParagraphPropertySet(left_indent=300, right_indent=300))
@@ -504,41 +514,46 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         ss.ParagraphStyles.append(
             ParagraphStyle("MeasureField",
                     TextStyle(TextPropertySet(
-                                    font=ss.Fonts.Arial, 
-                                    size=18, 
+                                    font=ss.Fonts.Arial,
+                                    size=18,
                                     underline=True)),
                     ParagraphPropertySet(left_indent=300, right_indent=300))
                     )
-
         # XXX: This part is removed
         # self.addActionPlan(document)
 
         # XXX: and replaced with this part:
         t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
         toc = createSection(document, self.context, self.request)
+
         body = Section()
-        heading = t(_("header_oira_report_download", 
+        heading = t(_("header_oira_report_download",
                     default=u"OiRA Report: \"${title}\"",
                     mapping=dict(title=self.session.title)))
-        toc.append(
-                    Paragraph(
-                        ss.ParagraphStyles.Heading1, 
+
+        toc.append(Paragraph(
+                        ss.ParagraphStyles.Heading1,
                         ParagraphPropertySet(alignment=ParagraphPropertySet.CENTER),
                         heading,
-                        )
-                    )
+                        ))
+
+        if self.session.report_comment:
+            # Add comment. #5985
+            normal_style = document.StyleSheet.ParagraphStyles.Normal
+            toc.append(Paragraph(normal_style, self.session.report_comment))
+
         toc_props = ParagraphPropertySet()
-        toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH*1)
-        toc_props.SetRightIndent(TabPropertySet.DEFAULT_WIDTH*1)
+        toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH * 1)
+        toc_props.SetRightIndent(TabPropertySet.DEFAULT_WIDTH * 1)
         p = Paragraph(ss.ParagraphStyles.Heading6, toc_props)
         txt = t(_("toc_header", default=u"Contents"))
         p.append(character.Text(txt))
         toc.append(p)
 
         headings = [
-            t(_("header_present_risks", 
+            t(_("header_present_risks",
                 default=u"Risks that have been identified, evaluated and have an Action Plan")),
-            t(_("header_unevaluated_risks", 
+            t(_("header_unevaluated_risks",
                 default=u"Risks that have been identified but do NOT have an Action Plan")),
             t(_("header_unanswered_risks",
                 default=u'Hazards/problems that have been "parked" and are still to be dealt with')),
@@ -563,8 +578,8 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         document.Sections.append(body)
         # Until here...
 
-        renderer=Renderer()
-        output=StringIO()
+        renderer = Renderer()
+        output = StringIO()
         renderer.Write(document, output)
 
         filename = translate(_("filename_report_actionplan",
@@ -594,7 +609,7 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
         return query.all()
 
     def addIdentificationResults(self, document):
-        survey=self.request.survey
+        survey = self.request.survey
         section = createIdentificationReportSection(document, self.context, self.request)
         styles = document.StyleSheet.ParagraphStyles
         header_styles = {
@@ -608,24 +623,24 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
         for node in self.getNodes():
             section.append(
                     Paragraph(
-                        header_styles.get(node.depth, styles.Heading6), 
+                        header_styles.get(node.depth, styles.Heading6),
                         u"%s %s" % (node.number, node.title))
                         )
 
-            if node.type!="risk":
+            if node.type != "risk":
                 continue
 
             zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
             section.append(
                     Paragraph(
-                        styles.Normal, 
+                        styles.Normal,
                         utils.html_unescape(
                             htmllaundry.StripMarkup(zodb_node.description))
                         )
                     )
 
-            for i in range(0,8):
-                p =  Paragraph(styles.Normal, " ")
+            for i in range(0, 8):
+                p = Paragraph(styles.Normal, " ")
                 section.append(p)
 
             tabs = TabPropertySet(
@@ -652,13 +667,13 @@ def createIdentificationReportSection(document, survey, request):
                     "date": formatDate(request, survey.published[2])}))
     header = Table(4750, 4750)
     c1 = Cell(Paragraph(
-                document.StyleSheet.ParagraphStyles.Footer, 
+                document.StyleSheet.ParagraphStyles.Footer,
                 SessionManager.session.title))
 
     pp = ParagraphPropertySet
     header_props = pp(alignment=pp.RIGHT)
     c2 = Cell(Paragraph(
-                document.StyleSheet.ParagraphStyles.Footer, 
+                document.StyleSheet.ParagraphStyles.Footer,
                 header_props,
                 formatDate(request, datetime.today())))
     header.AddRow(c1, c2)
@@ -686,13 +701,13 @@ def createSection(document, survey, request):
 
     header = Table(4750, 4750)
     c1 = Cell(Paragraph(
-                document.StyleSheet.ParagraphStyles.Footer, 
+                document.StyleSheet.ParagraphStyles.Footer,
                 survey.published[1]))
 
     pp = ParagraphPropertySet
     header_props = pp(alignment=pp.RIGHT)
     c2 = Cell(Paragraph(
-                document.StyleSheet.ParagraphStyles.Footer, 
+                document.StyleSheet.ParagraphStyles.Footer,
                 header_props,
                 formatDate(request, datetime.today())))
     header.AddRow(c1, c2)
@@ -709,4 +724,3 @@ def createSection(document, survey, request):
     section.Footer.append(footer)
     document.Sections.append(section)
     return section
-

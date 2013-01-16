@@ -69,8 +69,6 @@ _("Succesfully created a preview for the survey. It can be accessed at "
 _("help_publish", default=u"Publish the selected OiRA Tool live with its "
     u"latest changes.")
 _("help_add_version", default=u"Create a duplicate of the selected OiRA Tool")
-_("help_evaluation_optional", default=u"The option allows the end-user to "
-    u"skip the Evaluation step.")
 _("help_profilequestion_question", default=u'If this is to be "optional", '
     u'it must be formulated so that it is answerable with YES (the end-user '
     u'will have to tick a box) or NO (e.g. "Do you work with the public?"). '
@@ -121,22 +119,22 @@ _("help_reports", default=u"This text should describe how the report can "
 _("help_finalwords", default=u"General final recommendations.")
 
 # 3044:
-_("intro_print_identification_1", default=\
+_("intro_print_identification_1", default=
     u"It is possible for you to print out the contents of the tool to enable "
     u"you to look for the information at the relevant workplace (by walking "
     u"around and looking at what could cause harm, or by consulting the "
     u"workers and/or their representatives about problems they have "
     u"encountered). You can then introduce the information into the tool.")
 
-_("intro_print_identification_2", default=\
+_("intro_print_identification_2", default=
     u"You may also wish to distribute the contents among the workers and/or "
     u"their representatives and invite them to participate in identifying the "
-    u"hazards/problems, evaluating the risks and deciding on preventive action." 
+    u"hazards/problems, evaluating the risks and deciding on preventive action."
     u"Their feedback should be taken into account when filling in this tool.")
 
 _("list_of_risks", default=u"contents of the tool")
 
-_("help_evaluation_empty", default=\
+_("help_evaluation_empty", default=
     u"No hazards or problems were spotted. Please proceed directly to the "
     u"action plan step.")
 
@@ -198,9 +196,13 @@ _("unpublish_confirm", default=u"Are you sure you want to unpublish this OiRA To
 
 _("menu_import", default=u"Import OiRA Tool")
 
-_("message_no_delete_published_survey", default=u"You cannot delete an OiRA Tool version that is published. Please unpublish it first.")
+_("message_no_delete_published_survey",
+        default=u"You cannot delete an OiRA Tool version that is published. "
+                u"Please unpublish it first.")
 
-_("message_not_delete_published_sector", default=u"You can not delete a sector that contains published OiRA Tools."), 
+_("message_not_delete_published_sector",
+        default=u"You can not delete a sector that contains published "
+                u"OiRA Tools.")
 
 _("add_survey", default="add a new OiRA Tool")
 
@@ -211,6 +213,3 @@ _("header_sector_survey_list", default="OiRA Tools")
 _("expl_error", default="We're sorry, but an unforseen error has occured.")
 
 _("label_remove_measure", default="Delete this measure")
-
-
-

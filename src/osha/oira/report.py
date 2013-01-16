@@ -5,6 +5,7 @@ from osha.oira.interfaces import IOSHAReportPhaseSkinLayer
 
 grok.templatedir("templates")
 
+
 class ReportView(report.ReportView):
     """ Override so that skipped or filled in company forms are not shown
     again. For #4436.
@@ -21,7 +22,7 @@ class ReportView(report.ReportView):
 
             url = "%s/report/company" % self.request.survey.absolute_url()
             if getattr(self.session, 'company', None) is not None:
-                if getattr(self.session.company, 'country') != None:
+                if getattr(self.session.company, 'country') is not None:
                     url = "%s/report/view" % self.request.survey.absolute_url()
 
             self.request.response.redirect(url)

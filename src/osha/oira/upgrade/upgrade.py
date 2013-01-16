@@ -20,11 +20,9 @@ def renew_survey_published_date(context):
         for sector in country.objectValues():
             if not IClientSector.providedBy(sector):
                 continue
-
             for survey in sector.objectValues():
                 if not ISurvey.providedBy(survey):
                     continue
-
                 published = getattr(survey, "published", None)
                 if isinstance(published, tuple):
                     survey.published = (
@@ -53,3 +51,17 @@ def add_custom_homepage(context):
 <!-- The header and footer of the homepage is fixed and cannot be changed.
      Add here any HTML code that you'd like to be rendered in the body of the homepage.-->"""
 
+
+def reset_evaluation_flag(context):
+    """ """
+    site = getSite()
+    ps = site.portal_catalog(portal_type='euphorie.survey')
+    for p in ps:
+        try:
+            survey = p.getObject()
+        except:
+            continue
+        else:
+            if survey.evaluation_optional:
+                survey.evaluation_optional = False
+                survey.reindexObject()

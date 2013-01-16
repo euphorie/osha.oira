@@ -1,11 +1,80 @@
 Changelog
 =========
 
-1.2.19 (unreleased)
+1.2.30 (unreleased)
+-------------------
+
+- Fix ZCML loading in tests so we can support Plone 4.2.
+- Added FI translations #6410 [thomasw]
+- Added LT translations #6257 [thomasw]
+
+1.2.29 (2012-12-17)
+-------------------
+
+- Fixed RST error. [jcbrand]
+
+
+1.2.28 (2012-12-17)
+-------------------
+
+- Comments don't appear in the report #5985 [jcbrand]
+- Hide help tab #6071 [jcbrand]
+- Bump jquery to 1.8.2 [jcbrand]
+
+1.2.27. (2012-11-26)
+--------------------
+
+- Regenerate en po file. [jcbrand]
+- Re-add fuzzy entries and just remove the top ones (before doc metadata) which cause unicode errors. [jcbrand] 
+
+
+1.2.26 (2012-11-09)
+-------------------
+
+- Removed #fuzzy marker in all po files [thomasw]
+
+
+1.2.25 (2012-11-01)
+-------------------
+
+- Hide the standard solutions button when there aren't any [jcbrand]
+
+
+1.2.24 (2012-11-01)
+-------------------
+
+- Include datepicker.min.css when not in debug mode [jcbrand]
+
+
+1.2.23 (2012-11-01)
+-------------------
+
+- Added multilingual support to the datepicker [jcbrand]
+- Datepicker CSS and images now moved to the Euphorie Prototype [jcbrand]
+
+
+1.2.22 (2012-10-29)
+-------------------
+
+- fixed 2 fatal typos (for translation) in risk_actionplan :-( [thomasw]
+
+
+1.2.21 (2012-10-29)
+-------------------
+
+- Added missing i18n:translate statments in risk_actionplan (copied from the
+  Euphorie version) [thomasw] 
+
+1.2.20 (2012-10-29)
 -------------------
 
 - Nothing changed yet.
 
+
+1.2.19 (2012-10-29)
+-------------------
+
+- Changed name for language nl-be #5978 [thomasw]
 
 1.2.18 (2012-10-01)
 -------------------

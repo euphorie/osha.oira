@@ -5,6 +5,7 @@ from osha.oira.interfaces import IOSHAReportPhaseSkinLayer
 
 grok.templatedir("templates")
 
+
 class Company(GenericCompany):
     """ Override the class from euphorie.client to add our own layer.
     """
@@ -13,17 +14,17 @@ class Company(GenericCompany):
 
     @button.buttonAndHandler(u"Previous")
     def handlePrevious(self, action):
-        url="%s/report" % self.request.survey.absolute_url()
+        url = "%s/report" % self.request.survey.absolute_url()
         self.request.response.redirect(url)
 
     @button.buttonAndHandler(u"Next")
     def handleNext(self, action):
-        (data,errors) = self.extractData()
+        (data, errors) = self.extractData()
         if errors:
             self.status = self.formErrorsMessage
             return
         self.applyChanges(data)
-        url="%s/report/view" % self.request.survey.absolute_url()
+        url = "%s/report/view" % self.request.survey.absolute_url()
         self.request.response.redirect(url)
 
     @button.buttonAndHandler(u"Skip")
@@ -38,5 +39,5 @@ class Company(GenericCompany):
             'referer': None,
             'workers_participated': None}
         self.applyChanges(data)
-        url="%s/report/view" % self.request.survey.absolute_url()
+        url = "%s/report/view" % self.request.survey.absolute_url()
         self.request.response.redirect(url)

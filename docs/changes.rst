@@ -4,6 +4,7 @@ Changelog
 1.2.30 (unreleased)
 -------------------
 
+- Fix ZCML loading in tests so we can support Plone 4.2.
 - Added FI translations #6410 [thomasw]
 - Added LT translations #6257 [thomasw]
 

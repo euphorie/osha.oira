@@ -10,10 +10,12 @@ from euphorie.client.client import IClient
 
 grok.templatedir("templates")
 
+
 class View(grok.View):
     grok.context(IClient)
     grok.layer(IOSHAClientSkinLayer)
     grok.template("frontpage")
+
 
 class ClientPublishTraverser(DefaultPublishTraverse):
     """Publish traverser to setup the skin layer.
@@ -26,9 +28,8 @@ class ClientPublishTraverser(DefaultPublishTraverse):
     def publishTraverse(self, request, name):
         from euphorie.client.utils import setRequest
         setRequest(request)
-        request.client=self.context
-        ifaces=[iface for iface in directlyProvidedBy(request)
-                if not IBrowserSkinType.providedBy(iface)]
+        request.client = self.context
+        ifaces = [iface for iface in directlyProvidedBy(request)
+                  if not IBrowserSkinType.providedBy(iface)]
         directlyProvides(request, IOSHAClientSkinLayer, ifaces)
         return super(ClientPublishTraverser, self).publishTraverse(request, name)
-

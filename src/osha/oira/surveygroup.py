@@ -21,12 +21,11 @@ class View(surveygroup.View):
     grok.layer(NuPloneSkin)
     grok.name("nuplone-view")
     grok.template("surveygroup_view")
-    
+
     def surveys(self):
-        templates = [ dict(title=survey.title, url=survey.absolute_url())
+        templates = [dict(title=survey.title, url=survey.absolute_url())
                       for survey in self.context.values()
-                      if ISurvey.providedBy(survey)
-                    ]
+                      if ISurvey.providedBy(survey)]
         return templates
 
 View.render = None
@@ -82,12 +81,10 @@ class Delete(actions.Delete):
         surveys = [s for s in cl_sector[surveygroup.id].values() if s.id != 'preview']
         if surveys:
             flash(
-                _("message_not_delete_published_surveygroup", 
-                default=u"You can not delete an OiRA tool that has been published."), 
+                _("message_not_delete_published_surveygroup",
+                default=u"You can not delete an OiRA tool that has been published."),
                 "error"
                 )
             self.request.response.redirect(context.absolute_url())
             return False
         return True
-
-

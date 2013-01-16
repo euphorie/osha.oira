@@ -19,11 +19,12 @@ from osha.oira.z3cform.widget import LargeTextAreaFieldWidget
 
 grok.templatedir("templates")
 
+
 class IHomePage(form.Schema, IBasic):
     """ Custom user editable homepage
     """
     description = schema.Text(
-        title = _("label_homepage_description", u"HTML Source Code"))
+            title=_("label_homepage_description", u"HTML Source Code"))
     form.widget(description=LargeTextAreaFieldWidget)
 
 
@@ -62,6 +63,6 @@ class EditForm(edit.DefaultEditForm):
         self.applyChanges(data)
         self.request.response.redirect('nuplone-view')
         notify(EditFinishedEvent(self.context))
-    
+
 
 EditView = layout.wrap_form(EditForm)

@@ -12,8 +12,8 @@ from zope.sqlalchemy import datamanager
 import transaction
 
 from Products.CMFPlone.utils import safe_unicode
-import re
 import urllib2
+from datetime import datetime
 
 logger = logging.getLogger("osha.oira/browser.statistics")
 
@@ -25,7 +25,6 @@ class WriteStatistics(grok.View):
 
     def _walk(self, root, published=False):
         info_surveys = []
-        info_modules = []
         for country in root.objectValues():
             for sector in country.objectValues():
                 for survey_or_group in sector.objectValues():
@@ -44,62 +43,52 @@ class WriteStatistics(grok.View):
                         if not survey.portal_type == 'euphorie.survey':
                             logger.info('Object is not a survey but inside surveygroup, skipping. %s' % '/'.join(survey.getPhysicalPath()))
                             continue
-                        info_surveys.append((survey_path, survey.Language(), published))
-                        # we only need modules info for sessions, i.e. published surveys only
+                        published_date = None
                         if published:
-                            info_modules = info_modules + map(lambda tup: ('/'.join((survey_parent_path, tup[0])), tup[1]), self._get_modules_info(survey))
+                            if isinstance(survey.published, datetime):
+                                published_date = survey.published
+                            elif isinstance(survey.published, tuple):
+                                published_date = survey.published[2]
+                        info_surveys.append((survey_path, survey.Language(),
+                            published, published_date, survey.created()))
 
-        return (info_surveys, info_modules)
-
-    def _get_modules_info(self, obj):
-        no_child_risks = 0 #len(obj.objectIds('euphorie.risk'))
-        info_child_modules = []
-        for module_or_risk in obj.objectValues():
-            if module_or_risk.portal_type in ('euphorie.module', 'euphorie.profilequestion'):
-                info_child_modules += self._get_modules_info(module_or_risk)
-            elif module_or_risk.portal_type == 'euphorie.risk':
-                no_child_risks += 1
-            else:
-                logger.info('Object is neither module nor profile question nor risk, skipping. %s' % '/'.join(module_or_risk.getPhysicalPath()))
-
-        return [(obj.id, no_child_risks)] + map(lambda tup: ('/'.join((obj.id, tup[0])), tup[1]), info_child_modules)
+        return info_surveys
 
     def render(self):
         urltool = getToolByName(self.context, 'portal_url')
         dbtable_surveys = 'statistics_surveys'
-        dbtable_modules = 'statistics_modules'
-        path_re = re.compile('/Plone2/[^/]*/(.*)')
 
         portal = urltool.getPortalObject()
         # published surveys under /client
-        info_surveys_client, info_modules_client = self._walk(portal['client'], published=True)
+        info_surveys_client = self._walk(portal['client'], published=True)
         # unpublished surveys under /sectors
-        info_surveys_sectors, info_modules_sectors = self._walk(portal['sectors'], published=False)
+        info_surveys_sectors = self._walk(portal['sectors'], published=False)
 
         info_surveys = info_surveys_client + info_surveys_sectors
-        info_modules = info_modules_client + info_modules_sectors
 
         # write to db
         session = Session()
         session.execute('''DELETE FROM %s;''' % dbtable_surveys)
-        session.execute('''DELETE FROM %s;''' % dbtable_modules)
         def clean(value):
             if isinstance(value, basestring):
                 return safe_unicode(value).strip().encode('utf-8')
             return value
+        def pg_format(value):
+            if value is None:
+                return 'NULL'
+            if isinstance(value, datetime):
+                return "TIMESTAMP '%s'" % value.isoformat()
+            return "'%s'" % value
         for line in info_surveys:
             insert = '''INSERT INTO %s VALUES %s;''' % \
-                     (dbtable_surveys, str(tuple(map(clean,line))))
-            session.execute(insert)
-        for line in info_modules:
-            insert = '''INSERT INTO %s VALUES %s;''' % \
-                     (dbtable_modules, str(tuple(line)))
+                     (dbtable_surveys, '(%s)' % ', '.join(map(pg_format,
+                         map(clean,line))))
             session.execute(insert)
         datamanager.mark_changed(session)
         transaction.get().commit()
 
         from pprint import pformat
-        return "Written:\n" + pformat(info_surveys) + "\n\n" + pformat(info_modules)
+        return "Written:\n" + pformat(info_surveys)
 
 
 class ShowStatistics(grok.View):

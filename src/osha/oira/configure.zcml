@@ -40,6 +40,9 @@
     <include file="behaviors.zcml" />
 
     <adapter
+      factory=".profilequestion.context_proxy"/>
+
+    <adapter
         factory=".client.ClientPublishTraverser"
         provides="zope.publisher.interfaces.IPublishTraverse"
         />

@@ -4,6 +4,7 @@ from zope.component import adapter
 from zope.interface import implementer
 from plone.directives import dexterity
 from plone.directives import form
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from euphorie.content.profilequestion import IProfileQuestion
 from euphorie.content.profilequestion import View as BaseView
 from .interfaces import IOSHAContentSkinLayer
@@ -61,6 +62,7 @@ class AddForm(dexterity.AddForm):
     grok.layer(IOSHAContentSkinLayer)
 
     schema = IOSHAProfileQuestion
+    template = ViewPageTemplateFile('templates/profilequestion_add.pt')
 
 
 class EditForm(dexterity.EditForm):

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="euphorie"
+      meta:interpolation="true"
+      tal:omit-tag="">
+
+  <p tal:define="status view/status"
+     tal:condition="status"
+     class="message ${python:'error' if view.widgets.errors else 'notice'}"
+     tal:content="status" i18n:domain="plone">Form-global message</p>
+  <p class="discrete" tal:condition="python:getattr(view, 'description', None)">${view/description}</p>
+
+  <form class="concise" action="${request/getURL}" method="${view/method}" enctype="${view/enctype}">
+    <fieldset>
+      <tal:widget replace="structure view/widgets/title/render" />
+      <tal:widget replace="structure view/widgets/question/render" />
+      <tal:widget replace="structure view/widgets/label_single_occurances/render" />
+      <tal:widget replace="structure view/widgets/label_multiple_occurances/render" />
+    </fieldset>
+    <fieldset>
+      <tal:widget replace="structure view/widgets/description/render" />
+    </fieldset>
+
+    <div class="buttonBar" tal:define="actions view/actions/values|nothing" tal:condition="actions">
+      <tal:action repeat="action actions" replace="structure action/render" />
+    </div>
+  </form>
+</html>
+

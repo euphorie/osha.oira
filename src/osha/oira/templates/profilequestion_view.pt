@@ -18,8 +18,6 @@
       </div>
 
       <h2 i18n:translate="header_information">Information</h2>
-      <p tal:condition="python:context.type=='optional'" i18n:translate="profilequestion_type_optional">This is an optional profile item.</p>
-      <p tal:condition="python:context.type=='repeat'" i18n:translate="profilequestion_type_repeat">This is a repeatable profile item.</p>
 
       <tal:block condition="python:view.modules">
         <h2 i18n:translate="header_modules">Modules</h2>

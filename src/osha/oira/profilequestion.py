@@ -20,13 +20,16 @@ class IOSHAProfileQuestion(IProfileQuestion):
                           u'applies to them.'),
             required=True)
 
-    label_single_occurances = schema.TextLine(
+    label_multiple_present = schema.TextLine(
+            title=_(u'Multiple Item Question'),
+            required=True)
+
+    label_single_occurance = schema.TextLine(
             title=_(u'Single occurance prompt'),
             description=_(u'This must ask to user for the name of the '
                           u'relevant location.'),
             required=True)
-    form.widget(label_single_occurances='euphorie.content.profilequestion.TextSpan7')
-    form.order_after(label_single_occurances='question')
+    form.widget(label_single_occurance='euphorie.content.profilequestion.TextSpan7')
 
     label_multiple_occurances = schema.TextLine(
             title=_(u'Multiple occurance prompt'),
@@ -34,7 +37,6 @@ class IOSHAProfileQuestion(IProfileQuestion):
                           u'relevant locations.'),
             required=True)
     form.widget(label_multiple_occurances='euphorie.content.profilequestion.TextSpan7')
-    form.order_after(label_multiple_occurances='label_single_occurances')
 
 
 @adapter(IProfileQuestion)

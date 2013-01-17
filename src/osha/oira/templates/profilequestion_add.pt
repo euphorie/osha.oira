@@ -19,7 +19,8 @@
     <fieldset>
       <tal:widget replace="structure view/widgets/title/render" />
       <tal:widget replace="structure view/widgets/question/render" />
-      <tal:widget replace="structure view/widgets/label_single_occurances/render" />
+      <tal:widget replace="structure view/widgets/label_multiple_present/render" />
+      <tal:widget replace="structure view/widgets/label_single_occurance/render" />
       <tal:widget replace="structure view/widgets/label_multiple_occurances/render" />
     </fieldset>
     <fieldset>
@@ -30,5 +31,26 @@
       <tal:action repeat="action actions" replace="structure action/render" />
     </div>
   </form>
+
+  <h2 i18n:translate="">Example of client form</h2>
+
+  <div class="example">
+    <h3 id="example-title" i18n:translate="">Commercial manned guarding</h3>
+
+    <fieldset class="concise">
+      <fieldset class="comprehensive">
+        <legend id="example-question" i18n:translate="">Does your organisation provide mobile patrolling?</legend>
+        <label><input type="radio" checked="checked" disabled="disabled"/> <tal:span i18n:translate="">Yes</tal:span></label>
+        <label><input type="radio" disabled="disabled"/> <tal:span i18n:translate="">No</tal:span></label>
+      </fieldset>
+      <fieldset class="comprehensive">
+        <legend id="example-multiple_present" i18n:translate="">Do you ofer this service in multiple locations?</legend>
+        <label><input type="radio" disabled="disabled"/> <tal:span i18n:translate="">Yes</tal:span></label>
+        <label><input type="radio" checked="checked" disabled="disabled"/> <tal:span i18n:translate="">No</tal:span></label>
+      </fieldset>
+      <label id="example-single_occurance"><tal:span i18n:translate="">Please enter a name for the location you would like to assess</tal:span>
+        <input type="text" disabled="disabled" class="span-7" value="Standard Life Insurance"/></label>
+    </fieldset>
+  </div>
 </html>
 

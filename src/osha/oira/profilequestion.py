@@ -62,6 +62,7 @@ class AddForm(dexterity.AddForm):
     grok.name('euphorie.profilequestion')
     grok.require('euphorie.content.AddNewRIEContent')
     grok.layer(IOSHAContentSkinLayer)
+    form.wrap(True)
 
     schema = IOSHAProfileQuestion
     template = ViewPageTemplateFile('templates/profilequestion_add.pt')
@@ -71,5 +72,7 @@ class EditForm(dexterity.EditForm):
     grok.context(IProfileQuestion)
     grok.require('cmf.ModifyPortalContent')
     grok.layer(IOSHAContentSkinLayer)
+    form.wrap(True)
 
     schema = IOSHAProfileQuestion
+    template = ViewPageTemplateFile('templates/profilequestion_add.pt')

@@ -32,25 +32,132 @@
     </div>
   </form>
 
-  <h2 i18n:translate="">Example of client form</h2>
+  <style type="text/css">
+    .example {
+      background-color: #ebebeb;
+      border: 1px solid black;
+      padding: 10px;
+    }
+
+    .example fieldset.comprehensive p.legend {
+      width: 70% !important;
+    }
+
+    .example fieldset.concise label {
+      width: 45%;
+    }
+
+    .example .focus {
+      background: #fef5ba;
+    }
+
+  </style>
+
+  <h2 i18n:translate="">Client example for single occurance.</h2>
 
   <div class="example">
-    <h3 id="example-title" i18n:translate="">Commercial manned guarding</h3>
+    <h3 class="example-title" i18n:translate="">Commercial manned guarding</h3>
 
     <fieldset class="concise">
       <fieldset class="comprehensive">
-        <legend id="example-question" i18n:translate="">Does your organisation provide mobile patrolling?</legend>
+        <legend class="example-question" i18n:translate="">Does your organisation provide mobile patrolling?</legend>
         <label><input type="radio" checked="checked" disabled="disabled"/> <tal:span i18n:translate="">Yes</tal:span></label>
         <label><input type="radio" disabled="disabled"/> <tal:span i18n:translate="">No</tal:span></label>
       </fieldset>
       <fieldset class="comprehensive">
-        <legend id="example-multiple_present" i18n:translate="">Do you ofer this service in multiple locations?</legend>
+        <legend class="example-label_multiple_present" i18n:translate="">Do you ofer this service in multiple locations?</legend>
         <label><input type="radio" disabled="disabled"/> <tal:span i18n:translate="">Yes</tal:span></label>
         <label><input type="radio" checked="checked" disabled="disabled"/> <tal:span i18n:translate="">No</tal:span></label>
       </fieldset>
-      <label id="example-single_occurance"><tal:span i18n:translate="">Please enter a name for the location you would like to assess</tal:span>
-        <input type="text" disabled="disabled" class="span-7" value="Standard Life Insurance"/></label>
+      <label class="example-label_single_occurance"><tal:span i18n:translate="">Please enter a name for the location you would like to assess</tal:span>
+        <input type="text" disabled="disabled" class="span-5" i18n:attributes="value" value="Standard Life Insurance"/></label>
     </fieldset>
   </div>
-</html>
 
+  <h2 i18n:translate="">Client example for multiple occurances.</h2>
+
+  <div class="example">
+    <h3 class="example-title" i18n:translate="">Commercial manned guarding</h3>
+
+    <fieldset class="concise">
+      <fieldset class="comprehensive">
+        <legend class="example-question" i18n:translate="">Does your organisation provide mobile patrolling?</legend>
+        <label><input type="radio" checked="checked" disabled="disabled"/> <tal:span i18n:translate="">Yes</tal:span></label>
+        <label><input type="radio" disabled="disabled"/> <tal:span i18n:translate="">No</tal:span></label>
+      </fieldset>
+      <fieldset class="comprehensive">
+        <legend class="example-label_multiple_present" i18n:translate="">Do you ofer this service in multiple locations?</legend>
+        <label><input type="radio" checked="checked" disabled="disabled"/> <tal:span i18n:translate="">Yes</tal:span></label>
+        <label><input type="radio" disabled="disabled"/> <tal:span i18n:translate="">No</tal:span></label>
+      </fieldset>
+      <fieldset class="comprehensive">
+        <legend class="example-label_multiple_occurances" i18n:translate="">Please enter the name for each location you would like to assess</legend>
+        <ul>
+          <li><input type="text" disabled="disabled" class="span-5" i18n:attributes="value" value="Tesco, Morningside"/><button class="micro" i18n:translate="">Remove</button></li>
+          <li><input type="text" disabled="disabled" class="span-5" i18n:attributes="value" value="Castle Terrace car park"/><button class="micro" i18n:translate="">Remove</button></li>
+          <li><button class="small" i18n:translate="">Add another item</button></li>
+        </ul>
+      </fieldset>
+    </fieldset>
+  </div>
+
+  <script type="text/javascript">
+    // <![CDATA
+    function getText(node) {
+        var text="";
+
+        for (var child=node.firstChild; child!==null && child.nodeType===3; child=child.nextSibling)
+          text+=child.nodeValue;
+        return text;
+    }
+
+    function setText(node, text) {
+        var child;
+        while (node.firstChild!==null && node.firstChild.nodeType===3)
+          node.removeChild(node.firstChild);
+        var text_node = document.createTextNode(text);
+        if (node.firstChild===null)
+          node.appendChild(text_node);
+        else
+          node.insertBefore(text_node, node.firstChild);
+    }
+
+    function init() {
+      // Wait until jQuery has finished loading
+      if (window.jQuery===undefined) {
+        setTimeout(init, 20);
+        return;
+      }
+
+      jQuery("form :input").each(function() {
+          var selector = /form\.widgets\.(.*)/.exec(this.name);
+          if (selector===null)
+              return;
+          selector=".example .example-"+selector[1];
+          var $examples = jQuery(selector);
+          if ($examples.length===0)
+              return;
+          jQuery(this)
+              .focus(function() { jQuery(selector).addClass("focus"); })
+              .blur(function() { jQuery(selector).removeClass("focus"); })
+              .keyup(function() {
+                  var text = this.value;
+                  jQuery(selector).each(function() {
+                      var $this = jQuery(this);
+                      if (!$this.data("original")) {
+                          $this.data("original", getText(this));
+                          if (!text)
+                              return;
+                      }
+                      if (!text)
+                          text=$this.data("original");
+                      setText(this, text);
+                  });
+              });
+      });
+    }
+
+    init();
+    // ]]>
+  </script>
+</html>

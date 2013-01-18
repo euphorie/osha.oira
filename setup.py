@@ -37,7 +37,7 @@ setup(name='osha.oira',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'Euphorie',
+          'Euphorie >=6dev',
           'NuPlone',
           'Products.CMFCore',
           'Products.statusmessages',

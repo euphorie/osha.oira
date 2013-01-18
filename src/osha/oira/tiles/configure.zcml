@@ -19,6 +19,16 @@
         for="*"
         />
 
+    <plone:tile
+        name="osha.scripts"
+        title="Javascript utilities"
+        description="Various javascript utility methods"
+        add_permission="cmf.ManagePortal"
+        class="plone.tiles.Tile"
+        template="templates/scripts.pt"
+        permission="zope.Public"
+        />
+
     <configure package="plonetheme.nuplone.tiles">
         <plone:tile
             name="tabs"

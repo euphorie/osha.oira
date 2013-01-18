@@ -47,7 +47,8 @@ jQuery("form :input").each(function() {
                     text=$this.data("original");
                 setText(this, text);
             });
-        });
+        })
+        .keyup();
 });
 })();
 

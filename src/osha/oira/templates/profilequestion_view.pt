@@ -19,6 +19,23 @@
 
       <h2 i18n:translate="header_information">Information</h2>
 
+      <dl class="grid span-13">
+        <dt i18n:translate="label_profilequestion_question">Question</dt>
+        <dd>${context/question}</dd>
+
+        <dt i18n:translate="">Multiple Item Question</dt>
+        <dd tal:condition="not:context/label_multiple_present" i18n:translate="">Not provided</dd>
+        <dd tal:condition="context/label_multiple_present">${context/label_multiple_present}</dd>
+
+        <dt i18n:translate="">Single occurance prompt</dt>
+        <dd tal:condition="not:context/label_single_occurance" i18n:translate="">Not provided</dd>
+        <dd tal:condition="context/label_single_occurance">${context/label_single_occurance}</dd>
+
+        <dt i18n:translate="">Multiple occurance prompt</dt>
+        <dd tal:condition="not:context/label_multiple_occurances" i18n:translate="">Not provided</dd>
+        <dd tal:condition="context/label_multiple_occurances">${context/label_multiple_occurances}</dd>
+      </dl>
+
       <tal:block condition="python:view.modules">
         <h2 i18n:translate="header_modules">Modules</h2>
         <ol class="${python:'sortable' if can_edit and len(view.modules)&gt;1 else None}" tal:condition="python:view.modules">

@@ -21,8 +21,9 @@ class IOSHAProfileQuestion(IProfileQuestion):
             required=True)
 
     label_multiple_present = schema.TextLine(
-            title=_(u'Multiple Item Question'),
+            title=_(u'Multiple item question'),
             required=True)
+    form.widget(label_multiple_present='euphorie.content.profilequestion.TextSpan7')
 
     label_single_occurance = schema.TextLine(
             title=_(u'Single occurance prompt'),

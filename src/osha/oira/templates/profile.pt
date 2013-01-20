@@ -30,43 +30,35 @@
     </ul>
 
     <form method="post" action="${request/URL}">
-      <fieldset class="concise">
-        <tal:block repeat="question view/profile_questions">
-          <tal:block define="answer python:view.current_profile.get(question['id'])">
-            <tal:block condition="python:question['type']=='optional'">
-              <input type="hidden" value="" name="${question/id}:boolean:default" />
-              <label><span tal:replace="question/question">Online delivery</span>
-                <input type="checkbox" value="on" name="${question/id}:boolean"
-                checked="${python:'checked' if answer else None}" />
-              </label>
-            </tal:block>
+      <tal:question repeat="question view/profile_questions"><section tal:define="current python:view.current_profile.get(question['id'])">
+        <h2>${question/title}</h2>
+        <fieldset class="comprehensive radioList">
+          <legend>${question/question}</legend>
+          <label><input type="radio" class="presence" required="required" name="pq${question/id}.present" value="yes" checked="${python:'checked' if current else None}"/> <tal:span i18n:translate="">Yes</tal:span></label>
+          <label><input type="radio" class="presence" required="required" name="pq${question/id}.present" value="no" checked="${python:'checked' if not current else None}"/> <tal:span i18n:translate="">No</tal:span></label>
+        </fieldset>
 
-            <tal:block condition="python:question['type']=='repeat'">
-              <fieldset class="comprehensive">
-                <legend tal:content="question/question">Restaurants</legend>
-                <ol>
-                  <tal:block condition="python:not answer">
-                    <li><input type="text" name="${question/id}:utext:list"/>
-                    </li>
-                    <noscript>
-                      <li><input type="text" name="${question/id}:utext:list"/>
-                      </li>
-                      <li><input type="text" name="${question/id}:utext:list"/>
-                      </li>
-                    </noscript>
-                  </tal:block>
-                  <tal:block condition="python:answer">
-                    <li tal:repeat="title answer"><input type="text" name="${question/id}:utext:list" value="${title}"/></li>
-                  </tal:block>
-                </ol>
-                <button type="button" 
-                        i18n:translate="label_add_profile_module"
-                        value="${question/id}:utext:list" class="${question/id}:utext:list addButton jsOnly">Add</button>
-              </fieldset>
-            </tal:block>
-          </tal:block>
-        </tal:block>
-      </fieldset>
+        <fieldset class="comprehensive radioList dependsOn-pq${question/id}.present-equals-yes">
+          <legend>${question/label_multiple_present}</legend>
+          <label><input type="radio" class="multiple" name="pq${question/id}.multiple" value="yes" checked="${python:'checked' if current and len(current)&gt;1 else None}"/> <tal:span i18n:translate="">Yes</tal:span></label>
+          <label><input type="radio" class="multiple" name="pq${question/id}.multiple" value="no" checked="${python:'checked' if not current or len(current)==1 else None}"/> <tal:span i18n:translate="">No</tal:span></label>
+        </fieldset>
+
+        <fieldset class="comprehensive dependsOn-pq${question/id}.present-equals-yes dependsOn-pq${question/id}.multiple-on">
+          <legend>
+            <span class="dependsOn-pq${question/id}.multiple-equals-no">${question/label_single_occurance}</span>
+            <span class="dependsOn-pq${question/id}.multiple-equals-yes">${question/label_multiple_occurances}</span>
+          </legend>
+          <ol class="form-iteration">
+            <li tal:condition="python:not current"><input required="required" type="text" name="${question/id}:utext:list" /> <button type="button" class="small remove" i18n:translate="">Remove</button></li>
+            <li tal:repeat="title current"><input required="required" type="text" name="${question/id}:utext:list" value="${title}"/> <button type="button" class="small remove dependsOn-pq${question/id}.multiple-equals-yes" i18n:translate="">Remove</button></li>
+          </ol>
+          <p class="buttons addButton dependsOn-pq${question/id}.multiple-equals-yes">
+            <button class="small" type="button" i18n:translate="">Add another item</button>
+          </p>
+        </fieldset>
+      </section></tal:question>
+
       <p class="buttonBar">
       <button class="floatAfter" type="submit" i18n:translate="label_save_and_continue">Save and continue</button>
       </p>
@@ -105,26 +97,61 @@
     </ul>
     <metal:css use-macro="webhelpers/macros/appendix"/>
   </body>
-    <metal:css use-macro="webhelpers/macros/javascript"/>
-  <script type="text/javascript" defer="1">
+  <metal:css use-macro="webhelpers/macros/javascript"/>
+  <script type="text/javascript">
     // <![CDATA[
-    $(document).ready(function() {
-        $(".addButton").click(function() {
-            var button = $(this);
-            var field = button.attr("class").split(" ")[0];
-            var list = button.prev("ol");
-            var li = $("<li/>");
+    function styleSection($section) {
+        var presence = $section.find("input.presence:checked").val()==="yes";
+        if (!presence) {
+            $section.find("input:not(.presence)").prop("required", false);
+            return;
+        }
 
-            $("<input type='text'/>")
-                .attr("name", field)
-                .appendTo(li);
-            li.appendTo(list)
-              .find("input").get(0).focus();
-        });
+        $section.find("input").prop("required", true);
+        var multiple = $section.find("input.multiple:checked").val()==="yes";
+        if (!multiple) {
+            $section.find(".form-iteration li:not(:first)")
+                .hide()
+                .find("input").prop("required", false);
+            $section.find("button").hide();
+        } else {
+            var $buttons = $section.find("button");
+            $section.find(".form-iteration li").show();
+            $buttons.show();
+            if ($buttons.length<=2)
+              $buttons.filter(".remove").hide();
+        }
+    }
 
+    $(".addButton").on("click", function() {
+        var $button = $(this),
+            $section = $button.closest("section"),
+            $titles = $button.siblings(".form-iteration");
+
+        $titles.find("li:last").clone()
+            .find(":input").val("").end()
+            .appendTo($titles);
+        styleSection($section);
     });
+
+    $(document).on("click", ".form-iteration .remove", function() {
+        var $button = $(this),
+            $section = $button.closest("section");
+        $button.closest("li").remove();
+        styleSection($section);
+    });
+
+    $(document).on("change", "input[type=radio]", function() {
+          var $section = $(this).closest("section");
+          styleSection($section);
+    });
+
+    $("section").each(function() {
+        styleSection($(this));
+    });
+
     // ]]>
   </script>
-    <tal:block replace="tile:client-analytics"/>
+  <tal:block replace="tile:client-analytics"/>
 </html>
 

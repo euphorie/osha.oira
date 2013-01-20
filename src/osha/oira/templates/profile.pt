@@ -146,6 +146,13 @@
           styleSection($section);
     });
 
+    $("form").on("submit", function() {
+        var $sections = $("section");
+        $sections = $sections.filter(":has(.presence[value=yes]:checked)");
+        $sections = $sections.filter(":has(.multiple[value=no]:checked)");
+        $sections.find(".form-iteration li:not(:first-child)").remove();
+    });
+
     $("section").each(function() {
         styleSection($(this));
     });

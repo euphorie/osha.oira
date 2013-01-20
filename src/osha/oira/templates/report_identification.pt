@@ -48,7 +48,7 @@
             <p class="negation" tal:condition="python:view.show_negate_warning(node, zodbnode)"><em><strong class="icon warning">⚠</strong><tal:span i18n:translate="warn_risk_present">You responded negative to the above statement.</tal:span></em></p>
 
             <!-- Requested to be removed in #2382
-            <p class="emphasis" 
+            <p class="class emphasis" 
                 tal:condition="python:status=='unanswered'" 
                 i18n:translate="risk_unanswered"> 
                     This risk still needs to be inventorised 

@@ -29,7 +29,7 @@
         i18n:translate="button_download">Download</a>
 </div>
 
-<div class="notice comments" tal:condition="view/session/report_comment" tal:content="view/session/report_comment">
+<div class="message notice comments" tal:condition="view/session/report_comment" tal:content="view/session/report_comment">
     Extra remarks for this particular survey.
 </div>
 

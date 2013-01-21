@@ -4,7 +4,7 @@ Changelog
 1.2.31 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fixed LT unicode error [thomas_w]
 
 
 1.2.30 (2013-01-21)

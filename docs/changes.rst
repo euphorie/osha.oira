@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.31 (unreleased)
+1.2.31 (2013-01-21)
 -------------------
 
 - Fixed LT unicode error [thomas_w]

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.30 (unreleased)
+1.2.30 (2013-01-21)
 -------------------
 
 - Fix ZCML loading in tests so we can support Plone 4.2. [wiggy]

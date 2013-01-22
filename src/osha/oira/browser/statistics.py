@@ -156,6 +156,8 @@ class ShowStatistics(grok.View):
             url = "&".join([url, 'country=%s' % self.request.get('country')])
         elif report_type == 'tool':
             url = "&".join([url, 'tool=%s' % self.request.get('tool')])
+        elif report_type == 'overview':
+            url = "&".join([url, 'sector=%25'])
 
         year = self.request.get('year')
         month = 0

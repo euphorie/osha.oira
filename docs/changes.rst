@@ -4,7 +4,7 @@ Changelog
 1.2.33 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Remove "(in Euro)" for budget field #6208 [jcbrand]
 
 
 1.2.32 (2013-01-22)
@@ -29,7 +29,6 @@ Changelog
 - Fixed homepage for mobile view on android #6342 [jcbrand]
 - Reverse the order in which measures are shown #6287 [jcbrand]
 - French updates on the identification page #6428 [jcbrand]
-- Remove "(in Euro)" for budget field #6208 [jcbrand]
 - Added FI translations #6410 [thomasw]
 - Added LT translations #6257 [thomasw]
 

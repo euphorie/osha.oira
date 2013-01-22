@@ -1,10 +1,29 @@
 Changelog
 =========
 
-1.2.30 (unreleased)
+1.2.32 (unreleased)
 -------------------
 
-- Fix ZCML loading in tests so we can support Plone 4.2.
+- Nothing changed yet.
+
+
+1.2.31 (2013-01-21)
+-------------------
+
+- Fixed LT unicode error [thomas_w]
+
+
+1.2.30 (2013-01-21)
+-------------------
+
+- Fix ZCML loading in tests so we can support Plone 4.2. [wiggy]
+- Shorten buttons in Greek translation #6286 [jcbrand]
+- Override Survey edit form to hide "Evaluation optional" field #6175 [jcbrand] 
+- Integrate changes from Prototype. Fixes #6285 [jcbrand]
+- Fixed homepage for mobile view on android #6342 [jcbrand]
+- Reverse the order in which measures are shown #6287 [jcbrand]
+- French updates on the identification page #6428 [jcbrand]
+- Remove "(in Euro)" for budget field #6208 [jcbrand]
 - Added FI translations #6410 [thomasw]
 - Added LT translations #6257 [thomasw]
 

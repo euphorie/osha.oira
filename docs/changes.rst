@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.33 (unreleased)
+1.2.33 (2013-01-22)
 -------------------
 
 - Remove "(in Euro)" for budget field #6208 [jcbrand]

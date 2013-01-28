@@ -558,7 +558,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             t(_("header_unanswered_risks",
                 default=u'Hazards/problems that have been "parked" and are still to be dealt with')),
             t(_("header_risks_not_present",
-                default=u"Hazards/problems that are not present in your organisation"))
+                default=u"Hazards/problems that have been managed or are not present in your organisation"))
             ]
         nodes = [
             self.actioned_nodes,

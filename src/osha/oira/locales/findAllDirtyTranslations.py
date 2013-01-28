@@ -13,7 +13,7 @@ langs = ['en', 'bg', 'cs', 'da', 'de', 'el', 'es', 'et', 'fi', 'fr', 'hu',
 for lang in langs:
     if os.path.exists(lang):
         cmdline="./findDirtyTranslations.py %(lang)s/LC_MESSAGES/euphorie.po " \
-        "euphorie.pot --fuzzy --untranslated --output=dirty2/osha.oira_%(lang)s.po" % dict(lang=lang)
+        "euphorie.pot --fuzzy --untranslated --output=dirty/osha.oira_%(lang)s.po" % dict(lang=lang)
         print "executing for language ", lang
         p = Popen(cmdline, shell=True)
         sts = os.waitpid(p.pid, 0)[1]

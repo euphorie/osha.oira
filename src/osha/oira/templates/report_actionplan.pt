@@ -81,8 +81,8 @@
     <tal:block define="zodbnode python:view.getZodbNode(node);
                         title python:view.title(node, zodbnode);
                         status python:view.risk_status(node, zodbnode)">
-        <div class="warning" 
-             tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'warning', 'no-actionplans':'warning', 'unevaluated':'warning'}[status]"
+        <div class="message warning" 
+             tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'message warning', 'no-actionplans':'message warning', 'unevaluated':'message warning'}[status]"
              tal:define="show_negate_warning python:view.show_negate_warning(node, zodbnode)"
              tal:omit-tag="python:status=='unanswered'">
             <h4>
@@ -162,8 +162,8 @@
     <tal:block define="zodbnode python:view.getZodbNode(node);
                         title python:view.title(node, zodbnode);
                         status python:view.risk_status(node, zodbnode)">
-    <div class="warning" 
-            tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'warning', 'no-actionplans':'warning', 'unevaluated':'warning'}[status]"
+    <div class="message warning" 
+            tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'message warning', 'no-actionplans':'message warning', 'unevaluated':'message warning'}[status]"
             tal:define="show_negate_warning python:view.show_negate_warning(node, zodbnode)"
             tal:omit-tag="python:status=='unanswered'">
         <h4>

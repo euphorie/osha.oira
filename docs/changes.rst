@@ -4,7 +4,9 @@ Changelog
 1.2.35 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Update report markup with changes from Prototype (add .message class)
+  [jcbrand]
+
 
 
 1.2.34 (2013-01-29)

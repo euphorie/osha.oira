@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.35 (unreleased)
+1.2.35 (2013-01-29)
 -------------------
 
 - Update report markup with changes from Prototype (add .message class)

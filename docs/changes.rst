@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.34 (unreleased)
+1.2.34 (2013-01-29)
 -------------------
 
 - Show/hide link for legal refs was white on white. [jcbrand]

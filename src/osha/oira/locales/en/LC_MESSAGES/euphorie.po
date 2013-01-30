@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.23.dev0\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2013-01-28 12:28+0100\n"
-"PO-Revision-Date: 2013-01-10 13:42+0200\n"
+"POT-Creation-Date: 2013-01-30 10:06+0200\n"
+"PO-Revision-Date: 2013-01-30 10:11+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Generated-By: Babel 0.9.6\n"
 
 #. Default: HTML Source Code
@@ -124,54 +124,49 @@ msgstr "OiRA Tool"
 
 #. Default: Sessions
 #: src/osha/oira/manual_translations.py:35
-msgid "help_header_sessions"
-msgstr "Sessions"
-
-#. Default: Sessions
-#: src/osha/oira/manual_translations.py:36
 msgid "label_sessions"
 msgstr "Sessions"
 
 #. Default: OiRA Tool import
-#: src/osha/oira/manual_translations.py:37
+#: src/osha/oira/manual_translations.py:36
 msgid "Survey import"
 msgstr "OiRA Tool import"
 
 #. Default: Import OiRA tool version
-#: src/osha/oira/manual_translations.py:38
+#: src/osha/oira/manual_translations.py:37
 msgid "Import survey version"
 msgstr "Import OiRA tool version"
 
 #. Default: OiRA Tool version
-#: src/osha/oira/manual_translations.py:39
+#: src/osha/oira/manual_translations.py:38
 msgid "Survey version"
 msgstr "OiRA Tool version"
 
 #. Default: This OiRA Tool has no profile questions.
-#: src/osha/oira/manual_translations.py:40
+#: src/osha/oira/manual_translations.py:39
 msgid "no_profile_questions"
 msgstr "This OiRA Tool has no profile questions."
 
 #. Default: Create new OiRA Tool
-#: src/osha/oira/manual_translations.py:41
+#: src/osha/oira/manual_translations.py:40
 msgid "button_create_new"
 msgstr "Create new OiRA Tool"
 
 #. Default: Please choose a country of which you would like to view or copy an OiRA
 #. Tool.
-#: src/osha/oira/manual_translations.py:42
+#: src/osha/oira/manual_translations.py:41
 msgid "message_choose_country"
 msgstr ""
 "Please choose a country of which you would like to view or copy an OiRA Tool."
 
 #. Default: Select a sector for which you would like to view or copy an OiRA Tool.
-#: src/osha/oira/manual_translations.py:44
+#: src/osha/oira/manual_translations.py:43
 msgid "intro_select_sector"
 msgstr "Select a sector for which you would like to view or copy an OiRA Tool."
 
 #. Default: This is the title of this OiRA Tool version. This name is never shown
 #. to users.
-#: src/osha/oira/manual_translations.py:46
+#: src/osha/oira/manual_translations.py:45
 msgid "help_survey_title"
 msgstr ""
 "This is the title of this OiRA Tool version. This name is never shown to "
@@ -181,7 +176,7 @@ msgstr ""
 #. If no introduction is provided here a standard text will be shown. Please keep
 #. this text brief so it will easily fit on screens of small devices such as phones
 #. and PDAs.
-#: src/osha/oira/manual_translations.py:48
+#: src/osha/oira/manual_translations.py:47
 msgid "help_introduction"
 msgstr ""
 "The introduction text is shown when starting a new OiRA Tool session. If no "
@@ -191,53 +186,53 @@ msgstr ""
 
 #. Default: This is the only version of the OiRA Tool and can therefore not be
 #. deleted. Did you perhaps want to remove the OiRA Tool itself?
-#: src/osha/oira/manual_translations.py:52
+#: src/osha/oira/manual_translations.py:51
 msgid "message_delete_no_last_survey"
 msgstr ""
 "This is the only version of the OiRA Tool and can therefore not be deleted. "
 "Did you perhaps want to remove the OiRA Tool itself?"
 
 #. Default: Title of imported OiRA Tool
-#: src/osha/oira/manual_translations.py:55
+#: src/osha/oira/manual_translations.py:54
 msgid "label_surveygroup_title"
 msgstr "Title of imported OiRA Tool"
 
 #. Default: Succesfully imported the OiRA Tool
-#: src/osha/oira/manual_translations.py:56
+#: src/osha/oira/manual_translations.py:55
 msgid "upload_success"
 msgstr "Succesfully imported the OiRA Tool"
 
 #. Default: Import sector and OiRA Tool
-#: src/osha/oira/manual_translations.py:57
+#: src/osha/oira/manual_translations.py:56
 msgid "title_import_sector_survey"
 msgstr "Import sector and OiRA Tool"
 
 #. Default: The form will allow you to create a new OiRA Tool revision.
-#: src/osha/oira/manual_translations.py:58
+#: src/osha/oira/manual_translations.py:57
 msgid "intro_add_survey"
 msgstr "The form will allow you to create a new OiRA Tool revision."
 
 #. Default: Now that you have identified the existing hazards/problems in your
 #. company/organisation you need to evaluate the risks arising from them.
-#: src/osha/oira/manual_translations.py:60
+#: src/osha/oira/manual_translations.py:59
 msgid "help_risks_present"
 msgstr ""
 "Now that you have identified the existing hazards/problems in your company/"
 "organisation you need to evaluate the risks arising from them."
 
 #. Default: Solution
-#: src/osha/oira/manual_translations.py:63
+#: src/osha/oira/manual_translations.py:62
 msgid "label_solution_direction"
 msgstr "Solution"
 
 #. Default: Succesfully published the OiRA Tool
-#: src/osha/oira/manual_translations.py:64
+#: src/osha/oira/manual_translations.py:63
 msgid "Succesfully published the survey"
 msgstr "Succesfully published the OiRA Tool"
 
 #. Default: Succesfully created a preview for the OiRA Tool. It can be accessed at
 #. ${url}.
-#: src/osha/oira/manual_translations.py:66
+#: src/osha/oira/manual_translations.py:65
 msgid ""
 "Succesfully created a preview for the survey. It can be accessed at ${url} ."
 msgstr ""
@@ -245,12 +240,12 @@ msgstr ""
 "${url}."
 
 #. Default: Publish the selected OiRA Tool live with its latest changes.
-#: src/osha/oira/manual_translations.py:69
+#: src/osha/oira/manual_translations.py:68
 msgid "help_publish"
 msgstr "Publish the selected OiRA Tool live with its latest changes."
 
 #. Default: Create a duplicate of the selected OiRA Tool
-#: src/osha/oira/manual_translations.py:71
+#: src/osha/oira/manual_translations.py:70
 msgid "help_add_version"
 msgstr "Create a duplicate of the selected OiRA Tool"
 
@@ -258,7 +253,7 @@ msgstr "Create a duplicate of the selected OiRA Tool"
 #. answerable with YES (the end-user will have to tick a box) or NO (e.g. "Do you
 #. work with the public?"). If this is to be "repeatable", it must be formulated as
 #. a prompt to fill in multiple values (e.g. "List your different work locations").
-#: src/osha/oira/manual_translations.py:72
+#: src/osha/oira/manual_translations.py:71
 msgid "help_profilequestion_question"
 msgstr ""
 "If this is to be \"optional\", it must be formulated so that it is "
@@ -268,19 +263,19 @@ msgstr ""
 "different work locations\")."
 
 #. Default: Include any relevant information that may be helpful for the end-user.
-#: src/osha/oira/manual_translations.py:77
+#: src/osha/oira/manual_translations.py:76
 msgid "help_module_description"
 msgstr "Include any relevant information that may be helpful for the end-user."
 
 #. Default: Allows the end-user to skip this module and everything inside it.
-#: src/osha/oira/manual_translations.py:79
+#: src/osha/oira/manual_translations.py:78
 msgid "help_module_optional"
 msgstr "Allows the end-user to skip this module and everything inside it."
 
 #. Default: The question to ask the end-user if this module is optional. It must be
 #. formulated so that it is answerable with YES (the end-user will have to tick a
 #. box) or NO
-#: src/osha/oira/manual_translations.py:81
+#: src/osha/oira/manual_translations.py:80
 msgid "help_module_question"
 msgstr ""
 "The question to ask the end-user if this module is optional. It must be "
@@ -289,25 +284,25 @@ msgstr ""
 
 #. Default: This information will appear in the Action plan step and should include
 #. an overview of general solution(s) related to this module.
-#: src/osha/oira/manual_translations.py:84
+#: src/osha/oira/manual_translations.py:83
 msgid "help_solution_direction"
 msgstr ""
 "This information will appear in the Action plan step and should include an "
 "overview of general solution(s) related to this module."
 
 #. Default: Affirmative statement
-#: src/osha/oira/manual_translations.py:87
+#: src/osha/oira/manual_translations.py:86
 msgid "label_statement"
 msgstr "Affirmative statement"
 
 #. Default: Negative statement
-#: src/osha/oira/manual_translations.py:88
+#: src/osha/oira/manual_translations.py:87
 msgid "label_problem_description"
 msgstr "Negative statement"
 
 #. Default: This is a short affirmative statement about a possible risk (e.g. The
 #. building is well maintained.)
-#: src/osha/oira/manual_translations.py:89
+#: src/osha/oira/manual_translations.py:88
 msgid "help_statement"
 msgstr ""
 "This is a short affirmative statement about a possible risk (e.g. The "
@@ -315,7 +310,7 @@ msgstr ""
 
 #. Default: This is the inverse of the affirmative statement (e.g. The building is
 #. not well maintained.)
-#: src/osha/oira/manual_translations.py:91
+#: src/osha/oira/manual_translations.py:90
 msgid "help_problem_description"
 msgstr ""
 "This is the inverse of the affirmative statement (e.g. The building is not "
@@ -323,21 +318,21 @@ msgstr ""
 
 #. Default: Describe the risk. Include any relevant information that may be helpful
 #. for the end-user.
-#: src/osha/oira/manual_translations.py:93
+#: src/osha/oira/manual_translations.py:92
 msgid "help_risk_description"
 msgstr ""
 "Describe the risk. Include any relevant information that may be helpful for "
 "the end-user."
 
 #. Default: Priority risk
-#: src/osha/oira/manual_translations.py:95
+#: src/osha/oira/manual_translations.py:94
 msgid "risktype_top5"
 msgstr "Priority risk"
 
 #. Default: "Priority risk" is one of the high risks in the sector. "Risk" is
 #. related to the workplace or to the work carried out. "Policy" refers to
 #. agreements, procedures, and management decisions.
-#: src/osha/oira/manual_translations.py:96
+#: src/osha/oira/manual_translations.py:95
 msgid "help_risk_type"
 msgstr ""
 "Priority risk\" is one of the high risks in the sector. \"Risk\" is related "
@@ -346,61 +341,141 @@ msgstr ""
 
 #. Default: You can help the end-user by selecting a default priority. He/she can
 #. still change the priority.
-#: src/osha/oira/manual_translations.py:100
+#: src/osha/oira/manual_translations.py:99
 msgid "help_default_priority"
 msgstr ""
 "You can help the end-user by selecting a default priority. He/she can still "
 "change the priority."
 
 #. Default: Indicate the severity if this risk occurs.
-#: src/osha/oira/manual_translations.py:102
+#: src/osha/oira/manual_translations.py:101
 msgid "help_default_severity"
 msgstr "Indicate the severity if this risk occurs."
 
 #. Default: General information on risk assessment
-#: src/osha/oira/manual_translations.py:104
+#: src/osha/oira/manual_translations.py:103
 msgid "help_help_introduction"
 msgstr "General information on risk assessment"
 
-#. Default: This text should explain how to register and login.
+#. Default: Registration
+#: src/osha/oira/manual_translations.py:104
+msgid "label_help_authentication"
+msgstr "Registration"
+
+#. Default: Registration
 #: src/osha/oira/manual_translations.py:105
+msgid "help_header_authentication"
+msgstr "Registration"
+
+#. Default: This text should explain how to register and login.
+#: src/osha/oira/manual_translations.py:106
 msgid "help_authentication"
 msgstr "This text should explain how to register and login."
 
+#. Default: Carrying out your risk assessment
+#: src/osha/oira/manual_translations.py:108
+msgid "help_header_sessions"
+msgstr "Carrying out your risk assessment"
+
+#. Default: Carrying out your risk assessment
+#: src/osha/oira/manual_translations.py:109
+msgid "label_help_sessions"
+msgstr "Carrying out your risk assessment"
+
 #. Default: This text should describe the main functions of the OiRA Tool.
-#: src/osha/oira/manual_translations.py:107
+#: src/osha/oira/manual_translations.py:110
 msgid "help_sessions"
 msgstr "This text should describe the main functions of the OiRA Tool."
 
+#. Default: 1. Preparation
+#: src/osha/oira/manual_translations.py:112
+msgid "help_header_start"
+msgstr "1. Preparation"
+
+#. Default: 1. Preparation
+#: src/osha/oira/manual_translations.py:113
+msgid "label_help_preparation"
+msgstr "1. Preparation"
+
 #. Default: This text should explain the 2 types of profile questions.
-#: src/osha/oira/manual_translations.py:109
+#: src/osha/oira/manual_translations.py:114
 msgid "help_preparation"
 msgstr "This text should explain the 2 types of profile questions."
 
+#. Default: 2. Identification
+#: src/osha/oira/manual_translations.py:116
+msgid "help_header_identification"
+msgstr "2. Identification"
+
+#. Default: 2. Identification
+#: src/osha/oira/manual_translations.py:117
+msgid "label_help_identification"
+msgstr "2. Identification"
+
 #. Default: This text should explain how the risk identification works.
-#: src/osha/oira/manual_translations.py:111
+#: src/osha/oira/manual_translations.py:118
 msgid "help_identification"
 msgstr "This text should explain how the risk identification works."
 
+#. Default: 3. Evaluation
+#: src/osha/oira/manual_translations.py:120
+msgid "help_header_evaluation"
+msgstr "3. Evaluation"
+
+#. Default: 3. Evaluation
+#: src/osha/oira/manual_translations.py:121
+msgid "label_help_evaluation"
+msgstr "3. Evaluation"
+
 #. Default: This text should explain how to evaluate the identified risks.
-#: src/osha/oira/manual_translations.py:113
+#: src/osha/oira/manual_translations.py:122
 msgid "help_evaluation"
 msgstr "This text should explain how to evaluate the identified risks."
 
+#. Default: 4. Action Plan
+#: src/osha/oira/manual_translations.py:124
+msgid "help_header_actionplan"
+msgstr "4. Action Plan"
+
+#. Default: 4. Action Plan
+#: src/osha/oira/manual_translations.py:125
+msgid "label_help_actionplan"
+msgstr "4. Action Plan"
+
 #. Default: This text should explain how to fill in the Action plan.
-#: src/osha/oira/manual_translations.py:115
+#: src/osha/oira/manual_translations.py:126
 msgid "help_actionplan"
 msgstr "This text should explain how to fill in the Action plan."
 
+#. Default: 5. Report
+#: src/osha/oira/manual_translations.py:128
+msgid "help_header_report"
+msgstr "5. Report"
+
+#. Default: 5. Report
+#: src/osha/oira/manual_translations.py:129
+msgid "label_help_report"
+msgstr "5. Report"
+
 #. Default: This text should describe how the report can either be saved or
 #. printed.
-#: src/osha/oira/manual_translations.py:117
+#: src/osha/oira/manual_translations.py:130
 msgid "help_reports"
 msgstr ""
 "This text should describe how the report can either be saved or printed."
 
+#. Default: What happens next?
+#: src/osha/oira/manual_translations.py:132
+msgid "label_help_finalwords"
+msgstr "What happens next?"
+
+#. Default: What happens next?
+#: src/osha/oira/manual_translations.py:133
+msgid "help_header_finalwords"
+msgstr "What happens next?"
+
 #. Default: General final recommendations.
-#: src/osha/oira/manual_translations.py:119
+#: src/osha/oira/manual_translations.py:134
 msgid "help_finalwords"
 msgstr "General final recommendations."
 
@@ -409,7 +484,7 @@ msgstr "General final recommendations."
 #. looking at what could cause harm, or by consulting the workers and/or their
 #. representatives about problems they have encountered). You can then introduce
 #. the information into the tool.
-#: src/osha/oira/manual_translations.py:122
+#: src/osha/oira/manual_translations.py:137
 #: src/osha/oira/templates/identification.pt:19
 msgid "intro_print_identification_1"
 msgstr ""
@@ -423,7 +498,7 @@ msgstr ""
 #. their representatives and invite them to participate in identifying the
 #. hazards/problems, evaluating the risks and deciding on preventive action.Their
 #. feedback should be taken into account when filling in this tool.
-#: src/osha/oira/manual_translations.py:129
+#: src/osha/oira/manual_translations.py:144
 #: src/osha/oira/templates/identification.pt:20
 msgid "intro_print_identification_2"
 msgstr ""
@@ -433,14 +508,14 @@ msgstr ""
 "feedback should be taken into account when filling in this tool."
 
 #. Default: contents of the tool
-#: src/osha/oira/manual_translations.py:135
+#: src/osha/oira/manual_translations.py:150
 #: src/osha/oira/templates/identification.pt:22
 msgid "list_of_risks"
 msgstr "contents of the tool"
 
 #. Default: No hazards or problems were spotted. Please proceed directly to the
 #. action plan step.
-#: src/osha/oira/manual_translations.py:137
+#: src/osha/oira/manual_translations.py:152
 msgid "help_evaluation_empty"
 msgstr ""
 "No hazards or problems were spotted. Please proceed directly to the action "
@@ -448,20 +523,20 @@ msgstr ""
 
 #. Default: Start to write a new OiRA Tool. You will be asked whether you want to
 #. start off with a copy of an existing OiRA Tool..
-#: src/osha/oira/manual_translations.py:141
+#: src/osha/oira/manual_translations.py:156
 msgid "help_create_new_version"
 msgstr ""
 "Start to write a new OiRA Tool. You will be asked whether you want to start "
 "off with a copy of an existing OiRA Tool.."
 
 #. Default: Remove this OiRA Tool from the online client.
-#: src/osha/oira/manual_translations.py:145
+#: src/osha/oira/manual_translations.py:160
 msgid "title_help_unpublished"
 msgstr "Remove this OiRA Tool from the online client."
 
 #. Default: Succesfully created a preview for the OiRA Tool. It can be accessed at
 #. ${url} .
-#: src/osha/oira/manual_translations.py:148
+#: src/osha/oira/manual_translations.py:163
 msgid "message_preview_success"
 msgstr ""
 "Succesfully created a preview for the OiRA Tool. It can be accessed at "
@@ -470,7 +545,7 @@ msgstr ""
 #. Default: Please note that by deleting your account, you will also delete all
 #. your sessions. Please make sure you download your reports from the Report step
 #. prior to deleting your account, if you want to keep any.
-#: src/osha/oira/manual_translations.py:151
+#: src/osha/oira/manual_translations.py:166
 msgid "warning_account_delete_surveys"
 msgstr ""
 "Please note that by deleting your account, you will also delete all your "
@@ -480,7 +555,7 @@ msgstr ""
 #. Default: Are you sure you want to create a preview of this OiRA Tool? You can
 #. give the URL for the preview to others so they can test the OiRA Tool. To access
 #. the preview a standard OiRA client login is required.
-#: src/osha/oira/manual_translations.py:156
+#: src/osha/oira/manual_translations.py:171
 msgid "intro_preview"
 msgstr ""
 "Are you sure you want to create a preview of this OiRA Tool? You can give "
@@ -488,18 +563,18 @@ msgstr ""
 "the preview a standard OiRA client login is required."
 
 #. Default: Preview OiRA Tool
-#: src/osha/oira/manual_translations.py:161
+#: src/osha/oira/manual_translations.py:176
 msgid "header_preview"
 msgstr "Preview OiRA Tool"
 
 #. Default: After publication the OiRA Tool will be available at ${url}.
-#: src/osha/oira/manual_translations.py:163
+#: src/osha/oira/manual_translations.py:178
 msgid "help_publish_url"
 msgstr "After publication the OiRA Tool will be available at ${url}."
 
 #. Default: Are you sure you want to publish this OiRA Tool version? This will
 #. replace the current version.
-#: src/osha/oira/manual_translations.py:165
+#: src/osha/oira/manual_translations.py:180
 msgid "intro_publish_other_survey_published"
 msgstr ""
 "Are you sure you want to publish this OiRA Tool version? This will replace "
@@ -507,7 +582,7 @@ msgstr ""
 
 #. Default: Are you sure you want to republish this OiRA Tool? This will make all
 #. changes made public.
-#: src/osha/oira/manual_translations.py:169
+#: src/osha/oira/manual_translations.py:184
 msgid "intro_publish_survey_published"
 msgstr ""
 "Are you sure you want to republish this OiRA Tool? This will make all "
@@ -515,99 +590,98 @@ msgstr ""
 
 #. Default: Are you sure you want to publish this OiRA Tool? After publication the
 #. OiRA Tool will appear in the online client and be accessible by all users.
-#: src/osha/oira/manual_translations.py:173
+#: src/osha/oira/manual_translations.py:188
 msgid "intro_publish_first_time"
 msgstr ""
 "Are you sure you want to publish this OiRA Tool? After publication the OiRA "
 "Tool will appear in the online client and be accessible by all users."
 
 #. Default: Publish OiRA Tool
-#: src/osha/oira/manual_translations.py:177
+#: src/osha/oira/manual_translations.py:192
 msgid "header_publish"
 msgstr "Publish OiRA Tool"
 
 #. Default: This OiRA tool has changed since you last accessed it. Before you can
 #. continue, you need to update to these changes.
-#: src/osha/oira/manual_translations.py:179
+#: src/osha/oira/manual_translations.py:194
 msgid "expl_update"
 msgstr ""
 "This OiRA tool has changed since you last accessed it. Before you can "
 "continue, you need to update to these changes."
 
 #. Default: OiRA Tool was updated
-#: src/osha/oira/manual_translations.py:183
+#: src/osha/oira/manual_translations.py:198
 msgid "title_updated"
 msgstr "OiRA Tool was updated"
 
 #. Default: The title of this OiRA Tool. This title is used in the OiRA Tool
 #. overview in the clients.
-#: src/osha/oira/manual_translations.py:185
+#: src/osha/oira/manual_translations.py:200
 msgid "help_surveygroup_title"
 msgstr ""
 "The title of this OiRA Tool. This title is used in the OiRA Tool overview in "
 "the clients."
 
 #. Default: This OiRA Tool is now no longer available in the client.
-#: src/osha/oira/manual_translations.py:189
+#: src/osha/oira/manual_translations.py:204
 msgid "message_unpublish_success"
 msgstr "This OiRA Tool is now no longer available in the client."
 
 #. Default: Name for OiRA Tool version
-#: src/osha/oira/manual_translations.py:191
+#: src/osha/oira/manual_translations.py:206
 msgid "label_upload_survey_title"
 msgstr "Name for OiRA Tool version"
 
 #. Default: Default severity
-#: src/osha/oira/manual_translations.py:193
+#: src/osha/oira/manual_translations.py:208
 msgid "label_default_effect"
 msgstr "Default severity"
 
 #. Default: Are you sure you want to unpublish this OiRA Tool?
-#: src/osha/oira/manual_translations.py:195
+#: src/osha/oira/manual_translations.py:210
 msgid "unpublish_confirm"
 msgstr "Are you sure you want to unpublish this OiRA Tool?"
 
 #. Default: Import OiRA Tool
-#: src/osha/oira/manual_translations.py:197
+#: src/osha/oira/manual_translations.py:212
 msgid "menu_import"
 msgstr "Import OiRA Tool"
 
 #. Default: You cannot delete an OiRA Tool version that is published. Please
 #. unpublish it first.
-#: src/osha/oira/manual_translations.py:199
+#: src/osha/oira/manual_translations.py:214
 msgid "message_no_delete_published_survey"
 msgstr ""
 "You cannot delete an OiRA Tool version that is published. Please unpublish "
 "it first."
 
 #. Default: You can not delete a sector that contains published OiRA Tools.
-#: src/osha/oira/manual_translations.py:203
+#: src/osha/oira/manual_translations.py:218
 msgid "message_not_delete_published_sector"
 msgstr "You can not delete a sector that contains published OiRA Tools."
 
 #. Default: add a new OiRA Tool
-#: src/osha/oira/manual_translations.py:207
+#: src/osha/oira/manual_translations.py:222
 msgid "add_survey"
 msgstr "add a new OiRA Tool"
 
 #. Default: There are no OiRA Tools present. You can ${add_link}.
-#: src/osha/oira/manual_translations.py:209
+#: src/osha/oira/manual_translations.py:224
 msgid "no_surveys_present"
 msgstr "There are no OiRA Tools present. You can ${add_link}."
 
 #. Default: OiRA Tools
-#: src/osha/oira/manual_translations.py:211
+#: src/osha/oira/manual_translations.py:226
 msgid "header_sector_survey_list"
 msgstr "OiRA Tools"
 
 #. Default: We're sorry, but an unforseen error has occured.
-#: src/osha/oira/manual_translations.py:213
+#: src/osha/oira/manual_translations.py:228
 msgid "expl_error"
 msgstr "We're sorry, but an unforseen error has occured."
 
 #. Default: Delete this measure
-#: src/osha/oira/manual_translations.py:215
-#: src/osha/oira/templates/risk_actionplan.pt:67
+#: src/osha/oira/manual_translations.py:230
 msgid "label_remove_measure"
 msgstr "Delete this measure"
 
@@ -701,17 +775,17 @@ msgid "header_measure"
 msgstr "Measure ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
-#: src/osha/oira/survey.py:398 src/osha/oira/templates/risk_actionplan.pt:90
+#: src/osha/oira/survey.py:398
 msgid "label_measure_action_plan"
 msgstr "General approach (to eliminate or reduce the risk)"
 
 #. Default: Specific action(s) required to implement this approach
-#: src/osha/oira/survey.py:400 src/osha/oira/templates/risk_actionplan.pt:98
+#: src/osha/oira/survey.py:400
 msgid "label_measure_prevention_plan"
 msgstr "Specific action(s) required to implement this approach"
 
 #. Default: Level of expertise and/or requirements needed
-#: src/osha/oira/survey.py:402 src/osha/oira/templates/risk_actionplan.pt:107
+#: src/osha/oira/survey.py:402
 msgid "label_measure_requirements"
 msgstr "Level of expertise and/or requirements needed"
 
@@ -1663,13 +1737,6 @@ msgstr ""
 "results. You can, if desired, add some extra comments that should be "
 "included in this report in the field below."
 
-#. Default: Please leave any comments you may have on the question above in this
-#. field
-#: src/osha/oira/templates/report.pt:28
-msgid "label_report_comment"
-msgstr ""
-"Please leave any comments you may have on the question above in this field"
-
 #. Default: Download
 #: src/osha/oira/templates/report_actionplan.pt:27
 #: src/osha/oira/templates/report_identification.pt:24
@@ -2108,15 +2175,6 @@ msgstr "Medium"
 msgid "priority_high"
 msgstr "High"
 
-#. Default: Please leave any comments you may have on the question above in this
-#. field. These comments will be used in the action plan.
-#: src/osha/oira/templates/risk_evaluation.pt:124
-#: src/osha/oira/templates/risk_identification.pt:41
-msgid "label_comment"
-msgstr ""
-"Please leave any comments you may have on the question above in this field. "
-"These comments will be used in the action plan."
-
 #. Default: Not applicable
 #: src/osha/oira/templates/risk_identification.pt:24
 msgid "label_not_applicable"
@@ -2395,6 +2453,21 @@ msgstr "Hide"
 #: src/osha/oira/templates/webhelpers.pt:225
 msgid "action_show"
 msgstr "Show"
+
+#~ msgid "help_header_preparation"
+#~ msgstr "1. Preparation"
+
+#~ msgid "label_help_start"
+#~ msgstr "1. Preparation"
+
+#~ msgid "label_report_comment"
+#~ msgstr ""
+#~ "Please leave any comments you may have on the question above in this field"
+
+#~ msgid "label_comment"
+#~ msgstr ""
+#~ "Please leave any comments you may have on the question above in this "
+#~ "field. These comments will be used in the action plan."
 
 #~ msgid "help_evaluation_optional"
 #~ msgstr ""

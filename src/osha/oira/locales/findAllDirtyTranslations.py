@@ -8,7 +8,7 @@ from subprocess import *
 
 langs = ['en', 'bg', 'cs', 'da', 'de', 'el', 'es', 'et', 'fi', 'fr', 'hu',
     'is', 'it', 'lt', 'lv', 'mt', 'nl', 'nl_BE', 'no', 'pl', 'pt', 'ro', 'sk', 'sl',
-    'sv', ]
+    'sv', 'ca']
 
 for lang in langs:
     if os.path.exists(lang):

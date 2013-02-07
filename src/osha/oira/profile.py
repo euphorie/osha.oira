@@ -39,6 +39,7 @@ class OSHAUpdate(profile.Update):
     """
     grok.layer(interfaces.IOSHAClientSkinLayer)
     grok.template('update')
+    grok.name('update')
 
     def ProfileQuestions(self):
         return _questions(self.context)

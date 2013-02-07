@@ -57,8 +57,7 @@
         </label>
         <label><tal:span i18n:translate="label_session_title">Enter a title for your Risk Assessment</tal:span>:
             <input style="margin-left:1em;" type="text" name="title:utf8:ustring"/>
-            <a class="icon info clicktip" href="${webhelpers/help_url}#sessions" 
-                i18n:attributes="title session_title_tooltip"
+            <a class="icon info pat-tooltip" data-pat-tooltip="source: content;" href="${webhelpers/help_url}#sessions" 
                 i18n:translate="session_title_tooltip">
                     Once you have started an OiRA tool session, you will be able to stop
                     before the end. 

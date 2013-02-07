@@ -85,7 +85,7 @@
         <fieldset class="condensed">
         <legend><span i18n:translate="label_description">Description</span>
         <a href="#standardSolutions" class="button small solutions" tal:condition="python:view.solutions" i18n:translate="">Standard solutions</a>
-            <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip" i18n:attributes="title actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</a>
+            <a class="icon info pat-tooltip" data-pat-tooltip="content: source;" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip" i18n:attributes="title actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</a>
         </legend> 
         <textarea class="actionPlan" id="actionplan-1" 
             type="text" 
@@ -116,12 +116,13 @@
 
     <div class="column">
         <fieldset class="condensed">
-            <label><tal:span i18n:translate="label_action_plan_responsible">Who is responsible?</tal:span> <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_responsible_tooltip" i18n:attributes="title actionplan_measure_responsible_tooltip">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</a>
+          <label><tal:span i18n:translate="label_action_plan_responsible">Who is responsible?</tal:span>
+                <a class="icon info pat-tooltip" data-pat-tooltip="source: content;" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_responsible_tooltip">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</a>
                 <input type="text" class="responsible" name="measure.responsible:utf8:ustring:records" value="${actionplan/responsible|nothing}"/>
             </label>
 
             <label id="label-budget-${number}" class="${python:'error' if exists('errors/budget') else None}"><tal:span i18n:translate="label_action_plan_budget">Budget</tal:span>
-                <a class="icon info clicktip" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_budget_tooltip" i18n:attributes="title actionplan_measure_budget_tooltip">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</a>
+                <a class="icon info pat-tooltip" data-pat-tooltip="source: content;" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_budget_tooltip">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</a>
                 <input type="text" class="budget" name="measure.budget:records" id="input-budget-${number}" value="${actionplan/budget|nothing}"/>
                 <p class="focustip error target-id-input-budget-${number}" tal:condition="exists:errors/budget" i18n:translate="error_invalid_budget">
                 Please enter the budget in whole Euros.</p>

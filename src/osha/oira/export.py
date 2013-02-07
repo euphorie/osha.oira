@@ -21,7 +21,7 @@ class ExportSurvey(BaseExportSurvey):
         for field in PQ_FIELDS:
             value = getattr(profile, field, None)
             if value:
-                etree.SubElement(node, field.replace('_', '-'), value)
+                etree.SubElement(node, field.replace('_', '-')).text = value
         return node
 
 

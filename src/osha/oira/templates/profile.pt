@@ -38,22 +38,22 @@
           <label><input type="radio" class="presence" required="required" name="pq${question/id}.present" value="no" checked="${python:'checked' if not current else None}"/> <tal:span i18n:translate="">No</tal:span></label>
         </fieldset>
 
-        <fieldset class="comprehensive radioList dependsOn-pq${question/id}.present-equals-yes">
+        <fieldset class="comprehensive radioList pat-depends" data-pat-depends="pq${question/id}.present=yes">
           <legend>${question/label_multiple_present}</legend>
           <label><input type="radio" class="multiple" name="pq${question/id}.multiple" value="yes" checked="${python:'checked' if current and len(current)&gt;1 else None}"/> <tal:span i18n:translate="">Yes</tal:span></label>
           <label><input type="radio" class="multiple" name="pq${question/id}.multiple" value="no" checked="${python:'checked' if not current or len(current)==1 else None}"/> <tal:span i18n:translate="">No</tal:span></label>
         </fieldset>
 
-        <fieldset class="comprehensive dependsOn-pq${question/id}.present-equals-yes dependsOn-pq${question/id}.multiple-on">
+        <fieldset class="comprehensive pat-depends" data-pat-depends="condition: pq${question/id}.present=yes and pq${question/id}.multiple">
           <legend>
-            <span class="dependsOn-pq${question/id}.multiple-equals-no">${question/label_single_occurance}</span>
-            <span class="dependsOn-pq${question/id}.multiple-equals-yes">${question/label_multiple_occurances}</span>
+            <span class="pat-depends" data-pat-depends="pq${question/id}.multiple=no">${question/label_single_occurance}</span>
+            <span class="pat-depends" data-pat-depends="pq${question/id}.multiple=yes">${question/label_multiple_occurances}</span>
           </legend>
           <ol class="form-iteration">
             <li tal:condition="python:not current"><input required="required" type="text" name="${question/id}:utext:list" /> <button type="button" class="small remove" i18n:translate="">Remove</button></li>
-            <li tal:repeat="title current"><input required="required" type="text" name="${question/id}:utext:list" value="${title}"/> <button type="button" class="small remove dependsOn-pq${question/id}.multiple-equals-yes" i18n:translate="">Remove</button></li>
+            <li tal:repeat="title current"><input required="required" type="text" name="${question/id}:utext:list" value="${title}"/> <button type="button" class="small remove pat-depends" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="">Remove</button></li>
           </ol>
-          <p class="buttons addButton dependsOn-pq${question/id}.multiple-equals-yes">
+          <p class="buttons addButton pat-depends" data-pat-depends="pq${question/id}.multiple=yes">
             <button class="small" type="button" i18n:translate="">Add another item</button>
           </p>
         </fieldset>

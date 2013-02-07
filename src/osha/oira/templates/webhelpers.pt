@@ -14,6 +14,8 @@
     <meta name="viewport" content="width = device-width" />
     <meta name="viewport" content="user-scalable=no" />
     <link rel="icon" type="image/png" href="client/++resource++euphorie.media/favicon.png" />
+  <metal:javascript define-macro="javascript" meta:interpolation="true" tal:define="lib_url client/++resource++euphorie.libraries">
+    <script type="text/javascript" src="${client/++resource++euphorie.libraries}/modernizr-2.6.1.min.js"></script>
   </metal:headers>
 
   <metal:home define-macro="homelink" meta:interpolation="true" tal:define="logo_mode webhelpers/logoMode">
@@ -79,7 +81,6 @@
   <metal:javascript define-macro="javascript" meta:interpolation="true" tal:define="lib_url client/++resource++euphorie.libraries">
     <!--[if lte IE 8]> <script type="text/javascript" src="${lib_url}/excanvas.min.js"></script> <![endif]-->
     <tal:block condition="webhelpers/debug_mode">
-        <script type="text/javascript" src="${lib_url}/modernizr-2.6.1.min.js"></script>
         <script type="text/javascript" src="${lib_url}/jquery-1.8.3.min.js"></script>
         <script type="text/javascript" src="${lib_url}/jquery-ui-1.9.1.js"></script>
         <script type="text/javascript" src="${lib_url}/jquery-ui-i18n.js"></script>

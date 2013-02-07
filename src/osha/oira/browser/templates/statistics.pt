@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      i18n:domain="euphorie"
+      id="statistics"
+      metal:use-macro="context/@@layout/macros/layout">
+  <body>
+    <metal:title fill-slot="title" i18n:translate="title_statistics">Statistics Reporting</metal:title>
+    <metal:content fill-slot="content">
+    <form method="post" class="statisticsParametersForm">
+        <input type="hidden" name="submit" value="1"/>
+        <label for="type">Report Type</label><br />
+        <select name="type" id="type">
+            <option value="overview">EU-OSHA Overview</option>
+            <option value="country">Country</option>
+            <option value="tool">Tool</option>
+        </select><br />
+        <select name="country" id="country">
+            <option tal:repeat="country view/countries" value="eu" tal:attributes="value country/id" tal:content="country/title">European Union</option>
+        </select>
+        <select name="tool" id="tool">
+            <option tal:repeat="tool view/tools" value="cy/hairdressers/cyprus_hairdressers" tal:attributes="value tool" tal:content="tool">
+        </select><br />
+        <label for="period">Report Period</label>
+        <fieldset name="period">
+            <select name="year:int">
+                <option tal:repeat="year view/years" value="2011" tal:attributes="value year" tal:content="year">2011</option>
+            </select><br />
+            <input type="radio" name="date_method" value="year" checked="checked">Year<br />
+            <input type="radio" name="date_method" value="month" checked="checked">
+                <select name="month:int">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select><br />
+            <input type="radio" name="date_method" value="quarter">
+                <select name="quarter:int">
+                    <option value="1">1st Quarter</option>
+                    <option value="2">2nd Quarter</option>
+                    <option value="3">3rd Quarter</option>
+                    <option value="4">4th Quarter</option>
+                </select><br />
+
+        </fieldset>
+        <input type="submit" i18n:attributes="value Submit" value="Submit">
+    </form>
+    </metal:content>
+    <metal:scripts fill-slot="scripts">
+    <script type="text/javascript">
+        function showhide(value) {
+            if (value == 'country') {
+                jQuery('#tool').hide();
+                jQuery('#country').show();
+            }
+            if (value == 'tool') {
+                jQuery('#tool').show();
+                jQuery('#country').hide();
+            }
+            if (value == 'overview') {
+                jQuery('#tool').hide();
+                jQuery('#country').hide();
+            }
+        }
+        jQuery(document).ready(function () {
+                showhide(jQuery('#type').attr('value'));
+                jQuery('#type').change(function (ev) {
+                    showhide(ev.target.value);
+                });
+        });
+    </script>
+    </metal:scripts>
+  </body>
+</html>

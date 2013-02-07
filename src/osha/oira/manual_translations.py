@@ -32,7 +32,6 @@ _("header_password", default=u"Password")
 _("risk_solution_header", default=u"Measure ${number}")
 _("nav_surveys", default=u"OiRA Tools")
 _("Survey", default=u"OiRA Tool")
-_("help_header_sessions", default=u"Sessions")
 _("label_sessions", default=u"Sessions")
 _("Survey import", default=u"OiRA Tool import")
 _("Import survey version", default=u"Import OiRA tool version")
@@ -102,20 +101,36 @@ _("help_default_priority", default=u"You can help the end-user by selecting a "
 _("help_default_severity", default=u"Indicate the severity if this risk "
     u"occurs.")
 _("help_help_introduction", default=u"General information on risk assessment")
+_("label_help_authentication", default=u"Registration")
+_("help_header_authentication", default=u"Registration")
 _("help_authentication", default=u"This text should explain how to register "
     u"and login.")
+_("help_header_sessions", default=u"Carrying out your risk assessment")
+_("label_help_sessions", default=u"Carrying out your risk assessment")
 _("help_sessions", default=u"This text should describe the main functions of "
     u"the OiRA Tool.")
+_("help_header_start", default=u"1. Preparation")
+_("label_help_preparation", default=u"1. Preparation")
 _("help_preparation", default=u"This text should explain the 2 types of "
     u"profile questions.")
+_("help_header_identification", default=u"2. Identification")
+_("label_help_identification", default=u"2. Identification")
 _("help_identification", default=u"This text should explain how the risk "
     u"identification works.")
+_("help_header_evaluation", default=u"3. Evaluation")
+_("label_help_evaluation", default=u"3. Evaluation")
 _("help_evaluation", default=u"This text should explain how to evaluate the "
     u"identified risks.")
+_("help_header_actionplan", default=u"4. Action Plan")
+_("label_help_actionplan", default=u"4. Action Plan")
 _("help_actionplan", default=u"This text should explain how to fill in the "
     u"Action plan.")
+_("help_header_report", default=u"5. Report")
+_("label_help_report", default=u"5. Report")
 _("help_reports", default=u"This text should describe how the report can "
     u"either be saved or printed.")
+_("label_help_finalwords", default=u"What happens next?")
+_("help_header_finalwords", default=u"What happens next?")
 _("help_finalwords", default=u"General final recommendations.")
 
 # 3044:

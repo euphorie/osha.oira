@@ -60,7 +60,7 @@
     </tal:node>
     <li>
         <em>
-        <strong tal:condition="view/risk_not_present_nodes" i18n:translate="header_risks_not_present">Hazards/problems that are not present in your organisation</strong>
+        <strong tal:condition="view/risk_not_present_nodes" i18n:translate="header_risks_not_present">Hazards/problems that have been managed or are not present in your organisation</strong>
         </em>
     </li>
     <tal:node repeat="node view/risk_not_present_nodes">
@@ -81,8 +81,8 @@
     <tal:block define="zodbnode python:view.getZodbNode(node);
                         title python:view.title(node, zodbnode);
                         status python:view.risk_status(node, zodbnode)">
-        <div class="warning" 
-             tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'warning', 'no-actionplans':'warning', 'unevaluated':'warning'}[status]"
+        <div class="message warning" 
+             tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'message warning', 'no-actionplans':'message warning', 'unevaluated':'message warning'}[status]"
              tal:define="show_negate_warning python:view.show_negate_warning(node, zodbnode)"
              tal:omit-tag="python:status=='unanswered'">
             <h4>
@@ -162,8 +162,8 @@
     <tal:block define="zodbnode python:view.getZodbNode(node);
                         title python:view.title(node, zodbnode);
                         status python:view.risk_status(node, zodbnode)">
-    <div class="warning" 
-            tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'warning', 'no-actionplans':'warning', 'unevaluated':'warning'}[status]"
+    <div class="message warning" 
+            tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'message warning', 'no-actionplans':'message warning', 'unevaluated':'message warning'}[status]"
             tal:define="show_negate_warning python:view.show_negate_warning(node, zodbnode)"
             tal:omit-tag="python:status=='unanswered'">
         <h4>
@@ -218,7 +218,7 @@
 
 <tal:if define="risk_not_present_nodes view/risk_not_present_nodes"
         condition="risk_not_present_nodes">
-<h2 i18n:translate="header_risks_not_present">Hazards/problems that are not present in your organisation</h2>
+<h2 i18n:translate="header_risks_not_present">Hazards/problems that have been managed or are not present in your organisation</h2>
 <tal:block 
         define="identification_url python:webhelpers.survey_url(phase='identification')"
         repeat="node risk_not_present_nodes">

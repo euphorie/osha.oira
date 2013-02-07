@@ -1,19 +1,23 @@
 # -*- coding: utf-8 -*-
 
 import logging
+from AccessControl import Unauthorized
+from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.utils import safe_unicode
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
-from AccessControl import Unauthorized
+from datetime import datetime
 from five import grok
+
+from euphorie.content.utils import summarizeCountries
 
 from z3c.saconfig import Session
 from zope.sqlalchemy import datamanager
 import transaction
 
-from Products.CMFPlone.utils import safe_unicode
 import urllib2
-from datetime import datetime
 
 logger = logging.getLogger("osha.oira/browser.statistics")
 
@@ -96,16 +100,42 @@ class ShowStatistics(grok.View):
     grok.context(IPloneSiteRoot)
     grok.name('show-statistics')
 
+    filename = { 'overview': 'usage_statistics_overview.rptdesign',
+                 'country': 'usage_statistics_country.rptdesign',
+                 'tool': 'usage_statistics_tool.rptdesign',
+               }
+
+    def update(self):
+        countries = summarizeCountries(aq_inner(self.context['sectors']),
+                self.request)
+        self.countries = countries['region'] + \
+                         countries['country']
+        self.years = range(datetime.now().year, 2010, -1)
+        self.tools = []
+        for root in self.context.objectValues():
+            for country in root.objectValues():
+                for sector in country.objectValues():
+                    for survey_or_group in sector.objectValues():
+                        if survey_or_group.portal_type == 'euphorie.survey':
+                            self.tools.append('/'.join(survey_or_group.getPhysicalPath()[-3:]))
+                        elif survey_or_group.portal_type == 'euphorie.surveygroup':
+                            self.tools.extend(['/'.join(survey.getPhysicalPath()[-4:])
+                                for survey in survey_or_group.objectValues()])
+
     def render(self):
+        if not 'submit' in self.request.form:
+            template = ViewPageTemplateFile('templates/statistics.pt')
+            return template(self)
         ptool = getToolByName(self.context, 'portal_properties')
         site_properties = ptool.site_properties
-        URL = site_properties.getProperty('birt_report_url')
-        if not URL:
+        url = site_properties.getProperty('birt_report_url')
+        if not url:
             IStatusMessage(self.request).addStatusMessage(
                     "birt_report_url not set, please contact an administrator",
                     type=u'error')
             return self.request.response.redirect(self.context.absolute_url())
-        #URL = 'http://localhost:8080/birt-viewer/frameset?__report=report/OiRA-Reports/usage_statistics.rptdesign&__sessionId=20120131_180440_301&__format=pdf&__pageoverflow=0&__asattachment=true&__overwrite=false'
+        #URL = 'http://localhost:8080/birt-viewer/frameset?__format=pdf&__pageoverflow=0&__asattachment=true&__overwrite=false'
+        # __report=report/OiRA-Reports/usage_statistics.rptdesign
         pm = getToolByName(self.context, 'portal_membership')
         if pm.isAnonymousUser():
             raise Unauthorized, 'must be logged in to view statistics'
@@ -115,7 +145,30 @@ class ShowStatistics(grok.View):
         #parsedquery = urlparse.parse_qs(parsedurl.query)
         #parsedquery['member_id'] = member.id
         #url = urlparse.urlunparse(parsedurl[:4] + (urllib.urlencode(parsedquery),) + parsedurl[5:])
-        url = URL + '&sector=%s' % member.id
+
+        report_type = self.request.get('type')
+        filename = self.filename[report_type]
+        url = "&".join([url, '__report=report/OiRA-Reports/%s' % filename])
+
+        #url = url + '&sector=%s' % member.id
+
+        if report_type == 'country':
+            url = "&".join([url, 'country=%s' % self.request.get('country')])
+        elif report_type == 'tool':
+            url = "&".join([url, 'tool=%s' % self.request.get('tool')])
+        elif report_type == 'overview':
+            url = "&".join([url, 'sector=%25'])
+
+        year = self.request.get('year')
+        month = 0
+        quarter = 0
+        if self.request.get('date_method') == 'month':
+            month = self.request.get('month')
+        elif self.request.get('date_method') == 'quarter':
+            quarter = self.request.get('quarter')
+
+        url = "&".join([url, 'year=%d' % year, 'month=%d' % month, 'quarter=%d' %
+            quarter])
 
         try:
             page = urllib2.urlopen(url)

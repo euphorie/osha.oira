@@ -1,7 +1,7 @@
-from plone.app.z3cform.interfaces import IPloneFormLayer
+from plonetheme.nuplone.z3cform.interfaces import INuPloneFormLayer
 from z3c.form.interfaces import ITextAreaWidget
 
-class IOiRAFormLayer(IPloneFormLayer):
+class IOiRAFormLayer(INuPloneFormLayer):
     """ Browser layer to indicate we want OiRA form components.
     """
 

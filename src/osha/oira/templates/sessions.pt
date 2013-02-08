@@ -16,8 +16,10 @@
   </head>
   <body tal:define="sessions view/sessions">
     <h1 i18n:translate="header_session">OiRA Tool</h1>
-    
+
     <p tal:define="country webhelpers/country" class="country ${country}" id="country">${country}</p>
+    
+    <tal:block replace="tile:statusmessages"/>
     
     <tal:block condition="python:sessions">
       <h2 i18n:translate="header_select_session">Select an earlier session to complete or review</h2>
@@ -31,14 +33,11 @@
                 <tal:span i18n:translate="lable_session_modified">saved on
                 <tal:block i18n:name="date">${python:tools.formatDate(session['modified'])}</tal:block></tal:span></form></td>
             <td class="actions span-5">
-              <form method="post" action="${context/absolute_url}/@@json-rename-session" class="renameSessionForm jsOnly">
-                <input type="hidden" name="id" value="${session/id}" />
-                <button type="button" class="small rename floatAfter" i18n:translate="label_rename">Rename</button>
-              </form>
+              <a href="${context/absolute_url}/@@rename-session?id=${session/id}" class="small button pat-modal" i18n:translate="label_rename">Rename</a>
               <form method="post" action="delete-session" class="removeSessionForm">
                 <input type="hidden" name="json_url" value="${context/absolute_url}/@@json-delete-session"/>
                 <input type="hidden" name="id" value="${session/id}" />
-                <button type="button" class="small delete floatAfter" i18n:translate="label_delete">Delete</button>
+                <button type="button" class="small" i18n:translate="label_delete">Delete</button>
               </form>
             </td>
           </tr>

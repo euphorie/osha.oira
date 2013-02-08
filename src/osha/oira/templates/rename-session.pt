@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      i18n:domain="euphorie"
+      meta:interpolation="true"
+      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers">
+  <head>
+    <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
+    <metal:meta use-macro="webhelpers/macros/headers"/>
+    <metal:css use-macro="webhelpers/macros/css"/>
+  </head>
+  <body>
+    <h1 i18n:translate="">Change name of session</h1>
+
+    <form method="post" action="${request/URL}?id=${request/form/id}">
+      <div class="panel-body">
+        <p class="current-name" i18n:translate="">Current name: "<cite i18n:name="name">${view/original_title}</cite>"</p>
+        <fieldset tal:define="widget view/widgets/title" class="${python:'error' if widget.error else None}">
+          <h2 i18n:translate="">Please fill out a new name for this survey</h2>
+          <input placeholder="${view/original_title}" autofocus="autofocus" type="text" name="${widget/name}" class="huge${python: ' error' if widget.error else ''}" size="40" value="${python: widget.value if widget.value!= view.original_title else None}" />
+          <tal:error condition="widget/error" replace="structure widget/error/render|nothing"/>
+        </fieldset>
+
+        <fieldset>
+          <button type="submit" name="form.buttons.save" value="Save" i18n:translate="" class="close-panel">Save changes</button>
+          <button id="btnCancel" type="button" name="form.buttons.cancel" value="Cancel" i18n:translate="" class="close-panel">Cancel</button>
+        </fieldset>
+      </div>
+    </form>
+
+    <script type="text/javascript">
+      document.getElementById("btnCancel").type="submit";
+    </script>
+  </body>
+</html>
+
+

@@ -148,7 +148,7 @@ class ShowStatistics(grok.View):
 
         report_type = self.request.get('type')
         filename = self.filename[report_type]
-        url = "&".join([url, '__report=report/OiRA-Reports/%s' % filename])
+        url = "&".join([url, '__report=statistics/%s' % filename])
 
         #url = url + '&sector=%s' % member.id
 

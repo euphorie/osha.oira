@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.2.37syslab1 (unreleased)
+--------------------------
+
+- change BIRT url [reinhardt]
+
 1.2.37 (2013-02-06)
 -------------------
 

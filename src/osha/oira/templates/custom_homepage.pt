@@ -1,18 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      id="homepage">
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      id="homepage"
+      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers">
   <head>
-    <title>OiRA - Online interactive Risk Assessment</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="icon" type="image/png" href="client/++resource++euphorie.media/favicon.png" />
-    <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++euphorie.style/screen.css" />
-    <link rel="stylesheet" type="text/css" media="only screen and (min-width:768px)" title="ebc" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++osha.style/oira.min.css" />
-    <!--[if lte IE 6]> <link rel="stylesheet" type="text/css" media="all" href="++resource++screen-ie6.css"/> <link rel="stylesheet" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
-    <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-ie7.min.css"/> <link rel="stylesheet" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
-    <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-ie8.min.css" /> <link rel="stylesheet" href="http://client.oiraproject.eu/++resource++euphorie.style/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
+    <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
+    <metal:meta use-macro="webhelpers/macros/headers"/>
+    <metal:css use-macro="webhelpers/macros/css"/>
     <style type="text/css" media="all">
         @media only screen and (max-width: 767px) {
             #homepage h1 span {
@@ -37,26 +36,11 @@
             cursor: pointer;
         }
     </style>
-  
   </head>
   <body>
     <tal:render content="structure view/render_body"/>
-    <p id="appendix">
-        <a href="http://client.oiraproject.eu"><img class="appendix_oira_logo" src="++resource++osha.oira.images/footer_logo.png"/></a>
-        Produced by <a href="http://osha.europa.eu" target="_new">EU-OSHA</a>. 
-        |
-        <a href="http://client.oiraproject.eu/about">About</a>
-        |
-        <a href="http://client.oiraproject.eu/terms-and-conditions">Privacy</a>
-        |
-        <a href="http://client.oiraproject.eu/disclaimer">Disclaimer</a>
-        |
-        <a href="http://www.gnu.org/licenses/gpl.html">GPL License</a>
-        |
-        <a href="http://creativecommons.org/licenses/by-sa/2.5/"
-            alt="CC License">
-            <img class="creative_commons_logo" src="++resource++osha.oira.images/creative_commons.png"/>
-        </a>
-    </p>
+    <metal:css use-macro="webhelpers/macros/appendix"/>
+    <metal:css use-macro="webhelpers/macros/javascript"/>
+    <tal:block replace="tile:client-analytics"/>
   </body>
 </html>

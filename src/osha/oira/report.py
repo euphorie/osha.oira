@@ -1,7 +1,8 @@
 from five import grok
 from euphorie.client import report
 from euphorie.client.session import SessionManager
-from osha.oira.interfaces import IOSHAReportPhaseSkinLayer
+from .interfaces import IOSHAReportPhaseSkinLayer
+from . import _
 
 grok.templatedir("templates")
 
@@ -27,3 +28,18 @@ class ReportView(report.ReportView):
 
             self.request.response.redirect(url)
             return
+
+
+COLUMN_ORDER = ['title', 'priority', 'action_plan', 'planning_end',
+                'responsible', 'budget', 'number', 'comment']
+
+
+class ActionPlanTimeline(report.ActionPlanTimeline):
+    grok.layer(IOSHAReportPhaseSkinLayer)
+
+    columns = sorted(
+            (col for col in report.ActionPlanTimeline.columns
+                if col[1] in COLUMN_ORDER),
+            key=lambda d, co=COLUMN_ORDER: co.index(d[1]))
+    columns.insert(-2, (None, None, _('report_timeline_progress',
+        default=u'Progress (pending, in process, implemented)')))

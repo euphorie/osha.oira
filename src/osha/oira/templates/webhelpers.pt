@@ -16,6 +16,7 @@
     <link rel="icon" type="image/png" href="client/++resource++euphorie.media/favicon.png" />
   <metal:javascript define-macro="javascript" meta:interpolation="true" tal:define="lib_url client/++resource++euphorie.libraries">
     <script type="text/javascript" src="${client/++resource++euphorie.libraries}/modernizr-2.6.1.min.js"></script>
+    </metal:javascript>
   </metal:headers>
 
   <metal:home define-macro="homelink" meta:interpolation="true" tal:define="logo_mode webhelpers/logoMode">
@@ -30,26 +31,20 @@
 
   <metal:css define-macro="css" meta:interpolation="true" 
          tal:define="base_url client/++resource++euphorie.style;
-	             oira_base_url client/++resource++osha.oira.stylesheets; 
+	             oira_base_url client/++resource++osha.style; 
                      on_mobile webhelpers/on_mobile">
 
     <tal:block condition="webhelpers/debug_mode">
       <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen.css" />
-      <link rel="stylesheet" type="text/css" media="all" href="${base_url}/datepicker.css" />
-      <link rel="stylesheet" type="text/css" media="only screen and (min-width:768px)" title="ebc" href="${base_url}/screen-osha.css" />
-      <link rel="stylesheet" type="text/css" media="all" href="${oira_base_url}/main.css" />
-      <!--[if lte IE 6]> <link rel="stylesheet" type="text/css" media="all" href="++resource++screen-ie6.css"/> <link rel="stylesheet" href="${base_url}/screen-osha.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
-      <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie7.css"/> <link rel="stylesheet" href="${base_url}/screen-osha.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
-      <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie8.css" /> <link rel="stylesheet" href="${base_url}/screen-osha.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
+      <link rel="stylesheet" type="text/css" media="all" href="${oira_base_url}/screen.css" />
+      <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie7.css"/> <![endif]-->
+      <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie8.css" /> <![endif]-->
     </tal:block>
     <tal:block condition="not:webhelpers/debug_mode">
       <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen.css" />
-      <link rel="stylesheet" type="text/css" media="all" href="${base_url}/datepicker.min.css" />
-      <link rel="stylesheet" type="text/css" media="only screen and (min-width:768px)" title="ebc" href="${base_url}/screen-osha.min.css" />
-      <link rel="stylesheet" type="text/css" media="all" href="${oira_base_url}/oira.min.css" />
-      <!--[if lte IE 6]> <link rel="stylesheet" type="text/css" media="all" href="++resource++screen-ie6.css"/> <link rel="stylesheet" href="${base_url}/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
-      <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie7.min.css"/> <link rel="stylesheet" href="${base_url}/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
-      <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie8.min.css" /> <link rel="stylesheet" href="${base_url}/screen-osha.min.css" type="text/css" media="all" title="ebc" charset="utf-8" /><![endif]-->
+      <link rel="stylesheet" type="text/css" media="all" href="${oira_base_url}/screen.min.css" />
+      <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie7.min.css"/> <![endif]-->
+      <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${base_url}/screen-ie8.min.css" /> <![endif]-->
     </tal:block>
     <link tal:define="sector_url webhelpers/sector_url" 
           tal:condition="python:sector_url and not on_mobile" rel="stylesheet" type="text/css" media="all" href="${sector_url}/@@sector.css" />
@@ -59,7 +54,7 @@
             rel="stylesheet" 
             type="text/css" 
             media="all" 
-            href="client/++resource++osha.oira.stylesheets/lowercase_headers.css" />
+            href="client/++resource++osha.style/lowercase_headers.css" />
     <style type="text/css" media="all">
         .report #appendix img {
             margin-bottom: 0;

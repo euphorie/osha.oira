@@ -1,6 +1,6 @@
 from five import grok
-from osha.oira.interfaces import IOSHAContentSkinLayer
 from plonetheme.nuplone.skin import error
+from ..interfaces import IOSHAContentSkinLayer
 
 grok.templatedir("templates")
 

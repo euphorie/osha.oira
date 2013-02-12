@@ -9,8 +9,8 @@ from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.client.country import View as EuphorieView
 from euphorie.client.country import IClientCountry
 from euphorie.client.model import SurveySession
-from .interfaces import IOSHAClientSkinLayer
-from . import _
+from ..interfaces import IOSHAClientSkinLayer
+from .. import _
 
 
 grok.templatedir("templates")
@@ -23,7 +23,6 @@ class View(EuphorieView):
 
 class RenameSessionSchema(form.Schema):
     title = schema.TextLine(required=False)
-
 
 
 class RenameSession(form.SchemaForm):

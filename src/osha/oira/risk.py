@@ -1,26 +1,10 @@
 from five import grok
-from euphorie.client import risk
 from euphorie.content.risk import Edit as RiskEditForm
 from euphorie.content.risk import Add as RiskAddForm
-from osha.oira import interfaces
-from osha.oira import _
+from .interfaces import IOSHAContentSkinLayer
+from . import _
 
 grok.templatedir("templates")
-
-
-class OSHAIdentificationView(risk.IdentificationView):
-    grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
-    grok.template("risk_identification")
-
-
-class OSHAEvaluationView(risk.EvaluationView):
-    grok.layer(interfaces.IOSHAEvaluationPhaseSkinLayer)
-    grok.template("risk_evaluation")
-
-
-class OSHAActionPlanView(risk.ActionPlanView):
-    grok.layer(interfaces.IOSHAActionPlanPhaseSkinLayer)
-    grok.template("risk_actionplan")
 
 
 class OSHAFormMixin:
@@ -49,7 +33,7 @@ class OSHAFormMixin:
 class Add(RiskAddForm, OSHAFormMixin):
     """ Override to allow us to dynamically set field descriptions
     """
-    grok.layer(interfaces.IOSHAContentSkinLayer)
+    grok.layer(IOSHAContentSkinLayer)
 
     def updateFields(self):
         super(Add, self).updateFields()
@@ -59,7 +43,7 @@ class Add(RiskAddForm, OSHAFormMixin):
 class Edit(RiskEditForm, OSHAFormMixin):
     """ Override to allow us to dynamically set field descriptions
     """
-    grok.layer(interfaces.IOSHAContentSkinLayer)
+    grok.layer(IOSHAContentSkinLayer)
 
     def updateFields(self):
         super(Edit, self).updateFields()

@@ -1,7 +1,7 @@
 import logging
 from zope.interface import Interface
 from five import grok
-from osha.oira.interfaces import IOSHAClientSkinLayer
+from ..interfaces import IOSHAClientSkinLayer
 
 log = logging.getLogger(__name__)
 grok.templatedir("templates")

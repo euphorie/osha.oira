@@ -4,9 +4,9 @@ from zope.interface import directlyProvidedBy
 from zope.interface import directlyProvides
 from zope.publisher.interfaces.browser import IBrowserSkinType
 from ZPublisher.BaseRequest import DefaultPublishTraverse
-from osha.oira.interfaces import IProductLayer
-from osha.oira.interfaces import IOSHAClientSkinLayer
 from euphorie.client.client import IClient
+from ..interfaces import IProductLayer
+from ..interfaces import IOSHAClientSkinLayer
 
 grok.templatedir("templates")
 

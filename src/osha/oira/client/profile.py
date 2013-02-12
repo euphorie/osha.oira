@@ -1,7 +1,7 @@
 from five import grok
 from euphorie.client import profile
-from . import interfaces
-from . import _
+from .. import interfaces
+from .. import _
 
 grok.templatedir("templates")
 

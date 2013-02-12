@@ -1,7 +1,7 @@
 from five import grok
 from z3c.form import button
 from euphorie.client.company import Company as GenericCompany
-from osha.oira.interfaces import IOSHAReportPhaseSkinLayer
+from ..interfaces import IOSHAReportPhaseSkinLayer
 
 grok.templatedir("templates")
 

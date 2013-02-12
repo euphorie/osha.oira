@@ -1,25 +1,18 @@
 from five import grok
 from zope.component import getUtility
-
 from plone.directives import dexterity
 from plone.dexterity.interfaces import IDexterityFTI
-
 from euphorie.content import MessageFactory as _
 from euphorie.content.module import IModule
 from euphorie.content.module import View as ModuleView
-from euphorie.client.module import EvaluationView as ModuleEvaluationView
-from euphorie.client.module import ActionPlanView as ModuleActionPlanView
-from euphorie.client.module import IdentificationView as \
-                                        ModuleIdentificationView
-
-from . import interfaces
+from .interfaces import IOSHAContentSkinLayer
 
 grok.templatedir("templates")
 
 
 class View(ModuleView):
     grok.template("module_view")
-    grok.layer(interfaces.IOSHAContentSkinLayer)
+    grok.layer(IOSHAContentSkinLayer)
 
     @property
     def portal_type(self):
@@ -29,21 +22,6 @@ class View(ModuleView):
             portal_type = self.context.portal_type
             fti = getUtility(IDexterityFTI, name=portal_type)
             return fti.Title()
-
-
-class EvaluationView(ModuleEvaluationView):
-    grok.layer(interfaces.IOSHAEvaluationPhaseSkinLayer)
-    grok.template("module_evaluation")
-
-
-class IdentificationView(ModuleIdentificationView):
-    grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
-    grok.template("module_identification")
-
-
-class ActionPlanView(ModuleActionPlanView):
-    grok.layer(interfaces.IOSHAActionPlanPhaseSkinLayer)
-    grok.template("module_actionplan")
 
 
 class Edit(dexterity.EditForm):

@@ -1,8 +1,8 @@
 from five import grok
 from euphorie.content.risk import Edit as RiskEditForm
 from euphorie.content.risk import Add as RiskAddForm
-from .interfaces import IOSHAContentSkinLayer
-from . import _
+from ..interfaces import IOSHAContentSkinLayer
+from .. import _
 
 grok.templatedir("templates")
 

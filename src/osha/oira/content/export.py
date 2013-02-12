@@ -3,7 +3,7 @@ from lxml import etree
 from euphorie.content import export
 from euphorie.content import upload
 from euphorie.content.profilequestion import IProfileQuestion
-from .interfaces import IOSHAContentSkinLayer
+from ..interfaces import IOSHAContentSkinLayer
 
 
 PQ_FIELDS = ['label_multiple_present',

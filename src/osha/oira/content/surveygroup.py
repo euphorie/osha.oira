@@ -1,18 +1,15 @@
 from five import grok
 from zope.site.hooks import getSite
 from Acquisition import aq_parent
-
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
-
 from plone.app.kss.plonekssview import PloneKSSView
-
 from plonetheme.nuplone.skin import actions
 from plonetheme.nuplone.utils import getPortal
 from euphorie.content import MessageFactory as _
 from euphorie.content import surveygroup
 from euphorie.content.survey import ISurvey
-from .interfaces import IOSHAContentSkinLayer
+from ..interfaces import IOSHAContentSkinLayer
 
 grok.templatedir("templates")
 

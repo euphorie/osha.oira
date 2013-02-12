@@ -5,7 +5,7 @@ from plone.dexterity.interfaces import IDexterityFTI
 from euphorie.content import MessageFactory as _
 from euphorie.content.module import IModule
 from euphorie.content.module import View as ModuleView
-from .interfaces import IOSHAContentSkinLayer
+from ..interfaces import IOSHAContentSkinLayer
 
 grok.templatedir("templates")
 

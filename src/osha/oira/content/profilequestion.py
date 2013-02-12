@@ -7,8 +7,8 @@ from plone.directives import form
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from euphorie.content.profilequestion import IProfileQuestion
 from euphorie.content.profilequestion import View as BaseView
-from .interfaces import IOSHAContentSkinLayer
-from . import _
+from ..interfaces import IOSHAContentSkinLayer
+from .. import _
 
 grok.templatedir("templates")
 

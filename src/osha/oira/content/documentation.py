@@ -1,6 +1,6 @@
 from five import grok
 from euphorie.content.documentation import IDocumentationFolder
-from osha.oira import interfaces
+from .. import interfaces
 
 grok.templatedir("templates")
 

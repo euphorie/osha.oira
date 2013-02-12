@@ -13,7 +13,7 @@ from plone.directives import form
 from plone.autoform.interfaces import IFormFieldProvider
 from euphorie.content import sector
 from euphorie.content import MessageFactory as _
-from .interfaces import IOSHAContentSkinLayer
+from ..interfaces import IOSHAContentSkinLayer
 
 log = logging.getLogger('osha.oira/sector.py')
 

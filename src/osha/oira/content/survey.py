@@ -5,7 +5,7 @@ from plone.directives import dexterity
 from euphorie.content.profilequestion import IProfileQuestion
 from euphorie.content.survey import View as SurveyView
 from euphorie.content.survey import ISurvey
-from .interfaces import IOSHAContentSkinLayer
+from ..interfaces import IOSHAContentSkinLayer
 
 grok.templatedir("templates")
 

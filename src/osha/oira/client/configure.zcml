@@ -7,7 +7,7 @@
 
     <adapter
         factory=".survey.OSHASurveyPublishTraverser"
-        for="euphorie.content.survey.ISurvey ..interfaces.IOSHAClientSkinLayer"
+        for="euphorie.content.survey.ISurvey .interfaces.IOSHAClientSkinLayer"
         provides="zope.publisher.interfaces.IPublishTraverse"/>
 
 </configure>

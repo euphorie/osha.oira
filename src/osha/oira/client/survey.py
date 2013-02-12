@@ -24,8 +24,12 @@ from rtfng.document.paragraph import Paragraph, Table, Cell
 from rtfng.document.section import Section
 from euphorie.client import survey, report
 from euphorie.client.session import SessionManager
+from .interfaces import IOSHAClientSkinLayer
+from .interfaces import IOSHAIdentificationPhaseSkinLayer
+from .interfaces import IOSHAEvaluationPhaseSkinLayer
+from .interfaces import IOSHAActionPlanPhaseSkinLayer
+from .interfaces import IOSHAReportPhaseSkinLayer
 from .. import _
-from .. import interfaces
 from .. import utils
 from . import model
 
@@ -34,17 +38,17 @@ grok.templatedir("templates")
 
 class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
     phases = {
-            "identification": interfaces.IOSHAIdentificationPhaseSkinLayer,
-            "evaluation": interfaces.IOSHAEvaluationPhaseSkinLayer,
-            "actionplan": interfaces.IOSHAActionPlanPhaseSkinLayer,
-            "report": interfaces.IOSHAReportPhaseSkinLayer, }
+            "identification": IOSHAIdentificationPhaseSkinLayer,
+            "evaluation": IOSHAEvaluationPhaseSkinLayer,
+            "actionplan": IOSHAActionPlanPhaseSkinLayer,
+            "report": IOSHAReportPhaseSkinLayer, }
 
 
 class OSHAStart(survey.Start):
     """ Override the 'start' page to provide our own template.
     """
     grok.require("euphorie.client.ViewSurvey")
-    grok.layer(interfaces.IOSHAClientSkinLayer)
+    grok.layer(IOSHAClientSkinLayer)
     grok.template("start")
     grok.name("start")
 
@@ -52,7 +56,7 @@ class OSHAStart(survey.Start):
 class OSHAIdentification(survey.Identification):
     """ Override the 'identification' page to provide our own template.
     """
-    grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
+    grok.layer(IOSHAIdentificationPhaseSkinLayer)
     grok.template("identification")
     grok.name("index_html")
 
@@ -64,7 +68,7 @@ class OSHAReportView(report.ReportView):
         See euphorie/client/survey.py for more info
     """
     grok.template("report")
-    grok.layer(interfaces.IOSHAClientSkinLayer)
+    grok.layer(IOSHAClientSkinLayer)
 
     def get_language(self):
         context = aq_inner(self.context)
@@ -103,7 +107,7 @@ class OSHAActionPlan(survey.ActionPlan):
 
     Please refer to original for more details.
     """
-    grok.layer(interfaces.IOSHAActionPlanPhaseSkinLayer)
+    grok.layer(IOSHAActionPlanPhaseSkinLayer)
     grok.template("actionplan")
 
 
@@ -163,7 +167,7 @@ class OSHAActionPlanReportView(report.ActionPlanReportView, OSHAActionPlanMixin)
     Please refer to original for more details.
     """
     grok.template("report_actionplan")
-    grok.layer(interfaces.IOSHAReportPhaseSkinLayer)
+    grok.layer(IOSHAReportPhaseSkinLayer)
     grok.name("view")
     download = False
 
@@ -196,7 +200,7 @@ class OSHAIdentificationReport(report.IdentificationReport):
 
     Please refer to original for more details.
     """
-    grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
+    grok.layer(IOSHAIdentificationPhaseSkinLayer)
     grok.template("report_identification")
     download = False
 
@@ -230,7 +234,7 @@ class OSHAIdentificationReport(report.IdentificationReport):
 class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPlanMixin):
     """ Generate and download action report.
     """
-    grok.layer(interfaces.IOSHAReportPhaseSkinLayer)
+    grok.layer(IOSHAReportPhaseSkinLayer)
     grok.name("download")
     download = True
 
@@ -555,7 +559,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
 class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
     """Generate identification report in RTF form.
     """
-    grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
+    grok.layer(IOSHAIdentificationPhaseSkinLayer)
 
     def getNodes(self):
         """ Return an ordered list of all relevant tree items for the current

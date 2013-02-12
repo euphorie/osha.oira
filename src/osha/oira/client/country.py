@@ -9,7 +9,7 @@ from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.client.country import View as EuphorieView
 from euphorie.client.country import IClientCountry
 from euphorie.client.model import SurveySession
-from ..interfaces import IOSHAClientSkinLayer
+from .interfaces import IOSHAClientSkinLayer
 from .. import _
 
 

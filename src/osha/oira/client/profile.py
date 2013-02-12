@@ -1,6 +1,6 @@
 from five import grok
 from euphorie.client import profile
-from .. import interfaces
+from .interfaces import IOSHAClientSkinLayer
 from .. import _
 
 grok.templatedir("templates")
@@ -26,7 +26,7 @@ def _questions(context):
 class OSHAProfile(profile.Profile):
     """ Override the original profile to provide our own template.
     """
-    grok.layer(interfaces.IOSHAClientSkinLayer)
+    grok.layer(IOSHAClientSkinLayer)
     grok.template("profile")
     grok.name("profile")
 
@@ -37,7 +37,7 @@ class OSHAProfile(profile.Profile):
 class OSHAUpdate(profile.Update):
     """ Override the original profile to provide our own template.
     """
-    grok.layer(interfaces.IOSHAClientSkinLayer)
+    grok.layer(IOSHAClientSkinLayer)
     grok.template('update')
     grok.name('update')
 

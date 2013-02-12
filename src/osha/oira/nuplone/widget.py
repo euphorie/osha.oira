@@ -3,19 +3,17 @@ from zope.interface import implementer
 from zope.interface import implementsOnly
 from zope.schema.interfaces import IChoice
 from zope.schema.interfaces import IText
-
 from z3c.form.browser.select import SelectWidget
-from z3c.form.browser.textarea import TextAreaWidget 
+from z3c.form.browser.textarea import TextAreaWidget
 from z3c.form.interfaces import IFieldWidget
 from z3c.form.widget import FieldWidget
 from z3c.form.widget import Widget
-
 from plonetheme.nuplone.z3cform.widget import SingleRadioWidget
 from plonetheme.nuplone.z3cform.utils import getVocabulary
+from ..interfaces import IOSHAContentSkinLayer
+from .interfaces import ILargeTextAreaWidget
+from .interfaces import IOiRAFormLayer
 
-from osha.oira.interfaces import IOSHAContentSkinLayer
-from osha.oira.z3cform.interfaces import ILargeTextAreaWidget
-from interfaces import IOiRAFormLayer
 
 @adapter(IChoice, IOiRAFormLayer)
 @implementer(IFieldWidget)

@@ -1,9 +1,7 @@
 from sqlalchemy import sql
 from sqlalchemy import orm
-
 from euphorie.client.model import SurveyTreeItem
 from euphorie.client.model import Risk
-
 from euphorie.client.model import Company
 from euphorie.client.model import SKIPPED_PARENTS
 from euphorie.client.model import MODULE_WITH_RISK_OR_TOP5_FILTER

@@ -6,7 +6,7 @@ from zope.publisher.interfaces.browser import IBrowserSkinType
 from ZPublisher.BaseRequest import DefaultPublishTraverse
 from euphorie.client.client import IClient
 from ..interfaces import IProductLayer
-from ..interfaces import IOSHAClientSkinLayer
+from .interfaces import IOSHAClientSkinLayer
 
 grok.templatedir("templates")
 

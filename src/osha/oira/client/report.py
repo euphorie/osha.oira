@@ -1,7 +1,7 @@
 from five import grok
 from euphorie.client import report
 from euphorie.client.session import SessionManager
-from ..interfaces import IOSHAReportPhaseSkinLayer
+from .interfaces import IOSHAReportPhaseSkinLayer
 from .. import _
 
 grok.templatedir("templates")

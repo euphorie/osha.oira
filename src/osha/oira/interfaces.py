@@ -1,7 +1,7 @@
 from zope.interface import Interface
 from euphorie.client import interfaces
 from plonetheme.nuplone.skin.interfaces import NuPloneSkin
-from osha.oira.z3cform.interfaces import IOiRAFormLayer
+from osha.oira.nuplone.interfaces import IOiRAFormLayer
 
 
 class IProductLayer(Interface):

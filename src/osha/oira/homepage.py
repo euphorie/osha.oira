@@ -15,7 +15,7 @@ from plone.dexterity.events import EditFinishedEvent
 from euphorie.content import MessageFactory as _
 
 from osha.oira.interfaces import IOSHAContentSkinLayer
-from osha.oira.z3cform.widget import LargeTextAreaFieldWidget
+from osha.oira.nuplone.widget import LargeTextAreaFieldWidget
 
 grok.templatedir("templates")
 

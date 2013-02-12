@@ -1,0 +1,13 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+    <adapter
+        factory=".client.ClientPublishTraverser"
+        provides="zope.publisher.interfaces.IPublishTraverse"
+        />
+
+    <adapter
+        factory=".survey.OSHASurveyPublishTraverser"
+        for="euphorie.content.survey.ISurvey ..interfaces.IOSHAClientSkinLayer"
+        provides="zope.publisher.interfaces.IPublishTraverse"/>
+
+</configure>

@@ -1,19 +1,5 @@
-<configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
-    xmlns:browser="http://namespaces.zope.org/browser">
+<configure xmlns="http://namespaces.zope.org/zope">
 
-    <configure zcml:condition="installed euphorie.deployment">
-        <browser:page
-            for="*"
-            layer="euphorie.client.interfaces.IClientSkinLayer"
-            class="euphorie.client.utils.WebHelpers"
-            name="webhelpers"
-            template="templates/webhelpers.pt"
-            permission="zope2.View"
-            />
-    </configure>
-
-
+  <include package=".client" file="overrides.zcml"/>
 
 </configure>

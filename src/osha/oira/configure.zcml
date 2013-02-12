@@ -28,6 +28,8 @@
 
     <include package="euphorie.deployment" />
     <include package=".browser" />
+    <include package=".client" />
+    <include package=".content" />
     <include package=".tiles" />
     <include package=".z3cform" />
     <include package=".upgrade" />
@@ -38,20 +40,6 @@
          osha.oira's customizations
     -->
     <grok:grok package="." />
-    <include file="behaviors.zcml" />
-
-    <adapter
-      factory=".profilequestion.context_proxy"/>
-
-    <adapter
-        factory=".client.ClientPublishTraverser"
-        provides="zope.publisher.interfaces.IPublishTraverse"
-        />
-
-    <adapter
-        factory=".survey.OSHASurveyPublishTraverser"
-        for="euphorie.content.survey.ISurvey .interfaces.IOSHAClientSkinLayer"
-        provides="zope.publisher.interfaces.IPublishTraverse"/>
 
     <browser:page
         for="*"

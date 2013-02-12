@@ -1,6 +1,6 @@
-<configure xmlns="http://namespaces.zope.org/zope"
-           xmlns:plone="http://namespaces.plone.org/plone"
-           i18n_domain="euphorie">
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:plone="http://namespaces.plone.org/plone">
 
     <include package="plone.behavior" file="meta.zcml" />
     <include package="plone.directives.form" file="meta.zcml" />
@@ -13,5 +13,7 @@
         factory=".sector.OSHASector"
         for="plone.dexterity.interfaces.IDexterityContent"
         />
-        
+    <adapter
+      factory=".profilequestion.context_proxy"/>
+
 </configure>

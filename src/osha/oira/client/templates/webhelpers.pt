@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width = device-width" />
     <meta name="viewport" content="user-scalable=no" />
-    <link rel="icon" type="image/png" href="client/++resource++euphorie.media/favicon.png" />
+    <link rel="icon" type="image/png" href="${client/++resource++euphorie.media}/favicon.png" />
   <metal:javascript define-macro="javascript" meta:interpolation="true" tal:define="lib_url client/++resource++euphorie.libraries">
     <script type="text/javascript" src="${client/++resource++euphorie.libraries}/modernizr-2.6.1.min.js"></script>
     </metal:javascript>
@@ -126,9 +126,9 @@
   </metal:survey>
 
   <metal:appendix define-macro="appendix" meta:interpolation="true" i18n:domain="euphorie">
-    <p id="appendix">
+    <p id="appendix" tal:define="media_url client/++resource++euphorie.media">
         <a href="${webhelpers/client_url}">
-        <img class="appendix_oira_logo" src="++resource++osha.oira.images/footer_logo.png"/>
+          <img class="appendix_oira_logo" src="${media_url}/osha/footer_logo.png"/>
         </a>
 
         <tal:block repeat="page webhelpers/appendix">
@@ -146,9 +146,8 @@
         <a href="http://www.gnu.org/licenses/gpl.html" i18n:translate="appendix_gpl_license">GPL License</a>
         |
         <a href="http://creativecommons.org/licenses/by-sa/2.5/"
-            i18n:attributes="alt"
-            alt="CC License">
-            <img class="creative_commons_logo" src="++resource++osha.oira.images/creative_commons.png"/>
+            i18n:attributes="alt" alt="CC License">
+            <img class="creative_commons_logo" src="${media_url}/osha/creative_commons.png"/>
         </a>
     </p>
   </metal:appendix>

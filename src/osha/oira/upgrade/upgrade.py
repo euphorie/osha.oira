@@ -1,10 +1,15 @@
 # -*- coding: <utf-8> -*-
 import datetime
 import logging
+import transaction
+from z3c.saconfig import Session
+from zope.sqlalchemy import datamanager
 from zope.app.component.hooks import getSite
 from plone.dexterity import utils
 from euphorie.client.sector import IClientSector
 from euphorie.content.survey import ISurvey
+from euphorie.client import model
+
 
 log = logging.getLogger(__name__)
 
@@ -65,3 +70,12 @@ def reset_evaluation_flag(context):
             if survey.evaluation_optional:
                 survey.evaluation_optional = False
                 survey.reindexObject()
+
+
+def sql_create_all(context):
+    """Add all missing SQL tables and indices.
+    """
+    session = Session()
+    transaction.get().commit()
+    model.metadata.create_all(session.bind, checkfirst=True)
+    datamanager.mark_changed(session)

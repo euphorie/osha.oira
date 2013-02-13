@@ -36,5 +36,17 @@
         handler=".upgrade.reset_evaluation_flag"/>
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+        source="4"
+        destination="5"
+        profile="osha.oira:default">
+
+    <genericsetup:upgradeStep
+        title="Add login statistics stable"
+        description="Add a SQL table to store login records for client accounts."
+        handler=".upgrade.sql_create_all"/>
+
+  </genericsetup:upgradeSteps>
+
 </configure>
 

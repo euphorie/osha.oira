@@ -14,7 +14,7 @@
     <metal:meta use-macro="webhelpers/macros/headers"/>
     <metal:css use-macro="webhelpers/macros/css"/>
 </head>
-<body class="report ${webhelpers/extra_css}">
+<body class="${webhelpers/extra_css}">
     <h1>${context/title}</h1>
 
     <h2 i18n:translate="">Download and print your report</h2>

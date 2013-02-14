@@ -1,4 +1,5 @@
 from five import grok
+from euphorie.ghost import PathGhost
 from euphorie.client import report
 from euphorie.client.session import SessionManager
 from .interfaces import IOSHAReportPhaseSkinLayer
@@ -32,6 +33,19 @@ class ReportView(report.ReportView):
 
 COLUMN_ORDER = ['title', 'priority', 'action_plan', 'planning_end',
                 'responsible', 'budget', 'number', 'comment']
+
+
+class ReportLanding(grok.View):
+    """Custom report landing page.
+
+    This replaces the standard online view of the report with a page
+    offering the RTF and XLSX download options.
+    """
+    grok.context(PathGhost)
+    grok.require("euphorie.client.ViewSurvey")
+    grok.layer(IOSHAReportPhaseSkinLayer)
+    grok.template("report_landing")
+    grok.name("view")
 
 
 class ActionPlanTimeline(report.ActionPlanTimeline):

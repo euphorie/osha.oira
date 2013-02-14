@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      i18n:domain="euphorie"
+      tal:define="client nocall:request/client; 
+                  webhelpers nocall:context/@@webhelpers;">
+<head>
+    <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
+    <metal:meta use-macro="webhelpers/macros/headers"/>
+    <metal:css use-macro="webhelpers/macros/css"/>
+</head>
+<body class="report ${webhelpers/extra_css}">
+    <h1>${context/title}</h1>
+
+    <h2 i18n:translate="">Download and print your report</h2>
+
+    <p i18n:translate="">Save the report on your pc and print it. You can also modify it or add more information. Please note that changes made on your pc will <strong i18n:name="not" i18n:translate="">not</strong> be saved in the OiRA tool</p>
+    <p i18n:translate="">Use the report to:</p>
+
+    <ul>
+      <li i18n:translate="">Provide evidence for supervisory authorities.</li>
+      <li i18n:translate="">Pass information to the people concerned (workers, safety reps, employer, OSH experts, ...)</li>
+      <li i18n:translate="">Monitor and assess whether necessary measures have been introduced.</li>
+      <li i18n:translate="">Record any revision if circumstances change (new machines, new workers, as a result of findings of any accident investigations, etc.)</li>
+    </ul>
+
+    <div class="column span-7 append-1">
+      <h2 i18n:translate="">Download the full report</h2>
+
+      <a class="download rtf" href="${python:view.url(name='download')}" i18n:translate="">Full report</a>
+
+      <ul>
+        <li i18n:translate="">Format: Rich Text Format (.rtf)</li>
+        <li i18n:translate="">Contains: all the information and input provided by you throughout the risk assessment process.</li>
+      </ul>
+
+      <h3><tal:span i18n:translate="">Use it to</tal:span>:</h3>
+      <ul>
+        <li i18n:translate=""><strong i18n:name="provide-evidence" i18n:translate="">Provide evidence</strong> for supervisory authorities (labour inspectorate).</li>
+      </ul>
+
+      <p class="discrete" i18n:translate="">We recommend to always keep an updated printed version of your risk assessment (report) available in your company!</p>
+    </div>
+
+    <div class="last column span-7">
+      <h2 i18n:translate="">Download the action plan</h2>
+      <a class="download xlsx" href="${python:view.url(name='timeline')}" i18n:translate="">Action plan</a>
+      <ul>
+        <li i18n:translate="">Format: Office Open XML Workbook (.xlsx)</li>
+        <li i18n:translate="">Contains: only the measures to be implemented to effectively manage the identified risks.</li>
+      </ul>
+
+      <h3><tal:span i18n:translate="">Use it to</tal:span>:</h3>
+      <ul>
+        <li i18n:translate=""><strong i18n:name="manage" i18n:translate="">Manage</strong> the problems/risks in your workplace (specific tasks, expertise, responsibilities,
+        deadlines).</li>
+      </ul>
+    </div>
+
+    <ol id="steps">
+      <li class="complete" id="step-1">
+        <a href="${context/absolute_url}/start">
+          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_preparation">Preparation</tal:span>
+          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_preparation">Preparation</tal:span>
+        </a>
+      </li>
+      <li class="complete" id="step-2">
+        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_identification">Identification</tal:span>
+        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_identification">Identification</tal:span>
+      </li>
+      <li class="complete" id="step-3">
+        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_evaluation">Evaluation</tal:span>
+        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_evaluation">Evaluation</tal:span>
+      </li>
+      <li class="complete" id="step-4">
+        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_action_plan">Action Plan</tal:span>
+        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_action_plan">Action Plan</tal:span>
+      </li>
+      <li class="active current" id="step-5">
+        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_report">Report</tal:span>
+        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_report">Report</tal:span>
+      </li>
+    </ol>
+
+    <ul id="navigation">
+      <metal:home use-macro="webhelpers/macros/homelink"/>
+      <li><a href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a></li>
+      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">Sessions</a></li>
+      <li><a href="${webhelpers/help_url}#preparation" i18n:translate="navigation_help">Help</a></li>
+      <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>
+    </ul>
+    <metal:css use-macro="webhelpers/macros/appendix"/>
+    <metal:css use-macro="webhelpers/macros/javascript"/>
+    <tal:block replace="tile:client-analytics"/>
+  </body>
+</html>
+

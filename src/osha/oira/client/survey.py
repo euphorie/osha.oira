@@ -156,43 +156,6 @@ def node_title(node, zodbnode):
     return node.title
 
 
-class OSHAActionPlanReportView(report.ActionPlanReportView, OSHAActionPlanMixin):
-    """
-    Overrides the original ActionPlanReportView in euphorie.client.survey.py
-
-    Provides the following extra attributes (as per #1517, #1518):
-        unanswered_risk_nodes
-        not_present_risk_nodes
-
-    Please refer to original for more details.
-    """
-    grok.template("report_actionplan")
-    grok.layer(IOSHAReportPhaseSkinLayer)
-    grok.name("view")
-    download = False
-
-    def update(self):
-        """ """
-        super(OSHAActionPlanReportView, self).update()
-        self._extra_updates()
-
-    def title(self, node, zodbnode):
-        return node_title(node, zodbnode)
-
-    def risk_status(self, node, zodbnode):
-        """ """
-        if node.postponed or not node.identification:
-            return "unanswered"
-        elif node.identification in [u"n/a", u"yes"]:
-            return "not-present"
-        elif node.identification == "no":
-            if node.probability == 0:
-                return "no-actionplans"
-            elif node.action_plans == []:
-                return "unevaluated"
-            return "present"
-
-
 class OSHAIdentificationReport(report.IdentificationReport):
     """
     Overrides the original IdentificationReport in euphorie.client.survey.py

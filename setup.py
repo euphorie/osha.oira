@@ -1,43 +1,38 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.2.38a2.dev0'
+version = '2.0.dev0'
 
 tests_require = [
-          "Euphorie [tests]",
+        "Euphorie [tests]",
       ]
 
 setup(name='osha.oira',
       version=version,
-      description="OiRA is a comprehensive, easy to use and cost-free web application. It helps micro and small organisations to put in place a thorough step-by-step risk assessment process - from the identification and evaluation of workplace risks, through decision making on preventive actions and the completion of these actions, to continued monitoring and reporting.",
+      description="Euphorie customisations for OSHA-OiRA site.",
       long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "changes.rst")).read(),
       classifiers=[
-        "Framework :: Plone",
-        "License :: OSI Approved :: GNU General Public License (GPL)",
-        "Operating System :: OS Independent",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.6",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-        "Programming Language :: Python :: 2.6",
+          "Framework :: Plone",
+          "License :: OSI Approved :: GNU General Public License (GPL)",
+          "Operating System :: OS Independent",
+          "Programming Language :: Python :: 2",
+          "Programming Language :: Python :: 2.6",
+          "Programming Language :: Python :: 2.7",
+          "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='euphorie osha oira',
       author='syslab.com',
       author_email='info@syslab.com',
       url="http://www.oiraproject.eu/",
       license='GPL',
-      message_extractors = {"src": [
-            ("**.py",    "lingua_python", None),
-            ("**.pt",    "lingua_xml", None),
-            ("**.xml",   "lingua_xml", None),
-            ]},
       packages=find_packages('src'),
       package_dir={"": "src"},
       namespace_packages=['osha'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'Euphorie >=6dev',
+          'Euphorie >=6.0b1',
           'NuPlone',
           'Products.CMFCore',
           'Products.statusmessages',
@@ -62,7 +57,7 @@ setup(name='osha.oira',
       ],
       tests_require=tests_require,
       extras_require={
-        "tests" : tests_require,
+          "tests": tests_require,
       },
       entry_points="""
       [z3c.autoinclude.plugin]

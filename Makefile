@@ -34,6 +34,9 @@ pot: bin/pybabel
 		--charset=utf-8 \
 		. > $(EUPHORIE_POT)~ && mv $(EUPHORIE_POT)~ $(EUPHORIE_POT)	
 
+$(EUPHORIE_PO_FILES): $(EUPHORIE_POT)
+	msgmerge --update $@ $<
+
 .po.mo:
 	msgfmt -c --statistics -o $@~ $< && mv $@~ $@
 

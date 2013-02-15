@@ -23,6 +23,8 @@ accounts and client URL.
 Feature changes
 ~~~~~~~~~~~~~~~
 
+- Allow developers to use `make pot` to update the POT-file for translations.
+
 - CSS and JavaScript is now maintained in the Euphorie package to make
   maintenance easier. 
 

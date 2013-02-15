@@ -14,9 +14,7 @@
     <meta name="viewport" content="width = device-width" />
     <meta name="viewport" content="user-scalable=no" />
     <link rel="icon" type="image/png" href="${client/++resource++euphorie.media}/favicon.png" />
-  <metal:javascript define-macro="javascript" meta:interpolation="true" tal:define="lib_url client/++resource++euphorie.libraries">
     <script type="text/javascript" src="${client/++resource++euphorie.libraries}/modernizr-2.6.1.min.js"></script>
-    </metal:javascript>
   </metal:headers>
 
   <metal:home define-macro="homelink" meta:interpolation="true" tal:define="logo_mode webhelpers/logoMode">

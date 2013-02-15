@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.30.dev0\n"
 "Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2013-02-01 17:22+0200\n"
+"POT-Creation-Date: 2013-02-15 15:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -513,7 +513,7 @@ msgstr "Bendrosios galutinės rekomendacijos."
 #. representatives about problems they have encountered). You can then introduce
 #. the information into the tool.
 #: src/osha/oira/manual_translations.py:137
-#: src/osha/oira/templates/identification.pt:19
+#: src/osha/oira/client/templates/identification.pt:19
 msgid "intro_print_identification_1"
 msgstr ""
 "Jūs galite išspausdinti priemonės turinį, kad galėtumėte rinkti informaciją "
@@ -527,7 +527,7 @@ msgstr ""
 #. hazards/problems, evaluating the risks and deciding on preventive action.Their
 #. feedback should be taken into account when filling in this tool.
 #: src/osha/oira/manual_translations.py:144
-#: src/osha/oira/templates/identification.pt:20
+#: src/osha/oira/client/templates/identification.pt:20
 msgid "intro_print_identification_2"
 msgstr ""
 "Taip pat galėsite padalyti turinį darbuotojams bei jų atstovams ir pakviesti "
@@ -537,7 +537,7 @@ msgstr ""
 
 #. Default: contents of the tool
 #: src/osha/oira/manual_translations.py:150
-#: src/osha/oira/templates/identification.pt:22
+#: src/osha/oira/client/templates/identification.pt:22
 msgid "list_of_risks"
 msgstr "priemonės turinys"
 
@@ -630,7 +630,10 @@ msgstr "Paskelbti OiRA priemonę"
 
 #. Default: This OiRA tool has changed since you last accessed it. Before you can
 #. continue, you need to update to these changes.
+#. Default: This survey has been updated. Before you can continue any changes made
+#. in the survey will have to be merged in your session.
 #: src/osha/oira/manual_translations.py:194
+#: src/osha/oira/client/templates/update.pt:19
 msgid "expl_update"
 msgstr ""
 "Ši OiRA priemonė buvo pakeista po to, kai paskutinį kartą buvote ją atidarę. "
@@ -638,7 +641,9 @@ msgstr ""
 "tęsti."
 
 #. Default: OiRA Tool was updated
+#. Default: Survey was updated
 #: src/osha/oira/manual_translations.py:198
+#: src/osha/oira/client/templates/update.pt:17
 msgid "title_updated"
 msgstr "OiRA priemonė buvo atnaujinta"
 
@@ -714,208 +719,215 @@ msgstr "Apgailestaujame, bet įvyko nenumatyta klaida."
 msgid "label_remove_measure"
 msgstr "Ištrinti šią priemonę"
 
-#: src/osha/oira/module.py:27 src/osha/oira/module.py:55
-#: src/osha/oira/module.py:70
-msgid "Submodule"
-msgstr "Submodulis"
-
-#: src/osha/oira/module.py:60
-msgid "Edit ${name}"
-msgstr "Redaguoti ${name}"
-
-#: src/osha/oira/module.py:75
-msgid "Add ${name}"
-msgstr "Pridėti ${name}"
-
-#. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
-#. of probability, frequency and severity) method.
-#: src/osha/oira/risk.py:36
-msgid "help_evaluation_method_kinney"
-msgstr ""
-"Pasirinkite metodą ĮVERTINTA (apytikris įvertinimas) arba APSKAIČIUOTA "
-"(tikimybės, dažnumo ir sunkumo derinys)."
-
-#. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
-#. of frequency and severity) method.
-#: src/osha/oira/risk.py:43
-msgid "help_evaluation_method_french"
-msgstr ""
-"Pasirinkite metodą ĮVERTINTA (apytikris įvertinimas) arba APSKAIČIUOTA "
-"(dažnumo ir sunkumo derinys)."
-
-#. Default: Statistics Level
-#: src/osha/oira/sector.py:26
-msgid "label_statistics_level"
+#. Default: Statistics Reporting
+#: src/osha/oira/browser/templates/statistics.pt:13
+#, fuzzy
+msgid "title_statistics"
 msgstr "Statistikos lygis"
 
-#. Default: Level 1: Basic statistics about the use of the OiRA tool. Level 2: More
-#. detailed statistics regarding the risks
-#: src/osha/oira/sector.py:27
-msgid "help_statistics_level"
+#: src/osha/oira/client/country.py:53
+msgid "Save"
 msgstr ""
-"1 lygis: pagrindinė OiRA priemonės naudojimo statistika. 2 lygis: išsamesnė "
-"rizikos veiksnių statistika"
+
+#: src/osha/oira/client/country.py:61
+msgid "Session title has been changed to ${name}"
+msgstr ""
+
+#: src/osha/oira/client/country.py:65
+#: src/osha/oira/client/templates/rename-session.pt:29
+msgid "Cancel"
+msgstr ""
+
+#: src/osha/oira/client/profile.py:15
+msgid "Does this happen in multiple places?"
+msgstr ""
+
+#: src/osha/oira/client/profile.py:18
+msgid "Enter the name of the location"
+msgstr ""
+
+#: src/osha/oira/client/profile.py:21
+msgid "Enter the names of each location"
+msgstr ""
+
+#. Default: Progress (pending, in process, implemented)
+#: src/osha/oira/client/report.py:58
+msgid "report_timeline_progress"
+msgstr ""
 
 #. Default: low
-#: src/osha/oira/survey.py:336 src/osha/oira/templates/report_actionplan.pt:94
-#: src/osha/oira/templates/report_actionplan.pt:174
-#: src/osha/oira/templates/report_actionplan.pt:210
-#: src/osha/oira/templates/report_actionplan.pt:244
-#: src/osha/oira/templates/risk_actionplan.pt:40
+#: src/osha/oira/client/survey.py:263
+#: src/osha/oira/client/templates/report_actionplan.pt:94
+#: src/osha/oira/client/templates/report_actionplan.pt:174
+#: src/osha/oira/client/templates/report_actionplan.pt:210
+#: src/osha/oira/client/templates/report_actionplan.pt:244
+#: src/osha/oira/client/templates/risk_actionplan.pt:40
 msgid "risk_priority_low"
 msgstr "mažas"
 
 #. Default: medium
-#: src/osha/oira/survey.py:338 src/osha/oira/templates/report_actionplan.pt:94
-#: src/osha/oira/templates/report_actionplan.pt:174
-#: src/osha/oira/templates/report_actionplan.pt:210
-#: src/osha/oira/templates/report_actionplan.pt:245
-#: src/osha/oira/templates/risk_actionplan.pt:41
+#: src/osha/oira/client/survey.py:265
+#: src/osha/oira/client/templates/report_actionplan.pt:94
+#: src/osha/oira/client/templates/report_actionplan.pt:174
+#: src/osha/oira/client/templates/report_actionplan.pt:210
+#: src/osha/oira/client/templates/report_actionplan.pt:245
+#: src/osha/oira/client/templates/risk_actionplan.pt:41
 msgid "risk_priority_medium"
 msgstr "vidutinis"
 
 #. Default: high
-#: src/osha/oira/survey.py:340 src/osha/oira/templates/report_actionplan.pt:94
-#: src/osha/oira/templates/report_actionplan.pt:174
-#: src/osha/oira/templates/report_actionplan.pt:210
-#: src/osha/oira/templates/report_actionplan.pt:245
-#: src/osha/oira/templates/risk_actionplan.pt:42
+#: src/osha/oira/client/survey.py:267
+#: src/osha/oira/client/templates/report_actionplan.pt:94
+#: src/osha/oira/client/templates/report_actionplan.pt:174
+#: src/osha/oira/client/templates/report_actionplan.pt:210
+#: src/osha/oira/client/templates/report_actionplan.pt:245
+#: src/osha/oira/client/templates/risk_actionplan.pt:42
 msgid "risk_priority_high"
 msgstr "didelis"
 
 #. Default: This is a ${priority_value} priority risk.
-#: src/osha/oira/survey.py:342 src/osha/oira/templates/report_actionplan.pt:93
-#: src/osha/oira/templates/report_actionplan.pt:173
-#: src/osha/oira/templates/report_actionplan.pt:209
-#: src/osha/oira/templates/report_actionplan.pt:243
-#: src/osha/oira/templates/risk_actionplan.pt:38
+#: src/osha/oira/client/survey.py:269
+#: src/osha/oira/client/templates/report_actionplan.pt:93
+#: src/osha/oira/client/templates/report_actionplan.pt:173
+#: src/osha/oira/client/templates/report_actionplan.pt:209
+#: src/osha/oira/client/templates/report_actionplan.pt:243
+#: src/osha/oira/client/templates/risk_actionplan.pt:38
 msgid "risk_priority"
 msgstr "Tai yra ${priority_value} prioritetinė rizika."
 
 #. Default: Measure
-#: src/osha/oira/survey.py:369 src/osha/oira/survey.py:391
-#: src/osha/oira/templates/risk_actionplan.pt:65
+#: src/osha/oira/client/survey.py:296 src/osha/oira/client/survey.py:318
+#: src/osha/oira/client/templates/risk_actionplan.pt:65
 msgid "header_measure_single"
 msgstr "Priemonė"
 
 #. Default: Measure ${index}
-#: src/osha/oira/survey.py:371 src/osha/oira/templates/report_actionplan.pt:99
+#: src/osha/oira/client/survey.py:298
+#: src/osha/oira/client/templates/report_actionplan.pt:99
 msgid "header_measure"
 msgstr "Priemonė ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
-#: src/osha/oira/survey.py:398
+#: src/osha/oira/client/survey.py:325
 msgid "label_measure_action_plan"
 msgstr "Bendrasis požiūris (kaip pašalinti ar sumažinti riziką)"
 
 #. Default: Specific action(s) required to implement this approach
-#: src/osha/oira/survey.py:400
+#: src/osha/oira/client/survey.py:327
 msgid "label_measure_prevention_plan"
 msgstr ""
 "Konkretus (-ūs) veiksmas (-ai), reikalingas (-i) šiam požiūriui įgyvendinti"
 
 #. Default: Level of expertise and/or requirements needed
-#: src/osha/oira/survey.py:402
+#: src/osha/oira/client/survey.py:329
 msgid "label_measure_requirements"
 msgstr "Reikalingų ekspertinių žinių lygis ir (ar) reikalavimai"
 
 #. Default: Who is responsible?
-#: src/osha/oira/survey.py:404 src/osha/oira/templates/risk_actionplan.pt:119
+#: src/osha/oira/client/survey.py:331
+#: src/osha/oira/client/templates/risk_actionplan.pt:119
 msgid "label_action_plan_responsible"
 msgstr "Kas yra atsakingas?"
 
 #. Default: Budget
-#: src/osha/oira/survey.py:406 src/osha/oira/templates/risk_actionplan.pt:123
+#: src/osha/oira/client/survey.py:333
+#: src/osha/oira/client/templates/risk_actionplan.pt:124
 msgid "label_action_plan_budget"
 msgstr "Biudžetas"
 
 #. Default: Planning start
-#: src/osha/oira/survey.py:407 src/osha/oira/templates/risk_actionplan.pt:134
+#: src/osha/oira/client/survey.py:334
+#: src/osha/oira/client/templates/risk_actionplan.pt:135
 msgid "label_action_plan_start"
 msgstr "Planuojama pradžia"
 
 #. Default: Planning end
-#: src/osha/oira/survey.py:408
+#: src/osha/oira/client/survey.py:335
 msgid "label_action_plan_end"
 msgstr "Planuojama pabaiga"
 
 #. Default: Consultation of workers
-#: src/osha/oira/survey.py:456
+#: src/osha/oira/client/survey.py:383
 msgid "header_oira_report_consultation"
 msgstr "Darbuotojų konsultavimas"
 
 #. Default: The undersigned hereby declare that the workers have been consulted on
 #. the content of this document.
-#: src/osha/oira/survey.py:465
+#: src/osha/oira/client/survey.py:392
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
 "Žemiau pasirašęs asmuo pareiškia, kad darbuotojai buvo konsultuoti dėl šio "
 "dokumento turinio."
 
 #. Default: On the behalf of the employer:
-#: src/osha/oira/survey.py:478
+#: src/osha/oira/client/survey.py:405
 msgid "oira_consultation_employer"
 msgstr "Darbdavio vardu:"
 
 #. Default: On the behalf of the workers:
-#: src/osha/oira/survey.py:480
+#: src/osha/oira/client/survey.py:407
 msgid "oira_consultation_workers"
 msgstr "Darbuotojų vardu:"
 
 #. Default: Date:
-#: src/osha/oira/survey.py:489
+#: src/osha/oira/client/survey.py:416
 msgid "oira_survey_date"
 msgstr "Data:"
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/survey.py:530
+#: src/osha/oira/client/survey.py:457
 msgid "header_oira_report_download"
 msgstr "OiRA ataskaita: \"${title}"
 
 #. Default: Contents
-#: src/osha/oira/survey.py:549 src/osha/oira/templates/report_actionplan.pt:17
-#: src/osha/oira/templates/report_identification.pt:16
+#: src/osha/oira/client/survey.py:476
+#: src/osha/oira/client/templates/report_actionplan.pt:17
+#: src/osha/oira/client/templates/report_identification.pt:16
 msgid "toc_header"
 msgstr "Turinys"
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/survey.py:554 src/osha/oira/templates/report_actionplan.pt:39
-#: src/osha/oira/templates/report_actionplan.pt:72
+#: src/osha/oira/client/survey.py:481
+#: src/osha/oira/client/templates/report_actionplan.pt:39
+#: src/osha/oira/client/templates/report_actionplan.pt:72
 msgid "header_present_risks"
 msgstr ""
 "Rizikos veiksniai, kurie buvo identifikuoti, įvertinti ir kurių atžvilgiu "
 "yra prevencijos priemonių planas"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/survey.py:556 src/osha/oira/templates/report_actionplan.pt:47
-#: src/osha/oira/templates/report_actionplan.pt:153
+#: src/osha/oira/client/survey.py:483
+#: src/osha/oira/client/templates/report_actionplan.pt:47
+#: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
 msgstr ""
 "Rizikos veiksniai, kurie buvo identifikuoti, bet kurių atžvilgiu NĖRA "
 "prevencijos priemonių plano"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt with
-#: src/osha/oira/survey.py:558 src/osha/oira/templates/report_actionplan.pt:55
-#: src/osha/oira/templates/report_actionplan.pt:187
+#: src/osha/oira/client/survey.py:485
+#: src/osha/oira/client/templates/report_actionplan.pt:55
+#: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
 msgstr ""
 "Pavojai / problemos, kurios buvo \"įvardytos\" ir kurias dar reikia spręsti"
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
-#: src/osha/oira/survey.py:560 src/osha/oira/templates/report_actionplan.pt:63
-#: src/osha/oira/templates/report_actionplan.pt:221
+#: src/osha/oira/client/survey.py:487
+#: src/osha/oira/client/templates/report_actionplan.pt:63
+#: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
 msgstr "Pavojai / problemos, kurių nėra jūsų organizacijoje"
 
 #. Default: Action plan ${title}
-#: src/osha/oira/survey.py:585
+#: src/osha/oira/client/survey.py:512
 msgid "filename_report_actionplan"
 msgstr "Prevencijos priemonių planas ${title}"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/survey.py:663
+#: src/osha/oira/client/survey.py:590
 msgid "report_identification_revision"
 msgstr ""
 "Šis dokumentas pagrįstas OiRA priemone '${title}', kurios redakcijos data "
@@ -923,23 +935,1741 @@ msgstr ""
 
 #. Default: This report was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/survey.py:697
-#: src/osha/oira/templates/report_actionplan.pt:302
+#: src/osha/oira/client/survey.py:624
+#: src/osha/oira/client/templates/report_actionplan.pt:302
 msgid "report_survey_revision"
 msgstr ""
 "Ši ataskaita pagrįsta OiRA priemone '${title}', kurios redakcijos data yra "
 "${date}."
 
+#. Default: OiRA - Online interactive Risk Assessment
+#: src/osha/oira/client/templates/actionplan.pt:12
+#: src/osha/oira/client/templates/disclaimer.pt:12
+#: src/osha/oira/client/templates/frontpage.pt:15
+#: src/osha/oira/client/templates/identification.pt:12
+#: src/osha/oira/client/templates/module_actionplan.pt:12
+#: src/osha/oira/client/templates/module_evaluation.pt:12
+#: src/osha/oira/client/templates/module_identification.pt:11
+#: src/osha/oira/client/templates/register.pt:12
+#: src/osha/oira/client/templates/rename-session.pt:11
+#: src/osha/oira/client/templates/report.pt:12
+#: src/osha/oira/client/templates/report_actionplan.pt:13
+#: src/osha/oira/client/templates/report_company.pt:12
+#: src/osha/oira/client/templates/report_identification.pt:12
+#: src/osha/oira/client/templates/report_landing.pt:13
+#: src/osha/oira/client/templates/risk_actionplan.pt:12
+#: src/osha/oira/client/templates/risk_evaluation.pt:12
+#: src/osha/oira/client/templates/risk_identification.pt:12
+#: src/osha/oira/client/templates/sessions.pt:13
+#: src/osha/oira/client/templates/start.pt:14
+#: src/osha/oira/client/templates/update.pt:12
+#: src/osha/oira/client/templates/webhelpers.pt:24
+#: src/osha/oira/templates/custom_homepage.pt:12
+msgid "title_tool"
+msgstr "OiRA – interaktyvi rizikos vertinimo priemonė"
+
+#. Default: After having identified the risks, you need to put an action plan in
+#. place to manage the risks. To eliminate or reduce risks you need to determine
+#. which preventive and protective measures are to be taken.
+#: src/osha/oira/client/templates/actionplan.pt:19
+msgid "expl_actionplan_1"
+msgstr ""
+"Identifikavę rizikos veiksnius, turite įdiegti prevencijos priemonių planą "
+"rizikos veiksniams valdyti. Siekdami pašalinti arba sumažinti riziką, turite "
+"nustatyti, kokių prevencinių ar apsauginių priemonių reikia imtis."
+
+#. Default: Among the things to be considered for this step are:
+#: src/osha/oira/client/templates/actionplan.pt:24
+msgid "expl_actionplan_2"
+msgstr "Šiame etape, be kita ko, turi būti apsvarstyta:"
+
+#. Default: considering whether the task or job is necessary
+#: src/osha/oira/client/templates/actionplan.pt:32
+msgid "expl_actionplan_4"
+msgstr "ar užduotis arba darbas yra būtinas"
+
+#. Default: removing the hazard
+#: src/osha/oira/client/templates/actionplan.pt:33
+msgid "expl_actionplan_5"
+msgstr "kaip pašalinti pavojų"
+
+#. Default: Is a risk avoidable? Can it be removed entirely? For example, this
+#. could be achieved by: ${expl_actionplan_4_and_5}
+#: src/osha/oira/client/templates/actionplan.pt:29
+msgid "expl_actionplan_3"
+msgstr ""
+"Ar rizikos galima išvengti? Ar galima ją visiškai pašalinti? Pavyzdžiui, tai "
+"būtų galima pasiekti taikant: ${expl_actionplan_4_and_5}"
+
+#. Default: If certain risks are not avoidable, how can they be reduced to a level
+#. at which the health and safety of those exposed is not compromised?
+#: src/osha/oira/client/templates/actionplan.pt:37
+msgid "expl_actionplan_6"
+msgstr ""
+"Jei tam tikri rizikos veiksniai neišvengiami, kaip juos galima sumažinti iki "
+"tokio lygio, kad tai neturėtų neigiamo poveikio susijusių asmenų sveikatai "
+"ir saugai?"
+
+#. Default: Once you have decided how to eliminate or reduce a particular risk,
+#. then you describe the specific action(s) required to achieve this. You should
+#. also include details of the level of expertise and/or other requirements needed
+#. for those actions to be effective.
+#: src/osha/oira/client/templates/actionplan.pt:42
+msgid "expl_actionplan_7"
+msgstr ""
+"Kai nusprendžiate, kaip pašalinti ar sumažinti konkrečią riziką, aprašykite "
+"konkretų (-us) veiksmą (-us), reikalingą (-us) tam pasiekti. Taip pat "
+"turėtumėte įtraukti informaciją apie reikalingų ekspertinių žinių lygį ir "
+"(ar) kitus reikalavimus, būtinus tam, kad tie veiksmai būtų efektyvūs."
+
+#. Default: No risks were identified. Please proceed directly to the report.
+#: src/osha/oira/client/templates/actionplan.pt:47
+msgid "expl_actionplan_empty"
+msgstr "Jokių rizikos veiksnių nenustatyta. Pereikite tiesiai prie ataskaitos."
+
+#. Default: Create action plan
+#: src/osha/oira/client/templates/actionplan.pt:53
+msgid "label_create_action_plan"
+msgstr "Sukurti prevencijos priemonių planą"
+
+#. Default: Go to report
+#: src/osha/oira/client/templates/actionplan.pt:54
+msgid "label_jump_to_report"
+msgstr "Eiti į ataskaitą"
+
+#. Default: Preparation
+#: src/osha/oira/client/templates/actionplan.pt:61
+#: src/osha/oira/client/templates/identification.pt:32
+#: src/osha/oira/client/templates/module_actionplan.pt:59
+#: src/osha/oira/client/templates/module_evaluation.pt:45
+#: src/osha/oira/client/templates/module_identification.pt:62
+#: src/osha/oira/client/templates/profile.pt:70
+#: src/osha/oira/client/templates/report.pt:50
+#: src/osha/oira/client/templates/report_actionplan.pt:270
+#: src/osha/oira/client/templates/report_company.pt:61
+#: src/osha/oira/client/templates/report_identification.pt:85
+#: src/osha/oira/client/templates/report_landing.pt:68
+#: src/osha/oira/client/templates/risk_evaluation.pt:133
+#: src/osha/oira/client/templates/risk_identification.pt:51
+#: src/osha/oira/client/templates/sessions.pt:82
+#: src/osha/oira/client/templates/start.pt:36
+#: src/osha/oira/client/templates/update.pt:65
+msgid "label_preparation"
+msgstr "Pasiruošimas"
+
+#. Default: Preparation
+#: src/osha/oira/client/templates/actionplan.pt:62
+#: src/osha/oira/client/templates/identification.pt:33
+#: src/osha/oira/client/templates/module_actionplan.pt:60
+#: src/osha/oira/client/templates/module_evaluation.pt:46
+#: src/osha/oira/client/templates/module_identification.pt:63
+#: src/osha/oira/client/templates/profile.pt:71
+#: src/osha/oira/client/templates/report.pt:51
+#: src/osha/oira/client/templates/report_actionplan.pt:271
+#: src/osha/oira/client/templates/report_company.pt:62
+#: src/osha/oira/client/templates/report_identification.pt:86
+#: src/osha/oira/client/templates/report_landing.pt:69
+#: src/osha/oira/client/templates/risk_evaluation.pt:134
+#: src/osha/oira/client/templates/risk_identification.pt:52
+#: src/osha/oira/client/templates/sessions.pt:83
+#: src/osha/oira/client/templates/start.pt:37
+#: src/osha/oira/client/templates/update.pt:66
+msgid "iphone_label_preparation"
+msgstr "Pasiruošimas"
+
+#. Default: Identification
+#: src/osha/oira/client/templates/actionplan.pt:67
+#: src/osha/oira/client/templates/identification.pt:38
+#: src/osha/oira/client/templates/module_actionplan.pt:65
+#: src/osha/oira/client/templates/module_evaluation.pt:51
+#: src/osha/oira/client/templates/module_identification.pt:68
+#: src/osha/oira/client/templates/profile.pt:75
+#: src/osha/oira/client/templates/report.pt:56
+#: src/osha/oira/client/templates/report_actionplan.pt:276
+#: src/osha/oira/client/templates/report_company.pt:67
+#: src/osha/oira/client/templates/report_identification.pt:91
+#: src/osha/oira/client/templates/report_landing.pt:73
+#: src/osha/oira/client/templates/risk_evaluation.pt:139
+#: src/osha/oira/client/templates/risk_identification.pt:57
+#: src/osha/oira/client/templates/sessions.pt:86
+#: src/osha/oira/client/templates/start.pt:41
+#: src/osha/oira/client/templates/update.pt:70
+msgid "label_identification"
+msgstr "Identifikavimas"
+
+#. Default: Identification
+#: src/osha/oira/client/templates/actionplan.pt:68
+#: src/osha/oira/client/templates/identification.pt:39
+#: src/osha/oira/client/templates/module_actionplan.pt:66
+#: src/osha/oira/client/templates/module_evaluation.pt:52
+#: src/osha/oira/client/templates/module_identification.pt:69
+#: src/osha/oira/client/templates/profile.pt:76
+#: src/osha/oira/client/templates/report.pt:57
+#: src/osha/oira/client/templates/report_actionplan.pt:277
+#: src/osha/oira/client/templates/report_company.pt:68
+#: src/osha/oira/client/templates/report_identification.pt:92
+#: src/osha/oira/client/templates/report_landing.pt:74
+#: src/osha/oira/client/templates/risk_evaluation.pt:140
+#: src/osha/oira/client/templates/risk_identification.pt:58
+#: src/osha/oira/client/templates/sessions.pt:87
+#: src/osha/oira/client/templates/start.pt:42
+#: src/osha/oira/client/templates/update.pt:71
+msgid "iphone_label_identification"
+msgstr "Identifikavimas"
+
+#. Default: Evaluation
+#: src/osha/oira/client/templates/actionplan.pt:73
+#: src/osha/oira/client/templates/identification.pt:44
+#: src/osha/oira/client/templates/module_actionplan.pt:71
+#: src/osha/oira/client/templates/module_evaluation.pt:57
+#: src/osha/oira/client/templates/module_identification.pt:77
+#: src/osha/oira/client/templates/profile.pt:79
+#: src/osha/oira/client/templates/report.pt:62
+#: src/osha/oira/client/templates/report_actionplan.pt:282
+#: src/osha/oira/client/templates/report_company.pt:73
+#: src/osha/oira/client/templates/report_identification.pt:97
+#: src/osha/oira/client/templates/report_landing.pt:77
+#: src/osha/oira/client/templates/risk_evaluation.pt:145
+#: src/osha/oira/client/templates/risk_identification.pt:66
+#: src/osha/oira/client/templates/sessions.pt:90
+#: src/osha/oira/client/templates/start.pt:45
+#: src/osha/oira/client/templates/update.pt:74
+msgid "label_evaluation"
+msgstr "Vertinimas"
+
+#. Default: Evaluation
+#: src/osha/oira/client/templates/actionplan.pt:74
+#: src/osha/oira/client/templates/identification.pt:45
+#: src/osha/oira/client/templates/module_actionplan.pt:72
+#: src/osha/oira/client/templates/module_evaluation.pt:58
+#: src/osha/oira/client/templates/module_identification.pt:78
+#: src/osha/oira/client/templates/profile.pt:80
+#: src/osha/oira/client/templates/report.pt:63
+#: src/osha/oira/client/templates/report_actionplan.pt:283
+#: src/osha/oira/client/templates/report_company.pt:74
+#: src/osha/oira/client/templates/report_identification.pt:98
+#: src/osha/oira/client/templates/report_landing.pt:78
+#: src/osha/oira/client/templates/risk_evaluation.pt:146
+#: src/osha/oira/client/templates/risk_identification.pt:67
+#: src/osha/oira/client/templates/sessions.pt:91
+#: src/osha/oira/client/templates/start.pt:46
+#: src/osha/oira/client/templates/update.pt:75
+msgid "iphone_label_evaluation"
+msgstr "Vertinimas"
+
+#. Default: Action Plan
+#: src/osha/oira/client/templates/actionplan.pt:79
+#: src/osha/oira/client/templates/identification.pt:50
+#: src/osha/oira/client/templates/module_actionplan.pt:77
+#: src/osha/oira/client/templates/module_evaluation.pt:66
+#: src/osha/oira/client/templates/module_identification.pt:83
+#: src/osha/oira/client/templates/profile.pt:83
+#: src/osha/oira/client/templates/report.pt:68
+#: src/osha/oira/client/templates/report_actionplan.pt:288
+#: src/osha/oira/client/templates/report_company.pt:79
+#: src/osha/oira/client/templates/report_identification.pt:103
+#: src/osha/oira/client/templates/report_landing.pt:81
+#: src/osha/oira/client/templates/risk_evaluation.pt:154
+#: src/osha/oira/client/templates/risk_identification.pt:72
+#: src/osha/oira/client/templates/sessions.pt:94
+#: src/osha/oira/client/templates/start.pt:49
+#: src/osha/oira/client/templates/update.pt:78
+msgid "label_action_plan"
+msgstr "Prevencijos priemonių planas"
+
+#. Default: Action Plan
+#: src/osha/oira/client/templates/actionplan.pt:80
+#: src/osha/oira/client/templates/identification.pt:51
+#: src/osha/oira/client/templates/module_actionplan.pt:78
+#: src/osha/oira/client/templates/module_evaluation.pt:67
+#: src/osha/oira/client/templates/module_identification.pt:84
+#: src/osha/oira/client/templates/profile.pt:84
+#: src/osha/oira/client/templates/report.pt:69
+#: src/osha/oira/client/templates/report_actionplan.pt:289
+#: src/osha/oira/client/templates/report_company.pt:80
+#: src/osha/oira/client/templates/report_identification.pt:104
+#: src/osha/oira/client/templates/report_landing.pt:82
+#: src/osha/oira/client/templates/risk_evaluation.pt:155
+#: src/osha/oira/client/templates/risk_identification.pt:73
+#: src/osha/oira/client/templates/sessions.pt:95
+#: src/osha/oira/client/templates/start.pt:50
+#: src/osha/oira/client/templates/update.pt:79
+msgid "iphone_label_action_plan"
+msgstr "Prevencijos priemonių planas"
+
+#. Default: Report
+#: src/osha/oira/client/templates/actionplan.pt:85
+#: src/osha/oira/client/templates/identification.pt:56
+#: src/osha/oira/client/templates/module_actionplan.pt:86
+#: src/osha/oira/client/templates/module_evaluation.pt:72
+#: src/osha/oira/client/templates/module_identification.pt:89
+#: src/osha/oira/client/templates/profile.pt:87
+#: src/osha/oira/client/templates/report.pt:74
+#: src/osha/oira/client/templates/report_actionplan.pt:294
+#: src/osha/oira/client/templates/report_company.pt:85
+#: src/osha/oira/client/templates/report_identification.pt:109
+#: src/osha/oira/client/templates/report_landing.pt:85
+#: src/osha/oira/client/templates/risk_evaluation.pt:160
+#: src/osha/oira/client/templates/risk_identification.pt:78
+#: src/osha/oira/client/templates/sessions.pt:98
+#: src/osha/oira/client/templates/start.pt:53
+#: src/osha/oira/client/templates/update.pt:82
+msgid "label_report"
+msgstr "Ataskaita"
+
+#. Default: Report
+#: src/osha/oira/client/templates/actionplan.pt:86
+#: src/osha/oira/client/templates/identification.pt:57
+#: src/osha/oira/client/templates/module_actionplan.pt:87
+#: src/osha/oira/client/templates/module_evaluation.pt:73
+#: src/osha/oira/client/templates/module_identification.pt:90
+#: src/osha/oira/client/templates/profile.pt:88
+#: src/osha/oira/client/templates/report.pt:75
+#: src/osha/oira/client/templates/report_actionplan.pt:295
+#: src/osha/oira/client/templates/report_company.pt:86
+#: src/osha/oira/client/templates/report_identification.pt:110
+#: src/osha/oira/client/templates/report_landing.pt:86
+#: src/osha/oira/client/templates/risk_evaluation.pt:161
+#: src/osha/oira/client/templates/risk_identification.pt:79
+#: src/osha/oira/client/templates/sessions.pt:99
+#: src/osha/oira/client/templates/start.pt:54
+#: src/osha/oira/client/templates/update.pt:83
+msgid "iphone_report"
+msgstr "Ataskaita"
+
+#. Default: Logout
+#: src/osha/oira/client/templates/actionplan.pt:92
+#: src/osha/oira/client/templates/identification.pt:64
+#: src/osha/oira/client/templates/module_actionplan.pt:94
+#: src/osha/oira/client/templates/module_evaluation.pt:79
+#: src/osha/oira/client/templates/module_identification.pt:97
+#: src/osha/oira/client/templates/profile.pt:94
+#: src/osha/oira/client/templates/report.pt:82
+#: src/osha/oira/client/templates/report_actionplan.pt:307
+#: src/osha/oira/client/templates/report_company.pt:93
+#: src/osha/oira/client/templates/report_identification.pt:117
+#: src/osha/oira/client/templates/report_landing.pt:92
+#: src/osha/oira/client/templates/risk_evaluation.pt:168
+#: src/osha/oira/client/templates/risk_identification.pt:86
+#: src/osha/oira/client/templates/sessions.pt:105
+#: src/osha/oira/client/templates/start.pt:60
+#: src/osha/oira/client/templates/update.pt:89
+msgid "navigation_logout"
+msgstr "Atsijungti"
+
+#. Default: Sessions
+#. Default: Surveys
+#: src/osha/oira/client/templates/actionplan.pt:93
+#: src/osha/oira/client/templates/identification.pt:65
+#: src/osha/oira/client/templates/module_actionplan.pt:95
+#: src/osha/oira/client/templates/module_evaluation.pt:80
+#: src/osha/oira/client/templates/module_identification.pt:98
+#: src/osha/oira/client/templates/profile.pt:95
+#: src/osha/oira/client/templates/report.pt:83
+#: src/osha/oira/client/templates/report_actionplan.pt:308
+#: src/osha/oira/client/templates/report_company.pt:94
+#: src/osha/oira/client/templates/report_identification.pt:118
+#: src/osha/oira/client/templates/report_landing.pt:93
+#: src/osha/oira/client/templates/risk_evaluation.pt:169
+#: src/osha/oira/client/templates/risk_identification.pt:87
+#: src/osha/oira/client/templates/start.pt:61
+#: src/osha/oira/client/templates/update.pt:90
+msgid "navigation_surveys"
+msgstr "Seansai"
+
+#. Default: Help
+#: src/osha/oira/client/templates/actionplan.pt:94
+#: src/osha/oira/client/templates/disclaimer.pt:67
+#: src/osha/oira/client/templates/identification.pt:66
+#: src/osha/oira/client/templates/module_actionplan.pt:96
+#: src/osha/oira/client/templates/module_evaluation.pt:81
+#: src/osha/oira/client/templates/module_identification.pt:99
+#: src/osha/oira/client/templates/profile.pt:96
+#: src/osha/oira/client/templates/register.pt:41
+#: src/osha/oira/client/templates/report.pt:84
+#: src/osha/oira/client/templates/report_actionplan.pt:309
+#: src/osha/oira/client/templates/report_company.pt:95
+#: src/osha/oira/client/templates/report_identification.pt:119
+#: src/osha/oira/client/templates/report_landing.pt:94
+#: src/osha/oira/client/templates/risk_evaluation.pt:170
+#: src/osha/oira/client/templates/risk_identification.pt:88
+#: src/osha/oira/client/templates/sessions.pt:106
+#: src/osha/oira/client/templates/start.pt:62
+#: src/osha/oira/client/templates/update.pt:91
+msgid "navigation_help"
+msgstr "Žinynas"
+
+#. Default: Status
+#: src/osha/oira/client/templates/actionplan.pt:95
+#: src/osha/oira/client/templates/identification.pt:67
+#: src/osha/oira/client/templates/module_actionplan.pt:97
+#: src/osha/oira/client/templates/module_evaluation.pt:82
+#: src/osha/oira/client/templates/module_identification.pt:100
+#: src/osha/oira/client/templates/report.pt:85
+#: src/osha/oira/client/templates/report_actionplan.pt:310
+#: src/osha/oira/client/templates/report_company.pt:96
+#: src/osha/oira/client/templates/report_identification.pt:120
+#: src/osha/oira/client/templates/risk_evaluation.pt:171
+#: src/osha/oira/client/templates/risk_identification.pt:89
+msgid "navigation_status"
+msgstr "Būsena"
+
+#. Default: Settings
+#: src/osha/oira/client/templates/actionplan.pt:96
+#: src/osha/oira/client/templates/identification.pt:68
+#: src/osha/oira/client/templates/module_actionplan.pt:98
+#: src/osha/oira/client/templates/module_evaluation.pt:83
+#: src/osha/oira/client/templates/module_identification.pt:101
+#: src/osha/oira/client/templates/report.pt:86
+#: src/osha/oira/client/templates/report_actionplan.pt:311
+#: src/osha/oira/client/templates/report_company.pt:97
+#: src/osha/oira/client/templates/report_identification.pt:121
+#: src/osha/oira/client/templates/report_landing.pt:95
+#: src/osha/oira/client/templates/risk_evaluation.pt:172
+#: src/osha/oira/client/templates/sessions.pt:107
+#: src/osha/oira/client/templates/start.pt:63
+#: src/osha/oira/client/templates/update.pt:92
+msgid "navigation_settings"
+msgstr "Nuostatos"
+
+#. Default: Disclaimer of Liability
+#: src/osha/oira/client/templates/disclaimer.pt:17
+msgid "header_disclaimer"
+msgstr "Atsakomybės apribojimas"
+
+#. Default: This tool contains links to other websites which are not are not under
+#. the control of the European Agency for Safety and Health and the organisations
+#. involved. The Agency and the organisations involved accept no liability in
+#. respect of the content of these websites.
+#: src/osha/oira/client/templates/disclaimer.pt:19
+msgid "disclaimer_other_websites"
+msgstr ""
+"Šioje priemonėje pateiktos nuorodos į kitas interneto svetaines, kurių "
+"nekontroliuoja Europos saugos ir sveikatos darbe agentūra bei susijusios "
+"organizacijos. Agentūra ir susijusios organizacijos neprisiima atsakomybės "
+"už šių interneto svetainių turinį."
+
+#. Default: The European Agency for Safety and Health at Work and the organisations
+#. involved will not be liable for any false, inaccurate, inappropriate or
+#. incomplete information stored in the OiRA tool or any other damages as a result
+#. of using the software.
+#: src/osha/oira/client/templates/disclaimer.pt:26
+msgid "disclaimer_tool_information"
+msgstr ""
+"Europos saugos ir sveikatos darbe agentūra bei susijusios organizacijos "
+"neatsako už jokią OiRA priemonėje saugomą klaidingą, netikslią, netinkamą ar "
+"neišsamią informaciją arba už bet kokią kitą žalą, atsiradusią naudojant šią "
+"programinę įrangą."
+
+#. Default: Moreover, an OiRA tool is not intended to cover all the risks of every
+#. workplace but to help you put the risk assessment process into practice. For the
+#. OiRA tool to be fully effective it needs to be adapted to the context of your
+#. particular enterprise - some items might need to be added others omitted if they
+#. are not relevant.
+#: src/osha/oira/client/templates/disclaimer.pt:33
+msgid "disclaimer_risk_coverage"
+msgstr ""
+"Be to, OiRA priemonė nėra skirta aprašyti visus su kiekviena darbo vieta "
+"susijusius rizikos veiksnius, o yra skirta padėti jums praktiškai "
+"įgyvendinti rizikos įvertinimo procesą. Tam, kad OiRA priemonė būtų visiškai "
+"veiksminga, ją reikia pritaikyti prie jūsų konkrečios įmonės konteksto – kai "
+"kuriuos elementus gali prireikti įtraukti, o kitų nepaisyti, jei jie nėra "
+"svarbūs."
+
+#. Default: For practical and analytical reasons, the tool presents
+#. problems/hazards separately, but in workplaces they may be intertwined.
+#. Therefore interactions between the different problems or risk factors identified
+#. must be taken into account.
+#: src/osha/oira/client/templates/disclaimer.pt:41
+msgid "disclaimer_interactions"
+msgstr ""
+"Praktiniais ir analitiniais sumetimais ši priemonė pateikia problemas / "
+"pavojus atskirai, bet darbo vietose jie gali būti persipynę. Todėl privaloma "
+"atsižvelgti į tai, kaip sąveikauja identifikuotos skirtingos problemos ar "
+"rizikos veiksniai."
+
+#. Default: Therefore, EU-OSHA does not accept any liability for damages and claims
+#. in case a tool does not cover all risks of a given sector.
+#: src/osha/oira/client/templates/disclaimer.pt:48
+msgid "disclaimer_coverage_liability"
+msgstr ""
+"Todėl EU-OSHA neprisiima atsakomybės už žalą ir nepriima pretenzijų dėl to, "
+"kad ši priemonė neapima visų konkrečiame sektoriuje patiriamų rizikos "
+"veiksnių."
+
+#. Default: Moreover, the Agency and the organisations involved in the production
+#. of the OiRA tool do not accept any liability for damages and claims arising out
+#. of the use or inability to use the tool and the data stored therein. Similarly,
+#. EU-OSHA does not accept any liability in case of unavailability of the function
+#. of the OiRA tools to print the report, recording the risk assessment
+#. automatically generated by the tool. Therefore, the employer has to make sure,
+#. at any time, to be in possession of a printed, accurate and up-dated risk
+#. assessment.
+#: src/osha/oira/client/templates/disclaimer.pt:53
+msgid "disclaimer_printed_assesment"
+msgstr ""
+"Be to, agentūra ir organizacijos, dalyvavusios rengiant OiRA priemonę, "
+"neprisiima jokios atsakomybės už žalą ir nepriima pretenzijų dėl priemonės "
+"bei joje laikomų duomenų naudojimo ar negalėjimo naudoti. EU-OSHA taip pat "
+"neprisiima atsakomybės tuo atveju, jei neveikia OiRA priemonių funkcija "
+"spausdinti ataskaitą įrašant priemonės automatiškai generuotą rizikos "
+"įvertinimą. Todėl darbdavys turi pasirūpinti, kad bet kuriuo metu turėtų "
+"išspausdintą, tikslų ir atnaujintą rizikos įvertinimą."
+
+#. Default: Regions
+#: src/osha/oira/client/templates/frontpage.pt:406
+msgid "header_regions"
+msgstr "Regionai"
+
+#. Default: You can print the ${list-of-risks}.
+#: src/osha/oira/client/templates/identification.pt:21
+msgid "intro_identification"
+msgstr "Galite išspausdinti ${list-of-risks}."
+
+#. Default: Start Risk Identification
+#: src/osha/oira/client/templates/identification.pt:26
+msgid "label_start_identification"
+msgstr "Pradėti rizikos identifikavimą"
+
+#. Default: Previous
+#: src/osha/oira/client/templates/module_actionplan.pt:52
+#: src/osha/oira/client/templates/module_evaluation.pt:38
+#: src/osha/oira/client/templates/module_identification.pt:48
+#: src/osha/oira/client/templates/register.pt:34
+#: src/osha/oira/client/templates/report_company.pt:52
+#: src/osha/oira/client/templates/risk_evaluation.pt:119
+#: src/osha/oira/client/templates/risk_identification.pt:28
+#: src/osha/oira/client/templates/sessions.pt:75
+#: src/osha/oira/client/templates/start.pt:29
+msgid "label_previous"
+msgstr "Ankstesnis"
+
+#. Default: Next
+#: src/osha/oira/client/templates/module_actionplan.pt:53
+#: src/osha/oira/client/templates/module_evaluation.pt:39
+#: src/osha/oira/client/templates/module_identification.pt:54
+#: src/osha/oira/client/templates/register.pt:35
+#: src/osha/oira/client/templates/sessions.pt:76
+msgid "label_next"
+msgstr "Tolesnis"
+
+#. Default: Yes
+#: src/osha/oira/client/templates/module_identification.pt:41
+#: src/osha/oira/client/templates/risk_identification.pt:22
+msgid "label_yes"
+msgstr "Taip"
+
+#. Default: No
+#: src/osha/oira/client/templates/module_identification.pt:44
+#: src/osha/oira/client/templates/risk_identification.pt:23
+msgid "label_no"
+msgstr "Ne"
+
+#. Default: Save and continue
+#: src/osha/oira/client/templates/module_identification.pt:50
+#: src/osha/oira/client/templates/profile.pt:63
+#: src/osha/oira/client/templates/report.pt:38
+#: src/osha/oira/client/templates/report_company.pt:54
+#: src/osha/oira/client/templates/risk_evaluation.pt:120
+#: src/osha/oira/client/templates/risk_identification.pt:29
+msgid "label_save_and_continue"
+msgstr "Įrašyti ir tęsti"
+
+#. Default: Tailor the risk assessment to your organisation
+#: src/osha/oira/client/templates/profile.pt:16
+msgid "header_profile"
+msgstr "Rizikos įvertinimą specialiai pritaikykite jūsų organizacijai"
+
+#. Default: In order to tailor the risk assessment to your organisation you may be
+#. asked to:
+#: src/osha/oira/client/templates/profile.pt:18
+msgid "expl_profile"
+msgstr ""
+"Tam, kad rizikos įvertinimas būtų specialiai pritaikytas jūsų organizacijai, "
+"iš jūsų gali būti paprašyta:"
+
+#. Default: select or skip situation(s) relevant or not to your business activity
+#. and tick the box(es) if appropriate
+#: src/osha/oira/client/templates/profile.pt:23
+msgid "expl_profile_bullet1"
+msgstr ""
+"parinkti arba praleisti jūsų verslui aktualią (-as) ar neaktualią (-as) "
+"situaciją (-as) ir, jei reikia, pažymėti langelį (-us)"
+
+#. Default: list multiple business units, or branches, or stores, etc. These
+#. related risks will be repeated for each name you have entered.
+#: src/osha/oira/client/templates/profile.pt:27
+msgid "expl_profile_bullet2"
+msgstr ""
+"surašyti daugiau verslo padalinių, filialų ar parduotuvių ir pan. Šie susiję "
+"rizikos veiksniai bus kartojami su kiekvienu jūsų įvestu vardu."
+
+#: src/osha/oira/client/templates/profile.pt:37
+#: src/osha/oira/client/templates/profile.pt:43
+#: src/osha/oira/client/templates/update.pt:32
+#: src/osha/oira/client/templates/update.pt:38
+#: src/osha/oira/content/templates/profilequestion_add.pt:62
+#: src/osha/oira/content/templates/profilequestion_add.pt:67
+#: src/osha/oira/content/templates/profilequestion_add.pt:83
+#: src/osha/oira/content/templates/profilequestion_add.pt:88
+msgid "Yes"
+msgstr ""
+
+#: src/osha/oira/client/templates/profile.pt:38
+#: src/osha/oira/client/templates/profile.pt:44
+#: src/osha/oira/client/templates/update.pt:33
+#: src/osha/oira/client/templates/update.pt:39
+#: src/osha/oira/content/templates/profilequestion_add.pt:63
+#: src/osha/oira/content/templates/profilequestion_add.pt:68
+#: src/osha/oira/content/templates/profilequestion_add.pt:84
+#: src/osha/oira/content/templates/profilequestion_add.pt:89
+msgid "No"
+msgstr ""
+
+#: src/osha/oira/client/templates/profile.pt:53
+#: src/osha/oira/client/templates/profile.pt:54
+#: src/osha/oira/client/templates/update.pt:48
+#: src/osha/oira/client/templates/update.pt:49
+#: src/osha/oira/content/templates/profilequestion_add.pt:94
+#: src/osha/oira/content/templates/profilequestion_add.pt:95
+msgid "Remove"
+msgstr ""
+
+#: src/osha/oira/client/templates/profile.pt:57
+#: src/osha/oira/client/templates/update.pt:52
+#: src/osha/oira/content/templates/profilequestion_add.pt:96
+msgid "Add another item"
+msgstr ""
+
+#. Default: Register
+#: src/osha/oira/client/templates/register.pt:17
+#: src/osha/oira/client/templates/register.pt:25
+msgid "header_register"
+msgstr "Registruotis"
+
+#. Default: Email address
+#: src/osha/oira/client/templates/register.pt:27
+msgid "label_email"
+msgstr "E. pašto adresas"
+
+#. Default: Desired password
+#: src/osha/oira/client/templates/register.pt:29
+msgid "label_new_password"
+msgstr "Pageidaujamas slaptažodis"
+
+#. Default: Again password
+#: src/osha/oira/client/templates/register.pt:31
+msgid "label_password_confirm"
+msgstr "Pakartokite slaptažodį"
+
+#: src/osha/oira/client/templates/rename-session.pt:16
+msgid "Change name of session"
+msgstr ""
+
+#: src/osha/oira/client/templates/rename-session.pt:20
+msgid "Current name: \"${name}\""
+msgstr ""
+
+#: src/osha/oira/client/templates/rename-session.pt:22
+msgid "Please fill out a new name for this survey"
+msgstr ""
+
+#: src/osha/oira/client/templates/rename-session.pt:28
+msgid "Save changes"
+msgstr ""
+
+#. Default: Reporting
+#: src/osha/oira/client/templates/report.pt:17
+msgid "header_reporting"
+msgstr "Ataskaitos"
+
+#. Default: Now that you have finished identifying all the risks in your
+#. organisation and created an action plan you can create a report which lists all
+#. your results. You can, if desired, add some extra comments that should be
+#. included in this report in the field below.
+#: src/osha/oira/client/templates/report.pt:19
+msgid "report_intro"
+msgstr ""
+"Dabar, kai baigėte identifikuoti visus rizikos veiksnius jūsų organizacijoje "
+"ir sukūrėte prevencijos priemonių planą, galite sukurti ataskaitą, kurioje "
+"būtų surašyti visi rezultatai. Jei pageidaujate, žemiau esančiame laukelyje "
+"galite pridėti keletą papildomų komentarų, kurie turėtų būti įtraukti į šią "
+"ataskaitą."
+
+#. Default: Download
+#: src/osha/oira/client/templates/report_actionplan.pt:27
+#: src/osha/oira/client/templates/report_identification.pt:24
+msgid "button_download"
+msgstr "Atsisiųsti"
+
+#. Default: General approach (to eliminate or reduce the risk):
+#: src/osha/oira/client/templates/report_actionplan.pt:102
+msgid "report_measure_actionplan"
+msgstr "Bendrasis požiūris (kaip pašalinti ar sumažinti riziką):"
+
+#. Default: Specific action(s) required to implement this approach:
+#: src/osha/oira/client/templates/report_actionplan.pt:106
+msgid "report_measure_preventionplan"
+msgstr ""
+"Konkretus (-ūs) veiksmas (-ai), reikalingas (-i) šiam požiūriui įgyvendinti:"
+
+#. Default: Level of expertise and/or requirements needed:
+#: src/osha/oira/client/templates/report_actionplan.pt:110
+msgid "report_measure_requirements"
+msgstr "Reikalingų ekspertinių žinių lygis ir (ar) reikalavimai:"
+
+#. Default: ${responsible} is responsible for this task.
+#: src/osha/oira/client/templates/report_actionplan.pt:117
+msgid "report_measure_responsible"
+msgstr "${responsible} atsako už šią užduotį."
+
+#. Default: ${responsible} is responsible for this task which starts on ${start}.
+#: src/osha/oira/client/templates/report_actionplan.pt:119
+msgid "report_measure_responsible_and_start"
+msgstr "${responsible} atsako už šią užduotį, kuri pradedama ${start}."
+
+#. Default: ${responsible} is responsible for this task which ends on ${end}.
+#: src/osha/oira/client/templates/report_actionplan.pt:122
+msgid "report_measure_responsible_and_end"
+msgstr "${responsible} atsako už šią užduotį, kuri baigiama ${end}."
+
+#. Default: This task starts on ${start}.
+#: src/osha/oira/client/templates/report_actionplan.pt:125
+msgid "report_measure_start_only"
+msgstr "Ši užduotis pradedama ${start}."
+
+#. Default: This task ends on ${end}.
+#: src/osha/oira/client/templates/report_actionplan.pt:128
+msgid "report_measure_end_only"
+msgstr "Ši užduotis baigiama ${end}."
+
+#. Default: This task starts on ${start} and ends on ${end}.
+#: src/osha/oira/client/templates/report_actionplan.pt:131
+msgid "report_measure_start_and_stop"
+msgstr "Ši užduotis pradedama ${start} ir baigiama ${end}."
+
+#. Default: ${responsible} is responsible for this task which starts on ${start}
+#. and ends on ${end}.
+#: src/osha/oira/client/templates/report_actionplan.pt:135
+msgid "report_measure_full"
+msgstr ""
+"${responsible} atsako už šią užduotį, kuri pradedama ${start} ir baigiama "
+"${end}."
+
+#. Default: There is a budget of ${amount} for this measure.
+#: src/osha/oira/client/templates/report_actionplan.pt:139
+msgid "report_measure_budget"
+msgstr "Šiai priemonei skirtas ${amount} biudžetas."
+
+#. Default: The following risks have not yet been answered. Please do so at the
+#. soonest possibility.
+#: src/osha/oira/client/templates/report_actionplan.pt:189
+msgid "desc_unanswered_risks"
+msgstr ""
+"Į toliau pateiktus rizikos veiksnius dar nebuvo atsakyta. Padarykite tai "
+"esant pirmai galimybei."
+
+#. Default: This risk is not present in your organisation, but since the sector
+#. organisation considers this one of the priority risks it must be included in
+#. this report.
+#: src/osha/oira/client/templates/report_actionplan.pt:260
+#: src/osha/oira/client/templates/webhelpers.pt:180
+msgid "top5_risk_not_present"
+msgstr ""
+"Šio rizikos veiksnio nėra jūsų organizacijoje, bet kadangi sektoriaus "
+"organizacija laiko jį esant viena iš prioritetinių rizikų, jį reikia "
+"įtraukti į šią ataskaitą."
+
+#. Default: You are about to print the report... please complete the optional form
+#. and then proceed.
+#: src/osha/oira/client/templates/report_company.pt:17
+msgid "hader_company_details"
+msgstr ""
+"Jūs pasirengę spausdinti ataskaitą... Užpildykite pasirenkamą formą ir "
+"tęskite."
+
+#. Default: Please fix the indicated errors.
+#: src/osha/oira/client/templates/report_company.pt:18
+msgid "warn_fix_errors"
+msgstr "Ištaisykite nurodytas klaidas."
+
+#. Default: You are free to provide the information below. This information is
+#. meant to improve the tools and the services provided. This data will not appear
+#. in the report.
+#: src/osha/oira/client/templates/report_company.pt:19
+msgid "company_details_intro"
+msgstr ""
+"Informaciją žemiau pateikiate savo nuožiūra. Ši informacija yra skirta "
+"priemonėms ir teikiamoms paslaugoms tobulinti. Šie duomenys nebus pateikiami "
+"ataskaitoje."
+
+#. Default: Your country
+#: src/osha/oira/client/templates/report_company.pt:26
+msgid "label_company_country"
+msgstr "Jūsų šalis"
+
+#. Default: Through which channel did you learn about this tool?
+#: src/osha/oira/client/templates/report_company.pt:36
+msgid "label_referer"
+msgstr "Kuriuo kanalu sužinojote apie šią priemonę?"
+
+#. Default: an employers' organisation
+#: src/osha/oira/client/templates/report_company.pt:37
+msgid "referer_employers_organisation"
+msgstr "darbdavių organizacija"
+
+#. Default: a trade union organisation
+#: src/osha/oira/client/templates/report_company.pt:38
+msgid "referer_trade_union"
+msgstr "profesinės sąjungos organizacija"
+
+#. Default: a national public institution/administration
+#: src/osha/oira/client/templates/report_company.pt:39
+msgid "referer_national_public_institution"
+msgstr "nacionalinė viešoji institucija / administracija"
+
+#. Default: Ministry, Labour Inspectorate, National Institute for Safety and Health
+#. at Work, etc.
+#: src/osha/oira/client/templates/report_company.pt:40
+msgid "info_referer_national_public_institution"
+msgstr ""
+"ministerija, darbo inspekcija, nacionalinis saugos ir sveikatos darbe "
+"institutas ir kt."
+
+#. Default: an European institution/administration
+#: src/osha/oira/client/templates/report_company.pt:41
+msgid "referer_eu_institution"
+msgstr "Europos institucija / administracija"
+
+#. Default: The European Agency for Safety and Health at Work, European social
+#. partners, etc.
+#: src/osha/oira/client/templates/report_company.pt:42
+msgid "info_referer_eu_institution"
+msgstr ""
+"Europos saugos ir sveikatos darbe agentūra, Europos socialiniai partneriai "
+"ir kt."
+
+#. Default: health and safety experts
+#: src/osha/oira/client/templates/report_company.pt:43
+msgid "referer_health_safety_expert"
+msgstr "sveikatos ir saugos ekspertai"
+
+#. Default: other channel
+#: src/osha/oira/client/templates/report_company.pt:44
+msgid "referer_other"
+msgstr "kitas kanalas"
+
+#. Default: Skip this step
+#: src/osha/oira/client/templates/report_company.pt:53
+msgid "label_skip"
+msgstr "Praleisti šį etapą"
+
+#. Default: You responded negative to the above statement.
+#: src/osha/oira/client/templates/report_identification.pt:48
+#: src/osha/oira/client/templates/webhelpers.pt:192
+msgid "warn_risk_present"
+msgstr "Į aukščiau pateiktą teiginį jūs atsakėte neigiamai."
+
+#: src/osha/oira/client/templates/report_landing.pt:20
+msgid "Download and print your report"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:22
+msgid "not"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:22
+msgid ""
+"Save the report on your pc and print it. You can also modify it or add more "
+"information. Please note that changes made on your pc will ${not} be saved "
+"in the OiRA tool"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:23
+msgid "Use the report to:"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:26
+msgid "Provide evidence for supervisory authorities."
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:27
+msgid ""
+"Pass information to the people concerned (workers, safety reps, employer, "
+"OSH experts, ...)"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:28
+msgid "Monitor and assess whether necessary measures have been introduced."
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:29
+msgid ""
+"Record any revision if circumstances change (new machines, new workers, as a "
+"result of findings of any accident investigations, etc.)"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:33
+msgid "Download the full report"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:35
+msgid "Full report"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:38
+msgid "Format: Rich Text Format (.rtf)"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:39
+msgid ""
+"Contains: all the information and input provided by you throughout the risk "
+"assessment process."
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:42
+#: src/osha/oira/client/templates/report_landing.pt:58
+msgid "Use it to"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:44
+msgid "Provide evidence"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:44
+msgid "${provide-evidence} for supervisory authorities (labour inspectorate)."
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:47
+msgid ""
+"We recommend to always keep an updated printed version of your risk "
+"assessment (report) available in your company!"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:51
+msgid "Download the action plan"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:52
+msgid "Action plan"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:54
+msgid "Format: Office Open XML Workbook (.xlsx)"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:55
+msgid ""
+"Contains: only the measures to be implemented to effectively manage the "
+"identified risks."
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:60
+msgid "Manage"
+msgstr ""
+
+#: src/osha/oira/client/templates/report_landing.pt:60
+msgid ""
+"${manage} the problems/risks in your workplace (specific tasks, expertise, "
+"responsibilities, deadlines)."
+msgstr ""
+
+#: src/osha/oira/client/templates/risk_actionplan.pt:19
+msgid ""
+"Are you sure you want to delete this measure? This action can not be "
+"reverted."
+msgstr ""
+"Ar tikrai norite ištrinti šią priemonę? Šio veiksmo nebus galima atšaukti."
+
+#: src/osha/oira/client/templates/risk_actionplan.pt:20
+msgid ""
+"The current text in the fields 'Action plan', 'Prevention plan' and "
+"'Requirements' of this measure will be overwritten. This action cannot be "
+"reverted. Are you sure you want to continue?"
+msgstr ""
+"Šios priemonės laukuose „Prevencijos priemonių planas“, „Prevencijos planas“ "
+"ir „Reikalavimai“ esantis tekstas bus perrašytas. Šio veiksmo nebus galima "
+"atšaukti. Ar tikrai norite tęsti?"
+
+#. Default: Add
+#: src/osha/oira/client/templates/risk_actionplan.pt:24
+msgid "button_add"
+msgstr "Pridėti"
+
+#. Default: Select one or more of the known common measures provided.
+#: src/osha/oira/client/templates/risk_actionplan.pt:48
+msgid "label_select_measure"
+msgstr "Parinkite vieną ar daugiau iš pateiktų žinomų bendrųjų priemonių."
+
+#. Default: Delete
+#: src/osha/oira/client/templates/risk_actionplan.pt:67
+#: src/osha/oira/client/templates/sessions.pt:40
+msgid "label_delete"
+msgstr "Ištrinti"
+
+#. Default: Add another measure
+#: src/osha/oira/client/templates/risk_actionplan.pt:72
+msgid "label_add"
+msgstr "Pridėti kitą priemonę"
+
+#. Default: Description
+#: src/osha/oira/client/templates/risk_actionplan.pt:86
+msgid "label_description"
+msgstr "Aprašas"
+
+#: src/osha/oira/client/templates/risk_actionplan.pt:87
+msgid "Standard solutions"
+msgstr "Standartiniai sprendimai"
+
+#. Default: Describe: 1) what is your general approach to eliminate or (if the risk
+#. is not avoidable) reduce the risk; 2) the specific action(s) required to
+#. implement this approach (to eliminate or to reduce the risk); 3) the level of
+#. expertise needed to implement the measure, for instance “common sense (no OSH
+#. knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or
+#. training and/or consultation of OSH guidance required”, or “OSH expert”. You can
+#. also describe here any other additional requirement (if any).
+#: src/osha/oira/client/templates/risk_actionplan.pt:88
+msgid "actionplan_measure_tooltip"
+msgstr ""
+"Aprašykite: 1) kaip, jūsų požiūriu, apskritai reikia šalinti riziką arba "
+"(jei rizika neišvengiama) ją mažinti; 2) konkretų (-ius) veiksmą (-us), "
+"reikalingą (-us) šiam požiūriui įgyvendinti (pašalinti arba sumažinti "
+"riziką); 3) ekspertinių žinių, reikalingų priemonei įgyvendinti, lygį, "
+"pavyzdžiui, \"bendras supratimas (žinios apie DSS nebūtinos)\", \"nereikia "
+"specialių ekspertinių žinių apie DSS, bet būtinos minimalios žinios apie DSS "
+"arba su DSS susiję mokymai ir (ar) konsultacijos\" arba \"DSS ekspertas\". "
+"Čia taip pat galite aprašyti bet kokį kitą papildomą reikalavimą (jei yra)."
+
+#. Default: Appoint someone in your company to be responsible for the
+#. implementation of this measure. This person will have the authority to take the
+#. steps described in the Plan and/or the responsibility to ensure that they are
+#. carried out.
+#: src/osha/oira/client/templates/risk_actionplan.pt:120
+msgid "actionplan_measure_responsible_tooltip"
+msgstr ""
+"Ką nors iš jūsų bendrovės paskirkite būti atsakingu už šios priemonės "
+"įgyvendinimą. Šis asmuo turės įgaliojimų imtis plane aprašytų veiksmų ir "
+"(ar) privalės užtikrinti, kad jie būtų vykdomi."
+
+#. Default: Although some measures do not cost any money, most do. The measures
+#. should therefore be budgeted for; include them in the annual budget round if
+#. necessary.
+#: src/osha/oira/client/templates/risk_actionplan.pt:125
+msgid "actionplan_measure_budget_tooltip"
+msgstr ""
+"Nors kai kurios priemonės nieko nekainuoja, dauguma jų kainuoja. Todėl "
+"priemonės turėtų būti numatytos biudžete; jei reikia, įtraukite jas į metinį "
+"biudžetą."
+
+#. Default: Please enter the budget in whole Euros.
+#: src/osha/oira/client/templates/risk_actionplan.pt:127
+msgid "error_invalid_budget"
+msgstr "Įveskite biudžetą sveikais eurais."
+
+#. Default: Day
+#: src/osha/oira/client/templates/risk_actionplan.pt:137
+msgid "label_day"
+msgstr "Diena"
+
+#. Default: What is the chance of this risk occurring?
+#: src/osha/oira/client/templates/risk_evaluation.pt:28
+msgid "header_risk_probability"
+msgstr "Kokia šios rizikos tikimybė?"
+
+#. Default: Small
+#: src/osha/oira/client/templates/risk_evaluation.pt:30
+msgid "probability_small"
+msgstr "Maža"
+
+#. Default: Medium
+#: src/osha/oira/client/templates/risk_evaluation.pt:32
+msgid "probability_medium"
+msgstr "Vidutinė"
+
+#. Default: Large
+#: src/osha/oira/client/templates/risk_evaluation.pt:34
+msgid "probability_large"
+msgstr "Didelė"
+
+#. Default: How often are people exposed to this risk?
+#: src/osha/oira/client/templates/risk_evaluation.pt:38
+#: src/osha/oira/client/templates/risk_evaluation.pt:81
+msgid "header_risk_frequency"
+msgstr "Kiek dažnai žmonės patiria šią riziką?"
+
+#. Default: Almost never
+#: src/osha/oira/client/templates/risk_evaluation.pt:40
+msgid "frequency_almost_never"
+msgstr "Beveik niekada"
+
+#. Default: Regularly
+#: src/osha/oira/client/templates/risk_evaluation.pt:42
+msgid "frequency_regularly"
+msgstr "Reguliariai"
+
+#. Default: Constantly
+#: src/osha/oira/client/templates/risk_evaluation.pt:44
+msgid "frequency_constantly"
+msgstr "Nuolat"
+
+#. Default: What is the severity of the damage ?
+#: src/osha/oira/client/templates/risk_evaluation.pt:48
+msgid "header_risk_effect"
+msgstr "Koks žalos sunkumas?"
+
+#. Default: Weak severity
+#: src/osha/oira/client/templates/risk_evaluation.pt:50
+msgid "effect_injury_no_absence"
+msgstr "Mažas sunkumas"
+
+#. Default: Significant severity
+#: src/osha/oira/client/templates/risk_evaluation.pt:52
+msgid "effect_injury_with_absence"
+msgstr "Reikšmingas sunkumas"
+
+#. Default: High (very high) severity
+#: src/osha/oira/client/templates/risk_evaluation.pt:54
+msgid "effect_permanent_damage"
+msgstr "Didelis (labai didelis) sunkumas"
+
+#. Default: What is the severity of the damage ?
+#: src/osha/oira/client/templates/risk_evaluation.pt:59
+msgid "header_risk_severity"
+msgstr "Koks žalos sunkumas?"
+
+#. Default: Weak
+#: src/osha/oira/client/templates/risk_evaluation.pt:62
+msgid "severity_weak"
+msgstr "Mažas"
+
+#. Default: Not very severe
+#: src/osha/oira/client/templates/risk_evaluation.pt:66
+msgid "severity_not_severe"
+msgstr "Nelabai didelis"
+
+#. Default: Severe
+#: src/osha/oira/client/templates/risk_evaluation.pt:70
+msgid "severity_severe"
+msgstr "Didelis"
+
+#. Default: Very severe
+#: src/osha/oira/client/templates/risk_evaluation.pt:75
+msgid "severity_very_severe"
+msgstr "Labai didelis"
+
+#. Default: Rare
+#: src/osha/oira/client/templates/risk_evaluation.pt:84
+msgid "frequency_french_rare"
+msgstr "Retai"
+
+#. Default: Not very often
+#: src/osha/oira/client/templates/risk_evaluation.pt:89
+msgid "frequency_french_not_often"
+msgstr "Nelabai dažnai"
+
+#. Default: Often
+#: src/osha/oira/client/templates/risk_evaluation.pt:94
+msgid "frequency_french_often"
+msgstr "Dažnai"
+
+#. Default: Very often or regularly
+#: src/osha/oira/client/templates/risk_evaluation.pt:99
+msgid "frequency_french_regularly"
+msgstr "Labai dažnai arba reguliariai"
+
+#. Default: Select the priority of this risk
+#: src/osha/oira/client/templates/risk_evaluation.pt:108
+msgid "header_risk_priority"
+msgstr "Parinkti šio rizikos veiksnio prioritetą"
+
+#. Default: Low
+#: src/osha/oira/client/templates/risk_evaluation.pt:110
+msgid "priority_low"
+msgstr "Mažas"
+
+#. Default: Medium
+#: src/osha/oira/client/templates/risk_evaluation.pt:112
+msgid "priority_medium"
+msgstr "Vidutinis"
+
+#. Default: High
+#: src/osha/oira/client/templates/risk_evaluation.pt:114
+msgid "priority_high"
+msgstr "Didelis"
+
+#. Default: Not applicable
+#: src/osha/oira/client/templates/risk_identification.pt:24
+msgid "label_not_applicable"
+msgstr "Netaikoma"
+
+#. Default: OiRA Tool
+#: src/osha/oira/client/templates/sessions.pt:18
+msgid "header_session"
+msgstr "OiRA priemonė"
+
+#. Default: Select an earlier session to complete or review
+#: src/osha/oira/client/templates/sessions.pt:25
+msgid "header_select_session"
+msgstr "Parinkti ankstesnį seansą užbaigimui ar peržiūrai"
+
+#. Default: saved on ${date}
+#: src/osha/oira/client/templates/sessions.pt:33
+msgid "lable_session_modified"
+msgstr "išsaugota ${date}"
+
+#. Default: Rename
+#: src/osha/oira/client/templates/sessions.pt:36
+msgid "label_rename"
+msgstr "Pervadinti"
+
+#. Default: or…
+#: src/osha/oira/client/templates/sessions.pt:46
+msgid "header_or"
+msgstr "arba…"
+
+#. Default: Start a new session choosing one of the following sectoral tools
+#: src/osha/oira/client/templates/sessions.pt:52
+msgid "label_select_new_session"
+msgstr ""
+"Pradėti naują seansą pasirinkus vieną iš toliau pateiktų sektorių priemonių"
+
+#. Default: Enter a title for your Risk Assessment
+#: src/osha/oira/client/templates/sessions.pt:57
+msgid "label_session_title"
+msgstr "Įveskite jūsų rizikos įvertinimo pavadinimą"
+
+#. Default: Once you have started an OiRA tool session, you will be able to stop
+#. before the end. You can restart it again at a later date by selecting the title
+#. of the OiRA tool session. You can save more than one session, provided you have
+#. given them different title names. Please remember your e-mail address, password
+#. and the title that you have given the OiRA tool session. By clicking on the
+#. Logout button, you are logged out actively. You are also logged out if you close
+#. your Browser. For security reasons it is better to actively log out.
+#: src/osha/oira/client/templates/sessions.pt:59
+msgid "session_title_tooltip"
+msgstr ""
+"Pradėję OiRA priemonės seansą, galėsite jį sustabdyti prieš jam "
+"pasibaigiant. Vėliau galite paleisti jį iš naujo, pasirinkę OiRA priemonės "
+"seanso pavadinimą. Galite išsaugoti daugiau nei vieną seansą, jei suteikiate "
+"jiems skirtingus pavadinimus. Atsiminkite jūsų e. pašto adresą, slaptažodį "
+"ir OiRA priemonės seansui suteiktą pavadinimą. Spustelėję atsijungimo "
+"mygtuką, jūs atsijungiate aktyviai. Jūs atjungiami ir tada, kai uždarote "
+"naršyklę. Saugumo sumetimais geriau atsijungti aktyviai."
+
+#: src/osha/oira/client/templates/sessions.pt:112
+msgid ""
+"Are you sure you want to delete this session? This action can not be "
+"reverted."
+msgstr ""
+"Ar tikrai norite ištrinti šį seansą? Šio veiksmo nebus galima atšaukti."
+
+#. Default: Start
+#: src/osha/oira/client/templates/start.pt:30
+msgid "label_start_survey"
+msgstr "Pradėti"
+
+#. Default: Please verify if the profile is still accurate.
+#: src/osha/oira/client/templates/update.pt:24
+msgid "verify_profile"
+msgstr ""
+
+#. Default: Update
+#: src/osha/oira/client/templates/update.pt:58
+msgid "label_accept update"
+msgstr ""
+
+#. Default: Online interactive
+#: src/osha/oira/client/templates/webhelpers.pt:25
+msgid "oira_name_line_1"
+msgstr "Interaktyvi"
+
+#. Default: Risk Assessment
+#: src/osha/oira/client/templates/webhelpers.pt:26
+msgid "oira_name_line_2"
+msgstr "rizikos vertinimo priemonė"
+
+#: src/osha/oira/client/templates/webhelpers.pt:117
+msgid "Unvisited"
+msgstr ""
+
+#: src/osha/oira/client/templates/webhelpers.pt:118
+msgid "Postponed"
+msgstr ""
+
+#: src/osha/oira/client/templates/webhelpers.pt:119
+msgid "Unanswered"
+msgstr ""
+
+#: src/osha/oira/client/templates/webhelpers.pt:120
+msgid "Answered"
+msgstr ""
+
+#. Default: Produced by ${EU-OSHA}.
+#: src/osha/oira/client/templates/webhelpers.pt:135
+msgid "appendix_produced_by"
+msgstr "Parengė ${EU-OSHA}."
+
+#. Default: About
+#: src/osha/oira/client/templates/webhelpers.pt:138
+msgid "appendix_about"
+msgstr "Apie"
+
+#. Default: Privacy
+#: src/osha/oira/client/templates/webhelpers.pt:140
+msgid "appendix_privacy"
+msgstr "Privatumas"
+
+#. Default: Disclaimer
+#: src/osha/oira/client/templates/webhelpers.pt:142
+msgid "appendix_disclaimer"
+msgstr "Atsakomybės apribojimas"
+
+#. Default: GPL License
+#: src/osha/oira/client/templates/webhelpers.pt:144
+msgid "appendix_gpl_license"
+msgstr "GPL licencija"
+
+#: src/osha/oira/client/templates/webhelpers.pt:146
+msgid "CC License"
+msgstr "CC licencija"
+
+#. Default: Legal and policy references
+#: src/osha/oira/client/templates/webhelpers.pt:207
+#: src/osha/oira/client/templates/webhelpers.pt:221
+msgid "header_legal_references"
+msgstr "Teisės aktų ir politikos nuorodos"
+
+#. Default: Hide
+#: src/osha/oira/client/templates/webhelpers.pt:224
+msgid "action_hide"
+msgstr "Slėpti"
+
+#. Default: Show
+#: src/osha/oira/client/templates/webhelpers.pt:228
+msgid "action_show"
+msgstr "Rodyti"
+
+#: src/osha/oira/content/module.py:20 src/osha/oira/content/module.py:33
+#: src/osha/oira/content/module.py:48
+msgid "Submodule"
+msgstr "Submodulis"
+
+#: src/osha/oira/content/module.py:38
+msgid "Edit ${name}"
+msgstr "Redaguoti ${name}"
+
+#: src/osha/oira/content/module.py:53
+msgid "Add ${name}"
+msgstr "Pridėti ${name}"
+
+#. Default: Question
+#: src/osha/oira/content/profilequestion.py:18
+#: src/osha/oira/content/templates/profilequestion_view.pt:23
+msgid "label_profilequestion_question"
+msgstr ""
+
+#: src/osha/oira/content/profilequestion.py:19
+msgid "This question must ask users if this profile applies to them."
+msgstr ""
+
+#: src/osha/oira/content/profilequestion.py:24
+msgid "Multiple item question"
+msgstr ""
+
+#: src/osha/oira/content/profilequestion.py:29
+#: src/osha/oira/content/templates/profilequestion_view.pt:30
+msgid "Single occurance prompt"
+msgstr ""
+
+#: src/osha/oira/content/profilequestion.py:30
+msgid "This must ask to user for the name of the relevant location."
+msgstr ""
+
+#: src/osha/oira/content/profilequestion.py:36
+#: src/osha/oira/content/templates/profilequestion_view.pt:34
+msgid "Multiple occurance prompt"
+msgstr ""
+
+#: src/osha/oira/content/profilequestion.py:37
+msgid "This must ask to user for the names of all relevant locations."
+msgstr ""
+
+#. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
+#. of probability, frequency and severity) method.
+#: src/osha/oira/content/risk.py:20
+msgid "help_evaluation_method_kinney"
+msgstr ""
+"Pasirinkite metodą ĮVERTINTA (apytikris įvertinimas) arba APSKAIČIUOTA "
+"(tikimybės, dažnumo ir sunkumo derinys)."
+
+#. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
+#. of frequency and severity) method.
+#: src/osha/oira/content/risk.py:27
+msgid "help_evaluation_method_french"
+msgstr ""
+"Pasirinkite metodą ĮVERTINTA (apytikris įvertinimas) arba APSKAIČIUOTA "
+"(dažnumo ir sunkumo derinys)."
+
+#. Default: Statistics Level
+#: src/osha/oira/content/sector.py:26
+msgid "label_statistics_level"
+msgstr "Statistikos lygis"
+
+#. Default: Level 1: Basic statistics about the use of the OiRA tool. Level 2: More
+#. detailed statistics regarding the risks
+#: src/osha/oira/content/sector.py:27
+msgid "help_statistics_level"
+msgstr ""
+"1 lygis: pagrindinė OiRA priemonės naudojimo statistika. 2 lygis: išsamesnė "
+"rizikos veiksnių statistika"
+
 #. Default: You can not delete an OiRA tool that has been published.
-#: src/osha/oira/surveygroup.py:85
+#: src/osha/oira/content/surveygroup.py:82
 msgid "message_not_delete_published_surveygroup"
 msgstr "Jūs negalite ištrinti paskelbtos OiRA priemonės."
 
-#. Default: Statistics Reporting
-#: src/osha/oira/browser/templates/statistics.pt:13
-#, fuzzy
-msgid "title_statistics"
-msgstr "Statistikos lygis"
+#. Default: Documentation
+#: src/osha/oira/content/templates/documentation_view.pt:12
+msgid "title_country_documentation"
+msgstr "Dokumentacija"
+
+#. Default: online client
+#: src/osha/oira/content/templates/documentation_view.pt:15
+msgid "intro_documenation_client"
+msgstr "internetinė kliento programa"
+
+#. Default: Here you can manage the documentation for the ${client}.
+#: src/osha/oira/content/templates/documentation_view.pt:14
+msgid "intro_documenation"
+msgstr "Čia galite tvarkyti ${client} dokumentaciją."
+
+#. Default: Go to the ${homepage_edit_form} to change the way the homepage appears.
+#: src/osha/oira/content/templates/documentation_view.pt:17
+msgid "documentation_homepage"
+msgstr ""
+"Eikite į ${homepage_edit_form}, kad pakeistumėte pradinio puslapio rodymo "
+"būdą."
+
+#. Default: appendix
+#: src/osha/oira/content/templates/documentation_view.pt:23
+msgid "documentation_appendix_appendix"
+msgstr "priedėlis"
+
+#. Default: Pages created in the ${appendix} folder are available via links in the
+#. footer of the online client.
+#: src/osha/oira/content/templates/documentation_view.pt:23
+msgid "documentation_appendix"
+msgstr ""
+"${appendix} kataloge sukurti puslapiai prieinami per nuorodas internetinės "
+"kliento programos poraštėje."
+
+#. Default: online help
+#: src/osha/oira/content/templates/documentation_view.pt:28
+msgid "documentation_online_help_online_help"
+msgstr "internetinis žinynas"
+
+#. Default: The ${online_help} text can also be modified.
+#: src/osha/oira/content/templates/documentation_view.pt:28
+msgid "documentation_online_help"
+msgstr "${online_help} tekstą taip pat galima modifikuoti."
+
+#. Default: Information
+#: src/osha/oira/content/templates/module_view.pt:22
+#: src/osha/oira/content/templates/profilequestion_view.pt:20
+#: src/osha/oira/content/templates/survey_view.pt:21
+msgid "header_information"
+msgstr "Informacija"
+
+#. Default: This ${number} is mandatory.
+#: src/osha/oira/content/templates/module_view.pt:23
+msgid "module_mandatory"
+msgstr "Šis ${number} yra privalomas."
+
+#. Default: This ${number} is optional.
+#: src/osha/oira/content/templates/module_view.pt:27
+msgid "module_optional"
+msgstr "Šis ${number} yra pasirenkamas."
+
+#. Default: Submodules
+#: src/osha/oira/content/templates/module_view.pt:32
+msgid "header_submodules"
+msgstr "Submoduliai"
+
+#. Default: Risks
+#: src/osha/oira/content/templates/module_view.pt:39
+#: src/osha/oira/content/templates/profilequestion_view.pt:47
+msgid "header_risks"
+msgstr "Rizikos veiksniai"
+
+#: src/osha/oira/content/templates/profilequestion_add.pt:54
+msgid "Client example for single occurance."
+msgstr ""
+
+#: src/osha/oira/content/templates/profilequestion_add.pt:57
+#: src/osha/oira/content/templates/profilequestion_add.pt:78
+msgid "Commercial manned guarding"
+msgstr ""
+
+#: src/osha/oira/content/templates/profilequestion_add.pt:61
+#: src/osha/oira/content/templates/profilequestion_add.pt:82
+msgid "Does your organisation provide mobile patrolling?"
+msgstr ""
+
+#: src/osha/oira/content/templates/profilequestion_add.pt:66
+#: src/osha/oira/content/templates/profilequestion_add.pt:87
+msgid "Do you ofer this service in multiple locations?"
+msgstr ""
+
+#: src/osha/oira/content/templates/profilequestion_add.pt:70
+msgid "Please enter a name for the location you would like to assess"
+msgstr ""
+
+#: src/osha/oira/content/templates/profilequestion_add.pt:71
+msgid "Standard Life Insurance"
+msgstr ""
+
+#: src/osha/oira/content/templates/profilequestion_add.pt:75
+msgid "Client example for multiple occurances."
+msgstr ""
+
+#: src/osha/oira/content/templates/profilequestion_add.pt:92
+msgid "Please enter the name for each location you would like to assess"
+msgstr ""
+
+#: src/osha/oira/content/templates/profilequestion_add.pt:94
+msgid "Tesco, Morningside"
+msgstr ""
+
+#: src/osha/oira/content/templates/profilequestion_add.pt:95
+msgid "Castle Terrace car park"
+msgstr ""
+
+#: src/osha/oira/content/templates/profilequestion_view.pt:26
+msgid "Multiple Item Question"
+msgstr ""
+
+#: src/osha/oira/content/templates/profilequestion_view.pt:27
+#: src/osha/oira/content/templates/profilequestion_view.pt:31
+#: src/osha/oira/content/templates/profilequestion_view.pt:35
+msgid "Not provided"
+msgstr ""
+
+#. Default: Modules
+#: src/osha/oira/content/templates/profilequestion_view.pt:40
+msgid "header_modules"
+msgstr "Moduliai"
+
+#. Default: Evaluation phase
+#: src/osha/oira/content/templates/survey_view.pt:24
+msgid "label_evaluation_phase"
+msgstr "Vertinimo fazė"
+
+#. Default: Optional
+#: src/osha/oira/content/templates/survey_view.pt:25
+msgid "optional"
+msgstr "Pasirenkamas"
+
+#. Default: Mandatory
+#: src/osha/oira/content/templates/survey_view.pt:26
+msgid "mandatory"
+msgstr "Privalomas"
+
+#. Default: Classification code
+#: src/osha/oira/content/templates/survey_view.pt:27
+msgid "label_classification_code"
+msgstr "Klasifikavimo kodas"
+
+#. Default: Not set
+#: src/osha/oira/content/templates/survey_view.pt:29
+#: src/osha/oira/content/templates/survey_view.pt:32
+msgid "not_set"
+msgstr "Nenustatyta"
+
+#. Default: Language
+#: src/osha/oira/content/templates/survey_view.pt:30
+msgid "label_language"
+msgstr "Kalba"
+
+#. Default: Modules and Profile Questions
+#: src/osha/oira/content/templates/survey_view.pt:36
+msgid "header_modules_and_profile_questions"
+msgstr "Moduliai ir profilio klausimai"
+
+#. Default: This OiRA Tool has no modules.
+#: src/osha/oira/content/templates/survey_view.pt:38
+msgid "no_modules"
+msgstr "Šioje OiRA priemonėje nėra modulių."
+
+#. Default: This form will allow you to create a new OiRA Tool.
+#: src/osha/oira/content/templates/surveygroup_add.pt:11
+msgid "intro_add_surveygroup"
+msgstr "Ši forma leis jums sukurti naują OiRA priemonę."
+
+#. Default: How would you like to start
+#: src/osha/oira/content/templates/surveygroup_add.pt:19
+msgid "label_survey_source"
+msgstr "Kaip norėtumėte pradėti"
+
+#: src/osha/oira/content/templates/surveygroup_add.pt:20
+#: src/osha/oira/nuplone/templates/largetextarea_input.pt:21
+msgid "Information"
+msgstr "Informacija"
+
+#. Default: By copying an existing OiRA tool you also inherit its evaluation
+#. algorithm
+#: src/osha/oira/content/templates/surveygroup_add.pt:20
+msgid "help_survey_source"
+msgstr ""
+"Nukopijavę egzistuojančią OiRA priemonę, paveldite ir jos vertinimo algoritmą"
+
+#. Default: Create a new OiRA Tool from scratch
+#: src/osha/oira/content/templates/surveygroup_add.pt:23
+msgid "survey_source_scratch"
+msgstr "Sukurti naują OiRA priemonę nuo pradžių"
+
+#. Default: Base my new OiRA Tool on an existing OiRA Tool of my organisation
+#: src/osha/oira/content/templates/surveygroup_add.pt:24
+msgid "survey_source_local"
+msgstr ""
+"Mano naują OiRA priemonę sukurti remiantis egzistuojančia mano organizacijos "
+"OiRA priemone"
+
+#. Default: Base my new OiRA Tool on an existing OiRA Tool of another organisation
+#: src/osha/oira/content/templates/surveygroup_add.pt:25
+msgid "survey_source_other"
+msgstr ""
+"Mano naują OiRA priemonę sukurti remiantis egzistuojančia kitos "
+"organizacijos OiRA priemone"
+
+#. Default: Choose an OiRA Tool
+#: src/osha/oira/content/templates/surveygroup_add.pt:32
+#: src/osha/oira/content/templates/surveygroup_add.pt:58
+msgid "label_choose_surveygroup"
+msgstr "Pasirinkti OiRA priemonę"
+
+#. Default: Choose a revision of the selected OiRA Tool
+#: src/osha/oira/content/templates/surveygroup_add.pt:41
+#: src/osha/oira/content/templates/surveygroup_add.pt:77
+msgid "label_choose_survey"
+msgstr "Pasirinkti parinktos OiRA priemonės redakciją"
+
+#. Default: Choose a country
+#: src/osha/oira/content/templates/surveygroup_add.pt:51
+msgid "label_choose_country"
+msgstr "Pasirinkti šalį"
+
+#. Default: This method involves risk assessment by Severity x Exposure x
+#. Probability, whereas these have to be understood as follows; Severity of injury
+#. linked to hazard - Exposure (Frequency) to the hazard - Probability of the
+#. hazard occuring when exposed
+#: src/osha/oira/content/templates/surveygroup_add.pt:86
+msgid "help_survey_evaluation_algorithm_standard"
+msgstr ""
+"Šis metodas apima rizikos įvertinimą pagal sunkumą x poveikį x tikimybę, o "
+"šiuos kriterijus reikia suprasti taip: su pavojumi susijusio sužalojimo "
+"sunkumas – patiriamas pavojus (poveikio dažnumas) – pavojaus patiriant "
+"poveikį tikimybė"
+
+#. Default: Standard three criteria
+#: src/osha/oira/content/templates/surveygroup_add.pt:90
+msgid "algorithm_kinney"
+msgstr "Trys standartiniai kriterijai"
+
+#: src/osha/oira/content/templates/surveygroup_add.pt:92
+msgid ""
+"This is the recommended evaluation algorithm, based on the Kinney method"
+msgstr "Tai rekomenduojamas vertinimo algoritmas, pagrįstas Kinney metodu"
+
+#. Default: This method involves risk assessment by Severity x Exposure, whereas
+#. these have to be understood as follows; Severity of injury linked to hazard -
+#. Exposure (Frequency) to the hazard
+#: src/osha/oira/content/templates/surveygroup_add.pt:94
+msgid "help_survey_evaluation_algorithm_simplified"
+msgstr ""
+"Šis metodas apima rizikos įvertinimą pagal sunkumą x poveikį, o šiuos "
+"kriterijus reikia suprasti taip: su pavojumi susijusio sužalojimo sunkumas – "
+"patiriamas pavojus (poveikio dažnumas)"
+
+#. Default: Simplified two criteria
+#: src/osha/oira/content/templates/surveygroup_add.pt:100
+msgid "algorithm_french"
+msgstr "Du supaprastinti kriterijai"
+
+#: src/osha/oira/content/templates/surveygroup_add.pt:102
+msgid "This is a simpler evaluation algorithm using only two criteria."
+msgstr ""
+"Tai paprastesnis vertinimo algoritmas, kuriam naudojami tik du kriterijai."
+
+#. Default: Create
+#: src/osha/oira/content/templates/surveygroup_add.pt:109
+msgid "button_create"
+msgstr "Sukurti"
+
+#. Default: Cancel
+#: src/osha/oira/content/templates/surveygroup_add.pt:110
+msgid "button_cancel"
+msgstr "Atšaukti"
+
+#. Default: OiRA Tool versions
+#: src/osha/oira/content/templates/surveygroup_view.pt:14
+msgid "header_sector_tool_version_list"
+msgstr "OiRA priemonės versijos"
+
+#. Default: Login
+#: src/osha/oira/nuplone/templates/error_unauthorized.pt:14
+msgid "header_login"
+msgstr "Prisijungti"
+
+#. Default: Unauthorized
+#: src/osha/oira/nuplone/templates/error_unauthorized.pt:14
+msgid "header_error_unauthorized"
+msgstr "Nėra įgaliojimų"
+
+#. Default: I am afraid you are not authorised to do this.
+#: src/osha/oira/nuplone/templates/error_unauthorized.pt:18
+msgid "message_error_unauthorized"
+msgstr "Manome, kad neturite įgaliojimų tai atlikti."
+
+#. Default: You need to be logged in to access this page.
+#: src/osha/oira/nuplone/templates/error_unauthorized.pt:23
+msgid "message_error_not_logged_in"
+msgstr "Jums reikia prisijungti, kad galėtumėte pasiekti šį puslapį."
+
+#. Default: Credentials
+#: src/osha/oira/nuplone/templates/error_unauthorized.pt:29
+#: src/osha/oira/templates/login.pt:22
+msgid "legend_credentials"
+msgstr "Kredencialai"
+
+#. Default: Login
+#: src/osha/oira/nuplone/templates/error_unauthorized.pt:31
+#: src/osha/oira/templates/login.pt:25
+msgid "label_login"
+msgstr "Prisijungti"
+
+#. Default: Password
+#: src/osha/oira/nuplone/templates/error_unauthorized.pt:33
+#: src/osha/oira/templates/login.pt:27
+msgid "label_password"
+msgstr "Slaptažodis"
+
+#. Default: Login
+#: src/osha/oira/nuplone/templates/error_unauthorized.pt:38
+#: src/osha/oira/templates/login.pt:32
+msgid "button_login"
+msgstr "Prisijungti"
+
+#. Default: request a password reset
+#: src/osha/oira/nuplone/templates/error_unauthorized.pt:42
+#: src/osha/oira/templates/login.pt:17 src/osha/oira/templates/login.pt:36
+msgid "reset_password"
+msgstr "pareikalauti atstatyti slaptažodį"
+
+#. Default: If you forgot your password you can ${reset_password}.
+#: src/osha/oira/nuplone/templates/error_unauthorized.pt:42
+#: src/osha/oira/templates/login.pt:36
+msgid "message_reset_password"
+msgstr "Jei pamiršote slaptažodį, galite ${reset_password}."
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:7
 msgid "Profile question"
@@ -998,335 +2728,6 @@ msgstr "OiRA priemonės versija."
 #: src/osha/oira/profiles/default/types/oira.homepage.xml:7
 msgid "Home page"
 msgstr "Pradinis puslapis"
-
-#. Default: OiRA - Online interactive Risk Assessment
-#: src/osha/oira/templates/actionplan.pt:12
-#: src/osha/oira/templates/disclaimer.pt:12
-#: src/osha/oira/templates/frontpage.pt:15
-#: src/osha/oira/templates/identification.pt:12
-#: src/osha/oira/templates/module_actionplan.pt:12
-#: src/osha/oira/templates/module_evaluation.pt:12
-#: src/osha/oira/templates/module_identification.pt:11
-#: src/osha/oira/templates/register.pt:12 src/osha/oira/templates/report.pt:12
-#: src/osha/oira/templates/report_actionplan.pt:13
-#: src/osha/oira/templates/report_company.pt:12
-#: src/osha/oira/templates/report_identification.pt:12
-#: src/osha/oira/templates/risk_actionplan.pt:12
-#: src/osha/oira/templates/risk_evaluation.pt:12
-#: src/osha/oira/templates/risk_identification.pt:12
-#: src/osha/oira/templates/sessions.pt:13 src/osha/oira/templates/start.pt:14
-#: src/osha/oira/templates/webhelpers.pt:23
-msgid "title_tool"
-msgstr "OiRA – interaktyvi rizikos vertinimo priemonė"
-
-#. Default: After having identified the risks, you need to put an action plan in
-#. place to manage the risks. To eliminate or reduce risks you need to determine
-#. which preventive and protective measures are to be taken.
-#: src/osha/oira/templates/actionplan.pt:19
-msgid "expl_actionplan_1"
-msgstr ""
-"Identifikavę rizikos veiksnius, turite įdiegti prevencijos priemonių planą "
-"rizikos veiksniams valdyti. Siekdami pašalinti arba sumažinti riziką, turite "
-"nustatyti, kokių prevencinių ar apsauginių priemonių reikia imtis."
-
-#. Default: Among the things to be considered for this step are:
-#: src/osha/oira/templates/actionplan.pt:24
-msgid "expl_actionplan_2"
-msgstr "Šiame etape, be kita ko, turi būti apsvarstyta:"
-
-#. Default: considering whether the task or job is necessary
-#: src/osha/oira/templates/actionplan.pt:32
-msgid "expl_actionplan_4"
-msgstr "ar užduotis arba darbas yra būtinas"
-
-#. Default: removing the hazard
-#: src/osha/oira/templates/actionplan.pt:33
-msgid "expl_actionplan_5"
-msgstr "kaip pašalinti pavojų"
-
-#. Default: Is a risk avoidable? Can it be removed entirely? For example, this
-#. could be achieved by: ${expl_actionplan_4_and_5}
-#: src/osha/oira/templates/actionplan.pt:29
-msgid "expl_actionplan_3"
-msgstr ""
-"Ar rizikos galima išvengti? Ar galima ją visiškai pašalinti? Pavyzdžiui, tai "
-"būtų galima pasiekti taikant: ${expl_actionplan_4_and_5}"
-
-#. Default: If certain risks are not avoidable, how can they be reduced to a level
-#. at which the health and safety of those exposed is not compromised?
-#: src/osha/oira/templates/actionplan.pt:37
-msgid "expl_actionplan_6"
-msgstr ""
-"Jei tam tikri rizikos veiksniai neišvengiami, kaip juos galima sumažinti iki "
-"tokio lygio, kad tai neturėtų neigiamo poveikio susijusių asmenų sveikatai "
-"ir saugai?"
-
-#. Default: Once you have decided how to eliminate or reduce a particular risk,
-#. then you describe the specific action(s) required to achieve this. You should
-#. also include details of the level of expertise and/or other requirements needed
-#. for those actions to be effective.
-#: src/osha/oira/templates/actionplan.pt:42
-msgid "expl_actionplan_7"
-msgstr ""
-"Kai nusprendžiate, kaip pašalinti ar sumažinti konkrečią riziką, aprašykite "
-"konkretų (-us) veiksmą (-us), reikalingą (-us) tam pasiekti. Taip pat "
-"turėtumėte įtraukti informaciją apie reikalingų ekspertinių žinių lygį ir "
-"(ar) kitus reikalavimus, būtinus tam, kad tie veiksmai būtų efektyvūs."
-
-#. Default: No risks were identified. Please proceed directly to the report.
-#: src/osha/oira/templates/actionplan.pt:47
-msgid "expl_actionplan_empty"
-msgstr "Jokių rizikos veiksnių nenustatyta. Pereikite tiesiai prie ataskaitos."
-
-#. Default: Create action plan
-#: src/osha/oira/templates/actionplan.pt:53
-msgid "label_create_action_plan"
-msgstr "Sukurti prevencijos priemonių planą"
-
-#. Default: Go to report
-#: src/osha/oira/templates/actionplan.pt:54
-msgid "label_jump_to_report"
-msgstr "Eiti į ataskaitą"
-
-#. Default: Preparation
-#: src/osha/oira/templates/actionplan.pt:61
-#: src/osha/oira/templates/identification.pt:32
-#: src/osha/oira/templates/module_actionplan.pt:59
-#: src/osha/oira/templates/module_evaluation.pt:45
-#: src/osha/oira/templates/module_identification.pt:62
-#: src/osha/oira/templates/profile.pt:78 src/osha/oira/templates/report.pt:50
-#: src/osha/oira/templates/report_actionplan.pt:270
-#: src/osha/oira/templates/report_company.pt:61
-#: src/osha/oira/templates/report_identification.pt:85
-#: src/osha/oira/templates/risk_evaluation.pt:134
-#: src/osha/oira/templates/risk_identification.pt:51
-#: src/osha/oira/templates/sessions.pt:84 src/osha/oira/templates/start.pt:36
-msgid "label_preparation"
-msgstr "Pasiruošimas"
-
-#. Default: Preparation
-#: src/osha/oira/templates/actionplan.pt:62
-#: src/osha/oira/templates/identification.pt:33
-#: src/osha/oira/templates/module_actionplan.pt:60
-#: src/osha/oira/templates/module_evaluation.pt:46
-#: src/osha/oira/templates/module_identification.pt:63
-#: src/osha/oira/templates/profile.pt:79 src/osha/oira/templates/report.pt:51
-#: src/osha/oira/templates/report_actionplan.pt:271
-#: src/osha/oira/templates/report_company.pt:62
-#: src/osha/oira/templates/report_identification.pt:86
-#: src/osha/oira/templates/risk_evaluation.pt:135
-#: src/osha/oira/templates/risk_identification.pt:52
-#: src/osha/oira/templates/sessions.pt:85 src/osha/oira/templates/start.pt:37
-msgid "iphone_label_preparation"
-msgstr "Pasiruošimas"
-
-#. Default: Identification
-#: src/osha/oira/templates/actionplan.pt:67
-#: src/osha/oira/templates/identification.pt:38
-#: src/osha/oira/templates/module_actionplan.pt:65
-#: src/osha/oira/templates/module_evaluation.pt:51
-#: src/osha/oira/templates/module_identification.pt:68
-#: src/osha/oira/templates/profile.pt:83 src/osha/oira/templates/report.pt:56
-#: src/osha/oira/templates/report_actionplan.pt:276
-#: src/osha/oira/templates/report_company.pt:67
-#: src/osha/oira/templates/report_identification.pt:91
-#: src/osha/oira/templates/risk_evaluation.pt:140
-#: src/osha/oira/templates/risk_identification.pt:57
-#: src/osha/oira/templates/sessions.pt:88 src/osha/oira/templates/start.pt:41
-msgid "label_identification"
-msgstr "Identifikavimas"
-
-#. Default: Identification
-#: src/osha/oira/templates/actionplan.pt:68
-#: src/osha/oira/templates/identification.pt:39
-#: src/osha/oira/templates/module_actionplan.pt:66
-#: src/osha/oira/templates/module_evaluation.pt:52
-#: src/osha/oira/templates/module_identification.pt:69
-#: src/osha/oira/templates/profile.pt:84 src/osha/oira/templates/report.pt:57
-#: src/osha/oira/templates/report_actionplan.pt:277
-#: src/osha/oira/templates/report_company.pt:68
-#: src/osha/oira/templates/report_identification.pt:92
-#: src/osha/oira/templates/risk_evaluation.pt:141
-#: src/osha/oira/templates/risk_identification.pt:58
-#: src/osha/oira/templates/sessions.pt:89 src/osha/oira/templates/start.pt:42
-msgid "iphone_label_identification"
-msgstr "Identifikavimas"
-
-#. Default: Evaluation
-#: src/osha/oira/templates/actionplan.pt:73
-#: src/osha/oira/templates/identification.pt:44
-#: src/osha/oira/templates/module_actionplan.pt:71
-#: src/osha/oira/templates/module_evaluation.pt:57
-#: src/osha/oira/templates/module_identification.pt:77
-#: src/osha/oira/templates/profile.pt:87 src/osha/oira/templates/report.pt:62
-#: src/osha/oira/templates/report_actionplan.pt:282
-#: src/osha/oira/templates/report_company.pt:73
-#: src/osha/oira/templates/report_identification.pt:97
-#: src/osha/oira/templates/risk_evaluation.pt:146
-#: src/osha/oira/templates/risk_identification.pt:66
-#: src/osha/oira/templates/sessions.pt:92 src/osha/oira/templates/start.pt:45
-msgid "label_evaluation"
-msgstr "Vertinimas"
-
-#. Default: Evaluation
-#: src/osha/oira/templates/actionplan.pt:74
-#: src/osha/oira/templates/identification.pt:45
-#: src/osha/oira/templates/module_actionplan.pt:72
-#: src/osha/oira/templates/module_evaluation.pt:58
-#: src/osha/oira/templates/module_identification.pt:78
-#: src/osha/oira/templates/profile.pt:88 src/osha/oira/templates/report.pt:63
-#: src/osha/oira/templates/report_actionplan.pt:283
-#: src/osha/oira/templates/report_company.pt:74
-#: src/osha/oira/templates/report_identification.pt:98
-#: src/osha/oira/templates/risk_evaluation.pt:147
-#: src/osha/oira/templates/risk_identification.pt:67
-#: src/osha/oira/templates/sessions.pt:93 src/osha/oira/templates/start.pt:46
-msgid "iphone_label_evaluation"
-msgstr "Vertinimas"
-
-#. Default: Action Plan
-#: src/osha/oira/templates/actionplan.pt:79
-#: src/osha/oira/templates/identification.pt:50
-#: src/osha/oira/templates/module_actionplan.pt:77
-#: src/osha/oira/templates/module_evaluation.pt:66
-#: src/osha/oira/templates/module_identification.pt:83
-#: src/osha/oira/templates/profile.pt:91 src/osha/oira/templates/report.pt:68
-#: src/osha/oira/templates/report_actionplan.pt:288
-#: src/osha/oira/templates/report_company.pt:79
-#: src/osha/oira/templates/report_identification.pt:103
-#: src/osha/oira/templates/risk_evaluation.pt:155
-#: src/osha/oira/templates/risk_identification.pt:72
-#: src/osha/oira/templates/sessions.pt:96 src/osha/oira/templates/start.pt:49
-msgid "label_action_plan"
-msgstr "Prevencijos priemonių planas"
-
-#. Default: Action Plan
-#: src/osha/oira/templates/actionplan.pt:80
-#: src/osha/oira/templates/identification.pt:51
-#: src/osha/oira/templates/module_actionplan.pt:78
-#: src/osha/oira/templates/module_evaluation.pt:67
-#: src/osha/oira/templates/module_identification.pt:84
-#: src/osha/oira/templates/profile.pt:92 src/osha/oira/templates/report.pt:69
-#: src/osha/oira/templates/report_actionplan.pt:289
-#: src/osha/oira/templates/report_company.pt:80
-#: src/osha/oira/templates/report_identification.pt:104
-#: src/osha/oira/templates/risk_evaluation.pt:156
-#: src/osha/oira/templates/risk_identification.pt:73
-#: src/osha/oira/templates/sessions.pt:97 src/osha/oira/templates/start.pt:50
-msgid "iphone_label_action_plan"
-msgstr "Prevencijos priemonių planas"
-
-#. Default: Report
-#: src/osha/oira/templates/actionplan.pt:85
-#: src/osha/oira/templates/identification.pt:56
-#: src/osha/oira/templates/module_actionplan.pt:86
-#: src/osha/oira/templates/module_evaluation.pt:72
-#: src/osha/oira/templates/module_identification.pt:89
-#: src/osha/oira/templates/profile.pt:95 src/osha/oira/templates/report.pt:74
-#: src/osha/oira/templates/report_actionplan.pt:294
-#: src/osha/oira/templates/report_company.pt:85
-#: src/osha/oira/templates/report_identification.pt:109
-#: src/osha/oira/templates/risk_evaluation.pt:161
-#: src/osha/oira/templates/risk_identification.pt:78
-#: src/osha/oira/templates/sessions.pt:100 src/osha/oira/templates/start.pt:53
-msgid "label_report"
-msgstr "Ataskaita"
-
-#. Default: Report
-#: src/osha/oira/templates/actionplan.pt:86
-#: src/osha/oira/templates/identification.pt:57
-#: src/osha/oira/templates/module_actionplan.pt:87
-#: src/osha/oira/templates/module_evaluation.pt:73
-#: src/osha/oira/templates/module_identification.pt:90
-#: src/osha/oira/templates/profile.pt:96 src/osha/oira/templates/report.pt:75
-#: src/osha/oira/templates/report_actionplan.pt:295
-#: src/osha/oira/templates/report_company.pt:86
-#: src/osha/oira/templates/report_identification.pt:110
-#: src/osha/oira/templates/risk_evaluation.pt:162
-#: src/osha/oira/templates/risk_identification.pt:79
-#: src/osha/oira/templates/sessions.pt:101 src/osha/oira/templates/start.pt:54
-msgid "iphone_report"
-msgstr "Ataskaita"
-
-#. Default: Logout
-#: src/osha/oira/templates/actionplan.pt:92
-#: src/osha/oira/templates/identification.pt:64
-#: src/osha/oira/templates/module_actionplan.pt:94
-#: src/osha/oira/templates/module_evaluation.pt:79
-#: src/osha/oira/templates/module_identification.pt:97
-#: src/osha/oira/templates/profile.pt:102 src/osha/oira/templates/report.pt:82
-#: src/osha/oira/templates/report_actionplan.pt:307
-#: src/osha/oira/templates/report_company.pt:93
-#: src/osha/oira/templates/report_identification.pt:117
-#: src/osha/oira/templates/risk_evaluation.pt:169
-#: src/osha/oira/templates/risk_identification.pt:86
-#: src/osha/oira/templates/sessions.pt:107 src/osha/oira/templates/start.pt:60
-msgid "navigation_logout"
-msgstr "Atsijungti"
-
-#. Default: Sessions
-#: src/osha/oira/templates/actionplan.pt:93
-#: src/osha/oira/templates/identification.pt:65
-#: src/osha/oira/templates/module_actionplan.pt:95
-#: src/osha/oira/templates/module_evaluation.pt:80
-#: src/osha/oira/templates/module_identification.pt:98
-#: src/osha/oira/templates/profile.pt:103 src/osha/oira/templates/report.pt:83
-#: src/osha/oira/templates/report_actionplan.pt:308
-#: src/osha/oira/templates/report_company.pt:94
-#: src/osha/oira/templates/report_identification.pt:118
-#: src/osha/oira/templates/risk_evaluation.pt:170
-#: src/osha/oira/templates/risk_identification.pt:87
-#: src/osha/oira/templates/start.pt:61
-msgid "navigation_surveys"
-msgstr "Seansai"
-
-#. Default: Help
-#: src/osha/oira/templates/actionplan.pt:94
-#: src/osha/oira/templates/disclaimer.pt:67
-#: src/osha/oira/templates/identification.pt:66
-#: src/osha/oira/templates/module_actionplan.pt:96
-#: src/osha/oira/templates/module_evaluation.pt:81
-#: src/osha/oira/templates/module_identification.pt:99
-#: src/osha/oira/templates/profile.pt:104
-#: src/osha/oira/templates/register.pt:41 src/osha/oira/templates/report.pt:84
-#: src/osha/oira/templates/report_actionplan.pt:309
-#: src/osha/oira/templates/report_company.pt:95
-#: src/osha/oira/templates/report_identification.pt:119
-#: src/osha/oira/templates/risk_evaluation.pt:171
-#: src/osha/oira/templates/risk_identification.pt:88
-#: src/osha/oira/templates/sessions.pt:108 src/osha/oira/templates/start.pt:62
-msgid "navigation_help"
-msgstr "Žinynas"
-
-#. Default: Status
-#: src/osha/oira/templates/actionplan.pt:95
-#: src/osha/oira/templates/identification.pt:67
-#: src/osha/oira/templates/module_actionplan.pt:97
-#: src/osha/oira/templates/module_evaluation.pt:82
-#: src/osha/oira/templates/module_identification.pt:100
-#: src/osha/oira/templates/report.pt:85
-#: src/osha/oira/templates/report_actionplan.pt:310
-#: src/osha/oira/templates/report_company.pt:96
-#: src/osha/oira/templates/report_identification.pt:120
-#: src/osha/oira/templates/risk_evaluation.pt:172
-#: src/osha/oira/templates/risk_identification.pt:89
-msgid "navigation_status"
-msgstr "Būsena"
-
-#. Default: Settings
-#: src/osha/oira/templates/actionplan.pt:96
-#: src/osha/oira/templates/identification.pt:68
-#: src/osha/oira/templates/module_actionplan.pt:98
-#: src/osha/oira/templates/module_evaluation.pt:83
-#: src/osha/oira/templates/module_identification.pt:101
-#: src/osha/oira/templates/report.pt:86
-#: src/osha/oira/templates/report_actionplan.pt:311
-#: src/osha/oira/templates/report_company.pt:97
-#: src/osha/oira/templates/report_identification.pt:121
-#: src/osha/oira/templates/risk_evaluation.pt:173
-#: src/osha/oira/templates/sessions.pt:109 src/osha/oira/templates/start.pt:63
-msgid "navigation_settings"
-msgstr "Nuostatos"
 
 #. Default: Are you aware of all the risks?
 #: src/osha/oira/templates/default_introduction.pt:6
@@ -1402,206 +2803,6 @@ msgstr ""
 "mažiau nei 10 darbuotojų) ir mažoms (turinčioms mažiau nei 50 darbuotojų) "
 "įmonėms / organizacijoms."
 
-#. Default: Disclaimer of Liability
-#: src/osha/oira/templates/disclaimer.pt:17
-msgid "header_disclaimer"
-msgstr "Atsakomybės apribojimas"
-
-#. Default: This tool contains links to other websites which are not are not under
-#. the control of the European Agency for Safety and Health and the organisations
-#. involved. The Agency and the organisations involved accept no liability in
-#. respect of the content of these websites.
-#: src/osha/oira/templates/disclaimer.pt:19
-msgid "disclaimer_other_websites"
-msgstr ""
-"Šioje priemonėje pateiktos nuorodos į kitas interneto svetaines, kurių "
-"nekontroliuoja Europos saugos ir sveikatos darbe agentūra bei susijusios "
-"organizacijos. Agentūra ir susijusios organizacijos neprisiima atsakomybės "
-"už šių interneto svetainių turinį."
-
-#. Default: The European Agency for Safety and Health at Work and the organisations
-#. involved will not be liable for any false, inaccurate, inappropriate or
-#. incomplete information stored in the OiRA tool or any other damages as a result
-#. of using the software.
-#: src/osha/oira/templates/disclaimer.pt:26
-msgid "disclaimer_tool_information"
-msgstr ""
-"Europos saugos ir sveikatos darbe agentūra bei susijusios organizacijos "
-"neatsako už jokią OiRA priemonėje saugomą klaidingą, netikslią, netinkamą ar "
-"neišsamią informaciją arba už bet kokią kitą žalą, atsiradusią naudojant šią "
-"programinę įrangą."
-
-#. Default: Moreover, an OiRA tool is not intended to cover all the risks of every
-#. workplace but to help you put the risk assessment process into practice. For the
-#. OiRA tool to be fully effective it needs to be adapted to the context of your
-#. particular enterprise - some items might need to be added others omitted if they
-#. are not relevant.
-#: src/osha/oira/templates/disclaimer.pt:33
-msgid "disclaimer_risk_coverage"
-msgstr ""
-"Be to, OiRA priemonė nėra skirta aprašyti visus su kiekviena darbo vieta "
-"susijusius rizikos veiksnius, o yra skirta padėti jums praktiškai "
-"įgyvendinti rizikos įvertinimo procesą. Tam, kad OiRA priemonė būtų visiškai "
-"veiksminga, ją reikia pritaikyti prie jūsų konkrečios įmonės konteksto – kai "
-"kuriuos elementus gali prireikti įtraukti, o kitų nepaisyti, jei jie nėra "
-"svarbūs."
-
-#. Default: For practical and analytical reasons, the tool presents
-#. problems/hazards separately, but in workplaces they may be intertwined.
-#. Therefore interactions between the different problems or risk factors identified
-#. must be taken into account.
-#: src/osha/oira/templates/disclaimer.pt:41
-msgid "disclaimer_interactions"
-msgstr ""
-"Praktiniais ir analitiniais sumetimais ši priemonė pateikia problemas / "
-"pavojus atskirai, bet darbo vietose jie gali būti persipynę. Todėl privaloma "
-"atsižvelgti į tai, kaip sąveikauja identifikuotos skirtingos problemos ar "
-"rizikos veiksniai."
-
-#. Default: Therefore, EU-OSHA does not accept any liability for damages and claims
-#. in case a tool does not cover all risks of a given sector.
-#: src/osha/oira/templates/disclaimer.pt:48
-msgid "disclaimer_coverage_liability"
-msgstr ""
-"Todėl EU-OSHA neprisiima atsakomybės už žalą ir nepriima pretenzijų dėl to, "
-"kad ši priemonė neapima visų konkrečiame sektoriuje patiriamų rizikos "
-"veiksnių."
-
-#. Default: Moreover, the Agency and the organisations involved in the production
-#. of the OiRA tool do not accept any liability for damages and claims arising out
-#. of the use or inability to use the tool and the data stored therein. Similarly,
-#. EU-OSHA does not accept any liability in case of unavailability of the function
-#. of the OiRA tools to print the report, recording the risk assessment
-#. automatically generated by the tool. Therefore, the employer has to make sure,
-#. at any time, to be in possession of a printed, accurate and up-dated risk
-#. assessment.
-#: src/osha/oira/templates/disclaimer.pt:53
-msgid "disclaimer_printed_assesment"
-msgstr ""
-"Be to, agentūra ir organizacijos, dalyvavusios rengiant OiRA priemonę, "
-"neprisiima jokios atsakomybės už žalą ir nepriima pretenzijų dėl priemonės "
-"bei joje laikomų duomenų naudojimo ar negalėjimo naudoti. EU-OSHA taip pat "
-"neprisiima atsakomybės tuo atveju, jei neveikia OiRA priemonių funkcija "
-"spausdinti ataskaitą įrašant priemonės automatiškai generuotą rizikos "
-"įvertinimą. Todėl darbdavys turi pasirūpinti, kad bet kuriuo metu turėtų "
-"išspausdintą, tikslų ir atnaujintą rizikos įvertinimą."
-
-#. Default: Documentation
-#: src/osha/oira/templates/documentation_view.pt:12
-msgid "title_country_documentation"
-msgstr "Dokumentacija"
-
-#. Default: online client
-#: src/osha/oira/templates/documentation_view.pt:15
-msgid "intro_documenation_client"
-msgstr "internetinė kliento programa"
-
-#. Default: Here you can manage the documentation for the ${client}.
-#: src/osha/oira/templates/documentation_view.pt:14
-msgid "intro_documenation"
-msgstr "Čia galite tvarkyti ${client} dokumentaciją."
-
-#. Default: Go to the ${homepage_edit_form} to change the way the homepage appears.
-#: src/osha/oira/templates/documentation_view.pt:17
-msgid "documentation_homepage"
-msgstr ""
-"Eikite į ${homepage_edit_form}, kad pakeistumėte pradinio puslapio rodymo "
-"būdą."
-
-#. Default: appendix
-#: src/osha/oira/templates/documentation_view.pt:23
-msgid "documentation_appendix_appendix"
-msgstr "priedėlis"
-
-#. Default: Pages created in the ${appendix} folder are available via links in the
-#. footer of the online client.
-#: src/osha/oira/templates/documentation_view.pt:23
-msgid "documentation_appendix"
-msgstr ""
-"${appendix} kataloge sukurti puslapiai prieinami per nuorodas internetinės "
-"kliento programos poraštėje."
-
-#. Default: online help
-#: src/osha/oira/templates/documentation_view.pt:28
-msgid "documentation_online_help_online_help"
-msgstr "internetinis žinynas"
-
-#. Default: The ${online_help} text can also be modified.
-#: src/osha/oira/templates/documentation_view.pt:28
-msgid "documentation_online_help"
-msgstr "${online_help} tekstą taip pat galima modifikuoti."
-
-#. Default: Login
-#: src/osha/oira/templates/error_unauthorized.pt:14
-msgid "header_login"
-msgstr "Prisijungti"
-
-#. Default: Unauthorized
-#: src/osha/oira/templates/error_unauthorized.pt:14
-msgid "header_error_unauthorized"
-msgstr "Nėra įgaliojimų"
-
-#. Default: I am afraid you are not authorised to do this.
-#: src/osha/oira/templates/error_unauthorized.pt:18
-msgid "message_error_unauthorized"
-msgstr "Manome, kad neturite įgaliojimų tai atlikti."
-
-#. Default: You need to be logged in to access this page.
-#: src/osha/oira/templates/error_unauthorized.pt:23
-msgid "message_error_not_logged_in"
-msgstr "Jums reikia prisijungti, kad galėtumėte pasiekti šį puslapį."
-
-#. Default: Credentials
-#: src/osha/oira/templates/error_unauthorized.pt:29
-#: src/osha/oira/templates/login.pt:22
-msgid "legend_credentials"
-msgstr "Kredencialai"
-
-#. Default: Login
-#: src/osha/oira/templates/error_unauthorized.pt:31
-#: src/osha/oira/templates/login.pt:25
-msgid "label_login"
-msgstr "Prisijungti"
-
-#. Default: Password
-#: src/osha/oira/templates/error_unauthorized.pt:33
-#: src/osha/oira/templates/login.pt:27
-msgid "label_password"
-msgstr "Slaptažodis"
-
-#. Default: Login
-#: src/osha/oira/templates/error_unauthorized.pt:38
-#: src/osha/oira/templates/login.pt:32
-msgid "button_login"
-msgstr "Prisijungti"
-
-#. Default: request a password reset
-#: src/osha/oira/templates/error_unauthorized.pt:42
-#: src/osha/oira/templates/login.pt:17 src/osha/oira/templates/login.pt:36
-msgid "reset_password"
-msgstr "pareikalauti atstatyti slaptažodį"
-
-#. Default: If you forgot your password you can ${reset_password}.
-#: src/osha/oira/templates/error_unauthorized.pt:42
-#: src/osha/oira/templates/login.pt:36
-msgid "message_reset_password"
-msgstr "Jei pamiršote slaptažodį, galite ${reset_password}."
-
-#. Default: Regions
-#: src/osha/oira/templates/frontpage.pt:406
-msgid "header_regions"
-msgstr "Regionai"
-
-#. Default: You can print the ${list-of-risks}.
-#: src/osha/oira/templates/identification.pt:21
-msgid "intro_identification"
-msgstr "Galite išspausdinti ${list-of-risks}."
-
-#. Default: Start Risk Identification
-#: src/osha/oira/templates/identification.pt:26
-msgid "label_start_identification"
-msgstr "Pradėti rizikos identifikavimą"
-
 #. Default: Login
 #: src/osha/oira/templates/login.pt:12
 msgid "title_login"
@@ -1621,882 +2822,38 @@ msgstr ""
 "Negaliojantis prisijungimas. Jei pamiršote slaptažodį, galite "
 "${reset_password}."
 
-#. Default: Previous
-#: src/osha/oira/templates/module_actionplan.pt:52
-#: src/osha/oira/templates/module_evaluation.pt:38
-#: src/osha/oira/templates/module_identification.pt:48
-#: src/osha/oira/templates/register.pt:34
-#: src/osha/oira/templates/report_company.pt:52
-#: src/osha/oira/templates/risk_evaluation.pt:119
-#: src/osha/oira/templates/risk_identification.pt:28
-#: src/osha/oira/templates/sessions.pt:77 src/osha/oira/templates/start.pt:29
-msgid "label_previous"
-msgstr "Ankstesnis"
+#~ msgid "label_add_profile_module"
+#~ msgstr "Pridėti"
 
-#. Default: Next
-#: src/osha/oira/templates/module_actionplan.pt:53
-#: src/osha/oira/templates/module_evaluation.pt:39
-#: src/osha/oira/templates/module_identification.pt:54
-#: src/osha/oira/templates/register.pt:35
-#: src/osha/oira/templates/sessions.pt:78
-msgid "label_next"
-msgstr "Tolesnis"
+#~ msgid "profilequestion_type_optional"
+#~ msgstr "Tai pasirenkamas profilio elementas."
 
-#. Default: Yes
-#: src/osha/oira/templates/module_identification.pt:41
-#: src/osha/oira/templates/risk_identification.pt:22
-msgid "label_yes"
-msgstr "Taip"
+#~ msgid "profilequestion_type_repeat"
+#~ msgstr "Tai pakartojamas profilio elementas."
 
-#. Default: No
-#: src/osha/oira/templates/module_identification.pt:44
-#: src/osha/oira/templates/risk_identification.pt:23
-msgid "label_no"
-msgstr "Ne"
+#~ msgid "severity_weak_help"
+#~ msgstr "Nereikia nutraukti darbo"
 
-#. Default: Save and continue
-#: src/osha/oira/templates/module_identification.pt:50
-#: src/osha/oira/templates/profile.pt:71 src/osha/oira/templates/report.pt:38
-#: src/osha/oira/templates/report_company.pt:54
-#: src/osha/oira/templates/risk_evaluation.pt:120
-#: src/osha/oira/templates/risk_identification.pt:29
-msgid "label_save_and_continue"
-msgstr "Įrašyti ir tęsti"
+#~ msgid "severity_not_severe_help"
+#~ msgstr "Reikia nedirbti trumpiau nei 3 dienas"
 
-#. Default: Information
-#: src/osha/oira/templates/module_view.pt:22
-#: src/osha/oira/templates/profilequestion_view.pt:20
-#: src/osha/oira/templates/survey_view.pt:19
-msgid "header_information"
-msgstr "Informacija"
+#~ msgid "severity_severe_help"
+#~ msgstr "Reikia nedirbti ilgiau nei 3 dienas"
 
-#. Default: This ${number} is mandatory.
-#: src/osha/oira/templates/module_view.pt:23
-msgid "module_mandatory"
-msgstr "Šis ${number} yra privalomas."
+#~ msgid "severity_very_severe_help"
+#~ msgstr "Neišgydomas sužalojimas, nepagydoma liga, mirtis"
 
-#. Default: This ${number} is optional.
-#: src/osha/oira/templates/module_view.pt:27
-msgid "module_optional"
-msgstr "Šis ${number} yra pasirenkamas."
+#~ msgid "frequency_french_rare_help"
+#~ msgstr "Kartą per metus"
 
-#. Default: Submodules
-#: src/osha/oira/templates/module_view.pt:32
-msgid "header_submodules"
-msgstr "Submoduliai"
+#~ msgid "frequency_french_not_often_help"
+#~ msgstr "Kartą per mėnesį"
 
-#. Default: Risks
-#: src/osha/oira/templates/module_view.pt:39
-#: src/osha/oira/templates/profilequestion_view.pt:32
-msgid "header_risks"
-msgstr "Rizikos veiksniai"
+#~ msgid "frequency_french_often_help"
+#~ msgstr "Kartą per savaitę"
 
-#. Default: Tailor the risk assessment to your organisation
-#: src/osha/oira/templates/profile.pt:16
-msgid "header_profile"
-msgstr "Rizikos įvertinimą specialiai pritaikykite jūsų organizacijai"
-
-#. Default: In order to tailor the risk assessment to your organisation you may be
-#. asked to:
-#: src/osha/oira/templates/profile.pt:18
-msgid "expl_profile"
-msgstr ""
-"Tam, kad rizikos įvertinimas būtų specialiai pritaikytas jūsų organizacijai, "
-"iš jūsų gali būti paprašyta:"
-
-#. Default: select or skip situation(s) relevant or not to your business activity
-#. and tick the box(es) if appropriate
-#: src/osha/oira/templates/profile.pt:23
-msgid "expl_profile_bullet1"
-msgstr ""
-"parinkti arba praleisti jūsų verslui aktualią (-as) ar neaktualią (-as) "
-"situaciją (-as) ir, jei reikia, pažymėti langelį (-us)"
-
-#. Default: list multiple business units, or branches, or stores, etc. These
-#. related risks will be repeated for each name you have entered.
-#: src/osha/oira/templates/profile.pt:27
-msgid "expl_profile_bullet2"
-msgstr ""
-"surašyti daugiau verslo padalinių, filialų ar parduotuvių ir pan. Šie susiję "
-"rizikos veiksniai bus kartojami su kiekvienu jūsų įvestu vardu."
-
-#. Default: Add
-#: src/osha/oira/templates/profile.pt:62
-msgid "label_add_profile_module"
-msgstr "Pridėti"
-
-#. Default: This is an optional profile item.
-#: src/osha/oira/templates/profilequestion_view.pt:21
-msgid "profilequestion_type_optional"
-msgstr "Tai pasirenkamas profilio elementas."
-
-#. Default: This is a repeatable profile item.
-#: src/osha/oira/templates/profilequestion_view.pt:22
-msgid "profilequestion_type_repeat"
-msgstr "Tai pakartojamas profilio elementas."
-
-#. Default: Modules
-#: src/osha/oira/templates/profilequestion_view.pt:25
-msgid "header_modules"
-msgstr "Moduliai"
-
-#. Default: Register
-#: src/osha/oira/templates/register.pt:17
-#: src/osha/oira/templates/register.pt:25
-msgid "header_register"
-msgstr "Registruotis"
-
-#. Default: Email address
-#: src/osha/oira/templates/register.pt:27
-msgid "label_email"
-msgstr "E. pašto adresas"
-
-#. Default: Desired password
-#: src/osha/oira/templates/register.pt:29
-msgid "label_new_password"
-msgstr "Pageidaujamas slaptažodis"
-
-#. Default: Again password
-#: src/osha/oira/templates/register.pt:31
-msgid "label_password_confirm"
-msgstr "Pakartokite slaptažodį"
-
-#. Default: Reporting
-#: src/osha/oira/templates/report.pt:17
-msgid "header_reporting"
-msgstr "Ataskaitos"
-
-#. Default: Now that you have finished identifying all the risks in your
-#. organisation and created an action plan you can create a report which lists all
-#. your results. You can, if desired, add some extra comments that should be
-#. included in this report in the field below.
-#: src/osha/oira/templates/report.pt:19
-msgid "report_intro"
-msgstr ""
-"Dabar, kai baigėte identifikuoti visus rizikos veiksnius jūsų organizacijoje "
-"ir sukūrėte prevencijos priemonių planą, galite sukurti ataskaitą, kurioje "
-"būtų surašyti visi rezultatai. Jei pageidaujate, žemiau esančiame laukelyje "
-"galite pridėti keletą papildomų komentarų, kurie turėtų būti įtraukti į šią "
-"ataskaitą."
-
-#. Default: Download
-#: src/osha/oira/templates/report_actionplan.pt:27
-#: src/osha/oira/templates/report_identification.pt:24
-msgid "button_download"
-msgstr "Atsisiųsti"
-
-#. Default: General approach (to eliminate or reduce the risk):
-#: src/osha/oira/templates/report_actionplan.pt:102
-msgid "report_measure_actionplan"
-msgstr "Bendrasis požiūris (kaip pašalinti ar sumažinti riziką):"
-
-#. Default: Specific action(s) required to implement this approach:
-#: src/osha/oira/templates/report_actionplan.pt:106
-msgid "report_measure_preventionplan"
-msgstr ""
-"Konkretus (-ūs) veiksmas (-ai), reikalingas (-i) šiam požiūriui įgyvendinti:"
-
-#. Default: Level of expertise and/or requirements needed:
-#: src/osha/oira/templates/report_actionplan.pt:110
-msgid "report_measure_requirements"
-msgstr "Reikalingų ekspertinių žinių lygis ir (ar) reikalavimai:"
-
-#. Default: ${responsible} is responsible for this task.
-#: src/osha/oira/templates/report_actionplan.pt:117
-msgid "report_measure_responsible"
-msgstr "${responsible} atsako už šią užduotį."
-
-#. Default: ${responsible} is responsible for this task which starts on ${start}.
-#: src/osha/oira/templates/report_actionplan.pt:119
-msgid "report_measure_responsible_and_start"
-msgstr "${responsible} atsako už šią užduotį, kuri pradedama ${start}."
-
-#. Default: ${responsible} is responsible for this task which ends on ${end}.
-#: src/osha/oira/templates/report_actionplan.pt:122
-msgid "report_measure_responsible_and_end"
-msgstr "${responsible} atsako už šią užduotį, kuri baigiama ${end}."
-
-#. Default: This task starts on ${start}.
-#: src/osha/oira/templates/report_actionplan.pt:125
-msgid "report_measure_start_only"
-msgstr "Ši užduotis pradedama ${start}."
-
-#. Default: This task ends on ${end}.
-#: src/osha/oira/templates/report_actionplan.pt:128
-msgid "report_measure_end_only"
-msgstr "Ši užduotis baigiama ${end}."
-
-#. Default: This task starts on ${start} and ends on ${end}.
-#: src/osha/oira/templates/report_actionplan.pt:131
-msgid "report_measure_start_and_stop"
-msgstr "Ši užduotis pradedama ${start} ir baigiama ${end}."
-
-#. Default: ${responsible} is responsible for this task which starts on ${start}
-#. and ends on ${end}.
-#: src/osha/oira/templates/report_actionplan.pt:135
-msgid "report_measure_full"
-msgstr ""
-"${responsible} atsako už šią užduotį, kuri pradedama ${start} ir baigiama "
-"${end}."
-
-#. Default: There is a budget of ${amount} for this measure.
-#: src/osha/oira/templates/report_actionplan.pt:139
-msgid "report_measure_budget"
-msgstr "Šiai priemonei skirtas ${amount} biudžetas."
-
-#. Default: The following risks have not yet been answered. Please do so at the
-#. soonest possibility.
-#: src/osha/oira/templates/report_actionplan.pt:189
-msgid "desc_unanswered_risks"
-msgstr ""
-"Į toliau pateiktus rizikos veiksnius dar nebuvo atsakyta. Padarykite tai "
-"esant pirmai galimybei."
-
-#. Default: This risk is not present in your organisation, but since the sector
-#. organisation considers this one of the priority risks it must be included in
-#. this report.
-#: src/osha/oira/templates/report_actionplan.pt:260
-#: src/osha/oira/templates/webhelpers.pt:177
-msgid "top5_risk_not_present"
-msgstr ""
-"Šio rizikos veiksnio nėra jūsų organizacijoje, bet kadangi sektoriaus "
-"organizacija laiko jį esant viena iš prioritetinių rizikų, jį reikia "
-"įtraukti į šią ataskaitą."
-
-#. Default: You are about to print the report... please complete the optional form
-#. and then proceed.
-#: src/osha/oira/templates/report_company.pt:17
-msgid "hader_company_details"
-msgstr ""
-"Jūs pasirengę spausdinti ataskaitą... Užpildykite pasirenkamą formą ir "
-"tęskite."
-
-#. Default: Please fix the indicated errors.
-#: src/osha/oira/templates/report_company.pt:18
-msgid "warn_fix_errors"
-msgstr "Ištaisykite nurodytas klaidas."
-
-#. Default: You are free to provide the information below. This information is
-#. meant to improve the tools and the services provided. This data will not appear
-#. in the report.
-#: src/osha/oira/templates/report_company.pt:19
-msgid "company_details_intro"
-msgstr ""
-"Informaciją žemiau pateikiate savo nuožiūra. Ši informacija yra skirta "
-"priemonėms ir teikiamoms paslaugoms tobulinti. Šie duomenys nebus pateikiami "
-"ataskaitoje."
-
-#. Default: Your country
-#: src/osha/oira/templates/report_company.pt:26
-msgid "label_company_country"
-msgstr "Jūsų šalis"
-
-#. Default: Through which channel did you learn about this tool?
-#: src/osha/oira/templates/report_company.pt:36
-msgid "label_referer"
-msgstr "Kuriuo kanalu sužinojote apie šią priemonę?"
-
-#. Default: an employers' organisation
-#: src/osha/oira/templates/report_company.pt:37
-msgid "referer_employers_organisation"
-msgstr "darbdavių organizacija"
-
-#. Default: a trade union organisation
-#: src/osha/oira/templates/report_company.pt:38
-msgid "referer_trade_union"
-msgstr "profesinės sąjungos organizacija"
-
-#. Default: a national public institution/administration
-#: src/osha/oira/templates/report_company.pt:39
-msgid "referer_national_public_institution"
-msgstr "nacionalinė viešoji institucija / administracija"
-
-#. Default: Ministry, Labour Inspectorate, National Institute for Safety and Health
-#. at Work, etc.
-#: src/osha/oira/templates/report_company.pt:40
-msgid "info_referer_national_public_institution"
-msgstr ""
-"ministerija, darbo inspekcija, nacionalinis saugos ir sveikatos darbe "
-"institutas ir kt."
-
-#. Default: an European institution/administration
-#: src/osha/oira/templates/report_company.pt:41
-msgid "referer_eu_institution"
-msgstr "Europos institucija / administracija"
-
-#. Default: The European Agency for Safety and Health at Work, European social
-#. partners, etc.
-#: src/osha/oira/templates/report_company.pt:42
-msgid "info_referer_eu_institution"
-msgstr ""
-"Europos saugos ir sveikatos darbe agentūra, Europos socialiniai partneriai "
-"ir kt."
-
-#. Default: health and safety experts
-#: src/osha/oira/templates/report_company.pt:43
-msgid "referer_health_safety_expert"
-msgstr "sveikatos ir saugos ekspertai"
-
-#. Default: other channel
-#: src/osha/oira/templates/report_company.pt:44
-msgid "referer_other"
-msgstr "kitas kanalas"
-
-#. Default: Skip this step
-#: src/osha/oira/templates/report_company.pt:53
-msgid "label_skip"
-msgstr "Praleisti šį etapą"
-
-#. Default: You responded negative to the above statement.
-#: src/osha/oira/templates/report_identification.pt:48
-#: src/osha/oira/templates/webhelpers.pt:189
-msgid "warn_risk_present"
-msgstr "Į aukščiau pateiktą teiginį jūs atsakėte neigiamai."
-
-#: src/osha/oira/templates/risk_actionplan.pt:19
-msgid ""
-"Are you sure you want to delete this measure? This action can not be "
-"reverted."
-msgstr ""
-"Ar tikrai norite ištrinti šią priemonę? Šio veiksmo nebus galima atšaukti."
-
-#: src/osha/oira/templates/risk_actionplan.pt:20
-msgid ""
-"The current text in the fields 'Action plan', 'Prevention plan' and "
-"'Requirements' of this measure will be overwritten. This action cannot be "
-"reverted. Are you sure you want to continue?"
-msgstr ""
-"Šios priemonės laukuose „Prevencijos priemonių planas“, „Prevencijos planas“ "
-"ir „Reikalavimai“ esantis tekstas bus perrašytas. Šio veiksmo nebus galima "
-"atšaukti. Ar tikrai norite tęsti?"
-
-#. Default: Add
-#: src/osha/oira/templates/risk_actionplan.pt:24
-msgid "button_add"
-msgstr "Pridėti"
-
-#. Default: Select one or more of the known common measures provided.
-#: src/osha/oira/templates/risk_actionplan.pt:48
-msgid "label_select_measure"
-msgstr "Parinkite vieną ar daugiau iš pateiktų žinomų bendrųjų priemonių."
-
-#. Default: Delete
-#: src/osha/oira/templates/risk_actionplan.pt:67
-#: src/osha/oira/templates/sessions.pt:41
-msgid "label_delete"
-msgstr "Ištrinti"
-
-#. Default: Add another measure
-#: src/osha/oira/templates/risk_actionplan.pt:72
-msgid "label_add"
-msgstr "Pridėti kitą priemonę"
-
-#. Default: Description
-#: src/osha/oira/templates/risk_actionplan.pt:86
-msgid "label_description"
-msgstr "Aprašas"
-
-#: src/osha/oira/templates/risk_actionplan.pt:87
-msgid "Standard solutions"
-msgstr "Standartiniai sprendimai"
-
-#. Default: Describe: 1) what is your general approach to eliminate or (if the risk
-#. is not avoidable) reduce the risk; 2) the specific action(s) required to
-#. implement this approach (to eliminate or to reduce the risk); 3) the level of
-#. expertise needed to implement the measure, for instance “common sense (no OSH
-#. knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or
-#. training and/or consultation of OSH guidance required”, or “OSH expert”. You can
-#. also describe here any other additional requirement (if any).
-#: src/osha/oira/templates/risk_actionplan.pt:88
-msgid "actionplan_measure_tooltip"
-msgstr ""
-"Aprašykite: 1) kaip, jūsų požiūriu, apskritai reikia šalinti riziką arba "
-"(jei rizika neišvengiama) ją mažinti; 2) konkretų (-ius) veiksmą (-us), "
-"reikalingą (-us) šiam požiūriui įgyvendinti (pašalinti arba sumažinti "
-"riziką); 3) ekspertinių žinių, reikalingų priemonei įgyvendinti, lygį, "
-"pavyzdžiui, \"bendras supratimas (žinios apie DSS nebūtinos)\", \"nereikia "
-"specialių ekspertinių žinių apie DSS, bet būtinos minimalios žinios apie DSS "
-"arba su DSS susiję mokymai ir (ar) konsultacijos\" arba \"DSS ekspertas\". "
-"Čia taip pat galite aprašyti bet kokį kitą papildomą reikalavimą (jei yra)."
-
-#. Default: Appoint someone in your company to be responsible for the
-#. implementation of this measure. This person will have the authority to take the
-#. steps described in the Plan and/or the responsibility to ensure that they are
-#. carried out.
-#: src/osha/oira/templates/risk_actionplan.pt:119
-msgid "actionplan_measure_responsible_tooltip"
-msgstr ""
-"Ką nors iš jūsų bendrovės paskirkite būti atsakingu už šios priemonės "
-"įgyvendinimą. Šis asmuo turės įgaliojimų imtis plane aprašytų veiksmų ir "
-"(ar) privalės užtikrinti, kad jie būtų vykdomi."
-
-#. Default: Although some measures do not cost any money, most do. The measures
-#. should therefore be budgeted for; include them in the annual budget round if
-#. necessary.
-#: src/osha/oira/templates/risk_actionplan.pt:124
-msgid "actionplan_measure_budget_tooltip"
-msgstr ""
-"Nors kai kurios priemonės nieko nekainuoja, dauguma jų kainuoja. Todėl "
-"priemonės turėtų būti numatytos biudžete; jei reikia, įtraukite jas į metinį "
-"biudžetą."
-
-#. Default: Please enter the budget in whole Euros.
-#: src/osha/oira/templates/risk_actionplan.pt:126
-msgid "error_invalid_budget"
-msgstr "Įveskite biudžetą sveikais eurais."
-
-#. Default: Day
-#: src/osha/oira/templates/risk_actionplan.pt:136
-msgid "label_day"
-msgstr "Diena"
-
-#. Default: What is the chance of this risk occurring?
-#: src/osha/oira/templates/risk_evaluation.pt:28
-msgid "header_risk_probability"
-msgstr "Kokia šios rizikos tikimybė?"
-
-#. Default: Small
-#: src/osha/oira/templates/risk_evaluation.pt:30
-msgid "probability_small"
-msgstr "Maža"
-
-#. Default: Medium
-#: src/osha/oira/templates/risk_evaluation.pt:32
-msgid "probability_medium"
-msgstr "Vidutinė"
-
-#. Default: Large
-#: src/osha/oira/templates/risk_evaluation.pt:34
-msgid "probability_large"
-msgstr "Didelė"
-
-#. Default: How often are people exposed to this risk?
-#: src/osha/oira/templates/risk_evaluation.pt:38
-#: src/osha/oira/templates/risk_evaluation.pt:81
-msgid "header_risk_frequency"
-msgstr "Kiek dažnai žmonės patiria šią riziką?"
-
-#. Default: Almost never
-#: src/osha/oira/templates/risk_evaluation.pt:40
-msgid "frequency_almost_never"
-msgstr "Beveik niekada"
-
-#. Default: Regularly
-#: src/osha/oira/templates/risk_evaluation.pt:42
-msgid "frequency_regularly"
-msgstr "Reguliariai"
-
-#. Default: Constantly
-#: src/osha/oira/templates/risk_evaluation.pt:44
-msgid "frequency_constantly"
-msgstr "Nuolat"
-
-#. Default: What is the severity of the damage ?
-#: src/osha/oira/templates/risk_evaluation.pt:48
-msgid "header_risk_effect"
-msgstr "Koks žalos sunkumas?"
-
-#. Default: Weak severity
-#: src/osha/oira/templates/risk_evaluation.pt:50
-msgid "effect_injury_no_absence"
-msgstr "Mažas sunkumas"
-
-#. Default: Significant severity
-#: src/osha/oira/templates/risk_evaluation.pt:52
-msgid "effect_injury_with_absence"
-msgstr "Reikšmingas sunkumas"
-
-#. Default: High (very high) severity
-#: src/osha/oira/templates/risk_evaluation.pt:54
-msgid "effect_permanent_damage"
-msgstr "Didelis (labai didelis) sunkumas"
-
-#. Default: What is the severity of the damage ?
-#: src/osha/oira/templates/risk_evaluation.pt:59
-msgid "header_risk_severity"
-msgstr "Koks žalos sunkumas?"
-
-#. Default: Weak
-#: src/osha/oira/templates/risk_evaluation.pt:62
-msgid "severity_weak"
-msgstr "Mažas"
-
-#. Default: No need to stop working
-#: src/osha/oira/templates/risk_evaluation.pt:63
-msgid "severity_weak_help"
-msgstr "Nereikia nutraukti darbo"
-
-#. Default: Not very severe
-#: src/osha/oira/templates/risk_evaluation.pt:66
-msgid "severity_not_severe"
-msgstr "Nelabai didelis"
-
-#. Default: Need to stop working for less than 3 days
-#: src/osha/oira/templates/risk_evaluation.pt:67
-msgid "severity_not_severe_help"
-msgstr "Reikia nedirbti trumpiau nei 3 dienas"
-
-#. Default: Severe
-#: src/osha/oira/templates/risk_evaluation.pt:70
-msgid "severity_severe"
-msgstr "Didelis"
-
-#. Default: Need to stop working for more than 3 days
-#: src/osha/oira/templates/risk_evaluation.pt:71
-msgid "severity_severe_help"
-msgstr "Reikia nedirbti ilgiau nei 3 dienas"
-
-#. Default: Very severe
-#: src/osha/oira/templates/risk_evaluation.pt:75
-msgid "severity_very_severe"
-msgstr "Labai didelis"
-
-#. Default: Irreversible injury, incurable illness, death
-#: src/osha/oira/templates/risk_evaluation.pt:76
-msgid "severity_very_severe_help"
-msgstr "Neišgydomas sužalojimas, nepagydoma liga, mirtis"
-
-#. Default: Rare
-#: src/osha/oira/templates/risk_evaluation.pt:84
-msgid "frequency_french_rare"
-msgstr "Retai"
-
-#. Default: Once per year
-#: src/osha/oira/templates/risk_evaluation.pt:85
-msgid "frequency_french_rare_help"
-msgstr "Kartą per metus"
-
-#. Default: Not very often
-#: src/osha/oira/templates/risk_evaluation.pt:89
-msgid "frequency_french_not_often"
-msgstr "Nelabai dažnai"
-
-#. Default: Once per month
-#: src/osha/oira/templates/risk_evaluation.pt:90
-msgid "frequency_french_not_often_help"
-msgstr "Kartą per mėnesį"
-
-#. Default: Often
-#: src/osha/oira/templates/risk_evaluation.pt:94
-msgid "frequency_french_often"
-msgstr "Dažnai"
-
-#. Default: Once per week
-#: src/osha/oira/templates/risk_evaluation.pt:95
-msgid "frequency_french_often_help"
-msgstr "Kartą per savaitę"
-
-#. Default: Very often or regularly
-#: src/osha/oira/templates/risk_evaluation.pt:99
-msgid "frequency_french_regularly"
-msgstr "Labai dažnai arba reguliariai"
-
-#. Default: Minimum once per day
-#: src/osha/oira/templates/risk_evaluation.pt:100
-msgid "frequency_french_regularly_help"
-msgstr "Mažiausiai kartą per dieną"
-
-#. Default: Select the priority of this risk
-#: src/osha/oira/templates/risk_evaluation.pt:108
-msgid "header_risk_priority"
-msgstr "Parinkti šio rizikos veiksnio prioritetą"
-
-#. Default: Low
-#: src/osha/oira/templates/risk_evaluation.pt:110
-msgid "priority_low"
-msgstr "Mažas"
-
-#. Default: Medium
-#: src/osha/oira/templates/risk_evaluation.pt:112
-msgid "priority_medium"
-msgstr "Vidutinis"
-
-#. Default: High
-#: src/osha/oira/templates/risk_evaluation.pt:114
-msgid "priority_high"
-msgstr "Didelis"
-
-#. Default: Not applicable
-#: src/osha/oira/templates/risk_identification.pt:24
-msgid "label_not_applicable"
-msgstr "Netaikoma"
-
-#. Default: OiRA Tool
-#: src/osha/oira/templates/sessions.pt:18
-msgid "header_session"
-msgstr "OiRA priemonė"
-
-#. Default: Select an earlier session to complete or review
-#: src/osha/oira/templates/sessions.pt:23
-msgid "header_select_session"
-msgstr "Parinkti ankstesnį seansą užbaigimui ar peržiūrai"
-
-#. Default: saved on ${date}
-#: src/osha/oira/templates/sessions.pt:31
-msgid "lable_session_modified"
-msgstr "išsaugota ${date}"
-
-#. Default: Rename
-#: src/osha/oira/templates/sessions.pt:36
-msgid "label_rename"
-msgstr "Pervadinti"
-
-#. Default: or…
-#: src/osha/oira/templates/sessions.pt:47
-msgid "header_or"
-msgstr "arba…"
-
-#. Default: Start a new session choosing one of the following sectoral tools
-#: src/osha/oira/templates/sessions.pt:53
-msgid "label_select_new_session"
-msgstr ""
-"Pradėti naują seansą pasirinkus vieną iš toliau pateiktų sektorių priemonių"
-
-#. Default: Enter a title for your Risk Assessment
-#: src/osha/oira/templates/sessions.pt:58
-msgid "label_session_title"
-msgstr "Įveskite jūsų rizikos įvertinimo pavadinimą"
-
-#. Default: Once you have started an OiRA tool session, you will be able to stop
-#. before the end. You can restart it again at a later date by selecting the title
-#. of the OiRA tool session. You can save more than one session, provided you have
-#. given them different title names. Please remember your e-mail address, password
-#. and the title that you have given the OiRA tool session. By clicking on the
-#. Logout button, you are logged out actively. You are also logged out if you close
-#. your Browser. For security reasons it is better to actively log out.
-#: src/osha/oira/templates/sessions.pt:60
-msgid "session_title_tooltip"
-msgstr ""
-"Pradėję OiRA priemonės seansą, galėsite jį sustabdyti prieš jam "
-"pasibaigiant. Vėliau galite paleisti jį iš naujo, pasirinkę OiRA priemonės "
-"seanso pavadinimą. Galite išsaugoti daugiau nei vieną seansą, jei suteikiate "
-"jiems skirtingus pavadinimus. Atsiminkite jūsų e. pašto adresą, slaptažodį "
-"ir OiRA priemonės seansui suteiktą pavadinimą. Spustelėję atsijungimo "
-"mygtuką, jūs atsijungiate aktyviai. Jūs atjungiami ir tada, kai uždarote "
-"naršyklę. Saugumo sumetimais geriau atsijungti aktyviai."
-
-#: src/osha/oira/templates/sessions.pt:114
-msgid ""
-"Are you sure you want to delete this session? This action can not be "
-"reverted."
-msgstr ""
-"Ar tikrai norite ištrinti šį seansą? Šio veiksmo nebus galima atšaukti."
-
-#. Default: Start
-#: src/osha/oira/templates/start.pt:30
-msgid "label_start_survey"
-msgstr "Pradėti"
-
-#. Default: Evaluation phase
-#: src/osha/oira/templates/survey_view.pt:22
-msgid "label_evaluation_phase"
-msgstr "Vertinimo fazė"
-
-#. Default: Optional
-#: src/osha/oira/templates/survey_view.pt:23
-msgid "optional"
-msgstr "Pasirenkamas"
-
-#. Default: Mandatory
-#: src/osha/oira/templates/survey_view.pt:24
-msgid "mandatory"
-msgstr "Privalomas"
-
-#. Default: Classification code
-#: src/osha/oira/templates/survey_view.pt:25
-msgid "label_classification_code"
-msgstr "Klasifikavimo kodas"
-
-#. Default: Not set
-#: src/osha/oira/templates/survey_view.pt:27
-#: src/osha/oira/templates/survey_view.pt:30
-msgid "not_set"
-msgstr "Nenustatyta"
-
-#. Default: Language
-#: src/osha/oira/templates/survey_view.pt:28
-msgid "label_language"
-msgstr "Kalba"
-
-#. Default: Modules and Profile Questions
-#: src/osha/oira/templates/survey_view.pt:34
-msgid "header_modules_and_profile_questions"
-msgstr "Moduliai ir profilio klausimai"
-
-#. Default: This OiRA Tool has no modules.
-#: src/osha/oira/templates/survey_view.pt:36
-msgid "no_modules"
-msgstr "Šioje OiRA priemonėje nėra modulių."
-
-#. Default: This form will allow you to create a new OiRA Tool.
-#: src/osha/oira/templates/surveygroup_add.pt:11
-msgid "intro_add_surveygroup"
-msgstr "Ši forma leis jums sukurti naują OiRA priemonę."
-
-#. Default: How would you like to start
-#: src/osha/oira/templates/surveygroup_add.pt:19
-msgid "label_survey_source"
-msgstr "Kaip norėtumėte pradėti"
-
-#: src/osha/oira/templates/surveygroup_add.pt:20
-#: src/osha/oira/z3cform/templates/largetextarea_input.pt:21
-msgid "Information"
-msgstr "Informacija"
-
-#. Default: By copying an existing OiRA tool you also inherit its evaluation
-#. algorithm
-#: src/osha/oira/templates/surveygroup_add.pt:20
-msgid "help_survey_source"
-msgstr ""
-"Nukopijavę egzistuojančią OiRA priemonę, paveldite ir jos vertinimo algoritmą"
-
-#. Default: Create a new OiRA Tool from scratch
-#: src/osha/oira/templates/surveygroup_add.pt:23
-msgid "survey_source_scratch"
-msgstr "Sukurti naują OiRA priemonę nuo pradžių"
-
-#. Default: Base my new OiRA Tool on an existing OiRA Tool of my organisation
-#: src/osha/oira/templates/surveygroup_add.pt:24
-msgid "survey_source_local"
-msgstr ""
-"Mano naują OiRA priemonę sukurti remiantis egzistuojančia mano organizacijos "
-"OiRA priemone"
-
-#. Default: Base my new OiRA Tool on an existing OiRA Tool of another organisation
-#: src/osha/oira/templates/surveygroup_add.pt:25
-msgid "survey_source_other"
-msgstr ""
-"Mano naują OiRA priemonę sukurti remiantis egzistuojančia kitos "
-"organizacijos OiRA priemone"
-
-#. Default: Choose an OiRA Tool
-#: src/osha/oira/templates/surveygroup_add.pt:32
-#: src/osha/oira/templates/surveygroup_add.pt:58
-msgid "label_choose_surveygroup"
-msgstr "Pasirinkti OiRA priemonę"
-
-#. Default: Choose a revision of the selected OiRA Tool
-#: src/osha/oira/templates/surveygroup_add.pt:41
-#: src/osha/oira/templates/surveygroup_add.pt:77
-msgid "label_choose_survey"
-msgstr "Pasirinkti parinktos OiRA priemonės redakciją"
-
-#. Default: Choose a country
-#: src/osha/oira/templates/surveygroup_add.pt:51
-msgid "label_choose_country"
-msgstr "Pasirinkti šalį"
-
-#. Default: This method involves risk assessment by Severity x Exposure x
-#. Probability, whereas these have to be understood as follows; Severity of injury
-#. linked to hazard - Exposure (Frequency) to the hazard - Probability of the
-#. hazard occuring when exposed
-#: src/osha/oira/templates/surveygroup_add.pt:86
-msgid "help_survey_evaluation_algorithm_standard"
-msgstr ""
-"Šis metodas apima rizikos įvertinimą pagal sunkumą x poveikį x tikimybę, o "
-"šiuos kriterijus reikia suprasti taip: su pavojumi susijusio sužalojimo "
-"sunkumas – patiriamas pavojus (poveikio dažnumas) – pavojaus patiriant "
-"poveikį tikimybė"
-
-#. Default: Standard three criteria
-#: src/osha/oira/templates/surveygroup_add.pt:90
-msgid "algorithm_kinney"
-msgstr "Trys standartiniai kriterijai"
-
-#: src/osha/oira/templates/surveygroup_add.pt:92
-msgid ""
-"This is the recommended evaluation algorithm, based on the Kinney method"
-msgstr "Tai rekomenduojamas vertinimo algoritmas, pagrįstas Kinney metodu"
-
-#. Default: This method involves risk assessment by Severity x Exposure, whereas
-#. these have to be understood as follows; Severity of injury linked to hazard -
-#. Exposure (Frequency) to the hazard
-#: src/osha/oira/templates/surveygroup_add.pt:94
-msgid "help_survey_evaluation_algorithm_simplified"
-msgstr ""
-"Šis metodas apima rizikos įvertinimą pagal sunkumą x poveikį, o šiuos "
-"kriterijus reikia suprasti taip: su pavojumi susijusio sužalojimo sunkumas – "
-"patiriamas pavojus (poveikio dažnumas)"
-
-#. Default: Simplified two criteria
-#: src/osha/oira/templates/surveygroup_add.pt:100
-msgid "algorithm_french"
-msgstr "Du supaprastinti kriterijai"
-
-#: src/osha/oira/templates/surveygroup_add.pt:102
-msgid "This is a simpler evaluation algorithm using only two criteria."
-msgstr ""
-"Tai paprastesnis vertinimo algoritmas, kuriam naudojami tik du kriterijai."
-
-#. Default: Create
-#: src/osha/oira/templates/surveygroup_add.pt:109
-msgid "button_create"
-msgstr "Sukurti"
-
-#. Default: Cancel
-#: src/osha/oira/templates/surveygroup_add.pt:110
-msgid "button_cancel"
-msgstr "Atšaukti"
-
-#. Default: OiRA Tool versions
-#: src/osha/oira/templates/surveygroup_view.pt:14
-msgid "header_sector_tool_version_list"
-msgstr "OiRA priemonės versijos"
-
-#. Default: Online interactive
-#: src/osha/oira/templates/webhelpers.pt:24
-msgid "oira_name_line_1"
-msgstr "Interaktyvi"
-
-#. Default: Risk Assessment
-#: src/osha/oira/templates/webhelpers.pt:25
-msgid "oira_name_line_2"
-msgstr "rizikos vertinimo priemonė"
-
-#. Default: Produced by ${EU-OSHA}.
-#: src/osha/oira/templates/webhelpers.pt:131
-msgid "appendix_produced_by"
-msgstr "Parengė ${EU-OSHA}."
-
-#. Default: About
-#: src/osha/oira/templates/webhelpers.pt:134
-msgid "appendix_about"
-msgstr "Apie"
-
-#. Default: Privacy
-#: src/osha/oira/templates/webhelpers.pt:136
-msgid "appendix_privacy"
-msgstr "Privatumas"
-
-#. Default: Disclaimer
-#: src/osha/oira/templates/webhelpers.pt:138
-msgid "appendix_disclaimer"
-msgstr "Atsakomybės apribojimas"
-
-#. Default: GPL License
-#: src/osha/oira/templates/webhelpers.pt:140
-msgid "appendix_gpl_license"
-msgstr "GPL licencija"
-
-#: src/osha/oira/templates/webhelpers.pt:142
-msgid "CC License"
-msgstr "CC licencija"
-
-#. Default: Legal and policy references
-#: src/osha/oira/templates/webhelpers.pt:204
-#: src/osha/oira/templates/webhelpers.pt:218
-msgid "header_legal_references"
-msgstr "Teisės aktų ir politikos nuorodos"
-
-#. Default: Hide
-#: src/osha/oira/templates/webhelpers.pt:221
-msgid "action_hide"
-msgstr "Slėpti"
-
-#. Default: Show
-#: src/osha/oira/templates/webhelpers.pt:225
-msgid "action_show"
-msgstr "Rodyti"
+#~ msgid "frequency_french_regularly_help"
+#~ msgstr "Mažiausiai kartą per dieną"
 
 #, fuzzy
 #~ msgid "help_header_preparation"

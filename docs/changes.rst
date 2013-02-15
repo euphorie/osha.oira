@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.38a2 (unreleased)
+2.0 - (unreleased)
 ---------------------
 
 - Nothing changed yet.
@@ -9,8 +9,6 @@ Changelog
 
 1.2.38a1 (2013-02-15)
 ---------------------
-
-- Nothing changed yet.
 
 
 1.2.37 (2013-02-06)

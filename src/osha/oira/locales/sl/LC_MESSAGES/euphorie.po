@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.23\n"
-"Report-Msgid-Bugs-To: thomas@syslab.com\n"
-"POT-Creation-Date: 2013-02-15 15:43+0200\n"
+"Report-Msgid-Bugs-To: brand@syslab.com\n"
+"POT-Creation-Date: 2013-02-15 16:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,21 +30,22 @@ msgstr ""
 "Opišite svoj splošni pristop za preprečevanje ali (če se tveganju ni mogoče "
 "izogniti) zmanjšanje tveganja."
 
-#. Default: Describe the specific action(s) required to implement this approach (to
-#. eliminate or to reduce the risk).
+#. Default: Describe the specific action(s) required to implement this approach
+#. (to eliminate or to reduce the risk).
 #: src/osha/oira/manual_translations.py:7
 msgid "help_measure_prevention_plan"
 msgstr ""
 "Opišite specifična dejanja, potrebna za izvajanje tega pristopa (da "
 "preprečite ali zmanjšate tveganje)."
 
-#. Default: Describe: 1) what is your general approach to eliminate or (if the risk
-#. is not avoidable) reduce the risk; 2) the specific action(s) required to
-#. implement this approach (to eliminate or to reduce the risk); 3) the level of
-#. expertise needed to implement the measure, for instance "common sense (no OSH
-#. knowledge required)", "no specific OSH expertise, but minimum OSH knowledge or
-#. training and/or consultation of OSH guidance required", or "OSH expert". You can
-#. also describe here any other additional requirement (if any).
+#. Default: Describe: 1) what is your general approach to eliminate or (if the
+#. risk is not avoidable) reduce the risk; 2) the specific action(s) required
+#. to implement this approach (to eliminate or to reduce the risk); 3) the
+#. level of expertise needed to implement the measure, for instance "common
+#. sense (no OSH knowledge required)", "no specific OSH expertise, but minimum
+#. OSH knowledge or training and/or consultation of OSH guidance required", or
+#. "OSH expert". You can also describe here any other additional requirement
+#. (if any).
 #: src/osha/oira/manual_translations.py:10
 msgid "help_measure_requirements"
 msgstr ""
@@ -152,30 +153,31 @@ msgstr "To orodje OiRA nima profilnih vprašanj."
 msgid "button_create_new"
 msgstr "Ustvari novo orodje OiRA"
 
-#. Default: Please choose a country of which you would like to view or copy an OiRA
-#. Tool.
+#. Default: Please choose a country of which you would like to view or copy an
+#. OiRA Tool.
 #: src/osha/oira/manual_translations.py:41
 msgid "message_choose_country"
 msgstr ""
 "Izberite državo, za katero si želite ogledati ali prekopirati orodje OiRA."
 
-#. Default: Select a sector for which you would like to view or copy an OiRA Tool.
+#. Default: Select a sector for which you would like to view or copy an OiRA
+#. Tool.
 #: src/osha/oira/manual_translations.py:43
 msgid "intro_select_sector"
 msgstr ""
 "Izberite sektor, za katerega si želite ogledati ali prekopirati orodje OiRA."
 
-#. Default: This is the title of this OiRA Tool version. This name is never shown
-#. to users.
+#. Default: This is the title of this OiRA Tool version. This name is never
+#. shown to users.
 #: src/osha/oira/manual_translations.py:45
 msgid "help_survey_title"
 msgstr ""
 "To je naziv te različice orodja OiRA. To ime nikoli ni prikazano uporabnikom."
 
-#. Default: The introduction text is shown when starting a new OiRA Tool session.
-#. If no introduction is provided here a standard text will be shown. Please keep
-#. this text brief so it will easily fit on screens of small devices such as phones
-#. and PDAs.
+#. Default: The introduction text is shown when starting a new OiRA Tool
+#. session. If no introduction is provided here a standard text will be shown.
+#. Please keep this text brief so it will easily fit on screens of small
+#. devices such as phones and PDAs.
 #: src/osha/oira/manual_translations.py:47
 msgid "help_introduction"
 msgstr ""
@@ -227,8 +229,8 @@ msgstr "Rešitev"
 msgid "Succesfully published the survey"
 msgstr "Uspešno objavljeno orodje OiRA"
 
-#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed at
-#. ${url}.
+#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
+#. at ${url}.
 #: src/osha/oira/manual_translations.py:65
 msgid ""
 "Succesfully created a preview for the survey. It can be accessed at ${url} ."
@@ -248,9 +250,10 @@ msgid "help_add_version"
 msgstr "Ustvari dvojnik izbranega orodja OiRA"
 
 #. Default: If this is to be "optional", it must be formulated so that it is
-#. answerable with YES (the end-user will have to tick a box) or NO (e.g. "Do you
-#. work with the public?"). If this is to be "repeatable", it must be formulated as
-#. a prompt to fill in multiple values (e.g. "List your different work locations").
+#. answerable with YES (the end-user will have to tick a box) or NO (e.g. "Do
+#. you work with the public?"). If this is to be "repeatable", it must be
+#. formulated as a prompt to fill in multiple values (e.g. "List your different
+#. work locations").
 #: src/osha/oira/manual_translations.py:71
 msgid "help_profilequestion_question"
 msgstr ""
@@ -260,7 +263,8 @@ msgstr ""
 "treba oblikovati kot poziv za vnos več vrednosti (npr. \"Navedite svoje "
 "različne delovne lokacije\")."
 
-#. Default: Include any relevant information that may be helpful for the end-user.
+#. Default: Include any relevant information that may be helpful for the
+#. end-user.
 #: src/osha/oira/manual_translations.py:76
 msgid "help_module_description"
 msgstr ""
@@ -272,9 +276,9 @@ msgstr ""
 msgid "help_module_optional"
 msgstr "Končnemu uporabniku omogoča preskočiti ta modul in vse v njem."
 
-#. Default: The question to ask the end-user if this module is optional. It must be
-#. formulated so that it is answerable with YES (the end-user will have to tick a
-#. box) or NO
+#. Default: The question to ask the end-user if this module is optional. It
+#. must be formulated so that it is answerable with YES (the end-user will have
+#. to tick a box) or NO
 #: src/osha/oira/manual_translations.py:80
 msgid "help_module_question"
 msgstr ""
@@ -282,8 +286,8 @@ msgstr ""
 "Oblikovati ga je treba tako, da je nanj mogoče odgovoriti z DA (končni "
 "uporabnik bo moral odkljukati polje) ali NE"
 
-#. Default: This information will appear in the Action plan step and should include
-#. an overview of general solution(s) related to this module.
+#. Default: This information will appear in the Action plan step and should
+#. include an overview of general solution(s) related to this module.
 #: src/osha/oira/manual_translations.py:83
 msgid "help_solution_direction"
 msgstr ""
@@ -300,23 +304,23 @@ msgstr "Pritrditvena izjava"
 msgid "label_problem_description"
 msgstr "Negativna izjava"
 
-#. Default: This is a short affirmative statement about a possible risk (e.g. The
-#. building is well maintained.)
+#. Default: This is a short affirmative statement about a possible risk (e.g.
+#. The building is well maintained.)
 #: src/osha/oira/manual_translations.py:88
 msgid "help_statement"
 msgstr ""
 "To je kratka pritrditvena izjava o možnem tveganju (npr. Zgradba je dobro "
 "vzdrževana.)"
 
-#. Default: This is the inverse of the affirmative statement (e.g. The building is
-#. not well maintained.)
+#. Default: This is the inverse of the affirmative statement (e.g. The building
+#. is not well maintained.)
 #: src/osha/oira/manual_translations.py:90
 msgid "help_problem_description"
 msgstr ""
 "To je nasprotje pritrditvene izjave (npr. Ta zgradba ni dobro vzdrževana.)"
 
-#. Default: Describe the risk. Include any relevant information that may be helpful
-#. for the end-user.
+#. Default: Describe the risk. Include any relevant information that may be
+#. helpful for the end-user.
 #: src/osha/oira/manual_translations.py:92
 msgid "help_risk_description"
 msgstr ""
@@ -338,8 +342,8 @@ msgstr ""
 "povezano z delovnim mestom ali opravljanim delom. \"Politika\" se nanaša na "
 "sporazume, postopke in odločitve vodstva."
 
-#. Default: You can help the end-user by selecting a default priority. He/she can
-#. still change the priority.
+#. Default: You can help the end-user by selecting a default priority. He/she
+#. can still change the priority.
 #: src/osha/oira/manual_translations.py:99
 msgid "help_default_priority"
 msgstr ""
@@ -494,11 +498,11 @@ msgstr "Splošna končna priporočila."
 msgid "help_finalwords"
 msgstr "Splošna končna priporočila."
 
-#. Default: It is possible for you to print out the contents of the tool to enable
-#. you to look for the information at the relevant workplace (by walking around and
-#. looking at what could cause harm, or by consulting the workers and/or their
-#. representatives about problems they have encountered). You can then introduce
-#. the information into the tool.
+#. Default: It is possible for you to print out the contents of the tool to
+#. enable you to look for the information at the relevant workplace (by walking
+#. around and looking at what could cause harm, or by consulting the workers
+#. and/or their representatives about problems they have encountered). You can
+#. then introduce the information into the tool.
 #: src/osha/oira/manual_translations.py:137
 #: src/osha/oira/client/templates/identification.pt:19
 msgid "intro_print_identification_1"
@@ -508,10 +512,11 @@ msgstr ""
 "nevarnosti oz. se posvetujete z delavci in/ali njihovimi zastopniki glede "
 "težav, na katere so naleteli). Informacije lahko vnesete v orodje."
 
-#. Default: You may also wish to distribute the contents among the workers and/or
-#. their representatives and invite them to participate in identifying the
-#. hazards/problems, evaluating the risks and deciding on preventive action.Their
-#. feedback should be taken into account when filling in this tool.
+#. Default: You may also wish to distribute the contents among the workers
+#. and/or their representatives and invite them to participate in identifying
+#. the hazards/problems, evaluating the risks and deciding on preventive
+#. action.Their feedback should be taken into account when filling in this
+#. tool.
 #: src/osha/oira/manual_translations.py:144
 #: src/osha/oira/client/templates/identification.pt:20
 msgid "intro_print_identification_2"
@@ -535,8 +540,8 @@ msgstr ""
 "Odkrite niso bile nobene nevarnosti ali težave. Nadaljujte neposredno do "
 "koraka akcijskega načrta."
 
-#. Default: Start to write a new OiRA Tool. You will be asked whether you want to
-#. start off with a copy of an existing OiRA Tool..
+#. Default: Start to write a new OiRA Tool. You will be asked whether you want
+#. to start off with a copy of an existing OiRA Tool..
 #: src/osha/oira/manual_translations.py:156
 msgid "help_create_new_version"
 msgstr ""
@@ -548,16 +553,16 @@ msgstr ""
 msgid "title_help_unpublished"
 msgstr "Odstrani to orodje OiRA s spletnega odjemalca."
 
-#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed at
-#. ${url} .
+#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
+#. at ${url} .
 #: src/osha/oira/manual_translations.py:163
 msgid "message_preview_success"
 msgstr ""
 "Uspešno ustvarjen predogled orodja OiRA. Dostop do njega je mogoč na ${url} ."
 
 #. Default: Please note that by deleting your account, you will also delete all
-#. your sessions. Please make sure you download your reports from the Report step
-#. prior to deleting your account, if you want to keep any.
+#. your sessions. Please make sure you download your reports from the Report
+#. step prior to deleting your account, if you want to keep any.
 #: src/osha/oira/manual_translations.py:166
 msgid "warning_account_delete_surveys"
 msgstr ""
@@ -565,9 +570,9 @@ msgstr ""
 "Zagotovite, da si pred izbrisom računa prenesete poročila v koraku Poročila, "
 "če katera želite obdržati."
 
-#. Default: Are you sure you want to create a preview of this OiRA Tool? You can
-#. give the URL for the preview to others so they can test the OiRA Tool. To access
-#. the preview a standard OiRA client login is required.
+#. Default: Are you sure you want to create a preview of this OiRA Tool? You
+#. can give the URL for the preview to others so they can test the OiRA Tool.
+#. To access the preview a standard OiRA client login is required.
 #: src/osha/oira/manual_translations.py:171
 msgid "intro_preview"
 msgstr ""
@@ -593,16 +598,17 @@ msgstr ""
 "Ste prepričani, da želite objaviti to različico orodja OiRA? Ta bo "
 "nadomestila trenutno različico."
 
-#. Default: Are you sure you want to republish this OiRA Tool? This will make all
-#. changes made public.
+#. Default: Are you sure you want to republish this OiRA Tool? This will make
+#. all changes made public.
 #: src/osha/oira/manual_translations.py:184
 msgid "intro_publish_survey_published"
 msgstr ""
 "Ste prepričani, da želite ponovno objaviti to orodje? S tem bodo vse "
 "spremembe postale javne."
 
-#. Default: Are you sure you want to publish this OiRA Tool? After publication the
-#. OiRA Tool will appear in the online client and be accessible by all users.
+#. Default: Are you sure you want to publish this OiRA Tool? After publication
+#. the OiRA Tool will appear in the online client and be accessible by all
+#. users.
 #: src/osha/oira/manual_translations.py:188
 msgid "intro_publish_first_time"
 msgstr ""
@@ -614,10 +620,10 @@ msgstr ""
 msgid "header_publish"
 msgstr "Objavi orodje OiRA"
 
-#. Default: This OiRA tool has changed since you last accessed it. Before you can
-#. continue, you need to update to these changes.
-#. Default: This survey has been updated. Before you can continue any changes made
-#. in the survey will have to be merged in your session.
+#. Default: This OiRA tool has changed since you last accessed it. Before you
+#. can continue, you need to update to these changes.
+#. Default: This survey has been updated. Before you can continue any changes
+#. made in the survey will have to be merged in your session.
 #: src/osha/oira/manual_translations.py:194
 #: src/osha/oira/client/templates/update.pt:19
 msgid "expl_update"
@@ -700,6 +706,7 @@ msgstr "Oprostite, prišlo je do nepričakovane napake."
 
 #. Default: Delete this measure
 #: src/osha/oira/manual_translations.py:230
+#: src/osha/oira/client/templates/risk_actionplan.pt:67
 msgid "label_remove_measure"
 msgstr "Izbrišite ta ukrep"
 
@@ -793,16 +800,19 @@ msgstr "Ukrep ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
 #: src/osha/oira/client/survey.py:325
+#: src/osha/oira/client/templates/risk_actionplan.pt:90
 msgid "label_measure_action_plan"
 msgstr "Splošni pristop (za preprečitev ali zmanjšanje tveganja)"
 
 #. Default: Specific action(s) required to implement this approach
 #: src/osha/oira/client/survey.py:327
+#: src/osha/oira/client/templates/risk_actionplan.pt:98
 msgid "label_measure_prevention_plan"
 msgstr "Specifični ukrepi, potrebni za izvajanje tega pristopa"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/survey.py:329
+#: src/osha/oira/client/templates/risk_actionplan.pt:107
 msgid "label_measure_requirements"
 msgstr "Raven potrebne strokovnosti in/ali zahteve"
 
@@ -834,8 +844,8 @@ msgstr "Konec načrtovanja"
 msgid "header_oira_report_consultation"
 msgstr "Seznanjenost delavcev"
 
-#. Default: The undersigned hereby declare that the workers have been consulted on
-#. the content of this document.
+#. Default: The undersigned hereby declare that the workers have been consulted
+#. on the content of this document.
 #: src/osha/oira/client/survey.py:392
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
@@ -883,7 +893,8 @@ msgstr "Tveganja, ki so bila prepoznana, ocenjena in imajo akcijski načrt"
 msgid "header_unevaluated_risks"
 msgstr "Tveganja, ki so bila prepoznana, vendar NIMAJO akcijskega načrta"
 
-#. Default: Hazards/problems that have been "parked" and are still to be dealt with
+#. Default: Hazards/problems that have been "parked" and are still to be dealt
+#. with
 #: src/osha/oira/client/survey.py:485
 #: src/osha/oira/client/templates/report_actionplan.pt:55
 #: src/osha/oira/client/templates/report_actionplan.pt:187
@@ -904,8 +915,8 @@ msgstr "Nevarnosti/težave, ki jih ni v vaši organizaciji"
 msgid "filename_report_actionplan"
 msgstr "Akcijski načrt ${title}"
 
-#. Default: This document was based on the OiRA Tool '${title}' of revision date
-#. ${date}.
+#. Default: This document was based on the OiRA Tool '${title}' of revision
+#. date ${date}.
 #: src/osha/oira/client/survey.py:590
 msgid "report_identification_revision"
 msgstr ""
@@ -947,9 +958,9 @@ msgstr ""
 msgid "title_tool"
 msgstr "OiRA - Spletno interaktivno orodje za oceno tveganja"
 
-#. Default: After having identified the risks, you need to put an action plan in
-#. place to manage the risks. To eliminate or reduce risks you need to determine
-#. which preventive and protective measures are to be taken.
+#. Default: After having identified the risks, you need to put an action plan
+#. in place to manage the risks. To eliminate or reduce risks you need to
+#. determine which preventive and protective measures are to be taken.
 #: src/osha/oira/client/templates/actionplan.pt:19
 msgid "expl_actionplan_1"
 msgstr ""
@@ -980,8 +991,8 @@ msgstr ""
 "Se je tveganju mogoče izogniti? Ga je mogoče v celoti odstraniti? Npr. to bi "
 "bilo mogoče doseči z: ${expl_actionplan_4_and_5}"
 
-#. Default: If certain risks are not avoidable, how can they be reduced to a level
-#. at which the health and safety of those exposed is not compromised?
+#. Default: If certain risks are not avoidable, how can they be reduced to a
+#. level at which the health and safety of those exposed is not compromised?
 #: src/osha/oira/client/templates/actionplan.pt:37
 msgid "expl_actionplan_6"
 msgstr ""
@@ -990,9 +1001,9 @@ msgstr ""
 "ogrožana?"
 
 #. Default: Once you have decided how to eliminate or reduce a particular risk,
-#. then you describe the specific action(s) required to achieve this. You should
-#. also include details of the level of expertise and/or other requirements needed
-#. for those actions to be effective.
+#. then you describe the specific action(s) required to achieve this. You
+#. should also include details of the level of expertise and/or other
+#. requirements needed for those actions to be effective.
 #: src/osha/oira/client/templates/actionplan.pt:42
 msgid "expl_actionplan_7"
 msgstr ""
@@ -1316,10 +1327,10 @@ msgstr "Nastavitve"
 msgid "header_disclaimer"
 msgstr "Odpoved odgovornosti"
 
-#. Default: This tool contains links to other websites which are not are not under
-#. the control of the European Agency for Safety and Health and the organisations
-#. involved. The Agency and the organisations involved accept no liability in
-#. respect of the content of these websites.
+#. Default: This tool contains links to other websites which are not are not
+#. under the control of the European Agency for Safety and Health and the
+#. organisations involved. The Agency and the organisations involved accept no
+#. liability in respect of the content of these websites.
 #: src/osha/oira/client/templates/disclaimer.pt:19
 msgid "disclaimer_other_websites"
 msgstr ""
@@ -1328,10 +1339,10 @@ msgstr ""
 "in sodelujoče organizacije ne prevzemajo nobene odgovornosti glede vsebin "
 "teh spletnih strani."
 
-#. Default: The European Agency for Safety and Health at Work and the organisations
-#. involved will not be liable for any false, inaccurate, inappropriate or
-#. incomplete information stored in the OiRA tool or any other damages as a result
-#. of using the software.
+#. Default: The European Agency for Safety and Health at Work and the
+#. organisations involved will not be liable for any false, inaccurate,
+#. inappropriate or incomplete information stored in the OiRA tool or any other
+#. damages as a result of using the software.
 #: src/osha/oira/client/templates/disclaimer.pt:26
 msgid "disclaimer_tool_information"
 msgstr ""
@@ -1340,11 +1351,11 @@ msgstr ""
 "nepopolne informacije, shranjene v orodju OiRA ali kakršnekoli druge škode, "
 "nastale kot posledica uporabe programske opreme."
 
-#. Default: Moreover, an OiRA tool is not intended to cover all the risks of every
-#. workplace but to help you put the risk assessment process into practice. For the
-#. OiRA tool to be fully effective it needs to be adapted to the context of your
-#. particular enterprise - some items might need to be added others omitted if they
-#. are not relevant.
+#. Default: Moreover, an OiRA tool is not intended to cover all the risks of
+#. every workplace but to help you put the risk assessment process into
+#. practice. For the OiRA tool to be fully effective it needs to be adapted to
+#. the context of your particular enterprise - some items might need to be
+#. added others omitted if they are not relevant.
 #: src/osha/oira/client/templates/disclaimer.pt:33
 msgid "disclaimer_risk_coverage"
 msgstr ""
@@ -1356,8 +1367,8 @@ msgstr ""
 
 #. Default: For practical and analytical reasons, the tool presents
 #. problems/hazards separately, but in workplaces they may be intertwined.
-#. Therefore interactions between the different problems or risk factors identified
-#. must be taken into account.
+#. Therefore interactions between the different problems or risk factors
+#. identified must be taken into account.
 #: src/osha/oira/client/templates/disclaimer.pt:41
 msgid "disclaimer_interactions"
 msgstr ""
@@ -1366,22 +1377,22 @@ msgstr ""
 "Zato je treba upoštevati interakcije med različnimi težavami ali "
 "prepoznanimi dejavniki tveganja."
 
-#. Default: Therefore, EU-OSHA does not accept any liability for damages and claims
-#. in case a tool does not cover all risks of a given sector.
+#. Default: Therefore, EU-OSHA does not accept any liability for damages and
+#. claims in case a tool does not cover all risks of a given sector.
 #: src/osha/oira/client/templates/disclaimer.pt:48
 msgid "disclaimer_coverage_liability"
 msgstr ""
 "Zato EU-OSHA ne prevzema nobene odgovornosti za škode in zahtevke, če orodje "
 "ne zajema vseh tveganj v danem sektorju."
 
-#. Default: Moreover, the Agency and the organisations involved in the production
-#. of the OiRA tool do not accept any liability for damages and claims arising out
-#. of the use or inability to use the tool and the data stored therein. Similarly,
-#. EU-OSHA does not accept any liability in case of unavailability of the function
-#. of the OiRA tools to print the report, recording the risk assessment
-#. automatically generated by the tool. Therefore, the employer has to make sure,
-#. at any time, to be in possession of a printed, accurate and up-dated risk
-#. assessment.
+#. Default: Moreover, the Agency and the organisations involved in the
+#. production of the OiRA tool do not accept any liability for damages and
+#. claims arising out of the use or inability to use the tool and the data
+#. stored therein. Similarly, EU-OSHA does not accept any liability in case of
+#. unavailability of the function of the OiRA tools to print the report,
+#. recording the risk assessment automatically generated by the tool.
+#. Therefore, the employer has to make sure, at any time, to be in possession
+#. of a printed, accurate and up-dated risk assessment.
 #: src/osha/oira/client/templates/disclaimer.pt:53
 msgid "disclaimer_printed_assesment"
 msgstr ""
@@ -1457,15 +1468,15 @@ msgstr "Shrani in nadaljuj"
 msgid "header_profile"
 msgstr "Prilagodite oceno tveganja svoji organizaciji"
 
-#. Default: In order to tailor the risk assessment to your organisation you may be
-#. asked to:
+#. Default: In order to tailor the risk assessment to your organisation you may
+#. be asked to:
 #: src/osha/oira/client/templates/profile.pt:18
 msgid "expl_profile"
 msgstr ""
 "Da bi prilagodili oceno tveganja svoji organizaciji, boste morda pozvani, da:"
 
-#. Default: select or skip situation(s) relevant or not to your business activity
-#. and tick the box(es) if appropriate
+#. Default: select or skip situation(s) relevant or not to your business
+#. activity and tick the box(es) if appropriate
 #: src/osha/oira/client/templates/profile.pt:23
 msgid "expl_profile_bullet1"
 msgstr ""
@@ -1560,9 +1571,9 @@ msgid "header_reporting"
 msgstr "Poročanje"
 
 #. Default: Now that you have finished identifying all the risks in your
-#. organisation and created an action plan you can create a report which lists all
-#. your results. You can, if desired, add some extra comments that should be
-#. included in this report in the field below.
+#. organisation and created an action plan you can create a report which lists
+#. all your results. You can, if desired, add some extra comments that should
+#. be included in this report in the field below.
 #: src/osha/oira/client/templates/report.pt:19
 msgid "report_intro"
 msgstr ""
@@ -1570,6 +1581,14 @@ msgstr ""
 "ustvarili akcijski načrt, lahko ustvarite poročilo, ki bo vsebovale vse vaše "
 "rezultate. Če želite, lahko v spodnje polje dodate morebitne dodatne opombe, "
 "ki bi morale biti vključene v poročilo."
+
+#. Default: Please leave any comments you may have on the question above in
+#. this field
+#: src/osha/oira/client/templates/report.pt:28
+msgid "label_report_comment"
+msgstr ""
+"V to polje vnesite morebitne dodatne opombe, ki bi morale biti vključene v "
+"poročilo."
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -1597,7 +1616,8 @@ msgstr "Raven strokovnosti in/ali potrebne zahteve:"
 msgid "report_measure_responsible"
 msgstr "${responsible} je odgovorna oseba za to opravilo."
 
-#. Default: ${responsible} is responsible for this task which starts on ${start}.
+#. Default: ${responsible} is responsible for this task which starts on
+#. ${start}.
 #: src/osha/oira/client/templates/report_actionplan.pt:119
 msgid "report_measure_responsible_and_start"
 msgstr ""
@@ -1624,8 +1644,8 @@ msgstr "To opravilo se konča dne ${end}."
 msgid "report_measure_start_and_stop"
 msgstr "To opravil se začne dne ${start} in konča dne ${end}."
 
-#. Default: ${responsible} is responsible for this task which starts on ${start}
-#. and ends on ${end}.
+#. Default: ${responsible} is responsible for this task which starts on
+#. ${start} and ends on ${end}.
 #: src/osha/oira/client/templates/report_actionplan.pt:135
 msgid "report_measure_full"
 msgstr ""
@@ -1655,8 +1675,8 @@ msgstr ""
 "meni, da gre v tem primeru za prioritetno tveganje, ga je treba vključiti v "
 "to poročilo."
 
-#. Default: You are about to print the report... please complete the optional form
-#. and then proceed.
+#. Default: You are about to print the report... please complete the optional
+#. form and then proceed.
 #: src/osha/oira/client/templates/report_company.pt:17
 msgid "hader_company_details"
 msgstr ""
@@ -1668,8 +1688,8 @@ msgid "warn_fix_errors"
 msgstr "Popravite označene napake."
 
 #. Default: You are free to provide the information below. This information is
-#. meant to improve the tools and the services provided. This data will not appear
-#. in the report.
+#. meant to improve the tools and the services provided. This data will not
+#. appear in the report.
 #: src/osha/oira/client/templates/report_company.pt:19
 msgid "company_details_intro"
 msgstr ""
@@ -1701,8 +1721,8 @@ msgstr "organizacija sindikata"
 msgid "referer_national_public_institution"
 msgstr "državna javna ustanova/administracija"
 
-#. Default: Ministry, Labour Inspectorate, National Institute for Safety and Health
-#. at Work, etc.
+#. Default: Ministry, Labour Inspectorate, National Institute for Safety and
+#. Health at Work, etc.
 #: src/osha/oira/client/templates/report_company.pt:40
 msgid "info_referer_national_public_institution"
 msgstr ""
@@ -1895,13 +1915,14 @@ msgstr "Opis"
 msgid "Standard solutions"
 msgstr "Standardne rešitve"
 
-#. Default: Describe: 1) what is your general approach to eliminate or (if the risk
-#. is not avoidable) reduce the risk; 2) the specific action(s) required to
-#. implement this approach (to eliminate or to reduce the risk); 3) the level of
-#. expertise needed to implement the measure, for instance “common sense (no OSH
-#. knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or
-#. training and/or consultation of OSH guidance required”, or “OSH expert”. You can
-#. also describe here any other additional requirement (if any).
+#. Default: Describe: 1) what is your general approach to eliminate or (if the
+#. risk is not avoidable) reduce the risk; 2) the specific action(s) required
+#. to implement this approach (to eliminate or to reduce the risk); 3) the
+#. level of expertise needed to implement the measure, for instance “common
+#. sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum
+#. OSH knowledge or training and/or consultation of OSH guidance required”, or
+#. “OSH expert”. You can also describe here any other additional requirement
+#. (if any).
 #: src/osha/oira/client/templates/risk_actionplan.pt:88
 msgid "actionplan_measure_tooltip"
 msgstr ""
@@ -1915,9 +1936,9 @@ msgstr ""
 "morebitne druge dodatne zahteve (če obstajajo)."
 
 #. Default: Appoint someone in your company to be responsible for the
-#. implementation of this measure. This person will have the authority to take the
-#. steps described in the Plan and/or the responsibility to ensure that they are
-#. carried out.
+#. implementation of this measure. This person will have the authority to take
+#. the steps described in the Plan and/or the responsibility to ensure that
+#. they are carried out.
 #: src/osha/oira/client/templates/risk_actionplan.pt:120
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
@@ -2015,40 +2036,80 @@ msgstr "Kakšna je stopnja resnosti poškodbe?"
 msgid "severity_weak"
 msgstr "Nizka"
 
+#. Default: No need to stop working
+#: src/osha/oira/client/templates/risk_evaluation.pt:63
+msgid "severity_weak_help"
+msgstr "Ne rabi prenehati z delom"
+
 #. Default: Not very severe
 #: src/osha/oira/client/templates/risk_evaluation.pt:66
 msgid "severity_not_severe"
 msgstr "Ni zelo resna"
+
+#. Default: Need to stop working for less than 3 days
+#: src/osha/oira/client/templates/risk_evaluation.pt:67
+msgid "severity_not_severe_help"
+msgstr "Ne more delati manj kot 3 dni"
 
 #. Default: Severe
 #: src/osha/oira/client/templates/risk_evaluation.pt:70
 msgid "severity_severe"
 msgstr "Resna"
 
+#. Default: Need to stop working for more than 3 days
+#: src/osha/oira/client/templates/risk_evaluation.pt:71
+msgid "severity_severe_help"
+msgstr "Dlje kot 3 dni ne more delati"
+
 #. Default: Very severe
 #: src/osha/oira/client/templates/risk_evaluation.pt:75
 msgid "severity_very_severe"
 msgstr "Zelo resna"
+
+#. Default: Irreversible injury, incurable illness, death
+#: src/osha/oira/client/templates/risk_evaluation.pt:76
+msgid "severity_very_severe_help"
+msgstr "Nepopravljive poškodbe, neozdravljiva bolezen, smrt"
 
 #. Default: Rare
 #: src/osha/oira/client/templates/risk_evaluation.pt:84
 msgid "frequency_french_rare"
 msgstr "Redko"
 
+#. Default: Once per year
+#: src/osha/oira/client/templates/risk_evaluation.pt:85
+msgid "frequency_french_rare_help"
+msgstr "Enkrat letno"
+
 #. Default: Not very often
 #: src/osha/oira/client/templates/risk_evaluation.pt:89
 msgid "frequency_french_not_often"
 msgstr "Ne zelo pogosto"
+
+#. Default: Once per month
+#: src/osha/oira/client/templates/risk_evaluation.pt:90
+msgid "frequency_french_not_often_help"
+msgstr "Enkrat mesečno"
 
 #. Default: Often
 #: src/osha/oira/client/templates/risk_evaluation.pt:94
 msgid "frequency_french_often"
 msgstr "Pogosto"
 
+#. Default: Once per week
+#: src/osha/oira/client/templates/risk_evaluation.pt:95
+msgid "frequency_french_often_help"
+msgstr "Enkrat tedensko"
+
 #. Default: Very often or regularly
 #: src/osha/oira/client/templates/risk_evaluation.pt:99
 msgid "frequency_french_regularly"
 msgstr "Zelo pogosto ali redno"
+
+#. Default: Minimum once per day
+#: src/osha/oira/client/templates/risk_evaluation.pt:100
+msgid "frequency_french_regularly_help"
+msgstr "Najmanj enkrat dnevno"
 
 #. Default: Select the priority of this risk
 #: src/osha/oira/client/templates/risk_evaluation.pt:108
@@ -2069,6 +2130,15 @@ msgstr "Srednja"
 #: src/osha/oira/client/templates/risk_evaluation.pt:114
 msgid "priority_high"
 msgstr "Visoka"
+
+#. Default: Please leave any comments you may have on the question above in
+#. this field. These comments will be used in the action plan.
+#: src/osha/oira/client/templates/risk_evaluation.pt:124
+#: src/osha/oira/client/templates/risk_identification.pt:41
+msgid "label_comment"
+msgstr ""
+"V to polje vnesite vse opombe, ki jih morda imate glede zgornjega vprašanja. "
+"Te opombe se bodo uporabile v akcijskem načrtu."
 
 #. Default: Not applicable
 #: src/osha/oira/client/templates/risk_identification.pt:24
@@ -2111,13 +2181,14 @@ msgstr ""
 msgid "label_session_title"
 msgstr "Vnesite naslov za oceno tveganja"
 
-#. Default: Once you have started an OiRA tool session, you will be able to stop
-#. before the end. You can restart it again at a later date by selecting the title
-#. of the OiRA tool session. You can save more than one session, provided you have
-#. given them different title names. Please remember your e-mail address, password
-#. and the title that you have given the OiRA tool session. By clicking on the
-#. Logout button, you are logged out actively. You are also logged out if you close
-#. your Browser. For security reasons it is better to actively log out.
+#. Default: Once you have started an OiRA tool session, you will be able to
+#. stop before the end. You can restart it again at a later date by selecting
+#. the title of the OiRA tool session. You can save more than one session,
+#. provided you have given them different title names. Please remember your
+#. e-mail address, password and the title that you have given the OiRA tool
+#. session. By clicking on the Logout button, you are logged out actively. You
+#. are also logged out if you close your Browser. For security reasons it is
+#. better to actively log out.
 #: src/osha/oira/client/templates/sessions.pt:59
 msgid "session_title_tooltip"
 msgstr ""
@@ -2267,16 +2338,16 @@ msgstr ""
 msgid "This must ask to user for the names of all relevant locations."
 msgstr ""
 
-#. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
-#. of probability, frequency and severity) method.
+#. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
+#. (combination of probability, frequency and severity) method.
 #: src/osha/oira/content/risk.py:20
 msgid "help_evaluation_method_kinney"
 msgstr ""
 "Izberite med načinoma PREDVIDENO (približna ocena) ali IZRAČUNANO "
 "(kombinacija verjetnosti, frekvence in stopnje resnosti)."
 
-#. Default: Choose between ESTIMATED (rough estimation) or CALCULATED (combination
-#. of frequency and severity) method.
+#. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
+#. (combination of frequency and severity) method.
 #: src/osha/oira/content/risk.py:27
 msgid "help_evaluation_method_french"
 msgstr ""
@@ -2288,8 +2359,8 @@ msgstr ""
 msgid "label_statistics_level"
 msgstr "Statistična raven"
 
-#. Default: Level 1: Basic statistics about the use of the OiRA tool. Level 2: More
-#. detailed statistics regarding the risks
+#. Default: Level 1: Basic statistics about the use of the OiRA tool. Level 2:
+#. More detailed statistics regarding the risks
 #: src/osha/oira/content/sector.py:27
 msgid "help_statistics_level"
 msgstr ""
@@ -2316,7 +2387,8 @@ msgstr "Spletni klient"
 msgid "intro_documenation"
 msgstr "Tu lahko upravljate z dokumentacijo ${client}."
 
-#. Default: Go to the ${homepage_edit_form} to change the way the homepage appears.
+#. Default: Go to the ${homepage_edit_form} to change the way the homepage
+#. appears.
 #: src/osha/oira/content/templates/documentation_view.pt:17
 msgid "documentation_homepage"
 msgstr "Za spremembo prikaza domače strani ${homepage_edit_form} pojdite na."
@@ -2326,8 +2398,8 @@ msgstr "Za spremembo prikaza domače strani ${homepage_edit_form} pojdite na."
 msgid "documentation_appendix_appendix"
 msgstr "Dodatek"
 
-#. Default: Pages created in the ${appendix} folder are available via links in the
-#. footer of the online client.
+#. Default: Pages created in the ${appendix} folder are available via links in
+#. the footer of the online client.
 #: src/osha/oira/content/templates/documentation_view.pt:23
 msgid "documentation_appendix"
 msgstr ""
@@ -2506,7 +2578,8 @@ msgstr ""
 "Izdelaj moje novo orodje OiRA na osnovi obstoječega orodja OiRA moje "
 "organizacije"
 
-#. Default: Base my new OiRA Tool on an existing OiRA Tool of another organisation
+#. Default: Base my new OiRA Tool on an existing OiRA Tool of another
+#. organisation
 #: src/osha/oira/content/templates/surveygroup_add.pt:25
 msgid "survey_source_other"
 msgstr ""
@@ -2531,9 +2604,9 @@ msgid "label_choose_country"
 msgstr "Izberite državo"
 
 #. Default: This method involves risk assessment by Severity x Exposure x
-#. Probability, whereas these have to be understood as follows; Severity of injury
-#. linked to hazard - Exposure (Frequency) to the hazard - Probability of the
-#. hazard occuring when exposed
+#. Probability, whereas these have to be understood as follows; Severity of
+#. injury linked to hazard - Exposure (Frequency) to the hazard - Probability
+#. of the hazard occuring when exposed
 #: src/osha/oira/content/templates/surveygroup_add.pt:86
 msgid "help_survey_evaluation_algorithm_standard"
 msgstr ""
@@ -2554,9 +2627,9 @@ msgid ""
 msgstr ""
 "To je priporočen algoritem ocenjevanja, ki temelji na Kinneyjevi metodi"
 
-#. Default: This method involves risk assessment by Severity x Exposure, whereas
-#. these have to be understood as follows; Severity of injury linked to hazard -
-#. Exposure (Frequency) to the hazard
+#. Default: This method involves risk assessment by Severity x Exposure,
+#. whereas these have to be understood as follows; Severity of injury linked to
+#. hazard - Exposure (Frequency) to the hazard
 #: src/osha/oira/content/templates/surveygroup_add.pt:94
 msgid "help_survey_evaluation_algorithm_simplified"
 msgstr ""
@@ -2709,13 +2782,14 @@ msgstr "Domača stran"
 msgid "header_risk_aware"
 msgstr "Ali se zavedate vseh tveganj?"
 
-#. Default: Including the risks to your employees and your equipment? What if there
-#. is an accident with one of the machines? What if an employee is exposed to
-#. hazardous substances? A risk assessment helps you to define these risks and
-#. tackle them head on. A risk assessment mainly consists of two parts: a <dynamic
-#. element> with all the risks in your company and an <dynamic element> with
-#. details of how to deal with these risks. These two components allow you to limit
-#. the risks to your employees and your company, and therefore the financial risk.
+#. Default: Including the risks to your employees and your equipment? What if
+#. there is an accident with one of the machines? What if an employee is
+#. exposed to hazardous substances? A risk assessment helps you to define these
+#. risks and tackle them head on. A risk assessment mainly consists of two
+#. parts: a <dynamic element> with all the risks in your company and an
+#. <dynamic element> with details of how to deal with these risks. These two
+#. components allow you to limit the risks to your employees and your company,
+#. and therefore the financial risk.
 #: src/osha/oira/templates/default_introduction.pt:7
 msgid "intro_risk_aware"
 msgstr ""
@@ -2732,11 +2806,11 @@ msgstr ""
 msgid "header_not_complicated"
 msgstr "Ocenjevanje tveganja ni zapleteno"
 
-#. Default: Complicated? Not really. It just takes a bit of time. However, the RA
-#. is important. So important that it is a legal requirement. This is for good
-#. reason. If risks are not assessed or properly dealt with, a suitable risk
-#. management process cannot be started and appropriate preventive measures are
-#. unlikely to be found or put in place.
+#. Default: Complicated? Not really. It just takes a bit of time. However, the
+#. RA is important. So important that it is a legal requirement. This is for
+#. good reason. If risks are not assessed or properly dealt with, a suitable
+#. risk management process cannot be started and appropriate preventive
+#. measures are unlikely to be found or put in place.
 #: src/osha/oira/templates/default_introduction.pt:10
 msgid "intro_not_complicated"
 msgstr ""
@@ -2751,10 +2825,10 @@ msgstr ""
 msgid "header_consultation_of_workers"
 msgstr "Seznanjanje in sodelovanje zaposlenih"
 
-#. Default: Workers or workers' representatives with specific responsibility for
-#. the safety and health of workers shall take part in a balanced way or shall be
-#. consulted in advance and in good time by the employer with regard to risk
-#. assessment
+#. Default: Workers or workers' representatives with specific responsibility
+#. for the safety and health of workers shall take part in a balanced way or
+#. shall be consulted in advance and in good time by the employer with regard
+#. to risk assessment
 #: src/osha/oira/templates/default_introduction.pt:13
 msgid "intro_consultation_of_workers"
 msgstr ""
@@ -2767,8 +2841,8 @@ msgstr ""
 msgid "header_oira_tool"
 msgstr "Orodje OiRA"
 
-#. Default: This risk assessment tool is mainly intended for micro (less than 10
-#. workers) and small (less than 50 workers) enterprises/organisations.
+#. Default: This risk assessment tool is mainly intended for micro (less than
+#. 10 workers) and small (less than 50 workers) enterprises/organisations.
 #: src/osha/oira/templates/default_introduction.pt:16
 msgid "intro_oira_tool"
 msgstr ""
@@ -2780,13 +2854,14 @@ msgstr ""
 msgid "title_login"
 msgstr "Prijava"
 
-#. Default: You are already logged in. Please logout first before trying to login
-#. again.
+#. Default: You are already logged in. Please logout first before trying to
+#. login again.
 #: src/osha/oira/templates/login.pt:14
 msgid "message_already_logged_in"
 msgstr "Ste že prijavljeni. Za ponovno prijavo se morate najprej odjaviti."
 
-#. Default: Invalid login. If you forgot your password you can ${reset_password}.
+#. Default: Invalid login. If you forgot your password you can
+#. ${reset_password}.
 #: src/osha/oira/templates/login.pt:16
 msgid "message_invalid_login"
 msgstr "Prijava ni uspela. Če ste geslo pozabili, lahko ${reset_password}."
@@ -2800,30 +2875,6 @@ msgstr "Prijava ni uspela. Če ste geslo pozabili, lahko ${reset_password}."
 #~ msgid "profilequestion_type_repeat"
 #~ msgstr "To je ponavljajoč element profila."
 
-#~ msgid "severity_weak_help"
-#~ msgstr "Ne rabi prenehati z delom"
-
-#~ msgid "severity_not_severe_help"
-#~ msgstr "Ne more delati manj kot 3 dni"
-
-#~ msgid "severity_severe_help"
-#~ msgstr "Dlje kot 3 dni ne more delati"
-
-#~ msgid "severity_very_severe_help"
-#~ msgstr "Nepopravljive poškodbe, neozdravljiva bolezen, smrt"
-
-#~ msgid "frequency_french_rare_help"
-#~ msgstr "Enkrat letno"
-
-#~ msgid "frequency_french_not_often_help"
-#~ msgstr "Enkrat mesečno"
-
-#~ msgid "frequency_french_often_help"
-#~ msgstr "Enkrat tedensko"
-
-#~ msgid "frequency_french_regularly_help"
-#~ msgstr "Najmanj enkrat dnevno"
-
 #, fuzzy
 #~ msgid "help_header_preparation"
 #~ msgstr "To besedilo mora pojasniti 2 vrsti profilnih vprašanj."
@@ -2835,16 +2886,6 @@ msgstr "Prijava ni uspela. Če ste geslo pozabili, lahko ${reset_password}."
 #~ msgid "help_evaluation_optional"
 #~ msgstr ""
 #~ "Ta možnost končnemu uporabniku omogoča preskočiti korak ocenjevanja."
-
-#~ msgid "label_report_comment"
-#~ msgstr ""
-#~ "V to polje vnesite morebitne dodatne opombe, ki bi morale biti vključene "
-#~ "v poročilo."
-
-#~ msgid "label_comment"
-#~ msgstr ""
-#~ "V to polje vnesite vse opombe, ki jih morda imate glede zgornjega "
-#~ "vprašanja. Te opombe se bodo uporabile v akcijskem načrtu."
 
 #~ msgid "error_invalid_day"
 #~ msgstr "Neveljavni dan"

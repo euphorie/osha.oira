@@ -12,10 +12,12 @@
   <head>
       <script type="text/javascript" src="${client/++resource++euphorie.content.behaviour}/content.js"></script>
   </head>
-  <body> 
+  <body>
     <metal:title fill-slot="title">${view/group/title}</metal:title>
     <metal:bar fill-slot="buttonbar"><tal:tile replace="tile:euphorie.addbar"/></metal:bar>
-    <metal:content fill-slot="content" tal:define="can_edit python:tools.checkPermission('Modify portal content')">
+    <metal:content fill-slot="content" 
+            tal:define="can_edit python:tools.checkPermission('Modify portal content');
+                        media_url string:++resource++euphorie.media">
       <h2 i18n:translate="header_information">Information</h2>
 
       <dl class="grid span-9">
@@ -38,8 +40,8 @@
       <tal:children condition="python:children">
         <ol class="${python:'sortable' if can_edit and len(children)&gt;1 else None}" tal:condition="python:children">
             <li tal:repeat="child children" id="child-${child/id}">
-                <img tal:condition="not:child/is_profile_question" src="++resource++osha.oira.images/folder_icon.png"/>
-                <img tal:condition="child/is_profile_question" src="++resource++osha.oira.images/question.png"/>
+                <img tal:condition="not:child/is_profile_question" src="${media_url}/osha/folder_icon.png"/>
+                <img tal:condition="child/is_profile_question" src="${media_url}/osha/question.png"/>
                 <a href="${child/url}">${child/title}</a>
             </li>
         </ol>

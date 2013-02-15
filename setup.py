@@ -32,7 +32,7 @@ setup(name='osha.oira',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'Euphorie >=6dev',
+          'Euphorie >=6.0b1',
           'NuPlone',
           'Products.CMFCore',
           'Products.statusmessages',

@@ -15,6 +15,10 @@ This release updates the profile version to *5*. Please use the upgrade feature
 in ``portal_setup`` to upgrade the ``osha.oira:default`` profile to this
 version.
 
+The Euphorie configuration file (``etc/euphorie.ini`` in the standard buildout)
+no longer needs to include the complete configuration. You now only need to
+specify details that are specific to your deployment such as the Google Analytics
+accounts and client URL.
 
 Feature changes
 ~~~~~~~~~~~~~~~

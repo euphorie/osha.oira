@@ -23,6 +23,9 @@ accounts and client URL.
 Feature changes
 ~~~~~~~~~~~~~~~
 
+- This package is now automatically tested using `Travis
+  <travis-ci.org/euphorie/osha.oira>`_.
+
 - Allow developers to use `make pot` to update the POT-file for translations.
 
 - CSS and JavaScript is now maintained in the Euphorie package to make

@@ -4,7 +4,43 @@ Changelog
 2.0 - (unreleased)
 ---------------------
 
-- Nothing changed yet.
+Upgrade notes
+~~~~~~~~~~~~~
+
+osha.oira now requires Euphorie 6. Please see the `Euphorie upgrade notes 
+<http://euphorie.readthedocs.org/en/latest/changes.html#upgrade-notes>`_
+for important upgrade information.
+
+This release updates the profile version to *5*. Please use the upgrade feature
+in ``portal_setup`` to upgrade the ``osha.oira:default`` profile to this
+version.
+
+
+Feature changes
+~~~~~~~~~~~~~~~
+
+- CSS and JavaScript is now maintained in the Euphorie package to make
+  maintenance easier. 
+
+- Use a modal panel to change the title of an existing session.
+
+- Override the action plan timeline download from Euphorie to use a subset
+  of columns with a different ordering and add a new comment column.
+
+- Replace the online view of the action plan report with a new landing page
+  from where the full report can be downloaded in RTF format or a XLSX file
+  with all defined measures.
+
+- Change the user interface for profile questions: use separate questions to
+  ask if a section is relevant for a user and if it can occur multiple times.
+
+
+Bugfixes
+~~~~~~~~
+
+- Correct logging of client logins.
+- Improve display of error messages in the client.
+- Fix accidental double loading of javascript in client pages.
 
 
 1.2.38a1 (2013-02-15)

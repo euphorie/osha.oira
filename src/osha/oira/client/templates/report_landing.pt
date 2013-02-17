@@ -9,31 +9,31 @@
       i18n:domain="euphorie"
       tal:define="client nocall:request/client; 
                   webhelpers nocall:context/@@webhelpers;">
-<head>
+  <head>
     <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
     <metal:meta use-macro="webhelpers/macros/headers"/>
     <metal:css use-macro="webhelpers/macros/css"/>
-</head>
-<body class="${webhelpers/extra_css}">
+  </head>
+  <body class="${webhelpers/extra_css}">
     <h1>${context/title}</h1>
 
-    <h2 i18n:translate="">Download and print your report</h2>
+    <div class="message emphasis">
+      <h2 i18n:translate="">Download and print your report</h2>
 
-    <p i18n:translate="">Save the report on your pc and print it. You can also modify it or add more information. Please note that changes made on your pc will <strong i18n:name="not" i18n:translate="">not</strong> be saved in the OiRA tool</p>
-    <p i18n:translate="">Use the report to:</p>
+      <p i18n:translate="">Save the report on your pc and print it. You can also modify it or add more information. Please note that changes made on your pc will <strong i18n:name="not" i18n:translate="">not</strong> be saved in the OiRA tool</p>
+      <p i18n:translate="">Use the report to:</p>
 
-    <ul>
-      <li i18n:translate="">Provide evidence for supervisory authorities.</li>
-      <li i18n:translate="">Pass information to the people concerned (workers, safety reps, employer, OSH experts, ...)</li>
-      <li i18n:translate="">Monitor and assess whether necessary measures have been introduced.</li>
-      <li i18n:translate="">Record any revision if circumstances change (new machines, new workers, as a result of findings of any accident investigations, etc.)</li>
-    </ul>
+      <ul>
+        <li i18n:translate="">Provide evidence for supervisory authorities.</li>
+        <li i18n:translate="">Pass information to the people concerned (workers, safety reps, employer, OSH experts, ...)</li>
+        <li i18n:translate="">Monitor and assess whether necessary measures have been introduced.</li>
+        <li i18n:translate="">Record any revision if circumstances change (new machines, new workers, as a result of findings of any accident investigations, etc.)</li>
+      </ul>
+    </div>
 
     <div class="column span-7 append-1">
-      <h2 i18n:translate="">Download the full report</h2>
-
-      <a class="download rtf" href="${python:view.url(name='download')}" i18n:translate="">Full report</a>
-
+      <p><a class="button button-medium bar download rtf icon-download" href="${python:view.url(name='download')}" i18n:translate="">Download the full report</a></p>
+      
       <ul>
         <li i18n:translate="">Format: Rich Text Format (.rtf)</li>
         <li i18n:translate="">Contains: all the information and input provided by you throughout the risk assessment process.</li>
@@ -48,8 +48,8 @@
     </div>
 
     <div class="last column span-7">
-      <h2 i18n:translate="">Download the action plan</h2>
-      <a class="download xlsx" href="${python:view.url(name='timeline')}" i18n:translate="">Action plan</a>
+      <p><a class="button button-medium bar download xlsx icon-download" href="${python:view.url(name='timeline')}" i18n:translate="">Download the action plan</a></p>
+
       <ul>
         <li i18n:translate="">Format: Office Open XML Workbook (.xlsx)</li>
         <li i18n:translate="">Contains: only the measures to be implemented to effectively manage the identified risks.</li>

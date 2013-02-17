@@ -4,8 +4,7 @@ Changelog
 2.0b2 - Unreleased
 -------------------------
 
-- ...
-
+- Improve styling of report landing page.
 
 
 2.0b1 - February 15, 2013

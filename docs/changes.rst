@@ -6,6 +6,7 @@ Changelog
 
 - Improve styling of report landing page.
 - Include nuplone directory in MANIFEST.in
+- Fixed rendering of the custom homepage.
 
 
 2.0b1 - February 15, 2013

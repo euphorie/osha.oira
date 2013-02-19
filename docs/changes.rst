@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0b2 - Unreleased
--------------------------
+2.0b2 (2013-02-19)
+------------------
 
 - Improve styling of report landing page.
 - Include nuplone directory in MANIFEST.in

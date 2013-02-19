@@ -5,6 +5,7 @@ Changelog
 -------------------------
 
 - Improve styling of report landing page.
+- Include nuplone directory in MANIFEST.in
 
 
 2.0b1 - February 15, 2013
@@ -56,10 +57,6 @@ Bugfixes
 - Correct logging of client logins.
 - Improve display of error messages in the client.
 - Fix accidental double loading of javascript in client pages.
-
-
-1.2.38a1 (2013-02-15)
----------------------
 
 
 1.2.37 (2013-02-06)

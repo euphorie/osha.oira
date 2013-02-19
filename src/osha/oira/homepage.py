@@ -1,21 +1,27 @@
 from five import grok
 from zope import schema
-from zope.interface import implements
+from zope.component import adapts
 from zope.event import notify
+from zope.interface import directlyProvides
+from zope.interface import implements
+
+from ZPublisher.BaseRequest import DefaultPublishTraverse
 
 from z3c.form import button
+from plone.app.dexterity.behaviors.metadata import IBasic
+from plone.dexterity.browser import edit
+from plone.dexterity.events import EditFinishedEvent
+from plone.directives import dexterity
+from plone.directives import form
 from plone.z3cform import layout
 
-from plone.directives import form
-from plone.directives import dexterity
-from plone.dexterity.browser import edit
-from plone.app.dexterity.behaviors.metadata import IBasic
-from plone.dexterity.events import EditFinishedEvent
-
 from euphorie.content import MessageFactory as _
+from euphorie.client.utils import setRequest
 
-from osha.oira.interfaces import IOSHAContentSkinLayer
+from osha.oira.client.interfaces import IOSHAClientSkinLayer
+from osha.oira.interfaces import IProductLayer
 from osha.oira.nuplone.widget import LargeTextAreaFieldWidget
+
 
 grok.templatedir("templates")
 
@@ -35,12 +41,27 @@ class HomePage(dexterity.Container):
 class View(grok.View):
     grok.context(IHomePage)
     grok.require("zope2.View")
-    grok.layer(IOSHAContentSkinLayer)
+    grok.layer(IOSHAClientSkinLayer)
     grok.template("custom_homepage")
     grok.name("nuplone-view")
 
     def render_body(self):
         return self.context.description
+
+
+class HomePagePublishTraverser(DefaultPublishTraverse):
+    """Publish traverser to setup the skin layer.
+
+    This traverser marks the request with IOSHAClientSkinLayer when the
+    client is traversed and the osha.oira product is installed.
+    """
+    adapts(IHomePage, IProductLayer)
+
+    def publishTraverse(self, request, name):
+        setRequest(request)
+        request.client = self.context
+        directlyProvides(request, IOSHAClientSkinLayer)
+        return super(HomePagePublishTraverser, self).publishTraverse(request, name)
 
 
 class EditForm(edit.DefaultEditForm):

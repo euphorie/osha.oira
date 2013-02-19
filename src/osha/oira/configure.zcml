@@ -41,6 +41,11 @@
     -->
     <grok:grok package="." />
 
+    <adapter
+        factory=".homepage.HomePagePublishTraverser"
+        provides="zope.publisher.interfaces.IPublishTraverse"
+        />
+
     <browser:page
         for="*"
         name="default_introduction"

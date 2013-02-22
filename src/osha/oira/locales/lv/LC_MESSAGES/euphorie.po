@@ -11,11 +11,11 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"Language: \n"
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:27
@@ -707,9 +707,8 @@ msgstr "Dzçst ðo ziòu"
 
 #. Default: Statistics Reporting
 #: src/osha/oira/browser/templates/statistics.pt:13
-#, fuzzy
 msgid "title_statistics"
-msgstr "Statistikas līmenis"
+msgstr "Statistiskā atskaite"
 
 #: src/osha/oira/client/country.py:53
 msgid "Save"
@@ -905,7 +904,9 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
-msgstr "Bīstamības faktori/problēmas, kas jūsu organizācijā nepastāv."
+msgstr ""
+"Kaitīgie faktori/problēmas, kas ir novērsti vai neattiecas uz attiecīgo "
+"uzņēmumu"
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/survey.py:512
@@ -1583,7 +1584,8 @@ msgstr ""
 #. this field
 #: src/osha/oira/client/templates/report.pt:28
 msgid "label_report_comment"
-msgstr "Šajā laukā ievadiet visus papildu komentārus, kas jāiekļauj pārskatā."
+msgstr ""
+"Šajā laukā lūdzu norādīt papildus komentārus par augstāk minēto jautājumu"
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -2129,8 +2131,8 @@ msgstr "Augsts"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"Šajā laukā, lūdzu, ievadiet jebkādus komentārus par iepriekš minēto "
-"jautājumu. Šie komentāri tiks izmantoti rīcības plānā."
+"Šajā laukā lūdzu norādīt papildus komentārus par augstāk minēto jautājumu. "
+"Šie komentāri tiks izmantoti pasākumu plānā."
 
 #. Default: Not applicable
 #: src/osha/oira/client/templates/risk_identification.pt:24
@@ -2872,11 +2874,9 @@ msgstr ""
 #~ msgid "profilequestion_type_repeat"
 #~ msgstr "Šis ir atkārtojams profila elements."
 
-#, fuzzy
 #~ msgid "help_header_preparation"
 #~ msgstr "Šim tekstam jāizskaidro profila jautājumu 2 tipi."
 
-#, fuzzy
 #~ msgid "label_help_start"
 #~ msgstr "Pārskats"
 

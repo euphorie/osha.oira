@@ -11,11 +11,11 @@ msgstr ""
 "PO-Revision-Date: 2013-01-21 11:30+0200\n"
 "Last-Translator: xl <xl@hol.gr>\n"
 "Language-Team: en <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #. Default: HTML Source Code
@@ -744,9 +744,8 @@ msgstr "Σβήσε αυτό το μέτρο"
 
 #. Default: Statistics Reporting
 #: src/osha/oira/browser/templates/statistics.pt:13
-#, fuzzy
 msgid "title_statistics"
-msgstr "Επίπεδο στατιστικών "
+msgstr "Αναφορά στατιστικών στοιχείων"
 
 #: src/osha/oira/client/country.py:53
 msgid "Save"
@@ -946,7 +945,8 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
 msgstr ""
-"Οι κίνδυνοι που έχουν αναγνωριστεί ότι δεν υπάρχουν στην επιχείρησή σας:"
+"Κίνδυνοι οι οποίοι έχουν ήδη ελεγχθεί με επιτυχία ή δεν υπάρχουν στην "
+"επιχείρησή σας"
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/survey.py:512
@@ -1645,8 +1645,8 @@ msgstr ""
 #: src/osha/oira/client/templates/report.pt:28
 msgid "label_report_comment"
 msgstr ""
-"Παρακαλώ υποβάλλετε τυχόν πρόσφατα σχόλια που θα μπορούσαν να συμπεριληφθούν "
-"στην αναφορά σε αυτό το πεδίο."
+"Παρακαλώ υποβάλλετε στο πεδίο αυτό τυχόν σχόλια σχετικά με την παραπάνω "
+"ερώτηση"
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -1943,6 +1943,10 @@ msgid ""
 "'Requirements' of this measure will be overwritten. This action cannot be "
 "reverted. Are you sure you want to continue?"
 msgstr ""
+"Θα αντικατασταθεί το υπάρχον κείμενο σε καθένα από τα πεδία 'Σχέδιο Δράσης', "
+"'Σχέδιο Πρόληψης' και 'Απαιτήσεις' που αφορούν στο μέτρο αυτό. Η ενέργεια "
+"αυτή δεν μπορεί να αλλάξει στην συνέχεια. Είστε σίγουροι ότι επιθυμείτε να "
+"συνεχίσετε;"
 
 #. Default: Add
 #: src/osha/oira/client/templates/risk_actionplan.pt:24
@@ -1986,8 +1990,8 @@ msgstr "Προτεινόμενα μέτρα"
 msgid "actionplan_measure_tooltip"
 msgstr ""
 "Περιγράψτε: 1) ποια η γενική σας προσέγγισή για να εξαλείψετε ή (εάν ο "
-"κίνδυνος είναι αναπόφευκτος) να μειώσετε τον κίνδυνο, 2) την ειδική "
-"ενέργεια(-ες) που απαιτείται για να εφαρμόσετε αυτή την προσέγγιση (για να "
+"κίνδυνος είναι αναπόφευκτος) να μειώσετε τον κίνδυνο, 2) την ειδική ενέργεια"
+"(-ες) που απαιτείται για να εφαρμόσετε αυτή την προσέγγιση (για να "
 "εξαλείψετε ή να μειώσετε τον κίνδυνο), 3) το επίπεδο τεχνογνωσίας που "
 "απαιτείται για να εφαρμοστεί το μέτρο, για παράδειγμα “κοινή λογική (δεν "
 "απαιτούνται γνώσεις OSH)”, “δεν απαιτείται συγκεκριμένη τεχνογνωσία OSH, "
@@ -2199,8 +2203,8 @@ msgstr "Υψηλή"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"Αφήστε τυχόν σχόλια που μπορεί να έχετε σχετικά με την ερώτηση σε αυτό το "
-"πεδίο. Αυτά τα σχόλια θα χρησιμοποιηθούνσ το σχέδιο δράσης."
+"Παρακαλώ υποβάλλετε στο πεδίο αυτό τυχόν σχόλια σχετικά με την παραπάνω "
+"ερώτηση. Τα σχόλια αυτά θα χρησιμοποιηθούν στο Σχέδιο Δράσης."
 
 #. Default: Not applicable
 #: src/osha/oira/client/templates/risk_identification.pt:24

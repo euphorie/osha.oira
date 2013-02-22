@@ -11,11 +11,11 @@ msgstr ""
 "PO-Revision-Date: 2012-02-29 21:31+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: bg <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #. Default: HTML Source Code
@@ -734,7 +734,7 @@ msgstr "Изтрий тази мярка"
 #: src/osha/oira/browser/templates/statistics.pt:13
 #, fuzzy
 msgid "title_statistics"
-msgstr "Статистическо ниво"
+msgstr "Отчет на статистиката"
 
 #: src/osha/oira/client/country.py:53
 msgid "Save"
@@ -928,7 +928,9 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
-msgstr "Опасности/проблеми, които не присъстват във Вашата организация"
+msgstr ""
+"Опасности/проблеми, които не са разглеждани или не присъстват във вашата "
+"организация"
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/survey.py:512
@@ -2913,11 +2915,9 @@ msgstr ""
 #~ msgid "profilequestion_type_repeat"
 #~ msgstr "Това е повтарящ се елемент на профила."
 
-#, fuzzy
 #~ msgid "help_header_preparation"
 #~ msgstr "Този текст трябва да пояснява двата вида профилиращи въпроси."
 
-#, fuzzy
 #~ msgid "label_help_start"
 #~ msgstr "Доклад"
 

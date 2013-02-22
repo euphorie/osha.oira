@@ -11,11 +11,11 @@ msgstr ""
 "PO-Revision-Date: 2012-11-09 05:16-0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"Language: \n"
 "X-Generator: Poedit 1.5.4\n"
 
 #. Default: HTML Source Code
@@ -724,9 +724,8 @@ msgstr "Apagar esta medida"
 
 #. Default: Statistics Reporting
 #: src/osha/oira/browser/templates/statistics.pt:13
-#, fuzzy
 msgid "title_statistics"
-msgstr "Nível das estatísticas"
+msgstr "Relatório Estatístico"
 
 #: src/osha/oira/client/country.py:53
 msgid "Save"
@@ -919,7 +918,9 @@ msgstr "Riscos/problemas que ficaram \"parados\" e ainda têm de ser tratados"
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
-msgstr "Riscos/problemas que não estejam presentes na sua organização"
+msgstr ""
+"Riscos/problemas que já foram controlados ou que não existem na sua "
+"organização"
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/survey.py:512
@@ -1017,8 +1018,8 @@ msgstr ""
 #: src/osha/oira/client/templates/actionplan.pt:42
 msgid "expl_actionplan_7"
 msgstr ""
-"Após decidir como eliminar ou reduzir um risco em particular, descreverá "
-"a(s) ação(ões) específica(s) necessária(s) para alcançar isto. Também deve "
+"Após decidir como eliminar ou reduzir um risco em particular, descreverá a"
+"(s) ação(ões) específica(s) necessária(s) para alcançar isto. Também deve "
 "incluir detalhes do nível de competência e/ou outros requisitos necessários "
 "para que tais ações sejam eficazes."
 
@@ -1600,8 +1601,7 @@ msgstr ""
 #. this field
 #: src/osha/oira/client/templates/report.pt:28
 msgid "label_report_comment"
-msgstr ""
-"Deixe alguns comentários que tenha sobre a pergunta em cima neste campo"
+msgstr "Queira por favor comentar a questão acima indicada."
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -2153,8 +2153,8 @@ msgstr "Elevada"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"Deixe quaisquer comentários sobre a pergunta em cima neste campo. Estes "
-"comentários serão utilizados no plano de ação."
+"Queira por favor comentar a questão acima indicada. Estes comentários serão "
+"considerados no plano de ação."
 
 #. Default: Not applicable
 #: src/osha/oira/client/templates/risk_identification.pt:24
@@ -2901,11 +2901,9 @@ msgstr "Login inválido. Se esqueceu a palavra-passe, pode ${reset_password}."
 #~ msgid "profilequestion_type_repeat"
 #~ msgstr "Este é um item de perfil repetível."
 
-#, fuzzy
 #~ msgid "help_header_preparation"
 #~ msgstr "Este texto deve explicar os 2 tipos de perguntas de perfil."
 
-#, fuzzy
 #~ msgid "label_help_start"
 #~ msgstr "Relatório"
 

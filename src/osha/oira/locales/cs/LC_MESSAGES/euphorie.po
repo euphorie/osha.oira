@@ -10,16 +10,16 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"Language: \n"
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:27
 msgid "label_homepage_description"
-msgstr ""
+msgstr "HTML zdrojový kód"
 
 #. Default: Describe your general approach to eliminate or (if the risk is not
 #. avoidable) reduce the risk.
@@ -65,7 +65,7 @@ msgstr "Krok"
 #. Default: Measure
 #: src/osha/oira/manual_translations.py:20
 msgid "title_common_solution"
-msgstr ""
+msgstr "Opatření"
 
 #. Default: A standard measure for a risk.
 #: src/osha/oira/manual_translations.py:21
@@ -234,7 +234,7 @@ msgstr "Úspěšně publikovaný nástroj OiRA"
 #: src/osha/oira/manual_translations.py:65
 msgid ""
 "Succesfully created a preview for the survey. It can be accessed at ${url} ."
-msgstr ""
+msgstr "Úspěšně vytvořen náhled pro nástroj OiRA. K dispozici na ${url}."
 
 #. Default: Publish the selected OiRA Tool live with its latest changes.
 #: src/osha/oira/manual_translations.py:68
@@ -654,9 +654,8 @@ msgstr "Název pro verzi nástroje OiRA"
 
 #. Default: Default severity
 #: src/osha/oira/manual_translations.py:208
-#, fuzzy
 msgid "label_default_effect"
-msgstr "Vymazat"
+msgstr "Výchozí závažnost"
 
 #. Default: Are you sure you want to unpublish this OiRA Tool?
 #: src/osha/oira/manual_translations.py:210
@@ -673,6 +672,8 @@ msgstr "Importovat nástroj OiRA"
 #: src/osha/oira/manual_translations.py:214
 msgid "message_no_delete_published_survey"
 msgstr ""
+"Nelze odstranit verzi nástroje OiRA, která je publikována. Prosíme, nejprve "
+"označte/klikněte “nepublikovat”."
 
 #. Default: You can not delete a sector that contains published OiRA Tools.
 #: src/osha/oira/manual_translations.py:218
@@ -698,24 +699,19 @@ msgstr "Nástroje OiRA"
 
 #. Default: We're sorry, but an unforseen error has occured.
 #: src/osha/oira/manual_translations.py:228
-#, fuzzy
 msgid "expl_error"
-msgstr ""
-"Aby bylo možno přizpůsobit vyhodnocení rizik vaší organizaci, můžete být "
-"požádán/a o:"
+msgstr "Bohužel došlo k nepředvídatelné chybě."
 
 #. Default: Delete this measure
 #: src/osha/oira/manual_translations.py:230
 #: src/osha/oira/client/templates/risk_actionplan.pt:67
-#, fuzzy
 msgid "label_remove_measure"
-msgstr "Zvolte jeden z uvedených známých a běžných kroků."
+msgstr "Smazat toto opatření"
 
 #. Default: Statistics Reporting
 #: src/osha/oira/browser/templates/statistics.pt:13
-#, fuzzy
 msgid "title_statistics"
-msgstr "Statistická úroveň"
+msgstr "Statistické vykazování"
 
 #: src/osha/oira/client/country.py:53
 msgid "Save"
@@ -908,7 +904,9 @@ msgstr "Nebezpečí/problémy, které byly \"parked\" a které je stále třeba 
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
-msgstr "Nebezpečí/problémy, které se ve vaší organizaci nevyskytují"
+msgstr ""
+"Nebezpečí/problémy, které se ve vašem podniku nevyskytují nebo byly již "
+"vyřešeny"
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/survey.py:512
@@ -1407,19 +1405,13 @@ msgstr "Regiony"
 
 #. Default: You can print the ${list-of-risks}.
 #: src/osha/oira/client/templates/identification.pt:21
-#, fuzzy
 msgid "intro_identification"
-msgstr ""
-"Můžete vytisknout obsah nástroje, což vám umožní hledat informace na "
-"příslušném pracovišti (procházením se a pozorováním, co může způsobit "
-"nebezpečí, nebo pomocí rozhovorů s pracovníky a/nebo jejich zástupci o "
-"problémech, na které narazili). Pak můžete zavést informace do nástroje."
+msgstr "Můžete vytisknout ${list-of-risks}."
 
 #. Default: Start Risk Identification
 #: src/osha/oira/client/templates/identification.pt:26
-#, fuzzy
 msgid "label_start_identification"
-msgstr "Identifikace"
+msgstr "Zahájit identifikaci rizik"
 
 #. Default: Previous
 #: src/osha/oira/client/templates/module_actionplan.pt:52
@@ -1589,9 +1581,7 @@ msgstr ""
 #. this field
 #: src/osha/oira/client/templates/report.pt:28
 msgid "label_report_comment"
-msgstr ""
-"Vynechejte prosím jakékoliv zvláštní poznámky, které by se měly vložit do "
-"zprávy v tomto poli."
+msgstr "Prosíme o případné připomínky k problematice uvedené v otázce výše"
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -1757,9 +1747,8 @@ msgstr "jiný kanál"
 
 #. Default: Skip this step
 #: src/osha/oira/client/templates/report_company.pt:53
-#, fuzzy
 msgid "label_skip"
-msgstr "Ano"
+msgstr "Přeskočit tento krok"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
@@ -1884,11 +1873,14 @@ msgid ""
 "'Requirements' of this measure will be overwritten. This action cannot be "
 "reverted. Are you sure you want to continue?"
 msgstr ""
+"Stávající text v polích „obecný přístup“, „konkrétní činnosti“, „požadavky/"
+"odbornost“ tohoto opatření bude přepsán. Tento krok nelze vrátit. Jste si "
+"jisti, že chcete pokračovat?"
 
 #. Default: Add
 #: src/osha/oira/client/templates/risk_actionplan.pt:24
 msgid "button_add"
-msgstr ""
+msgstr "Přidat"
 
 #. Default: Select one or more of the known common measures provided.
 #: src/osha/oira/client/templates/risk_actionplan.pt:48
@@ -1903,14 +1895,13 @@ msgstr "Vymazat"
 
 #. Default: Add another measure
 #: src/osha/oira/client/templates/risk_actionplan.pt:72
-#, fuzzy
 msgid "label_add"
-msgstr "Den"
+msgstr "Přidat jiné opatření"
 
 #. Default: Description
 #: src/osha/oira/client/templates/risk_actionplan.pt:86
 msgid "label_description"
-msgstr ""
+msgstr "Popis"
 
 #: src/osha/oira/client/templates/risk_actionplan.pt:87
 msgid "Standard solutions"
@@ -1965,7 +1956,7 @@ msgstr "Zadejte prosím rozpočet v celých EUR"
 #. Default: Day
 #: src/osha/oira/client/templates/risk_actionplan.pt:137
 msgid "label_day"
-msgstr ""
+msgstr "Den"
 
 #. Default: What is the chance of this risk occurring?
 #: src/osha/oira/client/templates/risk_evaluation.pt:28
@@ -2040,9 +2031,8 @@ msgstr "Slabé"
 
 #. Default: No need to stop working
 #: src/osha/oira/client/templates/risk_evaluation.pt:63
-#, fuzzy
 msgid "severity_weak_help"
-msgstr "Slabé"
+msgstr "Není potřeba zastavit práci"
 
 #. Default: Not very severe
 #: src/osha/oira/client/templates/risk_evaluation.pt:66
@@ -2051,9 +2041,8 @@ msgstr "Nepříliš vážné"
 
 #. Default: Need to stop working for less than 3 days
 #: src/osha/oira/client/templates/risk_evaluation.pt:67
-#, fuzzy
 msgid "severity_not_severe_help"
-msgstr "Nepříliš vážné"
+msgstr "Potřeba zastavit práci na méně než 3 dny"
 
 #. Default: Severe
 #: src/osha/oira/client/templates/risk_evaluation.pt:70
@@ -2062,9 +2051,8 @@ msgstr "Vážné"
 
 #. Default: Need to stop working for more than 3 days
 #: src/osha/oira/client/templates/risk_evaluation.pt:71
-#, fuzzy
 msgid "severity_severe_help"
-msgstr "Vážné"
+msgstr "Potřeba zastavit práci na vice než 3 dny"
 
 #. Default: Very severe
 #: src/osha/oira/client/templates/risk_evaluation.pt:75
@@ -2073,9 +2061,8 @@ msgstr "Velmi závažné"
 
 #. Default: Irreversible injury, incurable illness, death
 #: src/osha/oira/client/templates/risk_evaluation.pt:76
-#, fuzzy
 msgid "severity_very_severe_help"
-msgstr "Velmi závažné"
+msgstr "Nevratné poškození, nevyléčitelná nemoc, smrt"
 
 #. Default: Rare
 #: src/osha/oira/client/templates/risk_evaluation.pt:84
@@ -2084,9 +2071,8 @@ msgstr "Zřídkakdy"
 
 #. Default: Once per year
 #: src/osha/oira/client/templates/risk_evaluation.pt:85
-#, fuzzy
 msgid "frequency_french_rare_help"
-msgstr "Zřídkakdy"
+msgstr "Jednou ročně"
 
 #. Default: Not very often
 #: src/osha/oira/client/templates/risk_evaluation.pt:89
@@ -2095,9 +2081,8 @@ msgstr "Nepříliš často"
 
 #. Default: Once per month
 #: src/osha/oira/client/templates/risk_evaluation.pt:90
-#, fuzzy
 msgid "frequency_french_not_often_help"
-msgstr "Nepříliš často"
+msgstr "Jednou měsíčně"
 
 #. Default: Often
 #: src/osha/oira/client/templates/risk_evaluation.pt:94
@@ -2106,9 +2091,8 @@ msgstr "Často"
 
 #. Default: Once per week
 #: src/osha/oira/client/templates/risk_evaluation.pt:95
-#, fuzzy
 msgid "frequency_french_often_help"
-msgstr "Často"
+msgstr "Jednou týdně"
 
 #. Default: Very often or regularly
 #: src/osha/oira/client/templates/risk_evaluation.pt:99
@@ -2117,9 +2101,8 @@ msgstr "Velmi často nebo pravidelně"
 
 #. Default: Minimum once per day
 #: src/osha/oira/client/templates/risk_evaluation.pt:100
-#, fuzzy
 msgid "frequency_french_regularly_help"
-msgstr "Velmi často nebo pravidelně"
+msgstr "Minimálně jednou denně"
 
 #. Default: Select the priority of this risk
 #: src/osha/oira/client/templates/risk_evaluation.pt:108
@@ -2147,8 +2130,8 @@ msgstr "Vysoká"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"Zde nezapisujte jakékoli poznámky nebo komentáře k výše uvedenému textu. "
-"Případné poznámky nebo komentáře uveďte v akčním plánu."
+"Prosíme o případné připomínky k problematice uvedené v otázce výše Tyto "
+"připomínky budou využity v akčním plánu"
 
 #. Default: Not applicable
 #: src/osha/oira/client/templates/risk_identification.pt:24
@@ -2284,7 +2267,7 @@ msgstr "Licence GPL"
 
 #: src/osha/oira/client/templates/webhelpers.pt:146
 msgid "CC License"
-msgstr ""
+msgstr "CC Licence"
 
 #. Default: Legal and policy references
 #: src/osha/oira/client/templates/webhelpers.pt:207
@@ -2360,6 +2343,8 @@ msgstr ""
 #: src/osha/oira/content/risk.py:27
 msgid "help_evaluation_method_french"
 msgstr ""
+"Vyberte mezi ODHADEM (hrubý odhad) nebo VÝPOČTEM (kombinace metod četnosti a "
+"závažnosti)."
 
 #. Default: Statistics Level
 #: src/osha/oira/content/sector.py:26
@@ -2382,49 +2367,48 @@ msgstr "Nemůžete zrušit nástroj OiRA, který byl publikován."
 #. Default: Documentation
 #: src/osha/oira/content/templates/documentation_view.pt:12
 msgid "title_country_documentation"
-msgstr ""
+msgstr "Dokumentace"
 
 #. Default: online client
 #: src/osha/oira/content/templates/documentation_view.pt:15
 msgid "intro_documenation_client"
-msgstr ""
+msgstr "online klient"
 
 #. Default: Here you can manage the documentation for the ${client}.
 #: src/osha/oira/content/templates/documentation_view.pt:14
-#, fuzzy
 msgid "intro_documenation"
-msgstr ""
-"Úvodní text se zobrazuje při zahájení nové relace nástroje OiRA. Pokud se "
-"zde neposkytuje žádný úvod, zobrazí se standardní text. Tento text by měl "
-"být co nejkratší, aby se snadno vešel na obrazovky malých zařízení, jako "
-"jsou telefony a PDA."
+msgstr "Zde můžete organizovat dokumentaci pro ${client}."
 
 #. Default: Go to the ${homepage_edit_form} to change the way the homepage
 #. appears.
 #: src/osha/oira/content/templates/documentation_view.pt:17
 msgid "documentation_homepage"
 msgstr ""
+"Přejít na ${homepage_edit_form}, chcete-li změnit způsob zobrazení Domovské "
+"stránky."
 
 #. Default: appendix
 #: src/osha/oira/content/templates/documentation_view.pt:23
 msgid "documentation_appendix_appendix"
-msgstr ""
+msgstr "Příloha"
 
 #. Default: Pages created in the ${appendix} folder are available via links in
 #. the footer of the online client.
 #: src/osha/oira/content/templates/documentation_view.pt:23
 msgid "documentation_appendix"
 msgstr ""
+"Stránky vytvořené ve ${appendix} složce jsou k dispozici prostřednictvím "
+"odkazů v “zápatí online klienta."
 
 #. Default: online help
 #: src/osha/oira/content/templates/documentation_view.pt:28
 msgid "documentation_online_help_online_help"
-msgstr ""
+msgstr "online nápověda"
 
 #. Default: The ${online_help} text can also be modified.
 #: src/osha/oira/content/templates/documentation_view.pt:28
 msgid "documentation_online_help"
-msgstr ""
+msgstr "${online_help} text může být též upraven."
 
 #. Default: Information
 #: src/osha/oira/content/templates/module_view.pt:22
@@ -2668,71 +2652,63 @@ msgstr "Verze nástroje OiRA"
 
 #. Default: Login
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:14
-#, fuzzy
 msgid "header_login"
-msgstr "Regiony"
+msgstr "Přihlášení"
 
 #. Default: Unauthorized
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:14
-#, fuzzy
 msgid "header_error_unauthorized"
-msgstr "Krok ${index}"
+msgstr "Neoprávněný"
 
 #. Default: I am afraid you are not authorised to do this.
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:18
 msgid "message_error_unauthorized"
-msgstr ""
+msgstr "Obávám se, že k tomuto nemáte oprávnění."
 
 #. Default: You need to be logged in to access this page.
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:23
 msgid "message_error_not_logged_in"
-msgstr ""
+msgstr "Pro přístup na tuto stránku musíte být přihlášen."
 
 #. Default: Credentials
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:29
 #: src/osha/oira/templates/login.pt:22
 msgid "legend_credentials"
-msgstr ""
+msgstr "Pověření"
 
 #. Default: Login
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:31
 #: src/osha/oira/templates/login.pt:25
-#, fuzzy
 msgid "label_login"
-msgstr "Ne"
+msgstr "Přihlášení"
 
 #. Default: Password
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:33
 #: src/osha/oira/templates/login.pt:27
-#, fuzzy
 msgid "label_password"
-msgstr "Nové heslo"
+msgstr "Heslo"
 
 #. Default: Login
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:38
 #: src/osha/oira/templates/login.pt:32
-#, fuzzy
 msgid "button_login"
-msgstr "Tisknout"
+msgstr "Přihlášení"
 
 #. Default: request a password reset
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:42
 #: src/osha/oira/templates/login.pt:17 src/osha/oira/templates/login.pt:36
-#, fuzzy
 msgid "reset_password"
-msgstr "Heslo"
+msgstr "požádat o nové nastavení hesla"
 
 #. Default: If you forgot your password you can ${reset_password}.
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:42
 #: src/osha/oira/templates/login.pt:36
-#, fuzzy
 msgid "message_reset_password"
-msgstr "Heslo"
+msgstr "Pokud jste zapomněli heslo, můžete ${reset_password}."
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:7
-#, fuzzy
 msgid "Profile question"
-msgstr "Tento nástroj OiRA nemá žádné profilové otázky."
+msgstr "Profilová otázka"
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:8
 msgid ""
@@ -2769,11 +2745,11 @@ msgstr "Sektor je národní organizace pro konkrétní typ průmyslu."
 
 #: src/osha/oira/profiles/default/types/euphorie.solution.xml:5
 msgid "Measure"
-msgstr ""
+msgstr "Opatření"
 
 #: src/osha/oira/profiles/default/types/euphorie.solution.xml:6
 msgid "A measure that can be taken to mitigate a risk."
-msgstr ""
+msgstr "Opatření, které může být přijato pro zmírnění rizika."
 
 #: src/osha/oira/profiles/default/types/euphorie.survey.xml:7
 msgid "OiRA Tool version"
@@ -2785,7 +2761,7 @@ msgstr "Verze nástroje OiRA."
 
 #: src/osha/oira/profiles/default/types/oira.homepage.xml:7
 msgid "Home page"
-msgstr ""
+msgstr "Domovská stránka"
 
 #. Default: Are you aware of all the risks?
 #: src/osha/oira/templates/default_introduction.pt:6
@@ -2861,21 +2837,22 @@ msgstr ""
 
 #. Default: Login
 #: src/osha/oira/templates/login.pt:12
-#, fuzzy
 msgid "title_login"
-msgstr "OiRA - Online interaktivní vyhodnocení rizik"
+msgstr "Přihlášení"
 
 #. Default: You are already logged in. Please logout first before trying to
 #. login again.
 #: src/osha/oira/templates/login.pt:14
 msgid "message_already_logged_in"
 msgstr ""
+"Jste již přihlášen. Prosím, odhlašte se, než se pokusíte přihlásit znovu."
 
 #. Default: Invalid login. If you forgot your password you can
 #. ${reset_password}.
 #: src/osha/oira/templates/login.pt:16
 msgid "message_invalid_login"
 msgstr ""
+"Neplatné přihlášení. Pokud jste zapomněli heslo, můžete ${reset_password}."
 
 #~ msgid "label_add_profile_module"
 #~ msgstr "Přidat"
@@ -2886,11 +2863,9 @@ msgstr ""
 #~ msgid "profilequestion_type_repeat"
 #~ msgstr "Toto je opakovatelná profilová položka."
 
-#, fuzzy
 #~ msgid "help_header_preparation"
 #~ msgstr "Tento text by měl vysvětlit 2 typy profilových otázek."
 
-#, fuzzy
 #~ msgid "label_help_start"
 #~ msgstr "Zpráva"
 
@@ -2909,7 +2884,6 @@ msgstr ""
 #~ msgid "error_invalid_year"
 #~ msgstr "Zadejte prosím platný rok po 1900"
 
-#, fuzzy
 #~ msgid "label_module_description"
 #~ msgstr ""
 #~ "Uveďte veškeré relevantní informace, které mohou být užitečné pro "

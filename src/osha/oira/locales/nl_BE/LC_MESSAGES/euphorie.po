@@ -11,11 +11,11 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"Language: \n"
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:27
@@ -737,9 +737,8 @@ msgstr "Verwijder deze maatregel"
 
 #. Default: Statistics Reporting
 #: src/osha/oira/browser/templates/statistics.pt:13
-#, fuzzy
 msgid "title_statistics"
-msgstr "Statistisch niveau"
+msgstr "Statistische Rapportering"
 
 #: src/osha/oira/client/country.py:53
 msgid "Save"
@@ -936,7 +935,7 @@ msgstr "Gevaren/problemen die vastgesteld zijn en nog moeten worden behandeld"
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
-msgstr "Gevaren/problemen die niet aanwezig zijn in uw bedrijf"
+msgstr "Gevaren/problemen die beheerst of niet aanwezig zijn in uw organisatie"
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/survey.py:512
@@ -1627,8 +1626,8 @@ msgstr ""
 #: src/osha/oira/client/templates/report.pt:28
 msgid "label_report_comment"
 msgstr ""
-"Vul hier eventuele opmerkingen in die moeten worden meegenomen in het "
-"rapport."
+"Gelieve hier al uw opmerkingen met betrekking tot de bovenstaande vraag te "
+"noteren."
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -2186,8 +2185,8 @@ msgstr "Hoog"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"In dit veld kunt u eventueel een opmerking plaatsen met betrekking tot de "
-"bovenstaande vraag. Deze opmerkingen worden opgenomen in het actieplan."
+"Gelieve hier al uw opmerkingen met betrekking tot de bovenstaande vraag te "
+"noteren. Deze opmerkingen zullen gebruikt worden in het actieplan."
 
 #. Default: Not applicable
 #: src/osha/oira/client/templates/risk_identification.pt:24
@@ -2935,11 +2934,9 @@ msgstr "Ongeldige login. Als u uw wachtwoord vergeet, ${reset_password}."
 #~ msgid "profilequestion_type_repeat"
 #~ msgstr "Dit is een herhaalbaar profielonderdeel."
 
-#, fuzzy
 #~ msgid "help_header_preparation"
 #~ msgstr "Deze tekst moet de 2 soorten profielvragen uitleggen."
 
-#, fuzzy
 #~ msgid "label_help_start"
 #~ msgstr "Rapport"
 

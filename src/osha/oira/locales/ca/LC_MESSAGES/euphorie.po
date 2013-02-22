@@ -11,11 +11,11 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"Language: \n"
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:27
@@ -725,9 +725,8 @@ msgstr "Esborrar aqusta mesura"
 
 #. Default: Statistics Reporting
 #: src/osha/oira/browser/templates/statistics.pt:13
-#, fuzzy
 msgid "title_statistics"
-msgstr "Nivell estadístic"
+msgstr "Informe estadístic"
 
 #: src/osha/oira/client/country.py:53
 msgid "Save"
@@ -920,7 +919,9 @@ msgstr "S'han \"aparcat\"  els perills o problemes i encara s'han de gestionar"
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
-msgstr "Perills o problemes no presents a la seva organització"
+msgstr ""
+"Riscos/deficiències que han estat controlats o no estan presents a la seva "
+"organització"
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/survey.py:512
@@ -1602,8 +1603,8 @@ msgstr ""
 #: src/osha/oira/client/templates/report.pt:28
 msgid "label_report_comment"
 msgstr ""
-"Introdueixi en aquest camp tots els comentaris addicionals que calgui "
-"incloure a l'informe."
+"Si us plau, deixeu en aquest camp qualsevol comentari que pugueu tenir sobre "
+"la pregunta de dalt."
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -1893,6 +1894,9 @@ msgid ""
 "'Requirements' of this measure will be overwritten. This action cannot be "
 "reverted. Are you sure you want to continue?"
 msgstr ""
+"El text actual dels camps 'Enfocament general', 'Accions concretes' i "
+"'Requisits/competència' d`aquesta mesura se sobreescriurà. Aquesta acció no "
+"es pot desfer. Esteu segur que voleu continuar?"
 
 #. Default: Add
 #: src/osha/oira/client/templates/risk_actionplan.pt:24
@@ -2148,8 +2152,8 @@ msgstr "Elevada"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"Introdueixi en aquest camp qualsevol comentari que tingui sobre la pregunta "
-"anterior. Aquests comentaris s'utilitzaran al pla d'acció."
+"Si us plau, deixeu en aquest camp qualsevol comentari que pugueu tenir sobre "
+"la pregunta de dalt. Aquests comentaris seran utilitzats en el pla d'acció."
 
 #. Default: Not applicable
 #: src/osha/oira/client/templates/risk_identification.pt:24
@@ -2890,11 +2894,9 @@ msgstr ""
 #~ msgid "profilequestion_type_repeat"
 #~ msgstr "Aquest element de perfil és recurrent."
 
-#, fuzzy
 #~ msgid "help_header_preparation"
 #~ msgstr "Aquest text hauria d'explicar els 2 tipus de preguntes de perfil."
 
-#, fuzzy
 #~ msgid "label_help_start"
 #~ msgstr "Informe"
 

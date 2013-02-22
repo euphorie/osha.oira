@@ -11,11 +11,11 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"Language: \n"
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:27
@@ -270,8 +270,8 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:76
 msgid "help_module_description"
 msgstr ""
-"Įtraukite bet kokią susijusią informaciją, kuri gali būti naudinga "
-"galutiniam naudotojui."
+"Įtraukite bet kokią svarbią informaciją, kuri gali būti naudinga galutiniam "
+"vartotojui."
 
 #. Default: Allows the end-user to skip this module and everything inside it.
 #: src/osha/oira/manual_translations.py:78
@@ -728,9 +728,8 @@ msgstr "Ištrinti šią priemonę"
 
 #. Default: Statistics Reporting
 #: src/osha/oira/browser/templates/statistics.pt:13
-#, fuzzy
 msgid "title_statistics"
-msgstr "Statistikos lygis"
+msgstr "Statistiniai duomenys"
 
 #: src/osha/oira/client/country.py:53
 msgid "Save"
@@ -929,7 +928,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
-msgstr "Pavojai / problemos, kurių nėra jūsų organizacijoje"
+msgstr "Pavojai, kurie yra jau įvertinti arba kurių nėra jūsų įmonėje."
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/survey.py:512
@@ -2907,10 +2906,8 @@ msgstr ""
 #~ msgid "profilequestion_type_repeat"
 #~ msgstr "Tai pakartojamas profilio elementas."
 
-#, fuzzy
 #~ msgid "help_header_preparation"
 #~ msgstr "Šiuo tekstu turėtų būti išaiškinti du profilio klausimų tipai."
 
-#, fuzzy
 #~ msgid "label_help_start"
 #~ msgstr "Ataskaita"

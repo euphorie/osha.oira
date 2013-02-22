@@ -15,11 +15,11 @@ msgstr ""
 "PO-Revision-Date: 2013-01-30 13:20+0200\n"
 "Last-Translator: cath\n"
 "Language-Team: en <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #. Default: HTML Source Code
@@ -722,7 +722,7 @@ msgstr "Effacer cette mesure"
 #. Default: Statistics Reporting
 #: src/osha/oira/browser/templates/statistics.pt:13
 msgid "title_statistics"
-msgstr ""
+msgstr "Relevé des statistiques"
 
 #: src/osha/oira/client/country.py:53
 msgid "Save"
@@ -1032,8 +1032,8 @@ msgstr ""
 "Pour intégrer une mesure, vous devez: décrire cette mesure (dans le premier "
 "champs de saisie), préciser les actions à mettre en place pour rendre cette "
 "mesure effective (2ème champs) et indiquer quelles compétences spécifiques "
-"sont nécessaires pour appliquer cette mesure ou préciser quelle(s) "
-"fonction(s) de l'entreprise est (sont) à mobiliser (3ème champs). "
+"sont nécessaires pour appliquer cette mesure ou préciser quelle(s) fonction"
+"(s) de l'entreprise est (sont) à mobiliser (3ème champs). "
 
 #. Default: No risks were identified. Please proceed directly to the report.
 #: src/osha/oira/client/templates/actionplan.pt:47
@@ -1619,7 +1619,7 @@ msgstr ""
 #. this field
 #: src/osha/oira/client/templates/report.pt:28
 msgid "label_report_comment"
-msgstr "Vous pouvez saisir ici un commentaire qui apparaîtra dans le rapport"
+msgstr "Vous pouvez écrire ici tout commentaire se rapportant à cette question"
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -1916,11 +1916,14 @@ msgid ""
 "'Requirements' of this measure will be overwritten. This action cannot be "
 "reverted. Are you sure you want to continue?"
 msgstr ""
+"Les textes actuels des trois champs 'description de la mesure', 'actions "
+"spécifiques' et 'compétences nécessaires' seront remplacés. Cette action est "
+"irréversible. Êtes-vous sûr de vouloir continuer ?"
 
 #. Default: Add
 #: src/osha/oira/client/templates/risk_actionplan.pt:24
 msgid "button_add"
-msgstr ""
+msgstr "Ajouter"
 
 #. Default: Select one or more of the known common measures provided.
 #: src/osha/oira/client/templates/risk_actionplan.pt:48
@@ -1941,7 +1944,7 @@ msgstr "Ajouter une autre mesure"
 #. Default: Description
 #: src/osha/oira/client/templates/risk_actionplan.pt:86
 msgid "label_description"
-msgstr ""
+msgstr "Description"
 
 #: src/osha/oira/client/templates/risk_actionplan.pt:87
 msgid "Standard solutions"
@@ -1997,7 +2000,7 @@ msgstr "Veuillez saisir un nombre entier pour le budget en Euros."
 #. Default: Day
 #: src/osha/oira/client/templates/risk_actionplan.pt:137
 msgid "label_day"
-msgstr ""
+msgstr "Date"
 
 #. Default: What is the chance of this risk occurring?
 #: src/osha/oira/client/templates/risk_evaluation.pt:28
@@ -2171,8 +2174,8 @@ msgstr "Élevée"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"Veuillez écrire tout commentaire relatif à la question ci-dessus dans ce "
-"champ. Ces commentaires seront utilisés dans le plan d'action."
+"Vous pouvez écrire ici tout commentaire se rapportant à cette question. Vous "
+"retrouverez ce commentaire dans le plan d'action."
 
 #. Default: Not applicable
 #: src/osha/oira/client/templates/risk_identification.pt:24

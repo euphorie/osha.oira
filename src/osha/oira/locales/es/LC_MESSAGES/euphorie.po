@@ -11,11 +11,11 @@ msgstr ""
 "PO-Revision-Date: 2011-08-23 12:51+0100\n"
 "Last-Translator: Cristina <cr_montoya@hotmail.com>\n"
 "Language-Team: ES <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"Language: \n"
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:27
@@ -723,9 +723,8 @@ msgstr "Borrar esta medida"
 
 #. Default: Statistics Reporting
 #: src/osha/oira/browser/templates/statistics.pt:13
-#, fuzzy
 msgid "title_statistics"
-msgstr "Nivel de estadísticas"
+msgstr "Informe Estadístico"
 
 #: src/osha/oira/client/country.py:53
 msgid "Save"
@@ -919,7 +918,9 @@ msgstr "Peligros/problemas que se han \"aparcado\" y se deben afrontar aún"
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
-msgstr "Peligros/problemas que no están presentes en su organización"
+msgstr ""
+"Riesgos / Problemas que han sido controlados o no están presentes en su "
+"organización"
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/survey.py:512
@@ -1601,7 +1602,8 @@ msgstr ""
 #: src/osha/oira/client/templates/report.pt:28
 msgid "label_report_comment"
 msgstr ""
-"Indique otros comentarios que deban introducirse en el informe en este campo."
+"Por favor, deje cualquier comentario que tenga sobre la pregunta anterior en "
+"este campo"
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -2152,8 +2154,8 @@ msgstr "Alto"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"Deje cualquier comentario sobre la pregunta de este campo. Estos comentarios "
-"se utilizarán en el plan de acción."
+"Por favor, deje cualquier comentario que tenga sobre la pregunta anterior en "
+"este campo. Los comentarios se usarán en el plan de acción."
 
 #. Default: Not applicable
 #: src/osha/oira/client/templates/risk_identification.pt:24
@@ -2902,11 +2904,9 @@ msgstr "Usuario inválido. Si ha olvidado su clave, puede ${reset_password}."
 #~ msgid "profilequestion_type_repeat"
 #~ msgstr "Este es un elemento del perfil repetible."
 
-#, fuzzy
 #~ msgid "help_header_preparation"
 #~ msgstr "Este texto debe explicar los dos tipos de preguntas de perfil."
 
-#, fuzzy
 #~ msgid "label_help_start"
 #~ msgstr "Informe"
 

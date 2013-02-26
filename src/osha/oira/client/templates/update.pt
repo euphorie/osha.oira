@@ -14,11 +14,11 @@
     <metal:css use-macro="webhelpers/macros/css"/>
   </head>
   <body class="${webhelpers/extra_css}">
-    <h1 i18n:translate="title_updated">Survey was updated</h1>
+    <h1 i18n:translate="title_updated">OiRA Tool was updated</h1>
 
     <p class="message notice" i18n:translate="expl_update">
-      This survey has been updated. Before you can continue any changes made
-      in the survey will have to be merged in your session.
+      This OiRA tool has changed since you last accessed it. Before you
+      can continue, you need to update to these changes.
     </p>
 
     <p tal:condition="python:view.profile_questions" i18n:translate="verify_profile">Please
@@ -87,7 +87,7 @@
     <ul id="navigation">
       <metal:home use-macro="webhelpers/macros/homelink"/>
       <li><a href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a></li>
-      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">Surveys</a></li>
+      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">Sessions</a></li>
       <li><a href="${webhelpers/help_url}#identification" i18n:translate="navigation_help">Help</a></li>
       <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>
     </ul>

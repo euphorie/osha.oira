@@ -191,12 +191,6 @@ _("intro_publish_first_time", default=u""
 
 _("header_publish", default="Publish OiRA Tool")
 
-_("expl_update", default=u""
-    u"This OiRA tool has changed since you last accessed it. Before you can "
-    u"continue, you need to update to these changes.")
-
-_("title_updated", default="OiRA Tool was updated")
-
 _("help_surveygroup_title", default=u""
     u"The title of this OiRA Tool. This title is used in the OiRA Tool overview in the "
     u"clients.")

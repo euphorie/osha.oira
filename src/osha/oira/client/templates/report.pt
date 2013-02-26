@@ -85,7 +85,6 @@
       <li><a href="${webhelpers/survey_url}/status" i18n:translate="navigation_status">Status</a></li>
       <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>
     </ul>
-
     <metal:appendix     use-macro="webhelpers/macros/appendix"/>
     <metal:javascripts  use-macro="webhelpers/macros/javascript"/>
     <tal:block replace="tile:client-analytics"/>

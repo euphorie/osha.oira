@@ -4,7 +4,15 @@ Changelog
 2.0b3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add upgrade step to set default value for 'time' column used for statistics.
+  Fixes error upon client login under certain circumstances.
+
+Upgrade notes
+~~~~~~~~~~~~~
+
+This release updates the profile version to *6*. Please use the upgrade feature
+in ``portal_setup`` to upgrade the ``osha.oira:default`` profile to this
+version.
 
 
 2.0b2 (2013-02-19)

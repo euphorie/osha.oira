@@ -48,5 +48,17 @@
 
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+        source="5"
+        destination="6"
+        profile="osha.oira:default">
+
+    <genericsetup:upgradeStep
+        title="Alter time column, to set its default value."
+        description="The default value for the time column must be the current timestamp, not null."
+        handler=".upgrade.alter_time_column"/>
+
+  </genericsetup:upgradeSteps>
+
 </configure>
 

@@ -6,10 +6,10 @@ from z3c.saconfig import Session
 from zope.sqlalchemy import datamanager
 from zope.app.component.hooks import getSite
 from plone.dexterity import utils
+from euphorie.client import model
 from euphorie.client.sector import IClientSector
 from euphorie.content.survey import ISurvey
-from euphorie.client import model
-
+from euphorie.deployment.upgrade.utils import TableExists
 
 log = logging.getLogger(__name__)
 
@@ -79,3 +79,15 @@ def sql_create_all(context):
     transaction.get().commit()
     model.metadata.create_all(session.bind, checkfirst=True)
     datamanager.mark_changed(session)
+
+
+def alter_time_column(context):
+    session = Session()
+    if TableExists(session, "statistics_login"):
+        session.execute(
+            "ALTER TABLE statistics_login ALTER COLUMN time SET DEFAULT CURRENT_TIMESTAMP")
+        model.metadata.create_all(session.bind, checkfirst=True)
+        datamanager.mark_changed(session)
+        transaction.get().commit()
+    log.info("Changed default for column 'time' to current timestamp")
+

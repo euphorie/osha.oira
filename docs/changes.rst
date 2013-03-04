@@ -18,6 +18,8 @@ Feature changes
   instead of measure start date. This fixes `ticket 87
   <https://github.com/euphorie/Euphorie/issues/87>`_.
 
+- Add action and expertise information for measures to the timeline report.
+  This fixes `ticket 85 <https://github.com/euphorie/Euphorie/issues/85>`_.
 
 Bugfixes
 ~~~~~~~~

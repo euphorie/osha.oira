@@ -123,9 +123,8 @@
             <label id="label-budget-${number}" class="${python:'error' if exists('errors/budget') else None}"><tal:span i18n:translate="label_action_plan_budget">Budget</tal:span>
                 <a class="icon info pat-tooltip" data-pat-tooltip="source: content;" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_budget_tooltip">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</a>
                 <input type="text" class="budget" name="measure.budget:records" id="input-budget-${number}" value="${actionplan/budget|nothing}"/>
-                <p class="focustip error target-id-input-budget-${number}" tal:condition="exists:errors/budget" i18n:translate="error_invalid_budget">
-                Please enter the budget in whole Euros.</p>
-            </label>
+                <em class="message error" tal:condition="exists:errors/budget" i18n:translate="error_invalid_budget">Please enter the budget in whole Euros.</em>
+              </label>
 
             <fieldset tal:define="day_error exists:errors/planning_start_day;
                                     year_error exists:errors/planning_start_year;
@@ -134,16 +133,13 @@
                 <legend i18n:translate="label_action_plan_start">Planning start</legend>
                 <fieldset class="date-eu">
                     <label class="${python:'error' if day_error else None}" for="label-planning-start-day-${number}" i18n:translate="label_day">Day</label>
-                    <input type="text" 
-                            name="measure.planning_start_day:records" 
+                    <input name="measure.planning_start_day:records" 
                             id="planning-start-day-${number}" 
                             maxlength="2"
                             type="number"
                             class="numeric day${python:' error' if day_error else ''}"
                             value="${actionplan/planning_start_day|actionplan/planning_start/day|nothing}"/>
-                    <p class="focustip error target-id-planning-start-day-${number}" 
-                        tal:condition="day_error" 
-                        i18n:translate="error_invalid_day">Invalid day</p>
+                    <em class="message error" tal:condition="day_error" i18n:translate="error_invalid_day">Invalid day</em>
                     <label for="planning-start-month-${number}" i18n:translate="label_month">Month</label>
                     <select name="measure.planning_start_month:records" 
                             id="planning-start-month-${number}" 
@@ -157,16 +153,13 @@
                     <label class="${python:'error' if year_error else None}" 
                             for="planning-start-year-${number}" 
                             i18n:translate="label_year">Year</label>
-                    <input type="text" 
-                            name="measure.planning_start_year:records" 
+                    <input name="measure.planning_start_year:records" 
                             id="planning-start-year-${number}" 
                             maxlength="4"
                             type="number"
                             class="numeric year enablePicker${python:' error' if year_error else ''}"
                             value="${actionplan/planning_start_year|actionplan/planning_start/year|nothing}"/>
-                    <p class="focustip error target-id-planning-start-year-${number}" 
-                        tal:condition="year_error" 
-                        i18n:translate="error_invalid_year">Please enter a valid year after 1900</p>
+                    <em class="message error" tal:condition="year_error" i18n:translate="error_invalid_year">Please enter a valid year after 1900</em>
                 </fieldset>
             </fieldset>
 
@@ -180,11 +173,11 @@
                 <fieldset class="date-eu">
                     <label class="${python:'error' if day_error else None}"
                         for="label-planning-end-day-${number}" i18n:translate="label_day">Day</label>
-                    <input type="text" name="measure.planning_end_day:records" id="planning-end-day-${number}" maxlength="2"
+                    <input name="measure.planning_end_day:records" id="planning-end-day-${number}" maxlength="2"
                         type="number"
                         class="numeric day ${python:' error' if day_error else ''}"
                         value="${actionplan/planning_end_day|actionplan/planning_end/day|nothing}"/>
-                    <p class="focustip error target-id-planning-end-day-${number}" tal:condition="day_error" i18n:translate="error_invalid_day">Invalid day</p>
+                    <em class="message error" tal:condition="day_error" i18n:translate="error_invalid_day">Invalid day</em>
 
                     <label for="planning-end-month-${number}" i18n:translate="label_month">Month</label>
 
@@ -199,11 +192,11 @@
 
                     <label class="${python:'error' if year_error else None}"
                         for="planning-end-year-${number}" i18n:translate="label_day">Day</label>
-                    <input type="text" name="measure.planning_end_year:records" id="planning-end-year-${number}" maxlength="4"
+                    <input name="measure.planning_end_year:records" id="planning-end-year-${number}" maxlength="4"
                         type="number"
                         class="numeric year enablePicker${python:' error' if year_error else ''}"
                         value="${actionplan/planning_end_year|actionplan/planning_end/year|nothing}"/>
-                    <p class="focustip error target-id-planning-end-year-${number}" tal:condition="year_error" i18n:translate="error_invalid_year">Please enter a valid year after 1900</p>
+                    <em class="message error" tal:condition="year_error" i18n:translate="error_invalid_year">Please enter a valid year after 1900</em>
                 </fieldset>
             </fieldset>
         </fieldset>

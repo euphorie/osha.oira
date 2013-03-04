@@ -30,7 +30,8 @@
     </ul>
 
     <form method="post" action="${request/URL}">
-      <tal:question repeat="question view/profile_questions"><section tal:define="current python:view.current_profile.get(question['id'])">
+      <tal:question repeat="question view/profile_questions">
+        <section tal:define="current python:view.current_profile.get(question['id'])">
         <h2>${question/title}</h2>
         <fieldset class="comprehensive radioList">
           <legend>${question/question}</legend>
@@ -50,15 +51,15 @@
             <span class="pat-depends" data-pat-depends="pq${question/id}.multiple=yes">${question/label_multiple_occurances}</span>
           </legend>
           <ol class="form-iteration">
-            <li tal:condition="python:not current"><input required="required" type="text" name="${question/id}:utext:list" /> <button type="button" class="small remove" i18n:translate="">Remove</button></li>
-            <li tal:repeat="title current"><input required="required" type="text" name="${question/id}:utext:list" value="${title}"/> <button type="button" class="small remove pat-depends" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="">Remove</button></li>
+            <li tal:condition="python:not current"><input required="required" type="text" name="${question/id}:utf8:utext:list" /> <button type="button" class="small remove" i18n:translate="">Remove</button></li>
+            <li tal:repeat="title current"><input required="required" type="text" name="${question/id}:utf8:utext:list" value="${title}"/> <button type="button" class="small remove pat-depends" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="">Remove</button></li>
           </ol>
           <p class="buttons addButton pat-depends" data-pat-depends="pq${question/id}.multiple=yes">
             <button class="small" type="button" i18n:translate="">Add another item</button>
           </p>
         </fieldset>
-      </section></tal:question>
-
+      </section>
+      </tal:question>
       <p class="buttonBar">
       <button class="floatAfter" type="submit" i18n:translate="label_save_and_continue">Save and continue</button>
       </p>
@@ -94,6 +95,7 @@
       <li><a href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a></li>
       <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">Sessions</a></li>
       <li><a href="${webhelpers/help_url}#preparation" i18n:translate="navigation_help">Help</a></li>
+      <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>
     </ul>
     <metal:css use-macro="webhelpers/macros/appendix"/>
   </body>

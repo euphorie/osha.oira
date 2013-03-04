@@ -55,5 +55,5 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             (col for col in report.ActionPlanTimeline.columns
                 if col[1] in COLUMN_ORDER),
             key=lambda d, co=COLUMN_ORDER: co.index(d[1]))
-    columns.insert(-2, (None, None, _('report_timeline_progress',
-        default=u'Progress (pending, in process, implemented)')))
+    columns.insert(-1, (None, None, _('report_timeline_progress',
+        default=u'Status (planned, in process, implemented)')))

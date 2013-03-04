@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-02-15 16:13+0100\n"
+"POT-Creation-Date: 2013-03-04 15:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Generated-By: Babel 0.9.6\n"
 
 #. Default: HTML Source Code
-#: src/osha/oira/homepage.py:27
+#: src/osha/oira/homepage.py:33
 msgid "label_homepage_description"
 msgstr ""
 
@@ -457,13 +457,13 @@ msgstr "Tento text by mal vysvetľovať, ako sa vypĺňa Akčný plán."
 #. Default: 5. Report
 #: src/osha/oira/manual_translations.py:128
 #, fuzzy
-msgid "help_header_report"
+msgid "help_header_reports"
 msgstr "Spravodajstvo"
 
 #. Default: 5. Report
 #: src/osha/oira/manual_translations.py:129
 #, fuzzy
-msgid "label_help_report"
+msgid "label_help_reports"
 msgstr "Správa"
 
 #. Default: This text should describe how the report can either be saved or
@@ -607,87 +607,68 @@ msgstr ""
 msgid "header_publish"
 msgstr "Uverejniť nástroj OiRA"
 
-#. Default: This OiRA tool has changed since you last accessed it. Before you
-#. can continue, you need to update to these changes.
-#. Default: This survey has been updated. Before you can continue any changes
-#. made in the survey will have to be merged in your session.
-#: src/osha/oira/manual_translations.py:194
-#: src/osha/oira/client/templates/update.pt:19
-msgid "expl_update"
-msgstr ""
-"Tento nástroj OiRA bol aktualizovaný. Predtým ako budete môcť pokračovať, sa "
-"budú musieť všetky zmeny vykonané v nástroji OiRA zaviesť do vášho "
-"stretnutia."
-
-#. Default: OiRA Tool was updated
-#. Default: Survey was updated
-#: src/osha/oira/manual_translations.py:198
-#: src/osha/oira/client/templates/update.pt:17
-msgid "title_updated"
-msgstr "Nástroj OiRA bol aktualizovaný"
-
 #. Default: The title of this OiRA Tool. This title is used in the OiRA Tool
 #. overview in the clients.
-#: src/osha/oira/manual_translations.py:200
+#: src/osha/oira/manual_translations.py:194
 msgid "help_surveygroup_title"
 msgstr ""
 "Názov tohto nástroja OiRA. Tento názov sa používa v prehľade nástroja OiRA u "
 "klientov."
 
 #. Default: This OiRA Tool is now no longer available in the client.
-#: src/osha/oira/manual_translations.py:204
+#: src/osha/oira/manual_translations.py:198
 msgid "message_unpublish_success"
 msgstr "Tento nástroj OiRA teraz už nie je dostupný u klienta."
 
 #. Default: Name for OiRA Tool version
-#: src/osha/oira/manual_translations.py:206
+#: src/osha/oira/manual_translations.py:200
 msgid "label_upload_survey_title"
 msgstr "Názov pre verziu nástroja OiRA"
 
 #. Default: Default severity
-#: src/osha/oira/manual_translations.py:208
+#: src/osha/oira/manual_translations.py:202
 #, fuzzy
 msgid "label_default_effect"
 msgstr "Vymazať"
 
 #. Default: Are you sure you want to unpublish this OiRA Tool?
-#: src/osha/oira/manual_translations.py:210
+#: src/osha/oira/manual_translations.py:204
 msgid "unpublish_confirm"
 msgstr "Ste si istí, že chcete neuverejniť tento nástroj OiRA?"
 
 #. Default: Import OiRA Tool
-#: src/osha/oira/manual_translations.py:212
+#: src/osha/oira/manual_translations.py:206
 msgid "menu_import"
 msgstr "Importovať nástroj OiRA"
 
 #. Default: You cannot delete an OiRA Tool version that is published. Please
 #. unpublish it first.
-#: src/osha/oira/manual_translations.py:214
+#: src/osha/oira/manual_translations.py:208
 msgid "message_no_delete_published_survey"
 msgstr ""
 
 #. Default: You can not delete a sector that contains published OiRA Tools.
-#: src/osha/oira/manual_translations.py:218
+#: src/osha/oira/manual_translations.py:212
 msgid "message_not_delete_published_sector"
 msgstr "Nemôžete vymazať sektor, ktorý obsahuje uverejnené nástroje OiRA."
 
 #. Default: add a new OiRA Tool
-#: src/osha/oira/manual_translations.py:222
+#: src/osha/oira/manual_translations.py:216
 msgid "add_survey"
 msgstr "pridať nový nástroj OiRA"
 
 #. Default: There are no OiRA Tools present. You can ${add_link}.
-#: src/osha/oira/manual_translations.py:224
+#: src/osha/oira/manual_translations.py:218
 msgid "no_surveys_present"
 msgstr "Nie sú tu žiadne nástroje OiRA. Môžete ${add_link}."
 
 #. Default: OiRA Tools
-#: src/osha/oira/manual_translations.py:226
+#: src/osha/oira/manual_translations.py:220
 msgid "header_sector_survey_list"
 msgstr "Nástroje OiRA"
 
 #. Default: We're sorry, but an unforseen error has occured.
-#: src/osha/oira/manual_translations.py:228
+#: src/osha/oira/manual_translations.py:222
 #, fuzzy
 msgid "expl_error"
 msgstr ""
@@ -695,8 +676,8 @@ msgstr ""
 "požiadaní, aby ste:"
 
 #. Default: Delete this measure
-#: src/osha/oira/manual_translations.py:230
-#: src/osha/oira/client/templates/risk_actionplan.pt:67
+#: src/osha/oira/manual_translations.py:224
+#: src/osha/oira/client/templates/risk_actionplan.pt:66
 #, fuzzy
 msgid "label_remove_measure"
 msgstr "Vyberte jedno alebo viac z uvedených známych spoločných opatrení."
@@ -743,7 +724,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
 #: src/osha/oira/client/templates/report_actionplan.pt:244
-#: src/osha/oira/client/templates/risk_actionplan.pt:40
+#: src/osha/oira/client/templates/risk_actionplan.pt:39
 msgid "risk_priority_low"
 msgstr "nízke"
 
@@ -753,7 +734,7 @@ msgstr "nízke"
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
 #: src/osha/oira/client/templates/report_actionplan.pt:245
-#: src/osha/oira/client/templates/risk_actionplan.pt:41
+#: src/osha/oira/client/templates/risk_actionplan.pt:40
 msgid "risk_priority_medium"
 msgstr "stredné"
 
@@ -763,7 +744,7 @@ msgstr "stredné"
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
 #: src/osha/oira/client/templates/report_actionplan.pt:245
-#: src/osha/oira/client/templates/risk_actionplan.pt:42
+#: src/osha/oira/client/templates/risk_actionplan.pt:41
 msgid "risk_priority_high"
 msgstr "vysoké"
 
@@ -779,7 +760,7 @@ msgstr "Toto je riziko s ${priority_value} prioritou."
 
 #. Default: Measure
 #: src/osha/oira/client/survey.py:296 src/osha/oira/client/survey.py:318
-#: src/osha/oira/client/templates/risk_actionplan.pt:65
+#: src/osha/oira/client/templates/risk_actionplan.pt:64
 msgid "header_measure_single"
 msgstr "Opatrenie"
 
@@ -791,37 +772,37 @@ msgstr "Opatrenie ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
 #: src/osha/oira/client/survey.py:325
-#: src/osha/oira/client/templates/risk_actionplan.pt:90
+#: src/osha/oira/client/templates/risk_actionplan.pt:89
 msgid "label_measure_action_plan"
 msgstr "Všeobecný prístup (na odstránenie alebo zníženie rizika)"
 
 #. Default: Specific action(s) required to implement this approach
 #: src/osha/oira/client/survey.py:327
-#: src/osha/oira/client/templates/risk_actionplan.pt:98
+#: src/osha/oira/client/templates/risk_actionplan.pt:97
 msgid "label_measure_prevention_plan"
 msgstr "Konkrétna akcia (akcie) potrebná na realizáciu tohto prístupu"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/survey.py:329
-#: src/osha/oira/client/templates/risk_actionplan.pt:107
+#: src/osha/oira/client/templates/risk_actionplan.pt:106
 msgid "label_measure_requirements"
 msgstr "Úroveň potrebnej odbornosti a/alebo požiadavky"
 
 #. Default: Who is responsible?
 #: src/osha/oira/client/survey.py:331
-#: src/osha/oira/client/templates/risk_actionplan.pt:119
+#: src/osha/oira/client/templates/risk_actionplan.pt:118
 msgid "label_action_plan_responsible"
 msgstr "Kto je zodpovedný?"
 
 #. Default: Budget
 #: src/osha/oira/client/survey.py:333
-#: src/osha/oira/client/templates/risk_actionplan.pt:124
+#: src/osha/oira/client/templates/risk_actionplan.pt:123
 msgid "label_action_plan_budget"
 msgstr "Rozpočet"
 
 #. Default: Planning start
 #: src/osha/oira/client/survey.py:334
-#: src/osha/oira/client/templates/risk_actionplan.pt:135
+#: src/osha/oira/client/templates/risk_actionplan.pt:134
 msgid "label_action_plan_start"
 msgstr "Plánovanie spustenia"
 
@@ -1023,7 +1004,7 @@ msgstr "Prejsť na správu"
 #: src/osha/oira/client/templates/module_actionplan.pt:59
 #: src/osha/oira/client/templates/module_evaluation.pt:45
 #: src/osha/oira/client/templates/module_identification.pt:62
-#: src/osha/oira/client/templates/profile.pt:70
+#: src/osha/oira/client/templates/profile.pt:71
 #: src/osha/oira/client/templates/report.pt:50
 #: src/osha/oira/client/templates/report_actionplan.pt:270
 #: src/osha/oira/client/templates/report_company.pt:61
@@ -1043,7 +1024,7 @@ msgstr "Príprava"
 #: src/osha/oira/client/templates/module_actionplan.pt:60
 #: src/osha/oira/client/templates/module_evaluation.pt:46
 #: src/osha/oira/client/templates/module_identification.pt:63
-#: src/osha/oira/client/templates/profile.pt:71
+#: src/osha/oira/client/templates/profile.pt:72
 #: src/osha/oira/client/templates/report.pt:51
 #: src/osha/oira/client/templates/report_actionplan.pt:271
 #: src/osha/oira/client/templates/report_company.pt:62
@@ -1063,7 +1044,7 @@ msgstr "Príprava"
 #: src/osha/oira/client/templates/module_actionplan.pt:65
 #: src/osha/oira/client/templates/module_evaluation.pt:51
 #: src/osha/oira/client/templates/module_identification.pt:68
-#: src/osha/oira/client/templates/profile.pt:75
+#: src/osha/oira/client/templates/profile.pt:76
 #: src/osha/oira/client/templates/report.pt:56
 #: src/osha/oira/client/templates/report_actionplan.pt:276
 #: src/osha/oira/client/templates/report_company.pt:67
@@ -1083,7 +1064,7 @@ msgstr "Identifikácia"
 #: src/osha/oira/client/templates/module_actionplan.pt:66
 #: src/osha/oira/client/templates/module_evaluation.pt:52
 #: src/osha/oira/client/templates/module_identification.pt:69
-#: src/osha/oira/client/templates/profile.pt:76
+#: src/osha/oira/client/templates/profile.pt:77
 #: src/osha/oira/client/templates/report.pt:57
 #: src/osha/oira/client/templates/report_actionplan.pt:277
 #: src/osha/oira/client/templates/report_company.pt:68
@@ -1103,7 +1084,7 @@ msgstr "Identifikácia"
 #: src/osha/oira/client/templates/module_actionplan.pt:71
 #: src/osha/oira/client/templates/module_evaluation.pt:57
 #: src/osha/oira/client/templates/module_identification.pt:77
-#: src/osha/oira/client/templates/profile.pt:79
+#: src/osha/oira/client/templates/profile.pt:80
 #: src/osha/oira/client/templates/report.pt:62
 #: src/osha/oira/client/templates/report_actionplan.pt:282
 #: src/osha/oira/client/templates/report_company.pt:73
@@ -1123,7 +1104,7 @@ msgstr "Vyhodnotenie"
 #: src/osha/oira/client/templates/module_actionplan.pt:72
 #: src/osha/oira/client/templates/module_evaluation.pt:58
 #: src/osha/oira/client/templates/module_identification.pt:78
-#: src/osha/oira/client/templates/profile.pt:80
+#: src/osha/oira/client/templates/profile.pt:81
 #: src/osha/oira/client/templates/report.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:283
 #: src/osha/oira/client/templates/report_company.pt:74
@@ -1143,7 +1124,7 @@ msgstr "Vyhodnotenie"
 #: src/osha/oira/client/templates/module_actionplan.pt:77
 #: src/osha/oira/client/templates/module_evaluation.pt:66
 #: src/osha/oira/client/templates/module_identification.pt:83
-#: src/osha/oira/client/templates/profile.pt:83
+#: src/osha/oira/client/templates/profile.pt:84
 #: src/osha/oira/client/templates/report.pt:68
 #: src/osha/oira/client/templates/report_actionplan.pt:288
 #: src/osha/oira/client/templates/report_company.pt:79
@@ -1163,7 +1144,7 @@ msgstr "Akčný plán"
 #: src/osha/oira/client/templates/module_actionplan.pt:78
 #: src/osha/oira/client/templates/module_evaluation.pt:67
 #: src/osha/oira/client/templates/module_identification.pt:84
-#: src/osha/oira/client/templates/profile.pt:84
+#: src/osha/oira/client/templates/profile.pt:85
 #: src/osha/oira/client/templates/report.pt:69
 #: src/osha/oira/client/templates/report_actionplan.pt:289
 #: src/osha/oira/client/templates/report_company.pt:80
@@ -1183,7 +1164,7 @@ msgstr "Akčný plán"
 #: src/osha/oira/client/templates/module_actionplan.pt:86
 #: src/osha/oira/client/templates/module_evaluation.pt:72
 #: src/osha/oira/client/templates/module_identification.pt:89
-#: src/osha/oira/client/templates/profile.pt:87
+#: src/osha/oira/client/templates/profile.pt:88
 #: src/osha/oira/client/templates/report.pt:74
 #: src/osha/oira/client/templates/report_actionplan.pt:294
 #: src/osha/oira/client/templates/report_company.pt:85
@@ -1203,7 +1184,7 @@ msgstr "Správa"
 #: src/osha/oira/client/templates/module_actionplan.pt:87
 #: src/osha/oira/client/templates/module_evaluation.pt:73
 #: src/osha/oira/client/templates/module_identification.pt:90
-#: src/osha/oira/client/templates/profile.pt:88
+#: src/osha/oira/client/templates/profile.pt:89
 #: src/osha/oira/client/templates/report.pt:75
 #: src/osha/oira/client/templates/report_actionplan.pt:295
 #: src/osha/oira/client/templates/report_company.pt:86
@@ -1223,7 +1204,7 @@ msgstr "Správa"
 #: src/osha/oira/client/templates/module_actionplan.pt:94
 #: src/osha/oira/client/templates/module_evaluation.pt:79
 #: src/osha/oira/client/templates/module_identification.pt:97
-#: src/osha/oira/client/templates/profile.pt:94
+#: src/osha/oira/client/templates/profile.pt:95
 #: src/osha/oira/client/templates/report.pt:82
 #: src/osha/oira/client/templates/report_actionplan.pt:307
 #: src/osha/oira/client/templates/report_company.pt:93
@@ -1238,13 +1219,12 @@ msgid "navigation_logout"
 msgstr "Odhlásenie"
 
 #. Default: Sessions
-#. Default: Surveys
 #: src/osha/oira/client/templates/actionplan.pt:93
 #: src/osha/oira/client/templates/identification.pt:65
 #: src/osha/oira/client/templates/module_actionplan.pt:95
 #: src/osha/oira/client/templates/module_evaluation.pt:80
 #: src/osha/oira/client/templates/module_identification.pt:98
-#: src/osha/oira/client/templates/profile.pt:95
+#: src/osha/oira/client/templates/profile.pt:96
 #: src/osha/oira/client/templates/report.pt:83
 #: src/osha/oira/client/templates/report_actionplan.pt:308
 #: src/osha/oira/client/templates/report_company.pt:94
@@ -1264,7 +1244,7 @@ msgstr "Stretnutia"
 #: src/osha/oira/client/templates/module_actionplan.pt:96
 #: src/osha/oira/client/templates/module_evaluation.pt:81
 #: src/osha/oira/client/templates/module_identification.pt:99
-#: src/osha/oira/client/templates/profile.pt:96
+#: src/osha/oira/client/templates/profile.pt:97
 #: src/osha/oira/client/templates/register.pt:41
 #: src/osha/oira/client/templates/report.pt:84
 #: src/osha/oira/client/templates/report_actionplan.pt:309
@@ -1300,6 +1280,7 @@ msgstr "Stav"
 #: src/osha/oira/client/templates/module_actionplan.pt:98
 #: src/osha/oira/client/templates/module_evaluation.pt:83
 #: src/osha/oira/client/templates/module_identification.pt:101
+#: src/osha/oira/client/templates/profile.pt:98
 #: src/osha/oira/client/templates/report.pt:86
 #: src/osha/oira/client/templates/report_actionplan.pt:311
 #: src/osha/oira/client/templates/report_company.pt:97
@@ -1435,7 +1416,7 @@ msgstr "Nie"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_identification.pt:50
-#: src/osha/oira/client/templates/profile.pt:63
+#: src/osha/oira/client/templates/profile.pt:64
 #: src/osha/oira/client/templates/report.pt:38
 #: src/osha/oira/client/templates/report_company.pt:54
 #: src/osha/oira/client/templates/risk_evaluation.pt:120
@@ -1473,8 +1454,8 @@ msgstr ""
 "atď. Tieto súvisiace riziká sa budú opakovať pre každý názov, ktorý ste "
 "zadali."
 
-#: src/osha/oira/client/templates/profile.pt:37
-#: src/osha/oira/client/templates/profile.pt:43
+#: src/osha/oira/client/templates/profile.pt:38
+#: src/osha/oira/client/templates/profile.pt:44
 #: src/osha/oira/client/templates/update.pt:32
 #: src/osha/oira/client/templates/update.pt:38
 #: src/osha/oira/content/templates/profilequestion_add.pt:62
@@ -1484,8 +1465,8 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: src/osha/oira/client/templates/profile.pt:38
-#: src/osha/oira/client/templates/profile.pt:44
+#: src/osha/oira/client/templates/profile.pt:39
+#: src/osha/oira/client/templates/profile.pt:45
 #: src/osha/oira/client/templates/update.pt:33
 #: src/osha/oira/client/templates/update.pt:39
 #: src/osha/oira/content/templates/profilequestion_add.pt:63
@@ -1495,8 +1476,8 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: src/osha/oira/client/templates/profile.pt:53
 #: src/osha/oira/client/templates/profile.pt:54
+#: src/osha/oira/client/templates/profile.pt:55
 #: src/osha/oira/client/templates/update.pt:48
 #: src/osha/oira/client/templates/update.pt:49
 #: src/osha/oira/content/templates/profilequestion_add.pt:94
@@ -1504,7 +1485,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: src/osha/oira/client/templates/profile.pt:57
+#: src/osha/oira/client/templates/profile.pt:58
 #: src/osha/oira/client/templates/update.pt:52
 #: src/osha/oira/content/templates/profilequestion_add.pt:96
 msgid "Add another item"
@@ -1646,7 +1627,7 @@ msgstr ""
 #. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:180
+#: src/osha/oira/client/templates/webhelpers.pt:168
 msgid "top5_risk_not_present"
 msgstr ""
 "Toto riziko sa nevyskytuje vo vašej organizácii, ale keďže sektorová "
@@ -1738,55 +1719,51 @@ msgstr "Áno"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:192
+#: src/osha/oira/client/templates/webhelpers.pt:180
 msgid "warn_risk_present"
 msgstr "Na predchádzajúce vyhlásenie ste reagovali negatívne."
 
-#: src/osha/oira/client/templates/report_landing.pt:20
+#: src/osha/oira/client/templates/report_landing.pt:21
 msgid "Download and print your report"
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:22
+#: src/osha/oira/client/templates/report_landing.pt:23
 msgid "not"
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:22
+#: src/osha/oira/client/templates/report_landing.pt:23
 msgid ""
 "Save the report on your pc and print it. You can also modify it or add more "
 "information. Please note that changes made on your pc will ${not} be saved "
 "in the OiRA tool"
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:23
+#: src/osha/oira/client/templates/report_landing.pt:24
 msgid "Use the report to:"
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:26
+#: src/osha/oira/client/templates/report_landing.pt:27
 msgid "Provide evidence for supervisory authorities."
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:27
+#: src/osha/oira/client/templates/report_landing.pt:28
 msgid ""
 "Pass information to the people concerned (workers, safety reps, employer, "
 "OSH experts, ...)"
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:28
+#: src/osha/oira/client/templates/report_landing.pt:29
 msgid "Monitor and assess whether necessary measures have been introduced."
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:29
+#: src/osha/oira/client/templates/report_landing.pt:30
 msgid ""
 "Record any revision if circumstances change (new machines, new workers, as a "
 "result of findings of any accident investigations, etc.)"
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:33
-msgid "Download the full report"
-msgstr ""
-
 #: src/osha/oira/client/templates/report_landing.pt:35
-msgid "Full report"
+msgid "Download the full report"
 msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:38
@@ -1820,10 +1797,6 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:51
 msgid "Download the action plan"
-msgstr ""
-
-#: src/osha/oira/client/templates/report_landing.pt:52
-msgid "Action plan"
 msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:54
@@ -1866,28 +1839,28 @@ msgid "button_add"
 msgstr ""
 
 #. Default: Select one or more of the known common measures provided.
-#: src/osha/oira/client/templates/risk_actionplan.pt:48
+#: src/osha/oira/client/templates/risk_actionplan.pt:47
 msgid "label_select_measure"
 msgstr "Vyberte jedno alebo viac z uvedených známych spoločných opatrení."
 
 #. Default: Delete
-#: src/osha/oira/client/templates/risk_actionplan.pt:67
+#: src/osha/oira/client/templates/risk_actionplan.pt:66
 #: src/osha/oira/client/templates/sessions.pt:40
 msgid "label_delete"
 msgstr "Vymazať"
 
 #. Default: Add another measure
-#: src/osha/oira/client/templates/risk_actionplan.pt:72
+#: src/osha/oira/client/templates/risk_actionplan.pt:71
 #, fuzzy
 msgid "label_add"
 msgstr "Deň"
 
 #. Default: Description
-#: src/osha/oira/client/templates/risk_actionplan.pt:86
+#: src/osha/oira/client/templates/risk_actionplan.pt:85
 msgid "label_description"
 msgstr ""
 
-#: src/osha/oira/client/templates/risk_actionplan.pt:87
+#: src/osha/oira/client/templates/risk_actionplan.pt:86
 msgid "Standard solutions"
 msgstr "Štandardné riešenia"
 
@@ -1899,7 +1872,7 @@ msgstr "Štandardné riešenia"
 #. OSH knowledge or training and/or consultation of OSH guidance required”, or
 #. “OSH expert”. You can also describe here any other additional requirement
 #. (if any).
-#: src/osha/oira/client/templates/risk_actionplan.pt:88
+#: src/osha/oira/client/templates/risk_actionplan.pt:87
 msgid "actionplan_measure_tooltip"
 msgstr ""
 "Opíšte: 1) aký je váš všeobecný prístup k odstráneniu alebo (ak sa riziku "
@@ -1909,7 +1882,7 @@ msgstr ""
 #. implementation of this measure. This person will have the authority to take
 #. the steps described in the Plan and/or the responsibility to ensure that
 #. they are carried out.
-#: src/osha/oira/client/templates/risk_actionplan.pt:120
+#: src/osha/oira/client/templates/risk_actionplan.pt:119
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
 "Určte niekoho vo vašej spoločnosti, kto bude zodpovedný za realizáciu tohto "
@@ -1918,19 +1891,19 @@ msgstr ""
 #. Default: Although some measures do not cost any money, most do. The measures
 #. should therefore be budgeted for; include them in the annual budget round if
 #. necessary.
-#: src/osha/oira/client/templates/risk_actionplan.pt:125
+#: src/osha/oira/client/templates/risk_actionplan.pt:124
 msgid "actionplan_measure_budget_tooltip"
 msgstr ""
 "Hoci niektoré opatrenia nestoja žiadne peniaze, väčšina stojí peniaze. Na "
 "opatrenia by sa mal preto pripraviť rozpočet; zaraďte ich do ročného"
 
 #. Default: Please enter the budget in whole Euros.
-#: src/osha/oira/client/templates/risk_actionplan.pt:127
+#: src/osha/oira/client/templates/risk_actionplan.pt:126
 msgid "error_invalid_budget"
 msgstr "Uveďte prosím rozpočet v celých Eurách."
 
 #. Default: Day
-#: src/osha/oira/client/templates/risk_actionplan.pt:137
+#: src/osha/oira/client/templates/risk_actionplan.pt:136
 msgid "label_day"
 msgstr ""
 
@@ -2184,6 +2157,20 @@ msgstr ""
 msgid "label_start_survey"
 msgstr "Začať"
 
+#. Default: OiRA Tool was updated
+#: src/osha/oira/client/templates/update.pt:17
+msgid "title_updated"
+msgstr "Nástroj OiRA bol aktualizovaný"
+
+#. Default: This OiRA tool has changed since you last accessed it. Before you
+#. can continue, you need to update to these changes.
+#: src/osha/oira/client/templates/update.pt:19
+msgid "expl_update"
+msgstr ""
+"Tento nástroj OiRA bol aktualizovaný. Predtým ako budete môcť pokračovať, sa "
+"budú musieť všetky zmeny vykonané v nástroji OiRA zaviesť do vášho "
+"stretnutia."
+
 #. Default: Please verify if the profile is still accurate.
 #: src/osha/oira/client/templates/update.pt:24
 msgid "verify_profile"
@@ -2204,64 +2191,64 @@ msgstr "Online interaktívne"
 msgid "oira_name_line_2"
 msgstr "Hodnotenie rizík"
 
-#: src/osha/oira/client/templates/webhelpers.pt:117
+#: src/osha/oira/client/templates/webhelpers.pt:105
 msgid "Unvisited"
 msgstr ""
 
-#: src/osha/oira/client/templates/webhelpers.pt:118
+#: src/osha/oira/client/templates/webhelpers.pt:106
 msgid "Postponed"
 msgstr ""
 
-#: src/osha/oira/client/templates/webhelpers.pt:119
+#: src/osha/oira/client/templates/webhelpers.pt:107
 msgid "Unanswered"
 msgstr ""
 
-#: src/osha/oira/client/templates/webhelpers.pt:120
+#: src/osha/oira/client/templates/webhelpers.pt:108
 msgid "Answered"
 msgstr ""
 
 #. Default: Produced by ${EU-OSHA}.
-#: src/osha/oira/client/templates/webhelpers.pt:135
+#: src/osha/oira/client/templates/webhelpers.pt:123
 msgid "appendix_produced_by"
 msgstr "Vytvorila agentúra ${EU-OSHA}."
 
 #. Default: About
-#: src/osha/oira/client/templates/webhelpers.pt:138
+#: src/osha/oira/client/templates/webhelpers.pt:126
 msgid "appendix_about"
 msgstr "Informácie"
 
 #. Default: Privacy
-#: src/osha/oira/client/templates/webhelpers.pt:140
+#: src/osha/oira/client/templates/webhelpers.pt:128
 msgid "appendix_privacy"
 msgstr "Ochrana osobných údajov"
 
 #. Default: Disclaimer
-#: src/osha/oira/client/templates/webhelpers.pt:142
+#: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "appendix_disclaimer"
 msgstr "Vylúčenie"
 
 #. Default: GPL License
-#: src/osha/oira/client/templates/webhelpers.pt:144
+#: src/osha/oira/client/templates/webhelpers.pt:132
 msgid "appendix_gpl_license"
 msgstr "Licencia GPL"
 
-#: src/osha/oira/client/templates/webhelpers.pt:146
+#: src/osha/oira/client/templates/webhelpers.pt:134
 msgid "CC License"
 msgstr ""
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:207
-#: src/osha/oira/client/templates/webhelpers.pt:221
+#: src/osha/oira/client/templates/webhelpers.pt:195
+#: src/osha/oira/client/templates/webhelpers.pt:209
 msgid "header_legal_references"
 msgstr "Právne a politické odkazy"
 
 #. Default: Hide
-#: src/osha/oira/client/templates/webhelpers.pt:224
+#: src/osha/oira/client/templates/webhelpers.pt:212
 msgid "action_hide"
 msgstr "Skryť"
 
 #. Default: Show
-#: src/osha/oira/client/templates/webhelpers.pt:228
+#: src/osha/oira/client/templates/webhelpers.pt:216
 msgid "action_show"
 msgstr "Zobraziť"
 

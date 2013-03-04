@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.6.dev0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-02-15 16:13+0100\n"
+"POT-Creation-Date: 2013-03-04 15:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-"Language: \n"
 
 #. Default: HTML Source Code
-#: src/osha/oira/homepage.py:27
+#: src/osha/oira/homepage.py:33
 msgid "label_homepage_description"
 msgstr "HTML Source Code"
 
@@ -460,13 +460,13 @@ msgstr "Šim tekstam jāizskaidro, kā aizpildīt rīcības plānu."
 #. Default: 5. Report
 #: src/osha/oira/manual_translations.py:128
 #, fuzzy
-msgid "help_header_report"
+msgid "help_header_reports"
 msgstr "Pārskatu veidošana"
 
 #. Default: 5. Report
 #: src/osha/oira/manual_translations.py:129
 #, fuzzy
-msgid "label_help_report"
+msgid "label_help_reports"
 msgstr "Pārskats"
 
 #. Default: This text should describe how the report can either be saved or
@@ -615,93 +615,75 @@ msgstr ""
 msgid "header_publish"
 msgstr "Publicēt OiRA rīku"
 
-#. Default: This OiRA tool has changed since you last accessed it. Before you
-#. can continue, you need to update to these changes.
-#. Default: This survey has been updated. Before you can continue any changes
-#. made in the survey will have to be merged in your session.
-#: src/osha/oira/manual_translations.py:194
-#: src/osha/oira/client/templates/update.pt:19
-msgid "expl_update"
-msgstr ""
-"OiRA rīks ir mainījies, kopš jūs tam pēdējoreiz piekļuvāt. Pirms turpināt, "
-"jums ir jāievieš šie atjauninājumi."
-
-#. Default: OiRA Tool was updated
-#. Default: Survey was updated
-#: src/osha/oira/manual_translations.py:198
-#: src/osha/oira/client/templates/update.pt:17
-msgid "title_updated"
-msgstr "OiRA rīks tika atjaunināts."
-
 #. Default: The title of this OiRA Tool. This title is used in the OiRA Tool
 #. overview in the clients.
-#: src/osha/oira/manual_translations.py:200
+#: src/osha/oira/manual_translations.py:194
 msgid "help_surveygroup_title"
 msgstr ""
 "Šī OiRA rīka nosaukums. Šo nosaukumu izmanto OiRA rīka priekšskatījumā "
 "klientos."
 
 #. Default: This OiRA Tool is now no longer available in the client.
-#: src/osha/oira/manual_translations.py:204
+#: src/osha/oira/manual_translations.py:198
 msgid "message_unpublish_success"
 msgstr "Šis OiRA rīks vairs nav pieejams klientā."
 
 #. Default: Name for OiRA Tool version
-#: src/osha/oira/manual_translations.py:206
+#: src/osha/oira/manual_translations.py:200
 msgid "label_upload_survey_title"
 msgstr "OiRA rīka versijas nosaukums"
 
 #. Default: Default severity
-#: src/osha/oira/manual_translations.py:208
+#: src/osha/oira/manual_translations.py:202
 msgid "label_default_effect"
 msgstr "Smaguma pakâpe pçc noklusçjuma"
 
 #. Default: Are you sure you want to unpublish this OiRA Tool?
-#: src/osha/oira/manual_translations.py:210
+#: src/osha/oira/manual_translations.py:204
 msgid "unpublish_confirm"
 msgstr "Vai tiešām vēlaties atsaukt šī OiRA rīka publikāciju?"
 
 #. Default: Import OiRA Tool
-#: src/osha/oira/manual_translations.py:212
+#: src/osha/oira/manual_translations.py:206
 msgid "menu_import"
 msgstr "Importēt OiRA rīku"
 
 #. Default: You cannot delete an OiRA Tool version that is published. Please
 #. unpublish it first.
-#: src/osha/oira/manual_translations.py:214
+#: src/osha/oira/manual_translations.py:208
 msgid "message_no_delete_published_survey"
 msgstr ""
 "Jūs nevarat izdzēst jau publicētu OiRA rīku. Lūdzu, vispirms atsauciet tā "
 "publikāciju."
 
 #. Default: You can not delete a sector that contains published OiRA Tools.
-#: src/osha/oira/manual_translations.py:218
+#: src/osha/oira/manual_translations.py:212
 msgid "message_not_delete_published_sector"
 msgstr "Jūs nevarat izdzēst sektoru, kurā ir publicēti OiRA rīki."
 
 #. Default: add a new OiRA Tool
-#: src/osha/oira/manual_translations.py:222
+#: src/osha/oira/manual_translations.py:216
 msgid "add_survey"
 msgstr "pievienot jaunu OiRA rīku"
 
 #. Default: There are no OiRA Tools present. You can ${add_link}.
-#: src/osha/oira/manual_translations.py:224
+#: src/osha/oira/manual_translations.py:218
 msgid "no_surveys_present"
 msgstr "Šobrīd nav pieejams neviens OiRA rīks. Jūs varat ${add_link}."
 
 #. Default: OiRA Tools
-#: src/osha/oira/manual_translations.py:226
+#: src/osha/oira/manual_translations.py:220
 msgid "header_sector_survey_list"
 msgstr "OiRA rīki"
 
 #. Default: We're sorry, but an unforseen error has occured.
-#: src/osha/oira/manual_translations.py:228
+#: src/osha/oira/manual_translations.py:222
 msgid "expl_error"
 msgstr "Atvainojiet, ir radusies neparedzēta kļūda."
 
 #. Default: Delete this measure
-#: src/osha/oira/manual_translations.py:230
-#: src/osha/oira/client/templates/risk_actionplan.pt:67
+#: src/osha/oira/manual_translations.py:224
+#: src/osha/oira/client/templates/risk_actionplan.pt:66
 msgid "label_remove_measure"
 msgstr "Dzçst ðo ziòu"
 
@@ -746,7 +728,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
 #: src/osha/oira/client/templates/report_actionplan.pt:244
-#: src/osha/oira/client/templates/risk_actionplan.pt:40
+#: src/osha/oira/client/templates/risk_actionplan.pt:39
 msgid "risk_priority_low"
 msgstr "zemas prioritātes risks"
 
@@ -756,7 +738,7 @@ msgstr "zemas prioritātes risks"
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
 #: src/osha/oira/client/templates/report_actionplan.pt:245
-#: src/osha/oira/client/templates/risk_actionplan.pt:41
+#: src/osha/oira/client/templates/risk_actionplan.pt:40
 msgid "risk_priority_medium"
 msgstr "vidējas prioritātes risks"
 
@@ -766,7 +748,7 @@ msgstr "vidējas prioritātes risks"
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
 #: src/osha/oira/client/templates/report_actionplan.pt:245
-#: src/osha/oira/client/templates/risk_actionplan.pt:42
+#: src/osha/oira/client/templates/risk_actionplan.pt:41
 msgid "risk_priority_high"
 msgstr "augstas prioritātes risks"
 
@@ -782,7 +764,7 @@ msgstr "Šis ir ${priority_value}"
 
 #. Default: Measure
 #: src/osha/oira/client/survey.py:296 src/osha/oira/client/survey.py:318
-#: src/osha/oira/client/templates/risk_actionplan.pt:65
+#: src/osha/oira/client/templates/risk_actionplan.pt:64
 msgid "header_measure_single"
 msgstr "Līdzeklis"
 
@@ -794,37 +776,37 @@ msgstr "Līdzeklis ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
 #: src/osha/oira/client/survey.py:325
-#: src/osha/oira/client/templates/risk_actionplan.pt:90
+#: src/osha/oira/client/templates/risk_actionplan.pt:89
 msgid "label_measure_action_plan"
 msgstr "Vispārējā pieeja (riska novēršana vai samazināšana)"
 
 #. Default: Specific action(s) required to implement this approach
 #: src/osha/oira/client/survey.py:327
-#: src/osha/oira/client/templates/risk_actionplan.pt:98
+#: src/osha/oira/client/templates/risk_actionplan.pt:97
 msgid "label_measure_prevention_plan"
 msgstr "Specifiskas darbības, kas jāveic, lai īstenotu šo pieeju"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/survey.py:329
-#: src/osha/oira/client/templates/risk_actionplan.pt:107
+#: src/osha/oira/client/templates/risk_actionplan.pt:106
 msgid "label_measure_requirements"
 msgstr "Nepieciešamais pieredzes līmenis un/vai prasības"
 
 #. Default: Who is responsible?
 #: src/osha/oira/client/survey.py:331
-#: src/osha/oira/client/templates/risk_actionplan.pt:119
+#: src/osha/oira/client/templates/risk_actionplan.pt:118
 msgid "label_action_plan_responsible"
 msgstr "Kura ir atbildīgā persona?"
 
 #. Default: Budget
 #: src/osha/oira/client/survey.py:333
-#: src/osha/oira/client/templates/risk_actionplan.pt:124
+#: src/osha/oira/client/templates/risk_actionplan.pt:123
 msgid "label_action_plan_budget"
 msgstr "Budžets"
 
 #. Default: Planning start
 #: src/osha/oira/client/survey.py:334
-#: src/osha/oira/client/templates/risk_actionplan.pt:135
+#: src/osha/oira/client/templates/risk_actionplan.pt:134
 msgid "label_action_plan_start"
 msgstr "Plānošanas sākums"
 
@@ -1030,7 +1012,7 @@ msgstr "Pāriet uz pārskatu"
 #: src/osha/oira/client/templates/module_actionplan.pt:59
 #: src/osha/oira/client/templates/module_evaluation.pt:45
 #: src/osha/oira/client/templates/module_identification.pt:62
-#: src/osha/oira/client/templates/profile.pt:70
+#: src/osha/oira/client/templates/profile.pt:71
 #: src/osha/oira/client/templates/report.pt:50
 #: src/osha/oira/client/templates/report_actionplan.pt:270
 #: src/osha/oira/client/templates/report_company.pt:61
@@ -1050,7 +1032,7 @@ msgstr "Sagatavošanās"
 #: src/osha/oira/client/templates/module_actionplan.pt:60
 #: src/osha/oira/client/templates/module_evaluation.pt:46
 #: src/osha/oira/client/templates/module_identification.pt:63
-#: src/osha/oira/client/templates/profile.pt:71
+#: src/osha/oira/client/templates/profile.pt:72
 #: src/osha/oira/client/templates/report.pt:51
 #: src/osha/oira/client/templates/report_actionplan.pt:271
 #: src/osha/oira/client/templates/report_company.pt:62
@@ -1070,7 +1052,7 @@ msgstr "Sagatavošanās"
 #: src/osha/oira/client/templates/module_actionplan.pt:65
 #: src/osha/oira/client/templates/module_evaluation.pt:51
 #: src/osha/oira/client/templates/module_identification.pt:68
-#: src/osha/oira/client/templates/profile.pt:75
+#: src/osha/oira/client/templates/profile.pt:76
 #: src/osha/oira/client/templates/report.pt:56
 #: src/osha/oira/client/templates/report_actionplan.pt:276
 #: src/osha/oira/client/templates/report_company.pt:67
@@ -1090,7 +1072,7 @@ msgstr "Identifikācija"
 #: src/osha/oira/client/templates/module_actionplan.pt:66
 #: src/osha/oira/client/templates/module_evaluation.pt:52
 #: src/osha/oira/client/templates/module_identification.pt:69
-#: src/osha/oira/client/templates/profile.pt:76
+#: src/osha/oira/client/templates/profile.pt:77
 #: src/osha/oira/client/templates/report.pt:57
 #: src/osha/oira/client/templates/report_actionplan.pt:277
 #: src/osha/oira/client/templates/report_company.pt:68
@@ -1110,7 +1092,7 @@ msgstr "Identifikācija"
 #: src/osha/oira/client/templates/module_actionplan.pt:71
 #: src/osha/oira/client/templates/module_evaluation.pt:57
 #: src/osha/oira/client/templates/module_identification.pt:77
-#: src/osha/oira/client/templates/profile.pt:79
+#: src/osha/oira/client/templates/profile.pt:80
 #: src/osha/oira/client/templates/report.pt:62
 #: src/osha/oira/client/templates/report_actionplan.pt:282
 #: src/osha/oira/client/templates/report_company.pt:73
@@ -1130,7 +1112,7 @@ msgstr "Novērtēšana"
 #: src/osha/oira/client/templates/module_actionplan.pt:72
 #: src/osha/oira/client/templates/module_evaluation.pt:58
 #: src/osha/oira/client/templates/module_identification.pt:78
-#: src/osha/oira/client/templates/profile.pt:80
+#: src/osha/oira/client/templates/profile.pt:81
 #: src/osha/oira/client/templates/report.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:283
 #: src/osha/oira/client/templates/report_company.pt:74
@@ -1150,7 +1132,7 @@ msgstr "Novērtēšana"
 #: src/osha/oira/client/templates/module_actionplan.pt:77
 #: src/osha/oira/client/templates/module_evaluation.pt:66
 #: src/osha/oira/client/templates/module_identification.pt:83
-#: src/osha/oira/client/templates/profile.pt:83
+#: src/osha/oira/client/templates/profile.pt:84
 #: src/osha/oira/client/templates/report.pt:68
 #: src/osha/oira/client/templates/report_actionplan.pt:288
 #: src/osha/oira/client/templates/report_company.pt:79
@@ -1170,7 +1152,7 @@ msgstr "Rīcības plāns"
 #: src/osha/oira/client/templates/module_actionplan.pt:78
 #: src/osha/oira/client/templates/module_evaluation.pt:67
 #: src/osha/oira/client/templates/module_identification.pt:84
-#: src/osha/oira/client/templates/profile.pt:84
+#: src/osha/oira/client/templates/profile.pt:85
 #: src/osha/oira/client/templates/report.pt:69
 #: src/osha/oira/client/templates/report_actionplan.pt:289
 #: src/osha/oira/client/templates/report_company.pt:80
@@ -1190,7 +1172,7 @@ msgstr "Rīcības plāns"
 #: src/osha/oira/client/templates/module_actionplan.pt:86
 #: src/osha/oira/client/templates/module_evaluation.pt:72
 #: src/osha/oira/client/templates/module_identification.pt:89
-#: src/osha/oira/client/templates/profile.pt:87
+#: src/osha/oira/client/templates/profile.pt:88
 #: src/osha/oira/client/templates/report.pt:74
 #: src/osha/oira/client/templates/report_actionplan.pt:294
 #: src/osha/oira/client/templates/report_company.pt:85
@@ -1210,7 +1192,7 @@ msgstr "Pārskats"
 #: src/osha/oira/client/templates/module_actionplan.pt:87
 #: src/osha/oira/client/templates/module_evaluation.pt:73
 #: src/osha/oira/client/templates/module_identification.pt:90
-#: src/osha/oira/client/templates/profile.pt:88
+#: src/osha/oira/client/templates/profile.pt:89
 #: src/osha/oira/client/templates/report.pt:75
 #: src/osha/oira/client/templates/report_actionplan.pt:295
 #: src/osha/oira/client/templates/report_company.pt:86
@@ -1230,7 +1212,7 @@ msgstr "Pārskats"
 #: src/osha/oira/client/templates/module_actionplan.pt:94
 #: src/osha/oira/client/templates/module_evaluation.pt:79
 #: src/osha/oira/client/templates/module_identification.pt:97
-#: src/osha/oira/client/templates/profile.pt:94
+#: src/osha/oira/client/templates/profile.pt:95
 #: src/osha/oira/client/templates/report.pt:82
 #: src/osha/oira/client/templates/report_actionplan.pt:307
 #: src/osha/oira/client/templates/report_company.pt:93
@@ -1245,13 +1227,12 @@ msgid "navigation_logout"
 msgstr "Iziet"
 
 #. Default: Sessions
-#. Default: Surveys
 #: src/osha/oira/client/templates/actionplan.pt:93
 #: src/osha/oira/client/templates/identification.pt:65
 #: src/osha/oira/client/templates/module_actionplan.pt:95
 #: src/osha/oira/client/templates/module_evaluation.pt:80
 #: src/osha/oira/client/templates/module_identification.pt:98
-#: src/osha/oira/client/templates/profile.pt:95
+#: src/osha/oira/client/templates/profile.pt:96
 #: src/osha/oira/client/templates/report.pt:83
 #: src/osha/oira/client/templates/report_actionplan.pt:308
 #: src/osha/oira/client/templates/report_company.pt:94
@@ -1271,7 +1252,7 @@ msgstr "Sesijas"
 #: src/osha/oira/client/templates/module_actionplan.pt:96
 #: src/osha/oira/client/templates/module_evaluation.pt:81
 #: src/osha/oira/client/templates/module_identification.pt:99
-#: src/osha/oira/client/templates/profile.pt:96
+#: src/osha/oira/client/templates/profile.pt:97
 #: src/osha/oira/client/templates/register.pt:41
 #: src/osha/oira/client/templates/report.pt:84
 #: src/osha/oira/client/templates/report_actionplan.pt:309
@@ -1307,6 +1288,7 @@ msgstr "Statuss"
 #: src/osha/oira/client/templates/module_actionplan.pt:98
 #: src/osha/oira/client/templates/module_evaluation.pt:83
 #: src/osha/oira/client/templates/module_identification.pt:101
+#: src/osha/oira/client/templates/profile.pt:98
 #: src/osha/oira/client/templates/report.pt:86
 #: src/osha/oira/client/templates/report_actionplan.pt:311
 #: src/osha/oira/client/templates/report_company.pt:97
@@ -1452,7 +1434,7 @@ msgstr "Nē"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_identification.pt:50
-#: src/osha/oira/client/templates/profile.pt:63
+#: src/osha/oira/client/templates/profile.pt:64
 #: src/osha/oira/client/templates/report.pt:38
 #: src/osha/oira/client/templates/report_company.pt:54
 #: src/osha/oira/client/templates/risk_evaluation.pt:120
@@ -1489,8 +1471,8 @@ msgstr ""
 "Norādīt vairākas uzņēmuma struktūrvienības, filiāles, veikalus u.c. Šie "
 "saistītie riski tiks atkārtoti katram jūsu ievadītajam nosaukumam."
 
-#: src/osha/oira/client/templates/profile.pt:37
-#: src/osha/oira/client/templates/profile.pt:43
+#: src/osha/oira/client/templates/profile.pt:38
+#: src/osha/oira/client/templates/profile.pt:44
 #: src/osha/oira/client/templates/update.pt:32
 #: src/osha/oira/client/templates/update.pt:38
 #: src/osha/oira/content/templates/profilequestion_add.pt:62
@@ -1500,8 +1482,8 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: src/osha/oira/client/templates/profile.pt:38
-#: src/osha/oira/client/templates/profile.pt:44
+#: src/osha/oira/client/templates/profile.pt:39
+#: src/osha/oira/client/templates/profile.pt:45
 #: src/osha/oira/client/templates/update.pt:33
 #: src/osha/oira/client/templates/update.pt:39
 #: src/osha/oira/content/templates/profilequestion_add.pt:63
@@ -1511,8 +1493,8 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: src/osha/oira/client/templates/profile.pt:53
 #: src/osha/oira/client/templates/profile.pt:54
+#: src/osha/oira/client/templates/profile.pt:55
 #: src/osha/oira/client/templates/update.pt:48
 #: src/osha/oira/client/templates/update.pt:49
 #: src/osha/oira/content/templates/profilequestion_add.pt:94
@@ -1520,7 +1502,7 @@ msgstr ""
 msgid "Remove"
 msgstr "Noņemt"
 
-#: src/osha/oira/client/templates/profile.pt:57
+#: src/osha/oira/client/templates/profile.pt:58
 #: src/osha/oira/client/templates/update.pt:52
 #: src/osha/oira/content/templates/profilequestion_add.pt:96
 msgid "Add another item"
@@ -1663,7 +1645,7 @@ msgstr ""
 #. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:180
+#: src/osha/oira/client/templates/webhelpers.pt:168
 msgid "top5_risk_not_present"
 msgstr ""
 "Šāds risks jūsu organizācijā nepastāv, taču sektora organizācija to uzskata "
@@ -1754,55 +1736,51 @@ msgstr "Izlaist šo soli"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:192
+#: src/osha/oira/client/templates/webhelpers.pt:180
 msgid "warn_risk_present"
 msgstr "Jūs uz iepriekšējo apgalvojumu atbildējāt noliedzoši."
 
-#: src/osha/oira/client/templates/report_landing.pt:20
+#: src/osha/oira/client/templates/report_landing.pt:21
 msgid "Download and print your report"
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:22
+#: src/osha/oira/client/templates/report_landing.pt:23
 msgid "not"
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:22
+#: src/osha/oira/client/templates/report_landing.pt:23
 msgid ""
 "Save the report on your pc and print it. You can also modify it or add more "
 "information. Please note that changes made on your pc will ${not} be saved "
 "in the OiRA tool"
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:23
+#: src/osha/oira/client/templates/report_landing.pt:24
 msgid "Use the report to:"
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:26
+#: src/osha/oira/client/templates/report_landing.pt:27
 msgid "Provide evidence for supervisory authorities."
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:27
+#: src/osha/oira/client/templates/report_landing.pt:28
 msgid ""
 "Pass information to the people concerned (workers, safety reps, employer, "
 "OSH experts, ...)"
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:28
+#: src/osha/oira/client/templates/report_landing.pt:29
 msgid "Monitor and assess whether necessary measures have been introduced."
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:29
+#: src/osha/oira/client/templates/report_landing.pt:30
 msgid ""
 "Record any revision if circumstances change (new machines, new workers, as a "
 "result of findings of any accident investigations, etc.)"
 msgstr ""
 
-#: src/osha/oira/client/templates/report_landing.pt:33
-msgid "Download the full report"
-msgstr ""
-
 #: src/osha/oira/client/templates/report_landing.pt:35
-msgid "Full report"
+msgid "Download the full report"
 msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:38
@@ -1836,10 +1814,6 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:51
 msgid "Download the action plan"
-msgstr ""
-
-#: src/osha/oira/client/templates/report_landing.pt:52
-msgid "Action plan"
 msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:54
@@ -1884,27 +1858,27 @@ msgid "button_add"
 msgstr "Pievienot"
 
 #. Default: Select one or more of the known common measures provided.
-#: src/osha/oira/client/templates/risk_actionplan.pt:48
+#: src/osha/oira/client/templates/risk_actionplan.pt:47
 msgid "label_select_measure"
 msgstr "Atlasiet vienu vai vairākus zināmos, plaši izplatītos līdzekļus."
 
 #. Default: Delete
-#: src/osha/oira/client/templates/risk_actionplan.pt:67
+#: src/osha/oira/client/templates/risk_actionplan.pt:66
 #: src/osha/oira/client/templates/sessions.pt:40
 msgid "label_delete"
 msgstr "Dzēst"
 
 #. Default: Add another measure
-#: src/osha/oira/client/templates/risk_actionplan.pt:72
+#: src/osha/oira/client/templates/risk_actionplan.pt:71
 msgid "label_add"
 msgstr "Pievienot citu pasâkumu"
 
 #. Default: Description
-#: src/osha/oira/client/templates/risk_actionplan.pt:86
+#: src/osha/oira/client/templates/risk_actionplan.pt:85
 msgid "label_description"
 msgstr "Apraksts"
 
-#: src/osha/oira/client/templates/risk_actionplan.pt:87
+#: src/osha/oira/client/templates/risk_actionplan.pt:86
 msgid "Standard solutions"
 msgstr "Standarta risinājumi"
 
@@ -1916,7 +1890,7 @@ msgstr "Standarta risinājumi"
 #. OSH knowledge or training and/or consultation of OSH guidance required”, or
 #. “OSH expert”. You can also describe here any other additional requirement
 #. (if any).
-#: src/osha/oira/client/templates/risk_actionplan.pt:88
+#: src/osha/oira/client/templates/risk_actionplan.pt:87
 msgid "actionplan_measure_tooltip"
 msgstr ""
 "Aprakstiet: 1) savu vispārējo pieeju, lai risku novērstu vai samazinātu (ja "
@@ -1932,7 +1906,7 @@ msgstr ""
 #. implementation of this measure. This person will have the authority to take
 #. the steps described in the Plan and/or the responsibility to ensure that
 #. they are carried out.
-#: src/osha/oira/client/templates/risk_actionplan.pt:120
+#: src/osha/oira/client/templates/risk_actionplan.pt:119
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
 "Uzticiet kādam uzņēmuma darbiniekam atbildību par šī līdzekļa ieviešanu. Šim "
@@ -1942,7 +1916,7 @@ msgstr ""
 #. Default: Although some measures do not cost any money, most do. The measures
 #. should therefore be budgeted for; include them in the annual budget round if
 #. necessary.
-#: src/osha/oira/client/templates/risk_actionplan.pt:125
+#: src/osha/oira/client/templates/risk_actionplan.pt:124
 msgid "actionplan_measure_budget_tooltip"
 msgstr ""
 "Lai gan daži riska novēršanas līdzekļi ir pieejami par brīvu, lielākā daļa "
@@ -1950,12 +1924,12 @@ msgstr ""
 "iekļaujiet šos līdzekļus ikgadējā budžetā."
 
 #. Default: Please enter the budget in whole Euros.
-#: src/osha/oira/client/templates/risk_actionplan.pt:127
+#: src/osha/oira/client/templates/risk_actionplan.pt:126
 msgid "error_invalid_budget"
 msgstr "Lūdzu, ievadiet budžetu eiro valūtā, pilnos skaitļos."
 
 #. Default: Day
-#: src/osha/oira/client/templates/risk_actionplan.pt:137
+#: src/osha/oira/client/templates/risk_actionplan.pt:136
 msgid "label_day"
 msgstr "Diena"
 
@@ -2204,6 +2178,19 @@ msgstr "Vai tiešām vēlaties dzēst šo sesiju? Šī darbība ir neatgriezenis
 msgid "label_start_survey"
 msgstr "Sākt"
 
+#. Default: OiRA Tool was updated
+#: src/osha/oira/client/templates/update.pt:17
+msgid "title_updated"
+msgstr "OiRA rīks tika atjaunināts."
+
+#. Default: This OiRA tool has changed since you last accessed it. Before you
+#. can continue, you need to update to these changes.
+#: src/osha/oira/client/templates/update.pt:19
+msgid "expl_update"
+msgstr ""
+"OiRA rīks ir mainījies, kopš jūs tam pēdējoreiz piekļuvāt. Pirms turpināt, "
+"jums ir jāievieš šie atjauninājumi."
+
 #. Default: Please verify if the profile is still accurate.
 #: src/osha/oira/client/templates/update.pt:24
 msgid "verify_profile"
@@ -2224,64 +2211,64 @@ msgstr "Riska interaktīvā"
 msgid "oira_name_line_2"
 msgstr "novērtēšana tiešsaistē"
 
-#: src/osha/oira/client/templates/webhelpers.pt:117
+#: src/osha/oira/client/templates/webhelpers.pt:105
 msgid "Unvisited"
 msgstr ""
 
-#: src/osha/oira/client/templates/webhelpers.pt:118
+#: src/osha/oira/client/templates/webhelpers.pt:106
 msgid "Postponed"
 msgstr ""
 
-#: src/osha/oira/client/templates/webhelpers.pt:119
+#: src/osha/oira/client/templates/webhelpers.pt:107
 msgid "Unanswered"
 msgstr ""
 
-#: src/osha/oira/client/templates/webhelpers.pt:120
+#: src/osha/oira/client/templates/webhelpers.pt:108
 msgid "Answered"
 msgstr ""
 
 #. Default: Produced by ${EU-OSHA}.
-#: src/osha/oira/client/templates/webhelpers.pt:135
+#: src/osha/oira/client/templates/webhelpers.pt:123
 msgid "appendix_produced_by"
 msgstr "Autors: ${EU-OSHA}."
 
 #. Default: About
-#: src/osha/oira/client/templates/webhelpers.pt:138
+#: src/osha/oira/client/templates/webhelpers.pt:126
 msgid "appendix_about"
 msgstr "Informācija"
 
 #. Default: Privacy
-#: src/osha/oira/client/templates/webhelpers.pt:140
+#: src/osha/oira/client/templates/webhelpers.pt:128
 msgid "appendix_privacy"
 msgstr "Privātums"
 
 #. Default: Disclaimer
-#: src/osha/oira/client/templates/webhelpers.pt:142
+#: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "appendix_disclaimer"
 msgstr "Atruna"
 
 #. Default: GPL License
-#: src/osha/oira/client/templates/webhelpers.pt:144
+#: src/osha/oira/client/templates/webhelpers.pt:132
 msgid "appendix_gpl_license"
 msgstr "GPL licence"
 
-#: src/osha/oira/client/templates/webhelpers.pt:146
+#: src/osha/oira/client/templates/webhelpers.pt:134
 msgid "CC License"
 msgstr "CC licence"
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:207
-#: src/osha/oira/client/templates/webhelpers.pt:221
+#: src/osha/oira/client/templates/webhelpers.pt:195
+#: src/osha/oira/client/templates/webhelpers.pt:209
 msgid "header_legal_references"
 msgstr "Juridiski dokumenti un politikas nostādnes atsaucei"
 
 #. Default: Hide
-#: src/osha/oira/client/templates/webhelpers.pt:224
+#: src/osha/oira/client/templates/webhelpers.pt:212
 msgid "action_hide"
 msgstr "Slēpt"
 
 #. Default: Show
-#: src/osha/oira/client/templates/webhelpers.pt:228
+#: src/osha/oira/client/templates/webhelpers.pt:216
 msgid "action_show"
 msgstr "Rādīt"
 

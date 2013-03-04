@@ -4,17 +4,21 @@ Changelog
 2.0b3 (unreleased)
 ------------------
 
-- Add upgrade step to set default value for 'time' column used for statistics.
-  Fixes error upon client login under certain circumstances.
-- Update HELP trnaslations for FR and EL. #5648
-- Fix unicode error when adding profiles in client. #4403
-
 Upgrade notes
 ~~~~~~~~~~~~~
 
 This release updates the profile version to *6*. Please use the upgrade feature
 in ``portal_setup`` to upgrade the ``osha.oira:default`` profile to this
 version.
+
+Bugfixes
+~~~~~~~~
+
+- Correct display of error messages on the risk action plan form.
+- Add upgrade step to set default value for ``time`` column used for statistics.
+  Fixes error upon client login under certain circumstances.
+- Update HELP trnaslations for FR and EL. #5648
+- Fix unicode error when adding profiles in client. #4403
 
 
 2.0b2 (2013-02-19)

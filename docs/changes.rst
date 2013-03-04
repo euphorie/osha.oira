@@ -6,6 +6,8 @@ Changelog
 
 - Add upgrade step to set default value for 'time' column used for statistics.
   Fixes error upon client login under certain circumstances.
+- Update HELP trnaslations for FR and EL. #5648
+- Fix unicode error when adding profiles in client. #4403
 
 Upgrade notes
 ~~~~~~~~~~~~~

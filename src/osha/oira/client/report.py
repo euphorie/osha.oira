@@ -31,7 +31,8 @@ class ReportView(report.ReportView):
             return
 
 
-COLUMN_ORDER = ['title', 'priority', 'action_plan', 'planning_end',
+COLUMN_ORDER = ['title', 'priority', 'action_plan', 'prevention_plan',
+                'requirements', 'planning_end',
                 'responsible', 'budget', 'number', 'comment']
 
 

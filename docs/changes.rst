@@ -11,6 +11,14 @@ This release updates the profile version to *6*. Please use the upgrade feature
 in ``portal_setup`` to upgrade the ``osha.oira:default`` profile to this
 version.
 
+Feature changes
+~~~~~~~~~~~~~~~
+
+- Change ordering for the action plan timeline to sort on risk priority
+  instead of measure start date. This fixes `ticket 87
+  <https://github.com/euphorie/Euphorie/issues/87>`_.
+
+
 Bugfixes
 ~~~~~~~~
 

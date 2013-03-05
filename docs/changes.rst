@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0b3 (unreleased)
+2.0b3 - unreleased
 ------------------
 
 Upgrade notes
@@ -31,12 +31,19 @@ Bugfixes
 - Fix unicode error when adding profiles in client. #4403
 
 
-2.0b2 (2013-02-19)
-------------------
+2.0b2 - February 19, 2013
+-------------------------
+
+Feature changes
+~~~~~~~~~~~~~~~
 
 - Improve styling of report landing page.
-- Include nuplone directory in MANIFEST.in
-- Fixed rendering of the custom homepage.
+
+Bugfixes
+~~~~~~~~
+
+- Include nuplone directory in MANIFEST.in.
+- Fixed rendering of the custom homepage..
 
 
 2.0b1 - February 15, 2013

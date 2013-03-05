@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0b3 - unreleased
-------------------
+2.0b3 - March 5, 2013
+---------------------
 
 Upgrade notes
 ~~~~~~~~~~~~~
@@ -10,6 +10,8 @@ Upgrade notes
 This release updates the profile version to *6*. Please use the upgrade feature
 in ``portal_setup`` to upgrade the ``osha.oira:default`` profile to this
 version.
+
+The minimum required Euphorie version is now *6.0b2*.
 
 Feature changes
 ~~~~~~~~~~~~~~~

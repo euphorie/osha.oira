@@ -403,9 +403,9 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
                 )
         employer = t(_("oira_consultation_employer",
-                    default="On the behalf of the employer:"))
+                    default="On behalf of the employer:"))
         workers = t(_("oira_consultation_workers",
-                    default="On the behalf of the workers:"))
+                    default="On behalf of the workers:"))
 
         p.append(employer, TAB, TAB, TAB, TAB, workers, LINE, LINE)
         c = Cell(p, FramePropertySet(no_edge, thin_edge, no_edge, thin_edge))

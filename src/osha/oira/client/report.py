@@ -1,7 +1,10 @@
 from five import grok
+from z3c.saconfig import Session
+from sqlalchemy import sql
 from euphorie.ghost import PathGhost
 from euphorie.client import report
 from euphorie.client.session import SessionManager
+from euphorie.client import model
 from .interfaces import IOSHAReportPhaseSkinLayer
 from .. import _
 
@@ -58,3 +61,30 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             key=lambda d, co=COLUMN_ORDER: co.index(d[1]))
     columns.insert(-1, (None, None, _('report_timeline_progress',
         default=u'Status (planned, in process, implemented)')))
+
+    def get_measures(self):
+        """Find all data that should be included in the report.
+
+        The data is returned as a list of tuples containing a
+        :py:class:`Risk <euphorie.client.model.Risk>` and
+        :py:class:`ActionPlan <euphorie.client.model.ActionPlan>`. Each
+        entry in the list will correspond to a row in the generated Excel
+        file.
+
+        This implementation differs from Euphorie in its ordering:
+        it sorts on risk priority instead of start date.
+        """
+        query = Session.query(model.SurveyTreeItem, model.ActionPlan)\
+                .outerjoin(model.ActionPlan)\
+                .filter(model.SurveyTreeItem.session == self.session)\
+                .filter(sql.not_(model.SKIPPED_PARENTS))\
+                .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
+                                model.RISK_PRESENT_OR_TOP5_FILTER))\
+                .join(model.Risk)\
+                .order_by(
+                        sql.case(
+                            value=model.Risk.priority,
+                            whens={'high': 0, 'medium': 1},
+                            else_=2),
+                        model.Risk.path)
+        return query.all()

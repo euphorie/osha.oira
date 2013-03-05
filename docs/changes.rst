@@ -1,11 +1,17 @@
 Changelog
 =========
 
-2.0b3 (unreleased)
-------------------
+2.0b4 - Unreleased
+---------------------
 
-- Add upgrade step to set default value for 'time' column used for statistics.
-  Fixes error upon client login under certain circumstances.
+Bugfixes
+~~~~~~~~
+
+- ...
+
+
+2.0b3 - March 5, 2013
+---------------------
 
 Upgrade notes
 ~~~~~~~~~~~~~
@@ -14,13 +20,41 @@ This release updates the profile version to *6*. Please use the upgrade feature
 in ``portal_setup`` to upgrade the ``osha.oira:default`` profile to this
 version.
 
+The minimum required Euphorie version is now *6.0b2*.
 
-2.0b2 (2013-02-19)
-------------------
+Feature changes
+~~~~~~~~~~~~~~~
+
+- Change ordering for the action plan timeline to sort on risk priority
+  instead of measure start date. This fixes `ticket 87
+  <https://github.com/euphorie/Euphorie/issues/87>`_.
+
+- Add action and expertise information for measures to the timeline report.
+  This fixes `ticket 85 <https://github.com/euphorie/Euphorie/issues/85>`_.
+
+Bugfixes
+~~~~~~~~
+
+- Correct display of error messages on the risk action plan form.
+- Add upgrade step to set default value for ``time`` column used for statistics.
+  Fixes error upon client login under certain circumstances.
+- Update HELP trnaslations for FR and EL. #5648
+- Fix unicode error when adding profiles in client. #4403
+
+
+2.0b2 - February 19, 2013
+-------------------------
+
+Feature changes
+~~~~~~~~~~~~~~~
 
 - Improve styling of report landing page.
-- Include nuplone directory in MANIFEST.in
-- Fixed rendering of the custom homepage.
+
+Bugfixes
+~~~~~~~~
+
+- Include nuplone directory in MANIFEST.in.
+- Fixed rendering of the custom homepage..
 
 
 2.0b1 - February 15, 2013

@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '2.0b3.dev0'
+version = '2.0b4.dev0'
 
 tests_require = [
         "Euphorie [tests]",
@@ -32,7 +32,7 @@ setup(name='osha.oira',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'Euphorie >=6.0b1',
+          'Euphorie >=6.0b2',
           'NuPlone',
           'Products.CMFCore',
           'Products.statusmessages',

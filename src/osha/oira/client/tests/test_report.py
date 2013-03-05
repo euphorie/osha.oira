@@ -115,3 +115,52 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
         self.assertEqual(browser.getControl(name="form.widgets.conductor").value, ["staff"])
         self.assertEqual(browser.getControl(name="form.widgets.referer").value, ["trade-union"])
         self.assertEqual(browser.getControl(name="form.widgets.workers_participated").value, ["True"])
+
+
+class ActionPlanTimelineTests(OiRAFunctionalTestCase):
+    def ActionPlanTimeline(self, *a, **kw):
+        from ..report import ActionPlanTimeline
+        return ActionPlanTimeline(*a, **kw)
+
+    def createSurveySession(self):
+        from z3c.saconfig import Session
+        from euphorie.client import model
+        self.sqlsession = Session()
+        account = model.Account(loginname=u"jane", password=u"secret")
+        self.sqlsession.add(account)
+        self.session = model.SurveySession(title=u"Session",
+                zodb_path="nl/dining/survey", account=account)
+        self.sqlsession.add(self.session)
+        self.sqlsession.flush()
+        return self.session
+
+    def test_get_measures_order_by_priority(self):
+        import datetime
+        from euphorie.client import model
+        session = self.createSurveySession()
+        module = model.Module(title=u'Root', module_id='1', zodb_path='1',
+                skip_children=False)
+        session.addChild(module)
+        module.addChild(model.Risk(
+            title=u'Risk 1', risk_id='2', zodb_path='1/2', type='risk',
+            priority=u'low', identification='no',
+            action_plans=[model.ActionPlan(
+                action_plan=u"Do something awesome",
+                planning_start=datetime.date(2013, 3, 4))]))
+        module.addChild(model.Risk(
+            title=u'Risk 2', risk_id='3', zodb_path='1/3', type='risk',
+            priority=u'high', identification='no',
+            action_plans=[model.ActionPlan(
+                action_plan=u"Do something awesome",
+                planning_start=datetime.date(2013, 5, 2))]))
+        module.addChild(model.Risk(
+            title=u'Risk 3', risk_id='4', zodb_path='1/4', type='risk',
+            priority=u'medium', identification='no',
+            action_plans=[model.ActionPlan(
+                action_plan=u"Do something awesome",
+                planning_start=datetime.date(2013, 4, 1))]))
+        view = self.ActionPlanTimeline(None, None)
+        view.session = self.session
+        self.assertEqual(
+                [risk.priority for (risk, measure) in view.get_measures()],
+                [u'high', u'medium', u'low'])

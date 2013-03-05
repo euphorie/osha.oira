@@ -75,12 +75,12 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         it sorts on risk priority instead of start date.
         """
         query = Session.query(model.SurveyTreeItem, model.ActionPlan)\
-                .join((model.Risk, model.Risk.id == model.SurveyTreeItem.id))\
                 .outerjoin(model.ActionPlan)\
                 .filter(model.SurveyTreeItem.session == self.session)\
                 .filter(sql.not_(model.SKIPPED_PARENTS))\
                 .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
                                 model.RISK_PRESENT_OR_TOP5_FILTER))\
+                .join(model.Risk)\
                 .order_by(
                         sql.case(
                             value=model.Risk.priority,

@@ -4,10 +4,20 @@ Changelog
 2.0b4 - Unreleased
 ---------------------
 
+
+Feature changes
+~~~~~~~~~~~~~~~
+
+- Add new Spanish translation.
+
+- Update French and Greek translation.
+
+
 Bugfixes
 ~~~~~~~~
 
-- ...
+- Fix grammar for field labels in the company information form.
+
 
 
 2.0b3 - March 5, 2013

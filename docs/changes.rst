@@ -18,6 +18,8 @@ Bugfixes
 
 - Fix grammar for field labels in the company information form.
 
+- Correct the navigation tree legend: the description for answered risks was
+  not correct.
 
 
 2.0b3 - March 5, 2013

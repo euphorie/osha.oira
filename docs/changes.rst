@@ -21,6 +21,8 @@ Bugfixes
 - Correct the navigation tree legend: the description for answered risks was
   not correct.
 
+- Fixed IE9 navtree rendering bug.
+
 
 2.0b3 - March 5, 2013
 ---------------------

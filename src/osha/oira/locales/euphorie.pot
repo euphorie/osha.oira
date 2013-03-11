@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-03-05 14:33+0100\n"
+"POT-Creation-Date: 2013-03-11 19:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1435,10 +1435,9 @@ msgstr ""
 msgid "report_intro"
 msgstr ""
 
-#. Default: Please leave any comments you may have on the question above in
-#. this field
+#. Default: Please leave any extra comments that should be included in the
+#. report in this field.
 #: src/osha/oira/client/templates/report.pt:28
-#: src/osha/oira/client/templates/risk_actionplan.pt:217
 msgid "label_report_comment"
 msgstr ""
 
@@ -1515,7 +1514,7 @@ msgstr ""
 #. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:168
+#: src/osha/oira/client/templates/webhelpers.pt:166
 msgid "top5_risk_not_present"
 msgstr ""
 
@@ -1596,7 +1595,7 @@ msgstr ""
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:180
+#: src/osha/oira/client/templates/webhelpers.pt:178
 msgid "warn_risk_present"
 msgstr ""
 
@@ -1802,6 +1801,14 @@ msgstr ""
 msgid "error_invalid_year"
 msgstr ""
 
+#. Default: Please leave any comments you may have on the question above in
+#. this field. These comments will be used in the action plan.
+#: src/osha/oira/client/templates/risk_actionplan.pt:217
+#: src/osha/oira/client/templates/risk_evaluation.pt:124
+#: src/osha/oira/client/templates/risk_identification.pt:41
+msgid "label_comment"
+msgstr ""
+
 #. Default: What is the chance of this risk occurring?
 #: src/osha/oira/client/templates/risk_evaluation.pt:28
 msgid "header_risk_probability"
@@ -1968,13 +1975,6 @@ msgstr ""
 msgid "priority_high"
 msgstr ""
 
-#. Default: Please leave any comments you may have on the question above in
-#. this field. These comments will be used in the action plan.
-#: src/osha/oira/client/templates/risk_evaluation.pt:124
-#: src/osha/oira/client/templates/risk_identification.pt:41
-msgid "label_comment"
-msgstr ""
-
 #. Default: Not applicable
 #: src/osha/oira/client/templates/risk_identification.pt:24
 msgid "label_not_applicable"
@@ -2069,64 +2069,64 @@ msgstr ""
 msgid "oira_name_line_2"
 msgstr ""
 
-#: src/osha/oira/client/templates/webhelpers.pt:105
+#: src/osha/oira/client/templates/webhelpers.pt:104
 msgid "Unvisited"
 msgstr ""
 
-#: src/osha/oira/client/templates/webhelpers.pt:106
+#: src/osha/oira/client/templates/webhelpers.pt:105
 msgid "Postponed"
 msgstr ""
 
-#: src/osha/oira/client/templates/webhelpers.pt:107
-msgid "Unanswered"
+#: src/osha/oira/client/templates/webhelpers.pt:106
+msgid "Risk not present"
 msgstr ""
 
-#: src/osha/oira/client/templates/webhelpers.pt:108
-msgid "Answered"
+#: src/osha/oira/client/templates/webhelpers.pt:107
+msgid "Risk present"
 msgstr ""
 
 #. Default: Produced by ${EU-OSHA}.
-#: src/osha/oira/client/templates/webhelpers.pt:123
+#: src/osha/oira/client/templates/webhelpers.pt:121
 msgid "appendix_produced_by"
 msgstr ""
 
 #. Default: About
-#: src/osha/oira/client/templates/webhelpers.pt:126
+#: src/osha/oira/client/templates/webhelpers.pt:124
 msgid "appendix_about"
 msgstr ""
 
 #. Default: Privacy
-#: src/osha/oira/client/templates/webhelpers.pt:128
+#: src/osha/oira/client/templates/webhelpers.pt:126
 msgid "appendix_privacy"
 msgstr ""
 
 #. Default: Disclaimer
-#: src/osha/oira/client/templates/webhelpers.pt:130
+#: src/osha/oira/client/templates/webhelpers.pt:128
 msgid "appendix_disclaimer"
 msgstr ""
 
 #. Default: GPL License
-#: src/osha/oira/client/templates/webhelpers.pt:132
+#: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "appendix_gpl_license"
 msgstr ""
 
-#: src/osha/oira/client/templates/webhelpers.pt:134
+#: src/osha/oira/client/templates/webhelpers.pt:132
 msgid "CC License"
 msgstr ""
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:195
-#: src/osha/oira/client/templates/webhelpers.pt:209
+#: src/osha/oira/client/templates/webhelpers.pt:193
+#: src/osha/oira/client/templates/webhelpers.pt:207
 msgid "header_legal_references"
 msgstr ""
 
 #. Default: Hide
-#: src/osha/oira/client/templates/webhelpers.pt:212
+#: src/osha/oira/client/templates/webhelpers.pt:210
 msgid "action_hide"
 msgstr ""
 
 #. Default: Show
-#: src/osha/oira/client/templates/webhelpers.pt:216
+#: src/osha/oira/client/templates/webhelpers.pt:214
 msgid "action_show"
 msgstr ""
 

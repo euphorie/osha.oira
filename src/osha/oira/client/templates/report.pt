@@ -29,7 +29,7 @@
                 name="comment:utf8:ustring" 
                 class="span-15" 
                 rows="5"
-                placeholder="Please leave any comments you may have on the question above in this field"
+                placeholder="Please leave any extra comments that should be included in the report in this field."
                 i18n:attributes="placeholder label_report_comment"
                 tal:content="view/session/report_comment">
             </textarea>

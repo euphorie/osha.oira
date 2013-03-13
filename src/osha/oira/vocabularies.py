@@ -63,19 +63,24 @@ class ReportToolsVocabulary(object):
     """ """
     grok.implements(IVocabularyFactory)
 
-    def getToolsInCountry(self, context):
+    def getToolsInSector(self, sector):
         tools = []
-        for sector in context.values():
+        for obj in sector.values():
+            if obj.portal_type == 'euphorie.survey':
+                tools.append(
+                    '/'.join(obj.getPhysicalPath()[-3:]))
+            elif obj.portal_type == 'euphorie.surveygroup':
+                tools.extend(
+                    ['/'.join(survey.getPhysicalPath()[-4:])
+                        for survey in obj.objectValues()])
+        return tools
+
+    def getToolsInCountry(self, country):
+        tools = []
+        for sector in country.values():
             if not ISector.providedBy(sector):
                 continue
-            for obj in sector.values():
-                if obj.portal_type == 'euphorie.survey':
-                    tools.append(
-                        '/'.join(obj.getPhysicalPath()[-3:]))
-                elif obj.portal_type == 'euphorie.surveygroup':
-                    tools.extend(
-                        ['/'.join(survey.getPhysicalPath()[-4:])
-                            for survey in obj.objectValues()])
+            tools += self.getToolsInSector(sector)
         return tools
 
     def __call__(self, context):
@@ -87,6 +92,8 @@ class ReportToolsVocabulary(object):
                 tools += self.getToolsInCountry(country)
         elif ICountry.providedBy(context):
             tools += self.getToolsInCountry(context)
+        elif ISector.providedBy(context):
+            tools += self.getToolsInSector(context)
         return SimpleVocabulary.fromValues(tools)
 
 grok.global_utility(ReportToolsVocabulary,

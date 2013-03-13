@@ -63,7 +63,7 @@ class TestUtils(TestCase):
                  r('1.2', 0),
                  m('2', 1),
                  m('2.1', 2),
-                 f('2.1.1', 3),
+                 m('2.1.1', 3),
                  r('2.1.1.1', 9, [ap])]
         unactioned_nodes = utils.get_unactioned_nodes(nodes)
         self.assertEquals([n.id for n in unactioned_nodes], ['1', '1.1', '1.2'])

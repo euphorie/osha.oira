@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      i18n:domain="euphorie"
+      id="statistics"
+      metal:use-macro="context/@@layout/macros/layout">
+<head>
+<metal:title fill-slot="title">${view/label}</metal:title>
+</head>
+
+<body>
+<metal:title fill-slot="title"><tal:title>${view/label}</tal:title></metal:title>
+<metal:content fill-slot="content">
+    <form class="concise statisticsParametersForm" action="${request/getURL}" enctype="${view/enctype}" method="${view/method}" id="${view/id}">
+        <tal:loop_widgets repeat="widget view/widgets/values">
+            <fieldset tal:attributes="id string:fieldset-${widget/id}">
+                <tal:widget replace="structure widget/render" />
+            </fieldset>
+        </tal:loop_widgets>
+
+        <div class="buttonBar" tal:define="actions view/actions/values|nothing" tal:condition="actions">
+          <tal:action repeat="action actions" replace="structure action/render" />
+        </div>
+    </form>
+    </metal:content>
+    <metal:scripts fill-slot="scripts">
+    <script type="text/javascript">
+        function toggle(value) {
+            if (value == 'Country') {
+                jQuery('#fieldset-form-widgets-tools').hide();
+                jQuery('#fieldset-form-widgets-countries').show('fast');
+            } else if (value == 'Tool') {
+                jQuery('#fieldset-form-widgets-tools').show('fast');
+                jQuery('#fieldset-form-widgets-countries').hide();
+            } else {
+                jQuery('#fieldset-form-widgets-tools').hide();
+                jQuery('#fieldset-form-widgets-countries').hide();
+            } 
+        }
+        jQuery(document).ready(function () {
+            $('button.remove.jsOnly').hide();
+            $selected = jQuery('#fieldset-form-widgets-report_type input:radio:checked');
+            if ($selected.length) {
+                toggle($selected.attr('value'));
+            } else {
+                toggle();
+            }
+            jQuery('#fieldset-form-widgets-report_type input:radio').change(function (ev) {
+                toggle(ev.target.value);
+            });
+        });
+    </script>
+    </metal:scripts>
+  </body>
+</html>

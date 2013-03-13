@@ -200,12 +200,12 @@ class StatisticsMixin(object):
                         data['year'] = int(year)
                         errors.remove(e)
 
-        if data.get('report_type') == 'Tool':
+        if data.get('report_type') == 'tool':
             for e in errors:
                 if isinstance(e.error, RequiredMissing):
                     if e.field.__name__ == 'countries':
                         errors.remove(e)
-        elif data.get('report_type') == 'Country':
+        elif data.get('report_type') == 'country':
             for e in errors:
                 if isinstance(e.error, RequiredMissing):
                     if e.field.__name__ == 'tools':
@@ -302,6 +302,12 @@ class SectorStatistics(form.SchemaForm, StatisticsMixin):
     @button.buttonAndHandler(_(u"Submit"))
     def handleSubmit(self, action):
         return self.handle()
+
+    def updateWidgets(self):
+        super(SectorStatistics, self).updateWidgets()
+        report_type = self.widgets.get('report_type')
+        report_type.mode = 'hidden'
+        report_type.field.default = 'tool'
 
 
 class GlobalStatistics(form.SchemaForm, StatisticsMixin):

@@ -123,7 +123,7 @@ class ReportCountriesVocabulary(object):
                     context.id,
                     context.title): context.id
             })
-        return SimpleVocabulary.fromItems(countries.items())
+        return SimpleVocabulary.fromItems(sorted(countries.items()))
 
 grok.global_utility(ReportCountriesVocabulary,
                     name='osha.oira.report_countries')

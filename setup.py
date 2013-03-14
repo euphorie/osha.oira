@@ -44,7 +44,7 @@ setup(name='osha.oira',
       ],
       tests_require=tests_require,
       extras_require={
-          "tests": tests_require,
+          "tests": tests_require + ['plone.app.testing'],
       },
       entry_points="""
       [z3c.autoinclude.plugin]

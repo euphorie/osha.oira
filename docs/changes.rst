@@ -14,6 +14,9 @@ Feature changes
 
 - deactivated legend temporarily until wording is final. This fixes #7007
 
+- reactivated main navigation heading so that you can click back. 
+  This fixes #6076.
+
 Bugfixes
 ~~~~~~~~
 

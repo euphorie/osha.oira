@@ -62,28 +62,36 @@
       </ul>
     </div>
 
-    <ol id="steps">
+    <ol id="steps" tal:define="survey_url webhelpers/survey_url">
       <li class="complete" id="step-1">
-        <a href="${context/absolute_url}/start">
+        <a href="${survey_url}/start">
           <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_preparation">Preparation</tal:span>
           <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_preparation">Preparation</tal:span>
         </a>
       </li>
       <li class="complete" id="step-2">
-        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_identification">Identification</tal:span>
-        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_identification">Identification</tal:span>
+        <a href="${survey_url}/identification">
+          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_identification">Identification</tal:span>
+          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_identification">Identification</tal:span>
+        </a>
       </li>
       <li class="complete" id="step-3">
-        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_evaluation">Evaluation</tal:span>
-        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_evaluation">Evaluation</tal:span>
+        <a href="${survey_url}/evaluation">
+          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_evaluation">Evaluation</tal:span>
+          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_evaluation">Evaluation</tal:span>
+        </a>
       </li>
       <li class="complete" id="step-4">
-        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_action_plan">Action Plan</tal:span>
-        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_action_plan">Action Plan</tal:span>
+        <a href="${survey_url}/actionplan">
+          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_action_plan">Action Plan</tal:span>
+          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_action_plan">Action Plan</tal:span>
+        </a>
       </li>
       <li class="active current" id="step-5">
-        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_report">Report</tal:span>
-        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_report">Report</tal:span>
+        <a href="${survey_url}/report">
+          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_report">Report</tal:span>
+          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_report">Report</tal:span>
+        </a>
       </li>
     </ol>
 

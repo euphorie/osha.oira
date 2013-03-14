@@ -12,6 +12,7 @@ Feature changes
 
 - Update French and Greek translation.
 
+- deactivated legend temporarily until wording is final. This fixes #7007
 
 Bugfixes
 ~~~~~~~~

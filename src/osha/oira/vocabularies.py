@@ -59,7 +59,7 @@ grok.global_utility(ReportPeriodVocabulary,
                     name='osha.oira.report_period')
 
 
-class ReportToolsVocabulary(object):
+class ToolsVocabulary(object):
     """ """
     grok.implements(IVocabularyFactory)
 
@@ -96,11 +96,11 @@ class ReportToolsVocabulary(object):
             tools += self.getToolsInSector(context)
         return SimpleVocabulary.fromValues(tools)
 
-grok.global_utility(ReportToolsVocabulary,
-                    name='osha.oira.report_tools')
+grok.global_utility(ToolsVocabulary,
+                    name='osha.oira.tools')
 
 
-class ReportCountriesVocabulary(object):
+class CountriesVocabulary(object):
     """ """
     grok.implements(IVocabularyFactory)
 
@@ -125,6 +125,6 @@ class ReportCountriesVocabulary(object):
             })
         return SimpleVocabulary.fromItems(sorted(countries.items()))
 
-grok.global_utility(ReportCountriesVocabulary,
-                    name='osha.oira.report_countries')
+grok.global_utility(CountriesVocabulary,
+                    name='osha.oira.countries')
 

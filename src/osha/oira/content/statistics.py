@@ -72,14 +72,14 @@ class StatisticsSchema(form.Schema):
 
     countries = schema.Choice(
         title=_(u'label_report_countries', default=u'Country'),
-        vocabulary='osha.oira.report_countries',
+        vocabulary='osha.oira.countries',
         required=True,
     )
     form.widget(countries=SelectFieldWidget)
 
     tools = schema.Choice(
         title=_(u'label_report_tools', default=u'Tool'),
-        vocabulary='osha.oira.report_tools',
+        vocabulary='osha.oira.tools',
         required=True,
     )
     form.widget(tools=SelectFieldWidget)
@@ -213,13 +213,7 @@ class StatisticsMixin(object):
         errors = tuple(errors)
         return (data, errors)
 
-    def handle(self):
-        (data, errors) = self._extractData()
-        if errors:
-            IStatusMessage(self.request).add(
-                "Please correct the errors", type=u'error')
-            return
-
+    def getStatisticsServerURL(self, data):
         sprops = api.portal.get_tool(name='portal_properties').site_properties
         url = sprops.getProperty('birt_report_url')
         if not url:
@@ -227,7 +221,6 @@ class StatisticsMixin(object):
                 "birt_report_url not set, please contact an administrator",
                 type=u'error')
             return
-
         report_type = data.get('report_type')
         filename = self.filename[report_type]
         url = "&".join([url, '__report=statistics/%s' % filename])
@@ -249,6 +242,18 @@ class StatisticsMixin(object):
         url = "&".join([url,
                         'year=%d' % year, 'month=%d' % month, 'quarter=%d' %
                         quarter])
+        return url
+
+    def _handleSubmit(self):
+        (data, errors) = self._extractData()
+        if errors:
+            IStatusMessage(self.request).add(
+                "Please correct the errors", type=u'error')
+            return
+
+        url = self.getStatisticsServerURL(data)
+        if url is None:
+            return
         try:
             page = urllib2.urlopen(url)
         except urllib2.URLError:
@@ -282,7 +287,7 @@ class CountryStatistics(form.SchemaForm, StatisticsMixin):
 
     @button.buttonAndHandler(_(u"Submit"))
     def handleSubmit(self, action):
-        return self.handle()
+        return self._handleSubmit()
 
 
 class SectorStatistics(form.SchemaForm, StatisticsMixin):
@@ -301,7 +306,7 @@ class SectorStatistics(form.SchemaForm, StatisticsMixin):
 
     @button.buttonAndHandler(_(u"Submit"))
     def handleSubmit(self, action):
-        return self.handle()
+        return self._handleSubmit()
 
     def updateWidgets(self):
         super(SectorStatistics, self).updateWidgets()
@@ -325,4 +330,4 @@ class GlobalStatistics(form.SchemaForm, StatisticsMixin):
 
     @button.buttonAndHandler(_(u"Submit"))
     def handleSubmit(self, action):
-        return self.handle()
+        return self._handleSubmit()

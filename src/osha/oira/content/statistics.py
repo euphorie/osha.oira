@@ -2,6 +2,7 @@
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.utils import safe_unicode
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from datetime import datetime
 from euphorie.content.country import ICountry
@@ -178,6 +179,7 @@ class StatisticsMixin(object):
         'country': 'usage_statistics_country.rptdesign',
         'tool': 'usage_statistics_tool.rptdesign',
     }
+    pdf_data = None
 
     def _extractData(self):
         """ Wrap z3c.form's extract data to better deal with errors.
@@ -268,7 +270,7 @@ class StatisticsMixin(object):
             'content-disposition',
             page.headers.get('content-disposition') or
             'inline; filename="report.pdf"')
-        return page.read()
+        self.pdf_data = page.read()
 
 
 class CountryStatistics(form.SchemaForm, StatisticsMixin):
@@ -279,15 +281,23 @@ class CountryStatistics(form.SchemaForm, StatisticsMixin):
     grok.name('show-statistics')
     grok.require('cmf.ModifyPortalContent')
     grok.layer(IOSHAContentSkinLayer)
-    grok.template('statistics')
     schema = StatisticsSchema
     ignoreContext = True
     label = _('title_country_statistics',
               default='Country Statistics Reporting')
+    template = None
+    form_template = ViewPageTemplateFile("templates/statistics.pt")
 
     @button.buttonAndHandler(_(u"Submit"))
     def handleSubmit(self, action):
         return self._handleSubmit()
+
+    def render(self):
+        if self.pdf_data is not None:
+            return self.pdf_data
+        else:
+            self.template = self.form_template
+            return self.template()
 
 
 class SectorStatistics(form.SchemaForm, StatisticsMixin):
@@ -298,11 +308,12 @@ class SectorStatistics(form.SchemaForm, StatisticsMixin):
     grok.name('show-statistics')
     grok.require('cmf.ModifyPortalContent')
     grok.layer(IOSHAContentSkinLayer)
-    grok.template('statistics')
     schema = StatisticsSchema
     ignoreContext = True
     label = _('title_sector_statistics',
               default='Sector Statistics Reporting')
+    template = None
+    form_template = ViewPageTemplateFile("templates/statistics.pt")
 
     @button.buttonAndHandler(_(u"Submit"))
     def handleSubmit(self, action):
@@ -314,6 +325,13 @@ class SectorStatistics(form.SchemaForm, StatisticsMixin):
         report_type.mode = 'hidden'
         report_type.field.default = 'tool'
 
+    def render(self):
+        if self.pdf_data is not None:
+            return self.pdf_data
+        else:
+            self.template = self.form_template
+            return self.template()
+
 
 class GlobalStatistics(form.SchemaForm, StatisticsMixin):
     """ Site managers can access statistics for the whole site.
@@ -322,12 +340,21 @@ class GlobalStatistics(form.SchemaForm, StatisticsMixin):
     grok.name('show-statistics')
     grok.require('cmf.ModifyPortalContent')
     grok.layer(IOSHAContentSkinLayer)
-    grok.template('statistics')
     schema = StatisticsSchema
     ignoreContext = True
     label = _('title_global_statistics',
               default='Global Statistics Reporting')
+    template = None
+    form_template = ViewPageTemplateFile("templates/statistics.pt")
 
     @button.buttonAndHandler(_(u"Submit"))
     def handleSubmit(self, action):
         return self._handleSubmit()
+
+    def render(self):
+        if self.pdf_data is not None:
+            return self.pdf_data
+        else:
+            self.template = self.form_template
+            return self.template()
+

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-03-11 19:49+0200\n"
+"POT-Creation-Date: 2013-03-15 05:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -600,9 +600,24 @@ msgstr ""
 msgid "label_remove_measure"
 msgstr ""
 
-#. Default: Statistics Reporting
-#: src/osha/oira/browser/templates/statistics.pt:13
-msgid "title_statistics"
+#: src/osha/oira/vocabularies.py:51
+msgid "Whole year"
+msgstr ""
+
+#: src/osha/oira/vocabularies.py:54
+msgid "1st Quarter"
+msgstr ""
+
+#: src/osha/oira/vocabularies.py:55
+msgid "2nd Quarter"
+msgstr ""
+
+#: src/osha/oira/vocabularies.py:56
+msgid "3rd Quarter"
+msgstr ""
+
+#: src/osha/oira/vocabularies.py:57
+msgid "4th Quarter"
 msgstr ""
 
 #: src/osha/oira/client/country.py:53
@@ -951,7 +966,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:276
 #: src/osha/oira/client/templates/report_company.pt:67
 #: src/osha/oira/client/templates/report_identification.pt:91
-#: src/osha/oira/client/templates/report_landing.pt:73
+#: src/osha/oira/client/templates/report_landing.pt:74
 #: src/osha/oira/client/templates/risk_actionplan.pt:238
 #: src/osha/oira/client/templates/risk_evaluation.pt:139
 #: src/osha/oira/client/templates/risk_identification.pt:57
@@ -972,7 +987,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:277
 #: src/osha/oira/client/templates/report_company.pt:68
 #: src/osha/oira/client/templates/report_identification.pt:92
-#: src/osha/oira/client/templates/report_landing.pt:74
+#: src/osha/oira/client/templates/report_landing.pt:75
 #: src/osha/oira/client/templates/risk_actionplan.pt:239
 #: src/osha/oira/client/templates/risk_evaluation.pt:140
 #: src/osha/oira/client/templates/risk_identification.pt:58
@@ -993,7 +1008,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:282
 #: src/osha/oira/client/templates/report_company.pt:73
 #: src/osha/oira/client/templates/report_identification.pt:97
-#: src/osha/oira/client/templates/report_landing.pt:77
+#: src/osha/oira/client/templates/report_landing.pt:80
 #: src/osha/oira/client/templates/risk_actionplan.pt:244
 #: src/osha/oira/client/templates/risk_evaluation.pt:145
 #: src/osha/oira/client/templates/risk_identification.pt:66
@@ -1014,7 +1029,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:283
 #: src/osha/oira/client/templates/report_company.pt:74
 #: src/osha/oira/client/templates/report_identification.pt:98
-#: src/osha/oira/client/templates/report_landing.pt:78
+#: src/osha/oira/client/templates/report_landing.pt:81
 #: src/osha/oira/client/templates/risk_actionplan.pt:245
 #: src/osha/oira/client/templates/risk_evaluation.pt:146
 #: src/osha/oira/client/templates/risk_identification.pt:67
@@ -1035,7 +1050,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:288
 #: src/osha/oira/client/templates/report_company.pt:79
 #: src/osha/oira/client/templates/report_identification.pt:103
-#: src/osha/oira/client/templates/report_landing.pt:81
+#: src/osha/oira/client/templates/report_landing.pt:86
 #: src/osha/oira/client/templates/risk_actionplan.pt:250
 #: src/osha/oira/client/templates/risk_evaluation.pt:154
 #: src/osha/oira/client/templates/risk_identification.pt:72
@@ -1056,7 +1071,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:289
 #: src/osha/oira/client/templates/report_company.pt:80
 #: src/osha/oira/client/templates/report_identification.pt:104
-#: src/osha/oira/client/templates/report_landing.pt:82
+#: src/osha/oira/client/templates/report_landing.pt:87
 #: src/osha/oira/client/templates/risk_actionplan.pt:251
 #: src/osha/oira/client/templates/risk_evaluation.pt:155
 #: src/osha/oira/client/templates/risk_identification.pt:73
@@ -1077,7 +1092,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:294
 #: src/osha/oira/client/templates/report_company.pt:85
 #: src/osha/oira/client/templates/report_identification.pt:109
-#: src/osha/oira/client/templates/report_landing.pt:85
+#: src/osha/oira/client/templates/report_landing.pt:92
 #: src/osha/oira/client/templates/risk_actionplan.pt:259
 #: src/osha/oira/client/templates/risk_evaluation.pt:160
 #: src/osha/oira/client/templates/risk_identification.pt:78
@@ -1098,7 +1113,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:295
 #: src/osha/oira/client/templates/report_company.pt:86
 #: src/osha/oira/client/templates/report_identification.pt:110
-#: src/osha/oira/client/templates/report_landing.pt:86
+#: src/osha/oira/client/templates/report_landing.pt:93
 #: src/osha/oira/client/templates/risk_actionplan.pt:260
 #: src/osha/oira/client/templates/risk_evaluation.pt:161
 #: src/osha/oira/client/templates/risk_identification.pt:79
@@ -1119,7 +1134,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:307
 #: src/osha/oira/client/templates/report_company.pt:93
 #: src/osha/oira/client/templates/report_identification.pt:117
-#: src/osha/oira/client/templates/report_landing.pt:92
+#: src/osha/oira/client/templates/report_landing.pt:100
 #: src/osha/oira/client/templates/risk_actionplan.pt:267
 #: src/osha/oira/client/templates/risk_evaluation.pt:168
 #: src/osha/oira/client/templates/risk_identification.pt:86
@@ -1140,7 +1155,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:308
 #: src/osha/oira/client/templates/report_company.pt:94
 #: src/osha/oira/client/templates/report_identification.pt:118
-#: src/osha/oira/client/templates/report_landing.pt:93
+#: src/osha/oira/client/templates/report_landing.pt:101
 #: src/osha/oira/client/templates/risk_actionplan.pt:268
 #: src/osha/oira/client/templates/risk_evaluation.pt:169
 #: src/osha/oira/client/templates/risk_identification.pt:87
@@ -1162,7 +1177,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:309
 #: src/osha/oira/client/templates/report_company.pt:95
 #: src/osha/oira/client/templates/report_identification.pt:119
-#: src/osha/oira/client/templates/report_landing.pt:94
+#: src/osha/oira/client/templates/report_landing.pt:102
 #: src/osha/oira/client/templates/risk_actionplan.pt:269
 #: src/osha/oira/client/templates/risk_evaluation.pt:170
 #: src/osha/oira/client/templates/risk_identification.pt:88
@@ -1199,7 +1214,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:311
 #: src/osha/oira/client/templates/report_company.pt:97
 #: src/osha/oira/client/templates/report_identification.pt:121
-#: src/osha/oira/client/templates/report_landing.pt:95
+#: src/osha/oira/client/templates/report_landing.pt:103
 #: src/osha/oira/client/templates/risk_actionplan.pt:271
 #: src/osha/oira/client/templates/risk_evaluation.pt:172
 #: src/osha/oira/client/templates/sessions.pt:107
@@ -1792,6 +1807,7 @@ msgstr ""
 
 #. Default: Year
 #: src/osha/oira/client/templates/risk_actionplan.pt:153
+#: src/osha/oira/content/statistics.py:34
 msgid "label_year"
 msgstr ""
 
@@ -2196,6 +2212,62 @@ msgstr ""
 #. More detailed statistics regarding the risks
 #: src/osha/oira/content/sector.py:27
 msgid "help_statistics_level"
+msgstr ""
+
+#. Default: Admin
+#: src/osha/oira/content/sitemenu.py:37
+msgid "menu_admin"
+msgstr ""
+
+#. Default: Statistics
+#: src/osha/oira/content/sitemenu.py:39
+msgid "menu_statistics"
+msgstr ""
+
+#. Default: Period
+#: src/osha/oira/content/statistics.py:39
+msgid "label_period"
+msgstr ""
+
+#. Default: Report Type
+#: src/osha/oira/content/statistics.py:68
+msgid "label_report_type"
+msgstr ""
+
+#. Default: Country
+#: src/osha/oira/content/statistics.py:74
+msgid "label_report_countries"
+msgstr ""
+
+#. Default: Tool
+#: src/osha/oira/content/statistics.py:81
+msgid "label_report_tools"
+msgstr ""
+
+#. Default: Report Period
+#: src/osha/oira/content/statistics.py:88
+msgid "label_report_period"
+msgstr ""
+
+#. Default: Country Statistics Reporting
+#: src/osha/oira/content/statistics.py:285
+msgid "title_country_statistics"
+msgstr ""
+
+#: src/osha/oira/content/statistics.py:288
+#: src/osha/oira/content/statistics.py:307
+#: src/osha/oira/content/statistics.py:331
+msgid "Submit"
+msgstr ""
+
+#. Default: Sector Statistics Reporting
+#: src/osha/oira/content/statistics.py:304
+msgid "title_sector_statistics"
+msgstr ""
+
+#. Default: Global Statistics Reporting
+#: src/osha/oira/content/statistics.py:328
+msgid "title_global_statistics"
 msgstr ""
 
 #. Default: You can not delete an OiRA tool that has been published.

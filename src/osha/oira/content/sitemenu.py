@@ -14,8 +14,10 @@ class Sitemenu(EuphorieSitemenu):
         """ See plonetheme.nuplone.skin.sitemenu.py
             Add extra 'statistics' action.
         """
-        menu = super(Sitemenu, self).actions()
-        children = menu["children"]
+        menu = super(Sitemenu, self).actions() or {}
+        children = menu.get("children")
+        if not children:
+            return None
         submenu = self.statistics()
         if submenu:
             children.append(submenu)

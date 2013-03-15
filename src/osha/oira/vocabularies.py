@@ -1,12 +1,13 @@
 from datetime import datetime
 from euphorie.content import utils
 from euphorie.content.country import ICountry
-from euphorie.content.sectorcontainer import ISectorContainer
 from euphorie.content.sector import ISector
+from euphorie.content.sectorcontainer import ISectorContainer
 from five import grok
+from osha.oira import _
+from plone import api
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
-from plone import api
 
 
 class ReportTypeVocabulary(object):
@@ -47,12 +48,13 @@ class ReportPeriodVocabulary(object):
     def __call__(self, context):
         site = api.portal.get()
         cal = site.REQUEST.locale.dates.calendars['gregorian']
-        items = [('Whole year', 0)]
-        items += [(m, i+1) for i, m in enumerate(cal.getMonthNames())]
-        items += [('1st Quarter', i+2)]
-        items += [('2nd Quarter', i+3)]
-        items += [('3rd Quarter', i+4)]
-        items += [('4th Quarter', i+5)]
+        items = [(_(u'Whole year'), 0)]
+        items += [(m.encode('utf-8'), i+1)
+                  for i, m in enumerate(cal.getMonthNames())]
+        items += [(_(u'1st Quarter').encode('utf-8'), i+2)]
+        items += [(_(u'2nd Quarter').encode('utf-8'), i+3)]
+        items += [(_(u'3rd Quarter').encode('utf-8'), i+4)]
+        items += [(_(u'4th Quarter').encode('utf-8'), i+5)]
         return SimpleVocabulary.fromItems(items)
 
 grok.global_utility(ReportPeriodVocabulary,

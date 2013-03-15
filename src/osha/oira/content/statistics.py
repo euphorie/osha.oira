@@ -248,7 +248,7 @@ class StatisticsMixin(object):
         (data, errors) = self._extractData()
         if errors:
             IStatusMessage(self.request).add(
-                "Please correct the errors", type=u'error')
+                "Please fill in all the required fields", type=u'error')
             return
 
         url = self.getStatisticsServerURL(data)

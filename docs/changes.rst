@@ -4,13 +4,21 @@ Changelog
 2.0b6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+Bugfixes
+~~~~~~~~
+
+- Actions menu couldn't load when user is anonymous
+- UnicodeDecodeError on statistics views
 
 
 2.0b5 (2013-03-15)
 ------------------
 
-- Nothing changed yet.
+Feature changes
+~~~~~~~~~~~~~~~
+
+- Restrict statistics views to users with edit permission in the relevant
+  context.
 
 
 2.0b4 (2013-03-15)

@@ -44,11 +44,11 @@
         }
         jQuery(document).ready(function () {
             $('button.remove.jsOnly').hide();
-            $selected = jQuery('#fieldset-form-widgets-report_type input:radio:checked');
+            var $selected = jQuery('#fieldset-form-widgets-report_type input:radio:checked');
             if ($selected.length) {
                 toggle($selected.attr('value'));
             } else {
-                toggle();
+                toggle('Tool');
             }
             jQuery('#fieldset-form-widgets-report_type input:radio').change(function (ev) {
                 toggle(ev.target.value);

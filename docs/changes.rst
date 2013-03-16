@@ -4,6 +4,12 @@ Changelog
 2.0b6 (unreleased)
 ------------------
 
+Feature changes
+~~~~~~~~~~~~~~~
+
+- Added combination of action plan, prevention plan and resources into
+  one cell 
+
 Bugfixes
 ~~~~~~~~
 

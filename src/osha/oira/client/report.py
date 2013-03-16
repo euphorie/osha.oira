@@ -7,6 +7,10 @@ from euphorie.client.session import SessionManager
 from euphorie.client import model
 from .interfaces import IOSHAReportPhaseSkinLayer
 from .. import _
+from openpyxl.workbook import Workbook
+from openpyxl.writer.excel import save_virtual_workbook
+from zope.i18n import translate
+
 
 grok.templatedir("templates")
 
@@ -61,6 +65,57 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             key=lambda d, co=COLUMN_ORDER: co.index(d[1]))
     columns.insert(-1, (None, None, _('report_timeline_progress',
         default=u'Status (planned, in process, implemented)')))
+
+    def create_workbook(self):
+        """Create an Excel workbook containing the all risks and measures.
+        """
+        t = lambda txt: translate(txt, context=self.request)
+        book = Workbook()
+        sheet = book.worksheets[0]
+        sheet.title = t(_('report_timeline_title', default=u'Timeline'))
+        sheet.default_column_dimension.auto_size = True
+        survey = self.request.survey
+
+        combine_keys = ['prevention_plan', 'requirements']
+
+        for (column, (type, key, title)) in enumerate(self.columns):
+            if key in combine_keys:
+                continue
+            sheet.cell(row=0, column=column).value = t(title)
+
+        for (row, (risk, measure)) in enumerate(self.get_measures(), 1):
+            column = 0
+            zodb_node = survey.restrictedTraverse(risk.zodb_path.split('/'))
+            
+            for (type, key, title) in self.columns:
+                value = None
+                if type == 'measure':
+                    value = getattr(measure, key, None)
+                elif type == 'risk':
+                    value = getattr(risk, key, None)
+                    if key == 'priority':
+                        value = self.priority_name(value)
+                    elif key == 'title':
+                        if zodb_node.problem_description and \
+                                zodb_node.problem_description.strip():
+                            value = zodb_node.problem_description
+                
+                # style
+                sheet.cell(row=row, column=column).style.alignment.wrap_text = True
+                
+                if key in combine_keys and value is not None:
+                    # osha wants to combine action_plan (col 3), prevention_plan and requirements in one cell
+                    if not sheet.cell(row=row, column=2).value:
+                        sheet.cell(row=row, column=2).value = u''
+                    sheet.cell(row=row, column=2).value += '\r\n'+value  
+                    continue
+                    
+                if value is not None:
+                    sheet.cell(row=row, column=column).value = value
+                column += 1
+        
+
+        return book
 
     def get_measures(self):
         """Find all data that should be included in the report.

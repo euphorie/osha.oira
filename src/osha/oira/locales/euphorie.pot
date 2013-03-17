@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-03-15 05:18+0200\n"
+"POT-Creation-Date: 2013-03-17 19:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -645,9 +644,19 @@ msgstr ""
 msgid "Enter the names of each location"
 msgstr ""
 
+#. Default: End date
+#: src/osha/oira/client/report.py:71
+msgid "report_timeline_end_date"
+msgstr ""
+
 #. Default: Status (planned, in process, implemented)
-#: src/osha/oira/client/report.py:62
+#: src/osha/oira/client/report.py:72
 msgid "report_timeline_progress"
+msgstr ""
+
+#. Default: Timeline
+#: src/osha/oira/client/report.py:82
+msgid "report_timeline_title"
 msgstr ""
 
 #. Default: low
@@ -1807,7 +1816,7 @@ msgstr ""
 
 #. Default: Year
 #: src/osha/oira/client/templates/risk_actionplan.pt:153
-#: src/osha/oira/content/statistics.py:34
+#: src/osha/oira/content/statistics.py:35
 msgid "label_year"
 msgstr ""
 
@@ -2225,48 +2234,48 @@ msgid "menu_statistics"
 msgstr ""
 
 #. Default: Period
-#: src/osha/oira/content/statistics.py:39
+#: src/osha/oira/content/statistics.py:40
 msgid "label_period"
 msgstr ""
 
 #. Default: Report Type
-#: src/osha/oira/content/statistics.py:68
+#: src/osha/oira/content/statistics.py:69
 msgid "label_report_type"
 msgstr ""
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:74
+#: src/osha/oira/content/statistics.py:75
 msgid "label_report_countries"
 msgstr ""
 
 #. Default: Tool
-#: src/osha/oira/content/statistics.py:81
+#: src/osha/oira/content/statistics.py:82
 msgid "label_report_tools"
 msgstr ""
 
 #. Default: Report Period
-#: src/osha/oira/content/statistics.py:88
+#: src/osha/oira/content/statistics.py:89
 msgid "label_report_period"
 msgstr ""
 
 #. Default: Country Statistics Reporting
-#: src/osha/oira/content/statistics.py:285
+#: src/osha/oira/content/statistics.py:275
 msgid "title_country_statistics"
 msgstr ""
 
-#: src/osha/oira/content/statistics.py:288
+#: src/osha/oira/content/statistics.py:280
 #: src/osha/oira/content/statistics.py:307
-#: src/osha/oira/content/statistics.py:331
+#: src/osha/oira/content/statistics.py:339
 msgid "Submit"
 msgstr ""
 
 #. Default: Sector Statistics Reporting
-#: src/osha/oira/content/statistics.py:304
+#: src/osha/oira/content/statistics.py:302
 msgid "title_sector_statistics"
 msgstr ""
 
 #. Default: Global Statistics Reporting
-#: src/osha/oira/content/statistics.py:328
+#: src/osha/oira/content/statistics.py:334
 msgid "title_global_statistics"
 msgstr ""
 

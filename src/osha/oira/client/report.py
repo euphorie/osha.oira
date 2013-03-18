@@ -59,12 +59,19 @@ class ReportLanding(grok.View):
 class ActionPlanTimeline(report.ActionPlanTimeline):
     grok.layer(IOSHAReportPhaseSkinLayer)
 
+    combine_keys = ['prevention_plan', 'requirements']
+
     columns = sorted(
             (col for col in report.ActionPlanTimeline.columns
                 if col[1] in COLUMN_ORDER),
             key=lambda d, co=COLUMN_ORDER: co.index(d[1]))
+    columns = [x for x in columns if x[1] not in combine_keys]
+    extra_cols = [x for x in columns if x[1] in combine_keys]
+    columns[3] = ('measure', 'planning_end',
+                    _('report_timeline_end_date', default=u'End date'))
     columns.insert(-1, (None, None, _('report_timeline_progress',
         default=u'Status (planned, in process, implemented)')))
+
 
     def create_workbook(self):
         """Create an Excel workbook containing the all risks and measures.
@@ -76,10 +83,9 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         sheet.default_column_dimension.auto_size = True
         survey = self.request.survey
 
-        combine_keys = ['prevention_plan', 'requirements']
 
         for (column, (type, key, title)) in enumerate(self.columns):
-            if key in combine_keys:
+            if key in self.combine_keys:
                 continue
             sheet.cell(row=0, column=column).value = t(title)
 
@@ -87,7 +93,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             column = 0
             zodb_node = survey.restrictedTraverse(risk.zodb_path.split('/'))
             
-            for (type, key, title) in self.columns:
+            for (type, key, title) in self.columns+self.extra_cols:
                 value = None
                 if type == 'measure':
                     value = getattr(measure, key, None)
@@ -103,7 +109,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                 # style
                 sheet.cell(row=row, column=column).style.alignment.wrap_text = True
                 
-                if key in combine_keys and value is not None:
+                if key in self.combine_keys and value is not None:
                     # osha wants to combine action_plan (col 3), prevention_plan and requirements in one cell
                     if not sheet.cell(row=row, column=2).value:
                         sheet.cell(row=row, column=2).value = u''
@@ -144,34 +150,6 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                         model.Risk.path)
         return query.all()
         
-        
-    columns = [
-            ('measure', 'planning_start',
-                _('label_action_plan_start', default=u'Planning start')),
-            # Osha specific change, see #7054.
-            ('measure', 'planning_end',
-                _('report_timeline_end_date', default=u'End date')),
-            ('measure', 'action_plan',
-                _('label_measure_action_plan',
-                    default=u'General approach '
-                            u'(to eliminate or reduce the risk)')),
-            ('measure', 'prevention_plan',
-                _('label_measure_prevention_plan',
-                    default=u'Specific action(s) required to implement '
-                            u'this approach')),
-            ('measure', 'requirements',
-                _('label_measure_requirements', default=u'Requirements')),
-            ('measure', 'responsible',
-                _('label_action_plan_responsible',
-                    default=u'Who is responsible?')),
-            ('measure', 'budget',
-                _('label_action_plan_budget', default=u'Budget (in Euro)')),
-            ('risk', 'number',
-                _('label_risk_number', default=u'Risk number')),
-            ('risk', 'title',
-                _('report_timeline_risk_title', default=u'Risk')),
-            ('risk', 'priority',
-                _('report_timeline_priority', default=u'Priority')),
-            ('risk', 'comment',
-                _('report_timeline_comment', default=u'Comments')),
-            ]
+
+
+

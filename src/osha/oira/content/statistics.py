@@ -227,9 +227,9 @@ class StatisticsMixin(object):
         filename = self.filename[report_type]
         url = "&".join([url, '__report=statistics/%s' % filename])
         if report_type == 'country':
-            url = "&".join([url, 'country=%s' % data.get('country')])
+            url = "&".join([url, 'country=%s' % data.get('countries')])
         elif report_type == 'tool':
-            url = "&".join([url, 'tool=%s' % data.get('tool')])
+            url = "&".join([url, 'tool=%s' % data.get('tools')])
         elif report_type == 'overview':
             url = "&".join([url, 'sector=%25'])
 

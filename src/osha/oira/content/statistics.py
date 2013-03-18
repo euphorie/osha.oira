@@ -54,7 +54,7 @@ class ReportPeriod(object):
          interface.Interface,
          interface.Interface,
          interface.Interface)
-class DaysOrMonthsPeriodFactory(object):
+class ReportPeriodFactory(object):
     interface.implements(IObjectFactory)
 
     def __init__(self, context, request, form, widget):
@@ -190,18 +190,6 @@ class StatisticsMixin(object):
         """
         (data, errors) = self.extractData()
         errors = list(errors)
-        # z3c.form's object field doesn't properly handle 'required' attr for
-        # subelements. We ignore report_period if it's said to be required
-        for e in errors:
-            if isinstance(e.error, RequiredMissing):
-                if e.field.__name__ == 'report_period':
-                    data['report_period'] = 0
-                    year = self.request.get(
-                        'form.widgets.report_period.widgets.year')
-                    if year:
-                        data['year'] = int(year)
-                        errors.remove(e)
-
         if data.get('report_type') == 'tool':
             for e in errors:
                 if isinstance(e.error, RequiredMissing):
@@ -233,10 +221,11 @@ class StatisticsMixin(object):
         elif report_type == 'overview':
             url = "&".join([url, 'sector=%25'])
 
-        year = data.get('year')
+        report_period = data.get('report_period')
+        year = report_period.year
+        period = report_period.period
         month = 0
         quarter = 0
-        period = data.get('report_period')
         if period > 12:
             quarter = period % 12
         else:

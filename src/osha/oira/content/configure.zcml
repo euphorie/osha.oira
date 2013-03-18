@@ -13,7 +13,13 @@
         factory=".sector.OSHASector"
         for="plone.dexterity.interfaces.IDexterityContent"
         />
+
     <adapter
       factory=".profilequestion.context_proxy"/>
+
+    <adapter    
+        factory=".statistics.ReportPeriodFactory"
+        name="osha.oira.content.statistics.IReportPeriod"
+        />
 
 </configure>

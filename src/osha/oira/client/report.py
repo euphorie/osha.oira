@@ -143,3 +143,35 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                             else_=2),
                         model.Risk.path)
         return query.all()
+        
+        
+    columns = [
+            ('measure', 'planning_start',
+                _('label_action_plan_start', default=u'Planning start')),
+            # Osha specific change, see #7054.
+            ('measure', 'planning_end',
+                _('report_timeline_end_date', default=u'End date')),
+            ('measure', 'action_plan',
+                _('label_measure_action_plan',
+                    default=u'General approach '
+                            u'(to eliminate or reduce the risk)')),
+            ('measure', 'prevention_plan',
+                _('label_measure_prevention_plan',
+                    default=u'Specific action(s) required to implement '
+                            u'this approach')),
+            ('measure', 'requirements',
+                _('label_measure_requirements', default=u'Requirements')),
+            ('measure', 'responsible',
+                _('label_action_plan_responsible',
+                    default=u'Who is responsible?')),
+            ('measure', 'budget',
+                _('label_action_plan_budget', default=u'Budget (in Euro)')),
+            ('risk', 'number',
+                _('label_risk_number', default=u'Risk number')),
+            ('risk', 'title',
+                _('report_timeline_risk_title', default=u'Risk')),
+            ('risk', 'priority',
+                _('report_timeline_priority', default=u'Priority')),
+            ('risk', 'comment',
+                _('report_timeline_comment', default=u'Comments')),
+            ]

@@ -65,8 +65,8 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             (col for col in report.ActionPlanTimeline.columns
                 if col[1] in COLUMN_ORDER),
             key=lambda d, co=COLUMN_ORDER: co.index(d[1]))
-    columns = [x for x in columns if x[1] not in combine_keys]
     extra_cols = [x for x in columns if x[1] in combine_keys]
+    columns = [x for x in columns if x[1] not in combine_keys]
     columns[3] = ('measure', 'planning_end',
                     _('report_timeline_end_date', default=u'End date'))
     columns.insert(-1, (None, None, _('report_timeline_progress',

@@ -9,6 +9,7 @@ from zope.component import getUtility
 from zope.interface.declarations import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
 from osha.oira.content import statistics
+from osha.oira.content.statistics import ReportPeriod
 import unittest2 as unittest
 
 
@@ -44,11 +45,14 @@ class TestStatistics(unittest.TestCase):
                     rtype = rtype.value
                     for year in year_vocab._terms:
                         year = year.value
-                        data = {'country': country,
-                                'report_period': period,
+                        report_period = ReportPeriod({
+                            'year': year,
+                            'period': period
+                        })
+                        data = {'countries': country,
+                                'report_period': report_period,
                                 'report_type': rtype,
-                                'tool': tool,
-                                'year': year
+                                'tools': tool,
                                 }
                         # Without setting the statistics server URL in
                         # site_props, the return url must be None

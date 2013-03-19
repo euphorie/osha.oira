@@ -9,6 +9,7 @@ Feature changes
 
 - Added combination of action plan, prevention plan and resources into
   one cell 
+- Shortened translation for fr, fixes #7073
 
 Bugfixes
 ~~~~~~~~

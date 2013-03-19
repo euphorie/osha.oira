@@ -4,19 +4,18 @@ Changelog
 2.0b10 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Fixed survey statistics to not show previews as published surveys.
 
 2.0b9 (2013-03-19)
 ------------------
 
-- Nothing changed yet.
+- Translation updates
 
 
 2.0b8 (2013-03-19)
 ------------------
 
-- Nothing changed yet.
+- Translation updates 
 
 
 2.0b7 (2013-03-19)

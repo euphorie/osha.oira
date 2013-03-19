@@ -4,7 +4,8 @@ Changelog
 2.0b10 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- removed customized version of module_identification to revert back to the 
+  working tno version
 
 
 2.0b9 (2013-03-19)

@@ -6,18 +6,18 @@ Changelog
 
 - removed customized version of module_identification to revert back to the 
   working tno version
-
+- Fixed survey statistics to not show previews as published surveys.
 
 2.0b9 (2013-03-19)
 ------------------
 
-- Nothing changed yet.
+- Translation updates
 
 
 2.0b8 (2013-03-19)
 ------------------
 
-- Nothing changed yet.
+- Translation updates 
 
 
 2.0b7 (2013-03-19)

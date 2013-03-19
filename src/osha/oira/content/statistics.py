@@ -110,16 +110,18 @@ class WriteStatistics(grok.View):
                          'surveygroup, skipping. %s'
                          % '/'.join(survey.getPhysicalPath()))
                 continue
+            published = survey.aq_parent.published == survey.id
             published_date = None
-            if isinstance(survey.published, datetime):
-                published_date = survey.published
-            elif isinstance(survey.published, tuple):
-                published_date = survey.published[2]
+            if published:
+                if isinstance(survey.published, datetime):
+                    published_date = survey.published
+                elif isinstance(survey.published, tuple):
+                    published_date = survey.published[2]
 
             info_surveys.append((
                 survey_path,
                 survey.Language(),
-                published_date is not None,
+                published,
                 published_date,
                 survey.created(),
             ))

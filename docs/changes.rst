@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0b8 (unreleased)
+2.0b8 (2013-03-19)
 ------------------
 
 - Nothing changed yet.

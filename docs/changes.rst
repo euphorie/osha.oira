@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0b6 (unreleased)
+2.0b7 (2013-03-19)
 ------------------
 
 Feature changes

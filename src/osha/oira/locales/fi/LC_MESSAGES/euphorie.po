@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.30.dev0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-03-15 05:18+0200\n"
+"POT-Creation-Date: 2013-03-19 14:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -745,15 +745,33 @@ msgstr ""
 msgid "Enter the names of each location"
 msgstr ""
 
-#. Default: Timeline
-#: src/euphorie/client/report.py:889
-msgid "report_timeline_title"
+#. Default: Measure
+#: src/osha/oira/client/report.py:71
+#, fuzzy
+msgid "report_timeline_measure"
 msgstr "Aikajana"
 
+#. Default: End date
+#: src/osha/oira/client/report.py:73
+#, fuzzy
+msgid "report_timeline_end_date"
+msgstr "Aikajana"
+
+#. Default: Responsible
+#: src/osha/oira/client/report.py:75
+#, fuzzy
+msgid "report_timeline_responsible"
+msgstr "${responsible} on vastuussa tästä tehtävästä."
+
 #. Default: Status (planned, in process, implemented)
-#: src/osha/oira/client/report.py:62
+#: src/osha/oira/client/report.py:77
 msgid "report_timeline_progress"
 msgstr ""
+
+#. Default: Timeline
+#: src/osha/oira/client/report.py:87
+msgid "report_timeline_title"
+msgstr "Aikajana"
 
 #. Default: low
 #: src/osha/oira/client/survey.py:263
@@ -2002,7 +2020,7 @@ msgstr "Seuraava"
 
 #. Default: Year
 #: src/osha/oira/client/templates/risk_actionplan.pt:153
-#: src/osha/oira/content/statistics.py:34
+#: src/osha/oira/content/statistics.py:35
 #, fuzzy
 msgid "label_year"
 msgstr "Kyllä"
@@ -2445,19 +2463,19 @@ msgid "menu_statistics"
 msgstr "Tilastot"
 
 #. Default: Period
-#: src/osha/oira/content/statistics.py:39
+#: src/osha/oira/content/statistics.py:40
 #, fuzzy
 msgid "label_period"
 msgstr "Edellinen"
 
 #. Default: Report Type
-#: src/osha/oira/content/statistics.py:68
+#: src/osha/oira/content/statistics.py:69
 #, fuzzy
 msgid "label_report_type"
 msgstr "Raportti"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:74
+#: src/osha/oira/content/statistics.py:75
 #, fuzzy
 msgid "label_report_countries"
 msgstr ""
@@ -2465,37 +2483,37 @@ msgstr ""
 "kysymyksestä."
 
 #. Default: Tool
-#: src/osha/oira/content/statistics.py:81
+#: src/osha/oira/content/statistics.py:82
 #, fuzzy
 msgid "label_report_tools"
 msgstr "Raportti"
 
 #. Default: Report Period
-#: src/osha/oira/content/statistics.py:88
+#: src/osha/oira/content/statistics.py:89
 #, fuzzy
 msgid "label_report_period"
 msgstr "Raportti"
 
 #. Default: Country Statistics Reporting
-#: src/osha/oira/content/statistics.py:285
+#: src/osha/oira/content/statistics.py:275
 #, fuzzy
 msgid "title_country_statistics"
 msgstr "Tilastot"
 
-#: src/osha/oira/content/statistics.py:288
+#: src/osha/oira/content/statistics.py:280
 #: src/osha/oira/content/statistics.py:307
-#: src/osha/oira/content/statistics.py:331
+#: src/osha/oira/content/statistics.py:339
 msgid "Submit"
 msgstr ""
 
 #. Default: Sector Statistics Reporting
-#: src/osha/oira/content/statistics.py:304
+#: src/osha/oira/content/statistics.py:302
 #, fuzzy
 msgid "title_sector_statistics"
 msgstr "Tilastot"
 
 #. Default: Global Statistics Reporting
-#: src/osha/oira/content/statistics.py:328
+#: src/osha/oira/content/statistics.py:334
 #, fuzzy
 msgid "title_global_statistics"
 msgstr "Tilastot"

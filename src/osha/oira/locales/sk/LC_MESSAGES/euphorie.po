@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-03-17 19:40+0100\n"
+"POT-Creation-Date: 2013-03-19 14:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Generated-By: Babel 0.9.6\n"
 
 #. Default: HTML Source Code
@@ -728,18 +728,32 @@ msgstr ""
 msgid "Enter the names of each location"
 msgstr ""
 
-#. Default: End date
+#. Default: Measure
 #: src/osha/oira/client/report.py:71
+#, fuzzy
+msgid "report_timeline_measure"
+msgstr ""
+"${responsible} je zodpovedný za túto úlohu, ktorá začína dňa ${start} a "
+"končí dňa ${end}."
+
+#. Default: End date
+#: src/osha/oira/client/report.py:73
 msgid "report_timeline_end_date"
 msgstr ""
 
+#. Default: Responsible
+#: src/osha/oira/client/report.py:75
+#, fuzzy
+msgid "report_timeline_responsible"
+msgstr "${responsible} je zodpovedný za túto úlohu."
+
 #. Default: Status (planned, in process, implemented)
-#: src/osha/oira/client/report.py:72
+#: src/osha/oira/client/report.py:77
 msgid "report_timeline_progress"
 msgstr ""
 
 #. Default: Timeline
-#: src/osha/oira/client/report.py:82
+#: src/osha/oira/client/report.py:87
 msgid "report_timeline_title"
 msgstr ""
 

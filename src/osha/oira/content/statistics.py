@@ -20,7 +20,7 @@ from z3c.saconfig import Session
 from zope import interface
 from zope import schema
 from zope.schema._bootstrapinterfaces import RequiredMissing
-from zope.component import adapter
+from zope import component
 from zope.sqlalchemy import datamanager
 import logging
 import transaction
@@ -50,10 +50,11 @@ class ReportPeriod(object):
         self.period = value['period']
 
 
-@adapter(interface.Interface,
-         interface.Interface,
-         interface.Interface,
-         interface.Interface)
+@component.adapter(
+    interface.Interface,
+    interface.Interface,
+    interface.Interface,
+    interface.Interface)
 class ReportPeriodFactory(object):
     interface.implements(IObjectFactory)
 
@@ -80,7 +81,7 @@ class StatisticsSchema(form.Schema):
 
     tools = schema.Choice(
         title=_(u'label_report_tools', default=u'Tool'),
-        vocabulary='osha.oira.tools',
+        vocabulary='osha.oira.publishedtools',
         required=True,
     )
     form.widget(tools=SelectFieldWidget)
@@ -96,55 +97,37 @@ class WriteStatistics(grok.View):
     grok.require('cmf.ManagePortal')
     grok.name('write-statistics')
 
-    def _walk(self, root, published=False):
+    def getSurveysInfo(self):
         info_surveys = []
-        for country in root.objectValues():
-            for sector in country.objectValues():
-                for survey_or_group in sector.objectValues():
-                    surveys = []
-                    if survey_or_group.portal_type == 'euphorie.survey':
-                        surveys = [survey_or_group]
-                        survey_parent_path = '/'.join((country.id, sector.id))
-                    elif survey_or_group.portal_type == 'euphorie.surveygroup':
-                        surveys = survey_or_group.objectValues()
-                        survey_parent_path = '/'.join((country.id,
-                                                       sector.id,
-                                                       survey_or_group.id))
-                    else:
-                        log.info('Object is neither survey nor surveygroup, '
-                                 'skipping. %s' % '/'.join(
-                                     survey_or_group.getPhysicalPath()))
-                        continue
-                    for survey in surveys:
-                        survey_path = '/'.join((survey_parent_path, survey.id))
-                        if not survey.portal_type == 'euphorie.survey':
-                            log.info('Object is not a survey but inside '
-                                     'surveygroup, skipping. %s'
-                                     % '/'.join(survey.getPhysicalPath()))
-                            continue
-                        published_date = None
-                        if published:
-                            if isinstance(survey.published, datetime):
-                                published_date = survey.published
-                            elif isinstance(survey.published, tuple):
-                                published_date = survey.published[2]
-                        info_surveys.append((survey_path,
-                                             survey.Language(),
-                                             published,
-                                             published_date,
-                                             survey.created()))
+        surveys = component.getUtility(
+            schema.interfaces.IVocabularyFactory,
+            'osha.oira.toolversions')(self.context)
 
+        for survey_path in surveys:
+            survey = self.context['sectors'].unrestrictedTraverse(survey_path)
+            if not survey.portal_type == 'euphorie.survey':
+                log.info('Object is not a survey but inside '
+                         'surveygroup, skipping. %s'
+                         % '/'.join(survey.getPhysicalPath()))
+                continue
+            published_date = None
+            if isinstance(survey.published, datetime):
+                published_date = survey.published
+            elif isinstance(survey.published, tuple):
+                published_date = survey.published[2]
+
+            info_surveys.append((
+                survey_path,
+                survey.Language(),
+                published_date is not None,
+                published_date,
+                survey.created(),
+            ))
         return info_surveys
 
     def render(self):
-        urltool = getToolByName(self.context, 'portal_url')
         dbtable_surveys = 'statistics_surveys'
-        portal = urltool.getPortalObject()
-        # published surveys under /client
-        info_surveys_client = self._walk(portal['client'], published=True)
-        # unpublished surveys under /sectors
-        info_surveys_sectors = self._walk(portal['sectors'], published=False)
-        info_surveys = info_surveys_client + info_surveys_sectors
+        info_surveys = self.getSurveysInfo()
         # write to db
         session = Session()
         session.execute('''DELETE FROM %s;''' % dbtable_surveys)
@@ -168,7 +151,6 @@ class WriteStatistics(grok.View):
             session.execute(insert)
         datamanager.mark_changed(session)
         transaction.get().commit()
-
         from pprint import pformat
         return "Written:\n" + pformat(info_surveys)
 

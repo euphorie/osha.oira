@@ -61,7 +61,44 @@ grok.global_utility(ReportPeriodVocabulary,
                     name='osha.oira.report_period')
 
 
-class ToolsVocabulary(object):
+class ToolVersionsVocabulary(object):
+    """ """
+    grok.implements(IVocabularyFactory)
+
+    def getToolVersionsInSector(self, sector):
+        tools = []
+        for obj in sector.values():
+            if obj.portal_type == 'euphorie.survey':
+                tools.append(
+                    '/'.join(obj.getPhysicalPath()[-3:]))
+            elif obj.portal_type == 'euphorie.surveygroup':
+                tools.extend(
+                    ['/'.join(survey.getPhysicalPath()[-4:])
+                        for survey in obj.objectValues()])
+        return tools
+
+    def getToolVersionsInCountry(self, country):
+        tools = []
+        for sector in country.values():
+            if not ISector.providedBy(sector):
+                continue
+            tools += self.getToolVersionsInSector(sector)
+        return tools
+
+    def __call__(self, context):
+        tools = []
+        site = api.portal.get()
+        for country in site['sectors'].values():
+            if not ICountry.providedBy(country):
+                continue
+            tools += self.getToolVersionsInCountry(country)
+        return tools
+
+grok.global_utility(ToolVersionsVocabulary,
+                    name='osha.oira.toolversions')
+
+
+class PublishedToolsVocabulary(object):
     """ """
     grok.implements(IVocabularyFactory)
 
@@ -94,8 +131,8 @@ class ToolsVocabulary(object):
             tools += self.getToolsInSector(context)
         return SimpleVocabulary.fromValues(tools)
 
-grok.global_utility(ToolsVocabulary,
-                    name='osha.oira.tools')
+grok.global_utility(PublishedToolsVocabulary,
+                    name='osha.oira.publishedtools')
 
 
 class CountriesVocabulary(object):

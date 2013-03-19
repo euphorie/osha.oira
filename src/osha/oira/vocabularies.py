@@ -107,7 +107,11 @@ class PublishedToolsVocabulary(object):
         for obj in sector.values():
             if obj.portal_type == 'euphorie.surveygroup' and \
                     getattr(obj, 'published', None):
-                tools += ['/'.join(obj.getPhysicalPath()[-3:])]
+                survey = obj.get(obj.published)
+                tools += [(
+                    '/'.join(obj.getPhysicalPath()[-3:]),
+                    '/'.join(survey.getPhysicalPath()[-4:])
+                )]
         return tools
 
     def getToolsInCountry(self, country):
@@ -129,7 +133,7 @@ class PublishedToolsVocabulary(object):
             tools += self.getToolsInCountry(context)
         elif ISector.providedBy(context):
             tools += self.getToolsInSector(context)
-        return SimpleVocabulary.fromValues(tools)
+        return SimpleVocabulary.fromItems(tools)
 
 grok.global_utility(PublishedToolsVocabulary,
                     name='osha.oira.publishedtools')

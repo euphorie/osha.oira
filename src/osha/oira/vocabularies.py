@@ -68,13 +68,9 @@ class ToolsVocabulary(object):
     def getToolsInSector(self, sector):
         tools = []
         for obj in sector.values():
-            if obj.portal_type == 'euphorie.survey':
-                tools.append(
-                    '/'.join(obj.getPhysicalPath()[-3:]))
-            elif obj.portal_type == 'euphorie.surveygroup':
-                tools.extend(
-                    ['/'.join(survey.getPhysicalPath()[-4:])
-                        for survey in obj.objectValues()])
+            if obj.portal_type == 'euphorie.surveygroup' and \
+                    getattr(obj, 'published', None):
+                tools += ['/'.join(obj.getPhysicalPath()[-3:])]
         return tools
 
     def getToolsInCountry(self, country):
@@ -115,7 +111,7 @@ class CountriesVocabulary(object):
                 countries.update({
                     utils.getRegionTitle(context.REQUEST,
                                          country.id,
-                                         country.title):
+                                         country.title).encode('utf-8'):
                     country.id
                 })
         elif ICountry.providedBy(context):
@@ -123,7 +119,7 @@ class CountriesVocabulary(object):
                 utils.getRegionTitle(
                     context.REQUEST,
                     context.id,
-                    context.title): context.id
+                    context.title).encode('utf-8'): context.id
             })
         return SimpleVocabulary.fromItems(sorted(countries.items()))
 

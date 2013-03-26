@@ -1,10 +1,13 @@
 Changelog
 =========
 
-2.2 (unreleased)
-----------------
+2.1.1 (unreleased)
+.-----------------
 
-- Nothing changed yet.
+Bugfixes
+~~~~~~~~
+
+- Added class "Message" on risk_evaluation, fixed github #93 [pysailor]
 
 
 2.1 (2013-03-22)

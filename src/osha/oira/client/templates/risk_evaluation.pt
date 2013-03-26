@@ -17,7 +17,7 @@
     class="evaluation ${webhelpers/extra_css}">
     <h1>${view/title}</h1>
 
-    <div class="notice" tal:define="show_statement python:True">
+    <div class="notice message" tal:define="show_statement python:True">
       <metal:call use-macro="webhelpers/macros/risk_info" />
     </div>
 
@@ -89,7 +89,7 @@
                 <tal:span i18n:translate="frequency_french_not_often">Not very often</tal:span><br/>
                 <dfn class="icon info pat-tooltip" i18n:attributes="title frequency_french_not_often_help;" title="Once per month"></dfn>
             </label>
-            <label> 
+            <label>
                 <input type="radio" name="frequency:int" value="7" checked="${python:'checked' if value==7 else None}"/>
                 <tal:span i18n:translate="frequency_french_often">Often</tal:span><br/>
                 <dfn class="icon info pat-tooltip" i18n:attributes="title frequency_french_often_help;" title="Once per week"></dfn>
@@ -119,7 +119,7 @@
         <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="previous floatBefore back">Previous</button>
         <button type="submit" name="next" value="next" i18n:translate="label_save_and_continue" class="next floatAfter">Save and continue</button>
       </p>
-      
+
       <fieldset class="concise" id="comments">
         <textarea id="comment" name="comment:utf8:ustring" class="span-15" rows="5"
             placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
@@ -177,5 +177,5 @@
     <tal:block replace="tile:client-analytics"/>
   </body>
 </html>
-      
+
 

@@ -95,3 +95,16 @@ def alter_time_column(context):
         transaction.get().commit()
     log.info("Changed default for column 'time' to current timestamp")
 
+
+def remove_birt_file_format(context):
+    site = getSite()
+    sprops = site.portal_properties.site_properties
+    url = sprops.getProperty('birt_report_url')
+    base, query = url.split('?')
+    if not query:
+        return
+    params = query.split('&')
+    if '__format=pdf' in params:
+        params.remove('__format=pdf')
+        newurl = '?'.join([base, '&'.join(params)])
+        sprops.manage_changeProperties({'birt_report_url': newurl})

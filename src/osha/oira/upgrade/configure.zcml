@@ -60,5 +60,17 @@
 
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+        source="6"
+        destination="7"
+        profile="osha.oira:default">
+
+    <genericsetup:upgradeStep
+        title="Remove __format=pdf from birt_report_url"
+        description="BIRT report file format is now chosen in the statistics form and should not be set in the birt_report_url"
+        handler=".upgrade.remove_birt_file_format"/>
+
+  </genericsetup:upgradeSteps>
+
 </configure>
 

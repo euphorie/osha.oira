@@ -91,6 +91,13 @@ class StatisticsSchema(form.Schema):
         schema=IReportPeriod,
     )
 
+    file_format = schema.Choice(
+        title=_(u'label_report_file_format', default=u'File Format'),
+        vocabulary='osha.oira.report_file_format',
+        required=True,
+    )
+    form.widget(file_format=SelectFieldWidget)
+
 
 class WriteStatistics(grok.View):
     grok.context(IPloneSiteRoot)
@@ -214,9 +221,13 @@ class StatisticsMixin(object):
             quarter = period % 12
         else:
             month = period
+        file_format = data.get('file_format')
         url = "&".join([url,
-                        'year=%d' % year, 'month=%d' % month, 'quarter=%d' %
-                        quarter])
+                        'year=%d' % year,
+                        'month=%d' % month,
+                        'quarter=%d' % quarter,
+                        '__format=%s' % file_format,
+                        ])
         return url
 
     def _handleSubmit(self):

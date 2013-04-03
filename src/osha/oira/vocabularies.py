@@ -163,3 +163,17 @@ class CountriesVocabulary(object):
 grok.global_utility(CountriesVocabulary,
                     name='osha.oira.countries')
 
+
+class ReportFileFormatVocabulary(object):
+    """ """
+    grok.implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        formats = {'Excel': 'xls',
+                   'PDF':   'pdf',
+                   }
+        return SimpleVocabulary.fromItems(formats.items())
+
+grok.global_utility(ReportFileFormatVocabulary,
+                    name='osha.oira.report_file_format')
+

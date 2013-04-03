@@ -2,13 +2,24 @@ Changelog
 =========
 
 2.1.1 (unreleased)
-.-----------------
+------------------
+
+Upgrade notes
+~~~~~~~~~~~~~
+
+This release updates the profile version to *7*. Please use the upgrade feature
+in ``portal_setup`` to upgrade the ``osha.oira:default`` profile to this
+version.
 
 Bugfixes
 ~~~~~~~~
 
 - Added class "Message" on risk_evaluation, fixed github #93 [pysailor]
 
+Feature changes
+~~~~~~~~~~~~~~~
+
+- allow choosing file format (pdf/xls) in statistics form, refs #7169 [reinhardt]
 
 2.1 (2013-03-22)
 ----------------

@@ -11,6 +11,11 @@ This release updates the profile version to *7*. Please use the upgrade feature
 in ``portal_setup`` to upgrade the ``osha.oira:default`` profile to this
 version.
 
+Feature changes
+~~~~~~~~~~~~~~~
+
+- Added Hungarian translations #7091 [pysailor]
+
 
 Feature changes
 ~~~~~~~~~~~~~~~

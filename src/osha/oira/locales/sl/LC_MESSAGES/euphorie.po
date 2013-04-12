@@ -928,7 +928,9 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
-msgstr "Nevarnosti/težave, ki jih ni v vaši organizaciji"
+msgstr ""
+"Nevarnosti/težave, ki so v vaši organizaciji nadzorovane/obvladane, oziroma "
+"niso prisotne."
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/survey.py:512
@@ -1593,8 +1595,8 @@ msgstr ""
 #: src/osha/oira/client/templates/report.pt:28
 msgid "label_report_comment"
 msgstr ""
-"V to polje vnesite morebitne dodatne opombe, ki bi morale biti vključene v "
-"poročilo."
+"V to polje vnesite vse morebitne opombe glede zgoraj navedenega, "
+"identificiranega tveganja."
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -1992,8 +1994,8 @@ msgstr "Vnesite veljavno leto po 1900"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"V to polje vnesite vse opombe, ki jih morda imate glede zgornjega vprašanja. "
-"Te opombe se bodo uporabile v akcijskem načrtu."
+"V to polje vnesite vse morebitne opombe glede zgoraj navedenega, "
+"identificiranega tveganja. Te opombe bodo upoštevane v akcijskem načrtu."
 
 #. Default: What is the chance of this risk occurring?
 #: src/osha/oira/client/templates/risk_evaluation.pt:28
@@ -2999,11 +3001,9 @@ msgstr "Prijava ni uspela. Če ste geslo pozabili, lahko ${reset_password}."
 #~ msgid "profilequestion_type_repeat"
 #~ msgstr "To je ponavljajoč element profila."
 
-#, fuzzy
 #~ msgid "help_header_preparation"
 #~ msgstr "To besedilo mora pojasniti 2 vrsti profilnih vprašanj."
 
-#, fuzzy
 #~ msgid "label_help_start"
 #~ msgstr "Poročilo"
 

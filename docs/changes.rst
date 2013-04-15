@@ -15,6 +15,7 @@ Feature changes
 ~~~~~~~~~~~~~~~
 
 - Added Hungarian translations #7091 [pysailor]
+- Changed title for statistics report to re-use existing translations [pysailor]
 
 
 Feature changes

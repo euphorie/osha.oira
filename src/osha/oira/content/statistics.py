@@ -267,8 +267,9 @@ class CountryStatistics(form.SchemaForm, StatisticsMixin):
     grok.layer(IOSHAContentSkinLayer)
     schema = StatisticsSchema
     ignoreContext = True
-    label = _('title_country_statistics',
-              default='Country Statistics Reporting')
+    label = _('title_statistics',
+              default='Statistics Reporting')
+    label_detail = _('label_country', default=u'Country')
     template = None
     form_template = ViewPageTemplateFile("templates/statistics.pt")
 
@@ -294,8 +295,9 @@ class SectorStatistics(form.SchemaForm, StatisticsMixin):
     grok.layer(IOSHAContentSkinLayer)
     schema = StatisticsSchema
     ignoreContext = True
-    label = _('title_sector_statistics',
-              default='Sector Statistics Reporting')
+    label = _('title_statistics',
+              default='Statistics Reporting')
+    label_detail = _('Sector', default=u'Sector')
     template = None
     form_template = ViewPageTemplateFile("templates/statistics.pt")
 
@@ -326,8 +328,9 @@ class GlobalStatistics(form.SchemaForm, StatisticsMixin):
     grok.layer(IOSHAContentSkinLayer)
     schema = StatisticsSchema
     ignoreContext = True
-    label = _('title_global_statistics',
-              default='Global Statistics Reporting')
+    label = _('title_statistics',
+              default='Statistics Reporting')
+    label_detail = _('label_global', default=u'Global')
     template = None
     form_template = ViewPageTemplateFile("templates/statistics.pt")
 

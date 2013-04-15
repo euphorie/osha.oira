@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-04-04 15:35+0200\n"
+"POT-Creation-Date: 2013-04-15 18:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2249,25 +2249,33 @@ msgstr ""
 msgid "label_report_file_format"
 msgstr ""
 
-#. Default: Country Statistics Reporting
+#. Default: Statistics Reporting
 #: src/osha/oira/content/statistics.py:270
-msgid "title_country_statistics"
+#: src/osha/oira/content/statistics.py:298
+#: src/osha/oira/content/statistics.py:331
+msgid "title_statistics"
 msgstr ""
 
-#: src/osha/oira/content/statistics.py:275
-#: src/osha/oira/content/statistics.py:302
-#: src/osha/oira/content/statistics.py:334
+#. Default: Country
+#: src/osha/oira/content/statistics.py:272
+msgid "label_country"
+msgstr ""
+
+#: src/osha/oira/content/statistics.py:276
+#: src/osha/oira/content/statistics.py:304
+#: src/osha/oira/content/statistics.py:337
 msgid "Submit"
 msgstr ""
 
-#. Default: Sector Statistics Reporting
-#: src/osha/oira/content/statistics.py:297
-msgid "title_sector_statistics"
+#. Default: Sector
+#: src/osha/oira/content/statistics.py:300
+#: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
+msgid "Sector"
 msgstr ""
 
-#. Default: Global Statistics Reporting
-#: src/osha/oira/content/statistics.py:329
-msgid "title_global_statistics"
+#. Default: Global
+#: src/osha/oira/content/statistics.py:333
+msgid "label_global"
 msgstr ""
 
 #. Default: You can not delete an OiRA tool that has been published.
@@ -2619,10 +2627,6 @@ msgid ""
 "corresponding module will be skipped entirely. If the end-user enters "
 "more than one option to a repeatable profile question then the "
 "corresponding module will be repeated the specified number of times."
-msgstr ""
-
-#: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
-msgid "Sector"
 msgstr ""
 
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:8

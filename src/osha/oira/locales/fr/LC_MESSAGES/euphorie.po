@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-04-04 15:35+0200\n"
+"POT-Creation-Date: 2013-04-15 18:51+0200\n"
 "PO-Revision-Date: 2013-04-04 16:14+0200\n"
 "Last-Translator: cath\n"
 "Language-Team: en <LL@li.org>\n"
@@ -1909,8 +1909,8 @@ msgid ""
 "${manage} the problems/risks in your workplace (specific tasks, expertise, "
 "responsibilities, deadlines)."
 msgstr ""
-"${manage} des actions programmées sur vos lieux de travail "
-"(mesures spécifiques, expertise, personnes responsables, dates limites)"
+"${manage} des actions programmées sur vos lieux de travail (mesures "
+"spécifiques, expertise, personnes responsables, dates limites)"
 
 #: src/osha/oira/client/templates/risk_actionplan.pt:19
 msgid ""
@@ -2495,7 +2495,7 @@ msgstr ""
 #. Default: Country
 #: src/osha/oira/content/statistics.py:76
 msgid "label_report_countries"
-msgstr ""
+msgstr "Pays"
 
 #. Default: Tool
 #: src/osha/oira/content/statistics.py:83
@@ -2514,29 +2514,34 @@ msgstr ""
 msgid "label_report_file_format"
 msgstr "Vous pouvez écrire ici tout commentaire se rapportant à cette question"
 
-#. Default: Country Statistics Reporting
+#. Default: Statistics Reporting
 #: src/osha/oira/content/statistics.py:270
-#, fuzzy
-msgid "title_country_statistics"
+#: src/osha/oira/content/statistics.py:298
+#: src/osha/oira/content/statistics.py:331
+msgid "title_statistics"
 msgstr "Relevé des statistiques"
 
-#: src/osha/oira/content/statistics.py:275
-#: src/osha/oira/content/statistics.py:302
-#: src/osha/oira/content/statistics.py:334
+#. Default: Country
+#: src/osha/oira/content/statistics.py:272
+msgid "label_country"
+msgstr "Pays"
+
+#: src/osha/oira/content/statistics.py:276
+#: src/osha/oira/content/statistics.py:304
+#: src/osha/oira/content/statistics.py:337
 msgid "Submit"
 msgstr ""
 
-#. Default: Sector Statistics Reporting
-#: src/osha/oira/content/statistics.py:297
-#, fuzzy
-msgid "title_sector_statistics"
-msgstr "Relevé des statistiques"
+#. Default: Sector
+#: src/osha/oira/content/statistics.py:300
+#: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
+msgid "Sector"
+msgstr "Secteur"
 
-#. Default: Global Statistics Reporting
-#: src/osha/oira/content/statistics.py:329
-#, fuzzy
-msgid "title_global_statistics"
-msgstr "Relevé des statistiques"
+#. Default: Global
+#: src/osha/oira/content/statistics.py:333
+msgid "label_global"
+msgstr ""
 
 #. Default: You can not delete an OiRA tool that has been published.
 #: src/osha/oira/content/surveygroup.py:82
@@ -2924,10 +2929,6 @@ msgstr ""
 "profil répétable alors le module correspondant sera répété le nombre de fois "
 "indiqué."
 
-#: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
-msgid "Sector"
-msgstr "Secteur"
-
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:8
 msgid "A sector is a national organisation for a specific type of industry."
 msgstr ""
@@ -3047,6 +3048,18 @@ msgid "message_invalid_login"
 msgstr ""
 "Mot de passe incorrect. Si vous avez oublié votre mot de passe, cliquez sur "
 "${reset_password}."
+
+#, fuzzy
+#~ msgid "title_country_statistics"
+#~ msgstr "Relevé des statistiques"
+
+#, fuzzy
+#~ msgid "title_sector_statistics"
+#~ msgstr "Relevé des statistiques"
+
+#, fuzzy
+#~ msgid "title_global_statistics"
+#~ msgstr "Relevé des statistiques"
 
 #~ msgid "label_add_profile_module"
 #~ msgstr "Ajouter"

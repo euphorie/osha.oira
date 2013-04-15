@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-04-04 15:35+0200\n"
+"POT-Creation-Date: 2013-04-15 18:51+0200\n"
 "PO-Revision-Date: 2013-04-04 15:38+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2469,29 +2469,34 @@ msgstr "Zpráva"
 msgid "label_report_file_format"
 msgstr "Prosíme o případné připomínky k problematice uvedené v otázce výše"
 
-#. Default: Country Statistics Reporting
+#. Default: Statistics Reporting
 #: src/osha/oira/content/statistics.py:270
-#, fuzzy
-msgid "title_country_statistics"
+#: src/osha/oira/content/statistics.py:298
+#: src/osha/oira/content/statistics.py:331
+msgid "title_statistics"
 msgstr "Statistické vykazování"
 
-#: src/osha/oira/content/statistics.py:275
-#: src/osha/oira/content/statistics.py:302
-#: src/osha/oira/content/statistics.py:334
+#. Default: Country
+#: src/osha/oira/content/statistics.py:272
+msgid "label_country"
+msgstr ""
+
+#: src/osha/oira/content/statistics.py:276
+#: src/osha/oira/content/statistics.py:304
+#: src/osha/oira/content/statistics.py:337
 msgid "Submit"
 msgstr ""
 
-#. Default: Sector Statistics Reporting
-#: src/osha/oira/content/statistics.py:297
-#, fuzzy
-msgid "title_sector_statistics"
-msgstr "Statistické vykazování"
+#. Default: Sector
+#: src/osha/oira/content/statistics.py:300
+#: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
+msgid "Sector"
+msgstr "Sektor"
 
-#. Default: Global Statistics Reporting
-#: src/osha/oira/content/statistics.py:329
-#, fuzzy
-msgid "title_global_statistics"
-msgstr "Statistické vykazování"
+#. Default: Global
+#: src/osha/oira/content/statistics.py:333
+msgid "label_global"
+msgstr ""
 
 #. Default: You can not delete an OiRA tool that has been published.
 #: src/osha/oira/content/surveygroup.py:82
@@ -2869,10 +2874,6 @@ msgstr ""
 "zadá do opakovatelné profilové otázky více než jednu možnost, pak se bude "
 "příslušný modul opakovat tolikrát, kolik opakování bude určeno."
 
-#: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
-msgid "Sector"
-msgstr "Sektor"
-
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:8
 msgid "A sector is a national organisation for a specific type of industry."
 msgstr "Sektor je národní organizace pro konkrétní typ průmyslu."
@@ -2987,6 +2988,18 @@ msgstr ""
 msgid "message_invalid_login"
 msgstr ""
 "Neplatné přihlášení. Pokud jste zapomněli heslo, můžete ${reset_password}."
+
+#, fuzzy
+#~ msgid "title_country_statistics"
+#~ msgstr "Statistické vykazování"
+
+#, fuzzy
+#~ msgid "title_sector_statistics"
+#~ msgstr "Statistické vykazování"
+
+#, fuzzy
+#~ msgid "title_global_statistics"
+#~ msgstr "Statistické vykazování"
 
 #~ msgid "not"
 #~ msgstr "NEBUDOU"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-04-04 15:35+0200\n"
+"POT-Creation-Date: 2013-04-15 18:51+0200\n"
 "PO-Revision-Date: 2011-02-16 12:03+0100\n"
 "Last-Translator: Judith Verschuren <idioom@planet.nl>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -2475,25 +2475,33 @@ msgstr ""
 "Vul hier eventuele opmerkingen in die moeten worden meegenomen in het "
 "rapport."
 
-#. Default: Country Statistics Reporting
+#. Default: Statistics Reporting
 #: src/osha/oira/content/statistics.py:270
-msgid "title_country_statistics"
+#: src/osha/oira/content/statistics.py:298
+#: src/osha/oira/content/statistics.py:331
+msgid "title_statistics"
 msgstr ""
 
-#: src/osha/oira/content/statistics.py:275
-#: src/osha/oira/content/statistics.py:302
-#: src/osha/oira/content/statistics.py:334
+#. Default: Country
+#: src/osha/oira/content/statistics.py:272
+msgid "label_country"
+msgstr ""
+
+#: src/osha/oira/content/statistics.py:276
+#: src/osha/oira/content/statistics.py:304
+#: src/osha/oira/content/statistics.py:337
 msgid "Submit"
 msgstr ""
 
-#. Default: Sector Statistics Reporting
-#: src/osha/oira/content/statistics.py:297
-msgid "title_sector_statistics"
+#. Default: Sector
+#: src/osha/oira/content/statistics.py:300
+#: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
+msgid "Sector"
 msgstr ""
 
-#. Default: Global Statistics Reporting
-#: src/osha/oira/content/statistics.py:329
-msgid "title_global_statistics"
+#. Default: Global
+#: src/osha/oira/content/statistics.py:333
+msgid "label_global"
 msgstr ""
 
 #. Default: You can not delete an OiRA tool that has been published.
@@ -2873,10 +2881,6 @@ msgstr ""
 "aan te vinken), wordt de betreffende module volledig overgeslagen. Wanneer "
 "de eindgebruiker meer dan een optie opgeeft voor een herhaalbare "
 "profielvraag, wordt de betreffende module zo vaak herhaald als aangegeven."
-
-#: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
-msgid "Sector"
-msgstr ""
 
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:8
 msgid "A sector is a national organisation for a specific type of industry."

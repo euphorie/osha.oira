@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.18dev1\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-04-04 15:35+0200\n"
+"POT-Creation-Date: 2013-04-15 18:51+0200\n"
 "PO-Revision-Date: 2013-04-04 15:38+0200\n"
 "Last-Translator: Cristina <cr_montoya@hotmail.com>\n"
 "Language-Team: ES <LL@li.org>\n"
@@ -2490,29 +2490,34 @@ msgstr ""
 "Por favor, deje cualquier comentario que tenga sobre la pregunta anterior en "
 "este campo"
 
-#. Default: Country Statistics Reporting
+#. Default: Statistics Reporting
 #: src/osha/oira/content/statistics.py:270
-#, fuzzy
-msgid "title_country_statistics"
+#: src/osha/oira/content/statistics.py:298
+#: src/osha/oira/content/statistics.py:331
+msgid "title_statistics"
 msgstr "Informe Estadístico"
 
-#: src/osha/oira/content/statistics.py:275
-#: src/osha/oira/content/statistics.py:302
-#: src/osha/oira/content/statistics.py:334
+#. Default: Country
+#: src/osha/oira/content/statistics.py:272
+msgid "label_country"
+msgstr ""
+
+#: src/osha/oira/content/statistics.py:276
+#: src/osha/oira/content/statistics.py:304
+#: src/osha/oira/content/statistics.py:337
 msgid "Submit"
 msgstr ""
 
-#. Default: Sector Statistics Reporting
-#: src/osha/oira/content/statistics.py:297
-#, fuzzy
-msgid "title_sector_statistics"
-msgstr "Informe Estadístico"
+#. Default: Sector
+#: src/osha/oira/content/statistics.py:300
+#: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
+msgid "Sector"
+msgstr "Sector"
 
-#. Default: Global Statistics Reporting
-#: src/osha/oira/content/statistics.py:329
-#, fuzzy
-msgid "title_global_statistics"
-msgstr "Informe Estadístico"
+#. Default: Global
+#: src/osha/oira/content/statistics.py:333
+msgid "label_global"
+msgstr ""
 
 #. Default: You can not delete an OiRA tool that has been published.
 #: src/osha/oira/content/surveygroup.py:82
@@ -2897,10 +2902,6 @@ msgstr ""
 "usuario final introduce más de una opción en un perfil repetible, el módulo "
 "correspondiente se repetirá el número de veces especificado."
 
-#: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
-msgid "Sector"
-msgstr "Sector"
-
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:8
 msgid "A sector is a national organisation for a specific type of industry."
 msgstr ""
@@ -3021,6 +3022,18 @@ msgstr ""
 #: src/osha/oira/templates/login.pt:16
 msgid "message_invalid_login"
 msgstr "Usuario inválido. Si ha olvidado su clave, puede ${reset_password}."
+
+#, fuzzy
+#~ msgid "title_country_statistics"
+#~ msgstr "Informe Estadístico"
+
+#, fuzzy
+#~ msgid "title_sector_statistics"
+#~ msgstr "Informe Estadístico"
+
+#, fuzzy
+#~ msgid "title_global_statistics"
+#~ msgstr "Informe Estadístico"
 
 #~ msgid "not"
 #~ msgstr "no"

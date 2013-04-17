@@ -25,7 +25,7 @@
       }
     </style>
 </head>
-<body tal:define="risk nocall:view/risk; data view/data; lang here/@@plone_portal_state/language" 
+<body tal:define="risk nocall:view/risk; data view/data; lang here/@@plone_portal_state/language"
         tal:attributes="lang lang"
         class="actionplan ${webhelpers/extra_css}">
 
@@ -63,16 +63,16 @@
             <a href="#measure-${number}">
                 <tal:measure i18n:translate="header_measure_single">Measure</tal:measure>
                 <tal:number replace="number">1</tal:number>
-                <span class="icon delete" 
+                <span class="icon delete"
                     i18n:translate="label_delete"
                     i18n:attributes="title label_remove_measure" title="Delete this measure">Delete</span></a>
         </tal:def>
     </tal:repeat>
-    <button type="submit" 
-        id="addMeasureButton" 
-        i18n:translate="label_add" 
-        i18n:attributes="title label_add" 
-        class="small" 
+    <button type="submit"
+        id="addMeasureButton"
+        i18n:translate="label_add"
+        i18n:attributes="title label_add"
+        class="small"
         title="Add another measure">Add another measure</button>
 </nav>
 
@@ -85,28 +85,28 @@
         <legend><span i18n:translate="label_description">Description</span>
         <a href="#standardSolutions" class="button small solutions" tal:condition="python:view.solutions" i18n:translate="">Standard solutions</a>
             <a class="icon info pat-tooltip" data-pat-tooltip="content: source;" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip" i18n:attributes="title actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</a>
-        </legend> 
-        <textarea class="actionPlan" id="actionplan-1" 
-            type="text" 
-            name="measure.action_plan:utf8:ustring:records" 
-            rows="6" 
+        </legend>
+        <textarea class="actionPlan" id="actionplan-1"
+            type="text"
+            name="measure.action_plan:utf8:ustring:records"
+            rows="6"
             placeholder="General approach (to eliminate or reduce the risk)"
             i18n:attributes="placeholder label_measure_action_plan"
             tal:content="actionplan/action_plan|nothing"></textarea>
-        
-        <textarea 
-            class="preventionPlan" 
-            id="preventionplan-1" 
-            name="measure.prevention_plan:utf8:ustring:records" 
-            rows="3" 
+
+        <textarea
+            class="preventionPlan"
+            id="preventionplan-1"
+            name="measure.prevention_plan:utf8:ustring:records"
+            rows="3"
             placeholder="Specific action(s) required to implement this approach"
             i18n:attributes="placeholder label_measure_prevention_plan"
             tal:content="actionplan/prevention_plan|nothing"></textarea>
-        
-        <textarea class="requirements" 
-            id="requirements-1" 
-            name="measure.requirements:utf8:ustring:records" 
-            rows="3" 
+
+        <textarea class="requirements"
+            id="requirements-1"
+            name="measure.requirements:utf8:ustring:records"
+            rows="3"
             placeholder="Level of expertise and/or requirements needed"
             i18n:attributes="placeholder label_measure_requirements"
             tal:content="actionplan/requirements|nothing"></textarea>
@@ -133,28 +133,28 @@
                 <legend i18n:translate="label_action_plan_start">Planning start</legend>
                 <fieldset class="date-eu">
                     <label class="${python:'error' if day_error else None}" for="label-planning-start-day-${number}" i18n:translate="label_day">Day</label>
-                    <input name="measure.planning_start_day:records" 
-                            id="planning-start-day-${number}" 
+                    <input name="measure.planning_start_day:records"
+                            id="planning-start-day-${number}"
                             maxlength="2"
                             type="number"
                             class="numeric day${python:' error' if day_error else ''}"
                             value="${actionplan/planning_start_day|actionplan/planning_start/day|nothing}"/>
                     <em class="message error" tal:condition="day_error" i18n:translate="error_invalid_day">Invalid day</em>
                     <label for="planning-start-month-${number}" i18n:translate="label_month">Month</label>
-                    <select name="measure.planning_start_month:records" 
-                            id="planning-start-month-${number}" 
+                    <select name="measure.planning_start_month:records"
+                            id="planning-start-month-${number}"
                             class="month"
                             tal:define="value actionplan/planning_start_month|actionplan/planning_start/month|nothing">
                         <tal:loop_months repeat="month webhelpers/months">
-                            <option value="${python:month[0]}" 
+                            <option value="${python:month[0]}"
                                     selected="${python:'selected' if str(value)==str(month[0]) else None}">${python:month[1]}</option>
                         </tal:loop_months>
                     </select>
-                    <label class="${python:'error' if year_error else None}" 
-                            for="planning-start-year-${number}" 
+                    <label class="${python:'error' if year_error else None}"
+                            for="planning-start-year-${number}"
                             i18n:translate="label_year">Year</label>
-                    <input name="measure.planning_start_year:records" 
-                            id="planning-start-year-${number}" 
+                    <input name="measure.planning_start_year:records"
+                            id="planning-start-year-${number}"
                             maxlength="4"
                             type="number"
                             class="numeric year enablePicker${python:' error' if year_error else ''}"
@@ -184,8 +184,8 @@
                     <select name="measure.planning_end_month:records" id="planning-end-month-${number}" class="month"
                             tal:define="value actionplan/planning_end_month|actionplan/planning_end/month|nothing">
                         <tal:loop_months repeat="month webhelpers/months">
-                            <option 
-                                value="${python:month[0]}" 
+                            <option
+                                value="${python:month[0]}"
                                 selected="${python:'selected' if str(value)==str(month[0]) else None}">${python:month[1]}</option>
                         </tal:loop_months>
                     </select>
@@ -207,15 +207,15 @@
 </div>
 
 <p class="buttonBar">
-    <button type="submit" name="next" value="previous" 
+    <button type="submit" name="next" value="previous"
             i18n:translate="label_previous" class="previous floatBefore back">Previous</button>
-    <button type="submit" name="next" value="next" 
+    <button type="submit" name="next" value="next"
             i18n:translate="label_save_and_continue" class="next floatAfter">Save and continue</button>
 </p>
 
 <fieldset class="concise" id="comments">
-    <textarea id="comment" name="comment:utf8:ustring" 
-        class="span-15" rows="5" 
+    <textarea id="comment" name="comment:utf8:ustring"
+        class="span-15" rows="5"
         placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
         i18n:attributes="placeholder label_comment"
         tal:content="data/comment|nothing"></textarea>
@@ -265,7 +265,7 @@
     <ul id="navigation">
       <metal:home use-macro="webhelpers/macros/homelink"/>
       <li><a href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a></li>
-      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">Sessions</a></li>
+      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">My Assessments</a></li>
       <li><a href="${webhelpers/help_url}#actionplan" i18n:translate="navigation_help">Help</a></li>
       <li><a href="${webhelpers/survey_url}/status" i18n:translate="navigation_status">Status</a></li>
       <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>

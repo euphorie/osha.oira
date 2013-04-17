@@ -7,7 +7,7 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       meta:interpolation="true"
       i18n:domain="euphorie"
-      tal:define="client nocall:request/client; 
+      tal:define="client nocall:request/client;
                   webhelpers nocall:context/@@webhelpers;">
   <head>
     <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
@@ -33,7 +33,7 @@
 
     <div class="column span-7 append-1">
       <p><a class="button button-medium bar download rtf icon-download" href="${python:view.url(name='download')}" i18n:translate="">Download the full report</a></p>
-      
+
       <ul>
         <li i18n:translate="">Format: Rich Text Format (.rtf)</li>
         <li i18n:translate="">Contains: all the information and input provided by you throughout the risk assessment process.</li>
@@ -98,7 +98,7 @@
     <ul id="navigation">
       <metal:home use-macro="webhelpers/macros/homelink"/>
       <li><a href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a></li>
-      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">Sessions</a></li>
+      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">My Assessments</a></li>
       <li><a href="${webhelpers/help_url}#preparation" i18n:translate="navigation_help">Help</a></li>
       <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>
     </ul>

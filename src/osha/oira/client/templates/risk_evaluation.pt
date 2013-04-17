@@ -125,6 +125,9 @@
             placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
             i18n:attributes="placeholder label_comment">${context/comment}</textarea>
       </fieldset>
+      <div class="last span-15" tal:condition="risk/legal_reference|nothing">
+          <metal:call use-macro="webhelpers/macros/risk_legal_collapsible" />
+      </div>
     </form>
 
     <ol id="steps" tal:define="survey_url webhelpers/survey_url">

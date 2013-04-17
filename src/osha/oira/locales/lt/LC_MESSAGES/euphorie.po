@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-04-15 18:51+0200\n"
+"POT-Creation-Date: 2013-04-17 17:30+0200\n"
 "PO-Revision-Date: 2013-04-04 15:38+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -369,12 +369,12 @@ msgstr "Bendroji rizikos vertinimo informacija"
 #. Default: Registration
 #: src/osha/oira/manual_translations.py:104
 msgid "label_help_authentication"
-msgstr ""
+msgstr "Registracija"
 
 #. Default: Registration
 #: src/osha/oira/manual_translations.py:105
 msgid "help_header_authentication"
-msgstr ""
+msgstr "Registracija"
 
 #. Default: This text should explain how to register and login.
 #: src/osha/oira/manual_translations.py:106
@@ -386,12 +386,12 @@ msgstr ""
 #. Default: Carrying out your risk assessment
 #: src/osha/oira/manual_translations.py:108
 msgid "help_header_sessions"
-msgstr "Seansai"
+msgstr "Atlikite rizikos vertinimą"
 
 #. Default: Carrying out your risk assessment
 #: src/osha/oira/manual_translations.py:109
 msgid "label_help_sessions"
-msgstr ""
+msgstr "Atlikite rizikos vertinimą"
 
 #. Default: This text should describe the main functions of the OiRA Tool.
 #: src/osha/oira/manual_translations.py:110
@@ -402,12 +402,12 @@ msgstr ""
 #. Default: 1. Preparation
 #: src/osha/oira/manual_translations.py:112
 msgid "help_header_start"
-msgstr ""
+msgstr "1. Paruošimas"
 
 #. Default: 1. Preparation
 #: src/osha/oira/manual_translations.py:113
 msgid "label_help_preparation"
-msgstr ""
+msgstr "1. Paruošimas"
 
 #. Default: This text should explain the 2 types of profile questions.
 #: src/osha/oira/manual_translations.py:114
@@ -417,12 +417,12 @@ msgstr "Šiuo tekstu turėtų būti paaiškinti du profilio klausimų tipai."
 #. Default: 2. Identification
 #: src/osha/oira/manual_translations.py:116
 msgid "help_header_identification"
-msgstr ""
+msgstr "2. Nustatymas"
 
 #. Default: 2. Identification
 #: src/osha/oira/manual_translations.py:117
 msgid "label_help_identification"
-msgstr ""
+msgstr "2. Nustatymas"
 
 #. Default: This text should explain how the risk identification works.
 #: src/osha/oira/manual_translations.py:118
@@ -433,12 +433,12 @@ msgstr ""
 #. Default: 3. Evaluation
 #: src/osha/oira/manual_translations.py:120
 msgid "help_header_evaluation"
-msgstr ""
+msgstr "3. Vertinimas"
 
 #. Default: 3. Evaluation
 #: src/osha/oira/manual_translations.py:121
 msgid "label_help_evaluation"
-msgstr ""
+msgstr "3. Vertinimas"
 
 #. Default: This text should explain how to evaluate the identified risks.
 #: src/osha/oira/manual_translations.py:122
@@ -449,12 +449,12 @@ msgstr ""
 #. Default: 4. Action Plan
 #: src/osha/oira/manual_translations.py:124
 msgid "help_header_actionplan"
-msgstr ""
+msgstr "4. Veiksmų planas"
 
 #. Default: 4. Action Plan
 #: src/osha/oira/manual_translations.py:125
 msgid "label_help_actionplan"
-msgstr ""
+msgstr "4. Veiksmų planas"
 
 #. Default: This text should explain how to fill in the Action plan.
 #: src/osha/oira/manual_translations.py:126
@@ -465,19 +465,13 @@ msgstr ""
 
 #. Default: 5. Report
 #: src/osha/oira/manual_translations.py:128
-#, fuzzy
 msgid "help_header_reports"
-msgstr ""
-"Šiuo tekstu turėtų būti paaiškinta, kaip reikia išsaugoti arba atspausdinti "
-"ataskaitą."
+msgstr "5. Ataskaita"
 
 #. Default: 5. Report
 #: src/osha/oira/manual_translations.py:129
-#, fuzzy
 msgid "label_help_reports"
-msgstr ""
-"Šiuo tekstu turėtų būti paaiškinta, kaip reikia išsaugoti arba atspausdinti "
-"ataskaitą."
+msgstr "5. Ataskaita"
 
 #. Default: This text should describe how the report can either be saved or
 #. printed.
@@ -490,12 +484,12 @@ msgstr ""
 #. Default: What happens next?
 #: src/osha/oira/manual_translations.py:132
 msgid "label_help_finalwords"
-msgstr ""
+msgstr "Kas toliau?"
 
 #. Default: What happens next?
 #: src/osha/oira/manual_translations.py:133
 msgid "help_header_finalwords"
-msgstr ""
+msgstr "Kas toliau?"
 
 #. Default: General final recommendations.
 #: src/osha/oira/manual_translations.py:134
@@ -700,9 +694,8 @@ msgid "label_remove_measure"
 msgstr "Pašalinti šią priemonę"
 
 #: src/osha/oira/vocabularies.py:51
-#, fuzzy
 msgid "Whole year"
-msgstr "Taip"
+msgstr ""
 
 #: src/osha/oira/vocabularies.py:54
 msgid "1st Quarter"
@@ -1681,7 +1674,7 @@ msgstr ""
 #. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:166
+#: src/osha/oira/client/templates/webhelpers.pt:167
 msgid "top5_risk_not_present"
 msgstr ""
 "Ši rizika šiuo metu jūsų organizacijoje nekyla, bet kadangi ekonominėje "
@@ -1773,7 +1766,7 @@ msgstr "Praleisti šį etapą"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:178
+#: src/osha/oira/client/templates/webhelpers.pt:179
 msgid "warn_risk_present"
 msgstr "Apie ankstesnį teiginį atsiliepėte neigiamai."
 
@@ -1800,13 +1793,10 @@ msgid "Provide evidence for supervisory authorities."
 msgstr "įrodymams priežiūros institucijoms pateikti;"
 
 #: src/osha/oira/client/templates/report_landing.pt:28
-#, fuzzy
 msgid ""
 "Pass information to the people concerned (workers, safety representatives, "
 "employers, experts in occupational safety and health, ...)"
 msgstr ""
-"informacijai susijusiems asmenims perduoti (darbuotojams, saugos atstovams, "
-"darbdaviui, darbuotojų sveikatos ir saugos ekspertams ir kt.);"
 
 #: src/osha/oira/client/templates/report_landing.pt:29
 msgid "Monitor and assess whether necessary measures have been introduced."
@@ -1989,9 +1979,8 @@ msgstr "Diena"
 #. Default: Invalid day
 #: src/osha/oira/client/templates/risk_actionplan.pt:142
 #: src/osha/oira/client/templates/risk_actionplan.pt:180
-#, fuzzy
 msgid "error_invalid_day"
-msgstr "Biudžetą sudarinėkite sumas nurodydami eurais."
+msgstr ""
 
 #. Default: Month
 #: src/osha/oira/client/templates/risk_actionplan.pt:143
@@ -2002,7 +1991,7 @@ msgstr "Toliau"
 
 #. Default: Year
 #: src/osha/oira/client/templates/risk_actionplan.pt:153
-#: src/osha/oira/content/statistics.py:35
+#: src/osha/oira/content/statistics.py:34
 #, fuzzy
 msgid "label_year"
 msgstr "Taip"
@@ -2010,9 +1999,8 @@ msgstr "Taip"
 #. Default: Please enter a valid year after 1900
 #: src/osha/oira/client/templates/risk_actionplan.pt:162
 #: src/osha/oira/client/templates/risk_actionplan.pt:199
-#, fuzzy
 msgid "error_invalid_year"
-msgstr "Biudžetą sudarinėkite sumas nurodydami eurais."
+msgstr ""
 
 #. Default: Please leave any comments you may have on the question above in
 #. this field. These comments will be used in the action plan.
@@ -2312,17 +2300,12 @@ msgid "Postponed"
 msgstr ""
 
 #: src/osha/oira/client/templates/webhelpers.pt:106
-#, fuzzy
 msgid "Risk not present"
 msgstr ""
-"Ši rizika šiuo metu jūsų organizacijoje nekyla, bet kadangi ekonominėje "
-"veikloje, kurią jūs vykdote, ši rizika yra laikoma prioritetine, į ataskaitą "
-"ją būtina įtraukti."
 
 #: src/osha/oira/client/templates/webhelpers.pt:107
-#, fuzzy
 msgid "Risk present"
-msgstr "Apie ankstesnį teiginį atsiliepėte neigiamai."
+msgstr ""
 
 #. Default: Produced by ${EU-OSHA}.
 #: src/osha/oira/client/templates/webhelpers.pt:121
@@ -2354,18 +2337,18 @@ msgid "CC License"
 msgstr "CC („Creative Commons“) licencija"
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:193
-#: src/osha/oira/client/templates/webhelpers.pt:207
+#: src/osha/oira/client/templates/webhelpers.pt:194
+#: src/osha/oira/client/templates/webhelpers.pt:208
 msgid "header_legal_references"
 msgstr "Teisinės ir politikos nuorodos"
 
 #. Default: Hide
-#: src/osha/oira/client/templates/webhelpers.pt:210
+#: src/osha/oira/client/templates/webhelpers.pt:211
 msgid "action_hide"
 msgstr "Slėpti"
 
 #. Default: Show
-#: src/osha/oira/client/templates/webhelpers.pt:214
+#: src/osha/oira/client/templates/webhelpers.pt:215
 msgid "action_show"
 msgstr "Rodyti"
 
@@ -2450,74 +2433,65 @@ msgstr ""
 
 #. Default: Statistics
 #: src/osha/oira/content/sitemenu.py:39
-#, fuzzy
 msgid "menu_statistics"
 msgstr ""
-"1 lygis: Pagrindiniai statistiniai duomenys apie OiRA priemonės naudojimą. 2 "
-"lygis: išsamesni statistiniai duomenys apie rizikas"
 
 #. Default: Period
-#: src/osha/oira/content/statistics.py:40
-#, fuzzy
+#: src/osha/oira/content/statistics.py:39
 msgid "label_period"
-msgstr "Ankstesnis"
+msgstr ""
 
 #. Default: Report Type
-#: src/osha/oira/content/statistics.py:70
-#, fuzzy
+#: src/osha/oira/content/statistics.py:69
 msgid "label_report_type"
-msgstr "Ataskaita"
+msgstr ""
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:76
-#, fuzzy
+#: src/osha/oira/content/statistics.py:75
 msgid "label_report_countries"
-msgstr "Šiame laukelyje įrašykite norimus komentarus"
+msgstr ""
 
 #. Default: Tool
-#: src/osha/oira/content/statistics.py:83
-#, fuzzy
+#: src/osha/oira/content/statistics.py:82
 msgid "label_report_tools"
-msgstr "Ataskaita"
+msgstr ""
 
 #. Default: Report Period
-#: src/osha/oira/content/statistics.py:90
-#, fuzzy
+#: src/osha/oira/content/statistics.py:89
 msgid "label_report_period"
-msgstr "Ataskaita"
+msgstr ""
 
 #. Default: File Format
-#: src/osha/oira/content/statistics.py:95
-#, fuzzy
+#: src/osha/oira/content/statistics.py:94
 msgid "label_report_file_format"
-msgstr "Šiame laukelyje įrašykite norimus komentarus"
+msgstr ""
 
 #. Default: Statistics Reporting
-#: src/osha/oira/content/statistics.py:270
-#: src/osha/oira/content/statistics.py:298
-#: src/osha/oira/content/statistics.py:331
+#: src/osha/oira/content/statistics.py:269
+#: src/osha/oira/content/statistics.py:297
+#: src/osha/oira/content/statistics.py:330
 msgid "title_statistics"
 msgstr "Statistiniai duomenys"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:272
+#: src/osha/oira/content/statistics.py:271
 msgid "label_country"
 msgstr ""
 
-#: src/osha/oira/content/statistics.py:276
-#: src/osha/oira/content/statistics.py:304
-#: src/osha/oira/content/statistics.py:337
+#: src/osha/oira/content/statistics.py:275
+#: src/osha/oira/content/statistics.py:303
+#: src/osha/oira/content/statistics.py:336
 msgid "Submit"
 msgstr ""
 
 #. Default: Sector
-#: src/osha/oira/content/statistics.py:300
+#: src/osha/oira/content/statistics.py:299
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
 msgid "Sector"
 msgstr "Ekonominė veikla"
 
 #. Default: Global
-#: src/osha/oira/content/statistics.py:333
+#: src/osha/oira/content/statistics.py:332
 msgid "label_global"
 msgstr ""
 

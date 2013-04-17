@@ -30,7 +30,7 @@ class IHomePage(form.Schema, IBasic):
     """ Custom user editable homepage
     """
     description = schema.Text(
-            title=_("label_homepage_description", u"HTML Source Code"))
+        title=_("label_homepage_description", u"HTML Source Code"))
     form.widget(description=LargeTextAreaFieldWidget)
 
 
@@ -61,13 +61,15 @@ class HomePagePublishTraverser(DefaultPublishTraverse):
         setRequest(request)
         request.client = self.context
         directlyProvides(request, IOSHAClientSkinLayer)
-        return super(HomePagePublishTraverser, self).publishTraverse(request, name)
+        return super(HomePagePublishTraverser,
+                     self).publishTraverse(request, name)
 
 
 class EditForm(edit.DefaultEditForm):
     """ """
     buttons = edit.DefaultEditForm.buttons
-    preview = button.Buttons(button.Button('preview', title=u'Save and preview'))
+    preview = button.Buttons(button.Button('preview',
+                                           title=u'Save and preview'))
     buttons = preview + buttons
     buttons['cancel'].title = u'Clear unsaved changes'
     handlers = edit.DefaultEditForm.handlers

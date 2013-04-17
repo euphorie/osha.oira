@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.23.dev0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-04-15 18:51+0200\n"
+"POT-Creation-Date: 2013-04-17 18:19+0200\n"
 "PO-Revision-Date: 2013-04-04 15:39+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1261,7 +1261,7 @@ msgstr "Relatório"
 msgid "navigation_logout"
 msgstr "Sair da sessão"
 
-#. Default: Sessions
+#. Default: My Assessments
 #: src/osha/oira/client/templates/actionplan.pt:93
 #: src/osha/oira/client/templates/identification.pt:65
 #: src/osha/oira/client/templates/module_actionplan.pt:95
@@ -1278,7 +1278,7 @@ msgstr "Sair da sessão"
 #: src/osha/oira/client/templates/start.pt:61
 #: src/osha/oira/client/templates/update.pt:90
 msgid "navigation_surveys"
-msgstr "Sessões"
+msgstr "Minhas avaliações"
 
 #. Default: Help
 #: src/osha/oira/client/templates/actionplan.pt:94
@@ -1670,7 +1670,7 @@ msgstr ""
 #. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:166
+#: src/osha/oira/client/templates/webhelpers.pt:167
 msgid "top5_risk_not_present"
 msgstr ""
 "O risco não está presente na sua organização, mas como a organização do "
@@ -1763,7 +1763,7 @@ msgstr "Ignorar este passo"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:178
+#: src/osha/oira/client/templates/webhelpers.pt:179
 msgid "warn_risk_present"
 msgstr "A sua resposta foi negativa à declaração em cima."
 
@@ -1980,7 +1980,7 @@ msgstr "Mês"
 
 #. Default: Year
 #: src/osha/oira/client/templates/risk_actionplan.pt:153
-#: src/osha/oira/content/statistics.py:35
+#: src/osha/oira/content/statistics.py:34
 msgid "label_year"
 msgstr "Ano"
 
@@ -2334,18 +2334,18 @@ msgid "CC License"
 msgstr "Licença CC "
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:193
-#: src/osha/oira/client/templates/webhelpers.pt:207
+#: src/osha/oira/client/templates/webhelpers.pt:194
+#: src/osha/oira/client/templates/webhelpers.pt:208
 msgid "header_legal_references"
 msgstr "Referências legais e políticas"
 
 #. Default: Hide
-#: src/osha/oira/client/templates/webhelpers.pt:210
+#: src/osha/oira/client/templates/webhelpers.pt:211
 msgid "action_hide"
 msgstr "Ocultar"
 
 #. Default: Show
-#: src/osha/oira/client/templates/webhelpers.pt:214
+#: src/osha/oira/client/templates/webhelpers.pt:215
 msgid "action_show"
 msgstr "Mostrar"
 
@@ -2435,67 +2435,67 @@ msgid "menu_statistics"
 msgstr "Relatório Estatístico"
 
 #. Default: Period
-#: src/osha/oira/content/statistics.py:40
+#: src/osha/oira/content/statistics.py:39
 #, fuzzy
 msgid "label_period"
 msgstr "Anterior"
 
 #. Default: Report Type
-#: src/osha/oira/content/statistics.py:70
+#: src/osha/oira/content/statistics.py:69
 #, fuzzy
 msgid "label_report_type"
 msgstr "Relatório"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:76
+#: src/osha/oira/content/statistics.py:75
 #, fuzzy
 msgid "label_report_countries"
 msgstr "Queira por favor comentar a questão acima indicada."
 
 #. Default: Tool
-#: src/osha/oira/content/statistics.py:83
+#: src/osha/oira/content/statistics.py:82
 #, fuzzy
 msgid "label_report_tools"
 msgstr "Relatório"
 
 #. Default: Report Period
-#: src/osha/oira/content/statistics.py:90
+#: src/osha/oira/content/statistics.py:89
 #, fuzzy
 msgid "label_report_period"
 msgstr "Relatório"
 
 #. Default: File Format
-#: src/osha/oira/content/statistics.py:95
+#: src/osha/oira/content/statistics.py:94
 #, fuzzy
 msgid "label_report_file_format"
 msgstr "Queira por favor comentar a questão acima indicada."
 
 #. Default: Statistics Reporting
-#: src/osha/oira/content/statistics.py:270
-#: src/osha/oira/content/statistics.py:298
-#: src/osha/oira/content/statistics.py:331
+#: src/osha/oira/content/statistics.py:269
+#: src/osha/oira/content/statistics.py:297
+#: src/osha/oira/content/statistics.py:330
 msgid "title_statistics"
 msgstr "Relatório Estatístico"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:272
+#: src/osha/oira/content/statistics.py:271
 msgid "label_country"
 msgstr ""
 
-#: src/osha/oira/content/statistics.py:276
-#: src/osha/oira/content/statistics.py:304
-#: src/osha/oira/content/statistics.py:337
+#: src/osha/oira/content/statistics.py:275
+#: src/osha/oira/content/statistics.py:303
+#: src/osha/oira/content/statistics.py:336
 msgid "Submit"
 msgstr ""
 
 #. Default: Sector
-#: src/osha/oira/content/statistics.py:300
+#: src/osha/oira/content/statistics.py:299
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
 msgid "Sector"
 msgstr "Setor"
 
 #. Default: Global
-#: src/osha/oira/content/statistics.py:333
+#: src/osha/oira/content/statistics.py:332
 msgid "label_global"
 msgstr ""
 

@@ -7,7 +7,7 @@ from five import grok
 from osha.oira import _
 from plone import api
 from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleVocabulary
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 
 class ReportTypeVocabulary(object):
@@ -169,10 +169,10 @@ class ReportFileFormatVocabulary(object):
     grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
-        formats = {'Excel': 'xls',
-                   'PDF':   'pdf',
-                   }
-        return SimpleVocabulary.fromItems(formats.items())
+        formats = [SimpleTerm('xls', token='Excel'),
+                   SimpleTerm('pdf', token='PDF'),
+                   ]
+        return SimpleVocabulary(formats)
 
 grok.global_utility(ReportFileFormatVocabulary,
                     name='osha.oira.report_file_format')

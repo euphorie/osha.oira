@@ -15,29 +15,32 @@ grok.templatedir("templates")
 
 class IOSHAProfileQuestion(IProfileQuestion):
     question = schema.TextLine(
-            title=_('label_profilequestion_question', default=u'Question'),
-            description=_(u'This question must ask users if this profile '
-                          u'applies to them.'),
-            required=True)
+        title=_('label_profilequestion_question', default=u'Question'),
+        description=_(u'This question must ask users if this profile '
+                      u'applies to them.'),
+        required=True)
 
     label_multiple_present = schema.TextLine(
-            title=_(u'Multiple item question'),
-            required=True)
-    form.widget(label_multiple_present='euphorie.content.profilequestion.TextSpan7')
+        title=_(u'Multiple item question'),
+        required=True)
+    form.widget(
+        label_multiple_present='euphorie.content.profilequestion.TextSpan7')
 
     label_single_occurance = schema.TextLine(
-            title=_(u'Single occurance prompt'),
-            description=_(u'This must ask to user for the name of the '
-                          u'relevant location.'),
-            required=True)
-    form.widget(label_single_occurance='euphorie.content.profilequestion.TextSpan7')
+        title=_(u'Single occurance prompt'),
+        description=_(u'This must ask to user for the name of the '
+                      u'relevant location.'),
+        required=True)
+    form.widget(
+        label_single_occurance='euphorie.content.profilequestion.TextSpan7')
 
     label_multiple_occurances = schema.TextLine(
-            title=_(u'Multiple occurance prompt'),
-            description=_(u'This must ask to user for the names of all '
-                          u'relevant locations.'),
-            required=True)
-    form.widget(label_multiple_occurances='euphorie.content.profilequestion.TextSpan7')
+        title=_(u'Multiple occurance prompt'),
+        description=_(u'This must ask to user for the names of all '
+                      u'relevant locations.'),
+        required=True)
+    form.widget(
+        label_multiple_occurances='euphorie.content.profilequestion.TextSpan7')
 
 
 @adapter(IProfileQuestion)

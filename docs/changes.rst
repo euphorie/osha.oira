@@ -1,8 +1,14 @@
 Changelog
 =========
 
-2.1.1 (unreleased)
+2.2.1 (unreleased)
 ------------------
+
+- Nothing changed yet.
+
+
+2.2 (2013-04-15)
+----------------
 
 Upgrade notes
 ~~~~~~~~~~~~~
@@ -11,15 +17,27 @@ This release updates the profile version to *7*. Please use the upgrade feature
 in ``portal_setup`` to upgrade the ``osha.oira:default`` profile to this
 version.
 
-Bugfixes
-~~~~~~~~
+Feature changes
+~~~~~~~~~~~~~~~
 
-- Added class "Message" on risk_evaluation, fixed github #93 [pysailor]
+- Added Hungarian translations #7091 [pysailor]
+- Changed title for statistics report to re-use existing translations [pysailor]
+
 
 Feature changes
 ~~~~~~~~~~~~~~~
 
 - allow choosing file format (pdf/xls) in statistics form, refs #7169 [reinhardt]
+
+2.1.1 March 26, 2013
+--------------------
+
+Bugfixes
+~~~~~~~~
+
+- Added class "Message" on risk_evaluation. This fixes `github ticket #93
+  <https://github.com/euphorie/Euphorie/issues/94>`_.  [pysailor]
+
 
 2.1 (2013-03-22)
 ----------------
@@ -28,20 +46,20 @@ Feature changes
   working tno version
 - Fixed survey statistics to not show previews as published surveys.
 
-2.0b9 (2013-03-19)
-------------------
+2.0b9 - Match 19, 2013
+----------------------
 
 - Translation updates
 
 
-2.0b8 (2013-03-19)
-------------------
+2.0b8 - Match 19, 2013
+----------------------
 
 - Translation updates 
 
 
-2.0b7 (2013-03-19)
-------------------
+2.0b7 - March 19, 2013
+----------------------
 
 Feature changes
 ~~~~~~~~~~~~~~~
@@ -57,8 +75,8 @@ Bugfixes
 - UnicodeDecodeError on statistics views
 
 
-2.0b5 (2013-03-15)
-------------------
+2.0b5 - March 15, 2013
+----------------------
 
 Feature changes
 ~~~~~~~~~~~~~~~
@@ -67,8 +85,8 @@ Feature changes
   context.
 
 
-2.0b4 (2013-03-15)
-------------------
+2.0b4 - March 13, 2013
+----------------------
 
 
 Feature changes

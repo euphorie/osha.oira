@@ -35,7 +35,7 @@ pot: bin/pybabel
 		src > $(EUPHORIE_POT)~ && mv $(EUPHORIE_POT)~ $(EUPHORIE_POT)	
 
 $(EUPHORIE_PO_FILES): $(EUPHORIE_POT)
-	msgmerge --update $@ $<
+	msgmerge --update -N $@ $<
 
 .po.mo:
 	msgfmt -c --statistics -o $@~ $< && mv $@~ $@

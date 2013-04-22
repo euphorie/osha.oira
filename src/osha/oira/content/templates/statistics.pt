@@ -10,11 +10,14 @@
       id="statistics"
       metal:use-macro="context/@@layout/macros/layout">
 <head>
-<metal:title fill-slot="title">${view/label}</metal:title>
+<metal:title fill-slot="title"><span i18n:translate="" tal:content="view/label" tal:omit-tag=""></span> -
+    <span i18n:translate="" tal:content="view/label_detail" tal:omit-tag=""></span>
+  </metal:title>
 </head>
 
 <body>
-<metal:title fill-slot="title"><tal:title>${view/label}</tal:title></metal:title>
+<metal:title fill-slot="title"><tal:title><span i18n:translate="" tal:content="view/label" tal:omit-tag=""></span> -
+    <span i18n:translate="" tal:content="view/label_detail" tal:omit-tag=""></span></tal:title></metal:title>
 <metal:content fill-slot="content">
     <form class="concise statisticsParametersForm" action="${request/getURL}" enctype="${view/enctype}" method="${view/method}" id="${view/id}">
         <tal:loop_widgets repeat="widget view/widgets/values">
@@ -40,14 +43,14 @@
             } else {
                 jQuery('#fieldset-form-widgets-tools').hide();
                 jQuery('#fieldset-form-widgets-countries').hide();
-            } 
+            }
         }
         jQuery(document).ready(function () {
             $('button.remove.jsOnly').hide();
             var $selected = jQuery('#fieldset-form-widgets-report_type input:radio:checked');
             if ($selected.length === 0) {
                 $selected = jQuery('#fieldset-form-widgets-report_type input.hidden-widget');
-            } 
+            }
             toggle($selected.attr('value'));
             jQuery('#fieldset-form-widgets-report_type input:radio').change(function (ev) {
                 toggle(ev.target.value);

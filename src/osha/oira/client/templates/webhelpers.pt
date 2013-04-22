@@ -29,7 +29,7 @@
 
   <metal:css define-macro="css" meta:interpolation="true" 
          tal:define="base_url client/++resource++euphorie.style;
-	             oira_base_url client/++resource++osha.style; 
+	                 oira_base_url client/++resource++osha.style; 
                      on_mobile webhelpers/on_mobile">
 
     <tal:block condition="webhelpers/debug_mode">
@@ -119,17 +119,18 @@
             <a href="${page/url}">${page/title}</a> |
         </tal:block>
         <tal:span i18n:translate="appendix_produced_by">
-        Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_new">EU-OSHA</a>.</tal:span> 
+        Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_blank">EU-OSHA</a>.</tal:span> 
         |
-        <a href="http://www.oiraproject.eu/" i18n:translate="appendix_about">About</a>
+        <a href="http://www.oiraproject.eu/" target="_blank" i18n:translate="appendix_about">About</a>
         |
-        <a href="${webhelpers/client_url}/terms-and-conditions" i18n:translate="appendix_privacy">Privacy</a>
+        <a href="${webhelpers/client_url}/terms-and-conditions" target="_blank"  i18n:translate="appendix_privacy">Privacy</a>
         |
-        <a href="${webhelpers/client_url}/disclaimer" i18n:translate="appendix_disclaimer">Disclaimer</a>
+        <a href="${webhelpers/client_url}/disclaimer" target="_blank" i18n:translate="appendix_disclaimer">Disclaimer</a>
         |
-        <a href="http://www.gnu.org/licenses/gpl.html" i18n:translate="appendix_gpl_license">GPL License</a>
+        <a href="http://www.gnu.org/licenses/gpl.html" target="_blank" i18n:translate="appendix_gpl_license">GPL License</a>
         |
         <a href="http://creativecommons.org/licenses/by-sa/2.5/"
+            target="_blank" 
             i18n:attributes="alt" alt="CC License">
             <img class="creative_commons_logo" src="${media_url}/osha/creative_commons.png"/>
         </a>

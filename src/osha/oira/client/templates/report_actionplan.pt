@@ -24,8 +24,8 @@
 
 <h1>${view/report_title}</h1>
 <div class="buttonBar super">
-    <a class="button-medium" 
-        href="${python:view.url(name='download')}" 
+    <a class="button-medium"
+        href="${python:view.url(name='download')}"
         i18n:translate="button_download">Download</a>
 </div>
 
@@ -81,13 +81,13 @@
     <tal:block define="zodbnode python:view.getZodbNode(node);
                         title python:view.title(node, zodbnode);
                         status python:view.risk_status(node, zodbnode)">
-        <div class="message warning" 
+        <div class="message warning"
              tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'message warning', 'no-actionplans':'message warning', 'unevaluated':'message warning'}[status]"
              tal:define="show_negate_warning python:view.show_negate_warning(node, zodbnode)"
              tal:omit-tag="python:status=='unanswered'">
             <h4>
                 <strong class="icon warning" tal:condition="python:not show_negate_warning and status=='present'">⚠</strong>
-                <a href="${survey_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a> 
+                <a href="${survey_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a>
                 <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'"><a href="#top5-footnote">*</a></sup>
             </h4>
             <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority">
@@ -162,12 +162,12 @@
     <tal:block define="zodbnode python:view.getZodbNode(node);
                         title python:view.title(node, zodbnode);
                         status python:view.risk_status(node, zodbnode)">
-    <div class="message warning" 
+    <div class="message warning"
             tal:attributes="class python:{'unanswered':None, 'not-present':'success', 'present':'message warning', 'no-actionplans':'message warning', 'unevaluated':'message warning'}[status]"
             tal:define="show_negate_warning python:view.show_negate_warning(node, zodbnode)"
             tal:omit-tag="python:status=='unanswered'">
         <h4>
-            <a href="${survey_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a> 
+            <a href="${survey_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a>
             <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'"><a href="#top5-footnote">*</a></sup>
         </h4>
         <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority">
@@ -189,7 +189,7 @@
 <p i18n:translate="desc_unanswered_risks">
     The following risks have not yet been answered. Please do so at the soonest possibility.
 </p>
-<tal:block 
+<tal:block
         define="identification_url python:webhelpers.survey_url(phase='identification')"
         repeat="node unanswered_nodes">
     <tal:module condition="python:node.type!='risk'">
@@ -203,7 +203,7 @@
                         title python:view.title(node, zodbnode);
                         status python:view.risk_status(node, zodbnode)">
         <h4>
-            <a href="${identification_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a> 
+            <a href="${identification_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a>
             <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'"><a href="#top5-footnote">*</a></sup>
         </h4>
         <p tal:condition="node/priority" class="priority-${node/priority}" i18n:translate="risk_priority">
@@ -219,7 +219,7 @@
 <tal:if define="risk_not_present_nodes view/risk_not_present_nodes"
         condition="risk_not_present_nodes">
 <h2 i18n:translate="header_risks_not_present">Hazards/problems that have been managed or are not present in your organisation</h2>
-<tal:block 
+<tal:block
         define="identification_url python:webhelpers.survey_url(phase='identification')"
         repeat="node risk_not_present_nodes">
 
@@ -235,7 +235,7 @@
                     title python:view.title(node, zodbnode);
                     status python:view.risk_status(node, zodbnode)">
         <h4>
-            <a href="${identification_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a> 
+            <a href="${identification_url}/${python:'/'.join(node.short_path)}">${node/number} ${title}</a>
             <sup tal:condition="python:status=='not-present' and node.risk_type=='top5'">
                 <a href="#top5-footnote">*</a>
             </sup>
@@ -256,7 +256,7 @@
 
 <tal:starred tal:condition="view/nodes">
     <hr/>
-    <p id="top5-footnote" class="discrete">*) 
+    <p id="top5-footnote" class="discrete">*)
         <tal:span i18n:translate="top5_risk_not_present">
         This risk is not present in your organisation, but since the sector organisation considers this one of the priority risks it must be
         included in this report.
@@ -305,7 +305,7 @@
     <ul id="navigation">
       <metal:home use-macro="webhelpers/macros/homelink"/>
       <li><a href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a></li>
-      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">Sessions</a></li>
+      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">My Assessments</a></li>
       <li><a href="${webhelpers/help_url}#actionplan" i18n:translate="navigation_help">Help</a></li>
       <li><a href="${webhelpers/survey_url}/status" i18n:translate="navigation_status">Status</a></li>
       <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>

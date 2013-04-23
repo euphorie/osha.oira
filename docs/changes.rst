@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.1 (unreleased)
+2.2.1 (2013-04-23)
 ------------------
 
 - Added formatting to the help text that explains the use of profile questions.

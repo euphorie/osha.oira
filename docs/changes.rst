@@ -4,8 +4,8 @@ Changelog
 2.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Added formatting to the help text that explains the use of profile questions.
+- Updated Portuguese, Czech and Lithuanian translations.
 
 2.2 (2013-04-15)
 ----------------

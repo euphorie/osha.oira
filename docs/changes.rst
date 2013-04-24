@@ -4,7 +4,7 @@ Changelog
 2.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Bugfix. Adding a second measure causes server error. 
 
 
 2.2.1 (2013-04-23)

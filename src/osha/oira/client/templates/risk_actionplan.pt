@@ -68,7 +68,8 @@
                     i18n:attributes="title label_remove_measure" title="Delete this measure">Delete</span></a>
         </tal:def>
     </tal:repeat>
-    <button type="submit"
+    <button 
+        type="button"
         id="addMeasureButton"
         i18n:translate="label_add"
         i18n:attributes="title label_add"

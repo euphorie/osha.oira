@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - Bugfix. Adding a second measure causes server error. 
+- Make XLS headings bold and space columns so that headings don't wrap.
 
 
 2.2.1 (2013-04-23)

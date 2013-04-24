@@ -91,7 +91,9 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         for (column, (type, key, title)) in enumerate(self.columns):
             if key in self.combine_keys:
                 continue
-            sheet.cell(row=0, column=column).value = t(title)
+            cell = sheet.cell(row=0, column=column)
+            cell.value = t(title)
+            cell.style.font.bold = True
 
         for (row, (risk, measure)) in enumerate(self.get_measures(), 1):
             column = 0

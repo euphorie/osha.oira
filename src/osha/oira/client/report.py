@@ -8,6 +8,7 @@ from euphorie.client import model
 from .interfaces import IOSHAReportPhaseSkinLayer
 from .. import _
 from openpyxl.workbook import Workbook
+from openpyxl.cell import get_column_letter
 from zope.i18n import translate
 
 grok.templatedir("templates")
@@ -94,6 +95,9 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             cell = sheet.cell(row=0, column=column)
             cell.value = t(title)
             cell.style.font.bold = True
+            cell.style.alignment.wrap_text = True
+            letter = get_column_letter(column+1)
+            sheet.column_dimensions[letter].width = len(cell.value)+5
 
         for (row, (risk, measure)) in enumerate(self.get_measures(), 1):
             column = 0

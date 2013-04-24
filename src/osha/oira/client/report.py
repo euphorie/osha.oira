@@ -8,9 +8,7 @@ from euphorie.client import model
 from .interfaces import IOSHAReportPhaseSkinLayer
 from .. import _
 from openpyxl.workbook import Workbook
-from openpyxl.writer.excel import save_virtual_workbook
 from zope.i18n import translate
-
 
 grok.templatedir("templates")
 
@@ -62,21 +60,23 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
     combine_keys = ['prevention_plan', 'requirements']
 
     columns = sorted(
-            (col for col in report.ActionPlanTimeline.columns
-                if col[1] in COLUMN_ORDER),
-            key=lambda d, co=COLUMN_ORDER: co.index(d[1]))
+        (col for col in report.ActionPlanTimeline.columns
+            if col[1] in COLUMN_ORDER),
+        key=lambda d, co=COLUMN_ORDER: co.index(d[1]))
     extra_cols = [x for x in columns if x[1] in combine_keys]
     columns = [x for x in columns if x[1] not in combine_keys]
-    columns[2] = ('measure', 'action_plan',
-                    _('report_timeline_measure', default=u'Measure'))
-    columns[3] = ('measure', 'planning_end',
-                    _('report_timeline_end_date', default=u'End date'))
-    columns[4] = ('measure', 'responsible',
-                    _('report_timeline_responsible', default=u'Responsible'))
-    
-    columns.insert(-1, (None, None, _('report_timeline_progress',
+    columns[2] = (
+        'measure', 'action_plan',
+        _('report_timeline_measure', default=u'Measure'))
+    columns[3] = (
+        'measure', 'planning_end',
+        _('report_timeline_end_date', default=u'End date'))
+    columns[4] = (
+        'measure', 'responsible',
+        _('report_timeline_responsible', default=u'Responsible'))
+    columns.insert(-1, (None, None, _(
+        'report_timeline_progress',
         default=u'Status (planned, in process, implemented)')))
-
 
     def create_workbook(self):
         """Create an Excel workbook containing the all risks and measures.
@@ -88,7 +88,6 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         sheet.default_column_dimension.auto_size = True
         survey = self.request.survey
 
-
         for (column, (type, key, title)) in enumerate(self.columns):
             if key in self.combine_keys:
                 continue
@@ -97,7 +96,6 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         for (row, (risk, measure)) in enumerate(self.get_measures(), 1):
             column = 0
             zodb_node = survey.restrictedTraverse(risk.zodb_path.split('/'))
-            
             for (type, key, title) in self.columns+self.extra_cols:
                 value = None
                 if type == 'measure':
@@ -110,22 +108,19 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                         if zodb_node.problem_description and \
                                 zodb_node.problem_description.strip():
                             value = zodb_node.problem_description
-                
                 # style
                 sheet.cell(row=row, column=column).style.alignment.wrap_text = True
-                
                 if key in self.combine_keys and value is not None:
-                    # osha wants to combine action_plan (col 3), prevention_plan and requirements in one cell
+                    # osha wants to combine action_plan (col 3),
+                    # prevention_plan and requirements in one cell
                     if not sheet.cell(row=row, column=2).value:
                         sheet.cell(row=row, column=2).value = u''
-                    sheet.cell(row=row, column=2).value += '\r\n'+value  
+                    sheet.cell(row=row, column=2).value += '\r\n'+value
                     continue
-                    
+
                 if value is not None:
                     sheet.cell(row=row, column=column).value = value
                 column += 1
-        
-
         return book
 
     def get_measures(self):
@@ -141,20 +136,16 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         it sorts on risk priority instead of start date.
         """
         query = Session.query(model.SurveyTreeItem, model.ActionPlan)\
-                .outerjoin(model.ActionPlan)\
-                .filter(model.SurveyTreeItem.session == self.session)\
-                .filter(sql.not_(model.SKIPPED_PARENTS))\
-                .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
-                                model.RISK_PRESENT_OR_TOP5_FILTER))\
-                .join(model.Risk)\
-                .order_by(
-                        sql.case(
-                            value=model.Risk.priority,
-                            whens={'high': 0, 'medium': 1},
-                            else_=2),
-                        model.Risk.path)
+            .outerjoin(model.ActionPlan)\
+            .filter(model.SurveyTreeItem.session == self.session)\
+            .filter(sql.not_(model.SKIPPED_PARENTS))\
+            .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
+                            model.RISK_PRESENT_OR_TOP5_FILTER))\
+            .join(model.Risk)\
+            .order_by(
+                sql.case(
+                    value=model.Risk.priority,
+                    whens={'high': 0, 'medium': 1},
+                    else_=2),
+                model.Risk.path)
         return query.all()
-        
-
-
-

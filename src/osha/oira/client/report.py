@@ -97,7 +97,10 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             cell.style.font.bold = True
             cell.style.alignment.wrap_text = True
             letter = get_column_letter(column+1)
-            sheet.column_dimensions[letter].width = len(cell.value)+5
+            if title == 'report_timeline_measure':
+                sheet.column_dimensions[letter].width = len(cell.value)+50
+            else:
+                sheet.column_dimensions[letter].width = len(cell.value)+5
 
         for (row, (risk, measure)) in enumerate(self.get_measures(), 1):
             column = 0

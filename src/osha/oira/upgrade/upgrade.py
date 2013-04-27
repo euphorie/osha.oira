@@ -7,6 +7,7 @@ from plone.dexterity import utils
 from z3c.saconfig import Session
 from zope.app.component.hooks import getSite
 from zope.sqlalchemy import datamanager
+from Products.CMFCore.utils import getToolByName
 import datetime
 import logging
 import transaction
@@ -108,3 +109,9 @@ def remove_birt_file_format(context):
         params.remove('__format=pdf')
         newurl = '?'.join([base, '&'.join(params)])
         sprops.manage_changeProperties({'birt_report_url': newurl})
+
+
+def update_types_information(context):
+    """ Reimport types to activate new behavior """
+    setup = getToolByName(context, 'portal_setup')
+    setup.runImportStepFromProfile('profile-osha.oira:default', 'typeinfo')

@@ -72,5 +72,17 @@
 
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+        source="*"
+        destination="8"
+        profile="osha.oira:default">
+
+    <genericsetup:upgradeStep
+        title="Reimport types to activate new behavior"
+        description="New behavior IOSHASurvey has been added and needs activation"
+        handler=".upgrade.update_types_information"/>
+
+  </genericsetup:upgradeSteps>
+
 </configure>
 

@@ -4,8 +4,23 @@ Changelog
 2.2.2 (unreleased)
 ------------------
 
+Upgrade notes
+~~~~~~~~~~~~~
+
+This release updates the profile version to *8*. Please use the upgrade feature
+in ``portal_setup`` to upgrade the ``osha.oira:default`` profile to this
+version.
+
+Bugfixes
+~~~~~~~~
+
 - Bugfix. Adding a second measure causes server error. 
+
+Feature changes
+~~~~~~~~~~~~~~~
+
 - Make XLS headings bold and space columns so that headings don't wrap.
+- Added IOSHASurvey behavior with externl site link fields, refs #5880 [reinhardt]
 
 
 2.2.1 (2013-04-23)

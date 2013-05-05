@@ -17,6 +17,14 @@
 </head>
 <body class="start ${webhelpers/extra_css}">
     <h1>${context/title}</h1>
+
+    <figure class="postit external-reference" tal:condition="context/external_site_logo | nothing">
+      <a href="#" tal:attributes="href context/external_site_url | nothing" tal:omit-tag="not:context/external_site_url | nothing">
+        <img src="http://client.oiraproject.eu/eu/leather-tanning/@@images/7870a759-8982-4217-858a-1348ef6edc14.jpeg" alt="" tal:attributes="src string:${context/absolute_url}/@@display-file/external_site_logo"/>
+      </a>
+      <figcaption tal:condition="context/external_site_name">This survey was offered to you by <a href="#" tal:attributes="href context/external_site_url | nothing" tal:content="context/external_site_name" tal:omit-tag="not:context/external_site_url | nothing">Leather Tanning</a>.</figcaption>
+    </figure>
+
     <tal:block condition="not:view/has_introduction">
         <metal:introduction use-macro="default_introduction/macros/default_introduction"/>
     </tal:block>

@@ -41,7 +41,6 @@ setup(name='osha.oira',
           'zope.publisher',
           'mobile.sniffer',
           'plone.api',
-          'collective.js.jqueryui',
       ],
       tests_require=tests_require,
       extras_require={

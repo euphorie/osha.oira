@@ -71,6 +71,8 @@ alsoProvides(IOSHASurvey, IFormFieldProvider)
 
 
 class OSHASurvey(MetadataBase):
+    enable_external_site_link = \
+        DCFieldProperty(IOSHASurvey['enable_external_site_link'])
     external_site_url = DCFieldProperty(IOSHASurvey['external_site_url'])
     external_site_name = DCFieldProperty(IOSHASurvey['external_site_name'])
     external_site_logo = DCFieldProperty(IOSHASurvey['external_site_logo'])

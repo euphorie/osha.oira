@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: osha.oira 1.2.6.dev0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
 "POT-Creation-Date: 2013-04-22 16:46+0200\n"
-"PO-Revision-Date: 2013-04-18 16:04+0200\n"
+"PO-Revision-Date: 2013-05-15 13:57+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -356,7 +356,6 @@ msgstr "Vispārīga informācija par riska novērtēšanu"
 
 #. Default: Registration
 #: src/osha/oira/manual_translations.py:104
-#, fuzzy
 msgid "label_help_authentication"
 msgstr "Reģistrācija"
 
@@ -672,50 +671,49 @@ msgid "label_remove_measure"
 msgstr "Dzçst ðo ziòu"
 
 #: src/osha/oira/vocabularies.py:51
-#, fuzzy
 msgid "Whole year"
-msgstr "Gads"
+msgstr "Viss gads"
 
 #: src/osha/oira/vocabularies.py:54
 msgid "1st Quarter"
-msgstr ""
+msgstr "1.ceturksnis"
 
 #: src/osha/oira/vocabularies.py:55
 msgid "2nd Quarter"
-msgstr ""
+msgstr "2.ceturksnis"
 
 #: src/osha/oira/vocabularies.py:56
 msgid "3rd Quarter"
-msgstr ""
+msgstr "3.ceturksnis"
 
 #: src/osha/oira/vocabularies.py:57
 msgid "4th Quarter"
-msgstr ""
+msgstr "4.ceturksnis"
 
 #: src/osha/oira/client/country.py:53
 msgid "Save"
-msgstr ""
+msgstr "Saglabāt"
 
 #: src/osha/oira/client/country.py:61
 msgid "Session title has been changed to ${name}"
-msgstr ""
+msgstr "Sesijas nosaukums ir nomainīts uz ${name}"
 
 #: src/osha/oira/client/country.py:65
 #: src/osha/oira/client/templates/rename-session.pt:29
 msgid "Cancel"
-msgstr ""
+msgstr "Atcelt"
 
 #: src/osha/oira/client/profile.py:15
 msgid "Does this happen in multiple places?"
-msgstr ""
+msgstr "Vai tas raksturīgs vairākās vietās?"
 
 #: src/osha/oira/client/profile.py:18
 msgid "Enter the name of the location"
-msgstr ""
+msgstr "Ievadiet atrašanās vietas nosaukumu"
 
 #: src/osha/oira/client/profile.py:21
 msgid "Enter the names of each location"
-msgstr ""
+msgstr "Ievadiet katras atrašanās vietas nosaukumu"
 
 #. Default: Measure
 #: src/osha/oira/client/report.py:71
@@ -1477,7 +1475,7 @@ msgstr ""
 #: src/osha/oira/content/templates/profilequestion_add.pt:91
 #: src/osha/oira/content/templates/profilequestion_add.pt:96
 msgid "Yes"
-msgstr ""
+msgstr "Jā"
 
 #: src/osha/oira/client/templates/profile.pt:39
 #: src/osha/oira/client/templates/profile.pt:45
@@ -1488,7 +1486,7 @@ msgstr ""
 #: src/osha/oira/content/templates/profilequestion_add.pt:92
 #: src/osha/oira/content/templates/profilequestion_add.pt:97
 msgid "No"
-msgstr ""
+msgstr "Nē"
 
 #: src/osha/oira/client/templates/profile.pt:54
 #: src/osha/oira/client/templates/profile.pt:55
@@ -1503,7 +1501,7 @@ msgstr "Noņemt"
 #: src/osha/oira/client/templates/update.pt:52
 #: src/osha/oira/content/templates/profilequestion_add.pt:104
 msgid "Add another item"
-msgstr ""
+msgstr "Pievienot vēl vienu struktūrvienību"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/profile.pt:64
@@ -1538,11 +1536,11 @@ msgstr "Ievadiet paroli vēlreiz"
 
 #: src/osha/oira/client/templates/rename-session.pt:16
 msgid "Change name of session"
-msgstr ""
+msgstr "Mainīt sesijas nosaukumu"
 
 #: src/osha/oira/client/templates/rename-session.pt:20
 msgid "Current name: \"${name}\""
-msgstr ""
+msgstr "Šī brīža nosaukums: \"${name}\""
 
 #: src/osha/oira/client/templates/rename-session.pt:22
 msgid "Please fill out a new name for this survey"
@@ -1550,7 +1548,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/rename-session.pt:28
 msgid "Save changes"
-msgstr ""
+msgstr "Saglabāt izmaiņas"
 
 #. Default: Reporting
 #: src/osha/oira/client/templates/report.pt:17
@@ -2258,12 +2256,12 @@ msgstr ""
 #. Default: Please verify if the profile is still accurate.
 #: src/osha/oira/client/templates/update.pt:24
 msgid "verify_profile"
-msgstr ""
+msgstr "Lūdzu, pārbaudiet, vai profils vēl joprojām ir precīzs."
 
 #. Default: Update
 #: src/osha/oira/client/templates/update.pt:58
 msgid "label_accept update"
-msgstr ""
+msgstr "Atjaunot"
 
 #. Default: Online interactive
 #: src/osha/oira/client/templates/webhelpers.pt:25
@@ -2357,7 +2355,7 @@ msgstr "Pievienot ${name}"
 #: src/osha/oira/content/profilequestion.py:18
 #: src/osha/oira/content/templates/profilequestion_view.pt:23
 msgid "label_profilequestion_question"
-msgstr ""
+msgstr "Jautājums"
 
 #: src/osha/oira/content/profilequestion.py:19
 msgid "This question must ask users if this profile applies to them."
@@ -2421,47 +2419,38 @@ msgstr ""
 
 #. Default: Statistics
 #: src/osha/oira/content/sitemenu.py:39
-#, fuzzy
 msgid "menu_statistics"
-msgstr "Statistiskā atskaite"
+msgstr "Statistiskā"
 
 #. Default: Period
 #: src/osha/oira/content/statistics.py:39
-#, fuzzy
 msgid "label_period"
-msgstr "Atpakaļ"
+msgstr "Periods"
 
 #. Default: Report Type
 #: src/osha/oira/content/statistics.py:69
-#, fuzzy
 msgid "label_report_type"
-msgstr "Pārskats"
+msgstr "Atskaites veids"
 
 #. Default: Country
 #: src/osha/oira/content/statistics.py:75
-#, fuzzy
 msgid "label_report_countries"
-msgstr ""
-"Šajā laukā lūdzu norādīt papildus komentārus par augstāk minēto jautājumu"
+msgstr "Valsts"
 
 #. Default: Tool
 #: src/osha/oira/content/statistics.py:82
-#, fuzzy
 msgid "label_report_tools"
-msgstr "Pārskats"
+msgstr "Rīks"
 
 #. Default: Report Period
 #: src/osha/oira/content/statistics.py:89
-#, fuzzy
 msgid "label_report_period"
-msgstr "Pārskats"
+msgstr "Atskaites periods"
 
 #. Default: File Format
 #: src/osha/oira/content/statistics.py:94
-#, fuzzy
 msgid "label_report_file_format"
-msgstr ""
-"Šajā laukā lūdzu norādīt papildus komentārus par augstāk minēto jautājumu"
+msgstr "Faila Formāts"
 
 #. Default: Statistics Reporting
 #: src/osha/oira/content/statistics.py:269
@@ -2473,13 +2462,13 @@ msgstr "Statistiskā atskaite"
 #. Default: Country
 #: src/osha/oira/content/statistics.py:271
 msgid "label_country"
-msgstr ""
+msgstr "Valsts"
 
 #: src/osha/oira/content/statistics.py:275
 #: src/osha/oira/content/statistics.py:303
 #: src/osha/oira/content/statistics.py:336
 msgid "Submit"
-msgstr ""
+msgstr "Iesniegt"
 
 #. Default: Sector
 #: src/osha/oira/content/statistics.py:299
@@ -2490,7 +2479,7 @@ msgstr "Sektors"
 #. Default: Global
 #: src/osha/oira/content/statistics.py:332
 msgid "label_global"
-msgstr ""
+msgstr "Globāls"
 
 #. Default: You can not delete an OiRA tool that has been published.
 #: src/osha/oira/content/surveygroup.py:82
@@ -2576,7 +2565,7 @@ msgstr "Riski"
 #: src/osha/oira/content/templates/profilequestion_add.pt:35
 msgid ""
 "The basic architecture of an Online interactive Risk Assessment consists of:"
-msgstr ""
+msgstr "Riska interaktīvā novērtēšanas tiešsaistes rīka arhitektūra sastāv no:"
 
 #. Default: Profile questions
 #: src/osha/oira/content/templates/profilequestion_add.pt:37

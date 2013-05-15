@@ -19,7 +19,7 @@
       <div class="panel-body">
         <p class="current-name" i18n:translate="">Current name: "<cite i18n:name="name">${view/original_title}</cite>"</p>
         <fieldset tal:define="widget view/widgets/title" class="${python:'error' if widget.error else None}">
-          <h2 i18n:translate="">Please fill out a new name for this survey</h2>
+          <h2 i18n:translate="">Please enter a new name for this OiRA Tool</h2>
           <input placeholder="${view/original_title}" autofocus="autofocus" type="text" name="${widget/name}" class="huge${python: ' error' if widget.error else ''}" size="40" value="${python: widget.value if widget.value!= view.original_title else None}" />
           <tal:error condition="widget/error" replace="structure widget/error/render|nothing"/>
         </fieldset>

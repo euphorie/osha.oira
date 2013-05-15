@@ -71,6 +71,10 @@ class AddForm(dexterity.AddForm):
     schema = IOSHAProfileQuestion
     template = ViewPageTemplateFile('templates/profilequestion_add.pt')
 
+    @property
+    def label(self):
+        return _(u"Add Profile question")
+
 
 class EditForm(dexterity.EditForm):
     grok.context(IProfileQuestion)
@@ -80,3 +84,8 @@ class EditForm(dexterity.EditForm):
 
     schema = IOSHAProfileQuestion
     template = ViewPageTemplateFile('templates/profilequestion_add.pt')
+
+
+    @property
+    def label(self):
+        return _(u"Edit Profile question")

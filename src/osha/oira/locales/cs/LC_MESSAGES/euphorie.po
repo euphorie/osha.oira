@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-15 15:56+0200\n"
+"POT-Creation-Date: 2013-05-15 19:14+0200\n"
 "PO-Revision-Date: 2013-04-04 15:38+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2355,10 +2355,6 @@ msgstr "Dílčí modul"
 msgid "Edit ${name}"
 msgstr "Editovat ${name}"
 
-#: src/osha/oira/content/module.py:53
-msgid "Add ${name}"
-msgstr "Přidat ${name}"
-
 #. Default: Question
 #: src/osha/oira/content/profilequestion.py:18
 #: src/osha/oira/content/templates/profilequestion_view.pt:23
@@ -2391,6 +2387,14 @@ msgstr ""
 msgid "This must ask to user for the names of all relevant locations."
 msgstr ""
 
+#: src/osha/oira/content/profilequestion.py:76
+msgid "Add Profile question"
+msgstr "Přidat Profilová otázka"
+
+#: src/osha/oira/content/profilequestion.py:91
+msgid "Edit Profile question"
+msgstr "Editovat Profilová otázka"
+
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
 #: src/osha/oira/content/risk.py:20
@@ -2406,6 +2410,10 @@ msgid "help_evaluation_method_french"
 msgstr ""
 "Vyberte mezi ODHADEM (hrubý odhad) nebo VÝPOČTEM (kombinace metod četnosti a "
 "závažnosti)."
+
+#: src/osha/oira/content/risk.py:44
+msgid "Add Risk"
+msgstr ""
 
 #. Default: Statistics Level
 #: src/osha/oira/content/sector.py:26
@@ -3081,6 +3089,9 @@ msgstr ""
 msgid "message_invalid_login"
 msgstr ""
 "Neplatné přihlášení. Pokud jste zapomněli heslo, můžete ${reset_password}."
+
+#~ msgid "Add ${name}"
+#~ msgstr "Přidat ${name}"
 
 #, fuzzy
 #~ msgid "title_country_statistics"

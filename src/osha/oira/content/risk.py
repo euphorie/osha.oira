@@ -39,6 +39,9 @@ class Add(RiskAddForm, OSHAFormMixin):
         super(Add, self).updateFields()
         self.setDynamicDescriptions()
 
+    @property
+    def label(self):
+        return _(u"Add Risk")
 
 class Edit(RiskEditForm, OSHAFormMixin):
     """ Override to allow us to dynamically set field descriptions

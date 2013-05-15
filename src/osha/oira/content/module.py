@@ -50,4 +50,4 @@ class Add(dexterity.AddForm):
             portal_type = self.portal_type
             fti = getUtility(IDexterityFTI, name=portal_type)
             type_name = fti.Title()
-        return _(u"Add ${name}", mapping={'name': type_name})
+        return _(u"Add %s" % type_name)

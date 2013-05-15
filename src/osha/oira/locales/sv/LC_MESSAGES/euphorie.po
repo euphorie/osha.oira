@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-15 15:56+0200\n"
+"POT-Creation-Date: 2013-05-15 19:14+0200\n"
 "PO-Revision-Date: 2011-01-19 12:47+0100\n"
 "Last-Translator: Robert <vansen@hotmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -2325,10 +2325,6 @@ msgstr "Undermodul"
 msgid "Edit ${name}"
 msgstr "Redigera ${name}"
 
-#: src/osha/oira/content/module.py:53
-msgid "Add ${name}"
-msgstr "Lägg till ${name}"
-
 #. Default: Question
 #: src/osha/oira/content/profilequestion.py:18
 #: src/osha/oira/content/templates/profilequestion_view.pt:23
@@ -2361,6 +2357,14 @@ msgstr ""
 msgid "This must ask to user for the names of all relevant locations."
 msgstr ""
 
+#: src/osha/oira/content/profilequestion.py:76
+msgid "Add Profile question"
+msgstr "Lägg till Profilfråga"
+
+#: src/osha/oira/content/profilequestion.py:91
+msgid "Edit Profile question"
+msgstr "Redigera Profilfråga"
+
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
 #: src/osha/oira/content/risk.py:20
@@ -2378,6 +2382,10 @@ msgid "help_evaluation_method_french"
 msgstr ""
 "Välj mellan metoderna UPPSKATTAD (grov uppskattning) eller BERÄKNAD "
 "( kombination av sannolikhet, frekvens och allvarlighetsgrad)."
+
+#: src/osha/oira/content/risk.py:44
+msgid "Add Risk"
+msgstr ""
 
 #. Default: Statistics Level
 #: src/osha/oira/content/sector.py:26
@@ -3048,6 +3056,9 @@ msgstr ""
 #: src/osha/oira/templates/login.pt:16
 msgid "message_invalid_login"
 msgstr ""
+
+#~ msgid "Add ${name}"
+#~ msgstr "Lägg till ${name}"
 
 #~ msgid "label_add_profile_module"
 #~ msgstr "Lägg till"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.6.dev0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-15 15:56+0200\n"
+"POT-Creation-Date: 2013-05-15 19:14+0200\n"
 "PO-Revision-Date: 2013-05-15 13:57+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2360,10 +2360,6 @@ msgstr "Apakšmodulis"
 msgid "Edit ${name}"
 msgstr "Rediģēt ${name}"
 
-#: src/osha/oira/content/module.py:53
-msgid "Add ${name}"
-msgstr "Pievienot ${name}"
-
 #. Default: Question
 #: src/osha/oira/content/profilequestion.py:18
 #: src/osha/oira/content/templates/profilequestion_view.pt:23
@@ -2396,6 +2392,14 @@ msgstr ""
 msgid "This must ask to user for the names of all relevant locations."
 msgstr ""
 
+#: src/osha/oira/content/profilequestion.py:76
+msgid "Add Profile question"
+msgstr "Pievienot: Profila jautājums"
+
+#: src/osha/oira/content/profilequestion.py:91
+msgid "Edit Profile question"
+msgstr "Rediģēt Profila jautājums"
+
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
 #: src/osha/oira/content/risk.py:20
@@ -2411,6 +2415,10 @@ msgid "help_evaluation_method_french"
 msgstr ""
 "Izvēlieties metodi: APTUVENS NOVĒRTĒJUMS (aptuvens aprēķins) vai APRĒĶINS "
 "(biežuma un bīstamības pakāpes kombinācija)."
+
+#: src/osha/oira/content/risk.py:44
+msgid "Add Risk"
+msgstr ""
 
 #. Default: Statistics Level
 #: src/osha/oira/content/sector.py:26
@@ -3090,6 +3098,9 @@ msgstr ""
 msgid "message_invalid_login"
 msgstr ""
 "Nederīgi pieteikšanās dati. Ja aizmirsāt paroli, varat ${reset_password}."
+
+#~ msgid "Add ${name}"
+#~ msgstr "Pievienot ${name}"
 
 #, fuzzy
 #~ msgid "title_country_statistics"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.1dev\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-15 15:56+0200\n"
+"POT-Creation-Date: 2013-05-15 19:14+0200\n"
 "PO-Revision-Date: 2013-04-18 15:56+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: bg <LL@li.org>\n"
@@ -2399,10 +2399,6 @@ msgstr "Подмодул"
 msgid "Edit ${name}"
 msgstr "Редактиране на ${name}"
 
-#: src/osha/oira/content/module.py:53
-msgid "Add ${name}"
-msgstr "Добавяне на ${name}"
-
 #. Default: Question
 #: src/osha/oira/content/profilequestion.py:18
 #: src/osha/oira/content/templates/profilequestion_view.pt:23
@@ -2435,6 +2431,14 @@ msgstr ""
 msgid "This must ask to user for the names of all relevant locations."
 msgstr ""
 
+#: src/osha/oira/content/profilequestion.py:76
+msgid "Add Profile question"
+msgstr "Добавяне на Профилиращ въпрос"
+
+#: src/osha/oira/content/profilequestion.py:91
+msgid "Edit Profile question"
+msgstr "Редактиране на Профилиращ въпрос"
+
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
 #: src/osha/oira/content/risk.py:20
@@ -2450,6 +2454,10 @@ msgid "help_evaluation_method_french"
 msgstr ""
 "Изберете между ПРЕЦЕНЕН (груба преценка) или ИЗЧИСЛЕН (комбинация от честота "
 "и сериозност) метод."
+
+#: src/osha/oira/content/risk.py:44
+msgid "Add Risk"
+msgstr ""
 
 #. Default: Statistics Level
 #: src/osha/oira/content/sector.py:26
@@ -3138,6 +3146,9 @@ msgid "message_invalid_login"
 msgstr ""
 "Невалидни данни за вход. Ако сте забравили паролата си, можете да направите"
 "${reset_password}."
+
+#~ msgid "Add ${name}"
+#~ msgstr "Добавяне на ${name}"
 
 #, fuzzy
 #~ msgid "title_country_statistics"

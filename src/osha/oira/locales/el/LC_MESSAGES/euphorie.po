@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-15 15:56+0200\n"
+"POT-Creation-Date: 2013-05-15 19:14+0200\n"
 "PO-Revision-Date: 2013-04-18 15:56+0200\n"
 "Last-Translator: xl <xl@hol.gr>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -2437,10 +2437,6 @@ msgstr "Επιμέρους ενότητα"
 msgid "Edit ${name}"
 msgstr "Επεξεργασία ${name} "
 
-#: src/osha/oira/content/module.py:53
-msgid "Add ${name}"
-msgstr "Προσθήκη ${name} "
-
 #. Default: Question
 #: src/osha/oira/content/profilequestion.py:18
 #: src/osha/oira/content/templates/profilequestion_view.pt:23
@@ -2473,6 +2469,14 @@ msgstr ""
 msgid "This must ask to user for the names of all relevant locations."
 msgstr ""
 
+#: src/osha/oira/content/profilequestion.py:76
+msgid "Add Profile question"
+msgstr "Προσθήκη Ερώτηση προφίλ"
+
+#: src/osha/oira/content/profilequestion.py:91
+msgid "Edit Profile question"
+msgstr "Επεξεργασία Ερώτηση προφίλ"
+
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
 #: src/osha/oira/content/risk.py:20
@@ -2488,6 +2492,10 @@ msgid "help_evaluation_method_french"
 msgstr ""
 "Επιλέξτε μεταξύ των μεθόδων ΚΑΤ' ΕΚΤΙΜΗΣΗΣ (εκτίμηση κατά προσέγγιση) και "
 "ΥΠΟΛΟΓΙΣΜΟΥ (συνδυασμός συχνότητας και σφοδρότητας)."
+
+#: src/osha/oira/content/risk.py:44
+msgid "Add Risk"
+msgstr ""
 
 #. Default: Statistics Level
 #: src/osha/oira/content/sector.py:26
@@ -3184,6 +3192,9 @@ msgstr ""
 msgid "message_invalid_login"
 msgstr ""
 "Άκυρη εισαγωγή. Εάν ξέχασες τον κωδικό σου μπορείς να ${reset_password}."
+
+#~ msgid "Add ${name}"
+#~ msgstr "Προσθήκη ${name} "
 
 #, fuzzy
 #~ msgid "title_country_statistics"

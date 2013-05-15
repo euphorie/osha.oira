@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-15 15:56+0200\n"
+"POT-Creation-Date: 2013-05-15 19:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2163,10 +2163,6 @@ msgstr ""
 msgid "Edit ${name}"
 msgstr ""
 
-#: src/osha/oira/content/module.py:53
-msgid "Add ${name}"
-msgstr ""
-
 #. Default: Question
 #: src/osha/oira/content/profilequestion.py:18
 #: src/osha/oira/content/templates/profilequestion_view.pt:23
@@ -2199,6 +2195,14 @@ msgstr ""
 msgid "This must ask to user for the names of all relevant locations."
 msgstr ""
 
+#: src/osha/oira/content/profilequestion.py:76
+msgid "Add Profile question"
+msgstr ""
+
+#: src/osha/oira/content/profilequestion.py:91
+msgid "Edit Profile question"
+msgstr ""
+
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
 #: src/osha/oira/content/risk.py:20
@@ -2209,6 +2213,10 @@ msgstr ""
 #. (combination of frequency and severity) method.
 #: src/osha/oira/content/risk.py:27
 msgid "help_evaluation_method_french"
+msgstr ""
+
+#: src/osha/oira/content/risk.py:44
+msgid "Add Risk"
 msgstr ""
 
 #. Default: Statistics Level

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-15 15:56+0200\n"
+"POT-Creation-Date: 2013-05-15 19:14+0200\n"
 "PO-Revision-Date: 2013-04-18 15:57+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2374,10 +2374,6 @@ msgstr "Submodulis"
 msgid "Edit ${name}"
 msgstr "Redaguoti ${name}"
 
-#: src/osha/oira/content/module.py:53
-msgid "Add ${name}"
-msgstr "Įkelti ${name}"
-
 #. Default: Question
 #: src/osha/oira/content/profilequestion.py:18
 #: src/osha/oira/content/templates/profilequestion_view.pt:23
@@ -2410,6 +2406,14 @@ msgstr ""
 msgid "This must ask to user for the names of all relevant locations."
 msgstr ""
 
+#: src/osha/oira/content/profilequestion.py:76
+msgid "Add Profile question"
+msgstr "Įkelti Profilio klausimą"
+
+#: src/osha/oira/content/profilequestion.py:91
+msgid "Edit Profile question"
+msgstr "Redaguoti Profilio klausimą"
+
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
 #: src/osha/oira/content/risk.py:20
@@ -2425,6 +2429,10 @@ msgid "help_evaluation_method_french"
 msgstr ""
 "Pasirinkite VERTINIMO (apytikris vertinimas) arba APSKAIČIAVIMO (dažnumo ir "
 "sunkumo kombinacijos) metodą."
+
+#: src/osha/oira/content/risk.py:44
+msgid "Add Risk"
+msgstr ""
 
 #. Default: Statistics Level
 #: src/osha/oira/content/sector.py:26
@@ -2442,12 +2450,12 @@ msgstr ""
 #. Default: Admin
 #: src/osha/oira/content/sitemenu.py:37
 msgid "menu_admin"
-msgstr ""
+msgstr "Admin"
 
 #. Default: Statistics
 #: src/osha/oira/content/sitemenu.py:39
 msgid "menu_statistics"
-msgstr ""
+msgstr "Statistika"
 
 #. Default: Period
 #: src/osha/oira/content/statistics.py:39
@@ -3100,6 +3108,9 @@ msgid "message_invalid_login"
 msgstr ""
 "Neteisingi prisijungimo duomenys. Jei pamiršote slaptažodį, galite "
 "${reset_password}."
+
+#~ msgid "Add ${name}"
+#~ msgstr "Įkelti ${name}"
 
 #, fuzzy
 #~ msgid "title_country_statistics"

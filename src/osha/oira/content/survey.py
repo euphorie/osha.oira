@@ -42,7 +42,7 @@ class IOSHASurvey(form.Schema):
                       default=u"This is the URL of an external site that is "
                       u"linked to. Clicking the logo or the name will take "
                       u"the user to this URL."),
-        required=True)
+        required=False)
 
     depends("IOSHASurvey.external_site_name",
             "IOSHASurvey.enable_external_site_link",
@@ -52,7 +52,7 @@ class IOSHASurvey(form.Schema):
         description=_("help_external_site_name",
                       default=u"This is the name of the external site that is "
                       u"linked to. It will appear next to the logo."),
-        required=True)
+        required=False)
 
     depends("IOSHASurvey.external_site_logo",
             "IOSHASurvey.enable_external_site_link",
@@ -64,7 +64,7 @@ class IOSHASurvey(form.Schema):
             default=u"Upload an image. Make sure your image is of format "
                     u"png, jpg or gif and does not contain any special "
                     u"characters."),
-        required=True)
+        required=False)
 
 
 alsoProvides(IOSHASurvey, IFormFieldProvider)

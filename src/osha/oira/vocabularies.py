@@ -8,6 +8,7 @@ from osha.oira import _
 from plone import api
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.i18n import translate
 
 
 class ReportTypeVocabulary(object):
@@ -15,14 +16,15 @@ class ReportTypeVocabulary(object):
     grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
-        types = {'Tool': 'tool'}
+        t = lambda txt: translate(txt, context=api.portal.get().REQUEST)
+        types = {t(_('Survey')).encode('utf-8'): 'tool'}
         if ISectorContainer.providedBy(context):
             types.update({
-                'EU-OSHA Overview': 'overview',
-                'Country': 'country'
+                t(_('EU-OSHA Overview')).encode('utf-8'): 'overview',
+                t(_('Country')): 'country'
             })
         elif ICountry.providedBy(context):
-            types.update({'Country': 'country'})
+            types.update({t(_('Country')).encode('utf-8'): 'country'})
         return SimpleVocabulary.fromItems(types.items())
 
 grok.global_utility(ReportTypeVocabulary,
@@ -46,15 +48,16 @@ class ReportPeriodVocabulary(object):
     grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
+        t = lambda txt: translate(txt, context=site.REQUEST)
         site = api.portal.get()
         cal = site.REQUEST.locale.dates.calendars['gregorian']
-        items = [(_(u'Whole year'), 0)]
+        items = [(t(_(u'Whole year')), 0)]
         items += [(m.encode('utf-8'), i+1)
                   for i, m in enumerate(cal.getMonthNames())]
-        items += [(_(u'1st Quarter').encode('utf-8'), i+2)]
-        items += [(_(u'2nd Quarter').encode('utf-8'), i+3)]
-        items += [(_(u'3rd Quarter').encode('utf-8'), i+4)]
-        items += [(_(u'4th Quarter').encode('utf-8'), i+5)]
+        items += [(t(_(u'1st Quarter')).encode('utf-8'), i+2)]
+        items += [(t(_(u'2nd Quarter')).encode('utf-8'), i+3)]
+        items += [(t(_(u'3rd Quarter')).encode('utf-8'), i+4)]
+        items += [(t(_(u'4th Quarter')).encode('utf-8'), i+5)]
         return SimpleVocabulary.fromItems(items)
 
 grok.global_utility(ReportPeriodVocabulary,

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.1\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-15 19:14+0200\n"
+"POT-Creation-Date: 2013-05-16 09:58+0200\n"
 "PO-Revision-Date: 2013-04-18 16:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2451,13 +2451,13 @@ msgstr ""
 msgid "Add Profile question"
 msgstr "Profielvraag toevoegen"
 
-#: src/osha/oira/content/profilequestion.py:91
+#: src/osha/oira/content/profilequestion.py:90
 msgid "Edit Profile question"
 msgstr "Bewerk Profielvraag"
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
-#: src/osha/oira/content/risk.py:20
+#: src/osha/oira/content/risk.py:23
 msgid "help_evaluation_method_kinney"
 msgstr ""
 "Kies tussen GESCHAT(ruwe schatting) of BEREKEND (combinatie van "
@@ -2465,15 +2465,31 @@ msgstr ""
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of frequency and severity) method.
-#: src/osha/oira/content/risk.py:27
+#: src/osha/oira/content/risk.py:30
 msgid "help_evaluation_method_french"
 msgstr ""
 "Kies tussen GESCHAT(ruwe schatting) of BEREKEND (combinatie van frequentie "
 "en ernst)."
 
-#: src/osha/oira/content/risk.py:44
-msgid "Add Risk"
+#: src/osha/oira/content/risk.py:44 src/osha/oira/content/risk.py:60
+#: src/osha/oira/content/risk.py:72
+msgid "button_save_changes"
 msgstr ""
+
+#. Default: Cancel
+#: src/osha/oira/content/risk.py:45 src/osha/oira/content/risk.py:61
+#: src/osha/oira/content/risk.py:73
+#: src/osha/oira/content/templates/surveygroup_add.pt:110
+msgid "button_cancel"
+msgstr "Annuleren"
+
+#: src/osha/oira/content/risk.py:49
+msgid "Add Risk"
+msgstr "Risico toevoegen"
+
+#: src/osha/oira/content/risk.py:77
+msgid "Edit Measure"
+msgstr "Bewerk Maatregel"
 
 #. Default: Statistics Level
 #: src/osha/oira/content/sector.py:26
@@ -2951,11 +2967,6 @@ msgstr ""
 #: src/osha/oira/content/templates/surveygroup_add.pt:109
 msgid "button_create"
 msgstr "Creëren"
-
-#. Default: Cancel
-#: src/osha/oira/content/templates/surveygroup_add.pt:110
-msgid "button_cancel"
-msgstr "Annuleren"
 
 #. Default: OiRA Tool versions
 #: src/osha/oira/content/templates/surveygroup_view.pt:14

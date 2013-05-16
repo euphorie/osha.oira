@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-15 19:14+0200\n"
+"POT-Creation-Date: 2013-05-16 09:58+0200\n"
 "PO-Revision-Date: 2011-01-19 12:47+0100\n"
 "Last-Translator: Robert <vansen@hotmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -2361,13 +2361,13 @@ msgstr ""
 msgid "Add Profile question"
 msgstr "Lägg till Profilfråga"
 
-#: src/osha/oira/content/profilequestion.py:91
+#: src/osha/oira/content/profilequestion.py:90
 msgid "Edit Profile question"
 msgstr "Redigera Profilfråga"
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
-#: src/osha/oira/content/risk.py:20
+#: src/osha/oira/content/risk.py:23
 #, fuzzy
 msgid "help_evaluation_method_kinney"
 msgstr ""
@@ -2376,15 +2376,31 @@ msgstr ""
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of frequency and severity) method.
-#: src/osha/oira/content/risk.py:27
+#: src/osha/oira/content/risk.py:30
 #, fuzzy
 msgid "help_evaluation_method_french"
 msgstr ""
 "Välj mellan metoderna UPPSKATTAD (grov uppskattning) eller BERÄKNAD "
 "( kombination av sannolikhet, frekvens och allvarlighetsgrad)."
 
-#: src/osha/oira/content/risk.py:44
+#: src/osha/oira/content/risk.py:44 src/osha/oira/content/risk.py:60
+#: src/osha/oira/content/risk.py:72
+msgid "button_save_changes"
+msgstr "Spara ändringar"
+
+#. Default: Cancel
+#: src/osha/oira/content/risk.py:45 src/osha/oira/content/risk.py:61
+#: src/osha/oira/content/risk.py:73
+#: src/osha/oira/content/templates/surveygroup_add.pt:110
+msgid "button_cancel"
+msgstr "Avbryt"
+
+#: src/osha/oira/content/risk.py:49
 msgid "Add Risk"
+msgstr "Lägg till Risk"
+
+#: src/osha/oira/content/risk.py:77
+msgid "Edit Measure"
 msgstr ""
 
 #. Default: Statistics Level
@@ -2844,11 +2860,6 @@ msgstr ""
 msgid "button_create"
 msgstr ""
 
-#. Default: Cancel
-#: src/osha/oira/content/templates/surveygroup_add.pt:110
-msgid "button_cancel"
-msgstr "Avbryt"
-
 #. Default: OiRA Tool versions
 #: src/osha/oira/content/templates/surveygroup_view.pt:14
 msgid "header_sector_tool_version_list"
@@ -3088,9 +3099,6 @@ msgstr ""
 
 #~ msgid "survey_list_footer"
 #~ msgstr "Du kan även ${add_link}."
-
-#~ msgid "button_save_changes"
-#~ msgstr "Spara ändringar"
 
 #~ msgid "help_sector_contactperson"
 #~ msgstr ""

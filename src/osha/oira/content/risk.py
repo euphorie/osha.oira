@@ -1,6 +1,8 @@
 from five import grok
 from euphorie.content.risk import Edit as RiskEditForm
 from euphorie.content.risk import Add as RiskAddForm
+from euphorie.content.solution import ISolution
+from plone.directives import form
 from ..interfaces import IOSHAContentSkinLayer
 from .. import _
 
@@ -38,10 +40,13 @@ class Add(RiskAddForm, OSHAFormMixin):
     def updateFields(self):
         super(Add, self).updateFields()
         self.setDynamicDescriptions()
+        self.buttons['save'].title = _(u'button_save_changes')
+        self.buttons['cancel'].title = _(u'button_cancel')
 
     @property
     def label(self):
         return _(u"Add Risk")
+
 
 class Edit(RiskEditForm, OSHAFormMixin):
     """ Override to allow us to dynamically set field descriptions
@@ -51,3 +56,21 @@ class Edit(RiskEditForm, OSHAFormMixin):
     def updateFields(self):
         super(Edit, self).updateFields()
         self.setDynamicDescriptions()
+        self.buttons['save'].title = _(u'button_save_changes')
+        self.buttons['cancel'].title = _(u'button_cancel')
+
+
+class SolutionEdit(form.SchemaEditForm):
+    grok.context(ISolution)
+    grok.require("cmf.ModifyPortalContent")
+    grok.layer(IOSHAContentSkinLayer)
+    grok.name("edit")
+
+    def updateFields(self):
+        super(SolutionEdit, self).updateFields()
+        self.buttons['save'].title = _(u'button_save_changes')
+        self.buttons['cancel'].title = _(u'button_cancel')
+
+    @property
+    def label(self):
+        return _(u"Edit Measure")

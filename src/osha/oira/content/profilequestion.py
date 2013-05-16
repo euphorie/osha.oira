@@ -85,7 +85,6 @@ class EditForm(dexterity.EditForm):
     schema = IOSHAProfileQuestion
     template = ViewPageTemplateFile('templates/profilequestion_add.pt')
 
-
     @property
     def label(self):
         return _(u"Edit Profile question")

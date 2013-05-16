@@ -58,28 +58,27 @@ for entry in reference:
     if match_reference:
         default_reference = match_reference.group(1).replace('\n', ' ')
     else:
-        print "WARNING! msgid '%s' in REFERENCE file does not have a " \
-            "default translation." % entry.msgid
+        # print "WARNING! msgid '%s' in REFERENCE file does not have a " \
+        #     "default translation." % entry.msgid
         default_reference = entry.msgid
-    # is this msgid already present in LOCAL?
+    # is this msgid present in LOCAL?
     target_local = local.find(entry.msgid)
-    if not target_local:
-        # If not, it needs to be propagated - check EXISTING for an available
-        # translation
+    if target_local:
         target_existing = existing.find(entry.msgid)
         if target_existing:
             match_existing = patt.match(target_existing.comment)
             if match_existing:
                 default_existing = match_existing.group(1).replace('\n', ' ')
             else:
-                print "WARNING! msgid '%s' in EXISTING file does not have a " \
-                    "default translation." % entry.msgid
+                continue
+                # print "WARNING! msgid '%s' in EXISTING file does not have a " \
+                #     "default translation." % entry.msgid
                 default_existing = target_existing.msgid
             if default_existing == default_reference and \
-                target_existing.msgstr != '':
-                local.append(polib.POEntry(msgid=entry.msgid,
-                msgstr=target_existing.msgstr,
-                occurrences=entry.occurrences, comment=entry.comment))
+                    target_existing.msgstr != '' and target_local.msgstr == '':
+                target_local.msgstr = target_existing.msgstr
+                print u"UPDATED '%s' with translation '%s'" % (
+                    entry.msgid, target_existing.msgstr)
                 cnt += 1
 
 print "Found and updated %d matching translations" % cnt

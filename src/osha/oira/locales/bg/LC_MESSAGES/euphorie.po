@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.1dev\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-16 10:41+0200\n"
+"POT-Creation-Date: 2013-05-16 11:21+0200\n"
 "PO-Revision-Date: 2013-04-18 15:56+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: bg <LL@li.org>\n"
@@ -713,7 +713,7 @@ msgid "label_remove_measure"
 msgstr "Изтрий тази мярка"
 
 #. Default: Add Measure
-#: src/osha/oira/manual_translations.py:225 src/osha/oira/content/risk.py:94
+#: src/osha/oira/manual_translations.py:225 src/osha/oira/content/risk.py:98
 msgid "Add Solution"
 msgstr "Добавяне на Мярка"
 
@@ -2307,12 +2307,12 @@ msgstr ""
 #. Default: Please verify if the profile is still accurate.
 #: src/osha/oira/client/templates/update.pt:24
 msgid "verify_profile"
-msgstr ""
+msgstr "Моля, потвърдете, че профилът е все още точен."
 
 #. Default: Update
 #: src/osha/oira/client/templates/update.pt:58
 msgid "label_accept update"
-msgstr ""
+msgstr "Актуализация"
 
 #. Default: Online interactive
 #: src/osha/oira/client/templates/webhelpers.pt:25
@@ -2403,7 +2403,7 @@ msgstr "Редактиране на ${name}"
 #: src/osha/oira/content/profilequestion.py:18
 #: src/osha/oira/content/templates/profilequestion_view.pt:23
 msgid "label_profilequestion_question"
-msgstr ""
+msgstr "Въпрос"
 
 #: src/osha/oira/content/profilequestion.py:19
 msgid "This question must ask users if this profile applies to them."
@@ -2455,24 +2455,25 @@ msgstr ""
 "Изберете между ПРЕЦЕНЕН (груба преценка) или ИЗЧИСЛЕН (комбинация от честота "
 "и сериозност) метод."
 
-#: src/osha/oira/content/risk.py:44 src/osha/oira/content/risk.py:60
-#: src/osha/oira/content/risk.py:73 src/osha/oira/content/risk.py:89
+#. Default: Save changes
+#: src/osha/oira/content/risk.py:44 src/osha/oira/content/risk.py:61
+#: src/osha/oira/content/risk.py:75 src/osha/oira/content/risk.py:92
 msgid "button_save_changes"
-msgstr ""
+msgstr "Запазване на промените"
 
 #. Default: Cancel
-#: src/osha/oira/content/risk.py:45 src/osha/oira/content/risk.py:61
-#: src/osha/oira/content/risk.py:74 src/osha/oira/content/risk.py:90
+#: src/osha/oira/content/risk.py:46 src/osha/oira/content/risk.py:63
+#: src/osha/oira/content/risk.py:77 src/osha/oira/content/risk.py:94
 #: src/osha/oira/content/templates/surveygroup_add.pt:110
 msgid "button_cancel"
 msgstr "Отменяне"
 
-#: src/osha/oira/content/risk.py:49
+#: src/osha/oira/content/risk.py:50
 msgid "Add Risk"
 msgstr "Добавяне на Риск"
 
 #. Default: Edit Measure
-#: src/osha/oira/content/risk.py:78
+#: src/osha/oira/content/risk.py:81
 msgid "Edit Solution"
 msgstr "Редактиране на Мярка"
 
@@ -2550,7 +2551,7 @@ msgstr "Отчет на статистиката"
 #. Default: Country
 #: src/osha/oira/content/statistics.py:271
 msgid "label_country"
-msgstr ""
+msgstr "Страна"
 
 #: src/osha/oira/content/statistics.py:275
 #: src/osha/oira/content/statistics.py:303
@@ -2613,6 +2614,8 @@ msgstr ""
 #: src/osha/oira/content/survey.py:62
 msgid "help_image_upload"
 msgstr ""
+"Качване на изображение. Уверете се, че Вашето изображение е в png, jpg или "
+"gif формат и не съдържа специални символи."
 
 #. Default: You can not delete an OiRA tool that has been published.
 #: src/osha/oira/content/surveygroup.py:82
@@ -3162,15 +3165,12 @@ msgstr ""
 #~ msgid "Add ${name}"
 #~ msgstr "Добавяне на ${name}"
 
-#, fuzzy
 #~ msgid "title_country_statistics"
 #~ msgstr "Отчет на статистиката"
 
-#, fuzzy
 #~ msgid "title_sector_statistics"
 #~ msgstr "Отчет на статистиката"
 
-#, fuzzy
 #~ msgid "title_global_statistics"
 #~ msgstr "Отчет на статистиката"
 

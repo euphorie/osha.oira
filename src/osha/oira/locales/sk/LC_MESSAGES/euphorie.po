@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-16 10:41+0200\n"
+"POT-Creation-Date: 2013-05-16 11:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -683,7 +683,7 @@ msgid "label_remove_measure"
 msgstr "Vyberte jedno alebo viac z uvedených známych spoločných opatrení."
 
 #. Default: Add Measure
-#: src/osha/oira/manual_translations.py:225 src/osha/oira/content/risk.py:94
+#: src/osha/oira/manual_translations.py:225 src/osha/oira/content/risk.py:98
 msgid "Add Solution"
 msgstr ""
 
@@ -1871,7 +1871,7 @@ msgstr ""
 #. Default: Add
 #: src/osha/oira/client/templates/risk_actionplan.pt:24
 msgid "button_add"
-msgstr ""
+msgstr "Uploadovať"
 
 #. Default: Select one or more of the known common measures provided.
 #: src/osha/oira/client/templates/risk_actionplan.pt:47
@@ -1893,7 +1893,7 @@ msgstr "Deň"
 #. Default: Description
 #: src/osha/oira/client/templates/risk_actionplan.pt:86
 msgid "label_description"
-msgstr ""
+msgstr "Popis"
 
 #: src/osha/oira/client/templates/risk_actionplan.pt:87
 msgid "Standard solutions"
@@ -1942,7 +1942,7 @@ msgstr "Uveďte prosím rozpočet v celých Eurách."
 #: src/osha/oira/client/templates/risk_actionplan.pt:175
 #: src/osha/oira/client/templates/risk_actionplan.pt:194
 msgid "label_day"
-msgstr ""
+msgstr "Obsah strany"
 
 #. Default: Invalid day
 #: src/osha/oira/client/templates/risk_actionplan.pt:143
@@ -2246,12 +2246,12 @@ msgstr ""
 #. Default: Please verify if the profile is still accurate.
 #: src/osha/oira/client/templates/update.pt:24
 msgid "verify_profile"
-msgstr ""
+msgstr "Overte prosím, či je profil stále presný."
 
 #. Default: Update
 #: src/osha/oira/client/templates/update.pt:58
 msgid "label_accept update"
-msgstr ""
+msgstr "Aktualizovať"
 
 #. Default: Online interactive
 #: src/osha/oira/client/templates/webhelpers.pt:25
@@ -2341,7 +2341,7 @@ msgstr "Upraviť ${name}"
 #: src/osha/oira/content/profilequestion.py:18
 #: src/osha/oira/content/templates/profilequestion_view.pt:23
 msgid "label_profilequestion_question"
-msgstr ""
+msgstr "Otázka"
 
 #: src/osha/oira/content/profilequestion.py:19
 msgid "This question must ask users if this profile applies to them."
@@ -2391,24 +2391,25 @@ msgstr ""
 msgid "help_evaluation_method_french"
 msgstr ""
 
-#: src/osha/oira/content/risk.py:44 src/osha/oira/content/risk.py:60
-#: src/osha/oira/content/risk.py:73 src/osha/oira/content/risk.py:89
+#. Default: Save changes
+#: src/osha/oira/content/risk.py:44 src/osha/oira/content/risk.py:61
+#: src/osha/oira/content/risk.py:75 src/osha/oira/content/risk.py:92
 msgid "button_save_changes"
-msgstr ""
+msgstr "Uložiť zmeny"
 
 #. Default: Cancel
-#: src/osha/oira/content/risk.py:45 src/osha/oira/content/risk.py:61
-#: src/osha/oira/content/risk.py:74 src/osha/oira/content/risk.py:90
+#: src/osha/oira/content/risk.py:46 src/osha/oira/content/risk.py:63
+#: src/osha/oira/content/risk.py:77 src/osha/oira/content/risk.py:94
 #: src/osha/oira/content/templates/surveygroup_add.pt:110
 msgid "button_cancel"
 msgstr "Zrušiť"
 
-#: src/osha/oira/content/risk.py:49
+#: src/osha/oira/content/risk.py:50
 msgid "Add Risk"
 msgstr ""
 
 #. Default: Edit Measure
-#: src/osha/oira/content/risk.py:78
+#: src/osha/oira/content/risk.py:81
 msgid "Edit Solution"
 msgstr ""
 
@@ -2486,7 +2487,7 @@ msgstr ""
 #. Default: Country
 #: src/osha/oira/content/statistics.py:271
 msgid "label_country"
-msgstr ""
+msgstr "Krajina"
 
 #: src/osha/oira/content/statistics.py:275
 #: src/osha/oira/content/statistics.py:303
@@ -2549,6 +2550,8 @@ msgstr ""
 #: src/osha/oira/content/survey.py:62
 msgid "help_image_upload"
 msgstr ""
+"Uploadujte obrázok. Uistite sa, že obrázok je vo formáte png, jpg alebo gif "
+"a neobsahuje žiadne špeciálne znaky."
 
 #. Default: You can not delete an OiRA tool that has been published.
 #: src/osha/oira/content/surveygroup.py:82
@@ -2558,12 +2561,12 @@ msgstr "Nemôžete vymazať nástroj OiRA, ktorý bol uverejnený."
 #. Default: Documentation
 #: src/osha/oira/content/templates/documentation_view.pt:12
 msgid "title_country_documentation"
-msgstr ""
+msgstr "Dokumentácia"
 
 #. Default: online client
 #: src/osha/oira/content/templates/documentation_view.pt:15
 msgid "intro_documenation_client"
-msgstr ""
+msgstr "online klient"
 
 #. Default: Here you can manage the documentation for the ${client}.
 #: src/osha/oira/content/templates/documentation_view.pt:14
@@ -2582,23 +2585,25 @@ msgstr ""
 #. Default: appendix
 #: src/osha/oira/content/templates/documentation_view.pt:23
 msgid "documentation_appendix_appendix"
-msgstr ""
+msgstr "príloha"
 
 #. Default: Pages created in the ${appendix} folder are available via links in
 #. the footer of the online client.
 #: src/osha/oira/content/templates/documentation_view.pt:23
 msgid "documentation_appendix"
 msgstr ""
+"Strany vytvorené v priečinku ${appendix} sú dostupné prostredníctvom odkazov "
+"v ukončení strany (päte) online klienta."
 
 #. Default: online help
 #: src/osha/oira/content/templates/documentation_view.pt:28
 msgid "documentation_online_help_online_help"
-msgstr ""
+msgstr "online nápoveda"
 
 #. Default: The ${online_help} text can also be modified.
 #: src/osha/oira/content/templates/documentation_view.pt:28
 msgid "documentation_online_help"
-msgstr ""
+msgstr "Text ${online_help} je možné tiež upraviť."
 
 #. Default: Information
 #: src/osha/oira/content/templates/module_view.pt:22
@@ -3080,15 +3085,12 @@ msgstr ""
 #~ msgid "Add ${name}"
 #~ msgstr "Pridať ${name}"
 
-#, fuzzy
 #~ msgid "title_country_statistics"
 #~ msgstr "Štatistická úroveň"
 
-#, fuzzy
 #~ msgid "title_sector_statistics"
 #~ msgstr "Štatistická úroveň"
 
-#, fuzzy
 #~ msgid "title_global_statistics"
 #~ msgstr "Štatistická úroveň"
 
@@ -3101,11 +3103,9 @@ msgstr ""
 #~ msgid "profilequestion_type_repeat"
 #~ msgstr "Toto je opakovateľná položka profilu."
 
-#, fuzzy
 #~ msgid "help_header_preparation"
 #~ msgstr "Tento text by mal vysvetľovať 2 typy profilových otázok."
 
-#, fuzzy
 #~ msgid "label_help_start"
 #~ msgstr "Správa"
 
@@ -3113,7 +3113,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Možnosť umožňuje koncovému používateľovi preskočiť krok Vyhodnotenie."
 
-#, fuzzy
 #~ msgid "label_module_description"
 #~ msgstr ""
 #~ "Uveďte všetky relevantné informácie, ktoré môžu byť užitočné pre "

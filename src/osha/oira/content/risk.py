@@ -41,8 +41,9 @@ class Add(RiskAddForm, OSHAFormMixin):
     def updateFields(self):
         super(Add, self).updateFields()
         self.setDynamicDescriptions()
-        self.buttons['save'].title = _(u'button_save_changes')
-        self.buttons['cancel'].title = _(u'button_cancel')
+        self.buttons['save'].title = _(
+            u'button_save_changes', default=u"Save changes")
+        self.buttons['cancel'].title = _(u'button_cancel', default=u"Cancel")
 
     @property
     def label(self):
@@ -57,8 +58,9 @@ class Edit(RiskEditForm, OSHAFormMixin):
     def updateFields(self):
         super(Edit, self).updateFields()
         self.setDynamicDescriptions()
-        self.buttons['save'].title = _(u'button_save_changes')
-        self.buttons['cancel'].title = _(u'button_cancel')
+        self.buttons['save'].title = _(
+            u'button_save_changes', default=u"Save changes")
+        self.buttons['cancel'].title = _(u'button_cancel', default=u"Cancel")
 
 
 class SolutionEdit(form.SchemaEditForm):
@@ -70,8 +72,9 @@ class SolutionEdit(form.SchemaEditForm):
 
     def updateFields(self):
         super(SolutionEdit, self).updateFields()
-        self.buttons['save'].title = _(u'button_save_changes')
-        self.buttons['cancel'].title = _(u'button_cancel')
+        self.buttons['save'].title = _(
+            u'button_save_changes', default=u"Save changes")
+        self.buttons['cancel'].title = _(u'button_cancel', default=u"Cancel")
 
     @property
     def label(self):
@@ -86,8 +89,9 @@ class SolutionAdd(dexterity.AddForm):
 
     def updateFields(self):
         super(SolutionAdd, self).updateFields()
-        self.buttons['save'].title = _(u'button_save_changes')
-        self.buttons['cancel'].title = _(u'button_cancel')
+        self.buttons['save'].title = _(
+            u'button_save_changes', default=u"Save changes")
+        self.buttons['cancel'].title = _(u'button_cancel', default=u"Cancel")
 
     @property
     def label(self):

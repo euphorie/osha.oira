@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.6.dev0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-16 09:58+0200\n"
+"POT-Creation-Date: 2013-05-16 10:41+0200\n"
 "PO-Revision-Date: 2013-05-15 13:57+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -671,7 +671,7 @@ msgid "label_remove_measure"
 msgstr "Dzçst ðo ziòu"
 
 #. Default: Add Measure
-#: src/osha/oira/manual_translations.py:225
+#: src/osha/oira/manual_translations.py:225 src/osha/oira/content/risk.py:94
 msgid "Add Solution"
 msgstr "Pievienot: Līdzeklis"
 
@@ -2417,13 +2417,13 @@ msgstr ""
 "(biežuma un bīstamības pakāpes kombinācija)."
 
 #: src/osha/oira/content/risk.py:44 src/osha/oira/content/risk.py:60
-#: src/osha/oira/content/risk.py:72
+#: src/osha/oira/content/risk.py:73 src/osha/oira/content/risk.py:89
 msgid "button_save_changes"
 msgstr ""
 
 #. Default: Cancel
 #: src/osha/oira/content/risk.py:45 src/osha/oira/content/risk.py:61
-#: src/osha/oira/content/risk.py:73
+#: src/osha/oira/content/risk.py:74 src/osha/oira/content/risk.py:90
 #: src/osha/oira/content/templates/surveygroup_add.pt:110
 msgid "button_cancel"
 msgstr "Atcelt"
@@ -2432,8 +2432,9 @@ msgstr "Atcelt"
 msgid "Add Risk"
 msgstr "Pievienot: Risks"
 
-#: src/osha/oira/content/risk.py:77
-msgid "Edit Measure"
+#. Default: Edit Measure
+#: src/osha/oira/content/risk.py:78
+msgid "Edit Solution"
 msgstr "Rediģēt Līdzeklis"
 
 #. Default: Statistics Level

@@ -3,6 +3,7 @@ from euphorie.content.risk import Edit as RiskEditForm
 from euphorie.content.risk import Add as RiskAddForm
 from euphorie.content.solution import ISolution
 from plone.directives import form
+from plone.directives import dexterity
 from ..interfaces import IOSHAContentSkinLayer
 from .. import _
 
@@ -61,6 +62,7 @@ class Edit(RiskEditForm, OSHAFormMixin):
 
 
 class SolutionEdit(form.SchemaEditForm):
+    """ Override to allow us to set form title and button labels """
     grok.context(ISolution)
     grok.require("cmf.ModifyPortalContent")
     grok.layer(IOSHAContentSkinLayer)
@@ -73,4 +75,20 @@ class SolutionEdit(form.SchemaEditForm):
 
     @property
     def label(self):
-        return _(u"Edit Measure")
+        return _(u"Edit Solution", default=u"Edit Measure")
+
+
+class SolutionAdd(dexterity.AddForm):
+    """ Override to allow us to set form title and button labels """
+    grok.context(ISolution)
+    grok.name("euphorie.solution")
+    grok.require("euphorie.content.AddNewRIEContent")
+
+    def updateFields(self):
+        super(SolutionAdd, self).updateFields()
+        self.buttons['save'].title = _(u'button_save_changes')
+        self.buttons['cancel'].title = _(u'button_cancel')
+
+    @property
+    def label(self):
+        return _(u"Add Solution", default=u"Add Measure")

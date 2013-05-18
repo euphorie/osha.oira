@@ -37,9 +37,18 @@ class ReportView(report.ReportView):
             return
 
 
-COLUMN_ORDER = ['title', 'priority', 'action_plan', 'prevention_plan',
-                'requirements', 'planning_end',
-                'responsible', 'budget', 'number', 'comment']
+COLUMN_ORDER = [
+    ('risk', 'title'),
+    ('risk', 'priority'),
+    ('measure', 'action_plan'),
+    ('measure', 'prevention_plan'),
+    ('measure', 'requirements'),
+    ('measure', 'planning_end'),
+    ('measure', 'responsible'),
+    ('measure', 'budget'),
+    ('risk', 'number'),
+    ('module', 'title'),
+    ('risk', 'comment'),]
 
 
 class ReportLanding(grok.View):
@@ -62,8 +71,8 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
 
     columns = sorted(
         (col for col in report.ActionPlanTimeline.columns
-            if col[1] in COLUMN_ORDER),
-        key=lambda d, co=COLUMN_ORDER: co.index(d[1]))
+            if (col[0], col[1]) in COLUMN_ORDER),
+        key=lambda d, co=COLUMN_ORDER: co.index((d[0], d[1])))
     extra_cols = [x for x in columns if x[1] in combine_keys]
     columns = [x for x in columns if x[1] not in combine_keys]
     columns[2] = (

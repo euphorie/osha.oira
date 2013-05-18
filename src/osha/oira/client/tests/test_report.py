@@ -138,8 +138,11 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         import datetime
         from euphorie.client import model
         session = self.createSurveySession()
-        module = model.Module(title=u'Root', module_id='1', zodb_path='1',
-                skip_children=False)
+        module = model.Module(
+            title=u'Root',
+            module_id='1',
+            zodb_path='1',
+            skip_children=False)
         session.addChild(module)
         module.addChild(model.Risk(
             title=u'Risk 1', risk_id='2', zodb_path='1/2', type='risk',
@@ -162,5 +165,5 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         view = self.ActionPlanTimeline(None, None)
         view.session = self.session
         self.assertEqual(
-                [risk.priority for (risk, measure) in view.get_measures()],
-                [u'high', u'medium', u'low'])
+            [risk.priority for (module, risk, measure) in view.get_measures()],
+            [u'high', u'medium', u'low'])

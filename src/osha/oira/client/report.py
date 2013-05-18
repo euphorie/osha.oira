@@ -102,7 +102,9 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             else:
                 sheet.column_dimensions[letter].width = len(cell.value)+5
 
-        for (row, (risk, measure)) in enumerate(self.get_measures(), 1):
+        for (row, (module, risk, measure)) in \
+                enumerate(self.get_measures(), 1):
+
             column = 0
             zodb_node = survey.restrictedTraverse(risk.zodb_path.split('/'))
             for (type, key, title) in self.columns+self.extra_cols:
@@ -117,8 +119,11 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                         if zodb_node.problem_description and \
                                 zodb_node.problem_description.strip():
                             value = zodb_node.problem_description
-                # style
-                sheet.cell(row=row, column=column).style.alignment.wrap_text = True
+                elif type == 'module':
+                    value = getattr(module, key, None)
+
+                sheet.cell(row=row, column=column)\
+                    .style.alignment.wrap_text = True  # style
                 if key in self.combine_keys and value is not None:
                     # osha wants to combine action_plan (col 3),
                     # prevention_plan and requirements in one cell
@@ -136,6 +141,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         """Find all data that should be included in the report.
 
         The data is returned as a list of tuples containing a
+        :py:class:`Module <euphorie.client.model.Module>`,
         :py:class:`Risk <euphorie.client.model.Risk>` and
         :py:class:`ActionPlan <euphorie.client.model.ActionPlan>`. Each
         entry in the list will correspond to a row in the generated Excel
@@ -144,13 +150,17 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         This implementation differs from Euphorie in its ordering:
         it sorts on risk priority instead of start date.
         """
-        query = Session.query(model.SurveyTreeItem, model.ActionPlan)\
-            .outerjoin(model.ActionPlan)\
-            .filter(model.SurveyTreeItem.session == self.session)\
+        query = Session.query(model.Module, model.Risk, model.ActionPlan)\
+            .filter(sql.and_(model.Module.depth == 1,
+                             model.Module.session == self.session))\
             .filter(sql.not_(model.SKIPPED_PARENTS))\
             .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
                             model.RISK_PRESENT_OR_TOP5_FILTER))\
-            .join(model.Risk)\
+            .join((model.Risk,
+                   sql.and_(model.Risk.path.startswith(model.Module.path),
+                            model.Risk.session == self.session)))\
+            .join((model.ActionPlan,
+                   model.ActionPlan.risk_id == model.Risk.id))\
             .order_by(
                 sql.case(
                     value=model.Risk.priority,

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.2 (unreleased)
+2.2.2 (2013-06-03)
 ------------------
 
 Upgrade notes

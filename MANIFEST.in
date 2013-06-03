@@ -1,7 +1,8 @@
 include *.rst
+recursive-include src *.pot
+recursive-include src *.py
 recursive-include src/osha/oira *.ini
 recursive-include src/osha/oira *.zcml
-recursive-include src/osha/oira/locales *.mo
 recursive-include src/osha/oira/locales *.po
 graft docs
 prune docs/.build
@@ -11,3 +12,5 @@ graft src/osha/oira/content/templates
 graft src/osha/oira/client/templates
 graft src/osha/oira/tiles/templates
 graft src/osha/oira/nuplone/templates
+
+

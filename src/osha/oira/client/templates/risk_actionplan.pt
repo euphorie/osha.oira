@@ -129,17 +129,16 @@
 
             <fieldset tal:define="date_error exists:errors/planning_start_date;
                                   day_error exists:errors/planning_start_day;
-                                    year_error exists:errors/planning_start_year;
-                                    error python:day_error or year_error"
-                            class="condensed${python:' error' if error else ''}">
-                <em class="message error" tal:condition="date_error" i18n:translate="error_start_not_before_end">Start date is not before end date</em>
+                                  year_error exists:errors/planning_start_year;
+                                  error python:day_error or year_error"
+                      class="condensed${python:' error' if error else ''}">
                 <legend i18n:translate="label_action_plan_start">Planning start</legend>
+                <em class="message error" tal:condition="date_error" i18n:translate="error_start_not_before_end">Start date is not before end date</em>
                 <fieldset class="date-eu">
                     <label class="${python:'error' if day_error else None}" for="label-planning-start-day-${number}" i18n:translate="label_day">Day</label>
                     <input name="measure.planning_start_day:records"
                             id="planning-start-day-${number}"
                             maxlength="2"
-                            type="number"
                             class="numeric day${python:' error' if day_error or date_error else ''}"
                             value="${actionplan/planning_start_day|actionplan/planning_start/day|nothing}"/>
                     <em class="message error" tal:condition="day_error" i18n:translate="error_invalid_day">Invalid day</em>
@@ -159,8 +158,7 @@
                     <input name="measure.planning_start_year:records"
                             id="planning-start-year-${number}"
                             maxlength="4"
-                            type="number"
-                            class="numeric year enablePicker dateRange${python:' error' if year_error or date_error else ''}"
+                            class="numeric year enablePicker${python:' error' if year_error or date_error else ''}"
                             value="${actionplan/planning_start_year|actionplan/planning_start/year|nothing}"/>
                     <em class="message error" tal:condition="year_error" i18n:translate="error_invalid_year">Please enter a valid year after 1900</em>
                 </fieldset>
@@ -177,7 +175,6 @@
                     <label class="${python:'error' if day_error else None}"
                         for="label-planning-end-day-${number}" i18n:translate="label_day">Day</label>
                     <input name="measure.planning_end_day:records" id="planning-end-day-${number}" maxlength="2"
-                        type="number"
                         class="numeric day ${python:' error' if day_error else ''}"
                         value="${actionplan/planning_end_day|actionplan/planning_end/day|nothing}"/>
                     <em class="message error" tal:condition="day_error" i18n:translate="error_invalid_day">Invalid day</em>
@@ -196,8 +193,7 @@
                     <label class="${python:'error' if year_error else None}"
                         for="planning-end-year-${number}" i18n:translate="label_day">Day</label>
                     <input name="measure.planning_end_year:records" id="planning-end-year-${number}" maxlength="4"
-                        type="number"
-                        class="numeric year enablePicker dateRange${python:' error' if year_error else ''}"
+                        class="numeric year enablePicker${python:' error' if year_error else ''}"
                         value="${actionplan/planning_end_year|actionplan/planning_end/year|nothing}"/>
                     <em class="message error" tal:condition="year_error" i18n:translate="error_invalid_year">Please enter a valid year after 1900</em>
                 </fieldset>

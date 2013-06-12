@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-16 11:21+0200\n"
+"POT-Creation-Date: 2013-06-03 18:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -792,7 +792,7 @@ msgid "Enter the names of each location"
 msgstr ""
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:71
+#: src/osha/oira/client/report.py:80
 #, fuzzy
 msgid "report_timeline_measure"
 msgstr ""
@@ -800,23 +800,23 @@ msgstr ""
 "und Ende am ${end}."
 
 #. Default: End date
-#: src/osha/oira/client/report.py:74
+#: src/osha/oira/client/report.py:83
 msgid "report_timeline_end_date"
 msgstr ""
 
 #. Default: Responsible
-#: src/osha/oira/client/report.py:77
+#: src/osha/oira/client/report.py:86
 #, fuzzy
 msgid "report_timeline_responsible"
 msgstr "${responsible} ist verantwortlich für diese Aufgabe."
 
 #. Default: Status (planned, in process, implemented)
-#: src/osha/oira/client/report.py:78
+#: src/osha/oira/client/report.py:87
 msgid "report_timeline_progress"
 msgstr ""
 
 #. Default: Timeline
-#: src/osha/oira/client/report.py:88
+#: src/osha/oira/client/report.py:97
 msgid "report_timeline_title"
 msgstr ""
 
@@ -1125,7 +1125,7 @@ msgstr "Gehe zu Bericht"
 #: src/osha/oira/client/templates/risk_evaluation.pt:136
 #: src/osha/oira/client/templates/risk_identification.pt:51
 #: src/osha/oira/client/templates/sessions.pt:82
-#: src/osha/oira/client/templates/start.pt:44
+#: src/osha/oira/client/templates/start.pt:46
 #: src/osha/oira/client/templates/update.pt:65
 msgid "label_preparation"
 msgstr "Vorbereitung"
@@ -1145,7 +1145,7 @@ msgstr "Vorbereitung"
 #: src/osha/oira/client/templates/risk_evaluation.pt:137
 #: src/osha/oira/client/templates/risk_identification.pt:52
 #: src/osha/oira/client/templates/sessions.pt:83
-#: src/osha/oira/client/templates/start.pt:45
+#: src/osha/oira/client/templates/start.pt:47
 #: src/osha/oira/client/templates/update.pt:66
 msgid "iphone_label_preparation"
 msgstr "Vorbereitung"
@@ -1165,7 +1165,7 @@ msgstr "Vorbereitung"
 #: src/osha/oira/client/templates/risk_evaluation.pt:142
 #: src/osha/oira/client/templates/risk_identification.pt:57
 #: src/osha/oira/client/templates/sessions.pt:86
-#: src/osha/oira/client/templates/start.pt:49
+#: src/osha/oira/client/templates/start.pt:51
 #: src/osha/oira/client/templates/update.pt:70
 msgid "label_identification"
 msgstr "Ermittlung"
@@ -1185,7 +1185,7 @@ msgstr "Ermittlung"
 #: src/osha/oira/client/templates/risk_evaluation.pt:143
 #: src/osha/oira/client/templates/risk_identification.pt:58
 #: src/osha/oira/client/templates/sessions.pt:87
-#: src/osha/oira/client/templates/start.pt:50
+#: src/osha/oira/client/templates/start.pt:52
 #: src/osha/oira/client/templates/update.pt:71
 msgid "iphone_label_identification"
 msgstr "Ermittlung"
@@ -1205,7 +1205,7 @@ msgstr "Ermittlung"
 #: src/osha/oira/client/templates/risk_evaluation.pt:148
 #: src/osha/oira/client/templates/risk_identification.pt:66
 #: src/osha/oira/client/templates/sessions.pt:90
-#: src/osha/oira/client/templates/start.pt:53
+#: src/osha/oira/client/templates/start.pt:55
 #: src/osha/oira/client/templates/update.pt:74
 msgid "label_evaluation"
 msgstr "Bewertung"
@@ -1225,7 +1225,7 @@ msgstr "Bewertung"
 #: src/osha/oira/client/templates/risk_evaluation.pt:149
 #: src/osha/oira/client/templates/risk_identification.pt:67
 #: src/osha/oira/client/templates/sessions.pt:91
-#: src/osha/oira/client/templates/start.pt:54
+#: src/osha/oira/client/templates/start.pt:56
 #: src/osha/oira/client/templates/update.pt:75
 msgid "iphone_label_evaluation"
 msgstr "Bewertung"
@@ -1245,7 +1245,7 @@ msgstr "Bewertung"
 #: src/osha/oira/client/templates/risk_evaluation.pt:157
 #: src/osha/oira/client/templates/risk_identification.pt:72
 #: src/osha/oira/client/templates/sessions.pt:94
-#: src/osha/oira/client/templates/start.pt:57
+#: src/osha/oira/client/templates/start.pt:59
 #: src/osha/oira/client/templates/update.pt:78
 msgid "label_action_plan"
 msgstr "Aktionsplan"
@@ -1265,7 +1265,7 @@ msgstr "Aktionsplan"
 #: src/osha/oira/client/templates/risk_evaluation.pt:158
 #: src/osha/oira/client/templates/risk_identification.pt:73
 #: src/osha/oira/client/templates/sessions.pt:95
-#: src/osha/oira/client/templates/start.pt:58
+#: src/osha/oira/client/templates/start.pt:60
 #: src/osha/oira/client/templates/update.pt:79
 msgid "iphone_label_action_plan"
 msgstr "Aktionsplan"
@@ -1285,7 +1285,7 @@ msgstr "Aktionsplan"
 #: src/osha/oira/client/templates/risk_evaluation.pt:163
 #: src/osha/oira/client/templates/risk_identification.pt:78
 #: src/osha/oira/client/templates/sessions.pt:98
-#: src/osha/oira/client/templates/start.pt:61
+#: src/osha/oira/client/templates/start.pt:63
 #: src/osha/oira/client/templates/update.pt:82
 msgid "label_report"
 msgstr "Bericht"
@@ -1305,7 +1305,7 @@ msgstr "Bericht"
 #: src/osha/oira/client/templates/risk_evaluation.pt:164
 #: src/osha/oira/client/templates/risk_identification.pt:79
 #: src/osha/oira/client/templates/sessions.pt:99
-#: src/osha/oira/client/templates/start.pt:62
+#: src/osha/oira/client/templates/start.pt:64
 #: src/osha/oira/client/templates/update.pt:83
 msgid "iphone_report"
 msgstr "Bericht"
@@ -1325,7 +1325,7 @@ msgstr "Bericht"
 #: src/osha/oira/client/templates/risk_evaluation.pt:171
 #: src/osha/oira/client/templates/risk_identification.pt:86
 #: src/osha/oira/client/templates/sessions.pt:105
-#: src/osha/oira/client/templates/start.pt:68
+#: src/osha/oira/client/templates/start.pt:70
 #: src/osha/oira/client/templates/update.pt:89
 msgid "navigation_logout"
 msgstr "Abmelden"
@@ -1344,7 +1344,7 @@ msgstr "Abmelden"
 #: src/osha/oira/client/templates/risk_actionplan.pt:269
 #: src/osha/oira/client/templates/risk_evaluation.pt:172
 #: src/osha/oira/client/templates/risk_identification.pt:87
-#: src/osha/oira/client/templates/start.pt:69
+#: src/osha/oira/client/templates/start.pt:71
 #: src/osha/oira/client/templates/update.pt:90
 msgid "navigation_surveys"
 msgstr "Meine Beurteilungen"
@@ -1366,7 +1366,7 @@ msgstr "Meine Beurteilungen"
 #: src/osha/oira/client/templates/risk_evaluation.pt:173
 #: src/osha/oira/client/templates/risk_identification.pt:88
 #: src/osha/oira/client/templates/sessions.pt:106
-#: src/osha/oira/client/templates/start.pt:70
+#: src/osha/oira/client/templates/start.pt:72
 #: src/osha/oira/client/templates/update.pt:91
 msgid "navigation_help"
 msgstr "Hilfe"
@@ -1400,7 +1400,7 @@ msgstr "Status"
 #: src/osha/oira/client/templates/risk_actionplan.pt:272
 #: src/osha/oira/client/templates/risk_evaluation.pt:175
 #: src/osha/oira/client/templates/sessions.pt:107
-#: src/osha/oira/client/templates/start.pt:71
+#: src/osha/oira/client/templates/start.pt:73
 #: src/osha/oira/client/templates/update.pt:92
 msgid "navigation_settings"
 msgstr "Einstellungen"
@@ -1525,7 +1525,7 @@ msgstr "Ermittlung"
 #: src/osha/oira/client/templates/risk_evaluation.pt:119
 #: src/osha/oira/client/templates/risk_identification.pt:28
 #: src/osha/oira/client/templates/sessions.pt:75
-#: src/osha/oira/client/templates/start.pt:37
+#: src/osha/oira/client/templates/start.pt:39
 msgid "label_previous"
 msgstr "Vorhergehende"
 
@@ -2343,8 +2343,12 @@ msgstr ""
 "Sind Sie sicher, dass Sie diese Sitzung löschen möchten? Dieser Vorgang kann "
 "nicht rückgängig gemacht werden."
 
+#: src/osha/oira/client/templates/start.pt:25
+msgid "This OiRA tool was offered to you by ${external_site}"
+msgstr ""
+
 #. Default: Start
-#: src/osha/oira/client/templates/start.pt:38
+#: src/osha/oira/client/templates/start.pt:40
 msgid "label_start_survey"
 msgstr "Starten"
 

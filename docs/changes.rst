@@ -6,6 +6,7 @@ Changelog
 
 - Fixed a typo in manual translations: help_header_report, not help_header_reports
   [pysailor]
+- #7555: Czech translation fixes [regebro]
 
 
 2.2.3 (2013-06-03)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-05-16 11:21+0200\n"
+"POT-Creation-Date: 2013-06-13 16:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,6 +114,8 @@ msgstr "Nástroje OiRA"
 
 #. Default: OiRA Tool
 #: src/osha/oira/manual_translations.py:34 src/osha/oira/vocabularies.py:20
+#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:4
+#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:5
 msgid "Survey"
 msgstr "Nástroj OiRA"
 
@@ -456,9 +458,8 @@ msgstr "Tento text by mal vysvetľovať, ako sa vypĺňa Akčný plán."
 
 #. Default: 5. Report
 #: src/osha/oira/manual_translations.py:128
-#, fuzzy
-msgid "help_header_reports"
-msgstr "Spravodajstvo"
+msgid "help_header_report"
+msgstr "5. Spravodajstvo"
 
 #. Default: 5. Report
 #: src/osha/oira/manual_translations.py:129
@@ -742,7 +743,7 @@ msgid "Enter the names of each location"
 msgstr ""
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:71
+#: src/osha/oira/client/report.py:80
 #, fuzzy
 msgid "report_timeline_measure"
 msgstr ""
@@ -750,23 +751,23 @@ msgstr ""
 "končí dňa ${end}."
 
 #. Default: End date
-#: src/osha/oira/client/report.py:74
+#: src/osha/oira/client/report.py:83
 msgid "report_timeline_end_date"
 msgstr ""
 
 #. Default: Responsible
-#: src/osha/oira/client/report.py:77
+#: src/osha/oira/client/report.py:86
 #, fuzzy
 msgid "report_timeline_responsible"
 msgstr "${responsible} je zodpovedný za túto úlohu."
 
 #. Default: Status (planned, in process, implemented)
-#: src/osha/oira/client/report.py:78
+#: src/osha/oira/client/report.py:87
 msgid "report_timeline_progress"
 msgstr ""
 
 #. Default: Timeline
-#: src/osha/oira/client/report.py:88
+#: src/osha/oira/client/report.py:97
 msgid "report_timeline_title"
 msgstr ""
 
@@ -854,7 +855,7 @@ msgstr "Rozpočet"
 
 #. Default: Planning start
 #: src/osha/oira/client/survey.py:334
-#: src/osha/oira/client/templates/risk_actionplan.pt:134
+#: src/osha/oira/client/templates/risk_actionplan.pt:135
 msgid "label_action_plan_start"
 msgstr "Plánovanie spustenia"
 
@@ -1061,11 +1062,11 @@ msgstr "Prejsť na správu"
 #: src/osha/oira/client/templates/report_company.pt:62
 #: src/osha/oira/client/templates/report_identification.pt:85
 #: src/osha/oira/client/templates/report_landing.pt:68
-#: src/osha/oira/client/templates/risk_actionplan.pt:233
+#: src/osha/oira/client/templates/risk_actionplan.pt:231
 #: src/osha/oira/client/templates/risk_evaluation.pt:136
 #: src/osha/oira/client/templates/risk_identification.pt:51
 #: src/osha/oira/client/templates/sessions.pt:82
-#: src/osha/oira/client/templates/start.pt:44
+#: src/osha/oira/client/templates/start.pt:46
 #: src/osha/oira/client/templates/update.pt:65
 msgid "label_preparation"
 msgstr "Príprava"
@@ -1081,11 +1082,11 @@ msgstr "Príprava"
 #: src/osha/oira/client/templates/report_company.pt:63
 #: src/osha/oira/client/templates/report_identification.pt:86
 #: src/osha/oira/client/templates/report_landing.pt:69
-#: src/osha/oira/client/templates/risk_actionplan.pt:234
+#: src/osha/oira/client/templates/risk_actionplan.pt:232
 #: src/osha/oira/client/templates/risk_evaluation.pt:137
 #: src/osha/oira/client/templates/risk_identification.pt:52
 #: src/osha/oira/client/templates/sessions.pt:83
-#: src/osha/oira/client/templates/start.pt:45
+#: src/osha/oira/client/templates/start.pt:47
 #: src/osha/oira/client/templates/update.pt:66
 msgid "iphone_label_preparation"
 msgstr "Príprava"
@@ -1101,11 +1102,11 @@ msgstr "Príprava"
 #: src/osha/oira/client/templates/report_company.pt:68
 #: src/osha/oira/client/templates/report_identification.pt:91
 #: src/osha/oira/client/templates/report_landing.pt:74
-#: src/osha/oira/client/templates/risk_actionplan.pt:239
+#: src/osha/oira/client/templates/risk_actionplan.pt:237
 #: src/osha/oira/client/templates/risk_evaluation.pt:142
 #: src/osha/oira/client/templates/risk_identification.pt:57
 #: src/osha/oira/client/templates/sessions.pt:86
-#: src/osha/oira/client/templates/start.pt:49
+#: src/osha/oira/client/templates/start.pt:51
 #: src/osha/oira/client/templates/update.pt:70
 msgid "label_identification"
 msgstr "Identifikácia"
@@ -1121,11 +1122,11 @@ msgstr "Identifikácia"
 #: src/osha/oira/client/templates/report_company.pt:69
 #: src/osha/oira/client/templates/report_identification.pt:92
 #: src/osha/oira/client/templates/report_landing.pt:75
-#: src/osha/oira/client/templates/risk_actionplan.pt:240
+#: src/osha/oira/client/templates/risk_actionplan.pt:238
 #: src/osha/oira/client/templates/risk_evaluation.pt:143
 #: src/osha/oira/client/templates/risk_identification.pt:58
 #: src/osha/oira/client/templates/sessions.pt:87
-#: src/osha/oira/client/templates/start.pt:50
+#: src/osha/oira/client/templates/start.pt:52
 #: src/osha/oira/client/templates/update.pt:71
 msgid "iphone_label_identification"
 msgstr "Identifikácia"
@@ -1141,11 +1142,11 @@ msgstr "Identifikácia"
 #: src/osha/oira/client/templates/report_company.pt:74
 #: src/osha/oira/client/templates/report_identification.pt:97
 #: src/osha/oira/client/templates/report_landing.pt:80
-#: src/osha/oira/client/templates/risk_actionplan.pt:245
+#: src/osha/oira/client/templates/risk_actionplan.pt:243
 #: src/osha/oira/client/templates/risk_evaluation.pt:148
 #: src/osha/oira/client/templates/risk_identification.pt:66
 #: src/osha/oira/client/templates/sessions.pt:90
-#: src/osha/oira/client/templates/start.pt:53
+#: src/osha/oira/client/templates/start.pt:55
 #: src/osha/oira/client/templates/update.pt:74
 msgid "label_evaluation"
 msgstr "Vyhodnotenie"
@@ -1161,11 +1162,11 @@ msgstr "Vyhodnotenie"
 #: src/osha/oira/client/templates/report_company.pt:75
 #: src/osha/oira/client/templates/report_identification.pt:98
 #: src/osha/oira/client/templates/report_landing.pt:81
-#: src/osha/oira/client/templates/risk_actionplan.pt:246
+#: src/osha/oira/client/templates/risk_actionplan.pt:244
 #: src/osha/oira/client/templates/risk_evaluation.pt:149
 #: src/osha/oira/client/templates/risk_identification.pt:67
 #: src/osha/oira/client/templates/sessions.pt:91
-#: src/osha/oira/client/templates/start.pt:54
+#: src/osha/oira/client/templates/start.pt:56
 #: src/osha/oira/client/templates/update.pt:75
 msgid "iphone_label_evaluation"
 msgstr "Vyhodnotenie"
@@ -1181,11 +1182,11 @@ msgstr "Vyhodnotenie"
 #: src/osha/oira/client/templates/report_company.pt:80
 #: src/osha/oira/client/templates/report_identification.pt:103
 #: src/osha/oira/client/templates/report_landing.pt:86
-#: src/osha/oira/client/templates/risk_actionplan.pt:251
+#: src/osha/oira/client/templates/risk_actionplan.pt:249
 #: src/osha/oira/client/templates/risk_evaluation.pt:157
 #: src/osha/oira/client/templates/risk_identification.pt:72
 #: src/osha/oira/client/templates/sessions.pt:94
-#: src/osha/oira/client/templates/start.pt:57
+#: src/osha/oira/client/templates/start.pt:59
 #: src/osha/oira/client/templates/update.pt:78
 msgid "label_action_plan"
 msgstr "Akčný plán"
@@ -1201,11 +1202,11 @@ msgstr "Akčný plán"
 #: src/osha/oira/client/templates/report_company.pt:81
 #: src/osha/oira/client/templates/report_identification.pt:104
 #: src/osha/oira/client/templates/report_landing.pt:87
-#: src/osha/oira/client/templates/risk_actionplan.pt:252
+#: src/osha/oira/client/templates/risk_actionplan.pt:250
 #: src/osha/oira/client/templates/risk_evaluation.pt:158
 #: src/osha/oira/client/templates/risk_identification.pt:73
 #: src/osha/oira/client/templates/sessions.pt:95
-#: src/osha/oira/client/templates/start.pt:58
+#: src/osha/oira/client/templates/start.pt:60
 #: src/osha/oira/client/templates/update.pt:79
 msgid "iphone_label_action_plan"
 msgstr "Akčný plán"
@@ -1221,11 +1222,11 @@ msgstr "Akčný plán"
 #: src/osha/oira/client/templates/report_company.pt:86
 #: src/osha/oira/client/templates/report_identification.pt:109
 #: src/osha/oira/client/templates/report_landing.pt:92
-#: src/osha/oira/client/templates/risk_actionplan.pt:260
+#: src/osha/oira/client/templates/risk_actionplan.pt:258
 #: src/osha/oira/client/templates/risk_evaluation.pt:163
 #: src/osha/oira/client/templates/risk_identification.pt:78
 #: src/osha/oira/client/templates/sessions.pt:98
-#: src/osha/oira/client/templates/start.pt:61
+#: src/osha/oira/client/templates/start.pt:63
 #: src/osha/oira/client/templates/update.pt:82
 msgid "label_report"
 msgstr "Správa"
@@ -1241,11 +1242,11 @@ msgstr "Správa"
 #: src/osha/oira/client/templates/report_company.pt:87
 #: src/osha/oira/client/templates/report_identification.pt:110
 #: src/osha/oira/client/templates/report_landing.pt:93
-#: src/osha/oira/client/templates/risk_actionplan.pt:261
+#: src/osha/oira/client/templates/risk_actionplan.pt:259
 #: src/osha/oira/client/templates/risk_evaluation.pt:164
 #: src/osha/oira/client/templates/risk_identification.pt:79
 #: src/osha/oira/client/templates/sessions.pt:99
-#: src/osha/oira/client/templates/start.pt:62
+#: src/osha/oira/client/templates/start.pt:64
 #: src/osha/oira/client/templates/update.pt:83
 msgid "iphone_report"
 msgstr "Správa"
@@ -1261,11 +1262,11 @@ msgstr "Správa"
 #: src/osha/oira/client/templates/report_company.pt:94
 #: src/osha/oira/client/templates/report_identification.pt:117
 #: src/osha/oira/client/templates/report_landing.pt:100
-#: src/osha/oira/client/templates/risk_actionplan.pt:268
+#: src/osha/oira/client/templates/risk_actionplan.pt:266
 #: src/osha/oira/client/templates/risk_evaluation.pt:171
 #: src/osha/oira/client/templates/risk_identification.pt:86
 #: src/osha/oira/client/templates/sessions.pt:105
-#: src/osha/oira/client/templates/start.pt:68
+#: src/osha/oira/client/templates/start.pt:70
 #: src/osha/oira/client/templates/update.pt:89
 msgid "navigation_logout"
 msgstr "Odhlásenie"
@@ -1281,10 +1282,10 @@ msgstr "Odhlásenie"
 #: src/osha/oira/client/templates/report_company.pt:95
 #: src/osha/oira/client/templates/report_identification.pt:118
 #: src/osha/oira/client/templates/report_landing.pt:101
-#: src/osha/oira/client/templates/risk_actionplan.pt:269
+#: src/osha/oira/client/templates/risk_actionplan.pt:267
 #: src/osha/oira/client/templates/risk_evaluation.pt:172
 #: src/osha/oira/client/templates/risk_identification.pt:87
-#: src/osha/oira/client/templates/start.pt:69
+#: src/osha/oira/client/templates/start.pt:71
 #: src/osha/oira/client/templates/update.pt:90
 msgid "navigation_surveys"
 msgstr "Stretnutia"
@@ -1302,11 +1303,11 @@ msgstr "Stretnutia"
 #: src/osha/oira/client/templates/report_company.pt:96
 #: src/osha/oira/client/templates/report_identification.pt:119
 #: src/osha/oira/client/templates/report_landing.pt:102
-#: src/osha/oira/client/templates/risk_actionplan.pt:270
+#: src/osha/oira/client/templates/risk_actionplan.pt:268
 #: src/osha/oira/client/templates/risk_evaluation.pt:173
 #: src/osha/oira/client/templates/risk_identification.pt:88
 #: src/osha/oira/client/templates/sessions.pt:106
-#: src/osha/oira/client/templates/start.pt:70
+#: src/osha/oira/client/templates/start.pt:72
 #: src/osha/oira/client/templates/update.pt:91
 msgid "navigation_help"
 msgstr "Pomocník"
@@ -1320,7 +1321,7 @@ msgstr "Pomocník"
 #: src/osha/oira/client/templates/report_actionplan.pt:310
 #: src/osha/oira/client/templates/report_company.pt:97
 #: src/osha/oira/client/templates/report_identification.pt:120
-#: src/osha/oira/client/templates/risk_actionplan.pt:271
+#: src/osha/oira/client/templates/risk_actionplan.pt:269
 #: src/osha/oira/client/templates/risk_evaluation.pt:174
 #: src/osha/oira/client/templates/risk_identification.pt:89
 msgid "navigation_status"
@@ -1337,10 +1338,10 @@ msgstr "Stav"
 #: src/osha/oira/client/templates/report_company.pt:98
 #: src/osha/oira/client/templates/report_identification.pt:121
 #: src/osha/oira/client/templates/report_landing.pt:103
-#: src/osha/oira/client/templates/risk_actionplan.pt:272
+#: src/osha/oira/client/templates/risk_actionplan.pt:270
 #: src/osha/oira/client/templates/risk_evaluation.pt:175
 #: src/osha/oira/client/templates/sessions.pt:107
-#: src/osha/oira/client/templates/start.pt:71
+#: src/osha/oira/client/templates/start.pt:73
 #: src/osha/oira/client/templates/update.pt:92
 msgid "navigation_settings"
 msgstr "Nastavenia"
@@ -1437,11 +1438,11 @@ msgstr "Identifikácia"
 #: src/osha/oira/client/templates/module_evaluation.pt:38
 #: src/osha/oira/client/templates/register.pt:34
 #: src/osha/oira/client/templates/report_company.pt:53
-#: src/osha/oira/client/templates/risk_actionplan.pt:211
+#: src/osha/oira/client/templates/risk_actionplan.pt:209
 #: src/osha/oira/client/templates/risk_evaluation.pt:119
 #: src/osha/oira/client/templates/risk_identification.pt:28
 #: src/osha/oira/client/templates/sessions.pt:75
-#: src/osha/oira/client/templates/start.pt:37
+#: src/osha/oira/client/templates/start.pt:39
 msgid "label_previous"
 msgstr "Predchádzajúci"
 
@@ -1524,7 +1525,7 @@ msgstr ""
 #: src/osha/oira/client/templates/profile.pt:64
 #: src/osha/oira/client/templates/report.pt:38
 #: src/osha/oira/client/templates/report_company.pt:55
-#: src/osha/oira/client/templates/risk_actionplan.pt:213
+#: src/osha/oira/client/templates/risk_actionplan.pt:211
 #: src/osha/oira/client/templates/risk_evaluation.pt:120
 #: src/osha/oira/client/templates/risk_identification.pt:29
 msgid "label_save_and_continue"
@@ -1937,40 +1938,45 @@ msgstr ""
 msgid "error_invalid_budget"
 msgstr "Uveďte prosím rozpočet v celých Eurách."
 
-#. Default: Day
+#. Default: Start date is not before end date
 #: src/osha/oira/client/templates/risk_actionplan.pt:136
+msgid "error_start_not_before_end"
+msgstr ""
+
+#. Default: Day
+#: src/osha/oira/client/templates/risk_actionplan.pt:138
 #: src/osha/oira/client/templates/risk_actionplan.pt:175
-#: src/osha/oira/client/templates/risk_actionplan.pt:194
+#: src/osha/oira/client/templates/risk_actionplan.pt:193
 msgid "label_day"
 msgstr "Obsah strany"
 
 #. Default: Invalid day
-#: src/osha/oira/client/templates/risk_actionplan.pt:143
-#: src/osha/oira/client/templates/risk_actionplan.pt:181
+#: src/osha/oira/client/templates/risk_actionplan.pt:144
+#: src/osha/oira/client/templates/risk_actionplan.pt:180
 msgid "error_invalid_day"
 msgstr "Neplatný deň"
 
 #. Default: Month
-#: src/osha/oira/client/templates/risk_actionplan.pt:144
-#: src/osha/oira/client/templates/risk_actionplan.pt:183
+#: src/osha/oira/client/templates/risk_actionplan.pt:145
+#: src/osha/oira/client/templates/risk_actionplan.pt:182
 msgid "label_month"
 msgstr "Mesiac"
 
 #. Default: Year
-#: src/osha/oira/client/templates/risk_actionplan.pt:154
+#: src/osha/oira/client/templates/risk_actionplan.pt:155
 #: src/osha/oira/content/statistics.py:34
 msgid "label_year"
 msgstr "Rok"
 
 #. Default: Please enter a valid year after 1900
 #: src/osha/oira/client/templates/risk_actionplan.pt:163
-#: src/osha/oira/client/templates/risk_actionplan.pt:200
+#: src/osha/oira/client/templates/risk_actionplan.pt:198
 msgid "error_invalid_year"
 msgstr "Uveďte prosím platný rok, neskorší ako 1900"
 
 #. Default: Please leave any comments you may have on the question above in
 #. this field. These comments will be used in the action plan.
-#: src/osha/oira/client/templates/risk_actionplan.pt:218
+#: src/osha/oira/client/templates/risk_actionplan.pt:216
 #: src/osha/oira/client/templates/risk_evaluation.pt:124
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
@@ -2224,8 +2230,12 @@ msgid ""
 msgstr ""
 "Ste si istí, že chcete vymazať toto stretnutie? Tento úkon je nezvratný."
 
+#: src/osha/oira/client/templates/start.pt:25
+msgid "This OiRA tool was offered to you by ${external_site}"
+msgstr ""
+
 #. Default: Start
-#: src/osha/oira/client/templates/start.pt:38
+#: src/osha/oira/client/templates/start.pt:40
 msgid "label_start_survey"
 msgstr "Začať"
 

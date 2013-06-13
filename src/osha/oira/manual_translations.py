@@ -125,7 +125,7 @@ _("help_header_actionplan", default=u"4. Action Plan")
 _("label_help_actionplan", default=u"4. Action Plan")
 _("help_actionplan", default=u"This text should explain how to fill in the "
     u"Action plan.")
-_("help_header_reports", default=u"5. Report")
+_("help_header_report", default=u"5. Report")
 _("label_help_reports", default=u"5. Report")
 _("help_reports", default=u"This text should describe how the report can "
     u"either be saved or printed.")

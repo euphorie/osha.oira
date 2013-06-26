@@ -6,6 +6,8 @@ Changelog
 
 - Fixed a typo in manual translations: help_header_report, not help_header_reports
   [pysailor]
+- Minor translation fixes and updates. #7830, #7766. [jcbrand]
+- Updated Flemish translations #7810 [jcbrand]
 - #7555: Czech translation fixes [regebro]
 
 

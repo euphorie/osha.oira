@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: osha.oira 1.2.1dev\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
 "POT-Creation-Date: 2013-06-03 18:21+0200\n"
-"PO-Revision-Date: 2013-04-18 15:56+0200\n"
+"PO-Revision-Date: 2013-06-26 15:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: bg <LL@li.org>\n"
 "Language: \n"
@@ -758,25 +758,23 @@ msgstr ""
 
 #. Default: Measure
 #: src/osha/oira/client/report.py:80
-#, fuzzy
 msgid "report_timeline_measure"
-msgstr "Времева скала"
+msgstr "Мярка"
 
 #. Default: End date
 #: src/osha/oira/client/report.py:83
 msgid "report_timeline_end_date"
-msgstr ""
+msgstr "краен срок"
 
 #. Default: Responsible
 #: src/osha/oira/client/report.py:86
-#, fuzzy
 msgid "report_timeline_responsible"
-msgstr "${responsible} носи отговорност за тази задача."
+msgstr "отговорник"
 
 #. Default: Status (planned, in process, implemented)
 #: src/osha/oira/client/report.py:87
 msgid "report_timeline_progress"
-msgstr ""
+msgstr "статус на мярката (предстояща/в процес на изпълнение/изпълнена)"
 
 #. Default: Timeline
 #: src/osha/oira/client/report.py:97
@@ -1799,85 +1797,94 @@ msgstr "Отговорихте отрицателно на горното твъ
 
 #: src/osha/oira/client/templates/report_landing.pt:21
 msgid "Download and print your report"
-msgstr ""
+msgstr "Изтегляне и разпечатване на вашия доклад"
 
 #: src/osha/oira/client/templates/report_landing.pt:23
 msgid ""
 "Save the report on your computer and print it. You can also modify it or add "
 "more information. Please note that changes made on your pc will NOT be saved "
 "in the OiRA tool"
-msgstr ""
+msgstr "Запазете доклада във вашия компютър и го разпечатайте. Вие можете да променяте "
+"съхранения доклад или да добавяте допълнителна информация. "
+"Имайте предвид, че промените по файла във вашия компютър НЕ се съхраняват в "
+"инструмента OiRA."
 
 #: src/osha/oira/client/templates/report_landing.pt:24
 msgid "Use the report to:"
-msgstr ""
+msgstr "Използвайте доклада, за да:"
 
 #: src/osha/oira/client/templates/report_landing.pt:27
 msgid "Provide evidence for supervisory authorities."
-msgstr ""
+msgstr "представите доказателства пред контролните органи"
 
 #: src/osha/oira/client/templates/report_landing.pt:28
 msgid ""
 "Pass information to the people concerned (workers, safety representatives, "
 "employers, experts in occupational safety and health, ...)"
-msgstr ""
+msgstr "информирате засегнатите лица (работници, органи по безопасност и здраве "
+"при работа, работодатели, представители на Служби по трудова медицина и т.н.)"
 
 #: src/osha/oira/client/templates/report_landing.pt:29
 msgid "Monitor and assess whether necessary measures have been introduced."
-msgstr ""
+msgstr "следите и оценявате дали са приложени необходимите мерки"
 
 #: src/osha/oira/client/templates/report_landing.pt:30
 msgid ""
 "Record any revision if circumstances change (new machines, new workers, as a "
 "result of findings of any accident investigations, etc.)"
-msgstr ""
+msgstr "отбелязвате всяко преразглеждане, в случай, че настъпят промени, които "
+"могат да окажат влияние върху риска (нови машини, нови работници, в резултат "
+"на констатации от разследване на злополука и т.н.)"
 
 #: src/osha/oira/client/templates/report_landing.pt:35
 msgid "Download the full report"
-msgstr ""
+msgstr "Изтегляне на пълния доклад"
 
 #: src/osha/oira/client/templates/report_landing.pt:38
 msgid "Format: Rich Text Format (.rtf)"
-msgstr ""
+msgstr "Формат: Rich Text Format (.rtf)"
 
 #: src/osha/oira/client/templates/report_landing.pt:39
 msgid ""
 "Contains: all the information and input provided by you throughout the risk "
 "assessment process."
-msgstr ""
+msgstr "Съдържа: цялата информация и данни, въведени от вас в рамките на "
+"процеса на оценяване на риска"
 
 #: src/osha/oira/client/templates/report_landing.pt:42
 #: src/osha/oira/client/templates/report_landing.pt:58
 msgid "Use it to"
-msgstr ""
+msgstr "Използвайте го, за да"
 
 #: src/osha/oira/client/templates/report_landing.pt:44
 msgid "Provide evidence"
-msgstr ""
+msgstr "представите доказателства"
 
 #: src/osha/oira/client/templates/report_landing.pt:44
 msgid "${provide-evidence} for supervisory authorities (labour inspectorate)."
-msgstr ""
+msgstr "${provide-evidence} пред контролните органи (Инспекцията по труда)"
 
 #: src/osha/oira/client/templates/report_landing.pt:47
 msgid ""
 "We recommend to always keep an updated printed version of your risk "
 "assessment (report) available in your company!"
-msgstr ""
+msgstr "Препоръчваме винаги да съхранявате актуализирана разпечатана "
+"версия на вашата оценка на риска (доклад) във вашето предприятие!"
 
 #: src/osha/oira/client/templates/report_landing.pt:51
 msgid "Download the action plan"
-msgstr ""
+msgstr "Изтегляне на плана за действие"
 
 #: src/osha/oira/client/templates/report_landing.pt:54
 msgid "Format: Office Open XML Workbook (.xlsx)"
-msgstr ""
+msgstr "Формат: Office Open XML Workbook (.xlsx)"
 
 #: src/osha/oira/client/templates/report_landing.pt:55
 msgid ""
 "Contains: only the measures to be implemented to effectively manage the "
 "identified risks."
-msgstr ""
+msgstr "Съдържа: само мерките, които трябва да бъдат предприети за "
+"ефективно премахване/минимизиране на определените рискове"
 
 #: src/osha/oira/client/templates/report_landing.pt:60
 msgid "Manage"
@@ -1887,7 +1894,8 @@ msgstr ""
 msgid ""
 "${manage} the problems/risks in your workplace (specific tasks, expertise, "
 "responsibilities, deadlines)."
-msgstr ""
+msgstr "премахнете/минимизирате съществуващи проблеми/рискове на Вашето "
+"работно място (конкретни задачи, експертен опит, отговорности, крайни срокове)"
 
 #: src/osha/oira/client/templates/risk_actionplan.pt:19
 msgid ""

@@ -1638,11 +1638,11 @@ msgstr "Σύνταξη έκθεσης"
 #: src/osha/oira/client/templates/report.pt:19
 msgid "report_intro"
 msgstr ""
-"Τώρα που έχετε ολοκληρώσει την ταυτοποίηση όλων των κινδύνων στην επιχείρησή "
-"σας και έχετε καταρτίσει ένα σχέδιο δράσης, μπορείτε να δημιουργήσετε μια "
-"αναφορά στην οποία θα παρατίθενται όλα τα αποτελέσματά σας. Μπορείτε, εάν "
-"θέλετε, να προσθέσετε ορισμένα πρόσθετα σχόλια που πρέπει να "
-"συμπεριλαμβάνονται σε αυτή την αναφορά στο παρακάτω πεδίο."
+"Τώρα που έχετε ολοκληρώσει την ταυτοποίηση των κινδύνων στην επιχείρησή σας "
+"και έχετε καταρτίσει ένα σχέδιο δράσης, μπορείτε να δημιουργήσετε μιαν "
+"αναφορά (έκθεση ΕΚ) στην οποία θα παρατίθενται όλα τα αποτελέσματά σας. "
+"Μπορείτε, αν θέλετε, να εισάγετε ορισμένα πρόσθετα σχόλια που εκτιμάτε ότι "
+"πρέπει να συμπεριλαμβάνονται σε αυτή την αναφορά, στο παρακάτω πεδίο."
 
 #. Default: Please leave any extra comments that should be included in the
 #. report in this field.
@@ -1770,35 +1770,35 @@ msgstr "Χώρα σας"
 #. Default: Through which channel did you learn about this tool?
 #: src/osha/oira/client/templates/report_company.pt:37
 msgid "label_referer"
-msgstr "Μέσω ποιου διαύλου μάθατε για αυτό το εργαλείο; "
+msgstr "Πληροφορηθήκατε για αυτό το εργαλείο από:"
 
 #. Default: an employers' organisation
 #: src/osha/oira/client/templates/report_company.pt:38
 msgid "referer_employers_organisation"
-msgstr "σωματείο εργοδοτών"
+msgstr "οργάνωση εργοδοτών"
 
 #. Default: a trade union organisation
 #: src/osha/oira/client/templates/report_company.pt:39
 msgid "referer_trade_union"
-msgstr "συνδικαλιστική οργάνωση"
+msgstr "οργάνωση εργαζομένων"
 
 #. Default: a national public institution/administration
 #: src/osha/oira/client/templates/report_company.pt:40
 msgid "referer_national_public_institution"
-msgstr "εθνικός δημόσιος οργανισμός/διεύθυνση"
+msgstr "εθνική κρατική αρχή/οργανισμός"
 
 #. Default: Ministry, Labour Inspectorate, National Institute for Safety and
 #. Health at Work, etc.
 #: src/osha/oira/client/templates/report_company.pt:41
 msgid "info_referer_national_public_institution"
 msgstr ""
-"Υπουργείο, Επιθεώρηση Εργασίας, Εθνικός Οργανισμός για την Ασφάλεια και την "
-"Υγεία στην Εργασία, κ.λπ. "
+"Υπουργείο, Επιθεώρηση Εργασίας, Εθνικός Οργανισμός για την Ασφάλεια και "
+"Υγεία στην Εργασία κ.λπ"
 
 #. Default: an European institution/administration
 #: src/osha/oira/client/templates/report_company.pt:42
 msgid "referer_eu_institution"
-msgstr "Ευρωπαϊκός οργανισμός/διεύθυνση"
+msgstr "Ευρωπαϊκός Οργανισμός EU-OSHA/εταίροι ΑΥΕ"
 
 #. Default: The European Agency for Safety and Health at Work, European social
 #. partners, etc.
@@ -1806,17 +1806,17 @@ msgstr "Ευρωπαϊκός οργανισμός/διεύθυνση"
 msgid "info_referer_eu_institution"
 msgstr ""
 "Ευρωπαϊκός Οργανισμός για την Ασφάλεια και την Υγεία στην Εργασία, Ευρωπαίοι "
-"κοινωνικοί εταίροι, κ.λπ. "
+"κοινωνικοί εταίροι, κ.λπ."
 
 #. Default: health and safety experts
 #: src/osha/oira/client/templates/report_company.pt:44
 msgid "referer_health_safety_expert"
-msgstr "ειδικοί σε θέματα υγείας και ασφάλειας"
+msgstr "ειδικοί σε θέματα ΑΥΕ"
 
 #. Default: other channel
 #: src/osha/oira/client/templates/report_company.pt:45
 msgid "referer_other"
-msgstr "άλλος δίαυλος "
+msgstr "άλλο"
 
 #. Default: Skip this step
 #: src/osha/oira/client/templates/report_company.pt:54
@@ -1894,7 +1894,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_landing.pt:42
 #: src/osha/oira/client/templates/report_landing.pt:58
 msgid "Use it to"
-msgstr "Χρησιμοποιήστε την για να:"
+msgstr "Χρησιμοποιήστε την για να"
 
 #: src/osha/oira/client/templates/report_landing.pt:44
 msgid "Provide evidence"

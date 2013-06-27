@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
 "POT-Creation-Date: 2013-06-03 18:21+0200\n"
-"PO-Revision-Date: 2013-04-18 15:56+0200\n"
+"PO-Revision-Date: 2013-06-26 16:45+0200\n"
 "Last-Translator: xl <xl@hol.gr>\n"
 "Language-Team: en <LL@li.org>\n"
 "Language: \n"
@@ -1877,7 +1877,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:35
 msgid "Download the full report"
-msgstr "Ανακτήστε το πλήρες κείμενο της έκθεσης"
+msgstr "Έκθεση κινδύνου"
 
 #: src/osha/oira/client/templates/report_landing.pt:38
 msgid "Format: Rich Text Format (.rtf)"
@@ -1914,7 +1914,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:51
 msgid "Download the action plan"
-msgstr "Ανακτήστε το σχέδιο δράσης"
+msgstr "Σχέδιο δράσης"
 
 #: src/osha/oira/client/templates/report_landing.pt:54
 msgid "Format: Office Open XML Workbook (.xlsx)"
@@ -2092,7 +2092,7 @@ msgstr "Ποια η πιθανότητα να προκληθεί αυτός ο �
 #. Default: Small
 #: src/osha/oira/client/templates/risk_evaluation.pt:30
 msgid "probability_small"
-msgstr "Μικρή"
+msgstr "Χαμηλή"
 
 #. Default: Medium
 #: src/osha/oira/client/templates/risk_evaluation.pt:32
@@ -2102,7 +2102,7 @@ msgstr "Μέτρια"
 #. Default: Large
 #: src/osha/oira/client/templates/risk_evaluation.pt:34
 msgid "probability_large"
-msgstr "Μεγάλη"
+msgstr "Υψηλή"
 
 #. Default: How often are people exposed to this risk?
 #: src/osha/oira/client/templates/risk_evaluation.pt:38
@@ -2128,22 +2128,22 @@ msgstr "Διαρκώς"
 #. Default: What is the severity of the damage ?
 #: src/osha/oira/client/templates/risk_evaluation.pt:48
 msgid "header_risk_effect"
-msgstr "Ποια είναι η σοβαρότητα επιπτώσεων της ζημιάς;"
+msgstr "Ποια είναι η σοβαρότητα των επιπτώσεων;"
 
 #. Default: Weak severity
 #: src/osha/oira/client/templates/risk_evaluation.pt:50
 msgid "effect_injury_no_absence"
-msgstr "Μικρή σφοδρότητα"
+msgstr "Μικρή"
 
 #. Default: Significant severity
 #: src/osha/oira/client/templates/risk_evaluation.pt:52
 msgid "effect_injury_with_absence"
-msgstr "Μέτρια σφοδρότητα"
+msgstr "Μέτρια"
 
 #. Default: High (very high) severity
 #: src/osha/oira/client/templates/risk_evaluation.pt:54
 msgid "effect_permanent_damage"
-msgstr "Μεγάλη (πολύ μεγάλη) σφοδρότητα"
+msgstr "Μεγάλη"
 
 #. Default: What is the severity of the damage ?
 #: src/osha/oira/client/templates/risk_evaluation.pt:59
@@ -2546,9 +2546,8 @@ msgstr ""
 
 #. Default: Statistics
 #: src/osha/oira/content/sitemenu.py:39
-#, fuzzy
 msgid "menu_statistics"
-msgstr "Αναφορά στατιστικών στοιχείων"
+msgstr ""
 
 #. Default: Period
 #: src/osha/oira/content/statistics.py:39
@@ -2558,9 +2557,8 @@ msgstr "Προηγούμενο"
 
 #. Default: Report Type
 #: src/osha/oira/content/statistics.py:69
-#, fuzzy
 msgid "label_report_type"
-msgstr "Αναφορά"
+msgstr ""
 
 #. Default: Country
 #: src/osha/oira/content/statistics.py:75

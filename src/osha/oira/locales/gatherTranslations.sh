@@ -4,7 +4,7 @@
 # Requires potools, translation-toolkit and pkzip.
 
 if ! hash pounique 2>/dev/null; then
-    echo "Could not find 'pounique', have you installed potools?"
+    echo "Could not find 'pounique', have you installed potools 0.3 or later?"
     exit 1
 fi
 
@@ -35,19 +35,31 @@ if ! [ -e "$SRCDIR/osha.oira" ]; then
     exit 1
 fi
 
+
+# First merge Euphorie and osha.oira translations together, with osha.oira overriding Euphorie:
+
 UNIQUEDIR=`mktemp -d`
 echo "Uniqe dir: $UNIQUEDIR"
 
-pounique $SRCDIR/Euphorie/src/euphorie/deployment/locales $SRCDIR/osha.oira/src/osha/oira/locales -o $UNIQUEDIR
+pounique "$SRCDIR/Euphorie/src/euphorie/deployment/locales" "$SRCDIR/osha.oira/src/osha/oira/locales" -o $UNIQUEDIR
+
+
+# Now filter out only those who needs review or translation:
 
 FILTEREDDIR=`mktemp -d`
 echo "Filtered dir: $FILTEREDDIR"
 
 pofilter -t untranslated -t isreview -t isfuzzy --nonotes $UNIQUEDIR -o $FILTEREDDIR
 
+# To make the translators life easier, populate empty translations with defaults:
+
+popopulate -u $FILTEREDDIR
+
+# And zip those together into a zip-file:
+
 OUTFILE=$CURDIR/untranslated_`date +%F`.zip
 
 cd $FILTEREDDIR
-zip -r $OUTFILE .
+zip -q -r $OUTFILE .
 echo "Missing translations gathered into $OUTFILE"
 

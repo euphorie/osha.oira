@@ -8,7 +8,7 @@ Changelog
   [pysailor]
 - Minor translation fixes and updates. #7830, #7766. [jcbrand]
 - Updated Flemish and Bulgarian translations #7810 [jcbrand]
-- Updated Greek translations #7310 [jcbrand]
+- Updated Greek translations #7310, #7704 [jcbrand, pysailor]
 - #7555: Czech translation fixes [regebro]
 
 

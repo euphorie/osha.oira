@@ -55,9 +55,9 @@ msgstr ""
 "ενέργειες που απαιτούνται για να εφαρμοστεί αυτή η προσέγγιση (για την "
 "εξάλειψη ή τη μείωση του κινδύνου) - 3) το επίπεδο τεχνογνωσίας που "
 "απαιτείται για να εφαρμοστούν τα μέτρα, για παράδειγμα \"κοινή λογική (δεν "
-"απαιτούνται γνώσεις OSH)\", \"απαιτείται όχι ειδική τεχνογνωσία σε OSH, αλλά "
-"οι ελάχιστες γνώσεις OSH ή κατάρτιση ή/και παροχή συμβουλών για καθοδήγηση "
-"σε ζητήματα OSH\", ή \"ειδικές γνώσεις OSH\". Μπορείτε επίσης εδώ να "
+"απαιτούνται γνώσεις ΑΥΕ)\", \"απαιτείται όχι ειδική τεχνογνωσία σε ΑΥΕ, αλλά "
+"οι ελάχιστες γνώσεις ΑΥΕ ή κατάρτιση ή/και παροχή συμβουλών για καθοδήγηση "
+"σε ζητήματα ΑΥΕ\", ή \"ειδικές γνώσεις ΑΥΕ\". Μπορείτε επίσης εδώ να "
 "περιγράψετε άλλες πρόσθετες απαιτήσεις (εάν υπάρχουν). "
 
 #. Default: Measure
@@ -832,7 +832,7 @@ msgstr "Υψηλή"
 #: src/osha/oira/client/templates/report_actionplan.pt:243
 #: src/osha/oira/client/templates/risk_actionplan.pt:38
 msgid "risk_priority"
-msgstr "Έκτίμηση επικινδυνότητας ${priority_value}."
+msgstr "Εκτίμηση επικινδυνότητας ${priority_value}."
 
 #. Default: Measure
 #: src/osha/oira/client/survey.py:296 src/osha/oira/client/survey.py:318
@@ -2007,7 +2007,7 @@ msgstr ""
 "εξαλείψετε ή να μειώσετε τον κίνδυνο), 3) το επίπεδο τεχνογνωσίας που "
 "απαιτείται για να εφαρμοστεί το μέτρο, για παράδειγμα “κοινή λογική (δεν "
 "απαιτούνται γνώσεις OSH)”, “δεν απαιτείται συγκεκριμένη τεχνογνωσία OSH, "
-"ωστόσο χρειάζονται οι ελάχιστες γνώσεις ή κατάρτιση OSH ή/και παροχή "
+"ωστόσο χρειάζονται οι ελάχιστες γνώσεις ή κατάρτιση ΑΥΕ ή/και παροχή "
 "συμβουλών για την καθοδήγηση OSH” ή “ειδικός(-ή) σε OSH”. Μπορείτε επίσης να "
 "περιγράψετε εδώ οποιαδήποτε άλλη πρόσθετη απαίτηση (εάν υπάρχει)."
 
@@ -2029,9 +2029,10 @@ msgstr ""
 #: src/osha/oira/client/templates/risk_actionplan.pt:125
 msgid "actionplan_measure_budget_tooltip"
 msgstr ""
-"Παρότι ορισμένα μέτρα δεν κοστίζουν χρήματα, τα περισσότερα κοστίζουν. Για "
-"αυτό το λόγο πρέπει να υπάρχει προϋπολογισμός για αυτά τα μέτρα - πρέπει να "
-"συμπεριληφθούν στον ετήσιο προϋπολογισμό εάν είναι απαραίτητο."
+"Παρότι η λήψη ορισμένων μέτρων δεν έχει κόστος, τα περισσότερα μέτρα "
+"συνεπάγονται κόστος. Για αυτό το λόγο πρέπει να υπάρχει διαθέσιμος "
+"προϋπολογισμός ή πρόβλεψη να συμπεριληφθούν οι σχετικές δαπάνες στον ετήσιο "
+"προϋπολογισμό, εάν αυτό είναι απαραίτητο."
 
 #. Default: Please enter the budget in whole Euros.
 #: src/osha/oira/client/templates/risk_actionplan.pt:127
@@ -2128,22 +2129,22 @@ msgstr "Διαρκώς"
 #. Default: What is the severity of the damage ?
 #: src/osha/oira/client/templates/risk_evaluation.pt:48
 msgid "header_risk_effect"
-msgstr "Ποια είναι η σοβαρότητα των επιπτώσεων;"
+msgstr "Ποια είναι η σοβαρότητα των επιπτώσεων?"
 
 #. Default: Weak severity
 #: src/osha/oira/client/templates/risk_evaluation.pt:50
 msgid "effect_injury_no_absence"
-msgstr "Μικρή"
+msgstr "Μικρή σοβαρότητα επιπτώσεων"
 
 #. Default: Significant severity
 #: src/osha/oira/client/templates/risk_evaluation.pt:52
 msgid "effect_injury_with_absence"
-msgstr "Μέτρια"
+msgstr "Μέτρια σοβαρότητα επιπτώσεων"
 
 #. Default: High (very high) severity
 #: src/osha/oira/client/templates/risk_evaluation.pt:54
 msgid "effect_permanent_damage"
-msgstr "Μεγάλη"
+msgstr "Μεγάλη σοβαρότητα επιπτώσεων"
 
 #. Default: What is the severity of the damage ?
 #: src/osha/oira/client/templates/risk_evaluation.pt:59
@@ -2233,7 +2234,7 @@ msgstr "Τουλάχιστον μία φορά την ημέρα "
 #. Default: Select the priority of this risk
 #: src/osha/oira/client/templates/risk_evaluation.pt:108
 msgid "header_risk_priority"
-msgstr "Επιλέξτε την προτεραιότητα για αυτό τον κίνδυνο"
+msgstr "Επιλέξτε την επικινδυνότητα για αυτόν τον κίνδυνο"
 
 #. Default: Low
 #: src/osha/oira/client/templates/risk_evaluation.pt:110
@@ -2243,7 +2244,7 @@ msgstr "Χαμηλή"
 #. Default: Medium
 #: src/osha/oira/client/templates/risk_evaluation.pt:112
 msgid "priority_medium"
-msgstr "Μέση"
+msgstr "Μέτρια"
 
 #. Default: High
 #: src/osha/oira/client/templates/risk_evaluation.pt:114
@@ -3031,7 +3032,7 @@ msgstr "Πρέπει να κάνεις εισαγωγή για να έχεις �
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:29
 #: src/osha/oira/templates/login.pt:22
 msgid "legend_credentials"
-msgstr "Πιστοποιητικά"
+msgstr "Έλεγχος πρόσβασης"
 
 #. Default: Login
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:31

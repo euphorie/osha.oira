@@ -9,7 +9,7 @@ if ! hash pounique 2>/dev/null; then
 fi
 
 if ! hash pofilter 2>/dev/null; then
-    echo "Could not find 'pofilter', have you installed translation-toolkit?"
+    echo "Could not find 'pofilter', have you installed translate-toolkit?"
     exit 1
 fi
 

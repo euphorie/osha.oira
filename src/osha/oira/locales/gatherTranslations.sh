@@ -53,7 +53,7 @@ pofilter -t untranslated -t isreview -t isfuzzy --nonotes $UNIQUEDIR -o $FILTERE
 
 # To make the translators life easier, populate empty translations with defaults:
 
-popopulate -u $FILTEREDDIR
+popopulate -u -f $FILTEREDDIR
 
 # And zip those together into a zip-file:
 

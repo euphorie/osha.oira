@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.4 (unreleased)
+2.2.4 (2013-07-05)
 ------------------
 
 - Fixed a typo in manual translations: help_header_report, not help_header_reports

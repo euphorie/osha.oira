@@ -10,6 +10,7 @@ Changelog
 - Updated Flemish and Bulgarian translations #7810 [jcbrand]
 - Updated Greek translations #7310, #7704 [jcbrand, pysailor]
 - #7555: Czech translation fixes [regebro]
+- PT translation fixed 7934 [pysailor]
 
 
 2.2.3 (2013-06-03)

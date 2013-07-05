@@ -498,10 +498,10 @@ msgstr "Recomendações finais gerais."
 #: src/osha/oira/client/templates/identification.pt:19
 msgid "intro_print_identification_1"
 msgstr ""
-"É possível imprimir os conteúdos da ferramenta para permitir encontrar a "
-"informação do local de trabalho relevante (ao circular e observar o que pode "
-"ser prejudicial, ou ao perguntar os trabalhadores e/ou os seus "
-"representantes sobre os problemas com que se depararam). A seguir, pode "
+"É possível imprimir os conteúdos da ferramenta. No documento impresso, pode "
+"registar informação relevante que tenha identificado no local de trabalho "
+"(observando o que pode ser prejudicial ou perguntando aos trabalhadores e/ou "
+"seus representantes sobre os problemas com que se depararam). A seguir, pode "
 "introduzir a informação na ferramenta."
 
 #. Default: You may also wish to distribute the contents among the workers
@@ -513,10 +513,10 @@ msgstr ""
 #: src/osha/oira/client/templates/identification.pt:20
 msgid "intro_print_identification_2"
 msgstr ""
-"Também pode pretender distribuir os conteúdos entre os trabalhadores e/ou os "
-"seus representantes e convidá-los a participar na identificação dos riscos/"
-"problemas, avaliar os riscos e decidir sobre a ação preventiva.O seu "
-"feedback deve ser tido em consideração ao preencher esta ferramenta."
+"Pode também pretender distribuir o documento entre os trabalhadores e/ou os "
+"seus representantes e convidá-los a participar na identificação dos "
+"riscos/problemas, avaliar os riscos e decidir sobre a ação preventiva. As "
+"suas observações devem ser consideradas ao preencher esta ferramenta."
 
 #. Default: contents of the tool
 #: src/osha/oira/manual_translations.py:150
@@ -992,40 +992,40 @@ msgstr "OiRA - Online interactive Risk Assessment"
 #: src/osha/oira/client/templates/actionplan.pt:19
 msgid "expl_actionplan_1"
 msgstr ""
-"Após a identificação dos riscos, é necessário adotar um plano de ação para "
-"gerir os riscos. Para eliminar ou reduzir os riscos, é necessário determinar "
-"as medidas preventivas e protetoras que devem ser tomadas."
+"Após a avaliação dos riscos, é necessário criar um plano de ação para gerir "
+"os riscos. Para eliminar ou reduzir os riscos, necessita determinar que "
+"medidas de prevenção ou de proteção dos trabalhadores devem ser tomadas."
 
 #. Default: Among the things to be considered for this step are:
 #: src/osha/oira/client/templates/actionplan.pt:24
 msgid "expl_actionplan_2"
-msgstr "Entre o que deve ser tido em consideração para este passo encontra-se:"
+msgstr "Eis alguns aspetos que devem ser considerados nesta fase:"
 
 #. Default: considering whether the task or job is necessary
 #: src/osha/oira/client/templates/actionplan.pt:32
 msgid "expl_actionplan_4"
-msgstr "verificar se a tarefa ou trabalho são necessários"
+msgstr "Avaliando se a tarefa é mesmo necessária"
 
 #. Default: removing the hazard
 #: src/osha/oira/client/templates/actionplan.pt:33
 msgid "expl_actionplan_5"
-msgstr "eliminar o risco"
+msgstr "Removendo totalmente o perigo/problema da tarefa"
 
 #. Default: Is a risk avoidable? Can it be removed entirely? For example, this
 #. could be achieved by: ${expl_actionplan_4_and_5}
 #: src/osha/oira/client/templates/actionplan.pt:29
 msgid "expl_actionplan_3"
 msgstr ""
-"O risco é evitável? Pode ser eliminado por completo? Por exemplo, isto pode "
-"ser conseguido por: ${expl_actionplan_4_and_5}"
+"1. O risco pode ser evitado? Pode ser totalmente eliminado? Isto pode ser "
+"conseguido, por exemplo, através de: ${expl_actionplan_4_and_5}"
 
 #. Default: If certain risks are not avoidable, how can they be reduced to a
 #. level at which the health and safety of those exposed is not compromised?
 #: src/osha/oira/client/templates/actionplan.pt:37
 msgid "expl_actionplan_6"
 msgstr ""
-"Se certos riscos forem inevitáveis, como podem ser reduzidos para um nível "
-"no qual a saúde e a segurança dos que estão expostos não ficam comprometidas?"
+"2. Se alguns riscos não são de todo evitáveis, como poderemos reduzir estes "
+"riscos para que não comprometam a saúde e a segurança dos trabalhadores?"
 
 #. Default: Once you have decided how to eliminate or reduce a particular risk,
 #. then you describe the specific action(s) required to achieve this. You
@@ -1034,10 +1034,10 @@ msgstr ""
 #: src/osha/oira/client/templates/actionplan.pt:42
 msgid "expl_actionplan_7"
 msgstr ""
-"Após decidir como eliminar ou reduzir um risco em particular, descreverá a"
-"(s) ação(ões) específica(s) necessária(s) para alcançar isto. Também deve "
-"incluir detalhes do nível de competência e/ou outros requisitos necessários "
-"para que tais ações sejam eficazes."
+"Após ter decidido como eliminar ou reduzir um determinado risco, deve "
+"descrever as ações específicas que são requeridas. Deve também mencionar o "
+"nível de competência e os requisitos necessários para que tais ações sejam "
+"eficazes."
 
 #. Default: No risks were identified. Please proceed directly to the report.
 #: src/osha/oira/client/templates/actionplan.pt:47
@@ -1442,7 +1442,7 @@ msgstr "Regiões"
 #. Default: You can print the ${list-of-risks}.
 #: src/osha/oira/client/templates/identification.pt:21
 msgid "intro_identification"
-msgstr "Pode imprimir a ${list-of-risks}."
+msgstr "Pode imprimir os ${list-of-risks}."
 
 #. Default: Start Risk Identification
 #: src/osha/oira/client/templates/identification.pt:26
@@ -1743,8 +1743,8 @@ msgstr "uma instituição/administração pública nacional"
 #: src/osha/oira/client/templates/report_company.pt:41
 msgid "info_referer_national_public_institution"
 msgstr ""
-"Ministério, Inspeção do Trabalho, Instituto Nacional para Segurança e Saúde "
-"no Trabalho, etc."
+"ACT- Autoridade para as Condições do Trabalho, DGS – Direção Geral da Saúde, "
+"DPRP – Departamento de Proteção contra os Riscos Profissionais, etc"
 
 #. Default: an European institution/administration
 #: src/osha/oira/client/templates/report_company.pt:42
@@ -1792,8 +1792,7 @@ msgid ""
 msgstr ""
 "Guarde o relatório no seu computador e imprima-o. Pode igualmente modificá-"
 "lo ou adicionar mais informações. Queira ter em conta que as alterações "
-"efetuadas no seu computador não serão guardadas na ferramenta OiRA. Para "
-"guardar faça....."
+"efetuadas no seu computador não serão guardadas na ferramenta OiRA."
 
 #: src/osha/oira/client/templates/report_landing.pt:24
 msgid "Use the report to:"
@@ -1802,7 +1801,7 @@ msgstr "Utilize o relatório para:"
 #: src/osha/oira/client/templates/report_landing.pt:27
 msgid "Provide evidence for supervisory authorities."
 msgstr ""
-"evidenciar junto das entidades com petentes a avaliação de riscos efetuada"
+"evidenciar junto das entidades competentes a avaliação de riscos efetuada;"
 
 #: src/osha/oira/client/templates/report_landing.pt:28
 msgid ""

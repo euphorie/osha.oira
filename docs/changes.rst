@@ -4,8 +4,7 @@ Changelog
 2.2.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Typo in LT translation [pysailor]
 
 2.2.4 (2013-07-05)
 ------------------

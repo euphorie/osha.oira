@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - Typo in LT translation [pysailor]
+- Applied translation updates #7938 [pysailor]
 
 2.2.4 (2013-07-05)
 ------------------

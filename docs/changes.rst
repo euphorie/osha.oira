@@ -7,6 +7,7 @@ Changelog
 - Typo in LT translation [pysailor]
 - Applied translation updates #7938 and #8190 [pysailor]
 - Implement sidebar legend with translations. #7939 [jcbrand]
+- Fixed wrong translations for cs and pt [pilz]
 
 2.2.4 (2013-07-05)
 ------------------

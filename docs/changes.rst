@@ -8,6 +8,7 @@ Changelog
 - Applied translation updates #7938 and #8190 [pysailor]
 - Implement sidebar legend with translations. #7939 [jcbrand]
 - Fixed wrong translations for cs and pt [pilz]
+- include a script for browser warnings. This fixes OSHA ticket 7368 [pilz]
 
 2.2.4 (2013-07-05)
 ------------------

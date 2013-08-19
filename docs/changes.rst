@@ -9,6 +9,7 @@ Changelog
 - Implement sidebar legend with translations. #7939 [jcbrand]
 - Fixed wrong translations for cs and pt [pilz]
 - include a script for browser warnings. This fixes OSHA ticket 7368 [pilz]
+- spelling fixes in LT #8258
 
 2.2.4 (2013-07-05)
 ------------------

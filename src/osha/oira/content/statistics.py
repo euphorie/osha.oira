@@ -343,4 +343,3 @@ class GlobalStatistics(form.SchemaForm, StatisticsMixin):
         else:
             self.template = self.form_template
             return self.template()
-

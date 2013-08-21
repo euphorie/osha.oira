@@ -52,12 +52,12 @@ class ReportPeriodVocabulary(object):
         site = api.portal.get()
         cal = site.REQUEST.locale.dates.calendars['gregorian']
         items = [(t(_(u'Whole year')), 0)]
-        items += [(m.encode('utf-8'), i+1)
+        items += [(m.encode('utf-8'), i + 1)
                   for i, m in enumerate(cal.getMonthNames())]
-        items += [(t(_(u'1st Quarter')).encode('utf-8'), i+2)]
-        items += [(t(_(u'2nd Quarter')).encode('utf-8'), i+3)]
-        items += [(t(_(u'3rd Quarter')).encode('utf-8'), i+4)]
-        items += [(t(_(u'4th Quarter')).encode('utf-8'), i+5)]
+        items += [(t(_(u'1st Quarter')).encode('utf-8'), i + 2)]
+        items += [(t(_(u'2nd Quarter')).encode('utf-8'), i + 3)]
+        items += [(t(_(u'3rd Quarter')).encode('utf-8'), i + 4)]
+        items += [(t(_(u'4th Quarter')).encode('utf-8'), i + 5)]
         return SimpleVocabulary.fromItems(items)
 
 grok.global_utility(ReportPeriodVocabulary,
@@ -179,4 +179,3 @@ class ReportFileFormatVocabulary(object):
 
 grok.global_utility(ReportFileFormatVocabulary,
                     name='osha.oira.report_file_format')
-

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.5 (unreleased)
+2.2.5 (2013-08-21)
 ------------------
 
 - Typo in LT translation [pysailor]

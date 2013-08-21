@@ -1,3 +1,4 @@
+from Acquisition import aq_parent
 from datetime import datetime
 from euphorie.content import utils
 from euphorie.content.country import ICountry
@@ -161,6 +162,15 @@ class CountriesVocabulary(object):
                     context.id,
                     context.title).encode('utf-8'): context.id
             })
+        elif ISector.providedBy(context):
+            country = aq_parent(context)
+            if ICountry.providedBy(country):
+                countries.update({
+                    utils.getRegionTitle(
+                        context.REQUEST,
+                        country.id,
+                        country.title).encode('utf-8'): country.id
+                })
         return SimpleVocabulary.fromItems(sorted(countries.items()))
 
 grok.global_utility(CountriesVocabulary,

@@ -23,7 +23,13 @@
         />
 
     <adapter
-      factory=".profilequestion.context_proxy"/>
+        for=".survey.IOSHASurveyMarker zope.schema.interfaces.IField"
+        factory="z3c.form.datamanager.AttributeField"
+        />
+
+    <adapter
+        factory=".profilequestion.context_proxy"
+        />
 
     <adapter    
         factory=".statistics.ReportPeriodFactory"

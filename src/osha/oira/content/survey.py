@@ -6,13 +6,12 @@ from plone.directives import dexterity, form
 from plone.namedfile import field as filefield
 from plonetheme.nuplone.z3cform.directives import depends
 from zope import schema
+from zope import interface
 from zope.component import getMultiAdapter
-from zope.interface import alsoProvides
 import z3c.form
 
 from euphorie.content.profilequestion import IProfileQuestion
-from euphorie.content.survey import View as SurveyView
-from euphorie.content.survey import ISurvey
+from euphorie.content import survey
 from ..interfaces import IOSHAContentSkinLayer
 from .. import _
 
@@ -66,8 +65,15 @@ class IOSHASurvey(form.Schema):
                     u"characters."),
         required=False)
 
+interface.alsoProvides(IOSHASurvey, IFormFieldProvider)
 
-alsoProvides(IOSHASurvey, IFormFieldProvider)
+
+class IOSHASurveyMarker(survey.ISurvey):
+    """ Marker interface so that we can register more specific adapters for
+        OSHA's survey object.
+    """
+
+interface.classImplements(survey.Survey, IOSHASurveyMarker)
 
 
 class OSHASurvey(MetadataBase):
@@ -79,7 +85,8 @@ class OSHASurvey(MetadataBase):
 
 
 class OSHASurveyEditForm(dexterity.EditForm):
-    grok.context(ISurvey)
+    grok.context(survey.ISurvey)
+    grok.layer(IOSHAContentSkinLayer)
 
     def updateWidgets(self):
         result = super(OSHASurveyEditForm, self).updateWidgets()
@@ -88,7 +95,7 @@ class OSHASurveyEditForm(dexterity.EditForm):
         return result
 
 
-class OSHASurveyView(SurveyView):
+class OSHASurveyView(survey.View):
     grok.layer(IOSHAContentSkinLayer)
     grok.template("survey_view")
 

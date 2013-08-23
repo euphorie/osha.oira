@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.6 (unreleased)
+2.2.6 (2013-08-23)
 ------------------
 
 - Register a more generic datamanger for survey. #8379 [jcbrand] 

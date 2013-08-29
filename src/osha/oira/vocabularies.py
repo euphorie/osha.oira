@@ -59,7 +59,10 @@ class ReportPeriodVocabulary(object):
         items += [(t(_(u'2nd Quarter')).encode('utf-8'), i + 3)]
         items += [(t(_(u'3rd Quarter')).encode('utf-8'), i + 4)]
         items += [(t(_(u'4th Quarter')).encode('utf-8'), i + 5)]
-        return SimpleVocabulary.fromItems(items)
+        terms = [
+            SimpleVocabulary.createTerm(value, value, token)
+            for (token, value) in items]
+        return SimpleVocabulary(terms)
 
 grok.global_utility(ReportPeriodVocabulary,
                     name='osha.oira.report_period')

@@ -4,7 +4,8 @@ Changelog
 2.2.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Bugfix in statistics report view for non-ascii month names #8420
+  [pysailor]
 
 
 2.2.6 (2013-08-23)

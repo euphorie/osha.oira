@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.7 (unreleased)
+2.2.7 (2013-08-29)
 ------------------
 
 - Bugfix in statistics report view for non-ascii month names #8420

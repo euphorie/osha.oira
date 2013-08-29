@@ -6,6 +6,8 @@ Changelog
 
 - Bugfix in statistics report view for non-ascii month names #8420
   [pysailor]
+- Amended translation for "This OiRA tool was presented to you by"
+  in FR #7992 [pysailor]
 
 
 2.2.6 (2013-08-23)

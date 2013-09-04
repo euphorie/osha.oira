@@ -222,16 +222,25 @@ class OSHAActionPlanMixin():
 
         session = Session()
         query = session.query(model.SurveyTreeItem)\
-            .filter(model.SurveyTreeItem.session == self.session)\
-            .filter(sql.or_(model.MODULE_WITH_UNANSWERED_RISKS_FILTER,
-                            model.UNANSWERED_RISKS_FILTER))\
+            .filter(
+                sql.and_(
+                    model.SurveyTreeItem.session == self.session,
+                    sql.or_(
+                        model.MODULE_WITH_UNANSWERED_RISKS_FILTER,
+                        model.UNANSWERED_RISKS_FILTER),
+                    sql.not_(model.SKIPPED_PARENTS)))\
             .order_by(model.SurveyTreeItem.path)
         self.unanswered_nodes = query.all()
 
         query = session.query(model.SurveyTreeItem)\
-            .filter(model.SurveyTreeItem.session == self.session)\
-            .filter(sql.or_(model.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
-                            model.RISK_NOT_PRESENT_FILTER))\
+            .filter(
+                sql.and_(
+                    model.SurveyTreeItem.session == self.session,
+                    sql.or_(
+                        model.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
+                        model.RISK_NOT_PRESENT_FILTER,
+                        model.SKIPPED_PARENTS
+                    )))\
             .order_by(model.SurveyTreeItem.path)
         self.risk_not_present_nodes = query.all()
 

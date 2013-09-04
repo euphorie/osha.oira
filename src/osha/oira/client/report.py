@@ -1,6 +1,7 @@
 from Acquisition import aq_inner
 from cStringIO import StringIO
 from datetime import datetime
+from euphorie.client import model
 from euphorie.client import report
 from euphorie.client import survey
 from euphorie.client.session import SessionManager
@@ -8,6 +9,11 @@ from euphorie.ghost import PathGhost
 from five import grok
 from openpyxl.cell import get_column_letter
 from openpyxl.workbook import Workbook
+from osha.oira import _
+from osha.oira import utils
+from osha.oira.client import model as oiramodel
+from osha.oira.client.interfaces import IOSHAIdentificationPhaseSkinLayer
+from osha.oira.client.interfaces import IOSHAReportPhaseSkinLayer
 from plonetheme.nuplone.utils import formatDate
 from rtfng.Elements import PAGE_NUMBER
 from rtfng.PropertySets import BorderPropertySet
@@ -27,12 +33,6 @@ from z3c.saconfig import Session
 from zExceptions import NotFound
 from zope.i18n import translate
 import htmllaundry
-
-from . import model
-from .. import _
-from .. import utils
-from .interfaces import IOSHAReportPhaseSkinLayer
-from .interfaces import IOSHAIdentificationPhaseSkinLayer
 
 grok.templatedir("templates")
 
@@ -226,8 +226,8 @@ class OSHAActionPlanMixin():
                 sql.and_(
                     model.SurveyTreeItem.session == self.session,
                     sql.or_(
-                        model.MODULE_WITH_UNANSWERED_RISKS_FILTER,
-                        model.UNANSWERED_RISKS_FILTER),
+                        oiramodel.MODULE_WITH_UNANSWERED_RISKS_FILTER,
+                        oiramodel.UNANSWERED_RISKS_FILTER),
                     sql.not_(model.SKIPPED_PARENTS)))\
             .order_by(model.SurveyTreeItem.path)
         self.unanswered_nodes = query.all()
@@ -237,8 +237,8 @@ class OSHAActionPlanMixin():
                 sql.and_(
                     model.SurveyTreeItem.session == self.session,
                     sql.or_(
-                        model.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
-                        model.RISK_NOT_PRESENT_FILTER,
+                        oiramodel.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
+                        oiramodel.RISK_NOT_PRESENT_FILTER,
                         model.SKIPPED_PARENTS
                     )))\
             .order_by(model.SurveyTreeItem.path)

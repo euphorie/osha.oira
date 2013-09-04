@@ -29,8 +29,10 @@ if not _instrumented:
         instrument_declarative(cls, model.metadata._decl_registry, model.metadata)
     _instrumented = True
 
-node = orm.aliased(model.SurveyTreeItem)
+parent = orm.aliased(model.SurveyTreeItem)
+SKIPPED_MODULE = sql.exists().where(parent.skip_children == True)
 
+node = orm.aliased(model.SurveyTreeItem)
 UNANSWERED_RISKS_FILTER = \
         sql.and_(model.SurveyTreeItem.type == "risk",
                 sql.exists(sql.select([model.Risk.sql_risk_id]).where(sql.and_(
@@ -67,3 +69,4 @@ RISK_NOT_PRESENT_FILTER = \
                     model.Risk.identification == "yes"))))
 
 del node
+del parent

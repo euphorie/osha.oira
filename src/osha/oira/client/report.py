@@ -119,7 +119,6 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         sheet = book.worksheets[0]
         sheet.title = t(_('report_timeline_title', default=u'Timeline'))
         sheet.default_column_dimension.auto_size = True
-        survey = self.request.survey
 
         for (column, (type, key, title)) in enumerate(self.columns):
             if key in self.combine_keys:
@@ -138,7 +137,8 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                 enumerate(self.get_measures(), 1):
 
             column = 0
-            zodb_node = survey.restrictedTraverse(risk.zodb_path.split('/'))
+            zodb_node = self.request.survey.restrictedTraverse(
+                risk.zodb_path.split('/'))
             for (type, key, title) in self.columns+self.extra_cols:
                 value = None
                 if type == 'measure':
@@ -211,7 +211,8 @@ class OSHAActionPlanMixin():
             - unactioned_nodes
             - actioned_nodes
 
-            Place in a separate method so that OSHAActionPlanReportDownload can call it.
+            Place in a separate method so that OSHAActionPlanReportDownload
+            can call it.
         """
         if survey.redirectOnSurveyUpdate(self.request):
             return
@@ -221,19 +222,18 @@ class OSHAActionPlanMixin():
 
         session = Session()
         query = session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session == self.session)\
-                .filter(sql.or_(model.MODULE_WITH_UNANSWERED_RISKS_FILTER,
-                                model.UNANSWERED_RISKS_FILTER))\
-                .order_by(model.SurveyTreeItem.path)
+            .filter(model.SurveyTreeItem.session == self.session)\
+            .filter(sql.or_(model.MODULE_WITH_UNANSWERED_RISKS_FILTER,
+                            model.UNANSWERED_RISKS_FILTER))\
+            .order_by(model.SurveyTreeItem.path)
         self.unanswered_nodes = query.all()
 
         query = session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session == self.session)\
-                .filter(sql.or_(model.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
-                                model.RISK_NOT_PRESENT_FILTER))\
-                .order_by(model.SurveyTreeItem.path)
+            .filter(model.SurveyTreeItem.session == self.session)\
+            .filter(sql.or_(model.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
+                            model.RISK_NOT_PRESENT_FILTER))\
+            .order_by(model.SurveyTreeItem.path)
         self.risk_not_present_nodes = query.all()
-
 
 
 def node_title(node, zodbnode):
@@ -268,7 +268,8 @@ class OSHAIdentificationReport(report.IdentificationReport):
         implement `IPublishTraverse`, which allows us to catch traversal steps.
         """
         if name == "download":
-            return OSHAIdentificationReportDownload(aq_inner(self.context), request)
+            return OSHAIdentificationReportDownload(
+                aq_inner(self.context), request)
         else:
             raise NotFound(self, name, request)
 
@@ -281,14 +282,13 @@ class OSHAIdentificationReport(report.IdentificationReport):
         session = Session()
         dbsession = SessionManager.session
         query = session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session == dbsession)\
-                .order_by(model.SurveyTreeItem.path)
+            .filter(model.SurveyTreeItem.session == dbsession)\
+            .order_by(model.SurveyTreeItem.path)
         self.nodes = query.all()
 
 
-
-
-class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPlanMixin):
+class OSHAActionPlanReportDownload(
+        report.ActionPlanReportDownload, OSHAActionPlanMixin):
     """ Generate and download action report.
     """
     grok.layer(IOSHAReportPhaseSkinLayer)
@@ -304,17 +304,20 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         if self.session.company is None:
             self.session.company = model.Company()
         query = session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session == self.session)\
-                .filter(sql.not_(model.SKIPPED_PARENTS))\
-                .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
-                                model.RISK_PRESENT_OR_TOP5_FILTER))\
-                .order_by(model.SurveyTreeItem.path)
+            .filter(model.SurveyTreeItem.session == self.session)\
+            .filter(sql.not_(model.SKIPPED_PARENTS))\
+            .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
+                            model.RISK_PRESENT_OR_TOP5_FILTER))\
+            .order_by(model.SurveyTreeItem.path)
+
         self.nodes = query.all()
         self._extra_updates()
 
     def addReportNodes(self, document, nodes, heading, toc, body):
         """ """
-        t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
+        t = lambda txt: "".join([
+            "\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)
+        ])
         ss = document.StyleSheet
         toc_props = ParagraphPropertySet()
         toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH * 1)
@@ -328,25 +331,28 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         survey = self.request.survey
         styles = ss.ParagraphStyles
         header_styles = {
-                0: styles.Heading2,
-                1: styles.Heading3,
-                2: styles.Heading4,
-                3: styles.Heading5,
-                4: styles.Heading6,
-                }
+            0: styles.Heading2,
+            1: styles.Heading3,
+            2: styles.Heading4,
+            3: styles.Heading5,
+            4: styles.Heading6,
+        }
         for node in nodes:
             zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
             title = node_title(node, zodb_node)
-            thin_edge = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
+            thin_edge = BorderPropertySet(
+                width=20, style=BorderPropertySet.SINGLE)
+
             if node.depth == 1:
                 p = Paragraph(
-                        header_styles.get(node.depth, styles.Heading6),
-                        FramePropertySet(thin_edge, thin_edge, thin_edge, thin_edge),
-                        u"%s %s" % (node.number, title))
+                    header_styles.get(node.depth, styles.Heading6),
+                    FramePropertySet(
+                        thin_edge, thin_edge, thin_edge, thin_edge),
+                    u"%s %s" % (node.number, title))
             else:
                 p = Paragraph(
-                        header_styles.get(node.depth, styles.Heading6),
-                        u"%s %s" % (node.number, title))
+                    header_styles.get(node.depth, styles.Heading6),
+                    u"%s %s" % (node.number, title))
             body.append(p)
 
             if node.type != "risk":
@@ -361,22 +367,22 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                     level = _("risk_priority_high", default=u"high")
 
                 msg = _("risk_priority",
-                    default="This is a ${priority_value} priority risk.",
-                    mapping={'priority_value': level})
+                        default="This is a ${priority_value} priority risk.",
+                        mapping={'priority_value': level})
                 body.append(Paragraph(
-                                styles.RiskPriority,
-                                t(msg)
-                            ))
+                    styles.RiskPriority,
+                    t(msg)
+                ))
 
             if getattr(node, 'identification', None) == 'no':
                 body.append(
                     Paragraph(
-                            styles.Normal,
-                            ParagraphPropertySet(left_indent=300, right_indent=300),
-                            t(_(utils.html_unescape(
-                                    htmllaundry.StripMarkup(zodb_node.description))
-                            ))
-                        ))
+                        styles.Normal,
+                        ParagraphPropertySet(
+                            left_indent=300, right_indent=300),
+                        t(_(utils.html_unescape(
+                            htmllaundry.StripMarkup(zodb_node.description))))
+                    ))
                 body.append(Paragraph(""))
 
             if node.comment and node.comment.strip():
@@ -389,9 +395,10 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                 if len(node.action_plans) == 1:
                     heading = t(_("header_measure_single", default=u"Measure"))
                 else:
-                    heading = t(_("header_measure",
-                                    default=u"Measure ${index}",
-                                    mapping={"index": idx + 1}))
+                    heading = t(
+                        _("header_measure",
+                            default=u"Measure ${index}",
+                            mapping={"index": idx + 1}))
 
                 self.addMeasure(document, heading, body, measure)
 
@@ -399,7 +406,9 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         """ Requirements for how the measure section should be displayed are
             in #2611
         """
-        t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
+        t = lambda txt: "".join([
+            "\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)
+        ])
         ss = document.StyleSheet
         styles = ss.ParagraphStyles
 
@@ -407,9 +416,9 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         thin_edge = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
         no_edge = BorderPropertySet(width=0, colour=ss.Colours.White)
         p = Paragraph(
-                styles.MeasureHeading,
-                ParagraphPropertySet(left_indent=300, right_indent=300),
-                t(_("header_measure_single", default=u"Measure")))
+            styles.MeasureHeading,
+            ParagraphPropertySet(left_indent=300, right_indent=300),
+            t(_("header_measure_single", default=u"Measure")))
         c = Cell(p, FramePropertySet(thin_edge, thin_edge, no_edge, thin_edge))
         table.AddRow(c)
 
@@ -427,7 +436,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             t(_("label_action_plan_budget", default=u"Budget")),
             t(_("label_action_plan_start", default=u"Planning start")),
             t(_("label_action_plan_end", default=u"Planning end")),
-            ]
+        ]
         m = measure
         values = [
             m.action_plan,
@@ -437,12 +446,12 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             m.budget and str(m.budget) or '',
             m.planning_start and formatDate(self.request, m.planning_start) or '',
             m.planning_end and formatDate(self.request, m.planning_end) or '',
-            ]
+        ]
         for heading, value in zip(headings, values):
             p = Paragraph(
-                        styles.MeasureField,
-                        heading
-                        )
+                styles.MeasureField,
+                heading
+            )
             c = Cell(p, FramePropertySet(no_edge, thin_edge, no_edge, thin_edge))
             table.AddRow(c)
 
@@ -451,9 +460,10 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
             else:
                 frame = FramePropertySet(no_edge, thin_edge, no_edge, thin_edge)
 
-            p = Paragraph(styles.Normal,
-                    ParagraphPropertySet(left_indent=600, right_indent=600),
-                    value)
+            p = Paragraph(
+                styles.Normal,
+                ParagraphPropertySet(left_indent=600, right_indent=600),
+                value)
             c = Cell(p, frame)
             table.AddRow(c)
 
@@ -466,38 +476,40 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         ss = document.StyleSheet
         styles = document.StyleSheet.ParagraphStyles
         thin_edge = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
-        t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
+        t = lambda txt: "".join([
+            "\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)
+        ])
 
         table = Table(9500)
         thin_edge = BorderPropertySet(width=20, style=BorderPropertySet.SINGLE)
         no_edge = BorderPropertySet(width=0, colour=ss.Colours.White)
         p = Paragraph(
-                styles.Heading3,
-                ParagraphPropertySet(alignment=ParagraphPropertySet.CENTER),
-                t(_("header_oira_report_consultation",
-                    default="Consultation of workers"))
-                )
+            styles.Heading3,
+            ParagraphPropertySet(alignment=ParagraphPropertySet.CENTER),
+            t(_("header_oira_report_consultation",
+                default="Consultation of workers"))
+        )
         c = Cell(p, FramePropertySet(thin_edge, thin_edge, no_edge, thin_edge))
         table.AddRow(c)
 
         p = Paragraph(
-                styles.Normal,
-                ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
-                t(_("paragraph_oira_consultation_of_workers",
-                    default="The undersigned hereby declare that the workers "
-                            "have been consulted on the content of this "
-                            "document.")),
-                LINE
-                )
+            styles.Normal,
+            ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
+            t(_("paragraph_oira_consultation_of_workers",
+                default="The undersigned hereby declare that the workers "
+                        "have been consulted on the content of this "
+                        "document.")),
+            LINE
+        )
         c = Cell(p, FramePropertySet(no_edge, thin_edge, no_edge, thin_edge))
         table.AddRow(c)
 
         p = Paragraph(
-                styles.Normal,
-                ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
-                )
+            styles.Normal,
+            ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
+        )
         employer = t(_("oira_consultation_employer",
-                    default="On behalf of the employer:"))
+                       default="On behalf of the employer:"))
         workers = t(_("oira_consultation_workers",
                     default="On behalf of the workers:"))
 
@@ -506,10 +518,10 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         table.AddRow(c)
 
         p = Paragraph(
-                ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
-                t(_("oira_survey_date", default="Date:")),
-                LINE, LINE
-                )
+            ParagraphPropertySet(alignment=ParagraphPropertySet.LEFT),
+            t(_("oira_survey_date", default="Date:")),
+            LINE, LINE
+        )
         c = Cell(p, FramePropertySet(no_edge, thin_edge, thin_edge, thin_edge))
         table.AddRow(c)
         section.append(table)
@@ -524,27 +536,33 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
 
         # Define some more custom styles
         ss.ParagraphStyles.append(
-            ParagraphStyle("RiskPriority",
-                    TextStyle(TextPropertySet(
-                                    font=ss.Fonts.Arial,
-                                    size=22,
-                                    italic=True,
-                                    colour=ss.Colours.Blue)),
-                    ParagraphPropertySet(left_indent=300, right_indent=300))
-                    )
+            ParagraphStyle(
+                "RiskPriority",
+                TextStyle(
+                    TextPropertySet(
+                        font=ss.Fonts.Arial,
+                        size=22,
+                        italic=True,
+                        colour=ss.Colours.Blue)),
+                ParagraphPropertySet(left_indent=300, right_indent=300))
+        )
         ss.ParagraphStyles.append(
-            ParagraphStyle("MeasureField",
-                    TextStyle(TextPropertySet(
-                                    font=ss.Fonts.Arial,
-                                    size=18,
-                                    underline=True)),
-                    ParagraphPropertySet(left_indent=300, right_indent=300))
-                    )
+            ParagraphStyle(
+                "MeasureField",
+                TextStyle(
+                    TextPropertySet(
+                        font=ss.Fonts.Arial,
+                        size=18,
+                        underline=True)),
+                ParagraphPropertySet(left_indent=300, right_indent=300))
+        )
         # XXX: This part is removed
         # self.addActionPlan(document)
 
         # XXX: and replaced with this part:
-        t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)])
+        t = lambda txt: "".join([
+            "\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)
+        ])
         toc = createSection(document, self.context, self.request)
 
         body = Section()
@@ -553,10 +571,10 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
                     mapping=dict(title=self.session.title)))
 
         toc.append(Paragraph(
-                        ss.ParagraphStyles.Heading1,
-                        ParagraphPropertySet(alignment=ParagraphPropertySet.CENTER),
-                        heading,
-                        ))
+            ss.ParagraphStyles.Heading1,
+            ParagraphPropertySet(alignment=ParagraphPropertySet.CENTER),
+            heading,
+        ))
 
         if self.session.report_comment:
             # Add comment. #5985
@@ -573,20 +591,24 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
 
         headings = [
             t(_("header_present_risks",
-                default=u"Risks that have been identified, evaluated and have an Action Plan")),
+                default=u"Risks that have been identified, "
+                        u"evaluated and have an Action Plan")),
             t(_("header_unevaluated_risks",
-                default=u"Risks that have been identified but do NOT have an Action Plan")),
+                default=u"Risks that have been identified but "
+                        u"do NOT have an Action Plan")),
             t(_("header_unanswered_risks",
-                default=u'Hazards/problems that have been "parked" and are still to be dealt with')),
+                default=u'Hazards/problems that have been "parked"'
+                        u'and are still to be dealt with')),
             t(_("header_risks_not_present",
-                default=u"Hazards/problems that have been managed or are not present in your organisation"))
-            ]
+                default=u"Hazards/problems that have been managed "
+                        u"or are not present in your organisation"))
+        ]
         nodes = [
             self.actioned_nodes,
             self.unactioned_nodes,
             self.unanswered_nodes,
             self.risk_not_present_nodes,
-            ]
+        ]
 
         for nodes, heading in zip(nodes, headings):
             if not nodes:
@@ -603,12 +625,14 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload, OSHAActionPl
         output = StringIO()
         renderer.Write(document, output)
 
-        filename = translate(_("filename_report_actionplan",
-                        default=u"Action plan ${title}",
-                        mapping=dict(title=self.session.title)),
-                        context=self.request,)
-        self.request.response.setHeader("Content-Disposition",
-                            "attachment; filename=\"%s.rtf\"" % filename.encode("utf-8"))
+        filename = translate(
+            _("filename_report_actionplan",
+                default=u"Action plan ${title}",
+                mapping=dict(title=self.session.title)),
+            context=self.request,)
+        self.request.response.setHeader(
+            "Content-Disposition",
+            "attachment; filename=\"%s.rtf\"" % filename.encode("utf-8"))
         self.request.response.setHeader("Content-Type", "application/rtf")
         return output.getvalue()
 
@@ -625,40 +649,42 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
         # 3813: Include children from optional modules.
         # Removed this: .filter(sql.not_(model.SKIPPED_PARENTS))\
         query = Session.query(model.SurveyTreeItem)\
-                .filter(model.SurveyTreeItem.session == self.session)\
-                .order_by(model.SurveyTreeItem.path)
+            .filter(model.SurveyTreeItem.session == self.session)\
+            .order_by(model.SurveyTreeItem.path)
         return query.all()
 
     def addIdentificationResults(self, document):
         survey = self.request.survey
-        section = createIdentificationReportSection(document, self.context, self.request)
+        section = createIdentificationReportSection(
+            document, self.context, self.request)
+
         styles = document.StyleSheet.ParagraphStyles
         header_styles = {
-                0: styles.Heading2,
-                1: styles.Heading3,
-                2: styles.Heading4,
-                3: styles.Heading5,
-                4: styles.Heading6,
-                }
+            0: styles.Heading2,
+            1: styles.Heading3,
+            2: styles.Heading4,
+            3: styles.Heading5,
+            4: styles.Heading6,
+        }
 
         for node in self.getNodes():
             section.append(
-                    Paragraph(
-                        header_styles.get(node.depth, styles.Heading6),
-                        u"%s %s" % (node.number, node.title))
-                        )
+                Paragraph(
+                    header_styles.get(node.depth, styles.Heading6),
+                    u"%s %s" % (node.number, node.title))
+            )
 
             if node.type != "risk":
                 continue
 
             zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
             section.append(
-                    Paragraph(
-                        styles.Normal,
-                        utils.html_unescape(
-                            htmllaundry.StripMarkup(zodb_node.description))
-                        )
-                    )
+                Paragraph(
+                    styles.Normal,
+                    utils.html_unescape(
+                        htmllaundry.StripMarkup(zodb_node.description))
+                )
+            )
 
             for i in range(0, 8):
                 p = Paragraph(styles.Normal, " ")
@@ -668,7 +694,7 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
                 section.TwipsToRightMargin(),
                 alignment=TabPropertySet.RIGHT,
                 leader=getattr(TabPropertySet, 'UNDERLINE')
-                )
+            )
             p = Paragraph(styles.Normal, ParagraphPropertySet(tabs=[tabs]))
             p.append(TAB)
             section.append(p)
@@ -678,32 +704,36 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
 
 
 def createIdentificationReportSection(document, survey, request):
-    t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=request)])
+    t = lambda txt: "".join([
+        "\u%s?" % str(ord(e)) for e in translate(txt, context=request)
+    ])
     section = Section()
 
-    footer_txt = t(_("report_identification_revision",
+    footer_txt = t(
+        _("report_identification_revision",
             default=u"This document was based on the OiRA Tool '${title}' of "
                     u"revision date ${date}.",
             mapping={"title": survey.published[1],
                     "date": formatDate(request, survey.published[2])}))
     header = Table(4750, 4750)
     c1 = Cell(Paragraph(
-                document.StyleSheet.ParagraphStyles.Footer,
-                SessionManager.session.title))
+        document.StyleSheet.ParagraphStyles.Footer,
+        SessionManager.session.title))
 
     pp = ParagraphPropertySet
     header_props = pp(alignment=pp.RIGHT)
     c2 = Cell(Paragraph(
-                document.StyleSheet.ParagraphStyles.Footer,
-                header_props,
-                formatDate(request, datetime.today())))
+        document.StyleSheet.ParagraphStyles.Footer,
+        header_props,
+        formatDate(request, datetime.today())))
     header.AddRow(c1, c2)
     section.Header.append(header)
 
     footer = Table(9000, 500)
-    c1 = Cell(Paragraph(document.StyleSheet.ParagraphStyles.Footer,
-                pp(alignment=pp.LEFT),
-                footer_txt))
+    c1 = Cell(Paragraph(
+        document.StyleSheet.ParagraphStyles.Footer,
+        pp(alignment=pp.LEFT),
+        footer_txt))
     c2 = Cell(Paragraph(pp(alignment=pp.RIGHT), PAGE_NUMBER))
     footer.AddRow(c1, c2)
     section.Footer.append(footer)
@@ -713,32 +743,37 @@ def createIdentificationReportSection(document, survey, request):
 
 
 def createSection(document, survey, request):
-    t = lambda txt: "".join(["\u%s?" % str(ord(e)) for e in translate(txt, context=request)])
+    t = lambda txt: "".join([
+        "\u%s?" % str(ord(e)) for e in translate(txt, context=request)
+    ])
     section = Section(break_type=Section.PAGE, first_page_number=1)
-    footer_txt = t(_("report_survey_revision",
-        default=u"This report was based on the OiRA Tool '${title}' of revision date ${date}.",
-        mapping={"title": survey.published[1],
-                 "date": formatDate(request, survey.published[2])}))
+    footer_txt = t(
+        _("report_survey_revision",
+            default=u"This report was based on the OiRA Tool '${title}' "\
+                    u"of revision date ${date}.",
+            mapping={"title": survey.published[1],
+                    "date": formatDate(request, survey.published[2])}))
 
     header = Table(4750, 4750)
     c1 = Cell(Paragraph(
-                document.StyleSheet.ParagraphStyles.Footer,
-                survey.published[1]))
+        document.StyleSheet.ParagraphStyles.Footer,
+        survey.published[1]))
 
     pp = ParagraphPropertySet
     header_props = pp(alignment=pp.RIGHT)
     c2 = Cell(Paragraph(
-                document.StyleSheet.ParagraphStyles.Footer,
-                header_props,
-                formatDate(request, datetime.today())))
+        document.StyleSheet.ParagraphStyles.Footer,
+        header_props,
+        formatDate(request, datetime.today())))
     header.AddRow(c1, c2)
     section.Header.append(header)
 
     footer = Table(9000, 500)
     # rtfng does not like unicode footers
-    c1 = Cell(Paragraph(document.StyleSheet.ParagraphStyles.Footer,
-                pp(alignment=pp.LEFT),
-                footer_txt))
+    c1 = Cell(Paragraph(
+        document.StyleSheet.ParagraphStyles.Footer,
+        pp(alignment=pp.LEFT),
+        footer_txt))
 
     c2 = Cell(Paragraph(pp(alignment=pp.RIGHT), PAGE_NUMBER))
     footer.AddRow(c1, c2)

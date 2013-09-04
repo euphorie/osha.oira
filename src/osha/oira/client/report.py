@@ -11,7 +11,6 @@ from openpyxl.cell import get_column_letter
 from openpyxl.workbook import Workbook
 from osha.oira import _
 from osha.oira import utils
-from osha.oira.client import model as oiramodel
 from osha.oira.client.interfaces import IOSHAIdentificationPhaseSkinLayer
 from osha.oira.client.interfaces import IOSHAReportPhaseSkinLayer
 from plonetheme.nuplone.utils import formatDate
@@ -216,33 +215,11 @@ class OSHAActionPlanMixin():
         """
         if survey.redirectOnSurveyUpdate(self.request):
             return
-
         self.actioned_nodes = utils.get_actioned_nodes(self.nodes)
         self.unactioned_nodes = utils.get_unactioned_nodes(self.nodes)
-
-        session = Session()
-        query = session.query(model.SurveyTreeItem)\
-            .filter(
-                sql.and_(
-                    model.SurveyTreeItem.session == self.session,
-                    sql.or_(
-                        oiramodel.MODULE_WITH_UNANSWERED_RISKS_FILTER,
-                        oiramodel.UNANSWERED_RISKS_FILTER),
-                    sql.not_(model.SKIPPED_PARENTS)))\
-            .order_by(model.SurveyTreeItem.path)
-        self.unanswered_nodes = query.all()
-
-        query = session.query(model.SurveyTreeItem)\
-            .filter(
-                sql.and_(
-                    model.SurveyTreeItem.session == self.session,
-                    sql.or_(
-                        oiramodel.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
-                        oiramodel.RISK_NOT_PRESENT_FILTER,
-                        model.SKIPPED_PARENTS
-                    )))\
-            .order_by(model.SurveyTreeItem.path)
-        self.risk_not_present_nodes = query.all()
+        self.unanswered_nodes = utils.get_unanswered_nodes(self.session)
+        self.risk_not_present_nodes = \
+            utils.get_risk_not_present_nodes(self.session)
 
 
 def node_title(node, zodbnode):

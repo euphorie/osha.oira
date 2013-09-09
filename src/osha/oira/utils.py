@@ -1,5 +1,8 @@
+from euphorie.client import model
+from osha.oira.client import model as oiramodel
+from sqlalchemy import sql
+from z3c.saconfig import Session
 import htmllib
-from five import grok
 
 
 def html_unescape(s):
@@ -76,3 +79,31 @@ def get_actioned_nodes(ls):
                     actioned.append(n)
 
     return remove_empty_modules(actioned)
+
+
+def get_unanswered_nodes(session):
+    query = Session().query(model.SurveyTreeItem)\
+        .filter(
+            sql.and_(
+                model.SurveyTreeItem.session == session,
+                sql.or_(
+                    oiramodel.MODULE_WITH_UNANSWERED_RISKS_FILTER,
+                    oiramodel.UNANSWERED_RISKS_FILTER),
+                sql.not_(model.SKIPPED_PARENTS)))\
+        .order_by(model.SurveyTreeItem.path)
+    return query.all()
+
+
+def get_risk_not_present_nodes(session):
+    query = Session().query(model.SurveyTreeItem)\
+        .filter(
+            sql.and_(
+                model.SurveyTreeItem.session == session,
+                sql.or_(
+                    model.SKIPPED_PARENTS,
+                    oiramodel.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
+                    oiramodel.RISK_NOT_PRESENT_FILTER,
+                    oiramodel.SKIPPED_MODULE,
+                )))\
+        .order_by(model.SurveyTreeItem.path)
+    return query.all()

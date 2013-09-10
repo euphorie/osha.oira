@@ -21,9 +21,6 @@
       <h2 i18n:translate="header_information">Information</h2>
 
       <dl class="grid span-9">
-        <dt i18n:translate="label_evaluation_phase">Evaluation phase</dt>
-        <dd tal:condition="context/evaluation_optional" i18n:translate="optional">Optional</dd>
-        <dd tal:condition="not:context/evaluation_optional" i18n:translate="mandatory">Mandatory</dd>
         <dt i18n:translate="label_classification_code">Classification code</dt>
         <dd tal:condition="context/classification_code">${context/classification_code}</dd>
         <dd tal:condition="not:context/classification_code"><em i18n:translate="not_set">Not set</em></dd>

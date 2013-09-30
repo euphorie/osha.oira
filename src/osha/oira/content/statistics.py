@@ -7,6 +7,7 @@ from datetime import datetime
 from euphorie.content.country import ICountry
 from euphorie.content.sector import ISector
 from euphorie.content.sectorcontainer import ISectorContainer
+from euphorie.content.surveygroup import ISurveyGroup
 from five import grok
 from osha.oira import _
 from osha.oira.interfaces import IOSHAContentSkinLayer
@@ -316,6 +317,13 @@ class SectorStatistics(form.SchemaForm, StatisticsMixin):
         else:
             self.template = self.form_template
             return self.template()
+
+
+class SectorStatisticsTool(SectorStatistics):
+    grok.context(ISurveyGroup)
+    grok.name('show-statistics')
+    grok.require('cmf.ModifyPortalContent')
+    grok.layer(IOSHAContentSkinLayer)
 
 
 class GlobalStatistics(form.SchemaForm, StatisticsMixin):

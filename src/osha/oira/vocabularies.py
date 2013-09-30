@@ -4,6 +4,7 @@ from euphorie.content import utils
 from euphorie.content.country import ICountry
 from euphorie.content.sector import ISector
 from euphorie.content.sectorcontainer import ISectorContainer
+from euphorie.content.surveygroup import ISurveyGroup
 from five import grok
 from osha.oira import _
 from plone import api
@@ -136,6 +137,8 @@ class PublishedToolsVocabulary(object):
             tools += self.getToolsInCountry(context)
         elif ISector.providedBy(context):
             tools += self.getToolsInSector(context)
+        elif ISurveyGroup.providedBy(context):
+            tools += self.getToolsInSector(aq_parent(context))
         return SimpleVocabulary.fromValues(tools)
 
 grok.global_utility(PublishedToolsVocabulary,
@@ -165,8 +168,12 @@ class CountriesVocabulary(object):
                     context.id,
                     context.title).encode('utf-8'): context.id
             })
-        elif ISector.providedBy(context):
-            country = aq_parent(context)
+        elif ISector.providedBy(context) or ISurveyGroup.providedBy(context):
+            if ISector.providedBy(context):
+                country = aq_parent(context)
+            elif ISurveyGroup.providedBy(context):
+                country = aq_parent(aq_parent(context))
+
             if ICountry.providedBy(country):
                 countries.update({
                     utils.getRegionTitle(

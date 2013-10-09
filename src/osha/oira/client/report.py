@@ -10,7 +10,7 @@ from five import grok
 from openpyxl.cell import get_column_letter
 from openpyxl.workbook import Workbook
 from osha.oira import _
-from osha.oira import utils
+from osha.oira.client import utils
 from osha.oira.client.interfaces import IOSHAIdentificationPhaseSkinLayer
 from osha.oira.client.interfaces import IOSHAReportPhaseSkinLayer
 from plonetheme.nuplone.utils import formatDate
@@ -201,27 +201,6 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         return query.all()
 
 
-class OSHAActionPlanMixin():
-
-    def _extra_updates(self):
-        """ Provides the following extra attributes (as per #1517, #1518):
-            - unanswered_risk_nodes
-            - not_present_risk_nodes
-            - unactioned_nodes
-            - actioned_nodes
-
-            Place in a separate method so that OSHAActionPlanReportDownload
-            can call it.
-        """
-        if survey.redirectOnSurveyUpdate(self.request):
-            return
-        self.actioned_nodes = utils.get_actioned_nodes(self.nodes)
-        self.unactioned_nodes = utils.get_unactioned_nodes(self.nodes)
-        self.unanswered_nodes = utils.get_unanswered_nodes(self.session)
-        self.risk_not_present_nodes = \
-            utils.get_risk_not_present_nodes(self.session)
-
-
 def node_title(node, zodbnode):
     # 2885: Non-present risks and unanswered risks are shown affirmatively,
     # i.e 'title'
@@ -273,8 +252,7 @@ class OSHAIdentificationReport(report.IdentificationReport):
         self.nodes = query.all()
 
 
-class OSHAActionPlanReportDownload(
-        report.ActionPlanReportDownload, OSHAActionPlanMixin):
+class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
     """ Generate and download action report.
     """
     grok.layer(IOSHAReportPhaseSkinLayer)
@@ -282,22 +260,42 @@ class OSHAActionPlanReportDownload(
     download = True
 
     def update(self):
-        """ Perform the super class' update and then get all the unanswered and
-            non-present risks.
-        """
-        super(OSHAActionPlanReportDownload, self).update()
-        session = Session()
-        if self.session.company is None:
-            self.session.company = model.Company()
-        query = session.query(model.SurveyTreeItem)\
-            .filter(model.SurveyTreeItem.session == self.session)\
-            .filter(sql.not_(model.SKIPPED_PARENTS))\
-            .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
-                            model.RISK_PRESENT_OR_TOP5_FILTER))\
-            .order_by(model.SurveyTreeItem.path)
+        """ Fetches the different kinds of risks we are interested in.
 
-        self.nodes = query.all()
-        self._extra_updates()
+            Actioned Nodes
+            --------------
+            Title: "Risks that have been identified, evaluated and have an
+            Action Plan"
+
+            Unactioned Nodes
+            ----------------
+            Title: "Risks that have been identified but do NOT have an Action
+            Plan"
+
+            Unanswered Nodes
+            ----------------
+            Title: "Hazards/problems that have been "parked" and are still
+            to be dealt with"
+
+            Risk not present nodes
+            ----------------------
+            Title: "Hazards/problems that have been managed or are not present
+            in your organisation"
+        """
+        if survey.redirectOnSurveyUpdate(self.request):
+            return
+
+        super(OSHAActionPlanReportDownload, self).update()
+        self.nodes = self.getNodes()  # Returns all identified nodes, with or
+                                      # without action plans
+
+        # Get the extra attributes as per #1517, #1518:
+        self.actioned_nodes = utils.get_actioned_nodes(self.nodes)
+        self.unactioned_nodes = utils.get_unactioned_nodes(self.nodes)
+
+        self.unanswered_nodes = utils.get_unanswered_nodes(self.session)
+        self.risk_not_present_nodes = \
+            utils.get_risk_not_present_nodes(self.session)
 
     def addReportNodes(self, document, nodes, heading, toc, body):
         """ """

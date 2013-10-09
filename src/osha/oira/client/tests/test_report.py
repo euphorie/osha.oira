@@ -1,6 +1,15 @@
 # coding=utf-8
 from Products.Five.testbrowser import Browser
+from euphorie.client import model
+from euphorie.client.interfaces import IReportPhaseSkinLayer
+from euphorie.client.tests.test_model import createSurvey
+from euphorie.ghost import PathGhost
+from osha.oira.client import utils
 from osha.oira.tests.base import OiRAFunctionalTestCase
+from osha.oira.tests.base import OiRATestCase
+from z3c.saconfig import Session
+from zope import component
+from zope import interface
 
 
 class EuphorieReportTests(OiRAFunctionalTestCase):
@@ -35,8 +44,6 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
 
     def testInvalidDateDoesNotBreakRendering(self):
         import datetime
-        from z3c.saconfig import Session
-        from euphorie.client import model
         from euphorie.content.tests.utils import BASIC_SURVEY
         from euphorie.client.tests.utils import addSurvey
         from euphorie.client.tests.utils import registerUserInClient
@@ -142,8 +149,6 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         return ActionPlanTimeline(*a, **kw)
 
     def createSurveySession(self):
-        from z3c.saconfig import Session
-        from euphorie.client import model
         self.sqlsession = Session()
         account = model.Account(loginname=u"jane", password=u"secret")
         self.sqlsession.add(account)
@@ -156,7 +161,6 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
 
     def test_get_measures_order_by_priority(self):
         import datetime
-        from euphorie.client import model
         session = self.createSurveySession()
         module = model.Module(
             title=u'Root',
@@ -187,3 +191,141 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         self.assertEqual(
             [risk.priority for (m, risk, measure) in view.get_measures()],
             [u'high', u'medium', u'low'])
+
+
+class RiskQueryTests(OiRATestCase):
+    """ Test #7547
+
+        A risk with evaluation method 'fixed' (i.e. skip_evaluation=true)
+        and which has been identified, should appear in the final report
+        as identified but without action plan.
+    """
+
+    def createData(self):
+        (self.session, self.survey_session) = createSurvey()
+
+        self.q1 = model.Module(**{
+            'depth': 1,
+            'module_id': 1,
+            'has_description': True,
+            'path': u'001',
+            'postponed': None,
+            'profile_index': -1,
+            'skip_children': False,
+            'title': u'What is the sound of one hand clapping?',
+            'type': u'module',
+            'zodb_path': u'173'
+        })
+        self.survey_session.addChild(self.q1)
+
+        self.mod1 = model.Module(**{
+            'depth': 2,
+            'module_id': 2,
+            'has_description': True,
+            'path': u'001001',
+            'postponed': None,
+            'profile_index': 0,
+            'skip_children': False,
+            'title': u'Stellenbosch',
+            'type': u'module',
+            'zodb_path': u'173'
+        })
+        self.q1.addChild(self.mod1)
+
+        self.r1 = model.Risk(**{
+            'risk_id': 1,
+            'depth': 3,
+            'identification': 'no',
+            'action_plans': [],
+            'has_description': True,
+            'path': u'001001001',
+            'postponed': False,
+            'profile_index': 0,
+            'skip_children': False,
+            'title': u'Hands are washed',
+            'type': u'risk',
+            'zodb_path': u'173/euphorie.risk'
+        })
+        self.mod1.addChild(self.r1)
+
+        self.mod2 = model.Module(**{
+            'depth': 2,
+            'module_id': 3,
+            'has_description': True,
+            'path': u'001002',
+            'postponed': None,
+            'profile_index': 1,
+            'skip_children': False,
+            'title': u'Somerset West',
+            'type': u'module',
+            'zodb_path': u'173'
+        })
+        self.q1.addChild(self.mod2)
+
+        self.r2 = model.Risk(**{
+            'risk_id': 1,
+            'depth': 3,
+            'identification': 'yes',
+            'action_plans': [],
+            'has_description': True,
+            'path': u'001002001',
+            'postponed': False,
+            'profile_index': 1,
+            'skip_children': False,
+            'title': u'Hands are washed',
+            'type': u'risk',
+            'zodb_path': u'173/euphorie.risk'
+        })
+        self.mod2.addChild(self.r2)
+
+        # self.r3 = model.Risk(**{
+        #     'risk_id': 2,
+        #     'depth': 3,
+        #     'identification': 'no',
+        #     'action_plans': [
+        #         model.ActionPlan(action_plan='Add soap')
+        #     ],
+        #     'has_description': True,
+        #     'path': u'001002001',
+        #     'postponed': False,
+        #     'profile_index': 1,
+        #     'skip_children': False,
+        #     'title': u'Hands are washed',
+        #     'type': u'risk',
+        #     'zodb_path': u'173/euphorie.risk'
+        # })
+        # self.mod2.addChild(self.r3)
+
+    def testUnactionedNodes(self):
+        self.createData()
+
+        interface.alsoProvides(self.portal.REQUEST, IReportPhaseSkinLayer)
+        view = component.getMultiAdapter(
+            (PathGhost('dummy'), self.portal.REQUEST), name="download")
+
+        view.session = self.survey_session
+        if view.session.company is None:
+            self.session.company = model.Company()
+
+        nodes = view.getNodes()
+        self.assertEqual(len(utils.get_unactioned_nodes(nodes)), 3)
+
+    def testActionedNodes(self):
+        self.createData()
+        query = Session().query(model.SurveyTreeItem)\
+            .filter(model.SurveyTreeItem.session == self.survey_session)\
+            .order_by(model.SurveyTreeItem.path)
+
+        nodes = query.all()
+        self.assertEqual(len(utils.get_actioned_nodes(nodes)), 0)
+
+    def testUnansweredNodes(self):
+        self.createData()
+        self.assertEqual(
+            len(utils.get_unanswered_nodes(self.survey_session)), 0)
+
+    def testRiskNotPresentNodes(self):
+        self.createData()
+        self.assertEqual(
+            len(utils.get_risk_not_present_nodes(self.survey_session)), 3)
+

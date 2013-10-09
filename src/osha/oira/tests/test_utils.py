@@ -1,5 +1,5 @@
 from Testing.ZopeTestCase import TestCase
-from osha.oira import utils
+from osha.oira.client import utils
 
 
 class MockActionPlan:

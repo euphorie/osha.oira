@@ -1,15 +1,124 @@
-from mobile.sniffer.detect import detect_mobile_browser
-from mobile.sniffer.utilities import get_user_agent
-from five import grok
+from .interfaces import IOSHAClientSkinLayer
 from Acquisition import aq_inner
-from zope.app.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
+from euphorie.client import model
 from euphorie.client.sector import IClientSector
 from euphorie.client.utils import WebHelpers
 from euphorie.content.survey import ISurvey
-from .interfaces import IOSHAClientSkinLayer
+from five import grok
+from mobile.sniffer.detect import detect_mobile_browser
+from mobile.sniffer.utilities import get_user_agent
+from osha.oira.client import model as oiramodel
+from sqlalchemy import sql
+from z3c.saconfig import Session
+from zope.app.component.hooks import getSite
+import htmllib
 
 grok.templatedir('templates')
+
+
+def html_unescape(s):
+    p = htmllib.HTMLParser(None)
+    p.save_bgn()
+    p.feed(s)
+    return p.save_end()
+
+
+def remove_empty_modules(ls):
+    """ Takes a list of modules and risks.
+
+        Removes modules that don't have any risks in them.
+        Modules with submodules (with risks) must however be kept.
+    """
+    while ls and ls[-1].type == 'module':
+        ls = ls[:-1]
+
+    for i in range(len(ls) - 1, 0, -1):
+        if ls[i] is None:
+            if ls[i - 1].type == 'module':
+                ls[i - 1] = None
+
+        elif ls[i].type == 'module':
+            if ls[i - 1].type == 'module' and \
+                    ls[i - 1].depth >= ls[i].depth:
+                ls[i - 1] = None
+
+    return [m for m in ls if m is not None]
+
+
+def get_unactioned_nodes(ls):
+    """ Takes a list of modules and risks and removes all risks that have been
+        actioned (i.e has at least one valid action plan).
+        Also remove all modules that have lost all their risks in the process
+
+        See https://syslab.com/proj/issues/2885
+    """
+    unactioned = []
+    for n in ls:
+        if n.type == 'module':
+            unactioned.append(n)
+
+        elif n.type == 'risk':
+            if not n.action_plans:
+                unactioned.append(n)
+            else:
+                # It's possible that there is an action plan object, but
+                # that it's not yet fully populated
+                if n.action_plans[0] is None or \
+                        n.action_plans[0].action_plan is None:
+                    unactioned.append(n)
+
+    return remove_empty_modules(unactioned)
+
+
+def get_actioned_nodes(ls):
+    """ Takes a list of modules and risks and removes all risks that are *not*
+        actioned (i.e does not have at least one valid action plan)
+        Also remove all modules that have lost all their risks in the process.
+
+        See https://syslab.com/proj/issues/2885
+    """
+    actioned = []
+    for n in ls:
+        if n.type == 'module':
+            actioned.append(n)
+
+        if n.type == 'risk' and len(n.action_plans):
+                # It's possible that there is an action plan object, but
+                # it's not yet fully populated
+                plans = [p.action_plan for p in n.action_plans]
+                if plans[0] is not None:
+                    actioned.append(n)
+
+    return remove_empty_modules(actioned)
+
+
+def get_unanswered_nodes(session):
+    query = Session().query(model.SurveyTreeItem)\
+        .filter(
+            sql.and_(
+                model.SurveyTreeItem.session == session,
+                sql.or_(
+                    oiramodel.MODULE_WITH_UNANSWERED_RISKS_FILTER,
+                    oiramodel.UNANSWERED_RISKS_FILTER),
+                sql.not_(model.SKIPPED_PARENTS)))\
+        .order_by(model.SurveyTreeItem.path)
+    return query.all()
+
+
+def get_risk_not_present_nodes(session):
+    query = Session().query(model.SurveyTreeItem)\
+        .filter(
+            sql.and_(
+                model.SurveyTreeItem.session == session,
+                sql.or_(
+                    model.SKIPPED_PARENTS,
+                    oiramodel.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
+                    oiramodel.RISK_NOT_PRESENT_FILTER,
+                    oiramodel.SKIPPED_MODULE,
+                )))\
+        .order_by(model.SurveyTreeItem.path)
+    return query.all()
 
 
 class OSHAWebHelpers(WebHelpers):
@@ -83,3 +192,5 @@ class OSHAWebHelpers(WebHelpers):
             if ldict:
                 resp[country.id] = ldict.keys()
         return resp
+
+

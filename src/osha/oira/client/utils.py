@@ -24,26 +24,57 @@ def html_unescape(s):
     return p.save_end()
 
 
-def remove_empty_modules(ls):
+def remove_empty_modules(nodes):
     """ Takes a list of modules and risks.
 
         Removes modules that don't have any risks in them.
         Modules with submodules (with risks) must however be kept.
+
+        How it works:
+        -------------
+        Use the 'grow' method to create a tree datastructure that
+        mirrors the actual layout of modules and risks.
+
+        Then 'prune' it by removing all branches that end in modules.
+
+        Lastly flatten the tree back into a list and use it to filter the
+        original list.
     """
-    while ls and ls[-1].type == 'module':
-        ls = ls[:-1]
+    tree = {}
+    ids = []
 
-    for i in range(len(ls) - 1, 0, -1):
-        if ls[i] is None:
-            if ls[i - 1].type == 'module':
-                ls[i - 1] = None
+    def grow(tree, nodes):
+        for i in range(0, len(nodes)):
+            node = nodes[i]
+            inserted = False
+            for k in tree.keys():
+                if node.path.startswith(k[0]):
+                    if tree[k]:
+                        grow(tree[k], [node])
+                    else:
+                        tree[k] = {(node.path, node.type, node.id): {}}
+                    inserted = True
+                    break
+            if not inserted:
+                tree[(node.path, node.type, node.id)] = {}
 
-        elif ls[i].type == 'module':
-            if ls[i - 1].type == 'module' and \
-                    ls[i - 1].depth >= ls[i].depth:
-                ls[i - 1] = None
+    def prune(tree):
+        for k in tree.keys():
+            if tree[k]:
+                prune(tree[k])
 
-    return [m for m in ls if m is not None]
+            if not tree[k] and k[1] == 'module':
+                del tree[k]
+
+    def flatten(tree):
+        for k in tree.keys():
+            ids.append(k[2])
+            flatten(tree[k])
+
+    grow(tree, nodes)
+    prune(tree)
+    flatten(tree)
+    return [n for n in nodes if n.id in ids]
 
 
 def get_unactioned_nodes(ls):

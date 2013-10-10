@@ -291,6 +291,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
 
         # Get the extra attributes as per #1517, #1518:
         self.actioned_nodes = utils.get_actioned_nodes(self.nodes)
+
         self.unactioned_nodes = utils.get_unactioned_nodes(self.nodes)
 
         self.unanswered_nodes = utils.get_unanswered_nodes(self.session)

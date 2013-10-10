@@ -27,6 +27,38 @@ class MockRisk:
 class TestUtils(TestCase):
     """ """
 
+    def test_remove_empty_modules(self):
+        m = MockModule
+        r = MockRisk
+        nodes = [
+            m('1', 1),
+            r('1.1', 2),
+            r('1.2', 2),
+            m('2', 1),
+            m('3', 1),
+            m('3.1', 2),
+            r('3.1.1', 3),
+            m('4', 1),
+            m('4.1', 2),
+            m('4.2', 2),
+            r('4.2.2', 3)
+        ]
+
+        self.assertEquals(
+            sorted(utils.remove_empty_modules(nodes)),
+            sorted([
+                m('1', 1),
+                r('1.1', 2),
+                r('1.2', 2),
+                m('3', 1),
+                m('3.1', 2),
+                r('3.1.1', 3),
+                m('4', 1),
+                m('4.2', 2),
+                r('4.2.2', 3)
+            ])
+        )
+
     def test_utils_methods(self):
         """ Tests the following methods in osha.oira/utils.py:
                 remove_empty_modules(ls)

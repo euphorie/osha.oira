@@ -223,6 +223,3 @@ _("expl_error", default="We're sorry, but an unforseen error has occured.")
 
 _("label_remove_measure", default="Delete this measure")
 _("Add Solution", default=u"Add Measure")
-
-# euphorie/content/risk.py
-_('evalmethod_fixed', default=u'Evaluation-free')

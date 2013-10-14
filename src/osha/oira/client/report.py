@@ -32,6 +32,9 @@ from z3c.saconfig import Session
 from zExceptions import NotFound
 from zope.i18n import translate
 import htmllaundry
+import logging
+
+log = logging.getLogger(__name__)
 
 grok.templatedir("templates")
 
@@ -138,7 +141,9 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             column = 0
             zodb_node = self.request.survey.restrictedTraverse(
                 risk.zodb_path.split('/'))
+
             for (type, key, title) in self.columns+self.extra_cols:
+                log.info('%s %s %s' % (type, key, title))
                 value = None
                 if type == 'measure':
                     value = getattr(measure, key, None)
@@ -182,13 +187,14 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         it sorts on risk priority instead of start date.
         """
         query = Session.query(model.Module, model.Risk, model.ActionPlan)\
-            .filter(sql.and_(model.Module.depth == 1,
-                             model.Module.session == self.session))\
+            .filter(sql.and_(model.Module.session == self.session,
+                             model.Module.profile_index > -1))\
             .filter(sql.not_(model.SKIPPED_PARENTS))\
             .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
                             model.RISK_PRESENT_OR_TOP5_FILTER))\
             .join((model.Risk,
                    sql.and_(model.Risk.path.startswith(model.Module.path),
+                            model.Risk.depth == model.Module.depth+1,
                             model.Risk.session == self.session)))\
             .join((model.ActionPlan,
                    model.ActionPlan.risk_id == model.Risk.id))\

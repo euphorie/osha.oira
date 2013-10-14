@@ -10,6 +10,7 @@ from osha.oira.tests.base import OiRATestCase
 from z3c.saconfig import Session
 from zope import component
 from zope import interface
+import datetime
 
 
 class EuphorieReportTests(OiRAFunctionalTestCase):
@@ -43,7 +44,6 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
             'attachment; filename="Action plan Sessi\xc3\xb8n.rtf"')
 
     def testInvalidDateDoesNotBreakRendering(self):
-        import datetime
         from euphorie.content.tests.utils import BASIC_SURVEY
         from euphorie.client.tests.utils import addSurvey
         from euphorie.client.tests.utils import registerUserInClient
@@ -144,8 +144,9 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
 
 
 class ActionPlanTimelineTests(OiRAFunctionalTestCase):
+
     def ActionPlanTimeline(self, *a, **kw):
-        from ..report import ActionPlanTimeline
+        from osha.oira.client.report import ActionPlanTimeline
         return ActionPlanTimeline(*a, **kw)
 
     def createSurveySession(self):
@@ -159,8 +160,68 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         self.sqlsession.flush()
         return self.session
 
+    def test_get_measures_with_profile_questions(self):
+        """ Test for #7322 and #8850
+        """
+        session = self.createSurveySession()
+        question = model.Module(
+            depth=1,
+            title=u'(Repeatable Module) Do you have multiple shops?',
+            module_id='1',
+            zodb_path='1',
+            skip_children=False,
+            profile_index=-1,
+        )
+        session.addChild(question)
+
+        i = 0
+        for module_title in [
+            u'(Repeating instance) Somerset West',
+            u'(Repeating instance) Stellenbosch']:
+
+            answer = model.Module(
+                depth=2,
+                title=module_title,
+                module_id='2',
+                zodb_path='1',
+                skip_children=False,
+                profile_index=i,
+            )
+            question.addChild(answer)
+
+            answer.addChild(
+                model.Risk(
+                    depth=3,
+                    title=u'Hands are washed',
+                    risk_id='1',
+                    zodb_path='1/2',
+                    type='risk',
+                    priority=u'low',
+                    identification='no',
+                    action_plans=[
+                        model.ActionPlan(
+                        action_plan=u"Do something awesome",
+                        planning_start=datetime.date(2013, 3, 4))
+                    ]
+                )
+            )
+            i += 1
+         
+        view = self.ActionPlanTimeline(None, None)
+        view.session = self.session
+
+        measures = view.get_measures()
+        self.assertEqual(len(measures), 2)
+        self.assertEqual(
+            measures[0][0].title,
+            u'(Repeating instance) Somerset West',
+        )
+        self.assertEqual(
+            measures[1][0].title,
+            u'(Repeating instance) Stellenbosch',
+        )
+
     def test_get_measures_order_by_priority(self):
-        import datetime
         session = self.createSurveySession()
         module = model.Module(
             title=u'Root',
@@ -186,10 +247,12 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
             action_plans=[model.ActionPlan(
                 action_plan=u"Do something awesome",
                 planning_start=datetime.date(2013, 4, 1))]))
+
         view = self.ActionPlanTimeline(None, None)
         view.session = self.session
+        measures = view.get_measures()
         self.assertEqual(
-            [risk.priority for (m, risk, measure) in view.get_measures()],
+            [risk.priority for (m, risk, measure) in measures],
             [u'high', u'medium', u'low'])
 
 

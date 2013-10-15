@@ -160,6 +160,64 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         self.sqlsession.flush()
         return self.session
 
+    def test_get_measures_with_nested_modules(self):
+        """ """
+        session = self.createSurveySession()
+        module = model.Module(
+            depth=1,
+            title=u'Root Module',
+            module_id='1',
+            zodb_path='1',
+            skip_children=False,
+            profile_index=0,
+        )
+        session.addChild(module)
+
+        nested_module1 = model.Module(
+            depth=2,
+            title=u'Nested Module 1',
+            module_id='2',
+            zodb_path='1/1',
+            skip_children=False,
+            profile_index=1,
+        )
+        module.addChild(nested_module1)
+
+        nested_module2 = model.Module(
+            depth=3,
+            title=u'Nested Module 2',
+            module_id='3',
+            zodb_path='1/1/1',
+            skip_children=False,
+            profile_index=2,
+        )
+        nested_module1.addChild(nested_module2)
+
+        risk = model.Risk(
+            depth=4,
+            title=u'Floors are washed',
+            risk_id='1',
+            zodb_path='1/1/1/1',
+            type='risk',
+            priority=u'low',
+            identification='no',
+            action_plans=[
+                model.ActionPlan(
+                action_plan=u"Do something awesome",
+                planning_start=datetime.date(2013, 3, 4))
+            ]
+        )
+        nested_module2.addChild(risk)
+
+        view = self.ActionPlanTimeline(None, None)
+        view.session = self.session
+        measures = view.get_measures()
+        self.assertEqual(len(measures), 1)
+        self.assertEqual(
+            measures[0][0].title,
+            u'Nested Module 2',
+        )
+
     def test_get_measures_with_profile_questions(self):
         """ Test for #7322 and #8850
         """
@@ -206,7 +264,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
                 )
             )
             i += 1
-         
+
         view = self.ActionPlanTimeline(None, None)
         view.session = self.session
 

@@ -143,7 +143,6 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                 risk.zodb_path.split('/'))
 
             for (type, key, title) in self.columns+self.extra_cols:
-                log.info('%s %s %s' % (type, key, title))
                 value = None
                 if type == 'measure':
                     value = getattr(measure, key, None)

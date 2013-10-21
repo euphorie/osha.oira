@@ -17,6 +17,7 @@ We also have a directory (and .po file) for English, because the default values
 in euphorie.pot aren't used by default. Instead the default values in
 euphorie/deployment/locales/euphorie.pot gets used!
 
+
 Adding new translations
 =======================
 
@@ -24,22 +25,19 @@ We cannot use infrae.i18nextract to extract messages for osha.oira's
 euphorie.pot because it will look in all the packages containing the *euphorie*
 domain, and we only want the strings from osha.oira.
 
-Additionally, apparently it cannot properly parse Chameleon templates.
+There is also a bug when parsing tal-statements that are inside javascript.
+Instead we are using pybabel, and this is done via osha.oira's makefile.
 
-We can however use osha.oira's setup.py. It's however important to have
-*lingua* installed, it's a package (hosted on GitHub by Wichert) containing helpers for parsing *Chameleon*
-templates.
+To update the .pot file, go to the root osha.oira directory and type:
 
-There is no *lingua* egg on pypi, but I released one to syslabcom.
+    $ make pot
+    
+This installs a whole Plone the first time it's run, but that's just because
+of dependencies, you will not actually run it.
 
-So, to update the euphorie.pot file in osha.oira, do this::
+You then need to update all the po files, which you do with 
 
-  python setup.py extract_messages
-
-If lingua is installed via buildout (which development.cfg does), then use this::
-
-  ~/${buildout:dir}/bin/zopepy setup.py extract_messages
-
+    $ make all
 
 General rules
 -------------
@@ -53,16 +51,7 @@ General rules
 * If you detect a missing translation, e.g. due to a missing i18n:translate statement in one of the Euphorie templates, please check if the
   new msgid might not be of general interest and add it to the Euphorie package, before you add it here.
 
-*gettext* is your friend
-------------------------
 
-Good documentation: http://www.gnu.org/software/hello/manual/gettext/
-
-To propagate a new message from the .pot file, use the *msgmerge* command. Example::
-
-  msgmerge -U -N --backup=off en/LC_MESSAGES/euphorie.po euphorie.pot
-
-This will add new msgids (plus comments) to the .po file but leave existing translations untouched.
 
 To extract all untranslated messages from a .po file, you can use the script getUntranslated.py. Example::
 
@@ -111,44 +100,23 @@ that need to be replaced. E.g::
 
   ./getNewEntries.py euphorie.pot ../../../euphorie/deployment/locales/euphorie.pot newWichert.po
 
+
 Creating po files for the translators
 -------------------------------------
 
-For both osha.oira and euphorie.deployment, make sure euphorie.pot is updated by running ``python setup.py extract_messages``
+To find untranslated messages, including fuzzy translations, run the script *gatherTranslations.sh*.
+You will need version 1.3.1 or later of potools installed.
 
-* For **osha.oira**: Now use *findDirtyTranslations* (with --untranslated and --fuzzy)
-  to generate the .po files for translators. E.g::
-
-  ./findDirtyTranslations.py sv/LC_MESSAGES/euphorie.po euphorie.pot --untranslated --fuzzy --output=oiraSV.po
-
-* For **euphorie.deployment**: We need two steps.
-
-  * First, we extract the "dirty" translations in euphorie in the way before,
-    but with the additional option --noprefill. We save the result to a temporary file, e.g::
-
-      ./findDirtyTranslations.py ../../../euphorie/deployment/locales/sv/euphorie.po ../../../euphorie/deployment/locales/euphorie.pot  --untranslated --debug --fuzzy --noprefill --output=euphorie_tmpSV.po
-
-  * This temporary file holds all dirty translations from euphorie. But some might not be needed, since they are already present in oira.
-    Therefore, we run a second step using getNewEntries which compares the temp file to the existing translations::
-
-      /getNewEntries.py sv/LC_MESSAGES/euphorie.po euphorie_tmpSV.po euphorieSV.po --ignore-translated
+  $ cd src/osha/oira/locales
+  $ ./gatherTranslations.sh
+  
+This will create a zip file of necessary translations.
 
 
-Now we have oiraSV.po and euphorieSV.po which can be sent to the translators.
+Updating po files with new translations
+---------------------------------------
 
-
-Propagating translations to existing po-files
----------------------------------------------
-
-Every so often, we need to send a sub-set of an existing po-file to the translators, either because
-
-1. new msgids were added and no translation exists yet or
-2. the default translation has changed and a re-translation is necessary.
-
-From the translators, we get back an UPDATE.po which is a subset of the existing ORIG.po. You can use the script
-*updatePoWithTranslations.py* to propagate the newly translated entries.
-If UPDATE.po contains msgids that are not present in ORIG.po, they will be ignored! The proper way to introduce new
-msgids is by adding them to the .pot file first and propagating them via msgmerge (see above).
+**TODO**
 
 
 Beware of fuzzy!
@@ -161,6 +129,7 @@ Therefore, before releasing a new egg version for osha.oira, Euphorie or NuPlone
 
 * that no single .po file contains any #fuzzy entry (grep is your friend)
 * for those eggs in which mo files are included, make sure they are up to date
+
 
 A note on formatting
 --------------------

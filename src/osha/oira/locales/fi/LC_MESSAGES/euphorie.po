@@ -2,20 +2,20 @@
 # Copyright (C) 2013 Syslab.com, GmbH
 # This file is distributed under the same license as the osha.oira project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.30.dev0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-06-03 18:21+0200\n"
+"POT-Creation-Date: 2013-10-22 10:42+0200\n"
 "PO-Revision-Date: 2013-08-15 11:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-"Language: \n"
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:33
@@ -30,8 +30,7 @@ msgstr ""
 "Kuvaa menettelytapasi riskin poistamiseksi tai pienentämiseksi (jos riskiä "
 "ei voi välttää)."
 
-#. Default: Describe the specific action(s) required to implement this
-#. approach
+#. Default: Describe the specific action(s) required to implement this approach
 #. (to eliminate or to reduce the risk).
 #: src/osha/oira/manual_translations.py:7
 msgid "help_measure_prevention_plan"
@@ -98,8 +97,8 @@ msgstr "Poista tili"
 
 #: src/osha/oira/manual_translations.py:29
 msgid ""
-"Please bear in mind that by changing the email address, your login name will"
-" also change."
+"Please bear in mind that by changing the email address, your login name will "
+"also change."
 msgstr ""
 "Ota huomioon, että myös kirjautumisnimesi muuttuu sähköpostiosoitteen "
 "vaihdon yhteydessä."
@@ -120,9 +119,7 @@ msgid "nav_surveys"
 msgstr "OiRA-työkalut"
 
 #. Default: OiRA Tool
-#: src/osha/oira/manual_translations.py:34 src/osha/oira/vocabularies.py:20
-#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:4
-#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:5
+#: src/osha/oira/manual_translations.py:34 src/osha/oira/vocabularies.py:22
 msgid "Survey"
 msgstr "OiRA-työkalu"
 
@@ -222,9 +219,8 @@ msgstr "Lomakkeella voit luoda uuden OiRA-työkaluversion."
 #: src/osha/oira/manual_translations.py:59
 msgid "help_risks_present"
 msgstr ""
-"Nyt kun olet tunnistanut olemassa olevat vaarat/ongelmat "
-"yrityksessäsi/organisaatiossasi, sinun tulee arvioida niistä syntyvät "
-"riskit."
+"Nyt kun olet tunnistanut olemassa olevat vaarat/ongelmat yrityksessäsi/"
+"organisaatiossasi, sinun tulee arvioida niistä syntyvät riskit."
 
 #. Default: Solution
 #: src/osha/oira/manual_translations.py:62
@@ -236,8 +232,7 @@ msgstr "Ratkaisu"
 msgid "Succesfully published the survey"
 msgstr "OiRA-työkalun julkaisu onnistui"
 
-#. Default: Succesfully created a preview for the OiRA Tool. It can be
-#. accessed
+#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url}.
 #: src/osha/oira/manual_translations.py:65
 msgid ""
@@ -248,8 +243,7 @@ msgstr ""
 #. Default: Publish the selected OiRA Tool live with its latest changes.
 #: src/osha/oira/manual_translations.py:68
 msgid "help_publish"
-msgstr ""
-"Julkaise valittu OiRA-työkalu yhdessä sen viimeisten muutosten kanssa."
+msgstr "Julkaise valittu OiRA-työkalu yhdessä sen viimeisten muutosten kanssa."
 
 #. Default: Create a duplicate of the selected OiRA Tool
 #: src/osha/oira/manual_translations.py:70
@@ -259,17 +253,16 @@ msgstr "Tee kopio valitusta OiRA-työkalusta"
 #. Default: If this is to be "optional", it must be formulated so that it is
 #. answerable with YES (the end-user will have to tick a box) or NO (e.g. "Do
 #. you work with the public?"). If this is to be "repeatable", it must be
-#. formulated as a prompt to fill in multiple values (e.g. "List your
-#. different
+#. formulated as a prompt to fill in multiple values (e.g. "List your different
 #. work locations").
 #: src/osha/oira/manual_translations.py:71
 msgid "help_profilequestion_question"
 msgstr ""
-"Jos tämän tulee olla \"valinnainen\", se on ilmaistava niin, että siihen voi"
-" vastata KYLLÄ (loppukäyttäjän täytyy laittaa rasti ruutuun) tai EI (esim. "
+"Jos tämän tulee olla \"valinnainen\", se on ilmaistava niin, että siihen voi "
+"vastata KYLLÄ (loppukäyttäjän täytyy laittaa rasti ruutuun) tai EI (esim. "
 "\"Oletko yleisöpalvelussa?\"). Jos tämän tulee olla \"toistettava\", se on "
-"ilmaistava kehotteena syöttää useita arvoja (esim. \"Mainitse eri "
-"työpaikkasi\")."
+"ilmaistava kehotteena syöttää useita arvoja (esim. \"Mainitse eri työpaikkasi"
+"\")."
 
 #. Default: Include any relevant information that may be helpful for the
 #. end-user.
@@ -281,12 +274,11 @@ msgstr "Lisää käyttäjän kannalta olennainen ja  hyödyllinen tieto."
 #: src/osha/oira/manual_translations.py:78
 msgid "help_module_optional"
 msgstr ""
-"Antaa loppukäyttäjälle mahdollisuuden sivuuttaa tämän moduulin ja kaiken sen"
-" sisältämän."
+"Antaa loppukäyttäjälle mahdollisuuden sivuuttaa tämän moduulin ja kaiken sen "
+"sisältämän."
 
 #. Default: The question to ask the end-user if this module is optional. It
-#. must be formulated so that it is answerable with YES (the end-user will
-#. have
+#. must be formulated so that it is answerable with YES (the end-user will have
 #. to tick a box) or NO
 #: src/osha/oira/manual_translations.py:80
 msgid "help_module_question"
@@ -321,8 +313,7 @@ msgstr ""
 "Tämä on lyhyt myönteinen toteamus mahdollisesta riskistä (esim. rakennuksen "
 "ylläpito on hyvä)."
 
-#. Default: This is the inverse of the affirmative statement (e.g. The
-#. building
+#. Default: This is the inverse of the affirmative statement (e.g. The building
 #. is not well maintained.)
 #: src/osha/oira/manual_translations.py:90
 msgid "help_problem_description"
@@ -496,8 +487,7 @@ msgid "help_finalwords"
 msgstr "Yleiset lopulliset suositukset"
 
 #. Default: It is possible for you to print out the contents of the tool to
-#. enable you to look for the information at the relevant workplace (by
-#. walking
+#. enable you to look for the information at the relevant workplace (by walking
 #. around and looking at what could cause harm, or by consulting the workers
 #. and/or their representatives about problems they have encountered). You can
 #. then introduce the information into the tool.
@@ -520,8 +510,8 @@ msgstr ""
 #: src/osha/oira/client/templates/identification.pt:20
 msgid "intro_print_identification_2"
 msgstr ""
-"Haluat ehkä myös jakaa sisältöjä työntekijöille ja/tai näiden edustajille ja"
-" pyytää heitä osallistumaan vaarojen/ongelmien tunnistamiseen, riskien "
+"Haluat ehkä myös jakaa sisältöjä työntekijöille ja/tai näiden edustajille ja "
+"pyytää heitä osallistumaan vaarojen/ongelmien tunnistamiseen, riskien "
 "arviointiin ja ennaltaehkäisevistä toimista tehtävään päätöksentekoon. "
 "Heidän antamansa palaute tulee ottaa huomioon, kun tiedot syötetään tähän "
 "työkaluun."
@@ -532,8 +522,7 @@ msgstr ""
 msgid "list_of_risks"
 msgstr "työkalun sisällöt"
 
-#. Default: No hazards or problems were spotted. Please proceed directly to
-#. the
+#. Default: No hazards or problems were spotted. Please proceed directly to the
 #. action plan step.
 #: src/osha/oira/manual_translations.py:152
 msgid "help_evaluation_empty"
@@ -554,23 +543,21 @@ msgstr ""
 msgid "title_help_unpublished"
 msgstr "Poista tämä OiRA-työkalu online-asiakkaasta."
 
-#. Default: Succesfully created a preview for the OiRA Tool. It can be
-#. accessed
+#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url} .
 #: src/osha/oira/manual_translations.py:163
 msgid "message_preview_success"
 msgstr "OiRA-työkalun esikatselu on luotu. Siihen pääsee osoitteesta ${url} ."
 
-#. Default: Please note that by deleting your account, you will also delete
-#. all
+#. Default: Please note that by deleting your account, you will also delete all
 #. your sessions. Please make sure you download your reports from the Report
 #. step prior to deleting your account, if you want to keep any.
 #: src/osha/oira/manual_translations.py:166
 msgid "warning_account_delete_surveys"
 msgstr ""
 "Ota huomioon, että poistaessasi tilisi poistat myös kaikki istuntosi. "
-"Varmista, että lataat raporttisi raporttivaiheesta ennen tilisi poistamista,"
-" jos haluat säilyttää ne."
+"Varmista, että lataat raporttisi raporttivaiheesta ennen tilisi poistamista, "
+"jos haluat säilyttää ne."
 
 #. Default: Are you sure you want to create a preview of this OiRA Tool? You
 #. can give the URL for the preview to others so they can test the OiRA Tool.
@@ -605,8 +592,8 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:184
 msgid "intro_publish_survey_published"
 msgstr ""
-"Haluatko varmasti julkaista uudelleen tämän OiRA-työkalun? Se tekee kaikista"
-" muutoksista julkisia."
+"Haluatko varmasti julkaista uudelleen tämän OiRA-työkalun? Se tekee kaikista "
+"muutoksista julkisia."
 
 #. Default: Are you sure you want to publish this OiRA Tool? After publication
 #. the OiRA Tool will appear in the online client and be accessible by all
@@ -698,31 +685,31 @@ msgstr "Poista tämä toimenpide"
 msgid "Add Solution"
 msgstr "Lisää Toimenpide"
 
-#: src/osha/oira/vocabularies.py:23
+#: src/osha/oira/vocabularies.py:25
 msgid "EU-OSHA Overview"
 msgstr "EU-OSHA-yleiskatsaus"
 
-#: src/osha/oira/vocabularies.py:24 src/osha/oira/vocabularies.py:27
+#: src/osha/oira/vocabularies.py:26 src/osha/oira/vocabularies.py:29
 msgid "Country"
 msgstr "Maa"
 
-#: src/osha/oira/vocabularies.py:54
+#: src/osha/oira/vocabularies.py:56
 msgid "Whole year"
 msgstr "Koko vuosi"
 
-#: src/osha/oira/vocabularies.py:57
+#: src/osha/oira/vocabularies.py:59
 msgid "1st Quarter"
 msgstr "1. neljännes"
 
-#: src/osha/oira/vocabularies.py:58
+#: src/osha/oira/vocabularies.py:60
 msgid "2nd Quarter"
 msgstr "2. neljännes"
 
-#: src/osha/oira/vocabularies.py:59
+#: src/osha/oira/vocabularies.py:61
 msgid "3rd Quarter"
 msgstr "3. neljännes"
 
-#: src/osha/oira/vocabularies.py:60
+#: src/osha/oira/vocabularies.py:62
 msgid "4th Quarter"
 msgstr "4. neljännes"
 
@@ -752,32 +739,32 @@ msgid "Enter the names of each location"
 msgstr "Esitä jokaisen sijaintipaikan nimi"
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:80
+#: src/osha/oira/client/report.py:105
 msgid "report_timeline_measure"
 msgstr "Mitta"
 
 #. Default: End date
-#: src/osha/oira/client/report.py:83
+#: src/osha/oira/client/report.py:108
 msgid "report_timeline_end_date"
 msgstr "Päättymispäivämäärä"
 
 #. Default: Responsible
-#: src/osha/oira/client/report.py:86
+#: src/osha/oira/client/report.py:111
 msgid "report_timeline_responsible"
 msgstr "Vastaava"
 
 #. Default: Status (planned, in process, implemented)
-#: src/osha/oira/client/report.py:87
+#: src/osha/oira/client/report.py:112
 msgid "report_timeline_progress"
 msgstr "Status (suunniteltu, meneillään, toteutettu)"
 
 #. Default: Timeline
-#: src/osha/oira/client/report.py:97
+#: src/osha/oira/client/report.py:122
 msgid "report_timeline_title"
 msgstr "Aikajana"
 
 #. Default: low
-#: src/osha/oira/client/survey.py:263
+#: src/osha/oira/client/report.py:353
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -787,7 +774,7 @@ msgid "risk_priority_low"
 msgstr "matala"
 
 #. Default: medium
-#: src/osha/oira/client/survey.py:265
+#: src/osha/oira/client/report.py:355
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -797,7 +784,7 @@ msgid "risk_priority_medium"
 msgstr "keskitasoinen"
 
 #. Default: high
-#: src/osha/oira/client/survey.py:267
+#: src/osha/oira/client/report.py:357
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -807,7 +794,7 @@ msgid "risk_priority_high"
 msgstr "korkea"
 
 #. Default: This is a ${priority_value} priority risk.
-#: src/osha/oira/client/survey.py:269
+#: src/osha/oira/client/report.py:359
 #: src/osha/oira/client/templates/report_actionplan.pt:93
 #: src/osha/oira/client/templates/report_actionplan.pt:173
 #: src/osha/oira/client/templates/report_actionplan.pt:209
@@ -817,102 +804,101 @@ msgid "risk_priority"
 msgstr "Tämän riskin prioriteetti on ${priority_value}."
 
 #. Default: Measure
-#: src/osha/oira/client/survey.py:296 src/osha/oira/client/survey.py:318
+#: src/osha/oira/client/report.py:386 src/osha/oira/client/report.py:411
 #: src/osha/oira/client/templates/risk_actionplan.pt:64
 msgid "header_measure_single"
 msgstr "Toimenpide"
 
 #. Default: Measure ${index}
-#: src/osha/oira/client/survey.py:298
+#: src/osha/oira/client/report.py:389
 #: src/osha/oira/client/templates/report_actionplan.pt:99
 msgid "header_measure"
 msgstr "Toimenpide ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
-#: src/osha/oira/client/survey.py:325
+#: src/osha/oira/client/report.py:418
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
 msgid "label_measure_action_plan"
 msgstr "Yleinen toimintatapa (riskin poistamiseksi tai pienentämiseksi)"
 
 #. Default: Specific action(s) required to implement this approach
-#: src/osha/oira/client/survey.py:327
+#: src/osha/oira/client/report.py:420
 #: src/osha/oira/client/templates/risk_actionplan.pt:98
 msgid "label_measure_prevention_plan"
 msgstr "Tähän toimintatapaan kuuluvat erityiset toimenpiteet"
 
 #. Default: Level of expertise and/or requirements needed
-#: src/osha/oira/client/survey.py:329
+#: src/osha/oira/client/report.py:422
 #: src/osha/oira/client/templates/risk_actionplan.pt:107
 msgid "label_measure_requirements"
 msgstr "Asiantuntemuksen taso ja/tai tarvittavat vaatimukset"
 
 #. Default: Who is responsible?
-#: src/osha/oira/client/survey.py:331
+#: src/osha/oira/client/report.py:424
 #: src/osha/oira/client/templates/risk_actionplan.pt:119
 msgid "label_action_plan_responsible"
 msgstr "Kuka on vastuussa?"
 
 #. Default: Budget
-#: src/osha/oira/client/survey.py:333
+#: src/osha/oira/client/report.py:426
 #: src/osha/oira/client/templates/risk_actionplan.pt:124
 msgid "label_action_plan_budget"
 msgstr "Budjetti"
 
 #. Default: Planning start
-#: src/osha/oira/client/survey.py:334
+#: src/osha/oira/client/report.py:427
 #: src/osha/oira/client/templates/risk_actionplan.pt:135
 msgid "label_action_plan_start"
 msgstr "Suunnittelun alku"
 
 #. Default: Planning end
-#: src/osha/oira/client/survey.py:335
+#: src/osha/oira/client/report.py:428
 #: src/osha/oira/client/templates/risk_actionplan.pt:171
 msgid "label_action_plan_end"
 msgstr "Suunnittelun loppu"
 
 #. Default: Consultation of workers
-#: src/osha/oira/client/survey.py:383
+#: src/osha/oira/client/report.py:479
 msgid "header_oira_report_consultation"
 msgstr "Työntekijöiden kuuleminen"
 
-#. Default: The undersigned hereby declare that the workers have been
-#. consulted
+#. Default: The undersigned hereby declare that the workers have been consulted
 #. on the content of this document.
-#: src/osha/oira/client/survey.py:392
+#: src/osha/oira/client/report.py:488
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
 "Allekirjoittaa vakuuttaa, että työntekijöitä on kuultu tämän dokumentin "
 "sisällöstä."
 
 #. Default: On behalf of the employer:
-#: src/osha/oira/client/survey.py:405
+#: src/osha/oira/client/report.py:501
 msgid "oira_consultation_employer"
 msgstr "Työnantajan puolesta:"
 
 #. Default: On behalf of the workers:
-#: src/osha/oira/client/survey.py:407
+#: src/osha/oira/client/report.py:503
 msgid "oira_consultation_workers"
 msgstr "Työntekijöiden puolesta:"
 
 #. Default: Date:
-#: src/osha/oira/client/survey.py:416
+#: src/osha/oira/client/report.py:512
 msgid "oira_survey_date"
 msgstr "Päivämäärä:"
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/client/survey.py:457
+#: src/osha/oira/client/report.py:559
 msgid "header_oira_report_download"
 msgstr "OiRA-raportti: \"${title}\""
 
 #. Default: Contents
-#: src/osha/oira/client/survey.py:476
+#: src/osha/oira/client/report.py:578
 #: src/osha/oira/client/templates/report_actionplan.pt:17
 #: src/osha/oira/client/templates/report_identification.pt:16
 msgid "toc_header"
 msgstr "Sisältö"
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/client/survey.py:481
+#: src/osha/oira/client/report.py:583
 #: src/osha/oira/client/templates/report_actionplan.pt:39
 #: src/osha/oira/client/templates/report_actionplan.pt:72
 msgid "header_present_risks"
@@ -920,37 +906,37 @@ msgstr ""
 "Riskit, jotka on tunnistettu, arvioitu ja joilla on toimintasuunnitelma"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/client/survey.py:483
+#: src/osha/oira/client/report.py:586
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
-msgstr ""
-"Riskit, jotka on tunnistettu, mutta joilla EI ole toimintasuunnitelmaa"
+msgstr "Riskit, jotka on tunnistettu, mutta joilla EI ole toimintasuunnitelmaa"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
-#: src/osha/oira/client/survey.py:485
+#: src/osha/oira/client/report.py:589
 #: src/osha/oira/client/templates/report_actionplan.pt:55
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
-msgstr "Vaarat/ongelmat, jotka on \"pantu parkkiin\" ja joita vielä käsitellään"
+msgstr ""
+"Vaarat/ongelmat, jotka on \"pantu parkkiin\" ja joita vielä käsitellään"
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
-#: src/osha/oira/client/survey.py:487
+#: src/osha/oira/client/report.py:592
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
 msgstr "Riskien/vaarojen hallinta toteutuu tai niitä ei esiinny työpaikalla"
 
 #. Default: Action plan ${title}
-#: src/osha/oira/client/survey.py:512
+#: src/osha/oira/client/report.py:619
 msgid "filename_report_actionplan"
 msgstr "Toimintasuunnitelma ${title}"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision
 #. date ${date}.
-#: src/osha/oira/client/survey.py:590
+#: src/osha/oira/client/report.py:703
 msgid "report_identification_revision"
 msgstr ""
 "Tämä dokumentti perustui OiRA-työkaluun '${title}', version päivämäärä "
@@ -958,12 +944,11 @@ msgstr ""
 
 #. Default: This report was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/client/survey.py:624
+#: src/osha/oira/client/report.py:741
 #: src/osha/oira/client/templates/report_actionplan.pt:302
 msgid "report_survey_revision"
 msgstr ""
-"Tämä raportti perustui OiRA-työkaluun '${title}', version päivämäärä "
-"${date}."
+"Tämä raportti perustui OiRA-työkaluun '${title}', version päivämäärä ${date}."
 
 #. Default: OiRA - Online interactive Risk Assessment
 #: src/osha/oira/client/templates/actionplan.pt:12
@@ -1032,16 +1017,15 @@ msgstr ""
 "sellaiselle tasolle, että niille altistuvien terveys ja turvallisuus eivät "
 "ole vaarassa?"
 
-#. Default: Once you have decided how to eliminate or reduce a particular
-#. risk,
+#. Default: Once you have decided how to eliminate or reduce a particular risk,
 #. then you describe the specific action(s) required to achieve this. You
 #. should also include details of the level of expertise and/or other
 #. requirements needed for those actions to be effective.
 #: src/osha/oira/client/templates/actionplan.pt:42
 msgid "expl_actionplan_7"
 msgstr ""
-"Kun olet päättänyt, miten tietyn riskin voi poistaa tai pienentää, kuvaa sen"
-" saavuttamiseksi tarvittavat toimenpiteet. Sinun tulee myös mainita näihin "
+"Kun olet päättänyt, miten tietyn riskin voi poistaa tai pienentää, kuvaa sen "
+"saavuttamiseksi tarvittavat toimenpiteet. Sinun tulee myös mainita näihin "
 "toimenpiteisiin tarvittava asiantuntemuksen taso ja/tai muut vaatimukset."
 
 #. Default: No risks were identified. Please proceed directly to the report.
@@ -1373,16 +1357,15 @@ msgstr ""
 
 #. Default: The European Agency for Safety and Health at Work and the
 #. organisations involved will not be liable for any false, inaccurate,
-#. inappropriate or incomplete information stored in the OiRA tool or any
-#. other
+#. inappropriate or incomplete information stored in the OiRA tool or any other
 #. damages as a result of using the software.
 #: src/osha/oira/client/templates/disclaimer.pt:26
 msgid "disclaimer_tool_information"
 msgstr ""
-"Euroopan työterveys- ja työturvallisuusvirasto ja osallistuvat organisaatiot"
-" eivät ole vastuussa OiRA-työkalunn tallennetuista vääristä, virheellisistä,"
-" asiattomista tai epätäydellisistä tiedoista tai muista ohjelmiston käytöstä"
-" aiheutuvista vahingoista."
+"Euroopan työterveys- ja työturvallisuusvirasto ja osallistuvat organisaatiot "
+"eivät ole vastuussa OiRA-työkalunn tallennetuista vääristä, virheellisistä, "
+"asiattomista tai epätäydellisistä tiedoista tai muista ohjelmiston käytöstä "
+"aiheutuvista vahingoista."
 
 #. Default: Moreover, an OiRA tool is not intended to cover all the risks of
 #. every workplace but to help you put the risk assessment process into
@@ -1393,8 +1376,8 @@ msgstr ""
 msgid "disclaimer_risk_coverage"
 msgstr ""
 "OiRA-työkalun tarkoituksena ei ole kattaa jokaisen työpaikan kaikkia "
-"riskejä, vaan auttaa sinua toteuttamaan käytännössä riskinarviointiprosessi."
-" OiRA-työkalu on muokattava yrityksesi viitekehykseen, jotta se voi olla "
+"riskejä, vaan auttaa sinua toteuttamaan käytännössä riskinarviointiprosessi. "
+"OiRA-työkalu on muokattava yrityksesi viitekehykseen, jotta se voi olla "
 "tehokas – joitakin asioita täytynee lisätä, joitakin poistaa, jos ne eivät "
 "ole oleellisia."
 
@@ -1406,8 +1389,8 @@ msgstr ""
 msgid "disclaimer_interactions"
 msgstr ""
 "Työkalu esittää käytännöllisistä ja analyyttisistä syistä ongelmat/vaarat "
-"erikseen, mutta ne voivat olla yhteydessä toisiinsa työpaikoilla. Sen vuoksi"
-" on otettava huomioon tunnistettujen ongelmien tai riskitekijöiden "
+"erikseen, mutta ne voivat olla yhteydessä toisiinsa työpaikoilla. Sen vuoksi "
+"on otettava huomioon tunnistettujen ongelmien tai riskitekijöiden "
 "vuorovaikutus."
 
 #. Default: Therefore, EU-OSHA does not accept any liability for damages and
@@ -1434,8 +1417,8 @@ msgstr ""
 "siihen tallennettuja tietoja ei osata käyttää. EU-OSHA ei myöskään vastaa "
 "siinä tapauksessa, että OiRA-työkalun automaattisesti luotujen "
 "riskinarvointien raporttien tallennustoiminto ei ole käytettävissä.  Sen "
-"vuoksi työnantajan on varmistettava, että hänellä on aina tallennettu, oikea"
-" ja päivitetty riskinarviointi."
+"vuoksi työnantajan on varmistettava, että hänellä on aina tallennettu, oikea "
+"ja päivitetty riskinarviointi."
 
 #. Default: Regions
 #: src/osha/oira/client/templates/frontpage.pt:406
@@ -1478,8 +1461,7 @@ msgstr "Seuraava"
 msgid "header_profile"
 msgstr "Muokkaa organisaatiosi riskinarviointi"
 
-#. Default: In order to tailor the risk assessment to your organisation you
-#. may
+#. Default: In order to tailor the risk assessment to your organisation you may
 #. be asked to:
 #: src/osha/oira/client/templates/profile.pt:18
 msgid "expl_profile"
@@ -1601,8 +1583,8 @@ msgid "report_intro"
 msgstr ""
 "Nyt kun olet vienyt päätökseen organisaatiosi riskien tunnistamisen ja "
 "laatinut toimintasuunnitelman, voit laatia raportin, joka sisältää kaikki "
-"tulokset. Voit halutessasi kirjoittaa alla olevaan kenttään tähän raporttiin"
-" lisättäviä kommentteja."
+"tulokset. Voit halutessasi kirjoittaa alla olevaan kenttään tähän raporttiin "
+"lisättäviä kommentteja."
 
 #. Default: Please leave any extra comments that should be included in the
 #. report in this field.
@@ -1678,26 +1660,23 @@ msgstr ""
 msgid "report_measure_budget"
 msgstr "Tämän toimenpiteen budjetti on ${amount}."
 
-#. Default: The following risks have not yet been answered. Please do so at
-#. the
+#. Default: The following risks have not yet been answered. Please do so at the
 #. soonest possibility.
 #: src/osha/oira/client/templates/report_actionplan.pt:189
 msgid "desc_unanswered_risks"
 msgstr ""
-"Seuraaville riskeille ei ole vielä annettu vastausta. Anna vastaus niin pian"
-" kuin mahdollista."
+"Seuraaville riskeille ei ole vielä annettu vastausta. Anna vastaus niin pian "
+"kuin mahdollista."
 
-#. Default: This risk is not present in your organisation, but since the
-#. sector
-#. organisation considers this one of the priority risks it must be included
-#. in
+#. Default: This risk is not present in your organisation, but since the sector
+#. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:167
+#: src/osha/oira/client/templates/webhelpers.pt:169
 msgid "top5_risk_not_present"
 msgstr ""
-"Tätä riskiä ei ole organisaatiossasi, mutta kun toimialan organisaatio pitää"
-" tätä ensisijaisena riskinä, se on sisällytettävä tähän raporttiin."
+"Tätä riskiä ei ole organisaatiossasi, mutta kun toimialan organisaatio pitää "
+"tätä ensisijaisena riskinä, se on sisällytettävä tähän raporttiin."
 
 #. Default: You are about to print the report... please complete the optional
 #. form and then proceed.
@@ -1785,7 +1764,7 @@ msgstr "Sivuuta tämä vaihe"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:179
+#: src/osha/oira/client/templates/webhelpers.pt:181
 msgid "warn_risk_present"
 msgstr "Vastasit kieltävästi yllä olevaan toteamukseen."
 
@@ -1795,9 +1774,9 @@ msgstr "Lataa ja tulosta raporttisi"
 
 #: src/osha/oira/client/templates/report_landing.pt:23
 msgid ""
-"Save the report on your computer and print it. You can also modify it or add"
-" more information. Please note that changes made on your pc will NOT be "
-"saved in the OiRA tool"
+"Save the report on your computer and print it. You can also modify it or add "
+"more information. Please note that changes made on your pc will NOT be saved "
+"in the OiRA tool"
 msgstr ""
 "Tallenna raportti tietokoneellesi ja tulosta se. Voit myös muuttaa sitä ja "
 "lisätä tietoja.Huomaa, että henkilökohtaiselle tietokoneellesi tehdyt "
@@ -1825,8 +1804,8 @@ msgstr "Seuraa ja arvioi, onko tarpeellisiin toimiin ryhdytty."
 
 #: src/osha/oira/client/templates/report_landing.pt:30
 msgid ""
-"Record any revision if circumstances change (new machines, new workers, as a"
-" result of findings of any accident investigations, etc.)"
+"Record any revision if circumstances change (new machines, new workers, as a "
+"result of findings of any accident investigations, etc.)"
 msgstr ""
 "Kirjaa jokainen tarkistus, jos olosuhteet muuttuvat (uudet koneet, uudet "
 "työntekijät, tuloksena onnettomuustutkintojen havaintojen perusteella jne.)"
@@ -1910,9 +1889,8 @@ msgid ""
 "reverted. Are you sure you want to continue?"
 msgstr ""
 "Nykyinen teksti korvaa aiemmat toimenpide-ehdotukset riskin pienentämiseksi "
-"tai poistamiseksi sekä toimenpiteiden toteuttamisessa tarvittavan "
-"osaamisen/asiantuntemuksen. Tätä toimintoa ei voi kumota. Haluatko varmasti "
-"jatkaa?"
+"tai poistamiseksi sekä toimenpiteiden toteuttamisessa tarvittavan osaamisen/"
+"asiantuntemuksen. Tätä toimintoa ei voi kumota. Haluatko varmasti jatkaa?"
 
 #. Default: Add
 #: src/osha/oira/client/templates/risk_actionplan.pt:24
@@ -1957,8 +1935,8 @@ msgid "actionplan_measure_tooltip"
 msgstr ""
 "Kuvaa: 1) mikä on yleinen toimintatapasi riskin poistamiseen tai (jos riski "
 "ei ole vältettävissä) sen pienentämiseen 2) tämän toimintatavan (riskin "
-"poistaminen tai pienentäminen) vaatimat toimenpiteet 3) toimenpiteen vaatima"
-" asiantuntemuksen taso, esim. ”terve järki (tietoja työturvallisuudesta ei "
+"poistaminen tai pienentäminen) vaatimat toimenpiteet 3) toimenpiteen vaatima "
+"asiantuntemuksen taso, esim. ”terve järki (tietoja työturvallisuudesta ei "
 "vaadita)”, ”ei erityistä työturvallisuusasiantuntemusta, mutta "
 "työturvallisuuden minimaalinen tuntemus tai koulutus ja/tai "
 "työturvallisuusopastus vaadittu”, tai ”työturvallisuusasiantuntija”. Voit "
@@ -1972,13 +1950,11 @@ msgstr ""
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
 "Nimitä yrityksessäsi tästä toimenpiteessä vastuussa oleva henkilö. Tämä "
-"henkilö on valtuutettu suunnitelmassa kuvattujen vaiheiden toteuttamiseen "
-"ja/tai varmistamaan, että ne suoritetaan."
+"henkilö on valtuutettu suunnitelmassa kuvattujen vaiheiden toteuttamiseen ja/"
+"tai varmistamaan, että ne suoritetaan."
 
-#. Default: Although some measures do not cost any money, most do. The
-#. measures
-#. should therefore be budgeted for; include them in the annual budget round
-#. if
+#. Default: Although some measures do not cost any money, most do. The measures
+#. should therefore be budgeted for; include them in the annual budget round if
 #. necessary.
 #: src/osha/oira/client/templates/risk_actionplan.pt:125
 msgid "actionplan_measure_budget_tooltip"
@@ -2017,7 +1993,7 @@ msgstr "Kuukausi"
 
 #. Default: Year
 #: src/osha/oira/client/templates/risk_actionplan.pt:155
-#: src/osha/oira/content/statistics.py:34
+#: src/osha/oira/content/statistics.py:35
 msgid "label_year"
 msgstr "Vuosi"
 
@@ -2270,8 +2246,8 @@ msgstr ""
 "Voit tallentaa useamman kuin yhden istunnon, jos olet antanut niille eri "
 "nimet. Pidä muistissa sähköpostiosoitteesi, salasanasi ja otsikko, jonka "
 "olet antanut OiRA-työkaluistunnolle. Voit kirjautua ulos napauttamalla "
-"uloskirjautumispainiketta. Kirjaudut myös ulos, kun laitat selaimesi kiinni."
-" Turvallisuussyistä kannattaa kirjautua ulos."
+"uloskirjautumispainiketta. Kirjaudut myös ulos, kun laitat selaimesi kiinni. "
+"Turvallisuussyistä kannattaa kirjautua ulos."
 
 #: src/osha/oira/client/templates/sessions.pt:112
 msgid ""
@@ -2321,64 +2297,64 @@ msgstr "Vuorovaikutteisesti verkossa"
 msgid "oira_name_line_2"
 msgstr "Riskinarviointi"
 
-#: src/osha/oira/client/templates/webhelpers.pt:104
+#: src/osha/oira/client/templates/webhelpers.pt:105
 msgid "Unvisited"
 msgstr "Vastaus puuttuu"
 
-#: src/osha/oira/client/templates/webhelpers.pt:105
+#: src/osha/oira/client/templates/webhelpers.pt:106
 msgid "Postponed"
 msgstr "Lykätty"
 
-#: src/osha/oira/client/templates/webhelpers.pt:106
+#: src/osha/oira/client/templates/webhelpers.pt:107
 msgid "Risk not present"
 msgstr "Kyllä"
 
-#: src/osha/oira/client/templates/webhelpers.pt:107
+#: src/osha/oira/client/templates/webhelpers.pt:108
 msgid "Risk present"
 msgstr "Huomio"
 
 #. Default: Produced by ${EU-OSHA}.
-#: src/osha/oira/client/templates/webhelpers.pt:121
+#: src/osha/oira/client/templates/webhelpers.pt:122
 msgid "appendix_produced_by"
 msgstr "Valmistaja ${EU-OSHA}."
 
 #. Default: About
-#: src/osha/oira/client/templates/webhelpers.pt:124
+#: src/osha/oira/client/templates/webhelpers.pt:125
 msgid "appendix_about"
 msgstr "Tietoja"
 
 #. Default: Privacy
-#: src/osha/oira/client/templates/webhelpers.pt:126
+#: src/osha/oira/client/templates/webhelpers.pt:127
 msgid "appendix_privacy"
 msgstr "Yksityisyys"
 
 #. Default: Disclaimer
-#: src/osha/oira/client/templates/webhelpers.pt:128
+#: src/osha/oira/client/templates/webhelpers.pt:129
 msgid "appendix_disclaimer"
 msgstr "Vastuuvapautuslauseke"
 
 #. Default: GPL License
-#: src/osha/oira/client/templates/webhelpers.pt:130
+#: src/osha/oira/client/templates/webhelpers.pt:131
 msgid "appendix_gpl_license"
 msgstr "GPL-lisenssi"
 
-#: src/osha/oira/client/templates/webhelpers.pt:132
+#: src/osha/oira/client/templates/webhelpers.pt:133
 msgid "CC License"
 msgstr "CC-lisenssi"
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:194
-#: src/osha/oira/client/templates/webhelpers.pt:208
+#: src/osha/oira/client/templates/webhelpers.pt:196
+#: src/osha/oira/client/templates/webhelpers.pt:210
 msgid "header_legal_references"
 msgstr "Oikeudelliset ja toimintaperiaatteita koskevat viitteet"
 
 #. Default: Hide
-#: src/osha/oira/client/templates/webhelpers.pt:211
+#: src/osha/oira/client/templates/webhelpers.pt:213
 msgid "action_hide"
 msgstr "Piilota"
 
 #. Default: Show
-#: src/osha/oira/client/templates/webhelpers.pt:215
+#: src/osha/oira/client/templates/webhelpers.pt:217
 msgid "action_show"
 msgstr "Näytä"
 
@@ -2499,73 +2475,73 @@ msgid "menu_statistics"
 msgstr "Tilastot"
 
 #. Default: Period
-#: src/osha/oira/content/statistics.py:39
+#: src/osha/oira/content/statistics.py:40
 msgid "label_period"
 msgstr "Ajanjakso"
 
 #. Default: Report Type
-#: src/osha/oira/content/statistics.py:69
+#: src/osha/oira/content/statistics.py:70
 msgid "label_report_type"
 msgstr "Raportin tyyppi"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:75
+#: src/osha/oira/content/statistics.py:76
 msgid "label_report_countries"
 msgstr "Maa"
 
 #. Default: Tool
-#: src/osha/oira/content/statistics.py:82
+#: src/osha/oira/content/statistics.py:83
 msgid "label_report_tools"
 msgstr "Työväline"
 
 #. Default: Report Period
-#: src/osha/oira/content/statistics.py:89
+#: src/osha/oira/content/statistics.py:90
 msgid "label_report_period"
 msgstr "Raportointiajanjakso"
 
 #. Default: File Format
-#: src/osha/oira/content/statistics.py:94
+#: src/osha/oira/content/statistics.py:95
 msgid "label_report_file_format"
 msgstr "Tiedostomuoto"
 
 #. Default: Statistics Reporting
-#: src/osha/oira/content/statistics.py:269
-#: src/osha/oira/content/statistics.py:297
-#: src/osha/oira/content/statistics.py:330
+#: src/osha/oira/content/statistics.py:270
+#: src/osha/oira/content/statistics.py:298
+#: src/osha/oira/content/statistics.py:338
 msgid "title_statistics"
 msgstr "Tilastot"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:271
+#: src/osha/oira/content/statistics.py:272
 msgid "label_country"
 msgstr "Maa"
 
-#: src/osha/oira/content/statistics.py:275
-#: src/osha/oira/content/statistics.py:303
-#: src/osha/oira/content/statistics.py:336
+#: src/osha/oira/content/statistics.py:276
+#: src/osha/oira/content/statistics.py:304
+#: src/osha/oira/content/statistics.py:344
 msgid "Submit"
 msgstr "Lähetä"
 
 #. Default: Sector
-#: src/osha/oira/content/statistics.py:299
+#: src/osha/oira/content/statistics.py:300
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
 msgid "Sector"
 msgstr "Toimiala"
 
 #. Default: Global
-#: src/osha/oira/content/statistics.py:332
+#: src/osha/oira/content/statistics.py:340
 msgid "label_global"
 msgstr "Globaali"
 
 #. Default: Include a logo which links to an external website.
-#: src/osha/oira/content/survey.py:25
+#: src/osha/oira/content/survey.py:24
 msgid "label_external_site_enabled"
 msgstr "Liitä mukaan ulkopuoliselle verkkosivustolle linkittävä logo."
 
 #. Default: Tick this option if you would like to create a hyperlink on the
 #. OiRA tool which points to an external website. The hyperlink will be in the
 #. form of a logo image.
-#: src/osha/oira/content/survey.py:28
+#: src/osha/oira/content/survey.py:27
 msgid "help_external_site_enabled"
 msgstr ""
 "Valitse tämä vaihtoehto, jos haluat luoda OiRA-työvälineeseen hyperlinkin, "
@@ -2573,40 +2549,39 @@ msgstr ""
 "kuva."
 
 #. Default: External site URL
-#: src/osha/oira/content/survey.py:40
+#: src/osha/oira/content/survey.py:39
 msgid "label_external_site_url"
 msgstr "Ulkopuolisen sivuston URL"
 
-#. Default: This is the URL of an external site that is linked to. Clicking
-#. the
+#. Default: This is the URL of an external site that is linked to. Clicking the
 #. logo or the name will take the user to this URL.
-#: src/osha/oira/content/survey.py:41
+#: src/osha/oira/content/survey.py:40
 msgid "help__external_site_url"
 msgstr ""
 "Tämä on URL linkitetylle ulkopuoliselle sivustolle. Klikkaamalla logoa tai "
 "nimeä käyttäjä pääsee tähän URLiin."
 
 #. Default: External site name
-#: src/osha/oira/content/survey.py:51
+#: src/osha/oira/content/survey.py:50
 msgid "label_external_site_name"
 msgstr "Ulkopuolisen sivuston nimi"
 
 #. Default: This is the name of the external site that is linked to. It will
 #. appear next to the logo.
-#: src/osha/oira/content/survey.py:52
+#: src/osha/oira/content/survey.py:51
 msgid "help_external_site_name"
 msgstr ""
 "Tämä on linkitetyn ulkopuolisen sivuston nimi. Se ilmestyy näkyviin  logon "
 "viereen."
 
 #. Default: External site logo
-#: src/osha/oira/content/survey.py:61
+#: src/osha/oira/content/survey.py:60
 msgid "label_external_site_logo"
 msgstr "Ulkopuolisen sivuston logo"
 
 #. Default: Upload an image. Make sure your image is of format png, jpg or gif
 #. and does not contain any special characters.
-#: src/osha/oira/content/survey.py:62
+#: src/osha/oira/content/survey.py:61
 msgid "help_image_upload"
 msgstr ""
 "Lähetä kuva. Varmista, että kuvasi formaatti on png, jpg tai gif ja että "
@@ -2813,44 +2788,29 @@ msgstr "Monikohtainen kysymys"
 msgid "Not provided"
 msgstr "Ei saatavilla"
 
-#. Default: Evaluation phase
-#: src/osha/oira/content/templates/survey_view.pt:24
-msgid "label_evaluation_phase"
-msgstr "Arviointivaihe"
-
-#. Default: Optional
-#: src/osha/oira/content/templates/survey_view.pt:25
-msgid "optional"
-msgstr "Valinnainen"
-
-#. Default: Mandatory
-#: src/osha/oira/content/templates/survey_view.pt:26
-msgid "mandatory"
-msgstr "Pakollinen"
-
 #. Default: Classification code
-#: src/osha/oira/content/templates/survey_view.pt:27
+#: src/osha/oira/content/templates/survey_view.pt:24
 msgid "label_classification_code"
 msgstr "Luokittelukoodi"
 
 #. Default: Not set
+#: src/osha/oira/content/templates/survey_view.pt:26
 #: src/osha/oira/content/templates/survey_view.pt:29
-#: src/osha/oira/content/templates/survey_view.pt:32
 msgid "not_set"
 msgstr "Ei asetettu"
 
 #. Default: Language
-#: src/osha/oira/content/templates/survey_view.pt:30
+#: src/osha/oira/content/templates/survey_view.pt:27
 msgid "label_language"
 msgstr "Kieli"
 
 #. Default: Modules and Profile Questions
-#: src/osha/oira/content/templates/survey_view.pt:36
+#: src/osha/oira/content/templates/survey_view.pt:33
 msgid "header_modules_and_profile_questions"
 msgstr "Moduulit ja profiilikysymykset"
 
 #. Default: This OiRA Tool has no modules.
-#: src/osha/oira/content/templates/survey_view.pt:38
+#: src/osha/oira/content/templates/survey_view.pt:35
 msgid "no_modules"
 msgstr "Tässä OiRA-työkalussa ei ole moduuleja."
 
@@ -2937,8 +2897,7 @@ msgstr ""
 "Tämä on suositeltu arviointialgoritmi, joka perustuu Kinneyn menetelmään"
 
 #. Default: This method involves risk assessment by Severity x Exposure,
-#. whereas these have to be understood as follows; Severity of injury linked
-#. to
+#. whereas these have to be understood as follows; Severity of injury linked to
 #. hazard - Exposure (Frequency) to the hazard
 #: src/osha/oira/content/templates/surveygroup_add.pt:94
 msgid "help_survey_evaluation_algorithm_simplified"
@@ -3030,8 +2989,8 @@ msgstr "Profiilikysymys"
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:8
 msgid ""
-"The basic architecture of an Online interactive Risk Assessment consists of:"
-" - profile questions (questions defining the company profile) - modules and "
+"The basic architecture of an Online interactive Risk Assessment consists of: "
+"- profile questions (questions defining the company profile) - modules and "
 "potentially sub-modules - risks (positive statements) Profile questions are "
 "used to determine whether particular modules apply to the end user at all "
 "(OPTIONAL), or whether they should be repeated a number of times "
@@ -3047,12 +3006,12 @@ msgstr ""
 "kysymykset) - moduulit ja mahdolliset alamoduulit - riskit (myönteiset "
 "toteamukset) Profiilikysymyksiä käytetään määrittämään, tarvitsevatko "
 "loppukäyttäjät tiettyjä moduuleja ollenkaan (VALINNAINEN) vai täytyykö ne "
-"toistaa ajoittain (TOISTETTAVA). Tällaiset kysymykset kysytään ENNEN riskien"
-" tunnistamista ja arviointia. Jos loppukäyttäjä ei vahvista, että "
-"valinnainen profiilikysymys on oleellinen (laittamalla rastin ruutuun), "
-"vastaava moduuli sivuutetaan kokonaan. Jos loppukäyttäjä antaa useamman kuin"
-" yhden vaihtoehdon toistettavaan profiilikysymykseen, vastaava moduuli "
-"toistetaan määritetyin väliajoin."
+"toistaa ajoittain (TOISTETTAVA). Tällaiset kysymykset kysytään ENNEN riskien "
+"tunnistamista ja arviointia. Jos loppukäyttäjä ei vahvista, että valinnainen "
+"profiilikysymys on oleellinen (laittamalla rastin ruutuun), vastaava moduuli "
+"sivuutetaan kokonaan. Jos loppukäyttäjä antaa useamman kuin yhden "
+"vaihtoehdon toistettavaan profiilikysymykseen, vastaava moduuli toistetaan "
+"määritetyin väliajoin."
 
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:8
 msgid "A sector is a national organisation for a specific type of industry."
@@ -3085,8 +3044,7 @@ msgstr "Oletko tietoinen kaikista riskeistä?"
 
 #. Default: Including the risks to your employees and your equipment? What if
 #. there is an accident with one of the machines? What if an employee is
-#. exposed to hazardous substances? A risk assessment helps you to define
-#. these
+#. exposed to hazardous substances? A risk assessment helps you to define these
 #. risks and tackle them head on. A risk assessment mainly consists of two
 #. parts: a <dynamic element> with all the risks in your company and an
 #. <dynamic element> with details of how to deal with these risks. These two
@@ -3101,8 +3059,8 @@ msgstr ""
 "korjaamaan ne. Riskinarvioinnissa on pääasiassa kaksi osaa: <dynamic "
 "element> sisältäen kaikki yrityksesi riskit ja <dynamic element> sisältäen "
 "keinot näiden riskien käsittelyyn. Näillä komponenteilla voit rajoittaa "
-"riskejä, joille työntekijäsi ja yrityksesi altistuvat ja siten taloudellista"
-" riskiä."
+"riskejä, joille työntekijäsi ja yrityksesi altistuvat ja siten taloudellista "
+"riskiä."
 
 #. Default: The assessment is not complicated
 #: src/osha/oira/templates/default_introduction.pt:9
@@ -3118,8 +3076,8 @@ msgstr "Arviointi ei ole monimutkainen"
 msgid "intro_not_complicated"
 msgstr ""
 "Monimutkainen? Ei todellakaan. Siihen tarvitaan vain hieman aikaa. "
-"Riskinarviointi on kuitenkin tärkeää. Niin tärkeää, että se on oikeudellinen"
-" vaatimus. Sille on syynsä. Jos riskejä ei ole arvioitu tai käsitelty "
+"Riskinarviointi on kuitenkin tärkeää. Niin tärkeää, että se on oikeudellinen "
+"vaatimus. Sille on syynsä. Jos riskejä ei ole arvioitu tai käsitelty "
 "kunnolla, sopivaa riskinhallintaprosessia ei voi käynnistää eikä "
 "asianmukaisia toimenpiteitä voi löytää tai ottaa käyttöön."
 
@@ -3135,8 +3093,8 @@ msgstr "Työntekijöiden kuuleminen ja osallistuminen"
 #: src/osha/oira/templates/default_introduction.pt:13
 msgid "intro_consultation_of_workers"
 msgstr ""
-"Riskinarvioinnin puitteissa työnantajan tulee osallistaa tasapainoisesti tai"
-" kuulla etukäteen hyvissä ajoin työntekijöitä tai työntekijöiden edustajia, "
+"Riskinarvioinnin puitteissa työnantajan tulee osallistaa tasapainoisesti tai "
+"kuulla etukäteen hyvissä ajoin työntekijöitä tai työntekijöiden edustajia, "
 "jotka ovat vastuussa työntekijöiden turvallisuudesta ja terveydestä."
 
 #. Default: The OiRA tool
@@ -3172,6 +3130,15 @@ msgstr ""
 msgid "message_invalid_login"
 msgstr ""
 "Väärät kirjautumistiedot. Jos olet unohtanut salasanasi, ${reset_password}."
+
+#~ msgid "label_evaluation_phase"
+#~ msgstr "Arviointivaihe"
+
+#~ msgid "optional"
+#~ msgstr "Valinnainen"
+
+#~ msgid "mandatory"
+#~ msgstr "Pakollinen"
 
 #~ msgid "Add ${name}"
 #~ msgstr "Lisää ${name}"

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-06-03 18:21+0200\n"
+"POT-Creation-Date: 2013-10-22 10:42+0200\n"
 "PO-Revision-Date: 2013-08-15 11:20+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-"Language: \n"
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:33
@@ -29,8 +29,7 @@ msgstr ""
 "Popište svůj všeobecný přístup k eliminaci nebo (pokud se nedá riziku "
 "vyhnout) ke snížení rizika."
 
-#. Default: Describe the specific action(s) required to implement this
-#. approach
+#. Default: Describe the specific action(s) required to implement this approach
 #. (to eliminate or to reduce the risk).
 #: src/osha/oira/manual_translations.py:7
 msgid "help_measure_prevention_plan"
@@ -97,8 +96,8 @@ msgstr "Zrušit účet"
 
 #: src/osha/oira/manual_translations.py:29
 msgid ""
-"Please bear in mind that by changing the email address, your login name will"
-" also change."
+"Please bear in mind that by changing the email address, your login name will "
+"also change."
 msgstr ""
 "Mějte prosím na paměti, že se změnou e-mailové adresy se také změní vaše "
 "přihlašovací jméno."
@@ -119,9 +118,7 @@ msgid "nav_surveys"
 msgstr "Nástroje OiRA"
 
 #. Default: OiRA Tool
-#: src/osha/oira/manual_translations.py:34 src/osha/oira/vocabularies.py:20
-#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:4
-#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:5
+#: src/osha/oira/manual_translations.py:34 src/osha/oira/vocabularies.py:22
 msgid "Survey"
 msgstr "Nástroj OiRA"
 
@@ -166,8 +163,7 @@ msgstr ""
 #. Tool.
 #: src/osha/oira/manual_translations.py:43
 msgid "intro_select_sector"
-msgstr ""
-"Zvolte sektor, pro který chcete shlédnout nebo kopírovat nástroj OiRA."
+msgstr "Zvolte sektor, pro který chcete shlédnout nebo kopírovat nástroj OiRA."
 
 #. Default: This is the title of this OiRA Tool version. This name is never
 #. shown to users.
@@ -233,8 +229,7 @@ msgstr "Řešení"
 msgid "Succesfully published the survey"
 msgstr "Úspěšně publikovaný nástroj OiRA"
 
-#. Default: Succesfully created a preview for the OiRA Tool. It can be
-#. accessed
+#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url}.
 #: src/osha/oira/manual_translations.py:65
 msgid ""
@@ -254,16 +249,15 @@ msgstr "Vytvořit duplikát zvoleného nástroje OiRA"
 #. Default: If this is to be "optional", it must be formulated so that it is
 #. answerable with YES (the end-user will have to tick a box) or NO (e.g. "Do
 #. you work with the public?"). If this is to be "repeatable", it must be
-#. formulated as a prompt to fill in multiple values (e.g. "List your
-#. different
+#. formulated as a prompt to fill in multiple values (e.g. "List your different
 #. work locations").
 #: src/osha/oira/manual_translations.py:71
 msgid "help_profilequestion_question"
 msgstr ""
 "Pokud má být tohle \"volitelné\", musí to být formulováno tak, aby se dalo "
 "zodpovědět pomocí ANO (koncový uživatel bude muset zatrhnout políčko) nebo "
-"NE (např. \"Pracujete s veřejností?\"). Pokud má být tohle \"opakovatelné\","
-" musí to být formulováno jako výzva k vyplnění mnoha hodnot (např. "
+"NE (např. \"Pracujete s veřejností?\"). Pokud má být tohle \"opakovatelné\", "
+"musí to být formulováno jako výzva k vyplnění mnoha hodnot (např. "
 "\"Vyjmenujte svá různá pracoviště\")."
 
 #. Default: Include any relevant information that may be helpful for the
@@ -280,8 +274,7 @@ msgid "help_module_optional"
 msgstr "Umožňuje koncovému uživateli přeskočit tento modul a vše uvnitř něj."
 
 #. Default: The question to ask the end-user if this module is optional. It
-#. must be formulated so that it is answerable with YES (the end-user will
-#. have
+#. must be formulated so that it is answerable with YES (the end-user will have
 #. to tick a box) or NO
 #: src/osha/oira/manual_translations.py:80
 msgid "help_module_question"
@@ -316,8 +309,7 @@ msgstr ""
 "Toto je krátké kladné prohlášení o možném riziku (např. Budova je dobře "
 "udržovaná.)"
 
-#. Default: This is the inverse of the affirmative statement (e.g. The
-#. building
+#. Default: This is the inverse of the affirmative statement (e.g. The building
 #. is not well maintained.)
 #: src/osha/oira/manual_translations.py:90
 msgid "help_problem_description"
@@ -342,8 +334,8 @@ msgstr "Prioritní riziko"
 #: src/osha/oira/manual_translations.py:95
 msgid "help_risk_type"
 msgstr ""
-"Prioritní riziko\" je jedno z největších rizik v sektoru. \"Riziko\" se týká"
-" pracoviště nebo prováděné práce. \"Politika\" označuje dohody, postupy a "
+"Prioritní riziko\" je jedno z největších rizik v sektoru. \"Riziko\" se týká "
+"pracoviště nebo prováděné práce. \"Politika\" označuje dohody, postupy a "
 "rozhodnutí vedení."
 
 #. Default: You can help the end-user by selecting a default priority. He/she
@@ -351,8 +343,8 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:99
 msgid "help_default_priority"
 msgstr ""
-"Můžete pomoci koncovému uživateli výběrem výchozí priority. Koncový uživatel"
-" může prioritu změnit."
+"Můžete pomoci koncovému uživateli výběrem výchozí priority. Koncový uživatel "
+"může prioritu změnit."
 
 #. Default: Indicate the severity if this risk occurs.
 #: src/osha/oira/manual_translations.py:101
@@ -486,8 +478,7 @@ msgid "help_finalwords"
 msgstr "Všeobecná konečná doporučení."
 
 #. Default: It is possible for you to print out the contents of the tool to
-#. enable you to look for the information at the relevant workplace (by
-#. walking
+#. enable you to look for the information at the relevant workplace (by walking
 #. around and looking at what could cause harm, or by consulting the workers
 #. and/or their representatives about problems they have encountered). You can
 #. then introduce the information into the tool.
@@ -520,8 +511,7 @@ msgstr ""
 msgid "list_of_risks"
 msgstr "obsah nástroje"
 
-#. Default: No hazards or problems were spotted. Please proceed directly to
-#. the
+#. Default: No hazards or problems were spotted. Please proceed directly to the
 #. action plan step.
 #: src/osha/oira/manual_translations.py:152
 msgid "help_evaluation_empty"
@@ -542,16 +532,14 @@ msgstr ""
 msgid "title_help_unpublished"
 msgstr "Odstraňte tento nástroj OiRA z online klienta."
 
-#. Default: Succesfully created a preview for the OiRA Tool. It can be
-#. accessed
+#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url} .
 #: src/osha/oira/manual_translations.py:163
 msgid "message_preview_success"
 msgstr ""
 "Úspěšně vytvořený náhled nástroje OiRA. Přístup k němu je možný na ${url} ."
 
-#. Default: Please note that by deleting your account, you will also delete
-#. all
+#. Default: Please note that by deleting your account, you will also delete all
 #. your sessions. Please make sure you download your reports from the Report
 #. step prior to deleting your account, if you want to keep any.
 #: src/osha/oira/manual_translations.py:166
@@ -690,31 +678,31 @@ msgstr "Smazat toto opatření"
 msgid "Add Solution"
 msgstr "Přidat Opatření"
 
-#: src/osha/oira/vocabularies.py:23
+#: src/osha/oira/vocabularies.py:25
 msgid "EU-OSHA Overview"
 msgstr "Přehled agentury EU-OSHA"
 
-#: src/osha/oira/vocabularies.py:24 src/osha/oira/vocabularies.py:27
+#: src/osha/oira/vocabularies.py:26 src/osha/oira/vocabularies.py:29
 msgid "Country"
 msgstr "Země"
 
-#: src/osha/oira/vocabularies.py:54
+#: src/osha/oira/vocabularies.py:56
 msgid "Whole year"
 msgstr "Celý rok"
 
-#: src/osha/oira/vocabularies.py:57
+#: src/osha/oira/vocabularies.py:59
 msgid "1st Quarter"
 msgstr "1. čtvrtletí"
 
-#: src/osha/oira/vocabularies.py:58
+#: src/osha/oira/vocabularies.py:60
 msgid "2nd Quarter"
 msgstr "2. čtvrtletí"
 
-#: src/osha/oira/vocabularies.py:59
+#: src/osha/oira/vocabularies.py:61
 msgid "3rd Quarter"
 msgstr "3. čtvrtletí"
 
-#: src/osha/oira/vocabularies.py:60
+#: src/osha/oira/vocabularies.py:62
 msgid "4th Quarter"
 msgstr "4. čtvrtletí"
 
@@ -744,32 +732,32 @@ msgid "Enter the names of each location"
 msgstr "Uveďte názvy všech míst"
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:80
+#: src/osha/oira/client/report.py:105
 msgid "report_timeline_measure"
 msgstr "Opatření"
 
 #. Default: End date
-#: src/osha/oira/client/report.py:83
+#: src/osha/oira/client/report.py:108
 msgid "report_timeline_end_date"
 msgstr "Datum splnění"
 
 #. Default: Responsible
-#: src/osha/oira/client/report.py:86
+#: src/osha/oira/client/report.py:111
 msgid "report_timeline_responsible"
 msgstr "Odpovědnost"
 
 #. Default: Status (planned, in process, implemented)
-#: src/osha/oira/client/report.py:87
+#: src/osha/oira/client/report.py:112
 msgid "report_timeline_progress"
 msgstr "Stav (nevyřízeno/rozpracováno/splněno)"
 
 #. Default: Timeline
-#: src/osha/oira/client/report.py:97
+#: src/osha/oira/client/report.py:122
 msgid "report_timeline_title"
 msgstr "Časový rozvrh"
 
 #. Default: low
-#: src/osha/oira/client/survey.py:263
+#: src/osha/oira/client/report.py:353
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -779,7 +767,7 @@ msgid "risk_priority_low"
 msgstr "nízká"
 
 #. Default: medium
-#: src/osha/oira/client/survey.py:265
+#: src/osha/oira/client/report.py:355
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -789,7 +777,7 @@ msgid "risk_priority_medium"
 msgstr "střední"
 
 #. Default: high
-#: src/osha/oira/client/survey.py:267
+#: src/osha/oira/client/report.py:357
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -799,7 +787,7 @@ msgid "risk_priority_high"
 msgstr "vysoká"
 
 #. Default: This is a ${priority_value} priority risk.
-#: src/osha/oira/client/survey.py:269
+#: src/osha/oira/client/report.py:359
 #: src/osha/oira/client/templates/report_actionplan.pt:93
 #: src/osha/oira/client/templates/report_actionplan.pt:173
 #: src/osha/oira/client/templates/report_actionplan.pt:209
@@ -809,109 +797,108 @@ msgid "risk_priority"
 msgstr "Toto je ${priority_value} prioritní riziko."
 
 #. Default: Measure
-#: src/osha/oira/client/survey.py:296 src/osha/oira/client/survey.py:318
+#: src/osha/oira/client/report.py:386 src/osha/oira/client/report.py:411
 #: src/osha/oira/client/templates/risk_actionplan.pt:64
 msgid "header_measure_single"
 msgstr "Krok"
 
 #. Default: Measure ${index}
-#: src/osha/oira/client/survey.py:298
+#: src/osha/oira/client/report.py:389
 #: src/osha/oira/client/templates/report_actionplan.pt:99
 msgid "header_measure"
 msgstr "Krok ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
-#: src/osha/oira/client/survey.py:325
+#: src/osha/oira/client/report.py:418
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
 msgid "label_measure_action_plan"
 msgstr "Obecný přístup (k eliminaci nebo snížení rizika)"
 
 #. Default: Specific action(s) required to implement this approach
-#: src/osha/oira/client/survey.py:327
+#: src/osha/oira/client/report.py:420
 #: src/osha/oira/client/templates/risk_actionplan.pt:98
 msgid "label_measure_prevention_plan"
 msgstr "Specifický/é krok/y požadované k implementaci tohoto přístupu"
 
 #. Default: Level of expertise and/or requirements needed
-#: src/osha/oira/client/survey.py:329
+#: src/osha/oira/client/report.py:422
 #: src/osha/oira/client/templates/risk_actionplan.pt:107
 msgid "label_measure_requirements"
 msgstr "Míra potřebných znalostí a/nebo požadavků"
 
 #. Default: Who is responsible?
-#: src/osha/oira/client/survey.py:331
+#: src/osha/oira/client/report.py:424
 #: src/osha/oira/client/templates/risk_actionplan.pt:119
 msgid "label_action_plan_responsible"
 msgstr "Kdo je odpovědný?"
 
 #. Default: Budget
-#: src/osha/oira/client/survey.py:333
+#: src/osha/oira/client/report.py:426
 #: src/osha/oira/client/templates/risk_actionplan.pt:124
 msgid "label_action_plan_budget"
 msgstr "Rozpočet"
 
 #. Default: Planning start
-#: src/osha/oira/client/survey.py:334
+#: src/osha/oira/client/report.py:427
 #: src/osha/oira/client/templates/risk_actionplan.pt:135
 msgid "label_action_plan_start"
 msgstr "Zahájení plánování"
 
 #. Default: Planning end
-#: src/osha/oira/client/survey.py:335
+#: src/osha/oira/client/report.py:428
 #: src/osha/oira/client/templates/risk_actionplan.pt:171
 msgid "label_action_plan_end"
 msgstr "Konec plánování"
 
 #. Default: Consultation of workers
-#: src/osha/oira/client/survey.py:383
+#: src/osha/oira/client/report.py:479
 msgid "header_oira_report_consultation"
 msgstr "Konzultace s pracovníky"
 
-#. Default: The undersigned hereby declare that the workers have been
-#. consulted
+#. Default: The undersigned hereby declare that the workers have been consulted
 #. on the content of this document.
-#: src/osha/oira/client/survey.py:392
+#: src/osha/oira/client/report.py:488
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
-"Níže podepsaný tímto prohlašuje, že obsah tohoto dokumentu byl konzultován s"
-" pracovníky."
+"Níže podepsaný tímto prohlašuje, že obsah tohoto dokumentu byl konzultován s "
+"pracovníky."
 
 #. Default: On behalf of the employer:
-#: src/osha/oira/client/survey.py:405
+#: src/osha/oira/client/report.py:501
 msgid "oira_consultation_employer"
 msgstr "Jménem zaměstnavatele:"
 
 #. Default: On behalf of the workers:
-#: src/osha/oira/client/survey.py:407
+#: src/osha/oira/client/report.py:503
 msgid "oira_consultation_workers"
 msgstr "Jménem pracovníků:"
 
 #. Default: Date:
-#: src/osha/oira/client/survey.py:416
+#: src/osha/oira/client/report.py:512
 msgid "oira_survey_date"
 msgstr "Datum:"
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/client/survey.py:457
+#: src/osha/oira/client/report.py:559
 msgid "header_oira_report_download"
 msgstr "Zpráva OiRA: \"${title}"
 
 #. Default: Contents
-#: src/osha/oira/client/survey.py:476
+#: src/osha/oira/client/report.py:578
 #: src/osha/oira/client/templates/report_actionplan.pt:17
 #: src/osha/oira/client/templates/report_identification.pt:16
 msgid "toc_header"
 msgstr "Obsah"
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/client/survey.py:481
+#: src/osha/oira/client/report.py:583
 #: src/osha/oira/client/templates/report_actionplan.pt:39
 #: src/osha/oira/client/templates/report_actionplan.pt:72
 msgid "header_present_risks"
 msgstr "Riziko, které bylo identifikováno, vyhodnoceno a které má Akční plán"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/client/survey.py:483
+#: src/osha/oira/client/report.py:586
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
@@ -919,7 +906,7 @@ msgstr "Riziko, které bylo identifikováno, ale nemá Akční plán"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
-#: src/osha/oira/client/survey.py:485
+#: src/osha/oira/client/report.py:589
 #: src/osha/oira/client/templates/report_actionplan.pt:55
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
@@ -927,7 +914,7 @@ msgstr "Nebezpečí/problémy, které byly \"parked\" a které je stále třeba 
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
-#: src/osha/oira/client/survey.py:487
+#: src/osha/oira/client/report.py:592
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
@@ -936,20 +923,20 @@ msgstr ""
 "vyřešeny"
 
 #. Default: Action plan ${title}
-#: src/osha/oira/client/survey.py:512
+#: src/osha/oira/client/report.py:619
 msgid "filename_report_actionplan"
 msgstr "Akční plán ${title}"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision
 #. date ${date}.
-#: src/osha/oira/client/survey.py:590
+#: src/osha/oira/client/report.py:703
 msgid "report_identification_revision"
 msgstr ""
 "Tento dokument je založen na nástroji OiRA '${title}' k datu revize ${date}."
 
 #. Default: This report was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/client/survey.py:624
+#: src/osha/oira/client/report.py:741
 #: src/osha/oira/client/templates/report_actionplan.pt:302
 msgid "report_survey_revision"
 msgstr ""
@@ -1021,8 +1008,7 @@ msgstr ""
 "Pokud se určitým rizikům nedá vyhnout, jak mohou být sníženy na úroveň, na "
 "které nepodléhá riziku zdraví a bezpečnosti osob, které jsou jim vystaveny."
 
-#. Default: Once you have decided how to eliminate or reduce a particular
-#. risk,
+#. Default: Once you have decided how to eliminate or reduce a particular risk,
 #. then you describe the specific action(s) required to achieve this. You
 #. should also include details of the level of expertise and/or other
 #. requirements needed for those actions to be effective.
@@ -1357,14 +1343,13 @@ msgstr "Zřeknutí se odpovědnosti"
 msgid "disclaimer_other_websites"
 msgstr ""
 "Tento nástroj obsahuje odkazy na jiné internetové stránky, které nejsou pod "
-"kontrolou Evropské agentury pro bezpečnost a zdraví a zapojených organizací."
-" Agentura a zapojené organizace na sebe neberou žádnou odpovědnost s ohledem"
-" na obsah těchto internetových stránek."
+"kontrolou Evropské agentury pro bezpečnost a zdraví a zapojených organizací. "
+"Agentura a zapojené organizace na sebe neberou žádnou odpovědnost s ohledem "
+"na obsah těchto internetových stránek."
 
 #. Default: The European Agency for Safety and Health at Work and the
 #. organisations involved will not be liable for any false, inaccurate,
-#. inappropriate or incomplete information stored in the OiRA tool or any
-#. other
+#. inappropriate or incomplete information stored in the OiRA tool or any other
 #. damages as a result of using the software.
 #: src/osha/oira/client/templates/disclaimer.pt:26
 msgid "disclaimer_tool_information"
@@ -1396,16 +1381,16 @@ msgstr ""
 msgid "disclaimer_interactions"
 msgstr ""
 "Pro praktické a analytické účely nástroj představuje problémy/nebezpečí "
-"samostatně, ale pracoviště mohou být propojena. Proto musí být vzaty v úvahu"
-" interakce mezi různými identifikovanými problémy nebo rizikovými faktory."
+"samostatně, ale pracoviště mohou být propojena. Proto musí být vzaty v úvahu "
+"interakce mezi různými identifikovanými problémy nebo rizikovými faktory."
 
 #. Default: Therefore, EU-OSHA does not accept any liability for damages and
 #. claims in case a tool does not cover all risks of a given sector.
 #: src/osha/oira/client/templates/disclaimer.pt:48
 msgid "disclaimer_coverage_liability"
 msgstr ""
-"Proto EU-OSHA na sebe nebere žádnou odpovědnost za škody a nároky v případě,"
-" že nástroj nebude pokrývat všechna rizika daného sektoru."
+"Proto EU-OSHA na sebe nebere žádnou odpovědnost za škody a nároky v případě, "
+"že nástroj nebude pokrývat všechna rizika daného sektoru."
 
 #. Default: Moreover, the Agency and the organisations involved in the
 #. production of the OiRA tool do not accept any liability for damages and
@@ -1422,8 +1407,8 @@ msgstr ""
 "žádnou odpovědnost za škody a nároky vyplývající z použití nebo nemožnosti "
 "použít nástroj a data v něm uložená. Podobně EU-OSHA nepřijímá žádnou "
 "odpovědnost v případě nedostupnosti funkce nástrojů OiRA k tisku zprávy, "
-"zaznamenání vyhodnocení rizik automaticky generovaných nástrojem. Proto musí"
-" zaměstnavatel zajistit, aby měl kdykoliv k dispozici vytištěné, přesné a "
+"zaznamenání vyhodnocení rizik automaticky generovaných nástrojem. Proto musí "
+"zaměstnavatel zajistit, aby měl kdykoliv k dispozici vytištěné, přesné a "
 "aktualizované vyhodnocení rizik."
 
 #. Default: Regions
@@ -1467,8 +1452,7 @@ msgstr "Další"
 msgid "header_profile"
 msgstr "Přizpůsobení vyhodnocení rizik vaší organizaci"
 
-#. Default: In order to tailor the risk assessment to your organisation you
-#. may
+#. Default: In order to tailor the risk assessment to your organisation you may
 #. be asked to:
 #: src/osha/oira/client/templates/profile.pt:18
 msgid "expl_profile"
@@ -1589,8 +1573,8 @@ msgstr "Podávání zpráv"
 msgid "report_intro"
 msgstr ""
 "Nyní, když jste ukončil/a identifikaci všech rizik ve vaší organizaci a "
-"vytvořil/a jste akční plán, můžete vytvořit zprávu, která uvádí veškeré vaše"
-" výsledky. Podle potřeby můžete přidat jakékoliv další komentáře, které by "
+"vytvořil/a jste akční plán, můžete vytvořit zprávu, která uvádí veškeré vaše "
+"výsledky. Podle potřeby můžete přidat jakékoliv další komentáře, které by "
 "měly být obsaženy v této zprávě v políčku níže."
 
 #. Default: Please leave any extra comments that should be included in the
@@ -1665,8 +1649,7 @@ msgstr ""
 msgid "report_measure_budget"
 msgstr "Pro tento krok je rozpočet ${amount}."
 
-#. Default: The following risks have not yet been answered. Please do so at
-#. the
+#. Default: The following risks have not yet been answered. Please do so at the
 #. soonest possibility.
 #: src/osha/oira/client/templates/report_actionplan.pt:189
 msgid "desc_unanswered_risks"
@@ -1674,13 +1657,11 @@ msgstr ""
 "Následující rizika zatím nebyla zodpovězena. Učiňte tak prosím co možná "
 "nejdříve."
 
-#. Default: This risk is not present in your organisation, but since the
-#. sector
-#. organisation considers this one of the priority risks it must be included
-#. in
+#. Default: This risk is not present in your organisation, but since the sector
+#. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:167
+#: src/osha/oira/client/templates/webhelpers.pt:169
 msgid "top5_risk_not_present"
 msgstr ""
 "Toto riziko ve vaší organizaci nehrozí, ale protože sektorová organizace "
@@ -1771,7 +1752,7 @@ msgstr "Přeskočit tento krok"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:179
+#: src/osha/oira/client/templates/webhelpers.pt:181
 msgid "warn_risk_present"
 msgstr "Na výše uvedené prohlášení jste odpověděl/a záporně."
 
@@ -1781,9 +1762,9 @@ msgstr "Stáhněte si a vytiskněte si svou zprávu"
 
 #: src/osha/oira/client/templates/report_landing.pt:23
 msgid ""
-"Save the report on your computer and print it. You can also modify it or add"
-" more information. Please note that changes made on your pc will NOT be "
-"saved in the OiRA tool"
+"Save the report on your computer and print it. You can also modify it or add "
+"more information. Please note that changes made on your pc will NOT be saved "
+"in the OiRA tool"
 msgstr ""
 "Uložte si zprávu v počítači a vytiskněte ji. Můžete ji také upravit nebo "
 "doplnit o další informace. Upozorňujeme, že změny provedené ve vašem "
@@ -1811,8 +1792,8 @@ msgstr "sledování a hodnocení toho, zda byla zavedena potřebná opatření,"
 
 #: src/osha/oira/client/templates/report_landing.pt:30
 msgid ""
-"Record any revision if circumstances change (new machines, new workers, as a"
-" result of findings of any accident investigations, etc.)"
+"Record any revision if circumstances change (new machines, new workers, as a "
+"result of findings of any accident investigations, etc.)"
 msgstr ""
 "zaznamenání a vedení evidence případných změn a doplnění, pokud dojde ke "
 "změně okolností (nové stroje, noví pracovníci, v důsledku  šetření "
@@ -1896,9 +1877,9 @@ msgid ""
 "'Requirements' of this measure will be overwritten. This action cannot be "
 "reverted. Are you sure you want to continue?"
 msgstr ""
-"Stávající text v polích „obecný přístup“, „konkrétní činnosti“, "
-"„požadavky/odbornost“ tohoto opatření bude přepsán. Tento krok nelze vrátit."
-" Jste si jisti, že chcete pokračovat?"
+"Stávající text v polích „obecný přístup“, „konkrétní činnosti“, „požadavky/"
+"odbornost“ tohoto opatření bude přepsán. Tento krok nelze vrátit. Jste si "
+"jisti, že chcete pokračovat?"
 
 #. Default: Add
 #: src/osha/oira/client/templates/risk_actionplan.pt:24
@@ -1946,8 +1927,8 @@ msgstr ""
 "tohoto přístupu (k eliminaci nebo snížení rizika); 3) míru znalostí "
 "potřebných k implementaci kroku, např. \"zdravý rozum (nevyžadují se žádné "
 "znalosti OSH)\", \"žádné konkrétní znalosti OSH, ale vyžadují se minimální "
-"znalosti OSH nebo znalosti nebo školení a/nebo konzultace vedení OSH\", nebo"
-" \"OSH expert\". Můžete zde také popsat jakýkoliv jiný požadavek (pokud "
+"znalosti OSH nebo znalosti nebo školení a/nebo konzultace vedení OSH\", nebo "
+"\"OSH expert\". Můžete zde také popsat jakýkoliv jiný požadavek (pokud "
 "existuje)."
 
 #. Default: Appoint someone in your company to be responsible for the
@@ -1958,19 +1939,17 @@ msgstr ""
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
 "Ustanovte někoho ve své společnosti, kdo bude odpovědný za implementaci "
-"tohoto kroku. Tato osoba bude oprávněná podniknout kroky popsané v plánu "
-"a/nebo bude odpovědná za zajištění, že se tyto kroky provádějí."
+"tohoto kroku. Tato osoba bude oprávněná podniknout kroky popsané v plánu a/"
+"nebo bude odpovědná za zajištění, že se tyto kroky provádějí."
 
-#. Default: Although some measures do not cost any money, most do. The
-#. measures
-#. should therefore be budgeted for; include them in the annual budget round
-#. if
+#. Default: Although some measures do not cost any money, most do. The measures
+#. should therefore be budgeted for; include them in the annual budget round if
 #. necessary.
 #: src/osha/oira/client/templates/risk_actionplan.pt:125
 msgid "actionplan_measure_budget_tooltip"
 msgstr ""
-"Ačkoliv některé kroky nestojí žádné peníze, mnoho z nich stojí. Proto by měl"
-" být pro kroky stanoven rozpočet; zahrňte je v ročním rozpočtu, pokud je to "
+"Ačkoliv některé kroky nestojí žádné peníze, mnoho z nich stojí. Proto by měl "
+"být pro kroky stanoven rozpočet; zahrňte je v ročním rozpočtu, pokud je to "
 "třeba."
 
 #. Default: Please enter the budget in whole Euros.
@@ -2004,7 +1983,7 @@ msgstr "Měsíc"
 
 #. Default: Year
 #: src/osha/oira/client/templates/risk_actionplan.pt:155
-#: src/osha/oira/content/statistics.py:34
+#: src/osha/oira/content/statistics.py:35
 msgid "label_year"
 msgstr "Rok"
 
@@ -2308,65 +2287,64 @@ msgstr "Online interaktivní"
 msgid "oira_name_line_2"
 msgstr "Vyhodnocení rizik"
 
-#: src/osha/oira/client/templates/webhelpers.pt:104
+#: src/osha/oira/client/templates/webhelpers.pt:105
 msgid "Unvisited"
 msgstr "Nezodpovězeno"
 
-#: src/osha/oira/client/templates/webhelpers.pt:105
+#: src/osha/oira/client/templates/webhelpers.pt:106
 msgid "Postponed"
 msgstr "Odloženo"
 
-#: src/osha/oira/client/templates/webhelpers.pt:106
+#: src/osha/oira/client/templates/webhelpers.pt:107
 msgid "Risk not present"
 msgstr "OK"
 
-#: src/osha/oira/client/templates/webhelpers.pt:107
+#: src/osha/oira/client/templates/webhelpers.pt:108
 msgid "Risk present"
 msgstr "Pozornost"
 
-
 #. Default: Produced by ${EU-OSHA}.
-#: src/osha/oira/client/templates/webhelpers.pt:121
+#: src/osha/oira/client/templates/webhelpers.pt:122
 msgid "appendix_produced_by"
 msgstr "Vytvořil ${EU-OSHA}."
 
 #. Default: About
-#: src/osha/oira/client/templates/webhelpers.pt:124
+#: src/osha/oira/client/templates/webhelpers.pt:125
 msgid "appendix_about"
 msgstr "O"
 
 #. Default: Privacy
-#: src/osha/oira/client/templates/webhelpers.pt:126
+#: src/osha/oira/client/templates/webhelpers.pt:127
 msgid "appendix_privacy"
 msgstr "Důvěrnost"
 
 #. Default: Disclaimer
-#: src/osha/oira/client/templates/webhelpers.pt:128
+#: src/osha/oira/client/templates/webhelpers.pt:129
 msgid "appendix_disclaimer"
 msgstr "Zřeknutí se odpovědnosti"
 
 #. Default: GPL License
-#: src/osha/oira/client/templates/webhelpers.pt:130
+#: src/osha/oira/client/templates/webhelpers.pt:131
 msgid "appendix_gpl_license"
 msgstr "Licence GPL"
 
-#: src/osha/oira/client/templates/webhelpers.pt:132
+#: src/osha/oira/client/templates/webhelpers.pt:133
 msgid "CC License"
 msgstr "CC Licence"
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:194
-#: src/osha/oira/client/templates/webhelpers.pt:208
+#: src/osha/oira/client/templates/webhelpers.pt:196
+#: src/osha/oira/client/templates/webhelpers.pt:210
 msgid "header_legal_references"
 msgstr "Odkazy na právní předpisy a postupy"
 
 #. Default: Hide
-#: src/osha/oira/client/templates/webhelpers.pt:211
+#: src/osha/oira/client/templates/webhelpers.pt:213
 msgid "action_hide"
 msgstr "Skrýt"
 
 #. Default: Show
-#: src/osha/oira/client/templates/webhelpers.pt:215
+#: src/osha/oira/client/templates/webhelpers.pt:217
 msgid "action_show"
 msgstr "Ukázat"
 
@@ -2435,8 +2413,8 @@ msgstr ""
 #: src/osha/oira/content/risk.py:30
 msgid "help_evaluation_method_french"
 msgstr ""
-"Vyberte mezi ODHADEM (hrubý odhad) nebo VÝPOČTEM (kombinace metod četnosti a"
-" závažnosti)."
+"Vyberte mezi ODHADEM (hrubý odhad) nebo VÝPOČTEM (kombinace metod četnosti a "
+"závažnosti)."
 
 #. Default: Save changes
 #: src/osha/oira/content/risk.py:44 src/osha/oira/content/risk.py:61
@@ -2484,114 +2462,113 @@ msgid "menu_statistics"
 msgstr "Statistiky"
 
 #. Default: Period
-#: src/osha/oira/content/statistics.py:39
+#: src/osha/oira/content/statistics.py:40
 msgid "label_period"
 msgstr "Období"
 
 #. Default: Report Type
-#: src/osha/oira/content/statistics.py:69
+#: src/osha/oira/content/statistics.py:70
 msgid "label_report_type"
 msgstr "Typ zprávy"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:75
+#: src/osha/oira/content/statistics.py:76
 msgid "label_report_countries"
 msgstr "Země"
 
 #. Default: Tool
-#: src/osha/oira/content/statistics.py:82
+#: src/osha/oira/content/statistics.py:83
 msgid "label_report_tools"
 msgstr "Nástroj"
 
 #. Default: Report Period
-#: src/osha/oira/content/statistics.py:89
+#: src/osha/oira/content/statistics.py:90
 msgid "label_report_period"
 msgstr "Období, ke kterému se zpráva vztahuje"
 
 #. Default: File Format
-#: src/osha/oira/content/statistics.py:94
+#: src/osha/oira/content/statistics.py:95
 msgid "label_report_file_format"
 msgstr "Formát souboru"
 
 #. Default: Statistics Reporting
-#: src/osha/oira/content/statistics.py:269
-#: src/osha/oira/content/statistics.py:297
-#: src/osha/oira/content/statistics.py:330
+#: src/osha/oira/content/statistics.py:270
+#: src/osha/oira/content/statistics.py:298
+#: src/osha/oira/content/statistics.py:338
 msgid "title_statistics"
 msgstr "Statistické vykazování"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:271
+#: src/osha/oira/content/statistics.py:272
 msgid "label_country"
 msgstr "Země"
 
-#: src/osha/oira/content/statistics.py:275
-#: src/osha/oira/content/statistics.py:303
-#: src/osha/oira/content/statistics.py:336
+#: src/osha/oira/content/statistics.py:276
+#: src/osha/oira/content/statistics.py:304
+#: src/osha/oira/content/statistics.py:344
 msgid "Submit"
 msgstr "Odeslat"
 
 #. Default: Sector
-#: src/osha/oira/content/statistics.py:299
+#: src/osha/oira/content/statistics.py:300
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
 msgid "Sector"
 msgstr "Sektor"
 
 #. Default: Global
-#: src/osha/oira/content/statistics.py:332
+#: src/osha/oira/content/statistics.py:340
 msgid "label_global"
 msgstr "Globální"
 
 #. Default: Include a logo which links to an external website.
-#: src/osha/oira/content/survey.py:25
+#: src/osha/oira/content/survey.py:24
 msgid "label_external_site_enabled"
 msgstr "Vložit logo s odkazem na externí webovou stránku."
 
 #. Default: Tick this option if you would like to create a hyperlink on the
 #. OiRA tool which points to an external website. The hyperlink will be in the
 #. form of a logo image.
-#: src/osha/oira/content/survey.py:28
+#: src/osha/oira/content/survey.py:27
 msgid "help_external_site_enabled"
 msgstr ""
-"Tuto možnost zaškrtněte v případě, že si přejete vytvořit hypertextový odkaz"
-" k nástroji OiRAvedoucí na externí webovou stránku. Tento hypertextový odkaz"
-" bude mít podobu loga."
+"Tuto možnost zaškrtněte v případě, že si přejete vytvořit hypertextový odkaz "
+"k nástroji OiRAvedoucí na externí webovou stránku. Tento hypertextový odkaz "
+"bude mít podobu loga."
 
 #. Default: External site URL
-#: src/osha/oira/content/survey.py:40
+#: src/osha/oira/content/survey.py:39
 msgid "label_external_site_url"
 msgstr "URL adresa externí webové stránky"
 
-#. Default: This is the URL of an external site that is linked to. Clicking
-#. the
+#. Default: This is the URL of an external site that is linked to. Clicking the
 #. logo or the name will take the user to this URL.
-#: src/osha/oira/content/survey.py:41
+#: src/osha/oira/content/survey.py:40
 msgid "help__external_site_url"
 msgstr ""
 "Toto je URL adresa externí webové stránky, na kterou se odkazuje. Kliknutím "
 "na logo nebo název bude uživatel přesměrován na tuto URL adresu."
 
 #. Default: External site name
-#: src/osha/oira/content/survey.py:51
+#: src/osha/oira/content/survey.py:50
 msgid "label_external_site_name"
 msgstr "Název externí webové stránky"
 
 #. Default: This is the name of the external site that is linked to. It will
 #. appear next to the logo.
-#: src/osha/oira/content/survey.py:52
+#: src/osha/oira/content/survey.py:51
 msgid "help_external_site_name"
 msgstr ""
 "Toto je název externí webové stránky, na kterou se odkazuje. Bude zobrazen "
 "vedle loga."
 
 #. Default: External site logo
-#: src/osha/oira/content/survey.py:61
+#: src/osha/oira/content/survey.py:60
 msgid "label_external_site_logo"
 msgstr "Logo externí webové stránky"
 
 #. Default: Upload an image. Make sure your image is of format png, jpg or gif
 #. and does not contain any special characters.
-#: src/osha/oira/content/survey.py:62
+#: src/osha/oira/content/survey.py:61
 msgid "help_image_upload"
 msgstr ""
 "Načtěte obrázek. Ujistěte se, že váš obrázek je ve formátu jpg nebo gif a "
@@ -2731,9 +2708,9 @@ msgid ""
 "repeatable profile question then the corresponding module will be repeated "
 "the specified number of times."
 msgstr ""
-"Takové otázky se pokládají PŘEDTÍM, než koncový uživatel zahájí identifikaci"
-" a hodnocení rizik. Pokud koncový uživatel nepotvrdí, že příslušná volitelná"
-" otázka týkající se profilu je relevantní (zaškrtnutím), odpovídající modul "
+"Takové otázky se pokládají PŘEDTÍM, než koncový uživatel zahájí identifikaci "
+"a hodnocení rizik. Pokud koncový uživatel nepotvrdí, že příslušná volitelná "
+"otázka týkající se profilu je relevantní (zaškrtnutím), odpovídající modul "
 "bude zcela vynechán. Pokud koncový uživatel uvede v případě opakovatelné "
 "otázky týkající se profilu více než jednu možnost, odpovídající modul se "
 "bude v příslušném počtu opakovat."
@@ -2795,44 +2772,29 @@ msgstr "Otázka týkající se více bodů"
 msgid "Not provided"
 msgstr "Není k dispozici"
 
-#. Default: Evaluation phase
-#: src/osha/oira/content/templates/survey_view.pt:24
-msgid "label_evaluation_phase"
-msgstr "Fáze vyhodnocení"
-
-#. Default: Optional
-#: src/osha/oira/content/templates/survey_view.pt:25
-msgid "optional"
-msgstr "Volitelný"
-
-#. Default: Mandatory
-#: src/osha/oira/content/templates/survey_view.pt:26
-msgid "mandatory"
-msgstr "Povinná"
-
 #. Default: Classification code
-#: src/osha/oira/content/templates/survey_view.pt:27
+#: src/osha/oira/content/templates/survey_view.pt:24
 msgid "label_classification_code"
 msgstr "Klasifikační kód"
 
 #. Default: Not set
+#: src/osha/oira/content/templates/survey_view.pt:26
 #: src/osha/oira/content/templates/survey_view.pt:29
-#: src/osha/oira/content/templates/survey_view.pt:32
 msgid "not_set"
 msgstr "Nenastaven"
 
 #. Default: Language
-#: src/osha/oira/content/templates/survey_view.pt:30
+#: src/osha/oira/content/templates/survey_view.pt:27
 msgid "label_language"
 msgstr "Jazyk"
 
 #. Default: Modules and Profile Questions
-#: src/osha/oira/content/templates/survey_view.pt:36
+#: src/osha/oira/content/templates/survey_view.pt:33
 msgid "header_modules_and_profile_questions"
 msgstr "Moduly nebo profilové otázky"
 
 #. Default: This OiRA Tool has no modules.
-#: src/osha/oira/content/templates/survey_view.pt:38
+#: src/osha/oira/content/templates/survey_view.pt:35
 msgid "no_modules"
 msgstr "Tento nástroj OiRA nemá žádné moduly."
 
@@ -2915,14 +2877,13 @@ msgid ""
 msgstr "Toto je doporučený algoritmus vyhodnocení založený na metodě Kinney"
 
 #. Default: This method involves risk assessment by Severity x Exposure,
-#. whereas these have to be understood as follows; Severity of injury linked
-#. to
+#. whereas these have to be understood as follows; Severity of injury linked to
 #. hazard - Exposure (Frequency) to the hazard
 #: src/osha/oira/content/templates/surveygroup_add.pt:94
 msgid "help_survey_evaluation_algorithm_simplified"
 msgstr ""
-"Tato metoda zahrnuje vyhodnocení rizik podle Závažnosti x Vystavení, přičemž"
-" je nutné je chápat následovně; Závažnost zranění spojeného s nebezpečím - "
+"Tato metoda zahrnuje vyhodnocení rizik podle Závažnosti x Vystavení, přičemž "
+"je nutné je chápat následovně; Závažnost zranění spojeného s nebezpečím - "
 "Vystavení (Frekvence) nebezpečí"
 
 #. Default: Simplified two criteria
@@ -3007,8 +2968,8 @@ msgstr "Profilová otázka"
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:8
 msgid ""
-"The basic architecture of an Online interactive Risk Assessment consists of:"
-" - profile questions (questions defining the company profile) - modules and "
+"The basic architecture of an Online interactive Risk Assessment consists of: "
+"- profile questions (questions defining the company profile) - modules and "
 "potentially sub-modules - risks (positive statements) Profile questions are "
 "used to determine whether particular modules apply to the end user at all "
 "(OPTIONAL), or whether they should be repeated a number of times "
@@ -3019,10 +2980,10 @@ msgid ""
 "than one option to a repeatable profile question then the corresponding "
 "module will be repeated the specified number of times."
 msgstr ""
-"Základní architektura Online interaktivního vyhodnocení rizik se skládá: - z"
-" profilových otázek (otázky definující profil společnosti) - moduly a dílčí "
-"moduly - rizika (kladná prohlášení). Profilové otázky se používají k určení,"
-" zda se konkrétní moduly vůbec vztahují na koncového uživatele (VOLITELNÉ) "
+"Základní architektura Online interaktivního vyhodnocení rizik se skládá: - z "
+"profilových otázek (otázky definující profil společnosti) - moduly a dílčí "
+"moduly - rizika (kladná prohlášení). Profilové otázky se používají k určení, "
+"zda se konkrétní moduly vůbec vztahují na koncového uživatele (VOLITELNÉ) "
 "nebo zda by se měly několikrát opakovat (OPAKOVATELNÉ). Tyto otázky se "
 "pokládají PŘED zahájením identifikace a vyhodnocení rizik. Pokud koncový "
 "uživatel nepotvrdí, že je volitelná profilová otázka relevantní (zatržením "
@@ -3061,8 +3022,7 @@ msgstr "Jste si vědom/a všech rizik?"
 
 #. Default: Including the risks to your employees and your equipment? What if
 #. there is an accident with one of the machines? What if an employee is
-#. exposed to hazardous substances? A risk assessment helps you to define
-#. these
+#. exposed to hazardous substances? A risk assessment helps you to define these
 #. risks and tackle them head on. A risk assessment mainly consists of two
 #. parts: a <dynamic element> with all the risks in your company and an
 #. <dynamic element> with details of how to deal with these risks. These two
@@ -3073,8 +3033,8 @@ msgid "intro_risk_aware"
 msgstr ""
 "Včetně rizik pro vaše zaměstnance a vaše zařízení? Co když na jednom z "
 "vašich strojů dojde k nehodě? Co když je zaměstnanec vystaven nebezpečným "
-"látkám? Vyhodnocení rizik vám pomáhá definovat tato rizika a přímo je řešit."
-" Vyhodnocení rizik se skládá hlavně ze dvou částí: jedna se všemi riziky ve "
+"látkám? Vyhodnocení rizik vám pomáhá definovat tato rizika a přímo je řešit. "
+"Vyhodnocení rizik se skládá hlavně ze dvou částí: jedna se všemi riziky ve "
 "vaší společnosti a jedna s detaily toho, jak tato rizika řešit. Tyto dva "
 "komponenty umožňují omezit rizika pro zaměstnance a vaši společnost a tedy "
 "rovněž finanční riziko."
@@ -3094,9 +3054,9 @@ msgid "intro_not_complicated"
 msgstr ""
 "Komplikované? Ani ne. Jen to trochu trvá. Avšak vyhodnocení rizik je "
 "důležité. Tak důležité, že je to zákonný požadavek. Je to z jistého důvodu. "
-"Pokud nejsou rizika vyhodnocena a náležitě řešena, nemůže být zahájen vhodný"
-" proces řízení rizik a vhodné preventivní kroky pravděpodobně nepůjde nalézt"
-" ani zavést."
+"Pokud nejsou rizika vyhodnocena a náležitě řešena, nemůže být zahájen vhodný "
+"proces řízení rizik a vhodné preventivní kroky pravděpodobně nepůjde nalézt "
+"ani zavést."
 
 #. Default: Consultation and participation of workers
 #: src/osha/oira/templates/default_introduction.pt:12
@@ -3146,6 +3106,15 @@ msgid "message_invalid_login"
 msgstr ""
 "Neplatné přihlášení. Pokud jste zapomněli heslo, můžete ${reset_password}."
 
+#~ msgid "label_evaluation_phase"
+#~ msgstr "Fáze vyhodnocení"
+
+#~ msgid "optional"
+#~ msgstr "Volitelný"
+
+#~ msgid "mandatory"
+#~ msgstr "Povinná"
+
 #~ msgid "Add ${name}"
 #~ msgstr "Přidat ${name}"
 
@@ -3181,14 +3150,14 @@ msgstr ""
 
 #~ msgid "label_module_description"
 #~ msgstr ""
-#~ "Uveďte veškeré relevantní informace, které mohou být užitečné pro koncového "
-#~ "uživatele."
+#~ "Uveďte veškeré relevantní informace, které mohou být užitečné pro "
+#~ "koncového uživatele."
 
 #~ msgid "popup_text"
 #~ msgstr ""
-#~ "Poskytněte nám prosím zpětnou vazbu k tomuto nástroji: zabere vám to pouze 3"
-#~ " minuty! Opravdu si ceníme vaší pomoci během této fáze testování nástroje "
-#~ "OiRA."
+#~ "Poskytněte nám prosím zpětnou vazbu k tomuto nástroji: zabere vám to "
+#~ "pouze 3 minuty! Opravdu si ceníme vaší pomoci během této fáze testování "
+#~ "nástroje OiRA."
 
 #~ msgid "popup_confirm"
 #~ msgstr "Přejít k průzkumu"

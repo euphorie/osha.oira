@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.23.dev0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-10-10 21:19+0200\n"
+"POT-Creation-Date: 2013-10-22 10:42+0200\n"
 "PO-Revision-Date: 2013-10-08 14:03+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -739,32 +739,32 @@ msgid "Enter the names of each location"
 msgstr ""
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:102
+#: src/osha/oira/client/report.py:105
 msgid "report_timeline_measure"
 msgstr "Measure"
 
 #. Default: End date
-#: src/osha/oira/client/report.py:105
+#: src/osha/oira/client/report.py:108
 msgid "report_timeline_end_date"
 msgstr ""
 
 #. Default: Responsible
-#: src/osha/oira/client/report.py:108
+#: src/osha/oira/client/report.py:111
 msgid "report_timeline_responsible"
 msgstr "Responsible"
 
 #. Default: Status (planned, in process, implemented)
-#: src/osha/oira/client/report.py:109
+#: src/osha/oira/client/report.py:112
 msgid "report_timeline_progress"
 msgstr ""
 
 #. Default: Timeline
-#: src/osha/oira/client/report.py:119
+#: src/osha/oira/client/report.py:122
 msgid "report_timeline_title"
 msgstr ""
 
 #. Default: low
-#: src/osha/oira/client/report.py:348
+#: src/osha/oira/client/report.py:353
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -774,7 +774,7 @@ msgid "risk_priority_low"
 msgstr "low"
 
 #. Default: medium
-#: src/osha/oira/client/report.py:350
+#: src/osha/oira/client/report.py:355
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -784,7 +784,7 @@ msgid "risk_priority_medium"
 msgstr "medium"
 
 #. Default: high
-#: src/osha/oira/client/report.py:352
+#: src/osha/oira/client/report.py:357
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -794,7 +794,7 @@ msgid "risk_priority_high"
 msgstr "high"
 
 #. Default: This is a ${priority_value} priority risk.
-#: src/osha/oira/client/report.py:354
+#: src/osha/oira/client/report.py:359
 #: src/osha/oira/client/templates/report_actionplan.pt:93
 #: src/osha/oira/client/templates/report_actionplan.pt:173
 #: src/osha/oira/client/templates/report_actionplan.pt:209
@@ -804,118 +804,116 @@ msgid "risk_priority"
 msgstr "This is a ${priority_value} priority risk."
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:381 src/osha/oira/client/report.py:406
+#: src/osha/oira/client/report.py:386 src/osha/oira/client/report.py:411
 #: src/osha/oira/client/templates/risk_actionplan.pt:64
 msgid "header_measure_single"
 msgstr "Measure"
 
 #. Default: Measure ${index}
-#: src/osha/oira/client/report.py:384
+#: src/osha/oira/client/report.py:389
 #: src/osha/oira/client/templates/report_actionplan.pt:99
 msgid "header_measure"
 msgstr "Measure ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
-#: src/osha/oira/client/report.py:413
+#: src/osha/oira/client/report.py:418
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
 msgid "label_measure_action_plan"
 msgstr "General approach (to eliminate or reduce the risk)"
 
 #. Default: Specific action(s) required to implement this approach
-#: src/osha/oira/client/report.py:415
+#: src/osha/oira/client/report.py:420
 #: src/osha/oira/client/templates/risk_actionplan.pt:98
 msgid "label_measure_prevention_plan"
 msgstr "Specific action(s) required to implement this approach"
 
 #. Default: Level of expertise and/or requirements needed
-#: src/osha/oira/client/report.py:417
+#: src/osha/oira/client/report.py:422
 #: src/osha/oira/client/templates/risk_actionplan.pt:107
 msgid "label_measure_requirements"
 msgstr "Level of expertise and/or requirements needed"
 
 #. Default: Who is responsible?
-#: src/osha/oira/client/report.py:419
+#: src/osha/oira/client/report.py:424
 #: src/osha/oira/client/templates/risk_actionplan.pt:119
 msgid "label_action_plan_responsible"
 msgstr "Who is responsible?"
 
 #. Default: Budget
-#: src/osha/oira/client/report.py:421
+#: src/osha/oira/client/report.py:426
 #: src/osha/oira/client/templates/risk_actionplan.pt:124
 msgid "label_action_plan_budget"
 msgstr "Budget"
 
 #. Default: Planning start
-#: src/osha/oira/client/report.py:422
+#: src/osha/oira/client/report.py:427
 #: src/osha/oira/client/templates/risk_actionplan.pt:135
 msgid "label_action_plan_start"
 msgstr "Planning start"
 
 #. Default: Planning end
-#: src/osha/oira/client/report.py:423
+#: src/osha/oira/client/report.py:428
 #: src/osha/oira/client/templates/risk_actionplan.pt:171
 msgid "label_action_plan_end"
 msgstr "Planning end"
 
 #. Default: Consultation of workers
-#: src/osha/oira/client/report.py:474
+#: src/osha/oira/client/report.py:479
 msgid "header_oira_report_consultation"
 msgstr "Consultation of workers"
 
 #. Default: The undersigned hereby declare that the workers have been consulted
 #. on the content of this document.
-#: src/osha/oira/client/report.py:483
+#: src/osha/oira/client/report.py:488
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
 "The undersigned hereby declare that the workers have been consulted on the "
 "content of this document."
 
 #. Default: On behalf of the employer:
-#: src/osha/oira/client/report.py:496
+#: src/osha/oira/client/report.py:501
 msgid "oira_consultation_employer"
 msgstr "On behalf of the employer:"
 
 #. Default: On behalf of the workers:
-#: src/osha/oira/client/report.py:498
+#: src/osha/oira/client/report.py:503
 msgid "oira_consultation_workers"
 msgstr "On behalf of the workers:"
 
 #. Default: Date:
-#: src/osha/oira/client/report.py:507
+#: src/osha/oira/client/report.py:512
 msgid "oira_survey_date"
 msgstr "Date:"
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/client/report.py:554
+#: src/osha/oira/client/report.py:559
 msgid "header_oira_report_download"
 msgstr "OiRA Report: \"${title}"
 
 #. Default: Contents
-#: src/osha/oira/client/report.py:573
+#: src/osha/oira/client/report.py:578
 #: src/osha/oira/client/templates/report_actionplan.pt:17
 #: src/osha/oira/client/templates/report_identification.pt:16
 msgid "toc_header"
 msgstr "Contents"
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/client/report.py:578
+#: src/osha/oira/client/report.py:583
 #: src/osha/oira/client/templates/report_actionplan.pt:39
 #: src/osha/oira/client/templates/report_actionplan.pt:72
 msgid "header_present_risks"
 msgstr "Risks that have been identified, evaluated and have an Action Plan"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/client/report.py:581
+#: src/osha/oira/client/report.py:586
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
 msgstr "Risks that have been identified but do NOT have an Action Plan"
 
-#. Default: Hazards/problems that have been "parked"and are still to be dealt
-#. with
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
-#: src/osha/oira/client/report.py:584
+#: src/osha/oira/client/report.py:589
 #: src/osha/oira/client/templates/report_actionplan.pt:55
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
@@ -924,7 +922,7 @@ msgstr ""
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
-#: src/osha/oira/client/report.py:587
+#: src/osha/oira/client/report.py:592
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
@@ -933,20 +931,20 @@ msgstr ""
 "organisation"
 
 #. Default: Action plan ${title}
-#: src/osha/oira/client/report.py:614
+#: src/osha/oira/client/report.py:619
 msgid "filename_report_actionplan"
 msgstr "Action plan ${title}"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision
 #. date ${date}.
-#: src/osha/oira/client/report.py:698
+#: src/osha/oira/client/report.py:703
 msgid "report_identification_revision"
 msgstr ""
 "This document was based on the OiRA Tool '${title}' of revision date ${date}."
 
 #. Default: This report was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/client/report.py:736
+#: src/osha/oira/client/report.py:741
 #: src/osha/oira/client/templates/report_actionplan.pt:302
 msgid "report_survey_revision"
 msgstr ""

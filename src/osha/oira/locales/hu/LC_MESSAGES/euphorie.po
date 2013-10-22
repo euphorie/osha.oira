@@ -2,20 +2,20 @@
 # Copyright (C) 2013 SYSLAB.COM GmbH
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-06-03 18:21+0200\n"
+"POT-Creation-Date: 2013-10-22 10:42+0200\n"
 "PO-Revision-Date: 2013-08-15 11:25+0200\n"
 "Last-Translator: Florakalman <florakalman@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-"Language: \n"
 "X-Generator: Poedit 1.5.5\n"
 
 #. Default: HTML Source Code
@@ -31,8 +31,7 @@ msgstr ""
 "Írja le, hogy milyen általános módszerrel küszöböli ki vagy (ha nem "
 "kiküszöbölhető) csökkenti a kockázatot."
 
-#. Default: Describe the specific action(s) required to implement this
-#. approach
+#. Default: Describe the specific action(s) required to implement this approach
 #. (to eliminate or to reduce the risk).
 #: src/osha/oira/manual_translations.py:7
 msgid "help_measure_prevention_plan"
@@ -52,13 +51,13 @@ msgstr ""
 msgid "help_measure_requirements"
 msgstr ""
 "Írja le, hogy 1) milyen általános módszerrel küszöböli ki vagy (ha nem "
-"kiküszöbölhető) csökkenti a kockázatot; 2) milyen konkrét lépés(ek) "
-"szükséges(ek) ennek a megoldásnak a bevezetéséhez (a kockázat kiküszöbölése "
-"vagy csökkentése érdekében); 3) milyen szakértelem szükséges az intézkedés "
+"kiküszöbölhető) csökkenti a kockázatot; 2) milyen konkrét lépés(ek) szükséges"
+"(ek) ennek a megoldásnak a bevezetéséhez (a kockázat kiküszöbölése vagy "
+"csökkentése érdekében); 3) milyen szakértelem szükséges az intézkedés "
 "bevezetéséhez, például \"józan megfontolás (nincs szükség OSH tudásra)\", "
 "\"nincs szükség speciális OSH szakértelemre, de minimális OSH tudás vagy "
-"képzés és/vagy az OSH útmutatók ismerete szükséges\", vagy \"OSH szakértő\"."
-" Itt megadhat további kiegészítő követelményeket is (ha vannak)."
+"képzés és/vagy az OSH útmutatók ismerete szükséges\", vagy \"OSH szakértő\". "
+"Itt megadhat további kiegészítő követelményeket is (ha vannak)."
 
 #. Default: Measure
 #: src/osha/oira/manual_translations.py:19
@@ -99,8 +98,8 @@ msgstr "Felhasználói fiók törlése"
 
 #: src/osha/oira/manual_translations.py:29
 msgid ""
-"Please bear in mind that by changing the email address, your login name will"
-" also change."
+"Please bear in mind that by changing the email address, your login name will "
+"also change."
 msgstr ""
 "Kérjük, figyeljen arra, hogy az e-mailcím megváltoztatása esetén a "
 "bejelentkezési név is megváltozik."
@@ -121,9 +120,7 @@ msgid "nav_surveys"
 msgstr "OiRA eszközök"
 
 #. Default: OiRA Tool
-#: src/osha/oira/manual_translations.py:34 src/osha/oira/vocabularies.py:20
-#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:4
-#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:5
+#: src/osha/oira/manual_translations.py:34 src/osha/oira/vocabularies.py:22
 msgid "Survey"
 msgstr "OiRA eszköz"
 
@@ -178,8 +175,8 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:45
 msgid "help_survey_title"
 msgstr ""
-"Ez ennek az OiRA eszköz verziónak a címe. Ezt a nevet a felhasználóknak soha"
-" nem mutatjuk."
+"Ez ennek az OiRA eszköz verziónak a címe. Ezt a nevet a felhasználóknak soha "
+"nem mutatjuk."
 
 #. Default: The introduction text is shown when starting a new OiRA Tool
 #. session. If no introduction is provided here a standard text will be shown.
@@ -240,8 +237,7 @@ msgstr "Megoldás"
 msgid "Succesfully published the survey"
 msgstr "Az OiRA eszköz közzététele sikeresen lezajlott"
 
-#. Default: Succesfully created a preview for the OiRA Tool. It can be
-#. accessed
+#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url}.
 #: src/osha/oira/manual_translations.py:65
 msgid ""
@@ -264,8 +260,7 @@ msgstr "A kiválasztott OiRA eszköz másolatának létrehozása"
 #. Default: If this is to be "optional", it must be formulated so that it is
 #. answerable with YES (the end-user will have to tick a box) or NO (e.g. "Do
 #. you work with the public?"). If this is to be "repeatable", it must be
-#. formulated as a prompt to fill in multiple values (e.g. "List your
-#. different
+#. formulated as a prompt to fill in multiple values (e.g. "List your different
 #. work locations").
 #: src/osha/oira/manual_translations.py:71
 msgid "help_profilequestion_question"
@@ -292,8 +287,7 @@ msgstr ""
 "tartalmát."
 
 #. Default: The question to ask the end-user if this module is optional. It
-#. must be formulated so that it is answerable with YES (the end-user will
-#. have
+#. must be formulated so that it is answerable with YES (the end-user will have
 #. to tick a box) or NO
 #: src/osha/oira/manual_translations.py:80
 msgid "help_module_question"
@@ -328,8 +322,7 @@ msgstr ""
 "Ez egy rövid igenlő állítás egy lehetséges kockázatról (pl. Az épület "
 "karbantartása rendben van.)"
 
-#. Default: This is the inverse of the affirmative statement (e.g. The
-#. building
+#. Default: This is the inverse of the affirmative statement (e.g. The building
 #. is not well maintained.)
 #: src/osha/oira/manual_translations.py:90
 msgid "help_problem_description"
@@ -488,8 +481,8 @@ msgstr "5. Jelentés"
 #: src/osha/oira/manual_translations.py:130
 msgid "help_reports"
 msgstr ""
-"Ennek a szövegnek azt kell bemutatnia, hogy ajelentést hogyan kell lementeni"
-" vagy kinyomtatni."
+"Ennek a szövegnek azt kell bemutatnia, hogy ajelentést hogyan kell lementeni "
+"vagy kinyomtatni."
 
 #. Default: What happens next?
 #: src/osha/oira/manual_translations.py:132
@@ -507,8 +500,7 @@ msgid "help_finalwords"
 msgstr "Végső általános javaslatok."
 
 #. Default: It is possible for you to print out the contents of the tool to
-#. enable you to look for the information at the relevant workplace (by
-#. walking
+#. enable you to look for the information at the relevant workplace (by walking
 #. around and looking at what could cause harm, or by consulting the workers
 #. and/or their representatives about problems they have encountered). You can
 #. then introduce the information into the tool.
@@ -516,11 +508,11 @@ msgstr "Végső általános javaslatok."
 #: src/osha/oira/client/templates/identification.pt:19
 msgid "intro_print_identification_1"
 msgstr ""
-"Lehetősége van az eszköz tartalmának a kinyomtatására, amely segíti az adott"
-" munkahely információinak megkeresését (körbesétálva és megfigyelve, hogy mi"
-" okozhat sérülést, illetve a dolgozókkal és/vagy képviselőikkel "
-"elbeszélgetve azokról a problémákról, amelyekkel szembe találják magukat). "
-"Ezután beírhatja za információkat az eszközbe."
+"Lehetősége van az eszköz tartalmának a kinyomtatására, amely segíti az adott "
+"munkahely információinak megkeresését (körbesétálva és megfigyelve, hogy mi "
+"okozhat sérülést, illetve a dolgozókkal és/vagy képviselőikkel elbeszélgetve "
+"azokról a problémákról, amelyekkel szembe találják magukat). Ezután "
+"beírhatja za információkat az eszközbe."
 
 #. Default: You may also wish to distribute the contents among the workers
 #. and/or their representatives and invite them to participate in identifying
@@ -531,8 +523,8 @@ msgstr ""
 #: src/osha/oira/client/templates/identification.pt:20
 msgid "intro_print_identification_2"
 msgstr ""
-"Ezen kívül kiküldheti a tartalmat a dolgozók és/vagy képviselőik számára is,"
-" és felkérheti őket, hogy vegyenek részt a veszélyek/problémák "
+"Ezen kívül kiküldheti a tartalmat a dolgozók és/vagy képviselőik számára is, "
+"és felkérheti őket, hogy vegyenek részt a veszélyek/problémák "
 "azonosításában, a kockázatok értékelésében és a megelőző lépések "
 "eldöntésében. Az eszköz kitöltésekor a visszajelzéseiket figyelembe kell "
 "venni."
@@ -543,8 +535,7 @@ msgstr ""
 msgid "list_of_risks"
 msgstr "az eszköz tartalma"
 
-#. Default: No hazards or problems were spotted. Please proceed directly to
-#. the
+#. Default: No hazards or problems were spotted. Please proceed directly to the
 #. action plan step.
 #: src/osha/oira/manual_translations.py:152
 msgid "help_evaluation_empty"
@@ -565,16 +556,14 @@ msgstr ""
 msgid "title_help_unpublished"
 msgstr "Az OiRA eszköz eltávolítása az online kliensről."
 
-#. Default: Succesfully created a preview for the OiRA Tool. It can be
-#. accessed
+#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url} .
 #: src/osha/oira/manual_translations.py:163
 msgid "message_preview_success"
 msgstr ""
 "Sikerült létrehozni az OiRA eszköz előnézetét. Itt nyitható meg: ${url} ."
 
-#. Default: Please note that by deleting your account, you will also delete
-#. all
+#. Default: Please note that by deleting your account, you will also delete all
 #. your sessions. Please make sure you download your reports from the Report
 #. step prior to deleting your account, if you want to keep any.
 #: src/osha/oira/manual_translations.py:166
@@ -626,8 +615,8 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:188
 msgid "intro_publish_first_time"
 msgstr ""
-"Biztosan közzé szeretné tenni ezt az OiRA eszközt? A közzététel után az OiRA"
-" eszköz megjelenik az online kliensen, és minden felhasználó számára "
+"Biztosan közzé szeretné tenni ezt az OiRA eszközt? A közzététel után az OiRA "
+"eszköz megjelenik az online kliensen, és minden felhasználó számára "
 "hozzáférhetővé válik."
 
 #. Default: Publish OiRA Tool
@@ -661,8 +650,7 @@ msgstr "Alapértelmezett súlyosság"
 #. Default: Are you sure you want to unpublish this OiRA Tool?
 #: src/osha/oira/manual_translations.py:204
 msgid "unpublish_confirm"
-msgstr ""
-"Biztosan szeretné megszüntetni ennek az OiRA eszköznek a közzétételét?"
+msgstr "Biztosan szeretné megszüntetni ennek az OiRA eszköznek a közzétételét?"
 
 #. Default: Import OiRA Tool
 #: src/osha/oira/manual_translations.py:206
@@ -714,31 +702,31 @@ msgstr "Az intézkedés törlése"
 msgid "Add Solution"
 msgstr "Kockázat Intézkedés"
 
-#: src/osha/oira/vocabularies.py:23
+#: src/osha/oira/vocabularies.py:25
 msgid "EU-OSHA Overview"
 msgstr "EU-OSHA áttekintés"
 
-#: src/osha/oira/vocabularies.py:24 src/osha/oira/vocabularies.py:27
+#: src/osha/oira/vocabularies.py:26 src/osha/oira/vocabularies.py:29
 msgid "Country"
 msgstr "Ország"
 
-#: src/osha/oira/vocabularies.py:54
+#: src/osha/oira/vocabularies.py:56
 msgid "Whole year"
 msgstr "Teljes év"
 
-#: src/osha/oira/vocabularies.py:57
+#: src/osha/oira/vocabularies.py:59
 msgid "1st Quarter"
 msgstr "1. negyedév"
 
-#: src/osha/oira/vocabularies.py:58
+#: src/osha/oira/vocabularies.py:60
 msgid "2nd Quarter"
 msgstr "2. negyedév"
 
-#: src/osha/oira/vocabularies.py:59
+#: src/osha/oira/vocabularies.py:61
 msgid "3rd Quarter"
 msgstr "3. negyedév"
 
-#: src/osha/oira/vocabularies.py:60
+#: src/osha/oira/vocabularies.py:62
 msgid "4th Quarter"
 msgstr "4. negyedév"
 
@@ -768,32 +756,32 @@ msgid "Enter the names of each location"
 msgstr "Adja meg mindegyik helyszín nevét"
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:80
+#: src/osha/oira/client/report.py:105
 msgid "report_timeline_measure"
 msgstr "Intézkedés"
 
 #. Default: End date
-#: src/osha/oira/client/report.py:83
+#: src/osha/oira/client/report.py:108
 msgid "report_timeline_end_date"
 msgstr "Befejezés dátuma"
 
 #. Default: Responsible
-#: src/osha/oira/client/report.py:86
+#: src/osha/oira/client/report.py:111
 msgid "report_timeline_responsible"
 msgstr "Felelős"
 
 #. Default: Status (planned, in process, implemented)
-#: src/osha/oira/client/report.py:87
+#: src/osha/oira/client/report.py:112
 msgid "report_timeline_progress"
 msgstr "Állapot (tervezett, folyamatban, bevezetve)"
 
 #. Default: Timeline
-#: src/osha/oira/client/report.py:97
+#: src/osha/oira/client/report.py:122
 msgid "report_timeline_title"
 msgstr "Ütemezés"
 
 #. Default: low
-#: src/osha/oira/client/survey.py:263
+#: src/osha/oira/client/report.py:353
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -803,7 +791,7 @@ msgid "risk_priority_low"
 msgstr "alacsony"
 
 #. Default: medium
-#: src/osha/oira/client/survey.py:265
+#: src/osha/oira/client/report.py:355
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -813,7 +801,7 @@ msgid "risk_priority_medium"
 msgstr "közepes"
 
 #. Default: high
-#: src/osha/oira/client/survey.py:267
+#: src/osha/oira/client/report.py:357
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -823,7 +811,7 @@ msgid "risk_priority_high"
 msgstr "magas"
 
 #. Default: This is a ${priority_value} priority risk.
-#: src/osha/oira/client/survey.py:269
+#: src/osha/oira/client/report.py:359
 #: src/osha/oira/client/templates/report_actionplan.pt:93
 #: src/osha/oira/client/templates/report_actionplan.pt:173
 #: src/osha/oira/client/templates/report_actionplan.pt:209
@@ -833,103 +821,101 @@ msgid "risk_priority"
 msgstr "Ez egy ${priority_value} prioritású kockázat."
 
 #. Default: Measure
-#: src/osha/oira/client/survey.py:296 src/osha/oira/client/survey.py:318
+#: src/osha/oira/client/report.py:386 src/osha/oira/client/report.py:411
 #: src/osha/oira/client/templates/risk_actionplan.pt:64
 msgid "header_measure_single"
 msgstr "Intézkedés"
 
 #. Default: Measure ${index}
-#: src/osha/oira/client/survey.py:298
+#: src/osha/oira/client/report.py:389
 #: src/osha/oira/client/templates/report_actionplan.pt:99
 msgid "header_measure"
 msgstr "${index} intézkedés"
 
 #. Default: General approach (to eliminate or reduce the risk)
-#: src/osha/oira/client/survey.py:325
+#: src/osha/oira/client/report.py:418
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
 msgid "label_measure_action_plan"
-msgstr ""
-"Általános megközelítés (a kockázat kiküszöbölésére vagy csökkentésére)"
+msgstr "Általános megközelítés (a kockázat kiküszöbölésére vagy csökkentésére)"
 
 #. Default: Specific action(s) required to implement this approach
-#: src/osha/oira/client/survey.py:327
+#: src/osha/oira/client/report.py:420
 #: src/osha/oira/client/templates/risk_actionplan.pt:98
 msgid "label_measure_prevention_plan"
 msgstr "A megoldás bevezetéséhez szükséges konkrét lépés(ek)"
 
 #. Default: Level of expertise and/or requirements needed
-#: src/osha/oira/client/survey.py:329
+#: src/osha/oira/client/report.py:422
 #: src/osha/oira/client/templates/risk_actionplan.pt:107
 msgid "label_measure_requirements"
 msgstr "Szükséges szakértelem és/vagy követelmények szintje"
 
 #. Default: Who is responsible?
-#: src/osha/oira/client/survey.py:331
+#: src/osha/oira/client/report.py:424
 #: src/osha/oira/client/templates/risk_actionplan.pt:119
 msgid "label_action_plan_responsible"
 msgstr "Ki a felelős?"
 
 #. Default: Budget
-#: src/osha/oira/client/survey.py:333
+#: src/osha/oira/client/report.py:426
 #: src/osha/oira/client/templates/risk_actionplan.pt:124
 msgid "label_action_plan_budget"
 msgstr "Költségvetés"
 
 #. Default: Planning start
-#: src/osha/oira/client/survey.py:334
+#: src/osha/oira/client/report.py:427
 #: src/osha/oira/client/templates/risk_actionplan.pt:135
 msgid "label_action_plan_start"
 msgstr "Tervezés kezdete"
 
 #. Default: Planning end
-#: src/osha/oira/client/survey.py:335
+#: src/osha/oira/client/report.py:428
 #: src/osha/oira/client/templates/risk_actionplan.pt:171
 msgid "label_action_plan_end"
 msgstr "Tervezés vége"
 
 #. Default: Consultation of workers
-#: src/osha/oira/client/survey.py:383
+#: src/osha/oira/client/report.py:479
 msgid "header_oira_report_consultation"
 msgstr "Konzultáció munkavállalókkal"
 
-#. Default: The undersigned hereby declare that the workers have been
-#. consulted
+#. Default: The undersigned hereby declare that the workers have been consulted
 #. on the content of this document.
-#: src/osha/oira/client/survey.py:392
+#: src/osha/oira/client/report.py:488
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
-"Alulírott ezennel igazolom, hogy a dolgozók véleményét kikértük a dokumentum"
-" tartalmának összeállításakor."
+"Alulírott ezennel igazolom, hogy a dolgozók véleményét kikértük a dokumentum "
+"tartalmának összeállításakor."
 
 #. Default: On behalf of the employer:
-#: src/osha/oira/client/survey.py:405
+#: src/osha/oira/client/report.py:501
 msgid "oira_consultation_employer"
 msgstr "Munkáltató nevében:"
 
 #. Default: On behalf of the workers:
-#: src/osha/oira/client/survey.py:407
+#: src/osha/oira/client/report.py:503
 msgid "oira_consultation_workers"
 msgstr "Dolgozók nevében:"
 
 #. Default: Date:
-#: src/osha/oira/client/survey.py:416
+#: src/osha/oira/client/report.py:512
 msgid "oira_survey_date"
 msgstr "Dátum:"
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/client/survey.py:457
+#: src/osha/oira/client/report.py:559
 msgid "header_oira_report_download"
 msgstr "OiRA jelentés: \"${title}"
 
 #. Default: Contents
-#: src/osha/oira/client/survey.py:476
+#: src/osha/oira/client/report.py:578
 #: src/osha/oira/client/templates/report_actionplan.pt:17
 #: src/osha/oira/client/templates/report_identification.pt:16
 msgid "toc_header"
 msgstr "Tartalom"
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/client/survey.py:481
+#: src/osha/oira/client/report.py:583
 #: src/osha/oira/client/templates/report_actionplan.pt:39
 #: src/osha/oira/client/templates/report_actionplan.pt:72
 msgid "header_present_risks"
@@ -938,7 +924,7 @@ msgstr ""
 "tartozik"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/client/survey.py:483
+#: src/osha/oira/client/report.py:586
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
@@ -946,7 +932,7 @@ msgstr "Az azonosított kockázatok, amelyekhez NEM tartozik cselekvési terv"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
-#: src/osha/oira/client/survey.py:485
+#: src/osha/oira/client/report.py:589
 #: src/osha/oira/client/templates/report_actionplan.pt:55
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
@@ -956,7 +942,7 @@ msgstr ""
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
-#: src/osha/oira/client/survey.py:487
+#: src/osha/oira/client/report.py:592
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
@@ -965,13 +951,13 @@ msgstr ""
 "szervezetében nincsenek jelen"
 
 #. Default: Action plan ${title}
-#: src/osha/oira/client/survey.py:512
+#: src/osha/oira/client/report.py:619
 msgid "filename_report_actionplan"
 msgstr "${title} cselekvési terv"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision
 #. date ${date}.
-#: src/osha/oira/client/survey.py:590
+#: src/osha/oira/client/report.py:703
 msgid "report_identification_revision"
 msgstr ""
 "Ez a dokumentum a(z) '${title}' OiRA eszköz ${date}-n átdolgozott verzióján "
@@ -979,7 +965,7 @@ msgstr ""
 
 #. Default: This report was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/client/survey.py:624
+#: src/osha/oira/client/report.py:741
 #: src/osha/oira/client/templates/report_actionplan.pt:302
 msgid "report_survey_revision"
 msgstr ""
@@ -1055,8 +1041,7 @@ msgstr ""
 "csökkenteni, ahol az ennek kitett személyek egészsége és biztonsága nem "
 "kerül veszélybe?"
 
-#. Default: Once you have decided how to eliminate or reduce a particular
-#. risk,
+#. Default: Once you have decided how to eliminate or reduce a particular risk,
 #. then you describe the specific action(s) required to achieve this. You
 #. should also include details of the level of expertise and/or other
 #. requirements needed for those actions to be effective.
@@ -1400,14 +1385,13 @@ msgstr ""
 
 #. Default: The European Agency for Safety and Health at Work and the
 #. organisations involved will not be liable for any false, inaccurate,
-#. inappropriate or incomplete information stored in the OiRA tool or any
-#. other
+#. inappropriate or incomplete information stored in the OiRA tool or any other
 #. damages as a result of using the software.
 #: src/osha/oira/client/templates/disclaimer.pt:26
 msgid "disclaimer_tool_information"
 msgstr ""
-"Az Európai Munkahelyi Egészségvédelmi és Biztonsági Ügynökség és a résztvevő"
-" szervezetek nem felelősek az OiRA eszközben tárolt bármiféle hamis, "
+"Az Európai Munkahelyi Egészségvédelmi és Biztonsági Ügynökség és a résztvevő "
+"szervezetek nem felelősek az OiRA eszközben tárolt bármiféle hamis, "
 "pontatlan, nem helyénvaló vagy nem teljes információért, illetve a szoftver "
 "használatából fakadó bármiféle kárért."
 
@@ -1460,12 +1444,12 @@ msgid "disclaimer_printed_assesment"
 msgstr ""
 "Ezenfelül, az Ügynökség és az OiRA eszköz létrehozásában résztvevő "
 "szervezetek nem vállalnak semmiféle felelősséget azokért a károkért és "
-"igényekért, amelyek abból fakadnak, hogy a felhasználó az eszközt és a benne"
-" tárolt adatokat használja, illetve nem tudja használni. Hasonlóképpen, az "
-"EU-OSHA nem vállal semmiféle felelősséget azért, ha az OiRA eszközben nem "
-"áll rendelkezésre a kockázatértékelés automatikusan rögzített jelentésének "
-"kinyomtatási lehetősége. Ezért a munkáltatónak gondoskodnia kell arról, hogy"
-" mindig legyen a birtokában egy kinyomtatott, pontos és frissített "
+"igényekért, amelyek abból fakadnak, hogy a felhasználó az eszközt és a benne "
+"tárolt adatokat használja, illetve nem tudja használni. Hasonlóképpen, az EU-"
+"OSHA nem vállal semmiféle felelősséget azért, ha az OiRA eszközben nem áll "
+"rendelkezésre a kockázatértékelés automatikusan rögzített jelentésének "
+"kinyomtatási lehetősége. Ezért a munkáltatónak gondoskodnia kell arról, hogy "
+"mindig legyen a birtokában egy kinyomtatott, pontos és frissített "
 "kockázatértékelés."
 
 #. Default: Regions
@@ -1509,8 +1493,7 @@ msgstr "Következő"
 msgid "header_profile"
 msgstr "A kockázatértékelés saját vállalathoz igazítása"
 
-#. Default: In order to tailor the risk assessment to your organisation you
-#. may
+#. Default: In order to tailor the risk assessment to your organisation you may
 #. be asked to:
 #: src/osha/oira/client/templates/profile.pt:18
 msgid "expl_profile"
@@ -1531,8 +1514,8 @@ msgstr ""
 #: src/osha/oira/client/templates/profile.pt:27
 msgid "expl_profile_bullet2"
 msgstr ""
-"fel kell sorolni a különböző üzletágakat, vagy fiókokat, üzleteket stb. Ezek"
-" a kapcsolódó kockázatok minden megadott névnél megismétlődnek."
+"fel kell sorolni a különböző üzletágakat, vagy fiókokat, üzleteket stb. Ezek "
+"a kapcsolódó kockázatok minden megadott névnél megismétlődnek."
 
 #: src/osha/oira/client/templates/profile.pt:38
 #: src/osha/oira/client/templates/profile.pt:44
@@ -1710,8 +1693,7 @@ msgstr ""
 msgid "report_measure_budget"
 msgstr "Ehhez az intézkedéshez a költségvetés: ${amount}."
 
-#. Default: The following risks have not yet been answered. Please do so at
-#. the
+#. Default: The following risks have not yet been answered. Please do so at the
 #. soonest possibility.
 #: src/osha/oira/client/templates/report_actionplan.pt:189
 msgid "desc_unanswered_risks"
@@ -1719,13 +1701,11 @@ msgstr ""
 "Az alábbi kockázatokat még nem válaszolták meg. Kérjük, minél előbb tegye "
 "meg."
 
-#. Default: This risk is not present in your organisation, but since the
-#. sector
-#. organisation considers this one of the priority risks it must be included
-#. in
+#. Default: This risk is not present in your organisation, but since the sector
+#. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:167
+#: src/osha/oira/client/templates/webhelpers.pt:169
 msgid "top5_risk_not_present"
 msgstr ""
 "Ez a kockázat az Ön vállalatánál nincs jelen, de mivel az ágazat szervezete "
@@ -1817,7 +1797,7 @@ msgstr "A lépés átugrása"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:179
+#: src/osha/oira/client/templates/webhelpers.pt:181
 msgid "warn_risk_present"
 msgstr "A fenti állításra tagadó választ adott."
 
@@ -1827,9 +1807,9 @@ msgstr "Jelentés letöltése és kinyomtatása"
 
 #: src/osha/oira/client/templates/report_landing.pt:23
 msgid ""
-"Save the report on your computer and print it. You can also modify it or add"
-" more information. Please note that changes made on your pc will NOT be "
-"saved in the OiRA tool"
+"Save the report on your computer and print it. You can also modify it or add "
+"more information. Please note that changes made on your pc will NOT be saved "
+"in the OiRA tool"
 msgstr ""
 "Mentse el a jelentést saját számítógépén, majd nyomtassa ki. A jelentést "
 "módosíthatja, illetve további információkkal kiegészítheti. Felhívjuk "
@@ -1850,8 +1830,8 @@ msgid ""
 "employers, experts in occupational safety and health, ...)"
 msgstr ""
 "Információátadás az érintetteknek (dolgozóknak, biztonsági képviselőknek, "
-"foglalkoztatási biztonsággal és egészségvédelemmel foglalkozó szakértőknek, "
-"...)"
+"foglalkoztatási biztonsággal és egészségvédelemmel foglalkozó "
+"szakértőknek, ...)"
 
 #: src/osha/oira/client/templates/report_landing.pt:29
 msgid "Monitor and assess whether necessary measures have been introduced."
@@ -1860,8 +1840,8 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:30
 msgid ""
-"Record any revision if circumstances change (new machines, new workers, as a"
-" result of findings of any accident investigations, etc.)"
+"Record any revision if circumstances change (new machines, new workers, as a "
+"result of findings of any accident investigations, etc.)"
 msgstr ""
 "Átdolgozások rögzítése, ha a körülmények változnak (új gépek, új dolgozók, "
 "baleseti kivizsgálások eredményei stb.)"
@@ -1879,8 +1859,8 @@ msgid ""
 "Contains: all the information and input provided by you throughout the risk "
 "assessment process."
 msgstr ""
-"Tartalmazza: az Ön által a teljes kockázatértékelési folyamat alatt megadott"
-" információkat és bevitt adatokat."
+"Tartalmazza: az Ön által a teljes kockázatértékelési folyamat alatt megadott "
+"információkat és bevitt adatokat."
 
 #: src/osha/oira/client/templates/report_landing.pt:42
 #: src/osha/oira/client/templates/report_landing.pt:58
@@ -1900,8 +1880,8 @@ msgid ""
 "We recommend to always keep an updated printed version of your risk "
 "assessment (report) available in your company!"
 msgstr ""
-"Azt javasoljuk, hogy a kockázatértékelés (jelentésének) mindig legyen kéznél"
-" egy frissített, nyomtatott változata a vállalatnál!"
+"Azt javasoljuk, hogy a kockázatértékelés (jelentésének) mindig legyen kéznél "
+"egy frissített, nyomtatott változata a vállalatnál!"
 
 #: src/osha/oira/client/templates/report_landing.pt:51
 msgid "Download the action plan"
@@ -2007,13 +1987,11 @@ msgstr ""
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
 "Jelöljön ki valakit a vállalatnál, aki felelős ennek az intézkedésnek a "
-"bevezetéséért. Ez a személy jogosult megtenni a Tervben leírt lépéseket  "
-"és/vagy felelős ezek végrehajtásáért."
+"bevezetéséért. Ez a személy jogosult megtenni a Tervben leírt lépéseket  és/"
+"vagy felelős ezek végrehajtásáért."
 
-#. Default: Although some measures do not cost any money, most do. The
-#. measures
-#. should therefore be budgeted for; include them in the annual budget round
-#. if
+#. Default: Although some measures do not cost any money, most do. The measures
+#. should therefore be budgeted for; include them in the annual budget round if
 #. necessary.
 #: src/osha/oira/client/templates/risk_actionplan.pt:125
 msgid "actionplan_measure_budget_tooltip"
@@ -2053,7 +2031,7 @@ msgstr "Hónap"
 
 #. Default: Year
 #: src/osha/oira/client/templates/risk_actionplan.pt:155
-#: src/osha/oira/content/statistics.py:34
+#: src/osha/oira/content/statistics.py:35
 msgid "label_year"
 msgstr "Év"
 
@@ -2070,8 +2048,8 @@ msgstr "Kérjük, 1900 utáni érvényes évet adjon meg"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"Ha megjegyzéseket szeretne hozzáfűzni a fenti kérdéshez, azt ebben a mezőben"
-" megteheti. Ezeket a megjegyzéseket a cselekvési tervben felhasználjuk."
+"Ha megjegyzéseket szeretne hozzáfűzni a fenti kérdéshez, azt ebben a mezőben "
+"megteheti. Ezeket a megjegyzéseket a cselekvési tervben felhasználjuk."
 
 #. Default: What is the chance of this risk occurring?
 #: src/osha/oira/client/templates/risk_evaluation.pt:28
@@ -2304,8 +2282,8 @@ msgstr ""
 "Miután elindította az OiRA eszköz munkafolyamatát, leállíthatja, mielőtt "
 "kész lenne. Később az OiRA eszköz munkafolyamatának címét kiválasztva "
 "újraindíthatja. Egynél több munkafolyamatot is elmenthet, amennyiben "
-"különböző neveket adott ezeknek. Ne felejtse el az e-mailcímét, jelszavát és"
-" az OiRA eszköz munkafolyamatának adott nevet. A Kijelentkezés gombra "
+"különböző neveket adott ezeknek. Ne felejtse el az e-mailcímét, jelszavát és "
+"az OiRA eszköz munkafolyamatának adott nevet. A Kijelentkezés gombra "
 "kattintva aktívan kijelentkezik. AKkor is kijelentkezik, ha lezárja a "
 "böngészőt. Biztonsági okokból jobb aktívan kijelentkezni."
 
@@ -2361,64 +2339,64 @@ msgstr "Online interaktív"
 msgid "oira_name_line_2"
 msgstr "Kockázatértékelés"
 
-#: src/osha/oira/client/templates/webhelpers.pt:104
+#: src/osha/oira/client/templates/webhelpers.pt:105
 msgid "Unvisited"
 msgstr "Megválaszolatlan"
 
-#: src/osha/oira/client/templates/webhelpers.pt:105
+#: src/osha/oira/client/templates/webhelpers.pt:106
 msgid "Postponed"
 msgstr "Elhalasztva"
 
-#: src/osha/oira/client/templates/webhelpers.pt:106
+#: src/osha/oira/client/templates/webhelpers.pt:107
 msgid "Risk not present"
 msgstr "Rendben"
 
-#: src/osha/oira/client/templates/webhelpers.pt:107
+#: src/osha/oira/client/templates/webhelpers.pt:108
 msgid "Risk present"
 msgstr "Figyelem"
 
 #. Default: Produced by ${EU-OSHA}.
-#: src/osha/oira/client/templates/webhelpers.pt:121
+#: src/osha/oira/client/templates/webhelpers.pt:122
 msgid "appendix_produced_by"
 msgstr "Létrehozta: ${EU-OSHA}."
 
 #. Default: About
-#: src/osha/oira/client/templates/webhelpers.pt:124
+#: src/osha/oira/client/templates/webhelpers.pt:125
 msgid "appendix_about"
 msgstr "Névjegy"
 
 #. Default: Privacy
-#: src/osha/oira/client/templates/webhelpers.pt:126
+#: src/osha/oira/client/templates/webhelpers.pt:127
 msgid "appendix_privacy"
 msgstr "Adatvédelem"
 
 #. Default: Disclaimer
-#: src/osha/oira/client/templates/webhelpers.pt:128
+#: src/osha/oira/client/templates/webhelpers.pt:129
 msgid "appendix_disclaimer"
 msgstr "Jognyilatkozat"
 
 #. Default: GPL License
-#: src/osha/oira/client/templates/webhelpers.pt:130
+#: src/osha/oira/client/templates/webhelpers.pt:131
 msgid "appendix_gpl_license"
 msgstr "GPL Licenc"
 
-#: src/osha/oira/client/templates/webhelpers.pt:132
+#: src/osha/oira/client/templates/webhelpers.pt:133
 msgid "CC License"
 msgstr "CC Licenc"
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:194
-#: src/osha/oira/client/templates/webhelpers.pt:208
+#: src/osha/oira/client/templates/webhelpers.pt:196
+#: src/osha/oira/client/templates/webhelpers.pt:210
 msgid "header_legal_references"
 msgstr "Hivatkozások jogszabályokra és szabályzatokra"
 
 #. Default: Hide
-#: src/osha/oira/client/templates/webhelpers.pt:211
+#: src/osha/oira/client/templates/webhelpers.pt:213
 msgid "action_hide"
 msgstr "Elrejtés"
 
 #. Default: Show
-#: src/osha/oira/client/templates/webhelpers.pt:215
+#: src/osha/oira/client/templates/webhelpers.pt:217
 msgid "action_show"
 msgstr "Megmutatás"
 
@@ -2536,73 +2514,73 @@ msgid "menu_statistics"
 msgstr "Statisztika"
 
 #. Default: Period
-#: src/osha/oira/content/statistics.py:39
+#: src/osha/oira/content/statistics.py:40
 msgid "label_period"
 msgstr "Időszak"
 
 #. Default: Report Type
-#: src/osha/oira/content/statistics.py:69
+#: src/osha/oira/content/statistics.py:70
 msgid "label_report_type"
 msgstr "Jelentés típusa"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:75
+#: src/osha/oira/content/statistics.py:76
 msgid "label_report_countries"
 msgstr "Ország"
 
 #. Default: Tool
-#: src/osha/oira/content/statistics.py:82
+#: src/osha/oira/content/statistics.py:83
 msgid "label_report_tools"
 msgstr "Eszköz"
 
 #. Default: Report Period
-#: src/osha/oira/content/statistics.py:89
+#: src/osha/oira/content/statistics.py:90
 msgid "label_report_period"
 msgstr "Jelentés időszaka"
 
 #. Default: File Format
-#: src/osha/oira/content/statistics.py:94
+#: src/osha/oira/content/statistics.py:95
 msgid "label_report_file_format"
 msgstr "Fájlformátum"
 
 #. Default: Statistics Reporting
-#: src/osha/oira/content/statistics.py:269
-#: src/osha/oira/content/statistics.py:297
-#: src/osha/oira/content/statistics.py:330
+#: src/osha/oira/content/statistics.py:270
+#: src/osha/oira/content/statistics.py:298
+#: src/osha/oira/content/statistics.py:338
 msgid "title_statistics"
 msgstr "Statisztikai jelentés"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:271
+#: src/osha/oira/content/statistics.py:272
 msgid "label_country"
 msgstr "Ország"
 
-#: src/osha/oira/content/statistics.py:275
-#: src/osha/oira/content/statistics.py:303
-#: src/osha/oira/content/statistics.py:336
+#: src/osha/oira/content/statistics.py:276
+#: src/osha/oira/content/statistics.py:304
+#: src/osha/oira/content/statistics.py:344
 msgid "Submit"
 msgstr "Elküldés"
 
 #. Default: Sector
-#: src/osha/oira/content/statistics.py:299
+#: src/osha/oira/content/statistics.py:300
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
 msgid "Sector"
 msgstr "Ágazat"
 
 #. Default: Global
-#: src/osha/oira/content/statistics.py:332
+#: src/osha/oira/content/statistics.py:340
 msgid "label_global"
 msgstr "Globális"
 
 #. Default: Include a logo which links to an external website.
-#: src/osha/oira/content/survey.py:25
+#: src/osha/oira/content/survey.py:24
 msgid "label_external_site_enabled"
 msgstr "Adjon meg egy külső weboldalra vezető logót!"
 
 #. Default: Tick this option if you would like to create a hyperlink on the
 #. OiRA tool which points to an external website. The hyperlink will be in the
 #. form of a logo image.
-#: src/osha/oira/content/survey.py:28
+#: src/osha/oira/content/survey.py:27
 msgid "help_external_site_enabled"
 msgstr ""
 "Jelölje ki ezt az opciót, amennyiben egy külső weboldalra mutató "
@@ -2610,40 +2588,39 @@ msgstr ""
 "egy logókép formájában fog szerepelni."
 
 #. Default: External site URL
-#: src/osha/oira/content/survey.py:40
+#: src/osha/oira/content/survey.py:39
 msgid "label_external_site_url"
 msgstr "A külső weboldal URL-je"
 
-#. Default: This is the URL of an external site that is linked to. Clicking
-#. the
+#. Default: This is the URL of an external site that is linked to. Clicking the
 #. logo or the name will take the user to this URL.
-#: src/osha/oira/content/survey.py:41
+#: src/osha/oira/content/survey.py:40
 msgid "help__external_site_url"
 msgstr ""
-"Ez egy külső weboldal URL-je, amelyhez hivatkozás kapcsolódik. A logóra vagy"
-" névre kattintva a felhasználó az URL-re jut."
+"Ez egy külső weboldal URL-je, amelyhez hivatkozás kapcsolódik. A logóra vagy "
+"névre kattintva a felhasználó az URL-re jut."
 
 #. Default: External site name
-#: src/osha/oira/content/survey.py:51
+#: src/osha/oira/content/survey.py:50
 msgid "label_external_site_name"
 msgstr "A külső weboldal neve"
 
 #. Default: This is the name of the external site that is linked to. It will
 #. appear next to the logo.
-#: src/osha/oira/content/survey.py:52
+#: src/osha/oira/content/survey.py:51
 msgid "help_external_site_name"
 msgstr ""
 "Ez annak a külső oldalnak a neve, amelyhez hivatkozás kapcsolódik. A logó "
 "mellett fog megjelenni."
 
 #. Default: External site logo
-#: src/osha/oira/content/survey.py:61
+#: src/osha/oira/content/survey.py:60
 msgid "label_external_site_logo"
 msgstr "A külső oldal logója"
 
 #. Default: Upload an image. Make sure your image is of format png, jpg or gif
 #. and does not contain any special characters.
-#: src/osha/oira/content/survey.py:62
+#: src/osha/oira/content/survey.py:61
 msgid "help_image_upload"
 msgstr ""
 "Töltsön fel egy képet. A kép formátuma legyen png, jpg vagy gif, és ne "
@@ -2674,8 +2651,7 @@ msgstr "Itt kezelheti a ${client} dokumentációját."
 #: src/osha/oira/content/templates/documentation_view.pt:17
 msgid "documentation_homepage"
 msgstr ""
-"A honlap megjelenésének megváltoztatásához lépjen ide: "
-"${homepage_edit_form}."
+"A honlap megjelenésének megváltoztatásához lépjen ide: ${homepage_edit_form}."
 
 #. Default: appendix
 #: src/osha/oira/content/templates/documentation_view.pt:23
@@ -2850,44 +2826,29 @@ msgstr "Többválasztós kérdés"
 msgid "Not provided"
 msgstr "Nincs"
 
-#. Default: Evaluation phase
-#: src/osha/oira/content/templates/survey_view.pt:24
-msgid "label_evaluation_phase"
-msgstr "Értékelési szakasz"
-
-#. Default: Optional
-#: src/osha/oira/content/templates/survey_view.pt:25
-msgid "optional"
-msgstr "Opcionális"
-
-#. Default: Mandatory
-#: src/osha/oira/content/templates/survey_view.pt:26
-msgid "mandatory"
-msgstr "Kötelező"
-
 #. Default: Classification code
-#: src/osha/oira/content/templates/survey_view.pt:27
+#: src/osha/oira/content/templates/survey_view.pt:24
 msgid "label_classification_code"
 msgstr "Osztályozás kódja"
 
 #. Default: Not set
+#: src/osha/oira/content/templates/survey_view.pt:26
 #: src/osha/oira/content/templates/survey_view.pt:29
-#: src/osha/oira/content/templates/survey_view.pt:32
 msgid "not_set"
 msgstr "Nincs beállítva"
 
 #. Default: Language
-#: src/osha/oira/content/templates/survey_view.pt:30
+#: src/osha/oira/content/templates/survey_view.pt:27
 msgid "label_language"
 msgstr "Nyelv"
 
 #. Default: Modules and Profile Questions
-#: src/osha/oira/content/templates/survey_view.pt:36
+#: src/osha/oira/content/templates/survey_view.pt:33
 msgid "header_modules_and_profile_questions"
 msgstr "Modulok és profilkérdések"
 
 #. Default: This OiRA Tool has no modules.
-#: src/osha/oira/content/templates/survey_view.pt:38
+#: src/osha/oira/content/templates/survey_view.pt:35
 msgid "no_modules"
 msgstr "Ennek az OiRA eszköznek nincsenek moduljai."
 
@@ -2972,8 +2933,7 @@ msgid ""
 msgstr "Ez a javasolt értékelési algoritmus a Kinney módszer alapján"
 
 #. Default: This method involves risk assessment by Severity x Exposure,
-#. whereas these have to be understood as follows; Severity of injury linked
-#. to
+#. whereas these have to be understood as follows; Severity of injury linked to
 #. hazard - Exposure (Frequency) to the hazard
 #: src/osha/oira/content/templates/surveygroup_add.pt:94
 msgid "help_survey_evaluation_algorithm_simplified"
@@ -3064,8 +3024,8 @@ msgstr "Profilkérdés"
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:8
 msgid ""
-"The basic architecture of an Online interactive Risk Assessment consists of:"
-" - profile questions (questions defining the company profile) - modules and "
+"The basic architecture of an Online interactive Risk Assessment consists of: "
+"- profile questions (questions defining the company profile) - modules and "
 "potentially sub-modules - risks (positive statements) Profile questions are "
 "used to determine whether particular modules apply to the end user at all "
 "(OPTIONAL), or whether they should be repeated a number of times "
@@ -3120,8 +3080,7 @@ msgstr "Tudatában van az összes kockázatnak?"
 
 #. Default: Including the risks to your employees and your equipment? What if
 #. there is an accident with one of the machines? What if an employee is
-#. exposed to hazardous substances? A risk assessment helps you to define
-#. these
+#. exposed to hazardous substances? A risk assessment helps you to define these
 #. risks and tackle them head on. A risk assessment mainly consists of two
 #. parts: a <dynamic element> with all the risks in your company and an
 #. <dynamic element> with details of how to deal with these risks. These two
@@ -3156,8 +3115,8 @@ msgstr ""
 "Bonyolult? Nem igazán. Csak rá kell szánni egy kis időt. Ugyanakkor a "
 "kockázatértékelés fontos - annyira fontos, hogy még törvény is előírja. És "
 "jó okkal. Ha a kockázatokat nem mérik föl, és nem megfelelően kezelik, nem "
-"indítható el a megfelelő kockázatkezelési folyamat, és nem valószínű, hogy a"
-" megfelelő megelőző intézkedéseket megteszik vagy bevezetik."
+"indítható el a megfelelő kockázatkezelési folyamat, és nem valószínű, hogy a "
+"megfelelő megelőző intézkedéseket megteszik vagy bevezetik."
 
 #. Default: Consultation and participation of workers
 #: src/osha/oira/templates/default_introduction.pt:12
@@ -3173,8 +3132,8 @@ msgid "intro_consultation_of_workers"
 msgstr ""
 "A dolgozóknak vagy a dolgozók egészségvédelemért és biztonságért felelős "
 "képviselőinek kiegyensúlyozott módon részt kell venniük a "
-"kockázatértékelésben, vagy a munkáltatónak előre és időben ki kell kérniük a"
-" véleményüket ezzel kapcsolatban."
+"kockázatértékelésben, vagy a munkáltatónak előre és időben ki kell kérniük a "
+"véleményüket ezzel kapcsolatban."
 
 #. Default: The OiRA tool
 #: src/osha/oira/templates/default_introduction.pt:15
@@ -3209,6 +3168,15 @@ msgid "message_invalid_login"
 msgstr ""
 "Érvénytelen bejelentkezés. Ha elfelejtette a jelszavát, ${reset_password}."
 
+#~ msgid "label_evaluation_phase"
+#~ msgstr "Értékelési szakasz"
+
+#~ msgid "optional"
+#~ msgstr "Opcionális"
+
+#~ msgid "mandatory"
+#~ msgstr "Kötelező"
+
 #~ msgid "Add ${name}"
 #~ msgstr "${name} hozzáadása"
 
@@ -3234,9 +3202,9 @@ msgstr ""
 #~ msgstr "nem"
 
 #~ msgid ""
-#~ "Save the report on your computer and print it. You can also modify it or add"
-#~ " more information. Please note that changes made on your pc will ${not} be "
-#~ "saved in the OiRA tool"
+#~ "Save the report on your computer and print it. You can also modify it or "
+#~ "add more information. Please note that changes made on your pc will "
+#~ "${not} be saved in the OiRA tool"
 #~ msgstr ""
 #~ "Elmenti a jelentést a számítógépére és kinyomtatja. Módosíthatja is, és "
 #~ "további információkat adhat hozzá. Ne feledje, hogy a saját számítógépén "

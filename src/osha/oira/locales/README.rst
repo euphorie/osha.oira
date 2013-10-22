@@ -116,7 +116,18 @@ This will create a zip file of necessary translations.
 Updating po files with new translations
 ---------------------------------------
 
-**TODO**
+When updating the translations you need to update both the Euphorie and the osha.oira translations.
+
+If you have just one translation file, you can update the translations like this,
+from the buildout root:
+
+  $ poupdate src/osha.oira/src/osha/oira/locales/sv/LC_MESSAGES/euphorie.po new_sv_translation/euphorie.po
+  $ poupdate src/Euphorie/src/euphorie/deployment/locales/sv/LC_MESSAGES/euphorie.po new_sv_translation.po
+  
+If you get the translations in a ZIP-file, unzip that file, and update both packages:
+
+  $ poupdate src/osha.oira/src/osha/oira/locales/ /tmp/new_translations/
+  $ poupdate src/Euphorie/src/euphorie/deployment/locales/ /tmp/new_translations/
 
 
 Beware of fuzzy!

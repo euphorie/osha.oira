@@ -26,8 +26,11 @@ class IdentificationView(module.IdentificationView):
 
         if IProfileQuestion.providedBy(module) and context.depth == 2:
             next = FindNextQuestion(context, filter=self.question_filter)
-            url = QuestionURL(self.request.survey, next,
-                    phase="identification")
+            if next is None:
+                # We ran out of questions, proceed to the evaluation
+                url = "%s/evaluation" % self.request.survey.absolute_url()
+            else:
+                url = QuestionURL(self.request.survey, next, phase="identification")
             return self.request.response.redirect(url)
         else:
             return super(IdentificationView, self).update()

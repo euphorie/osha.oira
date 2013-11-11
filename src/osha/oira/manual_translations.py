@@ -150,8 +150,7 @@ _("intro_print_identification_2", default=
 _("list_of_risks", default=u"contents of the tool")
 
 _("help_evaluation_empty", default=
-    u"No hazards or problems were spotted. Please proceed directly to the "
-    u"action plan step.")
+    u"Please proceed directly to the action plan step.")
 
 _("help_create_new_version", default=u"Start to write a new OiRA Tool. You "
     u"will be asked whether you want to start off with a copy of an existing "

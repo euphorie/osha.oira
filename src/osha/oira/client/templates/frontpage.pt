@@ -421,6 +421,7 @@
     </ul>
     <metal:css use-macro="webhelpers/macros/appendix"/>
     <metal:css use-macro="webhelpers/macros/javascript"/>
+    <!--[if lte IE 8]><script src="${client/++resource++euphorie.behaviour}/ie6/warning.js"></script><script>window.onload=function(){e("/++resource++euphorie.behaviour/ie6/")}</script><![endif]-->
     <script type="text/javascript" meta:interpolation="false">
     // <![CDATA[
         $(document).ready(function() {

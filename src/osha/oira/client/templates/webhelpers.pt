@@ -57,7 +57,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width = 320" />
     <meta name="viewport" content="user-scalable=no" />
-<!--[if lte IE 8]><script src="${client/++resource++euphorie.behaviour}/ie6/warning.js"></script><script>window.onload=function(){e("/++resource++euphorie.behaviour/ie6/")}</script><![endif]-->
   </metal:css>
 
   <metal:javascript define-macro="javascript" meta:interpolation="true" tal:define="lib_url client/++resource++euphorie.libraries">

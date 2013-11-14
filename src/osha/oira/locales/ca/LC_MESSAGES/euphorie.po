@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.6.dev0\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-10-25 15:06+0200\n"
+"POT-Creation-Date: 2013-11-14 11:25+0100\n"
 "PO-Revision-Date: 2013-08-15 11:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -525,29 +525,27 @@ msgstr ""
 msgid "list_of_risks"
 msgstr "contingut de l'eina"
 
-#. Default: No hazards or problems were spotted. Please proceed directly to the
-#. action plan step.
+#. Default: Please proceed directly to the action plan step.
 #: src/osha/oira/manual_translations.py:152
 msgid "help_evaluation_empty"
-msgstr ""
-"Passi directament al pas del pla d'acció."
+msgstr "Passi directament al pas del pla d'acció."
 
 #. Default: Start to write a new OiRA Tool. You will be asked whether you want
 #. to start off with a copy of an existing OiRA Tool..
-#: src/osha/oira/manual_translations.py:156
+#: src/osha/oira/manual_translations.py:155
 msgid "help_create_new_version"
 msgstr ""
 "Comenci a redactar una eina OiRA nova. Se li demanarà si vol començar amb "
 "una còpia d'una eina OiRA existent."
 
 #. Default: Remove this OiRA Tool from the online client.
-#: src/osha/oira/manual_translations.py:160
+#: src/osha/oira/manual_translations.py:159
 msgid "title_help_unpublished"
 msgstr "Elimini aquesta eina OiRA del client en línia."
 
 #. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url} .
-#: src/osha/oira/manual_translations.py:163
+#: src/osha/oira/manual_translations.py:162
 msgid "message_preview_success"
 msgstr ""
 "S'ha creat una previsualització correcta de l'eina OiRA. S'hi pot accedir "
@@ -556,7 +554,7 @@ msgstr ""
 #. Default: Please note that by deleting your account, you will also delete all
 #. your sessions. Please make sure you download your reports from the Report
 #. step prior to deleting your account, if you want to keep any.
-#: src/osha/oira/manual_translations.py:166
+#: src/osha/oira/manual_translations.py:165
 msgid "warning_account_delete_surveys"
 msgstr ""
 "Tingui en compte que, si suprimeix el compte, també se'n suprimiran totes "
@@ -566,7 +564,7 @@ msgstr ""
 #. Default: Are you sure you want to create a preview of this OiRA Tool? You
 #. can give the URL for the preview to others so they can test the OiRA Tool.
 #. To access the preview a standard OiRA client login is required.
-#: src/osha/oira/manual_translations.py:171
+#: src/osha/oira/manual_translations.py:170
 msgid "intro_preview"
 msgstr ""
 "Està segur que vol crear una previsualització d'aquesta eina OiRA? Pot "
@@ -575,18 +573,18 @@ msgstr ""
 "sessió de client OiRA estàndard."
 
 #. Default: Preview OiRA Tool
-#: src/osha/oira/manual_translations.py:176
+#: src/osha/oira/manual_translations.py:175
 msgid "header_preview"
 msgstr "Previsualitzar l'eina OiRA"
 
 #. Default: After publication the OiRA Tool will be available at ${url}.
-#: src/osha/oira/manual_translations.py:178
+#: src/osha/oira/manual_translations.py:177
 msgid "help_publish_url"
 msgstr "Un cop publicada, l'eina OiRA estarà disponible a ${url}."
 
 #. Default: Are you sure you want to publish this OiRA Tool version? This will
 #. replace the current version.
-#: src/osha/oira/manual_translations.py:180
+#: src/osha/oira/manual_translations.py:179
 msgid "intro_publish_other_survey_published"
 msgstr ""
 "Està segur que vol publicar aquesta versió de l'eina OiRA? En cas afirmatiu, "
@@ -594,7 +592,7 @@ msgstr ""
 
 #. Default: Are you sure you want to republish this OiRA Tool? This will make
 #. all changes made public.
-#: src/osha/oira/manual_translations.py:184
+#: src/osha/oira/manual_translations.py:183
 msgid "intro_publish_survey_published"
 msgstr ""
 "Està segur que vol tornar a publicar aquesta eina OiRA? Això farà que tots "
@@ -603,91 +601,91 @@ msgstr ""
 #. Default: Are you sure you want to publish this OiRA Tool? After publication
 #. the OiRA Tool will appear in the online client and be accessible by all
 #. users.
-#: src/osha/oira/manual_translations.py:188
+#: src/osha/oira/manual_translations.py:187
 msgid "intro_publish_first_time"
 msgstr ""
 "Està segur que vol publicar aquesta eina OiRA? Un cop publicada, l'eina OiRA "
 "apareixerà al client en línia i tots els usuaris hi podran accedir."
 
 #. Default: Publish OiRA Tool
-#: src/osha/oira/manual_translations.py:192
+#: src/osha/oira/manual_translations.py:191
 msgid "header_publish"
 msgstr "Publicar l'eina OiRA"
 
 #. Default: The title of this OiRA Tool. This title is used in the OiRA Tool
 #. overview in the clients.
-#: src/osha/oira/manual_translations.py:194
+#: src/osha/oira/manual_translations.py:193
 msgid "help_surveygroup_title"
 msgstr ""
 "El títol d'aquesta eina OiRA. Aquest títol s'utilitza a la visió general de "
 "l'eina OiRA dels clients."
 
 #. Default: This OiRA Tool is now no longer available in the client.
-#: src/osha/oira/manual_translations.py:198
+#: src/osha/oira/manual_translations.py:197
 msgid "message_unpublish_success"
 msgstr "Aquesta eina OiRA ja no es troba disponible al client."
 
 #. Default: Name for OiRA Tool version
-#: src/osha/oira/manual_translations.py:200
+#: src/osha/oira/manual_translations.py:199
 msgid "label_upload_survey_title"
 msgstr "Nom de la versió de l'eina OiRA"
 
 #. Default: Default severity
-#: src/osha/oira/manual_translations.py:202
+#: src/osha/oira/manual_translations.py:201
 msgid "label_default_effect"
 msgstr "Severitat per defecte"
 
 #. Default: Are you sure you want to unpublish this OiRA Tool?
-#: src/osha/oira/manual_translations.py:204
+#: src/osha/oira/manual_translations.py:203
 msgid "unpublish_confirm"
 msgstr "Està segur que vol despublicar aquesta eina OiRA?"
 
 #. Default: Import OiRA Tool
-#: src/osha/oira/manual_translations.py:206
+#: src/osha/oira/manual_translations.py:205
 msgid "menu_import"
 msgstr "Importar una eina OiRA"
 
 #. Default: You cannot delete an OiRA Tool version that is published. Please
 #. unpublish it first.
-#: src/osha/oira/manual_translations.py:208
+#: src/osha/oira/manual_translations.py:207
 msgid "message_no_delete_published_survey"
 msgstr ""
 "No es pot suprimir una versió de l'eina OiRA que estigui publicada. Abans "
 "s'ha de despublicar."
 
 #. Default: You can not delete a sector that contains published OiRA Tools.
-#: src/osha/oira/manual_translations.py:212
+#: src/osha/oira/manual_translations.py:211
 msgid "message_not_delete_published_sector"
 msgstr "No es pot suprimir un sector que contingui eines OiRA publicades."
 
 #. Default: add a new OiRA Tool
-#: src/osha/oira/manual_translations.py:216
+#: src/osha/oira/manual_translations.py:215
 msgid "add_survey"
 msgstr "afegir una eina OiRA nova"
 
 #. Default: There are no OiRA Tools present. You can ${add_link}.
-#: src/osha/oira/manual_translations.py:218
+#: src/osha/oira/manual_translations.py:217
 msgid "no_surveys_present"
 msgstr "No hi ha cap eina OiRA. Pot ${add_link}."
 
 #. Default: OiRA Tools
-#: src/osha/oira/manual_translations.py:220
+#: src/osha/oira/manual_translations.py:219
 msgid "header_sector_survey_list"
 msgstr "Eines OiRA"
 
 #. Default: We're sorry, but an unforseen error has occured.
-#: src/osha/oira/manual_translations.py:222
+#: src/osha/oira/manual_translations.py:221
 msgid "expl_error"
 msgstr "S'ha produït un error inesperat."
 
 #. Default: Delete this measure
-#: src/osha/oira/manual_translations.py:224
+#: src/osha/oira/manual_translations.py:223
 #: src/osha/oira/client/templates/risk_actionplan.pt:66
 msgid "label_remove_measure"
 msgstr "Esborrar aquesta mesura"
 
 #. Default: Add Measure
-#: src/osha/oira/manual_translations.py:225 src/osha/oira/content/risk.py:98
+#: src/osha/oira/manual_translations.py:224 src/osha/oira/content/risk.py:98
 msgid "Add Solution"
 msgstr "Afegir Mesura"
 
@@ -1680,7 +1678,7 @@ msgstr ""
 #. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:169
+#: src/osha/oira/client/templates/webhelpers.pt:168
 msgid "top5_risk_not_present"
 msgstr ""
 "Aquest risc no existeix a la seva organització però, com que l'organització "
@@ -1771,7 +1769,7 @@ msgstr "Ometre aquest pas"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:181
+#: src/osha/oira/client/templates/webhelpers.pt:180
 msgid "warn_risk_present"
 msgstr "Ha respost a l'afirmació anterior de forma negativa."
 
@@ -2314,64 +2312,64 @@ msgstr "Avaluació de riscos"
 msgid "oira_name_line_2"
 msgstr "interactiva en línia"
 
-#: src/osha/oira/client/templates/webhelpers.pt:105
+#: src/osha/oira/client/templates/webhelpers.pt:104
 msgid "Unvisited"
 msgstr "No respost"
 
-#: src/osha/oira/client/templates/webhelpers.pt:106
+#: src/osha/oira/client/templates/webhelpers.pt:105
 msgid "Postponed"
 msgstr "Posposat"
 
-#: src/osha/oira/client/templates/webhelpers.pt:107
+#: src/osha/oira/client/templates/webhelpers.pt:106
 msgid "Risk not present"
 msgstr "Correcte"
 
-#: src/osha/oira/client/templates/webhelpers.pt:108
+#: src/osha/oira/client/templates/webhelpers.pt:107
 msgid "Risk present"
 msgstr "Actuar"
 
 #. Default: Produced by ${EU-OSHA}.
-#: src/osha/oira/client/templates/webhelpers.pt:122
+#: src/osha/oira/client/templates/webhelpers.pt:121
 msgid "appendix_produced_by"
 msgstr "Creat per l'${EU-OSHA}."
 
 #. Default: About
-#: src/osha/oira/client/templates/webhelpers.pt:125
+#: src/osha/oira/client/templates/webhelpers.pt:124
 msgid "appendix_about"
 msgstr "Quant a"
 
 #. Default: Privacy
-#: src/osha/oira/client/templates/webhelpers.pt:127
+#: src/osha/oira/client/templates/webhelpers.pt:126
 msgid "appendix_privacy"
 msgstr "Privadesa"
 
 #. Default: Disclaimer
-#: src/osha/oira/client/templates/webhelpers.pt:129
+#: src/osha/oira/client/templates/webhelpers.pt:128
 msgid "appendix_disclaimer"
 msgstr "Avís d'exempció de responsabilitat"
 
 #. Default: GPL License
-#: src/osha/oira/client/templates/webhelpers.pt:131
+#: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "appendix_gpl_license"
 msgstr "Llicència GPL"
 
-#: src/osha/oira/client/templates/webhelpers.pt:133
+#: src/osha/oira/client/templates/webhelpers.pt:132
 msgid "CC License"
 msgstr "Llicència CC"
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:196
-#: src/osha/oira/client/templates/webhelpers.pt:210
+#: src/osha/oira/client/templates/webhelpers.pt:195
+#: src/osha/oira/client/templates/webhelpers.pt:209
 msgid "header_legal_references"
 msgstr "Referències legals i de la política"
 
 #. Default: Hide
-#: src/osha/oira/client/templates/webhelpers.pt:213
+#: src/osha/oira/client/templates/webhelpers.pt:212
 msgid "action_hide"
 msgstr "Amagar"
 
 #. Default: Show
-#: src/osha/oira/client/templates/webhelpers.pt:217
+#: src/osha/oira/client/templates/webhelpers.pt:216
 msgid "action_show"
 msgstr "Mostrar"
 

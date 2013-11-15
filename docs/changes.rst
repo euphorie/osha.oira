@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.8 (unreleased)
+2.2.8 (2013-11-15)
 ------------------
 
 - Added missing translations for SL and SK. Fixes #8780

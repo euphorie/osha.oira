@@ -5,6 +5,13 @@ Changelog
 ------------------
 
 - Added missing translations for SL and SK. Fixes #8780
+- #7947 Fixed: Optional module wrongly reflected in report [jcbrand]
+- Correction in FR. Refs #8583 [jcbrand]
+- Fixed navigation for profile question #7547 [jcbrand]
+- Fixed #7253: Investigation on Evaulation Mandatory [jcbrand]
+- Translation fixes: #8801, #8810, #8583, #8964 [pilz]
+- Avoid SQL error when updating Oira tool session #9039 [jcbrand]
+
 
 2.2.7 (2013-08-29)
 ------------------

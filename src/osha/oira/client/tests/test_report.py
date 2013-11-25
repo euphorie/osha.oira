@@ -280,8 +280,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         )
 
     def test_get_measures_with_profile_questions_and_submodules(self):
-        """ Test for #8850
-        """
+        """ """
         session = self.createSurveySession()
         question = model.Module(
             depth=1,
@@ -344,11 +343,11 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         self.assertEqual(len(measures), 2)
         self.assertEqual(
             measures[0][0].title,
-            u'(Repeating instance) Somerset West',
+            u'Nested Module 1',
         )
         self.assertEqual(
             measures[1][0].title,
-            u'(Repeating instance) Stellenbosch',
+            u'Nested Module 1',
         )
 
     def test_get_measures_order_by_priority(self):

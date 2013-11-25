@@ -137,7 +137,6 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
 
         for (row, (module, risk, measure)) in \
                 enumerate(self.get_measures(), 1):
-
             column = 0
             zodb_node = self.request.survey.restrictedTraverse(
                 risk.zodb_path.split('/'))
@@ -155,7 +154,18 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                                 zodb_node.problem_description.strip():
                             value = zodb_node.problem_description
                 elif type == 'module':
-                    value = getattr(module, key, None)
+                    if key == 'title' and module.depth > 1:
+                        titles = []
+                        m = module
+                        while m:
+                            title = getattr(m, 'title', None)
+                            if title:
+                                titles.append(m.title)
+                            m = m.parent
+                        titles.reverse()
+                        value = ', '.join(titles)
+                    else:
+                        value = getattr(module, key, None)
 
                 sheet.cell(row=row, column=column)\
                     .style.alignment.wrap_text = True  # style

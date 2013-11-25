@@ -279,6 +279,78 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
             u'(Repeating instance) Stellenbosch',
         )
 
+    def test_get_measures_with_profile_questions_and_submodules(self):
+        """ Test for #8850
+        """
+        session = self.createSurveySession()
+        question = model.Module(
+            depth=1,
+            title=u'(Repeatable Module) Do you have multiple shops?',
+            module_id='1',
+            zodb_path='1',
+            skip_children=False,
+            profile_index=-1,
+        )
+        session.addChild(question)
+
+        i = 0
+        for module_title in [
+            u'(Repeating instance) Somerset West',
+            u'(Repeating instance) Stellenbosch']:
+
+            location_path = '%s/%d' % (question.zodb_path, i)
+            location = model.Module(
+                depth=3,
+                title=module_title,
+                module_id='2',
+                zodb_path=location_path,
+                skip_children=False,
+                profile_index=i,
+            )
+            question.addChild(location)
+
+            submodule_path = '%s/1' % location_path
+            submodule = model.Module(
+                depth=2,
+                title=u'Nested Module 1',
+                module_id='2',
+                zodb_path='%s/1' % location_path,
+                skip_children=False,
+                profile_index=1,
+            )
+            location.addChild(submodule)
+
+            submodule.addChild(
+                model.Risk(
+                    depth=4,
+                    title=u'Hands are washed',
+                    risk_id='1',
+                    zodb_path='%s/%d' % (submodule_path, i),
+                    type='risk',
+                    priority=u'low',
+                    identification='no',
+                    action_plans=[
+                        model.ActionPlan(
+                        action_plan=u"Do something awesome",
+                        planning_start=datetime.date(2013, 3, 4))
+                    ]
+                )
+            )
+            i += 1
+
+        view = self.ActionPlanTimeline(None, None)
+        view.session = self.session
+        measures = view.get_measures()
+        self.assertEqual(len(measures), 2)
+        self.assertEqual(
+            measures[0][0].title,
+            u'(Repeating instance) Somerset West',
+        )
+        self.assertEqual(
+            measures[1][0].title,
+            u'(Repeating instance) Stellenbosch',
+        )
+
     def test_get_measures_order_by_priority(self):
         session = self.createSurveySession()
         module = model.Module(

@@ -4,8 +4,7 @@ Changelog
 2.2.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- New translations for Italian (it) and Icelandic (is) #8434
 
 2.2.8 (2013-11-15)
 ------------------

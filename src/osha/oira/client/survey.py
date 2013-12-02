@@ -84,3 +84,13 @@ class OSHAActionPlan(survey.ActionPlan):
     """
     grok.layer(IOSHAActionPlanPhaseSkinLayer)
     grok.template("actionplan")
+
+
+class Evaluation(survey.Evaluation):
+    """
+    Override the evaluation template. Reason: we never want to show help_skip_evaluation,
+    even if evaluation_optional should be True.
+    OSHA tickets: #8963, #6175
+    """
+    grok.layer(IOSHAEvaluationPhaseSkinLayer)
+    grok.template('evaluation')

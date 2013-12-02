@@ -1,3 +1,4 @@
+import os
 from five import grok
 from zope import schema
 from zope.component import adapts
@@ -8,6 +9,7 @@ from zope.interface import implements
 from ZPublisher.BaseRequest import DefaultPublishTraverse
 
 from z3c.form import button
+from z3c.form.form import FormTemplateFactory
 from plone.app.dexterity.behaviors.metadata import IBasic
 from plone.dexterity.browser import edit
 from plone.dexterity.events import EditFinishedEvent
@@ -19,6 +21,7 @@ from euphorie.content import MessageFactory as _
 from euphorie.client.utils import setRequest
 
 from osha.oira.client.interfaces import IOSHAClientSkinLayer
+from osha.oira.interfaces import IOSHAContentSkinLayer
 from osha.oira.interfaces import IProductLayer
 from osha.oira.nuplone.widget import LargeTextAreaFieldWidget
 
@@ -48,6 +51,19 @@ class View(grok.View):
     def render_body(self):
         return self.context.description
 
+
+class Edit(form.SchemaEditForm):
+    """ Override to allow us to set form title and button labels """
+    grok.context(IHomePage)
+    grok.require("cmf.ModifyPortalContent")
+    grok.layer(IOSHAContentSkinLayer)
+    grok.name("edit")
+
+path = lambda p: os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), 'templates', p)
+
+homepage_form_factory = FormTemplateFactory(
+        path('homepage_form.pt'), form=Edit)
 
 class HomePagePublishTraverser(DefaultPublishTraverse):
     """Publish traverser to setup the skin layer.

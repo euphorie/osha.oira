@@ -46,6 +46,8 @@
         provides="zope.publisher.interfaces.IPublishTraverse"
         />
 
+    <adapter factory=".homepage.homepage_form_factory" />
+
     <browser:page
         for="*"
         name="default_introduction"

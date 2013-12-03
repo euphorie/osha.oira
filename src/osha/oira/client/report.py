@@ -213,7 +213,15 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                     whens={'high': 0, 'medium': 1},
                     else_=2),
                 model.Risk.path)
-        return query.all()
+        return [t for t in query.all() if (
+            t[-1].planning_start is not None or
+            t[-1].planning_end is not None or
+            t[-1].responsible is not None or
+            t[-1].prevention_plan is not None or
+            t[-1].requirements is not None or
+            t[-1].budget is not None or
+            t[-1].action_plan is not None
+        )]
 
 
 def node_title(node, zodbnode):

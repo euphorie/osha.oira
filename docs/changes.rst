@@ -4,6 +4,7 @@ Changelog
 2.2.9 (unreleased)
 ------------------
 
+- proof of concept: Integration of redactor to show manuela. refs #7356
 - New translations for Italian (it) and Icelandic (is) #8434
 
 2.2.8 (2013-11-15)

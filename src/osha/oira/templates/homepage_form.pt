@@ -16,7 +16,7 @@
        class="message ${python:'error' if view.widgets.errors else 'notice'}"
        tal:content="status" i18n:domain="plone">Form-global message</p>
     <p class="discrete" tal:condition="python:getattr(view, 'description', None)">${view/description}</p>
-
+	
     <form class="concise" action="${request/getURL}" enctype="${view/enctype}" method="${view/method}" id="${view/id}">
       <fieldset>
         <tal:widget repeat="widget view/widgets/values" replace="structure widget/render" />
@@ -38,7 +38,23 @@
     </form>
   </metal:content>
   <metal:scripts fill-slot="scripts">
+  <link rel="stylesheet" href="http://imperavi.com/js/redactor/redactor.css" />
+  <style type="text/css">
+  .redactor_box { height: 480px; margin-top:30px; }
+  .redactor_editor { height: 400px!important;}
+  .redactor_toolbar li   {top:-20px;position:relative; }
+  
+  </style>
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+
+  <script src="http://imperavi.com/js/redactor/redactor.js"></script>
     <script type="text/javascript">
+	$(document).ready(
+		function()
+		{
+			$('#form-widgets-description').redactor();
+		}
+	);
         /* XXX: Custom Javascript for Wysiwyg comes here.
             alert('hello');
         */

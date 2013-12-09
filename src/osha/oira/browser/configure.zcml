@@ -7,5 +7,9 @@
         type="zope.publisher.interfaces.browser.IBrowserSkinType"
         name="OiRA"
         />
+    <browser:resourceDirectory
+        name="osha.oira.resources"
+        directory="resources"
+        />
 
 </configure>

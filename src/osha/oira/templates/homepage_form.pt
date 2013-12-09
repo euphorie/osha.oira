@@ -38,16 +38,16 @@
     </form>
   </metal:content>
   <metal:scripts fill-slot="scripts">
-  <link rel="stylesheet" href="http://imperavi.com/js/redactor/redactor.css" />
+  <link rel="stylesheet" href="++resource++osha.oira.resources/redactor.css" />
   <style type="text/css">
   .redactor_box { height: 480px; margin-top:30px; }
   .redactor_editor { height: 400px!important;}
   .redactor_toolbar li   {top:-20px;position:relative; }
   
   </style>
-  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="++resource++osha.oira.resources/jquery-2.0.3.min.js"></script>
 
-  <script src="http://imperavi.com/js/redactor/redactor.js"></script>
+  <script src="++resource++osha.oira.resources/redactor.js"></script>
     <script type="text/javascript">
 	$(document).ready(
 		function()

@@ -5,7 +5,12 @@ Changelog
 ------------------
 
 - proof of concept: Integration of redactor to show manuela. refs #7356
-- New translations for Italian (it) and Icelandic (is) #8434
+- New translations for Italian (it) and Icelandic (is) #8434 [pysailor]
+- Bugfix. Description didn't appear on 2nd measure. Refs #7930 [jcbrand]
+- Only show measures in the action plan report if at least one field has a value.
+  Refs #9140 [jcbrand]
+- Implementing fix for #9133 by hiding the "Obsolete Survey" option. [regebro]
+
 
 2.2.8 (2013-11-15)
 ------------------

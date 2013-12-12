@@ -14,3 +14,16 @@ graft src/osha/oira/tiles/templates
 graft src/osha/oira/nuplone/templates
 
 
+
+# added by check_manifest.py
+include *.py
+include .travis.yml
+include Makefile
+include babel.cfg
+include buildout.cfg
+include devel.cfg
+include versions.cfg
+recursive-include scripts *.py
+recursive-include src *.rst
+recursive-include src *.sh
+recursive-include src *.txt

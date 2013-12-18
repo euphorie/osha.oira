@@ -6,6 +6,7 @@ Changelog
 
 - Move h1 and logo markup from textfield into template to avoid markup messup
   refs #7356 [pilz]
+- Added MT translation. #8435
 
 2.2.9 (2013-12-12)
 ------------------

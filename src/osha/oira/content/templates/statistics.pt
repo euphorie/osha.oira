@@ -37,7 +37,7 @@
             if (value == 'Country') {
                 jQuery('#fieldset-form-widgets-tools').hide();
                 jQuery('#fieldset-form-widgets-countries').show('fast');
-            } else if (value == 'Tool') {
+            } else if (value in {'Tool':true, 'OiRA Tool': true}) {
                 jQuery('#fieldset-form-widgets-tools').show('fast');
                 jQuery('#fieldset-form-widgets-countries').hide();
             } else {

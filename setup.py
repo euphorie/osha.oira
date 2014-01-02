@@ -34,6 +34,7 @@ setup(name='osha.oira',
       install_requires=[
           'Euphorie >=6.0b2',
           'NuPlone',
+          'Pillow',
           'Products.statusmessages',
           'plone.autoform',
           'plone.tiles',

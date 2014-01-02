@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.2.10 (unreleased)
-------------------
+2.2.10 (2014-01-02)
+-------------------
 
 - Move h1 and logo markup from textfield into template to avoid markup messup
   refs #7356 [pilz]

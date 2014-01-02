@@ -8,6 +8,7 @@ Changelog
   refs #7356 [pilz]
 - Added MT translation. #8435
 - Translation corrections in PT. #9193
+- make sure that the selector for "tool" is really shown on the statistics form on the sector level. Fixes #9134 [pysailor]
 
 2.2.9 (2013-12-12)
 ------------------

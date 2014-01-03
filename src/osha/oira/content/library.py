@@ -123,7 +123,6 @@ class LibraryInsert(grok.View):
         if not is_allowed(target, source):
             raise NotFound(self, 'library-insert', self.request)  # XXX Wrong exception type
         copy = source._getCopy(target)
-        import ipdb ; ipdb.set_trace()
         assign_ids(target, copy)
         notify(ObjectCopiedEvent(copy, source))
         target._setObject(copy.id, copy, suppress_events=True)

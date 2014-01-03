@@ -125,7 +125,7 @@ class LibraryInsert(grok.View):
         copy = source._getCopy(target)
         assign_ids(target, copy)
         notify(ObjectCopiedEvent(copy, source))
-        target._setObject(copy.id, copy, suppress_events=True)
+        target._setObject(copy.id, copy)
         copy = target[copy.id]
         copy._postCopy(target, op=0)
         notify(ObjectClonedEvent(copy))

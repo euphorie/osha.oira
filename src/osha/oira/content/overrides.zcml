@@ -1,0 +1,16 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:plone="http://namespaces.plone.org/plone">
+
+    <plone:tile
+        name="euphorie.addbar"
+        title="Content add bar"
+        description="Button bar to add and edit content"
+        add_permission="cmf.ManagePortal"
+        class=".addbar.OshaAddBarTile"
+        permission="zope2.View"
+        template="templates/addbar.pt"
+        layer="..interfaces.IOSHAContentSkinLayer"
+        />
+
+</configure>

@@ -1,6 +1,5 @@
 import collections
 from zExceptions import NotFound
-from Acquisition import aq_base
 from Acquisition import aq_inner
 from five import grok
 from zope.event import notify
@@ -96,13 +95,23 @@ class Library(grok.View):
 
 
 def assign_ids(context, tree):
-    todo = collections.deque([tree])
+    todo = collections.deque([(None, tree)])
     while todo:
-        item = todo.popleft()
+        (parent, item) = todo.popleft()
         if INameFromUniqueId.providedBy(item):
-            item.id = get_next_id(context)
+            old_id = context.id
+            new_id = get_next_id(context)
+            item._setId(new_id)
+            if parent is not None:
+                # We need to reset the child in its folder to make sure
+                # the folder knows of the new id.
+                position = parent.getObjectPosition(old_id)
+                del parent[old_id]
+                parent[new_id] = item
+                parent.moveObjectToPosition(new_id, position, True)
         if IDexterityContainer.providedBy(item):
-            todo.extend(item.values())
+            for gc in item.values():
+                todo.append((item, gc))
 
 
 class LibraryInsert(grok.View):

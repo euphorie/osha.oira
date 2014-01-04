@@ -99,7 +99,7 @@ def assign_ids(context, tree):
     while todo:
         (parent, item) = todo.popleft()
         if INameFromUniqueId.providedBy(item):
-            old_id = context.id
+            old_id = item.id
             new_id = get_next_id(context)
             item._setId(new_id)
             if parent is not None:

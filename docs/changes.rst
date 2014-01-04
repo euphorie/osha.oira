@@ -1,13 +1,20 @@
 Changelog
 =========
 
-2.2.10 (unreleased)
-------------------
+2.2.11 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+2.2.10 (2014-01-02)
+-------------------
 
 - Move h1 and logo markup from textfield into template to avoid markup messup
   refs #7356 [pilz]
 - Added MT translation. #8435
 - Translation corrections in PT. #9193
+- make sure that the selector for "tool" is really shown on the statistics form on the sector level. Fixes #9134 [pysailor]
 
 2.2.9 (2013-12-12)
 ------------------

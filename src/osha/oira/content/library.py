@@ -1,5 +1,6 @@
 import collections
 from zExceptions import NotFound
+from Acquisition import aq_base
 from Acquisition import aq_inner
 from five import grok
 from zope.event import notify
@@ -10,6 +11,7 @@ from z3c.appconfig.interfaces import IAppConfig
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.dexterity.interfaces import IDexterityContainer
 from plonetheme.nuplone.utils import getPortal
+from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.content.interfaces import IQuestionContainer
 from euphorie.content.module import item_depth
@@ -95,9 +97,11 @@ class Library(grok.View):
 
 
 def assign_ids(context, tree):
+    uid_handler = getToolByName(context, 'portal_uidhandler')
     todo = collections.deque([(None, tree)])
     while todo:
         (parent, item) = todo.popleft()
+        uid_handler.register(item)
         if INameFromUniqueId.providedBy(item):
             old_id = item.id
             new_id = get_next_id(context)
@@ -107,11 +111,11 @@ def assign_ids(context, tree):
                 # the folder knows of the new id.
                 position = parent.getObjectPosition(old_id)
                 del parent[old_id]
-                parent[new_id] = item
+                parent._setObject(new_id, item, suppress_events=True)
                 parent.moveObjectToPosition(new_id, position, True)
         if IDexterityContainer.providedBy(item):
             for gc in item.values():
-                todo.append((item, gc))
+                todo.append((item, aq_base(gc)))
 
 
 class LibraryInsert(grok.View):

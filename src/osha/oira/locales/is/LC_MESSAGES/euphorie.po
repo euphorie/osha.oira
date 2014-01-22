@@ -2,7 +2,7 @@
 # Copyright (C) 2013 SYSLAB.COM GmbH
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
@@ -77,7 +77,7 @@ msgstr "Stöðluð ráðstöfun vegna áhættu. "
 #. Default: Standard measures
 #: src/osha/oira/manual_translations.py:22
 msgid "header_solutions"
-msgstr "Staðlaðar ráðstafanir "
+msgstr "Almennar lausnir"
 
 #. Default: Account data
 #: src/osha/oira/manual_translations.py:25
@@ -635,7 +635,7 @@ msgstr "Nafn á OiRA útgáfunni"
 #. Default: Default severity
 #: src/osha/oira/manual_translations.py:201
 msgid "label_default_effect"
-msgstr "Sjálfgefinn alvarleiki"
+msgstr "Gefnar afleiðingar"
 
 #. Default: Are you sure you want to unpublish this OiRA Tool?
 #: src/osha/oira/manual_translations.py:203
@@ -689,7 +689,7 @@ msgstr "Eyða þessari ráðstöfun"
 #. Default: Add Measure
 #: src/osha/oira/manual_translations.py:224 src/osha/oira/content/risk.py:98
 msgid "Add Solution"
-msgstr "Bæta við ráðstöfun"
+msgstr "Bæta við lausn"
 
 #: src/osha/oira/vocabularies.py:25
 msgid "EU-OSHA Overview"
@@ -787,7 +787,7 @@ msgstr "lágt"
 #: src/osha/oira/client/templates/report_actionplan.pt:245
 #: src/osha/oira/client/templates/risk_actionplan.pt:40
 msgid "risk_priority_medium"
-msgstr "miðlungs"
+msgstr "meðal"
 
 #. Default: high
 #: src/osha/oira/client/report.py:357
@@ -825,19 +825,19 @@ msgstr "Ráðstöfun ${index}"
 #: src/osha/oira/client/report.py:418
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
 msgid "label_measure_action_plan"
-msgstr "Almenn nálgun (til að fjarlægja áhættuna eða draga úr henni)"
+msgstr "Almenn nálgun (Fjarlægja skal hættur eða gera þær ásættanlegar)"
 
 #. Default: Specific action(s) required to implement this approach
 #: src/osha/oira/client/report.py:420
 #: src/osha/oira/client/templates/risk_actionplan.pt:98
 msgid "label_measure_prevention_plan"
-msgstr "Sérstök/sérstakar ráðstafanir sem þarf til að innleiða þessa áætlun"
+msgstr "Aðgerðir til að lausn komi að notum"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/report.py:422
 #: src/osha/oira/client/templates/risk_actionplan.pt:107
 msgid "label_measure_requirements"
-msgstr "Nauðsynlegt reynslustig og/eða kröfur"
+msgstr "Þekking og reynsla sem er nauðsynleg"
 
 #. Default: Who is responsible?
 #: src/osha/oira/client/report.py:424
@@ -1616,7 +1616,7 @@ msgstr "Niðurhal"
 #. Default: General approach (to eliminate or reduce the risk):
 #: src/osha/oira/client/templates/report_actionplan.pt:102
 msgid "report_measure_actionplan"
-msgstr "Almenn nálgun (til að fjarlægja áhættuna eða draga úr henni)"
+msgstr "Almenn nálgun (Fjarlægja skal hættur eða gera þær ásættanlegar)"
 
 #. Default: Specific action(s) required to implement this approach:
 #: src/osha/oira/client/templates/report_actionplan.pt:106
@@ -2369,7 +2369,7 @@ msgstr "CC leyfi"
 #: src/osha/oira/client/templates/webhelpers.pt:195
 #: src/osha/oira/client/templates/webhelpers.pt:209
 msgid "header_legal_references"
-msgstr "Tilvísanir um lagaleg atriði og stefnumótun"
+msgstr "Lög og reglugerðir"
 
 #. Default: Hide
 #: src/osha/oira/client/templates/webhelpers.pt:212
@@ -2384,7 +2384,7 @@ msgstr "Sýna"
 #: src/osha/oira/content/module.py:20 src/osha/oira/content/module.py:33
 #: src/osha/oira/content/module.py:48
 msgid "Submodule"
-msgstr "Undireining"
+msgstr "Undirflokk"
 
 #: src/osha/oira/content/module.py:38
 msgid "Edit ${name}"
@@ -2426,11 +2426,11 @@ msgstr "Þetta þarf að spyrja notandann um heiti allra viðkomandi staða."
 
 #: src/osha/oira/content/profilequestion.py:76
 msgid "Add Profile question"
-msgstr "Bæta við lýsingarspurningu"
+msgstr "Bæta við spurningu"
 
 #: src/osha/oira/content/profilequestion.py:90
 msgid "Edit Profile question"
-msgstr "Breyta lýsingarspurningu"
+msgstr "Breyta spurningu"
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
@@ -2468,7 +2468,7 @@ msgstr "Bæta við áhættu"
 #. Default: Edit Measure
 #: src/osha/oira/content/risk.py:81
 msgid "Edit Solution"
-msgstr "Breyta ráðstöfun"
+msgstr "Breyta lausn"
 
 #. Default: Statistics Level
 #: src/osha/oira/content/sector.py:26
@@ -2666,7 +2666,7 @@ msgstr "Upplýsingar"
 #. Default: This ${number} is mandatory.
 #: src/osha/oira/content/templates/module_view.pt:23
 msgid "module_mandatory"
-msgstr "Þessi  ${number} er skyldubundin."
+msgstr "Ekki er hægt að sleppa þessum ${number}."
 
 #. Default: This ${number} is optional.
 #: src/osha/oira/content/templates/module_view.pt:27
@@ -2676,7 +2676,7 @@ msgstr "Þessi ${number} valkvæð. "
 #. Default: Submodules
 #: src/osha/oira/content/templates/module_view.pt:32
 msgid "header_submodules"
-msgstr "Undireiningar"
+msgstr "Undirflokkar"
 
 #. Default: Risks
 #: src/osha/oira/content/templates/module_view.pt:39
@@ -3038,7 +3038,7 @@ msgstr "Atvinnusvið er landssamtök um sérstaka atvinnugrein."
 
 #: src/osha/oira/profiles/default/types/euphorie.solution.xml:5
 msgid "Measure"
-msgstr "Ráðstöfun"
+msgstr "Lausn"
 
 #: src/osha/oira/profiles/default/types/euphorie.solution.xml:6
 msgid "A measure that can be taken to mitigate a risk."

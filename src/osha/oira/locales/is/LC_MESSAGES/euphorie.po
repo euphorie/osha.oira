@@ -155,7 +155,8 @@ msgstr "Mynda nýtt OiRA verkfæri "
 #. OiRA Tool.
 #: src/osha/oira/manual_translations.py:41
 msgid "message_choose_country"
-msgstr "Veldu atvinnusvið sem þú vilt skoða eða að afrita OiRA verkfæri."
+msgstr "Veldu atvinnugrein í OiRA verkfærinu sem þú villt skoða eða nýta frá "
+"öðrum."
 
 #. Default: Select a sector for which you would like to view or copy an OiRA
 #. Tool.
@@ -612,8 +613,7 @@ msgstr "Birta OiRA verkfærið "
 #: src/osha/oira/manual_translations.py:193
 msgid "help_surveygroup_title"
 msgstr ""
-"Heiti þessa OiRA verkfæris. Þetta heiti er notað í yfirliti yfir OiRA "
-"verkfæri hjá biðlurunum."
+"Nafn á OiRA verkfærinu. Nafnið er notað í yfirliti fyrir OiRA verkfærin."
 
 #. Default: This OiRA Tool is now no longer available in the client.
 #: src/osha/oira/manual_translations.py:197
@@ -2536,7 +2536,7 @@ msgstr "Leggja fyrir"
 #: src/osha/oira/content/statistics.py:300
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
 msgid "Sector"
-msgstr "Atvinnusvið"
+msgstr "Atvinnugrein"
 
 #. Default: Global
 #: src/osha/oira/content/statistics.py:340
@@ -2822,7 +2822,7 @@ msgstr "Þetta OiRA verkfæri inniheldur engar einingar."
 #. Default: This form will allow you to create a new OiRA Tool.
 #: src/osha/oira/content/templates/surveygroup_add.pt:11
 msgid "intro_add_surveygroup"
-msgstr "Með eyðublaðinu er hægt að mynda nýja endurskoðun á OiRA verkfærinu."
+msgstr "Hér er hægt að búa til nýtt OiRA verkfæri."
 
 #. Default: How would you like to start
 #: src/osha/oira/content/templates/surveygroup_add.pt:19
@@ -2839,28 +2839,26 @@ msgstr "Upplýsingar"
 #: src/osha/oira/content/templates/surveygroup_add.pt:20
 msgid "help_survey_source"
 msgstr ""
-"Ef OiRA verkfæri sem er til er afritað erfist eining reiknirit þess fyrir "
-"mat"
+"Þegar byggt er á eldra OiRA verkfæri gildir sama reikniforritið"
 
 #. Default: Create a new OiRA Tool from scratch
 #: src/osha/oira/content/templates/surveygroup_add.pt:23
 msgid "survey_source_scratch"
-msgstr "Mynda nýtt OiRA verkfæri frá grunni"
+msgstr "Búa til nýtt OiRA verkfæri frá grunni"
 
 #. Default: Base my new OiRA Tool on an existing OiRA Tool of my organisation
 #: src/osha/oira/content/templates/surveygroup_add.pt:24
 msgid "survey_source_local"
 msgstr ""
-"Byggja á nýja OiRA verkfærinu eða á OiRA verkfæri sem er til staðar fyrir "
-"fyrirtæki mitt"
+"Búa til nýtt OiRA verkfæri upp úr verkfæri sem er þegar í notkun hjá "
+"fyrirtækinu."
 
 #. Default: Base my new OiRA Tool on an existing OiRA Tool of another
 #. organisation
 #: src/osha/oira/content/templates/surveygroup_add.pt:25
 msgid "survey_source_other"
 msgstr ""
-"Byggja nýja OiRA verkfærið á OiRA verkfæri sem er til staðar fyrir annað "
-"fyrirtæki"
+"Búa til nýtt OiRA verkfæri upp úr verkfæri sem er í notkun hjá öðru fyrirtæki"
 
 #. Default: Choose an OiRA Tool
 #: src/osha/oira/content/templates/surveygroup_add.pt:32
@@ -2886,22 +2884,19 @@ msgstr "Veldu land"
 #: src/osha/oira/content/templates/surveygroup_add.pt:86
 msgid "help_survey_evaluation_algorithm_standard"
 msgstr ""
-"Þessi aðferð felur í sér áhættumat eftir alvarleika x váhrif x líkindi en "
-"þessi atriði ber að skilja sem hér segir: alvarleiki slyss sem tengist "
-"áhættu - váhrif (tíðni) hættunnar - líkindi á því að hættan eigi sér stað "
-"þegar váhrif eiga sér stað"
+"Aðferðin felur í sér áhættumat út frá: líkur x tíðni x afleiðingar. Líkur: "
+"líkur á slysi; Tíðni: áætluð tíðni; Afleiðingar: alvarleiki slyss"
 
 #. Default: Standard three criteria
 #: src/osha/oira/content/templates/surveygroup_add.pt:90
 msgid "algorithm_kinney"
-msgstr "Þrjár almennar viðmiðanir"
+msgstr "Þrjár forsendur"
 
 #: src/osha/oira/content/templates/surveygroup_add.pt:92
 msgid ""
 "This is the recommended evaluation algorithm, based on the Kinney method"
 msgstr ""
-"Þetta það reiknirit fyrir mat sem mælt er með sem byggt er á Kinney-"
-"aðferðinni "
+"Þetta reikniforrit byggir á þríhliða aðferðafræði Kinney"
 
 #. Default: This method involves risk assessment by Severity x Exposure,
 #. whereas these have to be understood as follows; Severity of injury linked
@@ -2910,18 +2905,17 @@ msgstr ""
 #: src/osha/oira/content/templates/surveygroup_add.pt:94
 msgid "help_survey_evaluation_algorithm_simplified"
 msgstr ""
-"Þessi aðferð felur í sér áhættumat eftir alvarleika x váhrif x líkindi en "
-"þessi atriði ber að skilja sem hér segir: alvarleiki slyss sem tengist "
-"áhættu - váhrif (tíðni) hættunar"
+"Aðferðin felur í sér áhættumat út frá: líkur x afleiðingar. Líkur: líkur á "
+"slysi; Afleiðingar: alvarleiki slyss"
 
 #. Default: Simplified two criteria
 #: src/osha/oira/content/templates/surveygroup_add.pt:100
 msgid "algorithm_french"
-msgstr "Tvö einfölduð viðmið"
+msgstr "Tvær forsendur"
 
 #: src/osha/oira/content/templates/surveygroup_add.pt:102
 msgid "This is a simpler evaluation algorithm using only two criteria."
-msgstr "Þetta er einfaldara reiknirit fyrir mat þar sem notuð eru tvö viðmið."
+msgstr "Einfaldara reikniforrit, líkur x afleiðingar"
 
 #. Default: Create
 #: src/osha/oira/content/templates/surveygroup_add.pt:109
@@ -2957,13 +2951,13 @@ msgstr "Þú þarft að vera skráð/ur inn til að fá aðgang að þessari sí
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:29
 #: src/osha/oira/templates/login.pt:22
 msgid "legend_credentials"
-msgstr "Skilríki"
+msgstr "Innskráning"
 
 #. Default: Login
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:31
 #: src/osha/oira/templates/login.pt:25
 msgid "label_login"
-msgstr "Innskráning"
+msgstr "Notandanafn"
 
 #. Default: Password
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:33
@@ -2981,7 +2975,7 @@ msgstr "Innskráning"
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:42
 #: src/osha/oira/templates/login.pt:17 src/osha/oira/templates/login.pt:36
 msgid "reset_password"
-msgstr "biðja um endurstillingu á lykilorði"
+msgstr "beðið um nýtt"
 
 #. Default: If you forgot your password you can ${reset_password}.
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:42

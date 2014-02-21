@@ -2,24 +2,29 @@
 # Copyright (C) 2013 SYSLAB.COM GmbH
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2013-11-14 11:25+0100\n"
+"POT-Creation-Date: 2014-02-21 16:49+0100\n"
 "PO-Revision-Date: 2013-12-18 09:59+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
 #. Default: HTML Source Code
-#: src/osha/oira/homepage.py:33
+#: src/osha/oira/homepage.py:36
 msgid "label_homepage_description"
 msgstr "Kodiċi Sors HTML"
+
+#: src/osha/oira/homepage.py:90
+msgid "Clear unsaved changes"
+msgstr ""
 
 #. Default: Describe your general approach to eliminate or (if the risk is not
 #. avoidable) reduce the risk.
@@ -29,8 +34,7 @@ msgstr ""
 "Iddeskrivi l-approċċ ġenerali tiegħek biex telimina jew (jekk ir-riskju ma "
 "jistax jiġi evitat) tnaqqas ir-riskju."
 
-#. Default: Describe the specific action(s) required to implement this
-#. approach
+#. Default: Describe the specific action(s) required to implement this approach
 #. (to eliminate or to reduce the risk).
 #: src/osha/oira/manual_translations.py:7
 msgid "help_measure_prevention_plan"
@@ -53,8 +57,8 @@ msgstr ""
 "riskju ma jistax jiġi evitat) tnaqqas ir-riskju; 2) l-azzjoni(jiet) "
 "speċifika/speċifiċi meħtieġa biex jiġi implimentat dan l-approċċ (biex ir-"
 "riskju jiġi eliminat jew jitnaqqas); 3) il-livell ta' kompetenza meħtieġ "
-"biex tiġi implimentata l-miżura, pereżempju \"sens komun (ebda għarfien dwar"
-" saħħa u sigurtà fuq il-post tax-xogħol (OHS) mhu meħtieġ)\", \"ebda "
+"biex tiġi implimentata l-miżura, pereżempju \"sens komun (ebda għarfien dwar "
+"saħħa u sigurtà fuq il-post tax-xogħol (OHS) mhu meħtieġ)\", \"ebda "
 "kompetenza speċifika dwar OHS, iżda huwa meħtieġ minimu ta' għarfien jew "
 "taħriġ u/jew konsultazzjoni dwar il-linji gwida tal-OHS\", jew \"espert fl-"
 "OHS\". Tista' wkoll tiddeskrivi hawnhekk kwalunwe rekwiżit addizzjonali "
@@ -99,8 +103,8 @@ msgstr "Ħassar il-Kont"
 
 #: src/osha/oira/manual_translations.py:29
 msgid ""
-"Please bear in mind that by changing the email address, your login name will"
-" also change."
+"Please bear in mind that by changing the email address, your login name will "
+"also change."
 msgstr ""
 "Żomm f'moħħok li meta tibdel l-indirizz elettroniku, l-isem tal-login "
 "tiegħek jinbidel ukoll."
@@ -175,8 +179,8 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:45
 msgid "help_survey_title"
 msgstr ""
-"Dan huwa t-titlu ta' din il-verżjoni tal-Għodda tal-OiRA. Dan l-isem qatt ma"
-" jintwera lill-utenti."
+"Dan huwa t-titlu ta' din il-verżjoni tal-Għodda tal-OiRA. Dan l-isem qatt ma "
+"jintwera lill-utenti."
 
 #. Default: The introduction text is shown when starting a new OiRA Tool
 #. session. If no introduction is provided here a standard text will be shown.
@@ -187,8 +191,8 @@ msgid "help_introduction"
 msgstr ""
 "It-test ta' introduzzjoni jintwera meta tinbeda sessjoni ġdida tal-Għodda "
 "tal-OiRA. Jekk ma tiġi pprovduta ebda introduzzjoni hanwhekk, jintwera test "
-"standard. Żomm dan it-test fil-qosor biex ikun jista' joqgħod sew fl-iskrins"
-" ta' tagħmir żgħir bħama huma mowbajls u PDAs."
+"standard. Żomm dan it-test fil-qosor biex ikun jista' joqgħod sew fl-iskrins "
+"ta' tagħmir żgħir bħama huma mowbajls u PDAs."
 
 #. Default: This is the only version of the OiRA Tool and can therefore not be
 #. deleted. Did you perhaps want to remove the OiRA Tool itself?
@@ -220,12 +224,15 @@ msgstr "Il-formola tippermettilek toħloq verżjoni ġdida tal-Għodda tal-OiRA.
 
 #. Default: Now that you have identified the existing hazards/problems in your
 #. company/organisation you need to evaluate the risks arising from them.
+#. Default: You have indicated that there are possible risks in your
+#. organisation. During this evaluation phase you can assess the magnitude of
+#. risk for each bottleneck.
 #: src/osha/oira/manual_translations.py:59
+#: src/osha/oira/client/templates/evaluation.pt:19
 msgid "help_risks_present"
 msgstr ""
-"Issa li identifikajt il-perikli/problemi eżistenti fil- "
-"kumpanija/organizzazzjoni tiegħek, trid tivvaluta r-riskji li joriġinaw "
-"minnhom."
+"Issa li identifikajt il-perikli/problemi eżistenti fil- kumpanija/"
+"organizzazzjoni tiegħek, trid tivvaluta r-riskji li joriġinaw minnhom."
 
 #. Default: Solution
 #: src/osha/oira/manual_translations.py:62
@@ -237,8 +244,7 @@ msgstr "Soluzzjoni"
 msgid "Succesfully published the survey"
 msgstr "L-Għodda tal-OiRA ppubblikata"
 
-#. Default: Succesfully created a preview for the OiRA Tool. It can be
-#. accessed
+#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url}.
 #: src/osha/oira/manual_translations.py:65
 msgid ""
@@ -258,15 +264,14 @@ msgstr "Oħloq kopja tal-Għodda tal-OiRA magħżula"
 #. Default: If this is to be "optional", it must be formulated so that it is
 #. answerable with YES (the end-user will have to tick a box) or NO (e.g. "Do
 #. you work with the public?"). If this is to be "repeatable", it must be
-#. formulated as a prompt to fill in multiple values (e.g. "List your
-#. different
+#. formulated as a prompt to fill in multiple values (e.g. "List your different
 #. work locations").
 #: src/osha/oira/manual_translations.py:71
 msgid "help_profilequestion_question"
 msgstr ""
 "Jekk din għandu tkun \"fakultattiva\", għandha tkun ifformulata b'tali mod "
-"li tkun tista' titwieġeb b'IVA (l-utent aħħari jrid jimmarka f'kaxxa) jew LE"
-" (pereżempju \"Taħdem mal-pubbliku?\"). Jekk din se tkun \"ripetibbli\", "
+"li tkun tista' titwieġeb b'IVA (l-utent aħħari jrid jimmarka f'kaxxa) jew LE "
+"(pereżempju \"Taħdem mal-pubbliku?\"). Jekk din se tkun \"ripetibbli\", "
 "għandha tkun ifformulata bħala prompt fejn jiddaħħlu valuri multipli "
 "(pereżempju \"Elenka l-postijiet tax-xogħol differenti tiegħek\")."
 
@@ -284,8 +289,7 @@ msgid "help_module_optional"
 msgstr "Jippermetti lill-utent aħħari jaqbeż dan il-modulu u kull m'hemm fih."
 
 #. Default: The question to ask the end-user if this module is optional. It
-#. must be formulated so that it is answerable with YES (the end-user will
-#. have
+#. must be formulated so that it is answerable with YES (the end-user will have
 #. to tick a box) or NO
 #: src/osha/oira/manual_translations.py:80
 msgid "help_module_question"
@@ -320,8 +324,7 @@ msgstr ""
 "Din hija dikjarazzjoni pożittiva qasira dwar riskju potenzjali (pereżempju "
 "Il-bini miżmum tajjeb.)"
 
-#. Default: This is the inverse of the affirmative statement (e.g. The
-#. building
+#. Default: This is the inverse of the affirmative statement (e.g. The building
 #. is not well maintained.)
 #: src/osha/oira/manual_translations.py:90
 msgid "help_problem_description"
@@ -348,8 +351,8 @@ msgstr "Riskju ta' prijorità"
 #: src/osha/oira/manual_translations.py:95
 msgid "help_risk_type"
 msgstr ""
-"Riskju ta' prijorità\" huwa wieħed mir-riskji għoljin fis-settur. \"Riskju\""
-" huwa relatat mal-post tax-xogħol jew max-xogħol li jsir. \"Politika\" "
+"Riskju ta' prijorità\" huwa wieħed mir-riskji għoljin fis-settur. \"Riskju\" "
+"huwa relatat mal-post tax-xogħol jew max-xogħol li jsir. \"Politika\" "
 "tirreferi għal ftehimiet, proċeduri u deċiżjonijiet tal-maniġment."
 
 #. Default: You can help the end-user by selecting a default priority. He/she
@@ -475,8 +478,7 @@ msgstr "5. Ir-Rapport"
 #. printed.
 #: src/osha/oira/manual_translations.py:130
 msgid "help_reports"
-msgstr ""
-"Dan it-test għandu jiddeskrivi kif tissejvja jew tipprintja r-rapport."
+msgstr "Dan it-test għandu jiddeskrivi kif tissejvja jew tipprintja r-rapport."
 
 #. Default: What happens next?
 #: src/osha/oira/manual_translations.py:132
@@ -494,8 +496,7 @@ msgid "help_finalwords"
 msgstr "Rakkomandazzjonijiet ġenerali finali."
 
 #. Default: It is possible for you to print out the contents of the tool to
-#. enable you to look for the information at the relevant workplace (by
-#. walking
+#. enable you to look for the information at the relevant workplace (by walking
 #. around and looking at what could cause harm, or by consulting the workers
 #. and/or their representatives about problems they have encountered). You can
 #. then introduce the information into the tool.
@@ -503,11 +504,11 @@ msgstr "Rakkomandazzjonijiet ġenerali finali."
 #: src/osha/oira/client/templates/identification.pt:19
 msgid "intro_print_identification_1"
 msgstr ""
-"Tista' tipprintja l-kontenut tal-għodda biex tkun tista' tfittex "
-"l-informazzjoni fuq il-post tax-xogħol rilevanti (billi ddur u tara x'jista'"
-" jagħmel il-ħsara, jew billi tikkonsulta lill-ħaddiema u/jew lir-"
-"rappreżentanti tagħhom dwar il-problemi li ltaqgħu magħhom). Imbagħad tista'"
-" ddaħħal l-informazzjoni fl-għodda."
+"Tista' tipprintja l-kontenut tal-għodda biex tkun tista' tfittex l-"
+"informazzjoni fuq il-post tax-xogħol rilevanti (billi ddur u tara x'jista' "
+"jagħmel il-ħsara, jew billi tikkonsulta lill-ħaddiema u/jew lir-"
+"rappreżentanti tagħhom dwar il-problemi li ltaqgħu magħhom). Imbagħad tista' "
+"ddaħħal l-informazzjoni fl-għodda."
 
 #. Default: You may also wish to distribute the contents among the workers
 #. and/or their representatives and invite them to participate in identifying
@@ -531,7 +532,10 @@ msgid "list_of_risks"
 msgstr "kontenut tal-għodda"
 
 #. Default: Please proceed directly to the action plan step.
+#. Default: There are no risks that need to be evaluated. You can proceed
+#. directly to the action plan phase.
 #: src/osha/oira/manual_translations.py:152
+#: src/osha/oira/client/templates/evaluation.pt:25
 msgid "help_evaluation_empty"
 msgstr "Ipproċedi direttament għall-istadju tal-pjan ta' azzjoni."
 
@@ -548,15 +552,13 @@ msgstr ""
 msgid "title_help_unpublished"
 msgstr "Neħħi din l-Għodda tal-OiRA mill-klijent onlajn."
 
-#. Default: Succesfully created a preview for the OiRA Tool. It can be
-#. accessed
+#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url} .
 #: src/osha/oira/manual_translations.py:162
 msgid "message_preview_success"
 msgstr "Inħoloq preview tal-Għodda tal-OiRA. Tista' tarah fi ${url} ."
 
-#. Default: Please note that by deleting your account, you will also delete
-#. all
+#. Default: Please note that by deleting your account, you will also delete all
 #. your sessions. Please make sure you download your reports from the Report
 #. step prior to deleting your account, if you want to keep any.
 #: src/osha/oira/manual_translations.py:165
@@ -609,9 +611,9 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:187
 msgid "intro_publish_first_time"
 msgstr ""
-"Żgur tixtieq tippubblika din l-Għodda tal-OiRA? Wara li tippubblikaha, "
-"l-Għodda tal-OiRA se tidher fil-klijent onlajn u se tkun tista' tiġi "
-"aċċessata mill-utenti kollha."
+"Żgur tixtieq tippubblika din l-Għodda tal-OiRA? Wara li tippubblikaha, l-"
+"Għodda tal-OiRA se tidher fil-klijent onlajn u se tkun tista' tiġi aċċessata "
+"mill-utenti kollha."
 
 #. Default: Publish OiRA Tool
 #: src/osha/oira/manual_translations.py:191
@@ -774,7 +776,7 @@ msgid "report_timeline_title"
 msgstr "Skeda ta' żmien"
 
 #. Default: low
-#: src/osha/oira/client/report.py:353
+#: src/osha/oira/client/report.py:371
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -784,7 +786,7 @@ msgid "risk_priority_low"
 msgstr "baxxa"
 
 #. Default: medium
-#: src/osha/oira/client/report.py:355
+#: src/osha/oira/client/report.py:373
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -794,7 +796,7 @@ msgid "risk_priority_medium"
 msgstr "medja"
 
 #. Default: high
-#: src/osha/oira/client/report.py:357
+#: src/osha/oira/client/report.py:375
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -804,7 +806,7 @@ msgid "risk_priority_high"
 msgstr "għolja"
 
 #. Default: This is a ${priority_value} priority risk.
-#: src/osha/oira/client/report.py:359
+#: src/osha/oira/client/report.py:377
 #: src/osha/oira/client/templates/report_actionplan.pt:93
 #: src/osha/oira/client/templates/report_actionplan.pt:173
 #: src/osha/oira/client/templates/report_actionplan.pt:209
@@ -814,104 +816,103 @@ msgid "risk_priority"
 msgstr "Dan huwa riskju ta' prijorità ${priority_value}."
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:386 src/osha/oira/client/report.py:411
+#: src/osha/oira/client/report.py:404 src/osha/oira/client/report.py:429
 #: src/osha/oira/client/templates/risk_actionplan.pt:64
 msgid "header_measure_single"
 msgstr "Miżura"
 
 #. Default: Measure ${index}
-#: src/osha/oira/client/report.py:389
+#: src/osha/oira/client/report.py:407
 #: src/osha/oira/client/templates/report_actionplan.pt:99
 msgid "header_measure"
 msgstr "Miżura ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
-#: src/osha/oira/client/report.py:418
+#: src/osha/oira/client/report.py:436
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
 msgid "label_measure_action_plan"
 msgstr "Approċċ ġenerali (biex ir-riskju jiġi eliminat jew imnaqqas)"
 
 #. Default: Specific action(s) required to implement this approach
-#: src/osha/oira/client/report.py:420
+#: src/osha/oira/client/report.py:438
 #: src/osha/oira/client/templates/risk_actionplan.pt:98
 msgid "label_measure_prevention_plan"
 msgstr ""
-"Azzjoni(jiet) speċifika/speċifiċi meħtieġa biex jiġi implimentat dan "
-"l-approċċ"
+"Azzjoni(jiet) speċifika/speċifiċi meħtieġa biex jiġi implimentat dan l-"
+"approċċ"
 
 #. Default: Level of expertise and/or requirements needed
-#: src/osha/oira/client/report.py:422
+#: src/osha/oira/client/report.py:440
 #: src/osha/oira/client/templates/risk_actionplan.pt:107
 msgid "label_measure_requirements"
 msgstr "Livell ta' kompetenza u/jew rekwiżiti meħtieġa"
 
 #. Default: Who is responsible?
-#: src/osha/oira/client/report.py:424
+#: src/osha/oira/client/report.py:442
 #: src/osha/oira/client/templates/risk_actionplan.pt:119
 msgid "label_action_plan_responsible"
 msgstr "Min hu responsabbli?"
 
 #. Default: Budget
-#: src/osha/oira/client/report.py:426
+#: src/osha/oira/client/report.py:444
 #: src/osha/oira/client/templates/risk_actionplan.pt:124
 msgid "label_action_plan_budget"
 msgstr "Baġit"
 
 #. Default: Planning start
-#: src/osha/oira/client/report.py:427
+#: src/osha/oira/client/report.py:445
 #: src/osha/oira/client/templates/risk_actionplan.pt:135
 msgid "label_action_plan_start"
 msgstr "Bidu tal-ippjanar"
 
 #. Default: Planning end
-#: src/osha/oira/client/report.py:428
+#: src/osha/oira/client/report.py:446
 #: src/osha/oira/client/templates/risk_actionplan.pt:171
 msgid "label_action_plan_end"
 msgstr "Tmiem tal-ippjanar"
 
 #. Default: Consultation of workers
-#: src/osha/oira/client/report.py:479
+#: src/osha/oira/client/report.py:497
 msgid "header_oira_report_consultation"
 msgstr "Konsultazzjoni tal-ħaddiema"
 
-#. Default: The undersigned hereby declare that the workers have been
-#. consulted
+#. Default: The undersigned hereby declare that the workers have been consulted
 #. on the content of this document.
-#: src/osha/oira/client/report.py:488
+#: src/osha/oira/client/report.py:506
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
-"Il-firmatarji t'hawn taħt jiddikjaraw li l-ħaddiema ġew ikkonsultati dwar "
-"il-kontenut ta' dan id-dokument."
+"Il-firmatarji t'hawn taħt jiddikjaraw li l-ħaddiema ġew ikkonsultati dwar il-"
+"kontenut ta' dan id-dokument."
 
 #. Default: On behalf of the employer:
-#: src/osha/oira/client/report.py:501
+#: src/osha/oira/client/report.py:519
 msgid "oira_consultation_employer"
 msgstr "F'isem min iħaddem:"
 
 #. Default: On behalf of the workers:
-#: src/osha/oira/client/report.py:503
+#: src/osha/oira/client/report.py:521
 msgid "oira_consultation_workers"
 msgstr "F'isem il-ħaddiema:"
 
 #. Default: Date:
-#: src/osha/oira/client/report.py:512
+#: src/osha/oira/client/report.py:530
 msgid "oira_survey_date"
 msgstr "Data:"
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/client/report.py:559
+#: src/osha/oira/client/report.py:577
 msgid "header_oira_report_download"
 msgstr "Rapport tal-OiRA: \"${title}"
 
 #. Default: Contents
-#: src/osha/oira/client/report.py:578
+#: src/osha/oira/client/report.py:596
 #: src/osha/oira/client/templates/report_actionplan.pt:17
 #: src/osha/oira/client/templates/report_identification.pt:16
 msgid "toc_header"
 msgstr "Werrej"
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/client/report.py:583
+#: src/osha/oira/client/report.py:601
 #: src/osha/oira/client/templates/report_actionplan.pt:39
 #: src/osha/oira/client/templates/report_actionplan.pt:72
 msgid "header_present_risks"
@@ -919,7 +920,7 @@ msgstr ""
 "Ir-riskji li ġew identifikati, ivvalutati u li għandhom Pjan ta' Azzjoni"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/client/report.py:586
+#: src/osha/oira/client/report.py:604
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
@@ -927,7 +928,7 @@ msgstr "Ir-riskji li ġew identifikati iżda M'GĦANDHOMX Pjan ta' Azzjoni"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
-#: src/osha/oira/client/report.py:589
+#: src/osha/oira/client/report.py:607
 #: src/osha/oira/client/templates/report_actionplan.pt:55
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
@@ -935,22 +936,22 @@ msgstr "Perikli/problemi li ġew \"imwarrba\" u għad iridu jiġu ffaċċjati"
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
-#: src/osha/oira/client/report.py:592
+#: src/osha/oira/client/report.py:610
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
 msgstr ""
-"Perikli/problemi li ġew immaniġġjati jew mhumiex preżenti fl-organizzazzjoni"
-" tiegħek"
+"Perikli/problemi li ġew immaniġġjati jew mhumiex preżenti fl-organizzazzjoni "
+"tiegħek"
 
 #. Default: Action plan ${title}
-#: src/osha/oira/client/report.py:619
+#: src/osha/oira/client/report.py:637
 msgid "filename_report_actionplan"
 msgstr "Pjan ta' azzjoni ${title}"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision
 #. date ${date}.
-#: src/osha/oira/client/report.py:703
+#: src/osha/oira/client/report.py:721
 msgid "report_identification_revision"
 msgstr ""
 "Dan id-dokument ġie bbażat fuq l-Għodda tal-OiRA '${title}' b'data ta' "
@@ -958,7 +959,7 @@ msgstr ""
 
 #. Default: This report was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/client/report.py:741
+#: src/osha/oira/client/report.py:759
 #: src/osha/oira/client/templates/report_actionplan.pt:302
 msgid "report_survey_revision"
 msgstr ""
@@ -968,6 +969,7 @@ msgstr ""
 #. Default: OiRA - Online interactive Risk Assessment
 #: src/osha/oira/client/templates/actionplan.pt:12
 #: src/osha/oira/client/templates/disclaimer.pt:12
+#: src/osha/oira/client/templates/evaluation.pt:12
 #: src/osha/oira/client/templates/frontpage.pt:15
 #: src/osha/oira/client/templates/identification.pt:12
 #: src/osha/oira/client/templates/module_actionplan.pt:12
@@ -985,7 +987,7 @@ msgstr ""
 #: src/osha/oira/client/templates/sessions.pt:13
 #: src/osha/oira/client/templates/start.pt:14
 #: src/osha/oira/client/templates/update.pt:12
-#: src/osha/oira/client/templates/webhelpers.pt:24
+#: src/osha/oira/client/templates/webhelpers.pt:23
 #: src/osha/oira/templates/custom_homepage.pt:12
 msgid "title_tool"
 msgstr ""
@@ -1034,8 +1036,7 @@ msgstr ""
 "Jekk ċerti riskji mhumiex evitabbli, kif jistgħu jitnaqqsu għal livell fejn "
 "is-saħħa u s-sigurtà ta' dawk esposti ma jiġux kompromessi?"
 
-#. Default: Once you have decided how to eliminate or reduce a particular
-#. risk,
+#. Default: Once you have decided how to eliminate or reduce a particular risk,
 #. then you describe the specific action(s) required to achieve this. You
 #. should also include details of the level of expertise and/or other
 #. requirements needed for those actions to be effective.
@@ -1044,8 +1045,8 @@ msgid "expl_actionplan_7"
 msgstr ""
 "Ladarba tkun iddeċidejt kif telimina jew tnaqqas riskju partikolari, "
 "imbagħad tiddeskrivi l-azzjoni(jiet) speċifika/speċifiċi meħtieġa biex "
-"jinkiseb dan. Għandek ukoll tinkludi dettalji tal-livell ta' kompetenza "
-"u/jew rekwiżiti oħra meħtieġa biex dawk l-azzjonijiet ikunu effettivi."
+"jinkiseb dan. Għandek ukoll tinkludi dettalji tal-livell ta' kompetenza u/"
+"jew rekwiżiti oħra meħtieġa biex dawk l-azzjonijiet ikunu effettivi."
 
 #. Default: No risks were identified. Please proceed directly to the report.
 #: src/osha/oira/client/templates/actionplan.pt:47
@@ -1064,6 +1065,7 @@ msgstr "Mur għar-rapport"
 
 #. Default: Preparation
 #: src/osha/oira/client/templates/actionplan.pt:61
+#: src/osha/oira/client/templates/evaluation.pt:38
 #: src/osha/oira/client/templates/identification.pt:32
 #: src/osha/oira/client/templates/module_actionplan.pt:59
 #: src/osha/oira/client/templates/module_evaluation.pt:45
@@ -1084,6 +1086,7 @@ msgstr "It-Tħejjija"
 
 #. Default: Preparation
 #: src/osha/oira/client/templates/actionplan.pt:62
+#: src/osha/oira/client/templates/evaluation.pt:39
 #: src/osha/oira/client/templates/identification.pt:33
 #: src/osha/oira/client/templates/module_actionplan.pt:60
 #: src/osha/oira/client/templates/module_evaluation.pt:46
@@ -1104,6 +1107,7 @@ msgstr "It-Tħejjija"
 
 #. Default: Identification
 #: src/osha/oira/client/templates/actionplan.pt:67
+#: src/osha/oira/client/templates/evaluation.pt:44
 #: src/osha/oira/client/templates/identification.pt:38
 #: src/osha/oira/client/templates/module_actionplan.pt:65
 #: src/osha/oira/client/templates/module_evaluation.pt:51
@@ -1124,6 +1128,7 @@ msgstr "L-Identifikazzjoni"
 
 #. Default: Identification
 #: src/osha/oira/client/templates/actionplan.pt:68
+#: src/osha/oira/client/templates/evaluation.pt:45
 #: src/osha/oira/client/templates/identification.pt:39
 #: src/osha/oira/client/templates/module_actionplan.pt:66
 #: src/osha/oira/client/templates/module_evaluation.pt:52
@@ -1144,6 +1149,7 @@ msgstr "L-Identifikazzjoni"
 
 #. Default: Evaluation
 #: src/osha/oira/client/templates/actionplan.pt:73
+#: src/osha/oira/client/templates/evaluation.pt:50
 #: src/osha/oira/client/templates/identification.pt:44
 #: src/osha/oira/client/templates/module_actionplan.pt:71
 #: src/osha/oira/client/templates/module_evaluation.pt:57
@@ -1164,6 +1170,7 @@ msgstr "Il-Valutazzjoni"
 
 #. Default: Evaluation
 #: src/osha/oira/client/templates/actionplan.pt:74
+#: src/osha/oira/client/templates/evaluation.pt:51
 #: src/osha/oira/client/templates/identification.pt:45
 #: src/osha/oira/client/templates/module_actionplan.pt:72
 #: src/osha/oira/client/templates/module_evaluation.pt:58
@@ -1184,6 +1191,7 @@ msgstr "Il-Valutazzjoni"
 
 #. Default: Action Plan
 #: src/osha/oira/client/templates/actionplan.pt:79
+#: src/osha/oira/client/templates/evaluation.pt:56
 #: src/osha/oira/client/templates/identification.pt:50
 #: src/osha/oira/client/templates/module_actionplan.pt:77
 #: src/osha/oira/client/templates/module_evaluation.pt:66
@@ -1204,6 +1212,7 @@ msgstr "Il-Pjan ta' Azzjoni"
 
 #. Default: Action Plan
 #: src/osha/oira/client/templates/actionplan.pt:80
+#: src/osha/oira/client/templates/evaluation.pt:57
 #: src/osha/oira/client/templates/identification.pt:51
 #: src/osha/oira/client/templates/module_actionplan.pt:78
 #: src/osha/oira/client/templates/module_evaluation.pt:67
@@ -1224,6 +1233,7 @@ msgstr "Il-Pjan ta' Azzjoni"
 
 #. Default: Report
 #: src/osha/oira/client/templates/actionplan.pt:85
+#: src/osha/oira/client/templates/evaluation.pt:62
 #: src/osha/oira/client/templates/identification.pt:56
 #: src/osha/oira/client/templates/module_actionplan.pt:86
 #: src/osha/oira/client/templates/module_evaluation.pt:72
@@ -1244,6 +1254,7 @@ msgstr "Ir-Rapport"
 
 #. Default: Report
 #: src/osha/oira/client/templates/actionplan.pt:86
+#: src/osha/oira/client/templates/evaluation.pt:63
 #: src/osha/oira/client/templates/identification.pt:57
 #: src/osha/oira/client/templates/module_actionplan.pt:87
 #: src/osha/oira/client/templates/module_evaluation.pt:73
@@ -1264,6 +1275,7 @@ msgstr "Ir-Rapport"
 
 #. Default: Logout
 #: src/osha/oira/client/templates/actionplan.pt:92
+#: src/osha/oira/client/templates/evaluation.pt:70
 #: src/osha/oira/client/templates/identification.pt:64
 #: src/osha/oira/client/templates/module_actionplan.pt:94
 #: src/osha/oira/client/templates/module_evaluation.pt:79
@@ -1283,7 +1295,9 @@ msgid "navigation_logout"
 msgstr "Illoggja 'l barra"
 
 #. Default: My Assessments
+#. Default: Surveys
 #: src/osha/oira/client/templates/actionplan.pt:93
+#: src/osha/oira/client/templates/evaluation.pt:71
 #: src/osha/oira/client/templates/identification.pt:65
 #: src/osha/oira/client/templates/module_actionplan.pt:95
 #: src/osha/oira/client/templates/module_evaluation.pt:80
@@ -1304,6 +1318,7 @@ msgstr "Il-Valutazzjonijiet Tiegħi"
 #. Default: Help
 #: src/osha/oira/client/templates/actionplan.pt:94
 #: src/osha/oira/client/templates/disclaimer.pt:67
+#: src/osha/oira/client/templates/evaluation.pt:72
 #: src/osha/oira/client/templates/identification.pt:66
 #: src/osha/oira/client/templates/module_actionplan.pt:96
 #: src/osha/oira/client/templates/module_evaluation.pt:81
@@ -1325,6 +1340,7 @@ msgstr "Għajnuna"
 
 #. Default: Status
 #: src/osha/oira/client/templates/actionplan.pt:95
+#: src/osha/oira/client/templates/evaluation.pt:73
 #: src/osha/oira/client/templates/identification.pt:67
 #: src/osha/oira/client/templates/module_actionplan.pt:97
 #: src/osha/oira/client/templates/module_evaluation.pt:82
@@ -1340,6 +1356,7 @@ msgstr "Stat"
 
 #. Default: Settings
 #: src/osha/oira/client/templates/actionplan.pt:96
+#: src/osha/oira/client/templates/evaluation.pt:74
 #: src/osha/oira/client/templates/identification.pt:68
 #: src/osha/oira/client/templates/module_actionplan.pt:98
 #: src/osha/oira/client/templates/module_evaluation.pt:83
@@ -1370,20 +1387,19 @@ msgstr "Dikjarazzjoni ta' Ċaħda ta' Responsabilità"
 msgid "disclaimer_other_websites"
 msgstr ""
 "Din l-għodda fiha links għal websajts oħra li mhumiex taħt il-kontroll tal-"
-"Aġenzija Ewropea għas-Saħħa u s-Sigurtà u l-organizzazzjonijiet involuti. "
-"L-Aġenzija u l-organizzazzjonijiet involuti ma jaċċettaw ebda responsabilità"
-" fir-rigward tal-kontenut ta' dawn il-websajts."
+"Aġenzija Ewropea għas-Saħħa u s-Sigurtà u l-organizzazzjonijiet involuti. L-"
+"Aġenzija u l-organizzazzjonijiet involuti ma jaċċettaw ebda responsabilità "
+"fir-rigward tal-kontenut ta' dawn il-websajts."
 
 #. Default: The European Agency for Safety and Health at Work and the
 #. organisations involved will not be liable for any false, inaccurate,
-#. inappropriate or incomplete information stored in the OiRA tool or any
-#. other
+#. inappropriate or incomplete information stored in the OiRA tool or any other
 #. damages as a result of using the software.
 #: src/osha/oira/client/templates/disclaimer.pt:26
 msgid "disclaimer_tool_information"
 msgstr ""
-"L-Aġenzija Ewropea għas-Saħħa u s-Sigurtà fuq il-Post tax-Xogħol u "
-"l-organizzazzjonijiet involuti mhumiex responsabbli għal kwalunkwe "
+"L-Aġenzija Ewropea għas-Saħħa u s-Sigurtà fuq il-Post tax-Xogħol u l-"
+"organizzazzjonijiet involuti mhumiex responsabbli għal kwalunkwe "
 "informazzjoni falza, mhux preċiża, mhux xierqa jew mhux kompluta maħżuna fl-"
 "Għodda tal-OiRA jew kwalunkwe danni oħra li jirriżultaw mill-użu ta' dan is-"
 "softwer."
@@ -1396,10 +1412,10 @@ msgstr ""
 #: src/osha/oira/client/templates/disclaimer.pt:33
 msgid "disclaimer_risk_coverage"
 msgstr ""
-"Barra minn hekk, għodda tal-OiRA tool mhijiex maħsuba tkopri r-riskji kollha"
-" ta' kull post tax-xogħol, iżda hija maħsuba biex tgħinek tpoġġi fil-"
-"prattika l-proċess tal-valutazzjoni tar-riskji. Biex l-għodda tal-OiRA  tkun"
-" effettiva bis-sħiħ, trid tiġi adattata għall-kuntest tal-intrapriża "
+"Barra minn hekk, għodda tal-OiRA tool mhijiex maħsuba tkopri r-riskji kollha "
+"ta' kull post tax-xogħol, iżda hija maħsuba biex tgħinek tpoġġi fil-prattika "
+"l-proċess tal-valutazzjoni tar-riskji. Biex l-għodda tal-OiRA  tkun "
+"effettiva bis-sħiħ, trid tiġi adattata għall-kuntest tal-intrapriża "
 "partikolari tiegħek - jista' jkun hemm bżonn jiżdiedu xi oġġetti jew "
 "jitneħħew xi oħrajn jekk ma jkunux rilevanti."
 
@@ -1410,10 +1426,10 @@ msgstr ""
 #: src/osha/oira/client/templates/disclaimer.pt:41
 msgid "disclaimer_interactions"
 msgstr ""
-"Għal raġunijiet prattiċi u analitiċi, l-għodda tippreżenta "
-"l-problemi/perikli separatament, iżda fuq il-postijiet tax-xogħol dawn "
-"jistgħu jkunu amalgamati. Għalhekk l-interazzjonijiet bejn il-problemi jew "
-"il-fatturi ta' riskju differenti identifikati għandhom jiġu kkunsidrati."
+"Għal raġunijiet prattiċi u analitiċi, l-għodda tippreżenta l-problemi/"
+"perikli separatament, iżda fuq il-postijiet tax-xogħol dawn jistgħu jkunu "
+"amalgamati. Għalhekk l-interazzjonijiet bejn il-problemi jew il-fatturi ta' "
+"riskju differenti identifikati għandhom jiġu kkunsidrati."
 
 #. Default: Therefore, EU-OSHA does not accept any liability for damages and
 #. claims in case a tool does not cover all risks of a given sector.
@@ -1435,15 +1451,25 @@ msgstr ""
 #: src/osha/oira/client/templates/disclaimer.pt:53
 msgid "disclaimer_printed_assesment"
 msgstr ""
-"Barra minn hekk, l-Aġenzija u l-organizzazzjonijiet involuti fil-produzzjoni"
-" tal-għodda tal-OiRA ma jaċċettaw ebda responsabilità għal danni jew "
-"pretensjonijiet li jirriżultaw mill-użu jew l-inkapaċità li tintuża l-għodda"
-" u d-dejta maħżuna fiha. Bl-istess mod, l-EU-OSHA ma taċċetta ebda "
+"Barra minn hekk, l-Aġenzija u l-organizzazzjonijiet involuti fil-produzzjoni "
+"tal-għodda tal-OiRA ma jaċċettaw ebda responsabilità għal danni jew "
+"pretensjonijiet li jirriżultaw mill-użu jew l-inkapaċità li tintuża l-għodda "
+"u d-dejta maħżuna fiha. Bl-istess mod, l-EU-OSHA ma taċċetta ebda "
 "responsabilità f'każ ta' indisponibbiltà tal-funzjoni tal-għodda tal-OiRA "
 "biex tipprintja r-rapport, tirrekordja l-valutazzjoni tar-riskji "
-"awtomatikament iġġenerata bl-għodda. Għaldaqstant, min iħaddem irid jiżgura,"
-" f'kull ħin, li jkollu valutazzjoni tar-riskji pprintjata, korretta u "
+"awtomatikament iġġenerata bl-għodda. Għaldaqstant, min iħaddem irid jiżgura, "
+"f'kull ħin, li jkollu valutazzjoni tar-riskji pprintjata, korretta u "
 "aġġornata."
+
+#. Default: Run evaluation
+#: src/osha/oira/client/templates/evaluation.pt:31
+msgid "label_run_evaluation"
+msgstr ""
+
+#. Default: Go to action plan
+#: src/osha/oira/client/templates/evaluation.pt:32
+msgid "label_jump_to_actionplan"
+msgstr ""
 
 #. Default: Regions
 #: src/osha/oira/client/templates/frontpage.pt:406
@@ -1486,8 +1512,7 @@ msgstr "Li jmiss"
 msgid "header_profile"
 msgstr "Adatta l-valutazzjoni tar-riskji għall-organizzazzjoni tiegħek"
 
-#. Default: In order to tailor the risk assessment to your organisation you
-#. may
+#. Default: In order to tailor the risk assessment to your organisation you may
 #. be asked to:
 #: src/osha/oira/client/templates/profile.pt:18
 msgid "expl_profile"
@@ -1508,8 +1533,8 @@ msgstr ""
 #: src/osha/oira/client/templates/profile.pt:27
 msgid "expl_profile_bullet2"
 msgstr ""
-"elenka unitajiet kummerċjali, fergħat, ħwienet eċċ. multipli. Dawn ir-riskji"
-" relatati jiġu ripetuti għal kull isem li daħħalt."
+"elenka unitajiet kummerċjali, fergħat, ħwienet eċċ. multipli. Dawn ir-riskji "
+"relatati jiġu ripetuti għal kull isem li daħħalt."
 
 #: src/osha/oira/client/templates/profile.pt:38
 #: src/osha/oira/client/templates/profile.pt:44
@@ -1635,8 +1660,8 @@ msgstr "Approċċ ġenerali (biex ir-riskju jiġi eliminat jew imnaqqas):"
 #: src/osha/oira/client/templates/report_actionplan.pt:106
 msgid "report_measure_preventionplan"
 msgstr ""
-"Azzjoni(jiet) speċifika/speċifiċi meħtieġa biex jiġi implimentat dan "
-"l-approċċ:"
+"Azzjoni(jiet) speċifika/speċifiċi meħtieġa biex jiġi implimentat dan l-"
+"approċċ:"
 
 #. Default: Level of expertise and/or requirements needed:
 #: src/osha/oira/client/templates/report_actionplan.pt:110
@@ -1679,16 +1704,15 @@ msgstr "Dan il-kompitu jibda ${start} u jispiċċa ${end}."
 #: src/osha/oira/client/templates/report_actionplan.pt:135
 msgid "report_measure_full"
 msgstr ""
-"${responsible} responsabbli għal dan il-kompitu li jibda ${start} u jispiċċa"
-" ${end}."
+"${responsible} responsabbli għal dan il-kompitu li jibda ${start} u jispiċċa "
+"${end}."
 
 #. Default: There is a budget of ${amount} for this measure.
 #: src/osha/oira/client/templates/report_actionplan.pt:139
 msgid "report_measure_budget"
 msgstr "Hemm baġit ta' ${amount} għal din il-miżura."
 
-#. Default: The following risks have not yet been answered. Please do so at
-#. the
+#. Default: The following risks have not yet been answered. Please do so at the
 #. soonest possibility.
 #: src/osha/oira/client/templates/report_actionplan.pt:189
 msgid "desc_unanswered_risks"
@@ -1696,13 +1720,11 @@ msgstr ""
 "Ir-riskji li ġejjin għadhom ma ġewx imwieġba. Jekk jogħġbok weġibhom malajr "
 "kemm jista' jkun."
 
-#. Default: This risk is not present in your organisation, but since the
-#. sector
-#. organisation considers this one of the priority risks it must be included
-#. in
+#. Default: This risk is not present in your organisation, but since the sector
+#. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:168
+#: src/osha/oira/client/templates/webhelpers.pt:165
 msgid "top5_risk_not_present"
 msgstr ""
 "Dan ir-riskju mhuwiex preżenti fl-organizzazzjoni tiegħek, iżda minħabba li "
@@ -1775,8 +1797,8 @@ msgstr "istituzzjoni/amministrazzjoni Ewropea"
 #: src/osha/oira/client/templates/report_company.pt:43
 msgid "info_referer_eu_institution"
 msgstr ""
-"L-Aġenzija Ewropea għas-Saħħa u s-Sigurtà fuq il-Post tax-Xogħol, l-imsieħba"
-" soċjali Ewropej, eċċ."
+"L-Aġenzija Ewropea għas-Saħħa u s-Sigurtà fuq il-Post tax-Xogħol, l-imsieħba "
+"soċjali Ewropej, eċċ."
 
 #. Default: health and safety experts
 #: src/osha/oira/client/templates/report_company.pt:44
@@ -1795,7 +1817,7 @@ msgstr "Aqbeż dan l-istadju"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:180
+#: src/osha/oira/client/templates/webhelpers.pt:177
 msgid "warn_risk_present"
 msgstr "Inti weġibt b'mod negattiv għad-dikjarazzjoni t'hawn fuq."
 
@@ -1805,9 +1827,9 @@ msgstr "Niżżel u pprintja r-rapport tiegħek"
 
 #: src/osha/oira/client/templates/report_landing.pt:23
 msgid ""
-"Save the report on your computer and print it. You can also modify it or add"
-" more information. Please note that changes made on your pc will NOT be "
-"saved in the OiRA tool"
+"Save the report on your computer and print it. You can also modify it or add "
+"more information. Please note that changes made on your pc will NOT be saved "
+"in the OiRA tool"
 msgstr ""
 "Issejvja r-rapport fuq il-kompjuter tiegħek u pprintjah. Tista' wkoll "
 "temendah jew iżżid aktar informazzjoni. Ftakar li l-bidliet magħmula fuq il-"
@@ -1827,8 +1849,8 @@ msgid ""
 "employers, experts in occupational safety and health, ...)"
 msgstr ""
 "Għaddi informazzjoni lill-persuni kkonċernati (ħaddiema, rappreżentanti tas-"
-"sigurtà, min iħaddem, esperti fis-saħħa u s-sigurtà fuq il-post tax-xogħol, "
-"...)"
+"sigurtà, min iħaddem, esperti fis-saħħa u s-sigurtà fuq il-post tax-"
+"xogħol, ...)"
 
 #: src/osha/oira/client/templates/report_landing.pt:29
 msgid "Monitor and assess whether necessary measures have been introduced."
@@ -1836,8 +1858,8 @@ msgstr "Immoniterja u vvaluta jekk ġewx introdotti miżuri neċessarji."
 
 #: src/osha/oira/client/templates/report_landing.pt:30
 msgid ""
-"Record any revision if circumstances change (new machines, new workers, as a"
-" result of findings of any accident investigations, etc.)"
+"Record any revision if circumstances change (new machines, new workers, as a "
+"result of findings of any accident investigations, etc.)"
 msgstr ""
 "Irrekordja kwalunwe reviżjoni jekk jinbidlu ċ-ċirkustanzi (magni ġodda, "
 "ħaddiema ġodda, minħabba l-konklużjonijiet ta' xi investigazzjonijiet ta' "
@@ -1924,8 +1946,8 @@ msgid ""
 "'Requirements' of this measure will be overwritten. This action cannot be "
 "reverted. Are you sure you want to continue?"
 msgstr ""
-"It-test li hemm bħalissa fl-oqsma 'Pjan ta' azzjoni', 'Pjan ta' prevenzjoni'"
-" u 'Rekwiżiti' ta' din il-miżura se jiġi sostitwit. Din l-azzjoni mhijiex "
+"It-test li hemm bħalissa fl-oqsma 'Pjan ta' azzjoni', 'Pjan ta' prevenzjoni' "
+"u 'Rekwiżiti' ta' din il-miżura se jiġi sostitwit. Din l-azzjoni mhijiex "
 "riversibbli. Żgur li tixtieq tkompli?"
 
 #. Default: Add
@@ -1988,20 +2010,18 @@ msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
 "Aħtar persuna fil-kumpanija tiegħek biex tkun responsabbli mill-"
 "implimentazzjoni ta' din il-miżura. Din il-persuna jkollha l-awtorità tieħu "
-"l-passi deskritti fil-Pjan u/jew ir-responsabilità li jiġi żgurat li dawn "
-"il-passi jittieħdu."
+"l-passi deskritti fil-Pjan u/jew ir-responsabilità li jiġi żgurat li dawn il-"
+"passi jittieħdu."
 
-#. Default: Although some measures do not cost any money, most do. The
-#. measures
-#. should therefore be budgeted for; include them in the annual budget round
-#. if
+#. Default: Although some measures do not cost any money, most do. The measures
+#. should therefore be budgeted for; include them in the annual budget round if
 #. necessary.
 #: src/osha/oira/client/templates/risk_actionplan.pt:125
 msgid "actionplan_measure_budget_tooltip"
 msgstr ""
 "Għalkemm xi miżuri ma jiswewx flus, il-biċċa l-kbira jiswew. Għaldaqstant, "
-"dawn il-miżuri għandu jkollhom baġit; inkludihom fil-baġit annwali jekk hemm"
-" bżonn."
+"dawn il-miżuri għandu jkollhom baġit; inkludihom fil-baġit annwali jekk hemm "
+"bżonn."
 
 #. Default: Please enter the budget in whole Euros.
 #: src/osha/oira/client/templates/risk_actionplan.pt:127
@@ -2051,8 +2071,8 @@ msgstr "Daħħal sena valida wara l-1900"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"Tista' tħalli xi kummenti dwar il-mistoqsija t'hawn fuq f'dan il-qasam. Dawn"
-" il-kummenti jintużaw fil-pjan ta' azzjoni."
+"Tista' tħalli xi kummenti dwar il-mistoqsija t'hawn fuq f'dan il-qasam. Dawn "
+"il-kummenti jintużaw fil-pjan ta' azzjoni."
 
 #. Default: What is the chance of this risk occurring?
 #: src/osha/oira/client/templates/risk_evaluation.pt:28
@@ -2282,8 +2302,8 @@ msgstr "Daħħal titlu għall-Valutazzjoni tar-Riskji tiegħek"
 #: src/osha/oira/client/templates/sessions.pt:59
 msgid "session_title_tooltip"
 msgstr ""
-"Meta tkun bdejt sessjoni tal-għodda tal-OiRA, tista' tieqaf qabel tispiċċaha"
-" kollha. Tista' terġa' tibdieha mill-ġdid darba oħra billi tagħżel it-titlu "
+"Meta tkun bdejt sessjoni tal-għodda tal-OiRA, tista' tieqaf qabel tispiċċaha "
+"kollha. Tista' terġa' tibdieha mill-ġdid darba oħra billi tagħżel it-titlu "
 "tas-sessjoni tal-għodda tal-OiRA. Tista' tissejvja iktar minn sessjoni "
 "waħda, sakemm tkun tajthom ismijiet differenti. Ftakar l-indirizz "
 "elettroniku, il-password u t-titlu li tajt lis-sessjoni tal-OiRA. Jekk "
@@ -2331,73 +2351,73 @@ msgid "label_accept update"
 msgstr "Aġġorna"
 
 #. Default: Online interactive
-#: src/osha/oira/client/templates/webhelpers.pt:25
+#: src/osha/oira/client/templates/webhelpers.pt:24
 msgid "oira_name_line_1"
 msgstr "Valutazzjoni tar-Riskji"
 
 #. Default: Risk Assessment
-#: src/osha/oira/client/templates/webhelpers.pt:26
+#: src/osha/oira/client/templates/webhelpers.pt:25
 msgid "oira_name_line_2"
 msgstr "Onlajn interattiva"
 
-#: src/osha/oira/client/templates/webhelpers.pt:104
+#: src/osha/oira/client/templates/webhelpers.pt:101
 msgid "Unvisited"
 msgstr "Ma saritx żjara"
 
-#: src/osha/oira/client/templates/webhelpers.pt:105
+#: src/osha/oira/client/templates/webhelpers.pt:102
 msgid "Postponed"
 msgstr "Posponiment"
 
-#: src/osha/oira/client/templates/webhelpers.pt:106
+#: src/osha/oira/client/templates/webhelpers.pt:103
 msgid "Risk not present"
 msgstr "Riskju mhux preżenti"
 
-#: src/osha/oira/client/templates/webhelpers.pt:107
+#: src/osha/oira/client/templates/webhelpers.pt:104
 msgid "Risk present"
 msgstr "Riskju preżenti"
 
 #. Default: Produced by ${EU-OSHA}.
-#: src/osha/oira/client/templates/webhelpers.pt:121
+#: src/osha/oira/client/templates/webhelpers.pt:118
 msgid "appendix_produced_by"
 msgstr "Prodotta minn ${EU-OSHA}."
 
 #. Default: About
-#: src/osha/oira/client/templates/webhelpers.pt:124
+#: src/osha/oira/client/templates/webhelpers.pt:121
 msgid "appendix_about"
 msgstr "Dwar"
 
 #. Default: Privacy
-#: src/osha/oira/client/templates/webhelpers.pt:126
+#: src/osha/oira/client/templates/webhelpers.pt:123
 msgid "appendix_privacy"
 msgstr "Privatezza"
 
 #. Default: Disclaimer
-#: src/osha/oira/client/templates/webhelpers.pt:128
+#: src/osha/oira/client/templates/webhelpers.pt:125
 msgid "appendix_disclaimer"
 msgstr "Ċaħda ta’ responsabbiltà"
 
 #. Default: GPL License
-#: src/osha/oira/client/templates/webhelpers.pt:130
+#: src/osha/oira/client/templates/webhelpers.pt:127
 msgid "appendix_gpl_license"
 msgstr "Liċenzja GPL"
 
-#: src/osha/oira/client/templates/webhelpers.pt:132
+#: src/osha/oira/client/templates/webhelpers.pt:129
 msgid "CC License"
 msgstr "Liċenzja CC"
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:195
-#: src/osha/oira/client/templates/webhelpers.pt:209
+#: src/osha/oira/client/templates/webhelpers.pt:192
+#: src/osha/oira/client/templates/webhelpers.pt:206
 msgid "header_legal_references"
 msgstr "Referenzi legali u tal-politika"
 
 #. Default: Hide
-#: src/osha/oira/client/templates/webhelpers.pt:212
+#: src/osha/oira/client/templates/webhelpers.pt:209
 msgid "action_hide"
 msgstr "Aħbi"
 
 #. Default: Show
-#: src/osha/oira/client/templates/webhelpers.pt:216
+#: src/osha/oira/client/templates/webhelpers.pt:213
 msgid "action_show"
 msgstr "Uri"
 
@@ -2459,16 +2479,16 @@ msgstr "mistoqsija Editja l-Profil"
 #: src/osha/oira/content/risk.py:23
 msgid "help_evaluation_method_kinney"
 msgstr ""
-"Agħżel bejn metodu STMAT (stima bejn wieħed u ieħor) jew IKKALKULAT (taħlita"
-" ta’ probabbiltà, frekwenza u severità)."
+"Agħżel bejn metodu STMAT (stima bejn wieħed u ieħor) jew IKKALKULAT (taħlita "
+"ta’ probabbiltà, frekwenza u severità)."
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of frequency and severity) method.
 #: src/osha/oira/content/risk.py:30
 msgid "help_evaluation_method_french"
 msgstr ""
-"Agħżel bejn metodu STMAT (stima bejn wieħed u ieħor) jew IKKALKULAT (taħlita"
-" ta’ frekwenza u severità)."
+"Agħżel bejn metodu STMAT (stima bejn wieħed u ieħor) jew IKKALKULAT (taħlita "
+"ta’ frekwenza u severità)."
 
 #. Default: Save changes
 #: src/osha/oira/content/risk.py:44 src/osha/oira/content/risk.py:61
@@ -2594,8 +2614,7 @@ msgstr ""
 msgid "label_external_site_url"
 msgstr "URL ta’ sit estern"
 
-#. Default: This is the URL of an external site that is linked to. Clicking
-#. the
+#. Default: This is the URL of an external site that is linked to. Clicking the
 #. logo or the name will take the user to this URL.
 #: src/osha/oira/content/survey.py:40
 msgid "help__external_site_url"
@@ -2767,9 +2786,9 @@ msgid ""
 "repeatable profile question then the corresponding module will be repeated "
 "the specified number of times."
 msgstr ""
-"Tali mistoqsijiet isiru QABEL l-utent aħħari jibda l-identifikazzjoni u "
-"l-valutazzjoni tar-riskji. Jekk l-utent aħħari ma jikkonfermax li mistoqsija"
-" fakultattiva dwar il-profil hija rilevanti (billi jimmarka l-kaxxa), il-"
+"Tali mistoqsijiet isiru QABEL l-utent aħħari jibda l-identifikazzjoni u l-"
+"valutazzjoni tar-riskji. Jekk l-utent aħħari ma jikkonfermax li mistoqsija "
+"fakultattiva dwar il-profil hija rilevanti (billi jimmarka l-kaxxa), il-"
 "modulu korrispondenti mbagħad jinqabeż għalkollox. Jekk l-utent aħħari "
 "jdaħħal iktar minn għażla waħda f’mistoqsija dwar il-profil li tista’ tiġi "
 "ripetuta, il-modulu korrispondenti mbagħad jiġi ripetut għan-numru "
@@ -2925,11 +2944,11 @@ msgstr "Agħżel pajjiż"
 #: src/osha/oira/content/templates/surveygroup_add.pt:86
 msgid "help_survey_evaluation_algorithm_standard"
 msgstr ""
-"Dan il-metodu jinvolvi valutazzjoni tar-riskji skont is-Severità x "
-"l-Esponiment x il-Probabbiltà, filwaqt li dawn għandhom jiġu mifhuma kif "
-"ġej; is-Severità tal-korriment marbut mal-periklu – l-Esponiment (il-"
-"Frekwenza) għall-periklu – il-Probabbiltà li jokkorri l-periklu meta wieħed "
-"jiġi espost għalih"
+"Dan il-metodu jinvolvi valutazzjoni tar-riskji skont is-Severità x l-"
+"Esponiment x il-Probabbiltà, filwaqt li dawn għandhom jiġu mifhuma kif ġej; "
+"is-Severità tal-korriment marbut mal-periklu – l-Esponiment (il-Frekwenza) "
+"għall-periklu – il-Probabbiltà li jokkorri l-periklu meta wieħed jiġi espost "
+"għalih"
 
 #. Default: Standard three criteria
 #: src/osha/oira/content/templates/surveygroup_add.pt:90
@@ -2944,15 +2963,14 @@ msgstr ""
 "Kinney"
 
 #. Default: This method involves risk assessment by Severity x Exposure,
-#. whereas these have to be understood as follows; Severity of injury linked
-#. to
+#. whereas these have to be understood as follows; Severity of injury linked to
 #. hazard - Exposure (Frequency) to the hazard
 #: src/osha/oira/content/templates/surveygroup_add.pt:94
 msgid "help_survey_evaluation_algorithm_simplified"
 msgstr ""
-"Dan il-metodu jinvolvi valutazzoni tar-riskji skont is-Severità x "
-"l-Esponiment, filwaqt li dawn għandhom jiġu mifhuma kif ġej; is-Severità "
-"tal-korriment marbut mal-periklu – l-Esponiment (il-Frekwenza) għall-periklu"
+"Dan il-metodu jinvolvi valutazzoni tar-riskji skont is-Severità x l-"
+"Esponiment, filwaqt li dawn għandhom jiġu mifhuma kif ġej; is-Severità tal-"
+"korriment marbut mal-periklu – l-Esponiment (il-Frekwenza) għall-periklu"
 
 #. Default: Simplified two criteria
 #: src/osha/oira/content/templates/surveygroup_add.pt:100
@@ -3037,8 +3055,8 @@ msgstr "Mistoqsija tal-profil"
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:8
 msgid ""
-"The basic architecture of an Online interactive Risk Assessment consists of:"
-" - profile questions (questions defining the company profile) - modules and "
+"The basic architecture of an Online interactive Risk Assessment consists of: "
+"- profile questions (questions defining the company profile) - modules and "
 "potentially sub-modules - risks (positive statements) Profile questions are "
 "used to determine whether particular modules apply to the end user at all "
 "(OPTIONAL), or whether they should be repeated a number of times "
@@ -3053,12 +3071,12 @@ msgstr ""
 "tikkonsisti f’dan li ġej: - mistoqsijiet dwar il-profil (mistoqsijiet li "
 "jiddefinixxu l-profil tal-kumpanija) - moduli u potenzjalment moduli "
 "sekondarji - riskji (dikjarazzjonijiet pożittivi) Il-mistoqsijiet dwar il-"
-"profil jintużaw biex jiġi stabbilit jekk moduli partikolari japplikawx "
-"għall-utent aħħari (FAKULTATTIVI), jew jekk għandhomx jiġu ripetuti numru "
-"ta’ drabi (RIPETIBBLI). Tali mistoqsijiet isiru QABEL l-utent aħħari jibda "
-"l-identifikazzjoni u l-valutazzjoni tar-riskji. Jekk l-utent aħħari ma "
-"jikkonfermax li mistoqsija fakultattiva dwar il-profil hija rilevanti (billi"
-" jimmarka l-kaxxa), il-modulu korrispondenti mbagħad jinqabeż għalkollox. "
+"profil jintużaw biex jiġi stabbilit jekk moduli partikolari japplikawx għall-"
+"utent aħħari (FAKULTATTIVI), jew jekk għandhomx jiġu ripetuti numru ta’ "
+"drabi (RIPETIBBLI). Tali mistoqsijiet isiru QABEL l-utent aħħari jibda l-"
+"identifikazzjoni u l-valutazzjoni tar-riskji. Jekk l-utent aħħari ma "
+"jikkonfermax li mistoqsija fakultattiva dwar il-profil hija rilevanti (billi "
+"jimmarka l-kaxxa), il-modulu korrispondenti mbagħad jinqabeż għalkollox. "
 "Jekk l-utent aħħari jdaħħal iktar minn għażla waħda f’mistoqsija dwar il-"
 "profil li tista’ tiġi ripetuta, il-modulu korrispondenti mbagħad jiġi "
 "ripetut għan-numru speċifikat ta’ drabi."
@@ -3095,8 +3113,7 @@ msgstr "Inti taf bir-riskji kollha?"
 
 #. Default: Including the risks to your employees and your equipment? What if
 #. there is an accident with one of the machines? What if an employee is
-#. exposed to hazardous substances? A risk assessment helps you to define
-#. these
+#. exposed to hazardous substances? A risk assessment helps you to define these
 #. risks and tackle them head on. A risk assessment mainly consists of two
 #. parts: a <dynamic element> with all the risks in your company and an
 #. <dynamic element> with details of how to deal with these risks. These two
@@ -3111,8 +3128,8 @@ msgstr ""
 "tiffaċċjahom minn qabel. Valutazzjoni tar-riskji tikkonsisti prinċipalment "
 "f'żewġ partijiet: lista bir-riskji kollha fil-kumpanija tiegħek u pjan ta' "
 "azzjoni b'dettalji dwar kif tiffaċċja dawn ir-riskji. Dawn iż-żewġ "
-"komponenti jippermettulek tillimita r-riskji għall-impjegati tiegħek u "
-"għall-kumpanija tiegħek, u għalhekk anke r-riskju finanzjarju."
+"komponenti jippermettulek tillimita r-riskji għall-impjegati tiegħek u għall-"
+"kumpanija tiegħek, u għalhekk anke r-riskju finanzjarju."
 
 #. Default: The assessment is not complicated
 #: src/osha/oira/templates/default_introduction.pt:9
@@ -3127,8 +3144,8 @@ msgstr "Il-valutazzjoni mhijiex ikkumplikata"
 #: src/osha/oira/templates/default_introduction.pt:10
 msgid "intro_not_complicated"
 msgstr ""
-"Ikkumplikata? Mhux daqstant. L-iktar l-iktar tieħu ftit tal-ħin. Madankollu,"
-" il-Valutazzjoni tar-Riskji hija importanti. Tant hija importanti li hija "
+"Ikkumplikata? Mhux daqstant. L-iktar l-iktar tieħu ftit tal-ħin. Madankollu, "
+"il-Valutazzjoni tar-Riskji hija importanti. Tant hija importanti li hija "
 "rekwiżit legali. Dan huwa għal skop tajjeb. Jekk ir-riskji ma jiġux "
 "ivvalutati jew iffaċċjati korrettament, ma jkunx jista' jinbeda proċess "
 "adegwat ta' mmaniġġjar tar-riskji u x'aktarx ma jkunux jistgħu jinstabu jew "
@@ -3162,8 +3179,8 @@ msgstr "L-Għodda tal-OiRA"
 msgid "intro_oira_tool"
 msgstr ""
 "L-għodda tal-valutazzjoni tar-riskji hija prinċipalment maħsuba għall-"
-"intrapriżi/organizzazzjonijiet mikro (inqas minn 10 ħaddiema) u żgħar (inqas"
-" 50 ħaddiem)."
+"intrapriżi/organizzazzjonijiet mikro (inqas minn 10 ħaddiema) u żgħar (inqas "
+"50 ħaddiem)."
 
 #. Default: Login
 #: src/osha/oira/templates/login.pt:12

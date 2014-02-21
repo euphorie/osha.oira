@@ -4,8 +4,7 @@ Changelog
 2.2.11 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Translation corrections in IS #9345 [pysailor]
 
 2.2.10 (2014-01-02)
 -------------------

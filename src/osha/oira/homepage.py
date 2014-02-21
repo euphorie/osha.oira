@@ -87,7 +87,7 @@ class EditForm(edit.DefaultEditForm):
     preview = button.Buttons(button.Button('preview',
                                            title=u'Save and preview'))
     buttons = preview + buttons
-    buttons['cancel'].title = u'Clear unsaved changes'
+    buttons['cancel'].title = _(u'Clear unsaved changes')
     handlers = edit.DefaultEditForm.handlers
 
     def nextURL(self):

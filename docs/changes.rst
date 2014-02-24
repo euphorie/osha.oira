@@ -5,6 +5,7 @@ Changelog
 -------------------
 
 - Translation corrections in IS #9345 [pysailor]
+- Translation correction in LT #9510
 
 2.2.10 (2014-01-02)
 -------------------

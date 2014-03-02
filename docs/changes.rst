@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.11 (unreleased)
+2.2.11 (2014-03-02)
 -------------------
 
 - Translation corrections in IS #9345 [pysailor]

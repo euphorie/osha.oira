@@ -7,6 +7,8 @@ Changelog
 - Translation corrections in IS #9345 [pysailor]
 - Translation correction in LT #9510
 - Translation corrections in BG #9324
+- Change Sessions button in My Assessment #7443, #7635
+
 
 2.2.10 (2014-01-02)
 -------------------

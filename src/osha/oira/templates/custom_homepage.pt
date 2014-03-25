@@ -27,7 +27,7 @@
         .report #appendix img {
             margin-bottom: 0;
         }
-        .appendix_oira_logo { 
+        .appendix_oira_logo {
             margin-right: 15px;
             cursor: pointer;
         }
@@ -40,7 +40,7 @@
     </style>
   </head>
   <body>
-     <h1 style="text-align:center">Welcome to the Online interactive Risk Assessment tools (OiRA)</h1>
+     <h1 class="carousel"><span lang="en" xml:lang="en">Welcome to the Online interactive Risk Assessment tools (OiRA)</span></h1>
     <!--[if lte IE 7]> <br/> <![endif]-->
     <ul id="navigation">
         <li id="home">
@@ -105,8 +105,8 @@
             </div>
 
         </div>
-	
-	  
+
+
     <tal:render content="structure view/render_body"/>
     <metal:css use-macro="webhelpers/macros/appendix"/>
     <metal:css use-macro="webhelpers/macros/javascript"/>

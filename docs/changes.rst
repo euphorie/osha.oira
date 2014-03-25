@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.12 (unreleased)
+2.2.12 (2014-03-25)
 -------------------
 
 - Fixed headline in custom homepage for mobile [pysailor]

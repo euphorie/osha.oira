@@ -111,6 +111,7 @@ class Library(grok.View):
                 sector_library.sort(key=lambda s: s['title'])
                 library.append({'title': sector.title,
                                 'url': sector.absolute_url(),
+                                'path': '/'.join(sector.getPhysicalPath()),
                                 'surveys': sector_library})
         library.sort(key=lambda s: s['title'])
         return library

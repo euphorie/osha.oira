@@ -25,8 +25,16 @@
       i18n:name="title">`${context/title}`</em>.</p>
 
       <form action="${context/absolute_url}/@@library-insert" method="POST">
+        <p i18n:translate="">Show library from 
+          <select i18n:name="dropdown" name="survey">
+            <optgroup tal:repeat="sector view/library" label="${sector/title}">
+              <option tal:repeat="survey sector/surveys" value="${survey/path}">${survey/title}</option>
+            </optgroup>
+          </select>.
+        </p>
+
         <tal:sector repeat="sector view/library">
-          <tal:survey repeat="survey sector/surveys">
+          <div tal:repeat="survey sector/surveys" class="dependsOn-survey-equals-${survey/path}">
             <h3><a href="${sector/url}">${sector/title}</a> - <a href="${survey/url}">${survey/title}</a></h3>
 
             <tal:content define="children survey/children; top python:True">
@@ -38,7 +46,7 @@
                 </li>
               </ul>
             </tal:content>
-          </tal:survey>
+          </div>
         </tal:sector>
       </form>
     </metal:content>

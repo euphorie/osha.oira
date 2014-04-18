@@ -90,7 +90,7 @@ class Library(grok.View):
             try:
                 sector = site.restrictedTraverse(path)
             except (AttributeError, KeyError):
-                log.warning('Invalid library path: %s' % path)
+                log.warning('Invalid library path (not found): %s' % path)
                 continue
             if not ISector.providedBy(sector):
                 log.warning('Invalid library path (not a sector): %s', path)

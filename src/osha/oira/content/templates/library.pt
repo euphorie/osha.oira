@@ -24,16 +24,22 @@
       level of your survey, and modules may be too deeply nested to fit in <em
       i18n:name="title">`${context/title}`</em>.</p>
 
-      <form action="${context/absolute_url}/@@library-insert" method="POST" tal:define="survey view/contents; children survey/children; top python:True">
-        <h3>${survey/title}</h3>
+      <form action="${context/absolute_url}/@@library-insert" method="POST">
+        <tal:sector repeat="sector view/library">
+          <tal:survey repeat="survey sector/surveys">
+            <h3><a href="${sector/url}">${sector/title}</a> - <a href="${survey/url}">${survey/title}</a></h3>
 
-        <ul class="${python:'survey library' if top else None}" metal:define-macro="renderTree">
-          <li tal:repeat="item children">
-            <button tal:condition="not:item/disabled" name="path" value="${item/path}" class="micro floatAfter">Insert</button>
-            <a href="${item/url}" class="${python:'disabled' if item['disabled'] else None}"><strong class="counter">${item/number}</strong> <em class="icon ${item/portal_type}"></em>${item/title}</a>
-            <tal:subtree tal:define="children item/children; top python:False" tal:condition="python:children"><metal:block use-macro="template/macros/renderTree"/></tal:subtree>
-          </li>
-        </ul>
+            <tal:content define="children survey/children; top python:True">
+              <ul class="${python:'survey library' if top else None}" metal:define-macro="renderTree">
+                <li tal:repeat="item children">
+                  <button tal:condition="not:item/disabled" name="path" value="${item/path}" class="micro floatAfter">Insert</button>
+                  <a href="${item/url}" class="${python:'disabled' if item['disabled'] else None}"><strong class="counter">${item/number}</strong> <em class="icon ${item/portal_type}"></em>${item/title}</a>
+                  <tal:subtree tal:define="children item/children; top python:False" tal:condition="python:children"><metal:block use-macro="template/macros/renderTree"/></tal:subtree>
+                </li>
+              </ul>
+            </tal:content>
+          </tal:survey>
+        </tal:sector>
       </form>
     </metal:content>
 

@@ -4,8 +4,7 @@ Changelog
 2.2.13 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Translation corrections in SL (OSHA #9584)
 
 2.2.12 (2014-03-25)
 -------------------

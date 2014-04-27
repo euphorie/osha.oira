@@ -5,6 +5,7 @@ Changelog
 -------------------
 
 - Translation corrections in SL (OSHA #9584)
+- Translation corrections in FI (OSHA #9806)
 
 2.2.12 (2014-03-25)
 -------------------

@@ -37,7 +37,10 @@ class Company(GenericCompany):
             'country': u'xx',
             'employees': None,
             'referer': None,
-            'workers_participated': None}
+            'workers_participated': None,
+            'needs_met': None,
+            'recommend_tool': None,
+        }
         self.applyChanges(data)
         url = "%s/report/view" % self.request.survey.absolute_url()
         self.request.response.redirect(url)

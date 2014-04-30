@@ -38,6 +38,44 @@ def is_allowed(context, item):
     return True
 
 
+def get_library(context):
+    config = getUtility(IAppConfig).get('euphorie', {})
+    paths = [path.lstrip('/') for path in config.get('library', '').split()]
+    if not paths:
+        return []
+    site = getPortal(context)
+    library = []
+    for path in paths:
+        try:
+            sector = site.restrictedTraverse(path)
+        except (AttributeError, KeyError):
+            log.warning('Invalid library path (not found): %s' % path)
+            continue
+        if not ISector.providedBy(sector):
+            log.warning('Invalid library path (not a sector): %s', path)
+            continue
+        sector_library = []
+        survey_groups = [sg for sg in sector.values()
+                         if ISurveyGroup.providedBy(sg) and not sg.obsolete]
+        for sg in survey_groups:
+            surveys = [s for s in sg.values() if ISurvey.providedBy(s)]
+            if len(surveys) != 1:
+                log.warning('Ignoring surveygroup due to multiple versions: %s',
+                        '/'.join(sg.getPhysicalPath()))
+                continue
+            tree = build_survey_tree(aq_inner(context), surveys[0])
+            tree['title'] = sg.title
+            sector_library.append(tree)
+        if sector_library:
+            sector_library.sort(key=lambda s: s['title'])
+            library.append({'title': sector.title,
+                            'url': sector.absolute_url(),
+                            'path': '/'.join(sector.getPhysicalPath()),
+                            'surveys': sector_library})
+    library.sort(key=lambda s: s['title'])
+    return library
+
+
 def build_survey_tree(context, root):
     """Build a simple datastructure describing (part of) a survey.
 
@@ -79,45 +117,8 @@ class Library(grok.View):
     grok.require('euphorie.content.AddNewRIEContent')
     grok.template('library')
 
-    def _get_library(self):
-        config = getUtility(IAppConfig).get('euphorie', {})
-        paths = [path.lstrip('/') for path in config.get('library', '').split()]
-        if not paths:
-            return []
-        site = getPortal(self.context)
-        library = []
-        for path in paths:
-            try:
-                sector = site.restrictedTraverse(path)
-            except (AttributeError, KeyError):
-                log.warning('Invalid library path (not found): %s' % path)
-                continue
-            if not ISector.providedBy(sector):
-                log.warning('Invalid library path (not a sector): %s', path)
-                continue
-            sector_library = []
-            survey_groups = [sg for sg in sector.values()
-                             if ISurveyGroup.providedBy(sg) and not sg.obsolete]
-            for sg in survey_groups:
-                surveys = [s for s in sg.values() if ISurvey.providedBy(s)]
-                if len(surveys) != 1:
-                    log.warning('Ignoring surveygroup due to multiple versions: %s',
-                            '/'.join(sg.getPhysicalPath()))
-                    continue
-                tree = build_survey_tree(aq_inner(self.context), surveys[0])
-                tree['title'] = sg.title
-                sector_library.append(tree)
-            if sector_library:
-                sector_library.sort(key=lambda s: s['title'])
-                library.append({'title': sector.title,
-                                'url': sector.absolute_url(),
-                                'path': '/'.join(sector.getPhysicalPath()),
-                                'surveys': sector_library})
-        library.sort(key=lambda s: s['title'])
-        return library
-
     def update(self):
-        self.library = self._get_library()
+        self.library = get_library(self.context)
         if not self.library:
             raise NotFound(self, 'library', self.request)
         self.depth = item_depth(aq_inner(self.context))

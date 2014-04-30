@@ -15,20 +15,29 @@
 .countries.region {
     float: none;
 }
+.official {
+    float: left;
+}
+.library_info {
+    margin-top: -25px
+}
 </style>
       <div class="introduction">
         <p i18n:translate="message_choose_country">Please choose a country of which you would like to view or copy a survey.</p>
 
       </div>
-      <tal:block define='countries python:view.countries.get("region")' condition="python:countries">
+      <div tal:define='countries python:view.countries.get("region")' tal:condition="python:countries" class="official">
         <ul class="countries region">
           <li tal:repeat="region countries" class="${region/id}"><a href="${region/url}">${region/title}</a></li>
         </ul>
-        <div tal:condition="python:len(library_info)" style="float:left">
-          Here you can browse through the library of OiRA tools:
-          <ul><li tal:repeat="item library_info"><a href="#" tal:attributes="href item/url" tal:content="item/title">library</a></li></ul>
+        <div tal:condition="python:len(library_info)==1" class="library_info">
+          Here you can browse through the collection of generic OiRA Tools:
+            <a tal:define="item python:library_info[0]" tal:attributes="href item/url" tal:content="item/title">library</a>
+
+          <p class="discrete">To copy content from the Library, go to your own tool and use the "Library" button.</p>
+
         </div>
-      </tal:block>
+      </div>
       <tal:block define='countries python:view.countries.get("country")' condition="python:countries">
         <ul class="countries">
           <li tal:repeat="country countries" class="${country/id}"><a href="${country/url}">${country/title}</a></li>

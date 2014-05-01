@@ -30,7 +30,7 @@ jenkins: bin/test $(MO_FILES)
 pot: bin/pybabel
 	bin/pybabel extract -F babel.cfg \
 		--copyright-holder='SYSLAB.COM GmbH' \
-		--msgid-bugs-address='brand@syslab.com' \
+		--msgid-bugs-address='info@syslab.com' \
 		--charset=utf-8 \
 		src > $(EUPHORIE_POT)~ && mv $(EUPHORIE_POT)~ $(EUPHORIE_POT)	
 

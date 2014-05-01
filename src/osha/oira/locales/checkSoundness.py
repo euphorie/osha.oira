@@ -5,22 +5,24 @@
 """%(program)s: Check that all po files are sound and don't break when they
 are compiled
 
-usage:    %(program)s
+usage:      %(program)s [directory]
+directory:  Path to a directory that contains the 2-letter language directories.
+            Defaults to current directory.
 """
 
 import sys
 import os
 import re
-from popen2 import popen3
-# import polib
+import subprocess
 
 # Define here the patterns for all error messages you want to ignore
 messages_to_ignore = [
-  '.*?entry ignored',
-  '^msgfmt: found .*',
-  '.*?warning: source file contains fuzzy translation',
+    '.*?entry ignored',
+    '^msgfmt: found .*',
+    '.*?warning: source file contains fuzzy translation',
 ]
 ignore = [re.compile(patt) for patt in messages_to_ignore]
+
 
 def usage(stream, msg=None):
     if msg:
@@ -30,16 +32,26 @@ def usage(stream, msg=None):
     print >> stream, __doc__ % {"program": program}
     sys.exit(0)
 
-dirs = [x for x in os.listdir('.') if len(x) == 2 and os.path.isdir(x)]
+if len(sys.argv) > 2:
+    usage(sys.stderr, "\nERROR: Too many arguments")
+if len(sys.argv) == 2:
+    basedir = sys.argv[1]
+else:
+    basedir = '.'
+
+if not os.path.isdir(basedir):
+    usage(sys.stderr, u"The directory you provided does not exists")
+
+dirs = [x for x in os.listdir(basedir) if len(x) == 2 and os.path.isdir(x)]
 houstonwehaveaproblem = False
 for dirname in dirs:
-    path = "%s/LC_MESSAGES" % dirname
+    path = "{basedir}/{dirname}/LC_MESSAGES".format(basedir=basedir, dirname=dirname)
     names = [x for x in os.listdir(path) if x.endswith('po') and not x.startswith('._')]
     for name in names:
-        #print "\nchecking", name
-        cmd = "msgfmt -C %s/%s" % (path, name)
-        stout, stdin, stderr = popen3(cmd)
-        err = stderr.read()
+        args = ["msgfmt", "-C", "%s/%s" % (path, name)]
+        out, err = subprocess.Popen(
+            args, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+
         if err:
             problems = list()
             lines = err.split('\n')

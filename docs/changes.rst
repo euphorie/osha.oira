@@ -1,12 +1,26 @@
 Changelog
 =========
 
-2.2.11 (unreleased)
+2.2.13 (unreleased)
+-------------------
+
+- Translation corrections in SL (OSHA #9584)
+- Translation corrections in FI (OSHA #9806)
+- Translation corrections in BG (OSHA #9790)
+
+2.2.12 (2014-03-25)
+-------------------
+
+- Fixed headline in custom homepage for mobile [pysailor]
+
+2.2.11 (2014-03-02)
 -------------------
 
 - Translation corrections in IS #9345 [pysailor]
 - Translation correction in LT #9510
 - Translation corrections in BG #9324
+- Change Sessions button in My Assessment #7443, #7635
+
 
 2.2.10 (2014-01-02)
 -------------------
@@ -52,7 +66,7 @@ Changelog
 2.2.6 (2013-08-23)
 ------------------
 
-- Register a more generic datamanger for survey. #8379 [jcbrand] 
+- Register a more generic datamanger for survey. #8379 [jcbrand]
 
 2.2.5 (2013-08-21)
 ------------------

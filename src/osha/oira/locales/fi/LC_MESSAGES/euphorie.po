@@ -229,8 +229,8 @@ msgstr "Lomakkeella voit luoda uuden OiRA-työkaluversion."
 #: src/osha/oira/client/templates/evaluation.pt:19
 msgid "help_risks_present"
 msgstr ""
-"Nyt kun olet tunnistanut olemassa olevat vaarat/ongelmat yrityksessäsi/"
-"organisaatiossasi, sinun tulee arvioida niistä syntyvät riskit."
+"Nyt olet tunnistanut yrityksessäsi esiintyvät vaara- ja haittatekijät. "
+"Seuraavaksi sinun tulee arvioida niiden aiheuttaman riskin suuruus."
 
 #. Default: Solution
 #: src/osha/oira/manual_translations.py:62
@@ -505,11 +505,8 @@ msgstr "Yleiset lopulliset suositukset"
 #: src/osha/oira/client/templates/identification.pt:19
 msgid "intro_print_identification_1"
 msgstr ""
-"Voit tulostaa työkalun sisällöt, jotta voit tarkastella tietoja "
-"asiaankuuluvassa työpaikassa  (tekemällä kierroksen ja katsoen, mikä voi "
-"aiheuttaa haittaa, tai keskustellen työntekijöiden ja/tai näiden edustajien "
-"kanssa heidän kohtaamistaan ongelmista). Sen jälkeen voit viedä tiedot "
-"työkaluun."
+"Voit siirtyä suoraan riskien tunnistamiseen napsauttamalla ”Aloita riskien "
+"tunnistaminen”."
 
 #. Default: You may also wish to distribute the contents among the workers
 #. and/or their representatives and invite them to participate in identifying
@@ -520,17 +517,19 @@ msgstr ""
 #: src/osha/oira/client/templates/identification.pt:20
 msgid "intro_print_identification_2"
 msgstr ""
-"Haluat ehkä myös jakaa sisältöjä työntekijöille ja/tai näiden edustajille ja "
-"pyytää heitä osallistumaan vaarojen/ongelmien tunnistamiseen, riskien "
-"arviointiin ja ennaltaehkäisevistä toimista tehtävään päätöksentekoon. "
-"Heidän antamansa palaute tulee ottaa huomioon, kun tiedot syötetään tähän "
-"työkaluun."
+"Voit aloittaa riskien tunnistamisen myös tulostamalla ensin "
+"arviointilomakkeen ja kiertämällä sen kanssa työpaikalla arvioiden työn "
+"haitta- ja vaaratekijöitä. Jaa lomake/lomakkeita myös työntekijöille ja/tai "
+"työsuojeluvaltuutetuille/-toimikunnalle ja ota heidät mukaan vaarojen ja "
+"haittojen tunnistamiseen, riskien arviointiin ja ehkäisevien toimien "
+"suunnitteluun ja toteutukseen. Kirjaa lopuksi nämä keräämäsi tiedot tähän "
+"sovellukseen."
 
 #. Default: contents of the tool
 #: src/osha/oira/manual_translations.py:150
 #: src/osha/oira/client/templates/identification.pt:22
 msgid "list_of_risks"
-msgstr "työkalun sisällöt"
+msgstr "Tulosta riskien arviointilomake"
 
 #. Default: Please proceed directly to the action plan step.
 #. Default: There are no risks that need to be evaluated. You can proceed
@@ -847,7 +846,7 @@ msgstr "Asiantuntemuksen taso ja/tai tarvittavat vaatimukset"
 #: src/osha/oira/client/report.py:442
 #: src/osha/oira/client/templates/risk_actionplan.pt:119
 msgid "label_action_plan_responsible"
-msgstr "Kuka on vastuussa?"
+msgstr "Vastuuhenkilö"
 
 #. Default: Budget
 #: src/osha/oira/client/report.py:444
@@ -859,13 +858,13 @@ msgstr "Budjetti"
 #: src/osha/oira/client/report.py:445
 #: src/osha/oira/client/templates/risk_actionplan.pt:135
 msgid "label_action_plan_start"
-msgstr "Suunnittelun alku"
+msgstr "Aikataulu: Toimenpiteiden aloituspäivämäärä"
 
 #. Default: Planning end
 #: src/osha/oira/client/report.py:446
 #: src/osha/oira/client/templates/risk_actionplan.pt:171
 msgid "label_action_plan_end"
-msgstr "Suunnittelun loppu"
+msgstr "Toimenpiteet toteutettu/tilanne kunnossa"
 
 #. Default: Consultation of workers
 #: src/osha/oira/client/report.py:497
@@ -929,7 +928,7 @@ msgstr "Riskit, jotka on tunnistettu, mutta joilla EI ole toimintasuunnitelmaa"
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
 msgstr ""
-"Vaarat/ongelmat, jotka on \"pantu parkkiin\" ja joita vielä käsitellään"
+"Vaarat/ongelmat, jotka on ja joita vielä käsitellään"
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
@@ -992,41 +991,41 @@ msgstr "OiRA - Vuorovaikutteinen riskinarviointiprojekti verkossa"
 #: src/osha/oira/client/templates/actionplan.pt:19
 msgid "expl_actionplan_1"
 msgstr ""
-"Riskin tunnistamisen jälkeen sinun täytyy luoda toimintasuunnitelma riskin "
-"hallintaa varten. Riskien poistamiseksi tai pienentämiseksi sinun täytyy "
-"määrittää suoritettavat ennaltaehkäisevät ja suojaavat toimenpiteet."
+"Riskien arvioinnin perusteella laaditaan toimintasuunnitelma. Määrittele "
+"siihen ne käytännön toimenpiteet, joilla arvioimiesi riskien hallinta "
+"toteutuu."
 
 #. Default: Among the things to be considered for this step are:
 #: src/osha/oira/client/templates/actionplan.pt:24
 msgid "expl_actionplan_2"
-msgstr "Tässä vaiheessa huomioitavia asioita ovat:"
+msgstr "Huomioi toimintasuunnitelmaa tehdessäsi:"
 
 #. Default: considering whether the task or job is necessary
 #: src/osha/oira/client/templates/actionplan.pt:32
 msgid "expl_actionplan_4"
-msgstr "harkinta, onko tehtävä tai työ tarpeellinen"
+msgstr "Onko riskialtis työtehtävä tai työvaihe tarpeellinen?"
 
 #. Default: removing the hazard
 #: src/osha/oira/client/templates/actionplan.pt:33
 msgid "expl_actionplan_5"
-msgstr "vaaran poistaminen"
+msgstr "Onko vaara- tai haittatekijä mahdollista poistaa?"
 
 #. Default: Is a risk avoidable? Can it be removed entirely? For example, this
 #. could be achieved by: ${expl_actionplan_4_and_5}
 #: src/osha/oira/client/templates/actionplan.pt:29
 msgid "expl_actionplan_3"
 msgstr ""
-"Onko riski vältettävissä? Voiko sen poistaa kokonaan? Se voi saavuttaa "
-"esimerkiksi näin: ${expl_actionplan_4_and_5}"
+"Onko riski vältettävissä? Voiko sen poistaa kokonaan? "
+"Arvioi ${expl_actionplan_4_and_5}"
 
 #. Default: If certain risks are not avoidable, how can they be reduced to a
 #. level at which the health and safety of those exposed is not compromised?
 #: src/osha/oira/client/templates/actionplan.pt:37
 msgid "expl_actionplan_6"
 msgstr ""
-"Jos tietyt riskit eivät ole vältettävissä, miten ne voi pienentää "
-"sellaiselle tasolle, että niille altistuvien terveys ja turvallisuus eivät "
-"ole vaarassa?"
+"Jos työssä esiintyviä riskejä ei voi poistaa tai välttää, niin pohdi, miten "
+"ne voi pienentää sellaiselle tasolle, että niille altistuvien terveys ja "
+"turvallisuus eivät ole vaarassa?"
 
 #. Default: Once you have decided how to eliminate or reduce a particular risk,
 #. then you describe the specific action(s) required to achieve this. You
@@ -1035,9 +1034,12 @@ msgstr ""
 #: src/osha/oira/client/templates/actionplan.pt:42
 msgid "expl_actionplan_7"
 msgstr ""
-"Kun olet päättänyt, miten tietyn riskin voi poistaa tai pienentää, kuvaa sen "
-"saavuttamiseksi tarvittavat toimenpiteet. Sinun tulee myös mainita näihin "
-"toimenpiteisiin tarvittava asiantuntemuksen taso ja/tai muut vaatimukset."
+"Kuvaa toimintasuunnitelmaan kaikki ne toimenpiteet, joilla kunkin arvioimasi "
+"riskin voi poistaa tai sen aiheuttamaa haittaa pienentää. Muista myös "
+"mainita näihin toimenpiteisiin tarvittava asiantuntemuksen taso ja/tai muut "
+"vaatimukset. Toimintasuunnitelmaa luodessasi voit käyttää apunasi "
+"sovelluksen tarjoamia toimenpiteitä, muokata niitä tarpeen mukaan tai "
+"kirjata muita tarvittavia toimenpiteitä."
 
 #. Default: No risks were identified. Please proceed directly to the report.
 #: src/osha/oira/client/templates/actionplan.pt:47
@@ -1283,7 +1285,7 @@ msgstr "Raportti"
 #: src/osha/oira/client/templates/start.pt:70
 #: src/osha/oira/client/templates/update.pt:89
 msgid "navigation_logout"
-msgstr "Uloskirjautuminen"
+msgstr "Kirjaudu ulos"
 
 #. Default: My Assessments
 #: src/osha/oira/client/templates/actionplan.pt:93
@@ -1326,7 +1328,7 @@ msgstr "Omat arviointini"
 #: src/osha/oira/client/templates/start.pt:72
 #: src/osha/oira/client/templates/update.pt:91
 msgid "navigation_help"
-msgstr "Apu"
+msgstr "Ohjeet"
 
 #. Default: Status
 #: src/osha/oira/client/templates/actionplan.pt:95
@@ -1469,7 +1471,7 @@ msgstr "${list-of-risks} on mahdollista tulostaa."
 #. Default: Start Risk Identification
 #: src/osha/oira/client/templates/identification.pt:26
 msgid "label_start_identification"
-msgstr "Riskien tunnistamisen käynnistys"
+msgstr "Aloita riskien tunnistaminen"
 
 #. Default: Previous
 #: src/osha/oira/client/templates/module_actionplan.pt:52
@@ -1617,18 +1619,18 @@ msgstr "Raportointi"
 #: src/osha/oira/client/templates/report.pt:19
 msgid "report_intro"
 msgstr ""
-"Nyt kun olet vienyt päätökseen organisaatiosi riskien tunnistamisen ja "
-"laatinut toimintasuunnitelman, voit laatia raportin, joka sisältää kaikki "
-"tulokset. Voit halutessasi kirjoittaa alla olevaan kenttään tähän raporttiin "
-"lisättäviä kommentteja."
+"Olet nyt saanut valmiiksi riskien arvioinnin ja laatinut "
+"toimintasuunnitelman riskien hallintaan. Sovellus kerää kaikki nämä "
+"kirjaamasi tiedot raportiksi, jonka voit ladata omalle tietokoneellesi ja "
+"tarvittaessa muokata siellä. Voit halutessasi kirjoittaa alla olevaan "
+"kenttään raporttiin lisättäviä kommentteja ja lisätietoja."
 
 #. Default: Please leave any extra comments that should be included in the
 #. report in this field.
 #: src/osha/oira/client/templates/report.pt:28
 msgid "label_report_comment"
 msgstr ""
-"Kirjoita tähän kenttään kommentteja, joita sinulla on yllä olevasta "
-"kysymyksestä."
+"Lisää tähän tietoja tai kommentteja, jotka haluat näkyviin raportille."
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -1814,37 +1816,43 @@ msgid ""
 "more information. Please note that changes made on your pc will NOT be saved "
 "in the OiRA tool"
 msgstr ""
-"Tallenna raportti tietokoneellesi ja tulosta se. Voit myös muuttaa sitä ja "
-"lisätä tietoja.Huomaa, että henkilökohtaiselle tietokoneellesi tehdyt "
-"muutokset eivät tallennu OiRA-työvälineelle"
+"Tallenna raportti tietokoneelle ja tulosta se. Voit myös muokata "
+"tallennettua tiedostoa sekä lisätä tietoja siihen. Huomaa, että "
+"tietokoneelle ladattuihin tiedostoihin tehdyt muutokset eivät tallennu tähän "
+"sovellukseen."
 
 #: src/osha/oira/client/templates/report_landing.pt:24
 msgid "Use the report to:"
-msgstr "Käytä raporttia:"
+msgstr "Raportti on hyödyksi yrityksen arjessa, sillä se:"
 
 #: src/osha/oira/client/templates/report_landing.pt:27
 msgid "Provide evidence for supervisory authorities."
-msgstr "Esitä näyttöä valvontaviranomaisille."
+msgstr "on näyttönä riskien arvioinnista ja hallintatoimista "
+"työsuojeluviranomaisille,"
 
 #: src/osha/oira/client/templates/report_landing.pt:28
 msgid ""
 "Pass information to the people concerned (workers, safety representatives, "
 "employers, experts in occupational safety and health, ...)"
 msgstr ""
-"Välitä tietoa asianosaisille (työntekijät, turvallisuusvastaavat, "
-"työnantajat, työturvallisuus- ja työterveysasiantuntijat, ...)"
+"antaa tietoa työntekijöille, työsuojeluvaltuutetuille ja –toimikunnalle, "
+"työterveyshuollolle jne. työn turvallisuutta ja terveellisyyttä edistävistä "
+"ja ylläpitävistä toimista,"
 
 #: src/osha/oira/client/templates/report_landing.pt:29
 msgid "Monitor and assess whether necessary measures have been introduced."
-msgstr "Seuraa ja arvioi, onko tarpeellisiin toimiin ryhdytty."
+msgstr "auttaa seuraamaan ja arvioimaan, onko toimenpiteet tehty "
+"suunnitellusti ja ovatko ne vaikuttaneet halutulla tavalla sekä"
 
 #: src/osha/oira/client/templates/report_landing.pt:30
 msgid ""
 "Record any revision if circumstances change (new machines, new workers, as a "
 "result of findings of any accident investigations, etc.)"
 msgstr ""
-"Kirjaa jokainen tarkistus, jos olosuhteet muuttuvat (uudet koneet, uudet "
-"työntekijät, tuloksena onnettomuustutkintojen havaintojen perusteella jne.)"
+"on helppo päivittää joko tähän sovellukseen tai tietokoneelle tallennetulle "
+"raportille. Tee päivitys aina kun työoloissa tapahtuu muutoksia (esim. "
+"uudet koneet/laitteet/tilat, uudet työntekijät, sattuneiden tapaturmien tai "
+"vaaratilanteiden aiheuttamat muutostarpeet jne.)."
 
 #: src/osha/oira/client/templates/report_landing.pt:35
 msgid "Download the full report"
@@ -1859,8 +1867,7 @@ msgid ""
 "Contains: all the information and input provided by you throughout the risk "
 "assessment process."
 msgstr ""
-"Sisältää kaikki tiedot ja palautteen, jotka olet antanut "
-"riskinarviointiprosessin aikana."
+"Sisältää kaikki tiedot, jotka olet antanut riskinarviointiprosessin aikana."
 
 #: src/osha/oira/client/templates/report_landing.pt:42
 #: src/osha/oira/client/templates/report_landing.pt:58
@@ -1869,11 +1876,11 @@ msgstr "Käytä sitä"
 
 #: src/osha/oira/client/templates/report_landing.pt:44
 msgid "Provide evidence"
-msgstr "Esitä näyttöä"
+msgstr "näyttönä"
 
 #: src/osha/oira/client/templates/report_landing.pt:44
 msgid "${provide-evidence} for supervisory authorities (labour inspectorate)."
-msgstr "${provide-evidence} valvontaviranomaisille (työtarkastus)."
+msgstr "${provide-evidence} työsuojeluviranomaisille (työsuojelutarkastus)."
 
 #: src/osha/oira/client/templates/report_landing.pt:47
 msgid ""
@@ -1896,20 +1903,20 @@ msgid ""
 "Contains: only the measures to be implemented to effectively manage the "
 "identified risks."
 msgstr ""
-"Sisältö: vain havaittujen riskien tehokkaaksi hallitsemiseksi sovellettavat "
-"toimet."
+"Sisältö: toimenpiteet havaittujen riskien hallintaan"
 
 #: src/osha/oira/client/templates/report_landing.pt:60
 msgid "Manage"
-msgstr "Huolehdi"
+msgstr "Toteuttaessasi"
 
 #: src/osha/oira/client/templates/report_landing.pt:60
 msgid ""
 "${manage} the problems/risks in your workplace (specific tasks, expertise, "
 "responsibilities, deadlines)."
 msgstr ""
-"${manage} ongelmista/riskeistä työpaikallasi (erityistehtävät, "
-"erikoisosaaminen, vastuut, määräajat)."
+"${manage} työn vaara- ja haittatekijöiden ja riskien hallintaan suunnattuja "
+"toimenpiteitä työpaikalla (tehtävät, osaaminen, vastuunjako, määräajat, "
+"budjetti)."
 
 #: src/osha/oira/client/templates/risk_actionplan.pt:19
 msgid ""
@@ -2046,8 +2053,8 @@ msgstr "Ilmoita oikea vuosi vuoden 1900 jälkeen"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"Kirjoita tähän kenttään kommentteja, joita sinulla saattaa olla yllä "
-"olevasta kysymyksestä. Näitä kommentteja käytetään toimintasuunnitelmassa."
+"Tähän voit lisätä tietoja tai kommentteja yllä olevaan liittyen. Ne näkyvät "
+"myös toimintasuunnitelmassa."
 
 #. Default: What is the chance of this risk occurring?
 #: src/osha/oira/client/templates/risk_evaluation.pt:28
@@ -2264,7 +2271,7 @@ msgstr ""
 #. Default: Enter a title for your Risk Assessment
 #: src/osha/oira/client/templates/sessions.pt:57
 msgid "label_session_title"
-msgstr "Kirjoita riskinarvioinnin otsikko"
+msgstr "Anna nimi riskien arvioinnille"
 
 #. Default: Once you have started an OiRA tool session, you will be able to
 #. stop before the end. You can restart it again at a later date by selecting
@@ -2335,19 +2342,19 @@ msgstr "Riskinarviointi"
 
 #: src/osha/oira/client/templates/webhelpers.pt:101
 msgid "Unvisited"
-msgstr "Vastaus puuttuu"
+msgstr "vastaus puuttuu"
 
 #: src/osha/oira/client/templates/webhelpers.pt:102
 msgid "Postponed"
-msgstr "Lykätty"
+msgstr "arvioimatta"
 
 #: src/osha/oira/client/templates/webhelpers.pt:103
 msgid "Risk not present"
-msgstr "Kyllä"
+msgstr "OK"
 
 #: src/osha/oira/client/templates/webhelpers.pt:104
 msgid "Risk present"
-msgstr "Huomio"
+msgstr "kehitettävää"
 
 #. Default: Produced by ${EU-OSHA}.
 #: src/osha/oira/client/templates/webhelpers.pt:118

@@ -19,7 +19,12 @@
     float: left;
 }
 .library_info {
-    margin-top: -25px
+    margin-top: -25px;
+    width: 110%;
+}
+.official .legend{
+  font-weight: bold;
+  margin-bottom: 0;
 }
 </style>
       <div class="introduction">
@@ -31,8 +36,7 @@
           <li tal:repeat="region countries" class="${region/id}"><a href="${region/url}">${region/title}</a></li>
         </ul>
         <div tal:condition="python:len(library_info)==1" class="library_info">
-          Here you can browse through the collection of generic OiRA Tools:
-            <a tal:define="item python:library_info[0]" tal:attributes="href item/url" tal:content="item/title">library</a>
+          <p class="legend">Check out <a tal:define="item python:library_info[0]" tal:attributes="href item/url; title item/title">the Library of tools and modules</a>.</p>
 
           <p class="discrete">To copy content from the Library, go to your own tool and use the "Library" button.</p>
 

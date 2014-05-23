@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.14 (unreleased)
+2.2.14 (2014-05-23)
 -------------------
 
 - Translation corrections in SL #9589 #10059

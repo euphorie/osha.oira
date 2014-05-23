@@ -4,8 +4,7 @@ Changelog
 2.2.14 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Translation corrections in SL #9589 #10059
 
 2.2.13 (2014-05-02)
 -------------------

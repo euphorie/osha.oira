@@ -20,6 +20,7 @@ from z3c.saconfig import Session
 from zope import interface
 from zope import schema
 from zope.schema._bootstrapinterfaces import RequiredMissing
+from zope.schema.interfaces import IVocabularyFactory
 from zope import component
 from zope.sqlalchemy import datamanager
 import logging
@@ -256,6 +257,12 @@ class StatisticsMixin(object):
             'inline; filename="report.pdf"')
         self.pdf_data = page.read()
 
+    def _is_tool_available(self):
+        voc = component.getUtility(
+            IVocabularyFactory,
+            name='osha.oira.publishedtools')(self.context)
+        return bool(voc.by_value)
+
 
 class CountryStatistics(form.SchemaForm, StatisticsMixin):
     """ Country managers can access statistics for their countries and
@@ -273,11 +280,17 @@ class CountryStatistics(form.SchemaForm, StatisticsMixin):
     template = None
     form_template = ViewPageTemplateFile("templates/statistics.pt")
 
-    @button.buttonAndHandler(_(u"Submit"))
+    @button.buttonAndHandler(
+        _(u"Submit"), condition=lambda form: form._is_tool_available())
     def handleSubmit(self, action):
         return self._handleSubmit()
 
     def render(self):
+        if not self._is_tool_available():
+            IStatusMessage(self.request).add(
+                "No statistics are available as no tools have been "
+                "published yet", type=u'warning')
+
         if self.pdf_data is not None:
             return self.pdf_data
         else:
@@ -301,7 +314,8 @@ class SectorStatistics(form.SchemaForm, StatisticsMixin):
     template = None
     form_template = ViewPageTemplateFile("templates/statistics.pt")
 
-    @button.buttonAndHandler(_(u"Submit"))
+    @button.buttonAndHandler(
+        _(u"Submit"), condition=lambda form: form._is_tool_available())
     def handleSubmit(self, action):
         return self._handleSubmit()
 
@@ -312,6 +326,11 @@ class SectorStatistics(form.SchemaForm, StatisticsMixin):
         report_type.field.default = 'tool'
 
     def render(self):
+        if not self._is_tool_available():
+            IStatusMessage(self.request).add(
+                "No statistics are available as no tools have been "
+                "published yet", type=u'warning')
+
         if self.pdf_data is not None:
             return self.pdf_data
         else:

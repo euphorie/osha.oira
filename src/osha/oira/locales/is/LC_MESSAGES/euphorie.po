@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2014-02-24 15:35+0100\n"
+"Report-Msgid-Bugs-To: info@syslab.com\n"
+"POT-Creation-Date: 2014-06-02 18:31+0200\n"
 "PO-Revision-Date: 2013-11-26 11:52+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -119,8 +119,6 @@ msgstr "OiRA verkfæri"
 
 #. Default: OiRA Tool
 #: src/osha/oira/manual_translations.py:34 src/osha/oira/vocabularies.py:22
-#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:4
-#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:5
 msgid "Survey"
 msgstr "OiRA verkfæri"
 
@@ -213,31 +211,19 @@ msgstr "Flytja inn atvinnusvið og OiRA verkfæri"
 msgid "intro_add_survey"
 msgstr "Með eyðublaðinu er hægt að mynda nýja endurskoðun á OiRA verkfærinu."
 
-#. Default: Now that you have identified the existing hazards/problems in your
-#. company/organisation you need to evaluate the risks arising from them.
-#. Default: You have indicated that there are possible risks in your
-#. organisation. During this evaluation phase you can assess the magnitude of
-#. risk for each bottleneck.
-#: src/osha/oira/manual_translations.py:59
-#: src/osha/oira/client/templates/evaluation.pt:19
-msgid "help_risks_present"
-msgstr ""
-"Nú þegar þú hefur greint þær hættur/vandamál sem eru til staðar í "
-"fyrirverkfæri eða stofnun þinni þarftu að meta áhættuna sem stafar af þeim."
-
 #. Default: Solution
-#: src/osha/oira/manual_translations.py:62
+#: src/osha/oira/manual_translations.py:59
 msgid "label_solution_direction"
 msgstr "Lausn"
 
 #. Default: Succesfully published the OiRA Tool
-#: src/osha/oira/manual_translations.py:63
+#: src/osha/oira/manual_translations.py:60
 msgid "Succesfully published the survey"
 msgstr "Sending OiRA áhaldsins tókst"
 
 #. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url}.
-#: src/osha/oira/manual_translations.py:65
+#: src/osha/oira/manual_translations.py:62
 msgid ""
 "Succesfully created a preview for the survey. It can be accessed at ${url} ."
 msgstr ""
@@ -245,12 +231,12 @@ msgstr ""
 "${url}."
 
 #. Default: Publish the selected OiRA Tool live with its latest changes.
-#: src/osha/oira/manual_translations.py:68
+#: src/osha/oira/manual_translations.py:65
 msgid "help_publish"
 msgstr "Birta valið OiRA verkfæri beint með síðustu breytingum."
 
 #. Default: Create a duplicate of the selected OiRA Tool
-#: src/osha/oira/manual_translations.py:70
+#: src/osha/oira/manual_translations.py:67
 msgid "help_add_version"
 msgstr "Mynda afrit af völdu OiRA verkfæri"
 
@@ -259,7 +245,7 @@ msgstr "Mynda afrit af völdu OiRA verkfæri"
 #. you work with the public?"). If this is to be "repeatable", it must be
 #. formulated as a prompt to fill in multiple values (e.g. "List your different
 #. work locations").
-#: src/osha/oira/manual_translations.py:71
+#: src/osha/oira/manual_translations.py:68
 msgid "help_profilequestion_question"
 msgstr ""
 "Ef þetta á að vera „valkvætt\" þarf að setja það fram á þann hátt að hægt sé "
@@ -270,20 +256,20 @@ msgstr ""
 
 #. Default: Include any relevant information that may be helpful for the
 #. end-user.
-#: src/osha/oira/manual_translations.py:76
+#: src/osha/oira/manual_translations.py:73
 msgid "help_module_description"
 msgstr ""
 "Bætið við öllum nauðsynlegum upplýsingum sem geta komið notandanum til góða."
 
 #. Default: Allows the end-user to skip this module and everything inside it.
-#: src/osha/oira/manual_translations.py:78
+#: src/osha/oira/manual_translations.py:75
 msgid "help_module_optional"
 msgstr "Notandinn getur sleppt þessum hluta."
 
 #. Default: The question to ask the end-user if this module is optional. It
 #. must be formulated so that it is answerable with YES (the end-user will have
 #. to tick a box) or NO
-#: src/osha/oira/manual_translations.py:80
+#: src/osha/oira/manual_translations.py:77
 msgid "help_module_question"
 msgstr ""
 "Spyrja þarf endanlegan notanda þessarar spurningar ef þessi hluti er "
@@ -292,25 +278,25 @@ msgstr ""
 
 #. Default: This information will appear in the Action plan step and should
 #. include an overview of general solution(s) related to this module.
-#: src/osha/oira/manual_translations.py:83
+#: src/osha/oira/manual_translations.py:80
 msgid "help_solution_direction"
 msgstr ""
 "Þessar upplýsingar birtast í aðgerðaáætlunni og þurfa að sýna yfirlit lausna "
 "í flokknum"
 
 #. Default: Affirmative statement
-#: src/osha/oira/manual_translations.py:86
+#: src/osha/oira/manual_translations.py:83
 msgid "label_statement"
 msgstr "Jákvæð yfirlýsing"
 
 #. Default: Negative statement
-#: src/osha/oira/manual_translations.py:87
+#: src/osha/oira/manual_translations.py:84
 msgid "label_problem_description"
 msgstr "Neikvæð yfirlýsing"
 
 #. Default: This is a short affirmative statement about a possible risk (e.g.
 #. The building is well maintained.)
-#: src/osha/oira/manual_translations.py:88
+#: src/osha/oira/manual_translations.py:85
 msgid "help_statement"
 msgstr ""
 "Sett er fram stutt jákvæð yfirlýsing um hugsanlega áhættu (t.d. byggingunni "
@@ -318,7 +304,7 @@ msgstr ""
 
 #. Default: This is the inverse of the affirmative statement (e.g. The building
 #. is not well maintained.)
-#: src/osha/oira/manual_translations.py:90
+#: src/osha/oira/manual_translations.py:87
 msgid "help_problem_description"
 msgstr ""
 "Sett er fram stutt neikvæð yfirlýsing (t.d. byggingunni er ekki vel við "
@@ -326,19 +312,19 @@ msgstr ""
 
 #. Default: Describe the risk. Include any relevant information that may be
 #. helpful for the end-user.
-#: src/osha/oira/manual_translations.py:92
+#: src/osha/oira/manual_translations.py:89
 msgid "help_risk_description"
 msgstr "Lýsing á áhættunni. Allar upplýsingar sem geta komið notenda til góða."
 
 #. Default: Priority risk
-#: src/osha/oira/manual_translations.py:94
+#: src/osha/oira/manual_translations.py:91
 msgid "risktype_top5"
 msgstr "Forgangsáhætta"
 
 #. Default: "Priority risk" is one of the high risks in the sector. "Risk" is
 #. related to the workplace or to the work carried out. "Policy" refers to
 #. agreements, procedures, and management decisions.
-#: src/osha/oira/manual_translations.py:95
+#: src/osha/oira/manual_translations.py:92
 msgid "help_risk_type"
 msgstr ""
 "„Forgangsáhætta” er áhætta sem er mikil og þekkt í starfsgreininni. „áhætta” "
@@ -347,142 +333,142 @@ msgstr ""
 
 #. Default: You can help the end-user by selecting a default priority. He/she
 #. can still change the priority.
-#: src/osha/oira/manual_translations.py:99
+#: src/osha/oira/manual_translations.py:96
 msgid "help_default_priority"
 msgstr ""
 "Þú getur aðstoðað endanlegan notanda með því að velja sjálfgefna "
 "forgangsröð. Hann eða hún getur samt breytt forgangsröðinni."
 
 #. Default: Indicate the severity if this risk occurs.
-#: src/osha/oira/manual_translations.py:101
+#: src/osha/oira/manual_translations.py:98
 msgid "help_default_severity"
 msgstr "Hversu alvarlegt verður atvikið ef það gerist?"
 
 #. Default: General information on risk assessment
-#: src/osha/oira/manual_translations.py:103
+#: src/osha/oira/manual_translations.py:100
 msgid "help_help_introduction"
 msgstr "Almennar upplýsingar um áhættumat"
 
 #. Default: Registration
-#: src/osha/oira/manual_translations.py:104
+#: src/osha/oira/manual_translations.py:101
 msgid "label_help_authentication"
 msgstr "Skráning"
 
 #. Default: Registration
-#: src/osha/oira/manual_translations.py:105
+#: src/osha/oira/manual_translations.py:102
 msgid "help_header_authentication"
 msgstr "Skráning"
 
 #. Default: This text should explain how to register and login.
-#: src/osha/oira/manual_translations.py:106
+#: src/osha/oira/manual_translations.py:103
 msgid "help_authentication"
 msgstr "Þessi texti á að útskýra hvernig á að skrásetja sig "
 
 #. Default: Carrying out your risk assessment
-#: src/osha/oira/manual_translations.py:108
+#: src/osha/oira/manual_translations.py:105
 msgid "help_header_sessions"
 msgstr "Áhættumatið framkvæmt"
 
 #. Default: Carrying out your risk assessment
-#: src/osha/oira/manual_translations.py:109
+#: src/osha/oira/manual_translations.py:106
 msgid "label_help_sessions"
 msgstr "Hvernig á að framkvæma áhættumatið"
 
 #. Default: This text should describe the main functions of the OiRA Tool.
-#: src/osha/oira/manual_translations.py:110
+#: src/osha/oira/manual_translations.py:107
 msgid "help_sessions"
 msgstr "Þessi texti er lýsing á helstu aðgerðum OiRA verkfærisins."
 
 #. Default: 1. Preparation
-#: src/osha/oira/manual_translations.py:112
+#: src/osha/oira/manual_translations.py:109
 msgid "help_header_start"
 msgstr "1. Undirbúningur"
 
 #. Default: 1. Preparation
-#: src/osha/oira/manual_translations.py:113
+#: src/osha/oira/manual_translations.py:110
 msgid "label_help_preparation"
 msgstr "1. Undirbúningur"
 
 #. Default: This text should explain the 2 types of profile questions.
-#: src/osha/oira/manual_translations.py:114
+#: src/osha/oira/manual_translations.py:111
 msgid "help_preparation"
 msgstr "Þessi texti útskýrir hinar 2 gerðir af upplýsingaspurningum."
 
 #. Default: 2. Identification
-#: src/osha/oira/manual_translations.py:116
+#: src/osha/oira/manual_translations.py:113
 msgid "help_header_identification"
 msgstr "2. Auðkenning"
 
 #. Default: 2. Identification
-#: src/osha/oira/manual_translations.py:117
+#: src/osha/oira/manual_translations.py:114
 msgid "label_help_identification"
 msgstr "2. Greining"
 
 #. Default: This text should explain how the risk identification works.
-#: src/osha/oira/manual_translations.py:118
+#: src/osha/oira/manual_translations.py:115
 msgid "help_identification"
 msgstr "Þessi texti útskýrir hvernig greining áhættunnar fer fram."
 
 #. Default: 3. Evaluation
-#: src/osha/oira/manual_translations.py:120
+#: src/osha/oira/manual_translations.py:117
 msgid "help_header_evaluation"
 msgstr "3. Mat"
 
 #. Default: 3. Evaluation
-#: src/osha/oira/manual_translations.py:121
+#: src/osha/oira/manual_translations.py:118
 msgid "label_help_evaluation"
 msgstr "3. Mat"
 
 #. Default: This text should explain how to evaluate the identified risks.
-#: src/osha/oira/manual_translations.py:122
+#: src/osha/oira/manual_translations.py:119
 msgid "help_evaluation"
 msgstr ""
 "Þessi texti útskýrir hvernig á að meta þær áhættur sem greindar hafa verið."
 
 #. Default: 4. Action Plan
-#: src/osha/oira/manual_translations.py:124
+#: src/osha/oira/manual_translations.py:121
 msgid "help_header_actionplan"
 msgstr "4. Aðgerðaáætlun"
 
 #. Default: 4. Action Plan
-#: src/osha/oira/manual_translations.py:125
+#: src/osha/oira/manual_translations.py:122
 msgid "label_help_actionplan"
 msgstr "4. Aðgerðaáætlun"
 
 #. Default: This text should explain how to fill in the Action plan.
-#: src/osha/oira/manual_translations.py:126
+#: src/osha/oira/manual_translations.py:123
 msgid "help_actionplan"
 msgstr "Þessi texti útskýrir hvernig á að útfylla aðgerðaáætlunina."
 
 #. Default: 5. Report
-#: src/osha/oira/manual_translations.py:128
+#: src/osha/oira/manual_translations.py:125
 msgid "help_header_report"
 msgstr "5. Skýrsla"
 
 #. Default: 5. Report
-#: src/osha/oira/manual_translations.py:129
+#: src/osha/oira/manual_translations.py:126
 msgid "label_help_reports"
 msgstr "5. Skýrsla"
 
 #. Default: This text should describe how the report can either be saved or
 #. printed.
-#: src/osha/oira/manual_translations.py:130
+#: src/osha/oira/manual_translations.py:127
 msgid "help_reports"
 msgstr ""
 "Þessi texti útskýrir hvernig hægt er að vista skýrsluna eða prenta hana út."
 
 #. Default: What happens next?
-#: src/osha/oira/manual_translations.py:132
+#: src/osha/oira/manual_translations.py:129
 msgid "label_help_finalwords"
 msgstr "Hvað gerist næst?"
 
 #. Default: What happens next?
-#: src/osha/oira/manual_translations.py:133
+#: src/osha/oira/manual_translations.py:130
 msgid "help_header_finalwords"
 msgstr "Hvað gerist næst?"
 
 #. Default: General final recommendations.
-#: src/osha/oira/manual_translations.py:134
+#: src/osha/oira/manual_translations.py:131
 msgid "help_finalwords"
 msgstr "Almennar ráðleggingar í lokin."
 
@@ -491,7 +477,7 @@ msgstr "Almennar ráðleggingar í lokin."
 #. around and looking at what could cause harm, or by consulting the workers
 #. and/or their representatives about problems they have encountered). You can
 #. then introduce the information into the tool.
-#: src/osha/oira/manual_translations.py:137
+#: src/osha/oira/manual_translations.py:134
 #: src/osha/oira/client/templates/identification.pt:19
 msgid "intro_print_identification_1"
 msgstr ""
@@ -506,7 +492,7 @@ msgstr ""
 #. the hazards/problems, evaluating the risks and deciding on preventive
 #. action.Their feedback should be taken into account when filling in this
 #. tool.
-#: src/osha/oira/manual_translations.py:144
+#: src/osha/oira/manual_translations.py:141
 #: src/osha/oira/client/templates/identification.pt:20
 msgid "intro_print_identification_2"
 msgstr ""
@@ -516,42 +502,34 @@ msgstr ""
 "til svara þeirra við innfærslu í verkfærið"
 
 #. Default: contents of the tool
-#: src/osha/oira/manual_translations.py:150
+#: src/osha/oira/manual_translations.py:147
 #: src/osha/oira/client/templates/identification.pt:22
 msgid "list_of_risks"
 msgstr "innihald verkfærisins"
 
-#. Default: Please proceed directly to the action plan step.
-#. Default: There are no risks that need to be evaluated. You can proceed
-#. directly to the action plan phase.
-#: src/osha/oira/manual_translations.py:152
-#: src/osha/oira/client/templates/evaluation.pt:25
-msgid "help_evaluation_empty"
-msgstr "Farðu beint í skrefið fyrir aðgerðaáætlun."
-
 #. Default: Start to write a new OiRA Tool. You will be asked whether you want
-#. to start off with a copy of an existing OiRA Tool..
-#: src/osha/oira/manual_translations.py:155
+#. to start off with a copy of an existing OiRA Tool.
+#: src/osha/oira/manual_translations.py:149
 msgid "help_create_new_version"
 msgstr ""
 "Byrja að mynda nýtt OiRA verkfæri. Þú verður beðin(n) um að velja hvort þú "
 "viljir byrja með afrit af OiRA verkfæri sem er þegar til staðar."
 
 #. Default: Remove this OiRA Tool from the online client.
-#: src/osha/oira/manual_translations.py:159
+#: src/osha/oira/manual_translations.py:153
 msgid "title_help_unpublished"
 msgstr "Fjarlægja þetta OiRA verkfæri af biðlaranum á netinu."
 
 #. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url} .
-#: src/osha/oira/manual_translations.py:162
+#: src/osha/oira/manual_translations.py:156
 msgid "message_preview_success"
 msgstr "Myndun forsýnar á OiRA áhaldi. Hún er aðgengileg á ${url} ."
 
 #. Default: Please note that by deleting your account, you will also delete all
 #. your sessions. Please make sure you download your reports from the Report
 #. step prior to deleting your account, if you want to keep any.
-#: src/osha/oira/manual_translations.py:165
+#: src/osha/oira/manual_translations.py:159
 msgid "warning_account_delete_surveys"
 msgstr ""
 "Vinsamlegast athugaðu að ef þú eyðir reikningnum eyðir þú um leið öllum "
@@ -561,7 +539,7 @@ msgstr ""
 #. Default: Are you sure you want to create a preview of this OiRA Tool? You
 #. can give the URL for the preview to others so they can test the OiRA Tool.
 #. To access the preview a standard OiRA client login is required.
-#: src/osha/oira/manual_translations.py:170
+#: src/osha/oira/manual_translations.py:164
 msgid "intro_preview"
 msgstr ""
 "Ertu viss um að þú viljir birta forskoðun af þessu OiRA verkfæri? Þú getur "
@@ -570,18 +548,18 @@ msgstr ""
 "aðgang að forskoðuninni."
 
 #. Default: Preview OiRA Tool
-#: src/osha/oira/manual_translations.py:175
+#: src/osha/oira/manual_translations.py:169
 msgid "header_preview"
 msgstr "Forskoðun á OiRA verkfærinu"
 
 #. Default: After publication the OiRA Tool will be available at ${url}.
-#: src/osha/oira/manual_translations.py:177
+#: src/osha/oira/manual_translations.py:171
 msgid "help_publish_url"
 msgstr "Eftir birtingu verður OiRA verkfærið aðgengilegt á ${url}."
 
 #. Default: Are you sure you want to publish this OiRA Tool version? This will
 #. replace the current version.
-#: src/osha/oira/manual_translations.py:179
+#: src/osha/oira/manual_translations.py:173
 msgid "intro_publish_other_survey_published"
 msgstr ""
 "Ertu viss um að þú viljir endurbirta þessa útgáfu OiRA af verkfærinu? Það "
@@ -589,7 +567,7 @@ msgstr ""
 
 #. Default: Are you sure you want to republish this OiRA Tool? This will make
 #. all changes made public.
-#: src/osha/oira/manual_translations.py:183
+#: src/osha/oira/manual_translations.py:177
 msgid "intro_publish_survey_published"
 msgstr ""
 "Ertu viss um að þú viljir endurbirta þetta OiRA verkfæri? Það gerir allar "
@@ -598,90 +576,91 @@ msgstr ""
 #. Default: Are you sure you want to publish this OiRA Tool? After publication
 #. the OiRA Tool will appear in the online client and be accessible by all
 #. users.
-#: src/osha/oira/manual_translations.py:187
+#: src/osha/oira/manual_translations.py:181
 msgid "intro_publish_first_time"
 msgstr ""
 "Ertu viss um að þú viljir birta þetta OiRA verkfæri? Eftir að OiRA verkfærið "
 "hefur verið birt verður það aðgengilegt öllum notendum á netþjóninum."
 
 #. Default: Publish OiRA Tool
-#: src/osha/oira/manual_translations.py:191
+#: src/osha/oira/manual_translations.py:185
 msgid "header_publish"
 msgstr "Birta OiRA verkfærið "
 
 #. Default: The title of this OiRA Tool. This title is used in the OiRA Tool
 #. overview in the clients.
-#: src/osha/oira/manual_translations.py:193
+#: src/osha/oira/manual_translations.py:187
 msgid "help_surveygroup_title"
 msgstr ""
 "Nafn á OiRA verkfærinu. Nafnið er notað í yfirliti fyrir OiRA verkfærin."
 
 #. Default: This OiRA Tool is now no longer available in the client.
-#: src/osha/oira/manual_translations.py:197
+#: src/osha/oira/manual_translations.py:191
 msgid "message_unpublish_success"
 msgstr "Þetta OiRA verkfæri er ekki lengur tiltækt í biðlaranum."
 
 #. Default: Name for OiRA Tool version
-#: src/osha/oira/manual_translations.py:199
+#: src/osha/oira/manual_translations.py:193
 msgid "label_upload_survey_title"
 msgstr "Nafn á OiRA útgáfunni"
 
 #. Default: Default severity
-#: src/osha/oira/manual_translations.py:201
+#: src/osha/oira/manual_translations.py:195
 msgid "label_default_effect"
 msgstr "Gefnar afleiðingar"
 
 #. Default: Are you sure you want to unpublish this OiRA Tool?
-#: src/osha/oira/manual_translations.py:203
+#: src/osha/oira/manual_translations.py:197
 msgid "unpublish_confirm"
 msgstr "Ertu viss um að þú viljir hætta við að birta þetta OiRA verkfæri?"
 
 #. Default: Import OiRA Tool
-#: src/osha/oira/manual_translations.py:205
+#: src/osha/oira/manual_translations.py:199
 msgid "menu_import"
 msgstr "Flytja inn OiRA verkfæri"
 
 #. Default: You cannot delete an OiRA Tool version that is published. Please
 #. unpublish it first.
-#: src/osha/oira/manual_translations.py:207
+#: src/osha/oira/manual_translations.py:201
 msgid "message_no_delete_published_survey"
 msgstr ""
 "Þú getur ekki eytt OiRA verkfæri sem búið er að birta. Þú þarft fyrst að "
 "afturkalla birtinguna."
 
 #. Default: You can not delete a sector that contains published OiRA Tools.
-#: src/osha/oira/manual_translations.py:211
+#: src/osha/oira/manual_translations.py:205
 msgid "message_not_delete_published_sector"
 msgstr "Þú getur ekki eytt atvinnusviði sem inniheldur útgefin OiRA verkfæri."
 
 #. Default: add a new OiRA Tool
-#: src/osha/oira/manual_translations.py:215
+#: src/osha/oira/manual_translations.py:209
 msgid "add_survey"
 msgstr "bæta við nýju OiRA verkfæri"
 
 #. Default: There are no OiRA Tools present. You can ${add_link}.
-#: src/osha/oira/manual_translations.py:217
+#: src/osha/oira/manual_translations.py:211
 msgid "no_surveys_present"
 msgstr "Engin OiRA verkfæri eru til staðar. Þú getur ${add_link}."
 
 #. Default: OiRA Tools
-#: src/osha/oira/manual_translations.py:219
+#: src/osha/oira/manual_translations.py:213
 msgid "header_sector_survey_list"
 msgstr "OiRA verkfæri"
 
 #. Default: We're sorry, but an unforseen error has occured.
-#: src/osha/oira/manual_translations.py:221
+#: src/osha/oira/manual_translations.py:215
 msgid "expl_error"
 msgstr "Okkur þykir það leitt en ófyrirséð villa hefur komið upp."
 
 #. Default: Delete this measure
-#: src/osha/oira/manual_translations.py:223
+#: src/osha/oira/manual_translations.py:217
 #: src/osha/oira/client/templates/risk_actionplan.pt:66
 msgid "label_remove_measure"
 msgstr "Eyða þessari ráðstöfun"
 
 #. Default: Add Measure
-#: src/osha/oira/manual_translations.py:224 src/osha/oira/content/risk.py:98
+#: src/osha/oira/manual_translations.py:218
+#: src/osha/oira/content/solution.py:63
 msgid "Add Solution"
 msgstr "Bæta við lausn"
 
@@ -818,18 +797,21 @@ msgstr "Ráðstöfun ${index}"
 #. Default: General approach (to eliminate or reduce the risk)
 #: src/osha/oira/client/report.py:436
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
+#: src/osha/oira/content/templates/solution_view.pt:22
 msgid "label_measure_action_plan"
 msgstr "Almenn nálgun (Fjarlægja skal hættur eða gera þær ásættanlegar)"
 
 #. Default: Specific action(s) required to implement this approach
 #: src/osha/oira/client/report.py:438
 #: src/osha/oira/client/templates/risk_actionplan.pt:98
+#: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
 msgstr "Aðgerðir til að lausn komi að notum"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/report.py:440
 #: src/osha/oira/client/templates/risk_actionplan.pt:107
+#: src/osha/oira/content/templates/solution_view.pt:29
 msgid "label_measure_requirements"
 msgstr "Þekking og reynsla sem er nauðsynleg"
 
@@ -1049,7 +1031,7 @@ msgstr "Fara í skýrslu"
 
 #. Default: Preparation
 #: src/osha/oira/client/templates/actionplan.pt:61
-#: src/osha/oira/client/templates/evaluation.pt:38
+#: src/osha/oira/client/templates/evaluation.pt:36
 #: src/osha/oira/client/templates/identification.pt:32
 #: src/osha/oira/client/templates/module_actionplan.pt:59
 #: src/osha/oira/client/templates/module_evaluation.pt:45
@@ -1070,7 +1052,7 @@ msgstr "Undirbúningur"
 
 #. Default: Preparation
 #: src/osha/oira/client/templates/actionplan.pt:62
-#: src/osha/oira/client/templates/evaluation.pt:39
+#: src/osha/oira/client/templates/evaluation.pt:37
 #: src/osha/oira/client/templates/identification.pt:33
 #: src/osha/oira/client/templates/module_actionplan.pt:60
 #: src/osha/oira/client/templates/module_evaluation.pt:46
@@ -1091,7 +1073,7 @@ msgstr "Undirbúningur"
 
 #. Default: Identification
 #: src/osha/oira/client/templates/actionplan.pt:67
-#: src/osha/oira/client/templates/evaluation.pt:44
+#: src/osha/oira/client/templates/evaluation.pt:42
 #: src/osha/oira/client/templates/identification.pt:38
 #: src/osha/oira/client/templates/module_actionplan.pt:65
 #: src/osha/oira/client/templates/module_evaluation.pt:51
@@ -1112,7 +1094,7 @@ msgstr "Greining"
 
 #. Default: Identification
 #: src/osha/oira/client/templates/actionplan.pt:68
-#: src/osha/oira/client/templates/evaluation.pt:45
+#: src/osha/oira/client/templates/evaluation.pt:43
 #: src/osha/oira/client/templates/identification.pt:39
 #: src/osha/oira/client/templates/module_actionplan.pt:66
 #: src/osha/oira/client/templates/module_evaluation.pt:52
@@ -1133,7 +1115,7 @@ msgstr "Greining"
 
 #. Default: Evaluation
 #: src/osha/oira/client/templates/actionplan.pt:73
-#: src/osha/oira/client/templates/evaluation.pt:50
+#: src/osha/oira/client/templates/evaluation.pt:48
 #: src/osha/oira/client/templates/identification.pt:44
 #: src/osha/oira/client/templates/module_actionplan.pt:71
 #: src/osha/oira/client/templates/module_evaluation.pt:57
@@ -1154,7 +1136,7 @@ msgstr "Mat"
 
 #. Default: Evaluation
 #: src/osha/oira/client/templates/actionplan.pt:74
-#: src/osha/oira/client/templates/evaluation.pt:51
+#: src/osha/oira/client/templates/evaluation.pt:49
 #: src/osha/oira/client/templates/identification.pt:45
 #: src/osha/oira/client/templates/module_actionplan.pt:72
 #: src/osha/oira/client/templates/module_evaluation.pt:58
@@ -1175,7 +1157,7 @@ msgstr "Mat"
 
 #. Default: Action Plan
 #: src/osha/oira/client/templates/actionplan.pt:79
-#: src/osha/oira/client/templates/evaluation.pt:56
+#: src/osha/oira/client/templates/evaluation.pt:54
 #: src/osha/oira/client/templates/identification.pt:50
 #: src/osha/oira/client/templates/module_actionplan.pt:77
 #: src/osha/oira/client/templates/module_evaluation.pt:66
@@ -1196,7 +1178,7 @@ msgstr "Aðgerðaáætlun"
 
 #. Default: Action Plan
 #: src/osha/oira/client/templates/actionplan.pt:80
-#: src/osha/oira/client/templates/evaluation.pt:57
+#: src/osha/oira/client/templates/evaluation.pt:55
 #: src/osha/oira/client/templates/identification.pt:51
 #: src/osha/oira/client/templates/module_actionplan.pt:78
 #: src/osha/oira/client/templates/module_evaluation.pt:67
@@ -1217,7 +1199,7 @@ msgstr "Aðgerðaáætlun"
 
 #. Default: Report
 #: src/osha/oira/client/templates/actionplan.pt:85
-#: src/osha/oira/client/templates/evaluation.pt:62
+#: src/osha/oira/client/templates/evaluation.pt:60
 #: src/osha/oira/client/templates/identification.pt:56
 #: src/osha/oira/client/templates/module_actionplan.pt:86
 #: src/osha/oira/client/templates/module_evaluation.pt:72
@@ -1238,7 +1220,7 @@ msgstr "Skýrsla"
 
 #. Default: Report
 #: src/osha/oira/client/templates/actionplan.pt:86
-#: src/osha/oira/client/templates/evaluation.pt:63
+#: src/osha/oira/client/templates/evaluation.pt:61
 #: src/osha/oira/client/templates/identification.pt:57
 #: src/osha/oira/client/templates/module_actionplan.pt:87
 #: src/osha/oira/client/templates/module_evaluation.pt:73
@@ -1259,7 +1241,7 @@ msgstr "Skýrsla"
 
 #. Default: Logout
 #: src/osha/oira/client/templates/actionplan.pt:92
-#: src/osha/oira/client/templates/evaluation.pt:70
+#: src/osha/oira/client/templates/evaluation.pt:68
 #: src/osha/oira/client/templates/identification.pt:64
 #: src/osha/oira/client/templates/module_actionplan.pt:94
 #: src/osha/oira/client/templates/module_evaluation.pt:79
@@ -1280,7 +1262,7 @@ msgstr "Útskráning"
 
 #. Default: My Assessments
 #: src/osha/oira/client/templates/actionplan.pt:93
-#: src/osha/oira/client/templates/evaluation.pt:71
+#: src/osha/oira/client/templates/evaluation.pt:69
 #: src/osha/oira/client/templates/identification.pt:65
 #: src/osha/oira/client/templates/module_actionplan.pt:95
 #: src/osha/oira/client/templates/module_evaluation.pt:80
@@ -1301,7 +1283,7 @@ msgstr "Mat mitt"
 #. Default: Help
 #: src/osha/oira/client/templates/actionplan.pt:94
 #: src/osha/oira/client/templates/disclaimer.pt:67
-#: src/osha/oira/client/templates/evaluation.pt:72
+#: src/osha/oira/client/templates/evaluation.pt:70
 #: src/osha/oira/client/templates/identification.pt:66
 #: src/osha/oira/client/templates/module_actionplan.pt:96
 #: src/osha/oira/client/templates/module_evaluation.pt:81
@@ -1323,7 +1305,7 @@ msgstr "Aðstoð"
 
 #. Default: Status
 #: src/osha/oira/client/templates/actionplan.pt:95
-#: src/osha/oira/client/templates/evaluation.pt:73
+#: src/osha/oira/client/templates/evaluation.pt:71
 #: src/osha/oira/client/templates/identification.pt:67
 #: src/osha/oira/client/templates/module_actionplan.pt:97
 #: src/osha/oira/client/templates/module_evaluation.pt:82
@@ -1339,7 +1321,7 @@ msgstr " Staða"
 
 #. Default: Settings
 #: src/osha/oira/client/templates/actionplan.pt:96
-#: src/osha/oira/client/templates/evaluation.pt:74
+#: src/osha/oira/client/templates/evaluation.pt:72
 #: src/osha/oira/client/templates/identification.pt:68
 #: src/osha/oira/client/templates/module_actionplan.pt:98
 #: src/osha/oira/client/templates/module_evaluation.pt:83
@@ -1441,13 +1423,26 @@ msgstr ""
 "vinnuveitandi að ganga úr skugga um að hafa tiltækt hvenær sem er útprentað, "
 "nákvæmt og uppfært áhættumat. "
 
+#. Default: Now that you have identified the existing hazards/problems in your
+#. company/organisation you need to evaluate the risks arising from them.
+#: src/osha/oira/client/templates/evaluation.pt:19
+msgid "help_risks_present"
+msgstr ""
+"Nú þegar þú hefur greint þær hættur/vandamál sem eru til staðar í "
+"fyrirverkfæri eða stofnun þinni þarftu að meta áhættuna sem stafar af þeim."
+
+#. Default: Please proceed directly to the action plan step.
+#: src/osha/oira/client/templates/evaluation.pt:24
+msgid "help_evaluation_empty"
+msgstr "Farðu beint í skrefið fyrir aðgerðaáætlun."
+
 #. Default: Run evaluation
-#: src/osha/oira/client/templates/evaluation.pt:31
+#: src/osha/oira/client/templates/evaluation.pt:29
 msgid "label_run_evaluation"
 msgstr ""
 
 #. Default: Go to action plan
-#: src/osha/oira/client/templates/evaluation.pt:32
+#: src/osha/oira/client/templates/evaluation.pt:30
 msgid "label_jump_to_actionplan"
 msgstr ""
 
@@ -2025,7 +2020,7 @@ msgstr "Mánuður"
 
 #. Default: Year
 #: src/osha/oira/client/templates/risk_actionplan.pt:155
-#: src/osha/oira/content/statistics.py:35
+#: src/osha/oira/content/statistics.py:36
 msgid "label_year"
 msgstr "Ár"
 
@@ -2348,26 +2343,31 @@ msgstr "Áhættan er til staðar"
 
 #. Default: Produced by ${EU-OSHA}.
 #: src/osha/oira/client/templates/webhelpers.pt:118
+#: src/osha/oira/tiles/templates/footer.pt:17
 msgid "appendix_produced_by"
 msgstr "Framleitt af ${EU-OSHA}."
 
 #. Default: About
 #: src/osha/oira/client/templates/webhelpers.pt:121
+#: src/osha/oira/tiles/templates/footer.pt:20
 msgid "appendix_about"
 msgstr "Um"
 
 #. Default: Privacy
 #: src/osha/oira/client/templates/webhelpers.pt:123
+#: src/osha/oira/tiles/templates/footer.pt:23
 msgid "appendix_privacy"
 msgstr "Persónuvernd"
 
 #. Default: Disclaimer
 #: src/osha/oira/client/templates/webhelpers.pt:125
+#: src/osha/oira/tiles/templates/footer.pt:26
 msgid "appendix_disclaimer"
 msgstr "Fyrirvarar"
 
 #. Default: GPL License
 #: src/osha/oira/client/templates/webhelpers.pt:127
+#: src/osha/oira/tiles/templates/footer.pt:29
 msgid "appendix_gpl_license"
 msgstr "GPL leyfi"
 
@@ -2442,39 +2442,34 @@ msgstr "Breyta spurningu"
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
-#: src/osha/oira/content/risk.py:23
+#: src/osha/oira/content/risk.py:20
 msgid "help_evaluation_method_kinney"
 msgstr "Valið er á milli ÁÆTLAÐ (gróflega) eða REIKNAÐ (líkur x afleiðingar)"
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of frequency and severity) method.
-#: src/osha/oira/content/risk.py:30
+#: src/osha/oira/content/risk.py:27
 msgid "help_evaluation_method_french"
 msgstr ""
 "Veldu á milli ÁÆTLAÐ (gróflega) eða REIKNAÐ (sambland af líkindum, tíðni og "
 "alvarleika)."
 
 #. Default: Save changes
-#: src/osha/oira/content/risk.py:44 src/osha/oira/content/risk.py:61
-#: src/osha/oira/content/risk.py:75 src/osha/oira/content/risk.py:92
+#: src/osha/oira/content/risk.py:41 src/osha/oira/content/risk.py:58
+#: src/osha/oira/content/solution.py:40 src/osha/oira/content/solution.py:57
 msgid "button_save_changes"
 msgstr "Vista breytingar"
 
 #. Default: Cancel
-#: src/osha/oira/content/risk.py:46 src/osha/oira/content/risk.py:63
-#: src/osha/oira/content/risk.py:77 src/osha/oira/content/risk.py:94
+#: src/osha/oira/content/risk.py:43 src/osha/oira/content/risk.py:60
+#: src/osha/oira/content/solution.py:42 src/osha/oira/content/solution.py:59
 #: src/osha/oira/content/templates/surveygroup_add.pt:110
 msgid "button_cancel"
 msgstr "Hætt við"
 
-#: src/osha/oira/content/risk.py:50
+#: src/osha/oira/content/risk.py:47
 msgid "Add Risk"
 msgstr "Bæta við áhættu"
-
-#. Default: Edit Measure
-#: src/osha/oira/content/risk.py:81
-msgid "Edit Solution"
-msgstr "Breyta lausn"
 
 #. Default: Statistics Level
 #: src/osha/oira/content/sector.py:26
@@ -2499,62 +2494,67 @@ msgstr "Stjórnandi"
 msgid "menu_statistics"
 msgstr "Tölulegar upplýsingar"
 
+#. Default: Edit Measure
+#: src/osha/oira/content/solution.py:46
+msgid "Edit Solution"
+msgstr "Breyta lausn"
+
 #. Default: Period
-#: src/osha/oira/content/statistics.py:40
+#: src/osha/oira/content/statistics.py:41
 msgid "label_period"
 msgstr "Tímabil"
 
 #. Default: Report Type
-#: src/osha/oira/content/statistics.py:70
+#: src/osha/oira/content/statistics.py:71
 msgid "label_report_type"
 msgstr "Tegund skýrslu "
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:76
+#: src/osha/oira/content/statistics.py:77
 msgid "label_report_countries"
 msgstr "Land"
 
 #. Default: Tool
-#: src/osha/oira/content/statistics.py:83
+#: src/osha/oira/content/statistics.py:84
 msgid "label_report_tools"
 msgstr "Verkfæri"
 
 #. Default: Report Period
-#: src/osha/oira/content/statistics.py:90
+#: src/osha/oira/content/statistics.py:91
 msgid "label_report_period"
 msgstr "Tímabil skýrslu"
 
 #. Default: File Format
-#: src/osha/oira/content/statistics.py:95
+#: src/osha/oira/content/statistics.py:96
 msgid "label_report_file_format"
 msgstr "Skráarsnið "
 
 #. Default: Statistics Reporting
-#: src/osha/oira/content/statistics.py:270
-#: src/osha/oira/content/statistics.py:298
-#: src/osha/oira/content/statistics.py:338
+#: src/osha/oira/content/statistics.py:277
+#: src/osha/oira/content/statistics.py:311
+#: src/osha/oira/content/statistics.py:357
 msgid "title_statistics"
 msgstr "Skýrsla m tölfræðilegar upplýsingar "
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:272
+#: src/osha/oira/content/statistics.py:279
 msgid "label_country"
 msgstr "Land"
 
-#: src/osha/oira/content/statistics.py:276
-#: src/osha/oira/content/statistics.py:304
-#: src/osha/oira/content/statistics.py:344
+#: src/osha/oira/content/statistics.py:284
+#: src/osha/oira/content/statistics.py:318
+#: src/osha/oira/content/statistics.py:363
 msgid "Submit"
 msgstr "Leggja fyrir"
 
 #. Default: Sector
-#: src/osha/oira/content/statistics.py:300
+#: src/osha/oira/content/statistics.py:313
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
 msgid "Sector"
 msgstr "Atvinnugrein"
 
 #. Default: Global
-#: src/osha/oira/content/statistics.py:340
+#: src/osha/oira/content/statistics.py:359
 msgid "label_global"
 msgstr "Hnattrænt"
 
@@ -2664,6 +2664,7 @@ msgstr "Einnig er hægt að breyta textanum í ${online_help}."
 #. Default: Information
 #: src/osha/oira/content/templates/module_view.pt:22
 #: src/osha/oira/content/templates/profilequestion_view.pt:20
+#: src/osha/oira/content/templates/solution_view.pt:19
 #: src/osha/oira/content/templates/survey_view.pt:21
 msgid "header_information"
 msgstr "Upplýsingar"
@@ -2803,6 +2804,11 @@ msgstr "Fjölvalsspurning"
 #: src/osha/oira/content/templates/profilequestion_view.pt:35
 msgid "Not provided"
 msgstr "Ekki til staðar"
+
+#: src/osha/oira/content/templates/solution_view.pt:12
+#: src/osha/oira/profiles/default/types/euphorie.solution.xml:5
+msgid "Measure"
+msgstr "Lausn"
 
 #. Default: Classification code
 #: src/osha/oira/content/templates/survey_view.pt:24
@@ -3026,10 +3032,6 @@ msgstr ""
 msgid "A sector is a national organisation for a specific type of industry."
 msgstr "Atvinnusvið er landssamtök um sérstaka atvinnugrein."
 
-#: src/osha/oira/profiles/default/types/euphorie.solution.xml:5
-msgid "Measure"
-msgstr "Lausn"
-
 #: src/osha/oira/profiles/default/types/euphorie.solution.xml:6
 msgid "A measure that can be taken to mitigate a risk."
 msgstr "Lausn sem hægt er að framkvæma til að draga úr áhættu."
@@ -3137,3 +3139,8 @@ msgstr ""
 #: src/osha/oira/templates/login.pt:16
 msgid "message_invalid_login"
 msgstr "Innskráning ógild ${reset_password}."
+
+#. Default: CC License
+#: src/osha/oira/tiles/templates/footer.pt:32
+msgid "cc-license"
+msgstr ""

@@ -56,9 +56,6 @@ _("upload_success", default=u"Succesfully imported the OiRA Tool")
 _("title_import_sector_survey", default=u"Import sector and OiRA Tool")
 _("intro_add_survey", default=u"The form will allow you to create a new OiRA "
     u"Tool revision.")
-_("help_risks_present", default=u"Now that you have identified the existing "
-    u"hazards/problems in your company/organisation you need to evaluate the "
-    u"risks arising from them.")
 _("label_solution_direction", default=u"Solution")
 _("Succesfully published the survey", default=u"Succesfully published the "
     u"OiRA Tool")
@@ -149,12 +146,9 @@ _("intro_print_identification_2", default=
 
 _("list_of_risks", default=u"contents of the tool")
 
-_("help_evaluation_empty", default=
-    u"Please proceed directly to the action plan step.")
-
 _("help_create_new_version", default=u"Start to write a new OiRA Tool. You "
     u"will be asked whether you want to start off with a copy of an existing "
-    u"OiRA Tool..")
+    u"OiRA Tool.")
 
 _("title_help_unpublished", default=u"Remove this OiRA Tool from the online "
     u"client.")

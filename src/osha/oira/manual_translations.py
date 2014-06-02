@@ -148,7 +148,7 @@ _("list_of_risks", default=u"contents of the tool")
 
 _("help_create_new_version", default=u"Start to write a new OiRA Tool. You "
     u"will be asked whether you want to start off with a copy of an existing "
-    u"OiRA Tool..")
+    u"OiRA Tool.")
 
 _("title_help_unpublished", default=u"Remove this OiRA Tool from the online "
     u"client.")

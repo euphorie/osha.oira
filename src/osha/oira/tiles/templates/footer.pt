@@ -1,4 +1,3 @@
-<br clear="all"/>
 <span xmlns="http://www.w3.org/1999/xhtml"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:meta="http://xml.zope.org/namespaces/meta"
@@ -7,7 +6,8 @@
       meta:interpolation="true"
       i18n:domain="euphorie">
 
-    <p id="nuplone_appendix" 
+    <br clear="all"/>
+    <p id="nuplone_appendix"
             tal:define="lang here/@@plone_portal_state/language;
                         media_url string:++resource++euphorie.media"
             style="padding-bottom: 20px; padding-left: 220px; padding-top: 10em;">
@@ -17,10 +17,10 @@
         <tal:span i18n:translate="appendix_produced_by">
             Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_new">EU-OSHA</a>.</tal:span>
         |
-        <a tal:attributes="href string:http://client.oiraproject.eu/about?set_language=$lang" 
+        <a tal:attributes="href string:http://client.oiraproject.eu/about?set_language=$lang"
            i18n:translate="appendix_about">About</a>
         |
-        <a tal:attributes="href string:http://client.oiraproject.eu/terms-and-conditions?set_language=$lang" 
+        <a tal:attributes="href string:http://client.oiraproject.eu/terms-and-conditions?set_language=$lang"
            i18n:translate="appendix_privacy">Privacy</a>
         |
         <a tal:attributes="href string:http://client.oiraproject.eu/disclaimer?set_language=$lang"

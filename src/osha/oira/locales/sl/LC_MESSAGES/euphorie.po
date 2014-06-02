@@ -388,7 +388,7 @@ msgstr "To besedilo mora pojasniti, kako se registrirati in prijaviti."
 #. Default: Carrying out your risk assessment
 #: src/osha/oira/manual_translations.py:108
 msgid "help_header_sessions"
-msgstr "Seje"
+msgstr "Ocenjevanje tveganja"
 
 #. Default: Carrying out your risk assessment
 #: src/osha/oira/manual_translations.py:109
@@ -418,12 +418,12 @@ msgstr "To besedilo mora pojasniti 2 vrsti profilnih vprašanj."
 #. Default: 2. Identification
 #: src/osha/oira/manual_translations.py:116
 msgid "help_header_identification"
-msgstr "2. Prepoznavanje"
+msgstr "2. Identifikacija"
 
 #. Default: 2. Identification
 #: src/osha/oira/manual_translations.py:117
 msgid "label_help_identification"
-msgstr "2. Prepoznavanje"
+msgstr "2. Identifikacija"
 
 #. Default: This text should explain how the risk identification works.
 #: src/osha/oira/manual_translations.py:118
@@ -433,12 +433,12 @@ msgstr "To besedilo mora pojasniti, kako deluje prepoznavanje tveganja."
 #. Default: 3. Evaluation
 #: src/osha/oira/manual_translations.py:120
 msgid "help_header_evaluation"
-msgstr "3. Ovrednotenje"
+msgstr "3. Ocena"
 
 #. Default: 3. Evaluation
 #: src/osha/oira/manual_translations.py:121
 msgid "label_help_evaluation"
-msgstr "3. Ovrednotenje"
+msgstr "3. Ocena"
 
 #. Default: This text should explain how to evaluate the identified risks.
 #: src/osha/oira/manual_translations.py:122
@@ -463,7 +463,7 @@ msgstr "To besedilo mora pojasniti, kako izpolniti akcijski načrt."
 #. Default: 5. Report
 #: src/osha/oira/manual_translations.py:128
 msgid "help_header_report"
-msgstr "5. Poročanje"
+msgstr "5. Poročilo"
 
 #. Default: 5. Report
 #: src/osha/oira/manual_translations.py:129
@@ -479,12 +479,12 @@ msgstr "To besedilo mora opisati, kako poročilo shraniti ali natisniti."
 #. Default: What happens next?
 #: src/osha/oira/manual_translations.py:132
 msgid "label_help_finalwords"
-msgstr "Kaj se zgodi potem?"
+msgstr "Kako naprej?"
 
 #. Default: What happens next?
 #: src/osha/oira/manual_translations.py:133
 msgid "help_header_finalwords"
-msgstr "Kaj se zgodi potem?"
+msgstr "Kako naprej?"
 
 #. Default: General final recommendations.
 #: src/osha/oira/manual_translations.py:134
@@ -746,17 +746,17 @@ msgstr "Vpišite ime vsake od lokacij"
 #. Default: Measure
 #: src/osha/oira/client/report.py:105
 msgid "report_timeline_measure"
-msgstr "Merilo"
+msgstr "Sološni pristop"
 
 #. Default: End date
 #: src/osha/oira/client/report.py:108
 msgid "report_timeline_end_date"
-msgstr "Datum zaključka"
+msgstr "Načrtovani zaključek"
 
 #. Default: Responsible
 #: src/osha/oira/client/report.py:111
 msgid "report_timeline_responsible"
-msgstr "Odgovorni"
+msgstr "Odgovorna oseba"
 
 #. Default: Status (planned, in process, implemented)
 #: src/osha/oira/client/report.py:112
@@ -865,7 +865,7 @@ msgstr "Načrtovani zaključek"
 #. Default: Consultation of workers
 #: src/osha/oira/client/report.py:497
 msgid "header_oira_report_consultation"
-msgstr "Seznanjenost delavcev"
+msgstr "Seznanitev zaposlenih"
 
 #. Default: The undersigned hereby declare that the workers have been consulted
 #. on the content of this document.
@@ -914,7 +914,7 @@ msgstr "Tveganja, ki so bila prepoznana, ocenjena in imajo načrt ukrepov"
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
-msgstr "Tveganja, ki so bila prepoznana, vendar NIMAJO akcijskega načrta"
+msgstr "Tveganja, ki so bila prepoznana, vendar NIMAJO načrta ukrepov"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
@@ -923,7 +923,7 @@ msgstr "Tveganja, ki so bila prepoznana, vendar NIMAJO akcijskega načrta"
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
 msgstr ""
-"Nevarnosti/težave, ki so bile \"parkirane\" in jih je še treba obdelati"
+"Tveganja, ki so bila preložena in jih je še potrebno obdelati"
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
@@ -1801,7 +1801,7 @@ msgstr "Na zgornjo izjavo ste odgovorili negativno."
 
 #: src/osha/oira/client/templates/report_landing.pt:21
 msgid "Download and print your report"
-msgstr "Naložite in natisnite poročilo"
+msgstr "Prenos in tiskanje poročila"
 
 #: src/osha/oira/client/templates/report_landing.pt:23
 msgid ""
@@ -1809,9 +1809,9 @@ msgid ""
 "more information. Please note that changes made on your pc will NOT be saved "
 "in the OiRA tool"
 msgstr ""
-"Shanite poročilo na svoj računalnik in ga natisnite. Lahko ga tudi "
-"spremenite ali dodate več informacij. Ne pozabite, da spremembe na vašem "
-"osebnem računalniku NE bodo shranjene v orodju OiRA "
+"Poročilo shranite na osebni računalnik in ga natisnite. Lahko ga tudi "
+"spreminjate ali dodate več informacij. Upoštevajte, da se spremembe, ki ste "
+"jih vnesli na računalniku, NE BODO shranile v orodju OiRA."
 
 #: src/osha/oira/client/templates/report_landing.pt:24
 msgid "Use the report to:"
@@ -1819,44 +1819,44 @@ msgstr "Poročilo uporabite za:"
 
 #: src/osha/oira/client/templates/report_landing.pt:27
 msgid "Provide evidence for supervisory authorities."
-msgstr "Predložitev dokazil nadzornim organom."
+msgstr "Predložitev dokazil nadzornim organom;"
 
 #: src/osha/oira/client/templates/report_landing.pt:28
 msgid ""
 "Pass information to the people concerned (workers, safety representatives, "
 "employers, experts in occupational safety and health, ...)"
 msgstr ""
-"Posredovanje informacij zainteresiranim osebam (delavcem, delavskim "
-"zaupnikom za varnost, delodajalcem, strokovnjakom s področja varnosti in "
-"zdravja pri delu, ...)"
+"Posredovanje informacij zadevnim osebam (delavcem, predstavnikom delavcev za "
+"varnost in zdravje, delodajalcem, strokovnjakom za varnost in zdravje pri "
+"delu itd.);"
 
 #: src/osha/oira/client/templates/report_landing.pt:29
 msgid "Monitor and assess whether necessary measures have been introduced."
-msgstr "Spremljanje in ocenjevanje, ali so bili uvedeni potrebni ukrepi."
+msgstr "Spremljanje in ocenjevanje, ali so bili uvedeni potrebni ukrepi;"
 
 #: src/osha/oira/client/templates/report_landing.pt:30
 msgid ""
 "Record any revision if circumstances change (new machines, new workers, as a "
 "result of findings of any accident investigations, etc.)"
 msgstr ""
-"Beleženje dodatnih pregledov, če se okoliščine spremenijo (novi stroji, novi "
-"delavci, kot izid ugotovitev iz preiskav nezgode itd.)"
+"Beleženje vseh revizij, če se spremenijo okoliščine (novi stroji, novi "
+"delavci, zaradi ugotovitev preiskave nezgode itd.)."
 
 #: src/osha/oira/client/templates/report_landing.pt:35
 msgid "Download the full report"
-msgstr "Naložite celotno poročilo"
+msgstr "Prenos celotnega poročila"
 
 #: src/osha/oira/client/templates/report_landing.pt:38
 msgid "Format: Rich Text Format (.rtf)"
-msgstr "Format: Rich Text Format (.rtf)"
+msgstr "Format: Word / Rich Text Format (.rtf)"
 
 #: src/osha/oira/client/templates/report_landing.pt:39
 msgid ""
 "Contains: all the information and input provided by you throughout the risk "
 "assessment process."
 msgstr ""
-"Vsebuje: vse informacije in podatke, ki ste jih vnesli med postopkom ocene "
-"tveganja."
+"Vsebuje vse vaše informacije in vnose, ki ste jih zagotovili med "
+"ocenjevanjem tveganja."
 
 #: src/osha/oira/client/templates/report_landing.pt:42
 #: src/osha/oira/client/templates/report_landing.pt:58
@@ -1865,35 +1865,35 @@ msgstr "Uporabite ga za"
 
 #: src/osha/oira/client/templates/report_landing.pt:44
 msgid "Provide evidence"
-msgstr "Predložitev dokazil"
+msgstr "predložitev dokazil"
 
 #: src/osha/oira/client/templates/report_landing.pt:44
 msgid "${provide-evidence} for supervisory authorities (labour inspectorate)."
-msgstr "${provide-evidence} for supervisory authorities (labour inspectorate)."
+msgstr "${provide-evidence} nadzornim organom (inšpektoratu za delo)."
 
 #: src/osha/oira/client/templates/report_landing.pt:47
 msgid ""
 "We recommend to always keep an updated printed version of your risk "
 "assessment (report) available in your company!"
 msgstr ""
-"Priporočamo, da imate v podjetju vedno na voljo posodobljeno različico ocene "
-"tveganja (poročilo)."
+"Priporočamo vam, da natisnete posodobljeno različico ocene tveganja "
+"(poročilo) in jo imate vedno na voljo."
 
 #: src/osha/oira/client/templates/report_landing.pt:51
 msgid "Download the action plan"
-msgstr "Naložite načrt ukrepov"
+msgstr "Prenos načrta ukrepov"
 
 #: src/osha/oira/client/templates/report_landing.pt:54
 msgid "Format: Office Open XML Workbook (.xlsx)"
-msgstr "Format: Office Open XML Workbook (.xlsx)"
+msgstr "Format: Excel (.xlsx)"
 
 #: src/osha/oira/client/templates/report_landing.pt:55
 msgid ""
 "Contains: only the measures to be implemented to effectively manage the "
 "identified risks."
 msgstr ""
-"Vsebuje: samo ukrepe, ki jih je treba izvesti za učinkovito obvladovanje "
-"prepoznanih tveganj."
+"Vsebuje le ukrepe, ki jih je treba izvajati za učinkovito upravljanje "
+"identificiranih tveganj"
 
 #: src/osha/oira/client/templates/report_landing.pt:60
 msgid "Manage"
@@ -1904,8 +1904,8 @@ msgid ""
 "${manage} the problems/risks in your workplace (specific tasks, expertise, "
 "responsibilities, deadlines)."
 msgstr ""
-"${obvladovanje} težav/tveganj v vašem delovnem okolju (posebne naloge, "
-"strokovna znanja, odgovornosti, roki)."
+"${manage} težav/tveganj na svojem delovnem mestu (posebne naloge, strokovno "
+"znanje, odgovornosti, roki)."
 
 #: src/osha/oira/client/templates/risk_actionplan.pt:19
 msgid ""

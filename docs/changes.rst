@@ -1,7 +1,18 @@
 Changelog
 =========
 
-2.2.13 (unreleased)
+2.2.15 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+2.2.14 (2014-05-23)
+-------------------
+
+- Translation corrections in SL #9589 #10059
+
+2.2.13 (2014-05-02)
 -------------------
 
 - Translation corrections in SL (OSHA #9584)

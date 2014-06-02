@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.30.dev0\n"
-"Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2014-02-24 15:35+0100\n"
+"Report-Msgid-Bugs-To: info@syslab.com\n"
+"POT-Creation-Date: 2014-06-02 17:52+0200\n"
 "PO-Revision-Date: 2013-08-15 11:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,8 +124,6 @@ msgstr "OiRA-työkalut"
 
 #. Default: OiRA Tool
 #: src/osha/oira/manual_translations.py:34 src/osha/oira/vocabularies.py:22
-#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:4
-#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:5
 msgid "Survey"
 msgstr "OiRA-työkalu"
 
@@ -690,7 +688,8 @@ msgid "label_remove_measure"
 msgstr "Poista tämä toimenpide"
 
 #. Default: Add Measure
-#: src/osha/oira/manual_translations.py:224 src/osha/oira/content/risk.py:98
+#: src/osha/oira/manual_translations.py:224
+#: src/osha/oira/content/solution.py:63
 msgid "Add Solution"
 msgstr "Lisää Toimenpide"
 
@@ -827,18 +826,21 @@ msgstr "Toimenpide ${index}"
 #. Default: General approach (to eliminate or reduce the risk)
 #: src/osha/oira/client/report.py:436
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
+#: src/osha/oira/content/templates/solution_view.pt:22
 msgid "label_measure_action_plan"
 msgstr "Yleinen toimintatapa (riskin poistamiseksi tai pienentämiseksi)"
 
 #. Default: Specific action(s) required to implement this approach
 #: src/osha/oira/client/report.py:438
 #: src/osha/oira/client/templates/risk_actionplan.pt:98
+#: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
 msgstr "Tähän toimintatapaan kuuluvat erityiset toimenpiteet"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/report.py:440
 #: src/osha/oira/client/templates/risk_actionplan.pt:107
+#: src/osha/oira/content/templates/solution_view.pt:29
 msgid "label_measure_requirements"
 msgstr "Asiantuntemuksen taso ja/tai tarvittavat vaatimukset"
 
@@ -927,8 +929,7 @@ msgstr "Riskit, jotka on tunnistettu, mutta joilla EI ole toimintasuunnitelmaa"
 #: src/osha/oira/client/templates/report_actionplan.pt:55
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
-msgstr ""
-"Vaarat/ongelmat, jotka on ja joita vielä käsitellään"
+msgstr "Vaarat/ongelmat, jotka on ja joita vielä käsitellään"
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
@@ -1015,8 +1016,8 @@ msgstr "Onko vaara- tai haittatekijä mahdollista poistaa?"
 #: src/osha/oira/client/templates/actionplan.pt:29
 msgid "expl_actionplan_3"
 msgstr ""
-"Onko riski vältettävissä? Voiko sen poistaa kokonaan? "
-"Arvioi ${expl_actionplan_4_and_5}"
+"Onko riski vältettävissä? Voiko sen poistaa kokonaan? Arvioi "
+"${expl_actionplan_4_and_5}"
 
 #. Default: If certain risks are not avoidable, how can they be reduced to a
 #. level at which the health and safety of those exposed is not compromised?
@@ -1629,8 +1630,7 @@ msgstr ""
 #. report in this field.
 #: src/osha/oira/client/templates/report.pt:28
 msgid "label_report_comment"
-msgstr ""
-"Lisää tähän tietoja tai kommentteja, jotka haluat näkyviin raportille."
+msgstr "Lisää tähän tietoja tai kommentteja, jotka haluat näkyviin raportille."
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -1827,7 +1827,8 @@ msgstr "Raportti on hyödyksi yrityksen arjessa, sillä se:"
 
 #: src/osha/oira/client/templates/report_landing.pt:27
 msgid "Provide evidence for supervisory authorities."
-msgstr "on näyttönä riskien arvioinnista ja hallintatoimista "
+msgstr ""
+"on näyttönä riskien arvioinnista ja hallintatoimista "
 "työsuojeluviranomaisille,"
 
 #: src/osha/oira/client/templates/report_landing.pt:28
@@ -1841,8 +1842,9 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:29
 msgid "Monitor and assess whether necessary measures have been introduced."
-msgstr "auttaa seuraamaan ja arvioimaan, onko toimenpiteet tehty "
-"suunnitellusti ja ovatko ne vaikuttaneet halutulla tavalla sekä"
+msgstr ""
+"auttaa seuraamaan ja arvioimaan, onko toimenpiteet tehty suunnitellusti ja "
+"ovatko ne vaikuttaneet halutulla tavalla sekä"
 
 #: src/osha/oira/client/templates/report_landing.pt:30
 msgid ""
@@ -1850,8 +1852,8 @@ msgid ""
 "result of findings of any accident investigations, etc.)"
 msgstr ""
 "on helppo päivittää joko tähän sovellukseen tai tietokoneelle tallennetulle "
-"raportille. Tee päivitys aina kun työoloissa tapahtuu muutoksia (esim. "
-"uudet koneet/laitteet/tilat, uudet työntekijät, sattuneiden tapaturmien tai "
+"raportille. Tee päivitys aina kun työoloissa tapahtuu muutoksia (esim. uudet "
+"koneet/laitteet/tilat, uudet työntekijät, sattuneiden tapaturmien tai "
 "vaaratilanteiden aiheuttamat muutostarpeet jne.)."
 
 #: src/osha/oira/client/templates/report_landing.pt:35
@@ -1902,8 +1904,7 @@ msgstr "Formaatti: Office Open XML Workbook (.xlsx)"
 msgid ""
 "Contains: only the measures to be implemented to effectively manage the "
 "identified risks."
-msgstr ""
-"Sisältö: toimenpiteet havaittujen riskien hallintaan"
+msgstr "Sisältö: toimenpiteet havaittujen riskien hallintaan"
 
 #: src/osha/oira/client/templates/report_landing.pt:60
 msgid "Manage"
@@ -2036,7 +2037,7 @@ msgstr "Kuukausi"
 
 #. Default: Year
 #: src/osha/oira/client/templates/risk_actionplan.pt:155
-#: src/osha/oira/content/statistics.py:35
+#: src/osha/oira/content/statistics.py:36
 msgid "label_year"
 msgstr "Vuosi"
 
@@ -2358,26 +2359,31 @@ msgstr "kehitettävää"
 
 #. Default: Produced by ${EU-OSHA}.
 #: src/osha/oira/client/templates/webhelpers.pt:118
+#: src/osha/oira/tiles/templates/footer.pt:17
 msgid "appendix_produced_by"
 msgstr "Valmistaja ${EU-OSHA}."
 
 #. Default: About
 #: src/osha/oira/client/templates/webhelpers.pt:121
+#: src/osha/oira/tiles/templates/footer.pt:20
 msgid "appendix_about"
 msgstr "Tietoja"
 
 #. Default: Privacy
 #: src/osha/oira/client/templates/webhelpers.pt:123
+#: src/osha/oira/tiles/templates/footer.pt:23
 msgid "appendix_privacy"
 msgstr "Yksityisyys"
 
 #. Default: Disclaimer
 #: src/osha/oira/client/templates/webhelpers.pt:125
+#: src/osha/oira/tiles/templates/footer.pt:26
 msgid "appendix_disclaimer"
 msgstr "Vastuuvapautuslauseke"
 
 #. Default: GPL License
 #: src/osha/oira/client/templates/webhelpers.pt:127
+#: src/osha/oira/tiles/templates/footer.pt:29
 msgid "appendix_gpl_license"
 msgstr "GPL-lisenssi"
 
@@ -2457,7 +2463,7 @@ msgstr "Muokkaa Profiilikysymys"
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
-#: src/osha/oira/content/risk.py:23
+#: src/osha/oira/content/risk.py:20
 msgid "help_evaluation_method_kinney"
 msgstr ""
 "Valitse ARVIOITU (likimääräinen arviointi) tai LASKETTU (todennäisyyden, "
@@ -2465,33 +2471,28 @@ msgstr ""
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of frequency and severity) method.
-#: src/osha/oira/content/risk.py:30
+#: src/osha/oira/content/risk.py:27
 msgid "help_evaluation_method_french"
 msgstr ""
 "Valitse ARVIOITU (likimääräinen arviointi) tai LASKETTU (esiintymän ja "
 "vakavuuden yhdistelmä) menetelmä."
 
 #. Default: Save changes
-#: src/osha/oira/content/risk.py:44 src/osha/oira/content/risk.py:61
-#: src/osha/oira/content/risk.py:75 src/osha/oira/content/risk.py:92
+#: src/osha/oira/content/risk.py:41 src/osha/oira/content/risk.py:58
+#: src/osha/oira/content/solution.py:40 src/osha/oira/content/solution.py:57
 msgid "button_save_changes"
 msgstr "Tallenna muutokset"
 
 #. Default: Cancel
-#: src/osha/oira/content/risk.py:46 src/osha/oira/content/risk.py:63
-#: src/osha/oira/content/risk.py:77 src/osha/oira/content/risk.py:94
+#: src/osha/oira/content/risk.py:43 src/osha/oira/content/risk.py:60
+#: src/osha/oira/content/solution.py:42 src/osha/oira/content/solution.py:59
 #: src/osha/oira/content/templates/surveygroup_add.pt:110
 msgid "button_cancel"
 msgstr "Peruuta"
 
-#: src/osha/oira/content/risk.py:50
+#: src/osha/oira/content/risk.py:47
 msgid "Add Risk"
 msgstr "Lisää Riski"
-
-#. Default: Edit Measure
-#: src/osha/oira/content/risk.py:81
-msgid "Edit Solution"
-msgstr "Muokkaa Toimenpide"
 
 #. Default: Statistics Level
 #: src/osha/oira/content/sector.py:26
@@ -2517,62 +2518,67 @@ msgstr "Hallinto"
 msgid "menu_statistics"
 msgstr "Tilastot"
 
+#. Default: Edit Measure
+#: src/osha/oira/content/solution.py:46
+msgid "Edit Solution"
+msgstr "Muokkaa Toimenpide"
+
 #. Default: Period
-#: src/osha/oira/content/statistics.py:40
+#: src/osha/oira/content/statistics.py:41
 msgid "label_period"
 msgstr "Ajanjakso"
 
 #. Default: Report Type
-#: src/osha/oira/content/statistics.py:70
+#: src/osha/oira/content/statistics.py:71
 msgid "label_report_type"
 msgstr "Raportin tyyppi"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:76
+#: src/osha/oira/content/statistics.py:77
 msgid "label_report_countries"
 msgstr "Maa"
 
 #. Default: Tool
-#: src/osha/oira/content/statistics.py:83
+#: src/osha/oira/content/statistics.py:84
 msgid "label_report_tools"
 msgstr "Työväline"
 
 #. Default: Report Period
-#: src/osha/oira/content/statistics.py:90
+#: src/osha/oira/content/statistics.py:91
 msgid "label_report_period"
 msgstr "Raportointiajanjakso"
 
 #. Default: File Format
-#: src/osha/oira/content/statistics.py:95
+#: src/osha/oira/content/statistics.py:96
 msgid "label_report_file_format"
 msgstr "Tiedostomuoto"
 
 #. Default: Statistics Reporting
-#: src/osha/oira/content/statistics.py:270
-#: src/osha/oira/content/statistics.py:298
-#: src/osha/oira/content/statistics.py:338
+#: src/osha/oira/content/statistics.py:277
+#: src/osha/oira/content/statistics.py:311
+#: src/osha/oira/content/statistics.py:357
 msgid "title_statistics"
 msgstr "Tilastot"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:272
+#: src/osha/oira/content/statistics.py:279
 msgid "label_country"
 msgstr "Maa"
 
-#: src/osha/oira/content/statistics.py:276
-#: src/osha/oira/content/statistics.py:304
-#: src/osha/oira/content/statistics.py:344
+#: src/osha/oira/content/statistics.py:284
+#: src/osha/oira/content/statistics.py:318
+#: src/osha/oira/content/statistics.py:363
 msgid "Submit"
 msgstr "Lähetä"
 
 #. Default: Sector
-#: src/osha/oira/content/statistics.py:300
+#: src/osha/oira/content/statistics.py:313
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
 msgid "Sector"
 msgstr "Toimiala"
 
 #. Default: Global
-#: src/osha/oira/content/statistics.py:340
+#: src/osha/oira/content/statistics.py:359
 msgid "label_global"
 msgstr "Globaali"
 
@@ -2683,6 +2689,7 @@ msgstr "${online_help}-tekstiä voi myös muokata."
 #. Default: Information
 #: src/osha/oira/content/templates/module_view.pt:22
 #: src/osha/oira/content/templates/profilequestion_view.pt:20
+#: src/osha/oira/content/templates/solution_view.pt:19
 #: src/osha/oira/content/templates/survey_view.pt:21
 msgid "header_information"
 msgstr "Tiedot"
@@ -2830,6 +2837,11 @@ msgstr "Monikohtainen kysymys"
 #: src/osha/oira/content/templates/profilequestion_view.pt:35
 msgid "Not provided"
 msgstr "Ei saatavilla"
+
+#: src/osha/oira/content/templates/solution_view.pt:12
+#: src/osha/oira/profiles/default/types/euphorie.solution.xml:5
+msgid "Measure"
+msgstr "Toimenpide"
 
 #. Default: Classification code
 #: src/osha/oira/content/templates/survey_view.pt:24
@@ -3060,10 +3072,6 @@ msgstr ""
 msgid "A sector is a national organisation for a specific type of industry."
 msgstr "Toimiala on tietyntyyppisen liikealan kansallinen organisaatio."
 
-#: src/osha/oira/profiles/default/types/euphorie.solution.xml:5
-msgid "Measure"
-msgstr "Toimenpide"
-
 #: src/osha/oira/profiles/default/types/euphorie.solution.xml:6
 msgid "A measure that can be taken to mitigate a risk."
 msgstr "Riskin pienentämiseksi suoritettava toimenpide."
@@ -3173,6 +3181,11 @@ msgstr ""
 msgid "message_invalid_login"
 msgstr ""
 "Väärät kirjautumistiedot. Jos olet unohtanut salasanasi, ${reset_password}."
+
+#. Default: CC License
+#: src/osha/oira/tiles/templates/footer.pt:32
+msgid "cc-license"
+msgstr ""
 
 #~ msgid "label_evaluation_phase"
 #~ msgstr "Arviointivaihe"

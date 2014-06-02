@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.1dev\n"
-"Report-Msgid-Bugs-To: brand@syslab.com\n"
-"POT-Creation-Date: 2014-02-24 15:35+0100\n"
+"Report-Msgid-Bugs-To: info@syslab.com\n"
+"POT-Creation-Date: 2014-06-02 17:52+0200\n"
 "PO-Revision-Date: 2013-08-15 11:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: bg <LL@li.org>\n"
@@ -126,8 +126,6 @@ msgstr "OiRA инструменти"
 
 #. Default: OiRA Tool
 #: src/osha/oira/manual_translations.py:34 src/osha/oira/vocabularies.py:22
-#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:4
-#: src/osha/oira/profiles/default/types/euphorie.surveygroup.xml:5
 msgid "Survey"
 msgstr "OiRA инструмент"
 
@@ -705,7 +703,8 @@ msgid "label_remove_measure"
 msgstr "Изтрий тази мярка"
 
 #. Default: Add Measure
-#: src/osha/oira/manual_translations.py:224 src/osha/oira/content/risk.py:98
+#: src/osha/oira/manual_translations.py:224
+#: src/osha/oira/content/solution.py:63
 msgid "Add Solution"
 msgstr "Добавяне на Мярка"
 
@@ -842,18 +841,21 @@ msgstr "Мярка ${index}"
 #. Default: General approach (to eliminate or reduce the risk)
 #: src/osha/oira/client/report.py:436
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
+#: src/osha/oira/content/templates/solution_view.pt:22
 msgid "label_measure_action_plan"
 msgstr "Общ подход (за елиминиране или намаляване на риска)"
 
 #. Default: Specific action(s) required to implement this approach
 #: src/osha/oira/client/report.py:438
 #: src/osha/oira/client/templates/risk_actionplan.pt:98
+#: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
 msgstr "Конкретни действия, които се изискват, за да бъде следван този подход"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/report.py:440
 #: src/osha/oira/client/templates/risk_actionplan.pt:107
+#: src/osha/oira/content/templates/solution_view.pt:29
 msgid "label_measure_requirements"
 msgstr "Експертно ниво и/или изисквания, които са необходими"
 
@@ -1999,11 +2001,11 @@ msgstr ""
 "неизбежен) намаляване на риска; 2) конкретните действия, които се изискват, "
 "за да бъде следван подходът (за елиминиране или намаляване на риска); 3) "
 "експертното ниво, което е необходимо, за да бъде изпълнена мярката, например "
-"„здрав разум (не са необходими познания по БЗР)”, “не са "
-"нужни определени експертни познания по БЗР, но се изискват минимални "
-"познания или обучение по БЗР и/или консултация с ръководство по БЗР”, или "
-"“необходимо е експертно ниво по БЗР”. Тук можете да опишете и други "
-"допълнителни изисквания (ако има такива)."
+"„здрав разум (не са необходими познания по БЗР)”, “не са нужни определени "
+"експертни познания по БЗР, но се изискват минимални познания или обучение по "
+"БЗР и/или консултация с ръководство по БЗР”, или “необходимо е експертно "
+"ниво по БЗР”. Тук можете да опишете и други допълнителни изисквания (ако има "
+"такива)."
 
 #. Default: Appoint someone in your company to be responsible for the
 #. implementation of this measure. This person will have the authority to take
@@ -2058,7 +2060,7 @@ msgstr "Месец"
 
 #. Default: Year
 #: src/osha/oira/client/templates/risk_actionplan.pt:155
-#: src/osha/oira/content/statistics.py:35
+#: src/osha/oira/content/statistics.py:36
 msgid "label_year"
 msgstr "Година"
 
@@ -2383,26 +2385,31 @@ msgstr "Внимание"
 
 #. Default: Produced by ${EU-OSHA}.
 #: src/osha/oira/client/templates/webhelpers.pt:118
+#: src/osha/oira/tiles/templates/footer.pt:17
 msgid "appendix_produced_by"
 msgstr "Създадено от ${EU-OSHA}."
 
 #. Default: About
 #: src/osha/oira/client/templates/webhelpers.pt:121
+#: src/osha/oira/tiles/templates/footer.pt:20
 msgid "appendix_about"
 msgstr "За нас"
 
 #. Default: Privacy
 #: src/osha/oira/client/templates/webhelpers.pt:123
+#: src/osha/oira/tiles/templates/footer.pt:23
 msgid "appendix_privacy"
 msgstr "Поверителност"
 
 #. Default: Disclaimer
 #: src/osha/oira/client/templates/webhelpers.pt:125
+#: src/osha/oira/tiles/templates/footer.pt:26
 msgid "appendix_disclaimer"
 msgstr "Отказ от отговорност"
 
 #. Default: GPL License
 #: src/osha/oira/client/templates/webhelpers.pt:127
+#: src/osha/oira/tiles/templates/footer.pt:29
 msgid "appendix_gpl_license"
 msgstr "GPL Лиценз"
 
@@ -2482,7 +2489,7 @@ msgstr "Редактиране на Профилиращ въпрос"
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
-#: src/osha/oira/content/risk.py:23
+#: src/osha/oira/content/risk.py:20
 msgid "help_evaluation_method_kinney"
 msgstr ""
 "Изберете между ПРЕЦЕНЕН (груба преценка) или ИЗЧИСЛЕН (комбинация от "
@@ -2490,33 +2497,28 @@ msgstr ""
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of frequency and severity) method.
-#: src/osha/oira/content/risk.py:30
+#: src/osha/oira/content/risk.py:27
 msgid "help_evaluation_method_french"
 msgstr ""
 "Изберете между ПРЕЦЕНЕН (груба преценка) или ИЗЧИСЛЕН (комбинация от честота "
 "и сериозност) метод."
 
 #. Default: Save changes
-#: src/osha/oira/content/risk.py:44 src/osha/oira/content/risk.py:61
-#: src/osha/oira/content/risk.py:75 src/osha/oira/content/risk.py:92
+#: src/osha/oira/content/risk.py:41 src/osha/oira/content/risk.py:58
+#: src/osha/oira/content/solution.py:40 src/osha/oira/content/solution.py:57
 msgid "button_save_changes"
 msgstr "Запазване на промените"
 
 #. Default: Cancel
-#: src/osha/oira/content/risk.py:46 src/osha/oira/content/risk.py:63
-#: src/osha/oira/content/risk.py:77 src/osha/oira/content/risk.py:94
+#: src/osha/oira/content/risk.py:43 src/osha/oira/content/risk.py:60
+#: src/osha/oira/content/solution.py:42 src/osha/oira/content/solution.py:59
 #: src/osha/oira/content/templates/surveygroup_add.pt:110
 msgid "button_cancel"
 msgstr "Отменяне"
 
-#: src/osha/oira/content/risk.py:50
+#: src/osha/oira/content/risk.py:47
 msgid "Add Risk"
 msgstr "Добавяне на Риск"
-
-#. Default: Edit Measure
-#: src/osha/oira/content/risk.py:81
-msgid "Edit Solution"
-msgstr "Редактиране на Мярка"
 
 #. Default: Statistics Level
 #: src/osha/oira/content/sector.py:26
@@ -2541,62 +2543,67 @@ msgstr "Администратор"
 msgid "menu_statistics"
 msgstr "Статистики"
 
+#. Default: Edit Measure
+#: src/osha/oira/content/solution.py:46
+msgid "Edit Solution"
+msgstr "Редактиране на Мярка"
+
 #. Default: Period
-#: src/osha/oira/content/statistics.py:40
+#: src/osha/oira/content/statistics.py:41
 msgid "label_period"
 msgstr "Период"
 
 #. Default: Report Type
-#: src/osha/oira/content/statistics.py:70
+#: src/osha/oira/content/statistics.py:71
 msgid "label_report_type"
 msgstr "Тип доклад"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:76
+#: src/osha/oira/content/statistics.py:77
 msgid "label_report_countries"
 msgstr "Държава"
 
 #. Default: Tool
-#: src/osha/oira/content/statistics.py:83
+#: src/osha/oira/content/statistics.py:84
 msgid "label_report_tools"
 msgstr "Инструмент"
 
 #. Default: Report Period
-#: src/osha/oira/content/statistics.py:90
+#: src/osha/oira/content/statistics.py:91
 msgid "label_report_period"
 msgstr "Период на доклада"
 
 #. Default: File Format
-#: src/osha/oira/content/statistics.py:95
+#: src/osha/oira/content/statistics.py:96
 msgid "label_report_file_format"
 msgstr "Файлов формат"
 
 #. Default: Statistics Reporting
-#: src/osha/oira/content/statistics.py:270
-#: src/osha/oira/content/statistics.py:298
-#: src/osha/oira/content/statistics.py:338
+#: src/osha/oira/content/statistics.py:277
+#: src/osha/oira/content/statistics.py:311
+#: src/osha/oira/content/statistics.py:357
 msgid "title_statistics"
 msgstr "Отчет на статистиката"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:272
+#: src/osha/oira/content/statistics.py:279
 msgid "label_country"
 msgstr "Страна"
 
-#: src/osha/oira/content/statistics.py:276
-#: src/osha/oira/content/statistics.py:304
-#: src/osha/oira/content/statistics.py:344
+#: src/osha/oira/content/statistics.py:284
+#: src/osha/oira/content/statistics.py:318
+#: src/osha/oira/content/statistics.py:363
 msgid "Submit"
 msgstr "Изпращане"
 
 #. Default: Sector
-#: src/osha/oira/content/statistics.py:300
+#: src/osha/oira/content/statistics.py:313
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
 msgid "Sector"
 msgstr "Сектор"
 
 #. Default: Global
-#: src/osha/oira/content/statistics.py:340
+#: src/osha/oira/content/statistics.py:359
 msgid "label_global"
 msgstr "Глобален"
 
@@ -2707,6 +2714,7 @@ msgstr " ${online_help} Тексът също може да бъде проме�
 #. Default: Information
 #: src/osha/oira/content/templates/module_view.pt:22
 #: src/osha/oira/content/templates/profilequestion_view.pt:20
+#: src/osha/oira/content/templates/solution_view.pt:19
 #: src/osha/oira/content/templates/survey_view.pt:21
 msgid "header_information"
 msgstr "Информация"
@@ -2853,6 +2861,11 @@ msgstr "Въпроси с избираем отговор"
 #: src/osha/oira/content/templates/profilequestion_view.pt:35
 msgid "Not provided"
 msgstr "Не е предоставен"
+
+#: src/osha/oira/content/templates/solution_view.pt:12
+#: src/osha/oira/profiles/default/types/euphorie.solution.xml:5
+msgid "Measure"
+msgstr "Мярка"
 
 #. Default: Classification code
 #: src/osha/oira/content/templates/survey_view.pt:24
@@ -3083,10 +3096,6 @@ msgstr ""
 msgid "A sector is a national organisation for a specific type of industry."
 msgstr "Секторът е национална организация за определен вид индустрия."
 
-#: src/osha/oira/profiles/default/types/euphorie.solution.xml:5
-msgid "Measure"
-msgstr "Мярка"
-
 #: src/osha/oira/profiles/default/types/euphorie.solution.xml:6
 msgid "A measure that can be taken to mitigate a risk."
 msgstr "Мярка, която може да бъде взета за елиминиране или намаляване на риска"
@@ -3119,8 +3128,8 @@ msgstr "Знаете ли за всички рискове?"
 #: src/osha/oira/templates/default_introduction.pt:7
 msgid "intro_risk_aware"
 msgstr ""
-"Включително рисковете за Вашите служители и Вашето оборудване? Какво ще стане"
-", ако се случи нещастен случай с една от машините? Както ще стане, ако "
+"Включително рисковете за Вашите служители и Вашето оборудване? Какво ще "
+"стане, ако се случи нещастен случай с една от машините? Както ще стане, ако "
 "служител бъде изложен на влиянието на опасни вещества? Оценката на риска Ви "
 "помага да дефинирате тези рискове и да се справите с тях лице в лице. "
 "Оценката на риска се състои главно от две части: едната е да се определят "
@@ -3198,6 +3207,11 @@ msgstr ""
 "Невалидни данни за вход. Ако сте забравили паролата си, можете да направите"
 "${reset_password}."
 
+#. Default: CC License
+#: src/osha/oira/tiles/templates/footer.pt:32
+msgid "cc-license"
+msgstr "Криейтив комънс лиценз"
+
 #~ msgid "label_evaluation_phase"
 #~ msgstr "Фаза на оценяване"
 
@@ -3269,6 +3283,3 @@ msgstr ""
 
 #~ msgid "label_add_measure"
 #~ msgstr "Добавяне на друга мярка"
-
-#~ msgid "cc-license"
-#~ msgstr "Криейтив комънс лиценз"

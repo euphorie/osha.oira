@@ -7,6 +7,7 @@ from five import grok
 from zope.event import notify
 from zope.component import getUtility
 from zope.lifecycleevent import ObjectCopiedEvent
+from OFS.CopySupport import CopyError
 from OFS.event import ObjectClonedEvent
 from z3c.appconfig.interfaces import IAppConfig
 from plone.i18n.normalizer.interfaces import IIDNormalizer
@@ -34,6 +35,8 @@ def is_allowed(context, item):
     try:
         context._verifyObjectPaste(item)
     except ValueError:
+        return False
+    except CopyError:
         return False
     return True
 

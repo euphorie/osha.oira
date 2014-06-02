@@ -17,14 +17,12 @@
     <h1>${context/title}</h1>
 
     <p class="warning" i18n:translate="help_risks_present" tal:condition="view/next_url">
-      You have indicated that there are possible risks in your organisation.
-      During this evaluation phase you can assess the magnitude of risk
-      for each bottleneck.
+      Now that you have identified the existing hazards/problems in your
+      company/organisation you need to evaluate the risks arising from them.
     </p>
 
     <p i18n:translate="help_evaluation_empty" tal:condition="not:view/next_url">
-    There are no risks that need to be evaluated. You can proceed directly to the action
-    plan phase.
+    Please proceed directly to the action plan step.
     </p>
 
     <p class="buttonBar">

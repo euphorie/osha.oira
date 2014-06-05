@@ -115,3 +115,14 @@ def update_types_information(context):
     """ Reimport types to activate new behavior """
     setup = getToolByName(context, 'portal_setup')
     setup.runImportStepFromProfile('profile-osha.oira:default', 'typeinfo')
+
+
+def increase_statistics_surveys_path_column(context):
+    session = Session()
+    if TableExists(session, "statistics_surveys"):
+        session.execute(
+            "ALTER TABLE statistics_surveys ALTER COLUMN zodb_path TYPE varchar(512)")
+        model.metadata.create_all(session.bind, checkfirst=True)
+        datamanager.mark_changed(session)
+        transaction.get().commit()
+    log.info("Increased the size of column zodb_path in table statistics_surveys.")

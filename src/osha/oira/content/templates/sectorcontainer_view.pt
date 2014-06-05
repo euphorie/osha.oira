@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="euphorie"
+      meta:interpolation="true"
+      metal:use-macro="context/@@layout/macros/layout">
+  <body>
+    <metal:title fill-slot="title" i18n:translate="title_sectors">Sectors</metal:title>
+    <metal:content fill-slot="content" tal:define="library_info view/library_info">
+<style type="text/css">
+.countries.region {
+    float: none;
+}
+.official {
+    float: left;
+}
+.library_info {
+    margin-top: -25px;
+    width: 110%;
+}
+.official .legend{
+  font-weight: bold;
+  margin-bottom: 0;
+}
+</style>
+      <div class="introduction">
+        <p i18n:translate="message_choose_country">Please choose a country of which you would like to view or copy a survey.</p>
+
+      </div>
+      <div tal:define='countries python:view.countries.get("region")' tal:condition="python:countries" class="official">
+        <ul class="countries region">
+          <li tal:repeat="region countries" class="${region/id}"><a href="${region/url}">${region/title}</a></li>
+        </ul>
+        <div tal:condition="python:len(library_info)==1" class="library_info">
+          <p class="legend">Check out <a tal:define="item python:library_info[0]" tal:attributes="href item/url; title item/title">the Library of tools and modules</a>.</p>
+
+          <p class="discrete">To copy content from the Library, go to your own tool and use the "Library" button.</p>
+
+        </div>
+      </div>
+      <tal:block define='countries python:view.countries.get("country")' condition="python:countries">
+        <ul class="countries">
+          <li tal:repeat="country countries" class="${country/id}"><a href="${country/url}">${country/title}</a></li>
+        </ul>
+      </tal:block>
+    </metal:content>
+  </body>
+</html>

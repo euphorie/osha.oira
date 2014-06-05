@@ -76,7 +76,7 @@ Changelog
 2.2.6 (2013-08-23)
 ------------------
 
-- Register a more generic datamanger for survey. #8379 [jcbrand] 
+- Register a more generic datamanger for survey. #8379 [jcbrand]
 
 2.2.5 (2013-08-21)
 ------------------

@@ -4,7 +4,8 @@ import os
 version = '2.2.15.dev0'
 
 tests_require = [
-        "Euphorie [tests]",
+        'Euphorie [tests]',
+        'mock',
       ]
 
 setup(name='osha.oira',
@@ -33,10 +34,12 @@ setup(name='osha.oira',
       zip_safe=False,
       install_requires=[
           'Euphorie >=6.0b2',
-          'NuPlone',
+          'NuPlone >=1.3.9',
           'Pillow',
           'Products.statusmessages',
-        # We seem to have a persisten utility that prevents running upgrade steps. The following package is therefore added for providing the required interface
+          # We seem to have a persisten utility that prevents running upgrade
+          # steps. The following package is therefore added for providing the
+          # required interface.
           'collective.js.jqueryui',
           'plone.autoform',
           'plone.tiles',

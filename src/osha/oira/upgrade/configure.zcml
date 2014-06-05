@@ -84,5 +84,17 @@
 
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+        source="*"
+        destination="9"
+        profile="osha.oira:default">
+
+    <genericsetup:upgradeStep
+        title="Increase path field in statistics table"
+        description="Paths might be longer than 128 characters"
+        handler=".upgrade.increase_statistics_surveys_path_column"/>
+
+  </genericsetup:upgradeSteps>
+
 </configure>
 

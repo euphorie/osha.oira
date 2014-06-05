@@ -4,8 +4,7 @@ Changelog
 2.2.15 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Handle the results of the 2 additional company survey questions #9281
 
 2.2.14 (2014-05-23)
 -------------------

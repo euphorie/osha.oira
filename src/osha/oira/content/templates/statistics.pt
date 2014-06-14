@@ -19,6 +19,14 @@
 <metal:title fill-slot="title"><tal:title><span i18n:translate="" tal:content="view/label" tal:omit-tag=""></span> -
     <span i18n:translate="" tal:content="view/label_detail" tal:omit-tag=""></span></tal:title></metal:title>
 <metal:content fill-slot="content">
+    <div class="introduction">
+        <p>
+            Note: All reports are only 100% accurate for the month they were generated in. Any data about the past is to be treated as an indication only. In particular, numbers for a given month may decrease in subsequent reports. This includes the "Accumulated" sections in all reports as well as any report for which a reporting period more than one month in the past is selected.
+        </p>
+        <p>
+            The reason for this is that assessments are not fully tracked over time due to data protection. Older data may be overwritten when assessments are repeatedly modified, meaning that assessments will no longer be counted for past months if they have been modified during the current month.
+        </p>
+    </div>
     <form class="concise statisticsParametersForm" action="${request/getURL}" enctype="${view/enctype}" method="${view/method}" id="${view/id}">
         <tal:loop_widgets repeat="widget view/widgets/values">
             <fieldset tal:attributes="id string:fieldset-${widget/id}">

@@ -126,3 +126,14 @@ def increase_statistics_surveys_path_column(context):
         datamanager.mark_changed(session)
         transaction.get().commit()
     log.info("Increased the size of column zodb_path in table statistics_surveys.")
+
+
+def increase_sessions_path_column(context):
+    session = Session()
+    if TableExists(session, "session"):
+        session.execute(
+            "ALTER TABLE session ALTER COLUMN zodb_path TYPE varchar(512)")
+        model.metadata.create_all(session.bind, checkfirst=True)
+        datamanager.mark_changed(session)
+        transaction.get().commit()
+    log.info("Increased the size of column zodb_path in table session.")

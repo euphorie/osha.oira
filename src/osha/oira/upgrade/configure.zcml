@@ -94,6 +94,10 @@
         description="Paths might be longer than 128 characters"
         handler=".upgrade.increase_statistics_surveys_path_column"/>
 
+    <genericsetup:upgradeStep
+        title="Increase path field in sessions table"
+        description="Paths might be longer than 128 characters"
+        handler=".upgrade.increase_sessions_path_column"/>
   </genericsetup:upgradeSteps>
 
 </configure>

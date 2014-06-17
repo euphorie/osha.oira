@@ -83,7 +83,7 @@
 
     <fieldset class="dependsOn-source-equals-scratch comprehensive radioList" tal:define="widget view/widgets/evaluation_algorithm">
     <legend>${widget/label} <sup tal:condition="widget/required" class="required">*</sup></legend> 
-        <dfn class="infoPanel" title="Information" i18n:translate="help_survey_evaluation_algorithm_standard">
+        <dfn class="infoPanel" title="Information" i18n:translate="help_survey_evaluation_algorithm_standard" i18n:attributes="title">
         This method involves risk assessment by Severity x Exposure x Probability, whereas these have to be understood as follows; Severity of injury linked to hazard - Exposure (Frequency) to the hazard - Probability of the hazard occuring when exposed
         </dfn>
         <label><input type="radio" name="${widget/name}:list" value="kinney"
@@ -91,7 +91,7 @@
         i18n:translate="algorithm_kinney">Standard three criteria</tal:i18n><br/>
         <span class="discrete" i18n:translate="">This is the recommended evaluation algorithm, based on the Kinney method</span></label>
         <div class="secondInfoPanel">
-        <dfn class="infoPanel" title="Information" i18n:translate="help_survey_evaluation_algorithm_simplified">
+        <dfn class="infoPanel" title="Information" i18n:translate="help_survey_evaluation_algorithm_simplified" i18n:attributes="title">
         This method involves risk assessment by Severity x Exposure, whereas these have to be understood as follows; Severity of injury linked to hazard - Exposure (Frequency) to the hazard
         </dfn>
         </div> 

@@ -24,7 +24,7 @@ msgstr "HTML Source Code"
 
 #: src/osha/oira/homepage.py:90
 msgid "Clear unsaved changes"
-msgstr ""
+msgstr "Azzera"
 
 #. Default: Describe your general approach to eliminate or (if the risk is not
 #. avoidable) reduce the risk.
@@ -289,9 +289,9 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:77
 msgid "help_module_question"
 msgstr ""
-"La domanda da porre all'utente finale è se questo modulo è facoltativo. "
-"Dovrà essere formulato in modo che la risposta sia SÌ (l'utente finale dovrà "
-"barrare una casella) o NO."
+"La domanda da porre all’utente finale è prevista solo quando è selezionata "
+"l’opzione “questo modulo è facoltativo”. Dovrà essere formulata in modo che "
+"la risposta sia “si” o “no”."
 
 #. Default: This information will appear in the Action plan step and should
 #. include an overview of general solution(s) related to this module.
@@ -831,14 +831,14 @@ msgstr "Approccio generale (per eliminare e ridurre i rischi)"
 #: src/osha/oira/client/templates/risk_actionplan.pt:98
 #: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
-msgstr "Azione(i) specifica(che) richiede(ono) di implementare l'approccio"
+msgstr "Azione(i) specifica(che) per implementare la misura"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/report.py:440
 #: src/osha/oira/client/templates/risk_actionplan.pt:107
 #: src/osha/oira/content/templates/solution_view.pt:29
 msgid "label_measure_requirements"
-msgstr "Livello di competenza e/o requisiti necessari"
+msgstr "Livello di esperienza o requisiti necessari"
 
 #. Default: Who is responsible?
 #: src/osha/oira/client/report.py:442
@@ -2394,7 +2394,7 @@ msgstr "Cos’è OiRA"
 #: src/osha/oira/client/templates/webhelpers.pt:123
 #: src/osha/oira/tiles/templates/footer.pt:23
 msgid "appendix_privacy"
-msgstr "Linea di condotta"
+msgstr "Termini e condizioni"
 
 #. Default: Disclaimer
 #: src/osha/oira/client/templates/webhelpers.pt:125
@@ -2456,7 +2456,7 @@ msgstr "Diversi elementi di domanda"
 #: src/osha/oira/content/profilequestion.py:30
 #: src/osha/oira/content/templates/profilequestion_view.pt:30
 msgid "Single occurance prompt"
-msgstr "occorrenza singola pronta"
+msgstr "Singola localizzazione"
 
 #: src/osha/oira/content/profilequestion.py:31
 msgid "This must ask to user for the name of the relevant location."
@@ -2466,7 +2466,7 @@ msgstr ""
 #: src/osha/oira/content/profilequestion.py:38
 #: src/osha/oira/content/templates/profilequestion_view.pt:34
 msgid "Multiple occurance prompt"
-msgstr "Fenomeni multipli pronti"
+msgstr "Localizzazioni multiple"
 
 #: src/osha/oira/content/profilequestion.py:39
 msgid "This must ask to user for the names of all relevant locations."
@@ -2740,7 +2740,7 @@ msgid ""
 "The basic architecture of an Online interactive Risk Assessment consists of:"
 msgstr ""
 "L'architettura di base di una valutazione interattiva online dei rischi "
-"consiste di:"
+"consiste in:"
 
 #. Default: Profile questions
 #: src/osha/oira/content/templates/profilequestion_add.pt:37
@@ -2763,13 +2763,14 @@ msgstr "Moduli"
 #: src/osha/oira/content/templates/profilequestion_add.pt:38
 msgid "bullet_modules"
 msgstr ""
-"${Modules} (e possibili sotto-moduli): contenitori che offrono una struttura "
-"logistica"
+"${Modules} (e possibili sotto-moduli): contenitori che definiscono i pericoli"
+" attraverso una struttura logica"
 
 #. Default: ${Risks}: positive statements, which are contained in modules.
 #: src/osha/oira/content/templates/profilequestion_add.pt:39
 msgid "bullet_risks"
-msgstr "${Risks}: affermazioni positive contenuti nei moduli."
+msgstr "${Risks}: affermazioni positive riguardanti i pericoli indicati nei "
+"moduli."
 
 #: src/osha/oira/content/templates/profilequestion_add.pt:41
 msgid ""
@@ -2780,8 +2781,8 @@ msgid ""
 msgstr ""
 "Le domande sul profilo vengono utilizzate per determinare quale modulo "
 "applicare all'utente finale (per es. i moduli all'interno delle domande sul "
-"profilo sono FACOLTATIVE), e se applicate, se di dovranno ripetere alcune "
-"volte (per es. i moduli sono RIPETIBILI9."
+"profilo possono essere FACOLTATIVI), e se applicate, si dovranno ripetere "
+"(per es. i moduli sono RIPETIBILI)."
 
 #: src/osha/oira/content/templates/profilequestion_add.pt:42
 msgid ""
@@ -2794,7 +2795,7 @@ msgid ""
 msgstr ""
 "Queste domande dovranno essere poste PRIMA che l'utente finale avvii il "
 "procedimento di identificazione e di valutazione dei rischi. Se l'utente "
-"finale non conferma che un profilo facoltativo sia necessario (barrando la "
+"finale non conferma che un profilo facoltativo è necessario (barrando la "
 "casella), il modulo corrispondente sarà interamente ignorato. Se l'utente "
 "finale indica più di un'opzione ad un profilo facoltativo per domande "
 "ripetibili, allora il modulo corrispondente verrà ripetuto per il numero di "
@@ -2802,7 +2803,7 @@ msgstr ""
 
 #: src/osha/oira/content/templates/profilequestion_add.pt:43
 msgid "Please refer to the examples below the form."
-msgstr "Riferirsi agli esempi in basso al modulo."
+msgstr "Riferirsi agli esempi in basso al modulo….."
 
 #: src/osha/oira/content/templates/profilequestion_add.pt:62
 msgid "Client example for a single occurance."
@@ -2920,16 +2921,16 @@ msgstr "Creare un nuovo strumento OiRA partendo da zero"
 #: src/osha/oira/content/templates/surveygroup_add.pt:24
 msgid "survey_source_local"
 msgstr ""
-"Fondare il mio nuovo strumento OiRA ad uno strumento OiRA esistente della "
-"mia organizzazione"
+"Costruire un nuovo strumento OiRA, partendo da uno strumento OiRA già "
+"costruito dalle istituzioni organizzative del mio paese."
 
 #. Default: Base my new OiRA Tool on an existing OiRA Tool of another
 #. organisation
 #: src/osha/oira/content/templates/surveygroup_add.pt:25
 msgid "survey_source_other"
 msgstr ""
-"Fondare il nuovo strumento OiRA ad uno strumento OiRA esistente di un'altra "
-"organizzazione"
+"Costruire il nuovo strumento OiRA, partendo da uno strumento OiRA già "
+"costruito da istituzioni organizzative di un altro paese."
 
 #. Default: Choose an OiRA Tool
 #: src/osha/oira/content/templates/surveygroup_add.pt:32
@@ -2955,10 +2956,10 @@ msgstr "Scegliere il Paese"
 #: src/osha/oira/content/templates/surveygroup_add.pt:86
 msgid "help_survey_evaluation_algorithm_standard"
 msgstr ""
-"Questo metodo comporta la valutazione dei rischi da Gravità x Esposizione x "
-"Probabilità che dovranno essere intesi come segue: Gravità del danno legato "
-"al pericolo - Esposizione (Frequenza) del pericolo - Probabilità del "
-"pericolo quando esposti."
+"Questo metodo comporta la valutazione dei rischi da Gravità X Esposizione X "
+"Probabilità, che dovranno essere intesi come segue: Gravità del danno legato "
+"al pericolo – Probabilità di accadimento del danno dovuta all’esposizione al "
+"pericolo."
 
 #. Default: Standard three criteria
 #: src/osha/oira/content/templates/surveygroup_add.pt:90
@@ -3106,6 +3107,10 @@ msgstr "Versione dello strumento OiRA"
 #: src/osha/oira/profiles/default/types/euphorie.survey.xml:8
 msgid "A version of an OiRA Tool."
 msgstr "Una versione di uno strumento OiRA."
+
+#: src/euphorie/content/profiles/default/types/euphorie.module.xml:8
+msgid "A module is a grouping of risks"
+msgstr "Un modulo è un gruppo di rischi"
 
 #: src/osha/oira/profiles/default/types/oira.homepage.xml:7
 msgid "Home page"

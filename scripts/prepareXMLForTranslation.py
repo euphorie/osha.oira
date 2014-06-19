@@ -1,4 +1,4 @@
-#!/opt/python/python-2.6/bin/python2.6
+#!/usr/bin/env python
 
 # Author: Wolfgang Thomas <thomas@syslab.com>
 
@@ -15,6 +15,8 @@ raw_text.txt The filename for the text-only file
 import sys
 import os
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
+
+from word_wrap import wrap_str
 
 PLACEHOLDER = 'XXXXX'
 
@@ -44,10 +46,10 @@ images = soup.findAll('image')
 print "We have %d images" % len(images)
 [img.extract() for img in images]
 
-# Special requirement: Also strip all legal references
-legalrefs = soup.findAll('legal-reference')
-print "We have %d legal references" % len(legalrefs)
-[legalref.extract() for legalref in legalrefs]
+#### # Special requirement: Also strip all legal references
+#### legalrefs = soup.findAll('legal-reference')
+#### print "We have %d legal references" % len(legalrefs)
+#### [legalref.extract() for legalref in legalrefs]
 
 fh = open(output, 'w')
 fh.write(soup.prettify())
@@ -58,8 +60,10 @@ fh.close()
 # will be glued to the first word of the next tag -> bad for word counting.
 # Therefore we add a placeholder at the end of every tag's text, to be replaced
 # by a space after extraction
-tags = ('title', 'solution-direction', 'description', 'problem-description',
-    'action-plan')
+tags = (
+    'title', 'solution-direction', 'description', 'problem-description',
+    'action-plan'
+)
 for tag in tags:
     entities = soup.findAll(tag)
     [entity.setString('%s %s ' % (entity.text, PLACEHOLDER))
@@ -77,21 +81,30 @@ for tag in functional_tags:
 # We need to convert them to real tags to be able to strip them too for
 # word counting
 text = soup.text.encode('utf-8')
-stonesoup = BeautifulStoneSoup(text,
-    convertEntities=BeautifulStoneSoup.XML_ENTITIES)
+stonesoup = BeautifulStoneSoup(
+    text, convertEntities=BeautifulStoneSoup.XML_ENTITIES)
+
 txt = stonesoup.prettify()
 newsoup = BeautifulSoup("<html>%s</html>" % txt)
-text = newsoup.text.encode('utf-8')
 
 # Repeat the game of stuffing text inside entities for the newly generated tags
-tags = ('p', 'td')
-for tag in tags:
+html_tags = (
+    'a', 'p', 'strong', 'em', 'li', 'td',
+)
+for tag in html_tags:
     entities = newsoup.findAll(tag)
     [entity.setString('%s %s ' % (entity.text, PLACEHOLDER))
         for entity in entities]
 
+text = newsoup.text.replace("xml version='1.0' encoding='%SOUP-ENCODING%'", '')
+text = text.encode('utf-8')
+text = text.replace(' " ', ' ')
+
 # make a space character out of the placeholder
 text = text.replace(PLACEHOLDER, ' ')
+
+
+text = "\n".join(wrap_str(text, 80))
 
 fh = open(txtfile, 'w')
 fh.write(text)

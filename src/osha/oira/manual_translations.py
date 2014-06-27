@@ -7,10 +7,7 @@ _("help_measure_action_plan", default=u"Describe your general approach to "
 _("help_measure_prevention_plan", default=u"Describe the specific action(s) "
     u"required to implement this approach (to eliminate or to reduce the "
     u"risk).")
-_("help_measure_requirements", default=u'Describe: 1) what is your general '
-    u"approach to eliminate or (if the risk is not avoidable) reduce the "
-    u"risk; 2) the specific action(s) required to implement this approach "
-    u"(to eliminate or to reduce the risk); 3) the level of expertise needed "
+_("help_measure_requirements", default=u'Describe the level of expertise needed '
     u'to implement the measure, for instance "common sense (no OSH knowledge '
     u'required)", "no specific OSH expertise, but minimum OSH knowledge or '
     u'training and/or consultation of OSH guidance required", or "OSH '

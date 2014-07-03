@@ -5,6 +5,7 @@ Changelog
 -------------------
 
 - Handle the results of the 2 additional company survey questions #9281
+- Italian corrections #10039 #10370
 
 2.2.14 (2014-05-23)
 -------------------

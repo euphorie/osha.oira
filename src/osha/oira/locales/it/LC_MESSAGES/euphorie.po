@@ -995,28 +995,29 @@ msgstr "In questa fase poniti le seguenti domande:"
 #. Default: considering whether the task or job is necessary
 #: src/osha/oira/client/templates/actionplan.pt:32
 msgid "expl_actionplan_4"
-msgstr "Considerare in quanto il compito o il lavoro sia necessario"
+msgstr "Può essere eliminato?"
 
 #. Default: removing the hazard
 #: src/osha/oira/client/templates/actionplan.pt:33
 msgid "expl_actionplan_5"
-msgstr "eliminare il pericolo"
+msgstr "Può essere ridotto a livelli accettabili?"
 
 #. Default: Is a risk avoidable? Can it be removed entirely? For example, this
 #. could be achieved by: ${expl_actionplan_4_and_5}
 #: src/osha/oira/client/templates/actionplan.pt:29
 msgid "expl_actionplan_3"
 msgstr ""
-"Il rischio è evitabile? Può essere rimosso completamente? Ad esempio, "
-"potrebbe essere realizzato da: ${expl_actionplan_4_and_5}"
+"Il rischio è evitabile? Alternativamente: ${expl_actionplan_4_and_5}"
 
 #. Default: If certain risks are not avoidable, how can they be reduced to a
 #. level at which the health and safety of those exposed is not compromised?
 #: src/osha/oira/client/templates/actionplan.pt:37
 msgid "expl_actionplan_6"
 msgstr ""
-"Se i rischi non sono evitabili, come possono essere ridotti ad un livello da "
-"non compromettere la salute e la sicurezza di coloro che ne sono esposti?"
+"Tieni conto del fatto che per eliminare/ridurre il rischio puoi ad esempio: "
+"<ul><li>eliminare la fonte di pericolo</li><li>ridurre o il numero di "
+"lavoratori esposti al rischio</li><li>sostituire ciò che è pericoloso con "
+"ciò che non lo è </li></ul>"
 
 #. Default: Once you have decided how to eliminate or reduce a particular risk,
 #. then you describe the specific action(s) required to achieve this. You
@@ -1024,11 +1025,8 @@ msgstr ""
 #. requirements needed for those actions to be effective.
 #: src/osha/oira/client/templates/actionplan.pt:42
 msgid "expl_actionplan_7"
-msgstr ""
-"Una volta deciso come eliminare o ridurre un rischio particolare, si "
-"dovrebbe descrivere l'azione necessaria per raggiungere l'obiettivo. È "
-"altrettanto possibile includere le informazioni sul livello di competenza e/"
-"o gli altri requisiti necessari in modo che tali azioni siano efficaci."
+msgstr " "
+
 
 #. Default: No risks were identified. Please proceed directly to the report.
 #: src/osha/oira/client/templates/actionplan.pt:47

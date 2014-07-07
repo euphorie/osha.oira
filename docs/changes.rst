@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.15 (unreleased)
+2.2.15 (2014-07-07)
 -------------------
 
 - Add "Library" feature #7321 #9445

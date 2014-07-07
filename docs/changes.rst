@@ -4,8 +4,7 @@ Changelog
 2.2.16 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Translation corections in PT #10379
 
 2.2.15 (2014-07-07)
 -------------------

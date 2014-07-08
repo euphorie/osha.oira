@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.16 (unreleased)
+2.2.16 (2014-07-08)
 -------------------
 
 - Translation corections in PT #10379

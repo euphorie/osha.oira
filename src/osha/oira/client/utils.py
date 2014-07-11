@@ -11,7 +11,7 @@ from mobile.sniffer.utilities import get_user_agent
 from osha.oira.client import model as oiramodel
 from sqlalchemy import sql
 from z3c.saconfig import Session
-from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
 import htmllib
 
 grok.templatedir('templates')

@@ -5,7 +5,7 @@ from euphorie.content.survey import ISurvey
 from euphorie.deployment.upgrade.utils import TableExists
 from plone.dexterity import utils
 from z3c.saconfig import Session
-from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
 from zope.sqlalchemy import datamanager
 from Products.CMFCore.utils import getToolByName
 import datetime

@@ -3,7 +3,6 @@ from zope.site.hooks import getSite
 from Acquisition import aq_parent
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
-from plone.app.kss.plonekssview import PloneKSSView
 from plonetheme.nuplone.skin import actions
 from plonetheme.nuplone.utils import getPortal
 from euphorie.content import MessageFactory as _
@@ -28,7 +27,7 @@ class View(surveygroup.View):
 View.render = None
 
 
-class AddForm(surveygroup.AddForm, PloneKSSView):
+class AddForm(surveygroup.AddForm):
     """ """
     grok.context(surveygroup.ISurveyGroup)
     grok.name("euphorie.surveygroup")

@@ -11,11 +11,18 @@
   <body>
     <metal:title metal:fill-slot="title" i18n:translate="title_login">Login</metal:title>
     <metal:content fill-slot="content">
-      <p tal:condition="not:view/anonymous" class="notice message" i18n:translate="message_already_logged_in">
-        You are already logged in. Please logout first before trying to login again. 
-        </p><p tal:condition="view/failed" class="notice message" i18n:translate="message_invalid_login">Invalid login. If you
-        forgot your password you can <a href="${context/absolute_url}/@@request-password-reset"
-          i18n:name="reset_password" i18n:translate="reset_password">request a password reset</a>.</p>
+        <p tal:condition="not:view/anonymous" class="notice message" i18n:translate="message_already_logged_in">
+            You are already logged in. Please logout first before trying to login again. 
+        </p>
+        <tal:if condition="view/failed">
+            <div class="notice message">
+                <p i18n:translate="message_invalid_login">
+                    Invalid login.
+                    If you forgot your password you can <a href="${context/absolute_url}/@@request-password-reset" i18n:name="reset_password" i18n:translate="reset_password">request a password reset</a>.
+                </p>
+                <strong i18n:translate="account_lock_warning">Please be aware that your account will be locked after 3 invalid attempts.</strong>
+            </div>
+        </tal:if>
 
       <form tal:condition="view/anonymous" class="concise" action="${view/action}" method="post" id="loginForm">
         <fieldset>

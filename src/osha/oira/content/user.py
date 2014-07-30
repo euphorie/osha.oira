@@ -1,22 +1,22 @@
+from .. import _
 from Products.Archetypes.utils import IStatusMessage
 from Products.MailHost.MailHost import MailHostError
-from euphorie.content.countrymanager import ICountryManager
-from zope import component
+from euphorie.content.user import IUser
 from five import grok
 from plone import api
 from plonetheme.nuplone.utils import createEmailTo
+from zope import component
 from zope.i18n import translate
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
 import logging
 import socket
-from .. import _
 
 log = logging.getLogger(__name__)
 grok.templatedir("templates")
 
 
 class AccountCreatedNotification(grok.View):
-    grok.context(ICountryManager)
+    grok.context(IUser)
     grok.name("account_created_notification")
     grok.template("mail_activate_account")
 
@@ -30,16 +30,15 @@ class AccountCreatedNotification(grok.View):
             reset["randomstring"]
         )
 
+@grok.subscribe(IUser, IObjectAddedEvent)
+def OnUserCreation(user, event):
+    EmailActivationLink(user, event)
 
-@grok.subscribe(ICountryManager, IObjectAddedEvent)
-def OnCountryManagerCreation(manager, event):
-    EmailActivationLink(manager, event)
 
-
-def NotifyError(manager, e):
+def NotifyError(user, e):
     log.error("MailHost error sending account activation link to: %s",
-            manager.contact_email, e)
-    flash = IStatusMessage(manager.REQUEST).addStatusMessage
+            user.contact_email, e)
+    flash = IStatusMessage(user.REQUEST).addStatusMessage
     flash(_(u"error_activationmail",
             u'Could not send an account activation email to "%s".'
             u'Please contact the site administrator.'
@@ -47,13 +46,13 @@ def NotifyError(manager, e):
     return
 
 
-def EmailActivationLink(manager, event):
+def EmailActivationLink(user, event):
     registration = api.portal.get_tool('portal_registration')
-    if not registration.isValidEmail(manager.contact_email):
+    if not registration.isValidEmail(user.contact_email):
         return
     portal = api.portal.get()
     mailview = component.getMultiAdapter(
-        (manager, manager.REQUEST),
+        (user, user.REQUEST),
         name="account_created_notification"
     )
     subject = _(u"password_reset_subject",
@@ -63,8 +62,8 @@ def EmailActivationLink(manager, event):
         portal.email_from_name,
         portal.email_from_address,
         None,
-        manager.contact_email,
-        translate(subject, context=manager.REQUEST),
+        user.contact_email,
+        translate(subject, context=user.REQUEST),
         mailview()
     )
     try:
@@ -73,8 +72,8 @@ def EmailActivationLink(manager, event):
         return NotifyError(e)
     except socket.error, e:
         return NotifyError(e[1])
-    IStatusMessage(manager.REQUEST).add(
+    IStatusMessage(user.REQUEST).add(
         _("info_activation_mail_sent",
         default = u"An account activation email has been sent to the user."),
         "success")
-    manager.REQUEST.response.redirect(portal.absolute_url())
+    user.REQUEST.response.redirect(portal.absolute_url())

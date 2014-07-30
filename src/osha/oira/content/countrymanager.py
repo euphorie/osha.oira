@@ -7,7 +7,6 @@ from plone import api
 from plonetheme.nuplone.utils import createEmailTo
 from zope.i18n import translate
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
-from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 import logging
 import socket
 from .. import _
@@ -33,12 +32,7 @@ class AccountCreatedNotification(grok.View):
 
 
 @grok.subscribe(ICountryManager, IObjectAddedEvent)
-def OnAdd(manager, event):
-    EmailActivationLink(manager, event)
-
-
-@grok.subscribe(ICountryManager, IObjectModifiedEvent)
-def OnModified(manager, event):
+def OnCountryManagerCreation(manager, event):
     EmailActivationLink(manager, event)
 
 

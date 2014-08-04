@@ -1,6 +1,5 @@
 from euphorie.content import MessageFactory as _
 from euphorie.content import sector
-from euphorie.content.countrymanager import ICountryManager
 from five import grok
 from osha.oira.interfaces import IOSHAContentSkinLayer
 from plone.app.dexterity.behaviors.metadata import DCFieldProperty
@@ -70,7 +69,6 @@ class SectorAdd(dexterity.AddForm):
     def update(self):
         super(SectorAdd, self).update()
         self.widgets['password'].mode = z3c.form.interfaces.HIDDEN_MODE
-        self.widgets['password'].required = False
 
     def create(self, data):
         content = super(SectorAdd, self).create(data)

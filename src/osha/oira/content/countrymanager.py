@@ -14,4 +14,3 @@ class AddForm(dexterity.AddForm):
     def update(self):
         super(AddForm, self).update()
         self.widgets['password'].mode = z3c.form.interfaces.HIDDEN_MODE
-        self.widgets['password'].required = False

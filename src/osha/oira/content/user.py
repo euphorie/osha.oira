@@ -1,12 +1,21 @@
 from .. import _
 from Products.Archetypes.utils import IStatusMessage
 from Products.MailHost.MailHost import MailHostError
+from euphorie.content import user
 from euphorie.content.user import IUser
+from euphorie.content.user import InvalidPasswordError
 from five import grok
+from osha.oira.content.statistics import IOSHAContentSkinLayer
+from p01.widget.password.interfaces import IPasswordConfirmationWidget
 from plone import api
 from plonetheme.nuplone.utils import createEmailTo
+from z3c.form.interfaces import IForm
+from z3c.form.interfaces import IValidator
+from z3c.form.interfaces import IAddForm
 from zope import component
+from zope import schema
 from zope.i18n import translate
+from zope.interface import Interface
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
 import logging
 import socket
@@ -29,6 +38,7 @@ class AccountCreatedNotification(grok.View):
             api.portal.get().absolute_url(),
             reset["randomstring"]
         )
+
 
 @grok.subscribe(IUser, IObjectAddedEvent)
 def OnUserCreation(user, event):
@@ -77,3 +87,17 @@ def EmailActivationLink(user, event):
         default = u"An account activation email has been sent to the user."),
         "success")
     user.REQUEST.response.redirect(portal.absolute_url())
+
+
+class PasswordValidator(user.PasswordValidator):
+    grok.implements(IValidator)
+    grok.adapts(
+            Interface, IOSHAContentSkinLayer,
+            IForm, schema.Password, IPasswordConfirmationWidget)
+
+    def validate(self, value):
+        if IAddForm.providedBy(self.view) and \
+                self.view.portal_type in \
+                    ['euphorie.countrymanager', 'euphorie.sector']:
+            return
+        return super(PasswordValidator, self).validate(value)

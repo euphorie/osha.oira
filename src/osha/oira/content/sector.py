@@ -1,22 +1,23 @@
-import logging
+from euphorie.content import MessageFactory as _
+from euphorie.content import sector
+from euphorie.content.countrymanager import ICountryManager
 from five import grok
+from osha.oira.interfaces import IOSHAContentSkinLayer
+from plone.app.dexterity.behaviors.metadata import DCFieldProperty
+from plone.app.dexterity.behaviors.metadata import MetadataBase
+from plone.autoform.interfaces import IFormFieldProvider
+from plone.directives import dexterity
+from plone.directives import form
+from z3c.appconfig.interfaces import IAppConfig
 from zope import schema
 from zope.component import getUtility
 from zope.interface import alsoProvides
-from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.vocabulary import SimpleTerm
-from z3c.appconfig.interfaces import IAppConfig
-from plone.app.dexterity.behaviors.metadata import DCFieldProperty
-from plone.app.dexterity.behaviors.metadata import MetadataBase
-from plone.directives import dexterity
-from plone.directives import form
-from plone.autoform.interfaces import IFormFieldProvider
-from euphorie.content import sector
-from euphorie.content import MessageFactory as _
-from ..interfaces import IOSHAContentSkinLayer
+from zope.schema.vocabulary import SimpleVocabulary
+import logging
+import z3c.form
 
 log = logging.getLogger('osha.oira/sector.py')
-
 grok.templatedir("templates")
 
 
@@ -65,6 +66,11 @@ class SectorAdd(dexterity.AddForm):
     grok.name('euphorie.sector')
     grok.require("cmf.ModifyPortalContent")
     grok.layer(IOSHAContentSkinLayer)
+
+    def update(self):
+        super(SectorAdd, self).update()
+        self.widgets['password'].mode = z3c.form.interfaces.HIDDEN_MODE
+        self.widgets['password'].required = False
 
     def create(self, data):
         content = super(SectorAdd, self).create(data)

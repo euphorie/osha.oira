@@ -44,6 +44,10 @@ class AccountCreatedNotification(grok.View):
 
 @grok.subscribe(IUser, IObjectAddedEvent)
 def OnUserCreation(user, event):
+    if not user.contact_email:
+        log.warn(u"Could not send activation email to user '%s','" \
+                 u"no email set." % user.id)
+        return
     EmailActivationLink(user, event)
 
 

@@ -1,13 +1,13 @@
 # coding=utf-8
-from z3c.form.interfaces import IFieldWidget
-from z3c.form.browser.select import SelectWidget
-import zope.component
-from zope.schema.vocabulary import SimpleVocabulary
-from zope.schema.vocabulary import SimpleTerm
-from zope.interface import alsoProvides
-from plonetheme.nuplone.z3cform.widget import SingleRadioWidget
-from osha.oira.tests.base import OiRATestCase
 from osha.oira import interfaces
+from osha.oira.tests.base import OiRATestCase
+from plonetheme.nuplone.z3cform.widget import SingleRadioWidget
+from z3c.form.browser.select import SelectWidget
+from z3c.form.interfaces import IFieldWidget
+from zope.interface import alsoProvides
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
+import zope.component
 
 class OiRARiskTests(OiRATestCase):
 
@@ -15,9 +15,9 @@ class OiRARiskTests(OiRATestCase):
         newid = container.invokeFactory(*args, **kwargs)
         return getattr(container, newid)
 
-    def createModule(self, algorithm='kinney'):
+    def createModule(self, algorithm='kinney', sector_name='sector'):
         country = self.portal.sectors.nl
-        sector = self._create(country, "euphorie.sector", "sector")
+        sector = self._create(country, "euphorie.sector", sector_name)
         surveygroup = self._create(
                                 sector, 
                                 "euphorie.surveygroup", 
@@ -26,17 +26,13 @@ class OiRARiskTests(OiRATestCase):
         survey = self._create(surveygroup, "euphorie.survey", "survey")
         return self._create(survey, "euphorie.module", "module")
 
-    def createRisk(self, algorithm='kinney'):
-        module = self.createModule(algorithm)
-        return self._create(module, "euphorie.risk", "risk")
-
     def testDynamicDescription(self):
         """ #3343: Customize infoBubble description according to calculation
             method.
         """
         self.loginAsPortalOwner()
         for risk_type in ['kinney', 'french']:
-            module = self.createModule(risk_type)
+            module = self.createModule(risk_type, "sector-"+risk_type)
             # Merely installing the OiRA skin doesn't set it's layer on the
             # request. This happens during IBeforeTraverseEvent, so we have to do 
             # here manually
@@ -58,7 +54,7 @@ class OiRARiskTests(OiRATestCase):
                     form.schema.get('evaluation_method').description, 
                     'help_evaluation_method_%s' % risk_type
                     )
-            self.portal.sectors.nl.manage_delObjects(['sector'])
+            self.portal.sectors.nl.manage_delObjects(['sector-'+risk_type])
 
 
     def testChoiceWidget(self):

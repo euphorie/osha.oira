@@ -28,9 +28,9 @@ class LibraryTests(OiRAFunctionalTestCase):
         survey = addSurvey(sector, BASIC_SURVEY)
         browser = self.adminBrowser()
         browser.handleErrors = False
-        with mock.patch('osha.oira.content.library.Library._get_library',
+        with mock.patch('osha.oira.content.library.get_library',
                 return_value=self.library):
             browser.open(survey.absolute_url() + '/@@library')
         assert 'Library Sector Title' in browser.contents
-        assert 'Library Survey TItle' in browser.contents
+        assert 'Library Survey Title' in browser.contents
         assert 'Library Risk' in browser.contents

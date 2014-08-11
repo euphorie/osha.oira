@@ -1,17 +1,11 @@
 # coding=utf-8
-
 from z3c.form.interfaces import IFieldWidget
 from z3c.form.browser.select import SelectWidget
 import zope.component
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.vocabulary import SimpleTerm
 from zope.interface import alsoProvides
-
 from plonetheme.nuplone.z3cform.widget import SingleRadioWidget
-
-from euphorie.client.tests.utils import addSurvey
-from euphorie.client.tests.utils import registerUserInClient
-
 from osha.oira.tests.base import OiRATestCase
 from osha.oira import interfaces
 

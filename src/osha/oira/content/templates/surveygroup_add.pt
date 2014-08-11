@@ -81,7 +81,7 @@
         </tal:sector>
       </tal:country>
 
-    <fieldset class="dependsOn-source-equals-scratch comprehensive radioList" tal:define="widget view/widgets/evaluation_algorithm">
+    <fieldset class="dependsOn-source-equals-scratch comprehensive radioList" tal:define="widget nocall:view/widgets/evaluation_algorithm">
     <legend>${widget/label} <sup tal:condition="widget/required" class="required">*</sup></legend> 
         <dfn class="infoPanel" title="Information" i18n:translate="help_survey_evaluation_algorithm_standard" i18n:attributes="title">
         This method involves risk assessment by Severity x Exposure x Probability, whereas these have to be understood as follows; Severity of injury linked to hazard - Exposure (Frequency) to the hazard - Probability of the hazard occuring when exposed

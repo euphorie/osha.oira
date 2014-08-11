@@ -13,10 +13,11 @@ all: ${TARGETS}
 clean:
 	-rm ${TARGETS}
 
-bin/buildout: bootstrap.py
+buildout: bootstrap.py
 	$(PYTHON) bootstrap.py
+	./bin/buildout -c devel.cfg
 
-bin/test bin/pybabel: bin/buildout devel.cfg setup.py
+bin/test bin/pybabel: buildout devel.cfg setup.py
 	bin/buildout
 	touch bin/test
 	touch bin/pybabel
@@ -40,6 +41,6 @@ $(EUPHORIE_PO_FILES): $(EUPHORIE_POT)
 .po.mo:
 	msgfmt -c --statistics -o $@~ $< && mv $@~ $@
 
-.PHONY: all clean check jenkins pot
+.PHONY: all clean check jenkins pot buildout
 .SUFFIXES:
 .SUFFIXES: .po .mo

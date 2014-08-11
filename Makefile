@@ -16,7 +16,7 @@ clean:
 bin/buildout: bootstrap.py
 	$(PYTHON) bootstrap.py
 
-bin/test bin/pybabel: bin/buildout buildout.cfg setup.py
+bin/test bin/pybabel: bin/buildout devel.cfg setup.py
 	bin/buildout
 	touch bin/test
 	touch bin/pybabel

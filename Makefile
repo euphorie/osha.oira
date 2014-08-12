@@ -18,7 +18,6 @@ buildout: bootstrap.py
 	./bin/buildout -c devel.cfg
 
 bin/test bin/pybabel: buildout devel.cfg setup.py
-	bin/buildout
 	touch bin/test
 	touch bin/pybabel
 

@@ -1,11 +1,10 @@
-<tal:vars define="manager nocall:view/context">
-Dear <tal:name replace="manager/Title"/>
+<tal:vars define="manager nocall:view/context">Dear <tal:name replace="manager/contact_name"/>,
 
-An account has been created for you on <a href="https://admin.oiraproject.eu">OiRA</a>.
+An account has been created for your sector "<tal:sector replace="manager/Title"/>" in the admin interface of the OiRA site.
 
 Your username is <tal:username replace="manager/login"/>.
 
-Please choose your password by clicking here: <a href="${view/reset_url}">${view/reset_url}</a>
+Please choose your password by clicking here: ${view/reset_url}
 
 Regards
 The OiRA team

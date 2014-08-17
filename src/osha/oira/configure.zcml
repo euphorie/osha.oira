@@ -36,6 +36,10 @@
 
     <appconfig file="config.ini" />
 
+    <subscriber for="zope.processlifetime.IProcessStarting"
+        handler=".dbconfig.dbconfig"
+    />
+
     <!-- XXX: Uncomment the line below when testing Euphorie, to avoid
          osha.oira's customizations
     -->

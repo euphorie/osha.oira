@@ -15,7 +15,8 @@ class PasswordReset(pwreminder.PasswordReset):
 
     orig_description = pwreminder.PasswordReset.description
     extra_description = _(
-        u"Your password must contain at least 5 characters, "
+        u"password_policy_conditions",
+        default=u"Your password must contain at least 5 characters, "
         u"including at least one capital letter, one number and "
         u"one special character (e.g. $, # or @).")
 
@@ -27,7 +28,6 @@ class PasswordReset(pwreminder.PasswordReset):
 
     @property
     def description(self):
-        # import pdb; pdb.set_trace( )
         description = u" ".join([
             translate(self.orig_description, target_language=self.language),
             translate(self.extra_description, target_language=self.language)])

@@ -1,10 +1,10 @@
 Changelog
 =========
 
-2.2.17 (unreleased)
--------------------
+2.3.0 (unreleased)
+------------------
 
-- Nothing changed yet.
+- Upgrade Plone to 4.3
 
 
 2.2.16 (2014-07-08)

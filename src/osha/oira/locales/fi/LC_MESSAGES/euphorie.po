@@ -119,12 +119,12 @@ msgstr "OiRA-työkalut"
 #. Default: OiRA Tool
 #: src/osha/oira/manual_translations.py:31 src/osha/oira/vocabularies.py:22
 msgid "Survey"
-msgstr "OiRA-työkalu"
+msgstr "OiRA Riskien arviointi"
 
 #. Default: Sessions
 #: src/osha/oira/manual_translations.py:32
 msgid "label_sessions"
-msgstr "Istunnot"
+msgstr "Riskien arvioinnin eteneminen"
 
 #. Default: OiRA Tool import
 #: src/osha/oira/manual_translations.py:33
@@ -358,12 +358,12 @@ msgstr "Yleisiä tietoja riskinarvioinnista"
 #. Default: Registration
 #: src/osha/oira/manual_translations.py:98
 msgid "label_help_authentication"
-msgstr "Rekisteröinti"
+msgstr "Rekisteröityminen"
 
 #. Default: Registration
 #: src/osha/oira/manual_translations.py:99
 msgid "help_header_authentication"
-msgstr "Rekisteröinti"
+msgstr "Rekisteröityminen"
 
 #. Default: This text should explain how to register and login.
 #: src/osha/oira/manual_translations.py:100
@@ -374,7 +374,7 @@ msgstr ""
 #. Default: Carrying out your risk assessment
 #: src/osha/oira/manual_translations.py:102
 msgid "help_header_sessions"
-msgstr "Istunnot"
+msgstr "Riskien arvioinnin eteneminen"
 
 #. Default: Carrying out your risk assessment
 #: src/osha/oira/manual_translations.py:103
@@ -787,7 +787,7 @@ msgstr "korkea"
 #: src/osha/oira/client/templates/report_actionplan.pt:243
 #: src/osha/oira/client/templates/risk_actionplan.pt:38
 msgid "risk_priority"
-msgstr "Tämän riskin prioriteetti on ${priority_value}."
+msgstr "Riskitaso on suuruudeltaan ${priority_value}."
 
 #. Default: Measure
 #: src/osha/oira/client/report.py:404 src/osha/oira/client/report.py:429
@@ -806,21 +806,23 @@ msgstr "Toimenpide ${index}"
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
 #: src/osha/oira/content/templates/solution_view.pt:22
 msgid "label_measure_action_plan"
-msgstr "Yleinen toimintatapa (riskin poistamiseksi tai pienentämiseksi)"
+msgstr "Yleinen toimenpide riskin poistamiseksi tai pienentämiseksi"
 
 #. Default: Specific action(s) required to implement this approach
 #: src/osha/oira/client/report.py:438
 #: src/osha/oira/client/templates/risk_actionplan.pt:98
 #: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
-msgstr "Tähän toimintatapaan kuuluvat erityiset toimenpiteet"
+msgstr ""
+"Muut tarvittavat toimenpiteet riskin poistamiseksi tai pienentämiseksi sekä "
+"yrityksessä"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/report.py:440
 #: src/osha/oira/client/templates/risk_actionplan.pt:107
 #: src/osha/oira/content/templates/solution_view.pt:29
 msgid "label_measure_requirements"
-msgstr "Asiantuntemuksen taso ja/tai tarvittavat vaatimukset"
+msgstr "Tarvittava asiantuntemus ja/tai ulkopuolisen tuen tarve"
 
 #. Default: Who is responsible?
 #: src/osha/oira/client/report.py:442
@@ -838,7 +840,7 @@ msgstr "Budjetti"
 #: src/osha/oira/client/report.py:445
 #: src/osha/oira/client/templates/risk_actionplan.pt:135
 msgid "label_action_plan_start"
-msgstr "Aikataulu: Toimenpiteiden aloituspäivämäärä"
+msgstr "Aikataulu: Toimenpiteiden suunnittelu"
 
 #. Default: Planning end
 #: src/osha/oira/client/report.py:446
@@ -1458,7 +1460,7 @@ msgstr "Alueet"
 #. Default: You can print the ${list-of-risks}.
 #: src/osha/oira/client/templates/identification.pt:21
 msgid "intro_identification"
-msgstr "${list-of-risks} on mahdollista tulostaa."
+msgstr "${list-of-risks}"
 
 #. Default: Start Risk Identification
 #: src/osha/oira/client/templates/identification.pt:26
@@ -1566,7 +1568,7 @@ msgstr "Tallenna ja jatka"
 #: src/osha/oira/client/templates/register.pt:17
 #: src/osha/oira/client/templates/register.pt:25
 msgid "header_register"
-msgstr "Rekisteröinti"
+msgstr "Rekisteröityminen"
 
 #. Default: Email address
 #: src/osha/oira/client/templates/register.pt:27
@@ -1704,8 +1706,9 @@ msgstr ""
 #: src/osha/oira/client/templates/webhelpers.pt:165
 msgid "top5_risk_not_present"
 msgstr ""
-"Tätä riskiä ei ole organisaatiossasi, mutta kun toimialan organisaatio pitää "
-"tätä ensisijaisena riskinä, se on sisällytettävä tähän raporttiin."
+"Vastauksesi perusteella asia näyttäisi olevan yrityksessäsi kunnossa. Koska "
+"toimialalla tiedetään yleisesti tähän liittyvän merkittäviä riskejä, niin "
+"siksi se tulee aina mukaan toimintasuunnitelmaan."
 
 #. Default: You are about to print the report... please complete the optional
 #. form and then proceed.
@@ -1968,14 +1971,13 @@ msgstr "Vakioratkaisut"
 #: src/osha/oira/client/templates/risk_actionplan.pt:88
 msgid "actionplan_measure_tooltip"
 msgstr ""
-"Kuvaa: 1) mikä on yleinen toimintatapasi riskin poistamiseen tai (jos riski "
-"ei ole vältettävissä) sen pienentämiseen 2) tämän toimintatavan (riskin "
-"poistaminen tai pienentäminen) vaatimat toimenpiteet 3) toimenpiteen vaatima "
-"asiantuntemuksen taso, esim. ”terve järki (tietoja työturvallisuudesta ei "
-"vaadita)”, ”ei erityistä työturvallisuusasiantuntemusta, mutta "
-"työturvallisuuden minimaalinen tuntemus tai koulutus ja/tai "
-"työturvallisuusopastus vaadittu”, tai ”työturvallisuusasiantuntija”. Voit "
-"kuvata tässä myös muita vaatimuksia (mikäli vaadittu)."
+"Kuvaa: Henkilöstöön, tiloihin, laitteisiin tms. kohdentuva yleinen toimenpide "
+"riskin poistamiseksi tai sen pienentämiseksi (jos riski ei ole poistettavissa)"
+", muut toimenpiteet riskin poistamiseksi tai pienentämiseksi (esim. yrityksen "
+"prosessien kehittäminen, hankinnat) sekä yrityksessä toimenpiteiden "
+"toteuttamiseksi tarvittava asiantuntemus ja/tai ulkopuolisen tuen tarve "
+"(esim. työsuojelulainsäädännön osaaminen, suojainten käytön ja huollon "
+"tuntemus, laitteen maahantuojan antama perehdytys, työterveyshuollon tuki)."
 
 #. Default: Appoint someone in your company to be responsible for the
 #. implementation of this measure. This person will have the authority to take
@@ -2276,13 +2278,15 @@ msgstr "Anna nimi riskien arvioinnille"
 #: src/osha/oira/client/templates/sessions.pt:59
 msgid "session_title_tooltip"
 msgstr ""
-"Kun olet aloittanut OiRA-työkaluistunnon, voit keskeyttää sen ennen loppua. "
-"Voit käynnistää sen myöhemmin valitsemalla OiRA-työkaluistunnon otsikon. "
-"Voit tallentaa useamman kuin yhden istunnon, jos olet antanut niille eri "
-"nimet. Pidä muistissa sähköpostiosoitteesi, salasanasi ja otsikko, jonka "
-"olet antanut OiRA-työkaluistunnolle. Voit kirjautua ulos napauttamalla "
-"uloskirjautumispainiketta. Kirjaudut myös ulos, kun laitat selaimesi kiinni. "
-"Turvallisuussyistä kannattaa kirjautua ulos."
+"Luo uusi riskin arviointipohja antamalla sille nimi (esim. yrityksen nimi ja "
+"päivämäärä). Jos yrityksellä on useampi toimipiste tms., voit luoda kullekin "
+"oman riskien arviointipohjan antamalla niille eri nimet. Voit keskeyttää "
+"aloittamasi arvioinnin missä vaiheessa vain. Keskeytettyä arviointia pääset "
+"jatkamaan klikkaamalla riskin arvioinnin nimeä. Kirjaudu ulos napauttamalla "
+"”Kirjaudu ulos” painiketta. Huomaa, että uloskirjautuminen tapahtuu myös "
+"sulkiessasi selaimen. On suositeltavaa, että käytön päätteeksi kirjaudut "
+"sovelluksesta aina ulos. Pidä tallessa  sähköpostiosoitteesi ja salasanasi "
+"uudelleenkirjautumista varten."
 
 #: src/osha/oira/client/templates/sessions.pt:112
 msgid ""
@@ -3242,7 +3246,7 @@ msgstr ""
 #. Default: The OiRA tool
 #: src/osha/oira/templates/default_introduction.pt:15
 msgid "header_oira_tool"
-msgstr "OiRA-työkalu"
+msgstr "OiRA Riskien arviointi"
 
 #. Default: This risk assessment tool is mainly intended for micro (less than
 #. 10 workers) and small (less than 50 workers) enterprises/organisations.

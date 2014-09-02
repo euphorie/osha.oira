@@ -4,8 +4,7 @@ Changelog
 2.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Translation changes in FI #10635
 
 2.3.0 (2014-08-29)
 ------------------

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.1 (unreleased)
+2.3.1 (2014-09-03)
 ------------------
 
 - Translation changes in FI #10635

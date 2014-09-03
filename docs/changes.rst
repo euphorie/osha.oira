@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - Translation changes in FI #10635
+- Patch the Plone 4.3 upgrade to skip unnecessary steps that take a long time
 
 2.3.0 (2014-08-29)
 ------------------

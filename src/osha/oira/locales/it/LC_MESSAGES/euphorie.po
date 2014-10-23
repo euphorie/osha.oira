@@ -38,7 +38,7 @@ msgstr ""
 #. (to eliminate or to reduce the risk).
 #: src/osha/oira/manual_translations.py:7
 msgid "help_measure_prevention_plan"
-msgstr "Descrivere la misura specifica adottata."
+msgstr "Descrivere la misura specifica."
 
 #. Default: Describe the level of expertise needed to implement the measure,
 #. for instance "common sense (no OSH knowledge required)", "no specific OSH
@@ -496,7 +496,8 @@ msgstr "Raccomandazioni generali finali."
 #: src/osha/oira/client/templates/identification.pt:19
 msgid "intro_print_identification_1"
 msgstr ""
-"È possibile stampare i contenuti dello strumento che forniscono "
+"È possibile stampare il testo completo delle informazioni contenute nello "
+"strumento OIRA che forniscono "
 "un’illustrazione dei possibili pericoli presenti in una realtà lavorativa "
 "analoga alla tua. Esaminando la tua attività e consultando i tuoi lavoratori "
 "e/o i loro rappresentanti, puoi verificare la presenza o meno di tali "
@@ -817,14 +818,14 @@ msgstr "Misura ${index}"
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
 #: src/osha/oira/content/templates/solution_view.pt:22
 msgid "label_measure_action_plan"
-msgstr "Approccio generale (per eliminare e ridurre i rischi)"
+msgstr "Tipologia di misura (per eliminare e ridurre i rischi)"
 
 #. Default: Specific action(s) required to implement this approach
 #: src/osha/oira/client/report.py:438
 #: src/osha/oira/client/templates/risk_actionplan.pt:98
 #: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
-msgstr "Misura specifica adottata"
+msgstr "Misura specifica"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/report.py:440
@@ -843,19 +844,19 @@ msgstr "Chi è il responsabile?"
 #: src/osha/oira/client/report.py:444
 #: src/osha/oira/client/templates/risk_actionplan.pt:124
 msgid "label_action_plan_budget"
-msgstr "Budget"
+msgstr "Budget (campo facoltativo)"
 
 #. Default: Planning start
 #: src/osha/oira/client/report.py:445
 #: src/osha/oira/client/templates/risk_actionplan.pt:135
 msgid "label_action_plan_start"
-msgstr "Termine pianificato"
+msgstr "Stima inizio attuazione (solo per misure di miglioramento)"
 
 #. Default: Planning end
 #: src/osha/oira/client/report.py:446
 #: src/osha/oira/client/templates/risk_actionplan.pt:171
 msgid "label_action_plan_end"
-msgstr "Termine pianificato"
+msgstr "Stima termine previsto per la attuazione (solo per misure di miglioramento)"
 
 #. Default: Consultation of workers
 #: src/osha/oira/client/report.py:497
@@ -902,14 +903,18 @@ msgstr "Contenuti"
 #: src/osha/oira/client/templates/report_actionplan.pt:39
 #: src/osha/oira/client/templates/report_actionplan.pt:72
 msgid "header_present_risks"
-msgstr "Rischi identificati, valutati e che hanno un piano d'azione"
+msgstr "1. Adempimenti/rischi identificati, valutati e gestiti con misure "
+"obbligatorie adottate piano di miglioramento"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
 #: src/osha/oira/client/report.py:604
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
-msgstr "Rischi identificati che NON hanno un piano d'azione"
+msgstr "2. Adempimenti/rischi identificati per i quali la sezione “misure "
+"obbligatorie adottate e piano di miglioramento” NON è ancora stata compilata "
+"(Attenzione identificare/valutare i rischi  e adottare le misure prima di "
+"stampare la versione definitiva del report )"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
@@ -918,8 +923,9 @@ msgstr "Rischi identificati che NON hanno un piano d'azione"
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
 msgstr ""
-"Rischi/problemi che sono stati \"temporaneamente sospesi\" e sono ancora da "
-"affrontare"
+"3. Adempimenti/rischi per i quali la sezione “identificazione” non è ancora "
+"stata compilata (Attenzione identificare/valutare i rischi  e adottare le "
+"misure prima di stampare la versione definitiva del report )"
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
@@ -928,8 +934,9 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
 msgstr ""
-"Pericoli/problemi che sono stati amministrati o non sono presenti nella "
-"nostra organizzazione"
+"4. Rischi che sono “non applicabili” e quelli ai quali si risponde “si” nella "
+"sezione “Identificazione” (Attenzione questi ultimi sono presenti anche nel "
+"punto 1)"
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/report.py:637
@@ -985,9 +992,10 @@ msgstr "OiRA - Online interactive Risk Assessment"
 #: src/osha/oira/client/templates/actionplan.pt:19
 msgid "expl_actionplan_1"
 msgstr ""
-"Dopo aver identificato i pericoli è necessario mettere in atto un piano di "
-"azione per gestire i rischi ad essi correlati. Per eliminare o ridurre tali "
-"rischi è necessario definire le misure preventive e protettive da adottare."
+"Dopo aver identificato i pericoli e aver valutato i rischi è necessario "
+"mettere in atto misure obbligatorie e programmare le misure di "
+"miglioramento."
+
 
 #. Default: Among the things to be considered for this step are:
 #: src/osha/oira/client/templates/actionplan.pt:24
@@ -1015,10 +1023,11 @@ msgstr "Il rischio è evitabile? Alternativamente: ${expl_actionplan_4_and_5}"
 #: src/osha/oira/client/templates/actionplan.pt:37
 msgid "expl_actionplan_6"
 msgstr ""
-"Tieni conto del fatto che per eliminare/ridurre il rischio puoi ad esempio: "
-"<ul><li>eliminare la fonte di pericolo</li><li>ridurre o il numero di "
-"lavoratori esposti al rischio</li><li>sostituire ciò che è pericoloso con "
-"ciò che non lo è </li></ul>"
+"Occorre tener conto che per eliminare e ridurre il rischio si può ad "
+"esempio :"
+"<ul><li>eliminare la fonte di pericolo;</li>"
+"<li>ridurre il numero dei lavoratori esposti al rischio;</li>"
+"<li>sostituire ciò che è pericoloso con ciò che non lo è.</li></ul>"
 
 #. Default: Once you have decided how to eliminate or reduce a particular risk,
 #. then you describe the specific action(s) required to achieve this. You
@@ -1037,7 +1046,8 @@ msgstr ""
 #. Default: Create action plan
 #: src/osha/oira/client/templates/actionplan.pt:53
 msgid "label_create_action_plan"
-msgstr "Crea un piano d'azione"
+msgstr "Indica le misure obbligatorie adottate e pianifica le eventuali "
+"misure di miglioramento"
 
 #. Default: Go to report
 #: src/osha/oira/client/templates/actionplan.pt:54
@@ -1189,7 +1199,7 @@ msgstr "Valutazione"
 #: src/osha/oira/client/templates/start.pt:59
 #: src/osha/oira/client/templates/update.pt:78
 msgid "label_action_plan"
-msgstr "Piano d'azione"
+msgstr "Misure/programma"
 
 #. Default: Action Plan
 #: src/osha/oira/client/templates/actionplan.pt:80
@@ -1447,7 +1457,8 @@ msgstr ""
 #. Default: Please proceed directly to the action plan step.
 #: src/osha/oira/client/templates/evaluation.pt:24
 msgid "help_evaluation_empty"
-msgstr "Avanzare direttamente con il procedimento del piano d'azione."
+msgstr "Procedere direttamente all’indicazione delle misure obbligatorie "
+"adottate e alla pianificazione delle eventuali misure di miglioramento."
 
 #. Default: Run evaluation
 #: src/osha/oira/client/templates/evaluation.pt:29
@@ -1618,11 +1629,17 @@ msgstr "Report"
 #: src/osha/oira/client/templates/report.pt:19
 msgid "report_intro"
 msgstr ""
-"Dopo aver identificato tutti i pericoli, valutato i rischi presenti nel tuo "
-"luogo di lavoro e aver predisposto il tuo piano di azione è possibile creare "
-"un report nel quale vengono raccolte tutte le informazioni fornite. Nel "
-"campo seguente puoi aggiungere ulteriori dettagli o commenti che desideri "
-"vengano inseriti nel Report."
+"<p>A seguito della identificazione dei pericoli, della valutazione dei rischi ""e, dopo aver adottato le misure obbligatorie e programmato le misure di "
+"miglioramento, si genera progressivamente il documento di valutazione dei "
+"rischi.</p>\n"
+"<p>ATTENZIONE: PRIMA DI STAMPARE LA VERSIONE FINALE DEL REPORT, CONTROLLARE "
+"DI AVER IDENTIFICATO E VALUTATO TUTTI I RISCHI PRESENTI; E’ NECESSARIO "
+"ALLEGARE IL DOCUMENTO CON LE FIGURE DELLA PREVENZIONE E TUTTI GLI ALTRI "
+"DOCUMENTI CITATI NEL TESTO, APPOSITAMENTI COMPILATI, LADDOVE NECESSARI.</p>\n"
+"<p>Il documento deve essere munito di “data certa” o attestata dalla "
+"sottoscrizione dello stesso, da parte del datore di lavoro nonché ai soli "
+"fini della prova della data, da parte di RSPP, RLS o RLST e del Medico "
+"Competente, ove nominato.</p>"
 
 #. Default: Please leave any extra comments that should be included in the
 #. report in this field.
@@ -1641,7 +1658,7 @@ msgstr "Download"
 #. Default: General approach (to eliminate or reduce the risk):
 #: src/osha/oira/client/templates/report_actionplan.pt:102
 msgid "report_measure_actionplan"
-msgstr "Approccio generale (per eliminare e ridurre i rischi):"
+msgstr "Tipologia di misura (per eliminare e ridurre i rischi):"
 
 #. Default: Specific action(s) required to implement this approach:
 #: src/osha/oira/client/templates/report_actionplan.pt:106
@@ -1714,10 +1731,9 @@ msgstr ""
 #: src/osha/oira/client/templates/webhelpers.pt:165
 msgid "top5_risk_not_present"
 msgstr ""
-"Questo rischio non è presente nella tua azienda, ma dal momento in cui è "
-"stato valutato come prioritario deve necessariamente prevedere un piano di "
-"azione con le relative misure di prevenzione e protezione e deve essere "
-"incluso nel report."
+"Nonostante il rischio sia gestito correttamente, è comunque necessario "
+"elencare le misure obbligatorie adottate e le eventuali misure di "
+"miglioramento."
 
 #. Default: You are about to print the report... please complete the optional
 #. form and then proceed.
@@ -1946,7 +1962,8 @@ msgstr "Aggiungere"
 #. Default: Select one or more of the known common measures provided.
 #: src/osha/oira/client/templates/risk_actionplan.pt:47
 msgid "label_select_measure"
-msgstr "Selezionare una o più misure comuni conosciute e fornite."
+msgstr "Selezionare TUTTE le misure obbligatorie adottate e le eventuali "
+"misure di miglioramento."
 
 #. Default: Delete
 #: src/osha/oira/client/templates/risk_actionplan.pt:66
@@ -1979,9 +1996,9 @@ msgstr "Misure standard"
 #: src/osha/oira/client/templates/risk_actionplan.pt:88
 msgid "actionplan_measure_tooltip"
 msgstr ""
-"Descrivere qual è l’approccio generale utilizzato per eliminare o ridurre il "
-"rischio; l’azione specifica che hai adottato; le competenze/requisiti "
-"necessari per l’attuazione della misura."
+"Descrivere qual è l’approccio generale utilizzato per eliminare o ridurre i "
+"rischi: le misure obbligatorie adottate, le eventuali misure di "
+"miglioramento, competenze/requisiti necessari per l’attuazione delle misure."
 
 #. Default: Appoint someone in your company to be responsible for the
 #. implementation of this measure. This person will have the authority to take
@@ -1990,8 +2007,8 @@ msgstr ""
 #: src/osha/oira/client/templates/risk_actionplan.pt:120
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
-"Indicare la persona che nella tua azienda è responsabile dell’attuazione "
-"della misura adottata/da adottare."
+"Indicare la persona che nella tua azienda deve provvedere all’ attuazione "
+"della misura obbligatoria adottata e dell’eventuale misura di miglioramento."
 
 #. Default: Although some measures do not cost any money, most do. The measures
 #. should therefore be budgeted for; include them in the annual budget round if
@@ -2050,8 +2067,9 @@ msgstr "Indicare un anno valido a partire dal 1900"
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
-"Inserire in questo campo qualsiasi commento e informazione aggiuntiva. "
-"Queste informazioni saranno utilizzate nel piano d’azione."
+"Inserire eventuali commenti e informazioni aggiuntive (ad esempio gli "
+"eventuali strumenti di supporto utilizzati per la valutazione). Le "
+"informazioni riportate in questo campo verranno visualizzate nel Report."
 
 #. Default: What is the chance of this risk occurring?
 #: src/osha/oira/client/templates/risk_evaluation.pt:28
@@ -3271,6 +3289,23 @@ msgstr ""
 #: src/osha/oira/tiles/templates/footer.pt:32
 msgid "cc-license"
 msgstr ""
+
+#. Default: Legal and policy references
+#: src/euphorie/client/templates/webhelpers.pt:136
+msgid "header_legal_references"
+msgstr "Riferimenti normativi"
+
+#. Default: Legal and policy references
+#: src/euphorie/content/risk.py:77
+#: src/euphorie/content/templates/risk_view.pt:72
+msgid "label_legal_reference"
+msgstr "Riferimenti normativi"
+
+#. Default: Go to action plan
+#: src/euphorie/client/templates/evaluation.pt:38
+msgid "label_jump_to_actionplan"
+msgstr "Andare alle misure obbligatorie adottate e al programma di "
+"miglioramento"
 
 #~ msgid "A module is a grouping of risks"
 #~ msgstr ""

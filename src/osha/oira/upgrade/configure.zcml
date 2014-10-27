@@ -100,5 +100,16 @@
         handler=".upgrade.increase_sessions_path_column"/>
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+        source="*"
+        destination="10"
+        profile="osha.oira:default">
+
+    <genericsetup:upgradeStep
+        title="Reset 'obsolete' flag on surveygroups"
+        description="In Oct 2013 this flag was added to Euphorie for TNO; though never used in OiRA, we apparently have some surveygroups marked as obsolete, preventing them from being shown."
+        handler=".upgrade.reset_surveygroup_obsolete"/>
+  </genericsetup:upgradeSteps>
+
 </configure>
 

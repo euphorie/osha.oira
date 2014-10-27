@@ -137,3 +137,23 @@ def increase_sessions_path_column(context):
         datamanager.mark_changed(session)
         transaction.get().commit()
     log.info("Increased the size of column zodb_path in table session.")
+
+
+def reset_surveygroup_obsolete(context):
+    """ """
+    log.info('Reset "obsolete" flag from surveygroups.')
+    site = getSite()
+    brains = site.portal_catalog(portal_type='euphorie.surveygroup')
+    for brain in brains:
+        try:
+            surveygroup = brain.getObject()
+        except:
+            log.warning("Stale catalog entry for brain {0}".format(
+                brain.getPath()))
+            continue
+        else:
+            if getattr(surveygroup, 'obsolete', False):
+                log.info("Survey {0} was obsolete".format(
+                    surveygroup.absolute_url()))
+                surveygroup.obsolete = False
+                surveygroup.reindexObject()

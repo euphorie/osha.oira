@@ -722,7 +722,7 @@ msgstr "Il titolo della sessione è stato modificato a ${name}"
 #: src/osha/oira/client/country.py:65
 #: src/osha/oira/client/templates/rename-session.pt:29
 msgid "Cancel"
-msgstr "Eliminare"
+msgstr "Annullare"
 
 #: src/osha/oira/client/profile.py:15
 msgid "Does this happen in multiple places?"
@@ -993,14 +993,14 @@ msgstr "OiRA - Online interactive Risk Assessment"
 msgid "expl_actionplan_1"
 msgstr ""
 "Dopo aver identificato i pericoli e aver valutato i rischi è necessario "
-"mettere in atto misure obbligatorie e programmare le misure di "
-"miglioramento."
+"mettere in atto misure obbligatorie e programmare le misure di miglioramento."
 
 
 #. Default: Among the things to be considered for this step are:
 #: src/osha/oira/client/templates/actionplan.pt:24
 msgid "expl_actionplan_2"
-msgstr "In questa fase poniti le seguenti domande:"
+msgstr ""
+"Occorre tener conto che per eliminare e ridurre il rischio si può ad esempio:"
 
 #. Default: considering whether the task or job is necessary
 #: src/osha/oira/client/templates/actionplan.pt:32
@@ -1010,24 +1010,21 @@ msgstr "Può essere eliminato?"
 #. Default: removing the hazard
 #: src/osha/oira/client/templates/actionplan.pt:33
 msgid "expl_actionplan_5"
-msgstr "Può essere ridotto a livelli accettabili?"
+msgstr ""
 
 #. Default: Is a risk avoidable? Can it be removed entirely? For example, this
 #. could be achieved by: ${expl_actionplan_4_and_5}
 #: src/osha/oira/client/templates/actionplan.pt:29
 msgid "expl_actionplan_3"
-msgstr "Il rischio è evitabile? Alternativamente: ${expl_actionplan_4_and_5}"
+msgstr "eliminare la fonte di pericolo"
 
 #. Default: If certain risks are not avoidable, how can they be reduced to a
 #. level at which the health and safety of those exposed is not compromised?
 #: src/osha/oira/client/templates/actionplan.pt:37
 msgid "expl_actionplan_6"
 msgstr ""
-"Occorre tener conto che per eliminare e ridurre il rischio si può ad "
-"esempio :"
-"<ul><li>eliminare la fonte di pericolo;</li>"
-"<li>ridurre il numero dei lavoratori esposti al rischio;</li>"
-"<li>sostituire ciò che è pericoloso con ciò che non lo è.</li></ul>"
+"ridurre il numero dei lavoratori esposti al rischio</li>"
+"<li>sostituire ciò che è pericoloso con ciò che non lo è"
 
 #. Default: Once you have decided how to eliminate or reduce a particular risk,
 #. then you describe the specific action(s) required to achieve this. You
@@ -2510,7 +2507,7 @@ msgstr "Salvare le modifiche"
 #: src/osha/oira/content/solution.py:42 src/osha/oira/content/solution.py:59
 #: src/osha/oira/content/templates/surveygroup_add.pt:110
 msgid "button_cancel"
-msgstr "Eliminare"
+msgstr "Annullare"
 
 #: src/osha/oira/content/risk.py:47
 #: src/osha/oira/content/templates/addbar.pt:19

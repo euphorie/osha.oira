@@ -4,7 +4,8 @@ Changelog
 2.3.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Translation changes #10722, #10730, #10829, #10802
+  [jcbrand, reinhardt, pysailor]
 
 
 2.3.2 (2014-09-05)

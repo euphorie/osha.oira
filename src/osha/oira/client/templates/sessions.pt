@@ -99,13 +99,7 @@
         <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_report">Report</tal:span>
       </li>
     </ol>
-
-    <ul id="navigation">
-      <metal:home use-macro="webhelpers/macros/homelink"/>
-      <li><a href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a></li>
-      <li><a href="${webhelpers/help_url}#sessions" i18n:translate="navigation_help">Help</a></li>
-      <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>
-    </ul>
+    <metal:css use-macro="webhelpers/macros/toplevel-navigation" tal:define="help_section string:session"/>
     <metal:appendix use-macro="webhelpers/macros/appendix"/>
     <metal:javascript use-macro="webhelpers/macros/javascript"/>
     <script type="text/javascript" meta:interpolation="false">

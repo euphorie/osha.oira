@@ -302,7 +302,7 @@
       <li tal:condition="python:isinstance(getattr(context, 'published', None), tuple)" i18n:translate="report_survey_revision">This report was based on the OiRA Tool '<tal:span i18n:name="title">${python:context.published[1]}</tal:span>' of revision date <tal:span i18n:name="date">${python:tools.formatDate(context.published[2])}</tal:span>.</li>
     </ul>
 
-    <metal:css use-macro="webhelpers/macros/toplevel-navigation" tal:define="help_section string:actionplan"/>
+    <metal:css use-macro="webhelpers/macros/toplevel-navigation" tal:define="site_section string:actionplan"/>
     <metal:css use-macro="webhelpers/macros/appendix"/>
     <tal:block condition="not:view/download">
       <metal:css use-macro="webhelpers/macros/javascript"/>

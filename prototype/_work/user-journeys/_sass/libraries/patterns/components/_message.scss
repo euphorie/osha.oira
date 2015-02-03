@@ -1,0 +1,15 @@
+.pat-message {
+    color: inherit;
+    background-color: $colour-base-light;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 2em;
+
+    &.success {
+        background-color: $colour-success;
+    }
+    &.notice {
+        background-color: $colour-notice;
+        color: white;
+    }
+}

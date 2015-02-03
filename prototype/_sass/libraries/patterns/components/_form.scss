@@ -1,0 +1,183 @@
+@import "../components/checklist";
+@import "../components/select";
+
+input,
+textarea,
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-family: $body-font-family;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0.2em 0.5em;
+  margin: -0.2em 0;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: none;
+  color: inherit;
+  font-size: 100%;
+  border-radius: 0;
+
+  &:disabled {
+    border: transparent;
+    opacity: 1;
+    padding: 0;
+    background-color: transparent;
+  }
+}
+
+fieldset {
+  border-style: none;
+  margin: 0 0 1em;
+  min-width: inherit;
+ 
+    &.horizontal {
+      @media only screen and (min-width: 768px) { 
+    width: 100%;
+    .legend {
+      width: auto;
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+      letter-spacing: 0;
+      text-transform: none;
+      float: left;
+    }
+    > label {
+      position: relative;
+      display: block;
+      padding-right: 65%;
+      width: 35%;
+      left: 0;
+
+      &:after {
+        content: " ";
+        height: 0;
+        display: block;
+        clear: both;
+      }
+      > {
+        *, select {
+          position: relative;
+          vertical-align: top;
+          max-width: 170%;
+          left: 100%;
+          margin-right: -200%;
+          margin-left: 0;
+          float: left;
+        }
+      }
+      &.checkbox:before, &[data-option]:after {
+        position: relative;
+        vertical-align: top;
+        max-width: 170%;
+        left: 100%;
+        margin-right: -200%;
+        margin-left: 0;
+        float: left;
+      }
+    }
+
+    label {
+      .iconified {
+        float: none;
+        position: static;
+        line-height: 10px;
+        margin-top: 0;
+        vertical-align: baseline;
+        filter: none;
+      }
+      sup.required {
+        float: none;
+        position: static;
+        margin-top: 0;
+        vertical-align: baseline;
+        filter: none;
+        margin: 0;
+      }
+      textarea {
+        width: 170%;
+      }
+    }
+
+    fieldset,
+    div.group {
+      &.group {
+        width: 65%;
+        clear: left;
+        border-style: none;
+        margin: 0 0 1em;
+        padding-left: 35%;
+        position: relative;
+        padding-bottom: 0;
+        padding-top: 0;
+        legend {
+          position: absolute;
+          left: 0;
+          font-weight: normal;
+          font-style: normal;
+          top: 0;
+        }
+        .legend {
+          width: 48%;
+          display: inline;
+          text-align: left;
+          padding: 0;
+          position: relative;
+          display: block;
+          font-weight: normal;
+          font-style: normal;
+          margin: 0 0 0 -54%;
+          text-transform: none;
+          letter-spacing: 0;
+        }
+        label {
+          font-weight: normal;
+          font-style: normal;
+          position: relative;
+          border-style: none;
+          width: auto;
+        }
+      }
+    }
+  }
+}
+
+@mixin form-vertical () {
+  label {
+    position: relative;
+  }
+
+  input,
+  textarea,
+  select {
+    display: block;
+    margin-top: 0.5em;
+    width: 100%;
+  }
+
+  .legend,
+  > label {
+    font-weight: bold;
+    display: block;
+  }
+
+  .legend {
+    margin-bottom: 0.5em;
+  }
+}
+
+
+  @media only screen and (max-width: 767px) {
+    &.horizontal {
+      @include form-vertical();
+    }
+  }
+
+  &.vertical {
+    @include form-vertical();
+  }
+}

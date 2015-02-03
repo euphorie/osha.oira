@@ -1,0 +1,45 @@
+@mixin button() {
+  font-family: $body-font-family;
+  margin: 0 0.5em 0 0;
+  border: 0.06em solid rgba(0, 0, 0, 0.32);
+  color: rgba(0, 0, 0, 0.6);
+  cursor: default;
+  border-radius: 0.2em;
+  background-image: -moz-linear-gradient(bottom, #efefef 0%, white 100%);
+  background-image: -webkit-linear-gradient(bottom, #efefef 0%, white 100%);
+  background-image: linear-gradient(bottom, #efefef 0%, white 100%);
+  text-decoration: none !important;
+  line-height: 1.5;
+  background-color: transparent;
+  display: inline-block;
+  padding-top: 0;
+  padding-left: 1em;
+  padding-right: 1em;
+  font-size: 0.98em;
+
+  &:active, &.active {
+    box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+button,
+a.button {
+  @include button();
+}
+::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+button.on, 
+a.button:active, 
+a.button.active {
+  box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+button,
+.button {
+  &[disabled="disabled"], &:disabled {
+    opacity: 0.4;
+    filter: alpha(opacity = 40);
+  }
+}

@@ -1,0 +1,44 @@
+- label: Registreren
+  post_id: registreren
+  steps:
+    - label: Bezoekt sdusolid.nl voor de eerste keer. 
+      icon: home
+      image: /pagegrabs/home.png
+      image-size: 8
+      url: "http://sdusolid.nl"
+    - label: Wordt overgehaald tot inschrijven. 
+      icon: emo-displeased
+    - label: (Sluit een proef-abonnement af)
+      image: /pagegrabs/registreren.png
+      image-size: 14
+      image-position: 6
+      url: "http://www.sdusolid.nl/user/account-register"
+    - label: Vult het registratieformulier in. 
+      icon: emo-sleep
+      image: /pagegrabs/registreren-3.png
+      image-position: 2
+    - label: Ontvangt een e-mail bevestiging. 
+    - label: Komt voor het eerst op de ingelogde homepage. 
+      icon: home-outline
+      image: /pagegrabs/home-secure.png
+
+- label: Tool afnemen
+  post_id: abonneren
+  steps: 
+    - label: Kiest een thema. 
+      url: "http://www.sdusolid.nl/thema/milieu"
+    - label: (Kiest een subthema)
+      image: /pagegrabs/subthema.png
+      url: "http://www.sdusolid.nl/thema/machineveiligheid"
+    - label: Kiest en tool.
+      url: "http://www.sdusolid.nl/tool/carbon-manager-extended?thema=19"
+      icon: emo-displeased
+    - label: Neemt de tool af
+      icon: download
+      image-size: 18
+      image-position: 4
+      image: /pagegrabs/abonneren.png
+    - label: Aanvraag bevestigen (formulier)
+      url: "http://www.sdusolid.nl/tool/1-machine-inventarisatie?thema=15"
+    - label: Gebruikt tool
+      icon: emo-happy

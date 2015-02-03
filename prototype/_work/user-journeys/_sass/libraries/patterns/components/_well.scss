@@ -1,0 +1,16 @@
+.pat-well {
+  &.calculator {
+    h3:before {
+      background-color: $colour-base-light;
+      float: left;
+      font-size: 2em;
+      color: white;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      line-height: 5rem;
+      margin: -0.6rem 1rem 0 0;
+      text-indent: 0.2rem;
+    }
+  }
+}

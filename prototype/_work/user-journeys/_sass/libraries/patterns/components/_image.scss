@@ -1,0 +1,29 @@
+img,
+object[type="image/svg+xml"] {
+	max-width: 100%;
+}
+
+figure.composite {
+	position: relative;
+
+	&.rosette { 
+
+		figcaption {
+			margin-top: 5%;
+			position: relative;
+			top: -5em;
+			font-size: 0.8em;
+			padding: 0 1em;
+			color: gray;
+		}
+		.button {
+			position: absolute;
+			top: -2.5em;
+			width: 4.4em;
+			left: 48%;
+			margin-left: -3.9em;
+			font-size: 1.5em;
+			text-align: center;
+		}
+	}
+}

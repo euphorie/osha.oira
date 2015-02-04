@@ -14,17 +14,30 @@
 	<body class="sidebar-left-open {% if page.sidebar_controls %}toolbar{% endif %} {{ page.template }} application-{{ page.application }} {% if page.workspace_name %}ws-{{ page.workspace_id }}{% endif %}">
 		<header id="site-header">
 			<div class="container">
+				<a href="#osc" id="skip">Skip to sub navigation</a>
 				<ul id="global-nav">
-					<li><a href="">Home</a></li>
-					<li><a href="">Over ons</a></li>
-					<li><a href="">Vragen</a></li>
+					<li>
+						<a href="">Preparation</a>
+					</li>
+					<li>
+						<a href="">Identification</a>
+					</li>
+					<li>
+						<a href="">Action plan</a>
+					</li>
+					<li>
+						<a href="">Report</a>
+					</li>
 				</ul>
 			</div>
 		</header>
-		<div id="content">
-			<div class="container">
+		<div id="main">
+			<div id="content">
 				{{ content }}	
 			</div>
+			<aside id="osc">
+				
+			</aside>
 		</div>
 	</body>
 </html>

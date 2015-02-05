@@ -1,4 +1,10 @@
-<configure xmlns="http://namespaces.zope.org/zope">
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser">
+
+    <browser:resourceDirectory
+        name="oira.media"
+        directory="templates/media"
+    />
 
     <adapter
         factory=".client.ClientPublishTraverser"

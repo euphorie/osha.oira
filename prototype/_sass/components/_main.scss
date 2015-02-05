@@ -1,9 +1,7 @@
-#content {	
-	padding: 4% 4% 4% 4%;
-	overflow: auto;
+#main {	
 	position: absolute;
-	left: 33.33333333%;
-	top: 3rem;
+	left: 25%;
+	top: 0;
 	right: 0;
 	bottom: 0;
 
@@ -12,6 +10,10 @@
 	transition: left 0.5s;
 }
 
-.osc-off #content {
+.osc-on #main {
 	left: 25%;
+}
+
+.osc-off #main {
+	left: 0%;
 }

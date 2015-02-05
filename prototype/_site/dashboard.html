@@ -15,12 +15,12 @@
 		<div id="main">
 			<header id="toolbar">
 				<div id="sidebar-functions">
-					<a href="#osc" class="pat-button iconified icon-hamburger" id="burger">
+					<a href="#osc" class="pat-button iconified icon-hamburger pat-toggle" data-pat-toggle="selector: body; value: osc-on osc-off; store: local" id="burger">
 						Menu
 					</a>
 				</div>
-				<div id="main-functions">
-					…
+				<div id="document-functions">
+					<a class="pat-button icon-left">Name of container group</a>
 				</div>
 			</header>	
 			<div id="content">
@@ -131,6 +131,10 @@
 			</div>
 		</div>
 		<aside id="osc">
+			<header id="sidebar-header">
+				<a class="pat-button dropdown pat-tooltip">Name of tool</a>
+				<a class="pat-button iconified icon-cog">Settings</a>
+			</header>
 		    <ol id="steps">
 				<li id="step-1" class="complete">
 					<a href="#">Voorbereiden</a>

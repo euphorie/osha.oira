@@ -9,6 +9,10 @@
 	padding-top: 2.5%;
 	padding-bottom: 2.5%;
 
+	-moz-transition: left 0.5s;
+	-webkit-transition: left 0.5s;
+	transition: left 0.5s;
+
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -16,4 +20,12 @@
 	a {
 		color: white;
 	}
+}
+
+.osc-on #osc {
+	left: 0;
+}
+
+.osc-off #osc {
+	left: -25%;
 }

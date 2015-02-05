@@ -1,6 +1,6 @@
 #toolbar {
 	position: absolute;
-	left: 25%;
+	left: 0;
 	top: 0;
 	right: 0;
 	background: #efefef;
@@ -9,7 +9,6 @@
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	height: 3rem;
-	padding: 0.6rem 0.6rem 0.6rem 1.2em;
 
 	.pat-button {
 		color: black;	
@@ -18,5 +17,42 @@
 	#burger {
 		font-size: 1.5em;
 		line-height: 1.2em;
+	}
+
+	#sidebar-functions {
+		float: left;
+		width: 33.33333%;
+		padding: 0.6rem 2% 0.6rem 2%;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+
+		-moz-transition: width 0.5s;
+		-webkit-transition: width 0.5s;
+		transition: width 0.5s;
+	}
+
+	#document-functions {
+		float: right;
+		width: 66.666665%;
+		padding: 0.6rem 2% 0.6rem 2%;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+
+		-moz-transition: width 0.5s;
+		-webkit-transition: width 0.5s;
+		transition: width 0.5s;
+	}
+}
+
+.osc-off #toolbar {
+
+	#sidebar-functions {
+		width: 25%;
+	}
+
+	#document-functions {
+		width: 75%;
 	}
 }

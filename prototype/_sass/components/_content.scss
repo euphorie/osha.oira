@@ -14,6 +14,24 @@
 	transition: left 0.5s;
 }
 
-.osc-off #content {
-	left: 25%;
+@include screen-size(small) {
+	#content {
+		// overflow: visible;
+	}
+
+	.osc-off #content {
+		left: 0;
+	}
+}
+
+@include screen-size(medium) {
+	.osc-off #content {
+		left: 0;
+	}
+}
+
+@include screen-size(large) {
+	.osc-off #content {
+		left: 25%;
+	}
 }

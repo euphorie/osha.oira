@@ -9,6 +9,7 @@ grok.templatedir("templates")
 
 class Login(BaseLogin):
     grok.layer(IOSHAClientSkinLayer)
+    grok.template("login")
 
     def login(self, account, remember):
         account.logins.append(LoginStatistics(account=account))

@@ -20,14 +20,64 @@
 		height: 100%;
 		top: 0;
 		overflow: auto;
-
 		background: #efefef;
-
 		-moz-box-sizing: border-box;
 		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
-
 		padding: 10% 6%;
+
+		li {
+
+
+			a {
+				padding-left: 2.5em;
+			}
+
+			.counter {
+				float: left;
+				font-size: 0.8em;
+				margin-left: -3.1em;
+			}
+		}
+
+		.questions {
+			li {
+
+				a {
+					padding-left: 3.9em;
+
+					&:before {
+						font-family: fontello;
+						content: "\e80b";
+						color: gray;
+
+						float: left;
+						margin-left: -1.5em;
+					}
+				}
+
+				&.postponed {
+					a:before {
+						content: "\e802";
+						color: orange;
+					}
+				}
+
+				&.answered {
+					a:before {
+						content: "\e80a";
+						color: green;
+					}
+				}
+
+				&.answered.risk {
+					a:before {
+						content: "\e805";
+						color: red;
+					}
+				}
+			}
+		}
 
 		a {
 			color: black;

@@ -32,6 +32,12 @@ $body-font-style: normal;
 
 $base-space: 1em; // Create universal white space (e.g. margin, padding, left)
 
+// Responsive variables
+
+$break-small: 768px;
+$break-medium: 769px;
+$break-large: 1280px;
+
 // Libraries
 @import "libraries/reset";
 @import "libraries/patterns/patterns";

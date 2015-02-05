@@ -4,6 +4,9 @@
 	top: 0;
 	right: 0;
 	background: #efefef;
+
+	padding: 0.6rem 2% 0.6rem 2%;
+
 	border-bottom: silver 1px solid;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -31,42 +34,4 @@
 		padding: 0 0.5em 0 0.2em;
 	}
 
-	#sidebar-functions {
-		float: left;
-		width: 33.33333%;
-		padding: 0.6rem 2% 0.6rem 2%;
-
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		box-sizing: border-box;
-
-		-moz-transition: width 0.5s;
-		-webkit-transition: width 0.5s;
-		transition: width 0.5s;
-	}
-
-	#document-functions {
-		float: right;
-		width: 66.666665%;
-		padding: 0.6rem 2% 0.6rem 2%;
-
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		box-sizing: border-box;
-
-		-moz-transition: width 0.5s;
-		-webkit-transition: width 0.5s;
-		transition: width 0.5s;
-	}
-}
-
-.osc-off #toolbar {
-
-	#sidebar-functions {
-		width: 25%;
-	}
-
-	#document-functions {
-		width: 75%;
-	}
 }

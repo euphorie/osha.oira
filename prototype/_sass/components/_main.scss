@@ -10,10 +10,33 @@
 	transition: left 0.5s;
 }
 
-.osc-on #main {
-	left: 25%;
+@include screen-size(small) {
+	#main {
+		position: relative;
+		left: 0;
+	}
+
+	.osc-on #main {
+		left: 90%;
+	}
 }
 
-.osc-off #main {
-	left: 0%;
+@include screen-size(medium) {
+	.osc-on #main {
+		left: 25%;
+	}
+
+	.osc-off #main {
+		left: 0%;
+	}
+}
+
+@include screen-size(large) {
+	.osc-on #main {
+		left: 25%;
+	}
+
+	.osc-off #main {
+		left: 0%;
+	}
 }

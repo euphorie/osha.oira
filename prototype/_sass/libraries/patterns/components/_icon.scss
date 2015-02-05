@@ -1,4 +1,4 @@
-.iconified {
+.pat-button.iconified {
   overflow: hidden;
   text-decoration: none;
   position: relative;
@@ -10,6 +10,8 @@
   filter: none !important;
   outline: none !important;
   width: 1.3em;
+  padding: 0;
+
   &:active {
     box-shadow: none;
   }

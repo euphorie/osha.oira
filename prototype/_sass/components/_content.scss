@@ -32,6 +32,11 @@
 	.osc-off #content {
 		// left: 0;
 	}
+
+	.osc-on #content {
+		opacity: 0.5;
+		pointer-events: none;
+	}
 }
 
 @include screen-size(large) {

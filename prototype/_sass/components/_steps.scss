@@ -118,3 +118,17 @@
 		}
 	}
 }
+
+@include screen-size(medium) {
+	.osc-on #steps .topics {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+}
+
+@include screen-size(small) {
+	.osc-on #steps .topics {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+}

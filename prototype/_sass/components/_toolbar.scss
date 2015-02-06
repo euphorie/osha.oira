@@ -32,6 +32,9 @@
 
 	.pat-button.icon-left {
 		padding: 0 0.5em 0 0.2em;
+		max-width: 60%;
+		overflow: hidden;
+		text-overflow: ellipsis;
 
 		@include screen-size(medium) {
 			display: none;

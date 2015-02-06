@@ -24,7 +24,7 @@
 @include screen-size(small) {
 	#osc {
 		width: 90%;
-		overflow: auto;
+		// overflow: auto;
 	}
 
 	.osc-on #osc {
@@ -38,7 +38,7 @@
 
 @include screen-size(medium) {
 	#osc {
-		width: 25%;
+		width: 40%;
 	}
 
 	.osc-on #osc {
@@ -46,7 +46,7 @@
 	}
 
 	.osc-off #osc {
-		left: -25%;
+		left: -40%;
 	}
 }
 

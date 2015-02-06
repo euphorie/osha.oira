@@ -23,12 +23,14 @@
 }
 
 @include screen-size(medium) {
-	.osc-on #main {
-		left: 25%;
+	#main {
+		position: relative;
+		left: 0;
+		height: 100%;
 	}
 
-	.osc-off #main {
-		left: 0%;
+	.osc-on #main {
+		left: 40%;
 	}
 }
 

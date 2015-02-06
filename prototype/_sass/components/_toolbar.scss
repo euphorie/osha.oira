@@ -32,6 +32,36 @@
 
 	.pat-button.icon-left {
 		padding: 0 0.5em 0 0.2em;
+
+		@include screen-size(medium) {
+			display: none;
+		}
+
+		@include screen-size(large) {
+			display: none;
+		}
 	}
 
+}
+
+@include screen-size(small) {
+	.focus-sidebar {
+		#toolbar .pat-button.icon-left {
+			display: none;
+		}
+
+		#toolbar #burger {
+			display: inline-block;
+		}
+	}
+
+	.focus-document {
+		#toolbar .pat-button.icon-left {
+			display: inline-block;
+		}
+
+		#toolbar #burger {
+			display: none;
+		}
+	}
 }

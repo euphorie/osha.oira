@@ -39,4 +39,12 @@
             />
     </configure>
 
+    <plone:tile
+        name="statusmessages"
+        class="plonetheme.nuplone.tiles.messages.StatusmessagesTile"
+        template="templates/messages.pt"
+        layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+        permission="zope.Public"
+        />
+
 </configure>

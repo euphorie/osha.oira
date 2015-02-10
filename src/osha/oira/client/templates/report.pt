@@ -15,6 +15,7 @@
   </head>
   <body class="report ${webhelpers/extra_css}">
     <h1 i18n:translate="header_reporting">Reporting</h1>
+    <tal:block replace="tile:statusmessages"/>
 
     <p i18n:translate="report_intro">
         Now that you have finished identifying all the risks in your organisation

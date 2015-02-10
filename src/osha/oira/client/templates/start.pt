@@ -17,6 +17,7 @@
 </head>
 <body class="start ${webhelpers/extra_css}">
     <h1>${context/title}</h1>
+    <tal:block replace="tile:statusmessages"/>
 
     <figure class="postit external-reference" tal:condition="context/external_site_logo | nothing">
       <a href="#" tal:attributes="href context/external_site_url | nothing" target="_blank" tal:omit-tag="not:context/external_site_url | nothing">

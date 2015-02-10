@@ -15,6 +15,7 @@
 </head>
 <body tal:define="risk nocall:view/risk" class="identification ${webhelpers/extra_css}">
     <h1 tal:content="view/title">The temperature of all fridges is checked daily</h1>
+    <tal:block replace="tile:statusmessages"/>
     <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}">
       <fieldset class="radioList comprehensive">
         <legend tal:content="risk/title">The temperature of all fridges is checked daily</legend>

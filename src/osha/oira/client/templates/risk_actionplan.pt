@@ -26,6 +26,7 @@
         class="actionplan ${webhelpers/extra_css}">
 
 <h1>${view/title}</h1>
+<tal:block replace="tile:statusmessages"/>
 <form method="post" action="${context/absolute_url}">
 
 <div class="message warning last span-15" tal:define="show_statement python:True">

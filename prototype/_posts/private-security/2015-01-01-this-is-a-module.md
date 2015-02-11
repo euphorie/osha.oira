@@ -1,0 +1,22 @@
+---
+layout: module
+title: This is a module
+---
+When workers from different companies are involved in the same working
+environment, working relationships become more complex and may complicate the
+coordination of activities. This may result in disorganisation, with
+everything this entails in terms of accidents and confusion concerning the
+tasks to be executed, etc. In these kinds of circumstances efforts must
+therefore be made at company level in order to share information and to reach
+an agreement on respective duties and responsibilities. These are mainly
+interfering risks.
+
+The interference risk is basically an accident risk linked to the operations
+of the security company carried out within the client company. However, it
+also constitutes a possible factor of uncertainty, tension and stress for
+security guards to the extent that they find themselves in working
+situations/contexts in which they have no knowledge of the risks resulting
+from these situations, of the preventive measures to be adopted, or of the
+responsibilities of the people they deal with.
+
+

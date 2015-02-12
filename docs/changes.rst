@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.4 (unreleased)
+2.3.4 (2015-02-12)
 ------------------
 
 - Bugfix: Enable deleting of measures again #10925

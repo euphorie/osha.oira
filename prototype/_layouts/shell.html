@@ -35,7 +35,11 @@
 				<li class="active current" id="step-2">
 					<a href="#" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document">Inventariseren</a>
 					<div class="topics">
-					    <ol>
+					  <ol>
+                        {% for post in site.posts reversed %}
+                        <li>
+                          <a href="{{post.url}}" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="counter">{{post.number}}</strong> {{post.title}}</a></li>
+                        {% endfor %}
 					      <li class="active">
 					        <a href="#" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="counter">2.1</strong> Werksoorten</a>
 					        <ol>

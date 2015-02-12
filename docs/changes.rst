@@ -4,8 +4,8 @@ Changelog
 2.3.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Bugfix: Enable deleting of measures again #10925
+- Icelandic translation updates #11294
 
 2.3.3 (2014-11-03)
 ------------------

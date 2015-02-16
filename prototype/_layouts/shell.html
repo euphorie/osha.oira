@@ -36,10 +36,36 @@
 					<a href="#" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document">Inventariseren</a>
 					<div class="topics">
 					  <ol>
-                        {% for post in site.posts reversed %}
+                      {% for post in site.tool  %}
+
+                     	{% if post.layout == 'profile' %}
+                       	{% capture id %}{{ post.id }}{% endcapture %}
                         <li>
-                          <a href="{{post.url}}" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="counter">{{post.number}}</strong> {{post.title}}</a></li>
-                        {% endfor %}
+                          <a href="{{post.url}}" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="counter">{{post.number}}</strong> {{post.title}}</a>
+                          <ol>
+                          {% for post in site.tool  %}
+                            {% if post.parent_id == id %}
+		                    {% capture m_id %}{{ post.id }}{% endcapture %}
+		                    <li>
+		                      <a href="{{post.url}}" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="counter">{{post.number}}</strong> {{post.title}}</a>
+                          	<ol class="questions">
+	                          {% for post in site.tool  %}
+	                            {% if post.parent_id == m_id %}
+			                    <li class="{{post.classes}}">
+			                      <a href="{{post.url}}" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document">{{post.title}}</a>
+			                      </li>
+                           	    {% endif %}
+		                      {% endfor %}
+							</ol>		                      
+                       	  	</li>
+                       	    {% endif %}
+	                      {% endfor %}
+                       	  </ol>
+                        </li>
+                       	{% endif %}
+                      {% endfor %}
+
+
 					      <li class="active">
 					        <a href="#" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="counter">2.1</strong> Werksoorten</a>
 					        <ol>
@@ -116,6 +142,7 @@
 					      <li>
 					        <a href="#">Bijzondere omstandigheden</a>
 					      </li>
+					      
 					    </ol>
 				    	<ul class="legend">
 				    		<li class="unvisited">Unvisited</li>

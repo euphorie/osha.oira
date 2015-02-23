@@ -9,9 +9,30 @@ design_description:
 	<fieldset class="vertical">
 		<fieldset class="pat-checklist radio">
 			<legend>{{ page.title }}</legend> 
-			<label><input type="radio" name="answer" value="yes" {% if page.classes == 'answered risk' %}checked{% endif %} />Yes</label> 
-			<label><input type="radio" name="answer" value="no" {% if page.classes contains 'success' %}checked{% endif %} />No</label> 
-			<label><input type="radio" name="answer" value="na" {% if page.classes contains 'postponed' %}checked{% endif %} />Not applicable</label>
+			<label class="yes"><input type="radio" name="answer" value="yes" {% if page.classes == 'answered' %}checked{% endif %} />Yes</label> 
+			<label class="no"><input type="radio" name="answer" value="no" {% if page.classes == 'answered risk' %}checked{% endif %} />No</label> 
+			<label class="not-applicable"><input type="radio" name="answer" value="na" {% if page.classes contains 'postponed' %}checked{% endif %} />Not applicable</label>
+		</fieldset>
+	</fieldset>
+
+	<fieldset class="pat-depends vertical" data-pat-depends="condition: answer=no; transition: slide">
+		<fieldset class="pat-checklist radio">
+			<legend>How big is the chance on this risk?</legend>
+			<label><input type="radio" name="chance" /> Small</label>
+			<label><input type="radio" name="chance" /> Medium</label>
+			<label><input type="radio" name="chance" /> Large</label>
+		</fieldset>
+		<fieldset class="pat-checklist radio">
+			<legend>How often are people exposed to this risk?</legend>
+			<label><input type="radio" name="exposed" /> Almost never</label>
+			<label><input type="radio" name="exposed" /> Regularly</label>
+			<label><input type="radio" name="exposed" /> Continuously</label>
+		</fieldset>
+		<fieldset class="pat-checklist radio">
+			<legend>What is the effect?</legend>
+			<label><input type="radio" name="effect" /> Injury without absence</label>
+			<label><input type="radio" name="effect" /> Injury with absence</label>
+			<label><input type="radio" name="effect" /> Permanent health damage</label>
 		</fieldset>
 	</fieldset>
 

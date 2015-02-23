@@ -6,6 +6,7 @@ parent_id: commercial-manned-guarding
 title: Work environment (site related)
 module: commercial-manned-guarding
 ---
+
 Accident statistics show that risks like **slips, trips and falls**, **getting
 stuck**, ... are very frequent in the private security services sector.
 

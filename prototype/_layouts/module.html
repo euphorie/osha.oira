@@ -8,9 +8,10 @@ design_description:
 <form method="post" action="#">
 	<fieldset class="vertical">
 		<fieldset class="pat-checklist radio">
-			<legend>The temperature of all fridges is checked daily</legend> <label><input type="radio" name="answer" value="yes" />Yes</label> 
-			<label><input type="radio" name="answer" value="no" />No</label> 
-			<label><input type="radio" name="answer" value="n/a" />Not applicable</label>
+			<legend>{{ page.title }}</legend>
+			<label><input type="radio" name="answer" value="yes" {% if page.classes == 'answered risk' %}checked{% endif %} />Yes</label> 
+			<label><input type="radio" name="answer" value="no" {% if page.classes contains 'success' %}checked{% endif %} />No</label> 
+			<label><input type="radio" name="answer" value="na" {% if page.classes contains 'postponed' %}checked{% endif %} />Not applicable</label>
 		</fieldset>
 	</fieldset>
 

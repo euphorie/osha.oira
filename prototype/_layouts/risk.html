@@ -8,7 +8,8 @@ design_description:
 <form method="post" action="#">
 	<fieldset class="vertical">
 		<fieldset class="pat-checklist radio">
-			<legend>{{ page.title }}</legend> <label><input type="radio" name="answer" value="yes" {% if page.classes == 'answered risk' %}checked{% endif %} />Yes</label> 
+			<legend>{{ page.title }}</legend> 
+			<label><input type="radio" name="answer" value="yes" {% if page.classes == 'answered risk' %}checked{% endif %} />Yes</label> 
 			<label><input type="radio" name="answer" value="no" {% if page.classes contains 'success' %}checked{% endif %} />No</label> 
 			<label><input type="radio" name="answer" value="na" {% if page.classes contains 'postponed' %}checked{% endif %} />Not applicable</label>
 		</fieldset>

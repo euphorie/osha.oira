@@ -1,7 +1,7 @@
 ---
 layout: module
-id: physical-and-psychosocial-workload
-number: 2.4
+fid: physical-and-psychosocial-workload
+number: "2.4.0"
 parent_id: mobile-partrolling--intervention-after-alarm
 title: Physical and psychosocial workload
 module: mobile-partrolling--intervention-after-alarm

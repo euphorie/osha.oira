@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: risks-related-to-bullying-and-sexual-harassment-are-prevented
+fid: risks-related-to-bullying-and-sexual-harassment-are-prevented
 classes: postponed risk
-number: 1.4.6
+number: "1.4.6"
 parent_id: physical-and-psychosocial-workload
 title: "Risks related to bullying and sexual harassment are prevented."
 problem_description: "Risks related to bullying and sexual harassment are not prevented."

@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: risks-related-to-violence-and-aggression-are-prevented
+fid: risks-related-to-violence-and-aggression-are-prevented
 classes: postponed risk
-number: 2.4.5
+number: "2.4.5"
 parent_id: physical-and-psychosocial-workload
 title: "Risks related to violence and aggression are prevented."
 problem_description: "Risks related to violence and aggression are not prevented."

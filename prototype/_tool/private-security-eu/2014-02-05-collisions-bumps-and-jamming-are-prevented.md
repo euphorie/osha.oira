@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: collisions-bumps-and-jamming-are-prevented
-classes: answered risk
-number: 2.1.2
+fid: collisions-bumps-and-jamming-are-prevented
+classes: postponed risk
+number: "2.1.2"
 parent_id: work-environment-site-related
 title: "Collisions, bumps, and jamming are prevented."
 problem_description: "Collisions, bumps, and jamming are not prevented."

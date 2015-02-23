@@ -1,7 +1,7 @@
 ---
 layout: module
-id: work-equipment
-number: 1.3
+fid: work-equipment
+number: "1.3.0"
 parent_id: commercial-manned-guarding
 title: Work equipment
 module: commercial-manned-guarding

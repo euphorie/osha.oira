@@ -1,7 +1,7 @@
 ---
 layout: profile
-id: commercial-manned-guarding
-number: 1
+fid: commercial-manned-guarding
+number: "1.0.0"
 title: Commercial manned guarding
 ---
 

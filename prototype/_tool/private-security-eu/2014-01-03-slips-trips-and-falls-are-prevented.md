@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: slips-trips-and-falls-are-prevented
-classes: current postponed risk
-number: 1.1.1
+fid: slips-trips-and-falls-are-prevented
+classes: current answered risk
+number: "1.1.1"
 parent_id: work-environment-site-related
 title: "Slips, trips and falls are prevented."
 problem_description: "Slips, trips and falls are not prevented."

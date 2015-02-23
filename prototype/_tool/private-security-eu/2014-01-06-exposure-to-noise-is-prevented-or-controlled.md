@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: exposure-to-noise-is-prevented-or-controlled
+fid: exposure-to-noise-is-prevented-or-controlled
 classes: postponed risk
-number: 1.1.4
+number: "1.1.4"
 parent_id: work-environment-site-related
 title: "Exposure to noise is prevented or controlled."
 problem_description: "Exposure to noise is neither prevented nor controlled."

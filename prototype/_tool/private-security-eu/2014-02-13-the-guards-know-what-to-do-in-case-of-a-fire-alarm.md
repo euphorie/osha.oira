@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: the-guards-know-what-to-do-in-case-of-a-fire-alarm
-classes: current answered risk
-number: 2.2.1
+fid: the-guards-know-what-to-do-in-case-of-a-fire-alarm
+classes: current postponed risk
+number: "2.2.1"
 parent_id: fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of a fire alarm."
 problem_description: "The guards do not know what to do in case of a fire alarm."

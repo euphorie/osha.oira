@@ -21,6 +21,7 @@ from datetime import timedelta
 
 STATES = ['answered', 'postponed']
 
+
 def usage(stream, msg=None):
     if msg:
         print >> stream, msg
@@ -68,9 +69,9 @@ def _r(t):
 def create_risk(risk, parent_id=None, number="1"):
     risk_template = u"""---
 layout: risk
-id: {id}
+fid: {id}
 classes: {classes}
-number: {number}
+number: "{number}"
 parent_id: {parent_id}
 title: "{title}"
 problem_description: "{problem_description}"
@@ -122,8 +123,8 @@ solutions:
 def create_module(module, parent_id=None, number="1"):
     module_template = u"""---
 layout: module
-id: {id}
-number: {number}
+fid: {id}
+number: "{number}"
 parent_id: {parent_id}
 title: {title}{module}
 ---
@@ -137,7 +138,7 @@ title: {title}{module}
     fields = {
         "id": id,
         "title": title,
-        "number": number,
+        "number": number + '.0',
         "parent_id": parent_id,
         "module": "\nmodule: {}".format(parent_id) if parent_id else "",
         "body": escape2markdown(description),
@@ -145,7 +146,6 @@ title: {title}{module}
 
     content = module_template(**fields)
     write_md(id, content)
-
 
     sub_modules = module.findChildren("module", recursive=False)
     sub_number = number + ".1"
@@ -160,13 +160,11 @@ title: {title}{module}
         risk_number = increment_number(risk_number)
 
 
-
-
 def create_profile_question(profile_question, number="1"):
     question_template = u"""---
 layout: profile
-id: {id}
-number: {number}
+fid: {id}
+number: "{number}"
 title: {title}{images}
 ---
 
@@ -181,7 +179,7 @@ title: {title}{images}
     fields = {
         "id": id,
         "title": title,
-        "number": number,
+        "number": number + '.0.0',
         "images": "",
         "body": escape2markdown(description),
     }

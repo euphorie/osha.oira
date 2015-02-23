@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: exposure-to-radiation-is-prevented-or-controlled
-classes: postponed risk
-number: 1.1.7
+fid: exposure-to-radiation-is-prevented-or-controlled
+classes: answered risk
+number: "1.1.7"
 parent_id: work-environment-site-related
 title: "Exposure to radiation is prevented or controlled."
 problem_description: "Exposure to radiation is neither prevented nor controlled."

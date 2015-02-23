@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: measures-are-taken-to-reduce-time-pressure
+fid: measures-are-taken-to-reduce-time-pressure
 classes: postponed risk
-number: 1.4.3
+number: "1.4.3"
 parent_id: physical-and-psychosocial-workload
 title: "Measures are taken to reduce time pressure."
 problem_description: "Measures are not taken to reduce time pressure."

@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: risks-from-ambient-factors-are-prevented
-classes: answered risk
-number: 2.1.7
+fid: risks-from-ambient-factors-are-prevented
+classes: postponed risk
+number: "2.1.7"
 parent_id: work-environment-site-related
 title: "Risks from ambient factors are prevented."
 problem_description: "Risks from ambient factors are not prevented."

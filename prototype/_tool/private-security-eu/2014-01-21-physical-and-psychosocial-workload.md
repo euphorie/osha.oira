@@ -1,7 +1,7 @@
 ---
 layout: module
-id: physical-and-psychosocial-workload
-number: 1.4
+fid: physical-and-psychosocial-workload
+number: "1.4.0"
 parent_id: commercial-manned-guarding
 title: Physical and psychosocial workload
 module: commercial-manned-guarding

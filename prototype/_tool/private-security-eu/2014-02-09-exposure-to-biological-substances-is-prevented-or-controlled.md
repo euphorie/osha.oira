@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: exposure-to-biological-substances-is-prevented-or-controlled
-classes: answered risk
-number: 2.1.6
+fid: exposure-to-biological-substances-is-prevented-or-controlled
+classes: postponed risk
+number: "2.1.6"
 parent_id: work-environment-site-related
 title: "Exposure to biological substances is prevented or controlled."
 problem_description: "Exposure to biological substances is neither prevented nor controlled"

@@ -1,7 +1,7 @@
 ---
 layout: module
-id: fire-prevention-and-emergency-procedures
-number: 1.2
+fid: fire-prevention-and-emergency-procedures
+number: "1.2.0"
 parent_id: commercial-manned-guarding
 title: Fire prevention and emergency procedures
 module: commercial-manned-guarding

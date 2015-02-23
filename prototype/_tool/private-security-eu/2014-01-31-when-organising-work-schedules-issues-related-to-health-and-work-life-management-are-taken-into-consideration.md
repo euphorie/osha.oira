@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: when-organising-work-schedules-issues-related-to-health-and-work-life-management-are-taken-into-consideration
-classes: postponed risk
-number: 1.5.3
+fid: when-organising-work-schedules-issues-related-to-health-and-work-life-management-are-taken-into-consideration
+classes: answered risk
+number: "1.5.3"
 parent_id: work-organisation
 title: "When organising work schedules, issues related to health and work life management are taken into consideration."
 problem_description: "When organising work schedules, issues related to health and work life management are not taken into consideration."

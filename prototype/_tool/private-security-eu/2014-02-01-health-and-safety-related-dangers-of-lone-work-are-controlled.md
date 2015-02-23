@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: health-and-safety-related-dangers-of-lone-work-are-controlled
-classes: answered risk
-number: 1.5.4
+fid: health-and-safety-related-dangers-of-lone-work-are-controlled
+classes: postponed risk
+number: "1.5.4"
 parent_id: work-organisation
 title: "Health and safety related dangers of lone work are controlled."
 problem_description: "Health and safety related dangers of lone work are not controlled."

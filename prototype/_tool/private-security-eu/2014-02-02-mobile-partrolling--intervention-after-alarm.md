@@ -1,7 +1,7 @@
 ---
 layout: profile
-id: mobile-partrolling--intervention-after-alarm
-number: 2
+fid: mobile-partrolling--intervention-after-alarm
+number: "2.0.0"
 title: Mobile partrolling / intervention after alarm
 ---
 

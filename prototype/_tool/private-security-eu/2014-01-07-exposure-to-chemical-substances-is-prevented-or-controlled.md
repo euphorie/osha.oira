@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: exposure-to-chemical-substances-is-prevented-or-controlled
+fid: exposure-to-chemical-substances-is-prevented-or-controlled
 classes: postponed risk
-number: 1.1.5
+number: "1.1.5"
 parent_id: work-environment-site-related
 title: "Exposure to chemical substances is prevented or controlled."
 problem_description: "Exposure to chemical substances is neither prevented nor controlled."

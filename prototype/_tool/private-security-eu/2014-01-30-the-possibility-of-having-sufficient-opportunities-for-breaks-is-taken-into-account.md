@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: the-possibility-of-having-sufficient-opportunities-for-breaks-is-taken-into-account
+fid: the-possibility-of-having-sufficient-opportunities-for-breaks-is-taken-into-account
 classes: postponed risk
-number: 1.5.2
+number: "1.5.2"
 parent_id: work-organisation
 title: "The possibility of having sufficient opportunities for breaks is taken into account."
 problem_description: "The possibility of having sufficient opportunities for breaks is not taken into account."

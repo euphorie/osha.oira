@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: all-necessary-facilities-are-available-and-well-maintained
+fid: all-necessary-facilities-are-available-and-well-maintained
 classes: answered risk
-number: 2.1.8
+number: "2.1.8"
 parent_id: work-environment-site-related
 title: "All necessary facilities are available and well maintained."
 problem_description: "Not all necessary facilities are available and well maintained."

@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: health-risks-related-to-manual-handling-of-loads-are-prevented
+fid: health-risks-related-to-manual-handling-of-loads-are-prevented
 classes: current postponed risk
-number: 2.4.1
+number: "2.4.1"
 parent_id: physical-and-psychosocial-workload
 title: "Health risks related to manual handling of loads are prevented."
 problem_description: "Health risks related to manual handling of loads are not prevented."

@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: tasks-and-responsibilities-are-clear-to-the-private-security-guards
-classes: answered risk
-number: 1.4.4
+fid: tasks-and-responsibilities-are-clear-to-the-private-security-guards
+classes: postponed risk
+number: "1.4.4"
 parent_id: physical-and-psychosocial-workload
 title: "Tasks and responsibilities are clear to the private security guards."
 problem_description: "Tasks and responsibilities are not clear to the guards."

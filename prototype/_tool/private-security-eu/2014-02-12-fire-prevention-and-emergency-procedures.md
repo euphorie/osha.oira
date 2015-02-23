@@ -1,7 +1,7 @@
 ---
 layout: module
-id: fire-prevention-and-emergency-procedures
-number: 2.2
+fid: fire-prevention-and-emergency-procedures
+number: "2.2.0"
 parent_id: mobile-partrolling--intervention-after-alarm
 title: Fire prevention and emergency procedures
 module: mobile-partrolling--intervention-after-alarm

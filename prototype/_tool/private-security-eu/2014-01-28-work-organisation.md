@@ -1,7 +1,7 @@
 ---
 layout: module
-id: work-organisation
-number: 1.5
+fid: work-organisation
+number: "1.5.0"
 parent_id: commercial-manned-guarding
 title: Work organisation
 module: commercial-manned-guarding

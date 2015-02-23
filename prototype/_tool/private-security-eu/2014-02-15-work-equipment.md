@@ -1,7 +1,7 @@
 ---
 layout: module
-id: work-equipment
-number: 2.3
+fid: work-equipment
+number: "2.3.0"
 parent_id: mobile-partrolling--intervention-after-alarm
 title: Work equipment
 module: mobile-partrolling--intervention-after-alarm

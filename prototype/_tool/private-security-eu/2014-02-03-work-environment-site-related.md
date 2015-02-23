@@ -1,7 +1,7 @@
 ---
 layout: module
-id: work-environment-site-related
-number: 2.1
+fid: work-environment-site-related
+number: "2.1.0"
 parent_id: mobile-partrolling--intervention-after-alarm
 title: Work environment (site related)
 module: mobile-partrolling--intervention-after-alarm

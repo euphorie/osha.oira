@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: the-necessary-vehicles-are-available-of-good-quality-and-well-maintained
+fid: the-necessary-vehicles-are-available-of-good-quality-and-well-maintained
 classes: postponed risk
-number: 1.3.4
+number: "1.3.4"
 parent_id: work-equipment
 title: "The necessary vehicles are available, of good quality and well maintained."
 problem_description: "The necessary vehicles are not available, of bad quality and/or poorly maintained."

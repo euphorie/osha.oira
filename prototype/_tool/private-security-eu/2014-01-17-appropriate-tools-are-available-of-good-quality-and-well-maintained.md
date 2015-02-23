@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: appropriate-tools-are-available-of-good-quality-and-well-maintained
+fid: appropriate-tools-are-available-of-good-quality-and-well-maintained
 classes: answered risk
-number: 1.3.2
+number: "1.3.2"
 parent_id: work-equipment
 title: "Appropriate tools are available, of good quality and well maintained."
 problem_description: "Appropriate tools are not available, of bad quality and poorly maintained"

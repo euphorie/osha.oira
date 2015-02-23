@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: the-dogs-are-well-trained-and-have-regular-medical-check-ups
-classes: postponed risk
-number: 1.3.3
+fid: the-dogs-are-well-trained-and-have-regular-medical-check-ups
+classes: answered risk
+number: "1.3.3"
 parent_id: work-equipment
 title: "The dogs are well trained and have regular medical check-ups."
 problem_description: "The dogs are not well trained and/or don't have regular medical check-ups."

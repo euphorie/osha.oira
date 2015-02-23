@@ -1,8 +1,8 @@
 ---
 layout: risk
-id: the-guards-know-what-to-do-in-case-of-serious-and-imminent-dangers
+fid: the-guards-know-what-to-do-in-case-of-serious-and-imminent-dangers
 classes: answered risk
-number: 1.2.2
+number: "1.2.2"
 parent_id: fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of serious and imminent dangers."
 problem_description: "The guards do not know what to do in case of serious and imminent dangers."

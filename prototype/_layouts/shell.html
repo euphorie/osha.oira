@@ -52,7 +52,7 @@
 	                          {% for post in site.tool  %}
 	                            {% if post.parent_id == m_id %}
 			                    <li class="{{post.classes}}">
-			                      <a href="{{post.url}}" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document">{{post.title}}</a>
+			                      <a href="{{post.url}}#content" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document">{{post.title}}</a>
 			                      </li>
                            	    {% endif %}
 		                      {% endfor %}

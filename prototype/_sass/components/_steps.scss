@@ -52,13 +52,13 @@
 
 
 			a {
-				padding-left: 2.5em;
+				padding-left: 2.5rem;
 			}
 
 			.counter {
 				float: left;
 				font-size: 0.7em;
-				margin-left: -3.5em;
+				margin-left: -2.5rem;
 				color: rgba(0,0,0,0.5);
 			}
 		}
@@ -66,17 +66,19 @@
 		.questions {
 			li {
 
+				line-height: 1.3em;
+				font-size: 0.8em;
+
 				a {
-					padding-left: 3.9em;
+					padding-left: 3.7rem;
 					font-weight: normal;
 
 					&:before {
 						font-family: fontello;
 						content: "\e80b";
 						color: gray;
-
 						float: left;
-						margin-left: -1.5em;
+						margin-left: -1.4em;
 					}
 				}
 

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-private-security-guards-wear-the-necessary-well-fitting-clothes-and-ppe-in-accordance-with-their-duty
-classes: current answered risk
+classes: answered
 number: "1.3.1"
 parent_id: work-equipment
 title: "The private security guards wear the necessary, well-fitting clothes and PPE, in accordance with their duty."

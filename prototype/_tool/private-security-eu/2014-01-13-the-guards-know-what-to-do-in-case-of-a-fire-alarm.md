@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-guards-know-what-to-do-in-case-of-a-fire-alarm
-classes: current postponed risk
+classes: postponed
 number: "1.2.1"
 parent_id: fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of a fire alarm."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-chemical-substances-is-prevented-or-controlled
-classes: postponed risk
+classes: postponed
 number: "1.1.5"
 parent_id: work-environment-site-related
 title: "Exposure to chemical substances is prevented or controlled."

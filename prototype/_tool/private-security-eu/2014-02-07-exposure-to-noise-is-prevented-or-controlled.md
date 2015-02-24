@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-noise-is-prevented-or-controlled
-classes: postponed risk
+classes: 
 number: "2.1.4"
 parent_id: work-environment-site-related
 title: "Exposure to noise is prevented or controlled."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-guards-know-what-to-do-in-case-of-serious-and-imminent-dangers
-classes: postponed risk
+classes: postponed
 number: "2.2.2"
 parent_id: fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of serious and imminent dangers."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-chemical-substances-is-prevented-or-controlled
-classes: answered risk
+classes: 
 number: "2.1.5"
 parent_id: work-environment-site-related
 title: "Exposure to chemical substances is prevented or controlled."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: measures-are-taken-to-reduce-time-pressure
-classes: postponed risk
+classes: postponed
 number: "2.4.3"
 parent_id: physical-and-psychosocial-workload
 title: "Measures are taken to reduce time pressure."

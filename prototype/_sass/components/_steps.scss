@@ -89,6 +89,13 @@
 				line-height: 1.3em;
 				font-size: 0.8em;
 
+				&.current {
+					a {
+						background-color: rgba(0,0,0,0.1);
+						border-radius: 2em;
+					}
+				}
+
 				a {
 					padding-left: 3.2rem;
 					font-weight: normal;

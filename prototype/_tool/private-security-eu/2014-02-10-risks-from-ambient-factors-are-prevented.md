@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: risks-from-ambient-factors-are-prevented
-classes: postponed risk
+classes: 
 number: "2.1.7"
 parent_id: work-environment-site-related
 title: "Risks from ambient factors are prevented."

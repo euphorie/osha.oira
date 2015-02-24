@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-biological-substances-is-prevented-or-controlled
-classes: postponed risk
+classes: 
 number: "2.1.6"
 parent_id: work-environment-site-related
 title: "Exposure to biological substances is prevented or controlled."

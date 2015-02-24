@@ -55,7 +55,7 @@
 		                      <a href="{{module.url}}" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"  data-pat-inject="source: #step-2; target: #step-2 && source: #content; target: #content"><strong class="counter">{{module.number | replace: '.0' }}</strong> {{module.title}}</a>
 			                  {% assign modulelevel = module.number | split: '.' %}
 		                      {% if pagelevel[0] == modulelevel[0] and pagelevel[1] == modulelevel[1] %}
-    	                      	<ol class="questions">
+    	                      	<ol class="questions navigation">
 	    	                      {% for risk in site.tool  %}
 	        	                    {% if risk.parent_id == m_id %}
 			    	                <li class="{{risk.classes}}">

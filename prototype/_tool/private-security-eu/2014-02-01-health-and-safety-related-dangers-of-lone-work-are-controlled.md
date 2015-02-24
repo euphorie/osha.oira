@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: health-and-safety-related-dangers-of-lone-work-are-controlled
-classes: postponed risk
+classes: postponed
 number: "1.5.4"
 parent_id: work-organisation
 title: "Health and safety related dangers of lone work are controlled."

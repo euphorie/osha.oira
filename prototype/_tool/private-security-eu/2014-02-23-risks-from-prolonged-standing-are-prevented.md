@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: risks-from-prolonged-standing-are-prevented
-classes: postponed risk
+classes: postponed
 number: "2.4.2"
 parent_id: physical-and-psychosocial-workload
 title: "Risks from prolonged standing are prevented."

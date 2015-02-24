@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-electricity-gas-and-water-supplies-are-in-order-and-well-maintained
-classes: postponed risk
+classes: answered
 number: "1.1.3"
 parent_id: work-environment-site-related
 title: "The electricity, gas and water supplies are in order and well-maintained."

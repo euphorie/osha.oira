@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-dogs-are-well-trained-and-have-regular-medical-check-ups
-classes: postponed risk
+classes: postponed
 number: "2.3.3"
 parent_id: work-equipment
 title: "The dogs are well trained and have regular medical check-ups."

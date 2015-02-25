@@ -25,7 +25,7 @@
 		</div>
 		<aside id="osc">
 			<header id="osc-header">
-				<a class="pat-button dropdown pat-tooltip">Name of tool</a>
+				<a class="pat-button dropdown pat-tooltip">Private Security EU</a>
 				<a class="pat-button iconified icon-cog">Settings</a>
 			</header>
 		    <ol id="steps">
@@ -33,7 +33,7 @@
 					<a href="#" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: osc-*; add: osc-off">Preparation</a>
 				</li>
 				<li class="active current" id="step-2">
-					<a href="#" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document">Identification</a>
+					<a href="/identification.html" data-pat-inject="source: #content; target: #content && source: #osc; target: #osc" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document">Identification</a>
 					{% if page.number %}
 
 						<div class="topics">

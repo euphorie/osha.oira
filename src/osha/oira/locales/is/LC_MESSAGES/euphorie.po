@@ -479,11 +479,9 @@ msgstr "Almennar ráðleggingar í lokin."
 #: src/osha/oira/client/templates/identification.pt:19
 msgid "intro_print_identification_1"
 msgstr ""
-"Þú gætir prentað út innihald verkfærisins til a gera þér kleift að leita að "
-"þeim upplýsingum á viðkomandi vinnustað (með því að ganga um og leita að "
-"þeim atriðum sem gætu skapað hættu eða með því að hafa samráð við starfsmenn "
-"og/eða fulltrúa þeirra um vandamál sem þeir hafa orðið varir við). Síðan "
-"gætirðu fært þessar upplýsingar inn í verkfærið."
+"Hægt er að prenta út fullyrðingarnar sem verkfærið notar til greina hættur í "
+"vinnuumhverfinu. Útprentunina er hægt að nota sem gátlista þegar farið er "
+"yfir vinnuumhverfið við gerð áhættumatsins"
 
 #. Default: You may also wish to distribute the contents among the workers
 #. and/or their representatives and invite them to participate in identifying
@@ -494,16 +492,15 @@ msgstr ""
 #: src/osha/oira/client/templates/identification.pt:20
 msgid "intro_print_identification_2"
 msgstr ""
-"Þú hefur ef til vill einnig í huga að dreifa innihaldinu til starfsmannanna "
-"og/eða fulltrúa þeirra og bjóða þeim að taka þátt í að greina hættur/"
-"vandamál, meta áhættur og ákveða um forvarnaraðgerðir. Taka þyrfti tillit "
-"til svara þeirra við innfærslu í verkfærið"
+"Hægt er að dreifa gátlistanum til starfsfólks til að virkja það betur við "
+"gerð áhættumatsins. Starfsfólk á að geta komið með ábendingar um það sem "
+"betur má fara í vinnuumhverfinu."
 
 #. Default: contents of the tool
 #: src/osha/oira/manual_translations.py:144
 #: src/osha/oira/client/templates/identification.pt:22
 msgid "list_of_risks"
-msgstr "innihald verkfærisins"
+msgstr "gátlista áhættumatsins"
 
 #. Default: Start to write a new OiRA Tool. You will be asked whether you want
 #. to start off with a copy of an existing OiRA Tool.
@@ -1447,7 +1444,7 @@ msgstr "Svæði"
 #. Default: You can print the ${list-of-risks}.
 #: src/osha/oira/client/templates/identification.pt:21
 msgid "intro_identification"
-msgstr "Þú getur prentað ${list-of-risks}."
+msgstr "Hér er hægt að prenta út ${list-of-risks}."
 
 #. Default: Start Risk Identification
 #: src/osha/oira/client/templates/identification.pt:26
@@ -1773,7 +1770,7 @@ msgstr "eftir öðrum leiðum"
 #. Default: Skip this step
 #: src/osha/oira/client/templates/report_company.pt:56
 msgid "label_skip"
-msgstr "Hlauptu yfir þetta þrep"
+msgstr "Ekki taka þátt í könnuninni"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
@@ -1960,7 +1957,7 @@ msgstr ""
 #. Default: Please enter the budget in whole Euros.
 #: src/osha/oira/client/templates/risk_actionplan.pt:123
 msgid "error_invalid_budget"
-msgstr "Skráðu inn fjárveitinguna í heilum evrum."
+msgstr "Notið eingöngu tölustafi (ekki nota kommu og punkt)"
 
 #. Default: Start date is not before end date
 #: src/osha/oira/client/templates/risk_actionplan.pt:132

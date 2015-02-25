@@ -14,6 +14,10 @@
 	}
 
 	.topics {
+		> ol {
+			margin-bottom: 2em;
+		}
+
 		-moz-box-sizing: border-box;
 		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
@@ -84,6 +88,7 @@
 		}
 
 		.questions {
+
 			li {
 
 				line-height: 1.3em;
@@ -156,6 +161,58 @@
 
 		a {
 			color: black;			
+		}
+
+		.legend {
+			padding: 4%;
+			border: 1px solid silver;
+			border-radius: 1rem;
+			margin-bottom: 2em;
+			background-color: white;
+
+			li {
+				position: relative;
+				padding-left: 1.5em;
+
+				&:before {
+					font-family: fontello;
+					content: "\e80b";
+					color: white;
+					background: gray;
+					position: absolute;
+					left: 0rem;
+					border-radius: 50%;
+					padding: 0.1rem;
+					top: 50%;
+					margin-top: -0.6rem;
+					display: block;
+					height: 1rem;
+					width: 1rem;
+					text-align: center;
+					line-height: 1rem;
+				}
+
+				&.postponed {
+					&:before {
+						content: "\e802";
+						background: orange;
+					}
+				}
+
+				&.answered {
+					&:before {
+						content: "\e80a";
+						background: green;
+					}
+				}
+
+				&.answered.risk {
+					&:before {
+						content: "\e805";
+						background: red;
+					}
+				}
+			}
 		}
 	}
 }

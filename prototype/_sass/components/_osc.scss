@@ -4,7 +4,10 @@
 	left: 0;
 	top: 0;
 	bottom: 0;
-	background: #333332;
+	background: #333332 url(stars.svg) no-repeat;
+	-moz-background-size: auto 100% ;
+	-webkit-background-size: auto 100% ;
+	background-size: auto 100% ;
 	// padding-top: 2.5%;
 	padding-bottom: 2.5%;
 
@@ -22,6 +25,7 @@
 
 	#osc-header {
 		padding: 0.7rem 2% 0.7rem 2%;
+		margin-bottom: 2em;
 		height: 3rem;
 
 		border-bottom: solid 1px black;

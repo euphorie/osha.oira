@@ -7,21 +7,13 @@
 
 		h2 {
 			font-size: 1em;
-			padding: 1em 1em 0 1em;
+			padding: 5% 5% 0 5%;
 			line-height: 1em;
 			cursor: default;
 
 			-moz-transition: padding 0.5s;
 			-webkit-transition: padding 0.5s;
 			transition: padding 0.5s;
-
-			&.collapsible-closed {
-				padding: 0.5em 0.5em 0.4em 1em;
-
-				&:before {
-					content: "\e814";
-				}
-			}
 
 			&:before {
 				font-family: fontello;
@@ -32,8 +24,20 @@
 			}
 		}
 
+		&.closed,
+		&.open.in-progress {
+
+			h2 {
+			padding: 0.5em 0.5em 0.4em 1em;
+
+				&:before {
+					content: "\e814";
+				}
+			}
+		}
+
 		.panel-content {
-			padding: 1em;
+			padding: 5%;
 		}
 	}
 }

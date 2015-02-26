@@ -27,7 +27,6 @@ select {
   color: inherit;
   font-size: 100%;
   border-radius: 0;
-  max-width: 100%;
 
   &:disabled {
     border: transparent;
@@ -86,10 +85,7 @@ select {
   text-indent: 0.01px;
   text-overflow: '';
   
-  // border-right: 0.35em solid rgba(0, 0, 0, 0);
-  @include pat-button();
-  padding: 0 1em;
-
+  border-right: 0.35em solid rgba(0, 0, 0, 0);
   padding-right: 1em;
   background-repeat: no-repeat;
   background-position: right center;
@@ -228,7 +224,7 @@ fieldset {
   textarea,
   select {
     display: block;
-    margin-top: 0.5em;
+    margin-top: 0.2em;
     width: 100%;
   }
 
@@ -236,6 +232,7 @@ fieldset {
   > label {
     font-weight: bold;
     display: block;
+    margin-bottom: 1em;
   }
 
   .legend {

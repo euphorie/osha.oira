@@ -36,10 +36,15 @@ design_description:
 			</p>
 
 			<fieldset class="vertical">
-				<legend>Description</legend> 
-				<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea> 
-				<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea> 
-				<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3"></textarea>
+				<label>Description
+					<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea> 
+				</label> 
+				<label>Prevention plan
+					<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea> 
+				</label>
+				<label>Requirements
+					<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3"></textarea>
+				</label>
 			</fieldset>
 
 			<fieldset class="vertical">
@@ -62,6 +67,12 @@ design_description:
 					Planning end
 					<input type="date" />
 				</label>
+		<fieldset class="pat-checklist radio">
+			<legend>{{ page.title }}</legend> 
+			<label class="yes"><input type="radio" name="answer" value="yes" {% if page.classes == 'answered' %}checked{% endif %} />Yes</label> 
+			<label class="no"><input type="radio" name="answer" value="no" {% if page.classes == 'answered risk' %}checked{% endif %} />No</label> 
+			<label class="not-applicable"><input type="radio" name="answer" value="na" {% if page.classes contains 'postponed' %}checked{% endif %} />Not applicable</label>
+		</fieldset>
 			</fieldset>
 		</div>
 

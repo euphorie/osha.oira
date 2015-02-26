@@ -32,7 +32,7 @@
 				<li id="step-1" class="complete">
 					<a href="#" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: osc-*; add: osc-off">Preparation</a>
 				</li>
-				<li class="active current" id="step-2">
+				<li class="{% if page.number %}active{% endif %}" id="step-2">
 					<a href="/identification.html" data-pat-inject="source: #content; target: #content && source: #osc; target: #osc" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document">Identification</a>
 					{% if page.number %}
 
@@ -87,8 +87,21 @@
 					    
 					{% endif %}
 				</li>
-				<li id="step-4" class="disabled">
-					<a href="/action-plan.html">Action Plan</a>
+				<li id="step-4" class="{% if page.section == 'action' %}active{% endif %}">
+					<a href="/action-plan.html" data-pat-inject="source: #content; target: #content && source: #osc; target: #osc" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document">Action Plan</a>
+					{% if page.section == 'action' %}
+						<div class="topics">
+	                      	<ol class="questions navigation">
+		                      {% for risk in site.tool  %}
+	    	                    {% if risk.classes contains 'risk' %}
+		    	                <li class="answered risk">
+		        	              <a href="" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">{{ risk.number }}</strong> {{risk.title}}</a>
+			                      </li>
+	                       	    {% endif %}
+		                      {% endfor %}
+							</ol>
+						</div>
+					{% endif %}
 				</li>
 				<li id="step-5" class="disabled">
 					<a>Report</a>

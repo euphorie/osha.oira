@@ -86,7 +86,10 @@ select {
   text-indent: 0.01px;
   text-overflow: '';
   
-  border-right: 0.35em solid rgba(0, 0, 0, 0);
+  // border-right: 0.35em solid rgba(0, 0, 0, 0);
+  @include pat-button();
+  padding: 0 1em;
+
   padding-right: 1em;
   background-repeat: no-repeat;
   background-position: right center;

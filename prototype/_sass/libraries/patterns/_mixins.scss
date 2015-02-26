@@ -31,6 +31,8 @@
     &.success {
         background-color: $colour-success;
         color: white;
+
+        input { color: $colour-base-font};
     }
     &.notice {
         background-color: $colour-notice;
@@ -38,6 +40,9 @@
     &.warning {
         background-color: $colour-warning;
         color: white;
+
+        input { color: $colour-base-font};
+        // select { border: white, color: white;}
     }
 }
 

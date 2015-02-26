@@ -1,0 +1,303 @@
+---
+layout: shell
+design_title: Homepage
+---
+
+<form>
+	<article class="rich pat-well warning">
+
+		<h2>
+			The temperature of some fridges is checked daily
+		</h2>
+		<p>
+			This risk is not present in your organisation, but since the sector organisation considers this one of the top 5 most critical risks it must be included in this report.
+		</p>
+
+		<p class="description">
+			The temperature in a fridge is critical to storing food. If the temperature is too high or fluctuates too much food can start rotting quickly.
+		</p>
+
+		<fieldset class="">
+			<label>This is a 
+				<select>
+					<option>
+						low priority risk
+					</option>
+					<option>
+						medium priority risk
+					</option>
+					<option>
+						high priority risk
+					</option>
+				</select> .
+			</label>
+		</fieldset>
+	</article>
+
+	<div class="module-navigation-tabs" id="ActionPlanItemForm">
+		<div class="tab-container current" id="measure-1">
+			<div class="column">
+				<fieldset class="condensed">
+					<legend>Description <a class="button small solutions" href="#standardSolutions">Standard solutions</a> <dfn class="icon info pat-tooltip" title="How do I use this form?"></dfn></legend> 
+					<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea> 
+					<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea> 
+					<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3"></textarea>
+				</fieldset>
+			</div>
+
+			<div class="column">
+				<fieldset class="condensed">
+					<label>Who is responsible? <dfn class="icon info pat-tooltip" title="(More information)"></dfn> <input class="responsible" name="responsible" type="text"></label> <label>Budget (in Euro) <dfn class="icon info pat-tooltip" title="(More information)"></dfn> <input class="budget" min="0" name="budget" step="100" type="number"></label>
+
+					<fieldset class="condensed">
+						<legend>Planning start</legend>
+
+						<fieldset class="date-eu">
+							<input class="day" id="planning_start_day" maxlength="2" name="planning_start.day:record" placeholder="DD" type="number" value="12"> <label for="planning_start_month">Month</label> <select class="month" id="planning_start_month" name="planning_start.month:record">
+								<option value="01">
+									January
+								</option>
+
+								<option value="02">
+									February
+								</option>
+
+								<option value="03">
+									March
+								</option>
+
+								<option value="04">
+									April
+								</option>
+
+								<option value="05">
+									May
+								</option>
+
+								<option value="06">
+									June
+								</option>
+
+								<option value="07">
+									July
+								</option>
+
+								<option value="08">
+									August
+								</option>
+
+								<option value="09">
+									September
+								</option>
+
+								<option value="10">
+									October
+								</option>
+
+								<option value="11">
+									November
+								</option>
+
+								<option value="12">
+									December
+								</option>
+							</select> <input class="year enablePicker" id="planning_start_year" maxlength="4" name="planning_start.year:record" placeholder="YYYY" type="number" value="2012">
+						</fieldset>
+					</fieldset>
+
+					<fieldset class="condensed">
+						<legend>Planning end</legend>
+
+						<fieldset class="date-eu">
+							<label for="planning_end_day">Day</label> <input class="day" id="planning_end_day" maxlength="2" name="planning_end.day:record" placeholder="DD" type="number"> <label for="planning_end_month">Month</label> <select class="month" id="planning_end_month" name="planning_end.month:record">
+								<option value="01">
+									January
+								</option>
+
+								<option value="02">
+									February
+								</option>
+
+								<option value="03">
+									March
+								</option>
+
+								<option value="04">
+									April
+								</option>
+
+								<option value="05">
+									May
+								</option>
+
+								<option value="06">
+									June
+								</option>
+
+								<option value="07">
+									July
+								</option>
+
+								<option value="08">
+									August
+								</option>
+
+								<option value="09">
+									September
+								</option>
+
+								<option value="10">
+									October
+								</option>
+
+								<option value="11">
+									November
+								</option>
+
+								<option value="12">
+									December
+								</option>
+							</select> <label for="planning_end_year">Year</label> <input class="year enablePicker" id="planning_end_year" maxlength="4" name="planning_end.year:record" placeholder="YYYY" size="4" type="number" value="2012">
+						</fieldset>
+					</fieldset>
+				</fieldset>
+			</div>
+		</div>
+
+		<div class="tab-container error" id="measure-2">
+			<div class="column">
+				<fieldset class="condensed">
+					<legend>Description <a class="button small solutions" href="#standardSolutions">Standard solutions</a> <dfn class="icon info pat-tooltip" title="How do I use this form?"></dfn></legend> 
+					<textarea class="actionPlan error" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea> 
+					<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea> 
+					<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3"></textarea>
+				</fieldset>
+			</div>
+
+			<div class="column">
+				<fieldset class="condensed">
+					<label>Who is responsible? <dfn class="icon info pat-tooltip" title="(More information)"></dfn> <input class="responsible" name="responsible" type="text"></label> <label>Budget (in Euro) <dfn class="icon info pat-tooltip" title="(More information)"></dfn> <input class="budget" min="0" name="budget" step="100" type="number"></label>
+
+					<fieldset class="condensed error">
+						<legend>Planning start</legend>
+
+						<fieldset class="date-eu">
+							<input class="day error" id="planning_start_day-2" maxlength="2" name="planning_start.day:record" placeholder="Day" type="number" value="40">
+
+							<p class="focustip error target-id-planning_start_day-2">Enter a valid day</p><label for="planning_start_month">Month</label> <select class="month" id="planning_start_month-2" name="planning_start.month:record">
+								<option value="01">
+									January
+								</option>
+
+								<option value="02">
+									February
+								</option>
+
+								<option value="03">
+									March
+								</option>
+
+								<option value="04">
+									April
+								</option>
+
+								<option value="05">
+									May
+								</option>
+
+								<option value="06">
+									June
+								</option>
+
+								<option value="07">
+									July
+								</option>
+
+								<option value="08">
+									August
+								</option>
+
+								<option value="09">
+									September
+								</option>
+
+								<option value="10">
+									October
+								</option>
+
+								<option value="11">
+									November
+								</option>
+
+								<option value="12">
+									December
+								</option>
+							</select> <input class="year enablePicker error" id="planning_start_year-2" maxlength="4" name="planning_start.year:record" placeholder="Year" type="number" value="1980">
+
+							<p class="focustip error target-id-planning_start_year-2">Year must be at least 2000</p>
+						</fieldset>
+					</fieldset>
+
+					<fieldset class="condensed">
+						<legend>Planning end</legend>
+
+						<fieldset class="date-eu">
+							<input class="day" id="planning_end_day-2" maxlength="2" name="planning_end.day:record" placeholder="DD" type="number"> <label for="planning_end_month">Month</label> <select class="month" id="planning_end_month-2" name="planning_end.month:record">
+								<option value="01">
+									January
+								</option>
+
+								<option value="02">
+									February
+								</option>
+
+								<option value="03">
+									March
+								</option>
+
+								<option value="04">
+									April
+								</option>
+
+								<option value="05">
+									May
+								</option>
+
+								<option value="06">
+									June
+								</option>
+
+								<option value="07">
+									July
+								</option>
+
+								<option value="08">
+									August
+								</option>
+
+								<option value="09">
+									September
+								</option>
+
+								<option value="10">
+									October
+								</option>
+
+								<option value="11">
+									November
+								</option>
+
+								<option value="12">
+									December
+								</option>
+							</select> <input class="year enablePicker" id="planning_end_year-2" maxlength="4" name="planning_end.year:record" placeholder="YYYY" size="4" type="number" value="2012">
+						</fieldset>
+					</fieldset>
+				</fieldset>
+			</div>
+		</div>
+
+		<button class="small" id="addMeasureButton" title="Add another measure" type="button">Add another measure</button>
+	</div>
+	
+</form>

@@ -21,13 +21,14 @@
 
 	#burger {
 		padding: 0;
-		width: 2em;
+		width: 2rem;
 		overflow: hidden;
 		float: left;
 
 		&:before {
-			font-size: 1.5em;
-			// line-height: 1.2em;
+			font-size: 1.2em;
+			width: 1.6rem;
+			line-height: 1.7rem;
 			float: left;
 		}
 	}

@@ -6,6 +6,7 @@
 		border-radius: 1em;
 		position: relative;
 
+		&.open.in-progress .functions,
 		.functions {
 			position: absolute;
 			top: 3.2%;
@@ -14,9 +15,9 @@
 			font-size: 0.8em;
 			opacity: 0;
 
-			-moz-transition: opacity 0.5s;
-			-webkit-transition: opacity 0.5s;
-			transition: opacity 0.5s;
+			-moz-transition: opacity 0.2s;
+			-webkit-transition: opacity 0.2s;
+			transition: opacity 0.2s;
 
 			a {
 				display: inline-block;

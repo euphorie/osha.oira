@@ -4,6 +4,20 @@
 		margin-bottom: 2em;
 		border: 1px solid silver;
 		border-radius: 1em;
+		position: relative;
+
+		.functions {
+			position: absolute;
+			top: 3.2%;
+			right: 7%;
+			margin-right: 1em;
+			font-size: 0.8em;
+
+			a {
+				display: inline-block;
+				margin-right: 1em;
+			}
+		}
 
 		h2 {
 			font-size: 1em;

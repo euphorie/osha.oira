@@ -152,14 +152,15 @@ title: {title}{module}
 
     sub_modules = module.findChildren("module", recursive=False)
     sub_number = number + ".1"
+    sub_id = parent_id and "{0}-{1}".format(parent_id, id) or id
     for sub_module in sub_modules:
-        create_module(sub_module, parent_id=id, number=sub_number)
+        create_module(sub_module, parent_id=sub_id, number=sub_number)
         sub_number = increment_number(sub_number)
 
     risks = module.findChildren("risk", recursive=False)
     risk_number = number + ".1"
     for risk in risks:
-        create_risk(risk, parent_id=id, number=risk_number)
+        create_risk(risk, parent_id=sub_id, number=risk_number)
         risk_number = increment_number(risk_number)
 
 

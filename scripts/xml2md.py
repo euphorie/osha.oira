@@ -5,6 +5,7 @@
 
 usage:  %(program)s input.xml output/directory
 """
+import base64
 import codecs
 import os
 import random
@@ -78,6 +79,7 @@ problem_description: "{problem_description}"
 description: "{description}"
 legal_reference: "{legal_reference}"
 evaluation_method: {evaluation_method}
+{image_information}
 solutions:
   solution_1:
     description: "Visual inspection of work areas."
@@ -104,6 +106,17 @@ solutions:
     # solutions = risk.find("solutions").text
     # xxx handle the sub solutions
 
+    images = risk.findAll('image')
+    image_paths = []
+    count = 0
+    for image in images:
+        count += 1
+        image_path = os.path.join(media_path, image['filename'])
+        image_filename = os.path.join(dir_path, image_path)
+        with open(image_filename, 'w') as img_file:
+            img_file.write(base64.decodestring(image.contents[0]))
+        image_paths.append("image_url_{}: /{}".format(count, image_path))
+
     fields = {
         "id": id,
         "title": title,
@@ -116,6 +129,7 @@ solutions:
         "legal_reference": legal_reference,
         "evaluation_method": evaluation_method,
         "body": escape2markdown(description),
+        "image_information": "\n".join(image_paths),
     }
 
     content = risk_template(**fields)
@@ -129,6 +143,7 @@ fid: {id}
 number: "{number}"
 parent_id: {parent_id}
 title: {title}{module}
+{image_information}
 ---
 {body}
 """.format
@@ -137,6 +152,14 @@ title: {title}{module}
     id = str2filename(title)
     description = module.find("description").text
 
+    images = module.findAll('image')
+    image_path = ""
+    if images:
+        image_path = os.path.join(media_path, images[0]['filename'])
+        image_filename = os.path.join(dir_path, image_path)
+        with open(image_filename, 'w') as img_file:
+            img_file.write(base64.decodestring(images[0].contents[0]))
+
     fields = {
         "id": id,
         "title": title,
@@ -144,6 +167,7 @@ title: {title}{module}
         "parent_id": parent_id,
         "module": "\nmodule: {}".format(parent_id) if parent_id else "",
         "body": escape2markdown(description),
+        "image_information": image_path and "/{}".format(image_path) or '',
     }
 
     content = module_template(**fields)
@@ -209,21 +233,25 @@ if __name__ == "__main__":
     with open(input, 'r') as xml:
         soup = BeautifulSoup(xml.read())
 
-    # TODO: write the imgs to files
-    images = soup.findAll('image')
-    print "We have %d images" % len(images)
-    [img.extract() for img in images]
-
     survey = soup.find("survey")
     survey_title = survey.find("title").text
-    dir_path = os.path.join(output_dir, str2filename(survey_title))
+    survey_id = str2filename(survey_title)
+    dir_path = os.path.join(output_dir, survey_id)
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
+
+    media_path = os.path.join('media', survey_id)
+    media_file_path = os.path.join(dir_path, media_path)
+    if not os.path.exists(media_file_path):
+        os.makedirs(media_file_path)
 
     number = 1
     profile_questions = survey.findChildren("profile-question",
                                             recursive=False)
     for profile_question in profile_questions:
+        # Let 2 modules be enough
+        # if number > 2:
+        #     break
         create_profile_question(profile_question, number=str(number))
         number += 1
 

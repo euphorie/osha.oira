@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
 
-"""%(program)s: Strip the image tags from an exported OiRA survey and save it
-agan. Additionally export a text-only version for word counting. Please refer
-to the code for additional options.
+"""%(program)s: UPDATE ME.
 
 usage:  %(program)s input.xml output/directory
 """
@@ -101,8 +99,8 @@ solutions:
     evaluation_method = evaluation_method_node and evaluation_method_node.text or ""
     current = number.endswith(".1") and 'current' or ''
     state = random.choice(STATES)
-    risk = state == 'answered' and random.choice(['risk', '']) or ''
-    classes = "{} {} {}".format(current, state, risk)
+    risk_class = state == 'answered' and random.choice(['risk', '']) or ''
+    classes = "{} {} {}".format(current, state, risk_class)
     # solutions = risk.find("solutions").text
     # xxx handle the sub solutions
 

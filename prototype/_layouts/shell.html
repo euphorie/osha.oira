@@ -60,7 +60,7 @@
 				    	                      {% for risk in site.tool  %}
 				        	                    {% if risk.parent_id == m_id %}
 						    	                <li class="{{risk.classes}}">
-						        	              <a href="{{risk.url}}#content" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document">{{risk.title}}</a>
+						        	              <a href="{{risk.url}}#content" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">{{risk.number}}</strong> {{risk.title}}</a>
 							                      </li>
 			    	                       	    {% endif %}
 						                      {% endfor %}
@@ -84,7 +84,7 @@
 					    		<li class="answered risk">Risk identified</li>
 					    	</ul>
 						</div>
-					    
+
 					{% endif %}
 				</li>
 				<li id="step-4" class="{% if page.section == 'action' %}active{% endif %}">

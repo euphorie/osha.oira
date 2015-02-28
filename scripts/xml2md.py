@@ -167,7 +167,7 @@ title: {title}{module}
         "parent_id": parent_id,
         "module": "\nmodule: {}".format(parent_id) if parent_id else "",
         "body": escape2markdown(description),
-        "image_information": image_path and "/{}".format(image_path) or '',
+        "image_information": image_path and "image_url: /{}".format(image_path) or '',
     }
 
     content = module_template(**fields)

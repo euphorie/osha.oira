@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-biological-substances-is-prevented-or-controlled
-classes: answered risk
+classes: postponed
 number: "1.1.6"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Exposure to biological substances is prevented or controlled."
@@ -15,6 +15,7 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='https://osha.europa.eu/en/legislation/directives/exposure-to-biological-agents/77' rel='nofollow' target='_blank'&gt;2000/54/EC Directive on the protection of workers from risks related to exposure to biological agents at work.&lt;/a&gt;&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
+image_url_1: /media/private-security-eu/waarschuwing_-_biogevaarlijk.png
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

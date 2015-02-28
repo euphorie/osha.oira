@@ -5,6 +5,7 @@ number: "2.5.0"
 parent_id: mobile-partrolling--intervention-after-alarm
 title: Work organisation
 module: mobile-partrolling--intervention-after-alarm
+
 ---
 The way work is organised or procedures are administered can affect the level
 of risk to private security guards.

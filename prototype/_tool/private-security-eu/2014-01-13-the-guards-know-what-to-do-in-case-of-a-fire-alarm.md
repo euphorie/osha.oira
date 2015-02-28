@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-guards-know-what-to-do-in-case-of-a-fire-alarm
-classes: current answered risk
+classes: current postponed
 number: "1.2.1"
 parent_id: commercial-manned-guarding-fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of a fire alarm."
@@ -13,6 +13,9 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:01992L0058-20070627:EN:NOT' rel='nofollow' target='_blank'&gt;92/58/EEC on the minimum requirements for the provision of safety and/or health signs at work&lt;/a&gt;.&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
+image_url_1: /media/private-security-eu/redding_-_uitgang.png
+image_url_2: /media/private-security-eu/brand_-_blusapparaat.png
+image_url_3: /media/private-security-eu/brand_-_brandmelder.png
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

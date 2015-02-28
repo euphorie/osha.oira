@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: working-time-of-private-security-guards-including-overtime-provisions-is-as-stipulated-by-national-legislation-or-collective-labour-agreement
-classes: current answered risk
+classes: current answered
 number: "2.5.1"
 parent_id: mobile-partrolling--intervention-after-alarm-work-organisation
 title: "Working time of private security guards, including overtime provisions, is as stipulated by national legislation or collective labour agreement."
@@ -11,6 +11,7 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='http://europa.eu/legislation_summaries/other/c10405_en.htm' rel='nofollow' target='_blank'&gt;93/104/CEE Directive concerning certain aspects of the organization of working time&lt;/a&gt;&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: 
+
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-private-security-guards-wear-the-necessary-well-fitting-clothes-and-ppe-in-accordance-with-their-duty
-classes: current answered risk
+classes: current answered
 number: "2.3.1"
 parent_id: mobile-partrolling--intervention-after-alarm-work-equipment
 title: "The private security guards wear the necessary, well-fitting clothes and PPE, in accordance with their duty."
@@ -22,6 +22,7 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'&gt;89/654/EEC Directive on the minimum safety and health requirements for the workplace.&lt;/a&gt;&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
+
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

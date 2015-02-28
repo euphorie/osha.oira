@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: health-and-safety-related-dangers-of-lone-work-are-controlled
-classes: answered risk
+classes: postponed
 number: "1.5.4"
 parent_id: commercial-manned-guarding-work-organisation
 title: "Health and safety related dangers of lone work are controlled."
@@ -14,6 +14,7 @@ description: "&lt;p class='MsoNormal'&gt;Lone working private security guards ar
 &lt;/ul&gt;"
 legal_reference: "&lt;a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'&gt;89/391/CEE Implementing measures to improve the health and safety of workers (framework directive)&lt;/a&gt;"
 evaluation_method: 
+
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

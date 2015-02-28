@@ -24,6 +24,7 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='https://osha.europa.eu/data/links/framework-agreement-on-harassment-and-violence-at-work?utm_source=oshmail&amp;amp;utm_medium=email&amp;amp;utm_campaign=index_html' rel='nofollow' target='_blank'&gt;Framework agreement on harassment and violence at work.&lt;/a&gt;&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
+
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

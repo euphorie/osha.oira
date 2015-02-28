@@ -5,6 +5,7 @@ number: "2.4.0"
 parent_id: mobile-partrolling--intervention-after-alarm
 title: Physical and psychosocial workload
 module: mobile-partrolling--intervention-after-alarm
+
 ---
 While technical systems, equipment and the place of work provide the general
 conditions, the actual interaction of the private security guards with the

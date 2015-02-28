@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: tasks-and-responsibilities-are-clear-to-the-private-security-guards
-classes: postponed
+classes: answered risk
 number: "1.4.4"
 parent_id: commercial-manned-guarding-physical-and-psychosocial-workload
 title: "Tasks and responsibilities are clear to the private security guards."
@@ -16,6 +16,7 @@ description: "&lt;p class='MsoNormal'&gt;Private security guards have legally on
 &lt;/ul&gt;"
 legal_reference: "&lt;a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'&gt;89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).&lt;/a&gt;"
 evaluation_method: direct
+
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

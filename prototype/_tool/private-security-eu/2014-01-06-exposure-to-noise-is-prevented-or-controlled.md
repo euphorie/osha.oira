@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-noise-is-prevented-or-controlled
-classes: postponed
+classes: answered risk
 number: "1.1.4"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Exposure to noise is prevented or controlled."
@@ -21,6 +21,7 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='https://osha.europa.eu/en/legislation/directives/exposure-to-physical-hazards/osh-directives/82' rel='nofollow' target='_blank'&gt;2003/10/EC Directive on the minimum health and safety requirements regarding the exposure of workers to the risks arising from physical agents (noise).&lt;/a&gt;&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
+image_url_1: /media/private-security-eu/gebod_-_gehoorbescherming.png
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

@@ -5,6 +5,7 @@ number: "2.2.0"
 parent_id: mobile-partrolling--intervention-after-alarm
 title: Fire prevention and emergency procedures
 module: mobile-partrolling--intervention-after-alarm
+image_url: /media/private-security-eu/waarschuwing_-_ontvlambaar.png
 ---
 Private security guards need to be prepared for responding to fire and
 emergency situations.

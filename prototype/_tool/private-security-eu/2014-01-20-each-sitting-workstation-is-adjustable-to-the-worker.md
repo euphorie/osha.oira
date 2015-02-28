@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: each-sitting-workstation-is-adjustable-to-the-worker
-classes: answered risk
+classes: postponed
 number: "1.3.5"
 parent_id: commercial-manned-guarding-work-equipment
 title: "Each sitting workstation is adjustable to the worker."
@@ -24,6 +24,7 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/3' rel='nofollow' target='_blank'&gt;2009/104/EC Directive on the minimum safety and health requirements for the use of work equipment.&lt;/a&gt;&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
+
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

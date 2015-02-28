@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: health-risks-related-to-manual-handling-of-loads-are-prevented
-classes: current answered risk
+classes: current postponed
 number: "2.4.1"
 parent_id: mobile-partrolling--intervention-after-alarm-physical-and-psychosocial-workload
 title: "Health risks related to manual handling of loads are prevented."
@@ -16,6 +16,7 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='https://osha.europa.eu/en/legislation/directives/provisions-on-workload-ergonomical-and-psychosocial-risks/osh-directives/6' rel='nofollow' target='_blank'&gt;90/269/EEC Directive on the minimum health and safety requirements for the manual handling of loads.&lt;/a&gt;&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
+
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

@@ -20,6 +20,9 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'&gt;89/654/EEC Directive on the minimum safety and health requirements for the workplace&lt;/a&gt;.&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
+image_url_1: /media/private-security-eu/waarschuwing_-_struikelgevaar.png
+image_url_2: /media/private-security-eu/waarschuwing_-_uitglijden.png
+image_url_3: /media/private-security-eu/waarschuwing_-_afgrond.png
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

@@ -12,6 +12,7 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='http://ec.europa.eu/employment_social/dsw/public/actRetrieveText.do?id=10402' rel='nofollow' target='_blank'&gt;EU Framework agreement on work-related stress&lt;/a&gt;&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
+
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: collisions-bumps-and-jamming-are-prevented
-classes: postponed
+classes: answered
 number: "2.1.2"
 parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "Collisions, bumps, and jamming are prevented."
@@ -16,6 +16,10 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'&gt;89/654/EEC Directive on the minimum safety and health requirements for the workplace&lt;/a&gt;.&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
+image_url_1: /media/private-security-eu/waarschuwing_-_beklemming_lichaam.png
+image_url_2: /media/private-security-eu/waarschuwing_-_knelgevaar_draaiend.png
+image_url_3: /media/private-security-eu/waarschuwing_-_snijgevaar_voor_voet.png
+image_url_4: /media/private-security-eu/waarschuwing_-_kantelgevaar.png
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

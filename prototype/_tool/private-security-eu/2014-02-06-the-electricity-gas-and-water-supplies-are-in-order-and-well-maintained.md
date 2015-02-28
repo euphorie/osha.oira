@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-electricity-gas-and-water-supplies-are-in-order-and-well-maintained
-classes: answered risk
+classes: answered
 number: "2.1.3"
 parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "The electricity, gas and water supplies are in order and well-maintained."
@@ -16,6 +16,7 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='http://ec.europa.eu/enterprise/sectors/electrical/documents/lvd/legislation/' target='_blank' rel='nofollow'&gt;2006/95/EC Directive on the harmonisation of the laws of Member States relating to electrical equipment designed for use within certain voltage limits&lt;/a&gt;.&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
+image_url_1: /media/private-security-eu/waarschuwing_-_elektriciteit.png
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-dogs-are-well-trained-and-have-regular-medical-check-ups
-classes: answered
+classes: postponed
 number: "2.3.3"
 parent_id: mobile-partrolling--intervention-after-alarm-work-equipment
 title: "The dogs are well trained and have regular medical check-ups."
@@ -24,6 +24,7 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='https://osha.europa.eu/en/legislation/directives/exposure-to-biological-agents/77' rel='nofollow' target='_blank'&gt;2000/54/EC Directive on the protection of workers from risks related to exposure to biological agents at work&lt;/a&gt;.&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
+
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

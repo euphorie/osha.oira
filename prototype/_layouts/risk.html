@@ -2,15 +2,15 @@
 layout: shell
 application: home
 design_title: Homepage
-design_description: 
+design_description:
 ---
 
 <form method="post" action="#">
 	<fieldset class="vertical">
 		<fieldset class="pat-checklist radio">
-			<legend>{{ page.title }}</legend> 
-			<label class="yes"><input type="radio" name="answer" value="yes" {% if page.classes == 'answered' %}checked{% endif %} />Yes</label> 
-			<label class="no"><input type="radio" name="answer" value="no" {% if page.classes == 'answered risk' %}checked{% endif %} />No</label> 
+			<legend>{{ page.title }}</legend>
+			<label class="yes"><input type="radio" name="answer" value="yes" {% if page.classes contains 'answered' %}checked{% endif %} />Yes</label>
+			<label class="no"><input type="radio" name="answer" value="no" {% if page.classes contains 'answered' and page.classes contains 'risk' %}checked{% endif %} />No</label>
 			<label class="not-applicable"><input type="radio" name="answer" value="na" {% if page.classes contains 'postponed' %}checked{% endif %} />Not applicable</label>
 		</fieldset>
 	</fieldset>
@@ -45,7 +45,7 @@ design_description:
 	</fieldset>
 
 	<p class="buttonBar">
-		<button type="submit" name="next" value="previous" class="pat-button back">Previous</button> 
+		<button type="submit" name="next" value="previous" class="pat-button back">Previous</button>
 		<button type="submit" name="next" value="next" class="pat-button">Next</button>
 	</p>
 </form>

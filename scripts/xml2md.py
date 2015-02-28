@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-# Author: Wolfgang Thomas <thomas@syslab.com>
 
 """%(program)s: Strip the image tags from an exported OiRA survey and save it
 agan. Additionally export a text-only version for word counting. Please refer
@@ -10,9 +9,10 @@ usage:  %(program)s input.xml output/directory
 """
 import codecs
 import os
-import sys
 import random
 import re
+import sys
+import unicodedata
 
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 from html2text import html2text
@@ -33,6 +33,8 @@ def usage(stream, msg=None):
 
 def str2filename(text):
     stripped_text = re.sub("[()\[\]{}/.,;:!?]", "", text)
+    stripped_text = unicodedata.normalize('NFKD', stripped_text).encode(
+        'ascii', 'ignore')
     return stripped_text.lower().replace(" ", "-")
 
 
@@ -93,9 +95,10 @@ solutions:
     id = str2filename(title)
     problem_description = _r(risk.find("problem-description").text)
     description = _r(risk.find("description").text)
-    legal_reference = _r(risk.find("legal-reference").text)
-    evaluation_method = risk.find("evaluation-method")
-    evaluation_method = evaluation_method and evaluation_method.text or ""
+    legal_reference_node = risk.find("legal-reference")
+    legal_reference = legal_reference_node and _r(legal_reference_node.text) or ""
+    evaluation_method_node = risk.find("evaluation-method")
+    evaluation_method = evaluation_method_node and evaluation_method_node.text or ""
     current = number.endswith(".1") and 'current' or ''
     state = random.choice(STATES)
     classes = "%s %s risk" % (current, state)

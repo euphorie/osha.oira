@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: the-possibility-of-having-sufficient-opportunities-for-breaks-is-taken-into-account
-classes: answered risk
-number: "1.5.2"
-parent_id: commercial-manned-guarding-work-organisation
+classes: postponed
+number: "2.5.2"
+parent_id: mobile-partrolling--intervention-after-alarm-work-organisation
 title: "The possibility of having sufficient opportunities for breaks is taken into account."
 problem_description: "The possibility of having sufficient opportunities for breaks is not taken into account."
 description: "&lt;p&gt;National legislation and/or national or sectoral collective labour agreements must be respected. The particular features of the private security sector (clients particular demands) are taken into account.&lt;/p&gt;"

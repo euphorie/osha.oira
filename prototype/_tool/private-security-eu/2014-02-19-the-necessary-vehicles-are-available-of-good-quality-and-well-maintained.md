@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: the-necessary-vehicles-are-available-of-good-quality-and-well-maintained
-classes: answered risk
+classes: postponed
 number: "2.3.4"
-parent_id: work-equipment
+parent_id: mobile-partrolling--intervention-after-alarm-work-equipment
 title: "The necessary vehicles are available, of good quality and well maintained."
 problem_description: "The necessary vehicles are not available, of bad quality and/or poorly maintained."
 description: "&lt;p class='MsoNormal'&gt;There is a number of risks which affect all security staff going to work in a &lt;strong&gt;vehicle&lt;/strong&gt;. &lt;/p&gt;&amp;#13;

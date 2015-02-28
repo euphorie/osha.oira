@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: tasks-and-responsibilities-are-clear-to-the-private-security-guards
-classes: answered risk
+classes: answered
 number: "2.4.4"
-parent_id: physical-and-psychosocial-workload
+parent_id: mobile-partrolling--intervention-after-alarm-physical-and-psychosocial-workload
 title: "Tasks and responsibilities are clear to the private security guards."
 problem_description: "Tasks and responsibilities are not clear to the guards."
 description: "&lt;p class='MsoNormal'&gt;Private security guards have legally only one hierarchical line, i.e. with their employers and representatives. In the exercise of their duties, however, they have to meet the demands of the customer, which have been the object of a written agreement between his employer and the customer. In principle, the duties and obligations of those involved (the client - the employer - the security guard) are clearly delineated. However, in the field, the subcontracting relationship may result in each party’s &lt;strong&gt;roles and responsibilities becoming blurred&lt;/strong&gt;. This may &lt;strong&gt;cause stress&lt;/strong&gt; for security guards. &lt;/p&gt;&amp;#13;

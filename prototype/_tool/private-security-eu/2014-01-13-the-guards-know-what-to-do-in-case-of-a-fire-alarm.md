@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: the-guards-know-what-to-do-in-case-of-a-fire-alarm
-classes: postponed
+classes: current answered risk
 number: "1.2.1"
-parent_id: fire-prevention-and-emergency-procedures
+parent_id: commercial-manned-guarding-fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of a fire alarm."
 problem_description: "The guards do not know what to do in case of a fire alarm."
 description: "&lt;p class='MsoNormal'&gt;The tasks during a &lt;strong&gt;fire alarm&lt;/strong&gt; should be clear to all private security guards: fire fighting, evacuation procedures (guiding visitors, blocking entrances), emergency first aid, ... This should be &lt;strong&gt;tested and exercised during regular drills&lt;/strong&gt;.&lt;/p&gt;&amp;#13;

@@ -3,7 +3,7 @@ layout: risk
 fid: measures-are-taken-to-reduce-time-pressure
 classes: postponed
 number: "2.4.3"
-parent_id: physical-and-psychosocial-workload
+parent_id: mobile-partrolling--intervention-after-alarm-physical-and-psychosocial-workload
 title: "Measures are taken to reduce time pressure."
 problem_description: "Measures are not taken to reduce time pressure."
 description: "&lt;p class='MsoNormal'&gt;Some security activities require a series of time considerations to be met. These must be the object of an agreement between the employer and the  the client:  operational response times,  frequency of a series of operations, ... This kind of &lt;strong&gt;time pressure&lt;/strong&gt; can be a &lt;strong&gt;source of &lt;a title='' href='https://osha.europa.eu/en/topics/stress' target='_blank' rel='nofollow'&gt;stress&lt;/a&gt;&lt;/strong&gt;, particularly because unpredictable factors and unforeseen circumstances can lead to failure to comply with these kinds of requirements.&lt;/p&gt;&amp;#13;

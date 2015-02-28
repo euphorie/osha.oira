@@ -3,7 +3,7 @@ layout: risk
 fid: exposure-to-radiation-is-prevented-or-controlled
 classes: answered risk
 number: "1.1.7"
-parent_id: work-environment-site-related
+parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Exposure to radiation is prevented or controlled."
 problem_description: "Exposure to radiation is neither prevented nor controlled."
 description: "&lt;p class='MsoNormal'&gt;&lt;strong&gt;SCANNERS / X-RAY MACHINES. &lt;/strong&gt;The use of equipment which generates radiation or working in areas close to radiation sources entails a risk of tissue being destroyed and/or irreversible effects on health.&lt;/p&gt;&amp;#13;

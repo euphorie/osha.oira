@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: slips-trips-and-falls-are-prevented
-classes: answered risk
+classes: current answered
 number: "2.1.1"
-parent_id: work-environment-site-related
+parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "Slips, trips and falls are prevented."
 problem_description: "Slips, trips and falls are not prevented."
 description: "&lt;p class='MsoNormal'&gt;A significant number of occupational accidents are related to &lt;strong&gt;moving around the client company’s premises, either inside or outside the buildings&lt;/strong&gt; (e.g. static surveillance, rounds and surveillance patrols). These are mainly falls on the same level and those from a height, resulting in fractures, sprains, contusions, ... &lt;/p&gt;&amp;#13;

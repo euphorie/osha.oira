@@ -3,7 +3,7 @@ layout: risk
 fid: appropriate-tools-are-available-of-good-quality-and-well-maintained
 classes: answered risk
 number: "2.3.2"
-parent_id: work-equipment
+parent_id: mobile-partrolling--intervention-after-alarm-work-equipment
 title: "Appropriate tools are available, of good quality and well maintained."
 problem_description: "Appropriate tools are not available, of bad quality and poorly maintained"
 description: "&lt;p class='MsoNormal'&gt;&lt;strong&gt;National legislation regulating the carrying of weapons&lt;/strong&gt; differs widely from country to country:&lt;/p&gt;&amp;#13;

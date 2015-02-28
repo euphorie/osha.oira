@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: risks-related-to-violence-and-aggression-are-prevented
-classes: postponed
+classes: answered risk
 number: "1.4.5"
-parent_id: physical-and-psychosocial-workload
+parent_id: commercial-manned-guarding-physical-and-psychosocial-workload
 title: "Risks related to violence and aggression are prevented."
 problem_description: "Risks related to violence and aggression are not prevented."
 description: "&lt;p class='MsoNormal'&gt;&lt;strong&gt;Violence/aggression against private security guards&lt;/strong&gt; may come in many guises:&lt;/p&gt;&amp;#13;

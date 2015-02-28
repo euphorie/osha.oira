@@ -2,8 +2,8 @@
 layout: risk
 fid: health-and-safety-related-dangers-of-lone-work-are-controlled
 classes: answered risk
-number: "1.5.4"
-parent_id: commercial-manned-guarding-work-organisation
+number: "2.5.4"
+parent_id: mobile-partrolling--intervention-after-alarm-work-organisation
 title: "Health and safety related dangers of lone work are controlled."
 problem_description: "Health and safety related dangers of lone work are not controlled."
 description: "&lt;p class='MsoNormal'&gt;Lone working private security guards are &lt;strong&gt;those who work alone without any direct or close supervision&lt;/strong&gt;, generally on small sites which require the work of a single person.&lt;/p&gt;&amp;#13;

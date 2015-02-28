@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: exposure-to-chemical-substances-is-prevented-or-controlled
-classes: 
+classes: answered
 number: "2.1.5"
-parent_id: work-environment-site-related
+parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "Exposure to chemical substances is prevented or controlled."
 problem_description: "Exposure to chemical substances is neither prevented nor controlled."
 description: "&lt;p class='MsoNormal'&gt;&lt;strong&gt;CHEMICAL HAZARDS&lt;/strong&gt;&lt;/p&gt;&amp;#13;

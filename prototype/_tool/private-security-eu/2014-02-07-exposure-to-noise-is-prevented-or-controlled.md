@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: exposure-to-noise-is-prevented-or-controlled
-classes: 
+classes: answered
 number: "2.1.4"
-parent_id: work-environment-site-related
+parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "Exposure to noise is prevented or controlled."
 problem_description: "Exposure to noise is neither prevented nor controlled."
 description: "&lt;p class='MsoNormal'&gt;&lt;a title='' href='https://osha.europa.eu/en/topics/noise/index_html' rel='nofollow' target='_blank'&gt;Noise &lt;/a&gt;is an unwanted sound. &lt;/p&gt;&amp;#13;

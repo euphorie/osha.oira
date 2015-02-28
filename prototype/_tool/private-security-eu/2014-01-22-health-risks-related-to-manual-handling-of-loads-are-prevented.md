@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: health-risks-related-to-manual-handling-of-loads-are-prevented
-classes: current postponed risk
+classes: current postponed
 number: "1.4.1"
-parent_id: physical-and-psychosocial-workload
+parent_id: commercial-manned-guarding-physical-and-psychosocial-workload
 title: "Health risks related to manual handling of loads are prevented."
 problem_description: "Health risks related to manual handling of loads are not prevented."
 description: "&lt;p class='MsoNormal'&gt;According to the &lt;a title='' href='https://osha.europa.eu/en/legislation/directives/provisions-on-workload-ergonomical-and-psychosocial-risks/osh-directives/6' rel='nofollow' target='_blank'&gt;European directive which sets the minimum health and safety requirements for manual handling of loads&lt;/a&gt; “manual handling of loads means any activity involving transporting or supporting a load by one or several workers…”.&lt;/p&gt;&amp;#13;

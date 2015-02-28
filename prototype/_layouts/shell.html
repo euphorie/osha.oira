@@ -58,7 +58,8 @@
 					                      {% if pagelevel[0] == modulelevel[0] and pagelevel[1] == modulelevel[1] %}
 			    	                      	<ol class="questions navigation">
 				    	                      {% for risk in site.tool  %}
-				        	                    {% if risk.parent_id == m_id %}
+				    	                        {% capture p_id %}{{ id }}-{{ m_id}}{% endcapture %}
+				        	                    {% if risk.parent_id == p_id %}
 						    	                <li class="{{risk.classes}}">
 						        	              <a href="{{risk.url}}#content" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">{{risk.number}}</strong> {{risk.title}}</a>
 							                      </li>

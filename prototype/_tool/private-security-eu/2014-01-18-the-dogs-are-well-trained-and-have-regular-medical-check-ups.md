@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: the-dogs-are-well-trained-and-have-regular-medical-check-ups
-classes: answered risk
+classes: postponed
 number: "1.3.3"
-parent_id: work-equipment
+parent_id: commercial-manned-guarding-work-equipment
 title: "The dogs are well trained and have regular medical check-ups."
 problem_description: "The dogs are not well trained and/or don't have regular medical check-ups."
 description: "&lt;p class='MsoNormal'&gt;Dogs can cause slight &lt;strong&gt;injuries&lt;/strong&gt; such as lesions, light traumas (scratches, bruises) and serious injuries such as bites, etc. They may also be a carrier of microorganisms, viruses, proteins etc. that could cause &lt;strong&gt;infections, allergies or other health problems&lt;/strong&gt;.&lt;/p&gt;&amp;#13;

@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: collisions-bumps-and-jamming-are-prevented
-classes: answered
+classes: postponed
 number: "1.1.2"
-parent_id: work-environment-site-related
+parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Collisions, bumps, and jamming are prevented."
 problem_description: "Collisions, bumps, and jamming are not prevented."
 description: "&lt;p class='MsoNormal'&gt;Collisions, bumps and jamming involve &lt;strong&gt;fixed objects&lt;/strong&gt; (idle machinery, tools, furniture, ...), or &lt;strong&gt;moving objects&lt;/strong&gt; (machines placed in passageways, vehicles, sliding doors, ...).&lt;/p&gt;&amp;#13;

@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: the-guards-know-what-to-do-in-case-of-serious-and-imminent-dangers
-classes: postponed
+classes: answered risk
 number: "2.2.2"
-parent_id: fire-prevention-and-emergency-procedures
+parent_id: mobile-partrolling--intervention-after-alarm-fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of serious and imminent dangers."
 problem_description: "The guards do not know what to do in case of serious and imminent dangers."
 description: "&lt;p class='MsoNormal'&gt;The tasks during a &lt;strong&gt;bomb threat or other serious &amp;amp; immediate dangers (e.g., gas leak, flooding, ...)&lt;/strong&gt; should be clear to all private security guards. This should be &lt;strong&gt;tested and exercised during regular drills&lt;/strong&gt;.&lt;/p&gt;&amp;#13;

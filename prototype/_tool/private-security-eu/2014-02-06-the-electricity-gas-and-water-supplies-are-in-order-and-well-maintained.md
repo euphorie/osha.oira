@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: the-electricity-gas-and-water-supplies-are-in-order-and-well-maintained
-classes: 
+classes: answered risk
 number: "2.1.3"
-parent_id: work-environment-site-related
+parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "The electricity, gas and water supplies are in order and well-maintained."
 problem_description: "The electricity, gas and water supplies are not in order and/or not well-maintained."
 description: "&lt;p class='MsoNormal'&gt;&lt;strong&gt;Ensure that the electrical system, as well as the gas and water supplies are safe.&lt;/strong&gt; Some examples: all the exposed conductive parts are connected to the earthing system; all safety devices and switches are in place and they work well; there are measures in place to protect electrical equipment from water; ... &lt;/p&gt;&amp;#13;

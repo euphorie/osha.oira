@@ -3,7 +3,7 @@ layout: risk
 fid: all-necessary-facilities-are-available-and-well-maintained
 classes: answered
 number: "1.1.9"
-parent_id: work-environment-site-related
+parent_id: commercial-manned-guarding-work-environment-site-related
 title: "All necessary facilities are available and well maintained."
 problem_description: "Not all necessary facilities are available and well maintained."
 description: "&lt;p class='MsoNormal'&gt;Security guards should be provided with the following facilities, if and when necessary in view of their shift and taking the specific national legal provisions into account:&lt;/p&gt;&amp;#13;

@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: each-sitting-workstation-is-adjustable-to-the-worker
-classes: postponed
+classes: answered
 number: "2.3.5"
-parent_id: work-equipment
+parent_id: mobile-partrolling--intervention-after-alarm-work-equipment
 title: "Each sitting workstation is adjustable to the worker."
 problem_description: "Not each sitting workstation is adjustable to the worker."
 description: "&lt;p class='MsoNormal'&gt;Prolonged periods of &lt;strong&gt;working while sitting down &lt;/strong&gt;(e.g. counter/reception work, computer work)&lt;strong&gt;, &lt;/strong&gt;often&lt;strong&gt; in front of screens/monitors&lt;/strong&gt; (e.g. activities in alarm control centres and certain access control posts) may cause pain in the back, neck, shoulders, arms, legs, ... These health complaints can lead to lengthy sickness.&lt;/p&gt;&amp;#13;

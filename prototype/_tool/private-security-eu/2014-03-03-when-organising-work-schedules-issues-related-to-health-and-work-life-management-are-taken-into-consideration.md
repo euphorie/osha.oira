@@ -2,8 +2,8 @@
 layout: risk
 fid: when-organising-work-schedules-issues-related-to-health-and-work-life-management-are-taken-into-consideration
 classes: postponed
-number: "1.5.3"
-parent_id: commercial-manned-guarding-work-organisation
+number: "2.5.3"
+parent_id: mobile-partrolling--intervention-after-alarm-work-organisation
 title: "When organising work schedules, issues related to health and work life management are taken into consideration."
 problem_description: "When organising work schedules, issues related to health and work life management are not taken into consideration."
 description: "&lt;p&gt;Considering issues related to health and work life management, when organising work schedules, contributes to the quality of the work performed and the due protection of private security guards health. In any case, national legislation and or national or sectoral CLA’s must be respected.&lt;/p&gt;"

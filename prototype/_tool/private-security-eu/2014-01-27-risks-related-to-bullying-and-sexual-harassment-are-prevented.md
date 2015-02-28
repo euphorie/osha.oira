@@ -3,7 +3,7 @@ layout: risk
 fid: risks-related-to-bullying-and-sexual-harassment-are-prevented
 classes: postponed
 number: "1.4.6"
-parent_id: physical-and-psychosocial-workload
+parent_id: commercial-manned-guarding-physical-and-psychosocial-workload
 title: "Risks related to bullying and sexual harassment are prevented."
 problem_description: "Risks related to bullying and sexual harassment are not prevented."
 description: "&lt;p class='MsoNormal'&gt;&lt;strong&gt;&lt;a title='' href='https://osha.europa.eu/en/publications/factsheets/23/' rel='nofollow' target='_blank'&gt;Bullying in the workplace&lt;/a&gt;&lt;/strong&gt; is taken to mean “abnormal, repeated behaviour directed against a worker or group of workers which results in a risk to health and safety. (…) which may manifest itself through verbal as well as physical aggression, but also through more subtle acts, such as underrating an employee’s work or isolating the individual socially.” Examples of bullying could include: spreading malicious rumours, unfair treatment, picking on someone, ... It can happen face-to-face, by letter, by email, by phone.&lt;/p&gt;&amp;#13;

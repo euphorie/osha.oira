@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: risks-from-ambient-factors-are-prevented
-classes: answered risk
+classes: answered
 number: "1.1.8"
-parent_id: work-environment-site-related
+parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Risks from ambient factors are prevented."
 problem_description: "Risks from ambient factors are not prevented."
 description: "&lt;p class='MsoNormal'&gt;Whether it is inside a building or in outside workstations, minimal conditions in terms of ambient factors (humidity, ventilation, temperature, lighting) must be observed. These conditions must be fulfilled taking into account the specificities of the workstations, the level of physical activity required as well as the security officer´s clothing.&lt;/p&gt;&amp;#13;

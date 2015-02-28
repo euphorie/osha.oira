@@ -3,7 +3,7 @@ layout: risk
 fid: risks-from-prolonged-standing-are-prevented
 classes: postponed
 number: "1.4.2"
-parent_id: physical-and-psychosocial-workload
+parent_id: commercial-manned-guarding-physical-and-psychosocial-workload
 title: "Risks from prolonged standing are prevented."
 problem_description: "Risks from prolonged standing are not prevented."
 description: "&lt;p class='MsoNormal'&gt;&lt;strong&gt;Systematically working in an upright positon&lt;/strong&gt; for considerable lengths of time (e.g. during access control and static surveillance activities) is physically as well as mentally very demanding. It may lead to health complaints such as pain in legs, back pain, varicose vains.&lt;/p&gt;&amp;#13;

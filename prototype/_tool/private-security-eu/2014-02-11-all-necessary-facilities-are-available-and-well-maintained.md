@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: all-necessary-facilities-are-available-and-well-maintained
-classes: 
+classes: answered
 number: "2.1.8"
-parent_id: work-environment-site-related
+parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "All necessary facilities are available and well maintained."
 problem_description: "Not all necessary facilities are available and well maintained."
 description: "&lt;p class='MsoNormal'&gt;Security guards should be provided with the following facilities, if and when necessary in view of their shift and taking the specific national legal provisions into account:&lt;/p&gt;&amp;#13;

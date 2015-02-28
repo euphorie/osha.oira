@@ -101,7 +101,8 @@ solutions:
     evaluation_method = evaluation_method_node and evaluation_method_node.text or ""
     current = number.endswith(".1") and 'current' or ''
     state = random.choice(STATES)
-    classes = "%s %s risk" % (current, state)
+    risk = state == 'answered' and random.choice(['risk', '']) or ''
+    classes = "{} {} {}".format(current, state, risk)
     # solutions = risk.find("solutions").text
     # xxx handle the sub solutions
 

@@ -1,7 +1,7 @@
 #content {	
 	font-size: 120%;
 	line-height: 1.5em;
-	padding: 4% 6% 4% 6%;
+	padding: 10% 6% 10% 6%;
 	overflow: auto;
 	position: absolute;
 	left: 33.33333333%;
@@ -9,9 +9,9 @@
 	right: 0;
 	bottom: 0;
 
-	-moz-transition: left 0.5s;
-	-webkit-transition: left 0.5s;
-	transition: left 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
 }
 
 @include screen-size(small) {
@@ -47,5 +47,6 @@
 	.sidebar-off #content,
 	.osc-off.sidebar-off #content {
 		left: 0;
+		padding: 10% 10% 10% 10%;
 	}
 }

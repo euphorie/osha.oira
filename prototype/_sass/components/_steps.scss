@@ -13,12 +13,19 @@
 		}
 
 		&#help {
+			margin-top: 2em;
+			position: relative;
 
 			&:before {
-				border-top: solid 1px gray;
-				margin: 0.8em 6%;
+				position: absolute;
+				top: -0.95em;
+				background-color: gray;
+				right: 6%;
+				left: 6%;
 				content: ' ';
 				display: block;
+				height: 1px;
+				opacity: 0.5;
 			}
 		}
 	}

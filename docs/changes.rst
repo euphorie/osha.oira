@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.6 (unreleased)
+2.3.6 (2015-03-19)
 ------------------
 
 - remove three dots on action plan intro page #11424

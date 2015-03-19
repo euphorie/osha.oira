@@ -20,6 +20,8 @@ from datetime import timedelta
 
 STATES = ['answered', 'postponed']
 
+MAX_NUMBER_MODULES = 2
+
 
 def usage(stream, msg=None):
     if msg:
@@ -164,7 +166,7 @@ title: {title}{module}
         image_filename = os.path.join(dir_path, image_path)
         with open(image_filename, 'w') as img_file:
             img_file.write(base64.decodestring(images[0].contents[0]))
-        image_info = u"images:\n    - url: {0}\n      caption: {1}\n".format(
+        image_info = u"images:\n    - url: /{0}\n      caption: {1}\n".format(
             image_path, images[0].get('caption', ''))
 
     fields = {
@@ -256,13 +258,16 @@ if __name__ == "__main__":
     profile_questions = survey.findChildren("profile-question",
                                             recursive=False)
     for profile_question in profile_questions:
-        # Let 2 modules be enough
-        # if number > 2:
-        #     break
+        # Let X modules be enough
+        if MAX_NUMBER_MODULES and number > MAX_NUMBER_MODULES:
+            break
         create_profile_question(profile_question, number=str(number))
         number += 1
 
     modules = survey.findChildren("module", recursive=False)
     for module in modules:
+        # Let X modules be enough
+        if MAX_NUMBER_MODULES and number > MAX_NUMBER_MODULES:
+            break
         create_module(module, number=str(number))
         number += 1

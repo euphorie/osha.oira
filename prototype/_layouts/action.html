@@ -28,12 +28,11 @@ design_description:
 		</fieldset>
 	</article>
 
-	<div class="measures pat-clone" id="ActionPlanItemForm">
+	<div class="measures pat-clone" data-pat-clone="template: #measure-template" id="ActionPlanItemForm">
 		<div class="measure pat-collapsible" id="measure-1">
 			<h2>Measure 1</h2>
 			<p class="functions">
 				<a class="icon-pencil" href="#standardSolutions">Pre-fill</a>
-				<a class="icon-trash">Remove</a>
 			</p>
 
 			<fieldset class="vertical">
@@ -72,6 +71,50 @@ design_description:
 		</div>
 	</div>
 
+	<div class="button-bar">
 		<button class="add-clone pat-button icon-plus-circle" id="addMeasureButton" title="Add another measure" type="button">Add another measure</button>
-	
+	</div>
+
 </form>
+
+<div class="measure dont-touch-this pat-collapsible" id="measure-template" hidden>
+	<h2>Measure #{1}</h2>
+	<p class="functions">
+		<a class="icon-pencil" href="#standardSolutions">Pre-fill</a>
+		<a class="icon-trash remove-clone">Remove</a>
+	</p>
+
+	<fieldset class="vertical">
+		<label>Description
+			<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea> 
+		</label> 
+		<label>Prevention plan
+			<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea> 
+		</label>
+		<label>Requirements
+			<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3"></textarea>
+		</label>
+	</fieldset>
+
+	<fieldset class="vertical">
+		<label>
+			Who is responsible? 
+			<input class="responsible" name="responsible" type="text">
+		</label> 
+		<label class="currency">
+			Budget
+			<span class="composed currency-field">
+				<abbr title="Euro" class="currency">€</abbr>
+				<input type="number" class="currency" />
+			</span>
+		</label>
+		<label>
+			Planning start
+			<input type="date" />
+		</label>
+		<label>
+			Planning end
+			<input type="date" />
+		</label>
+	</fieldset>
+</div>

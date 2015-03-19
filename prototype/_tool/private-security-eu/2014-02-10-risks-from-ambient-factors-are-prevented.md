@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: risks-from-ambient-factors-are-prevented
-classes: postponed
+classes: answered risk
 number: "2.1.7"
 parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "Risks from ambient factors are prevented."

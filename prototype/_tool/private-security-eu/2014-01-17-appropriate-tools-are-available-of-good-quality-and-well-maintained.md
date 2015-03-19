@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: appropriate-tools-are-available-of-good-quality-and-well-maintained
-classes: postponed
+classes: answered
 number: "1.3.2"
 parent_id: commercial-manned-guarding-work-equipment
 title: "Appropriate tools are available, of good quality and well maintained."

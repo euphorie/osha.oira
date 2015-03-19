@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-guards-know-what-to-do-in-case-of-serious-and-imminent-dangers
-classes: postponed
+classes: answered
 number: "1.2.2"
 parent_id: commercial-manned-guarding-fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of serious and imminent dangers."

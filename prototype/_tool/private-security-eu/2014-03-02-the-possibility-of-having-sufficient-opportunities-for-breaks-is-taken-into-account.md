@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-possibility-of-having-sufficient-opportunities-for-breaks-is-taken-into-account
-classes: postponed
+classes: answered risk
 number: "2.5.2"
 parent_id: mobile-partrolling--intervention-after-alarm-work-organisation
 title: "The possibility of having sufficient opportunities for breaks is taken into account."

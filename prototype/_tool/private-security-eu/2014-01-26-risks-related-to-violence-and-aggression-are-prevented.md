@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: risks-related-to-violence-and-aggression-are-prevented
-classes: answered risk
+classes: postponed
 number: "1.4.5"
 parent_id: commercial-manned-guarding-physical-and-psychosocial-workload
 title: "Risks related to violence and aggression are prevented."

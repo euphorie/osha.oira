@@ -16,7 +16,10 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='http://ec.europa.eu/enterprise/sectors/electrical/documents/lvd/legislation/' target='_blank' rel='nofollow'&gt;2006/95/EC Directive on the harmonisation of the laws of Member States relating to electrical equipment designed for use within certain voltage limits&lt;/a&gt;.&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
-image_url_1: /media/private-security-eu/waarschuwing_-_elektriciteit.png
+images:
+    - url: /media/private-security-eu/waarschuwing_-_elektriciteit.png
+      caption: 
+
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

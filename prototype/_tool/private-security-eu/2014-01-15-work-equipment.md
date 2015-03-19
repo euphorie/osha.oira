@@ -5,6 +5,9 @@ number: "1.3.0"
 parent_id: commercial-manned-guarding
 title: Work equipment
 module: commercial-manned-guarding
+images:
+    - url: /media/private-security-eu/guard walkie talkie.jpg
+      caption: 
 
 ---
 Private security guards need the right equipment in order to carry out their

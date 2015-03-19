@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: measures-are-taken-to-reduce-time-pressure
-classes: answered
+classes: postponed
 number: "2.4.3"
 parent_id: mobile-partrolling--intervention-after-alarm-physical-and-psychosocial-workload
 title: "Measures are taken to reduce time pressure."

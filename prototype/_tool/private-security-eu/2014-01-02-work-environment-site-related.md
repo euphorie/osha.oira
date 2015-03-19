@@ -5,7 +5,10 @@ number: "1.1.0"
 parent_id: commercial-manned-guarding
 title: Work environment (site related)
 module: commercial-manned-guarding
-image_url: /media/private-security-eu/waarschuwing_-_struikelgevaar.png
+images:
+    - url: /media/private-security-eu/security.jpg
+      caption: It's all about security
+
 ---
 Accident statistics show that risks like **slips, trips and falls**, **getting
 stuck**, ... are very frequent in the private security services sector.

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: when-organising-work-schedules-issues-related-to-health-and-work-life-management-are-taken-into-consideration
-classes: answered
+classes: postponed
 number: "1.5.3"
 parent_id: commercial-manned-guarding-work-organisation
 title: "When organising work schedules, issues related to health and work life management are taken into consideration."

@@ -5,7 +5,10 @@ number: "1.2.0"
 parent_id: commercial-manned-guarding
 title: Fire prevention and emergency procedures
 module: commercial-manned-guarding
-image_url: /media/private-security-eu/waarschuwing_-_ontvlambaar.png
+images:
+    - url: /media/private-security-eu/waarschuwing_-_ontvlambaar.png
+      caption: 
+
 ---
 Private security guards need to be prepared for responding to fire and
 emergency situations.

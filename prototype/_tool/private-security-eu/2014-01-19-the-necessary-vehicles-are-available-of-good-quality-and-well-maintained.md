@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-necessary-vehicles-are-available-of-good-quality-and-well-maintained
-classes: postponed
+classes: answered risk
 number: "1.3.4"
 parent_id: commercial-manned-guarding-work-equipment
 title: "The necessary vehicles are available, of good quality and well maintained."

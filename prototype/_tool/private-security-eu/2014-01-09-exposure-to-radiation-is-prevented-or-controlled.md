@@ -25,7 +25,10 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;li&gt;&lt;a title='' href='https://osha.europa.eu/en/legislation/directives/exposure-to-physical-hazards/osh-directives/directive-2004-40-ec-of-the-european-parliament-and-of-the-council' rel='nofollow' target='_blank'&gt;2004/40/EC Directive on electromagnetic fields and waves.&lt;/a&gt;&lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
-image_url_1: /media/private-security-eu/waarschuwing_-_radioactief.png
+images:
+    - url: /media/private-security-eu/waarschuwing_-_radioactief.png
+      caption: 
+
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-chemical-substances-is-prevented-or-controlled
-classes: answered
+classes: postponed
 number: "1.1.5"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Exposure to chemical substances is prevented or controlled."
@@ -21,7 +21,10 @@ legal_reference: "&lt;ul&gt;&lt;li&gt;&lt;a title='' href='http://europa.eu/legi
 &lt;/li&gt;&amp;#13;
 &lt;/ul&gt;"
 evaluation_method: direct
-image_url_1: /media/private-security-eu/waarschuwing_-_giftig.png
+images:
+    - url: /media/private-security-eu/waarschuwing_-_giftig.png
+      caption: 
+
 solutions:
   solution_1:
     description: "Visual inspection of work areas."

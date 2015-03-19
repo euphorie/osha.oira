@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: risks-related-to-bullying-and-sexual-harassment-are-prevented
-classes: postponed
+classes: answered
 number: "1.4.6"
 parent_id: commercial-manned-guarding-physical-and-psychosocial-workload
 title: "Risks related to bullying and sexual harassment are prevented."

@@ -114,6 +114,9 @@
 				<li id="step-5" class="disabled">
 					<a>Report</a>
 				</li>
+				<li id="help" class="{% if page.section == 'help' %}active{% endif %}">
+					<a href="/help.html#content" data-pat-inject="source: #content; target: #content && source: #osc; target: #osc" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off">Help</a>
+				</li>
 		    </ol>
 		</aside>
 	</body>

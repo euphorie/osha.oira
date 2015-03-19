@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.5 (unreleased)
+2.3.5 (2015-03-19)
 ------------------
 
 - More translation changes in IS #11424

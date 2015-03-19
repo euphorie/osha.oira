@@ -107,15 +107,20 @@ solutions:
     # xxx handle the sub solutions
 
     images = risk.findAll('image')
-    image_paths = []
-    count = 0
+    image_data = []
+    image_info = u""
     for image in images:
-        count += 1
         image_path = os.path.join(media_path, image['filename'])
         image_filename = os.path.join(dir_path, image_path)
         with open(image_filename, 'w') as img_file:
             img_file.write(base64.decodestring(image.contents[0]))
-        image_paths.append("image_url_{}: /{}".format(count, image_path))
+        image_data.append(dict(url="/{0}".format(image_path), caption=image.get('caption', '')))
+
+    if image_data:
+        image_info = u"images:\n"
+        for entry in image_data:
+            image_info += u"    - url: {0}\n".format(entry['url'])
+            image_info += u"      caption: {0}\n".format(entry['caption'])
 
     fields = {
         "id": id,
@@ -129,7 +134,7 @@ solutions:
         "legal_reference": legal_reference,
         "evaluation_method": evaluation_method,
         "body": escape2markdown(description),
-        "image_information": "\n".join(image_paths),
+        "image_information": image_info,
     }
 
     content = risk_template(**fields)
@@ -153,12 +158,14 @@ title: {title}{module}
     description = module.find("description").text
 
     images = module.findAll('image')
-    image_path = ""
+    image_info = ""
     if images:
         image_path = os.path.join(media_path, images[0]['filename'])
         image_filename = os.path.join(dir_path, image_path)
         with open(image_filename, 'w') as img_file:
             img_file.write(base64.decodestring(images[0].contents[0]))
+        image_info = u"images:\n    - url: {0}\n      caption: {1}\n".format(
+            image_path, images[0].get('caption', ''))
 
     fields = {
         "id": id,
@@ -167,7 +174,7 @@ title: {title}{module}
         "parent_id": parent_id,
         "module": "\nmodule: {}".format(parent_id) if parent_id else "",
         "body": escape2markdown(description),
-        "image_information": image_path and "image_url: /{}".format(image_path) or '',
+        "image_information": image_info,
     }
 
     content = module_template(**fields)

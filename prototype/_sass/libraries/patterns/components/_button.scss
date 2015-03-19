@@ -38,12 +38,15 @@ textarea:focus {
   background-image: none;
 }
 
-.pat-button.dropdown {
+.pat-button.dropdown,
+a.dropdown {
   position: relative;
-  padding-right: 1.6em;
+  display: inline-block;
+  padding-right: 1.3em;
 }
 
-.pat-button.dropdown:after {
+.pat-button.dropdown:after,
+a.dropdown:after {
   content: '\25be';
   display: inline-block;
   font: 18px fontello;
@@ -51,15 +54,17 @@ textarea:focus {
   right: 4px;
 }
 
-.pat-button.dropdown[class*="icon-"] {
-  padding-right: 12px;
+.pat-button.dropdown[class*="icon-"],
+a.dropdown[class*="icon-"] {
+  // padding-right: 12px;
 }
 
-a.button.dropdown[class*="icon-"]:after, button.dropdown[class*="icon-"]:after {
+button.dropdown[class*="icon-"]:after {
   display: none;
 }
 
-a.button.tentative, button.tentative, ul.cal-events label[data-option="Tentative"] select {
+a.button.tentative, 
+button.tentative, ul.cal-events label[data-option="Tentative"] select {
   background-color: #ff9300;
   color: white;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c9de96', endColorstr='#398235',GradientType=0 );

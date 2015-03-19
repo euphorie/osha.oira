@@ -1,0 +1,33 @@
+---
+layout: panel
+title: Login
+action: /index-logged-in.html
+buttons: 
+  - label: Login
+    type: submit
+  - label: Cancel
+    type: button
+    class: close-panel
+---
+
+<fieldset class="vertical">
+    <label>
+        E-mail address 
+        <input size="50" name="email" type="email" required autofocus />
+    </label> 
+    <label>
+        Password (<a href="#">I forgot my password</a>) 
+        <input size="50" name="password" type="password" required="required" autofocus="autofocus"/>
+    </label>
+    <fieldset class="pat-checklist">
+        <label>
+            <input type="checkbox" /> Keep me logged in.
+        </label>
+    </fieldset>
+   
+
+    <p>
+        Don't have an account? Then please <a href="register.html">register</a> first. <a class="icon info pat-tooltip" data-pat-tooltip="position: lt; source: content" href="#">Uw registratiegegevens zijn privé. De opgeslagen gegevens zijn niet voor anderen toegankelijk.</a>
+
+    </p>
+</fieldset>

@@ -15,6 +15,7 @@ $glyph-checkbox: \f096;
 $glyph-checkbox-active: \2611;
 $glyph-radio-button: \e807;
 $glyph-radio-button-active: \e806;
+$glyph-close: "\e805";
 
 $colour-base-font: #222222;
 
@@ -41,6 +42,7 @@ $break-large: 1280px;
 
 // Libraries
 @import "libraries/reset";
+@import "libraries/animate";
 @import "libraries/patterns/patterns";
 
 // Project components

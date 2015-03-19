@@ -1,17 +1,37 @@
-// Patterns uses font based icons instead of images. Those are generated
-// with Fontello.com Make sure the fontello folder is placed in your
-// style folder
+@charset "UTF-8";
 
-@import "fontello/css/fontello.css";
+// Each pattern comes with a mixin. They may also be included seperately 
+// in a project and applied on custom markup.
 
-// Colours
+@import "animations";
+@import "mixins";
 
+// Variable defaults
+
+$body-font-family: 'Source Sans Pro', sans-serif;
+
+$break-small: 768px !default;
+$break-large: 769px !default;
+
+$colour-base: #efefef !default;
+$colour-primary: black !default;
+$colour-header-elements: #666 !default;
+$colour-post: #e4f2f8 !default;
 $colour-alert: red !default;
-$colour-success: green !default;
-$colour-notice: #FFFFD6 !default;
-$colour-warning: orange !default;
+$colour-workspace-default: #869EBF !default;
+$colour-accent: #5d91ff !default;
 
-$colour-base-font: black !default;
+$colour-success: #5bb75b !default;
+$colour-warning: #faa732 !default;
+$colour-notice: #fdfdc8 !default;
+$colour-info: #d9edf7 !default;
+$colour-error: red !default;
+
+$glyph-checkbox: \e808 !default;
+$glyph-checkbox-active: \e809 !default;
+$glyph-radio-button: \e807 !default;
+$glyph-radio-button-active: \e806 !default;
+$glyph-close:\e813!default;
 
 // Responsive variables
 

@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: shell
 title: Terms and conditions
 ---
 

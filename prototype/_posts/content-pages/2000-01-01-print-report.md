@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: shell
 title: You are about to print the report... please complete the optional form and then proceed.
 ---
 

@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: shell
 title: Tailor the risk assessment to your organisation
 ---
 

@@ -45,10 +45,14 @@
     overflow-x: visible;
     margin: 0;
     border: 1px solid silver;
--webkit-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
--moz-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-	width: 300px;
+    -webkit-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    width: 300px;
+
+    &.large {
+      width: 750px;
+    }
 }
 
   .tooltip-container .pointer{

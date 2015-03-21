@@ -38,7 +38,7 @@
 
   .tooltip-container {
     position: absolute;
-    z-index: 1001;
+    z-index: 9998;
     border: none;
     min-height: 50px;
     overflow: visible;
@@ -70,7 +70,7 @@
   }
 
   .tooltip-container > div{
-    padding: 10px!important;
+    padding: 1.5em !important;
     z-index: 1;
     position: relative;
     padding: 0;

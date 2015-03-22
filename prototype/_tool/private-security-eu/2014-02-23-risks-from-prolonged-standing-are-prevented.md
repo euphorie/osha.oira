@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: risks-from-prolonged-standing-are-prevented
-classes: postponed
+classes: answered
 number: "2.4.2"
 parent_id: mobile-partrolling--intervention-after-alarm-physical-and-psychosocial-workload
 title: "Risks from prolonged standing are prevented."

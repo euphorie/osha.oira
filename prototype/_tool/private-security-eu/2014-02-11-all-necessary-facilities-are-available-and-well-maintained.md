@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: all-necessary-facilities-are-available-and-well-maintained
-classes: answered risk
+classes: postponed
 number: "2.1.8"
 parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "All necessary facilities are available and well maintained."

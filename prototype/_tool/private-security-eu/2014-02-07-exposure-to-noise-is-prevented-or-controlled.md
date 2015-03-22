@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-noise-is-prevented-or-controlled
-classes: answered risk
+classes: answered
 number: "2.1.4"
 parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "Exposure to noise is prevented or controlled."

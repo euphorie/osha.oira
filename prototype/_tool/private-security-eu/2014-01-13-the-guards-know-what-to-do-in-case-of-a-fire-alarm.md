@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-guards-know-what-to-do-in-case-of-a-fire-alarm
-classes: current postponed
+classes: unvisited
 number: "1.2.1"
 parent_id: commercial-manned-guarding-fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of a fire alarm."

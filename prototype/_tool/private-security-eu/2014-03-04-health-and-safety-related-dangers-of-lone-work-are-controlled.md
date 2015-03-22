@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: health-and-safety-related-dangers-of-lone-work-are-controlled
-classes: answered risk
+classes: answered
 number: "2.5.4"
 parent_id: mobile-partrolling--intervention-after-alarm-work-organisation
 title: "Health and safety related dangers of lone work are controlled."

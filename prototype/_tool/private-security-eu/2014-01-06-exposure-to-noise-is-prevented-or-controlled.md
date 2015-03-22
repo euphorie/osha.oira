@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-noise-is-prevented-or-controlled
-classes: postponed
+classes: answered
 number: "1.1.4"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Exposure to noise is prevented or controlled."

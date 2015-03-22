@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: each-sitting-workstation-is-adjustable-to-the-worker
-classes: postponed
+classes: unvisited
 number: "1.3.5"
 parent_id: commercial-manned-guarding-work-equipment
 title: "Each sitting workstation is adjustable to the worker."

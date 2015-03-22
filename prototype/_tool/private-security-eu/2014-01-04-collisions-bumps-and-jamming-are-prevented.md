@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: collisions-bumps-and-jamming-are-prevented
-classes: answered risk
+classes: postponed
 number: "1.1.2"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Collisions, bumps, and jamming are prevented."

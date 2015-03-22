@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: risks-from-ambient-factors-are-prevented
-classes: answered
+classes: postponed
 number: "1.1.8"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Risks from ambient factors are prevented."

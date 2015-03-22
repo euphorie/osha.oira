@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: working-time-of-private-security-guards-including-overtime-provisions-is-as-stipulated-by-national-legislation-or-collective-labour-agreement
-classes: current answered risk
+classes: answered
 number: "1.5.1"
 parent_id: commercial-manned-guarding-work-organisation
 title: "Working time of private security guards, including overtime provisions, is as stipulated by national legislation or collective labour agreement."

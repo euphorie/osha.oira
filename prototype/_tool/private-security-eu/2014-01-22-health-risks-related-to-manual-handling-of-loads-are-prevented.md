@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: health-risks-related-to-manual-handling-of-loads-are-prevented
-classes: current answered
+classes: postponed
 number: "1.4.1"
 parent_id: commercial-manned-guarding-physical-and-psychosocial-workload
 title: "Health risks related to manual handling of loads are prevented."

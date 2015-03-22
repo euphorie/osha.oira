@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: slips-trips-and-falls-are-prevented
-classes: current postponed
+classes: answered risk
 number: "1.1.1"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Slips, trips and falls are prevented."

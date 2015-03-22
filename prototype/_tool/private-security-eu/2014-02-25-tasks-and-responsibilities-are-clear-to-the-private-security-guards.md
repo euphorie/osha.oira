@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: tasks-and-responsibilities-are-clear-to-the-private-security-guards
-classes: postponed
+classes: answered risk
 number: "2.4.4"
 parent_id: mobile-partrolling--intervention-after-alarm-physical-and-psychosocial-workload
 title: "Tasks and responsibilities are clear to the private security guards."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: risks-related-to-bullying-and-sexual-harassment-are-prevented
-classes: answered
+classes: unvisited
 number: "2.4.6"
 parent_id: mobile-partrolling--intervention-after-alarm-physical-and-psychosocial-workload
 title: "Risks related to bullying and sexual harassment are prevented."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: risks-related-to-violence-and-aggression-are-prevented
-classes: postponed
+classes: answered
 number: "2.4.5"
 parent_id: mobile-partrolling--intervention-after-alarm-physical-and-psychosocial-workload
 title: "Risks related to violence and aggression are prevented."

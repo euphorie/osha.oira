@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-biological-substances-is-prevented-or-controlled
-classes: postponed
+classes: unvisited
 number: "1.1.6"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Exposure to biological substances is prevented or controlled."

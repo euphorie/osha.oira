@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-dogs-are-well-trained-and-have-regular-medical-check-ups
-classes: answered
+classes: postponed
 number: "1.3.3"
 parent_id: commercial-manned-guarding-work-equipment
 title: "The dogs are well trained and have regular medical check-ups."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: health-risks-related-to-manual-handling-of-loads-are-prevented
-classes: current answered risk
+classes: unvisited
 number: "2.4.1"
 parent_id: mobile-partrolling--intervention-after-alarm-physical-and-psychosocial-workload
 title: "Health risks related to manual handling of loads are prevented."

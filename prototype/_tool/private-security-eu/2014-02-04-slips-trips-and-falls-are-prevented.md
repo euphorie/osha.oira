@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: slips-trips-and-falls-are-prevented
-classes: current postponed
+classes: answered risk
 number: "2.1.1"
 parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "Slips, trips and falls are prevented."

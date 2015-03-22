@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: tasks-and-responsibilities-are-clear-to-the-private-security-guards
-classes: answered
+classes: postponed
 number: "1.4.4"
 parent_id: commercial-manned-guarding-physical-and-psychosocial-workload
 title: "Tasks and responsibilities are clear to the private security guards."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: each-sitting-workstation-is-adjustable-to-the-worker
-classes: answered
+classes: postponed
 number: "2.3.5"
 parent_id: mobile-partrolling--intervention-after-alarm-work-equipment
 title: "Each sitting workstation is adjustable to the worker."

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-necessary-vehicles-are-available-of-good-quality-and-well-maintained
-classes: postponed
+classes: unvisited
 number: "2.3.4"
 parent_id: mobile-partrolling--intervention-after-alarm-work-equipment
 title: "The necessary vehicles are available, of good quality and well maintained."

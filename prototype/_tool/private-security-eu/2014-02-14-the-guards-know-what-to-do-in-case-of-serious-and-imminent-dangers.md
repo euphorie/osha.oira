@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-guards-know-what-to-do-in-case-of-serious-and-imminent-dangers
-classes: answered
+classes: postponed
 number: "2.2.2"
 parent_id: mobile-partrolling--intervention-after-alarm-fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of serious and imminent dangers."

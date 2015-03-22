@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: collisions-bumps-and-jamming-are-prevented
-classes: answered risk
+classes: answered
 number: "2.1.2"
 parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "Collisions, bumps, and jamming are prevented."

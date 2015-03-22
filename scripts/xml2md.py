@@ -18,7 +18,7 @@ from html2text import html2text
 from datetime import datetime
 from datetime import timedelta
 
-STATES = ['answered', 'postponed']
+STATES = ['answered', 'postponed', 'unvisited']
 
 MAX_NUMBER_MODULES = 2
 

@@ -101,10 +101,9 @@ solutions:
     legal_reference = legal_reference_node and _r(legal_reference_node.text) or ""
     evaluation_method_node = risk.find("evaluation-method")
     evaluation_method = evaluation_method_node and evaluation_method_node.text or ""
-    current = number.endswith(".1") and 'current' or ''
     state = random.choice(STATES)
     risk_class = state == 'answered' and random.choice(['risk', '']) or ''
-    classes = "{} {} {}".format(current, state, risk_class)
+    classes = "{} {}".format(state, risk_class)
     # solutions = risk.find("solutions").text
     # xxx handle the sub solutions
 

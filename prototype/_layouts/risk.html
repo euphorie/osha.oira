@@ -1,8 +1,5 @@
 ---
 layout: shell
-application: home
-design_title: Homepage
-design_description:
 ---
 
 <form method="post" action="#">
@@ -39,6 +36,10 @@ design_description:
 			<label><input type="radio" name="effect" /> Permanent health damage</label>
 		</fieldset>
 	</fieldset>
+
+	<article class="rich">
+		{{ content }}
+	</article>
 
 	<fieldset>
 		<textarea id="commentsField" name="comments" placeholder="Please leave any comments you may have on the above question" cols="70" rows="5" class="span-15"></textarea>

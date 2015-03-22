@@ -42,7 +42,7 @@ sound.
 
 **Make sure the client informs you (security company) and the private security guards **about the risks and measures in place.
 
-**Check whether the client:**
+**Check whether the client:**  
 
   * Has identified the source(s) of the noise + limit or reduce noise at source.
   * Ensures technical maintenance of workplaces, installations, ...

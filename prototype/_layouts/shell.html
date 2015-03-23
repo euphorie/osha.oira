@@ -37,7 +37,7 @@
 				<a class="pat-button iconified icon-cog" title="Configure this application">Settings</a>
 			</header>
 		    <ol id="steps">
-				<li id="step-1" class="complete">
+				<li id="step-1" class="complete {% if page.section == 'preparation' %}active{% endif %}">
 					<a href="/preparation.html#content" data-pat-inject="source: #content; target: #content && source: #osc; target: #osc" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off">Preparation</a>
 				</li>
 				<li class="{% if page.number %}active{% endif %}" id="step-2">

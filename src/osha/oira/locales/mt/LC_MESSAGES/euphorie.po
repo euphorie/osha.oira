@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2014-08-29 16:47+0200\n"
+"POT-Creation-Date: 2015-02-10 19:10+0100\n"
 "PO-Revision-Date: 2013-12-18 09:59+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -662,7 +662,7 @@ msgstr "Jiddispjaċina, iżda seħħ żball mhux mistenni."
 
 #. Default: Delete this measure
 #: src/osha/oira/manual_translations.py:214
-#: src/osha/oira/client/templates/risk_actionplan.pt:66
+#: src/osha/oira/client/templates/risk_actionplan.pt:62
 msgid "label_remove_measure"
 msgstr "Ħassar din il-miżura"
 
@@ -757,7 +757,7 @@ msgstr "Skeda ta' żmien"
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
 #: src/osha/oira/client/templates/report_actionplan.pt:244
-#: src/osha/oira/client/templates/risk_actionplan.pt:39
+#: src/osha/oira/client/templates/risk_actionplan.pt:35
 msgid "risk_priority_low"
 msgstr "baxxa"
 
@@ -767,7 +767,7 @@ msgstr "baxxa"
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
 #: src/osha/oira/client/templates/report_actionplan.pt:245
-#: src/osha/oira/client/templates/risk_actionplan.pt:40
+#: src/osha/oira/client/templates/risk_actionplan.pt:36
 msgid "risk_priority_medium"
 msgstr "medja"
 
@@ -777,7 +777,7 @@ msgstr "medja"
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
 #: src/osha/oira/client/templates/report_actionplan.pt:245
-#: src/osha/oira/client/templates/risk_actionplan.pt:41
+#: src/osha/oira/client/templates/risk_actionplan.pt:37
 msgid "risk_priority_high"
 msgstr "għolja"
 
@@ -787,13 +787,13 @@ msgstr "għolja"
 #: src/osha/oira/client/templates/report_actionplan.pt:173
 #: src/osha/oira/client/templates/report_actionplan.pt:209
 #: src/osha/oira/client/templates/report_actionplan.pt:243
-#: src/osha/oira/client/templates/risk_actionplan.pt:38
+#: src/osha/oira/client/templates/risk_actionplan.pt:34
 msgid "risk_priority"
 msgstr "Dan huwa riskju ta' prijorità ${priority_value}."
 
 #. Default: Measure
 #: src/osha/oira/client/report.py:404 src/osha/oira/client/report.py:429
-#: src/osha/oira/client/templates/risk_actionplan.pt:64
+#: src/osha/oira/client/templates/risk_actionplan.pt:60
 msgid "header_measure_single"
 msgstr "Miżura"
 
@@ -805,14 +805,14 @@ msgstr "Miżura ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
 #: src/osha/oira/client/report.py:436
-#: src/osha/oira/client/templates/risk_actionplan.pt:90
+#: src/osha/oira/client/templates/risk_actionplan.pt:86
 #: src/osha/oira/content/templates/solution_view.pt:22
 msgid "label_measure_action_plan"
 msgstr "Approċċ ġenerali (biex ir-riskju jiġi eliminat jew imnaqqas)"
 
 #. Default: Specific action(s) required to implement this approach
 #: src/osha/oira/client/report.py:438
-#: src/osha/oira/client/templates/risk_actionplan.pt:98
+#: src/osha/oira/client/templates/risk_actionplan.pt:94
 #: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
 msgstr ""
@@ -821,32 +821,32 @@ msgstr ""
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/report.py:440
-#: src/osha/oira/client/templates/risk_actionplan.pt:107
+#: src/osha/oira/client/templates/risk_actionplan.pt:103
 #: src/osha/oira/content/templates/solution_view.pt:29
 msgid "label_measure_requirements"
 msgstr "Livell ta' kompetenza u/jew rekwiżiti meħtieġa"
 
 #. Default: Who is responsible?
 #: src/osha/oira/client/report.py:442
-#: src/osha/oira/client/templates/risk_actionplan.pt:119
+#: src/osha/oira/client/templates/risk_actionplan.pt:115
 msgid "label_action_plan_responsible"
 msgstr "Min hu responsabbli?"
 
 #. Default: Budget
 #: src/osha/oira/client/report.py:444
-#: src/osha/oira/client/templates/risk_actionplan.pt:124
+#: src/osha/oira/client/templates/risk_actionplan.pt:120
 msgid "label_action_plan_budget"
 msgstr "Baġit"
 
 #. Default: Planning start
 #: src/osha/oira/client/report.py:445
-#: src/osha/oira/client/templates/risk_actionplan.pt:135
+#: src/osha/oira/client/templates/risk_actionplan.pt:131
 msgid "label_action_plan_start"
 msgstr "Bidu tal-ippjanar"
 
 #. Default: Planning end
 #: src/osha/oira/client/report.py:446
-#: src/osha/oira/client/templates/risk_actionplan.pt:171
+#: src/osha/oira/client/templates/risk_actionplan.pt:167
 msgid "label_action_plan_end"
 msgstr "Tmiem tal-ippjanar"
 
@@ -1054,7 +1054,7 @@ msgstr "Mur għar-rapport"
 #: src/osha/oira/client/templates/report_company.pt:64
 #: src/osha/oira/client/templates/report_identification.pt:85
 #: src/osha/oira/client/templates/report_landing.pt:68
-#: src/osha/oira/client/templates/risk_actionplan.pt:231
+#: src/osha/oira/client/templates/risk_actionplan.pt:227
 #: src/osha/oira/client/templates/risk_evaluation.pt:136
 #: src/osha/oira/client/templates/risk_identification.pt:51
 #: src/osha/oira/client/templates/sessions.pt:82
@@ -1075,7 +1075,7 @@ msgstr "It-Tħejjija"
 #: src/osha/oira/client/templates/report_company.pt:65
 #: src/osha/oira/client/templates/report_identification.pt:86
 #: src/osha/oira/client/templates/report_landing.pt:69
-#: src/osha/oira/client/templates/risk_actionplan.pt:232
+#: src/osha/oira/client/templates/risk_actionplan.pt:228
 #: src/osha/oira/client/templates/risk_evaluation.pt:137
 #: src/osha/oira/client/templates/risk_identification.pt:52
 #: src/osha/oira/client/templates/sessions.pt:83
@@ -1096,7 +1096,7 @@ msgstr "It-Tħejjija"
 #: src/osha/oira/client/templates/report_company.pt:70
 #: src/osha/oira/client/templates/report_identification.pt:91
 #: src/osha/oira/client/templates/report_landing.pt:74
-#: src/osha/oira/client/templates/risk_actionplan.pt:237
+#: src/osha/oira/client/templates/risk_actionplan.pt:233
 #: src/osha/oira/client/templates/risk_evaluation.pt:142
 #: src/osha/oira/client/templates/risk_identification.pt:57
 #: src/osha/oira/client/templates/sessions.pt:86
@@ -1117,7 +1117,7 @@ msgstr "L-Identifikazzjoni"
 #: src/osha/oira/client/templates/report_company.pt:71
 #: src/osha/oira/client/templates/report_identification.pt:92
 #: src/osha/oira/client/templates/report_landing.pt:75
-#: src/osha/oira/client/templates/risk_actionplan.pt:238
+#: src/osha/oira/client/templates/risk_actionplan.pt:234
 #: src/osha/oira/client/templates/risk_evaluation.pt:143
 #: src/osha/oira/client/templates/risk_identification.pt:58
 #: src/osha/oira/client/templates/sessions.pt:87
@@ -1138,7 +1138,7 @@ msgstr "L-Identifikazzjoni"
 #: src/osha/oira/client/templates/report_company.pt:76
 #: src/osha/oira/client/templates/report_identification.pt:97
 #: src/osha/oira/client/templates/report_landing.pt:80
-#: src/osha/oira/client/templates/risk_actionplan.pt:243
+#: src/osha/oira/client/templates/risk_actionplan.pt:239
 #: src/osha/oira/client/templates/risk_evaluation.pt:148
 #: src/osha/oira/client/templates/risk_identification.pt:66
 #: src/osha/oira/client/templates/sessions.pt:90
@@ -1159,7 +1159,7 @@ msgstr "Il-Valutazzjoni"
 #: src/osha/oira/client/templates/report_company.pt:77
 #: src/osha/oira/client/templates/report_identification.pt:98
 #: src/osha/oira/client/templates/report_landing.pt:81
-#: src/osha/oira/client/templates/risk_actionplan.pt:244
+#: src/osha/oira/client/templates/risk_actionplan.pt:240
 #: src/osha/oira/client/templates/risk_evaluation.pt:149
 #: src/osha/oira/client/templates/risk_identification.pt:67
 #: src/osha/oira/client/templates/sessions.pt:91
@@ -1180,7 +1180,7 @@ msgstr "Il-Valutazzjoni"
 #: src/osha/oira/client/templates/report_company.pt:82
 #: src/osha/oira/client/templates/report_identification.pt:103
 #: src/osha/oira/client/templates/report_landing.pt:86
-#: src/osha/oira/client/templates/risk_actionplan.pt:249
+#: src/osha/oira/client/templates/risk_actionplan.pt:245
 #: src/osha/oira/client/templates/risk_evaluation.pt:157
 #: src/osha/oira/client/templates/risk_identification.pt:72
 #: src/osha/oira/client/templates/sessions.pt:94
@@ -1201,7 +1201,7 @@ msgstr "Il-Pjan ta' Azzjoni"
 #: src/osha/oira/client/templates/report_company.pt:83
 #: src/osha/oira/client/templates/report_identification.pt:104
 #: src/osha/oira/client/templates/report_landing.pt:87
-#: src/osha/oira/client/templates/risk_actionplan.pt:250
+#: src/osha/oira/client/templates/risk_actionplan.pt:246
 #: src/osha/oira/client/templates/risk_evaluation.pt:158
 #: src/osha/oira/client/templates/risk_identification.pt:73
 #: src/osha/oira/client/templates/sessions.pt:95
@@ -1222,7 +1222,7 @@ msgstr "Il-Pjan ta' Azzjoni"
 #: src/osha/oira/client/templates/report_company.pt:88
 #: src/osha/oira/client/templates/report_identification.pt:109
 #: src/osha/oira/client/templates/report_landing.pt:92
-#: src/osha/oira/client/templates/risk_actionplan.pt:258
+#: src/osha/oira/client/templates/risk_actionplan.pt:254
 #: src/osha/oira/client/templates/risk_evaluation.pt:163
 #: src/osha/oira/client/templates/risk_identification.pt:78
 #: src/osha/oira/client/templates/sessions.pt:98
@@ -1243,7 +1243,7 @@ msgstr "Ir-Rapport"
 #: src/osha/oira/client/templates/report_company.pt:89
 #: src/osha/oira/client/templates/report_identification.pt:110
 #: src/osha/oira/client/templates/report_landing.pt:93
-#: src/osha/oira/client/templates/risk_actionplan.pt:259
+#: src/osha/oira/client/templates/risk_actionplan.pt:255
 #: src/osha/oira/client/templates/risk_evaluation.pt:164
 #: src/osha/oira/client/templates/risk_identification.pt:79
 #: src/osha/oira/client/templates/sessions.pt:99
@@ -1264,7 +1264,7 @@ msgstr "Ir-Rapport"
 #: src/osha/oira/client/templates/report_company.pt:96
 #: src/osha/oira/client/templates/report_identification.pt:117
 #: src/osha/oira/client/templates/report_landing.pt:100
-#: src/osha/oira/client/templates/risk_actionplan.pt:266
+#: src/osha/oira/client/templates/risk_actionplan.pt:262
 #: src/osha/oira/client/templates/risk_evaluation.pt:171
 #: src/osha/oira/client/templates/risk_identification.pt:86
 #: src/osha/oira/client/templates/sessions.pt:105
@@ -1285,7 +1285,7 @@ msgstr "Illoggja 'l barra"
 #: src/osha/oira/client/templates/report_company.pt:97
 #: src/osha/oira/client/templates/report_identification.pt:118
 #: src/osha/oira/client/templates/report_landing.pt:101
-#: src/osha/oira/client/templates/risk_actionplan.pt:267
+#: src/osha/oira/client/templates/risk_actionplan.pt:263
 #: src/osha/oira/client/templates/risk_evaluation.pt:172
 #: src/osha/oira/client/templates/risk_identification.pt:87
 #: src/osha/oira/client/templates/start.pt:71
@@ -1307,7 +1307,7 @@ msgstr "Il-Valutazzjonijiet Tiegħi"
 #: src/osha/oira/client/templates/report_company.pt:98
 #: src/osha/oira/client/templates/report_identification.pt:119
 #: src/osha/oira/client/templates/report_landing.pt:102
-#: src/osha/oira/client/templates/risk_actionplan.pt:268
+#: src/osha/oira/client/templates/risk_actionplan.pt:264
 #: src/osha/oira/client/templates/risk_evaluation.pt:173
 #: src/osha/oira/client/templates/risk_identification.pt:88
 #: src/osha/oira/client/templates/sessions.pt:106
@@ -1326,7 +1326,7 @@ msgstr "Għajnuna"
 #: src/osha/oira/client/templates/report_actionplan.pt:310
 #: src/osha/oira/client/templates/report_company.pt:99
 #: src/osha/oira/client/templates/report_identification.pt:120
-#: src/osha/oira/client/templates/risk_actionplan.pt:269
+#: src/osha/oira/client/templates/risk_actionplan.pt:265
 #: src/osha/oira/client/templates/risk_evaluation.pt:174
 #: src/osha/oira/client/templates/risk_identification.pt:89
 msgid "navigation_status"
@@ -1344,7 +1344,7 @@ msgstr "Stat"
 #: src/osha/oira/client/templates/report_company.pt:100
 #: src/osha/oira/client/templates/report_identification.pt:121
 #: src/osha/oira/client/templates/report_landing.pt:103
-#: src/osha/oira/client/templates/risk_actionplan.pt:270
+#: src/osha/oira/client/templates/risk_actionplan.pt:266
 #: src/osha/oira/client/templates/risk_evaluation.pt:175
 #: src/osha/oira/client/templates/sessions.pt:107
 #: src/osha/oira/client/templates/start.pt:73
@@ -1482,7 +1482,7 @@ msgstr "Ibda l-Identifikazzjoni tar-Riskji"
 #: src/osha/oira/client/templates/module_evaluation.pt:38
 #: src/osha/oira/client/templates/register.pt:34
 #: src/osha/oira/client/templates/report_company.pt:55
-#: src/osha/oira/client/templates/risk_actionplan.pt:209
+#: src/osha/oira/client/templates/risk_actionplan.pt:205
 #: src/osha/oira/client/templates/risk_evaluation.pt:119
 #: src/osha/oira/client/templates/risk_identification.pt:28
 #: src/osha/oira/client/templates/sessions.pt:75
@@ -1568,7 +1568,7 @@ msgstr "Żid oġġett ieħor"
 #: src/osha/oira/client/templates/profile.pt:64
 #: src/osha/oira/client/templates/report.pt:38
 #: src/osha/oira/client/templates/report_company.pt:57
-#: src/osha/oira/client/templates/risk_actionplan.pt:211
+#: src/osha/oira/client/templates/risk_actionplan.pt:207
 #: src/osha/oira/client/templates/risk_evaluation.pt:120
 #: src/osha/oira/client/templates/risk_identification.pt:29
 msgid "label_save_and_continue"
@@ -1924,50 +1924,33 @@ msgstr ""
 "${manage} il-problemi/ir-riskji fuq il-post tax-xogħol tiegħek (kompiti "
 "speċifiċi, kompetenza, responsabbiajiett, skadenzi)."
 
-#: src/osha/oira/client/templates/risk_actionplan.pt:19
-msgid ""
-"Are you sure you want to delete this measure? This action can not be "
-"reverted."
-msgstr ""
-"Żgur li tixtieq tħassar din il-miżura? Din l-azzjoni mhijiex riversibbli."
-
-#: src/osha/oira/client/templates/risk_actionplan.pt:20
-msgid ""
-"The current text in the fields 'Action plan', 'Prevention plan' and "
-"'Requirements' of this measure will be overwritten. This action cannot be "
-"reverted. Are you sure you want to continue?"
-msgstr ""
-"It-test li hemm bħalissa fl-oqsma 'Pjan ta' azzjoni', 'Pjan ta' prevenzjoni' "
-"u 'Rekwiżiti' ta' din il-miżura se jiġi sostitwit. Din l-azzjoni mhijiex "
-"riversibbli. Żgur li tixtieq tkompli?"
-
 #. Default: Add
-#: src/osha/oira/client/templates/risk_actionplan.pt:24
+#: src/osha/oira/client/templates/risk_actionplan.pt:20
 msgid "button_add"
 msgstr "Żid"
 
 #. Default: Select one or more of the known common measures provided.
-#: src/osha/oira/client/templates/risk_actionplan.pt:47
+#: src/osha/oira/client/templates/risk_actionplan.pt:43
 msgid "label_select_measure"
 msgstr "Agħżel waħda jew iktar mill-miżuri komuni pprovduti."
 
 #. Default: Delete
-#: src/osha/oira/client/templates/risk_actionplan.pt:66
+#: src/osha/oira/client/templates/risk_actionplan.pt:62
 #: src/osha/oira/client/templates/sessions.pt:40
 msgid "label_delete"
 msgstr "Ħassar"
 
 #. Default: Add another measure
-#: src/osha/oira/client/templates/risk_actionplan.pt:71
+#: src/osha/oira/client/templates/risk_actionplan.pt:67
 msgid "label_add"
 msgstr "Żid miżura oħra"
 
 #. Default: Description
-#: src/osha/oira/client/templates/risk_actionplan.pt:86
+#: src/osha/oira/client/templates/risk_actionplan.pt:82
 msgid "label_description"
 msgstr "Deskrizzjoni"
 
-#: src/osha/oira/client/templates/risk_actionplan.pt:87
+#: src/osha/oira/client/templates/risk_actionplan.pt:83
 msgid "Standard solutions"
 msgstr "Soluzzjonijiet standard"
 
@@ -1979,7 +1962,7 @@ msgstr "Soluzzjonijiet standard"
 #. OSH knowledge or training and/or consultation of OSH guidance required”, or
 #. “OSH expert”. You can also describe here any other additional requirement
 #. (if any).
-#: src/osha/oira/client/templates/risk_actionplan.pt:88
+#: src/osha/oira/client/templates/risk_actionplan.pt:84
 msgid "actionplan_measure_tooltip"
 msgstr ""
 "Iddeskrivi: 1) x'inhu l-approċċ ġenerali tiegħek biex telimina jew (jekk ir-"
@@ -1996,7 +1979,7 @@ msgstr ""
 #. implementation of this measure. This person will have the authority to take
 #. the steps described in the Plan and/or the responsibility to ensure that
 #. they are carried out.
-#: src/osha/oira/client/templates/risk_actionplan.pt:120
+#: src/osha/oira/client/templates/risk_actionplan.pt:116
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
 "Aħtar persuna fil-kumpanija tiegħek biex tkun responsabbli mill-"
@@ -2007,7 +1990,7 @@ msgstr ""
 #. Default: Although some measures do not cost any money, most do. The measures
 #. should therefore be budgeted for; include them in the annual budget round if
 #. necessary.
-#: src/osha/oira/client/templates/risk_actionplan.pt:125
+#: src/osha/oira/client/templates/risk_actionplan.pt:121
 msgid "actionplan_measure_budget_tooltip"
 msgstr ""
 "Għalkemm xi miżuri ma jiswewx flus, il-biċċa l-kbira jiswew. Għaldaqstant, "
@@ -2015,55 +1998,72 @@ msgstr ""
 "bżonn."
 
 #. Default: Please enter the budget in whole Euros.
-#: src/osha/oira/client/templates/risk_actionplan.pt:127
+#: src/osha/oira/client/templates/risk_actionplan.pt:123
 msgid "error_invalid_budget"
 msgstr "Daħħal il-baġit f'Euros sħaħ."
 
 #. Default: Start date is not before end date
-#: src/osha/oira/client/templates/risk_actionplan.pt:136
+#: src/osha/oira/client/templates/risk_actionplan.pt:132
 msgid "error_start_not_before_end"
 msgstr "Id-data tal-bidu mhijiex qabel id-data tat-tmiem"
 
 #. Default: Day
-#: src/osha/oira/client/templates/risk_actionplan.pt:138
-#: src/osha/oira/client/templates/risk_actionplan.pt:175
-#: src/osha/oira/client/templates/risk_actionplan.pt:193
+#: src/osha/oira/client/templates/risk_actionplan.pt:134
+#: src/osha/oira/client/templates/risk_actionplan.pt:171
+#: src/osha/oira/client/templates/risk_actionplan.pt:189
 msgid "label_day"
 msgstr "Jum"
 
 #. Default: Invalid day
-#: src/osha/oira/client/templates/risk_actionplan.pt:144
-#: src/osha/oira/client/templates/risk_actionplan.pt:180
+#: src/osha/oira/client/templates/risk_actionplan.pt:140
+#: src/osha/oira/client/templates/risk_actionplan.pt:176
 msgid "error_invalid_day"
 msgstr "Jum invalidu"
 
 #. Default: Month
-#: src/osha/oira/client/templates/risk_actionplan.pt:145
-#: src/osha/oira/client/templates/risk_actionplan.pt:182
+#: src/osha/oira/client/templates/risk_actionplan.pt:141
+#: src/osha/oira/client/templates/risk_actionplan.pt:178
 msgid "label_month"
 msgstr "Xahar"
 
 #. Default: Year
-#: src/osha/oira/client/templates/risk_actionplan.pt:155
+#: src/osha/oira/client/templates/risk_actionplan.pt:151
 #: src/osha/oira/content/statistics.py:36
 msgid "label_year"
 msgstr "Sena"
 
 #. Default: Please enter a valid year after 1900
-#: src/osha/oira/client/templates/risk_actionplan.pt:163
-#: src/osha/oira/client/templates/risk_actionplan.pt:198
+#: src/osha/oira/client/templates/risk_actionplan.pt:159
+#: src/osha/oira/client/templates/risk_actionplan.pt:194
 msgid "error_invalid_year"
 msgstr "Daħħal sena valida wara l-1900"
 
 #. Default: Please leave any comments you may have on the question above in
 #. this field. These comments will be used in the action plan.
-#: src/osha/oira/client/templates/risk_actionplan.pt:216
+#: src/osha/oira/client/templates/risk_actionplan.pt:212
 #: src/osha/oira/client/templates/risk_evaluation.pt:124
 #: src/osha/oira/client/templates/risk_identification.pt:41
 msgid "label_comment"
 msgstr ""
 "Tista' tħalli xi kummenti dwar il-mistoqsija t'hawn fuq f'dan il-qasam. Dawn "
 "il-kummenti jintużaw fil-pjan ta' azzjoni."
+
+#: src/osha/oira/client/templates/risk_actionplan.pt:270
+msgid ""
+"Are you sure you want to delete this measure? This action can not be "
+"reverted."
+msgstr ""
+"Żgur li tixtieq tħassar din il-miżura? Din l-azzjoni mhijiex riversibbli."
+
+#: src/osha/oira/client/templates/risk_actionplan.pt:271
+msgid ""
+"The current text in the fields 'Action plan', 'Prevention plan' and "
+"'Requirements' of this measure will be overwritten. This action cannot be "
+"reverted. Are you sure you want to continue?"
+msgstr ""
+"It-test li hemm bħalissa fl-oqsma 'Pjan ta' azzjoni', 'Pjan ta' prevenzjoni' "
+"u 'Rekwiżiti' ta' din il-miżura se jiġi sostitwit. Din l-azzjoni mhijiex "
+"riversibbli. Żgur li tixtieq tkompli?"
 
 #. Default: What is the chance of this risk occurring?
 #: src/osha/oira/client/templates/risk_evaluation.pt:28

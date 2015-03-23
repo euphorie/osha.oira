@@ -8,8 +8,8 @@ module: commercial-manned-guarding
 images:
     - url: /media/private-security-eu/security.jpg
       caption: It's all about security
----
 
+---
 Accident statistics show that risks like **slips, trips and falls**, **getting
 stuck**, ... are very frequent in the private security services sector.
 

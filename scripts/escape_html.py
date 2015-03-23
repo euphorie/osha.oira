@@ -12,7 +12,7 @@ output.xml   The filename for the fixed survey
 
 import sys
 import os
-from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup, Tag, UnicodeDammit
+from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup, Tag
 from xml.sax.saxutils import escape
 
 PLACEHOLDER = 'XXXXX'
@@ -38,7 +38,7 @@ fh.close()
 
 soup = BeautifulSoup(data)
 
-stonesoup = BeautifulStoneSoup(data, convertEntities=BeautifulStoneSoup.XML_ENTITIES)
+# stonesoup = BeautifulStoneSoup(data, convertEntities=BeautifulStoneSoup.XML_ENTITIES)
 
 
 tags = [
@@ -55,12 +55,13 @@ for tag in tags:
                 txt = escape(line.prettify()).decode('utf-8')
             else:
                 txt = line.string
+            txt = txt.strip()
             contents.append(txt)
-        entity.setString(u'\n'.join(contents))
+        entity.setString(u''.join(contents))
 
 
 fh = open(output, 'w')
-fh.write(soup.prettify())
+fh.write(soup.renderContents())
 fh.close()
 
 

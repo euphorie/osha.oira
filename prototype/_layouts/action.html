@@ -1,13 +1,34 @@
 ---
 layout: shell
 section: action
-application: home
-design_title: Profiled module
-design_description: 
 ---
 
 <form>
 	<article class="rich pat-well warning">
+		<h2>
+			<!-- The negative statement goes here. -->
+			The temperature of some fridges is not checked daily
+		</h2>
+		
+		<!-- The DIV and its content below are only plotted if there are actually images. -->
+
+		<div class="image-collage">
+			<a href="">
+				<img src="/media/private-security-eu/security.jpg" alt="" />
+			</a>
+
+			<!-- The next elements are only plotted if there are extra images. There's a maximum of 3 extra images allowed.  -->
+			
+			<a href="" class="four columns">
+				<img src="/media/private-security-eu/waarschuwing_-_giftig.png" alt="" />
+			</a>
+			<a href="" class="four columns">
+				<img src="/media/private-security-eu/redding_-_uitgang.png" alt="" />
+			</a>
+			<a href="" class="four columns">
+				<img src="/media/private-security-eu/redding_-_uitgang.png" alt="" />
+			</a>
+		</div>
 
 		{{ content }}
 
@@ -75,46 +96,56 @@ design_description:
 		<button class="add-clone pat-button icon-plus-circle" id="addMeasureButton" title="Add another measure" type="button">Add another measure</button>
 	</div>
 
+	<div class="measure dont-touch-this pat-collapsible" id="measure-template" hidden>
+		<h2>Measure #{1}</h2>
+		<p class="functions">
+			<a class="icon-pencil" href="#standardSolutions">Pre-fill</a>
+			<a class="icon-trash remove-clone">Remove</a>
+		</p>
+
+		<fieldset class="vertical">
+			<label>Description
+				<textarea autofocus class="pat-autofocus actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea> 
+			</label> 
+			<label>Prevention plan
+				<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea> 
+			</label>
+			<label>Requirements
+				<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3"></textarea>
+			</label>
+		</fieldset>
+
+		<fieldset class="vertical">
+			<label>
+				Who is responsible? 
+				<input class="responsible" name="responsible" type="text">
+			</label> 
+			<label class="currency">
+				Budget
+				<span class="composed currency-field">
+					<abbr title="Euro" class="currency">€</abbr>
+					<input type="number" class="currency" />
+				</span>
+			</label>
+			<label>
+				Planning start
+				<input type="date" />
+			</label>
+			<label>
+				Planning end
+				<input type="date" />
+			</label>
+		</fieldset>
+	</div>
+
+	<fieldset>
+		<textarea id="commentsField" name="comments" placeholder="Please leave any further comments you may have" cols="70" rows="5"></textarea>
+	</fieldset>
+
+	<div class="button-bar">
+		<button class="pat-button">
+			Save and continue
+		</button>
+	</div>
+
 </form>
-
-<div class="measure dont-touch-this pat-collapsible" id="measure-template" hidden>
-	<h2>Measure #{1}</h2>
-	<p class="functions">
-		<a class="icon-pencil" href="#standardSolutions">Pre-fill</a>
-		<a class="icon-trash remove-clone">Remove</a>
-	</p>
-
-	<fieldset class="vertical">
-		<label>Description
-			<textarea autofocus class="pat-autofocus actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea> 
-		</label> 
-		<label>Prevention plan
-			<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea> 
-		</label>
-		<label>Requirements
-			<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3"></textarea>
-		</label>
-	</fieldset>
-
-	<fieldset class="vertical">
-		<label>
-			Who is responsible? 
-			<input class="responsible" name="responsible" type="text">
-		</label> 
-		<label class="currency">
-			Budget
-			<span class="composed currency-field">
-				<abbr title="Euro" class="currency">€</abbr>
-				<input type="number" class="currency" />
-			</span>
-		</label>
-		<label>
-			Planning start
-			<input type="date" />
-		</label>
-		<label>
-			Planning end
-			<input type="date" />
-		</label>
-	</fieldset>
-</div>

@@ -17,6 +17,7 @@ from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 from html2text import html2text
 from datetime import datetime
 from datetime import timedelta
+from xml.sax.saxutils import unescape
 
 STATES = ['answered', 'postponed', 'unvisited']
 
@@ -96,9 +97,9 @@ solutions:
     title = risk.find("title").text
     id = str2filename(title)
     problem_description = _r(risk.find("problem-description").text)
-    description = _r(risk.find("description").text)
+    description = unescape(_r(risk.find("description").text))
     legal_reference_node = risk.find("legal-reference")
-    legal_reference = legal_reference_node and _r(legal_reference_node.text) or ""
+    legal_reference = legal_reference_node and unescape(_r(legal_reference_node.text)) or ""
     evaluation_method_node = risk.find("evaluation-method")
     evaluation_method = evaluation_method_node and evaluation_method_node.text or ""
     state = random.choice(STATES)

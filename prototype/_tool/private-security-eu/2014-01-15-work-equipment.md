@@ -6,7 +6,7 @@ parent_id: commercial-manned-guarding
 title: Work equipment
 module: commercial-manned-guarding
 images:
-    - url: /media/private-security-eu/guard walkie talkie.jpg
+    - url: /media/private-security-eu/guard-walkie-talkie.jpg
       caption: 
 
 ---

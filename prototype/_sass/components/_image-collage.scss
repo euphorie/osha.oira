@@ -1,13 +1,13 @@
 .image-collage {
-	margin: 0 -15px 2em;
+	margin: 0 -1.15em 2em;
 	overflow: hidden;
 
-	img {
-		width: 100%;
-	}
+	a {
+		background-size: cover;
+		height: 8em;
 
-	a:first-child {
-		display: block;
-		margin: 0 15px 15px 15px;
+		img {
+			opacity: 0;
+		}
 	}
 }

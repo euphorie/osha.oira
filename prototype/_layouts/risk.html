@@ -38,6 +38,18 @@ layout: shell
 	</fieldset>
 
 	<article class="rich">
+		{% if page.images %}
+			{% for image in page.images %}
+				<figure>
+					<img src="{{ image.url }}" alt="" title="{{ image.caption }}">
+					{% if image.caption %}
+					    <figcaption>
+					    	{{ image.caption }}
+					    </figcaption>
+					{% endif %}
+				</figure>
+			{% endfor %}
+		{% endif %}
 		{{ content }}
 	</article>
 

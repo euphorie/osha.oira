@@ -18,7 +18,7 @@ section: action
 			</a>
 
 			<!-- The next elements are only plotted if there are extra images. There's a maximum of 3 extra images allowed.  -->
-			
+
 			<a href="" class="four columns">
 				<img src="/media/private-security-eu/waarschuwing_-_giftig.png" alt="" />
 			</a>
@@ -53,10 +53,27 @@ section: action
 		<div class="measure pat-collapsible" id="measure-1">
 			<h2>Measure 1</h2>
 			<p class="functions">
-				<a class="icon-pencil" href="#standardSolutions">Pre-fill</a>
+				<a class="icon-pencil pat-tooltip" data-pat-tooltip="source: ajax" href="#standard-solutions-0">Pre-fill</a>
 			</p>
 
-			<fieldset class="vertical">
+			<div id="standard-solutions-0" hidden>
+				<p>
+					Select a standard solution. The main fields of this measure will be populated with the chosen solution. (Will overwrite the current solution.)
+				</p>
+				<ol>
+			        <li>
+			          	<a class="pat-inject close-panel" href="#standard-solution-1" data-pat-inject="target: #fields-0" class="title"><em class="small pat-button">Add</em> Standard solution bla</a>
+			        </li>
+			        <li>
+			          	<a class="pat-inject close-panel" href="#standard-solution-2" data-pat-inject="target: #fields-0"><em class="small pat-button">Add</em> Lorem ipsum dolor sit amet consectetuerLorem ipsum dolor sit amet consectetuerLorem ipsum dolor sit amet consectetuerLorem ipsum 	dolor sit amet consectetuerLorem ipsum dolor sit amet consectetuer</a>
+			        </li>
+			        <li>
+			          	<a class="pat-inject close-panel" href="#standard-solution-3" data-pat-inject="target: #fields-0"><em class="small pat-button">Add</em> Tremendae</a>
+			        </li>
+			    </ol>
+			</div>
+
+			<fieldset class="vertical" id="fields-0">
 				<label>Description
 					<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea> 
 				</label> 
@@ -99,11 +116,28 @@ section: action
 	<div class="measure dont-touch-this pat-collapsible" id="measure-template" hidden>
 		<h2>Measure #{1}</h2>
 		<p class="functions">
-			<a class="icon-pencil" href="#standardSolutions">Pre-fill</a>
+			<a class="icon-pencil pat-tooltip" data-pat-tooltip="source: ajax" href="#standard-solutions-#{1}">Pre-fill</a>
 			<a class="icon-trash remove-clone">Remove</a>
 		</p>
 
-		<fieldset class="vertical">
+		<div id="standard-solutions-#{1}" hidden>
+			<p>
+				Select a standard solution. The main fields of this measure will be populated with the chosen solution. (Will overwrite the current solution.)
+			</p>
+			<ol>
+		        <li>
+		          	<a class="pat-inject close-panel" href="#standard-solution-1" data-pat-inject="target: #fields-#{1}" class="title"><em class="small pat-button">Add</em> Standard solution bla</a>
+		        </li>
+		        <li>
+		          	<a class="pat-inject close-panel" href="#standard-solution-2" data-pat-inject="target: #fields-#{1}"><em class="small pat-button">Add</em> Lorem ipsum dolor sit amet consectetuerLorem ipsum dolor sit amet consectetuerLorem ipsum dolor sit amet consectetuerLorem ipsum 	dolor sit amet consectetuerLorem ipsum dolor sit amet consectetuer</a>
+		        </li>
+		        <li>
+		          	<a class="pat-inject close-panel" href="#standard-solution-3" data-pat-inject="target: #fields-#{1}"><em class="small pat-button">Add</em> Tremendae</a>
+		        </li>
+		    </ol>
+		</div>
+
+		<fieldset class="vertical" id="fields-#{1}">
 			<label>Description
 				<textarea autofocus class="pat-autofocus actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea> 
 			</label> 
@@ -147,5 +181,41 @@ section: action
 			Save and continue
 		</button>
 	</div>
+
+	<fieldset class="vertical" id="standard-solution-1" hidden>
+		<label>Description
+			<textarea autofocus class="pat-autofocus actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">Lorem ipsum 1</textarea> 
+		</label> 
+		<label>Prevention plan
+			<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3">Dolor sit</textarea> 
+		</label>
+		<label>Requirements
+			<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3">Amet consectetuer</textarea>
+		</label>
+	</fieldset>
+
+	<fieldset class="vertical" id="standard-solution-2" hidden>
+		<label>Description
+			<textarea autofocus class="pat-autofocus actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">Lorem ipsum 2</textarea> 
+		</label> 
+		<label>Prevention plan
+			<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3">Dolor sit</textarea> 
+		</label>
+		<label>Requirements
+			<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3">Amet consectetuer</textarea>
+		</label>
+	</fieldset>
+
+	<fieldset class="vertical" id="standard-solution-3" hidden>
+		<label>Description
+			<textarea autofocus class="pat-autofocus actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">Lorem ipsum 3</textarea> 
+		</label> 
+		<label>Prevention plan
+			<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3">Dolor sit</textarea> 
+		</label>
+		<label>Requirements
+			<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3">Amet consectetuer</textarea>
+		</label>
+	</fieldset>
 
 </form>

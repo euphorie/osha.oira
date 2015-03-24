@@ -1,6 +1,6 @@
 /* @group Tooltip */
 
-.tooltip-container .close-panel{
+.tooltip-container button.close-panel{
     position: absolute;
     right: 5px;
     top: 5px;
@@ -16,11 +16,11 @@
     border: none;
   }
 
-.tooltip-container .close-panel:hover {
+.tooltip-container button.close-panel:hover {
 	background-color: #7f7c71;
 }
   
-  .tooltip-container .close-panel:before {
+  .tooltip-container button.close-panel:before {
     content: "×";
 	color: white;
 	display: block;

@@ -12,22 +12,24 @@ section: action
 		
 		<!-- The DIV and its content below are only plotted if there are actually images. -->
 
-		<div class="image-collage">
-			<!-- Each image src is repeated as an image url as the value of the background image property inthe inline style on the link tag.  -->
+		<div class="image-collage pat-gallery">
+			<!-- Each image src is repeated as an image url as the value of the background image property inthe inline style on the link tag and in the HREF of the link tag. The background image should be a medium sized image, the image of the HREF should be the large, original image. -->
 
 			<!-- The class 'three' is three in case of four images, 'four' in case of three images, 'six' in case of two images and 'twelve' in case of one image. -->
 
-			<a href="" style="background-image: url(/media/private-security-eu/guard-walkie-talkie.jpg)" class="three columns">
-				<img src="/media/private-security-eu/guard-walkie-talkie.jpg" alt="" />
+			<!-- Notice that each image has an image caption in the title tag. -->
+
+			<a href="/media/private-security-eu/guard-walkie-talkie.jpg" style="background-image: url(/media/private-security-eu/guard-walkie-talkie.jpg)" class="three columns">
+				<img title="Image caption goes here" src="/media/private-security-eu/guard-walkie-talkie.jpg" alt="" />
 			</a>
-			<a href="" style="background-image: url(/media/private-security-eu/waarschuwing_-_giftig.png)" class="three columns">
-				<img src="/media/private-security-eu/waarschuwing_-_giftig.png" alt="" />
+			<a href="/media/private-security-eu/waarschuwing_-_giftig.png" style="background-image: url(/media/private-security-eu/waarschuwing_-_giftig.png)" class="three columns">
+				<img title="Image caption goes here" src="/media/private-security-eu/waarschuwing_-_giftig.png" alt="" />
 			</a>
-			<a href="" style="background-image: url(/media/private-security-eu/security.jpg)" class="three columns">
-				<img src="/media/private-security-eu/security.jpg" alt="" />
+			<a href="/media/private-security-eu/security.jpg" style="background-image: url(/media/private-security-eu/security.jpg)" class="three columns">
+				<img title="Image caption goes here" src="/media/private-security-eu/security.jpg" alt="" />
 			</a>
-			<a href="" style="background-image: url(/media/private-security-eu/redding_-_uitgang.png)" class="three columns">
-				<img src="/media/private-security-eu/redding_-_uitgang.png" alt="" />
+			<a href="/media/private-security-eu/redding_-_uitgang.png" style="background-image: url(/media/private-security-eu/redding_-_uitgang.png)" class="three columns">
+				<img title="Image caption goes here" src="/media/private-security-eu/redding_-_uitgang.png" alt="" />
 			</a>
 		</div>
 

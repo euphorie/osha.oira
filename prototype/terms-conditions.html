@@ -1,0 +1,131 @@
+---
+layout: shell
+design_title: Registration
+state: anonymous
+class: "sidebar-off"
+---
+
+<article>
+    <h1>
+        Terms & Conditions
+    </h1>
+    <p>
+        Please read and accept the following terms and conditions
+    </p>
+    <form action="/terms-conditions.html">
+        <fieldset class="vertical">
+            <div id="conditions" class="conditions">
+              <p>
+                The OiRA tool is an instrument put at your disposal by the European Agency for Safety and Health at Work (EU-OSHA). This Privacy Policy applies to all products, services and websites offered by EU-OSHA in the framework of the OiRA (Online interactive Risk Assessment) tool.
+              </p>
+
+              <p>
+                Your personal data is processed in line with Regulation (EC) N° 45/2001 of the European Parliament and of the Council of 18 December 2000 on the protection of individuals with regard to the processing of personal data by the Community institutions and bodies and on the free movement of such data. Further details of the privacy policy of EU-OSHA and the full text of the Regulation can be accessed at: <a href="http://osha.europa.eu/en/privacy-policy">http://osha.europa.eu/en/privacy-policy</a>.
+              </p>
+
+              <h2>The Information we collect and for what purposes</h2>
+
+              <p>
+              The kind of information we collect: when you sign up for an OiRA account and you put in data into the Online interactive Risk Assessment tool we are asking you for the following information:</p>
+
+              <ul>
+                <li>
+                  Email account: this is necessary to access the online tool, edit the input data, and delete the OiRA account. You can enter any valid e-mail address. Email addresses will not be used for commercial purposes.
+                </li>
+
+                <li>
+                  Any information you provide in the free text fields of the tool and in the action plan - (e.g. when you input a measure to tackle a risk, the person responsible for that measure, etc). The input of information in the free text fields is voluntary.
+                </li>
+
+                <li>
+                  Cookies – When you visit the site and select a language, we send a cookie to your computer or other device to store your language selection. This cookie stays in your browser until you close it. When you visit the site and log in, we send a cookie with your login information to keep you logged in during your visit. This cookie stays on your computer until you close your browser.  Most browsers are initially set up to accept cookies, but you can reset your browser to refuse all cookies or to indicate when a cookie is being sent. However, some features and services may not function properly if your cookies are disabled.
+                </li>
+
+                <li>
+                  Log information – When you access the service, our servers automatically record information that your browser sends whenever you visit a website. These server logs may include information such as your web request, your interaction with a service, browser type, browser language, the date and time of your request. IP addresses are not stored in the system.
+                </li>
+              </ul>
+
+              <p>
+                In addition to the above mentioned purposes, we may use the information we collect to:
+              </p>
+
+              <ul>
+                <li>
+                  Provide, maintain, protect, and improve our services and develop new services.
+                </li>
+
+                <li>
+                  Build statistics, by using exclusively aggregated and anonymous data on the risks of a sector. These statistics will be passed on exclusively to the developers of the tool.
+                </li>
+              </ul>
+
+              <p>
+                In any case no personal data will be used for processing of data.
+              </p>
+
+              <h2>Data controller</h2>
+
+              <p>
+                The data controller is Andrew Smith, European Agency for Safety and Health at Work, Bilbao.
+              </p>
+
+              <h2>Conservation and processing of information</h2>
+
+              <p>
+                We keep your data which is inaccessible for external users until you delete your account and your session(s).
+              </p>
+
+              <p>
+                EU-OSHA stores data on our servers in Halle, Germany.
+              </p>
+
+              <h2>Reviewing and removing your information</h2>
+
+              <p>
+                You can use the Account settings and your saved OiRA Session(s) to review, control and delete the information stored in your Account and in your Session(s).
+              </p>
+
+              <h2>Information security</h2>
+
+              <p>
+                We restrict access to personal information to authorised user. We take appropriate security measures to protect against unauthorized access to or unauthorized alteration, disclosure or destruction of data. These include internal reviews of our data collection, storage and processing practices and security measures, including appropriate encryption of communication and physical security measures to guard against unauthorized access to systems where we store personal data. Data are not accessible to anybody by any means. IP addresses are not saved so that end-users can not be identified through their access.
+              </p>
+
+              <h2>Contact information</h2>
+
+              <p>
+                EU-OSHA regularly reviews its compliance with this Privacy Policy.  Any inquiries and complaints regarding our privacy policy can be sent to the DPO of EU-OSHA at <a>DPO@osha.europa.eu</a> or to the EDPS at <a href="mailto:edps@edps.europa.eu">edps@edps.europa.eu</a>.
+              </p>
+            </div>
+
+            <p class="button-bar">
+              <button id="agree-button" class="pat-button" type="submit" disabled="disabled">Agree and complete registration</button>
+            </p>
+        </fieldset>
+    </form>
+</article>
+
+<script type="text/javascript">
+// <![CDATA[
+    function updateButton() {
+        var $conditions = $(this),
+            button = $("#agree-button")[0],
+            at_bottom;
+
+        if (!button.disabled) {
+            return;
+        }
+
+        at_bottom=(this.scrollHeight-$conditions.scrollTop())<=$conditions.innerHeight();
+        if (at_bottom) {
+            button.disabled=false;
+        }
+    }
+
+    $(document).ready(function() {
+        $("#conditions").scroll(updateButton);
+        $("#agreeButton")[0].disabled=true;
+    });
+// ]]>
+</script>

@@ -50,7 +50,11 @@ layout: shell
 				</figure>
 			{% endfor %}
 		{% endif %}
-		{{ content }}
+		{{ page.description }}
+		{% if page.legal_reference %}
+			<h4>Legal and policy references</h4>
+			{{ page.legal_reference }}
+		{% endif %}
 	</article>
 
 	<fieldset>

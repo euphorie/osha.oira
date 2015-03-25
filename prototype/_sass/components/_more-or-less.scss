@@ -1,0 +1,13 @@
+.show-more-or-less {
+	cursor: pointer;
+	// text-decoration: underline;
+	color: $colour-accent;
+
+	&.collapsible-open .show-more,
+	&.collapsible-closed .show-less,
+	.divider,
+	&:first-child::before {
+		display: none;
+	}
+
+}

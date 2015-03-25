@@ -19,6 +19,27 @@
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 
+	#organisation-logo {
+		opacity: 0.9;
+		padding: 4% 4%;
+		text-align: center;
+		position: absolute;
+		left: 6%;
+		bottom: 4%;
+		right: 6%;
+		background: white;
+		border-radius: 0.8em;
+
+		img {
+			max-width: 90%;
+			max-height: 100px;
+		}
+
+		@media screen and (max-height: 480px) {
+			display: none;
+		}
+	}
+
 	a {
 		color: white;
 	}

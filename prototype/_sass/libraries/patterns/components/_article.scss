@@ -1,6 +1,13 @@
 @charset "UTF-8";
 
 article {
+	margin-bottom: 2em;
+
+	&:after {
+		content: ' ';
+		display: table;
+		clear: both;
+	}
 
 	h1,h2,p,ul,ol,table,dl,pre {
 		margin-bottom: 2rem;

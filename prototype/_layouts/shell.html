@@ -175,8 +175,20 @@
 					</li>
 				{% endunless %}
 		    </ol>
-		    <a id="organisation-logo">
-		    	<img src="/media/private-security-eu/external-site-logo.jpg" alt="" />
+		    <a href="" id="organisation-logo" class="{% if page.state == 'anonymous' %}native{% else %}alien{% endif %}">
+				{% if page.state == 'anonymous' %}
+		    		<!-- In case the organisation has not changed the logo, the link tag gets a class 'native' instead of 'alien' and the following markup applies: -->
+			    	<figure>
+			    		<img src="/media/oira-logo.svg" alt="" />
+			    		<figcaption>
+			    			Online Interactive<br/>
+			    			Risk Assessment
+			    		</figcaption>
+			    	</figure>
+		    	{% else %}
+		    		<!-- In case of on organisation that uploaded a logo, no figure tag needs to be there: -->
+		    		<img src="/media/private-security-eu/external-site-logo.jpg" alt="" />
+		    	{% endif %}
 		    </a>
 		</aside>
 	</body>

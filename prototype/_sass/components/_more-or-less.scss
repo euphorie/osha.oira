@@ -2,6 +2,9 @@
 	cursor: pointer;
 	// text-decoration: underline;
 	color: $colour-accent;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 
 	&.collapsible-open .show-more,
 	&.collapsible-closed .show-less,

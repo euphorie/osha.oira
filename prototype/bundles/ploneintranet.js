@@ -33909,7 +33909,7 @@ define('pat-clone',[
             }
             var callback = function (idx, attrname) {
                 if (!$el.attr(attrname)) { return; }
-                $el.attr(attrname, $el.attr(attrname).replace("1", this.num_clones+1));
+                $el.attr(attrname, $el.attr(attrname).replace("#{1}", this.num_clones+1));
             };
             $.each(["name", "value", "placeholder"], callback.bind(this));
         },

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.7 (unreleased)
+2.3.7 (2015-04-01)
 ------------------
 
 - More changes in Icelandic #11552

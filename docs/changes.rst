@@ -4,8 +4,9 @@ Changelog
 2.3.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- More changes in Icelandic #11552
+- Bugfix: do not show delete and replace confirmations in plain text on
+  action plan #10925
 
 2.3.6 (2015-03-19)
 ------------------

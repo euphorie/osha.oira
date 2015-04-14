@@ -48,7 +48,11 @@ class: sidebar-off
 				<span class="pat-depends" data-pat-depends="pq492.multiple=yes">Please enter the name for each location you would like to assess.</span>
 			</legend>
 
-			<fieldset class="group form-iteration pat-clone" data-pat-clone="trigger-element: #clone-set-1">
+			<fieldset class="group form-iteration pat-clone" data-pat-clone="template: #clone-template-1; trigger-element: #clone-set-1">
+        <label id="clone-template-1" hidden>
+          <input autofocus placeholder="Name of location #{1}" size="40" type="text" name="492:utf8:utext:list">&nbsp;<button type="button" class="pat-button small remove-clone icon-trash iconified">Remove</button>
+        </label>
+
 				<label>
 					<input autofocus placeholder="Name of location #{1}" size="40" type="text" name="492:utf8:utext:list">&nbsp;<button type="button" class="pat-button small remove-clone icon-trash iconified">Remove</button>
 				</label>

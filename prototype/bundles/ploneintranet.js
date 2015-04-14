@@ -33899,7 +33899,7 @@ define("pat-clone",[
             $.each(ids, function (idx, id) {
                 if (id.indexOf("#{1}") !== -1) {
                     $clone.attr("id",
-                        $clone.attr("id") ? $clone.attr("id") + " " : '' + 
+                        $clone.attr("id") ? $clone.attr("id") + " " : "" +
                             id.replace("#{1}", this.num_clones+1));
                 }
             }.bind(this));
@@ -34684,8 +34684,14 @@ define('pat-inject',[
                 if ($source.length === 0)
                     log.warn("No source elements for selector:", source, $html);
 
-                $source.find("a[href^=\"#\"]").each(function() {
+                $source.find("a[href^=\"#\"]").each(function () {
                     var href = this.getAttribute("href");
+                    if (href.indexOf("#{1}") !== -1) {
+                        // We ignore hrefs containing #{1} because they're not
+                        // valid and only applicable in the context of
+                        // pat-clone.
+                        return;
+                    }
                     // Skip in-document links pointing to an id that is inside
                     // this fragment.
                     if (href.length === 1)  // Special case for top-of-page links

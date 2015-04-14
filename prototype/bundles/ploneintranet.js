@@ -33855,13 +33855,15 @@ define('pat-base',[
 });
 
 /* pat-clone */
-define('pat-clone',[
+define("pat-clone",[
     "jquery",
     "pat-parser",
     "pat-registry",
-    "pat-base"
-], function($, Parser, registry, Base) {
+    "pat-base",
+    "pat-logger"
+], function($, Parser, registry, Base, logger) {
     "use strict";
+    var log = logger.getLogger("pat-clone");
     var parser = new Parser("clone");
     parser.add_argument("max");
     parser.add_argument("template", ":first");
@@ -33892,6 +33894,15 @@ define('pat-clone',[
             }
             this.num_clones += 1;
             var $clone = this.$template.clone();
+            var ids = ($clone.attr("id") || "").split(" ");
+            $clone.removeAttr("id");
+            $.each(ids, function (idx, id) {
+                if (id.indexOf("#{1}") !== -1) {
+                    $clone.attr("id",
+                        $clone.attr("id") ? $clone.attr("id") + " " : '' + 
+                            id.replace("#{1}", this.num_clones+1));
+                }
+            }.bind(this));
             $clone.appendTo(this.$el);
             $clone.children().addBack().contents().addBack().filter(this.incrementValues.bind(this));
             $clone.find(this.options.removeElement).on("click", this.remove.bind(this, $clone));
@@ -33906,8 +33917,12 @@ define('pat-clone',[
             var $el = $(el);
             $el.children().addBack().contents().filter(this.incrementValues.bind(this));
             var callback = function (idx, attr) {
-                if (!$el.attr(attr.name)) { return; }
-                $el.attr(attr.name, $el.attr(attr.name).replace("#{1}", this.num_clones+1));
+                if (attr.name === "type" || !$el.attr(attr.name)) { return; }
+                try {
+                    $el.attr(attr.name, $el.attr(attr.name).replace("#{1}", this.num_clones+1));
+                } catch (e) {
+                    log.warn(e);
+                }
             };
             if (el.nodeType !== TEXT_NODE) {
                 $.each(el.attributes, callback.bind(this));

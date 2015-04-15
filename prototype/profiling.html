@@ -43,31 +43,29 @@ class: sidebar-off
         </fieldset>
 
         <fieldset class="group pat-depends" data-pat-depends="condition: pq492.present=yes and pq492.multiple">
-			<legend>
-				<span class="pat-depends" data-pat-depends="pq492.multiple=no">Please enter a name for the location you would like to assess.</span>
-				<span class="pat-depends" data-pat-depends="pq492.multiple=yes">Please enter the name for each location you would like to assess.</span>
-			</legend>
+    			<legend>
+    				<span class="pat-depends" data-pat-depends="pq492.multiple=no">Please enter a name for the location you would like to assess.</span>
+    				<span class="pat-depends" data-pat-depends="pq492.multiple=yes">Please enter the name for each location you would like to assess.</span>
+    			</legend>
+    			<fieldset class="group form-iteration pat-clone" data-pat-clone="template: #clone-template-1; trigger-element: #clone-set-1">
+            <label id="clone-template-1" hidden>
+              <input autofocus placeholder="Name of location #{1}" size="40" type="text" name="492:utf8:utext:list">&nbsp;<button type="button" class="pat-button small remove-clone icon-trash iconified">Remove</button>
+            </label>
 
-			<fieldset class="group form-iteration pat-clone" data-pat-clone="template: #clone-template-1; trigger-element: #clone-set-1">
-        <label id="clone-template-1" hidden>
-          <input autofocus placeholder="Name of location #{1}" size="40" type="text" name="492:utf8:utext:list">&nbsp;<button type="button" class="pat-button small remove-clone icon-trash iconified">Remove</button>
-        </label>
-
-				<label>
-					<input autofocus placeholder="Name of location #{1}" size="40" type="text" name="492:utf8:utext:list">&nbsp;<button type="button" class="pat-button small remove-clone icon-trash iconified">Remove</button>
-				</label>
-			</fieldset>
-
-			<p class="buttons pat-depends" data-pat-depends="pq492.multiple=yes">
-				<button id="clone-set-1" class="pat-button icon-plus-circle add-clone" type="button">Add another item</button>
-			</p>
-
+    				<label>
+    					<input autofocus placeholder="Name of location" size="40" type="text" name="492:utf8:utext:list" class="pat-depends" data-pat-depends="pq492.multiple=no" />
+              <input autofocus placeholder="Name of location 1" size="40" type="text" name="492:utf8:utext:list" class="pat-depends" data-pat-depends="pq492.multiple=yes" />
+    				</label>
+    			</fieldset>
+    			<p class="buttons pat-depends" data-pat-depends="pq492.multiple=yes">
+    				<button id="clone-set-1" class="pat-button icon-plus-circle add-clone" type="button">Add another item</button>
+    			</p>
         </fieldset>
-	</fieldset>
+	   </fieldset>
 
     <fieldset class="vertical">
 
-        <h2>Mobile partrolling / intervention after alarm</h2>
+        <h2>Mobile partrolling/intervention after alarm</h2>
         <fieldset class="pat-checklist radio">
           <legend>Does your organisation provide mobile patrolling / intervention after alarm?</legend>
           <label><input type="radio" class="presence" required="required" name="pq504.present" value="yes"> Yes</label>
@@ -76,8 +74,12 @@ class: sidebar-off
 
         <fieldset class="pat-checklist radio pat-depends" data-pat-depends="pq504.present=yes">
           <legend>Do you offer this service in multiple locations?</legend>
-          <label><input type="radio" class="multiple" name="pq504.multiple" value="yes"> Yes</label>
-          <label><input type="radio" class="multiple" name="pq504.multiple" value="no" checked="checked"> No</label>
+          <label>
+            <input type="radio" class="multiple" name="pq504.multiple" value="yes"> Yes
+          </label>
+          <label>
+            <input type="radio" class="multiple" name="pq504.multiple" value="no" checked="checked"> No
+          </label>
         </fieldset>
 
         <fieldset class="group pat-depends" data-pat-depends="condition: pq504.present=yes and pq504.multiple">
@@ -86,16 +88,21 @@ class: sidebar-off
             <span class="pat-depends" data-pat-depends="pq504.multiple=yes">Please enter the name for each location you would like to assess.</span>
           </legend>
 
-          <fieldset class="pat-clone form-iteration" data-pat-clone="trigger-element: #clone-set-2">
+          <fieldset class="pat-clone form-iteration" data-pat-clone="template: #clone-template-2; trigger-element: #clone-set-2">
+            <label id="clone-template-2" hidden>
+              <input autofocus placeholder="Name of location #{1}" size="40" type="text" name="504:utf8:utext:list">&nbsp;<button type="button" class="pat-button small remove-clone icon-trash iconified">Remove</button>
+            </label>
+
             <label>
-				<input autofocus placeholder="Name of location #{1}" size="40" type="text" name="492:utf8:utext:list">&nbsp;<button type="button" class="pat-button small remove-clone icon-trash iconified">Remove</button>
+              <input autofocus placeholder="Name of location" size="40" type="text" name="492:utf8:utext:list" class="pat-depends" data-pat-depends="pq504.multiple=no" />
+              <input autofocus placeholder="Name of location 1" size="40" type="text" name="492:utf8:utext:list" class="pat-depends" data-pat-depends="pq504.multiple=yes" />
             </label>
 
           </fieldset>
 
-			<p class="buttons pat-depends" data-pat-depends="pq504.multiple=yes">
-				<button id="clone-set-2" class="pat-button icon-plus-circle add-clone" type="button">Add another item</button>
-			</p>
+    			<p class="buttons pat-depends" data-pat-depends="pq504.multiple=yes">
+    				<button id="clone-set-2" class="pat-button icon-plus-circle add-clone" type="button">Add another item</button>
+    			</p>
 
         </fieldset>
     </fieldset>
@@ -120,15 +127,20 @@ class: sidebar-off
             <span class="pat-depends" data-pat-depends="pq505.multiple=yes">Please enter the name for each location you would like to assess.</span>
           </legend>
 
-          <fieldset class="form-iteration pat-clone" data-pat-clone="trigger-element: #clone-set-3">
+          <fieldset class="form-iteration pat-clone" data-pat-clone="ttemplate: #clone-template-3; rigger-element: #clone-set-3">
+            <label id="clone-template-3" hidden>
+              <input autofocus placeholder="Name of location #{1}" size="40" type="text" name="505:utf8:utext:list">&nbsp;<button type="button" class="pat-button small remove-clone icon-trash iconified">Remove</button>
+            </label>
+
             <label>
-            	<input autofocus placeholder="Name of location #{1}" size="40" type="text" name="492:utf8:utext:list">&nbsp;<button type="button" class="pat-button small remove-clone icon-trash iconified">Remove</button>
+              <input autofocus placeholder="Name of location" size="40" type="text" name="492:utf8:utext:list" class="pat-depends" data-pat-depends="pq505.multiple=no" />
+              <input autofocus placeholder="Name of location 1" size="40" type="text" name="492:utf8:utext:list" class="pat-depends" data-pat-depends="pq505.multiple=yes" />
             </label>
           </fieldset>
 
-			<p class="buttons pat-depends" data-pat-depends="pq505.multiple=yes">
-				<button id="clone-set-3" class="pat-button icon-plus-circle add-clone" type="button">Add another item</button>
-			</p>
+    			<p class="buttons pat-depends" data-pat-depends="pq505.multiple=yes">
+    				<button id="clone-set-3" class="pat-button icon-plus-circle add-clone" type="button">Add another item</button>
+    			</p>
         </fieldset>
 	</fieldset>
 

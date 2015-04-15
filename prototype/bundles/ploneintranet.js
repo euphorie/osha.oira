@@ -11331,7 +11331,7 @@ define('pat-registry',[
                         });
                 $.fn[plugin_name] = utils.jqueryPlugin(pattern);
                 // BBB 2012-12-10 and also for Mockup patterns.
-                $.fn[plugin_name.replace(/^pat/, "pattern")] = utils.jqueryPlugin(pattern);
+                $.fn[plugin_name.replace(/^pat/, "pattern")] = $.fn[plugin_name];
             }
             log.debug("Registered pattern:", name, pattern);
             if (registry.initialized) {
@@ -34938,8 +34938,9 @@ define('pat-collapsible',[
     "pat-parser",
     "pat-store",
     "pat-registry",
+    "pat-base",
     "pat-jquery-ext"
-], function($, inject, logger, Parser, store, registry) {
+], function($, inject, logger, Parser, store, registry, Base) {
     var log = logger.getLogger("pat.collapsible"),
         parser = new Parser("collapsible");
 
@@ -34950,8 +34951,10 @@ define('pat-collapsible',[
     parser.add_argument("effect-easing", "swing");
     parser.add_argument("closed", false);
     parser.add_argument("trigger", "::first");
+    parser.add_argument("close-trigger");
+    parser.add_argument("open-trigger");
 
-    var _ = {
+    return Base.extend({
         name: "collapsible",
         trigger: ".pat-collapsible",
         jquery_plugin: true,
@@ -34964,103 +34967,86 @@ define('pat-collapsible',[
         },
 
         init: function($el, opts) {
-            return $el.each(function() {
-                var $el = $(this),
-                    options = store.updateOptions(this, parser.parse($el, opts)),
-                // create collapsible structure
-                    $content, state, storage;
+            var $content, state, storage;
+            this.options = store.updateOptions($el[0], parser.parse($el, opts));
 
-                if (options.trigger === "::first") {
-                    options.$trigger = $el.children(":first");
-                    $content = $el.children(":gt(0)");
+            if (this.options.trigger === "::first") {
+                this.$trigger = $el.children(":first");
+                $content = $el.children(":gt(0)");
+            } else {
+                this.$trigger = $(this.options.trigger);
+                $content = $el.children();
+            }
+            if (this.$trigger.length === 0) {
+                log.error("Collapsible has no trigger.", $el[0]);
+                return;
+            }
+
+            this.$panel = $el.find(".panel-content");
+            if (this.$panel.length === 0) {
+                if ($content.length) {
+                    this.$panel = $content
+                        .wrapAll("<div class='panel-content' />")
+                        .parent();
                 } else {
-                    options.$trigger = $(options.trigger);
-                    $content = $el.children();
+                    this.$panel = $("<div class='panel-content' />")
+                        .insertAfter(this.$trigger);
                 }
+            }
 
-                if (options.$trigger.length === 0) {
-                    log.error("Collapsible has no trigger.", this);
-                    return;
-                }
+            state=(this.options.closed || $el.hasClass("closed")) ? "closed" : "open";
+            if (this.options.store!=="none") {
+                storage=(this.options.store==="local" ? store.local : store.session)(this.name);
+                state=storage.get($el.attr('id')) || state;
+            }
 
-                options.$panel = $el.find(".panel-content");
-                if (options.$panel.length === 0) {
-                    if ($content.length) {
-                        options.$panel = $content
-                            .wrapAll("<div class='panel-content' />")
-                            .parent();
-                    } else {
-                        options.$panel = $("<div class='panel-content' />")
-                            .insertAfter(options.$trigger);
-                    }
-                }
+            if (state==="closed") {
+                this.$trigger.removeClass("collapsible-open").addClass("collapsible-closed");
+                $el.removeClass("open").addClass("closed");
+                this.$panel.hide();
+            } else {
+                if (this.options.loadContent)
+                    this._loadContent($el, this.options.loadContent, this.$panel);
+                this.$trigger.removeClass("collapsible-closed").addClass("collapsible-open");
+                $el.removeClass("closed").addClass("open");
+                this.$panel.show();
+            }
 
-                $el.data("patternCollapsible", options);
-                state=(options.closed || $el.hasClass("closed")) ? "closed" : "open";
-                if (options.store!=="none") {
-                    storage=(options.store==="local" ? store.local : store.session)(_.name);
-                    state=storage.get(this.id) || state;
-                }
+            this.$trigger
+                .off(".pat-collapsible")
+                .on("click.pat-collapsible", null, $el, this._onClick.bind(this))
+                .on("keypress.pat-collapsible", null, $el, this._onKeyPress.bind(this));
 
-                if (state==="closed") {
-                    options.$trigger.removeClass("collapsible-open").addClass("collapsible-closed");
-                    $el.removeClass("open").addClass("closed");
-                    options.$panel.hide();
-                } else {
-                    if (options.loadContent)
-                        _._loadContent($el, options.loadContent, options.$panel);
-                    options.$trigger.removeClass("collapsible-closed").addClass("collapsible-open");
-                    $el.removeClass("closed").addClass("open");
-                    options.$panel.show();
-                }
+            if (this.options.closeTrigger) {
+                $(document).on("click", this.options.closeTrigger, this.close.bind(this));
+            }
+            if (this.options.openTrigger) {
+                $(document).on("click", this.options.openTrigger, this.open.bind(this));
+            }
 
-                options.$trigger
-                    .off(".pat-collapsible")
-                    .on("click.pat-collapsible", null, $el, _._onClick)
-                    .on("keypress.pat-collapsible", null, $el, _._onKeyPress);
+            return $el;
+        },
 
-                return $el;
-            });
+        open: function() {
+            if (!this.$el.hasClass("open"))
+                this.toggle();
+            return this.$el;
+        },
+
+        close: function() {
+            if (!this.$el.hasClass("closed"))
+                this.toggle();
+            return this.$el;
         },
 
         _onClick: function(event) {
-            _.toggle(event.data);
+            this.toggle(event.data);
         },
 
         _onKeyPress : function(event){
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if (keycode === 13)
-                _.toggle(event.data);
-        },
-
-        destroy: function($el) {
-            $el.removeData("patternCollapsible");
-            $el.children(":first").off(".pat-collapsible");
-        },
-
-        open: function($el) {
-            if (!$el.hasClass("open"))
-                _.toggle($el);
-            return $el;
-        },
-
-        close: function($el) {
-            if (!$el.hasClass("closed"))
-                _.toggle($el);
-            return $el;
-        },
-
-        _validateOptions: function(trigger, options) {
-            if (options.store!=="none") {
-                if (!trigger.id) {
-                    log.warn("state persistance requested, but element has no id");
-                    options.store="none";
-                } else if (!store.supported) {
-                    log.warn("state persistance requested, but browser does not support webstorage");
-                    options.store="none";
-                }
-            }
-            return options;
+                this.toggle();
         },
 
         _loadContent: function($el, url, $target) {
@@ -35078,80 +35064,58 @@ define('pat-collapsible',[
 
         // jQuery method to force loading of content.
         loadContent: function($el) {
-            return $el.each(function() {
-                var $el = $(this),
-                    options = $(this).data("patternCollapsible");
-                if (options.loadContent)
-                    _._loadContent($el, options.loadContent, options.$panel);
-            });
+            return $el.each(function(idx, el) {
+                if (this.options.loadContent)
+                    this._loadContent($(el), this.options.loadContent, this.$panel);
+            }.bind(this));
         },
 
-        toggle: function($el) {
-            var options = $el.data("patternCollapsible"),
-                new_state = $el.hasClass("closed") ? "open" : "closed";
-
-            if (options.store!=="none") {
-                var storage=(options.store==="local" ? store.local : store.session)(_.name);
-                storage.set($el.attr("id"), new_state);
+        toggle: function() {
+            var new_state = this.$el.hasClass("closed") ? "open" : "closed";
+            if (this.options.store!=="none") {
+                var storage=(this.options.store==="local" ? store.local : store.session)(this.name);
+                storage.set(this.$el.attr("id"), new_state);
             }
-
             if (new_state==="open") {
-                $el.trigger("patterns-collapsible-open");
-                _._transit($el, "closed", "open", options);
+                this.$el.trigger("patterns-collapsible-open");
+                this._transit(this.$el, "closed", "open");
             } else {
-                $el.trigger("patterns-collapsible-close");
-                _._transit($el, "open", "closed", options);
+                this.$el.trigger("patterns-collapsible-close");
+                this._transit(this.$el, "open", "closed");
             }
-
-            // allow for chaining
-            return $el;
+            return this.$el; // allow chaining
         },
 
-        _transit: function($el, from_cls, to_cls, options) {
-            if (to_cls === "open" && options.loadContent)
-                _._loadContent($el, options.loadContent, options.$panel);
-
-            var duration = (options.transition==="css" || options.transition==="none") ? null : options.effect.duration;
-
+        _transit: function($el, from_cls, to_cls) {
+            if (to_cls === "open" && this.options.loadContent) {
+                this._loadContent($el, this.options.loadContent, this.$panel);
+            }
+            var duration = (this.options.transition==="css" || this.options.transition==="none") ? null : this.options.effect.duration;
             if (!duration) {
-                options.$trigger
-                        .removeClass("collapsible-" + from_cls)
-                        .addClass("collapsible-" + to_cls);
-                $el
-                    .removeClass(from_cls)
-                    .addClass(to_cls)
-                    .trigger("pat-update",
+                this.$trigger.removeClass("collapsible-" + from_cls).addClass("collapsible-" + to_cls);
+                $el.removeClass(from_cls)
+                   .addClass(to_cls)
+                   .trigger("pat-update",
                             {pattern: "collapsible",
                              transition: "complete"});
             } else {
-                var t = _.transitions[options.transition];
-                $el
-                    .addClass("in-progress")
-                    .trigger("pat-update",
-                            {pattern: "collapsible",
-                             transition: "start"});
-                options.$trigger.addClass("collapsible-in-progress");
-                options.$panel[t[to_cls]](duration, options.effect.easing, function() {
-                    options.$trigger
-                            .removeClass("collapsible-" + from_cls)
-                            .removeClass("collapsible-in-progress")
-                            .addClass("collapsible-" + to_cls);
-                    $el
-                        .removeClass(from_cls)
-                        .removeClass("in-progress")
-                        .addClass(to_cls)
-                        .trigger("pat-update",
-                            {pattern: "collapsible",
-                             transition: "complete"});
-                });
+                var t = this.transitions[this.options.transition];
+                $el.addClass("in-progress")
+                   .trigger("pat-update", {pattern: "collapsible", transition: "start"});
+                this.$trigger.addClass("collapsible-in-progress");
+                this.$panel[t[to_cls]](duration, this.options.effect.easing, function() {
+                    this.$trigger.removeClass("collapsible-" + from_cls)
+                                 .removeClass("collapsible-in-progress")
+                                 .addClass("collapsible-" + to_cls);
+                    $el.removeClass(from_cls)
+                       .removeClass("in-progress")
+                       .addClass(to_cls)
+                       .trigger("pat-update", {pattern: "collapsible", transition: "complete"});
+                }.bind(this));
             }
         }
-    };
-
-    registry.register(_);
-    return _;
+    });
 });
-
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
 // vim: sw=4 expandtab
 ;

@@ -1,0 +1,39 @@
+---
+layout: identification
+design_title: Identification landing page
+number: "0.0.0"
+---
+
+<article>
+	<h1>
+		Other risks
+	</h1>
+</article>
+<form action="/action-plan.html">
+	<fieldset class="custom-risks">
+		<fieldset>
+			<textarea name="description-1" placeholder="Description of risk 1" id="description-1" cols="30" rows="6" class="description"></textarea>
+
+			<label class="priority">This is a
+				<select>
+					<option>
+						low priority risk
+					</option>
+					<option>
+						medium priority risk
+					</option>
+					<option>
+						high priority risk
+					</option>
+				</select> .
+			</label>
+
+			<button class="iconified icon-trash float-after remove">Remove risk</button>
+		</fieldset>
+	</fieldset>
+
+	<p class="buttons pat-button-bar">
+		<button id="clone-set-1" class="pat-button icon-plus-circle add-clone" type="button">Add a risk</button>
+		<button type="submit" class="float-after pat-button icon-angle-circled-right">Continue to action plan</button>
+	</p>
+</form>

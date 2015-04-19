@@ -10,9 +10,9 @@ number: "0.0.0"
 	</h1>
 </article>
 <form action="/action-plan.html">
-	<fieldset class="custom-risks">
-		<fieldset>
-			<textarea name="description-1" placeholder="Description of risk 1" id="description-1" cols="30" rows="6" class="description"></textarea>
+	<fieldset class="custom-risks pat-clone" data-pat-clone="template: #risk-template">
+		<fieldset class="risk-set">
+			<textarea autofocus name="description-1" placeholder="Description of risk 1" id="description-1" cols="30" rows="6" class="description"></textarea>
 
 			<label class="priority">This is a
 				<select>
@@ -28,7 +28,7 @@ number: "0.0.0"
 				</select> .
 			</label>
 
-			<button class="iconified icon-trash float-after remove">Remove risk</button>
+			<button class="iconified icon-trash float-after remove-clone">Remove risk</button>
 		</fieldset>
 	</fieldset>
 
@@ -37,3 +37,23 @@ number: "0.0.0"
 		<button type="submit" class="float-after pat-button icon-angle-circled-right">Continue to action plan</button>
 	</p>
 </form>
+
+<fieldset class="risk-set" id="risk-template" hidden>
+	<textarea autofocus name="description-#{1}" placeholder="Description of risk #{1}" id="description-#{1}" cols="30" rows="6" class="description"></textarea>
+
+	<label class="priority">This is a
+		<select>
+			<option>
+				low priority risk
+			</option>
+			<option>
+				medium priority risk
+			</option>
+			<option>
+				high priority risk
+			</option>
+		</select> .
+	</label>
+
+	<button class="iconified icon-trash float-after remove-clone">Remove risk</button>
+</fieldset>

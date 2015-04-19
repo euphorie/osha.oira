@@ -125,6 +125,9 @@
 
 			                          <ol>
 				                          {% for module in site.tool  %}
+                                            <!-- If a module does not contain a single risks that needs to be handled in the action plan (or sub-modules with risks that need to be handled), the whole module must not be displayed in the tree.
+                                                 This behaviour is already implemented in current Euphorie/OiRA
+                                            -->
 				                            {% if module.parent_id == id %}
 						                    {% capture m_id %}{{ module.fid }}{% endcapture %}
 						                    <li class="submodule">

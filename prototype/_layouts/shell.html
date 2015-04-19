@@ -134,7 +134,7 @@
 					    	                        {% capture p_id %}{{ id }}-{{ m_id}}{% endcapture %}
 					        	                    {% if risk.parent_id == p_id and risk.classes contains 'risk' %}
 							    	                <li class="{{risk.classes}}">
-							        	              <a href="{{risk.url}}#content" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">{{risk.number}}</strong> {{risk.title}}</a>
+							        	              <a href="{{risk.url}}#content" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">{{risk.number}}</strong> {{risk.problem_description}}</a>
 								                      </li>
 				    	                       	    {% endif %}
 							                      {% endfor %}

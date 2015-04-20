@@ -53,7 +53,7 @@ section: action
 	</article>
 
 	<div class="measures pat-clone" data-pat-clone="template: #measure-template" id="ActionPlanItemForm">
-		<div class="measure pat-collapsible" data-pat-collapsible="close-trigger: #addMeasureButton" id="measure-1">
+		<div class="measure pat-collapsible" id="measure-1">
 			<h2>Measure 1</h2>
 			<p class="functions">
 				<a class="icon-pencil pat-tooltip" data-pat-tooltip="source: ajax" href="#standard-solutions-0">Pre-fill</a>
@@ -78,7 +78,7 @@ section: action
 
 			<fieldset class="vertical" id="fields-0">
 				<label>Description
-					<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea>
+					<textarea autofocus class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea>
 				</label>
 				<label>Prevention plan
 					<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea>
@@ -116,7 +116,7 @@ section: action
 		<button class="add-clone pat-button icon-plus-circle" id="addMeasureButton" title="Add another measure" type="button">Add another measure</button>
 	</div>
 
-	<div class="measure pat-collapsible cant-touch-this" data-pat-collapsible="close-trigger: #addMeasureButton" id="measure-template" hidden>
+	<div class="measure pat-collapsible" id="measure-template" hidden>
 		<h2>Measure #{1}</h2>
 		<p class="functions">
 			<a class="icon-pencil pat-tooltip" data-pat-tooltip="source: ajax" href="#standard-solutions-#{1}">Pre-fill</a>
@@ -142,7 +142,7 @@ section: action
 
 		<fieldset class="vertical" id="fields-#{1}">
 			<label>Description
-				<textarea autofocus class="pat-autofocus actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea>
+				<textarea autofocus class=" actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea>
 			</label>
 			<label>Prevention plan
 				<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea>
@@ -187,7 +187,7 @@ section: action
 
 	<fieldset class="vertical" id="standard-solution-1" hidden>
 		<label>Description
-			<textarea autofocus class="pat-autofocus actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">Make sure a visual inspection of work areas is carried out in order to identify the potential hazards of falls and slips. Check that the anti-fall fittings and protective measures are present and in good condition.</textarea>
+			<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">Make sure a visual inspection of work areas is carried out in order to identify the potential hazards of falls and slips. Check that the anti-fall fittings and protective measures are present and in good condition.</textarea>
 		</label>
 		<label>Prevention plan
 			<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3">Dolor sit</textarea>
@@ -199,7 +199,7 @@ section: action
 
 	<fieldset class="vertical" id="standard-solution-2" hidden>
 		<label>Description
-			<textarea autofocus class="pat-autofocus actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">Provide torches (flashlights with good beams) and suitable shoes with anti-slip soles.</textarea>
+			<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">Provide torches (flashlights with good beams) and suitable shoes with anti-slip soles.</textarea>
 		</label>
 		<label>Prevention plan
 			<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3">Dolor sit</textarea>
@@ -211,7 +211,7 @@ section: action
 
 	<fieldset class="vertical" id="standard-solution-3" hidden>
 		<label>Description
-			<textarea autofocus class="pat-autofocus actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">Inform the private security guards about respecting warning signs, using the appropriate access ways, using the lights in passageways, using torches. Encourage them to report faults or other problems in the work environment.</textarea>
+			<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">Inform the private security guards about respecting warning signs, using the appropriate access ways, using the lights in passageways, using torches. Encourage them to report faults or other problems in the work environment.</textarea>
 		</label>
 		<label>Prevention plan
 			<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3">Dolor sit</textarea>

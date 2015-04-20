@@ -14,6 +14,18 @@
 	box-sizing: border-box;
 	height: 3rem;
 
+	.warning {
+		display: inline-block;
+		background-color: $colour-alert;
+		padding: 0 0.8em;
+		border: rgba(255,255,255,0.6) solid 1px;
+		border-radius: 2px;
+
+		a {
+			text-decoration: underline;
+		}
+	}
+
 	a {
 		color: white;
 	}
@@ -33,6 +45,7 @@
 		width: 2rem;
 		overflow: hidden;
 		float: left;
+		margin-right: 0.5em;
 
 		&:before {
 			font-size: 1.2em;

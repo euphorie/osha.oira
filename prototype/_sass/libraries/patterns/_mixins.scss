@@ -36,6 +36,7 @@
     border: rgba(0,0,0,0.05) solid 1px;
     background-color: #efefef;
     margin-bottom: 2em;
+    display: block;
 
     &.success {
         background-color: $colour-success;
@@ -93,6 +94,12 @@
     font-size: 0.6em;
     padding: 0 0.3em;
     line-height: 1.4em;
+  }
+
+  &.bar {
+    display: block;
+    text-align: center;
+    margin-right: 0;
   }
 
   &.no-label {

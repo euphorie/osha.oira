@@ -1,0 +1,25 @@
+.download-block {
+	a {
+		height: 100%;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+
+		padding: 10% 5%;
+		line-height: 1.5em;
+
+		font-size: 0.8em;
+
+		.pat-button {
+			font-size: 1.2em;
+			width: 80%;
+			margin: 0 auto 1em;
+			padding: 0.5em 0.2em 0.4em;
+
+			&:before {
+				font-family: fontello;
+				content: "\e819 ";
+			}
+		}
+	}
+}

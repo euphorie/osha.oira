@@ -7,14 +7,50 @@
 			background: rgba(0,0,0,0.2);
 		}
 
-		a {
-			padding: 0.4em 6%;
+		> a {
+			padding: 0.4em 6% 0.4em 2.6rem;
 			display: block;
 
 			.discrete {
 				opacity: 0.5;
 				font-size: 0.8em;
 				font-style: normal;
+			}
+
+			&:before {
+				font-family: fontello;
+				font-size: 0.9em;
+				content: "•";
+				float: left;
+				margin-left: -1.5rem;
+				width: 1.4rem;
+				text-align: center;
+			}
+
+			&.preparation:before {
+				content: '\e801';
+			}
+
+			&.identification:before {
+				content: '\e80a';
+			}
+
+			&.action-plan:before {
+				content: '\e80c';
+			}
+
+			&.report:before {
+				content: '\e80e';
+				font-size: 0.8em;
+			}
+
+			&.status:before {
+				content: '\e818';
+				font-size: 0.8em;
+			}
+
+			&.help:before {
+				content: '\e802';
 			}
 		}
 
@@ -78,7 +114,8 @@
 			position: relative;
 
 			a {
-				padding-left: 2.2rem;
+				padding: 0.4em 6% 0.4em 2.2rem;
+				display: block;
 				font-weight: bold;
 			}
 

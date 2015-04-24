@@ -19,6 +19,9 @@
 				</a>
 				<button class="pat-button icon-left pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-sidebar">Groenvoorzieningwerk en werken in natuurterrein</button>
 				{% if page.state == 'anonymous' %}
+					<a href="/login.html#document-content" class="pat-modal pat-button login" data-pat-modal="class: large">
+						Login
+					</a>
 					{% if page.mode == 'test' %}
 					    <p class="warning">
 							Test session. <a href="registration.html" class="registration">Register</a> to save your data.
@@ -26,9 +29,6 @@
 					{% else %}
 						<a href="registration.html" class="registration">Register</a>
 					{% endif %}
-					<a href="/login.html#document-content" class="pat-modal pat-button login" data-pat-modal="class: large">
-					Login
-					</a>
 				{% else %}
 					<a href="/feedback/user-menu.html#content" class="user-status pat-tooltip icon-user dropdown" data-pat-tooltip="source: ajax; class: medium; position-list: tr">hans@mittelmaier.de</a>
 				{% endif %}

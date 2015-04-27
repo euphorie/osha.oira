@@ -2,7 +2,7 @@
 layout: shell
 application: home
 design_title: Module page
-design_description: 
+design_description:
 ---
 
 <article class="rich">
@@ -22,6 +22,8 @@ design_description:
 	{{ content }}
 </article>
 
+{% unless page.extra == 'custom-risks' %}
 <p class="buttonBar">
 	<a href="" class="pat-button">Start module</a>
 </p>
+{% endunless %}

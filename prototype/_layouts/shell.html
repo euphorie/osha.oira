@@ -111,11 +111,11 @@
 
 						{% endif %}
 					</li>
-					<li id="step-4" class="{% if page.section == 'action' %}active{% endif %}">
+					<li id="step-4" class="{% if page.section contains 'action' %}active{% endif %}">
 
 						<!-- The tree for the action section uses the same structure as the identification tree, with the only differences that only risks and their parent modules are shown and that the entire tree is expanded. -->
 
-						<a href="/action-plan.html" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc" class="action-plan pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-off; add: sidebar-on">Action Plan</a>
+						<a href="/action-plan-landing.html" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc" class="action-plan pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; add: sidebar-off; remove: sidebar-on">Action Plan</a>
 						{% if page.section == 'action' %}
 
 							<div class="topics">

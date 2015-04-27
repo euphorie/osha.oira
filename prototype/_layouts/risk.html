@@ -37,6 +37,10 @@ layout: shell
 		</fieldset>
 	</fieldset>
 
+	<fieldset>
+		<textarea id="commentsField" name="comments" placeholder="Please leave any comments you may have on the above question" cols="70" rows="5" class="span-15"></textarea>
+	</fieldset>
+
 	<article class="rich">
 		{% if page.images %}
 			{% for image in page.images %}
@@ -57,9 +61,6 @@ layout: shell
 		{% endif %}
 	</article>
 
-	<fieldset>
-		<textarea id="commentsField" name="comments" placeholder="Please leave any comments you may have on the above question" cols="70" rows="5" class="span-15"></textarea>
-	</fieldset>
 
 	<p class="buttonBar">
 		<button type="submit" name="next" value="previous" class="pat-button back">Previous</button>

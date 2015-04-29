@@ -17,8 +17,9 @@ layout: shell
 			Evaluation
 		</h3>
  -->
+	{% if page.evaluation_method == 'risk_calculated' %}
 		<fieldset class="pat-checklist radio">
-			<legend>How big is the chance on this risk?</legend>
+			<legend>What is the chance of this risk occurring?</legend>
 			<label><input type="radio" name="chance" /> Small</label>
 			<label><input type="radio" name="chance" /> Medium</label>
 			<label><input type="radio" name="chance" /> Large</label>
@@ -30,11 +31,27 @@ layout: shell
 			<label><input type="radio" name="exposed" /> Continuously</label>
 		</fieldset>
 		<fieldset class="pat-checklist radio">
-			<legend>What is the effect?</legend>
-			<label><input type="radio" name="effect" /> Injury without absence</label>
-			<label><input type="radio" name="effect" /> Injury with absence</label>
-			<label><input type="radio" name="effect" /> Permanent health damage</label>
+			<legend>What is the severity of the damage?</legend>
+			<label><input type="radio" name="effect" /> Weak severity</label>
+			<label><input type="radio" name="effect" /> Significant severity</label>
+			<label><input type="radio" name="effect" /> High (very high) severity</label>
 		</fieldset>
+	{% elsif page.evaluation_method == 'risk_estimated'  %}
+		<fieldset class="pat-checklist radio">
+			<legend>Select the priority of this risk</legend>
+			<label><input type="radio" name="chance" /> Low</label>
+			<label><input type="radio" name="chance" /> Medium</label>
+			<label><input type="radio" name="chance" /> High</label>
+		</fieldset>
+	{% elsif page.evaluation_method == 'risk_direct'  %}
+		<p>The priority for this risk has been set automatically, so there is no need to evaluate the risk.</p>
+	{% elsif page.evaluation_method == 'policy'  %}
+		<p>This is a <em>policy risk</em>.</p>
+		<p>This kind of risks are, strictly speaking, not risks and therefore they are not evaluated and don't reveice a priority value.</p>
+	{% elsif page.evaluation_method == 'priority'  %}
+		<p>This is a <em>high priority</em> risk.</p>
+		<p>This kind of risks are considered by the sector to be among the high risks in the sector, and so they receive automatically a priority of High.</p>
+	{% endif %}
 	</fieldset>
 
 	<fieldset>

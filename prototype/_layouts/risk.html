@@ -41,10 +41,6 @@ layout: shell
 		<textarea id="commentsField" name="comments" placeholder="Please leave any comments you may have on the above question" cols="70" rows="5" class="span-15"></textarea>
 	</fieldset>
 
-    <div class="pat-collapsible closed show-more">
-        <p class="show-more-or-less">
-          <strong class="show-more">Show more…</strong> <span class="divider">/</span> <strong class="show-less">Show less…</strong>
-        </p>
 	<article class="rich">
 		{% if page.images %}
 			{% for image in page.images %}
@@ -64,7 +60,6 @@ layout: shell
 			{{ page.legal_reference }}
 		{% endif %}
 	</article>
-</div>
 
 
 	<p class="buttonBar">

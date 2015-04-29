@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-noise-is-prevented-or-controlled
-classes: postponed
+classes: unvisited
 number: "2.1.4"
 parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "Exposure to noise is prevented or controlled."
@@ -20,7 +20,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'>89/654/EEC Directive on the minimum safety and health requirements for the workplace</a>.</li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/exposure-to-physical-hazards/osh-directives/82' rel='nofollow' target='_blank'>2003/10/EC Directive on the minimum health and safety requirements regarding the exposure of workers to the risks arising from physical agents (noise).</a></li>&#13;
 </ul>"
-evaluation_method: direct
+evaluation_method: priority
 images:
     - url: /media/private-security-eu/gebod_-_gehoorbescherming.png
       caption: 

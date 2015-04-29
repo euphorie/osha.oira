@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-chemical-substances-is-prevented-or-controlled
-classes: unvisited
+classes: answered risk
 number: "1.1.5"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Exposure to chemical substances is prevented or controlled."
@@ -20,10 +20,10 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 <p class='MsoListParagraph'><a title='' href='https://osha.europa.eu/en/legislation/directives/exposure-to-biological-agents/77' rel='nofollow' target='_blank'>2000/54/EC Directive on the protection of workers from risks related to exposure to biological agents at work.</a></p>&#13;
 </li>&#13;
 </ul>"
-evaluation_method: direct
+evaluation_method: policy
 images:
     - url: /media/private-security-eu/waarschuwing_-_giftig.png
-      caption: 
+      caption:
 
 solutions:
   solution_1:

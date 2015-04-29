@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: slips-trips-and-falls-are-prevented
-classes: answered risk
+classes: postponed
 number: "2.1.1"
 parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "Slips, trips and falls are prevented."
@@ -19,7 +19,7 @@ description: "<p class='MsoNormal'>A significant number of occupational accident
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'>89/654/EEC Directive on the minimum safety and health requirements for the workplace</a>.</li>&#13;
 </ul>"
-evaluation_method: direct
+evaluation_method: policy
 images:
     - url: /media/private-security-eu/waarschuwing_-_struikelgevaar.png
       caption: 

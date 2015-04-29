@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: risks-related-to-bullying-and-sexual-harassment-are-prevented
-classes: postponed
+classes: answered risk
 number: "1.4.6"
 parent_id: commercial-manned-guarding-physical-and-psychosocial-workload
 title: "Risks related to bullying and sexual harassment are prevented."
@@ -20,7 +20,7 @@ description: "<p class='MsoNormal'><strong><a title='' href='https://osha.europa
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/data/links/framework-agreement-on-harassment-and-violence-at-work?utm_source=oshmail&amp;utm_medium=email&amp;utm_campaign=index_html' rel='nofollow' target='_blank'>Framework agreement on harassment and violence at work.</a></li>&#13;
 </ul>"
-evaluation_method: direct
+evaluation_method: risk_direct
 
 solutions:
   solution_1:

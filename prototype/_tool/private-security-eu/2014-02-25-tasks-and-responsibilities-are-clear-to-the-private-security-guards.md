@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: tasks-and-responsibilities-are-clear-to-the-private-security-guards
-classes: answered
+classes: unvisited
 number: "2.4.4"
 parent_id: mobile-partrolling--intervention-after-alarm-physical-and-psychosocial-workload
 title: "Tasks and responsibilities are clear to the private security guards."
@@ -15,7 +15,7 @@ description: "<p class='MsoNormal'>Private security guards have legally only one
 <li>Workers need to know clearly <strong>what is expected from them</strong>, <strong>what their duties are</strong> and <strong>who they are accountable to</strong>.</li>&#13;
 </ul>"
 legal_reference: "<a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a>"
-evaluation_method: direct
+evaluation_method: risk_estimated
 
 solutions:
   solution_1:

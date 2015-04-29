@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: risks-from-prolonged-standing-are-prevented
-classes: answered
+classes: unvisited
 number: "2.4.2"
 parent_id: mobile-partrolling--intervention-after-alarm-physical-and-psychosocial-workload
 title: "Risks from prolonged standing are prevented."
@@ -14,7 +14,7 @@ description: "<p class='MsoNormal'><strong>Systematically working in an upright 
 <li>Comfortable footwear can be provided.</li>&#13;
 </ul>"
 legal_reference: "<a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a>"
-evaluation_method: direct
+evaluation_method: risk_calculated
 
 solutions:
   solution_1:

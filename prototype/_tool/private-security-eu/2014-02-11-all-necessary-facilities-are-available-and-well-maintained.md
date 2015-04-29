@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: all-necessary-facilities-are-available-and-well-maintained
-classes: answered
+classes: unvisited
 number: "2.1.8"
 parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "All necessary facilities are available and well maintained."
@@ -14,7 +14,7 @@ description: "<p class='MsoNormal'>Security guards should be provided with the f
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'>89/654/EEC Directive on the minimum safety and health requirements for the workplace</a>.</li>&#13;
 </ul>"
-evaluation_method: 
+evaluation_method: policy
 
 solutions:
   solution_1:

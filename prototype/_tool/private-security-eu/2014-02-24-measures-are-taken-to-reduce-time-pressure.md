@@ -11,7 +11,7 @@ description: "<p class='MsoNormal'>Some security activities require a series of 
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='http://ec.europa.eu/employment_social/dsw/public/actRetrieveText.do?id=10402' rel='nofollow' target='_blank'>EU Framework agreement on work-related stress</a></li>&#13;
 </ul>"
-evaluation_method: direct
+evaluation_method: risk_estimated
 
 solutions:
   solution_1:

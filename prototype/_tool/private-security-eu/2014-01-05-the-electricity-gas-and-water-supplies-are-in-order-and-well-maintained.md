@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-electricity-gas-and-water-supplies-are-in-order-and-well-maintained
-classes: postponed
+classes: answered risk
 number: "1.1.3"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "The electricity, gas and water supplies are in order and well-maintained."
@@ -15,10 +15,10 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'>89/654/EEC Directive on the minimum safety and health requirements for the workplace</a>.</li>&#13;
 <li><a title='' href='http://ec.europa.eu/enterprise/sectors/electrical/documents/lvd/legislation/' target='_blank' rel='nofollow'>2006/95/EC Directive on the harmonisation of the laws of Member States relating to electrical equipment designed for use within certain voltage limits</a>.</li>&#13;
 </ul>"
-evaluation_method: direct
+evaluation_method: risk_direct
 images:
     - url: /media/private-security-eu/waarschuwing_-_elektriciteit.png
-      caption: 
+      caption:
 
 solutions:
   solution_1:

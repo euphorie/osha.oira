@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-guards-know-what-to-do-in-case-of-serious-and-imminent-dangers
-classes: answered risk
+classes: unvisited
 number: "2.2.2"
 parent_id: mobile-partrolling--intervention-after-alarm-fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of serious and imminent dangers."
@@ -13,7 +13,7 @@ Any worker faced with a serious and immediate danger to his or her safety and/or
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'>89/654/EEC Directive on the minimum safety and health requirements for the workplace</a>.</li>&#13;
 </ul>"
-evaluation_method: direct
+evaluation_method: risk_direct
 
 solutions:
   solution_1:

@@ -23,7 +23,7 @@ description: "<p class='MsoNormal'><strong>Violence/aggression against private s
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/data/links/framework-agreement-on-harassment-and-violence-at-work?utm_source=oshmail&amp;utm_medium=email&amp;utm_campaign=index_html' rel='nofollow' target='_blank'>Framework agreement on harassment and violence at work.</a></li>&#13;
 </ul>"
-evaluation_method: direct
+evaluation_method: policy
 
 solutions:
   solution_1:

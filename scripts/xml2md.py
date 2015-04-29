@@ -20,6 +20,7 @@ from datetime import timedelta
 from xml.sax.saxutils import unescape
 
 STATES = ['answered', 'postponed', 'unvisited']
+EVALUATION_TYPES = ['risk_direct', 'risk_estimated', 'risk_calculated', 'policy', 'priority']
 
 MAX_NUMBER_MODULES = 2
 
@@ -100,8 +101,7 @@ solutions:
     description = unescape(_r(risk.find("description").text))
     legal_reference_node = risk.find("legal-reference")
     legal_reference = legal_reference_node and unescape(_r(legal_reference_node.text)) or ""
-    evaluation_method_node = risk.find("evaluation-method")
-    evaluation_method = evaluation_method_node and evaluation_method_node.text or ""
+    evaluation_method = random.choice(EVALUATION_TYPES)
     state = random.choice(STATES)
     risk_class = state == 'answered' and random.choice(['risk', '']) or ''
     classes = "{} {}".format(state, risk_class)

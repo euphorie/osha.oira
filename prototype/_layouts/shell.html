@@ -12,6 +12,11 @@
 		<![endif]-->
 	</head>
 	<body class="test-session osc-off focus-sidebar {{ page.template }} {{ page.class }}">
+		{% if page.mode == 'test' %}
+		    <p id="warning-bar">
+				This is a test session. <a href="registration.html" class="registration">Register</a> to save your data. <a href="/explanations.html#test-session" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info">Info</a>
+		    </p>
+		{% endif %}
 		<div id="main">
 			<header id="toolbar">
 				<a href="#osc" class="pat-button icon-menu pat-toggle" data-pat-toggle="selector: body; value: osc-on osc-off; store: local" id="burger">
@@ -22,18 +27,18 @@
 					<a href="/login.html#document-content" class="pat-modal pat-button login" data-pat-modal="class: large">
 						Login
 					</a>
-					{% if page.mode == 'test' %}
-					    <p class="warning">
-							Test session. <a href="registration.html" class="registration">Register</a> to save your data.
-					    </p>
-					{% else %}
-						<a href="registration.html" class="registration">Register</a>
-					{% endif %}
+					<a href="registration.html" class="registration">Register</a>
 				{% else %}
 					<a href="/feedback/user-menu.html#content" class="user-status pat-tooltip icon-user dropdown" data-pat-tooltip="source: ajax; class: medium; position-list: tr">hans@mittelmaier.de</a>
 				{% endif %}
 			</header>
 			<div id="content">
+			
+		{% if page.mode == 'test' %}
+		    <p id="warning-bar">
+				This is a test session. <a href="registration.html" class="registration">Register</a> to save your data. <a href="/explanations.html#test-session" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info">Info</a>
+		    </p>
+		{% endif %}
 				{{ content }}
 			</div>
 		</div>

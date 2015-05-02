@@ -81,6 +81,12 @@
     }
   }
 
+  &.large {
+    @include screen-size(large) {
+      width: 50%;
+    }
+  }
+
   // Controls and other elements
   
   h4 {

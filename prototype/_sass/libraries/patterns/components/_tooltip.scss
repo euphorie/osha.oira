@@ -1,19 +1,3 @@
-.tooltip .closePanel {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  text-indent: 100px;
-  overflow: hidden;
-  padding: 0px;
-  background: gray url(close.png) no-repeat 2px;
-  -webkit-border-radius: 3px;
-  display: block;
-  height: 15px;
-  width: 15px;
-  z-index: 3;
-  border: none;
-}
-
 .tooltip-container {
   position: absolute;
   z-index: 9998;
@@ -33,8 +17,25 @@
     width: 300px;
   }
 
-  > button.close-panel {
-    display: none;
+  > div {
+    padding: 1em;
+    z-index: 1;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    min-height: 60px;
+    background-color: white;
+    overflow: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    &:after {
+      content: " ";
+      display: block;
+      clear: both;
+    }
   }
 
   &.bl .pointer, &.bm .pointer, &.br .pointer {
@@ -61,24 +62,29 @@
   &.tr .pointer, &.br .pointer {
     margin-left: -20px;
   }
+  
+  // Variations
+
+  &.info {
+    > div {
+      background-color: $colour-notice;
+    }
+
+    .pointer {
+      background-color: $colour-notice;
+    }
+  }
+
+  // Controls and other elements
+  
   h4 {
     color: #3b3b3b;
     font-size: 12px;
     line-height: 18px;
   }
-  
-  &.event {
-    width: 550px;
-    .panel-body fieldset {
-      &.vertical {
-        width: 530px;
-        display: block;
-        overflow: hidden;
-      }
-      &.row {
-        width: 510px;
-      }
-    }
+
+  > button.close-panel {
+    display: none;
   }
 
   .close-panel.iconified {
@@ -110,6 +116,23 @@
     transform: rotate(45deg);
     box-shadow: rgba(0, 0, 0, 0.19922) 0px 0px 10px;
   }
+
+  .closePanel {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    text-indent: 100px;
+    overflow: hidden;
+    padding: 0px;
+    background: gray url(close.png) no-repeat 2px;
+    -webkit-border-radius: 3px;
+    display: block;
+    height: 15px;
+    width: 15px;
+    z-index: 3;
+    border: none;
+  }
+
 }
 
 @include screen-size(small) {
@@ -150,27 +173,6 @@
       content: '\e819';
       float: right;
     }
-  }
-}
-
-.tooltip-container > div {
-  padding: 10px;
-  z-index: 1;
-  position: relative;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0;
-  min-height: 60px;
-  background-color: white;
-  overflow: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
-  &:after {
-    content: "";
-    display: block;
-    clear: both;
   }
 }
 

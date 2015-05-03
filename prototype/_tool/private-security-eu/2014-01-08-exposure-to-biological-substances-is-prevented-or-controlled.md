@@ -3,6 +3,7 @@ layout: risk
 fid: exposure-to-biological-substances-is-prevented-or-controlled
 classes: postponed
 number: "1.1.6"
+mode: test
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Exposure to biological substances is prevented or controlled."
 problem_description: "Exposure to biological substances is neither prevented nor controlled"
@@ -17,7 +18,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 evaluation_method: risk_calculated
 images:
     - url: /media/private-security-eu/waarschuwing_-_biogevaarlijk.png
-      caption: 
+      caption:
 
 solutions:
   solution_1:

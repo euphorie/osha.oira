@@ -22,7 +22,9 @@ from xml.sax.saxutils import unescape
 STATES = ['answered', 'postponed', 'unvisited']
 EVALUATION_TYPES = ['risk_direct', 'risk_estimated', 'risk_calculated', 'policy', 'priority']
 
-MAX_NUMBER_MODULES = 2
+MAX_NUMBER_MODULES = 1
+MAX_NUMBER_PROFILES = 2
+MAX_NUMBER_SUBMODULES = 3
 
 
 def usage(stream, msg=None):
@@ -185,9 +187,13 @@ title: {title}{module}
     sub_modules = module.findChildren("module", recursive=False)
     sub_number = number + ".1"
     sub_id = parent_id and "{0}-{1}".format(parent_id, id) or id
+    sub_count = 0
     for sub_module in sub_modules:
         create_module(sub_module, parent_id=sub_id, number=sub_number)
         sub_number = increment_number(sub_number)
+        sub_count += 1
+        if sub_count >= MAX_NUMBER_SUBMODULES:
+            break
 
     risks = module.findChildren("risk", recursive=False)
     risk_number = number + ".1"
@@ -225,9 +231,13 @@ title: {title}{images}
 
     sub_modules = profile_question.findChildren("module", recursive=False)
     sub_number = number + ".1"
+    sub_count = 0
     for sub_module in sub_modules:
         create_module(sub_module, parent_id=id, number=sub_number)
         sub_number = increment_number(sub_number)
+        sub_count += 1
+        if sub_count >= MAX_NUMBER_SUBMODULES:
+            break
 
 
 if __name__ == "__main__":
@@ -255,14 +265,6 @@ if __name__ == "__main__":
         os.makedirs(media_file_path)
 
     number = 1
-    profile_questions = survey.findChildren("profile-question",
-                                            recursive=False)
-    for profile_question in profile_questions:
-        # Let X modules be enough
-        if MAX_NUMBER_MODULES and number > MAX_NUMBER_MODULES:
-            break
-        create_profile_question(profile_question, number=str(number))
-        number += 1
 
     modules = survey.findChildren("module", recursive=False)
     for module in modules:
@@ -270,4 +272,13 @@ if __name__ == "__main__":
         if MAX_NUMBER_MODULES and number > MAX_NUMBER_MODULES:
             break
         create_module(module, number=str(number))
+        number += 1
+
+    profile_questions = survey.findChildren("profile-question",
+                                            recursive=False)
+    for profile_question in profile_questions:
+        # Let X modules be enough
+        if MAX_NUMBER_PROFILES and number > (MAX_NUMBER_PROFILES + MAX_NUMBER_MODULES):
+            break
+        create_profile_question(profile_question, number=str(number))
         number += 1

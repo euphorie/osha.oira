@@ -4,7 +4,7 @@ title: Delete session
 action: /index-logged-in.html
 inject: '#content'
 buttons: 
-  - label: Yes, delete session
+  - label: Rename
     type: submit
     class: close-panel
   - label: Cancel
@@ -12,6 +12,6 @@ buttons:
     class: close-panel
 ---
 
-<p>
-	You are about to delete the session '&lt;name of session&gt;'. This cannot be reverted. Are you sure you want to continue?
-</p>
+<fieldset class="vertical">
+	<input required autofocus type="text" placeholder="&lt;Current session name&gt;" />
+</fieldset>

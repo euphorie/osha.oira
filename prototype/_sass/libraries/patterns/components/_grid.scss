@@ -1,12 +1,9 @@
 /*
-This code is based on Zurb Foundation's grid framework.
-
-@license Zurb Foundation @http://foundation.zurb.com@
-
-Copyright (c) 2012 Mark Hayes
+This code is loosely based on Zurb Foundation's grid framework.
 */
 
-.row,.columns {
+.row,
+.columns {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -40,7 +37,8 @@ Copyright (c) 2012 Mark Hayes
 	margin: 0;
 }
 
-.column, .columns {
+.column, 
+.columns {
 	float: left;
 	min-height: 1px;
 	padding: 0 15px;
@@ -146,6 +144,14 @@ Copyright (c) 2012 Mark Hayes
 
 .row .offset-by-ten {
 	margin-left: 83.33333%;
+}
+
+.push-one {
+  left: 8.33335%;
+}
+
+.pull-one {
+  right: 8.33335%;
 }
 
 .push-two {

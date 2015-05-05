@@ -23,7 +23,7 @@
 					Menu
 				</a>
 				<button class="pat-button icon-left pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-sidebar">Groenvoorzieningwerk en werken in natuurterrein</button>
-				{% if page.state == 'anonymous' %}
+				{% if page.state == 'anonymous' or page.state == 'guest' %}
 					<a href="/login.html#document-content" class="pat-modal pat-button login" data-pat-modal="class: large">
 						Login
 					</a>
@@ -191,7 +191,11 @@
 						{% endif %}
 					</li>
 					<li id="step-5" class="disabled {% if page.section == 'report' %}active{% endif %}">
-						<a class="report pat-switch pat-inject" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off" href="/report.html#content">Report</a>
+                        {% if page.state == 'guest' %}
+						  <a class="report pat-switch pat-inject" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off" href="/report-guest.html#content">Report</a>
+                        {% else %}
+                            <a class="report pat-switch pat-inject" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off" href="/report.html#content">Report</a>
+                        {% endif %}
 					</li>
 					{% unless page.state == 'anonymous' %}
 						<li id="status" class="{% if page.section == 'status' %}active{% endif %}">

@@ -1,14 +1,33 @@
 .image-collage {
-	margin: 0 -1.15em 2em;
+	margin: 0 0 1em;
 	overflow: hidden;
 
 	a {
 		background-size: cover;
 		background-position: center center;
-		padding: 0;
+		// padding: 0;
+		float: left;
 
 		img {
 			opacity: 0;
+		}
+	}
+
+	.columns {
+		a {
+			width: 100%;
+			height: 100%;
+		}
+	}
+}
+
+.pat-well {
+	.image-collage {
+		margin: 0 -1.15em 2em;
+
+		a {
+			padding: 0;
+			// float: none;
 		}
 	}
 }

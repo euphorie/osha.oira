@@ -54,23 +54,37 @@ layout: shell
 	{% endif %}
 	</fieldset>
 
-	<fieldset>
+	<fieldset class="vertical">
 		<textarea id="commentsField" name="comments" placeholder="Please leave any comments you may have on the above question" cols="70" rows="5" class="span-15"></textarea>
 	</fieldset>
 
 	<article class="rich">
 		{% if page.images %}
-			{% for image in page.images %}
-				<figure>
-					<img src="{{ image.url }}" alt="" title="{{ image.caption }}">
-					{% if image.caption %}
-					    <figcaption>
-					    	{{ image.caption }}
-					    </figcaption>
-					{% endif %}
-				</figure>
-			{% endfor %}
+			{% if page.images.size == 1 %}
+				{% for image in page.images %}
+					<figure>
+						<img src="{{ image.url }}" alt="" title="{{ image.caption }}">
+						{% if image.caption %}
+						    <figcaption>
+						    	{{ image.caption }}
+						    </figcaption>
+						{% endif %}
+					</figure>
+				{% endfor %}
+			{% else %}
+				<div class="image-collage pat-gallery pat-equaliser">
+					{% for image in page.images %}
+						<div class="{% if page.images.size == 2 %}six {% elsif page.images.size == 3 %}four {% elsif page.images.size == 4 %}three {% endif %}columns">
+							
+							<a href="{{ image.url }}" style="background-image: url({{ image.url }})">
+								<img title="{{ image.caption }}" src="{{ image.url }}" alt="" />
+							</a>
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
 		{% endif %}
+
 		{{ page.description }}
 		{% if page.legal_reference %}
 			<h2>Legal and policy references</h2>

@@ -103,6 +103,10 @@
         background-color: $colour-success;
         color: white;
 
+        a {
+          color: white;
+        }
+
         input { color: $colour-base-font};
     }
     &.notice {
@@ -111,6 +115,10 @@
     &.warning {
         background-color: $colour-warning;
         color: white;
+
+        a {
+          color: white;
+        }
 
         input { color: $colour-base-font};
         // select { border: white, color: white;}

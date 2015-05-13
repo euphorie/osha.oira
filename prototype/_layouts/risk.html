@@ -87,7 +87,7 @@ layout: shell
 			</div>
 		{% endif %}
 
-		{{ page.content | excerpt }}
+		{{ content | truncatewords: 50 }}
 
 		<div class="pat-collapsible show-more closed">
 			<p class="show-more-or-less">

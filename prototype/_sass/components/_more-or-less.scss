@@ -18,3 +18,13 @@
 	}
 
 }
+
+.pat-well {
+	&.success,
+	&.warning {
+		.show-more-or-less {
+			color: white;
+			text-decoration: underline;
+		}
+	}
+}

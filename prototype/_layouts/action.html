@@ -49,7 +49,21 @@ section: action
 			</a>
 		</div>
 
-		{{ content }}
+		{{ content | truncatewords: 30 }}
+
+		<div class="pat-collapsible show-more closed">
+			<p class="show-more-or-less">
+				<strong class="show-more">Read more</strong> <span class="divider">/</span> <strong class="show-less">Read less</strong> about this risk.
+			</p>
+			<p>
+				Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+			</p>
+			<ul>
+			   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+			   <li>Aliquam tincidunt mauris eu risus.</li>
+			   <li>Vestibulum auctor dapibus neque.</li>
+			</ul> 
+		</div>
 	</article>
 
 	<div class="measures pat-clone" data-pat-clone="template: #measure-template" id="ActionPlanItemForm">

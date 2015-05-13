@@ -26,20 +26,18 @@
 		}
 	}
 
-	a {
+	a,
+	button {	
 		color: white;
-	}
-
-	.pat-button {
-		color: black;	
-		color: white;
+		// padding: 0 0.5em;
+		cursor: default;
 	}
 
 	.user-status,
 	.login,
 	.registration {
 		float: right;
-		margin-left: 0.8em;
+		margin-left: 1.5em;
 	}
 
 	@include screen-size(small) {
@@ -70,10 +68,14 @@
 		padding: 0;
 		width: 2rem;
 		overflow: hidden;
+		display: inline-block;
 		float: left;
+		height: 1.5em;
 		margin-right: 0.5em;
+		// box-shadow: inset 0 0 0.15em rgba(0,0,0,0.7);
 
 		&:before {
+			content: "\e81c";
 			font-size: 1.2em;
 			width: 1.6rem;
 			line-height: 1.7rem;
@@ -81,7 +83,7 @@
 		}
 	}
 
-	.pat-button.icon-left {
+	.icon-left {
 		padding: 0 0.5em 0 0.2em;
 		max-width: 60%;
 		overflow: hidden;
@@ -98,19 +100,60 @@
 
 }
 
+.osc-off #toolbar #burger {
+	// box-shadow: inset 0 0 0.15em rgba(0,0,0,0);
+
+	&:before {
+		@include screen-size(large) {
+			content: "\e81d";
+		}
+
+		@include screen-size(medium) {
+			content: "\e81d";
+		}
+
+		@include screen-size(small) {
+			content: "\e81b";
+		}
+	}
+}
+
 @include screen-size(small) {
 	.focus-sidebar {
-		#toolbar .pat-button.icon-left {
+		#toolbar .icon-left {
 			display: none;
 		}
 
 		#toolbar #burger {
 			display: inline-block;
+
+			&:before {
+				font-size: 1em;
+				width: 1.6rem;
+				line-height: 1.7rem;
+				float: left;
+			}
+		}
+	}
+
+	.osc-off {
+		#toolbar #burger {
+			&:before {
+				content: "\e812";
+			}
+		}
+	}
+
+	.osc-on {
+		#toolbar #burger {
+			&:before {
+				content: "\e81b";
+			}
 		}
 	}
 
 	.focus-document {
-		#toolbar .pat-button.icon-left {
+		#toolbar .icon-left {
 			display: inline-block;
 		}
 

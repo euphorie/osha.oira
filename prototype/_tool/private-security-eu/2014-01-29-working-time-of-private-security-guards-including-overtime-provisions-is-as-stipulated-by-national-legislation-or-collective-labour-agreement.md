@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: working-time-of-private-security-guards-including-overtime-provisions-is-as-stipulated-by-national-legislation-or-collective-labour-agreement
-classes: answered risk
+classes: unvisited
 number: "1.5.1"
 parent_id: commercial-manned-guarding-work-organisation
 title: "Working time of private security guards, including overtime provisions, is as stipulated by national legislation or collective labour agreement."
@@ -10,7 +10,7 @@ description: "<p>Each European Member State has to follow the <a title='' href='
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive)</a></li>&#13;
 <li><a title='' href='http://europa.eu/legislation_summaries/other/c10405_en.htm' rel='nofollow' target='_blank'>93/104/CEE Directive concerning certain aspects of the organization of working time</a></li>&#13;
 </ul>"
-evaluation_method: priority
+evaluation_method: risk_calculated
 
 solutions:
   solution_1:
@@ -20,9 +20,13 @@ solutions:
                   Check that the anti-fall fittings and protective measures are
                   present and in good condition."
 ---
-Each European Member State has to follow thenational working time
-legislationbased on theEU Working Time Directivein order to protect worker’s
-health and safety.The necessary and adequate compensation of overtime is a
-general labour law principle.
+Each European Member State has to follow the [national working time
+legislation ](http://eur-
+lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:72003L0088:EN:NOT)based on
+the [EU Working Time
+Directive](http://europa.eu/legislation_summaries/other/c10405_en.htm) in
+order to protect worker’s health and safety.  
+The necessary and adequate compensation of overtime is a general labour law
+principle.
 
 

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-guards-know-what-to-do-in-case-of-a-fire-alarm
-classes: answered risk
+classes: unvisited
 number: "1.2.1"
 parent_id: commercial-manned-guarding-fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of a fire alarm."
@@ -12,7 +12,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'>89/654/EEC Directive on the minimum safety and health requirements for the workplace</a>.</li>&#13;
 <li><a title='' href='http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:01992L0058-20070627:EN:NOT' rel='nofollow' target='_blank'>92/58/EEC on the minimum requirements for the provision of safety and/or health signs at work</a>.</li>&#13;
 </ul>"
-evaluation_method: risk_estimated
+evaluation_method: risk_calculated
 images:
     - url: /media/private-security-eu/redding_-_uitgang.png
       caption: 
@@ -29,10 +29,12 @@ solutions:
                   Check that the anti-fall fittings and protective measures are
                   present and in good condition."
 ---
-The tasks during afire alarmshould be clear to all private security guards:
-fire fighting, evacuation procedures (guiding visitors, blocking entrances),
-emergency first aid, ... This should betested and exercised during regular
-drills.Allemergency exitsshould be clearly marked and easy to open (not
+The tasks during a **fire alarm** should be clear to all private security
+guards: fire fighting, evacuation procedures (guiding visitors, blocking
+entrances), emergency first aid, ... This should be **tested and exercised
+during regular drills**.
+
+All **emergency exits** should be clearly marked and easy to open (not
 blocked).
 
 

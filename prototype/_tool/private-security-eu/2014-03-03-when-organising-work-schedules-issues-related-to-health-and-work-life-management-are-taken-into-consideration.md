@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: when-organising-work-schedules-issues-related-to-health-and-work-life-management-are-taken-into-consideration
-classes: unvisited
+classes: answered
 number: "2.5.3"
 parent_id: mobile-partrolling--intervention-after-alarm-work-organisation
 title: "When organising work schedules, issues related to health and work life management are taken into consideration."

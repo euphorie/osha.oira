@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: collisions-bumps-and-jamming-are-prevented
-classes: unvisited
+classes: postponed
 number: "2.1.2"
 parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "Collisions, bumps, and jamming are prevented."
@@ -15,7 +15,7 @@ description: "<p class='MsoNormal'>Collisions, bumps and jamming involve <strong
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'>89/654/EEC Directive on the minimum safety and health requirements for the workplace</a>.</li>&#13;
 </ul>"
-evaluation_method: risk_estimated
+evaluation_method: risk_direct
 images:
     - url: /media/private-security-eu/waarschuwing_-_beklemming_lichaam.png
       caption: 
@@ -34,16 +34,15 @@ solutions:
                   Check that the anti-fall fittings and protective measures are
                   present and in good condition."
 ---
-Collisions, bumps and jamming involvefixed objects(idle machinery, tools,
-furniture, ...), ormoving objects(machines placed in passageways, vehicles,
-sliding doors, ...).Check the following issues through visual inspection of
-work areas:The circulation of people and vehicles should be properly organised
-(sufficient clearance must be allowed between vehicle traffic routes and
-doors, gates, passages for pedestrians, corridors and staircases).Sufficient
-lighting should be provided (especially in stairwells and passageways).Warning
-indicators should be installed when the risk of collisions, bumps and getting
-jammed cannot be prevented through other measures.Make sure the client informs
-you (the private security services company) and the private security guards
-about the risks and measures in place.
+Collisions, bumps and jamming involve **fixed objects** (idle machinery,
+tools, furniture, ...), or **moving objects** (machines placed in passageways,
+vehicles, sliding doors, ...).
+
+**Check the following issues through visual inspection of work areas:**
+
+  * The circulation of people and vehicles should be properly organised (sufficient clearance must be allowed between vehicle traffic routes and doors, gates, passages for pedestrians, corridors and staircases).
+  * Sufficient lighting should be provided (especially in stairwells and passageways).
+  * Warning indicators should be installed when the risk of collisions, bumps and getting jammed cannot be prevented through other measures.
+**Make sure the client informs you (the private security services company) and the private security guards about the risks and measures in place.**
 
 

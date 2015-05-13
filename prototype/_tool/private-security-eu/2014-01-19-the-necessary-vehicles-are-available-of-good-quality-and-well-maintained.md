@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-necessary-vehicles-are-available-of-good-quality-and-well-maintained
-classes: answered
+classes: postponed
 number: "1.3.4"
 parent_id: commercial-manned-guarding-work-equipment
 title: "The necessary vehicles are available, of good quality and well maintained."
@@ -20,7 +20,7 @@ description: "<p class='MsoNormal'>There is a number of risks which affect all s
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/3' rel='nofollow' target='_blank'>2009/104/EC Directive on the minimum safety and health requirements for the use of work equipment.</a></li>&#13;
 </ul>"
-evaluation_method: policy
+evaluation_method: risk_estimated
 
 solutions:
   solution_1:
@@ -30,19 +30,21 @@ solutions:
                   Check that the anti-fall fittings and protective measures are
                   present and in good condition."
 ---
-There is a number of risks which affect all security staff going to work in
-avehicle.Work-related road accidentsinclude accidents while out on an
-assignment, i.e. when on the road because of the job (surveillance
-activities), or accidents taking place on the journey from home to the
-workplace. Sector statistics for accidents at work show that there is a
-considerable risk in this area.Many national regulations provide the
-conditions for this. These must be fully respected.Check the following
-issues:Regular maintenance of the vehicles should be ensured by an approved
-garage, in addition to the compulsory periodic roadworthiness test.Vehicles
-should have appropriate safety equipment and equipment for breakdowns.There
-should be no loose objects in the vehicles.When drawing up work schedules,
-allowances for unforeseen traffic conditions should be made.Training on road
-safety should be provided.The medical suitability of private security staff
-using vehicles should be regularly checked.
+There is a number of risks which affect all security staff going to work in a
+**vehicle**.
+
+**Work-related road accidents** include accidents while out on an assignment, i.e. when on the road because of the job (surveillance activities), or accidents taking place on the journey from home to the workplace. Sector statistics for accidents at work show that there is a considerable risk in this area.
+
+Many national regulations provide the conditions for this. These must be fully
+respected.
+
+**Check the following issues:**
+
+  * Regular maintenance of the vehicles should be ensured by an approved garage, in addition to the compulsory periodic roadworthiness test. 
+  * Vehicles should have appropriate safety equipment and equipment for breakdowns.
+  * There should be no loose objects in the vehicles.
+  * When drawing up work schedules, allowances for unforeseen traffic conditions should be made. 
+  * Training on road safety should be provided. 
+  * The medical suitability of private security staff using vehicles should be regularly checked.
 
 

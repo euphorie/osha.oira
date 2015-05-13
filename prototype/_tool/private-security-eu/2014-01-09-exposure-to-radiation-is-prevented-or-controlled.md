@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-radiation-is-prevented-or-controlled
-classes: unvisited
+classes: answered
 number: "1.1.7"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Exposure to radiation is prevented or controlled."
@@ -24,7 +24,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/exposure-to-physical-hazards/osh-directives/73' rel='nofollow' target='_blank'>96/29/Euratom Directive on ionizing radiation.</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/exposure-to-physical-hazards/osh-directives/directive-2004-40-ec-of-the-european-parliament-and-of-the-council' rel='nofollow' target='_blank'>2004/40/EC Directive on electromagnetic fields and waves.</a></li>&#13;
 </ul>"
-evaluation_method: risk_estimated
+evaluation_method: risk_calculated
 images:
     - url: /media/private-security-eu/waarschuwing_-_radioactief.png
       caption: 
@@ -37,21 +37,22 @@ solutions:
                   Check that the anti-fall fittings and protective measures are
                   present and in good condition."
 ---
-SCANNERS / X-RAY MACHINES.The use of equipment which generates radiation or
-working in areas close to radiation sources entails a risk of tissue being
-destroyed and/or irreversible effects on health.WHERE?Scanners at access
-control (airports, public buildings, ...).The screening of mail, packages,
-suitcases, ...Rounds in monitored or secured areas in hospitals (radiology,
-nuclear medicine departments), nuclear power plants, ...Make sure the client
-informs you (the private security services company) and the private security
-guardsabout any radiation sources at the place of work, about the risks
-associated with them and the preventive measures to be adopted.Check the
-following issues:Warning signs should be placed in monitored/secured areas.The
-instruction manual as well as any documentation relating to the use of the
-machine should be placed in close proximity to it.The sources should be
-monitored (to prevent leaks).Type-approved machines (marked CE) should be used
-or it should be made sure that the machines being used comply with European
-regulations.Periodical technical inspection of the equipment should be
-ensured.
+**SCANNERS / X-RAY MACHINES. **The use of equipment which generates radiation or working in areas close to radiation sources entails a risk of tissue being destroyed and/or irreversible effects on health.
+
+**WHERE?**
+
+  * Scanners at access control (airports, public buildings, ...).
+  * The screening of mail, packages, suitcases, ...
+  * Rounds in monitored or secured areas in hospitals (radiology, nuclear medicine departments), nuclear power plants, ...
+
+**Make sure the client informs you (the private security services company) and the private security guards** about any radiation sources at the place of work, about the risks associated with them and the preventive measures to be adopted.
+
+**Check the following issues:**
+
+  * Warning signs should be placed in monitored/secured areas.
+  * The instruction manual as well as any documentation relating to the use of the machine should be placed in close proximity to it.
+  * The sources should be monitored (to prevent leaks).
+  * Type-approved machines (marked CE) should be used or it should be made sure that the machines being used comply with European regulations.
+  * Periodical technical inspection of the equipment should be ensured.
 
 

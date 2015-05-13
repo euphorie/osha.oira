@@ -33,18 +33,21 @@ solutions:
                   Check that the anti-fall fittings and protective measures are
                   present and in good condition."
 ---
-Noiseis an unwanted sound.Possible sources:noise of the building’s
-installations, of machinery, of office equipment, detonation of ammunition
-during shooting practice, noise by human beings, crowds, ...Noise can cause
-considerablehearing damage. The intensity (loudness) and exposure duration
-determine whether noise is hazardous.Rule of thumb:'private security guards
-should be able to hear each other at one metre distance without raising their
-voice'.Noise can also be asource of annoyance and disturbance, if it
-interferes with the job or if the job is very complex.Make sure the client
-informs you (security company) and the private security guardsabout the risks
-and measures in place.Check whether the client:Has identified the source(s) of
-the noise + limit or reduce noise at source.Ensures technical maintenance of
-workplaces, installations, ...Provides work signs and PPEs.Promotes working
-habits and behaviour that are not noisy.
+[Noise ](https://osha.europa.eu/en/topics/noise/index_html)is an unwanted
+sound.
+
+  * **Possible sources: **noise of the building’s installations, of machinery, of office equipment, detonation of ammunition during shooting practice, noise by human beings, crowds, ...
+  * Noise can cause considerable **hearing damage**. The intensity (loudness) and exposure duration determine whether noise is hazardous. **Rule of thumb:** 'private security guards should be able to hear each other at one metre distance without raising their voice'.
+  * Noise can also be a **source of annoyance and disturbance**, if it interferes with the job or if the job is very complex.
+
+**Make sure the client informs you (security company) and the private security guards **about the risks and measures in place.
+
+**Check whether the client:**
+
+  * Has identified the source(s) of the noise + limit or reduce noise at source.
+  * Ensures technical maintenance of workplaces, installations, ...
+  * Provides work signs and PPEs.
+
+Promotes working habits and behaviour that are not noisy.
 
 

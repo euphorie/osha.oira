@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: all-necessary-facilities-are-available-and-well-maintained
-classes: unvisited
+classes: postponed
 number: "2.1.8"
 parent_id: mobile-partrolling--intervention-after-alarm-work-environment-site-related
 title: "All necessary facilities are available and well maintained."
@@ -26,7 +26,10 @@ solutions:
 ---
 Security guards should be provided with the following facilities, if and when
 necessary in view of their shift and taking the specific national legal
-provisions into account:changing room (dressing room)break areassanitary
-facilities.
+provisions into account:
+
+  * changing room (dressing room)
+  * break areas
+  * sanitary facilities.
 
 

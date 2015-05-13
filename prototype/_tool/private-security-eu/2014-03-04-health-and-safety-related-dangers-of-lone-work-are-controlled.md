@@ -13,7 +13,7 @@ description: "<p class='MsoNormal'>Lone working private security guards are <str
 <li>If conversely, the analysist reveals that it is possible, the security guard must be given all the necessary tools in order to be able to do the job in safety and without health problems.</li>&#13;
 </ul>"
 legal_reference: "<a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive)</a>"
-evaluation_method: priority
+evaluation_method: risk_direct
 
 solutions:
   solution_1:
@@ -23,17 +23,18 @@ solutions:
                   Check that the anti-fall fittings and protective measures are
                   present and in good condition."
 ---
-Lone working private security guards arethose who work alone without any
-direct or close supervision, generally on small sites which require the work
-of a single person.Risks associated with lone working are: being
-harassed/attacked, accident or sickness requiring immediate intervention,
-having difficulty to deal correctly with emergencies or unforeseen
-situations.Although lone working is not prohibited under the European
-Directives, it should in principle besubject to a prior analysis of the
-related dangers.If in the course of this analysis, serious health and safety
-dangers are identified, lone working should be minimised.If conversely, the
-analysist reveals that it is possible, the security guard must be given all
-the necessary tools in order to be able to do the job in safety and without
-health problems.
+Lone working private security guards are **those who work alone without any
+direct or close supervision**, generally on small sites which require the work
+of a single person.
+
+Risks associated with lone working are: being harassed/attacked, accident or
+sickness requiring immediate intervention, having difficulty to deal correctly
+with emergencies or unforeseen situations.
+
+Although lone working is not prohibited under the European Directives, it
+should in principle be **subject to a prior analysis of the related dangers**.
+
+  * If in the course of this analysis, serious health and safety dangers are identified, lone working should be minimised.
+  * If conversely, the analysist reveals that it is possible, the security guard must be given all the necessary tools in order to be able to do the job in safety and without health problems.
 
 

@@ -15,7 +15,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'>89/654/EEC Directive on the minimum safety and health requirements for the workplace</a>.</li>&#13;
 <li><a title='' href='http://ec.europa.eu/enterprise/sectors/electrical/documents/lvd/legislation/' target='_blank' rel='nofollow'>2006/95/EC Directive on the harmonisation of the laws of Member States relating to electrical equipment designed for use within certain voltage limits</a>.</li>&#13;
 </ul>"
-evaluation_method: risk_direct
+evaluation_method: priority
 images:
     - url: /media/private-security-eu/waarschuwing_-_elektriciteit.png
       caption: 
@@ -28,13 +28,9 @@ solutions:
                   Check that the anti-fall fittings and protective measures are
                   present and in good condition."
 ---
-Ensure that the electrical system, as well as the gas and water supplies are
-safe.Some examples: all the exposed conductive parts are connected to the
-earthing system; all safety devices and switches are in place and they work
-well; there are measures in place to protect electrical equipment from water;
-...The electricity, gas and water supplies at the client company must comply
-with the relevant safety regulations and be maintained by competent people in
-accordance with regulations.There should be restricted access to electricity,
-gas and water premises.
+**Ensure that the electrical system, as well as the gas and water supplies are safe.** Some examples: all the exposed conductive parts are connected to the earthing system; all safety devices and switches are in place and they work well; there are measures in place to protect electrical equipment from water; ... 
+
+  * The electricity, gas and water supplies at the client company must comply with the relevant safety regulations and be maintained by competent people in accordance with regulations.
+  * There should be restricted access to electricity, gas and water premises.
 
 

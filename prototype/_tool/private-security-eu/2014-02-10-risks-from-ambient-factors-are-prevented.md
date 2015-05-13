@@ -37,17 +37,21 @@ Whether it is inside a building or in outside workstations, minimal conditions
 in terms of ambient factors (humidity, ventilation, temperature, lighting)
 must be observed. These conditions must be fulfilled taking into account the
 specificities of the workstations, the level of physical activity required as
-well as the security officer´s clothing.Following requirements should be met
-in order to guarantee a comfortable, healthy and safe working environment for
-security staff:a sufficient quantity offresh, healthy aira constant and smooth
-indoor temperaturesufficient natural light and/or mechanisms ensuring adequate
-artificial lighting.Check the following issues:A sufficient supply of fresh
-air should be provided in enclosed working spaces.If necessary, air
-conditioning, ventilation and/or (de)humidification of the air should be
-provided.Private security guards operating in bad/extreme weather conditions
-(exposure to extreme heat/sunlight/cold) should be protected (shelter,
-heating).Sufficient and adequate lighting (as much natural light as possible)
-should be provided in all work areas, esp. in stairwells and passageways. Also
-in outdoor working areas!Lights should regulated separately.
+well as the security officer´s clothing.
+
+Following requirements should be met in order to guarantee a comfortable,
+healthy and safe working environment for security staff:
+
+  * a sufficient quantity of **fresh, healthy air**
+  * a constant and smooth indoor temperature
+  * sufficient natural light and/or mechanisms ensuring adequate artificial lighting.
+
+**Check the following issues: **
+
+  * A sufficient supply of fresh air should be provided in enclosed working spaces.
+  * If necessary, air conditioning, ventilation and/or (de)humidification of the air should be provided.
+  * Private security guards operating in bad/extreme weather conditions (exposure to extreme heat/sunlight/cold) should be protected (shelter, heating).
+  * Sufficient and adequate lighting (as much natural light as possible) should be provided in all work areas, esp. in stairwells and passageways. Also in outdoor working areas!
+  * Lights should regulated separately.
 
 

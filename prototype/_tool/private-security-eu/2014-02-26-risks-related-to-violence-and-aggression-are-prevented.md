@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: risks-related-to-violence-and-aggression-are-prevented
-classes: answered risk
+classes: postponed
 number: "2.4.5"
 parent_id: mobile-partrolling--intervention-after-alarm-physical-and-psychosocial-workload
 title: "Risks related to violence and aggression are prevented."
@@ -23,7 +23,7 @@ description: "<p class='MsoNormal'><strong>Violence/aggression against private s
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/data/links/framework-agreement-on-harassment-and-violence-at-work?utm_source=oshmail&amp;utm_medium=email&amp;utm_campaign=index_html' rel='nofollow' target='_blank'>Framework agreement on harassment and violence at work.</a></li>&#13;
 </ul>"
-evaluation_method: priority
+evaluation_method: policy
 
 solutions:
   solution_1:
@@ -33,23 +33,29 @@ solutions:
                   Check that the anti-fall fittings and protective measures are
                   present and in good condition."
 ---
-Violence/aggression against private security guardsmay come in many
-guises:verbal violence: insults, threatsphysical violence: being struck or
-being injuredby weapons or by giving the impression of being armed...These
-acts of violence may causephysical injuriesbut have also a negative effect on
-private security guards'psychologicalhealth (such as feelings of fear and
-post-traumatic stress). Private security guards, beingwitnessto a violent act,
-may as well suffer from psychological trauma.Security jobs that involvecontact
-with the public(e.g. surveillance in shopping centres or areas with a high
-through-flow of people such as railway and metro stations, detection of
-shoplifting) are more exposed to physical violence.Check the following
-issues(in agreement with the client if and when necessary)All existing
-security measures should be considered (coded doors, bolting entries,
-cameras,...).Quick communication should be possible if a problem arises
-(telephone, radio, alarm buttons, etc.).The number of lone working private
-security guards should be kept to a minimum and, if this proves impossible, it
-should be ensured that the worker has a means of constant contact with the
-private security company.Staff should be trained in handling conflict
-situations.Post-incident care should be provided.
+**Violence/aggression against private security guards** may come in many guises:
+
+  * verbal violence: insults, threats
+  * physical violence: being struck or being injured
+  * by weapons or by giving the impression of being armed
+  * ...
+
+These acts of violence may cause **physical injuries** but have also a
+negative effect on private security guards' **psychological** health (such as
+feelings of fear and post-traumatic stress). Private security guards, being
+**witness** to a violent act, may as well suffer from psychological trauma.
+
+Security jobs that involve **contact with the public** (e.g. surveillance in
+shopping centres or areas with a high through-flow of people such as railway
+and metro stations, detection of shoplifting) are more exposed to physical
+violence.
+
+**Check the following issues **(in agreement with the client if and when necessary)
+
+  * All existing security measures should be considered (coded doors, bolting entries, cameras,...).
+  * Quick communication should be possible if a problem arises (telephone, radio, alarm buttons, etc.).
+  * The number of lone working private security guards should be kept to a minimum and, if this proves impossible, it should be ensured that the worker has a means of constant contact with the private security company.
+  * Staff should be trained in handling conflict situations.
+  * Post-incident care should be provided.
 
 

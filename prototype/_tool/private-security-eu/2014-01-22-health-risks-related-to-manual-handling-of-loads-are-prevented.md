@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: health-risks-related-to-manual-handling-of-loads-are-prevented
-classes: unvisited
+classes: answered risk
 number: "1.4.1"
 parent_id: commercial-manned-guarding-physical-and-psychosocial-workload
 title: "Health risks related to manual handling of loads are prevented."
@@ -15,7 +15,7 @@ description: "<p class='MsoNormal'>According to the <a title='' href='https://os
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/provisions-on-workload-ergonomical-and-psychosocial-risks/osh-directives/6' rel='nofollow' target='_blank'>90/269/EEC Directive on the minimum health and safety requirements for the manual handling of loads.</a></li>&#13;
 </ul>"
-evaluation_method: risk_direct
+evaluation_method: risk_calculated
 
 solutions:
   solution_1:
@@ -25,14 +25,17 @@ solutions:
                   Check that the anti-fall fittings and protective measures are
                   present and in good condition."
 ---
-According to theEuropean directive which sets the minimum health and safety
-requirements for manual handling of loads“manual handling of loads means any
-activity involving transporting or supporting a load by one or several
-workers…”.Check the following issues:Lifting and handling aids should be
-provided when possible, in agreement with the clientPrivate security guards
-should be informed about the risks related to manual handling of loads and
-informed/trained in the correct way to handle loads (use of lifting/handling
-aids, correct lifting techniques).Training should be provided to private
-security guards susceptible to back problems.
+According to the [European directive which sets the minimum health and safety
+requirements for manual handling of
+loads](https://osha.europa.eu/en/legislation/directives/provisions-on-
+workload-ergonomical-and-psychosocial-risks/osh-directives/6) “manual handling
+of loads means any activity involving transporting or supporting a load by one
+or several workers…”.
+
+**Check the following issues:**
+
+  * Lifting and handling aids should be provided when possible, in agreement with the client
+  * Private security guards should be informed about the risks related to manual handling of loads and informed/trained in the correct way to handle loads (use of lifting/handling aids, correct lifting techniques). 
+  * Training should be provided to private security guards susceptible to back problems.
 
 

@@ -8,7 +8,7 @@ title: "When organising work schedules, issues related to health and work life m
 problem_description: "When organising work schedules, issues related to health and work life management are not taken into consideration."
 description: "<p>Considering issues related to health and work life management, when organising work schedules, contributes to the quality of the work performed and the due protection of private security guards health. In any case, national legislation and or national or sectoral CLA’s must be respected.</p>"
 legal_reference: "<a title='' href='http://www.coess.org/_Uploads/dbsAttachedFiles/Preventing_occupational_hazards_manual_EN.pdf' rel='nofollow' target='_blank'>European training manual 'Preventing occupational hazards in the private security sector' (pdf) </a>"
-evaluation_method: risk_estimated
+evaluation_method: policy
 
 solutions:
   solution_1:

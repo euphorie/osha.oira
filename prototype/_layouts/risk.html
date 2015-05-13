@@ -60,19 +60,21 @@ layout: shell
 
 	<article class="rich">
 		{% if page.images %}
-			{% if page.images.size == 1 %}
-				{% for image in page.images %}
-					<figure>
-						<img src="{{ image.url }}" alt="" title="{{ image.caption }}">
-						{% if image.caption %}
-						    <figcaption>
-						    	{{ image.caption }}
-						    </figcaption>
-						{% endif %}
-					</figure>
-				{% endfor %}
-			{% else %}
-				<div class="image-collage pat-gallery pat-equaliser">
+			<div class="image-collage pat-gallery pat-equaliser image-count-{{ page.images.size }}">
+				{% if page.images.size == 1 %}
+					{% for image in page.images %}
+						<figure>
+							<a href="{{ image.url }}">
+								<img src="{{ image.url }}" alt="" title="{{ image.caption }}" />
+							</a>
+							{% if image.caption %}
+							    <figcaption>
+							    	{{ image.caption }}
+							    </figcaption>
+							{% endif %}
+						</figure>
+					{% endfor %}
+				{% else %}
 					{% for image in page.images %}
 						<div class="{% if page.images.size == 2 %}six {% elsif page.images.size == 3 %}four {% elsif page.images.size == 4 %}three {% endif %}columns">
 							
@@ -81,11 +83,26 @@ layout: shell
 							</a>
 						</div>
 					{% endfor %}
-				</div>
-			{% endif %}
+				{% endif %}
+			</div>
 		{% endif %}
 
-		{{ page.description }}
+		{{ page.content | excerpt }}
+
+		<div class="pat-collapsible show-more closed">
+			<p class="show-more-or-less">
+				<strong class="show-more">Read more</strong> <span class="divider">/</span> <strong class="show-less">Read less</strong> about this risk.
+			</p>
+			<p>
+				Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+			</p>
+			<ul>
+			   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+			   <li>Aliquam tincidunt mauris eu risus.</li>
+			   <li>Vestibulum auctor dapibus neque.</li>
+			</ul> 
+		</div>
+
 		{% if page.legal_reference %}
 			<h2>Legal and policy references</h2>
 			{{ page.legal_reference }}

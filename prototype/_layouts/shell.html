@@ -140,14 +140,16 @@
                                             <!-- If a module does not contain a single risks that needs to be handled in the action plan (or sub-modules with risks that need to be handled), the whole module must not be displayed in the tree.
                                                  This behaviour is already implemented in current Euphorie/OiRA
                                             -->
-				                            {% if module.parent_id == id %}
+                                            <!-- Hardcoded to only display the submodules of the first module, so that we can pretend here that only the current module is open. OiRA team explicitly requested "consistency" with the navigation of the Identification phase. Syslab / Cornelis have explicitly warned against this folly. -->
+				                            {% if module.parent_id == id and profile.number == "1.0.0" %}
 						                    {% capture m_id %}{{ module.fid }}{% endcapture %}
 						                    <li class="submodule">
 						                      <a href="{{module.url}}" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"  data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #content; target: #content"><strong class="counter">{{module.number | replace: '.0' }}</strong> {{module.title}}</a>
 							                  	<ol class="questions navigation">
 					    	                      {% for risk in site.tool  %}
 					    	                        {% capture p_id %}{{ id }}-{{ m_id}}{% endcapture %}
-					        	                    {% if risk.parent_id == p_id and risk.classes contains 'risk' %}
+                                                    <!-- Hardcoded to only display the risks of the first submodule, so that we can pretend here that only the current module is open. OiRA team explicitly requested "consistency" with the navigation of the Identification phase. Syslab / Cornelis have explicitly warned against this folly. -->
+					        	                    {% if risk.parent_id == p_id and risk.classes contains 'risk' and module.number == "1.1.0" %}
 							    	                <li class="{{risk.classes}}">
 							        	              <a href="{{risk.url}}#content" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">{{risk.number}}</strong> {{risk.problem_description}}</a>
 								                      </li>

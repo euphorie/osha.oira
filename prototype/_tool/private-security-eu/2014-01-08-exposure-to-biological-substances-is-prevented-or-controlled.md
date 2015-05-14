@@ -1,8 +1,10 @@
 ---
 layout: risk
 fid: exposure-to-biological-substances-is-prevented-or-controlled
-classes: unvisited
+classes: postponed
 number: "1.1.6"
+mode: test
+state: guest
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Exposure to biological substances is prevented or controlled."
 problem_description: "Exposure to biological substances is neither prevented nor controlled"
@@ -17,7 +19,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 evaluation_method: priority
 images:
     - url: /media/private-security-eu/waarschuwing_-_biogevaarlijk.png
-      caption: 
+      caption:
 
 solutions:
   solution_1:
@@ -30,7 +32,7 @@ solutions:
 **BIOLOGICAL HAZARDS**
 
   * **What?** Biological agents, i.e. microorganisms, cell cultures and parasites living in the human body, which may cause infections, allergies or poisoning. These microorganisms can penetrate the human body through a wound, an animal bite or needle injuries. They can also be inhaled or swallowed. There is a risk of viral and bacteriological infections such as **HIV, hepatitis or tuberculosis, tetanus, [legionella](http://www.hse.gov.uk/legionnaires/)**, ...
-  * **Who?** All private security staff in specific work environments such as hospitals or with eventual biological risks. 
+  * **Who?** All private security staff in specific work environments such as hospitals or with eventual biological risks.
 
 Make sure the client informs you (the private security services company) and
 the private security guards about the risks and measures in place (e.g.

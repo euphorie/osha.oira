@@ -137,7 +137,7 @@ solutions:
         "problem_description": problem_description,
         "legal_reference": legal_reference,
         "evaluation_method": evaluation_method,
-        "body": escape2markdown(description),
+        "body": html2text(description),
         "image_information": image_info,
     }
 

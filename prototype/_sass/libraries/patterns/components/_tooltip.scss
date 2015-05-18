@@ -95,12 +95,45 @@
     line-height: 18px;
   }
 
-  > button.close-panel {
-    display: none;
+  @include screen-size(large) {
+
+    > button.close-panel {
+      display: none;
+    }
+
+    .close-panel.iconified {
+      display: none;
+    }
+
   }
 
-  .close-panel.iconified {
-    display: none;
+  .close-panel {
+    position: absolute;
+    color: gray;
+    top: 20px;
+    right: 20px;
+    line-height: 22px;
+    height: 22px;
+    width: 22px;
+    padding: 0;
+    text-indent: -1000px;
+    overflow: hidden;
+    margin: 0;
+    filter: none;
+    border-style: none;
+    border-radius: 50%;
+    background-image: none;
+    outline: none;
+
+    &:before {
+      content: "#{$glyph-close}";
+      text-indent: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 22px;
+      font: normal 20px/23px fontello;
+    }
   }
 
   .item-selector {
@@ -169,15 +202,6 @@
       border: none;
       padding: 5% !important;
       overflow: auto;
-    }
-
-    .close-panel.iconified {
-      position: absolute;
-      top: 2%;
-      right: 2%;
-      font-size: 2em;
-      margin: 0;
-      display: inline;
     }
 
     h1:after {

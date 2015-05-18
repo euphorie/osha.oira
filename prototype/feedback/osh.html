@@ -4,54 +4,16 @@ section: status
 class: sidebar-off
 ---
 
-<article id="osh-hamburger">
-	<h3>
-		Hamburger
-	</h3>
-	<p>
-		The hamburger menu lets you hide and show the off canvas menu so it’s only there when you need it. Hide the menu when you’re concentrating on filling out a tool or show it when you’re clicking about between various parts of the application.
-	</p>
-	<p class="footer">
-		<strong class="icon-lightbulb">Tip: </strong>You may switch this on screen help feature on or off at any time by clicking on the '&nbsp;<strong>?</strong>&nbsp;' at the top right on the toolbar.
-	</p>
-	<button class="close-panel">Close panel</button>
-</article>
-
-<article id="osh-menu">
-	<h3>
-		Menu
-	</h3>
-	<p>
-		The new off canvas menu provides access to the core functions of the applications. Also on mobile!
-	</p>
-	<p class="footer">
-		<strong class="icon-lightbulb">Tip: </strong>You may switch this on screen help feature on or off at any time by clicking on the '&nbsp;<strong>?</strong>&nbsp;' at the top right on the toolbar.
-	</p>
-	<button class="close-panel">Close panel</button>
-</article>
-
-<article id="osh-session-menu">
-	<h3>
-		Session menu
-	</h3>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	</p>
-	<p class="footer">
-		<strong class="icon-lightbulb">Tip: </strong>You may switch this on screen help feature on or off at any time by clicking on the '&nbsp;<strong>?</strong>&nbsp;' at the top right on the toolbar.
-	</p>
-	<button class="close-panel">Close panel</button>
-</article>
-
-<article id="osh-topics">
-	<h3>
-		Topics
-	</h3>
-	<p>
-		Lorem ipsum dolor sit amet.
-	</p>
-	<p class="footer">
-		<strong class="icon-lightbulb">Tip: </strong>You may switch this on screen help feature on or off at any time by clicking on the '&nbsp;<strong>?</strong>&nbsp;' at the top right on the toolbar.
-	</p>
-	<button class="close-panel">Close panel</button>
-</article>
+{% for bubble in site.data.osh %}
+	<article id="{{ bubble.msgid }}">
+		<h3>
+			{{ bubble.title }}
+		</h3>
+		{{ bubble.text | markdownify }}
+		<p class="footer">
+			<strong class="icon-lightbulb">Tip: </strong>You may switch this on screen help feature on or off at any time by clicking on the '&nbsp;<strong>?</strong>&nbsp;' at the top right on the toolbar.
+		</p>
+		<!-- Incude the following button to make escaping from the tooltip possible on small screen (hidden on large screen) -->
+		<button class="close-panel">Close panel</button>
+	</article>
+{% endfor %}

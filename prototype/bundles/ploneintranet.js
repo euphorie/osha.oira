@@ -12359,6 +12359,1555 @@ define('pat-registry',[
   return browser;
 }));
 
+//     Underscore.js 1.8.3
+//     http://underscorejs.org
+//     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+//     Underscore may be freely distributed under the MIT license.
+
+(function() {
+
+  // Baseline setup
+  // --------------
+
+  // Establish the root object, `window` in the browser, or `exports` on the server.
+  var root = this;
+
+  // Save the previous value of the `_` variable.
+  var previousUnderscore = root._;
+
+  // Save bytes in the minified (but not gzipped) version:
+  var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
+
+  // Create quick reference variables for speed access to core prototypes.
+  var
+    push             = ArrayProto.push,
+    slice            = ArrayProto.slice,
+    toString         = ObjProto.toString,
+    hasOwnProperty   = ObjProto.hasOwnProperty;
+
+  // All **ECMAScript 5** native function implementations that we hope to use
+  // are declared here.
+  var
+    nativeIsArray      = Array.isArray,
+    nativeKeys         = Object.keys,
+    nativeBind         = FuncProto.bind,
+    nativeCreate       = Object.create;
+
+  // Naked function reference for surrogate-prototype-swapping.
+  var Ctor = function(){};
+
+  // Create a safe reference to the Underscore object for use below.
+  var _ = function(obj) {
+    if (obj instanceof _) return obj;
+    if (!(this instanceof _)) return new _(obj);
+    this._wrapped = obj;
+  };
+
+  // Export the Underscore object for **Node.js**, with
+  // backwards-compatibility for the old `require()` API. If we're in
+  // the browser, add `_` as a global object.
+  if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && module.exports) {
+      exports = module.exports = _;
+    }
+    exports._ = _;
+  } else {
+    root._ = _;
+  }
+
+  // Current version.
+  _.VERSION = '1.8.3';
+
+  // Internal function that returns an efficient (for current engines) version
+  // of the passed-in callback, to be repeatedly applied in other Underscore
+  // functions.
+  var optimizeCb = function(func, context, argCount) {
+    if (context === void 0) return func;
+    switch (argCount == null ? 3 : argCount) {
+      case 1: return function(value) {
+        return func.call(context, value);
+      };
+      case 2: return function(value, other) {
+        return func.call(context, value, other);
+      };
+      case 3: return function(value, index, collection) {
+        return func.call(context, value, index, collection);
+      };
+      case 4: return function(accumulator, value, index, collection) {
+        return func.call(context, accumulator, value, index, collection);
+      };
+    }
+    return function() {
+      return func.apply(context, arguments);
+    };
+  };
+
+  // A mostly-internal function to generate callbacks that can be applied
+  // to each element in a collection, returning the desired result — either
+  // identity, an arbitrary callback, a property matcher, or a property accessor.
+  var cb = function(value, context, argCount) {
+    if (value == null) return _.identity;
+    if (_.isFunction(value)) return optimizeCb(value, context, argCount);
+    if (_.isObject(value)) return _.matcher(value);
+    return _.property(value);
+  };
+  _.iteratee = function(value, context) {
+    return cb(value, context, Infinity);
+  };
+
+  // An internal function for creating assigner functions.
+  var createAssigner = function(keysFunc, undefinedOnly) {
+    return function(obj) {
+      var length = arguments.length;
+      if (length < 2 || obj == null) return obj;
+      for (var index = 1; index < length; index++) {
+        var source = arguments[index],
+            keys = keysFunc(source),
+            l = keys.length;
+        for (var i = 0; i < l; i++) {
+          var key = keys[i];
+          if (!undefinedOnly || obj[key] === void 0) obj[key] = source[key];
+        }
+      }
+      return obj;
+    };
+  };
+
+  // An internal function for creating a new object that inherits from another.
+  var baseCreate = function(prototype) {
+    if (!_.isObject(prototype)) return {};
+    if (nativeCreate) return nativeCreate(prototype);
+    Ctor.prototype = prototype;
+    var result = new Ctor;
+    Ctor.prototype = null;
+    return result;
+  };
+
+  var property = function(key) {
+    return function(obj) {
+      return obj == null ? void 0 : obj[key];
+    };
+  };
+
+  // Helper for collection methods to determine whether a collection
+  // should be iterated as an array or as an object
+  // Related: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength
+  // Avoids a very nasty iOS 8 JIT bug on ARM-64. #2094
+  var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
+  var getLength = property('length');
+  var isArrayLike = function(collection) {
+    var length = getLength(collection);
+    return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
+  };
+
+  // Collection Functions
+  // --------------------
+
+  // The cornerstone, an `each` implementation, aka `forEach`.
+  // Handles raw objects in addition to array-likes. Treats all
+  // sparse array-likes as if they were dense.
+  _.each = _.forEach = function(obj, iteratee, context) {
+    iteratee = optimizeCb(iteratee, context);
+    var i, length;
+    if (isArrayLike(obj)) {
+      for (i = 0, length = obj.length; i < length; i++) {
+        iteratee(obj[i], i, obj);
+      }
+    } else {
+      var keys = _.keys(obj);
+      for (i = 0, length = keys.length; i < length; i++) {
+        iteratee(obj[keys[i]], keys[i], obj);
+      }
+    }
+    return obj;
+  };
+
+  // Return the results of applying the iteratee to each element.
+  _.map = _.collect = function(obj, iteratee, context) {
+    iteratee = cb(iteratee, context);
+    var keys = !isArrayLike(obj) && _.keys(obj),
+        length = (keys || obj).length,
+        results = Array(length);
+    for (var index = 0; index < length; index++) {
+      var currentKey = keys ? keys[index] : index;
+      results[index] = iteratee(obj[currentKey], currentKey, obj);
+    }
+    return results;
+  };
+
+  // Create a reducing function iterating left or right.
+  function createReduce(dir) {
+    // Optimized iterator function as using arguments.length
+    // in the main function will deoptimize the, see #1991.
+    function iterator(obj, iteratee, memo, keys, index, length) {
+      for (; index >= 0 && index < length; index += dir) {
+        var currentKey = keys ? keys[index] : index;
+        memo = iteratee(memo, obj[currentKey], currentKey, obj);
+      }
+      return memo;
+    }
+
+    return function(obj, iteratee, memo, context) {
+      iteratee = optimizeCb(iteratee, context, 4);
+      var keys = !isArrayLike(obj) && _.keys(obj),
+          length = (keys || obj).length,
+          index = dir > 0 ? 0 : length - 1;
+      // Determine the initial value if none is provided.
+      if (arguments.length < 3) {
+        memo = obj[keys ? keys[index] : index];
+        index += dir;
+      }
+      return iterator(obj, iteratee, memo, keys, index, length);
+    };
+  }
+
+  // **Reduce** builds up a single result from a list of values, aka `inject`,
+  // or `foldl`.
+  _.reduce = _.foldl = _.inject = createReduce(1);
+
+  // The right-associative version of reduce, also known as `foldr`.
+  _.reduceRight = _.foldr = createReduce(-1);
+
+  // Return the first value which passes a truth test. Aliased as `detect`.
+  _.find = _.detect = function(obj, predicate, context) {
+    var key;
+    if (isArrayLike(obj)) {
+      key = _.findIndex(obj, predicate, context);
+    } else {
+      key = _.findKey(obj, predicate, context);
+    }
+    if (key !== void 0 && key !== -1) return obj[key];
+  };
+
+  // Return all the elements that pass a truth test.
+  // Aliased as `select`.
+  _.filter = _.select = function(obj, predicate, context) {
+    var results = [];
+    predicate = cb(predicate, context);
+    _.each(obj, function(value, index, list) {
+      if (predicate(value, index, list)) results.push(value);
+    });
+    return results;
+  };
+
+  // Return all the elements for which a truth test fails.
+  _.reject = function(obj, predicate, context) {
+    return _.filter(obj, _.negate(cb(predicate)), context);
+  };
+
+  // Determine whether all of the elements match a truth test.
+  // Aliased as `all`.
+  _.every = _.all = function(obj, predicate, context) {
+    predicate = cb(predicate, context);
+    var keys = !isArrayLike(obj) && _.keys(obj),
+        length = (keys || obj).length;
+    for (var index = 0; index < length; index++) {
+      var currentKey = keys ? keys[index] : index;
+      if (!predicate(obj[currentKey], currentKey, obj)) return false;
+    }
+    return true;
+  };
+
+  // Determine if at least one element in the object matches a truth test.
+  // Aliased as `any`.
+  _.some = _.any = function(obj, predicate, context) {
+    predicate = cb(predicate, context);
+    var keys = !isArrayLike(obj) && _.keys(obj),
+        length = (keys || obj).length;
+    for (var index = 0; index < length; index++) {
+      var currentKey = keys ? keys[index] : index;
+      if (predicate(obj[currentKey], currentKey, obj)) return true;
+    }
+    return false;
+  };
+
+  // Determine if the array or object contains a given item (using `===`).
+  // Aliased as `includes` and `include`.
+  _.contains = _.includes = _.include = function(obj, item, fromIndex, guard) {
+    if (!isArrayLike(obj)) obj = _.values(obj);
+    if (typeof fromIndex != 'number' || guard) fromIndex = 0;
+    return _.indexOf(obj, item, fromIndex) >= 0;
+  };
+
+  // Invoke a method (with arguments) on every item in a collection.
+  _.invoke = function(obj, method) {
+    var args = slice.call(arguments, 2);
+    var isFunc = _.isFunction(method);
+    return _.map(obj, function(value) {
+      var func = isFunc ? method : value[method];
+      return func == null ? func : func.apply(value, args);
+    });
+  };
+
+  // Convenience version of a common use case of `map`: fetching a property.
+  _.pluck = function(obj, key) {
+    return _.map(obj, _.property(key));
+  };
+
+  // Convenience version of a common use case of `filter`: selecting only objects
+  // containing specific `key:value` pairs.
+  _.where = function(obj, attrs) {
+    return _.filter(obj, _.matcher(attrs));
+  };
+
+  // Convenience version of a common use case of `find`: getting the first object
+  // containing specific `key:value` pairs.
+  _.findWhere = function(obj, attrs) {
+    return _.find(obj, _.matcher(attrs));
+  };
+
+  // Return the maximum element (or element-based computation).
+  _.max = function(obj, iteratee, context) {
+    var result = -Infinity, lastComputed = -Infinity,
+        value, computed;
+    if (iteratee == null && obj != null) {
+      obj = isArrayLike(obj) ? obj : _.values(obj);
+      for (var i = 0, length = obj.length; i < length; i++) {
+        value = obj[i];
+        if (value > result) {
+          result = value;
+        }
+      }
+    } else {
+      iteratee = cb(iteratee, context);
+      _.each(obj, function(value, index, list) {
+        computed = iteratee(value, index, list);
+        if (computed > lastComputed || computed === -Infinity && result === -Infinity) {
+          result = value;
+          lastComputed = computed;
+        }
+      });
+    }
+    return result;
+  };
+
+  // Return the minimum element (or element-based computation).
+  _.min = function(obj, iteratee, context) {
+    var result = Infinity, lastComputed = Infinity,
+        value, computed;
+    if (iteratee == null && obj != null) {
+      obj = isArrayLike(obj) ? obj : _.values(obj);
+      for (var i = 0, length = obj.length; i < length; i++) {
+        value = obj[i];
+        if (value < result) {
+          result = value;
+        }
+      }
+    } else {
+      iteratee = cb(iteratee, context);
+      _.each(obj, function(value, index, list) {
+        computed = iteratee(value, index, list);
+        if (computed < lastComputed || computed === Infinity && result === Infinity) {
+          result = value;
+          lastComputed = computed;
+        }
+      });
+    }
+    return result;
+  };
+
+  // Shuffle a collection, using the modern version of the
+  // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
+  _.shuffle = function(obj) {
+    var set = isArrayLike(obj) ? obj : _.values(obj);
+    var length = set.length;
+    var shuffled = Array(length);
+    for (var index = 0, rand; index < length; index++) {
+      rand = _.random(0, index);
+      if (rand !== index) shuffled[index] = shuffled[rand];
+      shuffled[rand] = set[index];
+    }
+    return shuffled;
+  };
+
+  // Sample **n** random values from a collection.
+  // If **n** is not specified, returns a single random element.
+  // The internal `guard` argument allows it to work with `map`.
+  _.sample = function(obj, n, guard) {
+    if (n == null || guard) {
+      if (!isArrayLike(obj)) obj = _.values(obj);
+      return obj[_.random(obj.length - 1)];
+    }
+    return _.shuffle(obj).slice(0, Math.max(0, n));
+  };
+
+  // Sort the object's values by a criterion produced by an iteratee.
+  _.sortBy = function(obj, iteratee, context) {
+    iteratee = cb(iteratee, context);
+    return _.pluck(_.map(obj, function(value, index, list) {
+      return {
+        value: value,
+        index: index,
+        criteria: iteratee(value, index, list)
+      };
+    }).sort(function(left, right) {
+      var a = left.criteria;
+      var b = right.criteria;
+      if (a !== b) {
+        if (a > b || a === void 0) return 1;
+        if (a < b || b === void 0) return -1;
+      }
+      return left.index - right.index;
+    }), 'value');
+  };
+
+  // An internal function used for aggregate "group by" operations.
+  var group = function(behavior) {
+    return function(obj, iteratee, context) {
+      var result = {};
+      iteratee = cb(iteratee, context);
+      _.each(obj, function(value, index) {
+        var key = iteratee(value, index, obj);
+        behavior(result, value, key);
+      });
+      return result;
+    };
+  };
+
+  // Groups the object's values by a criterion. Pass either a string attribute
+  // to group by, or a function that returns the criterion.
+  _.groupBy = group(function(result, value, key) {
+    if (_.has(result, key)) result[key].push(value); else result[key] = [value];
+  });
+
+  // Indexes the object's values by a criterion, similar to `groupBy`, but for
+  // when you know that your index values will be unique.
+  _.indexBy = group(function(result, value, key) {
+    result[key] = value;
+  });
+
+  // Counts instances of an object that group by a certain criterion. Pass
+  // either a string attribute to count by, or a function that returns the
+  // criterion.
+  _.countBy = group(function(result, value, key) {
+    if (_.has(result, key)) result[key]++; else result[key] = 1;
+  });
+
+  // Safely create a real, live array from anything iterable.
+  _.toArray = function(obj) {
+    if (!obj) return [];
+    if (_.isArray(obj)) return slice.call(obj);
+    if (isArrayLike(obj)) return _.map(obj, _.identity);
+    return _.values(obj);
+  };
+
+  // Return the number of elements in an object.
+  _.size = function(obj) {
+    if (obj == null) return 0;
+    return isArrayLike(obj) ? obj.length : _.keys(obj).length;
+  };
+
+  // Split a collection into two arrays: one whose elements all satisfy the given
+  // predicate, and one whose elements all do not satisfy the predicate.
+  _.partition = function(obj, predicate, context) {
+    predicate = cb(predicate, context);
+    var pass = [], fail = [];
+    _.each(obj, function(value, key, obj) {
+      (predicate(value, key, obj) ? pass : fail).push(value);
+    });
+    return [pass, fail];
+  };
+
+  // Array Functions
+  // ---------------
+
+  // Get the first element of an array. Passing **n** will return the first N
+  // values in the array. Aliased as `head` and `take`. The **guard** check
+  // allows it to work with `_.map`.
+  _.first = _.head = _.take = function(array, n, guard) {
+    if (array == null) return void 0;
+    if (n == null || guard) return array[0];
+    return _.initial(array, array.length - n);
+  };
+
+  // Returns everything but the last entry of the array. Especially useful on
+  // the arguments object. Passing **n** will return all the values in
+  // the array, excluding the last N.
+  _.initial = function(array, n, guard) {
+    return slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
+  };
+
+  // Get the last element of an array. Passing **n** will return the last N
+  // values in the array.
+  _.last = function(array, n, guard) {
+    if (array == null) return void 0;
+    if (n == null || guard) return array[array.length - 1];
+    return _.rest(array, Math.max(0, array.length - n));
+  };
+
+  // Returns everything but the first entry of the array. Aliased as `tail` and `drop`.
+  // Especially useful on the arguments object. Passing an **n** will return
+  // the rest N values in the array.
+  _.rest = _.tail = _.drop = function(array, n, guard) {
+    return slice.call(array, n == null || guard ? 1 : n);
+  };
+
+  // Trim out all falsy values from an array.
+  _.compact = function(array) {
+    return _.filter(array, _.identity);
+  };
+
+  // Internal implementation of a recursive `flatten` function.
+  var flatten = function(input, shallow, strict, startIndex) {
+    var output = [], idx = 0;
+    for (var i = startIndex || 0, length = getLength(input); i < length; i++) {
+      var value = input[i];
+      if (isArrayLike(value) && (_.isArray(value) || _.isArguments(value))) {
+        //flatten current level of array or arguments object
+        if (!shallow) value = flatten(value, shallow, strict);
+        var j = 0, len = value.length;
+        output.length += len;
+        while (j < len) {
+          output[idx++] = value[j++];
+        }
+      } else if (!strict) {
+        output[idx++] = value;
+      }
+    }
+    return output;
+  };
+
+  // Flatten out an array, either recursively (by default), or just one level.
+  _.flatten = function(array, shallow) {
+    return flatten(array, shallow, false);
+  };
+
+  // Return a version of the array that does not contain the specified value(s).
+  _.without = function(array) {
+    return _.difference(array, slice.call(arguments, 1));
+  };
+
+  // Produce a duplicate-free version of the array. If the array has already
+  // been sorted, you have the option of using a faster algorithm.
+  // Aliased as `unique`.
+  _.uniq = _.unique = function(array, isSorted, iteratee, context) {
+    if (!_.isBoolean(isSorted)) {
+      context = iteratee;
+      iteratee = isSorted;
+      isSorted = false;
+    }
+    if (iteratee != null) iteratee = cb(iteratee, context);
+    var result = [];
+    var seen = [];
+    for (var i = 0, length = getLength(array); i < length; i++) {
+      var value = array[i],
+          computed = iteratee ? iteratee(value, i, array) : value;
+      if (isSorted) {
+        if (!i || seen !== computed) result.push(value);
+        seen = computed;
+      } else if (iteratee) {
+        if (!_.contains(seen, computed)) {
+          seen.push(computed);
+          result.push(value);
+        }
+      } else if (!_.contains(result, value)) {
+        result.push(value);
+      }
+    }
+    return result;
+  };
+
+  // Produce an array that contains the union: each distinct element from all of
+  // the passed-in arrays.
+  _.union = function() {
+    return _.uniq(flatten(arguments, true, true));
+  };
+
+  // Produce an array that contains every item shared between all the
+  // passed-in arrays.
+  _.intersection = function(array) {
+    var result = [];
+    var argsLength = arguments.length;
+    for (var i = 0, length = getLength(array); i < length; i++) {
+      var item = array[i];
+      if (_.contains(result, item)) continue;
+      for (var j = 1; j < argsLength; j++) {
+        if (!_.contains(arguments[j], item)) break;
+      }
+      if (j === argsLength) result.push(item);
+    }
+    return result;
+  };
+
+  // Take the difference between one array and a number of other arrays.
+  // Only the elements present in just the first array will remain.
+  _.difference = function(array) {
+    var rest = flatten(arguments, true, true, 1);
+    return _.filter(array, function(value){
+      return !_.contains(rest, value);
+    });
+  };
+
+  // Zip together multiple lists into a single array -- elements that share
+  // an index go together.
+  _.zip = function() {
+    return _.unzip(arguments);
+  };
+
+  // Complement of _.zip. Unzip accepts an array of arrays and groups
+  // each array's elements on shared indices
+  _.unzip = function(array) {
+    var length = array && _.max(array, getLength).length || 0;
+    var result = Array(length);
+
+    for (var index = 0; index < length; index++) {
+      result[index] = _.pluck(array, index);
+    }
+    return result;
+  };
+
+  // Converts lists into objects. Pass either a single array of `[key, value]`
+  // pairs, or two parallel arrays of the same length -- one of keys, and one of
+  // the corresponding values.
+  _.object = function(list, values) {
+    var result = {};
+    for (var i = 0, length = getLength(list); i < length; i++) {
+      if (values) {
+        result[list[i]] = values[i];
+      } else {
+        result[list[i][0]] = list[i][1];
+      }
+    }
+    return result;
+  };
+
+  // Generator function to create the findIndex and findLastIndex functions
+  function createPredicateIndexFinder(dir) {
+    return function(array, predicate, context) {
+      predicate = cb(predicate, context);
+      var length = getLength(array);
+      var index = dir > 0 ? 0 : length - 1;
+      for (; index >= 0 && index < length; index += dir) {
+        if (predicate(array[index], index, array)) return index;
+      }
+      return -1;
+    };
+  }
+
+  // Returns the first index on an array-like that passes a predicate test
+  _.findIndex = createPredicateIndexFinder(1);
+  _.findLastIndex = createPredicateIndexFinder(-1);
+
+  // Use a comparator function to figure out the smallest index at which
+  // an object should be inserted so as to maintain order. Uses binary search.
+  _.sortedIndex = function(array, obj, iteratee, context) {
+    iteratee = cb(iteratee, context, 1);
+    var value = iteratee(obj);
+    var low = 0, high = getLength(array);
+    while (low < high) {
+      var mid = Math.floor((low + high) / 2);
+      if (iteratee(array[mid]) < value) low = mid + 1; else high = mid;
+    }
+    return low;
+  };
+
+  // Generator function to create the indexOf and lastIndexOf functions
+  function createIndexFinder(dir, predicateFind, sortedIndex) {
+    return function(array, item, idx) {
+      var i = 0, length = getLength(array);
+      if (typeof idx == 'number') {
+        if (dir > 0) {
+            i = idx >= 0 ? idx : Math.max(idx + length, i);
+        } else {
+            length = idx >= 0 ? Math.min(idx + 1, length) : idx + length + 1;
+        }
+      } else if (sortedIndex && idx && length) {
+        idx = sortedIndex(array, item);
+        return array[idx] === item ? idx : -1;
+      }
+      if (item !== item) {
+        idx = predicateFind(slice.call(array, i, length), _.isNaN);
+        return idx >= 0 ? idx + i : -1;
+      }
+      for (idx = dir > 0 ? i : length - 1; idx >= 0 && idx < length; idx += dir) {
+        if (array[idx] === item) return idx;
+      }
+      return -1;
+    };
+  }
+
+  // Return the position of the first occurrence of an item in an array,
+  // or -1 if the item is not included in the array.
+  // If the array is large and already in sort order, pass `true`
+  // for **isSorted** to use binary search.
+  _.indexOf = createIndexFinder(1, _.findIndex, _.sortedIndex);
+  _.lastIndexOf = createIndexFinder(-1, _.findLastIndex);
+
+  // Generate an integer Array containing an arithmetic progression. A port of
+  // the native Python `range()` function. See
+  // [the Python documentation](http://docs.python.org/library/functions.html#range).
+  _.range = function(start, stop, step) {
+    if (stop == null) {
+      stop = start || 0;
+      start = 0;
+    }
+    step = step || 1;
+
+    var length = Math.max(Math.ceil((stop - start) / step), 0);
+    var range = Array(length);
+
+    for (var idx = 0; idx < length; idx++, start += step) {
+      range[idx] = start;
+    }
+
+    return range;
+  };
+
+  // Function (ahem) Functions
+  // ------------------
+
+  // Determines whether to execute a function as a constructor
+  // or a normal function with the provided arguments
+  var executeBound = function(sourceFunc, boundFunc, context, callingContext, args) {
+    if (!(callingContext instanceof boundFunc)) return sourceFunc.apply(context, args);
+    var self = baseCreate(sourceFunc.prototype);
+    var result = sourceFunc.apply(self, args);
+    if (_.isObject(result)) return result;
+    return self;
+  };
+
+  // Create a function bound to a given object (assigning `this`, and arguments,
+  // optionally). Delegates to **ECMAScript 5**'s native `Function.bind` if
+  // available.
+  _.bind = function(func, context) {
+    if (nativeBind && func.bind === nativeBind) return nativeBind.apply(func, slice.call(arguments, 1));
+    if (!_.isFunction(func)) throw new TypeError('Bind must be called on a function');
+    var args = slice.call(arguments, 2);
+    var bound = function() {
+      return executeBound(func, bound, context, this, args.concat(slice.call(arguments)));
+    };
+    return bound;
+  };
+
+  // Partially apply a function by creating a version that has had some of its
+  // arguments pre-filled, without changing its dynamic `this` context. _ acts
+  // as a placeholder, allowing any combination of arguments to be pre-filled.
+  _.partial = function(func) {
+    var boundArgs = slice.call(arguments, 1);
+    var bound = function() {
+      var position = 0, length = boundArgs.length;
+      var args = Array(length);
+      for (var i = 0; i < length; i++) {
+        args[i] = boundArgs[i] === _ ? arguments[position++] : boundArgs[i];
+      }
+      while (position < arguments.length) args.push(arguments[position++]);
+      return executeBound(func, bound, this, this, args);
+    };
+    return bound;
+  };
+
+  // Bind a number of an object's methods to that object. Remaining arguments
+  // are the method names to be bound. Useful for ensuring that all callbacks
+  // defined on an object belong to it.
+  _.bindAll = function(obj) {
+    var i, length = arguments.length, key;
+    if (length <= 1) throw new Error('bindAll must be passed function names');
+    for (i = 1; i < length; i++) {
+      key = arguments[i];
+      obj[key] = _.bind(obj[key], obj);
+    }
+    return obj;
+  };
+
+  // Memoize an expensive function by storing its results.
+  _.memoize = function(func, hasher) {
+    var memoize = function(key) {
+      var cache = memoize.cache;
+      var address = '' + (hasher ? hasher.apply(this, arguments) : key);
+      if (!_.has(cache, address)) cache[address] = func.apply(this, arguments);
+      return cache[address];
+    };
+    memoize.cache = {};
+    return memoize;
+  };
+
+  // Delays a function for the given number of milliseconds, and then calls
+  // it with the arguments supplied.
+  _.delay = function(func, wait) {
+    var args = slice.call(arguments, 2);
+    return setTimeout(function(){
+      return func.apply(null, args);
+    }, wait);
+  };
+
+  // Defers a function, scheduling it to run after the current call stack has
+  // cleared.
+  _.defer = _.partial(_.delay, _, 1);
+
+  // Returns a function, that, when invoked, will only be triggered at most once
+  // during a given window of time. Normally, the throttled function will run
+  // as much as it can, without ever going more than once per `wait` duration;
+  // but if you'd like to disable the execution on the leading edge, pass
+  // `{leading: false}`. To disable execution on the trailing edge, ditto.
+  _.throttle = function(func, wait, options) {
+    var context, args, result;
+    var timeout = null;
+    var previous = 0;
+    if (!options) options = {};
+    var later = function() {
+      previous = options.leading === false ? 0 : _.now();
+      timeout = null;
+      result = func.apply(context, args);
+      if (!timeout) context = args = null;
+    };
+    return function() {
+      var now = _.now();
+      if (!previous && options.leading === false) previous = now;
+      var remaining = wait - (now - previous);
+      context = this;
+      args = arguments;
+      if (remaining <= 0 || remaining > wait) {
+        if (timeout) {
+          clearTimeout(timeout);
+          timeout = null;
+        }
+        previous = now;
+        result = func.apply(context, args);
+        if (!timeout) context = args = null;
+      } else if (!timeout && options.trailing !== false) {
+        timeout = setTimeout(later, remaining);
+      }
+      return result;
+    };
+  };
+
+  // Returns a function, that, as long as it continues to be invoked, will not
+  // be triggered. The function will be called after it stops being called for
+  // N milliseconds. If `immediate` is passed, trigger the function on the
+  // leading edge, instead of the trailing.
+  _.debounce = function(func, wait, immediate) {
+    var timeout, args, context, timestamp, result;
+
+    var later = function() {
+      var last = _.now() - timestamp;
+
+      if (last < wait && last >= 0) {
+        timeout = setTimeout(later, wait - last);
+      } else {
+        timeout = null;
+        if (!immediate) {
+          result = func.apply(context, args);
+          if (!timeout) context = args = null;
+        }
+      }
+    };
+
+    return function() {
+      context = this;
+      args = arguments;
+      timestamp = _.now();
+      var callNow = immediate && !timeout;
+      if (!timeout) timeout = setTimeout(later, wait);
+      if (callNow) {
+        result = func.apply(context, args);
+        context = args = null;
+      }
+
+      return result;
+    };
+  };
+
+  // Returns the first function passed as an argument to the second,
+  // allowing you to adjust arguments, run code before and after, and
+  // conditionally execute the original function.
+  _.wrap = function(func, wrapper) {
+    return _.partial(wrapper, func);
+  };
+
+  // Returns a negated version of the passed-in predicate.
+  _.negate = function(predicate) {
+    return function() {
+      return !predicate.apply(this, arguments);
+    };
+  };
+
+  // Returns a function that is the composition of a list of functions, each
+  // consuming the return value of the function that follows.
+  _.compose = function() {
+    var args = arguments;
+    var start = args.length - 1;
+    return function() {
+      var i = start;
+      var result = args[start].apply(this, arguments);
+      while (i--) result = args[i].call(this, result);
+      return result;
+    };
+  };
+
+  // Returns a function that will only be executed on and after the Nth call.
+  _.after = function(times, func) {
+    return function() {
+      if (--times < 1) {
+        return func.apply(this, arguments);
+      }
+    };
+  };
+
+  // Returns a function that will only be executed up to (but not including) the Nth call.
+  _.before = function(times, func) {
+    var memo;
+    return function() {
+      if (--times > 0) {
+        memo = func.apply(this, arguments);
+      }
+      if (times <= 1) func = null;
+      return memo;
+    };
+  };
+
+  // Returns a function that will be executed at most one time, no matter how
+  // often you call it. Useful for lazy initialization.
+  _.once = _.partial(_.before, 2);
+
+  // Object Functions
+  // ----------------
+
+  // Keys in IE < 9 that won't be iterated by `for key in ...` and thus missed.
+  var hasEnumBug = !{toString: null}.propertyIsEnumerable('toString');
+  var nonEnumerableProps = ['valueOf', 'isPrototypeOf', 'toString',
+                      'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
+
+  function collectNonEnumProps(obj, keys) {
+    var nonEnumIdx = nonEnumerableProps.length;
+    var constructor = obj.constructor;
+    var proto = (_.isFunction(constructor) && constructor.prototype) || ObjProto;
+
+    // Constructor is a special case.
+    var prop = 'constructor';
+    if (_.has(obj, prop) && !_.contains(keys, prop)) keys.push(prop);
+
+    while (nonEnumIdx--) {
+      prop = nonEnumerableProps[nonEnumIdx];
+      if (prop in obj && obj[prop] !== proto[prop] && !_.contains(keys, prop)) {
+        keys.push(prop);
+      }
+    }
+  }
+
+  // Retrieve the names of an object's own properties.
+  // Delegates to **ECMAScript 5**'s native `Object.keys`
+  _.keys = function(obj) {
+    if (!_.isObject(obj)) return [];
+    if (nativeKeys) return nativeKeys(obj);
+    var keys = [];
+    for (var key in obj) if (_.has(obj, key)) keys.push(key);
+    // Ahem, IE < 9.
+    if (hasEnumBug) collectNonEnumProps(obj, keys);
+    return keys;
+  };
+
+  // Retrieve all the property names of an object.
+  _.allKeys = function(obj) {
+    if (!_.isObject(obj)) return [];
+    var keys = [];
+    for (var key in obj) keys.push(key);
+    // Ahem, IE < 9.
+    if (hasEnumBug) collectNonEnumProps(obj, keys);
+    return keys;
+  };
+
+  // Retrieve the values of an object's properties.
+  _.values = function(obj) {
+    var keys = _.keys(obj);
+    var length = keys.length;
+    var values = Array(length);
+    for (var i = 0; i < length; i++) {
+      values[i] = obj[keys[i]];
+    }
+    return values;
+  };
+
+  // Returns the results of applying the iteratee to each element of the object
+  // In contrast to _.map it returns an object
+  _.mapObject = function(obj, iteratee, context) {
+    iteratee = cb(iteratee, context);
+    var keys =  _.keys(obj),
+          length = keys.length,
+          results = {},
+          currentKey;
+      for (var index = 0; index < length; index++) {
+        currentKey = keys[index];
+        results[currentKey] = iteratee(obj[currentKey], currentKey, obj);
+      }
+      return results;
+  };
+
+  // Convert an object into a list of `[key, value]` pairs.
+  _.pairs = function(obj) {
+    var keys = _.keys(obj);
+    var length = keys.length;
+    var pairs = Array(length);
+    for (var i = 0; i < length; i++) {
+      pairs[i] = [keys[i], obj[keys[i]]];
+    }
+    return pairs;
+  };
+
+  // Invert the keys and values of an object. The values must be serializable.
+  _.invert = function(obj) {
+    var result = {};
+    var keys = _.keys(obj);
+    for (var i = 0, length = keys.length; i < length; i++) {
+      result[obj[keys[i]]] = keys[i];
+    }
+    return result;
+  };
+
+  // Return a sorted list of the function names available on the object.
+  // Aliased as `methods`
+  _.functions = _.methods = function(obj) {
+    var names = [];
+    for (var key in obj) {
+      if (_.isFunction(obj[key])) names.push(key);
+    }
+    return names.sort();
+  };
+
+  // Extend a given object with all the properties in passed-in object(s).
+  _.extend = createAssigner(_.allKeys);
+
+  // Assigns a given object with all the own properties in the passed-in object(s)
+  // (https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+  _.extendOwn = _.assign = createAssigner(_.keys);
+
+  // Returns the first key on an object that passes a predicate test
+  _.findKey = function(obj, predicate, context) {
+    predicate = cb(predicate, context);
+    var keys = _.keys(obj), key;
+    for (var i = 0, length = keys.length; i < length; i++) {
+      key = keys[i];
+      if (predicate(obj[key], key, obj)) return key;
+    }
+  };
+
+  // Return a copy of the object only containing the whitelisted properties.
+  _.pick = function(object, oiteratee, context) {
+    var result = {}, obj = object, iteratee, keys;
+    if (obj == null) return result;
+    if (_.isFunction(oiteratee)) {
+      keys = _.allKeys(obj);
+      iteratee = optimizeCb(oiteratee, context);
+    } else {
+      keys = flatten(arguments, false, false, 1);
+      iteratee = function(value, key, obj) { return key in obj; };
+      obj = Object(obj);
+    }
+    for (var i = 0, length = keys.length; i < length; i++) {
+      var key = keys[i];
+      var value = obj[key];
+      if (iteratee(value, key, obj)) result[key] = value;
+    }
+    return result;
+  };
+
+   // Return a copy of the object without the blacklisted properties.
+  _.omit = function(obj, iteratee, context) {
+    if (_.isFunction(iteratee)) {
+      iteratee = _.negate(iteratee);
+    } else {
+      var keys = _.map(flatten(arguments, false, false, 1), String);
+      iteratee = function(value, key) {
+        return !_.contains(keys, key);
+      };
+    }
+    return _.pick(obj, iteratee, context);
+  };
+
+  // Fill in a given object with default properties.
+  _.defaults = createAssigner(_.allKeys, true);
+
+  // Creates an object that inherits from the given prototype object.
+  // If additional properties are provided then they will be added to the
+  // created object.
+  _.create = function(prototype, props) {
+    var result = baseCreate(prototype);
+    if (props) _.extendOwn(result, props);
+    return result;
+  };
+
+  // Create a (shallow-cloned) duplicate of an object.
+  _.clone = function(obj) {
+    if (!_.isObject(obj)) return obj;
+    return _.isArray(obj) ? obj.slice() : _.extend({}, obj);
+  };
+
+  // Invokes interceptor with the obj, and then returns obj.
+  // The primary purpose of this method is to "tap into" a method chain, in
+  // order to perform operations on intermediate results within the chain.
+  _.tap = function(obj, interceptor) {
+    interceptor(obj);
+    return obj;
+  };
+
+  // Returns whether an object has a given set of `key:value` pairs.
+  _.isMatch = function(object, attrs) {
+    var keys = _.keys(attrs), length = keys.length;
+    if (object == null) return !length;
+    var obj = Object(object);
+    for (var i = 0; i < length; i++) {
+      var key = keys[i];
+      if (attrs[key] !== obj[key] || !(key in obj)) return false;
+    }
+    return true;
+  };
+
+
+  // Internal recursive comparison function for `isEqual`.
+  var eq = function(a, b, aStack, bStack) {
+    // Identical objects are equal. `0 === -0`, but they aren't identical.
+    // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
+    if (a === b) return a !== 0 || 1 / a === 1 / b;
+    // A strict comparison is necessary because `null == undefined`.
+    if (a == null || b == null) return a === b;
+    // Unwrap any wrapped objects.
+    if (a instanceof _) a = a._wrapped;
+    if (b instanceof _) b = b._wrapped;
+    // Compare `[[Class]]` names.
+    var className = toString.call(a);
+    if (className !== toString.call(b)) return false;
+    switch (className) {
+      // Strings, numbers, regular expressions, dates, and booleans are compared by value.
+      case '[object RegExp]':
+      // RegExps are coerced to strings for comparison (Note: '' + /a/i === '/a/i')
+      case '[object String]':
+        // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
+        // equivalent to `new String("5")`.
+        return '' + a === '' + b;
+      case '[object Number]':
+        // `NaN`s are equivalent, but non-reflexive.
+        // Object(NaN) is equivalent to NaN
+        if (+a !== +a) return +b !== +b;
+        // An `egal` comparison is performed for other numeric values.
+        return +a === 0 ? 1 / +a === 1 / b : +a === +b;
+      case '[object Date]':
+      case '[object Boolean]':
+        // Coerce dates and booleans to numeric primitive values. Dates are compared by their
+        // millisecond representations. Note that invalid dates with millisecond representations
+        // of `NaN` are not equivalent.
+        return +a === +b;
+    }
+
+    var areArrays = className === '[object Array]';
+    if (!areArrays) {
+      if (typeof a != 'object' || typeof b != 'object') return false;
+
+      // Objects with different constructors are not equivalent, but `Object`s or `Array`s
+      // from different frames are.
+      var aCtor = a.constructor, bCtor = b.constructor;
+      if (aCtor !== bCtor && !(_.isFunction(aCtor) && aCtor instanceof aCtor &&
+                               _.isFunction(bCtor) && bCtor instanceof bCtor)
+                          && ('constructor' in a && 'constructor' in b)) {
+        return false;
+      }
+    }
+    // Assume equality for cyclic structures. The algorithm for detecting cyclic
+    // structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
+
+    // Initializing stack of traversed objects.
+    // It's done here since we only need them for objects and arrays comparison.
+    aStack = aStack || [];
+    bStack = bStack || [];
+    var length = aStack.length;
+    while (length--) {
+      // Linear search. Performance is inversely proportional to the number of
+      // unique nested structures.
+      if (aStack[length] === a) return bStack[length] === b;
+    }
+
+    // Add the first object to the stack of traversed objects.
+    aStack.push(a);
+    bStack.push(b);
+
+    // Recursively compare objects and arrays.
+    if (areArrays) {
+      // Compare array lengths to determine if a deep comparison is necessary.
+      length = a.length;
+      if (length !== b.length) return false;
+      // Deep compare the contents, ignoring non-numeric properties.
+      while (length--) {
+        if (!eq(a[length], b[length], aStack, bStack)) return false;
+      }
+    } else {
+      // Deep compare objects.
+      var keys = _.keys(a), key;
+      length = keys.length;
+      // Ensure that both objects contain the same number of properties before comparing deep equality.
+      if (_.keys(b).length !== length) return false;
+      while (length--) {
+        // Deep compare each member
+        key = keys[length];
+        if (!(_.has(b, key) && eq(a[key], b[key], aStack, bStack))) return false;
+      }
+    }
+    // Remove the first object from the stack of traversed objects.
+    aStack.pop();
+    bStack.pop();
+    return true;
+  };
+
+  // Perform a deep comparison to check if two objects are equal.
+  _.isEqual = function(a, b) {
+    return eq(a, b);
+  };
+
+  // Is a given array, string, or object empty?
+  // An "empty" object has no enumerable own-properties.
+  _.isEmpty = function(obj) {
+    if (obj == null) return true;
+    if (isArrayLike(obj) && (_.isArray(obj) || _.isString(obj) || _.isArguments(obj))) return obj.length === 0;
+    return _.keys(obj).length === 0;
+  };
+
+  // Is a given value a DOM element?
+  _.isElement = function(obj) {
+    return !!(obj && obj.nodeType === 1);
+  };
+
+  // Is a given value an array?
+  // Delegates to ECMA5's native Array.isArray
+  _.isArray = nativeIsArray || function(obj) {
+    return toString.call(obj) === '[object Array]';
+  };
+
+  // Is a given variable an object?
+  _.isObject = function(obj) {
+    var type = typeof obj;
+    return type === 'function' || type === 'object' && !!obj;
+  };
+
+  // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.
+  _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function(name) {
+    _['is' + name] = function(obj) {
+      return toString.call(obj) === '[object ' + name + ']';
+    };
+  });
+
+  // Define a fallback version of the method in browsers (ahem, IE < 9), where
+  // there isn't any inspectable "Arguments" type.
+  if (!_.isArguments(arguments)) {
+    _.isArguments = function(obj) {
+      return _.has(obj, 'callee');
+    };
+  }
+
+  // Optimize `isFunction` if appropriate. Work around some typeof bugs in old v8,
+  // IE 11 (#1621), and in Safari 8 (#1929).
+  if (typeof /./ != 'function' && typeof Int8Array != 'object') {
+    _.isFunction = function(obj) {
+      return typeof obj == 'function' || false;
+    };
+  }
+
+  // Is a given object a finite number?
+  _.isFinite = function(obj) {
+    return isFinite(obj) && !isNaN(parseFloat(obj));
+  };
+
+  // Is the given value `NaN`? (NaN is the only number which does not equal itself).
+  _.isNaN = function(obj) {
+    return _.isNumber(obj) && obj !== +obj;
+  };
+
+  // Is a given value a boolean?
+  _.isBoolean = function(obj) {
+    return obj === true || obj === false || toString.call(obj) === '[object Boolean]';
+  };
+
+  // Is a given value equal to null?
+  _.isNull = function(obj) {
+    return obj === null;
+  };
+
+  // Is a given variable undefined?
+  _.isUndefined = function(obj) {
+    return obj === void 0;
+  };
+
+  // Shortcut function for checking if an object has a given property directly
+  // on itself (in other words, not on a prototype).
+  _.has = function(obj, key) {
+    return obj != null && hasOwnProperty.call(obj, key);
+  };
+
+  // Utility Functions
+  // -----------------
+
+  // Run Underscore.js in *noConflict* mode, returning the `_` variable to its
+  // previous owner. Returns a reference to the Underscore object.
+  _.noConflict = function() {
+    root._ = previousUnderscore;
+    return this;
+  };
+
+  // Keep the identity function around for default iteratees.
+  _.identity = function(value) {
+    return value;
+  };
+
+  // Predicate-generating functions. Often useful outside of Underscore.
+  _.constant = function(value) {
+    return function() {
+      return value;
+    };
+  };
+
+  _.noop = function(){};
+
+  _.property = property;
+
+  // Generates a function for a given object that returns a given property.
+  _.propertyOf = function(obj) {
+    return obj == null ? function(){} : function(key) {
+      return obj[key];
+    };
+  };
+
+  // Returns a predicate for checking whether an object has a given set of
+  // `key:value` pairs.
+  _.matcher = _.matches = function(attrs) {
+    attrs = _.extendOwn({}, attrs);
+    return function(obj) {
+      return _.isMatch(obj, attrs);
+    };
+  };
+
+  // Run a function **n** times.
+  _.times = function(n, iteratee, context) {
+    var accum = Array(Math.max(0, n));
+    iteratee = optimizeCb(iteratee, context, 1);
+    for (var i = 0; i < n; i++) accum[i] = iteratee(i);
+    return accum;
+  };
+
+  // Return a random integer between min and max (inclusive).
+  _.random = function(min, max) {
+    if (max == null) {
+      max = min;
+      min = 0;
+    }
+    return min + Math.floor(Math.random() * (max - min + 1));
+  };
+
+  // A (possibly faster) way to get the current timestamp as an integer.
+  _.now = Date.now || function() {
+    return new Date().getTime();
+  };
+
+   // List of HTML entities for escaping.
+  var escapeMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    '`': '&#x60;'
+  };
+  var unescapeMap = _.invert(escapeMap);
+
+  // Functions for escaping and unescaping strings to/from HTML interpolation.
+  var createEscaper = function(map) {
+    var escaper = function(match) {
+      return map[match];
+    };
+    // Regexes for identifying a key that needs to be escaped
+    var source = '(?:' + _.keys(map).join('|') + ')';
+    var testRegexp = RegExp(source);
+    var replaceRegexp = RegExp(source, 'g');
+    return function(string) {
+      string = string == null ? '' : '' + string;
+      return testRegexp.test(string) ? string.replace(replaceRegexp, escaper) : string;
+    };
+  };
+  _.escape = createEscaper(escapeMap);
+  _.unescape = createEscaper(unescapeMap);
+
+  // If the value of the named `property` is a function then invoke it with the
+  // `object` as context; otherwise, return it.
+  _.result = function(object, property, fallback) {
+    var value = object == null ? void 0 : object[property];
+    if (value === void 0) {
+      value = fallback;
+    }
+    return _.isFunction(value) ? value.call(object) : value;
+  };
+
+  // Generate a unique integer id (unique within the entire client session).
+  // Useful for temporary DOM ids.
+  var idCounter = 0;
+  _.uniqueId = function(prefix) {
+    var id = ++idCounter + '';
+    return prefix ? prefix + id : id;
+  };
+
+  // By default, Underscore uses ERB-style template delimiters, change the
+  // following template settings to use alternative delimiters.
+  _.templateSettings = {
+    evaluate    : /<%([\s\S]+?)%>/g,
+    interpolate : /<%=([\s\S]+?)%>/g,
+    escape      : /<%-([\s\S]+?)%>/g
+  };
+
+  // When customizing `templateSettings`, if you don't want to define an
+  // interpolation, evaluation or escaping regex, we need one that is
+  // guaranteed not to match.
+  var noMatch = /(.)^/;
+
+  // Certain characters need to be escaped so that they can be put into a
+  // string literal.
+  var escapes = {
+    "'":      "'",
+    '\\':     '\\',
+    '\r':     'r',
+    '\n':     'n',
+    '\u2028': 'u2028',
+    '\u2029': 'u2029'
+  };
+
+  var escaper = /\\|'|\r|\n|\u2028|\u2029/g;
+
+  var escapeChar = function(match) {
+    return '\\' + escapes[match];
+  };
+
+  // JavaScript micro-templating, similar to John Resig's implementation.
+  // Underscore templating handles arbitrary delimiters, preserves whitespace,
+  // and correctly escapes quotes within interpolated code.
+  // NB: `oldSettings` only exists for backwards compatibility.
+  _.template = function(text, settings, oldSettings) {
+    if (!settings && oldSettings) settings = oldSettings;
+    settings = _.defaults({}, settings, _.templateSettings);
+
+    // Combine delimiters into one regular expression via alternation.
+    var matcher = RegExp([
+      (settings.escape || noMatch).source,
+      (settings.interpolate || noMatch).source,
+      (settings.evaluate || noMatch).source
+    ].join('|') + '|$', 'g');
+
+    // Compile the template source, escaping string literals appropriately.
+    var index = 0;
+    var source = "__p+='";
+    text.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
+      source += text.slice(index, offset).replace(escaper, escapeChar);
+      index = offset + match.length;
+
+      if (escape) {
+        source += "'+\n((__t=(" + escape + "))==null?'':_.escape(__t))+\n'";
+      } else if (interpolate) {
+        source += "'+\n((__t=(" + interpolate + "))==null?'':__t)+\n'";
+      } else if (evaluate) {
+        source += "';\n" + evaluate + "\n__p+='";
+      }
+
+      // Adobe VMs need the match returned to produce the correct offest.
+      return match;
+    });
+    source += "';\n";
+
+    // If a variable is not specified, place data values in local scope.
+    if (!settings.variable) source = 'with(obj||{}){\n' + source + '}\n';
+
+    source = "var __t,__p='',__j=Array.prototype.join," +
+      "print=function(){__p+=__j.call(arguments,'');};\n" +
+      source + 'return __p;\n';
+
+    try {
+      var render = new Function(settings.variable || 'obj', '_', source);
+    } catch (e) {
+      e.source = source;
+      throw e;
+    }
+
+    var template = function(data) {
+      return render.call(this, data, _);
+    };
+
+    // Provide the compiled source as a convenience for precompilation.
+    var argument = settings.variable || 'obj';
+    template.source = 'function(' + argument + '){\n' + source + '}';
+
+    return template;
+  };
+
+  // Add a "chain" function. Start chaining a wrapped Underscore object.
+  _.chain = function(obj) {
+    var instance = _(obj);
+    instance._chain = true;
+    return instance;
+  };
+
+  // OOP
+  // ---------------
+  // If Underscore is called as a function, it returns a wrapped object that
+  // can be used OO-style. This wrapper holds altered versions of all the
+  // underscore functions. Wrapped objects may be chained.
+
+  // Helper function to continue chaining intermediate results.
+  var result = function(instance, obj) {
+    return instance._chain ? _(obj).chain() : obj;
+  };
+
+  // Add your own custom functions to the Underscore object.
+  _.mixin = function(obj) {
+    _.each(_.functions(obj), function(name) {
+      var func = _[name] = obj[name];
+      _.prototype[name] = function() {
+        var args = [this._wrapped];
+        push.apply(args, arguments);
+        return result(this, func.apply(_, args));
+      };
+    });
+  };
+
+  // Add all of the Underscore functions to the wrapper object.
+  _.mixin(_);
+
+  // Add all mutator Array functions to the wrapper.
+  _.each(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(name) {
+    var method = ArrayProto[name];
+    _.prototype[name] = function() {
+      var obj = this._wrapped;
+      method.apply(obj, arguments);
+      if ((name === 'shift' || name === 'splice') && obj.length === 0) delete obj[0];
+      return result(this, obj);
+    };
+  });
+
+  // Add all accessor Array functions to the wrapper.
+  _.each(['concat', 'join', 'slice'], function(name) {
+    var method = ArrayProto[name];
+    _.prototype[name] = function() {
+      return result(this, method.apply(this._wrapped, arguments));
+    };
+  });
+
+  // Extracts the result from a wrapped and chained object.
+  _.prototype.value = function() {
+    return this._wrapped;
+  };
+
+  // Provide unwrapping proxy for some methods used in engine operations
+  // such as arithmetic and JSON stringification.
+  _.prototype.valueOf = _.prototype.toJSON = _.prototype.value;
+
+  _.prototype.toString = function() {
+    return '' + this._wrapped;
+  };
+
+  // AMD registration happens at the end for compatibility with AMD loaders
+  // that may not enforce next-turn semantics on modules. Even though general
+  // practice for AMD registration is to be anonymous, underscore registers
+  // as a named module because, like jQuery, it is a base library that is
+  // popular enough to be bundled in a third party lib, but not be part of
+  // an AMD load request. Those cases could generate an error when an
+  // anonymous define() is called outside of a loader request.
+  if (typeof define === 'function' && define.amd) {
+    define('underscore', [], function() {
+      return _;
+    });
+  }
+}.call(this));
+
 /**
  * Patterns parser - Argument parser
  *
@@ -12367,8 +13916,9 @@ define('pat-registry',[
  */
 define('pat-parser',[
     "jquery",
+    "underscore",
     "pat-logger"
-], function($, logger) {
+], function($, _, logger) {
     function ArgumentParser(name, opts) {
         opts = opts || {};
         this.order = [];
@@ -12393,7 +13943,20 @@ define('pat-parser',[
             });
         },
 
-        add_argument: function ArgumentParser_add_argument(name, default_value, choices, multiple) {
+        addAlias: function ArgumentParserAddAlias(alias, original) {
+            /* Add an alias for a previously added parser argument.
+             *
+             * Useful when you want to support both US and UK english argument
+             * names.
+             */
+            if (this.parameters[original]) {
+                this.parameters[original].alias = alias;
+            } else {
+                throw ("Attempted to add an alias for a non-existing parser argument.");
+            }
+        },
+
+        addArgument: function ArgumentParserAddArgument(name, default_value, choices, multiple) {
             var spec, m;
 
             if (multiple && !Array.isArray(default_value))
@@ -12430,13 +13993,13 @@ define('pat-parser',[
                     first_spec.group=group;
                     first_spec.dest=first_name;
                     this.groups[group]=new ArgumentParser();
-                    this.groups[group].add_argument(
+                    this.groups[group].addArgument(
                             first_name,
                             spec.value, spec.choices, spec.multiple);
                     delete this.possible_groups[group];
                 }
                 if (group in this.groups) {
-                    this.groups[group].add_argument(field, default_value, choices, multiple);
+                    this.groups[group].addArgument(field, default_value, choices, multiple);
                     spec.group=group;
                     spec.dest=field;
                 } else {
@@ -12506,7 +14069,7 @@ define('pat-parser',[
             return value;
         },
 
-        _set: function ArgumentParser_set(opts, name, value) {
+        _set: function ArgumentParserSet(opts, name, value) {
             if (!(name in this.parameters)) {
                 this.log.debug("Ignoring value for unknown argument " + name);
                 return;
@@ -12558,22 +14121,25 @@ define('pat-parser',[
                     this.log.warn("Invalid parameter: " + parts[i]);
                     break;
                 }
-
                 var name = matches[1],
-                    value = matches[2].trim();
+                    value = matches[2].trim(),
+                    arg = _.chain(this.parameters).where({'alias': name}).value(),
+                    is_alias = arg.length === 1;
 
-                if (name in this.parameters)
+                if (is_alias) {
+                    this._set(opts, arg[0].name, value);
+                } else if (name in this.parameters) {
                     this._set(opts, name, value);
-                else if (name in this.groups) {
+                } else if (name in this.groups) {
                     var subopt = this.groups[name]._parseShorthandNotation(value);
-                    for (var field in subopt)
+                    for (var field in subopt) {
                         this._set(opts, name+"-"+field, subopt[field]);
+                    }
                 } else {
                     this.log.warn("Unknown named parameter " + matches[1]);
                     continue;
                 }
             }
-
             return opts;
         },
 
@@ -12605,7 +14171,6 @@ define('pat-parser',[
                     parts.unshift(part);
                     break;
                 }
-
                 i++;
                 if (i>=this.order.length)
                     break;
@@ -12748,7 +14313,8 @@ define('pat-parser',[
             return multiple ? results : results[0];
         }
     };
-
+    // BBB
+    ArgumentParser.prototype.add_argument = ArgumentParser.prototype.addArgument;
     return ArgumentParser;
 });
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
@@ -13988,7 +15554,7 @@ define('pat-ajax',[
     var log = logger.getLogger("pat.ajax"),
         parser = new Parser("ajax");
 
-    parser.add_argument("url", function($el) {
+    parser.addArgument("url", function($el) {
         return ($el.is("a") ? $el.attr("href") :
                 ($el.is("form") ? $el.attr("action") : "")).split("#")[0];
     });
@@ -14150,9 +15716,9 @@ define('pat-autoscale',[
     "pat-parser"
 ], function($, registry, Parser) {
     var parser = new Parser("auto-scale");
-    parser.add_argument("method", "scale", ["scale", "zoom"]);
-    parser.add_argument("min-width", 0);
-    parser.add_argument("max-width", 1000000);
+    parser.addArgument("method", "scale", ["scale", "zoom"]);
+    parser.addArgument("min-width", 0);
+    parser.addArgument("max-width", 1000000);
 
     var _ = {
         name: "autoscale",
@@ -14350,7 +15916,7 @@ define('pat-autosubmit',[
     // - 400ms -> 400
     // - 400 -> 400
     // - defocus
-    parser.add_argument("delay", "400ms");
+    parser.addArgument("delay", "400ms");
 
     var _ = {
         name: "autosubmit",
@@ -14474,22 +16040,22 @@ define('pat-autosuggest',[
     "use strict";
     var log = logger.getLogger("calendar");
     var parser = new Parser("autosuggest");
-    parser.add_argument("words", "");
-    parser.add_argument("words-json");
-    parser.add_argument("ajax-url", "");
-    parser.add_argument("ajax-data-type", "");
-    parser.add_argument("ajax-search-index", "");
+    parser.addArgument("words", "");
+    parser.addArgument("words-json");
+    parser.addArgument("ajax-url", "");
+    parser.addArgument("ajax-data-type", "");
+    parser.addArgument("ajax-search-index", "");
     // "selection-classes" allows you to add custom CSS classes to currently
     // selected elements.
     // The value passed in must be an object with each id being the text inside
     // a selection and value being a list of classes to be added to the
     // selection.
     // e.g. {'BMW': ['selected', 'car'], 'BMX': ['selected', 'bicycle']}
-    parser.add_argument("selection-classes", "");
-    parser.add_argument("pre-fill", function($el) { return $el.val(); });
-    parser.add_argument("data", "");
-    parser.add_argument("maximum-selection-size", 0);
-    parser.add_argument("placeholder", function($el) {
+    parser.addArgument("selection-classes", "");
+    parser.addArgument("pre-fill", function($el) { return $el.val(); });
+    parser.addArgument("data", "");
+    parser.addArgument("maximum-selection-size", 0);
+    parser.addArgument("placeholder", function($el) {
         return $el.attr("placeholder") || "Enter text";
     });
 
@@ -16226,12 +17792,12 @@ define('pat-bumper',[
     var parser = new Parser("bumper"),
         log = logger.getLogger("bumper");
 
-    parser.add_argument("margin", 0);
-    parser.add_argument("selector");
-    parser.add_argument("bump-add", "bumped");
-    parser.add_argument("bump-remove");
-    parser.add_argument("unbump-add");
-    parser.add_argument("unbump-remove", "bumped");
+    parser.addArgument("margin", 0);
+    parser.addArgument("selector");
+    parser.addArgument("bump-add", "bumped");
+    parser.addArgument("bump-remove");
+    parser.addArgument("unbump-add");
+    parser.addArgument("unbump-remove", "bumped");
 
     // XXX Handle resize
     var bumper = {
@@ -17327,15 +18893,15 @@ define('pat-carousel',[
     var log = logger.getLogger("pat.carousel"),
         parser = new Parser("carousel");
 
-    parser.add_argument("auto-play", false);
-    parser.add_argument("loop", true);
-    parser.add_argument("resize", false);
-    parser.add_argument("expand", false);
-    parser.add_argument("control-arrows", true);
-    parser.add_argument("control-navigation", false);
-    parser.add_argument("control-startstop", false);
-    parser.add_argument("time-delay", 3000);
-    parser.add_argument("time-animation", 600);
+    parser.addArgument("auto-play", false);
+    parser.addArgument("loop", true);
+    parser.addArgument("resize", false);
+    parser.addArgument("expand", false);
+    parser.addArgument("control-arrows", true);
+    parser.addArgument("control-navigation", false);
+    parser.addArgument("control-startstop", false);
+    parser.addArgument("time-delay", 3000);
+    parser.addArgument("time-animation", 600);
 
     var carousel = {
         name: "carousel",
@@ -17653,8 +19219,8 @@ define('pat-checklist',[
     "pat-registry"
 ], function($, dummy, Parser, registry) {
     var parser = new Parser("checklist");
-    parser.add_argument("select", ".select-all");
-    parser.add_argument("deselect", ".deselect-all");
+    parser.addArgument("select", ".select-all");
+    parser.addArgument("deselect", ".deselect-all");
 
     var _ = {
         name: "checklist",
@@ -18982,10 +20548,10 @@ define("pat-clone",[
     "use strict";
     var log = logger.getLogger("pat-clone");
     var parser = new Parser("clone");
-    parser.add_argument("max");
-    parser.add_argument("template", ":first");
-    parser.add_argument("trigger-element", ".add-clone");
-    parser.add_argument("remove-element", ".remove-clone");
+    parser.addArgument("max");
+    parser.addArgument("template", ":first");
+    parser.addArgument("trigger-element", ".add-clone");
+    parser.addArgument("remove-element", ".remove-clone");
     var TEXT_NODE = 3;
 
     return Base.extend({
@@ -19414,22 +20980,22 @@ define('pat-inject',[
         parser = new Parser("inject"),
         TEXT_NODE = 3;
 
-    parser.add_argument("selector");
-    parser.add_argument("target");
-    parser.add_argument("data-type", "html");
-    parser.add_argument("next-href");
-    parser.add_argument("source");
-    parser.add_argument("trigger", "default", ["default", "autoload", "autoload-visible"]);
+    parser.addArgument("selector");
+    parser.addArgument("target");
+    parser.addArgument("data-type", "html");
+    parser.addArgument("next-href");
+    parser.addArgument("source");
+    parser.addArgument("trigger", "default", ["default", "autoload", "autoload-visible"]);
     /* Once injection has completed successfully, pat-inject will trigger
      * an event for each hook: pat-inject-hook-$(hook)
      */
-    parser.add_argument("hooks", [], ["raptor"], true);
+    parser.addArgument("hooks", [], ["raptor"], true);
     // XXX: this should not be here but the parser would bail on
     // unknown parameters and expand/collapsible need to pass the url
     // to us
-    parser.add_argument("url");
-    parser.add_argument("class");
-    parser.add_argument("history");
+    parser.addArgument("url");
+    parser.addArgument("class");
+    parser.addArgument("history");
 
     var _ = {
         name: "inject",
@@ -20036,7 +21602,12 @@ define('pat-inject',[
             history.replaceState("anchor", "", document.location.href);
             return;
         }
-        window.location.reload();
+        // popstate event can be fired when history.back() is called. If
+        // event.state is null, then we are at the first "pageload" state
+        // and there's nothing left to do, so we do nothing.
+        if (event.state) {
+            window.location.reload();
+        }
     });
 
     // this entry ensures that the initally loaded page can be reached with
@@ -20200,15 +21771,15 @@ define('pat-collapsible',[
     var log = logger.getLogger("pat.collapsible"),
         parser = new Parser("collapsible");
 
-    parser.add_argument("load-content");
-    parser.add_argument("store", "none", ["none", "session", "local"]);
-    parser.add_argument("transition", "slide", ["none", "css", "fade", "slide", "slide-horizontal"]);
-    parser.add_argument("effect-duration", "fast");
-    parser.add_argument("effect-easing", "swing");
-    parser.add_argument("closed", false);
-    parser.add_argument("trigger", "::first");
-    parser.add_argument("close-trigger");
-    parser.add_argument("open-trigger");
+    parser.addArgument("load-content");
+    parser.addArgument("store", "none", ["none", "session", "local"]);
+    parser.addArgument("transition", "slide", ["none", "css", "fade", "slide", "slide-horizontal"]);
+    parser.addArgument("effect-duration", "fast");
+    parser.addArgument("effect-easing", "swing");
+    parser.addArgument("closed", false);
+    parser.addArgument("trigger", "::first");
+    parser.addArgument("close-trigger");
+    parser.addArgument("open-trigger");
 
     return Base.extend({
         name: "collapsible",
@@ -23634,18 +25205,20 @@ define('i18n',[], function() {
 }(this, function($, Base, registry, Parser, Picker, PickerDate, PickerTime, patternSelect2, _t) {
     'use strict';
     var parser = new Parser("date-picker");
-    parser.add_argument("class-date-name",'pattern-pickadate-date');
-    parser.add_argument("class-date-wrapper-name",'pattern-pickadate-date-wrapper');
-    parser.add_argument("class-separator-name", 'pattern-pickadate-separator');
-    parser.add_argument("class-time-name",'pattern-pickadate-time');
-    parser.add_argument("class-time-wrapper-name",'pattern-pickadate-time-wrapper');
-    parser.add_argument("class-wrapper-name",'pattern-pickadate-wrapper');
-    parser.add_argument("date", { selectYears: true, selectMonths: true });
-    parser.add_argument("separator", ' '); // Separator between date and time if both are enabled.
-    parser.add_argument("show", ["date", "time"], ["date", "time", "timezone", "polyfill"], true);
-    parser.add_argument("behavior", [], ["polyfill"], true);
-    parser.add_argument("time", {}); // Configure the time value shown
-    parser.add_argument("timezone", {});
+    parser.addArgument("class-date-name",'pattern-pickadate-date');
+    parser.addArgument("class-date-wrapper-name",'pattern-pickadate-date-wrapper');
+    parser.addArgument("class-separator-name", 'pattern-pickadate-separator');
+    parser.addArgument("class-time-name",'pattern-pickadate-time');
+    parser.addArgument("class-time-wrapper-name",'pattern-pickadate-time-wrapper');
+    parser.addArgument("class-wrapper-name",'pattern-pickadate-wrapper');
+    parser.addArgument("date", { selectYears: true, selectMonths: true });
+    parser.addArgument("separator", ' '); // Separator between date and time if both are enabled.
+    parser.addArgument("show", ["date", "time"], ["date", "time", "timezone", "polyfill"], true);
+    parser.addArgument("behavior", [], ["polyfill"], true);
+    parser.addArgument("time", {}); // Configure the time value shown
+    parser.addArgument("timezone", {});
+
+    parser.addAlias("behaviour", "behavior");
 
     return Base.extend({
         name: 'date-picker',
@@ -25689,11 +27262,11 @@ define('pat-depends',[
     var log = logging.getLogger("depends"),
         parser = new Parser("depends");
 
-    parser.add_argument("condition");
-    parser.add_argument("action", "show", ["show", "enable", "both"]);
-    parser.add_argument("transition", "none", ["none", "css", "fade", "slide"]);
-    parser.add_argument("effect-duration", "fast");
-    parser.add_argument("effect-easing", "swing");
+    parser.addArgument("condition");
+    parser.addArgument("action", "show", ["show", "enable", "both"]);
+    parser.addArgument("transition", "none", ["none", "css", "fade", "slide"]);
+    parser.addArgument("effect-duration", "fast");
+    parser.addArgument("effect-easing", "swing");
 
     var depends = {
         name: "depends",
@@ -26750,9 +28323,9 @@ define('pat-equaliser',[
     "imagesloaded"
 ], function($, patterns, Parser, utils, imagesLoaded) {
     var parser = new Parser("equaliser");
-    parser.add_argument("transition", "none", ["none", "grow"]);
-    parser.add_argument("effect-duration", "fast");
-    parser.add_argument("effect-easing", "swing");
+    parser.addArgument("transition", "none", ["none", "grow"]);
+    parser.addArgument("effect-duration", "fast");
+    parser.addArgument("effect-easing", "swing");
 
     var equaliser = {
         name: "equaliser",
@@ -26824,7 +28397,7 @@ define('pat-expandable',[
 ], function($, inject, Parser, registry) {
     var parser = new Parser("expandable");
 
-    parser.add_argument("load-content");
+    parser.addArgument("load-content");
 
     var _ = {
         name: "expandable",
@@ -26955,8 +28528,8 @@ define('pat-modal',[
     "pat-inject"
 ], function($, Parser, registry, utils, inject) {
     var parser = new Parser("modal");
-    parser.add_argument("class");
-    parser.add_argument("closing", ["close-button"], ["close-button", "outside"], true);
+    parser.addArgument("class");
+    parser.addArgument("closing", ["close-button"], ["close-button", "outside"], true);
 
     var modal = {
         name: "modal",
@@ -27215,7 +28788,7 @@ define('pat-forward',[
 ], function($, Parser, registry) {
     var parser = new Parser("forward");
 
-    parser.add_argument("selector");
+    parser.addArgument("selector");
 
     var _ = {
         name: "forward",
@@ -27248,6879 +28821,5077 @@ define('pat-forward',[
 // vim: sw=4 expandtab
 
 ;
-!function (name, context, definition) {
-  if (typeof define == 'function') define('klass',definition)
-  else if (typeof module != 'undefined') module.exports = definition()
-  else context[name] = definition()
-}('klass', this, function () {
-  var context = this
-    , old = context.klass
-    , f = 'function'
-    , fnTest = /xyz/.test(function () {xyz}) ? /\bsupr\b/ : /.*/
-    , proto = 'prototype'
-
-  function klass(o) {
-    return extend.call(isFn(o) ? o : function () {}, o, 1)
-  }
-
-  function isFn(o) {
-    return typeof o === f
-  }
-
-  function wrap(k, fn, supr) {
-    return function () {
-      var tmp = this.supr
-      this.supr = supr[proto][k]
-      var undef = {}.fabricatedUndefined
-      var ret = undef
-      try {
-        ret = fn.apply(this, arguments)
-      } finally {
-        this.supr = tmp
-      }
-      return ret
-    }
-  }
-
-  function process(what, o, supr) {
-    for (var k in o) {
-      if (o.hasOwnProperty(k)) {
-        what[k] = isFn(o[k])
-          && isFn(supr[proto][k])
-          && fnTest.test(o[k])
-          ? wrap(k, o[k], supr) : o[k]
-      }
-    }
-  }
-
-  function extend(o, fromSub) {
-    // must redefine noop each time so it doesn't inherit from previous arbitrary classes
-    function noop() {}
-    noop[proto] = this[proto]
-    var supr = this
-      , prototype = new noop()
-      , isFunction = isFn(o)
-      , _constructor = isFunction ? o : this
-      , _methods = isFunction ? {} : o
-    function fn() {
-      if (this.initialize) this.initialize.apply(this, arguments)
-      else {
-        fromSub || isFunction && supr.apply(this, arguments)
-        _constructor.apply(this, arguments)
-      }
-    }
-
-    fn.methods = function (o) {
-      process(prototype, o, supr)
-      fn[proto] = prototype
-      return this
-    }
-
-    fn.methods.call(fn, _methods).prototype.constructor = fn
-
-    fn.extend = arguments.callee
-    fn[proto].implement = fn.statics = function (o, optFn) {
-      o = typeof o == 'string' ? (function () {
-        var obj = {}
-        obj[o] = optFn
-        return obj
-      }()) : o
-      process(this, o, supr)
-      return this
-    }
-
-    return fn
-  }
-
-  klass.noConflict = function () {
-    context.klass = old
-    return this
-  }
-
-  return klass
-});
-// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-define('photoswipe',['klass'], function (klass) {
-window.klass = klass;
-(function (window) {
-
-	// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind
-	if (!Function.prototype.bind ) {
-
-		Function.prototype.bind = function( obj ) {
-			var slice = [].slice,
-					args = slice.call(arguments, 1),
-					self = this,
-					nop = function () {},
-					bound = function () {
-						return self.apply( this instanceof nop ? this : ( obj || {} ),
-																args.concat( slice.call(arguments) ) );
-					};
-
-			nop.prototype = self.prototype;
-
-			bound.prototype = new nop();
-
-			return bound;
-		};
+/*! PhotoSwipe - v4.0.7 - 2015-03-18
+* http://photoswipe.com
+* Copyright (c) 2015 Dmitry Semenov; */
+(function (root, factory) { 
+	if (typeof define === 'function' && define.amd) {
+		define('photoswipe',factory);
+	} else if (typeof exports === 'object') {
+		module.exports = factory();
+	} else {
+		root.PhotoSwipe = factory();
 	}
+})(this, function () {
 
+	'use strict';
+	var PhotoSwipe = function(template, UiClass, items, options){
 
-
-	if (typeof window.Code === "undefined") {
-		window.Code = {};
-	}
-
-
-
-	window.Code.Util = {
-
-
-		/*
-		 * Function: registerNamespace
-		 */
-		registerNamespace: function () {
-			var
-				args = arguments, obj = null, i, j, ns, nsParts, root, argsLen, nsPartsLens;
-			for (i=0, argsLen=args.length; i<argsLen; i++) {
-				ns = args[i];
-				nsParts = ns.split(".");
-				root = nsParts[0];
-				if (typeof window[root] === "undefined"){
-					window[root] = {};
+/*>>framework-bridge*/
+/**
+ *
+ * Set of generic functions used by gallery.
+ * 
+ * You're free to modify anything here as long as functionality is kept.
+ * 
+ */
+var framework = {
+	features: null,
+	bind: function(target, type, listener, unbind) {
+		var methodName = (unbind ? 'remove' : 'add') + 'EventListener';
+		type = type.split(' ');
+		for(var i = 0; i < type.length; i++) {
+			if(type[i]) {
+				target[methodName]( type[i], listener, false);
+			}
+		}
+	},
+	isArray: function(obj) {
+		return (obj instanceof Array);
+	},
+	createEl: function(classes, tag) {
+		var el = document.createElement(tag || 'div');
+		if(classes) {
+			el.className = classes;
+		}
+		return el;
+	},
+	getScrollY: function() {
+		var yOffset = window.pageYOffset;
+		return yOffset !== undefined ? yOffset : document.documentElement.scrollTop;
+	},
+	unbind: function(target, type, listener) {
+		framework.bind(target,type,listener,true);
+	},
+	removeClass: function(el, className) {
+		var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+		el.className = el.className.replace(reg, ' ').replace(/^\s\s*/, '').replace(/\s\s*$/, ''); 
+	},
+	addClass: function(el, className) {
+		if( !framework.hasClass(el,className) ) {
+			el.className += (el.className ? ' ' : '') + className;
+		}
+	},
+	hasClass: function(el, className) {
+		return el.className && new RegExp('(^|\\s)' + className + '(\\s|$)').test(el.className);
+	},
+	getChildByClass: function(parentEl, childClassName) {
+		var node = parentEl.firstChild;
+		while(node) {
+			if( framework.hasClass(node, childClassName) ) {
+				return node;
+			}
+			node = node.nextSibling;
+		}
+	},
+	arraySearch: function(array, value, key) {
+		var i = array.length;
+		while(i--) {
+			if(array[i][key] === value) {
+				return i;
+			} 
+		}
+		return -1;
+	},
+	extend: function(o1, o2, preventOverwrite) {
+		for (var prop in o2) {
+			if (o2.hasOwnProperty(prop)) {
+				if(preventOverwrite && o1.hasOwnProperty(prop)) {
+					continue;
 				}
-				obj = window[root];
-				//eval('if (typeof ' + root + ' == "undefined"){' + root + ' = {};} obj = ' + root + ';');
-				for (j=1, nsPartsLens=nsParts.length; j<nsPartsLens; ++j) {
-					obj[nsParts[j]] = obj[nsParts[j]] || {};
-					obj = obj[nsParts[j]];
-				}
+				o1[prop] = o2[prop];
+			}
+		}
+	},
+	easing: {
+		sine: {
+			out: function(k) {
+				return Math.sin(k * (Math.PI / 2));
+			},
+			inOut: function(k) {
+				return - (Math.cos(Math.PI * k) - 1) / 2;
 			}
 		},
-
-
-
+		cubic: {
+			out: function(k) {
+				return --k * k * k + 1;
+			}
+		}
 		/*
-		 * Function: coalesce
-		 * Takes any number of arguments and returns the first non Null / Undefined argument.
-		 */
-		coalesce: function () {
-			var i, j;
-			for (i=0, j=arguments.length; i<j; i++) {
-				if (!this.isNothing(arguments[i])) {
-					return arguments[i];
+			elastic: {
+				out: function ( k ) {
+
+					var s, a = 0.1, p = 0.4;
+					if ( k === 0 ) return 0;
+					if ( k === 1 ) return 1;
+					if ( !a || a < 1 ) { a = 1; s = p / 4; }
+					else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
+					return ( a * Math.pow( 2, - 10 * k) * Math.sin( ( k - s ) * ( 2 * Math.PI ) / p ) + 1 );
+
+				},
+			},
+			back: {
+				out: function ( k ) {
+					var s = 1.70158;
+					return --k * k * ( ( s + 1 ) * k + s ) + 1;
 				}
 			}
-			return null;
-		},
+		*/
+	},
 
+	/**
+	 * 
+	 * @return {object}
+	 * 
+	 * {
+	 *  raf : request animation frame function
+	 *  caf : cancel animation frame function
+	 *  transfrom : transform property key (with vendor), or null if not supported
+	 *  oldIE : IE8 or below
+	 * }
+	 * 
+	 */
+	detectFeatures: function() {
+		if(framework.features) {
+			return framework.features;
+		}
+		var helperEl = framework.createEl(),
+			helperStyle = helperEl.style,
+			vendor = '',
+			features = {};
 
+		// IE8 and below
+		features.oldIE = document.all && !document.addEventListener;
 
-		/*
-		 * Function: extend
-		 */
-		extend: function(destination, source, overwriteProperties){
-			var prop;
-			if (this.isNothing(overwriteProperties)){
-				overwriteProperties = true;
-			}
-			if (destination && source && this.isObject(source)){
-				for(prop in source){
-					if (this.objectHasProperty(source, prop)) {
-						if (overwriteProperties){
-							destination[prop] = source[prop];
-						}
-						else{
-							if(typeof destination[prop] === "undefined"){
-								destination[prop] = source[prop];
-							}
-						}
+		features.touch = 'ontouchstart' in window;
+
+		if(window.requestAnimationFrame) {
+			features.raf = window.requestAnimationFrame;
+			features.caf = window.cancelAnimationFrame;
+		}
+
+		features.pointerEvent = navigator.pointerEnabled || navigator.msPointerEnabled;
+
+		// fix false-positive detection of old Android in new IE
+		// (IE11 ua string contains "Android 4.0")
+		
+		if(!features.pointerEvent) { 
+
+			var ua = navigator.userAgent;
+
+			// Detect if device is iPhone or iPod and if it's older than iOS 8
+			// http://stackoverflow.com/a/14223920
+			// 
+			// This detection is made because of buggy top/bottom toolbars
+			// that don't trigger window.resize event.
+			// For more info refer to _isFixedPosition variable in core.js
+
+			if (/iP(hone|od)/.test(navigator.platform)) {
+				var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+				if(v && v.length > 0) {
+					v = parseInt(v[1], 10);
+					if(v >= 1 && v < 8 ) {
+						features.isOldIOSPhone = true;
 					}
 				}
 			}
-		},
+
+			// Detect old Android (before KitKat)
+			// due to bugs related to position:fixed
+			// http://stackoverflow.com/questions/7184573/pick-up-the-android-version-in-the-browser-by-javascript
+			
+			var match = ua.match(/Android\s([0-9\.]*)/);
+			var androidversion =  match ? match[1] : 0;
+			androidversion = parseFloat(androidversion);
+			if(androidversion >= 1 ) {
+				if(androidversion < 4.4) {
+					features.isOldAndroid = true; // for fixed position bug & performance
+				}
+				features.androidVersion = androidversion; // for touchend bug
+			}	
+			features.isMobileOpera = /opera mini|opera mobi/i.test(ua);
+
+			// p.s. yes, yes, UA sniffing is bad, propose your solution for above bugs.
+		}
+		
+		var styleChecks = ['transform', 'perspective', 'animationName'],
+			vendors = ['', 'webkit','Moz','ms','O'],
+			styleCheckItem,
+			styleName;
+
+		for(var i = 0; i < 4; i++) {
+			vendor = vendors[i];
+
+			for(var a = 0; a < 3; a++) {
+				styleCheckItem = styleChecks[a];
+
+				// uppercase first letter of property name, if vendor is present
+				styleName = vendor + (vendor ? 
+										styleCheckItem.charAt(0).toUpperCase() + styleCheckItem.slice(1) : 
+										styleCheckItem);
+			
+				if(!features[styleCheckItem] && styleName in helperStyle ) {
+					features[styleCheckItem] = styleName;
+				}
+			}
+
+			if(vendor && !features.raf) {
+				vendor = vendor.toLowerCase();
+				features.raf = window[vendor+'RequestAnimationFrame'];
+				if(features.raf) {
+					features.caf = window[vendor+'CancelAnimationFrame'] || 
+									window[vendor+'CancelRequestAnimationFrame'];
+				}
+			}
+		}
+			
+		if(!features.raf) {
+			var lastTime = 0;
+			features.raf = function(fn) {
+				var currTime = new Date().getTime();
+				var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+				var id = window.setTimeout(function() { fn(currTime + timeToCall); }, timeToCall);
+				lastTime = currTime + timeToCall;
+				return id;
+			};
+			features.caf = function(id) { clearTimeout(id); };
+		}
+
+		// Detect SVG support
+		features.svg = !!document.createElementNS && 
+						!!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect;
+
+		framework.features = features;
+
+		return features;
+	}
+};
+
+framework.detectFeatures();
+
+// Override addEventListener for old versions of IE
+if(framework.features.oldIE) {
+
+	framework.bind = function(target, type, listener, unbind) {
+		
+		type = type.split(' ');
+
+		var methodName = (unbind ? 'detach' : 'attach') + 'Event',
+			evName,
+			_handleEv = function() {
+				listener.handleEvent.call(listener);
+			};
+
+		for(var i = 0; i < type.length; i++) {
+			evName = type[i];
+			if(evName) {
+
+				if(typeof listener === 'object' && listener.handleEvent) {
+					if(!unbind) {
+						listener['oldIE' + evName] = _handleEv;
+					} else {
+						if(!listener['oldIE' + evName]) {
+							return false;
+						}
+					}
+
+					target[methodName]( 'on' + evName, listener['oldIE' + evName]);
+				} else {
+					target[methodName]( 'on' + evName, listener);
+				}
+
+			}
+		}
+	};
+	
+}
+
+/*>>framework-bridge*/
+
+/*>>core*/
+//function(template, UiClass, items, options)
+
+var self = this;
+
+/**
+ * Static vars, don't change unless you know what you're doing.
+ */
+var DOUBLE_TAP_RADIUS = 25, 
+	NUM_HOLDERS = 3;
+
+/**
+ * Options
+ */
+var _options = {
+	allowPanToNext:true,
+	spacing: 0.12,
+	bgOpacity: 1,
+	mouseUsed: false,
+	loop: true,
+	pinchToClose: true,
+	closeOnScroll: true,
+	closeOnVerticalDrag: true,
+	hideAnimationDuration: 333,
+	showAnimationDuration: 333,
+	showHideOpacity: false,
+	focus: true,
+	escKey: true,
+	arrowKeys: true,
+	mainScrollEndFriction: 0.35,
+	panEndFriction: 0.35,
+	isClickableElement: function(el) {
+        return el.tagName === 'A';
+    },
+    getDoubleTapZoom: function(isMouseClick, item) {
+    	if(isMouseClick) {
+    		return 1;
+    	} else {
+    		return item.initialZoomLevel < 0.7 ? 1 : 1.5;
+    	}
+    },
+    maxSpreadZoom: 2,
+
+	// not fully implemented yet
+	scaleMode: 'fit', // TODO
+	modal: true, // TODO
+	alwaysFadeIn: false // TODO
+};
+framework.extend(_options, options);
 
 
+/**
+ * Private helper variables & functions
+ */
 
-		/*
-		 * Function: clone
-		 */
-		clone: function(obj) {
-			var retval = {};
-			this.extend(retval, obj);
-			return retval;
-		},
+var _getEmptyPoint = function() { 
+		return {x:0,y:0}; 
+	};
 
+var _isOpen,
+	_isDestroying,
+	_closedByScroll,
+	_currentItemIndex,
+	_containerStyle,
+	_containerShiftIndex,
+	_currPanDist = _getEmptyPoint(),
+	_startPanOffset = _getEmptyPoint(),
+	_panOffset = _getEmptyPoint(),
+	_upMoveEvents, // drag move, drag end & drag cancel events array
+	_downEvents, // drag start events array
+	_globalEventHandlers,
+	_viewportSize = {},
+	_currZoomLevel,
+	_startZoomLevel,
+	_translatePrefix,
+	_translateSufix,
+	_updateSizeInterval,
+	_itemsNeedUpdate,
+	_currPositionIndex = 0,
+	_offset,
+	_slideSize = _getEmptyPoint(), // size of slide area, including spacing
+	_itemHolders,
+	_prevItemIndex,
+	_indexDiff = 0, // difference of indexes since last content update
+	_dragStartEvent,
+	_dragMoveEvent,
+	_dragEndEvent,
+	_dragCancelEvent,
+	_transformKey,
+	_pointerEventEnabled,
+	_isFixedPosition = true,
+	_likelyTouchDevice,
+	_modules = [],
+	_requestAF,
+	_cancelAF,
+	_initalClassName,
+	_initalWindowScrollY,
+	_oldIE,
+	_currentWindowScrollY,
+	_features,
+	_windowVisibleSize = {},
 
+	// Registers PhotoSWipe module (History, Controller ...)
+	_registerModule = function(name, module) {
+		framework.extend(self, module.publicMethods);
+		_modules.push(name);
+	},
 
-		/*
-		 * Function: isObject
-		 */
-		isObject: function(obj){
-			return obj instanceof Object;
-		},
+	_getLoopedId = function(index) {
+		var numSlides = _getNumItems();
+		if(index > numSlides - 1) {
+			return index - numSlides;
+		} else  if(index < 0) {
+			return numSlides + index;
+		}
+		return index;
+	},
+	
+	// Micro bind/trigger
+	_listeners = {},
+	_listen = function(name, fn) {
+		if(!_listeners[name]) {
+			_listeners[name] = [];
+		}
+		return _listeners[name].push(fn);
+	},
+	_shout = function(name) {
+		var listeners = _listeners[name];
 
+		if(listeners) {
+			var args = Array.prototype.slice.call(arguments);
+			args.shift();
 
+			for(var i = 0; i < listeners.length; i++) {
+				listeners[i].apply(self, args);
+			}
+		}
+	},
 
-		/*
-		 * Function: isFunction
-		 */
-		isFunction: function(obj){
-			return ({}).toString.call(obj) === "[object Function]";
-		},
+	_getCurrentTime = function() {
+		return new Date().getTime();
+	},
+	_applyBgOpacity = function(opacity) {
+		_bgOpacity = opacity;
+		self.bg.style.opacity = opacity * _options.bgOpacity;
+	},
+	
+	_applyZoomTransform = function(styleObj,x,y,zoom) {
+		styleObj[_transformKey] = _translatePrefix + x + 'px, ' + y + 'px' + _translateSufix + ' scale(' + zoom + ')';
+	},
+	_applyCurrentZoomPan = function() {
+		if(_currZoomElementStyle) {
+			_applyZoomTransform(_currZoomElementStyle, _panOffset.x, _panOffset.y, _currZoomLevel);
+		}
+	},
+	_applyZoomPanToItem = function(item) {
+		if(item.container) {
+			_applyZoomTransform(item.container.style, 
+								item.initialPosition.x, 
+								item.initialPosition.y, 
+								item.initialZoomLevel);
+		}
+	},
+	_setTranslateX = function(x, elStyle) {
+		elStyle[_transformKey] = _translatePrefix + x + 'px, 0px' + _translateSufix;
+	},
+	_moveMainScroll = function(x, dragging) {
 
+		if(!_options.loop && dragging) {
+			// if of current item during scroll (float)
+			var newSlideIndexOffset = _currentItemIndex + (_slideSize.x * _currPositionIndex - x)/_slideSize.x; 
+			var delta = Math.round(x - _mainScrollPos.x);
 
+			if( (newSlideIndexOffset < 0 && delta > 0) || 
+				(newSlideIndexOffset >= _getNumItems()-1 && delta < 0) ) {
+				x = _mainScrollPos.x + delta * _options.mainScrollEndFriction;
+			} 
+		}
+		
+		_mainScrollPos.x = x;
+		_setTranslateX(x, _containerStyle);
+	},
+	_calculatePanOffset = function(axis, zoomLevel) {
+		var m = _midZoomPoint[axis] - _offset[axis];
+		return _startPanOffset[axis] + _currPanDist[axis] + m - m * ( zoomLevel / _startZoomLevel );
+	},
+	
+	_equalizePoints = function(p1, p2) {
+		p1.x = p2.x;
+		p1.y = p2.y;
+		if(p2.id) {
+			p1.id = p2.id;
+		}
+	},
+	_roundPoint = function(p) {
+		p.x = Math.round(p.x);
+		p.y = Math.round(p.y);
+	},
 
-		/*
-		 * Function: isArray
-		 */
-		isArray: function(obj){
-			return obj instanceof Array;
-		},
+	_mouseMoveTimeout = null,
+	_onFirstMouseMove = function() {
+		// Wait until mouse move event is fired at least twice during 100ms
+		// We do this, because some mobile browsers trigger it on touchstart
+		if(_mouseMoveTimeout ) { 
+			framework.unbind(document, 'mousemove', _onFirstMouseMove);
+			framework.addClass(template, 'pswp--has_mouse');
+			_options.mouseUsed = true;
+			_shout('mouseUsed');
+		}
+		_mouseMoveTimeout = setTimeout(function() {
+			_mouseMoveTimeout = null;
+		}, 100);
+	},
 
+	_bindEvents = function() {
+		framework.bind(document, 'keydown', self);
 
-		/*
-		 * Function: isLikeArray
-		 */
-		isLikeArray: function(obj) {
-			return typeof obj.length === 'number';
-		},
+		if(_features.transform) {
+			// don't bind click event in browsers that don't support transform (mostly IE8)
+			framework.bind(self.scrollWrap, 'click', self);
+		}
+		
 
+		if(!_options.mouseUsed) {
+			framework.bind(document, 'mousemove', _onFirstMouseMove);
+		}
 
+		framework.bind(window, 'resize scroll', self);
 
-		/*
-		 * Function: isNumber
-		 */
-		isNumber: function(obj){
-			return typeof obj === "number";
-		},
+		_shout('bindEvents');
+	},
 
+	_unbindEvents = function() {
+		framework.unbind(window, 'resize', self);
+		framework.unbind(window, 'scroll', _globalEventHandlers.scroll);
+		framework.unbind(document, 'keydown', self);
+		framework.unbind(document, 'mousemove', _onFirstMouseMove);
 
+		if(_features.transform) {
+			framework.unbind(self.scrollWrap, 'click', self);
+		}
 
-		/*
-		 * Function: isString
-		 */
-		isString: function(obj){
-			return typeof obj === "string";
-		},
+		if(_isDragging) {
+			framework.unbind(window, _upMoveEvents, self);
+		}
 
+		_shout('unbindEvents');
+	},
+	
+	_calculatePanBounds = function(zoomLevel, update) {
+		var bounds = _calculateItemSize( self.currItem, _viewportSize, zoomLevel );
+		if(update) {
+			_currPanBounds = bounds;
+		}
+		return bounds;
+	},
+	
+	_getMinZoomLevel = function(item) {
+		if(!item) {
+			item = self.currItem;
+		}
+		return item.initialZoomLevel;
+	},
+	_getMaxZoomLevel = function(item) {
+		if(!item) {
+			item = self.currItem;
+		}
+		return item.w > 0 ? _options.maxSpreadZoom : 1;
+	},
 
-		/*
-		 * Function: isNothing
-		 */
-		isNothing: function (obj) {
+	// Return true if offset is out of the bounds
+	_modifyDestPanOffset = function(axis, destPanBounds, destPanOffset, destZoomLevel) {
+		if(destZoomLevel === self.currItem.initialZoomLevel) {
+			destPanOffset[axis] = self.currItem.initialPosition[axis];
+			return true;
+		} else {
+			destPanOffset[axis] = _calculatePanOffset(axis, destZoomLevel); 
 
-			if (typeof obj === "undefined" || obj === null) {
+			if(destPanOffset[axis] > destPanBounds.min[axis]) {
+				destPanOffset[axis] = destPanBounds.min[axis];
+				return true;
+			} else if(destPanOffset[axis] < destPanBounds.max[axis] ) {
+				destPanOffset[axis] = destPanBounds.max[axis];
 				return true;
 			}
-			return false;
+		}
+		return false;
+	},
 
-		},
+	_setupTransforms = function() {
 
-
-
-		/*
-		 * Function: swapArrayElements
-		 */
-		swapArrayElements: function(arr, i, j){
-
-			var temp = arr[i];
-			arr[i] = arr[j];
-			arr[j] = temp;
-
-		},
-
-
-
-		/*
-		 * Function: trim
-		 */
-		trim: function(val) {
-			return val.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-		},
-
-
-
-		/*
-		 * Function: toCamelCase
-		 */
-		toCamelCase: function(val){
-			return val.replace(/(\-[a-z])/g, function($1){return $1.toUpperCase().replace('-','');});
-		},
-
-
-
-		/*
-		 * Function: toDashedCase
-		 */
-		toDashedCase: function(val){
-			return val.replace(/([A-Z])/g, function($1){return "-"+$1.toLowerCase();});
-		},
-
-
-
-		/*
-		 * Function: indexOf
-		 */
-		arrayIndexOf: function(obj, array, prop){
-
-			var i, j, retval, arrayItem;
-
-			retval = -1;
-
-			for (i=0, j=array.length; i<j; i++){
-
-				arrayItem = array[i];
-
-				if (!this.isNothing(prop)){
-					if (this.objectHasProperty(arrayItem, prop)) {
-						if (arrayItem[prop] === obj){
-							retval = i;
-							break;
-						}
-					}
-				}
-				else{
-					if (arrayItem === obj){
-						retval = i;
-						break;
-					}
-				}
-
-			}
-
-			return retval;
-
-		},
-
-
-
-		/*
-		 * Function: objectHasProperty
-		 */
-		objectHasProperty: function(obj, propName){
-
-			if (propName in obj) {
-				return propName in obj;
-			}
-			else{
-				return ('undefined' !== typeof obj[propName]);
-			}
-
+		if(_transformKey) {
+			// setup 3d transforms
+			var allow3dTransform = _features.perspective && !_likelyTouchDevice;
+			_translatePrefix = 'translate' + (allow3dTransform ? '3d(' : '(');
+			_translateSufix = _features.perspective ? ', 0px)' : ')';	
+			return;
 		}
 
-
-	};
-
-}(window));
-// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, Util) {
-
-	Util.Browser = {
-
-		ua: null,
-		version: null,
-		safari: null,
-		webkit: null,
-		opera: null,
-		msie: null,
-		chrome: null,
-		mozilla: null,
-
-		android: null,
-		blackberry: null,
-		iPad: null,
-		iPhone: null,
-		iPod: null,
-		iOS: null,
-
-		is3dSupported: null,
-		isCSSTransformSupported: null,
-		isTouchSupported: null,
-		isGestureSupported: null,
-
-
-		_detect: function(){
-
-			this.ua = window.navigator.userAgent;
-			this.version = (this.ua.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || []);
-			this.safari = (/Safari/gi).test(window.navigator.appVersion);
-			this.webkit = /webkit/i.test(this.ua);
-			this.opera = /opera/i.test(this.ua);
-			this.msie = /msie/i.test(this.ua) && !this.opera;
-			this.chrome = /Chrome/i.test(this.ua);
-			this.firefox = /Firefox/i.test(this.ua);
-			this.fennec = /Fennec/i.test(this.ua);
-			this.mozilla = /mozilla/i.test(this.ua) && !/(compatible|webkit)/.test(this.ua);
-			this.android = /android/i.test(this.ua);
-			this.blackberry = /blackberry/i.test(this.ua);
-			this.iOS = (/iphone|ipod|ipad/gi).test(window.navigator.platform);
-			this.iPad = (/ipad/gi).test(window.navigator.platform);
-			this.iPhone = (/iphone/gi).test(window.navigator.platform);
-			this.iPod = (/ipod/gi).test(window.navigator.platform);
-
-			var testEl = document.createElement('div');
-			this.is3dSupported = !Util.isNothing(testEl.style.WebkitPerspective);
-			this.isCSSTransformSupported = ( !Util.isNothing(testEl.style.WebkitTransform) || !Util.isNothing(testEl.style.MozTransform) || !Util.isNothing(testEl.style.OTransform) || !Util.isNothing(testEl.style.transformProperty) );
-			this.isTouchSupported = this.isEventSupported('touchstart');
-			this.isGestureSupported = this.isEventSupported('gesturestart');
-
-		},
-
-
-		_eventTagNames: {
-			'select':'input',
-			'change':'input',
-			'submit':'form',
-			'reset':'form',
-			'error':'img',
-			'load':'img',
-			'abort':'img'
-		},
-
-
-		/*
-		 * Function: isEventSupported
-		 * http://perfectionkills.com/detecting-event-support-without-browser-sniffing/
-		 */
-		isEventSupported: function(eventName) {
-			var
-				el = document.createElement(this._eventTagNames[eventName] || 'div'),
-				isSupported;
-			eventName = 'on' + eventName;
-			isSupported = Util.objectHasProperty(el, eventName);
-			if (!isSupported) {
-				el.setAttribute(eventName, 'return;');
-				isSupported = typeof el[eventName] === 'function';
-			}
-			el = null;
-			return isSupported;
-		},
-
-
-		isLandscape: function(){
-			return (Util.DOM.windowWidth() > Util.DOM.windowHeight());
-		}
-  };
-
-	Util.Browser._detect();
-
-}
-(
-	window,
-	window.Code.Util
-))
-;
-// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function (window, Util) {
-
-	Util.extend(Util, {
-
-		Events: {
-
-
-			/*
-			 * Function: add
-			 * Add an event handler
-			 */
-			add: function(obj, type, handler){
-
-				this._checkHandlersProperty(obj);
-
-				if (type === 'mousewheel'){
-					type = this._normaliseMouseWheelType();
-				}
-
-				if (typeof obj.__eventHandlers[type] === 'undefined'){
-					obj.__eventHandlers[type] = [];
-				}
-				obj.__eventHandlers[type].push(handler);
-
-				// DOM element
-				if (this._isBrowserObject(obj)){
-					obj.addEventListener(type, handler, false);
-				}
-
-			},
-
-
-
-			/*
-			 * Function: remove
-			 * Removes a handler or all handlers associated with a type
-			 */
-			remove: function(obj, type, handler){
-
-				this._checkHandlersProperty(obj);
-
-				if (type === 'mousewheel'){
-					type = this._normaliseMouseWheelType();
-				}
-
-				if (obj.__eventHandlers[type] instanceof Array){
-
-					var
-						i, j,
-						handlers = obj.__eventHandlers[type];
-
-					// Removing all handlers for a type
-					if (Util.isNothing(handler)){
-
-						if (this._isBrowserObject(obj)){
-							for (i=0, j=handlers.length; i<j; i++){
-								obj.removeEventListener(type, handlers[i], false);
-							}
-						}
-
-						obj.__eventHandlers[type] = [];
-						return;
-					}
-
-					// Removing a specific handler
-					for (i=0, j=handlers.length; i<j; i++){
-						if (handlers[i] === handler){
-							handlers.splice(i, 1);
-							break;
-						}
-					}
-
-					// DOM element
-					if (this._isBrowserObject(obj)){
-						obj.removeEventListener(type, handler, false);
-						return;
-					}
-
-				}
-
-			},
-
-
-			/*
-			 * Function: fire
-			 * Fire an event
-			 */
-			fire: function(obj, type){
-
-				var
-					i, j,
-					event,
-					listeners,
-					listener,
-					args = Array.prototype.slice.call(arguments).splice(2),
-					isNative;
-
-
-				if (type === 'mousewheel'){
-					type = this._normaliseMouseWheelType();
-				}
-
-
-				// DOM element
-				if (this._isBrowserObject(obj)){
-
-					if (typeof type !== "string"){
-						throw 'type must be a string for DOM elements';
-					}
-
-					isNative = this._NATIVE_EVENTS[type];
-					event = document.createEvent(isNative ? "HTMLEvents" : "UIEvents");
-					event[isNative ? 'initEvent' : 'initUIEvent'](type, true, true, window, 1);
-
-					// Fire an event on an element that has no extra arguments
-					if (args.length < 1){
-						obj.dispatchEvent(event);
-						return;
-					}
-
-				}
-
-				this._checkHandlersProperty(obj);
-
-				if (typeof type === "string"){
-					event = { type: type };
-				}
-				else{
-					event = type;
-				}
-				if (!event.target){
-					event.target = obj;
-				}
-
-				if (!event.type){
-					throw new Error("Event object missing 'type' property.");
-				}
-
-				if (obj.__eventHandlers[event.type] instanceof Array){
-					listeners = obj.__eventHandlers[event.type];
-					args.unshift(event);
-					for (i=0, j=listeners.length; i<j; i++){
-						listener = listeners[i];
-						if (!Util.isNothing(listener)){
-							listener.apply(obj, args);
-						}
-					}
-				}
-
-			},
-
-
-			/*
-			 * Function: getMousePosition
-			 */
-			getMousePosition: function(event){
-
-				var retval = {
-					x: 0,
-					y: 0
-				};
-
-				if (event.pageX) {
-					retval.x = event.pageX;
-				}
-				else if (event.clientX) {
-					retval.x = event.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft);
-				}
-
-				if (event.pageY) {
-					retval.y = event.pageY;
-				}
-				else if (event.clientY) {
-					retval.y = event.clientY + ( document.documentElement.scrollTop || document.body.scrollTop);
-				}
-
-				return retval;
-			},
-
-
-			/*
-			 * Function: getTouchEvent
-			 */
-			getTouchEvent: function(event){
-
-				return event;
-
-			},
-
-
-
-			/*
-			 * Function: getWheelDelta
-			 */
-			getWheelDelta: function(event){
-
-				var delta = 0;
-
-				if (!Util.isNothing(event.wheelDelta)){
-					delta = event.wheelDelta / 120;
-				}
-				else if (!Util.isNothing(event.detail)){
-					delta = -event.detail / 3;
-				}
-
-				return delta;
-
-			},
-
-
-			/*
-			 * Function: domReady
-			 */
-			domReady: function(handler){
-
-				document.addEventListener('DOMContentLoaded', handler, false);
-
-			},
-
-
-			_checkHandlersProperty: function(obj){
-
-				if (Util.isNothing(obj.__eventHandlers)){
-					Util.extend(obj, {
-						__eventHandlers: { }
-					});
-				}
-
-			},
-
-
-			_isBrowserObject: function(obj){
-				if (obj === window || obj === window.document){
-					return true;
-				}
-				return this._isElement(obj) || this._isNode(obj);
-			},
-
-
-			_isElement: function(obj){
-				return (
-					typeof window.HTMLElement === "object" ? obj instanceof window.HTMLElement : //DOM2
-					typeof obj === "object" && obj.nodeType === 1 && typeof obj.nodeName==="string"
-				);
-			},
-
-
-
-			_isNode: function(obj){
-				return (
-					typeof window.Node === "object" ? obj instanceof window.Node :
-					typeof obj === "object" && typeof obj.nodeType === "number" && typeof obj.nodeName==="string"
-				);
-			},
-
-
-
-			_normaliseMouseWheelType: function(){
-
-				if (Util.Browser.isEventSupported('mousewheel')){
-					return 'mousewheel';
-				}
-				return 'DOMMouseScroll';
-
-			},
-
-
-
-			_NATIVE_EVENTS: {
-				click: 1, dblclick: 1, mouseup: 1, mousedown: 1, contextmenu: 1, //mouse buttons
-				mousewheel: 1, DOMMouseScroll: 1, //mouse wheel
-				mouseover: 1, mouseout: 1, mousemove: 1, selectstart: 1, selectend: 1, //mouse movement
-				keydown: 1, keypress: 1, keyup: 1, //keyboard
-				orientationchange: 1, // mobile
-				touchstart: 1, touchmove: 1, touchend: 1, touchcancel: 1, // touch
-				gesturestart: 1, gesturechange: 1, gestureend: 1, // gesture
-				focus: 1, blur: 1, change: 1, reset: 1, select: 1, submit: 1, //form elements
-				load: 1, unload: 1, beforeunload: 1, resize: 1, move: 1, DOMContentLoaded: 1, readystatechange: 1, //window
-				error: 1, abort: 1, scroll: 1
-			}
-
-		}
-
-
-	});
-
-
-}
-(
-	window,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function (window, Util) {
-
-	Util.extend(Util, {
-
-		DOM: {
-
-
-
-			/*
-			 * Function: setData
-			 */
-			setData: function(el, key, value){
-
-				if (Util.isLikeArray(el)){
-					var i, len;
-					for (i=0, len=el.length; i<len; i++){
-						Util.DOM._setData(el[i], key, value);
-					}
-				}
-				else{
-					Util.DOM._setData(el, key, value);
-				}
-
-			},
-			_setData: function(el, key, value){
-
-				Util.DOM.setAttribute(el, 'data-' + key, value);
-
-			},
-
-
-
-			/*
-			 * Function: getData
-			 */
-			getData: function(el, key, defaultValue){
-
-				return Util.DOM.getAttribute(el, 'data-' + key, defaultValue);
-
-			},
-
-
-
-			/*
-			 * Function: removeData
-			 */
-			removeData: function(el, key){
-
-				if (Util.isLikeArray(el)){
-					var i, len;
-					for (i=0, len=el.length; i<len; i++){
-						Util.DOM._removeData(el[i], key);
-					}
-				}
-				else{
-					Util.DOM._removeData(el, key);
-				}
-
-			},
-			_removeData: function(el, key){
-
-				Util.DOM.removeAttribute(el, 'data-' + key);
-
-			},
-
-
-
-			/*
-			 * Function: isChildOf
-			 */
-			isChildOf: function(childEl, parentEl)
-			{
-				if (parentEl === childEl){
-					return false;
-				}
-				while (childEl && childEl !== parentEl)
-				{
-					childEl = childEl.parentNode;
-				}
-
-				return childEl === parentEl;
-			},
-
-
-
-			/*
-			 * Function: find
-			 */
-			find: function(selectors, contextEl){
-				if (Util.isNothing(contextEl)){
-					contextEl = window.document;
-				}
-				var
-					els = contextEl.querySelectorAll(selectors),
-					retval = [],
-					i, j;
-
-				for (i=0, j=els.length; i<j; i++){
-					retval.push(els[i]);
-				}
-				return retval;
-			},
-
-
-
-			/*
-			 * Function: createElement
-			 */
-			createElement: function(type, attributes, content){
-
-				var
-					attribute,
-					retval = document.createElement(type);
-
-				for(attribute in attributes) {
-					if(Util.objectHasProperty(attributes, attribute)){
-						retval.setAttribute(attribute, attributes[attribute]);
-					}
-				}
-
-				retval.innerHTML = content || '';
-
-				return retval;
-
-			},
-
-
-			/*
-			 * Function: appendChild
-			 */
-			appendChild: function(childEl, parentEl){
-
-				parentEl.appendChild(childEl);
-
-			},
-
-
-			/*
-			 * Function: insertBefore
-			 */
-			insertBefore: function(newEl, refEl, parentEl){
-
-				parentEl.insertBefore(newEl, refEl);
-
-			},
-
-
-			/*
-			 * Function: appendText
-			 */
-			appendText: function(text, parentEl){
-
-				Util.DOM.appendChild(document.createTextNode(text), parentEl);
-
-			},
-
-
-			/*
-			 * Function: appendToBody
-			 */
-			appendToBody: function(childEl){
-
-				this.appendChild(childEl, document.body);
-
-			},
-
-
-			/*
-			 * Function: removeChild
-			 */
-			removeChild: function(childEl, parentEl){
-
-				parentEl.removeChild(childEl);
-
-			},
-
-
-
-			/*
-			 * Function: removeChildren
-			 */
-			removeChildren: function(parentEl){
-
-				if (parentEl.hasChildNodes()){
-
-					while (parentEl.childNodes.length >= 1){
-						parentEl.removeChild(parentEl.childNodes[parentEl.childNodes.length -1]);
-					}
-
-				}
-
-			},
-
-
-
-			/*
-			 * Function: hasAttribute
-			 */
-			hasAttribute: function(el, attributeName){
-
-				return !Util.isNothing(el.getAttribute(attributeName));
-
-			},
-
-
-
-			/*
-			 * Function: getAttribute
-			 */
-			getAttribute: function(el, attributeName, defaultValue){
-
-				var retval = el.getAttribute(attributeName);
-				if (Util.isNothing(retval) && !Util.isNothing(defaultValue)){
-					retval = defaultValue;
-				}
-				return retval;
-
-			},
-
-
-
-			/*
-			 * Function: el, attributeName
-			 */
-			setAttribute: function(el, attributeName, value){
-
-				if (Util.isLikeArray(el)){
-					var i, len;
-					for (i=0, len=el.length; i<len; i++){
-						Util.DOM._setAttribute(el[i], attributeName, value);
-					}
-				}
-				else{
-					Util.DOM._setAttribute(el, attributeName, value);
-				}
-
-			},
-			_setAttribute: function(el, attributeName, value){
-
-				el.setAttribute(attributeName, value);
-
-			},
-
-
-
-			/*
-			 * Function: removeAttribute
-			 */
-			removeAttribute: function(el, attributeName){
-
-				if (Util.isLikeArray(el)){
-					var i, len;
-					for (i=0, len=el.length; i<len; i++){
-						Util.DOM._removeAttribute(el[i], attributeName);
-					}
-				}
-				else{
-					Util.DOM._removeAttribute(el, attributeName);
-				}
-
-			},
-			_removeAttribute: function(el, attributeName){
-
-				if (this.hasAttribute(el, attributeName)){
-
-					el.removeAttribute(attributeName);
-
-				}
-
-			},
-
-
-
-			/*
-			 * Function: addClass
-			 */
-			addClass: function(el, className){
-
-				if (Util.isLikeArray(el)){
-					var i, len;
-					for (i=0, len=el.length; i<len; i++){
-						Util.DOM._addClass(el[i], className);
-					}
-				}
-				else{
-					Util.DOM._addClass(el, className);
-				}
-
-			},
-			_addClass: function(el, className){
-				var
-					currentClassValue = Util.DOM.getAttribute(el, 'class', ''),
-					re = new RegExp('(?:^|\\s+)' + className + '(?:\\s+|$)');
-
-				if ( ! re.test(currentClassValue) ){
-					if (currentClassValue !== ''){
-						currentClassValue = currentClassValue + ' ';
-					}
-					currentClassValue = currentClassValue + className;
-					Util.DOM.setAttribute(el, 'class', currentClassValue);
-				}
-			},
-
-
-
-			/*
-			 * Function: removeClass
-			 */
-			removeClass: function(el, className){
-
-				if (Util.isLikeArray(el)){
-					var i, len;
-					for (i=0, len=el.length; i<len; i++){
-						Util.DOM._removeClass(el[i], className);
-					}
-				}
-				else{
-					Util.DOM._removeClass(el, className);
-				}
-
-			},
-			_removeClass: function(el, className){
-
-				var
-					currentClassValue = Util.DOM.getAttribute(el, 'class', ''),
-					classes = Util.trim(currentClassValue).split(' '),
-					newClassVal = '',
-					i, j;
-
-				for (i=0, j=classes.length; i<j; i++){
-					if (classes[i] !== className){
-						if (newClassVal !== ''){
-							newClassVal += ' ';
-						}
-						newClassVal += classes[i];
-					}
-				}
-
-				if (newClassVal === ''){
-					Util.DOM.removeAttribute(el, 'class');
-				}
-				else{
-					Util.DOM.setAttribute(el, 'class', newClassVal);
-				}
-
-			},
-
-
-
-			/*
-			 * Function: hasClass
-			 */
-			hasClass: function(el, className){
-
-				var re = new RegExp('(?:^|\\s+)' + className + '(?:\\s+|$)');
-        return re.test(Util.DOM.getAttribute(el, 'class', ''));
-
-			},
-
-
-
-			/*
-			 * Function: setStyle
-			 */
-			setStyle: function(el, style, value){
-
-				if (Util.isLikeArray(el)){
-					var i, len;
-					for (i=0, len=el.length; i<len; i++){
-						Util.DOM._setStyle(el[i], style, value);
-					}
-				}
-				else{
-					Util.DOM._setStyle(el, style, value);
-				}
-
-			},
-			_setStyle: function(el, style, value){
-
-				var prop, val;
-
-				if (Util.isObject(style)) {
-					for(prop in style) {
-						if(Util.objectHasProperty(style, prop)){
-
-							if (prop === 'width'){
-								Util.DOM.width(el, style[prop]);
-							}
-							else if (prop === 'height'){
-								Util.DOM.height(el, style[prop]);
-							}
-							else{
-								el.style[prop] = style[prop];
-							}
-
-						}
-					}
-				}
-				else {
-					el.style[style] = value;
-				}
-			},
-
-
-
-			/*
-			 * Function: getStyle
-			 */
-			getStyle: function(el, styleName){
-
-				var retval = window.getComputedStyle(el,'').getPropertyValue(styleName);
-				if (retval === ''){
-					retval = el.style[styleName];
-				}
-				return retval;
-
-			},
-
-
-
-			/*
-			 * Function: hide
-			 */
-			hide: function(el){
-
-				if (Util.isLikeArray(el)){
-					var i, len;
-					for (i=0, len=el.length; i<len; i++){
-						Util.DOM._hide(el[i]);
-					}
-				}
-				else{
-					Util.DOM._hide(el);
-				}
-
-			},
-			_hide: function(el){
-
-				// Store the current display value if we use show
-				Util.DOM.setData(el, 'ccl-disp', Util.DOM.getStyle(el, 'display'));
-				Util.DOM.setStyle(el, 'display', 'none');
-
-			},
-
-
-
-			/*
-			 * Function: show
-			 */
-			show: function(el){
-
-				if (Util.isLikeArray(el)){
-					var i, len;
-					for (i=0, len=el.length; i<len; i++){
-						Util.DOM._show(el[i]);
-					}
-				}
-				else{
-					Util.DOM._show(el);
-				}
-
-			},
-			_show: function(el){
-
-				if (Util.DOM.getStyle(el, 'display') === 'none'){
-					var oldDisplayValue = Util.DOM.getData(el, 'ccl-disp', 'block');
-					if (oldDisplayValue === 'none' || oldDisplayValue === ''){
-						oldDisplayValue = 'block';
-					}
-					Util.DOM.setStyle(el, 'display', oldDisplayValue);
-				}
-
-			},
-
-
-
-			/*
-			 * Function: width
-			 * Content width, excludes padding
-			 */
-			width: function(el, value){
-
-				if (!Util.isNothing(value)){
-					if (Util.isNumber(value)){
-						value = value + 'px';
-					}
-					el.style.width = value;
-				}
-
-				return this._getDimension(el, 'width');
-
-			},
-
-
-
-			/*
-			 * Function: outerWidth
-			 */
-			outerWidth: function(el){
-
-				var retval = Util.DOM.width(el);
-
-				retval += parseInt(Util.DOM.getStyle(el, 'padding-left'), 10) + parseInt(Util.DOM.getStyle(el, 'padding-right'), 10);
-				retval += parseInt(Util.DOM.getStyle(el, 'margin-left'), 10) + parseInt(Util.DOM.getStyle(el, 'margin-right'), 10);
-				retval += parseInt(Util.DOM.getStyle(el, 'border-left-width'), 10) + parseInt(Util.DOM.getStyle(el, 'border-right-width'), 10);
-				return retval;
-
-			},
-
-
-
-			/*
-			 * Function: height
-			 * Content height, excludes padding
-			 */
-			height: function(el, value){
-
-				if (!Util.isNothing(value)){
-					if (Util.isNumber(value)){
-						value = value + 'px';
-					}
-					el.style.height = value;
-				}
-
-				return this._getDimension(el, 'height');
-
-			},
-
-
-
-			/*
-			 * Function: _getDimension
-			 */
-			_getDimension: function(el, dimension){
-
-				var
-					retval = window.parseInt(window.getComputedStyle(el,'').getPropertyValue(dimension)),
-					styleBackup;
-
-				if (isNaN(retval)){
-
-					// If this is the case, chances are the element is not displayed and we can't get
-					// the width and height. This temporarily shows and hides to get the value
-					styleBackup = {
-						display: el.style.display,
-						left: el.style.left
-					};
-
-					el.style.display = 'block';
-					el.style.left = '-1000000px';
-
-					retval = window.parseInt(window.getComputedStyle(el,'').getPropertyValue(dimension));
-
-					el.style.display = styleBackup.display;
-					el.style.left = styleBackup.left;
-				}
-				return retval;
-
-			},
-
-
-
-			/*
-			 * Function: outerHeight
-			 */
-			outerHeight: function(el){
-
-				var retval = Util.DOM.height(el);
-
-				retval += parseInt(Util.DOM.getStyle(el, 'padding-top'), 10) + parseInt(Util.DOM.getStyle(el, 'padding-bottom'), 10);
-				retval += parseInt(Util.DOM.getStyle(el, 'margin-top'), 10) + parseInt(Util.DOM.getStyle(el, 'margin-bottom'), 10);
-				retval += parseInt(Util.DOM.getStyle(el, 'border-top-width'), 10) + parseInt(Util.DOM.getStyle(el, 'border-bottom-width'), 10);
-
-				return retval;
-
-			},
-
-
-
-			/*
-			 * Function: documentWidth
-			 */
-			documentWidth: function(){
-
-				return Util.DOM.width(document.documentElement);
-
-			},
-
-
-
-			/*
-			 * Function: documentHeight
-			 */
-			documentHeight: function(){
-
-				return Util.DOM.height(document.documentElement);
-
-			},
-
-
-
-			/*
-			 * Function: documentOuterWidth
-			 */
-			documentOuterWidth: function(){
-
-				return Util.DOM.width(document.documentElement);
-
-			},
-
-
-
-			/*
-			 * Function: documentOuterHeight
-			 */
-			documentOuterHeight: function(){
-
-				return Util.DOM.outerHeight(document.documentElement);
-
-			},
-
-
-
-			/*
-			 * Function: bodyWidth
-			 */
-			bodyWidth: function(){
-
-				return Util.DOM.width(document.body);
-
-			},
-
-
-
-			/*
-			 * Function: bodyHeight
-			 */
-			bodyHeight: function(){
-
-				return Util.DOM.height(document.body);
-
-			},
-
-
-
-			/*
-			 * Function: bodyOuterWidth
-			 */
-			bodyOuterWidth: function(){
-
-				return Util.DOM.outerWidth(document.body);
-
-			},
-
-
-
-			/*
-			 * Function: bodyOuterHeight
-			 */
-			bodyOuterHeight: function(){
-
-				return Util.DOM.outerHeight(document.body);
-
-			},
-
-
-
-			/*
-			 * Function: windowWidth
-			 */
-			windowWidth: function(){
-
-				return window.innerWidth;
-
-			},
-
-
-
-			/*
-			 * Function: windowHeight
-			 */
-			windowHeight: function(){
-
-				return window.innerHeight;
-
-			},
-
-
-
-			/*
-			 * Function: windowScrollLeft
-			 */
-			windowScrollLeft: function(){
-
-				return window.pageXOffset;
-
-			},
-
-
-
-			/*
-			 * Function: windowScrollTop
-			 */
-			windowScrollTop: function(){
-
-				return window.pageYOffset;
-
-			}
-
-		}
-
-
-	});
-
-
-}
-(
-	window,
-	window.Code.Util
-));
-// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function (window, Util) {
-
-	Util.extend(Util, {
-
-		Animation: {
-
-			_applyTransitionDelay: 50,
-
-			_transitionEndLabel: (window.document.documentElement.style.webkitTransition !== undefined) ? "webkitTransitionEnd" : (window.document.documentElement.style.OTransition !== undefined) ? "oTransitionEnd otransitionend" : "transitionend",
-
-			_transitionEndHandler: null,
-
-			_transitionPrefix: (window.document.documentElement.style.webkitTransition !== undefined) ? "webkitTransition" : (window.document.documentElement.style.MozTransition !== undefined) ? "MozTransition" : (window.document.documentElement.style.OTransition !== undefined) ? "OTransition" : "transition",
-
-			_transformLabel: (window.document.documentElement.style.webkitTransform !== undefined) ? "webkitTransform" : (window.document.documentElement.style.MozTransform !== undefined) ? "MozTransform" : (window.document.documentElement.style.OTransform !== undefined) ? "OTransform" : "transform",
-
-
-			/*
-			 * Function: _getTransitionEndHandler
-			 */
-			_getTransitionEndHandler: function(){
-
-				if (Util.isNothing(this._transitionEndHandler)){
-					this._transitionEndHandler = this._onTransitionEnd.bind(this);
-				}
-
-				return this._transitionEndHandler;
-
-			},
-
-
-
-			/*
-			 * Function: stop
-			 */
-			stop: function(el){
-
-				if (Util.Browser.isCSSTransformSupported){
-					var
-						property = el.style[this._transitionPrefix + 'Property'],
-						callbackLabel = (property !== '') ? 'ccl' + property + 'callback' : 'cclallcallback',
-						style = {};
-
-					Util.Events.remove(el, this._transitionEndLabel, this._getTransitionEndHandler());
-					if (Util.isNothing(el.callbackLabel)){
-						delete el.callbackLabel;
-					}
-
-					style[this._transitionPrefix + 'Property'] = '';
-					style[this._transitionPrefix + 'Duration'] = '';
-					style[this._transitionPrefix + 'TimingFunction'] = '';
-					style[this._transitionPrefix + 'Delay'] = '';
-					style[this._transformLabel] = '';
-
-					Util.DOM.setStyle(el, style);
-				}
-				else if (!Util.isNothing(window.jQuery)){
-
-					window.jQuery(el).stop(true, true);
-
-				}
-
-
-			},
-
-
-
-			/*
-			 * Function: fadeIn
-			 */
-			fadeIn: function(el, speed, callback, timingFunction, opacity){
-
-				opacity = Util.coalesce(opacity, 1);
-				if (opacity <= 0){
-					opacity = 1;
-				}
-
-				if (speed <= 0){
-					Util.DOM.setStyle(el, 'opacity', opacity);
-					if (!Util.isNothing(callback)){
-						callback(el);
-						return;
-					}
-				}
-
-				var currentOpacity = Util.DOM.getStyle(el, 'opacity');
-
-				if (currentOpacity >= 1){
-					Util.DOM.setStyle(el, 'opacity', 0);
-				}
-
-				if (Util.Browser.isCSSTransformSupported){
-					this._applyTransition(el, 'opacity', opacity, speed, callback, timingFunction);
-				}
-				else if (!Util.isNothing(window.jQuery)){
-					window.jQuery(el).fadeTo(speed, opacity, callback);
-				}
-
-			},
-
-
-
-			/*
-			 * Function: fadeTo
-			 */
-			fadeTo: function(el, opacity, speed, callback, timingFunction){
-				this.fadeIn(el, speed, callback, timingFunction, opacity);
-			},
-
-
-
-			/*
-			 * Function: fadeOut
-			 */
-			fadeOut: function(el, speed, callback, timingFunction){
-
-				if (speed <= 0){
-					Util.DOM.setStyle(el, 'opacity', 0);
-					if (!Util.isNothing(callback)){
-						callback(el);
-						return;
-					}
-				}
-
-				if (Util.Browser.isCSSTransformSupported){
-
-					this._applyTransition(el, 'opacity', 0, speed, callback, timingFunction);
-
-				}
-				else{
-
-					window.jQuery(el).fadeTo(speed, 0, callback);
-
-				}
-
-			},
-
-
-
-			/*
-			 * Function: slideBy
-			 */
-			slideBy: function(el, x, y, speed, callback, timingFunction){
-
-				var style = {};
-
-				x = Util.coalesce(x, 0);
-				y = Util.coalesce(y, 0);
-				timingFunction = Util.coalesce(timingFunction, 'ease-out');
-
-				style[this._transitionPrefix + 'Property'] = 'all';
-				style[this._transitionPrefix + 'Delay'] = '0';
-
-				if (speed === 0){
-					style[this._transitionPrefix + 'Duration'] = '';
-					style[this._transitionPrefix + 'TimingFunction'] = '';
-				}
-				else{
-					style[this._transitionPrefix + 'Duration'] = speed + 'ms';
-					style[this._transitionPrefix + 'TimingFunction'] = Util.coalesce(timingFunction, 'ease-out');
-
-					Util.Events.add(el, this._transitionEndLabel, this._getTransitionEndHandler());
-
-				}
-
-				style[this._transformLabel] = (Util.Browser.is3dSupported) ? 'translate3d(' + x + 'px, ' + y + 'px, 0px)' : 'translate(' + x + 'px, ' + y + 'px)';
-
-				if (!Util.isNothing(callback)){
-					el.cclallcallback = callback;
-				}
-
-				Util.DOM.setStyle(el, style);
-
-				if (speed === 0){
-					window.setTimeout(function(){
-						this._leaveTransforms(el);
-					}.bind(this), this._applyTransitionDelay);
-				}
-
-			},
-
-
-
-			/*
-			 * Function:
-			 */
-			resetTranslate: function(el){
-
-				var style = {};
-				style[this._transformLabel] = style[this._transformLabel] = (Util.Browser.is3dSupported) ? 'translate3d(0px, 0px, 0px)' : 'translate(0px, 0px)';
-				Util.DOM.setStyle(el, style);
-
-			},
-
-
-
-			/*
-			 * Function: _applyTransition
-			 */
-			_applyTransition: function(el, property, val, speed, callback, timingFunction){
-
-				var style = {};
-
-				timingFunction = Util.coalesce(timingFunction, 'ease-in');
-
-				style[this._transitionPrefix + 'Property'] = property;
-				style[this._transitionPrefix + 'Duration'] = speed + 'ms';
-				style[this._transitionPrefix + 'TimingFunction'] = timingFunction;
-				style[this._transitionPrefix + 'Delay'] = '0';
-
-				Util.Events.add(el, this._transitionEndLabel, this._getTransitionEndHandler());
-
-				Util.DOM.setStyle(el, style);
-
-				if (!Util.isNothing(callback)){
-					el['ccl' + property + 'callback'] = callback;
-				}
-
-				window.setTimeout(function(){
-					Util.DOM.setStyle(el, property, val);
-				}, this._applyTransitionDelay);
-
-			},
-
-
-
-			/*
-			 * Function: _onTransitionEnd
-			 */
-			_onTransitionEnd: function(e){
-
-				Util.Events.remove(e.currentTarget, this._transitionEndLabel, this._getTransitionEndHandler());
-				this._leaveTransforms(e.currentTarget);
-
-			},
-
-
-
-			/*
-			 * Function: _leaveTransforms
-			 */
-			_leaveTransforms: function(el){
-
-				var
-						property = el.style[this._transitionPrefix + 'Property'],
-						callbackLabel = (property !== '') ? 'ccl' + property + 'callback' : 'cclallcallback',
-						callback,
-						transform = Util.coalesce(el.style.webkitTransform, el.style.MozTransform, el.style.OTransform, el.style.transform),
-						transformMatch,
-						transformExploded,
-						domX = window.parseInt(Util.DOM.getStyle(el, 'left'), 0),
-						domY = window.parseInt(Util.DOM.getStyle(el, 'top'), 0),
-						transformedX,
-						transformedY,
-						style = {};
-
-				if (transform !== ''){
-					if (Util.Browser.is3dSupported){
-						transformMatch = transform.match( /translate3d\((.*?)\)/ );
-					}
-					else{
-						transformMatch = transform.match( /translate\((.*?)\)/ );
-					}
-					if (!Util.isNothing(transformMatch)){
-						transformExploded = transformMatch[1].split(', ');
-						transformedX = window.parseInt(transformExploded[0], 0);
-						transformedY = window.parseInt(transformExploded[1], 0);
-					}
-				}
-
-				style[this._transitionPrefix + 'Property'] = '';
-				style[this._transitionPrefix + 'Duration'] = '';
-				style[this._transitionPrefix + 'TimingFunction'] = '';
-				style[this._transitionPrefix + 'Delay'] = '';
-
-				Util.DOM.setStyle(el, style);
-
-				window.setTimeout(function(){
-
-					if(!Util.isNothing(transformExploded)){
-
-						style = {};
-						style[this._transformLabel] = '';
-						style.left = (domX + transformedX) + 'px';
-						style.top = (domY + transformedY) + 'px';
-
-						Util.DOM.setStyle(el, style);
-
-					}
-
-					if (!Util.isNothing(el[callbackLabel])){
-						callback = el[callbackLabel];
-						delete el[callbackLabel];
-						callback(el);
-					}
-
-				}.bind(this), this._applyTransitionDelay);
-
-			}
-
-
-		}
-
-
-	});
-
-
-}
-(
-	window,
-	window.Code.Util
-));
-// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.Util.TouchElement');
-
-
-	Util.TouchElement.EventTypes = {
-
-		onTouch: 'CodeUtilTouchElementOnTouch'
-
-	};
-
-
-	Util.TouchElement.ActionTypes = {
-
-		touchStart: 'touchStart',
-		touchMove: 'touchMove',
-		touchEnd: 'touchEnd',
-		touchMoveEnd: 'touchMoveEnd',
-		tap: 'tap',
-		doubleTap: 'doubleTap',
-		swipeLeft: 'swipeLeft',
-		swipeRight: 'swipeRight',
-		swipeUp: 'swipeUp',
-		swipeDown: 'swipeDown',
-		gestureStart: 'gestureStart',
-		gestureChange: 'gestureChange',
-		gestureEnd: 'gestureEnd'
-
-	};
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.Util.TouchElement');
-
-
-	Util.TouchElement.TouchElementClass = klass({
-
-		el: null,
-
-		captureSettings: null,
-
-		touchStartPoint: null,
-		touchEndPoint: null,
-		touchStartTime: null,
-		doubleTapTimeout: null,
-
-		touchStartHandler: null,
-		touchMoveHandler: null,
-		touchEndHandler: null,
-
-		mouseDownHandler: null,
-		mouseMoveHandler: null,
-		mouseUpHandler: null,
-		mouseOutHandler: null,
-
-		gestureStartHandler: null,
-		gestureChangeHandler: null,
-		gestureEndHandler: null,
-
-		swipeThreshold: null,
-		swipeTimeThreshold: null,
-		doubleTapSpeed: null,
-
-
-
-		/*
-		 * Function: dispose
-		 */
-		dispose: function(){
-
-			var prop;
-
-			this.removeEventHandlers();
-
-			for (prop in this) {
-				if (Util.objectHasProperty(this, prop)) {
-					this[prop] = null;
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: initialize
-		 */
-		initialize: function(el, captureSettings){
-
-			this.el = el;
-
-			this.captureSettings = {
-				swipe: false,
-				move: false,
-				gesture: false,
-				doubleTap: false,
-				preventDefaultTouchEvents: true,
-				allowVerticalScroll:false
-			};
-
-			Util.extend(this.captureSettings, captureSettings);
-
-			this.swipeThreshold = 50;
-			this.swipeTimeThreshold = 250;
-			this.doubleTapSpeed = 250;
-
-			this.touchStartPoint = { x: 0, y: 0 };
-			this.touchEndPoint = { x: 0, y: 0 };
-
-		},
-
-
-
-		/*
-		 * Function: addEventHandlers
-		 */
-		addEventHandlers: function(){
-
-			if (Util.isNothing(this.touchStartHandler)){
-				this.touchStartHandler = this.onTouchStart.bind(this);
-				this.touchMoveHandler = this.onTouchMove.bind(this);
-				this.touchEndHandler = this.onTouchEnd.bind(this);
-				this.mouseDownHandler = this.onMouseDown.bind(this);
-				this.mouseMoveHandler = this.onMouseMove.bind(this);
-				this.mouseUpHandler = this.onMouseUp.bind(this);
-				this.mouseOutHandler = this.onMouseOut.bind(this);
-				this.gestureStartHandler = this.onGestureStart.bind(this);
-				this.gestureChangeHandler = this.onGestureChange.bind(this);
-				this.gestureEndHandler = this.onGestureEnd.bind(this);
-			}
-
-			Util.Events.add(this.el, 'touchstart', this.touchStartHandler);
-			if (this.captureSettings.move){
-				Util.Events.add(this.el, 'touchmove', this.touchMoveHandler);
-			}
-			Util.Events.add(this.el, 'touchend', this.touchEndHandler);
-
-			Util.Events.add(this.el, 'mousedown', this.mouseDownHandler);
-
-			if (Util.Browser.isGestureSupported && this.captureSettings.gesture){
-				Util.Events.add(this.el, 'gesturestart', this.gestureStartHandler);
-				Util.Events.add(this.el, 'gesturechange', this.gestureChangeHandler);
-				Util.Events.add(this.el, 'gestureend', this.gestureEndHandler);
-			}
-
-		},
-
-
-
-		/*
-		 * Function: removeEventHandlers
-		 */
-		removeEventHandlers: function(){
-
-			Util.Events.remove(this.el, 'touchstart', this.touchStartHandler);
-			if (this.captureSettings.move){
-				Util.Events.remove(this.el, 'touchmove', this.touchMoveHandler);
-			}
-			Util.Events.remove(this.el, 'touchend', this.touchEndHandler);
-			Util.Events.remove(this.el, 'mousedown', this.mouseDownHandler);
-
-			if (Util.Browser.isGestureSupported && this.captureSettings.gesture){
-				Util.Events.remove(this.el, 'gesturestart', this.gestureStartHandler);
-				Util.Events.remove(this.el, 'gesturechange', this.gestureChangeHandler);
-				Util.Events.remove(this.el, 'gestureend', this.gestureEndHandler);
-			}
-
-		},
-
-
-
-		/*
-		 * Function: getTouchPoint
-		 */
-		getTouchPoint: function(touches){
-
-			return {
-				x: touches[0].pageX,
-				y: touches[0].pageY
-			};
-
-		},
-
-
-
-		/*
-		 * Function: fireTouchEvent
-		 */
-		fireTouchEvent: function(e){
-
-			var
-				action,
-				distX = 0,
-				distY = 0,
-				dist = 0,
-				self,
-				endTime,
-				diffTime;
-
-			distX = this.touchEndPoint.x - this.touchStartPoint.x;
-			distY = this.touchEndPoint.y - this.touchStartPoint.y;
-			dist = Math.sqrt( (distX * distX) + (distY * distY) );
-
-			if (this.captureSettings.swipe){
-				endTime = new Date();
-				diffTime = endTime - this.touchStartTime;
-
-				// See if there was a swipe gesture
-				if (diffTime <= this.swipeTimeThreshold){
-
-					if (window.Math.abs(distX) >= this.swipeThreshold){
-
-						Util.Events.fire(this, {
-							type: Util.TouchElement.EventTypes.onTouch,
-							target: this,
-							point: this.touchEndPoint,
-							action: (distX < 0) ? Util.TouchElement.ActionTypes.swipeLeft : Util.TouchElement.ActionTypes.swipeRight,
-							targetEl: e.target,
-							currentTargetEl: e.currentTarget
-						});
-						return;
-
-					}
-
-
-					if (window.Math.abs(distY) >= this.swipeThreshold){
-
-						Util.Events.fire(this, {
-							type: Util.TouchElement.EventTypes.onTouch,
-							target: this,
-							point: this.touchEndPoint,
-							action: (distY < 0) ? Util.TouchElement.ActionTypes.swipeUp : Util.TouchElement.ActionTypes.swipeDown,
-							targetEl: e.target,
-							currentTargetEl: e.currentTarget
-						});
-						return;
-
-					}
-
-				}
-			}
-
-
-			if (dist > 1){
-
-				Util.Events.fire(this, {
-					type: Util.TouchElement.EventTypes.onTouch,
-					target: this,
-					action: Util.TouchElement.ActionTypes.touchMoveEnd,
-					point: this.touchEndPoint,
-					targetEl: e.target,
-					currentTargetEl: e.currentTarget
-				});
-				return;
-			}
-
-
-			if (!this.captureSettings.doubleTap){
-
-				Util.Events.fire(this, {
-					type: Util.TouchElement.EventTypes.onTouch,
-					target: this,
-					point: this.touchEndPoint,
-					action: Util.TouchElement.ActionTypes.tap,
-					targetEl: e.target,
-					currentTargetEl: e.currentTarget
-				});
-				return;
-
-			}
-
-			if (Util.isNothing(this.doubleTapTimeout)){
-
-				this.doubleTapTimeout = window.setTimeout(function(){
-
-					this.doubleTapTimeout = null;
-
-					Util.Events.fire(this, {
-						type: Util.TouchElement.EventTypes.onTouch,
-						target: this,
-						point: this.touchEndPoint,
-						action: Util.TouchElement.ActionTypes.tap,
-						targetEl: e.target,
-						currentTargetEl: e.currentTarget
-					});
-
-				}.bind(this), this.doubleTapSpeed);
-
-				return;
-
-			}
-			else{
-
-				window.clearTimeout(this.doubleTapTimeout);
-				this.doubleTapTimeout = null;
-
-				Util.Events.fire(this, {
-					type: Util.TouchElement.EventTypes.onTouch,
-					target: this,
-					point: this.touchEndPoint,
-					action: Util.TouchElement.ActionTypes.doubleTap,
-					targetEl: e.target,
-					currentTargetEl: e.currentTarget
-				});
-
-			}
-
-		},
-
-
-
-		/*
-		 * Function: onTouchStart
-		 */
-		onTouchStart: function(e){
-
-			if (this.captureSettings.preventDefaultTouchEvents && !this.captureSettings.allowVerticalScroll){
-				e.preventDefault();
-			}
-
-			// No longer need mouse events
-			Util.Events.remove(this.el, 'mousedown', this.mouseDownHandler);
-
-			var
-				touchEvent = Util.Events.getTouchEvent(e),
-				touches = touchEvent.touches;
-
-			if (touches.length > 1 && this.captureSettings.gesture){
-				this.isGesture = true;
-				return;
-			}
-
-			this.touchStartTime = new Date();
-			this.isGesture = false;
-			this.touchStartPoint = this.getTouchPoint(touches);
-
-			Util.Events.fire(this, {
-				type: Util.TouchElement.EventTypes.onTouch,
-				target: this,
-				action: Util.TouchElement.ActionTypes.touchStart,
-				point: this.touchStartPoint,
-				targetEl: e.target,
-				currentTargetEl: e.currentTarget
-			});
-
-
-		},
-
-
-
-		/*
-		 * Function: onTouchMove
-		 */
-		onTouchMove: function(e){
-
-
-
-			if (this.isGesture && this.captureSettings.gesture){
-				return;
-			}
-
-			var
-				touchEvent = Util.Events.getTouchEvent(e),
-				touches = touchEvent.touches;
-
-			var point = this.getTouchPoint(touches);
-
-			if(this.captureSettings.allowVerticalScroll && Math.abs(this.touchStartPoint.x - point.x) < Math.abs(this.touchStartPoint.y - point.y)){
-				return;
-			}
-
-			if (this.captureSettings.preventDefaultTouchEvents){
-				e.preventDefault();
-			}
-
-			Util.Events.fire(this, {
-				type: Util.TouchElement.EventTypes.onTouch,
-				target: this,
-				action: Util.TouchElement.ActionTypes.touchMove,
-				point: point,
-				targetEl: e.target,
-				currentTargetEl: e.currentTarget
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onTouchEnd
-		 */
-		onTouchEnd: function(e){
-
-			if (this.isGesture && this.captureSettings.gesture){
-				return;
-			}
-
-			// http://backtothecode.blogspot.com/2009/10/javascript-touch-and-gesture-events.html
-			// iOS removed the current touch from e.touches on "touchend"
-			// Need to look into e.changedTouches
-
-			var
-				touchEvent = Util.Events.getTouchEvent(e),
-				touches = (!Util.isNothing(touchEvent.changedTouches)) ? touchEvent.changedTouches : touchEvent.touches;
-
-
-
-			this.touchEndPoint = this.getTouchPoint(touches);
-
-			if(this.captureSettings.allowVerticalScroll && Math.abs(this.touchStartPoint.x - this.touchEndPoint.x) < Math.abs(this.touchStartPoint.y - this.touchEndPoint.y)){
-				return;
-		   }
-
-			if (this.captureSettings.preventDefaultTouchEvents){
-				e.preventDefault();
-			}
-
-			Util.Events.fire(this, {
-				type: Util.TouchElement.EventTypes.onTouch,
-				target: this,
-				action: Util.TouchElement.ActionTypes.touchEnd,
-				point: this.touchEndPoint,
-				targetEl: e.target,
-				currentTargetEl: e.currentTarget
-			});
-
-			this.fireTouchEvent(e);
-
-		},
-
-
-
-		/*
-		 * Function: onMouseDown
-		 */
-		onMouseDown: function(e){
-
-			e.preventDefault();
-
-			// No longer need touch events
-			Util.Events.remove(this.el, 'touchstart', this.mouseDownHandler);
-			Util.Events.remove(this.el, 'touchmove', this.touchMoveHandler);
-			Util.Events.remove(this.el, 'touchend', this.touchEndHandler);
-
-			// Add move/up/out
-			if (this.captureSettings.move){
-				Util.Events.add(this.el, 'mousemove', this.mouseMoveHandler);
-			}
-			Util.Events.add(this.el, 'mouseup', this.mouseUpHandler);
-			Util.Events.add(this.el, 'mouseout', this.mouseOutHandler);
-
-			this.touchStartTime = new Date();
-			this.isGesture = false;
-			this.touchStartPoint = Util.Events.getMousePosition(e);
-
-			Util.Events.fire(this, {
-				type: Util.TouchElement.EventTypes.onTouch,
-				target: this,
-				action: Util.TouchElement.ActionTypes.touchStart,
-				point: this.touchStartPoint,
-				targetEl: e.target,
-				currentTargetEl: e.currentTarget
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onMouseMove
-		 */
-		onMouseMove: function(e){
-
-			e.preventDefault();
-
-			Util.Events.fire(this, {
-				type: Util.TouchElement.EventTypes.onTouch,
-				target: this,
-				action: Util.TouchElement.ActionTypes.touchMove,
-				point: Util.Events.getMousePosition(e),
-				targetEl: e.target,
-				currentTargetEl: e.currentTarget
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onMouseUp
-		 */
-		onMouseUp: function(e){
-
-			e.preventDefault();
-
-			if (this.captureSettings.move){
-				Util.Events.remove(this.el, 'mousemove', this.mouseMoveHandler);
-			}
-			Util.Events.remove(this.el, 'mouseup', this.mouseUpHandler);
-			Util.Events.remove(this.el, 'mouseout', this.mouseOutHandler);
-
-			this.touchEndPoint = Util.Events.getMousePosition(e);
-
-			Util.Events.fire(this, {
-				type: Util.TouchElement.EventTypes.onTouch,
-				target: this,
-				action: Util.TouchElement.ActionTypes.touchEnd,
-				point: this.touchEndPoint,
-				targetEl: e.target,
-				currentTargetEl: e.currentTarget
-			});
-
-			this.fireTouchEvent(e);
-
-		},
-
-
-
-		/*
-		 * Function: onMouseOut
-		 */
-		onMouseOut: function(e){
-
-			/*
-			 * http://blog.stchur.com/2007/03/15/mouseenter-and-mouseleave-events-for-firefox-and-other-non-ie-browsers/
-			 */
-			var relTarget = e.relatedTarget;
-			if (this.el === relTarget || Util.DOM.isChildOf(relTarget, this.el)){
-				return;
-			}
-
-			e.preventDefault();
-
-			if (this.captureSettings.move){
-				Util.Events.remove(this.el, 'mousemove', this.mouseMoveHandler);
-			}
-			Util.Events.remove(this.el, 'mouseup', this.mouseUpHandler);
-			Util.Events.remove(this.el, 'mouseout', this.mouseOutHandler);
-
-			this.touchEndPoint = Util.Events.getMousePosition(e);
-
-			Util.Events.fire(this, {
-				type: Util.TouchElement.EventTypes.onTouch,
-				target: this,
-				action: Util.TouchElement.ActionTypes.touchEnd,
-				point: this.touchEndPoint,
-				targetEl: e.target,
-				currentTargetEl: e.currentTarget
-			});
-
-			this.fireTouchEvent(e);
-
-		},
-
-
-
-		/*
-		 * Function: onGestureStart
-		 */
-		onGestureStart: function(e){
-
-			e.preventDefault();
-
-			var touchEvent = Util.Events.getTouchEvent(e);
-
-			Util.Events.fire(this, {
-				type: Util.TouchElement.EventTypes.onTouch,
-				target: this,
-				action: Util.TouchElement.ActionTypes.gestureStart,
-				scale: touchEvent.scale,
-				rotation: touchEvent.rotation,
-				targetEl: e.target,
-				currentTargetEl: e.currentTarget
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onGestureChange
-		 */
-		onGestureChange: function(e){
-
-			e.preventDefault();
-
-			var touchEvent = Util.Events.getTouchEvent(e);
-
-			Util.Events.fire(this, {
-				type: Util.TouchElement.EventTypes.onTouch,
-				target: this,
-				action: Util.TouchElement.ActionTypes.gestureChange,
-				scale: touchEvent.scale,
-				rotation: touchEvent.rotation,
-				targetEl: e.target,
-				currentTargetEl: e.currentTarget
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onGestureEnd
-		 */
-		onGestureEnd: function(e){
-
-			e.preventDefault();
-
-			var touchEvent = Util.Events.getTouchEvent(e);
-
-			Util.Events.fire(this, {
-				type: Util.TouchElement.EventTypes.onTouch,
-				target: this,
-				action: Util.TouchElement.ActionTypes.gestureEnd,
-				scale: touchEvent.scale,
-				rotation: touchEvent.rotation,
-				targetEl: e.target,
-				currentTargetEl: e.currentTarget
-			});
-
-		}
-
-
-
-	});
-
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.Image');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-
-	PhotoSwipe.Image.EventTypes = {
-
-		onLoad: 'onLoad',
-		onError: 'onError'
-
-	};
-
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.Image');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-
-	PhotoSwipe.Image.ImageClass = klass({
-
-
-
-		refObj: null,
-		imageEl: null,
-		src: null,
-		caption: null,
-		metaData: null,
-		imageLoadHandler: null,
-		imageErrorHandler: null,
-
-
-
-		/*
-		 * Function: dispose
-		 */
-		dispose: function(){
-
-			var prop, i;
-
-			this.shrinkImage();
-
-			if (!Util.isNothing(this.imageEl)){
-				this.imageEl.onload = null;
-			}
-
-			for (prop in this) {
-				if (Util.objectHasProperty(this, prop)) {
-					this[prop] = null;
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: initialize
-		 */
-		initialize: function(refObj, src, caption, metaData){
-
-			this.refObj = refObj;
-			// This is needed. Webkit resolves the src
-			// value which means we can't compare against it in the load function
-			this.originalSrc = src;
-			this.src = src;
-			this.caption = caption;
-			this.metaData = metaData;
-
-			this.imageEl = new window.Image();
-
-			this.imageLoadHandler = this.onImageLoad.bind(this);
-			this.imageErrorHandler = this.onImageError.bind(this);
-
-		},
-
-
-
-		/*
-		 * Function: load
-		 */
-		load: function(){
-
-			this.imageEl.originalSrc = Util.coalesce(this.imageEl.originalSrc, '');
-
-			if (this.imageEl.originalSrc === this.src){
-
-				if (this.imageEl.isError){
-					Util.Events.fire(this, {
-						type: PhotoSwipe.Image.EventTypes.onError,
-						target: this
-					});
-				}
-				else{
-					Util.Events.fire(this, {
-						type: PhotoSwipe.Image.EventTypes.onLoad,
-						target: this
-					});
-				}
-				return;
-			}
-
-			this.imageEl.isError = false;
-			this.imageEl.isLoading = true;
-			this.imageEl.naturalWidth = null;
-			this.imageEl.naturalHeight = null;
-			this.imageEl.isLandscape = false;
-			this.imageEl.onload = this.imageLoadHandler;
-			this.imageEl.onerror = this.imageErrorHandler;
-			this.imageEl.onabort = this.imageErrorHandler;
-			this.imageEl.originalSrc = this.src;
-			this.imageEl.src = this.src;
-
-		},
-
-
-
-		/*
-		 * Function: shrinkImage
-		 */
-		shrinkImage: function(){
-
-			if (Util.isNothing(this.imageEl)){
-				return;
-			}
-
-			if (this.imageEl.src.indexOf(this.src) > -1){
-				this.imageEl.src = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
-				if (!Util.isNothing(this.imageEl.parentNode)){
-					Util.DOM.removeChild(this.imageEl, this.imageEl.parentNode);
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: onImageLoad
-		 */
-		onImageLoad: function(e){
-
-			this.imageEl.onload = null;
-			this.imageEl.naturalWidth = Util.coalesce(this.imageEl.naturalWidth, this.imageEl.width);
-			this.imageEl.naturalHeight = Util.coalesce(this.imageEl.naturalHeight, this.imageEl.height);
-			this.imageEl.isLandscape = (this.imageEl.naturalWidth > this.imageEl.naturalHeight);
-			this.imageEl.isLoading = false;
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.Image.EventTypes.onLoad,
-				target: this
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onImageError
-		 */
-		onImageError: function(e){
-
-			this.imageEl.onload = null;
-			this.imageEl.onerror = null;
-			this.imageEl.onabort = null;
-			this.imageEl.isLoading = false;
-			this.imageEl.isError = true;
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.Image.EventTypes.onError,
-				target: this
-			});
-
-		}
-
-
-
-	});
-
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.Cache');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-
-	PhotoSwipe.Cache.Mode = {
-
-		normal: 'normal',
-		aggressive: 'aggressive'
-
-	};
-
-
-
-	PhotoSwipe.Cache.Functions = {
-
-		/*
-		 * Function: getImageSource
-		 * Default method for returning an image's source
-		 */
-		getImageSource: function(el){
-			return el.href;
-		},
-
-
-
-		/*
-		 * Function: getImageCaption
-		 * Default method for returning an image's caption
-		 * Assumes the el is an anchor and the first child is the
-		 * image. The returned value is the "alt" attribute of the
-		 * image.
-		 */
-		getImageCaption: function(el){
-
-			if (el.nodeName === "IMG"){
-				return Util.DOM.getAttribute(el, 'alt');
-			}
-			var i, j, childEl;
-			for (i=0, j=el.childNodes.length; i<j; i++){
-				childEl = el.childNodes[i];
-				if (el.childNodes[i].nodeName === 'IMG'){
-					return Util.DOM.getAttribute(childEl, 'alt');
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: getImageMetaData
-		 * Can be used if you wish to store additional meta
-		 * data against the full size image
-		 */
-		getImageMetaData: function(el){
-
-			return  {};
-
-		}
-
-	};
-
-
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.Cache');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-
-	PhotoSwipe.Cache.CacheClass = klass({
-
-
-
-		images: null,
-		settings: null,
-
-
-
-		/*
-		 * Function: dispose
-		 */
-		dispose: function(){
-
-			var prop, i, j;
-
-			if (!Util.isNothing(this.images)){
-				for (i=0, j=this.images.length; i<j; i++){
-					this.images[i].dispose();
-				}
-				this.images.length = 0;
-			}
-
-			for (prop in this) {
-				if (Util.objectHasProperty(this, prop)) {
-					this[prop] = null;
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: initialize
-		 */
-		initialize: function(images, options){
-
-			var i, j, cacheImage, image, src, caption, metaData;
-
-			this.settings = options;
-
-			this.images = [];
-
-			for (i=0, j=images.length; i<j; i++){
-
-				image = images[i];
-				src = this.settings.getImageSource(image);
-				caption = this.settings.getImageCaption(image);
-				metaData = this.settings.getImageMetaData(image);
-
-				this.images.push(new PhotoSwipe.Image.ImageClass(image, src, caption, metaData));
-
-			}
-
-
-		},
-
-
-
-		/*
-		 * Function: getImages
-		 */
-		getImages: function(indexes){
-
-			var i, j, retval = [], cacheImage;
-
-			for (i=0, j=indexes.length; i<j; i++){
-				cacheImage = this.images[indexes[i]];
-				if (this.settings.cacheMode === PhotoSwipe.Cache.Mode.aggressive){
-					cacheImage.cacheDoNotShrink = true;
-				}
-				retval.push(cacheImage);
-			}
-
-			if (this.settings.cacheMode === PhotoSwipe.Cache.Mode.aggressive){
-				for (i=0, j=this.images.length; i<j; i++){
-					cacheImage = this.images[i];
-					if (!Util.objectHasProperty(cacheImage, 'cacheDoNotShrink')){
-						cacheImage.shrinkImage();
-					}
-					else{
-						delete cacheImage.cacheDoNotShrink;
-					}
-				}
-			}
-
-			return retval;
-
-		}
-
-
-	});
-
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util,
-	window.Code.PhotoSwipe.Image
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.DocumentOverlay');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-
-	PhotoSwipe.DocumentOverlay.CssClasses = {
-		documentOverlay: 'ps-document-overlay'
-	};
-
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.DocumentOverlay');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-
-	PhotoSwipe.DocumentOverlay.DocumentOverlayClass = klass({
-
-
-
-		el: null,
-		settings: null,
-		initialBodyHeight: null,
-
-
-
-		/*
-		 * Function: dispose
-		 */
-		dispose: function(){
-
-			var prop;
-
-			Util.Animation.stop(this.el);
-			Util.DOM.removeChild(this.el, this.el.parentNode);
-
-			for (prop in this) {
-				if (Util.objectHasProperty(this, prop)) {
-					this[prop] = null;
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: initialize
-		 */
-		initialize: function(options){
-
-			this.settings = options;
-
-			this.el = Util.DOM.createElement(
-				'div',
-				{
-					'class': PhotoSwipe.DocumentOverlay.CssClasses.documentOverlay
-				},
-				''
-			);
-			Util.DOM.setStyle(this.el, {
-				display: 'block',
-				position: 'absolute',
-				left: 0,
-				top: 0,
-				zIndex: this.settings.zIndex
-			});
-
-			Util.DOM.hide(this.el);
-			if (this.settings.target === window){
-				Util.DOM.appendToBody(this.el);
-			}
-			else{
-				Util.DOM.appendChild(this.el, this.settings.target);
-			}
-
-			Util.Animation.resetTranslate(this.el);
-
-			// Store this value incase the body dimensions change to zero!
-			// I've seen it happen! :D
-			this.initialBodyHeight = Util.DOM.bodyOuterHeight();
-
-
-		},
-
-
-
-		/*
-		 * Function: resetPosition
-		 */
-		resetPosition: function(){
-
-			var width, height, top;
-
-			if (this.settings.target === window){
-
-				width = Util.DOM.windowWidth();
-				height = Util.DOM.bodyOuterHeight() * 2; // This covers extra height added by photoswipe
-				top = (this.settings.jQueryMobile) ? Util.DOM.windowScrollTop() + 'px' : '0px';
-
-				if (height < 1){
-					height = this.initialBodyHeight;
-				}
-
-				if (Util.DOM.windowHeight() > height){
-					height = Util.DOM.windowHeight();
-				}
-
-			}
-			else{
-
-				width = Util.DOM.width(this.settings.target);
-				height = Util.DOM.height(this.settings.target);
-				top = '0px';
-
-			}
-
-			Util.DOM.setStyle(this.el, {
-				width: width,
-				height: height,
-				top: top
-			});
-
-		},
-
-
-
-		/*
-		 * Function: fadeIn
-		 */
-		fadeIn: function(speed, callback){
-
-			this.resetPosition();
-
-			Util.DOM.setStyle(this.el, 'opacity', 0);
-			Util.DOM.show(this.el);
-
-			Util.Animation.fadeIn(this.el, speed, callback);
-
-		}
-
-
-	});
-
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.Carousel');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-
-	PhotoSwipe.Carousel.EventTypes = {
-
-		onSlideByEnd: 'PhotoSwipeCarouselOnSlideByEnd',
-		onSlideshowStart: 'PhotoSwipeCarouselOnSlideshowStart',
-		onSlideshowStop: 'PhotoSwipeCarouselOnSlideshowStop'
-
-	};
-
-
-
-	PhotoSwipe.Carousel.CssClasses = {
-		carousel: 'ps-carousel',
-		content: 'ps-carousel-content',
-		item: 'ps-carousel-item',
-		itemLoading: 'ps-carousel-item-loading',
-		itemError: 'ps-carousel-item-error'
-	};
-
-
-
-	PhotoSwipe.Carousel.SlideByAction = {
-		previous: 'previous',
-		current: 'current',
-		next: 'next'
-	};
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.Carousel');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-	PhotoSwipe.Carousel.CarouselClass = klass({
-
-
-
-		el: null,
-		contentEl: null,
-		settings: null,
-		cache: null,
-		slideByEndHandler: null,
-		currentCacheIndex: null,
-		isSliding: null,
-		isSlideshowActive: null,
-		lastSlideByAction: null,
-		touchStartPoint: null,
-		touchStartPosition: null,
-		imageLoadHandler: null,
-		imageErrorHandler: null,
-		slideshowTimeout: null,
-
-
-
-		/*
-		 * Function: dispose
-		 */
-		dispose: function(){
-
-			var prop, i, j;
-
-			for (i=0, j=this.cache.images.length; i<j; i++){
-				Util.Events.remove(this.cache.images[i], PhotoSwipe.Image.EventTypes.onLoad, this.imageLoadHandler);
-				Util.Events.remove(this.cache.images[i], PhotoSwipe.Image.EventTypes.onError, this.imageErrorHandler);
-			}
-
-			this.stopSlideshow();
-			Util.Animation.stop(this.el);
-			Util.DOM.removeChild(this.el, this.el.parentNode);
-
-			for (prop in this) {
-				if (Util.objectHasProperty(this, prop)) {
-					this[prop] = null;
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: initialize
-		 */
-		initialize: function(cache, options){
-
-			//this.supr(true);
-
-			var i, totalItems, itemEl;
-
-			this.cache = cache;
-			this.settings = options;
-			this.slideByEndHandler = this.onSlideByEnd.bind(this);
-			this.imageLoadHandler = this.onImageLoad.bind(this);
-			this.imageErrorHandler = this.onImageError.bind(this);
-			this.currentCacheIndex = 0;
-			this.isSliding = false;
-			this.isSlideshowActive = false;
-
-			// No looping if < 3 images
-			if (this.cache.images.length < 3){
-				this.settings.loop = false;
-			}
-
-			// Main container
-			this.el = Util.DOM.createElement(
-				'div',
-				{
-					'class': PhotoSwipe.Carousel.CssClasses.carousel
-				},
-				''
-			);
-			Util.DOM.setStyle(this.el, {
-				display: 'block',
-				position: 'absolute',
-				left: 0,
-				top: 0,
-				overflow: 'hidden',
-				zIndex: this.settings.zIndex
-			});
-			Util.DOM.hide(this.el);
-
-
-			// Content
-			this.contentEl = Util.DOM.createElement(
-				'div',
-				{
-					'class': PhotoSwipe.Carousel.CssClasses.content
-				},
-				''
-			);
-			Util.DOM.setStyle(this.contentEl, {
-				display: 'block',
-				position: 'absolute',
-				left: 0,
-				top: 0
-			});
-
-			Util.DOM.appendChild(this.contentEl, this.el);
-
-
-			// Items
-			totalItems = (cache.images.length < 3) ? cache.images.length : 3;
-
-			for (i=0; i<totalItems; i++){
-
-				itemEl = Util.DOM.createElement(
-					'div',
-					{
-						'class': PhotoSwipe.Carousel.CssClasses.item +
-						' ' + PhotoSwipe.Carousel.CssClasses.item + '-'+ i
-					},
-					''
-				);
-				Util.DOM.setAttribute(itemEl, 'style', 'float: left;');
-				Util.DOM.setStyle(itemEl, {
-					display: 'block',
-					position: 'relative',
-					left: 0,
-					top: 0,
-					overflow: 'hidden'
-				});
-
-				if (this.settings.margin > 0){
-					Util.DOM.setStyle(itemEl, {
-						marginRight: this.settings.margin + 'px'
-					});
-				}
-
-				Util.DOM.appendChild(itemEl, this.contentEl);
-
-			}
-
-
-			if (this.settings.target === window){
-				Util.DOM.appendToBody(this.el);
-			}
-			else{
-				Util.DOM.appendChild(this.el, this.settings.target);
-			}
-
-		},
-
-
-
-
-		/*
-		 * Function: resetPosition
-		 */
-		resetPosition: function(){
-
-			var width, height, top, itemWidth, itemEls, contentWidth, i, j, itemEl, imageEl;
-
-			if (this.settings.target === window){
-				width = Util.DOM.windowWidth();
-				height = Util.DOM.windowHeight();
-				top = Util.DOM.windowScrollTop()  + 'px';
-			}
-			else{
-				width = Util.DOM.width(this.settings.target);
-				height = Util.DOM.height(this.settings.target);
-				top = '0px';
-			}
-
-			itemWidth = (this.settings.margin > 0) ? width + this.settings.margin : width;
-			itemEls = Util.DOM.find('.' + PhotoSwipe.Carousel.CssClasses.item, this.contentEl);
-			contentWidth = itemWidth * itemEls.length;
-
-
-			// Set the height and width to fill the document
-			Util.DOM.setStyle(this.el, {
-				top: top,
-				width: width,
-				height: height
-			});
-
-
-			// Set the height and width of the content el
-			Util.DOM.setStyle(this.contentEl, {
-				width: contentWidth,
-				height: height
-			});
-
-
-			// Set the height and width of item elements
-			for (i=0, j=itemEls.length; i<j; i++){
-
-				itemEl = itemEls[i];
-				Util.DOM.setStyle(itemEl, {
-					width: width,
-					height: height
-				});
-
-				// If an item has an image then resize that
-				imageEl = Util.DOM.find('img', itemEl)[0];
-				if (!Util.isNothing(imageEl)){
-					this.resetImagePosition(imageEl);
-				}
-
-			}
-
-			this.setContentLeftPosition();
-
-
-		},
-
-
-
-		/*
-		 * Function: resetImagePosition
-		 */
-		resetImagePosition: function(imageEl){
-
-			if (Util.isNothing(imageEl)){
-				return;
-			}
-
-			var
-				src = Util.DOM.getAttribute(imageEl, 'src'),
-				scale,
-				newWidth,
-				newHeight,
-				newTop,
-				newLeft,
-				maxWidth = Util.DOM.width(this.el),
-				maxHeight = Util.DOM.height(this.el);
-
-			if (this.settings.imageScaleMethod === 'fitNoUpscale'){
-
-				newWidth = imageEl.naturalWidth;
-				newHeight =imageEl.naturalHeight;
-
-				if (newWidth > maxWidth){
-					scale = maxWidth / newWidth;
-					newWidth = Math.round(newWidth * scale);
-					newHeight = Math.round(newHeight * scale);
-				}
-
-				if (newHeight > maxHeight){
-					scale = maxHeight / newHeight;
-					newHeight = Math.round(newHeight * scale);
-					newWidth = Math.round(newWidth * scale);
-				}
-
-			}
-			else{
-
-				if (imageEl.isLandscape) {
-					// Ensure the width fits the screen
-					scale = maxWidth / imageEl.naturalWidth;
-				}
-				else {
-					// Ensure the height fits the screen
-					scale = maxHeight / imageEl.naturalHeight;
-				}
-
-				newWidth = Math.round(imageEl.naturalWidth * scale);
-				newHeight = Math.round(imageEl.naturalHeight * scale);
-
-				if (this.settings.imageScaleMethod === 'zoom'){
-
-					scale = 1;
-					if (newHeight < maxHeight){
-						scale = maxHeight /newHeight;
-					}
-					else if (newWidth < maxWidth){
-						scale = maxWidth /newWidth;
-					}
-
-					if (scale !== 1) {
-						newWidth = Math.round(newWidth * scale);
-						newHeight = Math.round(newHeight * scale);
-					}
-
-				}
-				else if (this.settings.imageScaleMethod === 'fit') {
-					// Rescale again to ensure full image fits into the viewport
-					scale = 1;
-					if (newWidth > maxWidth) {
-						scale = maxWidth / newWidth;
-					}
-					else if (newHeight > maxHeight) {
-						scale = maxHeight / newHeight;
-					}
-					if (scale !== 1) {
-						newWidth = Math.round(newWidth * scale);
-						newHeight = Math.round(newHeight * scale);
-					}
-				}
-
-			}
-
-			newTop = Math.round( ((maxHeight - newHeight) / 2) ) + 'px';
-			newLeft = Math.round( ((maxWidth - newWidth) / 2) ) + 'px';
-
-			Util.DOM.setStyle(imageEl, {
-				position: 'absolute',
-				width: newWidth,
-				height: newHeight,
-				top: newTop,
-				left: newLeft,
-				display: 'block'
-			});
-
-		},
-
-
-
-		/*
-		 * Function: setContentLeftPosition
-		 */
-		setContentLeftPosition: function(){
-
-			var width, itemEls, left;
-			if (this.settings.target === window){
-				width = Util.DOM.windowWidth();
-			}
-			else{
-				width = Util.DOM.width(this.settings.target);
-			}
-
-			itemEls = this.getItemEls();
-			left = 0;
-
-			if (this.settings.loop){
-				left = (width + this.settings.margin) * -1;
-			}
-			else{
-
-				if (this.currentCacheIndex === this.cache.images.length-1){
-					left = ((itemEls.length-1) * (width + this.settings.margin)) * -1;
-				}
-				else if (this.currentCacheIndex > 0){
-					left = (width + this.settings.margin) * -1;
-				}
-
-			}
-
-			Util.DOM.setStyle(this.contentEl, {
-				left: left + 'px'
-			});
-
-		},
-
-
-
-		/*
-		 * Function:
-		 */
-		show: function(index){
-
-			this.currentCacheIndex = index;
-			this.resetPosition();
-			this.setImages(false);
-			Util.DOM.show(this.el);
-
-			Util.Animation.resetTranslate(this.contentEl);
-			var
-				itemEls = this.getItemEls(),
-				i, j;
-			for (i=0, j=itemEls.length; i<j; i++){
-				Util.Animation.resetTranslate(itemEls[i]);
-			}
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.Carousel.EventTypes.onSlideByEnd,
-				target: this,
-				action: PhotoSwipe.Carousel.SlideByAction.current,
-				cacheIndex: this.currentCacheIndex
-			});
-
-		},
-
-
-
-		/*
-		 * Function: setImages
-		 */
-		setImages: function(ignoreCurrent){
-
-			var
-				cacheImages,
-				itemEls = this.getItemEls(),
-				nextCacheIndex = this.currentCacheIndex + 1,
-				previousCacheIndex = this.currentCacheIndex - 1;
-
-			if (this.settings.loop){
-
-				if (nextCacheIndex > this.cache.images.length-1){
-					nextCacheIndex = 0;
-				}
-				if (previousCacheIndex < 0){
-					previousCacheIndex = this.cache.images.length-1;
-				}
-
-				cacheImages = this.cache.getImages([
-					previousCacheIndex,
-					this.currentCacheIndex,
-					nextCacheIndex
-				]);
-
-				if (!ignoreCurrent){
-					// Current
-					this.addCacheImageToItemEl(cacheImages[1], itemEls[1]);
-				}
-				// Next
-				this.addCacheImageToItemEl(cacheImages[2], itemEls[2]);
-				// Previous
-				this.addCacheImageToItemEl(cacheImages[0], itemEls[0]);
-
-			}
-			else{
-
-				if (itemEls.length === 1){
-					if (!ignoreCurrent){
-						// Current
-						cacheImages = this.cache.getImages([
-							this.currentCacheIndex
-						]);
-						this.addCacheImageToItemEl(cacheImages[0], itemEls[0]);
-					}
-				}
-				else if (itemEls.length === 2){
-
-					if (this.currentCacheIndex === 0){
-						cacheImages = this.cache.getImages([
-							this.currentCacheIndex,
-							this.currentCacheIndex + 1
-						]);
-						if (!ignoreCurrent){
-							this.addCacheImageToItemEl(cacheImages[0], itemEls[0]);
-						}
-						this.addCacheImageToItemEl(cacheImages[1], itemEls[1]);
-					}
-					else{
-						cacheImages = this.cache.getImages([
-							this.currentCacheIndex - 1,
-							this.currentCacheIndex
-						]);
-						if (!ignoreCurrent){
-							this.addCacheImageToItemEl(cacheImages[1], itemEls[1]);
-						}
-						this.addCacheImageToItemEl(cacheImages[0], itemEls[0]);
-					}
-
-				}
-				else{
-
-					if (this.currentCacheIndex === 0){
-						cacheImages = this.cache.getImages([
-							this.currentCacheIndex,
-							this.currentCacheIndex + 1,
-							this.currentCacheIndex + 2
-						]);
-						if (!ignoreCurrent){
-							this.addCacheImageToItemEl(cacheImages[0], itemEls[0]);
-						}
-						this.addCacheImageToItemEl(cacheImages[1], itemEls[1]);
-						this.addCacheImageToItemEl(cacheImages[2], itemEls[2]);
-					}
-					else if (this.currentCacheIndex === this.cache.images.length-1){
-						cacheImages = this.cache.getImages([
-							this.currentCacheIndex - 2,
-							this.currentCacheIndex - 1,
-							this.currentCacheIndex
-						]);
-						if (!ignoreCurrent){
-							// Current
-							this.addCacheImageToItemEl(cacheImages[2], itemEls[2]);
-						}
-						this.addCacheImageToItemEl(cacheImages[1], itemEls[1]);
-						this.addCacheImageToItemEl(cacheImages[0], itemEls[0]);
-					}
-					else{
-						cacheImages = this.cache.getImages([
-							this.currentCacheIndex - 1,
-							this.currentCacheIndex,
-							this.currentCacheIndex + 1
-						]);
-
-						if (!ignoreCurrent){
-							// Current
-							this.addCacheImageToItemEl(cacheImages[1], itemEls[1]);
-						}
-						// Next
-						this.addCacheImageToItemEl(cacheImages[2], itemEls[2]);
-						// Previous
-						this.addCacheImageToItemEl(cacheImages[0], itemEls[0]);
-					}
-
-				}
-
-			}
-
-		},
-
-
-
-		/*
-		 * Function: addCacheImageToItemEl
-		 */
-		addCacheImageToItemEl: function(cacheImage, itemEl){
-
-			Util.DOM.removeClass(itemEl, PhotoSwipe.Carousel.CssClasses.itemError);
-			Util.DOM.addClass(itemEl, PhotoSwipe.Carousel.CssClasses.itemLoading);
-
-			Util.DOM.removeChildren(itemEl);
-
-			Util.DOM.setStyle(cacheImage.imageEl, {
-				display: 'none'
-			});
-			Util.DOM.appendChild(cacheImage.imageEl, itemEl);
-
-			Util.Animation.resetTranslate(cacheImage.imageEl);
-
-			Util.Events.add(cacheImage, PhotoSwipe.Image.EventTypes.onLoad, this.imageLoadHandler);
-			Util.Events.add(cacheImage, PhotoSwipe.Image.EventTypes.onError, this.imageErrorHandler);
-
-			cacheImage.load();
-
-		},
-
-
-
-		/*
-		 * Function: slideCarousel
-		 */
-		slideCarousel: function(point, action, speed){
-
-			if (this.isSliding){
-				return;
-			}
-
-			var width, diffX, slideBy;
-
-			if (this.settings.target === window){
-				width = Util.DOM.windowWidth() + this.settings.margin;
-			}
-			else{
-				width = Util.DOM.width(this.settings.target) + this.settings.margin;
-			}
-
-			speed = Util.coalesce(speed, this.settings.slideSpeed);
-
-			if (window.Math.abs(diffX) < 1){
-				return;
-			}
-
-
-			switch (action){
-
-				case Util.TouchElement.ActionTypes.swipeLeft:
-
-					slideBy = width * -1;
-					break;
-
-				case Util.TouchElement.ActionTypes.swipeRight:
-
-					slideBy = width;
-					break;
-
-				default:
-
-					diffX = point.x - this.touchStartPoint.x;
-
-					if (window.Math.abs(diffX) > width / 2){
-						slideBy = (diffX > 0) ? width : width * -1;
-					}
-					else{
-						slideBy = 0;
-					}
-					break;
-
-			}
-
-			if (slideBy < 0){
-				this.lastSlideByAction = PhotoSwipe.Carousel.SlideByAction.next;
-			}
-			else if (slideBy > 0){
-				this.lastSlideByAction = PhotoSwipe.Carousel.SlideByAction.previous;
-			}
-			else{
-				this.lastSlideByAction = PhotoSwipe.Carousel.SlideByAction.current;
-			}
-
-			// Check for non-looping carousels
-			// If we are at the start or end, spring back to the current item element
-			if (!this.settings.loop){
-				if ( (this.lastSlideByAction === PhotoSwipe.Carousel.SlideByAction.previous && this.currentCacheIndex === 0 ) || (this.lastSlideByAction === PhotoSwipe.Carousel.SlideByAction.next && this.currentCacheIndex === this.cache.images.length-1) ){
-					slideBy = 0;
-					this.lastSlideByAction = PhotoSwipe.Carousel.SlideByAction.current;
-				}
-			}
-
-			this.isSliding = true;
-			this.doSlideCarousel(slideBy, speed);
-
-		},
-
-
-
-		/*
-		 * Function:
-		 */
-		moveCarousel: function(point){
-
-			if (this.isSliding){
-				return;
-			}
-
-			if (!this.settings.enableDrag){
-				return;
-			}
-
-			this.doMoveCarousel(point.x - this.touchStartPoint.x);
-
-		},
-
-
-
-		/*
-		 * Function: getItemEls
-		 */
-		getItemEls: function(){
-
-			return Util.DOM.find('.' + PhotoSwipe.Carousel.CssClasses.item, this.contentEl);
-
-		},
-
-
-
-		/*
-		 * Function: previous
-		 */
-		previous: function(){
-
-			this.stopSlideshow();
-			this.slideCarousel({x:0, y:0}, Util.TouchElement.ActionTypes.swipeRight, this.settings.nextPreviousSlideSpeed);
-
-		},
-
-
-
-		/*
-		 * Function: next
-		 */
-		next: function(){
-
-			this.stopSlideshow();
-			this.slideCarousel({x:0, y:0}, Util.TouchElement.ActionTypes.swipeLeft, this.settings.nextPreviousSlideSpeed);
-
-		},
-
-
-
-		/*
-		 * Function: slideshowNext
-		 */
-		slideshowNext: function(){
-
-			this.slideCarousel({x:0, y:0}, Util.TouchElement.ActionTypes.swipeLeft);
-
-		},
-
-
-
-
-		/*
-		 * Function: startSlideshow
-		 */
-		startSlideshow: function(){
-
-			this.stopSlideshow();
-
-			this.isSlideshowActive = true;
-
-			this.slideshowTimeout = window.setTimeout(this.slideshowNext.bind(this), this.settings.slideshowDelay);
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.Carousel.EventTypes.onSlideshowStart,
-				target: this
-			});
-
-		},
-
-
-
-		/*
-		 * Function: stopSlideshow
-		 */
-		stopSlideshow: function(){
-
-			if (!Util.isNothing(this.slideshowTimeout)){
-
-				window.clearTimeout(this.slideshowTimeout);
-				this.slideshowTimeout = null;
-				this.isSlideshowActive = false;
-
-				Util.Events.fire(this, {
-					type: PhotoSwipe.Carousel.EventTypes.onSlideshowStop,
-					target: this
-				});
-
-			}
-
-		},
-
-
-
-		/*
-		 * Function: onSlideByEnd
-		 */
-		onSlideByEnd: function(e){
-
-			if (Util.isNothing(this.isSliding)){
-				return;
-			}
-
-			var itemEls = this.getItemEls();
-
-			this.isSliding = false;
-
-			if (this.lastSlideByAction === PhotoSwipe.Carousel.SlideByAction.next){
-				this.currentCacheIndex = this.currentCacheIndex + 1;
-			}
-			else if (this.lastSlideByAction === PhotoSwipe.Carousel.SlideByAction.previous){
-				this.currentCacheIndex = this.currentCacheIndex - 1;
-			}
-
-			if (this.settings.loop){
-
-				if (this.lastSlideByAction === PhotoSwipe.Carousel.SlideByAction.next){
-					// Move first to the last
-					Util.DOM.appendChild(itemEls[0], this.contentEl);
-				}
-				else if (this.lastSlideByAction === PhotoSwipe.Carousel.SlideByAction.previous){
-					// Move the last to the first
-					Util.DOM.insertBefore(itemEls[itemEls.length-1], itemEls[0], this.contentEl);
-				}
-
-				if (this.currentCacheIndex < 0){
-					this.currentCacheIndex = this.cache.images.length - 1;
-				}
-				else if (this.currentCacheIndex === this.cache.images.length){
-					this.currentCacheIndex = 0;
-				}
-
-			}
-			else{
-
-				if (this.cache.images.length > 3){
-
-					if (this.currentCacheIndex > 1 && this.currentCacheIndex < this.cache.images.length-2){
-						if (this.lastSlideByAction === PhotoSwipe.Carousel.SlideByAction.next){
-							// Move first to the last
-							Util.DOM.appendChild(itemEls[0], this.contentEl);
-						}
-						else if (this.lastSlideByAction === PhotoSwipe.Carousel.SlideByAction.previous){
-							// Move the last to the first
-							Util.DOM.insertBefore(itemEls[itemEls.length-1], itemEls[0], this.contentEl);
-						}
-					}
-					else if (this.currentCacheIndex === 1){
-						if (this.lastSlideByAction === PhotoSwipe.Carousel.SlideByAction.previous){
-							// Move the last to the first
-							Util.DOM.insertBefore(itemEls[itemEls.length-1], itemEls[0], this.contentEl);
-						}
-					}
-					else if (this.currentCacheIndex === this.cache.images.length-2){
-						if (this.lastSlideByAction === PhotoSwipe.Carousel.SlideByAction.next){
-							// Move first to the last
-							Util.DOM.appendChild(itemEls[0], this.contentEl);
-						}
-					}
-
-				}
-
-
-			}
-
-			if (this.lastSlideByAction !== PhotoSwipe.Carousel.SlideByAction.current){
-				this.setContentLeftPosition();
-				this.setImages(true);
-			}
-
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.Carousel.EventTypes.onSlideByEnd,
-				target: this,
-				action: this.lastSlideByAction,
-				cacheIndex: this.currentCacheIndex
-			});
-
-
-			if (this.isSlideshowActive){
-
-				if (this.lastSlideByAction !== PhotoSwipe.Carousel.SlideByAction.current){
-					this.startSlideshow();
-				}
-				else{
-					this.stopSlideshow();
-				}
-
-			}
-
-
-		},
-
-
-
-		/*
-		 * Function: onTouch
-		 */
-		onTouch: function(action, point){
-
-			this.stopSlideshow();
-
-			switch(action){
-
-				case Util.TouchElement.ActionTypes.touchStart:
-					this.touchStartPoint = point;
-					this.touchStartPosition = {
-						x: window.parseInt(Util.DOM.getStyle(this.contentEl, 'left'), 0),
-						y: window.parseInt(Util.DOM.getStyle(this.contentEl, 'top'), 0)
-					};
-					break;
-
-				case Util.TouchElement.ActionTypes.touchMove:
-					this.moveCarousel(point);
-					break;
-
-				case Util.TouchElement.ActionTypes.touchMoveEnd:
-				case Util.TouchElement.ActionTypes.swipeLeft:
-				case Util.TouchElement.ActionTypes.swipeRight:
-					this.slideCarousel(point, action);
-					break;
-
-				case Util.TouchElement.ActionTypes.tap:
-					break;
-
-				case Util.TouchElement.ActionTypes.doubleTap:
-					break;
-
-
-			}
-
-		},
-
-
-
-		/*
-		 * Function: onImageLoad
-		 */
-		onImageLoad: function(e){
-
-			var cacheImage = e.target;
-
-			if (!Util.isNothing(cacheImage.imageEl.parentNode)){
-				Util.DOM.removeClass(cacheImage.imageEl.parentNode, PhotoSwipe.Carousel.CssClasses.itemLoading);
-				this.resetImagePosition(cacheImage.imageEl);
-			}
-
-			Util.Events.remove(cacheImage, PhotoSwipe.Image.EventTypes.onLoad, this.imageLoadHandler);
-			Util.Events.remove(cacheImage, PhotoSwipe.Image.EventTypes.onError, this.imageErrorHandler);
-
-		},
-
-
-
-		/*
-		 * Function: onImageError
-		 */
-		onImageError: function(e){
-
-			var cacheImage = e.target;
-
-			if (!Util.isNothing(cacheImage.imageEl.parentNode)){
-				Util.DOM.removeClass(cacheImage.imageEl.parentNode, PhotoSwipe.Carousel.CssClasses.itemLoading);
-				Util.DOM.addClass(cacheImage.imageEl.parentNode, PhotoSwipe.Carousel.CssClasses.itemError);
-			}
-
-			Util.Events.remove(cacheImage, PhotoSwipe.Image.EventTypes.onLoad, this.imageLoadHandler);
-			Util.Events.remove(cacheImage, PhotoSwipe.Image.EventTypes.onError, this.imageErrorHandler);
-
-		}
-
-
-
-	});
-
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util, TouchElement){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.Carousel');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-	PhotoSwipe.Carousel.CarouselClass = PhotoSwipe.Carousel.CarouselClass.extend({
-
-
-		/*
-		 * Function: getStartingPos
-		 */
-		getStartingPos: function(){
-
-			var startingPos = this.touchStartPosition;
-
-			if (Util.isNothing(startingPos)){
-				startingPos = {
-					x: window.parseInt(Util.DOM.getStyle(this.contentEl, 'left'), 0),
-					y: window.parseInt(Util.DOM.getStyle(this.contentEl, 'top'), 0)
-				};
-			}
-
-			return startingPos;
-
-		},
-
-
-
-		/*
-		 * Function: doMoveCarousel
-		 */
-		doMoveCarousel: function(xVal){
-
-			var style;
-
-			if (Util.Browser.isCSSTransformSupported){
-
-				style = {};
-
-				style[Util.Animation._transitionPrefix + 'Property'] = 'all';
-				style[Util.Animation._transitionPrefix + 'Duration'] = '';
-				style[Util.Animation._transitionPrefix + 'TimingFunction'] = '';
-				style[Util.Animation._transitionPrefix + 'Delay'] = '0';
-				style[Util.Animation._transformLabel] = (Util.Browser.is3dSupported) ? 'translate3d(' + xVal + 'px, 0px, 0px)' : 'translate(' + xVal + 'px, 0px)';
-
-				Util.DOM.setStyle(this.contentEl, style);
-
-			}
-			else if (!Util.isNothing(window.jQuery)){
-
-
-				window.jQuery(this.contentEl).stop().css('left', this.getStartingPos().x + xVal + 'px');
-
-			}
-
-		},
-
-
-
-		/*
-		 * Function: doSlideCarousel
-		 */
-		doSlideCarousel: function(xVal, speed){
-
-			var animateProps, transform;
-
-			if (speed <= 0){
-
-				this.slideByEndHandler();
-				return;
-
-			}
-
-
-			if (Util.Browser.isCSSTransformSupported){
-
-				transform = Util.coalesce(this.contentEl.style.webkitTransform, this.contentEl.style.MozTransform, this.contentEl.style.OTransform, this.contentEl.style.transform, '');
-				if (transform.indexOf('translate3d(' + xVal) === 0){
-					this.slideByEndHandler();
-					return;
-				}
-				else if (transform.indexOf('translate(' + xVal) === 0){
-					this.slideByEndHandler();
-					return;
-				}
-
-				Util.Animation.slideBy(this.contentEl, xVal, 0, speed, this.slideByEndHandler, this.settings.slideTimingFunction);
-
-			}
-			else if (!Util.isNothing(window.jQuery)){
-
-				animateProps = {
-					left: this.getStartingPos().x + xVal + 'px'
-				};
-
-				if (this.settings.animationTimingFunction === 'ease-out'){
-					this.settings.animationTimingFunction = 'easeOutQuad';
-				}
-
-				if ( Util.isNothing(window.jQuery.easing[this.settings.animationTimingFunction]) ){
-					this.settings.animationTimingFunction = 'linear';
-				}
-
-				window.jQuery(this.contentEl).animate(
-					animateProps,
-					this.settings.slideSpeed,
-					this.settings.animationTimingFunction,
-					this.slideByEndHandler
-				);
-
-			}
-
-
-		}
-
-	});
-
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util,
-	window.Code.PhotoSwipe.TouchElement
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.Toolbar');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-	PhotoSwipe.Toolbar.CssClasses = {
-		toolbar: 'ps-toolbar',
-		toolbarContent: 'ps-toolbar-content',
-		toolbarTop: 'ps-toolbar-top',
-		caption: 'ps-caption',
-		captionBottom: 'ps-caption-bottom',
-		captionContent: 'ps-caption-content',
-		close: 'ps-toolbar-close',
-		play: 'ps-toolbar-play',
-		playDisabled: 'ps-toolbar-play-disabled',
-		previous: 'ps-toolbar-previous',
-		previousDisabled: 'ps-toolbar-previous-disabled',
-		next: 'ps-toolbar-next',
-		nextDisabled: 'ps-toolbar-next-disabled'
-	};
-
-
-
-	PhotoSwipe.Toolbar.ToolbarAction = {
-		close: 'close',
-		play: 'play',
-		next: 'next',
-		previous: 'previous',
-		none: 'none'
-	};
-
-
-
-	PhotoSwipe.Toolbar.EventTypes = {
-		onTap: 'PhotoSwipeToolbarOnClick',
-		onBeforeShow: 'PhotoSwipeToolbarOnBeforeShow',
-		onShow: 'PhotoSwipeToolbarOnShow',
-		onBeforeHide: 'PhotoSwipeToolbarOnBeforeHide',
-		onHide: 'PhotoSwipeToolbarOnHide'
-	};
-
-
-
-	PhotoSwipe.Toolbar.getToolbar = function(){
-
-		return '<div class="' + PhotoSwipe.Toolbar.CssClasses.close + '"><div class="' + PhotoSwipe.Toolbar.CssClasses.toolbarContent + '"></div></div><div class="' + PhotoSwipe.Toolbar.CssClasses.play + '"><div class="' + PhotoSwipe.Toolbar.CssClasses.toolbarContent + '"></div></div><div class="' + PhotoSwipe.Toolbar.CssClasses.previous + '"><div class="' + PhotoSwipe.Toolbar.CssClasses.toolbarContent + '"></div></div><div class="' + PhotoSwipe.Toolbar.CssClasses.next + '"><div class="' + PhotoSwipe.Toolbar.CssClasses.toolbarContent + '"></div></div>';
-
-	};
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.Toolbar');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-	PhotoSwipe.Toolbar.ToolbarClass = klass({
-
-
-
-		toolbarEl: null,
-		closeEl: null,
-		playEl: null,
-		previousEl: null,
-		nextEl: null,
-		captionEl: null,
-		captionContentEl: null,
-		currentCaption: null,
-		settings: null,
-		cache: null,
-		timeout: null,
-		isVisible: null,
-		fadeOutHandler: null,
-		touchStartHandler: null,
-		touchMoveHandler: null,
-		clickHandler: null,
-
-
-
-		/*
-		 * Function: dispose
-		 */
-		dispose: function(){
-
-			var prop;
-
-			this.clearTimeout();
-
-			this.removeEventHandlers();
-
-			Util.Animation.stop(this.toolbarEl);
-			Util.Animation.stop(this.captionEl);
-
-			Util.DOM.removeChild(this.toolbarEl, this.toolbarEl.parentNode);
-			Util.DOM.removeChild(this.captionEl, this.captionEl.parentNode);
-
-			for (prop in this) {
-				if (Util.objectHasProperty(this, prop)) {
-					this[prop] = null;
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: initialize
-		 */
-		initialize: function(cache, options){
-
-			var cssClass;
-
-			this.settings = options;
-			this.cache = cache;
-			this.isVisible = false;
-
-			this.fadeOutHandler = this.onFadeOut.bind(this);
-			this.touchStartHandler = this.onTouchStart.bind(this);
-			this.touchMoveHandler = this.onTouchMove.bind(this);
-			this.clickHandler = this.onClick.bind(this);
-
-
-			cssClass = PhotoSwipe.Toolbar.CssClasses.toolbar;
-			if (this.settings.captionAndToolbarFlipPosition){
-				cssClass = cssClass + ' ' + PhotoSwipe.Toolbar.CssClasses.toolbarTop;
-			}
-
-
-			// Toolbar
-			this.toolbarEl = Util.DOM.createElement(
-				'div',
-				{
-					'class': cssClass
-				},
-				this.settings.getToolbar()
-			);
-
-
-			Util.DOM.setStyle(this.toolbarEl, {
-				left: 0,
-				position: 'absolute',
-				overflow: 'hidden',
-				zIndex: this.settings.zIndex
-			});
-
-			if (this.settings.target === window){
-				Util.DOM.appendToBody(this.toolbarEl);
-			}
-			else{
-				Util.DOM.appendChild(this.toolbarEl, this.settings.target);
-			}
-			Util.DOM.hide(this.toolbarEl);
-
-			this.closeEl = Util.DOM.find('.' + PhotoSwipe.Toolbar.CssClasses.close, this.toolbarEl)[0];
-			if (this.settings.preventHide && !Util.isNothing(this.closeEl)){
-				Util.DOM.hide(this.closeEl);
-			}
-
-			this.playEl = Util.DOM.find('.' + PhotoSwipe.Toolbar.CssClasses.play, this.toolbarEl)[0];
-			if (this.settings.preventSlideshow && !Util.isNothing(this.playEl)){
-				Util.DOM.hide(this.playEl);
-			}
-
-			this.nextEl = Util.DOM.find('.' + PhotoSwipe.Toolbar.CssClasses.next, this.toolbarEl)[0];
-			this.previousEl = Util.DOM.find('.' + PhotoSwipe.Toolbar.CssClasses.previous, this.toolbarEl)[0];
-
-
-			// Caption
-			cssClass = PhotoSwipe.Toolbar.CssClasses.caption;
-			if (this.settings.captionAndToolbarFlipPosition){
-				cssClass = cssClass + ' ' + PhotoSwipe.Toolbar.CssClasses.captionBottom;
-			}
-
-			this.captionEl = Util.DOM.createElement(
-				'div',
-				{
-					'class': cssClass
-				},
-				''
-			);
-			Util.DOM.setStyle(this.captionEl, {
-				left: 0,
-				position: 'absolute',
-				overflow: 'hidden',
-				zIndex: this.settings.zIndex
-			});
-
-			if (this.settings.target === window){
-				Util.DOM.appendToBody(this.captionEl);
-			}
-			else{
-				Util.DOM.appendChild(this.captionEl, this.settings.target);
-			}
-			Util.DOM.hide(this.captionEl);
-
-			this.captionContentEl = Util.DOM.createElement(
-				'div',
-				{
-					'class': PhotoSwipe.Toolbar.CssClasses.captionContent
-				},
-				''
-			);
-			Util.DOM.appendChild(this.captionContentEl, this.captionEl);
-
-			this.addEventHandlers();
-
-		},
-
-
-
-		/*
-		 * Function: resetPosition
-		 */
-		resetPosition: function(){
-
-			var width, toolbarTop, captionTop;
-
-			if (this.settings.target === window){
-				if (this.settings.captionAndToolbarFlipPosition){
-					toolbarTop = Util.DOM.windowScrollTop();
-					captionTop = (Util.DOM.windowScrollTop() + Util.DOM.windowHeight()) - Util.DOM.height(this.captionEl);
-				}
-				else {
-					toolbarTop = (Util.DOM.windowScrollTop() + Util.DOM.windowHeight()) - Util.DOM.height(this.toolbarEl);
-					captionTop = Util.DOM.windowScrollTop();
-				}
-				width = Util.DOM.windowWidth();
-			}
-			else{
-				if (this.settings.captionAndToolbarFlipPosition){
-					toolbarTop = '0';
-					captionTop = Util.DOM.height(this.settings.target) - Util.DOM.height(this.captionEl);
-				}
-				else{
-					toolbarTop = Util.DOM.height(this.settings.target) - Util.DOM.height(this.toolbarEl);
-					captionTop = 0;
-				}
-				width = Util.DOM.width(this.settings.target);
-			}
-
-			Util.DOM.setStyle(this.toolbarEl, {
-				top: toolbarTop + 'px',
-				width: width
-			});
-
-			Util.DOM.setStyle(this.captionEl, {
-				top: captionTop + 'px',
-				width: width
-			});
-		},
-
-
-
-		/*
-		 * Function: toggleVisibility
-		 */
-		toggleVisibility: function(index){
-
-			if (this.isVisible){
-				this.fadeOut();
-			}
-			else{
-				this.show(index);
-			}
-
-		},
-
-
-
-		/*
-		 * Function: show
-		 */
-		show: function(index){
-
-			Util.Animation.stop(this.toolbarEl);
-			Util.Animation.stop(this.captionEl);
-
-			this.resetPosition();
-			this.setToolbarStatus(index);
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.Toolbar.EventTypes.onBeforeShow,
-				target: this
-			});
-
-			this.showToolbar();
-			this.setCaption(index);
-			this.showCaption();
-
-			this.isVisible = true;
-
-			this.setTimeout();
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.Toolbar.EventTypes.onShow,
-				target: this
-			});
-
-		},
-
-
-
-		/*
-		 * Function: setTimeout
-		 */
-		setTimeout: function(){
-
-			if (this.settings.captionAndToolbarAutoHideDelay > 0){
-				// Set a timeout to hide the toolbar
-				this.clearTimeout();
-				this.timeout = window.setTimeout(this.fadeOut.bind(this), this.settings.captionAndToolbarAutoHideDelay);
-			}
-
-		},
-
-
-
-		/*
-		 * Function: clearTimeout
-		 */
-		clearTimeout: function(){
-
-			if (!Util.isNothing(this.timeout)){
-				window.clearTimeout(this.timeout);
-				this.timeout = null;
-			}
-
-		},
-
-
-
-		/*
-		 * Function: fadeOut
-		 */
-		fadeOut: function(){
-
-			this.clearTimeout();
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.Toolbar.EventTypes.onBeforeHide,
-				target: this
-			});
-
-			Util.Animation.fadeOut(this.toolbarEl, this.settings.fadeOutSpeed);
-			Util.Animation.fadeOut(this.captionEl, this.settings.fadeOutSpeed, this.fadeOutHandler);
-
-			this.isVisible = false;
-
-		},
-
-
-
-		/*
-		 * Function: addEventHandlers
-		 */
-		addEventHandlers: function(){
-
-			if (Util.Browser.isTouchSupported){
-				if (!Util.Browser.blackberry){
-					// Had an issue with touchstart, animation and Blackberry. BB will default to click
-					Util.Events.add(this.toolbarEl, 'touchstart', this.touchStartHandler);
-				}
-				Util.Events.add(this.toolbarEl, 'touchmove', this.touchMoveHandler);
-				Util.Events.add(this.captionEl, 'touchmove', this.touchMoveHandler);
-			}
-			Util.Events.add(this.toolbarEl, 'click', this.clickHandler);
-
-		},
-
-
-
-		/*
-		 * Function: removeEventHandlers
-		 */
-		removeEventHandlers: function(){
-
-			if (Util.Browser.isTouchSupported){
-				if (!Util.Browser.blackberry){
-					// Had an issue with touchstart, animation and Blackberry. BB will default to click
-					Util.Events.remove(this.toolbarEl, 'touchstart', this.touchStartHandler);
-				}
-				Util.Events.remove(this.toolbarEl, 'touchmove', this.touchMoveHandler);
-				Util.Events.remove(this.captionEl, 'touchmove', this.touchMoveHandler);
-			}
-			Util.Events.remove(this.toolbarEl, 'click', this.clickHandler);
-
-		},
-
-
-
-		/*
-		 * Function: handleTap
-		 */
-		handleTap: function(e){
-
-			this.clearTimeout();
-
-			var action;
-
-			if (e.target === this.nextEl || Util.DOM.isChildOf(e.target, this.nextEl)){
-				action = PhotoSwipe.Toolbar.ToolbarAction.next;
-			}
-			else if (e.target === this.previousEl || Util.DOM.isChildOf(e.target, this.previousEl)){
-				action = PhotoSwipe.Toolbar.ToolbarAction.previous;
-			}
-			else if (e.target === this.closeEl || Util.DOM.isChildOf(e.target, this.closeEl)){
-				action = PhotoSwipe.Toolbar.ToolbarAction.close;
-			}
-			else if (e.target === this.playEl || Util.DOM.isChildOf(e.target, this.playEl)){
-				action = PhotoSwipe.Toolbar.ToolbarAction.play;
-			}
-
-			this.setTimeout();
-
-			if (Util.isNothing(action)){
-				action = PhotoSwipe.Toolbar.ToolbarAction.none;
-			}
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.Toolbar.EventTypes.onTap,
-				target: this,
-				action: action,
-				tapTarget: e.target
-			});
-
-		},
-
-
-
-		/*
-		 * Function: setCaption
-		 */
-		setCaption: function(index){
-
-			Util.DOM.removeChildren(this.captionContentEl);
-
-			this.currentCaption = Util.coalesce(this.cache.images[index].caption, '\u00A0');
-
-			if (Util.isObject(this.currentCaption)){
-				Util.DOM.appendChild(this.currentCaption, this.captionContentEl);
-			}
-			else{
-				if (this.currentCaption === ''){
-					this.currentCaption = '\u00A0';
-				}
-				Util.DOM.appendText(this.currentCaption, this.captionContentEl);
-			}
-
-			this.currentCaption = (this.currentCaption === '\u00A0') ? '' : this.currentCaption;
-			this.resetPosition();
-
-		},
-
-
-
-		/*
-		 * Function: showToolbar
-		 */
-		showToolbar: function(){
-
-			Util.DOM.setStyle(this.toolbarEl, {
-				opacity: this.settings.captionAndToolbarOpacity
-			});
-			Util.DOM.show(this.toolbarEl);
-
-		},
-
-
-
-		/*
-		 * Function: showCaption
-		 */
-		showCaption: function(){
-
-			if (this.currentCaption === '' || this.captionContentEl.childNodes.length < 1){
-				// Empty caption
-				if (!this.settings.captionAndToolbarShowEmptyCaptions){
-					Util.DOM.hide(this.captionEl);
-					return;
-				}
-			}
-			Util.DOM.setStyle(this.captionEl, {
-				opacity: this.settings.captionAndToolbarOpacity
-			});
-			Util.DOM.show(this.captionEl);
-
-		},
-
-
-
-		/*
-		 * Function: setToolbarStatus
-		 */
-		setToolbarStatus: function(index){
-
-			if (this.settings.loop){
-				return;
-			}
-
-			Util.DOM.removeClass(this.previousEl, PhotoSwipe.Toolbar.CssClasses.previousDisabled);
-			Util.DOM.removeClass(this.nextEl, PhotoSwipe.Toolbar.CssClasses.nextDisabled);
-			Util.DOM.removeClass(this.playEl, PhotoSwipe.Toolbar.CssClasses.playDisabled);
-
-			if (index > 0 && index < this.cache.images.length-1){
-				return;
-			}
-
-            if (index === 0 && index === this.cache.images.length-1){
-                if (!Util.isNothing(this.playEl)){
-					Util.DOM.addClass(this.playEl, PhotoSwipe.Toolbar.CssClasses.playDisabled);
-				}
-			}
-
-			if (index === 0){
-				if (!Util.isNothing(this.previousEl)){
-					Util.DOM.addClass(this.previousEl, PhotoSwipe.Toolbar.CssClasses.previousDisabled);
-				}
-			}
-
-			if (index === this.cache.images.length-1){
-				if (!Util.isNothing(this.nextEl)){
-					Util.DOM.addClass(this.nextEl, PhotoSwipe.Toolbar.CssClasses.nextDisabled);
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: onFadeOut
-		 */
-		onFadeOut: function(){
-
-			Util.DOM.hide(this.toolbarEl);
-			Util.DOM.hide(this.captionEl);
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.Toolbar.EventTypes.onHide,
-				target: this
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onTouchStart
-		 */
-		onTouchStart: function(e){
-
-			e.preventDefault();
-			Util.Events.remove(this.toolbarEl, 'click', this.clickHandler);
-			this.handleTap(e);
-
-		},
-
-
-
-		/*
-		 * Function: onTouchMove
-		 */
-		onTouchMove: function(e){
-
-			e.preventDefault();
-
-		},
-
-
-
-		/*
-		 * Function: onClick
-		 */
-		onClick: function(e){
-
-			e.preventDefault();
-			this.handleTap(e);
-
-		}
-
-
-	});
-
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.UILayer');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-	PhotoSwipe.UILayer.CssClasses = {
-		uiLayer: 'ps-uilayer'
-	};
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.UILayer');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-	PhotoSwipe.UILayer.UILayerClass = Util.TouchElement.TouchElementClass.extend({
-
-
-
-		el: null,
-		settings: null,
-
-
-
-		/*
-		 * Function: dispose
-		 */
-		dispose: function(){
-
-			var prop;
-
-			this.removeEventHandlers();
-
-			Util.DOM.removeChild(this.el, this.el.parentNode);
-
-			for (prop in this) {
-				if (Util.objectHasProperty(this, prop)) {
-					this[prop] = null;
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: initialize
-		 */
-		initialize: function(options){
-
-			this.settings = options;
-
-			// Main container
-			this.el = Util.DOM.createElement(
-				'div',
-				{
-					'class': PhotoSwipe.UILayer.CssClasses.uiLayer
-				},
-				''
-			);
-			Util.DOM.setStyle(this.el, {
-				display: 'block',
-				position: 'absolute',
-				left: 0,
-				top: 0,
-				overflow: 'hidden',
-				zIndex: this.settings.zIndex,
-				opacity: 0
-			});
-			Util.DOM.hide(this.el);
-
-			if (this.settings.target === window){
-				Util.DOM.appendToBody(this.el);
-			}
-			else{
-				Util.DOM.appendChild(this.el, this.settings.target);
-			}
-
-			this.supr(this.el, {
-				swipe: true,
-				move: true,
-				gesture: Util.Browser.iOS,
-				doubleTap: true,
-				preventDefaultTouchEvents: this.settings.preventDefaultTouchEvents,
-				allowVerticalScroll: this.settings.allowVerticalScroll
-			});
-
-		},
-
-
-
-		/*
-		 * Function: resetPosition
-		 */
-		resetPosition: function(){
-
-			// Set the height and width to fill the document
-			if (this.settings.target === window){
-				Util.DOM.setStyle(this.el, {
-					top: Util.DOM.windowScrollTop()  + 'px',
-					width: Util.DOM.windowWidth(),
-					height: Util.DOM.windowHeight()
-				});
-			}
-			else{
-				Util.DOM.setStyle(this.el, {
-					top: '0px',
-					width: Util.DOM.width(this.settings.target),
-					height: Util.DOM.height(this.settings.target)
-				});
-			}
-
-		},
-
-
-
-		/*
-		 * Function: show
-		 */
-		show: function(){
-
-			this.resetPosition();
-			Util.DOM.show(this.el);
-			this.addEventHandlers();
-
-		},
-
-
-
-		/*
-		 * Function: addEventHandlers
-		 */
-		addEventHandlers: function(){
-
-			this.supr();
-
-		},
-
-
-
-		/*
-		 * Function: removeEventHandlers
-		 */
-		removeEventHandlers: function(){
-
-			this.supr();
-
-		}
-
-
-	});
-
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.ZoomPanRotate');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-	PhotoSwipe.ZoomPanRotate.CssClasses = {
-		zoomPanRotate: 'ps-zoom-pan-rotate'
-	};
-
-
-	PhotoSwipe.ZoomPanRotate.EventTypes = {
-
-		onTransform: 'PhotoSwipeZoomPanRotateOnTransform'
-
-	};
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe.ZoomPanRotate');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-	PhotoSwipe.ZoomPanRotate.ZoomPanRotateClass = klass({
-
-		el: null,
-		settings: null,
-		containerEl: null,
-		imageEl: null,
-		transformSettings: null,
-		panStartingPoint: null,
-		transformEl: null,
-
-
-
-		/*
-		 * Function: dispose
-		 */
-		dispose: function(){
-
-			var prop;
-
-			Util.DOM.removeChild(this.el, this.el.parentNode);
-
-			for (prop in this) {
-				if (Util.objectHasProperty(this, prop)) {
-					this[prop] = null;
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: initialize
-		 */
-		initialize: function(options, cacheImage, uiLayer){
-
-			var parentEl, width, height, top;
-
-			this.settings = options;
-
-			if (this.settings.target === window){
-				parentEl = document.body;
-				width = Util.DOM.windowWidth();
-				height = Util.DOM.windowHeight();
-				top = Util.DOM.windowScrollTop() + 'px';
-			}
-			else{
-				parentEl = this.settings.target;
-				width = Util.DOM.width(parentEl);
-				height = Util.DOM.height(parentEl);
-				top = '0px';
-			}
-
-			this.imageEl = cacheImage.imageEl.cloneNode(false);
-			Util.DOM.setStyle(this.imageEl, {
-
-				zIndex: 1
-
-			});
-
-			this.transformSettings = {
-
-				startingScale: 1.0,
-				scale: 1.0,
-				startingRotation: 0,
-				rotation: 0,
-				startingTranslateX: 0,
-				startingTranslateY: 0,
-				translateX: 0,
-				translateY: 0
-
-			};
-
-
-			this.el = Util.DOM.createElement(
-				'div',
-				{
-					'class': PhotoSwipe.ZoomPanRotate.CssClasses.zoomPanRotate
-				},
-				''
-			);
-			Util.DOM.setStyle(this.el, {
-				left: 0,
-				top: top,
-				position: 'absolute',
-				width: width,
-				height: height,
-				zIndex: this.settings.zIndex,
-				display: 'block'
-			});
-
-			Util.DOM.insertBefore(this.el, uiLayer.el, parentEl);
-
-			if (Util.Browser.iOS){
-				this.containerEl = Util.DOM.createElement('div','','');
-				Util.DOM.setStyle(this.containerEl, {
-					left: 0,
-					top: 0,
-					width: width,
-					height: height,
-					position: 'absolute',
-					zIndex: 1
-				});
-				Util.DOM.appendChild(this.imageEl, this.containerEl);
-				Util.DOM.appendChild(this.containerEl, this.el);
-				Util.Animation.resetTranslate(this.containerEl);
-				Util.Animation.resetTranslate(this.imageEl);
-				this.transformEl = this.containerEl;
-			}
-			else{
-				Util.DOM.appendChild(this.imageEl, this.el);
-				this.transformEl = this.imageEl;
-			}
-
-		},
-
-
-
-		/*
-		 * Function: setStartingTranslateFromCurrentTransform
-		 */
-		setStartingTranslateFromCurrentTransform: function(){
-
-			var
-				transformValue = Util.coalesce(this.transformEl.style.webkitTransform, this.transformEl.style.MozTransform, this.transformEl.style.OTransform, this.transformEl.style.transform),
-				transformExploded;
-
-			if (!Util.isNothing(transformValue)){
-
-				transformExploded = transformValue.match( /translate\((.*?)\)/ );
-
-				if (!Util.isNothing(transformExploded)){
-
-					transformExploded = transformExploded[1].split(', ');
-					this.transformSettings.startingTranslateX = window.parseInt(transformExploded[0], 10);
-					this.transformSettings.startingTranslateY = window.parseInt(transformExploded[1], 10);
-
-				}
-
-			}
-
-		},
-
-
-
-		/*
-		 * Function: getScale
-		 */
-		getScale: function(scaleValue){
-
-			var scale = this.transformSettings.startingScale * scaleValue;
-
-			if (this.settings.minUserZoom !== 0 && scale < this.settings.minUserZoom){
-				scale = this.settings.minUserZoom;
-			}
-			else if (this.settings.maxUserZoom !== 0 && scale > this.settings.maxUserZoom){
-				scale = this.settings.maxUserZoom;
-			}
-
-			return scale;
-
-		},
-
-
-
-		/*
-		 * Function: setStartingScaleAndRotation
-		 */
-		setStartingScaleAndRotation: function(scaleValue, rotationValue){
-
-			this.transformSettings.startingScale = this.getScale(scaleValue);
-
-			this.transformSettings.startingRotation =
-				(this.transformSettings.startingRotation + rotationValue) % 360;
-
-		},
-
-
-
-		/*
-		 * Function: zoomRotate
-		 */
-		zoomRotate: function(scaleValue, rotationValue){
-
-			this.transformSettings.scale = this.getScale(scaleValue);
-
-			this.transformSettings.rotation =
-				this.transformSettings.startingRotation + rotationValue;
-
-			this.applyTransform();
-
-		},
-
-
-
-		/*
-		 * Function: panStart
-		 */
-		panStart: function(point){
-
-			this.setStartingTranslateFromCurrentTransform();
-
-			this.panStartingPoint = {
-				x: point.x,
-				y: point.y
-			};
-
-		},
-
-
-
-		/*
-		 * Function: pan
-		 */
-		pan: function(point){
-
-			var
-				dx = point.x - this.panStartingPoint.x,
-				dy = point.y - this.panStartingPoint.y,
-				dxScaleAdjust = dx / this.transformSettings.scale ,
-        dyScaleAdjust = dy / this.transformSettings.scale;
-
-			this.transformSettings.translateX =
-				this.transformSettings.startingTranslateX + dxScaleAdjust;
-
-			this.transformSettings.translateY =
-				this.transformSettings.startingTranslateY + dyScaleAdjust;
-
-			this.applyTransform();
-
-		},
-
-
-
-		/*
-		 * Function: zoomAndPanToPoint
-		 */
-		zoomAndPanToPoint: function(scaleValue, point){
-
-
-			if (this.settings.target === window){
-
-				this.panStart({
-					x: Util.DOM.windowWidth() / 2,
-					y: Util.DOM.windowHeight() / 2
-				});
-
-				var
-					dx = point.x - this.panStartingPoint.x,
-					dy = point.y - this.panStartingPoint.y,
-					dxScaleAdjust = dx / this.transformSettings.scale,
-					dyScaleAdjust = dy / this.transformSettings.scale;
-
-				this.transformSettings.translateX =
-					(this.transformSettings.startingTranslateX + dxScaleAdjust) * -1;
-
-				this.transformSettings.translateY =
-					(this.transformSettings.startingTranslateY + dyScaleAdjust) * -1;
-
-			}
-
-
-			this.setStartingScaleAndRotation(scaleValue, 0);
-			this.transformSettings.scale = this.transformSettings.startingScale;
-
-			this.transformSettings.rotation = 0;
-
-			this.applyTransform();
-
-		},
-
-
-
-		/*
-		 * Function: applyTransform
-		 */
-		applyTransform: function(){
-
-			var
-				rotationDegs = this.transformSettings.rotation % 360,
-				translateX = window.parseInt(this.transformSettings.translateX, 10),
-				translateY = window.parseInt(this.transformSettings.translateY, 10),
-				transform = 'scale(' + this.transformSettings.scale + ') rotate(' + rotationDegs + 'deg) translate(' + translateX + 'px, ' + translateY + 'px)';
-
-			Util.DOM.setStyle(this.transformEl, {
-				webkitTransform: transform,
-				MozTransform: transform,
-				msTransform: transform,
-				OTransform: transform,
-				transform: transform
-			});
-
-			Util.Events.fire(this, {
-				target: this,
-				type: PhotoSwipe.ZoomPanRotate.EventTypes.onTransform,
-				scale: this.transformSettings.scale,
-				rotation: this.transformSettings.rotation,
-				rotationDegs: rotationDegs,
-				translateX: translateX,
-				translateY: translateY
-			});
-
-		}
-
-	});
-
-
-
-}
-(
-	window,
-	window.klass,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, Util){
-
-
-	Util.registerNamespace('Code.PhotoSwipe');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-
-	PhotoSwipe.CssClasses = {
-		buildingBody: 'ps-building',
-		activeBody: 'ps-active'
-	};
-
-
-
-	PhotoSwipe.EventTypes = {
-
-		onBeforeShow: 'PhotoSwipeOnBeforeShow',
-		onShow: 'PhotoSwipeOnShow',
-		onBeforeHide: 'PhotoSwipeOnBeforeHide',
-		onHide: 'PhotoSwipeOnHide',
-		onDisplayImage: 'PhotoSwipeOnDisplayImage',
-		onResetPosition: 'PhotoSwipeOnResetPosition',
-		onSlideshowStart: 'PhotoSwipeOnSlideshowStart',
-		onSlideshowStop: 'PhotoSwipeOnSlideshowStop',
-		onTouch: 'PhotoSwipeOnTouch',
-		onBeforeCaptionAndToolbarShow: 'PhotoSwipeOnBeforeCaptionAndToolbarShow',
-		onCaptionAndToolbarShow: 'PhotoSwipeOnCaptionAndToolbarShow',
-		onBeforeCaptionAndToolbarHide: 'PhotoSwipeOnBeforeCaptionAndToolbarHide',
-		onCaptionAndToolbarHide: 'PhotoSwipeOnCaptionAndToolbarHide',
-		onToolbarTap: 'PhotoSwipeOnToolbarTap',
-		onBeforeZoomPanRotateShow: 'PhotoSwipeOnBeforeZoomPanRotateShow',
-		onZoomPanRotateShow: 'PhotoSwipeOnZoomPanRotateShow',
-		onBeforeZoomPanRotateHide: 'PhotoSwipeOnBeforeZoomPanRotateHide',
-		onZoomPanRotateHide: 'PhotoSwipeOnZoomPanRotateHide',
-		onZoomPanRotateTransform: 'PhotoSwipeOnZoomPanRotateTransform'
-
-	};
-
-
-
-	PhotoSwipe.instances = [];
-	PhotoSwipe.activeInstances = [];
-
-
-
-	/*
-	 * Function: Code.PhotoSwipe.setActivateInstance
-	 */
-	PhotoSwipe.setActivateInstance = function(instance){
-
-		// Can only have one instance per target (i.e. window or div)
-		var index = Util.arrayIndexOf(instance.settings.target, PhotoSwipe.activeInstances, 'target');
-		if (index > -1){
-			throw 'Code.PhotoSwipe.activateInstance: Unable to active instance as another instance is already active for this target';
-		}
-		PhotoSwipe.activeInstances.push({
-			target: instance.settings.target,
-			instance: instance
-		});
-
-	};
-
-
-
-	/*
-	 * Function: Code.PhotoSwipe.unsetActivateInstance
-	 */
-	PhotoSwipe.unsetActivateInstance = function(instance){
-
-		var index = Util.arrayIndexOf(instance, PhotoSwipe.activeInstances, 'instance');
-		PhotoSwipe.activeInstances.splice(index, 1);
-
-	};
-
-
-
-	/*
-	 * Function: Code.PhotoSwipe.attach
-	 */
-	PhotoSwipe.attach = function(images, options, id){
-
-		var i, j, instance, image;
-
-		instance = PhotoSwipe.createInstance(images, options, id);
-
-		// Add click event handlers if applicable
-		for (i=0, j=images.length; i<j; i++){
-
-			image = images[i];
-			if (!Util.isNothing(image.nodeType)){
-				if (image.nodeType === 1){
-					// DOM element
-					image.__photoSwipeClickHandler = PhotoSwipe.onTriggerElementClick.bind(instance);
-					Util.Events.remove(image, 'click', image.__photoSwipeClickHandler);
-					Util.Events.add(image, 'click', image.__photoSwipeClickHandler);
-				}
-			}
-
-		}
-
-		return instance;
-
-	};
-
-
-
-	/*
-	 * jQuery plugin
-	 */
-	if (window.jQuery){
-
-		window.jQuery.fn.photoSwipe = function(options, id){
-
-			return PhotoSwipe.attach(this, options, id);
+		// Override zoom/pan/move functions in case old browser is used (most likely IE)
+		// (so they use left/top/width/height, instead of CSS transform)
+	
+		_transformKey = 'left';
+		framework.addClass(template, 'pswp--ie');
+
+		_setTranslateX = function(x, elStyle) {
+			elStyle.left = x + 'px';
+		};
+		_applyZoomPanToItem = function(item) {
+
+			var zoomRatio = item.fitRatio > 1 ? 1 : item.fitRatio,
+				s = item.container.style,
+				w = zoomRatio * item.w,
+				h = zoomRatio * item.h;
+
+			s.width = w + 'px';
+			s.height = h + 'px';
+			s.left = item.initialPosition.x + 'px';
+			s.top = item.initialPosition.y + 'px';
 
 		};
+		_applyCurrentZoomPan = function() {
+			if(_currZoomElementStyle) {
+
+				var s = _currZoomElementStyle,
+					item = self.currItem,
+					zoomRatio = item.fitRatio > 1 ? 1 : item.fitRatio,
+					w = zoomRatio * item.w,
+					h = zoomRatio * item.h;
+
+				s.width = w + 'px';
+				s.height = h + 'px';
 
 
+				s.left = _panOffset.x + 'px';
+				s.top = _panOffset.y + 'px';
+			}
+			
+		};
+	},
+
+	_onKeyDown = function(e) {
+		var keydownAction = '';
+		if(_options.escKey && e.keyCode === 27) { 
+			keydownAction = 'close';
+		} else if(_options.arrowKeys) {
+			if(e.keyCode === 37) {
+				keydownAction = 'prev';
+			} else if(e.keyCode === 39) { 
+				keydownAction = 'next';
+			}
+		}
+
+		if(keydownAction) {
+			// don't do anything if special key pressed to prevent from overriding default browser actions
+			// e.g. in Chrome on Mac cmd+arrow-left returns to previous page
+			if( !e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey ) {
+				if(e.preventDefault) {
+					e.preventDefault();
+				} else {
+					e.returnValue = false;
+				} 
+				self[keydownAction]();
+			}
+		}
+	},
+
+	_onGlobalClick = function(e) {
+		if(!e) {
+			return;
+		}
+
+		// don't allow click event to pass through when triggering after drag or some other gesture
+		if(_moved || _zoomStarted || _mainScrollAnimating || _verticalDragInitiated) {
+			e.preventDefault();
+			e.stopPropagation();
+		}
+	},
+
+	_onPageScroll = function() {
+		self.setScrollOffset(0, framework.getScrollY());		
+	};
+	
+
+
+	
+
+
+
+// Micro animation engine
+var _animations = {},
+	_numAnimations = 0,
+	_stopAnimation = function(name) {
+		if(_animations[name]) {
+			if(_animations[name].raf) {
+				_cancelAF( _animations[name].raf );
+			}
+			_numAnimations--;
+			delete _animations[name];
+		}
+	},
+	_registerStartAnimation = function(name) {
+		if(_animations[name]) {
+			_stopAnimation(name);
+		}
+		if(!_animations[name]) {
+			_numAnimations++;
+			_animations[name] = {};
+		}
+	},
+	_stopAllAnimations = function() {
+		for (var prop in _animations) {
+
+			if( _animations.hasOwnProperty( prop ) ) {
+				_stopAnimation(prop);
+			} 
+			
+		}
+	},
+	_animateProp = function(name, b, endProp, d, easingFn, onUpdate, onComplete) {
+		var startAnimTime = _getCurrentTime(), t;
+		_registerStartAnimation(name);
+
+		var animloop = function(){
+			if ( _animations[name] ) {
+				
+				t = _getCurrentTime() - startAnimTime; // time diff
+				//b - beginning (start prop)
+				//d - anim duration
+
+				if ( t >= d ) {
+					_stopAnimation(name);
+					onUpdate(endProp);
+					if(onComplete) {
+						onComplete();
+					}
+					return;
+				}
+				onUpdate( (endProp - b) * easingFn(t/d) + b );
+
+				_animations[name].raf = _requestAF(animloop);
+			}
+		};
+		animloop();
+	};
+	
+
+
+var publicMethods = {
+
+	// make a few local variables and functions public
+	shout: _shout,
+	listen: _listen,
+	viewportSize: _viewportSize,
+	options: _options,
+
+	isMainScrollAnimating: function() {
+		return _mainScrollAnimating;
+	},
+	getZoomLevel: function() {
+		return _currZoomLevel;
+	},
+	getCurrentIndex: function() {
+		return _currentItemIndex;
+	},
+	isDragging: function() {
+		return _isDragging;
+	},	
+	isZooming: function() {
+		return _isZooming;
+	},
+	setScrollOffset: function(x,y) {
+		_offset.x = x;
+		_currentWindowScrollY = _offset.y = y;
+	},
+	applyZoomPan: function(zoomLevel,panX,panY) {
+		_panOffset.x = panX;
+		_panOffset.y = panY;
+		_currZoomLevel = zoomLevel;
+		_applyCurrentZoomPan();
+	},
+
+	init: function() {
+
+		if(_isOpen || _isDestroying) {
+			return;
+		}
+
+		var i;
+
+		self.framework = framework; // basic function
+		self.template = template; // root DOM element of PhotoSwipe
+		self.bg = framework.getChildByClass(template, 'pswp__bg');
+
+		_initalClassName = template.className;
+		_isOpen = true;
+				
+		_features = framework.detectFeatures();
+		_requestAF = _features.raf;
+		_cancelAF = _features.caf;
+		_transformKey = _features.transform;
+		_oldIE = _features.oldIE;
+		
+		self.scrollWrap = framework.getChildByClass(template, 'pswp__scroll-wrap');
+		self.container = framework.getChildByClass(self.scrollWrap, 'pswp__container');
+
+		_containerStyle = self.container.style; // for fast access
+
+		// Objects that hold slides (there are only 3 in DOM)
+		self.itemHolders = _itemHolders = [
+			{el:self.container.children[0] , wrap:0, index: -1},
+			{el:self.container.children[1] , wrap:0, index: -1},
+			{el:self.container.children[2] , wrap:0, index: -1}
+		];
+
+		// hide nearby item holders until initial zoom animation finishes (to avoid extra Paints)
+		_itemHolders[0].el.style.display = _itemHolders[2].el.style.display = 'none';
+
+		_setupTransforms();
+
+		// Setup global events
+		_globalEventHandlers = {
+			resize: self.updateSize,
+			scroll: _onPageScroll,
+			keydown: _onKeyDown,
+			click: _onGlobalClick
+		};
+
+		// disable show/hide effects on old browsers that don't support CSS animations or transforms, 
+		// old IOS, Android and Opera mobile. Blackberry seems to work fine, even older models.
+		var oldPhone = _features.isOldIOSPhone || _features.isOldAndroid || _features.isMobileOpera;
+		if(!_features.animationName || !_features.transform || oldPhone) {
+			_options.showAnimationDuration = _options.hideAnimationDuration = 0;
+		}
+
+		// init modules
+		for(i = 0; i < _modules.length; i++) {
+			self['init' + _modules[i]]();
+		}
+		
+		// init
+		if(UiClass) {
+			var ui = self.ui = new UiClass(self, framework);
+			ui.init();
+		}
+
+		_shout('firstUpdate');
+		_currentItemIndex = _currentItemIndex || _options.index || 0;
+		// validate index
+		if( isNaN(_currentItemIndex) || _currentItemIndex < 0 || _currentItemIndex >= _getNumItems() ) {
+			_currentItemIndex = 0;
+		}
+		self.currItem = _getItemAt( _currentItemIndex );
+
+		
+		if(_features.isOldIOSPhone || _features.isOldAndroid) {
+			_isFixedPosition = false;
+		}
+		
+		if(_options.modal) {
+			template.setAttribute('aria-hidden', 'false');
+			if(!_isFixedPosition) {
+				template.style.position = 'absolute';
+				template.style.top = framework.getScrollY() + 'px';
+			} else {
+				template.style.position = 'fixed';
+			}
+		}
+
+		if(_currentWindowScrollY === undefined) {
+			_shout('initialLayout');
+			_currentWindowScrollY = _initalWindowScrollY = framework.getScrollY();
+		}
+		
+		// add classes to root element of PhotoSwipe
+		var rootClasses = 'pswp--open ';
+		if(_options.mainClass) {
+			rootClasses += _options.mainClass + ' ';
+		}
+		if(_options.showHideOpacity) {
+			rootClasses += 'pswp--animate_opacity ';
+		}
+		rootClasses += _likelyTouchDevice ? 'pswp--touch' : 'pswp--notouch';
+		rootClasses += _features.animationName ? ' pswp--css_animation' : '';
+		rootClasses += _features.svg ? ' pswp--svg' : '';
+		framework.addClass(template, rootClasses);
+
+		self.updateSize();
+
+		// initial update
+		_containerShiftIndex = -1;
+		_indexDiff = null;
+		for(i = 0; i < NUM_HOLDERS; i++) {
+			_setTranslateX( (i+_containerShiftIndex) * _slideSize.x, _itemHolders[i].el.style);
+		}
+
+		if(!_oldIE) {
+			framework.bind(self.scrollWrap, _downEvents, self); // no dragging for old IE
+		}	
+
+		_listen('initialZoomInEnd', function() {
+			self.setContent(_itemHolders[0], _currentItemIndex-1);
+			self.setContent(_itemHolders[2], _currentItemIndex+1);
+
+			_itemHolders[0].el.style.display = _itemHolders[2].el.style.display = 'block';
+
+			if(_options.focus) {
+				// focus causes layout, 
+				// which causes lag during the animation, 
+				// that's why we delay it untill the initial zoom transition ends
+				template.focus();
+			}
+			 
+
+			_bindEvents();
+		});
+
+		// set content for center slide (first time)
+		self.setContent(_itemHolders[1], _currentItemIndex);
+		
+		self.updateCurrItem();
+
+		_shout('afterInit');
+
+		if(!_isFixedPosition) {
+
+			// On all versions of iOS lower than 8.0, we check size of viewport every second.
+			// 
+			// This is done to detect when Safari top & bottom bars appear, 
+			// as this action doesn't trigger any events (like resize). 
+			// 
+			// On iOS8 they fixed this.
+			// 
+			// 10 Nov 2014: iOS 7 usage ~40%. iOS 8 usage 56%.
+			
+			_updateSizeInterval = setInterval(function() {
+				if(!_numAnimations && !_isDragging && !_isZooming && (_currZoomLevel === self.currItem.initialZoomLevel)  ) {
+					self.updateSize();
+				}
+			}, 1000);
+		}
+
+		framework.addClass(template, 'pswp--visible');
+	},
+
+	// Closes the gallery, then destroy it
+	close: function() {
+		if(!_isOpen) {
+			return;
+		}
+
+		_isOpen = false;
+		_isDestroying = true;
+		_shout('close');
+		_unbindEvents();
+
+		_showOrHide( self.currItem, null, true, self.destroy);
+	},
+
+	// destroys gallery (unbinds events, cleans up intervals and timeouts to avoid memory leaks)
+	destroy: function() {
+		_shout('destroy');
+
+		if(_showOrHideTimeout) {
+			clearTimeout(_showOrHideTimeout);
+		}
+		
+		if(_options.modal) {
+			template.setAttribute('aria-hidden', 'true');
+			template.className = _initalClassName;
+		}
+
+		if(_updateSizeInterval) {
+			clearInterval(_updateSizeInterval);
+		}
+
+		framework.unbind(self.scrollWrap, _downEvents, self);
+
+		// we unbind lost event at the end, as closing animation may depend on it
+		framework.unbind(window, 'scroll', self);
+
+		_stopDragUpdateLoop();
+
+		_stopAllAnimations();
+
+		_listeners = null;
+	},
+
+	/**
+	 * Pan image to position
+	 * @param {Number} x     
+	 * @param {Number} y     
+	 * @param {Boolean} force Will ignore bounds if set to true.
+	 */
+	panTo: function(x,y,force) {
+		if(!force) {
+			if(x > _currPanBounds.min.x) {
+				x = _currPanBounds.min.x;
+			} else if(x < _currPanBounds.max.x) {
+				x = _currPanBounds.max.x;
+			}
+
+			if(y > _currPanBounds.min.y) {
+				y = _currPanBounds.min.y;
+			} else if(y < _currPanBounds.max.y) {
+				y = _currPanBounds.max.y;
+			}
+		}
+		
+		_panOffset.x = x;
+		_panOffset.y = y;
+		_applyCurrentZoomPan();
+	},
+	
+	handleEvent: function (e) {
+		e = e || window.event;
+		if(_globalEventHandlers[e.type]) {
+			_globalEventHandlers[e.type](e);
+		}
+	},
+
+
+	goTo: function(index) {
+
+		index = _getLoopedId(index);
+
+		var diff = index - _currentItemIndex;
+		_indexDiff = diff;
+
+		_currentItemIndex = index;
+		self.currItem = _getItemAt( _currentItemIndex );
+		_currPositionIndex -= diff;
+		
+		_moveMainScroll(_slideSize.x * _currPositionIndex);
+		
+
+		_stopAllAnimations();
+		_mainScrollAnimating = false;
+
+		self.updateCurrItem();
+	},
+	next: function() {
+		self.goTo( _currentItemIndex + 1);
+	},
+	prev: function() {
+		self.goTo( _currentItemIndex - 1);
+	},
+
+	// update current zoom/pan objects
+	updateCurrZoomItem: function(emulateSetContent) {
+		if(emulateSetContent) {
+			_shout('beforeChange', 0);
+		}
+
+		// itemHolder[1] is middle (current) item
+		if(_itemHolders[1].el.children.length) {
+			var zoomElement = _itemHolders[1].el.children[0];
+			if( framework.hasClass(zoomElement, 'pswp__zoom-wrap') ) {
+				_currZoomElementStyle = zoomElement.style;
+			} else {
+				_currZoomElementStyle = null;
+			}
+		} else {
+			_currZoomElementStyle = null;
+		}
+		
+		_currPanBounds = self.currItem.bounds;	
+		_startZoomLevel = _currZoomLevel = self.currItem.initialZoomLevel;
+
+		_panOffset.x = _currPanBounds.center.x;
+		_panOffset.y = _currPanBounds.center.y;
+
+		if(emulateSetContent) {
+			_shout('afterChange');
+		}
+	},
+
+
+	invalidateCurrItems: function() {
+		_itemsNeedUpdate = true;
+		for(var i = 0; i < NUM_HOLDERS; i++) {
+			if( _itemHolders[i].item ) {
+				_itemHolders[i].item.needsUpdate = true;
+			}
+		}
+	},
+
+	updateCurrItem: function(beforeAnimation) {
+
+		if(_indexDiff === 0) {
+			return;
+		}
+
+		var diffAbs = Math.abs(_indexDiff),
+			tempHolder;
+
+		if(beforeAnimation && diffAbs < 2) {
+			return;
+		}
+
+
+		self.currItem = _getItemAt( _currentItemIndex );
+		
+		_shout('beforeChange', _indexDiff);
+
+		if(diffAbs >= NUM_HOLDERS) {
+			_containerShiftIndex += _indexDiff + (_indexDiff > 0 ? -NUM_HOLDERS : NUM_HOLDERS);
+			diffAbs = NUM_HOLDERS;
+		}
+		for(var i = 0; i < diffAbs; i++) {
+			if(_indexDiff > 0) {
+				tempHolder = _itemHolders.shift();
+				_itemHolders[NUM_HOLDERS-1] = tempHolder; // move first to last
+
+				_containerShiftIndex++;
+				_setTranslateX( (_containerShiftIndex+2) * _slideSize.x, tempHolder.el.style);
+				self.setContent(tempHolder, _currentItemIndex - diffAbs + i + 1 + 1);
+			} else {
+				tempHolder = _itemHolders.pop();
+				_itemHolders.unshift( tempHolder ); // move last to first
+
+				_containerShiftIndex--;
+				_setTranslateX( _containerShiftIndex * _slideSize.x, tempHolder.el.style);
+				self.setContent(tempHolder, _currentItemIndex + diffAbs - i - 1 - 1);
+			}
+			
+		}
+
+		// reset zoom/pan on previous item
+		if(_currZoomElementStyle && Math.abs(_indexDiff) === 1) {
+
+			var prevItem = _getItemAt(_prevItemIndex);
+			if(prevItem.initialZoomLevel !== _currZoomLevel) {
+				_calculateItemSize(prevItem , _viewportSize );
+				_applyZoomPanToItem( prevItem ); 
+			}
+
+		}
+
+		// reset diff after update
+		_indexDiff = 0;
+
+		self.updateCurrZoomItem();
+
+		_prevItemIndex = _currentItemIndex;
+
+		_shout('afterChange');
+		
+	},
+
+
+
+	updateSize: function(force) {
+		
+		if(!_isFixedPosition) {
+			var windowScrollY = framework.getScrollY();
+			if(_currentWindowScrollY !== windowScrollY) {
+				template.style.top = windowScrollY + 'px';
+				_currentWindowScrollY = windowScrollY;
+			}
+			if(!force && _windowVisibleSize.x === window.innerWidth && _windowVisibleSize.y === window.innerHeight) {
+				return;
+			}
+			_windowVisibleSize.x = window.innerWidth;
+			_windowVisibleSize.y = window.innerHeight;
+
+			//template.style.width = _windowVisibleSize.x + 'px';
+			template.style.height = _windowVisibleSize.y + 'px';
+		}
+
+
+
+		_viewportSize.x = self.scrollWrap.clientWidth;
+		_viewportSize.y = self.scrollWrap.clientHeight;
+
+		
+		_offset = {x:0,y:_currentWindowScrollY};//framework.getOffset(template); 
+
+		_slideSize.x = _viewportSize.x + Math.round(_viewportSize.x * _options.spacing);
+		_slideSize.y = _viewportSize.y;
+
+		_moveMainScroll(_slideSize.x * _currPositionIndex);
+
+		_shout('beforeResize'); // even may be used for example to switch image sources
+
+
+		// don't re-calculate size on inital size update
+		if(_containerShiftIndex !== undefined) {
+
+			var holder,
+				item,
+				hIndex;
+
+			for(var i = 0; i < NUM_HOLDERS; i++) {
+				holder = _itemHolders[i];
+				_setTranslateX( (i+_containerShiftIndex) * _slideSize.x, holder.el.style);
+
+				hIndex = _currentItemIndex+i-1;
+
+				if(_options.loop && _getNumItems() > 2) {
+					hIndex = _getLoopedId(hIndex);
+				}
+
+				// update zoom level on items and refresh source (if needsUpdate)
+				item = _getItemAt( hIndex );
+
+				// re-render gallery item if `needsUpdate`,
+				// or doesn't have `bounds` (entirely new slide object)
+				if( item && (_itemsNeedUpdate || item.needsUpdate || !item.bounds) ) {
+
+					self.cleanSlide( item );
+					
+					self.setContent( holder, hIndex );
+
+					// if "center" slide
+					if(i === 1) {
+						self.currItem = item;
+						self.updateCurrZoomItem(true);
+					}
+
+					item.needsUpdate = false;
+
+				} else if(holder.index === -1 && hIndex >= 0) {
+					// add content first time
+					self.setContent( holder, hIndex );
+				}
+				if(item && item.container) {
+					_calculateItemSize(item, _viewportSize);
+					_applyZoomPanToItem( item );
+				}
+				
+			}
+			_itemsNeedUpdate = false;
+		}	
+
+		_startZoomLevel = _currZoomLevel = self.currItem.initialZoomLevel;
+		_currPanBounds = self.currItem.bounds;
+
+		if(_currPanBounds) {
+			_panOffset.x = _currPanBounds.center.x;
+			_panOffset.y = _currPanBounds.center.y;
+			_applyCurrentZoomPan();
+		}
+		
+		_shout('resize');
+	},
+	
+	// Zoom current item to
+	zoomTo: function(destZoomLevel, centerPoint, speed, easingFn, updateFn) {
+		/*
+			if(destZoomLevel === 'fit') {
+				destZoomLevel = self.currItem.fitRatio;
+			} else if(destZoomLevel === 'fill') {
+				destZoomLevel = self.currItem.fillRatio;
+			}
+		*/
+
+		if(centerPoint) {
+			_startZoomLevel = _currZoomLevel;
+			_midZoomPoint.x = Math.abs(centerPoint.x) - _panOffset.x ;
+			_midZoomPoint.y = Math.abs(centerPoint.y) - _panOffset.y ;
+			_equalizePoints(_startPanOffset, _panOffset);
+		}
+
+		var destPanBounds = _calculatePanBounds(destZoomLevel, false),
+			destPanOffset = {};
+
+		_modifyDestPanOffset('x', destPanBounds, destPanOffset, destZoomLevel);
+		_modifyDestPanOffset('y', destPanBounds, destPanOffset, destZoomLevel);
+
+		var initialZoomLevel = _currZoomLevel;
+		var initialPanOffset = {
+			x: _panOffset.x,
+			y: _panOffset.y
+		};
+
+		_roundPoint(destPanOffset);
+
+		// _startZoomLevel = destZoomLevel;
+		var onUpdate = function(now) {
+			if(now === 1) {
+				_currZoomLevel = destZoomLevel;
+				_panOffset.x = destPanOffset.x;
+				_panOffset.y = destPanOffset.y;
+			} else {
+				_currZoomLevel = (destZoomLevel - initialZoomLevel) * now + initialZoomLevel;
+				_panOffset.x = (destPanOffset.x - initialPanOffset.x) * now + initialPanOffset.x;
+				_panOffset.y = (destPanOffset.y - initialPanOffset.y) * now + initialPanOffset.y;
+			}
+
+			if(updateFn) {
+				updateFn(now);
+			}
+
+			_applyCurrentZoomPan();
+		};
+
+		if(speed) {
+			_animateProp('customZoomTo', 0, 1, speed, easingFn || framework.easing.sine.inOut, onUpdate);
+		} else {
+			onUpdate(1);
+		}
 	}
 
 
+};
 
-	/*
-	 * Function: Code.PhotoSwipe.detatch
-	 */
-	PhotoSwipe.detatch = function(instance){
+/*>>core*/
 
-		var i, j, image;
+/*>>gestures*/
+/**
+ * Mouse/touch/pointer event handlers.
+ * 
+ * separated from @core.js for readability
+ */
 
-		// Remove click event handlers if applicable
-		for (i=0, j=instance.originalImages.length; i<j; i++){
+var MIN_SWIPE_DISTANCE = 30,
+	DIRECTION_CHECK_OFFSET = 10; // amount of pixels to drag to determine direction of swipe
 
-			image = instance.originalImages[i];
-			if (!Util.isNothing(image.nodeType)){
-				if (image.nodeType === 1){
-					// DOM element
-					Util.Events.remove(image, 'click', image.__photoSwipeClickHandler);
-					delete image.__photoSwipeClickHandler;
+var _gestureStartTime,
+	_gestureCheckSpeedTime,
+
+	// pool of objects that are used during dragging of zooming
+	p = {}, // first point
+	p2 = {}, // second point (for zoom gesture)
+	delta = {},
+	_currPoint = {},
+	_startPoint = {},
+	_currPointers = [],
+	_startMainScrollPos = {},
+	_releaseAnimData,
+	_posPoints = [], // array of points during dragging, used to determine type of gesture
+	_tempPoint = {},
+
+	_isZoomingIn,
+	_verticalDragInitiated,
+	_oldAndroidTouchEndTimeout,
+	_currZoomedItemIndex = 0,
+	_centerPoint = _getEmptyPoint(),
+	_lastReleaseTime = 0,
+	_isDragging, // at least one pointer is down
+	_isMultitouch, // at least two _pointers are down
+	_zoomStarted, // zoom level changed during zoom gesture
+	_moved,
+	_dragAnimFrame,
+	_mainScrollShifted,
+	_currentPoints, // array of current touch points
+	_isZooming,
+	_currPointsDistance,
+	_startPointsDistance,
+	_currPanBounds,
+	_mainScrollPos = _getEmptyPoint(),
+	_currZoomElementStyle,
+	_mainScrollAnimating, // true, if animation after swipe gesture is running
+	_midZoomPoint = _getEmptyPoint(),
+	_currCenterPoint = _getEmptyPoint(),
+	_direction,
+	_isFirstMove,
+	_opacityChanged,
+	_bgOpacity,
+	_wasOverInitialZoom,
+
+	_isEqualPoints = function(p1, p2) {
+		return p1.x === p2.x && p1.y === p2.y;
+	},
+	_isNearbyPoints = function(touch0, touch1) {
+		return Math.abs(touch0.x - touch1.x) < DOUBLE_TAP_RADIUS && Math.abs(touch0.y - touch1.y) < DOUBLE_TAP_RADIUS;
+	},
+	_calculatePointsDistance = function(p1, p2) {
+		_tempPoint.x = Math.abs( p1.x - p2.x );
+		_tempPoint.y = Math.abs( p1.y - p2.y );
+		return Math.sqrt(_tempPoint.x * _tempPoint.x + _tempPoint.y * _tempPoint.y);
+	},
+	_stopDragUpdateLoop = function() {
+		if(_dragAnimFrame) {
+			_cancelAF(_dragAnimFrame);
+			_dragAnimFrame = null;
+		}
+	},
+	_dragUpdateLoop = function() {
+		if(_isDragging) {
+			_dragAnimFrame = _requestAF(_dragUpdateLoop);
+			_renderMovement();
+		}
+	},
+	_canPan = function() {
+		return !(_options.scaleMode === 'fit' && _currZoomLevel ===  self.currItem.initialZoomLevel);
+	},
+	
+	// find the closest parent DOM element
+	_closestElement = function(el, fn) {
+	  	if(!el) {
+	  		return false;
+	  	}
+
+	  	// don't search elements above pswp__scroll-wrap
+	  	if(el.className && el.className.indexOf('pswp__scroll-wrap') > -1 ) {
+	  		return false;
+	  	}
+
+	  	if( fn(el) ) {
+	  		return el;
+	  	}
+
+	  	return _closestElement(el.parentNode, fn);
+	},
+
+	_preventObj = {},
+	_preventDefaultEventBehaviour = function(e, isDown) {
+	    _preventObj.prevent = !_closestElement(e.target, _options.isClickableElement);
+
+		_shout('preventDragEvent', e, isDown, _preventObj);
+		return _preventObj.prevent;
+
+	},
+	_convertTouchToPoint = function(touch, p) {
+		p.x = touch.pageX;
+		p.y = touch.pageY;
+		p.id = touch.identifier;
+		return p;
+	},
+	_findCenterOfPoints = function(p1, p2, pCenter) {
+		pCenter.x = (p1.x + p2.x) * 0.5;
+		pCenter.y = (p1.y + p2.y) * 0.5;
+	},
+	_pushPosPoint = function(time, x, y) {
+		if(time - _gestureCheckSpeedTime > 50) {
+			var o = _posPoints.length > 2 ? _posPoints.shift() : {};
+			o.x = x;
+			o.y = y; 
+			_posPoints.push(o);
+			_gestureCheckSpeedTime = time;
+		}
+	},
+
+	_calculateVerticalDragOpacityRatio = function() {
+		var yOffset = _panOffset.y - self.currItem.initialPosition.y; // difference between initial and current position
+		return 1 -  Math.abs( yOffset / (_viewportSize.y / 2)  );
+	},
+
+	
+	// points pool, reused during touch events
+	_ePoint1 = {},
+	_ePoint2 = {},
+	_tempPointsArr = [],
+	_tempCounter,
+	_getTouchPoints = function(e) {
+		// clean up previous points, without recreating array
+		while(_tempPointsArr.length > 0) {
+			_tempPointsArr.pop();
+		}
+
+		if(!_pointerEventEnabled) {
+			if(e.type.indexOf('touch') > -1) {
+
+				if(e.touches && e.touches.length > 0) {
+					_tempPointsArr[0] = _convertTouchToPoint(e.touches[0], _ePoint1);
+					if(e.touches.length > 1) {
+						_tempPointsArr[1] = _convertTouchToPoint(e.touches[1], _ePoint2);
+					}
 				}
+				
+			} else {
+				_ePoint1.x = e.pageX;
+				_ePoint1.y = e.pageY;
+				_ePoint1.id = '';
+				_tempPointsArr[0] = _ePoint1;//_ePoint1;
+			}
+		} else {
+			_tempCounter = 0;
+			// we can use forEach, as pointer events are supported only in modern browsers
+			_currPointers.forEach(function(p) {
+				if(_tempCounter === 0) {
+					_tempPointsArr[0] = p;
+				} else if(_tempCounter === 1) {
+					_tempPointsArr[1] = p;
+				}
+				_tempCounter++;
+
+			});
+		}
+		return _tempPointsArr;
+	},
+
+	_panOrMoveMainScroll = function(axis, delta) {
+
+		var panFriction,
+			overDiff = 0,
+			newOffset = _panOffset[axis] + delta[axis],
+			startOverDiff,
+			dir = delta[axis] > 0,
+			newMainScrollPosition = _mainScrollPos.x + delta.x,
+			mainScrollDiff = _mainScrollPos.x - _startMainScrollPos.x,
+			newPanPos,
+			newMainScrollPos;
+
+		// calculate fdistance over the bounds and friction
+		if(newOffset > _currPanBounds.min[axis] || newOffset < _currPanBounds.max[axis]) {
+			panFriction = _options.panEndFriction;
+			// Linear increasing of friction, so at 1/4 of viewport it's at max value. 
+			// Looks not as nice as was expected. Left for history.
+			// panFriction = (1 - (_panOffset[axis] + delta[axis] + panBounds.min[axis]) / (_viewportSize[axis] / 4) );
+		} else {
+			panFriction = 1;
+		}
+		
+		newOffset = _panOffset[axis] + delta[axis] * panFriction;
+
+		// move main scroll or start panning
+		if(_options.allowPanToNext || _currZoomLevel === self.currItem.initialZoomLevel) {
+
+
+			if(!_currZoomElementStyle) {
+				
+				newMainScrollPos = newMainScrollPosition;
+
+			} else if(_direction === 'h' && axis === 'x' && !_zoomStarted ) {
+				
+				if(dir) {
+					if(newOffset > _currPanBounds.min[axis]) {
+						panFriction = _options.panEndFriction;
+						overDiff = _currPanBounds.min[axis] - newOffset;
+						startOverDiff = _currPanBounds.min[axis] - _startPanOffset[axis];
+					}
+					
+					// drag right
+					if( (startOverDiff <= 0 || mainScrollDiff < 0) && _getNumItems() > 1 ) {
+						newMainScrollPos = newMainScrollPosition;
+						if(mainScrollDiff < 0 && newMainScrollPosition > _startMainScrollPos.x) {
+							newMainScrollPos = _startMainScrollPos.x;
+						}
+					} else {
+						if(_currPanBounds.min.x !== _currPanBounds.max.x) {
+							newPanPos = newOffset;
+						}
+						
+					}
+
+				} else {
+
+					if(newOffset < _currPanBounds.max[axis] ) {
+						panFriction =_options.panEndFriction;
+						overDiff = newOffset - _currPanBounds.max[axis];
+						startOverDiff = _startPanOffset[axis] - _currPanBounds.max[axis];
+					}
+
+					if( (startOverDiff <= 0 || mainScrollDiff > 0) && _getNumItems() > 1 ) {
+						newMainScrollPos = newMainScrollPosition;
+
+						if(mainScrollDiff > 0 && newMainScrollPosition < _startMainScrollPos.x) {
+							newMainScrollPos = _startMainScrollPos.x;
+						}
+
+					} else {
+						if(_currPanBounds.min.x !== _currPanBounds.max.x) {
+							newPanPos = newOffset;
+						}
+					}
+
+				}
+
+
+				//
+			}
+
+			if(axis === 'x') {
+
+				if(newMainScrollPos !== undefined) {
+					_moveMainScroll(newMainScrollPos, true);
+					if(newMainScrollPos === _startMainScrollPos.x) {
+						_mainScrollShifted = false;
+					} else {
+						_mainScrollShifted = true;
+					}
+				}
+
+				if(_currPanBounds.min.x !== _currPanBounds.max.x) {
+					if(newPanPos !== undefined) {
+						_panOffset.x = newPanPos;
+					} else if(!_mainScrollShifted) {
+						_panOffset.x += delta.x * panFriction;
+					}
+				}
+
+				return newMainScrollPos !== undefined;
 			}
 
 		}
 
-		PhotoSwipe.disposeInstance(instance);
+		if(!_mainScrollAnimating) {
+			
+			if(!_mainScrollShifted) {
+				if(_currZoomLevel > self.currItem.fitRatio) {
+					_panOffset[axis] += delta[axis] * panFriction;
+				
+				}
+			}
 
-	};
+			
+		}
+		
+	},
 
+	// Pointerdown/touchstart/mousedown handler
+	_onDragStart = function(e) {
 
-
-	/*
-	 * Function: Code.PhotoSwipe.createInstance
-	 */
-	PhotoSwipe.createInstance = function(images, options, id){
-
-		var i, instance, image;
-
-		if (Util.isNothing(images)){
-			throw 'Code.PhotoSwipe.attach: No images passed.';
+		// Allow dragging only via left mouse button.
+		// As this handler is not added in IE8 - we ignore e.which
+		// 
+		// http://www.quirksmode.org/js/events_properties.html
+		// https://developer.mozilla.org/en-US/docs/Web/API/event.button
+		if(e.type === 'mousedown' && e.button > 0  ) {
+			return;
 		}
 
-		if (!Util.isLikeArray(images)){
-			throw 'Code.PhotoSwipe.createInstance: Images must be an array of elements or image urls.';
+		if(_initialZoomRunning) {
+			e.preventDefault();
+			return;
 		}
 
-		if (images.length < 1){
-			throw 'Code.PhotoSwipe.createInstance: No images to passed.';
+		if(_oldAndroidTouchEndTimeout && e.type === 'mousedown') {
+			return;
 		}
 
-		options = Util.coalesce(options, { });
-
-		instance = PhotoSwipe.getInstance(id);
-
-		if (Util.isNothing(instance)){
-			instance = new PhotoSwipe.PhotoSwipeClass(images, options, id);
-			PhotoSwipe.instances.push(instance);
-		}
-		else{
-			throw 'Code.PhotoSwipe.createInstance: Instance with id "' + id +' already exists."';
+		if(_preventDefaultEventBehaviour(e, true)) {
+			e.preventDefault();
 		}
 
-		return instance;
-
-	};
 
 
+		_shout('pointerDown');
 
-	/*
-	 * Function: Code.PhotoSwipe.disposeInstance
-	 */
-	PhotoSwipe.disposeInstance = function(instance){
+		if(_pointerEventEnabled) {
+			var pointerIndex = framework.arraySearch(_currPointers, e.pointerId, 'id');
+			if(pointerIndex < 0) {
+				pointerIndex = _currPointers.length;
+			}
+			_currPointers[pointerIndex] = {x:e.pageX, y:e.pageY, id: e.pointerId};
+		}
+		
 
-		var instanceIndex = PhotoSwipe.getInstanceIndex(instance);
 
-		if (instanceIndex < 0){
-			throw 'Code.PhotoSwipe.disposeInstance: Unable to find instance to dispose.';
+		var startPointsList = _getTouchPoints(e),
+			numPoints = startPointsList.length;
+
+		_currentPoints = null;
+
+		_stopAllAnimations();
+
+		// init drag
+		if(!_isDragging || numPoints === 1) {
+
+			
+
+			_isDragging = _isFirstMove = true;
+			framework.bind(window, _upMoveEvents, self);
+
+			_isZoomingIn = 
+				_wasOverInitialZoom = 
+				_opacityChanged = 
+				_verticalDragInitiated = 
+				_mainScrollShifted = 
+				_moved = 
+				_isMultitouch = 
+				_zoomStarted = false;
+
+			_direction = null;
+
+			_shout('firstTouchStart', startPointsList);
+
+			_equalizePoints(_startPanOffset, _panOffset);
+
+			_currPanDist.x = _currPanDist.y = 0;
+			_equalizePoints(_currPoint, startPointsList[0]);
+			_equalizePoints(_startPoint, _currPoint);
+
+			//_equalizePoints(_startMainScrollPos, _mainScrollPos);
+			_startMainScrollPos.x = _slideSize.x * _currPositionIndex;
+
+			_posPoints = [{
+				x: _currPoint.x,
+				y: _currPoint.y
+			}];
+
+			_gestureCheckSpeedTime = _gestureStartTime = _getCurrentTime();
+
+			//_mainScrollAnimationEnd(true);
+			_calculatePanBounds( _currZoomLevel, true );
+			
+			// Start rendering
+			_stopDragUpdateLoop();
+			_dragUpdateLoop();
+			
 		}
 
-		instance.dispose();
-		PhotoSwipe.instances.splice(instanceIndex, 1);
-		instance = null;
+		// init zoom
+		if(!_isZooming && numPoints > 1 && !_mainScrollAnimating && !_mainScrollShifted) {
+			_startZoomLevel = _currZoomLevel;
+			_zoomStarted = false; // true if zoom changed at least once
 
-	};
+			_isZooming = _isMultitouch = true;
+			_currPanDist.y = _currPanDist.x = 0;
+
+			_equalizePoints(_startPanOffset, _panOffset);
+
+			_equalizePoints(p, startPointsList[0]);
+			_equalizePoints(p2, startPointsList[1]);
+
+			_findCenterOfPoints(p, p2, _currCenterPoint);
+
+			_midZoomPoint.x = Math.abs(_currCenterPoint.x) - _panOffset.x;
+			_midZoomPoint.y = Math.abs(_currCenterPoint.y) - _panOffset.y;
+			_currPointsDistance = _startPointsDistance = _calculatePointsDistance(p, p2);
+		}
 
 
+	},
 
-	/*
-	 * Function: onTriggerElementClick
-	 */
-	PhotoSwipe.onTriggerElementClick = function(e){
+	// Pointermove/touchmove/mousemove handler
+	_onDragMove = function(e) {
 
 		e.preventDefault();
 
-		var instance = this;
-		instance.show(e.currentTarget);
+		if(_pointerEventEnabled) {
+			var pointerIndex = framework.arraySearch(_currPointers, e.pointerId, 'id');
+			if(pointerIndex > -1) {
+				var p = _currPointers[pointerIndex];
+				p.x = e.pageX;
+				p.y = e.pageY; 
+			}
+		}
 
-	};
+		if(_isDragging) {
+			var touchesList = _getTouchPoints(e);
+			if(!_direction && !_moved && !_isZooming) {
+				var diff = Math.abs(touchesList[0].x - _currPoint.x) - Math.abs(touchesList[0].y - _currPoint.y);
+				// check the direction of movement
+				if(Math.abs(diff) >= DIRECTION_CHECK_OFFSET) {
+					_direction = diff > 0 ? 'h' : 'v';
+					_currentPoints = touchesList;
+				}
+			} else {
+				_currentPoints = touchesList;
+			}
+		}	
+	},
+	// 
+	_renderMovement =  function() {
+
+		if(!_currentPoints) {
+			return;
+		}
+
+		var numPoints = _currentPoints.length;
+
+		if(numPoints === 0) {
+			return;
+		}
+
+		_equalizePoints(p, _currentPoints[0]);
+
+		delta.x = p.x - _currPoint.x;
+		delta.y = p.y - _currPoint.y;
+
+		if(_isZooming && numPoints > 1) {
+			// Handle behaviour for more than 1 point
+
+			_currPoint.x = p.x;
+			_currPoint.y = p.y;
+		
+			// check if one of two points changed
+			if( !delta.x && !delta.y && _isEqualPoints(_currentPoints[1], p2) ) {
+				return;
+			}
+
+			_equalizePoints(p2, _currentPoints[1]);
 
 
+			if(!_zoomStarted) {
+				_zoomStarted = true;
+				_shout('zoomGestureStarted');
+			}
+			
+			// Distance between two points
+			var pointsDistance = _calculatePointsDistance(p,p2);
 
-	/*
-	 * Function: Code.PhotoSwipe.getInstance
-	 */
-	PhotoSwipe.getInstance = function(id){
+			var zoomLevel = _calculateZoomLevel(pointsDistance);
 
-		var i, j, instance;
+			// slightly over the of initial zoom level
+			if(zoomLevel > self.currItem.initialZoomLevel + self.currItem.initialZoomLevel / 15) {
+				_wasOverInitialZoom = true;
+			}
 
-		for (i=0, j=PhotoSwipe.instances.length; i<j; i++){
+			// Apply the friction if zoom level is out of the bounds
+			var zoomFriction = 1,
+				minZoomLevel = _getMinZoomLevel(),
+				maxZoomLevel = _getMaxZoomLevel();
 
-			instance = PhotoSwipe.instances[i];
-			if (instance.id === id){
-				return instance;
+			if ( zoomLevel < minZoomLevel ) {
+				
+				if(_options.pinchToClose && !_wasOverInitialZoom && _startZoomLevel <= self.currItem.initialZoomLevel) {
+					// fade out background if zooming out
+					var minusDiff = minZoomLevel - zoomLevel;
+					var percent = 1 - minusDiff / (minZoomLevel / 1.2);
+
+					_applyBgOpacity(percent);
+					_shout('onPinchClose', percent);
+					_opacityChanged = true;
+				} else {
+					zoomFriction = (minZoomLevel - zoomLevel) / minZoomLevel;
+					if(zoomFriction > 1) {
+						zoomFriction = 1;
+					}
+					zoomLevel = minZoomLevel - zoomFriction * (minZoomLevel / 3);
+				}
+				
+			} else if ( zoomLevel > maxZoomLevel ) {
+				// 1.5 - extra zoom level above the max. E.g. if max is x6, real max 6 + 1.5 = 7.5
+				zoomFriction = (zoomLevel - maxZoomLevel) / ( minZoomLevel * 6 );
+				if(zoomFriction > 1) {
+					zoomFriction = 1;
+				}
+				zoomLevel = maxZoomLevel + zoomFriction * minZoomLevel;
+			}
+
+			if(zoomFriction < 0) {
+				zoomFriction = 0;
+			}
+
+			// distance between touch points after friction is applied
+			_currPointsDistance = pointsDistance;
+
+			// _centerPoint - The point in the middle of two pointers
+			_findCenterOfPoints(p, p2, _centerPoint);
+		
+			// paning with two pointers pressed
+			_currPanDist.x += _centerPoint.x - _currCenterPoint.x;
+			_currPanDist.y += _centerPoint.y - _currCenterPoint.y;
+			_equalizePoints(_currCenterPoint, _centerPoint);
+
+			_panOffset.x = _calculatePanOffset('x', zoomLevel);
+			_panOffset.y = _calculatePanOffset('y', zoomLevel);
+
+			_isZoomingIn = zoomLevel > _currZoomLevel;
+			_currZoomLevel = zoomLevel;
+			_applyCurrentZoomPan();
+
+		} else {
+
+			// handle behaviour for one point (dragging or panning)
+
+			if(!_direction) {
+				return;
+			}
+
+			if(_isFirstMove) {
+				_isFirstMove = false;
+
+				// subtract drag distance that was used during the detection direction  
+
+				if( Math.abs(delta.x) >= DIRECTION_CHECK_OFFSET) {
+					delta.x -= _currentPoints[0].x - _startPoint.x;
+				}
+				
+				if( Math.abs(delta.y) >= DIRECTION_CHECK_OFFSET) {
+					delta.y -= _currentPoints[0].y - _startPoint.y;
+				}
+			}
+
+			_currPoint.x = p.x;
+			_currPoint.y = p.y;
+
+			// do nothing if pointers position hasn't changed
+			if(delta.x === 0 && delta.y === 0) {
+				return;
+			}
+
+			if(_direction === 'v' && _options.closeOnVerticalDrag) {
+				if(!_canPan()) {
+					
+					_currPanDist.y += delta.y;
+					_panOffset.y += delta.y;
+
+					var opacityRatio = _calculateVerticalDragOpacityRatio();
+
+					_verticalDragInitiated = true;
+					_shout('onVerticalDrag', opacityRatio);
+
+					_applyBgOpacity(opacityRatio);
+					_applyCurrentZoomPan();
+					return ;
+				}
+			}
+
+			_pushPosPoint(_getCurrentTime(), p.x, p.y);
+
+			_moved = true;
+			_currPanBounds = self.currItem.bounds;
+			
+			var mainScrollChanged = _panOrMoveMainScroll('x', delta);
+			if(!mainScrollChanged) {
+				_panOrMoveMainScroll('y', delta);
+
+				_roundPoint(_panOffset);
+				_applyCurrentZoomPan();
 			}
 
 		}
 
-		return null;
+	},
+	
+	// Pointerup/pointercancel/touchend/touchcancel/mouseup event handler
+	_onDragRelease = function(e) {
 
-	};
+		if(_features.isOldAndroid ) {
 
-
-
-	/*
-	 * Function: Code.PhotoSwipe.getInstanceIndex
-	 */
-	PhotoSwipe.getInstanceIndex = function(instance){
-
-		var i, j, instanceIndex = -1;
-
-		for (i=0, j=PhotoSwipe.instances.length; i<j; i++){
-
-			if (PhotoSwipe.instances[i] === instance){
-				instanceIndex = i;
-				break;
+			if(_oldAndroidTouchEndTimeout && e.type === 'mouseup') {
+				return;
 			}
 
+			// on Android (v4.1, 4.2, 4.3 & possibly older) 
+			// ghost mousedown/up event isn't preventable via e.preventDefault,
+			// which causes fake mousedown event
+			// so we block mousedown/up for 600ms
+			if( e.type.indexOf('touch') > -1 ) {
+				clearTimeout(_oldAndroidTouchEndTimeout);
+				_oldAndroidTouchEndTimeout = setTimeout(function() {
+					_oldAndroidTouchEndTimeout = 0;
+				}, 600);
+			}
+			
 		}
 
-		return instanceIndex;
-
-	};
-
-
-
-}
-(
-	window,
-	window.Code.Util
-));// Copyright (c) 2012 by Code Computerlove (http://www.codecomputerlove.com)
-// Licensed under the MIT license
-// version: 3.0.5.1
-
-(function(window, klass, Util, Cache, DocumentOverlay, Carousel, Toolbar, UILayer, ZoomPanRotate){
-
-
-	Util.registerNamespace('Code.PhotoSwipe');
-	var PhotoSwipe = window.Code.PhotoSwipe;
-
-
-	PhotoSwipe.PhotoSwipeClass = klass({
-
-
-
-		id: null,
-		settings: null,
-		isBackEventSupported: null,
-		backButtonClicked: null,
-		currentIndex: null,
-		originalImages: null,
-		mouseWheelStartTime: null,
-		windowDimensions: null,
-
-
-
-		// Components
-		cache: null,
-		documentOverlay: null,
-		carousel: null,
-		uiLayer: null,
-		toolbar: null,
-		zoomPanRotate: null,
-
-
-
-		// Handlers
-		windowOrientationChangeHandler: null,
-		windowScrollHandler: null,
-		windowHashChangeHandler: null,
-		keyDownHandler: null,
-		windowOrientationEventName: null,
-		uiLayerTouchHandler: null,
-		carouselSlideByEndHandler: null,
-		carouselSlideshowStartHandler: null,
-		carouselSlideshowStopHandler: null,
-		toolbarTapHandler: null,
-		toolbarBeforeShowHandler: null,
-		toolbarShowHandler: null,
-		toolbarBeforeHideHandler: null,
-		toolbarHideHandler: null,
-		mouseWheelHandler: null,
-		zoomPanRotateTransformHandler: null,
-
-
-		_isResettingPosition: null,
-		_uiWebViewResetPositionTimeout: null,
-
-
-		/*
-		 * Function: dispose
-		 */
-		dispose: function(){
-
-			var prop;
-
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onBeforeShow);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onShow);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onBeforeHide);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onHide);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onDisplayImage);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onResetPosition);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onSlideshowStart);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onSlideshowStop);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onTouch);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onBeforeCaptionAndToolbarShow);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onCaptionAndToolbarShow);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onBeforeCaptionAndToolbarHide);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onCaptionAndToolbarHide);
-			Util.Events.remove(this, PhotoSwipe.EventTypes.onZoomPanRotateTransform);
-
-
-			this.removeEventHandlers();
-
-			if (!Util.isNothing(this.documentOverlay)){
-				this.documentOverlay.dispose();
-			}
-
-			if (!Util.isNothing(this.carousel)){
-				this.carousel.dispose();
-			}
-
-			this.destroyZoomPanRotate();
-
-			if (!Util.isNothing(this.uiLayer)){
-				this.uiLayer.dispose();
-			}
-
-			if (!Util.isNothing(this.toolbar)){
-				this.toolbar.dispose();
-			}
-
-			if (!Util.isNothing(this.cache)){
-				this.cache.dispose();
-			}
-
-			for (prop in this) {
-				if (Util.objectHasProperty(this, prop)) {
-					this[prop] = null;
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: initialize
-		 */
-		initialize: function(images, options, id){
-
-			var targetPosition;
-
-			if (Util.isNothing(id)){
-				this.id = 'PhotoSwipe' + new Date().getTime().toString();
-			}
-			else{
-				this.id = id;
-			}
-
-			this.originalImages = images;
-
-			if (Util.Browser.android && !Util.Browser.firefox){
-				if (window.navigator.userAgent.match(/Android (\d+.\d+)/).toString().replace(/^.*\,/, '') >= 2.1){
-					this.isBackEventSupported = true;
-				}
-			}
-
-			if (!this.isBackEventSupported){
-				this.isBackEventSupported = Util.objectHasProperty(window, 'onhashchange');
-			}
-
-			this.settings = {
-
-				// General
-				fadeInSpeed: 250,
-				fadeOutSpeed: 250,
-				preventHide: false,
-				preventSlideshow: false,
-				zIndex: 1000,
-				backButtonHideEnabled: true,
-				enableKeyboard: true,
-				enableMouseWheel: true,
-				mouseWheelSpeed: 350,
-				autoStartSlideshow: false,
-				jQueryMobile: ( !Util.isNothing(window.jQuery) && !Util.isNothing(window.jQuery.mobile) ),
-				jQueryMobileDialogHash: '&ui-state=dialog',
-				enableUIWebViewRepositionTimeout: false,
-				uiWebViewResetPositionDelay: 500,
-				target: window,
-				preventDefaultTouchEvents: true,
-				allowVerticalScroll:false,
-
-				// Carousel
-				loop: true,
-				slideSpeed: 250,
-				nextPreviousSlideSpeed: 0,
-				enableDrag: true,
-				swipeThreshold: 50,
-				swipeTimeThreshold: 250,
-				slideTimingFunction: 'ease-out',
-				slideshowDelay: 3000,
-				doubleTapSpeed: 250,
-				margin: 20,
-				imageScaleMethod: 'fit', // Either "fit", "fitNoUpscale" or "zoom",
-
-
-				// Toolbar
-				captionAndToolbarHide: false,
-				captionAndToolbarFlipPosition: false,
-				captionAndToolbarAutoHideDelay: 5000,
-				captionAndToolbarOpacity: 0.8,
-				captionAndToolbarShowEmptyCaptions: true,
-				getToolbar: PhotoSwipe.Toolbar.getToolbar,
-
-
-				// ZoomPanRotate
-				allowUserZoom: true,
-				allowRotationOnUserZoom: false,
-				maxUserZoom: 5.0,
-				minUserZoom: 0.5,
-				doubleTapZoomLevel: 2.5,
-
-
-				// Cache
-				getImageSource: PhotoSwipe.Cache.Functions.getImageSource,
-				getImageCaption: PhotoSwipe.Cache.Functions.getImageCaption,
-				getImageMetaData: PhotoSwipe.Cache.Functions.getImageMetaData,
-				cacheMode: PhotoSwipe.Cache.Mode.normal
-
-			};
-
-			Util.extend(this.settings, options);
-
-			if (this.settings.target !== window){
-				targetPosition = Util.DOM.getStyle(this.settings.target, 'position');
-				if (targetPosition !== 'relative' || targetPosition !== 'absolute'){
-					Util.DOM.setStyle(this.settings.target, 'position', 'relative');
-				}
-			}
-
-			if (this.settings.target !== window){
-				this.isBackEventSupported = false;
-				this.settings.backButtonHideEnabled = false;
-			}
-			else{
-				if (this.settings.preventHide){
-					this.settings.backButtonHideEnabled = false;
-				}
-			}
-
-			this.cache = new Cache.CacheClass(images, this.settings);
-
-		},
-
-
-
-		/*
-		 * Function: show
-		 */
-		show: function(obj){
-
-			var i, j;
-
-			this._isResettingPosition = false;
-			this.backButtonClicked = false;
-
-			// Work out what the starting index is
-			if (Util.isNumber(obj)){
-				this.currentIndex = obj;
-			}
-			else{
-
-				this.currentIndex = -1;
-				for (i=0, j=this.originalImages.length; i<j; i++){
-					if (this.originalImages[i] === obj){
-						this.currentIndex = i;
-						break;
+		_shout('pointerUp');
+
+		if(_preventDefaultEventBehaviour(e, false)) {
+			e.preventDefault();
+		}
+
+		var releasePoint;
+
+		if(_pointerEventEnabled) {
+			var pointerIndex = framework.arraySearch(_currPointers, e.pointerId, 'id');
+			
+			if(pointerIndex > -1) {
+				releasePoint = _currPointers.splice(pointerIndex, 1)[0];
+
+				if(navigator.pointerEnabled) {
+					releasePoint.type = e.pointerType || 'mouse';
+				} else {
+					var MSPOINTER_TYPES = {
+						4: 'mouse', // event.MSPOINTER_TYPE_MOUSE
+						2: 'touch', // event.MSPOINTER_TYPE_TOUCH 
+						3: 'pen' // event.MSPOINTER_TYPE_PEN
+					};
+					releasePoint.type = MSPOINTER_TYPES[e.pointerType];
+
+					if(!releasePoint.type) {
+						releasePoint.type = e.pointerType || 'mouse';
 					}
 				}
 
 			}
-
-			if (this.currentIndex < 0 || this.currentIndex > this.originalImages.length-1){
-				throw "Code.PhotoSwipe.PhotoSwipeClass.show: Starting index out of range";
-			}
-
-			// Store a reference to the current window dimensions
-			// Use this later to double check that a window has actually
-			// been resized.
-			this.isAlreadyGettingPage = this.getWindowDimensions();
-
-			// Set this instance to be the active instance
-			PhotoSwipe.setActivateInstance(this);
-
-			this.windowDimensions = this.getWindowDimensions();
-
-			// Create components
-			if (this.settings.target === window){
-				Util.DOM.addClass(window.document.body, PhotoSwipe.CssClasses.buildingBody);
-			}
-			else{
-				Util.DOM.addClass(this.settings.target, PhotoSwipe.CssClasses.buildingBody);
-			}
-			this.createComponents();
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onBeforeShow,
-				target: this
-			});
-
-			// Fade in the document overlay
-			this.documentOverlay.fadeIn(this.settings.fadeInSpeed, this.onDocumentOverlayFadeIn.bind(this));
-
-		},
-
-
-
-		/*
-		 * Function: getWindowDimensions
-		 */
-		getWindowDimensions: function(){
-
-			return {
-				width: Util.DOM.windowWidth(),
-				height: Util.DOM.windowHeight()
-			};
-
-		},
-
-
-
-		/*
-		 * Function: createComponents
-		 */
-		createComponents: function(){
-
-			this.documentOverlay = new DocumentOverlay.DocumentOverlayClass(this.settings);
-			this.carousel = new Carousel.CarouselClass(this.cache, this.settings);
-			this.uiLayer = new UILayer.UILayerClass(this.settings);
-			if (!this.settings.captionAndToolbarHide){
-				this.toolbar = new Toolbar.ToolbarClass(this.cache, this.settings);
-			}
-
-		},
-
-
-
-		/*
-		 * Function: resetPosition
-		 */
-		resetPosition: function(){
-
-			if (this._isResettingPosition){
-				return;
-			}
-
-			var newWindowDimensions = this.getWindowDimensions();
-			if (!Util.isNothing(this.windowDimensions)){
-				if (newWindowDimensions.width === this.windowDimensions.width && newWindowDimensions.height === this.windowDimensions.height){
-					// This was added as a fudge for iOS
-					return;
-				}
-			}
-
-			this._isResettingPosition = true;
-
-			this.windowDimensions = newWindowDimensions;
-
-			this.destroyZoomPanRotate();
-
-			this.documentOverlay.resetPosition();
-			this.carousel.resetPosition();
-
-			if (!Util.isNothing(this.toolbar)){
-				this.toolbar.resetPosition();
-			}
-
-			this.uiLayer.resetPosition();
-
-			this._isResettingPosition = false;
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onResetPosition,
-				target: this
-			});
-
-		},
-
-
-
-		/*
-		 * Function: addEventHandler
-		 */
-		addEventHandler: function(type, handler){
-
-			Util.Events.add(this, type, handler);
-
-		},
-
-
-
-		/*
-		 * Function: addEventHandlers
-		 */
-		addEventHandlers: function(){
-
-			if (Util.isNothing(this.windowOrientationChangeHandler)){
-
-				this.windowOrientationChangeHandler = this.onWindowOrientationChange.bind(this);
-				this.windowScrollHandler = this.onWindowScroll.bind(this);
-				this.keyDownHandler = this.onKeyDown.bind(this);
-				this.windowHashChangeHandler = this.onWindowHashChange.bind(this);
-				this.uiLayerTouchHandler = this.onUILayerTouch.bind(this);
-				this.carouselSlideByEndHandler = this.onCarouselSlideByEnd.bind(this);
-				this.carouselSlideshowStartHandler = this.onCarouselSlideshowStart.bind(this);
-				this.carouselSlideshowStopHandler = this.onCarouselSlideshowStop.bind(this);
-				this.toolbarTapHandler = this.onToolbarTap.bind(this);
-				this.toolbarBeforeShowHandler = this.onToolbarBeforeShow.bind(this);
-				this.toolbarShowHandler = this.onToolbarShow.bind(this);
-				this.toolbarBeforeHideHandler = this.onToolbarBeforeHide.bind(this);
-				this.toolbarHideHandler = this.onToolbarHide.bind(this);
-				this.mouseWheelHandler = this.onMouseWheel.bind(this);
-				this.zoomPanRotateTransformHandler = this.onZoomPanRotateTransform.bind(this);
-
-			}
-
-			// Set window handlers
-			if (Util.Browser.android){
-				// For some reason, resize was more stable than orientationchange in Android
-				this.orientationEventName = 'resize';
-			}
-			else if (Util.Browser.iOS && (!Util.Browser.safari)){
-				Util.Events.add(window.document.body, 'orientationchange', this.windowOrientationChangeHandler);
-			}
-			else{
-				var supportsOrientationChange = !Util.isNothing(window.onorientationchange);
-				this.orientationEventName = supportsOrientationChange ? 'orientationchange' : 'resize';
-			}
-
-			if (!Util.isNothing(this.orientationEventName)){
-				Util.Events.add(window, this.orientationEventName, this.windowOrientationChangeHandler);
-			}
-			if (this.settings.target === window){
-				Util.Events.add(window, 'scroll', this.windowScrollHandler);
-			}
-
-			if (this.settings.enableKeyboard){
-				Util.Events.add(window.document, 'keydown', this.keyDownHandler);
-			}
-
-
-			if (this.isBackEventSupported && this.settings.backButtonHideEnabled){
-
-				this.windowHashChangeHandler = this.onWindowHashChange.bind(this);
-
-				if (this.settings.jQueryMobile){
-					window.location.hash = this.settings.jQueryMobileDialogHash;
-				}
-				else{
-					this.currentHistoryHashValue = 'PhotoSwipe' + new Date().getTime().toString();
-					window.location.hash = this.currentHistoryHashValue;
-				}
-
-				Util.Events.add(window, 'hashchange', this.windowHashChangeHandler);
-
-			}
-
-			if (this.settings.enableMouseWheel){
-				Util.Events.add(window, 'mousewheel', this.mouseWheelHandler);
-			}
-
-			Util.Events.add(this.uiLayer, Util.TouchElement.EventTypes.onTouch, this.uiLayerTouchHandler);
-			Util.Events.add(this.carousel, Carousel.EventTypes.onSlideByEnd, this.carouselSlideByEndHandler);
-			Util.Events.add(this.carousel, Carousel.EventTypes.onSlideshowStart, this.carouselSlideshowStartHandler);
-			Util.Events.add(this.carousel, Carousel.EventTypes.onSlideshowStop, this.carouselSlideshowStopHandler);
-
-			if (!Util.isNothing(this.toolbar)){
-				Util.Events.add(this.toolbar, Toolbar.EventTypes.onTap, this.toolbarTapHandler);
-				Util.Events.add(this.toolbar, Toolbar.EventTypes.onBeforeShow, this.toolbarBeforeShowHandler);
-				Util.Events.add(this.toolbar, Toolbar.EventTypes.onShow, this.toolbarShowHandler);
-				Util.Events.add(this.toolbar, Toolbar.EventTypes.onBeforeHide, this.toolbarBeforeHideHandler);
-				Util.Events.add(this.toolbar, Toolbar.EventTypes.onHide, this.toolbarHideHandler);
-			}
-
-		},
-
-
-
-		/*
-		 * Function: removeEventHandlers
-		 */
-		removeEventHandlers: function(){
-
-			if (Util.Browser.iOS && (!Util.Browser.safari)){
-				Util.Events.remove(window.document.body, 'orientationchange', this.windowOrientationChangeHandler);
-			}
-
-			if (!Util.isNothing(this.orientationEventName)){
-				Util.Events.remove(window, this.orientationEventName, this.windowOrientationChangeHandler);
-			}
-
-			Util.Events.remove(window, 'scroll', this.windowScrollHandler);
-
-			if (this.settings.enableKeyboard){
-				Util.Events.remove(window.document, 'keydown', this.keyDownHandler);
-			}
-
-			if (this.isBackEventSupported && this.settings.backButtonHideEnabled && this.windowHashChangeHandler !== null){
-				Util.Events.remove(window, 'hashchange', this.windowHashChangeHandler);
-			}
-
-			if (this.settings.enableMouseWheel){
-				Util.Events.remove(window, 'mousewheel', this.mouseWheelHandler);
-			}
-
-			if (!Util.isNothing(this.uiLayer)){
-				Util.Events.remove(this.uiLayer, Util.TouchElement.EventTypes.onTouch, this.uiLayerTouchHandler);
-			}
-
-			if (!Util.isNothing(this.toolbar)){
-				Util.Events.remove(this.carousel, Carousel.EventTypes.onSlideByEnd, this.carouselSlideByEndHandler);
-				Util.Events.remove(this.carousel, Carousel.EventTypes.onSlideshowStart, this.carouselSlideshowStartHandler);
-				Util.Events.remove(this.carousel, Carousel.EventTypes.onSlideshowStop, this.carouselSlideshowStopHandler);
-			}
-
-			if (!Util.isNothing(this.toolbar)){
-				Util.Events.remove(this.toolbar, Toolbar.EventTypes.onTap, this.toolbarTapHandler);
-				Util.Events.remove(this.toolbar, Toolbar.EventTypes.onBeforeShow, this.toolbarBeforeShowHandler);
-				Util.Events.remove(this.toolbar, Toolbar.EventTypes.onShow, this.toolbarShowHandler);
-				Util.Events.remove(this.toolbar, Toolbar.EventTypes.onBeforeHide, this.toolbarBeforeHideHandler);
-				Util.Events.remove(this.toolbar, Toolbar.EventTypes.onHide, this.toolbarHideHandler);
-			}
-
-		},
-
-
-
-
-		/*
-		 * Function: hide
-		 */
-		hide: function(){
-
-			if (this.settings.preventHide){
-				return;
-			}
-
-			if (Util.isNothing(this.documentOverlay)){
-				throw "Code.PhotoSwipe.PhotoSwipeClass.hide: PhotoSwipe instance is already hidden";
-			}
-
-			if (!Util.isNothing(this.hiding)){
-				return;
-			}
-
-			this.clearUIWebViewResetPositionTimeout();
-
-			this.destroyZoomPanRotate();
-
-			this.removeEventHandlers();
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onBeforeHide,
-				target: this
-			});
-
-			this.uiLayer.dispose();
-			this.uiLayer = null;
-
-			if (!Util.isNothing(this.toolbar)){
-				this.toolbar.dispose();
-				this.toolbar = null;
-			}
-
-			this.carousel.dispose();
-			this.carousel = null;
-
-			Util.DOM.removeClass(window.document.body, PhotoSwipe.CssClasses.activeBody);
-			Util.DOM.removeClass(window.document.getElementsByTagName("html")[0], PhotoSwipe.CssClasses.activeBody);
-
-			this.documentOverlay.dispose();
-			this.documentOverlay = null;
-
-			this._isResettingPosition = false;
-
-			// Deactive this instance
-			PhotoSwipe.unsetActivateInstance(this);
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onHide,
-				target: this
-			});
-
-			this.goBackInHistory();
-
-		},
-
-
-
-		/*
-		 * Function: goBackInHistory
-		 */
-		goBackInHistory: function(){
-
-			if (this.isBackEventSupported && this.settings.backButtonHideEnabled){
-				if ( !this.backButtonClicked ){
-					window.history.back();
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: play
-		 */
-		play: function(){
-
-			if (this.isZoomActive()){
-				return;
-			}
-
-			if (!this.settings.preventSlideshow){
-				if (!Util.isNothing(this.carousel)){
-					if (!Util.isNothing(this.toolbar) && this.toolbar.isVisible){
-						this.toolbar.fadeOut();
-					}
-					this.carousel.startSlideshow();
-				}
-			}
-
-		},
-
-
-
-		/*
-		 * Function: stop
-		 */
-		stop: function(){
-
-			if (this.isZoomActive()){
-				return;
-			}
-
-			if (!Util.isNothing(this.carousel)){
-				this.carousel.stopSlideshow();
-			}
-
-		},
-
-
-
-		/*
-		 * Function: previous
-		 */
-		previous: function(){
-
-			if (this.isZoomActive()){
-				return;
-			}
-
-			if (!Util.isNothing(this.carousel)){
-				this.carousel.previous();
-			}
-
-		},
-
-
-
-		/*
-		 * Function: next
-		 */
-		next: function(){
-
-			if (this.isZoomActive()){
-				return;
-			}
-
-			if (!Util.isNothing(this.carousel)){
-				this.carousel.next();
-			}
-
-		},
-
-
-
-		/*
-		 * Function: toggleToolbar
-		 */
-		toggleToolbar: function(){
-
-			if (this.isZoomActive()){
-				return;
-			}
-
-			if (!Util.isNothing(this.toolbar)){
-				this.toolbar.toggleVisibility(this.currentIndex);
-			}
-
-		},
-
-
-
-		/*
-		 * Function: fadeOutToolbarIfVisible
-		 */
-		fadeOutToolbarIfVisible: function(){
-
-			if (!Util.isNothing(this.toolbar) && this.toolbar.isVisible && this.settings.captionAndToolbarAutoHideDelay > 0){
-				this.toolbar.fadeOut();
-			}
-
-		},
-
-
-
-		/*
-		 * Function: createZoomPanRotate
-		 */
-		createZoomPanRotate: function(){
-
-			this.stop();
-
-			if (this.canUserZoom() && !this.isZoomActive()){
-
-				Util.Events.fire(this, PhotoSwipe.EventTypes.onBeforeZoomPanRotateShow);
-
-				this.zoomPanRotate = new ZoomPanRotate.ZoomPanRotateClass(
-					this.settings,
-					this.cache.images[this.currentIndex],
-					this.uiLayer
-				);
-
-				// If we don't override this in the event of false
-				// you will be unable to pan around a zoomed image effectively
-				this.uiLayer.captureSettings.preventDefaultTouchEvents = true;
-
-				Util.Events.add(this.zoomPanRotate, PhotoSwipe.ZoomPanRotate.EventTypes.onTransform, this.zoomPanRotateTransformHandler);
-
-				Util.Events.fire(this, PhotoSwipe.EventTypes.onZoomPanRotateShow);
-
-				if (!Util.isNothing(this.toolbar) && this.toolbar.isVisible){
-					this.toolbar.fadeOut();
-				}
-
-			}
-
-		},
-
-
-
-		/*
-		 * Function: destroyZoomPanRotate
-		 */
-		destroyZoomPanRotate: function(){
-
-			if (!Util.isNothing(this.zoomPanRotate)){
-
-				Util.Events.fire(this, PhotoSwipe.EventTypes.onBeforeZoomPanRotateHide);
-
-				Util.Events.remove(this.zoomPanRotate, PhotoSwipe.ZoomPanRotate.EventTypes.onTransform, this.zoomPanRotateTransformHandler);
-				this.zoomPanRotate.dispose();
-				this.zoomPanRotate = null;
-
-				// Set the preventDefaultTouchEvents back to it was
-				this.uiLayer.captureSettings.preventDefaultTouchEvents = this.settings.preventDefaultTouchEvents;
-
-				Util.Events.fire(this, PhotoSwipe.EventTypes.onZoomPanRotateHide);
-
-			}
-
-		},
-
-
-
-		/*
-		 * Function: canUserZoom
-		 */
-		canUserZoom: function(){
-
-			var testEl, cacheImage;
-
-			if (Util.Browser.msie){
-				testEl = document.createElement('div');
-				if (Util.isNothing(testEl.style.msTransform)){
-					return false;
-				}
-			}
-			else if (!Util.Browser.isCSSTransformSupported){
-				return false;
-			}
-
-			if (!this.settings.allowUserZoom){
-				return false;
-			}
-
-
-			if (this.carousel.isSliding){
-				return false;
-			}
-
-			cacheImage = this.cache.images[this.currentIndex];
-
-			if (Util.isNothing(cacheImage)){
-				return false;
-			}
-
-			if (cacheImage.isLoading){
-				return false;
-			}
-
+		}
+
+		var touchList = _getTouchPoints(e),
+			gestureType,
+			numPoints = touchList.length;
+
+		if(e.type === 'mouseup') {
+			numPoints = 0;
+		}
+
+		// Do nothing if there were 3 touch points or more
+		if(numPoints === 2) {
+			_currentPoints = null;
 			return true;
+		}
 
-		},
-
-
-
-		/*
-		 * Function: isZoomActive
-		 */
-		isZoomActive: function(){
-
-			return (!Util.isNothing(this.zoomPanRotate));
-
-		},
+		// if second pointer released
+		if(numPoints === 1) {
+			_equalizePoints(_startPoint, touchList[0]);
+		}				
 
 
+		// pointer hasn't moved, send "tap release" point
+		if(numPoints === 0 && !_direction && !_mainScrollAnimating) {
+			if(!releasePoint) {
+				if(e.type === 'mouseup') {
+					releasePoint = {x: e.pageX, y: e.pageY, type:'mouse'};
+				} else if(e.changedTouches && e.changedTouches[0]) {
+					releasePoint = {x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY, type:'touch'};
+				}		
+			}
 
-		/*
-		 * Function: getCurrentImage
-		 */
-		getCurrentImage: function(){
+			_shout('touchRelease', e, releasePoint);
+		}
 
-			return this.cache.images[this.currentIndex];
+		// Difference in time between releasing of two last touch points (zoom gesture)
+		var releaseTimeDiff = -1;
 
-		},
+		// Gesture completed, no pointers left
+		if(numPoints === 0) {
+			_isDragging = false;
+			framework.unbind(window, _upMoveEvents, self);
+
+			_stopDragUpdateLoop();
+
+			if(_isZooming) {
+				// Two points released at the same time
+				releaseTimeDiff = 0;
+			} else if(_lastReleaseTime !== -1) {
+				releaseTimeDiff = _getCurrentTime() - _lastReleaseTime;
+			}
+		}
+		_lastReleaseTime = numPoints === 1 ? _getCurrentTime() : -1;
+		
+		if(releaseTimeDiff !== -1 && releaseTimeDiff < 150) {
+			gestureType = 'zoom';
+		} else {
+			gestureType = 'swipe';
+		}
+
+		if(_isZooming && numPoints < 2) {
+			_isZooming = false;
+
+			// Only second point released
+			if(numPoints === 1) {
+				gestureType = 'zoomPointerUp';
+			}
+			_shout('zoomGestureEnded');
+		}
+
+		_currentPoints = null;
+		if(!_moved && !_zoomStarted && !_mainScrollAnimating && !_verticalDragInitiated) {
+			// nothing to animate
+			return;
+		}
+	
+		_stopAllAnimations();
+
+		
+		if(!_releaseAnimData) {
+			_releaseAnimData = _initDragReleaseAnimationData();
+		}
+		
+		_releaseAnimData.calculateSwipeSpeed('x');
 
 
+		if(_verticalDragInitiated) {
 
-		/*
-		 * Function: onDocumentOverlayFadeIn
-		 */
-		onDocumentOverlayFadeIn: function(e){
+			var opacityRatio = _calculateVerticalDragOpacityRatio();
 
-			window.setTimeout(function(){
-				if (Util.isNothing(this.settings)){
-					return;
-				}
+			if(opacityRatio < 0.6) {
+				self.close();
+			} else {
+				var initalPanY = _panOffset.y,
+					initialBgOpacity = _bgOpacity;
 
-				var el = (this.settings.target === window) ? window.document.body : this.settings.target;
+				_animateProp('verticalDrag', 0, 1, 300, framework.easing.cubic.out, function(now) {
+					
+					_panOffset.y = (self.currItem.initialPosition.y - initalPanY) * now + initalPanY;
 
-				Util.DOM.removeClass(el, PhotoSwipe.CssClasses.buildingBody);
-                                Util.DOM.addClass(window.document.getElementsByTagName("html")[0], PhotoSwipe.CssClasses.activeBody);
-				Util.DOM.addClass(el, PhotoSwipe.CssClasses.activeBody);
-
-				this.addEventHandlers();
-
-				this.carousel.show(this.currentIndex);
-
-				this.uiLayer.show();
-
-				if (this.settings.autoStartSlideshow){
-					this.play();
-				}
-				else if (!Util.isNothing(this.toolbar)){
-					this.toolbar.show(this.currentIndex);
-				}
-
-				Util.Events.fire(this, {
-					type: PhotoSwipe.EventTypes.onShow,
-					target: this
+					_applyBgOpacity(  (1 - initialBgOpacity) * now + initialBgOpacity );
+					_applyCurrentZoomPan();
 				});
 
-				this.setUIWebViewResetPositionTimeout();
-
-			}.bind(this), 250);
-
-
-		},
-
-
-
-		/*
-		 * Function: setUIWebViewResetPositionTimeout
-		 */
-		setUIWebViewResetPositionTimeout: function(){
-
-			if (!this.settings.enableUIWebViewRepositionTimeout){
-				return;
+				_shout('onVerticalDrag', 1);
 			}
 
-			if (!(Util.Browser.iOS && (!Util.Browser.safari))){
-				return;
-			}
-
-			if (!Util.isNothing(this._uiWebViewResetPositionTimeout)){
-				window.clearTimeout(this._uiWebViewResetPositionTimeout);
-			}
-			this._uiWebViewResetPositionTimeout = window.setTimeout(function(){
-
-				this.resetPosition();
-
-				this.setUIWebViewResetPositionTimeout();
-
-			}.bind(this), this.settings.uiWebViewResetPositionDelay);
-
-		},
-
-
-
-		/*
-		 * Function: clearUIWebViewResetPositionTimeout
-		 */
-		clearUIWebViewResetPositionTimeout: function(){
-			if (!Util.isNothing(this._uiWebViewResetPositionTimeout)){
-				window.clearTimeout(this._uiWebViewResetPositionTimeout);
-			}
-		},
-
-
-
-		/*
-		 * Function: onWindowScroll
-		 */
-		onWindowScroll: function(e){
-
-			this.resetPosition();
-
-		},
-
-
-
-		/*
-		 * Function: onWindowOrientationChange
-		 */
-		onWindowOrientationChange: function(e){
-
-			this.resetPosition();
-
-		},
-
-
-
-		/*
-		 * Function: onWindowHashChange
-		 */
-		onWindowHashChange: function(e){
-
-			var compareHash = '#' +
-				((this.settings.jQueryMobile) ? this.settings.jQueryMobileDialogHash : this.currentHistoryHashValue);
-
-			if (window.location.hash !== compareHash){
-				this.backButtonClicked = true;
-				this.hide();
-			}
-
-		},
-
-
-
-		/*
-		 * Function: onKeyDown
-		 */
-		onKeyDown: function(e){
-
-			if (e.keyCode === 37) { // Left
-				e.preventDefault();
-				this.previous();
-			}
-			else if (e.keyCode === 39) { // Right
-				e.preventDefault();
-				this.next();
-			}
-			else if (e.keyCode === 38 || e.keyCode === 40) { // Up and down
-				e.preventDefault();
-			}
-			else if (e.keyCode === 27) { // Escape
-				e.preventDefault();
-				this.hide();
-			}
-			else if (e.keyCode === 32) { // Spacebar
-				if (!this.settings.hideToolbar){
-					this.toggleToolbar();
-				}
-				else{
-					this.hide();
-				}
-				e.preventDefault();
-			}
-			else if (e.keyCode === 13) { // Enter
-				e.preventDefault();
-				this.play();
-			}
-
-		},
-
-
-
-		/*
-		 * Function: onUILayerTouch
-		 */
-		onUILayerTouch: function(e){
-
-			if (this.isZoomActive()){
-
-				switch (e.action){
-
-					case Util.TouchElement.ActionTypes.gestureChange:
-						this.zoomPanRotate.zoomRotate(e.scale, (this.settings.allowRotationOnUserZoom) ? e.rotation : 0);
-						break;
-
-					case Util.TouchElement.ActionTypes.gestureEnd:
-						this.zoomPanRotate.setStartingScaleAndRotation(e.scale, (this.settings.allowRotationOnUserZoom) ? e.rotation : 0);
-						break;
-
-					case Util.TouchElement.ActionTypes.touchStart:
-						this.zoomPanRotate.panStart(e.point);
-						break;
-
-					case Util.TouchElement.ActionTypes.touchMove:
-						this.zoomPanRotate.pan(e.point);
-						break;
-
-					case Util.TouchElement.ActionTypes.doubleTap:
-						this.destroyZoomPanRotate();
-						this.toggleToolbar();
-						break;
-
-					case Util.TouchElement.ActionTypes.swipeLeft:
-						this.destroyZoomPanRotate();
-						this.next();
-						this.toggleToolbar();
-						break;
-
-					case Util.TouchElement.ActionTypes.swipeRight:
-						this.destroyZoomPanRotate();
-						this.previous();
-						this.toggleToolbar();
-						break;
-				}
-
-			}
-			else{
-
-				switch (e.action){
-
-					case Util.TouchElement.ActionTypes.touchMove:
-					case Util.TouchElement.ActionTypes.swipeLeft:
-					case Util.TouchElement.ActionTypes.swipeRight:
-
-						// Hide the toolbar if need be
-						this.fadeOutToolbarIfVisible();
-
-						// Pass the touch onto the carousel
-						this.carousel.onTouch(e.action, e.point);
-						break;
-
-					case Util.TouchElement.ActionTypes.touchStart:
-					case Util.TouchElement.ActionTypes.touchMoveEnd:
-
-						// Pass the touch onto the carousel
-						this.carousel.onTouch(e.action, e.point);
-						break;
-
-					case Util.TouchElement.ActionTypes.tap:
-						this.toggleToolbar();
-						break;
-
-					case Util.TouchElement.ActionTypes.doubleTap:
-
-						// Take into consideration the window scroll
-						if (this.settings.target === window){
-							e.point.x -= Util.DOM.windowScrollLeft();
-							e.point.y -= Util.DOM.windowScrollTop();
-						}
-
-						// Just make sure that if the user clicks out of the image
-						// that the image does not pan out of view!
-						var
-							cacheImageEl = this.cache.images[this.currentIndex].imageEl,
-
-							imageTop = window.parseInt(Util.DOM.getStyle(cacheImageEl, 'top'), 10),
-							imageLeft = window.parseInt(Util.DOM.getStyle(cacheImageEl, 'left'), 10),
-							imageRight = imageLeft + Util.DOM.width(cacheImageEl),
-							imageBottom = imageTop + Util.DOM.height(cacheImageEl);
-
-						if (e.point.x < imageLeft){
-							e.point.x = imageLeft;
-						}
-						else if (e.point.x > imageRight){
-							e.point.x = imageRight;
-						}
-
-						if (e.point.y < imageTop){
-							e.point.y = imageTop;
-						}
-						else if (e.point.y > imageBottom){
-							e.point.y = imageBottom;
-						}
-
-						this.createZoomPanRotate();
-						if (this.isZoomActive()){
-							this.zoomPanRotate.zoomAndPanToPoint(this.settings.doubleTapZoomLevel, e.point);
-						}
-
-						break;
-
-					case Util.TouchElement.ActionTypes.gestureStart:
-						this.createZoomPanRotate();
-						break;
-				}
-
-
-			}
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onTouch,
-				target: this,
-				point: e.point,
-				action: e.action
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onCarouselSlideByEnd
-		 */
-		onCarouselSlideByEnd: function(e){
-
-			this.currentIndex = e.cacheIndex;
-
-			if (!Util.isNothing(this.toolbar)){
-				this.toolbar.setCaption(this.currentIndex);
-				this.toolbar.setToolbarStatus(this.currentIndex);
-			}
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onDisplayImage,
-				target: this,
-				action: e.action,
-				index: e.cacheIndex
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onToolbarTap
-		 */
-		onToolbarTap: function(e){
-
-			switch(e.action){
-
-				case Toolbar.ToolbarAction.next:
-					this.next();
-					break;
-
-				case Toolbar.ToolbarAction.previous:
-					this.previous();
-					break;
-
-				case Toolbar.ToolbarAction.close:
-					this.hide();
-					break;
-
-				case Toolbar.ToolbarAction.play:
-					this.play();
-					break;
-
-			}
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onToolbarTap,
-				target: this,
-				toolbarAction: e.action,
-				tapTarget: e.tapTarget
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onMouseWheel
-		 */
-		onMouseWheel: function(e){
-
-			var
-				delta = Util.Events.getWheelDelta(e),
-				dt = e.timeStamp - (this.mouseWheelStartTime || 0);
-
-			if (dt < this.settings.mouseWheelSpeed) {
-				return;
-			}
-
-			this.mouseWheelStartTime = e.timeStamp;
-
-			if (this.settings.invertMouseWheel){
-				delta = delta * -1;
-			}
-
-			if (delta < 0){
-				this.next();
-			}
-			else if (delta > 0){
-				this.previous();
-			}
-
-		},
-
-
-
-		/*
-		 * Function: onCarouselSlideshowStart
-		 */
-		onCarouselSlideshowStart: function(e){
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onSlideshowStart,
-				target: this
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onCarouselSlideshowStop
-		 */
-		onCarouselSlideshowStop: function(e){
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onSlideshowStop,
-				target: this
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onToolbarBeforeShow
-		 */
-		onToolbarBeforeShow: function(e){
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onBeforeCaptionAndToolbarShow,
-				target: this
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onToolbarShow
-		 */
-		onToolbarShow: function(e){
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onCaptionAndToolbarShow,
-				target: this
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onToolbarBeforeHide
-		 */
-		onToolbarBeforeHide: function(e){
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onBeforeCaptionAndToolbarHide,
-				target: this
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onToolbarHide
-		 */
-		onToolbarHide: function(e){
-
-			Util.Events.fire(this, {
-				type: PhotoSwipe.EventTypes.onCaptionAndToolbarHide,
-				target: this
-			});
-
-		},
-
-
-
-		/*
-		 * Function: onZoomPanRotateTransform
-		 */
-		onZoomPanRotateTransform: function(e){
-
-			Util.Events.fire(this, {
-				target: this,
-				type: PhotoSwipe.EventTypes.onZoomPanRotateTransform,
-				scale: e.scale,
-				rotation: e.rotation,
-				rotationDegs: e.rotationDegs,
-				translateX: e.translateX,
-				translateY: e.translateY
-			});
-
+			return;
 		}
 
 
-	});
+		// main scroll 
+		if(  (_mainScrollShifted || _mainScrollAnimating) && numPoints === 0) {
+			var itemChanged = _finishSwipeMainScrollGesture(gestureType, _releaseAnimData);
+			if(itemChanged) {
+				return;
+			}
+			gestureType = 'zoomPointerUp';
+		}
+
+		// prevent zoom/pan animation when main scroll animation runs
+		if(_mainScrollAnimating) {
+			return;
+		}
+		
+		// Complete simple zoom gesture (reset zoom level if it's out of the bounds)  
+		if(gestureType !== 'swipe') {
+			_completeZoomGesture();
+			return;
+		}
+	
+		// Complete pan gesture if main scroll is not shifted, and it's possible to pan current image
+		if(!_mainScrollShifted && _currZoomLevel > self.currItem.fitRatio) {
+			_completePanGesture(_releaseAnimData);
+		}
+	},
 
 
+	// Returns object with data about gesture
+	// It's created only once and then reused
+	_initDragReleaseAnimationData  = function() {
+		// temp local vars
+		var lastFlickDuration,
+			tempReleasePos;
 
-}
-(
-	window,
-	window.klass,
-	window.Code.Util,
-	window.Code.PhotoSwipe.Cache,
-	window.Code.PhotoSwipe.DocumentOverlay,
-	window.Code.PhotoSwipe.Carousel,
-	window.Code.PhotoSwipe.Toolbar,
-	window.Code.PhotoSwipe.UILayer,
-	window.Code.PhotoSwipe.ZoomPanRotate
-));
+		// s = this
+		var s = {
+			lastFlickOffset: {},
+			lastFlickDist: {},
+			lastFlickSpeed: {},
+			slowDownRatio:  {},
+			slowDownRatioReverse:  {},
+			speedDecelerationRatio:  {},
+			speedDecelerationRatioAbs:  {},
+			distanceOffset:  {},
+			backAnimDestination: {},
+			backAnimStarted: {},
+			calculateSwipeSpeed: function(axis) {
+				
+
+				if( _posPoints.length > 1) {
+					lastFlickDuration = _getCurrentTime() - _gestureCheckSpeedTime + 50;
+					tempReleasePos = _posPoints[_posPoints.length-2][axis];
+				} else {
+					lastFlickDuration = _getCurrentTime() - _gestureStartTime; // total gesture duration
+					tempReleasePos = _startPoint[axis];
+				}
+				s.lastFlickOffset[axis] = _currPoint[axis] - tempReleasePos;
+				s.lastFlickDist[axis] = Math.abs(s.lastFlickOffset[axis]);
+				if(s.lastFlickDist[axis] > 20) {
+					s.lastFlickSpeed[axis] = s.lastFlickOffset[axis] / lastFlickDuration;
+				} else {
+					s.lastFlickSpeed[axis] = 0;
+				}
+				if( Math.abs(s.lastFlickSpeed[axis]) < 0.1 ) {
+					s.lastFlickSpeed[axis] = 0;
+				}
+				
+				s.slowDownRatio[axis] = 0.95;
+				s.slowDownRatioReverse[axis] = 1 - s.slowDownRatio[axis];
+				s.speedDecelerationRatio[axis] = 1;
+			},
+
+			calculateOverBoundsAnimOffset: function(axis, speed) {
+				if(!s.backAnimStarted[axis]) {
+
+					if(_panOffset[axis] > _currPanBounds.min[axis]) {
+						s.backAnimDestination[axis] = _currPanBounds.min[axis];
+						
+					} else if(_panOffset[axis] < _currPanBounds.max[axis]) {
+						s.backAnimDestination[axis] = _currPanBounds.max[axis];
+					}
+
+					if(s.backAnimDestination[axis] !== undefined) {
+						s.slowDownRatio[axis] = 0.7;
+						s.slowDownRatioReverse[axis] = 1 - s.slowDownRatio[axis];
+						if(s.speedDecelerationRatioAbs[axis] < 0.05) {
+
+							s.lastFlickSpeed[axis] = 0;
+							s.backAnimStarted[axis] = true;
+
+							_animateProp('bounceZoomPan'+axis,_panOffset[axis], 
+								s.backAnimDestination[axis], 
+								speed || 300, 
+								framework.easing.sine.out, 
+								function(pos) {
+									_panOffset[axis] = pos;
+									_applyCurrentZoomPan();
+								}
+							);
+
+						}
+					}
+				}
+			},
+
+			// Reduces the speed by slowDownRatio (per 10ms)
+			calculateAnimOffset: function(axis) {
+				if(!s.backAnimStarted[axis]) {
+					s.speedDecelerationRatio[axis] = s.speedDecelerationRatio[axis] * (s.slowDownRatio[axis] + 
+												s.slowDownRatioReverse[axis] - 
+												s.slowDownRatioReverse[axis] * s.timeDiff / 10);
+
+					s.speedDecelerationRatioAbs[axis] = Math.abs(s.lastFlickSpeed[axis] * s.speedDecelerationRatio[axis]);
+					s.distanceOffset[axis] = s.lastFlickSpeed[axis] * s.speedDecelerationRatio[axis] * s.timeDiff;
+					_panOffset[axis] += s.distanceOffset[axis];
+
+				}
+			},
+
+			panAnimLoop: function() {
+				if ( _animations.zoomPan ) {
+					_animations.zoomPan.raf = _requestAF(s.panAnimLoop);
+
+					s.now = _getCurrentTime();
+					s.timeDiff = s.now - s.lastNow;
+					s.lastNow = s.now;
+					
+					s.calculateAnimOffset('x');
+					s.calculateAnimOffset('y');
+
+					_applyCurrentZoomPan();
+					
+					s.calculateOverBoundsAnimOffset('x');
+					s.calculateOverBoundsAnimOffset('y');
+
+
+					if (s.speedDecelerationRatioAbs.x < 0.05 && s.speedDecelerationRatioAbs.y < 0.05) {
+
+						// round pan position
+						_panOffset.x = Math.round(_panOffset.x);
+						_panOffset.y = Math.round(_panOffset.y);
+						_applyCurrentZoomPan();
+						
+						_stopAnimation('zoomPan');
+						return;
+					}
+				}
+
+			}
+		};
+		return s;
+	},
+
+	_completePanGesture = function(animData) {
+		// calculate swipe speed for Y axis (paanning)
+		animData.calculateSwipeSpeed('y');
+
+		_currPanBounds = self.currItem.bounds;
+		
+		animData.backAnimDestination = {};
+		animData.backAnimStarted = {};
+
+		// Avoid acceleration animation if speed is too low
+		if(Math.abs(animData.lastFlickSpeed.x) <= 0.05 && Math.abs(animData.lastFlickSpeed.y) <= 0.05 ) {
+			animData.speedDecelerationRatioAbs.x = animData.speedDecelerationRatioAbs.y = 0;
+
+			// Run pan drag release animation. E.g. if you drag image and release finger without momentum.
+			animData.calculateOverBoundsAnimOffset('x');
+			animData.calculateOverBoundsAnimOffset('y');
+			return true;
+		}
+
+		// Animation loop that controls the acceleration after pan gesture ends
+		_registerStartAnimation('zoomPan');
+		animData.lastNow = _getCurrentTime();
+		animData.panAnimLoop();
+	},
+
+
+	_finishSwipeMainScrollGesture = function(gestureType, _releaseAnimData) {
+		var itemChanged;
+		if(!_mainScrollAnimating) {
+			_currZoomedItemIndex = _currentItemIndex;
+		}
+
+
+		
+		var itemsDiff;
+
+		if(gestureType === 'swipe') {
+			var totalShiftDist = _currPoint.x - _startPoint.x,
+				isFastLastFlick = _releaseAnimData.lastFlickDist.x < 10;
+
+			// if container is shifted for more than MIN_SWIPE_DISTANCE, 
+			// and last flick gesture was in right direction
+			if(totalShiftDist > MIN_SWIPE_DISTANCE && 
+				(isFastLastFlick || _releaseAnimData.lastFlickOffset.x > 20) ) {
+				// go to prev item
+				itemsDiff = -1;
+			} else if(totalShiftDist < -MIN_SWIPE_DISTANCE && 
+				(isFastLastFlick || _releaseAnimData.lastFlickOffset.x < -20) ) {
+				// go to next item
+				itemsDiff = 1;
+			}
+		}
+
+		var nextCircle;
+
+		if(itemsDiff) {
+			
+			_currentItemIndex += itemsDiff;
+
+			if(_currentItemIndex < 0) {
+				_currentItemIndex = _options.loop ? _getNumItems()-1 : 0;
+				nextCircle = true;
+			} else if(_currentItemIndex >= _getNumItems()) {
+				_currentItemIndex = _options.loop ? 0 : _getNumItems()-1;
+				nextCircle = true;
+			}
+
+			if(!nextCircle || _options.loop) {
+				_indexDiff += itemsDiff;
+				_currPositionIndex -= itemsDiff;
+				itemChanged = true;
+			}
+			
+
+			
+		}
+
+		var animateToX = _slideSize.x * _currPositionIndex;
+		var animateToDist = Math.abs( animateToX - _mainScrollPos.x );
+		var finishAnimDuration;
+
+
+		if(!itemChanged && animateToX > _mainScrollPos.x !== _releaseAnimData.lastFlickSpeed.x > 0) {
+			// "return to current" duration, e.g. when dragging from slide 0 to -1
+			finishAnimDuration = 333; 
+		} else {
+			finishAnimDuration = Math.abs(_releaseAnimData.lastFlickSpeed.x) > 0 ? 
+									animateToDist / Math.abs(_releaseAnimData.lastFlickSpeed.x) : 
+									333;
+
+			finishAnimDuration = Math.min(finishAnimDuration, 400);
+			finishAnimDuration = Math.max(finishAnimDuration, 250);
+		}
+
+		if(_currZoomedItemIndex === _currentItemIndex) {
+			itemChanged = false;
+		}
+		
+		_mainScrollAnimating = true;
+		
+		_shout('mainScrollAnimStart');
+
+		_animateProp('mainScroll', _mainScrollPos.x, animateToX, finishAnimDuration, framework.easing.cubic.out, 
+			_moveMainScroll,
+			function() {
+				_stopAllAnimations();
+				_mainScrollAnimating = false;
+				_currZoomedItemIndex = -1;
+				
+				if(itemChanged || _currZoomedItemIndex !== _currentItemIndex) {
+					self.updateCurrItem();
+				}
+				
+				_shout('mainScrollAnimComplete');
+			}
+		);
+
+		if(itemChanged) {
+			self.updateCurrItem(true);
+		}
+
+		return itemChanged;
+	},
+
+	_calculateZoomLevel = function(touchesDistance) {
+		return  1 / _startPointsDistance * touchesDistance * _startZoomLevel;
+	},
+
+	// Resets zoom if it's out of bounds
+	_completeZoomGesture = function() {
+		var destZoomLevel = _currZoomLevel,
+			minZoomLevel = _getMinZoomLevel(),
+			maxZoomLevel = _getMaxZoomLevel();
+
+		if ( _currZoomLevel < minZoomLevel ) {
+			destZoomLevel = minZoomLevel;
+		} else if ( _currZoomLevel > maxZoomLevel ) {
+			destZoomLevel = maxZoomLevel;
+		}
+
+		var destOpacity = 1,
+			onUpdate,
+			initialOpacity = _bgOpacity;
+
+		if(_opacityChanged && !_isZoomingIn && !_wasOverInitialZoom && _currZoomLevel < minZoomLevel) {
+			//_closedByScroll = true;
+			self.close();
+			return true;
+		}
+
+		if(_opacityChanged) {
+			onUpdate = function(now) {
+
+				_applyBgOpacity(  (destOpacity - initialOpacity) * now + initialOpacity );
+
+			};
+		}
+
+		self.zoomTo(destZoomLevel, 0, 300,  framework.easing.cubic.out, onUpdate);
+		return true;
+	};
+
+
+_registerModule('Gestures', {
+	publicMethods: {
+
+		initGestures: function() {
+
+			// helper function that builds touch/pointer/mouse events
+			var addEventNames = function(pref, down, move, up, cancel) {
+				_dragStartEvent = pref + down;
+				_dragMoveEvent = pref + move;
+				_dragEndEvent = pref + up;
+				if(cancel) {
+					_dragCancelEvent = pref + cancel;
+				} else {
+					_dragCancelEvent = '';
+				}
+			};
+
+			_pointerEventEnabled = _features.pointerEvent;
+			if(_pointerEventEnabled && _features.touch) {
+				// we don't need touch events, if browser supports pointer events
+				_features.touch = false;
+			}
+
+			if(_pointerEventEnabled) {
+				if(navigator.pointerEnabled) {
+					addEventNames('pointer', 'down', 'move', 'up', 'cancel');
+				} else {
+					// IE10 pointer events are case-sensitive
+					addEventNames('MSPointer', 'Down', 'Move', 'Up', 'Cancel');
+				}
+			} else if(_features.touch) {
+				addEventNames('touch', 'start', 'move', 'end', 'cancel');
+				_likelyTouchDevice = true;
+			} else {
+				addEventNames('mouse', 'down', 'move', 'up');	
+			}
+
+			_upMoveEvents = _dragMoveEvent + ' ' + _dragEndEvent  + ' ' +  _dragCancelEvent;
+			_downEvents = _dragStartEvent;
+
+			if(_pointerEventEnabled && !_likelyTouchDevice) {
+				_likelyTouchDevice = (navigator.maxTouchPoints > 1) || (navigator.msMaxTouchPoints > 1);
+			}
+			// make variable public
+			self.likelyTouchDevice = _likelyTouchDevice; 
+			
+			_globalEventHandlers[_dragStartEvent] = _onDragStart;
+			_globalEventHandlers[_dragMoveEvent] = _onDragMove;
+			_globalEventHandlers[_dragEndEvent] = _onDragRelease; // the Kraken
+
+			if(_dragCancelEvent) {
+				_globalEventHandlers[_dragCancelEvent] = _globalEventHandlers[_dragEndEvent];
+			}
+
+			// Bind mouse events on device with detected hardware touch support, in case it supports multiple types of input.
+			if(_features.touch) {
+				_downEvents += ' mousedown';
+				_upMoveEvents += ' mousemove mouseup';
+				_globalEventHandlers.mousedown = _globalEventHandlers[_dragStartEvent];
+				_globalEventHandlers.mousemove = _globalEventHandlers[_dragMoveEvent];
+				_globalEventHandlers.mouseup = _globalEventHandlers[_dragEndEvent];
+			}
+
+			if(!_likelyTouchDevice) {
+				// don't allow pan to next slide from zoomed state on Desktop
+				_options.allowPanToNext = false;
+			}
+		}
+
+	}
 });
+
+
+/*>>gestures*/
+
+/*>>show-hide-transition*/
+/**
+ * show-hide-transition.js:
+ *
+ * Manages initial opening or closing transition.
+ *
+ * If you're not planning to use transition for gallery at all,
+ * you may set options hideAnimationDuration and showAnimationDuration to 0,
+ * and just delete startAnimation function.
+ * 
+ */
+
+
+var _showOrHideTimeout,
+	_showOrHide = function(item, img, out, completeFn) {
+
+		if(_showOrHideTimeout) {
+			clearTimeout(_showOrHideTimeout);
+		}
+
+		_initialZoomRunning = true;
+		_initialContentSet = true;
+		
+		// dimensions of small thumbnail {x:,y:,w:}.
+		// Height is optional, as calculated based on large image.
+		var thumbBounds; 
+		if(item.initialLayout) {
+			thumbBounds = item.initialLayout;
+			item.initialLayout = null;
+		} else {
+			thumbBounds = _options.getThumbBoundsFn && _options.getThumbBoundsFn(_currentItemIndex);
+		}
+
+		var duration = out ? _options.hideAnimationDuration : _options.showAnimationDuration;
+
+		var onComplete = function() {
+			_stopAnimation('initialZoom');
+			if(!out) {
+				_applyBgOpacity(1);
+				if(img) {
+					img.style.display = 'block';
+				}
+				framework.addClass(template, 'pswp--animated-in');
+				_shout('initialZoom' + (out ? 'OutEnd' : 'InEnd'));
+			} else {
+				self.template.removeAttribute('style');
+				self.bg.removeAttribute('style');
+			}
+
+			if(completeFn) {
+				completeFn();
+			}
+			_initialZoomRunning = false;
+		};
+
+		// if bounds aren't provided, just open gallery without animation
+		if(!duration || !thumbBounds || thumbBounds.x === undefined) {
+
+			var finishWithoutAnimation = function() {
+				_shout('initialZoom' + (out ? 'Out' : 'In') );
+
+				_currZoomLevel = item.initialZoomLevel;
+				_equalizePoints(_panOffset,  item.initialPosition );
+				_applyCurrentZoomPan();
+
+				// no transition
+				template.style.opacity = out ? 0 : 1;
+				_applyBgOpacity(1);
+
+				onComplete();
+			};
+			finishWithoutAnimation();
+			
+			return;
+		}
+
+		var startAnimation = function() {
+			var closeWithRaf = _closedByScroll,
+				fadeEverything = !self.currItem.src || self.currItem.loadError || _options.showHideOpacity;
+			
+			// apply hw-acceleration to image
+			if(item.miniImg) {
+				item.miniImg.style.webkitBackfaceVisibility = 'hidden';
+			}
+
+			if(!out) {
+				_currZoomLevel = thumbBounds.w / item.w;
+				_panOffset.x = thumbBounds.x;
+				_panOffset.y = thumbBounds.y - _initalWindowScrollY;
+
+				self[fadeEverything ? 'template' : 'bg'].style.opacity = 0.001;
+				_applyCurrentZoomPan();
+			}
+
+			_registerStartAnimation('initialZoom');
+			
+			if(out && !closeWithRaf) {
+				framework.removeClass(template, 'pswp--animated-in');
+			}
+
+			if(fadeEverything) {
+				if(out) {
+					framework[ (closeWithRaf ? 'remove' : 'add') + 'Class' ](template, 'pswp--animate_opacity');
+				} else {
+					setTimeout(function() {
+						framework.addClass(template, 'pswp--animate_opacity');
+					}, 30);
+				}
+			}
+
+			_showOrHideTimeout = setTimeout(function() {
+
+				_shout('initialZoom' + (out ? 'Out' : 'In') );
+				
+
+				if(!out) {
+
+					// "in" animation always uses CSS transitions (instead of rAF).
+					// CSS transition work faster here, 
+					// as developer may also want to animate other things, 
+					// like ui on top of sliding area, which can be animated just via CSS
+					
+					_currZoomLevel = item.initialZoomLevel;
+					_equalizePoints(_panOffset,  item.initialPosition );
+					_applyCurrentZoomPan();
+					_applyBgOpacity(1);
+
+					if(fadeEverything) {
+						template.style.opacity = 1;
+					} else {
+						_applyBgOpacity(1);
+					}
+
+					_showOrHideTimeout = setTimeout(onComplete, duration + 20);
+				} else {
+
+					// "out" animation uses rAF only when PhotoSwipe is closed by browser scroll, to recalculate position
+					var destZoomLevel = thumbBounds.w / item.w,
+						initialPanOffset = {
+							x: _panOffset.x,
+							y: _panOffset.y
+						},
+						initialZoomLevel = _currZoomLevel,
+						initalBgOpacity = _bgOpacity,
+						onUpdate = function(now) {
+							
+							if(now === 1) {
+								_currZoomLevel = destZoomLevel;
+								_panOffset.x = thumbBounds.x;
+								_panOffset.y = thumbBounds.y  - _currentWindowScrollY;
+							} else {
+								_currZoomLevel = (destZoomLevel - initialZoomLevel) * now + initialZoomLevel;
+								_panOffset.x = (thumbBounds.x - initialPanOffset.x) * now + initialPanOffset.x;
+								_panOffset.y = (thumbBounds.y - _currentWindowScrollY - initialPanOffset.y) * now + initialPanOffset.y;
+							}
+							
+							_applyCurrentZoomPan();
+							if(fadeEverything) {
+								template.style.opacity = 1 - now;
+							} else {
+								_applyBgOpacity( initalBgOpacity - now * initalBgOpacity );
+							}
+						};
+
+					if(closeWithRaf) {
+						_animateProp('initialZoom', 0, 1, duration, framework.easing.cubic.out, onUpdate, onComplete);
+					} else {
+						onUpdate(1);
+						_showOrHideTimeout = setTimeout(onComplete, duration + 20);
+					}
+				}
+			
+			}, out ? 25 : 90); // Main purpose of this delay is to give browser time to paint and
+					// create composite layers of PhotoSwipe UI parts (background, controls, caption, arrows).
+					// Which avoids lag at the beginning of scale transition.
+		};
+		startAnimation();
+
+		
+	};
+
+/*>>show-hide-transition*/
+
+/*>>items-controller*/
+/**
+*
+* Controller manages gallery items, their dimensions, and their content.
+* 
+*/
+
+var _items,
+	_tempPanAreaSize = {},
+	_imagesToAppendPool = [],
+	_initialContentSet,
+	_initialZoomRunning,
+	_controllerDefaultOptions = {
+		index: 0,
+		errorMsg: '<div class="pswp__error-msg"><a href="%url%" target="_blank">The image</a> could not be loaded.</div>',
+		forceProgressiveLoading: false, // TODO
+		preload: [1,1],
+		getNumItemsFn: function() {
+			return _items.length;
+		}
+	};
+
+
+var _getItemAt,
+	_getNumItems,
+	_initialIsLoop,
+	_getZeroBounds = function() {
+		return {
+			center:{x:0,y:0}, 
+			max:{x:0,y:0}, 
+			min:{x:0,y:0}
+		};
+	},
+	_calculateSingleItemPanBounds = function(item, realPanElementW, realPanElementH ) {
+		var bounds = item.bounds;
+
+		// position of element when it's centered
+		bounds.center.x = Math.round((_tempPanAreaSize.x - realPanElementW) / 2);
+		bounds.center.y = Math.round((_tempPanAreaSize.y - realPanElementH) / 2) + item.vGap.top;
+
+		// maximum pan position
+		bounds.max.x = (realPanElementW > _tempPanAreaSize.x) ? 
+							Math.round(_tempPanAreaSize.x - realPanElementW) : 
+							bounds.center.x;
+		
+		bounds.max.y = (realPanElementH > _tempPanAreaSize.y) ? 
+							Math.round(_tempPanAreaSize.y - realPanElementH) + item.vGap.top : 
+							bounds.center.y;
+		
+		// minimum pan position
+		bounds.min.x = (realPanElementW > _tempPanAreaSize.x) ? 0 : bounds.center.x;
+		bounds.min.y = (realPanElementH > _tempPanAreaSize.y) ? item.vGap.top : bounds.center.y;
+	},
+	_calculateItemSize = function(item, viewportSize, zoomLevel) {
+
+		if (item.src && !item.loadError) {
+			var isInitial = !zoomLevel;
+			
+			if(isInitial) {
+				if(!item.vGap) {
+					item.vGap = {top:0,bottom:0};
+				}
+				// allows overriding vertical margin for individual items
+				_shout('parseVerticalMargin', item);
+			}
+
+
+			_tempPanAreaSize.x = viewportSize.x;
+			_tempPanAreaSize.y = viewportSize.y - item.vGap.top - item.vGap.bottom;
+
+			if (isInitial) {
+				var hRatio = _tempPanAreaSize.x / item.w;
+				var vRatio = _tempPanAreaSize.y / item.h;
+
+				item.fitRatio = hRatio < vRatio ? hRatio : vRatio;
+				//item.fillRatio = hRatio > vRatio ? hRatio : vRatio;
+
+				var scaleMode = _options.scaleMode;
+
+				if (scaleMode === 'orig') {
+					zoomLevel = 1;
+				} else if (scaleMode === 'fit') {
+					zoomLevel = item.fitRatio;
+				}
+
+				if (zoomLevel > 1) {
+					zoomLevel = 1;
+				}
+
+				item.initialZoomLevel = zoomLevel;
+				
+				if(!item.bounds) {
+					// reuse bounds object
+					item.bounds = _getZeroBounds(); 
+				}
+			}
+
+			if(!zoomLevel) {
+				return;
+			}
+
+			_calculateSingleItemPanBounds(item, item.w * zoomLevel, item.h * zoomLevel);
+
+			if (isInitial && zoomLevel === item.initialZoomLevel) {
+				item.initialPosition = item.bounds.center;
+			}
+
+			return item.bounds;
+		} else {
+			item.w = item.h = 0;
+			item.initialZoomLevel = item.fitRatio = 1;
+			item.bounds = _getZeroBounds();
+			item.initialPosition = item.bounds.center;
+
+			// if it's not image, we return zero bounds (content is not zoomable)
+			return item.bounds;
+		}
+		return false;
+	},
+
+	
+
+
+	_appendImage = function(index, item, baseDiv, img, preventAnimation, keepPlaceholder) {
+		
+
+		if(item.loadError) {
+			return;
+		}
+
+		var animate,
+			isSwiping = self.isDragging() && !self.isZooming(),
+			slideMightBeVisible = index === _currentItemIndex || self.isMainScrollAnimating() || isSwiping;
+
+		// fade in loaded image only when current holder is active, or might be visible
+		if(!preventAnimation && (_likelyTouchDevice || _options.alwaysFadeIn) && slideMightBeVisible) {
+			animate = true;
+		}
+
+		if(img) {
+			if(animate) {
+				img.style.opacity = 0;
+			}
+
+			item.imageAppended = true;
+			_setImageSize(img, item.w, item.h);
+			
+			baseDiv.appendChild(img);
+
+			if(animate) {
+				setTimeout(function() {
+					img.style.opacity = 1;
+					if(keepPlaceholder) {
+						setTimeout(function() {
+							// hide image placeholder "behind"
+							if(item && item.loaded && item.placeholder) {
+								item.placeholder.style.display = 'none';
+								item.placeholder = null;
+							}
+						}, 500);
+					}
+				}, 50);
+			}
+		}
+	},
+	
+
+
+	_preloadImage = function(item) {
+		item.loading = true;
+		item.loaded = false;
+		var img = item.img = framework.createEl('pswp__img', 'img');
+		var onComplete = function() {
+			item.loading = false;
+			item.loaded = true;
+
+			if(item.loadComplete) {
+				item.loadComplete(item);
+			} else {
+				item.img = null; // no need to store image object
+			}
+			img.onload = img.onerror = null;
+			img = null;
+		};
+		img.onload = onComplete;
+		img.onerror = function() {
+			item.loadError = true;
+			onComplete();
+		};		
+
+		img.src = item.src;// + '?a=' + Math.random();
+
+		return img;
+	},
+	_checkForError = function(item, cleanUp) {
+		if(item.src && item.loadError && item.container) {
+
+			if(cleanUp) {
+				item.container.innerHTML = '';
+			}
+
+			item.container.innerHTML = _options.errorMsg.replace('%url%',  item.src );
+			return true;
+			
+		}
+	},
+	_setImageSize = function(img, w, h) {
+		img.style.width = w + 'px';
+		img.style.height = h + 'px';
+	},
+	_appendImagesPool = function() {
+
+		if(_imagesToAppendPool.length) {
+			var poolItem;
+
+			for(var i = 0; i < _imagesToAppendPool.length; i++) {
+				poolItem = _imagesToAppendPool[i];
+				if( poolItem.holder.index === poolItem.index ) {
+					_appendImage(poolItem.index, poolItem.item, poolItem.baseDiv, poolItem.img);
+				}
+			}
+			_imagesToAppendPool = [];
+		}
+	};
+	
+
+
+_registerModule('Controller', {
+
+	publicMethods: {
+
+		lazyLoadItem: function(index) {
+			index = _getLoopedId(index);
+			var item = _getItemAt(index);
+
+			if(!item || item.loaded || item.loading) {
+				return;
+			}
+
+			_shout('gettingData', index, item);
+
+			if (!item.src) {
+				return;
+			}
+
+			_preloadImage(item);
+		},
+		initController: function() {
+			framework.extend(_options, _controllerDefaultOptions, true);
+			self.items = _items = items;
+			_getItemAt = self.getItemAt;
+			_getNumItems = _options.getNumItemsFn; //self.getNumItems;
+
+
+
+			_initialIsLoop = _options.loop;
+			if(_getNumItems() < 3) {
+				_options.loop = false; // disable loop if less then 3 items
+			}
+
+			_listen('beforeChange', function(diff) {
+
+				var p = _options.preload,
+					isNext = diff === null ? true : (diff > 0),
+					preloadBefore = Math.min(p[0], _getNumItems() ),
+					preloadAfter = Math.min(p[1], _getNumItems() ),
+					i;
+
+
+				for(i = 1; i <= (isNext ? preloadAfter : preloadBefore); i++) {
+					self.lazyLoadItem(_currentItemIndex+i);
+				}
+				for(i = 1; i <= (isNext ? preloadBefore : preloadAfter); i++) {
+					self.lazyLoadItem(_currentItemIndex-i);
+				}
+			});
+
+			_listen('initialLayout', function() {
+				self.currItem.initialLayout = _options.getThumbBoundsFn && _options.getThumbBoundsFn(_currentItemIndex);
+			});
+
+			_listen('mainScrollAnimComplete', _appendImagesPool);
+			_listen('initialZoomInEnd', _appendImagesPool);
+
+
+
+			_listen('destroy', function() {
+				var item;
+				for(var i = 0; i < _items.length; i++) {
+					item = _items[i];
+					// remove reference to DOM elements, for GC
+					if(item.container) {
+						item.container = null; 
+					}
+					if(item.placeholder) {
+						item.placeholder = null;
+					}
+					if(item.img) {
+						item.img = null;
+					}
+					if(item.preloader) {
+						item.preloader = null;
+					}
+					if(item.loadError) {
+						item.loaded = item.loadError = false;
+					}
+				}
+				_imagesToAppendPool = null;
+			});
+		},
+
+
+		getItemAt: function(index) {
+			if (index >= 0) {
+				return _items[index] !== undefined ? _items[index] : false;
+			}
+			return false;
+		},
+
+		allowProgressiveImg: function() {
+			// 1. Progressive image loading isn't working on webkit/blink 
+			//    when hw-acceleration (e.g. translateZ) is applied to IMG element.
+			//    That's why in PhotoSwipe parent element gets zoom transform, not image itself.
+			//    
+			// 2. Progressive image loading sometimes blinks in webkit/blink when applying animation to parent element.
+			//    That's why it's disabled on touch devices (mainly because of swipe transition)
+			//    
+			// 3. Progressive image loading sometimes doesn't work in IE (up to 11).
+
+			// Don't allow progressive loading on non-large touch devices
+			return _options.forceProgressiveLoading || !_likelyTouchDevice || _options.mouseUsed || screen.width > 1200; 
+			// 1200 - to eliminate touch devices with large screen (like Chromebook Pixel)
+		},
+
+		setContent: function(holder, index) {
+
+			if(_options.loop) {
+				index = _getLoopedId(index);
+			}
+
+			var prevItem = self.getItemAt(holder.index);
+			if(prevItem) {
+				prevItem.container = null;
+			}
+	
+			var item = self.getItemAt(index),
+				img;
+			
+			if(!item) {
+				holder.el.innerHTML = '';
+				return;
+			}
+
+			// allow to override data
+			_shout('gettingData', index, item);
+
+			holder.index = index;
+			holder.item = item;
+
+			// base container DIV is created only once for each of 3 holders
+			var baseDiv = item.container = framework.createEl('pswp__zoom-wrap'); 
+
+			
+
+			if(!item.src && item.html) {
+				if(item.html.tagName) {
+					baseDiv.appendChild(item.html);
+				} else {
+					baseDiv.innerHTML = item.html;
+				}
+			}
+
+			_checkForError(item);
+			
+			if(item.src && !item.loadError && !item.loaded) {
+
+				item.loadComplete = function(item) {
+
+					// gallery closed before image finished loading
+					if(!_isOpen) {
+						return;
+					}
+
+					// Apply hw-acceleration only after image is loaded.
+					// This is webkit progressive image loading bugfix.
+					// https://bugs.webkit.org/show_bug.cgi?id=108630
+					// https://code.google.com/p/chromium/issues/detail?id=404547
+					if(item.img) {
+						item.img.style.webkitBackfaceVisibility = 'hidden';
+					}
+
+					// check if holder hasn't changed while image was loading
+					if(holder && holder.index === index ) {
+						if( _checkForError(item, true) ) {
+							item.loadComplete = item.img = null;
+							_calculateItemSize(item, _viewportSize);
+							_applyZoomPanToItem(item);
+
+							if(holder.index === _currentItemIndex) {
+								// recalculate dimensions
+								self.updateCurrZoomItem();
+							}
+							return;
+						}
+						if( !item.imageAppended ) {
+							if(_features.transform && (_mainScrollAnimating || _initialZoomRunning) ) {
+								_imagesToAppendPool.push({
+									item:item,
+									baseDiv:baseDiv,
+									img:item.img,
+									index:index,
+									holder:holder
+								});
+							} else {
+								_appendImage(index, item, baseDiv, item.img, _mainScrollAnimating || _initialZoomRunning);
+							}
+						} else {
+							// remove preloader & mini-img
+							if(!_initialZoomRunning && item.placeholder) {
+								item.placeholder.style.display = 'none';
+								item.placeholder = null;
+							}
+						}
+					}
+
+					item.loadComplete = null;
+					item.img = null; // no need to store image element after it's added
+
+					_shout('imageLoadComplete', index, item);
+				};
+
+				if(framework.features.transform) {
+					
+					var placeholderClassName = 'pswp__img pswp__img--placeholder'; 
+					placeholderClassName += (item.msrc ? '' : ' pswp__img--placeholder--blank');
+
+					var placeholder = framework.createEl(placeholderClassName, item.msrc ? 'img' : '');
+					if(item.msrc) {
+						placeholder.src = item.msrc;
+					}
+					
+					_setImageSize(placeholder, item.w, item.h);
+
+					baseDiv.appendChild(placeholder);
+					item.placeholder = placeholder;
+
+				}
+				
+
+				
+
+				if(!item.loading) {
+					_preloadImage(item);
+				}
+
+
+				if( self.allowProgressiveImg() ) {
+					// just append image
+					if(!_initialContentSet && _features.transform) {
+						_imagesToAppendPool.push({
+							item:item, 
+							baseDiv:baseDiv, 
+							img:item.img, 
+							index:index, 
+							holder:holder
+						});
+					} else {
+						_appendImage(index, item, baseDiv, item.img, true, true);
+					}
+				}
+				
+			} else if(item.src && !item.loadError) {
+				// image object is created every time, due to bugs of image loading & delay when switching images
+				img = framework.createEl('pswp__img', 'img');
+				img.style.webkitBackfaceVisibility = 'hidden';
+				img.style.opacity = 1;
+				img.src = item.src;
+				_setImageSize(img, item.w, item.h);
+				_appendImage(index, item, baseDiv, img, true);
+			}
+			
+			_calculateItemSize(item, _viewportSize);
+
+			if(!_initialContentSet && index === _currentItemIndex) {
+				_currZoomElementStyle = baseDiv.style;
+				_showOrHide(item, (img ||item.img) );
+			} else {
+				_applyZoomPanToItem(item);
+			}
+
+			holder.el.innerHTML = '';
+			holder.el.appendChild(baseDiv);
+		},
+
+		cleanSlide: function( item ) {
+			if(item.img ) {
+				item.img.onload = item.img.onerror = null;
+			}
+			item.loaded = item.loading = item.img = item.imageAppended = false;
+		}
+
+	}
+});
+
+/*>>items-controller*/
+
+/*>>tap*/
+/**
+ * tap.js:
+ *
+ * Displatches tap and double-tap events.
+ * 
+ */
+
+var tapTimer,
+	tapReleasePoint = {},
+	_dispatchTapEvent = function(origEvent, releasePoint, pointerType) {		
+		var e = document.createEvent( 'CustomEvent' ),
+			eDetail = {
+				origEvent:origEvent, 
+				target:origEvent.target, 
+				releasePoint: releasePoint, 
+				pointerType:pointerType || 'touch'
+			};
+
+		e.initCustomEvent( 'pswpTap', true, true, eDetail );
+		origEvent.target.dispatchEvent(e);
+	};
+
+_registerModule('Tap', {
+	publicMethods: {
+		initTap: function() {
+			_listen('firstTouchStart', self.onTapStart);
+			_listen('touchRelease', self.onTapRelease);
+			_listen('destroy', function() {
+				tapReleasePoint = {};
+				tapTimer = null;
+			});
+		},
+		onTapStart: function(touchList) {
+			if(touchList.length > 1) {
+				clearTimeout(tapTimer);
+				tapTimer = null;
+			}
+		},
+		onTapRelease: function(e, releasePoint) {
+			if(!releasePoint) {
+				return;
+			}
+
+			if(!_moved && !_isMultitouch && !_numAnimations) {
+				var p0 = releasePoint;
+				if(tapTimer) {
+					clearTimeout(tapTimer);
+					tapTimer = null;
+
+					// Check if taped on the same place
+					if ( _isNearbyPoints(p0, tapReleasePoint) ) {
+						_shout('doubleTap', p0);
+						return;
+					}
+				}
+
+				if(releasePoint.type === 'mouse') {
+					_dispatchTapEvent(e, releasePoint, 'mouse');
+					return;
+				}
+
+				var clickedTagName = e.target.tagName.toUpperCase();
+				// avoid double tap delay on buttons and elements that have class pswp__single-tap
+				if(clickedTagName === 'BUTTON' || framework.hasClass(e.target, 'pswp__single-tap') ) {
+					_dispatchTapEvent(e, releasePoint);
+					return;
+				}
+
+				_equalizePoints(tapReleasePoint, p0);
+
+				tapTimer = setTimeout(function() {
+					_dispatchTapEvent(e, releasePoint);
+					tapTimer = null;
+				}, 300);
+			}
+		}
+	}
+});
+
+/*>>tap*/
+
+/*>>desktop-zoom*/
+/**
+ *
+ * desktop-zoom.js:
+ *
+ * - Binds mousewheel event for paning zoomed image.
+ * - Manages "dragging", "zoomed-in", "zoom-out" classes.
+ *   (which are used for cursors and zoom icon)
+ * - Adds toggleDesktopZoom function.
+ * 
+ */
+
+var _wheelDelta;
+	
+_registerModule('DesktopZoom', {
+
+	publicMethods: {
+
+		initDesktopZoom: function() {
+
+			if(_oldIE) {
+				// no zoom for old IE (<=8)
+				return;
+			}
+
+			if(_likelyTouchDevice) {
+				// if detected hardware touch support, we wait until mouse is used,
+				// and only then apply desktop-zoom features
+				_listen('mouseUsed', function() {
+					self.setupDesktopZoom();
+				});
+			} else {
+				self.setupDesktopZoom(true);
+			}
+
+		},
+
+		setupDesktopZoom: function(onInit) {
+
+			_wheelDelta = {};
+
+			var events = 'wheel mousewheel DOMMouseScroll';
+			
+			_listen('bindEvents', function() {
+				framework.bind(template, events,  self.handleMouseWheel);
+			});
+
+			_listen('unbindEvents', function() {
+				if(_wheelDelta) {
+					framework.unbind(template, events, self.handleMouseWheel);
+				}
+			});
+
+			self.mouseZoomedIn = false;
+
+			var hasDraggingClass,
+				updateZoomable = function() {
+					if(self.mouseZoomedIn) {
+						framework.removeClass(template, 'pswp--zoomed-in');
+						self.mouseZoomedIn = false;
+					}
+					if(_currZoomLevel < 1) {
+						framework.addClass(template, 'pswp--zoom-allowed');
+					} else {
+						framework.removeClass(template, 'pswp--zoom-allowed');
+					}
+					removeDraggingClass();
+				},
+				removeDraggingClass = function() {
+					if(hasDraggingClass) {
+						framework.removeClass(template, 'pswp--dragging');
+						hasDraggingClass = false;
+					}
+				};
+
+			_listen('resize' , updateZoomable);
+			_listen('afterChange' , updateZoomable);
+			_listen('pointerDown', function() {
+				if(self.mouseZoomedIn) {
+					hasDraggingClass = true;
+					framework.addClass(template, 'pswp--dragging');
+				}
+			});
+			_listen('pointerUp', removeDraggingClass);
+
+			if(!onInit) {
+				updateZoomable();
+			}
+			
+		},
+
+		handleMouseWheel: function(e) {
+
+			if(_currZoomLevel <= self.currItem.fitRatio) {
+				if(!_options.closeOnScroll) {
+					e.preventDefault();
+				} else {
+
+					// close PhotoSwipe
+					// if browser supports transforms & scroll changed enough
+					if( _transformKey && Math.abs(e.deltaY) > 2 ) {
+						_closedByScroll = true;
+						self.close();
+					}
+
+				}
+				return true;
+			}
+
+			e.preventDefault();
+			// allow just one event to fire
+			e.stopPropagation();
+
+			// https://developer.mozilla.org/en-US/docs/Web/Events/wheel
+			_wheelDelta.x = 0;
+
+			if('deltaX' in e) {				
+				if(e.deltaMode === 1 /* DOM_DELTA_LINE */) {
+					// 18 - average line height
+					_wheelDelta.x = e.deltaX * 18;
+					_wheelDelta.y = e.deltaY * 18;
+				} else {
+					_wheelDelta.x = e.deltaX;
+					_wheelDelta.y = e.deltaY;
+				}
+			} else if('wheelDelta' in e) {
+				if(e.wheelDeltaX) {
+					_wheelDelta.x = -0.16 * e.wheelDeltaX;
+				} 
+				if(e.wheelDeltaY) {
+					_wheelDelta.y = -0.16 * e.wheelDeltaY;
+				} else {
+					_wheelDelta.y = -0.16 * e.wheelDelta;
+				}
+			} else if('detail' in e) {
+				_wheelDelta.y = e.detail;
+			} else {
+				return;
+			}
+		
+			// TODO: use rAF instead of mousewheel?
+			_calculatePanBounds(_currZoomLevel, true);
+			self.panTo(_panOffset.x - _wheelDelta.x, _panOffset.y - _wheelDelta.y);
+		},
+
+		toggleDesktopZoom: function(centerPoint) {
+			centerPoint = centerPoint || {x:_viewportSize.x/2, y:_viewportSize.y/2 + _currentWindowScrollY };
+
+			var doubleTapZoomLevel = _options.getDoubleTapZoom(true, self.currItem);
+			var zoomOut = _currZoomLevel === doubleTapZoomLevel;
+			
+			self.mouseZoomedIn = !zoomOut;
+
+			self.zoomTo(zoomOut ? self.currItem.initialZoomLevel : doubleTapZoomLevel, centerPoint, 333);
+			framework[ (!zoomOut ? 'add' : 'remove') + 'Class'](template, 'pswp--zoomed-in');
+		}
+
+	}
+});
+
+/*>>desktop-zoom*/
+
+/*>>history*/
+/**
+ *
+ * history.js:
+ *
+ * - Back button to close gallery.
+ * 
+ * - Unique URL for each slide: example.com/&pid=1&gid=3
+ *   (where PID is picture index, and GID and gallery index)
+ *   
+ * - Switch URL when slides change.
+ * 
+ */
+
+
+var _historyDefaultOptions = {
+	history: true,
+	galleryUID: 1
+};
+
+var _historyUpdateTimeout,
+	_hashChangeTimeout,
+	_hashAnimCheckTimeout,
+	_hashChangedByScript,
+	_hashChangedByHistory,
+	_hashReseted,
+	_initialHash,
+	_historyChanged,
+	_closedFromURL,
+	_urlChangedOnce,
+	_windowLoc,
+
+	_supportsPushState,
+
+	_getHash = function() {
+		return _windowLoc.hash.substring(1);
+	},
+	_cleanHistoryTimeouts = function() {
+
+		if(_historyUpdateTimeout) {
+			clearTimeout(_historyUpdateTimeout);
+		}
+
+		if(_hashAnimCheckTimeout) {
+			clearTimeout(_hashAnimCheckTimeout);
+		}
+	},
+
+	// pid - Picture index
+	// gid - Gallery index
+	_parseItemIndexFromURL = function() {
+		var hash = _getHash(),
+			params = {};
+
+		if(hash.length < 5) { // pid=1
+			return params;
+		}
+
+		var vars = hash.split('&');
+		for (var i = 0; i < vars.length; i++) {
+			if(!vars[i]) {
+				continue;
+			}
+			var pair = vars[i].split('=');	
+			if(pair.length < 2) {
+				continue;
+			}
+			params[pair[0]] = pair[1];
+		}
+		params.pid = parseInt(params.pid,10)-1;
+		if( params.pid < 0 ) {
+			params.pid = 0;
+		}
+		return params;
+	},
+	_updateHash = function() {
+
+		if(_hashAnimCheckTimeout) {
+			clearTimeout(_hashAnimCheckTimeout);
+		}
+
+
+		if(_numAnimations || _isDragging) {
+			// changing browser URL forces layout/paint in some browsers, which causes noticable lag during animation
+			// that's why we update hash only when no animations running
+			_hashAnimCheckTimeout = setTimeout(_updateHash, 500);
+			return;
+		}
+		
+		if(_hashChangedByScript) {
+			clearTimeout(_hashChangeTimeout);
+		} else {
+			_hashChangedByScript = true;
+		}
+
+
+		var newHash = _initialHash + '&'  +  'gid=' + _options.galleryUID + '&' + 'pid=' + (_currentItemIndex + 1);
+
+		if(!_historyChanged) {
+			if(_windowLoc.hash.indexOf(newHash) === -1) {
+				_urlChangedOnce = true;
+			}
+			// first time - add new hisory record, then just replace
+		}
+
+		var newURL = _windowLoc.href.split('#')[0] + '#' +  newHash;
+
+		if( _supportsPushState ) {
+
+			if('#' + newHash !== window.location.hash) {
+				history[_historyChanged ? 'replaceState' : 'pushState']('', document.title, newURL);
+			}
+
+		} else {
+			if(_historyChanged) {
+				_windowLoc.replace( newURL );
+			} else {
+				_windowLoc.hash = newHash;
+			}
+		}
+		
+		
+
+		_historyChanged = true;
+		_hashChangeTimeout = setTimeout(function() {
+			_hashChangedByScript = false;
+		}, 60);
+	};
+
+
+
+	
+
+_registerModule('History', {
+
+	
+
+	publicMethods: {
+		initHistory: function() {
+
+			framework.extend(_options, _historyDefaultOptions, true);
+
+			if( !_options.history ) {
+				return;
+			}
+
+
+			_windowLoc = window.location;
+			_urlChangedOnce = false;
+			_closedFromURL = false;
+			_historyChanged = false;
+			_initialHash = _getHash();
+			_supportsPushState = ('pushState' in history);
+
+
+			if(_initialHash.indexOf('gid=') > -1) {
+				_initialHash = _initialHash.split('&gid=')[0];
+				_initialHash = _initialHash.split('?gid=')[0];
+			}
+			
+
+			_listen('afterChange', self.updateURL);
+			_listen('unbindEvents', function() {
+				framework.unbind(window, 'hashchange', self.onHashChange);
+			});
+
+
+			var returnToOriginal = function() {
+				_hashReseted = true;
+				if(!_closedFromURL) {
+
+					if(_urlChangedOnce) {
+						history.back();
+					} else {
+
+						if(_initialHash) {
+							_windowLoc.hash = _initialHash;
+						} else {
+							if (_supportsPushState) {
+
+								// remove hash from url without refreshing it or scrolling to top
+								history.pushState('', document.title,  _windowLoc.pathname + _windowLoc.search );
+							} else {
+								_windowLoc.hash = '';
+							}
+						}
+					}
+					
+				}
+
+				_cleanHistoryTimeouts();
+			};
+
+
+			_listen('unbindEvents', function() {
+				if(_closedByScroll) {
+					// if PhotoSwipe is closed by scroll, we go "back" before the closing animation starts
+					// this is done to keep the scroll position
+					returnToOriginal();
+				}
+			});
+			_listen('destroy', function() {
+				if(!_hashReseted) {
+					returnToOriginal();
+				}
+			});
+			_listen('firstUpdate', function() {
+				_currentItemIndex = _parseItemIndexFromURL().pid;
+			});
+
+			
+
+			
+			var index = _initialHash.indexOf('pid=');
+			if(index > -1) {
+				_initialHash = _initialHash.substring(0, index);
+				if(_initialHash.slice(-1) === '&') {
+					_initialHash = _initialHash.slice(0, -1);
+				}
+			}
+			
+
+			setTimeout(function() {
+				if(_isOpen) { // hasn't destroyed yet
+					framework.bind(window, 'hashchange', self.onHashChange);
+				}
+			}, 40);
+			
+		},
+		onHashChange: function() {
+
+			if(_getHash() === _initialHash) {
+
+				_closedFromURL = true;
+				self.close();
+				return;
+			}
+			if(!_hashChangedByScript) {
+
+				_hashChangedByHistory = true;
+				self.goTo( _parseItemIndexFromURL().pid );
+				_hashChangedByHistory = false;
+			}
+			
+		},
+		updateURL: function() {
+
+			// Delay the update of URL, to avoid lag during transition, 
+			// and to not to trigger actions like "refresh page sound" or "blinking favicon" to often
+			
+			_cleanHistoryTimeouts();
+			
+
+			if(_hashChangedByHistory) {
+				return;
+			}
+
+			if(!_historyChanged) {
+				_updateHash(); // first time
+			} else {
+				_historyUpdateTimeout = setTimeout(_updateHash, 800);
+			}
+		}
+	
+	}
+});
+
+/*>>history*/
+	framework.extend(self, publicMethods); };
+	return PhotoSwipe;
+});
+/*! PhotoSwipe Default UI - 4.0.7 - 2015-03-18
+* http://photoswipe.com
+* Copyright (c) 2015 Dmitry Semenov; */
+/**
+*
+* UI on top of main sliding area (caption, arrows, close button, etc.).
+* Built just using public methods/properties of PhotoSwipe.
+* 
+*/
+(function (root, factory) { 
+	if (typeof define === 'function' && define.amd) {
+		define('photoswipe-ui',factory);
+	} else if (typeof exports === 'object') {
+		module.exports = factory();
+	} else {
+		root.PhotoSwipeUI_Default = factory();
+	}
+})(this, function () {
+
+	'use strict';
+
+
+
+var PhotoSwipeUI_Default =
+ function(pswp, framework) {
+
+	var ui = this;
+	var _overlayUIUpdated = false,
+		_controlsVisible = true,
+		_fullscrenAPI,
+		_controls,
+		_captionContainer,
+		_fakeCaptionContainer,
+		_indexIndicator,
+		_shareButton,
+		_shareModal,
+		_shareModalHidden = true,
+		_initalCloseOnScrollValue,
+		_isIdle,
+		_listen,
+
+		_loadingIndicator,
+		_loadingIndicatorHidden,
+		_loadingIndicatorTimeout,
+
+		_galleryHasOneSlide,
+
+		_options,
+		_defaultUIOptions = {
+			barsSize: {top:44, bottom:'auto'},
+			closeElClasses: ['item', 'caption', 'zoom-wrap', 'ui', 'top-bar'], 
+			timeToIdle: 4000, 
+			timeToIdleOutside: 1000,
+			loadingIndicatorDelay: 1000, // 2s
+			
+			addCaptionHTMLFn: function(item, captionEl /*, isFake */) {
+				if(!item.title) {
+					captionEl.children[0].innerHTML = '';
+					return false;
+				}
+				captionEl.children[0].innerHTML = item.title;
+				return true;
+			},
+
+			closeEl:true,
+			captionEl: true,
+			fullscreenEl: true,
+			zoomEl: true,
+			shareEl: true,
+			counterEl: true,
+			arrowEl: true,
+			preloaderEl: true,
+
+			tapToClose: false,
+			tapToToggleControls: true,
+
+			clickToCloseNonZoomable: true,
+
+			shareButtons: [
+				{id:'facebook', label:'Share on Facebook', url:'https://www.facebook.com/sharer/sharer.php?u={{url}}'},
+				{id:'twitter', label:'Tweet', url:'https://twitter.com/intent/tweet?text={{text}}&url={{url}}'},
+				{id:'pinterest', label:'Pin it', url:'http://www.pinterest.com/pin/create/button/'+
+													'?url={{url}}&media={{image_url}}&description={{text}}'},
+				{id:'download', label:'Download image', url:'{{raw_image_url}}', download:true}
+			],
+			getImageURLForShare: function( /* shareButtonData */ ) {
+				return pswp.currItem.src || '';
+			},
+			getPageURLForShare: function( /* shareButtonData */ ) {
+				return window.location.href;
+			},
+			getTextForShare: function( /* shareButtonData */ ) {
+				return pswp.currItem.title || '';
+			},
+				
+			indexIndicatorSep: ' / '
+
+		},
+		_blockControlsTap,
+		_blockControlsTapTimeout;
+
+
+
+	var _onControlsTap = function(e) {
+			if(_blockControlsTap) {
+				return true;
+			}
+
+
+			e = e || window.event;
+
+			if(_options.timeToIdle && _options.mouseUsed && !_isIdle) {
+				// reset idle timer
+				_onIdleMouseMove();
+			}
+
+
+			var target = e.target || e.srcElement,
+				uiElement,
+				clickedClass = target.className,
+				found;
+
+			for(var i = 0; i < _uiElements.length; i++) {
+				uiElement = _uiElements[i];
+				if(uiElement.onTap && clickedClass.indexOf('pswp__' + uiElement.name ) > -1 ) {
+					uiElement.onTap();
+					found = true;
+
+				}
+			}
+
+			if(found) {
+				if(e.stopPropagation) {
+					e.stopPropagation();
+				}
+				_blockControlsTap = true;
+
+				// Some versions of Android don't prevent ghost click event 
+				// when preventDefault() was called on touchstart and/or touchend.
+				// 
+				// This happens on v4.3, 4.2, 4.1, 
+				// older versions strangely work correctly, 
+				// but just in case we add delay on all of them)	
+				var tapDelay = framework.features.isOldAndroid ? 600 : 30;
+				_blockControlsTapTimeout = setTimeout(function() {
+					_blockControlsTap = false;
+				}, tapDelay);
+			}
+
+		},
+		_fitControlsInViewport = function() {
+			return !pswp.likelyTouchDevice || _options.mouseUsed || screen.width > 1200;
+		},
+		_togglePswpClass = function(el, cName, add) {
+			framework[ (add ? 'add' : 'remove') + 'Class' ](el, 'pswp__' + cName);
+		},
+
+		// add class when there is just one item in the gallery
+		// (by default it hides left/right arrows and 1ofX counter)
+		_countNumItems = function() {
+			var hasOneSlide = (_options.getNumItemsFn() === 1);
+
+			if(hasOneSlide !== _galleryHasOneSlide) {
+				_togglePswpClass(_controls, 'ui--one-slide', hasOneSlide);
+				_galleryHasOneSlide = hasOneSlide;
+			}
+		},
+		_toggleShareModalClass = function() {
+			_togglePswpClass(_shareModal, 'share-modal--hidden', _shareModalHidden);
+		},
+		_toggleShareModal = function() {
+
+			_shareModalHidden = !_shareModalHidden;
+			
+			
+			if(!_shareModalHidden) {
+				_toggleShareModalClass();
+				setTimeout(function() {
+					if(!_shareModalHidden) {
+						framework.addClass(_shareModal, 'pswp__share-modal--fade-in');
+					}
+				}, 30);
+			} else {
+				framework.removeClass(_shareModal, 'pswp__share-modal--fade-in');
+				setTimeout(function() {
+					if(_shareModalHidden) {
+						_toggleShareModalClass();
+					}
+				}, 300);
+			}
+			
+			if(!_shareModalHidden) {
+				_updateShareURLs();
+			}
+			return false;
+		},
+
+		_openWindowPopup = function(e) {
+			e = e || window.event;
+			var target = e.target || e.srcElement;
+
+			pswp.shout('shareLinkClick', e, target);
+
+			if(!target.href) {
+				return false;
+			}
+
+			if( target.hasAttribute('download') ) {
+				return true;
+			}
+
+			window.open(target.href, 'pswp_share', 'scrollbars=yes,resizable=yes,toolbar=no,'+
+										'location=yes,width=550,height=420,top=100,left=' + 
+										(window.screen ? Math.round(screen.width / 2 - 275) : 100)  );
+
+			if(!_shareModalHidden) {
+				_toggleShareModal();
+			}
+			
+			return false;
+		},
+		_updateShareURLs = function() {
+			var shareButtonOut = '',
+				shareButtonData,
+				shareURL,
+				image_url,
+				page_url,
+				share_text;
+
+			for(var i = 0; i < _options.shareButtons.length; i++) {
+				shareButtonData = _options.shareButtons[i];
+
+				image_url = _options.getImageURLForShare(shareButtonData);
+				page_url = _options.getPageURLForShare(shareButtonData);
+				share_text = _options.getTextForShare(shareButtonData);
+
+				shareURL = shareButtonData.url.replace('{{url}}', encodeURIComponent(page_url) )
+									.replace('{{image_url}}', encodeURIComponent(image_url) )
+									.replace('{{raw_image_url}}', image_url )
+									.replace('{{text}}', encodeURIComponent(share_text) );
+
+				shareButtonOut += '<a href="' + shareURL + '" target="_blank" '+
+									'class="pswp__share--' + shareButtonData.id + '"' +
+									(shareButtonData.download ? 'download' : '') + '>' + 
+									shareButtonData.label + '</a>';
+
+				if(_options.parseShareButtonOut) {
+					shareButtonOut = _options.parseShareButtonOut(shareButtonData, shareButtonOut);
+				}
+			}
+			_shareModal.children[0].innerHTML = shareButtonOut;
+			_shareModal.children[0].onclick = _openWindowPopup;
+
+		},
+		_hasCloseClass = function(target) {
+			for(var  i = 0; i < _options.closeElClasses.length; i++) {
+				if( framework.hasClass(target, 'pswp__' + _options.closeElClasses[i]) ) {
+					return true;
+				}
+			}
+		},
+		_idleInterval,
+		_idleTimer,
+		_idleIncrement = 0,
+		_onIdleMouseMove = function() {
+			clearTimeout(_idleTimer);
+			_idleIncrement = 0;
+			if(_isIdle) {
+				ui.setIdle(false);
+			}
+		},
+		_onMouseLeaveWindow = function(e) {
+			e = e ? e : window.event;
+			var from = e.relatedTarget || e.toElement;
+			if (!from || from.nodeName === 'HTML') {
+				clearTimeout(_idleTimer);
+				_idleTimer = setTimeout(function() {
+					ui.setIdle(true);
+				}, _options.timeToIdleOutside);
+			}
+		},
+		_setupFullscreenAPI = function() {
+			if(_options.fullscreenEl) {
+				if(!_fullscrenAPI) {
+					_fullscrenAPI = ui.getFullscreenAPI();
+				}
+				if(_fullscrenAPI) {
+					framework.bind(document, _fullscrenAPI.eventK, ui.updateFullscreen);
+					ui.updateFullscreen();
+					framework.addClass(pswp.template, 'pswp--supports-fs');
+				} else {
+					framework.removeClass(pswp.template, 'pswp--supports-fs');
+				}
+			}
+		},
+		_setupLoadingIndicator = function() {
+			// Setup loading indicator
+			if(_options.preloaderEl) {
+			
+				_toggleLoadingIndicator(true);
+
+				_listen('beforeChange', function() {
+
+					clearTimeout(_loadingIndicatorTimeout);
+
+					// display loading indicator with delay
+					_loadingIndicatorTimeout = setTimeout(function() {
+
+						if(pswp.currItem && pswp.currItem.loading) {
+
+							if( !pswp.allowProgressiveImg() || (pswp.currItem.img && !pswp.currItem.img.naturalWidth)  ) {
+								// show preloader if progressive loading is not enabled, 
+								// or image width is not defined yet (because of slow connection)
+								_toggleLoadingIndicator(false); 
+								// items-controller.js function allowProgressiveImg
+							}
+							
+						} else {
+							_toggleLoadingIndicator(true); // hide preloader
+						}
+
+					}, _options.loadingIndicatorDelay);
+					
+				});
+				_listen('imageLoadComplete', function(index, item) {
+					if(pswp.currItem === item) {
+						_toggleLoadingIndicator(true);
+					}
+				});
+
+			}
+		},
+		_toggleLoadingIndicator = function(hide) {
+			if( _loadingIndicatorHidden !== hide ) {
+				_togglePswpClass(_loadingIndicator, 'preloader--active', !hide);
+				_loadingIndicatorHidden = hide;
+			}
+		},
+		_applyNavBarGaps = function(item) {
+			var gap = item.vGap;
+
+			if( _fitControlsInViewport() ) {
+				
+				var bars = _options.barsSize; 
+				if(_options.captionEl && bars.bottom === 'auto') {
+					if(!_fakeCaptionContainer) {
+						_fakeCaptionContainer = framework.createEl('pswp__caption pswp__caption--fake');
+						_fakeCaptionContainer.appendChild( framework.createEl('pswp__caption__center') );
+						_controls.insertBefore(_fakeCaptionContainer, _captionContainer);
+						framework.addClass(_controls, 'pswp__ui--fit');
+					}
+					if( _options.addCaptionHTMLFn(item, _fakeCaptionContainer, true) ) {
+
+						var captionSize = _fakeCaptionContainer.clientHeight;
+						gap.bottom = parseInt(captionSize,10) || 44;
+					} else {
+						gap.bottom = bars.top; // if no caption, set size of bottom gap to size of top
+					}
+				} else {
+					gap.bottom = bars.bottom === 'auto' ? 0 : bars.bottom;
+				}
+				
+				// height of top bar is static, no need to calculate it
+				gap.top = bars.top;
+			} else {
+				gap.top = gap.bottom = 0;
+			}
+		},
+		_setupIdle = function() {
+			// Hide controls when mouse is used
+			if(_options.timeToIdle) {
+				_listen('mouseUsed', function() {
+					
+					framework.bind(document, 'mousemove', _onIdleMouseMove);
+					framework.bind(document, 'mouseout', _onMouseLeaveWindow);
+
+					_idleInterval = setInterval(function() {
+						_idleIncrement++;
+						if(_idleIncrement === 2) {
+							ui.setIdle(true);
+						}
+					}, _options.timeToIdle / 2);
+				});
+			}
+		},
+		_setupHidingControlsDuringGestures = function() {
+
+			// Hide controls on vertical drag
+			_listen('onVerticalDrag', function(now) {
+				if(_controlsVisible && now < 0.95) {
+					ui.hideControls();
+				} else if(!_controlsVisible && now >= 0.95) {
+					ui.showControls();
+				}
+			});
+
+			// Hide controls when pinching to close
+			var pinchControlsHidden;
+			_listen('onPinchClose' , function(now) {
+				if(_controlsVisible && now < 0.9) {
+					ui.hideControls();
+					pinchControlsHidden = true;
+				} else if(pinchControlsHidden && !_controlsVisible && now > 0.9) {
+					ui.showControls();
+				}
+			});
+
+			_listen('zoomGestureEnded', function() {
+				pinchControlsHidden = false;
+				if(pinchControlsHidden && !_controlsVisible) {
+					ui.showControls();
+				}
+			});
+
+		};
+
+
+
+	var _uiElements = [
+		{ 
+			name: 'caption', 
+			option: 'captionEl',
+			onInit: function(el) {  
+				_captionContainer = el; 
+			} 
+		},
+		{ 
+			name: 'share-modal', 
+			option: 'shareEl',
+			onInit: function(el) {  
+				_shareModal = el;
+			},
+			onTap: function() {
+				_toggleShareModal();
+			} 
+		},
+		{ 
+			name: 'button--share', 
+			option: 'shareEl',
+			onInit: function(el) { 
+				_shareButton = el;
+			},
+			onTap: function() {
+				_toggleShareModal();
+			} 
+		},
+		{ 
+			name: 'button--zoom', 
+			option: 'zoomEl',
+			onTap: pswp.toggleDesktopZoom
+		},
+		{ 
+			name: 'counter', 
+			option: 'counterEl',
+			onInit: function(el) {  
+				_indexIndicator = el;
+			} 
+		},
+		{ 
+			name: 'button--close', 
+			option: 'closeEl',
+			onTap: pswp.close
+		},
+		{ 
+			name: 'button--arrow--left', 
+			option: 'arrowEl',
+			onTap: pswp.prev
+		},
+		{ 
+			name: 'button--arrow--right', 
+			option: 'arrowEl',
+			onTap: pswp.next
+		},
+		{ 
+			name: 'button--fs', 
+			option: 'fullscreenEl',
+			onTap: function() {  
+				if(_fullscrenAPI.isFullscreen()) {
+					_fullscrenAPI.exit();
+				} else {
+					_fullscrenAPI.enter();
+				}
+			} 
+		},
+		{ 
+			name: 'preloader', 
+			option: 'preloaderEl',
+			onInit: function(el) {  
+				_loadingIndicator = el;
+			} 
+		}
+
+	];
+
+	var _setupUIElements = function() {
+		var item,
+			classAttr,
+			uiElement;
+
+		var loopThroughChildElements = function(sChildren) {
+			if(!sChildren) {
+				return;
+			}
+
+			var l = sChildren.length;
+			for(var i = 0; i < l; i++) {
+				item = sChildren[i];
+				classAttr = item.className;
+
+				for(var a = 0; a < _uiElements.length; a++) {
+					uiElement = _uiElements[a];
+
+					if(classAttr.indexOf('pswp__' + uiElement.name) > -1  ) {
+
+						if( _options[uiElement.option] ) { // if element is not disabled from options
+							
+							framework.removeClass(item, 'pswp__element--disabled');
+							if(uiElement.onInit) {
+								uiElement.onInit(item);
+							}
+							
+							//item.style.display = 'block';
+						} else {
+							framework.addClass(item, 'pswp__element--disabled');
+							//item.style.display = 'none';
+						}
+					}
+				}
+			}
+		};
+		loopThroughChildElements(_controls.children);
+
+		var topBar =  framework.getChildByClass(_controls, 'pswp__top-bar');
+		if(topBar) {
+			loopThroughChildElements( topBar.children );
+		}
+	};
+
+
+	
+
+	ui.init = function() {
+
+		// extend options
+		framework.extend(pswp.options, _defaultUIOptions, true);
+
+		// create local link for fast access
+		_options = pswp.options;
+
+		// find pswp__ui element
+		_controls = framework.getChildByClass(pswp.scrollWrap, 'pswp__ui');
+
+		// create local link
+		_listen = pswp.listen;
+
+
+		_setupHidingControlsDuringGestures();
+
+		// update controls when slides change
+		_listen('beforeChange', ui.update);
+
+		// toggle zoom on double-tap
+		_listen('doubleTap', function(point) {
+			var initialZoomLevel = pswp.currItem.initialZoomLevel;
+			if(pswp.getZoomLevel() !== initialZoomLevel) {
+				pswp.zoomTo(initialZoomLevel, point, 333);
+			} else {
+				pswp.zoomTo(_options.getDoubleTapZoom(false, pswp.currItem), point, 333);
+			}
+		});
+
+		// Allow text selection in caption
+		_listen('preventDragEvent', function(e, isDown, preventObj) {
+			var t = e.target || e.srcElement;
+			if(
+				t && 
+				t.className && e.type.indexOf('mouse') > -1 && 
+				( t.className.indexOf('__caption') > 0 || (/(SMALL|STRONG|EM)/i).test(t.tagName) ) 
+			) {
+				preventObj.prevent = false;
+			}
+		});
+
+		// bind events for UI
+		_listen('bindEvents', function() {
+			framework.bind(_controls, 'pswpTap click', _onControlsTap);
+			framework.bind(pswp.scrollWrap, 'pswpTap', ui.onGlobalTap);
+
+			if(!pswp.likelyTouchDevice) {
+				framework.bind(pswp.scrollWrap, 'mouseover', ui.onMouseOver);
+			}
+		});
+
+		// unbind events for UI
+		_listen('unbindEvents', function() {
+			if(!_shareModalHidden) {
+				_toggleShareModal();
+			}
+
+			if(_idleInterval) {
+				clearInterval(_idleInterval);
+			}
+			framework.unbind(document, 'mouseout', _onMouseLeaveWindow);
+			framework.unbind(document, 'mousemove', _onIdleMouseMove);
+			framework.unbind(_controls, 'pswpTap click', _onControlsTap);
+			framework.unbind(pswp.scrollWrap, 'pswpTap', ui.onGlobalTap);
+			framework.unbind(pswp.scrollWrap, 'mouseover', ui.onMouseOver);
+
+			if(_fullscrenAPI) {
+				framework.unbind(document, _fullscrenAPI.eventK, ui.updateFullscreen);
+				if(_fullscrenAPI.isFullscreen()) {
+					_options.hideAnimationDuration = 0;
+					_fullscrenAPI.exit();
+				}
+				_fullscrenAPI = null;
+			}
+		});
+
+
+		// clean up things when gallery is destroyed
+		_listen('destroy', function() {
+			if(_options.captionEl) {
+				if(_fakeCaptionContainer) {
+					_controls.removeChild(_fakeCaptionContainer);
+				}
+				framework.removeClass(_captionContainer, 'pswp__caption--empty');
+			}
+
+			if(_shareModal) {
+				_shareModal.children[0].onclick = null;
+			}
+			framework.removeClass(_controls, 'pswp__ui--over-close');
+			framework.addClass( _controls, 'pswp__ui--hidden');
+			ui.setIdle(false);
+		});
+		
+
+		if(!_options.showAnimationDuration) {
+			framework.removeClass( _controls, 'pswp__ui--hidden');
+		}
+		_listen('initialZoomIn', function() {
+			if(_options.showAnimationDuration) {
+				framework.removeClass( _controls, 'pswp__ui--hidden');
+			}
+		});
+		_listen('initialZoomOut', function() {
+			framework.addClass( _controls, 'pswp__ui--hidden');
+		});
+
+		_listen('parseVerticalMargin', _applyNavBarGaps);
+		
+		_setupUIElements();
+
+		if(_options.shareEl && _shareButton && _shareModal) {
+			_shareModalHidden = true;
+		}
+
+		_countNumItems();
+
+		_setupIdle();
+
+		_setupFullscreenAPI();
+
+		_setupLoadingIndicator();
+	};
+
+	ui.setIdle = function(isIdle) {
+		_isIdle = isIdle;
+		_togglePswpClass(_controls, 'ui--idle', isIdle);
+	};
+
+	ui.update = function() {
+		// Don't update UI if it's hidden
+		if(_controlsVisible && pswp.currItem) {
+			
+			ui.updateIndexIndicator();
+
+			if(_options.captionEl) {
+				_options.addCaptionHTMLFn(pswp.currItem, _captionContainer);
+
+				_togglePswpClass(_captionContainer, 'caption--empty', !pswp.currItem.title);
+			}
+
+			_overlayUIUpdated = true;
+
+		} else {
+			_overlayUIUpdated = false;
+		}
+
+		if(!_shareModalHidden) {
+			_toggleShareModal();
+		}
+
+		_countNumItems();
+	};
+
+	ui.updateFullscreen = function(e) {
+
+		if(e) {
+			// some browsers change window scroll position during the fullscreen
+			// so PhotoSwipe updates it just in case
+			setTimeout(function() {
+				pswp.setScrollOffset( 0, framework.getScrollY() );
+			}, 50);
+		}
+		
+		// toogle pswp--fs class on root element
+		framework[ (_fullscrenAPI.isFullscreen() ? 'add' : 'remove') + 'Class' ](pswp.template, 'pswp--fs');
+	};
+
+	ui.updateIndexIndicator = function() {
+		if(_options.counterEl) {
+			_indexIndicator.innerHTML = (pswp.getCurrentIndex()+1) + 
+										_options.indexIndicatorSep + 
+										_options.getNumItemsFn();
+		}
+	};
+	
+	ui.onGlobalTap = function(e) {
+		e = e || window.event;
+		var target = e.target || e.srcElement;
+
+		if(_blockControlsTap) {
+			return;
+		}
+
+		if(e.detail && e.detail.pointerType === 'mouse') {
+
+			// close gallery if clicked outside of the image
+			if(_hasCloseClass(target)) {
+				pswp.close();
+				return;
+			}
+
+			if(framework.hasClass(target, 'pswp__img')) {
+				if(pswp.getZoomLevel() === 1 && pswp.getZoomLevel() <= pswp.currItem.fitRatio) {
+					if(_options.clickToCloseNonZoomable) {
+						pswp.close();
+					}
+				} else {
+					pswp.toggleDesktopZoom(e.detail.releasePoint);
+				}
+			}
+			
+		} else {
+
+			// tap anywhere (except buttons) to toggle visibility of controls
+			if(_options.tapToToggleControls) {
+				if(_controlsVisible) {
+					ui.hideControls();
+				} else {
+					ui.showControls();
+				}
+			}
+
+			// tap to close gallery
+			if(_options.tapToClose && (framework.hasClass(target, 'pswp__img') || _hasCloseClass(target)) ) {
+				pswp.close();
+				return;
+			}
+			
+		}
+	};
+	ui.onMouseOver = function(e) {
+		e = e || window.event;
+		var target = e.target || e.srcElement;
+
+		// add class when mouse is over an element that should close the gallery
+		_togglePswpClass(_controls, 'ui--over-close', _hasCloseClass(target));
+	};
+
+	ui.hideControls = function() {
+		framework.addClass(_controls,'pswp__ui--hidden');
+		_controlsVisible = false;
+	};
+
+	ui.showControls = function() {
+		_controlsVisible = true;
+		if(!_overlayUIUpdated) {
+			ui.update();
+		}
+		framework.removeClass(_controls,'pswp__ui--hidden');
+	};
+
+	ui.supportsFullscreen = function() {
+		var d = document;
+		return !!(d.exitFullscreen || d.mozCancelFullScreen || d.webkitExitFullscreen || d.msExitFullscreen);
+	};
+
+	ui.getFullscreenAPI = function() {
+		var dE = document.documentElement,
+			api,
+			tF = 'fullscreenchange';
+
+		if (dE.requestFullscreen) {
+			api = {
+				enterK: 'requestFullscreen',
+				exitK: 'exitFullscreen',
+				elementK: 'fullscreenElement',
+				eventK: tF
+			};
+
+		} else if(dE.mozRequestFullScreen ) {
+			api = {
+				enterK: 'mozRequestFullScreen',
+				exitK: 'mozCancelFullScreen',
+				elementK: 'mozFullScreenElement',
+				eventK: 'moz' + tF
+			};
+
+			
+
+		} else if(dE.webkitRequestFullscreen) {
+			api = {
+				enterK: 'webkitRequestFullscreen',
+				exitK: 'webkitExitFullscreen',
+				elementK: 'webkitFullscreenElement',
+				eventK: 'webkit' + tF
+			};
+
+		} else if(dE.msRequestFullscreen) {
+			api = {
+				enterK: 'msRequestFullscreen',
+				exitK: 'msExitFullscreen',
+				elementK: 'msFullscreenElement',
+				eventK: 'MSFullscreenChange'
+			};
+		}
+
+		if(api) {
+			api.enter = function() { 
+				// disable close-on-scroll in fullscreen
+				_initalCloseOnScrollValue = _options.closeOnScroll; 
+				_options.closeOnScroll = false; 
+
+				if(this.enterK === 'webkitRequestFullscreen') {
+					pswp.template[this.enterK]( Element.ALLOW_KEYBOARD_INPUT );
+				} else {
+					return pswp.template[this.enterK](); 
+				}
+			};
+			api.exit = function() { 
+				_options.closeOnScroll = _initalCloseOnScrollValue;
+
+				return document[this.exitK](); 
+
+			};
+			api.isFullscreen = function() { return document[this.elementK]; };
+		}
+
+		return api;
+	};
+
+
+
+};
+return PhotoSwipeUI_Default;
+
+
+});
+/**
+ * @license RequireJS text 2.0.14 Copyright (c) 2010-2014, The Dojo Foundation All Rights Reserved.
+ * Available via the MIT or new BSD license.
+ * see: http://github.com/requirejs/text for details
+ */
+/*jslint regexp: true */
+/*global require, XMLHttpRequest, ActiveXObject,
+  define, window, process, Packages,
+  java, location, Components, FileUtils */
+
+define('text',['module'], function (module) {
+    'use strict';
+
+    var text, fs, Cc, Ci, xpcIsWindows,
+        progIds = ['Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 'Msxml2.XMLHTTP.4.0'],
+        xmlRegExp = /^\s*<\?xml(\s)+version=[\'\"](\d)*.(\d)*[\'\"](\s)*\?>/im,
+        bodyRegExp = /<body[^>]*>\s*([\s\S]+)\s*<\/body>/im,
+        hasLocation = typeof location !== 'undefined' && location.href,
+        defaultProtocol = hasLocation && location.protocol && location.protocol.replace(/\:/, ''),
+        defaultHostName = hasLocation && location.hostname,
+        defaultPort = hasLocation && (location.port || undefined),
+        buildMap = {},
+        masterConfig = (module.config && module.config()) || {};
+
+    text = {
+        version: '2.0.14',
+
+        strip: function (content) {
+            //Strips <?xml ...?> declarations so that external SVG and XML
+            //documents can be added to a document without worry. Also, if the string
+            //is an HTML document, only the part inside the body tag is returned.
+            if (content) {
+                content = content.replace(xmlRegExp, "");
+                var matches = content.match(bodyRegExp);
+                if (matches) {
+                    content = matches[1];
+                }
+            } else {
+                content = "";
+            }
+            return content;
+        },
+
+        jsEscape: function (content) {
+            return content.replace(/(['\\])/g, '\\$1')
+                .replace(/[\f]/g, "\\f")
+                .replace(/[\b]/g, "\\b")
+                .replace(/[\n]/g, "\\n")
+                .replace(/[\t]/g, "\\t")
+                .replace(/[\r]/g, "\\r")
+                .replace(/[\u2028]/g, "\\u2028")
+                .replace(/[\u2029]/g, "\\u2029");
+        },
+
+        createXhr: masterConfig.createXhr || function () {
+            //Would love to dump the ActiveX crap in here. Need IE 6 to die first.
+            var xhr, i, progId;
+            if (typeof XMLHttpRequest !== "undefined") {
+                return new XMLHttpRequest();
+            } else if (typeof ActiveXObject !== "undefined") {
+                for (i = 0; i < 3; i += 1) {
+                    progId = progIds[i];
+                    try {
+                        xhr = new ActiveXObject(progId);
+                    } catch (e) {}
+
+                    if (xhr) {
+                        progIds = [progId];  // so faster next time
+                        break;
+                    }
+                }
+            }
+
+            return xhr;
+        },
+
+        /**
+         * Parses a resource name into its component parts. Resource names
+         * look like: module/name.ext!strip, where the !strip part is
+         * optional.
+         * @param {String} name the resource name
+         * @returns {Object} with properties "moduleName", "ext" and "strip"
+         * where strip is a boolean.
+         */
+        parseName: function (name) {
+            var modName, ext, temp,
+                strip = false,
+                index = name.lastIndexOf("."),
+                isRelative = name.indexOf('./') === 0 ||
+                             name.indexOf('../') === 0;
+
+            if (index !== -1 && (!isRelative || index > 1)) {
+                modName = name.substring(0, index);
+                ext = name.substring(index + 1);
+            } else {
+                modName = name;
+            }
+
+            temp = ext || modName;
+            index = temp.indexOf("!");
+            if (index !== -1) {
+                //Pull off the strip arg.
+                strip = temp.substring(index + 1) === "strip";
+                temp = temp.substring(0, index);
+                if (ext) {
+                    ext = temp;
+                } else {
+                    modName = temp;
+                }
+            }
+
+            return {
+                moduleName: modName,
+                ext: ext,
+                strip: strip
+            };
+        },
+
+        xdRegExp: /^((\w+)\:)?\/\/([^\/\\]+)/,
+
+        /**
+         * Is an URL on another domain. Only works for browser use, returns
+         * false in non-browser environments. Only used to know if an
+         * optimized .js version of a text resource should be loaded
+         * instead.
+         * @param {String} url
+         * @returns Boolean
+         */
+        useXhr: function (url, protocol, hostname, port) {
+            var uProtocol, uHostName, uPort,
+                match = text.xdRegExp.exec(url);
+            if (!match) {
+                return true;
+            }
+            uProtocol = match[2];
+            uHostName = match[3];
+
+            uHostName = uHostName.split(':');
+            uPort = uHostName[1];
+            uHostName = uHostName[0];
+
+            return (!uProtocol || uProtocol === protocol) &&
+                   (!uHostName || uHostName.toLowerCase() === hostname.toLowerCase()) &&
+                   ((!uPort && !uHostName) || uPort === port);
+        },
+
+        finishLoad: function (name, strip, content, onLoad) {
+            content = strip ? text.strip(content) : content;
+            if (masterConfig.isBuild) {
+                buildMap[name] = content;
+            }
+            onLoad(content);
+        },
+
+        load: function (name, req, onLoad, config) {
+            //Name has format: some.module.filext!strip
+            //The strip part is optional.
+            //if strip is present, then that means only get the string contents
+            //inside a body tag in an HTML string. For XML/SVG content it means
+            //removing the <?xml ...?> declarations so the content can be inserted
+            //into the current doc without problems.
+
+            // Do not bother with the work if a build and text will
+            // not be inlined.
+            if (config && config.isBuild && !config.inlineText) {
+                onLoad();
+                return;
+            }
+
+            masterConfig.isBuild = config && config.isBuild;
+
+            var parsed = text.parseName(name),
+                nonStripName = parsed.moduleName +
+                    (parsed.ext ? '.' + parsed.ext : ''),
+                url = req.toUrl(nonStripName),
+                useXhr = (masterConfig.useXhr) ||
+                         text.useXhr;
+
+            // Do not load if it is an empty: url
+            if (url.indexOf('empty:') === 0) {
+                onLoad();
+                return;
+            }
+
+            //Load the text. Use XHR if possible and in a browser.
+            if (!hasLocation || useXhr(url, defaultProtocol, defaultHostName, defaultPort)) {
+                text.get(url, function (content) {
+                    text.finishLoad(name, parsed.strip, content, onLoad);
+                }, function (err) {
+                    if (onLoad.error) {
+                        onLoad.error(err);
+                    }
+                });
+            } else {
+                //Need to fetch the resource across domains. Assume
+                //the resource has been optimized into a JS module. Fetch
+                //by the module name + extension, but do not include the
+                //!strip part to avoid file system issues.
+                req([nonStripName], function (content) {
+                    text.finishLoad(parsed.moduleName + '.' + parsed.ext,
+                                    parsed.strip, content, onLoad);
+                });
+            }
+        },
+
+        write: function (pluginName, moduleName, write, config) {
+            if (buildMap.hasOwnProperty(moduleName)) {
+                var content = text.jsEscape(buildMap[moduleName]);
+                write.asModule(pluginName + "!" + moduleName,
+                               "define(function () { return '" +
+                                   content +
+                               "';});\n");
+            }
+        },
+
+        writeFile: function (pluginName, moduleName, req, write, config) {
+            var parsed = text.parseName(moduleName),
+                extPart = parsed.ext ? '.' + parsed.ext : '',
+                nonStripName = parsed.moduleName + extPart,
+                //Use a '.js' file name so that it indicates it is a
+                //script that can be loaded across domains.
+                fileName = req.toUrl(parsed.moduleName + extPart) + '.js';
+
+            //Leverage own load() method to load plugin value, but only
+            //write out values that do not have the strip argument,
+            //to avoid any potential issues with ! in file names.
+            text.load(nonStripName, req, function (value) {
+                //Use own write() method to construct full module value.
+                //But need to create shell that translates writeFile's
+                //write() to the right interface.
+                var textWrite = function (contents) {
+                    return write(fileName, contents);
+                };
+                textWrite.asModule = function (moduleName, contents) {
+                    return write.asModule(moduleName, fileName, contents);
+                };
+
+                text.write(pluginName, nonStripName, textWrite, config);
+            }, config);
+        }
+    };
+
+    if (masterConfig.env === 'node' || (!masterConfig.env &&
+            typeof process !== "undefined" &&
+            process.versions &&
+            !!process.versions.node &&
+            !process.versions['node-webkit'] &&
+            !process.versions['atom-shell'])) {
+        //Using special require.nodeRequire, something added by r.js.
+        fs = require.nodeRequire('fs');
+
+        text.get = function (url, callback, errback) {
+            try {
+                var file = fs.readFileSync(url, 'utf8');
+                //Remove BOM (Byte Mark Order) from utf8 files if it is there.
+                if (file[0] === '\uFEFF') {
+                    file = file.substring(1);
+                }
+                callback(file);
+            } catch (e) {
+                if (errback) {
+                    errback(e);
+                }
+            }
+        };
+    } else if (masterConfig.env === 'xhr' || (!masterConfig.env &&
+            text.createXhr())) {
+        text.get = function (url, callback, errback, headers) {
+            var xhr = text.createXhr(), header;
+            xhr.open('GET', url, true);
+
+            //Allow plugins direct access to xhr headers
+            if (headers) {
+                for (header in headers) {
+                    if (headers.hasOwnProperty(header)) {
+                        xhr.setRequestHeader(header.toLowerCase(), headers[header]);
+                    }
+                }
+            }
+
+            //Allow overrides specified in config
+            if (masterConfig.onXhr) {
+                masterConfig.onXhr(xhr, url);
+            }
+
+            xhr.onreadystatechange = function (evt) {
+                var status, err;
+                //Do not explicitly handle errors, those should be
+                //visible via console output in the browser.
+                if (xhr.readyState === 4) {
+                    status = xhr.status || 0;
+                    if (status > 399 && status < 600) {
+                        //An http 4xx or 5xx error. Signal an error.
+                        err = new Error(url + ' HTTP status: ' + status);
+                        err.xhr = xhr;
+                        if (errback) {
+                            errback(err);
+                        }
+                    } else {
+                        callback(xhr.responseText);
+                    }
+
+                    if (masterConfig.onXhrComplete) {
+                        masterConfig.onXhrComplete(xhr, url);
+                    }
+                }
+            };
+            xhr.send(null);
+        };
+    } else if (masterConfig.env === 'rhino' || (!masterConfig.env &&
+            typeof Packages !== 'undefined' && typeof java !== 'undefined')) {
+        //Why Java, why is this so awkward?
+        text.get = function (url, callback) {
+            var stringBuffer, line,
+                encoding = "utf-8",
+                file = new java.io.File(url),
+                lineSeparator = java.lang.System.getProperty("line.separator"),
+                input = new java.io.BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(file), encoding)),
+                content = '';
+            try {
+                stringBuffer = new java.lang.StringBuffer();
+                line = input.readLine();
+
+                // Byte Order Mark (BOM) - The Unicode Standard, version 3.0, page 324
+                // http://www.unicode.org/faq/utf_bom.html
+
+                // Note that when we use utf-8, the BOM should appear as "EF BB BF", but it doesn't due to this bug in the JDK:
+                // http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4508058
+                if (line && line.length() && line.charAt(0) === 0xfeff) {
+                    // Eat the BOM, since we've already found the encoding on this file,
+                    // and we plan to concatenating this buffer with others; the BOM should
+                    // only appear at the top of a file.
+                    line = line.substring(1);
+                }
+
+                if (line !== null) {
+                    stringBuffer.append(line);
+                }
+
+                while ((line = input.readLine()) !== null) {
+                    stringBuffer.append(lineSeparator);
+                    stringBuffer.append(line);
+                }
+                //Make sure we return a JavaScript string and not a Java string.
+                content = String(stringBuffer.toString()); //String
+            } finally {
+                input.close();
+            }
+            callback(content);
+        };
+    } else if (masterConfig.env === 'xpconnect' || (!masterConfig.env &&
+            typeof Components !== 'undefined' && Components.classes &&
+            Components.interfaces)) {
+        //Avert your gaze!
+        Cc = Components.classes;
+        Ci = Components.interfaces;
+        Components.utils['import']('resource://gre/modules/FileUtils.jsm');
+        xpcIsWindows = ('@mozilla.org/windows-registry-key;1' in Cc);
+
+        text.get = function (url, callback) {
+            var inStream, convertStream, fileObj,
+                readData = {};
+
+            if (xpcIsWindows) {
+                url = url.replace(/\//g, '\\');
+            }
+
+            fileObj = new FileUtils.File(url);
+
+            //XPCOM, you so crazy
+            try {
+                inStream = Cc['@mozilla.org/network/file-input-stream;1']
+                           .createInstance(Ci.nsIFileInputStream);
+                inStream.init(fileObj, 1, 0, false);
+
+                convertStream = Cc['@mozilla.org/intl/converter-input-stream;1']
+                                .createInstance(Ci.nsIConverterInputStream);
+                convertStream.init(inStream, "utf-8", inStream.available(),
+                Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
+
+                convertStream.readString(inStream.available(), readData);
+                convertStream.close();
+                inStream.close();
+                callback(readData.value);
+            } catch (e) {
+                throw new Error((fileObj && fileObj.path || '') + ': ' + e);
+            }
+        };
+    }
+    return text;
+});
+
+// RequireJS UnderscoreJS template plugin
+// http://github.com/jfparadis/requirejs-tpl
+//
+// An alternative to http://github.com/ZeeAgency/requirejs-tpl
+//
+// Using UnderscoreJS micro-templates at http://underscorejs.org/#template
+// Using and RequireJS text.js at http://requirejs.org/docs/api.html#text
+// @author JF Paradis
+// @version 0.0.2
+//
+// Released under the MIT license
+//
+// Usage:
+//   require(['backbone', 'tpl!mytemplate'], function (Backbone, mytemplate) {
+//     return Backbone.View.extend({
+//       initialize: function(){
+//         this.render();
+//       },
+//       render: function(){
+//         this.$el.html(mytemplate({message: 'hello'}));
+//     });
+//   });
+//
+// Configuration: (optional)
+//   require.config({
+//     tpl: {
+//       extension: '.tpl' // default = '.html'
+//     }
+//   });
+
+/*jslint nomen: true */
+/*global define: false */
+
+define('tpl',['text', 'underscore'], function (text, _) {
+    'use strict';
+
+    var buildMap = {},
+        buildTemplateSource = "define('{pluginName}!{moduleName}', function () { return {source}; });\n";
+
+    return {
+        version: '0.0.2',
+
+        load: function (moduleName, parentRequire, onload, config) {
+
+            if (config.tpl && config.tpl.templateSettings) {
+                _.templateSettings = config.tpl.templateSettings;
+            }
+
+            if (buildMap[moduleName]) {
+                onload(buildMap[moduleName]);
+
+            } else {
+                var ext = (config.tpl && config.tpl.extension) || '.html';
+                var path = (config.tpl && config.tpl.path) || '';
+                text.load(path + moduleName + ext, parentRequire, function (source) {
+                    buildMap[moduleName] = _.template(source);
+                    onload(buildMap[moduleName]);
+                }, config);
+            }
+        },
+
+        write: function (pluginName, moduleName, write) {
+            var build = buildMap[moduleName],
+                source = build && build.source;
+            if (source) {
+                write.asModule(pluginName + '!' + moduleName,
+                    buildTemplateSource
+                    .replace('{pluginName}', pluginName)
+                    .replace('{moduleName}', moduleName)
+                    .replace('{source}', source));
+            }
+        }
+    };
+});
+
+
+define('tpl!photoswipe-template', [],function () { return function(obj){
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
+with(obj||{}){
+__p+='<!-- Root element of PhotoSwipe. Must have class pswp. -->\n<div id="photoswipe-template" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">\n\n    <!-- Background of PhotoSwipe. \n         It\'s a separate element as animating opacity is faster than rgba(). -->\n    <div class="pswp__bg"></div>\n\n    <!-- Slides wrapper with overflow:hidden. -->\n    <div class="pswp__scroll-wrap">\n\n        <!-- Container that holds slides. \n            PhotoSwipe keeps only 3 of them in the DOM to save memory.\n            Don\'t modify these 3 pswp__item elements, data is added later on. -->\n        <div class="pswp__container">\n            <div class="pswp__item"></div>\n            <div class="pswp__item"></div>\n            <div class="pswp__item"></div>\n        </div>\n\n        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->\n        <div class="pswp__ui pswp__ui--hidden">\n\n            <div class="pswp__top-bar">\n\n                <!--  Controls are self-explanatory. Order can be changed. -->\n\n                <div class="pswp__counter"></div>\n\n                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>\n\n                <button class="pswp__button pswp__button--share" title="Share"></button>\n\n                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>\n\n                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>\n\n                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->\n                <!-- element will get class pswp__preloader__active when preloader is running -->\n                <div class="pswp__preloader">\n                    <div class="pswp__preloader__icn">\n                      <div class="pswp__preloader__cut">\n                        <div class="pswp__preloader__donut"></div>\n                      </div>\n                    </div>\n                </div>\n            </div>\n\n            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">\n                <div class="pswp__share-tooltip"></div> \n            </div>\n\n            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">\n            </button>\n\n            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">\n            </button>\n\n            <div class="pswp__caption">\n                <div class="pswp__caption__center"></div>\n            </div>\n        </div>\n    </div>\n</div>\n';
+}
+return __p;
+}; });
 
 /**
  * Patterns gallery - A simple gallery
  *
  * Copyright 2013 Simplon B.V. - Wichert Akkerman
  */
-define('pat-gallery',[
+define("pat-gallery", [
     "jquery",
     "pat-registry",
+    "pat-base",
     "pat-parser",
-    "photoswipe"
-], function($, patterns, Parser) {
+    "photoswipe",
+    "photoswipe-ui",
+    "tpl!photoswipe-template",
+    "underscore"
+], function($, patterns, Base, Parser, PhotoSwipe, PhotoSwipeUI, template, _) {
     var parser = new Parser("gallery");
+    parser.addArgument("loop", true);
+    parser.addArgument("scale-method", "fit", ["fit", "fitNoUpscale", "zoom"]);
+    parser.addArgument("delay", 30000);
+    parser.addArgument("effect-duration", 250);
 
-    parser.add_argument("slideshow", "manual", ["auto", "manual", "none"]);
-    parser.add_argument("loop", true);
-    parser.add_argument("scale-method", "fit", ["fit", "fitNoUpscale", "zoom"]);
-    parser.add_argument("delay", 30000);
-    parser.add_argument("effect-duration", 250);
-    parser.add_argument("effect-easing", "ease-out");
-    parser.add_argument("hide-overlay", 5000);
-
-    var gallery = {
+    return Base.extend({
         name: "gallery",
         trigger: ".pat-gallery:has(a img)",
 
-        init: function($el, opts) {
-            return $el.each(function() {
-                var options = parser.parse($(this), opts);
-                $("a:has(img)", this).photoSwipe({
-                    autoStartSlideshow: options.slideshow==="auto",
-                    imageScaleMethod: options.scaleMethod,
-                    loop: options.loop,
-                    slideshowDelay: options.delay,
-                    slideSpeed: options.effect.duration,
-                    slideTimingFunction: options.effect.easing,
-                    captionAndToolbarAutoHideDelay: options.hideOverlay,
-
-                    zIndex: 10000,
-                    getImageCaption: gallery._getImageCaption
+        init: function patGalleryInit($el, opts) {
+            this.options = parser.parse(this.$el, opts);
+            if ($('#photoswipe-template').length === 0) {
+                $('body').append(template());
+            }
+            var $image_anchors = $("a:has(img)", this.$el);
+            var images = $image_anchors.map(function () {
+                return { 'w': 0, 'h': 0, 'src': this.href, 'title': $(this).find('img').attr('title') };
+            });
+            var pswpElement = document.querySelectorAll('.pswp')[0];
+            var options = {
+                index: 0,
+                scaleMode: this.options.scaleMethod,
+                loop: this.options.loop,
+                slideshowDelay: this.options.delay,
+                hideAnimationDuration: this.options.effectDuration,
+                showAnimationDuration: this.options.effectDuration
+            };
+            $image_anchors.click(function (ev) {
+                ev.preventDefault();
+                if (this.href) {
+                    options.index = _.indexOf(_.pluck(images, 'src'), this.href);
+                } else {
+                    options.index = 0;
+                }
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI, images, options);
+                gallery.listen('gettingData', function(index, item) {
+                    // Workaround for the fact that we don't know the image sizes.
+                    // https://github.com/dimsemenov/PhotoSwipe/issues/796
+                    if (item.w < 1 || item.h < 1) { // unknown size
+                        var img = new Image();
+                        img.onload = function() { // will get size after load
+                            item.w = this.width; // set image width
+                            item.h = this.height; // set image height
+                            gallery.invalidateCurrItems(); // reinit Items
+                            gallery.updateSize(true); // reinit Items
+                        };
+                        img.src = item.src; // let's download image
+                    }
                 });
+                gallery.init();
             });
         },
-
-        _getImageCaption: function(el) {
-            if (el.nodeName==="IMG")
-                return el.title;
-            var $children = $("img[title]:first", el);
-            if ($children.length)
-                return $children.attr("title");
-        }
-    };
-
-
-    patterns.register(gallery);
-    return gallery;
+    });
 });
 
 /**
@@ -35830,15 +35601,15 @@ define('pat-image-crop',[
     var log = logger.getLogger("pat.image-crop"),
         parser = new Parser("image-crop");
 
-    parser.add_argument("preview-id", "");
-    parser.add_argument("preview-height", 0);
-    parser.add_argument("preview-width", 0);
-    parser.add_argument("aspect-ratio", 1);
-    parser.add_argument("form-id", "");
-    parser.add_argument("initial-sel", "0 0 0 0");
-    parser.add_argument("min-size", "0 0");
-    parser.add_argument("max-size", "0 0");
-    parser.add_argument("input-prefix", "");
+    parser.addArgument("preview-id", "");
+    parser.addArgument("preview-height", 0);
+    parser.addArgument("preview-width", 0);
+    parser.addArgument("aspect-ratio", 1);
+    parser.addArgument("form-id", "");
+    parser.addArgument("initial-sel", "0 0 0 0");
+    parser.addArgument("min-size", "0 0");
+    parser.addArgument("max-size", "0 0");
+    parser.addArgument("input-prefix", "");
 
     var _ = {
         name: "image-crop",
@@ -40018,17 +39789,17 @@ var indexOf = Array.prototype.indexOf ?
 }(this, function($, registry, Parser, Base, Masonry, imagesLoaded) {
     "use strict";
     var parser = new Parser("masonry");
-    parser.add_argument("column-width");
-    parser.add_argument("container-style", "{ position: 'relative' }");
-    parser.add_argument("gutter");
-    parser.add_argument("hidden-style", "{ opacity: 0, transform: 'scale(0.001)' }");
-    parser.add_argument("is-fit-width", false);
-    parser.add_argument("is-origin-left", true);
-    parser.add_argument("is-origin-top", true);
-    parser.add_argument("item-selector", ".item");
-    parser.add_argument("stamp", "");
-    parser.add_argument("transition-duration", "0.4s");
-    parser.add_argument("visible-style", "{ opacity: 1, transform: 'scale(1)' }");
+    parser.addArgument("column-width");
+    parser.addArgument("container-style", "{ position: 'relative' }");
+    parser.addArgument("gutter");
+    parser.addArgument("hidden-style", "{ opacity: 0, transform: 'scale(0.001)' }");
+    parser.addArgument("is-fit-width", false);
+    parser.addArgument("is-origin-left", true);
+    parser.addArgument("is-origin-top", true);
+    parser.addArgument("item-selector", ".item");
+    parser.addArgument("stamp", "");
+    parser.addArgument("transition-duration", "0.4s");
+    parser.addArgument("visible-style", "{ opacity: 1, transform: 'scale(1)' }");
 
     return Base.extend({
         name: "masonry",
@@ -40243,10 +40014,10 @@ define('pat-notification',[
     var log = logger.getLogger("notification"),
         parser = new Parser("notification");
 
-    parser.add_argument("type", "static", ["static", "banner"]);
-    parser.add_argument("healing", "5s");
-    parser.add_argument("controls", "icons", ["icons", "buttons", "none"]);
-    parser.add_argument("class");
+    parser.addArgument("type", "static", ["static", "banner"]);
+    parser.addArgument("healing", "5s");
+    parser.addArgument("controls", "icons", ["icons", "buttons", "none"]);
+    parser.addArgument("class");
 
     var _ = {
         name: "notification",
@@ -40482,7 +40253,7 @@ define('pat-sortable',[
 ], function($, patterns, logger, Parser) {
     var parser = new Parser("sortable");
 
-    parser.add_argument("selector", "li");
+    parser.addArgument("selector", "li");
 
     var _ = {
         name: "sortable",
@@ -40610,1555 +40381,6 @@ define('pat-sortable',[
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
 // vim: sw=4 expandtab
 ;
-//     Underscore.js 1.8.3
-//     http://underscorejs.org
-//     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-//     Underscore may be freely distributed under the MIT license.
-
-(function() {
-
-  // Baseline setup
-  // --------------
-
-  // Establish the root object, `window` in the browser, or `exports` on the server.
-  var root = this;
-
-  // Save the previous value of the `_` variable.
-  var previousUnderscore = root._;
-
-  // Save bytes in the minified (but not gzipped) version:
-  var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
-
-  // Create quick reference variables for speed access to core prototypes.
-  var
-    push             = ArrayProto.push,
-    slice            = ArrayProto.slice,
-    toString         = ObjProto.toString,
-    hasOwnProperty   = ObjProto.hasOwnProperty;
-
-  // All **ECMAScript 5** native function implementations that we hope to use
-  // are declared here.
-  var
-    nativeIsArray      = Array.isArray,
-    nativeKeys         = Object.keys,
-    nativeBind         = FuncProto.bind,
-    nativeCreate       = Object.create;
-
-  // Naked function reference for surrogate-prototype-swapping.
-  var Ctor = function(){};
-
-  // Create a safe reference to the Underscore object for use below.
-  var _ = function(obj) {
-    if (obj instanceof _) return obj;
-    if (!(this instanceof _)) return new _(obj);
-    this._wrapped = obj;
-  };
-
-  // Export the Underscore object for **Node.js**, with
-  // backwards-compatibility for the old `require()` API. If we're in
-  // the browser, add `_` as a global object.
-  if (typeof exports !== 'undefined') {
-    if (typeof module !== 'undefined' && module.exports) {
-      exports = module.exports = _;
-    }
-    exports._ = _;
-  } else {
-    root._ = _;
-  }
-
-  // Current version.
-  _.VERSION = '1.8.3';
-
-  // Internal function that returns an efficient (for current engines) version
-  // of the passed-in callback, to be repeatedly applied in other Underscore
-  // functions.
-  var optimizeCb = function(func, context, argCount) {
-    if (context === void 0) return func;
-    switch (argCount == null ? 3 : argCount) {
-      case 1: return function(value) {
-        return func.call(context, value);
-      };
-      case 2: return function(value, other) {
-        return func.call(context, value, other);
-      };
-      case 3: return function(value, index, collection) {
-        return func.call(context, value, index, collection);
-      };
-      case 4: return function(accumulator, value, index, collection) {
-        return func.call(context, accumulator, value, index, collection);
-      };
-    }
-    return function() {
-      return func.apply(context, arguments);
-    };
-  };
-
-  // A mostly-internal function to generate callbacks that can be applied
-  // to each element in a collection, returning the desired result — either
-  // identity, an arbitrary callback, a property matcher, or a property accessor.
-  var cb = function(value, context, argCount) {
-    if (value == null) return _.identity;
-    if (_.isFunction(value)) return optimizeCb(value, context, argCount);
-    if (_.isObject(value)) return _.matcher(value);
-    return _.property(value);
-  };
-  _.iteratee = function(value, context) {
-    return cb(value, context, Infinity);
-  };
-
-  // An internal function for creating assigner functions.
-  var createAssigner = function(keysFunc, undefinedOnly) {
-    return function(obj) {
-      var length = arguments.length;
-      if (length < 2 || obj == null) return obj;
-      for (var index = 1; index < length; index++) {
-        var source = arguments[index],
-            keys = keysFunc(source),
-            l = keys.length;
-        for (var i = 0; i < l; i++) {
-          var key = keys[i];
-          if (!undefinedOnly || obj[key] === void 0) obj[key] = source[key];
-        }
-      }
-      return obj;
-    };
-  };
-
-  // An internal function for creating a new object that inherits from another.
-  var baseCreate = function(prototype) {
-    if (!_.isObject(prototype)) return {};
-    if (nativeCreate) return nativeCreate(prototype);
-    Ctor.prototype = prototype;
-    var result = new Ctor;
-    Ctor.prototype = null;
-    return result;
-  };
-
-  var property = function(key) {
-    return function(obj) {
-      return obj == null ? void 0 : obj[key];
-    };
-  };
-
-  // Helper for collection methods to determine whether a collection
-  // should be iterated as an array or as an object
-  // Related: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength
-  // Avoids a very nasty iOS 8 JIT bug on ARM-64. #2094
-  var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
-  var getLength = property('length');
-  var isArrayLike = function(collection) {
-    var length = getLength(collection);
-    return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
-  };
-
-  // Collection Functions
-  // --------------------
-
-  // The cornerstone, an `each` implementation, aka `forEach`.
-  // Handles raw objects in addition to array-likes. Treats all
-  // sparse array-likes as if they were dense.
-  _.each = _.forEach = function(obj, iteratee, context) {
-    iteratee = optimizeCb(iteratee, context);
-    var i, length;
-    if (isArrayLike(obj)) {
-      for (i = 0, length = obj.length; i < length; i++) {
-        iteratee(obj[i], i, obj);
-      }
-    } else {
-      var keys = _.keys(obj);
-      for (i = 0, length = keys.length; i < length; i++) {
-        iteratee(obj[keys[i]], keys[i], obj);
-      }
-    }
-    return obj;
-  };
-
-  // Return the results of applying the iteratee to each element.
-  _.map = _.collect = function(obj, iteratee, context) {
-    iteratee = cb(iteratee, context);
-    var keys = !isArrayLike(obj) && _.keys(obj),
-        length = (keys || obj).length,
-        results = Array(length);
-    for (var index = 0; index < length; index++) {
-      var currentKey = keys ? keys[index] : index;
-      results[index] = iteratee(obj[currentKey], currentKey, obj);
-    }
-    return results;
-  };
-
-  // Create a reducing function iterating left or right.
-  function createReduce(dir) {
-    // Optimized iterator function as using arguments.length
-    // in the main function will deoptimize the, see #1991.
-    function iterator(obj, iteratee, memo, keys, index, length) {
-      for (; index >= 0 && index < length; index += dir) {
-        var currentKey = keys ? keys[index] : index;
-        memo = iteratee(memo, obj[currentKey], currentKey, obj);
-      }
-      return memo;
-    }
-
-    return function(obj, iteratee, memo, context) {
-      iteratee = optimizeCb(iteratee, context, 4);
-      var keys = !isArrayLike(obj) && _.keys(obj),
-          length = (keys || obj).length,
-          index = dir > 0 ? 0 : length - 1;
-      // Determine the initial value if none is provided.
-      if (arguments.length < 3) {
-        memo = obj[keys ? keys[index] : index];
-        index += dir;
-      }
-      return iterator(obj, iteratee, memo, keys, index, length);
-    };
-  }
-
-  // **Reduce** builds up a single result from a list of values, aka `inject`,
-  // or `foldl`.
-  _.reduce = _.foldl = _.inject = createReduce(1);
-
-  // The right-associative version of reduce, also known as `foldr`.
-  _.reduceRight = _.foldr = createReduce(-1);
-
-  // Return the first value which passes a truth test. Aliased as `detect`.
-  _.find = _.detect = function(obj, predicate, context) {
-    var key;
-    if (isArrayLike(obj)) {
-      key = _.findIndex(obj, predicate, context);
-    } else {
-      key = _.findKey(obj, predicate, context);
-    }
-    if (key !== void 0 && key !== -1) return obj[key];
-  };
-
-  // Return all the elements that pass a truth test.
-  // Aliased as `select`.
-  _.filter = _.select = function(obj, predicate, context) {
-    var results = [];
-    predicate = cb(predicate, context);
-    _.each(obj, function(value, index, list) {
-      if (predicate(value, index, list)) results.push(value);
-    });
-    return results;
-  };
-
-  // Return all the elements for which a truth test fails.
-  _.reject = function(obj, predicate, context) {
-    return _.filter(obj, _.negate(cb(predicate)), context);
-  };
-
-  // Determine whether all of the elements match a truth test.
-  // Aliased as `all`.
-  _.every = _.all = function(obj, predicate, context) {
-    predicate = cb(predicate, context);
-    var keys = !isArrayLike(obj) && _.keys(obj),
-        length = (keys || obj).length;
-    for (var index = 0; index < length; index++) {
-      var currentKey = keys ? keys[index] : index;
-      if (!predicate(obj[currentKey], currentKey, obj)) return false;
-    }
-    return true;
-  };
-
-  // Determine if at least one element in the object matches a truth test.
-  // Aliased as `any`.
-  _.some = _.any = function(obj, predicate, context) {
-    predicate = cb(predicate, context);
-    var keys = !isArrayLike(obj) && _.keys(obj),
-        length = (keys || obj).length;
-    for (var index = 0; index < length; index++) {
-      var currentKey = keys ? keys[index] : index;
-      if (predicate(obj[currentKey], currentKey, obj)) return true;
-    }
-    return false;
-  };
-
-  // Determine if the array or object contains a given item (using `===`).
-  // Aliased as `includes` and `include`.
-  _.contains = _.includes = _.include = function(obj, item, fromIndex, guard) {
-    if (!isArrayLike(obj)) obj = _.values(obj);
-    if (typeof fromIndex != 'number' || guard) fromIndex = 0;
-    return _.indexOf(obj, item, fromIndex) >= 0;
-  };
-
-  // Invoke a method (with arguments) on every item in a collection.
-  _.invoke = function(obj, method) {
-    var args = slice.call(arguments, 2);
-    var isFunc = _.isFunction(method);
-    return _.map(obj, function(value) {
-      var func = isFunc ? method : value[method];
-      return func == null ? func : func.apply(value, args);
-    });
-  };
-
-  // Convenience version of a common use case of `map`: fetching a property.
-  _.pluck = function(obj, key) {
-    return _.map(obj, _.property(key));
-  };
-
-  // Convenience version of a common use case of `filter`: selecting only objects
-  // containing specific `key:value` pairs.
-  _.where = function(obj, attrs) {
-    return _.filter(obj, _.matcher(attrs));
-  };
-
-  // Convenience version of a common use case of `find`: getting the first object
-  // containing specific `key:value` pairs.
-  _.findWhere = function(obj, attrs) {
-    return _.find(obj, _.matcher(attrs));
-  };
-
-  // Return the maximum element (or element-based computation).
-  _.max = function(obj, iteratee, context) {
-    var result = -Infinity, lastComputed = -Infinity,
-        value, computed;
-    if (iteratee == null && obj != null) {
-      obj = isArrayLike(obj) ? obj : _.values(obj);
-      for (var i = 0, length = obj.length; i < length; i++) {
-        value = obj[i];
-        if (value > result) {
-          result = value;
-        }
-      }
-    } else {
-      iteratee = cb(iteratee, context);
-      _.each(obj, function(value, index, list) {
-        computed = iteratee(value, index, list);
-        if (computed > lastComputed || computed === -Infinity && result === -Infinity) {
-          result = value;
-          lastComputed = computed;
-        }
-      });
-    }
-    return result;
-  };
-
-  // Return the minimum element (or element-based computation).
-  _.min = function(obj, iteratee, context) {
-    var result = Infinity, lastComputed = Infinity,
-        value, computed;
-    if (iteratee == null && obj != null) {
-      obj = isArrayLike(obj) ? obj : _.values(obj);
-      for (var i = 0, length = obj.length; i < length; i++) {
-        value = obj[i];
-        if (value < result) {
-          result = value;
-        }
-      }
-    } else {
-      iteratee = cb(iteratee, context);
-      _.each(obj, function(value, index, list) {
-        computed = iteratee(value, index, list);
-        if (computed < lastComputed || computed === Infinity && result === Infinity) {
-          result = value;
-          lastComputed = computed;
-        }
-      });
-    }
-    return result;
-  };
-
-  // Shuffle a collection, using the modern version of the
-  // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
-  _.shuffle = function(obj) {
-    var set = isArrayLike(obj) ? obj : _.values(obj);
-    var length = set.length;
-    var shuffled = Array(length);
-    for (var index = 0, rand; index < length; index++) {
-      rand = _.random(0, index);
-      if (rand !== index) shuffled[index] = shuffled[rand];
-      shuffled[rand] = set[index];
-    }
-    return shuffled;
-  };
-
-  // Sample **n** random values from a collection.
-  // If **n** is not specified, returns a single random element.
-  // The internal `guard` argument allows it to work with `map`.
-  _.sample = function(obj, n, guard) {
-    if (n == null || guard) {
-      if (!isArrayLike(obj)) obj = _.values(obj);
-      return obj[_.random(obj.length - 1)];
-    }
-    return _.shuffle(obj).slice(0, Math.max(0, n));
-  };
-
-  // Sort the object's values by a criterion produced by an iteratee.
-  _.sortBy = function(obj, iteratee, context) {
-    iteratee = cb(iteratee, context);
-    return _.pluck(_.map(obj, function(value, index, list) {
-      return {
-        value: value,
-        index: index,
-        criteria: iteratee(value, index, list)
-      };
-    }).sort(function(left, right) {
-      var a = left.criteria;
-      var b = right.criteria;
-      if (a !== b) {
-        if (a > b || a === void 0) return 1;
-        if (a < b || b === void 0) return -1;
-      }
-      return left.index - right.index;
-    }), 'value');
-  };
-
-  // An internal function used for aggregate "group by" operations.
-  var group = function(behavior) {
-    return function(obj, iteratee, context) {
-      var result = {};
-      iteratee = cb(iteratee, context);
-      _.each(obj, function(value, index) {
-        var key = iteratee(value, index, obj);
-        behavior(result, value, key);
-      });
-      return result;
-    };
-  };
-
-  // Groups the object's values by a criterion. Pass either a string attribute
-  // to group by, or a function that returns the criterion.
-  _.groupBy = group(function(result, value, key) {
-    if (_.has(result, key)) result[key].push(value); else result[key] = [value];
-  });
-
-  // Indexes the object's values by a criterion, similar to `groupBy`, but for
-  // when you know that your index values will be unique.
-  _.indexBy = group(function(result, value, key) {
-    result[key] = value;
-  });
-
-  // Counts instances of an object that group by a certain criterion. Pass
-  // either a string attribute to count by, or a function that returns the
-  // criterion.
-  _.countBy = group(function(result, value, key) {
-    if (_.has(result, key)) result[key]++; else result[key] = 1;
-  });
-
-  // Safely create a real, live array from anything iterable.
-  _.toArray = function(obj) {
-    if (!obj) return [];
-    if (_.isArray(obj)) return slice.call(obj);
-    if (isArrayLike(obj)) return _.map(obj, _.identity);
-    return _.values(obj);
-  };
-
-  // Return the number of elements in an object.
-  _.size = function(obj) {
-    if (obj == null) return 0;
-    return isArrayLike(obj) ? obj.length : _.keys(obj).length;
-  };
-
-  // Split a collection into two arrays: one whose elements all satisfy the given
-  // predicate, and one whose elements all do not satisfy the predicate.
-  _.partition = function(obj, predicate, context) {
-    predicate = cb(predicate, context);
-    var pass = [], fail = [];
-    _.each(obj, function(value, key, obj) {
-      (predicate(value, key, obj) ? pass : fail).push(value);
-    });
-    return [pass, fail];
-  };
-
-  // Array Functions
-  // ---------------
-
-  // Get the first element of an array. Passing **n** will return the first N
-  // values in the array. Aliased as `head` and `take`. The **guard** check
-  // allows it to work with `_.map`.
-  _.first = _.head = _.take = function(array, n, guard) {
-    if (array == null) return void 0;
-    if (n == null || guard) return array[0];
-    return _.initial(array, array.length - n);
-  };
-
-  // Returns everything but the last entry of the array. Especially useful on
-  // the arguments object. Passing **n** will return all the values in
-  // the array, excluding the last N.
-  _.initial = function(array, n, guard) {
-    return slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
-  };
-
-  // Get the last element of an array. Passing **n** will return the last N
-  // values in the array.
-  _.last = function(array, n, guard) {
-    if (array == null) return void 0;
-    if (n == null || guard) return array[array.length - 1];
-    return _.rest(array, Math.max(0, array.length - n));
-  };
-
-  // Returns everything but the first entry of the array. Aliased as `tail` and `drop`.
-  // Especially useful on the arguments object. Passing an **n** will return
-  // the rest N values in the array.
-  _.rest = _.tail = _.drop = function(array, n, guard) {
-    return slice.call(array, n == null || guard ? 1 : n);
-  };
-
-  // Trim out all falsy values from an array.
-  _.compact = function(array) {
-    return _.filter(array, _.identity);
-  };
-
-  // Internal implementation of a recursive `flatten` function.
-  var flatten = function(input, shallow, strict, startIndex) {
-    var output = [], idx = 0;
-    for (var i = startIndex || 0, length = getLength(input); i < length; i++) {
-      var value = input[i];
-      if (isArrayLike(value) && (_.isArray(value) || _.isArguments(value))) {
-        //flatten current level of array or arguments object
-        if (!shallow) value = flatten(value, shallow, strict);
-        var j = 0, len = value.length;
-        output.length += len;
-        while (j < len) {
-          output[idx++] = value[j++];
-        }
-      } else if (!strict) {
-        output[idx++] = value;
-      }
-    }
-    return output;
-  };
-
-  // Flatten out an array, either recursively (by default), or just one level.
-  _.flatten = function(array, shallow) {
-    return flatten(array, shallow, false);
-  };
-
-  // Return a version of the array that does not contain the specified value(s).
-  _.without = function(array) {
-    return _.difference(array, slice.call(arguments, 1));
-  };
-
-  // Produce a duplicate-free version of the array. If the array has already
-  // been sorted, you have the option of using a faster algorithm.
-  // Aliased as `unique`.
-  _.uniq = _.unique = function(array, isSorted, iteratee, context) {
-    if (!_.isBoolean(isSorted)) {
-      context = iteratee;
-      iteratee = isSorted;
-      isSorted = false;
-    }
-    if (iteratee != null) iteratee = cb(iteratee, context);
-    var result = [];
-    var seen = [];
-    for (var i = 0, length = getLength(array); i < length; i++) {
-      var value = array[i],
-          computed = iteratee ? iteratee(value, i, array) : value;
-      if (isSorted) {
-        if (!i || seen !== computed) result.push(value);
-        seen = computed;
-      } else if (iteratee) {
-        if (!_.contains(seen, computed)) {
-          seen.push(computed);
-          result.push(value);
-        }
-      } else if (!_.contains(result, value)) {
-        result.push(value);
-      }
-    }
-    return result;
-  };
-
-  // Produce an array that contains the union: each distinct element from all of
-  // the passed-in arrays.
-  _.union = function() {
-    return _.uniq(flatten(arguments, true, true));
-  };
-
-  // Produce an array that contains every item shared between all the
-  // passed-in arrays.
-  _.intersection = function(array) {
-    var result = [];
-    var argsLength = arguments.length;
-    for (var i = 0, length = getLength(array); i < length; i++) {
-      var item = array[i];
-      if (_.contains(result, item)) continue;
-      for (var j = 1; j < argsLength; j++) {
-        if (!_.contains(arguments[j], item)) break;
-      }
-      if (j === argsLength) result.push(item);
-    }
-    return result;
-  };
-
-  // Take the difference between one array and a number of other arrays.
-  // Only the elements present in just the first array will remain.
-  _.difference = function(array) {
-    var rest = flatten(arguments, true, true, 1);
-    return _.filter(array, function(value){
-      return !_.contains(rest, value);
-    });
-  };
-
-  // Zip together multiple lists into a single array -- elements that share
-  // an index go together.
-  _.zip = function() {
-    return _.unzip(arguments);
-  };
-
-  // Complement of _.zip. Unzip accepts an array of arrays and groups
-  // each array's elements on shared indices
-  _.unzip = function(array) {
-    var length = array && _.max(array, getLength).length || 0;
-    var result = Array(length);
-
-    for (var index = 0; index < length; index++) {
-      result[index] = _.pluck(array, index);
-    }
-    return result;
-  };
-
-  // Converts lists into objects. Pass either a single array of `[key, value]`
-  // pairs, or two parallel arrays of the same length -- one of keys, and one of
-  // the corresponding values.
-  _.object = function(list, values) {
-    var result = {};
-    for (var i = 0, length = getLength(list); i < length; i++) {
-      if (values) {
-        result[list[i]] = values[i];
-      } else {
-        result[list[i][0]] = list[i][1];
-      }
-    }
-    return result;
-  };
-
-  // Generator function to create the findIndex and findLastIndex functions
-  function createPredicateIndexFinder(dir) {
-    return function(array, predicate, context) {
-      predicate = cb(predicate, context);
-      var length = getLength(array);
-      var index = dir > 0 ? 0 : length - 1;
-      for (; index >= 0 && index < length; index += dir) {
-        if (predicate(array[index], index, array)) return index;
-      }
-      return -1;
-    };
-  }
-
-  // Returns the first index on an array-like that passes a predicate test
-  _.findIndex = createPredicateIndexFinder(1);
-  _.findLastIndex = createPredicateIndexFinder(-1);
-
-  // Use a comparator function to figure out the smallest index at which
-  // an object should be inserted so as to maintain order. Uses binary search.
-  _.sortedIndex = function(array, obj, iteratee, context) {
-    iteratee = cb(iteratee, context, 1);
-    var value = iteratee(obj);
-    var low = 0, high = getLength(array);
-    while (low < high) {
-      var mid = Math.floor((low + high) / 2);
-      if (iteratee(array[mid]) < value) low = mid + 1; else high = mid;
-    }
-    return low;
-  };
-
-  // Generator function to create the indexOf and lastIndexOf functions
-  function createIndexFinder(dir, predicateFind, sortedIndex) {
-    return function(array, item, idx) {
-      var i = 0, length = getLength(array);
-      if (typeof idx == 'number') {
-        if (dir > 0) {
-            i = idx >= 0 ? idx : Math.max(idx + length, i);
-        } else {
-            length = idx >= 0 ? Math.min(idx + 1, length) : idx + length + 1;
-        }
-      } else if (sortedIndex && idx && length) {
-        idx = sortedIndex(array, item);
-        return array[idx] === item ? idx : -1;
-      }
-      if (item !== item) {
-        idx = predicateFind(slice.call(array, i, length), _.isNaN);
-        return idx >= 0 ? idx + i : -1;
-      }
-      for (idx = dir > 0 ? i : length - 1; idx >= 0 && idx < length; idx += dir) {
-        if (array[idx] === item) return idx;
-      }
-      return -1;
-    };
-  }
-
-  // Return the position of the first occurrence of an item in an array,
-  // or -1 if the item is not included in the array.
-  // If the array is large and already in sort order, pass `true`
-  // for **isSorted** to use binary search.
-  _.indexOf = createIndexFinder(1, _.findIndex, _.sortedIndex);
-  _.lastIndexOf = createIndexFinder(-1, _.findLastIndex);
-
-  // Generate an integer Array containing an arithmetic progression. A port of
-  // the native Python `range()` function. See
-  // [the Python documentation](http://docs.python.org/library/functions.html#range).
-  _.range = function(start, stop, step) {
-    if (stop == null) {
-      stop = start || 0;
-      start = 0;
-    }
-    step = step || 1;
-
-    var length = Math.max(Math.ceil((stop - start) / step), 0);
-    var range = Array(length);
-
-    for (var idx = 0; idx < length; idx++, start += step) {
-      range[idx] = start;
-    }
-
-    return range;
-  };
-
-  // Function (ahem) Functions
-  // ------------------
-
-  // Determines whether to execute a function as a constructor
-  // or a normal function with the provided arguments
-  var executeBound = function(sourceFunc, boundFunc, context, callingContext, args) {
-    if (!(callingContext instanceof boundFunc)) return sourceFunc.apply(context, args);
-    var self = baseCreate(sourceFunc.prototype);
-    var result = sourceFunc.apply(self, args);
-    if (_.isObject(result)) return result;
-    return self;
-  };
-
-  // Create a function bound to a given object (assigning `this`, and arguments,
-  // optionally). Delegates to **ECMAScript 5**'s native `Function.bind` if
-  // available.
-  _.bind = function(func, context) {
-    if (nativeBind && func.bind === nativeBind) return nativeBind.apply(func, slice.call(arguments, 1));
-    if (!_.isFunction(func)) throw new TypeError('Bind must be called on a function');
-    var args = slice.call(arguments, 2);
-    var bound = function() {
-      return executeBound(func, bound, context, this, args.concat(slice.call(arguments)));
-    };
-    return bound;
-  };
-
-  // Partially apply a function by creating a version that has had some of its
-  // arguments pre-filled, without changing its dynamic `this` context. _ acts
-  // as a placeholder, allowing any combination of arguments to be pre-filled.
-  _.partial = function(func) {
-    var boundArgs = slice.call(arguments, 1);
-    var bound = function() {
-      var position = 0, length = boundArgs.length;
-      var args = Array(length);
-      for (var i = 0; i < length; i++) {
-        args[i] = boundArgs[i] === _ ? arguments[position++] : boundArgs[i];
-      }
-      while (position < arguments.length) args.push(arguments[position++]);
-      return executeBound(func, bound, this, this, args);
-    };
-    return bound;
-  };
-
-  // Bind a number of an object's methods to that object. Remaining arguments
-  // are the method names to be bound. Useful for ensuring that all callbacks
-  // defined on an object belong to it.
-  _.bindAll = function(obj) {
-    var i, length = arguments.length, key;
-    if (length <= 1) throw new Error('bindAll must be passed function names');
-    for (i = 1; i < length; i++) {
-      key = arguments[i];
-      obj[key] = _.bind(obj[key], obj);
-    }
-    return obj;
-  };
-
-  // Memoize an expensive function by storing its results.
-  _.memoize = function(func, hasher) {
-    var memoize = function(key) {
-      var cache = memoize.cache;
-      var address = '' + (hasher ? hasher.apply(this, arguments) : key);
-      if (!_.has(cache, address)) cache[address] = func.apply(this, arguments);
-      return cache[address];
-    };
-    memoize.cache = {};
-    return memoize;
-  };
-
-  // Delays a function for the given number of milliseconds, and then calls
-  // it with the arguments supplied.
-  _.delay = function(func, wait) {
-    var args = slice.call(arguments, 2);
-    return setTimeout(function(){
-      return func.apply(null, args);
-    }, wait);
-  };
-
-  // Defers a function, scheduling it to run after the current call stack has
-  // cleared.
-  _.defer = _.partial(_.delay, _, 1);
-
-  // Returns a function, that, when invoked, will only be triggered at most once
-  // during a given window of time. Normally, the throttled function will run
-  // as much as it can, without ever going more than once per `wait` duration;
-  // but if you'd like to disable the execution on the leading edge, pass
-  // `{leading: false}`. To disable execution on the trailing edge, ditto.
-  _.throttle = function(func, wait, options) {
-    var context, args, result;
-    var timeout = null;
-    var previous = 0;
-    if (!options) options = {};
-    var later = function() {
-      previous = options.leading === false ? 0 : _.now();
-      timeout = null;
-      result = func.apply(context, args);
-      if (!timeout) context = args = null;
-    };
-    return function() {
-      var now = _.now();
-      if (!previous && options.leading === false) previous = now;
-      var remaining = wait - (now - previous);
-      context = this;
-      args = arguments;
-      if (remaining <= 0 || remaining > wait) {
-        if (timeout) {
-          clearTimeout(timeout);
-          timeout = null;
-        }
-        previous = now;
-        result = func.apply(context, args);
-        if (!timeout) context = args = null;
-      } else if (!timeout && options.trailing !== false) {
-        timeout = setTimeout(later, remaining);
-      }
-      return result;
-    };
-  };
-
-  // Returns a function, that, as long as it continues to be invoked, will not
-  // be triggered. The function will be called after it stops being called for
-  // N milliseconds. If `immediate` is passed, trigger the function on the
-  // leading edge, instead of the trailing.
-  _.debounce = function(func, wait, immediate) {
-    var timeout, args, context, timestamp, result;
-
-    var later = function() {
-      var last = _.now() - timestamp;
-
-      if (last < wait && last >= 0) {
-        timeout = setTimeout(later, wait - last);
-      } else {
-        timeout = null;
-        if (!immediate) {
-          result = func.apply(context, args);
-          if (!timeout) context = args = null;
-        }
-      }
-    };
-
-    return function() {
-      context = this;
-      args = arguments;
-      timestamp = _.now();
-      var callNow = immediate && !timeout;
-      if (!timeout) timeout = setTimeout(later, wait);
-      if (callNow) {
-        result = func.apply(context, args);
-        context = args = null;
-      }
-
-      return result;
-    };
-  };
-
-  // Returns the first function passed as an argument to the second,
-  // allowing you to adjust arguments, run code before and after, and
-  // conditionally execute the original function.
-  _.wrap = function(func, wrapper) {
-    return _.partial(wrapper, func);
-  };
-
-  // Returns a negated version of the passed-in predicate.
-  _.negate = function(predicate) {
-    return function() {
-      return !predicate.apply(this, arguments);
-    };
-  };
-
-  // Returns a function that is the composition of a list of functions, each
-  // consuming the return value of the function that follows.
-  _.compose = function() {
-    var args = arguments;
-    var start = args.length - 1;
-    return function() {
-      var i = start;
-      var result = args[start].apply(this, arguments);
-      while (i--) result = args[i].call(this, result);
-      return result;
-    };
-  };
-
-  // Returns a function that will only be executed on and after the Nth call.
-  _.after = function(times, func) {
-    return function() {
-      if (--times < 1) {
-        return func.apply(this, arguments);
-      }
-    };
-  };
-
-  // Returns a function that will only be executed up to (but not including) the Nth call.
-  _.before = function(times, func) {
-    var memo;
-    return function() {
-      if (--times > 0) {
-        memo = func.apply(this, arguments);
-      }
-      if (times <= 1) func = null;
-      return memo;
-    };
-  };
-
-  // Returns a function that will be executed at most one time, no matter how
-  // often you call it. Useful for lazy initialization.
-  _.once = _.partial(_.before, 2);
-
-  // Object Functions
-  // ----------------
-
-  // Keys in IE < 9 that won't be iterated by `for key in ...` and thus missed.
-  var hasEnumBug = !{toString: null}.propertyIsEnumerable('toString');
-  var nonEnumerableProps = ['valueOf', 'isPrototypeOf', 'toString',
-                      'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
-
-  function collectNonEnumProps(obj, keys) {
-    var nonEnumIdx = nonEnumerableProps.length;
-    var constructor = obj.constructor;
-    var proto = (_.isFunction(constructor) && constructor.prototype) || ObjProto;
-
-    // Constructor is a special case.
-    var prop = 'constructor';
-    if (_.has(obj, prop) && !_.contains(keys, prop)) keys.push(prop);
-
-    while (nonEnumIdx--) {
-      prop = nonEnumerableProps[nonEnumIdx];
-      if (prop in obj && obj[prop] !== proto[prop] && !_.contains(keys, prop)) {
-        keys.push(prop);
-      }
-    }
-  }
-
-  // Retrieve the names of an object's own properties.
-  // Delegates to **ECMAScript 5**'s native `Object.keys`
-  _.keys = function(obj) {
-    if (!_.isObject(obj)) return [];
-    if (nativeKeys) return nativeKeys(obj);
-    var keys = [];
-    for (var key in obj) if (_.has(obj, key)) keys.push(key);
-    // Ahem, IE < 9.
-    if (hasEnumBug) collectNonEnumProps(obj, keys);
-    return keys;
-  };
-
-  // Retrieve all the property names of an object.
-  _.allKeys = function(obj) {
-    if (!_.isObject(obj)) return [];
-    var keys = [];
-    for (var key in obj) keys.push(key);
-    // Ahem, IE < 9.
-    if (hasEnumBug) collectNonEnumProps(obj, keys);
-    return keys;
-  };
-
-  // Retrieve the values of an object's properties.
-  _.values = function(obj) {
-    var keys = _.keys(obj);
-    var length = keys.length;
-    var values = Array(length);
-    for (var i = 0; i < length; i++) {
-      values[i] = obj[keys[i]];
-    }
-    return values;
-  };
-
-  // Returns the results of applying the iteratee to each element of the object
-  // In contrast to _.map it returns an object
-  _.mapObject = function(obj, iteratee, context) {
-    iteratee = cb(iteratee, context);
-    var keys =  _.keys(obj),
-          length = keys.length,
-          results = {},
-          currentKey;
-      for (var index = 0; index < length; index++) {
-        currentKey = keys[index];
-        results[currentKey] = iteratee(obj[currentKey], currentKey, obj);
-      }
-      return results;
-  };
-
-  // Convert an object into a list of `[key, value]` pairs.
-  _.pairs = function(obj) {
-    var keys = _.keys(obj);
-    var length = keys.length;
-    var pairs = Array(length);
-    for (var i = 0; i < length; i++) {
-      pairs[i] = [keys[i], obj[keys[i]]];
-    }
-    return pairs;
-  };
-
-  // Invert the keys and values of an object. The values must be serializable.
-  _.invert = function(obj) {
-    var result = {};
-    var keys = _.keys(obj);
-    for (var i = 0, length = keys.length; i < length; i++) {
-      result[obj[keys[i]]] = keys[i];
-    }
-    return result;
-  };
-
-  // Return a sorted list of the function names available on the object.
-  // Aliased as `methods`
-  _.functions = _.methods = function(obj) {
-    var names = [];
-    for (var key in obj) {
-      if (_.isFunction(obj[key])) names.push(key);
-    }
-    return names.sort();
-  };
-
-  // Extend a given object with all the properties in passed-in object(s).
-  _.extend = createAssigner(_.allKeys);
-
-  // Assigns a given object with all the own properties in the passed-in object(s)
-  // (https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
-  _.extendOwn = _.assign = createAssigner(_.keys);
-
-  // Returns the first key on an object that passes a predicate test
-  _.findKey = function(obj, predicate, context) {
-    predicate = cb(predicate, context);
-    var keys = _.keys(obj), key;
-    for (var i = 0, length = keys.length; i < length; i++) {
-      key = keys[i];
-      if (predicate(obj[key], key, obj)) return key;
-    }
-  };
-
-  // Return a copy of the object only containing the whitelisted properties.
-  _.pick = function(object, oiteratee, context) {
-    var result = {}, obj = object, iteratee, keys;
-    if (obj == null) return result;
-    if (_.isFunction(oiteratee)) {
-      keys = _.allKeys(obj);
-      iteratee = optimizeCb(oiteratee, context);
-    } else {
-      keys = flatten(arguments, false, false, 1);
-      iteratee = function(value, key, obj) { return key in obj; };
-      obj = Object(obj);
-    }
-    for (var i = 0, length = keys.length; i < length; i++) {
-      var key = keys[i];
-      var value = obj[key];
-      if (iteratee(value, key, obj)) result[key] = value;
-    }
-    return result;
-  };
-
-   // Return a copy of the object without the blacklisted properties.
-  _.omit = function(obj, iteratee, context) {
-    if (_.isFunction(iteratee)) {
-      iteratee = _.negate(iteratee);
-    } else {
-      var keys = _.map(flatten(arguments, false, false, 1), String);
-      iteratee = function(value, key) {
-        return !_.contains(keys, key);
-      };
-    }
-    return _.pick(obj, iteratee, context);
-  };
-
-  // Fill in a given object with default properties.
-  _.defaults = createAssigner(_.allKeys, true);
-
-  // Creates an object that inherits from the given prototype object.
-  // If additional properties are provided then they will be added to the
-  // created object.
-  _.create = function(prototype, props) {
-    var result = baseCreate(prototype);
-    if (props) _.extendOwn(result, props);
-    return result;
-  };
-
-  // Create a (shallow-cloned) duplicate of an object.
-  _.clone = function(obj) {
-    if (!_.isObject(obj)) return obj;
-    return _.isArray(obj) ? obj.slice() : _.extend({}, obj);
-  };
-
-  // Invokes interceptor with the obj, and then returns obj.
-  // The primary purpose of this method is to "tap into" a method chain, in
-  // order to perform operations on intermediate results within the chain.
-  _.tap = function(obj, interceptor) {
-    interceptor(obj);
-    return obj;
-  };
-
-  // Returns whether an object has a given set of `key:value` pairs.
-  _.isMatch = function(object, attrs) {
-    var keys = _.keys(attrs), length = keys.length;
-    if (object == null) return !length;
-    var obj = Object(object);
-    for (var i = 0; i < length; i++) {
-      var key = keys[i];
-      if (attrs[key] !== obj[key] || !(key in obj)) return false;
-    }
-    return true;
-  };
-
-
-  // Internal recursive comparison function for `isEqual`.
-  var eq = function(a, b, aStack, bStack) {
-    // Identical objects are equal. `0 === -0`, but they aren't identical.
-    // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
-    if (a === b) return a !== 0 || 1 / a === 1 / b;
-    // A strict comparison is necessary because `null == undefined`.
-    if (a == null || b == null) return a === b;
-    // Unwrap any wrapped objects.
-    if (a instanceof _) a = a._wrapped;
-    if (b instanceof _) b = b._wrapped;
-    // Compare `[[Class]]` names.
-    var className = toString.call(a);
-    if (className !== toString.call(b)) return false;
-    switch (className) {
-      // Strings, numbers, regular expressions, dates, and booleans are compared by value.
-      case '[object RegExp]':
-      // RegExps are coerced to strings for comparison (Note: '' + /a/i === '/a/i')
-      case '[object String]':
-        // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
-        // equivalent to `new String("5")`.
-        return '' + a === '' + b;
-      case '[object Number]':
-        // `NaN`s are equivalent, but non-reflexive.
-        // Object(NaN) is equivalent to NaN
-        if (+a !== +a) return +b !== +b;
-        // An `egal` comparison is performed for other numeric values.
-        return +a === 0 ? 1 / +a === 1 / b : +a === +b;
-      case '[object Date]':
-      case '[object Boolean]':
-        // Coerce dates and booleans to numeric primitive values. Dates are compared by their
-        // millisecond representations. Note that invalid dates with millisecond representations
-        // of `NaN` are not equivalent.
-        return +a === +b;
-    }
-
-    var areArrays = className === '[object Array]';
-    if (!areArrays) {
-      if (typeof a != 'object' || typeof b != 'object') return false;
-
-      // Objects with different constructors are not equivalent, but `Object`s or `Array`s
-      // from different frames are.
-      var aCtor = a.constructor, bCtor = b.constructor;
-      if (aCtor !== bCtor && !(_.isFunction(aCtor) && aCtor instanceof aCtor &&
-                               _.isFunction(bCtor) && bCtor instanceof bCtor)
-                          && ('constructor' in a && 'constructor' in b)) {
-        return false;
-      }
-    }
-    // Assume equality for cyclic structures. The algorithm for detecting cyclic
-    // structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
-
-    // Initializing stack of traversed objects.
-    // It's done here since we only need them for objects and arrays comparison.
-    aStack = aStack || [];
-    bStack = bStack || [];
-    var length = aStack.length;
-    while (length--) {
-      // Linear search. Performance is inversely proportional to the number of
-      // unique nested structures.
-      if (aStack[length] === a) return bStack[length] === b;
-    }
-
-    // Add the first object to the stack of traversed objects.
-    aStack.push(a);
-    bStack.push(b);
-
-    // Recursively compare objects and arrays.
-    if (areArrays) {
-      // Compare array lengths to determine if a deep comparison is necessary.
-      length = a.length;
-      if (length !== b.length) return false;
-      // Deep compare the contents, ignoring non-numeric properties.
-      while (length--) {
-        if (!eq(a[length], b[length], aStack, bStack)) return false;
-      }
-    } else {
-      // Deep compare objects.
-      var keys = _.keys(a), key;
-      length = keys.length;
-      // Ensure that both objects contain the same number of properties before comparing deep equality.
-      if (_.keys(b).length !== length) return false;
-      while (length--) {
-        // Deep compare each member
-        key = keys[length];
-        if (!(_.has(b, key) && eq(a[key], b[key], aStack, bStack))) return false;
-      }
-    }
-    // Remove the first object from the stack of traversed objects.
-    aStack.pop();
-    bStack.pop();
-    return true;
-  };
-
-  // Perform a deep comparison to check if two objects are equal.
-  _.isEqual = function(a, b) {
-    return eq(a, b);
-  };
-
-  // Is a given array, string, or object empty?
-  // An "empty" object has no enumerable own-properties.
-  _.isEmpty = function(obj) {
-    if (obj == null) return true;
-    if (isArrayLike(obj) && (_.isArray(obj) || _.isString(obj) || _.isArguments(obj))) return obj.length === 0;
-    return _.keys(obj).length === 0;
-  };
-
-  // Is a given value a DOM element?
-  _.isElement = function(obj) {
-    return !!(obj && obj.nodeType === 1);
-  };
-
-  // Is a given value an array?
-  // Delegates to ECMA5's native Array.isArray
-  _.isArray = nativeIsArray || function(obj) {
-    return toString.call(obj) === '[object Array]';
-  };
-
-  // Is a given variable an object?
-  _.isObject = function(obj) {
-    var type = typeof obj;
-    return type === 'function' || type === 'object' && !!obj;
-  };
-
-  // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.
-  _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function(name) {
-    _['is' + name] = function(obj) {
-      return toString.call(obj) === '[object ' + name + ']';
-    };
-  });
-
-  // Define a fallback version of the method in browsers (ahem, IE < 9), where
-  // there isn't any inspectable "Arguments" type.
-  if (!_.isArguments(arguments)) {
-    _.isArguments = function(obj) {
-      return _.has(obj, 'callee');
-    };
-  }
-
-  // Optimize `isFunction` if appropriate. Work around some typeof bugs in old v8,
-  // IE 11 (#1621), and in Safari 8 (#1929).
-  if (typeof /./ != 'function' && typeof Int8Array != 'object') {
-    _.isFunction = function(obj) {
-      return typeof obj == 'function' || false;
-    };
-  }
-
-  // Is a given object a finite number?
-  _.isFinite = function(obj) {
-    return isFinite(obj) && !isNaN(parseFloat(obj));
-  };
-
-  // Is the given value `NaN`? (NaN is the only number which does not equal itself).
-  _.isNaN = function(obj) {
-    return _.isNumber(obj) && obj !== +obj;
-  };
-
-  // Is a given value a boolean?
-  _.isBoolean = function(obj) {
-    return obj === true || obj === false || toString.call(obj) === '[object Boolean]';
-  };
-
-  // Is a given value equal to null?
-  _.isNull = function(obj) {
-    return obj === null;
-  };
-
-  // Is a given variable undefined?
-  _.isUndefined = function(obj) {
-    return obj === void 0;
-  };
-
-  // Shortcut function for checking if an object has a given property directly
-  // on itself (in other words, not on a prototype).
-  _.has = function(obj, key) {
-    return obj != null && hasOwnProperty.call(obj, key);
-  };
-
-  // Utility Functions
-  // -----------------
-
-  // Run Underscore.js in *noConflict* mode, returning the `_` variable to its
-  // previous owner. Returns a reference to the Underscore object.
-  _.noConflict = function() {
-    root._ = previousUnderscore;
-    return this;
-  };
-
-  // Keep the identity function around for default iteratees.
-  _.identity = function(value) {
-    return value;
-  };
-
-  // Predicate-generating functions. Often useful outside of Underscore.
-  _.constant = function(value) {
-    return function() {
-      return value;
-    };
-  };
-
-  _.noop = function(){};
-
-  _.property = property;
-
-  // Generates a function for a given object that returns a given property.
-  _.propertyOf = function(obj) {
-    return obj == null ? function(){} : function(key) {
-      return obj[key];
-    };
-  };
-
-  // Returns a predicate for checking whether an object has a given set of
-  // `key:value` pairs.
-  _.matcher = _.matches = function(attrs) {
-    attrs = _.extendOwn({}, attrs);
-    return function(obj) {
-      return _.isMatch(obj, attrs);
-    };
-  };
-
-  // Run a function **n** times.
-  _.times = function(n, iteratee, context) {
-    var accum = Array(Math.max(0, n));
-    iteratee = optimizeCb(iteratee, context, 1);
-    for (var i = 0; i < n; i++) accum[i] = iteratee(i);
-    return accum;
-  };
-
-  // Return a random integer between min and max (inclusive).
-  _.random = function(min, max) {
-    if (max == null) {
-      max = min;
-      min = 0;
-    }
-    return min + Math.floor(Math.random() * (max - min + 1));
-  };
-
-  // A (possibly faster) way to get the current timestamp as an integer.
-  _.now = Date.now || function() {
-    return new Date().getTime();
-  };
-
-   // List of HTML entities for escaping.
-  var escapeMap = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#x27;',
-    '`': '&#x60;'
-  };
-  var unescapeMap = _.invert(escapeMap);
-
-  // Functions for escaping and unescaping strings to/from HTML interpolation.
-  var createEscaper = function(map) {
-    var escaper = function(match) {
-      return map[match];
-    };
-    // Regexes for identifying a key that needs to be escaped
-    var source = '(?:' + _.keys(map).join('|') + ')';
-    var testRegexp = RegExp(source);
-    var replaceRegexp = RegExp(source, 'g');
-    return function(string) {
-      string = string == null ? '' : '' + string;
-      return testRegexp.test(string) ? string.replace(replaceRegexp, escaper) : string;
-    };
-  };
-  _.escape = createEscaper(escapeMap);
-  _.unescape = createEscaper(unescapeMap);
-
-  // If the value of the named `property` is a function then invoke it with the
-  // `object` as context; otherwise, return it.
-  _.result = function(object, property, fallback) {
-    var value = object == null ? void 0 : object[property];
-    if (value === void 0) {
-      value = fallback;
-    }
-    return _.isFunction(value) ? value.call(object) : value;
-  };
-
-  // Generate a unique integer id (unique within the entire client session).
-  // Useful for temporary DOM ids.
-  var idCounter = 0;
-  _.uniqueId = function(prefix) {
-    var id = ++idCounter + '';
-    return prefix ? prefix + id : id;
-  };
-
-  // By default, Underscore uses ERB-style template delimiters, change the
-  // following template settings to use alternative delimiters.
-  _.templateSettings = {
-    evaluate    : /<%([\s\S]+?)%>/g,
-    interpolate : /<%=([\s\S]+?)%>/g,
-    escape      : /<%-([\s\S]+?)%>/g
-  };
-
-  // When customizing `templateSettings`, if you don't want to define an
-  // interpolation, evaluation or escaping regex, we need one that is
-  // guaranteed not to match.
-  var noMatch = /(.)^/;
-
-  // Certain characters need to be escaped so that they can be put into a
-  // string literal.
-  var escapes = {
-    "'":      "'",
-    '\\':     '\\',
-    '\r':     'r',
-    '\n':     'n',
-    '\u2028': 'u2028',
-    '\u2029': 'u2029'
-  };
-
-  var escaper = /\\|'|\r|\n|\u2028|\u2029/g;
-
-  var escapeChar = function(match) {
-    return '\\' + escapes[match];
-  };
-
-  // JavaScript micro-templating, similar to John Resig's implementation.
-  // Underscore templating handles arbitrary delimiters, preserves whitespace,
-  // and correctly escapes quotes within interpolated code.
-  // NB: `oldSettings` only exists for backwards compatibility.
-  _.template = function(text, settings, oldSettings) {
-    if (!settings && oldSettings) settings = oldSettings;
-    settings = _.defaults({}, settings, _.templateSettings);
-
-    // Combine delimiters into one regular expression via alternation.
-    var matcher = RegExp([
-      (settings.escape || noMatch).source,
-      (settings.interpolate || noMatch).source,
-      (settings.evaluate || noMatch).source
-    ].join('|') + '|$', 'g');
-
-    // Compile the template source, escaping string literals appropriately.
-    var index = 0;
-    var source = "__p+='";
-    text.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
-      source += text.slice(index, offset).replace(escaper, escapeChar);
-      index = offset + match.length;
-
-      if (escape) {
-        source += "'+\n((__t=(" + escape + "))==null?'':_.escape(__t))+\n'";
-      } else if (interpolate) {
-        source += "'+\n((__t=(" + interpolate + "))==null?'':__t)+\n'";
-      } else if (evaluate) {
-        source += "';\n" + evaluate + "\n__p+='";
-      }
-
-      // Adobe VMs need the match returned to produce the correct offest.
-      return match;
-    });
-    source += "';\n";
-
-    // If a variable is not specified, place data values in local scope.
-    if (!settings.variable) source = 'with(obj||{}){\n' + source + '}\n';
-
-    source = "var __t,__p='',__j=Array.prototype.join," +
-      "print=function(){__p+=__j.call(arguments,'');};\n" +
-      source + 'return __p;\n';
-
-    try {
-      var render = new Function(settings.variable || 'obj', '_', source);
-    } catch (e) {
-      e.source = source;
-      throw e;
-    }
-
-    var template = function(data) {
-      return render.call(this, data, _);
-    };
-
-    // Provide the compiled source as a convenience for precompilation.
-    var argument = settings.variable || 'obj';
-    template.source = 'function(' + argument + '){\n' + source + '}';
-
-    return template;
-  };
-
-  // Add a "chain" function. Start chaining a wrapped Underscore object.
-  _.chain = function(obj) {
-    var instance = _(obj);
-    instance._chain = true;
-    return instance;
-  };
-
-  // OOP
-  // ---------------
-  // If Underscore is called as a function, it returns a wrapped object that
-  // can be used OO-style. This wrapper holds altered versions of all the
-  // underscore functions. Wrapped objects may be chained.
-
-  // Helper function to continue chaining intermediate results.
-  var result = function(instance, obj) {
-    return instance._chain ? _(obj).chain() : obj;
-  };
-
-  // Add your own custom functions to the Underscore object.
-  _.mixin = function(obj) {
-    _.each(_.functions(obj), function(name) {
-      var func = _[name] = obj[name];
-      _.prototype[name] = function() {
-        var args = [this._wrapped];
-        push.apply(args, arguments);
-        return result(this, func.apply(_, args));
-      };
-    });
-  };
-
-  // Add all of the Underscore functions to the wrapper object.
-  _.mixin(_);
-
-  // Add all mutator Array functions to the wrapper.
-  _.each(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(name) {
-    var method = ArrayProto[name];
-    _.prototype[name] = function() {
-      var obj = this._wrapped;
-      method.apply(obj, arguments);
-      if ((name === 'shift' || name === 'splice') && obj.length === 0) delete obj[0];
-      return result(this, obj);
-    };
-  });
-
-  // Add all accessor Array functions to the wrapper.
-  _.each(['concat', 'join', 'slice'], function(name) {
-    var method = ArrayProto[name];
-    _.prototype[name] = function() {
-      return result(this, method.apply(this._wrapped, arguments));
-    };
-  });
-
-  // Extracts the result from a wrapped and chained object.
-  _.prototype.value = function() {
-    return this._wrapped;
-  };
-
-  // Provide unwrapping proxy for some methods used in engine operations
-  // such as arithmetic and JSON stringification.
-  _.prototype.valueOf = _.prototype.toJSON = _.prototype.value;
-
-  _.prototype.toString = function() {
-    return '' + this._wrapped;
-  };
-
-  // AMD registration happens at the end for compatibility with AMD loaders
-  // that may not enforce next-turn semantics on modules. Even though general
-  // practice for AMD registration is to be anonymous, underscore registers
-  // as a named module because, like jQuery, it is a base library that is
-  // popular enough to be bundled in a third party lib, but not be part of
-  // an AMD load request. Those cases could generate an error when an
-  // anonymous define() is called outside of a loader request.
-  if (typeof define === 'function' && define.amd) {
-    define('underscore', [], function() {
-      return _;
-    });
-  }
-}.call(this));
-
 /*! jQuery UI - v1.11.4 - 2015-03-11
 * http://jqueryui.com
 * Includes: core.js, widget.js, mouse.js, position.js, accordion.js, autocomplete.js, button.js, datepicker.js, dialog.js, draggable.js, droppable.js, effect.js, effect-blind.js, effect-bounce.js, effect-clip.js, effect-drop.js, effect-explode.js, effect-fade.js, effect-fold.js, effect-highlight.js, effect-puff.js, effect-pulsate.js, effect-scale.js, effect-shake.js, effect-size.js, effect-slide.js, effect-transfer.js, menu.js, progressbar.js, resizable.js, selectable.js, selectmenu.js, slider.js, sortable.js, spinner.js, tabs.js, tooltip.js
@@ -82436,10 +80658,10 @@ define('pat-stacks',[
     var log = logging.getLogger("stacks"),
         parser = new Parser("stacks");
 
-    parser.add_argument("selector", "> *[id]");
-    parser.add_argument("transition", "none", ["none", "css", "fade", "slide"]);
-    parser.add_argument("effect-duration", "fast");
-    parser.add_argument("effect-easing", "swing");
+    parser.addArgument("selector", "> *[id]");
+    parser.addArgument("transition", "none", ["none", "css", "fade", "slide"]);
+    parser.addArgument("effect-duration", "fast");
+    parser.addArgument("effect-easing", "swing");
 
     var stacks = {
         name: "stacks",
@@ -82674,10 +80896,10 @@ define('pat-switch',[
     var log = logger.getLogger("pat.switch"),
         parser = new Parser("switch");
 
-    parser.add_argument("selector");
-    parser.add_argument("remove");
-    parser.add_argument("add");
-    parser.add_argument("store", "none", ["none", "session", "local"]);
+    parser.addArgument("selector");
+    parser.addArgument("remove");
+    parser.addArgument("add");
+    parser.addArgument("store", "none", ["none", "session", "local"]);
 
     var switcher = {
         name: "switch",
@@ -82791,10 +81013,10 @@ define('pat-toggle',[
     var log = logger.getLogger("pat.toggle"),
         parser = new Parser("toggle");
 
-    parser.add_argument("selector");
-    parser.add_argument("attr", "class");
-    parser.add_argument("value");
-    parser.add_argument("store", "none", ["none", "session", "local"]);
+    parser.addArgument("selector");
+    parser.addArgument("attr", "class");
+    parser.addArgument("value");
+    parser.addArgument("store", "none", ["none", "session", "local"]);
 
     function ClassToggler(values) {
         this.values=values.slice(0);
@@ -83027,16 +81249,16 @@ define('pat-tooltip',[
                          "rt", "rm", "rb",
                          "br", "bm", "bl",
                          "lb", "lm", "lt"];
-    parser.add_argument("position-list", [], all_positions, true);
-    parser.add_argument("position-policy", "auto", ["auto", "force"]);
-    parser.add_argument("height", "auto", ["auto", "max"]);
-    parser.add_argument("trigger", "click", ["click", "hover"]);
-    parser.add_argument("closing", "auto", ["auto", "sticky", "close-button"]);
-    parser.add_argument("source", "title", ["auto", "ajax", "content", "title"]);
-    parser.add_argument("ajax-data-type", "html", ["html", "markdown"]);
-    parser.add_argument("delay", 0);
-    parser.add_argument("class");
-    parser.add_argument("target", "body");
+    parser.addArgument("position-list", [], all_positions, true);
+    parser.addArgument("position-policy", "auto", ["auto", "force"]);
+    parser.addArgument("height", "auto", ["auto", "max"]);
+    parser.addArgument("trigger", "click", ["click", "hover"]);
+    parser.addArgument("closing", "auto", ["auto", "sticky", "close-button"]);
+    parser.addArgument("source", "title", ["auto", "ajax", "content", "title"]);
+    parser.addArgument("ajax-data-type", "html", ["html", "markdown"]);
+    parser.addArgument("delay", 0);
+    parser.addArgument("class");
+    parser.addArgument("target", "body");
 
     var tooltip = {
         name: "tooltip",
@@ -85566,398 +83788,6 @@ if (typeof exports == "object") {
 }
 })()
 ;
-/**
- * @license RequireJS text 2.0.14 Copyright (c) 2010-2014, The Dojo Foundation All Rights Reserved.
- * Available via the MIT or new BSD license.
- * see: http://github.com/requirejs/text for details
- */
-/*jslint regexp: true */
-/*global require, XMLHttpRequest, ActiveXObject,
-  define, window, process, Packages,
-  java, location, Components, FileUtils */
-
-define('text',['module'], function (module) {
-    'use strict';
-
-    var text, fs, Cc, Ci, xpcIsWindows,
-        progIds = ['Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 'Msxml2.XMLHTTP.4.0'],
-        xmlRegExp = /^\s*<\?xml(\s)+version=[\'\"](\d)*.(\d)*[\'\"](\s)*\?>/im,
-        bodyRegExp = /<body[^>]*>\s*([\s\S]+)\s*<\/body>/im,
-        hasLocation = typeof location !== 'undefined' && location.href,
-        defaultProtocol = hasLocation && location.protocol && location.protocol.replace(/\:/, ''),
-        defaultHostName = hasLocation && location.hostname,
-        defaultPort = hasLocation && (location.port || undefined),
-        buildMap = {},
-        masterConfig = (module.config && module.config()) || {};
-
-    text = {
-        version: '2.0.14',
-
-        strip: function (content) {
-            //Strips <?xml ...?> declarations so that external SVG and XML
-            //documents can be added to a document without worry. Also, if the string
-            //is an HTML document, only the part inside the body tag is returned.
-            if (content) {
-                content = content.replace(xmlRegExp, "");
-                var matches = content.match(bodyRegExp);
-                if (matches) {
-                    content = matches[1];
-                }
-            } else {
-                content = "";
-            }
-            return content;
-        },
-
-        jsEscape: function (content) {
-            return content.replace(/(['\\])/g, '\\$1')
-                .replace(/[\f]/g, "\\f")
-                .replace(/[\b]/g, "\\b")
-                .replace(/[\n]/g, "\\n")
-                .replace(/[\t]/g, "\\t")
-                .replace(/[\r]/g, "\\r")
-                .replace(/[\u2028]/g, "\\u2028")
-                .replace(/[\u2029]/g, "\\u2029");
-        },
-
-        createXhr: masterConfig.createXhr || function () {
-            //Would love to dump the ActiveX crap in here. Need IE 6 to die first.
-            var xhr, i, progId;
-            if (typeof XMLHttpRequest !== "undefined") {
-                return new XMLHttpRequest();
-            } else if (typeof ActiveXObject !== "undefined") {
-                for (i = 0; i < 3; i += 1) {
-                    progId = progIds[i];
-                    try {
-                        xhr = new ActiveXObject(progId);
-                    } catch (e) {}
-
-                    if (xhr) {
-                        progIds = [progId];  // so faster next time
-                        break;
-                    }
-                }
-            }
-
-            return xhr;
-        },
-
-        /**
-         * Parses a resource name into its component parts. Resource names
-         * look like: module/name.ext!strip, where the !strip part is
-         * optional.
-         * @param {String} name the resource name
-         * @returns {Object} with properties "moduleName", "ext" and "strip"
-         * where strip is a boolean.
-         */
-        parseName: function (name) {
-            var modName, ext, temp,
-                strip = false,
-                index = name.lastIndexOf("."),
-                isRelative = name.indexOf('./') === 0 ||
-                             name.indexOf('../') === 0;
-
-            if (index !== -1 && (!isRelative || index > 1)) {
-                modName = name.substring(0, index);
-                ext = name.substring(index + 1);
-            } else {
-                modName = name;
-            }
-
-            temp = ext || modName;
-            index = temp.indexOf("!");
-            if (index !== -1) {
-                //Pull off the strip arg.
-                strip = temp.substring(index + 1) === "strip";
-                temp = temp.substring(0, index);
-                if (ext) {
-                    ext = temp;
-                } else {
-                    modName = temp;
-                }
-            }
-
-            return {
-                moduleName: modName,
-                ext: ext,
-                strip: strip
-            };
-        },
-
-        xdRegExp: /^((\w+)\:)?\/\/([^\/\\]+)/,
-
-        /**
-         * Is an URL on another domain. Only works for browser use, returns
-         * false in non-browser environments. Only used to know if an
-         * optimized .js version of a text resource should be loaded
-         * instead.
-         * @param {String} url
-         * @returns Boolean
-         */
-        useXhr: function (url, protocol, hostname, port) {
-            var uProtocol, uHostName, uPort,
-                match = text.xdRegExp.exec(url);
-            if (!match) {
-                return true;
-            }
-            uProtocol = match[2];
-            uHostName = match[3];
-
-            uHostName = uHostName.split(':');
-            uPort = uHostName[1];
-            uHostName = uHostName[0];
-
-            return (!uProtocol || uProtocol === protocol) &&
-                   (!uHostName || uHostName.toLowerCase() === hostname.toLowerCase()) &&
-                   ((!uPort && !uHostName) || uPort === port);
-        },
-
-        finishLoad: function (name, strip, content, onLoad) {
-            content = strip ? text.strip(content) : content;
-            if (masterConfig.isBuild) {
-                buildMap[name] = content;
-            }
-            onLoad(content);
-        },
-
-        load: function (name, req, onLoad, config) {
-            //Name has format: some.module.filext!strip
-            //The strip part is optional.
-            //if strip is present, then that means only get the string contents
-            //inside a body tag in an HTML string. For XML/SVG content it means
-            //removing the <?xml ...?> declarations so the content can be inserted
-            //into the current doc without problems.
-
-            // Do not bother with the work if a build and text will
-            // not be inlined.
-            if (config && config.isBuild && !config.inlineText) {
-                onLoad();
-                return;
-            }
-
-            masterConfig.isBuild = config && config.isBuild;
-
-            var parsed = text.parseName(name),
-                nonStripName = parsed.moduleName +
-                    (parsed.ext ? '.' + parsed.ext : ''),
-                url = req.toUrl(nonStripName),
-                useXhr = (masterConfig.useXhr) ||
-                         text.useXhr;
-
-            // Do not load if it is an empty: url
-            if (url.indexOf('empty:') === 0) {
-                onLoad();
-                return;
-            }
-
-            //Load the text. Use XHR if possible and in a browser.
-            if (!hasLocation || useXhr(url, defaultProtocol, defaultHostName, defaultPort)) {
-                text.get(url, function (content) {
-                    text.finishLoad(name, parsed.strip, content, onLoad);
-                }, function (err) {
-                    if (onLoad.error) {
-                        onLoad.error(err);
-                    }
-                });
-            } else {
-                //Need to fetch the resource across domains. Assume
-                //the resource has been optimized into a JS module. Fetch
-                //by the module name + extension, but do not include the
-                //!strip part to avoid file system issues.
-                req([nonStripName], function (content) {
-                    text.finishLoad(parsed.moduleName + '.' + parsed.ext,
-                                    parsed.strip, content, onLoad);
-                });
-            }
-        },
-
-        write: function (pluginName, moduleName, write, config) {
-            if (buildMap.hasOwnProperty(moduleName)) {
-                var content = text.jsEscape(buildMap[moduleName]);
-                write.asModule(pluginName + "!" + moduleName,
-                               "define(function () { return '" +
-                                   content +
-                               "';});\n");
-            }
-        },
-
-        writeFile: function (pluginName, moduleName, req, write, config) {
-            var parsed = text.parseName(moduleName),
-                extPart = parsed.ext ? '.' + parsed.ext : '',
-                nonStripName = parsed.moduleName + extPart,
-                //Use a '.js' file name so that it indicates it is a
-                //script that can be loaded across domains.
-                fileName = req.toUrl(parsed.moduleName + extPart) + '.js';
-
-            //Leverage own load() method to load plugin value, but only
-            //write out values that do not have the strip argument,
-            //to avoid any potential issues with ! in file names.
-            text.load(nonStripName, req, function (value) {
-                //Use own write() method to construct full module value.
-                //But need to create shell that translates writeFile's
-                //write() to the right interface.
-                var textWrite = function (contents) {
-                    return write(fileName, contents);
-                };
-                textWrite.asModule = function (moduleName, contents) {
-                    return write.asModule(moduleName, fileName, contents);
-                };
-
-                text.write(pluginName, nonStripName, textWrite, config);
-            }, config);
-        }
-    };
-
-    if (masterConfig.env === 'node' || (!masterConfig.env &&
-            typeof process !== "undefined" &&
-            process.versions &&
-            !!process.versions.node &&
-            !process.versions['node-webkit'] &&
-            !process.versions['atom-shell'])) {
-        //Using special require.nodeRequire, something added by r.js.
-        fs = require.nodeRequire('fs');
-
-        text.get = function (url, callback, errback) {
-            try {
-                var file = fs.readFileSync(url, 'utf8');
-                //Remove BOM (Byte Mark Order) from utf8 files if it is there.
-                if (file[0] === '\uFEFF') {
-                    file = file.substring(1);
-                }
-                callback(file);
-            } catch (e) {
-                if (errback) {
-                    errback(e);
-                }
-            }
-        };
-    } else if (masterConfig.env === 'xhr' || (!masterConfig.env &&
-            text.createXhr())) {
-        text.get = function (url, callback, errback, headers) {
-            var xhr = text.createXhr(), header;
-            xhr.open('GET', url, true);
-
-            //Allow plugins direct access to xhr headers
-            if (headers) {
-                for (header in headers) {
-                    if (headers.hasOwnProperty(header)) {
-                        xhr.setRequestHeader(header.toLowerCase(), headers[header]);
-                    }
-                }
-            }
-
-            //Allow overrides specified in config
-            if (masterConfig.onXhr) {
-                masterConfig.onXhr(xhr, url);
-            }
-
-            xhr.onreadystatechange = function (evt) {
-                var status, err;
-                //Do not explicitly handle errors, those should be
-                //visible via console output in the browser.
-                if (xhr.readyState === 4) {
-                    status = xhr.status || 0;
-                    if (status > 399 && status < 600) {
-                        //An http 4xx or 5xx error. Signal an error.
-                        err = new Error(url + ' HTTP status: ' + status);
-                        err.xhr = xhr;
-                        if (errback) {
-                            errback(err);
-                        }
-                    } else {
-                        callback(xhr.responseText);
-                    }
-
-                    if (masterConfig.onXhrComplete) {
-                        masterConfig.onXhrComplete(xhr, url);
-                    }
-                }
-            };
-            xhr.send(null);
-        };
-    } else if (masterConfig.env === 'rhino' || (!masterConfig.env &&
-            typeof Packages !== 'undefined' && typeof java !== 'undefined')) {
-        //Why Java, why is this so awkward?
-        text.get = function (url, callback) {
-            var stringBuffer, line,
-                encoding = "utf-8",
-                file = new java.io.File(url),
-                lineSeparator = java.lang.System.getProperty("line.separator"),
-                input = new java.io.BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(file), encoding)),
-                content = '';
-            try {
-                stringBuffer = new java.lang.StringBuffer();
-                line = input.readLine();
-
-                // Byte Order Mark (BOM) - The Unicode Standard, version 3.0, page 324
-                // http://www.unicode.org/faq/utf_bom.html
-
-                // Note that when we use utf-8, the BOM should appear as "EF BB BF", but it doesn't due to this bug in the JDK:
-                // http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4508058
-                if (line && line.length() && line.charAt(0) === 0xfeff) {
-                    // Eat the BOM, since we've already found the encoding on this file,
-                    // and we plan to concatenating this buffer with others; the BOM should
-                    // only appear at the top of a file.
-                    line = line.substring(1);
-                }
-
-                if (line !== null) {
-                    stringBuffer.append(line);
-                }
-
-                while ((line = input.readLine()) !== null) {
-                    stringBuffer.append(lineSeparator);
-                    stringBuffer.append(line);
-                }
-                //Make sure we return a JavaScript string and not a Java string.
-                content = String(stringBuffer.toString()); //String
-            } finally {
-                input.close();
-            }
-            callback(content);
-        };
-    } else if (masterConfig.env === 'xpconnect' || (!masterConfig.env &&
-            typeof Components !== 'undefined' && Components.classes &&
-            Components.interfaces)) {
-        //Avert your gaze!
-        Cc = Components.classes;
-        Ci = Components.interfaces;
-        Components.utils['import']('resource://gre/modules/FileUtils.jsm');
-        xpcIsWindows = ('@mozilla.org/windows-registry-key;1' in Cc);
-
-        text.get = function (url, callback) {
-            var inStream, convertStream, fileObj,
-                readData = {};
-
-            if (xpcIsWindows) {
-                url = url.replace(/\//g, '\\');
-            }
-
-            fileObj = new FileUtils.File(url);
-
-            //XPCOM, you so crazy
-            try {
-                inStream = Cc['@mozilla.org/network/file-input-stream;1']
-                           .createInstance(Ci.nsIFileInputStream);
-                inStream.init(fileObj, 1, 0, false);
-
-                convertStream = Cc['@mozilla.org/intl/converter-input-stream;1']
-                                .createInstance(Ci.nsIConverterInputStream);
-                convertStream.init(inStream, "utf-8", inStream.available(),
-                Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
-
-                convertStream.readString(inStream.available(), readData);
-                convertStream.close();
-                inStream.close();
-                callback(readData.value);
-            } catch (e) {
-                throw new Error((fileObj && fileObj.path || '') + ': ' + e);
-            }
-        };
-    }
-    return text;
-});
-
 
 define('text!upload',[],function () { return '<div class="upload-container upload-multiple">\n    <div class="upload-area">\n        <div class="fallback">\n            <input name="file" type="file" multiple />\n        </div>\n        <div class="dz-message"><p><%= label %></p></div>\n        <div class="row">\n            <div class="col-md-9">\n                <input\n                    id="fakeUploadFile"\n                    placeholder="Choose File"\n                    disabled="disabled"\n                    />\n            </div>\n            <div class="col-md-3">\n                <button\n                    type="button"\n                    class="btn btn-primary browse">\n                    Browse\n                </button>\n            </div>\n        </div>\n        <div class="upload-queue">\n            <div class="previews">\n            </div>\n            <div class="controls">\n                <div class="path">\n                    <label>Upload to…</label>\n                    <p class="form-help">If nothing selected files we be added to current context.</p>\n                    <input type="text" name="location" />\n                </div>\n                <div class="actions row">\n                    <div class="col-md-9">\n                        <div class="progress progress-striped active">\n                            <div class="progress-bar progress-bar-success"\n                                 role="progressbar"\n                                 aria-valuenow="0"\n                                 aria-valuemin="0"\n                                 aria-valuemax="100"\n                                 style="width: 0%">\n                                <span class="sr-only">40% Complete (success)</span>\n                            </div>\n                        </div>\n                    </div>\n                    <div class="col-md-3 align-right">\n                        <button\n                            type="button"\n                            class="btn btn-primary upload-all">\n                            Upload\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n';});
 
@@ -88330,8 +86160,8 @@ define('pat-zoom',[
 ], function($, patterns, Parser) {
     var parser = new Parser("zoom");
 
-    parser.add_argument("min", 0);
-    parser.add_argument("max", 2);
+    parser.addArgument("min", 0);
+    parser.addArgument("max", 2);
 
     var zoom = {
         name: "zoom",

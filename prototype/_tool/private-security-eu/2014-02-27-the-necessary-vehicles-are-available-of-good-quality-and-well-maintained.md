@@ -2,8 +2,8 @@
 layout: risk
 fid: the-necessary-vehicles-are-available-of-good-quality-and-well-maintained
 classes: unvisited
-number: "1.3.4"
-parent_id: commercial-manned-guarding-work-equipment
+number: "2.2.3.4"
+parent_id: mobile-partrolling--intervention-after-alarm-baker-street-work-equipment
 title: "The necessary vehicles are available, of good quality and well maintained."
 problem_description: "The necessary vehicles are not available, of bad quality and/or poorly maintained."
 description: "<p class='MsoNormal'>There is a number of risks which affect all security staff going to work in a <strong>vehicle</strong>. </p>&#13;
@@ -20,7 +20,7 @@ description: "<p class='MsoNormal'>There is a number of risks which affect all s
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/3' rel='nofollow' target='_blank'>2009/104/EC Directive on the minimum safety and health requirements for the use of work equipment.</a></li>&#13;
 </ul>"
-evaluation_method: risk_calculated
+evaluation_method: policy
 
 solutions:
   solution_1:

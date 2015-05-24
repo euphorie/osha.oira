@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: exposure-to-biological-substances-is-prevented-or-controlled
-classes: answered risk
-number: "1.1.6"
-parent_id: commercial-manned-guarding-work-environment-site-related
+classes: answered
+number: "2.1.1.6"
+parent_id: mobile-partrolling--intervention-after-alarm-abby-road-work-environment-site-related
 title: "Exposure to biological substances is prevented or controlled."
 problem_description: "Exposure to biological substances is neither prevented nor controlled"
 description: "<p class='MsoNormal'><strong>BIOLOGICAL HAZARDS</strong></p>&#13;
@@ -14,7 +14,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'>89/654/EEC Directive on the minimum safety and health requirements for the workplace</a>.</li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/exposure-to-biological-agents/77' rel='nofollow' target='_blank'>2000/54/EC Directive on the protection of workers from risks related to exposure to biological agents at work.</a></li>&#13;
 </ul>"
-evaluation_method: risk_calculated
+evaluation_method: risk_direct
 images:
     - url: /media/private-security-eu/waarschuwing_-_biogevaarlijk.png
       caption: 

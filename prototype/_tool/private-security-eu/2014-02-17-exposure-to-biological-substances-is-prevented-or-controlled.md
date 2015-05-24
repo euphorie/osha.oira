@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: exposure-to-biological-substances-is-prevented-or-controlled
-classes: answered risk
-number: "1.1.6"
-parent_id: commercial-manned-guarding-work-environment-site-related
+classes: unvisited
+number: "2.2.1.6"
+parent_id: mobile-partrolling--intervention-after-alarm-baker-street-work-environment-site-related
 title: "Exposure to biological substances is prevented or controlled."
 problem_description: "Exposure to biological substances is neither prevented nor controlled"
 description: "<p class='MsoNormal'><strong>BIOLOGICAL HAZARDS</strong></p>&#13;

@@ -2,8 +2,8 @@
 layout: risk
 fid: the-dogs-are-well-trained-and-have-regular-medical-check-ups
 classes: postponed
-number: "1.3.3"
-parent_id: commercial-manned-guarding-work-equipment
+number: "2.1.3.3"
+parent_id: mobile-partrolling--intervention-after-alarm-abby-road-work-equipment
 title: "The dogs are well trained and have regular medical check-ups."
 problem_description: "The dogs are not well trained and/or don't have regular medical check-ups."
 description: "<p class='MsoNormal'>Dogs can cause slight <strong>injuries</strong> such as lesions, light traumas (scratches, bruises) and serious injuries such as bites, etc. They may also be a carrier of microorganisms, viruses, proteins etc. that could cause <strong>infections, allergies or other health problems</strong>.</p>&#13;
@@ -23,7 +23,7 @@ description: "<p class='MsoNormal'>Dogs can cause slight <strong>injuries</stron
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/exposure-to-biological-agents/77' rel='nofollow' target='_blank'>2000/54/EC Directive on the protection of workers from risks related to exposure to biological agents at work</a>.</li>&#13;
 </ul>"
-evaluation_method: risk_calculated
+evaluation_method: risk_estimated
 
 solutions:
   solution_1:

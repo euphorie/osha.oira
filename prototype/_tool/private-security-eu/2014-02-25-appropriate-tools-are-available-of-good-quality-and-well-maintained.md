@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: appropriate-tools-are-available-of-good-quality-and-well-maintained
-classes: answered risk
-number: "1.3.2"
-parent_id: commercial-manned-guarding-work-equipment
+classes: answered
+number: "2.2.3.2"
+parent_id: mobile-partrolling--intervention-after-alarm-baker-street-work-equipment
 title: "Appropriate tools are available, of good quality and well maintained."
 problem_description: "Appropriate tools are not available, of bad quality and poorly maintained"
 description: "<p class='MsoNormal'><strong>National legislation regulating the carrying of weapons</strong> differs widely from country to country:</p>&#13;
@@ -21,7 +21,7 @@ description: "<p class='MsoNormal'><strong>National legislation regulating the c
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/3' rel='nofollow' target='_blank'>2009/104/EC Directive on the minimum safety and health requirements for the use of work equipment.</a></li>&#13;
 </ul>"
-evaluation_method: risk_direct
+evaluation_method: risk_calculated
 
 solutions:
   solution_1:

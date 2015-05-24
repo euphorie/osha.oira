@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-radiation-is-prevented-or-controlled
-classes: postponed
+classes: unvisited
 number: "1.1.7"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Exposure to radiation is prevented or controlled."
@@ -24,7 +24,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/exposure-to-physical-hazards/osh-directives/73' rel='nofollow' target='_blank'>96/29/Euratom Directive on ionizing radiation.</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/exposure-to-physical-hazards/osh-directives/directive-2004-40-ec-of-the-european-parliament-and-of-the-council' rel='nofollow' target='_blank'>2004/40/EC Directive on electromagnetic fields and waves.</a></li>&#13;
 </ul>"
-evaluation_method: risk_calculated
+evaluation_method: risk_direct
 images:
     - url: /media/private-security-eu/waarschuwing_-_radioactief.png
       caption: 

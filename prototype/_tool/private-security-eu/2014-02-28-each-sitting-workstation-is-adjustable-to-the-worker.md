@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: each-sitting-workstation-is-adjustable-to-the-worker
-classes: unvisited
-number: "1.3.5"
-parent_id: commercial-manned-guarding-work-equipment
+classes: answered risk
+number: "2.2.3.5"
+parent_id: mobile-partrolling--intervention-after-alarm-baker-street-work-equipment
 title: "Each sitting workstation is adjustable to the worker."
 problem_description: "Not each sitting workstation is adjustable to the worker."
 description: "<p class='MsoNormal'>Prolonged periods of <strong>working while sitting down </strong>(e.g. counter/reception work, computer work)<strong>, </strong>often<strong> in front of screens/monitors</strong> (e.g. activities in alarm control centres and certain access control posts) may cause pain in the back, neck, shoulders, arms, legs, ... These health complaints can lead to lengthy sickness.</p>&#13;
@@ -23,7 +23,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/provisions-on-workload-ergonomical-and-psychosocial-risks/osh-directives/5' rel='nofollow' target='_blank'>90/270/EEC Directive on the minimum safety and health requirements for work with display screen equipment</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/3' rel='nofollow' target='_blank'>2009/104/EC Directive on the minimum safety and health requirements for the use of work equipment.</a></li>&#13;
 </ul>"
-evaluation_method: risk_direct
+evaluation_method: priority
 images:
     - url: /media/private-security-eu/guard screens.jpg
       caption: 

@@ -1,9 +1,9 @@
 ---
 layout: risk
 fid: appropriate-tools-are-available-of-good-quality-and-well-maintained
-classes: answered risk
-number: "1.3.2"
-parent_id: commercial-manned-guarding-work-equipment
+classes: postponed
+number: "2.1.3.2"
+parent_id: mobile-partrolling--intervention-after-alarm-abby-road-work-equipment
 title: "Appropriate tools are available, of good quality and well maintained."
 problem_description: "Appropriate tools are not available, of bad quality and poorly maintained"
 description: "<p class='MsoNormal'><strong>National legislation regulating the carrying of weapons</strong> differs widely from country to country:</p>&#13;

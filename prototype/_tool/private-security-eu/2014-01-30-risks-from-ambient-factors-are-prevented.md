@@ -2,8 +2,8 @@
 layout: risk
 fid: risks-from-ambient-factors-are-prevented
 classes: answered
-number: "1.1.8"
-parent_id: commercial-manned-guarding-work-environment-site-related
+number: "2.1.1.7"
+parent_id: mobile-partrolling--intervention-after-alarm-abby-road-work-environment-site-related
 title: "Risks from ambient factors are prevented."
 problem_description: "Risks from ambient factors are not prevented."
 description: "<p class='MsoNormal'>Whether it is inside a building or in outside workstations, minimal conditions in terms of ambient factors (humidity, ventilation, temperature, lighting) must be observed. These conditions must be fulfilled taking into account the specificities of the workstations, the level of physical activity required as well as the security officer´s clothing.</p>&#13;
@@ -23,7 +23,7 @@ description: "<p class='MsoNormal'>Whether it is inside a building or in outside
 legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summaries/employment_and_social_policy/health_hygiene_safety_at_work/c11113_en.htm' rel='nofollow' target='_blank'>89/391/CEE Implementing measures to improve the health and safety of workers (framework directive).</a></li>&#13;
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'>89/654/EEC Directive on the minimum safety and health requirements for the workplace</a>.</li>&#13;
 </ul>"
-evaluation_method: policy
+evaluation_method: risk_estimated
 
 solutions:
   solution_1:

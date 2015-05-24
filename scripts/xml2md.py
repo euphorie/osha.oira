@@ -21,6 +21,7 @@ from xml.sax.saxutils import unescape
 
 STATES = ['answered', 'postponed', 'unvisited']
 EVALUATION_TYPES = ['risk_calculated', 'risk_estimated', 'risk_direct', 'priority', 'policy']
+LOCATIONS = [u'Abby Road', u'Baker Street']
 
 MAX_NUMBER_MODULES = 1
 MAX_NUMBER_PROFILES = 2
@@ -213,7 +214,24 @@ title: {title}{module}
         risk_number = increment_number(risk_number)
 
 
-def create_profile_question(profile_question, number="1"):
+def create_location(location_number, location_name, parent_id):
+    id = str2filename(location_name)
+    content = u"""---
+layout: location
+fid: {fid}
+number: {location_number}
+title: {location_name}
+parent_id: {parent_id}
+---
+""".format(
+        location_name=location_name,
+        location_number=location_number,
+        parent_id=parent_id,
+        fid=id)
+    write_md(id, content)
+
+
+def create_profile_question(profile_question, number="1", locations=[]):
     question_template = u"""---
 layout: profile
 fid: {id}
@@ -232,7 +250,7 @@ title: {title}{images}
     fields = {
         "id": id,
         "title": title,
-        "number": number + '.0.0',
+        "number": len(locations) and "{0}.0.0.0".format(number) or "{0}.0.0".format(number),
         "images": "",
         "body": escape2markdown(description),
     }
@@ -241,14 +259,28 @@ title: {title}{images}
     write_md(id, content)
 
     sub_modules = profile_question.findChildren("module", recursive=False)
-    sub_number = number + ".1"
-    sub_count = 0
-    for sub_module in sub_modules:
-        create_module(sub_module, parent_id=id, number=sub_number)
-        sub_number = increment_number(sub_number)
-        sub_count += 1
-        if sub_count >= MAX_NUMBER_SUBMODULES:
-            break
+    if len(locations):
+        for i in range(len(locations)):
+            location_number = "{0}.{1}.0.0".format(number, i + 1)
+            create_location(location_number, locations[i], parent_id=id)
+            sub_number = "{0}.{1}.1".format(number, i + 1)
+            location_id = "{0}-{1}".format(id, str2filename(locations[i]))
+            sub_count = 0
+            for sub_module in sub_modules:
+                create_module(sub_module, parent_id=location_id, number=sub_number)
+                sub_number = increment_number(sub_number)
+                sub_count += 1
+                if sub_count >= MAX_NUMBER_SUBMODULES:
+                    break
+    else:
+        sub_number = number + ".1"
+        sub_count = 0
+        for sub_module in sub_modules:
+            create_module(sub_module, parent_id=id, number=sub_number)
+            sub_number = increment_number(sub_number)
+            sub_count += 1
+            if sub_count >= MAX_NUMBER_SUBMODULES:
+                break
 
 
 if __name__ == "__main__":
@@ -276,6 +308,7 @@ if __name__ == "__main__":
         os.makedirs(media_file_path)
 
     number = 1
+    profile_number = 1
 
     profile_questions = survey.findChildren("profile-question",
                                             recursive=False)
@@ -284,8 +317,12 @@ if __name__ == "__main__":
         if MAX_NUMBER_PROFILES and number > MAX_NUMBER_PROFILES:
             break
         print "Export Profile Question '{0}'".format(profile_question.title.text)
-        create_profile_question(profile_question, number=str(number))
+        if profile_number > 1:
+            create_profile_question(profile_question, number=str(number), locations=LOCATIONS)
+        else:
+            create_profile_question(profile_question, number=str(number))
         number += 1
+        profile_number += 1
 
     modules = survey.findChildren("module", recursive=False)
     for module in modules:

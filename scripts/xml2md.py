@@ -20,7 +20,7 @@ from datetime import timedelta
 from xml.sax.saxutils import unescape
 
 STATES = ['answered', 'postponed', 'unvisited']
-EVALUATION_TYPES = ['risk_direct', 'risk_estimated', 'risk_calculated', 'policy', 'priority']
+EVALUATION_TYPES = ['risk_calculated', 'risk_estimated', 'risk_direct', 'priority', 'policy']
 
 MAX_NUMBER_MODULES = 1
 MAX_NUMBER_PROFILES = 2
@@ -51,6 +51,9 @@ def escape2markdown(text):
 
 # Hack to order entries by date
 current_date = datetime(2014, 1, 1)
+
+# Hack to enforce the 5 different risk evaluation types on the first risks
+risk_counter = 0
 
 
 def write_md(id, content):
@@ -103,12 +106,20 @@ solutions:
     description = unescape(_r(risk.find("description").text))
     legal_reference_node = risk.find("legal-reference")
     legal_reference = legal_reference_node and unescape(_r(legal_reference_node.text)) or ""
-    evaluation_method = random.choice(EVALUATION_TYPES)
-    state = random.choice(STATES)
-    risk_class = state == 'answered' and random.choice(['risk', '']) or ''
+    global risk_counter
+    if risk_counter < len(EVALUATION_TYPES):
+        evaluation_method = EVALUATION_TYPES[risk_counter]
+        state = 'answered'
+        risk_class = 'risk'
+        print "Risk {0} with method {1}".format(title, evaluation_method)
+    else:
+        evaluation_method = random.choice(EVALUATION_TYPES)
+        state = random.choice(STATES)
+        risk_class = state == 'answered' and random.choice(['risk', '']) or ''
     classes = "{} {}".format(state, risk_class)
     # solutions = risk.find("solutions").text
     # xxx handle the sub solutions
+    risk_counter += 1
 
     images = risk.findAll('image')
     image_data = []
@@ -266,19 +277,21 @@ if __name__ == "__main__":
 
     number = 1
 
-    modules = survey.findChildren("module", recursive=False)
-    for module in modules:
-        # Let X modules be enough
-        if MAX_NUMBER_MODULES and number > MAX_NUMBER_MODULES:
-            break
-        create_module(module, number=str(number))
-        number += 1
-
     profile_questions = survey.findChildren("profile-question",
                                             recursive=False)
     for profile_question in profile_questions:
         # Let X modules be enough
-        if MAX_NUMBER_PROFILES and number > (MAX_NUMBER_PROFILES + MAX_NUMBER_MODULES):
+        if MAX_NUMBER_PROFILES and number > MAX_NUMBER_PROFILES:
             break
+        print "Export Profile Question '{0}'".format(profile_question.title.text)
         create_profile_question(profile_question, number=str(number))
+        number += 1
+
+    modules = survey.findChildren("module", recursive=False)
+    for module in modules:
+        # Let X modules be enough
+        if MAX_NUMBER_MODULES and number > (MAX_NUMBER_MODULES + MAX_NUMBER_PROFILES):
+            break
+        print "Export Module '{0}'".format(module.title.text)
+        create_module(module, number=str(number))
         number += 1

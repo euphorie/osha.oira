@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: exposure-to-radiation-is-prevented-or-controlled
-classes: answered
+classes: postponed
 number: "1.1.7"
 parent_id: commercial-manned-guarding-work-environment-site-related
 title: "Exposure to radiation is prevented or controlled."

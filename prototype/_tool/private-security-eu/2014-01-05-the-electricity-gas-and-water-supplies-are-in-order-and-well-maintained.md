@@ -18,7 +18,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 evaluation_method: risk_direct
 images:
     - url: /media/private-security-eu/waarschuwing_-_elektriciteit.png
-      caption:
+      caption: 
 
 solutions:
   solution_1:
@@ -28,7 +28,7 @@ solutions:
                   Check that the anti-fall fittings and protective measures are
                   present and in good condition."
 ---
-**Ensure that the electrical system, as well as the gas and water supplies are safe.** Some examples: all the exposed conductive parts are connected to the earthing system; all safety devices and switches are in place and they work well; there are measures in place to protect electrical equipment from water; ...
+**Ensure that the electrical system, as well as the gas and water supplies are safe.** Some examples: all the exposed conductive parts are connected to the earthing system; all safety devices and switches are in place and they work well; there are measures in place to protect electrical equipment from water; ... 
 
   * The electricity, gas and water supplies at the client company must comply with the relevant safety regulations and be maintained by competent people in accordance with regulations.
   * There should be restricted access to electricity, gas and water premises.

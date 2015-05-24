@@ -40,13 +40,13 @@ A significant number of occupational accidents are related to **moving around
 the client company’s premises, either inside or outside the buildings** (e.g.
 static surveillance, rounds and surveillance patrols). These are mainly falls
 on the same level and those from a height, resulting in fractures, sprains,
-contusions, Lorem ipsum dolor sit amet, consectetuer adipiscing elit ...
+contusions, ...
 
 **Check the following issues through visual inspection of work areas:**
 
   * Floors throughout the sites where the private security guards work should be tidy, level and slip-proof
   * Outdoor: take into account weather conditions such as rain, snow, ice, leafs, ... Also be aware of open water (risk of drowning) = ponds (without fence), lakes, canals, ...
-  * Passageways and surfaces should be free from obstacles (e.g. cables).
+  * Passageways and surfaces should be free from obstacles (e.g. cables). 
   * Protective measures, such as handrails, railings and anti-fall fittings, should be installed and properly maintained to counter the risk of falls.
   * Sufficient lighting (especially in stairwells and passageways) should be provided.
   * Warning indicators (signs, floor markings, etc.) should be installed, when the risk of trips and falls cannot be prevented through other measures.

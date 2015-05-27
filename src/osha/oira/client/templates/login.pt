@@ -8,13 +8,14 @@
       i18n:domain="euphorie"
       id="login"
       meta:interpolation="true"
-      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers">
-  <head>
-    <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
-    <metal:meta use-macro="webhelpers/macros/headers"/>
-    <metal:css use-macro="webhelpers/macros/css"/>
-  </head>
-  <body class="login ${webhelpers/extra_css}" tal:define="is_guest_account webhelpers/is_guest_account">
+      tal:define="webhelpers nocall:context/@@webhelpers;
+                  tools nocall:context/@@tools;
+                  client nocall:request/client"
+      metal:use-macro="context/@@shell/macros/shell">
+
+<body>
+<metal:slot fill-slot="content" tal:define="is_guest_account webhelpers/is_guest_account">
+    <tal:block replace="tile:statusmessages"/>
      <h1 i18n:translate="header_welcome">Welcome</h1>
      <tal:block replace="tile:statusmessages"/>
 
@@ -31,7 +32,7 @@
 
       <section class="report-blurb" tal:condition="python:is_guest_account and request.get('report_blurb')">
           <p>
-          We're sorry, but unregistered users can't use the download feature. Create a user account 
+          We're sorry, but unregistered users can't use the download feature. Create a user account
           in just one easy step and gain access to the following benefits:
           </p>
           <ul>
@@ -130,12 +131,8 @@
     <h4 i18n:translate="">Do I need to prepare?</h4>
     <p i18n:translate="">You do not need any kind of specific preparation to start using the tool, however you should take some time to think about who is going to carry out the risk assessment, how workers are going to be involved in the process, etc.</p>
 
-    <ul id="navigation">
-      <metal:home use-macro="webhelpers/macros/homelink"/>
-      <li><a href="${webhelpers/help_url}#authentication" i18n:translate="navigation_help">Help</a></li>
-    </ul>
-    <metal:css use-macro="webhelpers/macros/appendix"/>
-    <metal:css use-macro="webhelpers/macros/javascript"/>
+
     <tal:block replace="tile:client-analytics"/>
+  </metal:slot>
   </body>
 </html>

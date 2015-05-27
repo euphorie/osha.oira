@@ -6,24 +6,26 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       i18n:domain="euphorie"
+      id="register"
       meta:interpolation="true"
-      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers">
-  <head>
-    <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
-    <metal:meta use-macro="webhelpers/macros/headers"/>
-    <metal:css use-macro="webhelpers/macros/css"/>
-  </head>
-  <body class="${webhelpers/extra_css}">
-    <h1 i18n:translate="header_register">Register</h1>
+      tal:define="webhelpers nocall:context/@@webhelpers;
+                  tools nocall:context/@@tools;
+                  client nocall:request/client"
+      metal:use-macro="context/@@shell/macros/shell">
 
-    <p tal:define="country webhelpers/country" class="country ${country}" id="country">${country}</p>
-    
+<body>
+<metal:slot fill-slot="content" tal:define="is_guest_account webhelpers/is_guest_account">
+    <tal:block replace="tile:statusmessages"/>
+    <article>
+      <h1 i18n:translate="header_register">Register</h1>
+    </article>
+
     <p class="message error" tal:condition="view/error|nothing">${view/error}</p>
 
     <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" tal:define="errors view/errors" action="${request/URL}">
       <input type="hidden" name="came_from" tal:condition="request/came_from|nothing" value="${request/came_from}"/>
-      <fieldset class="concise">
-        <tal:guest_account condition="webhelpers/is_guest_account|nothing">
+      <fieldset class="vertical">
+        <tal:guest_account condition="is_guest_account|nothing">
             <input type="hidden" name="guest_session_id" tal:attributes="value webhelpers/guest_session_id"/>
         </tal:guest_account>
         <label class="${python:'error' if 'email' in errors else None}"><tal:span i18n:translate="label_email">Email address</tal:span> <input class="email" autofocus="autofocus" type="email" name="email" value="${request/email|nothing}"/>
@@ -33,17 +35,12 @@
         <label><tal:span i18n:translate="label_password_confirm">Again password</tal:span> <input class="password" type="password"  name="password2:utf8:ustring"/> </label>
       </fieldset>
       <p class="buttonBar">
-        <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="previous floatBefore back">Previous</button>
-        <button type="submit" name="next" value="next" i18n:translate="label_next" class="next floatAfter">Next</button>
+        <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="pat-button">Previous</button>
+        <button type="submit" name="next" value="next" i18n:translate="label_next" class="pat-button">Next</button>
       </p>
     </form>
 
-    <ul id="navigation">
-      <metal:home use-macro="webhelpers/macros/homelink"/>
-      <li><a href="${webhelpers/help_url}#authentication" i18n:translate="navigation_help">Help</a></li>
-    </ul>
-    <metal:css use-macro="webhelpers/macros/appendix"/>
-    <metal:css use-macro="webhelpers/macros/javascript"/>
     <tal:block replace="tile:client-analytics"/>
+  </metal:slot>
   </body>
 </html>

@@ -4,7 +4,10 @@ from zope.interface import Interface
 
 grok.templatedir("templates")
 
+
 class Shell(grok.View):
+    """ Layouts (Think main_template, called layouts in Jekyll)
+    """
     grok.context(Interface)
     grok.name("shell")
     grok.layer(IOSHAClientSkinLayer)
@@ -12,6 +15,8 @@ class Shell(grok.View):
 
 
 class Includes(grok.View):
+    """ Includes (Think macros, called includes in Jekyll)
+    """
     grok.context(Interface)
     grok.name("includes")
     grok.layer(IOSHAClientSkinLayer)

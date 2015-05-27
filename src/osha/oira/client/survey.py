@@ -1,9 +1,5 @@
 from Acquisition import aq_inner
 from euphorie.client import survey, report
-from euphorie.client.session import SessionManager
-from euphorie.client.navigation import FindFirstQuestion
-from euphorie.client.navigation import QuestionURL
-from euphorie.client.update import redirectOnSurveyUpdate
 from five import grok
 from zope.component import getMultiAdapter
 from .interfaces import IOSHAClientSkinLayer
@@ -28,32 +24,8 @@ class OSHAStart(survey.Start):
     """
     grok.require("euphorie.client.ViewSurvey")
     grok.layer(IOSHAClientSkinLayer)
-    grok.template("preparation")
-    grok.name("preparation.html")
-
-
-class Resume(survey.Resume):
-    """Survey resume screen.
-    Override to point to new template names
-
-    """
-    grok.layer(IOSHAClientSkinLayer)
-    grok.require("euphorie.client.ViewSurvey")
-    grok.name("resume")
-
-    def render(self):
-        survey = aq_inner(self.context)
-        dbsession = SessionManager.session
-        if redirectOnSurveyUpdate(self.request):
-            return
-
-        question = FindFirstQuestion(dbsession=dbsession)
-        if question is None:
-            # No tree generated, so start over
-            self.request.response.redirect("%s/preparation.html" % survey.absolute_url())
-        else:
-            self.request.response.redirect(
-                    QuestionURL(survey, question, phase="identification"))
+    grok.template("start")
+    grok.name("start")
 
 
 class OSHAIdentification(survey.Identification):

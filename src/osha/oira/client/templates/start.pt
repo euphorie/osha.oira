@@ -5,75 +5,46 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
-      meta:interpolation="true"
       i18n:domain="euphorie"
-      tal:define="client nocall:request/client;
-                  webhelpers nocall:context/@@webhelpers;
-                  default_introduction nocall:context/@@default_introduction">
-<head>
-    <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
-    <metal:meta use-macro="webhelpers/macros/headers"/>
-    <metal:css use-macro="webhelpers/macros/css"/>
-</head>
-<body class="start ${webhelpers/extra_css}">
-    <h1>${context/title}</h1>
+      id="preparation"
+      meta:interpolation="true"
+      tal:define="webhelpers nocall:context/@@webhelpers;
+                  tools nocall:context/@@tools;
+                  client nocall:request/client"
+      metal:use-macro="context/@@shell/macros/shell">
 
-    <figure class="postit external-reference" tal:condition="context/external_site_logo | nothing">
-      <a href="#" tal:attributes="href context/external_site_url | nothing" target="_blank" tal:omit-tag="not:context/external_site_url | nothing">
-        <img style="cursor: pointer" src="http://client.oiraproject.eu/eu/leather-tanning/@@images/7870a759-8982-4217-858a-1348ef6edc14.jpeg" alt="" tal:attributes="src string:${context/absolute_url}/@@display-file/external_site_logo"/>
-      </a>
-      <figcaption tal:condition="context/external_site_name" i18n:translate="">
-        This OiRA tool was offered to you by <a i18n:name="external_site" href="#" tal:attributes="href context/external_site_url | nothing" tal:content="context/external_site_name" target="_blank" tal:omit-tag="not:context/external_site_url | nothing">Leather Tanning</a>
-       </figcaption>
-    </figure>
+<body>
+<metal:slot fill-slot="content">
 
-    <tal:block condition="not:view/has_introduction">
-        <metal:introduction use-macro="default_introduction/macros/default_introduction"/>
-    </tal:block>
-    <p tal:condition="view/has_introduction" tal:replace="structure context/introduction">
-      Introduction text for this sector.
-    </p>
+    <tal:block replace="tile:statusmessages"/>
+
+    <article class="rich">
+        <figure class="postit external-reference" tal:condition="context/external_site_logo | nothing">
+          <a href="#" tal:attributes="href context/external_site_url | nothing" target="_blank" tal:omit-tag="not:context/external_site_url | nothing">
+            <img style="cursor: pointer" src="http://client.oiraproject.eu/eu/leather-tanning/@@images/7870a759-8982-4217-858a-1348ef6edc14.jpeg" alt="" tal:attributes="src string:${context/absolute_url}/@@display-file/external_site_logo"/>
+          </a>
+          <figcaption tal:condition="context/external_site_name" i18n:translate="">
+            This OiRA tool was offered to you by <a i18n:name="external_site" href="#" tal:attributes="href context/external_site_url | nothing" tal:content="context/external_site_name" target="_blank" tal:omit-tag="not:context/external_site_url | nothing">Leather Tanning</a>
+           </figcaption>
+        </figure>
+
+        <h1>${context/title}</h1>
+
+        <tal:block condition="not:view/has_introduction">
+            <metal:introduction use-macro="default_introduction/macros/default_introduction"/>
+        </tal:block>
+        <p tal:condition="view/has_introduction" tal:replace="structure context/introduction">
+          Introduction text for this sector.
+        </p>
+    </article>
 
     <form method="post" action="${request/URL}">
-      <p class="buttonBar">
+      <div class="button-bar">
         <a i18n:translate="label_previous" href="${webhelpers/session_overview_url}" class="floatBefore button-medium back">Previous</a>
-        <button class="floatAfter" type="submit" i18n:translate="label_start_survey">Start</button>
-      </p>
+        <button type="submit" class="pat-button" i18n:translate="label_start_survey">Start</button>
+      </div>
     </form>
-    <ol id="steps">
-      <li class="active current" id="step-1">
-        <a href="${context/absolute_url}/start">
-          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_preparation">Preparation</tal:span>
-          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_preparation">Preparation</tal:span>
-        </a>
-      </li>
-      <li id="step-2" class="disabled">
-        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_identification">Identification</tal:span>
-        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_identification">Identification</tal:span>
-      </li>
-      <li id="step-3" class="disabled">
-        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_evaluation">Evaluation</tal:span>
-        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_evaluation">Evaluation</tal:span>
-      </li>
-      <li id="step-4" class="disabled">
-        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_action_plan">Action Plan</tal:span>
-        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_action_plan">Action Plan</tal:span>
-      </li>
-      <li id="step-5" class="disabled">
-        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_report">Report</tal:span>
-        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_report">Report</tal:span>
-      </li>
-    </ol>
 
-    <ul id="navigation">
-      <metal:home use-macro="webhelpers/macros/homelink"/>
-      <li><a href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a></li>
-      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">My Assessments</a></li>
-      <li><a href="${webhelpers/help_url}#preparation" i18n:translate="navigation_help">Help</a></li>
-      <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>
-    </ul>
-    <metal:css use-macro="webhelpers/macros/appendix"/>
-    <metal:css use-macro="webhelpers/macros/javascript"/>
-    <tal:block replace="tile:client-analytics"/>
-  </body>
+</metal:slot>
+</body>
 </html>

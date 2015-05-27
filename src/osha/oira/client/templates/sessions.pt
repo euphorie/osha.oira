@@ -15,8 +15,7 @@
 
 <body>
 <metal:slot fill-slot="content" tal:define="sessions view/sessions">
-
-<tal:block replace="tile:statusmessages"/>
+    <tal:block replace="tile:statusmessages"/>
     <article>
         <p>
             Select an earlier session to complete or review or

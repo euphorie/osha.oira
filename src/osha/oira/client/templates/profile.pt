@@ -7,14 +7,14 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       meta:interpolation="true"
       i18n:domain="euphorie"
-      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers">
-  <head>
-    <metal:meta use-macro="webhelpers/macros/headers"/>
-    <metal:css use-macro="webhelpers/macros/css"/>
-  </head>
-  <body class="profile ${webhelpers/extra_css}">
-    <h1 i18n:translate="header_profile">Tailor the risk assessment to your organisation</h1>
+      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers"
+      metal:use-macro="context/@@shell/macros/shell">
 
+<body>
+<metal:slot fill-slot="content">
+    <tal:block replace="tile:statusmessages"/>
+    <article class="rich">
+    <h1 i18n:translate="header_profile">Tailor the risk assessment to your organisation</h1>
     <p i18n:translate="expl_profile">
         In order to tailor the risk assessment to your organisation you may be
         asked to:
@@ -23,144 +23,58 @@
         <li i18n:translate="expl_profile_bullet1">select or skip situation(s) relevant or not to your business activity and
         tick the box(es) if appropriate
         </li>
-
         <li i18n:translate="expl_profile_bullet2">list multiple business units, or branches, or stores, etc. These related
         risks will be repeated for each name you have entered.
         </li>
     </ul>
+</article>
 
-    <form method="post" action="${request/URL}">
-      <tal:question repeat="question view/profile_questions">
-        <section tal:define="current python:view.current_profile.get(question['id'])">
+<form method="post" action="${request/URL}">
+<fieldset class="vertical" tal:repeat="question view/profile_questions">
+    <section tal:define="current python:view.current_profile.get(question['id'])">
         <h2>${question/title}</h2>
-        <fieldset class="comprehensive radioList">
+        <fieldset class="pat-checklist radio">
           <legend>${question/question}</legend>
           <label><input type="radio" class="presence" required="required" name="pq${question/id}.present" value="yes" checked="${python:'checked' if current else None}"/> <tal:span i18n:translate="">Yes</tal:span></label>
           <label><input type="radio" class="presence" required="required" name="pq${question/id}.present" value="no" checked="${python:'checked' if not current else None}"/> <tal:span i18n:translate="">No</tal:span></label>
         </fieldset>
 
-        <fieldset class="comprehensive radioList pat-depends" data-pat-depends="pq${question/id}.present=yes">
+        <fieldset class="pat-checklist radio pat-depends" data-pat-depends="pq${question/id}.present=yes">
           <legend>${question/label_multiple_present}</legend>
           <label><input type="radio" class="multiple" name="pq${question/id}.multiple" value="yes" checked="${python:'checked' if current and len(current)&gt;1 else None}"/> <tal:span i18n:translate="">Yes</tal:span></label>
           <label><input type="radio" class="multiple" name="pq${question/id}.multiple" value="no" checked="${python:'checked' if not current or len(current)==1 else None}"/> <tal:span i18n:translate="">No</tal:span></label>
         </fieldset>
 
-        <fieldset class="comprehensive pat-depends" data-pat-depends="condition: pq${question/id}.present=yes and pq${question/id}.multiple">
+        <fieldset class="group pat-depends" data-pat-depends="condition: pq${question/id}.present=yes and pq${question/id}.multiple">
           <legend>
             <span class="pat-depends" data-pat-depends="pq${question/id}.multiple=no">${question/label_single_occurance}</span>
             <span class="pat-depends" data-pat-depends="pq${question/id}.multiple=yes">${question/label_multiple_occurances}</span>
           </legend>
-          <ol class="form-iteration">
-            <li tal:condition="python:not current"><input required="required" type="text" name="${question/id}:utf8:utext:list" /> <button type="button" class="small remove" i18n:translate="">Remove</button></li>
-            <li tal:repeat="title current"><input required="required" type="text" name="${question/id}:utf8:utext:list" value="${title}"/> <button type="button" class="small remove pat-depends" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="">Remove</button></li>
-          </ol>
-          <p class="buttons addButton pat-depends" data-pat-depends="pq${question/id}.multiple=yes">
-            <button class="small" type="button" i18n:translate="">Add another item</button>
-          </p>
+
+            <fieldset class="form-iteration pat-clone" data-pat-clone="template: #clone-template-${question/id}; trigger-element: #clone-set-3">
+                <label id="clone-template-${question/id}" hidden>
+                    <input class="pat-depends" autofocus placeholder="${question/label_single_occurance} #{1}" data-pat-depends="pq${question/id}.multiple=yes" 
+                           size="40" type="text" name="505:utf8:utext:list">&nbsp;
+                    <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes">Remove</button>
+                </label>
+
+                <label>
+                    <input autofocus data-pat-depends="pq${question/id}.multiple=no" name="${question/id}:utf8:utext:list">
+                    <input autofocus placeholder="${question/label_single_occurance} 1" data-pat-depends="pq${question/id}.multiple=yes" name="${question/id}:utf8:utext:list" tal:repeat="title current">
+                </label>
+            </fieldset>
+
+            <p class="buttons pat-depends" data-pat-depends="pq${question/id}.multiple=yes">
+                <button id="clone-set-3" class="pat-button icon-plus-circle add-clone" type="button">Add another item</button>
+            </p>
         </fieldset>
-      </section>
-      </tal:question>
-      <p class="buttonBar">
-      <button class="floatAfter" type="submit" i18n:translate="label_save_and_continue">Save and continue</button>
-      </p>
-    </form>
-
-    <ol id="steps">
-      <li class="active current" id="step-1">
-        <a href="${webhelpers/survey_url}/start">
-          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_preparation">Preparation</tal:span>
-          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_preparation">Preparation</tal:span>
-        </a>
-      </li>
-      <li id="step-2" class="disabled">
-        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_identification">Identification</tal:span>
-        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_identification">Identification</tal:span>
-      </li>
-      <li id="step-3" class="disabled">
-        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_evaluation">Evaluation</tal:span>
-        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_evaluation">Evaluation</tal:span>
-      </li>
-      <li id="step-4" class="disabled">
-        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_action_plan">Action Plan</tal:span>
-        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_action_plan">Action Plan</tal:span>
-      </li>
-      <li id="step-5" class="disabled">
-        <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_report">Report</tal:span>
-        <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_report">Report</tal:span>
-      </li>
-    </ol>
-
-    <ul id="navigation">
-      <metal:home use-macro="webhelpers/macros/homelink"/>
-      <li><a href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a></li>
-      <li><a href="${webhelpers/session_overview_url}" i18n:translate="navigation_surveys">My Assessments</a></li>
-      <li><a href="${webhelpers/help_url}#preparation" i18n:translate="navigation_help">Help</a></li>
-      <li><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>
-    </ul>
-    <metal:css use-macro="webhelpers/macros/appendix"/>
-  </body>
-  <metal:css use-macro="webhelpers/macros/javascript"/>
-  <script type="text/javascript">
-    // <![CDATA[
-    function styleSection($section) {
-        var presence = $section.find("input.presence:checked").val()==="yes";
-        if (!presence) {
-            $section.find("input:not(.presence)").prop("required", false);
-            return;
-        }
-
-        $section.find("input").prop("required", true);
-        var multiple = $section.find("input.multiple:checked").val()==="yes";
-        if (!multiple) {
-            $section.find(".form-iteration li:not(:first)")
-                .hide()
-                .find("input").prop("required", false);
-            $section.find("button").hide();
-        } else {
-            var $buttons = $section.find("button");
-            $section.find(".form-iteration li").show();
-            $buttons.show();
-            if ($buttons.length<=2)
-              $buttons.filter(".remove").hide();
-        }
-    }
-
-    $(".addButton").on("click", function() {
-        var $button = $(this),
-            $section = $button.closest("section"),
-            $titles = $button.siblings(".form-iteration");
-
-        $titles.find("li:last").clone()
-            .find(":input").val("").end()
-            .appendTo($titles);
-        styleSection($section);
-    });
-
-    $(document).on("click", ".form-iteration .remove", function() {
-        var $button = $(this),
-            $section = $button.closest("section");
-        $button.closest("li").remove();
-        styleSection($section);
-    });
-
-    $(document).on("change", "input[type=radio]", function() {
-          var $section = $(this).closest("section");
-          styleSection($section);
-    });
-
-    $("form").on("submit", function() {
-        var $sections = $("section");
-        $sections = $sections.filter(":has(.presence[value=yes]:checked)");
-        $sections = $sections.filter(":has(.multiple[value=no]:checked)");
-        $sections.find(".form-iteration li:not(:first-child)").remove();
-    });
-
-    $("section").each(function() {
-        styleSection($(this));
-    });
-
-    // ]]>
-  </script>
-  <tal:block replace="tile:client-analytics"/>
+    </section>
+</fieldset>
+<p class="buttonBar">
+    <button class="pat-button" type="submit" i18n:translate="label_save_and_continue">Save and continue</button>
+</p>
+</form>
+</metal:slot>
+</body>
 </html>
 

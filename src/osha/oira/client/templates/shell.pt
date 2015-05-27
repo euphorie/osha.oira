@@ -10,7 +10,7 @@
       i18n:domain="nuplone"
       tal:define="webhelpers nocall:context/@@webhelpers;
                   base_url string:client/++resource++osha.oira.resources;
-                  page_section string:;
+                  page_section webhelpers/get_phase;
                   client nocall:request/client;
                   tools context/@@tools">
 
@@ -41,7 +41,7 @@
     <metal:styleslot define-slot="style_slot" />
 </head>
 
-<body class="osh-on test-session osc-off osc-s-on focus-sidebar sidebar-off" tal:define="is_anonymous webhelpers/anonymous">
+<body class="osh-on test-session osc-off osc-s-on focus-sidebar sidebar-off" tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey">
     <div id="main">
         <header id="toolbar">
             <a href="#osc" class="icon-menu pat-toggle"
@@ -51,7 +51,7 @@
                 Menu
             </a>
             <metal:include tal:define="id string:hamburger" use-macro="context/@@includes/macros/osh"/>
-            
+
             <button class="icon-left pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-sidebar">Private Security EU</button>
             <button id="osh-toggle" class="osh-toggle pat-toggle" data-pat-toggle="selector: body; value: osh-on osh-off; store: local">?</button>
 
@@ -79,8 +79,10 @@
             </tal:if>
 
             <tal:if condition="not:is_anonymous">
-                <a href="/sessions.html#content" class="dropdown pat-tooltip" id="button-sessions"
-                    data-pat-tooltip="source: ajax; class: large; position-list: tl" title="Select an existing session to review or to continue">Private Security EU</a>
+                <tal:if condition="not:is_outside_of_survey">
+                    <a href="${webhelpers/country_url}/view#content" class="dropdown pat-tooltip" id="button-sessions"
+                        data-pat-tooltip="source: ajax; class: large; position-list: tl" title="Select an existing session to review or to continue" tal:content="webhelpers/get_survey_title">Private Security EU</a>
+                </tal:if>
                 <a class="pat-button iconified icon-cog" title="Configure this application">Settings</a>
                 <a href="new-session.html#document-content" id="button-new-session-quick"
                     data-pat-modal="class: large" class="no-label pat-modal iconified icon-plus-circle" title="Start a new session">New</a>
@@ -89,15 +91,15 @@
 
         <metal:include tal:define="id string:menu" use-macro="context/@@includes/macros/osh"/>
 
-        <ol id="steps" class="pat-switch" data-pat-switch="selector: body; remove: osc-s-*; add: osc-s-off; store: local">
+        <ol id="steps" class="pat-switch" data-pat-switch="selector: body; remove: osc-s-*; add: osc-s-off; store: local" tal:define="survey_url webhelpers/survey_url; base_url webhelpers/base_url">
             <tal:if_not_anon condition="not:is_anonymous">
                 <li id="step-1" tal:attributes="class python:'complete %s' % page_section == 'preparation' and 'active' or ''">
-                    <a href="/preparation.html#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
+                    <a href="${survey_url}/start#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
                         class="preparation pat-switch pat-inject"
                         data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off">Preparation</a>
                 </li>
                 <li id="step-2">
-                    <a href="/identification.html" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
+                    <a href="${survey_url}/identification" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
                         class="identification pat-switch pat-inject"
                         data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-off; add: sidebar-on">Identification + Evaluation</a>
                     <!--
@@ -106,29 +108,27 @@
                     </div>
                     -->
                 </li>
-            </tal:if_not_anon>
+                <li id="step-4" tal:attributes="class python:'action' in page_section and 'active' or ''">
+                    <!-- The tree for the action section uses the same structure as the identification tree, with the only differences that only risks and their parent modules are shown and that the entire tree is expanded. -->
+                    <a href="${survey_url}/actionplan" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
+                       class="action-plan pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; add: sidebar-off; remove: sidebar-on">Action Plan</a>
+                </li>
 
-            <li id="step-4" tal:attributes="class python:'action' in page_section and 'active' or ''">
-                <!-- The tree for the action section uses the same structure as the identification tree, with the only differences that only risks and their parent modules are shown and that the entire tree is expanded. -->
-                <a href="/action-plan-landing.html" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
-                   class="action-plan pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; add: sidebar-off; remove: sidebar-on">Action Plan</a>
-            </li>
+                <li id="step-5" tal:attributes="class python:'disabled %s' % page_section == 'report' and 'active' or ''">
+                    <!-- TODO: check if guest -->
+                    <a href="${survey_url}/report" class="report pat-switch pat-inject"
+                       data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
+                       data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off" href="/report.html#content">Report</a>
+                </li>
 
-            <li id="step-5" tal:attributes="class python:'disabled %s' % page_section == 'report' and 'active' or ''">
-                <!-- TODO: check if guest -->
-                <a class="report pat-switch pat-inject"
-                   data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
-                   data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off" href="/report.html#content">Report</a>
-            </li>
 
-            <tal:if_not_anon condition="not:is_anonymous">
                 <li id="status" tal:attributes="class python:page_section == 'status' and 'active' or ''">
-                    <a href="/status.html#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
+                    <a href="${survey_url}/status#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
                         class="status pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off">Status</a>
                 </li>
             </tal:if_not_anon>
             <li id="help" tal:attributes="class python:'%s' % page_section == 'help'  and 'active' or ''">
-                <a href="/help.html#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
+                <a href="${base_url}/help#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
                     class="help pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off">Help</a>
             </li>
         </ol>

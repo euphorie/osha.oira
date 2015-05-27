@@ -5,6 +5,7 @@ from euphorie.client import model
 from euphorie.client.sector import IClientSector
 from euphorie.client.utils import WebHelpers
 from euphorie.content.survey import ISurvey
+from euphorie.decorators import reify
 from five import grok
 from mobile.sniffer.detect import detect_mobile_browser
 from mobile.sniffer.utilities import get_user_agent
@@ -228,3 +229,22 @@ class OSHAWebHelpers(WebHelpers):
     def get_username(self):
         member = api.user.get_current()
         return member.getProperty('fullname') or member.getUserName()
+
+    @reify
+    def base_url(self):
+        return self._base_url()
+
+    @reify
+    def is_outside_of_survey(self):
+        return self._base_url() != self.survey_url()
+
+    @reify
+    def get_survey_title(self):
+        survey = self._survey
+        if not survey:
+            return None
+        return survey.title
+
+    def get_phase(self):
+        "to be done"
+        return ""

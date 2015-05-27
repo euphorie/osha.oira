@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      i18n:domain="euphorie"
+      id="preparation"
+      meta:interpolation="true"
+      tal:define="webhelpers nocall:context/@@webhelpers;
+                  tools nocall:context/@@tools;
+                  client nocall:request/client"
+      metal:use-macro="context/@@shell/macros/shell">
+
+<body>
+<metal:slot fill-slot="content">
+
+    <tal:block replace="tile:statusmessages"/>
+
+
+    <article class="rich">
+
+        <figure class="postit external-reference" tal:condition="context/external_site_logo | nothing">
+          <a href="#" tal:attributes="href context/external_site_url | nothing" target="_blank" tal:omit-tag="not:context/external_site_url | nothing">
+            <img style="cursor: pointer" src="http://client.oiraproject.eu/eu/leather-tanning/@@images/7870a759-8982-4217-858a-1348ef6edc14.jpeg" alt="" tal:attributes="src string:${context/absolute_url}/@@display-file/external_site_logo"/>
+          </a>
+          <figcaption tal:condition="context/external_site_name" i18n:translate="">
+            This OiRA tool was offered to you by <a i18n:name="external_site" href="#" tal:attributes="href context/external_site_url | nothing" tal:content="context/external_site_name" target="_blank" tal:omit-tag="not:context/external_site_url | nothing">Leather Tanning</a>
+           </figcaption>
+        </figure>
+
+        <h1>${context/title}</h1>
+
+        <tal:block condition="not:view/has_introduction">
+            <metal:introduction use-macro="default_introduction/macros/default_introduction"/>
+        </tal:block>
+        <p tal:condition="view/has_introduction" tal:replace="structure context/introduction">
+          Introduction text for this sector.
+        </p>
+
+    </article>
+
+    <form method="post" action="${request/URL}">
+      <div class="button-bar">
+        <a i18n:translate="label_previous" href="${webhelpers/session_overview_url}" class="floatBefore button-medium back">Previous</a>
+        <button type="submit" class="pat-button" i18n:translate="label_start_survey">Start</button>
+      </div>
+    </form>
+
+</metal:slot>
+</body>
+</html>

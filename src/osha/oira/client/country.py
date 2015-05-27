@@ -28,6 +28,27 @@ class CreateSession(View):
     grok.template("new-session")
 
 
+class DeleteSession(grok.View):
+    grok.context(IClientCountry)
+    grok.name("confirmation-delete-session.html")
+    grok.layer(IOSHAClientSkinLayer)
+    grok.template("confirmation-delete-session")
+
+    def __call__(self, *args, **kwargs):
+        try:
+            self.session_id = int(self.request.get("id"))
+        except (ValueError, TypeError):
+            raise KeyError("Invalid session id")
+        user = getSecurityManager().getUser()
+        session = object_session(user).query(SurveySession)\
+                .filter(SurveySession.account == user)\
+                .filter(SurveySession.id == self.session_id).first()
+        if session is None:
+            raise KeyError("Unknown session id")
+        self.session_title = session.title
+        return super(DeleteSession, self).__call__(*args, **kwargs)
+
+
 class RenameSessionSchema(form.Schema):
     title = schema.TextLine(required=False)
 

@@ -34,16 +34,8 @@
                     <tal:span i18n:translate="lable_session_modified">saved on
                     <tal:block i18n:name="date">${python:tools.formatDate(session['modified'])}</tal:block></tal:span></form></td>
                 <td class="actions span-5">
-                <a class="iconified icon-pencil pat-modal" title="Rename this session" href="${context/absolute_url}/@@rename-session?id=${session/id}">Rename</a>
-                <a class="iconified icon-trash pat-modal" title="Delete this session" href="/confirmation-delete-session.html#document-content">Delete</a>
-
-                <!--
-                <form method="post" action="delete-session" class="removeSessionForm">
-                    <input type="hidden" name="json_url" value="${context/absolute_url}/@@json-delete-session"/>
-                    <input type="hidden" name="id" value="${session/id}" />
-                    <button type="button" class="small" i18n:translate="label_delete">Delete</button>
-                </form>
-                -->
+                    <a class="iconified icon-pencil pat-modal" title="Rename this session" href="${context/absolute_url}/@@rename-session?id=${session/id}">Rename</a>
+                    <a class="iconified icon-trash pat-modal" title="Delete this session" href="${context/absolute_url}/confirmation-delete-session.html?id=${session/id}#document-content">Delete</a>
                 </td>
             </tr>
             </tbody>

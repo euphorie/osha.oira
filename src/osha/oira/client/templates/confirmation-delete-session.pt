@@ -14,9 +14,12 @@
 <body>
     <div id="document-content" class="pat-modal">
         <h1> Delete session </h1>
-        <form action="/index-logged-in.html" class="wizard-box pat-inject" data-pat-inject="#content">    
+        <form method="post" action="delete-session" class="wizard-box pat-inject" data-pat-inject="#content">    
+            <input type="hidden" name="json_url" value="${context/absolute_url}/@@json-delete-session"/>
+            <input type="hidden" name="id" value="${view/session_id}" />
             <div class="panel-body"> <!-- TODO: Add session name -->
-                <p>You are about to delete the session 'Private Security EU'. This cannot be reverted. Are you sure you want to continue?</p>
+                <p>You are about to delete the session `<tal:name replace="view/session_title"/>`.
+                   This cannot be reverted. Are you sure you want to continue?</p>
             </div>
             <div class="buttons panel-footer">
                 <button type="submit" class="pat-button close-panel"> Yes, delete session </button>                    

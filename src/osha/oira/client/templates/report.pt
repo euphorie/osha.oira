@@ -17,14 +17,12 @@
 <metal:slot fill-slot="content">
     <tal:block replace="tile:statusmessages"/>
 
-    <h1 i18n:translate="header_reporting">Reporting</h1>
-    <tal:block replace="tile:statusmessages"/>
-
     <form id="report_comment_form" accept-charset="UTF-8" method="post" action="${request/URL}">
       <article class="rich">
+        <h1 i18n:translate="header_reporting">Reporting</h1>
         <p i18n:translate="report_intro">
             Now that you have finished identifying all the risks in your organisation
-            and creat^ed an action plan you can create a report which lists all your
+            and created an action plan you can create a report which lists all your
             results. You can, if desired, add some extra comments that should be
             included in this report in the field below.
         </p>
@@ -34,6 +32,7 @@
         <fieldset class="vertical" id="comments">
             <textarea id="commentsField"
                 name="comment:utf8:ustring"
+                cols="70" rows="5"
                 placeholder="Please leave any extra comments that should be included in the report in this field."
                 i18n:attributes="placeholder label_report_comment"
                 tal:content="view/session/report_comment">

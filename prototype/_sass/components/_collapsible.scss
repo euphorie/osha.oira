@@ -1,0 +1,19 @@
+.pat-collapsible {
+	&.show-more {
+		position: relative;
+		min-height: 2em;
+
+		.show-more-or-less {
+			position: absolute;
+			bottom: 1em;
+			left: 0;
+			right: 0;
+			margin: 0;
+		}
+
+		.panel-content {
+			padding-top: 0;
+			padding-bottom: 2em;
+		}
+	}
+}

@@ -1,0 +1,16 @@
+title: OiRA
+author: Cornelis G. A. Kolbach
+baseurl: /
+markdown: kramdown
+permalink: /:title
+sass:
+  style: :compressed
+exclude: 
+  - Gemfile
+  - Gemfile.lock
+  - config.codekit
+  - config.rb
+collections:
+  tool:
+    title: Private Security
+    output: true

@@ -1,0 +1,62 @@
+---
+layout: identification
+design_title: Custom risks
+number: "0.0.0"
+---
+
+<article>
+	<h1>
+		Other risks
+	</h1>
+	<p>
+		In this section you may add extra risks that are not mentioned in the tool.
+	</p>
+</article>
+<form action="/action-plan.html">
+	<fieldset class="custom-risks pat-clone" data-pat-clone="template: #risk-template">
+		<fieldset class="risk-set">
+			<textarea autofocus name="description-1" placeholder="Description of risk 1" id="description-1" cols="30" rows="6" class="description"></textarea>
+
+			<label class="priority">This is a
+				<select>
+					<option>
+						low priority risk
+					</option>
+					<option>
+						medium priority risk
+					</option>
+					<option>
+						high priority risk
+					</option>
+				</select> .
+			</label>
+
+			<button class="iconified icon-trash float-after remove-clone">Remove risk</button>
+		</fieldset>
+	</fieldset>
+
+	<p class="buttons pat-button-bar">
+		<button id="clone-set-1" class="pat-button icon-plus-circle add-clone" type="button">Add a risk</button>
+		<button type="submit" class="float-after pat-button icon-angle-circled-right">Continue to action plan</button>
+	</p>
+</form>
+
+<fieldset class="risk-set" id="risk-template" hidden>
+	<textarea autofocus name="description-#{1}" placeholder="Description of risk #{1}" id="description-#{1}" cols="30" rows="6" class="description"></textarea>
+
+	<label class="priority">This is a
+		<select>
+			<option>
+				low priority risk
+			</option>
+			<option>
+				medium priority risk
+			</option>
+			<option>
+				high priority risk
+			</option>
+		</select> .
+	</label>
+
+	<button class="iconified icon-trash float-after remove-clone">Remove risk</button>
+</fieldset>

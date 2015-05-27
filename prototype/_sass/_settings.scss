@@ -1,0 +1,87 @@
+// @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700&subset=latin,greek,cyrillic-ext,cyrillic,greek-ext,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400italic,400,300,700&subset=latin,cyrillic-ext,cyrillic,greek-ext,greek,latin-ext);
+// @import url(http://fonts.googleapis.com/css?family=Lato:300,400,900,400italic,900italic);
+
+// Assets
+@import "fontello/css/fontello.css";
+
+// Primary colours
+$colour-primary: #996699;
+$colour-secondary: #003399;
+$colour-base: #efefef;	
+$colour-alert: red;
+$colour-accent: #0081be;
+$colour-success: #CBF08B;
+$colour-warning: #c16800;
+
+// Glyps
+
+$glyph-checkbox: \f096;
+$glyph-checkbox-active: \2611;
+$glyph-radio-button: \e807;
+$glyph-radio-button-active: \e806;
+$glyph-close: "\e805";
+
+$colour-base-font: #222222;
+
+// Font treatment
+$base-font-size: 18px;
+$base-line-height: 150%;
+$font-weight-normal: 300;
+$font-weight-bold: bold;
+
+// We use these to control various global styles
+$body-bg: white;
+$body-font-color: #222222;
+// $body-font-family: 'Lato', sans-serif;
+$body-font-family: 'Roboto Condensed', sans-serif;
+// $body-font-family: 'Open Sans', sans-serif;
+$body-font-weight: $font-weight-normal;
+$body-font-style: normal;
+
+$base-space: 1em; // Create universal white space (e.g. margin, padding, left)
+
+// Responsive variables
+
+$break-small: 768px;
+$break-medium: 769px;
+$break-large: 1280px;
+
+// Libraries
+@import "libraries/reset";
+@import "libraries/animate";
+@import "libraries/patterns/patterns";
+
+// Project components
+@import "components/anchor";
+@import "components/appendix";
+@import "components/ankeiler";
+@import "components/body";
+@import "components/button-bar";
+@import "components/checklist";
+@import "components/collapsible";
+@import "components/conditions";
+@import "components/container";
+@import "components/content";
+@import "components/custom-risks";
+@import "components/download-blocks";
+@import "components/form-iteration";
+@import "components/image-collage";
+@import "components/info-icon";
+@import "components/logo";
+@import "components/main";
+@import "components/measures";
+@import "components/modal";
+@import "components/more-or-less";
+@import "components/notification";
+@import "components/onscreen-help";
+@import "components/osc";
+@import "components/site-header";
+@import "components/status";
+@import "components/steps";
+@import "components/sub-nav-bar";
+@import "components/table";
+@import "components/toolbar";
+@import "components/tooltip";
+@import "components/warning-bar";
+

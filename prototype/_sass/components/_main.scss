@@ -1,0 +1,49 @@
+#main {	
+	position: absolute;
+	left: 25%;
+	top: 0;
+	right: 0;
+	bottom: 0;
+
+	-moz-transition: left 0.5s;
+	-webkit-transition: left 0.5s;
+	transition: left 0.5s;
+}
+
+@include screen-size(small) {
+	#main {
+		position: relative;
+		left: 0;
+		height: 100%;
+	}
+
+	.osc-s-on #main {
+		left: 90%;
+	}
+}
+
+@include screen-size(medium) {
+	#main {
+		position: relative;
+		left: 0;
+		height: 100%;
+	}
+
+	.osc-on #main {
+		left: 40%;
+	}
+}
+
+@include screen-size(large) {
+	.osc-on #main {
+		left: 25%;
+	}
+
+	.osc-off #main {
+		left: 0%;
+	}
+}
+
+// .test-session #main {
+// 	top: 3rem;
+// }

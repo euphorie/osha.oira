@@ -1,0 +1,119 @@
+---
+layout: shell
+section: status
+class: sidebar-off
+---
+
+<article class="rich">
+	<h1>
+		Status: statistics per module
+	</h1>
+	
+    <script src="/lib/Highcharts-4/js/highcharts.js"></script>
+
+    <div class="pat-well">
+        <h3>Commercial manned guarding</h3>
+        <dl id="chart-1" class="chart">
+            <dt>Risks not present</dt>
+            <dd>45%</dd>
+            <dt>Risks postponed</dt>
+            <dd>26.8%</dd>
+            <dt>Risks not answered</dt>
+            <dd>12.8%</dd>
+            <dt>Risks with more than one measure</dt>
+            <dd>8.5%</dd>
+            <dt>Risks without measures</dt>
+            <dd>6.2%</dd>
+        </dl>
+    </div>
+
+	<script type="text/javascript">
+        $(function () {
+            $('#chart-1').highcharts({
+            	chart: {
+            		backgroundColor: "transparent"
+            	},
+                title: {
+                    text: '46%<br/>answered',
+                    useHTML: true,
+                    verticalAlign: 'middle',
+                    y: 50
+                },
+                plotOptions: {
+                    pie: {
+
+                        startAngle: -130,
+                        endAngle: 130,
+                        center: ['50%', '68%']
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Commercial manned guarding',
+                    innerSize: '70%',
+                    colors: ['green', 'orange', 'gray', 'red', 'darkred'],
+                    data: [
+                        ['Risks not present 45%',   45.0],
+                        ['Risks postponed 27%',       26.8],
+                        ['Risks not answered 13%', 12.8],
+                        ['Risks with more than one measure 8%',    8.5],
+                        ['Risks without measures 6%',     6.2],
+                    ]
+                }]
+            });
+        });
+	</script>
+
+    <div class="pat-well">
+        <h3>Mobile partrolling / intervention after alarm</h3>
+        <dl id="chart-2" class="chart">
+            <dt>Risks not present</dt>
+            <dd>25%</dd>
+            <dt>Risks postponed</dt>
+            <dd>46.8%</dd>
+            <dt>Risks not answered</dt>
+            <dd>12.8%</dd>
+            <dt>Risks with more than one measure</dt>
+            <dd>6.5%</dd>
+            <dt>Risks without measures</dt>
+            <dd>8.2%</dd>
+        </dl>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#chart-2').highcharts({
+                title: {
+                    text: '34%<br/>answered',
+                    useHTML: true,
+                    verticalAlign: 'middle',
+                    y: 50
+                },
+            	chart: {
+            		backgroundColor: "transparent"
+            	},
+                plotOptions: {
+                    pie: {
+
+                        startAngle: -130,
+                        endAngle: 130,
+                        center: ['50%', '68%']
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Mobile partrolling / intervention after alarm',
+                    innerSize: '70%',
+                    colors: ['green', 'orange', 'gray', 'red', 'darkred'],
+                    data: [
+                        ['Risks not present 25%',   25.0],
+                        ['Risks postponed 46%',       46.8],
+                        ['Risks not answered 13%', 12.8],
+                        ['Risks with more than one measure 6%',    6.5],
+                        ['Risks without measures 8%',     8.2],
+                    ]
+                }]
+            });
+        });
+    </script>
+</article>

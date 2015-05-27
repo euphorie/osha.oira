@@ -1,0 +1,6 @@
+<metal:macro define-macro="osh">
+    <a href="/feedback/osh.html#osh-${ id }"
+       id="osh-target-${ id }"
+       class="onscreen-help pat-tooltip"
+       data-pat-tooltip="trigger: click; source: ajax; class: rich info;">Help</a>
+</metal:macro>

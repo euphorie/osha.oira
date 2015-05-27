@@ -1,0 +1,30 @@
+.show-more-or-less {
+	cursor: pointer;
+	// text-decoration: underline;
+	color: $colour-accent;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+
+	* {
+		font-weight: normal;
+	}
+
+	&.collapsible-open .show-more,
+	&.collapsible-closed .show-less,
+	.divider,
+	&:first-child::before {
+		display: none;
+	}
+
+}
+
+.pat-well {
+	&.success,
+	&.warning {
+		.show-more-or-less {
+			color: white;
+			text-decoration: underline;
+		}
+	}
+}

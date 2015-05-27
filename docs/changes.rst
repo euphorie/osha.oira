@@ -1,11 +1,35 @@
 Changelog
 =========
 
-2.3.4 (unreleased)
+2.3.8 (unreleased)
 ------------------
 
 - Nothing changed yet.
 
+
+2.3.7 (2015-04-01)
+------------------
+
+- More changes in Icelandic #11552
+- Bugfix: do not show delete and replace confirmations in plain text on
+  action plan #10925
+
+2.3.6 (2015-03-19)
+------------------
+
+- remove three dots on action plan intro page #11424
+
+
+2.3.5 (2015-03-19)
+------------------
+
+- More translation changes in IS #11424
+
+2.3.4 (2015-02-12)
+------------------
+
+- Bugfix: Enable deleting of measures again #10925
+- Icelandic translation updates #11294
 
 2.3.3 (2014-11-03)
 ------------------

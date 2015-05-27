@@ -1,0 +1,17 @@
+.pat-checklist.radio {
+	label:before {
+		z-index: 1;
+	}
+	label:after {
+		position: absolute;
+		left: 0;
+		top: 0.3em;
+		width: 0.8em;
+		height: 0.8em;
+		content: ' ';
+		display: block;
+		background-color: white;
+		border-radius: 50%;
+		z-index: 0;
+	}
+}

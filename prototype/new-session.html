@@ -1,0 +1,27 @@
+---
+layout: panel
+title: New session
+action: /preparation.html
+buttons: 
+  - label: Start session
+    type: submit
+  - label: Cancel
+    type: button
+    class: close-panel
+---
+
+<fieldset class="vertical">
+    <label>
+    	Start a new session choosing one of the following sectoral tools
+        <select class="oira_sessions_select" name="survey">
+            <option value="leather-tanning/leather-tanning-draft-risk-assessment-tool">Leather &amp; Tanning</option>
+            <option value="eu-private-security/private-secui">Private Secui</option>
+            <option value="eu-private-security/private-security-eu">Private Security EU</option>
+        </select>
+    </label>
+    <label>
+    	Enter a title for your Risk Assessment <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Once you have started an OiRA tool session, you will be able to stop before the end. You can restart it again at a later date by selecting the title of the OiRA tool session. You can save more than one session, provided you have given them different title names. Please remember your e-mail address, password and the title that you have given the OiRA tool session. By clicking on the Logout button, you are logged out actively. You are also logged out if you close your Browser. For security reasons it is better to actively log out.</dfn>
+
+        <input type="text" placeholder="Session name" name="title:utf8:ustring">
+    </label>
+</fieldset>

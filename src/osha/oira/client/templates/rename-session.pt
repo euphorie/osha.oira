@@ -13,28 +13,23 @@
     <metal:css use-macro="webhelpers/macros/css"/>
   </head>
   <body>
-    <h1 i18n:translate="">Change name of session</h1>
+    <h1 i18n:translate="">Rename session</h1>
 
     <form method="post" action="${request/URL}?id=${request/form/id}">
       <div class="panel-body">
-        <p class="current-name" i18n:translate="">Current name: "<cite i18n:name="name">${view/original_title}</cite>"</p>
-        <fieldset tal:define="widget view/widgets/title" class="${python:'error' if widget.error else None}">
-          <h2 i18n:translate="">Please enter a new name for this OiRA Tool</h2>
-          <input placeholder="${view/original_title}" autofocus="autofocus" type="text" name="${widget/name}" class="huge${python: ' error' if widget.error else ''}" size="40" value="${python: widget.value if widget.value!= view.original_title else None}" />
+        <fieldset tal:define="widget nocall:view/widgets/title" class="${python:'error' if widget.error else None}">
+          <input autofocus="autofocus" type="text" name="${widget/name}" class="huge${python: ' error' if widget.error else ''}" size="40" value="${view/original_title}" />
           <tal:error condition="widget/error" replace="structure widget/error/render|nothing"/>
         </fieldset>
 
-        <fieldset>
-          <button type="submit" name="form.buttons.save" value="Save" i18n:translate="" class="close-panel">Save changes</button>
-          <button id="btnCancel" type="button" name="form.buttons.cancel" value="Cancel" i18n:translate="" class="close-panel">Cancel</button>
-        </fieldset>
+        <div class="buttons panel-footer">
+          <button type="submit" name="form.buttons.save" value="Save" class="pat-button" i18n:translate="">Save changes</button>
+          <button id="btnCancel" type="button" name="form.buttons.cancel" value="Cancel" class="pat-button close-panel" i18n:translate="" class="close-panel">Cancel</button>
+        </div>
       </div>
     </form>
-
     <script type="text/javascript">
       document.getElementById("btnCancel").type="submit";
     </script>
   </body>
 </html>
-
-

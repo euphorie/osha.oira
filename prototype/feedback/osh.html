@@ -1,0 +1,19 @@
+---
+layout: shell
+section: status
+class: sidebar-off
+---
+
+{% for bubble in site.data.osh %}
+	<article id="osh-{{ bubble.id }}">
+		<h3>
+			{{ bubble.title }}
+		</h3>
+		{{ bubble.text | markdownify }}
+		<p class="footer">
+			<strong class="icon-lightbulb">Tip: </strong>You may switch this on screen help feature on or off at any time by clicking on the '&nbsp;<strong>?</strong>&nbsp;' at the top right on the toolbar.
+		</p>
+		<!-- Incude the following button to make escaping from the tooltip possible on small screen (hidden on large screen) -->
+		<button class="close-panel">Close panel</button>
+	</article>
+{% endfor %}

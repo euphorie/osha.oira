@@ -1,0 +1,57 @@
+dl.status {
+  padding: 4%;
+  background-color: #e1dddb;
+  margin-bottom: 2em;
+  margin-top: 0;
+
+  dt {
+    height: 2em;
+    line-height: 2em;
+    margin-bottom: -2em;
+    color: white;
+    padding-left: 3%;
+    position: relative;
+    clear: left;
+	display: block;
+    text-decoration: none;
+
+    a {
+      color: white;
+      text-decoration: none;
+      display: block;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  dd {
+    background: #c8c3be;
+    clear: left;
+	display: block;
+    height: 2em;
+    margin: 0 0 1em 0;
+    padding: 0;
+  }
+
+  .range {
+    height: 2em;
+    text-indent: -1000px;
+    overflow: hidden;
+    display: inline-block;
+    float: left;
+
+    &.answered {
+      background-color: green;
+    }
+
+    &.risk {
+      background-color: red;
+    }
+
+    &.postponed {
+      background-color: orange;
+    }
+  }
+}

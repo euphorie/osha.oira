@@ -1,0 +1,31 @@
+---
+layout: panel
+title: Login
+action: /index-logged-in.html
+buttons:
+  - label: Login
+    type: submit
+  - label: Cancel
+    type: button
+    class: close-panel
+---
+
+<fieldset class="vertical">
+    <label>
+        E-mail address
+        <input size="50" name="email" type="email" required autofocus />
+    </label>
+    <label>
+        Password (<a href="forgot-password.html#document-content" class="pat-inject" data-pat-inject="source: .wizard-box; target: .wizard-box">I forgot my password</a>)
+        <input size="50" name="password" type="password" required="required" autofocus="autofocus"/>
+    </label>
+    <fieldset class="pat-checklist">
+        <label>
+            <input type="checkbox" /> Keep me logged in.
+        </label>
+    </fieldset>
+
+    <p>
+        Don't have an account? Then please <a href="/registration.html">register</a> first. <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Your registration is a private matter. All your data is stored to be accessed only by you. You only need to provide your email address.</dfn>
+    </p>
+</fieldset>

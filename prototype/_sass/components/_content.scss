@@ -1,0 +1,52 @@
+#content {	
+	font-size: 120%;
+	line-height: 1.5em;
+	padding: 10% 6% 10% 6%;
+	overflow: auto;
+	position: absolute;
+	left: 33.33333333%;
+	top: 3rem;
+	right: 0;
+	bottom: 0;
+
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+@include screen-size(small) {
+	#content {
+		// overflow: visible;
+	}
+
+	.osc-s-off #content {
+		left: 0;
+	}
+}
+
+@include screen-size(medium) {
+	#content {
+		left: 30%;
+	}
+
+	.sidebar-off #content {
+		left: 0;
+	}
+
+	.osc-on #content {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+}
+
+@include screen-size(large) {
+	.osc-off #content {
+		left: 25%;
+	}
+
+	.sidebar-off #content,
+	.osc-off.sidebar-off #content {
+		left: 0;
+		padding: 10% 10% 10% 10%;
+	}
+}

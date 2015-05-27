@@ -12,6 +12,7 @@ from osha.oira.client import model as oiramodel
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.component.hooks import getSite
+from plone import api
 import htmllib
 
 grok.templatedir('templates')
@@ -224,4 +225,6 @@ class OSHAWebHelpers(WebHelpers):
                 resp[country.id] = ldict.keys()
         return resp
 
-
+    def get_username(self):
+        member = api.user.get_current()
+        return member.getProperty('fullname') or member.getUserName()

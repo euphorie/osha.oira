@@ -1,0 +1,24 @@
+html {
+	height: 100%;
+}
+
+body {
+    color: $body-font-color;
+    font-family: $body-font-family;
+    font-weight: $body-font-weight;
+    font-style: $body-font-style;
+    line-height: $base-line-height;
+    font-size: $base-font-size;
+    background: $body-bg;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+
+	[hidden="hidden"],
+	[hidden],
+	[type="hidden"] {
+		display: none !important;
+	}
+}

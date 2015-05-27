@@ -41,7 +41,7 @@
     <metal:styleslot define-slot="style_slot" />
 </head>
 
-<body class="osh-on test-session osc-off osc-s-on focus-sidebar sidebar-off" tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey">
+<body class="osh-on test-session osc-off osc-s-on focus-sidebar sidebar-off" tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
     <div id="main">
         <header id="toolbar">
             <a href="#osc" class="icon-menu pat-toggle"
@@ -55,17 +55,20 @@
             <button class="icon-left pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-sidebar">Private Security EU</button>
             <button id="osh-toggle" class="osh-toggle pat-toggle" data-pat-toggle="selector: body; value: osh-on osh-off; store: local">?</button>
 
-            <tal:if_anon condition="is_anonymous">
-                <a href="/login.html#document-content" class="pat-modal login" data-pat-modal="class: large">Login</a>
-                <a href="registration.html" class="registration">Register</a>
+            <tal:if_anon condition="python:is_anonymous or webhelpers.is_guest_account">
+                <a href="${base_url}/login#document-content" class="pat-modal login" data-pat-modal="class: large">Login</a>
+                <a href="${base_url}/register" class="registration">Register</a>
             </tal:if_anon>
-            <tal:if_not_anon condition="not:is_anonymous">
+            <tal:if_not_anon condition="python: not is_anonymous and not webhelpers.is_guest_account">
                 <a href="user-menu.html#content"
                    class="user-status pat-tooltip icon-user dropdown"
                    data-pat-tooltip="source: ajax; class: medium; position-list: tr">${webhelpers/get_username}</a>
             </tal:if_not_anon>
         </header>
         <div id="content">
+            <p tal:condition="webhelpers/is_guest_account" id="warning-bar">
+                This is a test session. <a href="${base_url}/login" class="registration">Sign in</a> to save your data. <a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info">Info</a>
+            </p>
             <metal:block define-slot="content"/>
         </div>
     </div>
@@ -91,7 +94,7 @@
 
         <metal:include tal:define="id string:menu" use-macro="context/@@includes/macros/osh"/>
 
-        <ol id="steps" class="pat-switch" data-pat-switch="selector: body; remove: osc-s-*; add: osc-s-off; store: local" tal:define="survey_url webhelpers/survey_url; base_url webhelpers/base_url">
+        <ol id="steps" class="pat-switch" data-pat-switch="selector: body; remove: osc-s-*; add: osc-s-off; store: local">
             <tal:if_not_anon condition="not:is_anonymous">
                 <li id="step-1" tal:attributes="class python:'complete %s' % page_section == 'preparation' and 'active' or ''">
                     <a href="${survey_url}/start#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"

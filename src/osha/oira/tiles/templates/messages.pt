@@ -5,13 +5,5 @@
       meta:interpolation="true"
       tal:omit-tag="">
 
-    <p class="message warning" i18n:translate="guest_login_warning" 
-       tal:define="webhelpers nocall:context/@@webhelpers"
-       tal:condition="webhelpers/is_guest_account">
-        You are currently evaluating OiRA as a guest user. 
-        You will not be able to save your progress or download any 
-        reports. To save your work, please sign in or register by 
-        clicking the \"sign in\" link at the top right of the page.
-    </p>
   <p tal:repeat="message view/messages" class="message ${message/type}">${message/message}</p>
 </div>

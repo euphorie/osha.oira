@@ -23,3 +23,15 @@ class Includes(grok.View):
     grok.name("includes")
     grok.layer(IOSHAClientSkinLayer)
     grok.template("includes")
+
+
+class Tooltips(grok.View):
+    """ This view's templates contains a number of <div> element that are used
+    for various tooltips.
+    In proto, see explanations.html
+
+    """
+    grok.context(Interface)
+    grok.name("tooltips")
+    grok.layer(IOSHAClientSkinLayer)
+    grok.template("tooltips")

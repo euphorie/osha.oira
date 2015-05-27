@@ -21,6 +21,8 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
 
 class OSHAStart(survey.Start):
     """ Override the 'start' page to provide our own template.
+
+        In the Jekyll prototype this is called preparation.html
     """
     grok.require("euphorie.client.ViewSurvey")
     grok.layer(IOSHAClientSkinLayer)

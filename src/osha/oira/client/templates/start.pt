@@ -13,6 +13,8 @@
                   client nocall:request/client"
       metal:use-macro="context/@@shell/macros/shell">
 
+<!-- The equivalent template in the Jekyll prototype is preparation.html -->
+
 <body>
 <metal:slot fill-slot="content">
 

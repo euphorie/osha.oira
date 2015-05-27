@@ -6,7 +6,8 @@ grok.templatedir("templates")
 
 
 class Shell(grok.View):
-    """ Layouts (Think main_template, called layouts in Jekyll)
+    """ Based on the _layouts/shell.html layout in Jekyll. In Plone terms it's
+        similar to the main_template.pt.
     """
     grok.context(Interface)
     grok.name("shell")
@@ -15,7 +16,8 @@ class Shell(grok.View):
 
 
 class Includes(grok.View):
-    """ Includes (Think macros, called includes in Jekyll)
+    """ This view's templates contains a collection of macros, corresponding to
+        the Jekyll includes under the _includes dir.
     """
     grok.context(Interface)
     grok.name("includes")

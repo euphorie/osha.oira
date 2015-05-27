@@ -41,6 +41,7 @@ class Mixin(object):
 
 class IdentificationView(module.IdentificationView, Mixin):
     grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
+    grok.template("module_identification")
 
     def update(self):
         return self._update(IdentificationView)

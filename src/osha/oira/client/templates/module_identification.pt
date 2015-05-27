@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      i18n:domain="euphorie"
+      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers"
+      metal:use-macro="context/@@shell/macros/shell">
+
+<body>
+<metal:slot fill-slot="content" tal:define="module nocall:view/module">
+    <article class="rich">
+    <h1>${module/title}</h1>
+    <tal:block replace="tile:statusmessages"/>
+
+    <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}">
+        <fieldset class="vertical">
+        <a tal:define="images module/@@images; scale python:images.scale('image', width=200, height=500, direction='thumbnail')"
+            tal:condition="scale" title="${module/caption|nothing}" rel="fancybox" class="floatAfter" href="${module/absolute_url}/@@download/image/${module/image/filename}">
+            <img alt="" src="${scale/url}" width="${scale/width}" height="${scale/height}"/></a>
+
+        <p tal:content="structure module/description">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
+            ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+            explicabo.</p>
+
+        <fieldset class="pat-checklist radio" tal:condition="module/optional">
+            <legend>${module/question}</legend>
+            <label>
+                <input type="radio" name="skip_children:boolean" value="False" checked="${python:'checked' if (context.postponed is False and not context.skip_children) else None}"/>
+                <tal:span i18n:translate="label_yes">Yes</tal:span>
+            </label>
+            <label>
+                <input type="radio" name="skip_children:boolean" value="True" checked="${python:'checked' if (context.postponed is False and context.skip_children) else None}" />
+                <tal:span i18n:translate="label_no">No</tal:span>
+            </label>
+        </fieldset>
+        </fieldset>
+        
+        <p class="buttonBar">
+            <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="previous floatBefore back">Previous</button>
+            <button type="submit" name="next" value="next" i18n:translate="label_next" class="pat-button next floatAfter">Next</button>
+        </p>
+    </form>
+    </article>
+</metal:slot>
+</body>
+</html>
+

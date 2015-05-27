@@ -12,6 +12,7 @@
 <div id="document-content" class="pat-modal">
     <h1>New session</h1>
     <form method="post" action="${request/URL}" class="wizard-box">    
+    <input type="hidden" name="action" value="new"/>
     <div class="panel-body">
     <fieldset class="vertical">
         <label>

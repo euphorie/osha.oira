@@ -7,261 +7,203 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       meta:interpolation="true"
       i18n:domain="euphorie"
-      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers">
-<head>
-    <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
-    <metal:meta use-macro="webhelpers/macros/headers"/>
-    <metal:css use-macro="webhelpers/macros/css"/>
-    <metal:js  use-macro="webhelpers/macros/javascript"/>
-    <script type="text/javascript">$("input[placeholder], textarea[placeholder]").placeholder();</script>
-    <script type="text/javascript" src="client/++resource++euphorie.behaviour/oira.js"></script>
-    <style type="text/css" media="all">
-      #standardSolutions ol li:before {
-        content: "<span tal:omit-tag='' i18n:translate='button_add'>Add</span>";
-      }
-    </style>
-</head>
-<body tal:define="risk nocall:view/risk; data view/data; lang here/@@plone_portal_state/language"
-        tal:attributes="lang lang"
-        class="actionplan ${webhelpers/extra_css}">
+      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers"
+      metal:use-macro="context/@@shell/macros/shell">
 
-<h1>${view/title}</h1>
+<body>
+<metal:slot fill-slot="content" tal:define="risk nocall:view/risk; data view/data">
 <tal:block replace="tile:statusmessages"/>
 <form method="post" action="${context/absolute_url}">
-
-<div class="message warning last span-15" tal:define="show_statement python:True">
-    <metal:call use-macro="webhelpers/macros/risk_info" />
-    <fieldset tal:define="value data/priority">
-        <label i18n:translate="risk_priority">This is a <select name="priority" i18n:name="priority_value">
-        <option value="low" selected="${python:'selected' if value=='low' else None}" i18n:translate="risk_priority_low">low</option>
-        <option value="medium" selected="${python:'selected' if value=='medium' else None}" i18n:translate="risk_priority_medium">medium</option>
-        <option value="high" selected="${python:'selected' if value=='high' else None}" i18n:translate="risk_priority_high">high</option>
-        </select> priority risk.</label>
-    </fieldset>
-</div>
-
-<div class="solutions" id="standardSolutions" tal:condition="python:view.solutions">
-    <p class="info" i18n:translate="label_select_measure">
-        Select one or more of the known common measures provided.
-    </p>
-    <ol>
-        <li tal:repeat="solution view/solutions"><strong class="title">${solution/description}</strong>
-            <p class="actionPlan">${solution/action_plan}</p>
-            <p class="preventionPlan">${solution/prevention_plan}</p>
-            <p class="requirements">${solution/requirements}</p>
-        </li>
-    </ol>
-</div>
-
-<div class="module-navigation-tabs" id="ActionPlanItemForm">
-<nav class="nav nav-tabs" id="measureTabs">
-    <tal:repeat repeat="actionplan data/action_plans">
-        <tal:def define="number repeat/actionplan/number">
-            <a href="#measure-${number}">
-                <tal:measure i18n:translate="header_measure_single">Measure</tal:measure>
-                <tal:number replace="number">1</tal:number>
-                <span class="icon delete"
-                    i18n:translate="label_delete"
-                    i18n:attributes="title label_remove_measure" title="Delete this measure">Delete</span></a>
-        </tal:def>
-    </tal:repeat>
-    <button
-        type="button"
-        id="addMeasureButton"
-        i18n:translate="label_add"
-        i18n:attributes="title label_add"
-        class="small"
-        title="Add another measure">Add another measure</button>
-</nav>
-
-<tal:loop_plans repeat="actionplan data/action_plans">
-<tal:def define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};
-                        number repeat/actionplan/number">
-    <div class="tab-container" id="measure-${number}">
-    <div class="column">
-        <fieldset class="condensed">
-        <legend><span i18n:translate="label_description">Description</span>
-        <a href="#standardSolutions" class="button small solutions" tal:condition="python:view.solutions" i18n:translate="">Standard solutions</a>
-        <a class="icon info pat-tooltip" data-pat-tooltip="source: content;" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_tooltip" i18n:attributes="title actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</a>
-        </legend>
-        <textarea class="actionPlan" id="actionplan-1"
-            type="text"
-            name="measure.action_plan:utf8:ustring:records"
-            rows="6"
-            placeholder="General approach (to eliminate or reduce the risk)"
-            i18n:attributes="placeholder label_measure_action_plan"
-            tal:content="actionplan/action_plan|nothing"></textarea>
-
-        <textarea
-            class="preventionPlan"
-            id="preventionplan-1"
-            name="measure.prevention_plan:utf8:ustring:records"
-            rows="3"
-            placeholder="Specific action(s) required to implement this approach"
-            i18n:attributes="placeholder label_measure_prevention_plan"
-            tal:content="actionplan/prevention_plan|nothing"></textarea>
-
-        <textarea class="requirements"
-            id="requirements-1"
-            name="measure.requirements:utf8:ustring:records"
-            rows="3"
-            placeholder="Level of expertise and/or requirements needed"
-            i18n:attributes="placeholder label_measure_requirements"
-            tal:content="actionplan/requirements|nothing"></textarea>
+<article class="rich pat-well warning">
+    <h2>${view/title}</h2>
+    <div class="message warning last span-15" tal:define="show_statement python:True">
+        <metal:call use-macro="webhelpers/macros/risk_info" />
+        <fieldset tal:define="value data/priority">
+            <label i18n:translate="risk_priority">This is a <select name="priority" i18n:name="priority_value">
+            <option value="low" selected="${python:'selected' if value=='low' else None}" i18n:translate="risk_priority_low">low</option>
+            <option value="medium" selected="${python:'selected' if value=='medium' else None}" i18n:translate="risk_priority_medium">medium</option>
+            <option value="high" selected="${python:'selected' if value=='high' else None}" i18n:translate="risk_priority_high">high</option>
+            </select> priority risk.</label>
         </fieldset>
     </div>
 
-    <div class="column">
-        <fieldset class="condensed">
-          <label><tal:span i18n:translate="label_action_plan_responsible">Who is responsible?</tal:span>
-                <a class="icon info pat-tooltip" data-pat-tooltip="source: content;" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_responsible_tooltip">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</a>
+    <div class="last span-15" tal:condition="risk/legal_reference|nothing">
+        <metal:call use-macro="webhelpers/macros/risk_legal_collapsible" />
+    </div>
+</article>
+
+<tal:def define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};">
+
+<div class="measures pat-clone" data-pat-clone="template: #measure-template" id="ActionPlanItemForm">
+    <div class="measure pat-collapsible" id="measure-1" tal:repeat="actionplan data/action_plans">
+
+        <h2>Measure 1</h2>
+        <tal:if_has_measures define="measures view/solutions" condition="measures">
+            <p class="functions">
+                <a class="icon-pencil pat-tooltip" data-pat-tooltip="source:ajax" href="#standard-solutions-0">Pre-fill</a>
+            </p>
+            <div id="standard-solutions-0" hidden>
+                <p class="info" i18n:translate="label_select_measure">Select one or more of the known common measures provided.</p>
+                <ol class="add-measure-menu">
+                    <li tal:repeat="measure measures">
+                        <a class="pat-inject close-panel"
+                        href="#standard-solution-1"
+                        data-pat-inject="target: #fields-0" class="title">
+                        <em class="small pat-button">Add</em>${measure/description}</a>
+                    </li>
+                </ol>
+            </div>
+        </tal:if_has_measures>
+
+        <fieldset class="vertical" id="fields-0">
+            <label>Description
+                <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
+                <textarea class="actionPlan" type="text" name="measure.action_plan:utf8:ustring:records" rows="6"
+                    placeholder="General approach (to eliminate or reduce the risk)"
+                    i18n:attributes="placeholder label_measure_action_plan"
+                    tal:content="actionplan/action_plan|nothing"></textarea>
+            </label>
+            <label>Prevention plan
+                <textarea class="preventionPlan" name="measure.prevention_plan:utf8:ustring:records" rows="3"
+                    placeholder="Specific action(s) required to implement this approach"
+                    i18n:attributes="placeholder label_measure_prevention_plan"
+                    tal:content="actionplan/prevention_plan|nothing"></textarea>
+            </label>
+            <label>Requirements
+                <textarea class="requirements" name="measure.requirements:utf8:ustring:records" rows="3"
+                    placeholder="Level of expertise and/or requirements needed"
+                    i18n:attributes="placeholder label_measure_requirements"
+                    tal:content="actionplan/requirements|nothing"></textarea>
+            </label>
+        </fieldset>
+
+        <fieldset class="vertical" tal:define="number repeat/actionplan/number">
+            <label>
+                <tal:span i18n:translate="label_action_plan_responsible">Who is responsible?</tal:span>
+                <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="actionplan_measure_responsible_tooltip">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</dfn>
                 <input type="text" class="responsible" name="measure.responsible:utf8:ustring:records" value="${actionplan/responsible|nothing}"/>
             </label>
-
-            <label id="label-budget-${number}" class="${python:'error' if exists('errors/budget') else None}"><tal:span i18n:translate="label_action_plan_budget">Budget</tal:span>
-                <a class="icon info pat-tooltip" data-pat-tooltip="source: content;" href="${webhelpers/help_url}#actionplan" i18n:translate="actionplan_measure_budget_tooltip">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</a>
-                <input type="text" class="budget" name="measure.budget:records" id="input-budget-${number}" value="${actionplan/budget|nothing}"/>
+            <label class="currency" class="${python:'error' if exists('errors/budget') else None}">
+                <tal:span i18n:translate="label_action_plan_budget">Budget</tal:span>
                 <em class="message error" tal:condition="exists:errors/budget" i18n:translate="error_invalid_budget">Please enter the budget in whole Euros.</em>
-              </label>
+                <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="actionplan_measure_budget_tooltip">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</dfn>
+                <span class="composed currency-field">
+                    <input type="number" class="currency" name="measure.budget:records" id="input-budget-${number}" value="${actionplan/budget|nothing}"/>
+                </span>
+            </label>
 
-            <fieldset tal:define="date_error exists:errors/planning_start_date;
-                                  day_error exists:errors/planning_start_day;
-                                  year_error exists:errors/planning_start_year;
-                                  error python:day_error or year_error"
-                      class="condensed${python:' error' if error else ''}">
-                <legend i18n:translate="label_action_plan_start">Planning start</legend>
+            <label tal:define="date_error exists:errors/planning_start_date">
+                <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
                 <em class="message error" tal:condition="date_error" i18n:translate="error_start_not_before_end">Start date is not before end date</em>
-                <fieldset class="date-eu">
-                    <label class="${python:'error' if day_error else None}" for="label-planning-start-day-${number}" i18n:translate="label_day">Day</label>
-                    <input name="measure.planning_start_day:records"
-                            id="planning-start-day-${number}"
-                            maxlength="2"
-                            class="numeric day${python:' error' if day_error or date_error else ''}"
-                            value="${actionplan/planning_start_day|actionplan/planning_start/day|nothing}"/>
-                    <em class="message error" tal:condition="day_error" i18n:translate="error_invalid_day">Invalid day</em>
-                    <label for="planning-start-month-${number}" i18n:translate="label_month">Month</label>
-                    <select name="measure.planning_start_month:records"
-                            id="planning-start-month-${number}"
-                            class="month"
-                            tal:define="value actionplan/planning_start_month|actionplan/planning_start/month|nothing">
-                        <tal:loop_months repeat="month webhelpers/months">
-                            <option value="${python:month[0]}"
-                                    selected="${python:'selected' if str(value)==str(month[0]) else None}">${python:month[1]}</option>
-                        </tal:loop_months>
-                    </select>
-                    <label class="${python:'error' if year_error else None}"
-                            for="planning-start-year-${number}"
-                            i18n:translate="label_year">Year</label>
-                    <input name="measure.planning_start_year:records"
-                            id="planning-start-year-${number}"
-                            maxlength="4"
-                            class="numeric year enablePicker${python:' error' if year_error or date_error else ''}"
-                            value="${actionplan/planning_start_year|actionplan/planning_start/year|nothing}"/>
-                    <em class="message error" tal:condition="year_error" i18n:translate="error_invalid_year">Please enter a valid year after 1900</em>
-                </fieldset>
-            </fieldset>
+                <input type="date" name="measure.planning_start:records"
+                        id="planning-start-${number}"
+                        value="${actionplan/planning_start|nothing}"/>
+            </label>
 
-            <fieldset tal:define="day_error exists:errors/planning_end_day;
-                                    year_error exists:errors/planning_end_year;
-                                    error python:day_error or year_error"
-                    class="condensed${python:' error' if error else ''}">
-                <legend i18n:translate="label_action_plan_end">Planning end</legend>
-
-
-                <fieldset class="date-eu">
-                    <label class="${python:'error' if day_error else None}"
-                        for="label-planning-end-day-${number}" i18n:translate="label_day">Day</label>
-                    <input name="measure.planning_end_day:records" id="planning-end-day-${number}" maxlength="2"
-                        class="numeric day ${python:' error' if day_error else ''}"
-                        value="${actionplan/planning_end_day|actionplan/planning_end/day|nothing}"/>
-                    <em class="message error" tal:condition="day_error" i18n:translate="error_invalid_day">Invalid day</em>
-
-                    <label for="planning-end-month-${number}" i18n:translate="label_month">Month</label>
-
-                    <select name="measure.planning_end_month:records" id="planning-end-month-${number}" class="month"
-                            tal:define="value actionplan/planning_end_month|actionplan/planning_end/month|nothing">
-                        <tal:loop_months repeat="month webhelpers/months">
-                            <option
-                                value="${python:month[0]}"
-                                selected="${python:'selected' if str(value)==str(month[0]) else None}">${python:month[1]}</option>
-                        </tal:loop_months>
-                    </select>
-
-                    <label class="${python:'error' if year_error else None}"
-                        for="planning-end-year-${number}" i18n:translate="label_day">Day</label>
-                    <input name="measure.planning_end_year:records" id="planning-end-year-${number}" maxlength="4"
-                        class="numeric year enablePicker${python:' error' if year_error else ''}"
-                        value="${actionplan/planning_end_year|actionplan/planning_end/year|nothing}"/>
-                    <em class="message error" tal:condition="year_error" i18n:translate="error_invalid_year">Please enter a valid year after 1900</em>
-                </fieldset>
-            </fieldset>
+            <label tal:define="date_error exists:errors/planning_end_date">
+                <tal:label i18n:translate="label_action_plan_end">Planning end</tal:label>
+                <em class="message error" tal:condition="date_error" i18n:translate="error_end_not_before_end">End date is not after start date</em>
+                <input type="date" name="measure.planning_end:records"
+                        id="planning-end-${number}"
+                        value="${actionplan/planning_end|nothing}"/>
+            </label>
         </fieldset>
     </div>
 </div>
+
+	<div class="button-bar">
+		<button class="add-clone pat-button icon-plus-circle" id="addMeasureButton" title="Add another measure" type="button">Add another measure</button>
+	</div>
+
+	<div class="measure pat-collapsible" id="measure-template" hidden>
+        <tal:get_measures define="measures view/solutions">
+		<h2>Measure #{1}</h2>
+		<p class="functions">
+			<a class="icon-pencil pat-tooltip" tal:condition="measures" data-pat-tooltip="source: ajax" href="#standard-solutions-#{1}">Pre-fill</a>
+			<a class="icon-trash remove-clone">Remove</a>
+		</p>
+
+        <tal:if_has_measures condition="measures">
+		<div id="standard-solutions-#{1}" hidden>
+            <p class="info" i18n:translate="label_select_measure">Select one or more of the known common measures provided.</p>
+            <ol class="add-measure-menu">
+                <li tal:repeat="solution measures">
+                    <a class="pat-inject close-panel"
+                       class="title"
+                       data-pat-inject="target: #fields-#{1}">
+                    <em class="small pat-button">Add</em>${solution/description}</a>
+                </li>
+            </ol>
+        </div>
+        </tal:if_has_measures>
+        </tal:get_measures>
+
+		<fieldset class="vertical" id="fields-#{1}">
+			<label>Description
+				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
+				<textarea autofocus class=" actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea>
+			</label>
+			<label>Prevention plan
+				<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea>
+			</label>
+			<label>Requirements
+				<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3"></textarea>
+			</label>
+		</fieldset>
+
+		<fieldset class="vertical">
+			<label>
+				Who is responsible?
+				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</dfn>
+				<input class="responsible" name="responsible" type="text">
+			</label>
+			<label class="currency">
+				Budget
+				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</dfn>
+				<span class="composed currency-field">
+					<input type="number" class="currency" />
+				</span>
+			</label>
+			<label>
+				Planning start
+				<input type="date" />
+			</label>
+			<label>
+				Planning end
+				<input type="date" />
+			</label>
+		</fieldset>
+	</div>
+
+    <fieldset id="comments">
+        <textarea id="commentsField" name="comment:utf8:ustring" cols="70" rows="5"
+            placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
+            i18n:attributes="placeholder label_comment"
+            tal:content="data/comment|nothing"></textarea>
+    </fieldset>
+
+    <div class="button-bar">
+        <button type="submit" name="next" value="previous"
+                i18n:translate="label_previous" class="pat-button-back">Previous</button>
+        <button type="submit" name="next" value="next"
+                i18n:translate="label_save_and_continue" class="pat-button">Save and continue</button>
+    </div>
+
+    <tal:loop repeat="solution view/solutions">
+        <fieldset class="vertical" id="standard-solution-${repeat/measure/number}">
+            <label>Description
+                <textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">${solution/description}</textarea>
+            </label>
+            <label>Prevention plan
+                <textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3">${solution/action_plan}</textarea>
+            </label>
+            <label>Requirements
+                <textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3">${solution/requirements}</textarea>
+            </label>
+        </fieldset>
+    </tal:loop>
 </tal:def>
-</tal:loop_plans>
-</div>
-
-<p class="buttonBar">
-    <button type="submit" name="next" value="previous"
-            i18n:translate="label_previous" class="previous floatBefore back">Previous</button>
-    <button type="submit" name="next" value="next"
-            i18n:translate="label_save_and_continue" class="next floatAfter">Save and continue</button>
-</p>
-
-<fieldset class="concise" id="comments">
-    <textarea id="comment" name="comment:utf8:ustring"
-        class="span-15" rows="5"
-        placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
-        i18n:attributes="placeholder label_comment"
-        tal:content="data/comment|nothing"></textarea>
-</fieldset>
-
-<div class="last span-15" tal:condition="risk/legal_reference|nothing">
-    <metal:call use-macro="webhelpers/macros/risk_legal_collapsible" />
-</div>
 </form>
-
-    <ol id="steps" tal:define="survey_url webhelpers/survey_url">
-      <li class="complete" id="step-1">
-        <a href="${survey_url}/start">
-          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_preparation">Preparation</tal:span>
-          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_preparation">Preparation</tal:span>
-        </a>
-      </li>
-      <li class="complete" id="step-2">
-        <a href="${survey_url}/identification">
-          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_identification">Identification</tal:span>
-          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_identification">Identification</tal:span>
-        </a>
-      </li>
-      <li class="complete" id="step-3">
-        <a href="${survey_url}/evaluation">
-          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_evaluation">Evaluation</tal:span>
-          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_evaluation">Evaluation</tal:span>
-        </a>
-      </li>
-      <li class="active current" id="step-4">
-        <a href="${survey_url}/actionplan">
-          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_action_plan">Action Plan</tal:span>
-          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_action_plan">Action Plan</tal:span>
-        </a>
-        <tal:block define="tree view/tree">
-          <metal:call use-macro="webhelpers/macros/survey_tree" />
-        </tal:block>
-      </li>
-      <li id="step-5">
-        <a href="${survey_url}/report">
-          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_report">Report</tal:span>
-          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_report">Report</tal:span>
-        </a>
-      </li>
-    </ol>
-
-    <metal:css use-macro="webhelpers/macros/toplevel-navigation" tal:define="site_section string:actionplan"/>
-    <metal:css use-macro="webhelpers/macros/appendix"/>
-    <tal:block replace="tile:client-analytics"/>
-    <span id="delete_confirm_text" style="display:none" i18n:translate=''>Are you sure you want to delete this measure? This action can not be reverted.</span>
-    <span id="replace_confirm_text" style="display:none" i18n:translate=''>The current text in the fields 'Action plan', 'Prevention plan' and 'Requirements' of this measure will be overwritten. This action cannot be reverted. Are you sure you want to continue?</span>
-  </body>
+</metal:slot>
+</body>
 </html>

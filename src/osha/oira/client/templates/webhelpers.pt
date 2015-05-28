@@ -37,7 +37,7 @@
     </ul>
   </metal:topnav>
 
-  <metal:css define-macro="css" meta:interpolation="true" 
+  <metal:css define-macro="css" meta:interpolation="true"
          tal:define="base_url client/++resource++osha.oira.resources">
 
     <tal:block condition="webhelpers/debug_mode">
@@ -60,12 +60,12 @@
     </tal:block>
   </metal:javascript>
 
-  <metal:survey define-macro="survey_tree_inner" meta:interpolation="true">
+  <metal:survey define-macro="survey_tree_inner_old" meta:interpolation="true">
     <ol tal:condition="exists:tree" class="${python:'microns' if tree['leaf_module'] else None}">
-      <li tal:repeat="item tree/children" 
+      <li tal:repeat="item tree/children"
           title="${python:'%s. %s' % (item['number'], item['title']) if tree['leaf_module'] else None}"
           class="${item/class}">
-        <a  tal:define="item_class item/class" 
+        <a  tal:define="item_class item/class"
             href="${item/url}">
             <tal:if condition="python:not tree['leaf_module']">
                 <strong class="counter">${item/number}</strong> ${item/title}
@@ -78,7 +78,36 @@
     </ol>
   </metal:survey>
 
+  <metal:survey define-macro="survey_tree_inner" meta:interpolation="true">
+    <ol tal:condition="exists:tree" tal:attributes="class python:tree['leaf_module'] and 'navigation questions' or ''">
+      <li tal:repeat="item tree/children"
+          title="${python:'%s. %s' % (item['number'], item['title']) if tree['leaf_module'] else None}"
+          class="${item/class}">
+        <a tal:define="item_class item/class"
+            href="${item/url}">
+                <strong class="number">${item/number}</strong> ${item/title}
+
+        </a>
+        <tal:subtree condition="python:item['children']" define="tree python:item">
+          <metal:call use-macro="webhelpers/macros/survey_tree_inner" />
+        </tal:subtree>
+      </li>
+    </ol>
+  </metal:survey>
+
   <metal:survey define-macro="survey_tree" meta:interpolation="true">
+    <div tal:condition="exists:tree" class="topics">
+      <metal:call use-macro="webhelpers/macros/survey_tree_inner" />
+        <ul class="legend">
+          <li class="unvisited" i18n:translate="">Unvisited</li>
+          <li class="postponed" i18n:translate="">Postponed</li>
+          <li class="answered" i18n:translate="">Risk not present</li>
+          <li class="answered risk" i18n:translate="">Risk present</li>
+        </ul>
+    </div>
+  </metal:survey>
+
+  <metal:survey define-macro="survey_tree_old" meta:interpolation="true">
     <aside tal:condition="exists:tree" class="questions">
       <metal:call use-macro="webhelpers/macros/survey_tree_inner" />
       <ul class="legend">
@@ -100,7 +129,7 @@
             <a href="${page/url}">${page/title}</a> |
         </tal:block>
         <tal:span i18n:translate="appendix_produced_by">
-        Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_blank">EU-OSHA</a>.</tal:span> 
+        Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_blank">EU-OSHA</a>.</tal:span>
         |
         <a href="http://www.oiraproject.eu/" target="_blank" i18n:translate="appendix_about">About</a>
         |
@@ -111,7 +140,7 @@
         <a href="http://www.gnu.org/licenses/gpl.html" target="_blank" i18n:translate="appendix_gpl_license">GPL License</a>
         |
         <a href="http://creativecommons.org/licenses/by-sa/2.5/"
-            target="_blank" 
+            target="_blank"
             i18n:attributes="alt" alt="CC License">
             <img class="creative_commons_logo" src="${media_url}/osha/creative_commons.png"/>
         </a>
@@ -121,7 +150,7 @@
 
   <metal:riskinfo define-macro="risk_info" meta:interpolation="true" i18n:domain="euphorie">
     <p class="gallery" tal:define="images risk/@@images" tal:condition="python:risk.image is not None">
-      <a rel="fancybox" title="${risk/caption|nothing}" 
+      <a rel="fancybox" title="${risk/caption|nothing}"
             tal:define="thumb python:images.scale('image', width=150, height=500, direction='thumbnail');
                         large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
             href="${large/url|nothing}"
@@ -137,7 +166,7 @@
                         large python:images.scale('image3', width=590, height=1900, direction='thumbnail')"
             href="${large/url|nothing}"
             tal:condition="thumb"><img alt="" with="${thumb/width}" height="${thumb/height}" src="${thumb/url}" class="floatBefore"/></a>
-      <a rel="fancybox" title="${risk/caption4|nothing}" 
+      <a rel="fancybox" title="${risk/caption4|nothing}"
             tal:define="thumb python:images.scale('image4', width=120, height=172, direction='thumbnail');
                         large python:images.scale('image4', width=590, height=1900, direction='thumbnail')"
             href="${large/url|nothing}"
@@ -177,36 +206,36 @@
       <p tal:content="structure risk/legal_reference">
         The requirements for fridges are defined in section 13.1 section a
         of the health code.
-      </p> 
+      </p>
     </tal:block>
   </metal:risklegal>
-  
+
   <metal:risklegal define-macro="risk_legal_collapsible" meta:interpolation="true" i18n:domain="euphorie">
     <tal:block condition="risk/legal_reference"
                define="legal_shown python:request.get('show_legal') not in ['0', None];
                        toggle_legal python:legal_shown and '0' or '1'">
-        
-        <h4 class="oira_legal_header" 
+
+        <h4 class="oira_legal_header"
             tal:attributes="class string:oira_legal_header"
             i18n:translate="header_legal_references">Legal and policy references</h4>
-        <a id="oira_legal_show_anchor" 
+        <a id="oira_legal_show_anchor"
             tal:attributes="href string:${request/ACTUAL_URL}?show_legal=${toggle_legal};
                             style python:not legal_shown and 'display: None';"
             i18n:translate="action_hide">Hide</a>
-        <a id="oira_legal_hide_anchor" 
+        <a id="oira_legal_hide_anchor"
             tal:attributes="href string:${request/ACTUAL_URL}?show_legal=${toggle_legal};
                             style python:legal_shown and 'display: None';"
             i18n:translate="action_show">Show</a>
         <br clear="all"/>
-        
-        <div id="legal_reference" 
+
+        <div id="legal_reference"
               style="display:none"
               tal:attributes="style python:legal_shown and 'display:block' or 'display:none'">
 
             <tal:desc tal:replace="structure risk/legal_reference">
                     The requirements for fridges are defined in section 13.1 section a
                     of the health code.
-            </tal:desc> 
+            </tal:desc>
         </div>
     </tal:block>
   </metal:risklegal>

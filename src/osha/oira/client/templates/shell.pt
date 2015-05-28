@@ -11,6 +11,7 @@
       tal:define="webhelpers nocall:context/@@webhelpers;
                   base_url string:client/++resource++osha.oira.resources;
                   page_section webhelpers/get_phase;
+                  sidebar_default python:page_section in ['identification', 'actionplan'] and 'sidebar-on' or 'sidebar-off';
                   client nocall:request/client;
                   tools context/@@tools">
 
@@ -41,7 +42,7 @@
     <metal:styleslot define-slot="style_slot" />
 </head>
 
-<body class="osh-on test-session osc-off osc-s-on focus-sidebar sidebar-off" tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
+<body class="osh-on test-session osc-off osc-s-on focus-sidebar ${sidebar_default}"  tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
     <div id="main">
         <header id="toolbar">
             <a href="#osc" class="icon-menu pat-toggle"
@@ -95,7 +96,7 @@
         <metal:include tal:define="id string:menu" use-macro="context/@@includes/macros/osh"/>
 
         <ol id="steps" class="pat-switch" data-pat-switch="selector: body; remove: osc-s-*; add: osc-s-off; store: local">
-            <tal:if_not_anon condition="not:is_anonymous">
+            <tal:if_not_anon condition="not:is_anonymous" define="tree view/tree|nothing">
                 <li id="step-1" tal:attributes="class python:page_section == 'preparation' and 'active' or ''">
                     <a href="${survey_url}/start#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
                         class="preparation pat-switch pat-inject"
@@ -105,6 +106,11 @@
                     <a href="${survey_url}/identification" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
                         class="identification pat-switch pat-inject"
                         data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-off; add: sidebar-on">Identification + Evaluation</a>
+
+                    <tal:block condition="nocall:tree">
+                      <metal:call use-macro="webhelpers/macros/survey_tree" />
+                    </tal:block>
+
                     <!--
                     <div class="topics">
                         <metal:include tal:define="id string:topics" use-macro="context/@@includes/macros/osh"/>

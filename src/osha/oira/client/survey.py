@@ -12,11 +12,12 @@ grok.templatedir("templates")
 
 
 class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
-    phases = {
-            "identification": IOSHAIdentificationPhaseSkinLayer,
-            "evaluation": IOSHAEvaluationPhaseSkinLayer,
-            "actionplan": IOSHAActionPlanPhaseSkinLayer,
-            "report": IOSHAReportPhaseSkinLayer, }
+    survey.SurveyPublishTraverser.phases.update({
+        "identification": IOSHAIdentificationPhaseSkinLayer,
+        "evaluation": IOSHAEvaluationPhaseSkinLayer,
+        "actionplan": IOSHAActionPlanPhaseSkinLayer,
+        "report": IOSHAReportPhaseSkinLayer,
+    })
 
 
 class OSHAStart(survey.Start):

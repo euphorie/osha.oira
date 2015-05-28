@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      i18n:domain="euphorie"
+      id="statistics"
+      metal:use-macro="context/@@layout/macros/layout">
+
+<head>
+    <metal:title fill-slot="title">Risk Identification and Evaluation Statistics</metal:title>
+</head>
+
+<body>
+<metal:content fill-slot="content">
+
+    <h2>Sessions</h2>
+    <canvas id="sessions-chart" width="300" height="150"></canvas>
+    <p>
+        There are <strong id="num-accounts" tal:content="view/num_accounts"/> user accounts and <strong id="num-sessions" tal:content="view/num_sessions"/> sessions at an average of 
+        <strong tal:content="python: '%.2f' % (float(view.num_sessions)/view.num_accounts)"/> sessions per account.
+    </p>
+
+    <h2>Types of Risks</h2>
+    <canvas id="types-of-risks-chart" width="200" height="200"></canvas>
+    <section id="types-of-risks-legend"></section>
+    <p>
+        There are <strong tal:content="view/num_risks"></strong> risks at an average of <strong tal:content="python: '%.2f' % (float(view.num_risks)/view.num_sessions)"></strong> risks per session.
+    </p>
+
+    <p>
+        There are <strong id="num-present-risks" tal:content="view/num_present_risks"></strong> risks identified as <strong>present</strong> at an average of 
+        <strong tal:content="python: '%.2f' % (float(view.num_present_risks)/view.num_sessions)"></strong> per session or
+        <strong tal:content="python: '%.2f' % ((float(view.num_present_risks)/view.num_risks)*100)"></strong>%.
+    </p>
+
+    <p>
+        There are <strong id="num-non-present-risks" tal:content="view/num_non_present_risks"></strong> risks identified as <strong>not present</strong> at an average of 
+        <strong tal:content="python: '%.2f' % (float(view.num_non_present_risks)/view.num_sessions)"></strong> per session or
+        <strong tal:content="python: '%.2f' % ((float(view.num_non_present_risks)/view.num_risks)*100)"></strong>%.
+    </p>
+
+    <p>
+        There are <strong id="num-skipped-risks" tal:content="view/num_skipped_risks"/> <strong>skipped risks</strong> at an average of 
+        <strong tal:content="python: '%.2f' % (float(view.num_skipped_risks)/view.num_sessions)"></strong> per session or
+        <strong tal:content="python: '%.2f' % ((float(view.num_skipped_risks)/view.num_risks)*100)"></strong>%.
+    </p>
+
+    <p>
+        There are <strong id="num-unidentified-risks" tal:content="view/num_unidentified_risks"/> <strong>unidentified risks</strong> at an average of 
+        <strong tal:content="python: '%.2f' % (float(view.num_unidentified_risks)/view.num_sessions)"></strong> per session or 
+        <strong tal:content="python: '%.2f' % ((float(view.num_unidentified_risks)/view.num_risks)*100)"></strong>%.
+    </p>
+
+    <h2>Risks with measures</h2>
+    <canvas id="risks-bar-chart" width="300" height="300"></canvas>
+    <p>
+        Of the risks that have been identified as present, there are <strong id="num-evaluated-risks" tal:content="view/num_evaluated_risks"></strong>
+        <strong>evaluated risks</strong>,
+        and of the evaluated risks there are <strong id="num-actioned-risks" tal:content="view/num_actioned_risks"></strong> risks with measures
+        <tal:avoid_div_by_zero condition="view/num_evaluated_risks"> at an average of 
+        <strong tal:content="python: '%.2f' % (float(view.num_actioned_risks)/view.num_evaluated_risks)"/> measures per evaluated risk.
+        </tal:avoid_div_by_zero>
+    </p>
+    <p>
+        There are <strong id="num-measures" tal:content="view/num_evaluated_risks"></strong> <strong>measures</strong> at an average of 
+        at an average of <strong tal:content="python: '%.2f' % (float(view.num_action_plans)/view.num_actioned_risks)"></strong> measures per risk with action plan.
+    </p>
+</metal:content>
+
+<metal:scripts fill-slot="scripts">
+    <style>
+        #types-of-risks-legend {
+            display: inline-block;
+            width: 50%;
+        }
+        ul.pie-legend li span {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            margin-right: 1em;
+        }
+    </style>
+    <script type="text/javascript" src="++resource++osha.oira.resources/chart-1.0.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            drawRiskTypesPieChart();
+            drawSessionsBarChart();
+            drawRisksBarChart();
+        });
+
+        function drawSessionsBarChart() {
+            var data = {
+                labels: ["Accounts", "Sessions"],
+                datasets: [
+                    {
+                        label: "Dataset",
+                        fillColor: "rgba(151,187,205,0.5)",
+                        strokeColor: "rgba(151,187,205,0.8)",
+                        highlightFill: "rgba(151,187,205,0.75)",
+                        highlightStroke: "rgba(151,187,205,1)",
+                        data: [parseInt($('#num-accounts').text()), parseInt($('#num-sessions').text())]
+                    }
+                ]
+            };
+            var ctx = document.getElementById("sessions-chart").getContext("2d");
+            var sessionsBarChart = new Chart(ctx).Bar(data);
+        }
+
+        function drawRisksBarChart() {
+            var data = {
+                labels: ["Evaluated Risks", "Eval. Risks with measures", "Measures"],
+                datasets: [{
+                        label: "Dataset",
+                        fillColor: "rgba(151,187,205,0.5)",
+                        strokeColor: "rgba(151,187,205,0.8)",
+                        highlightFill: "rgba(151,187,205,0.75)",
+                        highlightStroke: "rgba(151,187,205,1)",
+                        data: [parseInt($('#num-evaluated-risks').text()), parseInt($('#num-actioned-risks').text()), parseInt($('#num-measures').text())]
+                }]
+            };
+            var ctx = document.getElementById("risks-bar-chart").getContext("2d");
+            var sessionsBarChart = new Chart(ctx).Bar(data);
+        }
+
+        function drawRiskTypesPieChart() {
+            var data = [{
+                    value: parseInt($('#num-present-risks').text()),
+                    color:"#F7464A",
+                    highlight: "#FF5A5E",
+                    label: "Present"
+                }, { value: parseInt($('#num-non-present-risks').text()),
+                    color: "#46BFBD",
+                    highlight: "#5AD3D1",
+                    label: "Not Present"
+                }, { value: parseInt($('#num-skipped-risks').text()),
+                    color: "#d3d3d3",
+                    highlight: "#FFC870",
+                    label: "Skipped"
+                }, { value: parseInt($('#num-unidentified-risks').text()),
+                    color: "#FDB45C",
+                    highlight: "#FFC870",
+                    label: "Not Identified"
+            }]
+            var ctx = document.getElementById("types-of-risks-chart").getContext("2d");
+            var sessionsBarChart = new Chart(ctx).Pie(data);
+            $("#types-of-risks-legend").html(sessionsBarChart.generateLegend());
+        }
+    </script>
+</metal:scripts>
+
+</body>
+</html>

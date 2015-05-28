@@ -7,85 +7,44 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       meta:interpolation="true"
       i18n:domain="euphorie"
-      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers">
-<head>
-    <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
-    <metal:meta use-macro="webhelpers/macros/headers"/>
-    <metal:css use-macro="webhelpers/macros/css"/>
-</head>
-<body tal:define="risk nocall:view/risk" class="identification ${webhelpers/extra_css}">
-    <h1 tal:content="view/title">The temperature of all fridges is checked daily</h1>
-    <tal:block replace="tile:statusmessages"/>
-    <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}">
-      <fieldset class="radioList comprehensive">
+      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers"
+      metal:use-macro="context/@@shell/macros/shell">
+
+<body>
+<metal:slot fill-slot="content" tal:define="risk nocall:view/risk">
+<tal:block replace="tile:statusmessages"/>
+<form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}">
+    <fieldset class="vertical">
+		<fieldset class="pat-checklist radio">
         <legend tal:content="risk/title">The temperature of all fridges is checked daily</legend>
         <input type="hidden" name="answer:default" value="postponed"/>
-        <label><input type="radio" name="answer" value="yes" checked="${python:'checked' if context.identification=='yes' else None}"/><tal:span i18n:translate="label_yes">Yes</tal:span></label>
-        <label><input type="radio" name="answer" value="no" checked="${python:'checked' if context.identification=='no' else None}"/><tal:span i18n:translate="label_no">No</tal:span></label>
-        <label tal:condition="risk/show_notapplicable"><input type="radio" name="answer" value="n/a" checked="${python:'checked' if context.identification=='n/a' else None}"/><tal:span i18n:translate="label_not_applicable">Not applicable</tal:span></label>
-      </fieldset>
+        <label class="yes"><input type="radio" name="answer" value="yes" checked="${python:'checked' if context.identification=='yes' else None}"/><tal:span i18n:translate="label_yes">Yes</tal:span></label>
+        <label class="no"><input type="radio" name="answer" value="no" checked="${python:'checked' if context.identification=='no' else None}"/><tal:span i18n:translate="label_no">No</tal:span></label>
+        <label tal:condition="risk/show_notapplicable" class="not-applicable"><input type="radio" name="answer" value="n/a" checked="${python:'checked' if context.identification=='n/a' else None}"/><tal:span i18n:translate="label_not_applicable">Not applicable</tal:span></label>
+		</fieldset>
+    </fieldset>
 
-    <p class="buttonBar">
-        <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="floatBefore back">Previous</button>
-        <button type="submit" name="next" value="next" i18n:translate="label_save_and_continue" class="floatAfter">Save and continue</button>
-    </p>
-
-    <div class="message emphasis" tal:condition="view/show_info">
-        <metal:call use-macro="webhelpers/macros/risk_info" />
-    </div>
-
-    <div tal:condition="risk/legal_reference|nothing">
-        <metal:call use-macro="webhelpers/macros/risk_legal" />
-    </div>
-
-    <fieldset class="concise" id="comments">
+	<fieldset class="vertical" id="comments">
         <textarea id="comment" name="comment:utf8:ustring" class="span-15" rows="5" tal:content="context/comment"
             placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
             i18n:attributes="placeholder label_comment">
         </textarea>
-    </fieldset>
-    </form>
+	</fieldset>
 
-    <ol id="steps" tal:define="survey_url webhelpers/survey_url">
-      <li class="complete" id="step-1">
-        <a href="${survey_url}/start">
-          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_preparation">Preparation</tal:span>
-          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_preparation">Preparation</tal:span>
-        </a>
-      </li>
-      <li class="active current" id="step-2">
-        <a href="${survey_url}/identification">
-          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_identification">Identification</tal:span>
-          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_identification">Identification</tal:span>
-        </a>
-        <tal:block define="tree view/tree">
-          <metal:call use-macro="webhelpers/macros/survey_tree" />
-        </tal:block>
-      </li>
-      <li id="step-3">
-        <a href="${survey_url}/evaluation">
-          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_evaluation">Evaluation</tal:span>
-          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_evaluation">Evaluation</tal:span>
-        </a>
-      </li>
-      <li id="step-4">
-        <a href="${survey_url}/actionplan">
-          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_action_plan">Action Plan</tal:span>
-          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_label_action_plan">Action Plan</tal:span>
-        </a>
-      </li>
-      <li id="step-5">
-        <a href="${survey_url}/report">
-          <tal:span condition="not:webhelpers/is_iphone" i18n:translate="label_report">Report</tal:span>
-          <tal:span condition="webhelpers/is_iphone" i18n:translate="iphone_report">Report</tal:span>
-        </a>
-      </li>
-    </ol>
+    <article class="rich" class="message emphasis" tal:condition="view/show_info">
+        <metal:call use-macro="webhelpers/macros/risk_info" />
 
-    <metal:css use-macro="webhelpers/macros/toplevel-navigation" tal:define="site_section string:identification"/>
-    <metal:css use-macro="webhelpers/macros/appendix"/>
-    <metal:css use-macro="webhelpers/macros/javascript"/>
-    <tal:block replace="tile:client-analytics"/>
-  </body>
+        <tal:if_legal condition="risk/legal_reference|nothing">
+            <metal:call use-macro="webhelpers/macros/risk_legal" />
+        </tal:if_legal>
+    </article>
+
+    <p class="buttonBar">
+        <button class="pat-button-back" type="submit" name="next" value="previous" i18n:translate="label_previous" class="floatBefore back">Previous</button>
+        <button class="pat-button" type="submit" name="next" value="next" i18n:translate="label_save_and_continue" class="floatAfter">Save and continue</button>
+    </p>
+</form>
+</metal:slot>
+</body>
 </html>
 

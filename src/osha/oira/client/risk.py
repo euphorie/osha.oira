@@ -68,8 +68,6 @@ class OSHAIdentificationView(risk.EvaluationView):
             self.request.response.redirect(url)
         else:
             self.tree = getTreeData(self.request, self.context)
-            # self.tree = getTreeData(self.request, self.context,
-            #     filter=self.question_filter, phase="evaluation")
             self.title = self.context.parent.title
             self.show_info = self.risk.image or \
                 HasText(self.risk.description) or \

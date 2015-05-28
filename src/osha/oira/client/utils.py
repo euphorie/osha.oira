@@ -9,6 +9,7 @@ from euphorie.decorators import reify
 from five import grok
 from mobile.sniffer.detect import detect_mobile_browser
 from mobile.sniffer.utilities import get_user_agent
+from os import path
 from osha.oira.client import model as oiramodel
 from sqlalchemy import sql
 from z3c.saconfig import Session
@@ -17,6 +18,17 @@ from plone import api
 import htmllib
 
 grok.templatedir('templates')
+
+
+NAME_TO_PHASE = dict(
+    start='preparation',
+    profile='preparation',
+    identification='identification',
+    actionplan='actionplan',
+    report='report',
+    status='status',
+    help='help',
+)
 
 
 def html_unescape(s):
@@ -247,4 +259,10 @@ class OSHAWebHelpers(WebHelpers):
 
     def get_phase(self):
         "to be done"
+        head, tail = path.split(self.request.PATH_INFO)
+        while tail:
+            tail = tail.replace('@', '')
+            if tail in NAME_TO_PHASE:
+                return NAME_TO_PHASE[tail]
+            head, tail = path.split(head)
         return ""

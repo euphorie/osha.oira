@@ -1,5 +1,10 @@
 from Acquisition import aq_inner
+from Acquisition import aq_parent
 from euphorie.client import survey, report
+from euphorie.client.navigation import getTreeData
+from euphorie.client.update import redirectOnSurveyUpdate
+from euphorie.client.navigation import FindFirstQuestion
+from euphorie.client.navigation import QuestionURL
 from five import grok
 from zope.component import getMultiAdapter
 from .interfaces import IOSHAClientSkinLayer
@@ -38,6 +43,19 @@ class OSHAIdentification(survey.Identification):
     grok.template("identification")
     grok.name("index_html")
 
+    def update(self):
+        if redirectOnSurveyUpdate(self.request):
+            return
+
+        self.survey = survey = aq_parent(aq_inner(self.context))
+        question = FindFirstQuestion(filter=self.question_filter)
+        if question is not None:
+            self.next_url = QuestionURL(
+                survey, question, phase="identification")
+            self.tree = getTreeData(self.request, question)
+        else:
+            self.next_url = None
+
 
 class OSHAReportView(report.ReportView):
     """ Override the default view, to add a popup overlay
@@ -51,9 +69,8 @@ class OSHAReportView(report.ReportView):
     def get_language(self):
         context = aq_inner(self.context)
         portal_state = getMultiAdapter(
-                                (context, self.request),
-                                name=u'plone_portal_state'
-                                )
+            (context, self.request),
+            name=u'plone_portal_state')
         return portal_state.language()
 
     def get_survey_url(self):
@@ -87,6 +104,20 @@ class OSHAActionPlan(survey.ActionPlan):
     """
     grok.layer(IOSHAActionPlanPhaseSkinLayer)
     grok.template("actionplan")
+
+    def update(self):
+        if redirectOnSurveyUpdate(self.request):
+            return
+
+        self.survey = survey = aq_parent(aq_inner(self.context))
+        question = FindFirstQuestion(filter=self.question_filter)
+        if question is not None:
+            self.next_url = QuestionURL(survey, question, phase="actionplan")
+            self.tree = getTreeData(
+                self.request, question,
+                filter=self.question_filter, phase="actionplan")
+        else:
+            self.next_url = None
 
 
 class Evaluation(survey.Evaluation):

@@ -24,7 +24,7 @@
 					Menu
 				</a>
 				{% include osh.html id="hamburger" %}
-				
+
 				<button class="icon-left pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-sidebar">Private Security EU</button>
 				<button id="osh-toggle" class="osh-toggle pat-toggle" data-pat-toggle="selector: body; value: osh-on osh-off; store: local">?</button>
 				{% if page.state == 'anonymous' or page.state == 'guest' %}
@@ -49,7 +49,7 @@
 			<header id="osc-header">
 				{% if page.state == 'anonymous' %}
 					<a href="/new-session-test.html#document-content" id="button-new-session" data-pat-modal="class: large" class="pat-modal icon-plus-circle" title="Start a new session">Start test session</a>
-					
+
 				{% include osh.html id="session-menu" %}
 				{% else %}
 					<a href="/sessions.html#content" class="dropdown pat-tooltip" id="button-sessions" data-pat-tooltip="source: ajax; class: large; position-list: tl" title="Select an existing session to review or to continue">Private Security EU</a>
@@ -58,7 +58,7 @@
 				{% endif %}
 			</header>
 
-			
+
 				{% include osh.html id="menu" %}
 
 		    <ol id="steps" class="pat-switch" data-pat-switch="selector: body; remove: osc-s-*; add: osc-s-off; store: local">
@@ -71,7 +71,7 @@
 						{% if page.number %}
 
 							<div class="topics">
-								
+
 								{% include osh.html id="topics" %}
 
 			                  	{% if page.number %}
@@ -85,9 +85,10 @@
 											<a href="{{profile.url}}" class="pat-switch pat-inject" data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #content; target: #content" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="counter">{{profile.number | replace: '.0' }}</strong> {{profile.title}}</a>
 											{% assign profilelevel = profile.number | split: '.' %}
 											{% if pagelevel[0] == profilelevel[0] %}
-											<ol>
+
 											  {% for module in site.tool  %}
-											    {% if module.parent_id == id %}
+											    {% if module.layout == 'module' and module.parent_id == id %}
+                                                <ol>
 											    {% capture m_id %}{{ module.fid }}{% endcapture %}
 											    <li class="submodule">
 											      <a href="{{module.url}}" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"  data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #content; target: #content"><strong class="counter">{{module.number | replace: '.0' }}</strong> {{module.title}}</a>
@@ -105,230 +106,65 @@
 													</ol>
 													{% endif %}
 												  	</li>
-												    {% endif %}
+                                                  </ol>
+                                                {% elsif module.layout == 'location' and module.parent_id == id %}
+                                                <h4 class="location-tag">{{module.number | replace: '.0'}} {{module.title}}</h4>
+                                                {% capture l_id %}{{ id }}-{{ module.fid }}{% endcapture %}
+                                                {% for lmodule in site.tool  %}
+                                                {% if lmodule.layout == 'module' and lmodule.parent_id == l_id %}
+                                                <ol>
+                                                {% capture m_id %}{{ lmodule.fid }}{% endcapture %}
+                                                <li class="submodule">
+                                                  <a href="{{lmodule.url}}" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"  data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #content; target: #content"><strong class="counter">{{lmodule.number | replace: '.0' }}</strong> {{lmodule.title}}</a>
+                                                  {% assign modulelevel = lmodule.number | split: '.' %}
+                                                  {% if pagelevel[0] == modulelevel[0] and pagelevel[1] == modulelevel[1] %}
+                                                    <ol class="questions navigation">
+                                                      {% for risk in site.tool  %}
+                                                        {% capture p_id %}{{ l_id }}-{{ m_id}}{% endcapture %}
+                                                        {% if risk.parent_id == p_id %}
+                                                        <li class="{{risk.classes}}">
+                                                          <a href="{{risk.url}}#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">{{risk.number}}</strong> {{risk.title}}</a>
+                                                          </li>
+                                                        {% endif %}
+                                                      {% endfor %}
+                                                    </ol>
+                                                    {% endif %}
+                                                    </li>
+                                                  </ol>
+                                                  {% endif %}
+                                                  {% endfor %}
+
+                                                {% endif %}
 											  {% endfor %}
-											  </ol>
+
 											  {% endif %}
 				                        </li>
+                                        {% elsif profile.layout == 'module' and profile.parent_id == 'None' %}
+                                        {% capture id %}{{ profile.fid }}{% endcapture %}
+                                        <li>
+                                            <a href="{{profile.url}}" class="pat-switch pat-inject" data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #content; target: #content" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="counter">{{profile.number | replace: '.0' }}</strong> {{profile.title}}</a>
+                                            {% assign profilelevel = profile.number | split: '.' %}
+                                            {% if pagelevel[0] == profilelevel[0] %}
+                                                    <ol class="questions navigation">
+                                                      {% for risk in site.tool  %}
+                                                        {% if risk.parent_id == id %}
+                                                        <li class="{{risk.classes}}">
+                                                          <a href="{{risk.url}}#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">{{risk.number}}</strong> {{risk.title}}</a>
+                                                          </li>
+                                                        {% endif %}
+                                                      {% endfor %}
+                                                    </ol>
+
+                                              {% endif %}
+                                        </li>
 				                       	{% endif %}
 				                      	{% endfor %}
-				                      	<li>
-				                      		<a href=# class="pat-switch pat-inject" data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="counter">3</strong> No submodules example</a>
-											<ol class="questions navigation">
-											    <li class="postponed">
-											      <a href="/tool/private-security-eu/2014-02-04-slips-trips-and-falls-are-prevented.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.1</strong> Slips, trips and falls are prevented.</a>
-											      </li>
-												    
-											  
-											    
-											    
-											    <li class="postponed">
-											      <a href="/tool/private-security-eu/2014-02-05-collisions-bumps-and-jamming-are-prevented.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.2</strong> Collisions, bumps, and jamming are prevented.</a>
-											      </li>
-												    
-											  
-											    
-											    
-											    <li class="answered risk">
-											      <a href="/tool/private-security-eu/2014-02-06-the-electricity-gas-and-water-supplies-are-in-order-and-well-maintained.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.3</strong> The electricity, gas and water supplies are in order and well-maintained.</a>
-											      </li>
-												    
-											  
-											    
-											    
-											    <li class="unvisited">
-											      <a href="/tool/private-security-eu/2014-02-07-exposure-to-noise-is-prevented-or-controlled.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.4</strong> Exposure to noise is prevented or controlled.</a>
-											      </li>
-												    
-											  
-											    
-											    
-											    <li class="answered risk">
-											      <a href="/tool/private-security-eu/2014-02-08-exposure-to-chemical-substances-is-prevented-or-controlled.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.5</strong> Exposure to chemical substances is prevented or controlled.</a>
-											      </li>
-												    
-											  
-											    
-											    
-											    <li class="unvisited">
-											      <a href="/tool/private-security-eu/2014-02-09-exposure-to-biological-substances-is-prevented-or-controlled.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.6</strong> Exposure to biological substances is prevented or controlled.</a>
-											      </li>
-												    
-											  
-											    
-											    
-											    <li class="answered risk">
-											      <a href="/tool/private-security-eu/2014-02-10-risks-from-ambient-factors-are-prevented.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.7</strong> Risks from ambient factors are prevented.</a>
-											      </li>
-												    
-											  
-											    
-											    
-											    <li class="postponed">
-											      <a href="/tool/private-security-eu/2014-02-11-all-necessary-facilities-are-available-and-well-maintained.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.8</strong> All necessary facilities are available and well maintained.</a>
-											      </li>
-											</ol>
-				                      	</li>
-				                      	<li>
-											<a href="/tool/private-security-eu/2014-02-02-mobile-partrolling--intervention-after-alarm.html" class="pat-switch pat-inject" data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="counter">4</strong> Example locations</a>
-											      
-											<h4 class="location-tag">
-												Location 1
-											</h4>
-											
-											<ol>
-											    <li class="submodule">
-											      <a href="/tool/private-security-eu/2014-02-03-work-environment-site-related.html" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content"><strong class="counter">2.1</strong> Work environment (site related)</a>
-											      
-											      	<ol class="questions navigation">
-											          
-											            <li class="postponed">
-											              <a href="/tool/private-security-eu/2014-02-04-slips-trips-and-falls-are-prevented.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.1</strong> Slips, trips and falls are prevented.</a>
-											              </li>
-											       	    
-											          
-											            
-											            
-											            <li class="postponed">
-											              <a href="/tool/private-security-eu/2014-02-05-collisions-bumps-and-jamming-are-prevented.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.2</strong> Collisions, bumps, and jamming are prevented.</a>
-											              </li>
-											       	    
-											          
-											            
-											            
-											            <li class="answered risk">
-											              <a href="/tool/private-security-eu/2014-02-06-the-electricity-gas-and-water-supplies-are-in-order-and-well-maintained.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.3</strong> The electricity, gas and water supplies are in order and well-maintained.</a>
-											              </li>
-											       	    
-											          
-											            
-											            
-											            <li class="unvisited">
-											              <a href="/tool/private-security-eu/2014-02-07-exposure-to-noise-is-prevented-or-controlled.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.4</strong> Exposure to noise is prevented or controlled.</a>
-											              </li>
-											       	    
-											          
-											            
-											            
-											            <li class="answered risk">
-											              <a href="/tool/private-security-eu/2014-02-08-exposure-to-chemical-substances-is-prevented-or-controlled.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.5</strong> Exposure to chemical substances is prevented or controlled.</a>
-											              </li>       
-											            
-											            <li class="unvisited">
-											              <a href="/tool/private-security-eu/2014-02-09-exposure-to-biological-substances-is-prevented-or-controlled.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.6</strong> Exposure to biological substances is prevented or controlled.</a>
-											              </li>
-											       	    
-											          
-											            
-											            
-											            <li class="answered risk">
-											              <a href="/tool/private-security-eu/2014-02-10-risks-from-ambient-factors-are-prevented.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.7</strong> Risks from ambient factors are prevented.</a>
-											              </li>
-											       	    
-											          
-											            
-											            
-											            <li class="postponed">
-											              <a href="/tool/private-security-eu/2014-02-11-all-necessary-facilities-are-available-and-well-maintained.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.8</strong> All necessary facilities are available and well maintained.</a>
-											              </li>
-											       	    
-													</ol>
-													
-												  	</li>
-												    
-											    <li class="submodule">
-											      <a href="/tool/private-security-eu/2014-02-12-fire-prevention-and-emergency-procedures.html" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content"><strong class="counter">2.2</strong> Fire prevention and emergency procedures</a>
-											      
-											      
-												  	</li>
-												    
-											    <li class="submodule">
-											      <a href="/tool/private-security-eu/2014-02-15-work-equipment.html" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content"><strong class="counter">2.3</strong> Work equipment</a>
-											      
-											      
-												  	</li>
-												    
-											    <li class="submodule">
-											      <a href="/tool/private-security-eu/2014-02-21-physical-and-psychosocial-workload.html" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content"><strong class="counter">2.4</strong> Physical and psychosocial workload</a>
-											      
-											      
-												  	</li>
-												    
-											    <li class="submodule">
-											      <a href="/tool/private-security-eu/2014-02-28-work-organisation.html" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content"><strong class="counter">2.5</strong> Work organisation</a>
-											      
-											      
-												  	</li>
-												    
-											  </ol>
-											  
-											      
-											<h4 class="location-tag">
-												Location 2
-											</h4>
-											
-											<ol>
-											    <li class="submodule">
-											      <a href="/tool/private-security-eu/2014-02-03-work-environment-site-related.html" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content"><strong class="counter">2.1</strong> Work environment (site related)</a>
-											      
-											      	<ol class="questions navigation">
 
-											            <li class="answered risk">
-											              <a href="/tool/private-security-eu/2014-02-08-exposure-to-chemical-substances-is-prevented-or-controlled.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.5</strong> Exposure to chemical substances is prevented or controlled.</a>
-											              </li>       
-											            
-											            <li class="unvisited">
-											              <a href="/tool/private-security-eu/2014-02-09-exposure-to-biological-substances-is-prevented-or-controlled.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.6</strong> Exposure to biological substances is prevented or controlled.</a>
-											              </li>
-											       	    
-											          
-											            
-											            
-											            <li class="answered risk">
-											              <a href="/tool/private-security-eu/2014-02-10-risks-from-ambient-factors-are-prevented.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.7</strong> Risks from ambient factors are prevented.</a>
-											              </li>
-											       	    
-											          
-											            
-											            
-											            <li class="postponed">
-											              <a href="/tool/private-security-eu/2014-02-11-all-necessary-facilities-are-available-and-well-maintained.html#content" data-pat-inject="history: record;" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="number">2.1.8</strong> All necessary facilities are available and well maintained.</a>
-											              </li>
-											       	    
-													</ol>
-													
-												  	</li>
-												    
-											    <li class="submodule">
-											      <a href="/tool/private-security-eu/2014-02-12-fire-prevention-and-emergency-procedures.html" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content"><strong class="counter">2.2</strong> Fire prevention and emergency procedures</a>
-											      
-											      
-												  	</li>
-												    
-											    <li class="submodule">
-											      <a href="/tool/private-security-eu/2014-02-15-work-equipment.html" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content"><strong class="counter">2.3</strong> Work equipment</a>
-											      
-											      
-												  	</li>
-												    
-											    <li class="submodule">
-											      <a href="/tool/private-security-eu/2014-02-21-physical-and-psychosocial-workload.html" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content"><strong class="counter">2.4</strong> Physical and psychosocial workload</a>
-											      
-											      
-												  	</li>
-												    
-											    <li class="submodule">
-											      <a href="/tool/private-security-eu/2014-02-28-work-organisation.html" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content"><strong class="counter">2.5</strong> Work organisation</a>
-											      
-											      
-												  	</li>
-												    
-											  </ol>
-											  
-										</li>
+
 				                      	<li>
 				                      		<a href="/custom-risks-landing.html" class="pat-switch pat-inject" data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #content; target: #content" data-pat-switch="selector: body; remove: focus-*; add: focus-document"><strong class="counter">Ω</strong> Other risks</a>
 				                      	</li>
+
 							    	</ol>
 						    	{% endif %}
 

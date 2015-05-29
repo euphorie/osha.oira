@@ -97,13 +97,13 @@
 
   @include screen-size(large) {
 
-    .close-panel {
+    .close-panel-mobile {
       display: none;
     }
 
   }
 
-  .close-panel {
+  .close-panel-mobile {
     position: absolute;
     color: gray;
     top: 9px;

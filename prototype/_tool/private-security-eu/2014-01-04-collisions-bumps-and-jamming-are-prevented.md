@@ -19,13 +19,13 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 evaluation_method: risk_estimated
 images:
     - url: /media/private-security-eu/waarschuwing_-_beklemming_lichaam.png
-      caption:
+      caption: 
     - url: /media/private-security-eu/waarschuwing_-_knelgevaar_draaiend.png
-      caption:
+      caption: 
     - url: /media/private-security-eu/waarschuwing_-_snijgevaar_voor_voet.png
-      caption:
+      caption: 
     - url: /media/private-security-eu/waarschuwing_-_kantelgevaar.png
-      caption:
+      caption: 
 
 solutions:
   solution_1:

@@ -1,7 +1,7 @@
 ---
 layout: risk
 fid: the-guards-know-what-to-do-in-case-of-a-fire-alarm
-classes: unvisited
+classes: postponed
 number: "1.2.1"
 parent_id: commercial-manned-guarding-fire-prevention-and-emergency-procedures
 title: "The guards know what to do in case of a fire alarm."
@@ -12,7 +12,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 <li><a title='' href='https://osha.europa.eu/en/legislation/directives/workplaces-equipment-signs-personal-protective-equipment/osh-directives/2' rel='nofollow' target='_blank'>89/654/EEC Directive on the minimum safety and health requirements for the workplace</a>.</li>&#13;
 <li><a title='' href='http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:01992L0058-20070627:EN:NOT' rel='nofollow' target='_blank'>92/58/EEC on the minimum requirements for the provision of safety and/or health signs at work</a>.</li>&#13;
 </ul>"
-evaluation_method: risk_calculated
+evaluation_method: risk_estimated
 images:
     - url: /media/private-security-eu/redding_-_uitgang.png
       caption: 

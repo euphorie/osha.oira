@@ -23,7 +23,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 evaluation_method: policy
 images:
     - url: /media/private-security-eu/waarschuwing_-_giftig.png
-      caption:
+      caption: 
 
 solutions:
   solution_1:
@@ -35,7 +35,7 @@ solutions:
 ---
 **CHEMICAL HAZARDS**
 
-  * **What?** There is a whole series of **chemical products** that can constitute a health risk. Depending on their properties (toxic, carcinogenic/mutagenic, irritants, corrosive), the way in which they enter the body (through inhalation, ingestion, skin and eye contact, or contact with an open wound) and the quantity absorbed, they may adversely affect the health to a lesser or greater extent. Some volatile chemicals and flammable dust pose a fire and explosion risk.
+  * **What?** There is a whole series of **chemical products** that can constitute a health risk. Depending on their properties (toxic, carcinogenic/mutagenic, irritants, corrosive), the way in which they enter the body (through inhalation, ingestion, skin and eye contact, or contact with an open wound) and the quantity absorbed, they may adversely affect the health to a lesser or greater extent. Some volatile chemicals and flammable dust pose a fire and explosion risk. 
   * **Who?** Private security guards may be exposed to hazardous products from the client company’s operations during **surveillance activities and rounds**.
 
 

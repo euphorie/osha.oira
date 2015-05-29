@@ -23,7 +23,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 evaluation_method: priority
 images:
     - url: /media/private-security-eu/gebod_-_gehoorbescherming.png
-      caption:
+      caption: 
 
 solutions:
   solution_1:

@@ -47,7 +47,7 @@
                 <ol class="add-measure-menu">
                     <li tal:repeat="measure measures">
                         <a class="pat-inject close-panel"
-                        href="#standard-solution-1"
+                        href="#standard-solution-${repeat/measure/number}"
                         data-pat-inject="target: #fields-0" class="title">
                         <em class="small pat-button">Add</em>${measure/description}</a>
                     </li>
@@ -130,6 +130,7 @@
                 <li tal:repeat="solution measures">
                     <a class="pat-inject close-panel"
                        class="title"
+                       href="#standard-solution-${repeat/solution/number}"
                        data-pat-inject="target: #fields-#{1}">
                     <em class="small pat-button">Add</em>${solution/description}</a>
                 </li>
@@ -190,7 +191,7 @@
     </div>
 
     <tal:loop repeat="solution view/solutions">
-        <fieldset class="vertical" id="standard-solution-${repeat/measure/number}" hidden>
+        <fieldset class="vertical" id="standard-solution-${repeat/solution/number}" hidden>
             <label>Description
                 <textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">${solution/description}</textarea>
             </label>

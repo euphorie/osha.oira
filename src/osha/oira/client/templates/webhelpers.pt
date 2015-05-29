@@ -80,18 +80,27 @@
 
   <metal:survey define-macro="survey_tree_inner" meta:interpolation="true">
     <ol tal:condition="exists:tree" tal:attributes="class python:tree['leaf_module'] and 'navigation questions' or ''">
-      <li tal:repeat="item tree/children"
+      <tal:items repeat="item tree/children">
+      <li tal:condition="python: item['type']!='location'"
           title="${python:'%s. %s' % (item['number'], item['title']) if tree['leaf_module'] else None}"
-          class="${item/class}">
+          class="${python: '%s %s' % (item['class'], 'submodule' if item['type'] == 'module' and item['depth']>1 else '')}">
         <a tal:define="item_class item/class"
             href="${item/url}">
                 <strong class="number">${item/number}</strong> ${item/title}
-
         </a>
+
         <tal:subtree condition="python:item['children']" define="tree python:item">
           <metal:call use-macro="webhelpers/macros/survey_tree_inner" />
         </tal:subtree>
       </li>
+      <tal:location condition="python: item['type']=='location'">
+        <h4 class="location-tag"><strong class="number">${item/number}</strong> ${item/title}</h4>
+        <tal:subtree condition="python:item['children']" define="tree python:item">
+          <metal:call use-macro="webhelpers/macros/survey_tree_inner" />
+        </tal:subtree>
+      </tal:location>
+
+    </tal:items>
     </ol>
   </metal:survey>
 

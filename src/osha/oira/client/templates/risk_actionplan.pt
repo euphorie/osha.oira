@@ -13,6 +13,7 @@
 <body>
 <metal:slot fill-slot="content" tal:define="risk nocall:view/risk; data view/data">
 <tal:block replace="tile:statusmessages"/>
+<tal:def define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};">
 <form method="post" action="${context/absolute_url}">
 <article class="rich pat-well warning">
     <h2>${view/title}</h2>
@@ -32,7 +33,7 @@
     </div>
 </article>
 
-<tal:def define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};">
+
 
 <div class="measures pat-clone" data-pat-clone="template: #measure-template" id="ActionPlanItemForm">
     <div class="measure pat-collapsible" id="measure-1" tal:repeat="actionplan data/action_plans">
@@ -142,13 +143,13 @@
 		<fieldset class="vertical" id="fields-#{1}">
 			<label>Description
 				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
-				<textarea autofocus class=" actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea>
+				<textarea autofocus class=" actionPlan" name="measure.action_plan:utf8:ustring:records" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea>
 			</label>
 			<label>Prevention plan
-				<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea>
+				<textarea class="preventionPlan" name="measure.prevention_plan:utf8:ustring:records" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea>
 			</label>
 			<label>Requirements
-				<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3"></textarea>
+				<textarea class="requirements" name="measure.requirements:utf8:ustring:records" placeholder="Level of expertise and/or requirements needed" rows="3"></textarea>
 			</label>
 		</fieldset>
 
@@ -156,7 +157,7 @@
 			<label>
 				Who is responsible?
 				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</dfn>
-				<input class="responsible" name="responsible" type="text">
+				<input class="responsible" name="measure.responsible:utf8:ustring:records" type="text">
 			</label>
 			<label class="currency">
 				Budget
@@ -166,12 +167,14 @@
 				</span>
 			</label>
 			<label>
-				Planning start
-				<input type="date" />
+                <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
+                <input type="date" name="measure.planning_start:records"
+                        id="planning-start" />
 			</label>
 			<label>
-				Planning end
-				<input type="date" />
+                <tal:label i18n:translate="label_action_plan_end">Planning end</tal:label>
+                <input type="date" name="measure.planning_end:records"
+                        id="planning-end"/>
 			</label>
 		</fieldset>
 	</div>
@@ -189,22 +192,23 @@
         <button type="submit" name="next" value="next"
                 i18n:translate="label_save_and_continue" class="pat-button">Save and continue</button>
     </div>
+    </form>
 
     <tal:loop repeat="solution view/solutions">
         <fieldset class="vertical" id="standard-solution-${repeat/solution/number}" hidden>
             <label>Description
-                <textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">${solution/description}</textarea>
+                <textarea class="actionPlan" name="measure.action_plan:utf8:ustring:records" placeholder="General approach (to eliminate or reduce the risk)" rows="6">${solution/description}</textarea>
             </label>
             <label>Prevention plan
-                <textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3">${solution/action_plan}</textarea>
+                <textarea class="preventionPlan" name="measure.prevention_plan:utf8:ustring:records" placeholder="Specific action(s) required to implement this approach" rows="3">${solution/action_plan}</textarea>
             </label>
             <label>Requirements
-                <textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3">${solution/requirements}</textarea>
+                <textarea class="requirements" name="measure.requirements:utf8:ustring:records" placeholder="Level of expertise and/or requirements needed" rows="3">${solution/requirements}</textarea>
             </label>
         </fieldset>
     </tal:loop>
 </tal:def>
-</form>
+
 </metal:slot>
 </body>
 </html>

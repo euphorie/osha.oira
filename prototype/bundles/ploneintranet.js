@@ -21855,2348 +21855,3459 @@ define('pat-collapsible',[
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
 // vim: sw=4 expandtab
 ;
-// Spectrum Colorpicker v1.7.0
-// https://github.com/bgrins/spectrum
-// Author: Brian Grinstead
-// License: MIT
 
-(function (factory) {
-    "use strict";
+/*!
+ * pickadate.js v3.4.0, 2014/02/15
+ * By Amsul, http://amsul.ca
+ * Hosted on http://amsul.github.io/pickadate.js
+ * Licensed under MIT
+ */
 
-    if (typeof define === 'function' && define.amd) { // AMD
-        define('spectrum',['jquery'], factory);
-    }
-    else if (typeof exports == "object" && typeof module == "object") { // CommonJS
-        module.exports = factory;
-    }
-    else { // Browser
-        factory(jQuery);
-    }
-})(function($, undefined) {
-    "use strict";
+(function ( factory ) {
 
-    var defaultOpts = {
+    // Register as an anonymous module.
+    if ( typeof define === 'function' && define.amd )
+        define( 'picker', ['jquery'], factory )
 
-        // Callbacks
-        beforeShow: noop,
-        move: noop,
-        change: noop,
-        show: noop,
-        hide: noop,
+    // Or using browser globals.
+    else this.Picker = factory( jQuery )
 
-        // Options
-        color: false,
-        flat: false,
-        showInput: false,
-        allowEmpty: false,
-        showButtons: true,
-        clickoutFiresChange: true,
-        showInitial: false,
-        showPalette: false,
-        showPaletteOnly: false,
-        hideAfterPaletteSelect: false,
-        togglePaletteOnly: false,
-        showSelectionPalette: true,
-        localStorageKey: false,
-        appendTo: "body",
-        maxSelectionSize: 7,
-        cancelText: "cancel",
-        chooseText: "choose",
-        togglePaletteMoreText: "more",
-        togglePaletteLessText: "less",
-        clearText: "Clear Color Selection",
-        noColorSelectedText: "No Color Selected",
-        preferredFormat: false,
-        className: "", // Deprecated - use containerClassName and replacerClassName instead.
-        containerClassName: "",
-        replacerClassName: "",
-        showAlpha: false,
-        theme: "sp-light",
-        palette: [["#ffffff", "#000000", "#ff0000", "#ff8000", "#ffff00", "#008000", "#0000ff", "#4b0082", "#9400d3"]],
-        selectionPalette: [],
-        disabled: false,
-        offset: null
-    },
-    spectrums = [],
-    IE = !!/msie/i.exec( window.navigator.userAgent ),
-    rgbaSupport = (function() {
-        function contains( str, substr ) {
-            return !!~('' + str).indexOf(substr);
-        }
+}(function( $ ) {
 
-        var elem = document.createElement('div');
-        var style = elem.style;
-        style.cssText = 'background-color:rgba(0,0,0,.5)';
-        return contains(style.backgroundColor, 'rgba') || contains(style.backgroundColor, 'hsla');
-    })(),
-    replaceInput = [
-        "<div class='sp-replacer'>",
-            "<div class='sp-preview'><div class='sp-preview-inner'></div></div>",
-            "<div class='sp-dd'>&#9660;</div>",
-        "</div>"
-    ].join(''),
-    markup = (function () {
+var $document = $( document )
 
-        // IE does not support gradients with multiple stops, so we need to simulate
-        //  that for the rainbow slider with 8 divs that each have a single gradient
-        var gradientFix = "";
-        if (IE) {
-            for (var i = 1; i <= 6; i++) {
-                gradientFix += "<div class='sp-" + i + "'></div>";
-            }
-        }
-
-        return [
-            "<div class='sp-container sp-hidden'>",
-                "<div class='sp-palette-container'>",
-                    "<div class='sp-palette sp-thumb sp-cf'></div>",
-                    "<div class='sp-palette-button-container sp-cf'>",
-                        "<button type='button' class='sp-palette-toggle'></button>",
-                    "</div>",
-                "</div>",
-                "<div class='sp-picker-container'>",
-                    "<div class='sp-top sp-cf'>",
-                        "<div class='sp-fill'></div>",
-                        "<div class='sp-top-inner'>",
-                            "<div class='sp-color'>",
-                                "<div class='sp-sat'>",
-                                    "<div class='sp-val'>",
-                                        "<div class='sp-dragger'></div>",
-                                    "</div>",
-                                "</div>",
-                            "</div>",
-                            "<div class='sp-clear sp-clear-display'>",
-                            "</div>",
-                            "<div class='sp-hue'>",
-                                "<div class='sp-slider'></div>",
-                                gradientFix,
-                            "</div>",
-                        "</div>",
-                        "<div class='sp-alpha'><div class='sp-alpha-inner'><div class='sp-alpha-handle'></div></div></div>",
-                    "</div>",
-                    "<div class='sp-input-container sp-cf'>",
-                        "<input class='sp-input' type='text' spellcheck='false'  />",
-                    "</div>",
-                    "<div class='sp-initial sp-thumb sp-cf'></div>",
-                    "<div class='sp-button-container sp-cf'>",
-                        "<a class='sp-cancel' href='#'></a>",
-                        "<button type='button' class='sp-choose'></button>",
-                    "</div>",
-                "</div>",
-            "</div>"
-        ].join("");
-    })();
-
-    function paletteTemplate (p, color, className, opts) {
-        var html = [];
-        for (var i = 0; i < p.length; i++) {
-            var current = p[i];
-            if(current) {
-                var tiny = tinycolor(current);
-                var c = tiny.toHsl().l < 0.5 ? "sp-thumb-el sp-thumb-dark" : "sp-thumb-el sp-thumb-light";
-                c += (tinycolor.equals(color, current)) ? " sp-thumb-active" : "";
-                var formattedString = tiny.toString(opts.preferredFormat || "rgb");
-                var swatchStyle = rgbaSupport ? ("background-color:" + tiny.toRgbString()) : "filter:" + tiny.toFilter();
-                html.push('<span title="' + formattedString + '" data-color="' + tiny.toRgbString() + '" class="' + c + '"><span class="sp-thumb-inner" style="' + swatchStyle + ';" /></span>');
-            } else {
-                var cls = 'sp-clear-display';
-                html.push($('<div />')
-                    .append($('<span data-color="" style="background-color:transparent;" class="' + cls + '"></span>')
-                        .attr('title', opts.noColorSelectedText)
-                    )
-                    .html()
-                );
-            }
-        }
-        return "<div class='sp-cf " + className + "'>" + html.join('') + "</div>";
-    }
-
-    function hideAll() {
-        for (var i = 0; i < spectrums.length; i++) {
-            if (spectrums[i]) {
-                spectrums[i].hide();
-            }
-        }
-    }
-
-    function instanceOptions(o, callbackContext) {
-        var opts = $.extend({}, defaultOpts, o);
-        opts.callbacks = {
-            'move': bind(opts.move, callbackContext),
-            'change': bind(opts.change, callbackContext),
-            'show': bind(opts.show, callbackContext),
-            'hide': bind(opts.hide, callbackContext),
-            'beforeShow': bind(opts.beforeShow, callbackContext)
-        };
-
-        return opts;
-    }
-
-    function spectrum(element, o) {
-
-        var opts = instanceOptions(o, element),
-            flat = opts.flat,
-            showSelectionPalette = opts.showSelectionPalette,
-            localStorageKey = opts.localStorageKey,
-            theme = opts.theme,
-            callbacks = opts.callbacks,
-            resize = throttle(reflow, 10),
-            visible = false,
-            isDragging = false,
-            dragWidth = 0,
-            dragHeight = 0,
-            dragHelperHeight = 0,
-            slideHeight = 0,
-            slideWidth = 0,
-            alphaWidth = 0,
-            alphaSlideHelperWidth = 0,
-            slideHelperHeight = 0,
-            currentHue = 0,
-            currentSaturation = 0,
-            currentValue = 0,
-            currentAlpha = 1,
-            palette = [],
-            paletteArray = [],
-            paletteLookup = {},
-            selectionPalette = opts.selectionPalette.slice(0),
-            maxSelectionSize = opts.maxSelectionSize,
-            draggingClass = "sp-dragging",
-            shiftMovementDirection = null;
-
-        var doc = element.ownerDocument,
-            body = doc.body,
-            boundElement = $(element),
-            disabled = false,
-            container = $(markup, doc).addClass(theme),
-            pickerContainer = container.find(".sp-picker-container"),
-            dragger = container.find(".sp-color"),
-            dragHelper = container.find(".sp-dragger"),
-            slider = container.find(".sp-hue"),
-            slideHelper = container.find(".sp-slider"),
-            alphaSliderInner = container.find(".sp-alpha-inner"),
-            alphaSlider = container.find(".sp-alpha"),
-            alphaSlideHelper = container.find(".sp-alpha-handle"),
-            textInput = container.find(".sp-input"),
-            paletteContainer = container.find(".sp-palette"),
-            initialColorContainer = container.find(".sp-initial"),
-            cancelButton = container.find(".sp-cancel"),
-            clearButton = container.find(".sp-clear"),
-            chooseButton = container.find(".sp-choose"),
-            toggleButton = container.find(".sp-palette-toggle"),
-            isInput = boundElement.is("input"),
-            isInputTypeColor = isInput && boundElement.attr("type") === "color" && inputTypeColorSupport(),
-            shouldReplace = isInput && !flat,
-            replacer = (shouldReplace) ? $(replaceInput).addClass(theme).addClass(opts.className).addClass(opts.replacerClassName) : $([]),
-            offsetElement = (shouldReplace) ? replacer : boundElement,
-            previewElement = replacer.find(".sp-preview-inner"),
-            initialColor = opts.color || (isInput && boundElement.val()),
-            colorOnShow = false,
-            preferredFormat = opts.preferredFormat,
-            currentPreferredFormat = preferredFormat,
-            clickoutFiresChange = !opts.showButtons || opts.clickoutFiresChange,
-            isEmpty = !initialColor,
-            allowEmpty = opts.allowEmpty && !isInputTypeColor;
-
-        function applyOptions() {
-
-            if (opts.showPaletteOnly) {
-                opts.showPalette = true;
-            }
-
-            toggleButton.text(opts.showPaletteOnly ? opts.togglePaletteMoreText : opts.togglePaletteLessText);
-
-            if (opts.palette) {
-                palette = opts.palette.slice(0);
-                paletteArray = $.isArray(palette[0]) ? palette : [palette];
-                paletteLookup = {};
-                for (var i = 0; i < paletteArray.length; i++) {
-                    for (var j = 0; j < paletteArray[i].length; j++) {
-                        var rgb = tinycolor(paletteArray[i][j]).toRgbString();
-                        paletteLookup[rgb] = true;
-                    }
-                }
-            }
-
-            container.toggleClass("sp-flat", flat);
-            container.toggleClass("sp-input-disabled", !opts.showInput);
-            container.toggleClass("sp-alpha-enabled", opts.showAlpha);
-            container.toggleClass("sp-clear-enabled", allowEmpty);
-            container.toggleClass("sp-buttons-disabled", !opts.showButtons);
-            container.toggleClass("sp-palette-buttons-disabled", !opts.togglePaletteOnly);
-            container.toggleClass("sp-palette-disabled", !opts.showPalette);
-            container.toggleClass("sp-palette-only", opts.showPaletteOnly);
-            container.toggleClass("sp-initial-disabled", !opts.showInitial);
-            container.addClass(opts.className).addClass(opts.containerClassName);
-
-            reflow();
-        }
-
-        function initialize() {
-
-            if (IE) {
-                container.find("*:not(input)").attr("unselectable", "on");
-            }
-
-            applyOptions();
-
-            if (shouldReplace) {
-                boundElement.after(replacer).hide();
-            }
-
-            if (!allowEmpty) {
-                clearButton.hide();
-            }
-
-            if (flat) {
-                boundElement.after(container).hide();
-            }
-            else {
-
-                var appendTo = opts.appendTo === "parent" ? boundElement.parent() : $(opts.appendTo);
-                if (appendTo.length !== 1) {
-                    appendTo = $("body");
-                }
-
-                appendTo.append(container);
-            }
-
-            updateSelectionPaletteFromStorage();
-
-            offsetElement.bind("click.spectrum touchstart.spectrum", function (e) {
-                if (!disabled) {
-                    toggle();
-                }
-
-                e.stopPropagation();
-
-                if (!$(e.target).is("input")) {
-                    e.preventDefault();
-                }
-            });
-
-            if(boundElement.is(":disabled") || (opts.disabled === true)) {
-                disable();
-            }
-
-            // Prevent clicks from bubbling up to document.  This would cause it to be hidden.
-            container.click(stopPropagation);
-
-            // Handle user typed input
-            textInput.change(setFromTextInput);
-            textInput.bind("paste", function () {
-                setTimeout(setFromTextInput, 1);
-            });
-            textInput.keydown(function (e) { if (e.keyCode == 13) { setFromTextInput(); } });
-
-            cancelButton.text(opts.cancelText);
-            cancelButton.bind("click.spectrum", function (e) {
-                e.stopPropagation();
-                e.preventDefault();
-                revert();
-                hide();
-            });
-
-            clearButton.attr("title", opts.clearText);
-            clearButton.bind("click.spectrum", function (e) {
-                e.stopPropagation();
-                e.preventDefault();
-                isEmpty = true;
-                move();
-
-                if(flat) {
-                    //for the flat style, this is a change event
-                    updateOriginalInput(true);
-                }
-            });
-
-            chooseButton.text(opts.chooseText);
-            chooseButton.bind("click.spectrum", function (e) {
-                e.stopPropagation();
-                e.preventDefault();
-
-                if (IE && textInput.is(":focus")) {
-                    textInput.trigger('change');
-                }
-
-                if (isValid()) {
-                    updateOriginalInput(true);
-                    hide();
-                }
-            });
-
-            toggleButton.text(opts.showPaletteOnly ? opts.togglePaletteMoreText : opts.togglePaletteLessText);
-            toggleButton.bind("click.spectrum", function (e) {
-                e.stopPropagation();
-                e.preventDefault();
-
-                opts.showPaletteOnly = !opts.showPaletteOnly;
-
-                // To make sure the Picker area is drawn on the right, next to the
-                // Palette area (and not below the palette), first move the Palette
-                // to the left to make space for the picker, plus 5px extra.
-                // The 'applyOptions' function puts the whole container back into place
-                // and takes care of the button-text and the sp-palette-only CSS class.
-                if (!opts.showPaletteOnly && !flat) {
-                    container.css('left', '-=' + (pickerContainer.outerWidth(true) + 5));
-                }
-                applyOptions();
-            });
-
-            draggable(alphaSlider, function (dragX, dragY, e) {
-                currentAlpha = (dragX / alphaWidth);
-                isEmpty = false;
-                if (e.shiftKey) {
-                    currentAlpha = Math.round(currentAlpha * 10) / 10;
-                }
-
-                move();
-            }, dragStart, dragStop);
-
-            draggable(slider, function (dragX, dragY) {
-                currentHue = parseFloat(dragY / slideHeight);
-                isEmpty = false;
-                if (!opts.showAlpha) {
-                    currentAlpha = 1;
-                }
-                move();
-            }, dragStart, dragStop);
-
-            draggable(dragger, function (dragX, dragY, e) {
-
-                // shift+drag should snap the movement to either the x or y axis.
-                if (!e.shiftKey) {
-                    shiftMovementDirection = null;
-                }
-                else if (!shiftMovementDirection) {
-                    var oldDragX = currentSaturation * dragWidth;
-                    var oldDragY = dragHeight - (currentValue * dragHeight);
-                    var furtherFromX = Math.abs(dragX - oldDragX) > Math.abs(dragY - oldDragY);
-
-                    shiftMovementDirection = furtherFromX ? "x" : "y";
-                }
-
-                var setSaturation = !shiftMovementDirection || shiftMovementDirection === "x";
-                var setValue = !shiftMovementDirection || shiftMovementDirection === "y";
-
-                if (setSaturation) {
-                    currentSaturation = parseFloat(dragX / dragWidth);
-                }
-                if (setValue) {
-                    currentValue = parseFloat((dragHeight - dragY) / dragHeight);
-                }
-
-                isEmpty = false;
-                if (!opts.showAlpha) {
-                    currentAlpha = 1;
-                }
-
-                move();
-
-            }, dragStart, dragStop);
-
-            if (!!initialColor) {
-                set(initialColor);
-
-                // In case color was black - update the preview UI and set the format
-                // since the set function will not run (default color is black).
-                updateUI();
-                currentPreferredFormat = preferredFormat || tinycolor(initialColor).format;
-
-                addColorToSelectionPalette(initialColor);
-            }
-            else {
-                updateUI();
-            }
-
-            if (flat) {
-                show();
-            }
-
-            function paletteElementClick(e) {
-                if (e.data && e.data.ignore) {
-                    set($(e.target).closest(".sp-thumb-el").data("color"));
-                    move();
-                }
-                else {
-                    set($(e.target).closest(".sp-thumb-el").data("color"));
-                    move();
-                    updateOriginalInput(true);
-                    if (opts.hideAfterPaletteSelect) {
-                      hide();
-                    }
-                }
-
-                return false;
-            }
-
-            var paletteEvent = IE ? "mousedown.spectrum" : "click.spectrum touchstart.spectrum";
-            paletteContainer.delegate(".sp-thumb-el", paletteEvent, paletteElementClick);
-            initialColorContainer.delegate(".sp-thumb-el:nth-child(1)", paletteEvent, { ignore: true }, paletteElementClick);
-        }
-
-        function updateSelectionPaletteFromStorage() {
-
-            if (localStorageKey && window.localStorage) {
-
-                // Migrate old palettes over to new format.  May want to remove this eventually.
-                try {
-                    var oldPalette = window.localStorage[localStorageKey].split(",#");
-                    if (oldPalette.length > 1) {
-                        delete window.localStorage[localStorageKey];
-                        $.each(oldPalette, function(i, c) {
-                             addColorToSelectionPalette(c);
-                        });
-                    }
-                }
-                catch(e) { }
-
-                try {
-                    selectionPalette = window.localStorage[localStorageKey].split(";");
-                }
-                catch (e) { }
-            }
-        }
-
-        function addColorToSelectionPalette(color) {
-            if (showSelectionPalette) {
-                var rgb = tinycolor(color).toRgbString();
-                if (!paletteLookup[rgb] && $.inArray(rgb, selectionPalette) === -1) {
-                    selectionPalette.push(rgb);
-                    while(selectionPalette.length > maxSelectionSize) {
-                        selectionPalette.shift();
-                    }
-                }
-
-                if (localStorageKey && window.localStorage) {
-                    try {
-                        window.localStorage[localStorageKey] = selectionPalette.join(";");
-                    }
-                    catch(e) { }
-                }
-            }
-        }
-
-        function getUniqueSelectionPalette() {
-            var unique = [];
-            if (opts.showPalette) {
-                for (var i = 0; i < selectionPalette.length; i++) {
-                    var rgb = tinycolor(selectionPalette[i]).toRgbString();
-
-                    if (!paletteLookup[rgb]) {
-                        unique.push(selectionPalette[i]);
-                    }
-                }
-            }
-
-            return unique.reverse().slice(0, opts.maxSelectionSize);
-        }
-
-        function drawPalette() {
-
-            var currentColor = get();
-
-            var html = $.map(paletteArray, function (palette, i) {
-                return paletteTemplate(palette, currentColor, "sp-palette-row sp-palette-row-" + i, opts);
-            });
-
-            updateSelectionPaletteFromStorage();
-
-            if (selectionPalette) {
-                html.push(paletteTemplate(getUniqueSelectionPalette(), currentColor, "sp-palette-row sp-palette-row-selection", opts));
-            }
-
-            paletteContainer.html(html.join(""));
-        }
-
-        function drawInitial() {
-            if (opts.showInitial) {
-                var initial = colorOnShow;
-                var current = get();
-                initialColorContainer.html(paletteTemplate([initial, current], current, "sp-palette-row-initial", opts));
-            }
-        }
-
-        function dragStart() {
-            if (dragHeight <= 0 || dragWidth <= 0 || slideHeight <= 0) {
-                reflow();
-            }
-            isDragging = true;
-            container.addClass(draggingClass);
-            shiftMovementDirection = null;
-            boundElement.trigger('dragstart.spectrum', [ get() ]);
-        }
-
-        function dragStop() {
-            isDragging = false;
-            container.removeClass(draggingClass);
-            boundElement.trigger('dragstop.spectrum', [ get() ]);
-        }
-
-        function setFromTextInput() {
-
-            var value = textInput.val();
-
-            if ((value === null || value === "") && allowEmpty) {
-                set(null);
-                updateOriginalInput(true);
-            }
-            else {
-                var tiny = tinycolor(value);
-                if (tiny.isValid()) {
-                    set(tiny);
-                    updateOriginalInput(true);
-                }
-                else {
-                    textInput.addClass("sp-validation-error");
-                }
-            }
-        }
-
-        function toggle() {
-            if (visible) {
-                hide();
-            }
-            else {
-                show();
-            }
-        }
-
-        function show() {
-            var event = $.Event('beforeShow.spectrum');
-
-            if (visible) {
-                reflow();
-                return;
-            }
-
-            boundElement.trigger(event, [ get() ]);
-
-            if (callbacks.beforeShow(get()) === false || event.isDefaultPrevented()) {
-                return;
-            }
-
-            hideAll();
-            visible = true;
-
-            $(doc).bind("keydown.spectrum", onkeydown);
-            $(doc).bind("click.spectrum", clickout);
-            $(window).bind("resize.spectrum", resize);
-            replacer.addClass("sp-active");
-            container.removeClass("sp-hidden");
-
-            reflow();
-            updateUI();
-
-            colorOnShow = get();
-
-            drawInitial();
-            callbacks.show(colorOnShow);
-            boundElement.trigger('show.spectrum', [ colorOnShow ]);
-        }
-
-        function onkeydown(e) {
-            // Close on ESC
-            if (e.keyCode === 27) {
-                hide();
-            }
-        }
-
-        function clickout(e) {
-            // Return on right click.
-            if (e.button == 2) { return; }
-
-            // If a drag event was happening during the mouseup, don't hide
-            // on click.
-            if (isDragging) { return; }
-
-            if (clickoutFiresChange) {
-                updateOriginalInput(true);
-            }
-            else {
-                revert();
-            }
-            hide();
-        }
-
-        function hide() {
-            // Return if hiding is unnecessary
-            if (!visible || flat) { return; }
-            visible = false;
-
-            $(doc).unbind("keydown.spectrum", onkeydown);
-            $(doc).unbind("click.spectrum", clickout);
-            $(window).unbind("resize.spectrum", resize);
-
-            replacer.removeClass("sp-active");
-            container.addClass("sp-hidden");
-
-            callbacks.hide(get());
-            boundElement.trigger('hide.spectrum', [ get() ]);
-        }
-
-        function revert() {
-            set(colorOnShow, true);
-        }
-
-        function set(color, ignoreFormatChange) {
-            if (tinycolor.equals(color, get())) {
-                // Update UI just in case a validation error needs
-                // to be cleared.
-                updateUI();
-                return;
-            }
-
-            var newColor, newHsv;
-            if (!color && allowEmpty) {
-                isEmpty = true;
-            } else {
-                isEmpty = false;
-                newColor = tinycolor(color);
-                newHsv = newColor.toHsv();
-
-                currentHue = (newHsv.h % 360) / 360;
-                currentSaturation = newHsv.s;
-                currentValue = newHsv.v;
-                currentAlpha = newHsv.a;
-            }
-            updateUI();
-
-            if (newColor && newColor.isValid() && !ignoreFormatChange) {
-                currentPreferredFormat = preferredFormat || newColor.getFormat();
-            }
-        }
-
-        function get(opts) {
-            opts = opts || { };
-
-            if (allowEmpty && isEmpty) {
-                return null;
-            }
-
-            return tinycolor.fromRatio({
-                h: currentHue,
-                s: currentSaturation,
-                v: currentValue,
-                a: Math.round(currentAlpha * 100) / 100
-            }, { format: opts.format || currentPreferredFormat });
-        }
-
-        function isValid() {
-            return !textInput.hasClass("sp-validation-error");
-        }
-
-        function move() {
-            updateUI();
-
-            callbacks.move(get());
-            boundElement.trigger('move.spectrum', [ get() ]);
-        }
-
-        function updateUI() {
-
-            textInput.removeClass("sp-validation-error");
-
-            updateHelperLocations();
-
-            // Update dragger background color (gradients take care of saturation and value).
-            var flatColor = tinycolor.fromRatio({ h: currentHue, s: 1, v: 1 });
-            dragger.css("background-color", flatColor.toHexString());
-
-            // Get a format that alpha will be included in (hex and names ignore alpha)
-            var format = currentPreferredFormat;
-            if (currentAlpha < 1 && !(currentAlpha === 0 && format === "name")) {
-                if (format === "hex" || format === "hex3" || format === "hex6" || format === "name") {
-                    format = "rgb";
-                }
-            }
-
-            var realColor = get({ format: format }),
-                displayColor = '';
-
-             //reset background info for preview element
-            previewElement.removeClass("sp-clear-display");
-            previewElement.css('background-color', 'transparent');
-
-            if (!realColor && allowEmpty) {
-                // Update the replaced elements background with icon indicating no color selection
-                previewElement.addClass("sp-clear-display");
-            }
-            else {
-                var realHex = realColor.toHexString(),
-                    realRgb = realColor.toRgbString();
-
-                // Update the replaced elements background color (with actual selected color)
-                if (rgbaSupport || realColor.alpha === 1) {
-                    previewElement.css("background-color", realRgb);
-                }
-                else {
-                    previewElement.css("background-color", "transparent");
-                    previewElement.css("filter", realColor.toFilter());
-                }
-
-                if (opts.showAlpha) {
-                    var rgb = realColor.toRgb();
-                    rgb.a = 0;
-                    var realAlpha = tinycolor(rgb).toRgbString();
-                    var gradient = "linear-gradient(left, " + realAlpha + ", " + realHex + ")";
-
-                    if (IE) {
-                        alphaSliderInner.css("filter", tinycolor(realAlpha).toFilter({ gradientType: 1 }, realHex));
-                    }
-                    else {
-                        alphaSliderInner.css("background", "-webkit-" + gradient);
-                        alphaSliderInner.css("background", "-moz-" + gradient);
-                        alphaSliderInner.css("background", "-ms-" + gradient);
-                        // Use current syntax gradient on unprefixed property.
-                        alphaSliderInner.css("background",
-                            "linear-gradient(to right, " + realAlpha + ", " + realHex + ")");
-                    }
-                }
-
-                displayColor = realColor.toString(format);
-            }
-
-            // Update the text entry input as it changes happen
-            if (opts.showInput) {
-                textInput.val(displayColor);
-            }
-
-            if (opts.showPalette) {
-                drawPalette();
-            }
-
-            drawInitial();
-        }
-
-        function updateHelperLocations() {
-            var s = currentSaturation;
-            var v = currentValue;
-
-            if(allowEmpty && isEmpty) {
-                //if selected color is empty, hide the helpers
-                alphaSlideHelper.hide();
-                slideHelper.hide();
-                dragHelper.hide();
-            }
-            else {
-                //make sure helpers are visible
-                alphaSlideHelper.show();
-                slideHelper.show();
-                dragHelper.show();
-
-                // Where to show the little circle in that displays your current selected color
-                var dragX = s * dragWidth;
-                var dragY = dragHeight - (v * dragHeight);
-                dragX = Math.max(
-                    -dragHelperHeight,
-                    Math.min(dragWidth - dragHelperHeight, dragX - dragHelperHeight)
-                );
-                dragY = Math.max(
-                    -dragHelperHeight,
-                    Math.min(dragHeight - dragHelperHeight, dragY - dragHelperHeight)
-                );
-                dragHelper.css({
-                    "top": dragY + "px",
-                    "left": dragX + "px"
-                });
-
-                var alphaX = currentAlpha * alphaWidth;
-                alphaSlideHelper.css({
-                    "left": (alphaX - (alphaSlideHelperWidth / 2)) + "px"
-                });
-
-                // Where to show the bar that displays your current selected hue
-                var slideY = (currentHue) * slideHeight;
-                slideHelper.css({
-                    "top": (slideY - slideHelperHeight) + "px"
-                });
-            }
-        }
-
-        function updateOriginalInput(fireCallback) {
-            var color = get(),
-                displayColor = '',
-                hasChanged = !tinycolor.equals(color, colorOnShow);
-
-            if (color) {
-                displayColor = color.toString(currentPreferredFormat);
-                // Update the selection palette with the current color
-                addColorToSelectionPalette(color);
-            }
-
-            if (isInput) {
-                boundElement.val(displayColor);
-            }
-
-            if (fireCallback && hasChanged) {
-                callbacks.change(color);
-                boundElement.trigger('change', [ color ]);
-            }
-        }
-
-        function reflow() {
-            dragWidth = dragger.width();
-            dragHeight = dragger.height();
-            dragHelperHeight = dragHelper.height();
-            slideWidth = slider.width();
-            slideHeight = slider.height();
-            slideHelperHeight = slideHelper.height();
-            alphaWidth = alphaSlider.width();
-            alphaSlideHelperWidth = alphaSlideHelper.width();
-
-            if (!flat) {
-                container.css("position", "absolute");
-                if (opts.offset) {
-                    container.offset(opts.offset);
-                } else {
-                    container.offset(getOffset(container, offsetElement));
-                }
-            }
-
-            updateHelperLocations();
-
-            if (opts.showPalette) {
-                drawPalette();
-            }
-
-            boundElement.trigger('reflow.spectrum');
-        }
-
-        function destroy() {
-            boundElement.show();
-            offsetElement.unbind("click.spectrum touchstart.spectrum");
-            container.remove();
-            replacer.remove();
-            spectrums[spect.id] = null;
-        }
-
-        function option(optionName, optionValue) {
-            if (optionName === undefined) {
-                return $.extend({}, opts);
-            }
-            if (optionValue === undefined) {
-                return opts[optionName];
-            }
-
-            opts[optionName] = optionValue;
-            applyOptions();
-        }
-
-        function enable() {
-            disabled = false;
-            boundElement.attr("disabled", false);
-            offsetElement.removeClass("sp-disabled");
-        }
-
-        function disable() {
-            hide();
-            disabled = true;
-            boundElement.attr("disabled", true);
-            offsetElement.addClass("sp-disabled");
-        }
-
-        function setOffset(coord) {
-            opts.offset = coord;
-            reflow();
-        }
-
-        initialize();
-
-        var spect = {
-            show: show,
-            hide: hide,
-            toggle: toggle,
-            reflow: reflow,
-            option: option,
-            enable: enable,
-            disable: disable,
-            offset: setOffset,
-            set: function (c) {
-                set(c);
-                updateOriginalInput();
-            },
-            get: get,
-            destroy: destroy,
-            container: container
-        };
-
-        spect.id = spectrums.push(spect) - 1;
-
-        return spect;
-    }
-
-    /**
-    * checkOffset - get the offset below/above and left/right element depending on screen position
-    * Thanks https://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.datepicker.js
-    */
-    function getOffset(picker, input) {
-        var extraY = 0;
-        var dpWidth = picker.outerWidth();
-        var dpHeight = picker.outerHeight();
-        var inputHeight = input.outerHeight();
-        var doc = picker[0].ownerDocument;
-        var docElem = doc.documentElement;
-        var viewWidth = docElem.clientWidth + $(doc).scrollLeft();
-        var viewHeight = docElem.clientHeight + $(doc).scrollTop();
-        var offset = input.offset();
-        offset.top += inputHeight;
-
-        offset.left -=
-            Math.min(offset.left, (offset.left + dpWidth > viewWidth && viewWidth > dpWidth) ?
-            Math.abs(offset.left + dpWidth - viewWidth) : 0);
-
-        offset.top -=
-            Math.min(offset.top, ((offset.top + dpHeight > viewHeight && viewHeight > dpHeight) ?
-            Math.abs(dpHeight + inputHeight - extraY) : extraY));
-
-        return offset;
-    }
-
-    /**
-    * noop - do nothing
-    */
-    function noop() {
-
-    }
-
-    /**
-    * stopPropagation - makes the code only doing this a little easier to read in line
-    */
-    function stopPropagation(e) {
-        e.stopPropagation();
-    }
-
-    /**
-    * Create a function bound to a given object
-    * Thanks to underscore.js
-    */
-    function bind(func, obj) {
-        var slice = Array.prototype.slice;
-        var args = slice.call(arguments, 2);
-        return function () {
-            return func.apply(obj, args.concat(slice.call(arguments)));
-        };
-    }
-
-    /**
-    * Lightweight drag helper.  Handles containment within the element, so that
-    * when dragging, the x is within [0,element.width] and y is within [0,element.height]
-    */
-    function draggable(element, onmove, onstart, onstop) {
-        onmove = onmove || function () { };
-        onstart = onstart || function () { };
-        onstop = onstop || function () { };
-        var doc = document;
-        var dragging = false;
-        var offset = {};
-        var maxHeight = 0;
-        var maxWidth = 0;
-        var hasTouch = ('ontouchstart' in window);
-
-        var duringDragEvents = {};
-        duringDragEvents["selectstart"] = prevent;
-        duringDragEvents["dragstart"] = prevent;
-        duringDragEvents["touchmove mousemove"] = move;
-        duringDragEvents["touchend mouseup"] = stop;
-
-        function prevent(e) {
-            if (e.stopPropagation) {
-                e.stopPropagation();
-            }
-            if (e.preventDefault) {
-                e.preventDefault();
-            }
-            e.returnValue = false;
-        }
-
-        function move(e) {
-            if (dragging) {
-                // Mouseup happened outside of window
-                if (IE && doc.documentMode < 9 && !e.button) {
-                    return stop();
-                }
-
-                var t0 = e.originalEvent && e.originalEvent.touches && e.originalEvent.touches[0];
-                var pageX = t0 && t0.pageX || e.pageX;
-                var pageY = t0 && t0.pageY || e.pageY;
-
-                var dragX = Math.max(0, Math.min(pageX - offset.left, maxWidth));
-                var dragY = Math.max(0, Math.min(pageY - offset.top, maxHeight));
-
-                if (hasTouch) {
-                    // Stop scrolling in iOS
-                    prevent(e);
-                }
-
-                onmove.apply(element, [dragX, dragY, e]);
-            }
-        }
-
-        function start(e) {
-            var rightclick = (e.which) ? (e.which == 3) : (e.button == 2);
-
-            if (!rightclick && !dragging) {
-                if (onstart.apply(element, arguments) !== false) {
-                    dragging = true;
-                    maxHeight = $(element).height();
-                    maxWidth = $(element).width();
-                    offset = $(element).offset();
-
-                    $(doc).bind(duringDragEvents);
-                    $(doc.body).addClass("sp-dragging");
-
-                    move(e);
-
-                    prevent(e);
-                }
-            }
-        }
-
-        function stop() {
-            if (dragging) {
-                $(doc).unbind(duringDragEvents);
-                $(doc.body).removeClass("sp-dragging");
-
-                // Wait a tick before notifying observers to allow the click event
-                // to fire in Chrome.
-                setTimeout(function() {
-                    onstop.apply(element, arguments);
-                }, 0);
-            }
-            dragging = false;
-        }
-
-        $(element).bind("touchstart mousedown", start);
-    }
-
-    function throttle(func, wait, debounce) {
-        var timeout;
-        return function () {
-            var context = this, args = arguments;
-            var throttler = function () {
-                timeout = null;
-                func.apply(context, args);
-            };
-            if (debounce) clearTimeout(timeout);
-            if (debounce || !timeout) timeout = setTimeout(throttler, wait);
-        };
-    }
-
-    function inputTypeColorSupport() {
-        return $.fn.spectrum.inputTypeColorSupport();
-    }
-
-    /**
-    * Define a jQuery plugin
-    */
-    var dataID = "spectrum.id";
-    $.fn.spectrum = function (opts, extra) {
-
-        if (typeof opts == "string") {
-
-            var returnValue = this;
-            var args = Array.prototype.slice.call( arguments, 1 );
-
-            this.each(function () {
-                var spect = spectrums[$(this).data(dataID)];
-                if (spect) {
-                    var method = spect[opts];
-                    if (!method) {
-                        throw new Error( "Spectrum: no such method: '" + opts + "'" );
-                    }
-
-                    if (opts == "get") {
-                        returnValue = spect.get();
-                    }
-                    else if (opts == "container") {
-                        returnValue = spect.container;
-                    }
-                    else if (opts == "option") {
-                        returnValue = spect.option.apply(spect, args);
-                    }
-                    else if (opts == "destroy") {
-                        spect.destroy();
-                        $(this).removeData(dataID);
-                    }
-                    else {
-                        method.apply(spect, args);
-                    }
-                }
-            });
-
-            return returnValue;
-        }
-
-        // Initializing a new instance of spectrum
-        return this.spectrum("destroy").each(function () {
-            var options = $.extend({}, opts, $(this).data());
-            var spect = spectrum(this, options);
-            $(this).data(dataID, spect.id);
-        });
-    };
-
-    $.fn.spectrum.load = true;
-    $.fn.spectrum.loadOpts = {};
-    $.fn.spectrum.draggable = draggable;
-    $.fn.spectrum.defaults = defaultOpts;
-    $.fn.spectrum.inputTypeColorSupport = function inputTypeColorSupport() {
-        if (typeof inputTypeColorSupport._cachedResult === "undefined") {
-            var colorInput = $("<input type='color' value='!' />")[0];
-            inputTypeColorSupport._cachedResult = colorInput.type === "color" && colorInput.value !== "!";
-        }
-        return inputTypeColorSupport._cachedResult;
-    };
-
-    $.spectrum = { };
-    $.spectrum.localization = { };
-    $.spectrum.palettes = { };
-
-    $.fn.spectrum.processNativeColorInputs = function () {
-        var colorInputs = $("input[type=color]");
-        if (colorInputs.length && !inputTypeColorSupport()) {
-            colorInputs.spectrum({
-                preferredFormat: "hex6"
-            });
-        }
-    };
-
-    // TinyColor v1.1.2
-    // https://github.com/bgrins/TinyColor
-    // Brian Grinstead, MIT License
-
-    (function() {
-
-    var trimLeft = /^[\s,#]+/,
-        trimRight = /\s+$/,
-        tinyCounter = 0,
-        math = Math,
-        mathRound = math.round,
-        mathMin = math.min,
-        mathMax = math.max,
-        mathRandom = math.random;
-
-    var tinycolor = function(color, opts) {
-
-        color = (color) ? color : '';
-        opts = opts || { };
-
-        // If input is already a tinycolor, return itself
-        if (color instanceof tinycolor) {
-           return color;
-        }
-        // If we are called as a function, call using new instead
-        if (!(this instanceof tinycolor)) {
-            return new tinycolor(color, opts);
-        }
-
-        var rgb = inputToRGB(color);
-        this._originalInput = color,
-        this._r = rgb.r,
-        this._g = rgb.g,
-        this._b = rgb.b,
-        this._a = rgb.a,
-        this._roundA = mathRound(100*this._a) / 100,
-        this._format = opts.format || rgb.format;
-        this._gradientType = opts.gradientType;
-
-        // Don't let the range of [0,255] come back in [0,1].
-        // Potentially lose a little bit of precision here, but will fix issues where
-        // .5 gets interpreted as half of the total, instead of half of 1
-        // If it was supposed to be 128, this was already taken care of by `inputToRgb`
-        if (this._r < 1) { this._r = mathRound(this._r); }
-        if (this._g < 1) { this._g = mathRound(this._g); }
-        if (this._b < 1) { this._b = mathRound(this._b); }
-
-        this._ok = rgb.ok;
-        this._tc_id = tinyCounter++;
-    };
-
-    tinycolor.prototype = {
-        isDark: function() {
-            return this.getBrightness() < 128;
-        },
-        isLight: function() {
-            return !this.isDark();
-        },
-        isValid: function() {
-            return this._ok;
-        },
-        getOriginalInput: function() {
-          return this._originalInput;
-        },
-        getFormat: function() {
-            return this._format;
-        },
-        getAlpha: function() {
-            return this._a;
-        },
-        getBrightness: function() {
-            var rgb = this.toRgb();
-            return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
-        },
-        setAlpha: function(value) {
-            this._a = boundAlpha(value);
-            this._roundA = mathRound(100*this._a) / 100;
-            return this;
-        },
-        toHsv: function() {
-            var hsv = rgbToHsv(this._r, this._g, this._b);
-            return { h: hsv.h * 360, s: hsv.s, v: hsv.v, a: this._a };
-        },
-        toHsvString: function() {
-            var hsv = rgbToHsv(this._r, this._g, this._b);
-            var h = mathRound(hsv.h * 360), s = mathRound(hsv.s * 100), v = mathRound(hsv.v * 100);
-            return (this._a == 1) ?
-              "hsv("  + h + ", " + s + "%, " + v + "%)" :
-              "hsva(" + h + ", " + s + "%, " + v + "%, "+ this._roundA + ")";
-        },
-        toHsl: function() {
-            var hsl = rgbToHsl(this._r, this._g, this._b);
-            return { h: hsl.h * 360, s: hsl.s, l: hsl.l, a: this._a };
-        },
-        toHslString: function() {
-            var hsl = rgbToHsl(this._r, this._g, this._b);
-            var h = mathRound(hsl.h * 360), s = mathRound(hsl.s * 100), l = mathRound(hsl.l * 100);
-            return (this._a == 1) ?
-              "hsl("  + h + ", " + s + "%, " + l + "%)" :
-              "hsla(" + h + ", " + s + "%, " + l + "%, "+ this._roundA + ")";
-        },
-        toHex: function(allow3Char) {
-            return rgbToHex(this._r, this._g, this._b, allow3Char);
-        },
-        toHexString: function(allow3Char) {
-            return '#' + this.toHex(allow3Char);
-        },
-        toHex8: function() {
-            return rgbaToHex(this._r, this._g, this._b, this._a);
-        },
-        toHex8String: function() {
-            return '#' + this.toHex8();
-        },
-        toRgb: function() {
-            return { r: mathRound(this._r), g: mathRound(this._g), b: mathRound(this._b), a: this._a };
-        },
-        toRgbString: function() {
-            return (this._a == 1) ?
-              "rgb("  + mathRound(this._r) + ", " + mathRound(this._g) + ", " + mathRound(this._b) + ")" :
-              "rgba(" + mathRound(this._r) + ", " + mathRound(this._g) + ", " + mathRound(this._b) + ", " + this._roundA + ")";
-        },
-        toPercentageRgb: function() {
-            return { r: mathRound(bound01(this._r, 255) * 100) + "%", g: mathRound(bound01(this._g, 255) * 100) + "%", b: mathRound(bound01(this._b, 255) * 100) + "%", a: this._a };
-        },
-        toPercentageRgbString: function() {
-            return (this._a == 1) ?
-              "rgb("  + mathRound(bound01(this._r, 255) * 100) + "%, " + mathRound(bound01(this._g, 255) * 100) + "%, " + mathRound(bound01(this._b, 255) * 100) + "%)" :
-              "rgba(" + mathRound(bound01(this._r, 255) * 100) + "%, " + mathRound(bound01(this._g, 255) * 100) + "%, " + mathRound(bound01(this._b, 255) * 100) + "%, " + this._roundA + ")";
-        },
-        toName: function() {
-            if (this._a === 0) {
-                return "transparent";
-            }
-
-            if (this._a < 1) {
-                return false;
-            }
-
-            return hexNames[rgbToHex(this._r, this._g, this._b, true)] || false;
-        },
-        toFilter: function(secondColor) {
-            var hex8String = '#' + rgbaToHex(this._r, this._g, this._b, this._a);
-            var secondHex8String = hex8String;
-            var gradientType = this._gradientType ? "GradientType = 1, " : "";
-
-            if (secondColor) {
-                var s = tinycolor(secondColor);
-                secondHex8String = s.toHex8String();
-            }
-
-            return "progid:DXImageTransform.Microsoft.gradient("+gradientType+"startColorstr="+hex8String+",endColorstr="+secondHex8String+")";
-        },
-        toString: function(format) {
-            var formatSet = !!format;
-            format = format || this._format;
-
-            var formattedString = false;
-            var hasAlpha = this._a < 1 && this._a >= 0;
-            var needsAlphaFormat = !formatSet && hasAlpha && (format === "hex" || format === "hex6" || format === "hex3" || format === "name");
-
-            if (needsAlphaFormat) {
-                // Special case for "transparent", all other non-alpha formats
-                // will return rgba when there is transparency.
-                if (format === "name" && this._a === 0) {
-                    return this.toName();
-                }
-                return this.toRgbString();
-            }
-            if (format === "rgb") {
-                formattedString = this.toRgbString();
-            }
-            if (format === "prgb") {
-                formattedString = this.toPercentageRgbString();
-            }
-            if (format === "hex" || format === "hex6") {
-                formattedString = this.toHexString();
-            }
-            if (format === "hex3") {
-                formattedString = this.toHexString(true);
-            }
-            if (format === "hex8") {
-                formattedString = this.toHex8String();
-            }
-            if (format === "name") {
-                formattedString = this.toName();
-            }
-            if (format === "hsl") {
-                formattedString = this.toHslString();
-            }
-            if (format === "hsv") {
-                formattedString = this.toHsvString();
-            }
-
-            return formattedString || this.toHexString();
-        },
-
-        _applyModification: function(fn, args) {
-            var color = fn.apply(null, [this].concat([].slice.call(args)));
-            this._r = color._r;
-            this._g = color._g;
-            this._b = color._b;
-            this.setAlpha(color._a);
-            return this;
-        },
-        lighten: function() {
-            return this._applyModification(lighten, arguments);
-        },
-        brighten: function() {
-            return this._applyModification(brighten, arguments);
-        },
-        darken: function() {
-            return this._applyModification(darken, arguments);
-        },
-        desaturate: function() {
-            return this._applyModification(desaturate, arguments);
-        },
-        saturate: function() {
-            return this._applyModification(saturate, arguments);
-        },
-        greyscale: function() {
-            return this._applyModification(greyscale, arguments);
-        },
-        spin: function() {
-            return this._applyModification(spin, arguments);
-        },
-
-        _applyCombination: function(fn, args) {
-            return fn.apply(null, [this].concat([].slice.call(args)));
-        },
-        analogous: function() {
-            return this._applyCombination(analogous, arguments);
-        },
-        complement: function() {
-            return this._applyCombination(complement, arguments);
-        },
-        monochromatic: function() {
-            return this._applyCombination(monochromatic, arguments);
-        },
-        splitcomplement: function() {
-            return this._applyCombination(splitcomplement, arguments);
-        },
-        triad: function() {
-            return this._applyCombination(triad, arguments);
-        },
-        tetrad: function() {
-            return this._applyCombination(tetrad, arguments);
-        }
-    };
-
-    // If input is an object, force 1 into "1.0" to handle ratios properly
-    // String input requires "1.0" as input, so 1 will be treated as 1
-    tinycolor.fromRatio = function(color, opts) {
-        if (typeof color == "object") {
-            var newColor = {};
-            for (var i in color) {
-                if (color.hasOwnProperty(i)) {
-                    if (i === "a") {
-                        newColor[i] = color[i];
-                    }
-                    else {
-                        newColor[i] = convertToPercentage(color[i]);
-                    }
-                }
-            }
-            color = newColor;
-        }
-
-        return tinycolor(color, opts);
-    };
-
-    // Given a string or object, convert that input to RGB
-    // Possible string inputs:
-    //
-    //     "red"
-    //     "#f00" or "f00"
-    //     "#ff0000" or "ff0000"
-    //     "#ff000000" or "ff000000"
-    //     "rgb 255 0 0" or "rgb (255, 0, 0)"
-    //     "rgb 1.0 0 0" or "rgb (1, 0, 0)"
-    //     "rgba (255, 0, 0, 1)" or "rgba 255, 0, 0, 1"
-    //     "rgba (1.0, 0, 0, 1)" or "rgba 1.0, 0, 0, 1"
-    //     "hsl(0, 100%, 50%)" or "hsl 0 100% 50%"
-    //     "hsla(0, 100%, 50%, 1)" or "hsla 0 100% 50%, 1"
-    //     "hsv(0, 100%, 100%)" or "hsv 0 100% 100%"
-    //
-    function inputToRGB(color) {
-
-        var rgb = { r: 0, g: 0, b: 0 };
-        var a = 1;
-        var ok = false;
-        var format = false;
-
-        if (typeof color == "string") {
-            color = stringInputToObject(color);
-        }
-
-        if (typeof color == "object") {
-            if (color.hasOwnProperty("r") && color.hasOwnProperty("g") && color.hasOwnProperty("b")) {
-                rgb = rgbToRgb(color.r, color.g, color.b);
-                ok = true;
-                format = String(color.r).substr(-1) === "%" ? "prgb" : "rgb";
-            }
-            else if (color.hasOwnProperty("h") && color.hasOwnProperty("s") && color.hasOwnProperty("v")) {
-                color.s = convertToPercentage(color.s);
-                color.v = convertToPercentage(color.v);
-                rgb = hsvToRgb(color.h, color.s, color.v);
-                ok = true;
-                format = "hsv";
-            }
-            else if (color.hasOwnProperty("h") && color.hasOwnProperty("s") && color.hasOwnProperty("l")) {
-                color.s = convertToPercentage(color.s);
-                color.l = convertToPercentage(color.l);
-                rgb = hslToRgb(color.h, color.s, color.l);
-                ok = true;
-                format = "hsl";
-            }
-
-            if (color.hasOwnProperty("a")) {
-                a = color.a;
-            }
-        }
-
-        a = boundAlpha(a);
-
-        return {
-            ok: ok,
-            format: color.format || format,
-            r: mathMin(255, mathMax(rgb.r, 0)),
-            g: mathMin(255, mathMax(rgb.g, 0)),
-            b: mathMin(255, mathMax(rgb.b, 0)),
-            a: a
-        };
-    }
-
-
-    // Conversion Functions
-    // --------------------
-
-    // `rgbToHsl`, `rgbToHsv`, `hslToRgb`, `hsvToRgb` modified from:
-    // <http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript>
-
-    // `rgbToRgb`
-    // Handle bounds / percentage checking to conform to CSS color spec
-    // <http://www.w3.org/TR/css3-color/>
-    // *Assumes:* r, g, b in [0, 255] or [0, 1]
-    // *Returns:* { r, g, b } in [0, 255]
-    function rgbToRgb(r, g, b){
-        return {
-            r: bound01(r, 255) * 255,
-            g: bound01(g, 255) * 255,
-            b: bound01(b, 255) * 255
-        };
-    }
-
-    // `rgbToHsl`
-    // Converts an RGB color value to HSL.
-    // *Assumes:* r, g, and b are contained in [0, 255] or [0, 1]
-    // *Returns:* { h, s, l } in [0,1]
-    function rgbToHsl(r, g, b) {
-
-        r = bound01(r, 255);
-        g = bound01(g, 255);
-        b = bound01(b, 255);
-
-        var max = mathMax(r, g, b), min = mathMin(r, g, b);
-        var h, s, l = (max + min) / 2;
-
-        if(max == min) {
-            h = s = 0; // achromatic
-        }
-        else {
-            var d = max - min;
-            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-            switch(max) {
-                case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-                case g: h = (b - r) / d + 2; break;
-                case b: h = (r - g) / d + 4; break;
-            }
-
-            h /= 6;
-        }
-
-        return { h: h, s: s, l: l };
-    }
-
-    // `hslToRgb`
-    // Converts an HSL color value to RGB.
-    // *Assumes:* h is contained in [0, 1] or [0, 360] and s and l are contained [0, 1] or [0, 100]
-    // *Returns:* { r, g, b } in the set [0, 255]
-    function hslToRgb(h, s, l) {
-        var r, g, b;
-
-        h = bound01(h, 360);
-        s = bound01(s, 100);
-        l = bound01(l, 100);
-
-        function hue2rgb(p, q, t) {
-            if(t < 0) t += 1;
-            if(t > 1) t -= 1;
-            if(t < 1/6) return p + (q - p) * 6 * t;
-            if(t < 1/2) return q;
-            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-            return p;
-        }
-
-        if(s === 0) {
-            r = g = b = l; // achromatic
-        }
-        else {
-            var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-            var p = 2 * l - q;
-            r = hue2rgb(p, q, h + 1/3);
-            g = hue2rgb(p, q, h);
-            b = hue2rgb(p, q, h - 1/3);
-        }
-
-        return { r: r * 255, g: g * 255, b: b * 255 };
-    }
-
-    // `rgbToHsv`
-    // Converts an RGB color value to HSV
-    // *Assumes:* r, g, and b are contained in the set [0, 255] or [0, 1]
-    // *Returns:* { h, s, v } in [0,1]
-    function rgbToHsv(r, g, b) {
-
-        r = bound01(r, 255);
-        g = bound01(g, 255);
-        b = bound01(b, 255);
-
-        var max = mathMax(r, g, b), min = mathMin(r, g, b);
-        var h, s, v = max;
-
-        var d = max - min;
-        s = max === 0 ? 0 : d / max;
-
-        if(max == min) {
-            h = 0; // achromatic
-        }
-        else {
-            switch(max) {
-                case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-                case g: h = (b - r) / d + 2; break;
-                case b: h = (r - g) / d + 4; break;
-            }
-            h /= 6;
-        }
-        return { h: h, s: s, v: v };
-    }
-
-    // `hsvToRgb`
-    // Converts an HSV color value to RGB.
-    // *Assumes:* h is contained in [0, 1] or [0, 360] and s and v are contained in [0, 1] or [0, 100]
-    // *Returns:* { r, g, b } in the set [0, 255]
-     function hsvToRgb(h, s, v) {
-
-        h = bound01(h, 360) * 6;
-        s = bound01(s, 100);
-        v = bound01(v, 100);
-
-        var i = math.floor(h),
-            f = h - i,
-            p = v * (1 - s),
-            q = v * (1 - f * s),
-            t = v * (1 - (1 - f) * s),
-            mod = i % 6,
-            r = [v, q, p, p, t, v][mod],
-            g = [t, v, v, q, p, p][mod],
-            b = [p, p, t, v, v, q][mod];
-
-        return { r: r * 255, g: g * 255, b: b * 255 };
-    }
-
-    // `rgbToHex`
-    // Converts an RGB color to hex
-    // Assumes r, g, and b are contained in the set [0, 255]
-    // Returns a 3 or 6 character hex
-    function rgbToHex(r, g, b, allow3Char) {
-
-        var hex = [
-            pad2(mathRound(r).toString(16)),
-            pad2(mathRound(g).toString(16)),
-            pad2(mathRound(b).toString(16))
-        ];
-
-        // Return a 3 character hex if possible
-        if (allow3Char && hex[0].charAt(0) == hex[0].charAt(1) && hex[1].charAt(0) == hex[1].charAt(1) && hex[2].charAt(0) == hex[2].charAt(1)) {
-            return hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0);
-        }
-
-        return hex.join("");
-    }
-        // `rgbaToHex`
-        // Converts an RGBA color plus alpha transparency to hex
-        // Assumes r, g, b and a are contained in the set [0, 255]
-        // Returns an 8 character hex
-        function rgbaToHex(r, g, b, a) {
-
-            var hex = [
-                pad2(convertDecimalToHex(a)),
-                pad2(mathRound(r).toString(16)),
-                pad2(mathRound(g).toString(16)),
-                pad2(mathRound(b).toString(16))
-            ];
-
-            return hex.join("");
-        }
-
-    // `equals`
-    // Can be called with any tinycolor input
-    tinycolor.equals = function (color1, color2) {
-        if (!color1 || !color2) { return false; }
-        return tinycolor(color1).toRgbString() == tinycolor(color2).toRgbString();
-    };
-    tinycolor.random = function() {
-        return tinycolor.fromRatio({
-            r: mathRandom(),
-            g: mathRandom(),
-            b: mathRandom()
-        });
-    };
-
-
-    // Modification Functions
-    // ----------------------
-    // Thanks to less.js for some of the basics here
-    // <https://github.com/cloudhead/less.js/blob/master/lib/less/functions.js>
-
-    function desaturate(color, amount) {
-        amount = (amount === 0) ? 0 : (amount || 10);
-        var hsl = tinycolor(color).toHsl();
-        hsl.s -= amount / 100;
-        hsl.s = clamp01(hsl.s);
-        return tinycolor(hsl);
-    }
-
-    function saturate(color, amount) {
-        amount = (amount === 0) ? 0 : (amount || 10);
-        var hsl = tinycolor(color).toHsl();
-        hsl.s += amount / 100;
-        hsl.s = clamp01(hsl.s);
-        return tinycolor(hsl);
-    }
-
-    function greyscale(color) {
-        return tinycolor(color).desaturate(100);
-    }
-
-    function lighten (color, amount) {
-        amount = (amount === 0) ? 0 : (amount || 10);
-        var hsl = tinycolor(color).toHsl();
-        hsl.l += amount / 100;
-        hsl.l = clamp01(hsl.l);
-        return tinycolor(hsl);
-    }
-
-    function brighten(color, amount) {
-        amount = (amount === 0) ? 0 : (amount || 10);
-        var rgb = tinycolor(color).toRgb();
-        rgb.r = mathMax(0, mathMin(255, rgb.r - mathRound(255 * - (amount / 100))));
-        rgb.g = mathMax(0, mathMin(255, rgb.g - mathRound(255 * - (amount / 100))));
-        rgb.b = mathMax(0, mathMin(255, rgb.b - mathRound(255 * - (amount / 100))));
-        return tinycolor(rgb);
-    }
-
-    function darken (color, amount) {
-        amount = (amount === 0) ? 0 : (amount || 10);
-        var hsl = tinycolor(color).toHsl();
-        hsl.l -= amount / 100;
-        hsl.l = clamp01(hsl.l);
-        return tinycolor(hsl);
-    }
-
-    // Spin takes a positive or negative amount within [-360, 360] indicating the change of hue.
-    // Values outside of this range will be wrapped into this range.
-    function spin(color, amount) {
-        var hsl = tinycolor(color).toHsl();
-        var hue = (mathRound(hsl.h) + amount) % 360;
-        hsl.h = hue < 0 ? 360 + hue : hue;
-        return tinycolor(hsl);
-    }
-
-    // Combination Functions
-    // ---------------------
-    // Thanks to jQuery xColor for some of the ideas behind these
-    // <https://github.com/infusion/jQuery-xcolor/blob/master/jquery.xcolor.js>
-
-    function complement(color) {
-        var hsl = tinycolor(color).toHsl();
-        hsl.h = (hsl.h + 180) % 360;
-        return tinycolor(hsl);
-    }
-
-    function triad(color) {
-        var hsl = tinycolor(color).toHsl();
-        var h = hsl.h;
-        return [
-            tinycolor(color),
-            tinycolor({ h: (h + 120) % 360, s: hsl.s, l: hsl.l }),
-            tinycolor({ h: (h + 240) % 360, s: hsl.s, l: hsl.l })
-        ];
-    }
-
-    function tetrad(color) {
-        var hsl = tinycolor(color).toHsl();
-        var h = hsl.h;
-        return [
-            tinycolor(color),
-            tinycolor({ h: (h + 90) % 360, s: hsl.s, l: hsl.l }),
-            tinycolor({ h: (h + 180) % 360, s: hsl.s, l: hsl.l }),
-            tinycolor({ h: (h + 270) % 360, s: hsl.s, l: hsl.l })
-        ];
-    }
-
-    function splitcomplement(color) {
-        var hsl = tinycolor(color).toHsl();
-        var h = hsl.h;
-        return [
-            tinycolor(color),
-            tinycolor({ h: (h + 72) % 360, s: hsl.s, l: hsl.l}),
-            tinycolor({ h: (h + 216) % 360, s: hsl.s, l: hsl.l})
-        ];
-    }
-
-    function analogous(color, results, slices) {
-        results = results || 6;
-        slices = slices || 30;
-
-        var hsl = tinycolor(color).toHsl();
-        var part = 360 / slices;
-        var ret = [tinycolor(color)];
-
-        for (hsl.h = ((hsl.h - (part * results >> 1)) + 720) % 360; --results; ) {
-            hsl.h = (hsl.h + part) % 360;
-            ret.push(tinycolor(hsl));
-        }
-        return ret;
-    }
-
-    function monochromatic(color, results) {
-        results = results || 6;
-        var hsv = tinycolor(color).toHsv();
-        var h = hsv.h, s = hsv.s, v = hsv.v;
-        var ret = [];
-        var modification = 1 / results;
-
-        while (results--) {
-            ret.push(tinycolor({ h: h, s: s, v: v}));
-            v = (v + modification) % 1;
-        }
-
-        return ret;
-    }
-
-    // Utility Functions
-    // ---------------------
-
-    tinycolor.mix = function(color1, color2, amount) {
-        amount = (amount === 0) ? 0 : (amount || 50);
-
-        var rgb1 = tinycolor(color1).toRgb();
-        var rgb2 = tinycolor(color2).toRgb();
-
-        var p = amount / 100;
-        var w = p * 2 - 1;
-        var a = rgb2.a - rgb1.a;
-
-        var w1;
-
-        if (w * a == -1) {
-            w1 = w;
-        } else {
-            w1 = (w + a) / (1 + w * a);
-        }
-
-        w1 = (w1 + 1) / 2;
-
-        var w2 = 1 - w1;
-
-        var rgba = {
-            r: rgb2.r * w1 + rgb1.r * w2,
-            g: rgb2.g * w1 + rgb1.g * w2,
-            b: rgb2.b * w1 + rgb1.b * w2,
-            a: rgb2.a * p  + rgb1.a * (1 - p)
-        };
-
-        return tinycolor(rgba);
-    };
-
-
-    // Readability Functions
-    // ---------------------
-    // <http://www.w3.org/TR/AERT#color-contrast>
-
-    // `readability`
-    // Analyze the 2 colors and returns an object with the following properties:
-    //    `brightness`: difference in brightness between the two colors
-    //    `color`: difference in color/hue between the two colors
-    tinycolor.readability = function(color1, color2) {
-        var c1 = tinycolor(color1);
-        var c2 = tinycolor(color2);
-        var rgb1 = c1.toRgb();
-        var rgb2 = c2.toRgb();
-        var brightnessA = c1.getBrightness();
-        var brightnessB = c2.getBrightness();
-        var colorDiff = (
-            Math.max(rgb1.r, rgb2.r) - Math.min(rgb1.r, rgb2.r) +
-            Math.max(rgb1.g, rgb2.g) - Math.min(rgb1.g, rgb2.g) +
-            Math.max(rgb1.b, rgb2.b) - Math.min(rgb1.b, rgb2.b)
-        );
-
-        return {
-            brightness: Math.abs(brightnessA - brightnessB),
-            color: colorDiff
-        };
-    };
-
-    // `readable`
-    // http://www.w3.org/TR/AERT#color-contrast
-    // Ensure that foreground and background color combinations provide sufficient contrast.
-    // *Example*
-    //    tinycolor.isReadable("#000", "#111") => false
-    tinycolor.isReadable = function(color1, color2) {
-        var readability = tinycolor.readability(color1, color2);
-        return readability.brightness > 125 && readability.color > 500;
-    };
-
-    // `mostReadable`
-    // Given a base color and a list of possible foreground or background
-    // colors for that base, returns the most readable color.
-    // *Example*
-    //    tinycolor.mostReadable("#123", ["#fff", "#000"]) => "#000"
-    tinycolor.mostReadable = function(baseColor, colorList) {
-        var bestColor = null;
-        var bestScore = 0;
-        var bestIsReadable = false;
-        for (var i=0; i < colorList.length; i++) {
-
-            // We normalize both around the "acceptable" breaking point,
-            // but rank brightness constrast higher than hue.
-
-            var readability = tinycolor.readability(baseColor, colorList[i]);
-            var readable = readability.brightness > 125 && readability.color > 500;
-            var score = 3 * (readability.brightness / 125) + (readability.color / 500);
-
-            if ((readable && ! bestIsReadable) ||
-                (readable && bestIsReadable && score > bestScore) ||
-                ((! readable) && (! bestIsReadable) && score > bestScore)) {
-                bestIsReadable = readable;
-                bestScore = score;
-                bestColor = tinycolor(colorList[i]);
-            }
-        }
-        return bestColor;
-    };
-
-
-    // Big List of Colors
-    // ------------------
-    // <http://www.w3.org/TR/css3-color/#svg-color>
-    var names = tinycolor.names = {
-        aliceblue: "f0f8ff",
-        antiquewhite: "faebd7",
-        aqua: "0ff",
-        aquamarine: "7fffd4",
-        azure: "f0ffff",
-        beige: "f5f5dc",
-        bisque: "ffe4c4",
-        black: "000",
-        blanchedalmond: "ffebcd",
-        blue: "00f",
-        blueviolet: "8a2be2",
-        brown: "a52a2a",
-        burlywood: "deb887",
-        burntsienna: "ea7e5d",
-        cadetblue: "5f9ea0",
-        chartreuse: "7fff00",
-        chocolate: "d2691e",
-        coral: "ff7f50",
-        cornflowerblue: "6495ed",
-        cornsilk: "fff8dc",
-        crimson: "dc143c",
-        cyan: "0ff",
-        darkblue: "00008b",
-        darkcyan: "008b8b",
-        darkgoldenrod: "b8860b",
-        darkgray: "a9a9a9",
-        darkgreen: "006400",
-        darkgrey: "a9a9a9",
-        darkkhaki: "bdb76b",
-        darkmagenta: "8b008b",
-        darkolivegreen: "556b2f",
-        darkorange: "ff8c00",
-        darkorchid: "9932cc",
-        darkred: "8b0000",
-        darksalmon: "e9967a",
-        darkseagreen: "8fbc8f",
-        darkslateblue: "483d8b",
-        darkslategray: "2f4f4f",
-        darkslategrey: "2f4f4f",
-        darkturquoise: "00ced1",
-        darkviolet: "9400d3",
-        deeppink: "ff1493",
-        deepskyblue: "00bfff",
-        dimgray: "696969",
-        dimgrey: "696969",
-        dodgerblue: "1e90ff",
-        firebrick: "b22222",
-        floralwhite: "fffaf0",
-        forestgreen: "228b22",
-        fuchsia: "f0f",
-        gainsboro: "dcdcdc",
-        ghostwhite: "f8f8ff",
-        gold: "ffd700",
-        goldenrod: "daa520",
-        gray: "808080",
-        green: "008000",
-        greenyellow: "adff2f",
-        grey: "808080",
-        honeydew: "f0fff0",
-        hotpink: "ff69b4",
-        indianred: "cd5c5c",
-        indigo: "4b0082",
-        ivory: "fffff0",
-        khaki: "f0e68c",
-        lavender: "e6e6fa",
-        lavenderblush: "fff0f5",
-        lawngreen: "7cfc00",
-        lemonchiffon: "fffacd",
-        lightblue: "add8e6",
-        lightcoral: "f08080",
-        lightcyan: "e0ffff",
-        lightgoldenrodyellow: "fafad2",
-        lightgray: "d3d3d3",
-        lightgreen: "90ee90",
-        lightgrey: "d3d3d3",
-        lightpink: "ffb6c1",
-        lightsalmon: "ffa07a",
-        lightseagreen: "20b2aa",
-        lightskyblue: "87cefa",
-        lightslategray: "789",
-        lightslategrey: "789",
-        lightsteelblue: "b0c4de",
-        lightyellow: "ffffe0",
-        lime: "0f0",
-        limegreen: "32cd32",
-        linen: "faf0e6",
-        magenta: "f0f",
-        maroon: "800000",
-        mediumaquamarine: "66cdaa",
-        mediumblue: "0000cd",
-        mediumorchid: "ba55d3",
-        mediumpurple: "9370db",
-        mediumseagreen: "3cb371",
-        mediumslateblue: "7b68ee",
-        mediumspringgreen: "00fa9a",
-        mediumturquoise: "48d1cc",
-        mediumvioletred: "c71585",
-        midnightblue: "191970",
-        mintcream: "f5fffa",
-        mistyrose: "ffe4e1",
-        moccasin: "ffe4b5",
-        navajowhite: "ffdead",
-        navy: "000080",
-        oldlace: "fdf5e6",
-        olive: "808000",
-        olivedrab: "6b8e23",
-        orange: "ffa500",
-        orangered: "ff4500",
-        orchid: "da70d6",
-        palegoldenrod: "eee8aa",
-        palegreen: "98fb98",
-        paleturquoise: "afeeee",
-        palevioletred: "db7093",
-        papayawhip: "ffefd5",
-        peachpuff: "ffdab9",
-        peru: "cd853f",
-        pink: "ffc0cb",
-        plum: "dda0dd",
-        powderblue: "b0e0e6",
-        purple: "800080",
-        rebeccapurple: "663399",
-        red: "f00",
-        rosybrown: "bc8f8f",
-        royalblue: "4169e1",
-        saddlebrown: "8b4513",
-        salmon: "fa8072",
-        sandybrown: "f4a460",
-        seagreen: "2e8b57",
-        seashell: "fff5ee",
-        sienna: "a0522d",
-        silver: "c0c0c0",
-        skyblue: "87ceeb",
-        slateblue: "6a5acd",
-        slategray: "708090",
-        slategrey: "708090",
-        snow: "fffafa",
-        springgreen: "00ff7f",
-        steelblue: "4682b4",
-        tan: "d2b48c",
-        teal: "008080",
-        thistle: "d8bfd8",
-        tomato: "ff6347",
-        turquoise: "40e0d0",
-        violet: "ee82ee",
-        wheat: "f5deb3",
-        white: "fff",
-        whitesmoke: "f5f5f5",
-        yellow: "ff0",
-        yellowgreen: "9acd32"
-    };
-
-    // Make it easy to access colors via `hexNames[hex]`
-    var hexNames = tinycolor.hexNames = flip(names);
-
-
-    // Utilities
-    // ---------
-
-    // `{ 'name1': 'val1' }` becomes `{ 'val1': 'name1' }`
-    function flip(o) {
-        var flipped = { };
-        for (var i in o) {
-            if (o.hasOwnProperty(i)) {
-                flipped[o[i]] = i;
-            }
-        }
-        return flipped;
-    }
-
-    // Return a valid alpha value [0,1] with all invalid values being set to 1
-    function boundAlpha(a) {
-        a = parseFloat(a);
-
-        if (isNaN(a) || a < 0 || a > 1) {
-            a = 1;
-        }
-
-        return a;
-    }
-
-    // Take input from [0, n] and return it as [0, 1]
-    function bound01(n, max) {
-        if (isOnePointZero(n)) { n = "100%"; }
-
-        var processPercent = isPercentage(n);
-        n = mathMin(max, mathMax(0, parseFloat(n)));
-
-        // Automatically convert percentage into number
-        if (processPercent) {
-            n = parseInt(n * max, 10) / 100;
-        }
-
-        // Handle floating point rounding errors
-        if ((math.abs(n - max) < 0.000001)) {
-            return 1;
-        }
-
-        // Convert into [0, 1] range if it isn't already
-        return (n % max) / parseFloat(max);
-    }
-
-    // Force a number between 0 and 1
-    function clamp01(val) {
-        return mathMin(1, mathMax(0, val));
-    }
-
-    // Parse a base-16 hex value into a base-10 integer
-    function parseIntFromHex(val) {
-        return parseInt(val, 16);
-    }
-
-    // Need to handle 1.0 as 100%, since once it is a number, there is no difference between it and 1
-    // <http://stackoverflow.com/questions/7422072/javascript-how-to-detect-number-as-a-decimal-including-1-0>
-    function isOnePointZero(n) {
-        return typeof n == "string" && n.indexOf('.') != -1 && parseFloat(n) === 1;
-    }
-
-    // Check to see if string passed in is a percentage
-    function isPercentage(n) {
-        return typeof n === "string" && n.indexOf('%') != -1;
-    }
-
-    // Force a hex value to have 2 characters
-    function pad2(c) {
-        return c.length == 1 ? '0' + c : '' + c;
-    }
-
-    // Replace a decimal with it's percentage value
-    function convertToPercentage(n) {
-        if (n <= 1) {
-            n = (n * 100) + "%";
-        }
-
-        return n;
-    }
-
-    // Converts a decimal to a hex value
-    function convertDecimalToHex(d) {
-        return Math.round(parseFloat(d) * 255).toString(16);
-    }
-    // Converts a hex value to a decimal
-    function convertHexToDecimal(h) {
-        return (parseIntFromHex(h) / 255);
-    }
-
-    var matchers = (function() {
-
-        // <http://www.w3.org/TR/css3-values/#integers>
-        var CSS_INTEGER = "[-\\+]?\\d+%?";
-
-        // <http://www.w3.org/TR/css3-values/#number-value>
-        var CSS_NUMBER = "[-\\+]?\\d*\\.\\d+%?";
-
-        // Allow positive/negative integer/number.  Don't capture the either/or, just the entire outcome.
-        var CSS_UNIT = "(?:" + CSS_NUMBER + ")|(?:" + CSS_INTEGER + ")";
-
-        // Actual matching.
-        // Parentheses and commas are optional, but not required.
-        // Whitespace can take the place of commas or opening paren
-        var PERMISSIVE_MATCH3 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
-        var PERMISSIVE_MATCH4 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
-
-        return {
-            rgb: new RegExp("rgb" + PERMISSIVE_MATCH3),
-            rgba: new RegExp("rgba" + PERMISSIVE_MATCH4),
-            hsl: new RegExp("hsl" + PERMISSIVE_MATCH3),
-            hsla: new RegExp("hsla" + PERMISSIVE_MATCH4),
-            hsv: new RegExp("hsv" + PERMISSIVE_MATCH3),
-            hsva: new RegExp("hsva" + PERMISSIVE_MATCH4),
-            hex3: /^([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
-            hex6: /^([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
-            hex8: /^([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
-        };
-    })();
-
-    // `stringInputToObject`
-    // Permissive string parsing.  Take in a number of formats, and output an object
-    // based on detected format.  Returns `{ r, g, b }` or `{ h, s, l }` or `{ h, s, v}`
-    function stringInputToObject(color) {
-
-        color = color.replace(trimLeft,'').replace(trimRight, '').toLowerCase();
-        var named = false;
-        if (names[color]) {
-            color = names[color];
-            named = true;
-        }
-        else if (color == 'transparent') {
-            return { r: 0, g: 0, b: 0, a: 0, format: "name" };
-        }
-
-        // Try to match string input using regular expressions.
-        // Keep most of the number bounding out of this function - don't worry about [0,1] or [0,100] or [0,360]
-        // Just return an object and let the conversion functions handle that.
-        // This way the result will be the same whether the tinycolor is initialized with string or object.
-        var match;
-        if ((match = matchers.rgb.exec(color))) {
-            return { r: match[1], g: match[2], b: match[3] };
-        }
-        if ((match = matchers.rgba.exec(color))) {
-            return { r: match[1], g: match[2], b: match[3], a: match[4] };
-        }
-        if ((match = matchers.hsl.exec(color))) {
-            return { h: match[1], s: match[2], l: match[3] };
-        }
-        if ((match = matchers.hsla.exec(color))) {
-            return { h: match[1], s: match[2], l: match[3], a: match[4] };
-        }
-        if ((match = matchers.hsv.exec(color))) {
-            return { h: match[1], s: match[2], v: match[3] };
-        }
-        if ((match = matchers.hsva.exec(color))) {
-            return { h: match[1], s: match[2], v: match[3], a: match[4] };
-        }
-        if ((match = matchers.hex8.exec(color))) {
-            return {
-                a: convertHexToDecimal(match[1]),
-                r: parseIntFromHex(match[2]),
-                g: parseIntFromHex(match[3]),
-                b: parseIntFromHex(match[4]),
-                format: named ? "name" : "hex8"
-            };
-        }
-        if ((match = matchers.hex6.exec(color))) {
-            return {
-                r: parseIntFromHex(match[1]),
-                g: parseIntFromHex(match[2]),
-                b: parseIntFromHex(match[3]),
-                format: named ? "name" : "hex"
-            };
-        }
-        if ((match = matchers.hex3.exec(color))) {
-            return {
-                r: parseIntFromHex(match[1] + '' + match[1]),
-                g: parseIntFromHex(match[2] + '' + match[2]),
-                b: parseIntFromHex(match[3] + '' + match[3]),
-                format: named ? "name" : "hex"
-            };
-        }
-
-        return false;
-    }
-
-    window.tinycolor = tinycolor;
-    })();
-
-    $(function () {
-        if ($.fn.spectrum.load) {
-            $.fn.spectrum.processNativeColorInputs();
-        }
-    });
-
-});
 
 /**
- * Patterns pat-polyfill-colour - Polyfill for colour inputs.
- *
- * Copyright 2014 Marko Durkovic
- * Copyright 2014 Simplon B.V. - Wichert Akkerman
+ * The picker constructor that creates a blank picker.
  */
-define('pat-colour-picker',[
-    "pat-registry",
-    "spectrum"
-], function(registry) {
-    var _ = {
-        name: "polyfill-color",
-        trigger: "input.pat-colour-picker,input.pat-color-picker",
-        init: function($el) {
-            return $el.spectrum({preferredFormat: "hex"});
-        }
-    };
+function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
 
-    registry.register(_);
-    return _;
+    // If there’s no element, return the picker constructor.
+    if ( !ELEMENT ) return PickerConstructor
+
+
+    var
+        // The state of the picker.
+        STATE = {
+            id: ELEMENT.id || 'P' + Math.abs( ~~(Math.random() * new Date()) )
+        },
+
+
+        // Merge the defaults and options passed.
+        SETTINGS = COMPONENT ? $.extend( true, {}, COMPONENT.defaults, OPTIONS ) : OPTIONS || {},
+
+
+        // Merge the default classes with the settings classes.
+        CLASSES = $.extend( {}, PickerConstructor.klasses(), SETTINGS.klass ),
+
+
+        // The element node wrapper into a jQuery object.
+        $ELEMENT = $( ELEMENT ),
+
+
+        // Pseudo picker constructor.
+        PickerInstance = function() {
+            return this.start()
+        },
+
+
+        // The picker prototype.
+        P = PickerInstance.prototype = {
+
+            constructor: PickerInstance,
+
+            $node: $ELEMENT,
+
+
+            /**
+             * Initialize everything
+             */
+            start: function() {
+
+                // If it’s already started, do nothing.
+                if ( STATE && STATE.start ) return P
+
+
+                // Update the picker states.
+                STATE.methods = {}
+                STATE.start = true
+                STATE.open = false
+                STATE.type = ELEMENT.type
+
+
+                // Confirm focus state, convert into text input to remove UA stylings,
+                // and set as readonly to prevent keyboard popup.
+                ELEMENT.autofocus = ELEMENT == document.activeElement
+                ELEMENT.type = 'text'
+                ELEMENT.readOnly = !SETTINGS.editable
+                ELEMENT.id = ELEMENT.id || STATE.id
+
+
+                // Create a new picker component with the settings.
+                P.component = new COMPONENT(P, SETTINGS)
+
+
+                // Create the picker root with a holder and then prepare it.
+                P.$root = $( PickerConstructor._.node('div', createWrappedComponent(), CLASSES.picker, 'id="' + ELEMENT.id + '_root"') )
+                prepareElementRoot()
+
+
+                // If there’s a format for the hidden input element, create the element.
+                if ( SETTINGS.formatSubmit ) {
+                    prepareElementHidden()
+                }
+
+
+                // Prepare the input element.
+                prepareElement()
+
+
+                // Insert the root as specified in the settings.
+                if ( SETTINGS.container ) $( SETTINGS.container ).append( P.$root )
+                else $ELEMENT.after( P.$root )
+
+
+                // Bind the default component and settings events.
+                P.on({
+                    start: P.component.onStart,
+                    render: P.component.onRender,
+                    stop: P.component.onStop,
+                    open: P.component.onOpen,
+                    close: P.component.onClose,
+                    set: P.component.onSet
+                }).on({
+                    start: SETTINGS.onStart,
+                    render: SETTINGS.onRender,
+                    stop: SETTINGS.onStop,
+                    open: SETTINGS.onOpen,
+                    close: SETTINGS.onClose,
+                    set: SETTINGS.onSet
+                })
+
+
+                // If the element has autofocus, open the picker.
+                if ( ELEMENT.autofocus ) {
+                    P.open()
+                }
+
+
+                // Trigger queued the “start” and “render” events.
+                return P.trigger( 'start' ).trigger( 'render' )
+            }, //start
+
+
+            /**
+             * Render a new picker
+             */
+            render: function( entireComponent ) {
+
+                // Insert a new component holder in the root or box.
+                if ( entireComponent ) P.$root.html( createWrappedComponent() )
+                else P.$root.find( '.' + CLASSES.box ).html( P.component.nodes( STATE.open ) )
+
+                // Trigger the queued “render” events.
+                return P.trigger( 'render' )
+            }, //render
+
+
+            /**
+             * Destroy everything
+             */
+            stop: function() {
+
+                // If it’s already stopped, do nothing.
+                if ( !STATE.start ) return P
+
+                // Then close the picker.
+                P.close()
+
+                // Remove the hidden field.
+                if ( P._hidden ) {
+                    P._hidden.parentNode.removeChild( P._hidden )
+                }
+
+                // Remove the root.
+                P.$root.remove()
+
+                // Remove the input class, remove the stored data, and unbind
+                // the events (after a tick for IE - see `P.close`).
+                $ELEMENT.removeClass( CLASSES.input ).removeData( NAME )
+                setTimeout( function() {
+                    $ELEMENT.off( '.' + STATE.id )
+                }, 0)
+
+                // Restore the element state
+                ELEMENT.type = STATE.type
+                ELEMENT.readOnly = false
+
+                // Trigger the queued “stop” events.
+                P.trigger( 'stop' )
+
+                // Reset the picker states.
+                STATE.methods = {}
+                STATE.start = false
+
+                return P
+            }, //stop
+
+
+            /*
+             * Open up the picker
+             */
+            open: function( dontGiveFocus ) {
+
+                // If it’s already open, do nothing.
+                if ( STATE.open ) return P
+
+                // Add the “active” class.
+                $ELEMENT.addClass( CLASSES.active )
+                aria( ELEMENT, 'expanded', true )
+
+                // Add the “opened” class to the picker root.
+                P.$root.addClass( CLASSES.opened )
+                aria( P.$root[0], 'hidden', false )
+
+                // If we have to give focus, bind the element and doc events.
+                if ( dontGiveFocus !== false ) {
+
+                    // Set it as open.
+                    STATE.open = true
+
+                    // Pass focus to the element’s jQuery object.
+                    $ELEMENT.trigger( 'focus' )
+
+                    // Bind the document events.
+                    $document.on( 'click.' + STATE.id + ' focusin.' + STATE.id, function( event ) {
+
+                        var target = event.target
+
+                        // If the target of the event is not the element, close the picker picker.
+                        // * Don’t worry about clicks or focusins on the root because those don’t bubble up.
+                        //   Also, for Firefox, a click on an `option` element bubbles up directly
+                        //   to the doc. So make sure the target wasn't the doc.
+                        // * In Firefox stopPropagation() doesn’t prevent right-click events from bubbling,
+                        //   which causes the picker to unexpectedly close when right-clicking it. So make
+                        //   sure the event wasn’t a right-click.
+                        if ( target != ELEMENT && target != document && event.which != 3 ) {
+
+                            // If the target was the holder that covers the screen,
+                            // keep the element focused to maintain tabindex.
+                            P.close( target === P.$root.children()[0] )
+                        }
+
+                    }).on( 'keydown.' + STATE.id, function( event ) {
+
+                        var
+                            // Get the keycode.
+                            keycode = event.keyCode,
+
+                            // Translate that to a selection change.
+                            keycodeToMove = P.component.key[ keycode ],
+
+                            // Grab the target.
+                            target = event.target
+
+
+                        // On escape, close the picker and give focus.
+                        if ( keycode == 27 ) {
+                            P.close( true )
+                        }
+
+
+                        // Check if there is a key movement or “enter” keypress on the element.
+                        else if ( target == ELEMENT && ( keycodeToMove || keycode == 13 ) ) {
+
+                            // Prevent the default action to stop page movement.
+                            event.preventDefault()
+
+                            // Trigger the key movement action.
+                            if ( keycodeToMove ) {
+                                PickerConstructor._.trigger( P.component.key.go, P, [ PickerConstructor._.trigger( keycodeToMove ) ] )
+                            }
+
+                            // On “enter”, if the highlighted item isn’t disabled, set the value and close.
+                            else if ( !P.$root.find( '.' + CLASSES.highlighted ).hasClass( CLASSES.disabled ) ) {
+                                P.set( 'select', P.component.item.highlight ).close()
+                            }
+                        }
+
+
+                        // If the target is within the root and “enter” is pressed,
+                        // prevent the default action and trigger a click on the target instead.
+                        else if ( $.contains( P.$root[0], target ) && keycode == 13 ) {
+                            event.preventDefault()
+                            target.click()
+                        }
+                    })
+                }
+
+                // Trigger the queued “open” events.
+                return P.trigger( 'open' )
+            }, //open
+
+
+            /**
+             * Close the picker
+             */
+            close: function( giveFocus ) {
+
+                // If we need to give focus, do it before changing states.
+                if ( giveFocus ) {
+                    // ....ah yes! It would’ve been incomplete without a crazy workaround for IE :|
+                    // The focus is triggered *after* the close has completed - causing it
+                    // to open again. So unbind and rebind the event at the next tick.
+                    $ELEMENT.off( 'focus.' + STATE.id ).trigger( 'focus' )
+                    setTimeout( function() {
+                        $ELEMENT.on( 'focus.' + STATE.id, focusToOpen )
+                    }, 0 )
+                }
+
+                // Remove the “active” class.
+                $ELEMENT.removeClass( CLASSES.active )
+                aria( ELEMENT, 'expanded', false )
+
+                // Remove the “opened” and “focused” class from the picker root.
+                P.$root.removeClass( CLASSES.opened + ' ' + CLASSES.focused )
+                aria( P.$root[0], 'hidden', true )
+                aria( P.$root[0], 'selected', false )
+
+                // If it’s already closed, do nothing more.
+                if ( !STATE.open ) return P
+
+                // Set it as closed.
+                STATE.open = false
+
+                // Unbind the document events.
+                $document.off( '.' + STATE.id )
+
+                // Trigger the queued “close” events.
+                return P.trigger( 'close' )
+            }, //close
+
+
+            /**
+             * Clear the values
+             */
+            clear: function() {
+                return P.set( 'clear' )
+            }, //clear
+
+
+            /**
+             * Set something
+             */
+            set: function( thing, value, options ) {
+
+                var thingItem, thingValue,
+                    thingIsObject = $.isPlainObject( thing ),
+                    thingObject = thingIsObject ? thing : {}
+
+                // Make sure we have usable options.
+                options = thingIsObject && $.isPlainObject( value ) ? value : options || {}
+
+                if ( thing ) {
+
+                    // If the thing isn’t an object, make it one.
+                    if ( !thingIsObject ) {
+                        thingObject[ thing ] = value
+                    }
+
+                    // Go through the things of items to set.
+                    for ( thingItem in thingObject ) {
+
+                        // Grab the value of the thing.
+                        thingValue = thingObject[ thingItem ]
+
+                        // First, if the item exists and there’s a value, set it.
+                        if ( thingItem in P.component.item ) {
+                            P.component.set( thingItem, thingValue, options )
+                        }
+
+                        // Then, check to update the element value and broadcast a change.
+                        if ( thingItem == 'select' || thingItem == 'clear' ) {
+                            $ELEMENT.val( thingItem == 'clear' ?
+                                '' : P.get( thingItem, SETTINGS.format )
+                            ).trigger( 'change' )
+                        }
+                    }
+
+                    // Render a new picker.
+                    P.render()
+                }
+
+                // When the method isn’t muted, trigger queued “set” events and pass the `thingObject`.
+                return options.muted ? P : P.trigger( 'set', thingObject )
+            }, //set
+
+
+            /**
+             * Get something
+             */
+            get: function( thing, format ) {
+
+                // Make sure there’s something to get.
+                thing = thing || 'value'
+
+                // If a picker state exists, return that.
+                if ( STATE[ thing ] != null ) {
+                    return STATE[ thing ]
+                }
+
+                // Return the value, if that.
+                if ( thing == 'value' ) {
+                    return ELEMENT.value
+                }
+
+                // Check if a component item exists, return that.
+                if ( thing in P.component.item ) {
+                    if ( typeof format == 'string' ) {
+                        return PickerConstructor._.trigger(
+                            P.component.formats.toString,
+                            P.component,
+                            [ format, P.component.get( thing ) ]
+                        )
+                    }
+                    return P.component.get( thing )
+                }
+            }, //get
+
+
+
+            /**
+             * Bind events on the things.
+             */
+            on: function( thing, method ) {
+
+                var thingName, thingMethod,
+                    thingIsObject = $.isPlainObject( thing ),
+                    thingObject = thingIsObject ? thing : {}
+
+                if ( thing ) {
+
+                    // If the thing isn’t an object, make it one.
+                    if ( !thingIsObject ) {
+                        thingObject[ thing ] = method
+                    }
+
+                    // Go through the things to bind to.
+                    for ( thingName in thingObject ) {
+
+                        // Grab the method of the thing.
+                        thingMethod = thingObject[ thingName ]
+
+                        // Make sure the thing methods collection exists.
+                        STATE.methods[ thingName ] = STATE.methods[ thingName ] || []
+
+                        // Add the method to the relative method collection.
+                        STATE.methods[ thingName ].push( thingMethod )
+                    }
+                }
+
+                return P
+            }, //on
+
+
+
+            /**
+             * Unbind events on the things.
+             */
+            off: function() {
+                var i, thingName,
+                    names = arguments;
+                for ( i = 0, namesCount = names.length; i < namesCount; i += 1 ) {
+                    thingName = names[i]
+                    if ( thingName in STATE.methods ) {
+                        delete STATE.methods[thingName]
+                    }
+                }
+                return P
+            },
+
+
+            /**
+             * Fire off method events.
+             */
+            trigger: function( name, data ) {
+                var methodList = STATE.methods[ name ]
+                if ( methodList ) {
+                    methodList.map( function( method ) {
+                        PickerConstructor._.trigger( method, P, [ data ] )
+                    })
+                }
+                return P
+            } //trigger
+        } //PickerInstance.prototype
+
+
+    /**
+     * Wrap the picker holder components together.
+     */
+    function createWrappedComponent() {
+
+        // Create a picker wrapper holder
+        return PickerConstructor._.node( 'div',
+
+            // Create a picker wrapper node
+            PickerConstructor._.node( 'div',
+
+                // Create a picker frame
+                PickerConstructor._.node( 'div',
+
+                    // Create a picker box node
+                    PickerConstructor._.node( 'div',
+
+                        // Create the components nodes.
+                        P.component.nodes( STATE.open ),
+
+                        // The picker box class
+                        CLASSES.box
+                    ),
+
+                    // Picker wrap class
+                    CLASSES.wrap
+                ),
+
+                // Picker frame class
+                CLASSES.frame
+            ),
+
+            // Picker holder class
+            CLASSES.holder
+        ) //endreturn
+    } //createWrappedComponent
+
+
+
+    /**
+     * Prepare the input element with all bindings.
+     */
+    function prepareElement() {
+
+        $ELEMENT.
+
+            // Store the picker data by component name.
+            data(NAME, P).
+
+            // Add the “input” class name.
+            addClass(CLASSES.input).
+
+            // If there’s a `data-value`, update the value of the element.
+            val( $ELEMENT.data('value') ?
+                P.get('select', SETTINGS.format) :
+                ELEMENT.value
+            ).
+
+            // On focus/click, open the picker and adjust the root “focused” state.
+            on('focus.' + STATE.id + ' click.' + STATE.id, focusToOpen)
+
+
+        // Only bind keydown events if the element isn’t editable.
+        if ( !SETTINGS.editable ) {
+
+            // Handle keyboard event based on the picker being opened or not.
+            $ELEMENT.on('keydown.' + STATE.id, function(event) {
+
+                var keycode = event.keyCode,
+
+                    // Check if one of the delete keys was pressed.
+                    isKeycodeDelete = /^(8|46)$/.test(keycode)
+
+                // For some reason IE clears the input value on “escape”.
+                if ( keycode == 27 ) {
+                    P.close()
+                    return false
+                }
+
+                // Check if `space` or `delete` was pressed or the picker is closed with a key movement.
+                if ( keycode == 32 || isKeycodeDelete || !STATE.open && P.component.key[keycode] ) {
+
+                    // Prevent it from moving the page and bubbling to doc.
+                    event.preventDefault()
+                    event.stopPropagation()
+
+                    // If `delete` was pressed, clear the values and close the picker.
+                    // Otherwise open the picker.
+                    if ( isKeycodeDelete ) { P.clear().close() }
+                    else { P.open() }
+                }
+            })
+        }
+
+
+        // Update the aria attributes.
+        aria(ELEMENT, {
+            haspopup: true,
+            expanded: false,
+            readonly: false,
+            owns: ELEMENT.id + '_root' + (P._hidden ? ' ' + P._hidden.id : '')
+        })
+    }
+
+
+    /**
+     * Prepare the root picker element with all bindings.
+     */
+    function prepareElementRoot() {
+
+        P.$root.
+
+            on({
+
+                // When something within the root is focused, stop from bubbling
+                // to the doc and remove the “focused” state from the root.
+                focusin: function( event ) {
+                    P.$root.removeClass( CLASSES.focused )
+                    aria( P.$root[0], 'selected', false )
+                    event.stopPropagation()
+                },
+
+                // When something within the root holder is clicked, stop it
+                // from bubbling to the doc.
+                'mousedown click': function( event ) {
+
+                    var target = event.target
+
+                    // Make sure the target isn’t the root holder so it can bubble up.
+                    if ( target != P.$root.children()[ 0 ] ) {
+
+                        event.stopPropagation()
+
+                        // * For mousedown events, cancel the default action in order to
+                        //   prevent cases where focus is shifted onto external elements
+                        //   when using things like jQuery mobile or MagnificPopup (ref: #249 & #120).
+                        //   Also, for Firefox, don’t prevent action on the `option` element.
+                        if ( event.type == 'mousedown' && !$( target ).is( ':input' ) && target.nodeName != 'OPTION' ) {
+
+                            event.preventDefault()
+
+                            // Re-focus onto the element so that users can click away
+                            // from elements focused within the picker.
+                            ELEMENT.focus()
+                        }
+                    }
+                }
+            }).
+
+            // If there’s a click on an actionable element, carry out the actions.
+            on( 'click', '[data-pick], [data-nav], [data-clear]', function() {
+
+                var $target = $( this ),
+                    targetData = $target.data(),
+                    targetDisabled = $target.hasClass( CLASSES.navDisabled ) || $target.hasClass( CLASSES.disabled ),
+
+                    // * For IE, non-focusable elements can be active elements as well
+                    //   (http://stackoverflow.com/a/2684561).
+                    activeElement = document.activeElement
+                    activeElement = activeElement && ( activeElement.type || activeElement.href ) && activeElement
+
+                // If it’s disabled or nothing inside is actively focused, re-focus the element.
+                if ( targetDisabled || activeElement && !$.contains( P.$root[0], activeElement ) ) {
+                    ELEMENT.focus()
+                }
+
+                // If something is superficially changed, update the `highlight` based on the `nav`.
+                if ( targetData.nav && !targetDisabled ) {
+                    P.set( 'highlight', P.component.item.highlight, { nav: targetData.nav } )
+                }
+
+                // If something is picked, set `select` then close with focus.
+                else if ( PickerConstructor._.isInteger( targetData.pick ) && !targetDisabled ) {
+                    P.set( 'select', targetData.pick ).close( true )
+                }
+
+                // If a “clear” button is pressed, empty the values and close with focus.
+                else if ( targetData.clear ) {
+                    P.clear().close( true )
+                }
+            }) //P.$root
+
+        aria( P.$root[0], 'hidden', true )
+    }
+
+
+     /**
+      * Prepare the hidden input element along with all bindings.
+      */
+    function prepareElementHidden() {
+
+        var id = [
+            typeof SETTINGS.hiddenPrefix == 'string' ? SETTINGS.hiddenPrefix : '',
+            typeof SETTINGS.hiddenSuffix == 'string' ? SETTINGS.hiddenSuffix : '_submit'
+        ]
+
+        P._hidden = $(
+            '<input ' +
+            'type=hidden ' +
+
+            // Create the name and ID by using the original
+            // input’s with a prefix and suffix.
+            'name="' + id[0] + ELEMENT.name + id[1] + '"' +
+            'id="' + id[0] + ELEMENT.id + id[1] + '"' +
+
+            // If the element has a value, set the hidden value as well.
+            (
+                $ELEMENT.data('value') || ELEMENT.value ?
+                    ' value="' + P.get('select', SETTINGS.formatSubmit) + '"' :
+                    ''
+            ) +
+            '>'
+        )[0]
+
+        $ELEMENT.
+
+            // If the value changes, update the hidden input with the correct format.
+            on('change.' + STATE.id, function() {
+                P._hidden.value = ELEMENT.value ?
+                    P.get('select', SETTINGS.formatSubmit) :
+                    ''
+            }).
+
+            // Insert the hidden input after the element.
+            after(P._hidden)
+    }
+
+
+    // Separated for IE
+    function focusToOpen( event ) {
+
+        // Stop the event from propagating to the doc.
+        event.stopPropagation()
+
+        // If it’s a focus event, add the “focused” class to the root.
+        if ( event.type == 'focus' ) {
+            P.$root.addClass( CLASSES.focused )
+            aria( P.$root[0], 'selected', true )
+        }
+
+        // And then finally open the picker.
+        P.open()
+    }
+
+
+    // Return a new picker instance.
+    return new PickerInstance()
+} //PickerConstructor
+
+
+
+/**
+ * The default classes and prefix to use for the HTML classes.
+ */
+PickerConstructor.klasses = function( prefix ) {
+    prefix = prefix || 'picker'
+    return {
+
+        picker: prefix,
+        opened: prefix + '--opened',
+        focused: prefix + '--focused',
+
+        input: prefix + '__input',
+        active: prefix + '__input--active',
+
+        holder: prefix + '__holder',
+
+        frame: prefix + '__frame',
+        wrap: prefix + '__wrap',
+
+        box: prefix + '__box'
+    }
+} //PickerConstructor.klasses
+
+
+
+/**
+ * PickerConstructor helper methods.
+ */
+PickerConstructor._ = {
+
+    /**
+     * Create a group of nodes. Expects:
+     * `
+        {
+            min:    {Integer},
+            max:    {Integer},
+            i:      {Integer},
+            node:   {String},
+            item:   {Function}
+        }
+     * `
+     */
+    group: function( groupObject ) {
+
+        var
+            // Scope for the looped object
+            loopObjectScope,
+
+            // Create the nodes list
+            nodesList = '',
+
+            // The counter starts from the `min`
+            counter = PickerConstructor._.trigger( groupObject.min, groupObject )
+
+
+        // Loop from the `min` to `max`, incrementing by `i`
+        for ( ; counter <= PickerConstructor._.trigger( groupObject.max, groupObject, [ counter ] ); counter += groupObject.i ) {
+
+            // Trigger the `item` function within scope of the object
+            loopObjectScope = PickerConstructor._.trigger( groupObject.item, groupObject, [ counter ] )
+
+            // Splice the subgroup and create nodes out of the sub nodes
+            nodesList += PickerConstructor._.node(
+                groupObject.node,
+                loopObjectScope[ 0 ],   // the node
+                loopObjectScope[ 1 ],   // the classes
+                loopObjectScope[ 2 ]    // the attributes
+            )
+        }
+
+        // Return the list of nodes
+        return nodesList
+    }, //group
+
+
+    /**
+     * Create a dom node string
+     */
+    node: function( wrapper, item, klass, attribute ) {
+
+        // If the item is false-y, just return an empty string
+        if ( !item ) return ''
+
+        // If the item is an array, do a join
+        item = $.isArray( item ) ? item.join( '' ) : item
+
+        // Check for the class
+        klass = klass ? ' class="' + klass + '"' : ''
+
+        // Check for any attributes
+        attribute = attribute ? ' ' + attribute : ''
+
+        // Return the wrapped item
+        return '<' + wrapper + klass + attribute + '>' + item + '</' + wrapper + '>'
+    }, //node
+
+
+    /**
+     * Lead numbers below 10 with a zero.
+     */
+    lead: function( number ) {
+        return ( number < 10 ? '0': '' ) + number
+    },
+
+
+    /**
+     * Trigger a function otherwise return the value.
+     */
+    trigger: function( callback, scope, args ) {
+        return typeof callback == 'function' ? callback.apply( scope, args || [] ) : callback
+    },
+
+
+    /**
+     * If the second character is a digit, length is 2 otherwise 1.
+     */
+    digits: function( string ) {
+        return ( /\d/ ).test( string[ 1 ] ) ? 2 : 1
+    },
+
+
+    /**
+     * Tell if something is a date object.
+     */
+    isDate: function( value ) {
+        return {}.toString.call( value ).indexOf( 'Date' ) > -1 && this.isInteger( value.getDate() )
+    },
+
+
+    /**
+     * Tell if something is an integer.
+     */
+    isInteger: function( value ) {
+        return {}.toString.call( value ).indexOf( 'Number' ) > -1 && value % 1 === 0
+    },
+
+
+    /**
+     * Create ARIA attribute strings.
+     */
+    ariaAttr: ariaAttr
+} //PickerConstructor._
+
+
+
+/**
+ * Extend the picker with a component and defaults.
+ */
+PickerConstructor.extend = function( name, Component ) {
+
+    // Extend jQuery.
+    $.fn[ name ] = function( options, action ) {
+
+        // Grab the component data.
+        var componentData = this.data( name )
+
+        // If the picker is requested, return the data object.
+        if ( options == 'picker' ) {
+            return componentData
+        }
+
+        // If the component data exists and `options` is a string, carry out the action.
+        if ( componentData && typeof options == 'string' ) {
+            PickerConstructor._.trigger( componentData[ options ], componentData, [ action ] )
+            return this
+        }
+
+        // Otherwise go through each matched element and if the component
+        // doesn’t exist, create a new picker using `this` element
+        // and merging the defaults and options with a deep copy.
+        return this.each( function() {
+            var $this = $( this )
+            if ( !$this.data( name ) ) {
+                new PickerConstructor( this, name, Component, options )
+            }
+        })
+    }
+
+    // Set the defaults.
+    $.fn[ name ].defaults = Component.defaults
+} //PickerConstructor.extend
+
+
+
+function aria(element, attribute, value) {
+    if ( $.isPlainObject(attribute) ) {
+        for ( var key in attribute ) {
+            ariaSet(element, key, attribute[key])
+        }
+    }
+    else {
+        ariaSet(element, attribute, value)
+    }
+}
+function ariaSet(element, attribute, value) {
+    element.setAttribute(
+        (attribute == 'role' ? '' : 'aria-') + attribute,
+        value
+    )
+}
+function ariaAttr(attribute, data) {
+    if ( !$.isPlainObject(attribute) ) {
+        attribute = { attribute: data }
+    }
+    data = ''
+    for ( var key in attribute ) {
+        var attr = (key == 'role' ? '' : 'aria-') + key,
+            attrVal = attribute[key]
+        data += attrVal == null ? '' : attr + '="' + attribute[key] + '"'
+    }
+    return data
+}
+
+
+
+// Expose the picker constructor.
+return PickerConstructor
+
+
+}));
+
+
+
+
+
+/*!
+ * Date picker for pickadate.js v3.4.0
+ * http://amsul.github.io/pickadate.js/date.htm
+ */
+
+(function ( factory ) {
+
+    // Register as an anonymous module.
+    if ( typeof define == 'function' && define.amd )
+        define( 'picker.date',['picker','jquery'], factory )
+
+    // Or using browser globals.
+    else factory( Picker, jQuery )
+
+}(function( Picker, $ ) {
+
+
+/**
+ * Globals and constants
+ */
+var DAYS_IN_WEEK = 7,
+    WEEKS_IN_CALENDAR = 6,
+    _ = Picker._
+
+
+
+/**
+ * The date picker constructor
+ */
+function DatePicker( picker, settings ) {
+
+    var calendar = this,
+        elementValue = picker.$node[ 0 ].value,
+        elementDataValue = picker.$node.data( 'value' ),
+        valueString = elementDataValue || elementValue,
+        formatString = elementDataValue ? settings.formatSubmit : settings.format,
+        isRTL = function() {
+            return getComputedStyle( picker.$root[0] ).direction === 'rtl'
+        }
+
+    calendar.settings = settings
+    calendar.$node = picker.$node
+
+    // The queue of methods that will be used to build item objects.
+    calendar.queue = {
+        min: 'measure create',
+        max: 'measure create',
+        now: 'now create',
+        select: 'parse create validate',
+        highlight: 'parse navigate create validate',
+        view: 'parse create validate viewset',
+        disable: 'deactivate',
+        enable: 'activate'
+    }
+
+    // The component's item object.
+    calendar.item = {}
+
+    calendar.item.disable = ( settings.disable || [] ).slice( 0 )
+    calendar.item.enable = -(function( collectionDisabled ) {
+        return collectionDisabled[ 0 ] === true ? collectionDisabled.shift() : -1
+    })( calendar.item.disable )
+
+    calendar.
+        set( 'min', settings.min ).
+        set( 'max', settings.max ).
+        set( 'now' )
+
+    // When there’s a value, set the `select`, which in turn
+    // also sets the `highlight` and `view`.
+    if ( valueString ) {
+        calendar.set( 'select', valueString, {
+            format: formatString,
+            fromValue: !!elementValue
+        })
+    }
+
+    // If there’s no value, default to highlighting “today”.
+    else {
+        calendar.
+            set( 'select', null ).
+            set( 'highlight', calendar.item.now )
+    }
+
+
+    // The keycode to movement mapping.
+    calendar.key = {
+        40: 7, // Down
+        38: -7, // Up
+        39: function() { return isRTL() ? -1 : 1 }, // Right
+        37: function() { return isRTL() ? 1 : -1 }, // Left
+        go: function( timeChange ) {
+            var highlightedObject = calendar.item.highlight,
+                targetDate = new Date( highlightedObject.year, highlightedObject.month, highlightedObject.date + timeChange )
+            calendar.set(
+                'highlight',
+                [ targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate() ],
+                { interval: timeChange }
+            )
+            this.render()
+        }
+    }
+
+
+    // Bind some picker events.
+    picker.
+        on( 'render', function() {
+            picker.$root.find( '.' + settings.klass.selectMonth ).on( 'change', function() {
+                var value = this.value
+                if ( value ) {
+                    picker.set( 'highlight', [ picker.get( 'view' ).year, value, picker.get( 'highlight' ).date ] )
+                    picker.$root.find( '.' + settings.klass.selectMonth ).trigger( 'focus' )
+                }
+            })
+            picker.$root.find( '.' + settings.klass.selectYear ).on( 'change', function() {
+                var value = this.value
+                if ( value ) {
+                    picker.set( 'highlight', [ value, picker.get( 'view' ).month, picker.get( 'highlight' ).date ] )
+                    picker.$root.find( '.' + settings.klass.selectYear ).trigger( 'focus' )
+                }
+            })
+        }).
+        on( 'open', function() {
+            picker.$root.find( 'button, select' ).attr( 'disabled', false )
+        }).
+        on( 'close', function() {
+            picker.$root.find( 'button, select' ).attr( 'disabled', true )
+        })
+
+} //DatePicker
+
+
+/**
+ * Set a datepicker item object.
+ */
+DatePicker.prototype.set = function( type, value, options ) {
+
+    var calendar = this,
+        calendarItem = calendar.item
+
+    // If the value is `null` just set it immediately.
+    if ( value === null ) {
+        calendarItem[ type ] = value
+        return calendar
+    }
+
+    // Otherwise go through the queue of methods, and invoke the functions.
+    // Update this as the time unit, and set the final value as this item.
+    // * In the case of `enable`, keep the queue but set `disable` instead.
+    //   And in the case of `flip`, keep the queue but set `enable` instead.
+    calendarItem[ ( type == 'enable' ? 'disable' : type == 'flip' ? 'enable' : type ) ] = calendar.queue[ type ].split( ' ' ).map( function( method ) {
+        value = calendar[ method ]( type, value, options )
+        return value
+    }).pop()
+
+    // Check if we need to cascade through more updates.
+    if ( type == 'select' ) {
+        calendar.set( 'highlight', calendarItem.select, options )
+    }
+    else if ( type == 'highlight' ) {
+        calendar.set( 'view', calendarItem.highlight, options )
+    }
+    else if ( type.match( /^(flip|min|max|disable|enable)$/ ) ) {
+        if ( calendarItem.select && calendar.disabled( calendarItem.select ) ) {
+            calendar.set( 'select', calendarItem.select, options )
+        }
+        if ( calendarItem.highlight && calendar.disabled( calendarItem.highlight ) ) {
+            calendar.set( 'highlight', calendarItem.highlight, options )
+        }
+    }
+
+    return calendar
+} //DatePicker.prototype.set
+
+
+/**
+ * Get a datepicker item object.
+ */
+DatePicker.prototype.get = function( type ) {
+    return this.item[ type ]
+} //DatePicker.prototype.get
+
+
+/**
+ * Create a picker date object.
+ */
+DatePicker.prototype.create = function( type, value, options ) {
+
+    var isInfiniteValue,
+        calendar = this
+
+    // If there’s no value, use the type as the value.
+    value = value === undefined ? type : value
+
+
+    // If it’s infinity, update the value.
+    if ( value == -Infinity || value == Infinity ) {
+        isInfiniteValue = value
+    }
+
+    // If it’s an object, use the native date object.
+    else if ( $.isPlainObject( value ) && _.isInteger( value.pick ) ) {
+        value = value.obj
+    }
+
+    // If it’s an array, convert it into a date and make sure
+    // that it’s a valid date – otherwise default to today.
+    else if ( $.isArray( value ) ) {
+        value = new Date( value[ 0 ], value[ 1 ], value[ 2 ] )
+        value = _.isDate( value ) ? value : calendar.create().obj
+    }
+
+    // If it’s a number or date object, make a normalized date.
+    else if ( _.isInteger( value ) || _.isDate( value ) ) {
+        value = calendar.normalize( new Date( value ), options )
+    }
+
+    // If it’s a literal true or any other case, set it to now.
+    else /*if ( value === true )*/ {
+        value = calendar.now( type, value, options )
+    }
+
+    // Return the compiled object.
+    return {
+        year: isInfiniteValue || value.getFullYear(),
+        month: isInfiniteValue || value.getMonth(),
+        date: isInfiniteValue || value.getDate(),
+        day: isInfiniteValue || value.getDay(),
+        obj: isInfiniteValue || value,
+        pick: isInfiniteValue || value.getTime()
+    }
+} //DatePicker.prototype.create
+
+
+/**
+ * Create a range limit object using an array, date object,
+ * literal “true”, or integer relative to another time.
+ */
+DatePicker.prototype.createRange = function( from, to ) {
+
+    var calendar = this,
+        createDate = function( date ) {
+            if ( date === true || $.isArray( date ) || _.isDate( date ) ) {
+                return calendar.create( date )
+            }
+            return date
+        }
+
+    // Create objects if possible.
+    if ( !_.isInteger( from ) ) {
+        from = createDate( from )
+    }
+    if ( !_.isInteger( to ) ) {
+        to = createDate( to )
+    }
+
+    // Create relative dates.
+    if ( _.isInteger( from ) && $.isPlainObject( to ) ) {
+        from = [ to.year, to.month, to.date + from ];
+    }
+    else if ( _.isInteger( to ) && $.isPlainObject( from ) ) {
+        to = [ from.year, from.month, from.date + to ];
+    }
+
+    return {
+        from: createDate( from ),
+        to: createDate( to )
+    }
+} //DatePicker.prototype.createRange
+
+
+/**
+ * Check if a date unit falls within a date range object.
+ */
+DatePicker.prototype.withinRange = function( range, dateUnit ) {
+    range = this.createRange(range.from, range.to)
+    return dateUnit.pick >= range.from.pick && dateUnit.pick <= range.to.pick
+}
+
+
+/**
+ * Check if two date range objects overlap.
+ */
+DatePicker.prototype.overlapRanges = function( one, two ) {
+
+    var calendar = this
+
+    // Convert the ranges into comparable dates.
+    one = calendar.createRange( one.from, one.to )
+    two = calendar.createRange( two.from, two.to )
+
+    return calendar.withinRange( one, two.from ) || calendar.withinRange( one, two.to ) ||
+        calendar.withinRange( two, one.from ) || calendar.withinRange( two, one.to )
+}
+
+
+/**
+ * Get the date today.
+ */
+DatePicker.prototype.now = function( type, value, options ) {
+    value = new Date()
+    if ( options && options.rel ) {
+        value.setDate( value.getDate() + options.rel )
+    }
+    return this.normalize( value, options )
+}
+
+
+/**
+ * Navigate to next/prev month.
+ */
+DatePicker.prototype.navigate = function( type, value, options ) {
+
+    var targetDateObject,
+        targetYear,
+        targetMonth,
+        targetDate,
+        isTargetArray = $.isArray( value ),
+        isTargetObject = $.isPlainObject( value ),
+        viewsetObject = this.item.view/*,
+        safety = 100*/
+
+
+    if ( isTargetArray || isTargetObject ) {
+
+        if ( isTargetObject ) {
+            targetYear = value.year
+            targetMonth = value.month
+            targetDate = value.date
+        }
+        else {
+            targetYear = +value[0]
+            targetMonth = +value[1]
+            targetDate = +value[2]
+        }
+
+        // If we’re navigating months but the view is in a different
+        // month, navigate to the view’s year and month.
+        if ( options && options.nav && viewsetObject && viewsetObject.month !== targetMonth ) {
+            targetYear = viewsetObject.year
+            targetMonth = viewsetObject.month
+        }
+
+        // Figure out the expected target year and month.
+        targetDateObject = new Date( targetYear, targetMonth + ( options && options.nav ? options.nav : 0 ), 1 )
+        targetYear = targetDateObject.getFullYear()
+        targetMonth = targetDateObject.getMonth()
+
+        // If the month we’re going to doesn’t have enough days,
+        // keep decreasing the date until we reach the month’s last date.
+        while ( /*safety &&*/ new Date( targetYear, targetMonth, targetDate ).getMonth() !== targetMonth ) {
+            targetDate -= 1
+            /*safety -= 1
+            if ( !safety ) {
+                throw 'Fell into an infinite loop while navigating to ' + new Date( targetYear, targetMonth, targetDate ) + '.'
+            }*/
+        }
+
+        value = [ targetYear, targetMonth, targetDate ]
+    }
+
+    return value
+} //DatePicker.prototype.navigate
+
+
+/**
+ * Normalize a date by setting the hours to midnight.
+ */
+DatePicker.prototype.normalize = function( value/*, options*/ ) {
+    value.setHours( 0, 0, 0, 0 )
+    return value
+}
+
+
+/**
+ * Measure the range of dates.
+ */
+DatePicker.prototype.measure = function( type, value/*, options*/ ) {
+
+    var calendar = this
+
+    // If it's anything false-y, remove the limits.
+    if ( !value ) {
+        value = type == 'min' ? -Infinity : Infinity
+    }
+
+    // If it's an integer, get a date relative to today.
+    else if ( _.isInteger( value ) ) {
+        value = calendar.now( type, value, { rel: value } )
+    }
+
+    return value
+} ///DatePicker.prototype.measure
+
+
+/**
+ * Create a viewset object based on navigation.
+ */
+DatePicker.prototype.viewset = function( type, dateObject/*, options*/ ) {
+    return this.create([ dateObject.year, dateObject.month, 1 ])
+}
+
+
+/**
+ * Validate a date as enabled and shift if needed.
+ */
+DatePicker.prototype.validate = function( type, dateObject, options ) {
+
+    var calendar = this,
+
+        // Keep a reference to the original date.
+        originalDateObject = dateObject,
+
+        // Make sure we have an interval.
+        interval = options && options.interval ? options.interval : 1,
+
+        // Check if the calendar enabled dates are inverted.
+        isFlippedBase = calendar.item.enable === -1,
+
+        // Check if we have any enabled dates after/before now.
+        hasEnabledBeforeTarget, hasEnabledAfterTarget,
+
+        // The min & max limits.
+        minLimitObject = calendar.item.min,
+        maxLimitObject = calendar.item.max,
+
+        // Check if we’ve reached the limit during shifting.
+        reachedMin, reachedMax,
+
+        // Check if the calendar is inverted and at least one weekday is enabled.
+        hasEnabledWeekdays = isFlippedBase && calendar.item.disable.filter( function( value ) {
+
+            // If there’s a date, check where it is relative to the target.
+            if ( $.isArray( value ) ) {
+                var dateTime = calendar.create( value ).pick
+                if ( dateTime < dateObject.pick ) hasEnabledBeforeTarget = true
+                else if ( dateTime > dateObject.pick ) hasEnabledAfterTarget = true
+            }
+
+            // Return only integers for enabled weekdays.
+            return _.isInteger( value )
+        }).length/*,
+
+        safety = 100*/
+
+
+
+    // Cases to validate for:
+    // [1] Not inverted and date disabled.
+    // [2] Inverted and some dates enabled.
+    // [3] Not inverted and out of range.
+    //
+    // Cases to **not** validate for:
+    // • Navigating months.
+    // • Not inverted and date enabled.
+    // • Inverted and all dates disabled.
+    // • ..and anything else.
+    if ( !options || !options.nav ) if (
+        /* 1 */ ( !isFlippedBase && calendar.disabled( dateObject ) ) ||
+        /* 2 */ ( isFlippedBase && calendar.disabled( dateObject ) && ( hasEnabledWeekdays || hasEnabledBeforeTarget || hasEnabledAfterTarget ) ) ||
+        /* 3 */ ( !isFlippedBase && (dateObject.pick <= minLimitObject.pick || dateObject.pick >= maxLimitObject.pick) )
+    ) {
+
+
+        // When inverted, flip the direction if there aren’t any enabled weekdays
+        // and there are no enabled dates in the direction of the interval.
+        if ( isFlippedBase && !hasEnabledWeekdays && ( ( !hasEnabledAfterTarget && interval > 0 ) || ( !hasEnabledBeforeTarget && interval < 0 ) ) ) {
+            interval *= -1
+        }
+
+
+        // Keep looping until we reach an enabled date.
+        while ( /*safety &&*/ calendar.disabled( dateObject ) ) {
+
+            /*safety -= 1
+            if ( !safety ) {
+                throw 'Fell into an infinite loop while validating ' + dateObject.obj + '.'
+            }*/
+
+
+            // If we’ve looped into the next/prev month with a large interval, return to the original date and flatten the interval.
+            if ( Math.abs( interval ) > 1 && ( dateObject.month < originalDateObject.month || dateObject.month > originalDateObject.month ) ) {
+                dateObject = originalDateObject
+                interval = interval > 0 ? 1 : -1
+            }
+
+
+            // If we’ve reached the min/max limit, reverse the direction, flatten the interval and set it to the limit.
+            if ( dateObject.pick <= minLimitObject.pick ) {
+                reachedMin = true
+                interval = 1
+                dateObject = calendar.create([ minLimitObject.year, minLimitObject.month, minLimitObject.date - 1 ])
+            }
+            else if ( dateObject.pick >= maxLimitObject.pick ) {
+                reachedMax = true
+                interval = -1
+                dateObject = calendar.create([ maxLimitObject.year, maxLimitObject.month, maxLimitObject.date + 1 ])
+            }
+
+
+            // If we’ve reached both limits, just break out of the loop.
+            if ( reachedMin && reachedMax ) {
+                break
+            }
+
+
+            // Finally, create the shifted date using the interval and keep looping.
+            dateObject = calendar.create([ dateObject.year, dateObject.month, dateObject.date + interval ])
+        }
+
+    } //endif
+
+
+    // Return the date object settled on.
+    return dateObject
+} //DatePicker.prototype.validate
+
+
+/**
+ * Check if a date is disabled.
+ */
+DatePicker.prototype.disabled = function( dateToVerify ) {
+
+    var
+        calendar = this,
+
+        // Filter through the disabled dates to check if this is one.
+        isDisabledMatch = calendar.item.disable.filter( function( dateToDisable ) {
+
+            // If the date is a number, match the weekday with 0index and `firstDay` check.
+            if ( _.isInteger( dateToDisable ) ) {
+                return dateToVerify.day === ( calendar.settings.firstDay ? dateToDisable : dateToDisable - 1 ) % 7
+            }
+
+            // If it’s an array or a native JS date, create and match the exact date.
+            if ( $.isArray( dateToDisable ) || _.isDate( dateToDisable ) ) {
+                return dateToVerify.pick === calendar.create( dateToDisable ).pick
+            }
+
+            // If it’s an object, match a date within the “from” and “to” range.
+            if ( $.isPlainObject( dateToDisable ) ) {
+                return calendar.withinRange( dateToDisable, dateToVerify )
+            }
+        })
+
+    // If this date matches a disabled date, confirm it’s not inverted.
+    isDisabledMatch = isDisabledMatch.length && !isDisabledMatch.filter(function( dateToDisable ) {
+        return $.isArray( dateToDisable ) && dateToDisable[3] == 'inverted' ||
+            $.isPlainObject( dateToDisable ) && dateToDisable.inverted
+    }).length
+
+    // Check the calendar “enabled” flag and respectively flip the
+    // disabled state. Then also check if it’s beyond the min/max limits.
+    return calendar.item.enable === -1 ? !isDisabledMatch : isDisabledMatch ||
+        dateToVerify.pick < calendar.item.min.pick ||
+        dateToVerify.pick > calendar.item.max.pick
+
+} //DatePicker.prototype.disabled
+
+
+/**
+ * Parse a string into a usable type.
+ */
+DatePicker.prototype.parse = function( type, value, options ) {
+
+    var calendar = this,
+        parsingObject = {},
+        monthIndex
+
+    if ( !value || _.isInteger( value ) || $.isArray( value ) || _.isDate( value ) || $.isPlainObject( value ) && _.isInteger( value.pick ) ) {
+        return value
+    }
+
+    // We need a `.format` to parse the value with.
+    if ( !( options && options.format ) ) {
+        options = options || {}
+        options.format = calendar.settings.format
+    }
+
+    // Calculate the month index to adjust with.
+    monthIndex = typeof value == 'string' && !options.fromValue ? 1 : 0
+
+    // Convert the format into an array and then map through it.
+    calendar.formats.toArray( options.format ).map( function( label ) {
+
+        var
+            // Grab the formatting label.
+            formattingLabel = calendar.formats[ label ],
+
+            // The format length is from the formatting label function or the
+            // label length without the escaping exclamation (!) mark.
+            formatLength = formattingLabel ? _.trigger( formattingLabel, calendar, [ value, parsingObject ] ) : label.replace( /^!/, '' ).length
+
+        // If there's a format label, split the value up to the format length.
+        // Then add it to the parsing object with appropriate label.
+        if ( formattingLabel ) {
+            parsingObject[ label ] = value.substr( 0, formatLength )
+        }
+
+        // Update the value as the substring from format length to end.
+        value = value.substr( formatLength )
+    })
+
+    // If it’s parsing a user provided month value, compensate for month 0index.
+    return [
+        parsingObject.yyyy || parsingObject.yy,
+        +( parsingObject.mm || parsingObject.m ) - monthIndex,
+        parsingObject.dd || parsingObject.d
+    ]
+} //DatePicker.prototype.parse
+
+
+/**
+ * Various formats to display the object in.
+ */
+DatePicker.prototype.formats = (function() {
+
+    // Return the length of the first word in a collection.
+    function getWordLengthFromCollection( string, collection, dateObject ) {
+
+        // Grab the first word from the string.
+        var word = string.match( /\w+/ )[ 0 ]
+
+        // If there's no month index, add it to the date object
+        if ( !dateObject.mm && !dateObject.m ) {
+            dateObject.m = collection.indexOf( word )
+        }
+
+        // Return the length of the word.
+        return word.length
+    }
+
+    // Get the length of the first word in a string.
+    function getFirstWordLength( string ) {
+        return string.match( /\w+/ )[ 0 ].length
+    }
+
+    return {
+
+        d: function( string, dateObject ) {
+
+            // If there's string, then get the digits length.
+            // Otherwise return the selected date.
+            return string ? _.digits( string ) : dateObject.date
+        },
+        dd: function( string, dateObject ) {
+
+            // If there's a string, then the length is always 2.
+            // Otherwise return the selected date with a leading zero.
+            return string ? 2 : _.lead( dateObject.date )
+        },
+        ddd: function( string, dateObject ) {
+
+            // If there's a string, then get the length of the first word.
+            // Otherwise return the short selected weekday.
+            return string ? getFirstWordLength( string ) : this.settings.weekdaysShort[ dateObject.day ]
+        },
+        dddd: function( string, dateObject ) {
+
+            // If there's a string, then get the length of the first word.
+            // Otherwise return the full selected weekday.
+            return string ? getFirstWordLength( string ) : this.settings.weekdaysFull[ dateObject.day ]
+        },
+        m: function( string, dateObject ) {
+
+            // If there's a string, then get the length of the digits
+            // Otherwise return the selected month with 0index compensation.
+            return string ? _.digits( string ) : dateObject.month + 1
+        },
+        mm: function( string, dateObject ) {
+
+            // If there's a string, then the length is always 2.
+            // Otherwise return the selected month with 0index and leading zero.
+            return string ? 2 : _.lead( dateObject.month + 1 )
+        },
+        mmm: function( string, dateObject ) {
+
+            var collection = this.settings.monthsShort
+
+            // If there's a string, get length of the relevant month from the short
+            // months collection. Otherwise return the selected month from that collection.
+            return string ? getWordLengthFromCollection( string, collection, dateObject ) : collection[ dateObject.month ]
+        },
+        mmmm: function( string, dateObject ) {
+
+            var collection = this.settings.monthsFull
+
+            // If there's a string, get length of the relevant month from the full
+            // months collection. Otherwise return the selected month from that collection.
+            return string ? getWordLengthFromCollection( string, collection, dateObject ) : collection[ dateObject.month ]
+        },
+        yy: function( string, dateObject ) {
+
+            // If there's a string, then the length is always 2.
+            // Otherwise return the selected year by slicing out the first 2 digits.
+            return string ? 2 : ( '' + dateObject.year ).slice( 2 )
+        },
+        yyyy: function( string, dateObject ) {
+
+            // If there's a string, then the length is always 4.
+            // Otherwise return the selected year.
+            return string ? 4 : dateObject.year
+        },
+
+        // Create an array by splitting the formatting string passed.
+        toArray: function( formatString ) { return formatString.split( /(d{1,4}|m{1,4}|y{4}|yy|!.)/g ) },
+
+        // Format an object into a string using the formatting options.
+        toString: function ( formatString, itemObject ) {
+            var calendar = this
+            return calendar.formats.toArray( formatString ).map( function( label ) {
+                return _.trigger( calendar.formats[ label ], calendar, [ 0, itemObject ] ) || label.replace( /^!/, '' )
+            }).join( '' )
+        }
+    }
+})() //DatePicker.prototype.formats
+
+
+
+
+/**
+ * Check if two date units are the exact.
+ */
+DatePicker.prototype.isDateExact = function( one, two ) {
+
+    var calendar = this
+
+    // When we’re working with weekdays, do a direct comparison.
+    if (
+        ( _.isInteger( one ) && _.isInteger( two ) ) ||
+        ( typeof one == 'boolean' && typeof two == 'boolean' )
+     ) {
+        return one === two
+    }
+
+    // When we’re working with date representations, compare the “pick” value.
+    if (
+        ( _.isDate( one ) || $.isArray( one ) ) &&
+        ( _.isDate( two ) || $.isArray( two ) )
+    ) {
+        return calendar.create( one ).pick === calendar.create( two ).pick
+    }
+
+    // When we’re working with range objects, compare the “from” and “to”.
+    if ( $.isPlainObject( one ) && $.isPlainObject( two ) ) {
+        return calendar.isDateExact( one.from, two.from ) && calendar.isDateExact( one.to, two.to )
+    }
+
+    return false
+}
+
+
+/**
+ * Check if two date units overlap.
+ */
+DatePicker.prototype.isDateOverlap = function( one, two ) {
+
+    var calendar = this
+
+    // When we’re working with a weekday index, compare the days.
+    if ( _.isInteger( one ) && ( _.isDate( two ) || $.isArray( two ) ) ) {
+        return one === calendar.create( two ).day + 1
+    }
+    if ( _.isInteger( two ) && ( _.isDate( one ) || $.isArray( one ) ) ) {
+        return two === calendar.create( one ).day + 1
+    }
+
+    // When we’re working with range objects, check if the ranges overlap.
+    if ( $.isPlainObject( one ) && $.isPlainObject( two ) ) {
+        return calendar.overlapRanges( one, two )
+    }
+
+    return false
+}
+
+
+/**
+ * Flip the “enabled” state.
+ */
+DatePicker.prototype.flipEnable = function(val) {
+    var itemObject = this.item
+    itemObject.enable = val || (itemObject.enable == -1 ? 1 : -1)
+}
+
+
+/**
+ * Mark a collection of dates as “disabled”.
+ */
+DatePicker.prototype.deactivate = function( type, datesToDisable ) {
+
+    var calendar = this,
+        disabledItems = calendar.item.disable.slice(0)
+
+
+    // If we’re flipping, that’s all we need to do.
+    if ( datesToDisable == 'flip' ) {
+        calendar.flipEnable()
+    }
+
+    else if ( datesToDisable === false ) {
+        calendar.flipEnable(1)
+        disabledItems = []
+    }
+
+    else if ( datesToDisable === true ) {
+        calendar.flipEnable(-1)
+        disabledItems = []
+    }
+
+    // Otherwise go through the dates to disable.
+    else {
+
+        datesToDisable.map(function( unitToDisable ) {
+
+            var matchFound
+
+            // When we have disabled items, check for matches.
+            // If something is matched, immediately break out.
+            for ( var index = 0; index < disabledItems.length; index += 1 ) {
+                if ( calendar.isDateExact( unitToDisable, disabledItems[index] ) ) {
+                    matchFound = true
+                    break
+                }
+            }
+
+            // If nothing was found, add the validated unit to the collection.
+            if ( !matchFound ) {
+                if (
+                    _.isInteger( unitToDisable ) ||
+                    _.isDate( unitToDisable ) ||
+                    $.isArray( unitToDisable ) ||
+                    ( $.isPlainObject( unitToDisable ) && unitToDisable.from && unitToDisable.to )
+                ) {
+                    disabledItems.push( unitToDisable )
+                }
+            }
+        })
+    }
+
+    // Return the updated collection.
+    return disabledItems
+} //DatePicker.prototype.deactivate
+
+
+/**
+ * Mark a collection of dates as “enabled”.
+ */
+DatePicker.prototype.activate = function( type, datesToEnable ) {
+
+    var calendar = this,
+        disabledItems = calendar.item.disable,
+        disabledItemsCount = disabledItems.length
+
+    // If we’re flipping, that’s all we need to do.
+    if ( datesToEnable == 'flip' ) {
+        calendar.flipEnable()
+    }
+
+    else if ( datesToEnable === true ) {
+        calendar.flipEnable(1)
+        disabledItems = []
+    }
+
+    else if ( datesToEnable === false ) {
+        calendar.flipEnable(-1)
+        disabledItems = []
+    }
+
+    // Otherwise go through the disabled dates.
+    else {
+
+        datesToEnable.map(function( unitToEnable ) {
+
+            var matchFound,
+                disabledUnit,
+                index,
+                isExactRange
+
+            // Go through the disabled items and try to find a match.
+            for ( index = 0; index < disabledItemsCount; index += 1 ) {
+
+                disabledUnit = disabledItems[index]
+
+                // When an exact match is found, remove it from the collection.
+                if ( calendar.isDateExact( disabledUnit, unitToEnable ) ) {
+                    matchFound = disabledItems[index] = null
+                    isExactRange = true
+                    break
+                }
+
+                // When an overlapped match is found, add the “inverted” state to it.
+                else if ( calendar.isDateOverlap( disabledUnit, unitToEnable ) ) {
+                    if ( $.isPlainObject( unitToEnable ) ) {
+                        unitToEnable.inverted = true
+                        matchFound = unitToEnable
+                    }
+                    else if ( $.isArray( unitToEnable ) ) {
+                        matchFound = unitToEnable
+                        if ( !matchFound[3] ) matchFound.push( 'inverted' )
+                    }
+                    else if ( _.isDate( unitToEnable ) ) {
+                        matchFound = [ unitToEnable.getFullYear(), unitToEnable.getMonth(), unitToEnable.getDate(), 'inverted' ]
+                    }
+                    break
+                }
+            }
+
+            // If a match was found, remove a previous duplicate entry.
+            if ( matchFound ) for ( index = 0; index < disabledItemsCount; index += 1 ) {
+                if ( calendar.isDateExact( disabledItems[index], unitToEnable ) ) {
+                    disabledItems[index] = null
+                    break
+                }
+            }
+
+            // In the event that we’re dealing with an exact range of dates,
+            // make sure there are no “inverted” dates because of it.
+            if ( isExactRange ) for ( index = 0; index < disabledItemsCount; index += 1 ) {
+                if ( calendar.isDateOverlap( disabledItems[index], unitToEnable ) ) {
+                    disabledItems[index] = null
+                    break
+                }
+            }
+
+            // If something is still matched, add it into the collection.
+            if ( matchFound ) {
+                disabledItems.push( matchFound )
+            }
+        })
+    }
+
+    // Return the updated collection.
+    return disabledItems.filter(function( val ) { return val != null })
+} //DatePicker.prototype.activate
+
+
+/**
+ * Create a string for the nodes in the picker.
+ */
+DatePicker.prototype.nodes = function( isOpen ) {
+
+    var
+        calendar = this,
+        settings = calendar.settings,
+        calendarItem = calendar.item,
+        nowObject = calendarItem.now,
+        selectedObject = calendarItem.select,
+        highlightedObject = calendarItem.highlight,
+        viewsetObject = calendarItem.view,
+        disabledCollection = calendarItem.disable,
+        minLimitObject = calendarItem.min,
+        maxLimitObject = calendarItem.max,
+
+
+        // Create the calendar table head using a copy of weekday labels collection.
+        // * We do a copy so we don't mutate the original array.
+        tableHead = (function( collection ) {
+
+            // If the first day should be Monday, move Sunday to the end.
+            if ( settings.firstDay ) {
+                collection.push( collection.shift() )
+            }
+
+            // Create and return the table head group.
+            return _.node(
+                'thead',
+                _.node(
+                    'tr',
+                    _.group({
+                        min: 0,
+                        max: DAYS_IN_WEEK - 1,
+                        i: 1,
+                        node: 'th',
+                        item: function( counter ) {
+                            return [
+                                collection[ counter ],
+                                settings.klass.weekdays
+                            ]
+                        }
+                    })
+                )
+            ) //endreturn
+        })( ( settings.showWeekdaysFull ? settings.weekdaysFull : settings.weekdaysShort ).slice( 0 ) ), //tableHead
+
+
+        // Create the nav for next/prev month.
+        createMonthNav = function( next ) {
+
+            // Otherwise, return the created month tag.
+            return _.node(
+                'div',
+                ' ',
+                settings.klass[ 'nav' + ( next ? 'Next' : 'Prev' ) ] + (
+
+                    // If the focused month is outside the range, disabled the button.
+                    ( next && viewsetObject.year >= maxLimitObject.year && viewsetObject.month >= maxLimitObject.month ) ||
+                    ( !next && viewsetObject.year <= minLimitObject.year && viewsetObject.month <= minLimitObject.month ) ?
+                    ' ' + settings.klass.navDisabled : ''
+                ),
+                'data-nav=' + ( next || -1 )
+            ) //endreturn
+        }, //createMonthNav
+
+
+        // Create the month label.
+        createMonthLabel = function( monthsCollection ) {
+
+            // If there are months to select, add a dropdown menu.
+            if ( settings.selectMonths ) {
+
+                return _.node( 'select', _.group({
+                    min: 0,
+                    max: 11,
+                    i: 1,
+                    node: 'option',
+                    item: function( loopedMonth ) {
+
+                        return [
+
+                            // The looped month and no classes.
+                            monthsCollection[ loopedMonth ], 0,
+
+                            // Set the value and selected index.
+                            'value=' + loopedMonth +
+                            ( viewsetObject.month == loopedMonth ? ' selected' : '' ) +
+                            (
+                                (
+                                    ( viewsetObject.year == minLimitObject.year && loopedMonth < minLimitObject.month ) ||
+                                    ( viewsetObject.year == maxLimitObject.year && loopedMonth > maxLimitObject.month )
+                                ) ?
+                                ' disabled' : ''
+                            )
+                        ]
+                    }
+                }), settings.klass.selectMonth, isOpen ? '' : 'disabled' )
+            }
+
+            // If there's a need for a month selector
+            return _.node( 'div', monthsCollection[ viewsetObject.month ], settings.klass.month )
+        }, //createMonthLabel
+
+
+        // Create the year label.
+        createYearLabel = function() {
+
+            var focusedYear = viewsetObject.year,
+
+            // If years selector is set to a literal "true", set it to 5. Otherwise
+            // divide in half to get half before and half after focused year.
+            numberYears = settings.selectYears === true ? 5 : ~~( settings.selectYears / 2 )
+
+            // If there are years to select, add a dropdown menu.
+            if ( numberYears ) {
+
+                var
+                    minYear = minLimitObject.year,
+                    maxYear = maxLimitObject.year,
+                    lowestYear = focusedYear - numberYears,
+                    highestYear = focusedYear + numberYears
+
+                // If the min year is greater than the lowest year, increase the highest year
+                // by the difference and set the lowest year to the min year.
+                if ( minYear > lowestYear ) {
+                    highestYear += minYear - lowestYear
+                    lowestYear = minYear
+                }
+
+                // If the max year is less than the highest year, decrease the lowest year
+                // by the lower of the two: available and needed years. Then set the
+                // highest year to the max year.
+                if ( maxYear < highestYear ) {
+
+                    var availableYears = lowestYear - minYear,
+                        neededYears = highestYear - maxYear
+
+                    lowestYear -= availableYears > neededYears ? neededYears : availableYears
+                    highestYear = maxYear
+                }
+
+                return _.node( 'select', _.group({
+                    min: lowestYear,
+                    max: highestYear,
+                    i: 1,
+                    node: 'option',
+                    item: function( loopedYear ) {
+                        return [
+
+                            // The looped year and no classes.
+                            loopedYear, 0,
+
+                            // Set the value and selected index.
+                            'value=' + loopedYear + ( focusedYear == loopedYear ? ' selected' : '' )
+                        ]
+                    }
+                }), settings.klass.selectYear, isOpen ? '' : 'disabled' )
+            }
+
+            // Otherwise just return the year focused
+            return _.node( 'div', focusedYear, settings.klass.year )
+        } //createYearLabel
+
+
+    // Create and return the entire calendar.
+    return _.node(
+        'div',
+        createMonthNav() + createMonthNav( 1 ) +
+        createMonthLabel( settings.showMonthsShort ? settings.monthsShort : settings.monthsFull ) +
+        createYearLabel(),
+        settings.klass.header
+    ) + _.node(
+        'table',
+        tableHead +
+        _.node(
+            'tbody',
+            _.group({
+                min: 0,
+                max: WEEKS_IN_CALENDAR - 1,
+                i: 1,
+                node: 'tr',
+                item: function( rowCounter ) {
+
+                    // If Monday is the first day and the month starts on Sunday, shift the date back a week.
+                    var shiftDateBy = settings.firstDay && calendar.create([ viewsetObject.year, viewsetObject.month, 1 ]).day === 0 ? -7 : 0
+
+                    return [
+                        _.group({
+                            min: DAYS_IN_WEEK * rowCounter - viewsetObject.day + shiftDateBy + 1, // Add 1 for weekday 0index
+                            max: function() {
+                                return this.min + DAYS_IN_WEEK - 1
+                            },
+                            i: 1,
+                            node: 'td',
+                            item: function( targetDate ) {
+
+                                // Convert the time date from a relative date to a target date.
+                                targetDate = calendar.create([ viewsetObject.year, viewsetObject.month, targetDate + ( settings.firstDay ? 1 : 0 ) ])
+
+                                var isSelected = selectedObject && selectedObject.pick == targetDate.pick,
+                                    isHighlighted = highlightedObject && highlightedObject.pick == targetDate.pick,
+                                    isDisabled = disabledCollection && calendar.disabled( targetDate ) || targetDate.pick < minLimitObject.pick || targetDate.pick > maxLimitObject.pick
+
+                                return [
+                                    _.node(
+                                        'div',
+                                        targetDate.date,
+                                        (function( klasses ) {
+
+                                            // Add the `infocus` or `outfocus` classes based on month in view.
+                                            klasses.push( viewsetObject.month == targetDate.month ? settings.klass.infocus : settings.klass.outfocus )
+
+                                            // Add the `today` class if needed.
+                                            if ( nowObject.pick == targetDate.pick ) {
+                                                klasses.push( settings.klass.now )
+                                            }
+
+                                            // Add the `selected` class if something's selected and the time matches.
+                                            if ( isSelected ) {
+                                                klasses.push( settings.klass.selected )
+                                            }
+
+                                            // Add the `highlighted` class if something's highlighted and the time matches.
+                                            if ( isHighlighted ) {
+                                                klasses.push( settings.klass.highlighted )
+                                            }
+
+                                            // Add the `disabled` class if something's disabled and the object matches.
+                                            if ( isDisabled ) {
+                                                klasses.push( settings.klass.disabled )
+                                            }
+
+                                            return klasses.join( ' ' )
+                                        })([ settings.klass.day ]),
+                                        'data-pick=' + targetDate.pick + ' ' + _.ariaAttr({
+                                            role: 'button',
+                                            controls: calendar.$node[0].id,
+                                            checked: isSelected && calendar.$node.val() === _.trigger(
+                                                    calendar.formats.toString,
+                                                    calendar,
+                                                    [ settings.format, targetDate ]
+                                                ) ? true : null,
+                                            activedescendant: isHighlighted ? true : null,
+                                            disabled: isDisabled ? true : null
+                                        })
+                                    )
+                                ] //endreturn
+                            }
+                        })
+                    ] //endreturn
+                }
+            })
+        ),
+        settings.klass.table
+    ) +
+
+    // * For Firefox forms to submit, make sure to set the buttons’ `type` attributes as “button”.
+    _.node(
+        'div',
+        _.node( 'button', settings.today, settings.klass.buttonToday, 'type=button data-pick=' + nowObject.pick + ( isOpen ? '' : ' disabled' ) ) +
+        _.node( 'button', settings.clear, settings.klass.buttonClear, 'type=button data-clear=1' + ( isOpen ? '' : ' disabled' ) ),
+        settings.klass.footer
+    ) //endreturn
+} //DatePicker.prototype.nodes
+
+
+
+
+/**
+ * The date picker defaults.
+ */
+DatePicker.defaults = (function( prefix ) {
+
+    return {
+
+        // Months and weekdays
+        monthsFull: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
+        monthsShort: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
+        weekdaysFull: [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ],
+        weekdaysShort: [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ],
+
+        // Today and clear
+        today: 'Today',
+        clear: 'Clear',
+
+        // The format to show on the `input` element
+        format: 'd mmmm, yyyy',
+
+        // Classes
+        klass: {
+
+            table: prefix + 'table',
+
+            header: prefix + 'header',
+
+            navPrev: prefix + 'nav--prev',
+            navNext: prefix + 'nav--next',
+            navDisabled: prefix + 'nav--disabled',
+
+            month: prefix + 'month',
+            year: prefix + 'year',
+
+            selectMonth: prefix + 'select--month',
+            selectYear: prefix + 'select--year',
+
+            weekdays: prefix + 'weekday',
+
+            day: prefix + 'day',
+            disabled: prefix + 'day--disabled',
+            selected: prefix + 'day--selected',
+            highlighted: prefix + 'day--highlighted',
+            now: prefix + 'day--today',
+            infocus: prefix + 'day--infocus',
+            outfocus: prefix + 'day--outfocus',
+
+            footer: prefix + 'footer',
+
+            buttonClear: prefix + 'button--clear',
+            buttonToday: prefix + 'button--today'
+        }
+    }
+})( Picker.klasses().picker + '__' )
+
+
+
+
+
+/**
+ * Extend the picker to add the date picker.
+ */
+Picker.extend( 'pickadate', DatePicker )
+
+
+}));
+
+
+
+
+
+/*!
+ * Time picker for pickadate.js v3.4.0
+ * http://amsul.github.io/pickadate.js/time.htm
+ */
+
+(function ( factory ) {
+
+    // Register as an anonymous module.
+    if ( typeof define == 'function' && define.amd )
+        define( 'picker.time',['picker','jquery'], factory )
+
+    // Or using browser globals.
+    else factory( Picker, jQuery )
+
+}(function( Picker, $ ) {
+
+
+/**
+ * Globals and constants
+ */
+var HOURS_IN_DAY = 24,
+    MINUTES_IN_HOUR = 60,
+    HOURS_TO_NOON = 12,
+    MINUTES_IN_DAY = HOURS_IN_DAY * MINUTES_IN_HOUR,
+    _ = Picker._
+
+
+
+/**
+ * The time picker constructor
+ */
+function TimePicker( picker, settings ) {
+
+    var clock = this,
+        elementValue = picker.$node[ 0 ].value,
+        elementDataValue = picker.$node.data( 'value' ),
+        valueString = elementDataValue || elementValue,
+        formatString = elementDataValue ? settings.formatSubmit : settings.format
+
+    clock.settings = settings
+    clock.$node = picker.$node
+
+    // The queue of methods that will be used to build item objects.
+    clock.queue = {
+        interval: 'i',
+        min: 'measure create',
+        max: 'measure create',
+        now: 'now create',
+        select: 'parse create validate',
+        highlight: 'parse create validate',
+        view: 'parse create validate',
+        disable: 'deactivate',
+        enable: 'activate'
+    }
+
+    // The component's item object.
+    clock.item = {}
+
+    clock.item.interval = settings.interval || 30
+    clock.item.disable = ( settings.disable || [] ).slice( 0 )
+    clock.item.enable = -(function( collectionDisabled ) {
+        return collectionDisabled[ 0 ] === true ? collectionDisabled.shift() : -1
+    })( clock.item.disable )
+
+    clock.
+        set( 'min', settings.min ).
+        set( 'max', settings.max ).
+        set( 'now' )
+
+    // When there’s a value, set the `select`, which in turn
+    // also sets the `highlight` and `view`.
+    if ( valueString ) {
+        clock.set( 'select', valueString, {
+            format: formatString,
+            fromValue: !!elementValue
+        })
+    }
+
+    // If there’s no value, default to highlighting “today”.
+    else {
+        clock.
+            set( 'select', null ).
+            set( 'highlight', clock.item.now )
+    }
+
+    // The keycode to movement mapping.
+    clock.key = {
+        40: 1, // Down
+        38: -1, // Up
+        39: 1, // Right
+        37: -1, // Left
+        go: function( timeChange ) {
+            clock.set(
+                'highlight',
+                clock.item.highlight.pick + timeChange * clock.item.interval,
+                { interval: timeChange * clock.item.interval }
+            )
+            this.render()
+        }
+    }
+
+
+    // Bind some picker events.
+    picker.
+        on( 'render', function() {
+            var $pickerHolder = picker.$root.children(),
+                $viewset = $pickerHolder.find( '.' + settings.klass.viewset )
+            if ( $viewset.length ) {
+                $pickerHolder[ 0 ].scrollTop = ~~$viewset.position().top - ( $viewset[ 0 ].clientHeight * 2 )
+            }
+        }).
+        on( 'open', function() {
+            picker.$root.find( 'button' ).attr( 'disable', false )
+        }).
+        on( 'close', function() {
+            picker.$root.find( 'button' ).attr( 'disable', true )
+        })
+
+} //TimePicker
+
+
+/**
+ * Set a timepicker item object.
+ */
+TimePicker.prototype.set = function( type, value, options ) {
+
+    var clock = this,
+        clockItem = clock.item
+
+    // If the value is `null` just set it immediately.
+    if ( value === null ) {
+        clockItem[ type ] = value
+        return clock
+    }
+
+    // Otherwise go through the queue of methods, and invoke the functions.
+    // Update this as the time unit, and set the final value as this item.
+    // * In the case of `enable`, keep the queue but set `disable` instead.
+    //   And in the case of `flip`, keep the queue but set `enable` instead.
+    clockItem[ ( type == 'enable' ? 'disable' : type == 'flip' ? 'enable' : type ) ] = clock.queue[ type ].split( ' ' ).map( function( method ) {
+        value = clock[ method ]( type, value, options )
+        return value
+    }).pop()
+
+    // Check if we need to cascade through more updates.
+    if ( type == 'select' ) {
+        clock.set( 'highlight', clockItem.select, options )
+    }
+    else if ( type == 'highlight' ) {
+        clock.set( 'view', clockItem.highlight, options )
+    }
+    else if ( type == 'interval' ) {
+        clock.
+            set( 'min', clockItem.min, options ).
+            set( 'max', clockItem.max, options )
+    }
+    else if ( type.match( /^(flip|min|max|disable|enable)$/ ) ) {
+        if ( type == 'min' ) {
+            clock.set( 'max', clockItem.max, options )
+        }
+        if ( clockItem.select && clock.disabled( clockItem.select ) ) {
+            clock.set( 'select', clockItem.select, options )
+        }
+        if ( clockItem.highlight && clock.disabled( clockItem.highlight ) ) {
+            clock.set( 'highlight', clockItem.highlight, options )
+        }
+    }
+
+    return clock
+} //TimePicker.prototype.set
+
+
+/**
+ * Get a timepicker item object.
+ */
+TimePicker.prototype.get = function( type ) {
+    return this.item[ type ]
+} //TimePicker.prototype.get
+
+
+/**
+ * Create a picker time object.
+ */
+TimePicker.prototype.create = function( type, value, options ) {
+
+    var clock = this
+
+    // If there’s no value, use the type as the value.
+    value = value === undefined ? type : value
+
+    // If it’s a date object, convert it into an array.
+    if ( _.isDate( value ) ) {
+        value = [ value.getHours(), value.getMinutes() ]
+    }
+
+    // If it’s an object, use the “pick” value.
+    if ( $.isPlainObject( value ) && _.isInteger( value.pick ) ) {
+        value = value.pick
+    }
+
+    // If it’s an array, convert it into minutes.
+    else if ( $.isArray( value ) ) {
+        value = +value[ 0 ] * MINUTES_IN_HOUR + (+value[ 1 ])
+    }
+
+    // If no valid value is passed, set it to “now”.
+    else if ( !_.isInteger( value ) ) {
+        value = clock.now( type, value, options )
+    }
+
+    // If we’re setting the max, make sure it’s greater than the min.
+    if ( type == 'max' && value < clock.item.min.pick ) {
+        value += MINUTES_IN_DAY
+    }
+
+    // If the value doesn’t fall directly on the interval,
+    // add one interval to indicate it as “passed”.
+    if ( type != 'min' && type != 'max' && (value - clock.item.min.pick) % clock.item.interval !== 0 ) {
+        value += clock.item.interval
+    }
+
+    // Normalize it into a “reachable” interval.
+    value = clock.normalize( type, value, options )
+
+    // Return the compiled object.
+    return {
+
+        // Divide to get hours from minutes.
+        hour: ~~( HOURS_IN_DAY + value / MINUTES_IN_HOUR ) % HOURS_IN_DAY,
+
+        // The remainder is the minutes.
+        mins: ( MINUTES_IN_HOUR + value % MINUTES_IN_HOUR ) % MINUTES_IN_HOUR,
+
+        // The time in total minutes.
+        time: ( MINUTES_IN_DAY + value ) % MINUTES_IN_DAY,
+
+        // Reference to the “relative” value to pick.
+        pick: value
+    }
+} //TimePicker.prototype.create
+
+
+/**
+ * Create a range limit object using an array, date object,
+ * literal “true”, or integer relative to another time.
+ */
+TimePicker.prototype.createRange = function( from, to ) {
+
+    var clock = this,
+        createTime = function( time ) {
+            if ( time === true || $.isArray( time ) || _.isDate( time ) ) {
+                return clock.create( time )
+            }
+            return time
+        }
+
+    // Create objects if possible.
+    if ( !_.isInteger( from ) ) {
+        from = createTime( from )
+    }
+    if ( !_.isInteger( to ) ) {
+        to = createTime( to )
+    }
+
+    // Create relative times.
+    if ( _.isInteger( from ) && $.isPlainObject( to ) ) {
+        from = [ to.hour, to.mins + ( from * clock.settings.interval ) ];
+    }
+    else if ( _.isInteger( to ) && $.isPlainObject( from ) ) {
+        to = [ from.hour, from.mins + ( to * clock.settings.interval ) ];
+    }
+
+    return {
+        from: createTime( from ),
+        to: createTime( to )
+    }
+} //TimePicker.prototype.createRange
+
+
+/**
+ * Check if a time unit falls within a time range object.
+ */
+TimePicker.prototype.withinRange = function( range, timeUnit ) {
+    range = this.createRange(range.from, range.to)
+    return timeUnit.pick >= range.from.pick && timeUnit.pick <= range.to.pick
+}
+
+
+/**
+ * Check if two time range objects overlap.
+ */
+TimePicker.prototype.overlapRanges = function( one, two ) {
+
+    var clock = this
+
+    // Convert the ranges into comparable times.
+    one = clock.createRange( one.from, one.to )
+    two = clock.createRange( two.from, two.to )
+
+    return clock.withinRange( one, two.from ) || clock.withinRange( one, two.to ) ||
+        clock.withinRange( two, one.from ) || clock.withinRange( two, one.to )
+}
+
+
+/**
+ * Get the time relative to now.
+ */
+TimePicker.prototype.now = function( type, value/*, options*/ ) {
+
+    var interval = this.item.interval,
+        date = new Date(),
+        nowMinutes = date.getHours() * MINUTES_IN_HOUR + date.getMinutes(),
+        isValueInteger = _.isInteger( value ),
+        isBelowInterval
+
+    // Make sure “now” falls within the interval range.
+    nowMinutes -= nowMinutes % interval
+
+    // Check if the difference is less than the interval itself.
+    isBelowInterval = value < 0 && interval * value + nowMinutes <= -interval
+
+    // Add an interval because the time has “passed”.
+    nowMinutes += type == 'min' && isBelowInterval ? 0 : interval
+
+    // If the value is a number, adjust by that many intervals.
+    if ( isValueInteger ) {
+        nowMinutes += interval * (
+            isBelowInterval && type != 'max' ?
+                value + 1 :
+                value
+            )
+    }
+
+    // Return the final calculation.
+    return nowMinutes
+} //TimePicker.prototype.now
+
+
+/**
+ * Normalize minutes to be “reachable” based on the min and interval.
+ */
+TimePicker.prototype.normalize = function( type, value/*, options*/ ) {
+
+    var interval = this.item.interval,
+        minTime = this.item.min && this.item.min.pick || 0
+
+    // If setting min time, don’t shift anything.
+    // Otherwise get the value and min difference and then
+    // normalize the difference with the interval.
+    value -= type == 'min' ? 0 : ( value - minTime ) % interval
+
+    // Return the adjusted value.
+    return value
+} //TimePicker.prototype.normalize
+
+
+/**
+ * Measure the range of minutes.
+ */
+TimePicker.prototype.measure = function( type, value, options ) {
+
+    var clock = this
+
+    // If it’s anything false-y, set it to the default.
+    if ( !value ) {
+        value = type == 'min' ? [ 0, 0 ] : [ HOURS_IN_DAY - 1, MINUTES_IN_HOUR - 1 ]
+    }
+
+    // If it’s a literal true, or an integer, make it relative to now.
+    else if ( value === true || _.isInteger( value ) ) {
+        value = clock.now( type, value, options )
+    }
+
+    // If it’s an object already, just normalize it.
+    else if ( $.isPlainObject( value ) && _.isInteger( value.pick ) ) {
+        value = clock.normalize( type, value.pick, options )
+    }
+
+    return value
+} ///TimePicker.prototype.measure
+
+
+/**
+ * Validate an object as enabled.
+ */
+TimePicker.prototype.validate = function( type, timeObject, options ) {
+
+    var clock = this,
+        interval = options && options.interval ? options.interval : clock.item.interval
+
+    // Check if the object is disabled.
+    if ( clock.disabled( timeObject ) ) {
+
+        // Shift with the interval until we reach an enabled time.
+        timeObject = clock.shift( timeObject, interval )
+    }
+
+    // Scope the object into range.
+    timeObject = clock.scope( timeObject )
+
+    // Do a second check to see if we landed on a disabled min/max.
+    // In that case, shift using the opposite interval as before.
+    if ( clock.disabled( timeObject ) ) {
+        timeObject = clock.shift( timeObject, interval * -1 )
+    }
+
+    // Return the final object.
+    return timeObject
+} //TimePicker.prototype.validate
+
+
+/**
+ * Check if an object is disabled.
+ */
+TimePicker.prototype.disabled = function( timeToVerify ) {
+
+    var clock = this,
+
+        // Filter through the disabled times to check if this is one.
+        isDisabledMatch = clock.item.disable.filter( function( timeToDisable ) {
+
+            // If the time is a number, match the hours.
+            if ( _.isInteger( timeToDisable ) ) {
+                return timeToVerify.hour == timeToDisable
+            }
+
+            // If it’s an array, create the object and match the times.
+            if ( $.isArray( timeToDisable ) || _.isDate( timeToDisable ) ) {
+                return timeToVerify.pick == clock.create( timeToDisable ).pick
+            }
+
+            // If it’s an object, match a time within the “from” and “to” range.
+            if ( $.isPlainObject( timeToDisable ) ) {
+                return clock.withinRange( timeToDisable, timeToVerify )
+            }
+        })
+
+    // If this time matches a disabled time, confirm it’s not inverted.
+    isDisabledMatch = isDisabledMatch.length && !isDisabledMatch.filter(function( timeToDisable ) {
+        return $.isArray( timeToDisable ) && timeToDisable[2] == 'inverted' ||
+            $.isPlainObject( timeToDisable ) && timeToDisable.inverted
+    }).length
+
+    // If the clock is "enabled" flag is flipped, flip the condition.
+    return clock.item.enable === -1 ? !isDisabledMatch : isDisabledMatch ||
+        timeToVerify.pick < clock.item.min.pick ||
+        timeToVerify.pick > clock.item.max.pick
+} //TimePicker.prototype.disabled
+
+
+/**
+ * Shift an object by an interval until we reach an enabled object.
+ */
+TimePicker.prototype.shift = function( timeObject, interval ) {
+
+    var clock = this,
+        minLimit = clock.item.min.pick,
+        maxLimit = clock.item.max.pick/*,
+        safety = 1000*/
+
+    interval = interval || clock.item.interval
+
+    // Keep looping as long as the time is disabled.
+    while ( /*safety &&*/ clock.disabled( timeObject ) ) {
+
+        /*safety -= 1
+        if ( !safety ) {
+            throw 'Fell into an infinite loop while shifting to ' + timeObject.hour + ':' + timeObject.mins + '.'
+        }*/
+
+        // Increase/decrease the time by the interval and keep looping.
+        timeObject = clock.create( timeObject.pick += interval )
+
+        // If we've looped beyond the limits, break out of the loop.
+        if ( timeObject.pick <= minLimit || timeObject.pick >= maxLimit ) {
+            break
+        }
+    }
+
+    // Return the final object.
+    return timeObject
+} //TimePicker.prototype.shift
+
+
+/**
+ * Scope an object to be within range of min and max.
+ */
+TimePicker.prototype.scope = function( timeObject ) {
+    var minLimit = this.item.min.pick,
+        maxLimit = this.item.max.pick
+    return this.create( timeObject.pick > maxLimit ? maxLimit : timeObject.pick < minLimit ? minLimit : timeObject )
+} //TimePicker.prototype.scope
+
+
+/**
+ * Parse a string into a usable type.
+ */
+TimePicker.prototype.parse = function( type, value, options ) {
+
+    var hour, minutes, isPM, item, parseValue,
+        clock = this,
+        parsingObject = {}
+
+    if ( !value || _.isInteger( value ) || $.isArray( value ) || _.isDate( value ) || $.isPlainObject( value ) && _.isInteger( value.pick ) ) {
+        return value
+    }
+
+    // We need a `.format` to parse the value with.
+    if ( !( options && options.format ) ) {
+        options = options || {}
+        options.format = clock.settings.format
+    }
+
+    // Convert the format into an array and then map through it.
+    clock.formats.toArray( options.format ).map( function( label ) {
+
+        var
+            substring,
+
+            // Grab the formatting label.
+            formattingLabel = clock.formats[ label ],
+
+            // The format length is from the formatting label function or the
+            // label length without the escaping exclamation (!) mark.
+            formatLength = formattingLabel ?
+                _.trigger( formattingLabel, clock, [ value, parsingObject ] ) :
+                label.replace( /^!/, '' ).length
+
+        // If there's a format label, split the value up to the format length.
+        // Then add it to the parsing object with appropriate label.
+        if ( formattingLabel ) {
+            substring = value.substr( 0, formatLength )
+            parsingObject[ label ] = substring.match(/^\d+$/) ? +substring : substring
+        }
+
+        // Update the time value as the substring from format length to end.
+        value = value.substr( formatLength )
+    })
+
+    // Grab the hour and minutes from the parsing object.
+    for ( item in parsingObject ) {
+        parseValue = parsingObject[item]
+        if ( _.isInteger(parseValue) ) {
+            if ( item.match(/^(h|hh)$/i) ) {
+                hour = parseValue
+                if ( item == 'h' || item == 'hh' ) {
+                    hour %= 12
+                }
+            }
+            else if ( item == 'i' ) {
+                minutes = parseValue
+            }
+        }
+        else if ( item.match(/^a$/i) && parseValue.match(/^p/i) && ('h' in parsingObject || 'hh' in parsingObject) ) {
+            isPM = true
+        }
+    }
+
+    // Calculate it in minutes and return.
+    return (isPM ? hour + 12 : hour) * MINUTES_IN_HOUR + minutes
+} //TimePicker.prototype.parse
+
+
+/**
+ * Various formats to display the object in.
+ */
+TimePicker.prototype.formats = {
+
+    h: function( string, timeObject ) {
+
+        // If there's string, then get the digits length.
+        // Otherwise return the selected hour in "standard" format.
+        return string ? _.digits( string ) : timeObject.hour % HOURS_TO_NOON || HOURS_TO_NOON
+    },
+    hh: function( string, timeObject ) {
+
+        // If there's a string, then the length is always 2.
+        // Otherwise return the selected hour in "standard" format with a leading zero.
+        return string ? 2 : _.lead( timeObject.hour % HOURS_TO_NOON || HOURS_TO_NOON )
+    },
+    H: function( string, timeObject ) {
+
+        // If there's string, then get the digits length.
+        // Otherwise return the selected hour in "military" format as a string.
+        return string ? _.digits( string ) : '' + ( timeObject.hour % 24 )
+    },
+    HH: function( string, timeObject ) {
+
+        // If there's string, then get the digits length.
+        // Otherwise return the selected hour in "military" format with a leading zero.
+        return string ? _.digits( string ) : _.lead( timeObject.hour % 24 )
+    },
+    i: function( string, timeObject ) {
+
+        // If there's a string, then the length is always 2.
+        // Otherwise return the selected minutes.
+        return string ? 2 : _.lead( timeObject.mins )
+    },
+    a: function( string, timeObject ) {
+
+        // If there's a string, then the length is always 4.
+        // Otherwise check if it's more than "noon" and return either am/pm.
+        return string ? 4 : MINUTES_IN_DAY / 2 > timeObject.time % MINUTES_IN_DAY ? 'a.m.' : 'p.m.'
+    },
+    A: function( string, timeObject ) {
+
+        // If there's a string, then the length is always 2.
+        // Otherwise check if it's more than "noon" and return either am/pm.
+        return string ? 2 : MINUTES_IN_DAY / 2 > timeObject.time % MINUTES_IN_DAY ? 'AM' : 'PM'
+    },
+
+    // Create an array by splitting the formatting string passed.
+    toArray: function( formatString ) { return formatString.split( /(h{1,2}|H{1,2}|i|a|A|!.)/g ) },
+
+    // Format an object into a string using the formatting options.
+    toString: function ( formatString, itemObject ) {
+        var clock = this
+        return clock.formats.toArray( formatString ).map( function( label ) {
+            return _.trigger( clock.formats[ label ], clock, [ 0, itemObject ] ) || label.replace( /^!/, '' )
+        }).join( '' )
+    }
+} //TimePicker.prototype.formats
+
+
+
+
+/**
+ * Check if two time units are the exact.
+ */
+TimePicker.prototype.isTimeExact = function( one, two ) {
+
+    var clock = this
+
+    // When we’re working with minutes, do a direct comparison.
+    if (
+        ( _.isInteger( one ) && _.isInteger( two ) ) ||
+        ( typeof one == 'boolean' && typeof two == 'boolean' )
+     ) {
+        return one === two
+    }
+
+    // When we’re working with time representations, compare the “pick” value.
+    if (
+        ( _.isDate( one ) || $.isArray( one ) ) &&
+        ( _.isDate( two ) || $.isArray( two ) )
+    ) {
+        return clock.create( one ).pick === clock.create( two ).pick
+    }
+
+    // When we’re working with range objects, compare the “from” and “to”.
+    if ( $.isPlainObject( one ) && $.isPlainObject( two ) ) {
+        return clock.isTimeExact( one.from, two.from ) && clock.isTimeExact( one.to, two.to )
+    }
+
+    return false
+}
+
+
+/**
+ * Check if two time units overlap.
+ */
+TimePicker.prototype.isTimeOverlap = function( one, two ) {
+
+    var clock = this
+
+    // When we’re working with an integer, compare the hours.
+    if ( _.isInteger( one ) && ( _.isDate( two ) || $.isArray( two ) ) ) {
+        return one === clock.create( two ).hour
+    }
+    if ( _.isInteger( two ) && ( _.isDate( one ) || $.isArray( one ) ) ) {
+        return two === clock.create( one ).hour
+    }
+
+    // When we’re working with range objects, check if the ranges overlap.
+    if ( $.isPlainObject( one ) && $.isPlainObject( two ) ) {
+        return clock.overlapRanges( one, two )
+    }
+
+    return false
+}
+
+
+/**
+ * Flip the “enabled” state.
+ */
+TimePicker.prototype.flipEnable = function(val) {
+    var itemObject = this.item
+    itemObject.enable = val || (itemObject.enable == -1 ? 1 : -1)
+}
+
+
+/**
+ * Mark a collection of times as “disabled”.
+ */
+TimePicker.prototype.deactivate = function( type, timesToDisable ) {
+
+    var clock = this,
+        disabledItems = clock.item.disable.slice(0)
+
+
+    // If we’re flipping, that’s all we need to do.
+    if ( timesToDisable == 'flip' ) {
+        clock.flipEnable()
+    }
+
+    else if ( timesToDisable === false ) {
+        clock.flipEnable(1)
+        disabledItems = []
+    }
+
+    else if ( timesToDisable === true ) {
+        clock.flipEnable(-1)
+        disabledItems = []
+    }
+
+    // Otherwise go through the times to disable.
+    else {
+
+        timesToDisable.map(function( unitToDisable ) {
+
+            var matchFound
+
+            // When we have disabled items, check for matches.
+            // If something is matched, immediately break out.
+            for ( var index = 0; index < disabledItems.length; index += 1 ) {
+                if ( clock.isTimeExact( unitToDisable, disabledItems[index] ) ) {
+                    matchFound = true
+                    break
+                }
+            }
+
+            // If nothing was found, add the validated unit to the collection.
+            if ( !matchFound ) {
+                if (
+                    _.isInteger( unitToDisable ) ||
+                    _.isDate( unitToDisable ) ||
+                    $.isArray( unitToDisable ) ||
+                    ( $.isPlainObject( unitToDisable ) && unitToDisable.from && unitToDisable.to )
+                ) {
+                    disabledItems.push( unitToDisable )
+                }
+            }
+        })
+    }
+
+    // Return the updated collection.
+    return disabledItems
+} //TimePicker.prototype.deactivate
+
+
+/**
+ * Mark a collection of times as “enabled”.
+ */
+TimePicker.prototype.activate = function( type, timesToEnable ) {
+
+    var clock = this,
+        disabledItems = clock.item.disable,
+        disabledItemsCount = disabledItems.length
+
+    // If we’re flipping, that’s all we need to do.
+    if ( timesToEnable == 'flip' ) {
+        clock.flipEnable()
+    }
+
+    else if ( timesToEnable === true ) {
+        clock.flipEnable(1)
+        disabledItems = []
+    }
+
+    else if ( timesToEnable === false ) {
+        clock.flipEnable(-1)
+        disabledItems = []
+    }
+
+    // Otherwise go through the disabled times.
+    else {
+
+        timesToEnable.map(function( unitToEnable ) {
+
+            var matchFound,
+                disabledUnit,
+                index,
+                isRangeMatched
+
+            // Go through the disabled items and try to find a match.
+            for ( index = 0; index < disabledItemsCount; index += 1 ) {
+
+                disabledUnit = disabledItems[index]
+
+                // When an exact match is found, remove it from the collection.
+                if ( clock.isTimeExact( disabledUnit, unitToEnable ) ) {
+                    matchFound = disabledItems[index] = null
+                    isRangeMatched = true
+                    break
+                }
+
+                // When an overlapped match is found, add the “inverted” state to it.
+                else if ( clock.isTimeOverlap( disabledUnit, unitToEnable ) ) {
+                    if ( $.isPlainObject( unitToEnable ) ) {
+                        unitToEnable.inverted = true
+                        matchFound = unitToEnable
+                    }
+                    else if ( $.isArray( unitToEnable ) ) {
+                        matchFound = unitToEnable
+                        if ( !matchFound[2] ) matchFound.push( 'inverted' )
+                    }
+                    else if ( _.isDate( unitToEnable ) ) {
+                        matchFound = [ unitToEnable.getFullYear(), unitToEnable.getMonth(), unitToEnable.getDate(), 'inverted' ]
+                    }
+                    break
+                }
+            }
+
+            // If a match was found, remove a previous duplicate entry.
+            if ( matchFound ) for ( index = 0; index < disabledItemsCount; index += 1 ) {
+                if ( clock.isTimeExact( disabledItems[index], unitToEnable ) ) {
+                    disabledItems[index] = null
+                    break
+                }
+            }
+
+            // In the event that we’re dealing with an overlap of range times,
+            // make sure there are no “inverted” times because of it.
+            if ( isRangeMatched ) for ( index = 0; index < disabledItemsCount; index += 1 ) {
+                if ( clock.isTimeOverlap( disabledItems[index], unitToEnable ) ) {
+                    disabledItems[index] = null
+                    break
+                }
+            }
+
+            // If something is still matched, add it into the collection.
+            if ( matchFound ) {
+                disabledItems.push( matchFound )
+            }
+        })
+    }
+
+    // Return the updated collection.
+    return disabledItems.filter(function( val ) { return val != null })
+} //TimePicker.prototype.activate
+
+
+/**
+ * The division to use for the range intervals.
+ */
+TimePicker.prototype.i = function( type, value/*, options*/ ) {
+    return _.isInteger( value ) && value > 0 ? value : this.item.interval
+}
+
+
+/**
+ * Create a string for the nodes in the picker.
+ */
+TimePicker.prototype.nodes = function( isOpen ) {
+
+    var
+        clock = this,
+        settings = clock.settings,
+        selectedObject = clock.item.select,
+        highlightedObject = clock.item.highlight,
+        viewsetObject = clock.item.view,
+        disabledCollection = clock.item.disable
+
+    return _.node(
+        'ul',
+        _.group({
+            min: clock.item.min.pick,
+            max: clock.item.max.pick,
+            i: clock.item.interval,
+            node: 'li',
+            item: function( loopedTime ) {
+                loopedTime = clock.create( loopedTime )
+                var timeMinutes = loopedTime.pick,
+                    isSelected = selectedObject && selectedObject.pick == timeMinutes,
+                    isHighlighted = highlightedObject && highlightedObject.pick == timeMinutes,
+                    isDisabled = disabledCollection && clock.disabled( loopedTime )
+                return [
+                    _.trigger( clock.formats.toString, clock, [ _.trigger( settings.formatLabel, clock, [ loopedTime ] ) || settings.format, loopedTime ] ),
+                    (function( klasses ) {
+
+                        if ( isSelected ) {
+                            klasses.push( settings.klass.selected )
+                        }
+
+                        if ( isHighlighted ) {
+                            klasses.push( settings.klass.highlighted )
+                        }
+
+                        if ( viewsetObject && viewsetObject.pick == timeMinutes ) {
+                            klasses.push( settings.klass.viewset )
+                        }
+
+                        if ( isDisabled ) {
+                            klasses.push( settings.klass.disabled )
+                        }
+
+                        return klasses.join( ' ' )
+                    })( [ settings.klass.listItem ] ),
+                    'data-pick=' + loopedTime.pick + ' ' + _.ariaAttr({
+                        role: 'button',
+                        controls: clock.$node[0].id,
+                        checked: isSelected && clock.$node.val() === _.trigger(
+                                clock.formats.toString,
+                                clock,
+                                [ settings.format, loopedTime ]
+                            ) ? true : null,
+                        activedescendant: isHighlighted ? true : null,
+                        disabled: isDisabled ? true : null
+                    })
+                ]
+            }
+        }) +
+
+        // * For Firefox forms to submit, make sure to set the button’s `type` attribute as “button”.
+        _.node(
+            'li',
+            _.node(
+                'button',
+                settings.clear,
+                settings.klass.buttonClear,
+                'type=button data-clear=1' + ( isOpen ? '' : ' disable' )
+            )
+        ),
+        settings.klass.list
+    )
+} //TimePicker.prototype.nodes
+
+
+
+
+
+
+
+/* ==========================================================================
+   Extend the picker to add the component with the defaults.
+   ========================================================================== */
+
+TimePicker.defaults = (function( prefix ) {
+
+    return {
+
+        // Clear
+        clear: 'Clear',
+
+        // The format to show on the `input` element
+        format: 'h:i A',
+
+        // The interval between each time
+        interval: 30,
+
+        // Classes
+        klass: {
+
+            picker: prefix + ' ' + prefix + '--time',
+            holder: prefix + '__holder',
+
+            list: prefix + '__list',
+            listItem: prefix + '__list-item',
+
+            disabled: prefix + '__list-item--disabled',
+            selected: prefix + '__list-item--selected',
+            highlighted: prefix + '__list-item--highlighted',
+            viewset: prefix + '__list-item--viewset',
+            now: prefix + '__list-item--now',
+
+            buttonClear: prefix + '__button--clear'
+        }
+    }
+})( Picker.klasses().picker )
+
+
+
+
+
+/**
+ * Extend the picker to add the time picker.
+ */
+Picker.extend( 'pickatime', TimePicker )
+
+
+}));
+
+
+
+
+/* This is a stub, used by patterns that need compatibility with Mockup which
+ * have i18n support.
+ *
+ * Eventually we might want to implement our own i18n functionality here (while
+ * keeping compatibility with Mockup).
+ *
+ * Jed.js would be a good candidate. (http://slexaxton.github.io/Jed)
+ */
+
+define('i18n',[], function() {
+    return function translate (str) {
+        return str;
+    };
 });
 
-// vim: sw=4 expandtab
-;
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define('pat-date-picker',[
+           'jquery',
+           'pat-base',
+           "pat-registry",
+           "pat-parser",
+           'picker',
+           'picker.date',
+           'picker.time',
+           'pat-autosuggest',
+           'i18n',
+           'modernizr'
+        ], function() {
+            return factory.apply(this, arguments);
+        });
+    } else {
+        factory($, Base, root.patterns, root.patterns.Parser, Picker, PickerDate, PickerTime, Autosuggest, _t);
+    }
+}(this, function($, Base, registry, Parser, Picker, PickerDate, PickerTime, patternSelect2, _t) {
+    'use strict';
+    var parser = new Parser("date-picker");
+    parser.addArgument("class-date-name",'pattern-pickadate-date');
+    parser.addArgument("class-date-wrapper-name",'pattern-pickadate-date-wrapper');
+    parser.addArgument("class-separator-name", 'pattern-pickadate-separator');
+    parser.addArgument("class-time-name",'pattern-pickadate-time');
+    parser.addArgument("class-time-wrapper-name",'pattern-pickadate-time-wrapper');
+    parser.addArgument("class-wrapper-name",'pattern-pickadate-wrapper');
+    parser.addArgument("date", { selectYears: true, selectMonths: true });
+    parser.addArgument("separator", ' '); // Separator between date and time if both are enabled.
+    parser.addArgument("show", ["date", "time"], ["date", "time", "timezone", "polyfill"], true);
+    parser.addArgument("behavior", [], ["polyfill"], true);
+    parser.addArgument("time", {}); // Configure the time value shown
+    parser.addArgument("timezone", {});
+
+    parser.addAlias("behaviour", "behavior");
+
+    return Base.extend({
+        name: 'date-picker',
+        trigger: ".pat-date-picker",
+        parser: "patternslib",
+
+        init: function patPickadateInit ($el, opts) {
+            var value = this.$el.val().split(' '),
+                dateValue = value[0] || '',
+                timeValue = value[1] || '';
+
+            this.options = $.extend(this.options, parser.parse(this.$el, opts));
+            this.polyfill = this.options.behavior.indexOf('polyfill') > -1;
+            if (this.polyfill && Modernizr.inputtypes.date) { return; }
+
+
+            this.showDate = this.options.show.indexOf('date') > -1;
+            this.showTime = this.options.show.indexOf('time') > -1;
+            this.showTimeZone = this.options.show.indexOf('timezone') > -1;
+
+            if (!this.showDate) { timeValue = value[0]; }
+            this.$el.hide();
+
+            this.$wrapper = $('<div/>')
+                    .addClass(this.options.class['wrapper-name'])
+                    .insertAfter(this.$el);
+
+            if (this.showDate) {
+                this.options.date.formatSubmit = 'yyyy-mm-dd';
+                this.$date = $('<input type="text"/>')
+                    .attr('placeholder', this.options.placeholderDate)
+                    .attr('data-value', dateValue)
+                    .addClass(this.options.class['date-name'])
+                    .appendTo($('<div/>')
+                            .addClass(this.options.class['date-wrapper-name'])
+                            .appendTo(this.$wrapper))
+                    .pickadate($.extend(true, {}, this.options.date, {
+                        onSet: function(e) {
+                            if (e.select !== undefined) {
+                                this.$date.attr('data-value', e.select);
+                                if (this.showTime || (this.$time && this.$time.attr('data-value') !== '')) {
+                                    this.updateValue.call(this, this.$el);
+                                }
+                            }
+                            if (e.hasOwnProperty('clear')) {
+                                this.$el.removeAttr('value');
+                                this.$date.attr('data-value', '');
+                            }
+                        }.bind(this)
+                    }));
+            }
+
+            if (this.showDate && this.showTime) {
+                this.$separator = $('<span/>')
+                    .addClass(this.options.class['separator-name'])
+                    .html(this.options.separator === ' ' ? '&nbsp;': this.options.separator)
+                    .appendTo(this.$wrapper);
+            }
+
+            if (this.showTime) {
+                this.options.time.formatSubmit = 'HH:i';
+                this.$time = $('<input type="text"/>')
+                    .attr('placeholder', this.options.placeholderTime)
+                    .attr('data-value', timeValue)
+                    .addClass(this.options.class['time-name'])
+                    .appendTo($('<div/>')
+                            .addClass(this.options.class['time-wrapper-name'])
+                            .appendTo(this.$wrapper))
+                    .pickatime($.extend(true, {}, this.options.time, {
+                        onSet: function(e) {
+                            if (e.select !== undefined) {
+                                this.$time.attr('data-value', e.select);
+                                if (this.showDate || (this.$date && this.$date.attr('data-value') !== '')) {
+                                    this.updateValue.call(this);
+                                }
+                            }
+                            if (e.hasOwnProperty('clear')) {
+                                this.$el.removeAttr('value');
+                                this.$time.attr('data-value', '');
+                            }
+                        }.bind(this)
+                    }));
+
+                // XXX: bug in pickatime
+                // work around pickadate bug loading 00:xx as value
+                if (typeof(timeValue) === 'string' && timeValue.substring(0,2) === '00') {
+                    this.$time.pickatime('picker').set('select', timeValue.split(':'));
+                    this.$time.attr('data-value', timeValue);
+                }
+            }
+
+            if (this.showDate && this.showTime && this.showTimeZone) {
+                this.$separator = $('<span/>')
+                    .addClass(this.options.class['separator-name'])
+                    .html(this.options.separator === ' ' ? '&nbsp;'
+                                                                                                : this.options.separator)
+                    .appendTo(this.$wrapper);
+            }
+
+            if (this.showTimeZone) {
+                this.$timezone = $('<input type="text" class="pat-autosuggest" />')
+                    .addClass(this.options.classTimezoneName)
+                    .attr('placeholder', this.options.placeholderTimezone)
+                    .attr('data-pat-autosuggest',
+                            'words-json: '+ (JSON.stringify(this.options.timezone.data) || "") +
+                            '; pre-fill: '+ (this.options.timezone.default || "") +
+                            '; maximum-selection-size: 1')
+                    .appendTo($('<div/>')
+                        .addClass(this.options.classTimezoneWrapperName)
+                        .appendTo(this.$wrapper))
+                    .on('change', function(e) {
+                        if (e.val !== undefined){
+                            this.$timezone.attr('data-value', e.val);
+                            if ((this.options.date === false || this.$date.attr('data-value') !== '') &&
+                                    (this.options.time === false || this.$time.attr('data-value') !== '')) {
+                                this.updateValue.call(this);
+                            }
+                        }
+                    }.bind(this));
+                registry.scan(this.$timezone.parent(), ['autosuggest']);
+
+                var defaultTimezone = this.options.timezone.default;
+                // if timezone has a default value included
+                if (defaultTimezone) {
+                    var isInList;
+                    // the timezone list contains the default value
+                    this.options.timezone.data.forEach(function(obj) {
+                        isInList = (obj.text === this.options.timezone.default) ? true : false;
+                    }.bind(this));
+                    if (isInList) {
+                        this.$timezone.attr('data-value', defaultTimezone);
+                        this.$timezone.parent().find('.select2-chosen').text(defaultTimezone);
+                    }
+                }
+                // if data contains only one timezone this value will be chosen
+                // and the timezone dropdown list will be disabled and
+                var data = this.options.timezone.data;
+                if (data && data.length === 1) {
+                    this.$timezone.attr('data-value', data[0].text);
+                    this.$timezone.parent().find('.select2-chosen').text(data[0].text);
+                    this.$timezone.select2('enable', false);
+                }
+            }
+
+            this.$clear = $('<div/>')
+                .addClass(this.options.classClearName)
+                .appendTo(this.$wrapper);
+        },
+
+        updateValue: function() {
+            var value = '';
+
+            if (this.showDate) {
+                var date = this.$date.data('pickadate').component,
+                    dateValue = this.$date.data('pickadate').get('select'),
+                    formatDate = date.formats.toString;
+                if (dateValue) {
+                    value += formatDate.apply(date, ['yyyy-mm-dd', dateValue]);
+                }
+            }
+
+            if (this.showTime) {
+                if (this.showDate) { value += ' '; }
+                var time = this.$time.data('pickatime').component,
+                        timeValue = this.$time.data('pickatime').get('select'),
+                        formatTime = time.formats.toString;
+                if (timeValue) {
+                    value += formatTime.apply(time, ['HH:i', timeValue]);
+                }
+            }
+            if (this.showTimeZone) {
+                var timezone = ' ' + this.$timezone.attr('data-value');
+                if (timezone) { value += timezone; }
+            }
+            this.$el.attr('value', value);
+            this.$el.trigger('updated');
+        }
+    });
+}));
+
 define('pat-depends_parse',[],function() {
   /*
    * Generated by PEG.js 0.7.0.
@@ -34618,384 +35729,6 @@ define('pat-legend',[
     return legend;
 });
 
-define('pat-menu',[
-    "jquery",
-    "pat-registry"
-], function($, patterns) {
-    var menu = {
-        name: "menu",
-        trigger: "ul.pat-menu",
-
-        init: function($root) {
-            return $root.each(function() {
-                var $menu = $(this),
-                    timer,
-                    closeMenu, openMenu,
-                    mouseOverHandler, mouseOutHandler;
-
-                openMenu = function($li) {
-                    if (timer) {
-                        clearTimeout(timer);
-                        timer = null;
-                    }
-
-                    if (!$li.hasClass("open")) {
-                        $li.siblings("li.open").each(function() { closeMenu($menu);});
-                        $li.addClass("open").removeClass("closed");
-                    }
-                };
-
-                closeMenu = function($li) {
-                    $li.find("li.open").andSelf().removeClass("open").addClass("closed");
-                };
-
-                mouseOverHandler = function() {
-                    var $li = $(this);
-                    openMenu($li);
-                };
-
-                mouseOutHandler = function() {
-                    var $li = $(this);
-
-                    if (timer) {
-                        clearTimeout(timer);
-                        timer=null;
-                    }
-
-                    timer = setTimeout(function() { closeMenu($li); }, 1000);
-                };
-
-                $root.find("li")
-                    .addClass("closed")
-                    .filter(":has(ul)").addClass("hasChildren").end()
-                    .on("mouseover.pat-menu", mouseOverHandler)
-                    .on("mouseout.pat-menu", mouseOutHandler);
-            });
-        }
-    };
-
-    patterns.register(menu);
-});
-
-// jshint indent: 4, browser: true, jquery: true, quotmark: double
-// vim: sw=4 expandtab
-;
-define('pat-navigation',[
-    "jquery",
-    "pat-logger",
-    "pat-registry"
-], function($, logger, registry) {
-    var log = logger.getLogger("pat.navigation");
-
-    var _ = {
-        name: "navigation",
-        trigger: "nav, .navigation, .pat-navigation",
-        init: function($el) {
-            return $el.each(function() {
-                var $el = $(this);
-                var curpath = window.location.pathname;
-                log.debug("current path:", curpath);
-
-                // check whether to load
-                if ($el.hasClass("navigation-load-current")) {
-                    $el.find("a.current, .current a").click();
-                    // check for current elements injected here
-                    $el.on("patterns-injected-scanned", function(ev) {
-                        var $target = $(ev.target);
-                        if ($target.is("a.current"))
-                            $target.click();
-                        if ($target.is(".current"))
-                            $target.find("a").click();
-                        _._updatenavpath($el);
-                    });
-                }
-
-                // An anchor within this navigation triggered injection
-                $el.on("patterns-inject-triggered", "a", function(ev) {
-                    var $target = $(ev.target);
-                    // remove all set current classes
-                    $el.find(".current").removeClass("current");
-                    // set .current on target
-                    $target.addClass("current");
-                    // If target's parent is an LI, also set current there
-                    $target.parent("li").addClass("current");
-                    _._updatenavpath($el);
-                });
-
-                // set current class if it is not set
-                if ($el.find(".current").length === 0) {
-                    $el.find("li a").each(function() {
-                        var $a = $(this),
-                            $li = $a.parents("li:first"),
-                            url = $a.attr("href"),
-                            path;
-                        if (typeof url === "undefined") {
-                            return;
-                        }
-                        path = _._pathfromurl(url);
-                        log.debug("checking url:", url, "extracted path:", path);
-                        if (_._match(curpath, path)) {
-                            log.debug("found match", $li);
-                            $li.addClass("current");
-                        }
-                    });
-                }
-                _._updatenavpath($el);
-            });
-        },
-        _updatenavpath: function($el) {
-            $el.find(".navigation-in-path").removeClass("navigation-in-path");
-            $el.find("li:has(.current)").addClass("navigation-in-path");
-        },
-        _match: function(curpath, path) {
-            if (!path) {
-                log.debug("path empty");
-                return false;
-            }
-            // current path needs to end in the anchor's path
-            if (path !== curpath.slice(- path.length)) {
-                log.debug(curpath, "does not end in", path);
-                return false;
-            }
-            // XXX: we might need more exclusion tests
-            return true;
-        },
-        _pathfromurl: function(url) {
-            var path = url.split("#")[0].split("://");
-            if (path.length > 2) {
-                log.error("weird url", url);
-                return "";
-            }
-            if (path.length === 1) return path[0];
-            return path[1].split("/").slice(1).join("/");
-        }
-    };
-    registry.register(_);
-    return _;
-});
-
-// jshint indent: 4, browser: true, jquery: true, quotmark: double
-// vim: sw=4 expandtab
-;
-/**
- * Patterns notification - Display (self-healing) notifications.
- *
- * Copyright 2013 Marko Durkovic
- */
-define('pat-notification',[
-    "jquery",
-    "pat-registry",
-    "pat-logger",
-    "pat-parser",
-    "pat-inject"
-], function($, patterns, logger, Parser, inject) {
-    var log = logger.getLogger("notification"),
-        parser = new Parser("notification");
-
-    parser.addArgument("type", "static", ["static", "banner"]);
-    parser.addArgument("healing", "5s");
-    parser.addArgument("controls", "icons", ["icons", "buttons", "none"]);
-    parser.addArgument("class");
-
-    var _ = {
-        name: "notification",
-        trigger: ".pat-notification",
-
-        // this is generic functionality and should be moved to lib
-        parseUnit: function(value, unit) {
-            var unitRe = new RegExp(unit+"$"),
-                numericRe = new RegExp("^[0-9.]+");
-
-            if (!(unitRe.test(value))) {
-                throw "value " + value + "is not in unit " + unit;
-            }
-
-            var mod = value.replace(numericRe, "");
-            mod = mod.replace(unitRe, "");
-
-            value = parseFloat(value);
-            if (!mod.length) {
-                return value;
-            }
-
-            var factors = {
-                M: 1000000,
-                k: 1000,
-                m: 0.001,
-                u: 0.000001
-            };
-
-            return value * factors[mod];
-        },
-
-        parseUnitOrOption: function(value, unit, options) {
-            if (options.indexOf(value) >= 0) {
-                return value;
-            }
-
-            return _.parseUnit(value, unit);
-        },
-
-        count: 0,
-
-        init: function($el, opts) {
-            return $el.each(function() {
-                var $el = $(this);
-
-                if ($el.is("a,form")) {
-                    _._init_inject($el, opts);
-                } else {
-                    _._initNotification($el, opts);
-                }
-                return $el;
-            });
-        },
-
-        _initNotification: function($el, opts) {
-            _.count++;
-
-            var options = parser.parse($el, opts);
-
-            $el = $el.wrap("<div/>").parent()
-                .attr("id", "pat-notification-" + _.count)
-                .addClass("pat-notification-panel")
-                .on("mouseenter.pat-notification", _.onMouseEnter)
-                .on("mouseleave.pat-notification", _.onMouseLeave);
-
-            if (options["class"]) {
-                $el.addClass(options["class"]);
-            }
-
-            if (!Array.isArray(options.controls)) {
-                options.controls = [ options.controls ];
-            }
-
-            // add close icon if requsted
-            if (options.controls.indexOf("icons") >= 0) {
-                $el.append("<button type='button' class=.close-panel'>Close</button>");
-            }
-
-            // add close button if requested
-            if (options.controls.indexOf("buttons") >= 0) {
-                $el.append("<div class='button-bar'><button type='button' class='close-panel'>Close</button></div>");
-            }
-
-            if ($el.find(".close-panel").length) {
-                $el.on("click.pat-notification", ".close-panel", _.onClick);
-            } else {
-                $el.on("click.pat-notification", _.onClick);
-            }
-
-            if (options.type === "banner") {
-                var $container = $("#pat-notification-banners");
-                if (!$container.length) {
-                    $container = $("<div/>").attr("id", "pat-notification-banners").addClass("pat-notification-container").appendTo("body");
-                }
-                $container.append($el);
-            }
-
-            var healing = _.parseUnitOrOption(options.healing, "s", ["persistent"]);
-
-            log.debug("Healing value is", healing);
-            $el.data("healing", healing);
-
-            $el.animate({"opacity": 1}, "fast", function() {
-                _.initRemoveTimer($el);
-            });
-        },
-
-        _init_inject: function($el) {
-            var inject_opts = {
-                target: "#pat-notification-temp"
-            };
-            $el.on("pat-inject-success.pat-notification", function() {
-                var $trigger = $(this),
-                    cfg = parser.parse($trigger, { type: "banner"});
-
-                var $el = $("#pat-notification-temp").contents().wrapAll("<div/>")
-                    .parent()
-                    .addClass("pat-notification");
-
-                if ($trigger.is("a")) {
-                    $trigger.after($el);
-                } else {
-                    $el.prependTo($trigger);
-                }
-                _._initNotification($el, cfg);
-
-                // XXX: Do this later as inject tries to access its target afterwards.
-                // This should be fixed in injection.
-                setTimeout(function() {
-                    $("#pat-notification-temp").remove();
-                }, 0);
-            });
-            inject.init($el, inject_opts);
-        },
-
-        initRemoveTimer: function($el) {
-            var healing = $el.data("healing");
-            if (healing !== "persistent") {
-                clearTimeout($el.data("timer"));
-                $el.data("timer", setTimeout(function() {
-                    _.remove($el);
-                }, healing * 1000));
-            }
-        },
-
-        onMouseEnter: function() {
-            $(this).data("persistent", true);
-        },
-
-        onMouseLeave: function() {
-            var $this = $(this);
-
-            $this.data("persistent", false);
-            _.initRemoveTimer($this);
-        },
-
-        onClick: function(event) {
-            var $this = $(event.delegateTarget);
-
-            $this.data("persistent", false);
-            _.remove($this);
-        },
-
-        remove: function($el) {
-            if ($el.data("persistent") || $el.data("removing")) {
-                return;
-            }
-
-            $el.data("removing", true);
-
-            $el.stop(true).animate({"opacity": 0}, {
-                step: function() {
-                    if ($el.data("persistent")) {
-                        // remove the timer and show notification
-                        clearTimeout($el.data("timer"));
-                        $el.stop(true).animate({"opacity": 1});
-                        $el.data("removing", false);
-                        return false;
-                    }
-                },
-
-                complete: function() {
-                    var $this = $(this);
-                    $this.off(".pat-notification");
-                    $this.slideUp("slow", function() {
-                        $this.remove();
-                    });
-                }
-            });
-        }
-    };
-
-    patterns.register(_);
-    return _;
-});
-
-// jshint indent: 4, browser: true, jquery: true, quotmark: double
-// vim: sw=4 expandtab
-;
 /*!
  * Masonry PACKAGED v3.2.3
  * Cascading grid layout library
@@ -38040,6 +38773,384 @@ var indexOf = Array.prototype.indexOf ?
     });
 }));
 
+define('pat-menu',[
+    "jquery",
+    "pat-registry"
+], function($, patterns) {
+    var menu = {
+        name: "menu",
+        trigger: "ul.pat-menu",
+
+        init: function($root) {
+            return $root.each(function() {
+                var $menu = $(this),
+                    timer,
+                    closeMenu, openMenu,
+                    mouseOverHandler, mouseOutHandler;
+
+                openMenu = function($li) {
+                    if (timer) {
+                        clearTimeout(timer);
+                        timer = null;
+                    }
+
+                    if (!$li.hasClass("open")) {
+                        $li.siblings("li.open").each(function() { closeMenu($menu);});
+                        $li.addClass("open").removeClass("closed");
+                    }
+                };
+
+                closeMenu = function($li) {
+                    $li.find("li.open").andSelf().removeClass("open").addClass("closed");
+                };
+
+                mouseOverHandler = function() {
+                    var $li = $(this);
+                    openMenu($li);
+                };
+
+                mouseOutHandler = function() {
+                    var $li = $(this);
+
+                    if (timer) {
+                        clearTimeout(timer);
+                        timer=null;
+                    }
+
+                    timer = setTimeout(function() { closeMenu($li); }, 1000);
+                };
+
+                $root.find("li")
+                    .addClass("closed")
+                    .filter(":has(ul)").addClass("hasChildren").end()
+                    .on("mouseover.pat-menu", mouseOverHandler)
+                    .on("mouseout.pat-menu", mouseOutHandler);
+            });
+        }
+    };
+
+    patterns.register(menu);
+});
+
+// jshint indent: 4, browser: true, jquery: true, quotmark: double
+// vim: sw=4 expandtab
+;
+define('pat-navigation',[
+    "jquery",
+    "pat-logger",
+    "pat-registry"
+], function($, logger, registry) {
+    var log = logger.getLogger("pat.navigation");
+
+    var _ = {
+        name: "navigation",
+        trigger: "nav, .navigation, .pat-navigation",
+        init: function($el) {
+            return $el.each(function() {
+                var $el = $(this);
+                var curpath = window.location.pathname;
+                log.debug("current path:", curpath);
+
+                // check whether to load
+                if ($el.hasClass("navigation-load-current")) {
+                    $el.find("a.current, .current a").click();
+                    // check for current elements injected here
+                    $el.on("patterns-injected-scanned", function(ev) {
+                        var $target = $(ev.target);
+                        if ($target.is("a.current"))
+                            $target.click();
+                        if ($target.is(".current"))
+                            $target.find("a").click();
+                        _._updatenavpath($el);
+                    });
+                }
+
+                // An anchor within this navigation triggered injection
+                $el.on("patterns-inject-triggered", "a", function(ev) {
+                    var $target = $(ev.target);
+                    // remove all set current classes
+                    $el.find(".current").removeClass("current");
+                    // set .current on target
+                    $target.addClass("current");
+                    // If target's parent is an LI, also set current there
+                    $target.parent("li").addClass("current");
+                    _._updatenavpath($el);
+                });
+
+                // set current class if it is not set
+                if ($el.find(".current").length === 0) {
+                    $el.find("li a").each(function() {
+                        var $a = $(this),
+                            $li = $a.parents("li:first"),
+                            url = $a.attr("href"),
+                            path;
+                        if (typeof url === "undefined") {
+                            return;
+                        }
+                        path = _._pathfromurl(url);
+                        log.debug("checking url:", url, "extracted path:", path);
+                        if (_._match(curpath, path)) {
+                            log.debug("found match", $li);
+                            $li.addClass("current");
+                        }
+                    });
+                }
+                _._updatenavpath($el);
+            });
+        },
+        _updatenavpath: function($el) {
+            $el.find(".navigation-in-path").removeClass("navigation-in-path");
+            $el.find("li:has(.current)").addClass("navigation-in-path");
+        },
+        _match: function(curpath, path) {
+            if (!path) {
+                log.debug("path empty");
+                return false;
+            }
+            // current path needs to end in the anchor's path
+            if (path !== curpath.slice(- path.length)) {
+                log.debug(curpath, "does not end in", path);
+                return false;
+            }
+            // XXX: we might need more exclusion tests
+            return true;
+        },
+        _pathfromurl: function(url) {
+            var path = url.split("#")[0].split("://");
+            if (path.length > 2) {
+                log.error("weird url", url);
+                return "";
+            }
+            if (path.length === 1) return path[0];
+            return path[1].split("/").slice(1).join("/");
+        }
+    };
+    registry.register(_);
+    return _;
+});
+
+// jshint indent: 4, browser: true, jquery: true, quotmark: double
+// vim: sw=4 expandtab
+;
+/**
+ * Patterns notification - Display (self-healing) notifications.
+ *
+ * Copyright 2013 Marko Durkovic
+ */
+define('pat-notification',[
+    "jquery",
+    "pat-registry",
+    "pat-logger",
+    "pat-parser",
+    "pat-inject"
+], function($, patterns, logger, Parser, inject) {
+    var log = logger.getLogger("notification"),
+        parser = new Parser("notification");
+
+    parser.addArgument("type", "static", ["static", "banner"]);
+    parser.addArgument("healing", "5s");
+    parser.addArgument("controls", "icons", ["icons", "buttons", "none"]);
+    parser.addArgument("class");
+
+    var _ = {
+        name: "notification",
+        trigger: ".pat-notification",
+
+        // this is generic functionality and should be moved to lib
+        parseUnit: function(value, unit) {
+            var unitRe = new RegExp(unit+"$"),
+                numericRe = new RegExp("^[0-9.]+");
+
+            if (!(unitRe.test(value))) {
+                throw "value " + value + "is not in unit " + unit;
+            }
+
+            var mod = value.replace(numericRe, "");
+            mod = mod.replace(unitRe, "");
+
+            value = parseFloat(value);
+            if (!mod.length) {
+                return value;
+            }
+
+            var factors = {
+                M: 1000000,
+                k: 1000,
+                m: 0.001,
+                u: 0.000001
+            };
+
+            return value * factors[mod];
+        },
+
+        parseUnitOrOption: function(value, unit, options) {
+            if (options.indexOf(value) >= 0) {
+                return value;
+            }
+
+            return _.parseUnit(value, unit);
+        },
+
+        count: 0,
+
+        init: function($el, opts) {
+            return $el.each(function() {
+                var $el = $(this);
+
+                if ($el.is("a,form")) {
+                    _._init_inject($el, opts);
+                } else {
+                    _._initNotification($el, opts);
+                }
+                return $el;
+            });
+        },
+
+        _initNotification: function($el, opts) {
+            _.count++;
+
+            var options = parser.parse($el, opts);
+
+            $el = $el.wrap("<div/>").parent()
+                .attr("id", "pat-notification-" + _.count)
+                .addClass("pat-notification-panel")
+                .on("mouseenter.pat-notification", _.onMouseEnter)
+                .on("mouseleave.pat-notification", _.onMouseLeave);
+
+            if (options["class"]) {
+                $el.addClass(options["class"]);
+            }
+
+            if (!Array.isArray(options.controls)) {
+                options.controls = [ options.controls ];
+            }
+
+            // add close icon if requsted
+            if (options.controls.indexOf("icons") >= 0) {
+                $el.append("<button type='button' class=.close-panel'>Close</button>");
+            }
+
+            // add close button if requested
+            if (options.controls.indexOf("buttons") >= 0) {
+                $el.append("<div class='button-bar'><button type='button' class='close-panel'>Close</button></div>");
+            }
+
+            if ($el.find(".close-panel").length) {
+                $el.on("click.pat-notification", ".close-panel", _.onClick);
+            } else {
+                $el.on("click.pat-notification", _.onClick);
+            }
+
+            if (options.type === "banner") {
+                var $container = $("#pat-notification-banners");
+                if (!$container.length) {
+                    $container = $("<div/>").attr("id", "pat-notification-banners").addClass("pat-notification-container").appendTo("body");
+                }
+                $container.append($el);
+            }
+
+            var healing = _.parseUnitOrOption(options.healing, "s", ["persistent"]);
+
+            log.debug("Healing value is", healing);
+            $el.data("healing", healing);
+
+            $el.animate({"opacity": 1}, "fast", function() {
+                _.initRemoveTimer($el);
+            });
+        },
+
+        _init_inject: function($el) {
+            var inject_opts = {
+                target: "#pat-notification-temp"
+            };
+            $el.on("pat-inject-success.pat-notification", function() {
+                var $trigger = $(this),
+                    cfg = parser.parse($trigger, { type: "banner"});
+
+                var $el = $("#pat-notification-temp").contents().wrapAll("<div/>")
+                    .parent()
+                    .addClass("pat-notification");
+
+                if ($trigger.is("a")) {
+                    $trigger.after($el);
+                } else {
+                    $el.prependTo($trigger);
+                }
+                _._initNotification($el, cfg);
+
+                // XXX: Do this later as inject tries to access its target afterwards.
+                // This should be fixed in injection.
+                setTimeout(function() {
+                    $("#pat-notification-temp").remove();
+                }, 0);
+            });
+            inject.init($el, inject_opts);
+        },
+
+        initRemoveTimer: function($el) {
+            var healing = $el.data("healing");
+            if (healing !== "persistent") {
+                clearTimeout($el.data("timer"));
+                $el.data("timer", setTimeout(function() {
+                    _.remove($el);
+                }, healing * 1000));
+            }
+        },
+
+        onMouseEnter: function() {
+            $(this).data("persistent", true);
+        },
+
+        onMouseLeave: function() {
+            var $this = $(this);
+
+            $this.data("persistent", false);
+            _.initRemoveTimer($this);
+        },
+
+        onClick: function(event) {
+            var $this = $(event.delegateTarget);
+
+            $this.data("persistent", false);
+            _.remove($this);
+        },
+
+        remove: function($el) {
+            if ($el.data("persistent") || $el.data("removing")) {
+                return;
+            }
+
+            $el.data("removing", true);
+
+            $el.stop(true).animate({"opacity": 0}, {
+                step: function() {
+                    if ($el.data("persistent")) {
+                        // remove the timer and show notification
+                        clearTimeout($el.data("timer"));
+                        $el.stop(true).animate({"opacity": 1});
+                        $el.data("removing", false);
+                        return false;
+                    }
+                },
+
+                complete: function() {
+                    var $this = $(this);
+                    $this.off(".pat-notification");
+                    $this.slideUp("slow", function() {
+                        $this.remove();
+                    });
+                }
+            });
+        }
+    };
+
+    patterns.register(_);
+    return _;
+});
+
+// jshint indent: 4, browser: true, jquery: true, quotmark: double
+// vim: sw=4 expandtab
+;
 /*! http://mths.be/placeholder v2.0.7 by @mathias */
 ;(function(f,h,$){var a='placeholder' in h.createElement('input'),d='placeholder' in h.createElement('textarea'),i=$.fn,c=$.valHooks,k,j;if(a&&d){j=i.placeholder=function(){return this};j.input=j.textarea=true}else{j=i.placeholder=function(){var l=this;l.filter((a?'textarea':':input')+'[placeholder]').not('.placeholder').bind({'focus.placeholder':b,'blur.placeholder':e}).data('placeholder-enabled',true).trigger('blur.placeholder');return l};j.input=a;j.textarea=d;k={get:function(m){var l=$(m);return l.data('placeholder-enabled')&&l.hasClass('placeholder')?'':m.value},set:function(m,n){var l=$(m);if(!l.data('placeholder-enabled')){return m.value=n}if(n==''){m.value=n;if(m!=h.activeElement){e.call(m)}}else{if(l.hasClass('placeholder')){b.call(m,true,n)||(m.value=n)}else{m.value=n}}return l}};a||(c.input=k);d||(c.textarea=k);$(function(){$(h).delegate('form','submit.placeholder',function(){var l=$('.placeholder',this).each(b);setTimeout(function(){l.each(e)},10)})});$(f).bind('beforeunload.placeholder',function(){$('.placeholder').each(function(){this.value=''})})}function g(m){var l={},n=/^jQuery\d+$/;$.each(m.attributes,function(p,o){if(o.specified&&!n.test(o.name)){l[o.name]=o.value}});return l}function b(m,n){var l=this,o=$(l);if(l.value==o.attr('placeholder')&&o.hasClass('placeholder')){if(o.data('placeholder-password')){o=o.hide().next().show().attr('id',o.removeAttr('id').data('placeholder-id'));if(m===true){return o[0].value=n}o.focus()}else{l.value='';o.removeClass('placeholder');l==h.activeElement&&l.select()}}}function e(){var q,l=this,p=$(l),m=p,o=this.id;if(l.value==''){if(l.type=='password'){if(!p.data('placeholder-textinput')){try{q=p.clone().attr({type:'text'})}catch(n){q=$('<input>').attr($.extend(g(this),{type:'text'}))}q.removeAttr('name').data({'placeholder-password':true,'placeholder-id':o}).bind('focus.placeholder',b);p.data({'placeholder-textinput':q,'placeholder-id':o}).before(q)}p=p.removeAttr('id').hide().prev().attr('id',o).show()}p.addClass('placeholder');p[0].value=p.attr('placeholder')}else{p.removeClass('placeholder')}}}(this,document,jQuery));
 define("jquery.placeholder", ["jquery"], function(){});
@@ -38067,974 +39178,6 @@ define('pat-placeholder',[
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
 // vim: sw=4 expandtab
 ;
-/**
- * Patterns selectbox - Expose select option
- * for (un)checking.
- *
- * Copyright 2012-2014 Simplon B.V. - Wichert Akkerman
- * Copyright 2012 JC Brand
- * Copyright 2012-2013 Florian Friesdorf
- */
-define('pat-selectbox',[
-    "jquery",
-    "pat-registry"
-], function($, patterns) {
-    var selectbox = {
-        name: "selectbox",
-        trigger: "select",
-
-        init: function($el) {
-            var $forms = $();
-            $el.each(function() {
-                if (this.form !== null) {
-                    var $form = $(this.form);
-                    if ($form.data("pat-selectbox.reset"))
-                        return;
-                    $form.data("pat-selectbox.reset", true);
-                    $forms = $forms.add(this.form);
-                }
-            });
-
-            $el.filter("select:not([multiple])")
-                .each(function() {
-                    var $el = $(this);
-                    // create parent span if not direct child of a label
-                    if ($el.parent("label").length === 0)
-                        $el.wrap("<span />");
-                    selectbox.onChangeSelect.call(this);
-                })
-                .on("change.pat-selectbox", selectbox.onChangeSelect);
-
-            $forms.on("reset.pat-selectbox", selectbox.onFormReset);
-        },
-
-        destroy: function($el) {
-            return $el.off(".pat-selectbox");
-        },
-
-        onFormReset: function() {
-            // This event is triggered before the form is reset, and we need
-            // the post-reset state to update our pattern. Use a small delay
-            // to fix this.
-            var form = this;
-            setTimeout(function() {
-                $("select:not([multiple])", form).each(selectbox.onChangeSelect);
-            }, 50);
-        },
-
-        onChangeSelect: function() {
-            var $select = $(this);
-            $select.parent().attr(
-                "data-option",
-                $select.find("option:selected").text()
-            );
-        }
-    };
-
-    patterns.register(selectbox);
-    return selectbox;
-});
-
-// vim: sw=4 expandtab
-;
-/** slides.js
- *
- * Copyright 2013 Simplon B.V. - Wichert Akkerman
- */
-
-(function() {
-
-var _whitespace = /[\t\r\n\f]/g;
-
-function hasClass(el, name) {
-        return (" " + el.className + " ").replace(this._whitespace, " ").indexOf(name)>=0;
-}
-
-
-function addClass(el, name) {
-        if (hasClass(el, name))
-                return;
-        el.className+=" " + name;
-}
-
-
-function removeClass(el, name) {
-        var classes = el.className.split(/\s+/);
-        for (var i=0; i<classes.length; i++)
-                if (classes[i]===name) {
-                        classes.splice(i, 1);
-                        el.className=classes.join(" ");
-                        return;
-                }
-}
-
-
-function extend(target, src) {
-        for (var name in src)
-                if  (src.hasOwnProperty(name))
-                        target[name]=src[name];
-}
-
-
-//////////////////////////////////////////////////////////////////////
-function EventTracker() {
-        this.listeners=[];
-}
-
-EventTracker.prototype={
-        add: function(el, type, handler, context) {
-                var bound_handler = handler.bind(context);
-                this.listeners.push({el: el,
-                                     type: type,
-                                     handler: handler,
-                                     bound_handler: bound_handler});
-                el.addEventListener(type, bound_handler);
-        },
-
-        remove: function(el, type, handler) {
-                var listener;
-                for (var i=0; i<this.listeners.length; i++) {
-                        listener=this.listeners[i];
-                        if (listener.el===el && listener.type===type && listener.handler===handler) {
-                                listener.el.removeEventListener(listener.type, listener.bound_handler);
-                                this.listeners.splice(i, 1);
-                                break;
-                        }
-                }
-        },
-
-        removeAll: function() {
-                var listener;
-                for (var i=0; i<this.listeners.length; i++) {
-                        listener=this.listeners[i];
-                        listener.el.removeEventListener(listener.type, listener.bound_handler);
-                }
-                this.listeners=[];
-        }
-};
-
-
-//////////////////////////////////////////////////////////////////////
-function Slide(presentation, element, active, number) {
-        this.presentation=presentation;
-        this.element=element;
-        this.id=element.id;
-        this.active=!!active;
-        this.number=number;
-        element.addEventListener("click", this._onClick.bind(this));
-}
-
-
-Slide.prototype={
-        title: function() {
-                var el = this.element.querySelector(this.presentation.config.slide_title_selector);
-                return el!==null ? el.textContent : null;
-        },
-
-        notes: function() {
-                return this.element.querySelector(this.presentation.config.slide_notes_selector);
-        },
-
-        _onClick: function() {
-                this.presentation._showSlide(this);
-        },
-
-        _markActive: function() {
-                this.active=true;
-                addClass(this.element, "active");
-        },
-
-        _markInactive: function() {
-                this.active=false;
-                removeClass(this.element, "active");
-        }
-};
-
-
-//////////////////////////////////////////////////////////////////////
-function Notes(presentation) {
-        this.presentation=presentation;
-        this.events=new EventTracker();
-        this.time_start=new Date();
-}
-
-
-Notes.prototype={
-        window: null,
-        document: null,
-        timer_inter: null,
-        time_start: null,
-        global_onunload: null,
-
-        show: function(notes) {
-                if (this.window===null || this.window.closed)
-                        this.window=window.open("about:blank", "presenter-notes",
-                                "menubar=no,personalbar=no,location=no,status=no");
-                if (this.window===null)
-                        return false;
-                this.document=this.window.document;
-                this.events.add(this.document, "keydown", this.presentation._onKey, this.presentation);
-                this._addContent();
-                this.update();
-                this._startTimer();
-                this.global_onunload=window.onunload;
-                window.onunload=this._onUnload.bind(this);
-                return true;
-        },
-
-        hide: function(notes) {
-                this.events.removeAll();
-                this._stopTimer();
-                window.onunload=this.global_ununload;
-                if (this.window!==null) {
-                        if (!this.window.closed)
-                                this.window.close();
-                        this.window=null;
-                        this.document=null;
-                }
-        },
-
-        update: function() {
-                if (!this.isOpen())
-                        return;
-
-                var number = this.presentation.current_slide_index+1,
-                    span = this.document.querySelector("#slide .current");
-                span.firstChild.textContent=number.toString();
-
-                var slide = this.presentation.slides[this.presentation.current_slide_index],
-                    notes = slide.notes(),
-                    section = this.document.getElementById("notes");
-
-                while (section.hasChildNodes())
-                        section.removeChild(section.firstChild);
-
-                if (notes && notes.childElementCount) {
-                        var children = notes.children, dir, lang;
-                        for (var i=0; i<children.length; i++)
-                                section.appendChild(this.document.importNode(children[i], true));
-
-                        for (var w=notes; w!==null && (!dir || !lang); w=w.parentElement) {
-                                if (!dir && w.dir)
-                                        dir=w.dir;
-                                if (!lang && w.lang)
-                                        lang=w.lang;
-                        }
-                        section.dir=dir || "";
-                        section.lang=lang || "";
-                }
-        },
-
-        isOpen: function() {
-                return this.window && !this.window.closed;
-        },
-
-        _addContent: function() {
-                var body = this.document.body,
-                    header, container, span;
-
-                body.id="presentor-notes";
-
-                header=this.document.createElement("header");
-                header.className="meta";
-
-                // Create the slide index
-                container=this.document.createElement("div");
-                container.id="slide";
-                span=this.document.createElement("span");
-                span.className="current";
-                span.appendChild(this.document.createTextNode(this.presentation.current_slide_index+1));
-                container.appendChild(span);
-                span.appendChild(this.document.createTextNode("/"));
-                span=this.document.createElement("span");
-                span.className="total";
-                span.appendChild(this.document.createTextNode(this.presentation.slides.length));
-                container.appendChild(span);
-                header.appendChild(container);
-
-                // Create the timer
-                container=this.document.createElement("timer");
-                container.id="timer";
-                container.appendChild(this.document.createTextNode("00:00:00"));
-                header.appendChild(container);
-
-                body.appendChild(header);
-
-                container=this.document.createElement("section");
-                container.id="notes";
-                body.appendChild(container);
-        },
-
-        _onUnload: function() {
-                if (this.global_onunload!==null)
-                        this.global_onunload();
-                this.hide();
-        },
-
-        _startTimer: function() {
-                this.timer_interval=setInterval(this._updateTimer.bind(this), 1000);
-                this._updateTimer();
-        },
-
-        _stopTimer: function() {
-                if (this.timer_interval!==null) {
-                        clearInterval(this.timer_interval);
-                        this.timer_interval=null;
-                }
-        },
-
-        _twoDigitNumber: function(num) {
-                var buf = num.toString();
-                return buf.length>1 ? buf : "0"+buf;
-        },
-
-        _updateTimer: function() {
-                if (this.window.closed) {
-                        this.hide();
-                        return;
-                }
-
-                var delta = new Date(new Date()-this.time_start),
-                    digits = this._twoDigitNumber,
-                    timer = this.document.getElementById("timer");
-                timer.firstChild.textContent=delta.getUTCHours()+":"+digits(delta.getUTCMinutes())+":"+digits(delta.getUTCSeconds());
-                timer.setAttribute("datetime",
-                                delta.getUTCHours()+"h "+delta.getUTCMinutes()+"m "+delta.getUTCSeconds()+"s");
-        }
-};
-
-
-//////////////////////////////////////////////////////////////////////
-
-var default_config = {
-        // Selector to find slides.
-        slide_selector: ".slide",
-
-        // Selector to find the title of a slide *from the slide*.
-        slide_title_selector: "header",
-
-        // Selector to find the presentation notes for a slide *from the slide*.
-        slide_notes_selector: "footer"
-};
-
-
-function Presentation(container, options) {
-        this.config={};
-        extend(this.config, default_config);
-        if (typeof options==="object")
-                extend(this.config, options);
-        this.container=container;
-        removeClass(this.container, "mode-full");
-        addClass(this.container, "mode-list");
-        this.scan();
-        this.events=new EventTracker();
-        this.notes_window=new Notes(this);
-}
-
-
-Presentation.prototype={
-        // Notes instance
-        notes_window: null,
-
-        // Flag if we are currently running in presentation mode.
-        running: false,
-
-        // The currently shown slide.
-        current_slide_index: null,
-
-        // Identifier of touch event being tracked
-        touch_identifier: null,
-
-        // Page position where a touch event started.
-        touch_start_position: null,
-
-        // Last seen page position during a touch.
-        touch_last_position: null,
-
-        start: function(slide) {
-                if (this.running)
-                        return;
-
-                this.running=true;
-                if (this.current_slide_index===null)
-                        this.current_slide_index=0;
-                addClass(document.body, "slideshow-running");
-                addClass(this.container, "mode-full");
-                removeClass(this.container, "mode-list");
-                this._scaleDocument();
-                this.events.add(window, "resize", this._scaleDocument, this);
-                this.events.add(document, "keydown", this._onKey, this);
-                this.events.add(document, "touchstart", this._onTouchStart, this);
-                var event = document.createEvent("CustomEvent");
-                event.initCustomEvent("SlideshowStart", true, true,
-                                {slideshow: this.container});
-                this.container.dispatchEvent(event);
-                this._display(this.current_slide_index);
-        },
-
-        stop: function(slide) {
-                if (!this.running)
-                        return;
-                this.running=false;
-
-                if (this._isFullScreen())
-                        this.exitFullscreen();
-                this.events.removeAll();
-                removeClass(this.container, "mode-full");
-                addClass(this.container, "mode-list");
-                removeClass(document.body, "slideshow-running");
-                this._applyScale(1);
-                this.notes_window.hide();
-
-                var event;
-
-                event=document.createEvent("CustomEvent");
-                event.initCustomEvent("SlideHide", true, true,
-                                {slideshow: this,
-                                 slide: this.slides[this.current_slide_index],
-                                 number: this.current_slide_index+1});
-                this.slides[this.current_slide_index].element.dispatchEvent(event);
-
-                event=document.createEvent("CustomEvent");
-                event.initCustomEvent("SlideshowStop", true, true,
-                                {slideshow: this.container});
-                this.container.dispatchEvent(event);
-        },
-
-        toggleNotesWindow: function() {
-                if (this.notes_window.isOpen())
-                        this.notes_window.hide();
-                else
-                        this.notes_window.show();
-        },
-
-        enterFullscreen: function() {
-                var names = ["requestFullScreen", "webkitRequestFullScreen",
-                             "mozRequestFullScreen", "msCancelFullScreen",
-                             "oRequestFullScreen"];
-                for (var i=0; i<names.length; i++)
-                        if (typeof this.container[names[i]]==="function") {
-                                this.container[names[i]](this.container);
-                                break;
-                        }
-        },
-
-        exitFullscreen: function() {
-                var names = ["cancelFullScreen", "webkitCancelFullScreen",
-                             "mozCancelFullScreen", "msCancelFullScreen",
-                             "oCancelFullScreen"];
-                for (var i=0; i<names.length; i++)
-                        if (typeof document[names[i]]==="function") {
-                                document[names[i]]();
-                                break;
-                        }
-        },
-
-        _isFullScreen: function() {
-                var names = ["fullScreen", "webkitIsFullScreen", "mozFullScreen",
-                             "msFullScreen", "oFullScreen"],
-                    fullScreen;
-
-                for (var i=0; fullScreen===undefined && i<names.length; i++)
-                        fullScreen=document[names[i]];
-                return fullScreen;
-        },
-
-        toggleFullscreen: function() {
-                switch (this._isFullScreen()) {
-                        case undefined:
-                                return;
-                        case true:
-                                this.exitFullscreen();
-                                break;
-                        case false:
-                                this.enterFullscreen();
-                                break;
-                }
-        },
-
-        first: function() {
-                if (!this.running)
-                        return;
-                this._display(0);
-        },
-
-        previous: function() {
-                if (!this.running)
-                        return;
-                if (!this.current_slide_index)
-                        return;
-                this._display(this.current_slide_index-1);
-        },
-
-        next: function() {
-                if (!this.running)
-                        return;
-                if (this.current_slide_index==(this.slides.length-1))
-                        return;
-                this._display(this.current_slide_index+1);
-        },
-
-        last: function() {
-                if (!this.running)
-                        return;
-                this._display(this.slides.length-1);
-        },
-
-        _applyScale: function(ratio) {
-                var style = (ratio!=1) ? ("scale("+ratio+")") : "";
-                this.container.style.WebkitTransform=style;
-                this.container.style.MozTransform=style;
-                this.container.style.msTransform=style;
-                this.container.style.OTransform=style;
-                this.container.style.transform=style;
-        },
-
-        _scaleDocument: function() {
-                var el = this.slides[0].element;
-                var ratio = 1/Math.max(el.clientWidth/window.innerWidth,
-                                       el.clientHeight/window.innerHeight);
-                this._applyScale(ratio);
-        },
-
-        _showSlide: function(slide) {
-                for (var i=0; i<this.slides.length; i++)
-                        if (this.slides[i]===slide) {
-                                this.current_slide_index=i;
-                                break;
-                        }
-                if (this.running)
-                        this._display(this.current_slide_index);
-                else
-                        this.start();
-        },
-
-        _display: function(index) {
-                var event, slide;
-
-                for (var i=0; i<this.slides.length; i++) {
-                        slide=this.slides[i];
-                        if (i===index)
-                                slide._markActive();
-                        else if (slide.active) {
-                                slide._markInactive();
-                                event=document.createEvent("CustomEvent");
-                                event.initCustomEvent("SlideHide", true, true,
-                                                {slideshow: this,
-                                                 slide: slide,
-                                                 number: i+1});
-                                slide.element.dispatchEvent(event);
-                        }
-                }
-                this.current_slide_index=index;
-                this.notes_window.update();
-
-                event=document.createEvent("CustomEvent");
-                slide=this.slides[this.current_slide_index];
-                event.initCustomEvent("SlideDisplay", true, true,
-                                {slideshow: this,
-                                 slide: slide,
-                                 number: this.current_slide_index+1});
-                slide.element.dispatchEvent(event);
-        },
-
-        _onKey: function(event) {
-                switch (event.which) {
-                        case 27: // Escape
-                                event.preventDefault();
-                                this.stop();
-                                break;
-
-                        case 33: // PageUp
-                        case 38: // Up
-                        case 37: // Left
-                                event.preventDefault();
-                                this.previous();
-                                break;
-
-                        case 32: // Space
-                        case 34: // PageDown
-                        case 39: // Right
-                        case 40: // Down
-                                event.preventDefault();
-                                this.next();
-                                break;
-
-                        case 36: // Home
-                                event.preventDefault();
-                                this.first();
-                                break;
-
-                        case 35: // End
-                                event.preventDefault();
-                                this.last();
-                                break;
-
-                        case 70: // F
-                                event.preventDefault();
-                                this.toggleFullscreen();
-                                break;
-
-                        case 78: // N
-                                event.preventDefault();
-                                this.toggleNotesWindow();
-                                break;
-                }
-        },
-
-        _onTouchStart: function(event) {
-                if (event.touches.length!==1)
-                        return;
-                this.touch_identifier=event.touches[0].identifier;
-                this.touch_start_position=[event.touches[0].pageX, event.touches[0].pageY];
-                this.touch_last_position=[event.touches[0].pageX, event.touches[0].pageY];
-                this.events.add(document, "touchmove", this._onTouchMove, this);
-                this.events.add(document, "touchend", this._onTouchEnd, this);
-                this.events.add(document, "touchcancel", this._onTouchCancel, this);
-        },
-
-        _onTouchMove: function(event) {
-                for (var i=0; i<event.touches.length; i++)
-                        if (event.touches[i].identifier===this.touch_identifier) {
-                                this.touch_last_position[0]=event.touches[i].pageX;
-                                this.touch_last_position[1]=event.touches[i].pageY;
-                                event.preventDefault();
-                                break;
-                        }
-        },
-
-        _onTouchEnd: function(event) {
-                for (var i=0; i<event.changedTouches.length && this.touch_identifier!==null; i++)
-                        if (event.changedTouches[i].identifier===this.touch_identifier) {
-                                this.touch_identifier=null;
-                                var delta_x = this.touch_start_position[0]-this.touch_last_position[0],
-                                    delta_y = this.touch_start_position[1]-this.touch_last_position[1],
-                                    offset_x = Math.abs(delta_x),
-                                    offset_y = Math.abs(delta_y);
-
-                                if (Math.max(offset_x, offset_y)<50)
-                                        continue;
-
-                                if (offset_x>offset_y) {
-                                        if (delta_x<0)
-                                                this.previous();
-                                        else
-                                                this.next();
-                                } else if (delta_y<0)
-                                        this.stop();
-                        }
-        },
-
-        _onTouchCancel: function() {
-                this.touch_identifier=null;
-                this.touch_start_position=null;
-                this.touch_last_position=null;
-                this.events.remove(document, "touchmove", this._onTouchMove);
-                this.events.remove(document, "touchend", this._onTouchEnd);
-                this.events.remove(document, "touchcancel", this._onTouchCancel);
-        },
-
-        scan: function() {
-                var elements = this.container.querySelectorAll(this.config.slide_selector);
-                this.slides=[];
-                this.current_slide_index=0;
-                for (var i=0; i<elements.length; i++) {
-                        var element = elements[i],
-                            active = hasClass(element, "active");
-                        this.slides.push(new Slide(this, element, active, i+1));
-                        if (active)
-                                this.current_slide_index=i;
-                }
-        }
-};
-
-window.Presentation=Presentation;
-})();
-
-define("patternslib.slides", function(){});
-
-/**
- * Patterns URL - URL parsing utilities
- *
- * Copyright 2013 Simplon B.V.
- */
-define('pat-url',[],function() {
-    function UrlArgumentParser() {
-        this._cache=null;
-        if (window.addEventListener)
-            window.addEventListener("popstate", this._reset);
-    }
-
-    UrlArgumentParser.prototype = {
-        space_pattern: /\+/g,
-        keyvalue_pattern: /^(.+?)(?:=(.*))/,
-
-        _reset: function UrlArgumentParser_reset() {
-            this._cache=null;
-        },
-
-        _decodeQS: function UrlArgumentParser_decodeQS(bit) {
-            return decodeURIComponent(bit.replace(this.space_pattern, " "));
-        },
-
-        _parse: function UrlArgumentParser_parse(qs) {
-            var query = /\?(.+)/.exec(qs),
-                params = {};
-
-            if (query===null)
-                return params;
-
-            var parameters = query[1].split("&"),
-                i, parts, key, value;
-                
-            for (i=0; i<parameters.length; i++) {
-                if ((parts=this.keyvalue_pattern.exec(parameters[i]))===null) {
-                    key=this._decodeQS(parameters[i]);
-                    value=null;
-                } else {
-                    key=this._decodeQS(parts[1]);
-                    value=this._decodeQS(parts[2]);
-                }
-
-                if (params[key]===undefined)
-                    params[key]=[];
-                params[key].push(value);
-            }
-
-            return params;
-        },
-
-        get: function UrlArgumentParser_get() {
-            if (this._cache===null)
-                this._cache=this._parse(window.location.search);
-            return this._cache;
-        }
-    };
-
-    var url_parser = new UrlArgumentParser();
-
-    return {
-        UrlArgumentParser: UrlArgumentParser,
-        parameters: url_parser.get.bind(url_parser)
-    };
-});
-
-/**
- * Patterns remove - send event when objects are removed from the DOM
- *
- * Copyright 2012 Simplon B.V. - Wichert Akkerman
- */
-define('pat-remove',[
-    "jquery"
-], function($) {
-    var real_cleanData = $.cleanData;
-
-    $.cleanData = function remove_cleanData(elems) {
-        var i, el;
-        for (i=0; (el=elems[i])!==undefined; i++)
-            $(el).triggerHandler("destroy");
-        real_cleanData.call(this, arguments);
-    };
-});
-
-
-/**
- * Patterns slides - Automatic and customised slideshows.
- *
- * Copyright 2013 Simplon B.V. - Wichert Akkerman
- */
-define('pat-slides',[
-    "jquery",
-    "pat-registry",
-    "patternslib.slides",
-    "pat-utils",
-    "pat-url",
-    "pat-remove"
-], function($, patterns, Presentation, utils, url) {
-    var slides = {
-        name: "slides",
-        trigger: ".pat-slides:has(.slide)",
-
-        setup: function() {
-            $(document).on("patterns-injected", utils.debounce(slides._reset, 100));
-        },
-
-        init: function($el) {
-            var parameters = url.parameters();
-            if (parameters.slides!==undefined) {
-                var requested_ids = slides._collapse_ids(parameters.slides);
-                if (requested_ids)
-                    slides._remove_slides($el, requested_ids);
-            }
-            $el.each(function() {
-                var presentation = new Presentation(this),
-                    $container = $(this);
-                $container
-                    .data("pat-slide", presentation)
-                    .on("SlideDisplay", slides._onSlideDisplay)
-                    .on("SlideHide", slides._onSlideHide);
-            });
-            return slides._hook($el);
-        },
-
-        _onSlideDisplay: function(event) {
-            var slide = event.originalEvent.detail.slide.element,
-                $videos = $("video", slide);
-
-            $videos.each(function() {
-                if (this.paused) {
-                    this.currentTime=0;
-                    this.play();
-                }
-            });
-        },
-
-        _onSlideHide: function(event) {
-            var slide = event.originalEvent.detail.slide.element,
-                $videos = $("video", slide);
-
-            $videos.each(function() {
-                if (!this.paused)
-                    this.pause();
-            });
-        },
-
-        _collapse_ids: function(params) {
-            var ids = [];
-            params.forEach(function(param) {
-                if (param)
-                    ids=ids.concat(param.split(",").filter(function(id) { return !!id;}));
-            });
-            return ids;
-        },
-
-        _remove_slides: function($shows, ids) {
-            var has_bad_id = function(idx, el) { return ids.indexOf(el.id)===-1; };
-
-            for (var i=0; i<$shows.length; i++) {
-                var $show = $shows.eq(i),
-                    $bad_slides = $show.find(".slide[id]").filter(has_bad_id);
-                $bad_slides.remove();
-            }
-        },
-
-        _hook: function($el) {
-            return $el
-                .off("destroy.pat-slide")
-                .on("destroy.pat-slide", utils.debounce(slides._reset, 100));
-        },
-
-        _reset: function() {
-            var $container = $(this).closest(".pat-slides"),
-                presentation = $container.data("pat-slide");
-            if (presentation)
-                presentation.scan();
-            slides._hook($(this.trigger));
-        }
-    };
-
-
-    slides.setup();
-    patterns.register(slides);
-    return slides;
-});
-
-/**
- * Patterns slideshow builder - Create forms to generate custom slideshows
- *
- * Copyright 2013 Simplon B.V. - Wichert Akkerman
- */
-define('pat-slideshow-builder',[
-    "jquery",
-    "pat-registry",
-    "pat-logger"
-], function($, patterns, logging) {
-    var log = logging.getLogger("slideshow-builder"),
-
-        builder = {
-        name: "slideshow-builder",
-        trigger: ".pat-slideshow-builder",
-
-        init: function($el) {
-            return $el.each(function() {
-                var action;
-
-                if (this.tagName.toLowerCase()==="form")
-                    action=this.action;
-                else {
-                    var $form = $(this).closest("form");
-                    if ($form.length===0) {
-                        log.error("Can not find a containing form", this);
-                        return;
-                    }
-                    action = $form[0].action;
-                }
-
-                $.ajax({
-                    url: action,
-                    context: this,
-                    dataType: "html",
-                    error: builder.onError,
-                    success: builder.onLoad
-                });
-            });
-        },
-
-        onError: function(jqXHR, textStatus, errorThrown) {
-            log.error("Error loading slidethis from " + this.action, textStatus, errorThrown, this);
-        },
-
-        onLoad: function(html) {
-            html=html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
-                    .replace(/<head\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/head>/gi, "")
-                    .replace(/<body([^>]*?)>/gi, "<div id=\"__original_body\">")
-                    .replace(/<\/body([^>]*?)>/gi, "</div>");
-            var $fragment = $(html),
-                $slides = $fragment.find(".slide[id]"),
-                headers = [],
-                i;
-            if (!$slides.length) {
-                log.warn("Could not find any slides in " + this.action, this);
-                return;
-            }
-
-            for (i=0; i<$slides.length; i++) {
-                var slide = $slides[i],
-                    $header = $(slide).find("header h2:first");
-                if ($header.length)
-                    headers.push({id: slide.id, title: $header.text()});
-                else
-                    log.info("No header found for slide " + slide.id + " from " + this.action, this);
-            }
-
-            if (!headers.length) {
-                log.warn("No slides with headers found in " + this.action, this);
-                return;
-            }
-
-            var fieldset = document.createElement("fieldset"),
-                label, input;
-            fieldset.className="checklist";
-
-            for (i=0; i<headers.length; i++) {
-                input=document.createElement("input");
-                input.type="checkbox";
-                input.name="slides";
-                input.value=headers[i].id;
-                label=document.createElement("label");
-                label.appendChild(input);
-                label.appendChild(document.createTextNode(headers[i].title));
-                fieldset.appendChild(label);
-            }
-            this.insertBefore(fieldset, this.firstChild);
-            patterns.scan(fieldset);
-        }
-    };
-
-    patterns.register(builder);
-    return builder;
-});
-
 define('pat-sortable',[
     "jquery",
     "pat-registry",
@@ -39736,6 +39879,25 @@ define('pat-toggle',[
 });
 
 /**
+ * Patterns remove - send event when objects are removed from the DOM
+ *
+ * Copyright 2012 Simplon B.V. - Wichert Akkerman
+ */
+define('pat-remove',[
+    "jquery"
+], function($) {
+    var real_cleanData = $.cleanData;
+
+    $.cleanData = function remove_cleanData(elems) {
+        var i, el;
+        for (i=0; (el=elems[i])!==undefined; i++)
+            $(el).triggerHandler("destroy");
+        real_cleanData.call(this, arguments);
+    };
+});
+
+
+/**
  * @license
  * Patterns @VERSION@ tooltip - tooltips
  *
@@ -40345,6 +40507,72 @@ define('pat-tooltip',[
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
 // vim: sw=4 expandtab
 ;
+/**
+ * Patterns URL - URL parsing utilities
+ *
+ * Copyright 2013 Simplon B.V.
+ */
+define('pat-url',[],function() {
+    function UrlArgumentParser() {
+        this._cache=null;
+        if (window.addEventListener)
+            window.addEventListener("popstate", this._reset);
+    }
+
+    UrlArgumentParser.prototype = {
+        space_pattern: /\+/g,
+        keyvalue_pattern: /^(.+?)(?:=(.*))/,
+
+        _reset: function UrlArgumentParser_reset() {
+            this._cache=null;
+        },
+
+        _decodeQS: function UrlArgumentParser_decodeQS(bit) {
+            return decodeURIComponent(bit.replace(this.space_pattern, " "));
+        },
+
+        _parse: function UrlArgumentParser_parse(qs) {
+            var query = /\?(.+)/.exec(qs),
+                params = {};
+
+            if (query===null)
+                return params;
+
+            var parameters = query[1].split("&"),
+                i, parts, key, value;
+                
+            for (i=0; i<parameters.length; i++) {
+                if ((parts=this.keyvalue_pattern.exec(parameters[i]))===null) {
+                    key=this._decodeQS(parameters[i]);
+                    value=null;
+                } else {
+                    key=this._decodeQS(parts[1]);
+                    value=this._decodeQS(parts[2]);
+                }
+
+                if (params[key]===undefined)
+                    params[key]=[];
+                params[key].push(value);
+            }
+
+            return params;
+        },
+
+        get: function UrlArgumentParser_get() {
+            if (this._cache===null)
+                this._cache=this._parse(window.location.search);
+            return this._cache;
+        }
+    };
+
+    var url_parser = new UrlArgumentParser();
+
+    return {
+        UrlArgumentParser: UrlArgumentParser,
+        parameters: url_parser.get.bind(url_parser)
+    };
+});
+
 /*
  * Parsley.js allows you to verify your form inputs frontend side, without writing a line of javascript. Or so..
  *
@@ -42004,8 +42232,8 @@ define('pat-zoom',[
  * directly in your RequireJS configuration.
  */
 define('patterns',[
+    "pat-registry", // Keep separate as first argument to callback
     "jquery",
-    "pat-registry",
     "jquery.browser",
     "pat-ajax",
     "pat-autofocus",
@@ -42021,8 +42249,10 @@ define('patterns',[
     "pat-chosen",
     "pat-clone",
     "pat-collapsible",
-    "pat-colour-picker",
+    "pat-date-picker",
+    // "pat-colour-picker",
     "pat-depends",
+    "pat-depends_parse",
     // "pat-edit-tinymce",
     "pat-equaliser",
     "pat-expandable",
@@ -42036,15 +42266,12 @@ define('patterns',[
     "pat-input-change-events",
     "pat-legend",
     // "pat-markdown",
+    "pat-masonry",
     "pat-menu",
     "pat-modal",
     "pat-navigation",
     "pat-notification",
-    "pat-masonry",
     "pat-placeholder",
-    "pat-selectbox",
-    "pat-slides",
-    "pat-slideshow-builder",
     "pat-sortable",
     "pat-stacks",
     "pat-subform",
@@ -42054,13 +42281,15 @@ define('patterns',[
     "pat-url",
     "pat-validate",
     "pat-zoom"
-], function($, registry) {
+], function(registry) {
     window.patterns = registry;
+
     // workaround this MSIE bug :
     // https://dev.plone.org/plone/ticket/10894
     if ($.browser.msie) { $("#settings").remove(); }
     window.Browser = {};
     window.Browser.onUploadComplete = function () {};
+
     registry.init();
     return registry;
 });

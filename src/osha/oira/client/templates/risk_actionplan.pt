@@ -33,7 +33,7 @@
             <option value="high" selected="${python:'selected' if value=='high' else None}" i18n:translate="risk_priority_high">high</option>
             </select> priority risk.</label>
         </fieldset>
-        <metal:call use-macro="webhelpers/macros/risk_info" />
+        <metal:call use-macro="webhelpers/macros/risk_info_actionplan" />
     </div>
 
     <div class="last span-15" tal:condition="risk/legal_reference|nothing">

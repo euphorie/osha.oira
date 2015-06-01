@@ -34,14 +34,14 @@
 </article>
 
 
-
 <div class="measures pat-clone" data-pat-clone="template: #measure-template" id="ActionPlanItemForm">
-    <div class="measure pat-collapsible" id="measure-1" tal:repeat="actionplan data/action_plans">
+    <div class="measure clone pat-collapsible" tal:repeat="actionplan data/action_plans">
 
-        <h2>Measure 1</h2>
+        <h2 tal:content="string:Measure ${repeat/actionplan/number}">Measure 1</h2>
         <tal:if_has_measures define="measures view/solutions" condition="measures">
             <p class="functions">
                 <a class="icon-pencil pat-tooltip" data-pat-tooltip="source:ajax" href="#standard-solutions-0">Pre-fill</a>
+                <a class="icon-trash remove-clone">Remove</a>
             </p>
             <div id="standard-solutions-0" hidden>
                 <p class="info" i18n:translate="label_select_measure">Select one or more of the known common measures provided.</p>

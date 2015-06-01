@@ -102,12 +102,12 @@
                         class="preparation pat-switch pat-inject"
                         data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off">Preparation</a>
                 </li>
-                <li id="step-2" tal:attributes="class python:page_section == 'identification' and 'active' or ''">
+                <li id="step-2" tal:define="active python:page_section == 'identification'" tal:attributes="class python:active and 'active' or ''">
                     <a href="${survey_url}/identification" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
                         class="identification pat-switch pat-inject"
                         data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-off; add: sidebar-on">Identification + Evaluation</a>
 
-                    <tal:block condition="nocall:tree">
+                    <tal:block condition="python: active and tree">
                       <metal:call use-macro="webhelpers/macros/survey_tree" />
                     </tal:block>
 
@@ -117,10 +117,15 @@
                     </div>
                     -->
                 </li>
-                <li id="step-4" tal:attributes="class python:page_section == 'actionplan' and 'active' or ''">
+                <li id="step-4" tal:define="active python:page_section == 'actionplan'" tal:attributes="class python:active and 'active' or ''">
                     <!-- The tree for the action section uses the same structure as the identification tree, with the only differences that only risks and their parent modules are shown and that the entire tree is expanded. -->
                     <a href="${survey_url}/actionplan" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
                        class="action-plan pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; add: sidebar-on; remove: sidebar-off">Action Plan</a>
+
+                    <tal:block condition="python: active and tree">
+                      <metal:call use-macro="webhelpers/macros/survey_tree" />
+                    </tal:block>
+
                 </li>
 
                 <li id="step-5" tal:attributes="class python:page_section == 'report' and 'active' or ''">

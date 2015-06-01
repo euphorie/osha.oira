@@ -78,13 +78,13 @@
     </ol>
   </metal:survey>
 
-  <metal:survey define-macro="survey_tree_inner" meta:interpolation="true">
+  <metal:survey define-macro="survey_tree_inner" meta:interpolation="true" tal:define="target_inject python:page_section=='identification' and 'step-2' or 'step-4'">
     <ol tal:condition="exists:tree" tal:attributes="class python:tree['leaf_module'] and 'navigation questions' or ''">
       <tal:items repeat="item tree/children">
       <li tal:condition="python: item['type']!='location'"
           title="${python:'%s. %s' % (item['number'], item['title']) if tree['leaf_module'] else None}"
           class="${python: '%s %s' % (item['class'], 'submodule' if item['type'] == 'module' and item['depth']>1 else '')}">
-        <a tal:define="item_class item/class"
+        <a tal:define="item_class item/class" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #${target_inject}; target: #${target_inject} && source: #content; target: #content"
             href="${item/url}">
                 <strong class="number">${item/number}</strong> ${item/title}
         </a>

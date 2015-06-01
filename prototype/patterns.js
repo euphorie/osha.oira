@@ -10,8 +10,6 @@ define([
     "jquery",
     "pat-registry",
     "jquery.browser",
-    "modernizr",
-    "prefixfree",
     "pat-ajax",
     "pat-autofocus",
     "pat-autoscale",
@@ -19,7 +17,7 @@ define([
     "pat-autosuggest",
     // "pat-breadcrumbs",
     "pat-bumper",
-    "pat-calendar",
+    // "pat-calendar",
     "pat-carousel",
     "pat-checkedflag",
     "pat-checklist",
@@ -60,9 +58,12 @@ define([
     "pat-validate",
     "pat-zoom"
 ], function($, registry) {
-    // Since we are in a non-AMD env, register a few useful utilites
-    $(function () {
-        registry.init();
-    });
+    window.patterns = registry;
+    // workaround this MSIE bug :
+    // https://dev.plone.org/plone/ticket/10894
+    if ($.browser.msie) { $("#settings").remove(); }
+    window.Browser = {};
+    window.Browser.onUploadComplete = function () {};
+    registry.init();
     return registry;
 });

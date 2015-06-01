@@ -7,8 +7,8 @@
  * directly in your RequireJS configuration.
  */
 define([
+    "pat-registry", // Keep separate as first argument to callback
     "jquery",
-    "pat-registry",
     "jquery.browser",
     "pat-ajax",
     "pat-autofocus",
@@ -24,8 +24,10 @@ define([
     "pat-chosen",
     "pat-clone",
     "pat-collapsible",
-    "pat-colour-picker",
+    "pat-date-picker",
+    // "pat-colour-picker",
     "pat-depends",
+    "pat-depends_parse",
     // "pat-edit-tinymce",
     "pat-equaliser",
     "pat-expandable",
@@ -39,15 +41,12 @@ define([
     "pat-input-change-events",
     "pat-legend",
     // "pat-markdown",
+    "pat-masonry",
     "pat-menu",
     "pat-modal",
     "pat-navigation",
     "pat-notification",
-    "pat-masonry",
     "pat-placeholder",
-    "pat-selectbox",
-    "pat-slides",
-    "pat-slideshow-builder",
     "pat-sortable",
     "pat-stacks",
     "pat-subform",
@@ -57,13 +56,15 @@ define([
     "pat-url",
     "pat-validate",
     "pat-zoom"
-], function($, registry) {
+], function(registry) {
     window.patterns = registry;
+
     // workaround this MSIE bug :
     // https://dev.plone.org/plone/ticket/10894
     if ($.browser.msie) { $("#settings").remove(); }
     window.Browser = {};
     window.Browser.onUploadComplete = function () {};
+
     registry.init();
     return registry;
 });

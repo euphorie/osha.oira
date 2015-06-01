@@ -10,6 +10,9 @@ default: all
 ########################################################################
 ## Install dependencies
 
+bundle bundle.js: build.js stamp-bower
+	node_modules/.bin/r.js -o build.js
+
 stamp-npm: package.json
 	npm install
 	touch stamp-npm

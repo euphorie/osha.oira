@@ -16,6 +16,14 @@ from .interfaces import IOSHAActionPlanPhaseSkinLayer
 
 grok.templatedir("templates")
 
+IMAGE_CLASS = {
+    0: '',
+    1: 'twelve',
+    2: 'six',
+    3: 'four',
+    4: 'three',
+}
+
 
 class OSHAIdentificationView(risk.EvaluationView):
     """ This view is a combination of the Euphorie Identification and Evauation
@@ -76,7 +84,14 @@ class OSHAIdentificationView(risk.EvaluationView):
             self.show_info = self.risk.image or \
                 HasText(self.risk.description) or \
                 HasText(self.risk.legal_reference)
-
+            number_images = getattr(self.risk, 'image', None) and 1 or 0
+            if number_images:
+                for i in range(2, 5):
+                    number_images += getattr(
+                        self.risk, 'image{0}'.format(i), None) and 1 or 0
+            self.has_images = number_images > 0
+            self.number_images = number_images
+            self.image_class = IMAGE_CLASS[number_images]
             super(risk.EvaluationView, self).update()
 
 
@@ -166,5 +181,11 @@ class OSHAActionPlanView(risk.ActionPlanView):
             filter=self.question_filter, phase="actionplan")
         self.solutions = [solution for solution in self.risk.values()
                           if ISolution.providedBy(solution)]
+        number_images = getattr(self.risk, 'image', None) and 1 or 0
+        if number_images:
+            for i in range(2, 5):
+                number_images += getattr(
+                    self.risk, 'image{0}'.format(i), None) and 1 or 0
+        self.has_images = number_images > 0
+        self.image_class = IMAGE_CLASS[number_images]
         super(risk.ActionPlanView, self).update()
-

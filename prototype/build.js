@@ -2,11 +2,9 @@
     baseUrl: ".",
     out: "bundles/ploneintranet.js",
     include: ["patterns"],
+    insertRequire: ["patterns"],
     name: "almond",
     mainConfigFile: 'main.js',
-    wrap: {
-        endFile: "bower_components/patternslib/src/wrap-end.js"
-    },
     optimize: "none",
     paths: {
         "almond": "bower_components/almond/almond"

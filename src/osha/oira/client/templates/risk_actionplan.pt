@@ -16,9 +16,16 @@
 <tal:def define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};">
 <form method="post" action="${context/absolute_url}">
 <article class="rich pat-well warning">
-    <h2>${view/title}</h2>
+    <tal:block condition="not:view/risk_present">
+        <h2 tal:content="risk/title"></h2>
+    </tal:block>
+    <tal:block condition="view/risk_present" define="use_problem_description view/use_problem_description">
+        <h2 tal:condition="use_problem_description"
+            tal:content="risk/problem_description">The fridges are checked daily.</h2>
+        <h2 tal:condition="not:use_problem_description"
+            tal:content="risk/title">The fridges are checked daily.</h2>
+    </tal:block>
     <div class="message warning last span-15" tal:define="show_statement python:True">
-        <metal:call use-macro="webhelpers/macros/risk_info" />
         <fieldset tal:define="value data/priority">
             <label i18n:translate="risk_priority">This is a <select name="priority" i18n:name="priority_value">
             <option value="low" selected="${python:'selected' if value=='low' else None}" i18n:translate="risk_priority_low">low</option>
@@ -26,6 +33,7 @@
             <option value="high" selected="${python:'selected' if value=='high' else None}" i18n:translate="risk_priority_high">high</option>
             </select> priority risk.</label>
         </fieldset>
+        <metal:call use-macro="webhelpers/macros/risk_info" />
     </div>
 
     <div class="last span-15" tal:condition="risk/legal_reference|nothing">

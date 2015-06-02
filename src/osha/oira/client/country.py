@@ -1,13 +1,17 @@
+import urllib
 from zope import schema
 from zope.interface import directlyProvides
 from sqlalchemy.orm import object_session
 from AccessControl import getSecurityManager
+from Acquisition import aq_inner
 from five import grok
 from z3c.form import button
 from plone.directives import form
 from Products.statusmessages.interfaces import IStatusMessage
+from euphorie.client import utils
 from euphorie.client.country import View as EuphorieView
 from euphorie.client.country import IClientCountry
+from euphorie.client.login import Tryout
 from euphorie.client.model import SurveySession
 from .interfaces import IOSHAClientSkinLayer
 from zope.interface import Interface
@@ -26,6 +30,33 @@ class CreateSession(View):
     grok.context(Interface)
     grok.name("new-session.html")
     grok.template("new-session")
+
+
+class CreateTestSession(View, Tryout):
+    grok.context(Interface)
+    grok.require("zope2.View")
+    grok.name("new-session-test.html")
+    grok.template("new-session-test")
+
+    def update(self):
+        context = aq_inner(self.context)
+        came_from = self.request.form.get("came_from")
+        if came_from:
+            if isinstance(came_from, list):
+                # If came_from is both in the querystring and the form data
+                came_from = came_from[0]
+        else:
+            came_from = context.absolute_url()
+        self.register_url = "%s/@@register?%s" % (
+            context.absolute_url(), urllib.urlencode({'came_from': came_from}))
+        utils.setLanguage(self.request, self.context)
+        if self.request.environ["REQUEST_METHOD"] == "POST":
+            reply = self.request.form
+            if reply["action"] == "new":
+                account = self.createGuestAccount()
+                self.login(account, False)
+                self._NewSurvey(reply, account)
+        self._updateSurveys()
 
 
 class DeleteSession(grok.View):

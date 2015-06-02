@@ -79,7 +79,7 @@
     <aside id="osc">
         <header id="osc-header">
             <tal:if condition="is_anonymous">
-                <a href="/new-session-test.html#document-content" id="button-new-session"
+                <a href="${base_url}/new-session-test.html?${came_from_param}#document-content" id="button-new-session"
                     data-pat-modal="class: large" class="pat-modal icon-plus-circle" title="Start a new session">Start test session</a>
                 <metal:include tal:define="id string:session-menu" use-macro="context/@@includes/macros/osh"/>
             </tal:if>

@@ -13,6 +13,7 @@ from os import path
 from osha.oira.client import model as oiramodel
 from sqlalchemy import sql
 from z3c.saconfig import Session
+from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
 from plone import api
 import htmllib
@@ -266,3 +267,11 @@ class OSHAWebHelpers(WebHelpers):
                 return NAME_TO_PHASE[tail]
             head, tail = path.split(head)
         return ""
+
+    @reify
+    def get_sector_logo(self):
+        sector = self.sector
+        if sector is None:
+            return None
+        images = getMultiAdapter((sector, self.request), name="images")
+        return images.scale("logo", height=100, direction="up") or None

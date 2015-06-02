@@ -13,6 +13,8 @@
                   page_section webhelpers/get_phase;
                   sidebar_default python:page_section in ['identification', 'actionplan'] and 'sidebar-on' or 'sidebar-off';
                   client nocall:request/client;
+                  came_from webhelpers/came_from;
+                  came_from_param python:came_from and 'came_from=%s' % came_from or '';
                   tools context/@@tools">
 
 <head>
@@ -57,7 +59,7 @@
             <button id="osh-toggle" class="osh-toggle pat-toggle" data-pat-toggle="selector: body; value: osh-on osh-off; store: local">?</button>
 
             <tal:if_anon condition="python:is_anonymous or webhelpers.is_guest_account">
-                <a href="${base_url}/login#document-content" class="pat-modal login" data-pat-modal="class: large">Login</a>
+                <a href="${base_url}/login_form?${came_from_param}#document-content" class="pat-modal login" data-pat-modal="class: large">Login</a>
                 <a href="${base_url}/register" class="registration">Register</a>
             </tal:if_anon>
             <tal:if_not_anon condition="python: not is_anonymous and not webhelpers.is_guest_account">
@@ -68,7 +70,7 @@
         </header>
         <div id="content">
             <p tal:condition="webhelpers/is_guest_account" id="warning-bar">
-                This is a test session. <a href="${base_url}/login" class="registration">Sign in</a> to save your data. <a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info">Info</a>
+                This is a test session. <a href="${base_url}/login_form?${came_from_param}#document-content" class="registration">Sign in</a> to save your data. <a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info">Info</a>
             </p>
             <metal:block define-slot="content"/>
         </div>

@@ -17,6 +17,12 @@ class Login(BaseLogin):
         return super(Login, self).login(account, remember)
 
 
+class LoginForm(Login):
+    grok.layer(IOSHAClientSkinLayer)
+    grok.name("login_form")
+    grok.template("login_form")
+
+
 class Register(BaseRegister):
     grok.layer(IOSHAClientSkinLayer)
     grok.template("register")

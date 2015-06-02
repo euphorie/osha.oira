@@ -152,7 +152,7 @@
             <tal:if_anon condition="is_anonymous">
                 <!-- In case the organisation has not changed the logo, the link tag gets a class 'native' instead of 'alien' and the following markup applies: -->
                 <figure>
-                    <img src="/media/oira-logo.svg" alt="" />
+                    <img src="${base_url}/++resource++oira.media/oira-logo.svg" alt="" />
                     <figcaption>
                         Online Interactive<br/>
                         Risk Assessment

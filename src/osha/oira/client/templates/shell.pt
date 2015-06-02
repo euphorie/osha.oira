@@ -13,6 +13,8 @@
                   page_section webhelpers/get_phase;
                   sidebar_default python:page_section in ['identification', 'actionplan'] and 'sidebar-on' or 'sidebar-off';
                   client nocall:request/client;
+                  came_from webhelpers/came_from;
+                  came_from_param python:came_from and 'came_from=%s' % came_from or '';
                   tools context/@@tools">
 
 <head>
@@ -57,7 +59,7 @@
             <button id="osh-toggle" class="osh-toggle pat-toggle" data-pat-toggle="selector: body; value: osh-on osh-off; store: local">?</button>
 
             <tal:if_anon condition="python:is_anonymous or webhelpers.is_guest_account">
-                <a href="${base_url}/login#document-content" class="pat-modal login" data-pat-modal="class: large">Login</a>
+                <a href="${base_url}/login_form?${came_from_param}#document-content" class="pat-modal login" data-pat-modal="class: large">Login</a>
                 <a href="${base_url}/register" class="registration">Register</a>
             </tal:if_anon>
             <tal:if_not_anon condition="python: not is_anonymous and not webhelpers.is_guest_account">
@@ -68,7 +70,7 @@
         </header>
         <div id="content">
             <p tal:condition="webhelpers/is_guest_account" id="warning-bar">
-                This is a test session. <a href="${base_url}/login" class="registration">Sign in</a> to save your data. <a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info">Info</a>
+                This is a test session. <a href="${base_url}/login_form?${came_from_param}#document-content" class="registration">Sign in</a> to save your data. <a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info">Info</a>
             </p>
             <metal:block define-slot="content"/>
         </div>
@@ -146,21 +148,22 @@
                     class="help pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off">Help</a>
             </li>
         </ol>
-        <a href="" id="organisation-logo" tal:attributes="class python:is_anonymous and 'native' or 'alien'">
-            <tal:if_anon condition="is_anonymous">
+
+        <a href="" id="organisation-logo" tal:define="sector_logo webhelpers/get_sector_logo" tal:attributes="class python:sector_logo and 'alien' or 'native'">
+            <tal:native condition="not:nocall:sector_logo">
                 <!-- In case the organisation has not changed the logo, the link tag gets a class 'native' instead of 'alien' and the following markup applies: -->
                 <figure>
-                    <img src="/media/oira-logo.svg" alt="" />
+                    <img src="${base_url}/++resource++oira.media/oira-logo.svg" alt="" />
                     <figcaption>
                         Online Interactive<br/>
                         Risk Assessment
                     </figcaption>
                 </figure>
-            </tal:if_anon>
-            <tal:if_not_anon condition="not: is_anonymous">
+            </tal:native>
+            <tal:alien condition="nocall:sector_logo">
                 <!-- In case of on organisation that uploaded a logo, no figure tag needs to be there: -->
-                <img src="${base_url}/external-site-logo.jpg" alt="" />
-            </tal:if_not_anon>
+                <img src="${sector_logo/url}" alt="" />
+            </tal:alien>
         </a>
     </aside>
 </body>

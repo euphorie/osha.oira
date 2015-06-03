@@ -32,6 +32,7 @@ class OSHAIdentificationView(risk.EvaluationView):
     """
     grok.layer(IOSHAIdentificationPhaseSkinLayer)
     grok.template("risk_identification")
+    question_filter = None
 
     def update(self):
         if redirectOnSurveyUpdate(self.request):

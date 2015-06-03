@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      i18n:domain="euphorie"
+      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers"
+      metal:use-macro="context/@@shell/macros/shell">
+
+<body>
+<metal:slot fill-slot="content" tal:define="module nocall:view/module">
+<article class="rich">
+    <h1 i18n:translate="title_other_risks">Other risks</h1>
+    <tal:block replace="tile:statusmessages"/>
+
+    <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}">
+
+	<fieldset class="custom-risks pat-clone" data-pat-clone="template: #risk-template">
+		<fieldset class="risk-set clone">
+			<textarea autofocus name="risk.description:utf8:ustring:records" placeholder="Description of risk 1" id="description-1" cols="30" rows="6" class="description"></textarea>
+            <em tal:condition="python:request.get('errors', {}).get('description')" class="validation warning message" data-validate-constraint="required">This value is required.</em>
+			<label class="priority">This is a
+                <select name="risk.priority:utf8:ustring:records">
+					<option value="low">
+                        <tal:span i18n:translate="priority_low_risk">low priority risk</tal:span>
+					</option>
+					<option value="medium">
+                        <tal:span i18n:translate="priority_medium_risk">medium priority risk</tal:span>
+					</option>
+					<option vaule="high">
+                        <tal:span i18n:translate="priority_high_risk">high priority risk</tal:span>
+					</option>
+				</select> .
+                <em tal:condition="python:request.get('errors', {}).get('priority')" class="validation warning message" data-validate-constraint="required">This value is required.</em>
+			</label>
+            <fieldset class="vertical">
+                <textarea name="risk.comment:utf8:ustring:records" class="span-15" rows="5"
+                    placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
+        i            i18n:attributes="placeholder label_comment"></textarea>
+            </fieldset>
+			<button class="iconified icon-trash float-after remove-clone">Remove risk</button>
+		</fieldset>
+	</fieldset>
+    <p class="buttons pat-button-bar">
+        <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="pat-button-back">Previous</button>
+        <button id="clone-set-1" type="button" i18n:translate="label_add_risk" class="pat-button icon-plus-circle add-clone">Add risk</button>
+        <button type="submit" name="next" value="next" i18n:translate="label_skip_to_action_plan" class="float-after pat-button icon-angle-circled-right">Save and continue to action plan</button>
+    </p>
+    </form>
+
+    <fieldset class="risk-set" id="risk-template" hidden>
+        <textarea autofocus name="risk.description:utf8:ustring:records" placeholder="Description of risk #{1}" id="description-#{1}" cols="30" rows="6" class="description"></textarea>
+        <label class="priority">This is a
+            <select name="risk.priority:utf8:ustring:records">
+                <option>
+                    low priority risk
+                </option>
+                <option>
+                    medium priority risk
+                </option>
+                <option>
+                    high priority risk
+                </option>
+            </select> .
+        </label>
+        <fieldset class="vertical">
+            <textarea name="risk.comment:utf8:ustring:records" class="span-15" rows="5"
+                placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
+                i18n:attributes="placeholder label_comment"></textarea>
+        </fieldset>
+        <button class="iconified icon-trash float-after remove-clone">Remove risk</button>
+    </fieldset>
+
+
+    <tal:if_has_risks define="risks view/get_custom_risks" condition="risks">
+    <h2 i18n:translate="list_custom_risks">My existing custom risks:</h2>
+    <table>
+        <tr><th>Risk Title</th> <th>Risk Priority</th> <th>Comments</th></tr>
+        <tr tal:repeat="item risks">
+            <td tal:content="item/title"></td>
+            <td tal:content="item/priority"></td>
+            <td tal:content="item/comment"></td>
+        </tr>
+    </table>
+    </tal:if_has_risks>
+</article>
+</metal:slot>
+</body>
+</html>
+

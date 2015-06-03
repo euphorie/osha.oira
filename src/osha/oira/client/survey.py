@@ -7,21 +7,18 @@ from euphorie.client.navigation import FindFirstQuestion
 from euphorie.client.navigation import QuestionURL
 from five import grok
 from zope.component import getMultiAdapter
-from .interfaces import IOSHAClientSkinLayer
-from .interfaces import IOSHAIdentificationPhaseSkinLayer
-from .interfaces import IOSHAEvaluationPhaseSkinLayer
-from .interfaces import IOSHAActionPlanPhaseSkinLayer
-from .interfaces import IOSHAReportPhaseSkinLayer
+from osha.oira.client import interfaces
 
 grok.templatedir("templates")
 
 
 class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
     survey.SurveyPublishTraverser.phases.update({
-        "identification": IOSHAIdentificationPhaseSkinLayer,
-        "evaluation": IOSHAEvaluationPhaseSkinLayer,
-        "actionplan": IOSHAActionPlanPhaseSkinLayer,
-        "report": IOSHAReportPhaseSkinLayer,
+        "identification": interfaces.IOSHAIdentificationPhaseSkinLayer,
+        "customization": interfaces.IOSHACustomizationPhaseSkinLayer,
+        "evaluation": interfaces.IOSHAEvaluationPhaseSkinLayer,
+        "actionplan": interfaces.IOSHAActionPlanPhaseSkinLayer,
+        "report": interfaces.IOSHAReportPhaseSkinLayer,
     })
 
 
@@ -31,7 +28,7 @@ class OSHAStart(survey.Start):
         In the Jekyll prototype this is called preparation.html
     """
     grok.require("euphorie.client.ViewSurvey")
-    grok.layer(IOSHAClientSkinLayer)
+    grok.layer(interfaces.IOSHAClientSkinLayer)
     grok.template("start")
     grok.name("start")
 
@@ -39,7 +36,7 @@ class OSHAStart(survey.Start):
 class OSHAIdentification(survey.Identification):
     """ Override the 'identification' page to provide our own template.
     """
-    grok.layer(IOSHAIdentificationPhaseSkinLayer)
+    grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
     grok.template("identification")
     grok.name("index_html")
 
@@ -64,7 +61,7 @@ class OSHAReportView(report.ReportView):
         See euphorie/client/survey.py for more info
     """
     grok.template("report")
-    grok.layer(IOSHAClientSkinLayer)
+    grok.layer(interfaces.IOSHAClientSkinLayer)
 
     def get_language(self):
         context = aq_inner(self.context)
@@ -102,7 +99,7 @@ class OSHAActionPlan(survey.ActionPlan):
 
     Please refer to original for more details.
     """
-    grok.layer(IOSHAActionPlanPhaseSkinLayer)
+    grok.layer(interfaces.IOSHAActionPlanPhaseSkinLayer)
     grok.template("actionplan")
 
     def update(self):
@@ -126,5 +123,5 @@ class Evaluation(survey.Evaluation):
     even if evaluation_optional should be True.
     OSHA tickets: #8963, #6175
     """
-    grok.layer(IOSHAEvaluationPhaseSkinLayer)
+    grok.layer(interfaces.IOSHAEvaluationPhaseSkinLayer)
     grok.template('evaluation')

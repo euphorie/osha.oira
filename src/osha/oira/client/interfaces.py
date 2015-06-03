@@ -2,6 +2,7 @@ from euphorie.client.interfaces import IClientSkinLayer
 from euphorie.client.interfaces import IIdentificationPhaseSkinLayer
 from euphorie.client.interfaces import IEvaluationPhaseSkinLayer
 from euphorie.client.interfaces import IActionPlanPhaseSkinLayer
+from euphorie.client.interfaces import ICustomizationPhaseSkinLayer
 from euphorie.client.interfaces import IReportPhaseSkinLayer
 
 
@@ -20,6 +21,9 @@ class IOSHAEvaluationPhaseSkinLayer(IEvaluationPhaseSkinLayer):
 class IOSHAActionPlanPhaseSkinLayer(IActionPlanPhaseSkinLayer):
     """Skin layer used during the action plan phase."""
 
+
+class IOSHACustomizationPhaseSkinLayer(ICustomizationPhaseSkinLayer):
+    """Skin layer used during the action plan report phase."""
 
 class IOSHAReportPhaseSkinLayer(IReportPhaseSkinLayer):
     """Skin layer used during the action plan report phase."""

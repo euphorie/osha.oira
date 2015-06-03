@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      i18n:domain="euphorie"
+      id="account-settings"
+      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers"
+      metal:use-macro="context/@@shell/macros/shell">
+
+  <body>
+    <metal:content fill-slot="content" tal:define="base_url context/absolute_url">
+      <h1>${view/label}</h1>
+      <h2 i18n:translate="header_account_data">Account data</h2>
+      <fieldset class="vertical" id="newEmail">
+        <legend i18n:translate="">Email address/account name</legend>
+        <p><strong>${tools/user/loginname}</strong><br/>
+          <a href="${base_url}/new-email" class="discrete" i18n:translate="">Change email address</a> | <a href="${base_url}/account-delete" class="discrete" i18n:translate="">Delete account</a></p>
+        <p><strong i18n:translate="">Please bear in mind that by changing the email address, your login name will also change.</strong></p>
+      </fieldset>
+      <hr />
+      <h2 i18n:translate="header_password">Password</h2>
+      <form action="${request/getURL}" enctype="${view/enctype}" method="${view/method}" id="${view/id}">
+        <fieldset class="vertical">
+          <tal:widget repeat="widget view/widgets/values" replace="structure widget/render" />
+        </fieldset>
+        <p class="buttonBar">
+            <button class="pat-button" name="form.buttons.save" type="submit" i18n:translate="Save changes">Save changes</button>
+        </p>
+      </form>
+    </metal:content>
+  </body>
+</html>
+

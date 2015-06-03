@@ -260,7 +260,6 @@ class OSHAWebHelpers(WebHelpers):
         return survey.title
 
     def get_phase(self):
-        "to be done"
         head, tail = path.split(self.request.PATH_INFO)
         while tail:
             tail = tail.replace('@', '')

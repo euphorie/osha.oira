@@ -23,24 +23,6 @@
       <input type="hidden" name="came_from" tal:condition="request/came_from|nothing" value="${request/came_from}"/>
       <h2 i18n:translate="header_login">Login</h2>
 
-      <section class="report-blurb" tal:condition="python:is_guest_account and request.get('report_blurb')">
-          <p>
-          We're sorry, but unregistered users can't use the download feature. Create a user account
-          in just one easy step and gain access to the following benefits:
-          </p>
-          <ul>
-              <li>It's free</li>
-              <li>You can save your work online</li>
-              <li>Your business information and account are confidential to you only</li>
-              <li>Make sure to be in possession of a printed accurate and updated risk assessment</li>
-              <li>Download the full report and the action plan of your risk assessment</li>
-          </ul>
-          <ul class="report-examples">
-              <li><img src="/++resource++oira.media/screen_shot_report.png"/></li>
-              <li><img src="/++resource++oira.media/screen_shot_action_plan.png"/></li>
-          </ul>
-      </section>
-
       <p class="discrete" tal:define="allow_guest_accounts view/allow_guest_accounts|nothing">
         <tal:if_no_tryouts condition="not:allow_guest_accounts">
             <tal:span i18n:translate="register_teaser">Don't have an account? Then please <a i18n:name="register_link" i18n:translate="label_register" href="${view/register_url}">register</a> first.</tal:span>

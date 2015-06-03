@@ -14,9 +14,39 @@
       metal:use-macro="context/@@shell/macros/shell">
 
 <body>
-<metal:slot fill-slot="content" tal:define="is_guest_account webhelpers/is_guest_account">
+<metal:slot fill-slot="content" tal:define="is_guest_account webhelpers/is_guest_account; base_url webhelpers/base_url">
     <tal:block replace="tile:statusmessages"/>
-    <article>
+    <article tal:condition="python:is_guest_account and request.get('report_blurb')">
+      <h1 i18n:translate="header_reporting">Reporting</h1>
+      <p i18n:translate="report_guest_register_intro">We are sorry, this is a trial version and the download feature cannot be used. Register in just one step and gain access to the following benefits:</p>
+      <ul>
+          <li i18n:translate="label_register_benefit_1">It's free.</li>
+          <li i18n:translate="label_register_benefit_2">You can save your work online.</li>
+          <li i18n:translate="label_register_benefit_3">You can download a full report and an action plan.</li>
+      </ul>
+      <hr class="pat-separator blank" />
+      <div class="row pat-gallery">
+          <a href="${base_url}/++resource++oira.media/example-rtf-ribbon.png" class="four columns push-two">
+              <figure>
+                  <img src="${base_url}/++resource++oira.media/example-rtf-ribbon-thumb.png" alt="Example of a report in rich text format" title="Example of a full report in rich text format (.rtf)" />
+                  <figcaption>
+                      Example of a full report in rich text format (.rtf)
+                  </figcaption>
+              </figure>
+          </a>
+          <a href="${base_url}/++resource++oira.media/example-xlsx-ribbon.png" class="four columns pull-two">
+              <figure>
+                  <img src="${base_url}/++resource++oira.media/example-xlsx-ribbon-thumb.png" alt="Example of a report in rich text format" title="Example of an action plan in Office Open XML Workbook format  (.xlsx)" />
+                  <figcaption>
+                      Example of an action plan in Office Open XML Workbook format  (.xlsx)
+                  </figcaption>
+              </figure>
+          </a>
+      </div>
+      <h2 i18n:translate="header_register">Register</h2>
+    </article>
+
+    <article tal:condition="python: not request.get('report_blurb')">
       <h1 i18n:translate="header_register">Register</h1>
     </article>
 
@@ -28,7 +58,9 @@
         <tal:guest_account condition="is_guest_account|nothing">
             <input type="hidden" name="guest_session_id" tal:attributes="value webhelpers/guest_session_id"/>
         </tal:guest_account>
-        <label class="${python:'error' if 'email' in errors else None}"><tal:span i18n:translate="label_email">Email address</tal:span> <input class="email" autofocus="autofocus" type="email" name="email" value="${request/email|nothing}"/>
+        <label class="${python:'error' if 'email' in errors else None}"><tal:span i18n:translate="label_email">Email address</tal:span>
+            <input tal:condition="python: not request.get('report_blurb')" class="email" autofocus="autofocus" type="email" name="email" value="${request/email|nothing}"/>
+            <input tal:condition="python: is_guest_account and request.get('report_blurb')" class="email" type="email" name="email" value="${request/email|nothing}"/>
           <em class="message warning" tal:condition="exists:errors/email" tal:content="errors/email">Invalid login name</em></label>
         <label class="${python:'error' if 'password' in errors else None}"><tal:span i18n:translate="label_new_password">Desired password</tal:span> <input class="password" type="password" name="password1:utf8:ustring" />
           <em class="message warning" tal:condition="exists:errors/password" tal:content="errors/password">Invalid password</em></label>

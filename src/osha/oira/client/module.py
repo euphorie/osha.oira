@@ -98,6 +98,7 @@ class CustomizationView(module.CustomizationView):
                 risk_type='risk', # XXX Could it also be top5 or policy?
                 skip_evaluation=True,
                 title=risk_values['description'],
+                identification="no"
             )
             risk.is_custom_risk = True
             risk.skip_children = False

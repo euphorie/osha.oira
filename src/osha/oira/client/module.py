@@ -103,7 +103,7 @@ class CustomizationView(module.CustomizationView):
             risk.skip_children = False
             risk.postponed = False
             risk.has_description = None
-            risk.zodb_path = "/".join([session.zodb_path] + ['customization'] + ['1'])
+            risk.zodb_path = "/".join([session.zodb_path] + [self.context.zodb_path] + ['1'])
             risk.profile_index = 0 # XXX: not sure what this is for
             self.context.addChild(risk)
             IStatusMessage(self.request).add(

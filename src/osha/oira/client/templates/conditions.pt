@@ -104,7 +104,11 @@
           </p>
         </div>
         <p class="buttonBar" tal:condition="not:is_anonymous">
-          <button id="agree-button" class="pat-button" type="submit" disabled="disabled" value="agree" i18n:translate="agree_and_continue">Agree and continue</button>
+          <!-- the javascript for disabling does not work, therefore I leave the button enabled for now
+            To reenable, add disable="disabled" to the button, and uncomment the line that sets disabled
+            in the Javascript below.
+          -->
+          <button id="agree-button" class="pat-button" type="submit" value="agree" i18n:translate="agree_and_continue">Agree and continue</button>
         </p>
       </fieldset>
     </form>
@@ -129,7 +133,7 @@
 
     $(document).ready(function() {
         $("#conditions").scroll(updateButton);
-        $("#agree-button")[0].disabled=true;
+        #$("#agree-button")[0].disabled=true;
     });
 // ]]>
 </script>

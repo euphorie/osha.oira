@@ -146,8 +146,12 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         for (row, (module, risk, measure)) in \
                 enumerate(self.get_measures(), 1):
             column = 0
-            zodb_node = self.request.survey.restrictedTraverse(
-                risk.zodb_path.split('/'))
+
+            if getattr(risk, 'is_custom_risk', None):
+                zodb_node = self.request.survey.restrictedTraverse(
+                    risk.zodb_path.split('/'))
+            else:
+                zodb_node = None
 
             for (type, key, title) in self.columns+self.extra_cols:
                 value = None
@@ -158,7 +162,9 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                     if key == 'priority':
                         value = self.priority_name(value)
                     elif key == 'title':
-                        if zodb_node.problem_description and \
+                        if zodb_node is None:
+                            value = getattr(risk, key, None)
+                        elif zodb_node.problem_description and \
                                 zodb_node.problem_description.strip():
                             value = zodb_node.problem_description
                 elif type == 'module':
@@ -354,8 +360,13 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
             4: styles.Heading6,
         }
         for node in nodes:
-            zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
-            title = node_title(node, zodb_node)
+            zodb_node = None
+            if getattr(node, 'is_custom_risk', None):
+                title = node.title
+            else:
+                zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
+                title = node_title(node, zodb_node)
+
             thin_edge = BorderPropertySet(
                 width=20, style=BorderPropertySet.SINGLE)
 
@@ -391,13 +402,18 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
                 ))
 
             if getattr(node, 'identification', None) == 'no':
+                if zodb_node is None:
+                    description = node.title
+                else:
+                    description = zodb_node.description
+
                 body.append(
                     Paragraph(
                         styles.Normal,
                         ParagraphPropertySet(
                             left_indent=300, right_indent=300),
                         t(_(utils.html_unescape(
-                            htmllaundry.StripMarkup(zodb_node.description))))
+                            htmllaundry.StripMarkup(description))))
                     ))
                 body.append(Paragraph(""))
 
@@ -693,12 +709,17 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
             if node.type != "risk":
                 continue
 
-            zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))
+            if getattr(node, 'is_custom_node', None):
+                description = survey.restrictedTraverse(
+                        node.zodb_path.split("/")).description
+            else:
+                description = node.title
+
             section.append(
                 Paragraph(
                     styles.Normal,
                     utils.html_unescape(
-                        htmllaundry.StripMarkup(zodb_node.description))
+                        htmllaundry.StripMarkup(description))
                 )
             )
 

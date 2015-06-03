@@ -25,6 +25,7 @@ NAME_TO_PHASE = dict(
     start='preparation',
     profile='preparation',
     identification='identification',
+    customization='identification',
     actionplan='actionplan',
     report='report',
     status='status',

@@ -80,6 +80,7 @@ class CustomizationView(module.CustomizationView):
 
     def add_custom_risks(self, form):
         session = SessionManager.session
+        self.context.removeChildren() # Clear previous custom risks
         for risk_values in form['risk']:
             if not risk_values.get("description") or not risk_values.get("priority"):
                 IStatusMessage(self.request).add(

@@ -14,7 +14,7 @@
       metal:use-macro="context/@@shell/macros/shell">
 
 <body>
-<metal:slot fill-slot="content" tal:define="is_guest_account webhelpers/is_guest_account">
+<metal:slot fill-slot="content" tal:define="is_guest_account webhelpers/is_guest_account; is_outside_of_survey webhelpers/is_outside_of_survey; came_from webhelpers/came_from; came_from_param python:came_from and 'came_from=%s' % came_from or '';">
     <tal:block replace="tile:statusmessages"/>
      <h1 i18n:translate="header_welcome">Welcome</h1>
 
@@ -57,10 +57,6 @@
       </fieldset>
     </form> -->
 
-    <div style="border: 1px solid red; padding: 1em; margin: 1em">
-    <h2>For Development: Hardcoded guest session login:</h2>
-    <p><a i18n:translate="label_guest_tryout" href="${view/tryout_url}">Try it out without registering</a>.</p>
-    </div>
 
 <article class="rich">
 
@@ -107,7 +103,7 @@
       </div>
 
     <p i18n:translate="teaser_try_oira">
-        Want to try OiRA? You may <strong><a i18n:name="tryout_link" i18n:translate="label_tryout" href="/new-session-test.html#document-content" data-pat-modal="class: large" class="pat-modal">run a test session</a></strong> or <strong><a i18n:name="register_link" i18n:translate="label_register" href="${view/register_url}">register</a></strong> to start for real.
+        Want to try OiRA? You may <strong i18n:name="tryout_link"><a i18n:translate="label_tryout" tal:condition="is_outside_of_survey" href="${base_url}/new-session-test.html?${came_from_param}#document-content" data-pat-modal="class: large" class="pat-modal" title="Start a new test session">run a test session</a><a i18n:translate="label_tryout" tal:condition="not:is_outside_of_survey" href="${base_url}/@@tryout?${came_from_param}#document-content" title="Start a new test session">run a test session</a></strong> or <strong><a i18n:name="register_link" i18n:translate="label_register" href="${view/register_url}">register</a></strong> to start for real.
     </p>
 
     <metal:css use-macro="webhelpers/macros/appendix"/>

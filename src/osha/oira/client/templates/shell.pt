@@ -79,8 +79,10 @@
     <aside id="osc">
         <header id="osc-header">
             <tal:if condition="is_anonymous">
-                <a href="${base_url}/new-session-test.html?${came_from_param}#document-content" id="button-new-session"
-                    data-pat-modal="class: large" class="pat-modal icon-plus-circle" title="Start a new session">Start test session</a>
+
+                <a tal:condition="is_outside_of_survey" href="${base_url}/new-session-test.html?${came_from_param}#document-content" id="button-new-session"
+                    data-pat-modal="class: large" class="pat-modal icon-plus-circle" title="Start a new test session" i18n:translate="">Start test session</a>
+                <a tal:condition="not:is_outside_of_survey" href="${base_url}/@@tryout?${came_from_param}#document-content" title="Start a new test session" id="button-new-session" class="icon-plus-circle" i18n:translate="">Start test session</a>
                 <metal:include tal:define="id string:session-menu" use-macro="context/@@includes/macros/osh"/>
             </tal:if>
 

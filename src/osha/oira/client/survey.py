@@ -112,7 +112,7 @@ class OSHAActionPlan(survey.ActionPlan):
             self.next_url = QuestionURL(survey, question, phase="actionplan")
             self.tree = getTreeData(
                 self.request, question,
-                filter=None, phase="actionplan")
+                filter=self.question_filter, phase="actionplan")
         else:
             self.next_url = None
 

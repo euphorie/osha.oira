@@ -13,7 +13,7 @@
 <body>
 <metal:slot fill-slot="content" tal:define="risk nocall:view/risk">
 <tal:block replace="tile:statusmessages"/>
-<form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}">
+<form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}" class="pat-inject" data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #content; target: #content">
 
     <!-- Identification -->
     <fieldset class="vertical">
@@ -145,7 +145,7 @@
     </article>
 
     <p class="buttonBar">
-        <button class="pat-button-back" type="submit" name="next" value="previous" i18n:translate="label_previous" class="floatBefore back">Previous</button>
+        <button class="pat-button" type="submit" name="next" value="previous" i18n:translate="label_previous" class="floatBefore back">Previous</button>
         <button class="pat-button" type="submit" name="next" value="next" i18n:translate="label_save_and_continue" class="floatAfter">Save and continue</button>
     </p>
 </form>

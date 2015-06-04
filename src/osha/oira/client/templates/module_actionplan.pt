@@ -53,7 +53,7 @@
 </article>
 
 <p class="buttonBar">
-    <a class="pat-button" href="${view/next_url}" i18n:translate="label_start_module">Start module</a>
+    <a class="pat-button pat-inject" data-pat-inject="history: record; source: #step-4; target: #step-4 && source: #content; target: #content" href="${view/next_url}" i18n:translate="label_start_module">Start module</a>
 </p>
 </metal:slot>
 </body>

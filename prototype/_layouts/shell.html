@@ -107,7 +107,7 @@
 												  	</li>
                                                   </ol>
                                                 {% elsif module.layout == 'location' and module.parent_id == id %}
-                                                <h4 class="location-tag">{{module.number | replace: '.0'}} {{module.title}}</h4>
+                                                <h4 class="location-tag">{{module.title}}</h4>
                                                 {% capture l_id %}{{ id }}-{{ module.fid }}{% endcapture %}
                                                 {% for lmodule in site.tool  %}
                                                 {% if lmodule.layout == 'module' and lmodule.parent_id == l_id %}

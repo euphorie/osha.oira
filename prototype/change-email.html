@@ -4,37 +4,34 @@ design_title: Change email address
 class: "sidebar-off"
 ---
 
-<article>
+<article class="pat-rich">
     <h1>
         Change email address
     </h1>
-    <p><strong>Please bear in mind that by changing the email address, your login name will also change.</strong></p>
-
+    <p class="pat-message notice">
+        Please bear in mind that by changing the email address, your login name will also change.
+    </p>
 </article>
 
 <form enctype="multipart/form-data" id="form">
     <fieldset class="vertical">
 
     <!-- Start block of generated markup -->
-        <div class="z3cFieldContainer ">
+        
           <label>Email address/account name <sup class="required">*</sup>
               <input type="text" id="form-widgets-loginname" name="form.widgets.loginname" value="" class="text-widget required rfc822mailaddress-field">
           </label>
 
-        </div>
-
-        <div class=" z3cFieldContainer">
           <label>Your password for confirmation <sup class="required">*</sup>
             <input type="password" id="form-widgets-password" name="form.widgets.password" value="" class="password-widget required password-field password" maxlength="${view/maxlength">
         </label>
 
-        </div>
     <!-- End block of generated markup -->
 
-    </fieldset>
+        <div class="group button-bar">
+            <button class="pat-button" name="form.buttons.save" type="submit">Save changes</button>
+            <button class="pat-button" name="form.buttons.cancel" type="submit">Cancel</button>
+        </div>
 
-    <p class="buttonBar">
-        <button class="pat-button" name="form.buttons.save" type="submit">Save changes</button>
-        <button class="pat-button" name="form.buttons.cancel" type="submit">Cancel</button>
-    </p>
+    </fieldset>
 </form>

@@ -1,3 +1,4 @@
+from euphorie.client.help import HelpView
 from five import grok
 from osha.oira.client.interfaces import IOSHAClientSkinLayer
 from zope.interface import Interface
@@ -35,3 +36,9 @@ class Tooltips(grok.View):
     grok.name("tooltips")
     grok.layer(IOSHAClientSkinLayer)
     grok.template("tooltips")
+
+
+class OSHAHelpView(HelpView):
+    grok.layer(IOSHAClientSkinLayer)
+    grok.name("help")
+    grok.template("help")

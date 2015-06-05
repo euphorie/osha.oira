@@ -16,49 +16,10 @@
 <body>
 <metal:slot fill-slot="content" tal:define="is_guest_account webhelpers/is_guest_account; is_outside_of_survey webhelpers/is_outside_of_survey; came_from webhelpers/came_from; came_from_param python:came_from and 'came_from=%s' % came_from or '';">
     <tal:block replace="tile:statusmessages"/>
-     <h1 i18n:translate="header_welcome">Welcome</h1>
-
-<!--
-    <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/@@absolute_url}/@@login">
-      <input type="hidden" name="came_from" tal:condition="request/came_from|nothing" value="${request/came_from}"/>
-      <h2 i18n:translate="header_login">Login</h2>
-
-      <p class="discrete" tal:define="allow_guest_accounts view/allow_guest_accounts|nothing">
-        <tal:if_no_tryouts condition="not:allow_guest_accounts">
-            <tal:span i18n:translate="register_teaser">Don't have an account? Then please <a i18n:name="register_link" i18n:translate="label_register" href="${view/register_url}">register</a> first.</tal:span>
-        </tal:if_no_tryouts>
-        <tal:if_tryouts_allowed condition="allow_guest_accounts">
-            <tal:guest_account condition="is_guest_account">
-                <tal:span i18n:translate="guest_register_teaser">Don't have an account? Please <a i18n:name="register_link" i18n:translate="label_register" href="${view/register_url}">register</a>.</tal:span>
-                <input type="hidden" name="guest_session_id" tal:attributes="value webhelpers/guest_session_id"/>
-            </tal:guest_account>
-            <tal:anonymous condition="not:is_guest_account">
-                <tal:span i18n:translate="guest_register_teaser">
-                    Don't have an account? Please <a i18n:name="register_link" i18n:translate="label_register" href="${view/register_url}">register</a>
-                    or first <a i18n:name="tryout_link" i18n:translate="label_guest_tryout" href="${view/tryout_url}">try it out without registering</a>.
-                </tal:span>
-            </tal:anonymous>
-        </tal:if_tryouts_allowed>
-        <a class="icon info pat-tooltip" data-pat-tooltip="position: lt; source: content" href="${webhelpers/help_url}#authentication" i18n:translate="">Your registration is a private matter. All your data is stored to be accessed only by you.</a>
-      </p>
-
-      <fieldset class="concise">
-        <label><tal:span i18n:translate="label_email">Email address</tal:span> <input autofocus="autofocus" tabindex="1" class="email" id="login_name" type="email" name="__ac_name" value="${request/__ac_name|nothing}"/></label>
-        <label><tal:span i18n:translate="label_login_password">Password (<a i18n:name="forgot_link" href="${view/reminder_url}" i18n:translate="label_forgot_password">I forgot my password</a>)</tal:span>
-          <input tabindex="2" type="password" id="login_password" class="password" name="__ac_password:utf8:ustring"/></label>
-        <fieldset class="comprehensive">
-          <label><input tabindex="3" type="checkbox" name="remember" value="True"/> <tal:span i18n:translate="label_keep_logged_in">Keep me logged in.</tal:span></label>
-        </fieldset>
-        <hr />
-        <p class="buttonBar">
-          <button tabindex="4" id="login_submit" type="submit" name="next" value="next" class="next floatAfter" i18n:translate="label_login">Login</button>
-          <a i18n:translate="label_change_country" class="floatBefore button-medium back" href="${webhelpers/client_url}">Change country/language</a>
-        </p>
-      </fieldset>
-    </form> -->
 
 
-<article class="rich">
+  <article class="rich">
+    <h1 i18n:translate="header_welcome">Welcome</h1>
 
     <p>The OiRA project is a European-wide initiative lead  by the <a href="http://osha.europa.eu/en" title="http://osha.europa.eu/en" target="_blank">European Agency for Safety and Health at Work</a>  in partnership with National  authorities (Ministries, Labour Inspectorates, OSH institutes, etc.) and EU/National Sectoral Social Partners (employers'  and employees' organisations).</p>
 

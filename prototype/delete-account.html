@@ -1,0 +1,30 @@
+---
+layout: shell
+design_title: Change email address
+class: "sidebar-off"
+---
+
+<article>
+    <h1>
+        Delete account
+    </h1>
+    <p class="warning">By clicking on 'Delete account', your account will be permenantly deleted. This action is irreversable.</p>
+    <p>Please note that by deleting your account, you will also delete all your sessions. Please make sure you download your reports from the Report step prior to deleting your account, if you want to keep any.</p>
+</article>
+
+<form enctype="multipart/form-data" method="post" id="form">
+  <fieldset class="vertical">
+
+  <div class=" z3cFieldContainer">
+    <label>Your password for confirmation <sup class="required">*</sup>
+      <input type="password" id="form-widgets-password" name="form.widgets.password" value="" class="password-widget required password-field password" maxlength="${view/maxlength">
+    </label>
+  </div>
+
+  </fieldset>
+
+  <p class="buttonBar">
+    <button class="pat-button" name="form.buttons.delete" type="submit">Delete account</button>
+    <button class="pat-button" name="form.buttons.cancel" type="submit">Cancel</button>
+  </p>
+</form>

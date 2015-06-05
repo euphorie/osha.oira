@@ -214,11 +214,37 @@
         </tal:block>
       </tal:block>
     </tal:block>
-    <p class="description" tal:replace="structure risk/description">
-      The temperature in a fridge is critical to storing food. If the
-      temperature is too high or fluctuates too much food can start
-      rotting quickly.
-    </p>
+
+    <span id="description">
+      <p class="description" tal:content="view/description_intro">short description</p>
+      <p class="show-more-or-less">
+        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description"><strong class="show-more">Read more</strong> about this risk.</a>
+      </p>
+    </span>
+
+    <span id="full_description" hidden="hidden">
+      <p class="description" tal:content="structure risk/description">
+        The temperature in a fridge is critical to storing food.
+      </p>
+      <tal:block condition="risk/legal_reference">
+        <h2 i18n:translate="header_legal_references">Legal and policy references</h2>
+        <p tal:content="structure risk/legal_reference">
+          The requirements for fridges are defined in section 13.1 section a
+          of the health code.
+        </p>
+      </tal:block>
+      <p class="show-more-or-less">
+        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description; target: #description"><strong class="show-less">Read less</strong> about this risk.</a>
+      </p>
+    </span>
+
+    <span id="short_description" hidden="hidden">
+      <p class="description" tal:content="view/description_intro">short description</p>
+      <p class="show-more-or-less">
+        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description"><strong class="show-more">Read more</strong> about this risk.</a>
+      </p>
+    </span>
+
   </metal:riskinfo>
 
 
@@ -283,28 +309,35 @@
             </figure>
     </tal:single>
     </div>
-    <tal:block condition="show_statement|nothing" define="use_problem_description view/use_problem_description">
-      <tal:block condition="not:view/risk_present">
-        <p tal:condition="python:risk.type=='top5'" i18n:translate="top5_risk_not_present">
-            This risk is not present in your organisation, but since the sector organisation considers this one of the priority risks it must be
-            included in this report.
+    <span id="description">
+      <p class="description" tal:content="view/description_intro">short description</p>
+      <p class="show-more-or-less">
+        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description"><strong class="show-more">Read more</strong> about this risk.</a>
+      </p>
+    </span>
+
+    <span id="full_description" hidden="hidden">
+      <p class="description" tal:content="structure risk/description">
+        The temperature in a fridge is critical to storing food.
+      </p>
+      <tal:block condition="risk/legal_reference">
+        <h2 i18n:translate="header_legal_references">Legal and policy references</h2>
+        <p tal:content="structure risk/legal_reference">
+          The requirements for fridges are defined in section 13.1 section a
+          of the health code.
         </p>
       </tal:block>
-      <tal:block condition="view/risk_present">
-        <tal:block condition="not:use_problem_description">
-          <p class="negation">
-            <em><strong class="icon warning">⚠</strong>
-                <tal:span i18n:translate="warn_risk_present"> You responded negative to the above statement.</tal:span>
-            </em>
-        </p>
-        </tal:block>
-      </tal:block>
-    </tal:block>
-    <p class="description" tal:replace="structure risk/description">
-      The temperature in a fridge is critical to storing food. If the
-      temperature is too high or fluctuates too much food can start
-      rotting quickly.
-    </p>
+      <p class="show-more-or-less">
+        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description; target: #description"><strong class="show-less">Read less</strong> about this risk.</a>
+      </p>
+    </span>
+
+    <span id="short_description" hidden="hidden">
+      <p class="description" tal:content="view/description_intro">short description</p>
+      <p class="show-more-or-less">
+        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description"><strong class="show-more">Read more</strong> about this risk.</a>
+      </p>
+    </span>
   </metal:riskinfo>
 
 

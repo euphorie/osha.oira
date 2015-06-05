@@ -9,8 +9,10 @@ from euphorie.client.session import SessionManager
 from euphorie.client.update import redirectOnSurveyUpdate
 from euphorie.client.utils import HasText
 from euphorie.content.solution import ISolution
+from euphorie.content.utils import StripMarkup
 from five import grok
 from z3c.saconfig import Session
+from zope.component import getMultiAdapter
 from .interfaces import IOSHAIdentificationPhaseSkinLayer
 from .interfaces import IOSHAActionPlanPhaseSkinLayer
 
@@ -93,6 +95,11 @@ class OSHAIdentificationView(risk.EvaluationView):
             self.has_images = number_images > 0
             self.number_images = number_images
             self.image_class = IMAGE_CLASS[number_images]
+
+            ploneview = getMultiAdapter(
+                (self.context, self.request), name="plone")
+            self.description_intro = ploneview.cropText(
+                StripMarkup(self.risk.description), 200)
             super(risk.EvaluationView, self).update()
 
 
@@ -189,4 +196,8 @@ class OSHAActionPlanView(risk.ActionPlanView):
                     self.risk, 'image{0}'.format(i), None) and 1 or 0
         self.has_images = number_images > 0
         self.image_class = IMAGE_CLASS[number_images]
+        ploneview = getMultiAdapter(
+            (self.context, self.request), name="plone")
+        self.description_intro = ploneview.cropText(
+            StripMarkup(self.risk.description), 200)
         super(risk.ActionPlanView, self).update()

@@ -43,26 +43,16 @@
     <metal:styleslot define-slot="style_slot" />
 </head>
 
-<body class="osh-on test-session osc-off osc-s-on focus-sidebar ${sidebar_default}"  tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
+<body class="osh-on test-session osc-off osc-s-on focus-sidebar ${sidebar_default}"  tal:define="is_anonymous webhelpers/anonymous">
     <div id="main">
         <header id="toolbar">
-
-            <tal:if_anon condition="python:is_anonymous or webhelpers.is_guest_account">
-                <a href="${base_url}/login_form?${came_from_param}#document-content" class="pat-modal login" data-pat-modal="class: large">Login</a>
-                <a href="${base_url}/register" class="registration">Register</a>
-            </tal:if_anon>
-            <tal:if_not_anon condition="python: not is_anonymous and not webhelpers.is_guest_account">
-                <a href="user-menu.html#content"
-                   class="user-status pat-tooltip icon-user dropdown"
-                   data-pat-tooltip="source: ajax; class: medium; position-list: tr">${webhelpers/get_username}</a>
-            </tal:if_not_anon>
         </header>
         <div id="content">
-            <p tal:condition="webhelpers/is_guest_account" id="warning-bar">
-                This is a test session. <a href="${base_url}/login_form?${came_from_param}#document-content" class="registration">Sign in</a> to save your data. <a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info">Info</a>
-            </p>
 
 
+                <figure style="position:absolute; top:0; padding-top: 30px">
+                    <img src="${request/SERVER_URL}/flags/oira.gif" alt="" />
+                </figure>
 
      <h1 class="carousel"><span lang="en" xml:lang="en">Welcome to the Online interactive Risk Assessment tools (OiRA)</span></h1>
 

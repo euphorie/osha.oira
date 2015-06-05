@@ -86,7 +86,7 @@
           class="${python: '%s %s' % (item['class'], 'submodule' if item['type'] == 'module' and item['depth']>1 else '')}">
         <a tal:define="item_class item/class" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #${target_inject}; target: #${target_inject} && source: #content; target: #content"
             href="${item/url}">
-                <strong class="number">${item/number}</strong> ${item/title}
+                <strong class="${python:'counter' if item['type']=='module' else 'number'}">${item/number}</strong> ${item/title}
         </a>
 
         <tal:subtree condition="python:item['children']" define="tree python:item">
@@ -94,7 +94,7 @@
         </tal:subtree>
       </li>
       <tal:location condition="python: item['type']=='location'">
-        <h4 class="location-tag"><strong class="number">${item/number}</strong> ${item/title}</h4>
+        <h4 class="location-tag">${item/title}</h4>
         <tal:subtree condition="python:item['children']" define="tree python:item">
           <metal:call use-macro="webhelpers/macros/survey_tree_inner" />
         </tal:subtree>

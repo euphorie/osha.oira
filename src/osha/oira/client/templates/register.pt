@@ -67,7 +67,6 @@
         <label><tal:span i18n:translate="label_password_confirm">Again password</tal:span> <input class="password" type="password"  name="password2:utf8:ustring"/> </label>
       </fieldset>
       <p class="buttonBar">
-        <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="pat-button">Previous</button>
         <button type="submit" name="next" value="next" i18n:translate="label_next" class="pat-button">Next</button>
       </p>
     </form>

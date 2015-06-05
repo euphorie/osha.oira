@@ -249,43 +249,43 @@
 
       <!-- Notice that each image has an image caption in the title tag. -->
       <tal:many condition="python:view.number_images > 1">
-        <div class="${view/image_class} columns">
+        <div class="${view/image_class} columns"
+          tal:define="thumb python:images.scale('image', width=120, height=172, direction='thumbnail');
+                      large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
+          tal:condition="thumb">
           <a title="${risk/caption|nothing}"
                 style="background-image: url(${large/url|nothing})"
-                tal:define="thumb python:images.scale('image', width=150, height=500, direction='thumbnail');
-                            large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
-                href="${large/url|nothing}"
-                tal:condition="thumb"><img  alt="" src="${thumb/url}" />
+                href="${large/url|nothing}"><img  alt="" src="${thumb/url}" />
           </a>
         </div>
-        <div class="${view/image_class} columns">
+        <div class="${view/image_class} columns"
+          tal:define="thumb python:images.scale('image2', width=120, height=172, direction='thumbnail');
+                      large python:images.scale('image2', width=590, height=1900, direction='thumbnail')"
+          tal:condition="thumb">
           <a title="${risk/caption2|nothing}"
                 class="${view/image_class} columns"
                 style="background-image: url(${large/url|nothing})"
-                tal:define="thumb python:images.scale('image2', width=120, height=172, direction='thumbnail');
-                            large python:images.scale('image2', width=590, height=1900, direction='thumbnail')"
-                href="${large/url|nothing}"
-                tal:condition="thumb"><img alt="" src="${thumb/url}" />
+                href="${large/url|nothing}"><img alt="" src="${thumb/url}" />
           </a>
         </div>
-        <div class="${view/image_class} columns">
+        <div class="${view/image_class} columns"
+          tal:define="thumb python:images.scale('image3', width=120, height=172, direction='thumbnail');
+                      large python:images.scale('image3', width=590, height=1900, direction='thumbnail')"
+          tal:condition="thumb">
           <a title="${risk/caption3|nothing}"
                 class="${view/image_class} columns"
                 style="background-image: url(${large/url|nothing})"
-                tal:define="thumb python:images.scale('image3', width=120, height=172, direction='thumbnail');
-                            large python:images.scale('image3', width=590, height=1900, direction='thumbnail')"
-                href="${large/url|nothing}"
-                tal:condition="thumb"><img alt="" src="${thumb/url}" />
+                href="${large/url|nothing}"><img alt="" src="${thumb/url}" />
           </a>
         </div>
-        <div class="${view/image_class} columns">
+        <div class="${view/image_class} columns"
+          tal:define="thumb python:images.scale('image4', width=120, height=172, direction='thumbnail');
+                      large python:images.scale('image4', width=590, height=1900, direction='thumbnail')"
+          tal:condition="thumb">
           <a title="${risk/caption4|nothing}"
                 class="${view/image_class} columns"
                 style="background-image: url(${large/url|nothing})"
-                tal:define="thumb python:images.scale('image4', width=120, height=172, direction='thumbnail');
-                            large python:images.scale('image4', width=590, height=1900, direction='thumbnail')"
-                href="${large/url|nothing}"
-                tal:condition="thumb"><img alt="" src="${thumb/url}" />
+                href="${large/url|nothing}"><img alt="" src="${thumb/url}" />
           </a>
         </div>
     </tal:many>

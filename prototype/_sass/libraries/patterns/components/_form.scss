@@ -9,6 +9,14 @@ form {
     margin: 1em 0 0;
   }
 
+  .pat-message {
+    display: block;
+    clear: both;
+    margin-top: 0.5em;
+
+    @include box-sizing();
+  }
+
   h2 {
     margin-bottom: 1em;
   }
@@ -115,32 +123,54 @@ form {
    
       &.horizontal {
         @media only screen and (min-width: 768px) { 
-      width: 100%;
-      .legend {
-        width: auto;
-        margin: 0;
-        padding: 0;
-        font-weight: bold;
-        letter-spacing: 0;
-        text-transform: none;
-        float: left;
-      }
-      > label {
-        position: relative;
-        display: block;
-        padding-right: 65%;
-        margin-bottom: 1em;
-        width: 35%;
-        left: 0;
-
-        &:after {
-          content: " ";
-          height: 0;
-          display: block;
-          clear: both;
+        width: 100%;
+        
+        .legend {
+          width: auto;
+          margin: 0;
+          padding: 0;
+          font-weight: bold;
+          letter-spacing: 0;
+          text-transform: none;
+          float: left;
         }
-        > {
-          input, textarea, select, .composed {
+
+        > label {
+          position: relative;
+          display: block;
+          padding-right: 65%;
+          margin-bottom: 1em;
+          width: 35%;
+          left: 0;
+
+          &:after {
+            content: " ";
+            height: 0;
+            display: block;
+            clear: both;
+          }
+
+          > {
+            input, 
+            textarea, 
+            select, 
+            .composed,
+            .pat-message {
+              position: relative;
+              vertical-align: top;
+              max-width: 170%;
+              left: 100%;
+              margin-right: -200%;
+              margin-left: 0;
+              float: left;
+            }
+
+            .pat-message {
+              width: 170%;
+            }
+          }
+
+          &.checkbox:before, &[data-option]:after {
             position: relative;
             vertical-align: top;
             max-width: 170%;
@@ -150,79 +180,71 @@ form {
             float: left;
           }
         }
-        &.checkbox:before, &[data-option]:after {
-          position: relative;
-          vertical-align: top;
-          max-width: 170%;
-          left: 100%;
-          margin-right: -200%;
-          margin-left: 0;
-          float: left;
-        }
-      }
 
-      label {
-        .iconified {
-          float: none;
-          position: static;
-          line-height: 10px;
-          margin-top: 0;
-          vertical-align: baseline;
-          filter: none;
-        }
-        sup.required {
-          float: none;
-          position: static;
-          margin-top: 0;
-          vertical-align: baseline;
-          filter: none;
-          margin: 0;
-        }
-        textarea {
-          width: 170%;
-        }
-      }
-
-      fieldset.group,
-      div.group,
-      .help,
-      .instruction {
-        width: 65%;
-        clear: left;
-        border-style: none;
-        margin: 0 0 1em 0;
-        padding-left: 35%;
-        position: relative;
-        padding-bottom: 0;
-        padding-top: 0;
-        legend {
-          position: absolute;
-          left: 0;
-          font-weight: normal;
-          font-style: normal;
-          top: 0;
-        }
-        .legend {
-          width: 48%;
-          display: inline;
-          text-align: left;
-          padding: 0;
-          position: relative;
-          display: block;
-          font-weight: normal;
-          font-style: normal;
-          margin: 0 0 0 -54%;
-          text-transform: none;
-          letter-spacing: 0;
-        }
         label {
-          font-weight: normal;
-          font-style: normal;
-          position: relative;
-          border-style: none;
-          width: auto;
-          margin: 0;
+          .iconified {
+            float: none;
+            position: static;
+            line-height: 10px;
+            margin-top: 0;
+            vertical-align: baseline;
+            filter: none;
+          }
+          sup.required {
+            float: none;
+            position: static;
+            margin-top: 0;
+            vertical-align: baseline;
+            filter: none;
+            margin: 0;
+          }
+          textarea {
+            width: 170%;
+          }
         }
+
+        fieldset.group,
+        div.group,
+        .help,
+        .instruction {
+          width: 65%;
+          clear: left;
+          border-style: none;
+          margin: 0 0 1em 0;
+          padding-left: 35%;
+          position: relative;
+          padding-bottom: 0;
+          padding-top: 0;
+
+          legend {
+            position: absolute;
+            left: 0;
+            font-weight: normal;
+            font-style: normal;
+            top: 0;
+          }
+
+          .legend {
+            width: 48%;
+            display: inline;
+            text-align: left;
+            padding: 0;
+            position: relative;
+            display: block;
+            font-weight: normal;
+            font-style: normal;
+            margin: 0 0 0 -54%;
+            text-transform: none;
+            letter-spacing: 0;
+          }
+          label {
+            font-weight: normal;
+            font-style: normal;
+            position: relative;
+            border-style: none;
+            width: auto;
+            margin: 0;
+          }
       }
     }
   }
@@ -241,7 +263,8 @@ form {
     }
 
     .legend,
-    > label {
+    > label,
+    .section > label {
       font-weight: bold;
       display: block;
       margin-bottom: 1em;

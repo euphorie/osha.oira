@@ -18,6 +18,12 @@
   }
 }
 
+@mixin box-sizing() {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 @mixin pat-avatar($border-radius: 50%, $border: 0.055556em solid rgba(0,0,0,0.2), $height: 2em, $width: 2em) {
     display: inline-block;
     overflow: hidden;
@@ -27,6 +33,25 @@
     width: $width;
     img {
         width: 100%;
+    }
+}
+
+@mixin pat-message() {
+    color: rgba(0,0,0,0.5);
+    padding: 1em;
+    border: rgba(0,0,0,0.05) solid 0.2rem;
+    background-color: #efefef;
+
+    &.success {
+        background-color: $colour-success;
+        color: white;
+    }
+    &.notice {
+        background-color: $colour-notice;
+    }
+    &.warning {
+        background-color: $colour-warning;
+        color: white;
     }
 }
 

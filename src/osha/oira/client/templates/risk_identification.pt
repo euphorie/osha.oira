@@ -138,6 +138,10 @@
     <!-- Copy and legal -->
     <article class="rich" class="message emphasis" tal:condition="view/show_info">
         <metal:call use-macro="webhelpers/macros/risk_info_identification" />
+
+        <tal:if_legal condition="risk/legal_reference|nothing">
+            <metal:call use-macro="webhelpers/macros/risk_legal" />
+        </tal:if_legal>
     </article>
 
     <p class="buttonBar">

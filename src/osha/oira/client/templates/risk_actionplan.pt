@@ -36,6 +36,9 @@
         <metal:call use-macro="webhelpers/macros/risk_info_actionplan" />
     </div>
 
+    <div class="last span-15" tal:condition="risk/legal_reference|nothing">
+        <metal:call use-macro="webhelpers/macros/risk_legal" />
+    </div>
 </article>
 
 

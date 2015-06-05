@@ -226,13 +226,6 @@
       <p class="description" tal:content="structure risk/description">
         The temperature in a fridge is critical to storing food.
       </p>
-      <tal:block condition="risk/legal_reference">
-        <h2 i18n:translate="header_legal_references">Legal and policy references</h2>
-        <p tal:content="structure risk/legal_reference">
-          The requirements for fridges are defined in section 13.1 section a
-          of the health code.
-        </p>
-      </tal:block>
       <p class="show-more-or-less">
         <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description; target: #description"><strong class="show-less">Read less</strong> about this risk.</a>
       </p>
@@ -320,13 +313,6 @@
       <p class="description" tal:content="structure risk/description">
         The temperature in a fridge is critical to storing food.
       </p>
-      <tal:block condition="risk/legal_reference">
-        <h2 i18n:translate="header_legal_references">Legal and policy references</h2>
-        <p tal:content="structure risk/legal_reference">
-          The requirements for fridges are defined in section 13.1 section a
-          of the health code.
-        </p>
-      </tal:block>
       <p class="show-more-or-less">
         <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description; target: #description"><strong class="show-less">Read less</strong> about this risk.</a>
       </p>

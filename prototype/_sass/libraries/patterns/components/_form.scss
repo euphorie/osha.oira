@@ -9,12 +9,14 @@ form {
     margin: 1em 0 0;
   }
 
-  .pat-message {
+  .pat-message,
+  .message {
+    @include pat-message();
+    @include box-sizing();
+
     display: block;
     clear: both;
     margin-top: 0.5em;
-
-    @include box-sizing();
   }
 
   h2 {
@@ -155,7 +157,8 @@ form {
             textarea, 
             select, 
             .composed,
-            .pat-message {
+            .pat-message,
+            .message {
               position: relative;
               vertical-align: top;
               max-width: 170%;
@@ -165,7 +168,7 @@ form {
               float: left;
             }
 
-            .pat-message {
+            .message {
               width: 170%;
             }
           }

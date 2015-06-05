@@ -2,60 +2,70 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:meta="http://xml.zope.org/namespaces/meta"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
       meta:interpolation="true"
-      id="homepage"
-      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers">
-  <head>
+      i18n:domain="nuplone"
+      tal:define="webhelpers nocall:context/@@webhelpers;
+                  base_url string:client/++resource++osha.oira.resources;
+                  page_section webhelpers/get_phase;
+                  sidebar_default python:page_section in ['identification', 'actionplan'] and 'sidebar-on' or 'sidebar-off';
+                  client nocall:request/client;
+                  came_from webhelpers/came_from;
+                  came_from_param python:came_from and 'came_from=%s' % came_from or '';
+                  tools context/@@tools">
+
+<head>
     <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
-    <metal:meta use-macro="webhelpers/macros/headers"/>
-    <metal:css use-macro="webhelpers/macros/css"/>
-    <style type="text/css" media="all">
-        @media only screen and (max-width: 767px) {
-            #homepage h1 span {
-                padding-top: 95px;
-            }
-        }
-        #homepage h1 span {
-            padding-left: 0;
-            width: 100%;
-            text-align: center;
-        }
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="${client/++resource++euphorie.media}/favicon.png" />
 
-        .report #appendix img {
-            margin-bottom: 0;
-        }
-        .appendix_oira_logo {
-            margin-right: 15px;
-            cursor: pointer;
-        }
-        .report .creative_commons_logo {
-            cursor: pointer;
-        }
-   	 .indented {
-   	   margin-left: 8pt;
-   	 }
-    </style>
-  </head>
-  <body>
+    <tal:block condition="webhelpers/debug_mode">
+        <script type="text/javascript" src="${base_url}/oira.js"></script>
+    </tal:block>
+    <tal:block condition="not:webhelpers/debug_mode">
+        <!-- TODO: this must be minified -->
+        <script type="text/javascript" src="${base_url}/oira.js"></script>
+    </tal:block>
+
+    <tal:block condition="webhelpers/debug_mode">
+        <link rel="stylesheet" href="${base_url}/screen.css" type="text/css">
+    </tal:block>
+    <tal:block condition="not:webhelpers/debug_mode">
+        <!-- TODO: needs to be minified -->
+        <link rel="stylesheet" href="${base_url}/screen.css" type="text/css">
+    </tal:block>
+
+    <metal:javascriptslot define-slot="javascript_head_slot" />
+    <metal:styleslot define-slot="style_slot" />
+</head>
+
+<body class="osh-on test-session osc-off osc-s-on focus-sidebar ${sidebar_default}"  tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
+    <div id="main">
+        <header id="toolbar">
+
+            <tal:if_anon condition="python:is_anonymous or webhelpers.is_guest_account">
+                <a href="${base_url}/login_form?${came_from_param}#document-content" class="pat-modal login" data-pat-modal="class: large">Login</a>
+                <a href="${base_url}/register" class="registration">Register</a>
+            </tal:if_anon>
+            <tal:if_not_anon condition="python: not is_anonymous and not webhelpers.is_guest_account">
+                <a href="user-menu.html#content"
+                   class="user-status pat-tooltip icon-user dropdown"
+                   data-pat-tooltip="source: ajax; class: medium; position-list: tr">${webhelpers/get_username}</a>
+            </tal:if_not_anon>
+        </header>
+        <div id="content">
+            <p tal:condition="webhelpers/is_guest_account" id="warning-bar">
+                This is a test session. <a href="${base_url}/login_form?${came_from_param}#document-content" class="registration">Sign in</a> to save your data. <a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info">Info</a>
+            </p>
+
+
+
      <h1 class="carousel"><span lang="en" xml:lang="en">Welcome to the Online interactive Risk Assessment tools (OiRA)</span></h1>
-    <!--[if lte IE 7]> <br/> <![endif]-->
-    <ul id="navigation">
-        <li id="home">
-            <a href="https://client.oiraproject.eu">
-                <strong>OiRA - Online interactive Risk Assessment</strong><br/>
-                    Online interactive<br/>
-                    Risk Assessment</a>
-        </li>
-    </ul>
 
-    <style type="text/css">
-    .indented {
-      margin-left: 8pt;
-    }
-    </style>
 
     <p>&nbsp;</p>
     <p>The OiRA project is a European-wide initiative lead  by the <a href="http://osha.europa.eu/en" title="http://osha.europa.eu/en" target="_blank">European Agency for Safety and Health at Work</a>  in partnership with National  authorities (Ministries, Labour Inspectorates, OSH institutes, etc.) and EU/National Sectoral Social Partners (employers'  and employees' organisations).</p>
@@ -109,8 +119,9 @@
 
     <tal:render content="structure view/render_body"/>
     <metal:css use-macro="webhelpers/macros/appendix"/>
-    <metal:css use-macro="webhelpers/macros/javascript"/>
     <!--[if lte IE 8]><script src="${client/++resource++euphorie.behaviour}/ie6/warning.js"></script><script>window.onload=function(){e("/++resource++euphorie.behaviour/ie6/")}</script><![endif]-->
     <tal:block replace="tile:client-analytics"/>
+    </div>
+  </div>
   </body>
 </html>

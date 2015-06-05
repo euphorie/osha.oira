@@ -28,12 +28,12 @@
 				<button class="icon-left pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-sidebar">Private Security EU</button>
 				<button id="osh-toggle" class="osh-toggle pat-toggle" data-pat-toggle="selector: body; value: osh-on osh-off; store: local">?</button>
 				{% if page.state == 'anonymous' or page.state == 'guest' %}
-					<a href="/login.html#document-content" class="pat-modal login" data-pat-modal="class: large">
+					<a href="/login.html#document-content" class="pat-modal login" data-pat-modal="class: large" title="Login with your existing personal account">
 						Login
 					</a>
-					<a href="registration.html" class="registration">Register</a>
+					<a href="registration.html" class="registration" title="Register an account to use OiRA">Register</a>
 				{% else %}
-					<a href="/feedback/user-menu.html#content" class="user-status pat-tooltip icon-user dropdown" data-pat-tooltip="source: ajax; class: medium; position-list: tr">hans@mittelmaier.de</a>
+					<a href="/feedback/user-menu.html#content" class="user-status pat-tooltip icon-user dropdown" data-pat-tooltip="source: ajax; class: medium; position-list: tr" title="Click to toggle the on screen help system">hans@mittelmaier.de</a>
 				{% endif %}
 			</header>
 			<div id="content">

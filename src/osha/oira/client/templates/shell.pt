@@ -9,10 +9,10 @@
       metal:define-macro="shell"
       i18n:domain="euphorie"
       tal:define="webhelpers nocall:context/@@webhelpers;
-                  base_url string:client/++resource++osha.oira.resources;
+                  client nocall:request/client;
+                  base_url client/++resource++osha.oira.resources;
                   page_section webhelpers/get_phase;
                   sidebar_default python:page_section in ['identification', 'actionplan'] and 'sidebar-on' or 'sidebar-off';
-                  client nocall:request/client;
                   came_from webhelpers/came_from;
                   came_from_param python:came_from and 'came_from=%s' % came_from or '';
                   tools context/@@tools">
@@ -83,7 +83,6 @@
                 <a tal:condition="is_outside_of_survey" href="${base_url}/new-session-test.html?${came_from_param}#document-content" id="button-new-session"
                     data-pat-modal="class: large" class="pat-modal icon-plus-circle" title="Start a new test session" i18n:translate="">Start test session</a>
                 <a tal:condition="not:is_outside_of_survey" href="${base_url}/@@tryout?${came_from_param}#document-content" title="Start a new test session" id="button-new-session" class="icon-plus-circle" i18n:translate="">Start test session</a>
-                <metal:include tal:define="id string:session-menu" use-macro="context/@@includes/macros/osh"/>
             </tal:if>
 
             <tal:if condition="not:is_anonymous">
@@ -91,10 +90,10 @@
                     <a href="${webhelpers/country_url}/view#content" class="dropdown pat-tooltip" id="button-sessions"
                         data-pat-tooltip="source: ajax; class: large; position-list: tl" title="Select an existing session to review or to continue" tal:content="webhelpers/get_survey_title">Private Security EU</a>
                 </tal:if>
-                <a class="pat-button iconified icon-cog" title="Configure this application">Settings</a>
                 <a href="new-session.html#document-content" id="button-new-session-quick"
                     data-pat-modal="class: large" class="no-label pat-modal iconified icon-plus-circle" title="Start a new session">New</a>
             </tal:if>
+            <metal:include tal:define="id string:session-menu" use-macro="context/@@includes/macros/osh"/>
         </header>
 
         <metal:include tal:define="id string:menu" use-macro="context/@@includes/macros/osh"/>

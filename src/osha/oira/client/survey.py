@@ -125,3 +125,11 @@ class Evaluation(survey.Evaluation):
     """
     grok.layer(interfaces.IOSHAEvaluationPhaseSkinLayer)
     grok.template('evaluation')
+
+
+class OSHAStatus(survey.Status):
+    """ Override the 'status' page to provide our own template.
+    """
+    grok.layer(interfaces.IOSHAClientSkinLayer)
+    grok.template("status")
+    grok.name("status")

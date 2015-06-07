@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      i18n:domain="euphorie"
+      id="account-settings"
+      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers"
+      metal:use-macro="context/@@shell/macros/shell">
+
+  <body>
+    <metal:content fill-slot="content">
+      <article class="pat-rich">
+        <h1 i18n:translate="title_status">Status</h1>
+        <h2 i18n:translate="header_questions_answered">Questions answered per module</h2>
+        <dl class="status" tal:define="status python:view.status">
+          <tal:repeat repeat="module status">
+            <dt><a href="${module/url}">${module/title}</a></dt>
+            <dd>
+              <p tal:condition="python: 'ok' in module" style="width: ${module/ok/width}px"
+                 class="range answered" i18n:translate="status_answered"><span i18n:name="count" tal:replace="module/ok/count">3</span> questions were answersed</p>
+              <p tal:condition="python: 'risk' in module" style="width: ${module/risk/width}px"
+                 class="range risk" i18n:translate="status_risk"><span i18n:name="count" tal:replace="module/risk/count">3</span> answers indicated a risk</p>
+              <p tal:condition="python: 'postponed' in module" style="width: ${module/postponed/width}px"
+                 class="range postponed" i18n:translate="status_postponed"><span i18n:name="count" tal:replace="module/postponed/count">3</span> questions were postponed</p>
+            </dd>
+          </tal:repeat>
+        </dl>
+      </article>
+
+    <tal:block replace="tile:client-analytics"/>
+    </metal:content>
+  </body>
+</html>

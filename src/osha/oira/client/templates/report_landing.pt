@@ -36,9 +36,10 @@
   <div class="row pat-equaliser download-blocks count-2">
     <!-- The class 'count-x' indicates the amount of download blocks that are present. The classes 'count-1', 'count-2', 'count-3' and 'count-4' are supported. -->
     <div class="download-block column">
-      <a class="pat-well pat-rich" href="${python:view.url(name='download')}">
-          <h2 class="pat-button bar download rtf icon-download" i18n:translate="">Download the full report</h2>
-
+      <article class="pat-well pat-rich">
+        <p>
+          <a class="pat-button bar download rtf icon-download" href="${python:view.url(name='download')}" i18n:translate="">Download the full report</a>
+        </p>
         <ul>
           <li i18n:translate="">Format: Rich Text Format (.rtf)</li>
           <li i18n:translate="">Contains: all the information and input provided by you throughout the risk assessment process.</li>
@@ -50,13 +51,14 @@
         </ul>
 
         <p class="discrete" i18n:translate="">We recommend to always keep an updated printed version of your risk assessment (report) available in your company!</p>
-      </a>
+      </article>
     </div>
 
     <div class="download-block column">
-      <a class="pat-well pat-rich" href="${python:view.url(name='timeline')}">
-        <h2 class="pat-button bar download rtf icon-download" i18n:translate="">Download the action plan</h2>
-
+      <article class="pat-well pat-rich">
+        <p>
+          <a class="pat-button bar download xlsx icon-download" href="${python:view.url(name='timeline')}" i18n:translate="">Download the action plan</a>
+        </p>
         <ul>
           <li i18n:translate="">Format: Office Open XML Workbook (.xlsx)</li>
           <li i18n:translate="">Contains: only the measures to be implemented to effectively manage the identified risks.</li>
@@ -67,7 +69,7 @@
           <li i18n:translate=""><strong i18n:name="manage" i18n:translate="">Manage</strong> the problems/risks in your workplace (specific tasks, expertise, responsibilities,
           deadlines).</li>
         </ul>
-      </a>
+      </article>
     </div>
   </div>
 

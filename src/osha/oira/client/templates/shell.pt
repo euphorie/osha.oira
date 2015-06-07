@@ -7,7 +7,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       meta:interpolation="true"
       metal:define-macro="shell"
-      i18n:domain="nuplone"
+      i18n:domain="euphorie"
       tal:define="webhelpers nocall:context/@@webhelpers;
                   base_url string:client/++resource++osha.oira.resources;
                   page_section webhelpers/get_phase;

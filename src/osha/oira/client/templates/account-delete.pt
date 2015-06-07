@@ -13,19 +13,23 @@
 
   <body>
     <metal:content fill-slot="content">
-      <h1>${view/label}</h1>
-      <p class="warning" i18n:translate="warning_account_delete_irreversible">By clicking on 'Delete account', your account will be permenantly deleted. This action is irreversable.</p>
-      <p i18n:translate="warning_account_delete_surveys">Please note that by deleting your account, also all your filled out surveys will be deleted. Please make sure to download your surveys from the reports screen prior to deleting your account if you want to keep any.</p>
+
+      <article class="pat-rich">
+          <h1>${view/label}</h1>
+          <p class="pat-message warning" i18n:translate="warning_account_delete_irreversible">By clicking on 'Delete account', your account will be permenantly deleted. This action is irreversable.</p>
+          <p i18n:translate="warning_account_delete_surveys">Please note that by deleting your account, you will also delete all your sessions. Please make sure you download your reports from the Report step prior to deleting your account, if you want to keep any.</p>
+      </article>
 
       <form action="${request/getURL}" enctype="${view/enctype}" method="${view/method}" id="${view/id}">
         <fieldset class="vertical">
           <tal:widget repeat="widget view/widgets/values" replace="structure widget/render" />
-        </fieldset>
 
-        <p class="buttonBar">
-            <button class="pat-button" name="form.buttons.delete" type="submit" i18n:translate="Delete account">Delete account</button>
-            <button class="pat-button" name="form.buttons.cancel" type="submit" i18n:translate="Cancel">Cancel</button>
-        </p>
+
+          <div class="group button-bar">
+              <button class="pat-button" name="form.buttons.delete" type="submit" i18n:translate="Delete account">Delete account</button>
+              <button class="pat-button" name="form.buttons.cancel" type="submit" i18n:translate="Cancel">Cancel</button>
+          </div>
+        </fieldset>
       </form>
     </metal:content>
   </body>

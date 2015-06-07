@@ -13,5 +13,26 @@
     template="templates/largetextarea_input.pt"
     />
 
+  <z3c:widgetTemplate
+    mode="input"
+    widget="z3c.form.interfaces.ITextWidget"
+    layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+    template="templates/text_input.pt"
+    />
+
+  <z3c:widgetTemplate
+    mode="input"
+    widget="z3c.form.interfaces.IPasswordWidget"
+    layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+    template="templates/password_input.pt"
+    />
+
+  <z3c:widgetTemplate
+    mode="input"
+    widget="p01.widget.password.interfaces.IPasswordConfirmationWidget"
+    layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+    template="templates/passwordconfirm_input.pt"
+    />
+
 </configure>
 

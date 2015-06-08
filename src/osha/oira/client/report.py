@@ -1,4 +1,5 @@
 from Acquisition import aq_inner
+from Acquisition import aq_parent
 from AccessControl import getSecurityManager
 from cStringIO import StringIO
 from datetime import datetime
@@ -147,7 +148,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                 enumerate(self.get_measures(), 1):
             column = 0
 
-            if getattr(risk, 'is_custom_risk', None):
+            if not getattr(risk, 'is_custom_risk', None):
                 zodb_node = self.request.survey.restrictedTraverse(
                     risk.zodb_path.split('/'))
             else:
@@ -167,6 +168,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                         elif zodb_node.problem_description and \
                                 zodb_node.problem_description.strip():
                             value = zodb_node.problem_description
+
                 elif type == 'module':
                     if key == 'title' and module.depth > 1:
                         titles = []

@@ -1,5 +1,4 @@
 from Acquisition import aq_inner
-from Acquisition import aq_parent
 from AccessControl import getSecurityManager
 from cStringIO import StringIO
 from datetime import datetime

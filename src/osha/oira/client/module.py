@@ -3,14 +3,18 @@ from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.client import model
 from euphorie.client import module
 from euphorie.client.navigation import FindNextQuestion
+from euphorie.client.navigation import FindPreviousQuestion
 from euphorie.client.navigation import QuestionURL
 from euphorie.client.navigation import getTreeData
 from euphorie.client.session import SessionManager
 from euphorie.client.update import redirectOnSurveyUpdate
 from euphorie.content import MessageFactory as _
+from euphorie.content.interfaces import ICustomRisksModule
 from euphorie.content.profilequestion import IProfileQuestion
 from five import grok
 from osha.oira.client import interfaces
+from sqlalchemy import sql
+from z3c.saconfig import Session
 
 grok.templatedir("templates")
 
@@ -45,7 +49,19 @@ class Mixin(object):
             return super(superclass, self).update()
 
 
-class CustomizationView(module.CustomizationView):
+    def get_custom_risks(self):
+        session = SessionManager.session
+        query = Session.query(model.Risk).filter(
+            sql.and_(
+                model.Risk.is_custom_risk == True,
+                model.Risk.path.startswith(model.Module.path),
+                model.Risk.session_id == session.id
+            )
+        )
+        return query.all()
+
+
+class CustomizationView(module.CustomizationView, Mixin):
     grok.context(model.Module)
     grok.require("euphorie.client.ViewSurvey")
     grok.layer(interfaces.IOSHACustomizationPhaseSkinLayer)
@@ -81,7 +97,7 @@ class CustomizationView(module.CustomizationView):
     def add_custom_risks(self, form):
         session = SessionManager.session
         self.context.removeChildren() # Clear previous custom risks
-        for risk_values in form['risk']:
+        for risk_values in form.get('risk', []):
             if not risk_values.get("description") or not risk_values.get("priority"):
                 IStatusMessage(self.request).add(
                         _(u"Please fill in the required fields"),
@@ -116,8 +132,76 @@ class IdentificationView(module.IdentificationView, Mixin):
     grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
     grok.template("module_identification")
 
+
     def update(self):
-        return self._update(IdentificationView)
+        if redirectOnSurveyUpdate(self.request):
+            return
+        context = aq_inner(self.context)
+        module = self.request.survey.restrictedTraverse(
+                                        context.zodb_path.split("/"))
+        if self.request.environ["REQUEST_METHOD"] == "POST":
+            self.save_and_continue(module)
+        else:
+            if ICustomRisksModule.providedBy(module) \
+                    and not self.context.skip_children \
+                    and len(self.get_custom_risks()):
+                url = "%s/customization/%d" % (
+                    self.request.survey.absolute_url(),
+                    int(self.context.path))
+                return self.request.response.redirect(url)
+
+            self.tree = getTreeData(self.request, context,
+                    filter=model.NO_CUSTOM_RISKS_FILTER)
+            self.title = context.title
+            self.module = module
+            super(IdentificationView, self).update()
+
+
+    def save_and_continue(self, module):
+        """ We received a POST request.
+            Submit the form and figure out where to go next.
+        """
+        context = aq_inner(self.context)
+        reply = self.request.form
+        if module.optional:
+            if "skip_children" in reply:
+                context.skip_children = reply.get("skip_children")
+                context.postponed = False
+            else:
+                context.postponed = True
+            SessionManager.session.touch()
+
+        if reply["next"] == "previous":
+            next = FindPreviousQuestion(context,
+                    filter=self.question_filter)
+            if next is None:
+                # We ran out of questions, step back to intro page
+                url = "%s/identification" % \
+                        self.request.survey.absolute_url()
+                self.request.response.redirect(url)
+                return
+        else:
+            if ICustomRisksModule.providedBy(module):
+                if not context.skip_children:
+                    # The user will now be allowed to create custom
+                    # (user-defined) risks.
+                    url = "%s/customization/%d" % (
+                            self.request.survey.absolute_url(),
+                            int(self.context.path))
+                    return self.request.response.redirect(url)
+                else:
+                    # We ran out of questions, proceed to the evaluation
+                    url = "%s/actionplan" % self.request.survey.absolute_url()
+                    return self.request.response.redirect(url)
+            next = FindNextQuestion(context, filter=self.question_filter)
+            if next is None:
+                # We ran out of questions, proceed to the evaluation
+                url = "%s/evaluation" % self.request.survey.absolute_url()
+                return self.request.response.redirect(url)
+
+        url = QuestionURL(self.request.survey, next,
+                phase="identification")
+        self.request.response.redirect(url)
 
 
 class EvaluationView(module.EvaluationView, Mixin):

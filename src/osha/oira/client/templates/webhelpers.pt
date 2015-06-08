@@ -218,14 +218,21 @@
     </tal:block>
 
     <span id="description">
-      <p class="description" tal:content="view/description_intro">short description</p>
-      <p class="show-more-or-less">
-        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description"><strong class="show-more">Read more</strong> about this risk.</a>
-      </p>
+      <tal:description_intro condition="view/description_intro">
+        <p class="description" tal:content="structure view/description_intro">short description</p>
+        <p class="show-more-or-less">
+          <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description"><strong class="show-more">Read more</strong> about this risk.</a>
+        </p>
+      </tal:description_intro>
+      <tal:no_description_intro condition="not:view/description_intro">
+        <p class="description" tal:replace="structure risk/description">
+          The temperature in a fridge is critical to storing food.
+        </p>
+      </tal:no_description_intro>
     </span>
 
     <span id="full_description" hidden="hidden">
-      <p class="description" tal:content="structure risk/description">
+      <p class="description" tal:replace="structure risk/description">
         The temperature in a fridge is critical to storing food.
       </p>
       <p class="show-more-or-less">
@@ -234,7 +241,7 @@
     </span>
 
     <span id="short_description" hidden="hidden">
-      <p class="description" tal:content="view/description_intro">short description</p>
+      <p class="description" tal:content="structure view/description_intro">short description</p>
       <p class="show-more-or-less">
         <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description"><strong class="show-more">Read more</strong> about this risk.</a>
       </p>
@@ -300,14 +307,21 @@
     </tal:single>
     </div>
     <span id="description">
-      <p class="description" tal:content="view/description_intro">short description</p>
-      <p class="show-more-or-less">
-        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description"><strong class="show-more">Read more</strong> about this risk.</a>
-      </p>
+      <tal:description_intro condition="view/description_intro">
+        <p class="description" tal:content="structure view/description_intro">short description</p>
+        <p class="show-more-or-less">
+          <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description"><strong class="show-more">Read more</strong> about this risk.</a>
+        </p>
+      </tal:description_intro>
+      <tal:no_description_intro condition="not:view/description_intro">
+        <p class="description" tal:replace="structure risk/description">
+          The temperature in a fridge is critical to storing food.
+        </p>
+      </tal:no_description_intro>
     </span>
 
     <span id="full_description" hidden="hidden">
-      <p class="description" tal:content="structure risk/description">
+      <p class="description" tal:replace="structure risk/description">
         The temperature in a fridge is critical to storing food.
       </p>
       <p class="show-more-or-less">
@@ -316,7 +330,7 @@
     </span>
 
     <span id="short_description" hidden="hidden">
-      <p class="description" tal:content="view/description_intro">short description</p>
+      <p class="description" tal:content="structure view/description_intro">short description</p>
       <p class="show-more-or-less">
         <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description"><strong class="show-more">Read more</strong> about this risk.</a>
       </p>

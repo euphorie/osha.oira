@@ -26,6 +26,8 @@ IMAGE_CLASS = {
     4: 'three',
 }
 
+DESCRIPTION_CROP_LENGTH = 200
+
 
 class OSHAIdentificationView(risk.EvaluationView):
     """ This view is a combination of the Euphorie Identification and Evauation
@@ -98,8 +100,13 @@ class OSHAIdentificationView(risk.EvaluationView):
 
             ploneview = getMultiAdapter(
                 (self.context, self.request), name="plone")
-            self.description_intro = ploneview.cropText(
-                StripMarkup(self.risk.description), 200)
+            stripped_description = StripMarkup(self.risk.description)
+            if len(stripped_description) > DESCRIPTION_CROP_LENGTH:
+                self.description_intro = ploneview.cropText(
+                    stripped_description, DESCRIPTION_CROP_LENGTH)
+            else:
+                self.description_intro = ""
+
             super(risk.EvaluationView, self).update()
 
 
@@ -165,8 +172,12 @@ class OSHAActionPlanView(risk.ActionPlanView):
                         self.risk, 'image{0}'.format(i), None) and 1 or 0
             ploneview = getMultiAdapter(
                 (self.context, self.request), name="plone")
-            self.description_intro = ploneview.cropText(
-                StripMarkup(self.risk.description), 200)
+            stripped_description = StripMarkup(self.risk.description)
+            if len(stripped_description) > DESCRIPTION_CROP_LENGTH:
+                self.description_intro = ploneview.cropText(
+                    stripped_description, DESCRIPTION_CROP_LENGTH)
+            else:
+                self.description_intro = ""
             self.solutions = [solution for solution in self.risk.values()
                             if ISolution.providedBy(solution)]
 

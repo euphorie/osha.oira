@@ -157,7 +157,8 @@
     <div id="browser-warning" style="display:none">This will contain the warning translated</div>
   </metal:appendix>
   <metal:riskinfo define-macro="risk_info_actionplan" meta:interpolation="true" i18n:domain="euphorie" >
-    <div tal:condition="view/has_images" class="image-collage pat-gallery pat-equaliser" tal:define="images risk/@@images" >
+  <div tal:condition="view/has_images" class="image-collage pat-gallery pat-equaliser">
+      <tal:get define="images risk/@@images">
       <!-- Each image src is repeated as an image url as the value of the background image property inthe inline style on the link tag and in the HREF of the link tag. The background image should be a medium sized image, the image of the HREF should be the large, original image. -->
 
       <!-- The class 'three' is three in case of four images, 'four' in case of three images, 'six' in case of two images and 'twelve' in case of one image. -->
@@ -196,6 +197,7 @@
             href="${large/url|nothing}"
             tal:condition="thumb"><img alt="" src="${thumb/url}" />
       </a>
+      </tal:get>
     </div>
     <tal:block condition="show_statement|nothing" define="use_problem_description view/use_problem_description">
       <tal:block condition="not:view/risk_present">

@@ -11,7 +11,7 @@
       metal:use-macro="context/@@shell/macros/shell">
 
 <body>
-<metal:slot fill-slot="content" tal:define="risk nocall:view/risk; data view/data">
+<metal:slot fill-slot="content" tal:define="risk nocall:view/risk|nothing; data view/data">
 <tal:block replace="tile:statusmessages"/>
 <tal:def define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};">
 <form method="post" action="${context/absolute_url}" class="pat-inject" data-pat-inject="history: record; source: #step-4; target: #step-4 && source: #content; target: #content">
@@ -46,7 +46,7 @@
     <div class="measure clone pat-collapsible" tal:repeat="actionplan data/action_plans">
 
         <h2 tal:content="string:Measure ${repeat/actionplan/number}">Measure 1</h2>
-        <tal:if_has_measures define="measures view/solutions" condition="measures">
+        <tal:if_has_measures define="measures view/solutions|python:[]" condition="measures">
             <p class="functions">
                 <a class="icon-pencil pat-tooltip" data-pat-tooltip="source:ajax" href="#standard-solutions-0">Pre-fill</a>
                 <a class="icon-trash remove-clone">Remove</a>
@@ -125,7 +125,7 @@
 	</div>
 
 	<div class="measure pat-collapsible" id="measure-template" hidden>
-        <tal:get_measures define="measures view/solutions">
+        <tal:get_measures define="measures view/solutions|python:[]">
 		<h2>Measure #{1}</h2>
 		<p class="functions">
 			<a class="icon-pencil pat-tooltip" tal:condition="measures" data-pat-tooltip="source: ajax" href="#standard-solutions-#{1}">Pre-fill</a>
@@ -202,7 +202,7 @@
     </div>
     </form>
 
-    <tal:loop repeat="solution view/solutions">
+    <tal:loop repeat="solution view/solutions|python:[]">
         <fieldset class="vertical" id="standard-solution-${repeat/solution/number}" hidden>
             <label>Description
                 <textarea class="actionPlan" name="measure.action_plan:utf8:ustring:records" placeholder="General approach (to eliminate or reduce the risk)" rows="6">${solution/description}</textarea>

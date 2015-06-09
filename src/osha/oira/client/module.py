@@ -61,11 +61,15 @@ class Mixin(object):
         return query.all()
 
 
-class CustomizationView(module.CustomizationView, Mixin):
+class CustomizationView(grok.View, Mixin):
     grok.context(model.Module)
     grok.require("euphorie.client.ViewSurvey")
     grok.layer(interfaces.IOSHACustomizationPhaseSkinLayer)
     grok.template("module_customization")
+    grok.name("index_html")
+
+    phase = "customization"
+    question_filter = None
 
     def update(self):
         if redirectOnSurveyUpdate(self.request):

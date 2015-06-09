@@ -28,19 +28,13 @@ class EuphorieRiskTests(OiRAFunctionalTestCase):
         # Identify the risk
         browser.getControl("next").click()
         browser.getControl(name="answer").value = ["no"]
-        browser.getControl("next").click()
-        # Move on to the risk's action plan form
-        browser.getLink("Run evaluation").click()
-        browser.handleErrors = False
-        browser.getLink("Next").click()
         # Verify number of options
         self.assertEqual(len(browser.getControl(name="frequency:int").controls), 4)
         self.assertEqual(len(browser.getControl(name="severity:int").controls), 4)
-        # Enter some digits
+        # # Enter some digits
         browser.getControl(name="frequency:int").value = ["7"]
         browser.getControl(name="severity:int").value = ["10"]
         browser.getControl("next").click()
-        # Verify the result
         browser.open(
                 "http://nohost/plone/client/nl/ict/software-development/actionplan/1/1")
         self.assertEqual(browser.getControl(name="priority").value, ["high"])

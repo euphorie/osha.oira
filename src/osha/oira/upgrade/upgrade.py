@@ -1,16 +1,21 @@
 # -*- coding: <utf-8> -*-
+from Products.CMFCore.utils import getToolByName
 from euphorie.client import model
+from euphorie.client.publish import EnableCustomRisks
 from euphorie.client.sector import IClientSector
 from euphorie.content.survey import ISurvey
 from euphorie.deployment.upgrade.utils import TableExists
+from plone import api
 from plone.dexterity import utils
+from z3c.appconfig.interfaces import IAppConfig
+from z3c.appconfig.utils import asBool
 from z3c.saconfig import Session
 from zope.component.hooks import getSite
 from zope.sqlalchemy import datamanager
-from Products.CMFCore.utils import getToolByName
 import datetime
 import logging
 import transaction
+import zope.component
 
 log = logging.getLogger(__name__)
 
@@ -157,3 +162,18 @@ def reset_surveygroup_obsolete(context):
                     surveygroup.absolute_url()))
                 surveygroup.obsolete = False
                 surveygroup.reindexObject()
+
+
+def enable_custom_risks_on_all_modules(context):
+    """ """
+    appconfig = zope.component.getUtility(IAppConfig)
+    if not asBool(appconfig["euphorie"].get("allow_user_defined_risks")):
+        return
+    catalog = api.portal.get_tool('portal_catalog')
+    brains = catalog(portal_type="euphorie.survey")
+    for b in brains:
+        try:
+            EnableCustomRisks(b.getObject())
+        except Exception, e:
+            log.error("Could not enable custom risks for module. %s" % e)
+    log.info('All published modules can now have custom risks.')

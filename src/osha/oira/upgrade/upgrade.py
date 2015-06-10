@@ -2,6 +2,7 @@
 from Products.CMFCore.utils import getToolByName
 from euphorie.client import model
 from euphorie.client.publish import EnableCustomRisks
+from euphorie.client.country import IClientCountry
 from euphorie.client.sector import IClientSector
 from euphorie.content.survey import ISurvey
 from euphorie.deployment.upgrade.utils import TableExists
@@ -169,11 +170,19 @@ def enable_custom_risks_on_all_modules(context):
     appconfig = zope.component.getUtility(IAppConfig)
     if not asBool(appconfig["euphorie"].get("allow_user_defined_risks")):
         return
-    catalog = api.portal.get_tool('portal_catalog')
-    brains = catalog(portal_type="euphorie.survey")
-    for b in brains:
-        try:
-            EnableCustomRisks(b.getObject())
-        except Exception, e:
-            log.error("Could not enable custom risks for module. %s" % e)
-    log.info('All published modules can now have custom risks.')
+    portal = api.portal.get()
+    client = portal.client
+    count = 0
+    for country in client.objectValues():
+        if IClientCountry.providedBy(country):
+            for sector in country.objectValues():
+                if IClientSector.providedBy(sector):
+                    for survey in sector.objectValues():
+                        try:
+                            EnableCustomRisks(survey)
+                            count += 1
+                            survey.published = (
+                                survey.id, survey.title, datetime.datetime.now())
+                        except Exception, e:
+                            log.error("Could not enable custom risks for module. %s" % e)
+    log.info('All %d published surveys can now have custom risks.' % count)

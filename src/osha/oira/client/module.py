@@ -57,7 +57,7 @@ class Mixin(object):
                 model.Risk.path.startswith(model.Module.path),
                 model.Risk.session_id == session.id
             )
-        )
+        ).order_by(model.Risk.id)
         return query.all()
 
 

@@ -15,7 +15,7 @@
 <tal:block replace="tile:statusmessages"/>
 <tal:def define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};">
 <form method="post" action="${context/absolute_url}" class="pat-inject" data-pat-inject="history: record; source: #step-4; target: #step-4 && source: #content; target: #content">
-<article class="rich pat-well warning">
+<article class="rich pat-well warning" id="${view/risk_number}">
     <tal:block condition="not:view/risk_present">
         <h2 tal:content="risk/title"></h2>
     </tal:block>

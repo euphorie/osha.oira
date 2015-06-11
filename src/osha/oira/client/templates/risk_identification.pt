@@ -16,7 +16,7 @@
 <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}" class="pat-inject" data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #content; target: #content">
 
     <!-- Identification -->
-    <fieldset class="vertical">
+    <fieldset class="vertical" id="${view/risk_number}">
 		<fieldset class="pat-checklist radio">
         <legend tal:content="risk/title">The temperature of all fridges is checked daily</legend>
         <input type="hidden" name="answer:default" value="postponed"/>

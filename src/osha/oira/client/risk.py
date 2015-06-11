@@ -97,6 +97,7 @@ class OSHAIdentificationView(risk.EvaluationView):
             self.has_images = number_images > 0
             self.number_images = number_images
             self.image_class = IMAGE_CLASS[number_images]
+            self.risk_number = self.context.number
 
             ploneview = getMultiAdapter(
                 (self.context, self.request), name="plone")
@@ -183,6 +184,7 @@ class OSHAActionPlanView(risk.ActionPlanView):
 
         self.has_images = number_images > 0
         self.image_class = IMAGE_CLASS[number_images]
+        self.risk_number = self.context.number
         super(risk.ActionPlanView, self).update()
 
     def extract_plans_from_request(self):

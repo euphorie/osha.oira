@@ -36,7 +36,7 @@ class Mixin(object):
             next = FindNextQuestion(context, filter=self.question_filter)
             if next is None:
                 if self.phase == 'identification':
-                    url = "%s/evaluation" % self.request.survey.absolute_url()
+                    url = "%s/actionplan" % self.request.survey.absolute_url()
                 elif self.phase == 'evaluation':
                     url = "%s/actionplan" % \
                             self.request.survey.absolute_url()
@@ -146,7 +146,15 @@ class IdentificationView(module.IdentificationView, Mixin):
         if self.request.environ["REQUEST_METHOD"] == "POST":
             self.save_and_continue(module)
         else:
-            if ICustomRisksModule.providedBy(module) \
+            if IProfileQuestion.providedBy(module) and context.depth == 2:
+                next = FindNextQuestion(context, filter=self.question_filter)
+                if next is None:
+                    url = "%s/actionplan" % self.request.survey.absolute_url()
+                else:
+                    url = QuestionURL(self.request.survey, next, phase=self.phase)
+                return self.request.response.redirect(url)
+
+            elif ICustomRisksModule.providedBy(module) \
                     and not self.context.skip_children \
                     and len(self.get_custom_risks()):
                 url = "%s/customization/%d" % (

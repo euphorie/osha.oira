@@ -120,6 +120,21 @@ class OSHAActionPlanView(risk.ActionPlanView):
         if redirectOnSurveyUpdate(self.request):
             return
         context = aq_inner(self.context)
+
+        self.next_is_report = False
+        # already compute "next" here, so that we can know in the template
+        # if the next step might be the report phase, in which case we
+        # need to switch off the sidebar
+        next = FindNextQuestion(
+            context, filter=self.question_filter)
+        if next is None:
+            # We ran out of questions, proceed to the report
+            url = "%s/report" % self.request.survey.absolute_url()
+            self.next_is_report = True
+        else:
+            url = QuestionURL(
+                self.request.survey, next, phase="actionplan")
+
         if self.request.environ["REQUEST_METHOD"] == "POST":
             reply = self.request.form
             session = Session()
@@ -138,18 +153,11 @@ class OSHAActionPlanView(risk.ActionPlanView):
                     # We ran out of questions, step back to intro page
                     url = "%s/evaluation" \
                             % self.request.survey.absolute_url()
-                    return self.request.response.redirect(url)
-            else:
-                next = FindNextQuestion(
-                    context, filter=self.question_filter)
-                if next is None:
-                    # We ran out of questions, proceed to the report
-                    url = "%s/report" % self.request.survey.absolute_url()
-                    return self.request.response.redirect(url)
-            url = QuestionURL(
-                self.request.survey, next, phase="actionplan")
-            self.request.response.redirect(url)
-            return
+                else:
+                    url = QuestionURL(
+                        self.request.survey, next, phase="actionplan")
+            return self.request.response.redirect(url)
+
         else:
             if len(context.action_plans) == 0:
                 context.action_plans.append(model.ActionPlan())

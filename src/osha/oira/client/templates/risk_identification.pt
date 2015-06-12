@@ -27,7 +27,7 @@
     </fieldset>
 
     <!-- Evaluation -->
-	<fieldset class="pat-well notice pat-depends vertical"
+	<fieldset class="pat-well notice pat-depends vertical" id="evaluation"
               data-pat-depends="condition: answer=no; transition: slide">
 
     <tal:block condition="python:risk.evaluation_method=='calculated'">

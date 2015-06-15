@@ -72,6 +72,14 @@
             <p tal:condition="webhelpers/is_guest_account" id="warning-bar">
                 This is a test session. <a href="${base_url}/login_form?${came_from_param}#document-content" class="registration">Sign in</a> to save your data. <a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info">Info</a>
             </p>
+            <tal:statusmsg tal:repeat="message webhelpers/messages">
+                <p class="pat-notification" data-pat-notification="type: banner"
+                   tal:attributes="id string:${message/id}-body;
+                                   data-pat-notification string:${attrs/data-pat-notification};;
+                                   class: ${message/type}"
+                   tal:content="message/message | nothing" i18n:translate="">This is a status message</p>
+                </tal:statusmsg>
+
             <metal:block define-slot="content"/>
         </div>
     </div>

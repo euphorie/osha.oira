@@ -1,6 +1,7 @@
 from .interfaces import IOSHAClientSkinLayer
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
+from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.client import model
 from euphorie.client.sector import IClientSector
 from euphorie.client.utils import WebHelpers
@@ -11,6 +12,7 @@ from mobile.sniffer.detect import detect_mobile_browser
 from mobile.sniffer.utilities import get_user_agent
 from os import path
 from osha.oira.client import model as oiramodel
+from plone.i18n.normalizer import idnormalizer
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.component import getMultiAdapter
@@ -275,3 +277,10 @@ class OSHAWebHelpers(WebHelpers):
             return None
         images = getMultiAdapter((sector, self.request), name="images")
         return images.scale("logo", height=100, direction="up") or None
+
+    def messages(self):
+        status = IStatusMessage(self.request)
+        messages = status.show()
+        for m in messages:
+            m.id = idnormalizer.normalize(m.message)
+        return messages

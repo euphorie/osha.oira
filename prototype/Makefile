@@ -41,7 +41,7 @@ check-clean:
 ########################################################################
 # For development (i.e. serving files)
 
-serve: stamp-bundler
+serve: stamp-bower stamp-bundler
 	bundle exec jekyll serve --watch --baseurl "" --host 0.0.0.0
 
 .PHONY: all extra-clean clean check-clean serve

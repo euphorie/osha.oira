@@ -54,10 +54,12 @@ class OSHAIdentificationView(risk.EvaluationView):
                 self.context.identification = None
             else:
                 self.context.identification = answer
-                if self.risk.evaluation_method == "direct":
-                    self.context.priority = reply.get("priority")
+                if self.risk.type in ('top5', 'policy'):
+                    self.context.priority = 'high'
                 elif self.risk.evaluation_method == 'calculated':
                     self.calculatePriority(self.risk, reply)
+                elif self.risk.evaluation_method == "direct":
+                    self.context.priority = reply.get("priority")
 
             SessionManager.session.touch()
 
@@ -114,7 +116,6 @@ class OSHAIdentificationView(risk.EvaluationView):
 class OSHAActionPlanView(risk.ActionPlanView):
     grok.layer(IOSHAActionPlanPhaseSkinLayer)
     grok.template("risk_actionplan")
-
 
     def update(self):
         if redirectOnSurveyUpdate(self.request):

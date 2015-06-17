@@ -30,7 +30,7 @@ class Mixin(object):
 
         context = aq_inner(self.context)
         module = self.request.survey.restrictedTraverse(
-                                self.context.zodb_path.split("/"))
+            self.context.zodb_path.split("/"))
 
         if IProfileQuestion.providedBy(module) and context.depth == 2:
             next = FindNextQuestion(context, filter=self.question_filter)
@@ -38,8 +38,7 @@ class Mixin(object):
                 if self.phase == 'identification':
                     url = "%s/actionplan" % self.request.survey.absolute_url()
                 elif self.phase == 'evaluation':
-                    url = "%s/actionplan" % \
-                            self.request.survey.absolute_url()
+                    url = "%s/actionplan" % self.request.survey.absolute_url()
                 elif self.phase == 'actionplan':
                     url = "%s/report" % self.request.survey.absolute_url()
             else:
@@ -47,7 +46,6 @@ class Mixin(object):
             return self.request.response.redirect(url)
         else:
             return super(superclass, self).update()
-
 
     def get_custom_risks(self):
         session = SessionManager.session
@@ -78,17 +76,17 @@ class CustomizationView(grok.View, Mixin):
         context = aq_inner(self.context)
         survey = self.request.survey
         self.module = survey.restrictedTraverse(self.context.zodb_path.split("/"))
-        self.title = self.context.title
+        self.title = context.title
         self.tree = getTreeData(
-                self.request, self.context, phase="identification",
-                filter=model.NO_CUSTOM_RISKS_FILTER)
+            self.request, self.context, phase="identification",
+            filter=model.NO_CUSTOM_RISKS_FILTER)
 
         if self.request.environ["REQUEST_METHOD"] == "POST":
             reply = self.request.form
             if reply.get("next") == "previous":
                 url = "%s/identification/%d" % (
-                        self.request.survey.absolute_url(),
-                        int(self.context.path))
+                    self.request.survey.absolute_url(),
+                    int(self.context.path))
                 return self.request.response.redirect(url)
 
             elif reply.get("next") == "next":
@@ -100,22 +98,21 @@ class CustomizationView(grok.View, Mixin):
 
     def add_custom_risks(self, form):
         session = SessionManager.session
-        self.context.removeChildren() # Clear previous custom risks
+        self.context.removeChildren()  # Clear previous custom risks
         for risk_values in form.get('risk', []):
             if not risk_values.get("description") or not risk_values.get("priority"):
                 IStatusMessage(self.request).add(
-                        _(u"Please fill in the required fields"),
-                        type="error")
+                    _(u"Please fill in the required fields"), type="error")
                 self.request.set('errors', {
                     'description': not risk_values.get("description"),
                     'priority': not risk_values.get("priority"),
-                });
-                return;
+                })
+                return
             risk = model.Risk(
                 comment=risk_values.get('comment'),
                 priority=risk_values['priority'],
                 risk_id=None,
-                risk_type='risk', # XXX Could it also be top5 or policy?
+                risk_type='risk',  # XXX Could it also be top5 or policy?
                 skip_evaluation=True,
                 title=risk_values['description'],
                 identification="no"
@@ -125,24 +122,23 @@ class CustomizationView(grok.View, Mixin):
             risk.postponed = False
             risk.has_description = None
             risk.zodb_path = "/".join([session.zodb_path] + [self.context.zodb_path] + ['1'])
-            risk.profile_index = 0 # XXX: not sure what this is for
+            risk.profile_index = 0  # XXX: not sure what this is for
             self.context.addChild(risk)
             IStatusMessage(self.request).add(
-                    _(u"Your custom risk has been succesfully created."),
-                    type="success")
+                _(u"Your custom risk has been succesfully created."),
+                type="success")
 
 
 class IdentificationView(module.IdentificationView, Mixin):
     grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
     grok.template("module_identification")
 
-
     def update(self):
         if redirectOnSurveyUpdate(self.request):
             return
         context = aq_inner(self.context)
         module = self.request.survey.restrictedTraverse(
-                                        context.zodb_path.split("/"))
+            context.zodb_path.split("/"))
         if self.request.environ["REQUEST_METHOD"] == "POST":
             self.save_and_continue(module)
         else:
@@ -162,12 +158,11 @@ class IdentificationView(module.IdentificationView, Mixin):
                     int(self.context.path))
                 return self.request.response.redirect(url)
 
-            self.tree = getTreeData(self.request, context,
-                    filter=model.NO_CUSTOM_RISKS_FILTER)
+            self.tree = getTreeData(
+                self.request, context, filter=model.NO_CUSTOM_RISKS_FILTER)
             self.title = context.title
             self.module = module
             super(IdentificationView, self).update()
-
 
     def save_and_continue(self, module):
         """ We received a POST request.
@@ -184,12 +179,10 @@ class IdentificationView(module.IdentificationView, Mixin):
             SessionManager.session.touch()
 
         if reply["next"] == "previous":
-            next = FindPreviousQuestion(context,
-                    filter=self.question_filter)
+            next = FindPreviousQuestion(context, filter=self.question_filter)
             if next is None:
                 # We ran out of questions, step back to intro page
-                url = "%s/identification" % \
-                        self.request.survey.absolute_url()
+                url = "%s/identification" % self.request.survey.absolute_url()
                 self.request.response.redirect(url)
                 return
         else:
@@ -198,8 +191,8 @@ class IdentificationView(module.IdentificationView, Mixin):
                     # The user will now be allowed to create custom
                     # (user-defined) risks.
                     url = "%s/customization/%d" % (
-                            self.request.survey.absolute_url(),
-                            int(self.context.path))
+                        self.request.survey.absolute_url(),
+                        int(self.context.path))
                     return self.request.response.redirect(url)
                 else:
                     # We ran out of questions, proceed to the evaluation
@@ -211,8 +204,7 @@ class IdentificationView(module.IdentificationView, Mixin):
                 url = "%s/evaluation" % self.request.survey.absolute_url()
                 return self.request.response.redirect(url)
 
-        url = QuestionURL(self.request.survey, next,
-                phase="identification")
+        url = QuestionURL(self.request.survey, next, phase="identification")
         self.request.response.redirect(url)
 
 

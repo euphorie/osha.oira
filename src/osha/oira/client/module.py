@@ -83,13 +83,7 @@ class CustomizationView(grok.View, Mixin):
 
         if self.request.environ["REQUEST_METHOD"] == "POST":
             reply = self.request.form
-            if reply.get("next") == "previous":
-                url = "%s/identification/%d" % (
-                    self.request.survey.absolute_url(),
-                    int(self.context.path))
-                return self.request.response.redirect(url)
-
-            elif reply.get("next") == "next":
+            if reply.get("next") == "next":
                 self.add_custom_risks(reply)
                 url = "%s/actionplan" % self.request.survey.absolute_url()
                 return self.request.response.redirect(url)

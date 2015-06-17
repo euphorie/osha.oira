@@ -93,15 +93,10 @@ class CustomizationView(grok.View, Mixin):
     def add_custom_risks(self, form):
         session = SessionManager.session
         self.context.removeChildren()  # Clear previous custom risks
+        risk_added = 0
         for risk_values in form.get('risk', []):
             if not risk_values.get("description") or not risk_values.get("priority"):
-                IStatusMessage(self.request).add(
-                    _(u"Please fill in the required fields"), type="error")
-                self.request.set('errors', {
-                    'description': not risk_values.get("description"),
-                    'priority': not risk_values.get("priority"),
-                })
-                return
+                continue
             risk = model.Risk(
                 comment=risk_values.get('comment'),
                 priority=risk_values['priority'],
@@ -118,9 +113,17 @@ class CustomizationView(grok.View, Mixin):
             risk.zodb_path = "/".join([session.zodb_path] + [self.context.zodb_path] + ['1'])
             risk.profile_index = 0  # XXX: not sure what this is for
             self.context.addChild(risk)
-            IStatusMessage(self.request).add(
-                _(u"Your custom risk has been succesfully created."),
-                type="success")
+            risk_added += 1
+        if risk_added > 1:
+            message = _(u"Your custom risks have been succesfully created / updated.")
+            status = "success"
+        elif risk_added == 1:
+            message = _(u"Your custom risk has been succesfully created / updated.")
+            status = "success"
+        else:
+            message = _(u"No custom risks were created / updated.")
+            status = "warning"
+        IStatusMessage(self.request).add(message, type=status)
 
 
 class IdentificationView(module.IdentificationView, Mixin):

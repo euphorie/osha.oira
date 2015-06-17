@@ -21,8 +21,13 @@
 
         <fieldset class="risk-set clone" tal:repeat="item risks">
             <h2>Risk ${repeat/item/number}</h2>
-            <textarea autofocus required tal:content="item/title"
-                name="risk.description:utf8:ustring:records" placeholder="Description of risk ${repeat/item/number}" id="description-${repeat/item/number}" cols="30" rows="6" class="description"></textarea>
+            <fieldset class="vertical">
+                <textarea autofocus required tal:content="item/title"
+                    name="risk.description:utf8:ustring:records" placeholder="Description of risk ${repeat/item/number}" id="description-${repeat/item/number}" cols="30" rows="6" class="description"></textarea>
+                <textarea name="risk.comment:utf8:ustring:records" class="span-15" rows="5" tal:content="item/comment"
+                    placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
+                        i18n:attributes="placeholder label_comment"></textarea>
+            </fieldset>
 			<label class="priority">This is a
                 <select name="risk.priority:utf8:ustring:records">
 					<option value="low" tal:attributes="selected python:item.priority == 'low'">
@@ -37,16 +42,16 @@
 				</select> .
                 <em tal:condition="python:request.get('errors', {}).get('priority')" class="validation warning message" data-validate-constraint="required">This value is required.</em>
 			</label>
-            <fieldset class="vertical">
-                <textarea name="risk.comment:utf8:ustring:records" class="span-15" rows="5" tal:content="item/comment"
-                    placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
-                        i18n:attributes="placeholder label_comment"></textarea>
-            </fieldset>
 			<button class="iconified icon-trash float-after remove-clone">Remove risk</button>
         </fieldset>
 
 		<fieldset class="risk-set clone" tal:condition="not:risks">
-			<textarea autofocus required name="risk.description:utf8:ustring:records" placeholder="Description of risk 1" id="description-1" cols="30" rows="6" class="description"></textarea>
+            <fieldset class="vertical">
+			    <textarea autofocus required name="risk.description:utf8:ustring:records" placeholder="Description of risk 1" id="description-1" cols="30" rows="6" class="description"></textarea>
+                <textarea name="risk.comment:utf8:ustring:records" class="span-15" rows="5"
+                    placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
+                        i18n:attributes="placeholder label_comment"></textarea>
+            </fieldset>
 			<label class="priority">This is a
                 <select name="risk.priority:utf8:ustring:records">
 					<option value="low">
@@ -61,18 +66,11 @@
 				</select> .
                 <em tal:condition="python:request.get('errors', {}).get('priority')" class="validation warning message" data-validate-constraint="required">This value is required.</em>
 			</label>
-            <fieldset class="vertical">
-                <textarea name="risk.comment:utf8:ustring:records" class="span-15" rows="5"
-                    placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
-                        i18n:attributes="placeholder label_comment"></textarea>
-            </fieldset>
 			<button class="iconified icon-trash float-after remove-clone">Remove risk</button>
 		</fieldset>
-
 	</fieldset>
 
     <p class="buttons pat-button-bar">
-        <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="pat-button-back">Previous</button>
         <button id="clone-set-1" type="button" i18n:translate="label_add_risk" class="pat-button icon-plus-circle add-clone">Add risk</button>
         <button type="submit" name="next" value="next" i18n:translate="label_skip_to_action_plan" class="float-after pat-button icon-angle-circled-right">Save and continue to action plan</button>
     </p>
@@ -80,7 +78,12 @@
 
     <fieldset class="risk-set" id="risk-template" hidden>
         <h2>Risk #{1}</h2>
-        <textarea autofocus name="risk.description:utf8:ustring:records" placeholder="Description of risk #{1}" id="description-#{1}" cols="30" rows="6" class="description"></textarea>
+        <fieldset class="vertical">
+            <textarea autofocus required name="risk.description:utf8:ustring:records" placeholder="Description of risk #{1}" id="description-#{1}" cols="30" rows="6" class="description"></textarea>
+            <textarea name="risk.comment:utf8:ustring:records" class="span-15" rows="5"
+                placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
+                i18n:attributes="placeholder label_comment"></textarea>
+        </fieldset>
         <label class="priority">This is a
             <select name="risk.priority:utf8:ustring:records">
                 <option value="low">
@@ -94,11 +97,6 @@
                 </option>
             </select> .
         </label>
-        <fieldset class="vertical">
-            <textarea name="risk.comment:utf8:ustring:records" class="span-15" rows="5"
-                placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
-                i18n:attributes="placeholder label_comment"></textarea>
-        </fieldset>
         <button class="iconified icon-trash float-after remove-clone">Remove risk</button>
     </fieldset>
 </article>

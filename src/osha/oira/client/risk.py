@@ -221,7 +221,7 @@ class OSHAActionPlanView(risk.ActionPlanView):
                         responsible=measure.get("responsible"),
                         budget=measure.get("budget"),
                         planning_start=measure.get('planning_start'),
-                        planning_end=measure.get('planning_start')
+                        planning_end=measure.get('planning_end')
                     )
                 )
         return new_plans

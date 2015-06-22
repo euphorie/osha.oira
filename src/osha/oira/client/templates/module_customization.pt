@@ -21,6 +21,7 @@
 
         <fieldset class="risk-set clone" tal:repeat="item risks">
             <h2>Risk ${repeat/item/number}</h2>
+            <input type="hidden" name="risk.id:utf8:ustring:records" value="${item/id}"/>
             <fieldset class="vertical">
                 <textarea autofocus required tal:content="item/title"
                     name="risk.description:utf8:ustring:records" placeholder="Description of risk ${repeat/item/number}" id="description-${repeat/item/number}" cols="30" rows="6" class="description"></textarea>

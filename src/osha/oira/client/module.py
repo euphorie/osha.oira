@@ -90,40 +90,88 @@ class CustomizationView(grok.View, Mixin):
 
         return super(CustomizationView, self).update()
 
+    def give_customization_feedback(self, added, updated, removed):
+        if removed == 0 and added == 0 and updated == 0:
+            IStatusMessage(self.request).add(
+                _(u"No changes were made to your custom risks."),
+                type='warning'
+            )
+            return;
+
+        if added > 1:
+            IStatusMessage(self.request).add(
+                _(u"Your new custom risks have been created."),
+                type='success'
+            )
+        elif added == 1:
+            IStatusMessage(self.request).add(
+                _(u"A new custom risk has been created."),
+                type='success'
+            )
+        if updated> 1:
+            IStatusMessage(self.request).add(
+                _(u"Existing custom risks have been updated."),
+                type='success'
+            )
+        elif updated == 1:
+            IStatusMessage(self.request).add(
+                _(u"An existing custom risk has been updated."),
+                type='success'
+            )
+        if removed == 1:
+            IStatusMessage(self.request).add(
+                _(u"A custom risk has been removed."), type='success')
+        elif removed > 1:
+            IStatusMessage(self.request).add(
+                _(u"A custom risk has been removed."), type='success')
+
     def add_custom_risks(self, form):
         session = SessionManager.session
-        self.context.removeChildren()  # Clear previous custom risks
-        risk_added = 0
+        existing_risks = {}
+        for risk_dict in form['risk']:
+            if risk_dict.get('id'):
+                existing_risks[risk_dict['id']] = risk_dict
+        # Remove risks not in the form any more.
+        excluded = [int(k) for k in existing_risks.keys()]
+        removed = len(self.context.removeChildren(excluded=excluded))
+
+        sql_risks = self.context.children()
+        added = 0
+        updated = 0
         for risk_values in form.get('risk', []):
             if not risk_values.get("description") or not risk_values.get("priority"):
                 continue
-            risk = model.Risk(
-                comment=risk_values.get('comment'),
-                priority=risk_values['priority'],
-                risk_id=None,
-                risk_type='risk',  # XXX Could it also be top5 or policy?
-                skip_evaluation=True,
-                title=risk_values['description'],
-                identification="no"
-            )
-            risk.is_custom_risk = True
-            risk.skip_children = False
-            risk.postponed = False
-            risk.has_description = None
-            risk.zodb_path = "/".join([session.zodb_path] + [self.context.zodb_path] + ['1'])
-            risk.profile_index = 0  # XXX: not sure what this is for
-            self.context.addChild(risk)
-            risk_added += 1
-        if risk_added > 1:
-            message = _(u"Your custom risks have been succesfully created / updated.")
-            status = "success"
-        elif risk_added == 1:
-            message = _(u"Your custom risk has been succesfully created / updated.")
-            status = "success"
-        else:
-            message = _(u"No custom risks were created / updated.")
-            status = "warning"
-        IStatusMessage(self.request).add(message, type=status)
+            if risk_values.get('id') in existing_risks:
+                # Update an existing risk
+                risk = sql_risks.filter_by(id=risk_values.get('id')).all()[0]
+                if risk.title != risk_values['description'] or \
+                        risk.priority != risk_values['priority'] or \
+                        risk.comment != risk_values.get('comment'):
+
+                    risk.comment = risk_values.get('comment')
+                    risk.priority = risk_values['priority']
+                    risk.title = risk_values['description']
+                    updated += 1
+            else:
+                # Add a new risk
+                risk = model.Risk(
+                    comment=risk_values.get('comment'),
+                    priority=risk_values['priority'],
+                    risk_id=None,
+                    risk_type='risk',  # XXX Could it also be top5 or policy?
+                    skip_evaluation=True,
+                    title=risk_values['description'],
+                    identification="no"
+                )
+                risk.is_custom_risk = True
+                risk.skip_children = False
+                risk.postponed = False
+                risk.has_description = None
+                risk.zodb_path = "/".join([session.zodb_path] + [self.context.zodb_path] + ['1'])
+                risk.profile_index = 0  # XXX: not sure what this is for
+                self.context.addChild(risk)
+                added += 1
+        self.give_customization_feedback(added, updated, removed)
 
 
 class IdentificationView(module.IdentificationView, Mixin):

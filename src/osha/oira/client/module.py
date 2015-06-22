@@ -123,12 +123,12 @@ class CustomizationView(grok.View, Mixin):
                 _(u"A custom risk has been removed."), type='success')
         elif removed > 1:
             IStatusMessage(self.request).add(
-                _(u"A custom risk has been removed."), type='success')
+                _(u"Custom risks have been removed."), type='success')
 
     def add_custom_risks(self, form):
         session = SessionManager.session
         existing_risks = {}
-        for risk_dict in form['risk']:
+        for risk_dict in form.get('risk', []):
             if risk_dict.get('id'):
                 existing_risks[risk_dict['id']] = risk_dict
         # Remove risks not in the form any more.

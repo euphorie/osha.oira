@@ -206,12 +206,6 @@ class OSHAActionPlanView(risk.ActionPlanView):
             measure = dict([p for p in form['measure'][i].items()
                             if p[1].strip()])
             form['action_plans'].append(measure)
-            start = measure.get('planning_start')
-            end = measure.get('planning_end')
-            if start and end and start > end:
-                form['action_plans'][-1]['errors'][
-                    'planning_start_date'] = [
-                        u'Start date is not before end date']
             if len(measure):
                 new_plans.append(
                     model.ActionPlan(

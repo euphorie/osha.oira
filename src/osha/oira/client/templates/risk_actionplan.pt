@@ -14,7 +14,13 @@
 <metal:slot fill-slot="content" tal:define="risk nocall:view/risk|nothing; data view/data">
 <tal:block replace="tile:statusmessages"/>
 <tal:def define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};">
-<form method="post" action="${context/absolute_url}" class="pat-inject" data-pat-inject="history: record; source: #step-4; target: #step-4 && source: #content; target: #content">
+
+<!-- TODO: This needs to be integrated into site's CSS somehow -->
+<style> .measures .measure .functions a.disabled { display: none; } </style>
+
+<form method="post" action="${context/absolute_url}" class="pat-inject pat-validate"
+    data-pat-validate="disable-selector: button[name='next'], .remove-clone"
+    data-pat-inject="history: record; source: #step-4; target: #step-4 && source: #content; target: #content">
 <article class="rich pat-well warning" id="${view/risk_number}">
     <tal:block condition="not:view/risk_present">
         <h2 tal:content="risk/title"></h2>
@@ -43,14 +49,16 @@
 
 
 <div class="measures pat-clone" data-pat-clone="template: #measure-template" id="ActionPlanItemForm">
-    <div class="measure clone pat-collapsible" tal:repeat="actionplan data/action_plans">
+    <div class="measure clone pat-collapsible"
+         tal:define="measures view/solutions|python:[]" 
+        tal:repeat="actionplan data/action_plans">
 
         <h2 tal:content="string:Measure ${repeat/actionplan/number}">Measure 1</h2>
-        <tal:if_has_measures define="measures view/solutions|python:[]" condition="measures">
-            <p class="functions">
-                <a class="icon-pencil pat-tooltip" data-pat-tooltip="source:ajax" href="#standard-solutions-0">Pre-fill</a>
-                <a class="icon-trash remove-clone">Remove</a>
-            </p>
+        <p class="functions">
+            <a class="icon-pencil pat-tooltip" tal:condition="measures" data-pat-tooltip="source:ajax" href="#standard-solutions-0">Pre-fill</a>
+            <a class="icon-trash remove-clone">Remove</a>
+        </p>
+        <tal:if_has_measures condition="measures">
             <div id="standard-solutions-0" hidden>
                 <p class="info" i18n:translate="label_select_measure">Select one or more of the known common measures provided.</p>
                 <ol class="add-measure-menu">
@@ -105,16 +113,18 @@
                 <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
                 <em class="message error" tal:condition="date_error" i18n:translate="error_start_not_before_end">Start date is not before end date</em>
                 <input type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records"
-                        id="planning-start-${number}"
-                        value="${actionplan/planning_start|nothing}"/>
+                    id="planning-start-${number}"
+                    value="${actionplan/planning_start|nothing}"/>
             </label>
 
             <label tal:define="date_error exists:errors/planning_end_date">
                 <tal:label i18n:translate="label_action_plan_end">Planning end</tal:label>
                 <em class="message error" tal:condition="date_error" i18n:translate="error_end_not_before_end">End date is not after start date</em>
-                <input type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_end:records"
-                        id="planning-end-${number}"
-                        value="${actionplan/planning_end|nothing}"/>
+
+                <input parsley-onorafterdate="#planning-start-${number}"
+                    type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_end:records"
+                    id="planning-end-${number}"
+                    value="${actionplan/planning_end|nothing}"/>
             </label>
         </fieldset>
     </div>
@@ -176,13 +186,11 @@
 			</label>
 			<label>
                 <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
-                <input type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records"
-                        id="planning-start" />
+                <input type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records" id="planning-start-#{1}" />
 			</label>
 			<label>
                 <tal:label i18n:translate="label_action_plan_end">Planning end</tal:label>
-                <input type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_end:records"
-                        id="planning-end"/>
+                <input parsley-onorafterdate="#planning-start-#{1}" type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_end:records" id="planning-end-#{1}"/>
 			</label>
 		</fieldset>
 	</div>
@@ -195,7 +203,7 @@
     </fieldset>
 
     <div class="button-bar">
-        <button type="submit" name="next" value="previous"
+        <button type="submit" name="previous" value="previous"
                 i18n:translate="label_previous" class="pat-button">Previous</button>
         <button type="submit" name="next" value="next" data-pat-switch="${python:view.next_is_report and 'selector: body; remove: sidebar-on; add: sidebar-off' or ''}"
                 i18n:translate="label_save_and_continue" class="pat-button ${python: view.next_is_report and 'pat-switch' or ''}">Save and continue</button>

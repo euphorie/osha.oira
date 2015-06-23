@@ -11121,20 +11121,23 @@ define('pat-utils',[
     }
 
     function findLabel(input) {
-        for (var label=input.parentNode; label && label.nodeType!==11; label=label.parentNode)
-            if (label.tagName==="LABEL")
-                return label;
-
         var $label;
-
-        if (input.id)
-            $label = $("label[for="+input.id+"]");
-        if ($label && $label.length===0 && input.form)
-            $label = $("label[for="+input.name+"]", input.form);
-        if ($label && $label.length)
+        for (var label=input.parentNode; label && label.nodeType!==11; label=label.parentNode) {
+            if (label.tagName==="LABEL") {
+                return label;
+            }
+        }
+        if (input.id) {
+            $label = $("label[for=\""+input.id+"\"]");
+        }
+        if ($label && $label.length===0 && input.form) {
+            $label = $("label[for=\""+input.name+"\"]", input.form);
+        }
+        if ($label && $label.length) {
             return $label[0];
-        else
+        } else {
             return null;
+        }
     }
 
     // Taken from http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
@@ -12049,6 +12052,8 @@ define('pat-registry',[
     "pat-compat",
     "pat-jquery-ext"
 ], function($, logger, utils) {
+    var TEXT_NODE = 3;
+    var COMMENT_NODE = 8;
     var log = logger.getLogger("registry");
 
     var disable_re = /patterns-disable=([^&]+)/g,
@@ -12178,11 +12183,13 @@ define('pat-registry',[
     };
 
     $(document).on("patterns-injected.patterns",
-            function registry_onInject(ev, inject_config, inject_trigger) {
-                registry.scan(ev.target, null, {type: "injection", element: inject_trigger});
-                $(ev.target).trigger("patterns-injected-scanned");
-            });
-
+        function registry_onInject(ev, config, trigger_el, injected_el) {
+            if (injected_el.nodeType !== TEXT_NODE && injected_el !== COMMENT_NODE) {
+                registry.scan(injected_el, null, {type: "injection", element: trigger_el});
+                $(injected_el).trigger("patterns-injected-scanned");
+            }
+        }
+    );
     return registry;
 });
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
@@ -14103,9 +14110,14 @@ define('pat-parser',[
                 this.log.debug("Ignoring value for unknown argument " + name);
                 return;
             }
-            var spec = this.parameters[name];
+            var spec = this.parameters[name],
+                parts, i, v;
             if (spec.multiple) {
-                var parts=value.split(/,+/), i, v;
+                if (typeof value === "string") {
+                    parts = value.split(/,+/);
+                } else {
+                    parts = value;
+                }
                 value = [];
                 for (i=0; i<parts.length; i++) {
                     v = this._coerce(name, parts[i].trim());
@@ -20526,6 +20538,7 @@ define("pat-clone",[
             $clone.find(this.options.removeElement).on("click", this.remove.bind(this, $clone));
             $clone.removeAttr("hidden");
             registry.scan($clone);
+            $clone.trigger("pat-update", {'pattern':"clone", '$el': $clone});
             if (this.num_clones >= this.options.max) {
                 $(this.options.triggerElement).hide();
             }
@@ -20923,12 +20936,12 @@ define('pat-inject',[
      * an event for each hook: pat-inject-hook-$(hook)
      */
     parser.addArgument("hooks", [], ["raptor"], true);
+    parser.addArgument("class"); // Add a class to the injected content.
+    parser.addArgument("history");
     // XXX: this should not be here but the parser would bail on
     // unknown parameters and expand/collapsible need to pass the url
     // to us
     parser.addArgument("url");
-    parser.addArgument("class");
-    parser.addArgument("history");
 
     var _ = {
         name: "inject",
@@ -21142,9 +21155,85 @@ define('pat-inject',[
             return $target;
         },
 
+        stopBubblingFromRemovedElement: function ($el, cfgs, ev) {
+            /* IE8 fix. Stop event from propagating IF $el will be removed
+            * from the DOM. With pat-inject, often $el is the target that
+            * will itself be replaced with injected content.
+            *
+            * IE8 cannot handle events bubbling up from an element removed
+            * from the DOM.
+            *
+            * See: http://stackoverflow.com/questions/7114368/why-is-jquery-remove-throwing-attr-exception-in-ie8
+            */
+            var s; // jquery selector
+            for (var i=0; i<cfgs.length; i++) {
+                s = cfgs[i].target;
+                if ($el.parents(s).addBack(s) && !ev.isPropagationStopped()) {
+                    ev.stopPropagation();
+                    return;
+                }
+            }
+        },
+
+        _performInjection: function ($el, $source, cfg, trigger) {
+            /* Called after the XHR has succeeded and we have a new $source
+             * element to inject.
+             */
+            if (cfg.sourceMod === "content") {
+                $source = $source.contents();
+            }
+            var $src;
+            // $source.clone() does not work with shived elements in IE8
+            if (document.all && document.querySelector &&
+                !document.addEventListener) {
+                $src = $source.map(function() {
+                    return $(this.outerHTML)[0];
+                });
+            } else {
+                $src = $source.clone();
+            }
+            var $target = $(this),
+                $injected = cfg.$injected || $src;
+
+            $src.findInclusive("img").on("load", function() {
+                $(this).trigger("pat-inject-content-loaded");
+            });
+            // Now the injection actually happens.
+            if (_._inject(trigger, $src, $target, cfg)) { _._afterInjection($el, $injected, cfg); }
+            // History support.
+            if ((cfg.history === "record") && ("pushState" in history)) {
+                history.pushState({'url': cfg.url}, "", cfg.url);
+            }
+        },
+
+        _afterInjection: function ($el, $injected, cfg) {
+            /* Set a class on the injected elements and fire the
+             * patterns-injected event.
+             */
+            $injected.filter(function() {
+                // setting data on textnode fails in IE8
+                return this.nodeType !== TEXT_NODE;
+            }).data("pat-injected", {origin: cfg.url});
+
+            if ($injected.length === 1 && $injected[0].nodeType == TEXT_NODE) {
+                // Only one element injected, and it was a text node.
+                // So we trigger "patterns-injected" on the parent.
+                // The event handler should check whether the
+                // injected element and the triggered element are
+                // the same.
+                $injected.parent().trigger("patterns-injected", [cfg, $el[0], $injected[0]]);
+            } else {
+                $injected.each(function () {
+                    // patterns-injected event will be triggered for each injected (non-text) element.
+                    if (this.nodeType !== TEXT_NODE) {
+                        $(this).addClass(cfg["class"]).trigger("patterns-injected", [cfg, $el[0], this]);
+                    }
+                });
+            }
+        },
+
         _onInjectSuccess: function ($el, cfgs, ev) {
-            var trigger = ev.target,
-                sources$,
+            var sources$,
                 data = ev && ev.jqxhr && ev.jqxhr.responseText;
             if (!data) {
                 log.warn("No response content, aborting", ev);
@@ -21153,73 +21242,13 @@ define('pat-inject',[
             $.each(cfgs[0].hooks || [], function (idx, hook) {
                 $el.trigger("pat-inject-hook-"+hook);
             });
-
-            function stopBubblingFromRemovedElement (ev) {
-               /* IE8 fix. Stop event from propagating IF $el will be removed
-                * from the DOM. With pat-inject, often $el is the target that
-                * will itself be replaced with injected content.
-                *
-                * IE8 cannot handle events bubbling up from an element removed
-                * from the DOM.
-                *
-                * See: http://stackoverflow.com/questions/7114368/why-is-jquery-remove-throwing-attr-exception-in-ie8
-                */
-                var s; // jquery selector
-                for (var i=0; i<cfgs.length; i++) {
-                    s = cfgs[i].target;
-                    if ($el.parents(s).addBack(s) && !ev.isPropagationStopped()) {
-                        ev.stopPropagation();
-                        return;
-                    }
-                }
-            }
-            stopBubblingFromRemovedElement(ev);
+            _.stopBubblingFromRemovedElement($el, cfgs, ev);
             sources$ = _.callTypeHandler(cfgs[0].dataType, "sources", $el, [cfgs, data, ev]);
             cfgs.forEach(function(cfg, idx) {
-                var $source = sources$[idx];
-                if (cfg.sourceMod === "content") {
-                    $source = $source.contents();
-                }
-
-                // perform injection
-                cfg.$target.each(function inject_onSuccess_perform() {
-                    var $src;
-                    // $source.clone() does not work with shived elements in IE8
-                    if (document.all && document.querySelector &&
-                        !document.addEventListener) {
-                        $src = $source.map(function() {
-                            return $(this.outerHTML)[0];
-                        });
-                    } else {
-                        $src = $source.clone();
-                    }
-
-                    var $target = $(this),
-                        $injected = cfg.$injected || $src;
-
-                    $src.findInclusive("img").on("load", function() {
-                        $(this).trigger("pat-inject-content-loaded");
-                    });
-
-                    if (_._inject(trigger, $src, $target, cfg)) {
-                        $injected.filter(function() {
-                            // setting data on textnode fails in IE8
-                            return this.nodeType !== 3; //Node.TEXT_NODE
-                        }).data("pat-injected", {origin: cfg.url});
-
-                        if ($injected[0].nodeType !== TEXT_NODE) {
-                            $injected.addClass(cfg["class"])
-                                .trigger("patterns-injected", [cfg, $el[0]]);
-                        } else { // Makes no sense adding a class to a text node.
-                            $injected.parent().trigger("patterns-injected", [cfg, $el[0]]);
-                        }
-                    }
-                    if ((cfg.history === "record") &&
-                        ("pushState" in history))
-                        history.pushState({url: cfg.url}, "", cfg.url);
+                cfg.$target.each(function() {
+                    _._performInjection.apply(this, [$el, sources$[idx], cfg, ev.target]);
                 });
             });
-
             if (cfgs[0].nextHref) {
                 $el.attr({href: (window.location.href.split("#")[0] || "") +
                             cfgs[0].nextHref});
@@ -40397,135 +40426,172 @@ define('pat-placeholder',[
 ;
 define('pat-sortable',[
     "jquery",
-    "pat-registry",
-    "pat-logger",
+    "pat-base",
     "pat-parser"
-], function($, patterns, logger, Parser) {
+], function($, Base, Parser) {
     var parser = new Parser("sortable");
-
     parser.addArgument("selector", "li");
 
-    var _ = {
+    return Base.extend({
         name: "sortable",
         trigger: ".pat-sortable",
 
-        init: function($el) {
-            if ($el.length > 1)
-                return $el.each(function() { _.init($(this)); });
+        init: function ($el) {
+            this.$form = this.$el.closest('form');
+            this.options = parser.parse(this.$el, true);
+            this.recordPositions().addHandles().initScrolling();
+            this.$el.on('pat-update', this.onPatternUpdate.bind(this));
+        },
 
-            var cfgs = parser.parse($el, true);
-            $el.data("patterns.sortable", cfgs);
+        onPatternUpdate: function (ev, data) {
+            /* Handler which gets called when pat-update is triggered within
+             * the .pat-sortable element.
+             */
+            if (data.pattern == "clone") {
+                this.recordPositions();
+                data.$el.on("dragstart", this.onDragStart.bind(this));
+                data.$el.on("dragend", this.onDragEnd.bind(this));
+            }
+            return true;
+        },
 
+        recordPositions: function () {
             // use only direct descendants to support nested lists
-            var $sortables = $el.children().filter(cfgs[0].selector);
+            this.$sortables = this.$el.children().filter(this.options[0].selector);
+            this.$sortables.each(function (idx, $el) {
+                $(this).data('patterns.sortable', {'position': idx});
+            });
+            return this;
+        },
 
-            // add handles and make them draggable for HTML5 and IE8/9
-            // it has to be an "a" tag (or img) to make it draggable in IE8/9
-            var $handles = $("<a href=\"#\" class=\"handle\"></a>").appendTo($sortables);
-            if("draggable" in document.createElement("span"))
+        addHandles: function () {
+            /* Add handles and make them draggable for HTML5 and IE8/9
+             * it has to be an "a" tag (or img) to make it draggable in IE8/9
+             */
+            var $sortables_without_handles = this.$sortables.filter(function() {
+                return $(this).find('.sortable-handle').length === 0;
+            });
+            var $handles = $("<a href=\"#\" class=\"sortable-handle\">⇕</a>").appendTo($sortables_without_handles);
+            if("draggable" in document.createElement("span")) {
                 $handles.attr("draggable", true);
-            else
-                $handles.bind("selectstart", function(event) {
-                    event.preventDefault();
-                });
+            } else {
+                $handles.on("selectstart", function(event) { event.preventDefault(); });
+            }
+            $handles.on("dragstart", this.onDragStart.bind(this));
+            $handles.on("dragend", this.onDragEnd.bind(this));
+            return this;
+        },
 
+        initScrolling: function () {
             // invisible scroll activation areas
             var scrollup = $("<div id=\"pat-scroll-up\">&nbsp;</div>"),
                 scrolldn = $("<div id=\"pat-scroll-dn\">&nbsp;</div>"),
                 scroll = $().add(scrollup).add(scrolldn);
-
             scrollup.css({ top: 0 });
             scrolldn.css({ bottom: 0 });
             scroll.css({
                 position: "fixed", zIndex: 999999,
                 height: 32, left: 0, right: 0
             });
-
-            scroll.bind("dragover", function(event) {
+            scroll.on("dragover", function(event) {
                 event.preventDefault();
-                if ($("html,body").is(":animated")) return;
-
-                var newpos = $(window).scrollTop() +
-                    ($(this).attr("id")==="pat-scroll-up" ? -32 : 32);
-
+                if ($("html,body").is(":animated")) { return; }
+                var newpos = $(window).scrollTop() + ($(this).attr("id")==="pat-scroll-up" ? -32 : 32);
                 $("html,body").animate({scrollTop: newpos}, 50, "linear");
             });
+            return this;
+        },
 
-            $handles.bind("dragstart", function(event) {
-                // Firefox seems to need this set to any value
-                event.originalEvent.dataTransfer.setData("Text", "");
-                event.originalEvent.dataTransfer.effectAllowed = ["move"];
-                if ("setDragImage" in event.originalEvent.dataTransfer)
-                    event.originalEvent.dataTransfer.setDragImage(
-                        $(this).parent()[0], 0, 0);
-                $(this).parent().addClass("dragged");
+        onDragEnd: function (ev) {
+            $(".dragged").removeClass("dragged");
+            this.$sortables.unbind(".pat-sortable");
+            this.$el.unbind(".pat-sortable");
+            $("#pat-scroll-up, #pat-scroll-dn").detach();
+            this.submitChangedAmount($(ev.target).closest('.sortable'));
+        },
 
-                // Scroll the list if near the borders
-                $el.bind("dragover.pat-sortable", function(event) {
-                    event.preventDefault();
-                    if ($el.is(":animated")) return;
+        submitChangedAmount: function ($dragged) {
+            /* If we are in a form, then submit the form with the right amount
+             * that the sortable element was moved up or down.
+             */
+            var $amount_input = this.$form.find('.sortable-amount');
+            if ($amount_input.length === 0) { return; }
+            var old_position = $dragged.data('patterns.sortable').position;
+            this.recordPositions();
+            var new_position = $dragged.data('patterns.sortable').position;
+            var change = Math.abs(new_position - old_position);
+            var direction = new_position > old_position && 'down' || 'up';
+            if (this.$form.length > 0) {
+                $amount_input.val(change);
+                if (direction == 'up') {
+                    $dragged.find('.sortable-button-up').click();
+                } else {
+                    $dragged.find('.sortable-button-down').click();
+                }
+            }
+        },
 
-                    var pos = event.originalEvent.clientY + $("body").scrollTop();
+        onDragStart: function (event) {
+            var $handle = $(event.target),
+                $draggable = $handle.parent();
 
-                    if (pos - $el.offset().top < 32)
-                        $el.animate({scrollTop: $el.scrollTop()-32}, 50, "linear");
-                    else if ($el.offset().top+$el.height() - pos < 32)
-                        $el.animate({scrollTop: $el.scrollTop()+32}, 50, "linear");
-                });
+            // Firefox seems to need this set to any value
+            event.originalEvent.dataTransfer.setData("Text", "");
+            event.originalEvent.dataTransfer.effectAllowed = ["move"];
+            if ("setDragImage" in event.originalEvent.dataTransfer) {
+                event.originalEvent.dataTransfer.setDragImage($draggable[0], 0, 0);
+            }
+            $draggable.addClass("dragged");
 
-                // list elements are only drop targets when one element of the
-                // list is being dragged. avoids dragging between lists.
-                $sortables.bind("dragover.pat-sortable", function(event) {
-                    var $this = $(this),
-                        midlineY = $this.offset().top - $(document).scrollTop() +
-                            $this.height()/2;
+            // Scroll the list if near the borders
+            this.$el.on("dragover.pat-sortable", function(event) {
+                event.preventDefault();
+                if (this.$el.is(":animated")) return;
 
+                var pos = event.originalEvent.clientY + $("body").scrollTop();
+
+                if (pos - this.$el.offset().top < 32)
+                    this.$el.animate({scrollTop: this.$el.scrollTop()-32}, 50, "linear");
+                else if (this.$el.offset().top+this.$el.height() - pos < 32)
+                    this.$el.animate({scrollTop: this.$el.scrollTop()+32}, 50, "linear");
+            }.bind(this));
+
+            // list elements are only drop targets when one element of the
+            // list is being dragged. avoids dragging between lists.
+            this.$sortables.on("dragover.pat-sortable", function(event) {
+                var $this = $(this),
+                    midlineY = $this.offset().top - $(document).scrollTop() + $this.height()/2;
+
+                if ($(this).hasClass("dragged")) {
                     // bail if dropping on self
-                    if ($(this).hasClass("dragged"))
-                        return;
-
-                    $this.removeClass("drop-target-above drop-target-below");
-                    if (event.originalEvent.clientY > midlineY)
-                        $this.addClass("drop-target-below");
-                    else
-                        $this.addClass("drop-target-above");
-                    event.preventDefault();
-                });
-
-                $sortables.bind("dragleave.pat-sortable", function() {
-                    $sortables.removeClass("drop-target-above drop-target-below");
-                });
-
-                $sortables.bind("drop.pat-sortable", function(event) {
-                    if ($(this).hasClass("dragged"))
-                        return;
-
-                    if ($(this).hasClass("drop-target-below"))
-                        $(this).after($(".dragged"));
-                    else
-                        $(this).before($(".dragged"));
-                    $(this).removeClass("drop-target-above drop-target-below");
-                    event.preventDefault();
-                });
-
-                //XXX: Deactivate document scroll areas, as DnD affects only
-                //     scrolling of parent element
-                //scroll.appendTo("body");
+                    return;
+                }
+                $this.removeClass("drop-target-above drop-target-below");
+                if (event.originalEvent.clientY > midlineY)
+                    $this.addClass("drop-target-below");
+                else
+                    $this.addClass("drop-target-above");
+                event.preventDefault();
             });
 
-            $handles.bind("dragend", function() {
-                $(".dragged").removeClass("dragged");
-                $sortables.unbind(".pat-sortable");
-                $el.unbind(".pat-sortable");
-                $("#pat-scroll-up, #pat-scroll-dn").detach();
-            });
+            this.$sortables.on("dragleave.pat-sortable", function() {
+                this.$sortables.removeClass("drop-target-above drop-target-below");
+            }.bind(this));
 
-            return $el;
+            this.$sortables.on("drop.pat-sortable", function(event) {
+                var $sortable = $(this);
+                if ($sortable.hasClass("dragged"))
+                    return;
+
+                if ($sortable.hasClass("drop-target-below"))
+                    $sortable.after($(".dragged"));
+                else
+                    $sortable.before($(".dragged"));
+                $sortable.removeClass("drop-target-above drop-target-below");
+                event.preventDefault();
+            });
         }
-    };
-
-    patterns.register(_);
-    return _;
+    });
 });
 
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
@@ -43565,51 +43631,77 @@ define("parsley.extend", ["jquery"], function(){});
  */
 define('pat-validate',[
     "jquery",
-    "pat-registry",
+    "pat-parser",
+    "pat-base",
     "pat-utils",
     "parsley",
     "parsley.extend"
-], function($, patterns, utils) {
-    var validate = {
+], function($, Parser, Base, utils) {
+    var parser = new Parser("validate");
+    parser.addArgument("disable-selector"); // Elements which must be disabled if there are errors
+
+    return Base.extend({
         name: "validate",
         trigger: "form.pat-validate",
 
-        init: function($el) {
-            return $el.each(function() {
-                this.noValidate=true;
-                var parsley_form, field, i;
+        init: function($el, opts) {
+            this.errors = 0;
+            this.options = parser.parse(this.$el, opts);
+            this.$el.noValidate = true;
+            this.initParsley();
+            this.$el.on("pat-ajax-before.pat-validate", this.onPreSubmit);
+            this.$el.on('pat-update', this.onPatternUpdate.bind(this));
+        },
 
-                parsley_form=$(this).parsley({
-                    trigger: "change keyup",
-                    successClass: "valid",
-                    errorClass: "warning",
-                    errors: {
-                        classHandler: validate._classHandler,
-                        container: validate._container
-                    },
-                    messages: {
-                        beforedate:     "This date should be before another date.",
-                        onorbeforedate: "This date should be on or before another date.",
-                        afterdate:      "This date should be after another date.",
-                        onorafterdate:  "This date should be on or after another date."
-                    }
-                });
-                for (i=0; i<parsley_form.items.length; i++) {
-                    field = parsley_form.items[i];
-                    if (typeof field.UI !== "undefined") {
-                        // Parsley 1.2.x
-                        field.UI.addError = validate._addFieldError;
-                        field.UI.removeError = validate._removeFieldError;
-                        validate.parsley12 = true;
-                    } else {
-                        // Parsley 1.1.x
-                        field.addError = validate._addFieldError;
-                        field.removeError = validate._removeFieldError;
-                    }
+        initParsley: function() {
+            var field, i;
+            var parsley_form = this.$el.parsley({
+                trigger: "change keyup",
+                successClass: "valid",
+                errorClass: "warning",
+                errors: {
+                    classHandler: this._classHandler,
+                    container: this._container
+                },
+                messages: {
+                    beforedate:     "This date should be before another date.",
+                    onorbeforedate: "This date should be on or before another date.",
+                    afterdate:      "This date should be after another date.",
+                    onorafterdate:  "This date should be on or after another date."
                 }
-                $(this).on("pat-ajax-before.pat-validate",
-                           validate.onPreSubmit);
             });
+            var that = this;
+            function _addFieldError(error) {
+                that._addFieldError.call(that, this, error);
+            }
+            function _removeFieldError(constraintName) {
+                that._removeFieldError.call(that, this, constraintName);
+            }
+            for (i=0; i<parsley_form.items.length; i++) {
+                field = parsley_form.items[i];
+                if (typeof field.UI !== "undefined") {
+                    // Parsley 1.2.x
+                    field.UI.addError = _addFieldError;
+                    field.UI.removeError = _removeFieldError;
+                    this.parsley12 = true;
+                } else {
+                    // Parsley 1.1.x
+                    field.addError = _addFieldError;
+                    field.removeError = _removeFieldError;
+                }
+            }
+        },
+
+        onPatternUpdate: function (ev, data) {
+            /* Handler which gets called when pat-update is triggered within
+             * the .pat-validate element.
+             */
+            // XXX: We should also handle here general pat-inject updates.
+            if (data.pattern == "clone") {
+                this.$el.data("parsleyForm", null); // XXX: Hack. Remove old data, so that parsley rescans.
+                this.initParsley(data.$el);
+            }
+            return true;
         },
 
         // Parsley error class handler, used to determine which element will
@@ -43640,12 +43732,12 @@ define('pat-validate',[
         },
 
         // Parsley method to add an error to a field
-        _addFieldError: function(error) {
+        _addFieldError: function(parsley, error) {
             var $el;
-            if (validate.parsley12) {
-                $el = this.ParsleyInstance.element;
+            if (this.parsley12) {
+                $el = parsley.ParsleyInstance.element;
             } else {
-                $el = this.element;
+                $el = parsley.element;
             }
             var $position = $el,
                 strategy="after";
@@ -43659,8 +43751,9 @@ define('pat-validate',[
             }
 
             for (var constraintName in error) {
-                if (validate._findErrorMessages($el, constraintName).length)
+                if (this._findErrorMessages($el, constraintName).length) {
                     return;
+                }
                 var $message = $("<em/>", {"class": "validation warning message"});
                 $message.attr("data-validate-constraint", constraintName);
                 $message.text(error[constraintName]);
@@ -43673,31 +43766,36 @@ define('pat-validate',[
                         break;
                 }
             }
+            this.errors += 1;
+            $(this.options.disableSelector).prop('disabled', true).addClass('disabled');
             $position.trigger("pat-update", {pattern: "validate"});
         },
 
         // Parsley method to remove all error messages for a field
-        _removeFieldError: function(constraintName) {
+        _removeFieldError: function(parsley, constraintName) {
             var $el;
-            if (validate.parsley12) {
-                $el = this.ParsleyInstance.element;
+            if (this.parsley12) {
+                $el = parsley.ParsleyInstance.element;
             } else {
-                $el = this.element;
+                $el = parsley.element;
             }
-            var $messages = validate._findErrorMessages($el, constraintName);
+            var $messages = this._findErrorMessages($el, constraintName);
             $messages.parent().trigger("pat-update", {pattern: "validate"});
             $messages.remove();
+            if (this.errors <= 1) {
+                $(this.options.disableSelector).prop('disabled', false).removeClass('disabled');
+                this.errors = 0;
+            } else {
+                this.errors -= 1;
+            }
         },
 
         onPreSubmit: function(event, veto) {
             veto.veto |= !$(event.target).parsley("isValid");
             $(event.target).parsley("validate");
         }
-    };
+    });
 
-
-    patterns.register(validate);
-    return validate;
 });
 
 define('pat-zoom',[

@@ -9,6 +9,7 @@ if (typeof(require) === 'undefined') {
 require.config({
     baseUrl: 'src',
     paths: {
+        "almond":                           "bower_components/almond/almond",
         "eventEmitter":                     "bower_components/eventEmitter",
         "eventie":                          "bower_components/eventie",
         "get-size":                         "bower_components/get-size",

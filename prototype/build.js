@@ -5,8 +5,5 @@
     insertRequire: ["patterns"],
     name: "almond",
     mainConfigFile: 'main.js',
-    optimize: "none",
-    paths: {
-        "almond": "bower_components/almond/almond"
-    }
+    optimize: "none"
 })

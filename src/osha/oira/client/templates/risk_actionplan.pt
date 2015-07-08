@@ -50,7 +50,7 @@
 
 <div class="measures pat-clone" data-pat-clone="template: #measure-template" id="ActionPlanItemForm">
     <div class="measure clone pat-collapsible"
-         tal:define="measures view/solutions|python:[]" 
+         tal:define="measures view/solutions|python:[]"
         tal:repeat="actionplan data/action_plans">
 
         <h2 tal:content="string:Measure ${repeat/actionplan/number}">Measure 1</h2>
@@ -112,7 +112,9 @@
             <label tal:define="date_error exists:errors/planning_start_date">
                 <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
                 <em class="message error" tal:condition="date_error" i18n:translate="error_start_not_before_end">Start date is not before end date</em>
-                <input type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records"
+                <input
+                    parsley-onorbeforedate="#planning-end-${number}"
+                    type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records"
                     id="planning-start-${number}"
                     value="${actionplan/planning_start|nothing}"/>
             </label>
@@ -186,7 +188,7 @@
 			</label>
 			<label>
                 <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
-                <input type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records" id="planning-start-#{1}" />
+                <input parsley-onorbeforedate="#planning-end-#{1}"  type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records" id="planning-start-#{1}" />
 			</label>
 			<label>
                 <tal:label i18n:translate="label_action_plan_end">Planning end</tal:label>
@@ -203,7 +205,7 @@
     </fieldset>
 
     <div class="button-bar">
-        <button type="submit" name="previous" value="previous"
+        <button type="submit" name="next" value="previous"
                 i18n:translate="label_previous" class="pat-button">Previous</button>
         <button type="submit" name="next" value="next" data-pat-switch="${python:view.next_is_report and 'selector: body; remove: sidebar-on; add: sidebar-off' or ''}"
                 i18n:translate="label_save_and_continue" class="pat-button ${python: view.next_is_report and 'pat-switch' or ''}">Save and continue</button>

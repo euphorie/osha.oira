@@ -188,7 +188,7 @@
 			</label>
 			<label>
                 <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
-                <input parsley-onorbeforedate="#planning-end-#{1}"  type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records" id="planning-start-#{1}" />
+                <input type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records" id="planning-start-#{1}" />
 			</label>
 			<label>
                 <tal:label i18n:translate="label_action_plan_end">Planning end</tal:label>

@@ -11,8 +11,8 @@
       tal:define="tools context/@@tools">
   <head tal:define="style_url tools/portal/++resource++NuPlone.style">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script type="text/javascript" src="${tools/portal/++resource++NuPlone.libraries}/css_browser_selector.js"></script>
     <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="++resource++osha.oira.resources/redactor.css" />
     <!--[if IE 6]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base-ie6.css" /> <![endif]-->
     <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base-ie7.css" /> <![endif]-->
     <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base-ie8.css" /> <![endif]-->
@@ -45,28 +45,11 @@
     </p>
     <tal:block replace="tile:actions"/>
     <tal:block replace="tile:footer"/>
+    <script src="++resource++osha.oira.resources/oira.cms.js"></script>
     <script type="text/javascript">
       var plone = { portal_url : '${tools/portal/absolute_url}',
                     context_url : '${context/absolute_url}' };
     </script>
-    <!--
-        XXX: Scheduled to be removed
-        <script type="text/javascript" src="${tools/portal/++resource++NuPlone.libraries}/jquery-1.4.4.min.js"></script>
-        <script type="text/javascript" src="${tools/portal/++resource++NuPlone.libraries}/jquery.tools.min.js"></script>
-        <script type="text/javascript" src="${tools/portal/++resource++NuPlone.libraries}/ui-1.8/minified/jquery-ui.min.js"></script>
-    -->
-    <script src="++resource++osha.oira.resources/jquery-2.0.3.min.js"></script>
-    <script type="text/javascript" src="${tools/portal/++resource++NuPlone.z3cform.js}"></script>
-    <script type="text/javascript" src="${tools/portal/++resource++NuPlone.behaviour}/behaviour.js"></script>
-    <script src="++resource++osha.oira.resources/redactor.js"></script>
-    <script type="text/javascript">
-        $(document).ready(
-            function() {
-                $('#form-widgets-description').redactor();
-            }
-        );
-    </script> 
-
     <tal:block replace="tile:scripts"/>
     <metal:block define-slot="scripts"/>
   </body>

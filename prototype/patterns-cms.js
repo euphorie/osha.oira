@@ -8,7 +8,13 @@
  */
 define([
     "pat-registry", // Keep separate as first argument to callback
-    "jquery",
+    "jquery.browser",
+    "jquery.ui",
+    "nuplone-behaviour",
+    "nuplone-css-browser-selector",
+    "nuplone-editlink",
+    "nuplone-ordering",
+    "nuplone-z3cform",
     "pat-redactor"
 ], function(registry) {
     registry.init();

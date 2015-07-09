@@ -44,7 +44,7 @@
     <metal:styleslot define-slot="style_slot" />
 </head>
 
-<body class="osh-on test-session osc-on osc-s-on focus-sidebar ${sidebar_default}"  tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
+<body class="osh-on test-session osc-on osc-s-on focus-sidebar ${sidebar_default}" i18n:domain="euphorie" tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
     <div id="main">
         <header id="toolbar">
             <a href="#osc" class="icon-menu pat-toggle"
@@ -110,13 +110,13 @@
             <tal:if_not_anon condition="not:is_anonymous" define="tree view/tree|nothing">
                 <li id="step-1" tal:attributes="class python:page_section == 'preparation' and 'active' or ''">
                     <a href="${survey_url}/start#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
-                        class="preparation pat-switch pat-inject"
+                        class="preparation pat-switch pat-inject" i18n:translate="label_preparation"
                         data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off">Preparation</a>
                 </li>
                 <li id="step-2" tal:define="active python:page_section == 'identification'" tal:attributes="class python:active and 'active' or ''">
                     <a href="${survey_url}/identification" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
                         class="identification pat-switch pat-inject"
-                        data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-off; add: sidebar-on">Identification + Evaluation</a>
+                        data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-off; add: sidebar-on"><tal:identification i18n:translate="label_identification">Identification</tal:identification> + <tal:evaluation i18n:translate="label_evaluation">Evaluation</tal:evaluation></a>
 
                     <tal:block condition="python: active and tree">
                       <metal:call use-macro="webhelpers/macros/survey_tree" />
@@ -130,30 +130,29 @@
                 </li>
                 <li id="step-4" tal:define="active python:page_section == 'actionplan'" tal:attributes="class python:active and 'active' or ''">
                     <!-- The tree for the action section uses the same structure as the identification tree, with the only differences that only risks and their parent modules are shown and that the entire tree is expanded. -->
-                    <a href="${survey_url}/actionplan" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
+                    <a href="${survey_url}/actionplan" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc" i18n:translate="label_action_plan"
                        class="action-plan pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; add: sidebar-on; remove: sidebar-off">Action Plan</a>
 
                     <tal:block condition="python: active and tree">
                       <metal:call use-macro="webhelpers/macros/survey_tree" />
                     </tal:block>
-
                 </li>
 
                 <li id="step-5" tal:attributes="class python:page_section == 'report' and 'active' or ''">
                     <!-- TODO: check if guest -->
                     <a href="${survey_url}/report" class="report pat-switch pat-inject"
-                       data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
+                       data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc" i18n:translate="label_report"
                        data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off" href="/report.html#content">Report</a>
                 </li>
 
 
                 <li id="status" tal:attributes="class python:page_section == 'status' and 'active' or ''">
-                    <a href="${survey_url}/status#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
+                    <a href="${survey_url}/status#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc" i18n:translate="navigation_status"
                         class="status pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off">Status</a>
                 </li>
             </tal:if_not_anon>
             <li id="help" tal:attributes="class python:page_section == 'help'  and 'active' or ''">
-                <a href="${base_url}/help#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc"
+                <a href="${base_url}/help#content" data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc" i18n:translate="navigation_help"
                     class="help pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document && selector: body; remove: sidebar-on; add: sidebar-off">Help</a>
             </li>
         </ol>
@@ -164,8 +163,8 @@
                 <figure>
                     <img src="${base_url}/++resource++oira.media/oira-logo.svg" alt="" />
                     <figcaption>
-                        Online Interactive<br/>
-                        Risk Assessment
+                        <tal:oi i18n:translate="oira_name_line_1">Online Interactive</tal:oi><br/>
+                        <tal:ra i18n:translate="oira_name_line_2">Risk Assessment</tal:ra>
                     </figcaption>
                 </figure>
             </tal:native>

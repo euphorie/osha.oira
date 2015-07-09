@@ -55,10 +55,6 @@ layout: shell
 	{% endif %}
 	</fieldset>
 
-	<fieldset class="vertical">
-		<textarea id="commentsField" name="comments" placeholder="Please leave any comments you may have on the above question" cols="70" rows="5" class="span-15"></textarea>
-	</fieldset>
-
 	<article class="rich">
 		{% if page.images %}
 			<div class="image-collage pat-gallery pat-equaliser image-count-{{ page.images.size }}">
@@ -108,6 +104,11 @@ layout: shell
 			<h2>Legal and policy references</h2>
 			{{ page.legal_reference }}
 		{% endif %}
+
+	<fieldset class="vertical">
+		<textarea id="commentsField" name="comments" placeholder="Please leave any comments you may have on the above question" cols="70" rows="5" class="span-15"></textarea>
+	</fieldset>
+
 	</article>
 
 

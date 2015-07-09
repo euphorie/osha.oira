@@ -138,14 +138,6 @@
 
     </fieldset>
 
-    <!-- Comments -->
-	<fieldset class="vertical" id="comments">
-        <textarea id="comment" name="comment:utf8:ustring" class="span-15" rows="5" tal:content="context/comment"
-            placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
-            i18n:attributes="placeholder label_comment">
-        </textarea>
-	</fieldset>
-
     <!-- Copy and legal -->
     <article class="rich" class="message emphasis" tal:condition="view/show_info">
         <metal:call use-macro="webhelpers/macros/risk_info_identification" />
@@ -154,6 +146,14 @@
             <metal:call use-macro="webhelpers/macros/risk_legal" />
         </tal:if_legal>
     </article>
+
+    <!-- Comments -->
+    <fieldset class="vertical" id="comments">
+        <textarea id="comment" name="comment:utf8:ustring" class="span-15" rows="5" tal:content="context/comment"
+            placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
+            i18n:attributes="placeholder label_comment">
+        </textarea>
+    </fieldset>
 
     <p class="buttonBar">
         <button class="pat-button" type="submit" name="next" value="previous" i18n:translate="label_previous" class="floatBefore back">Previous</button>

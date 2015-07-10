@@ -59,7 +59,7 @@
                 </label>
 
                 <label tal:condition="not:current" class="clone">
-                    <input data-pat-depends="pq${question/id}.multiple=no" name="${question/id}:utf8:utext:list" />
+                    <input data-pat-depends="pq${question/id}.multiple=no" required="required" name="${question/id}:utf8:utext:list" />
                 </label>
                     <tal:locations repeat="title current">
                       <label class="clone">

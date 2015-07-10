@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      i18n:domain="euphorie"
+      id="login"
+      meta:interpolation="true"
+      tal:define="webhelpers nocall:context/@@webhelpers;
+                  tools nocall:context/@@tools;
+                  client nocall:request/client"
+      metal:use-macro="context/@@shell/macros/shell">
+
+<body>
+<metal:slot fill-slot="content" tal:define="is_guest_account webhelpers/is_guest_account; base_url webhelpers/base_url">
+  <div id="document-content" class="pat-modal">
+     <h1 i18n:translate="">Quit test session</h1>
+
+      <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${base_url}/@@logout" class="wizard-box">
+
+        <article>
+          <p class="message warning" i18n:translate="">Warning! If you quit this test session, all information you have entered will be lost.</p>
+        </article>
+        <div class="buttons panel-footer">
+          <button tabindex="4" id="login_submit" type="submit" name="next" value="next" class="pat-button" i18n:translate="">Quit test session</button>
+          <button type="button" class="pat-button close-panel" i18n:translate="button_cancel">Cancel</button>
+        </div>
+
+      </form>
+
+    </div>
+  </metal:slot>
+  </body>
+</html>

@@ -15,7 +15,7 @@
 
 <body>
 <metal:slot fill-slot="content" tal:define="is_guest_account webhelpers/is_guest_account; base_url webhelpers/base_url">
-  <div id="document-content">
+  <div id="document-content" tal:define="error view/error|nothing">
     <article>
       <h1 i18n:translate="header_password_reminder">
         Password reminder
@@ -26,13 +26,13 @@
     </article>
 
     <form enctype="multipart/form-data" class="wizard-box" accept-charset="UTF-8" method="post" action="${context/absolute_url}/@@reminder">
-      <p class="message warning" tal:condition="view/error|nothing">${view/error}</p>
-      <p class="message warning" tal:condition="view/notice|nothing">${view/notice}</p>
+
 
       <input type="hidden" name="came_from" value="${view/back_url}"/>
 
       <fieldset class="vertical">
-        <label><tal:span i18n:translate="label_email">Email address</tal:span> <input class="email" type="email" name="loginname" value="${request/loginname|nothing}"/></label>
+        <label class="${python:'error' if error else None}"><tal:span i18n:translate="label_email">Email address</tal:span> <input class="email" type="email" name="loginname" value="${request/loginname|nothing}"/>
+        <em class="message warning" tal:condition="error">${error}</em></label>
       </fieldset>
 
       <p class="buttonBar">

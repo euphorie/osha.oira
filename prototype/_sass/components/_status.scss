@@ -1,22 +1,23 @@
 dl.status {
   padding: 4%;
-  background-color: #e1dddb;
+  background: rgba(0,0,0,0.2);
   margin-bottom: 2em;
   margin-top: 0;
 
   dt {
     height: 2em;
     line-height: 2em;
-    margin-bottom: -2em;
+    // margin-bottom: -2em;
     color: white;
-    padding-left: 3%;
+    // padding-left: 3%;
     position: relative;
     clear: left;
-	display: block;
+	  display: block;
     text-decoration: none;
+    font-weight: bold;
 
     a {
-      color: white;
+      // color: white;
       text-decoration: none;
       display: block;
 
@@ -27,20 +28,28 @@ dl.status {
   }
 
   dd {
-    background: #c8c3be;
+    background: rgba(0,0,0,0.2);
     clear: left;
 	  display: block;
     height: 2em;
     margin: 0 0 1em 0;
     padding: 0;
+    text-align: center;
+    color: white;
+    line-height: 2.1em;
+    font-weight: normal;
   }
 
   .range {
     height: 2em;
-    text-indent: -1000px;
     overflow: hidden;
-    display: inline-block;
+    display: inline-block;;
+    text-align: center;
     float: left;
+
+    .label {
+      display: none;
+    }
 
     &.answered {
       background-color: green;

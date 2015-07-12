@@ -36,9 +36,7 @@ dl.status {
     padding: 0;
     text-align: center;
     color: white;
-    line-height: 2.1em;
-    font-weight: normal;
-  }
+    line-height: 2.1em;  }
 
   .range {
     height: 2em;
@@ -49,6 +47,11 @@ dl.status {
 
     .label {
       display: none;
+    }
+
+    .number {  
+      font-weight: normal;
+      font-size: 0.8em;
     }
 
     &.answered {

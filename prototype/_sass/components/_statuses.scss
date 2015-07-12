@@ -1,0 +1,41 @@
+.statuses {
+  h1 {
+    margin-left: 4em;
+    position: relative;
+
+    .score-badge {
+      position: absolute;
+      left: -4.7em;
+      top: -1.3em;
+      width: 4em;
+      height: 4em;
+      line-height: 4em;
+      border-radius: 50%;
+      text-align: center;
+      // @include box-sizing();
+      color: white;
+
+      &:before {
+        background-color: red;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        z-index: -1;
+      }
+    }
+  }
+
+  .page-toc {
+    margin-left: 6em;
+    margin-top: 3.5em;
+    margin-bottom: 3em;
+    padding: 2em;
+    border-radius: 1em;
+    background-color: rgba(0,0,0,0.1);
+  }
+}

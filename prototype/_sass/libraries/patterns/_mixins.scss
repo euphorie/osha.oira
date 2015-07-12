@@ -38,13 +38,14 @@
 
 @mixin pat-message() {
     color: rgba(0,0,0,0.5);
-    padding: 1em;
+    padding: 0.8em;
+    margin-bottom: 1em;
     border: rgba(0,0,0,0.05) solid 0.2rem;
     background-color: #efefef;
 
     &.success {
         background-color: $colour-success;
-        color: white;
+        color: darken($colour-success, 50%);
     }
     &.notice {
         background-color: $colour-notice;
@@ -52,6 +53,11 @@
     &.warning {
         background-color: $colour-warning;
         color: white;
+
+        a {
+          color: white;
+          text-decoration: underline;
+        }
     }
 }
 

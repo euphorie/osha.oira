@@ -113,7 +113,6 @@
                 <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
                 <em class="message error" tal:condition="date_error" i18n:translate="error_start_not_before_end">Start date is not before end date</em>
                 <input
-                    parsley-onorbeforedate="#planning-end-${number}"
                     type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records"
                     id="planning-start-${number}"
                     value="${actionplan/planning_start|nothing}"/>
@@ -182,9 +181,9 @@
 			<label class="currency">
 				Budget
 				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</dfn>
-				<span class="composed currency-field">
-					<input type="number" class="currency" />
-				</span>
+                <span class="composed currency-field">
+                    <input type="number" class="currency" name="measure.budget:records" id="input-budget-#{1}" />
+                </span>
 			</label>
 			<label>
                 <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>

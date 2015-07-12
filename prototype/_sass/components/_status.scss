@@ -1,6 +1,7 @@
 dl.status {
-  padding: 4%;
-  background: rgba(0,0,0,0.1);
+  // padding: 4%;
+  padding-top: 1em;
+  // background: rgba(0,0,0,0.1);
   margin-bottom: 2em;
   margin-top: 0;
 
@@ -15,62 +16,172 @@ dl.status {
 	  display: block;
     text-decoration: none;
     font-weight: bold;
+    margin-left: 6em;
 
     a {
-      // color: white;
+      color: black;
       text-decoration: none;
       display: block;
+      text-transform: uppercase;
+      // font-size: 1.2em;
 
       &:hover {
         text-decoration: underline;
       }
     }
+
+    .score-badge {
+      position: absolute;
+      left: -6em;
+      top: 0.5em;
+      width: 5em;
+      height: 5em;
+      line-height: 5em;
+      border-radius: 50%;
+      text-align: center;
+      // @include box-sizing();
+      color: white;
+
+      &:before {
+        background-color: red;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        z-index: -1;
+      }
+    }
   }
 
   dd {
-    background: rgba(0,0,0,0.1);
-    clear: left;
-	  display: block;
-    height: 2em;
-    margin: 0 0 1em 0;
-    padding: 0;
-    text-align: center;
-    color: white;
-    line-height: 2.1em;
-    border-radius: 1em;
-    overflow: hidden;
-  }
+    margin-left: 6em;
+    position: relative;
 
-  .range {
-    height: 2em;
-    overflow: hidden;
-    display: inline-block;;
-    text-align: center;
-    float: left;
+    .high-prio-risks {
+      margin-bottom: 3.5em;
 
-    .label {
-      display: none;
+      h4 {
+        color: rgba(0,0,0,0.6);
+      }
+
+      li {
+         margin-left: 0;
+         padding-left: 1em;
+
+         a {
+          color: rgba(0,0,0,0.6);
+
+          &:hover {
+            color: black;
+            text-decoration: underline;
+          }
+         }
+
+         &:before {
+          content: "•";
+          float: left;
+          margin-left: -1em;
+         }
+      }
     }
 
-    .number {  
-      font-weight: normal;
-      font-size: 0.8em;
+    .legend {
+      margin-bottom: 3.5em;
+      color: rgba(0,0,0,0.6);
+
+      li {
+        padding-left: 1.8em;
+        font-style: normal;
+
+        .number {
+          float: left;
+          margin-left: -1.8em;
+          margin-top: 0.1em;
+          width: 1.3em;
+          height: 1.3em;
+          line-height: 1.5em;
+          border-radius: 50%;
+          text-align: center;
+          background-color: gray;
+          color: white;
+          font-size: 0.9em;
+          font-weight: normal;
+        }
+
+        &.answered .number {
+          background-color: green;
+        }
+
+        &.risk .number {
+          background-color: red;
+        }
+
+        &.risk-measure .number {
+          background-color: DarkRed;
+        }
+
+        &.postponed .number {
+          background-color: orange;
+          color: rgba(0,0,0,0.6);
+        }
+
+        &.unanswered .number {
+          background-color: rgba(0,0,0,0.1);
+          color: rgba(0,0,0,0.6);
+        }
+      }
     }
 
-    &.answered {
-      background-color: green;
-    }
+    .graph {
+      background: rgba(0,0,0,0.1);
+      clear: left;
+  	  display: block;
+      height: 2em;
+      margin: 0 0 2.5em 0;
+      padding: 0;
+      text-align: center;
+      color: white;
+      line-height: 2.1em;
+      border-radius: 1em;
+      overflow: hidden;
 
-    &.risk {
-      background-color: red;
-    }
+      .range {
+        height: 2em;
+        overflow: hidden;
+        display: inline-block;;
+        text-align: center;
+        float: left;
 
-    &.risk-measure {
-      background-color: DarkRed ;
-    }
+        .label {
+          display: none;
+        }
 
-    &.postponed {
-      background-color: orange;
+        .number {  
+          font-weight: normal;
+          font-size: 0.8em;
+        }
+
+        &.answered {
+          background-color: green;
+        }
+
+        &.risk {
+          background-color: red;
+        }
+
+        &.risk-measure {
+          background-color: DarkRed ;
+        }
+
+        &.postponed {
+          background-color: orange;
+          color: rgba(0,0,0,0.6);
+        }
+      }
     }
   }
 }

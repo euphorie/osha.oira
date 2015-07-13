@@ -12,6 +12,7 @@ default: all
 
 bundle bundle.js: build.js stamp-bower
 	node_modules/.bin/r.js -o build.js
+	node_modules/.bin/grunt uglify
 
 cmsbundle bundles/oira.cms.js: build-cms.js stamp-bower
 	node_modules/.bin/r.js -o build-cms.js

@@ -111,5 +111,16 @@
         handler=".upgrade.reset_surveygroup_obsolete"/>
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+        source="*"
+        destination="11"
+        profile="osha.oira:default">
+
+    <genericsetup:upgradeStep
+        title="Install non-free resourcess"
+        description="Install the oira.private egg, which contains non-free Javascript and CSS files"
+        handler=".upgrade.install_private_resources"/>
+  </genericsetup:upgradeSteps>
+
 </configure>
 

@@ -113,7 +113,7 @@ def remove_birt_file_format(context):
 
 def update_types_information(context):
     """ Reimport types to activate new behavior """
-    setup = getToolByName(context, 'portal_setup')
+    setup = api.portal.get_tool('portal_setup')
     setup.runImportStepFromProfile('profile-osha.oira:default', 'typeinfo')
 
 
@@ -157,3 +157,10 @@ def reset_surveygroup_obsolete(context):
                     surveygroup.absolute_url()))
                 surveygroup.obsolete = False
                 surveygroup.reindexObject()
+
+def install_private_resources(context):
+    """ Install the oira.private egg, which contains non-free JS and CSS
+        resources.
+    """
+    setup = api.portal.get_tool('portal_setup')
+    setup.runAllImportStepFromProfile('profile-oira.private:default', 'typeinfo')

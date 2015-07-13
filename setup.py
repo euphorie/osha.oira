@@ -41,7 +41,7 @@ setup(name='osha.oira',
           # steps. The following package is therefore added for providing the
           # required interface.
           'collective.js.jqueryui',
-          'oira.redactor', # Private egg with nonfree redactor JS/CSS
+          'oira.private', # Private egg with nonfree redactor JS/CSS
           'plone.autoform',
           'plone.tiles',
           'setuptools',

@@ -16,8 +16,8 @@
          tal:content="description"/>
     <label for="${view/id}" class="superImpose" i18n:translate="">Please enter text here</label>
     <textarea class="pat-redactor"
-              data-pat-redactor="show-source-button: true; buttons: html, formatting, bold, italic, deleted, unordered-list, ordered-list, outdent, indent, alignment, link, horizontal-rule;
-                        allowed-tags: p, ul, li, ol, hr, strong, em, a; formatting-tags: p;"
+              data-pat-redactor="show-source-button: true; buttons: html, bold, italic, deleted, unordered-list, ordered-list, outdent, indent, alignment, link, horizontal-rule;
+                        allowed-tags: p, ul, li, ol, hr, strong, em, a;"
 
             id="${view/id}" name="${view/name}" disabled="${view/disabled}" readonly="${view/readonly}" cols="${view/cols}" rows="${view/rows}">
         <tal:content condition="view/value" replace="structure view/value"/>

@@ -207,6 +207,8 @@ class IdentificationView(module.IdentificationView, Mixin):
                 self.request, context, filter=model.NO_CUSTOM_RISKS_FILTER)
             self.title = context.title
             self.module = module
+            self.next_is_actionplan = not FindNextQuestion(
+                context, filter=self.question_filter)
             super(IdentificationView, self).update()
 
     def save_and_continue(self, module):

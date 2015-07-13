@@ -12,7 +12,7 @@
   <head tal:define="style_url tools/portal/++resource++NuPlone.style">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="++resource++osha.oira.resources/redactor.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="/++resource++oira.private/redactor.min.css" />
     <!--[if IE 6]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base-ie6.css" /> <![endif]-->
     <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base-ie7.css" /> <![endif]-->
     <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base-ie8.css" /> <![endif]-->
@@ -45,7 +45,7 @@
     </p>
     <tal:block replace="tile:actions"/>
     <tal:block replace="tile:footer"/>
-    <script src="++resource++osha.oira.resources/oira.cms.js"></script>
+    <script src="/++resource++oira.private/oira.cms.min.js"></script>
     <script type="text/javascript">
       var plone = { portal_url : '${tools/portal/absolute_url}',
                     context_url : '${context/absolute_url}' };

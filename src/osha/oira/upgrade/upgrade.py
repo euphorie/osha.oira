@@ -192,4 +192,4 @@ def install_private_resources(context):
         resources.
     """
     setup = api.portal.get_tool('portal_setup')
-    setup.runAllImportStepFromProfile('profile-oira.private:default', 'typeinfo')
+    setup.runAllImportStepsFromProfile('profile-oira.private:default')

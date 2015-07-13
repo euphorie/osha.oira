@@ -63,7 +63,7 @@
                 <a href="${base_url}/register" class="registration" i18n:translate="header_register">Register</a>
             </tal:if_anon>
             <tal:if_not_anon condition="python: not is_anonymous and not webhelpers.is_guest_account">
-                <a href="user-menu.html#content"
+                <a href="${webhelpers/session_overview_url}/user-menu.html#content"
                    class="user-status pat-tooltip icon-user dropdown"
                    data-pat-tooltip="source: ajax; class: medium; position-list: tr">${webhelpers/get_username}</a>
             </tal:if_not_anon>
@@ -141,7 +141,7 @@
                     </tal:block>
                 </li>
 
-                <li id="step-5" tal:define="active python:page_section == 'actionplan'; disabled python:page_section == 'preparation'" tal:attributes="class python:(active and 'active') or (disabled and 'disabled') or ''">
+                <li id="step-5" tal:define="active python:page_section == 'report'; disabled python:page_section == 'preparation'" tal:attributes="class python:(active and 'active') or (disabled and 'disabled') or ''">
                     <!-- TODO: check if guest -->
                     <a tal:condition="not:disabled" href="${survey_url}/report" class="report pat-switch pat-inject"
                        data-pat-inject="history: record; source: #content; target: #content && source: #osc; target: #osc" i18n:translate="label_report"

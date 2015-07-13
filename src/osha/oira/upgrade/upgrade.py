@@ -1,8 +1,7 @@
 # -*- coding: <utf-8> -*-
-from Products.CMFCore.utils import getToolByName
 from euphorie.client import model
-from euphorie.client.publish import EnableCustomRisks
 from euphorie.client.country import IClientCountry
+from euphorie.client.publish import EnableCustomRisks
 from euphorie.client.sector import IClientSector
 from euphorie.content.survey import ISurvey
 from euphorie.deployment.upgrade.utils import TableExists
@@ -119,7 +118,7 @@ def remove_birt_file_format(context):
 
 def update_types_information(context):
     """ Reimport types to activate new behavior """
-    setup = getToolByName(context, 'portal_setup')
+    setup = api.portal.get_tool('portal_setup')
     setup.runImportStepFromProfile('profile-osha.oira:default', 'typeinfo')
 
 
@@ -186,3 +185,11 @@ def enable_custom_risks_on_all_modules(context):
                         except Exception, e:
                             log.error("Could not enable custom risks for module. %s" % e)
     log.info('All %d published surveys can now have custom risks.' % count)
+
+
+def install_private_resources(context):
+    """ Install the oira.private egg, which contains non-free JS and CSS
+        resources.
+    """
+    setup = api.portal.get_tool('portal_setup')
+    setup.runAllImportStepFromProfile('profile-oira.private:default', 'typeinfo')

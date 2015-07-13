@@ -3,6 +3,7 @@ from euphorie.client import model
 from euphorie.client.sector import IClientSector
 from euphorie.content.survey import ISurvey
 from euphorie.deployment.upgrade.utils import TableExists
+from plone import api
 from plone.dexterity import utils
 from z3c.saconfig import Session
 from zope.component.hooks import getSite

@@ -30,6 +30,7 @@
 	<fieldset class="pat-well notice pat-depends vertical" id="evaluation" tal:define="evaluation_method python:risk.type in ('policy', 'top5') and risk.type or risk.evaluation_method"
               data-pat-depends="condition: answer=no; transition: slide">
     <tal:block condition="python:evaluation_method=='calculated'">
+    <legend>${view/risk/problem_description}</legend>
 	<p i18n:translate="help_calculated_evaluation">Please answer the following questions. As a result of your answers the system will calculate the priority of the risk. You will be able to modify the priority later.</p>
     <tal:get define="algorithm python:view.evaluation_algorithm(risk)">
     <tal:kinney condition="python:algorithm!='french'">
@@ -115,7 +116,8 @@
 
     <tal:block condition="python:evaluation_method=='direct'">
     <fieldset class="pat-checklist radio" tal:define="value context/priority">
-        <legend i18n:translate="header_risk_priority">Select the priority of this risk</legend>
+        <legend>${view/risk/problem_description}</legend>
+        <p i18n:translate="header_risk_priority">Select the priority of this risk</p>
         <label><input type="radio" name="priority" value="low" checked="${python:'checked' if value=='low' else None}"/>
         <tal:span i18n:translate="priority_low">Low</tal:span></label>
         <label><input type="radio" name="priority" value="medium" checked="${python:'checked' if value=='medium' else None}"/>

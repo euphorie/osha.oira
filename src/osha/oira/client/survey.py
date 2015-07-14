@@ -10,6 +10,8 @@ from euphorie.client.session import SessionManager
 from euphorie.client.update import redirectOnSurveyUpdate
 from five import grok
 from osha.oira.client import interfaces
+from sqlalchemy import sql
+from sqlalchemy import orm
 from z3c.saconfig import Session
 from zope.component import getMultiAdapter
 
@@ -178,7 +180,6 @@ class OSHAStatus(survey.Status):
         query = self.query % dict(sessionid=session_id)
         session = Session()
         result = session.execute(query).fetchall()
-        
         total_ok = 0
         total = 0
 
@@ -200,6 +201,30 @@ class OSHAStatus(survey.Status):
         titles = dict(session.query(model.Module.path, model.Module.title)
                 .filter(model.Module.session_id == session_id)
                 .filter(model.Module.path.in_(modules.keys())))
+
+        child_node = orm.aliased(model.Risk)
+        risks = session.query(
+                    model.Module.path,
+                    child_node.path,
+                    child_node.title
+                ).filter(
+                    sql.and_(
+                        model.Module.session_id == session_id,
+                        model.Module.path.in_(modules.keys()),
+                        sql.and_(
+                            child_node.session_id == model.SurveyTreeItem.session_id,
+                            child_node.priority== u"high",
+                            child_node.depth > model.SurveyTreeItem.depth,
+                            child_node.path.like(model.SurveyTreeItem.path + "%")
+                        )
+                    )
+                )
+        self.high_risks = {}
+        for r in risks:
+            if self.high_risks.get(r[0]):
+                self.high_risks[r[0]].append({'title':r[2], 'path':r[1]})
+            else:
+                self.high_risks[r[0]] = [{'title':r[2], 'path':r[1]}]
 
         for module in modules.values():
             module["title"] = titles[module["path"]]

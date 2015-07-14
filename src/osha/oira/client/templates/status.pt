@@ -83,17 +83,11 @@
                             <strong class="number">${num_todo}</strong> <em class="label">Unanswered</em>
                         </li>
                     </ul>
-                    <div class="six columns high-prio-risks">
+                    <div class="six columns high-prio-risks" tal:define="high_risks python:view.high_risks.get(module.get('path'), [])" tal:condition="high_risks">
                         <h4>High priority risks</h4>
                         <ul>
-                            <li>
-                                <a href="#">Lorem ipsum</a>
-                            </li>
-                            <li>
-                                <a href="#">Dolor sit amet</a>
-                            </li>
-                            <li>
-                                <a href="#">Consectetuer vadifrimulus automobilis</a>
+                            <li tal:repeat="risk high_risks">
+                                <a href="${risk/path}">${risk/title}</a>
                             </li>
                         </ul>
                     </div>

@@ -9,11 +9,13 @@ from z3c.form import button
 from plone.directives import form
 from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.client import utils
+from euphorie.client.country import DeleteSession as EuphorieDeleteSession
 from euphorie.client.country import View as EuphorieView
 from euphorie.client.country import IClientCountry
 from euphorie.client.login import Tryout
 from euphorie.client.model import SurveySession
 from .interfaces import IOSHAClientSkinLayer
+from z3c.saconfig import Session
 from zope.interface import Interface
 from .. import _
 
@@ -59,7 +61,7 @@ class CreateTestSession(View, Tryout):
         self._updateSurveys()
 
 
-class DeleteSession(grok.View):
+class ConfirmationDeleteSession(grok.View):
     grok.context(IClientCountry)
     grok.name("confirmation-delete-session.html")
     grok.layer(IOSHAClientSkinLayer)
@@ -77,7 +79,22 @@ class DeleteSession(grok.View):
         if session is None:
             raise KeyError("Unknown session id")
         self.session_title = session.title
-        return super(DeleteSession, self).__call__(*args, **kwargs)
+        return super(ConfirmationDeleteSession, self).__call__(*args, **kwargs)
+
+
+class DeleteSession(EuphorieDeleteSession):
+    grok.layer(IOSHAClientSkinLayer)
+    grok.name("delete-session")
+
+    def render(self):
+        session = Session()
+        ss = session.query(SurveySession).get(self.request.form["id"])
+        if ss is not None:
+            flash = IStatusMessage(self.request).addStatusMessage
+            flash(_(u"Session `${name}` has been deleted.",
+                    mapping={"name": getattr(ss, 'title')}), "success")
+            session.delete(ss)
+        self.request.response.redirect(self.context.absolute_url())
 
 
 class RenameSessionSchema(form.Schema):

@@ -14,7 +14,7 @@
 <body>
     <div id="document-content" class="pat-modal">
         <h1> Delete session </h1>
-        <form method="post" action="delete-session" class="wizard-box pat-inject" data-pat-inject="#content">    
+        <form method="post" action="delete-session" class="wizard-box">
             <input type="hidden" name="json_url" value="${context/absolute_url}/@@json-delete-session"/>
             <input type="hidden" name="id" value="${view/session_id}" />
             <div class="panel-body"> <!-- TODO: Add session name -->
@@ -22,10 +22,10 @@
                    This cannot be reverted. Are you sure you want to continue?</p>
             </div>
             <div class="buttons panel-footer">
-                <button type="submit" class="pat-button close-panel"> Yes, delete session </button>                    
-                <button type="button" class="pat-button close-panel"> Cancel </button>                    
+                <button type="submit" class="pat-button close-panel"> Yes, delete session </button>
+                <button type="button" class="pat-button close-panel"> Cancel </button>
             </div>
-        </form>  
+        </form>
     </div>
 </body>
 </html>

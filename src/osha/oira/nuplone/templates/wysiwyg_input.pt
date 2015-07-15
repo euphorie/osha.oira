@@ -8,20 +8,20 @@
       tal:omit-tag="">
   <fieldset class="richInput">
     <legend class="${view/@@dependencies}" lang="${portal_state/language}">${view/label}<sup tal:condition="view/required" class="required">*</sup></legend>
-    <dfn class="infoPanel" 
-         i18n:attributes="title" 
-         title="Information" 
-         tal:define="description view/field/description" 
-         tal:condition="description" 
+    <dfn class="infoPanel"
+         i18n:attributes="title"
+         title="Information"
+         tal:define="description view/field/description"
+         tal:condition="description"
          tal:content="description"/>
     <label for="${view/id}" class="superImpose" i18n:translate="">Please enter text here</label>
     <textarea class="pat-redactor"
-              data-pat-redactor="show-source-button: true; buttons: html, bold, italic, deleted, unordered-list, ordered-list, outdent, indent, alignment, link, horizontal-rule;
-                        allowed-tags: p, ul, li, ol, hr, strong, em, a;"
+              data-pat-redactor="show-source-button: true; buttons: html, bold, italic, unordered-list, ordered-list, outdent, indent, link;
+                        allowed-tags: p, ul, li, ol, strong, em, a;"
 
             id="${view/id}" name="${view/name}" disabled="${view/disabled}" readonly="${view/readonly}" cols="${view/cols}" rows="${view/rows}">
         <tal:content condition="view/value" replace="structure view/value"/>
-    </textarea> 
+    </textarea>
     <tal:error condition="view/error" replace="structure view/error/render|nothing"/>
   </fieldset>
 </html>

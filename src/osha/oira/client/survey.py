@@ -141,10 +141,21 @@ class OSHAStatus(survey.Status):
     grok.template("status")
     grok.name("status")
 
+    module_query = """SELECT
+                    CASE WHEN profile_index != -1 AND zodb_path IN %(optional_modules)s
+                            THEN SUBSTRING(path FROM 1 FOR 6)
+                         WHEN profile_index != -1
+                            THEN SUBSTRING(path FROM 1 FOR 3)
+                    END AS module
+            FROM tree
+            WHERE session_id=%(sessionid)d AND type='module'
+            GROUP BY module"""
+
     query = """SELECT
                     CASE WHEN type='module' AND profile_index != -1 AND zodb_path IN %(optional_modules)s
-                        THEN SUBSTRING(path FROM 1 FOR 6)
-                        ELSE SUBSTRING(path FROM 1 FOR 3)
+                            THEN SUBSTRING(path FROM 1 FOR 6)
+                         WHEN type!='module' OR profile_index != -1
+                            THEN SUBSTRING(path FROM 1 FOR 3)
                     END AS module,
 
                     CASE WHEN EXISTS(
@@ -177,12 +188,13 @@ class OSHAStatus(survey.Status):
                     COUNT(*) AS count
             FROM tree
             WHERE session_id=%(sessionid)d
-            GROUP BY module, status;"""
+            GROUP BY status, module;"""
 
 
     def getStatus(self):
         # Note: Optional modules with a yes-answer are not distinguishable
         # from non-optional modules, and ignored.
+        base_url = "%s/identification" % self.request.survey.absolute_url()
         session_id = SessionManager.id
         profile = extractProfile(self.request.survey, SessionManager.session)
         query = self.query % dict(
@@ -191,41 +203,33 @@ class OSHAStatus(survey.Status):
         )
         session = Session()
         result = session.execute(query).fetchall()
-        total_ok = 0
-        total = 0
 
-        modules = {}
-        base_url = "%s/identification" % self.request.survey.absolute_url()
-        for row in result:
-            module = modules.setdefault(row.module, dict())
-            if "url" not in module:
-                module["url"] = "%s/%s" % (base_url, int(row.module))
-            module["path"] = row.module
-            if row.status != "ignore":
-                module["total"] = module.get("total", 0) + row.count
-                if row.status == 'ok':
-                    total_ok += row.count
-                total += row.count
+        module_query = self.module_query % dict(
+            sessionid=session_id,
+            optional_modules="(%s)" % (','.join(["'%s'" % k for k in profile.keys()]))
+        )
+        module_paths = [p[0] for p in session.execute(module_query).fetchall() if p[0] is not None]
 
-            module[row.status] = {'count': row.count}
-
-        import pdb; pdb.set_trace()
         titles = dict(session.query(model.Module.path, model.Module.title)
                 .filter(model.Module.session_id == session_id)
-                .filter(model.Module.path.in_(modules.keys())))
+                .filter(model.Module.path.in_(module_paths)))
 
+        # TODO: replace this with a modification of the query above, so that we
+        # can get the risks with and without measures as well.
         child_node = orm.aliased(model.Risk)
         risks = session.query(
                     model.Module.path,
                     child_node.path,
-                    child_node.title
+                    child_node.title,
+                    child_node.identification,
+                    child_node.priority,
+                    child_node.postponed
                 ).filter(
                     sql.and_(
                         model.Module.session_id == session_id,
-                        model.Module.path.in_(modules.keys()),
+                        model.Module.path.in_(module_paths),
                         sql.and_(
                             child_node.session_id == model.SurveyTreeItem.session_id,
-                            child_node.priority== u"high",
                             child_node.depth > model.SurveyTreeItem.depth,
                             child_node.path.like(model.SurveyTreeItem.path + "%")
                         )
@@ -237,17 +241,43 @@ class OSHAStatus(survey.Status):
                 yield path[:3].lstrip("0")
                 path = path[3:]
 
+        modules = {}
+        for path in module_paths:
+            modules[path] = {
+                'path': path,
+                'title': titles[path],
+                'url': '%s/%s' % (base_url, '/'.join(slice(path))),
+                'todo': 0,
+                'ok': 0,
+                'postponed': 0,
+                'risk_with_measures': 0,
+                'risk_without_measures': 0
+            }
+
+        total_ok = 0
+        total = 0
         self.high_risks = {}
         for r in risks:
+            if r[3] in ['yes', 'n/a']:
+                total_ok += 1
+                modules[r[0]]['ok'] += 1
+            elif r[3] == 'no':
+                # FIXME: we need to differentiate between risks with measures
+                # and thos without
+                modules[r[0]]['risk_with_measures'] += 1
+            elif r[5]:
+                modules[r[0]]['postponed'] += 1
+            else:
+                modules[r[0]]['todo'] += 1
+
+            if r[4] != "high":
+                continue
+            total += 1
             url = '%s/%s' % (base_url, '/'.join(slice(r[1])))
             if self.high_risks.get(r[0]):
                 self.high_risks[r[0]].append({'title':r[2], 'path': url})
             else:
                 self.high_risks[r[0]] = [{'title':r[2], 'path':url}]
-
-        for module in modules.values():
-            module["title"] = titles[module["path"]]
-
 
         self.percentage_ok = int(total_ok/Decimal(total)*100)
         self.status = modules.values()

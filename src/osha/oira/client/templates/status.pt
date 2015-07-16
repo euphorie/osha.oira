@@ -28,11 +28,11 @@
         <dl class="status">
             <tal:loop repeat="module status">
             <tal:defs define="
-                num_ok python:int(module.get('ok', {}).get('count', 0));
-                num_risks_without_measures python:int(module.get('risk_without_measures', {}).get('count', 0));
-                num_risks_with_measures python:int(module.get('risk_with_measures', {}).get('count', 0));
-                num_postponed python:int(module.get('postponed', {}).get('count', 0));
-                num_todo python:int(module.get('todo', {}).get('count', 0));
+                num_ok python:module.get('ok', 0);
+                num_risks_without_measures python:module.get('risk_without_measures', 0);
+                num_risks_with_measures python:module.get('risk_with_measures', 0);
+                num_postponed python:module.get('postponed', 0);
+                num_todo python:module.get('todo', 0);
                 num_total python:num_ok + num_risks_with_measures + num_risks_without_measures + num_postponed + num_todo;
                 perc_ok python:num_total and num_ok/decimal.Decimal(num_total)*100 or 0;
                 perc_risks_without_measures python:num_total and num_risks_without_measures/decimal.Decimal(num_total)*100 or 0;

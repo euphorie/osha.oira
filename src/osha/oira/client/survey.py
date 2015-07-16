@@ -3,6 +3,7 @@ from Acquisition import aq_parent
 from decimal import Decimal
 from euphorie.client import model
 from euphorie.client import survey, report
+from euphorie.client.profile import extractProfile
 from euphorie.client.navigation import FindFirstQuestion
 from euphorie.client.navigation import QuestionURL
 from euphorie.client.navigation import getTreeData
@@ -140,7 +141,12 @@ class OSHAStatus(survey.Status):
     grok.template("status")
     grok.name("status")
 
-    query = """SELECT SUBSTRING(path FROM 1 FOR 3) AS module,
+    query = """SELECT
+                    CASE WHEN type='module' AND profile_index != -1 AND zodb_path IN %(optional_modules)s
+                        THEN SUBSTRING(path FROM 1 FOR 6)
+                        ELSE SUBSTRING(path FROM 1 FOR 3)
+                    END AS module,
+
                     CASE WHEN EXISTS(
                                 SELECT * FROM tree AS parent_node
                                 WHERE tree.session_id=parent_node.session_id AND
@@ -173,11 +179,16 @@ class OSHAStatus(survey.Status):
             WHERE session_id=%(sessionid)d
             GROUP BY module, status;"""
 
+
     def getStatus(self):
         # Note: Optional modules with a yes-answer are not distinguishable
         # from non-optional modules, and ignored.
         session_id = SessionManager.id
-        query = self.query % dict(sessionid=session_id)
+        profile = extractProfile(self.request.survey, SessionManager.session)
+        query = self.query % dict(
+            sessionid=session_id,
+            optional_modules="(%s)" % (','.join(["'%s'" % k for k in profile.keys()]))
+        )
         session = Session()
         result = session.execute(query).fetchall()
         total_ok = 0
@@ -198,6 +209,7 @@ class OSHAStatus(survey.Status):
 
             module[row.status] = {'count': row.count}
 
+        import pdb; pdb.set_trace()
         titles = dict(session.query(model.Module.path, model.Module.title)
                 .filter(model.Module.session_id == session_id)
                 .filter(model.Module.path.in_(modules.keys())))
@@ -219,15 +231,23 @@ class OSHAStatus(survey.Status):
                         )
                     )
                 )
+
+        def slice(path):
+            while path:
+                yield path[:3].lstrip("0")
+                path = path[3:]
+
         self.high_risks = {}
         for r in risks:
+            url = '%s/%s' % (base_url, '/'.join(slice(r[1])))
             if self.high_risks.get(r[0]):
-                self.high_risks[r[0]].append({'title':r[2], 'path':r[1]})
+                self.high_risks[r[0]].append({'title':r[2], 'path': url})
             else:
-                self.high_risks[r[0]] = [{'title':r[2], 'path':r[1]}]
+                self.high_risks[r[0]] = [{'title':r[2], 'path':url}]
 
         for module in modules.values():
             module["title"] = titles[module["path"]]
+
 
         self.percentage_ok = int(total_ok/Decimal(total)*100)
         self.status = modules.values()

@@ -39,7 +39,7 @@
                 perc_risks_with_measures python:num_total and num_risks_with_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_postponed python:num_total and num_postponed/decimal.Decimal(num_total)*100 or 0; ">
             <dt>
-                <a href="#">${module/title}<strong class="score-badge"
+                <a href="${module/url}">${module/title}<strong class="score-badge"
                         tal:attributes="style python:'background-color: rgba(0,100,0,%s)' %(perc_ok/100)" tal:content="python:'%d%%' %(int(perc_ok))"></strong></a>
             </dt>
             <dd>

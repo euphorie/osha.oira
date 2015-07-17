@@ -35,7 +35,9 @@
     <tal:get define="algorithm python:view.evaluation_algorithm(risk)">
     <tal:kinney condition="python:algorithm!='french'">
         <fieldset class="pat-checklist radio" tal:define="value context/probability">
-        <legend i18n:translate="header_risk_probability">What is the chance of this risk occurring?</legend>
+        <legend><tal:span i18n:translate="header_risk_probability">What is the chance of this risk occurring?</tal:span>
+            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="help_default_probability">Indicate how likely occurence of this risk is in a normal situation.</dfn>
+        </legend>
         <label><input type="radio" name="probability:int" value="1" checked="${python:'checked' if value==1 else None}"/>
             <tal:span i18n:translate="probability_small">Small</tal:span></label>
         <label><input type="radio" name="probability:int" value="3" checked="${python:'checked' if value==3 else None}"/>
@@ -45,7 +47,9 @@
         </fieldset>
 
         <fieldset class="pat-checklist radio" tal:define="value context/frequency">
-        <legend i18n:translate="header_risk_frequency">How often are people exposed to this risk?</legend>
+        <legend><tal:span i18n:translate="header_risk_frequency">How often are people exposed to this risk?</tal:span>
+            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="help_default_frequency">Indicate how often this risk occurs in a normal situation.</dfn>
+        </legend>
         <label><input type="radio" name="frequency:int" value="1" checked="${python:'checked' if value==1 else None}"/>
             <tal:span i18n:translate="frequency_almost_never">Almost never</tal:span></label>
         <label><input type="radio" name="frequency:int" value="4" checked="${python:'checked' if value==4 else None}"/>
@@ -55,7 +59,9 @@
         </fieldset>
 
         <fieldset class="pat-checklist radio" tal:define="value context/effect">
-        <legend i18n:translate="header_risk_effect">What is the severity of the damage ?</legend>
+        <legend><tal:span i18n:translate="header_risk_effect">What is the severity of the damage?</tal:span>
+            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="help_default_severity">Indicate the default severity of this risk occurs.</dfn>
+        </legend>
         <label><input type="radio" name="effect:int" value="1" checked="${python:'checked' if value==1 else None}"/>
             <tal:span i18n:translate="effect_injury_no_absence">Weak severity</tal:span></label>
         <label><input type="radio" name="effect:int" value="5" checked="${python:'checked' if value==5 else None}"/>
@@ -66,7 +72,9 @@
     </tal:kinney>
     <tal:french condition="python:algorithm=='french'">
         <fieldset class="pat-checklist radio" tal:define="value context/effect">
-        <legend i18n:translate="header_risk_severity">What is the severity of the damage ?</legend>
+        <legend><tal:span i18n:translate="header_risk_effect">What is the severity of the damage?</tal:span>
+            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="help_default_severity">Indicate the default severity of this risk occurs.</dfn>
+        </legend>
         <label>
             <input type="radio" name="severity:int" value="1" checked="${python:'checked' if value==1 else None}"/>
             <tal:span i18n:translate="severity_weak">Weak</tal:span><br/>
@@ -88,7 +96,9 @@
         </fieldset>
 
         <fieldset class="pat-checklist radio" tal:define="value context/frequency">
-        <legend i18n:translate="header_risk_frequency">How often are people exposed to this risk?</legend>
+        <legend><tal:span i18n:translate="header_risk_frequency">How often are people exposed to this risk?</tal:span>
+            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="help_default_frequency">Indicate how often this risk occurs in a normal situation.</dfn>
+        </legend>
         <label>
             <input type="radio" name="frequency:int" value="1" checked="${python:'checked' if value==1 else None}"/>
             <tal:span i18n:translate="frequency_french_rare">Rare</tal:span><br/>

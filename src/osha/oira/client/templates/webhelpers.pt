@@ -340,7 +340,7 @@
 
   <metal:risklegal define-macro="risk_legal" meta:interpolation="true" i18n:domain="euphorie">
     <tal:block condition="risk/legal_reference">
-      <h3 i18n:translate="header_legal_references">Legal and policy references</h3>
+      <h3 i18n:translate="header_legal_references" class="legal-references">Legal and policy references</h3>
       <p tal:content="structure risk/legal_reference">
         The requirements for fridges are defined in section 13.1 section a
         of the health code.
@@ -350,7 +350,7 @@
 
   <metal:risklegal define-macro="risk_legal_collapsible" meta:interpolation="true" i18n:domain="euphorie">
     <tal:block condition="risk/legal_reference" >
-      <h2 i18n:translate="header_legal_references">Legal and policy references</h2>
+      <h3 i18n:translate="header_legal_references" class="legal-references">Legal and policy references</h3>
       <div class="pat-collapsible closed show-more">
         <p class="show-more-or-less">
           <strong class="show-more" i18n:translate="action_show">Show</strong> <span class="divider">/</span> <strong class="show-less" i18n:translate="action_hide">Hide</strong>

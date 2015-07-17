@@ -31,7 +31,7 @@
         <h2 tal:condition="not:use_problem_description"
             tal:content="risk/title">The fridges are checked daily.</h2>
     </tal:block>
-    <div class="message warning last span-15" tal:define="show_statement python:True">
+    <tal:priority tal:define="show_statement python:True">
         <fieldset tal:define="value data/priority">
             <label i18n:translate="risk_priority">This is a <select name="priority" i18n:name="priority_value">
             <option value="low" selected="${python:'selected' if value=='low' else None}" i18n:translate="risk_priority_low">low</option>
@@ -40,7 +40,7 @@
             </select> priority risk.</label>
         </fieldset>
         <metal:call use-macro="webhelpers/macros/risk_info_actionplan" />
-    </div>
+    </tal:priority>
 
     <div class="last span-15" tal:condition="risk/legal_reference|nothing">
         <metal:call use-macro="webhelpers/macros/risk_legal_collapsible" />

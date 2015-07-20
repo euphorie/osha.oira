@@ -13,7 +13,6 @@ from five import grok
 from osha.oira.client import interfaces
 from sqlalchemy import sql
 from sqlalchemy import orm
-from sqlalchemy import func
 from z3c.saconfig import Session
 from zope.component import getMultiAdapter
 
@@ -142,15 +141,17 @@ class OSHAStatus(survey.Status):
     grok.template("status")
     grok.name("status")
 
-    module_query = """SELECT
-                    CASE WHEN profile_index != -1 AND zodb_path IN %(optional_modules)s
-                            THEN SUBSTRING(path FROM 1 FOR 6)
-                         WHEN profile_index != -1
-                            THEN SUBSTRING(path FROM 1 FOR 3)
-                    END AS module
-            FROM tree
-            WHERE session_id=%(sessionid)d AND type='module'
-            GROUP BY module"""
+    module_query = """
+        SELECT
+            CASE WHEN profile_index != -1 AND zodb_path IN %(optional_modules)s
+                    THEN SUBSTRING(path FROM 1 FOR 6)
+                    WHEN profile_index != -1
+                    THEN SUBSTRING(path FROM 1 FOR 3)
+            END AS module
+        FROM tree
+        WHERE session_id=%(sessionid)d AND type='module'
+        GROUP BY module
+    """
 
     def slicePath(self, path):
         while path:

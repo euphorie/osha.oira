@@ -34,7 +34,7 @@
                 num_postponed python:module.get('postponed', 0);
                 num_todo python:module.get('todo', 0);
                 num_total python:num_ok + num_risks_with_measures + num_risks_without_measures + num_postponed + num_todo;
-                perc_ok python:num_total and num_ok/decimal.Decimal(num_total)*100 or 0;
+                perc_ok python:not num_total and 100 or num_ok/decimal.Decimal(num_total)*100;
                 perc_risks_without_measures python:num_total and num_risks_without_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_risks_with_measures python:num_total and num_risks_with_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_postponed python:num_total and num_postponed/decimal.Decimal(num_total)*100 or 0; ">

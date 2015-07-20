@@ -248,10 +248,10 @@ class OSHAStatus(survey.Status):
         base_url = "%s/identification" % self.request.survey.absolute_url()
         session = Session()
         total_ok = 0
-        total = 0
         self.high_risks = {}
         modules = self.getModules()
-        for r in self.getRisks([m['path'] for m in modules.values()]):
+        risks = self.getRisks([m['path'] for m in modules.values()])
+        for r in risks:
             if r['identification'] in ['yes', 'n/a']:
                 total_ok += 1
                 modules[r['module_path']]['ok'] += 1
@@ -270,13 +270,12 @@ class OSHAStatus(survey.Status):
 
             if r['priority'] != "high":
                 continue
-            total += 1
             url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['module_path'])))
             if self.high_risks.get(r['module_path']):
                 self.high_risks[r['module_path']].append({'title':r['title'], 'path': url})
             else:
                 self.high_risks[r['module_path']] = [{'title':r['title'], 'path':url}]
 
-        self.percentage_ok = total and int(total_ok/Decimal(total)*100) or 0
+        self.percentage_ok = len(risks) and int(total_ok/Decimal(len(risks))*100) or 100
         self.status = modules.values()
         self.status.sort(key=lambda m: m["path"])

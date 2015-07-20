@@ -13,6 +13,7 @@ from five import grok
 from osha.oira.client import interfaces
 from sqlalchemy import sql
 from sqlalchemy import orm
+from sqlalchemy import func
 from z3c.saconfig import Session
 from zope.component import getMultiAdapter
 
@@ -151,74 +152,69 @@ class OSHAStatus(survey.Status):
             WHERE session_id=%(sessionid)d AND type='module'
             GROUP BY module"""
 
-    query = """SELECT
-                    CASE WHEN type='module' AND profile_index != -1 AND zodb_path IN %(optional_modules)s
-                            THEN SUBSTRING(path FROM 1 FOR 6)
-                         WHEN type!='module' OR profile_index != -1
-                            THEN SUBSTRING(path FROM 1 FOR 3)
-                    END AS module,
+    def slicePath(self, path):
+        while path:
+            yield path[:3].lstrip("0")
+            path = path[3:]
 
-                    CASE WHEN EXISTS(
-                                SELECT * FROM tree AS parent_node
-                                WHERE tree.session_id=parent_node.session_id AND
-                                        tree.depth>parent_node.depth AND
-                                        tree.path LIKE parent_node.path || '%%' AND
-                                        parent_node.skip_children)
-                                THEN 'ignore'
-                        WHEN postponed
-                                THEN 'postponed'
-                        WHEN type='module' AND skip_children='f'
-                                THEN 'ignore'
-                        WHEN type='module' AND postponed IS NOT NULL
-                                THEN 'ok'
-                        WHEN type='risk' AND (SELECT identification
-                                                FROM risk
-                                                WHERE risk.id=tree.id) IN ('yes', 'n/a')
-                                THEN 'ok'
-                        WHEN type='risk' AND (SELECT identification FROM risk
-                                                WHERE risk.id=tree.id AND (SELECT COUNT(id) FROM action_plan WHERE risk.id=action_plan.risk_id)>0
-                                             )='no'
-                                THEN 'risk_with_measures'
-                        WHEN type='risk' AND (SELECT identification FROM risk
-                                                WHERE risk.id=tree.id AND (SELECT COUNT(id) FROM action_plan WHERE risk.id=action_plan.risk_id)=0
-                                             )='no'
-                                THEN 'risk_without_measures'
-                        ELSE 'todo'
-                    END AS status,
-                    COUNT(*) AS count
-            FROM tree
-            WHERE session_id=%(sessionid)d
-            GROUP BY status, module;"""
-
-
-    def getStatus(self):
-        # Note: Optional modules with a yes-answer are not distinguishable
-        # from non-optional modules, and ignored.
-        base_url = "%s/identification" % self.request.survey.absolute_url()
-        session_id = SessionManager.id
-        profile = extractProfile(self.request.survey, SessionManager.session)
-        query = self.query % dict(
-            sessionid=session_id,
-            optional_modules="(%s)" % (','.join(["'%s'" % k for k in profile.keys()]))
-        )
+    def getModules(self):
+        """ Return a list of dicts of all the top-level modules and locations
+            belonging to this survey.
+        """
         session = Session()
-        result = session.execute(query).fetchall()
-
+        session_id = SessionManager.id
+        base_url = "%s/identification" % self.request.survey.absolute_url()
+        profile = extractProfile(self.request.survey, SessionManager.session)
         module_query = self.module_query % dict(
             sessionid=session_id,
             optional_modules="(%s)" % (','.join(["'%s'" % k for k in profile.keys()]))
         )
         module_paths = [p[0] for p in session.execute(module_query).fetchall() if p[0] is not None]
-
+        parent_node = orm.aliased(model.Module)
         titles = dict(session.query(model.Module.path, model.Module.title)
                 .filter(model.Module.session_id == session_id)
                 .filter(model.Module.path.in_(module_paths)))
 
-        # TODO: replace this with a modification of the query above, so that we
-        # can get the risks with and without measures as well.
+        location_titles = dict(session.query(
+                    model.Module.path,
+                    parent_node.title
+                ).filter(
+                        model.Module.session_id == session_id).filter(
+                        model.Module.path.in_(module_paths)).filter(
+                        sql.and_(
+                            parent_node.session_id == session_id,
+                            parent_node.depth < model.Module.depth,
+                            model.Module.path.like(parent_node.path + "%")
+                        )
+                ))
+        modules = {}
+        for path in module_paths:
+            if path in location_titles:
+                prefix = location_titles[path] + ' - '
+            else:
+                prefix = ''
+            modules[path] = {
+                'path': path,
+                'title': prefix + titles[path],
+                'url': '%s/%s' % (base_url, '/'.join(self.slicePath(path))),
+                'todo': 0,
+                'ok': 0,
+                'postponed': 0,
+                'risk_with_measures': 0,
+                'risk_without_measures': 0
+            }
+        return modules
+
+    def getRisks(self, module_paths):
+        """ Return a list of risk dicts for risks that belong to the modules
+            with paths as specified in module_paths.
+        """
+        session = Session()
+        session_id = SessionManager.id
         child_node = orm.aliased(model.Risk)
         risks = session.query(
                     model.Module.path,
+                    child_node.id,
                     child_node.path,
                     child_node.title,
                     child_node.identification,
@@ -229,56 +225,59 @@ class OSHAStatus(survey.Status):
                         model.Module.session_id == session_id,
                         model.Module.path.in_(module_paths),
                         sql.and_(
-                            child_node.session_id == model.SurveyTreeItem.session_id,
-                            child_node.depth > model.SurveyTreeItem.depth,
-                            child_node.path.like(model.SurveyTreeItem.path + "%")
+                            child_node.session_id == model.Module.session_id,
+                            child_node.depth > model.Module.depth,
+                            child_node.path.like(model.Module.path + "%")
                         )
                     )
                 )
+        return [{
+                'module_path': risk[0],
+                'id': risk[1],
+                'path': risk[2],
+                'title': risk[3],
+                'identification': risk[4],
+                'priority': risk[5],
+                'postponed': risk[6]
+            } for risk in risks]
 
-        def slice(path):
-            while path:
-                yield path[:3].lstrip("0")
-                path = path[3:]
-
-        modules = {}
-        for path in module_paths:
-            modules[path] = {
-                'path': path,
-                'title': titles[path],
-                'url': '%s/%s' % (base_url, '/'.join(slice(path))),
-                'todo': 0,
-                'ok': 0,
-                'postponed': 0,
-                'risk_with_measures': 0,
-                'risk_without_measures': 0
-            }
-
+    def getStatus(self):
+        """ Gather a list of the modules and locations in this survey as well
+            as data around their state of completion.
+        """
+        base_url = "%s/identification" % self.request.survey.absolute_url()
+        session = Session()
         total_ok = 0
         total = 0
         self.high_risks = {}
-        for r in risks:
-            if r[3] in ['yes', 'n/a']:
+        modules = self.getModules()
+        for r in self.getRisks([m['path'] for m in modules.values()]):
+            if r['identification'] in ['yes', 'n/a']:
                 total_ok += 1
-                modules[r[0]]['ok'] += 1
-            elif r[3] == 'no':
-                # FIXME: we need to differentiate between risks with measures
-                # and thos without
-                modules[r[0]]['risk_with_measures'] += 1
-            elif r[5]:
-                modules[r[0]]['postponed'] += 1
+                modules[r['module_path']]['ok'] += 1
+            elif r['identification'] == 'no':
+                modules[r['module_path']]['risk_with_measures'] += 1
+                measures = session.query(
+                            func.count(model.ActionPlan.risk_id)
+                        ).filter(
+                            sql.and_(
+                                model.ActionPlan.risk_id == r['id']
+                            )
+                        )
+            elif r['postponed']:
+                modules[r['module_path']]['postponed'] += 1
             else:
-                modules[r[0]]['todo'] += 1
+                modules[r['module_path']]['todo'] += 1
 
-            if r[4] != "high":
+            if r['priority'] != "high":
                 continue
             total += 1
-            url = '%s/%s' % (base_url, '/'.join(slice(r[1])))
-            if self.high_risks.get(r[0]):
-                self.high_risks[r[0]].append({'title':r[2], 'path': url})
+            url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['module_path'])))
+            if self.high_risks.get(r['module_path']):
+                self.high_risks[r['module_path']].append({'title':r['title'], 'path': url})
             else:
-                self.high_risks[r[0]] = [{'title':r[2], 'path':url}]
+                self.high_risks[r['module_path']] = [{'title':r['title'], 'path':url}]
 
-        self.percentage_ok = int(total_ok/Decimal(total)*100)
+        self.percentage_ok = total and int(total_ok/Decimal(total)*100) or 0
         self.status = modules.values()
         self.status.sort(key=lambda m: m["path"])

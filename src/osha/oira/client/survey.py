@@ -256,14 +256,13 @@ class OSHAStatus(survey.Status):
                 total_ok += 1
                 modules[r['module_path']]['ok'] += 1
             elif r['identification'] == 'no':
-                modules[r['module_path']]['risk_with_measures'] += 1
                 measures = session.query(
-                            func.count(model.ActionPlan.risk_id)
-                        ).filter(
-                            sql.and_(
-                                model.ActionPlan.risk_id == r['id']
-                            )
-                        )
+                        model.ActionPlan.id
+                    ).filter(model.ActionPlan.risk_id == r['id'])
+                if measures.count():
+                    modules[r['module_path']]['risk_with_measures'] += 1
+                else:
+                    modules[r['module_path']]['risk_without_measures'] += 1
             elif r['postponed']:
                 modules[r['module_path']]['postponed'] += 1
             else:

@@ -10,6 +10,7 @@ from euphorie.client.navigation import getTreeData
 from euphorie.client.session import SessionManager
 from euphorie.client.update import redirectOnSurveyUpdate
 from five import grok
+from osha.oira import log
 from osha.oira.client import interfaces
 from sqlalchemy import sql
 from sqlalchemy import orm
@@ -144,9 +145,11 @@ class OSHAStatus(survey.Status):
 
     def module_query(self, sessionid, optional_modules):
         if optional_modules:
-            omc = """WHEN profile_index != -1 AND zodb_path IN {0}
+            omc = """WHEN profile_index != -1 AND zodb_path IN %(modules)s
                         THEN SUBSTRING(path FROM 1 FOR 6)
-            """.format(optional_modules)
+                    WHEN profile_index = -1 AND zodb_path IN %(modules)s
+                        THEN SUBSTRING(path FROM 1 FOR 3) || '000-profile'
+            """ % dict(modules=optional_modules)
         else:
             omc = ""
         query = """
@@ -158,6 +161,7 @@ class OSHAStatus(survey.Status):
             FROM tree
             WHERE session_id=%(sessionid)d AND type='module'
             GROUP BY module
+            ORDER BY module
         """ % dict(OPTIONAL_MODULE_CLAUSE=omc, sessionid=sessionid)
         return query
 
@@ -179,7 +183,18 @@ class OSHAStatus(survey.Status):
             optional_modules=len(profile) and "(%s)" % (','.join(
                 ["'%s'" % k for k in profile.keys()])) or None
         )
+        module_res = session.execute(module_query).fetchall()
+        modules_and_profiles = {}
+        for row in module_res:
+            if row[0] is not None:
+                if row[0].find('profile') > 0:
+                    path = row[0][:3]
+                    modules_and_profiles[path] = 'profile'
+                else:
+                    modules_and_profiles[row[0]] = ''
         module_paths = [p[0] for p in session.execute(module_query).fetchall() if p[0] is not None]
+        module_paths = modules_and_profiles.keys()
+        module_paths = sorted(module_paths)
         parent_node = orm.aliased(model.Module)
         titles = dict(session.query(model.Module.path, model.Module.title)
                 .filter(model.Module.session_id == session_id)
@@ -198,14 +213,38 @@ class OSHAStatus(survey.Status):
                         )
                 ))
         modules = {}
+        toc = {}
+
         for path in module_paths:
-            if path in location_titles:
-                prefix = location_titles[path] + ' - '
+            # top-level module, always include it in the toc
+            if len(path) == 3:
+                title = titles[path]
+                toc[path] = {
+                    'path': path,
+                    'title': title,
+                    'locations': [],
+                }
+                # If this is a profile (aka container for locations, skip
+                # adding to the list of modules
+                if modules_and_profiles[path] == 'profile':
+                    continue
+            # sub-module (location) or location container
             else:
-                prefix = ''
+                if path in location_titles:
+                    title = u"{0} - {1}".format(location_titles[path], titles[path])
+                    toc[path[:3]]['locations'].append({
+                        'path': path,
+                        'title': titles[path],
+                    })
+                else:
+                    log.warning(
+                        "Status: found a path for a submodule {0} for which "
+                        "there's no location title.".format(path))
+                    continue
+
             modules[path] = {
                 'path': path,
-                'title': prefix + titles[path],
+                'title': title,
                 'url': '%s/%s' % (base_url, '/'.join(self.slicePath(path))),
                 'todo': 0,
                 'ok': 0,
@@ -213,6 +252,8 @@ class OSHAStatus(survey.Status):
                 'risk_with_measures': 0,
                 'risk_without_measures': 0
             }
+        self.toc = toc.values()
+        self.toc.sort(key=lambda m: m["path"])
         return modules
 
     def getRisks(self, module_paths):

@@ -20,9 +20,20 @@
                     tal:attributes="style python:'background-color: rgba(0,100,0,%s)' %(view.percentage_ok/100)" tal:content="python:'%d%%' % view.percentage_ok"></strong>
             </h1>
         </article>
+
         <ul class="page-toc">
-            <li tal:repeat="module status">
-                <a href="${here/absolute_url}/status#${module/path}">${module/title}</a>
+            <li tal:repeat="module view/toc">
+                <tal:no_locations condition="not:module/locations">
+                    <a href="${here/absolute_url}/status#${module/path}">${module/title}</a>
+                </tal:no_locations>
+                <tal:locations condition="module/locations">
+                    ${python:module['title']}
+                    <ul>
+                        <li tal:repeat="location module/locations">
+                            <a href="${here/absolute_url}/status#${location/path}">${location/title}</a>
+                        </li>
+                    </ul>
+                </tal:locations>
             </li>
         </ul>
         <dl class="status">

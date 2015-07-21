@@ -156,8 +156,6 @@ class OSHAStatus(survey.Status):
         query = """
             SELECT
                 CASE %(OPTIONAL_MODULE_CLAUSE)s
-                    WHEN zodb_path = 'custom-risks'
-                    THEN path || '-custom'
                     WHEN profile_index != -1 AND depth < 2
                     THEN SUBSTRING(path FROM 1 FOR 3)
                 END AS module
@@ -193,9 +191,6 @@ class OSHAStatus(survey.Status):
                 if row[0].find('profile') > 0:
                     path = row[0][:3]
                     modules_and_profiles[path] = 'profile'
-                elif row[0].find('custom') > 0:
-                    path = row[0][:3]
-                    modules_and_profiles[path] = 'custom'
                 else:
                     modules_and_profiles[row[0]] = ''
         module_paths = [p[0] for p in session.execute(module_query).fetchall() if p[0] is not None]
@@ -224,24 +219,6 @@ class OSHAStatus(survey.Status):
         for path in module_paths:
             # top-level module, always include it in the toc
             if len(path) == 3:
-                # but check first: if it's the custom module, then only
-                # include it if it contains risks
-                if modules_and_profiles[path] == 'custom':
-                    child_node = orm.aliased(model.Risk)
-                    risks = session.query(
-                        child_node.id
-                    ).filter(
-                        sql.and_(
-                            model.Module.session_id == session_id,
-                            model.Module.path.in_([path]),
-                            sql.and_(
-                                child_node.session_id == model.Module.session_id,
-                                child_node.is_custom_risk == True
-                            )
-                        )
-                    )
-                    if not len([x for x in risks]):
-                        continue
                 title = titles[path]
                 toc[path] = {
                     'path': path,
@@ -276,8 +253,7 @@ class OSHAStatus(survey.Status):
                 'risk_with_measures': 0,
                 'risk_without_measures': 0
             }
-        self.toc = toc.values()
-        self.toc.sort(key=lambda m: m["path"])
+        self.tocdata = toc
         return modules
 
     def getRisks(self, module_paths):
@@ -368,7 +344,12 @@ class OSHAStatus(survey.Status):
                 self.high_risks[r['module_path']].append({'title': risk_title, 'path': url})
             else:
                 self.high_risks[r['module_path']] = [{'title': risk_title, 'path':url}]
-
+        for key, m in modules.items():
+            if m['ok'] + m['postponed'] + m['risk_with_measures'] + m['risk_without_measures'] + m['todo'] == 0:
+                del modules[key]
+                del self.tocdata[key]
         self.percentage_ok = not len(risks) and 100 or int(total_ok / Decimal(len(risks))*100)
         self.status = modules.values()
         self.status.sort(key=lambda m: m["path"])
+        self.toc = self.tocdata.values()
+        self.toc.sort(key=lambda m: m["path"])

@@ -142,17 +142,24 @@ class OSHAStatus(survey.Status):
     grok.template("status")
     grok.name("status")
 
-    module_query = """
-        SELECT
-            CASE WHEN profile_index != -1 AND zodb_path IN %(optional_modules)s
-                    THEN SUBSTRING(path FROM 1 FOR 6)
-                    WHEN profile_index != -1 AND depth < 2
-                    THEN SUBSTRING(path FROM 1 FOR 3)
-            END AS module
-        FROM tree
-        WHERE session_id=%(sessionid)d AND type='module'
-        GROUP BY module
-    """
+    def module_query(self, sessionid, optional_modules):
+        if optional_modules:
+            omc = """WHEN profile_index != -1 AND zodb_path IN {0}
+                        THEN SUBSTRING(path FROM 1 FOR 6)
+            """.format(optional_modules)
+        else:
+            omc = ""
+        query = """
+            SELECT
+                CASE %(OPTIONAL_MODULE_CLAUSE)s
+                        WHEN profile_index != -1 AND depth < 2
+                        THEN SUBSTRING(path FROM 1 FOR 3)
+                END AS module
+            FROM tree
+            WHERE session_id=%(sessionid)d AND type='module'
+            GROUP BY module
+        """ % dict(OPTIONAL_MODULE_CLAUSE=omc, sessionid=sessionid)
+        return query
 
     def slicePath(self, path):
         while path:
@@ -167,9 +174,10 @@ class OSHAStatus(survey.Status):
         session_id = SessionManager.id
         base_url = "%s/identification" % self.request.survey.absolute_url()
         profile = extractProfile(self.request.survey, SessionManager.session)
-        module_query = self.module_query % dict(
+        module_query = self.module_query(
             sessionid=session_id,
-            optional_modules="(%s)" % (','.join(["'%s'" % k for k in profile.keys()]))
+            optional_modules=len(profile) and "(%s)" % (','.join(
+                ["'%s'" % k for k in profile.keys()])) or None
         )
         module_paths = [p[0] for p in session.execute(module_query).fetchall() if p[0] is not None]
         parent_node = orm.aliased(model.Module)

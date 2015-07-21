@@ -9,6 +9,7 @@ from euphorie.client.navigation import QuestionURL
 from euphorie.client.navigation import getTreeData
 from euphorie.client.session import SessionManager
 from euphorie.client.update import redirectOnSurveyUpdate
+from euphorie.content.module import IModule
 from five import grok
 from osha.oira import log
 from osha.oira.client import interfaces
@@ -155,8 +156,10 @@ class OSHAStatus(survey.Status):
         query = """
             SELECT
                 CASE %(OPTIONAL_MODULE_CLAUSE)s
-                        WHEN profile_index != -1 AND depth < 2
-                        THEN SUBSTRING(path FROM 1 FOR 3)
+                    WHEN zodb_path = 'custom-risks'
+                    THEN path || '-custom'
+                    WHEN profile_index != -1 AND depth < 2
+                    THEN SUBSTRING(path FROM 1 FOR 3)
                 END AS module
             FROM tree
             WHERE session_id=%(sessionid)d AND type='module'
@@ -190,6 +193,9 @@ class OSHAStatus(survey.Status):
                 if row[0].find('profile') > 0:
                     path = row[0][:3]
                     modules_and_profiles[path] = 'profile'
+                elif row[0].find('custom') > 0:
+                    path = row[0][:3]
+                    modules_and_profiles[path] = 'custom'
                 else:
                     modules_and_profiles[row[0]] = ''
         module_paths = [p[0] for p in session.execute(module_query).fetchall() if p[0] is not None]
@@ -218,13 +224,31 @@ class OSHAStatus(survey.Status):
         for path in module_paths:
             # top-level module, always include it in the toc
             if len(path) == 3:
+                # but check first: if it's the custom module, then only
+                # include it if it contains risks
+                if modules_and_profiles[path] == 'custom':
+                    child_node = orm.aliased(model.Risk)
+                    risks = session.query(
+                        child_node.id
+                    ).filter(
+                        sql.and_(
+                            model.Module.session_id == session_id,
+                            model.Module.path.in_([path]),
+                            sql.and_(
+                                child_node.session_id == model.Module.session_id,
+                                child_node.is_custom_risk == True
+                            )
+                        )
+                    )
+                    if not len([x for x in risks]):
+                        continue
                 title = titles[path]
                 toc[path] = {
                     'path': path,
                     'title': title,
                     'locations': [],
                 }
-                # If this is a profile (aka container for locations, skip
+                # If this is a profile (aka container for locations), skip
                 # adding to the list of modules
                 if modules_and_profiles[path] == 'profile':
                     continue
@@ -272,6 +296,7 @@ class OSHAStatus(survey.Status):
                     child_node.priority,
                     child_node.risk_type,
                     child_node.zodb_path,
+                    child_node.is_custom_risk,
                     child_node.postponed
                 ).filter(
                     sql.and_(
@@ -284,6 +309,7 @@ class OSHAStatus(survey.Status):
                         )
                     )
                 )
+
         return [{
                 'module_path': risk[0],
                 'id': risk[1],
@@ -293,7 +319,8 @@ class OSHAStatus(survey.Status):
                 'priority': risk[5],
                 'risk_type': risk[6],
                 'zodb_path': risk[7],
-                'postponed': risk[8],
+                'is_custom_risk': risk[8],
+                'postponed': risk[9],
             } for risk in risks]
 
     def getStatus(self):
@@ -329,10 +356,13 @@ class OSHAStatus(survey.Status):
                         continue
             else:
                 continue
-            risk_obj = self.request.survey.restrictedTraverse(r['zodb_path'].split('/'))
-            if not risk_obj:
-                continue
-            risk_title = risk_obj.problem_description
+            if r['is_custom_risk']:
+                risk_title = r['title']
+            else:
+                risk_obj = self.request.survey.restrictedTraverse(r['zodb_path'].split('/'))
+                if not risk_obj:
+                    continue
+                risk_title = risk_obj.problem_description
             url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['path'])))
             if self.high_risks.get(r['module_path']):
                 self.high_risks[r['module_path']].append({'title': risk_title, 'path': url})

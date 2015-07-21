@@ -15818,6 +15818,119 @@ define('pat-autoscale',[
     return _;
 });
 
+/**
+ * A Base pattern for creating scoped patterns. It'ssSimilar to Backbone's
+ * Model class. The advantage of this approach is that each instance of a
+ * pattern has its own local scope (closure).
+ *
+ * A new instance is created for each DOM element on which a pattern applies.
+ *
+ * You can assign values, such as $el, to `this` for an instance and they
+ * will remain unique to that instance.
+ *
+ * Older Patternslib patterns on the other hand have a single global scope for
+ * all DOM elements.
+ */
+
+define('pat-base',[
+  'jquery',
+  'pat-registry',
+  "pat-logger"
+], function($, Registry, logger) {
+    'use strict';
+    var log = logger.getLogger("Patternslib Base");
+
+    var initBasePattern = function initBasePattern($el, options, trigger) {
+        var name = this.prototype.name;
+        var log = logger.getLogger("pat." + name);
+        var pattern = $el.data('pattern-' + name);
+        if (pattern === undefined && Registry.patterns[name]) {
+            try {
+                pattern = new Registry.patterns[name]($el, options, trigger);
+            } catch (e) {
+                log.error('Failed while initializing "' + name + '" pattern.');
+            }
+            $el.data('pattern-' + name, pattern);
+        }
+        return pattern;
+    };
+
+    var Base = function($el, options, trigger) {
+        this.$el = $el;
+        this.options = $.extend(true, {}, this.defaults || {}, options || {});
+        this.init($el, options, trigger);
+        this.emit('init');
+    };
+
+    Base.prototype = {
+        constructor: Base,
+        on: function(eventName, eventCallback) {
+            this.$el.on(eventName + '.' + this.name + '.patterns', eventCallback);
+        },
+        emit: function(eventName, args) {
+            // args should be a list
+            if (args === undefined) {
+                args = [];
+            }
+            this.$el.trigger(eventName + '.' + this.name + '.patterns', args);
+        }
+    };
+
+    Base.extend = function(patternProps) {
+        /* Helper function to correctly set up the prototype chain for new patterns.
+        */
+        var parent = this;
+        var child;
+
+        // Check that the required configuration properties are given.
+        if (!patternProps) {
+            throw new Error("Pattern configuration properties required when calling Base.extend");
+        }
+
+        // The constructor function for the new subclass is either defined by you
+        // (the "constructor" property in your `extend` definition), or defaulted
+        // by us to simply call the parent's constructor.
+        if (patternProps.hasOwnProperty('constructor')) {
+            child = patternProps.constructor;
+        } else {
+            child = function() { parent.apply(this, arguments); };
+        }
+
+        // Allow patterns to be extended indefinitely
+        child.extend = Base.extend;
+
+        // Static properties required by the Patternslib registry 
+        child.init = initBasePattern;
+        child.jquery_plugin = true;
+        child.trigger = patternProps.trigger;
+
+        // Set the prototype chain to inherit from `parent`, without calling
+        // `parent`'s constructor function.
+        var Surrogate = function() { this.constructor = child; };
+        Surrogate.prototype = parent.prototype;
+        child.prototype = new Surrogate();
+
+        // Add pattern's configuration properties (instance properties) to the subclass,
+        $.extend(true, child.prototype, patternProps);
+
+        // Set a convenience property in case the parent's prototype is needed
+        // later.
+        child.__super__ = parent.prototype;
+
+        // Register the pattern in the Patternslib registry.
+        if (!patternProps.name) {
+            log.warn("This pattern without a name attribute will not be registered!");
+        } else if (!patternProps.trigger) {
+            log.warn("The pattern '"+patternProps.name+"' does not " +
+                     "have a trigger attribute, it will not be registered.");
+        } else {
+            Registry.register(child, patternProps.name);
+        }
+        return child;
+    };
+    return Base;
+});
+
 // helper functions to make all input elements
 define('pat-input-change-events',[
     "jquery",
@@ -15827,98 +15940,99 @@ define('pat-input-change-events',[
         log = logging.getLogger(namespace);
 
     var _ = {
-        setup: function($form, pat) {
-
-            if (!$form.is("form,.pat-subform")) {
-                log.error("Input change event handler can only be set on forms.");
-                return;
-            }
-
+        setup: function($el, pat) {
             if (!pat) {
                 log.error("The name of the calling pattern has to be set.");
                 return;
             }
-
             // list of patterns that installed input-change-event handlers
-            var patterns = $form.data(namespace) || [];
+            var patterns = $el.data(namespace) || [];
             log.debug("setup handlers for " + pat);
 
             if (!patterns.length) {
                 log.debug("installing handlers");
-                _.setupInputHandlers($form);
+                _.setupInputHandlers($el);
 
-                $form.on("patterns-injected." + namespace, function(event) {
+                $el.on("patterns-injected." + namespace, function(event) {
                     _.setupInputHandlers($(event.target));
                 });
             }
-
             if (patterns.indexOf(pat) === -1) {
                 patterns.push(pat);
-                $form.data(namespace, patterns);
+                $el.data(namespace, patterns);
             }
         },
 
-        setupInputHandlers: function($parent) {
-            $parent.findInclusive(":input").each(function() {
-                var $el = $(this),
-                    isText = $el.is("input:text, input[type=search], textarea");
+        setupInputHandlers: function($el) {
+            if (!$el.is(":input")) {
+                // We've been given an element that is not a form input. We
+                // therefore assume that it's a container of form inputs and
+                // register handlers for its children.
+                $el.findInclusive(":input").each(_.registerHandlersForElement);
+            } else {
+                // The element itself is an input, se we simply register a
+                // handler fot it.
+                _.registerHandlersForElement($el);
+            }
+        },
 
-                if (isText) {
-                    if ("oninput" in window) {
-                        $el.on("input." + namespace, function() {
-                            log.debug("translating input");
+        registerHandlersForElement: function() {
+            var $el = $(this),
+                isText = $el.is("input:text, input[type=search], textarea");
+
+            if (isText) {
+                if ("oninput" in window) {
+                    $el.on("input." + namespace, function() {
+                        log.debug("translating input");
+                        $el.trigger("input-change");
+                    });
+                } else {
+                    // this is the legacy code path for IE8
+                    // Work around buggy placeholder polyfill.
+                    if ($el.attr("placeholder")) {
+                        $el.on("keyup." + namespace, function() {
+                            log.debug("translating keyup");
                             $el.trigger("input-change");
                         });
                     } else {
-                        // this is the legacy code path for IE8
-                        // Work around buggy placeholder polyfill.
-                        if ($el.attr("placeholder")) {
-                            $el.on("keyup." + namespace, function() {
-                                log.debug("translating keyup");
+                        $el.on("propertychange." + namespace, function(ev) {
+                            if (ev.originalEvent.propertyName === "value") {
+                                log.debug("translating propertychange");
                                 $el.trigger("input-change");
-                            });
-                        } else {
-                            $el.on("propertychange." + namespace, function(ev) {
-                                if (ev.originalEvent.propertyName === "value") {
-                                    log.debug("translating propertychange");
-                                    $el.trigger("input-change");
-                                }
-                            });
-                        }
+                            }
+                        });
                     }
-                } else {
-                    $el.on("change." + namespace, function() {
-                        log.debug("translating change");
-                        $el.trigger("input-change");
-                    });
                 }
-
-                $el.on("blur", function() {
-                    $el.trigger("input-defocus");
+            } else {
+                $el.on("change." + namespace, function() {
+                    log.debug("translating change");
+                    $el.trigger("input-change");
                 });
+            }
+
+            $el.on("blur", function() {
+                $el.trigger("input-defocus");
             });
         },
 
-        remove: function($form, pat) {
-            var patterns = $form.data(namespace) || [];
+        remove: function($el, pat) {
+            var patterns = $el.data(namespace) || [];
             if (patterns.indexOf(pat) === -1) {
                 log.warn("input-change-events were never installed for " + pat);
             } else {
                 patterns = patterns.filter(function(e){return e!==pat;});
                 if (patterns.length) {
-                    $form.data(namespace, patterns);
+                    $el.data(namespace, patterns);
                 } else {
                     log.debug("remove handlers");
-                    $form.removeData(namespace);
-                    $form.find(":input").off("." + namespace);
-                    $form.off("." + namespace);
+                    $el.removeData(namespace);
+                    $el.find(":input").off("." + namespace);
+                    $el.off("." + namespace);
                 }
             }
         }
     };
-
     return _;
-
 });
 
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
@@ -15930,15 +16044,17 @@ define('pat-input-change-events',[
  * Copyright 2012-2013 Florian Friesdorf
  * Copyright 2012 Simplon B.V. - Wichert Akkerman
  * Copyright 2013 Marko Durkovic
+ * Copyright 2014-2015 Syslab.com GmbH - JC Brand 
  */
 define('pat-autosubmit',[
     "jquery",
     "pat-registry",
+    "pat-base",
     "pat-logger",
     "pat-parser",
     "pat-input-change-events",
     "pat-utils"
-], function($, registry, logging, Parser, input_change_events, utils) {
+], function($, registry, Base, logging, Parser, input_change_events, utils) {
     var log = logging.getLogger("autosubmit"),
         parser = new Parser("autosubmit");
 
@@ -15947,9 +16063,9 @@ define('pat-autosubmit',[
     // - defocus
     parser.addArgument("delay", "400ms");
 
-    var _ = {
+    return Base.extend({
         name: "autosubmit",
-        trigger: ".pat-autosubmit :input",
+        trigger: ".pat-autosubmit",
         parser: {
             parse: function($el, opts) {
                 var cfg = parser.parse($el, opts);
@@ -15960,69 +16076,69 @@ define('pat-autosubmit',[
             }
         },
 
-        init: function($el, opts) {
-            if ($el.length > 1)
-                return $el.each(function() { _.init($(this), opts); });
+        init: function() {
+            this.options = this.parser.parse(this.$el, arguments[1]);
+            input_change_events.setup(this.$el, "autosubmit");
+            this.registerListeners();
+            this.registerTriggers();
+            return this.$el;
+        },
 
-            // handle the form itself
-            if ($el.is("form,.pat-subform")) {
-                if ($el.data("pat-autosubmit-initialized")) {
-                    return $el;
-                }
-                input_change_events.setup($el, "autosubmit");
-                $el.on("input-change-delayed.pat-autosubmit", _.onInputChange)
-                    .data("pat-autosubmit-initialized", true);
-                return $el;
-            }
+        registerListeners: function() {
+            this.$el.on("input-change-delayed.pat-autosubmit", this.onInputChange);
+            this.registerSubformListeners();
+            this.$el.on('patterns-injected', this.registerSubformListeners.bind(this));
+        },
 
-            // make sure the form is initialized if it does not have the pat-autosubmit class
-            var $form = $el.parents("form,.pat-subform").first();
-            if (!$form.data("pat-autosubmit-initialized")) {
-                _.init($form);
-            }
+        registerSubformListeners: function(ev) {
+            /* If there are subforms, we need to listen on them as well, so
+             * that only the subform gets submitted if an element inside it
+             * changes.
+             */
+            var $el = typeof ev !== "undefined" ? $(ev.target) : this.$el;
+            $el.find(".pat-subform").each(function (idx, el) {
+                $(el).on("input-change-delayed.pat-autosubmit", this.onInputChange);
+            }.bind(this));
+        },
 
-            var cfg = _.parser.parse($el, opts),
-                isText = $el.is("input:text, input[type=search], textarea");
-
-            if (cfg.delay === "defocus" && !isText) {
+        registerTriggers: function() {
+            var isText = this.$el.is("input:text, input[type=search], textarea");
+            if (this.options.delay === "defocus" && !isText) {
                 log.error("The defocus delay value makes only sense on text input elements.");
-                return $el;
+                return this.$el;
             }
-
-            if (cfg.delay === "defocus") {
-                $el.on("input-defocus.pat-autosubmit", function() {
-                    $el.trigger("input-change-delayed");
+            if (this.options.delay === "defocus") {
+                this.$el.on("input-defocus.pat-autosubmit", function(ev) {
+                    $(ev.target).trigger("input-change-delayed");
                 });
-            } else if (cfg.delay > 0) {
-                $el.on("input-change.pat-autosubmit", utils.debounce(function() {
-                    $el.trigger("input-change-delayed");
-                }, cfg.delay));
+            } else if (this.options.delay > 0) {
+                this.$el.on("input-change.pat-autosubmit", utils.debounce(function(ev) {
+                    $(ev.target).trigger("input-change-delayed");
+                }, this.options.delay));
             } else {
-                $el.on("input-change.pat-autosubmit", function() {
-                    $el.trigger("input-change-delayed");
+                this.$el.on("input-change.pat-autosubmit", function(ev) {
+                    $(ev.target).trigger("input-change-delayed");
                 });
             }
-            return $el;
         },
 
         destroy: function($el) {
             input_change_events.remove($el, "autosubmit");
-            $el.removeData("pat-autosubmit-initialized");
-            $el.off(".pat-autosubmit")
-                .find(":input").off(".pat-autosubmit");
+            if (this.$el.is("form")) {
+                this.$el.find(".pat-subform").addBack(this.$el).each(function (idx, el) {
+                    $(el).off(".pat-autosubmit");
+                });
+            } else {
+                $el.off(".pat-autosubmit");
+            }
         },
 
         onInputChange: function(ev) {
             ev.stopPropagation();
-
             $(this).submit();
-
             log.debug("triggered by " + ev.type);
         }
-    };
-
-    registry.register(_);
-    return _;
+    });
 });
 
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
@@ -20363,119 +20479,6 @@ define('pat-chosen',[
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
 // vim: sw=4 expandtab
 ;
-/**
- * A Base pattern for creating scoped patterns. It'ssSimilar to Backbone's
- * Model class. The advantage of this approach is that each instance of a
- * pattern has its own local scope (closure).
- *
- * A new instance is created for each DOM element on which a pattern applies.
- *
- * You can assign values, such as $el, to `this` for an instance and they
- * will remain unique to that instance.
- *
- * Older Patternslib patterns on the other hand have a single global scope for
- * all DOM elements.
- */
-
-define('pat-base',[
-  'jquery',
-  'pat-registry',
-  "pat-logger"
-], function($, Registry, logger) {
-    'use strict';
-    var log = logger.getLogger("Patternslib Base");
-
-    var initBasePattern = function initBasePattern($el, options, trigger) {
-        var name = this.prototype.name;
-        var log = logger.getLogger("pat." + name);
-        var pattern = $el.data('pattern-' + name);
-        if (pattern === undefined && Registry.patterns[name]) {
-            try {
-                pattern = new Registry.patterns[name]($el, options, trigger);
-            } catch (e) {
-                log.error('Failed while initializing "' + name + '" pattern.');
-            }
-            $el.data('pattern-' + name, pattern);
-        }
-        return pattern;
-    };
-
-    var Base = function($el, options, trigger) {
-        this.$el = $el;
-        this.options = $.extend(true, {}, this.defaults || {}, options || {});
-        this.init($el, options, trigger);
-        this.emit('init');
-    };
-
-    Base.prototype = {
-        constructor: Base,
-        on: function(eventName, eventCallback) {
-            this.$el.on(eventName + '.' + this.name + '.patterns', eventCallback);
-        },
-        emit: function(eventName, args) {
-            // args should be a list
-            if (args === undefined) {
-                args = [];
-            }
-            this.$el.trigger(eventName + '.' + this.name + '.patterns', args);
-        }
-    };
-
-    Base.extend = function(patternProps) {
-        /* Helper function to correctly set up the prototype chain for new patterns.
-        */
-        var parent = this;
-        var child;
-
-        // Check that the required configuration properties are given.
-        if (!patternProps) {
-            throw new Error("Pattern configuration properties required when calling Base.extend");
-        }
-
-        // The constructor function for the new subclass is either defined by you
-        // (the "constructor" property in your `extend` definition), or defaulted
-        // by us to simply call the parent's constructor.
-        if (patternProps.hasOwnProperty('constructor')) {
-            child = patternProps.constructor;
-        } else {
-            child = function() { parent.apply(this, arguments); };
-        }
-
-        // Allow patterns to be extended indefinitely
-        child.extend = Base.extend;
-
-        // Static properties required by the Patternslib registry 
-        child.init = initBasePattern;
-        child.jquery_plugin = true;
-        child.trigger = patternProps.trigger;
-
-        // Set the prototype chain to inherit from `parent`, without calling
-        // `parent`'s constructor function.
-        var Surrogate = function() { this.constructor = child; };
-        Surrogate.prototype = parent.prototype;
-        child.prototype = new Surrogate();
-
-        // Add pattern's configuration properties (instance properties) to the subclass,
-        $.extend(true, child.prototype, patternProps);
-
-        // Set a convenience property in case the parent's prototype is needed
-        // later.
-        child.__super__ = parent.prototype;
-
-        // Register the pattern in the Patternslib registry.
-        if (!patternProps.name) {
-            log.warn("This pattern without a name attribute will not be registered!");
-        } else if (!patternProps.trigger) {
-            log.warn("The pattern '"+patternProps.name+"' does not " +
-                     "have a trigger attribute, it will not be registered.");
-        } else {
-            Registry.register(child, patternProps.name);
-        }
-        return child;
-    };
-    return Base;
-});
-
 /* pat-clone */
 define("pat-clone",[
     "jquery",
@@ -39957,6 +39960,7 @@ var indexOf = Array.prototype.indexOf ?
             "pat-registry",
             "pat-parser",
             "pat-base",
+            "pat-utils",
             "masonry",
             "imagesloaded"
             ], function() {
@@ -39965,7 +39969,7 @@ var indexOf = Array.prototype.indexOf ?
     } else {
         factory(root.$, root.patterns, root.patterns.Parser, root.Base, root.Masonry, root.imagesLoaded);
     }
-}(this, function($, registry, Parser, Base, Masonry, imagesLoaded) {
+}(this, function($, registry, Parser, Base, utils, Masonry, imagesLoaded) {
     "use strict";
     var parser = new Parser("masonry");
     parser.addArgument("column-width");
@@ -39985,23 +39989,37 @@ var indexOf = Array.prototype.indexOf ?
         trigger: ".pat-masonry",
 
         init: function masonryInit($el, opts) {
-            var options = parser.parse(this.$el, opts);
+            this.options = parser.parse(this.$el, opts);
             $(document).trigger("clear-imagesloaded-cache");
-            this.msnry = new Masonry(this.$el[0], {
-                columnWidth:         this.getTypeCastedValue(options.columnWidth),
-                containerStyle:      options.containerStyle,
-                gutter:              this.getTypeCastedValue(options.gutter),
-                hiddenStyle:         options.hiddenStyle,
-                isFitWidth:          options.is["fit-width"],
-                isInitLayout:        false,
-                isOriginLeft:        options.is["origin-left"],
-                isOriginTOp:         options.is["origin-top"],
-                itemSelector:        options.itemSelector,
-                stamp:               options.stamp,
-                transitionDuration:  options.transitionDuration,
-                visibleStyle:        options.visibleStyle
-            });
+            this.initMasonry();
             this.$el.imagesLoaded(this.layout.bind(this));
+            // Update if something gets injected inside the pat-masonry
+            // element.
+            this.$el.on("patterns-injected.pat-masonry",
+                    utils.debounce(this.update.bind(this), 100));
+        },
+
+        initMasonry: function () {
+            this.msnry = new Masonry(this.$el[0], {
+                columnWidth:         this.getTypeCastedValue(this.options.columnWidth),
+                containerStyle:      this.options.containerStyle,
+                gutter:              this.getTypeCastedValue(this.options.gutter),
+                hiddenStyle:         this.options.hiddenStyle,
+                isFitWidth:          this.options.is["fit-width"],
+                isInitLayout:        false,
+                isOriginLeft:        this.options.is["origin-left"],
+                isOriginTOp:         this.options.is["origin-top"],
+                itemSelector:        this.options.itemSelector,
+                stamp:               this.options.stamp,
+                transitionDuration:  this.options.transitionDuration,
+                visibleStyle:        this.options.visibleStyle
+            });
+        },
+
+        update: function () {
+            this.msnry.remove();
+            this.initMasonry();
+            this.layout();
         },
 
         layout: function () {
@@ -40419,6 +40437,315 @@ define('pat-placeholder',[
           "placeholder" in document.createElement("textarea")))
         patterns.register(pattern_spec);
     return pattern_spec;
+});
+
+// jshint indent: 4, browser: true, jquery: true, quotmark: double
+// vim: sw=4 expandtab
+;
+/*!
+ * jQuery Smooth Scroll - v1.5.5 - 2015-02-19
+ * https://github.com/kswedberg/jquery-smooth-scroll
+ * Copyright (c) 2015 Karl Swedberg
+ * Licensed MIT (https://github.com/kswedberg/jquery-smooth-scroll/blob/master/LICENSE-MIT)
+ */
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define('jquery.smoothscroll',['jquery'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS
+    factory(require('jquery'));
+  } else {
+    // Browser globals
+    factory(jQuery);
+  }
+}(function ($) {
+
+  var version = '1.5.5',
+      optionOverrides = {},
+      defaults = {
+        exclude: [],
+        excludeWithin:[],
+        offset: 0,
+
+        // one of 'top' or 'left'
+        direction: 'top',
+
+        // jQuery set of elements you wish to scroll (for $.smoothScroll).
+        //  if null (default), $('html, body').firstScrollable() is used.
+        scrollElement: null,
+
+        // only use if you want to override default behavior
+        scrollTarget: null,
+
+        // fn(opts) function to be called before scrolling occurs.
+        // `this` is the element(s) being scrolled
+        beforeScroll: function() {},
+
+        // fn(opts) function to be called after scrolling occurs.
+        // `this` is the triggering element
+        afterScroll: function() {},
+        easing: 'swing',
+        speed: 400,
+
+        // coefficient for "auto" speed
+        autoCoefficient: 2,
+
+        // $.fn.smoothScroll only: whether to prevent the default click action
+        preventDefault: true
+      },
+
+      getScrollable = function(opts) {
+        var scrollable = [],
+            scrolled = false,
+            dir = opts.dir && opts.dir === 'left' ? 'scrollLeft' : 'scrollTop';
+
+        this.each(function() {
+
+          if (this === document || this === window) { return; }
+          var el = $(this);
+          if ( el[dir]() > 0 ) {
+            scrollable.push(this);
+          } else {
+            // if scroll(Top|Left) === 0, nudge the element 1px and see if it moves
+            el[dir](1);
+            scrolled = el[dir]() > 0;
+            if ( scrolled ) {
+              scrollable.push(this);
+            }
+            // then put it back, of course
+            el[dir](0);
+          }
+        });
+
+        // If no scrollable elements, fall back to <body>,
+        // if it's in the jQuery collection
+        // (doing this because Safari sets scrollTop async,
+        // so can't set it to 1 and immediately get the value.)
+        if (!scrollable.length) {
+          this.each(function() {
+            if (this.nodeName === 'BODY') {
+              scrollable = [this];
+            }
+          });
+        }
+
+        // Use the first scrollable element if we're calling firstScrollable()
+        if ( opts.el === 'first' && scrollable.length > 1 ) {
+          scrollable = [ scrollable[0] ];
+        }
+
+        return scrollable;
+      };
+
+  $.fn.extend({
+    scrollable: function(dir) {
+      var scrl = getScrollable.call(this, {dir: dir});
+      return this.pushStack(scrl);
+    },
+    firstScrollable: function(dir) {
+      var scrl = getScrollable.call(this, {el: 'first', dir: dir});
+      return this.pushStack(scrl);
+    },
+
+    smoothScroll: function(options, extra) {
+      options = options || {};
+
+      if ( options === 'options' ) {
+        if ( !extra ) {
+          return this.first().data('ssOpts');
+        }
+        return this.each(function() {
+          var $this = $(this),
+              opts = $.extend($this.data('ssOpts') || {}, extra);
+
+          $(this).data('ssOpts', opts);
+        });
+      }
+
+      var opts = $.extend({}, $.fn.smoothScroll.defaults, options),
+          locationPath = $.smoothScroll.filterPath(location.pathname);
+
+      this
+      .unbind('click.smoothscroll')
+      .bind('click.smoothscroll', function(event) {
+        var link = this,
+            $link = $(this),
+            thisOpts = $.extend({}, opts, $link.data('ssOpts') || {}),
+            exclude = opts.exclude,
+            excludeWithin = thisOpts.excludeWithin,
+            elCounter = 0, ewlCounter = 0,
+            include = true,
+            clickOpts = {},
+            hostMatch = ((location.hostname === link.hostname) || !link.hostname),
+            pathMatch = thisOpts.scrollTarget || ( $.smoothScroll.filterPath(link.pathname) === locationPath ),
+            thisHash = escapeSelector(link.hash);
+
+        if ( !thisOpts.scrollTarget && (!hostMatch || !pathMatch || !thisHash) ) {
+          include = false;
+        } else {
+          while (include && elCounter < exclude.length) {
+            if ($link.is(escapeSelector(exclude[elCounter++]))) {
+              include = false;
+            }
+          }
+          while ( include && ewlCounter < excludeWithin.length ) {
+            if ($link.closest(excludeWithin[ewlCounter++]).length) {
+              include = false;
+            }
+          }
+        }
+
+        if ( include ) {
+
+          if ( thisOpts.preventDefault ) {
+            event.preventDefault();
+          }
+
+          $.extend( clickOpts, thisOpts, {
+            scrollTarget: thisOpts.scrollTarget || thisHash,
+            link: link
+          });
+
+          $.smoothScroll( clickOpts );
+        }
+      });
+
+      return this;
+    }
+  });
+
+  $.smoothScroll = function(options, px) {
+    if ( options === 'options' && typeof px === 'object' ) {
+      return $.extend(optionOverrides, px);
+    }
+    var opts, $scroller, scrollTargetOffset, speed, delta,
+        scrollerOffset = 0,
+        offPos = 'offset',
+        scrollDir = 'scrollTop',
+        aniProps = {},
+        aniOpts = {};
+
+    if (typeof options === 'number') {
+      opts = $.extend({link: null}, $.fn.smoothScroll.defaults, optionOverrides);
+      scrollTargetOffset = options;
+    } else {
+      opts = $.extend({link: null}, $.fn.smoothScroll.defaults, options || {}, optionOverrides);
+      if (opts.scrollElement) {
+        offPos = 'position';
+        if (opts.scrollElement.css('position') === 'static') {
+          opts.scrollElement.css('position', 'relative');
+        }
+      }
+    }
+
+    scrollDir = opts.direction === 'left' ? 'scrollLeft' : scrollDir;
+
+    if ( opts.scrollElement ) {
+      $scroller = opts.scrollElement;
+      if ( !(/^(?:HTML|BODY)$/).test($scroller[0].nodeName) ) {
+        scrollerOffset = $scroller[scrollDir]();
+      }
+    } else {
+      $scroller = $('html, body').firstScrollable(opts.direction);
+    }
+
+    // beforeScroll callback function must fire before calculating offset
+    opts.beforeScroll.call($scroller, opts);
+
+    scrollTargetOffset = (typeof options === 'number') ? options :
+                          px ||
+                          ( $(opts.scrollTarget)[offPos]() &&
+                          $(opts.scrollTarget)[offPos]()[opts.direction] ) ||
+                          0;
+
+    aniProps[scrollDir] = scrollTargetOffset + scrollerOffset + opts.offset;
+    speed = opts.speed;
+
+    // automatically calculate the speed of the scroll based on distance / coefficient
+    if (speed === 'auto') {
+
+      // $scroller.scrollTop() is position before scroll, aniProps[scrollDir] is position after
+      // When delta is greater, speed will be greater.
+      delta = aniProps[scrollDir] - $scroller.scrollTop();
+      if(delta < 0) {
+        delta *= -1;
+      }
+
+      // Divide the delta by the coefficient
+      speed = delta / opts.autoCoefficient;
+    }
+
+    aniOpts = {
+      duration: speed,
+      easing: opts.easing,
+      complete: function() {
+        opts.afterScroll.call(opts.link, opts);
+      }
+    };
+
+    if (opts.step) {
+      aniOpts.step = opts.step;
+    }
+
+    if ($scroller.length) {
+      $scroller.stop().animate(aniProps, aniOpts);
+    } else {
+      opts.afterScroll.call(opts.link, opts);
+    }
+  };
+
+  $.smoothScroll.version = version;
+  $.smoothScroll.filterPath = function(string) {
+    string = string || '';
+    return string
+      .replace(/^\//,'')
+      .replace(/(?:index|default).[a-zA-Z]{3,4}$/,'')
+      .replace(/\/$/,'');
+  };
+
+  // default options
+  $.fn.smoothScroll.defaults = defaults;
+
+  function escapeSelector (str) {
+    return str.replace(/(:|\.|\/)/g,'\\$1');
+  }
+
+}));
+
+
+/**
+ * Copyright 2012-2013 Syslab.com GmbH - JC Brand
+ */
+define('pat-scroll',[
+    "jquery",
+    "pat-registry",
+    "pat-base",
+    "pat-utils",
+    "pat-logger",
+    "pat-parser",
+    "underscore",
+    "jquery.smoothscroll"
+], function($, patterns, Base, utils, logging, Parser, _) {
+    var log = logging.getLogger("scroll"),
+        parser = new Parser("scroll");
+    parser.addArgument("trigger", "click", ["click", "auto"]);
+    parser.addArgument("direction", "top", ["top", "left"]);
+
+    return Base.extend({
+        name: "scroll",
+        trigger: ".pat-scroll",
+        jquery_plugin: true,
+
+        init: function($el, opts) {
+            var options = parser.parse(this.$el, opts);
+            this.$el.smoothScroll(_.pick(options, 'direction'));
+            if (options.trigger == "auto") {
+                this.$el.click();
+            }
+        }
+    });
 });
 
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
@@ -43648,9 +43975,15 @@ define('pat-validate',[
             this.errors = 0;
             this.options = parser.parse(this.$el, opts);
             this.$el.noValidate = true;
-            this.initParsley();
+            var parsley_form = this.initParsley();
             this.$el.on("pat-ajax-before.pat-validate", this.onPreSubmit);
             this.$el.on('pat-update', this.onPatternUpdate.bind(this));
+            this.$el.on("click.pat-validate", ".close-panel", function (ev) {
+                if (!parsley_form.validate()) {
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                }
+            }.bind(this));
         },
 
         initParsley: function() {
@@ -43690,6 +44023,7 @@ define('pat-validate',[
                     field.removeError = _removeFieldError;
                 }
             }
+            return parsley_form;
         },
 
         onPatternUpdate: function (ev, data) {
@@ -43894,6 +44228,7 @@ define('patterns',[
     "pat-navigation",
     "pat-notification",
     "pat-placeholder",
+    "pat-scroll",
     "pat-sortable",
     "pat-stacks",
     "pat-subform",

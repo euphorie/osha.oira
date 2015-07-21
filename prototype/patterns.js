@@ -47,6 +47,7 @@ define([
     "pat-navigation",
     "pat-notification",
     "pat-placeholder",
+    "pat-scroll",
     "pat-sortable",
     "pat-stacks",
     "pat-subform",

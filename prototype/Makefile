@@ -14,9 +14,13 @@ bundle bundle.js: build.js stamp-bower
 	node_modules/.bin/r.js -o build.js
 
 cmsbundle bundles/oira.cms.js: build-cms.js stamp-bower
+	cp ../../oira.private/src/oira/private/browser/static/redactor.js redactor/
+	cp ../../oira.private/src/oira/private/browser/static/redactor.css redactor/
 	node_modules/.bin/r.js -o build-cms.js
 	node_modules/.bin/grunt uglify
+	node_modules/.bin/grunt cssmin
 	cp bundles/oira.cms* ../../oira.private/src/oira/private/browser/static/
+	cp redactor/redactor.min.css ../../oira.private/src/oira/private/browser/static/
 
 stamp-npm: package.json
 	npm install

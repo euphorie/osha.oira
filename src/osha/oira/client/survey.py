@@ -16,6 +16,7 @@ from sqlalchemy import orm
 from z3c.saconfig import Session
 from zope.component import getMultiAdapter
 
+
 grok.templatedir("templates")
 
 
@@ -277,6 +278,6 @@ class OSHAStatus(survey.Status):
             else:
                 self.high_risks[r['module_path']] = [{'title':r['title'], 'path':url}]
 
-        self.percentage_ok = len(risks) and int(total_ok/Decimal(len(risks))*100) or 100
+        self.percentage_ok = not len(risks) and 100 or int(total_ok / Decimal(len(risks))*100)
         self.status = modules.values()
         self.status.sort(key=lambda m: m["path"])

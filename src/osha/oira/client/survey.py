@@ -270,6 +270,7 @@ class OSHAStatus(survey.Status):
                     child_node.title,
                     child_node.identification,
                     child_node.priority,
+                    child_node.risk_type,
                     child_node.postponed
                 ).filter(
                     sql.and_(
@@ -289,7 +290,8 @@ class OSHAStatus(survey.Status):
                 'title': risk[3],
                 'identification': risk[4],
                 'priority': risk[5],
-                'postponed': risk[6]
+                'risk_type': risk[6],
+                'postponed': risk[7],
             } for risk in risks]
 
     def getStatus(self):
@@ -319,7 +321,11 @@ class OSHAStatus(survey.Status):
             else:
                 modules[r['module_path']]['todo'] += 1
 
-            if r['priority'] != "high":
+            if r['priority'] == "high":
+                if r['identification'] != 'no':
+                    if r['risk_type'] not in ['top5']:
+                        continue
+            else:
                 continue
             url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['module_path'])))
             if self.high_risks.get(r['module_path']):

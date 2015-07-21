@@ -22,7 +22,7 @@
         </article>
         <ul class="page-toc">
             <li tal:repeat="module status">
-                <a href="${module/url}">${module/title}</a>
+                <a href="${here/absolute_url}/status#${module/path}">${module/title}</a>
             </li>
         </ul>
         <dl class="status">
@@ -38,13 +38,13 @@
                 perc_risks_without_measures python:num_total and num_risks_without_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_risks_with_measures python:num_total and num_risks_with_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_postponed python:num_total and num_postponed/decimal.Decimal(num_total)*100 or 0; ">
-            <dt>
+            <dt><a name="${module/path}"> </a>
                 <a href="${module/url}">${module/title}<strong class="score-badge"
                         tal:attributes="style python:'background-color: rgba(0,100,0,%s)' %(perc_ok/100)" tal:content="python:'%d%%' %(int(perc_ok))"></strong></a>
             </dt>
             <dd>
                 <section class="graph">
-                    <p class="range answered" style="width: ${perc_ok}%" 
+                    <p class="range answered" style="width: ${perc_ok}%"
                         tal:attributes="title python:'%s question%s answered without a risk' % (num_ok, num_ok != 1 and 's' or '')">
                         <strong class="number">${num_ok}</strong>
                         <em class="label" tal:content="python:'question%s answered without a risk' % (num_ok != 1 and 's' or '')"></em>

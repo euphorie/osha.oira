@@ -271,6 +271,7 @@ class OSHAStatus(survey.Status):
                     child_node.identification,
                     child_node.priority,
                     child_node.risk_type,
+                    child_node.zodb_path,
                     child_node.postponed
                 ).filter(
                     sql.and_(
@@ -291,14 +292,15 @@ class OSHAStatus(survey.Status):
                 'identification': risk[4],
                 'priority': risk[5],
                 'risk_type': risk[6],
-                'postponed': risk[7],
+                'zodb_path': risk[7],
+                'postponed': risk[8],
             } for risk in risks]
 
     def getStatus(self):
         """ Gather a list of the modules and locations in this survey as well
             as data around their state of completion.
         """
-        base_url = "%s/identification" % self.request.survey.absolute_url()
+        base_url = "%s/actionplan" % self.request.survey.absolute_url()
         session = Session()
         total_ok = 0
         self.high_risks = {}
@@ -327,11 +329,15 @@ class OSHAStatus(survey.Status):
                         continue
             else:
                 continue
-            url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['module_path'])))
+            risk_obj = self.request.survey.restrictedTraverse(r['zodb_path'].split('/'))
+            if not risk_obj:
+                continue
+            risk_title = risk_obj.problem_description
+            url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['path'])))
             if self.high_risks.get(r['module_path']):
-                self.high_risks[r['module_path']].append({'title':r['title'], 'path': url})
+                self.high_risks[r['module_path']].append({'title': risk_title, 'path': url})
             else:
-                self.high_risks[r['module_path']] = [{'title':r['title'], 'path':url}]
+                self.high_risks[r['module_path']] = [{'title': risk_title, 'path':url}]
 
         self.percentage_ok = not len(risks) and 100 or int(total_ok / Decimal(len(risks))*100)
         self.status = modules.values()

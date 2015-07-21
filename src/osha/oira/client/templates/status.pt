@@ -78,19 +78,19 @@
                 </section>
                 <section class="row">
                     <ul class="six columns legend">
-                        <li class="answered">
+                        <li class="answered" tal:condition="num_ok">
                             <strong class="number">${num_ok}</strong> <em class="label">No risk</em>
                         </li>
-                        <li class="risk-measure">
+                        <li class="risk-measure" tal:condition="num_risks_with_measures">
                             <strong class="number">${num_risks_with_measures}</strong> <em class="label">Risk with measure(s)</em>
                         </li>
-                        <li class="risk">
+                        <li class="risk" tal:condition="num_risks_without_measures">
                             <strong class="number">${num_risks_without_measures}</strong> <em class="label">Risk without measure</em>
                         </li>
-                        <li class="postponed">
+                        <li class="postponed" tal:condition="num_postponed">
                             <strong class="number">${num_postponed}</strong> <em class="label">Postponed</em>
                         </li>
-                        <li class="unanswered">
+                        <li class="unanswered" tal:condition="num_todo">
                             <strong class="number">${num_todo}</strong> <em class="label">Unanswered</em>
                         </li>
                     </ul>

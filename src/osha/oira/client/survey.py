@@ -146,7 +146,7 @@ class OSHAStatus(survey.Status):
         SELECT
             CASE WHEN profile_index != -1 AND zodb_path IN %(optional_modules)s
                     THEN SUBSTRING(path FROM 1 FOR 6)
-                    WHEN profile_index != -1
+                    WHEN profile_index != -1 AND depth < 2
                     THEN SUBSTRING(path FROM 1 FOR 3)
             END AS module
         FROM tree

@@ -50,7 +50,7 @@
 </article>
 
 <p class="buttonBar">
-    <a class="pat-button pat-inject pat-scroll" data-pat-inject="history: record; source: #step-4; target: #step-4 && source: #content; target: #content" data-pat-scroll="selector: #content; trigger: auto" href="${view/next_url}" i18n:translate="label_start_module">Start module</a>
+    <a class="pat-button pat-inject pat-scroll" data-pat-inject="history: record; source: #step-4; target: #step-4 && source: #content; target: #content" data-pat-scroll="selector: #content; trigger: auto; offset: 0" href="${view/next_url}" i18n:translate="label_start_module">Start module</a>
 </p>
 </metal:slot>
 </body>

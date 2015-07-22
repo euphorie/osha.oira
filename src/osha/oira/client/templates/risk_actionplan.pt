@@ -21,7 +21,7 @@
 <form method="post" action="${context/absolute_url}" class="pat-inject pat-validate pat-scroll"
     data-pat-validate="disable-selector: button[name='next'], .remove-clone"
     data-pat-inject="history: record; source: #step-4; target: #step-4 && source: #content; target: #content"
-    data-pat-scroll="selector: #content; trigger: auto">
+    data-pat-scroll="selector: #content; trigger: auto; offset: 0">
 <article class="rich pat-well warning" id="${view/risk_number}">
     <tal:block condition="not:view/risk_present">
         <h2 tal:content="risk/title"></h2>

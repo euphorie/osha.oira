@@ -17,7 +17,7 @@
     <div class="statuses" tal:define="status python:view.status">
         <article class="richs">
             <h1>Status of ${here/Title} <strong class="score-badge"
-                    tal:attributes="style python:'background-color: rgba(0,100,0,%s)' %(view.percentage_ok/100)" tal:content="python:'%d%%' % view.percentage_ok"></strong>
+                    tal:attributes="style python:'background-color: rgba(0,100,0,%s)' %(decimal.Decimal(view.percentage_ok)/100)" tal:content="python:'%d%%' % view.percentage_ok"></strong>
             </h1>
         </article>
 

@@ -68,7 +68,7 @@
                    data-pat-tooltip="source: ajax; class: medium; position-list: tr">${webhelpers/get_username}</a>
             </tal:if_not_anon>
         </header>
-        <div id="content" class="pat-scroll" data-pat-scroll="trigger: auto; offset: 0">
+        <div id="content">
             <p tal:condition="webhelpers/is_guest_account" id="warning-bar">
                 This is a test session. <a href="${base_url}/login_form?${came_from_param}#document-content" class="registration">Sign in</a> to save your data. <a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info">Info</a>
             </p>

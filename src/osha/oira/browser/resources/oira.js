@@ -40458,7 +40458,8 @@ define('pat-scroll',[
         parser = new Parser("scroll");
     parser.addArgument("trigger", "click", ["click", "auto"]);
     parser.addArgument("direction", "top", ["top", "left"]);
-    parser.addArgument("offset");
+    parser.addArgument("selector");
+    parser.addArgument("offset", 0);
 
     return Base.extend({
         name: "scroll",
@@ -40468,8 +40469,7 @@ define('pat-scroll',[
         init: function($el, opts) {
             this.options = parser.parse(this.$el, opts);
             if (this.options.trigger == "auto") {
-                this.smoothScroll();
-                this.$el.on('patterns-injected', this.smoothScroll.bind(this));
+               this.smoothScroll();
             } else if (this.options.trigger == "click") {
                 this.$el.click(function (ev) {
                     ev.preventDefault();
@@ -40479,19 +40479,16 @@ define('pat-scroll',[
         },
 
         smoothScroll: function() {
-            if (this.options.direction == "top") {
-                if (this.options.offset) {
-                    this.$el.animate({scrollTop: this.options.offset}, 500);
-                } else {
-                    $('body').animate({scrollTop: $(this.$el.attr('href')).offset().top}, 500);
-                }
-            } else if (this.options.direction == "left") {
-                if (this.options.offset) {
-                    this.$el.animate({scrollLeft: this.options.offset}, 500);
-                } else {
-                    $('body').animate({scrollLeft: $(this.$el.attr('href')).offset().top}, 500);
-                }
+            var scroll = this.options.direction == "top" ? 'scrollTop' : 'scrollLeft',
+                $el, options = {};
+            if (typeof this.options.offset != "undefined") {
+                $el = this.options.selector ? $(this.options.selector) : this.$el;
+                options[scroll] = this.options.offset;
+            } else {
+                options[scroll] = $($el.attr('href')).offset().top;
+                $el = $('body');
             }
+            $el.animate(options, 500);
         }
     });
 });

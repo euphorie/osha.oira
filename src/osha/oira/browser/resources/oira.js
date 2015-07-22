@@ -40459,7 +40459,7 @@ define('pat-scroll',[
     parser.addArgument("trigger", "click", ["click", "auto"]);
     parser.addArgument("direction", "top", ["top", "left"]);
     parser.addArgument("selector");
-    parser.addArgument("offset", 0);
+    parser.addArgument("offset");
 
     return Base.extend({
         name: "scroll",
@@ -40485,8 +40485,8 @@ define('pat-scroll',[
                 $el = this.options.selector ? $(this.options.selector) : this.$el;
                 options[scroll] = this.options.offset;
             } else {
-                options[scroll] = $($el.attr('href')).offset().top;
                 $el = $('body');
+                options[scroll] = $(this.$el.attr('href')).offset().top;
             }
             $el.animate(options, 500);
         }

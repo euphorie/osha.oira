@@ -16,7 +16,7 @@
     <h1>${module/title}</h1>
     <tal:block replace="tile:statusmessages"/>
 
-    <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}" class="pat-inject" data-pat-inject="${python: 'history: record; source: #content; target: #content && source: #osc; target: #osc' if view.next_is_actionplan else 'history: record; source: #step-2; target: #step-2 && source: #content; target: #content'}">
+    <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}" class="pat-inject pat-scroll" data-pat-inject="${python: 'history: record; source: #content; target: #content && source: #osc; target: #osc' if view.next_is_actionplan else 'history: record; source: #step-2; target: #step-2 && source: #content; target: #content'}" data-pat-scroll="selector: #content; trigger: auto">
 
         <figure tal:define="images module/@@images; large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
             tal:condition="large" title="${module/caption|nothing}">

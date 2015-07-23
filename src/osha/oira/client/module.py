@@ -248,7 +248,7 @@ class IdentificationView(module.IdentificationView, Mixin):
             next = FindNextQuestion(context, filter=self.question_filter)
             if next is None:
                 # We ran out of questions, proceed to the evaluation
-                url = "%s/evaluation" % self.request.survey.absolute_url()
+                url = "%s/actionplan" % self.request.survey.absolute_url()
                 return self.request.response.redirect(url)
 
         url = QuestionURL(self.request.survey, next, phase="identification")

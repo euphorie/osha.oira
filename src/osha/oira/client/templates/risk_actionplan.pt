@@ -75,7 +75,7 @@
         </tal:if_has_measures>
 
         <fieldset class="vertical" id="fields-0">
-            <label><tal:label i18n:translate="label_description"Description</tal:label>
+            <label><tal:label i18n:translate="label_description">Description</tal:label>
                 <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
                 <textarea class="actionPlan" type="text" name="measure.action_plan:utf8:ustring:records" rows="6"
                     placeholder="General approach (to eliminate or reduce the risk)"

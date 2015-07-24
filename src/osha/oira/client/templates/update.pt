@@ -48,7 +48,7 @@
             <label id="clone-template-${question/id}" hidden>
                 <input class="pat-depends" autofocus placeholder="${question/label_single_occurance} #{1}" data-pat-depends="pq${question/id}.multiple=yes" 
                         size="40" type="text" name="505:utf8:utext:list">&nbsp;
-                <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes">Remove</button>
+                <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="label_remove">Remove</button>
             </label>
 
             <label class="clone">
@@ -61,12 +61,12 @@
                 <input class="pat-depends" autofocus placeholder="${question/label_single_occurance} 1" size="40" type="text"
                     tal:attributes="value title"
                     data-pat-depends="pq${question/id}.multiple=yes" name="${question/id}:utf8:utext:list">
-                <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes">Remove</button>
+                <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="label_remove">Remove</button>
             </label>
         </fieldset>
 
           <p class="buttons addButton pat-depends" data-pat-depends="pq${question/id}.multiple=yes">
-            <button id="clone-set-${question/id}" class="pat-button icon-plus-circle add-clone" type="button">Add another item</button>
+            <button id="clone-set-${question/id}" class="pat-button icon-plus-circle add-clone" type="button" i18n:translate="label_add_another_item">Add another item</button>
           </p>
         </fieldset>
     </section>

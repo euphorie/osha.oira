@@ -21,9 +21,9 @@
   <article class="rich">
     <h1 i18n:translate="header_welcome">Welcome</h1>
 
-    <p>The OiRA project is a European-wide initiative lead  by the <a href="http://osha.europa.eu/en" title="http://osha.europa.eu/en" target="_blank">European Agency for Safety and Health at Work</a>  in partnership with National  authorities (Ministries, Labour Inspectorates, OSH institutes, etc.) and EU/National Sectoral Social Partners (employers'  and employees' organisations).</p>
+    <p i18n:translate="intro1_welcome">The OiRA project is a European-wide initiative lead  by the <tal:name i18n:name="link_osha"><a href="http://osha.europa.eu/en" title="http://osha.europa.eu/en" target="_blank" i18n:translate="">European Agency for Safety and Health at Work</a></tal:name>  in partnership with National  authorities (Ministries, Labour Inspectorates, OSH institutes, etc.) and EU/National Sectoral Social Partners (employers'  and employees' organisations).</p>
 
-    <p>Visit the <a href="http://www.oiraproject.eu/" title="OiRA project site" target="_blank">OiRA project site</a> to know more about it.</p>
+    <p i18n:translate="intro2_welcome">Visit the <tal:name i18n:name="link_oira"><a href="http://www.oiraproject.eu/" title="OiRA project site" target="_blank" i18n:translate="">OiRA project site</a></tal:name> to know more about it.</p>
 
 
     <h2 i18n:translate="">What is OiRA (Online Interactive Risk Assessment)?</h2>
@@ -31,7 +31,7 @@
 
     <div class="extra pat-collapsible closed show-more">
         <p class="show-more-or-less">
-          <strong class="show-more">Show more…</strong> <span class="divider">/</span> <strong class="show-less">Show less…</strong>
+          <strong class="show-more" i18n:translate="label_show_more">Show more…</strong> <span class="divider">/</span> <strong class="show-less" i18n:translate="label_show_less">Show less…</strong>
         </p>
         <div class="panel-content">
 

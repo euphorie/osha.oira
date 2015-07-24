@@ -57,8 +57,8 @@
 
         <h2 tal:content="string:Measure ${repeat/actionplan/number}">Measure 1</h2>
         <p class="functions">
-            <a class="icon-pencil pat-tooltip" tal:condition="measures" data-pat-tooltip="source:ajax" href="#standard-solutions-0">Pre-fill</a>
-            <a class="icon-trash remove-clone">Remove</a>
+            <a class="icon-pencil pat-tooltip" tal:condition="measures" data-pat-tooltip="source:ajax" href="#standard-solutions-0" i18n:translate="label_prefill">Pre-fill</a>
+            <a class="icon-trash remove-clone" i18n:translate="label_remove">Remove</a>
         </p>
         <tal:if_has_measures condition="measures">
             <div id="standard-solutions-0" hidden>
@@ -68,27 +68,27 @@
                         <a class="pat-inject close-panel"
                         href="#standard-solution-${repeat/measure/number}"
                         data-pat-inject="target: #fields-0" class="title">
-                        <em class="small pat-button">Add</em>${measure/description}</a>
+                        <em class="small pat-button" i18n:translate="">Add</em>${measure/description}</a>
                     </li>
                 </ol>
             </div>
         </tal:if_has_measures>
 
         <fieldset class="vertical" id="fields-0">
-            <label>Description
+            <label><tal:label i18n:translate="label_description"Description</tal:label>
                 <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
                 <textarea class="actionPlan" type="text" name="measure.action_plan:utf8:ustring:records" rows="6"
                     placeholder="General approach (to eliminate or reduce the risk)"
                     i18n:attributes="placeholder label_measure_action_plan"
                     tal:content="actionplan/action_plan|nothing"></textarea>
             </label>
-            <label>Prevention plan
+            <label><tal:label i18n:translate="label_prevention_plan">Prevention plan</tal:label>
                 <textarea class="preventionPlan" name="measure.prevention_plan:utf8:ustring:records" rows="3"
                     placeholder="Specific action(s) required to implement this approach"
                     i18n:attributes="placeholder label_measure_prevention_plan"
                     tal:content="actionplan/prevention_plan|nothing"></textarea>
             </label>
-            <label>Requirements
+            <label><tal:label i18n:translate="label_requirements">Requirements</tal:label>
                 <textarea class="requirements" name="measure.requirements:utf8:ustring:records" rows="3"
                     placeholder="Level of expertise and/or requirements needed"
                     i18n:attributes="placeholder label_measure_requirements"
@@ -134,15 +134,15 @@
 </div>
 
 	<div class="button-bar">
-		<button class="add-clone pat-button icon-plus-circle" id="addMeasureButton" title="Add another measure" type="button">Add another measure</button>
+		<button class="add-clone pat-button icon-plus-circle" id="addMeasureButton" title="Add another measure" type="button" i18n:translate="label_add_another_measure">Add another measure</button>
 	</div>
 
 	<div class="measure pat-collapsible" id="measure-template" hidden>
         <tal:get_measures define="measures view/solutions|python:[]">
-		<h2>Measure #{1}</h2>
+		<h2 i18n:translate="header_measure1">Measure #{1}</h2>
 		<p class="functions">
-			<a class="icon-pencil pat-tooltip" tal:condition="measures" data-pat-tooltip="source: ajax" href="#standard-solutions-#{1}">Pre-fill</a>
-			<a class="icon-trash remove-clone">Remove</a>
+			<a class="icon-pencil pat-tooltip" tal:condition="measures" data-pat-tooltip="source: ajax" href="#standard-solutions-#{1}" i18n:translate="label_prefill">Pre-fill</a>
+			<a class="icon-trash remove-clone" i18n:translate="label_remove">Remove</a>
 		</p>
 
         <tal:if_has_measures condition="measures">
@@ -154,7 +154,7 @@
                        class="title"
                        href="#standard-solution-${repeat/solution/number}"
                        data-pat-inject="target: #fields-#{1}">
-                    <em class="small pat-button">Add</em>${solution/description}</a>
+                    <em class="small pat-button" i18n:translate="">Add</em>${solution/description}</a>
                 </li>
             </ol>
         </div>
@@ -215,13 +215,13 @@
 
     <tal:loop repeat="solution view/solutions|python:[]">
         <fieldset class="vertical" id="standard-solution-${repeat/solution/number}" hidden>
-            <label>Description
+            <label><tal:label i18n:translate="label_description">Description</tal:label>
                 <textarea class="actionPlan" name="measure.action_plan:utf8:ustring:records" placeholder="General approach (to eliminate or reduce the risk)" rows="6">${solution/description}</textarea>
             </label>
-            <label>Prevention plan
+            <label><tal:label i18n:translate="label_prevention_plan">Prevention plan</tal:label>
                 <textarea class="preventionPlan" name="measure.prevention_plan:utf8:ustring:records" placeholder="Specific action(s) required to implement this approach" rows="3">${solution/action_plan}</textarea>
             </label>
-            <label>Requirements
+            <label><tal:label i18n:translate="label_requirements">Requirements</tal:label>
                 <textarea class="requirements" name="measure.requirements:utf8:ustring:records" placeholder="Level of expertise and/or requirements needed" rows="3">${solution/requirements}</textarea>
             </label>
         </fieldset>

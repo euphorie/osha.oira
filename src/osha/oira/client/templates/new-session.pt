@@ -10,7 +10,7 @@
       metal:use-macro="context/@@shell/macros/shell">
 <body>
 <div id="document-content" class="pat-modal">
-    <h1>New session</h1>
+    <h1 i18n:translate="header_new_session">New session</h1>
     <form method="post" action="${request/URL}" class="wizard-box">
     <input type="hidden" name="action" value="new"/>
     <div class="panel-body">
@@ -34,8 +34,8 @@
     </fieldset>
     </div>
     <div class="buttons panel-footer">
-        <button type="submit" class="pat-button ">Start session</button>
-        <button type="button" class="pat-button close-panel">Cancel</button>
+        <button type="submit" class="pat-button " i18n:translate="button_start_session">Start session</button>
+        <button type="button" class="pat-button close-panel" i18n:translate="button_cancel">Cancel</button>
     </div>
     </form>
 </div>

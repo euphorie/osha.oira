@@ -265,7 +265,7 @@
       </li>
     </ul>
 
-    <h2>EFTA Countries</h2>
+    <h2 i18n:translate="header_efta_countries">EFTA Countries</h2>
     <ul class="countries">
       <li class="is"
           tal:attributes="class python: sectors_dict.get('is') and 'is' or 'is disabled'">

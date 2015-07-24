@@ -52,9 +52,9 @@
           </legend>
 
             <fieldset class="form-iteration pat-clone" data-pat-clone="template: #clone-template-${question/id}; trigger-element: #clone-set-${repeat/question/number}">
-                <label id="clone-template-${question/id}" hidden>
-                    <input class="pat-depends" autofocus placeholder="${question/label_single_occurance} #{1}" data-pat-depends="pq${question/id}.multiple=yes"
-                           size="40" type="text" name="${question/id}:utf8:utext:list">&nbsp;
+                <label id="clone-template-${question/id}" hidden="hidden">
+                    <input class="pat-depends" autofocus="autofocus" placeholder="${question/label_single_occurance} #{1}" data-pat-depends="pq${question/id}.multiple=yes"
+                           size="40" type="text" name="${question/id}:utf8:utext:list" />&nbsp;
                     <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="Remove">Remove</button>
                 </label>
 

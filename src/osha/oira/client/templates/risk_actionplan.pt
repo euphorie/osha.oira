@@ -20,7 +20,7 @@
 
 <form method="post" action="${context/absolute_url}" class="pat-inject pat-validate pat-scroll"
     data-pat-validate="disable-selector: button[name='next'], .remove-clone"
-    data-pat-inject="history: record; source: #step-4; target: #step-4 && source: #content; target: #content"
+    data-pat-inject="history: record; source: #step-4; target: #step-4 &amp;&amp; source: #content; target: #content"
     data-pat-scroll="selector: #content; trigger: auto; offset: 0">
 <article class="rich pat-well warning" id="${view/risk_number}">
     <tal:block condition="not:view/risk_present">
@@ -61,13 +61,13 @@
             <a class="icon-trash remove-clone" i18n:translate="label_remove">Remove</a>
         </p>
         <tal:if_has_measures condition="measures">
-            <div id="standard-solutions-0" hidden>
+            <div id="standard-solutions-0" hidden="hidden">
                 <p class="info" i18n:translate="label_select_measure">Select one or more of the known common measures provided.</p>
                 <ol class="add-measure-menu">
                     <li tal:repeat="measure measures">
-                        <a class="pat-inject close-panel"
+                        <a class="pat-inject close-panel title"
                         href="#standard-solution-${repeat/measure/number}"
-                        data-pat-inject="target: #fields-0" class="title">
+                        data-pat-inject="target: #fields-0">
                         <em class="small pat-button" i18n:translate="">Add</em>${measure/description}</a>
                     </li>
                 </ol>
@@ -102,7 +102,7 @@
                 <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="actionplan_measure_responsible_tooltip">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</dfn>
                 <input type="text" class="responsible" name="measure.responsible:utf8:ustring:records" value="${actionplan/responsible|nothing}"/>
             </label>
-            <label class="currency" class="${python:'error' if exists('errors/budget') else None}">
+            <label class="${python:'error' if exists('errors/budget') else None}">
                 <tal:span i18n:translate="label_action_plan_budget">Budget</tal:span>
                 <em class="message error" tal:condition="exists:errors/budget" i18n:translate="error_invalid_budget">Please enter the budget in whole Euros.</em>
                 <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="actionplan_measure_budget_tooltip">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</dfn>
@@ -137,21 +137,20 @@
 		<button class="add-clone pat-button icon-plus-circle" id="addMeasureButton" title="Add another measure" type="button" i18n:translate="label_add_another_measure">Add another measure</button>
 	</div>
 
-	<div class="measure pat-collapsible" id="measure-template" hidden>
+	<div class="measure pat-collapsible" id="measure-template" hidden="hidden">
         <tal:get_measures define="measures view/solutions|python:[]">
-		<h2 i18n:translate="header_measure1">Measure #{1}</h2>
+		<h2><tal:measure i18n:translate="Solution">Measure</tal:measure> #{1}</h2>
 		<p class="functions">
 			<a class="icon-pencil pat-tooltip" tal:condition="measures" data-pat-tooltip="source: ajax" href="#standard-solutions-#{1}" i18n:translate="label_prefill">Pre-fill</a>
 			<a class="icon-trash remove-clone" i18n:translate="label_remove">Remove</a>
 		</p>
 
         <tal:if_has_measures condition="measures">
-		<div id="standard-solutions-#{1}" hidden>
+		<div id="standard-solutions-#{1}" hidden="hidden">
             <p class="info" i18n:translate="label_select_measure">Select one or more of the known common measures provided.</p>
             <ol class="add-measure-menu">
                 <li tal:repeat="solution measures">
-                    <a class="pat-inject close-panel"
-                       class="title"
+                    <a class="pat-inject close-panel title"
                        href="#standard-solution-${repeat/solution/number}"
                        data-pat-inject="target: #fields-#{1}">
                     <em class="small pat-button" i18n:translate="">Add</em>${solution/description}</a>
@@ -164,7 +163,7 @@
 		<fieldset class="vertical" id="fields-#{1}">
 			<label>Description
 				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
-				<textarea autofocus class=" actionPlan" name="measure.action_plan:utf8:ustring:records" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea>
+				<textarea autofocus="autofocus" class=" actionPlan" name="measure.action_plan:utf8:ustring:records" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea>
 			</label>
 			<label>Prevention plan
 				<textarea class="preventionPlan" name="measure.prevention_plan:utf8:ustring:records" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea>
@@ -178,7 +177,7 @@
 			<label>
 				Who is responsible?
 				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</dfn>
-				<input class="responsible" name="measure.responsible:utf8:ustring:records" type="text">
+				<input class="responsible" name="measure.responsible:utf8:ustring:records" type="text" />
 			</label>
 			<label class="currency">
 				Budget
@@ -214,7 +213,7 @@
     </form>
 
     <tal:loop repeat="solution view/solutions|python:[]">
-        <fieldset class="vertical" id="standard-solution-${repeat/solution/number}" hidden>
+        <fieldset class="vertical" id="standard-solution-${repeat/solution/number}" hidden="hidden">
             <label><tal:label i18n:translate="label_description">Description</tal:label>
                 <textarea class="actionPlan" name="measure.action_plan:utf8:ustring:records" placeholder="General approach (to eliminate or reduce the risk)" rows="6">${solution/description}</textarea>
             </label>

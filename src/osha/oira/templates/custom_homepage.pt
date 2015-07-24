@@ -32,11 +32,11 @@
     </tal:block>
 
     <tal:block condition="webhelpers/debug_mode">
-        <link rel="stylesheet" href="${base_url}/screen.css" type="text/css">
+        <link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
     </tal:block>
     <tal:block condition="not:webhelpers/debug_mode">
         <!-- TODO: needs to be minified -->
-        <link rel="stylesheet" href="${base_url}/screen.css" type="text/css">
+        <link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
     </tal:block>
 
     <metal:javascriptslot define-slot="javascript_head_slot" />

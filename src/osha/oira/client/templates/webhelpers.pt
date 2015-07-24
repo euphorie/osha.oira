@@ -41,11 +41,11 @@
          tal:define="base_url client/++resource++osha.oira.resources">
 
     <tal:block condition="webhelpers/debug_mode">
-		<link rel="stylesheet" href="${base_url}/screen.css" type="text/css">
+		<link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
     </tal:block>
     <tal:block condition="not:webhelpers/debug_mode">
         <!-- TODO: needs to be minified -->
-		<link rel="stylesheet" href="${base_url}/screen.css" type="text/css">
+		<link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
     </tal:block>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
   </metal:css>
@@ -84,7 +84,7 @@
       <li tal:condition="python: item['type']!='location'"
           title="${python:'%s. %s' % (item['number'], item['title']) if tree['leaf_module'] else None}"
           class="${python: '%s %s' % (item['class'], 'submodule' if item['type'] == 'module' and item['depth']>1 else '')}">
-        <a tal:define="item_class item/class" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #${target_inject}; target: #${target_inject} && source: #content; target: #content"
+        <a tal:define="item_class item/class" class="pat-switch pat-inject" data-pat-switch="selector: body; remove: focus-*; add: focus-document" data-pat-inject="history: record; source: #${target_inject}; target: #${target_inject} &amp;&amp; source: #content; target: #content"
             href="${item/url}">
                 <strong class="${python:'counter' if item['type']=='module' else 'number'}">${item/number}</strong> ${item/title}
         </a>

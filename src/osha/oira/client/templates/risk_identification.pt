@@ -14,7 +14,7 @@
 <metal:slot fill-slot="content" tal:define="risk nocall:view/risk">
 <tal:block replace="tile:statusmessages"/>
 <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}" class="pat-inject pat-scroll"
-      data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #content; target: #content"
+      data-pat-inject="history: record; source: #step-2; target: #step-2 &amp;&amp; source: #content; target: #content"
       data-pat-scroll="selector: #content; trigger: auto; offset: 0">
 
     <!-- Identification -->
@@ -156,7 +156,7 @@
     </fieldset>
 
     <!-- Copy and legal -->
-    <article class="rich" class="message emphasis" tal:condition="view/show_info">
+    <article class="message emphasis rich" tal:condition="view/show_info">
         <metal:call use-macro="webhelpers/macros/risk_info_identification" />
 
         <tal:if_legal condition="risk/legal_reference|nothing">
@@ -173,8 +173,8 @@
     </fieldset>
 
     <p class="buttonBar">
-        <button class="pat-button" type="submit" name="next" value="previous" i18n:translate="label_previous" class="floatBefore back">Previous</button>
-        <button class="pat-button" type="submit" name="next" value="next" i18n:translate="label_save_and_continue" class="floatAfter">Save and continue</button>
+        <button class="pat-button" type="submit" name="next" value="previous" i18n:translate="label_previous">Previous</button>
+        <button class="pat-button" type="submit" name="next" value="next" i18n:translate="label_save_and_continue">Save and continue</button>
     </p>
 </form>
 </metal:slot>

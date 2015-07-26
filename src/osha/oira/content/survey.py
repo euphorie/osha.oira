@@ -65,6 +65,53 @@ class IOSHASurvey(form.Schema):
                     u"characters."),
         required=False)
 
+    enable_custom_evaluation_descriptions = schema.Bool(
+        title=_("label_enable_custom_evaluation_descriptions",
+                default=u"The criteria applied to evaluate risks are specific "
+                u"of this tool? (If not, the common criteria descriptions "
+                u"will apply)."),
+        description=_("help_enable_custom_evaluation_descriptions",
+                      default=u"Tick this option if you would like to define "
+                      u"your own descriptions for the criteria of the "
+                      u"evaluation algorithm. The user will see them as hints "
+                      u"when answering the questions to calculate the "
+                      u"priority of a risk."),
+        required=False,
+        default=False)
+
+    depends("IOSHASurvey.description_probability",
+            "IOSHASurvey.enable_custom_evaluation_descriptions",
+            "on")
+    description_probability = schema.Text(
+        title=_(u"Probability"),
+        description=_(
+            u"description_criteria_description",
+            default=u"Enter your explanation here"),
+        required=False,
+    )
+
+    depends("IOSHASurvey.description_frequency",
+            "IOSHASurvey.enable_custom_evaluation_descriptions",
+            "on")
+    description_frequency = schema.Text(
+        title=_(u"Frequency"),
+        description=_(
+            u"description_criteria_description",
+            default=u"Enter your explanation here"),
+        required=False,
+    )
+
+    depends("IOSHASurvey.description_severity",
+            "IOSHASurvey.enable_custom_evaluation_descriptions",
+            "on")
+    description_severity = schema.Text(
+        title=_(u"Severity"),
+        description=_(
+            u"description_criteria_description",
+            default=u"Enter your explanation here"),
+        required=False,
+    )
+
 interface.alsoProvides(IOSHASurvey, IFormFieldProvider)
 
 
@@ -82,6 +129,10 @@ class OSHASurvey(MetadataBase):
     external_site_url = DCFieldProperty(IOSHASurvey['external_site_url'])
     external_site_name = DCFieldProperty(IOSHASurvey['external_site_name'])
     external_site_logo = DCFieldProperty(IOSHASurvey['external_site_logo'])
+    enable_custom_evaluation_descriptions = DCFieldProperty(IOSHASurvey['enable_custom_evaluation_descriptions'])
+    description_probability = DCFieldProperty(IOSHASurvey['description_probability'])
+    description_frequency = DCFieldProperty(IOSHASurvey['description_frequency'])
+    description_severity = DCFieldProperty(IOSHASurvey['description_severity'])
 
 
 class OSHASurveyEditForm(dexterity.EditForm):
@@ -90,8 +141,11 @@ class OSHASurveyEditForm(dexterity.EditForm):
 
     def updateWidgets(self):
         result = super(OSHASurveyEditForm, self).updateWidgets()
-        widget = self.widgets.get('evaluation_optional')
-        widget.mode = z3c.form.interfaces.HIDDEN_MODE
+        evaluation_optional = self.widgets.get('evaluation_optional')
+        evaluation_optional.mode = z3c.form.interfaces.HIDDEN_MODE
+        if self.context.aq_parent.evaluation_algorithm == 'french':
+            description_probability = self.widgets.get('IOSHASurvey.description_probability')
+            description_probability.mode = z3c.form.interfaces.HIDDEN_MODE
         return result
 
 

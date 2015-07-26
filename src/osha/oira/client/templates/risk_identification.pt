@@ -38,7 +38,7 @@
     <tal:kinney condition="python:algorithm!='french'">
         <fieldset class="pat-checklist radio" tal:define="value context/probability">
         <legend><tal:span i18n:translate="header_risk_probability">What is the chance of this risk occurring?</tal:span>
-            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="help_default_probability">Indicate how likely occurence of this risk is in a normal situation.</dfn>
+            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="help_default_probability">${view/description_probability}</dfn>
         </legend>
         <label><input type="radio" name="probability:int" value="1" checked="${python:'checked' if value==1 else None}"/>
             <tal:span i18n:translate="probability_small">Small</tal:span></label>
@@ -50,7 +50,7 @@
 
         <fieldset class="pat-checklist radio" tal:define="value context/frequency">
         <legend><tal:span i18n:translate="header_risk_frequency">How often are people exposed to this risk?</tal:span>
-            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="help_default_frequency">Indicate how often this risk occurs in a normal situation.</dfn>
+            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">${view/description_frequency}</dfn>
         </legend>
         <label><input type="radio" name="frequency:int" value="1" checked="${python:'checked' if value==1 else None}"/>
             <tal:span i18n:translate="frequency_almost_never">Almost never</tal:span></label>
@@ -62,7 +62,7 @@
 
         <fieldset class="pat-checklist radio" tal:define="value context/effect">
         <legend><tal:span i18n:translate="header_risk_effect">What is the severity of the damage?</tal:span>
-            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="help_default_severity">Indicate the default severity of this risk occurs.</dfn>
+            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">${view/description_severity}</dfn>
         </legend>
         <label><input type="radio" name="effect:int" value="1" checked="${python:'checked' if value==1 else None}"/>
             <tal:span i18n:translate="effect_injury_no_absence">Weak severity</tal:span></label>
@@ -75,7 +75,7 @@
     <tal:french condition="python:algorithm=='french'">
         <fieldset class="pat-checklist radio" tal:define="value context/effect">
         <legend><tal:span i18n:translate="header_risk_effect">What is the severity of the damage?</tal:span>
-            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="help_default_severity">Indicate the default severity of this risk occurs.</dfn>
+            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">${view/description_severity}</dfn>
         </legend>
         <label>
             <input type="radio" name="severity:int" value="1" checked="${python:'checked' if value==1 else None}"/>
@@ -99,7 +99,7 @@
 
         <fieldset class="pat-checklist radio" tal:define="value context/frequency">
         <legend><tal:span i18n:translate="header_risk_frequency">How often are people exposed to this risk?</tal:span>
-            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="help_default_frequency">Indicate how often this risk occurs in a normal situation.</dfn>
+            <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">${view/description_frequency}</dfn>
         </legend>
         <label>
             <input type="radio" name="frequency:int" value="1" checked="${python:'checked' if value==1 else None}"/>

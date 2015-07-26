@@ -217,6 +217,7 @@ class OSHAStatus(survey.Status):
         toc = {}
 
         for path in module_paths:
+            number = ".".join(self.slicePath(path))
             # top-level module, always include it in the toc
             if len(path) == 3:
                 title = titles[path]
@@ -224,6 +225,7 @@ class OSHAStatus(survey.Status):
                     'path': path,
                     'title': title,
                     'locations': [],
+                    'number': number,
                 }
                 # If this is a profile (aka container for locations), skip
                 # adding to the list of modules
@@ -236,6 +238,7 @@ class OSHAStatus(survey.Status):
                     toc[path[:3]]['locations'].append({
                         'path': path,
                         'title': titles[path],
+                        'number': number,
                     })
                 else:
                     log.warning(
@@ -251,7 +254,8 @@ class OSHAStatus(survey.Status):
                 'ok': 0,
                 'postponed': 0,
                 'risk_with_measures': 0,
-                'risk_without_measures': 0
+                'risk_without_measures': 0,
+                'number': number,
             }
         self.tocdata = toc
         return modules

@@ -338,7 +338,10 @@ class OSHAStatus(survey.Status):
                 risk_obj = self.request.survey.restrictedTraverse(r['zodb_path'].split('/'))
                 if not risk_obj:
                     continue
-                risk_title = risk_obj.problem_description
+                if r['identification'] == 'no':
+                    risk_title = risk_obj.problem_description
+                else:
+                    risk_title = r['title']
             url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['path'])))
             if self.high_risks.get(r['module_path']):
                 self.high_risks[r['module_path']].append({'title': risk_title, 'path': url})

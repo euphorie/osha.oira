@@ -10,21 +10,21 @@
       metal:use-macro="context/@@shell/macros/shell">
 
 <body i18n:domain="euphorie">
-<div id="content">
-    <ul class="menu" tal:define="webhelpers nocall:context/@@webhelpers">
-      <li>
-          <a class="icon-key" href="${webhelpers/country_url}/account-settings" i18n:translate="title_change_password">Change password</a>
-      </li>
-      <li>
-          <a class="icon-mail" href="${webhelpers/country_url}/new-email" i18n:translate="">Change email address</a>
-      </li>
-      <li>
-          <a class="icon-cancel-circled" href="${webhelpers/country_url}/account-delete" i18n:translate="">Delete account</a>
-      </li>
-      <li>
-        <a class="icon-logout" href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a>
-      </li>
-    </ul>
-</div>
+  <metal:slot fill-slot="content">
+      <ul class="menu" tal:define="webhelpers nocall:context/@@webhelpers">
+        <li>
+            <a class="icon-key" href="${webhelpers/country_url}/account-settings" i18n:translate="title_change_password">Change password</a>
+        </li>
+        <li>
+            <a class="icon-mail" href="${webhelpers/country_url}/new-email" i18n:translate="">Change email address</a>
+        </li>
+        <li>
+            <a class="icon-cancel-circled" href="${webhelpers/country_url}/account-delete" i18n:translate="">Delete account</a>
+        </li>
+        <li>
+          <a class="icon-logout" href="${webhelpers/country_url}/logout" i18n:translate="navigation_logout">Logout</a>
+        </li>
+      </ul>
+  </metal:slot>
 </body>
 </html>

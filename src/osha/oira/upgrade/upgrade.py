@@ -5,6 +5,7 @@ from euphorie.client.publish import EnableCustomRisks
 from euphorie.client.sector import IClientSector
 from euphorie.content.survey import ISurvey
 from euphorie.deployment.upgrade.utils import TableExists
+from osha.oira import _
 from plone import api
 from plone.dexterity import utils
 from z3c.appconfig.interfaces import IAppConfig
@@ -168,6 +169,9 @@ def enable_custom_risks_on_all_modules(context):
     """ """
     appconfig = zope.component.getUtility(IAppConfig)
     if not asBool(appconfig["euphorie"].get("allow_user_defined_risks")):
+        log.warning(
+            "Custom risks are not enabled. Set 'allow_user_defined_risks' to "
+            "true in euphorie.ini for enabling them.")
         return
     portal = api.portal.get()
     client = portal.client
@@ -180,11 +184,22 @@ def enable_custom_risks_on_all_modules(context):
                         try:
                             EnableCustomRisks(survey)
                             count += 1
+                            custom = getattr(survey, 'custom-risks', None)
+                            if custom:
+                                custom.title = _('title_other_risks')
                             survey.published = (
                                 survey.id, survey.title, datetime.datetime.now())
                         except Exception, e:
                             log.error("Could not enable custom risks for module. %s" % e)
     log.info('All %d published surveys can now have custom risks.' % count)
+    session = Session()
+    if TableExists(session, "tree"):
+        session.execute(
+            "UPDATE tree SET title = 'title_other_risks' WHERE zodb_path ='custom-risks'")
+        model.metadata.create_all(session.bind, checkfirst=True)
+        datamanager.mark_changed(session)
+        transaction.get().commit()
+        log.info('Set correct title on all exisiting sessions for custom risks module.')
 
 
 def install_private_resources(context):

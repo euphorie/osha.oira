@@ -13,7 +13,9 @@
 <body>
 <metal:slot fill-slot="content" tal:define="risk nocall:view/risk|nothing; data view/data">
 <tal:block replace="tile:statusmessages"/>
-<tal:def define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};">
+<tal:def define="errors python:exists('actionplan/errors') and actionplan['errors'] or {};
+    action_plans data/action_plans;
+    action_plans python:len(action_plans) and action_plans or data.empty_action_plan">
 
 <!-- TODO: This needs to be integrated into site's CSS somehow -->
 <style> .measures .measure .functions a.disabled { display: none; } </style>
@@ -53,7 +55,7 @@
 <div class="measures pat-clone" data-pat-clone="template: #measure-template" id="ActionPlanItemForm">
     <div class="measure clone pat-collapsible"
          tal:define="measures view/solutions|python:[]"
-        tal:repeat="actionplan data/action_plans">
+        tal:repeat="actionplan action_plans">
 
         <h2 tal:content="string:Measure ${repeat/actionplan/number}">Measure 1</h2>
         <p class="functions">

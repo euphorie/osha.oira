@@ -160,9 +160,9 @@ class OSHAActionPlanView(risk.ActionPlanView):
             return self.request.response.redirect(url)
 
         else:
-            if len(context.action_plans) == 0:
-                context.action_plans.append(model.ActionPlan())
             self.data = context
+            if len(context.action_plans) == 0:
+                self.data.empty_action_plan = [model.ActionPlan()]
 
         self.title = context.parent.title
         self.tree = getTreeData(

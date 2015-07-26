@@ -8,7 +8,7 @@ from euphorie.client.navigation import QuestionURL
 from euphorie.client.navigation import getTreeData
 from euphorie.client.session import SessionManager
 from euphorie.client.update import redirectOnSurveyUpdate
-from euphorie.content import MessageFactory as _
+from osha.oira import _
 from euphorie.content.interfaces import ICustomRisksModule
 from euphorie.content.profilequestion import IProfileQuestion
 from five import grok
@@ -205,7 +205,7 @@ class IdentificationView(module.IdentificationView, Mixin):
 
             self.tree = getTreeData(
                 self.request, context, filter=model.NO_CUSTOM_RISKS_FILTER)
-            self.title = context.title
+            self.title = module.title
             self.module = module
             self.next_is_actionplan = not FindNextQuestion(
                 context, filter=self.question_filter)

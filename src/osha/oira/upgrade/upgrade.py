@@ -182,13 +182,25 @@ def enable_custom_risks_on_all_modules(context):
                 if IClientSector.providedBy(sector):
                     for survey in sector.objectValues():
                         try:
-                            EnableCustomRisks(survey)
+                            is_new = EnableCustomRisks(survey)
                             count += 1
                             custom = getattr(survey, 'custom-risks', None)
                             if custom:
-                                custom.title = _('title_other_risks')
-                            survey.published = (
-                                survey.id, survey.title, datetime.datetime.now())
+                                custom.title = _(u'title_other_risks', default=u"Added risks (by you)")
+                                custom.description = _(
+                                    u"description_other_risks",
+                                    default=u"In case you have identified risks not included in "
+                                    u"the tool, you are able to add them now:")
+                                custom.question = _(
+                                    u"question_other_risks",
+                                    default=u"<p>Would you now like to add your own defined risks "
+                                    u"to this tool?</p><p><strong>Important:</strong> In "
+                                    u"order to avoid duplicating risks, we strongly recommend you "
+                                    u"to go first through all the previous modules, if you have not "
+                                    u"done it yet.</p><p>If you don't need to add risks, please select 'No.'</p>")
+                            if is_new:
+                                survey.published = (
+                                    survey.id, survey.title, datetime.datetime.now())
                         except Exception, e:
                             log.error("Could not enable custom risks for module. %s" % e)
     log.info('All %d published surveys can now have custom risks.' % count)

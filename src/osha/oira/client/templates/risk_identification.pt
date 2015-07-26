@@ -156,7 +156,7 @@
     </fieldset>
 
     <!-- Copy and legal -->
-    <article class="message emphasis rich" tal:condition="view/show_info">
+    <article class="rich" tal:condition="view/show_info">
         <metal:call use-macro="webhelpers/macros/risk_info_identification" />
 
         <tal:if_legal condition="risk/legal_reference|nothing">

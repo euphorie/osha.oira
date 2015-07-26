@@ -12,7 +12,7 @@
 <body>
 <metal:slot fill-slot="content" tal:define="module nocall:view/module">
 <article class="rich">
-    <h1 i18n:translate="title_other_risks">Other risks</h1>
+    <h1 i18n:translate="title_other_risks">Added risks (by you)</h1>
     <tal:block replace="tile:statusmessages"/>
 
     <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}">

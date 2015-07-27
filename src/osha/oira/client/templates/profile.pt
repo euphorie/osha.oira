@@ -29,7 +29,7 @@
     </ul>
 </article>
 
-<form class="pat-validate" method="post" action="${request/URL}" novalidate
+<form class="pat-validate" method="post" action="${request/URL}"
       data-pat-validate="message-required: This field is required">
 <fieldset class="vertical" tal:repeat="question view/profile_questions">
     <section tal:define="current python:view.current_profile.get(question['id'])">

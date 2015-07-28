@@ -43053,6 +43053,7 @@ define('pat-validate',[
     "moment",
     "validate"
 ], function($, Parser, Base, utils, moment, validate) {
+    "use strict"
     validate.moment = moment;
     var parser = new Parser("validate");
     parser.addArgument("disable-selector"); // Elements which must be disabled if there are errors
@@ -43072,9 +43073,47 @@ define('pat-validate',[
             this.errors = 0;
             this.options = parser.parse(this.$el, opts);
             this.$inputs = this.$el.find(':input[name]');
-            this.$inputs.on('change.pat-validate', this.validateElement.bind(this));
+            this.$inputs.on('change.pat-validate', function (ev) { this.validateElement(ev.target); }.bind(this));
             this.$el.on('submit.pat-validate', this.validateForm.bind(this));
             this.$el.on('pat-update.pat-validate', this.onPatternUpdate.bind(this));
+        },
+
+        setLocalDateConstraints: function (input, opts, constraints) {
+            /* Set the relative date constraints, i.e. not-after and not-before, as well as custom messages.
+             */
+            var name, c, type = input.getAttribute('type');
+            if (typeof opts == "undefined") {
+                return constraints;
+            }
+            name = input.getAttribute('name').replace(/\./g, '\\.');
+            c = constraints[name][type];
+            _.each(['before', 'after'], function (relation) {
+                var isDate = validate.moment.isDate,
+                    relative = opts.not[relation], arr, constraint, $ref;
+                if (opts.message[type]) {
+                    c.message = '^'+opts.message[type];
+                }
+                if (typeof relative == "undefined") {
+                    return;
+                }
+                constraint = relation === "before" ? 'earliest' : 'latest';
+                if (isDate(relative)) {
+                    c[constraint] = relative;
+                } else {
+                    try {
+                        $ref = $(relative);
+                    } catch (e) {
+                        console.log(e);
+                    }
+                    arr = $ref.data('pat-validate-refs') || [];
+                    if (!_.contains(arr, input)) {
+                        arr.unshift(input);
+                        $ref.data('pat-validate-refs', arr);
+                    }
+                    c[constraint] = $ref.val();
+                }
+            });
+            return constraints;
         },
 
         setLocalConstraints: function (input, constraints) {
@@ -43083,28 +43122,9 @@ define('pat-validate',[
              *
              * We parse them and add them to the passed in constraints obj.
              */
-            var name = input.getAttribute('name').replace(/\./g, '\\.'),
-                type = input.getAttribute('type'),
-                isDate = validate.moment.isDate,
-                opts;
             if (input.dataset.patValidate) {
-                if (_.contains(['datetime', 'date'], type)) {
-                    opts = parser.parse($(input));
-                    if (typeof opts.not !== "undefined") {
-                        c = constraints[name][type];
-                        try {
-                            if (typeof opts.not.before !== "undefined") {
-                                c.earliest = isDate(opts.not.before) ? opts.not.before : $(opts.not.before).val();
-                                c.message = '^'+opts.message[type];
-                            }
-                            if (typeof opts.not.after !== "undefined") {
-                                c.latest = isDate(opts.not.after) ? opts.not.after : $(opts.not.after).val();
-                                c.message = '^'+opts.message[type];
-                            }
-                        } catch (e) {
-                            console.log(e);
-                        }
-                    }
+                if (_.contains(['datetime', 'date'], input.getAttribute('type'))) {
+                    this.setLocalDateConstraints(input, parser.parse($(input)), constraints);
                 }
             }
             return constraints;
@@ -43144,10 +43164,8 @@ define('pat-validate',[
                 return !input.hasAttribute('disabled');
             });
             for (var i=0; i<$not_disabled.length; i++) {
-                input = $not_disabled[i];
-                error = validate(this.getValueDict(input), this.getConstraints(input));
+                error = this.validateElement($not_disabled[i]);
                 if (typeof error != "undefined") {
-                    this.showError(error, input);
                     if (!has_errors) {
                         ev.preventDefault();
                         ev.stopPropagation();
@@ -43158,17 +43176,21 @@ define('pat-validate',[
             }
         },
 
-        validateElement: function (ev) {
+        validateElement: function (input, no_recurse) {
             /* Handler which gets called when a single form :input element
              * needs to be validated. Will prevent the event's default action
              * if validation fails.
              */
-            var error = validate(this.getValueDict(ev.target), this.getConstraints(ev.target));
+            var error = validate(this.getValueDict(input), this.getConstraints(input));
             if (!error) {
-                this.removeError(ev.target);
+                this.removeError(input);
             } else {
-                this.showError(error, ev.target);
+                this.showError(error, input);
             }
+            if (!no_recurse) {
+                _.each($(input).data('pat-validate-refs') || [], _.partial(this.validateElement.bind(this), _, true));
+            }
+            return error;
         },
 
         onPatternUpdate: function (ev, data) {

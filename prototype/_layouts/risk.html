@@ -49,7 +49,7 @@ layout: shell
 			<label><input type="radio" name="effect" /> High (very high) severity</label>
 		</fieldset>
 	{% elsif page.evaluation_method == 'risk_estimated'  %}
-		<legend class="problem-description">{{ page.problem_description }}</legend>
+		<p class="problem-description"><strong>{{ page.problem_description }}</strong></p>
 		<fieldset class="pat-checklist radio">
 			<legend>Select the priority of this risk</legend>
 			<label><input type="radio" name="chance" /> Low</label>

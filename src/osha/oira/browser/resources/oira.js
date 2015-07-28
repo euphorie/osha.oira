@@ -10740,1646 +10740,6 @@ return jQuery;
 
 }));
 
-/**
- * Patterns logging - minimal logging framework
- *
- * Copyright 2012 Simplon B.V.
- */
-
-(function() {
-    // source: https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/bind
-    if (!Function.prototype.bind) {
-        Function.prototype.bind = function (oThis) {
-            if (typeof this !== "function") {
-                // closest thing possible to the ECMAScript 5 internal IsCallable function
-                throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
-            }
-
-            var aArgs = Array.prototype.slice.call(arguments, 1),
-                fToBind = this,
-                fNOP = function () {},
-                fBound = function () {
-                    return fToBind.apply(this instanceof fNOP &&
-                            oThis ? this : oThis,
-                            aArgs.concat(Array.prototype.slice.call(arguments)));
-                };
-            fNOP.prototype = this.prototype;
-            fBound.prototype = new fNOP();
-
-            return fBound;
-        };
-    }
-
-    var root,    // root logger instance
-        writer;  // writer instance, used to output log entries
-
-    var Level = {
-        DEBUG: 10,
-        INFO: 20,
-        WARN: 30,
-        ERROR: 40,
-        FATAL: 50
-    };
-
-    function IEConsoleWriter() {
-    }
-
-    IEConsoleWriter.prototype = {
-        output:  function(log_name, level, messages) {
-            // console.log will magically appear in IE8 when the user opens the
-            // F12 Developer Tools, so we have to test for it every time.
-            if (typeof window.console==="undefined" || typeof console.log==="undefined")
-                    return;
-            if (log_name)
-                messages.unshift(log_name+":");
-            var message = messages.join(" ");
-
-            // Under some conditions console.log will be available but the
-            // other functions are missing.
-            if (typeof console.info===undefined) {
-                var level_name;
-                if (level<=Level.DEBUG)
-                    level_name="DEBUG";
-                else if (level<=Level.INFO)
-                    level_name="INFO";
-                else if (level<=Level.WARN)
-                    level_name="WARN";
-                else if (level<=Level.ERROR)
-                    level_name="ERROR";
-                else
-                    level_name="FATAL";
-                console.log("["+level_name+"] "+message);
-            } else {
-                if (level<=Level.DEBUG) {
-                    // console.debug exists but is deprecated
-                    message="[DEBUG] "+message;
-                    console.log(message);
-                } else if (level<=Level.INFO)
-                    console.info(message);
-                else if (level<=Level.WARN)
-                    console.warn(message);
-                else
-                    console.error(message);
-            }
-        }
-    };
-
-
-    function ConsoleWriter() {
-    }
-
-    ConsoleWriter.prototype = {
-        output: function(log_name, level, messages) {
-            if (log_name)
-                messages.unshift(log_name+":");
-            if (level<=Level.DEBUG) {
-                // console.debug exists but is deprecated
-                messages.unshift("[DEBUG]");
-                console.log.apply(console, messages);
-            } else if (level<=Level.INFO)
-                console.info.apply(console, messages);
-            else if (level<=Level.WARN)
-                console.warn.apply(console, messages);
-            else
-                console.error.apply(console, messages);
-        }
-    };
-
-
-    function Logger(name, parent) {
-        this._loggers={};
-        this.name=name || "";
-        this._parent=parent || null;
-        if (!parent) {
-            this._enabled=true;
-            this._level=Level.WARN;
-        }
-    }
-
-    Logger.prototype = {
-        getLogger: function(name) {
-            var path = name.split("."),
-                root = this,
-                route = this.name ? [this.name] : [];
-            while (path.length) {
-                var entry = path.shift();
-                route.push(entry);
-                if (!(entry in root._loggers))
-                    root._loggers[entry] = new Logger(route.join("."), root);
-                root=root._loggers[entry];
-            }
-            return root;
-        },
-
-        _getFlag: function(flag) {
-            var context=this;
-            flag="_"+flag;
-            while (context!==null) {
-                if (context[flag]!==undefined)
-                    return context[flag];
-                context=context._parent;
-            }
-            return null;
-        },
-
-        setEnabled: function(state) {
-            this._enabled=!!state;
-        },
-
-        isEnabled: function() {
-            this._getFlag("enabled");
-        },
-
-        setLevel: function(level) {
-            if (typeof level==="number")
-                this._level=level;
-            else if (typeof level==="string") {
-                level=level.toUpperCase();
-                if (level in Level)
-                    this._level=Level[level];
-            }
-        },
-
-        getLevel: function() {
-            return this._getFlag("level");
-        },
-
-        log: function(level, messages) {
-            if (!messages.length || !this._getFlag("enabled") || level<this._getFlag("level"))
-                return;
-            messages=Array.prototype.slice.call(messages);
-            writer.output(this.name, level, messages);
-        },
-
-        debug: function() {
-            this.log(Level.DEBUG, arguments);
-        },
-
-        info: function() {
-            this.log(Level.INFO, arguments);
-        },
-
-        warn: function() {
-            this.log(Level.WARN, arguments);
-        },
-
-        error: function() {
-            this.log(Level.ERROR, arguments);
-        },
-
-        fatal: function() {
-            this.log(Level.FATAL, arguments);
-        }
-    };
-
-    function getWriter() {
-        return writer;
-    }
-
-    function setWriter(w) {
-        writer=w;
-    }
-
-    if (!window.console || !window.console.log || typeof window.console.log.apply !== "function") {
-        setWriter(new IEConsoleWriter());
-    } else {
-        setWriter(new ConsoleWriter());
-    }
-
-    root=new Logger();
-
-    var logconfig = /loglevel(|-[^=]+)=([^&]+)/g,
-        match;
-
-    while ((match=logconfig.exec(window.location.search))!==null) {
-        var logger = (match[1]==="") ? root : root.getLogger(match[1].slice(1));
-        logger.setLevel(match[2].toUpperCase());
-    }
-
-    var api = {
-        Level: Level,
-        getLogger: root.getLogger.bind(root),
-        setEnabled: root.setEnabled.bind(root),
-        isEnabled: root.isEnabled.bind(root),
-        setLevel: root.setLevel.bind(root),
-        getLevel: root.getLevel.bind(root),
-        debug: root.debug.bind(root),
-        info: root.info.bind(root),
-        warn: root.warn.bind(root),
-        error: root.error.bind(root),
-        fatal: root.fatal.bind(root),
-        getWriter: getWriter,
-        setWriter: setWriter
-    };
-
-    // Expose as either an AMD module if possible. If not fall back to exposing
-    // a global object.
-    if (typeof define==="function")
-        define("logging", [], function () {
-            return api;
-        });
-    else
-        window.logging=api;
-})();
-
-/**
- * Patterns logger - wrapper around logging library
- *
- * Copyright 2012-2013 Florian Friesdorf
- */
-define('pat-logger',[
-    'logging'
-], function(logging) {
-    var log = logging.getLogger('patterns');
-    return log;
-});
-
-define('pat-utils',[
-    "jquery"
-], function($) {
-
-    var singleBoundJQueryPlugin = function (pattern, method, options) {
-        /* This is a jQuery plugin for patterns which are invoked ONCE FOR EACH
-         * matched element in the DOM.
-         *
-         * This is how the Mockup-type patterns behave. They are constructor
-         * functions which need to be invoked once per jQuery-wrapped DOM node
-         * for all DOM nodes on which the pattern applies.
-         */
-        var $this = this;
-        $this.each(function() {
-            var pat, $el = $(this);
-            pat = pattern.init($el, options);
-            if (method) {
-                if (pat[method] === undefined) {
-                    $.error("Method " + method +
-                            " does not exist on jQuery." + pattern.name);
-                    return false;
-                }
-                if (method.charAt(0) === '_') {
-                    $.error("Method " + method +
-                            " is private on jQuery." + pattern.name);
-                    return false;
-                }
-                pat[method].apply(pat, [options]);
-            }
-        });
-        return $this;
-    };
-
-    var pluralBoundJQueryPlugin = function (pattern, method, options) {
-        /* This is a jQuery plugin for patterns which are invoked ONCE FOR ALL
-         * matched elements in the DOM.
-         *
-         * This is how the vanilla Patternslib-type patterns behave. They are
-         * simple objects with an init method and this method gets called once
-         * with a list of jQuery-wrapped DOM nodes on which the pattern
-         * applies.
-         */
-        var $this = this;
-        if (method) {
-            if (pattern[method]) {
-                return pattern[method].apply($this, [$this].concat([options]));
-            } else {
-                $.error("Method " + method +
-                        " does not exist on jQuery." + pattern.name);
-            }
-        } else {
-            pattern.init.apply($this, [$this].concat([options]));
-        }
-        return $this;
-    };
-
-    var jqueryPlugin = function(pattern) {
-        return function(method, options) {
-            var $this = this;
-            if ($this.length === 0) {
-                return $this;
-            }
-            if (typeof method === 'object') {
-                options = method;
-                method = undefined;
-            }
-            if (typeof pattern === "function") {
-                return singleBoundJQueryPlugin.call(this, pattern, method, options);
-            } else {
-                return pluralBoundJQueryPlugin.call(this, pattern, method, options);
-            }
-        };
-    };
-
-    //     Underscore.js 1.3.1
-    //     (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
-    //     Underscore is freely distributable under the MIT license.
-    //     Portions of Underscore are inspired or borrowed from Prototype,
-    //     Oliver Steele's Functional, and John Resig's Micro-Templating.
-    //     For all details and documentation:
-    //     http://documentcloud.github.com/underscore
-    //
-    // Returns a function, that, as long as it continues to be invoked, will not
-    // be triggered. The function will be called after it stops being called for
-    // N milliseconds.
-    function debounce(func, wait) {
-        var timeout;
-        return function debounce_run() {
-            var context = this, args = arguments;
-            var later = function() {
-                timeout = null;
-                func.apply(context, args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    // Is a given variable an object?
-    function isObject(obj) {
-        var type = typeof obj;
-        return type === 'function' || type === 'object' && !!obj;
-    }
-
-    // Extend a given object with all the properties in passed-in object(s).
-    function extend(obj) {
-        if (!isObject(obj)) return obj;
-        var source, prop;
-        for (var i = 1, length = arguments.length; i < length; i++) {
-            source = arguments[i];
-            for (prop in source) {
-                if (hasOwnProperty.call(source, prop)) {
-                    obj[prop] = source[prop];
-                }
-            }
-        }
-        return obj;
-    }
-    // END: Taken from Underscore.js until here.
-
-    function rebaseURL(base, url) {
-        if (url.indexOf("://")!==-1 || url[0]==="/")
-            return url;
-        return base.slice(0, base.lastIndexOf("/")+1) + url;
-    }
-
-    function findLabel(input) {
-        var $label;
-        for (var label=input.parentNode; label && label.nodeType!==11; label=label.parentNode) {
-            if (label.tagName==="LABEL") {
-                return label;
-            }
-        }
-        if (input.id) {
-            $label = $("label[for=\""+input.id+"\"]");
-        }
-        if ($label && $label.length===0 && input.form) {
-            $label = $("label[for=\""+input.name+"\"]", input.form);
-        }
-        if ($label && $label.length) {
-            return $label[0];
-        } else {
-            return null;
-        }
-    }
-
-    // Taken from http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
-    function elementInViewport(el) {
-       var rect = el.getBoundingClientRect(),
-           docEl = document.documentElement,
-           vWidth = window.innerWidth || docEl.clientWidth,
-           vHeight = window.innerHeight || docEl.clientHeight;
-
-        if (rect.right<0 || rect.bottom<0 || rect.left>vWidth || rect.top>vHeight)
-            return false;
-        return true;
-    }
-
-    // Taken from http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
-    function escapeRegExp(str) {
-        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-    }
-
-    function removeWildcardClass($targets, classes) {
-        if (classes.indexOf("*")===-1)
-            $targets.removeClass(classes);
-        else {
-            var matcher = classes.replace(/[\-\[\]{}()+?.,\\\^$|#\s]/g, "\\$&");
-            matcher = matcher.replace(/[*]/g, ".*");
-            matcher = new RegExp("^" + matcher + "$");
-            $targets.filter("[class]").each(function() {
-                var $this = $(this),
-                    classes = $this.attr("class").split(/\s+/),
-                    ok=[];
-                for (var i=0; i<classes.length; i++)
-                    if (!matcher.test(classes[i]))
-                        ok.push(classes[i]);
-                if (ok.length)
-                    $this.attr("class", ok.join(" "));
-                else
-                    $this.removeAttr("class");
-            });
-        }
-    }
-
-    var transitions = {
-        none: {hide: "hide", show: "show"},
-        fade: {hide: "fadeOut", show: "fadeIn"},
-        slide: {hide: "slideUp", show: "slideDown"}
-    };
-
-    function hideOrShow($slave, visible, options, pattern_name) {
-        var duration = (options.transition==="css" || options.transition==="none") ? null : options.effect.duration;
-
-        $slave.removeClass("visible hidden in-progress");
-        var onComplete = function() {
-            $slave
-                .removeClass("in-progress")
-                .addClass(visible ? "visible" : "hidden")
-                .trigger("pat-update",
-                        {pattern: pattern_name,
-                         transition: "complete"});
-        };
-        if (!duration) {
-            if (options.transition!=="css")
-                $slave[visible ? "show" : "hide"]();
-            onComplete();
-        } else {
-            var t = transitions[options.transition];
-            $slave
-                .addClass("in-progress")
-                .trigger("pat-update",
-                        {pattern: pattern_name,
-                         transition: "start"});
-            $slave[visible ? t.show : t.hide]({
-                duration: duration,
-                easing: options.effect.easing,
-                complete: onComplete
-            });
-        }
-    }
-
-    function addURLQueryParameter(fullURL, param, value) {
-        /* Using a positive lookahead (?=\=) to find the given parameter,
-         * preceded by a ? or &, and followed by a = with a value after
-         * than (using a non-greedy selector) and then followed by
-         * a & or the end of the string.
-         *
-         * Taken from http://stackoverflow.com/questions/7640270/adding-modify-query-string-get-variables-in-a-url-with-javascript
-         */
-        var val = new RegExp('(\\?|\\&)' + param + '=.*?(?=(&|$))'),
-            parts = fullURL.toString().split('#'),
-            url = parts[0],
-            hash = parts[1],
-            qstring = /\?.+$/,
-            newURL = url;
-        // Check if the parameter exists
-        if (val.test(url)) {
-            // if it does, replace it, using the captured group
-            // to determine & or ? at the beginning
-            newURL = url.replace(val, '$1' + param + '=' + value);
-        } else if (qstring.test(url)) {
-            // otherwise, if there is a query string at all
-            // add the param to the end of it
-            newURL = url + '&' + param + '=' + value;
-        } else {
-            // if there's no query string, add one
-            newURL = url + '?' + param + '=' + value;
-        }
-        if (hash) { newURL += '#' + hash; }
-        return newURL;
-    }
-
-    var utils = {
-        // pattern pimping - own module?
-        jqueryPlugin: jqueryPlugin,
-        debounce: debounce,
-        escapeRegExp: escapeRegExp,
-        isObject: isObject,
-        extend: extend,
-        rebaseURL: rebaseURL,
-        findLabel: findLabel,
-        elementInViewport: elementInViewport,
-        removeWildcardClass: removeWildcardClass,
-        hideOrShow: hideOrShow,
-        addURLQueryParameter: addURLQueryParameter
-    };
-    return utils;
-});
-
-define('pat-compat',[],function() {
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/every (JS 1.6)
-    if (!Array.prototype.every)
-    {
-        Array.prototype.every = function(fun /*, thisp */)
-        {
-            "use strict";
-
-            if (this === null)
-                throw new TypeError();
-
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (typeof fun !== "function")
-                throw new TypeError();
-
-            var thisp = arguments[1];
-            for (var i = 0; i < len; i++)
-            {
-                if (i in t && !fun.call(thisp, t[i], i, t))
-                    return false;
-            }
-
-            return true;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/filter (JS 1.6)
-    if (!Array.prototype.filter) {
-        Array.prototype.filter = function(fun /*, thisp */) {
-            "use strict";
-
-            if (this === null)
-                throw new TypeError();
-
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (typeof fun !== "function")
-                throw new TypeError();
-
-            var res = [];
-            var thisp = arguments[1];
-            for (var i = 0; i < len; i++)
-            {
-                if (i in t)
-                {
-                    var val = t[i]; // in case fun mutates this
-                    if (fun.call(thisp, val, i, t))
-                        res.push(val);
-                }
-            }
-
-            return res;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach (JS 1.6)
-    // Production steps of ECMA-262, Edition 5, 15.4.4.18
-    // Reference: http://es5.github.com/#x15.4.4.18
-    if ( !Array.prototype.forEach ) {
-
-        Array.prototype.forEach = function( callback, thisArg ) {
-
-            var T, k;
-
-            if ( this === null ) {
-                throw new TypeError( " this is null or not defined" );
-            }
-
-            // 1. Let O be the result of calling ToObject passing the |this| value as the argument.
-            var O = Object(this);
-
-            // 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
-            // 3. Let len be ToUint32(lenValue).
-            var len = O.length >>> 0; // Hack to convert O.length to a UInt32
-
-            // 4. If IsCallable(callback) is false, throw a TypeError exception.
-            // See: http://es5.github.com/#x9.11
-            if ( {}.toString.call(callback) !== "[object Function]" ) {
-                throw new TypeError( callback + " is not a function" );
-            }
-
-            // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
-            if ( thisArg ) {
-                T = thisArg;
-            }
-
-            // 6. Let k be 0
-            k = 0;
-
-            // 7. Repeat, while k < len
-            while( k < len ) {
-
-                var kValue;
-
-                // a. Let Pk be ToString(k).
-                //   This is implicit for LHS operands of the in operator
-                // b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
-                //   This step can be combined with c
-                // c. If kPresent is true, then
-                if ( k in O ) {
-
-                    // i. Let kValue be the result of calling the Get internal method of O with argument Pk.
-                    kValue = O[ k ];
-
-                    // ii. Call the Call internal method of callback with T as the this value and
-                    // argument list containing kValue, k, and O.
-                    callback.call( T, kValue, k, O );
-                }
-                // d. Increase k by 1.
-                k++;
-            }
-            // 8. return undefined
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf (JS 1.6)
-    if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
-            "use strict";
-            if (this === null) {
-                throw new TypeError();
-            }
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (len === 0) {
-                return -1;
-            }
-            var n = 0;
-            if (arguments.length > 0) {
-                n = Number(arguments[1]);
-                if (n !== n) { // shortcut for verifying if it's NaN
-                    n = 0;
-                } else if (n !== 0 && n !== Infinity && n !== -Infinity) {
-                    n = (n > 0 || -1) * Math.floor(Math.abs(n));
-                }
-            }
-            if (n >= len) {
-                return -1;
-            }
-            var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
-            for (; k < len; k++) {
-                if (k in t && t[k] === searchElement) {
-                    return k;
-                }
-            }
-            return -1;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/lastIndexOf (JS 1.6)
-    if (!Array.prototype.lastIndexOf) {
-        Array.prototype.lastIndexOf = function(searchElement /*, fromIndex*/) {
-            "use strict";
-
-            if (this === null)
-                throw new TypeError();
-
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (len === 0)
-                return -1;
-
-            var n = len;
-            if (arguments.length > 1)
-            {
-                n = Number(arguments[1]);
-                if (n !== n)
-                    n = 0;
-                else if (n !== 0 && n !== (1 / 0) && n !== -(1 / 0))
-                    n = (n > 0 || -1) * Math.floor(Math.abs(n));
-            }
-
-            var k = n >= 0 ? Math.min(n, len - 1) : len - Math.abs(n);
-
-            for (; k >= 0; k--)
-            {
-                if (k in t && t[k] === searchElement)
-                    return k;
-            }
-            return -1;
-        };
-    }
-
-
-    // source: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/map (JS 1.6)
-    // Production steps of ECMA-262, Edition 5, 15.4.4.19
-    // Reference: http://es5.github.com/#x15.4.4.19
-    if (!Array.prototype.map) {
-        Array.prototype.map = function(callback, thisArg) {
-
-            var T, A, k;
-
-            if (this === null) {
-                throw new TypeError(" this is null or not defined");
-            }
-
-            // 1. Let O be the result of calling ToObject passing the |this| value as the argument.
-            var O = Object(this);
-
-            // 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
-            // 3. Let len be ToUint32(lenValue).
-            var len = O.length >>> 0;
-
-            // 4. If IsCallable(callback) is false, throw a TypeError exception.
-            // See: http://es5.github.com/#x9.11
-            if ({}.toString.call(callback) !== "[object Function]") {
-                throw new TypeError(callback + " is not a function");
-            }
-
-            // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
-            if (thisArg) {
-                T = thisArg;
-            }
-
-            // 6. Let A be a new array created as if by the expression new Array(len) where Array is
-            // the standard built-in constructor with that name and len is the value of len.
-            A = new Array(len);
-
-            // 7. Let k be 0
-            k = 0;
-
-            // 8. Repeat, while k < len
-            while(k < len) {
-
-                var kValue, mappedValue;
-
-                // a. Let Pk be ToString(k).
-                //   This is implicit for LHS operands of the in operator
-                // b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
-                //   This step can be combined with c
-                // c. If kPresent is true, then
-                if (k in O) {
-
-                    // i. Let kValue be the result of calling the Get internal method of O with argument Pk.
-                    kValue = O[ k ];
-
-                    // ii. Let mappedValue be the result of calling the Call internal method of callback
-                    // with T as the this value and argument list containing kValue, k, and O.
-                    mappedValue = callback.call(T, kValue, k, O);
-
-                    // iii. Call the DefineOwnProperty internal method of A with arguments
-                    // Pk, Property Descriptor {Value: mappedValue, Writable: true, Enumerable: true, Configurable: true},
-                    // and false.
-
-                    // In browsers that support Object.defineProperty, use the following:
-                    // Object.defineProperty(A, Pk, { value: mappedValue, writable: true, enumerable: true, configurable: true });
-
-                    // For best browser support, use the following:
-                    A[ k ] = mappedValue;
-                }
-                // d. Increase k by 1.
-                k++;
-            }
-
-            // 9. return A
-            return A;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/Reduce (JS 1.8)
-    if (!Array.prototype.reduce) {
-        Array.prototype.reduce = function reduce(accumulator){
-            if (this===null || this===undefined) throw new TypeError("Object is null or undefined");
-            var i = 0, l = this.length >> 0, curr;
-
-            if(typeof accumulator !== "function") // ES5 : "If IsCallable(callbackfn) is false, throw a TypeError exception."
-                throw new TypeError("First argument is not callable");
-
-            if(arguments.length < 2) {
-                if (l === 0) throw new TypeError("Array length is 0 and no second argument");
-                curr = this[0];
-                i = 1; // start accumulating at the second element
-            }
-            else
-                curr = arguments[1];
-
-            while (i < l) {
-                if(i in this) curr = accumulator.call(undefined, curr, this[i], i, this);
-                ++i;
-            }
-
-            return curr;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/ReduceRight (JS 1.8)
-    if (!Array.prototype.reduceRight)
-    {
-        Array.prototype.reduceRight = function(callbackfn /*, initialValue */)
-        {
-            "use strict";
-
-            if (this === null)
-                throw new TypeError();
-
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (typeof callbackfn !== "function")
-                throw new TypeError();
-
-            // no value to return if no initial value, empty array
-            if (len === 0 && arguments.length === 1)
-                throw new TypeError();
-
-            var k = len - 1;
-            var accumulator;
-            if (arguments.length >= 2)
-            {
-                accumulator = arguments[1];
-            }
-            else
-            {
-                do
-                {
-                    if (k in this)
-                    {
-                        accumulator = this[k--];
-                        break;
-                    }
-
-                    // if array contains no values, no initial value to return
-                    if (--k < 0)
-                        throw new TypeError();
-                }
-                while (true);
-            }
-
-            while (k >= 0)
-            {
-                if (k in t)
-                    accumulator = callbackfn.call(undefined, accumulator, t[k], k, t);
-                k--;
-            }
-
-            return accumulator;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/some (JS 1.6)
-    if (!Array.prototype.some)
-    {
-        Array.prototype.some = function(fun /*, thisp */)
-        {
-            "use strict";
-
-            if (this === null)
-                throw new TypeError();
-
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (typeof fun !== "function")
-                throw new TypeError();
-
-            var thisp = arguments[1];
-            for (var i = 0; i < len; i++)
-            {
-                if (i in t && fun.call(thisp, t[i], i, t))
-                    return true;
-            }
-
-            return false;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/isArray (JS 1.8.5)
-    if (!Array.isArray) {
-        Array.isArray = function (arg) {
-            return Object.prototype.toString.call(arg) === "[object Array]";
-        };
-    }
-
-    // source: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/Trim (JS 1.8.1)
-    if (!String.prototype.trim) {
-        String.prototype.trim = function () {
-            return this.replace(/^\s+|\s+$/g, "");
-        };
-    }
-
-    // source: https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/bind
-    if (!Function.prototype.bind) {
-        Function.prototype.bind = function (oThis) {
-            if (typeof this !== "function") {
-                // closest thing possible to the ECMAScript 5 internal IsCallable function
-                throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
-            }
-
-            var aArgs = Array.prototype.slice.call(arguments, 1),
-                fToBind = this,
-                fNOP = function () {},
-                fBound = function () {
-                    return fToBind.apply(this instanceof fNOP &&
-                            oThis ? this : oThis,
-                            aArgs.concat(Array.prototype.slice.call(arguments)));
-                };
-            fNOP.prototype = this.prototype;
-            fBound.prototype = new fNOP();
-
-            return fBound;
-        };
-    }
-
-    // https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/keys
-    if (!Object.keys) {
-        Object.keys = (function () {
-            var _hasOwnProperty = Object.prototype.hasOwnProperty,
-            hasDontEnumBug = !({toString: null}).propertyIsEnumerable("toString"),
-            dontEnums = [
-            "toString",
-            "toLocaleString",
-            "valueOf",
-            "hasOwnProperty",
-            "isPrototypeOf",
-            "propertyIsEnumerable",
-            "constructor"
-            ],
-            dontEnumsLength = dontEnums.length;
-
-            return function (obj) {
-                if (typeof obj !== "object" && typeof obj !== "function" || obj === null)
-                    throw new TypeError("Object.keys called on non-object");
-
-                var result = [];
-                for (var prop in obj)
-                    if (_hasOwnProperty.call(obj, prop))
-                        result.push(prop);
-
-                if (hasDontEnumBug)
-                    for (var i=0; i < dontEnumsLength; i++)
-                        if (_hasOwnProperty.call(obj, dontEnums[i]))
-                            result.push(dontEnums[i]);
-                return result;
-            };
-        })();
-    }
-});
-
-/**
- * @license
- * Patterns @VERSION@ jquery-ext - various jQuery extensions
- *
- * Copyright 2011 Humberto Sermeño
- */
-define('pat-jquery-ext',["jquery"], function($) {
-    var methods = {
-        init: function( options ) {
-            var settings = {
-                time: 3, /* time it will wait before moving to "timeout" after a move event */
-                initialTime: 8, /* time it will wait before first adding the "timeout" class */
-                exceptionAreas: [] /* IDs of elements that, if the mouse is over them, will reset the timer */
-            };
-            return this.each(function() {
-                var $this = $(this),
-                    data = $this.data("timeout");
-
-                if (!data) {
-                    if ( options ) {
-                        $.extend( settings, options );
-                    }
-                    $this.data("timeout", {
-                        "lastEvent": new Date(),
-                        "trueTime": settings.time,
-                        "time": settings.initialTime,
-                        "untouched": true,
-                        "inExceptionArea": false
-                    });
-
-                    $this.bind( "mouseover.timeout", methods.mouseMoved );
-                    $this.bind( "mouseenter.timeout", methods.mouseMoved );
-
-                    $(settings.exceptionAreas).each(function() {
-                        $this.find(this)
-                            .live( "mouseover.timeout", {"parent":$this}, methods.enteredException )
-                            .live( "mouseleave.timeout", {"parent":$this}, methods.leftException );
-                    });
-
-                    if (settings.initialTime > 0)
-                        $this.timeout("startTimer");
-                    else
-                        $this.addClass("timeout");
-                }
-            });
-        },
-
-        enteredException: function(event) {
-            var data = event.data.parent.data("timeout");
-            data.inExceptionArea = true;
-            event.data.parent.data("timeout", data);
-            event.data.parent.trigger("mouseover");
-        },
-
-        leftException: function(event) {
-            var data = event.data.parent.data("timeout");
-            data.inExceptionArea = false;
-            event.data.parent.data("timeout", data);
-        },
-
-        destroy: function() {
-            return this.each( function() {
-                var $this = $(this),
-                    data = $this.data("timeout");
-
-                $(window).unbind(".timeout");
-                data.timeout.remove();
-                $this.removeData("timeout");
-            });
-        },
-
-        mouseMoved: function() {
-            var $this = $(this), data = $this.data("timeout");
-
-            if ($this.hasClass("timeout")) {
-                $this.removeClass("timeout");
-                $this.timeout("startTimer");
-            } else if ( data.untouched ) {
-                data.untouched = false;
-                data.time = data.trueTime;
-            }
-
-            data.lastEvent = new Date();
-            $this.data("timeout", data);
-        },
-
-        startTimer: function() {
-            var $this = $(this), data = $this.data("timeout");
-            var fn = function(){
-                var data = $this.data("timeout");
-                if ( data && data.lastEvent ) {
-                    if ( data.inExceptionArea ) {
-                        setTimeout( fn, Math.floor( data.time*1000 ) );
-                    } else {
-                        var now = new Date();
-                        var diff = Math.floor(data.time*1000) - ( now - data.lastEvent );
-                        if ( diff > 0 ) {
-                            // the timeout has not ocurred, so set the timeout again
-                            setTimeout( fn, diff+100 );
-                        } else {
-                            // timeout ocurred, so set the class
-                            $this.addClass("timeout");
-                        }
-                    }
-                }
-            };
-
-            setTimeout( fn, Math.floor( data.time*1000 ) );
-        }
-    };
-
-    $.fn.timeout = function( method ) {
-        if ( methods[method] ) {
-            return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
-        } else if ( typeof method === "object" || !method ) {
-            return methods.init.apply( this, arguments );
-        } else {
-            $.error( "Method " + method + " does not exist on jQuery.timeout" );
-        }
-    };
-
-    // Custom jQuery selector to find elements with scrollbars
-    $.extend($.expr[":"], {
-        scrollable: function(element) {
-            var vertically_scrollable, horizontally_scrollable;
-            if ($(element).css("overflow") === "scroll" ||
-                $(element).css("overflowX") === "scroll" ||
-                $(element).css("overflowY") === "scroll")
-                return true;
-
-            vertically_scrollable = (element.clientHeight < element.scrollHeight) && (
-                $.inArray($(element).css("overflowY"), ["scroll", "auto"]) !== -1 || $.inArray($(element).css("overflow"), ["scroll", "auto"]) !== -1);
-
-            if (vertically_scrollable)
-                return true;
-
-            horizontally_scrollable = (element.clientWidth < element.scrollWidth) && (
-                $.inArray($(element).css("overflowX"), ["scroll", "auto"]) !== -1 || $.inArray($(element).css("overflow"), ["scroll", "auto"]) !== -1);
-            return horizontally_scrollable;
-        }
-    });
-
-    // Make Visible in scroll
-    $.fn.makeVisibleInScroll = function( parent_id ) {
-        var absoluteParent = null;
-        if ( typeof parent_id === "string" ) {
-            absoluteParent = $("#" + parent_id);
-        } else if ( parent_id ) {
-            absoluteParent = $(parent_id);
-        }
-
-        return this.each(function() {
-            var $this = $(this), parent;
-            if (!absoluteParent) {
-                parent = $this.parents(":scrollable");
-                if (parent.length > 0) {
-                    parent = $(parent[0]);
-                } else {
-                    parent = $(window);
-                }
-            } else {
-                parent = absoluteParent;
-            }
-
-            var elemTop = $this.position().top;
-            var elemBottom = $this.height() + elemTop;
-
-            var viewTop = parent.scrollTop();
-            var viewBottom = parent.height() + viewTop;
-
-            if (elemTop < viewTop) {
-                parent.scrollTop(elemTop);
-            } else if ( elemBottom > viewBottom - parent.height()/2 ) {
-                parent.scrollTop( elemTop - (parent.height() - $this.height())/2 );
-            }
-        });
-    };
-
-    //Make absolute location
-    $.fn.setPositionAbsolute = function(element,offsettop,offsetleft) {
-        return this.each(function() {
-            // set absolute location for based on the element passed
-            // dynamically since every browser has different settings
-            var $this = $(this);
-            var thiswidth = $(this).width();
-            var    pos   = element.offset();
-            var    width = element.width();
-            var    height = element.height();
-            var setleft = (pos.left + width - thiswidth + offsetleft);
-            var settop = (pos.top + height + offsettop);
-            $this.css({ "z-index" : 1, "position": "absolute", "marginLeft": 0, "marginTop": 0, "left": setleft + "px", "top":settop + "px" ,"width":thiswidth});
-            $this.remove().appendTo("body").show();
-        });
-    };
-
-    $.fn.positionAncestor = function(selector) {
-        var left = 0;
-        var top = 0;
-        this.each(function() {
-            // check if current element has an ancestor matching a selector
-            // and that ancestor is positioned
-            var $ancestor = $(this).closest(selector);
-            if ($ancestor.length && $ancestor.css("position") !== "static") {
-                var $child = $(this);
-                var childMarginEdgeLeft = $child.offset().left - parseInt($child.css("marginLeft"), 10);
-                var childMarginEdgeTop = $child.offset().top - parseInt($child.css("marginTop"), 10);
-                var ancestorPaddingEdgeLeft = $ancestor.offset().left + parseInt($ancestor.css("borderLeftWidth"), 10);
-                var ancestorPaddingEdgeTop = $ancestor.offset().top + parseInt($ancestor.css("borderTopWidth"), 10);
-                left = childMarginEdgeLeft - ancestorPaddingEdgeLeft;
-                top = childMarginEdgeTop - ancestorPaddingEdgeTop;
-                // we have found the ancestor and computed the position
-                // stop iterating
-                return false;
-            }
-        });
-        return {
-            left:    left,
-            top:    top
-        };
-    };
-
-
-    // XXX: In compat.js we include things for browser compatibility,
-    // but these two seem to be only convenience. Do we really want to
-    // include these as part of patterns?
-    String.prototype.startsWith = function(str) { return (this.match("^"+str) !== null); };
-    String.prototype.endsWith = function(str) { return (this.match(str+"$") !== null); };
-
-
-    /******************************
-
-     Simple Placeholder
-
-     ******************************/
-
-    $.simplePlaceholder = {
-        placeholder_class: null,
-
-        hide_placeholder: function(){
-            var $this = $(this);
-            if($this.val() === $this.attr("placeholder")){
-                $this.val("").removeClass($.simplePlaceholder.placeholder_class);
-            }
-        },
-
-        show_placeholder: function(){
-            var $this = $(this);
-            if($this.val() === ""){
-                $this.val($this.attr("placeholder")).addClass($.simplePlaceholder.placeholder_class);
-            }
-        },
-
-        prevent_placeholder_submit: function(){
-            $(this).find(".simple-placeholder").each(function() {
-                var $this = $(this);
-                if ($this.val() === $this.attr("placeholder")){
-                    $this.val("");
-                }
-            });
-            return true;
-        }
-    };
-
-    $.fn.simplePlaceholder = function(options) {
-        if(document.createElement("input").placeholder === undefined){
-            var config = {
-                placeholder_class : "placeholding"
-            };
-
-            if(options) $.extend(config, options);
-            $.simplePlaceholder.placeholder_class = config.placeholder_class;
-
-            this.each(function() {
-                var $this = $(this);
-                $this.focus($.simplePlaceholder.hide_placeholder);
-                $this.blur($.simplePlaceholder.show_placeholder);
-                if($this.val() === "") {
-                    $this.val($this.attr("placeholder"));
-                    $this.addClass($.simplePlaceholder.placeholder_class);
-                }
-                $this.addClass("simple-placeholder");
-                $(this.form).submit($.simplePlaceholder.prevent_placeholder_submit);
-            });
-        }
-
-        return this;
-    };
-
-    $.fn.findInclusive = function(selector) {
-        return this.find('*').addBack().filter(selector);
-    };
-
-    $.fn.slideIn = function(speed, easing, callback) {
-        return this.animate({width: "show"}, speed, easing, callback);
-    };
-
-    $.fn.slideOut = function(speed, easing, callback) {
-        return this.animate({width: "hide"}, speed, easing, callback);
-    };
-
-    // case-insensitive :contains
-    $.expr[":"].Contains = function(a, i, m) {
-        return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
-    };
-
-    $.fn.scopedFind = function (selector) {
-        /*  If the selector starts with an object id do a global search,
-         *  otherwise do a local search.
-         */
-        if (selector.startsWith('#')) {
-            return $(selector);
-        } else {
-            return this.find(selector);
-        }
-    };
-});
-
-/**
- * Patterns registry - Central registry and scan logic for patterns
- *
- * Copyright 2012-2013 Simplon B.V.
- * Copyright 2012-2013 Florian Friesdorf
- * Copyright 2013 Marko Durkovic
- * Copyright 2013 Rok Garbas
- */
-
-/*
- * changes to previous patterns.register/scan mechanism
- * - if you want initialised class, do it in init
- * - init returns set of elements actually initialised
- * - handle once within init
- * - no turnstile anymore
- * - set pattern.jquery_plugin if you want it
- */
-define('pat-registry',[
-    "jquery",
-    "pat-logger",
-    "pat-utils",
-    // below here modules that are only loaded
-    "pat-compat",
-    "pat-jquery-ext"
-], function($, logger, utils) {
-    var TEXT_NODE = 3;
-    var COMMENT_NODE = 8;
-    var log = logger.getLogger("registry");
-
-    var disable_re = /patterns-disable=([^&]+)/g,
-        dont_catch_re = /patterns-dont-catch/g,
-        dont_catch = false,
-        disabled = {}, match;
-
-    while ((match=disable_re.exec(window.location.search)) !== null) {
-        disabled[match[1]] = true;
-        log.info("Pattern disabled via url config:", match[1]);
-    }
-
-    while ((match=dont_catch_re.exec(window.location.search)) !== null) {
-        dont_catch = true;
-        log.info("I will not catch init exceptions");
-    }
-
-    var registry = {
-        patterns: {},
-        // as long as the registry is not initialized, pattern
-        // registration just registers a pattern. Once init is called,
-        // the DOM is scanned. After that registering a new pattern
-        // results in rescanning the DOM only for this pattern.
-        initialized: false,
-        init: function registry_init() {
-            $(document).ready(function() {
-                log.info("loaded: " + Object.keys(registry.patterns).sort().join(", "));
-                registry.scan(document.body);
-                registry.initialized = true;
-                log.info("finished initial scan.");
-            });
-        },
-
-        clear: function clearRegistry() {
-            // Removes all patterns from the registry. Currently only being
-            // used in tests.
-            this.patterns = {};
-        },
-
-        scan: function registryScan(content, patterns, trigger) {
-            var $content = $(content),
-                all = [], allsel,
-                $match, plog;
-
-            // If no list of patterns was specified, we scan for all patterns
-            patterns = patterns || Object.keys(registry.patterns);
-
-            // selector for all patterns
-            patterns.forEach(function registry_scan_loop(name) {
-                if (disabled[name]) {
-                    log.debug("Skipping disabled pattern:", name);
-                    return;
-                }
-                var pattern = registry.patterns[name];
-                if (pattern.transform) {
-                    try {
-                        pattern.transform($content);
-                    } catch (e) {
-                        if (dont_catch) { throw(e); }
-                        log.error("Transform error for pattern" + name, e);
-                    }
-                }
-                if (pattern.trigger) {
-                    all.push(pattern.trigger);
-                }
-            });
-            // Find all elements that belong to any pattern.
-            allsel = all.join(",");
-            $match = $content.findInclusive(allsel);
-            $match = $match.filter(function() { return $(this).parents("pre").length === 0; });
-            $match = $match.filter(":not(.cant-touch-this)");
-
-            // walk list backwards and initialize patterns inside-out.
-            $match.toArray().reduceRight(function registry_pattern_init(acc, el) {
-                var pattern, $el = $(el);
-                for (var name in registry.patterns) {
-                    pattern = registry.patterns[name];
-                    if (pattern.init) {
-                        plog = logger.getLogger("pat." + name);
-                        if ($el.is(pattern.trigger)) {
-                            plog.debug("Initialising:", $el);
-                            try {
-                                pattern.init($el, null, trigger);
-                                plog.debug("done.");
-                            } catch (e) {
-                                if (dont_catch) { throw(e); }
-                                plog.error("Caught error:", e);
-                            }
-                        }
-                    }
-                }
-            }, null);
-            $("body").addClass("patterns-loaded");
-        },
-
-        register: function registry_register(pattern, name) {
-            var plugin_name, jquery_plugin;
-            name = name || pattern.name;
-            if (!name) {
-                log.error("Pattern lacks a name:", pattern);
-                return false;
-            }
-            if (registry.patterns[name]) {
-                log.error("Already have a pattern called: " + name);
-                return false;
-            }
-
-            // register pattern to be used for scanning new content
-            registry.patterns[name] = pattern;
-
-            // register pattern as jquery plugin
-            if (pattern.jquery_plugin) {
-                plugin_name = ("pat-" + name)
-                        .replace(/-([a-zA-Z])/g, function(match, p1) {
-                            return p1.toUpperCase();
-                        });
-                $.fn[plugin_name] = utils.jqueryPlugin(pattern);
-                // BBB 2012-12-10 and also for Mockup patterns.
-                $.fn[plugin_name.replace(/^pat/, "pattern")] = $.fn[plugin_name];
-            }
-            log.debug("Registered pattern:", name, pattern);
-            if (registry.initialized) {
-                registry.scan(document.body, [name]);
-            }
-            return true;
-        }
-    };
-
-    $(document).on("patterns-injected.patterns",
-        function registry_onInject(ev, config, trigger_el, injected_el) {
-            if (injected_el.nodeType !== TEXT_NODE && injected_el !== COMMENT_NODE) {
-                registry.scan(injected_el, null, {type: "injection", element: trigger_el});
-                $(injected_el).trigger("patterns-injected-scanned");
-            }
-        }
-    );
-    return registry;
-});
-// jshint indent: 4, browser: true, jquery: true, quotmark: double
-// vim: sw=4 expandtab
-;
-/*!
- * jQuery Browser Plugin 0.0.8
- * https://github.com/gabceb/jquery-browser-plugin
- *
- * Original jquery-browser code Copyright 2005, 2015 jQuery Foundation, Inc. and other contributors
- * http://jquery.org/license
- *
- * Modifications Copyright 2015 Gabriel Cebrian
- * https://github.com/gabceb
- *
- * Released under the MIT license
- *
- * Date: 05-07-2015
- */
-/*global window: false */
-
-(function (factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define('jquery.browser',['jquery'], function ($) {
-      return factory($);
-    });
-  } else if (typeof module === 'object' && typeof module.exports === 'object') {
-    // Node-like environment
-    module.exports = factory(require('jquery'));
-  } else {
-    // Browser globals
-    factory(window.jQuery);
-  }
-}(function(jQuery) {
-  "use strict";
-
-  function uaMatch( ua ) {
-    // If an UA is not provided, default to the current browser UA.
-    if ( ua === undefined ) {
-      ua = window.navigator.userAgent;
-    }
-    ua = ua.toLowerCase();
-
-    var match = /(edge)\/([\w.]+)/.exec( ua ) ||
-        /(opr)[\/]([\w.]+)/.exec( ua ) ||
-        /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
-        /(version)(applewebkit)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
-        /(webkit)[ \/]([\w.]+).*(version)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
-        /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
-        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
-        /(msie) ([\w.]+)/.exec( ua ) ||
-        ua.indexOf("trident") >= 0 && /(rv)(?::| )([\w.]+)/.exec( ua ) ||
-        ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
-        [];
-
-    var platform_match = /(ipad)/.exec( ua ) ||
-        /(ipod)/.exec( ua ) ||
-        /(iphone)/.exec( ua ) ||
-        /(kindle)/.exec( ua ) ||
-        /(silk)/.exec( ua ) ||
-        /(android)/.exec( ua ) ||
-        /(windows phone)/.exec( ua ) ||
-        /(win)/.exec( ua ) ||
-        /(mac)/.exec( ua ) ||
-        /(linux)/.exec( ua ) ||
-        /(cros)/.exec( ua ) ||
-        /(playbook)/.exec( ua ) ||
-        /(bb)/.exec( ua ) ||
-        /(blackberry)/.exec( ua ) ||
-        [];
-
-    var browser = {},
-        matched = {
-          browser: match[ 5 ] || match[ 3 ] || match[ 1 ] || "",
-          version: match[ 2 ] || match[ 4 ] || "0",
-          versionNumber: match[ 4 ] || match[ 2 ] || "0",
-          platform: platform_match[ 0 ] || ""
-        };
-
-    if ( matched.browser ) {
-      browser[ matched.browser ] = true;
-      browser.version = matched.version;
-      browser.versionNumber = parseInt(matched.versionNumber, 10);
-    }
-
-    if ( matched.platform ) {
-      browser[ matched.platform ] = true;
-    }
-
-    // These are all considered mobile platforms, meaning they run a mobile browser
-    if ( browser.android || browser.bb || browser.blackberry || browser.ipad || browser.iphone ||
-      browser.ipod || browser.kindle || browser.playbook || browser.silk || browser[ "windows phone" ]) {
-      browser.mobile = true;
-    }
-
-    // These are all considered desktop platforms, meaning they run a desktop browser
-    if ( browser.cros || browser.mac || browser.linux || browser.win ) {
-      browser.desktop = true;
-    }
-
-    // Chrome, Opera 15+ and Safari are webkit based browsers
-    if ( browser.chrome || browser.opr || browser.safari ) {
-      browser.webkit = true;
-    }
-
-    // IE11 has a new token so we will assign it msie to avoid breaking changes
-    // IE12 disguises itself as Chrome, but adds a new Edge token.
-    if ( browser.rv || browser.edge ) {
-      var ie = "msie";
-
-      matched.browser = ie;
-      browser[ie] = true;
-    }
-
-    // Blackberry browsers are marked as Safari on BlackBerry
-    if ( browser.safari && browser.blackberry ) {
-      var blackberry = "blackberry";
-
-      matched.browser = blackberry;
-      browser[blackberry] = true;
-    }
-
-    // Playbook browsers are marked as Safari on Playbook
-    if ( browser.safari && browser.playbook ) {
-      var playbook = "playbook";
-
-      matched.browser = playbook;
-      browser[playbook] = true;
-    }
-
-    // BB10 is a newer OS version of BlackBerry
-    if ( browser.bb ) {
-      var bb = "blackberry";
-
-      matched.browser = bb;
-      browser[bb] = true;
-    }
-
-    // Opera 15+ are identified as opr
-    if ( browser.opr ) {
-      var opera = "opera";
-
-      matched.browser = opera;
-      browser[opera] = true;
-    }
-
-    // Stock Android browsers are marked as Safari on Android.
-    if ( browser.safari && browser.android ) {
-      var android = "android";
-
-      matched.browser = android;
-      browser[android] = true;
-    }
-
-    // Kindle browsers are marked as Safari on Kindle
-    if ( browser.safari && browser.kindle ) {
-      var kindle = "kindle";
-
-      matched.browser = kindle;
-      browser[kindle] = true;
-    }
-
-     // Kindle Silk browsers are marked as Safari on Kindle
-    if ( browser.safari && browser.silk ) {
-      var silk = "silk";
-
-      matched.browser = silk;
-      browser[silk] = true;
-    }
-
-    // Assign the name and platform variable
-    browser.name = matched.browser;
-    browser.platform = matched.platform;
-    return browser;
-  }
-
-  // Run the matching process, also assign the function to the returned object
-  // for manual, jQuery-free use if desired
-  window.jQBrowser = uaMatch( window.navigator.userAgent );
-  window.jQBrowser.uaMatch = uaMatch;
-
-  // Only assign to jQuery.browser if jQuery is loaded
-  if ( jQuery ) {
-    jQuery.browser = window.jQBrowser;
-  }
-
-  return window.jQBrowser;
-}));
-
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -13928,6 +12288,1712 @@ define('pat-registry',[
     });
   }
 }.call(this));
+
+/**
+ * Patterns logging - minimal logging framework
+ *
+ * Copyright 2012 Simplon B.V.
+ */
+
+(function() {
+    // source: https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/bind
+    if (!Function.prototype.bind) {
+        Function.prototype.bind = function (oThis) {
+            if (typeof this !== "function") {
+                // closest thing possible to the ECMAScript 5 internal IsCallable function
+                throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+            }
+
+            var aArgs = Array.prototype.slice.call(arguments, 1),
+                fToBind = this,
+                fNOP = function () {},
+                fBound = function () {
+                    return fToBind.apply(this instanceof fNOP &&
+                            oThis ? this : oThis,
+                            aArgs.concat(Array.prototype.slice.call(arguments)));
+                };
+            fNOP.prototype = this.prototype;
+            fBound.prototype = new fNOP();
+
+            return fBound;
+        };
+    }
+
+    var root,    // root logger instance
+        writer;  // writer instance, used to output log entries
+
+    var Level = {
+        DEBUG: 10,
+        INFO: 20,
+        WARN: 30,
+        ERROR: 40,
+        FATAL: 50
+    };
+
+    function IEConsoleWriter() {
+    }
+
+    IEConsoleWriter.prototype = {
+        output:  function(log_name, level, messages) {
+            // console.log will magically appear in IE8 when the user opens the
+            // F12 Developer Tools, so we have to test for it every time.
+            if (typeof window.console==="undefined" || typeof console.log==="undefined")
+                    return;
+            if (log_name)
+                messages.unshift(log_name+":");
+            var message = messages.join(" ");
+
+            // Under some conditions console.log will be available but the
+            // other functions are missing.
+            if (typeof console.info===undefined) {
+                var level_name;
+                if (level<=Level.DEBUG)
+                    level_name="DEBUG";
+                else if (level<=Level.INFO)
+                    level_name="INFO";
+                else if (level<=Level.WARN)
+                    level_name="WARN";
+                else if (level<=Level.ERROR)
+                    level_name="ERROR";
+                else
+                    level_name="FATAL";
+                console.log("["+level_name+"] "+message);
+            } else {
+                if (level<=Level.DEBUG) {
+                    // console.debug exists but is deprecated
+                    message="[DEBUG] "+message;
+                    console.log(message);
+                } else if (level<=Level.INFO)
+                    console.info(message);
+                else if (level<=Level.WARN)
+                    console.warn(message);
+                else
+                    console.error(message);
+            }
+        }
+    };
+
+
+    function ConsoleWriter() {
+    }
+
+    ConsoleWriter.prototype = {
+        output: function(log_name, level, messages) {
+            if (log_name)
+                messages.unshift(log_name+":");
+            if (level<=Level.DEBUG) {
+                // console.debug exists but is deprecated
+                messages.unshift("[DEBUG]");
+                console.log.apply(console, messages);
+            } else if (level<=Level.INFO)
+                console.info.apply(console, messages);
+            else if (level<=Level.WARN)
+                console.warn.apply(console, messages);
+            else
+                console.error.apply(console, messages);
+        }
+    };
+
+
+    function Logger(name, parent) {
+        this._loggers={};
+        this.name=name || "";
+        this._parent=parent || null;
+        if (!parent) {
+            this._enabled=true;
+            this._level=Level.WARN;
+        }
+    }
+
+    Logger.prototype = {
+        getLogger: function(name) {
+            var path = name.split("."),
+                root = this,
+                route = this.name ? [this.name] : [];
+            while (path.length) {
+                var entry = path.shift();
+                route.push(entry);
+                if (!(entry in root._loggers))
+                    root._loggers[entry] = new Logger(route.join("."), root);
+                root=root._loggers[entry];
+            }
+            return root;
+        },
+
+        _getFlag: function(flag) {
+            var context=this;
+            flag="_"+flag;
+            while (context!==null) {
+                if (context[flag]!==undefined)
+                    return context[flag];
+                context=context._parent;
+            }
+            return null;
+        },
+
+        setEnabled: function(state) {
+            this._enabled=!!state;
+        },
+
+        isEnabled: function() {
+            this._getFlag("enabled");
+        },
+
+        setLevel: function(level) {
+            if (typeof level==="number")
+                this._level=level;
+            else if (typeof level==="string") {
+                level=level.toUpperCase();
+                if (level in Level)
+                    this._level=Level[level];
+            }
+        },
+
+        getLevel: function() {
+            return this._getFlag("level");
+        },
+
+        log: function(level, messages) {
+            if (!messages.length || !this._getFlag("enabled") || level<this._getFlag("level"))
+                return;
+            messages=Array.prototype.slice.call(messages);
+            writer.output(this.name, level, messages);
+        },
+
+        debug: function() {
+            this.log(Level.DEBUG, arguments);
+        },
+
+        info: function() {
+            this.log(Level.INFO, arguments);
+        },
+
+        warn: function() {
+            this.log(Level.WARN, arguments);
+        },
+
+        error: function() {
+            this.log(Level.ERROR, arguments);
+        },
+
+        fatal: function() {
+            this.log(Level.FATAL, arguments);
+        }
+    };
+
+    function getWriter() {
+        return writer;
+    }
+
+    function setWriter(w) {
+        writer=w;
+    }
+
+    if (!window.console || !window.console.log || typeof window.console.log.apply !== "function") {
+        setWriter(new IEConsoleWriter());
+    } else {
+        setWriter(new ConsoleWriter());
+    }
+
+    root=new Logger();
+
+    var logconfig = /loglevel(|-[^=]+)=([^&]+)/g,
+        match;
+
+    while ((match=logconfig.exec(window.location.search))!==null) {
+        var logger = (match[1]==="") ? root : root.getLogger(match[1].slice(1));
+        logger.setLevel(match[2].toUpperCase());
+    }
+
+    var api = {
+        Level: Level,
+        getLogger: root.getLogger.bind(root),
+        setEnabled: root.setEnabled.bind(root),
+        isEnabled: root.isEnabled.bind(root),
+        setLevel: root.setLevel.bind(root),
+        getLevel: root.getLevel.bind(root),
+        debug: root.debug.bind(root),
+        info: root.info.bind(root),
+        warn: root.warn.bind(root),
+        error: root.error.bind(root),
+        fatal: root.fatal.bind(root),
+        getWriter: getWriter,
+        setWriter: setWriter
+    };
+
+    // Expose as either an AMD module if possible. If not fall back to exposing
+    // a global object.
+    if (typeof define==="function")
+        define("logging", [], function () {
+            return api;
+        });
+    else
+        window.logging=api;
+})();
+
+/**
+ * Patterns logger - wrapper around logging library
+ *
+ * Copyright 2012-2013 Florian Friesdorf
+ */
+define('pat-logger',[
+    'logging'
+], function(logging) {
+    var log = logging.getLogger('patterns');
+    return log;
+});
+
+define('pat-utils',[
+    "jquery"
+], function($) {
+
+    // Production steps of ECMA-262, Edition 5, 15.4.4.18
+    // Reference: http://es5.github.io/#x15.4.4.18
+    if (!Array.prototype.forEach) {
+        Array.prototype.forEach = function(callback, thisArg) {
+            var T, k;
+            if (this === null) {
+                throw new TypeError(' this is null or not defined');
+            }
+            // 1. Let O be the result of calling ToObject passing the |this| value as the argument.
+            var O = Object(this);
+            // 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
+            // 3. Let len be ToUint32(lenValue).
+            var len = O.length >>> 0;
+            // 4. If IsCallable(callback) is false, throw a TypeError exception.
+            // See: http://es5.github.com/#x9.11
+            if (typeof callback !== "function") {
+                throw new TypeError(callback + ' is not a function');
+            }
+            // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
+            if (arguments.length > 1) {
+                T = thisArg;
+            }
+            // 6. Let k be 0
+            k = 0;
+            // 7. Repeat, while k < len
+            while (k < len) {
+                var kValue;
+                // a. Let Pk be ToString(k).
+                //   This is implicit for LHS operands of the in operator
+                // b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
+                //   This step can be combined with c
+                // c. If kPresent is true, then
+                if (k in O) {
+                    // i. Let kValue be the result of calling the Get internal method of O with argument Pk.
+                    kValue = O[k];
+                    // ii. Call the Call internal method of callback with T as the this value and
+                    // argument list containing kValue, k, and O.
+                    callback.call(T, kValue, k, O);
+                }
+                // d. Increase k by 1.
+                k++;
+            }
+            // 8. return undefined
+        };
+    }
+
+    var singleBoundJQueryPlugin = function (pattern, method, options) {
+        /* This is a jQuery plugin for patterns which are invoked ONCE FOR EACH
+         * matched element in the DOM.
+         *
+         * This is how the Mockup-type patterns behave. They are constructor
+         * functions which need to be invoked once per jQuery-wrapped DOM node
+         * for all DOM nodes on which the pattern applies.
+         */
+        var $this = this;
+        $this.each(function() {
+            var pat, $el = $(this);
+            pat = pattern.init($el, options);
+            if (method) {
+                if (pat[method] === undefined) {
+                    $.error("Method " + method +
+                            " does not exist on jQuery." + pattern.name);
+                    return false;
+                }
+                if (method.charAt(0) === '_') {
+                    $.error("Method " + method +
+                            " is private on jQuery." + pattern.name);
+                    return false;
+                }
+                pat[method].apply(pat, [options]);
+            }
+        });
+        return $this;
+    };
+
+    var pluralBoundJQueryPlugin = function (pattern, method, options) {
+        /* This is a jQuery plugin for patterns which are invoked ONCE FOR ALL
+         * matched elements in the DOM.
+         *
+         * This is how the vanilla Patternslib-type patterns behave. They are
+         * simple objects with an init method and this method gets called once
+         * with a list of jQuery-wrapped DOM nodes on which the pattern
+         * applies.
+         */
+        var $this = this;
+        if (method) {
+            if (pattern[method]) {
+                return pattern[method].apply($this, [$this].concat([options]));
+            } else {
+                $.error("Method " + method +
+                        " does not exist on jQuery." + pattern.name);
+            }
+        } else {
+            pattern.init.apply($this, [$this].concat([options]));
+        }
+        return $this;
+    };
+
+    var jqueryPlugin = function(pattern) {
+        return function(method, options) {
+            var $this = this;
+            if ($this.length === 0) {
+                return $this;
+            }
+            if (typeof method === 'object') {
+                options = method;
+                method = undefined;
+            }
+            if (typeof pattern === "function") {
+                return singleBoundJQueryPlugin.call(this, pattern, method, options);
+            } else {
+                return pluralBoundJQueryPlugin.call(this, pattern, method, options);
+            }
+        };
+    };
+
+    //     Underscore.js 1.3.1
+    //     (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
+    //     Underscore is freely distributable under the MIT license.
+    //     Portions of Underscore are inspired or borrowed from Prototype,
+    //     Oliver Steele's Functional, and John Resig's Micro-Templating.
+    //     For all details and documentation:
+    //     http://documentcloud.github.com/underscore
+    //
+    // Returns a function, that, as long as it continues to be invoked, will not
+    // be triggered. The function will be called after it stops being called for
+    // N milliseconds.
+    function debounce(func, wait) {
+        var timeout;
+        return function debounce_run() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                func.apply(context, args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // Is a given variable an object?
+    function isObject(obj) {
+        var type = typeof obj;
+        return type === 'function' || type === 'object' && !!obj;
+    }
+
+    // Extend a given object with all the properties in passed-in object(s).
+    function extend(obj) {
+        if (!isObject(obj)) return obj;
+        var source, prop;
+        for (var i = 1, length = arguments.length; i < length; i++) {
+            source = arguments[i];
+            for (prop in source) {
+                if (hasOwnProperty.call(source, prop)) {
+                    obj[prop] = source[prop];
+                }
+            }
+        }
+        return obj;
+    }
+    // END: Taken from Underscore.js until here.
+
+    function rebaseURL(base, url) {
+        if (url.indexOf("://")!==-1 || url[0]==="/")
+            return url;
+        return base.slice(0, base.lastIndexOf("/")+1) + url;
+    }
+
+    function findLabel(input) {
+        var $label;
+        for (var label=input.parentNode; label && label.nodeType!==11; label=label.parentNode) {
+            if (label.tagName==="LABEL") {
+                return label;
+            }
+        }
+        if (input.id) {
+            $label = $("label[for=\""+input.id+"\"]");
+        }
+        if ($label && $label.length===0 && input.form) {
+            $label = $("label[for=\""+input.name+"\"]", input.form);
+        }
+        if ($label && $label.length) {
+            return $label[0];
+        } else {
+            return null;
+        }
+    }
+
+    // Taken from http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+    function elementInViewport(el) {
+       var rect = el.getBoundingClientRect(),
+           docEl = document.documentElement,
+           vWidth = window.innerWidth || docEl.clientWidth,
+           vHeight = window.innerHeight || docEl.clientHeight;
+
+        if (rect.right<0 || rect.bottom<0 || rect.left>vWidth || rect.top>vHeight)
+            return false;
+        return true;
+    }
+
+    // Taken from http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
+    function escapeRegExp(str) {
+        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+    }
+
+    function removeWildcardClass($targets, classes) {
+        if (classes.indexOf("*")===-1)
+            $targets.removeClass(classes);
+        else {
+            var matcher = classes.replace(/[\-\[\]{}()+?.,\\\^$|#\s]/g, "\\$&");
+            matcher = matcher.replace(/[*]/g, ".*");
+            matcher = new RegExp("^" + matcher + "$");
+            $targets.filter("[class]").each(function() {
+                var $this = $(this),
+                    classes = $this.attr("class").split(/\s+/),
+                    ok=[];
+                for (var i=0; i<classes.length; i++)
+                    if (!matcher.test(classes[i]))
+                        ok.push(classes[i]);
+                if (ok.length)
+                    $this.attr("class", ok.join(" "));
+                else
+                    $this.removeAttr("class");
+            });
+        }
+    }
+
+    var transitions = {
+        none: {hide: "hide", show: "show"},
+        fade: {hide: "fadeOut", show: "fadeIn"},
+        slide: {hide: "slideUp", show: "slideDown"}
+    };
+
+    function hideOrShow($slave, visible, options, pattern_name) {
+        var duration = (options.transition==="css" || options.transition==="none") ? null : options.effect.duration;
+
+        $slave.removeClass("visible hidden in-progress");
+        var onComplete = function() {
+            $slave
+                .removeClass("in-progress")
+                .addClass(visible ? "visible" : "hidden")
+                .trigger("pat-update",
+                        {pattern: pattern_name,
+                         transition: "complete"});
+        };
+        if (!duration) {
+            if (options.transition!=="css")
+                $slave[visible ? "show" : "hide"]();
+            onComplete();
+        } else {
+            var t = transitions[options.transition];
+            $slave
+                .addClass("in-progress")
+                .trigger("pat-update",
+                        {pattern: pattern_name,
+                         transition: "start"});
+            $slave[visible ? t.show : t.hide]({
+                duration: duration,
+                easing: options.effect.easing,
+                complete: onComplete
+            });
+        }
+    }
+
+    function addURLQueryParameter(fullURL, param, value) {
+        /* Using a positive lookahead (?=\=) to find the given parameter,
+         * preceded by a ? or &, and followed by a = with a value after
+         * than (using a non-greedy selector) and then followed by
+         * a & or the end of the string.
+         *
+         * Taken from http://stackoverflow.com/questions/7640270/adding-modify-query-string-get-variables-in-a-url-with-javascript
+         */
+        var val = new RegExp('(\\?|\\&)' + param + '=.*?(?=(&|$))'),
+            parts = fullURL.toString().split('#'),
+            url = parts[0],
+            hash = parts[1],
+            qstring = /\?.+$/,
+            newURL = url;
+        // Check if the parameter exists
+        if (val.test(url)) {
+            // if it does, replace it, using the captured group
+            // to determine & or ? at the beginning
+            newURL = url.replace(val, '$1' + param + '=' + value);
+        } else if (qstring.test(url)) {
+            // otherwise, if there is a query string at all
+            // add the param to the end of it
+            newURL = url + '&' + param + '=' + value;
+        } else {
+            // if there's no query string, add one
+            newURL = url + '?' + param + '=' + value;
+        }
+        if (hash) { newURL += '#' + hash; }
+        return newURL;
+    }
+
+    var utils = {
+        // pattern pimping - own module?
+        jqueryPlugin: jqueryPlugin,
+        debounce: debounce,
+        escapeRegExp: escapeRegExp,
+        isObject: isObject,
+        extend: extend,
+        rebaseURL: rebaseURL,
+        findLabel: findLabel,
+        elementInViewport: elementInViewport,
+        removeWildcardClass: removeWildcardClass,
+        hideOrShow: hideOrShow,
+        addURLQueryParameter: addURLQueryParameter
+    };
+    return utils;
+});
+
+define('pat-compat',[],function() {
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/every (JS 1.6)
+    if (!Array.prototype.every)
+    {
+        Array.prototype.every = function(fun /*, thisp */)
+        {
+            "use strict";
+
+            if (this === null)
+                throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof fun !== "function")
+                throw new TypeError();
+
+            var thisp = arguments[1];
+            for (var i = 0; i < len; i++)
+            {
+                if (i in t && !fun.call(thisp, t[i], i, t))
+                    return false;
+            }
+
+            return true;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/filter (JS 1.6)
+    if (!Array.prototype.filter) {
+        Array.prototype.filter = function(fun /*, thisp */) {
+            "use strict";
+
+            if (this === null)
+                throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof fun !== "function")
+                throw new TypeError();
+
+            var res = [];
+            var thisp = arguments[1];
+            for (var i = 0; i < len; i++)
+            {
+                if (i in t)
+                {
+                    var val = t[i]; // in case fun mutates this
+                    if (fun.call(thisp, val, i, t))
+                        res.push(val);
+                }
+            }
+
+            return res;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach (JS 1.6)
+    // Production steps of ECMA-262, Edition 5, 15.4.4.18
+    // Reference: http://es5.github.com/#x15.4.4.18
+    if ( !Array.prototype.forEach ) {
+
+        Array.prototype.forEach = function( callback, thisArg ) {
+
+            var T, k;
+
+            if ( this === null ) {
+                throw new TypeError( " this is null or not defined" );
+            }
+
+            // 1. Let O be the result of calling ToObject passing the |this| value as the argument.
+            var O = Object(this);
+
+            // 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
+            // 3. Let len be ToUint32(lenValue).
+            var len = O.length >>> 0; // Hack to convert O.length to a UInt32
+
+            // 4. If IsCallable(callback) is false, throw a TypeError exception.
+            // See: http://es5.github.com/#x9.11
+            if ( {}.toString.call(callback) !== "[object Function]" ) {
+                throw new TypeError( callback + " is not a function" );
+            }
+
+            // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
+            if ( thisArg ) {
+                T = thisArg;
+            }
+
+            // 6. Let k be 0
+            k = 0;
+
+            // 7. Repeat, while k < len
+            while( k < len ) {
+
+                var kValue;
+
+                // a. Let Pk be ToString(k).
+                //   This is implicit for LHS operands of the in operator
+                // b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
+                //   This step can be combined with c
+                // c. If kPresent is true, then
+                if ( k in O ) {
+
+                    // i. Let kValue be the result of calling the Get internal method of O with argument Pk.
+                    kValue = O[ k ];
+
+                    // ii. Call the Call internal method of callback with T as the this value and
+                    // argument list containing kValue, k, and O.
+                    callback.call( T, kValue, k, O );
+                }
+                // d. Increase k by 1.
+                k++;
+            }
+            // 8. return undefined
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf (JS 1.6)
+    if (!Array.prototype.indexOf) {
+        Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
+            "use strict";
+            if (this === null) {
+                throw new TypeError();
+            }
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (len === 0) {
+                return -1;
+            }
+            var n = 0;
+            if (arguments.length > 0) {
+                n = Number(arguments[1]);
+                if (n !== n) { // shortcut for verifying if it's NaN
+                    n = 0;
+                } else if (n !== 0 && n !== Infinity && n !== -Infinity) {
+                    n = (n > 0 || -1) * Math.floor(Math.abs(n));
+                }
+            }
+            if (n >= len) {
+                return -1;
+            }
+            var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
+            for (; k < len; k++) {
+                if (k in t && t[k] === searchElement) {
+                    return k;
+                }
+            }
+            return -1;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/lastIndexOf (JS 1.6)
+    if (!Array.prototype.lastIndexOf) {
+        Array.prototype.lastIndexOf = function(searchElement /*, fromIndex*/) {
+            "use strict";
+
+            if (this === null)
+                throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (len === 0)
+                return -1;
+
+            var n = len;
+            if (arguments.length > 1)
+            {
+                n = Number(arguments[1]);
+                if (n !== n)
+                    n = 0;
+                else if (n !== 0 && n !== (1 / 0) && n !== -(1 / 0))
+                    n = (n > 0 || -1) * Math.floor(Math.abs(n));
+            }
+
+            var k = n >= 0 ? Math.min(n, len - 1) : len - Math.abs(n);
+
+            for (; k >= 0; k--)
+            {
+                if (k in t && t[k] === searchElement)
+                    return k;
+            }
+            return -1;
+        };
+    }
+
+
+    // source: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/map (JS 1.6)
+    // Production steps of ECMA-262, Edition 5, 15.4.4.19
+    // Reference: http://es5.github.com/#x15.4.4.19
+    if (!Array.prototype.map) {
+        Array.prototype.map = function(callback, thisArg) {
+
+            var T, A, k;
+
+            if (this === null) {
+                throw new TypeError(" this is null or not defined");
+            }
+
+            // 1. Let O be the result of calling ToObject passing the |this| value as the argument.
+            var O = Object(this);
+
+            // 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
+            // 3. Let len be ToUint32(lenValue).
+            var len = O.length >>> 0;
+
+            // 4. If IsCallable(callback) is false, throw a TypeError exception.
+            // See: http://es5.github.com/#x9.11
+            if ({}.toString.call(callback) !== "[object Function]") {
+                throw new TypeError(callback + " is not a function");
+            }
+
+            // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
+            if (thisArg) {
+                T = thisArg;
+            }
+
+            // 6. Let A be a new array created as if by the expression new Array(len) where Array is
+            // the standard built-in constructor with that name and len is the value of len.
+            A = new Array(len);
+
+            // 7. Let k be 0
+            k = 0;
+
+            // 8. Repeat, while k < len
+            while(k < len) {
+
+                var kValue, mappedValue;
+
+                // a. Let Pk be ToString(k).
+                //   This is implicit for LHS operands of the in operator
+                // b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
+                //   This step can be combined with c
+                // c. If kPresent is true, then
+                if (k in O) {
+
+                    // i. Let kValue be the result of calling the Get internal method of O with argument Pk.
+                    kValue = O[ k ];
+
+                    // ii. Let mappedValue be the result of calling the Call internal method of callback
+                    // with T as the this value and argument list containing kValue, k, and O.
+                    mappedValue = callback.call(T, kValue, k, O);
+
+                    // iii. Call the DefineOwnProperty internal method of A with arguments
+                    // Pk, Property Descriptor {Value: mappedValue, Writable: true, Enumerable: true, Configurable: true},
+                    // and false.
+
+                    // In browsers that support Object.defineProperty, use the following:
+                    // Object.defineProperty(A, Pk, { value: mappedValue, writable: true, enumerable: true, configurable: true });
+
+                    // For best browser support, use the following:
+                    A[ k ] = mappedValue;
+                }
+                // d. Increase k by 1.
+                k++;
+            }
+
+            // 9. return A
+            return A;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/Reduce (JS 1.8)
+    if (!Array.prototype.reduce) {
+        Array.prototype.reduce = function reduce(accumulator){
+            if (this===null || this===undefined) throw new TypeError("Object is null or undefined");
+            var i = 0, l = this.length >> 0, curr;
+
+            if(typeof accumulator !== "function") // ES5 : "If IsCallable(callbackfn) is false, throw a TypeError exception."
+                throw new TypeError("First argument is not callable");
+
+            if(arguments.length < 2) {
+                if (l === 0) throw new TypeError("Array length is 0 and no second argument");
+                curr = this[0];
+                i = 1; // start accumulating at the second element
+            }
+            else
+                curr = arguments[1];
+
+            while (i < l) {
+                if(i in this) curr = accumulator.call(undefined, curr, this[i], i, this);
+                ++i;
+            }
+
+            return curr;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/ReduceRight (JS 1.8)
+    if (!Array.prototype.reduceRight)
+    {
+        Array.prototype.reduceRight = function(callbackfn /*, initialValue */)
+        {
+            "use strict";
+
+            if (this === null)
+                throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof callbackfn !== "function")
+                throw new TypeError();
+
+            // no value to return if no initial value, empty array
+            if (len === 0 && arguments.length === 1)
+                throw new TypeError();
+
+            var k = len - 1;
+            var accumulator;
+            if (arguments.length >= 2)
+            {
+                accumulator = arguments[1];
+            }
+            else
+            {
+                do
+                {
+                    if (k in this)
+                    {
+                        accumulator = this[k--];
+                        break;
+                    }
+
+                    // if array contains no values, no initial value to return
+                    if (--k < 0)
+                        throw new TypeError();
+                }
+                while (true);
+            }
+
+            while (k >= 0)
+            {
+                if (k in t)
+                    accumulator = callbackfn.call(undefined, accumulator, t[k], k, t);
+                k--;
+            }
+
+            return accumulator;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/some (JS 1.6)
+    if (!Array.prototype.some)
+    {
+        Array.prototype.some = function(fun /*, thisp */)
+        {
+            "use strict";
+
+            if (this === null)
+                throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof fun !== "function")
+                throw new TypeError();
+
+            var thisp = arguments[1];
+            for (var i = 0; i < len; i++)
+            {
+                if (i in t && fun.call(thisp, t[i], i, t))
+                    return true;
+            }
+
+            return false;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/isArray (JS 1.8.5)
+    if (!Array.isArray) {
+        Array.isArray = function (arg) {
+            return Object.prototype.toString.call(arg) === "[object Array]";
+        };
+    }
+
+    // source: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/Trim (JS 1.8.1)
+    if (!String.prototype.trim) {
+        String.prototype.trim = function () {
+            return this.replace(/^\s+|\s+$/g, "");
+        };
+    }
+
+    // source: https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/bind
+    if (!Function.prototype.bind) {
+        Function.prototype.bind = function (oThis) {
+            if (typeof this !== "function") {
+                // closest thing possible to the ECMAScript 5 internal IsCallable function
+                throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+            }
+
+            var aArgs = Array.prototype.slice.call(arguments, 1),
+                fToBind = this,
+                fNOP = function () {},
+                fBound = function () {
+                    return fToBind.apply(this instanceof fNOP &&
+                            oThis ? this : oThis,
+                            aArgs.concat(Array.prototype.slice.call(arguments)));
+                };
+            fNOP.prototype = this.prototype;
+            fBound.prototype = new fNOP();
+
+            return fBound;
+        };
+    }
+
+    // https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/keys
+    if (!Object.keys) {
+        Object.keys = (function () {
+            var _hasOwnProperty = Object.prototype.hasOwnProperty,
+            hasDontEnumBug = !({toString: null}).propertyIsEnumerable("toString"),
+            dontEnums = [
+            "toString",
+            "toLocaleString",
+            "valueOf",
+            "hasOwnProperty",
+            "isPrototypeOf",
+            "propertyIsEnumerable",
+            "constructor"
+            ],
+            dontEnumsLength = dontEnums.length;
+
+            return function (obj) {
+                if (typeof obj !== "object" && typeof obj !== "function" || obj === null)
+                    throw new TypeError("Object.keys called on non-object");
+
+                var result = [];
+                for (var prop in obj)
+                    if (_hasOwnProperty.call(obj, prop))
+                        result.push(prop);
+
+                if (hasDontEnumBug)
+                    for (var i=0; i < dontEnumsLength; i++)
+                        if (_hasOwnProperty.call(obj, dontEnums[i]))
+                            result.push(dontEnums[i]);
+                return result;
+            };
+        })();
+    }
+});
+
+/**
+ * @license
+ * Patterns @VERSION@ jquery-ext - various jQuery extensions
+ *
+ * Copyright 2011 Humberto Sermeño
+ */
+define('pat-jquery-ext',["jquery"], function($) {
+    var methods = {
+        init: function( options ) {
+            var settings = {
+                time: 3, /* time it will wait before moving to "timeout" after a move event */
+                initialTime: 8, /* time it will wait before first adding the "timeout" class */
+                exceptionAreas: [] /* IDs of elements that, if the mouse is over them, will reset the timer */
+            };
+            return this.each(function() {
+                var $this = $(this),
+                    data = $this.data("timeout");
+
+                if (!data) {
+                    if ( options ) {
+                        $.extend( settings, options );
+                    }
+                    $this.data("timeout", {
+                        "lastEvent": new Date(),
+                        "trueTime": settings.time,
+                        "time": settings.initialTime,
+                        "untouched": true,
+                        "inExceptionArea": false
+                    });
+
+                    $this.bind( "mouseover.timeout", methods.mouseMoved );
+                    $this.bind( "mouseenter.timeout", methods.mouseMoved );
+
+                    $(settings.exceptionAreas).each(function() {
+                        $this.find(this)
+                            .live( "mouseover.timeout", {"parent":$this}, methods.enteredException )
+                            .live( "mouseleave.timeout", {"parent":$this}, methods.leftException );
+                    });
+
+                    if (settings.initialTime > 0)
+                        $this.timeout("startTimer");
+                    else
+                        $this.addClass("timeout");
+                }
+            });
+        },
+
+        enteredException: function(event) {
+            var data = event.data.parent.data("timeout");
+            data.inExceptionArea = true;
+            event.data.parent.data("timeout", data);
+            event.data.parent.trigger("mouseover");
+        },
+
+        leftException: function(event) {
+            var data = event.data.parent.data("timeout");
+            data.inExceptionArea = false;
+            event.data.parent.data("timeout", data);
+        },
+
+        destroy: function() {
+            return this.each( function() {
+                var $this = $(this),
+                    data = $this.data("timeout");
+
+                $(window).unbind(".timeout");
+                data.timeout.remove();
+                $this.removeData("timeout");
+            });
+        },
+
+        mouseMoved: function() {
+            var $this = $(this), data = $this.data("timeout");
+
+            if ($this.hasClass("timeout")) {
+                $this.removeClass("timeout");
+                $this.timeout("startTimer");
+            } else if ( data.untouched ) {
+                data.untouched = false;
+                data.time = data.trueTime;
+            }
+
+            data.lastEvent = new Date();
+            $this.data("timeout", data);
+        },
+
+        startTimer: function() {
+            var $this = $(this), data = $this.data("timeout");
+            var fn = function(){
+                var data = $this.data("timeout");
+                if ( data && data.lastEvent ) {
+                    if ( data.inExceptionArea ) {
+                        setTimeout( fn, Math.floor( data.time*1000 ) );
+                    } else {
+                        var now = new Date();
+                        var diff = Math.floor(data.time*1000) - ( now - data.lastEvent );
+                        if ( diff > 0 ) {
+                            // the timeout has not ocurred, so set the timeout again
+                            setTimeout( fn, diff+100 );
+                        } else {
+                            // timeout ocurred, so set the class
+                            $this.addClass("timeout");
+                        }
+                    }
+                }
+            };
+
+            setTimeout( fn, Math.floor( data.time*1000 ) );
+        }
+    };
+
+    $.fn.timeout = function( method ) {
+        if ( methods[method] ) {
+            return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
+        } else if ( typeof method === "object" || !method ) {
+            return methods.init.apply( this, arguments );
+        } else {
+            $.error( "Method " + method + " does not exist on jQuery.timeout" );
+        }
+    };
+
+    // Custom jQuery selector to find elements with scrollbars
+    $.extend($.expr[":"], {
+        scrollable: function(element) {
+            var vertically_scrollable, horizontally_scrollable;
+            if ($(element).css("overflow") === "scroll" ||
+                $(element).css("overflowX") === "scroll" ||
+                $(element).css("overflowY") === "scroll")
+                return true;
+
+            vertically_scrollable = (element.clientHeight < element.scrollHeight) && (
+                $.inArray($(element).css("overflowY"), ["scroll", "auto"]) !== -1 || $.inArray($(element).css("overflow"), ["scroll", "auto"]) !== -1);
+
+            if (vertically_scrollable)
+                return true;
+
+            horizontally_scrollable = (element.clientWidth < element.scrollWidth) && (
+                $.inArray($(element).css("overflowX"), ["scroll", "auto"]) !== -1 || $.inArray($(element).css("overflow"), ["scroll", "auto"]) !== -1);
+            return horizontally_scrollable;
+        }
+    });
+
+    // Make Visible in scroll
+    $.fn.makeVisibleInScroll = function( parent_id ) {
+        var absoluteParent = null;
+        if ( typeof parent_id === "string" ) {
+            absoluteParent = $("#" + parent_id);
+        } else if ( parent_id ) {
+            absoluteParent = $(parent_id);
+        }
+
+        return this.each(function() {
+            var $this = $(this), parent;
+            if (!absoluteParent) {
+                parent = $this.parents(":scrollable");
+                if (parent.length > 0) {
+                    parent = $(parent[0]);
+                } else {
+                    parent = $(window);
+                }
+            } else {
+                parent = absoluteParent;
+            }
+
+            var elemTop = $this.position().top;
+            var elemBottom = $this.height() + elemTop;
+
+            var viewTop = parent.scrollTop();
+            var viewBottom = parent.height() + viewTop;
+
+            if (elemTop < viewTop) {
+                parent.scrollTop(elemTop);
+            } else if ( elemBottom > viewBottom - parent.height()/2 ) {
+                parent.scrollTop( elemTop - (parent.height() - $this.height())/2 );
+            }
+        });
+    };
+
+    //Make absolute location
+    $.fn.setPositionAbsolute = function(element,offsettop,offsetleft) {
+        return this.each(function() {
+            // set absolute location for based on the element passed
+            // dynamically since every browser has different settings
+            var $this = $(this);
+            var thiswidth = $(this).width();
+            var    pos   = element.offset();
+            var    width = element.width();
+            var    height = element.height();
+            var setleft = (pos.left + width - thiswidth + offsetleft);
+            var settop = (pos.top + height + offsettop);
+            $this.css({ "z-index" : 1, "position": "absolute", "marginLeft": 0, "marginTop": 0, "left": setleft + "px", "top":settop + "px" ,"width":thiswidth});
+            $this.remove().appendTo("body").show();
+        });
+    };
+
+    $.fn.positionAncestor = function(selector) {
+        var left = 0;
+        var top = 0;
+        this.each(function() {
+            // check if current element has an ancestor matching a selector
+            // and that ancestor is positioned
+            var $ancestor = $(this).closest(selector);
+            if ($ancestor.length && $ancestor.css("position") !== "static") {
+                var $child = $(this);
+                var childMarginEdgeLeft = $child.offset().left - parseInt($child.css("marginLeft"), 10);
+                var childMarginEdgeTop = $child.offset().top - parseInt($child.css("marginTop"), 10);
+                var ancestorPaddingEdgeLeft = $ancestor.offset().left + parseInt($ancestor.css("borderLeftWidth"), 10);
+                var ancestorPaddingEdgeTop = $ancestor.offset().top + parseInt($ancestor.css("borderTopWidth"), 10);
+                left = childMarginEdgeLeft - ancestorPaddingEdgeLeft;
+                top = childMarginEdgeTop - ancestorPaddingEdgeTop;
+                // we have found the ancestor and computed the position
+                // stop iterating
+                return false;
+            }
+        });
+        return {
+            left:    left,
+            top:    top
+        };
+    };
+
+
+    // XXX: In compat.js we include things for browser compatibility,
+    // but these two seem to be only convenience. Do we really want to
+    // include these as part of patterns?
+    String.prototype.startsWith = function(str) { return (this.match("^"+str) !== null); };
+    String.prototype.endsWith = function(str) { return (this.match(str+"$") !== null); };
+
+
+    /******************************
+
+     Simple Placeholder
+
+     ******************************/
+
+    $.simplePlaceholder = {
+        placeholder_class: null,
+
+        hide_placeholder: function(){
+            var $this = $(this);
+            if($this.val() === $this.attr("placeholder")){
+                $this.val("").removeClass($.simplePlaceholder.placeholder_class);
+            }
+        },
+
+        show_placeholder: function(){
+            var $this = $(this);
+            if($this.val() === ""){
+                $this.val($this.attr("placeholder")).addClass($.simplePlaceholder.placeholder_class);
+            }
+        },
+
+        prevent_placeholder_submit: function(){
+            $(this).find(".simple-placeholder").each(function() {
+                var $this = $(this);
+                if ($this.val() === $this.attr("placeholder")){
+                    $this.val("");
+                }
+            });
+            return true;
+        }
+    };
+
+    $.fn.simplePlaceholder = function(options) {
+        if(document.createElement("input").placeholder === undefined){
+            var config = {
+                placeholder_class : "placeholding"
+            };
+
+            if(options) $.extend(config, options);
+            $.simplePlaceholder.placeholder_class = config.placeholder_class;
+
+            this.each(function() {
+                var $this = $(this);
+                $this.focus($.simplePlaceholder.hide_placeholder);
+                $this.blur($.simplePlaceholder.show_placeholder);
+                if($this.val() === "") {
+                    $this.val($this.attr("placeholder"));
+                    $this.addClass($.simplePlaceholder.placeholder_class);
+                }
+                $this.addClass("simple-placeholder");
+                $(this.form).submit($.simplePlaceholder.prevent_placeholder_submit);
+            });
+        }
+
+        return this;
+    };
+
+    $.fn.findInclusive = function(selector) {
+        return this.find('*').addBack().filter(selector);
+    };
+
+    $.fn.slideIn = function(speed, easing, callback) {
+        return this.animate({width: "show"}, speed, easing, callback);
+    };
+
+    $.fn.slideOut = function(speed, easing, callback) {
+        return this.animate({width: "hide"}, speed, easing, callback);
+    };
+
+    // case-insensitive :contains
+    $.expr[":"].Contains = function(a, i, m) {
+        return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+    };
+
+    $.fn.scopedFind = function (selector) {
+        /*  If the selector starts with an object id do a global search,
+         *  otherwise do a local search.
+         */
+        if (selector.startsWith('#')) {
+            return $(selector);
+        } else {
+            return this.find(selector);
+        }
+    };
+});
+
+/**
+ * Patterns registry - Central registry and scan logic for patterns
+ *
+ * Copyright 2012-2013 Simplon B.V.
+ * Copyright 2012-2013 Florian Friesdorf
+ * Copyright 2013 Marko Durkovic
+ * Copyright 2013 Rok Garbas
+ * Copyright 2014-2015 Syslab.com GmBH, JC Brand
+ */
+
+/*
+ * changes to previous patterns.register/scan mechanism
+ * - if you want initialised class, do it in init
+ * - init returns set of elements actually initialised
+ * - handle once within init
+ * - no turnstile anymore
+ * - set pattern.jquery_plugin if you want it
+ */
+define('pat-registry',[
+    "jquery",
+    "underscore",
+    "pat-logger",
+    "pat-utils",
+    // below here modules that are only loaded
+    "pat-compat",
+    "pat-jquery-ext"
+], function($, _, logger, utils) {
+    var TEXT_NODE = 3;
+    var COMMENT_NODE = 8;
+    var log = logger.getLogger("registry");
+
+    var disable_re = /patterns-disable=([^&]+)/g,
+        dont_catch_re = /patterns-dont-catch/g,
+        dont_catch = false,
+        disabled = {}, match;
+
+    while ((match=disable_re.exec(window.location.search)) !== null) {
+        disabled[match[1]] = true;
+        log.info("Pattern disabled via url config:", match[1]);
+    }
+
+    while ((match=dont_catch_re.exec(window.location.search)) !== null) {
+        dont_catch = true;
+        log.info("I will not catch init exceptions");
+    }
+
+    var registry = {
+        patterns: {},
+        // as long as the registry is not initialized, pattern
+        // registration just registers a pattern. Once init is called,
+        // the DOM is scanned. After that registering a new pattern
+        // results in rescanning the DOM only for this pattern.
+        initialized: false,
+        init: function registry_init() {
+            $(document).ready(function() {
+                log.info("loaded: " + Object.keys(registry.patterns).sort().join(", "));
+                registry.scan(document.body);
+                registry.initialized = true;
+                log.info("finished initial scan.");
+            });
+        },
+
+        clear: function clearRegistry() {
+            // Removes all patterns from the registry. Currently only being
+            // used in tests.
+            this.patterns = {};
+        },
+
+        transformPattern: function(name, content) {
+            /* Call the transform method on the pattern with the given name, if
+             * it exists.
+             */
+            if (disabled[name]) {
+                log.debug("Skipping disabled pattern:", name);
+                return;
+            }
+            var pattern = registry.patterns[name];
+            if (pattern.transform) {
+                try {
+                    pattern.transform($(content));
+                } catch (e) {
+                    if (dont_catch) { throw(e); }
+                    log.error("Transform error for pattern" + name, e);
+                }
+            }
+        },
+
+        initPattern: function(name, el, trigger) {
+            /* Initialize the pattern with the provided name and in the context
+             * of the passed in DOM element.
+             */
+            var $el = $(el);
+            var pattern = registry.patterns[name];
+            if (pattern.init) {
+                plog = logger.getLogger("pat." + name);
+                if ($el.is(pattern.trigger)) {
+                    plog.debug("Initialising:", $el);
+                    try {
+                        pattern.init($el, null, trigger);
+                        plog.debug("done.");
+                    } catch (e) {
+                        if (dont_catch) { throw(e); }
+                        plog.error("Caught error:", e);
+                    }
+                }
+            }
+        },
+
+        orderPatterns: function (patterns) {
+            // XXX: Bit of a hack. We need the validate pattern to be
+            // parsed and initiated before the inject pattern. So we make
+            // sure here, that it appears first. Not sure what would be
+            // the best solution. Perhaps some kind of way to register
+            // patterns "before" or "after" other patterns.
+            if (_.contains(patterns, "validate") && _.contains(patterns, "inject")) {
+                patterns.splice(patterns.indexOf("validate"), 1);
+                patterns.unshift("validate");
+            }
+            return patterns;
+        },
+
+        scan: function registryScan(content, patterns, trigger) {
+            var selectors = [], $match, plog;
+            patterns = this.orderPatterns(patterns || Object.keys(registry.patterns));
+            patterns.forEach(_.partial(this.transformPattern, _, content));
+            patterns = _.each(patterns, function (name) {
+                var pattern = registry.patterns[name];
+                if (pattern.trigger) {
+                    selectors.unshift(pattern.trigger);
+                }
+            });
+            $match = $(content).findInclusive(selectors.join(",")); // Find all DOM elements belonging to a pattern
+            $match = $match.filter(function() { return $(this).parents("pre").length === 0; });
+            $match = $match.filter(":not(.cant-touch-this)");
+
+            // walk list backwards and initialize patterns inside-out.
+            $match.toArray().reduceRight(function registryInitPattern(acc, el) {
+                patterns.forEach(_.partial(this.initPattern, _, el, trigger));
+            }.bind(this), null);
+            $("body").addClass("patterns-loaded");
+        },
+
+        register: function registry_register(pattern, name) {
+            var plugin_name, jquery_plugin;
+            name = name || pattern.name;
+            if (!name) {
+                log.error("Pattern lacks a name:", pattern);
+                return false;
+            }
+            if (registry.patterns[name]) {
+                log.error("Already have a pattern called: " + name);
+                return false;
+            }
+
+            // register pattern to be used for scanning new content
+            registry.patterns[name] = pattern;
+
+            // register pattern as jquery plugin
+            if (pattern.jquery_plugin) {
+                plugin_name = ("pat-" + name)
+                        .replace(/-([a-zA-Z])/g, function(match, p1) {
+                            return p1.toUpperCase();
+                        });
+                $.fn[plugin_name] = utils.jqueryPlugin(pattern);
+                // BBB 2012-12-10 and also for Mockup patterns.
+                $.fn[plugin_name.replace(/^pat/, "pattern")] = $.fn[plugin_name];
+            }
+            log.debug("Registered pattern:", name, pattern);
+            if (registry.initialized) {
+                registry.scan(document.body, [name]);
+            }
+            return true;
+        }
+    };
+
+    $(document).on("patterns-injected.patterns",
+        function registry_onInject(ev, config, trigger_el, injected_el) {
+            if (injected_el.nodeType !== TEXT_NODE && injected_el !== COMMENT_NODE) {
+                registry.scan(injected_el, null, {type: "injection", element: trigger_el});
+                $(injected_el).trigger("patterns-injected-scanned");
+            }
+        }
+    );
+    return registry;
+});
+// jshint indent: 4, browser: true, jquery: true, quotmark: double
+// vim: sw=4 expandtab
+;
+/*!
+ * jQuery Browser Plugin 0.0.8
+ * https://github.com/gabceb/jquery-browser-plugin
+ *
+ * Original jquery-browser code Copyright 2005, 2015 jQuery Foundation, Inc. and other contributors
+ * http://jquery.org/license
+ *
+ * Modifications Copyright 2015 Gabriel Cebrian
+ * https://github.com/gabceb
+ *
+ * Released under the MIT license
+ *
+ * Date: 05-07-2015
+ */
+/*global window: false */
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define('jquery.browser',['jquery'], function ($) {
+      return factory($);
+    });
+  } else if (typeof module === 'object' && typeof module.exports === 'object') {
+    // Node-like environment
+    module.exports = factory(require('jquery'));
+  } else {
+    // Browser globals
+    factory(window.jQuery);
+  }
+}(function(jQuery) {
+  "use strict";
+
+  function uaMatch( ua ) {
+    // If an UA is not provided, default to the current browser UA.
+    if ( ua === undefined ) {
+      ua = window.navigator.userAgent;
+    }
+    ua = ua.toLowerCase();
+
+    var match = /(edge)\/([\w.]+)/.exec( ua ) ||
+        /(opr)[\/]([\w.]+)/.exec( ua ) ||
+        /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+        /(version)(applewebkit)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
+        /(webkit)[ \/]([\w.]+).*(version)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
+        /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
+        /(msie) ([\w.]+)/.exec( ua ) ||
+        ua.indexOf("trident") >= 0 && /(rv)(?::| )([\w.]+)/.exec( ua ) ||
+        ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
+        [];
+
+    var platform_match = /(ipad)/.exec( ua ) ||
+        /(ipod)/.exec( ua ) ||
+        /(iphone)/.exec( ua ) ||
+        /(kindle)/.exec( ua ) ||
+        /(silk)/.exec( ua ) ||
+        /(android)/.exec( ua ) ||
+        /(windows phone)/.exec( ua ) ||
+        /(win)/.exec( ua ) ||
+        /(mac)/.exec( ua ) ||
+        /(linux)/.exec( ua ) ||
+        /(cros)/.exec( ua ) ||
+        /(playbook)/.exec( ua ) ||
+        /(bb)/.exec( ua ) ||
+        /(blackberry)/.exec( ua ) ||
+        [];
+
+    var browser = {},
+        matched = {
+          browser: match[ 5 ] || match[ 3 ] || match[ 1 ] || "",
+          version: match[ 2 ] || match[ 4 ] || "0",
+          versionNumber: match[ 4 ] || match[ 2 ] || "0",
+          platform: platform_match[ 0 ] || ""
+        };
+
+    if ( matched.browser ) {
+      browser[ matched.browser ] = true;
+      browser.version = matched.version;
+      browser.versionNumber = parseInt(matched.versionNumber, 10);
+    }
+
+    if ( matched.platform ) {
+      browser[ matched.platform ] = true;
+    }
+
+    // These are all considered mobile platforms, meaning they run a mobile browser
+    if ( browser.android || browser.bb || browser.blackberry || browser.ipad || browser.iphone ||
+      browser.ipod || browser.kindle || browser.playbook || browser.silk || browser[ "windows phone" ]) {
+      browser.mobile = true;
+    }
+
+    // These are all considered desktop platforms, meaning they run a desktop browser
+    if ( browser.cros || browser.mac || browser.linux || browser.win ) {
+      browser.desktop = true;
+    }
+
+    // Chrome, Opera 15+ and Safari are webkit based browsers
+    if ( browser.chrome || browser.opr || browser.safari ) {
+      browser.webkit = true;
+    }
+
+    // IE11 has a new token so we will assign it msie to avoid breaking changes
+    // IE12 disguises itself as Chrome, but adds a new Edge token.
+    if ( browser.rv || browser.edge ) {
+      var ie = "msie";
+
+      matched.browser = ie;
+      browser[ie] = true;
+    }
+
+    // Blackberry browsers are marked as Safari on BlackBerry
+    if ( browser.safari && browser.blackberry ) {
+      var blackberry = "blackberry";
+
+      matched.browser = blackberry;
+      browser[blackberry] = true;
+    }
+
+    // Playbook browsers are marked as Safari on Playbook
+    if ( browser.safari && browser.playbook ) {
+      var playbook = "playbook";
+
+      matched.browser = playbook;
+      browser[playbook] = true;
+    }
+
+    // BB10 is a newer OS version of BlackBerry
+    if ( browser.bb ) {
+      var bb = "blackberry";
+
+      matched.browser = bb;
+      browser[bb] = true;
+    }
+
+    // Opera 15+ are identified as opr
+    if ( browser.opr ) {
+      var opera = "opera";
+
+      matched.browser = opera;
+      browser[opera] = true;
+    }
+
+    // Stock Android browsers are marked as Safari on Android.
+    if ( browser.safari && browser.android ) {
+      var android = "android";
+
+      matched.browser = android;
+      browser[android] = true;
+    }
+
+    // Kindle browsers are marked as Safari on Kindle
+    if ( browser.safari && browser.kindle ) {
+      var kindle = "kindle";
+
+      matched.browser = kindle;
+      browser[kindle] = true;
+    }
+
+     // Kindle Silk browsers are marked as Safari on Kindle
+    if ( browser.safari && browser.silk ) {
+      var silk = "silk";
+
+      matched.browser = silk;
+      browser[silk] = true;
+    }
+
+    // Assign the name and platform variable
+    browser.name = matched.browser;
+    browser.platform = matched.platform;
+    return browser;
+  }
+
+  // Run the matching process, also assign the function to the returned object
+  // for manual, jQuery-free use if desired
+  window.jQBrowser = uaMatch( window.navigator.userAgent );
+  window.jQBrowser.uaMatch = uaMatch;
+
+  // Only assign to jQuery.browser if jQuery is loaded
+  if ( jQuery ) {
+    jQuery.browser = window.jQBrowser;
+  }
+
+  return window.jQBrowser;
+}));
 
 /**
  * Patterns parser - Argument parser
@@ -42987,19 +43053,23 @@ define('pat-validate',[
     "moment",
     "validate"
 ], function($, Parser, Base, utils, moment, validate) {
+    validate.moment = moment;
     var parser = new Parser("validate");
     parser.addArgument("disable-selector"); // Elements which must be disabled if there are errors
-    parser.addArgument("message-required", "This field is required");
+    parser.addArgument("message-date", "This value must be a valid date");
+    parser.addArgument("message-datetime", "This value must be a valid date and time");
     parser.addArgument("message-email", "This value must be a valid email address");
     parser.addArgument("message-number", "This value must be a number");
-    parser.addArgument("message-datetime", "This value must be a valid date and time");
-    parser.addArgument("message-date", "This value must be a valid date");
+    parser.addArgument("message-required", "This field is required");
+    parser.addArgument("not-after");
+    parser.addArgument("not-before");
 
     return Base.extend({
         name: "validate",
         trigger: "form.pat-validate",
 
         init: function($el, opts) {
+            this.errors = 0;
             this.options = parser.parse(this.$el, opts);
             this.$inputs = this.$el.find(':input[name]');
             this.$inputs.on('change.pat-validate', this.validateElement.bind(this));
@@ -43007,19 +43077,52 @@ define('pat-validate',[
             this.$el.on('pat-update.pat-validate', this.onPatternUpdate.bind(this));
         },
 
+        setLocalConstraints: function (input, constraints) {
+            /* Some form fields might have their own data-pat-validate
+             * attribute, used to set field-specific constraints.
+             *
+             * We parse them and add them to the passed in constraints obj.
+             */
+            var name = input.getAttribute('name').replace(/\./g, '\\.'),
+                type = input.getAttribute('type'),
+                isDate = validate.moment.isDate,
+                opts;
+            if (input.dataset.patValidate) {
+                if (_.contains(['datetime', 'date'], type)) {
+                    opts = parser.parse($(input));
+                    if (typeof opts.not !== "undefined") {
+                        c = constraints[name][type];
+                        try {
+                            if (typeof opts.not.before !== "undefined") {
+                                c.earliest = isDate(opts.not.before) ? opts.not.before : $(opts.not.before).val();
+                                c.message = '^'+opts.message[type];
+                            }
+                            if (typeof opts.not.after !== "undefined") {
+                                c.latest = isDate(opts.not.after) ? opts.not.after : $(opts.not.after).val();
+                                c.message = '^'+opts.message[type];
+                            }
+                        } catch (e) {
+                            console.log(e);
+                        }
+                    }
+                }
+            }
+            return constraints;
+        },
+
         getConstraints: function (input) {
             // Get validation constraints by parsing the input element for hints
-            var name = input.getAttribute('name'),
+            var name = input.getAttribute('name').replace(/\./g, '\\.'),
+                type = input.getAttribute('type'),
                 constraints = {};
-            if (!name) { return; }
-            constraints[name.replace(/\./g, '\\.')] = {
+            constraints[name] = {
                 'presence': input.getAttribute('required') ? { 'message': '^'+this.options.message.required } : false,
-                'email': input.getAttribute('type') == 'email' ? { 'message': '^'+this.options.message.email } : false,
-                'numericality': input.getAttribute('type') == 'number' ? { 'message': '^'+this.options.message.number } : false,
-                'datetime': input.getAttribute('type') == 'datetime' ? { 'message': '^'+this.options.message.datetime } : false,
-                'date': input.getAttribute('type') == 'date' ? { 'message': '^'+this.options.message.date } : false
+                'email': type == 'email' ? { 'message': '^'+this.options.message.email } : false,
+                'numericality': type == 'number' ? { 'message': '^'+this.options.message.number } : false,
+                'datetime': type == 'datetime' ? { 'message': '^'+this.options.message.datetime } : false,
+                'date': type == 'date' ? { 'message': '^'+this.options.message.date } : false
             };
-            return constraints;
+            return this.setLocalConstraints(input, constraints);
         },
 
         getValueDict: function (input) {
@@ -43036,20 +43139,22 @@ define('pat-validate',[
             /* Handler which gets called when the entire form needs to be
              * validated. Will prevent the event's default action if validation fails.
              */
-            var has_errors = false;
+            var has_errors = false, input, error;
             var $not_disabled = this.$inputs.filter(function (idx, input) {
                 return !input.hasAttribute('disabled');
             });
-            $not_disabled.each(function (idx, input) {
-                var error = validate(this.getValueDict(input), this.getConstraints(input));
+            for (var i=0; i<$not_disabled.length; i++) {
+                input = $not_disabled[i];
+                error = validate(this.getValueDict(input), this.getConstraints(input));
                 if (typeof error != "undefined") {
                     this.showError(error, input);
+                    if (!has_errors) {
+                        ev.preventDefault();
+                        ev.stopPropagation();
+                        ev.stopImmediatePropagation();
+                    }
                     has_errors = true;
                 }
-            }.bind(this));
-            if (has_errors) {
-                ev.preventDefault();
-                ev.stopPropagation();
             }
         },
 
@@ -43060,7 +43165,7 @@ define('pat-validate',[
              */
             var error = validate(this.getValueDict(ev.target), this.getConstraints(ev.target));
             if (!error) {
-                this.findErrorMessages($(ev.target)).remove();
+                this.removeError(ev.target);
             } else {
                 this.showError(error, ev.target);
             }
@@ -43083,8 +43188,9 @@ define('pat-validate',[
             return true;
         },
 
-        findErrorMessages: function($el) {
-            var selector = "em.validation.message",
+        findErrorMessages: function(el) {
+            var $el = $(el),
+                selector = "em.validation.message",
                 $messages = $el.siblings(selector);
             if ($el.is("[type=radio],[type=checkbox]")) {
                 var $fieldset = $el.closest("fieldset.checklist");
@@ -43092,6 +43198,15 @@ define('pat-validate',[
                     $messages=$fieldset.find(selector);
             }
             return $messages;
+        },
+
+        removeError: function(input) {
+            var $errors = this.findErrorMessages(input);
+            $errors.remove();
+            this.errors = this.errors - $errors.length;
+            if (this.errors < 1 && this.options.disableSelector) {
+                $(this.options.disableSelector).removeProp('disabled').removeClass('disabled');
+            }
         },
 
         showError: function(error, input) {
@@ -43107,7 +43222,7 @@ define('pat-validate',[
                     strategy="append";
                 }
             }
-            this.findErrorMessages($el).remove();
+            this.findErrorMessages(input).remove();
             _.each(Object.keys(error), function (key) {
                 $message.text(error[key]);
             });
@@ -43119,7 +43234,10 @@ define('pat-validate',[
                     $message.insertAfter($position);
                     break;
             }
-            $(this.options.disableSelector).prop('disabled', true).addClass('disabled');
+            this.errors += 1;
+            if (this.options.disableSelector) {
+                $(this.options.disableSelector).prop('disabled', true).addClass('disabled');
+            }
             $position.trigger("pat-update", {pattern: "validate"});
         }
     });

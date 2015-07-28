@@ -13,7 +13,7 @@
 <body>
 <metal:slot fill-slot="content">
     <div id="document-content" class="pat-modal">
-        <h1> <tal:header i18n:translate="header_delete_session">Delete session</hal:header> </h1>
+        <h1 i18n:translate="header_delete_session">Delete session</h1>
         <form method="post" action="delete-session" class="wizard-box">
             <input type="hidden" name="json_url" value="${context/absolute_url}/@@json-delete-session"/>
             <input type="hidden" name="id" value="${view/session_id}" />

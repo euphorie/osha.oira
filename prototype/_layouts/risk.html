@@ -13,15 +13,19 @@ layout: shell
 		</fieldset>
 	</fieldset>
 
-	<fieldset class="pat-well notice pat-depends vertical" data-pat-depends="condition: answer=no; transition: slide">
+	<fieldset class="evaluation pat-well notice pat-depends vertical" data-pat-depends="condition: answer=no; transition: slide">
 <!-- 		<h3>
 			Evaluation
 		</h3>
  -->
 	{% if page.evaluation_method == 'risk_calculated' %}
-	<p>Please answer the following questions. As a result of your answers the system will calculate the priority of the risk. You will be able to modify the priority later.</p>
+	<p class="problem-description"><strong>{{ page.problem_description }}</strong></p>
+	<p class="instruction">Please answer the following questions. As a result of your answers the system will calculate the priority of the risk. You will be able to modify the priority later.</p>
 		<fieldset class="pat-checklist radio">
-			<legend>What is the chance of this risk occurring?</legend>
+			<legend>
+				What is the chance of this risk occurring?
+				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Indicate how likely occurence of this risk is in a normal situation.</dfn>
+			</legend>
 			<label><input type="radio" name="chance" /> Small</label>
 			<label><input type="radio" name="chance" /> Medium</label>
 			<label><input type="radio" name="chance" /> Large</label>
@@ -39,6 +43,7 @@ layout: shell
 			<label><input type="radio" name="effect" /> High (very high) severity</label>
 		</fieldset>
 	{% elsif page.evaluation_method == 'risk_estimated'  %}
+		<legend class="problem-description">{{ page.problem_description }}</legend>
 		<fieldset class="pat-checklist radio">
 			<legend>Select the priority of this risk</legend>
 			<label><input type="radio" name="chance" /> Low</label>

@@ -20,7 +20,7 @@
 <!-- TODO: This needs to be integrated into site's CSS somehow -->
 <style> .measures .measure .functions a.disabled { display: none; } </style>
 
-<form method="post" action="${context/absolute_url}" class="pat-inject pat-validate pat-scroll"
+<form method="post" action="${context/absolute_url}" class="pat-validate pat-inject pat-scroll" novalidate
     data-pat-validate="disable-selector: button[name='next'], .remove-clone"
     data-pat-inject="history: record; source: #step-4; target: #step-4 &amp;&amp; source: #content; target: #content"
     data-pat-scroll="selector: #content; trigger: auto; offset: 0">
@@ -117,7 +117,10 @@
                 <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
                 <em class="message error" tal:condition="date_error" i18n:translate="error_start_not_before_end">Start date is not before end date</em>
                 <input
-                    type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records"
+                    type="date" class="pat-date-picker"
+                    name="measure.planning_start:records"
+                    data-pat-date-picker="behavior: native"
+                    data-pat-validate="not-after: #planning-end-${number}; message-date: This date must be on or before the end date."
                     id="planning-start-${number}"
                     value="${actionplan/planning_start|nothing}"/>
             </label>
@@ -126,8 +129,10 @@
                 <tal:label i18n:translate="label_action_plan_end">Planning end</tal:label>
                 <em class="message error" tal:condition="date_error" i18n:translate="error_end_not_before_end">End date is not after start date</em>
 
-                <input parsley-onorafterdate="#planning-start-${number}"
-                    type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_end:records"
+                <input
+                    type="date" class="pat-date-picker" name="measure.planning_end:records"
+                    data-pat-date-picker="behavior: native"
+                    data-pat-validate="not-before: #planning-start-${number}; message-date: This date must be on or after the start date."
                     id="planning-end-${number}"
                     value="${actionplan/planning_end|nothing}"/>
             </label>
@@ -190,11 +195,17 @@
 			</label>
 			<label>
                 <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
-                <input type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records" id="planning-start-#{1}" />
+                <input type="date" class="pat-date-picker"
+                       data-pat-date-picker="behavior: native"
+                       data-pat-validate="not-after: #planning-end-#{1}; message-date: This date must be on or before the end date."
+                       name="measure.planning_start:records" id="planning-start-#{1}" />
 			</label>
 			<label>
                 <tal:label i18n:translate="label_action_plan_end">Planning end</tal:label>
-                <input parsley-onorafterdate="#planning-start-#{1}" type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_end:records" id="planning-end-#{1}"/>
+                <input type="date" class="pat-date-picker"
+                    data-pat-date-picker="behavior: native"
+                    data-pat-validate="not-before: #planning-start-#{1}; message-date: This date must be on or after the start date."
+                    name="measure.planning_end:records" id="planning-end-#{1}"/>
 			</label>
 		</fieldset>
 	</div>

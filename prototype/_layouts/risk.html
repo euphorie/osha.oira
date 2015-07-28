@@ -22,19 +22,28 @@ layout: shell
 	<legend>{{ page.problem_description }}</legend>
 	<p>Please answer the following questions. As a result of your answers the system will calculate the priority of the risk. You will be able to modify the priority later.</p>
 		<fieldset class="pat-checklist radio">
-			<legend>What is the chance of this risk occurring?</legend>
+			<legend>
+				What is the chance of this risk occurring?
+				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Indicate how likely occurence of this risk is in a normal situation.</dfn>
+			</legend>
 			<label><input type="radio" name="chance" /> Small</label>
 			<label><input type="radio" name="chance" /> Medium</label>
 			<label><input type="radio" name="chance" /> Large</label>
 		</fieldset>
 		<fieldset class="pat-checklist radio">
-			<legend>How often are people exposed to this risk?</legend>
+			<legend>
+				How often are people exposed to this risk?
+				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Indicate how often this risk occurs in a normal situation.</dfn>
+			</legend>
 			<label><input type="radio" name="exposed" /> Almost never</label>
 			<label><input type="radio" name="exposed" /> Regularly</label>
 			<label><input type="radio" name="exposed" /> Continuously</label>
 		</fieldset>
 		<fieldset class="pat-checklist radio">
-			<legend>What is the severity of the damage?</legend>
+			<legend>
+				What is the severity of the damage?
+				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Indicate the default severity of this risk occurs.</dfn>
+			</legend>
 			<label><input type="radio" name="effect" /> Weak severity</label>
 			<label><input type="radio" name="effect" /> Significant severity</label>
 			<label><input type="radio" name="effect" /> High (very high) severity</label>

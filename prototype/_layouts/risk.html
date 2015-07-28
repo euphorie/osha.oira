@@ -56,14 +56,9 @@ layout: shell
 			<label><input type="radio" name="chance" /> Medium</label>
 			<label><input type="radio" name="chance" /> High</label>
 		</fieldset>
-	{% elsif page.evaluation_method == 'risk_direct'  %}
-		<p>The priority for this risk has been set automatically, so there is no need to evaluate the risk.</p>
-	{% elsif page.evaluation_method == 'policy'  %}
-		<p>This is a <em>policy risk</em>.</p>
-		<p>This kind of risks are, strictly speaking, not risks and therefore they are not evaluated and don't reveice a priority value.</p>
-	{% elsif page.evaluation_method == 'priority'  %}
-		<p>This is a <em>high priority</em> risk.</p>
-		<p>This kind of risks are considered by the sector to be among the high risks in the sector, and so they receive automatically a priority of High.</p>
+
+	{% else %}
+		<p>The risk evaluation has been automatically done by the tool. You will be able to change the priority for this risk – if you consider it necessary – in the action plan.</p>
 	{% endif %}
 	</fieldset>
 

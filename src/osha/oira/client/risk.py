@@ -187,6 +187,7 @@ class OSHAActionPlanView(risk.ActionPlanView):
         if self.context.is_custom_risk:
             self.risk = self.context
             self.description_intro = u""
+            self.risk.description = u""
             number_images = 0
         else:
             self.risk = self.request.survey.restrictedTraverse(

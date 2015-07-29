@@ -36,8 +36,9 @@
         </h3>
         <p i18n:translate="info_osh_hamburger">The menu toggle lets you hide and show the ‘off canvas’ menu so it’s only there when you need it. Hide the menu when you’re concentrating on filling out a tool or show it when you’re clicking about between various parts of the application.</p>
 
-        <p class="footer" i18n:translate="info_screen_help">
-            <strong class="icon-lightbulb" i18n:name="tip"><tal:name i18n:translate="Tip">Tip</tal:name>: </strong>You may switch this on screen help feature on or off at any time by clicking on the <tal:name i18n:name="questionmark">'&nbsp;<strong>?</strong>&nbsp;'</tal:name> at the top right on the toolbar.
+        <p class="footer">
+            <strong class="icon-lightbulb" i18n:translate="Tip">Tip</strong>:
+            <tal:help i18n:translate="info_screen_help">You may switch this on screen help feature on or off at any time by clicking on the <tal:name i18n:name="questionmark">'&nbsp;<strong>?</strong>&nbsp;'</tal:name> at the top right on the toolbar.</tal:help>
         </p>
         <!-- Incude the following button to make escaping from the tooltip possible on small screen (hidden on large screen) -->
         <button class="close-panel-mobile close-panel" i18n:translate="label_close_panel">Close panel</button>
@@ -49,8 +50,9 @@
         </h3>
         <p i18n:translate="info_osh_menu">The new off canvas menu provides access to the core functions of the applications. Also on mobile!</p>
 
-        <p class="footer" i18n:translate="info_screen_help">
-            <strong class="icon-lightbulb" i18n:name="tip"><tal:name i18n:translate="Tip">Tip</tal:name>: </strong>You may switch this on screen help feature on or off at any time by clicking on the <tal:name i18n:name="questionmark">'&nbsp;<strong>?</strong>&nbsp;'</tal:name> at the top right on the toolbar.
+        <p class="footer">
+            <strong class="icon-lightbulb" i18n:translate="Tip">Tip</strong>:
+            <tal:help i18n:translate="info_screen_help">You may switch this on screen help feature on or off at any time by clicking on the <tal:name i18n:name="questionmark">'&nbsp;<strong>?</strong>&nbsp;'</tal:name> at the top right on the toolbar.</tal:help>
         </p>
         <!-- Incude the following button to make escaping from the tooltip possible on small screen (hidden on large screen) -->
         <button class="close-panel-mobile close-panel" i18n:translate="label_close_panel">Close panel</button>
@@ -62,21 +64,9 @@
         </h3>
         <p i18n:translate="info_osh_session_menu">From this menu you can start a new session of an OiRA tool, or pick up a previous session to continue working on it. If you do not have an account for the OiRA application yet, you can start a test session to try it out immediately.</p>
 
-        <p class="footer" i18n:translate="info_screen_help">
-            <strong class="icon-lightbulb" i18n:name="tip"><tal:name i18n:translate="Tip">Tip</tal:name>: </strong>You may switch this on screen help feature on or off at any time by clicking on the <tal:name i18n:name="questionmark">'&nbsp;<strong>?</strong>&nbsp;'</tal:name> at the top right on the toolbar.
-        </p>
-        <!-- Incude the following button to make escaping from the tooltip possible on small screen (hidden on large screen) -->
-        <button class="close-panel-mobile close-panel" i18n:translate="label_close_panel">Close panel</button>
-    </article>
-
-    <article id="osh-topics">
-        <h3 i18n:translate="header_osh_topics">
-            Topics
-        </h3>
-        <p i18n:translate="info_osh_topics">Lorem ipsum dolor sit amet.</p>
-
-        <p class="footer" i18n:translate="info_screen_help">
-            <strong class="icon-lightbulb" i18n:name="tip"><tal:name i18n:translate="Tip">Tip</tal:name>: </strong>You may switch this on screen help feature on or off at any time by clicking on the <tal:name i18n:name="questionmark">'&nbsp;<strong>?</strong>&nbsp;'</tal:name> at the top right on the toolbar.
+        <p class="footer">
+            <strong class="icon-lightbulb" i18n:translate="Tip">Tip</strong>:
+            <tal:help i18n:translate="info_screen_help">You may switch this on screen help feature on or off at any time by clicking on the <tal:name i18n:name="questionmark">'&nbsp;<strong>?</strong>&nbsp;'</tal:name> at the top right on the toolbar.</tal:help>
         </p>
         <!-- Incude the following button to make escaping from the tooltip possible on small screen (hidden on large screen) -->
         <button class="close-panel-mobile close-panel" i18n:translate="label_close_panel">Close panel</button>

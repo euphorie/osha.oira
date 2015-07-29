@@ -33,7 +33,7 @@
       <li><a href="${webhelpers/help_url}#${site_section}" i18n:translate="navigation_help">Help</a></li>
       <li tal:condition="python:site_section not in ['preparation', 'session', 'sessions']"><a href="${webhelpers/survey_url}/status" i18n:translate="navigation_status">Status</a></li>
       <li tal:condition="not:webhelpers/is_guest_account"><a href="${webhelpers/country_url}/account-settings" i18n:translate="navigation_settings">Settings</a></li>
-      <li tal:condition="webhelpers/is_guest_account"><a href="${webhelpers/country_url}/@@login?came_from=${context/absolute_url}" i18n:translate="navigation_convert_guest">Sign In</a></li>
+      <li tal:condition="webhelpers/is_guest_account"><a href="${webhelpers/country_url}/@@login?came_from=${context/absolute_url}" i18n:translate="Sign in">Sign in</a></li>
     </ul>
   </metal:topnav>
 
@@ -154,7 +154,7 @@
             <img class="creative_commons_logo" src="${media_url}/osha/creative_commons.png"/>
         </a>
     </p>
-    <div id="browser-warning" style="display:none" i18n:translate="warning_hidden">This will contain the warning translated</div>
+    <div id="browser-warning" style="display:none">This will contain the warning translated</div>
   </metal:appendix>
   <metal:riskinfo define-macro="risk_info_actionplan" meta:interpolation="true" i18n:domain="euphorie" >
   <div tal:condition="view/has_images" class="image-collage pat-gallery pat-equaliser">
@@ -221,7 +221,7 @@
       <tal:description_intro condition="view/description_intro">
         <p class="description" tal:content="structure view/description_intro">short description</p>
         <p class="show-more-or-less">
-          <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description" i18n:translate="label_show_more"><strong i18n:name="strong" i18n:translate="Read more" class="show-more">Read more</strong> about this risk.</a>
+          <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description" i18n:translate="label_show_more"><strong i18n:name="read_more" i18n:translate="Read more" class="show-more">Read more</strong> about this risk.</a>
         </p>
       </tal:description_intro>
       <tal:no_description_intro condition="not:view/description_intro">
@@ -236,14 +236,14 @@
         The temperature in a fridge is critical to storing food.
       </p>
       <p class="show-more-or-less">
-        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description; target: #description" i18n:translate="label_show_less"><strong i18n:name="strong" i18n:translate="Read less" class="show-less">Read less</strong> about this risk.</a>
+        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description; target: #description" i18n:translate="label_show_less"><strong i18n:name="read_less" i18n:translate="Read less" class="show-less">Read less</strong> about this risk.</a>
       </p>
     </span>
 
     <span id="short_description" hidden="hidden">
       <p class="description" tal:content="structure view/description_intro">short description</p>
       <p class="show-more-or-less">
-        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description" i18n:translate="label_show_more"><strong i18n:name="strong" i18n:translate="Read more" class="show-more">Read more</strong> about this risk.</a>
+        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description" i18n:translate="label_show_more"><strong i18n:name="read_more" i18n:translate="Read more" class="show-more">Read more</strong> about this risk.</a>
       </p>
     </span>
 
@@ -310,7 +310,7 @@
       <tal:description_intro condition="view/description_intro">
         <p tal:content="structure view/description_intro">short description</p>
         <p class="show-more-or-less">
-          <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description" i18n:translate="label_show_more"><strong i18n:name="strong" i18n:translate="Read more" class="show-more">Read more</strong> about this risk.</a>
+          <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description" i18n:translate="label_show_more"><strong i18n:name="read_more" i18n:translate="Read more" class="show-more">Read more</strong> about this risk.</a>
         </p>
       </tal:description_intro>
       <tal:no_description_intro condition="not:view/description_intro">
@@ -325,14 +325,14 @@
         The temperature in a fridge is critical to storing food.
       </p>
       <p class="show-more-or-less">
-        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description; target: #description" i18n:translate="label_show_less"><strong i18n:name="strong" i18n:translate="Read less" class="show-less">Read less</strong> about this risk.</a>
+        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description; target: #description" i18n:translate="label_show_less"><strong i18n:name="read_less" i18n:translate="Read less" class="show-less">Read less</strong> about this risk.</a>
       </p>
     </span>
 
     <span id="short_description" hidden="hidden">
       <p tal:content="structure view/description_intro">short description</p>
       <p class="show-more-or-less">
-        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description" i18n:translate="label_show_more"><strong i18n:name="strong" i18n:translate="Read more" class="show-more">Read more</strong> about this risk.</a>
+        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description" i18n:translate="label_show_more"><strong i18n:name="read_more" i18n:translate="Read more" class="show-more">Read more</strong> about this risk.</a>
       </p>
     </span>
   </metal:riskinfo>

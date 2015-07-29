@@ -69,15 +69,15 @@
             </tal:if_not_anon>
         </header>
         <div id="content">
-            <p tal:condition="webhelpers/is_guest_account" id="warning-bar" i18n:translate="info_testsession">
-                This is a test session. <tal:name i18n:name="link1"><a href="${base_url}/login_form?${came_from_param}#document-content" class="registration" i18n:translate="Sign in">Sign in</a></tal:name> to save your data. <tal:name i18n:name="link2"><a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info" i18n:translate="Info">Info</a></tal:name>
+            <p tal:condition="webhelpers/is_guest_account" id="warning-bar">
+                <tal:testsession i18n:translate="info_testsession">This is a test session. <tal:name i18n:name="link_sign_in"><a href="${base_url}/login_form?${came_from_param}#document-content" class="registration" i18n:translate="Sign in">Sign in</a></tal:name> to save your data.</tal:testsession><a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info" i18n:translate="Info">Info</a>
             </p>
             <tal:statusmsg tal:repeat="message webhelpers/messages">
                 <p class="pat-notification" data-pat-notification="type: banner"
                    tal:attributes="id string:${message/id}-body;
                                    data-pat-notification string:${attrs/data-pat-notification};;
                                    class: ${message/type}"
-                   tal:content="message/message | nothing" i18n:translate="">This is a status message</p>
+                   tal:content="message/message | nothing">Status message</p>
                 </tal:statusmsg>
 
             <metal:block define-slot="content"/>
@@ -123,11 +123,6 @@
                       <metal:call use-macro="webhelpers/macros/survey_tree" />
                     </tal:block>
 
-                    <!--
-                    <div class="topics">
-                        <metal:include tal:define="id string:topics" use-macro="context/@@includes/macros/osh"/>
-                    </div>
-                    -->
                 </li>
                 <li id="step-4" tal:define="active python:page_section == 'actionplan'; disabled python:page_section == 'preparation'" tal:attributes="class python:(active and 'active') or (disabled and 'disabled') or ''">
                     <!-- The tree for the action section uses the same structure as the identification tree, with the only differences that only risks and their parent modules are shown and that the entire tree is expanded. -->

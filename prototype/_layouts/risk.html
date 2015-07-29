@@ -107,10 +107,23 @@ layout: shell
 		</div>
 
 		{% if page.legal_reference %}
-		<section class="legal-references pat-well notice">
-			<h3>Legal and policy references</h3>
-			{{ page.legal_reference }}
-		</section>
+			<section class="caption pat-well">
+				<section class="pat-collapsible legal-references closed">
+					<h3>Legal and policy references</h3>
+					{{ page.legal_reference }}
+				</section>
+				<section class="pat-collapsible more-information closed">
+					<h3>More information</h3>
+					<ul>
+						<li class="icon-download">
+							<a href="">Lorem ipsum dolor sit.pdf</a>
+						</li>
+						<li class="icon-download">
+							<a href="">Amet consectetuer.pdf</a>
+						</li>
+					</ul>
+				</section>
+			</section>
 		{% endif %}
 
 	</article>

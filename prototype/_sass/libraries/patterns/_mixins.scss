@@ -78,6 +78,12 @@
         float: left;
         margin-left: -1em;
        }
+
+       &[class^="icon-"]:before, 
+       &[class*=" icon-"]:before {
+        line-height: inherit;
+        margin-left: -1em;
+       }
     }
 
   }

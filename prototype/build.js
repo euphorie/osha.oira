@@ -1,6 +1,6 @@
 ({
     baseUrl: ".",
-    out: "bundles/ploneintranet.js",
+    out: "bundles/oira.js",
     include: ["patterns"],
     insertRequire: ["patterns"],
     name: "almond",

@@ -177,7 +177,7 @@ class LibraryInsert(grok.View):
         notify(ObjectClonedEvent(copy))
 
         IStatusMessage(self.request).addStatusMessage(
-                _(u'Addded a copy of "${title}" to your survey.',
+                _(u'Addded a copy of "${title}" to your OiRA tool.',
                     mapping={'title': copy.title}),
                 type='success')
         self.response.redirect(copy.absolute_url())

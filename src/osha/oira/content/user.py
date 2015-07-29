@@ -52,13 +52,12 @@ def OnUserCreation(user, event):
 
 
 def NotifyError(user, e):
-    log.error("MailHost error sending account activation link to: %s",
-            user.contact_email, e)
+    log.error(
+        "MailHost error sending account activation link to: %s",
+        user.contact_email, e)
     flash = IStatusMessage(user.REQUEST).addStatusMessage
-    flash(_(u"error_activationmail",
-            u'Could not send an account activation email to "%s".'
-            u'Please contact the site administrator.'
-        ), "error")
+    flash(u'Could not send an account activation email to "%s".'
+          u'Please contact the site administrator.', "error")
     return
 
 

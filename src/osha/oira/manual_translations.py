@@ -213,3 +213,13 @@ _("expl_error", default="We're sorry, but an unforseen error has occured.")
 
 _("label_remove_measure", default="Delete this measure")
 _("Add Solution", default=u"Add Measure")
+
+# Validation error messages
+_("error_validation_date", default=u"This value must be a valid date.")
+_("error_validation_email", default=u"This value must be a valid email address.")
+_("error_validation_number", default=u"This value must be a number.")
+_("error_validation_whole_number", default=u"This value must be a whole number.")
+_("error_validation_positive_whole_number", default=u"This value must be a positive whole number.")
+_("error_validation_required", default="This value is required.")
+_("error_validation_before_end_date", default=u"This date must be on or before the end date.")
+_("error_validation_after_start_date", default=u"This date must be on or after the start date.")

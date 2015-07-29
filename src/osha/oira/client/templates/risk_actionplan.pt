@@ -57,10 +57,10 @@
          tal:define="measures view/solutions|python:[]"
         tal:repeat="actionplan action_plans">
 
-        <h2 tal:content="string:Measure ${repeat/actionplan/number}">Measure 1</h2>
+        <h2><tal:span i18n:translate="Measure">Measure</tal:span> ${repeat/actionplan/number}</h2>
         <p class="functions">
             <a class="icon-pencil pat-tooltip" tal:condition="measures" data-pat-tooltip="source:ajax" href="#standard-solutions-0" i18n:translate="label_prefill">Pre-fill</a>
-            <a class="icon-trash remove-clone" i18n:translate="label_remove">Remove</a>
+            <a class="icon-trash remove-clone" i18n:translate="label_remove_measure">Delete this measure</a>
         </p>
         <tal:if_has_measures condition="measures">
             <div id="standard-solutions-0" hidden="hidden">
@@ -136,15 +136,15 @@
 </div>
 
 	<div class="button-bar">
-		<button class="add-clone pat-button icon-plus-circle" id="addMeasureButton" title="Add another measure" type="button" i18n:translate="label_add_another_measure">Add another measure</button>
+		<button class="add-clone pat-button icon-plus-circle" id="addMeasureButton" title="Add another measure" type="button" i18n:translate="label_add">Add another measure</button>
 	</div>
 
 	<div class="measure pat-collapsible" id="measure-template" hidden="hidden">
         <tal:get_measures define="measures view/solutions|python:[]">
-		<h2><tal:measure i18n:translate="Solution">Measure</tal:measure> #{1}</h2>
+		<h2><tal:measure i18n:translate="Measure">Measure</tal:measure> #{1}</h2>
 		<p class="functions">
 			<a class="icon-pencil pat-tooltip" tal:condition="measures" data-pat-tooltip="source: ajax" href="#standard-solutions-#{1}" i18n:translate="label_prefill">Pre-fill</a>
-			<a class="icon-trash remove-clone" i18n:translate="label_remove">Remove</a>
+			<a class="icon-trash remove-clone" i18n:translate="label_remove_measure">Delete this measure</a>
 		</p>
 
         <tal:if_has_measures condition="measures">

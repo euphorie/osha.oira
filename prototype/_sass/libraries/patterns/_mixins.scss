@@ -101,7 +101,7 @@
 
   h3 {
     font-size: 1em;
-    line-height: 130%;
+    // line-height: 130%;
     letter-spacing: 0.05em;
     font-weight: 400;
     margin-bottom: 1em;
@@ -135,6 +135,24 @@
     margin-bottom: 2em;
     display: block;
 
+    &.pat-collapsible {
+      border-radius: 0.5em;
+      padding: 0;
+
+      .collapsible-closed,
+      .collapsible-open {
+        padding: 1em;
+      }
+
+      &.open,
+      &.closed.in-progress,
+      &.open.in-progress {
+        .panel-content {
+          padding: 1em;
+        }
+      }
+    }
+
     &.success {
         background-color: $colour-success;
         color: white;
@@ -146,9 +164,16 @@
 
         input { color: $colour-base-font};
     }
+
     &.notice {
         background-color: $colour-notice;
     }
+
+    &.caption {
+        background-color: transparent;
+        border: 1px solid rgba(0,0,0,0.5)
+    }
+
     &.warning {
         background-color: $colour-warning;
         color: white;

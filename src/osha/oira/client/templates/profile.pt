@@ -29,8 +29,12 @@
     </ul>
 </article>
 
-<form class="pat-validate" method="post" action="${request/URL}"
-      data-pat-validate="message-required: This field is required">
+<form class="pat-validation" method="post" action="${request/URL}"
+      data-pat-validation="message-date: This value must be a valid date;
+                           message-datetime: This value must be a valid date and time;
+                           message-email: This value must be a valid email address;
+                           message-number: This value must be a number;
+                           message-required: This field is required;"
 <fieldset class="vertical" tal:repeat="question view/profile_questions">
     <section tal:define="current python:view.current_profile.get(question['id'])">
         <h2>${question/title}</h2>
@@ -61,7 +65,7 @@
 
                 <label tal:condition="not:current" class="clone">
                     <input class="pat-depends" data-pat-depends="condition: pq${question/id}.present=yes; action: both;"
-                           data-pat-validate="message: Please enter a name here"
+                           data-pat-validation="message-required: Please enter a name here"
                            name="${question/id}:utf8:utext:list" required="required"/>
                 </label>
                 <tal:locations repeat="title current">

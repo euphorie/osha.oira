@@ -115,7 +115,6 @@
 
             <label tal:define="date_error exists:errors/planning_start_date">
                 <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
-                <em class="message error" tal:condition="date_error" i18n:translate="error_start_not_before_end">Start date is not before end date</em>
                 <input
                     type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_start:records"
                     id="planning-start-${number}"
@@ -124,7 +123,6 @@
 
             <label tal:define="date_error exists:errors/planning_end_date">
                 <tal:label i18n:translate="label_action_plan_end">Planning end</tal:label>
-                <em class="message error" tal:condition="date_error" i18n:translate="error_end_not_before_end">End date is not after start date</em>
 
                 <input parsley-onorafterdate="#planning-start-${number}"
                     type="date" class="pat-date-picker" data-pat-date-picker="behavior: native" name="measure.planning_end:records"

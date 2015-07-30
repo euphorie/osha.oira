@@ -34,7 +34,7 @@
                            message-datetime: This value must be a valid date and time;
                            message-email: This value must be a valid email address;
                            message-number: This value must be a number;
-                           message-required: This field is required;"
+                           message-required: This field is required;">
 <fieldset class="vertical" tal:repeat="question view/profile_questions">
     <section tal:define="current python:view.current_profile.get(question['id'])">
         <h2>${question/title}</h2>

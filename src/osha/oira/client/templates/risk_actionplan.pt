@@ -20,7 +20,7 @@
 <!-- TODO: This needs to be integrated into site's CSS somehow -->
 <style> .measures .measure .functions a.disabled { display: none; } </style>
 
-<form method="post" action="${context/absolute_url}" class="pat-validation pat-inject pat-scroll" novalidate
+<form method="post" action="${context/absolute_url}" class="pat-validation pat-inject pat-scroll"
     data-pat-validation="disable-selector: button[name='next'], .remove-clone;
                        message-date: This value must be a valid date;
                        message-datetime: This value must be a valid date and time;

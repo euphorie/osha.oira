@@ -217,35 +217,10 @@
       </tal:block>
     </tal:block>
 
-    <span id="description">
-      <tal:description_intro condition="view/description_intro">
-        <p class="description" tal:content="structure view/description_intro">short description</p>
-        <p class="show-more-or-less">
-          <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description" i18n:translate="label_show_more"><strong i18n:name="read_more" i18n:translate="Read more" class="show-more">Read more</strong> about this risk.</a>
-        </p>
-      </tal:description_intro>
-      <tal:no_description_intro condition="not:view/description_intro">
-        <p class="description" tal:replace="structure risk/description">
-          The temperature in a fridge is critical to storing food.
-        </p>
-      </tal:no_description_intro>
-    </span>
-
-    <span id="full_description" hidden="hidden">
+    <div class="pat-collapsible closed">
+      <h4 i18n:translate="label_show_more"><tal:more i18n:name="read_more" i18n:translate="Read more">Read more</tal:more> about this risk.</h4>
       <p class="description" tal:replace="structure risk/description">
-        The temperature in a fridge is critical to storing food.
-      </p>
-      <p class="show-more-or-less">
-        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description; target: #description" i18n:translate="label_show_less"><strong i18n:name="read_less" i18n:translate="Read less" class="show-less">Read less</strong> about this risk.</a>
-      </p>
-    </span>
-
-    <span id="short_description" hidden="hidden">
-      <p class="description" tal:content="structure view/description_intro">short description</p>
-      <p class="show-more-or-less">
-        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description" i18n:translate="label_show_more"><strong i18n:name="read_more" i18n:translate="Read more" class="show-more">Read more</strong> about this risk.</a>
-      </p>
-    </span>
+    </div>
 
   </metal:riskinfo>
 
@@ -339,30 +314,40 @@
 
 
   <metal:risklegal define-macro="risk_legal" meta:interpolation="true" i18n:domain="euphorie">
-    <tal:block condition="risk/legal_reference">
-      <h3 i18n:translate="header_legal_references" class="legal-references">Legal and policy references</h3>
-      <p tal:content="structure risk/legal_reference">
-        The requirements for fridges are defined in section 13.1 section a
-        of the health code.
-      </p>
+    <tal:block condition="python:risk.legal_reference or view.has_files">
+      <section class="caption pat-well">
+        <section class="pat-collapsible legal-references closed" tal:condition="risk/legal_reference">
+          <h3 i18n:translate="header_legal_references">Legal and policy references</h3>
+          <p tal:content="structure risk/legal_reference">
+            The requirements for fridges are defined in section 13.1 section a
+            of the health code.
+          </p>
+        </section>
+        <section class="pat-collapsible more-information closed" tal:condition="view/has_files">
+          <h3 i18n:translate="header_additional_resources">Additional resources for assessing the risk</h3>
+          <ul>
+            <li class="icon-download">
+              <a href="">Lorem ipsum dolor sit.pdf</a>
+            </li>
+            <li class="icon-download">
+              <a href="">Amet consectetuer.pdf</a>
+            </li>
+          </ul>
+        </section>
+      </section>
     </tal:block>
   </metal:risklegal>
 
   <metal:risklegal define-macro="risk_legal_collapsible" meta:interpolation="true" i18n:domain="euphorie">
-    <tal:block condition="risk/legal_reference" >
-      <h3 i18n:translate="header_legal_references" class="legal-references">Legal and policy references</h3>
-      <div class="pat-collapsible closed show-more">
-        <p class="show-more-or-less">
-          <strong class="show-more" i18n:translate="action_show">Show</strong> <span class="divider">/</span> <strong class="show-less" i18n:translate="action_hide">Hide</strong>
-        </p>
-        <div class="panel-content">
-            <tal:desc tal:replace="structure risk/legal_reference">
-                    The requirements for fridges are defined in section 13.1 section a
-                    of the health code.
-            </tal:desc>
-        </div>
+    <div class="pat-collapsible closed" condition="risk/legal_reference">
+      <h4 i18n:translate="header_legal_references">Legal and policy references</h4>
+      <div class="panel-content">
+          <tal:desc tal:replace="structure risk/legal_reference">
+                  The requirements for fridges are defined in section 13.1 section a
+                  of the health code.
+          </tal:desc>
       </div>
-    </tal:block>
+    </div>
   </metal:risklegal>
 
 </html>

@@ -29,7 +29,12 @@
     </ul>
 </article>
 
-<form method="post" action="${request/URL}">
+<form class="pat-validation" method="post" action="${request/URL}"
+      data-pat-validation="message-date: This value must be a valid date;
+                           message-datetime: This value must be a valid date and time;
+                           message-email: This value must be a valid email address;
+                           message-number: This value must be a number;
+                           message-required: This field is required;"
 <fieldset class="vertical" tal:repeat="question view/profile_questions">
     <section tal:define="current python:view.current_profile.get(question['id'])">
         <h2>${question/title}</h2>
@@ -53,20 +58,27 @@
 
             <fieldset class="form-iteration pat-clone" data-pat-clone="template: #clone-template-${question/id}; trigger-element: #clone-set-${repeat/question/number}">
                 <label id="clone-template-${question/id}" hidden="hidden">
-                    <input class="pat-depends" autofocus="autofocus" placeholder="${question/label_single_occurance} #{1}" data-pat-depends="pq${question/id}.multiple=yes"
+                    <input class="pat-depends" autofocus="autofocus" placeholder="${question/label_single_occurance} #{1}" data-pat-depends="condition: pq${question/id}.multiple=yes; action: both;"
                            size="40" type="text" name="${question/id}:utf8:utext:list" />&nbsp;
                     <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="Remove">Remove</button>
                 </label>
 
                 <label tal:condition="not:current" class="clone">
-                    <input data-pat-depends="pq${question/id}.multiple=no" name="${question/id}:utf8:utext:list" />
+                    <input class="pat-depends" data-pat-depends="condition: pq${question/id}.present=yes; action: both;"
+                           data-pat-validation="message-required: Please enter a name here"
+                           name="${question/id}:utf8:utext:list" required="required"/>
                 </label>
-                    <tal:locations repeat="title current">
+                <tal:locations repeat="title current">
                       <label class="clone">
-                        <input placeholder="${question/label_single_occurance} 1" value="${title}" data-pat-depends="pq${question/id}.multiple=yes" name="${question/id}:utf8:utext:list" />
-                        <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="Remove">Remove</button>
+                        <input class="pat-depends"
+                            required="required"
+                            placeholder="${question/label_single_occurance} 1" value="${title}"
+                            data-pat-depends="condition: pq${question/id}.present=yes; action: both" name="${question/id}:utf8:utext:list" />
+                        <tal:if_not_first condition="repeat/title/index">
+                            <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="Remove">Remove</button>
+                        </tal:if_not_first>
                     </label>
-                    </tal:locations>
+                </tal:locations>
             </fieldset>
 
             <p class="buttons pat-depends" data-pat-depends="pq${question/id}.multiple=yes">

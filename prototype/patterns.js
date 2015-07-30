@@ -55,7 +55,7 @@ define([
     "pat-toggle",
     "pat-tooltip",
     "pat-url",
-    "pat-validate",
+    "pat-validation",
     "pat-zoom"
 ], function(registry) {
     window.patterns = registry;

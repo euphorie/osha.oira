@@ -10740,1632 +10740,6 @@ return jQuery;
 
 }));
 
-/**
- * Patterns logging - minimal logging framework
- *
- * Copyright 2012 Simplon B.V.
- */
-
-(function() {
-    // source: https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/bind
-    if (!Function.prototype.bind) {
-        Function.prototype.bind = function (oThis) {
-            if (typeof this !== "function") {
-                // closest thing possible to the ECMAScript 5 internal IsCallable function
-                throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
-            }
-
-            var aArgs = Array.prototype.slice.call(arguments, 1),
-                fToBind = this,
-                fNOP = function () {},
-                fBound = function () {
-                    return fToBind.apply(this instanceof fNOP &&
-                            oThis ? this : oThis,
-                            aArgs.concat(Array.prototype.slice.call(arguments)));
-                };
-            fNOP.prototype = this.prototype;
-            fBound.prototype = new fNOP();
-
-            return fBound;
-        };
-    }
-
-    var root,    // root logger instance
-        writer;  // writer instance, used to output log entries
-
-    var Level = {
-        DEBUG: 10,
-        INFO: 20,
-        WARN: 30,
-        ERROR: 40,
-        FATAL: 50
-    };
-
-    function IEConsoleWriter() {
-    }
-
-    IEConsoleWriter.prototype = {
-        output:  function(log_name, level, messages) {
-            // console.log will magically appear in IE8 when the user opens the
-            // F12 Developer Tools, so we have to test for it every time.
-            if (typeof window.console==="undefined" || typeof console.log==="undefined")
-                    return;
-            if (log_name)
-                messages.unshift(log_name+":");
-            var message = messages.join(" ");
-
-            // Under some conditions console.log will be available but the
-            // other functions are missing.
-            if (typeof console.info===undefined) {
-                var level_name;
-                if (level<=Level.DEBUG)
-                    level_name="DEBUG";
-                else if (level<=Level.INFO)
-                    level_name="INFO";
-                else if (level<=Level.WARN)
-                    level_name="WARN";
-                else if (level<=Level.ERROR)
-                    level_name="ERROR";
-                else
-                    level_name="FATAL";
-                console.log("["+level_name+"] "+message);
-            } else {
-                if (level<=Level.DEBUG) {
-                    // console.debug exists but is deprecated
-                    message="[DEBUG] "+message;
-                    console.log(message);
-                } else if (level<=Level.INFO)
-                    console.info(message);
-                else if (level<=Level.WARN)
-                    console.warn(message);
-                else
-                    console.error(message);
-            }
-        }
-    };
-
-
-    function ConsoleWriter() {
-    }
-
-    ConsoleWriter.prototype = {
-        output: function(log_name, level, messages) {
-            if (log_name)
-                messages.unshift(log_name+":");
-            if (level<=Level.DEBUG) {
-                // console.debug exists but is deprecated
-                messages.unshift("[DEBUG]");
-                console.log.apply(console, messages);
-            } else if (level<=Level.INFO)
-                console.info.apply(console, messages);
-            else if (level<=Level.WARN)
-                console.warn.apply(console, messages);
-            else
-                console.error.apply(console, messages);
-        }
-    };
-
-
-    function Logger(name, parent) {
-        this._loggers={};
-        this.name=name || "";
-        this._parent=parent || null;
-        if (!parent) {
-            this._enabled=true;
-            this._level=Level.WARN;
-        }
-    }
-
-    Logger.prototype = {
-        getLogger: function(name) {
-            var path = name.split("."),
-                root = this,
-                route = this.name ? [this.name] : [];
-            while (path.length) {
-                var entry = path.shift();
-                route.push(entry);
-                if (!(entry in root._loggers))
-                    root._loggers[entry] = new Logger(route.join("."), root);
-                root=root._loggers[entry];
-            }
-            return root;
-        },
-
-        _getFlag: function(flag) {
-            var context=this;
-            flag="_"+flag;
-            while (context!==null) {
-                if (context[flag]!==undefined)
-                    return context[flag];
-                context=context._parent;
-            }
-            return null;
-        },
-
-        setEnabled: function(state) {
-            this._enabled=!!state;
-        },
-
-        isEnabled: function() {
-            this._getFlag("enabled");
-        },
-
-        setLevel: function(level) {
-            if (typeof level==="number")
-                this._level=level;
-            else if (typeof level==="string") {
-                level=level.toUpperCase();
-                if (level in Level)
-                    this._level=Level[level];
-            }
-        },
-
-        getLevel: function() {
-            return this._getFlag("level");
-        },
-
-        log: function(level, messages) {
-            if (!messages.length || !this._getFlag("enabled") || level<this._getFlag("level"))
-                return;
-            messages=Array.prototype.slice.call(messages);
-            writer.output(this.name, level, messages);
-        },
-
-        debug: function() {
-            this.log(Level.DEBUG, arguments);
-        },
-
-        info: function() {
-            this.log(Level.INFO, arguments);
-        },
-
-        warn: function() {
-            this.log(Level.WARN, arguments);
-        },
-
-        error: function() {
-            this.log(Level.ERROR, arguments);
-        },
-
-        fatal: function() {
-            this.log(Level.FATAL, arguments);
-        }
-    };
-
-    function getWriter() {
-        return writer;
-    }
-
-    function setWriter(w) {
-        writer=w;
-    }
-
-    if (!window.console || !window.console.log || typeof window.console.log.apply !== "function") {
-        setWriter(new IEConsoleWriter());
-    } else {
-        setWriter(new ConsoleWriter());
-    }
-
-    root=new Logger();
-
-    var logconfig = /loglevel(|-[^=]+)=([^&]+)/g,
-        match;
-
-    while ((match=logconfig.exec(window.location.search))!==null) {
-        var logger = (match[1]==="") ? root : root.getLogger(match[1].slice(1));
-        logger.setLevel(match[2].toUpperCase());
-    }
-
-    var api = {
-        Level: Level,
-        getLogger: root.getLogger.bind(root),
-        setEnabled: root.setEnabled.bind(root),
-        isEnabled: root.isEnabled.bind(root),
-        setLevel: root.setLevel.bind(root),
-        getLevel: root.getLevel.bind(root),
-        debug: root.debug.bind(root),
-        info: root.info.bind(root),
-        warn: root.warn.bind(root),
-        error: root.error.bind(root),
-        fatal: root.fatal.bind(root),
-        getWriter: getWriter,
-        setWriter: setWriter
-    };
-
-    // Expose as either an AMD module if possible. If not fall back to exposing
-    // a global object.
-    if (typeof define==="function")
-        define("logging", [], function () {
-            return api;
-        });
-    else
-        window.logging=api;
-})();
-
-/**
- * Patterns logger - wrapper around logging library
- *
- * Copyright 2012-2013 Florian Friesdorf
- */
-define('pat-logger',[
-    'logging'
-], function(logging) {
-    var log = logging.getLogger('patterns');
-    return log;
-});
-
-define('pat-utils',[
-    "jquery"
-], function($) {
-
-    var singleBoundJQueryPlugin = function (pattern, method, options) {
-        /* This is a jQuery plugin for patterns which are invoked ONCE FOR EACH
-         * matched element in the DOM.
-         *
-         * This is how the Mockup-type patterns behave. They are constructor
-         * functions which need to be invoked once per jQuery-wrapped DOM node
-         * for all DOM nodes on which the pattern applies.
-         */
-        var $this = this;
-        $this.each(function() {
-            var pat, $el = $(this);
-            pat = pattern.init($el, options);
-            if (method) {
-                if (pat[method] === undefined) {
-                    $.error("Method " + method +
-                            " does not exist on jQuery." + pattern.name);
-                    return false;
-                }
-                if (method.charAt(0) === '_') {
-                    $.error("Method " + method +
-                            " is private on jQuery." + pattern.name);
-                    return false;
-                }
-                pat[method].apply(pat, [options]);
-            }
-        });
-        return $this;
-    };
-
-    var pluralBoundJQueryPlugin = function (pattern, method, options) {
-        /* This is a jQuery plugin for patterns which are invoked ONCE FOR ALL
-         * matched elements in the DOM.
-         *
-         * This is how the vanilla Patternslib-type patterns behave. They are
-         * simple objects with an init method and this method gets called once
-         * with a list of jQuery-wrapped DOM nodes on which the pattern
-         * applies.
-         */
-        var $this = this;
-        if (method) {
-            if (pattern[method]) {
-                return pattern[method].apply($this, [$this].concat([options]));
-            } else {
-                $.error("Method " + method +
-                        " does not exist on jQuery." + pattern.name);
-            }
-        } else {
-            pattern.init.apply($this, [$this].concat([options]));
-        }
-        return $this;
-    };
-
-    var jqueryPlugin = function(pattern) {
-        return function(method, options) {
-            var $this = this;
-            if ($this.length === 0) {
-                return $this;
-            }
-            if (typeof method === 'object') {
-                options = method;
-                method = undefined;
-            }
-            if (typeof pattern === "function") {
-                return singleBoundJQueryPlugin.call(this, pattern, method, options);
-            } else {
-                return pluralBoundJQueryPlugin.call(this, pattern, method, options);
-            }
-        };
-    };
-
-    //     Underscore.js 1.3.1
-    //     (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
-    //     Underscore is freely distributable under the MIT license.
-    //     Portions of Underscore are inspired or borrowed from Prototype,
-    //     Oliver Steele's Functional, and John Resig's Micro-Templating.
-    //     For all details and documentation:
-    //     http://documentcloud.github.com/underscore
-    //
-    // Returns a function, that, as long as it continues to be invoked, will not
-    // be triggered. The function will be called after it stops being called for
-    // N milliseconds.
-    function debounce(func, wait) {
-        var timeout;
-        return function debounce_run() {
-            var context = this, args = arguments;
-            var later = function() {
-                timeout = null;
-                func.apply(context, args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    // Is a given variable an object?
-    function isObject(obj) {
-        var type = typeof obj;
-        return type === 'function' || type === 'object' && !!obj;
-    }
-
-    // Extend a given object with all the properties in passed-in object(s).
-    function extend(obj) {
-        if (!isObject(obj)) return obj;
-        var source, prop;
-        for (var i = 1, length = arguments.length; i < length; i++) {
-            source = arguments[i];
-            for (prop in source) {
-                if (hasOwnProperty.call(source, prop)) {
-                    obj[prop] = source[prop];
-                }
-            }
-        }
-        return obj;
-    }
-    // END: Taken from Underscore.js until here.
-
-    function rebaseURL(base, url) {
-        if (url.indexOf("://")!==-1 || url[0]==="/")
-            return url;
-        return base.slice(0, base.lastIndexOf("/")+1) + url;
-    }
-
-    function findLabel(input) {
-        var $label;
-        for (var label=input.parentNode; label && label.nodeType!==11; label=label.parentNode) {
-            if (label.tagName==="LABEL") {
-                return label;
-            }
-        }
-        if (input.id) {
-            $label = $("label[for=\""+input.id+"\"]");
-        }
-        if ($label && $label.length===0 && input.form) {
-            $label = $("label[for=\""+input.name+"\"]", input.form);
-        }
-        if ($label && $label.length) {
-            return $label[0];
-        } else {
-            return null;
-        }
-    }
-
-    // Taken from http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
-    function elementInViewport(el) {
-       var rect = el.getBoundingClientRect(),
-           docEl = document.documentElement,
-           vWidth = window.innerWidth || docEl.clientWidth,
-           vHeight = window.innerHeight || docEl.clientHeight;
-
-        if (rect.right<0 || rect.bottom<0 || rect.left>vWidth || rect.top>vHeight)
-            return false;
-        return true;
-    }
-
-    // Taken from http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
-    function escapeRegExp(str) {
-        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-    }
-
-    function removeWildcardClass($targets, classes) {
-        if (classes.indexOf("*")===-1)
-            $targets.removeClass(classes);
-        else {
-            var matcher = classes.replace(/[\-\[\]{}()+?.,\\\^$|#\s]/g, "\\$&");
-            matcher = matcher.replace(/[*]/g, ".*");
-            matcher = new RegExp("^" + matcher + "$");
-            $targets.filter("[class]").each(function() {
-                var $this = $(this),
-                    classes = $this.attr("class").split(/\s+/),
-                    ok=[];
-                for (var i=0; i<classes.length; i++)
-                    if (!matcher.test(classes[i]))
-                        ok.push(classes[i]);
-                if (ok.length)
-                    $this.attr("class", ok.join(" "));
-                else
-                    $this.removeAttr("class");
-            });
-        }
-    }
-
-    var transitions = {
-        none: {hide: "hide", show: "show"},
-        fade: {hide: "fadeOut", show: "fadeIn"},
-        slide: {hide: "slideUp", show: "slideDown"}
-    };
-
-    function hideOrShow($slave, visible, options, pattern_name) {
-        var duration = (options.transition==="css" || options.transition==="none") ? null : options.effect.duration;
-
-        $slave.removeClass("visible hidden in-progress");
-        var onComplete = function() {
-            $slave
-                .removeClass("in-progress")
-                .addClass(visible ? "visible" : "hidden")
-                .trigger("pat-update",
-                        {pattern: pattern_name,
-                         transition: "complete"});
-        };
-        if (!duration) {
-            if (options.transition!=="css")
-                $slave[visible ? "show" : "hide"]();
-            onComplete();
-        } else {
-            var t = transitions[options.transition];
-            $slave
-                .addClass("in-progress")
-                .trigger("pat-update",
-                        {pattern: pattern_name,
-                         transition: "start"});
-            $slave[visible ? t.show : t.hide]({
-                duration: duration,
-                easing: options.effect.easing,
-                complete: onComplete
-            });
-        }
-    }
-
-    function addURLQueryParameter(fullURL, param, value) {
-        /* Using a positive lookahead (?=\=) to find the given parameter,
-         * preceded by a ? or &, and followed by a = with a value after
-         * than (using a non-greedy selector) and then followed by
-         * a & or the end of the string.
-         *
-         * Taken from http://stackoverflow.com/questions/7640270/adding-modify-query-string-get-variables-in-a-url-with-javascript
-         */
-        var val = new RegExp('(\\?|\\&)' + param + '=.*?(?=(&|$))'),
-            parts = fullURL.toString().split('#'),
-            url = parts[0],
-            hash = parts[1],
-            qstring = /\?.+$/,
-            newURL = url;
-        // Check if the parameter exists
-        if (val.test(url)) {
-            // if it does, replace it, using the captured group
-            // to determine & or ? at the beginning
-            newURL = url.replace(val, '$1' + param + '=' + value);
-        } else if (qstring.test(url)) {
-            // otherwise, if there is a query string at all
-            // add the param to the end of it
-            newURL = url + '&' + param + '=' + value;
-        } else {
-            // if there's no query string, add one
-            newURL = url + '?' + param + '=' + value;
-        }
-        if (hash) { newURL += '#' + hash; }
-        return newURL;
-    }
-
-    var utils = {
-        // pattern pimping - own module?
-        jqueryPlugin: jqueryPlugin,
-        debounce: debounce,
-        escapeRegExp: escapeRegExp,
-        isObject: isObject,
-        extend: extend,
-        rebaseURL: rebaseURL,
-        findLabel: findLabel,
-        elementInViewport: elementInViewport,
-        removeWildcardClass: removeWildcardClass,
-        hideOrShow: hideOrShow,
-        addURLQueryParameter: addURLQueryParameter
-    };
-    return utils;
-});
-
-define('pat-compat',[],function() {
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/every (JS 1.6)
-    if (!Array.prototype.every)
-    {
-        Array.prototype.every = function(fun /*, thisp */)
-        {
-            "use strict";
-
-            if (this === null)
-                throw new TypeError();
-
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (typeof fun !== "function")
-                throw new TypeError();
-
-            var thisp = arguments[1];
-            for (var i = 0; i < len; i++)
-            {
-                if (i in t && !fun.call(thisp, t[i], i, t))
-                    return false;
-            }
-
-            return true;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/filter (JS 1.6)
-    if (!Array.prototype.filter) {
-        Array.prototype.filter = function(fun /*, thisp */) {
-            "use strict";
-
-            if (this === null)
-                throw new TypeError();
-
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (typeof fun !== "function")
-                throw new TypeError();
-
-            var res = [];
-            var thisp = arguments[1];
-            for (var i = 0; i < len; i++)
-            {
-                if (i in t)
-                {
-                    var val = t[i]; // in case fun mutates this
-                    if (fun.call(thisp, val, i, t))
-                        res.push(val);
-                }
-            }
-
-            return res;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach (JS 1.6)
-    // Production steps of ECMA-262, Edition 5, 15.4.4.18
-    // Reference: http://es5.github.com/#x15.4.4.18
-    if ( !Array.prototype.forEach ) {
-
-        Array.prototype.forEach = function( callback, thisArg ) {
-
-            var T, k;
-
-            if ( this === null ) {
-                throw new TypeError( " this is null or not defined" );
-            }
-
-            // 1. Let O be the result of calling ToObject passing the |this| value as the argument.
-            var O = Object(this);
-
-            // 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
-            // 3. Let len be ToUint32(lenValue).
-            var len = O.length >>> 0; // Hack to convert O.length to a UInt32
-
-            // 4. If IsCallable(callback) is false, throw a TypeError exception.
-            // See: http://es5.github.com/#x9.11
-            if ( {}.toString.call(callback) !== "[object Function]" ) {
-                throw new TypeError( callback + " is not a function" );
-            }
-
-            // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
-            if ( thisArg ) {
-                T = thisArg;
-            }
-
-            // 6. Let k be 0
-            k = 0;
-
-            // 7. Repeat, while k < len
-            while( k < len ) {
-
-                var kValue;
-
-                // a. Let Pk be ToString(k).
-                //   This is implicit for LHS operands of the in operator
-                // b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
-                //   This step can be combined with c
-                // c. If kPresent is true, then
-                if ( k in O ) {
-
-                    // i. Let kValue be the result of calling the Get internal method of O with argument Pk.
-                    kValue = O[ k ];
-
-                    // ii. Call the Call internal method of callback with T as the this value and
-                    // argument list containing kValue, k, and O.
-                    callback.call( T, kValue, k, O );
-                }
-                // d. Increase k by 1.
-                k++;
-            }
-            // 8. return undefined
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf (JS 1.6)
-    if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
-            "use strict";
-            if (this === null) {
-                throw new TypeError();
-            }
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (len === 0) {
-                return -1;
-            }
-            var n = 0;
-            if (arguments.length > 0) {
-                n = Number(arguments[1]);
-                if (n !== n) { // shortcut for verifying if it's NaN
-                    n = 0;
-                } else if (n !== 0 && n !== Infinity && n !== -Infinity) {
-                    n = (n > 0 || -1) * Math.floor(Math.abs(n));
-                }
-            }
-            if (n >= len) {
-                return -1;
-            }
-            var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
-            for (; k < len; k++) {
-                if (k in t && t[k] === searchElement) {
-                    return k;
-                }
-            }
-            return -1;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/lastIndexOf (JS 1.6)
-    if (!Array.prototype.lastIndexOf) {
-        Array.prototype.lastIndexOf = function(searchElement /*, fromIndex*/) {
-            "use strict";
-
-            if (this === null)
-                throw new TypeError();
-
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (len === 0)
-                return -1;
-
-            var n = len;
-            if (arguments.length > 1)
-            {
-                n = Number(arguments[1]);
-                if (n !== n)
-                    n = 0;
-                else if (n !== 0 && n !== (1 / 0) && n !== -(1 / 0))
-                    n = (n > 0 || -1) * Math.floor(Math.abs(n));
-            }
-
-            var k = n >= 0 ? Math.min(n, len - 1) : len - Math.abs(n);
-
-            for (; k >= 0; k--)
-            {
-                if (k in t && t[k] === searchElement)
-                    return k;
-            }
-            return -1;
-        };
-    }
-
-
-    // source: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/map (JS 1.6)
-    // Production steps of ECMA-262, Edition 5, 15.4.4.19
-    // Reference: http://es5.github.com/#x15.4.4.19
-    if (!Array.prototype.map) {
-        Array.prototype.map = function(callback, thisArg) {
-
-            var T, A, k;
-
-            if (this === null) {
-                throw new TypeError(" this is null or not defined");
-            }
-
-            // 1. Let O be the result of calling ToObject passing the |this| value as the argument.
-            var O = Object(this);
-
-            // 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
-            // 3. Let len be ToUint32(lenValue).
-            var len = O.length >>> 0;
-
-            // 4. If IsCallable(callback) is false, throw a TypeError exception.
-            // See: http://es5.github.com/#x9.11
-            if ({}.toString.call(callback) !== "[object Function]") {
-                throw new TypeError(callback + " is not a function");
-            }
-
-            // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
-            if (thisArg) {
-                T = thisArg;
-            }
-
-            // 6. Let A be a new array created as if by the expression new Array(len) where Array is
-            // the standard built-in constructor with that name and len is the value of len.
-            A = new Array(len);
-
-            // 7. Let k be 0
-            k = 0;
-
-            // 8. Repeat, while k < len
-            while(k < len) {
-
-                var kValue, mappedValue;
-
-                // a. Let Pk be ToString(k).
-                //   This is implicit for LHS operands of the in operator
-                // b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
-                //   This step can be combined with c
-                // c. If kPresent is true, then
-                if (k in O) {
-
-                    // i. Let kValue be the result of calling the Get internal method of O with argument Pk.
-                    kValue = O[ k ];
-
-                    // ii. Let mappedValue be the result of calling the Call internal method of callback
-                    // with T as the this value and argument list containing kValue, k, and O.
-                    mappedValue = callback.call(T, kValue, k, O);
-
-                    // iii. Call the DefineOwnProperty internal method of A with arguments
-                    // Pk, Property Descriptor {Value: mappedValue, Writable: true, Enumerable: true, Configurable: true},
-                    // and false.
-
-                    // In browsers that support Object.defineProperty, use the following:
-                    // Object.defineProperty(A, Pk, { value: mappedValue, writable: true, enumerable: true, configurable: true });
-
-                    // For best browser support, use the following:
-                    A[ k ] = mappedValue;
-                }
-                // d. Increase k by 1.
-                k++;
-            }
-
-            // 9. return A
-            return A;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/Reduce (JS 1.8)
-    if (!Array.prototype.reduce) {
-        Array.prototype.reduce = function reduce(accumulator){
-            if (this===null || this===undefined) throw new TypeError("Object is null or undefined");
-            var i = 0, l = this.length >> 0, curr;
-
-            if(typeof accumulator !== "function") // ES5 : "If IsCallable(callbackfn) is false, throw a TypeError exception."
-                throw new TypeError("First argument is not callable");
-
-            if(arguments.length < 2) {
-                if (l === 0) throw new TypeError("Array length is 0 and no second argument");
-                curr = this[0];
-                i = 1; // start accumulating at the second element
-            }
-            else
-                curr = arguments[1];
-
-            while (i < l) {
-                if(i in this) curr = accumulator.call(undefined, curr, this[i], i, this);
-                ++i;
-            }
-
-            return curr;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/ReduceRight (JS 1.8)
-    if (!Array.prototype.reduceRight)
-    {
-        Array.prototype.reduceRight = function(callbackfn /*, initialValue */)
-        {
-            "use strict";
-
-            if (this === null)
-                throw new TypeError();
-
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (typeof callbackfn !== "function")
-                throw new TypeError();
-
-            // no value to return if no initial value, empty array
-            if (len === 0 && arguments.length === 1)
-                throw new TypeError();
-
-            var k = len - 1;
-            var accumulator;
-            if (arguments.length >= 2)
-            {
-                accumulator = arguments[1];
-            }
-            else
-            {
-                do
-                {
-                    if (k in this)
-                    {
-                        accumulator = this[k--];
-                        break;
-                    }
-
-                    // if array contains no values, no initial value to return
-                    if (--k < 0)
-                        throw new TypeError();
-                }
-                while (true);
-            }
-
-            while (k >= 0)
-            {
-                if (k in t)
-                    accumulator = callbackfn.call(undefined, accumulator, t[k], k, t);
-                k--;
-            }
-
-            return accumulator;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/some (JS 1.6)
-    if (!Array.prototype.some)
-    {
-        Array.prototype.some = function(fun /*, thisp */)
-        {
-            "use strict";
-
-            if (this === null)
-                throw new TypeError();
-
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (typeof fun !== "function")
-                throw new TypeError();
-
-            var thisp = arguments[1];
-            for (var i = 0; i < len; i++)
-            {
-                if (i in t && fun.call(thisp, t[i], i, t))
-                    return true;
-            }
-
-            return false;
-        };
-    }
-
-
-    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/isArray (JS 1.8.5)
-    if (!Array.isArray) {
-        Array.isArray = function (arg) {
-            return Object.prototype.toString.call(arg) === "[object Array]";
-        };
-    }
-
-    // source: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/Trim (JS 1.8.1)
-    if (!String.prototype.trim) {
-        String.prototype.trim = function () {
-            return this.replace(/^\s+|\s+$/g, "");
-        };
-    }
-
-    // source: https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/bind
-    if (!Function.prototype.bind) {
-        Function.prototype.bind = function (oThis) {
-            if (typeof this !== "function") {
-                // closest thing possible to the ECMAScript 5 internal IsCallable function
-                throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
-            }
-
-            var aArgs = Array.prototype.slice.call(arguments, 1),
-                fToBind = this,
-                fNOP = function () {},
-                fBound = function () {
-                    return fToBind.apply(this instanceof fNOP &&
-                            oThis ? this : oThis,
-                            aArgs.concat(Array.prototype.slice.call(arguments)));
-                };
-            fNOP.prototype = this.prototype;
-            fBound.prototype = new fNOP();
-
-            return fBound;
-        };
-    }
-
-    // https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/keys
-    if (!Object.keys) {
-        Object.keys = (function () {
-            var _hasOwnProperty = Object.prototype.hasOwnProperty,
-            hasDontEnumBug = !({toString: null}).propertyIsEnumerable("toString"),
-            dontEnums = [
-            "toString",
-            "toLocaleString",
-            "valueOf",
-            "hasOwnProperty",
-            "isPrototypeOf",
-            "propertyIsEnumerable",
-            "constructor"
-            ],
-            dontEnumsLength = dontEnums.length;
-
-            return function (obj) {
-                if (typeof obj !== "object" && typeof obj !== "function" || obj === null)
-                    throw new TypeError("Object.keys called on non-object");
-
-                var result = [];
-                for (var prop in obj)
-                    if (_hasOwnProperty.call(obj, prop))
-                        result.push(prop);
-
-                if (hasDontEnumBug)
-                    for (var i=0; i < dontEnumsLength; i++)
-                        if (_hasOwnProperty.call(obj, dontEnums[i]))
-                            result.push(dontEnums[i]);
-                return result;
-            };
-        })();
-    }
-});
-
-/**
- * @license
- * Patterns @VERSION@ jquery-ext - various jQuery extensions
- *
- * Copyright 2011 Humberto Sermeño
- */
-define('pat-jquery-ext',["jquery"], function($) {
-    var methods = {
-        init: function( options ) {
-            var settings = {
-                time: 3, /* time it will wait before moving to "timeout" after a move event */
-                initialTime: 8, /* time it will wait before first adding the "timeout" class */
-                exceptionAreas: [] /* IDs of elements that, if the mouse is over them, will reset the timer */
-            };
-            return this.each(function() {
-                var $this = $(this),
-                    data = $this.data("timeout");
-
-                if (!data) {
-                    if ( options ) {
-                        $.extend( settings, options );
-                    }
-                    $this.data("timeout", {
-                        "lastEvent": new Date(),
-                        "trueTime": settings.time,
-                        "time": settings.initialTime,
-                        "untouched": true,
-                        "inExceptionArea": false
-                    });
-
-                    $this.bind( "mouseover.timeout", methods.mouseMoved );
-                    $this.bind( "mouseenter.timeout", methods.mouseMoved );
-
-                    $(settings.exceptionAreas).each(function() {
-                        $this.find(this)
-                            .live( "mouseover.timeout", {"parent":$this}, methods.enteredException )
-                            .live( "mouseleave.timeout", {"parent":$this}, methods.leftException );
-                    });
-
-                    if (settings.initialTime > 0)
-                        $this.timeout("startTimer");
-                    else
-                        $this.addClass("timeout");
-                }
-            });
-        },
-
-        enteredException: function(event) {
-            var data = event.data.parent.data("timeout");
-            data.inExceptionArea = true;
-            event.data.parent.data("timeout", data);
-            event.data.parent.trigger("mouseover");
-        },
-
-        leftException: function(event) {
-            var data = event.data.parent.data("timeout");
-            data.inExceptionArea = false;
-            event.data.parent.data("timeout", data);
-        },
-
-        destroy: function() {
-            return this.each( function() {
-                var $this = $(this),
-                    data = $this.data("timeout");
-
-                $(window).unbind(".timeout");
-                data.timeout.remove();
-                $this.removeData("timeout");
-            });
-        },
-
-        mouseMoved: function() {
-            var $this = $(this), data = $this.data("timeout");
-
-            if ($this.hasClass("timeout")) {
-                $this.removeClass("timeout");
-                $this.timeout("startTimer");
-            } else if ( data.untouched ) {
-                data.untouched = false;
-                data.time = data.trueTime;
-            }
-
-            data.lastEvent = new Date();
-            $this.data("timeout", data);
-        },
-
-        startTimer: function() {
-            var $this = $(this), data = $this.data("timeout");
-            var fn = function(){
-                var data = $this.data("timeout");
-                if ( data && data.lastEvent ) {
-                    if ( data.inExceptionArea ) {
-                        setTimeout( fn, Math.floor( data.time*1000 ) );
-                    } else {
-                        var now = new Date();
-                        var diff = Math.floor(data.time*1000) - ( now - data.lastEvent );
-                        if ( diff > 0 ) {
-                            // the timeout has not ocurred, so set the timeout again
-                            setTimeout( fn, diff+100 );
-                        } else {
-                            // timeout ocurred, so set the class
-                            $this.addClass("timeout");
-                        }
-                    }
-                }
-            };
-
-            setTimeout( fn, Math.floor( data.time*1000 ) );
-        }
-    };
-
-    $.fn.timeout = function( method ) {
-        if ( methods[method] ) {
-            return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
-        } else if ( typeof method === "object" || !method ) {
-            return methods.init.apply( this, arguments );
-        } else {
-            $.error( "Method " + method + " does not exist on jQuery.timeout" );
-        }
-    };
-
-    // Custom jQuery selector to find elements with scrollbars
-    $.extend($.expr[":"], {
-        scrollable: function(element) {
-            var vertically_scrollable, horizontally_scrollable;
-            if ($(element).css("overflow") === "scroll" ||
-                $(element).css("overflowX") === "scroll" ||
-                $(element).css("overflowY") === "scroll")
-                return true;
-
-            vertically_scrollable = (element.clientHeight < element.scrollHeight) && (
-                $.inArray($(element).css("overflowY"), ["scroll", "auto"]) !== -1 || $.inArray($(element).css("overflow"), ["scroll", "auto"]) !== -1);
-
-            if (vertically_scrollable)
-                return true;
-
-            horizontally_scrollable = (element.clientWidth < element.scrollWidth) && (
-                $.inArray($(element).css("overflowX"), ["scroll", "auto"]) !== -1 || $.inArray($(element).css("overflow"), ["scroll", "auto"]) !== -1);
-            return horizontally_scrollable;
-        }
-    });
-
-    // Make Visible in scroll
-    $.fn.makeVisibleInScroll = function( parent_id ) {
-        var absoluteParent = null;
-        if ( typeof parent_id === "string" ) {
-            absoluteParent = $("#" + parent_id);
-        } else if ( parent_id ) {
-            absoluteParent = $(parent_id);
-        }
-
-        return this.each(function() {
-            var $this = $(this), parent;
-            if (!absoluteParent) {
-                parent = $this.parents(":scrollable");
-                if (parent.length > 0) {
-                    parent = $(parent[0]);
-                } else {
-                    parent = $(window);
-                }
-            } else {
-                parent = absoluteParent;
-            }
-
-            var elemTop = $this.position().top;
-            var elemBottom = $this.height() + elemTop;
-
-            var viewTop = parent.scrollTop();
-            var viewBottom = parent.height() + viewTop;
-
-            if (elemTop < viewTop) {
-                parent.scrollTop(elemTop);
-            } else if ( elemBottom > viewBottom - parent.height()/2 ) {
-                parent.scrollTop( elemTop - (parent.height() - $this.height())/2 );
-            }
-        });
-    };
-
-    //Make absolute location
-    $.fn.setPositionAbsolute = function(element,offsettop,offsetleft) {
-        return this.each(function() {
-            // set absolute location for based on the element passed
-            // dynamically since every browser has different settings
-            var $this = $(this);
-            var thiswidth = $(this).width();
-            var    pos   = element.offset();
-            var    width = element.width();
-            var    height = element.height();
-            var setleft = (pos.left + width - thiswidth + offsetleft);
-            var settop = (pos.top + height + offsettop);
-            $this.css({ "z-index" : 1, "position": "absolute", "marginLeft": 0, "marginTop": 0, "left": setleft + "px", "top":settop + "px" ,"width":thiswidth});
-            $this.remove().appendTo("body").show();
-        });
-    };
-
-    $.fn.positionAncestor = function(selector) {
-        var left = 0;
-        var top = 0;
-        this.each(function() {
-            // check if current element has an ancestor matching a selector
-            // and that ancestor is positioned
-            var $ancestor = $(this).closest(selector);
-            if ($ancestor.length && $ancestor.css("position") !== "static") {
-                var $child = $(this);
-                var childMarginEdgeLeft = $child.offset().left - parseInt($child.css("marginLeft"), 10);
-                var childMarginEdgeTop = $child.offset().top - parseInt($child.css("marginTop"), 10);
-                var ancestorPaddingEdgeLeft = $ancestor.offset().left + parseInt($ancestor.css("borderLeftWidth"), 10);
-                var ancestorPaddingEdgeTop = $ancestor.offset().top + parseInt($ancestor.css("borderTopWidth"), 10);
-                left = childMarginEdgeLeft - ancestorPaddingEdgeLeft;
-                top = childMarginEdgeTop - ancestorPaddingEdgeTop;
-                // we have found the ancestor and computed the position
-                // stop iterating
-                return false;
-            }
-        });
-        return {
-            left:    left,
-            top:    top
-        };
-    };
-
-
-    // XXX: In compat.js we include things for browser compatibility,
-    // but these two seem to be only convenience. Do we really want to
-    // include these as part of patterns?
-    String.prototype.startsWith = function(str) { return (this.match("^"+str) !== null); };
-    String.prototype.endsWith = function(str) { return (this.match(str+"$") !== null); };
-
-
-    /******************************
-
-     Simple Placeholder
-
-     ******************************/
-
-    $.simplePlaceholder = {
-        placeholder_class: null,
-
-        hide_placeholder: function(){
-            var $this = $(this);
-            if($this.val() === $this.attr("placeholder")){
-                $this.val("").removeClass($.simplePlaceholder.placeholder_class);
-            }
-        },
-
-        show_placeholder: function(){
-            var $this = $(this);
-            if($this.val() === ""){
-                $this.val($this.attr("placeholder")).addClass($.simplePlaceholder.placeholder_class);
-            }
-        },
-
-        prevent_placeholder_submit: function(){
-            $(this).find(".simple-placeholder").each(function() {
-                var $this = $(this);
-                if ($this.val() === $this.attr("placeholder")){
-                    $this.val("");
-                }
-            });
-            return true;
-        }
-    };
-
-    $.fn.simplePlaceholder = function(options) {
-        if(document.createElement("input").placeholder === undefined){
-            var config = {
-                placeholder_class : "placeholding"
-            };
-
-            if(options) $.extend(config, options);
-            $.simplePlaceholder.placeholder_class = config.placeholder_class;
-
-            this.each(function() {
-                var $this = $(this);
-                $this.focus($.simplePlaceholder.hide_placeholder);
-                $this.blur($.simplePlaceholder.show_placeholder);
-                if($this.val() === "") {
-                    $this.val($this.attr("placeholder"));
-                    $this.addClass($.simplePlaceholder.placeholder_class);
-                }
-                $this.addClass("simple-placeholder");
-                $(this.form).submit($.simplePlaceholder.prevent_placeholder_submit);
-            });
-        }
-
-        return this;
-    };
-
-    $.fn.findInclusive = function(selector) {
-        return this.find('*').addBack().filter(selector);
-    };
-
-    $.fn.slideIn = function(speed, easing, callback) {
-        return this.animate({width: "show"}, speed, easing, callback);
-    };
-
-    $.fn.slideOut = function(speed, easing, callback) {
-        return this.animate({width: "hide"}, speed, easing, callback);
-    };
-
-    // case-insensitive :contains
-    $.expr[":"].Contains = function(a, i, m) {
-        return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
-    };
-
-    $.fn.scopedFind = function (selector) {
-        /*  If the selector starts with an object id do a global search,
-         *  otherwise do a local search.
-         */
-        if (selector.startsWith('#')) {
-            return $(selector);
-        } else {
-            return this.find(selector);
-        }
-    };
-});
-
-/**
- * Patterns registry - Central registry and scan logic for patterns
- *
- * Copyright 2012-2013 Simplon B.V.
- * Copyright 2012-2013 Florian Friesdorf
- * Copyright 2013 Marko Durkovic
- * Copyright 2013 Rok Garbas
- */
-
-/*
- * changes to previous patterns.register/scan mechanism
- * - if you want initialised class, do it in init
- * - init returns set of elements actually initialised
- * - handle once within init
- * - no turnstile anymore
- * - set pattern.jquery_plugin if you want it
- */
-define('pat-registry',[
-    "jquery",
-    "pat-logger",
-    "pat-utils",
-    // below here modules that are only loaded
-    "pat-compat",
-    "pat-jquery-ext"
-], function($, logger, utils) {
-    var TEXT_NODE = 3;
-    var COMMENT_NODE = 8;
-    var log = logger.getLogger("registry");
-
-    var disable_re = /patterns-disable=([^&]+)/g,
-        dont_catch_re = /patterns-dont-catch/g,
-        dont_catch = false,
-        disabled = {}, match;
-
-    while ((match=disable_re.exec(window.location.search)) !== null) {
-        disabled[match[1]] = true;
-        log.info("Pattern disabled via url config:", match[1]);
-    }
-
-    while ((match=dont_catch_re.exec(window.location.search)) !== null) {
-        dont_catch = true;
-        log.info("I will not catch init exceptions");
-    }
-
-    var registry = {
-        patterns: {},
-        // as long as the registry is not initialized, pattern
-        // registration just registers a pattern. Once init is called,
-        // the DOM is scanned. After that registering a new pattern
-        // results in rescanning the DOM only for this pattern.
-        initialized: false,
-        init: function registry_init() {
-            $(document).ready(function() {
-                log.info("loaded: " + Object.keys(registry.patterns).sort().join(", "));
-                registry.scan(document.body);
-                registry.initialized = true;
-                log.info("finished initial scan.");
-            });
-        },
-
-        clear: function clearRegistry() {
-            // Removes all patterns from the registry. Currently only being
-            // used in tests.
-            this.patterns = {};
-        },
-
-        scan: function registryScan(content, patterns, trigger) {
-            var $content = $(content),
-                all = [], allsel,
-                $match, plog;
-
-            // If no list of patterns was specified, we scan for all patterns
-            patterns = patterns || Object.keys(registry.patterns);
-
-            // selector for all patterns
-            patterns.forEach(function registry_scan_loop(name) {
-                if (disabled[name]) {
-                    log.debug("Skipping disabled pattern:", name);
-                    return;
-                }
-                var pattern = registry.patterns[name];
-                if (pattern.transform) {
-                    try {
-                        pattern.transform($content);
-                    } catch (e) {
-                        if (dont_catch) { throw(e); }
-                        log.error("Transform error for pattern" + name, e);
-                    }
-                }
-                if (pattern.trigger) {
-                    all.push(pattern.trigger);
-                }
-            });
-            // Find all elements that belong to any pattern.
-            allsel = all.join(",");
-            $match = $content.findInclusive(allsel);
-            $match = $match.filter(function() { return $(this).parents("pre").length === 0; });
-            $match = $match.filter(":not(.cant-touch-this)");
-
-            // walk list backwards and initialize patterns inside-out.
-            $match.toArray().reduceRight(function registry_pattern_init(acc, el) {
-                var pattern, $el = $(el);
-                for (var name in registry.patterns) {
-                    pattern = registry.patterns[name];
-                    if (pattern.init) {
-                        plog = logger.getLogger("pat." + name);
-                        if ($el.is(pattern.trigger)) {
-                            plog.debug("Initialising:", $el);
-                            try {
-                                pattern.init($el, null, trigger);
-                                plog.debug("done.");
-                            } catch (e) {
-                                if (dont_catch) { throw(e); }
-                                plog.error("Caught error:", e);
-                            }
-                        }
-                    }
-                }
-            }, null);
-            $("body").addClass("patterns-loaded");
-        },
-
-        register: function registry_register(pattern, name) {
-            var plugin_name, jquery_plugin;
-            name = name || pattern.name;
-            if (!name) {
-                log.error("Pattern lacks a name:", pattern);
-                return false;
-            }
-            if (registry.patterns[name]) {
-                log.error("Already have a pattern called: " + name);
-                return false;
-            }
-
-            // register pattern to be used for scanning new content
-            registry.patterns[name] = pattern;
-
-            // register pattern as jquery plugin
-            if (pattern.jquery_plugin) {
-                plugin_name = ("pat-" + name)
-                        .replace(/-([a-zA-Z])/g, function(match, p1) {
-                            return p1.toUpperCase();
-                        });
-                $.fn[plugin_name] = utils.jqueryPlugin(pattern);
-                // BBB 2012-12-10 and also for Mockup patterns.
-                $.fn[plugin_name.replace(/^pat/, "pattern")] = $.fn[plugin_name];
-            }
-            log.debug("Registered pattern:", name, pattern);
-            if (registry.initialized) {
-                registry.scan(document.body, [name]);
-            }
-            return true;
-        }
-    };
-
-    $(document).on("patterns-injected.patterns",
-        function registry_onInject(ev, config, trigger_el, injected_el) {
-            if (injected_el.nodeType !== TEXT_NODE && injected_el !== COMMENT_NODE) {
-                registry.scan(injected_el, null, {type: "injection", element: trigger_el});
-                $(injected_el).trigger("patterns-injected-scanned");
-            }
-        }
-    );
-    return registry;
-});
-// jshint indent: 4, browser: true, jquery: true, quotmark: double
-// vim: sw=4 expandtab
-;
-/*!
- * jQuery Browser Plugin 0.0.7
- * https://github.com/gabceb/jquery-browser-plugin
- *
- * Original jquery-browser code Copyright 2005, 2013 jQuery Foundation, Inc. and other contributors
- * http://jquery.org/license
- *
- * Modifications Copyright 2014 Gabriel Cebrian
- * https://github.com/gabceb
- *
- * Released under the MIT license
- *
- * Date: 12-12-2014
- */
-
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define('jquery.browser',['jquery'], function ($) {
-      factory($, root);
-    });
-  } else {
-    // Browser globals
-    factory(jQuery, root);
-  }
-}(this, function(jQuery, window) {
-  "use strict";
-
-  var matched, browser;
-
-  jQuery.uaMatch = function( ua ) {
-    ua = ua.toLowerCase();
-
-    var match = /(edge)\/([\w.]+)/.exec( ua ) ||
-        /(opr)[\/]([\w.]+)/.exec( ua ) ||
-        /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
-        /(version)(applewebkit)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
-        /(webkit)[ \/]([\w.]+).*(version)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
-        /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
-        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
-        /(msie) ([\w.]+)/.exec( ua ) ||
-        ua.indexOf("trident") >= 0 && /(rv)(?::| )([\w.]+)/.exec( ua ) ||
-        ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
-        [];
-
-    var platform_match = /(ipad)/.exec( ua ) ||
-        /(ipod)/.exec( ua ) ||
-        /(iphone)/.exec( ua ) ||
-        /(kindle)/.exec( ua ) ||
-        /(silk)/.exec( ua ) ||
-        /(android)/.exec( ua ) ||
-        /(windows phone)/.exec( ua ) ||
-        /(win)/.exec( ua ) ||
-        /(mac)/.exec( ua ) ||
-        /(linux)/.exec( ua ) ||
-        /(cros)/.exec( ua ) ||
-        /(playbook)/.exec( ua ) ||
-        /(bb)/.exec( ua ) ||
-        /(blackberry)/.exec( ua ) ||
-        [];
-
-    return {
-      browser: match[ 5 ] || match[ 3 ] || match[ 1 ] || "",
-      version: match[ 2 ] || match[ 4 ] || "0",
-      versionNumber: match[ 4 ] || match[ 2 ] || "0",
-      platform: platform_match[ 0 ] || ""
-    };
-  };
-
-  matched = jQuery.uaMatch( window.navigator.userAgent );
-  browser = {};
-
-  if ( matched.browser ) {
-    browser[ matched.browser ] = true;
-    browser.version = matched.version;
-    browser.versionNumber = parseInt(matched.versionNumber, 10);
-  }
-
-  if ( matched.platform ) {
-    browser[ matched.platform ] = true;
-  }
-
-  // These are all considered mobile platforms, meaning they run a mobile browser
-  if ( browser.android || browser.bb || browser.blackberry || browser.ipad || browser.iphone ||
-    browser.ipod || browser.kindle || browser.playbook || browser.silk || browser[ "windows phone" ]) {
-    browser.mobile = true;
-  }
-
-  // These are all considered desktop platforms, meaning they run a desktop browser
-  if ( browser.cros || browser.mac || browser.linux || browser.win ) {
-    browser.desktop = true;
-  }
-
-  // Chrome, Opera 15+ and Safari are webkit based browsers
-  if ( browser.chrome || browser.opr || browser.safari ) {
-    browser.webkit = true;
-  }
-
-  // IE11 has a new token so we will assign it msie to avoid breaking changes
-  // IE12 disguises itself as Chrome, but adds a new Edge token.
-  if ( browser.rv || browser.edge ) {
-    var ie = "msie";
-
-    matched.browser = ie;
-    browser[ie] = true;
-  }
-
-  // Blackberry browsers are marked as Safari on BlackBerry
-  if ( browser.safari && browser.blackberry ) {
-    var blackberry = "blackberry";
-
-    matched.browser = blackberry;
-    browser[blackberry] = true;
-  }
-
-  // Playbook browsers are marked as Safari on Playbook
-  if ( browser.safari && browser.playbook ) {
-    var playbook = "playbook";
-
-    matched.browser = playbook;
-    browser[playbook] = true;
-  }
-
-  // BB10 is a newer OS version of BlackBerry
-  if ( browser.bb ) {
-    var bb = "blackberry";
-
-    matched.browser = bb;
-    browser[bb] = true;
-  }
-
-  // Opera 15+ are identified as opr
-  if ( browser.opr ) {
-    var opera = "opera";
-
-    matched.browser = opera;
-    browser[opera] = true;
-  }
-
-  // Stock Android browsers are marked as Safari on Android.
-  if ( browser.safari && browser.android ) {
-    var android = "android";
-
-    matched.browser = android;
-    browser[android] = true;
-  }
-
-  // Kindle browsers are marked as Safari on Kindle
-  if ( browser.safari && browser.kindle ) {
-    var kindle = "kindle";
-
-    matched.browser = kindle;
-    browser[kindle] = true;
-  }
-
-   // Kindle Silk browsers are marked as Safari on Kindle
-  if ( browser.safari && browser.silk ) {
-    var silk = "silk";
-
-    matched.browser = silk;
-    browser[silk] = true;
-  }
-
-  // Assign the name and platform variable
-  browser.name = matched.browser;
-  browser.platform = matched.platform;
-
-  jQuery.browser = browser;
-  return browser;
-}));
-
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -13914,6 +12288,1712 @@ define('pat-registry',[
     });
   }
 }.call(this));
+
+/**
+ * Patterns logging - minimal logging framework
+ *
+ * Copyright 2012 Simplon B.V.
+ */
+
+(function() {
+    // source: https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/bind
+    if (!Function.prototype.bind) {
+        Function.prototype.bind = function (oThis) {
+            if (typeof this !== "function") {
+                // closest thing possible to the ECMAScript 5 internal IsCallable function
+                throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+            }
+
+            var aArgs = Array.prototype.slice.call(arguments, 1),
+                fToBind = this,
+                fNOP = function () {},
+                fBound = function () {
+                    return fToBind.apply(this instanceof fNOP &&
+                            oThis ? this : oThis,
+                            aArgs.concat(Array.prototype.slice.call(arguments)));
+                };
+            fNOP.prototype = this.prototype;
+            fBound.prototype = new fNOP();
+
+            return fBound;
+        };
+    }
+
+    var root,    // root logger instance
+        writer;  // writer instance, used to output log entries
+
+    var Level = {
+        DEBUG: 10,
+        INFO: 20,
+        WARN: 30,
+        ERROR: 40,
+        FATAL: 50
+    };
+
+    function IEConsoleWriter() {
+    }
+
+    IEConsoleWriter.prototype = {
+        output:  function(log_name, level, messages) {
+            // console.log will magically appear in IE8 when the user opens the
+            // F12 Developer Tools, so we have to test for it every time.
+            if (typeof window.console==="undefined" || typeof console.log==="undefined")
+                    return;
+            if (log_name)
+                messages.unshift(log_name+":");
+            var message = messages.join(" ");
+
+            // Under some conditions console.log will be available but the
+            // other functions are missing.
+            if (typeof console.info===undefined) {
+                var level_name;
+                if (level<=Level.DEBUG)
+                    level_name="DEBUG";
+                else if (level<=Level.INFO)
+                    level_name="INFO";
+                else if (level<=Level.WARN)
+                    level_name="WARN";
+                else if (level<=Level.ERROR)
+                    level_name="ERROR";
+                else
+                    level_name="FATAL";
+                console.log("["+level_name+"] "+message);
+            } else {
+                if (level<=Level.DEBUG) {
+                    // console.debug exists but is deprecated
+                    message="[DEBUG] "+message;
+                    console.log(message);
+                } else if (level<=Level.INFO)
+                    console.info(message);
+                else if (level<=Level.WARN)
+                    console.warn(message);
+                else
+                    console.error(message);
+            }
+        }
+    };
+
+
+    function ConsoleWriter() {
+    }
+
+    ConsoleWriter.prototype = {
+        output: function(log_name, level, messages) {
+            if (log_name)
+                messages.unshift(log_name+":");
+            if (level<=Level.DEBUG) {
+                // console.debug exists but is deprecated
+                messages.unshift("[DEBUG]");
+                console.log.apply(console, messages);
+            } else if (level<=Level.INFO)
+                console.info.apply(console, messages);
+            else if (level<=Level.WARN)
+                console.warn.apply(console, messages);
+            else
+                console.error.apply(console, messages);
+        }
+    };
+
+
+    function Logger(name, parent) {
+        this._loggers={};
+        this.name=name || "";
+        this._parent=parent || null;
+        if (!parent) {
+            this._enabled=true;
+            this._level=Level.WARN;
+        }
+    }
+
+    Logger.prototype = {
+        getLogger: function(name) {
+            var path = name.split("."),
+                root = this,
+                route = this.name ? [this.name] : [];
+            while (path.length) {
+                var entry = path.shift();
+                route.push(entry);
+                if (!(entry in root._loggers))
+                    root._loggers[entry] = new Logger(route.join("."), root);
+                root=root._loggers[entry];
+            }
+            return root;
+        },
+
+        _getFlag: function(flag) {
+            var context=this;
+            flag="_"+flag;
+            while (context!==null) {
+                if (context[flag]!==undefined)
+                    return context[flag];
+                context=context._parent;
+            }
+            return null;
+        },
+
+        setEnabled: function(state) {
+            this._enabled=!!state;
+        },
+
+        isEnabled: function() {
+            this._getFlag("enabled");
+        },
+
+        setLevel: function(level) {
+            if (typeof level==="number")
+                this._level=level;
+            else if (typeof level==="string") {
+                level=level.toUpperCase();
+                if (level in Level)
+                    this._level=Level[level];
+            }
+        },
+
+        getLevel: function() {
+            return this._getFlag("level");
+        },
+
+        log: function(level, messages) {
+            if (!messages.length || !this._getFlag("enabled") || level<this._getFlag("level"))
+                return;
+            messages=Array.prototype.slice.call(messages);
+            writer.output(this.name, level, messages);
+        },
+
+        debug: function() {
+            this.log(Level.DEBUG, arguments);
+        },
+
+        info: function() {
+            this.log(Level.INFO, arguments);
+        },
+
+        warn: function() {
+            this.log(Level.WARN, arguments);
+        },
+
+        error: function() {
+            this.log(Level.ERROR, arguments);
+        },
+
+        fatal: function() {
+            this.log(Level.FATAL, arguments);
+        }
+    };
+
+    function getWriter() {
+        return writer;
+    }
+
+    function setWriter(w) {
+        writer=w;
+    }
+
+    if (!window.console || !window.console.log || typeof window.console.log.apply !== "function") {
+        setWriter(new IEConsoleWriter());
+    } else {
+        setWriter(new ConsoleWriter());
+    }
+
+    root=new Logger();
+
+    var logconfig = /loglevel(|-[^=]+)=([^&]+)/g,
+        match;
+
+    while ((match=logconfig.exec(window.location.search))!==null) {
+        var logger = (match[1]==="") ? root : root.getLogger(match[1].slice(1));
+        logger.setLevel(match[2].toUpperCase());
+    }
+
+    var api = {
+        Level: Level,
+        getLogger: root.getLogger.bind(root),
+        setEnabled: root.setEnabled.bind(root),
+        isEnabled: root.isEnabled.bind(root),
+        setLevel: root.setLevel.bind(root),
+        getLevel: root.getLevel.bind(root),
+        debug: root.debug.bind(root),
+        info: root.info.bind(root),
+        warn: root.warn.bind(root),
+        error: root.error.bind(root),
+        fatal: root.fatal.bind(root),
+        getWriter: getWriter,
+        setWriter: setWriter
+    };
+
+    // Expose as either an AMD module if possible. If not fall back to exposing
+    // a global object.
+    if (typeof define==="function")
+        define("logging", [], function () {
+            return api;
+        });
+    else
+        window.logging=api;
+})();
+
+/**
+ * Patterns logger - wrapper around logging library
+ *
+ * Copyright 2012-2013 Florian Friesdorf
+ */
+define('pat-logger',[
+    'logging'
+], function(logging) {
+    var log = logging.getLogger('patterns');
+    return log;
+});
+
+define('pat-utils',[
+    "jquery"
+], function($) {
+
+    // Production steps of ECMA-262, Edition 5, 15.4.4.18
+    // Reference: http://es5.github.io/#x15.4.4.18
+    if (!Array.prototype.forEach) {
+        Array.prototype.forEach = function(callback, thisArg) {
+            var T, k;
+            if (this === null) {
+                throw new TypeError(' this is null or not defined');
+            }
+            // 1. Let O be the result of calling ToObject passing the |this| value as the argument.
+            var O = Object(this);
+            // 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
+            // 3. Let len be ToUint32(lenValue).
+            var len = O.length >>> 0;
+            // 4. If IsCallable(callback) is false, throw a TypeError exception.
+            // See: http://es5.github.com/#x9.11
+            if (typeof callback !== "function") {
+                throw new TypeError(callback + ' is not a function');
+            }
+            // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
+            if (arguments.length > 1) {
+                T = thisArg;
+            }
+            // 6. Let k be 0
+            k = 0;
+            // 7. Repeat, while k < len
+            while (k < len) {
+                var kValue;
+                // a. Let Pk be ToString(k).
+                //   This is implicit for LHS operands of the in operator
+                // b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
+                //   This step can be combined with c
+                // c. If kPresent is true, then
+                if (k in O) {
+                    // i. Let kValue be the result of calling the Get internal method of O with argument Pk.
+                    kValue = O[k];
+                    // ii. Call the Call internal method of callback with T as the this value and
+                    // argument list containing kValue, k, and O.
+                    callback.call(T, kValue, k, O);
+                }
+                // d. Increase k by 1.
+                k++;
+            }
+            // 8. return undefined
+        };
+    }
+
+    var singleBoundJQueryPlugin = function (pattern, method, options) {
+        /* This is a jQuery plugin for patterns which are invoked ONCE FOR EACH
+         * matched element in the DOM.
+         *
+         * This is how the Mockup-type patterns behave. They are constructor
+         * functions which need to be invoked once per jQuery-wrapped DOM node
+         * for all DOM nodes on which the pattern applies.
+         */
+        var $this = this;
+        $this.each(function() {
+            var pat, $el = $(this);
+            pat = pattern.init($el, options);
+            if (method) {
+                if (pat[method] === undefined) {
+                    $.error("Method " + method +
+                            " does not exist on jQuery." + pattern.name);
+                    return false;
+                }
+                if (method.charAt(0) === '_') {
+                    $.error("Method " + method +
+                            " is private on jQuery." + pattern.name);
+                    return false;
+                }
+                pat[method].apply(pat, [options]);
+            }
+        });
+        return $this;
+    };
+
+    var pluralBoundJQueryPlugin = function (pattern, method, options) {
+        /* This is a jQuery plugin for patterns which are invoked ONCE FOR ALL
+         * matched elements in the DOM.
+         *
+         * This is how the vanilla Patternslib-type patterns behave. They are
+         * simple objects with an init method and this method gets called once
+         * with a list of jQuery-wrapped DOM nodes on which the pattern
+         * applies.
+         */
+        var $this = this;
+        if (method) {
+            if (pattern[method]) {
+                return pattern[method].apply($this, [$this].concat([options]));
+            } else {
+                $.error("Method " + method +
+                        " does not exist on jQuery." + pattern.name);
+            }
+        } else {
+            pattern.init.apply($this, [$this].concat([options]));
+        }
+        return $this;
+    };
+
+    var jqueryPlugin = function(pattern) {
+        return function(method, options) {
+            var $this = this;
+            if ($this.length === 0) {
+                return $this;
+            }
+            if (typeof method === 'object') {
+                options = method;
+                method = undefined;
+            }
+            if (typeof pattern === "function") {
+                return singleBoundJQueryPlugin.call(this, pattern, method, options);
+            } else {
+                return pluralBoundJQueryPlugin.call(this, pattern, method, options);
+            }
+        };
+    };
+
+    //     Underscore.js 1.3.1
+    //     (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
+    //     Underscore is freely distributable under the MIT license.
+    //     Portions of Underscore are inspired or borrowed from Prototype,
+    //     Oliver Steele's Functional, and John Resig's Micro-Templating.
+    //     For all details and documentation:
+    //     http://documentcloud.github.com/underscore
+    //
+    // Returns a function, that, as long as it continues to be invoked, will not
+    // be triggered. The function will be called after it stops being called for
+    // N milliseconds.
+    function debounce(func, wait) {
+        var timeout;
+        return function debounce_run() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                func.apply(context, args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // Is a given variable an object?
+    function isObject(obj) {
+        var type = typeof obj;
+        return type === 'function' || type === 'object' && !!obj;
+    }
+
+    // Extend a given object with all the properties in passed-in object(s).
+    function extend(obj) {
+        if (!isObject(obj)) return obj;
+        var source, prop;
+        for (var i = 1, length = arguments.length; i < length; i++) {
+            source = arguments[i];
+            for (prop in source) {
+                if (hasOwnProperty.call(source, prop)) {
+                    obj[prop] = source[prop];
+                }
+            }
+        }
+        return obj;
+    }
+    // END: Taken from Underscore.js until here.
+
+    function rebaseURL(base, url) {
+        if (url.indexOf("://")!==-1 || url[0]==="/")
+            return url;
+        return base.slice(0, base.lastIndexOf("/")+1) + url;
+    }
+
+    function findLabel(input) {
+        var $label;
+        for (var label=input.parentNode; label && label.nodeType!==11; label=label.parentNode) {
+            if (label.tagName==="LABEL") {
+                return label;
+            }
+        }
+        if (input.id) {
+            $label = $("label[for=\""+input.id+"\"]");
+        }
+        if ($label && $label.length===0 && input.form) {
+            $label = $("label[for=\""+input.name+"\"]", input.form);
+        }
+        if ($label && $label.length) {
+            return $label[0];
+        } else {
+            return null;
+        }
+    }
+
+    // Taken from http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+    function elementInViewport(el) {
+       var rect = el.getBoundingClientRect(),
+           docEl = document.documentElement,
+           vWidth = window.innerWidth || docEl.clientWidth,
+           vHeight = window.innerHeight || docEl.clientHeight;
+
+        if (rect.right<0 || rect.bottom<0 || rect.left>vWidth || rect.top>vHeight)
+            return false;
+        return true;
+    }
+
+    // Taken from http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
+    function escapeRegExp(str) {
+        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+    }
+
+    function removeWildcardClass($targets, classes) {
+        if (classes.indexOf("*")===-1)
+            $targets.removeClass(classes);
+        else {
+            var matcher = classes.replace(/[\-\[\]{}()+?.,\\\^$|#\s]/g, "\\$&");
+            matcher = matcher.replace(/[*]/g, ".*");
+            matcher = new RegExp("^" + matcher + "$");
+            $targets.filter("[class]").each(function() {
+                var $this = $(this),
+                    classes = $this.attr("class").split(/\s+/),
+                    ok=[];
+                for (var i=0; i<classes.length; i++)
+                    if (!matcher.test(classes[i]))
+                        ok.push(classes[i]);
+                if (ok.length)
+                    $this.attr("class", ok.join(" "));
+                else
+                    $this.removeAttr("class");
+            });
+        }
+    }
+
+    var transitions = {
+        none: {hide: "hide", show: "show"},
+        fade: {hide: "fadeOut", show: "fadeIn"},
+        slide: {hide: "slideUp", show: "slideDown"}
+    };
+
+    function hideOrShow($slave, visible, options, pattern_name) {
+        var duration = (options.transition==="css" || options.transition==="none") ? null : options.effect.duration;
+
+        $slave.removeClass("visible hidden in-progress");
+        var onComplete = function() {
+            $slave
+                .removeClass("in-progress")
+                .addClass(visible ? "visible" : "hidden")
+                .trigger("pat-update",
+                        {pattern: pattern_name,
+                         transition: "complete"});
+        };
+        if (!duration) {
+            if (options.transition!=="css")
+                $slave[visible ? "show" : "hide"]();
+            onComplete();
+        } else {
+            var t = transitions[options.transition];
+            $slave
+                .addClass("in-progress")
+                .trigger("pat-update",
+                        {pattern: pattern_name,
+                         transition: "start"});
+            $slave[visible ? t.show : t.hide]({
+                duration: duration,
+                easing: options.effect.easing,
+                complete: onComplete
+            });
+        }
+    }
+
+    function addURLQueryParameter(fullURL, param, value) {
+        /* Using a positive lookahead (?=\=) to find the given parameter,
+         * preceded by a ? or &, and followed by a = with a value after
+         * than (using a non-greedy selector) and then followed by
+         * a & or the end of the string.
+         *
+         * Taken from http://stackoverflow.com/questions/7640270/adding-modify-query-string-get-variables-in-a-url-with-javascript
+         */
+        var val = new RegExp('(\\?|\\&)' + param + '=.*?(?=(&|$))'),
+            parts = fullURL.toString().split('#'),
+            url = parts[0],
+            hash = parts[1],
+            qstring = /\?.+$/,
+            newURL = url;
+        // Check if the parameter exists
+        if (val.test(url)) {
+            // if it does, replace it, using the captured group
+            // to determine & or ? at the beginning
+            newURL = url.replace(val, '$1' + param + '=' + value);
+        } else if (qstring.test(url)) {
+            // otherwise, if there is a query string at all
+            // add the param to the end of it
+            newURL = url + '&' + param + '=' + value;
+        } else {
+            // if there's no query string, add one
+            newURL = url + '?' + param + '=' + value;
+        }
+        if (hash) { newURL += '#' + hash; }
+        return newURL;
+    }
+
+    var utils = {
+        // pattern pimping - own module?
+        jqueryPlugin: jqueryPlugin,
+        debounce: debounce,
+        escapeRegExp: escapeRegExp,
+        isObject: isObject,
+        extend: extend,
+        rebaseURL: rebaseURL,
+        findLabel: findLabel,
+        elementInViewport: elementInViewport,
+        removeWildcardClass: removeWildcardClass,
+        hideOrShow: hideOrShow,
+        addURLQueryParameter: addURLQueryParameter
+    };
+    return utils;
+});
+
+define('pat-compat',[],function() {
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/every (JS 1.6)
+    if (!Array.prototype.every)
+    {
+        Array.prototype.every = function(fun /*, thisp */)
+        {
+            "use strict";
+
+            if (this === null)
+                throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof fun !== "function")
+                throw new TypeError();
+
+            var thisp = arguments[1];
+            for (var i = 0; i < len; i++)
+            {
+                if (i in t && !fun.call(thisp, t[i], i, t))
+                    return false;
+            }
+
+            return true;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/filter (JS 1.6)
+    if (!Array.prototype.filter) {
+        Array.prototype.filter = function(fun /*, thisp */) {
+            "use strict";
+
+            if (this === null)
+                throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof fun !== "function")
+                throw new TypeError();
+
+            var res = [];
+            var thisp = arguments[1];
+            for (var i = 0; i < len; i++)
+            {
+                if (i in t)
+                {
+                    var val = t[i]; // in case fun mutates this
+                    if (fun.call(thisp, val, i, t))
+                        res.push(val);
+                }
+            }
+
+            return res;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach (JS 1.6)
+    // Production steps of ECMA-262, Edition 5, 15.4.4.18
+    // Reference: http://es5.github.com/#x15.4.4.18
+    if ( !Array.prototype.forEach ) {
+
+        Array.prototype.forEach = function( callback, thisArg ) {
+
+            var T, k;
+
+            if ( this === null ) {
+                throw new TypeError( " this is null or not defined" );
+            }
+
+            // 1. Let O be the result of calling ToObject passing the |this| value as the argument.
+            var O = Object(this);
+
+            // 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
+            // 3. Let len be ToUint32(lenValue).
+            var len = O.length >>> 0; // Hack to convert O.length to a UInt32
+
+            // 4. If IsCallable(callback) is false, throw a TypeError exception.
+            // See: http://es5.github.com/#x9.11
+            if ( {}.toString.call(callback) !== "[object Function]" ) {
+                throw new TypeError( callback + " is not a function" );
+            }
+
+            // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
+            if ( thisArg ) {
+                T = thisArg;
+            }
+
+            // 6. Let k be 0
+            k = 0;
+
+            // 7. Repeat, while k < len
+            while( k < len ) {
+
+                var kValue;
+
+                // a. Let Pk be ToString(k).
+                //   This is implicit for LHS operands of the in operator
+                // b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
+                //   This step can be combined with c
+                // c. If kPresent is true, then
+                if ( k in O ) {
+
+                    // i. Let kValue be the result of calling the Get internal method of O with argument Pk.
+                    kValue = O[ k ];
+
+                    // ii. Call the Call internal method of callback with T as the this value and
+                    // argument list containing kValue, k, and O.
+                    callback.call( T, kValue, k, O );
+                }
+                // d. Increase k by 1.
+                k++;
+            }
+            // 8. return undefined
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf (JS 1.6)
+    if (!Array.prototype.indexOf) {
+        Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
+            "use strict";
+            if (this === null) {
+                throw new TypeError();
+            }
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (len === 0) {
+                return -1;
+            }
+            var n = 0;
+            if (arguments.length > 0) {
+                n = Number(arguments[1]);
+                if (n !== n) { // shortcut for verifying if it's NaN
+                    n = 0;
+                } else if (n !== 0 && n !== Infinity && n !== -Infinity) {
+                    n = (n > 0 || -1) * Math.floor(Math.abs(n));
+                }
+            }
+            if (n >= len) {
+                return -1;
+            }
+            var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
+            for (; k < len; k++) {
+                if (k in t && t[k] === searchElement) {
+                    return k;
+                }
+            }
+            return -1;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/lastIndexOf (JS 1.6)
+    if (!Array.prototype.lastIndexOf) {
+        Array.prototype.lastIndexOf = function(searchElement /*, fromIndex*/) {
+            "use strict";
+
+            if (this === null)
+                throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (len === 0)
+                return -1;
+
+            var n = len;
+            if (arguments.length > 1)
+            {
+                n = Number(arguments[1]);
+                if (n !== n)
+                    n = 0;
+                else if (n !== 0 && n !== (1 / 0) && n !== -(1 / 0))
+                    n = (n > 0 || -1) * Math.floor(Math.abs(n));
+            }
+
+            var k = n >= 0 ? Math.min(n, len - 1) : len - Math.abs(n);
+
+            for (; k >= 0; k--)
+            {
+                if (k in t && t[k] === searchElement)
+                    return k;
+            }
+            return -1;
+        };
+    }
+
+
+    // source: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/map (JS 1.6)
+    // Production steps of ECMA-262, Edition 5, 15.4.4.19
+    // Reference: http://es5.github.com/#x15.4.4.19
+    if (!Array.prototype.map) {
+        Array.prototype.map = function(callback, thisArg) {
+
+            var T, A, k;
+
+            if (this === null) {
+                throw new TypeError(" this is null or not defined");
+            }
+
+            // 1. Let O be the result of calling ToObject passing the |this| value as the argument.
+            var O = Object(this);
+
+            // 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
+            // 3. Let len be ToUint32(lenValue).
+            var len = O.length >>> 0;
+
+            // 4. If IsCallable(callback) is false, throw a TypeError exception.
+            // See: http://es5.github.com/#x9.11
+            if ({}.toString.call(callback) !== "[object Function]") {
+                throw new TypeError(callback + " is not a function");
+            }
+
+            // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
+            if (thisArg) {
+                T = thisArg;
+            }
+
+            // 6. Let A be a new array created as if by the expression new Array(len) where Array is
+            // the standard built-in constructor with that name and len is the value of len.
+            A = new Array(len);
+
+            // 7. Let k be 0
+            k = 0;
+
+            // 8. Repeat, while k < len
+            while(k < len) {
+
+                var kValue, mappedValue;
+
+                // a. Let Pk be ToString(k).
+                //   This is implicit for LHS operands of the in operator
+                // b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
+                //   This step can be combined with c
+                // c. If kPresent is true, then
+                if (k in O) {
+
+                    // i. Let kValue be the result of calling the Get internal method of O with argument Pk.
+                    kValue = O[ k ];
+
+                    // ii. Let mappedValue be the result of calling the Call internal method of callback
+                    // with T as the this value and argument list containing kValue, k, and O.
+                    mappedValue = callback.call(T, kValue, k, O);
+
+                    // iii. Call the DefineOwnProperty internal method of A with arguments
+                    // Pk, Property Descriptor {Value: mappedValue, Writable: true, Enumerable: true, Configurable: true},
+                    // and false.
+
+                    // In browsers that support Object.defineProperty, use the following:
+                    // Object.defineProperty(A, Pk, { value: mappedValue, writable: true, enumerable: true, configurable: true });
+
+                    // For best browser support, use the following:
+                    A[ k ] = mappedValue;
+                }
+                // d. Increase k by 1.
+                k++;
+            }
+
+            // 9. return A
+            return A;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/Reduce (JS 1.8)
+    if (!Array.prototype.reduce) {
+        Array.prototype.reduce = function reduce(accumulator){
+            if (this===null || this===undefined) throw new TypeError("Object is null or undefined");
+            var i = 0, l = this.length >> 0, curr;
+
+            if(typeof accumulator !== "function") // ES5 : "If IsCallable(callbackfn) is false, throw a TypeError exception."
+                throw new TypeError("First argument is not callable");
+
+            if(arguments.length < 2) {
+                if (l === 0) throw new TypeError("Array length is 0 and no second argument");
+                curr = this[0];
+                i = 1; // start accumulating at the second element
+            }
+            else
+                curr = arguments[1];
+
+            while (i < l) {
+                if(i in this) curr = accumulator.call(undefined, curr, this[i], i, this);
+                ++i;
+            }
+
+            return curr;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/ReduceRight (JS 1.8)
+    if (!Array.prototype.reduceRight)
+    {
+        Array.prototype.reduceRight = function(callbackfn /*, initialValue */)
+        {
+            "use strict";
+
+            if (this === null)
+                throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof callbackfn !== "function")
+                throw new TypeError();
+
+            // no value to return if no initial value, empty array
+            if (len === 0 && arguments.length === 1)
+                throw new TypeError();
+
+            var k = len - 1;
+            var accumulator;
+            if (arguments.length >= 2)
+            {
+                accumulator = arguments[1];
+            }
+            else
+            {
+                do
+                {
+                    if (k in this)
+                    {
+                        accumulator = this[k--];
+                        break;
+                    }
+
+                    // if array contains no values, no initial value to return
+                    if (--k < 0)
+                        throw new TypeError();
+                }
+                while (true);
+            }
+
+            while (k >= 0)
+            {
+                if (k in t)
+                    accumulator = callbackfn.call(undefined, accumulator, t[k], k, t);
+                k--;
+            }
+
+            return accumulator;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/some (JS 1.6)
+    if (!Array.prototype.some)
+    {
+        Array.prototype.some = function(fun /*, thisp */)
+        {
+            "use strict";
+
+            if (this === null)
+                throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof fun !== "function")
+                throw new TypeError();
+
+            var thisp = arguments[1];
+            for (var i = 0; i < len; i++)
+            {
+                if (i in t && fun.call(thisp, t[i], i, t))
+                    return true;
+            }
+
+            return false;
+        };
+    }
+
+
+    // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/isArray (JS 1.8.5)
+    if (!Array.isArray) {
+        Array.isArray = function (arg) {
+            return Object.prototype.toString.call(arg) === "[object Array]";
+        };
+    }
+
+    // source: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/Trim (JS 1.8.1)
+    if (!String.prototype.trim) {
+        String.prototype.trim = function () {
+            return this.replace(/^\s+|\s+$/g, "");
+        };
+    }
+
+    // source: https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/bind
+    if (!Function.prototype.bind) {
+        Function.prototype.bind = function (oThis) {
+            if (typeof this !== "function") {
+                // closest thing possible to the ECMAScript 5 internal IsCallable function
+                throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+            }
+
+            var aArgs = Array.prototype.slice.call(arguments, 1),
+                fToBind = this,
+                fNOP = function () {},
+                fBound = function () {
+                    return fToBind.apply(this instanceof fNOP &&
+                            oThis ? this : oThis,
+                            aArgs.concat(Array.prototype.slice.call(arguments)));
+                };
+            fNOP.prototype = this.prototype;
+            fBound.prototype = new fNOP();
+
+            return fBound;
+        };
+    }
+
+    // https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/keys
+    if (!Object.keys) {
+        Object.keys = (function () {
+            var _hasOwnProperty = Object.prototype.hasOwnProperty,
+            hasDontEnumBug = !({toString: null}).propertyIsEnumerable("toString"),
+            dontEnums = [
+            "toString",
+            "toLocaleString",
+            "valueOf",
+            "hasOwnProperty",
+            "isPrototypeOf",
+            "propertyIsEnumerable",
+            "constructor"
+            ],
+            dontEnumsLength = dontEnums.length;
+
+            return function (obj) {
+                if (typeof obj !== "object" && typeof obj !== "function" || obj === null)
+                    throw new TypeError("Object.keys called on non-object");
+
+                var result = [];
+                for (var prop in obj)
+                    if (_hasOwnProperty.call(obj, prop))
+                        result.push(prop);
+
+                if (hasDontEnumBug)
+                    for (var i=0; i < dontEnumsLength; i++)
+                        if (_hasOwnProperty.call(obj, dontEnums[i]))
+                            result.push(dontEnums[i]);
+                return result;
+            };
+        })();
+    }
+});
+
+/**
+ * @license
+ * Patterns @VERSION@ jquery-ext - various jQuery extensions
+ *
+ * Copyright 2011 Humberto Sermeño
+ */
+define('pat-jquery-ext',["jquery"], function($) {
+    var methods = {
+        init: function( options ) {
+            var settings = {
+                time: 3, /* time it will wait before moving to "timeout" after a move event */
+                initialTime: 8, /* time it will wait before first adding the "timeout" class */
+                exceptionAreas: [] /* IDs of elements that, if the mouse is over them, will reset the timer */
+            };
+            return this.each(function() {
+                var $this = $(this),
+                    data = $this.data("timeout");
+
+                if (!data) {
+                    if ( options ) {
+                        $.extend( settings, options );
+                    }
+                    $this.data("timeout", {
+                        "lastEvent": new Date(),
+                        "trueTime": settings.time,
+                        "time": settings.initialTime,
+                        "untouched": true,
+                        "inExceptionArea": false
+                    });
+
+                    $this.bind( "mouseover.timeout", methods.mouseMoved );
+                    $this.bind( "mouseenter.timeout", methods.mouseMoved );
+
+                    $(settings.exceptionAreas).each(function() {
+                        $this.find(this)
+                            .live( "mouseover.timeout", {"parent":$this}, methods.enteredException )
+                            .live( "mouseleave.timeout", {"parent":$this}, methods.leftException );
+                    });
+
+                    if (settings.initialTime > 0)
+                        $this.timeout("startTimer");
+                    else
+                        $this.addClass("timeout");
+                }
+            });
+        },
+
+        enteredException: function(event) {
+            var data = event.data.parent.data("timeout");
+            data.inExceptionArea = true;
+            event.data.parent.data("timeout", data);
+            event.data.parent.trigger("mouseover");
+        },
+
+        leftException: function(event) {
+            var data = event.data.parent.data("timeout");
+            data.inExceptionArea = false;
+            event.data.parent.data("timeout", data);
+        },
+
+        destroy: function() {
+            return this.each( function() {
+                var $this = $(this),
+                    data = $this.data("timeout");
+
+                $(window).unbind(".timeout");
+                data.timeout.remove();
+                $this.removeData("timeout");
+            });
+        },
+
+        mouseMoved: function() {
+            var $this = $(this), data = $this.data("timeout");
+
+            if ($this.hasClass("timeout")) {
+                $this.removeClass("timeout");
+                $this.timeout("startTimer");
+            } else if ( data.untouched ) {
+                data.untouched = false;
+                data.time = data.trueTime;
+            }
+
+            data.lastEvent = new Date();
+            $this.data("timeout", data);
+        },
+
+        startTimer: function() {
+            var $this = $(this), data = $this.data("timeout");
+            var fn = function(){
+                var data = $this.data("timeout");
+                if ( data && data.lastEvent ) {
+                    if ( data.inExceptionArea ) {
+                        setTimeout( fn, Math.floor( data.time*1000 ) );
+                    } else {
+                        var now = new Date();
+                        var diff = Math.floor(data.time*1000) - ( now - data.lastEvent );
+                        if ( diff > 0 ) {
+                            // the timeout has not ocurred, so set the timeout again
+                            setTimeout( fn, diff+100 );
+                        } else {
+                            // timeout ocurred, so set the class
+                            $this.addClass("timeout");
+                        }
+                    }
+                }
+            };
+
+            setTimeout( fn, Math.floor( data.time*1000 ) );
+        }
+    };
+
+    $.fn.timeout = function( method ) {
+        if ( methods[method] ) {
+            return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
+        } else if ( typeof method === "object" || !method ) {
+            return methods.init.apply( this, arguments );
+        } else {
+            $.error( "Method " + method + " does not exist on jQuery.timeout" );
+        }
+    };
+
+    // Custom jQuery selector to find elements with scrollbars
+    $.extend($.expr[":"], {
+        scrollable: function(element) {
+            var vertically_scrollable, horizontally_scrollable;
+            if ($(element).css("overflow") === "scroll" ||
+                $(element).css("overflowX") === "scroll" ||
+                $(element).css("overflowY") === "scroll")
+                return true;
+
+            vertically_scrollable = (element.clientHeight < element.scrollHeight) && (
+                $.inArray($(element).css("overflowY"), ["scroll", "auto"]) !== -1 || $.inArray($(element).css("overflow"), ["scroll", "auto"]) !== -1);
+
+            if (vertically_scrollable)
+                return true;
+
+            horizontally_scrollable = (element.clientWidth < element.scrollWidth) && (
+                $.inArray($(element).css("overflowX"), ["scroll", "auto"]) !== -1 || $.inArray($(element).css("overflow"), ["scroll", "auto"]) !== -1);
+            return horizontally_scrollable;
+        }
+    });
+
+    // Make Visible in scroll
+    $.fn.makeVisibleInScroll = function( parent_id ) {
+        var absoluteParent = null;
+        if ( typeof parent_id === "string" ) {
+            absoluteParent = $("#" + parent_id);
+        } else if ( parent_id ) {
+            absoluteParent = $(parent_id);
+        }
+
+        return this.each(function() {
+            var $this = $(this), parent;
+            if (!absoluteParent) {
+                parent = $this.parents(":scrollable");
+                if (parent.length > 0) {
+                    parent = $(parent[0]);
+                } else {
+                    parent = $(window);
+                }
+            } else {
+                parent = absoluteParent;
+            }
+
+            var elemTop = $this.position().top;
+            var elemBottom = $this.height() + elemTop;
+
+            var viewTop = parent.scrollTop();
+            var viewBottom = parent.height() + viewTop;
+
+            if (elemTop < viewTop) {
+                parent.scrollTop(elemTop);
+            } else if ( elemBottom > viewBottom - parent.height()/2 ) {
+                parent.scrollTop( elemTop - (parent.height() - $this.height())/2 );
+            }
+        });
+    };
+
+    //Make absolute location
+    $.fn.setPositionAbsolute = function(element,offsettop,offsetleft) {
+        return this.each(function() {
+            // set absolute location for based on the element passed
+            // dynamically since every browser has different settings
+            var $this = $(this);
+            var thiswidth = $(this).width();
+            var    pos   = element.offset();
+            var    width = element.width();
+            var    height = element.height();
+            var setleft = (pos.left + width - thiswidth + offsetleft);
+            var settop = (pos.top + height + offsettop);
+            $this.css({ "z-index" : 1, "position": "absolute", "marginLeft": 0, "marginTop": 0, "left": setleft + "px", "top":settop + "px" ,"width":thiswidth});
+            $this.remove().appendTo("body").show();
+        });
+    };
+
+    $.fn.positionAncestor = function(selector) {
+        var left = 0;
+        var top = 0;
+        this.each(function() {
+            // check if current element has an ancestor matching a selector
+            // and that ancestor is positioned
+            var $ancestor = $(this).closest(selector);
+            if ($ancestor.length && $ancestor.css("position") !== "static") {
+                var $child = $(this);
+                var childMarginEdgeLeft = $child.offset().left - parseInt($child.css("marginLeft"), 10);
+                var childMarginEdgeTop = $child.offset().top - parseInt($child.css("marginTop"), 10);
+                var ancestorPaddingEdgeLeft = $ancestor.offset().left + parseInt($ancestor.css("borderLeftWidth"), 10);
+                var ancestorPaddingEdgeTop = $ancestor.offset().top + parseInt($ancestor.css("borderTopWidth"), 10);
+                left = childMarginEdgeLeft - ancestorPaddingEdgeLeft;
+                top = childMarginEdgeTop - ancestorPaddingEdgeTop;
+                // we have found the ancestor and computed the position
+                // stop iterating
+                return false;
+            }
+        });
+        return {
+            left:    left,
+            top:    top
+        };
+    };
+
+
+    // XXX: In compat.js we include things for browser compatibility,
+    // but these two seem to be only convenience. Do we really want to
+    // include these as part of patterns?
+    String.prototype.startsWith = function(str) { return (this.match("^"+str) !== null); };
+    String.prototype.endsWith = function(str) { return (this.match(str+"$") !== null); };
+
+
+    /******************************
+
+     Simple Placeholder
+
+     ******************************/
+
+    $.simplePlaceholder = {
+        placeholder_class: null,
+
+        hide_placeholder: function(){
+            var $this = $(this);
+            if($this.val() === $this.attr("placeholder")){
+                $this.val("").removeClass($.simplePlaceholder.placeholder_class);
+            }
+        },
+
+        show_placeholder: function(){
+            var $this = $(this);
+            if($this.val() === ""){
+                $this.val($this.attr("placeholder")).addClass($.simplePlaceholder.placeholder_class);
+            }
+        },
+
+        prevent_placeholder_submit: function(){
+            $(this).find(".simple-placeholder").each(function() {
+                var $this = $(this);
+                if ($this.val() === $this.attr("placeholder")){
+                    $this.val("");
+                }
+            });
+            return true;
+        }
+    };
+
+    $.fn.simplePlaceholder = function(options) {
+        if(document.createElement("input").placeholder === undefined){
+            var config = {
+                placeholder_class : "placeholding"
+            };
+
+            if(options) $.extend(config, options);
+            $.simplePlaceholder.placeholder_class = config.placeholder_class;
+
+            this.each(function() {
+                var $this = $(this);
+                $this.focus($.simplePlaceholder.hide_placeholder);
+                $this.blur($.simplePlaceholder.show_placeholder);
+                if($this.val() === "") {
+                    $this.val($this.attr("placeholder"));
+                    $this.addClass($.simplePlaceholder.placeholder_class);
+                }
+                $this.addClass("simple-placeholder");
+                $(this.form).submit($.simplePlaceholder.prevent_placeholder_submit);
+            });
+        }
+
+        return this;
+    };
+
+    $.fn.findInclusive = function(selector) {
+        return this.find('*').addBack().filter(selector);
+    };
+
+    $.fn.slideIn = function(speed, easing, callback) {
+        return this.animate({width: "show"}, speed, easing, callback);
+    };
+
+    $.fn.slideOut = function(speed, easing, callback) {
+        return this.animate({width: "hide"}, speed, easing, callback);
+    };
+
+    // case-insensitive :contains
+    $.expr[":"].Contains = function(a, i, m) {
+        return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+    };
+
+    $.fn.scopedFind = function (selector) {
+        /*  If the selector starts with an object id do a global search,
+         *  otherwise do a local search.
+         */
+        if (selector.startsWith('#')) {
+            return $(selector);
+        } else {
+            return this.find(selector);
+        }
+    };
+});
+
+/**
+ * Patterns registry - Central registry and scan logic for patterns
+ *
+ * Copyright 2012-2013 Simplon B.V.
+ * Copyright 2012-2013 Florian Friesdorf
+ * Copyright 2013 Marko Durkovic
+ * Copyright 2013 Rok Garbas
+ * Copyright 2014-2015 Syslab.com GmBH, JC Brand
+ */
+
+/*
+ * changes to previous patterns.register/scan mechanism
+ * - if you want initialised class, do it in init
+ * - init returns set of elements actually initialised
+ * - handle once within init
+ * - no turnstile anymore
+ * - set pattern.jquery_plugin if you want it
+ */
+define('pat-registry',[
+    "jquery",
+    "underscore",
+    "pat-logger",
+    "pat-utils",
+    // below here modules that are only loaded
+    "pat-compat",
+    "pat-jquery-ext"
+], function($, _, logger, utils) {
+    var TEXT_NODE = 3;
+    var COMMENT_NODE = 8;
+    var log = logger.getLogger("registry");
+
+    var disable_re = /patterns-disable=([^&]+)/g,
+        dont_catch_re = /patterns-dont-catch/g,
+        dont_catch = false,
+        disabled = {}, match;
+
+    while ((match=disable_re.exec(window.location.search)) !== null) {
+        disabled[match[1]] = true;
+        log.info("Pattern disabled via url config:", match[1]);
+    }
+
+    while ((match=dont_catch_re.exec(window.location.search)) !== null) {
+        dont_catch = true;
+        log.info("I will not catch init exceptions");
+    }
+
+    var registry = {
+        patterns: {},
+        // as long as the registry is not initialized, pattern
+        // registration just registers a pattern. Once init is called,
+        // the DOM is scanned. After that registering a new pattern
+        // results in rescanning the DOM only for this pattern.
+        initialized: false,
+        init: function registry_init() {
+            $(document).ready(function() {
+                log.info("loaded: " + Object.keys(registry.patterns).sort().join(", "));
+                registry.scan(document.body);
+                registry.initialized = true;
+                log.info("finished initial scan.");
+            });
+        },
+
+        clear: function clearRegistry() {
+            // Removes all patterns from the registry. Currently only being
+            // used in tests.
+            this.patterns = {};
+        },
+
+        transformPattern: function(name, content) {
+            /* Call the transform method on the pattern with the given name, if
+             * it exists.
+             */
+            if (disabled[name]) {
+                log.debug("Skipping disabled pattern:", name);
+                return;
+            }
+            var pattern = registry.patterns[name];
+            if (pattern.transform) {
+                try {
+                    pattern.transform($(content));
+                } catch (e) {
+                    if (dont_catch) { throw(e); }
+                    log.error("Transform error for pattern" + name, e);
+                }
+            }
+        },
+
+        initPattern: function(name, el, trigger) {
+            /* Initialize the pattern with the provided name and in the context
+             * of the passed in DOM element.
+             */
+            var $el = $(el);
+            var pattern = registry.patterns[name];
+            if (pattern.init) {
+                plog = logger.getLogger("pat." + name);
+                if ($el.is(pattern.trigger)) {
+                    plog.debug("Initialising:", $el);
+                    try {
+                        pattern.init($el, null, trigger);
+                        plog.debug("done.");
+                    } catch (e) {
+                        if (dont_catch) { throw(e); }
+                        plog.error("Caught error:", e);
+                    }
+                }
+            }
+        },
+
+        orderPatterns: function (patterns) {
+            // XXX: Bit of a hack. We need the validation pattern to be
+            // parsed and initiated before the inject pattern. So we make
+            // sure here, that it appears first. Not sure what would be
+            // the best solution. Perhaps some kind of way to register
+            // patterns "before" or "after" other patterns.
+            if (_.contains(patterns, "validation") && _.contains(patterns, "inject")) {
+                patterns.splice(patterns.indexOf("validation"), 1);
+                patterns.unshift("validation");
+            }
+            return patterns;
+        },
+
+        scan: function registryScan(content, patterns, trigger) {
+            var selectors = [], $match, plog;
+            patterns = this.orderPatterns(patterns || Object.keys(registry.patterns));
+            patterns.forEach(_.partial(this.transformPattern, _, content));
+            patterns = _.each(patterns, function (name) {
+                var pattern = registry.patterns[name];
+                if (pattern.trigger) {
+                    selectors.unshift(pattern.trigger);
+                }
+            });
+            $match = $(content).findInclusive(selectors.join(",")); // Find all DOM elements belonging to a pattern
+            $match = $match.filter(function() { return $(this).parents("pre").length === 0; });
+            $match = $match.filter(":not(.cant-touch-this)");
+
+            // walk list backwards and initialize patterns inside-out.
+            $match.toArray().reduceRight(function registryInitPattern(acc, el) {
+                patterns.forEach(_.partial(this.initPattern, _, el, trigger));
+            }.bind(this), null);
+            $("body").addClass("patterns-loaded");
+        },
+
+        register: function registry_register(pattern, name) {
+            var plugin_name, jquery_plugin;
+            name = name || pattern.name;
+            if (!name) {
+                log.error("Pattern lacks a name:", pattern);
+                return false;
+            }
+            if (registry.patterns[name]) {
+                log.error("Already have a pattern called: " + name);
+                return false;
+            }
+
+            // register pattern to be used for scanning new content
+            registry.patterns[name] = pattern;
+
+            // register pattern as jquery plugin
+            if (pattern.jquery_plugin) {
+                plugin_name = ("pat-" + name)
+                        .replace(/-([a-zA-Z])/g, function(match, p1) {
+                            return p1.toUpperCase();
+                        });
+                $.fn[plugin_name] = utils.jqueryPlugin(pattern);
+                // BBB 2012-12-10 and also for Mockup patterns.
+                $.fn[plugin_name.replace(/^pat/, "pattern")] = $.fn[plugin_name];
+            }
+            log.debug("Registered pattern:", name, pattern);
+            if (registry.initialized) {
+                registry.scan(document.body, [name]);
+            }
+            return true;
+        }
+    };
+
+    $(document).on("patterns-injected.patterns",
+        function registry_onInject(ev, config, trigger_el, injected_el) {
+            if (injected_el.nodeType !== TEXT_NODE && injected_el !== COMMENT_NODE) {
+                registry.scan(injected_el, null, {type: "injection", element: trigger_el});
+                $(injected_el).trigger("patterns-injected-scanned");
+            }
+        }
+    );
+    return registry;
+});
+// jshint indent: 4, browser: true, jquery: true, quotmark: double
+// vim: sw=4 expandtab
+;
+/*!
+ * jQuery Browser Plugin 0.0.8
+ * https://github.com/gabceb/jquery-browser-plugin
+ *
+ * Original jquery-browser code Copyright 2005, 2015 jQuery Foundation, Inc. and other contributors
+ * http://jquery.org/license
+ *
+ * Modifications Copyright 2015 Gabriel Cebrian
+ * https://github.com/gabceb
+ *
+ * Released under the MIT license
+ *
+ * Date: 05-07-2015
+ */
+/*global window: false */
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define('jquery.browser',['jquery'], function ($) {
+      return factory($);
+    });
+  } else if (typeof module === 'object' && typeof module.exports === 'object') {
+    // Node-like environment
+    module.exports = factory(require('jquery'));
+  } else {
+    // Browser globals
+    factory(window.jQuery);
+  }
+}(function(jQuery) {
+  "use strict";
+
+  function uaMatch( ua ) {
+    // If an UA is not provided, default to the current browser UA.
+    if ( ua === undefined ) {
+      ua = window.navigator.userAgent;
+    }
+    ua = ua.toLowerCase();
+
+    var match = /(edge)\/([\w.]+)/.exec( ua ) ||
+        /(opr)[\/]([\w.]+)/.exec( ua ) ||
+        /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+        /(version)(applewebkit)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
+        /(webkit)[ \/]([\w.]+).*(version)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
+        /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
+        /(msie) ([\w.]+)/.exec( ua ) ||
+        ua.indexOf("trident") >= 0 && /(rv)(?::| )([\w.]+)/.exec( ua ) ||
+        ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
+        [];
+
+    var platform_match = /(ipad)/.exec( ua ) ||
+        /(ipod)/.exec( ua ) ||
+        /(iphone)/.exec( ua ) ||
+        /(kindle)/.exec( ua ) ||
+        /(silk)/.exec( ua ) ||
+        /(android)/.exec( ua ) ||
+        /(windows phone)/.exec( ua ) ||
+        /(win)/.exec( ua ) ||
+        /(mac)/.exec( ua ) ||
+        /(linux)/.exec( ua ) ||
+        /(cros)/.exec( ua ) ||
+        /(playbook)/.exec( ua ) ||
+        /(bb)/.exec( ua ) ||
+        /(blackberry)/.exec( ua ) ||
+        [];
+
+    var browser = {},
+        matched = {
+          browser: match[ 5 ] || match[ 3 ] || match[ 1 ] || "",
+          version: match[ 2 ] || match[ 4 ] || "0",
+          versionNumber: match[ 4 ] || match[ 2 ] || "0",
+          platform: platform_match[ 0 ] || ""
+        };
+
+    if ( matched.browser ) {
+      browser[ matched.browser ] = true;
+      browser.version = matched.version;
+      browser.versionNumber = parseInt(matched.versionNumber, 10);
+    }
+
+    if ( matched.platform ) {
+      browser[ matched.platform ] = true;
+    }
+
+    // These are all considered mobile platforms, meaning they run a mobile browser
+    if ( browser.android || browser.bb || browser.blackberry || browser.ipad || browser.iphone ||
+      browser.ipod || browser.kindle || browser.playbook || browser.silk || browser[ "windows phone" ]) {
+      browser.mobile = true;
+    }
+
+    // These are all considered desktop platforms, meaning they run a desktop browser
+    if ( browser.cros || browser.mac || browser.linux || browser.win ) {
+      browser.desktop = true;
+    }
+
+    // Chrome, Opera 15+ and Safari are webkit based browsers
+    if ( browser.chrome || browser.opr || browser.safari ) {
+      browser.webkit = true;
+    }
+
+    // IE11 has a new token so we will assign it msie to avoid breaking changes
+    // IE12 disguises itself as Chrome, but adds a new Edge token.
+    if ( browser.rv || browser.edge ) {
+      var ie = "msie";
+
+      matched.browser = ie;
+      browser[ie] = true;
+    }
+
+    // Blackberry browsers are marked as Safari on BlackBerry
+    if ( browser.safari && browser.blackberry ) {
+      var blackberry = "blackberry";
+
+      matched.browser = blackberry;
+      browser[blackberry] = true;
+    }
+
+    // Playbook browsers are marked as Safari on Playbook
+    if ( browser.safari && browser.playbook ) {
+      var playbook = "playbook";
+
+      matched.browser = playbook;
+      browser[playbook] = true;
+    }
+
+    // BB10 is a newer OS version of BlackBerry
+    if ( browser.bb ) {
+      var bb = "blackberry";
+
+      matched.browser = bb;
+      browser[bb] = true;
+    }
+
+    // Opera 15+ are identified as opr
+    if ( browser.opr ) {
+      var opera = "opera";
+
+      matched.browser = opera;
+      browser[opera] = true;
+    }
+
+    // Stock Android browsers are marked as Safari on Android.
+    if ( browser.safari && browser.android ) {
+      var android = "android";
+
+      matched.browser = android;
+      browser[android] = true;
+    }
+
+    // Kindle browsers are marked as Safari on Kindle
+    if ( browser.safari && browser.kindle ) {
+      var kindle = "kindle";
+
+      matched.browser = kindle;
+      browser[kindle] = true;
+    }
+
+     // Kindle Silk browsers are marked as Safari on Kindle
+    if ( browser.safari && browser.silk ) {
+      var silk = "silk";
+
+      matched.browser = silk;
+      browser[silk] = true;
+    }
+
+    // Assign the name and platform variable
+    browser.name = matched.browser;
+    browser.platform = matched.platform;
+    return browser;
+  }
+
+  // Run the matching process, also assign the function to the returned object
+  // for manual, jQuery-free use if desired
+  window.jQBrowser = uaMatch( window.navigator.userAgent );
+  window.jQBrowser.uaMatch = uaMatch;
+
+  // Only assign to jQuery.browser if jQuery is loaded
+  if ( jQuery ) {
+    jQuery.browser = window.jQBrowser;
+  }
+
+  return window.jQBrowser;
+}));
 
 /**
  * Patterns parser - Argument parser
@@ -41928,1879 +42008,1289 @@ define('pat-url',[],function() {
     };
 });
 
-/*
- * Parsley.js allows you to verify your form inputs frontend side, without writing a line of javascript. Or so..
- *
- * Author: Guillaume Potier - @guillaumepotier
-*/
+//     Validate.js 0.7.1
 
-!function ($) {
+//     (c) 2013-2015 Nicklas Ansman, 2013 Wrapp
+//     Validate.js may be freely distributed under the MIT license.
+//     For all details and documentation:
+//     http://validatejs.org/
 
-  'use strict';
+(function(exports, module, define) {
+  "use strict";
 
-  /**
-  * Validator class stores all constraints functions and associated messages.
-  * Provides public interface to add, remove or modify them
-  *
-  * @class Validator
-  * @constructor
-  */
-  var Validator = function ( options ) {
-    /**
-    * Error messages
-    *
-    * @property messages
-    * @type {Object}
-    */
-    this.messages = {
-        defaultMessage: "This value seems to be invalid."
-      , type: {
-            email:      "This value should be a valid email."
-          , url:        "This value should be a valid url."
-          , urlstrict:  "This value should be a valid url."
-          , number:     "This value should be a valid number."
-          , digits:     "This value should be digits."
-          , dateIso:    "This value should be a valid date (YYYY-MM-DD)."
-          , alphanum:   "This value should be alphanumeric."
-          , phone:      "This value should be a valid phone number."
+  // The main function that calls the validators specified by the constraints.
+  // The options are the following:
+  //   - format (string) - An option that controls how the returned value is formatted
+  //     * flat - Returns a flat array of just the error messages
+  //     * grouped - Returns the messages grouped by attribute (default)
+  //     * detailed - Returns an array of the raw validation data
+  //   - fullMessages (boolean) - If `true` (default) the attribute name is prepended to the error.
+  //
+  // Please note that the options are also passed to each validator.
+  var validate = function(attributes, constraints, options) {
+    options = v.extend({}, v.options, options);
+
+    var results = v.runValidations(attributes, constraints, options)
+      , attr
+      , validator;
+
+    for (attr in results) {
+      for (validator in results[attr]) {
+        if (v.isPromise(results[attr][validator])) {
+          throw new Error("Use validate.async if you want support for promises");
         }
-      , notnull:        "This value should not be null."
-      , notblank:       "This value should not be blank."
-      , required:       "This value is required."
-      , regexp:         "This value seems to be invalid."
-      , min:            "This value should be greater than or equal to %s."
-      , max:            "This value should be lower than or equal to %s."
-      , range:          "This value should be between %s and %s."
-      , minlength:      "This value is too short. It should have %s characters or more."
-      , maxlength:      "This value is too long. It should have %s characters or less."
-      , rangelength:    "This value length is invalid. It should be between %s and %s characters long."
-      , mincheck:       "You must select at least %s choices."
-      , maxcheck:       "You must select %s choices or less."
-      , rangecheck:     "You must select between %s and %s choices."
-      , equalto:        "This value should be the same."
-    },
-
-    this.init( options );
+      }
+    }
+    return validate.processValidationResults(results, options);
   };
 
-  Validator.prototype = {
-
-    constructor: Validator
-
-    /**
-    * Validator list. Built-in validators functions
-    *
-    * @property validators
-    * @type {Object}
-    */
-    , validators: {
-      notnull: function () {
-        return {
-          validate: function ( val ) {
-            return val.length > 0;
-          }
-          , priority: 2
-        }
-      }
-      , notblank: function () {
-        return {
-          validate: function ( val ) {
-            return 'string' === typeof val && '' !== val.replace( /^\s+/g, '' ).replace( /\s+$/g, '' );
-          }
-          , priority: 2
-        }
-      }
-      , required: function () {
-        var that = this;
-        return {
-          validate: function ( val ) {
-            // for checkboxes and select multiples. Check there is at least one required value
-            if ( 'object' === typeof val ) {
-              for ( var i in val ) {
-                if ( that.required().validate( val[ i ] ) ) {
-                  return true;
-                }
-              }
-
-              return false;
-            }
-
-            return that.notnull().validate( val ) && that.notblank().validate( val );
-          }
-          , priority: 512
-        }
-      }
-      , type: function () {
-        return {
-          validate: function ( val, type ) {
-            var regExp;
-
-            switch ( type ) {
-              case 'number':
-                regExp = /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/;
-                break;
-              case 'digits':
-                regExp = /^\d+$/;
-                break;
-              case 'alphanum':
-                regExp = /^\w+$/;
-                break;
-              case 'email':
-                regExp = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))){2,6}$/i;
-                break;
-              case 'url':
-                val = new RegExp( '(https?|s?ftp|git)', 'i' ).test( val ) ? val : 'http://' + val;
-                /* falls through */
-              case 'urlstrict':
-                regExp = /^(https?|s?ftp|git):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
-                break;
-              case 'dateIso':
-                regExp = /^(\d{4})\D?(0[1-9]|1[0-2])\D?([12]\d|0[1-9]|3[01])$/;
-                break;
-              case 'phone':
-                regExp = /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$/;
-                break;
-              default:
-                return false;
-            }
-
-            // test regExp if not null
-            return '' !== val ? regExp.test( val ) : false;
-          }
-          , priority: 256
-        }
-      }
-      , regexp: function () {
-        return {
-          validate: function ( val, regExp, self ) {
-            return new RegExp( regExp, self.options.regexpFlag || '' ).test( val );
-          }
-          , priority: 64
-        }
-      }
-      , minlength: function () {
-        return {
-          validate: function ( val, min ) {
-            return val.length >= min;
-          }
-          , priority: 32
-        }
-      }
-      , maxlength: function () {
-        return {
-          validate: function ( val, max ) {
-            return val.length <= max;
-          }
-          , priority: 32
-        }
-      }
-      , rangelength: function () {
-        var that = this;
-        return {
-          validate: function ( val, arrayRange ) {
-            return that.minlength().validate( val, arrayRange[ 0 ] ) && that.maxlength().validate( val, arrayRange[ 1 ] );
-          }
-          , priority: 32
-        }
-      }
-      , min: function () {
-        return {
-          validate: function ( val, min ) {
-            return Number( val ) >= min;
-          }
-          , priority: 32
-        }
-      }
-      , max: function () {
-        return {
-          validate: function ( val, max ) {
-            return Number( val ) <= max;
-          }
-          , priority: 32
-        }
-      }
-      , range: function () {
-        var that = this;
-        return {
-          validate: function ( val, arrayRange ) {
-            return that.min().validate( val, arrayRange[ 0 ] ) && that.max().validate( val, arrayRange[ 1 ] );
-          }
-          , priority: 32
-        }
-      }
-      , equalto: function () {
-        return {
-          validate: function ( val, elem, self ) {
-            self.options.validateIfUnchanged = true;
-            return val === $( elem ).val();
-          }
-          , priority: 64
-        }
-      }
-      , remote: function () {
-        return {
-          validate: function ( val, url, self ) {
-            var result = null
-              , data = {}
-              , dataType = {};
-
-            data[ self.$element.attr( 'name' ) ] = val;
-
-            if ( 'undefined' !== typeof self.options.remoteDatatype )
-              dataType = { dataType: self.options.remoteDatatype };
-
-            var manage = function ( isConstraintValid, message ) {
-              // remove error message if we got a server message, different from previous message
-              if ( 'undefined' !== typeof message && 'undefined' !== typeof self.Validator.messages.remote && message !== self.Validator.messages.remote ) {
-                $( self.UI.ulError + ' .remote' ).remove();
-              }
-
-              if (false === isConstraintValid) {
-                  self.options.listeners.onFieldError( self.element, self.constraints, self );
-              } else if (true === isConstraintValid && false === self.options.listeners.onFieldSuccess( self.element, self.constraints, self )) {
-                  // if onFieldSuccess returns (bool) false, consider that field is invalid
-                  isConstraintValid = false;
-              }
-
-              self.updtConstraint( { name: 'remote', valid: isConstraintValid }, message );
-              self.manageValidationResult();
-            };
-
-            // transform string response into object
-            var handleResponse = function ( response ) {
-              if ( 'object' === typeof response ) {
-                return response;
-              }
-
-              try {
-                response = $.parseJSON( response );
-              } catch ( err ) {}
-
-              return response;
-            }
-
-            var manageErrorMessage = function ( response ) {
-              return 'object' === typeof response && null !== response ? ( 'undefined' !== typeof response.error ? response.error : ( 'undefined' !== typeof response.message ? response.message : null ) ) : null;
-            }
-
-            $.ajax( $.extend( {}, {
-                url: url
-              , data: data
-              , type: self.options.remoteMethod || 'GET'
-              , success: function ( response ) {
-                response = handleResponse( response );
-                manage( 1 === response || true === response || ( 'object' === typeof response && null !== response && 'undefined' !== typeof response.success ), manageErrorMessage( response )
-                );
-              }
-              , error: function ( response ) {
-                response = handleResponse( response );
-                manage( false, manageErrorMessage( response ) );
-              }
-            }, dataType ) );
-
-            return result;
-          }
-          , priority: 64
-        }
-      }
-
-      /**
-      * Aliases for checkboxes constraints
-      */
-      , mincheck: function () {
-        var that = this;
-        return {
-          validate: function ( obj, val ) { return that.minlength().validate( obj, val ) }
-          , priority: 32
-        }
-      }
-      , maxcheck: function () {
-        var that = this;
-        return {
-          validate: function ( obj, val ) { return that.maxlength().validate( obj, val ) }
-          , priority: 32
-        }
-      }
-      , rangecheck: function () {
-        var that = this;
-        return {
-          validate: function ( obj, arrayRange ) { return that.rangelength().validate( obj, arrayRange ) }
-          , priority: 32
-        }
-      }
-    }
-
-    /*
-    * Register custom validators and messages
-    */
-    , init: function ( options ) {
-      var customValidators = options.validators
-        , customMessages = options.messages
-        , key;
-
-      for ( key in customValidators ) {
-        this.addValidator(key, customValidators[ key ]);
-      }
-
-      for ( key in customMessages ) {
-        this.addMessage(key, customMessages[ key ]);
-      }
-    }
-
-    /**
-    * Replace %s placeholders by values
-    *
-    * @method formatMesssage
-    * @param {String} message Message key
-    * @param {Mixed} args Args passed by validators functions. Could be string, number or object
-    * @return {String} Formatted string
-    */
-    , formatMesssage: function ( message, args ) {
-
-      if ( 'object' === typeof args ) {
-        for ( var i in args ) {
-          message = this.formatMesssage( message, args[ i ] );
-        }
-
-        return message;
-      }
-
-      return 'string' === typeof message ? message.replace( new RegExp( '%s', 'i' ), args ) : '';
-    }
-
-    /**
-    * Add / override a validator in validators list
-    *
-    * @method addValidator
-    * @param {String} name Validator name.
-    * @param {Function} fn Validator. Must return { validator: fn(), priority: int }
-    */
-    , addValidator: function ( name, fn ) {
-      if ('undefined' === typeof fn().validate) {
-        throw new Error( 'Validator `' + name + '` must have a validate method. See more here: http://parsleyjs.org/documentation.html#javascript-general' );
-      }
-
-      // add default prioirty if not given.
-      if ('undefined' === typeof fn().priority) {
-        fn = {
-            validate: fn().validate
-          , priority: 32
-        };
-
-        // Warn if possible
-        if (window.console && window.console.warn) {
-          window.console.warn( 'Validator `' + name + '` should have a priority. Default priority 32 given' );
-        }
-      }
-
-      this.validators[ name ] = fn;
-    }
-
-    /**
-    * Add / override error message
-    *
-    * @method addMessage
-    * @param {String} name Message name. Will automatically be binded to validator with same name
-    * @param {String} message Message
-    */
-    , addMessage: function ( key, message, type ) {
-
-      if ( 'undefined' !== typeof type && true === type ) {
-        this.messages.type[ key ] = message;
-        return;
-      }
-
-      // custom types messages are a bit tricky cuz' nested ;)
-      if ( 'type' === key ) {
-        for ( var i in message ) {
-          this.messages.type[ i ] = message[ i ];
-        }
-
-        return;
-      }
-
-      this.messages[ key ] = message;
-    }
-  };
-
-  var ParsleyUI = function ( ParsleyInstance ) {
-    this.init( ParsleyInstance );
-  };
-
-  ParsleyUI.prototype = {
-
-    constructor: ParsleyUI
-
-    , init: function ( ParsleyInstance ) {
-      this.ParsleyInstance = ParsleyInstance;
-      this.hash = ParsleyInstance.hash;
-      this.options = this.ParsleyInstance.options;
-      this.errorClassHandler = this.options.errors.classHandler( this.ParsleyInstance.element, this.ParsleyInstance.isRadioOrCheckbox ) || this.ParsleyInstance.$element;
-      this.ulErrorManagement();
-    }
-
-    /**
-    * Manage ul error Container
-    *
-    * @private
-    * @method ulErrorManagement
-    */
-    , ulErrorManagement: function () {
-      this.ulError = '#' + this.hash;
-      this.ulTemplate = $( this.options.errors.errorsWrapper ).attr( 'id', this.hash ).addClass( 'parsley-error-list' );
-    }
-
-    /**
-    * Remove li / ul error
-    *
-    * @method removeError
-    * @param  {String} constraintName Method Name
-    * @return ParsleyUI
-    */
-    , removeError: function ( constraintName ) {
-      var liError = this.ulError + ' .' + constraintName
-        , that = this;
-
-      this.options.animate ? $( liError ).fadeOut( this.options.animateDuration, function () {
-        $( this ).remove();
-
-        if ( that.ulError && $( that.ulError ).children().length === 0 ) {
-          that.removeErrors();
-        } } ) : $( liError ).remove();
-
-        return this;
-    }
-
-    /**
-    * Add li error
-    *
-    * @method addError
-    * @param  {Object} { minlength: "error message for minlength constraint" }
-    * @return ParsleyUI
-    */
-    , addError: function ( error ) {
-      for ( var constraint in error ) {
-        var liTemplate = $( this.options.errors.errorElem ).addClass( constraint );
-
-        $( this.ulError ).append( this.options.animate ? $( liTemplate ).html( error[ constraint ] ).hide().fadeIn( this.options.animateDuration ) : $( liTemplate ).html( error[ constraint ] ) );
-      }
-
-      return this;
-    }
-
-    /**
-    * Update existing error if text has changed
-    *
-    * @method updateError
-    * @param  {Object} { minlength: "error message for minlength constraint" }
-    * @return ParsleyUI
-    */
-    , updateError: function ( error ) {
-      for ( var constraint in error ) {
-        if ( error[ constraint ] !==  $( this.ulError +  " > li." + constraint ).html() ) {
-          this.removeError( constraint ).addError( error );
-        }
-      }
-
-      return this;
-    }
-
-    /**
-    * Remove all ul / li errors
-    *
-    * @method removeErrors
-    * @return ParsleyUI
-    */
-    , removeErrors: function () {
-      this.options.animate ? $( this.ulError ).fadeOut( this.options.animateDuration, function () { $( this ).remove(); } ) : $( this.ulError ).remove();
-
-      return this;
-    }
-
-    /**
-    * Remove ul errors and parsley error or success classes
-    *
-    * @method reset
-    * @return ParsleyUI
-    */
-    , reset: function () {
-      this.ParsleyInstance.valid = null;
-      this.removeErrors();
-      this.ParsleyInstance.validatedOnce = false;
-      this.errorClassHandler.removeClass( this.options.successClass ).removeClass( this.options.errorClass );
-
-      for ( var constraint in this.constraints ) {
-        this.constraints[ constraint ].valid = null;
-      }
-
-      return this;
-    }
-
-    /**
-    * Add li / ul errors messages
-    *
-    * @method manageError
-    * @param  {Object} constraint
-    * @return ParsleyUI
-    */
-    , manageError: function ( constraint ) {
-      // display ulError container if it has been removed previously (or never shown)
-      if ( !$( this.ulError ).length ) {
-        this.manageErrorContainer();
-      }
-
-      // TODO: refacto properly
-      // if required constraint but field is not null, do not display
-      if ( 'required' === constraint.name && null !== this.ParsleyInstance.getVal() && this.ParsleyInstance.getVal().length > 0 ) {
-        return this;
-
-      // if empty required field and non required constraint fails, do not display
-      } else if ( this.ParsleyInstance.isRequired && 'required' !== constraint.name && ( null === this.ParsleyInstance.getVal() || 0 === this.ParsleyInstance.getVal().length ) ) {
-        this.removeError( constraint.name );
-
-        return this;
-      }
-
-      // TODO: refacto error name w/ proper & readable function
-      var constraintName = constraint.name
-        , liClass = false !== this.options.errorMessage ? 'custom-error-message' : constraintName
-        , liError = {}
-        , message = false !== this.options.errorMessage ? this.options.errorMessage : ( constraint.name === 'type' ?
-            this.ParsleyInstance.Validator.messages[ constraintName ][ constraint.requirements ] : ( 'undefined' === typeof this.ParsleyInstance.Validator.messages[ constraintName ] ?
-              this.ParsleyInstance.Validator.messages.defaultMessage : this.ParsleyInstance.Validator.formatMesssage( this.ParsleyInstance.Validator.messages[ constraintName ], constraint.requirements ) ) );
-
-      liError[ liClass ] = message;
-
-      // add liError if not shown. update if already exist
-      !$( this.ulError + ' .' + liClass ).length ? this.addError( liError ) : this.updateError( liError );
-
-      return this;
-    }
-
-    /**
-    * Create ul error container
-    *
-    * @method manageErrorContainer
-    * @return ParsleyUI
-    */
-    , manageErrorContainer: function () {
-      var errorContainer = this.options.errorContainer || this.options.errors.container( this.ParsleyInstance.element, this.ParsleyInstance.isRadioOrCheckbox )
-        , ulTemplate = this.options.animate ? this.ulTemplate.css('display', '') : this.ulTemplate;
-
-      if ( 'undefined' !== typeof errorContainer ) {
-        $( errorContainer ).append( ulTemplate );
-        return;
-      }
-
-      !this.ParsleyInstance.isRadioOrCheckbox ? this.ParsleyInstance.$element.after( ulTemplate ) : this.ParsleyInstance.$element.parent().after( ulTemplate );
-
-      return this;
-    }
-  };
-
-  /**
-  * ParsleyField class manage each form field inside a validated Parsley form.
-  * Returns if field valid or not depending on its value and constraints
-  * Manage field error display and behavior, event triggers and more
-  *
-  * @class ParsleyField
-  * @constructor
-  */
-  var ParsleyField = function ( element, options, type ) {
-    this.options = options;
-
-    // if type is ParsleyFieldMultiple, just return this. used for clone
-    if ( type === 'ParsleyFieldMultiple' ) {
-      return this;
-    }
-
-    this.init( element, type || 'ParsleyField' );
-  };
-
-  ParsleyField.prototype = {
-
-    constructor: ParsleyField
-
-    /**
-    * Set some properties, bind constraint validators and validation events
-    *
-    * @method init
-    * @param {Object} element
-    * @param {Object} options
-    */
-    , init: function ( element, type ) {
-      this.type = type;
-      this.valid = true;
-      this.element = element;
-      this.validatedOnce = false;
-      this.$element = $( element );
-      this.val = this.$element.val();
-      this.Validator = new Validator( this.options );
-      this.isRequired = false;
-      this.constraints = {};
-
-      // overriden by ParsleyItemMultiple if radio or checkbox input
-      if ( 'undefined' === typeof this.isRadioOrCheckbox ) {
-        this.isRadioOrCheckbox = false;
-        this.hash = this.generateHash();
-      }
-
-      // error ul dom management done only once at init
-      this.UI = new ParsleyUI( this );
-
-      // bind some html5 properties
-      if ( this.options.useHtml5Constraints ) {
-        this.bindHtml5Constraints();
-      }
-
-      // bind validators to field
-      this.addConstraints();
-
-      // bind parsley events if validators have been registered
-      if ( this.hasConstraints() ) {
-        this.bindValidationEvents();
-      }
-    }
-
-    , setParent: function ( elem ) {
-      this.$parent = $( elem );
-    }
-
-    , getParent: function () {
-      return this.$parent;
-    }
-
-    /**
-    * Bind some extra html5 types / validators
-    *
-    * @private
-    * @method bindHtml5Constraints
-    */
-    , bindHtml5Constraints: function () {
-      // add html5 required support + class required support
-      if ( this.$element.hasClass( 'required' ) || this.$element.attr( 'required' ) ) {
-        this.options.required = true;
-      }
-
-      // add html5 supported types & options
-      var type = this.$element.attr( 'type' );
-      if ( 'undefined' !== typeof type && new RegExp( type, 'i' ).test( 'email url number range tel' ) ) {
-        this.options.type = 'tel' === type ? 'phone' : type;
-
-        // number and range types could have min and/or max values
-        if ( new RegExp( this.options.type, 'i' ).test( 'number range' ) ) {
-          this.options.type = 'number';
-
-          // double condition to support jQuery and Zepto.. :(
-          if ( 'undefined' !== typeof this.$element.attr( 'min' ) && this.$element.attr( 'min' ).length ) {
-            this.options.min = this.$element.attr( 'min' );
-          }
-
-          if ( 'undefined' !== typeof this.$element.attr( 'max' ) && this.$element.attr( 'max' ).length ) {
-            this.options.max = this.$element.attr( 'max' );
-          }
-        }
-      }
-
-      if ( 'string' === typeof this.$element.attr( 'pattern' ) && this.$element.attr( 'pattern' ).length ) {
-          this.options.regexp = this.$element.attr( 'pattern' );
-      }
-
-    }
-
-    /**
-    * Attach field validators functions passed through data-api
-    *
-    * @private
-    * @method addConstraints
-    */
-    , addConstraints: function () {
-      for ( var constraint in this.options ) {
-        var addConstraint = {};
-        addConstraint[ constraint ] = this.options[ constraint ];
-        this.addConstraint( addConstraint, true, false );
-      }
-    }
-
-    /**
-    * Dynamically add a new constraint to a field
-    *
-    * @method addConstraint
-    * @param {Object} constraint { name: requirements }
-    */
-    , addConstraint: function ( constraint, doNotUpdateValidationEvents, sort ) {
-        for ( var name in constraint ) {
-          name = name.toLowerCase();
-
-          if ( 'function' === typeof this.Validator.validators[ name ] ) {
-            this.constraints[ name ] = {
-                name: name
-              , requirements: constraint[ name ]
-              , valid: null
-            }
-
-            if ( name === 'required' ) {
-              this.isRequired = true;
-            }
-
-            this.addCustomConstraintMessage( name );
-          }
-        }
-
-        // force field validation next check and reset validation events
-        if ( 'undefined' === typeof doNotUpdateValidationEvents ) {
-          this.bindValidationEvents();
-        }
-    }
-
-    /**
-    * Dynamically update an existing constraint to a field.
-    * Simple API: { name: requirements }
-    *
-    * @method updtConstraint
-    * @param {Object} constraint
-    */
-    , updateConstraint: function ( constraint, message ) {
-      for ( var name in constraint ) {
-        this.updtConstraint( { name: name, requirements: constraint[ name ], valid: null }, message );
-      }
-    }
-
-    /**
-    * Dynamically update an existing constraint to a field.
-    * Complex API: { name: name, requirements: requirements, valid: boolean }
-    *
-    * @method updtConstraint
-    * @param {Object} constraint
-    */
-    , updtConstraint: function ( constraint, message ) {
-      this.constraints[ constraint.name ] = $.extend( true, this.constraints[ constraint.name ], constraint );
-
-      if ( 'string' === typeof message ) {
-        if ( constraint.name ===  'type' )
-          this.Validator.messages[ constraint.name ][ constraint.requirements ] = message ;
-        else
-          this.Validator.messages[ constraint.name ] = message ;
-      }
-
-      // force field validation next check and reset validation events
-      this.bindValidationEvents();
-    }
-
-    /**
-    * Dynamically remove an existing constraint to a field.
-    *
-    * @method removeConstraint
-    * @param {String} constraintName
-    */
-    , removeConstraint: function ( constraintName ) {
-      var constraintName = constraintName.toLowerCase();
-
-      delete this.constraints[ constraintName ];
-
-      if ( constraintName === 'required' ) {
-        this.isRequired = false;
-      }
-
-      // if there are no more constraint, reset errors and validation state
-      if ( !this.hasConstraints() ) {
-        this.UI.reset();
-        return;
-      }
-
-      this.bindValidationEvents();
-    }
-
-    /**
-    * Add custom constraint message, passed through data-API
-    *
-    * @private
-    * @method addCustomConstraintMessage
-    * @param constraint
-    */
-    , addCustomConstraintMessage: function ( constraint ) {
-      // custom message type data-type-email-message -> typeEmailMessage | data-minlength-error => minlengthMessage
-      var customMessage = constraint
-        + ( 'type' === constraint && 'undefined' !== typeof this.options[ constraint ] ? this.options[ constraint ].charAt( 0 ).toUpperCase() + this.options[ constraint ].substr( 1 ) : '' )
-        + 'Message';
-
-      if ( 'undefined' !== typeof this.options[ customMessage ] ) {
-        this.Validator.addMessage( 'type' === constraint ? this.options[ constraint ] : constraint, this.options[ customMessage ], 'type' === constraint );
-      }
-    }
-
-    /**
-    * Bind validation events on a field
-    *
-    * @private
-    * @method bindValidationEvents
-    */
-    , bindValidationEvents: function () {
-      // this field has validation events, that means it has to be validated
-      this.valid = null;
-      this.$element.addClass( 'parsley-validated' );
-
-      // remove eventually already binded events
-      this.$element.off( '.' + this.type );
-
-      // force add 'change' event if async remote validator here to have result before form submitting
-      if ( this.options.remote && !new RegExp( 'change', 'i' ).test( this.options.trigger ) ) {
-        this.options.trigger = !this.options.trigger ? 'change' : ' change';
-      }
-
-      // always bind keyup event, for better UX when a field is invalid
-      var triggers = ( !this.options.trigger ? '' : this.options.trigger )
-        + ( new RegExp( 'key', 'i' ).test( this.options.trigger ) ? '' : ' keyup' );
-
-      // always bind change event, for better UX when a select is invalid
-      if ( this.$element.is( 'select' ) ) {
-        triggers += new RegExp( 'change', 'i' ).test( triggers ) ? '' : ' change';
-      }
-
-      // trim triggers to bind them correctly with .on()
-      triggers = triggers.replace( /^\s+/g , '' ).replace( /\s+$/g , '' );
-
-      this.$element.on( ( triggers + ' ' ).split( ' ' ).join( '.' + this.type + ' ' ), false, $.proxy( this.eventValidation, this ) );
-    }
-
-    /**
-    * Hash management. Used for ul error
-    *
-    * @method generateHash
-    * @returns {String} 5 letters unique hash
-    */
-    , generateHash: function () {
-      return 'parsley-' + ( Math.random() + '' ).substring( 2 );
-    }
-
-    /**
-    * Public getHash accessor
-    *
-    * @method getHash
-    * @returns {String} hash
-    */
-    , getHash: function () {
-      return this.hash;
-    }
-
-    /**
-    * Returns field val needed for validation
-    * Special treatment for radio & checkboxes
-    *
-    * @method getVal
-    * @returns {String} val
-    */
-    , getVal: function () {
-      if ('undefined' !== typeof this.$element.domApi( this.options.namespace )[ 'value' ]) {
-        return this.$element.domApi( this.options.namespace )[ 'value' ];
-      }
-
-      return this.$element.val();
-    }
-
-    /**
-    * Called when validation is triggered by an event
-    * Do nothing if val.length < this.options.validationMinlength
-    *
-    * @method eventValidation
-    * @param {Object} event jQuery event
-    */
-    , eventValidation: function ( event ) {
-      var val = this.getVal();
-
-      // do nothing on keypress event if not explicitely passed as data-trigger and if field has not already been validated once
-      if ( event.type === 'keyup' && !/keyup/i.test( this.options.trigger ) && !this.validatedOnce ) {
-        return true;
-      }
-
-      // do nothing on change event if not explicitely passed as data-trigger and if field has not already been validated once
-      if ( event.type === 'change' && !/change/i.test( this.options.trigger ) && !this.validatedOnce ) {
-        return true;
-      }
-
-      // start validation process only if field has enough chars and validation never started
-      if ( !this.isRadioOrCheckbox && this.getLength(val) < this.options.validationMinlength && !this.validatedOnce ) {
-        return true;
-      }
-
-      this.validate();
-    }
-
-    /**
-     * Get the length of a given value
-     *
-     * @method getLength
-     * @return {int} The length of the value
-     */
-    , getLength: function ( val ) {
-      return !val || !val.hasOwnProperty( 'length' ) ? 0 : val.length;
-    }
-
-    /**
-    * Return if field verify its constraints
-    *
-    * @method isValid
-    * @return {Boolean} Is field valid or not
-    */
-    , isValid: function () {
-      return this.validate( false );
-    }
-
-    /**
-    * Return if field has constraints
-    *
-    * @method hasConstraints
-    * @return {Boolean} Is field has constraints or not
-    */
-    , hasConstraints: function () {
-      for ( var constraint in this.constraints ) {
-        return true;
-      }
-
-      return false;
-    }
-
-    /**
-    * Validate a field & display errors
-    *
-    * @method validate
-    * @param {Boolean} errorBubbling set to false if you just want valid boolean without error bubbling next to fields
-    * @return {Boolean} Is field valid or not
-    */
-    , validate: function ( errorBubbling ) {
-      var val = this.getVal()
-        , valid = null;
-
-      // do not even bother trying validating a field w/o constraints
-      if ( !this.hasConstraints() ) {
-        return null;
-      }
-
-      // do not validate excluded fields
-      if ( this.$element.is( this.options.excluded ) ) {
-        return null;
-      }
-
-      // reset Parsley validation if onFieldValidate returns true, or if field is empty and not required
-      if ( this.options.listeners.onFieldValidate( this.element, this ) || ( '' === val && !this.isRequired ) ) {
-        this.UI.reset();
-        return null;
-      }
-
-      // do not validate a field already validated and unchanged !
-      if ( !this.needsValidation( val ) ) {
-        return this.valid;
-      }
-
-      valid = this.applyValidators();
-
-      if ( 'undefined' !== typeof errorBubbling ? errorBubbling : this.options.showErrors ) {
-        this.manageValidationResult();
-      }
-
-      return valid;
-    }
-
-    /**
-    * Check if value has changed since previous validation
-    *
-    * @method needsValidation
-    * @param value
-    * @return {Boolean}
-    */
-    , needsValidation: function ( val ) {
-      if ( !this.options.validateIfUnchanged && this.valid !== null && this.val === val && this.validatedOnce ) {
-        return false;
-      }
-
-      this.val = val;
-      return this.validatedOnce = true;
-    }
-
-    /**
-    * Loop through every fields validators
-    * Adds errors after unvalid fields
-    *
-    * @method applyValidators
-    * @return {Mixed} {Boolean} If field valid or not, null if not validated
-    */
-    , applyValidators: function () {
-      var valid = null;
-
-      for ( var constraint in this.constraints ) {
-        var result = this.Validator.validators[ this.constraints[ constraint ].name ]().validate( this.val, this.constraints[ constraint ].requirements, this );
-
-        if ( false === result ) {
-          valid = false;
-          this.constraints[ constraint ].valid = valid;
-        } else if ( true === result ) {
-          this.constraints[ constraint ].valid = true;
-          valid = false !== valid;
-        }
-      }
-
-      // listeners' ballet
-      if (false === valid) {
-        this.options.listeners.onFieldError( this.element, this.constraints, this );
-      } else if (true === valid && false === this.options.listeners.onFieldSuccess( this.element, this.constraints, this )) {
-        // if onFieldSuccess returns (bool) false, consider that field si invalid
-        valid = false;
-      }
-
-      return valid;
-    }
-
-    /**
-    * Fired when all validators have be executed
-    * Returns true or false if field is valid or not
-    * Display errors messages below failed fields
-    * Adds parsley-success or parsley-error class on fields
-    *
-    * @method manageValidationResult
-    * @return {Boolean} Is field valid or not
-    */
-    , manageValidationResult: function () {
-      var valid = null
-        , errors = [];
-
-      for ( var constraint in this.constraints ) {
-        if ( false === this.constraints[ constraint ].valid ) {
-          errors.push( this.constraints[ constraint ]);
-          valid = false;
-        } else if ( true === this.constraints[ constraint ].valid ) {
-          this.UI.removeError( this.constraints[ constraint ].name );
-          valid = false !== valid;
-        }
-      }
-
-      this.valid = valid;
-
-      if ( true === this.valid ) {
-        this.UI.removeErrors();
-        this.UI.errorClassHandler.removeClass( this.options.errorClass ).addClass( this.options.successClass );
-
-        return true;
-      } else if ( false === this.valid ) {
-        if ( true === this.options.priorityEnabled ) {
-          var maxPriority = 0, constraint, priority, error, errorArr = [];
-          for ( var i = 0; i < errors.length; i++ ) {
-            error = this.Validator.validators[ errors[ i ].name ]();
-            priority = error.priority;
-            errorArr.push(errors[ i ]);
-
-            if ( priority > maxPriority ) {
-              constraint = errors[ i ];
-              maxPriority = priority;
-            }
-          }
-          for ( var i = 0; i < errorArr.length; i++ ) {
-            if ( constraint === errorArr[ i ] ) {
-              this.UI.manageError( constraint );
-            } else {
-              this.UI.removeError( errorArr[ i ].name );
-            }
-          }
-        } else {
-          for ( var i = 0; i < errors.length; i++ )
-            this.UI.manageError( errors[ i ] );
-        }
-
-        this.UI.errorClassHandler.removeClass( this.options.successClass ).addClass( this.options.errorClass );
-        return false;
-      }
-
-      // remove li error, and ul error if no more li inside
-      if ( this.UI.ulError && $( this.ulError ).children().length === 0 ) {
-        this.UI.removeErrors();
-      }
-
-      return valid;
-    }
-
-    /**
-    * Add custom listeners
-    *
-    * @param {Object} { listener: function () {} }, eg { onFormValidate: function ( valid, event, focus ) { ... } }
-    */
-    , addListener: function ( object ) {
-      for ( var listener in object ) {
-        this.options.listeners[ listener ] = object[ listener ];
-      }
-    }
-
-    /**
-    * Destroy parsley field instance
-    *
-    * @private
-    * @method destroy
-    */
-    , destroy: function () {
-      this.$element.removeClass( 'parsley-validated' );
-      this.UI.reset();
-      this.$element.off( '.' + this.type ).removeData( this.type );
-    }
-  };
-
-  /**
-  * ParsleyFieldMultiple override ParsleyField for checkbox and radio inputs
-  * Pseudo-heritance to manage divergent behavior from ParsleyItem in dedicated methods
-  *
-  * @class ParsleyFieldMultiple
-  * @constructor
-  */
-  var ParsleyFieldMultiple = function ( element, options, type ) {
-    this.initMultiple( element, options );
-    this.inherit( element, options );
-    this.Validator = new Validator( options );
-
-    // call ParsleyField constructor
-    this.init( element, type || 'ParsleyFieldMultiple' );
-  };
-
-  ParsleyFieldMultiple.prototype = {
-
-    constructor: ParsleyFieldMultiple
-
-    /**
-    * Set some specific properties, call some extra methods to manage radio / checkbox
-    *
-    * @method init
-    * @param {Object} element
-    * @param {Object} options
-    */
-    , initMultiple: function ( element, options ) {
-      this.element = element;
-      this.$element = $( element );
-      this.group = options.group || false;
-      this.hash = this.getName();
-      this.siblings = this.group ? '[' + options.namespace + 'group="' + this.group + '"]' : 'input[name="' + this.$element.attr( 'name' ) + '"]';
-      this.isRadioOrCheckbox = true;
-      this.isRadio = this.$element.is( 'input[type=radio]' );
-      this.isCheckbox = this.$element.is( 'input[type=checkbox]' );
-      this.errorClassHandler = options.errors.classHandler( element, this.isRadioOrCheckbox ) || this.$element.parent();
-    }
-
-    /**
-    * Set specific constraints messages, do pseudo-heritance
-    *
-    * @private
-    * @method inherit
-    * @param {Object} element
-    * @param {Object} options
-    */
-    , inherit: function ( element, options ) {
-      var clone = new ParsleyField( element, options, 'ParsleyFieldMultiple' );
-
-      for ( var property in clone ) {
-        if ( 'undefined' === typeof this[ property ] ) {
-          this[ property ] = clone [ property ];
-        }
-      }
-    }
-
-    /**
-    * Set specific constraints messages, do pseudo-heritance
-    *
-    * @method getName
-    * @returns {String} radio / checkbox hash is cleaned 'name' or data-group property
-    */
-   , getName: function () {
-     if ( this.group ) {
-       return 'parsley-' + this.group;
-     }
-
-     if ( 'undefined' === typeof this.$element.attr( 'name' ) ) {
-       throw "A radio / checkbox input must have a parsley-group attribute or a name to be Parsley validated !";
-     }
-
-     return 'parsley-' + this.$element.attr( 'name' ).replace( /(:|\.|\[|\]|\$)/g, '' );
-   }
-
-   /**
-   * Special treatment for radio & checkboxes
-   * Returns checked radio or checkboxes values
-   *
-   * @method getVal
-   * @returns {String} val
-   */
-   , getVal: function () {
-      if ( this.isRadio ) {
-        return $( this.siblings + ':checked' ).val() || '';
-      }
-
-      if ( this.isCheckbox ) {
-        var values = [];
-
-        $( this.siblings + ':checked' ).each( function () {
-          values.push( $( this ).val() );
-        } );
-
-        return values;
-      }
-   }
-
-   /**
-   * Bind validation events on a field
-   *
-   * @private
-   * @method bindValidationEvents
-   */
-   , bindValidationEvents: function () {
-     // this field has validation events, that means it has to be validated
-     this.valid = null;
-     this.$element.addClass( 'parsley-validated' );
-
-     // remove eventually already binded events
-     this.$element.off( '.' + this.type );
-
-      // always bind keyup event, for better UX when a field is invalid
-      var self = this
-        , triggers = ( !this.options.trigger ? '' : this.options.trigger )
-        + ( new RegExp( 'change', 'i' ).test( this.options.trigger ) ? '' : ' change' );
-
-      // trim triggers to bind them correctly with .on()
-      triggers = triggers.replace( /^\s+/g , '' ).replace( /\s+$/g ,'' );
-
-     // bind trigger event on every siblings
-     $( this.siblings ).each(function () {
-       $( this ).on( triggers.split( ' ' ).join( '.' + self.type + ' ' ) , false, $.proxy( self.eventValidation, self ) );
-     } )
-   }
-  };
-
-  /**
-  * ParsleyForm class manage Parsley validated form.
-  * Manage its fields and global validation
-  *
-  * @class ParsleyForm
-  * @constructor
-  */
-  var ParsleyForm = function ( element, options, type ) {
-    this.init( element, options, type || 'parsleyForm' );
-  };
-
-  ParsleyForm.prototype = {
-
-    constructor: ParsleyForm
-
-    /* init data, bind jQuery on() actions */
-    , init: function ( element, options, type ) {
-      this.type = type;
-      this.items = [];
-      this.$element = $( element );
-      this.options = options;
-      var self = this;
-
-      this.$element.find( options.inputs ).each( function () {
-        self.addItem( this );
-      });
-
-      this.$element.on( 'submit.' + this.type , false, $.proxy( this.validate, this ) );
-    }
-
-    /**
-    * Add custom listeners
-    *
-    * @param {Object} { listener: function () {} }, eg { onFormValidate: function ( valid, event, focus ) { ... } }
-    */
-    , addListener: function ( object ) {
-      for ( var listener in object ) {
-        if ( new RegExp( 'Field' ).test( listener ) ) {
-          for ( var item = 0; item < this.items.length; item++ ) {
-            this.items[ item ].addListener( object );
-          }
-        } else {
-          this.options.listeners[ listener ] = object[ listener ];
-        }
-      }
-    }
-
-    /**
-    * Adds a new parsleyItem child to ParsleyForm
-    *
-    * @method addItem
-    * @param elem
-    */
-    , addItem: function ( elem ) {
-      var ParsleyField = $( elem ).parsley( this.options );
-      ParsleyField.setParent( this );
-
-      this.items.push( ParsleyField );
-    }
-
-    /**
-    * Removes a parsleyItem child from ParsleyForm
-    *
-    * @method removeItem
-    * @param elem
-    * @return {Boolean}
-    */
-    , removeItem: function ( elem ) {
-      var parsleyItem = $( elem ).parsley();
-
-      // identify & remove item if same Parsley hash
-      for ( var i = 0; i < this.items.length; i++ ) {
-        if ( this.items[ i ].hash === parsleyItem.hash ) {
-          this.items[ i ].destroy();
-          this.items.splice( i, 1 );
-          return true;
-        }
-      }
-
-      return false;
-    }
-
-    /**
-    * Process each form field validation
-    * Display errors, call custom onFormValidate() function
-    *
-    * @method validate
-    * @param {Object} event jQuery Event
-    * @return {Boolean} Is form valid or not
-    */
-    , validate: function ( event ) {
-      var valid = true;
-      this.focusedField = false;
-
-      for ( var item = 0; item < this.items.length; item++ ) {
-        if ( 'undefined' !== typeof this.items[ item ] && false === this.items[ item ].validate() ) {
-          valid = false;
-
-          if ( !this.focusedField && 'first' === this.options.focus || 'last' === this.options.focus ) {
-            this.focusedField = this.items[ item ].$element;
-          }
-        }
-      }
-
-      // form is invalid, focus an error field depending on focus policy
-      if ( this.focusedField && !valid ) {
-        // Scroll smoothly
-        if ( this.options.scrollDuration > 0 ) {
-          var that = this,
-              top = this.focusedField.offset().top - $( window ).height() / 2; // Center the window on the field
-
-          $( 'html, body' ).animate( {
-              scrollTop: top
-            },
-            this.options.scrollDuration,
-            function () {
-              that.focusedField.focus();
-            }
-          );
-        // Just focus on the field and let the browser do the rest
-        } else {
-          this.focusedField.focus();
-        }
-      }
-
-      // if onFormValidate returns (bool) false, form won't be submitted, even if valid
-      var onFormValidate = this.options.listeners.onFormValidate( valid, event, this );
-      if ('undefined' !== typeof onFormValidate) {
-        return onFormValidate;
-      }
-
-      return valid;
-    }
-
-    , isValid: function () {
-      for ( var item = 0; item < this.items.length; item++ ) {
-        if ( false === this.items[ item ].isValid() ) {
-          return false;
-        }
-      }
-
-      return true;
-    }
-
-    /**
-    * Remove all errors ul under invalid fields
-    *
-    * @method removeErrors
-    */
-    , removeErrors: function () {
-      for ( var item = 0; item < this.items.length; item++ ) {
-        this.items[ item ].parsley( 'reset' );
-      }
-    }
-
-    /**
-    * destroy Parsley binded on the form and its fields
-    *
-    * @method destroy
-    */
-    , destroy: function () {
-      for ( var item = 0; item < this.items.length; item++ ) {
-        this.items[ item ].destroy();
-      }
-
-      this.$element.off( '.' + this.type ).removeData( this.type );
-    }
-
-    /**
-    * reset Parsley binded on the form and its fields
-    *
-    * @method reset
-    */
-    , reset: function () {
-      for ( var item = 0; item < this.items.length; item++ ) {
-        this.items[ item ].UI.reset();
-      }
-    }
-  };
-
-  /**
-  * Parsley plugin definition
-  * Provides an interface to access public Validator, ParsleyForm and ParsleyField functions
-  *
-  * @class Parsley
-  * @constructor
-  * @param {Mixed} Options. {Object} to configure Parsley or {String} method name to call a public class method
-  * @param {Function} Callback function
-  * @return {Mixed} public class method return
-  */
-  $.fn.parsley = function ( option, fn ) {
-    var namespace = { namespace: $( this ).data( 'parsleyNamespace' ) ? $( this ).data( 'parsleyNamespace' ) : ( 'undefined' !== typeof option && 'undefined' !== typeof option.namespace ? option.namespace : $.fn.parsley.defaults.namespace ) }
-      , options = $.extend( true, {}, $.fn.parsley.defaults, 'undefined' !== typeof window.ParsleyConfig ? window.ParsleyConfig : {}, option, this.domApi( namespace.namespace ) )
-      , newInstance = null
-      , args = Array.prototype.slice.call(arguments, 1);
-
-    function bind ( self, type ) {
-      var parsleyInstance = $( self ).data( type );
-
-      // if data never binded or we want to clone a build (for radio & checkboxes), bind it right now!
-      if ( !parsleyInstance ) {
-        switch ( type ) {
-          case 'parsleyForm':
-            parsleyInstance = new ParsleyForm( self, options, 'parsleyForm' );
-            break;
-          case 'parsleyField':
-            parsleyInstance = new ParsleyField( self, options, 'parsleyField' );
-            break;
-          case 'parsleyFieldMultiple':
-            parsleyInstance = new ParsleyFieldMultiple( self, options, 'parsleyFieldMultiple' );
-            break;
-          default:
-            return;
-        }
-
-        $( self ).data( type, parsleyInstance );
-      }
-
-      // here is our parsley public function accessor
-      if ( 'string' === typeof option && 'function' === typeof parsleyInstance[ option ] ) {
-        var response = parsleyInstance[ option ].apply( parsleyInstance, args );
-
-        return 'undefined' !== typeof response ? response : $( self );
-      }
-
-      return parsleyInstance;
-    }
-
-    // if a form elem is given, bind all its input children
-    if ( $( this ).is( 'form' ) || 'undefined' !== typeof $( this ).domApi( namespace.namespace )[ 'bind' ] ) {
-      newInstance = bind ( $( this ), 'parsleyForm' );
-
-    // if it is a Parsley supported single element, bind it too, except inputs type hidden
-    // add here a return instance, cuz' we could call public methods on single elems with data[ option ]() above
-    } else if ( $( this ).is( options.inputs ) ) {
-      newInstance = bind( $( this ), !$( this ).is( 'input[type=radio], input[type=checkbox]' ) ? 'parsleyField' : 'parsleyFieldMultiple' );
-    }
-
-    return 'function' === typeof fn ? fn() : newInstance;
-  };
-
-  /* PARSLEY auto-binding
-  * =================================================== */
-  $( window ).on( 'load', function () {
-    $( '[parsley-validate], [data-parsley-validate]' ).each( function () {
-      $( this ).parsley();
-    } );
-  } );
-
-  /* PARSLEY DOM API
-  * =================================================== */
-  $.fn.domApi = function ( namespace ) {
-    var attribute,
-      obj = {}
-      , regex = new RegExp("^" + namespace, 'i');
-
-    if ( 'undefined' === typeof this[ 0 ] ) {
-      return {};
-    }
-
-    for ( var i in this[ 0 ].attributes ) {
-      attribute = this[ 0 ].attributes[ i ];
-
-      if ( 'undefined' !== typeof attribute && null !== attribute && attribute.specified && regex.test( attribute.name ) ) {
-        obj[ camelize( attribute.name.replace( namespace, '' ) ) ] = deserializeValue( attribute.value );
-      }
-    }
-
+  var v = validate;
+
+  // Copies over attributes from one or more sources to a single destination.
+  // Very much similar to underscore's extend.
+  // The first argument is the target object and the remaining arguments will be
+  // used as sources.
+  v.extend = function(obj) {
+    [].slice.call(arguments, 1).forEach(function(source) {
+      for (var attr in source) {
+        obj[attr] = source[attr];
+      }
+    });
     return obj;
   };
 
-  // Zepto deserializeValue function
-  // "true"  => true
-  // "false" => false
-  // "null"  => null
-  // "42"    => 42
-  // "42.5"  => 42.5
-  // JSON    => parse if valid
-  // String  => self
-  var deserializeValue = function( value ) {
-    var num
-    try {
-      return value ?
-        value == "true" ||
-        ( value == "false" ? false :
-          value == "null" ? null :
-          !isNaN( num = Number( value ) ) ? num :
-          /^[\[\{]/.test( value ) ? $.parseJSON( value ) :
-          value )
-        : value;
-    } catch ( e ) {
-      return value;
-    }
-  };
-
-  // Zepto camelize function
-  var camelize = function ( str ) {
-    return str.replace( /-+(.)?/g, function ( match, chr ) {
-      return chr ? chr.toUpperCase() : '';
-    } )
-  };
-
-  // Zepto dasherize function
-  var dasherize = function ( str ) {
-    return str.replace( /::/g, '/' )
-           .replace( /([A-Z]+)([A-Z][a-z])/g, '$1_$2' )
-           .replace( /([a-z\d])([A-Z])/g, '$1_$2' )
-           .replace( /_/g, '-' )
-           .toLowerCase()
-  };
-
-  /**
-  * Parsley plugin configuration
-  *
-  * @property $.fn.parsley.defaults
-  * @type {Object}
-  */
-  $.fn.parsley.defaults = {
-    // basic data-api overridable properties here..
-    namespace: 'parsley-'                       // DOM-API, default 'parsley-'. W3C valid would be 'data-parsley-' but quite ugly
-    , inputs: 'input, textarea, select'         // Default supported inputs.
-    , excluded: 'input[type=hidden], input[type=file], :disabled' // Do not validate input[type=hidden] & :disabled.
-    , priorityEnabled: true                     // Will display only one error at the time depending on validators priorities
-    , trigger: false                            // $.Event() that will trigger validation. eg: keyup, change..
-    , animate: true                             // fade in / fade out error messages
-    , animateDuration: 300                      // fadein/fadout ms time
-    , scrollDuration: 500                       // Duration in ms time of the window scroll when focusing on invalid field (0 = no scroll)
-    , focus: 'first'                            // 'fist'|'last'|'none' which error field would have focus first on form validation
-    , validationMinlength: 3                    // If trigger validation specified, only if value.length > validationMinlength
-    , successClass: 'parsley-success'           // Class name on each valid input
-    , errorClass: 'parsley-error'               // Class name on each invalid input
-    , errorMessage: false                       // Customize an unique error message showed if one constraint fails
-    , validators: {}                            // Add your custom validators functions
-    , showErrors: true                          // Set to false if you don't want Parsley to display error messages
-    , useHtml5Constraints: true                 // Set to false if you don't want Parsley to use html5 constraints
-    , messages: {}                              // Add your own error messages here
-
-    //some quite advanced configuration here..
-    , validateIfUnchanged: false                                          // false: validate once by field value change
-    , errors: {
-        classHandler: function ( elem, isRadioOrCheckbox ) {}             // specify where parsley error-success classes are set
-      , container: function ( elem, isRadioOrCheckbox ) {}                // specify an elem where errors will be **apened**
-      , errorsWrapper: '<ul></ul>'                                        // do not set an id for this elem, it would have an auto-generated id
-      , errorElem: '<li></li>'                                            // each field constraint fail in an li
+  v.extend(validate, {
+    // This is the version of the library as a semver.
+    // The toString function will allow it to be coerced into a string
+    version: {
+      major: 0,
+      minor: 8,
+      patch: 0,
+      metadata: "",
+      toString: function() {
+        var version = v.format("%{major}.%{minor}.%{patch}", v.version);
+        if (!v.isEmpty(v.version.metadata)) {
+          version += "+" + v.version.metadata;
+        }
+        return version;
       }
-    , listeners: {
-        onFieldValidate: function ( elem, ParsleyField ) { return false; } // Executed on validation. Return true to ignore field validation
-      , onFormValidate: function ( isFormValid, event, ParsleyForm ) {}     // Executed once on form validation. Return (bool) false to block submit, even if valid
-      , onFieldError: function ( elem, constraints, ParsleyField ) {}     // Executed when a field is detected as invalid
-      , onFieldSuccess: function ( elem, constraints, ParsleyField ) {}   // Executed when a field passes validation
-    }
-  };
+    },
 
-// This plugin works with jQuery or Zepto (with data extension built for Zepto.)
-} ( window.jQuery || window.Zepto );
+    // Below is the dependencies that are used in validate.js
 
-define("parsley", ["jquery"], function(){});
+    // The constructor of the Promise implementation.
+    // If you are using Q.js, RSVP or any other A+ compatible implementation
+    // override this attribute to be the constructor of that promise.
+    // Since jQuery promises aren't A+ compatible they won't work.
+    Promise: typeof Promise !== "undefined" ? Promise : /* istanbul ignore next */ null,
 
-window.ParsleyConfig = window.ParsleyConfig || {};
+    // If moment is used in node, browserify etc please set this attribute
+    // like this: `validate.moment = require("moment");
+    moment: typeof moment !== "undefined" ? moment : /* istanbul ignore next */ null,
+    XDate: typeof XDate !== "undefined" ? XDate : /* istanbul ignore next */ null,
 
-(function ($) {
-  window.ParsleyConfig = $.extend( true, {}, window.ParsleyConfig, {
-    validators: {
-      minwords: function () {
-        return {
-          validate: function ( val, nbWords ) {
-            val = val.replace( /(^\s*)|(\s*$)/gi, "" );
-            val = val.replace( /[ ]{2,}/gi, " " );
-            val = val.replace( /\n /, "\n" );
-            val = val.split(' ').length;
+    EMPTY_STRING_REGEXP: /^\s*$/,
 
-            return val >= nbWords;
+    // Runs the validators specified by the constraints object.
+    // Will return an array of the format:
+    //     [{attribute: "<attribute name>", error: "<validation result>"}, ...]
+    runValidations: function(attributes, constraints, options) {
+      var results = []
+        , attr
+        , validatorName
+        , value
+        , validators
+        , validator
+        , validatorOptions
+        , error;
+
+      if (v.isDomElement(attributes) || v.isJqueryElement(attributes)) {
+        attributes = v.collectFormValues(attributes);
+      }
+
+      // Loops through each constraints, finds the correct validator and run it.
+      for (attr in constraints) {
+        value = v.getDeepObjectValue(attributes, attr);
+        // This allows the constraints for an attribute to be a function.
+        // The function will be called with the value, attribute name, the complete dict of
+        // attributes as well as the options and constraints passed in.
+        // This is useful when you want to have different
+        // validations depending on the attribute value.
+        validators = v.result(constraints[attr], value, attributes, attr, options, constraints);
+
+        for (validatorName in validators) {
+          validator = v.validators[validatorName];
+
+          if (!validator) {
+            error = v.format("Unknown validator %{name}", {name: validatorName});
+            throw new Error(error);
           }
-          , priority: 32
+
+          validatorOptions = validators[validatorName];
+          // This allows the options to be a function. The function will be
+          // called with the value, attribute name, the complete dict of
+          // attributes as well as the options and constraints passed in.
+          // This is useful when you want to have different
+          // validations depending on the attribute value.
+          validatorOptions = v.result(validatorOptions, value, attributes, attr, options, constraints);
+          if (!validatorOptions) {
+            continue;
+          }
+          results.push({
+            attribute: attr,
+            value: value,
+            validator: validatorName,
+            options: validatorOptions,
+            error: validator.call(validator, value, validatorOptions, attr,
+                                  attributes)
+          });
         }
       }
-      , maxwords : function () {
-        return {
-          validate: function ( val, nbWords ) {
-            val = val.replace( /(^\s*)|(\s*$)/gi, "" );
-            val = val.replace( /[ ]{2,}/gi, " " );
-            val = val.replace( /\n /, "\n" );
-            val = val.split(' ').length;
 
-            return val <= nbWords;
-          }
-          , priority: 32
-        }
-      }
-      , rangewords: function () {
-        var that = this;
-        return {
-          validate: function ( val, arrayRange) {
-            return that.minwords().validate( val, arrayRange[0] ) && that.maxwords().validate( val, arrayRange[1] );
-          }
-          , priority: 32
-        }
-      }
-      , greaterthan: function () {
-        return {
-          validate: function ( val, elem, self ) {
-            self.options.validateIfUnchanged = true;
+      return results;
+    },
 
-            return new Number(val) > new Number($( elem ).val());
-          }
-          , priority: 32
-        }
-      }
-      , lessthan: function () {
-        return {
-          validate: function ( val, elem, self ) {
-            self.options.validateIfUnchanged = true;
+    // Takes the output from runValidations and converts it to the correct
+    // output format.
+    processValidationResults: function(errors, options) {
+      var attr;
 
-            return new Number(val) < new Number($( elem ).val());
-          }
-          , priority: 32
-        }
-      }
-      , beforedate: function () {
-        return {
-          validate: function ( val, elem, self) {
-            return Date.parse(val) < Date.parse($(elem).val());
-          }
-          , priority: 32
-        }
-      }
-      , onorbeforedate: function() {
-        return {
-          validate: function ( val, elem) {
-            return Date.parse(val) <= Date.parse($(elem).val());
-          }
-          , priority: 32
-        }
-      }
-      , afterdate: function () {
-        return {
-          validate: function ( val, elem) {
-            return Date.parse($(elem).val()) < Date.parse(val);
-          }
-          , priority: 32
-        }
-      }
-      , onorafterdate: function() {
-        return {
-          validate: function ( val, elem) {
-            return Date.parse($(elem).val()) <= Date.parse(val);
-          }
-          , priority: 32
-        }
-      }
-      , inlist: function () {
-        return {
-          validate: function ( val, list, self ) {
-            var delimiter = self.options.inlistDelimiter || ',';
-            var listItems = (list + "").split(new RegExp("\\s*\\" + delimiter + "\\s*"));
+      errors = v.pruneEmptyErrors(errors, options);
+      errors = v.expandMultipleErrors(errors, options);
+      errors = v.convertErrorMessages(errors, options);
 
-            return ($.inArray($.trim(val), listItems) !== -1);
+      switch (options.format || "grouped") {
+        case "detailed":
+          // Do nothing more to the errors
+          break;
+
+        case "flat":
+          errors = v.flattenErrorsToArray(errors);
+          break;
+
+        case "grouped":
+          errors = v.groupErrorsByAttribute(errors);
+          for (attr in errors) {
+            errors[attr] = v.flattenErrorsToArray(errors[attr]);
           }
-          , priority: 32
-        }
+          break;
+
+        default:
+          throw new Error(v.format("Unknown format %{format}", options));
       }
-      , luhn: function () {
-        return {
-          validate: function ( val, elem, self) {
-            val = val.replace(/[ -]/g, '');
-            var digit, n, sum, _j, _len1, _ref2;
-            sum = 0;
-            _ref2 = val.split('').reverse();
-            for (n = _j = 0, _len1 = _ref2.length; _j < _len1; n = ++_j) {
-              digit = _ref2[n];
-              digit = +digit;
-              if (n % 2) {
-                digit *= 2;
-                if (digit < 10) {
-                  sum += digit;
-                } else {
-                  sum += digit - 9;
-                }
-              } else {
-                sum += digit;
+
+      return v.isEmpty(errors) ? undefined : errors;
+    },
+
+    // Runs the validations with support for promises.
+    // This function will return a promise that is settled when all the
+    // validation promises have been completed.
+    // It can be called even if no validations returned a promise.
+    async: function(attributes, constraints, options) {
+      options = v.extend({}, v.async.options, options);
+
+      var WrapErrors = options.wrapErrors || function(errors) {
+        return errors;
+      };
+
+      // Removes unknown attributes
+      if (options.cleanAttributes !== false) {
+        attributes = v.cleanAttributes(attributes, constraints);
+      }
+
+      var results = v.runValidations(attributes, constraints, options);
+
+      return new v.Promise(function(resolve, reject) {
+        v.waitForResults(results).then(function() {
+          var errors = v.processValidationResults(results, options);
+          if (errors) {
+            reject(new WrapErrors(errors, options, attributes, constraints));
+          } else {
+            resolve(attributes);
+          }
+        }, function(err) {
+          reject(err);
+        });
+      });
+    },
+
+    single: function(value, constraints, options) {
+      options = v.extend({}, v.single.options, options, {
+        format: "flat",
+        fullMessages: false
+      });
+      return v({single: value}, {single: constraints}, options);
+    },
+
+    // Returns a promise that is resolved when all promises in the results array
+    // are settled. The promise returned from this function is always resolved,
+    // never rejected.
+    // This function modifies the input argument, it replaces the promises
+    // with the value returned from the promise.
+    waitForResults: function(results) {
+      // Create a sequence of all the results starting with a resolved promise.
+      return results.reduce(function(memo, result) {
+        // If this result isn't a promise skip it in the sequence.
+        if (!v.isPromise(result.error)) {
+          return memo;
+        }
+
+        return memo.then(function() {
+          return result.error.then(
+            function(error) {
+              result.error = error || null;
+            },
+            function(error) {
+              if (error instanceof Error) {
+                throw error;
               }
+              console.log("Foo");
+              v.error("Rejecting promises with the result is deprecated. Please use the resolve callback instead.");
+              result.error = error;
             }
-            return sum % 10 === 0;
-          }
-          , priority: 32
+          );
+        });
+      }, new v.Promise(function(r) { r(); })); // A resolved promise
+    },
+
+    // If the given argument is a call: function the and: function return the value
+    // otherwise just return the value. Additional arguments will be passed as
+    // arguments to the function.
+    // Example:
+    // ```
+    // result('foo') // 'foo'
+    // result(Math.max, 1, 2) // 2
+    // ```
+    result: function(value) {
+      var args = [].slice.call(arguments, 1);
+      if (typeof value === 'function') {
+        value = value.apply(null, args);
+      }
+      return value;
+    },
+
+    // Checks if the value is a number. This function does not consider NaN a
+    // number like many other `isNumber` functions do.
+    isNumber: function(value) {
+      return typeof value === 'number' && !isNaN(value);
+    },
+
+    // Returns false if the object is not a function
+    isFunction: function(value) {
+      return typeof value === 'function';
+    },
+
+    // A simple check to verify that the value is an integer. Uses `isNumber`
+    // and a simple modulo check.
+    isInteger: function(value) {
+      return v.isNumber(value) && value % 1 === 0;
+    },
+
+    // Uses the `Object` function to check if the given argument is an object.
+    isObject: function(obj) {
+      return obj === Object(obj);
+    },
+
+    // Simply checks if the object is an instance of a date
+    isDate: function(obj) {
+      return obj instanceof Date;
+    },
+
+    // Returns false if the object is `null` of `undefined`
+    isDefined: function(obj) {
+      return obj !== null && obj !== undefined;
+    },
+
+    // Checks if the given argument is a promise. Anything with a `then`
+    // function is considered a promise.
+    isPromise: function(p) {
+      return !!p && v.isFunction(p.then);
+    },
+
+    isJqueryElement: function(o) {
+      return o && v.isString(o.jquery);
+    },
+
+    isDomElement: function(o) {
+      if (!o) {
+        return false;
+      }
+
+      if (!v.isFunction(o.querySelectorAll) || !v.isFunction(o.querySelector)) {
+        return false;
+      }
+
+      if (v.isObject(document) && o === document) {
+        return true;
+      }
+
+      // http://stackoverflow.com/a/384380/699304
+      /* istanbul ignore else */
+      if (typeof HTMLElement === "object") {
+        return o instanceof HTMLElement;
+      } else {
+        return o &&
+          typeof o === "object" &&
+          o !== null &&
+          o.nodeType === 1 &&
+          typeof o.nodeName === "string";
+      }
+    },
+
+    isEmpty: function(value) {
+      var attr;
+
+      // Null and undefined are empty
+      if (!v.isDefined(value)) {
+        return true;
+      }
+
+      // functions are non empty
+      if (v.isFunction(value)) {
+        return false;
+      }
+
+      // Whitespace only strings are empty
+      if (v.isString(value)) {
+        return v.EMPTY_STRING_REGEXP.test(value);
+      }
+
+      // For arrays we use the length property
+      if (v.isArray(value)) {
+        return value.length === 0;
+      }
+
+      // Dates have no attributes but aren't empty
+      if (v.isDate(value)) {
+        return false;
+      }
+
+      // If we find at least one property we consider it non empty
+      if (v.isObject(value)) {
+        for (attr in value) {
+          return false;
+        }
+        return true;
+      }
+
+      return false;
+    },
+
+    // Formats the specified strings with the given values like so:
+    // ```
+    // format("Foo: %{foo}", {foo: "bar"}) // "Foo bar"
+    // ```
+    // If you want to write %{...} without having it replaced simply
+    // prefix it with % like this `Foo: %%{foo}` and it will be returned
+    // as `"Foo: %{foo}"`
+    format: v.extend(function(str, vals) {
+      return str.replace(v.format.FORMAT_REGEXP, function(m0, m1, m2) {
+        if (m1 === '%') {
+          return "%{" + m2 + "}";
+        } else {
+          return String(vals[m2]);
+        }
+      });
+    }, {
+      // Finds %{key} style patterns in the given string
+      FORMAT_REGEXP: /(%?)%\{([^\}]+)\}/g
+    }),
+
+    // "Prettifies" the given string.
+    // Prettifying means replacing [.\_-] with spaces as well as splitting
+    // camel case words.
+    prettify: function(str) {
+      if (v.isNumber(str)) {
+        // If there are more than 2 decimals round it to two
+        if ((str * 100) % 1 === 0) {
+          return "" + str;
+        } else {
+          return parseFloat(Math.round(str * 100) / 100).toFixed(2);
         }
       }
-      , americandate: function () {
-        return {
-          validate: function ( val, elem, self) {
-            if ( !/^([01]?[0-9])[\.\/-]([0-3]?[0-9])[\.\/-]([0-9]{4}|[0-9]{2})$/.test( val ) ) {
-              return false;
+
+      if (v.isArray(str)) {
+        return str.map(function(s) { return v.prettify(s); }).join(", ");
+      }
+
+      if (v.isObject(str)) {
+        return str.toString();
+      }
+
+      // Ensure the string is actually a string
+      str = "" + str;
+
+      return str
+        // Splits keys separated by periods
+        .replace(/([^\s])\.([^\s])/g, '$1 $2')
+        // Removes backslashes
+        .replace(/\\+/g, '')
+        // Replaces - and - with space
+        .replace(/[_-]/g, ' ')
+        // Splits camel cased words
+        .replace(/([a-z])([A-Z])/g, function(m0, m1, m2) {
+          return "" + m1 + " " + m2.toLowerCase();
+        })
+        .toLowerCase();
+    },
+
+    stringifyValue: function(value) {
+      return v.prettify(value);
+    },
+
+    isString: function(value) {
+      return typeof value === 'string';
+    },
+
+    isArray: function(value) {
+      return {}.toString.call(value) === '[object Array]';
+    },
+
+    contains: function(obj, value) {
+      if (!v.isDefined(obj)) {
+        return false;
+      }
+      if (v.isArray(obj)) {
+        return obj.indexOf(value) !== -1;
+      }
+      return value in obj;
+    },
+
+    forEachKeyInKeypath: function(object, keypath, callback) {
+      if (!v.isString(keypath)) {
+        return undefined;
+      }
+
+      var key = ""
+        , i
+        , escape = false;
+
+      for (i = 0; i < keypath.length; ++i) {
+        switch (keypath[i]) {
+          case '.':
+            if (escape) {
+              escape = false;
+              key += '.';
+            } else {
+              object = callback(object, key, false);
+              key = "";
             }
-            var parts = val.split(/[.\/-]+/);
-            var day = parseInt(parts[1], 10);
-            var month = parseInt(parts[0], 10);
-            var year = parseInt(parts[2], 10);
-            if ( year == 0 || month == 0 || month > 12 ) {
-              return false;
+            break;
+
+          case '\\':
+            if (escape) {
+              escape = false;
+              key += '\\';
+            } else {
+              escape = true;
             }
-            var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
-            if ( year % 400 == 0 || ( year % 100 != 0 && year % 4 == 0 ) ) {
-              monthLength[1] = 29;
-            }
-            return day > 0 && day <= monthLength[month - 1];
-          }
-          , priority: 32
+            break;
+
+          default:
+            escape = false;
+            key += keypath[i];
+            break;
         }
       }
-    }
-    , messages: {
-        minwords:       "This value should have %s words at least."
-      , maxwords:       "This value should have %s words maximum."
-      , rangewords:     "This value should have between %s and %s words."
-      , greaterthan:    "This value should be greater than %s."
-      , lessthan:       "This value should be less than %s."
-      , beforedate:     "This date should be before %s."
-      , onorbeforedate: "This date should be on or before %s."
-      , afterdate:      "This date should be after %s."
-      , onorafterdate:  "This date should be on or after %s."
-      , luhn:           "This value should pass the luhn test."
-      , americandate:	"This value should be a valid date (MM/DD/YYYY)."
+
+      return callback(object, key, true);
+    },
+
+    getDeepObjectValue: function(obj, keypath) {
+      if (!v.isObject(obj)) {
+        return undefined;
+      }
+
+      return v.forEachKeyInKeypath(obj, keypath, function(obj, key) {
+        if (v.isObject(obj)) {
+          return obj[key];
+        }
+      });
+    },
+
+    // This returns an object with all the values of the form.
+    // It uses the input name as key and the value as value
+    // So for example this:
+    // <input type="text" name="email" value="foo@bar.com" />
+    // would return:
+    // {email: "foo@bar.com"}
+    collectFormValues: function(form, options) {
+      var values = {}
+        , i
+        , input
+        , inputs
+        , value;
+
+      if (v.isJqueryElement(form)) {
+        form = form[0];
+      }
+
+      if (!form) {
+        return values;
+      }
+
+      options = options || {};
+
+      inputs = form.querySelectorAll("input[name], textarea[name]");
+      for (i = 0; i < inputs.length; ++i) {
+        input = inputs.item(i);
+
+        if (v.isDefined(input.getAttribute("data-ignored"))) {
+          continue;
+        }
+
+        value = v.sanitizeFormValue(input.value, options);
+        if (input.type === "number") {
+          value = +value;
+        } else if (input.type === "checkbox") {
+          if (input.attributes.value) {
+            if (!input.checked) {
+              value = values[input.name] || null;
+            }
+          } else {
+            value = input.checked;
+          }
+        } else if (input.type === "radio") {
+          if (!input.checked) {
+            value = values[input.name] || null;
+          }
+        }
+        values[input.name] = value;
+      }
+
+      inputs = form.querySelectorAll("select[name]");
+      for (i = 0; i < inputs.length; ++i) {
+        input = inputs.item(i);
+        value = v.sanitizeFormValue(input.options[input.selectedIndex].value, options);
+        values[input.name] = value;
+      }
+
+      return values;
+    },
+
+    sanitizeFormValue: function(value, options) {
+      if (options.trim && v.isString(value)) {
+        value = value.trim();
+      }
+
+      if (options.nullify !== false && value === "") {
+        return null;
+      }
+      return value;
+    },
+
+    capitalize: function(str) {
+      if (!v.isString(str)) {
+        return str;
+      }
+      return str[0].toUpperCase() + str.slice(1);
+    },
+
+    // Remove all errors who's error attribute is empty (null or undefined)
+    pruneEmptyErrors: function(errors) {
+      return errors.filter(function(error) {
+        return !v.isEmpty(error.error);
+      });
+    },
+
+    // In
+    // [{error: ["err1", "err2"], ...}]
+    // Out
+    // [{error: "err1", ...}, {error: "err2", ...}]
+    //
+    // All attributes in an error with multiple messages are duplicated
+    // when expanding the errors.
+    expandMultipleErrors: function(errors) {
+      var ret = [];
+      errors.forEach(function(error) {
+        // Removes errors without a message
+        if (v.isArray(error.error)) {
+          error.error.forEach(function(msg) {
+            ret.push(v.extend({}, error, {error: msg}));
+          });
+        } else {
+          ret.push(error);
+        }
+      });
+      return ret;
+    },
+
+    // Converts the error mesages by prepending the attribute name unless the
+    // message is prefixed by ^
+    convertErrorMessages: function(errors, options) {
+      options = options || {};
+
+      var ret = [];
+      errors.forEach(function(errorInfo) {
+        var error = errorInfo.error;
+
+        if (error[0] === '^') {
+          error = error.slice(1);
+        } else if (options.fullMessages !== false) {
+          error = v.capitalize(v.prettify(errorInfo.attribute)) + " " + error;
+        }
+        error = error.replace(/\\\^/g, "^");
+        error = v.format(error, {value: v.stringifyValue(errorInfo.value)});
+        ret.push(v.extend({}, errorInfo, {error: error}));
+      });
+      return ret;
+    },
+
+    // In:
+    // [{attribute: "<attributeName>", ...}]
+    // Out:
+    // {"<attributeName>": [{attribute: "<attributeName>", ...}]}
+    groupErrorsByAttribute: function(errors) {
+      var ret = {};
+      errors.forEach(function(error) {
+        var list = ret[error.attribute];
+        if (list) {
+          list.push(error);
+        } else {
+          ret[error.attribute] = [error];
+        }
+      });
+      return ret;
+    },
+
+    // In:
+    // [{error: "<message 1>", ...}, {error: "<message 2>", ...}]
+    // Out:
+    // ["<message 1>", "<message 2>"]
+    flattenErrorsToArray: function(errors) {
+      return errors.map(function(error) { return error.error; });
+    },
+
+    cleanAttributes: function(attributes, whitelist) {
+      function whitelistCreator(obj, key, last) {
+        if (v.isObject(obj[key])) {
+          return obj[key];
+        }
+        return (obj[key] = last ? true : {});
+      }
+
+      function buildObjectWhitelist(whitelist) {
+        var ow = {}
+          , lastObject
+          , attr;
+        for (attr in whitelist) {
+          if (!whitelist[attr]) {
+            continue;
+          }
+          v.forEachKeyInKeypath(ow, attr, whitelistCreator);
+        }
+        return ow;
+      }
+
+      function cleanRecursive(attributes, whitelist) {
+        if (!v.isObject(attributes)) {
+          return attributes;
+        }
+
+        var ret = v.extend({}, attributes)
+          , w
+          , attribute;
+
+        for (attribute in attributes) {
+          w = whitelist[attribute];
+
+          if (v.isObject(w)) {
+            ret[attribute] = cleanRecursive(ret[attribute], w);
+          } else if (!w) {
+            delete ret[attribute];
+          }
+        }
+        return ret;
+      }
+
+      if (!v.isObject(whitelist) || !v.isObject(attributes)) {
+        return {};
+      }
+
+      whitelist = buildObjectWhitelist(whitelist);
+      return cleanRecursive(attributes, whitelist);
+    },
+
+    exposeModule: function(validate, root, exports, module, define) {
+      if (exports) {
+        if (module && module.exports) {
+          exports = module.exports = validate;
+        }
+        exports.validate = validate;
+      } else {
+        root.validate = validate;
+        if (validate.isFunction(define) && define.amd) {
+          define('validate',[], function () { return validate; });
+        }
+      }
+    },
+
+    warn: function(msg) {
+      if (typeof console !== "undefined" && console.warn) {
+        console.warn("[validate.js] " + msg);
+      }
+    },
+
+    error: function(msg) {
+      if (typeof console !== "undefined" && console.error) {
+        console.error("[validate.js] " + msg);
+      }
     }
   });
-}(window.jQuery || window.Zepto));
 
-define("parsley.extend", ["jquery"], function(){});
+  validate.validators = {
+    // Presence validates that the value isn't empty
+    presence: function(value, options) {
+      options = v.extend({}, this.options, options);
+      if (v.isEmpty(value)) {
+        return options.message || this.message || "can't be blank";
+      }
+    },
+    length: function(value, options, attribute) {
+      // Empty values are allowed
+      if (v.isEmpty(value)) {
+        return;
+      }
+
+      options = v.extend({}, this.options, options);
+
+      var is = options.is
+        , maximum = options.maximum
+        , minimum = options.minimum
+        , tokenizer = options.tokenizer || function(val) { return val; }
+        , err
+        , errors = [];
+
+      value = tokenizer(value);
+      var length = value.length;
+      if(!v.isNumber(length)) {
+        v.error(v.format("Attribute %{attr} has a non numeric value for `length`", {attr: attribute}));
+        return options.message || this.notValid || "has an incorrect length";
+      }
+
+      // Is checks
+      if (v.isNumber(is) && length !== is) {
+        err = options.wrongLength ||
+          this.wrongLength ||
+          "is the wrong length (should be %{count} characters)";
+        errors.push(v.format(err, {count: is}));
+      }
+
+      if (v.isNumber(minimum) && length < minimum) {
+        err = options.tooShort ||
+          this.tooShort ||
+          "is too short (minimum is %{count} characters)";
+        errors.push(v.format(err, {count: minimum}));
+      }
+
+      if (v.isNumber(maximum) && length > maximum) {
+        err = options.tooLong ||
+          this.tooLong ||
+          "is too long (maximum is %{count} characters)";
+        errors.push(v.format(err, {count: maximum}));
+      }
+
+      if (errors.length > 0) {
+        return options.message || errors;
+      }
+    },
+    numericality: function(value, options) {
+      // Empty values are fine
+      if (v.isEmpty(value)) {
+        return;
+      }
+
+      options = v.extend({}, this.options, options);
+
+      var errors = []
+        , name
+        , count
+        , checks = {
+            greaterThan:          function(v, c) { return v > c; },
+            greaterThanOrEqualTo: function(v, c) { return v >= c; },
+            equalTo:              function(v, c) { return v === c; },
+            lessThan:             function(v, c) { return v < c; },
+            lessThanOrEqualTo:    function(v, c) { return v <= c; }
+          };
+
+      // Coerce the value to a number unless we're being strict.
+      if (options.noStrings !== true && v.isString(value)) {
+        value = +value;
+      }
+
+      // If it's not a number we shouldn't continue since it will compare it.
+      if (!v.isNumber(value)) {
+        return options.message || this.notValid || "is not a number";
+      }
+
+      // Same logic as above, sort of. Don't bother with comparisons if this
+      // doesn't pass.
+      if (options.onlyInteger && !v.isInteger(value)) {
+        return options.message || this.notInteger  || "must be an integer";
+      }
+
+      for (name in checks) {
+        count = options[name];
+        if (v.isNumber(count) && !checks[name](value, count)) {
+          // This picks the default message if specified
+          // For example the greaterThan check uses the message from
+          // this.notGreaterThan so we capitalize the name and prepend "not"
+          var msg = this["not" + v.capitalize(name)] ||
+            "must be %{type} %{count}";
+
+          errors.push(v.format(msg, {
+            count: count,
+            type: v.prettify(name)
+          }));
+        }
+      }
+
+      if (options.odd && value % 2 !== 1) {
+        errors.push(this.notOdd || "must be odd");
+      }
+      if (options.even && value % 2 !== 0) {
+        errors.push(this.notEven || "must be even");
+      }
+
+      if (errors.length) {
+        return options.message || errors;
+      }
+    },
+    datetime: v.extend(function(value, options) {
+      // Empty values are fine
+      if (v.isEmpty(value)) {
+        return;
+      }
+
+      options = v.extend({}, this.options, options);
+
+      var err
+        , errors = []
+        , earliest = options.earliest ? this.parse(options.earliest, options) : NaN
+        , latest = options.latest ? this.parse(options.latest, options) : NaN;
+
+      value = this.parse(value, options);
+
+      // 86400000 is the number of seconds in a day, this is used to remove
+      // the time from the date
+      if (isNaN(value) || options.dateOnly && value % 86400000 !== 0) {
+        return options.message || this.notValid || "must be a valid date";
+      }
+
+      if (!isNaN(earliest) && value < earliest) {
+        err = this.tooEarly || "must be no earlier than %{date}";
+        err = v.format(err, {date: this.format(earliest, options)});
+        errors.push(err);
+      }
+
+      if (!isNaN(latest) && value > latest) {
+        err = this.tooLate || "must be no later than %{date}";
+        err = v.format(err, {date: this.format(latest, options)});
+        errors.push(err);
+      }
+
+      if (errors.length) {
+        return options.message || errors;
+      }
+    }, {
+      // This is the function that will be used to convert input to the number
+      // of millis since the epoch.
+      // It should return NaN if it's not a valid date.
+      parse: function(value, options) {
+        if (v.isFunction(v.XDate)) {
+          return new v.XDate(value, true).getTime();
+        }
+
+        if (v.isDefined(v.moment)) {
+          return +v.moment.utc(value);
+        }
+
+        throw new Error("Neither XDate or moment.js was found");
+      },
+      // Formats the given timestamp. Uses ISO8601 to format them.
+      // If options.dateOnly is true then only the year, month and day will be
+      // output.
+      format: function(date, options) {
+        var format = options.dateFormat;
+
+        if (v.isFunction(v.XDate)) {
+          format = format || (options.dateOnly ? "yyyy-MM-dd" : "yyyy-MM-dd HH:mm:ss");
+          return new v.XDate(date, true).toString(format);
+        }
+
+        if (v.isDefined(v.moment)) {
+          format = format || (options.dateOnly ? "YYYY-MM-DD" : "YYYY-MM-DD HH:mm:ss");
+          return v.moment.utc(date).format(format);
+        }
+
+        throw new Error("Neither XDate or moment.js was found");
+      }
+    }),
+    date: function(value, options) {
+      options = v.extend({}, options, {dateOnly: true});
+      return v.validators.datetime.call(v.validators.datetime, value, options);
+    },
+    format: function(value, options) {
+      if (v.isString(options) || (options instanceof RegExp)) {
+        options = {pattern: options};
+      }
+
+      options = v.extend({}, this.options, options);
+
+      var message = options.message || this.message || "is invalid"
+        , pattern = options.pattern
+        , match;
+
+      // Empty values are allowed
+      if (v.isEmpty(value)) {
+        return;
+      }
+      if (!v.isString(value)) {
+        return message;
+      }
+
+      if (v.isString(pattern)) {
+        pattern = new RegExp(options.pattern, options.flags);
+      }
+      match = pattern.exec(value);
+      if (!match || match[0].length != value.length) {
+        return message;
+      }
+    },
+    inclusion: function(value, options) {
+      // Empty values are fine
+      if (v.isEmpty(value)) {
+        return;
+      }
+      if (v.isArray(options)) {
+        options = {within: options};
+      }
+      options = v.extend({}, this.options, options);
+      if (v.contains(options.within, value)) {
+        return;
+      }
+      var message = options.message ||
+        this.message ||
+        "^%{value} is not included in the list";
+      return v.format(message, {value: value});
+    },
+    exclusion: function(value, options) {
+      // Empty values are fine
+      if (v.isEmpty(value)) {
+        return;
+      }
+      if (v.isArray(options)) {
+        options = {within: options};
+      }
+      options = v.extend({}, this.options, options);
+      if (!v.contains(options.within, value)) {
+        return;
+      }
+      var message = options.message || this.message || "^%{value} is restricted";
+      return v.format(message, {value: value});
+    },
+    email: v.extend(function(value, options) {
+      options = v.extend({}, this.options, options);
+      var message = options.message || this.message || "is not a valid email";
+      // Empty values are fine
+      if (v.isEmpty(value)) {
+        return;
+      }
+      if (!v.isString(value)) {
+        return message;
+      }
+      if (!this.PATTERN.exec(value)) {
+        return message;
+      }
+    }, {
+      PATTERN: /^[a-z0-9\u007F-\uffff!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9\u007F-\uffff!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/i
+    }),
+    equality: function(value, options, attribute, attributes) {
+      if (v.isEmpty(value)) {
+        return;
+      }
+
+      if (v.isString(options)) {
+        options = {attribute: options};
+      }
+      options = v.extend({}, this.options, options);
+      var message = options.message ||
+        this.message ||
+        "is not equal to %{attribute}";
+
+      if (v.isEmpty(options.attribute) || !v.isString(options.attribute)) {
+        throw new Error("The attribute must be a non empty string");
+      }
+
+      var otherValue = v.getDeepObjectValue(attributes, options.attribute)
+        , comparator = options.comparator || function(v1, v2) {
+          return v1 === v2;
+        };
+
+      if (!comparator(value, otherValue, options, attribute, attributes)) {
+        return v.format(message, {attribute: v.prettify(options.attribute)});
+      }
+    }
+  };
+
+  validate.exposeModule(validate, this, exports, module, define);
+}).call(this,
+        typeof exports !== 'undefined' ? /* istanbul ignore next */ exports : null,
+        typeof module !== 'undefined' ? /* istanbul ignore next */ module : null,
+        typeof define !== 'undefined' ? /* istanbul ignore next */ define : null);
 
 /**
  * Patterns validate - Form vlidation
  *
  * Copyright 2013 Simplon B.V. - Wichert Akkerman
+ * Copyright 2014-2015 Syslab.com GmBH  - JC Brand
  */
-define('pat-validate',[
+define('pat-validation',[
     "jquery",
+    "underscore",
     "pat-parser",
     "pat-base",
     "pat-utils",
-    "parsley",
-    "parsley.extend"
-], function($, Parser, Base, utils) {
-    var parser = new Parser("validate");
+    "moment",
+    "validate"
+], function($, _, Parser, Base, utils, moment, validate) {
+    "use strict";
+    validate.moment = moment;
+    var parser = new Parser("validation");
     parser.addArgument("disable-selector"); // Elements which must be disabled if there are errors
+    parser.addArgument("message-date", "This value must be a valid date");
+    parser.addArgument("message-datetime", "This value must be a valid date and time");
+    parser.addArgument("message-email", "This value must be a valid email address");
+    parser.addArgument("message-integer", "This value must be an integer");
+    parser.addArgument("message-max", "This value must be less than or equal to %{count}");
+    parser.addArgument("message-min", "This value must be greater than or equal to %{count}");
+    parser.addArgument("message-number", "This value must be a number");
+    parser.addArgument("message-required", "This field is required");
+    parser.addArgument("not-after");
+    parser.addArgument("not-before");
+    parser.addArgument("type", undefined, ["integer"]); // Currently only used for number types.
+    var VALIDATION_TYPE_MAP = {
+        'required': 'presence',
+        'email': 'email',
+        'datetime': 'datetime',
+        'date': 'date'
+    };
 
     return Base.extend({
-        name: "validate",
-        trigger: "form.pat-validate",
+        name: "validation",
+        trigger: "form.pat-validation",
 
         init: function($el, opts) {
             this.errors = 0;
             this.options = parser.parse(this.$el, opts);
-            this.$el.noValidate = true;
-            var parsley_form = this.initParsley();
-            this.$el.on("pat-ajax-before.pat-validate", this.onPreSubmit);
-            this.$el.on('pat-update', this.onPatternUpdate.bind(this));
-            this.$el.on("click.pat-validate", ".close-panel", function (ev) {
-                if (!parsley_form.validate()) {
-                    ev.preventDefault();
-                    ev.stopPropagation();
-                }
-            }.bind(this));
+            this.$inputs = this.$el.find(':input[name]');
+            this.$el.find(":input[type=number]").bind('keyup mouseup', _.debounce(function (ev) {
+                this.validateElement(ev.target);
+            }.bind(this), 500));
+            this.$inputs.on('change.pat-validation', function (ev) { this.validateElement(ev.target); }.bind(this));
+            this.$el.on('submit.pat-validation', this.validateForm.bind(this));
+            this.$el.on('pat-update.pat-validation', this.onPatternUpdate.bind(this));
         },
 
-        initParsley: function() {
-            var field, i;
-            var parsley_form = this.$el.parsley({
-                trigger: "change keyup",
-                successClass: "valid",
-                errorClass: "warning",
-                errors: {
-                    classHandler: this._classHandler,
-                    container: this._container
-                },
-                messages: {
-                    beforedate:     "This date should be before another date.",
-                    onorbeforedate: "This date should be on or before another date.",
-                    afterdate:      "This date should be after another date.",
-                    onorafterdate:  "This date should be on or after another date."
+        setLocalDateConstraints: function (input, opts, constraints) {
+            /* Set the relative date constraints, i.e. not-after and not-before, as well as custom messages.
+             */
+            var name = input.getAttribute('name').replace(/\./g, '\\.'),
+                type = input.getAttribute('type'),
+                c = constraints[name][type];
+
+            if (typeof opts == "undefined") {
+                return constraints;
+            }
+            _.each(['before', 'after'], function (relation) {
+                var isDate = validate.moment.isDate,
+                    relative = opts.not[relation], arr, constraint, $ref;
+                if (typeof relative == "undefined") {
+                    return;
+                }
+                constraint = relation === "before" ? 'earliest' : 'latest';
+                if (isDate(relative)) {
+                    c[constraint] = relative;
+                } else {
+                    try {
+                        $ref = $(relative);
+                    } catch (e) {
+                        console.log(e);
+                    }
+                    arr = $ref.data('pat-validation-refs') || [];
+                    if (!_.contains(arr, input)) {
+                        arr.unshift(input);
+                        $ref.data('pat-validation-refs', arr);
+                    }
+                    c[constraint] = $ref.val();
                 }
             });
-            var that = this;
-            function _addFieldError(error) {
-                that._addFieldError.call(that, this, error);
-            }
-            function _removeFieldError(constraintName) {
-                that._removeFieldError.call(that, this, constraintName);
-            }
-            for (i=0; i<parsley_form.items.length; i++) {
-                field = parsley_form.items[i];
-                if (typeof field.UI !== "undefined") {
-                    // Parsley 1.2.x
-                    field.UI.addError = _addFieldError;
-                    field.UI.removeError = _removeFieldError;
-                    this.parsley12 = true;
-                } else {
-                    // Parsley 1.1.x
-                    field.addError = _addFieldError;
-                    field.removeError = _removeFieldError;
+            return constraints;
+        },
+
+        setLocalConstraints: function (input, constraints) {
+            /* Some form fields might have their own data-pat-validation
+             * attribute, used to set field-specific constraints.
+             *
+             * We parse them and add them to the passed in constraints obj.
+             */
+            var name = input.getAttribute('name').replace(/\./g, '\\.'),
+                type = input.getAttribute('type'),
+                opts = parser.parse($(input)),
+                constraint = constraints[name];
+            if (_.contains(['datetime', 'date'], type)) {
+                this.setLocalDateConstraints(input, opts, constraints);
+            } else if (type == 'number') {
+                _.each(['min', 'max'], function (limit) {
+                    // TODO: need to figure out how to add local validation
+                    // messages for numericality operators
+                    if (input.getAttribute(limit)) {
+                        var constraint = constraints[name],
+                            key = limit == 'min' ? 'greaterThanOrEqualTo' : 'lessThanOrEqualTo',
+                            value = Number(input.getAttribute(limit));
+                        if (typeof constraint.numericality === "boolean") {
+                            constraint.numericality = {};
+                        }
+                        constraint.numericality[key] = value;
+                    }
+                });
+                if (opts.type == "integer") {
+                    if (typeof constraint.numericality === "boolean") {
+                        constraint.numericality = {};
+                    }
+                    constraint.numericality.onlyInteger = true;
                 }
             }
-            return parsley_form;
+            // Set local validation messages.
+            _.each(Object.keys(VALIDATION_TYPE_MAP), function (type) {
+                var c = constraints[name][VALIDATION_TYPE_MAP[type]];
+                if (c === false) {
+                    c = { 'message': '^'+opts.message[type] };
+                } else {
+                    c.message = '^'+opts.message[type];
+                }
+            });
+            return constraints;
+        },
+
+        getConstraints: function (input) {
+            // Get validation constraints by parsing the input element for hints
+            var name = input.getAttribute('name'),
+                type = input.getAttribute('type'),
+                constraints = {};
+            if (!name) { return; }
+            constraints[name.replace(/\./g, '\\.')] = {
+                'presence': input.getAttribute('required') ? { 'message': '^'+this.options.message.required } : false,
+                'email': type == 'email' ? { 'message': '^'+this.options.message.email } : false,
+                'numericality': type == 'number' ? true : false,
+                'datetime': type == 'datetime' ? { 'message': '^'+this.options.message.datetime } : false,
+                'date': type == 'date' ? { 'message': '^'+this.options.message.date } : false
+            };
+            return this.setLocalConstraints(input, constraints);
+        },
+
+        getValueDict: function (input) {
+            /* Return a dict {name: value} derived from a DOM input element.
+             * Used by validate.js's validate method.
+             */
+            var value_dict = {};
+            var name = input.getAttribute('name');
+            var value = input.value;
+            if (input.getAttribute('type') == "number") {
+                try {
+                    value = Number(input.value);
+                } catch (e) {
+                    value = input.value;
+                }
+            }
+            value_dict[name] = value;
+            return value_dict;
+        },
+
+        validateForm: function (ev) {
+            /* Handler which gets called when the entire form needs to be
+             * validated. Will prevent the event's default action if validation fails.
+             */
+            var has_errors = false, input, error;
+            var $not_disabled = this.$inputs.filter(function (idx, input) {
+                return !input.hasAttribute('disabled');
+            });
+            for (var i=0; i<$not_disabled.length; i++) {
+                error = this.validateElement($not_disabled[i]);
+                if (typeof error != "undefined") {
+                    if (!has_errors) {
+                        ev.preventDefault();
+                        ev.stopPropagation();
+                        ev.stopImmediatePropagation();
+                    }
+                    has_errors = true;
+                }
+            }
+        },
+
+        customizeMessage: function (msg, input) {
+            /* Due to a limitation in validate.js, whereby we cannot have more
+             * fine-grained error messages for sub-validations (e.g. is a
+             * number and is bigger than 5), we need to customize the messages
+             * after validation. We do that here.
+             */
+            var opts = parser.parse($(input));
+            if (msg.indexOf("must be greater than or equal to") != -1) {
+                return validate.format(opts.message.min, {
+                    count: input.getAttribute('min')
+                });
+            } else if (msg.indexOf("must be less than or equal to") != -1) {
+                return validate.format(opts.message.max, {
+                    count: input.getAttribute('max')
+                });
+            } else if (msg.indexOf("is not a number") != -1) {
+                return opts.message.number;
+            } else if (msg.indexOf("must be an integer") != -1) {
+                return opts.message.integer;
+            }
+            return msg;
+        },
+
+        validateElement: function (input, no_recurse) {
+            /* Handler which gets called when a single form :input element
+             * needs to be validated. Will prevent the event's default action
+             * if validation fails.
+             */
+            var error = validate(this.getValueDict(input), this.getConstraints(input));
+            if (!error) {
+                this.removeError(input);
+            } else {
+                var name = input.getAttribute('name').replace(/\./g, '\\.');
+                _.each(error[name], function (msg) {
+                    this.showError(this.customizeMessage(msg, input), input);
+                }.bind(this));
+            }
+            if (!no_recurse) {
+                _.each($(input).data('pat-validation-refs') || [], _.partial(this.validateElement.bind(this), _, true));
+            }
+            return error;
         },
 
         onPatternUpdate: function (ev, data) {
             /* Handler which gets called when pat-update is triggered within
-             * the .pat-validate element.
+             * the .pat-validation element.
+             *
+             * Currently we handle the case where new content appears in the
+             * form. In that case we need to remove and then reassign event
+             * handlers.
              */
-            // XXX: We should also handle here general pat-inject updates.
-            if (data.pattern == "clone") {
-                this.$el.data("parsleyForm", null); // XXX: Hack. Remove old data, so that parsley rescans.
-                this.initParsley(data.$el);
+            if (data.pattern == "clone" || data.pattern == "inject") {
+                this.$inputs.off('change.pat-validation');
+                this.$el.off('submit.pat-validation');
+                this.$el.off('pat-update.pat-validation');
+                this.init();
             }
             return true;
         },
 
-        // Parsley error class handler, used to determine which element will
-        // receive the status class.
-        _classHandler: function(elem/*, isRadioOrCheckbox */) {
-            var $result = elem;
-            for (var i=0; i<elem.length; i++) {
-                $result=$result.add(utils.findLabel(elem[i]));
-                $result=$result.add(elem.eq(i).closest("fieldset"));
-            }
-            return $result;
-        },
-
-        // Parsley hook to determine where error messages are inserted.
-        _container: function(/* element, isRadioOrCheckbox */) {
-            return $();
-        },
-
-        _findErrorMessages: function($el, constraintName) {
-            var selector = "em.validation.message[data-validate-constraint="+constraintName+"]",
+        findErrorMessages: function(el) {
+            var $el = $(el),
+                selector = "em.validation.message",
                 $messages = $el.siblings(selector);
             if ($el.is("[type=radio],[type=checkbox]")) {
                 var $fieldset = $el.closest("fieldset.checklist");
@@ -43810,71 +43300,45 @@ define('pat-validate',[
             return $messages;
         },
 
-        // Parsley method to add an error to a field
-        _addFieldError: function(parsley, error) {
-            var $el;
-            if (this.parsley12) {
-                $el = parsley.ParsleyInstance.element;
-            } else {
-                $el = parsley.element;
+        removeError: function(input) {
+            var $errors = this.findErrorMessages(input);
+            $errors.remove();
+            this.errors = this.errors - $errors.length;
+            if (this.errors < 1 && this.options.disableSelector) {
+                $(this.options.disableSelector).removeProp('disabled').removeClass('disabled');
             }
-            var $position = $el,
-                strategy="after";
+        },
 
+        showError: function(error, input) {
+            var $el = $(input),
+                $position = $el,
+                strategy="after",
+                $message = $("<em/>", {"class": "validation warning message"}),
+                $fieldset;
             if ($el.is("[type=radio],[type=checkbox]")) {
-                var $fieldset = $el.closest("fieldset.checklist");
+                $fieldset = $el.closest("fieldset.checklist");
                 if ($fieldset.length) {
-                    $position=$fieldset;
+                    $position = $fieldset;
                     strategy="append";
                 }
             }
-
-            for (var constraintName in error) {
-                if (this._findErrorMessages($el, constraintName).length) {
-                    return;
-                }
-                var $message = $("<em/>", {"class": "validation warning message"});
-                $message.attr("data-validate-constraint", constraintName);
-                $message.text(error[constraintName]);
-                switch (strategy) {
-                    case "append":
-                        $message.appendTo($position);
-                        break;
-                    case "after":
-                        $message.insertAfter($position);
-                        break;
-                }
+            this.findErrorMessages(input).remove();
+            $message.text(error);
+            switch (strategy) {
+                case "append":
+                    $message.appendTo($position);
+                    break;
+                case "after":
+                    $message.insertAfter($position);
+                    break;
             }
             this.errors += 1;
-            $(this.options.disableSelector).prop('disabled', true).addClass('disabled');
-            $position.trigger("pat-update", {pattern: "validate"});
-        },
-
-        // Parsley method to remove all error messages for a field
-        _removeFieldError: function(parsley, constraintName) {
-            var $el;
-            if (this.parsley12) {
-                $el = parsley.ParsleyInstance.element;
-            } else {
-                $el = parsley.element;
+            if (this.options.disableSelector) {
+                $(this.options.disableSelector).prop('disabled', true).addClass('disabled');
             }
-            var $messages = this._findErrorMessages($el, constraintName);
-            $messages.parent().trigger("pat-update", {pattern: "validate"});
-            $messages.remove();
-            if (this.errors <= 1) {
-                $(this.options.disableSelector).prop('disabled', false).removeClass('disabled');
-                this.errors = 0;
-            } else {
-                this.errors -= 1;
-            }
-        },
-
-        onPreSubmit: function(event, veto) {
-            veto.veto |= !$(event.target).parsley("isValid");
-            $(event.target).parsley("validate");
+            $position.trigger("pat-update", {pattern: "validation"});
         }
     });
-
 });
 
 define('pat-zoom',[
@@ -43981,7 +43445,7 @@ define('patterns',[
     "pat-toggle",
     "pat-tooltip",
     "pat-url",
-    "pat-validate",
+    "pat-validation",
     "pat-zoom"
 ], function(registry) {
     window.patterns = registry;

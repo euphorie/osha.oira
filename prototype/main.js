@@ -36,8 +36,6 @@ require.config({
         "picker":                           "bower_components/pickadate/lib/picker",
         "picker.date":                      "bower_components/pickadate/lib/picker.date",
         "picker.time":                      "bower_components/pickadate/lib/picker.time",
-        "parsley":                          "bower_components/parsleyjs/parsley",
-        "parsley.extend":                   "bower_components/parsleyjs/parsley.extend",
         "patternslib.slides":               "bower_components/slides/src/slides",
         "photoswipe":                       "bower_components/photoswipe/dist/photoswipe",
         "photoswipe-ui":                    "bower_components/photoswipe/dist/photoswipe-ui-default",
@@ -54,6 +52,7 @@ require.config({
         "tpl":                              "bower_components/requirejs-tpl-jcbrand/tpl",
         "tinymce":                          "bower_components/jquery.tinymce/jscripts/tiny_mce/jquery.tinymce",
         "underscore":                       "bower_components/underscore/underscore",
+        "validate":                         "bower_components/validate/validate",
 
         // Calendar pattern
         "moment": "bower_components/moment/moment",
@@ -125,7 +124,7 @@ require.config({
         "pat-toggle":                "bower_components/patternslib/src/pat/toggle/toggle",
         "pat-tooltip":               "bower_components/patternslib/src/pat/tooltip/tooltip",
         "pat-upload":                "bower_components/pat-upload/src/pat-upload",
-        "pat-validate":              "bower_components/patternslib/src/pat/validate/validate",
+        "pat-validation":            "bower_components/patternslib/src/pat/validation/validation",
         "pat-zoom":                  "bower_components/patternslib/src/pat/zoom/zoom",
         "patterns":                  "patterns",
     },
@@ -138,15 +137,13 @@ require.config({
         "jquery.fullcalendar.dnd":      { deps: ["jquery"] },
         "jquery.placeholder":           { deps: ["jquery"] },
         "jquery.textchange":            { deps: ["jquery"] },
-        "parsley":                      { deps: ["jquery"] },
-        "parsley.extend":               { deps: ["jquery"] },
         "select2":                      { deps: ["jquery"] },
         "spectrum":                     { deps: ["jquery"] },
         "tinymce":                      { deps: ["jquery"] },
         "showdown-github":              { deps: ["showdown"] },
         "showdown-prettify":            { deps: ["showdown", "google-code-prettify"] },
         "showdown-table":               { deps: ["showdown"] }
-    },
+    }
 });
 
 if (typeof(require) === 'function') {

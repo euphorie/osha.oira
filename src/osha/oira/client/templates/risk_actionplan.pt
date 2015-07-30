@@ -75,7 +75,7 @@
                         <a class="pat-inject close-panel title"
                         href="#standard-solution-${repeat/measure/number}"
                         data-pat-inject="target: #fields-0">
-                        <em class="small pat-button" i18n:translate="">Add</em>${measure/description}</a>
+                        <em class="iconified icon-plus-circle" i18n:translate="">Add</em>${measure/description}</a>
                     </li>
                 </ol>
             </div>
@@ -163,7 +163,7 @@
                     <a class="pat-inject close-panel title"
                        href="#standard-solution-${repeat/solution/number}"
                        data-pat-inject="target: #fields-#{1}">
-                    <em class="small pat-button">Add</em>${solution/description}</a>
+                    <em class="iconified icon-plus-circle">Add</em>${solution/description}</a>
                 </li>
             </ol>
         </div>

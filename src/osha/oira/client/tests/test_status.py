@@ -36,6 +36,7 @@ SURVEY = \
             </survey>
           </sector>"""
 
+
 def addSurvey(portal, xml_survey):
     """Add a survey to the portal. This function requires that you are already
     loggin in as portal owner."""
@@ -46,6 +47,7 @@ def addSurvey(portal, xml_survey):
     survey = sector.values()[0]["test-import"]
     publisher = publish.PublishSurvey(survey, portal.REQUEST)
     publisher.publish()
+
 
 def createSurveySession():
     sqlsession = Session()
@@ -94,7 +96,8 @@ class SurveySessionTests(OiRAFunctionalTestCase):
 
         def getRisks(dummy):
             return [
-                {   'title': u"Le conducteur est-il prot\xe9g\xe9 des autres v\xe9hicules lorsqu'il circule au sol ?",
+                {
+                    'title': u"Le conducteur est-il prot\xe9g\xe9 des autres v\xe9hicules lorsqu'il circule au sol ?",
                     'priority': u'medium',
                     'identification': u'no',
                     'path': u'001001001',
@@ -104,7 +107,8 @@ class SurveySessionTests(OiRAFunctionalTestCase):
                     'zodb_path': u'504/277/444',
                     'risk_type': u'risk'
                 },
-                {   'title': u"Le conducteur effectue-t-il toutes ses man\u0153uvres d'accroche/d\xe9croche depuis le sol ?",
+                {
+                    'title': u"Le conducteur effectue-t-il toutes ses man\u0153uvres d'accroche/d\xe9croche depuis le sol ?",
                     'priority': u'high',
                     'identification': u'no',
                     'path': u'001001002',
@@ -160,11 +164,13 @@ class SurveySessionTests(OiRAFunctionalTestCase):
             }
         }
         view.getStatus()
-        self.assertEquals(view.status[0]['title'], u'Shops are clean - Somerset West');
-        self.assertEquals(view.status[0]['risk_without_measures'], 2);
-        self.assertEquals(view.status[0]['risk_with_measures'], 0);
-        self.assertEquals(view.status[0]['postponed'], 1);
-        self.assertEquals(view.status[0]['todo'], 1);
-        self.assertEquals(view.status[0]['ok'], 1);
-        self.assertEquals(view.percentage_ok, 20);
+        self.assertEquals(
+            view.status[0]['title'],
+            u'Shops are clean - Somerset West')
+        self.assertEquals(view.status[0]['risk_without_measures'], 2)
+        self.assertEquals(view.status[0]['risk_with_measures'], 0)
+        self.assertEquals(view.status[0]['postponed'], 1)
+        self.assertEquals(view.status[0]['todo'], 1)
+        self.assertEquals(view.status[0]['ok'], 1)
+        self.assertEquals(view.percentage_ok, 20)
         self.assertEquals(len(view.high_risks[u'001001']), 1)

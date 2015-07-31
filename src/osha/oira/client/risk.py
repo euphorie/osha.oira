@@ -226,13 +226,15 @@ class OSHAActionPlanView(risk.ActionPlanView):
                             if p[1].strip()])
             form['action_plans'].append(measure)
             if len(measure):
+                budget = measure.get("budget")
+                budget = budget and budget.split(',')[0].split('.')[0]
                 new_plans.append(
                     model.ActionPlan(
                         action_plan=measure.get("action_plan"),
                         prevention_plan=measure.get("prevention_plan"),
                         requirements=measure.get("requirements"),
                         responsible=measure.get("responsible"),
-                        budget=measure.get("budget", '').split(',')[0].split('.')[0],
+                        budget=budget,
                         planning_start=measure.get('planning_start'),
                         planning_end=measure.get('planning_end')
                     )

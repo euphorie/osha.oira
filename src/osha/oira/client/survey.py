@@ -307,7 +307,6 @@ class OSHAStatus(survey.Status):
         """ Gather a list of the modules and locations in this survey as well
             as data around their state of completion.
         """
-        base_url = "%s/actionplan" % self.request.survey.absolute_url()
         session = Session()
         total_ok = 0
         self.high_risks = {}
@@ -330,27 +329,8 @@ class OSHAStatus(survey.Status):
             else:
                 modules[r['module_path']]['todo'] += 1
 
-            if r['priority'] == "high":
-                if r['identification'] != 'no':
-                    if r['risk_type'] not in ['top5']:
-                        continue
-            else:
-                continue
-            if r['is_custom_risk']:
-                risk_title = r['title']
-            else:
-                risk_obj = self.request.survey.restrictedTraverse(r['zodb_path'].split('/'))
-                if not risk_obj:
-                    continue
-                if r['identification'] == 'no':
-                    risk_title = risk_obj.problem_description
-                else:
-                    risk_title = r['title']
-            url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['path'])))
-            if self.high_risks.get(r['module_path']):
-                self.high_risks[r['module_path']].append({'title': risk_title, 'path': url})
-            else:
-                self.high_risks[r['module_path']] = [{'title': risk_title, 'path':url}]
+            self.add_to_priority_list(r)
+
         for key, m in modules.items():
             if m['ok'] + m['postponed'] + m['risk_with_measures'] + m['risk_without_measures'] + m['todo'] == 0:
                 del modules[key]
@@ -360,3 +340,29 @@ class OSHAStatus(survey.Status):
         self.status.sort(key=lambda m: m["path"])
         self.toc = self.tocdata.values()
         self.toc.sort(key=lambda m: m["path"])
+
+    def add_to_priority_list(self, r):
+        if r['priority'] == "high":
+            if r['identification'] != 'no':
+                if r['risk_type'] not in ['top5']:
+                    return
+        else:
+            return
+
+        base_url = "%s/actionplan" % self.request.survey.absolute_url()
+
+        if r['is_custom_risk']:
+            risk_title = r['title']
+        else:
+            risk_obj = self.request.survey.restrictedTraverse(r['zodb_path'].split('/'))
+            if not risk_obj:
+                return
+            if r['identification'] == 'no':
+                risk_title = risk_obj.problem_description
+            else:
+                risk_title = r['title']
+        url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['path'])))
+        if self.high_risks.get(r['module_path']):
+            self.high_risks[r['module_path']].append({'title': risk_title, 'path': url})
+        else:
+            self.high_risks[r['module_path']] = [{'title': risk_title, 'path':url}]

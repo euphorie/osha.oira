@@ -232,7 +232,7 @@ class OSHAActionPlanView(risk.ActionPlanView):
                         prevention_plan=measure.get("prevention_plan"),
                         requirements=measure.get("requirements"),
                         responsible=measure.get("responsible"),
-                        budget=measure.get("budget").split(',')[0].split('.')[0],
+                        budget=measure.get("budget", '').split(',')[0].split('.')[0],
                         planning_start=measure.get('planning_start'),
                         planning_end=measure.get('planning_end')
                     )

@@ -124,7 +124,29 @@ class SurveySessionTests(OiRAFunctionalTestCase):
                     'is_custom_risk': False,
                     'zodb_path': u'504/277/385',
                     'risk_type': u'risk'
-                }
+                },
+                {
+                    'title': u'Un autre risque ?',
+                    'priority': u'medium',
+                    'identification': None,
+                    'path': u'001001004',
+                    'module_path': u'001001',
+                    'postponed': False, 'id': 324771,
+                    'is_custom_risk': False,
+                    'zodb_path': u'504/277/383',
+                    'risk_type': u'risk'
+                },
+                {
+                    'title': u'Encore un autre risque ?',
+                    'priority': u'low',
+                    'identification': None,
+                    'path': u'001001005',
+                    'module_path': u'001001',
+                    'postponed': True, 'id': 324764,
+                    'is_custom_risk': False,
+                    'zodb_path': u'504/277/381',
+                    'risk_type': u'risk'
+                },
             ]
 
         view.getModules = getModules
@@ -141,8 +163,8 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         self.assertEquals(view.status[0]['title'], u'Shops are clean - Somerset West');
         self.assertEquals(view.status[0]['risk_without_measures'], 2);
         self.assertEquals(view.status[0]['risk_with_measures'], 0);
-        self.assertEquals(view.status[0]['postponed'], 0);
-        self.assertEquals(view.status[0]['todo'], 0);
+        self.assertEquals(view.status[0]['postponed'], 1);
+        self.assertEquals(view.status[0]['todo'], 1);
         self.assertEquals(view.status[0]['ok'], 1);
-        self.assertEquals(view.percentage_ok, 33);
+        self.assertEquals(view.percentage_ok, 20);
         self.assertEquals(len(view.high_risks[u'001001']), 1)

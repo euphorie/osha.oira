@@ -281,35 +281,24 @@
             </figure>
     </tal:single>
     </div>
-    <span id="description">
+
+    <section id="concise-content">
       <tal:description_intro condition="view/description_intro">
-        <p tal:content="structure view/description_intro">short description</p>
-        <p class="show-more-or-less">
-          <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description" i18n:translate="label_show_more"><strong i18n:name="read_more" i18n:translate="Read more" class="show-more">Read more</strong> about this risk.</a>
+        <p class="introduction">
+          <tal:text replace="structure view/description_intro">short description</tal:text> <a class="show-more pat-inject" href="${request/ACTUAL_URL}" data-pat-inject="source: #full-content; target: #concise-content;" i18n:translate="Read more">Read more</a>
         </p>
       </tal:description_intro>
       <tal:no_description_intro condition="not:view/description_intro">
-        <p class="description" tal:replace="structure risk/description">
-          The temperature in a fridge is critical to storing food.
+        <p class="introduction">
+          <tal:text replace="structure risk/description">description</tal:text>
         </p>
       </tal:no_description_intro>
-    </span>
+    </section>
 
-    <span id="full_description" hidden="hidden">
-      <p tal:replace="structure risk/description">
-        The temperature in a fridge is critical to storing food.
-      </p>
-      <p class="show-more-or-less">
-        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description; target: #description" i18n:translate="label_show_less"><strong i18n:name="read_less" i18n:translate="Read less" class="show-less">Read less</strong> about this risk.</a>
-      </p>
-    </span>
+    <article id="full-content" hidden="hidden">
+      <tal:text replace="structure risk/description">description</tal:text>
+    </article>
 
-    <span id="short_description" hidden="hidden">
-      <p tal:content="structure view/description_intro">short description</p>
-      <p class="show-more-or-less">
-        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #full_description; target: #description" i18n:translate="label_show_more"><strong i18n:name="read_more" i18n:translate="Read more" class="show-more">Read more</strong> about this risk.</a>
-      </p>
-    </span>
   </metal:riskinfo>
 
 

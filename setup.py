@@ -6,6 +6,7 @@ version = '2.3.8.dev0'
 tests_require = [
         'Euphorie [tests]',
         'mock',
+        'collective.testcaselayer',
       ]
 
 setup(name='osha.oira',
@@ -41,6 +42,7 @@ setup(name='osha.oira',
           # steps. The following package is therefore added for providing the
           # required interface.
           'collective.js.jqueryui',
+          'htmllaundry',
           'oira.private', # Private egg with nonfree redactor JS/CSS
           'plone.autoform',
           'plone.tiles',

@@ -1,5 +1,6 @@
 from Acquisition import aq_inner
 from Acquisition import aq_parent
+from collections import defaultdict
 from decimal import Decimal
 from euphorie.client import model
 from euphorie.client import survey, report
@@ -143,6 +144,20 @@ class OSHAStatus(survey.Status):
     grok.layer(interfaces.IOSHAClientSkinLayer)
     grok.template("status")
     grok.name("status")
+
+    def __init__(self, context, request):
+        super(OSHAStatus, self).__init__(context, request)
+        self.risks_by_status = {
+            'present': {
+                'high': defaultdict(list),
+                'medium': defaultdict(list),
+                'low': defaultdict(list),
+            },
+            'possible': {
+                'postponed': defaultdict(list),
+                'todo': defaultdict(list),
+            },
+        }
 
     def module_query(self, sessionid, optional_modules):
         if optional_modules:
@@ -309,7 +324,6 @@ class OSHAStatus(survey.Status):
         """
         session = Session()
         total_ok = 0
-        self.high_risks = {}
         modules = self.getModules()
         risks = self.getRisks([m['path'] for m in modules.values()])
         for r in risks:
@@ -329,7 +343,7 @@ class OSHAStatus(survey.Status):
             else:
                 modules[r['module_path']]['todo'] += 1
 
-            self.add_to_priority_list(r)
+            self.add_to_risk_list(r)
 
         for key, m in modules.items():
             if m['ok'] + m['postponed'] + m['risk_with_measures'] + m['risk_without_measures'] + m['todo'] == 0:
@@ -341,16 +355,18 @@ class OSHAStatus(survey.Status):
         self.toc = self.tocdata.values()
         self.toc.sort(key=lambda m: m["path"])
 
-    def add_to_priority_list(self, r):
-        if r['priority'] == "high":
-            if r['identification'] != 'no':
-                if r['risk_type'] not in ['top5']:
-                    return
-        else:
+    def add_to_risk_list(self, r):
+        if self.is_skipped_from_risk_list(r):
             return
 
-        base_url = "%s/actionplan" % self.request.survey.absolute_url()
+        risk_title = self.get_risk_title(r)
 
+        base_url = "%s/actionplan" % self.request.survey.absolute_url()
+        url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['path'])))
+
+        self.risks_by_status['present'][r['priority']][r['module_path']].append({'title': risk_title, 'path': url})
+
+    def get_risk_title(self, r):
         if r['is_custom_risk']:
             risk_title = r['title']
         else:
@@ -361,8 +377,24 @@ class OSHAStatus(survey.Status):
                 risk_title = risk_obj.problem_description
             else:
                 risk_title = r['title']
-        url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['path'])))
-        if self.high_risks.get(r['module_path']):
-            self.high_risks[r['module_path']].append({'title': risk_title, 'path': url})
+        return risk_title
+
+    def is_skipped_from_risk_list(self, r):
+        if r['priority'] == "high":
+            if r['identification'] != 'no':
+                if r['risk_type'] not in ['top5']:
+                    return True
         else:
-            self.high_risks[r['module_path']] = [{'title': risk_title, 'path':url}]
+            return True
+
+
+class RisksOverview(OSHAStatus):
+    """ Implements the "Overview of Risks" report, see #10967
+    """
+    grok.layer(interfaces.IOSHAClientSkinLayer)
+    grok.template("status")
+    grok.name("risks_overview")
+
+    def is_skipped_from_risk_list(self, r):
+        if r['identification'] != 'no' and r['risk_type'] not in ['top5']:
+            return True

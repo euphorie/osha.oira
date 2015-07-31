@@ -63,22 +63,25 @@ def createSurveySession():
 
 class SurveySessionTests(OiRAFunctionalTestCase):
 
-    def testStatusView(self):
+    def setUp(self):
+        super(SurveySessionTests, self).setUp()
         self.loginAsPortalOwner()
         addSurvey(self.portal, SURVEY)
-        survey = self.portal.client.nl["ict"]["software-development"]
+        self.survey = self.portal.client.nl["ict"]["software-development"]
 
         class DummyObj(object):
             problem_description = u'A Tricky Problem'
 
-        survey.restrictedTraverse = lambda path: DummyObj()
-        request = self.portal.REQUEST
-        request.survey = survey
-        request.other["euphorie.session"] = createSurveySession()
-        utils.setRequest(request)
-        interface.alsoProvides(request, interfaces.IOSHAClientSkinLayer)
+        self.survey.restrictedTraverse = lambda path: DummyObj()
+        self.request = self.portal.REQUEST
+        self.request.survey = self.survey
+        self.request.other["euphorie.session"] = createSurveySession()
+        utils.setRequest(self.request)
+        interface.alsoProvides(self.request, interfaces.IOSHAClientSkinLayer)
+
+    def testStatusView(self):
         view = component.getMultiAdapter(
-            (survey, request), name="status")
+            (self.survey, self.request), name="status")
 
         def getModules():
             return {
@@ -173,4 +176,96 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         self.assertEquals(view.status[0]['todo'], 1)
         self.assertEquals(view.status[0]['ok'], 1)
         self.assertEquals(view.percentage_ok, 20)
-        self.assertEquals(len(view.high_risks[u'001001']), 1)
+        self.assertEquals(len(view.risks_by_status['present']['high'][u'001001']), 1)
+
+    def testRisksOverviewView(self):
+        view = component.getMultiAdapter(
+            (self.survey, self.request), name="risks_overview")
+
+        def getModules():
+            return {
+                u'001001': {
+                    'ok': 0,
+                    'path': u'001001',
+                    'postponed': 0,
+                    'risk_with_measures': 0,
+                    'risk_without_measures': 0,
+                    'title': u'Shops are clean - Somerset West',
+                    'todo': 0,
+                    'url': u'http://oira:4080/Plone2/client/fr/transportroutier/transporoutier-2-parametres/identification/1/1'
+                }
+            }
+
+        def getRisks(dummy):
+            return [
+                {
+                    'title': u"Le conducteur est-il prot\xe9g\xe9 des autres v\xe9hicules lorsqu'il circule au sol ?",
+                    'priority': u'medium',
+                    'identification': u'no',
+                    'path': u'001001001',
+                    'module_path': u'001001',
+                    'postponed': False, 'id': 324781,
+                    'is_custom_risk': False,
+                    'zodb_path': u'504/277/444',
+                    'risk_type': u'risk'
+                },
+                {
+                    'title': u"Le conducteur effectue-t-il toutes ses man\u0153uvres d'accroche/d\xe9croche depuis le sol ?",
+                    'priority': u'high',
+                    'identification': u'no',
+                    'path': u'001001002',
+                    'module_path': u'001001',
+                    'postponed': False, 'id': 324780,
+                    'is_custom_risk': False,
+                    'zodb_path': u'504/277/388',
+                    'risk_type': u'risk'
+                },
+                {
+                    'title': u'Le conducteur descend-il de sa cabine en utilisant les marches ?',
+                    'priority': u'low',
+                    'identification': u'no',
+                    'path': u'001001003',
+                    'module_path': u'001001',
+                    'postponed': False, 'id': 324772,
+                    'is_custom_risk': False,
+                    'zodb_path': u'504/277/385',
+                    'risk_type': u'risk'
+                },
+                {
+                    'title': u'Un autre risque ?',
+                    'priority': u'medium',
+                    'identification': None,
+                    'path': u'001001004',
+                    'module_path': u'001001',
+                    'postponed': False, 'id': 324771,
+                    'is_custom_risk': False,
+                    'zodb_path': u'504/277/383',
+                    'risk_type': u'risk'
+                },
+                {
+                    'title': u'Encore un autre risque ?',
+                    'priority': u'low',
+                    'identification': None,
+                    'path': u'001001005',
+                    'module_path': u'001001',
+                    'postponed': True, 'id': 324764,
+                    'is_custom_risk': False,
+                    'zodb_path': u'504/277/381',
+                    'risk_type': u'risk'
+                },
+            ]
+
+        view.getModules = getModules
+        view.getRisks = getRisks
+        view.tocdata = {
+            u'001001': {
+                'path': u'001001',
+                'title': u'Shops are clean - Somerset West',
+                'locations': [],
+                'number': 1,
+            }
+        }
+        view.getStatus()
+        self.assertEquals(len(view.risks_by_status['present']['high'][u'001001']), 1)
+        self.assertEquals(len(view.risks_by_status['present']['medium'][u'001001']), 1)
+        self.assertEquals(len(view.risks_by_status['present']['low'][u'001001']), 1)

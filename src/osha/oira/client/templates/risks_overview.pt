@@ -76,7 +76,13 @@
                         <em class="label" tal:content="python:'question%s were postponed' % (num_postponed != 1 and 's' or '')"></em>
                     </p>
                 </section>
-                <section class="row">
+                <section class="row"
+                    tal:define="risks_by_status python:view.risks_by_status[module.get('path')];
+                                num_high python:len(risks_by_status['present']['high']);
+                                num_medium python:len(risks_by_status['present']['medium']);
+                                num_low python:len(risks_by_status['present']['low']);
+                                num_present python:num_high + num_medium + num_low;
+                                num_possible python:num_postponed + num_todo;">
                     <ul class="six columns legend">
                         <li class="answered" tal:condition="num_ok">
                             <strong class="number">${num_ok}</strong> <em class="label" i18n:translate="label_no_risk">No risk</em>
@@ -94,14 +100,33 @@
                             <strong class="number">${num_todo}</strong> <em class="label" i18n:translate="label_unanswered">Unanswered</em>
                         </li>
                     </ul>
-                    <div class="six columns high-prio-risks" tal:define="high_risks python:view.risks_by_status[module.get('path')]['present']['high']" tal:condition="high_risks">
-                        <h4 i18n:translate="heading_high_prio_risks">High priority risks</h4>
+
+                    <h3 i18n:translate="heading_present_risks"><span i18n:name="num_present_risks">${num_present}</span> Present Risks</h3>
+                    <tal:prio tal:repeat="priority python:['high', 'medium', 'low']">
+                    <div class="six columns high-prio-risks" tal:define="risks python:risks_by_status['present'][priority]" tal:condition="risks">
+                        <h4 i18n:translate="heading_num_high_prio_risks" tal:condition="python:priority == 'high'"><span i18n:name="num_high_risks">${num_high}</span> High priority risks</h4>
+                        <h4 i18n:translate="heading_num_medium_prio_risks" tal:condition="python:priority == 'medium'"><span i18n:name="num_medium_risks">${num_medium}</span> Medium priority risks</h4>
+                        <h4 i18n:translate="heading_num_low_prio_risks" tal:condition="python:priority == 'low'"><span i18n:name="num_low_risks">${num_low}</span> Low priority risks</h4>
                         <ul>
-                            <li tal:repeat="risk high_risks">
+                            <li tal:repeat="risk risks">
+                                <a href="${risk/path}">${risk/title}</a> <span tal:condition="risk/has_measures">(≥1 measures)</span><span tal:condition="not:risk/has_measures">(without measures)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    </tal:prio>
+
+                    <h3 i18n:translate="heading_possible_risks"><span i18n:name="num_possible_risks">${num_possible}</span> Possible Risks</h3>
+                    <tal:prio tal:repeat="status python:['postponed', 'todo']">
+                    <div class="six columns high-prio-risks" tal:define="risks python:risks_by_status['possible'][status]" tal:condition="risks">
+                        <h4 i18n:translate="heading_num_postponed_prio_risks" tal:condition="python:status == 'postponed'"><span i18n:name="num_postponed_risks">${num_postponed}</span> Risks postponed</h4>
+                        <h4 i18n:translate="heading_num_todo_prio_risks" tal:condition="python:status == 'todo'"><span i18n:name="num_todo_risks">${num_todo}</span> Risks not answered</h4>
+                        <ul>
+                            <li tal:repeat="risk risks">
                                 <a href="${risk/path}">${risk/title}</a>
                             </li>
                         </ul>
                     </div>
+                    </tal:prio>
                 </section>
             </dd>
             </tal:defs>

@@ -269,3 +269,5 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         self.assertEquals(len(view.risks_by_status[u'001001']['present']['high']), 1)
         self.assertEquals(len(view.risks_by_status[u'001001']['present']['medium']), 1)
         self.assertEquals(len(view.risks_by_status[u'001001']['present']['low']), 1)
+        self.assertEquals(len(view.risks_by_status[u'001001']['possible']['postponed']), 1)
+        self.assertEquals(len(view.risks_by_status[u'001001']['possible']['todo']), 1)

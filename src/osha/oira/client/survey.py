@@ -147,7 +147,7 @@ class OSHAStatus(survey.Status):
 
     def __init__(self, context, request):
         super(OSHAStatus, self).__init__(context, request)
-        default_risks_by_status = {
+        default_risks_by_status = lambda: {
             'present': {
                 'high': [],
                 'medium': [],
@@ -158,7 +158,7 @@ class OSHAStatus(survey.Status):
                 'todo': [],
             },
         }
-        self.risks_by_status = defaultdict(lambda: default_risks_by_status)
+        self.risks_by_status = defaultdict(default_risks_by_status)
 
     def module_query(self, sessionid, optional_modules):
         if optional_modules:
@@ -328,6 +328,7 @@ class OSHAStatus(survey.Status):
         modules = self.getModules()
         risks = self.getRisks([m['path'] for m in modules.values()])
         for r in risks:
+            has_measures = False
             if r['identification'] in ['yes', 'n/a']:
                 total_ok += 1
                 modules[r['module_path']]['ok'] += 1
@@ -336,6 +337,7 @@ class OSHAStatus(survey.Status):
                         model.ActionPlan.id
                     ).filter(model.ActionPlan.risk_id == r['id'])
                 if measures.count():
+                    has_measures = True
                     modules[r['module_path']]['risk_with_measures'] += 1
                 else:
                     modules[r['module_path']]['risk_without_measures'] += 1
@@ -344,7 +346,7 @@ class OSHAStatus(survey.Status):
             else:
                 modules[r['module_path']]['todo'] += 1
 
-            self.add_to_risk_list(r)
+            self.add_to_risk_list(r, has_measures=has_measures)
 
         for key, m in modules.items():
             if m['ok'] + m['postponed'] + m['risk_with_measures'] + m['risk_without_measures'] + m['todo'] == 0:
@@ -356,7 +358,7 @@ class OSHAStatus(survey.Status):
         self.toc = self.tocdata.values()
         self.toc.sort(key=lambda m: m["path"])
 
-    def add_to_risk_list(self, r):
+    def add_to_risk_list(self, r, has_measures=False):
         if self.is_skipped_from_risk_list(r):
             return
 
@@ -365,7 +367,11 @@ class OSHAStatus(survey.Status):
         base_url = "%s/actionplan" % self.request.survey.absolute_url()
         url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['path'])))
 
-        self.risks_by_status[r['module_path']]['present'][r['priority'] or 'low'].append({'title': risk_title, 'path': url})
+        if r['identification'] != 'no':
+            status = r['postponed'] and 'postponed' or 'todo'
+            self.risks_by_status[r['module_path']]['possible'][status].append({'title': risk_title, 'path': url})
+        else:
+            self.risks_by_status[r['module_path']]['present'][r['priority'] or 'low'].append({'title': risk_title, 'path': url, 'has_measures': has_measures})
 
     def get_risk_title(self, r):
         if r['is_custom_risk']:
@@ -404,5 +410,5 @@ class RisksOverview(OSHAStatus):
     grok.name("risks_overview")
 
     def is_skipped_from_risk_list(self, r):
-        if r['identification'] != 'no' and r['risk_type'] not in ['top5']:
+        if r['identification'] == 'yes':
             return True

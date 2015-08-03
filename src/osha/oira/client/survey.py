@@ -310,6 +310,7 @@ class OSHAStatus(survey.Status):
         base_url = "%s/actionplan" % self.request.survey.absolute_url()
         session = Session()
         total_ok = 0
+        total_with_measures = 0
         self.high_risks = {}
         modules = self.getModules()
         risks = self.getRisks([m['path'] for m in modules.values()])
@@ -323,6 +324,7 @@ class OSHAStatus(survey.Status):
                     ).filter(model.ActionPlan.risk_id == r['id'])
                 if measures.count():
                     modules[r['module_path']]['risk_with_measures'] += 1
+                    total_with_measures += 1
                 else:
                     modules[r['module_path']]['risk_without_measures'] += 1
             elif r['postponed']:
@@ -355,7 +357,7 @@ class OSHAStatus(survey.Status):
             if m['ok'] + m['postponed'] + m['risk_with_measures'] + m['risk_without_measures'] + m['todo'] == 0:
                 del modules[key]
                 del self.tocdata[key]
-        self.percentage_ok = not len(risks) and 100 or int(total_ok / Decimal(len(risks))*100)
+        self.percentage_ok = not len(risks) and 100 or int((total_ok + total_with_measures) / Decimal(len(risks))*100)
         self.status = modules.values()
         self.status.sort(key=lambda m: m["path"])
         self.toc = self.tocdata.values()

@@ -176,7 +176,7 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         self.assertEquals(view.status[0]['todo'], 1)
         self.assertEquals(view.status[0]['ok'], 1)
         self.assertEquals(view.percentage_ok, 20)
-        self.assertEquals(len(view.risks_by_status['present']['high'][u'001001']), 1)
+        self.assertEquals(len(view.risks_by_status[u'001001']['present']['high']), 1)
 
     def testRisksOverviewView(self):
         view = component.getMultiAdapter(
@@ -266,6 +266,6 @@ class SurveySessionTests(OiRAFunctionalTestCase):
             }
         }
         view.getStatus()
-        self.assertEquals(len(view.risks_by_status['present']['high'][u'001001']), 1)
-        self.assertEquals(len(view.risks_by_status['present']['medium'][u'001001']), 1)
-        self.assertEquals(len(view.risks_by_status['present']['low'][u'001001']), 1)
+        self.assertEquals(len(view.risks_by_status[u'001001']['present']['high']), 1)
+        self.assertEquals(len(view.risks_by_status[u'001001']['present']['medium']), 1)
+        self.assertEquals(len(view.risks_by_status[u'001001']['present']['low']), 1)

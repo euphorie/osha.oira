@@ -9,7 +9,7 @@
       i18n:domain="euphorie"
       id="account-settings"
       tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers"
-      metal:use-macro="context/@@shell/macros/shell">
+      metal:use-macro="context/@@plain/macros/shell">
 
 <body>
 <metal:content fill-slot="content">

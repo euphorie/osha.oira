@@ -147,17 +147,18 @@ class OSHAStatus(survey.Status):
 
     def __init__(self, context, request):
         super(OSHAStatus, self).__init__(context, request)
-        self.risks_by_status = {
+        default_risks_by_status = {
             'present': {
-                'high': defaultdict(list),
-                'medium': defaultdict(list),
-                'low': defaultdict(list),
+                'high': [],
+                'medium': [],
+                'low': [],
             },
             'possible': {
-                'postponed': defaultdict(list),
-                'todo': defaultdict(list),
+                'postponed': [],
+                'todo': [],
             },
         }
+        self.risks_by_status = defaultdict(lambda: default_risks_by_status)
 
     def module_query(self, sessionid, optional_modules):
         if optional_modules:
@@ -364,7 +365,7 @@ class OSHAStatus(survey.Status):
         base_url = "%s/actionplan" % self.request.survey.absolute_url()
         url = '%s/%s' % (base_url, '/'.join(self.slicePath(r['path'])))
 
-        self.risks_by_status['present'][r['priority']][r['module_path']].append({'title': risk_title, 'path': url})
+        self.risks_by_status[r['module_path']]['present'][r['priority'] or 'low'].append({'title': risk_title, 'path': url})
 
     def get_risk_title(self, r):
         if r['is_custom_risk']:
@@ -399,7 +400,7 @@ class RisksOverview(OSHAStatus):
     """ Implements the "Overview of Risks" report, see #10967
     """
     grok.layer(interfaces.IOSHAClientSkinLayer)
-    grok.template("status")
+    grok.template("risks_overview")
     grok.name("risks_overview")
 
     def is_skipped_from_risk_list(self, r):

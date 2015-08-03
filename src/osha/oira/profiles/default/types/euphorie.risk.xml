@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<object name="euphorie.risk" meta_type="Dexterity FTI"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="euphorie">
+
+ <!-- List of enabled behaviors -->
+ <property name="behaviors">
+  <element value="osha.oira.content.risk.IOSHARisk" />
+ </property>
+
+</object>
+

@@ -100,8 +100,11 @@ class OSHAIdentificationView(risk.EvaluationView):
             self.has_images = number_images > 0
             self.number_images = number_images
             self.image_class = IMAGE_CLASS[number_images]
-            # Preparation for new development, adding files to a Risk:
-            self.has_files = False
+            number_files = 0
+            for i in range(1, 5):
+                number_files += getattr(
+                    self.risk, 'file{0}'.format(i), None) and 1 or 0
+            self.has_files = number_files > 0
             self.risk_number = self.context.number
 
             ploneview = getMultiAdapter(

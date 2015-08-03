@@ -41,7 +41,7 @@
 
     <style type="text/css">
 @page {
-    size: A4 landscape;
+    size: A4 portrait;
     margin:2cm 0.5cm 2cm 0.5cm;
 
     @bottom-right {
@@ -59,13 +59,25 @@
 
 body {
     font-family: <dtml-var fontFamily>;
-    padding: 80px 50px 50px 50px;
     font-size: 60%;
     orphans:3;
     widows:4;
 }
 div.print-footer {
   flow: static(footer);
+}
+.osc-off #main {
+    position: inherit;
+}
+.sidebar-off #content, .osc-off.sidebar-off #content {
+    position: inherit;
+}
+dt {
+    page-break-after: avoid;
+}
+dd {
+    page-break-inside: avoid;
+    page-break-after: always;
 }
     </style>
 

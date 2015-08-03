@@ -16,6 +16,16 @@ class Shell(grok.View):
     grok.template("shell")
 
 
+class Plain(grok.View):
+    """ Based on the shell template, but stripped down to a minimum (no
+        sidebar, no header). Meant for use in things like pdf reports.
+    """
+    grok.context(Interface)
+    grok.name("plain")
+    grok.layer(IOSHAClientSkinLayer)
+    grok.template("plain")
+
+
 class Includes(grok.View):
     """ This view's templates contains a collection of macros, corresponding to
         the Jekyll includes under the _includes dir.

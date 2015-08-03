@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      meta:interpolation="true"
+      metal:define-macro="shell"
+      i18n:domain="euphorie"
+      tal:define="webhelpers nocall:context/@@webhelpers;
+                  client nocall:request/client;
+                  base_url client/++resource++osha.oira.resources;
+                  page_section webhelpers/get_phase;
+                  came_from webhelpers/came_from;
+                  came_from_param python:came_from and 'came_from=%s' % came_from or '';
+                  tools context/@@tools">
+
+<head>
+    <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="${client/++resource++euphorie.media}/favicon.png" />
+
+    <tal:block condition="webhelpers/debug_mode">
+        <script type="text/javascript" src="${base_url}/oira.js"></script>
+    </tal:block>
+    <tal:block condition="not:webhelpers/debug_mode">
+        <!-- TODO: this must be minified -->
+        <script type="text/javascript" src="${base_url}/oira.js"></script>
+    </tal:block>
+
+    <tal:block condition="webhelpers/debug_mode">
+        <link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
+    </tal:block>
+    <tal:block condition="not:webhelpers/debug_mode">
+        <!-- TODO: needs to be minified -->
+        <link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
+    </tal:block>
+
+    <metal:javascriptslot define-slot="javascript_head_slot" />
+    <metal:styleslot define-slot="style_slot" />
+</head>
+
+<body class="osh-off test-session osc-off osc-s-off sidebar-off" i18n:domain="euphorie" tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
+    <div id="main">
+        <div id="content">
+            <p tal:condition="webhelpers/is_guest_account" id="warning-bar">
+                <tal:testsession i18n:translate="info_testsession">This is a test session. <tal:name i18n:name="link_sign_in"><a href="${base_url}/login_form?${came_from_param}#document-content" class="registration" i18n:translate="Sign in">Sign in</a></tal:name> to save your data.</tal:testsession><a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info" i18n:translate="Info">Info</a>
+            </p>
+            <tal:statusmsg tal:repeat="message webhelpers/messages">
+                <p class="pat-notification" data-pat-notification="type: banner"
+                   tal:attributes="id string:${message/id}-body;
+                                   data-pat-notification string:${attrs/data-pat-notification};;
+                                   class: ${message/type}"
+                   tal:content="message/message | nothing">Status message</p>
+                </tal:statusmsg>
+
+            <metal:block define-slot="content"/>
+        </div>
+    </div>
+
+    <tal:block replace="tile:client-analytics"/>
+</body>
+</html>

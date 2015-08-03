@@ -39,6 +39,36 @@
         <link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
     </tal:block>
 
+    <style type="text/css">
+@page {
+    size: A4 landscape;
+    margin:2cm 0.5cm 2cm 0.5cm;
+
+    @bottom-right {
+        content: "Page " counter(page) " of " counter(pages);
+        font-size: 8pt;
+        font-family: sans-serif;
+    }
+    @bottom-left {
+        font-size: 8pt;
+        content: flow(footer);
+        text-align:left;
+        font-family: sans-serif;
+    }
+}
+
+body {
+    font-family: <dtml-var fontFamily>;
+    padding: 80px 50px 50px 50px;
+    font-size: 60%;
+    orphans:3;
+    widows:4;
+}
+div.print-footer {
+  flow: static(footer);
+}
+    </style>
+
     <metal:javascriptslot define-slot="javascript_head_slot" />
     <metal:styleslot define-slot="style_slot" />
 </head>

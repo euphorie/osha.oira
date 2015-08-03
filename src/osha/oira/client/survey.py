@@ -388,6 +388,13 @@ class OSHAStatus(survey.Status):
             return True
 
 
+class OSHAStatusPrint(OSHAStatus):
+    """ Override the 'status' page to provide our own template.
+    """
+    grok.template("status_print")
+    grok.name("status_print")
+
+
 class RisksOverview(OSHAStatus):
     """ Implements the "Overview of Risks" report, see #10967
     """

@@ -46,6 +46,7 @@ newpo = polib.POFile()
 # Copy header and metadata
 newpo.header = po.header
 [newpo.metadata.update({key: val}) for (key, val) in po.metadata.items()]
+cnt = 0
 
 # Copy all untranslated messages
 for entry in po.untranslated_entries():
@@ -61,7 +62,8 @@ for entry in po.untranslated_entries():
         default = u''
     newpo.append(polib.POEntry(msgid=entry.msgid, msgstr=default, occurrences=entry.occurrences,
         comment=entry.comment))
+    cnt += 1
 
 newpo.save(output)
 
-sys.exit('Ok')
+sys.exit('Ok, found %d untranslated.' % cnt)

@@ -70,12 +70,11 @@ for entry in reference:
             if match_existing:
                 default_existing = match_existing.group(1).replace('\n', ' ')
             else:
-                continue
-                # print "WARNING! msgid '%s' in EXISTING file does not have a " \
-                #     "default translation." % entry.msgid
+                print "WARNING! msgid '%s' in EXISTING file does not have a " \
+                     "default translation." % entry.msgid
                 default_existing = target_existing.msgid
-            if default_existing == default_reference and \
-                    target_existing.msgstr != '' and target_local.msgstr == '':
+            if (default_existing == default_reference and
+                    target_existing.msgstr != '' and target_local.msgstr == ''):
                 target_local.msgstr = target_existing.msgstr
                 print u"UPDATED '%s' with translation '%s'" % (
                     entry.msgid, target_existing.msgstr)

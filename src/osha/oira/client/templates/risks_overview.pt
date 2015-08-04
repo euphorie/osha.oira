@@ -49,28 +49,45 @@
                 perc_risks_without_measures python:num_total and num_risks_without_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_risks_with_measures python:num_total and num_risks_with_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_postponed python:num_total and num_postponed/decimal.Decimal(num_total)*100 or 0; ">
+            <style>
+                .score-badge.module-${module/path} {
+                    background-color: rgba(0,100,0,${python:perc_ok/100});
+                }
+                .answered.module-${module/path} {
+                    width: ${perc_ok}%;
+                }
+                .risk-measure.module-${module/path} {
+                    width: ${perc_risks_with_measures}%;
+                }
+                .risk.module-${module/path} {
+                    width: ${perc_risks_without_measures}%;
+                }
+                .postponed.module-${module/path} {
+                    width: ${perc_postponed}%;
+                }
+            </style>
             <dt><a name="${module/path}"> </a>
-                <a href="${module/url}">${module/title}<strong class="score-badge"
-                        tal:attributes="style python:'background-color: rgba(0,100,0,%s)' %(perc_ok/100)" tal:content="python:'%d%%' %(int(perc_ok))"></strong></a>
+                <a href="${module/url}">${module/title}<strong class="score-badge module-${module/path}"
+                        tal:content="python:'%d%%' %(int(perc_ok))"></strong></a>
             </dt>
             <dd>
                 <section class="graph">
-                    <p class="range answered" style="width: ${perc_ok}%"
+                    <p class="range answered module-${module/path}"
                         tal:attributes="title python:'%s question%s answered without a risk' % (num_ok, num_ok != 1 and 's' or '')">
                         <strong class="number">${num_ok}</strong>
                         <em class="label" tal:content="python:'question%s answered without a risk' % (num_ok != 1 and 's' or '')"></em>
                     </p>
-                    <p class="range  risk-measure" style="width: ${perc_risks_with_measures}%"
+                    <p class="range risk-measure module-${module/path}"
                         tal:attributes="title python:'%s answer%s indicated a risk and have at least one measure defined in the action plan' % (num_risks_with_measures, num_risks_with_measures != 1 and 's' or '')">
                         <strong class="number">${num_risks_with_measures}</strong>
                         <em class="label" tal:content="python:'answer%s indicated a risk and have at least one measure defined in the action plan' % (num_risks_with_measures != 1 and 's' or '')"></em>
                     </p>
-                    <p class="range risk" style="width: ${perc_risks_without_measures}%"
+                    <p class="range risk module-${module/path}"
                         tal:attributes="title python:'%s answer%s indicated a risk without any measure defined in the action plan' % (num_risks_without_measures, num_risks_without_measures != 1 and 's' or '')">
                         <strong class="number">${num_risks_without_measures}</strong>
                         <em class="label" tal:content="python:'answer%s indicated a risk without any measure defined in the action plan' % (num_risks_without_measures != 1 and 's' or '')"></em>
                     </p>
-                    <p class="range postponed" style="width: ${perc_postponed}%"
+                    <p class="range postponed module-${module/path}"
                         tal:attributes="title python:'%s questions were postponed' % num_postponed">
                         <strong class="number">${num_postponed}</strong>
                         <em class="label" tal:content="python:'question%s were postponed' % (num_postponed != 1 and 's' or '')"></em>

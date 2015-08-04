@@ -219,7 +219,7 @@
 
     <div class="pat-collapsible closed">
       <h4 i18n:translate="label_show_more"><tal:more i18n:name="read_more" i18n:translate="Read more">Read more</tal:more> about this risk.</h4>
-      <tal:description class="description" tal:replace="structure risk/description" />
+      <tal:description tal:replace="structure risk/description" />
     </div>
 
   </metal:riskinfo>

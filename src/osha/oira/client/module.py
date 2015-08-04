@@ -93,37 +93,37 @@ class CustomizationView(grok.View, Mixin):
     def give_customization_feedback(self, added, updated, removed):
         if removed == 0 and added == 0 and updated == 0:
             IStatusMessage(self.request).add(
-                _(u"No changes were made to your custom risks."),
+                _(u"No changes were made to your added risks."),
                 type='warning'
             )
             return;
 
         if added > 1:
             IStatusMessage(self.request).add(
-                _(u"Your new custom risks have been created."),
+                _(u"Your new added risks have been created."),
                 type='success'
             )
         elif added == 1:
             IStatusMessage(self.request).add(
-                _(u"A new custom risk has been created."),
+                _(u"A new added risk has been created."),
                 type='success'
             )
         if updated> 1:
             IStatusMessage(self.request).add(
-                _(u"Existing custom risks have been updated."),
+                _(u"Existing added risks have been updated."),
                 type='success'
             )
         elif updated == 1:
             IStatusMessage(self.request).add(
-                _(u"An existing custom risk has been updated."),
+                _(u"An existing added risk has been updated."),
                 type='success'
             )
         if removed == 1:
             IStatusMessage(self.request).add(
-                _(u"A custom risk has been removed."), type='success')
+                _(u"An added risk has been removed."), type='success')
         elif removed > 1:
             IStatusMessage(self.request).add(
-                _(u"Custom risks have been removed."), type='success')
+                _(u"Added risks have been removed."), type='success')
 
     def add_custom_risks(self, form):
         session = SessionManager.session

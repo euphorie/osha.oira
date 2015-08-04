@@ -89,10 +89,10 @@
                             <strong class="number">${num_risks_without_measures}</strong> <em class="label" i18n:translate="label_risk_without_measure">Risk without measure</em>
                         </li>
                         <li class="postponed" tal:condition="num_postponed">
-                            <strong class="number">${num_postponed}</strong> <em class="label" i18n:translate="label_postponed">Postponed</em>
+                            <strong class="number">${num_postponed}</strong> <em class="label" i18n:translate="Postponed">Postponed</em>
                         </li>
                         <li class="unanswered" tal:condition="num_todo">
-                            <strong class="number">${num_todo}</strong> <em class="label" i18n:translate="label_unanswered">Unanswered</em>
+                            <strong class="number">${num_todo}</strong> <em class="label" i18n:translate="Unvisited">Unanswered</em>
                         </li>
                     </ul>
                     <div class="six columns high-prio-risks" tal:define="high_risks python:view.high_risks.get(module.get('path'), [])" tal:condition="high_risks">

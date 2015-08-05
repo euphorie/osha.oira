@@ -19,7 +19,7 @@ class IOSHARisk(form.Schema):
         label=_("header_additional_content", default=u"Additional content"),
         description=_(
             "intro_additional_content",
-            default=u"Attach any additional content you consider helpful"
+            default=u"Attach any additional content you consider helpful "
             "for the user"),
         fields=[
             "file1", "file1_caption", "file2", "file2_caption",

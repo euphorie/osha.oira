@@ -307,10 +307,10 @@
       <section class="caption pat-well">
         <section class="pat-collapsible legal-references closed" tal:condition="risk/legal_reference">
           <h3 i18n:translate="header_legal_references">Legal and policy references</h3>
-          <p tal:content="structure risk/legal_reference">
+          <tal:legal replace="structure risk/legal_reference">
             The requirements for fridges are defined in section 13.1 section a
             of the health code.
-          </p>
+          </tal:legal>
         </section>
         <section class="pat-collapsible more-information closed" tal:condition="view/has_files">
           <h3 i18n:translate="header_additional_resources">Additional resources for assessing the risk</h3>

@@ -9,10 +9,13 @@ from euphorie.client.navigation import QuestionURL
 from euphorie.client.navigation import getTreeData
 from euphorie.client.session import SessionManager
 from euphorie.client.update import redirectOnSurveyUpdate
-from euphorie.content.module import IModule
+from euphorie.content.survey import ISurvey
 from five import grok
 from osha.oira import log
 from osha.oira.client import interfaces
+from .country import ConfirmationDeleteSession
+from .country import DeleteSession
+from .country import RenameSession
 from sqlalchemy import sql
 from sqlalchemy import orm
 from z3c.saconfig import Session
@@ -32,6 +35,15 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
     })
 
 
+class OSHAView(survey.View):
+    """ Override the "select existing session or start a new one" view
+    """
+    grok.require("euphorie.client.ViewSurvey")
+    grok.layer(interfaces.IOSHAClientSkinLayer)
+    grok.template("survey_sessions")
+    grok.name("index_html")
+
+
 class OSHAStart(survey.Start):
     """ Override the 'start' page to provide our own template.
 
@@ -41,6 +53,18 @@ class OSHAStart(survey.Start):
     grok.layer(interfaces.IOSHAClientSkinLayer)
     grok.template("start")
     grok.name("start")
+
+
+class ConfirmationDeleteSurveySession(ConfirmationDeleteSession):
+    grok.context(ISurvey)
+
+
+class DeleteSurveySession(DeleteSession):
+    grok.context(ISurvey)
+
+
+class RenameSurveySession(RenameSession):
+    grok.context(ISurvey)
 
 
 class OSHAIdentification(survey.Identification):

@@ -4,6 +4,56 @@ body.report {
 	width: auto;
 }
 
-.article.report {
+article.report {
+	.prio-high {
+		.risk-title,
+		td {
+			color: red;
+		}
+	}
+	.prio-medium {
+		.risk-title,
+		td {
+			color: orange;
+		}
+	}
+	.prio-low {
+		.risk-title,
+		td {
+			color: green;
+		}
+	}
+
+	table {
+    	border-collapse: collapse;
+
+		th,
+		td {
+			border-bottom: 1px solid silver;
+			padding: 0.5em 0;
+		}
+
+		td {
+			padding-left: 0.5em;
+			padding-right: 0.5em;
+		}
+
+		tbody {
+			td {
+				vertical-align: middle;
+				text-align: center;
+			}	
+		}
+	}
+
+	.risk-title {
+		margin-bottom: 0;
+		font-weight: bold;
+	}
+
+	.description {
+		font-weight: normal;
+		margin-bottom: 0;
+	}
 
 }

@@ -5,6 +5,14 @@ body.report {
 }
 
 article.report {
+	h1 {
+		margin-bottom: 0.3em;
+	}
+
+	h1 + .byline {
+		margin-bottom: 4em;
+	}
+
 	.title-line {
 		td,
 		th {

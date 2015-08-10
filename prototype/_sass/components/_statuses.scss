@@ -2,14 +2,27 @@
   h1 {
     margin-left: 4em;
     position: relative;
-    margin-bottom: 1.5em;
+    margin-bottom: 0em;
 
     .score-badge {
       position: absolute;
       left: -4.7em;
-      top: -1.3em;
+      top: -0.95em;
       width: 4em;
       height: 4em;
+      // text-indent: 0;
+      // padding-top: 4em;
+      // height: 0;
+      // text-align: center;
+      // line-height: 2em;
+
+      // em {
+      //   display: block;
+      //   font-size: 0.4em;
+      //   font-style: normal;
+      //   margin-top: -2.8em;
+      //   opacity: 0.6;
+      // }
 
       &:before {
         line-height: 1.6em;
@@ -19,6 +32,13 @@
         // line-height: ;
       }
     }
+  }
+
+  .byline {
+    margin-left: 6em;
+    position: relative;
+    margin-bottom: 2em;
+    font-size: 1.34em;
   }
 
   .page-toc {

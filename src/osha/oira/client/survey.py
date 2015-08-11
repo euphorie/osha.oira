@@ -12,6 +12,7 @@ from euphorie.client.update import redirectOnSurveyUpdate
 from euphorie.content.survey import ISurvey
 from five import grok
 from osha.oira import log
+from osha.oira import _
 from osha.oira.client import interfaces
 from .country import ConfirmationDeleteSession
 from .country import DeleteSession
@@ -20,6 +21,7 @@ from sqlalchemy import sql
 from sqlalchemy import orm
 from z3c.saconfig import Session
 from zope.component import getMultiAdapter
+from zope.i18n import translate
 
 
 grok.templatedir("templates")
@@ -240,11 +242,17 @@ class OSHAStatus(survey.Status):
         modules = {}
         toc = {}
 
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        title_custom_risks = translate(_(
+            'title_other_risks', default=u'Added risks (by you)'), target_language=lang)
+
         for path in module_paths:
             number = ".".join(self.slicePath(path))
             # top-level module, always include it in the toc
             if len(path) == 3:
                 title = titles[path]
+                if title == 'title_other_risks':
+                    title = title_custom_risks
                 toc[path] = {
                     'path': path,
                     'title': title,

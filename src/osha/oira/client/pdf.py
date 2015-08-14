@@ -1,7 +1,7 @@
 from StringIO import StringIO
-from euphorie.client.interfaces import IClientSkinLayer
-from euphorie.content.survey import ISurvey
+from euphorie.ghost import PathGhost
 from five import grok
+from osha.oira.client.interfaces import IOSHAReportPhaseSkinLayer
 from z3c.appconfig.interfaces import IAppConfig
 from zope.component import getUtility
 
@@ -25,9 +25,9 @@ class PdfView(grok.View):
     This requires that we render the view, add the contents to a ZIP
     file, and send it to the smartprintng server via an xmlrpc call.
     """
-    grok.context(ISurvey)
+    grok.context(PathGhost)
+    grok.layer(IOSHAReportPhaseSkinLayer)
     grok.require("euphorie.client.ViewSurvey")
-    grok.layer(IClientSkinLayer)
     grok.name('pdf')
 
     def render(self):

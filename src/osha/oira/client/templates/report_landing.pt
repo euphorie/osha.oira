@@ -77,7 +77,7 @@
     <div class="download-block column">
       <article class="pat-well pat-rich">
         <p>
-          <a href="#" class="pat-button bar download xlsx icon-download" i18n:translate="">
+          <a href="${python:view.url(name='pdf', obj=context, data={'view': 'risks_overview'})}" class="pat-button bar download xlsx icon-download" i18n:translate="">
           Download the risks overview
         </a>
         </p>
@@ -98,7 +98,7 @@
     <div class="download-block column">
       <article class="pat-well pat-rich">
         <p>
-          <a href="#" class="pat-button bar download xlsx icon-download" i18n:translate="">
+          <a href="${python:view.url(name='pdf', obj=context, data={'view': 'measures_overview'})}" class="pat-button bar download xlsx icon-download" i18n:translate="">
           Download the measures overview
         </a>
         </p>

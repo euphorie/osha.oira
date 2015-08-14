@@ -68,16 +68,23 @@ div.print-footer {
 }
 .osc-off #main {
     position: inherit;
+    height: inherit;
 }
 .sidebar-off #content, .osc-off.sidebar-off #content {
     position: inherit;
+    height: inherit;
+}
+h3 {
+    clear: both;
 }
 dt {
     page-break-after: avoid;
 }
 dd {
-    page-break-inside: avoid;
     page-break-after: always;
+}
+.graph {
+    position: relative;
 }
     </style>
 

@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      i18n:domain="euphorie"
+      id="account-settings"
+      tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers"
+      metal:use-macro="context/@@plain/macros/shell">
+
+<body>
+    <metal:content fill-slot="content">
+		<article class="pat-rich report">
+			<h1>
+				Risk analysis and resolutions
+			</h1>
+			<p class="byline">
+                ${view/date}
+			</p>
+			<section class="module" tal:repeat="module view/modules">
+				<h2 class="module-name">
+                    ${module/number} ${module/name}
+				</h2>
+				<table class="risk-measures-plan">
+					<thead>
+						<tr>
+							<th class="legend">
+							
+							</th>
+							<th tal:repeat="month view/months">
+                                ${month}
+							</th>
+						</tr>
+					</thead>
+					<tbody class="prio-high">
+						<tr class="title-line">
+							<th colspan="4">
+								<h3>
+									High priority risks
+								</h3>
+							</th>
+						</tr>
+						<tr tal:repeat="risk module/risks/high">
+                            <metal:macro define-macro="risk-row">
+							<th>
+								<h4 class="risk-title">
+                                    ${risk/title}
+								</h4>
+								<p class="description">
+                                    ${risk/description}
+								</p>
+							</th>
+                            <tal:block tal:repeat="month risk/months">
+							<td tal:condition="month">
+								•
+							</td>
+							<td tal:condition="not:month">
+								
+							</td>
+                            </tal:block>
+                            </metal:macro>
+						</tr>
+					</tbody>
+					<tbody class="prio-medium">
+						<tr class="title-line">
+							<th colspan="4">
+								<h3>
+									Medium priority risks
+								</h3>
+							</th>
+						</tr>
+						<tr tal:repeat="risk module/risks/medium">
+                            <metal:macro use-macro="view/risk-row" />
+						</tr>
+					</tbody>
+					<tbody class="prio-low">
+						<tr class="title-line">
+							<th colspan="4">
+								<h3>
+									Low priority risks
+								</h3>
+							</th>
+						</tr>
+						<tr tal:repeat="risk module/risks/low">
+                            <metal:macro use-macro="view/risk-row" />
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</article>
+    </metal:content>
+</body>
+</html>

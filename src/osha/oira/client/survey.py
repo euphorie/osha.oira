@@ -434,15 +434,3 @@ class OSHAStatusPrint(OSHAStatus):
     """
     grok.template("status_print")
     grok.name("status_print")
-
-
-class RisksOverview(OSHAStatus):
-    """ Implements the "Overview of Risks" report, see #10967
-    """
-    grok.layer(interfaces.IOSHAClientSkinLayer)
-    grok.template("risks_overview")
-    grok.name("risks_overview")
-
-    def is_skipped_from_risk_list(self, r):
-        if r['identification'] == 'yes':
-            return True

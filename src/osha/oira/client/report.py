@@ -1,6 +1,7 @@
 from Acquisition import aq_inner
 from AccessControl import getSecurityManager
 from cStringIO import StringIO
+from collections import defaultdict
 from datetime import datetime
 from euphorie.client import model
 from euphorie.client import report
@@ -15,6 +16,7 @@ from osha.oira import _
 from osha.oira.client import utils
 from osha.oira.client.interfaces import IOSHAIdentificationPhaseSkinLayer
 from osha.oira.client.interfaces import IOSHAReportPhaseSkinLayer
+from osha.oira.client.survey import OSHAStatus
 from plonetheme.nuplone.utils import formatDate
 from rtfng.Elements import PAGE_NUMBER
 from rtfng.PropertySets import BorderPropertySet
@@ -818,3 +820,79 @@ def createSection(document, survey, request):
     section.Footer.append(footer)
     document.Sections.append(section)
     return section
+
+
+class RisksOverview(OSHAStatus):
+    """ Implements the "Overview of Risks" report, see #10967
+    """
+    grok.context(PathGhost)
+    grok.layer(IOSHAReportPhaseSkinLayer)
+    grok.template("risks_overview")
+    grok.name("risks_overview")
+
+    def is_skipped_from_risk_list(self, r):
+        if r['identification'] == 'yes':
+            return True
+
+
+class MeasuresOverview(grok.View):
+    """ Implements the "Overview of Measures" report, see #10967
+    """
+    grok.context(PathGhost)
+    grok.layer(IOSHAReportPhaseSkinLayer)
+    grok.template("measures_overview")
+    grok.require('euphorie.client.ViewSurvey')
+    grok.name("measures_overview")
+
+    def update(self):
+        self.session = SessionManager.session
+
+        now = datetime.now()
+        next_month = datetime(now.year, now.month + 1, 1)
+        month_after_next = datetime(now.year, now.month + 2, 1)
+        self.date = now.strftime('%d %B %Y')
+        self.months = []
+        self.months.append(now.strftime('%b'))
+        self.months.append(next_month.strftime('%b'))
+        self.months.append(month_after_next.strftime('%b'))
+
+        query = Session.query(model.Module, model.Risk, model.ActionPlan)\
+            .filter(sql.and_(model.Module.session == self.session,
+                             model.Module.profile_index > -1))\
+            .filter(sql.not_(model.SKIPPED_PARENTS))\
+            .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
+                            model.RISK_PRESENT_OR_TOP5_FILTER))\
+            .join((model.Risk,
+                   sql.and_(model.Risk.path.startswith(model.Module.path),
+                            model.Risk.depth == model.Module.depth+1,
+                            model.Risk.session == self.session)))\
+            .join((model.ActionPlan,
+                   model.ActionPlan.risk_id == model.Risk.id))\
+            .order_by(
+                sql.case(
+                    value=model.Risk.priority,
+                    whens={'high': 0, 'medium': 1},
+                    else_=2),
+                model.Risk.path)
+        measures = [t for t in query.all() if (
+            t[-1].planning_start is not None or
+            t[-1].planning_end is not None or
+            t[-1].responsible is not None or
+            t[-1].prevention_plan is not None or
+            t[-1].requirements is not None or
+            t[-1].budget is not None or
+            t[-1].action_plan is not None
+        )]
+        modulesdict = defaultdict(lambda: defaultdict(list))
+        for module, risk, action in measures:
+            modulesdict[module][risk.priority].append(
+                {'title': risk.title,
+                 'description': risk.comment,
+                 'months': [action.planning_start and
+                            action.planning_start.month == m.month
+                            for m in [now, next_month, month_after_next]],
+                 })
+        self.modules = [{'name': module.title,
+                         'number': module.number,
+                         'risks': risks}
+                        for module, risks in sorted(modulesdict.items(), key=lambda m: m[0].zodb_path)]

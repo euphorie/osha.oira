@@ -27,11 +27,24 @@
         factory="z3c.form.datamanager.AttributeField"
         />
 
+    <plone:behavior
+        title="OSHA extra Risk fields"
+        description="Provide additional OSHA fields"
+        provides=".risk.IOSHARisk"
+        factory=".risk.OSHARisk"
+        for="plone.dexterity.interfaces.IDexterityContent"
+        />
+
+    <adapter
+        for=".risk.IOSHARiskMarker zope.schema.interfaces.IField"
+        factory="z3c.form.datamanager.AttributeField"
+        />
+
     <adapter
         factory=".profilequestion.context_proxy"
         />
 
-    <adapter    
+    <adapter
         factory=".statistics.ReportPeriodFactory"
         name="osha.oira.content.statistics.IReportPeriod"
         />

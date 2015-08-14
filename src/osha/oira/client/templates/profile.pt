@@ -69,15 +69,23 @@
                            name="${question/id}:utf8:utext:list" required="required"/>
                 </label>
                 <tal:locations repeat="title current">
-                      <label class="clone">
-                        <input class="pat-depends"
+                  <tal:if_not_first condition="repeat/title/index">
+                    <label class="clone pat-depends" data-pat-depends="pq${question/id}.multiple=yes">
+                      <input class="pat-depends"
                             required="required"
                             placeholder="${question/label_single_occurance} 1" value="${title}"
                             data-pat-depends="condition: pq${question/id}.present=yes; action: both" name="${question/id}:utf8:utext:list" />
-                        <tal:if_not_first condition="repeat/title/index">
-                            <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="Remove">Remove</button>
-                        </tal:if_not_first>
+                      <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="Remove">Remove</button>
                     </label>
+                  </tal:if_not_first>
+                  <tal:if_first condition="not:repeat/title/index">
+                    <label class="clone">
+                      <input class="pat-depends"
+                            required="required"
+                            placeholder="${question/label_single_occurance} 1" value="${title}"
+                            data-pat-depends="condition: pq${question/id}.present=yes; action: both" name="${question/id}:utf8:utext:list" />
+                    </label>
+                  </tal:if_first>
                 </tal:locations>
             </fieldset>
 

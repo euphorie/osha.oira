@@ -91,9 +91,13 @@ layout: shell
 			</div>
 		{% endif %}
 
-		{{ content | truncatewords: 50 }}
+		<section id="concise-content">
+			<p class="introduction">
+				{{ content | strip_html | truncatewords: 50 }} <a class="show-more pat-inject" href="#full-content" data-pat-inject="target: #concise-content;">Read more</a>
+			</p>
+		</section>
 
-		<div class="pat-collapsible show-more closed">
+		<!-- <div class="pat-collapsible show-more closed">
 			<p class="show-more-or-less">
 				<strong class="show-more">Read more</strong> <span class="divider">/</span> <strong class="show-less">Read less</strong> about this risk.
 			</p>
@@ -105,7 +109,7 @@ layout: shell
 			   <li>Aliquam tincidunt mauris eu risus.</li>
 			   <li>Vestibulum auctor dapibus neque.</li>
 			</ul>
-		</div>
+		</div> -->
 
 		{% if page.legal_reference %}
 			<section class="caption pat-well">
@@ -114,7 +118,7 @@ layout: shell
 					{{ page.legal_reference }}
 				</section>
 				<section class="pat-collapsible more-information closed">
-					<h3>More information</h3>
+					<h3>Additional resources for assessing the risk</h3>
 					<ul>
 						<li class="icon-download">
 							<a href="">Lorem ipsum dolor sit.pdf</a>
@@ -137,5 +141,8 @@ layout: shell
 		<button type="submit" name="next" value="previous" class="pat-button back">Previous</button>
 		<button type="submit" name="next" value="next" class="pat-button">Save and continue</button>
 	</p>
+	<article hidden id="full-content">
+		{{ content }}
+	</article>
 </form>
 

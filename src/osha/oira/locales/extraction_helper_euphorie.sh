@@ -1,7 +1,7 @@
 #!/bin/sh
 
 EUPHORIE_LOCALES="../../../../../Euphorie/src/euphorie/deployment/locales"
-OUTPUT_DIR="untranslated"
+OUTPUT_DIR="untrans5"
 TMP_DIR="/tmp"
 
 # Firstly, msgmerge

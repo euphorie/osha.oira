@@ -61,12 +61,9 @@ class OSHAProfile(profile.Profile):
         return profile
 
 
-class OSHAUpdate(profile.Update):
+class OSHAUpdate(OSHAProfile, profile.Update):
     """ Override the original profile to provide our own template.
     """
     grok.layer(IOSHAClientSkinLayer)
     grok.template('update')
     grok.name('update')
-
-    def ProfileQuestions(self):
-        return _questions(self.context)

@@ -1,0 +1,19 @@
+<fieldset xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      meta:interpolation="true"
+      i18n:domain="nuplone"
+      tal:define="download_url view/download_url;"
+      class="comprehensive filefield ${view/@@dependencies}">
+  <legend>${view/label}<sup tal:condition="view/required" class="required">*</sup></legend>
+  <dfn class="infoPanel" i18n:attributes="title" title="Information" tal:define="description view/field/description" tal:condition="description">${description}</dfn>
+  <tal:has-image condition="view/allow_nochange"><img class="floatAfter"
+      tal:define="images context/@@images; scale python:images.scale(view.field.getName(), height=64, width=64, direction='thumbnail');"
+      tal:condition="scale" src="${scale/url}" width="${scale/width}" alt=""/>
+    <label><input type="checkbox" name="${view/name}.action" value="remove"/> <tal:span i18n:translate="">Remove image</tal:span></label></tal:has-image>
+  <input type="file" id="${view/id}" name="${view/name}" class="${view/klass}"
+      disabled="${view/disabled}" readonly="${view/readonly}"/> <tal:error condition="view/error" replace="structure view/error/render|nothing"/>
+</fieldset>
+
+

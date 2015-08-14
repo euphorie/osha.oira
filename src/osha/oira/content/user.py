@@ -88,8 +88,7 @@ def EmailActivationLink(user, event):
     except socket.error, e:
         return NotifyError(e[1])
     IStatusMessage(user.REQUEST).add(
-        _("info_activation_mail_sent",
-        default = u"An account activation email has been sent to the user."),
+        u"An account activation email has been sent to the user.",
         "success")
     user.REQUEST.response.redirect(portal.absolute_url())
 

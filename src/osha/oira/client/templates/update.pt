@@ -22,8 +22,8 @@
 
 <p tal:condition="python:view.profile_questions" i18n:translate="verify_profile">Please verify if the profile is still accurate.</p>
 
-<form method="post" action="${request/URL}" accept-charset="UTF-8">
-    <tal:question repeat="question view/profile_questions">
+<form class="pat-validation" method="post" action="${request/URL}" accept-charset="UTF-8">
+  <fieldset class="vertical" tal:repeat="question view/profile_questions">
     <section tal:define="current python:view.current_profile.get(question['id'])">
         <h2>${question/title}</h2>
         <fieldset class="pat-checklist radio">
@@ -38,39 +38,51 @@
           <label><input type="radio" class="multiple" name="pq${question/id}.multiple" value="no" checked="${python:'checked' if not current or len(current)==1 else None}"/> <tal:span i18n:translate="">No</tal:span></label>
         </fieldset>
 
-        <fieldset class="pat-checklist pat-depends" data-pat-depends="condition: pq${question/id}.present=yes and pq${question/id}.multiple">
+        <fieldset class="group pat-depends" data-pat-depends="condition: pq${question/id}.present=yes and pq${question/id}.multiple">
           <legend>
             <span class="pat-depends" data-pat-depends="pq${question/id}.multiple=no">${question/label_single_occurance}</span>
             <span class="pat-depends" data-pat-depends="pq${question/id}.multiple=yes">${question/label_multiple_occurances}</span>
           </legend>
 
-          <fieldset class="form-iteration pat-clone" data-pat-clone="template: #clone-template-${question/id}; trigger-element: #clone-set-${question/id}">
-            <label id="clone-template-${question/id}" hidden="hidden">
-                <input class="pat-depends" autofocus="autofocus" placeholder="${question/label_single_occurance} #{1}" data-pat-depends="pq${question/id}.multiple=yes"
-                        size="40" type="text" name="505:utf8:utext:list" />&nbsp;
-                <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="label_remove">Remove</button>
-            </label>
+            <fieldset class="form-iteration pat-clone" data-pat-clone="template: #clone-template-${question/id}; trigger-element: #clone-set-${repeat/question/number}">
+                <label id="clone-template-${question/id}" hidden="hidden">
+                    <input class="pat-depends" autofocus="autofocus" placeholder="${question/label_single_occurance} #{1}" data-pat-depends="condition: pq${question/id}.multiple=yes; action: both;"
+                           size="40" type="text" name="${question/id}:utf8:utext:list" />&nbsp;
+                    <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="Remove">Remove</button>
+                </label>
 
-            <label class="clone">
-                <input class="pat-depends" autofocus="autofocus" placeholder="${question/label_single_occurance}"
-                    tal:attributes="value python:len(current) == 1 and current[0] or ''"
-                    data-pat-depends="pq${question/id}.multiple=no; action:both;" name="${question/id}:utf8:utext:list" size="40" type="text" />
-            </label>
+                <label tal:condition="not:current" class="clone">
+                    <input class="pat-depends" data-pat-depends="condition: pq${question/id}.present=yes; action: both;"
+                           data-pat-validation="message-required: Please enter a name here"
+                           name="${question/id}:utf8:utext:list" required="required"/>
+                </label>
+                <tal:locations repeat="title current">
+                  <tal:if_not_first condition="repeat/title/index">
+                    <label class="clone pat-depends" data-pat-depends="pq${question/id}.multiple=yes">
+                      <input class="pat-depends"
+                            required="required"
+                            placeholder="${question/label_single_occurance} 1" value="${title}"
+                            data-pat-depends="condition: pq${question/id}.present=yes; action: both" name="${question/id}:utf8:utext:list" />
+                      <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="Remove">Remove</button>
+                    </label>
+                  </tal:if_not_first>
+                  <tal:if_first condition="not:repeat/title/index">
+                    <label class="clone">
+                      <input class="pat-depends"
+                            required="required"
+                            placeholder="${question/label_single_occurance} 1" value="${title}"
+                            data-pat-depends="condition: pq${question/id}.present=yes; action: both" name="${question/id}:utf8:utext:list" />
+                    </label>
+                  </tal:if_first>
+                </tal:locations>
+            </fieldset>
 
-            <label class="clone" tal:repeat="title current">
-                <input class="pat-depends" autofocus="autofocus" placeholder="${question/label_single_occurance} 1" size="40" type="text"
-                    tal:attributes="value title"
-                    data-pat-depends="pq${question/id}.multiple=yes" name="${question/id}:utf8:utext:list" />
-                <button type="button" class="pat-depends pat-button small remove-clone icon-trash iconified" data-pat-depends="pq${question/id}.multiple=yes" i18n:translate="label_remove">Remove</button>
-            </label>
-        </fieldset>
-
-          <p class="buttons addButton pat-depends" data-pat-depends="pq${question/id}.multiple=yes">
-            <button id="clone-set-${question/id}" class="pat-button icon-plus-circle add-clone" type="button" i18n:translate="Add another item">Add another item</button>
+          <p class="buttons pat-depends" data-pat-depends="pq${question/id}.multiple=yes">
+            <button id="clone-set-${repeat/question/number}" class="pat-button icon-plus-circle add-clone" type="button" i18n:translate="Add another item">Add another item</button>
           </p>
         </fieldset>
     </section>
-    </tal:question>
+  </fieldset>
 
     <p class="buttonBar"><button class="pat-button" type="submit" i18n:translate="label_accept update">Update</button></p>
 </form>

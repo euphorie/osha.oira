@@ -100,8 +100,11 @@ class OSHAIdentificationView(risk.EvaluationView):
             self.has_images = number_images > 0
             self.number_images = number_images
             self.image_class = IMAGE_CLASS[number_images]
-            # Preparation for new development, adding files to a Risk:
-            self.has_files = False
+            number_files = 0
+            for i in range(1, 5):
+                number_files += getattr(
+                    self.risk, 'file{0}'.format(i), None) and 1 or 0
+            self.has_files = number_files > 0
             self.risk_number = self.context.number
 
             ploneview = getMultiAdapter(
@@ -226,13 +229,15 @@ class OSHAActionPlanView(risk.ActionPlanView):
                             if p[1].strip()])
             form['action_plans'].append(measure)
             if len(measure):
+                budget = measure.get("budget")
+                budget = budget and budget.split(',')[0].split('.')[0]
                 new_plans.append(
                     model.ActionPlan(
                         action_plan=measure.get("action_plan"),
                         prevention_plan=measure.get("prevention_plan"),
                         requirements=measure.get("requirements"),
                         responsible=measure.get("responsible"),
-                        budget=measure.get("budget"),
+                        budget=budget,
                         planning_start=measure.get('planning_start'),
                         planning_end=measure.get('planning_end')
                     )

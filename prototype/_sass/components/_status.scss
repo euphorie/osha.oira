@@ -7,7 +7,7 @@ dl.status {
 
   dt {
     height: 2em;
-    line-height: 2em;
+    // line-height: 2em;
     // margin-bottom: -2em;
     color: white;
     // padding-left: 3%;
@@ -27,32 +27,6 @@ dl.status {
 
       &:hover {
         text-decoration: underline;
-      }
-    }
-
-    .score-badge {
-      position: absolute;
-      left: -6em;
-      top: 0.5em;
-      width: 5em;
-      height: 5em;
-      line-height: 5em;
-      border-radius: 50%;
-      text-align: center;
-      // @include box-sizing();
-      color: white;
-
-      &:before {
-        background-color: red;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        content: " ";
-        display: block;
-        border-radius: 50%;
-        z-index: -1;
       }
     }
   }
@@ -167,6 +141,10 @@ dl.status {
 
         &.answered {
           background-color: green;
+        }
+
+        &.unanswered {
+          color: rgba(0,0,0,0.6);
         }
 
         &.risk {

@@ -15,10 +15,12 @@
 <metal:content fill-slot="content">
     <?python import decimal ?>
     <div class="statuses" tal:define="status python:view.status">
-        <article class="richs">
-            <h1><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${here/Title}</tal:name></tal:title> <strong class="score-badge"
-                    tal:attributes="style python:'background-color: rgba(0,100,0,%s)' %(decimal.Decimal(view.percentage_ok)/100)" tal:content="python:'%d%%' % view.percentage_ok"></strong>
+        <article class="rich">
+            <h1><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${here/Title}</tal:name></tal:title> <strong class="score-badge" data-satisfaction="${python:'%02d' % view.percentage_ok}"><tal:percent content="python:'%d%%' % view.percentage_ok">20%</tal:percent> <em class="label" i18n:translate="risk_free">Risk free</em></strong>
             </h1>
+            <p class="byline">
+                <tal:percent content="python:'%d%%' % view.percentage_ok">20%</tal:percent> <tal:translate i18n:translate="risk_free">Risk free</tal:translate>
+            </p>
         </article>
 
         <ul class="page-toc">
@@ -45,13 +47,13 @@
                 num_postponed python:module.get('postponed', 0);
                 num_todo python:module.get('todo', 0);
                 num_total python:num_ok + num_risks_with_measures + num_risks_without_measures + num_postponed + num_todo;
+                perc_total_progress python:not num_total and 100 or (num_ok + num_risks_with_measures)/decimal.Decimal(num_total)*100;
                 perc_ok python:not num_total and 100 or num_ok/decimal.Decimal(num_total)*100;
                 perc_risks_without_measures python:num_total and num_risks_without_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_risks_with_measures python:num_total and num_risks_with_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_postponed python:num_total and num_postponed/decimal.Decimal(num_total)*100 or 0; ">
             <dt><a name="${module/path}"> </a>
-                <a href="${module/url}">${module/title}<strong class="score-badge"
-                        tal:attributes="style python:'background-color: rgba(0,100,0,%s)' %(perc_ok/100)" tal:content="python:'%d%%' %(int(perc_ok))"></strong></a>
+                <a href="${module/url}">${module/title} <strong class="score-badge" data-satisfaction="${python:'%02d' % perc_total_progress}"><tal:percent content="python:'%d%%' %(int(perc_total_progress))">20%</tal:percent> <tal:translate i18n:translate="risk_free">Risk free</tal:translate></strong></a>
             </dt>
             <dd>
                 <section class="graph">
@@ -88,10 +90,10 @@
                             <strong class="number">${num_risks_without_measures}</strong> <em class="label" i18n:translate="label_risk_without_measure">Risk without measure</em>
                         </li>
                         <li class="postponed" tal:condition="num_postponed">
-                            <strong class="number">${num_postponed}</strong> <em class="label" i18n:translate="label_postponed">Postponed</em>
+                            <strong class="number">${num_postponed}</strong> <em class="label" i18n:translate="Postponed">Postponed</em>
                         </li>
                         <li class="unanswered" tal:condition="num_todo">
-                            <strong class="number">${num_todo}</strong> <em class="label" i18n:translate="label_unanswered">Unanswered</em>
+                            <strong class="number">${num_todo}</strong> <em class="label" i18n:translate="Unvisited">Unanswered</em>
                         </li>
                     </ul>
                     <div class="six columns high-prio-risks" tal:define="high_risks python:view.risks_by_status[module.get('path')]['present']['high']" tal:condition="high_risks">

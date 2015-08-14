@@ -10,14 +10,19 @@ from euphorie.client.navigation import QuestionURL
 from euphorie.client.navigation import getTreeData
 from euphorie.client.session import SessionManager
 from euphorie.client.update import redirectOnSurveyUpdate
-from euphorie.content.module import IModule
+from euphorie.content.survey import ISurvey
 from five import grok
 from osha.oira import log
+from osha.oira import _
 from osha.oira.client import interfaces
+from .country import ConfirmationDeleteSession
+from .country import DeleteSession
+from .country import RenameSession
 from sqlalchemy import sql
 from sqlalchemy import orm
 from z3c.saconfig import Session
 from zope.component import getMultiAdapter
+from zope.i18n import translate
 
 
 grok.templatedir("templates")
@@ -33,6 +38,15 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
     })
 
 
+class OSHAView(survey.View):
+    """ Override the "select existing session or start a new one" view
+    """
+    grok.require("euphorie.client.ViewSurvey")
+    grok.layer(interfaces.IOSHAClientSkinLayer)
+    grok.template("survey_sessions")
+    grok.name("index_html")
+
+
 class OSHAStart(survey.Start):
     """ Override the 'start' page to provide our own template.
 
@@ -42,6 +56,18 @@ class OSHAStart(survey.Start):
     grok.layer(interfaces.IOSHAClientSkinLayer)
     grok.template("start")
     grok.name("start")
+
+
+class ConfirmationDeleteSurveySession(ConfirmationDeleteSession):
+    grok.context(ISurvey)
+
+
+class DeleteSurveySession(DeleteSession):
+    grok.context(ISurvey)
+
+
+class RenameSurveySession(RenameSession):
+    grok.context(ISurvey)
 
 
 class OSHAIdentification(survey.Identification):
@@ -232,11 +258,17 @@ class OSHAStatus(survey.Status):
         modules = {}
         toc = {}
 
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        title_custom_risks = translate(_(
+            'title_other_risks', default=u'Added risks (by you)'), target_language=lang)
+
         for path in module_paths:
             number = ".".join(self.slicePath(path))
             # top-level module, always include it in the toc
             if len(path) == 3:
                 title = titles[path]
+                if title == 'title_other_risks':
+                    title = title_custom_risks
                 toc[path] = {
                     'path': path,
                     'title': title,
@@ -325,6 +357,7 @@ class OSHAStatus(survey.Status):
         """
         session = Session()
         total_ok = 0
+        total_with_measures = 0
         modules = self.getModules()
         risks = self.getRisks([m['path'] for m in modules.values()])
         for r in risks:
@@ -339,6 +372,7 @@ class OSHAStatus(survey.Status):
                 if measures.count():
                     has_measures = True
                     modules[r['module_path']]['risk_with_measures'] += 1
+                    total_with_measures += 1
                 else:
                     modules[r['module_path']]['risk_without_measures'] += 1
             elif r['postponed']:
@@ -352,7 +386,7 @@ class OSHAStatus(survey.Status):
             if m['ok'] + m['postponed'] + m['risk_with_measures'] + m['risk_without_measures'] + m['todo'] == 0:
                 del modules[key]
                 del self.tocdata[key]
-        self.percentage_ok = not len(risks) and 100 or int(total_ok / Decimal(len(risks))*100)
+        self.percentage_ok = not len(risks) and 100 or int((total_ok + total_with_measures) / Decimal(len(risks))*100)
         self.status = modules.values()
         self.status.sort(key=lambda m: m["path"])
         self.toc = self.tocdata.values()

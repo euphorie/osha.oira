@@ -2,6 +2,10 @@
 	margin: 0 0 1em;
 	overflow: hidden;
 
+	figure {
+		@include clear();
+	}
+
 	a {
 		background-size: cover;
 		background-position: center center;

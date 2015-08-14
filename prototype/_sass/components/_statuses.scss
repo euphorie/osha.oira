@@ -2,32 +2,43 @@
   h1 {
     margin-left: 4em;
     position: relative;
+    margin-bottom: 0em;
 
     .score-badge {
       position: absolute;
       left: -4.7em;
-      top: -1.3em;
+      top: -0.95em;
       width: 4em;
       height: 4em;
-      line-height: 4em;
-      border-radius: 50%;
-      text-align: center;
-      // @include box-sizing();
-      color: white;
+      // text-indent: 0;
+      // padding-top: 4em;
+      // height: 0;
+      // text-align: center;
+      // line-height: 2em;
+
+      // em {
+      //   display: block;
+      //   font-size: 0.4em;
+      //   font-style: normal;
+      //   margin-top: -2.8em;
+      //   opacity: 0.6;
+      // }
 
       &:before {
-        background-color: red;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        content: " ";
-        display: block;
-        border-radius: 50%;
-        z-index: -1;
+        line-height: 1.6em;
+      }
+
+      &:after {
+        // line-height: ;
       }
     }
+  }
+
+  .byline {
+    margin-left: 6em;
+    position: relative;
+    margin-bottom: 2em;
+    font-size: 1.34em;
   }
 
   .page-toc {

@@ -13,6 +13,33 @@
 
 <body>
     <metal:content fill-slot="content">
+        <style type="text/css">
+.prio-high .risk-title, .prio-high td {
+      color: red;
+}
+.prio-medium .risk-title,
+.prio-medium td {
+    color:orange
+}
+.prio-low .risk-title,
+.prio-low td {
+    color:green
+}
+table{border-collapse:collapse}
+table th,table td{border-bottom:1px solid silver;padding:0.5em 0}
+table td{padding-left:0.5em;padding-right:0.5em}
+table thead th{text-align:center}
+table tbody td{vertical-align:middle;text-align:center;font-weight:bold;font-size:3em}
+table tbody td:nth-child(even){background-color:#ececec}
+.risk-title{margin-bottom:0;font-weight:bold}
+.description{font-weight:normal;margin-bottom:0}
+
+h2,.pat-rich h2{font-size:1.5em;line-height:130%;letter-spacing:0.05em;font-weight:400;margin-bottom:0.7em;letter-spacing:0.05em}
+
+section.module {
+      margin-bottom: 5em;
+}
+        </style>
 		<article class="pat-rich report">
 			<h1>
 				Risk analysis and resolutions

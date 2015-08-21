@@ -13,8 +13,9 @@
 
 <body>
 <metal:content fill-slot="content">
-    <?python import decimal ?>
     <div class="statuses" tal:define="status python:view.status">
+
+        <metal:macro define-macro="title_block">
         <article class="rich">
             <h1><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${here/Title}</tal:name></tal:title> <strong class="score-badge" data-satisfaction="${python:'%02d' % view.percentage_ok}"><tal:percent content="python:'%d%%' % view.percentage_ok">20%</tal:percent> <em class="label" i18n:translate="risk_free">Risk free</em></strong>
             </h1>
@@ -22,7 +23,9 @@
                 <tal:percent content="python:'%d%%' % view.percentage_ok">20%</tal:percent> <tal:translate i18n:translate="risk_free">Risk free</tal:translate>
             </p>
         </article>
+        </metal:macro>
 
+        <metal:macro define-macro="page_toc">
         <ul class="page-toc">
             <li tal:repeat="module view/toc">
                 <tal:no_locations condition="not:module/locations">
@@ -38,6 +41,10 @@
                 </tal:locations>
             </li>
         </ul>
+        </metal:macro>
+
+        <metal:macro define-macro="status_modules">
+        <?python import decimal ?>
         <dl class="status">
             <tal:loop repeat="module status">
             <tal:defs define="
@@ -78,8 +85,8 @@
                         <em class="label" tal:content="python:'question%s were postponed' % (num_postponed != 1 and 's' or '')"></em>
                     </p>
                 </section>
-                <section class="row">
-                    <ul class="six columns legend">
+                <section class="row" tal:define="legend_columns legend_columns|string:six">
+                    <ul class="${legend_columns} columns legend">
                         <li class="answered" tal:condition="num_ok">
                             <strong class="number">${num_ok}</strong> <em class="label" i18n:translate="label_no_risk">No risk</em>
                         </li>
@@ -96,6 +103,7 @@
                             <strong class="number">${num_todo}</strong> <em class="label" i18n:translate="Unvisited">Unanswered</em>
                         </li>
                     </ul>
+                    <metal:slot define-slot="risk-list">
                     <div class="six columns high-prio-risks" tal:define="high_risks python:view.risks_by_status[module.get('path')]['present']['high']" tal:condition="high_risks">
                         <h4 i18n:translate="heading_high_prio_risks">High priority risks</h4>
                         <ul>
@@ -104,11 +112,13 @@
                             </li>
                         </ul>
                     </div>
+                    </metal:slot>
                 </section>
             </dd>
             </tal:defs>
             </tal:loop>
         </dl>
+        </metal:macro>
     </div>
 <tal:block replace="tile:client-analytics"/>
 </metal:content>

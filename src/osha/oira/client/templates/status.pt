@@ -51,7 +51,8 @@
                 perc_ok python:not num_total and 100 or num_ok/decimal.Decimal(num_total)*100;
                 perc_risks_without_measures python:num_total and num_risks_without_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_risks_with_measures python:num_total and num_risks_with_measures/decimal.Decimal(num_total)*100 or 0;
-                perc_postponed python:num_total and num_postponed/decimal.Decimal(num_total)*100 or 0; ">
+                perc_postponed python:num_total and num_postponed/decimal.Decimal(num_total)*100 or 0;
+                perc_todo python:num_total and num_todo/decimal.Decimal(num_total)*100 or 0; ">
             <dt><a name="${module/path}"> </a>
                 <a href="${module/url}">${module/title} <strong class="score-badge" data-satisfaction="${python:'%02d' % perc_total_progress}"><tal:percent content="python:'%d%%' %(int(perc_total_progress))">20%</tal:percent> <tal:translate i18n:translate="risk_free">Risk free</tal:translate></strong></a>
             </dt>
@@ -76,6 +77,11 @@
                         tal:attributes="title python:'%s questions were postponed' % num_postponed">
                         <strong class="number">${num_postponed}</strong>
                         <em class="label" tal:content="python:'question%s were postponed' % (num_postponed != 1 and 's' or '')"></em>
+                    </p>
+                    <p class="range unanswered" style="width: ${perc_todo}%"
+                        tal:attributes="title python:'%s questions aren\'t answered yet' % num_todo">
+                        <strong class="number">${num_todo}</strong>
+                        <em class="label" tal:content="python:'question%s aren\'t answered yet' % (num_todo != 1 and 's' or '')"></em>
                     </p>
                 </section>
                 <section class="row">

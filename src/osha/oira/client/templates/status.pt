@@ -79,6 +79,7 @@
                         tal:attributes="title python:'%s questions were postponed' % num_postponed">
                         <strong class="number">${num_postponed}</strong>
                         <em class="label" tal:content="python:'question%s were postponed' % (num_postponed != 1 and 's' or '')"></em>
+                    </p>
                     <p class="range unanswered" style="width: ${perc_todo}%"
                         tal:attributes="title python:'%s questions aren\'t answered yet' % num_todo">
                         <strong class="number">${num_todo}</strong>

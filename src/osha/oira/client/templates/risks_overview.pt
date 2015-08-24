@@ -13,29 +13,304 @@
 
 <body>
 <metal:content fill-slot="content">
-    <?python import decimal ?>
-    <div class="statuses" tal:define="status python:view.status">
-        <article class="richs">
-            <h1><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${here/Title}</tal:name></tal:title> <strong class="score-badge"
-                    tal:attributes="style python:'background-color: rgba(0,100,0,%s)' %(decimal.Decimal(view.percentage_ok)/100)" tal:content="python:'%d%%' % view.percentage_ok"></strong>
+    <style type="text/css">
+.statuses h1 {
+    margin-left: 4em;
+    position: relative;
+    margin-bottom: 0em;
+}
+article h1, .pat-rich h1 {
+    font-weight: 600;
+    font-size: 2em;
+    line-height: 130%;
+    margin-bottom: 0.7em;
+    letter-spacing: 0.05em;
+}
+.statuses h1 .score-badge {
+    position: absolute;
+    left: -4.7em;
+    top: -0.95em;
+    width: 4em;
+    height: 4em;
+}
+.score-badge {
+    background-color: red;
+    position: absolute;
+    left: -6em;
+    top: 0.5em;
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    text-align: center;
+    text-indent: -1000em;
+    color: black;
+}
+.statuses h1 .score-badge:before {
+    line-height: 1.6em;
+}
+.score-badge[data-satisfaction^="0"]:before,.score-badge[data-satisfaction="1"]:before,.score-badge[data-satisfaction="3"]:before,.score-badge[data-satisfaction="4"]:before,.score-badge[data-satisfaction="5"]:before,.score-badge[data-satisfaction="6"]:before,.score-badge[data-satisfaction="7"]:before,.score-badge[data-satisfaction="8"]:before,.score-badge[data-satisfaction="9"]:before {
+    background-color: rgba(255,255,0,0);
+}
+.score-badge[data-satisfaction^="0"]:after,.score-badge[data-satisfaction^="1"]:after,.score-badge[data-satisfaction^="2"]:after,.score-badge[data-satisfaction^="3"]:after,.score-badge[data-satisfaction^="4"]:after {
+    border-bottom: none;
+    border-top: 0.3em solid black;
+}
+.score-badge[data-satisfaction^="0"]:after,.score-badge[data-satisfaction="1"]:after,.score-badge[data-satisfaction="3"]:after,.score-badge[data-satisfaction="4"]:after,.score-badge[data-satisfaction="5"]:after,.score-badge[data-satisfaction="6"]:after,.score-badge[data-satisfaction="7"]:after,.score-badge[data-satisfaction="8"]:after,.score-badge[data-satisfaction="9"]:after {
+    height: 30%;
+    bottom: 8%;
+}
+.score-badge[data-satisfaction^="1"]:before {
+    background-color: rgba(255,255,0,0.1);
+}
+.score-badge[data-satisfaction^="1"]:after {
+    height: 24%;
+    bottom: 12%;
+}
+.score-badge[data-satisfaction^="2"]:before {
+    background-color: rgba(255,255,0,0.2);
+}
+.score-badge[data-satisfaction^="2"]:after {
+    height: 18%;
+    bottom: 16%;
+}
+.score-badge[data-satisfaction^="3"]:before {
+    background-color: rgba(255,255,0,0.3);
+}
+.score-badge[data-satisfaction^="3"]:after {
+    height: 12%;
+    bottom: 22%;
+}
+.score-badge[data-satisfaction^="4"]:before {
+    background-color: rgba(255,255,0,0.4);
+}
+.score-badge[data-satisfaction^="4"]:after {
+    height: 6%;
+    bottom: 26%;
+}
+.score-badge[data-satisfaction^="5"]:before {
+    background-color: rgba(255,255,0,0.5);
+}
+.score-badge[data-satisfaction^="5"]:after {
+    height: 0;
+    bottom: 30%;
+}
+.score-badge[data-satisfaction^="6"]:before {
+    background-color: rgba(255,255,0,0.6);
+}
+.score-badge[data-satisfaction^="6"]:after {
+    height: 36%;
+    bottom: 28%;
+}
+.score-badge[data-satisfaction^="7"]:before {
+    background-color: rgba(255,255,0,0.7);
+}
+.score-badge[data-satisfaction^="7"]:after {
+    height: 43%;
+    bottom: 26%;
+}
+.score-badge[data-satisfaction^="8"]:before {
+    background-color: rgba(255,255,0,0.8);
+}
+.score-badge[data-satisfaction^="8"]::after {
+    height: 49%;
+    bottom: 24%;
+}
+.score-badge[data-satisfaction^="9"]:before {
+    background-color: rgba(255,255,0,0.9);
+}
+.score-badge[data-satisfaction^="9"]:after {
+    height: 55%;
+    bottom: 22%;
+}
+.score-badge[data-satisfaction="100"]:before {
+    background-color: #ff0;
+}
+.score-badge[data-satisfaction="100"]:after {
+    height: 61%;
+    bottom: 22%;
+    border-top: none;
+    border-bottom: 0.3em solid black;
+}
+
+.score-badge:before {
+    content: '• •';
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    border-radius: 50%;
+    line-height: 2em;
+    font-size: 2em;
+    z-index: 1;
+}
+.score-badge:after {
+    content: ' ';
+    display: block;
+    left: 16%;
+    right: 16%;
+    bottom: 1em;
+    height: 2.5em;
+    background-color: rgba(255,255,0,0);
+    border-bottom: 0.3em solid black;
+    border-radius: 100%;
+    z-index: 1;
+}
+.score-badge:before, .score-badge:after {
+    position: absolute;
+    text-indent: 0;
+}
+.statuses .byline {
+    margin-left: 6em;
+    position: relative;
+    margin-bottom: 2em;
+    font-size: 1.34em;
+}
+.statuses .page-toc {
+    margin-left: 6em;
+    margin-top: -8.5em;
+    margin-bottom: 3em;
+    padding: 6.8em 2em 2.5em 2em;
+    border-radius: 1em;
+    background-color: rgba(0,0,0,0.1);
+}
+dl.status {
+    padding-top: 1em;
+    margin-bottom: 2em;
+    margin-top: 0;
+}
+dl.status dt {
+    height: 2em;
+    color: white;
+    position: relative;
+    clear: left;
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 6em;
+}
+dl.status dt a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    text-transform: uppercase;
+}
+dl.status dd {
+    margin-left: 6em;
+    position: relative;
+}
+dl.status dd .graph {
+    background: rgba(0,0,0,0.1);
+    clear: left;
+    display: block;
+    height: 2em;
+    margin: 0 0 2.5em 0;
+    padding: 0;
+    text-align: center;
+    color: white;
+    line-height: 2.1em;
+    border-radius: 1em;
+    overflow: hidden;
+}
+dl.status dd .graph .range {
+    height: 2em;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+    float: left;
+}
+dl.status dd .graph .range.answered {
+    background-color: green;
+}
+dl.status dd .graph .range.risk-measure {
+    background-color: DarkRed;
+}
+dl.status dd .graph .range.risk {
+    background-color: red;
+}
+dl.status dd .graph .range.postponed {
+    background-color: orange;
+    color: rgba(0,0,0,0.6);
+}
+dl.status dd .graph .range.unanswered {
+    color: rgba(0,0,0,0.6);
+}
+dl.status dd .graph .range .number {
+    font-weight: normal;
+    font-size: 0.8em;
+}
+dl.status dd .graph .range .label {
+    display: none;
+}
+dl.status dd .legend {
+    margin-bottom: 3.5em;
+    color: rgba(0,0,0,0.6);
+}
+dl.status dd .legend li {
+    padding-left: 1.8em;
+    font-style: normal;
+}
+dl.status dd .legend li .number {
+    float: left;
+    margin-left: -1.8em;
+    margin-top: 0.1em;
+    width: 1.3em;
+    height: 1.3em;
+    line-height: 1.5em;
+    border-radius: 50%;
+    text-align: center;
+    background-color: gray;
+    color: white;
+    font-size: 0.9em;
+    font-weight: normal;
+}
+dl.status dd .legend li.answered .number {
+    background-color: green;
+}
+dl.status dd .legend li.risk-measure .number {
+        background-color: DarkRed;
+}
+dl.status dd .legend li.risk .number {
+    background-color: red;
+}
+dl.status dd .legend li.postponed .number {
+    background-color: orange;
+    color: rgba(0,0,0,0.6);
+}
+dl.status dd .legend li.unanswered .number {
+    background-color: rgba(0,0,0,0.1);
+    color: rgba(0,0,0,0.6);
+}
+
+    </style>
+    <div class="statuses" tal:define="status python:view.status; status_view nocall:context/aq_parent/@@status">
+
+        <article class="rich">
+            <h1><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${here/Title}</tal:name></tal:title> <strong class="score-badge" data-satisfaction="${python:'%02d' % view.percentage_ok}"></strong>
             </h1>
+            <p class="byline">
+                <tal:percent content="python:'%d%%' % view.percentage_ok">20%</tal:percent> <tal:translate i18n:translate="risk_free">Risk free</tal:translate>
+            </p>
         </article>
 
+        <a name="page-toc"> </a>
         <ul class="page-toc">
             <li tal:repeat="module view/toc">
                 <tal:no_locations condition="not:module/locations">
-                    <a href="${here/absolute_url}/status#${module/path}">${module/title}</a>
+                    <a href="#${module/path}">${module/title}</a>
                 </tal:no_locations>
                 <tal:locations condition="module/locations">
                     ${python:module['title']}
                     <ul>
                         <li tal:repeat="location module/locations">
-                            <a href="${here/absolute_url}/status#${location/path}">${location/title}</a>
+                            <a href="#${location/path}">${location/title}</a>
                         </li>
                     </ul>
                 </tal:locations>
             </li>
         </ul>
+
+        <?python import decimal ?>
         <dl class="status">
             <tal:loop repeat="module status">
             <tal:defs define="
@@ -45,61 +320,44 @@
                 num_postponed python:module.get('postponed', 0);
                 num_todo python:module.get('todo', 0);
                 num_total python:num_ok + num_risks_with_measures + num_risks_without_measures + num_postponed + num_todo;
+                perc_total_progress python:not num_total and 100 or (num_ok + num_risks_with_measures)/decimal.Decimal(num_total)*100;
                 perc_ok python:not num_total and 100 or num_ok/decimal.Decimal(num_total)*100;
                 perc_risks_without_measures python:num_total and num_risks_without_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_risks_with_measures python:num_total and num_risks_with_measures/decimal.Decimal(num_total)*100 or 0;
-                perc_postponed python:num_total and num_postponed/decimal.Decimal(num_total)*100 or 0; ">
-            <style>
-                .score-badge.module-${module/path} {
-                    background-color: rgba(0,100,0,${python:perc_ok/100});
-                }
-                .answered.module-${module/path} {
-                    width: ${perc_ok}%;
-                }
-                .risk-measure.module-${module/path} {
-                    width: ${perc_risks_with_measures}%;
-                }
-                .risk.module-${module/path} {
-                    width: ${perc_risks_without_measures}%;
-                }
-                .postponed.module-${module/path} {
-                    width: ${perc_postponed}%;
-                }
-            </style>
+                perc_postponed python:num_total and num_postponed/decimal.Decimal(num_total)*100 or 0;
+                perc_todo python:num_total and num_todo/decimal.Decimal(num_total)*100 or 0; ">
             <dt><a name="${module/path}"> </a>
-                <a href="${module/url}">${module/title}<strong class="score-badge module-${module/path}"
-                        tal:content="python:'%d%%' %(int(perc_ok))"></strong></a>
+                <a href="#page-toc">${module/title} <strong class="score-badge" data-satisfaction="${python:'%02d' % perc_total_progress}"></strong></a>
             </dt>
             <dd>
                 <section class="graph">
-                    <span class="range answered module-${module/path}"
+                    <span class="range answered" style="width: ${perc_ok}%"
                         tal:attributes="title python:'%s question%s answered without a risk' % (num_ok, num_ok != 1 and 's' or '')">
                         <strong class="number">${num_ok}</strong>
                         <em class="label" tal:content="python:'question%s answered without a risk' % (num_ok != 1 and 's' or '')"></em>
                     </span>
-                    <span class="range risk-measure module-${module/path}"
+                    <span class="range  risk-measure" style="width: ${perc_risks_with_measures}%"
                         tal:attributes="title python:'%s answer%s indicated a risk and have at least one measure defined in the action plan' % (num_risks_with_measures, num_risks_with_measures != 1 and 's' or '')">
                         <strong class="number">${num_risks_with_measures}</strong>
                         <em class="label" tal:content="python:'answer%s indicated a risk and have at least one measure defined in the action plan' % (num_risks_with_measures != 1 and 's' or '')"></em>
                     </span>
-                    <span class="range risk module-${module/path}"
+                    <span class="range risk" style="width: ${perc_risks_without_measures}%"
                         tal:attributes="title python:'%s answer%s indicated a risk without any measure defined in the action plan' % (num_risks_without_measures, num_risks_without_measures != 1 and 's' or '')">
                         <strong class="number">${num_risks_without_measures}</strong>
                         <em class="label" tal:content="python:'answer%s indicated a risk without any measure defined in the action plan' % (num_risks_without_measures != 1 and 's' or '')"></em>
                     </span>
-                    <span class="range postponed module-${module/path}"
+                    <span class="range postponed" style="width: ${perc_postponed}%"
                         tal:attributes="title python:'%s questions were postponed' % num_postponed">
                         <strong class="number">${num_postponed}</strong>
                         <em class="label" tal:content="python:'question%s were postponed' % (num_postponed != 1 and 's' or '')"></em>
                     </span>
+                    <span class="range unanswered" style="width: ${perc_todo}%"
+                        tal:attributes="title python:'%s questions aren\'t answered yet' % num_todo">
+                        <strong class="number">${num_todo}</strong>
+                        <em class="label" tal:content="python:'question%s aren\'t answered yet' % (num_todo != 1 and 's' or '')"></em>
+                    </span>
                 </section>
-                <section class="row"
-                    tal:define="risks_by_status python:view.risks_by_status[module.get('path')];
-                                num_high python:len(risks_by_status['present']['high']);
-                                num_medium python:len(risks_by_status['present']['medium']);
-                                num_low python:len(risks_by_status['present']['low']);
-                                num_present python:num_high + num_medium + num_low;
-                                num_possible python:num_postponed + num_todo;">
+                <section class="row">
                     <ul class="twelve columns legend">
                         <li class="answered" tal:condition="num_ok">
                             <strong class="number">${num_ok}</strong> <em class="label" i18n:translate="label_no_risk">No risk</em>
@@ -111,13 +369,19 @@
                             <strong class="number">${num_risks_without_measures}</strong> <em class="label" i18n:translate="label_risk_without_measure">Risk without measure</em>
                         </li>
                         <li class="postponed" tal:condition="num_postponed">
-                            <strong class="number">${num_postponed}</strong> <em class="label" i18n:translate="label_postponed">Postponed</em>
+                            <strong class="number">${num_postponed}</strong> <em class="label" i18n:translate="Postponed">Postponed</em>
                         </li>
                         <li class="unanswered" tal:condition="num_todo">
-                            <strong class="number">${num_todo}</strong> <em class="label" i18n:translate="label_unanswered">Unanswered</em>
+                            <strong class="number">${num_todo}</strong> <em class="label" i18n:translate="Unvisited">Unanswered</em>
                         </li>
                     </ul>
-
+                    <tal:risk_lists
+                            tal:define="risks_by_status python:view.risks_by_status[module.get('path')];
+                                        num_high python:len(risks_by_status['present']['high']);
+                                        num_medium python:len(risks_by_status['present']['medium']);
+                                        num_low python:len(risks_by_status['present']['low']);
+                                        num_present python:num_high + num_medium + num_low;
+                                        num_possible python:num_postponed + num_todo;">
                     <div class="six columns">
                         <h3 i18n:translate="heading_present_risks"><span i18n:name="num_present_risks">${num_present}</span> Present Risks</h3>
                         <tal:prio tal:repeat="priority python:['high', 'medium', 'low']">
@@ -127,7 +391,7 @@
                             <h4 i18n:translate="heading_num_low_prio_risks" tal:condition="python:priority == 'low'"><span i18n:name="num_low_risks">${num_low}</span> Low priority risks</h4>
                             <ul>
                                 <li tal:repeat="risk risks">
-                                    <a href="${risk/path}">${risk/title}</a> <span tal:condition="risk/has_measures">(≥1 measures)</span><span tal:condition="not:risk/has_measures">(without measures)</span>
+                                    ${risk/title} <span tal:condition="risk/has_measures">(≥1 measures)</span><span tal:condition="not:risk/has_measures">(without measures)</span>
                                 </li>
                             </ul>
                         </div>
@@ -142,12 +406,13 @@
                             <h4 i18n:translate="heading_num_todo_prio_risks" tal:condition="python:status == 'todo'"><span i18n:name="num_todo_risks">${num_todo}</span> Risks not answered</h4>
                             <ul>
                                 <li tal:repeat="risk risks">
-                                    <a href="${risk/path}">${risk/title}</a>
+                                    ${risk/title}
                                 </li>
                             </ul>
                         </div>
                         </tal:prio>
                     </div>
+                    </tal:risk_lists>
                 </section>
             </dd>
             </tal:defs>

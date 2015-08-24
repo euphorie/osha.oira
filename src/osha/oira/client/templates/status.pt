@@ -13,8 +13,8 @@
 
 <body>
 <metal:content fill-slot="content">
-    <?python import decimal ?>
     <div class="statuses" tal:define="status python:view.status">
+
         <article class="rich">
             <h1><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${here/Title}</tal:name></tal:title> <strong class="score-badge" data-satisfaction="${python:'%02d' % view.percentage_ok}"><tal:percent content="python:'%d%%' % view.percentage_ok">20%</tal:percent> <em class="label" i18n:translate="risk_free">Risk free</em></strong>
             </h1>
@@ -38,6 +38,8 @@
                 </tal:locations>
             </li>
         </ul>
+
+        <?python import decimal ?>
         <dl class="status">
             <tal:loop repeat="module status">
             <tal:defs define="

@@ -31,8 +31,10 @@ class Mixin(object):
         context = aq_inner(self.context)
         module = self.request.survey.restrictedTraverse(
             self.context.zodb_path.split("/"))
-
-        if IProfileQuestion.providedBy(module) and context.depth == 2:
+        if (
+            (IProfileQuestion.providedBy(module) and context.depth == 2) or
+            (ICustomRisksModule.providedBy(module) and self.phase == 'actionplan')
+        ):
             next = FindNextQuestion(context, filter=self.question_filter)
             if next is None:
                 if self.phase == 'identification':
@@ -96,7 +98,7 @@ class CustomizationView(grok.View, Mixin):
                 _(u"No changes were made to your added risks."),
                 type='warning'
             )
-            return;
+            return
 
         if added > 1:
             IStatusMessage(self.request).add(
@@ -108,7 +110,7 @@ class CustomizationView(grok.View, Mixin):
                 _(u"A new added risk has been created."),
                 type='success'
             )
-        if updated> 1:
+        if updated > 1:
             IStatusMessage(self.request).add(
                 _(u"Existing added risks have been updated."),
                 type='success'

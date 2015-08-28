@@ -50,10 +50,6 @@
         <metal:call use-macro="webhelpers/macros/risk_info_actionplan" />
     </tal:priority>
 
-    <div class="last span-15" tal:condition="risk/legal_reference|nothing">
-        <metal:call use-macro="webhelpers/macros/risk_legal_collapsible" />
-    </div>
-
 </article>
 
 
@@ -84,7 +80,7 @@
         <fieldset class="vertical" id="fields-0">
             <label><tal:label i18n:translate="label_description">Description</tal:label>
                 <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
-                <textarea class="actionPlan" type="text" name="measure.action_plan:utf8:ustring:records" rows="6"
+                <textarea class="actionPlan" type="text" name="measure.action_plan:utf8:ustring:records" rows="3"
                     placeholder="General approach (to eliminate or reduce the risk)"
                     i18n:attributes="placeholder label_measure_action_plan"
                     tal:content="actionplan/action_plan|nothing"></textarea>
@@ -173,7 +169,7 @@
 		<fieldset class="vertical" id="fields-#{1}">
 			<label><tal:label i18n:translate="label_description">Description</tal:label>
 				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
-				<textarea autofocus="autofocus" class=" actionPlan" name="measure.action_plan:utf8:ustring:records" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea>
+				<textarea autofocus="autofocus" class=" actionPlan" name="measure.action_plan:utf8:ustring:records" placeholder="General approach (to eliminate or reduce the risk)" rows="3"></textarea>
 			</label>
 			<label><tal:label i18n:translate="label_prevention_plan">Prevention plan</tal:label>
 				<textarea class="preventionPlan" name="measure.prevention_plan:utf8:ustring:records" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea>
@@ -214,7 +210,7 @@
 	</div>
 
     <fieldset id="comments">
-        <textarea id="commentsField" name="comment:utf8:ustring" cols="70" rows="5"
+        <textarea id="commentsField" name="comment:utf8:ustring" cols="70" rows="3"
             placeholder="Please leave any comments you may have on the question above in this field. These comments will be used in the action plan."
             i18n:attributes="placeholder label_comment"
             tal:content="data/comment|nothing"></textarea>
@@ -231,7 +227,7 @@
     <tal:loop repeat="solution view/solutions|python:[]">
         <fieldset class="vertical" id="standard-solution-${repeat/solution/number}" hidden="hidden">
             <label><tal:label i18n:translate="label_description">Description</tal:label>
-                <textarea class="actionPlan" name="measure.action_plan:utf8:ustring:records" placeholder="General approach (to eliminate or reduce the risk)" rows="6">${solution/description}</textarea>
+                <textarea class="actionPlan" name="measure.action_plan:utf8:ustring:records" placeholder="General approach (to eliminate or reduce the risk)" rows="3">${solution/description}</textarea>
             </label>
             <label><tal:label i18n:translate="label_prevention_plan">Prevention plan</tal:label>
                 <textarea class="preventionPlan" name="measure.prevention_plan:utf8:ustring:records" placeholder="Specific action(s) required to implement this approach" rows="3">${solution/action_plan}</textarea>

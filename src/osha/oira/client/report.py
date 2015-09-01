@@ -892,7 +892,12 @@ class MeasuresOverview(grok.View):
                             action.planning_start.month == m.month
                             for m in [now, next_month, month_after_next]],
                  })
-        self.modules = [{'name': module.title,
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        title_custom_risks = translate(_(
+            'title_other_risks', default=u'Added risks (by you)'),
+            target_language=lang)
+        self.modules = [{'name': (module.title == 'title_other_risks' and
+                                  title_custom_risks or module.title),
                          'number': module.number,
                          'risks': risks}
                         for module, risks in sorted(modulesdict.items(), key=lambda m: m[0].zodb_path)]

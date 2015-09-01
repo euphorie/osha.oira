@@ -887,7 +887,7 @@ class MeasuresOverview(grok.View):
         for module, risk, action in measures:
             modulesdict[module][risk.priority].append(
                 {'title': risk.title,
-                 'description': risk.comment,
+                 'description': action.action_plan,
                  'months': [action.planning_start and
                             action.planning_start.month == m.month
                             for m in [now, next_month, month_after_next]],

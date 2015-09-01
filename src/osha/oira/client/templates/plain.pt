@@ -57,6 +57,9 @@
     }
 }
 
+html {
+    height: inherit;
+}
 body {
     font-size: 60%;
     orphans:3;
@@ -65,11 +68,9 @@ body {
 div.print-footer {
   flow: static(footer);
 }
-.osc-off #main {
-    position: inherit;
-    height: inherit;
-}
-.sidebar-off #content, .osc-off.sidebar-off #content {
+.osc-off #main,
+.sidebar-off #content,
+.osc-off.sidebar-off #content {
     position: inherit;
     height: inherit;
 }

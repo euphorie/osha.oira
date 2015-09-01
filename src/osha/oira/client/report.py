@@ -875,13 +875,16 @@ class MeasuresOverview(grok.View):
                     else_=2),
                 model.Risk.path)
         measures = [t for t in query.all() if (
-            t[-1].planning_start is not None or
-            t[-1].planning_end is not None or
-            t[-1].responsible is not None or
-            t[-1].prevention_plan is not None or
-            t[-1].requirements is not None or
-            t[-1].budget is not None or
-            t[-1].action_plan is not None
+            (t[-1].planning_start is not None
+                and t[-1].planning_start.strftime('%b') in self.months) and
+            (
+                t[-1].planning_end is not None or
+                t[-1].responsible is not None or
+                t[-1].prevention_plan is not None or
+                t[-1].requirements is not None or
+                t[-1].budget is not None or
+                t[-1].action_plan is not None
+            )
         )]
         modulesdict = defaultdict(lambda: defaultdict(list))
         for module, risk, action in measures:

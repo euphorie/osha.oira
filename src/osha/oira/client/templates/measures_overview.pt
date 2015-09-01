@@ -29,7 +29,8 @@ table{border-collapse:collapse}
 table th,table td{border-bottom:1px solid silver;padding:0.5em 0}
 table td{padding-left:0.5em;padding-right:0.5em}
 table thead th{text-align:center}
-table tbody td{vertical-align:middle;text-align:center;font-weight:bold;font-size:3em}
+table tbody th{width:65%}
+table tbody td{vertical-align:middle;text-align:center;font-weight:bold;font-size:3em;width:11%}
 table tbody td:nth-child(even){background-color:#ececec}
 .risk-title{margin-bottom:0;font-weight:bold}
 .description{font-weight:normal;margin-bottom:0}
@@ -55,7 +56,7 @@ section.module {
 					<thead>
 						<tr>
 							<th class="legend">
-							
+
 							</th>
 							<th tal:repeat="month view/months">
                                 ${month}
@@ -85,7 +86,7 @@ section.module {
 								•
 							</td>
 							<td tal:condition="not:month">
-								
+
 							</td>
                             </tal:block>
                             </metal:macro>

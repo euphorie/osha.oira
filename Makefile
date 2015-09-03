@@ -32,7 +32,9 @@ pot: bin/pybabel
 		--copyright-holder='SYSLAB.COM GmbH' \
 		--msgid-bugs-address='info@syslab.com' \
 		--charset=utf-8 \
-		src/osha > $(EUPHORIE_POT)~ && mv $(EUPHORIE_POT)~ $(EUPHORIE_POT)	
+		src/osha > $(EUPHORIE_POT)~
+	mv $(EUPHORIE_POT)~ $(EUPHORIE_POT)
+	$(MAKE) $(MFLAGS) $(EUPHORIE_PO_FILES)
 
 $(EUPHORIE_PO_FILES): $(EUPHORIE_POT)
 	msgmerge --update -N $@ $<

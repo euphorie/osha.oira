@@ -835,7 +835,7 @@ class RisksOverview(OSHAStatus):
             return True
 
 
-class MeasuresOverview(grok.View):
+class MeasuresOverview(OSHAStatus):
     """ Implements the "Overview of Measures" report, see #10967
     """
     grok.context(PathGhost)
@@ -886,6 +886,7 @@ class MeasuresOverview(grok.View):
                 t[-1].action_plan is not None
             )
         )]
+
         modulesdict = defaultdict(lambda: defaultdict(list))
         for module, risk, action in measures:
             modulesdict[module][risk.priority].append(
@@ -895,12 +896,19 @@ class MeasuresOverview(grok.View):
                             action.planning_start.month == m.month
                             for m in [now, next_month, month_after_next]],
                  })
-        lang = getattr(self.request, 'LANGUAGE', 'en')
-        title_custom_risks = translate(_(
-            'title_other_risks', default=u'Added risks (by you)'),
-            target_language=lang)
-        self.modules = [{'name': (module.title == 'title_other_risks' and
-                                  title_custom_risks or module.title),
-                         'number': module.number,
-                         'risks': risks}
-                        for module, risks in sorted(modulesdict.items(), key=lambda m: m[0].zodb_path)]
+
+        # re-use top-level module computation from the Status overview
+        modules = self.getModules()
+        main_modules = {}
+        for module, risks in sorted(modulesdict.items(), key=lambda m: m[0].zodb_path):
+            path = module.path[:6]
+            if path in main_modules:
+                main_modules[path]['risks'].update(risks)
+            else:
+                title = modules[path]['title']
+                number = modules[path]['number']
+                main_modules[path] = {'name': title, 'number': number, 'risks': risks}
+
+        self.modules = []
+        for key in sorted(main_modules.keys()):
+            self.modules.append(main_modules[key])

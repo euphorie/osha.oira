@@ -889,8 +889,13 @@ class MeasuresOverview(OSHAStatus):
 
         modulesdict = defaultdict(lambda: defaultdict(list))
         for module, risk, action in measures:
+            if 'custom-risks' not in risk.zodb_path:
+                risk_obj = self.request.survey.restrictedTraverse(risk.zodb_path.split('/'))
+                title = risk_obj and risk_obj.problem_description or risk.title
+            else:
+                title = risk.title
             modulesdict[module][risk.priority].append(
-                {'title': risk.title,
+                {'title': title,
                  'description': action.action_plan,
                  'months': [action.planning_start and
                             action.planning_start.month == m.month

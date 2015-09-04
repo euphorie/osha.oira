@@ -29,8 +29,8 @@ table{border-collapse:collapse}
 table th,table td{border-bottom:1px solid silver;padding:0.5em 0}
 table td{padding-left:0.5em;padding-right:0.5em}
 table thead th{text-align:center}
-table tbody th{width:65%}
-table tbody td{vertical-align:middle;text-align:center;font-weight:bold;font-size:3em;width:11%}
+table tbody th{width:70%; padding: 0.5em}
+table tbody td{vertical-align:middle;text-align:center;font-weight:bold;font-size:3em;width:9%}
 table tbody td:nth-child(even){background-color:#ececec}
 .risk-title{margin-bottom:0;font-weight:bold}
 .description{font-weight:normal;margin-bottom:0}
@@ -40,10 +40,12 @@ h2,.pat-rich h2{font-size:1.5em;line-height:130%;letter-spacing:0.05em;font-weig
 section.module {
       margin-bottom: 5em;
 }
+p.byline {margin-bottom: 3em;}
         </style>
 		<article class="pat-rich report">
 			<h1>
-				Risk analysis and resolutions
+                ${here/Title} <br />
+                <em>Risk analysis and resolutions</em>
 			</h1>
 			<p class="byline">
                 ${view/date}
@@ -63,7 +65,7 @@ section.module {
 							</th>
 						</tr>
 					</thead>
-					<tbody class="prio-high">
+					<tbody class="prio-high" tal:condition="module/risks/high">
 						<tr class="title-line">
 							<th colspan="4">
 								<h3>
@@ -92,7 +94,7 @@ section.module {
                             </metal:macro>
 						</tr>
 					</tbody>
-					<tbody class="prio-medium">
+					<tbody class="prio-medium" tal:condition="module/risks/medium">
 						<tr class="title-line">
 							<th colspan="4">
 								<h3>
@@ -104,7 +106,7 @@ section.module {
                             <metal:macro use-macro="view/risk-row" />
 						</tr>
 					</tbody>
-					<tbody class="prio-low">
+					<tbody class="prio-low" tal:condition="module/risks/low">
 						<tr class="title-line">
 							<th colspan="4">
 								<h3>

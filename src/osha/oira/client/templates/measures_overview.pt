@@ -14,7 +14,7 @@
 <body>
     <metal:content fill-slot="content">
         <style type="text/css">
-.prio-high .risk-title, .prio-high td {
+.prio-high .risk-title, .prio-high td.month {
       color: red;
 }
 .prio-medium .risk-title,
@@ -29,9 +29,12 @@ table{border-collapse:collapse}
 table th,table td{border-bottom:1px solid silver;padding:0.5em 0}
 table td{padding-left:0.5em;padding-right:0.5em}
 table thead th{text-align:center}
+table thead th.legend{text-align:right}
 table tbody th{width:70%; padding: 0.5em}
-table tbody td{vertical-align:middle;text-align:center;font-weight:bold;font-size:3em;width:9%}
+table tbody td{vertical-align:middle;text-align:center;font-weight:bold;width:9%;}
+table tbody td.month{font-size:3em;}
 table tbody td:nth-child(even){background-color:#ececec}
+table tbody td.legend{font-size:100%; color: black; background-color:#FFFFFF;}
 .risk-title{margin-bottom:0;font-weight:bold}
 .description{font-weight:normal;margin-bottom:0}
 
@@ -54,24 +57,24 @@ p.byline {margin-bottom: 3em;}
 				<h2 class="module-name">
                     ${module/number} ${module/name}
 				</h2>
-				<table class="risk-measures-plan">
+				<table class="risk-measures-plan" border="1">
 					<thead>
-						<tr>
-							<th class="legend">
-
-							</th>
-							<th tal:repeat="month view/months">
-                                ${month}
-							</th>
-						</tr>
+                        <tr>
+                            <th colspan="4" class="legend" i18n:translate="">
+                                Measure to be implemented by
+                            </th>
+                        </tr>
 					</thead>
 					<tbody class="prio-high" tal:condition="module/risks/high">
 						<tr class="title-line">
-							<th colspan="4">
+							<th >
 								<h3>
 									High priority risks
 								</h3>
 							</th>
+                            <td tal:repeat="month view/months" class="legend">
+                                ${month}
+                            </td>
 						</tr>
 						<tr tal:repeat="risk module/risks/high">
                             <metal:macro define-macro="risk-row">
@@ -84,10 +87,10 @@ p.byline {margin-bottom: 3em;}
 								</p>
 							</th>
                             <tal:block tal:repeat="month risk/months">
-							<td tal:condition="month">
+							<td tal:condition="month" class="month">
 								•
 							</td>
-							<td tal:condition="not:month">
+							<td tal:condition="not:month" class="month">
 
 							</td>
                             </tal:block>
@@ -96,11 +99,14 @@ p.byline {margin-bottom: 3em;}
 					</tbody>
 					<tbody class="prio-medium" tal:condition="module/risks/medium">
 						<tr class="title-line">
-							<th colspan="4">
+							<th>
 								<h3>
 									Medium priority risks
 								</h3>
 							</th>
+                            <td tal:repeat="month view/months" class="legend">
+                                ${month}
+                            </td>
 						</tr>
 						<tr tal:repeat="risk module/risks/medium">
                             <metal:macro use-macro="view/risk-row" />
@@ -108,11 +114,14 @@ p.byline {margin-bottom: 3em;}
 					</tbody>
 					<tbody class="prio-low" tal:condition="module/risks/low">
 						<tr class="title-line">
-							<th colspan="4">
+							<th>
 								<h3>
 									Low priority risks
 								</h3>
 							</th>
+                            <td tal:repeat="month view/months" class="legend">
+                                ${month}
+                            </td>
 						</tr>
 						<tr tal:repeat="risk module/risks/low">
                             <metal:macro use-macro="view/risk-row" />

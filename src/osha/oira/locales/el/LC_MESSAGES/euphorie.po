@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-08-05 21:17+0200\n"
+"POT-Creation-Date: 2015-09-06 00:23+0200\n"
 "PO-Revision-Date: 2013-08-15 11:22+0200\n"
 "Last-Translator: xl <xl@hol.gr>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Generated-By: Babel 0.9.6\n"
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:36
@@ -25,7 +25,7 @@ msgstr "HTML Source Code"
 
 #: src/osha/oira/homepage.py:90
 msgid "Clear unsaved changes"
-msgstr ""
+msgstr "Διαγραφή μη αποθηκευμένων αλλαγών"
 
 #. Default: Describe your general approach to eliminate or (if the risk is not
 #. avoidable) reduce the risk.
@@ -719,8 +719,8 @@ msgstr "Συγγνώμη, αλλά ένα απρόβλεπτο σφάλμα πρ
 
 #. Default: Delete this measure
 #: src/osha/oira/manual_translations.py:214
-#: src/osha/oira/client/templates/risk_actionplan.pt:68
-#: src/osha/oira/client/templates/risk_actionplan.pt:155
+#: src/osha/oira/client/templates/risk_actionplan.pt:64
+#: src/osha/oira/client/templates/risk_actionplan.pt:151
 msgid "label_remove_measure"
 msgstr "Σβήσε αυτό το μέτρο"
 
@@ -784,7 +784,7 @@ msgstr ""
 #. Default: priority
 #: src/osha/oira/manual_translations.py:230
 msgid "label_fixed_priority"
-msgstr ""
+msgstr "προτεραιότητα"
 
 #. Default: Please be aware that you have %s more login attempts before your
 #. account will be locked.
@@ -812,42 +812,45 @@ msgstr ""
 #. Default: This value must be a valid date.
 #: src/osha/oira/manual_translations.py:239
 msgid "error_validation_date"
-msgstr ""
+msgstr "Αυτή η τιμή πρέπει να είναι έγκυρη ημερομηνία."
 
 #. Default: This value must be a valid email address.
 #: src/osha/oira/manual_translations.py:240
 msgid "error_validation_email"
 msgstr ""
+"Αυτή η τιμή πρέπει να είναι έγκυρη διεύθυνση ηλεκτρονικού ταχυδρομείου."
 
 #. Default: This value must be a number.
 #: src/osha/oira/manual_translations.py:241
 msgid "error_validation_number"
-msgstr ""
+msgstr "Αυτή η τιμή πρέπει να είναι αριθμός."
 
 #. Default: This value must be a whole number.
 #: src/osha/oira/manual_translations.py:242
 msgid "error_validation_whole_number"
-msgstr ""
+msgstr "Αυτή η τιμή πρέπει να είναι ακέραιος αριθμός."
 
 #. Default: This value must be a positive whole number.
 #: src/osha/oira/manual_translations.py:243
 msgid "error_validation_positive_whole_number"
-msgstr ""
+msgstr "Αυτή η τιμή πρέπει να είναι θετικός ακέραιος αριθμός."
 
 #. Default: This value is required.
 #: src/osha/oira/manual_translations.py:244
 msgid "error_validation_required"
-msgstr ""
+msgstr "Αυτή η τιμή είναι υποχρεωτική."
 
 #. Default: This date must be on or before the end date.
 #: src/osha/oira/manual_translations.py:245
 msgid "error_validation_before_end_date"
 msgstr ""
+"Αυτή η ημερομηνία δεν πρέπει να είναι μεταγενέστερη της ημερομηνίας λήξης."
 
 #. Default: This date must be on or after the start date.
 #: src/osha/oira/manual_translations.py:246
 msgid "error_validation_after_start_date"
 msgstr ""
+"Αυτή η ημερομηνία δεν πρέπει να είναι μεταγενέστερη της ημερομηνίας έναρξης."
 
 #: src/osha/oira/vocabularies.py:25
 msgid "EU-OSHA Overview"
@@ -879,7 +882,7 @@ msgstr "4ο τρίμηνο"
 
 #: src/osha/oira/client/country.py:94
 msgid "Session `${name}` has been deleted."
-msgstr ""
+msgstr "Η ενότητα `${name}` διαγράφηκε."
 
 #: src/osha/oira/client/country.py:129
 msgid "Save"
@@ -901,33 +904,33 @@ msgstr "Ακύρωση"
 msgid "An email with a password reminder has been sent to your address."
 msgstr ""
 
-#: src/osha/oira/client/module.py:96
+#: src/osha/oira/client/module.py:98
 msgid "No changes were made to your added risks."
-msgstr ""
+msgstr "Δεν έγιναν αλλαγές στους συμπληρωματικούς κινδύνους."
 
-#: src/osha/oira/client/module.py:103
+#: src/osha/oira/client/module.py:105
 msgid "Your new added risks have been created."
-msgstr ""
+msgstr "Οι νέοι συμπληρωματικοί κίνδυνοι δημιουργήθηκαν."
 
-#: src/osha/oira/client/module.py:108
+#: src/osha/oira/client/module.py:110
 msgid "A new added risk has been created."
-msgstr ""
+msgstr "Ένας νέος συμπληρωματικός κίνδυνος δημιουργήθηκε."
 
-#: src/osha/oira/client/module.py:113
+#: src/osha/oira/client/module.py:115
 msgid "Existing added risks have been updated."
-msgstr ""
+msgstr "Οι υπάρχοντες συμπληρωματικοί κίνδυνοι επικαιροποιήθηκαν."
 
-#: src/osha/oira/client/module.py:118
+#: src/osha/oira/client/module.py:120
 msgid "An existing added risk has been updated."
-msgstr ""
+msgstr "Ένας υπάρχων συμπληρωματικός κίνδυνος επικαιροποιήθηκε."
 
-#: src/osha/oira/client/module.py:123
+#: src/osha/oira/client/module.py:125
 msgid "An added risk has been removed."
-msgstr ""
+msgstr "Ένας συμπληρωματικός κίνδυνος διαγράφηκε."
 
-#: src/osha/oira/client/module.py:126
+#: src/osha/oira/client/module.py:128
 msgid "Added risks have been removed."
-msgstr ""
+msgstr "Οι συμπληρωματικοί κίνδυνοι διαγράφηκαν."
 
 #: src/osha/oira/client/profile.py:16
 msgid "Does this happen in multiple places?"
@@ -942,32 +945,32 @@ msgid "Enter the names of each location"
 msgstr "Εισαγωγή ονομασίας κάθε τοποθεσίας"
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:113
+#: src/osha/oira/client/report.py:115
 msgid "report_timeline_measure"
 msgstr "Μέτρα"
 
 #. Default: End date
-#: src/osha/oira/client/report.py:116
+#: src/osha/oira/client/report.py:118
 msgid "report_timeline_end_date"
 msgstr "Ημερομηνία Λήξης"
 
 #. Default: Responsible
-#: src/osha/oira/client/report.py:119
+#: src/osha/oira/client/report.py:121
 msgid "report_timeline_responsible"
 msgstr "Υπεύθυνο Άτομο"
 
 #. Default: Status (planned, in process, implemented)
-#: src/osha/oira/client/report.py:120
+#: src/osha/oira/client/report.py:122
 msgid "report_timeline_progress"
 msgstr "Κατάσταση (εκκρεμεί/σε εξέλιξη/υλοποιήθηκε)"
 
 #. Default: Timeline
-#: src/osha/oira/client/report.py:130
+#: src/osha/oira/client/report.py:132
 msgid "report_timeline_title"
 msgstr "Σχέδιο δράσης"
 
 #. Default: low
-#: src/osha/oira/client/report.py:391
+#: src/osha/oira/client/report.py:393
 #: src/osha/oira/client/templates/module_customization.pt:34
 #: src/osha/oira/client/templates/module_customization.pt:51
 #: src/osha/oira/client/templates/module_customization.pt:77
@@ -980,7 +983,7 @@ msgid "risk_priority_low"
 msgstr "Χαμηλή"
 
 #. Default: medium
-#: src/osha/oira/client/report.py:393
+#: src/osha/oira/client/report.py:395
 #: src/osha/oira/client/templates/module_customization.pt:35
 #: src/osha/oira/client/templates/module_customization.pt:52
 #: src/osha/oira/client/templates/module_customization.pt:78
@@ -993,7 +996,7 @@ msgid "risk_priority_medium"
 msgstr "Μέτρια "
 
 #. Default: high
-#: src/osha/oira/client/report.py:395
+#: src/osha/oira/client/report.py:397
 #: src/osha/oira/client/templates/module_customization.pt:36
 #: src/osha/oira/client/templates/module_customization.pt:53
 #: src/osha/oira/client/templates/module_customization.pt:79
@@ -1006,7 +1009,7 @@ msgid "risk_priority_high"
 msgstr "Υψηλή"
 
 #. Default: This is a ${priority_value} priority risk.
-#: src/osha/oira/client/report.py:397
+#: src/osha/oira/client/report.py:399
 #: src/osha/oira/client/templates/module_customization.pt:32
 #: src/osha/oira/client/templates/module_customization.pt:49
 #: src/osha/oira/client/templates/module_customization.pt:75
@@ -1019,107 +1022,107 @@ msgid "risk_priority"
 msgstr "Εκτίμηση επικινδυνότητας: ${priority_value}."
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:429 src/osha/oira/client/report.py:454
+#: src/osha/oira/client/report.py:431 src/osha/oira/client/report.py:456
 msgid "header_measure_single"
 msgstr "Μέτρο"
 
 #. Default: Measure ${index}
-#: src/osha/oira/client/report.py:432
+#: src/osha/oira/client/report.py:434
 #: src/osha/oira/client/templates/report_actionplan.pt:99
 msgid "header_measure"
 msgstr "Μέτρο ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
-#: src/osha/oira/client/report.py:461
-#: src/osha/oira/client/templates/risk_actionplan.pt:87
+#: src/osha/oira/client/report.py:463
+#: src/osha/oira/client/templates/risk_actionplan.pt:83
 #: src/osha/oira/content/templates/solution_view.pt:22
 msgid "label_measure_action_plan"
 msgstr "Γενική προσέγγιση (για την εξάλειψη ή μείωση του κινδύνου)"
 
 #. Default: Specific action(s) required to implement this approach
-#: src/osha/oira/client/report.py:463
-#: src/osha/oira/client/templates/risk_actionplan.pt:93
+#: src/osha/oira/client/report.py:465
+#: src/osha/oira/client/templates/risk_actionplan.pt:89
 #: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
 msgstr "Απαιτείται ειδική ενέργεια(-ες) για την εφαρμογή αυτής της προσέγγισης"
 
 #. Default: Level of expertise and/or requirements needed
-#: src/osha/oira/client/report.py:465
-#: src/osha/oira/client/templates/risk_actionplan.pt:99
+#: src/osha/oira/client/report.py:467
+#: src/osha/oira/client/templates/risk_actionplan.pt:95
 #: src/osha/oira/content/templates/solution_view.pt:29
 msgid "label_measure_requirements"
 msgstr "Απαιτήσεις"
 
 #. Default: Who is responsible?
-#: src/osha/oira/client/report.py:467
-#: src/osha/oira/client/templates/risk_actionplan.pt:108
-#: src/osha/oira/client/templates/risk_actionplan.pt:188
+#: src/osha/oira/client/report.py:469
+#: src/osha/oira/client/templates/risk_actionplan.pt:104
+#: src/osha/oira/client/templates/risk_actionplan.pt:184
 msgid "label_action_plan_responsible"
 msgstr "Ποιος είναι υπεύθυνος;"
 
 #. Default: Budget
-#: src/osha/oira/client/report.py:469
-#: src/osha/oira/client/templates/risk_actionplan.pt:113
-#: src/osha/oira/client/templates/risk_actionplan.pt:193
+#: src/osha/oira/client/report.py:471
+#: src/osha/oira/client/templates/risk_actionplan.pt:109
+#: src/osha/oira/client/templates/risk_actionplan.pt:189
 msgid "label_action_plan_budget"
 msgstr "Προϋπολογισμός"
 
 #. Default: Planning start
-#: src/osha/oira/client/report.py:470
-#: src/osha/oira/client/templates/risk_actionplan.pt:122
-#: src/osha/oira/client/templates/risk_actionplan.pt:200
+#: src/osha/oira/client/report.py:472
+#: src/osha/oira/client/templates/risk_actionplan.pt:118
+#: src/osha/oira/client/templates/risk_actionplan.pt:196
 msgid "label_action_plan_start"
 msgstr "Έναρξη σχεδιασμού"
 
 #. Default: Planning end
-#: src/osha/oira/client/report.py:471
-#: src/osha/oira/client/templates/risk_actionplan.pt:133
-#: src/osha/oira/client/templates/risk_actionplan.pt:207
+#: src/osha/oira/client/report.py:473
+#: src/osha/oira/client/templates/risk_actionplan.pt:129
+#: src/osha/oira/client/templates/risk_actionplan.pt:203
 msgid "label_action_plan_end"
 msgstr "Τέλος σχεδιασμού"
 
 #. Default: Consultation of workers
-#: src/osha/oira/client/report.py:522
+#: src/osha/oira/client/report.py:524
 msgid "header_oira_report_consultation"
 msgstr "Παροχή συμβουλών στους εργαζομένους "
 
 #. Default: The undersigned hereby declare that the workers have been consulted
 #. on the content of this document.
-#: src/osha/oira/client/report.py:531
+#: src/osha/oira/client/report.py:533
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
 "Ο κάτωθι υπογεγραμμένος δηλώνει διά του παρόντος ότι οι εργαζόμενοι έχουν "
 "ενημερωθεί σχετικά με το περιεχόμενο αυτού του εγγράφου. "
 
 #. Default: On behalf of the employer:
-#: src/osha/oira/client/report.py:544
+#: src/osha/oira/client/report.py:546
 msgid "oira_consultation_employer"
 msgstr "Εκ μέρους του εργοδότη: "
 
 #. Default: On behalf of the workers:
-#: src/osha/oira/client/report.py:546
+#: src/osha/oira/client/report.py:548
 msgid "oira_consultation_workers"
 msgstr "Εκ μέρους των εργαζομένων: "
 
 #. Default: Date:
-#: src/osha/oira/client/report.py:555
+#: src/osha/oira/client/report.py:557
 msgid "oira_survey_date"
 msgstr "Ημερομηνία: "
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/client/report.py:602
+#: src/osha/oira/client/report.py:604
 msgid "header_oira_report_download"
 msgstr "Έκθεση OiRA: \"${title}"
 
 #. Default: Contents
-#: src/osha/oira/client/report.py:621
+#: src/osha/oira/client/report.py:623
 #: src/osha/oira/client/templates/report_actionplan.pt:17
 #: src/osha/oira/client/templates/report_identification.pt:16
 msgid "toc_header"
 msgstr "Περιεχόμενα"
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/client/report.py:626
+#: src/osha/oira/client/report.py:628
 #: src/osha/oira/client/templates/report_actionplan.pt:39
 #: src/osha/oira/client/templates/report_actionplan.pt:72
 msgid "header_present_risks"
@@ -1128,7 +1131,7 @@ msgstr ""
 "υπάρχει Σχέδιο Δράσης "
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/client/report.py:629
+#: src/osha/oira/client/report.py:631
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
@@ -1138,7 +1141,7 @@ msgstr ""
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
-#: src/osha/oira/client/report.py:632
+#: src/osha/oira/client/report.py:634
 #: src/osha/oira/client/templates/report_actionplan.pt:55
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
@@ -1148,7 +1151,7 @@ msgstr ""
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
-#: src/osha/oira/client/report.py:635
+#: src/osha/oira/client/report.py:637
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
@@ -1157,13 +1160,13 @@ msgstr ""
 "επιχείρησή σας"
 
 #. Default: Action plan ${title}
-#: src/osha/oira/client/report.py:662
+#: src/osha/oira/client/report.py:664
 msgid "filename_report_actionplan"
 msgstr "Έκθεση κινδύνου ${title}"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision
 #. date ${date}.
-#: src/osha/oira/client/report.py:751
+#: src/osha/oira/client/report.py:753
 msgid "report_identification_revision"
 msgstr ""
 "Αυτό το έγγραφο βασίστηκε στο Εργαλείο OiRA '${title}' με ημερομηνία "
@@ -1171,7 +1174,7 @@ msgstr ""
 
 #. Default: This report was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/client/report.py:789
+#: src/osha/oira/client/report.py:791
 #: src/osha/oira/client/templates/report_actionplan.pt:302
 msgid "report_survey_revision"
 msgstr ""
@@ -1197,6 +1200,13 @@ msgstr "Πόσο συχνά εκτίθενται άνθρωποι σε αυτό 
 #: src/osha/oira/client/settings.py:18
 #: src/osha/oira/client/templates/user-menu.pt:16
 msgid "title_change_password"
+msgstr "Αλλαγή κωδικού πρόσβασης"
+
+#. Default: Added risks (by you)
+#: src/osha/oira/client/survey.py:262
+#: src/osha/oira/client/templates/module_customization.pt:15
+#: src/osha/oira/upgrade/upgrade.py:189
+msgid "title_other_risks"
 msgstr ""
 
 #. Default: By clicking on 'Delete account', your account will be permenantly
@@ -1460,10 +1470,11 @@ msgstr ""
 #. Default: Delete
 #: src/osha/oira/client/templates/confirmation-delete-session.pt:16
 #: src/osha/oira/client/templates/sessions.pt:37
+#: src/osha/oira/client/templates/survey_sessions.pt:33
 msgid "label_delete"
 msgstr "Διαγραφή"
 
-#: src/osha/oira/client/templates/confirmation-delete-session.pt:21
+#: src/osha/oira/client/templates/confirmation-delete-session.pt:20
 msgid ""
 "Are you sure you want to delete this session? This action can not be "
 "reverted."
@@ -1472,12 +1483,12 @@ msgstr ""
 "μπορεί να αντιστραφεί."
 
 #. Default: Yes, delete session
-#: src/osha/oira/client/templates/confirmation-delete-session.pt:24
+#: src/osha/oira/client/templates/confirmation-delete-session.pt:23
 msgid "button_delete_session"
-msgstr ""
+msgstr "Ναι, διαγραφή ενότητας"
 
 #. Default: Cancel
-#: src/osha/oira/client/templates/confirmation-delete-session.pt:25
+#: src/osha/oira/client/templates/confirmation-delete-session.pt:24
 #: src/osha/oira/client/templates/login_form.pt:56
 #: src/osha/oira/client/templates/new-session-test.pt:42
 #: src/osha/oira/client/templates/new-session.pt:39
@@ -1493,6 +1504,7 @@ msgstr "Άκυρο"
 #: src/osha/oira/client/templates/evaluation.pt:12
 #: src/osha/oira/client/templates/frontpage.pt:15
 #: src/osha/oira/client/templates/module_evaluation.pt:12
+#: src/osha/oira/client/templates/plain.pt:20
 #: src/osha/oira/client/templates/report_actionplan.pt:13
 #: src/osha/oira/client/templates/report_identification.pt:12
 #: src/osha/oira/client/templates/risk_evaluation.pt:12
@@ -1759,7 +1771,7 @@ msgstr ""
 #. Default: run a test session
 #: src/osha/oira/client/templates/login.pt:25
 msgid "label_tryout"
-msgstr ""
+msgstr "εκτελέσετε τη δοκιμαστική έκδοση"
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
@@ -1773,6 +1785,8 @@ msgstr ""
 #: src/osha/oira/client/templates/login.pt:24
 msgid "teaser_try_oira"
 msgstr ""
+"Θέλετε να δοκιμάσετε το OiRA; Μπορείτε να ${tryout_link} ή να "
+"${register_link} για να ξεκινήσετε την κανονική εκτίμηση κινδύνου."
 
 #. Default: Show more…
 #: src/osha/oira/client/templates/login.pt:33
@@ -1948,20 +1962,19 @@ msgstr ""
 msgid "label_login"
 msgstr "Εισαγωγή"
 
+#: src/osha/oira/client/templates/measures_overview.pt:63
+msgid "Measure to be implemented by"
+msgstr ""
+
 #. Default: Next
 #: src/osha/oira/client/templates/module_actionplan.pt:50
 #: src/osha/oira/client/templates/module_evaluation.pt:40
 #: src/osha/oira/client/templates/module_identification.pt:50
 #: src/osha/oira/client/templates/register.pt:70
 #: src/osha/oira/client/templates/reminder.pt:39
+#: src/osha/oira/client/templates/survey_sessions.pt:57
 msgid "label_next"
 msgstr "Επόμενο"
-
-#. Default: Added risks (by you)
-#: src/osha/oira/client/templates/module_customization.pt:15
-#: src/osha/oira/upgrade/upgrade.py:189
-msgid "title_other_risks"
-msgstr ""
 
 #. Default: Risk
 #: src/osha/oira/client/templates/module_customization.pt:23
@@ -1973,16 +1986,16 @@ msgstr ""
 #: src/osha/oira/client/templates/module_customization.pt:44
 #: src/osha/oira/client/templates/module_customization.pt:69
 msgid "Description of the risk"
-msgstr ""
+msgstr "Περιγραφή του κινδύνου"
 
 #. Default: Please leave any comments you may have on the question above in
 #. this field. These comments will be used in the action plan.
 #: src/osha/oira/client/templates/module_customization.pt:28
 #: src/osha/oira/client/templates/module_customization.pt:45
 #: src/osha/oira/client/templates/module_customization.pt:70
-#: src/osha/oira/client/templates/risk_actionplan.pt:217
+#: src/osha/oira/client/templates/risk_actionplan.pt:213
 #: src/osha/oira/client/templates/risk_evaluation.pt:125
-#: src/osha/oira/client/templates/risk_identification.pt:160
+#: src/osha/oira/client/templates/risk_identification.pt:157
 msgid "label_comment"
 msgstr ""
 "Παρακαλώ υποβάλλετε στο πεδίο αυτό τυχόν σχόλια σχετικά με την παραπάνω "
@@ -1993,7 +2006,7 @@ msgstr ""
 #: src/osha/oira/client/templates/module_customization.pt:56
 #: src/osha/oira/client/templates/module_customization.pt:83
 msgid "button_remove_risk"
-msgstr ""
+msgstr "Διαγραφή κινδύνου"
 
 #. Default: Add risk
 #: src/osha/oira/client/templates/module_customization.pt:61
@@ -2005,18 +2018,18 @@ msgstr ""
 #: src/osha/oira/client/templates/profile.pt:99
 #: src/osha/oira/client/templates/report.pt:41
 #: src/osha/oira/client/templates/report_company.pt:94
-#: src/osha/oira/client/templates/risk_actionplan.pt:226
+#: src/osha/oira/client/templates/risk_actionplan.pt:222
 #: src/osha/oira/client/templates/risk_evaluation.pt:121
-#: src/osha/oira/client/templates/risk_identification.pt:168
+#: src/osha/oira/client/templates/risk_identification.pt:165
 msgid "label_save_and_continue"
 msgstr "Αποθήκευση"
 
 #. Default: Previous
 #: src/osha/oira/client/templates/module_evaluation.pt:39
 #: src/osha/oira/client/templates/report_company.pt:92
-#: src/osha/oira/client/templates/risk_actionplan.pt:224
+#: src/osha/oira/client/templates/risk_actionplan.pt:220
 #: src/osha/oira/client/templates/risk_evaluation.pt:120
-#: src/osha/oira/client/templates/risk_identification.pt:167
+#: src/osha/oira/client/templates/risk_identification.pt:164
 msgid "label_previous"
 msgstr "Προηγούμενο"
 
@@ -2041,7 +2054,7 @@ msgstr "Όχι"
 #. Default: New test session
 #: src/osha/oira/client/templates/new-session-test.pt:14
 msgid "label_new_session_test"
-msgstr ""
+msgstr "Νέα δοκιμαστική ενότητα"
 
 #. Default: Start a new session choosing one of the following sectoral tools
 #: src/osha/oira/client/templates/new-session-test.pt:20
@@ -2053,6 +2066,7 @@ msgstr ""
 #. Default: Enter a title for your Risk Assessment
 #: src/osha/oira/client/templates/new-session-test.pt:26
 #: src/osha/oira/client/templates/new-session.pt:26
+#: src/osha/oira/client/templates/survey_sessions.pt:47
 msgid "label_session_title"
 msgstr "Εισάγετε έναν τίτλο για την Εκτίμηση Κινδύνου σας"
 
@@ -2066,6 +2080,7 @@ msgstr "Εισάγετε έναν τίτλο για την Εκτίμηση Κι
 #. better to actively log out.
 #: src/osha/oira/client/templates/new-session-test.pt:28
 #: src/osha/oira/client/templates/new-session.pt:27
+#: src/osha/oira/client/templates/survey_sessions.pt:48
 msgid "session_title_tooltip"
 msgstr ""
 "Μόλις αρχίσετε μια ενότητα εργαλείου OiRA, θα μπορείτε να σταματήσετε πριν "
@@ -2081,35 +2096,60 @@ msgstr ""
 #. Default: benefits
 #: src/osha/oira/client/templates/new-session-test.pt:34
 msgid "benefits"
-msgstr ""
+msgstr "οφέλη"
 
 #. Default: limitations
 #: src/osha/oira/client/templates/new-session-test.pt:34
 msgid "limitations"
-msgstr ""
+msgstr "περιορισμοί"
 
 #. Default: Read here about the ${benefits}${tooltip_benefits} and
 #. ${limitations}${tooltip_limitations} of a test session.
 #: src/osha/oira/client/templates/new-session-test.pt:34
 msgid "testsession_benefits_limitations"
 msgstr ""
+"Διαβάσετε εδώ για τα ${benefits}${tooltip_benefits} και τους "
+"${limitations}${tooltip_limitations} της δοκιμαστικής έκδοσης."
 
 #. Default: Or ${register_link} instead. Find out why you should
 #. register${tooltip_register}.
 #: src/osha/oira/client/templates/new-session-test.pt:37
 msgid "testsession_register"
 msgstr ""
+"Ή, αντ' αυτού, ${register_link}. Μάθετε γιατί είναι καλό να εγγραφείτε "
+"${tooltip_register}."
 
 #. Default: Start session
 #: src/osha/oira/client/templates/new-session-test.pt:41
 #: src/osha/oira/client/templates/new-session.pt:38
 msgid "button_start_session"
-msgstr ""
+msgstr "Έναρξη ενότητας"
 
 #. Default: New session
 #: src/osha/oira/client/templates/new-session.pt:14
 msgid "header_new_session"
+msgstr "Νέα ενότητα"
+
+#. Default: Sign in
+#: src/osha/oira/client/templates/plain.pt:99
+#: src/osha/oira/client/templates/shell.pt:73
+#: src/osha/oira/client/templates/webhelpers.pt:36
+msgid "Sign in"
+msgstr "Συνδεθείτε"
+
+#. Default: This is a test session. ${link_sign_in} to save your data.
+#: src/osha/oira/client/templates/plain.pt:99
+#: src/osha/oira/client/templates/shell.pt:73
+msgid "info_testsession"
 msgstr ""
+"Η έκδοση αυτή είναι δοκιμαστική. ${link_sign_in} για να αποθηκεύσετε τα "
+"δεδομένα σας."
+
+#. Default: Info
+#: src/osha/oira/client/templates/plain.pt:99
+#: src/osha/oira/client/templates/shell.pt:73
+msgid "Info"
+msgstr "Πληροφορίες"
 
 #. Default: Tailor the risk assessment to your organisation
 #: src/osha/oira/client/templates/profile.pt:17
@@ -2192,35 +2232,38 @@ msgstr "Σύνταξη έκθεσης"
 #: src/osha/oira/client/templates/register.pt:21
 msgid "report_guest_register_intro"
 msgstr ""
+"Λυπούμαστε, η έκδοση αυτή είναι δοκιμαστική και δεν μπορεί να χρησιμοποιηθεί "
+"η λειτουργία μεταφόρτωσης. Εγγραφείτε με ένα μόλις βήμα και εξασφαλίστε τα "
+"ακόλουθα οφέλη:"
 
 #. Default: It's free.
 #: src/osha/oira/client/templates/register.pt:23
 #: src/osha/oira/client/templates/tooltips.pt:26
 msgid "label_register_benefit_1"
-msgstr ""
+msgstr "Είναι δωρεάν."
 
 #. Default: You can save your work online.
 #: src/osha/oira/client/templates/register.pt:24
 #: src/osha/oira/client/templates/tooltips.pt:27
 msgid "label_register_benefit_2"
-msgstr ""
+msgstr "Μπορείτε να αποθηκεύετε την εργασία σας διαδικτυακά."
 
 #. Default: You can download a full report and an action plan.
 #: src/osha/oira/client/templates/register.pt:25
 #: src/osha/oira/client/templates/tooltips.pt:28
 msgid "label_register_benefit_3"
-msgstr ""
+msgstr "Μπορείτε να μεταφορτώσετε την πλήρη έκθεση και το σχέδιο δράσης."
 
 #. Default: Example of a full report in rich text format (.rtf)
 #: src/osha/oira/client/templates/register.pt:32
 msgid "header_example_report_rft"
-msgstr ""
+msgstr "Παράδειγμα πλήρους έκθεσης σε μορφή εμπλουτισμένου κειμένου (.rtf)"
 
 #. Default: Example of an action plan in Office Open XML Workbook format
 #. (.xlsx)
 #: src/osha/oira/client/templates/register.pt:40
 msgid "header_example_report_xlsx"
-msgstr ""
+msgstr "Παράδειγμα σχεδίου δράσης σε μορφή Office Open XML Workbook (.xlsx)"
 
 #. Default: Register
 #: src/osha/oira/client/templates/register.pt:46
@@ -2249,6 +2292,8 @@ msgstr ""
 #: src/osha/oira/client/templates/reminder.pt:23
 msgid "description_password_reminder"
 msgstr ""
+"Παρακαλούμε συμπληρώστε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας. Τα "
+"στοιχεία σύνδεσής σας θα σας αποσταλούν."
 
 #: src/osha/oira/client/templates/rename-session.pt:16
 msgid "Change name of session"
@@ -2615,6 +2660,8 @@ msgstr "Τύπος: Excel (.xls)"
 msgid ""
 "Contains: main elements to effectively manage the risks at your workplace."
 msgstr ""
+"Τι περιέχει: τα κυριότερα στοιχεία για την αποτελεσματική διαχείριση των "
+"κινδύνων στον χώρο εργασίας σας."
 
 #: src/osha/oira/client/templates/report_landing.pt:71
 msgid "Manage"
@@ -2631,64 +2678,66 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:80
 msgid "Download the risks overview"
-msgstr ""
+msgstr "Μεταφόρτωση της επισκόπησης των κινδύνων"
 
 #: src/osha/oira/client/templates/report_landing.pt:86
 #: src/osha/oira/client/templates/report_landing.pt:107
 msgid "Format: Portable Document Format (.pdf)"
-msgstr ""
+msgstr "Μορφή: PDF (.pdf)"
 
 #: src/osha/oira/client/templates/report_landing.pt:87
 msgid "Contains: an overview of the risks identified"
-msgstr ""
+msgstr "Τι περιέχει: επισκόπηση των κινδύνων που προσδιορίστηκαν"
 
 #: src/osha/oira/client/templates/report_landing.pt:92
 #: src/osha/oira/client/templates/report_landing.pt:113
 msgid "Pass information to the people concerned."
-msgstr ""
+msgstr "Διαβίβαση πληροφοριών στους ενδιαφερόμενους."
 
 #: src/osha/oira/client/templates/report_landing.pt:93
 #: src/osha/oira/client/templates/report_landing.pt:114
 msgid "Monitor whether risks / measures are properly dealt with."
 msgstr ""
+"Παρακολούθηση της εξέλιξης των κινδύνων ή των μέτρων για να διαπιστωθεί εάν "
+"αντιμετωπίζονται σωστά."
 
 #: src/osha/oira/client/templates/report_landing.pt:101
 msgid "Download the measures overview"
-msgstr ""
+msgstr "Μεταφόρτωση της επισκόπησης των μέτρων"
 
 #: src/osha/oira/client/templates/report_landing.pt:108
 msgid "Contains: an overview of the measures to be implemented."
-msgstr ""
+msgstr "Τι περιέχει: επισκόπηση των μέτρων προς εφαρμογή."
 
 #. Default: Measure
-#: src/osha/oira/client/templates/risk_actionplan.pt:65
-#: src/osha/oira/client/templates/risk_actionplan.pt:152
+#: src/osha/oira/client/templates/risk_actionplan.pt:61
+#: src/osha/oira/client/templates/risk_actionplan.pt:148
 #: src/osha/oira/content/templates/solution_view.pt:12
 #: src/osha/oira/profiles/default/types/euphorie.solution.xml:5
 msgid "Measure"
 msgstr "Μέτρο"
 
 #. Default: Pre-fill
-#: src/osha/oira/client/templates/risk_actionplan.pt:67
-#: src/osha/oira/client/templates/risk_actionplan.pt:154
+#: src/osha/oira/client/templates/risk_actionplan.pt:63
+#: src/osha/oira/client/templates/risk_actionplan.pt:150
 msgid "label_prefill"
-msgstr ""
+msgstr "Προσυμπλήρωση"
 
 #. Default: Select one or more of the known common measures provided.
-#: src/osha/oira/client/templates/risk_actionplan.pt:72
-#: src/osha/oira/client/templates/risk_actionplan.pt:160
+#: src/osha/oira/client/templates/risk_actionplan.pt:68
+#: src/osha/oira/client/templates/risk_actionplan.pt:156
 msgid "label_select_measure"
 msgstr "Επιλέξτε ένα ή περισσότερα από τα γνωστά κοινά μέτρα που παρέχονται."
 
 #. Default: Add
-#: src/osha/oira/client/templates/risk_actionplan.pt:78
+#: src/osha/oira/client/templates/risk_actionplan.pt:74
 msgid "button_add"
 msgstr "επιλογή"
 
 #. Default: Description
-#: src/osha/oira/client/templates/risk_actionplan.pt:85
-#: src/osha/oira/client/templates/risk_actionplan.pt:174
-#: src/osha/oira/client/templates/risk_actionplan.pt:233
+#: src/osha/oira/client/templates/risk_actionplan.pt:81
+#: src/osha/oira/client/templates/risk_actionplan.pt:170
+#: src/osha/oira/client/templates/risk_actionplan.pt:229
 msgid "label_description"
 msgstr "Περιγραφή"
 
@@ -2700,8 +2749,8 @@ msgstr "Περιγραφή"
 #. OSH knowledge or training and/or consultation of OSH guidance required”, or
 #. “OSH expert”. You can also describe here any other additional requirement
 #. (if any).
-#: src/osha/oira/client/templates/risk_actionplan.pt:86
-#: src/osha/oira/client/templates/risk_actionplan.pt:175
+#: src/osha/oira/client/templates/risk_actionplan.pt:82
+#: src/osha/oira/client/templates/risk_actionplan.pt:171
 msgid "actionplan_measure_tooltip"
 msgstr ""
 "Περιγράψτε: 1) ποια η γενική σας προσέγγισή για να εξαλείψετε ή (εάν ο "
@@ -2715,25 +2764,25 @@ msgstr ""
 "περιγράψετε εδώ οποιαδήποτε άλλη πρόσθετη απαίτηση (εάν υπάρχει)."
 
 #. Default: Prevention plan
-#: src/osha/oira/client/templates/risk_actionplan.pt:92
-#: src/osha/oira/client/templates/risk_actionplan.pt:178
-#: src/osha/oira/client/templates/risk_actionplan.pt:236
+#: src/osha/oira/client/templates/risk_actionplan.pt:88
+#: src/osha/oira/client/templates/risk_actionplan.pt:174
+#: src/osha/oira/client/templates/risk_actionplan.pt:232
 msgid "label_prevention_plan"
-msgstr ""
+msgstr "Σχέδιο πρόληψης"
 
 #. Default: Requirements
-#: src/osha/oira/client/templates/risk_actionplan.pt:98
-#: src/osha/oira/client/templates/risk_actionplan.pt:181
-#: src/osha/oira/client/templates/risk_actionplan.pt:239
+#: src/osha/oira/client/templates/risk_actionplan.pt:94
+#: src/osha/oira/client/templates/risk_actionplan.pt:177
+#: src/osha/oira/client/templates/risk_actionplan.pt:235
 msgid "label_requirements"
-msgstr ""
+msgstr "Προϋποθέσεις"
 
 #. Default: Appoint someone in your company to be responsible for the
 #. implementation of this measure. This person will have the authority to take
 #. the steps described in the Plan and/or the responsibility to ensure that
 #. they are carried out.
-#: src/osha/oira/client/templates/risk_actionplan.pt:109
-#: src/osha/oira/client/templates/risk_actionplan.pt:189
+#: src/osha/oira/client/templates/risk_actionplan.pt:105
+#: src/osha/oira/client/templates/risk_actionplan.pt:185
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
 "Αναθέστε σε κάποιον στην εταιρεία σας την ευθύνη για την εφαρμογή αυτού του "
@@ -2742,15 +2791,15 @@ msgstr ""
 "των ενεργειών."
 
 #. Default: Please enter the budget in whole Euros.
-#: src/osha/oira/client/templates/risk_actionplan.pt:114
+#: src/osha/oira/client/templates/risk_actionplan.pt:110
 msgid "error_invalid_budget"
 msgstr "Παρακαλώ εισάγετε τον προϋπολογισμό σε ακέραια ευρώ."
 
 #. Default: Although some measures do not cost any money, most do. The measures
 #. should therefore be budgeted for; include them in the annual budget round if
 #. necessary.
-#: src/osha/oira/client/templates/risk_actionplan.pt:115
-#: src/osha/oira/client/templates/risk_actionplan.pt:194
+#: src/osha/oira/client/templates/risk_actionplan.pt:111
+#: src/osha/oira/client/templates/risk_actionplan.pt:190
 msgid "actionplan_measure_budget_tooltip"
 msgstr ""
 "Παρότι η λήψη ορισμένων μέτρων δεν έχει κόστος, τα περισσότερα μέτρα "
@@ -2759,7 +2808,7 @@ msgstr ""
 "προϋπολογισμό, εάν αυτό είναι απαραίτητο."
 
 #. Default: Add another measure
-#: src/osha/oira/client/templates/risk_actionplan.pt:147
+#: src/osha/oira/client/templates/risk_actionplan.pt:143
 msgid "label_add"
 msgstr "προσθέστε άλλο μέτρο"
 
@@ -2967,6 +3016,9 @@ msgstr "Δεν ισχύει"
 #: src/osha/oira/client/templates/risk_identification.pt:36
 msgid "help_calculated_evaluation"
 msgstr ""
+"Παρακαλούμε απαντήστε στις ακόλουθες ερωτήσεις. Βάσει των απαντήσεών σας το "
+"σύστημα θα υπολογίσει την επικινδυνότητα του κινδύνου. Κατόπιν θα μπορείτε "
+"αν θέλετε να τροποποιήσετε την επικινδυνότητα."
 
 #. Default: The risk evaluation has been automatically done by the tool. You
 #. will be able to change the priority for this risk – if you consider it
@@ -2974,53 +3026,133 @@ msgstr ""
 #: src/osha/oira/client/templates/risk_identification.pt:143
 msgid "description_automatic_evaluation"
 msgstr ""
+"Η αξιολόγηση του κινδύνου πραγματοποιήθηκε αυτόματα από το εργαλείο. Θα "
+"μπορείτε να τροποποιήσετε την προτεραιότητα για αυτόν τον κίνδυνο – εάν το "
+"κρίνετε σκόπιμο – στο σχέδιο δράσης."
+
+#. Default: Status of ${survey_title}
+#: src/osha/oira/client/templates/risks_overview.pt:289
+#: src/osha/oira/client/templates/status.pt:19
+#: src/osha/oira/client/templates/status_print.pt:19
+msgid "title_status_of"
+msgstr "Στάδιο της ${survey_title}"
+
+#. Default: Risk free
+#: src/osha/oira/client/templates/risks_overview.pt:292
+#: src/osha/oira/client/templates/status.pt:19
+#: src/osha/oira/client/templates/status.pt:22
+#: src/osha/oira/client/templates/status.pt:59
+msgid "risk_free"
+msgstr ""
+
+#. Default: No risk
+#: src/osha/oira/client/templates/risks_overview.pt:363
+#: src/osha/oira/client/templates/status.pt:92
+#: src/osha/oira/client/templates/status_print.pt:85
+msgid "label_no_risk"
+msgstr "Κανένας κίνδυνος"
+
+#. Default: Risk with measure(s)
+#: src/osha/oira/client/templates/risks_overview.pt:366
+#: src/osha/oira/client/templates/status.pt:95
+#: src/osha/oira/client/templates/status_print.pt:88
+msgid "label_risk_with_measure"
+msgstr "Κίνδυνος με μέτρο(-α)"
+
+#. Default: Risk without measure
+#: src/osha/oira/client/templates/risks_overview.pt:369
+#: src/osha/oira/client/templates/status.pt:98
+#: src/osha/oira/client/templates/status_print.pt:91
+msgid "label_risk_without_measure"
+msgstr "Κίνδυνος χωρίς μέτρο"
+
+#. Default: Postponed
+#: src/osha/oira/client/templates/risks_overview.pt:372
+#: src/osha/oira/client/templates/status.pt:101
+#: src/osha/oira/client/templates/webhelpers.pt:112
+#: src/osha/oira/client/templates/webhelpers.pt:124
+msgid "Postponed"
+msgstr "Σε εκκρεμότητα"
+
+#. Default: Unanswered
+#: src/osha/oira/client/templates/risks_overview.pt:375
+#: src/osha/oira/client/templates/status.pt:104
+#: src/osha/oira/client/templates/webhelpers.pt:111
+#: src/osha/oira/client/templates/webhelpers.pt:123
+msgid "Unvisited"
+msgstr "Υπό εξέταση κίνδυνος"
+
+#. Default: ${num_present_risks} Present Risks
+#: src/osha/oira/client/templates/risks_overview.pt:386
+msgid "heading_present_risks"
+msgstr ""
+
+#. Default: ${num_high_risks} High priority risks
+#: src/osha/oira/client/templates/risks_overview.pt:389
+msgid "heading_num_high_prio_risks"
+msgstr ""
+
+#. Default: ${num_medium_risks} Medium priority risks
+#: src/osha/oira/client/templates/risks_overview.pt:390
+msgid "heading_num_medium_prio_risks"
+msgstr ""
+
+#. Default: ${num_low_risks} Low priority risks
+#: src/osha/oira/client/templates/risks_overview.pt:391
+msgid "heading_num_low_prio_risks"
+msgstr ""
+
+#. Default: ${num_possible_risks} Possible Risks
+#: src/osha/oira/client/templates/risks_overview.pt:402
+msgid "heading_possible_risks"
+msgstr ""
+
+#. Default: ${num_postponed_risks} Risks postponed
+#: src/osha/oira/client/templates/risks_overview.pt:405
+msgid "heading_num_postponed_prio_risks"
+msgstr ""
+
+#. Default: ${num_todo_risks} Risks not answered
+#: src/osha/oira/client/templates/risks_overview.pt:406
+msgid "heading_num_todo_prio_risks"
+msgstr ""
 
 #. Default: start a new session
+#. Default: Start a new session
 #: src/osha/oira/client/templates/sessions.pt:22
+#: src/osha/oira/client/templates/survey_sessions.pt:45
 msgid "link_start_session"
-msgstr ""
+msgstr "ξεκινήστε μια νέα ενότητα"
 
 #. Default: Select an earlier session to complete or review or
 #. ${start_session}.
 #: src/osha/oira/client/templates/sessions.pt:20
 msgid "info_select_session"
 msgstr ""
+"Επιλέξτε μια προηγούμενη ενότητα για να τη συμπληρώσετε ή να την "
+"αναθεωρήσετε ή ${start_session}."
 
 #. Default: saved on ${date}
 #: src/osha/oira/client/templates/sessions.pt:33
+#: src/osha/oira/client/templates/survey_sessions.pt:29
 msgid "lable_session_modified"
 msgstr "αποθηκεύτηκε στις ${date}"
 
 #. Default: Rename
 #: src/osha/oira/client/templates/sessions.pt:36
+#: src/osha/oira/client/templates/survey_sessions.pt:32
 msgid "label_rename"
 msgstr "Μετονομασία"
-
-#. Default: Sign in
-#: src/osha/oira/client/templates/shell.pt:73
-#: src/osha/oira/client/templates/webhelpers.pt:36
-msgid "Sign in"
-msgstr ""
-
-#. Default: This is a test session. ${link_sign_in} to save your data.
-#: src/osha/oira/client/templates/shell.pt:73
-msgid "info_testsession"
-msgstr ""
-
-#. Default: Info
-#: src/osha/oira/client/templates/shell.pt:73
-msgid "Info"
-msgstr ""
 
 #: src/osha/oira/client/templates/shell.pt:91
 #: src/osha/oira/client/templates/shell.pt:93
 msgid "Start test session"
-msgstr ""
+msgstr "Έναρξη δοκιμαστικής ενότητας"
 
 #. Default: New
 #: src/osha/oira/client/templates/shell.pt:101
 msgid "New"
-msgstr ""
+msgstr "Νέο"
 
 #. Default: Status
 #: src/osha/oira/client/templates/shell.pt:149
@@ -3050,44 +3182,31 @@ msgstr "Το παρόν εργαλείο OiRA σάς παρέχεται από $
 msgid "label_start_survey"
 msgstr "Έναρξη"
 
-#. Default: Status of ${survey_title}
-#: src/osha/oira/client/templates/status.pt:19
-msgid "title_status_of"
-msgstr ""
-
-#. Default: No risk
-#: src/osha/oira/client/templates/status.pt:83
-msgid "label_no_risk"
-msgstr ""
-
-#. Default: Risk with measure(s)
-#: src/osha/oira/client/templates/status.pt:86
-msgid "label_risk_with_measure"
-msgstr ""
-
-#. Default: Risk without measure
-#: src/osha/oira/client/templates/status.pt:89
-msgid "label_risk_without_measure"
-msgstr ""
+#. Default: High priority risks
+#: src/osha/oira/client/templates/status.pt:108
+#: src/osha/oira/client/templates/status_print.pt:101
+msgid "heading_high_prio_risks"
+msgstr "Κίνδυνοι υψηλής προτεραιότητας"
 
 #. Default: Postponed
-#: src/osha/oira/client/templates/status.pt:92
-#: src/osha/oira/client/templates/webhelpers.pt:112
-#: src/osha/oira/client/templates/webhelpers.pt:124
-msgid "Postponed"
-msgstr "Σε εκκρεμότητα"
+#: src/osha/oira/client/templates/status_print.pt:94
+msgid "label_postponed"
+msgstr ""
 
 #. Default: Unanswered
-#: src/osha/oira/client/templates/status.pt:95
-#: src/osha/oira/client/templates/webhelpers.pt:111
-#: src/osha/oira/client/templates/webhelpers.pt:123
-msgid "Unvisited"
-msgstr "Υπό εξέταση κίνδυνος"
-
-#. Default: High priority risks
-#: src/osha/oira/client/templates/status.pt:99
-msgid "heading_high_prio_risks"
+#: src/osha/oira/client/templates/status_print.pt:97
+msgid "label_unanswered"
 msgstr ""
+
+#. Default: Select an earlier session to complete or review
+#: src/osha/oira/client/templates/survey_sessions.pt:20
+msgid "header_select_session"
+msgstr "Επιλέξτε μια προγενέστερη ενότητα για ολοκλήρωση ή προεπισκόπηση"
+
+#. Default: or…
+#: src/osha/oira/client/templates/survey_sessions.pt:39
+msgid "header_or"
+msgstr "ή…"
 
 #. Default: You are currently evaluating OiRA as a guest user. You will not be
 #. able to save your progress or download any reports. To save your work,
@@ -3096,60 +3215,74 @@ msgstr ""
 #: src/osha/oira/client/templates/tooltips.pt:3
 msgid "guest_login_warning"
 msgstr ""
+"Επί του παρόντος αξιολογείτε το OiRA ως επισκέπτης χρήστης. Δεν θα μπορείτε "
+"να αποθηκεύσετε ό,τι έχετε κάνει ως τώρα ή να μεταφορτώσετε οποιαδήποτε "
+"έκθεση. Για να αποθηκεύσετε την εργασία σας συνδεθείτε ή εγγραφείτε κάνοντας "
+"κλικ στον σύνδεσμο \"Σύνδεση\" στην πάνω δεξιά γωνία της σελίδας."
 
 #. Default: Important
 #: src/osha/oira/client/templates/tooltips.pt:8
 msgid "Important"
-msgstr ""
+msgstr "Σημαντικό"
 
 #. Default: ${important} In a test session you cannot save your work. All
 #. progess will be lost unless you register.
 #: src/osha/oira/client/templates/tooltips.pt:8
 msgid "list_test_session_limitations1"
 msgstr ""
+"${important} Στη δοκιμαστική έκδοση δεν μπορείτε να αποθηκεύσετε την εργασία "
+"σας. Εάν δεν εγγραφείτε, ό,τι έχετε κάνει ως τώρα θα χαθεί."
 
 #. Default: You will not be able to print or download reports.
 #: src/osha/oira/client/templates/tooltips.pt:9
 msgid "list_test_session_limitations2"
-msgstr ""
+msgstr "Δεν θα είστε σε θέση να τυπώσετε ή να μεταφορτώσετε εκθέσεις."
 
 #. Default: During a test session you will have the possibility at any time to
 #. register by clicking on the "Register" link at the top.
 #: src/osha/oira/client/templates/tooltips.pt:10
 msgid "list_test_session_limitations3"
 msgstr ""
+"Όσο χρησιμοποιείτε τη δοκιμαστική έκδοση έχετε τη δυνατότητα να "
+"δημιουργήσετε λογαριασμό ανά πάσα στιγμή κάνοντας κλικ στον σύνδεσμο "
+"\"Εγγραφή\" στο πάνω μέρος της οθόνης."
 
 #. Default: Discover how easy it is to create a risk assessment with OiRA.
 #: src/osha/oira/client/templates/tooltips.pt:16
 msgid "list_test_session_benefits1"
 msgstr ""
+"Ανακαλύψτε πόσο εύκολο είναι να εκπονήσετε μια εκτίμηση κινδύνου με το OiRA."
 
 #. Default: Identify potential risks in your business and the measures to
 #. reduce them.
 #: src/osha/oira/client/templates/tooltips.pt:17
 msgid "list_test_session_benefits2"
 msgstr ""
+"Προσδιορίστε τους δυνητικούς κινδύνους στην επιχείρησή σας και τα κατάλληλα "
+"μέτρα για να τους περιορίσετε."
 
 #. Default: Use it for vocational training.
 #: src/osha/oira/client/templates/tooltips.pt:18
 msgid "list_test_session_benefits3"
-msgstr ""
+msgstr "Χρησιμοποιήστε το για σκοπούς επαγγελματικής κατάρτισης."
 
 #. Default: You can register in one single step just by entering a valid email
 #. address.
 #: src/osha/oira/client/templates/tooltips.pt:23
 msgid "info_register1"
 msgstr ""
+"Μπορείτε να εγγραφείτε με ένα μόνο βήμα, πληκτρολογώντας μια έγκυρη "
+"διεύθυνση ηλεκτρονικού ταχυδρομείου."
 
 #. Default: Main benefits of having an account:
 #: src/osha/oira/client/templates/tooltips.pt:24
 msgid "info_register2"
-msgstr ""
+msgstr "Τα κυριότερα οφέλη εάν έχετε λογαριασμό:"
 
 #. Default: Menu toggle
 #: src/osha/oira/client/templates/tooltips.pt:34
 msgid "header_osh_hamburger"
-msgstr ""
+msgstr "Δυνατότητα εμφάνισης/απόκρυψης μενού"
 
 #. Default: The menu toggle lets you hide and show the ‘off canvas’ menu so
 #. it’s only there when you need it. Hide the menu when you’re concentrating on
@@ -3158,13 +3291,18 @@ msgstr ""
 #: src/osha/oira/client/templates/tooltips.pt:37
 msgid "info_osh_hamburger"
 msgstr ""
+"Η δυνατότητα εμφάνισης/απόκρυψης του μενού σάς επιτρέπει να εμφανίζετε ή να "
+"αποκρύβετε το πλευρικό μενού ώστε να το βλέπετε μόνο όταν το χρειάζεστε. "
+"Αποκρύψτε το μενού όταν επικεντρώνετε την προσοχή σας στη συμπλήρωση ενός "
+"εργαλείου ή εμφανίστε το όταν μετακινείστε σε διάφορες ενότητες της "
+"εφαρμογής."
 
 #. Default: Tip
 #: src/osha/oira/client/templates/tooltips.pt:40
 #: src/osha/oira/client/templates/tooltips.pt:54
 #: src/osha/oira/client/templates/tooltips.pt:68
 msgid "Tip"
-msgstr ""
+msgstr "Συμβουλή"
 
 #. Default: You may switch this on screen help feature on or off at any time by
 #. clicking on the ${questionmark} at the top right on the toolbar.
@@ -3173,29 +3311,34 @@ msgstr ""
 #: src/osha/oira/client/templates/tooltips.pt:69
 msgid "info_screen_help"
 msgstr ""
+"Μπορείτε να ενεργοποιείτε ή να απενεργοποιείτε αυτό το βοηθητικό μενού "
+"οποιαδήποτε στιγμή κάνοντας κλικ στο ${questionmark} στην πάνω δεξιά γωνία "
+"της γραμμής εργαλείων."
 
 #. Default: Close panel
 #: src/osha/oira/client/templates/tooltips.pt:44
 #: src/osha/oira/client/templates/tooltips.pt:58
 #: src/osha/oira/client/templates/tooltips.pt:72
 msgid "label_close_panel"
-msgstr ""
+msgstr "Κλείσιμο του πάνελ"
 
 #. Default: Off canvas menu
 #: src/osha/oira/client/templates/tooltips.pt:48
 msgid "header_osh_menu"
-msgstr ""
+msgstr "Πλευρικό μενού"
 
 #. Default: The new off canvas menu provides access to the core functions of
 #. the applications. Also on mobile!
 #: src/osha/oira/client/templates/tooltips.pt:51
 msgid "info_osh_menu"
 msgstr ""
+"Το νέο πλευρικό μενού παρέχει πρόσβαση στις βασικές λειτουργίες των "
+"εφαρμογών. Είναι διαθέσιμο και σε κινητές συσκευές!"
 
 #. Default: Session menu
 #: src/osha/oira/client/templates/tooltips.pt:62
 msgid "header_osh_session_menu"
-msgstr ""
+msgstr "Μενού ενότητας"
 
 #. Default: From this menu you can start a new session of an OiRA tool, or pick
 #. up a previous session to continue working on it. If you do not have an
@@ -3204,6 +3347,10 @@ msgstr ""
 #: src/osha/oira/client/templates/tooltips.pt:65
 msgid "info_osh_session_menu"
 msgstr ""
+"Από αυτό το μενού μπορείτε να ξεκινήσετε μια νέα ενότητα του εργαλείου OiRA "
+"ή να συνεχίσετε να εργάζεστε σε μια ενότητα που έχετε ήδη ξεκινήσει. Εάν δεν "
+"έχετε ακόμα λογαριασμό για την εφαρμογή OiRA, μπορείτε να δοκιμάσετε αμέσως "
+"τη δοκιμαστική έκδοση."
 
 #. Default: OiRA Tool was updated
 #: src/osha/oira/client/templates/update.pt:15
@@ -3293,12 +3440,12 @@ msgstr "CC Άδεια"
 #: src/osha/oira/client/templates/webhelpers.pt:221
 #: src/osha/oira/client/templates/webhelpers.pt:288
 msgid "Read more"
-msgstr ""
+msgstr "Διαβάστε περισσότερα"
 
 #. Default: ${read_more} about this risk.
 #: src/osha/oira/client/templates/webhelpers.pt:221
 msgid "label_show_more"
-msgstr ""
+msgstr "${read_more} για αυτό τον κίνδυνο."
 
 #. Default: Legal and policy references
 #: src/osha/oira/client/templates/webhelpers.pt:309
@@ -3309,11 +3456,11 @@ msgstr "Νομικές αναφορές και αναφορές πολιτική
 #. Default: Additional resources for assessing the risk
 #: src/osha/oira/client/templates/webhelpers.pt:316
 msgid "header_additional_resources"
-msgstr ""
+msgstr "Πρόσθετοι πόροι για την εκτίμηση του κινδύνου"
 
 #: src/osha/oira/content/library.py:180
 msgid "Addded a copy of \"${title}\" to your OiRA tool."
-msgstr ""
+msgstr "Αντίγραφο του \"${title}\" προστέθηκε στο εργαλείο OiRA."
 
 #: src/osha/oira/content/module.py:20 src/osha/oira/content/module.py:33
 #: src/osha/oira/content/module.py:48
@@ -3371,18 +3518,19 @@ msgstr "Επεξεργασία Ερώτηση προφίλ"
 #. Default: Additional content
 #: src/osha/oira/content/risk.py:19
 msgid "header_additional_content"
-msgstr ""
+msgstr "Συμπληρωματικό περιεχόμενο"
 
 #. Default: Attach any additional content you consider helpful for the user
 #: src/osha/oira/content/risk.py:20
 msgid "intro_additional_content"
 msgstr ""
+"Επισύναψη συμπληρωματικού περιεχομένου που θεωρείτε χρήσιμο για τον χρήστη"
 
 #. Default: Content file
 #: src/osha/oira/content/risk.py:29 src/osha/oira/content/risk.py:41
 #: src/osha/oira/content/risk.py:53 src/osha/oira/content/risk.py:65
 msgid "label_file"
-msgstr ""
+msgstr "Αρχείο περιεχομένου"
 
 #. Default: Upload an image. Make sure your image is of format png, jpg or gif
 #. and does not contain any special characters.
@@ -3398,7 +3546,7 @@ msgstr ""
 #: src/osha/oira/content/risk.py:37 src/osha/oira/content/risk.py:49
 #: src/osha/oira/content/risk.py:61 src/osha/oira/content/risk.py:73
 msgid "label_file_caption"
-msgstr ""
+msgstr "Λεζάντα περιεχομένου"
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
@@ -3570,6 +3718,9 @@ msgstr "Λογότυπο εξωτερικού δικτυακού τόπου"
 #: src/osha/oira/content/survey.py:69
 msgid "label_enable_custom_evaluation_descriptions"
 msgstr ""
+"Τα κριτήρια που θα χρησιμοποιηθούν για την αξιολόγηση των κινδύνων αφορούν "
+"ειδικά αυτό το εργαλείο; (Σε αντίθετη περίπτωση θα χρησιμοποιηθούν οι "
+"περιγραφές των κοινών κριτηρίων)."
 
 #. Default: Tick this option if you would like to define your own descriptions
 #. for the criteria of the evaluation algorithm. The user will see them as
@@ -3577,24 +3728,28 @@ msgstr ""
 #: src/osha/oira/content/survey.py:73
 msgid "help_enable_custom_evaluation_descriptions"
 msgstr ""
+"Τσεκάρετε αυτή την επιλογή εάν θέλετε να ορίσετε τις δικές σας περιγραφές "
+"για τα κριτήρια του αλγορίθμου αξιολόγησης. Ο χρήστης θα τα βλέπει ως "
+"συμβουλές όταν απαντά στις ερωτήσεις για τον υπολογισμό της προτεραιότητας "
+"ενός κινδύνου."
 
 #: src/osha/oira/content/survey.py:86
 msgid "Probability"
-msgstr ""
+msgstr "Πιθανότητα"
 
 #. Default: Enter your explanation here
 #: src/osha/oira/content/survey.py:87 src/osha/oira/content/survey.py:98
 #: src/osha/oira/content/survey.py:109
 msgid "description_criteria_description"
-msgstr ""
+msgstr "Πληκτρολογήστε την περιγραφή σας εδώ"
 
 #: src/osha/oira/content/survey.py:97
 msgid "Frequency"
-msgstr ""
+msgstr "Συχνότητα"
 
 #: src/osha/oira/content/survey.py:108
 msgid "Severity"
-msgstr ""
+msgstr "Σοβαρότητα"
 
 #. Default: You can not delete an OiRA tool that has been published.
 #: src/osha/oira/content/surveygroup.py:81
@@ -3604,7 +3759,7 @@ msgstr "Δεν μπορείτε να διαγράψετε ένα εργαλεί�
 #. Default: Password reset for ${site}
 #: src/osha/oira/content/user.py:73
 msgid "password_reset_subject"
-msgstr ""
+msgstr "Επαναφορά κωδικού πρόσβασης για ${site}"
 
 #. Default: Edit
 #: src/osha/oira/content/templates/addbar.pt:9
@@ -3614,7 +3769,7 @@ msgstr ""
 #. Default: Library
 #: src/osha/oira/content/templates/addbar.pt:10
 msgid "button_library"
-msgstr ""
+msgstr "Βιβλιοθήκη"
 
 #: src/osha/oira/content/templates/addbar.pt:13
 msgid "Add Module"
@@ -3677,7 +3832,7 @@ msgstr "Tο ${online_help} κείμενο μπορεί επίσης να τρο�
 
 #: src/osha/oira/content/templates/library.pt:15
 msgid "Add content from library"
-msgstr ""
+msgstr "Προσθήκη περιεχομένου από τη βιβλιοθήκη"
 
 #: src/osha/oira/content/templates/library.pt:17
 msgid ""
@@ -3685,6 +3840,10 @@ msgid ""
 "surveys. Just select the module or risk you want to use in the list below "
 "and it will be copied to your survey."
 msgstr ""
+"Μπορείτε να χρησιμοποιήσετε στις μελέτες σας περιεχόμενο από την "
+"τυποποιημένη βιβλιοθήκη του OSHA. Απλώς επιλέξτε την ενότητα ή τον κίνδυνο "
+"που θέλετε να χρησιμοποιήσετε από τον παρακάτω κατάλογο και αυτό θα "
+"αντιγραφεί στη μελέτη σας."
 
 #: src/osha/oira/content/templates/library.pt:21
 msgid ""
@@ -3692,10 +3851,15 @@ msgid ""
 "questions can only be used at the top level of your survey, and modules may "
 "be too deeply nested to fit in ${title}."
 msgstr ""
+"Επισημαίνεται ότι ενδέχεται να μην μπορείτε να κάνετε χρήση όλου του "
+"διαθέσιμου περιεχομένου: οι ερωτήσεις διαμόρφωσης προφίλ μπορούν να "
+"χρησιμοποιηθούν μόνο στο αρχικό στάδιο της μελέτης σας και οι ενότητες "
+"μπορεί να είναι πολύ πυκνά δομημένες και να μην μπορούν να ενταχθούν στη "
+"μελέτη σας ${title}."
 
 #: src/osha/oira/content/templates/library.pt:28
 msgid "Show library from ${dropdown}."
-msgstr ""
+msgstr "Προβολή βιβλιοθήκης από ${dropdown}."
 
 #. Default: Login
 #: src/osha/oira/content/templates/login.pt:12
@@ -4064,19 +4228,19 @@ msgstr "Πρέπει να κάνεις εισαγωγή για να έχεις �
 
 #: src/osha/oira/nuplone/templates/namedfile_input.pt:13
 msgid "Remove file"
-msgstr ""
+msgstr "Διαγραφή φακέλου"
 
 #: src/osha/oira/nuplone/templates/namedimage_input.pt:14
 msgid "Remove image"
-msgstr ""
+msgstr "Διαγραφή εικόνας"
 
 #: src/osha/oira/nuplone/templates/passwordconfirm_input.pt:9
 msgid "Confirm password"
-msgstr ""
+msgstr "Επιβεβαίωση κωδικού πρόσβασης"
 
 #: src/osha/oira/nuplone/templates/wysiwyg_input.pt:17
 msgid "Please enter text here"
-msgstr ""
+msgstr "Πληκτρολογήστε το κείμενό σας εδώ"
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:7
 msgid "Profile question"
@@ -4211,13 +4375,15 @@ msgstr ""
 #. Default: CC License
 #: src/osha/oira/tiles/templates/footer.pt:32
 msgid "cc-license"
-msgstr ""
+msgstr "Άδεια CC"
 
 #. Default: In case you have identified risks not included in the tool, you are
 #. able to add them now:
 #: src/osha/oira/upgrade/upgrade.py:190
 msgid "description_other_risks"
 msgstr ""
+"Εάν προσδιορίσατε κινδύνους που δεν έχουν συμπεριληφθεί στο εργαλείο, "
+"μπορείτε να τους προσθέσετε τώρα:"
 
 #. Default: <p>Would you now like to add your own defined risks to this
 #. tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks,
@@ -4255,12 +4421,6 @@ msgstr ""
 
 #~ msgid "header_session"
 #~ msgstr "Εργαλείο OiRA"
-
-#~ msgid "header_select_session"
-#~ msgstr "Επιλέξτε μια προγενέστερη ενότητα για ολοκλήρωση ή προεπισκόπηση"
-
-#~ msgid "header_or"
-#~ msgstr "ή…"
 
 #~ msgid "action_hide"
 #~ msgstr "Απόκρυψη"

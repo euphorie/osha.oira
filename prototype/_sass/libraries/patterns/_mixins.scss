@@ -118,6 +118,26 @@
     max-width: 100%;
     margin: 0 auto;
     display: block;
+
+    &.float-before {
+      margin-right: 1em;
+      float: left;
+      top: 0.2em;
+      position: relative;
+    }
+
+    &.float-after {
+      margin-left: 1em;
+      float: right;
+      top: 0.2em;
+      position: relative;
+    }
+
+    @include screen-size(large) { 
+      &.medium {
+        width: 33%;
+      }
+    }
   }
 
   figure {

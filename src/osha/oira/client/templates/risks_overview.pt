@@ -170,7 +170,6 @@ ul.title {margin-bottom:3em;}
         <dl class="status">
             <tal:loop repeat="module status">
             <tal:defs define="
-                epsilon python:11/10;
                 num_ok python:module.get('ok', 0);
                 num_risks_without_measures python:module.get('risk_without_measures', 0);
                 num_risks_with_measures python:module.get('risk_with_measures', 0);
@@ -182,30 +181,32 @@ ul.title {margin-bottom:3em;}
                 perc_risks_without_measures python:num_total and num_risks_without_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_risks_with_measures python:num_total and num_risks_with_measures/decimal.Decimal(num_total)*100 or 0;
                 perc_postponed python:num_total and num_postponed/decimal.Decimal(num_total)*100 or 0;
-                perc_todo python:num_total and num_todo/decimal.Decimal(num_total)*100 or 0; ">
+                perc_todo python:num_total and num_todo/decimal.Decimal(num_total)*100 or 0;
+                epsilon python:decimal.Decimal(1/10.0);
+                ">
             <dt><a name="${module/path}"> </a>
                 <a href="#page-toc">${module/title} </a>
             </dt>
             <dd>
                 <section class="graph">
                     <span class="range answered" tal:condition="perc_ok"
-                        tal:attributes="style python:'width: %f%%' % (decimal.Decimal(perc_ok)-epsilon)">
+                        tal:attributes="style python:'width: %.2f%%' % float(decimal.Decimal(perc_ok)-epsilon)">
                         <strong class="number">${num_ok}</strong>
                     </span>
                     <span class="range  risk-measure" tal:condition="perc_risks_with_measures"
-                        tal:attributes="style python:'width: %f%%' % (decimal.Decimal(perc_risks_with_measures)-epsilon)">
+                        tal:attributes="style python:'width: %.2f%%' % (decimal.Decimal(perc_risks_with_measures)-epsilon)">
                         <strong class="number">${num_risks_with_measures}</strong>
                     </span>
                     <span class="range risk" tal:condition="perc_risks_without_measures"
-                        tal:attributes="style python:'width: %f%%' % (decimal.Decimal(perc_risks_without_measures)-epsilon)">
+                        tal:attributes="style python:'width: %.2f%%' % (decimal.Decimal(perc_risks_without_measures)-epsilon)">
                         <strong class="number">${num_risks_without_measures}</strong>
                     </span>
                     <span class="range postponed" tal:condition="perc_postponed"
-                        tal:attributes="style python:'width: %f%%' % (decimal.Decimal(perc_postponed)-epsilon)">
+                        tal:attributes="style python:'width: %.2f%%' % (decimal.Decimal(perc_postponed)-epsilon)">
                         <strong class="number">${num_postponed}</strong>
                     </span>
                     <span class="range unanswered" tal:condition="perc_todo"
-                        tal:attributes="style python:'width: %f%%' % (decimal.Decimal(perc_todo)-epsilon)">
+                        tal:attributes="style python:'width: %.2f%%' % (decimal.Decimal(perc_todo)-epsilon)">
                         <strong class="number">${num_todo}</strong>
                     </span>
                 </section>

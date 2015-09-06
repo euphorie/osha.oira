@@ -29,7 +29,7 @@ table{border-collapse:collapse}
 table th,table td{border-bottom:1px solid silver;padding:0.5em 0}
 table td{padding-left:0.5em;padding-right:0.5em}
 table thead th{text-align:center}
-table thead th.legend{text-align:right}
+table thead th.legend{text-align:right; padding-right:0.5em}
 table tbody th{width:70%; padding: 0.5em}
 table tbody td{vertical-align:middle;text-align:center;font-weight:bold;width:9%;}
 table tbody td.month{font-size:3em;}
@@ -38,21 +38,30 @@ table tbody td.legend{font-size:100%; color: black; background-color:#FFFFFF;}
 .risk-title{margin-bottom:0;font-weight:bold}
 .description{font-weight:normal;margin-bottom:0}
 
-h2,.pat-rich h2{font-size:1.5em;line-height:130%;letter-spacing:0.05em;font-weight:400;margin-bottom:0.7em;letter-spacing:0.05em}
-
+.module h2{font-size:1.5em;line-height:130%;letter-spacing:0.05em;font-weight:400;margin-bottom:0.2em;letter-spacing:0.05em}
+h2.title {line-height:100%;letter-spacing:0.05em;font-weight:400;letter-spacing:0.05em; margin-bottom:0.3em}
 section.module {
       margin-bottom: 5em;
 }
-p.byline {margin-bottom: 3em;}
+p.byline {float:right;}
+h1 {line-height:130%;}
+h3.title {margin-bottom:1.2em;}
+ul.title {margin-bottom:3em;}
         </style>
 		<article class="pat-rich report">
-			<h1>
-                ${here/Title} <br />
-                <em>Risk analysis and resolutions</em>
-			</h1>
-			<p class="byline">
+            <p class="byline">
                 ${view/date}
-			</p>
+            </p>
+			<h1>${here/Title}</h1>
+            <h2 class="title"><em i18n:translate="">Risk analysis and resolutions</em></h2>
+            <h3 class="title" i18n:translate="">(measures to be implemented in the coming months)</h3>
+            <h4><tal:span i18n:translate="">Use it to</tal:span>:</h4>
+            <ul class="title">
+              <li i18n:translate="">Pass information to the people concerned.</li>
+              <li i18n:translate="">Monitor the measures to be implemented in the forthcoming 3 months.</li>
+            </ul>
+
+
 			<section class="module" tal:repeat="module view/modules">
 				<h2 class="module-name">
                     ${module/number} ${module/name}

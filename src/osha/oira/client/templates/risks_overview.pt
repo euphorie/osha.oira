@@ -14,163 +14,12 @@
 <body>
 <metal:content fill-slot="content">
     <style type="text/css">
-.statuses h1 {
-    margin-left: 4em;
-    position: relative;
-    margin-bottom: 0em;
-}
-article h1, .pat-rich h1 {
-    font-weight: 600;
-    font-size: 2em;
-    line-height: 130%;
-    margin-bottom: 0.7em;
-    letter-spacing: 0.05em;
-}
-.statuses h1 .score-badge {
-    position: absolute;
-    left: -4.7em;
-    top: -0.95em;
-    width: 4em;
-    height: 4em;
-}
-.score-badge {
-    background-color: red;
-    position: absolute;
-    left: -6em;
-    top: 0.5em;
-    width: 5em;
-    height: 5em;
-    border-radius: 50%;
-    text-align: center;
-    text-indent: -1000em;
-    color: black;
-}
-.statuses h1 .score-badge:before {
-    line-height: 1.6em;
-}
-.score-badge[data-satisfaction^="0"]:before,.score-badge[data-satisfaction="1"]:before,.score-badge[data-satisfaction="3"]:before,.score-badge[data-satisfaction="4"]:before,.score-badge[data-satisfaction="5"]:before,.score-badge[data-satisfaction="6"]:before,.score-badge[data-satisfaction="7"]:before,.score-badge[data-satisfaction="8"]:before,.score-badge[data-satisfaction="9"]:before {
-    background-color: rgba(255,255,0,0);
-}
-.score-badge[data-satisfaction^="0"]:after,.score-badge[data-satisfaction^="1"]:after,.score-badge[data-satisfaction^="2"]:after,.score-badge[data-satisfaction^="3"]:after,.score-badge[data-satisfaction^="4"]:after {
-    border-bottom: none;
-    border-top: 0.3em solid black;
-}
-.score-badge[data-satisfaction^="0"]:after,.score-badge[data-satisfaction="1"]:after,.score-badge[data-satisfaction="3"]:after,.score-badge[data-satisfaction="4"]:after,.score-badge[data-satisfaction="5"]:after,.score-badge[data-satisfaction="6"]:after,.score-badge[data-satisfaction="7"]:after,.score-badge[data-satisfaction="8"]:after,.score-badge[data-satisfaction="9"]:after {
-    height: 30%;
-    bottom: 8%;
-}
-.score-badge[data-satisfaction^="1"]:before {
-    background-color: rgba(255,255,0,0.1);
-}
-.score-badge[data-satisfaction^="1"]:after {
-    height: 24%;
-    bottom: 12%;
-}
-.score-badge[data-satisfaction^="2"]:before {
-    background-color: rgba(255,255,0,0.2);
-}
-.score-badge[data-satisfaction^="2"]:after {
-    height: 18%;
-    bottom: 16%;
-}
-.score-badge[data-satisfaction^="3"]:before {
-    background-color: rgba(255,255,0,0.3);
-}
-.score-badge[data-satisfaction^="3"]:after {
-    height: 12%;
-    bottom: 22%;
-}
-.score-badge[data-satisfaction^="4"]:before {
-    background-color: rgba(255,255,0,0.4);
-}
-.score-badge[data-satisfaction^="4"]:after {
-    height: 6%;
-    bottom: 26%;
-}
-.score-badge[data-satisfaction^="5"]:before {
-    background-color: rgba(255,255,0,0.5);
-}
-.score-badge[data-satisfaction^="5"]:after {
-    height: 0;
-    bottom: 30%;
-}
-.score-badge[data-satisfaction^="6"]:before {
-    background-color: rgba(255,255,0,0.6);
-}
-.score-badge[data-satisfaction^="6"]:after {
-    height: 36%;
-    bottom: 28%;
-}
-.score-badge[data-satisfaction^="7"]:before {
-    background-color: rgba(255,255,0,0.7);
-}
-.score-badge[data-satisfaction^="7"]:after {
-    height: 43%;
-    bottom: 26%;
-}
-.score-badge[data-satisfaction^="8"]:before {
-    background-color: rgba(255,255,0,0.8);
-}
-.score-badge[data-satisfaction^="8"]::after {
-    height: 49%;
-    bottom: 24%;
-}
-.score-badge[data-satisfaction^="9"]:before {
-    background-color: rgba(255,255,0,0.9);
-}
-.score-badge[data-satisfaction^="9"]:after {
-    height: 55%;
-    bottom: 22%;
-}
-.score-badge[data-satisfaction="100"]:before {
-    background-color: #ff0;
-}
-.score-badge[data-satisfaction="100"]:after {
-    height: 61%;
-    bottom: 22%;
-    border-top: none;
-    border-bottom: 0.3em solid black;
-}
 
-.score-badge:before {
-    content: '• •';
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: block;
-    border-radius: 50%;
-    line-height: 2em;
-    font-size: 2em;
-    z-index: 1;
-}
-.score-badge:after {
-    content: ' ';
-    display: block;
-    left: 16%;
-    right: 16%;
-    bottom: 1em;
-    height: 2.5em;
-    background-color: rgba(255,255,0,0);
-    border-bottom: 0.3em solid black;
-    border-radius: 100%;
-    z-index: 1;
-}
-.score-badge:before, .score-badge:after {
-    position: absolute;
-    text-indent: 0;
-}
-.statuses .byline {
-    margin-left: 6em;
-    position: relative;
-    margin-bottom: 2em;
-    font-size: 1.34em;
-}
 .statuses .page-toc {
-    margin-left: 6em;
-    margin-top: -8.5em;
+    margin-left: 0;
+    margin-top: 0;
     margin-bottom: 3em;
-    padding: 6.8em 2em 2.5em 2em;
+    padding: 2em;
     border-radius: 1em;
     background-color: rgba(0,0,0,0.1);
 }
@@ -187,7 +36,7 @@ dl.status dt {
     display: block;
     text-decoration: none;
     font-weight: bold;
-    margin-left: 6em;
+    margin-left: 0;
 }
 dl.status dt a {
     color: black;
@@ -196,7 +45,7 @@ dl.status dt a {
     text-transform: uppercase;
 }
 dl.status dd {
-    margin-left: 6em;
+    margin-left: 0;
     position: relative;
 }
 dl.status dd .graph {
@@ -214,7 +63,7 @@ dl.status dd .graph {
 }
 dl.status dd .graph .range {
     height: 2em;
-    overflow: hidden;
+    overflow: display;
     display: inline-block;
     text-align: center;
     float: left;
@@ -238,9 +87,6 @@ dl.status dd .graph .range.unanswered {
 dl.status dd .graph .range .number {
     font-weight: normal;
     font-size: 0.8em;
-}
-dl.status dd .graph .range .label {
-    display: none;
 }
 dl.status dd .legend {
     margin-bottom: 3.5em;
@@ -281,19 +127,28 @@ dl.status dd .legend li.unanswered .number {
     background-color: rgba(0,0,0,0.1);
     color: rgba(0,0,0,0.6);
 }
-
+p.byline {float:right;}
+h1 {line-height:130%;}
+h2.title {line-height:100%;letter-spacing:0.05em;font-weight:400;letter-spacing:0.05em;margin-bottom:1.2em;}
+h3.title {margin-bottom:0.7em;}
+ul.title {margin-bottom:3em;}
     </style>
+    <article class="rich">
+        <p class="byline">
+            ${view/date}
+        </p>
+        <h1>${here/Title}</h1>
+        <h2 class="title"><em i18n:translate="">Overview of risks</em></h2>
+        <h4><tal:span i18n:translate="">Use it to</tal:span>:</h4>
+        <ul class="title">
+          <li i18n:translate="">Pass information to the people concerned.</li>
+          <li i18n:translate="">Monitor whether risks / measures are properly dealt with.</li>
+        </ul>
+    </article>
+
     <div class="statuses" tal:define="status python:view.status; status_view nocall:context/aq_parent/@@status">
-
-        <article class="rich">
-            <h1><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${here/Title}</tal:name></tal:title> <strong class="score-badge" data-satisfaction="${python:'%02d' % view.percentage_ok}"></strong>
-            </h1>
-            <p class="byline">
-                <tal:percent content="python:'%d%%' % view.percentage_ok">20%</tal:percent> <tal:translate i18n:translate="risk_free">Risk free</tal:translate>
-            </p>
-        </article>
-
         <a name="page-toc"> </a>
+        <h2 class="title" i18n:translate="toc_header">Contents</h2>
         <ul class="page-toc">
             <li tal:repeat="module view/toc">
                 <tal:no_locations condition="not:module/locations">
@@ -314,6 +169,7 @@ dl.status dd .legend li.unanswered .number {
         <dl class="status">
             <tal:loop repeat="module status">
             <tal:defs define="
+                epsilon python:1/10;
                 num_ok python:module.get('ok', 0);
                 num_risks_without_measures python:module.get('risk_without_measures', 0);
                 num_risks_with_measures python:module.get('risk_with_measures', 0);
@@ -327,34 +183,29 @@ dl.status dd .legend li.unanswered .number {
                 perc_postponed python:num_total and num_postponed/decimal.Decimal(num_total)*100 or 0;
                 perc_todo python:num_total and num_todo/decimal.Decimal(num_total)*100 or 0; ">
             <dt><a name="${module/path}"> </a>
-                <a href="#page-toc">${module/title} <strong class="score-badge" data-satisfaction="${python:'%02d' % perc_total_progress}"></strong></a>
+                <a href="#page-toc">${module/title} </a>
             </dt>
             <dd>
                 <section class="graph">
-                    <span class="range answered" style="width: ${perc_ok}%"
-                        tal:attributes="title python:'%s question%s answered without a risk' % (num_ok, num_ok != 1 and 's' or '')">
+                    <span class="range answered" tal:condition="perc_ok"
+                        tal:attributes="style python:'width: %f%%' % (decimal.Decimal(perc_ok)-epsilon)">
                         <strong class="number">${num_ok}</strong>
-                        <em class="label" tal:content="python:'question%s answered without a risk' % (num_ok != 1 and 's' or '')"></em>
                     </span>
-                    <span class="range  risk-measure" style="width: ${perc_risks_with_measures}%"
-                        tal:attributes="title python:'%s answer%s indicated a risk and have at least one measure defined in the action plan' % (num_risks_with_measures, num_risks_with_measures != 1 and 's' or '')">
+                    <span class="range  risk-measure" tal:condition="perc_risks_with_measures"
+                        tal:attributes="style python:'width: %f%%' % (decimal.Decimal(perc_risks_with_measures)-epsilon)">
                         <strong class="number">${num_risks_with_measures}</strong>
-                        <em class="label" tal:content="python:'answer%s indicated a risk and have at least one measure defined in the action plan' % (num_risks_with_measures != 1 and 's' or '')"></em>
                     </span>
-                    <span class="range risk" style="width: ${perc_risks_without_measures}%"
-                        tal:attributes="title python:'%s answer%s indicated a risk without any measure defined in the action plan' % (num_risks_without_measures, num_risks_without_measures != 1 and 's' or '')">
+                    <span class="range risk" tal:condition="perc_risks_without_measures"
+                        tal:attributes="style python:'width: %f%%' % (decimal.Decimal(perc_risks_without_measures)-epsilon)">
                         <strong class="number">${num_risks_without_measures}</strong>
-                        <em class="label" tal:content="python:'answer%s indicated a risk without any measure defined in the action plan' % (num_risks_without_measures != 1 and 's' or '')"></em>
                     </span>
-                    <span class="range postponed" style="width: ${perc_postponed}%"
-                        tal:attributes="title python:'%s questions were postponed' % num_postponed">
+                    <span class="range postponed" tal:condition="perc_postponed"
+                        tal:attributes="style python:'width: %f%%' % (decimal.Decimal(perc_postponed)-epsilon)">
                         <strong class="number">${num_postponed}</strong>
-                        <em class="label" tal:content="python:'question%s were postponed' % (num_postponed != 1 and 's' or '')"></em>
                     </span>
-                    <span class="range unanswered" style="width: ${perc_todo}%"
-                        tal:attributes="title python:'%s questions aren\'t answered yet' % num_todo">
+                    <span class="range unanswered" tal:condition="perc_todo"
+                        tal:attributes="style python:'width: %f%%' % (decimal.Decimal(perc_todo)-epsilon)">
                         <strong class="number">${num_todo}</strong>
-                        <em class="label" tal:content="python:'question%s aren\'t answered yet' % (num_todo != 1 and 's' or '')"></em>
                     </span>
                 </section>
                 <section class="row">

@@ -1,6 +1,7 @@
 from Acquisition import aq_inner
 from Acquisition import aq_parent
 from collections import defaultdict
+from datetime import datetime
 from decimal import Decimal
 from euphorie.client import model
 from euphorie.client import survey, report
@@ -185,6 +186,8 @@ class OSHAStatus(survey.Status):
             },
         }
         self.risks_by_status = defaultdict(default_risks_by_status)
+        now = datetime.now()
+        self.date = now.strftime('%d %B %Y')
 
     def module_query(self, sessionid, optional_modules):
         if optional_modules:

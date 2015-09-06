@@ -132,6 +132,7 @@ h1 {line-height:130%;}
 h2.title {line-height:100%;letter-spacing:0.05em;font-weight:400;letter-spacing:0.05em;margin-bottom:1.2em;}
 h3.title {margin-bottom:0.7em;}
 ul.title {margin-bottom:3em;}
+.six, .row .six {width: 49%;}
     </style>
     <article class="rich">
         <p class="byline">
@@ -169,7 +170,7 @@ ul.title {margin-bottom:3em;}
         <dl class="status">
             <tal:loop repeat="module status">
             <tal:defs define="
-                epsilon python:1/10;
+                epsilon python:11/10;
                 num_ok python:module.get('ok', 0);
                 num_risks_without_measures python:module.get('risk_without_measures', 0);
                 num_risks_with_measures python:module.get('risk_with_measures', 0);

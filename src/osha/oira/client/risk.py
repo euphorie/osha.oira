@@ -213,6 +213,7 @@ class OSHAActionPlanView(risk.ActionPlanView):
             self.solutions = [solution for solution in self.risk.values()
                             if ISolution.providedBy(solution)]
 
+        self.number_images = number_images
         self.has_images = number_images > 0
         self.image_class = IMAGE_CLASS[number_images]
         self.risk_number = self.context.number

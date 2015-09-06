@@ -157,48 +157,57 @@
     <div id="browser-warning" style="display:none">This will contain the warning translated</div>
   </metal:appendix>
   <metal:riskinfo define-macro="risk_info_actionplan" meta:interpolation="true" i18n:domain="euphorie" >
-  <div tal:condition="view/has_images" class="image-collage pat-gallery pat-equaliser">
-      <tal:get define="images risk/@@images">
-      <!-- Each image src is repeated as an image url as the value of the background image property inthe inline style on the link tag and in the HREF of the link tag. The background image should be a medium sized image, the image of the HREF should be the large, original image. -->
+  <div tal:condition="python:view.number_images > 1" class="image-collage pat-gallery pat-equaliser">
+    <tal:get define="images risk/@@images">
+    <!-- Each image src is repeated as an image url as the value of the background image property inthe inline style on the link tag and in the HREF of the link tag. The background image should be a medium sized image, the image of the HREF should be the large, original image. -->
 
-      <!-- The class 'three' is three in case of four images, 'four' in case of three images, 'six' in case of two images and 'twelve' in case of one image. -->
+    <!-- The class 'three' is three in case of four images, 'four' in case of three images, 'six' in case of two images and 'twelve' in case of one image. -->
 
-      <!-- Notice that each image has an image caption in the title tag. -->
-
-      <a title="${risk/caption|nothing}"
-            class="${view/image_class} columns"
-            style="background-image: url(${large/url|nothing})"
-            tal:define="thumb python:images.scale('image', width=150, height=500, direction='thumbnail');
-                        large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
-            href="${large/url|nothing}"
-            tal:condition="thumb"><img  alt="" src="${thumb/url}" />
-      </a>
-      <a title="${risk/caption2|nothing}"
-            class="${view/image_class} columns"
-            style="background-image: url(${large/url|nothing})"
-            tal:define="thumb python:images.scale('image2', width=120, height=172, direction='thumbnail');
-                        large python:images.scale('image2', width=590, height=1900, direction='thumbnail')"
-            href="${large/url|nothing}"
-            tal:condition="thumb"><img alt="" src="${thumb/url}" />
-      </a>
-      <a title="${risk/caption3|nothing}"
-            class="${view/image_class} columns"
-            style="background-image: url(${large/url|nothing})"
-            tal:define="thumb python:images.scale('image3', width=120, height=172, direction='thumbnail');
-                        large python:images.scale('image3', width=590, height=1900, direction='thumbnail')"
-            href="${large/url|nothing}"
-            tal:condition="thumb"><img alt="" src="${thumb/url}" />
-      </a>
-      <a title="${risk/caption4|nothing}"
-            class="${view/image_class} columns"
-            style="background-image: url(${large/url|nothing})"
-            tal:define="thumb python:images.scale('image4', width=120, height=172, direction='thumbnail');
-                        large python:images.scale('image4', width=590, height=1900, direction='thumbnail')"
-            href="${large/url|nothing}"
-            tal:condition="thumb"><img alt="" src="${thumb/url}" />
-      </a>
+    <!-- Notice that each image has an image caption in the title tag. -->
+        <a title="${risk/caption|nothing}"
+              class="${view/image_class} columns"
+              style="background-image: url(${large/url|nothing})"
+              tal:define="thumb python:images.scale('image', width=400, height=600, direction='thumbnail');
+                          large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
+              href="${large/url|nothing}"
+              tal:condition="thumb"><img  alt="" src="${thumb/url}" />
+        </a>
+        <a title="${risk/caption2|nothing}"
+              class="${view/image_class} columns"
+              style="background-image: url(${large/url|nothing})"
+              tal:define="thumb python:images.scale('image2', width=400, height=600, direction='thumbnail');
+                          large python:images.scale('image2', width=590, height=1900, direction='thumbnail')"
+              href="${large/url|nothing}"
+              tal:condition="thumb"><img alt="" src="${thumb/url}" />
+        </a>
+        <a title="${risk/caption3|nothing}"
+              class="${view/image_class} columns"
+              style="background-image: url(${large/url|nothing})"
+              tal:define="thumb python:images.scale('image3', width=400, height=600, direction='thumbnail');
+                          large python:images.scale('image3', width=590, height=1900, direction='thumbnail')"
+              href="${large/url|nothing}"
+              tal:condition="thumb"><img alt="" src="${thumb/url}" />
+        </a>
+        <a title="${risk/caption4|nothing}"
+              class="${view/image_class} columns"
+              style="background-image: url(${large/url|nothing})"
+              tal:define="thumb python:images.scale('image4', width=400, height=600, direction='thumbnail');
+                          large python:images.scale('image4', width=590, height=1900, direction='thumbnail')"
+              href="${large/url|nothing}"
+              tal:condition="thumb"><img alt="" src="${thumb/url}" />
+        </a>
       </tal:get>
     </div>
+    <nav class="pat-gallery" tal:condition="python:view.number_images == 1">
+      <a href="${large/url|nothing}"
+         tal:define="images risk/@@images;
+                     thumb python:images.scale('image', width=400, height=600, direction='thumbnail');
+                     large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
+          style="background-image: url(${large/url|nothing})">
+        <img class="medium float-before" src="${thumb/url}" alt="" />
+      </a>
+    </nav>
+
     <tal:block condition="show_statement|nothing" define="use_problem_description view/use_problem_description">
       <tal:block condition="not:view/risk_present">
         <p tal:condition="python:risk.type=='top5'" i18n:translate="top5_risk_not_present">

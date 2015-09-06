@@ -12,8 +12,8 @@
       metal:use-macro="context/@@shell/macros/shell">
 
 <body>
-<metal:content fill-slot="content">
-    <div class="statuses" tal:define="status python:view.status">
+<metal:content fill-slot="content" tal:define="language context/portal_languages/getPreferredLanguage">
+    <div class="statuses language-${language}" tal:define="status python:view.status">
 
         <article class="rich">
             <h1><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${here/Title}</tal:name></tal:title> <strong class="score-badge" data-satisfaction="${python:'%02d' % view.percentage_ok}"><tal:percent content="python:'%d%%' % view.percentage_ok">20%</tal:percent> <em class="label" i18n:translate="risk_free">Risk free</em></strong>

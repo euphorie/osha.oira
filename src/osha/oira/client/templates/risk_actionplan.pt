@@ -84,14 +84,12 @@
                     placeholder="General approach (to eliminate or reduce the risk)"
                     i18n:attributes="placeholder label_measure_action_plan"
                     tal:content="actionplan/action_plan|nothing"></textarea>
-            </label>
-            <label><tal:label i18n:translate="label_prevention_plan">Prevention plan</tal:label>
+                <br />
                 <textarea class="preventionPlan" name="measure.prevention_plan:utf8:ustring:records" rows="3"
                     placeholder="Specific action(s) required to implement this approach"
                     i18n:attributes="placeholder label_measure_prevention_plan"
                     tal:content="actionplan/prevention_plan|nothing"></textarea>
-            </label>
-            <label><tal:label i18n:translate="label_requirements">Requirements</tal:label>
+                <br />
                 <textarea class="requirements" name="measure.requirements:utf8:ustring:records" rows="3"
                     placeholder="Level of expertise and/or requirements needed"
                     i18n:attributes="placeholder label_measure_requirements"

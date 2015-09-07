@@ -6,18 +6,16 @@
       meta:interpolation="true"
       tal:omit-tag="">
 <div class="z3cFieldContainer" tal:attributes="class string:${view/@@dependencies} z3cFieldContainer">
-    <label>${view/label}<sup tal:condition="view/required" class="required">*</sup> 
+    <label>${view/label}<sup tal:condition="view/required" class="required">*</sup>
     </label>
-    <textarea
-        style="width: 100%; height: 500px;"
-        tal:content="view/value"
-        tal:attributes="id view/id;
-                        name view/name; 
-                        class view/klass;
-                        disabled view/disabled;
-                        readonly view/readonly;
-                        cols view/cols;
-                        rows view/rows" /> <tal:error condition="view/error" replace="structure view/error/render|nothing"/>
+
+    <textarea class="pat-redactor"
+              data-pat-redactor="show-source-button: true; buttons: html, bold, italic, unordered-list, ordered-list, outdent, indent, link;
+                        allowed-tags: p, img, ul, li, ol, strong, em, a;"
+
+            id="${view/id}" name="${view/name}" disabled="${view/disabled}" readonly="${view/readonly}" cols="${view/cols}" rows="${view/rows}">
+        <tal:content condition="view/value" replace="structure view/value"/>
+    </textarea>
     <dfn class="infoPanel" i18n:attributes="title" title="Information" tal:define="description view/field/description" tal:condition="description" tal:content="description"/>
 </div>
 </html>

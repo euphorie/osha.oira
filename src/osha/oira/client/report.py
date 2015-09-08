@@ -906,7 +906,10 @@ class MeasuresOverview(OSHAStatus):
         modules = self.getModules()
         main_modules = {}
         for module, risks in sorted(modulesdict.items(), key=lambda m: m[0].zodb_path):
-            path = module.path[:6]
+            if 'custom-risks' in module.zodb_path:
+                path = module.path[:6]
+            else:
+                path = module.path[:3]
             if path in main_modules:
                 main_modules[path]['risks'].update(risks)
             else:

@@ -16,11 +16,9 @@
     <div class="statuses language-${language}" tal:define="status python:view.status">
 
         <article class="rich">
-            <h1><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${here/Title}</tal:name></tal:title> <strong class="score-badge" data-satisfaction="${python:'%02d' % view.percentage_ok}"><tal:percent content="python:'%d%%' % view.percentage_ok">20%</tal:percent> <em class="label" i18n:translate="risk_free">Risk free</em></strong>
+            <h1><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${here/Title}</tal:name></tal:title>
             </h1>
-            <p class="byline">
-                <tal:percent content="python:'%d%%' % view.percentage_ok">20%</tal:percent> <tal:translate i18n:translate="risk_free">Risk free</tal:translate>
-            </p>
+
         </article>
 
         <ul class="page-toc">
@@ -56,7 +54,7 @@
                 perc_postponed python:num_total and num_postponed/decimal.Decimal(num_total)*100 or 0;
                 perc_todo python:num_total and num_todo/decimal.Decimal(num_total)*100 or 0; ">
             <dt><a name="${module/path}"> </a>
-                <a href="${module/url}">${module/title} <strong class="score-badge" data-satisfaction="${python:'%02d' % perc_total_progress}"><tal:percent content="python:'%d%%' %(int(perc_total_progress))">20%</tal:percent> <tal:translate i18n:translate="risk_free">Risk free</tal:translate></strong></a>
+                <a href="${module/url}">${module/title}</a>
             </dt>
             <dd>
                 <section class="graph">

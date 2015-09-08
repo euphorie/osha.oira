@@ -18,7 +18,9 @@
         <article class="rich">
             <h1><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${here/Title}</tal:name></tal:title>
             </h1>
-
+            <p class="byline">
+                <tal:translate i18n:translate="header_questions_answered">Questions answered per module</tal:translate>
+            </p>
         </article>
 
         <ul class="page-toc">

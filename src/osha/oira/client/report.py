@@ -8,6 +8,8 @@ from euphorie.client import report
 from euphorie.client import survey
 from euphorie.client.session import SessionManager
 from euphorie.client import config
+from euphorie.content.profilequestion import IProfileQuestion
+from euphorie.content.interfaces import ICustomRisksModule
 from euphorie.ghost import PathGhost
 from five import grok
 from openpyxl.cell import get_column_letter
@@ -906,7 +908,12 @@ class MeasuresOverview(OSHAStatus):
         modules = self.getModules()
         main_modules = {}
         for module, risks in sorted(modulesdict.items(), key=lambda m: m[0].zodb_path):
-            if 'custom-risks' in module.zodb_path:
+            module_obj = self.request.survey.restrictedTraverse(module.zodb_path.split('/'))
+            if (
+                IProfileQuestion.providedBy(module_obj) or
+                ICustomRisksModule.providedBy(module_obj) or
+                module.depth >= 3
+            ):
                 path = module.path[:6]
             else:
                 path = module.path[:3]

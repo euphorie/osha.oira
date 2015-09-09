@@ -4,8 +4,7 @@ Changelog
 2.3.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Translation updates in IS #12327
 
 2.3.7 (2015-04-01)
 ------------------

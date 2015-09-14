@@ -118,7 +118,7 @@
                     type="date" class="pat-date-picker"
                     name="measure.planning_start:records"
                     data-pat-date-picker="behavior: native"
-                    data-pat-validation="not-after: #planning-end-${number}; message-date: This date must be on or before the end date."
+                    data-pat-validation="type: date; not-after: #planning-end-${number}; message-date: This date must be on or before the end date."
                     id="planning-start-${number}"
                     value="${actionplan/planning_start|nothing}"/>
             </label>
@@ -129,7 +129,7 @@
                 <input
                     type="date" class="pat-date-picker" name="measure.planning_end:records"
                     data-pat-date-picker="behavior: native"
-                    data-pat-validation="not-before: #planning-start-${number}; message-date: This date must be on or after the start date."
+                    data-pat-validation="type: date; not-before: #planning-start-${number}; message-date: This date must be on or after the start date."
                     id="planning-end-${number}"
                     value="${actionplan/planning_end|nothing}"/>
             </label>

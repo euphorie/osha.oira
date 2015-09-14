@@ -1,5 +1,5 @@
 ({
-    baseUrl: ".",
+    baseUrl: "src",
     out: "bundles/oira.js",
     include: ["patterns"],
     insertRequire: ["patterns"],

@@ -4,8 +4,7 @@ Changelog
 2.3.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Re-release, apparently the previous one was botched
 
 2.3.8 (2015-09-15)
 ------------------

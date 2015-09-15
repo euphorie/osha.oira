@@ -115,21 +115,24 @@ class OSHAIdentificationView(risk.EvaluationView):
                     stripped_description, DESCRIPTION_CROP_LENGTH)
             else:
                 self.description_intro = ""
+            self.description_probability = _(
+                u"help_default_probability", default=u"Indicate how "
+                "likely occurence of this risk is in a normal situation.")
+            self.description_frequency = _(
+                u"header_risk_frequency", default=u"How often are people "
+                "exposed to this risk?")
+            self.description_severity = _(
+                u"help_default_severity", default=u"Indicate the default "
+                "severity of this risk occurs.")
             if getattr(self.request.survey, 'enable_custom_evaluation_descriptions', False):
                 if self.request.survey.evaluation_algorithm != 'french':
-                    self.description_probability = self.request.survey.description_probability
-                self.description_frequency = self.request.survey.description_frequency
-                self.description_severity = self.request.survey.description_severity
-            else:
-                self.description_probability = _(
-                    u"help_default_probability", default=u"Indicate how "
-                    "likely occurence of this risk is in a normal situation.")
-                self.description_frequency = _(
-                    u"header_risk_frequency", default=u"How often are people "
-                    "exposed to this risk?")
-                self.description_severity = _(
-                    u"help_default_severity", default=u"Indicate the default "
-                    "severity of this risk occurs.")
+                    custom_dp = getattr(
+                        self.request.survey, 'description_probability', '')
+                    self.description_probability = custom_dp.strip() or self.description_probability
+                custom_df = getattr(self.request.survey, 'description_frequency', '')
+                self.description_frequency = custom_df.strip() or self.description_frequency
+                custom_ds = getattr(self.request.survey, 'description_severity', '')
+                self.description_severity = custom_ds.strip() or self.description_severity
 
             super(risk.EvaluationView, self).update()
 

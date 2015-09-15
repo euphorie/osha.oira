@@ -127,11 +127,11 @@ class OSHAIdentificationView(risk.EvaluationView):
             if getattr(self.request.survey, 'enable_custom_evaluation_descriptions', False):
                 if self.request.survey.evaluation_algorithm != 'french':
                     custom_dp = getattr(
-                        self.request.survey, 'description_probability', '')
+                        self.request.survey, 'description_probability', '') or ''
                     self.description_probability = custom_dp.strip() or self.description_probability
-                custom_df = getattr(self.request.survey, 'description_frequency', '')
+                custom_df = getattr(self.request.survey, 'description_frequency', '') or ''
                 self.description_frequency = custom_df.strip() or self.description_frequency
-                custom_ds = getattr(self.request.survey, 'description_severity', '')
+                custom_ds = getattr(self.request.survey, 'description_severity', '') or ''
                 self.description_severity = custom_ds.strip() or self.description_severity
 
             super(risk.EvaluationView, self).update()

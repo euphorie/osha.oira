@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.8 (unreleased)
+2.3.8 (2015-09-15)
 ------------------
 
 - Translation updates in IS #12327

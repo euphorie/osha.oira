@@ -256,7 +256,6 @@
                       large python:images.scale('image2', width=590, height=1900, direction='thumbnail')"
           tal:condition="large">
           <a title="${risk/caption2|nothing}"
-                class="${view/image_class} columns"
                 style="background-image: url(${large/url|nothing})"
                 href="${large/url|nothing}"><img alt="" src="${thumb/url}" />
           </a>
@@ -266,7 +265,6 @@
                       large python:images.scale('image3', width=590, height=1900, direction='thumbnail')"
           tal:condition="large">
           <a title="${risk/caption3|nothing}"
-                class="${view/image_class} columns"
                 style="background-image: url(${large/url|nothing})"
                 href="${large/url|nothing}"><img alt="" src="${thumb/url}" />
           </a>
@@ -276,7 +274,6 @@
                       large python:images.scale('image4', width=590, height=1900, direction='thumbnail')"
           tal:condition="large">
           <a title="${risk/caption4|nothing}"
-                class="${view/image_class} columns"
                 style="background-image: url(${large/url|nothing})"
                 href="${large/url|nothing}"><img alt="" src="${thumb/url}" />
           </a>

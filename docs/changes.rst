@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.9 (unreleased)
+2.3.9 (2015-09-15)
 ------------------
 
 - Re-release, apparently the previous one was botched

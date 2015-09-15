@@ -311,6 +311,15 @@
 
     <article id="full-content" hidden="hidden">
       <tal:text replace="structure risk/description">description</tal:text>
+      <p class="show-more-or-less">
+        <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description; target: #concise-content"><strong i18n:translate="Show less" class="show-less">Show less</strong></a>
+      </p>
+    </article>
+
+    <article id="short_description" hidden="hidden">
+      <p class="introduction">
+          <tal:text replace="structure view/description_intro">short description</tal:text> <a class="show-more pat-inject" href="${request/ACTUAL_URL}" data-pat-inject="source: #full-content; target: #concise-content;" i18n:translate="Read more">Read more</a>
+        </p>
     </article>
 
   </metal:riskinfo>

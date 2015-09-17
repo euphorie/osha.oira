@@ -156,6 +156,7 @@
     </p>
     <div id="browser-warning" style="display:none">This will contain the warning translated</div>
   </metal:appendix>
+
   <metal:riskinfo define-macro="risk_info_actionplan" meta:interpolation="true" i18n:domain="euphorie" >
   <div tal:condition="python:view.number_images > 1" class="image-collage pat-gallery pat-equaliser">
     <tal:get define="images risk/@@images">
@@ -282,7 +283,6 @@
     <tal:single condition="python:view.number_images == 1">
           <figure>
             <a title="${risk/caption|nothing}"
-                  style="background-image: url(${large/url|nothing})"
                   tal:define="thumb python:images.scale('image', width=400, height=600, direction='thumbnail');
                               large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
                   href="${large/url|nothing}"

@@ -244,7 +244,7 @@
       <!-- Notice that each image has an image caption in the title tag. -->
       <tal:many condition="python:view.number_images > 1">
         <div class="${view/image_class} columns"
-          tal:define="thumb python:images.scale('image', width=400, height=600, direction='thumbnail');
+          tal:define="thumb python:images.scale('image', width=590, height=800, direction='thumbnail');
                       large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
           tal:condition="large">
           <a title="${risk/caption|nothing}"
@@ -253,7 +253,7 @@
           </a>
         </div>
         <div class="${view/image_class} columns"
-          tal:define="thumb python:images.scale('image2', width=400, height=600, direction='thumbnail');
+          tal:define="thumb python:images.scale('image2', width=590, height=800, direction='thumbnail');
                       large python:images.scale('image2', width=590, height=1900, direction='thumbnail')"
           tal:condition="large">
           <a title="${risk/caption2|nothing}"
@@ -262,7 +262,7 @@
           </a>
         </div>
         <div class="${view/image_class} columns"
-          tal:define="thumb python:images.scale('image3', width=400, height=600, direction='thumbnail');
+          tal:define="thumb python:images.scale('image3', width=590, height=800, direction='thumbnail');
                       large python:images.scale('image3', width=590, height=1900, direction='thumbnail')"
           tal:condition="large">
           <a title="${risk/caption3|nothing}"
@@ -271,7 +271,7 @@
           </a>
         </div>
         <div class="${view/image_class} columns"
-          tal:define="thumb python:images.scale('image4', width=400, height=600, direction='thumbnail');
+          tal:define="thumb python:images.scale('image4', width=590, height=800, direction='thumbnail');
                       large python:images.scale('image4', width=590, height=1900, direction='thumbnail')"
           tal:condition="large">
           <a title="${risk/caption4|nothing}"

@@ -119,11 +119,11 @@ class OSHAIdentificationView(risk.EvaluationView):
                 u"help_default_probability", default=u"Indicate how "
                 "likely occurence of this risk is in a normal situation.")
             self.description_frequency = _(
-                u"header_risk_frequency", default=u"How often are people "
-                "exposed to this risk?")
+                u"help_default_frequency", default=u"Indicate how often this "
+                u"risk occurs in a normal situation.")
             self.description_severity = _(
-                u"help_default_severity", default=u"Indicate the default "
-                "severity of this risk occurs.")
+                u"help_default_severity", default=u"Indicate the "
+                "severity if this risk occurs.")
             if getattr(self.request.survey, 'enable_custom_evaluation_descriptions', False):
                 if self.request.survey.evaluation_algorithm != 'french':
                     custom_dp = getattr(

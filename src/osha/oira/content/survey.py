@@ -85,8 +85,15 @@ class IOSHASurvey(form.Schema):
     description_probability = schema.Text(
         title=_(u"Probability"),
         description=_(
-            u"description_criteria_description",
-            default=u"Enter your explanation here"),
+            u"description_criteria_explanation",
+            default=u'Provide your custom explanation here, to override this '
+                    u'default explanation: "${default_explanation}"',
+            mapping={
+                u'default_explanation': _(
+                    u"help_default_probability",
+                    default=u"Indicate how likely occurence of this risk is "
+                    u"in a normal situation.")}
+        ),
         required=False,
     )
 
@@ -96,8 +103,15 @@ class IOSHASurvey(form.Schema):
     description_frequency = schema.Text(
         title=_(u"Frequency"),
         description=_(
-            u"description_criteria_description",
-            default=u"Enter your explanation here"),
+            u"description_criteria_explanation",
+            default=u'Provide your custom explanation here, to override this '
+                    u'default explanation: "${default_explanation}"',
+            mapping={
+                u'default_explanation': _(
+                    u"help_default_frequency",
+                    default=u"Indicate how often this risk occurs in a normal "
+                    u"situation.")}
+        ),
         required=False,
     )
 
@@ -107,8 +121,14 @@ class IOSHASurvey(form.Schema):
     description_severity = schema.Text(
         title=_(u"Severity"),
         description=_(
-            u"description_criteria_description",
-            default=u"Enter your explanation here"),
+            u"description_criteria_explanation",
+            default=u'Provide your custom explanation here, to override this '
+                    u'default explanation: "${default_explanation}"',
+            mapping={
+                u'default_explanation': _(
+                    u"help_default_severity",
+                    default=u"Indicate the severity if this risk occurs.")}
+        ),
         required=False,
     )
 

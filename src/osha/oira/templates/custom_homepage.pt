@@ -41,18 +41,27 @@
 
     <metal:javascriptslot define-slot="javascript_head_slot" />
     <metal:styleslot define-slot="style_slot" />
+    <style type="text/css">
+    @media only screen and (min-width: 1280px){
+        .sidebar-off #content,.osc-off.sidebar-off #content{
+            left:0;
+            padding:4% 10% 10% 10%;}
+    }
+    #content{
+        padding: 4% 6% 10% 6%;}
+</style>
 </head>
 
-<body class="osh-on test-session osc-off osc-s-on focus-sidebar ${sidebar_default}"  tal:define="is_anonymous webhelpers/anonymous">
-    <div id="main">
-        <header id="toolbar">
-        </header>
-        <div id="content">
+<body class="osh-on osc-off osc-s-off focus-sidebar ${sidebar_default}" tal:define="is_anonymous webhelpers/anonymous">
+    <header id="toolbar">
+    </header>
+    <div id="content">
 
-
-                <figure style="position:absolute; top:0; padding-top: 30px">
-                    <img src="${request/SERVER_URL}/flags/oira.gif" alt="" />
-                </figure>
+      <article>
+            <figure>
+                <img src="${request/SERVER_URL}/flags/oira.gif" alt="" />
+            </figure>
+      </article>
 
      <h1 class="carousel"><span lang="en" xml:lang="en">Welcome to the Online interactive Risk Assessment tools (OiRA)</span></h1>
 
@@ -112,6 +121,5 @@
     <!--[if lte IE 8]><script src="${client/++resource++euphorie.behaviour}/ie6/warning.js"></script><script>window.onload=function(){e("/++resource++euphorie.behaviour/ie6/")}</script><![endif]-->
     <tal:block replace="tile:client-analytics"/>
     </div>
-  </div>
   </body>
 </html>

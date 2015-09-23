@@ -1,5 +1,6 @@
 from euphorie.client import model
 from euphorie.client import utils
+from euphorie.ghost import PathGhost
 from osha.oira.client import interfaces
 from osha.oira.tests.base import OiRAFunctionalTestCase
 from z3c.saconfig import Session
@@ -179,8 +180,12 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         self.assertEquals(len(view.risks_by_status[u'001001']['present']['high']), 1)
 
     def testRisksOverviewView(self):
+        interface.alsoProvides(
+            self.request,
+            interfaces.IOSHAReportPhaseSkinLayer
+        )
         view = component.getMultiAdapter(
-            (self.survey, self.request), name="risks_overview")
+            (PathGhost('casper'), self.request), name="risks_overview")
 
         def getModules():
             return {

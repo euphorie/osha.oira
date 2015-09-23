@@ -70,6 +70,7 @@ require.config({
         "pat-input-change-events":   "bower_components/patternslib/src/lib/input-change-events",
         "pat-jquery-ext":            "bower_components/patternslib/src/core/jquery-ext",
         "pat-logger":                "bower_components/patternslib/src/core/logger",
+        "pat-mockup-parser":         "bower_components/patternslib/src/core/mockup-parser",
         "pat-parser":                "bower_components/patternslib/src/core/parser",
         "pat-registry":              "bower_components/patternslib/src/core/registry",
         "pat-remove":                "bower_components/patternslib/src/core/remove",

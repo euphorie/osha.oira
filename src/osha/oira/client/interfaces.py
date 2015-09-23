@@ -25,5 +25,6 @@ class IOSHAActionPlanPhaseSkinLayer(IActionPlanPhaseSkinLayer):
 class IOSHACustomizationPhaseSkinLayer(ICustomizationPhaseSkinLayer):
     """Skin layer used during the action plan report phase."""
 
+
 class IOSHAReportPhaseSkinLayer(IReportPhaseSkinLayer):
     """Skin layer used during the action plan report phase."""

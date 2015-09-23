@@ -1,9 +1,10 @@
 BOWER 		?= node_modules/.bin/bower
 BINDIR      ?= .bundle/bin
+BUNDLE      ?= $(BINDIR)/bundle
 # XXX: See stamp-bundler below.
-# BUNDLE      ?= $(BINDIR)/bundle
-BUNDLE      ?= bundle
+# BUNDLE      ?= bundle
 
+.PHONY: all
 all:: serve
 default: all
 
@@ -31,26 +32,26 @@ stamp-bower: stamp-npm
 	touch stamp-bower
 
 stamp-bundler:
-	# XXX This can be used to install bundler but doesn't work on Jenkins :(
-	# mkdir -p $(BINDIR) && gem install --user-install bundler --bindir=$(BINDIR) --no-wrappers
-	# $(BUNDLE) install --path .bundle --binstubs $(BINDIR)
-	# Instead we now rely on Bundler being installed globally.
+	mkdir -p $(BINDIR) && gem install --user-install bundler --bindir=$(BINDIR) --no-wrappers
 	$(BUNDLE) install --path .bundle --binstubs $(BINDIR)
 	touch stamp-bundler
 
+.PHONY: clean
 clean::
 	rm -rf stamp-npm stamp-bower stamp-bundler node_modules src/bower_components bundles/*
 
+.PHONY: extra-clean
 extra-clean:: clean
 	rm -rf ~/.cache/bower
 
+.PHONY: check-clean
 check-clean:
 	test -z "$(shell git status --porcelain)" || (git status && echo && echo "Workdir not clean." && false) && echo "Workdir clean."
 
 ########################################################################
 # For development (i.e. serving files)
 
+.PHONY: serve
 serve: stamp-bower stamp-bundler
-	bundle exec jekyll serve --watch --baseurl "" --host 0.0.0.0
+	$(BUNDLE) exec jekyll serve --watch --baseurl "" --host 0.0.0.0
 
-.PHONY: all extra-clean clean check-clean serve

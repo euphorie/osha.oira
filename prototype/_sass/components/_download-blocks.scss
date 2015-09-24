@@ -2,6 +2,11 @@
 	.download-block {
 		margin-bottom: 1.5em;
 
+		@include screen-size(small) {
+			height: auto !important;
+			margin-bottom: 0.5em !important;
+		}
+
 		.pat-well {
 			height: 100%;
 			-moz-box-sizing: border-box;
@@ -15,6 +20,9 @@
 
 			.pat-button {
 				font-size: 1.2em;
+				@include screen-size(small) {
+					font-size: 1em;
+				}
 				width: 80%;
 				margin: 0 auto 2em;
 				padding: 0.5em 0.2em 0.4em;

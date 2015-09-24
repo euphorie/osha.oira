@@ -49,9 +49,20 @@
 			-webkit-transition: opacity 0.2s;
 			transition: opacity 0.2s;
 
+			@include screen-size(small) {
+				top: -3.1%;
+			}
+
 			a {
 				display: inline-block;
 				margin-right: 1em;
+
+				@include screen-size(small) {
+					width: 1em;
+					overflow: hidden;
+					height: 2em;
+					top: -2.9%;
+				}
 			}
 		}
 

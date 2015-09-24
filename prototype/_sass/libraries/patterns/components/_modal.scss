@@ -77,15 +77,17 @@ div.pat-modal {
     top: 37px;
     z-index: 1;
   }
+  
+  @include screen-size(large) {
+    &.large {
+      width: 768px;
+      margin-left: -384px;
+    }
 
-  &.large {
-    width: 768px;
-    margin-left: -384px;
-  }
-
-  &.small {
-    width: 400px;
-    margin-left: -200px;
+    &.small {
+      width: 400px;
+      margin-left: -200px;
+    }
   }
 
   img {

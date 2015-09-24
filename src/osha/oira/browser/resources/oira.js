@@ -15836,9 +15836,10 @@ define('pat-autofocus',[
  */
 define('pat-autoscale',[
     "jquery",
+    "jquery.browser",
     "pat-registry",
     "pat-parser"
-], function($, registry, Parser) {
+], function($, dummy, registry, Parser) {
     var parser = new Parser("auto-scale");
     parser.addArgument("method", "scale", ["scale", "zoom"]);
     parser.addArgument("min-width", 0);
@@ -15913,8 +15914,58 @@ define('pat-autoscale',[
     return _;
 });
 
+define('pat-mockup-parser',[
+    'jquery'
+], function($) {
+    'use strict';
+
+    var parser = {
+        getOptions: function getOptions($el, patternName, options) {
+            /* This is the Mockup parser. An alternative parser for Patternslib
+             * patterns.
+             *
+             * NOTE: Use of the Mockup parser is discouraged and is added here for
+             * legacy support for the Plone Mockup project.
+             *
+             * It parses a DOM element for pattern configuration options.
+             */
+            options = options || {};
+            // get options from parent element first, stop if element tag name is 'body'
+            if ($el.length !== 0 && !$.nodeName($el[0], 'body')) {
+                options = getOptions($el.parent(), patternName, options);
+            }
+            // collect all options from element
+            var elOptions = {};
+            if ($el.length !== 0) {
+                elOptions = $el.data('pat-' + patternName);
+                if (elOptions) {
+                    // parse options if string
+                    if (typeof(elOptions) === 'string') {
+                        var tmpOptions = {};
+                        $.each(elOptions.split(';'),
+                            function(i, item) {
+                                item = item.split(':');
+                                item.reverse();
+                                var key = item.pop();
+                                key = key.replace(/^\s+|\s+$/g, '');    // trim
+                                item.reverse();
+                                var value = item.join(':');
+                                value = value.replace(/^\s+|\s+$/g, '');    // trim
+                                tmpOptions[key] = value;
+                            }
+                        );
+                        elOptions = tmpOptions;
+                    }
+                }
+            }
+            return $.extend(true, {}, options, elOptions);
+        }
+    };
+    return parser;
+});
+
 /**
- * A Base pattern for creating scoped patterns. It'ssSimilar to Backbone's
+ * A Base pattern for creating scoped patterns. It's similar to Backbone's
  * Model class. The advantage of this approach is that each instance of a
  * pattern has its own local scope (closure).
  *
@@ -15928,24 +15979,26 @@ define('pat-autoscale',[
  */
 
 define('pat-base',[
-  'jquery',
-  'pat-registry',
+  "jquery",
+  "pat-registry",
+  "pat-mockup-parser",
   "pat-logger"
-], function($, Registry, logger) {
-    'use strict';
+], function($, Registry, mockupParser, logger) {
+    "use strict";
     var log = logger.getLogger("Patternslib Base");
 
     var initBasePattern = function initBasePattern($el, options, trigger) {
         var name = this.prototype.name;
         var log = logger.getLogger("pat." + name);
-        var pattern = $el.data('pattern-' + name);
+        var pattern = $el.data("pattern-" + name);
         if (pattern === undefined && Registry.patterns[name]) {
             try {
+                options = this.prototype.parser  === "mockup" ? mockupParser.getOptions($el, name, options) : options;
                 pattern = new Registry.patterns[name]($el, options, trigger);
             } catch (e) {
-                log.error('Failed while initializing "' + name + '" pattern.');
+                log.error("Failed while initializing '" + name + "' pattern.", e);
             }
-            $el.data('pattern-' + name, pattern);
+            $el.data("pattern-" + name, pattern);
         }
         return pattern;
     };
@@ -15954,20 +16007,20 @@ define('pat-base',[
         this.$el = $el;
         this.options = $.extend(true, {}, this.defaults || {}, options || {});
         this.init($el, options, trigger);
-        this.emit('init');
+        this.emit("init");
     };
 
     Base.prototype = {
         constructor: Base,
         on: function(eventName, eventCallback) {
-            this.$el.on(eventName + '.' + this.name + '.patterns', eventCallback);
+            this.$el.on(eventName + "." + this.name + ".patterns", eventCallback);
         },
         emit: function(eventName, args) {
             // args should be a list
             if (args === undefined) {
                 args = [];
             }
-            this.$el.trigger(eventName + '.' + this.name + '.patterns', args);
+            this.$el.trigger(eventName + "." + this.name + ".patterns", args);
         }
     };
 
@@ -15985,7 +16038,7 @@ define('pat-base',[
         // The constructor function for the new subclass is either defined by you
         // (the "constructor" property in your `extend` definition), or defaulted
         // by us to simply call the parent's constructor.
-        if (patternProps.hasOwnProperty('constructor')) {
+        if (patternProps.hasOwnProperty("constructor")) {
             child = patternProps.constructor;
         } else {
             child = function() { parent.apply(this, arguments); };
@@ -20589,7 +20642,10 @@ define("pat-clone",[
     parser.addArgument("template", ":first");
     parser.addArgument("trigger-element", ".add-clone");
     parser.addArgument("remove-element", ".remove-clone");
+    parser.addArgument("remove-behaviour", "confirm", ["confirm", "none"]);
+    parser.addArgument("remove-confirmation", "Are you sure you want to remove this element?");
     parser.addArgument("clone-element", ".clone");
+    parser.addAlias("remove-behavior", "remove-behaviour");
     var TEXT_NODE = 3;
 
     return Base.extend({
@@ -20609,7 +20665,7 @@ define("pat-clone",[
             this.num_clones = $clones.length;
             $clones.each(function (idx, clone) {
                 var $clone = $(clone);
-                $clone.find(this.options.removeElement).on("click", this.remove.bind(this, $clone));
+                $clone.find(this.options.remove.element).on("click", this.confirmRemoval.bind(this, $clone));
             }.bind(this));
         },
 
@@ -20634,7 +20690,7 @@ define("pat-clone",[
 
             $clone.appendTo(this.$el);
             $clone.children().addBack().contents().addBack().filter(this.incrementValues.bind(this));
-            $clone.find(this.options.removeElement).on("click", this.remove.bind(this, $clone));
+            $clone.find(this.options.remove.element).on("click", this.confirmRemoval.bind(this, $clone));
 
             $clone.removeAttr("hidden");
             registry.scan($clone);
@@ -20660,6 +20716,16 @@ define("pat-clone",[
                 $.each(el.attributes, callback.bind(this));
             } else if (el.data.length) {
                 el.data = el.data.replace("#{1}", this.num_clones);
+            }
+        },
+
+        confirmRemoval: function confirmRemoval($el, callback) {
+            if (this.options.remove.behaviour === "confirm") {
+                if (window.confirm(this.options.remove.confirmation) === true) {
+                    this.remove($el);
+                }
+            } else {
+                this.remove($el);
             }
         },
 
@@ -21670,8 +21736,12 @@ define('pat-inject',[
 
     $(window).bind("popstate", function (event) {
         // popstate also triggers on traditional anchors
-        if (!event.originalEvent.state) {
-            history.replaceState("anchor", "", document.location.href);
+        if (!event.originalEvent.state && ("replaceState" in history)) {
+            try {
+                history.replaceState("anchor", "", document.location.href);
+            } catch (e) {
+                log.debug(e);
+            }
             return;
         }
         // popstate event can be fired when history.back() is called. If
@@ -21685,7 +21755,11 @@ define('pat-inject',[
     // this entry ensures that the initally loaded page can be reached with
     // the back button
     if ("replaceState" in history) {
-        history.replaceState("pageload", "", document.location.href);
+        try {
+            history.replaceState("pageload", "", document.location.href);
+        } catch (e) {
+            log.debug(e);
+        }
     }
 
     registry.register(_);
@@ -29681,7 +29755,7 @@ define('pat-equaliser',[
 
     var equaliser = {
         name: "equaliser",
-        trigger: ".pat-equaliser",
+        trigger: ".pat-equaliser, .pat-equalizer",
 
         init: function($el, opts) {
             return $el.each(function() {
@@ -29689,6 +29763,7 @@ define('pat-equaliser',[
                     options = parser.parse($container, opts);
                 $container.data("pat-equaliser", options);
                 $container.on("pat-update.pat-equaliser", null, this, equaliser._onEvent);
+                $container.on("patterns-injected.pat-equaliser", null, this, equaliser._onEvent);
                 $(window).on("resize.pat-equaliser", null, this, utils.debounce(equaliser._onEvent, 100));
                 imagesLoaded(this, $.proxy(function() {
                     equaliser._update(this);
@@ -30178,7 +30253,7 @@ define('pat-forward',[
 // vim: sw=4 expandtab
 
 ;
-/*! PhotoSwipe - v4.0.8 - 2015-05-21
+/*! PhotoSwipe - v4.1.0 - 2015-07-11
 * http://photoswipe.com
 * Copyright (c) 2015 Dmitry Semenov; */
 (function (root, factory) { 
@@ -30498,7 +30573,7 @@ var _options = {
 	pinchToClose: true,
 	closeOnScroll: true,
 	closeOnVerticalDrag: true,
-	verticalDragRange: 0.6,
+	verticalDragRange: 0.75,
 	hideAnimationDuration: 333,
 	showAnimationDuration: 333,
 	showHideOpacity: false,
@@ -30514,10 +30589,10 @@ var _options = {
     	if(isMouseClick) {
     		return 1;
     	} else {
-    		return item.initialZoomLevel < 0.7 ? 1 : 1.5;
+    		return item.initialZoomLevel < 0.7 ? 1 : 1.33;
     	}
     },
-    maxSpreadZoom: 2,
+    maxSpreadZoom: 1.33,
 	modal: true,
 
 	// not fully implemented yet
@@ -30577,6 +30652,7 @@ var _isOpen,
 	_currentWindowScrollY,
 	_features,
 	_windowVisibleSize = {},
+	_renderMaxResolution = false,
 
 	// Registers PhotoSWipe module (History, Controller ...)
 	_registerModule = function(name, module) {
@@ -30622,21 +30698,43 @@ var _isOpen,
 		_bgOpacity = opacity;
 		self.bg.style.opacity = opacity * _options.bgOpacity;
 	},
-	
-	_applyZoomTransform = function(styleObj,x,y,zoom) {
+
+	_applyZoomTransform = function(styleObj,x,y,zoom,item) {
+		if(!_renderMaxResolution || (item && item !== self.currItem) ) {
+			zoom = zoom / (item ? item.fitRatio : self.currItem.fitRatio);	
+		}
+			
 		styleObj[_transformKey] = _translatePrefix + x + 'px, ' + y + 'px' + _translateSufix + ' scale(' + zoom + ')';
 	},
-	_applyCurrentZoomPan = function() {
+	_applyCurrentZoomPan = function( allowRenderResolution ) {
 		if(_currZoomElementStyle) {
+
+			if(allowRenderResolution) {
+				if(_currZoomLevel > self.currItem.fitRatio) {
+					if(!_renderMaxResolution) {
+						_setImageSize(self.currItem, false, true);
+						_renderMaxResolution = true;
+					}
+				} else {
+					if(_renderMaxResolution) {
+						_setImageSize(self.currItem);
+						_renderMaxResolution = false;
+					}
+				}
+			}
+			
+
 			_applyZoomTransform(_currZoomElementStyle, _panOffset.x, _panOffset.y, _currZoomLevel);
 		}
 	},
 	_applyZoomPanToItem = function(item) {
 		if(item.container) {
+
 			_applyZoomTransform(item.container.style, 
 								item.initialPosition.x, 
 								item.initialPosition.y, 
-								item.initialZoomLevel);
+								item.initialZoomLevel,
+								item);
 		}
 	},
 	_setTranslateX = function(x, elStyle) {
@@ -30952,11 +31050,11 @@ var publicMethods = {
 		_currentWindowScrollY = _offset.y = y;
 		_shout('updateScrollOffset', _offset);
 	},
-	applyZoomPan: function(zoomLevel,panX,panY) {
+	applyZoomPan: function(zoomLevel,panX,panY,allowRenderResolution) {
 		_panOffset.x = panX;
 		_panOffset.y = panY;
 		_currZoomLevel = zoomLevel;
-		_applyCurrentZoomPan();
+		_applyCurrentZoomPan( allowRenderResolution );
 	},
 
 	init: function() {
@@ -31277,6 +31375,7 @@ var publicMethods = {
 
 
 		self.currItem = _getItemAt( _currentItemIndex );
+		_renderMaxResolution = false;
 		
 		_shout('beforeChange', _indexDiff);
 
@@ -31309,7 +31408,8 @@ var publicMethods = {
 			var prevItem = _getItemAt(_prevItemIndex);
 			if(prevItem.initialZoomLevel !== _currZoomLevel) {
 				_calculateItemSize(prevItem , _viewportSize );
-				_applyZoomPanToItem( prevItem ); 
+				_setImageSize(prevItem);
+				_applyZoomPanToItem( prevItem ); 				
 			}
 
 		}
@@ -31402,6 +31502,7 @@ var publicMethods = {
 				}
 				if(item && item.container) {
 					_calculateItemSize(item, _viewportSize);
+					_setImageSize(item);
 					_applyZoomPanToItem( item );
 				}
 				
@@ -31415,7 +31516,7 @@ var publicMethods = {
 		if(_currPanBounds) {
 			_panOffset.x = _currPanBounds.center.x;
 			_panOffset.y = _currPanBounds.center.y;
-			_applyCurrentZoomPan();
+			_applyCurrentZoomPan( true );
 		}
 		
 		_shout('resize');
@@ -31468,7 +31569,7 @@ var publicMethods = {
 				updateFn(now);
 			}
 
-			_applyCurrentZoomPan();
+			_applyCurrentZoomPan( now === 1 );
 		};
 
 		if(speed) {
@@ -31910,12 +32011,19 @@ var _gestureStartTime,
 		if(_isDragging) {
 			var touchesList = _getTouchPoints(e);
 			if(!_direction && !_moved && !_isZooming) {
-				var diff = Math.abs(touchesList[0].x - _currPoint.x) - Math.abs(touchesList[0].y - _currPoint.y);
-				// check the direction of movement
-				if(Math.abs(diff) >= DIRECTION_CHECK_OFFSET) {
-					_direction = diff > 0 ? 'h' : 'v';
-					_currentPoints = touchesList;
+
+				if(_mainScrollPos.x !== _slideSize.x * _currPositionIndex) {
+					// if main scroll position is shifted – direction is always horizontal
+					_direction = 'h';
+				} else {
+					var diff = Math.abs(touchesList[0].x - _currPoint.x) - Math.abs(touchesList[0].y - _currPoint.y);
+					// check the direction of movement
+					if(Math.abs(diff) >= DIRECTION_CHECK_OFFSET) {
+						_direction = diff > 0 ? 'h' : 'v';
+						_currentPoints = touchesList;
+					}
 				}
+				
 			} else {
 				_currentPoints = touchesList;
 			}
@@ -32054,7 +32162,6 @@ var _gestureStartTime,
 
 			if(_direction === 'v' && _options.closeOnVerticalDrag) {
 				if(!_canPan()) {
-					
 					_currPanDist.y += delta.y;
 					_panOffset.y += delta.y;
 
@@ -32554,13 +32661,11 @@ var _gestureStartTime,
 
 		if(_opacityChanged) {
 			onUpdate = function(now) {
-
 				_applyBgOpacity(  (destOpacity - initialOpacity) * now + initialOpacity );
-
 			};
 		}
 
-		self.zoomTo(destZoomLevel, 0, 300,  framework.easing.cubic.out, onUpdate);
+		self.zoomTo(destZoomLevel, 0, 200,  framework.easing.cubic.out, onUpdate);
 		return true;
 	};
 
@@ -32953,38 +33058,20 @@ var _getItemAt,
 			return;
 		}
 
-		var animate,
-			isSwiping = self.isDragging() && !self.isZooming(),
-			slideMightBeVisible = index === _currentItemIndex || self.isMainScrollAnimating() || isSwiping;
-
-		// fade in loaded image only when current holder is active, or might be visible
-		if(!preventAnimation && (_likelyTouchDevice || _options.alwaysFadeIn) && slideMightBeVisible) {
-			animate = true;
-		}
-
 		if(img) {
-			if(animate) {
-				img.style.opacity = 0;
-			}
 
 			item.imageAppended = true;
-			_setImageSize(img, item.w, item.h);
+			_setImageSize(item, img);
 			
 			baseDiv.appendChild(img);
 
-			if(animate) {
+			if(keepPlaceholder) {
 				setTimeout(function() {
-					img.style.opacity = 1;
-					if(keepPlaceholder) {
-						setTimeout(function() {
-							// hide image placeholder "behind"
-							if(item && item.loaded && item.placeholder) {
-								item.placeholder.style.display = 'none';
-								item.placeholder = null;
-							}
-						}, 500);
+					if(item && item.loaded && item.placeholder) {
+						item.placeholder.style.display = 'none';
+						item.placeholder = null;
 					}
-				}, 50);
+				}, 500);
 			}
 		}
 	},
@@ -33029,7 +33116,23 @@ var _getItemAt,
 			
 		}
 	},
-	_setImageSize = function(img, w, h) {
+	_setImageSize = function(item, img, maxRes) {
+		if(!item.src) {
+			return;
+		}
+
+		if(!img) {
+			img = item.container.lastChild;
+		}
+
+		var w = maxRes ? item.w : Math.round(item.w * item.fitRatio),
+			h = maxRes ? item.h : Math.round(item.h * item.fitRatio);
+		
+		if(item.placeholder && !item.loaded) {
+			item.placeholder.style.width = w + 'px';
+			item.placeholder.style.height = h + 'px';
+		}
+
 		img.style.width = w + 'px';
 		img.style.height = h + 'px';
 	},
@@ -33041,7 +33144,7 @@ var _getItemAt,
 			for(var i = 0; i < _imagesToAppendPool.length; i++) {
 				poolItem = _imagesToAppendPool[i];
 				if( poolItem.holder.index === poolItem.index ) {
-					_appendImage(poolItem.index, poolItem.item, poolItem.baseDiv, poolItem.img);
+					_appendImage(poolItem.index, poolItem.item, poolItem.baseDiv, poolItem.img, false, poolItem.clearPlaceholder);
 				}
 			}
 			_imagesToAppendPool = [];
@@ -33196,6 +33299,8 @@ _registerModule('Controller', {
 			}
 
 			_checkForError(item);
+
+			_calculateItemSize(item, _viewportSize);
 			
 			if(item.src && !item.loadError && !item.loaded) {
 
@@ -33204,14 +33309,6 @@ _registerModule('Controller', {
 					// gallery closed before image finished loading
 					if(!_isOpen) {
 						return;
-					}
-
-					// Apply hw-acceleration only after image is loaded.
-					// This is webkit progressive image loading bugfix.
-					// https://bugs.webkit.org/show_bug.cgi?id=108630
-					// https://code.google.com/p/chromium/issues/detail?id=404547
-					if(item.img) {
-						item.img.style.webkitBackfaceVisibility = 'hidden';
 					}
 
 					// check if holder hasn't changed while image was loading
@@ -33234,10 +33331,11 @@ _registerModule('Controller', {
 									baseDiv:baseDiv,
 									img:item.img,
 									index:index,
-									holder:holder
+									holder:holder,
+									clearPlaceholder:true
 								});
 							} else {
-								_appendImage(index, item, baseDiv, item.img, _mainScrollAnimating || _initialZoomRunning);
+								_appendImage(index, item, baseDiv, item.img, _mainScrollAnimating || _initialZoomRunning, true);
 							}
 						} else {
 							// remove preloader & mini-img
@@ -33264,7 +33362,7 @@ _registerModule('Controller', {
 						placeholder.src = item.msrc;
 					}
 					
-					_setImageSize(placeholder, item.w, item.h);
+					_setImageSize(item, placeholder);
 
 					baseDiv.appendChild(placeholder);
 					item.placeholder = placeholder;
@@ -33297,14 +33395,12 @@ _registerModule('Controller', {
 			} else if(item.src && !item.loadError) {
 				// image object is created every time, due to bugs of image loading & delay when switching images
 				img = framework.createEl('pswp__img', 'img');
-				img.style.webkitBackfaceVisibility = 'hidden';
 				img.style.opacity = 1;
 				img.src = item.src;
-				_setImageSize(img, item.w, item.h);
+				_setImageSize(item, img);
 				_appendImage(index, item, baseDiv, img, true);
 			}
 			
-			_calculateItemSize(item, _viewportSize);
 
 			if(!_initialContentSet && index === _currentItemIndex) {
 				_currZoomElementStyle = baseDiv.style;
@@ -33507,9 +33603,9 @@ _registerModule('DesktopZoom', {
 			if(_currZoomLevel <= self.currItem.fitRatio) {
 				if( _options.modal ) {
 
-					if ( !_options.closeOnScroll ) {
+					if (!_options.closeOnScroll || _numAnimations || _isDragging) {
 						e.preventDefault();
-					} else if( _transformKey && Math.abs(e.deltaY) > 2 ) {
+					} else if(_transformKey && Math.abs(e.deltaY) > 2) {
 						// close PhotoSwipe
 						// if browser supports transforms & scroll changed enough
 						_closedByScroll = true;
@@ -33876,7 +33972,7 @@ _registerModule('History', {
 	framework.extend(self, publicMethods); };
 	return PhotoSwipe;
 });
-/*! PhotoSwipe Default UI - 4.0.8 - 2015-05-21
+/*! PhotoSwipe Default UI - 4.1.0 - 2015-07-11
 * http://photoswipe.com
 * Copyright (c) 2015 Dmitry Semenov; */
 /**
@@ -35207,7 +35303,7 @@ define('tpl',['text', 'underscore'], function (text, _) {
 define('tpl!photoswipe-template', [],function () { return function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<!-- Root element of PhotoSwipe. Must have class pswp. -->\n<div id="photoswipe-template" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">\n\n    <!-- Background of PhotoSwipe. \n         It\'s a separate element as animating opacity is faster than rgba(). -->\n    <div class="pswp__bg"></div>\n\n    <!-- Slides wrapper with overflow:hidden. -->\n    <div class="pswp__scroll-wrap">\n\n        <!-- Container that holds slides. \n            PhotoSwipe keeps only 3 of them in the DOM to save memory.\n            Don\'t modify these 3 pswp__item elements, data is added later on. -->\n        <div class="pswp__container">\n            <div class="pswp__item"></div>\n            <div class="pswp__item"></div>\n            <div class="pswp__item"></div>\n        </div>\n\n        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->\n        <div class="pswp__ui pswp__ui--hidden">\n\n            <div class="pswp__top-bar">\n\n                <!--  Controls are self-explanatory. Order can be changed. -->\n\n                <div class="pswp__counter"></div>\n\n                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>\n\n                <button class="pswp__button pswp__button--share" title="Share"></button>\n\n                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>\n\n                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>\n\n                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->\n                <!-- element will get class pswp__preloader__active when preloader is running -->\n                <div class="pswp__preloader">\n                    <div class="pswp__preloader__icn">\n                      <div class="pswp__preloader__cut">\n                        <div class="pswp__preloader__donut"></div>\n                      </div>\n                    </div>\n                </div>\n            </div>\n\n            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">\n                <div class="pswp__share-tooltip"></div> \n            </div>\n\n            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">\n            </button>\n\n            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">\n            </button>\n\n            <div class="pswp__caption">\n                <div class="pswp__caption__center"></div>\n            </div>\n        </div>\n    </div>\n</div>\n';
+__p+='<!-- Root element of PhotoSwipe. Must have class pswp. -->\n<div id="photoswipe-template" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">\n\n    <!-- Background of PhotoSwipe. \n         It\'s a separate element as animating opacity is faster than rgba(). -->\n    <div class="pswp__bg"></div>\n\n    <!-- Slides wrapper with overflow:hidden. -->\n    <div class="pswp__scroll-wrap">\n\n        <!-- Container that holds slides. \n            PhotoSwipe keeps only 3 of them in the DOM to save memory.\n            Don\'t modify these 3 pswp__item elements, data is added later on. -->\n        <div class="pswp__container">\n            <div class="pswp__item"></div>\n            <div class="pswp__item"></div>\n            <div class="pswp__item"></div>\n        </div>\n\n        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->\n        <div class="pswp__ui pswp__ui--hidden">\n\n            <div class="pswp__top-bar">\n\n                <!--  Controls are self-explanatory. Order can be changed. -->\n                <div class="pswp__counter"></div>\n\n                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>\n                <button class="pswp__button pswp__button--share" title="Share"></button>\n                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>\n                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>\n\n                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->\n                <!-- element will get class pswp__preloader__active when preloader is running -->\n                <div class="pswp__preloader">\n                    <div class="pswp__preloader__icn">\n                      <div class="pswp__preloader__cut">\n                        <div class="pswp__preloader__donut"></div>\n                      </div>\n                    </div>\n                </div>\n            </div>\n\n            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">\n                <div class="pswp__share-tooltip"></div> \n            </div>\n\n            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">\n            </button>\n\n            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">\n            </button>\n\n            <div class="pswp__caption">\n                <div class="pswp__caption__center"></div>\n            </div>\n        </div>\n    </div>\n</div>\n';
 }
 return __p;
 }; });
@@ -37139,8 +37235,9 @@ define('pat-image-crop',[
 ;
 define('pat-legend',[
     "jquery",
+    "jquery.browser",
     "pat-registry"
-], function($, registry) {
+], function($, dummy, registry) {
     var legend = {
         name: "legend",
         trigger: "legend",
@@ -40910,14 +41007,19 @@ define('pat-stacks',[
             options=parser.parse($container, options);
             $container.data("pat-stacks", options);
             $sheets=$container.find(options.selector);
-            if ($sheets.length<2) {
+
+            if ($sheets.length < 2) {
                 log.warn("Stacks pattern: must have more than one sheet.", $container[0]);
                 return;
             }
-
-            $visible=[];
-            if (selected)
-                $visible=$sheets.filter("#"+selected);
+            $visible = [];
+            if (selected) {
+                try {
+                    $visible = $sheets.filter("#"+selected);
+                } catch (e) {
+                    selected = undefined;
+                }
+            }
             if (!$visible.length) {
                 $visible=$sheets.first();
                 selected=$visible[0].id;
@@ -43212,6 +43314,11 @@ define('pat-validation',[
             this.$inputs.on('change.pat-validation', function (ev) { this.validateElement(ev.target); }.bind(this));
             this.$el.on('submit.pat-validation', this.validateForm.bind(this));
             this.$el.on('pat-update.pat-validation', this.onPatternUpdate.bind(this));
+            this.$el.on("click.pat-validation", ".close-panel", function (ev) {
+                if (!$(ev.target).hasClass('validate-ignore')) {
+                    this.validateForm(ev);
+                }
+            }.bind(this));
         },
 
         getFieldType: function (input) {
@@ -43446,9 +43553,9 @@ define('pat-validation',[
         findErrorMessages: function(el) {
             var $el = $(el),
                 selector = "em.validation.message",
-                $messages = $el.siblings(selector);
+                $messages = $el.next(selector);
             if ($el.is("[type=radio],[type=checkbox]")) {
-                var $fieldset = $el.closest("fieldset.checklist");
+                var $fieldset = $el.closest("fieldset.pat-checklist");
                 if ($fieldset.length)
                     $messages=$fieldset.find(selector);
             }
@@ -43460,7 +43567,7 @@ define('pat-validation',[
             this.errors = this.errors - $errors.length;
             $errors.remove();
             if (this.errors < 1 && this.options.disableSelector) {
-                $(this.options.disableSelector).removeProp('disabled').removeClass('disabled');
+                $(this.options.disableSelector).prop('disabled', false).removeClass('disabled');
             }
         },
 
@@ -43471,7 +43578,7 @@ define('pat-validation',[
                 $message = $("<em/>", {"class": "validation warning message"}),
                 $fieldset;
             if ($el.is("[type=radio],[type=checkbox]")) {
-                $fieldset = $el.closest("fieldset.checklist");
+                $fieldset = $el.closest("fieldset.pat-checklist");
                 if ($fieldset.length) {
                     $position = $fieldset;
                     strategy="append";

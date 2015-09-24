@@ -17,7 +17,7 @@
 
     <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${context/absolute_url}">
 
-	<fieldset class="custom-risks pat-clone" data-pat-clone="template: #risk-template" tal:define="risks view/get_custom_risks">
+	<fieldset class="custom-risks pat-clone" data-pat-clone="template: #risk-template; remove-behaviour: none" tal:define="risks view/get_custom_risks">
 
         <fieldset class="risk-set clone" tal:repeat="item risks">
             <h2><tal:translate i18n:translate="Risk">Risk</tal:translate> ${repeat/item/number} </h2>

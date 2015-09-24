@@ -14,6 +14,7 @@ from five import grok
 from osha.oira import _
 from z3c.saconfig import Session
 from zope.component import getMultiAdapter
+from zope.i18n import translate
 from .interfaces import IOSHAIdentificationPhaseSkinLayer
 from .interfaces import IOSHAActionPlanPhaseSkinLayer
 
@@ -220,6 +221,11 @@ class OSHAActionPlanView(risk.ActionPlanView):
         self.has_images = number_images > 0
         self.image_class = IMAGE_CLASS[number_images]
         self.risk_number = self.context.number
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        self.delete_confirmation = translate(_(
+            u"Are you sure you want to delete this measure? This action can "
+            u"not be reverted."),
+            target_language=lang)
         super(risk.ActionPlanView, self).update()
 
     def extract_plans_from_request(self):

@@ -56,7 +56,7 @@
             <span class="pat-depends" data-pat-depends="pq${question/id}.multiple=yes">${question/label_multiple_occurances}</span>
           </legend>
 
-            <fieldset class="form-iteration pat-clone" data-pat-clone="template: #clone-template-${question/id}; trigger-element: #clone-set-${repeat/question/number}">
+            <fieldset class="form-iteration pat-clone" data-pat-clone="template: #clone-template-${question/id}; trigger-element: #clone-set-${repeat/question/number}; remove-behaviour: none">
                 <label id="clone-template-${question/id}" hidden="hidden">
                     <input class="pat-depends" autofocus="autofocus" placeholder="${question/label_single_occurance} #{1}" data-pat-depends="condition: pq${question/id}.multiple=yes; action: both;"
                            size="40" type="text" name="${question/id}:utf8:utext:list" />&nbsp;

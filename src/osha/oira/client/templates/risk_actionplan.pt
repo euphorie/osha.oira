@@ -53,7 +53,7 @@
 </article>
 
 
-<div class="measures pat-clone" data-pat-clone="template: #measure-template; remove-confirmation: Are you sure you want to remove this measure?" id="ActionPlanItemForm">
+<div class="measures pat-clone" data-pat-clone="template: #measure-template; remove-confirmation: ${view/delete_confirmation}" id="ActionPlanItemForm">
     <div class="measure clone pat-collapsible"
          tal:define="measures view/solutions|python:[]"
         tal:repeat="actionplan action_plans">

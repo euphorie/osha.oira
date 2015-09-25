@@ -44,7 +44,7 @@
     <metal:styleslot define-slot="style_slot" />
 </head>
 
-<body class="osh-on test-session osc-on osc-s-on focus-sidebar ${sidebar_default}" i18n:domain="euphorie" tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
+<body class="osh-on test-session osc-on osc-s-off focus-sidebar ${sidebar_default}" i18n:domain="euphorie" tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
     <div id="main">
         <header id="toolbar">
             <a href="#osc" class="icon-menu pat-toggle"

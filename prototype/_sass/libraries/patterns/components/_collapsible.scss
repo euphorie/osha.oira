@@ -3,12 +3,19 @@
 
 	 > *:first-child:before {
 		content: "▼";
+		text-align: center;
 		width: 1.5em;
 		display: inline-block;
+
+		-moz-transition: all 0.5s;
+		-webkit-transition: all 0.5s;
+		transition: all 0.5s;
 	}
 
 	&.closed > *:first-child:before {
-		content: "▶";
+		-moz-transform: rotate(-90deg);
+		-webkit-transform: rotate(-90deg);
+		transform: rotate(-90deg);
 	}
 
 	 > .panel-content {

@@ -12,24 +12,35 @@
 		// padding: 0;
 		float: left;
 
+		@include screen-size(small) {
+			height: auto !important;
+		}
+
 		img {
-			opacity: 0;
+			@include screen-size(large) {
+				opacity: 0;
+			}
+			@include screen-size(medium) {
+				opacity: 0;
+			}
 		}
 	}
+	
+	@include screen-size(large) {
+		&.image-count-1 {
+			float: left;
+			width: 40%;
+			margin-right: 1em;
+			margin-bottom: 0;
 
-	&.image-count-1 {
-		float: left;
-		width: 40%;
-		margin-right: 1em;
-		margin-bottom: 0;
+			a {
+				width: 100%;
+			}
 
-		a {
-			width: 100%;
-		}
-
-		figure {
-			img {
-				opacity: 1;
+			figure {
+				img {
+					opacity: 1;
+				}
 			}
 		}
 	}
@@ -48,7 +59,12 @@
 
 		a {
 			padding: 0;
-			// float: none;
+
+			@include screen-size(small) {
+				background: none !important;
+				padding: 0 0.95em 1em;
+				float: left !important;
+			}
 		}
 	}
 }

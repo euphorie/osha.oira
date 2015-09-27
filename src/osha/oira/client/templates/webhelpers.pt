@@ -165,7 +165,7 @@
     <!-- The class 'three' is three in case of four images, 'four' in case of three images, 'six' in case of two images and 'twelve' in case of one image. -->
 
     <!-- Notice that each image has an image caption in the title tag. -->
-        <a title="${risk/caption|nothing}"
+        <a title="${risk/caption|nothing}" tal:on-error="nothing"
               class="${view/image_class} columns"
               style="background-image: url(${large/url|nothing})"
               tal:define="thumb python:images.scale('image', width=400, height=600, direction='thumbnail');
@@ -173,7 +173,7 @@
               href="${large/url|nothing}"
               tal:condition="thumb"><img  alt="" src="${thumb/url}" />
         </a>
-        <a title="${risk/caption2|nothing}"
+        <a title="${risk/caption2|nothing}" tal:on-error="nothing"
               class="${view/image_class} columns"
               style="background-image: url(${large/url|nothing})"
               tal:define="thumb python:images.scale('image2', width=400, height=600, direction='thumbnail');
@@ -181,7 +181,7 @@
               href="${large/url|nothing}"
               tal:condition="thumb"><img alt="" src="${thumb/url}" />
         </a>
-        <a title="${risk/caption3|nothing}"
+        <a title="${risk/caption3|nothing}" tal:on-error="nothing"
               class="${view/image_class} columns"
               style="background-image: url(${large/url|nothing})"
               tal:define="thumb python:images.scale('image3', width=400, height=600, direction='thumbnail');
@@ -189,7 +189,7 @@
               href="${large/url|nothing}"
               tal:condition="thumb"><img alt="" src="${thumb/url}" />
         </a>
-        <a title="${risk/caption4|nothing}"
+        <a title="${risk/caption4|nothing}" tal:on-error="nothing"
               class="${view/image_class} columns"
               style="background-image: url(${large/url|nothing})"
               tal:define="thumb python:images.scale('image4', width=400, height=600, direction='thumbnail');
@@ -199,7 +199,7 @@
         </a>
       </tal:get>
     </div>
-    <nav class="pat-gallery" tal:condition="python:view.number_images == 1">
+    <nav class="pat-gallery" tal:condition="python:view.number_images == 1" tal:on-error="nothing">
       <a href="${large/url|nothing}"
          tal:define="images risk/@@images;
                      thumb python:images.scale('image', width=400, height=600, direction='thumbnail');
@@ -243,7 +243,7 @@
 
       <!-- Notice that each image has an image caption in the title tag. -->
       <tal:many condition="python:view.number_images > 1">
-        <div class="${view/image_class} columns"
+        <div class="${view/image_class} columns" tal:on-error="nothing"
           tal:define="thumb python:images.scale('image', width=590, height=800, direction='thumbnail');
                       large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
           tal:condition="large">
@@ -252,7 +252,7 @@
                 href="${large/url|nothing}"><img alt="" src="${thumb/url}" />
           </a>
         </div>
-        <div class="${view/image_class} columns"
+        <div class="${view/image_class} columns" tal:on-error="nothing"
           tal:define="thumb python:images.scale('image2', width=590, height=800, direction='thumbnail');
                       large python:images.scale('image2', width=590, height=1900, direction='thumbnail')"
           tal:condition="large">
@@ -261,7 +261,7 @@
                 href="${large/url|nothing}"><img alt="" src="${thumb/url}" />
           </a>
         </div>
-        <div class="${view/image_class} columns"
+        <div class="${view/image_class} columns" tal:on-error="nothing"
           tal:define="thumb python:images.scale('image3', width=590, height=800, direction='thumbnail');
                       large python:images.scale('image3', width=590, height=1900, direction='thumbnail')"
           tal:condition="large">
@@ -270,7 +270,7 @@
                 href="${large/url|nothing}"><img alt="" src="${thumb/url}" />
           </a>
         </div>
-        <div class="${view/image_class} columns"
+        <div class="${view/image_class} columns" tal:on-error="nothing"
           tal:define="thumb python:images.scale('image4', width=590, height=800, direction='thumbnail');
                       large python:images.scale('image4', width=590, height=1900, direction='thumbnail')"
           tal:condition="large">
@@ -280,7 +280,7 @@
           </a>
         </div>
     </tal:many>
-    <tal:single condition="python:view.number_images == 1">
+    <tal:single condition="python:view.number_images == 1" tal:on-error="nothing">
           <figure>
             <a title="${risk/caption|nothing}"
                   tal:define="thumb python:images.scale('image', width=400, height=600, direction='thumbnail');

@@ -16,7 +16,7 @@
     <h1>${module/title}</h1>
     <tal:block replace="tile:statusmessages"/>
 
-        <figure tal:define="images module/@@images; large python:images.scale('image', width=590, height=1900, direction='thumbnail')"
+        <figure tal:define="images module/@@images; large python:images.scale('image', width=590, height=1900, direction='thumbnail')" tal:on-error="nothing"
             tal:condition="large" title="${module/caption|nothing}">
             <img src="${large/url}" alt="" title="${module/caption|nothing}" />
               <figcaption tal:condition="module/caption|nothing">

@@ -28,7 +28,7 @@
 }
 </style>
       <div class="introduction">
-        <p i18n:translate="message_choose_country">Please choose a country of which you would like to view or copy a survey.</p>
+        <p i18n:translate="message_choose_country">Please choose a country of which you would like to view or copy an OiRA Tool.</p>
 
       </div>
       <div tal:define='countries python:view.countries.get("region")' tal:condition="python:countries" class="official">

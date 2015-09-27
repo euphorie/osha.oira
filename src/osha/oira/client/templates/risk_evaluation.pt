@@ -46,7 +46,7 @@
           </fieldset>
 
           <fieldset class="comprehensive radioList" tal:define="value context/effect">
-            <legend i18n:translate="header_risk_effect">What is the severity of the damage ?</legend>
+            <legend i18n:translate="header_risk_effect">What is the severity of the damage?</legend>
             <label><input type="radio" name="effect:int" value="1" checked="${python:'checked' if value==1 else None}"/>
               <tal:span i18n:translate="effect_injury_no_absence">Weak severity</tal:span></label>
             <label><input type="radio" name="effect:int" value="5" checked="${python:'checked' if value==5 else None}"/>

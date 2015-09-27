@@ -769,7 +769,7 @@ msgstr "Šim lielumam ir jābūt spēkā esošai e-pasta adresei."
 #. Default: This value must be a number.
 #: src/osha/oira/manual_translations.py:241
 msgid "error_validation_number"
-msgstr "Šim lielumam ir jābūt numuram."
+msgstr "Šim lielumam ir jābūt skaitlim."
 
 #. Default: This value must be a whole number.
 #: src/osha/oira/manual_translations.py:242
@@ -850,7 +850,7 @@ msgstr ""
 
 #: src/osha/oira/client/module.py:98
 msgid "No changes were made to your added risks."
-msgstr "Jūsu pievienotajiem riskiem nekādas izmaiņas neveica."
+msgstr "Jūsu pievienotajiem riskiem nekādas izmaiņas netika veiktas."
 
 #: src/osha/oira/client/module.py:105
 msgid "Your new added risks have been created."
@@ -1706,14 +1706,14 @@ msgstr ""
 #. Default: run a test session
 #: src/osha/oira/client/templates/login.pt:25
 msgid "label_tryout"
-msgstr "sākt"
+msgstr "sākt testa sesiju"
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
 #: src/osha/oira/client/templates/login_form.pt:49
 #: src/osha/oira/client/templates/new-session-test.pt:37
 msgid "label_register"
-msgstr ""
+msgstr "reģistrēties"
 
 #. Default: Want to try OiRA? You may ${tryout_link} or ${register_link} to
 #. start for real.
@@ -1930,7 +1930,7 @@ msgstr "Izmantojiet to, lai"
 #: src/osha/oira/client/templates/report_landing.pt:113
 #: src/osha/oira/client/templates/risks_overview.pt:146
 msgid "Pass information to the people concerned."
-msgstr "Nodot informāciju attiecīgajiem cilvēkiem."
+msgstr "Nodot informāciju iesaistītajiem cilvēkiem."
 
 #: src/osha/oira/client/templates/measures_overview.pt:61
 #: src/osha/oira/client/templates/report_landing.pt:114
@@ -2201,7 +2201,7 @@ msgstr "Pārskatu veidošana"
 #: src/osha/oira/client/templates/register.pt:21
 msgid "report_guest_register_intro"
 msgstr ""
-"Diemžēl šī ir izmēģinājuma versija un lejupielādes funkciju nevar izmantot. "
+"Diemžēl šī ir izmēģinājuma versija, un lejupielādes funkciju nevar izmantot. "
 "Reģistrējieties vienā acumirklī un iegūstiet piekļuvi turpmāk minētajām "
 "priekšrocībām."
 
@@ -2221,18 +2221,18 @@ msgstr "Jūs varat saglabāt savu darbu tiešsaistē."
 #: src/osha/oira/client/templates/register.pt:25
 #: src/osha/oira/client/templates/tooltips.pt:28
 msgid "label_register_benefit_3"
-msgstr "Jūs varat lejupielādēt pilnu ziņojumu un rīcības plānu."
+msgstr "Jūs varat lejupielādēt pilnu darba vides riska novērtējumu un pasākumu plānu."
 
 #. Default: Example of a full report in rich text format (.rtf)
 #: src/osha/oira/client/templates/register.pt:33
 msgid "header_example_report_rft"
-msgstr "Pilna ziņojuma piemērs bagātinātā teksta formātā (.rtf)"
+msgstr "Pilna novērtējuma  piemērs bagātinātā teksta formātā (.rtf)"
 
 #. Default: Example of an action plan in Office Open XML Workbook format
 #. (.xlsx)
 #: src/osha/oira/client/templates/register.pt:41
 msgid "header_example_report_xlsx"
-msgstr "Rīcības plāna piemērs Office Open XML darbgrāmatas formātā (.xlsx)"
+msgstr "Rīcības plāna piemērs Office Open XML formātā (.xlsx)"
 
 #. Default: Example of a risk overview report in PDF format
 #: src/osha/oira/client/templates/register.pt:51
@@ -2271,8 +2271,7 @@ msgstr ""
 #: src/osha/oira/client/templates/reminder.pt:23
 msgid "description_password_reminder"
 msgstr ""
-"Lūdzu, ievadiet savu e-pasta adresi. Jums nosūtīs informāciju par jūsu "
-"pieteikumvārdu."
+"Lūdzu, ievadiet savu e-pasta adresi. Jums nosūtīs jūsu reģistrācijas informāciju."
 
 #: src/osha/oira/client/templates/rename-session.pt:16
 msgid "Change name of session"
@@ -2625,7 +2624,7 @@ msgstr "Formāts: Excel (.xls)"
 msgid ""
 "Contains: main elements to effectively manage the risks at your workplace."
 msgstr ""
-"Satur: galvenos elementus, lai efektīvi pārvaldītu riskus jūsu darbavietā."
+"Satur: galvenos elementus, lai efektīvi novērstu darba vides riskus."
 
 #: src/osha/oira/client/templates/report_landing.pt:71
 msgid "Manage"
@@ -2643,7 +2642,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:80
 msgid "Download the risks overview"
-msgstr "Lejupielādēt risku pārskatu"
+msgstr "Lejupielādēt darba vides riska novērtējumu"
 
 #: src/osha/oira/client/templates/report_landing.pt:86
 #: src/osha/oira/client/templates/report_landing.pt:107
@@ -2652,12 +2651,12 @@ msgstr "Formāts: Pārvietojams dokumenta formāts (.pdf)"
 
 #: src/osha/oira/client/templates/report_landing.pt:87
 msgid "Contains: an overview of the risks identified"
-msgstr "Satur: noteikto risku pārskatu"
+msgstr "Satur: pārskatu par identificētajiem riskiem"
 
 #: src/osha/oira/client/templates/report_landing.pt:93
 #: src/osha/oira/client/templates/risks_overview.pt:147
 msgid "Monitor whether risks / measures are properly dealt with."
-msgstr "Uzraudzīt, vai riskus/pasākumus pareizi risina/veic."
+msgstr "Uzraudzīt, vai riskus precīzi novērš /pasākumus īsteno."
 
 #: src/osha/oira/client/templates/report_landing.pt:101
 msgid "Download the measures overview"
@@ -2955,9 +2954,7 @@ msgstr "Nav attiecināms"
 #: src/osha/oira/client/templates/risk_identification.pt:36
 msgid "help_calculated_evaluation"
 msgstr ""
-"Lūdzu, atbildiet uz turpmāk ietvertajiem jautājumiem. Balstoties uz jūsu "
-"atbildēm, sistēma aprēķinās riska prioritāti. Jūs vēlāk varēsiet prioritāti "
-"grozīt."
+"Lūdzu, atbildiet uz zemāk norādītajiem jautājumiem. Balstoties uz jūsu atbildēm, sistēma aprēķinās riska pakāpi. Jūs vēlāk varēsiet to mainīt."
 
 #. Default: The risk evaluation has been automatically done by the tool. You
 #. will be able to change the priority for this risk – if you consider it
@@ -2965,8 +2962,7 @@ msgstr ""
 #: src/osha/oira/client/templates/risk_identification.pt:143
 msgid "description_automatic_evaluation"
 msgstr ""
-"Riska novērtējumu automātiski ir veicis rīks. Jūs varēsiet mainīt šim riskam "
-"prioritāti (ja jūs to uzskatīsiet par vajadzīgu) rīcības plānā."
+"Riska novērtējumu automātiski ir veicis rīks. Jūs varēsiet mainīt šim riska pakāpi rīcības plānā (ja jūs to uzskatīsiet par vajadzīgu)."
 
 #: src/osha/oira/client/templates/risks_overview.pt:143
 msgid "Overview of risks"
@@ -3055,7 +3051,7 @@ msgstr "sāciet jaunu sesiju"
 #: src/osha/oira/client/templates/sessions.pt:20
 msgid "info_select_session"
 msgstr ""
-"Izvēlēties iepriekšēju sesiju, lai pabeigtu vai pārskatītu, vai "
+"Izvēlēties iepriekšēju sesiju, lai to pabeigtu vai pārskatītu, vai "
 "${start_session}."
 
 #. Default: saved on ${date}
@@ -3151,8 +3147,8 @@ msgstr "vai..."
 #: src/osha/oira/client/templates/tooltips.pt:3
 msgid "guest_login_warning"
 msgstr ""
-"Pašlaik jūs novērtējat OiRA kā vieslietotājs. Jūs nevarēsiet saglabāt darbu "
-"vai lejupielādēt kādus ziņojumus. Lai saglabātu savu darbu, lūdzu, "
+"Pašlaik Jūs novērtējat OiRA kā viesis. Jūs nevarēsiet saglabāt darbu "
+"vai lejupielādēt kādus dokumentus. Lai saglabātu savu darbu, lūdzu, "
 "piesakieties vai reģistrējieties, noklikšķinot uz \"Pieteikties\" saites "
 "lapas augšā labajā pusē."
 
@@ -3166,20 +3162,20 @@ msgstr "Svarīgi"
 #: src/osha/oira/client/templates/tooltips.pt:8
 msgid "list_test_session_limitations1"
 msgstr ""
-"${important} Testa sesijā jūs nevarat saglabāt savu darbu. Ja "
+"${important} Testa sesijā Jūs nevarat saglabāt savu darbu. Ja "
 "nereģistrēsieties, viss paveiktais pazudīs."
 
 #. Default: You will not be able to print or download reports.
 #: src/osha/oira/client/templates/tooltips.pt:9
 msgid "list_test_session_limitations2"
-msgstr "Jūs nevarēsiet izdrukāt vai lejupielādēt ziņojumus."
+msgstr "Jūs nevarēsiet izdrukāt vai lejupielādēt dokumentus."
 
 #. Default: During a test session you will have the possibility at any time to
 #. register by clicking on the "Register" link at the top.
 #: src/osha/oira/client/templates/tooltips.pt:10
 msgid "list_test_session_limitations3"
 msgstr ""
-"Testa sesijas laikā jums būs iespēja jebkurā laikā reģistrēties, "
+"Testa sesijas laikā Jums būs iespēja jebkurā laikā reģistrēties, "
 "noklikšķinot uz \"Pieteikties\" saites augšā."
 
 #. Default: Discover how easy it is to create a risk assessment with OiRA.
@@ -3192,12 +3188,12 @@ msgstr "Atklājiet, cik viegli ir izveidot riska novērtējumu ar OiRA."
 #: src/osha/oira/client/templates/tooltips.pt:17
 msgid "list_test_session_benefits2"
 msgstr ""
-"Nosakiet potenciālos riskus savā uzņēmējdarbībā un pasākumus to mazināšanai."
+"Nosakiet iespējamos darba vides riskus savā uzņēmumā un pasākumus to mazināšanai."
 
 #. Default: Use it for vocational training.
 #: src/osha/oira/client/templates/tooltips.pt:18
 msgid "list_test_session_benefits3"
-msgstr "Izmantojiet to arodapmācībai."
+msgstr "Izmantojiet to apmācībai."
 
 #. Default: You can register in one single step just by entering a valid email
 #. address.
@@ -3210,7 +3206,7 @@ msgstr ""
 #. Default: Main benefits of having an account:
 #: src/osha/oira/client/templates/tooltips.pt:24
 msgid "info_register2"
-msgstr "Konta galvenās priekšrocības"
+msgstr "Galvenās priekšrocības, ja izveidosiet savu kontu"
 
 #. Default: Menu toggle
 #: src/osha/oira/client/templates/tooltips.pt:34
@@ -3224,10 +3220,10 @@ msgstr "Izvēlnes poga"
 #: src/osha/oira/client/templates/tooltips.pt:37
 msgid "info_osh_hamburger"
 msgstr ""
-"Izvēlnes poga ļauj jums paslēpt un parādīt \"izslīdošo\" izvēlni, līdz ar to "
-"tā parādās tikai tad, kad jums to vajag. Paslēpiet izvēlni, kad jūs "
-"koncentrējaties uz to, lai aizpildītu rīku, vai parādiet to, kad jūs "
-"klikšķināt starp dažādām lietojumprogrammas sadaļām."
+"Izvēlnes poga ļauj Jums paslēpt un parādīt \"izslīdošo\" izvēlni, līdz ar to "
+"tā parādās tikai tad, kad Jums to vajag. Paslēpiet izvēlni, kad Jūs "
+"koncentrējaties uz to, lai aizpildītu rīku, vai parādiet to, kad Jūs "
+"klikšķināt starp dažādām rīka sadaļām."
 
 #. Default: Tip
 #: src/osha/oira/client/templates/tooltips.pt:40
@@ -3278,10 +3274,7 @@ msgstr "Sesijas izvēlne"
 #: src/osha/oira/client/templates/tooltips.pt:65
 msgid "info_osh_session_menu"
 msgstr ""
-"No šīs izvēlnes jūs varat sākt OiRA rīka jaunu sesiju vai turpināt "
-"iepriekšēju sesiju, lai pabeigtu pie tās strādāt. Ja jums vēl nav OiRA "
-"lietojumprogrammas konts, jūs varat sākt testa sesiju, lai nekavējoties to "
-"izmēģinātu."
+"No šīs izvēlnes Jūs varat sākt OiRA rīka jaunu sesiju vai turpināt iepriekšēju sesiju, lai pabeigtu pie tās strādāt. Ja Jums vēl nav OiRA lietotāja konts, Jūs varat sākt testa sesiju, lai nekavējoties to izmēģinātu."
 
 #. Default: OiRA Tool was updated
 #: src/osha/oira/client/templates/update.pt:15
@@ -3647,8 +3640,7 @@ msgstr "Ārējās tīmekļa vietnes logotips"
 #: src/osha/oira/content/survey.py:69
 msgid "label_enable_custom_evaluation_descriptions"
 msgstr ""
-"Vai tie kritēriji, kas piemēroti, lai novērtētu riskus, ir konkrēti šim "
-"rīkam? (Ja nē, piemēros vispārējos kritēriju aprakstus)."
+"Vai riska novērtēšanai piemērotie kritēriji ir specifiski šim rīkam? (Ja nē, tiks piemēroti vispārējo kritēriju apraksti)."
 
 #. Default: Tick this option if you would like to define your own descriptions
 #. for the criteria of the evaluation algorithm. The user will see them as
@@ -3656,9 +3648,7 @@ msgstr ""
 #: src/osha/oira/content/survey.py:73
 msgid "help_enable_custom_evaluation_descriptions"
 msgstr ""
-"Atzīmējiet šo izvēli, ja jūs vēlētos noteikt savus aprakstus novērtēšanas "
-"algoritma kritērijiem. Lietotājs redzēs tos kā norādes, atbildot uz "
-"jautājumiem, lai aprēķinātu riska prioritāti."
+"Atzīmējiet šo izvēli, ja Jūs vēlēties izmantot savus novērtēšanas algoritma kritēriju aprakstus. Lietotājs redzēs tos kā norādes, atbildot uz jautājumiem, lai aprēķinātu riska pakāpi."
 
 #: src/osha/oira/content/survey.py:86
 msgid "Probability"
@@ -4303,7 +4293,7 @@ msgstr "CC licence"
 #: src/osha/oira/upgrade/upgrade.py:190
 msgid "description_other_risks"
 msgstr ""
-"Gadījumā, ja esat noteicis(-usi) riskus, kuri nav iekļauti rīkā, varat tos "
+"Gadījumā, ja esat identificējis(-usi) riskus, kuri nav iekļauti rīkā, varat tos "
 "pievienot tagad:"
 
 #. Default: <p>Would you now like to add your own defined risks to this

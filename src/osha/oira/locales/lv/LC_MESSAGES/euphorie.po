@@ -60,12 +60,12 @@ msgstr ""
 #. Default: Measure
 #: src/osha/oira/manual_translations.py:16
 msgid "Solution"
-msgstr "Līdzeklis"
+msgstr "Pasākums"
 
 #. Default: Measure
 #: src/osha/oira/manual_translations.py:17
 msgid "title_common_solution"
-msgstr "Līdzeklis"
+msgstr "Pasākums"
 
 #. Default: A standard measure for a risk.
 #: src/osha/oira/manual_translations.py:18
@@ -84,7 +84,7 @@ msgstr "Konta dati"
 
 #: src/osha/oira/manual_translations.py:23
 msgid "Email address/account name"
-msgstr "E-pasta adrese/konta nosaukums"
+msgstr "E-pasta adrese / lietotājvārds"
 
 #: src/osha/oira/manual_translations.py:24 src/osha/oira/client/settings.py:36
 #: src/osha/oira/client/templates/user-menu.pt:19
@@ -101,7 +101,7 @@ msgid ""
 "Please bear in mind that by changing the email address, your login name will "
 "also change."
 msgstr ""
-"Lūdzu, ņemiet vērā: mainot e-pasta adresi, mainīsies arī jūsu pieteikumvārds."
+"Lūdzu, ņemiet vērā: mainot e-pasta adresi, mainīsies arī jūsu Jūsu lietotājvārds."
 
 #. Default: Password
 #: src/osha/oira/manual_translations.py:27
@@ -673,7 +673,7 @@ msgstr "Atvainojiet, ir radusies neparedzēta kļūda."
 #: src/osha/oira/client/templates/risk_actionplan.pt:64
 #: src/osha/oira/client/templates/risk_actionplan.pt:149
 msgid "label_remove_measure"
-msgstr "Dzçst ðo ziòu"
+msgstr "Dzēst šo pasākumu"
 
 #. Default: Add Measure
 #: src/osha/oira/manual_translations.py:215
@@ -968,13 +968,13 @@ msgstr "Šis ir ${priority_value}"
 #. Default: Measure
 #: src/osha/oira/client/report.py:433 src/osha/oira/client/report.py:458
 msgid "header_measure_single"
-msgstr "Līdzeklis"
+msgstr "Pasākums"
 
 #. Default: Measure ${index}
 #: src/osha/oira/client/report.py:436
 #: src/osha/oira/client/templates/report_actionplan.pt:99
 msgid "header_measure"
-msgstr "Līdzeklis ${index}"
+msgstr "Pasākums ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
 #: src/osha/oira/client/report.py:465
@@ -1019,14 +1019,14 @@ msgstr "Budžets"
 #: src/osha/oira/client/templates/risk_actionplan.pt:116
 #: src/osha/oira/client/templates/risk_actionplan.pt:192
 msgid "label_action_plan_start"
-msgstr "Plānošanas sākums"
+msgstr "Uzsākšanas datums"
 
 #. Default: Planning end
 #: src/osha/oira/client/report.py:475
 #: src/osha/oira/client/templates/risk_actionplan.pt:127
 #: src/osha/oira/client/templates/risk_actionplan.pt:199
 msgid "label_action_plan_end"
-msgstr "Plānošanas beigas"
+msgstr "Pabeigšanas datums"
 
 #. Default: Consultation of workers
 #: src/osha/oira/client/report.py:526
@@ -1059,7 +1059,7 @@ msgstr "Datums:"
 #. Default: OiRA Report: "${title}"
 #: src/osha/oira/client/report.py:606
 msgid "header_oira_report_download"
-msgstr "OiRA pārskats: \"${title}"
+msgstr "Darba vides riska novērtējums ar OiRA: \"${title}\""
 
 #. Default: Contents
 #: src/osha/oira/client/report.py:625
@@ -1082,7 +1082,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
-msgstr "Riski, kas ir identificēti, bet kuriem NAV rīcības plāna."
+msgstr "Riski, kas ir identificēti, bet kuru novēršanai NAV identificēti veicamie pasākumi"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
@@ -1148,7 +1148,7 @@ msgstr "Mainīt paroli"
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
-msgstr ""
+msgstr "Jūsu pievienotie riski"
 
 #. Default: By clicking on 'Delete account', your account will be permenantly
 #. deleted. This action is irreversable.
@@ -1706,7 +1706,7 @@ msgstr ""
 #. Default: run a test session
 #: src/osha/oira/client/templates/login.pt:25
 msgid "label_tryout"
-msgstr "palaidiet testa sesiju"
+msgstr "sākt"
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
@@ -1726,12 +1726,12 @@ msgstr ""
 #. Default: log in
 #: src/osha/oira/client/templates/login.pt:27
 msgid "log in"
-msgstr ""
+msgstr "ienāciet"
 
 #. Default: If you are a registered user, you can ${log_in} here.
 #: src/osha/oira/client/templates/login.pt:27
 msgid "label_login_here"
-msgstr ""
+msgstr "Ja Jūs esat reģistrēts lietoties, ${log_in} šeit."
 
 #. Default: Show more…
 #: src/osha/oira/client/templates/login.pt:34
@@ -1906,7 +1906,7 @@ msgstr ""
 #: src/osha/oira/content/templates/login.pt:24
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:31
 msgid "label_login"
-msgstr "Pieteikumvārds"
+msgstr "Ienākt"
 
 #: src/osha/oira/client/templates/measures_overview.pt:56
 msgid "Overview of measures"
@@ -1986,7 +1986,7 @@ msgstr "Dzēst risku"
 #. Default: Add risk
 #: src/osha/oira/client/templates/module_customization.pt:61
 msgid "label_add_risk"
-msgstr ""
+msgstr "Pievienot risku"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_customization.pt:62
@@ -2068,12 +2068,12 @@ msgstr ""
 #. Default: benefits
 #: src/osha/oira/client/templates/new-session-test.pt:34
 msgid "benefits"
-msgstr "priekšrocības"
+msgstr "priekšrocībām"
 
 #. Default: limitations
 #: src/osha/oira/client/templates/new-session-test.pt:34
 msgid "limitations"
-msgstr "ierobežojumi"
+msgstr "ierobežojumiem"
 
 #. Default: Read here about the ${benefits}${tooltip_benefits} and
 #. ${limitations}${tooltip_limitations} of a test session.
@@ -2673,13 +2673,13 @@ msgstr "Satur: īstenojamo pasākumu pārskatu."
 #: src/osha/oira/content/templates/solution_view.pt:12
 #: src/osha/oira/profiles/default/types/euphorie.solution.xml:5
 msgid "Measure"
-msgstr "Līdzeklis"
+msgstr "Pasākums"
 
 #. Default: Pre-fill
 #: src/osha/oira/client/templates/risk_actionplan.pt:63
 #: src/osha/oira/client/templates/risk_actionplan.pt:148
 msgid "label_prefill"
-msgstr "Aizpildīt iepriekš"
+msgstr "Tipveida pasākumi"
 
 #. Default: Select one or more of the known common measures provided.
 #: src/osha/oira/client/templates/risk_actionplan.pt:68
@@ -2712,14 +2712,8 @@ msgstr "Apraksts"
 #: src/osha/oira/client/templates/risk_actionplan.pt:226
 msgid "actionplan_measure_tooltip"
 msgstr ""
-"Aprakstiet: 1) savu vispārējo pieeju, lai risku novērstu vai samazinātu (ja "
-"tas nav novēršams); 2) specifiskās darbības, kas jāveic, lai īstenotu šo "
-"pieeju (lai samazinātu vai novērstu risku); 3) pieredzes līmeni, kas "
-"nepieciešams šī līdzekļa realizēšanai, piemēram, \"vispārīgu izpratni (nav "
-"nepieciešamas zināšanas par OSH)\", \"nav nepieciešamas specifiskas "
-"zināšanas par OSH, bet jābūt minimālām zināšanām par OSH vai saņemtai "
-"apmācībai un/vai konsultācijai, kas nodrošina ievadu OSH\" vai \"OSH eksperts"
-"\". Šeit varat arī aprakstīt jebkādas papildu prasības (ja jums tādas ir)."
+"Aprakstiet: 1) savu pasākumu, lai risku novērstu vai samazinātu (ja tas nav novēršams) – obligāts lauks; 2) specifiskās darbības, kas jāveic, lai īstenotu šo pieeju (lai samazinātu vai novērstu risku) – nav obligāts lauks; 3) pieredzes līmeni, kas nepieciešams šo pasākumu īstenotu, piemēram, \"vispārīga izpratne (nav nepieciešamas zināšanas par darba aizsardzību)\", \"nav nepieciešamas specifiskas padziļinātas zināšanas par darba aizsardzību, bet jābūt minimālām zināšanām par darba aizsardzību” vai „mērījumu laboratorijai jābūt akreditētai\". Šeit varat arī aprakstīt jebkādas papildu prasības (ja jums tādas ir)."
+
 
 #. Default: Appoint someone in your company to be responsible for the
 #. implementation of this measure. This person will have the authority to take
@@ -2729,9 +2723,7 @@ msgstr ""
 #: src/osha/oira/client/templates/risk_actionplan.pt:181
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
-"Uzticiet kādam uzņēmuma darbiniekam atbildību par šī līdzekļa ieviešanu. Šim "
-"darbiniekam būs pilnvaras veikt plānā minētās darbības un/vai pienākums "
-"gādāt par to izpildi."
+"Uzticiet kādam uzņēmuma darbiniekam atbildību par šī pasākuma ieviešanu. Šim darbiniekam būs pilnvaras veikt plānā minētās darbības un/vai pienākums gādāt par to izpildi."
 
 #. Default: Please enter the budget in whole Euros.
 #: src/osha/oira/client/templates/risk_actionplan.pt:108
@@ -2745,9 +2737,7 @@ msgstr "Lūdzu, ievadiet budžetu eiro valūtā, pilnos skaitļos."
 #: src/osha/oira/client/templates/risk_actionplan.pt:186
 msgid "actionplan_measure_budget_tooltip"
 msgstr ""
-"Lai gan daži riska novēršanas līdzekļi ir pieejami par brīvu, lielākā daļa "
-"tomēr rada izmaksas. Tādēļ tiem jāatvēl vieta budžetā. Ja nepieciešams, "
-"iekļaujiet šos līdzekļus ikgadējā budžetā."
+"Lai gan daži pasākumi riska novēršanai ir bezmaksas, lielākā daļa tomēr rada izmaksas. Tādēļ tiem jāatvēl vieta budžetā. Ja nepieciešams, iekļaujiet šos pasākumus ikgadējā uzņēmuma budžetā."
 
 #. Default: Add another measure
 #: src/osha/oira/client/templates/risk_actionplan.pt:141
@@ -3009,7 +2999,7 @@ msgstr "Risks bez pasākuma"
 #: src/osha/oira/client/templates/webhelpers.pt:112
 #: src/osha/oira/client/templates/webhelpers.pt:124
 msgid "Postponed"
-msgstr "Atlikts"
+msgstr "Atlikts jautājums"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/risks_overview.pt:229
@@ -3190,7 +3180,7 @@ msgstr "Jūs nevarēsiet izdrukāt vai lejupielādēt ziņojumus."
 msgid "list_test_session_limitations3"
 msgstr ""
 "Testa sesijas laikā jums būs iespēja jebkurā laikā reģistrēties, "
-"noklikšķinot uz \"Reģistrēties\" saites augšā."
+"noklikšķinot uz \"Pieteikties\" saites augšā."
 
 #. Default: Discover how easy it is to create a risk assessment with OiRA.
 #: src/osha/oira/client/templates/tooltips.pt:16
@@ -3335,7 +3325,7 @@ msgstr "Iestatījumi"
 #: src/osha/oira/client/templates/webhelpers.pt:113
 #: src/osha/oira/client/templates/webhelpers.pt:125
 msgid "Risk not present"
-msgstr "Labi"
+msgstr "Viss kārtībā"
 
 #: src/osha/oira/client/templates/webhelpers.pt:114
 #: src/osha/oira/client/templates/webhelpers.pt:126

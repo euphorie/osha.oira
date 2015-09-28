@@ -50,6 +50,22 @@ form {
       padding: 0;
       background-color: transparent;
     }
+
+    &::-webkit-input-placeholder { 
+      color: rgba(0,0,0,0.35); 
+    }
+
+    &::-moz-placeholder { 
+      color: rgba(0,0,0,0.35); 
+    } /* firefox 19+ */
+
+    &:-ms-input-placeholder { 
+      color: rgba(0,0,0,0.35); 
+    } /* ie */
+
+    &input:-moz-placeholder { 
+      color: rgba(0,0,0,0.35); 
+    }
   }
 
   input[type="range"] {

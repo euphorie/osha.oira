@@ -24,7 +24,7 @@ msgstr "HTML šaltinio kodas"
 
 #: src/osha/oira/homepage.py:90
 msgid "Clear unsaved changes"
-msgstr "Išvalykite neišsaugotus pakeitimus"
+msgstr "Ištrinkite neišsaugotus pakeitimus"
 
 #. Default: Describe your general approach to eliminate or (if the risk is not
 #. avoidable) reduce the risk.
@@ -753,7 +753,7 @@ msgstr ""
 #. Default: priority
 #: src/osha/oira/manual_translations.py:230
 msgid "label_fixed_priority"
-msgstr "prioritetas"
+msgstr "Dydis"
 
 #. Default: Please be aware that you have %s more login attempts before your
 #. account will be locked.
@@ -781,7 +781,7 @@ msgstr ""
 #. Default: This value must be a valid date.
 #: src/osha/oira/manual_translations.py:239
 msgid "error_validation_date"
-msgstr "Šioje vietoje nurodykite galiojančią datą."
+msgstr "Šioje vietoje nurodykite datą."
 
 #. Default: This value must be a valid email address.
 #: src/osha/oira/manual_translations.py:240
@@ -848,7 +848,7 @@ msgstr "Ketvirtasis ketvirtis"
 
 #: src/osha/oira/client/country.py:94
 msgid "Session `${name}` has been deleted."
-msgstr "Seansas `${name}` panaikintas."
+msgstr "Sesija `${name}` panaikintas."
 
 #: src/osha/oira/client/country.py:129
 msgid "Save"
@@ -872,31 +872,31 @@ msgstr ""
 
 #: src/osha/oira/client/module.py:98
 msgid "No changes were made to your added risks."
-msgstr "Neatlikti jokie su jūsų nurodytomis rizikos rūšimis susiję pakeitimai."
+msgstr "Neatlikti jokie su jūsų pridėtomis rizikomis susiję pakeitimai."
 
 #: src/osha/oira/client/module.py:105
 msgid "Your new added risks have been created."
-msgstr "Sukurtas naujas jūsų nurodytų rizikos rūšių sąrašas."
+msgstr "Sukurtas naujas jūsų pridėtų rizikų sąrašas."
 
 #: src/osha/oira/client/module.py:110
 msgid "A new added risk has been created."
-msgstr "Sukurta nauja jūsų nurodyta rizikos rūšis."
+msgstr "Pridėta naujai sukurta rizika."
 
 #: src/osha/oira/client/module.py:115
 msgid "Existing added risks have been updated."
-msgstr "Atnaujintos jau nurodytos rizikos rūšys."
+msgstr "Atnaujintos jau esančios rizikos."
 
 #: src/osha/oira/client/module.py:120
 msgid "An existing added risk has been updated."
-msgstr "Atnaujinta jau nurodyta rizikos rūšis."
+msgstr "Atnaujinta jau esanti rizika."
 
 #: src/osha/oira/client/module.py:125
 msgid "An added risk has been removed."
-msgstr "Nurodyta rizikos rūšis pašalinta."
+msgstr "Pašalinta pridėta rizika."
 
 #: src/osha/oira/client/module.py:128
 msgid "Added risks have been removed."
-msgstr "Nurodytos rizikos rūšys pašalintos."
+msgstr "Pašalintos pridėtos rizikos."
 
 #: src/osha/oira/client/profile.py:16
 msgid "Does this happen in multiple places?"
@@ -1431,7 +1431,7 @@ msgstr "Ar tikrai norite pašalinti šį seansą? Šis veiksmas yra neatšaukiam
 #. Default: Yes, delete session
 #: src/osha/oira/client/templates/confirmation-delete-session.pt:23
 msgid "button_delete_session"
-msgstr "Taip, panaikinti seansą"
+msgstr "Taip, ištrinti sesiją."
 
 #. Default: Cancel
 #: src/osha/oira/client/templates/confirmation-delete-session.pt:24
@@ -1727,7 +1727,7 @@ msgstr ""
 #. Default: run a test session
 #: src/osha/oira/client/templates/login.pt:25
 msgid "label_tryout"
-msgstr "pradėkite bandomąjį seansą"
+msgstr "pradėkite bandomąją sesiją."
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
@@ -2051,7 +2051,7 @@ msgstr "Ne"
 #. Default: New test session
 #: src/osha/oira/client/templates/new-session-test.pt:14
 msgid "label_new_session_test"
-msgstr "Naujas bandomasis seansas"
+msgstr "Nauja bandomoji sesija"
 
 #. Default: Start a new session choosing one of the following sectoral tools
 #: src/osha/oira/client/templates/new-session-test.pt:20
@@ -2102,7 +2102,7 @@ msgstr "apribojimai"
 #: src/osha/oira/client/templates/new-session-test.pt:34
 msgid "testsession_benefits_limitations"
 msgstr ""
-"Čia galite rasti informacijos apie bandomojo seanso "
+"Čia galite rasti informacijos apie bandomąją sesiją"
 "${benefits}${tooltip_benefits} ir ${limitations}${tooltip_limitations}."
 
 #. Default: Or ${register_link} instead. Find out why you should
@@ -2117,12 +2117,12 @@ msgstr ""
 #: src/osha/oira/client/templates/new-session-test.pt:41
 #: src/osha/oira/client/templates/new-session.pt:38
 msgid "button_start_session"
-msgstr "Pradėkite seansą"
+msgstr "Pradėkite sesia"
 
 #. Default: New session
 #: src/osha/oira/client/templates/new-session.pt:14
 msgid "header_new_session"
-msgstr "Naujas seansas"
+msgstr "Nauja sesia"
 
 #. Default: Sign in
 #: src/osha/oira/client/templates/plain.pt:99
@@ -2136,7 +2136,7 @@ msgstr "Registruokitės"
 #: src/osha/oira/client/templates/shell.pt:73
 msgid "info_testsession"
 msgstr ""
-"Tai yra bandomasis seansas. ${link_sign_in} ,kad išsaugotumėte savo duomenis."
+"Tai yra bandomoji sesija. ${link_sign_in} ,kad išsaugotumėte savo duomenis."
 
 #. Default: Info
 #: src/osha/oira/client/templates/plain.pt:99
@@ -2662,23 +2662,22 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:80
 msgid "Download the risks overview"
-msgstr "Atsisiųskite rizikos apžvalgą"
+msgstr "Atsisiųskite rizikų apžvalgą"
 
 #: src/osha/oira/client/templates/report_landing.pt:86
 #: src/osha/oira/client/templates/report_landing.pt:107
 msgid "Format: Portable Document Format (.pdf)"
-msgstr "Formatas: nešiojamojo dokumento formatas (.pdf)"
+msgstr "Formatas: dokumento formatas (.pdf)"
 
 #: src/osha/oira/client/templates/report_landing.pt:87
 msgid "Contains: an overview of the risks identified"
-msgstr "Turinys: nustatytos rizikos apžvalga"
+msgstr "Turinys: nustatytų rizikų apžvalga"
 
 #: src/osha/oira/client/templates/report_landing.pt:93
 #: src/osha/oira/client/templates/risks_overview.pt:147
 msgid "Monitor whether risks / measures are properly dealt with."
 msgstr ""
-"Stebėkite, ar tinkamai sprendžiami su rizika / priemonių įgyvendinimu susiję "
-"klausimai."
+"Stebėkite rizikas / priemonių tinkamą įgyvendinimą."
 
 #: src/osha/oira/client/templates/report_landing.pt:101
 msgid "Download the measures overview"
@@ -2700,7 +2699,7 @@ msgstr "Priemonė"
 #: src/osha/oira/client/templates/risk_actionplan.pt:63
 #: src/osha/oira/client/templates/risk_actionplan.pt:148
 msgid "label_prefill"
-msgstr "Preliminariai užpildyti"
+msgstr "Užpildykite iš anksto"
 
 #. Default: Select one or more of the known common measures provided.
 #: src/osha/oira/client/templates/risk_actionplan.pt:68
@@ -2985,8 +2984,8 @@ msgstr "Netaikoma"
 msgid "help_calculated_evaluation"
 msgstr ""
 "Atsakykite į toliau pateiktus klausimus. Atsižvelgiant į jūsų atsakymus, "
-"sistemoje bus atlikti su rizikos prioritetu susiję skaičiavimai. Vėliau "
-"rizikos prioritetą galėsite pakeisti"
+"sistemoje bus atlikti su rizikos dydžiu susiję skaičiavimai. Vėliau "
+"rizikos dydį galėsite pakeisti"
 
 #. Default: The risk evaluation has been automatically done by the tool. You
 #. will be able to change the priority for this risk – if you consider it
@@ -2995,7 +2994,7 @@ msgstr ""
 msgid "description_automatic_evaluation"
 msgstr ""
 "Priemonė automatiškai atliko rizikos vertinimą. Veiksmų plane, jeigu "
-"manysite, kad tai reikalinga, galėsite pakeisti šios rizikos prioritetą."
+"manysite, kad tai reikalinga, galėsite pakeisti šios rizikos dydį."
 
 #: src/osha/oira/client/templates/risks_overview.pt:143
 msgid "Overview of risks"
@@ -3006,21 +3005,21 @@ msgstr ""
 #: src/osha/oira/client/templates/status.pt:92
 #: src/osha/oira/client/templates/status_print.pt:85
 msgid "label_no_risk"
-msgstr "Rizikos nėra"
+msgstr "Rizikos nėra (labai maža)"
 
 #. Default: Risk with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:220
 #: src/osha/oira/client/templates/status.pt:95
 #: src/osha/oira/client/templates/status_print.pt:88
 msgid "label_risk_with_measure"
-msgstr "Rizika, kuriai taikoma priemonė (-ės)"
+msgstr "Rizika, numatyta (-os) priemonė (-ės)"
 
 #. Default: Risk without measure
 #: src/osha/oira/client/templates/risks_overview.pt:223
 #: src/osha/oira/client/templates/status.pt:98
 #: src/osha/oira/client/templates/status_print.pt:91
 msgid "label_risk_without_measure"
-msgstr "Rizika, kuriai netaikoma priemonė (-ės)"
+msgstr "Rizika, kuriai nenumatyta (-os) priemonė (-ės)"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/risks_overview.pt:226
@@ -3077,14 +3076,14 @@ msgstr ""
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/survey_sessions.pt:45
 msgid "link_start_session"
-msgstr "pradėkite naują seansą"
+msgstr "pradėkite naują sesija"
 
 #. Default: Select an earlier session to complete or review or
 #. ${start_session}.
 #: src/osha/oira/client/templates/sessions.pt:20
 msgid "info_select_session"
 msgstr ""
-"Pasirinkite ankstesnį seansą, kad jį užbaigtumėte arba peržiūrėtumėte, arba "
+"Pasirinkite ankstesnę sesia, kad jį užbaigtumėte arba peržiūrėtumėte, arba "
 "${start_session}."
 
 #. Default: saved on ${date}
@@ -3102,7 +3101,7 @@ msgstr "Pervardyti"
 #: src/osha/oira/client/templates/shell.pt:91
 #: src/osha/oira/client/templates/shell.pt:93
 msgid "Start test session"
-msgstr "Pradėkite bandomąjį seansą"
+msgstr "Pradėkite bandomąją sesia"
 
 #. Default: New
 #: src/osha/oira/client/templates/shell.pt:101
@@ -3151,7 +3150,7 @@ msgstr ""
 #: src/osha/oira/client/templates/status.pt:108
 #: src/osha/oira/client/templates/status_print.pt:101
 msgid "heading_high_prio_risks"
-msgstr "Didelio prioriteto rizika"
+msgstr "didelė rizika"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/status_print.pt:94
@@ -3180,7 +3179,7 @@ msgstr "arba..."
 #: src/osha/oira/client/templates/tooltips.pt:3
 msgid "guest_login_warning"
 msgstr ""
-"Šiuo metu OiRA vertinate svečio teisėmis. Negalėsite išsaugoti atlikto darbo "
+"Šiuo metu naudojatės OiRA svečio svečio teisėmis. Negalėsite išsaugoti atlikto darbo "
 "arba atsisiųsti ataskaitų. Norėdami išsaugoti savo darbą, prisijunkite arba "
 "registruokitės spustelėdami viršutiniame dešiniajame puslapio kampe esančią "
 "nuorodą \"Registruokitės\"."
@@ -3195,7 +3194,7 @@ msgstr "Svarbu"
 #: src/osha/oira/client/templates/tooltips.pt:8
 msgid "list_test_session_limitations1"
 msgstr ""
-"${important} Bandomojo seanso metu atlikto darbo išsaugoti negalite. Jeigu "
+"${important} Bandomosios sesios metu atlikto darbo išsaugoti negalite. Jeigu "
 "neužsiregistruosite, negalėsite išsaugoti visos įrašytos informacijos."
 
 #. Default: You will not be able to print or download reports.
@@ -3208,7 +3207,7 @@ msgstr "Negalėsite atsispausdinti arba atsisiųsti ataskaitų."
 #: src/osha/oira/client/templates/tooltips.pt:10
 msgid "list_test_session_limitations3"
 msgstr ""
-"Bandomojo seanso metu bet kada galėsite užsiregistruoti spustelėję viršuje "
+"Bandomosios sesijos metu bet kada galėsite užsiregistruoti spustelėję viršuje "
 "esančią nuorodą \"Registruokitės\"."
 
 #. Default: Discover how easy it is to create a risk assessment with OiRA.
@@ -3220,7 +3219,7 @@ msgstr "Sužinokite, kaip paprasta atlikti rizikos vertinimą naudojantis OiRA."
 #. reduce them.
 #: src/osha/oira/client/templates/tooltips.pt:17
 msgid "list_test_session_benefits2"
-msgstr "Nustatykite jūsų įmonei kylančią riziką ir jos mažinimo priemones."
+msgstr "Nustatykite jūsų įmonėje kylančias rizikas ir jų mažinimo priemones."
 
 #. Default: Use it for vocational training.
 #: src/osha/oira/client/templates/tooltips.pt:18
@@ -3232,12 +3231,12 @@ msgstr "Naudokitės OiRA profesinio mokymo tikslais."
 #: src/osha/oira/client/templates/tooltips.pt:23
 msgid "info_register1"
 msgstr ""
-"Registracija trunka akimirką, pakanka įrašyti galiojantį e. pašto adresą."
+"Registracija yra paprasta, pakanka įrašyti galiojantį e. pašto adresą."
 
 #. Default: Main benefits of having an account:
 #: src/osha/oira/client/templates/tooltips.pt:24
 msgid "info_register2"
-msgstr "Pagrindiniai paskyros pranašumai:"
+msgstr "Pagrindinė nauda turint paskyrą:"
 
 #. Default: Menu toggle
 #: src/osha/oira/client/templates/tooltips.pt:34
@@ -3254,7 +3253,7 @@ msgstr ""
 "Perjungiamasis meniu leidžia slėpti ir rodyti nenaudojamus meniu langus, "
 "todėl juos atverti galite tik kai to reikia. Paslėpkite meniu juostą, kai "
 "visą dėmesį turite sutelkti į informacijos įrašymą OiRA priemonėje, arba "
-"įjunkite ją, kai naršote įvairiose taikomosios programos skiltyse."
+"įjunkite ją, kai naršote kitur."
 
 #. Default: Tip
 #: src/osha/oira/client/templates/tooltips.pt:40
@@ -3279,7 +3278,7 @@ msgstr ""
 #: src/osha/oira/client/templates/tooltips.pt:58
 #: src/osha/oira/client/templates/tooltips.pt:72
 msgid "label_close_panel"
-msgstr "Uždaryti skydelį"
+msgstr "Uždaryti langą"
 
 #. Default: Off canvas menu
 #: src/osha/oira/client/templates/tooltips.pt:48
@@ -3292,12 +3291,12 @@ msgstr "Nenaudojami meniu langai"
 msgid "info_osh_menu"
 msgstr ""
 "Nauja nenaudojamų meniu langų funkcija leidžia pasinaudoti pagrindinėmis "
-"taikomosios programos funkcijomis. Galima naudotis ir mobiliajame telefone!"
+"funkcijomis. Galima naudotis ir mobiliajame telefone!"
 
 #. Default: Session menu
 #: src/osha/oira/client/templates/tooltips.pt:62
 msgid "header_osh_session_menu"
-msgstr "Seanso meniu"
+msgstr "Sesijos meniu"
 
 #. Default: From this menu you can start a new session of an OiRA tool, or pick
 #. up a previous session to continue working on it. If you do not have an
@@ -3306,10 +3305,9 @@ msgstr "Seanso meniu"
 #: src/osha/oira/client/templates/tooltips.pt:65
 msgid "info_osh_session_menu"
 msgstr ""
-"Iš šio meniu galite pradėti naują OiRA priemonės seansą arba pasirinkti "
-"ankstesnį seansą ir jį tęsti. Jeigu dar neturite OiRA taikomosios programos "
-"paskyros, galite pradėti bandomąjį seansą ir iš karto išbandyti šią "
-"taikomąją programą."
+"Nuo šio meniu galite pradėti naują OiRA sesiją arba pasirinkti "
+"ankstesnę sesiją ir ją tęsti. Jeigu dar neturite OiRA "
+"paskyros, galite pradėti bandomąją sesiją ir iš karto ją išbandyti."
 
 #. Default: OiRA Tool was updated
 #: src/osha/oira/client/templates/update.pt:15
@@ -3674,7 +3672,7 @@ msgstr "Išorės interneto svetainės logotipas"
 #: src/osha/oira/content/survey.py:69
 msgid "label_enable_custom_evaluation_descriptions"
 msgstr ""
-"Ar rizikos vertinimui taikyti kriterijai yra būdingi šiai priemonei? (Jeigu "
+"Ar rizikos vertinimui taikyti kriterijai yra būdingi tik šiai priemonei? (Jeigu "
 "ne, bus taikomi bendrieji aprašymų kriterijai)."
 
 #. Default: Tick this option if you would like to define your own descriptions
@@ -3683,9 +3681,9 @@ msgstr ""
 #: src/osha/oira/content/survey.py:73
 msgid "help_enable_custom_evaluation_descriptions"
 msgstr ""
-"Pažymėkite šią funkciją, jeigu norite pateikti savo vertinimo algoritmo "
-"kriterijų aprašymus. Tuomet naudotojas, atsakydamas į klausimus, susijusius "
-"su rizikos prioriteto apskaičiavimu, matys juos kaip patarimus."
+"Pažymėkite tai, jeigu norite pateikti savo vertinimo "
+"kriterijų aprašymus. Tuomet atsakydami į klausimus, susijusius "
+"su rizikos dydžio apskaičiavimu, matysite juos kaip patarimus."
 
 #: src/osha/oira/content/survey.py:86
 msgid "Probability"
@@ -3793,7 +3791,7 @@ msgstr "${online_help} tekstą taip pat galima keisti."
 
 #: src/osha/oira/content/templates/library.pt:15
 msgid "Add content from library"
-msgstr "Pridėkite bibliotekos turinį"
+msgstr "Pridėkite medžiagą iš bibliotekos"
 
 #: src/osha/oira/content/templates/library.pt:17
 msgid ""
@@ -3801,9 +3799,9 @@ msgid ""
 "surveys. Just select the module or risk you want to use in the list below "
 "and it will be copied to your survey."
 msgstr ""
-"Savo apklausose galite naudoti įprastos bibliotekos turinį, kurį pateikė EU-"
-"OSHA. Toliau pateiktame sąraše tiesiog pasirinkite norimą modulį arba riziką "
-"ir ji bus nukopijuota į jūsų apklausą."
+"Galite naudotis bibliotekos medžiaga, kurią pateikė EU-OSHA. Toliau "
+"pateiktame sąraše tiesiog pasirinkite norimą modulį arba riziką ir ji bus "
+"nukopijuota."
 
 #: src/osha/oira/content/templates/library.pt:21
 msgid ""
@@ -3811,8 +3809,8 @@ msgid ""
 "questions can only be used at the top level of your survey, and modules may "
 "be too deeply nested to fit in ${title}."
 msgstr ""
-"Atkreipkite dėmesį į tai, kad negalėsite pasinaudoti visu prieinamu turiniu: "
-"atrankiniai klausimai gali būti naudojami tik apklausos pradžioje, o "
+"Atkreipkite dėmesį į tai, kad negalėsite naudotis visu prieinamu turiniu: "
+"atrankiniai klausimai gali būti naudojami tik pradžioje, o "
 "moduliai gali būti pernelyg specifiniai, kad atitiktų ${title}."
 
 #: src/osha/oira/content/templates/library.pt:28
@@ -4183,7 +4181,7 @@ msgstr "Panaikinti failą"
 
 #: src/osha/oira/nuplone/templates/namedimage_input.pt:14
 msgid "Remove image"
-msgstr "Panaikinti atvaizdą"
+msgstr "Panaikinti paveikslėlį"
 
 #: src/osha/oira/nuplone/templates/passwordconfirm_input.pt:9
 msgid "Confirm password"
@@ -4339,7 +4337,7 @@ msgstr ""
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
 msgstr ""
-"<p>Ar norėtumėte pridėti savo aprašytą riziką šioje priemonėje dabar?</"
+"<p>Ar norėtumėte pridėti savo nustatytą riziką šioje priemonėje dabar?</"
 "p><p><strong>Svarbu:</strong> Siekdami išvengti dvigubo rizikos nurodymo, "
 "labai rekomenduojame pirmiausia susipažinti su visais ankstesniais "
 "moduliais, jeigu to dar nepadarėte./p><p>Jeigu rizikos pridėti nereikia, "
@@ -4352,7 +4350,7 @@ msgstr ""
 #~ msgstr "Reikalavimai"
 
 #~ msgid "description_criteria_description"
-#~ msgstr "Paaiškinimą įrašykite čia"
+#~ msgstr "Įrašykite čia savo Paaiškinimą"
 
 #~ msgid "Current name: \"${name}\""
 #~ msgstr "Dabartinis pavadinimas: \"${name}\""

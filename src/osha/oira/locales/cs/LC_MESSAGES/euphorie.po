@@ -761,7 +761,7 @@ msgstr ""
 #. Default: This value must be a valid date.
 #: src/osha/oira/manual_translations.py:239
 msgid "error_validation_date"
-msgstr "Tato hodnota musí být platné datum."
+msgstr "Tento údaj musí být platné datum."
 
 #. Default: This value must be a valid email address.
 #: src/osha/oira/manual_translations.py:240
@@ -791,7 +791,7 @@ msgstr "Tato hodnota je povinná."
 #. Default: This date must be on or before the end date.
 #: src/osha/oira/manual_translations.py:245
 msgid "error_validation_before_end_date"
-msgstr "Toto datum musí být před koncovým datem."
+msgstr "Toto datum musí být před datem ukončení."
 
 #. Default: This date must be on or after the start date.
 #: src/osha/oira/manual_translations.py:246
@@ -828,7 +828,7 @@ msgstr "4. čtvrtletí"
 
 #: src/osha/oira/client/country.py:94
 msgid "Session `${name}` has been deleted."
-msgstr "Relace `${name}` byla smazána."
+msgstr "Modul `${name}` byla smazán."
 
 #: src/osha/oira/client/country.py:129
 msgid "Save"
@@ -1410,7 +1410,7 @@ msgstr ""
 #. Default: Yes, delete session
 #: src/osha/oira/client/templates/confirmation-delete-session.pt:23
 msgid "button_delete_session"
-msgstr "Ano, smazat relaci."
+msgstr "Ano, smazat modul."
 
 #. Default: Cancel
 #: src/osha/oira/client/templates/confirmation-delete-session.pt:24
@@ -1703,7 +1703,7 @@ msgstr ""
 #. Default: run a test session
 #: src/osha/oira/client/templates/login.pt:25
 msgid "label_tryout"
-msgstr "spustit testovací relaci"
+msgstr "spustit testovací modul"
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
@@ -1983,7 +1983,7 @@ msgstr "Odstranit riziko"
 #. Default: Add risk
 #: src/osha/oira/client/templates/module_customization.pt:61
 msgid "label_add_risk"
-msgstr ""
+msgstr "Přidej riziko"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_customization.pt:62
@@ -2026,20 +2026,20 @@ msgstr "Ne"
 #. Default: New test session
 #: src/osha/oira/client/templates/new-session-test.pt:14
 msgid "label_new_session_test"
-msgstr "Nová testovací relace"
+msgstr "Nový testovací modul"
 
 #. Default: Start a new session choosing one of the following sectoral tools
 #: src/osha/oira/client/templates/new-session-test.pt:20
 #: src/osha/oira/client/templates/new-session.pt:20
 msgid "label_select_new_session"
-msgstr "Zahajte novou modul zvolením následujících sektorových nástrojů"
+msgstr "Zahajte nový modul zvolením následujících sektorových nástrojů"
 
 #. Default: Enter a title for your Risk Assessment
 #: src/osha/oira/client/templates/new-session-test.pt:26
 #: src/osha/oira/client/templates/new-session.pt:26
 #: src/osha/oira/client/templates/survey_sessions.pt:47
 msgid "label_session_title"
-msgstr "Zadejte název svého vyhodnocení rizik."
+msgstr "Zadejte název svého vyhodnocení rizik"
 
 #. Default: Once you have started an OiRA tool session, you will be able to
 #. stop before the end. You can restart it again at a later date by selecting
@@ -2054,11 +2054,11 @@ msgstr "Zadejte název svého vyhodnocení rizik."
 #: src/osha/oira/client/templates/survey_sessions.pt:48
 msgid "session_title_tooltip"
 msgstr ""
-"Po zahájení relace nástroje OiRA budete moci skončit před koncem. Můžete "
-"znovu pokračovat kdykoliv později zvolením názvu relace nástroje OiRA. "
-"Můžete uložit více než jednu modul, pokud jste jim dali různé názvy. "
+"Po zahájení práce na vlastním modulu OiRA budete moci práci kdykoliv přerušit (i před dokončením modulu). Můžete "
+"znovu pokračovat později zvolením uoženého názvu modulu OiRA. "
+"Můžete uložit více než jeden modul, pokud jste jim dali různé názvy. "
 "Zapamatujte si prosím svou e-mailovou adresu a název, který jste "
-"modulnástroje OiRA dal/a. Kliknutím na tlačítko Odhlásit se aktivně "
+"modulu OiRA dal/a. Kliknutím na tlačítko Odhlásit se aktivně "
 "odhlásíte. Odhlásíte se také tím, když zavřete prohlížeč. Z důvodů "
 "bezpečnosti je lepší se odhlásit aktivně."
 
@@ -2078,7 +2078,7 @@ msgstr "omezeních"
 msgid "testsession_benefits_limitations"
 msgstr ""
 "Zde si můžete přečíst o ${benefits}${tooltip_benefits} "
-"a ${limitations}${tooltip_limitations} testovací relace."
+"a ${limitations}${tooltip_limitations} testovacího modulu."
 
 #. Default: Or ${register_link} instead. Find out why you should
 #. register${tooltip_register}.
@@ -2092,12 +2092,12 @@ msgstr ""
 #: src/osha/oira/client/templates/new-session-test.pt:41
 #: src/osha/oira/client/templates/new-session.pt:38
 msgid "button_start_session"
-msgstr "Spustit relaci"
+msgstr "Spustit modul"
 
 #. Default: New session
 #: src/osha/oira/client/templates/new-session.pt:14
 msgid "header_new_session"
-msgstr "Nová relace"
+msgstr "Nový modul"
 
 #. Default: Sign in
 #: src/osha/oira/client/templates/plain.pt:99
@@ -2110,7 +2110,7 @@ msgstr "Přihlaste se"
 #: src/osha/oira/client/templates/plain.pt:99
 #: src/osha/oira/client/templates/shell.pt:73
 msgid "info_testsession"
-msgstr "Toto je testovací relace ${link_sign_in}, abyste mohli data uložit."
+msgstr "Toto je testovací modul ${link_sign_in}, abyste mohli data uložit."
 
 #. Default: Info
 #: src/osha/oira/client/templates/plain.pt:99
@@ -2199,7 +2199,7 @@ msgstr "Podávání zpráv"
 msgid "report_guest_register_intro"
 msgstr ""
 "Litujeme, ale jedná se o zkušební verzi a funkci stahování nelze použít. "
-"Zaregistrujte se jen pomocí jednoho kroku a získejte přístup k těmto výhodám:"
+"Zaregistrujte se pomocí jednoho kroku a získejte přístup k těmto výhodám:"
 
 #. Default: It's free.
 #: src/osha/oira/client/templates/register.pt:23
@@ -2267,7 +2267,7 @@ msgstr ""
 #: src/osha/oira/client/templates/reminder.pt:23
 msgid "description_password_reminder"
 msgstr ""
-"Zadejte prosím svoji e-mailovou adresu. Zašleme vám přihlašovací údaje."
+"Zadejte svoji e-mailovou adresu. Zašleme vám přihlašovací údaje."
 
 #: src/osha/oira/client/templates/rename-session.pt:16
 msgid "Change name of session"
@@ -2615,7 +2615,7 @@ msgstr "Formát: Excel (.xlsx)"
 #: src/osha/oira/client/templates/report_landing.pt:66
 msgid ""
 "Contains: main elements to effectively manage the risks at your workplace."
-msgstr "Obsahuje: hlavní prvky pro účinné řízení rizik na vašem pracovišti."
+msgstr "Obsahuje: hlavní zásady pro účinné řízení rizik na vašem pracovišti."
 
 #: src/osha/oira/client/templates/report_landing.pt:71
 msgid "Manage"
@@ -2704,9 +2704,9 @@ msgstr ""
 "nedá vyhnout) snížení rizika; 2) konkrétní krok/y vyžadované k implementaci "
 "tohoto přístupu (k eliminaci nebo snížení rizika); 3) míru znalostí "
 "potřebných k implementaci kroku, např. \"zdravý rozum (nevyžadují se žádné "
-"znalosti OSH)\", \"žádné konkrétní znalosti OSH, ale vyžadují se minimální "
-"znalosti OSH nebo znalosti nebo školení a/nebo konzultace vedení OSH\", nebo "
-"\"OSH expert\". Můžete zde také popsat jakýkoliv jiný požadavek (pokud "
+"znalosti BOZP)\", \"žádné specifické znalosti BOZP, ale vyžadují se minimální "
+"znalosti BOZP nebo znalosti nebo školení a/nebo konzultace s vedením společnosti\", nebo "
+"\"expert\" na prevencirizik. Můžete zde také popsat jakýkoliv jiný požadavek (pokud "
 "existuje)."
 
 #. Default: Appoint someone in your company to be responsible for the
@@ -2962,7 +2962,7 @@ msgstr ""
 #: src/osha/oira/client/templates/risk_identification.pt:143
 msgid "description_automatic_evaluation"
 msgstr ""
-"Nástroj provedl automaticky hodnocení rizika. Prioritu tohoto rizika budete "
+"Nástroj provedl hodnocení rizika automaticky. Prioritu tohoto rizika budete "
 "moci změnit v akčním plánu, pokud to budete považovat za nutné."
 
 #: src/osha/oira/client/templates/risks_overview.pt:143
@@ -3045,14 +3045,14 @@ msgstr ""
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/survey_sessions.pt:45
 msgid "link_start_session"
-msgstr "spustit novou relaci"
+msgstr "spustit nový modul"
 
 #. Default: Select an earlier session to complete or review or
 #. ${start_session}.
 #: src/osha/oira/client/templates/sessions.pt:20
 msgid "info_select_session"
 msgstr ""
-"Zvolte si předchozí relaci, kterou chcete dokončit nebo zkontrolovat, nebo "
+"Zvolte si předchozí modul, který chcete dokončit nebo zkontrolovat, nebo "
 "můžete ${start_session}."
 
 #. Default: saved on ${date}
@@ -3070,7 +3070,7 @@ msgstr "Přejmenovat"
 #: src/osha/oira/client/templates/shell.pt:91
 #: src/osha/oira/client/templates/shell.pt:93
 msgid "Start test session"
-msgstr "Spustit novou testovací relaci"
+msgstr "Spustit nový testovací modul"
 
 #. Default: New
 #: src/osha/oira/client/templates/shell.pt:101
@@ -3148,7 +3148,7 @@ msgstr "nebo…"
 #: src/osha/oira/client/templates/tooltips.pt:3
 msgid "guest_login_warning"
 msgstr ""
-"Nyní nástroj OiRA hodnotíte jako uživatel typu host. Nemůžete ukládat "
+"Nyní si nástroj OiRA zkoušíte jako host. Nemůžete ukládat "
 "provedenou práci ani stahovat zprávy. Chcete-li si práci uložit, přihlaste "
 "se nebo zaregistrujte klepnutím na odkaz \"Přihlásit se\" v pravém horním "
 "rohu stránky."
@@ -3163,7 +3163,7 @@ msgstr "Důležité"
 #: src/osha/oira/client/templates/tooltips.pt:8
 msgid "list_test_session_limitations1"
 msgstr ""
-"${important} Při testovací relaci si práci nemůžete uložit. Veškerou "
+"${important} Při testovacím modulu si práci nemůžete uložit. Veškerou "
 "dosavadní práci ztratíte, pokud se nezaregistrujete."
 
 #. Default: You will not be able to print or download reports.
@@ -3265,7 +3265,7 @@ msgstr ""
 #. Default: Session menu
 #: src/osha/oira/client/templates/tooltips.pt:62
 msgid "header_osh_session_menu"
-msgstr "Nabídka relace"
+msgstr "Nabídka modulu"
 
 #. Default: From this menu you can start a new session of an OiRA tool, or pick
 #. up a previous session to continue working on it. If you do not have an
@@ -3274,9 +3274,9 @@ msgstr "Nabídka relace"
 #: src/osha/oira/client/templates/tooltips.pt:65
 msgid "info_osh_session_menu"
 msgstr ""
-"Z této nabídky můžete spustit novou relaci nástroje OiRA nebo pokračovat "
-"v práci v předchozí relaci. Pokud ještě nemáte účet v aplikaci OiRA, můžete "
-"spustit testovací relaci a aplikaci si ihned vyzkoušet."
+"Z této nabídky můžete spustit nový modul nástroje OiRA nebo pokračovat "
+"v práci v předchozím modulu. Pokud ještě nemáte účet v aplikaci OiRA, můžete "
+"spustit testovací modul a aplikaci si ihned vyzkoušet."
 
 #. Default: OiRA Tool was updated
 #: src/osha/oira/client/templates/update.pt:15
@@ -3450,7 +3450,7 @@ msgstr "Další obsah"
 #: src/osha/oira/content/risk.py:20
 msgid "intro_additional_content"
 msgstr ""
-"Připojte jakýkoli další obsah, který je podle vás pro uživatele užitečný."
+"Připojte jakýkoli další obsah, který považujete za užitečný."
 
 #. Default: Content file
 #: src/osha/oira/content/risk.py:29 src/osha/oira/content/risk.py:41
@@ -3644,7 +3644,7 @@ msgstr "Logo externí webové stránky"
 #: src/osha/oira/content/survey.py:69
 msgid "label_enable_custom_evaluation_descriptions"
 msgstr ""
-"Jsou kritéria použitá pro hodnocení rizik specifická pro tento nástroj? "
+"Jsou použitá kritéria hodnocení rizik specifická pro tento nástroj? "
 "(Pokud ne, použijí se popisy běžných kritérií)."
 
 #. Default: Tick this option if you would like to define your own descriptions
@@ -3654,7 +3654,7 @@ msgstr ""
 msgid "help_enable_custom_evaluation_descriptions"
 msgstr ""
 "Tuto možnost zaškrtněte, pokud byste chtěli definovat vlastní popisy "
-"kritérií algoritmu hodnocení. Uživatel je uvidí jako nápovědy při odpovídání "
+"kritérií algoritmu hodnocení. Uživatel je uvidí jako nápovědu při odpovídání "
 "na otázky pro výpočet priority rizika."
 
 #: src/osha/oira/content/survey.py:86
@@ -3772,9 +3772,9 @@ msgid ""
 "surveys. Just select the module or risk you want to use in the list below "
 "and it will be copied to your survey."
 msgstr ""
-"Ve vlastních průzkumech můžete použít obsah ze standardní knihovny, kterou "
-"poskytuje OSHA. Stačí si ze seznamu níže vybrat modul nebo riziko, které "
-"chcete použít, a zkopíruje se do vašeho průzkumu."
+"Ve vlastní analýze můžete použít obsah ze standardní knihovny, kterou "
+"poskytuje OSHA. Stačí si ze seznamu vybrat modul nebo riziko, které "
+"chcete použít, a ony se zkopírují se do vaší analýzy."
 
 #: src/osha/oira/content/templates/library.pt:21
 msgid ""

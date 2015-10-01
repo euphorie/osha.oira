@@ -19,6 +19,7 @@ from osha.oira.client import interfaces
 from .country import ConfirmationDeleteSession
 from .country import DeleteSession
 from .country import RenameSession
+from .country import SplashMessage
 from sqlalchemy import sql
 from sqlalchemy import orm
 from z3c.saconfig import Session
@@ -39,13 +40,17 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
     })
 
 
-class OSHAView(survey.View):
+class OSHAView(survey.View, SplashMessage):
     """ Override the "select existing session or start a new one" view
     """
     grok.require("euphorie.client.ViewSurvey")
     grok.layer(interfaces.IOSHAClientSkinLayer)
     grok.template("survey_sessions")
     grok.name("index_html")
+
+    def update(self):
+        self._updateMOTD()
+        super(OSHAView, self).update()
 
 
 class OSHAStart(survey.Start):

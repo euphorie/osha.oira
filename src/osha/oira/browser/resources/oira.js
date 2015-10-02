@@ -21114,7 +21114,7 @@ define('pat-inject',[
 
     var _ = {
         name: "inject",
-        trigger: "a.pat-inject, form.pat-inject, .pat-subform.pat-inject",
+        trigger: ".raptor-ui .ui-button.pat-inject, a.pat-inject, form.pat-inject, .pat-subform.pat-inject",
         init: function inject_init($el, opts) {
             var cfgs = _.extractConfig($el, opts);
             // if the injection shall add a history entry and HTML5 pushState
@@ -21144,14 +21144,14 @@ define('pat-inject',[
             switch (cfgs[0].trigger) {
                 case "default":
                     // setup event handlers
-                    if ($el.is("a")) {
-                        $el.on("click.pat-inject", _.onTrigger);
-                    } else if ($el.is("form")) {
+                    if ($el.is("form")) {
                         $el.on("submit.pat-inject", _.onTrigger)
                         .on("click.pat-inject", "[type=submit]", ajax.onClickSubmit)
                         .on("click.pat-inject", "[type=submit][formaction], [type=image][formaction]", _.onFormActionSubmit);
                     } else if ($el.is(".pat-subform")) {
                         log.debug("Initializing subform with injection");
+                    } else {
+                        $el.on("click.pat-inject", _.onTrigger);
                     }
                     break;
                 case "autoload":
@@ -21161,6 +21161,7 @@ define('pat-inject',[
                     _._initAutoloadVisible($el);
                     break;
             }
+
             log.debug("initialised:", $el);
             return $el;
         },
@@ -21288,12 +21289,18 @@ define('pat-inject',[
                         return false;
                     }
                 }
-                if (cfg.confirm == 'class') {
-                    // XXX: this assumes too much, causes technical debt and shouldn't be here :(
-                    // Work was done for pat-raptor and this line should
-                    // ideally go there.
-                    cfg.$target.removeClass('is-dirty');
+
+                // pat-inject is used to populate target in some form and when
+                // Cancel button is presed (this triggers reset event on the
+                // form) you would expect to populate with initial placeholder 
+                var $form = cfg.$target.parents('form')
+                if ($form.size() !== 0 && cfg.$target.data('initial-value') === undefined) {
+                    cfg.$target.data('initial-value', cfg.$target.html());
+                    $form.on('reset', function() {
+                        cfg.$target.html(cfg.$target.data('initial-value'))
+                    })
                 }
+
                 return true;
             });
         },
@@ -21670,7 +21677,7 @@ define('pat-inject',[
             // function to trigger the autoload and mark as triggered
             function trigger() {
                 $el.data("pat-inject-autoloaded", true);
-                _.onClick.apply($el[0], []);
+                _.onTrigger.apply($el[0], []);
                 return true;
             }
 
@@ -41597,6 +41604,7 @@ define('pat-tooltip',[
     parser.addArgument("source", "title", ["auto", "ajax", "content", "content-html", "title"]);
     parser.addArgument("ajax-data-type", "html", ["html", "markdown"]);
     parser.addArgument("delay", 0);
+    parser.addArgument("mark-inactive", true);
     parser.addArgument("class");
     parser.addArgument("target", "body");
 
@@ -41636,7 +41644,9 @@ define('pat-tooltip',[
                     .data("patterns.tooltip", options)
                     .on("destroy", $trigger, tooltip.onDestroy);
                 tooltip.setupShowEvents($trigger);
-                $trigger.addClass("inactive");
+                if (options.markInactive) {
+                    $trigger.addClass("inactive");
+                }
             });
         },
 
@@ -41681,8 +41691,7 @@ define('pat-tooltip',[
         setupHideEvents: function($trigger) {
             var $container = tooltip.getContainer($trigger),
                 options = $trigger.data("patterns.tooltip");
-            $container
-                .on("click.tooltip", ".close-panel", $trigger, tooltip.hide);
+            $container.on("click.tooltip", ".close-panel", $trigger, tooltip.hide);
 
             if (options.closing==="close-button") {
                 // Make sure click on the trigger element becomes a NOP
@@ -41775,20 +41784,26 @@ define('pat-tooltip',[
                  tooltip.positionContainer($trigger, $container);
             });
 
-            $trigger.removeClass("inactive").addClass("active");
+            if (options.markInactive) {
+                $trigger.removeClass("inactive").addClass("active");
+            }
         },
 
         hide: function(event) {
             var $trigger = event.data,
                 $container = tooltip.getContainer($trigger),
+                options = $trigger.data("patterns.tooltip"),
                 namespace = $container.attr("id");
+
             // when another tooltip trigger is clicked, only close the previous tooltip if it does not contain the trigger
             if (event.type !== "pat-tooltip-click" || $container.has(event.target).length <= 0) {
                 $container.css("visibility", "hidden");
                 $container.parents().add(window).off("." + namespace);
                 tooltip.removeHideEvents($trigger);
                 tooltip.setupShowEvents($trigger);
-                $trigger.removeClass("active").addClass("inactive");
+                if (options.markInactive) {
+                    $trigger.removeClass("active").addClass("inactive");
+                }
                 $trigger.trigger("pat-update", {pattern: "tooltip", hidden: true});
             }
         },
@@ -41820,7 +41835,7 @@ define('pat-tooltip',[
                 $content, $container, href;
 
             $trigger.data("patterns.tooltip.number", count);
-            $container = $("<div/>", {"class": "tooltip-container",
+            $container = $("<div/>", {"class": "tooltip-container type-"+options.closing,
                                      "id": "tooltip" + count});
             if (options["class"])
                 $container.addClass(options["class"]);
@@ -41851,11 +41866,9 @@ define('pat-tooltip',[
             $container.append(
                 $("<div/>").css("display", "block").append($content))
                 .append($("<span></span>", {"class": "pointer"}));
-            if (options.closing==="close-button") {
-                $("<button/>", {"class": "close-panel"})
-                    .text("Close")
-                    .insertBefore($container.find("*:first"));
-            }
+            $("<button/>", {"class": "close-panel"})
+                .text("Close")
+                .insertBefore($container.find("*:first"));
             $(options.target).append($container);
             return $container;
         },

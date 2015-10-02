@@ -21099,6 +21099,8 @@ define('pat-inject',[
     parser.addArgument("next-href");
     parser.addArgument("source");
     parser.addArgument("trigger", "default", ["default", "autoload", "autoload-visible"]);
+    parser.addArgument("confirm", 'class', ['never', 'always', 'form-data', 'class']);
+    parser.addArgument("confirm-message", 'Are you sure you want to leave this page?');
     /* Once injection has completed successfully, pat-inject will trigger
      * an event for each hook: pat-inject-hook-$(hook)
      */
@@ -21114,9 +21116,6 @@ define('pat-inject',[
         name: "inject",
         trigger: "a.pat-inject, form.pat-inject, .pat-subform.pat-inject",
         init: function inject_init($el, opts) {
-            if ($el.length > 1) {
-                return $el.each(function() { _.init($(this), opts); });
-            }
             var cfgs = _.extractConfig($el, opts);
             // if the injection shall add a history entry and HTML5 pushState
             // is missing, then don't initialize the injection.
@@ -21146,9 +21145,9 @@ define('pat-inject',[
                 case "default":
                     // setup event handlers
                     if ($el.is("a")) {
-                        $el.on("click.pat-inject", _.onClick);
+                        $el.on("click.pat-inject", _.onTrigger);
                     } else if ($el.is("form")) {
-                        $el.on("submit.pat-inject", _.onSubmit)
+                        $el.on("submit.pat-inject", _.onTrigger)
                         .on("click.pat-inject", "[type=submit]", ajax.onClickSubmit)
                         .on("click.pat-inject", "[type=submit][formaction], [type=image][formaction]", _.onFormActionSubmit);
                     } else if ($el.is(".pat-subform")) {
@@ -21156,7 +21155,7 @@ define('pat-inject',[
                     }
                     break;
                 case "autoload":
-                    _.onClick.apply($el[0], []);
+                    _.onTrigger.apply($el[0], []);
                     break;
                 case "autoload-visible":
                     _._initAutoloadVisible($el);
@@ -21172,16 +21171,7 @@ define('pat-inject',[
             return $el;
         },
 
-        onClick: function inject_onClick(ev) {
-            var cfgs = $(this).data("pat-inject"),
-                $el = $(this);
-            if (ev)
-                ev.preventDefault();
-            $el.trigger("patterns-inject-triggered");
-            _.execute(cfgs, $el);
-        },
-
-        onSubmit: function inject_onSubmit(ev) {
+        onTrigger: function inject_onTrigger(ev) {
             var cfgs = $(this).data("pat-inject"),
                 $el = $(this);
             if (ev)
@@ -21241,9 +21231,19 @@ define('pat-inject',[
             });
             return cfgs;
         },
-        // verify and post-process config
-        // XXX: this should return a command instead of messing around on the config
+
+        elementIsDirty: function(m) {
+            var data = $.map(m.find(":input:not(select)"),
+                function(i) {
+                    var val = $(i).val();
+                    return (Boolean(val) && val !== $(i).attr('placeholder'));
+                });
+            return $.inArray(true, data)!==-1;
+        },
+
         verifyConfig: function inject_verifyConfig(cfgs, $el) {
+            // verify and post-process config
+            // XXX: this should return a command instead of messing around on the config
             var url = cfgs[0].url;
 
             // verification for each cfg in the array needs to succeed
@@ -21272,15 +21272,28 @@ define('pat-inject',[
                     cfg.$target = _._createTarget(cfg.target);
                     cfg.$injected = cfg.$target;
                 }
-
+                var confirm = false;
+                if (cfg.confirm == 'always') {
+                    confirm = true;
+                } else if (cfg.confirm === 'form-data') {
+                    $.each(cfgs, function(idx, cfg) {
+                        confirm = _.elementIsDirty(cfg.$target) ? true : confirm;
+                    });
+                } else if (cfg.confirm === 'class') {
+                    confirm = cfg.$target.hasClass('is-dirty');
+                }
                 // check if target is "dirty"
-                if (cfg.$target.hasClass('is-dirty')) {
-                    if (!confirm('Are you sure you want to leave this page?')) {
-                      return false;
+                if (confirm) {
+                    if (!window.confirm(cfg.confirmMessage)) {
+                        return false;
                     }
+                }
+                if (cfg.confirm == 'class') {
+                    // XXX: this assumes too much, causes technical debt and shouldn't be here :(
+                    // Work was done for pat-raptor and this line should
+                    // ideally go there.
                     cfg.$target.removeClass('is-dirty');
                 }
-
                 return true;
             });
         },
@@ -21496,7 +21509,6 @@ define('pat-inject',[
                         {selector: cfg.target});
                 return false;
             }
-
             if (cfg.action === "content")
                 $target.empty().append($source);
             else if (cfg.action === "element")
@@ -29204,20 +29216,22 @@ define('pat-depends',[
      * @return {Object} Current instance of EventEmitter for chaining.
      */
     proto.emitEvent = function emitEvent(evt, args) {
-        var listeners = this.getListenersAsObject(evt);
+        var listenersMap = this.getListenersAsObject(evt);
+        var listeners;
         var listener;
         var i;
         var key;
         var response;
 
-        for (key in listeners) {
-            if (listeners.hasOwnProperty(key)) {
-                i = listeners[key].length;
+        for (key in listenersMap) {
+            if (listenersMap.hasOwnProperty(key)) {
+                listeners = listenersMap[key].slice(0);
+                i = listeners.length;
 
                 while (i--) {
                     // If the listener returns true then it shall be removed from the event
                     // The function is executed either with a basic call or an apply if there is an args array
-                    listener = listeners[key][i];
+                    listener = listeners[i];
 
                     if (listener.once === true) {
                         this.removeListener(evt, listener.listener);

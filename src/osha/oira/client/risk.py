@@ -226,6 +226,11 @@ class OSHAActionPlanView(risk.ActionPlanView):
             u"Are you sure you want to delete this measure? This action can "
             u"not be reverted."),
             target_language=lang)
+        self.override_confirmation = translate(_(
+            u"The current text in the fields 'Action plan', 'Prevention plan' and "
+            u"'Requirements' of this measure will be overwritten. This action cannot be "
+            u"reverted. Are you sure you want to continue?"),
+            target_language=lang)
         super(risk.ActionPlanView, self).update()
 
     def extract_plans_from_request(self):

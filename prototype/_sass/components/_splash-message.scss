@@ -19,10 +19,19 @@
 		position: absolute;
 		top: 50%;
 		left: 15%;
-		  -webkit-transform: translateY(-50%);
-		  -ms-transform: translateY(-50%);
-		  transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
 		width: 70%;
+
+		@include screen-size(small) {
+			padding: 15% 6%;
+			width: auto;
+			position: static;
+			-webkit-transform: none;
+			-ms-transform: none;
+			transform: none;
+		}
 
 		.logo {
 			margin-top: 4em;

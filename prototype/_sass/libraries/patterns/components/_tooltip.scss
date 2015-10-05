@@ -149,21 +149,22 @@
     left: 0;
   }
   
-  @include screen-size(large) {
-    .pointer {
-      height: 20px;
-      width: 20px;
-      display: block;
-      background-color: white;
-      border: 1px solid silver;
-      z-index: 0;
-      position: absolute;
-      -webkit-transform: rotate(45deg);
-      -webkit-box-shadow: rgba(0, 0, 0, 0.19922) 0px 0px 10px;
-      -moz-transform: rotate(45deg);
-      -moz-box-shadow: rgba(0, 0, 0, 0.19922) 0px 0px 10px;
-      transform: rotate(45deg);
-      box-shadow: rgba(0, 0, 0, 0.19922) 0px 0px 10px;
+  .pointer {
+    height: 20px;
+    width: 20px;
+    display: block;
+    background-color: white;
+    border: 1px solid silver;
+    z-index: 0;
+    position: absolute;
+    -webkit-transform: rotate(45deg);
+    -webkit-box-shadow: rgba(0, 0, 0, 0.19922) 0px 0px 10px;
+    -moz-transform: rotate(45deg);
+    -moz-box-shadow: rgba(0, 0, 0, 0.19922) 0px 0px 10px;
+    transform: rotate(45deg);
+    box-shadow: rgba(0, 0, 0, 0.19922) 0px 0px 10px;
+    @include screen-size(large) {
+      display: none;
     }
   }
 

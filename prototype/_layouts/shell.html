@@ -12,7 +12,7 @@
 				<link rel="shortcut icon" type="image/x-icon" href="media/favicon.ico" />
 		<![endif]-->
 	</head>
-	<body class="osh-on osc-on osc-s-off focus-sidebar {{ page.template }} {{ page.class }}">
+	<body class="splash-on osh-on osc-on osc-s-off focus-sidebar {{ page.template }} {{ page.class }}">
 		{% if page.mode == 'test' %}
 		    <p id="warning-bar">
 				This is a test session. <a href="/login.html" class="registration">Sign in</a> to save your data. <a href="/explanations.html#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info">Info</a>
@@ -290,5 +290,15 @@
 				</p>
 			</div>
 		<![endif]-->
+
+		<div class="splash-message">
+		    <hr class="trigger pat-switch" data-pat-switch="selector: body; remove: splash-*; add: splash-off; store: local" />
+	       <article class="content">
+	         <h1>Message of the day!</h1>
+	         <p>Sit amet consectetuer.</p>
+	          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+	          <p>OiRA Team</p>
+	       </article>
+		</div>
 	</body>
 </html>

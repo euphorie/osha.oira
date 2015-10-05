@@ -5,9 +5,9 @@
 	right: 0;
 	bottom: 0;
 
-	-moz-transition: left 0.5s;
-	-webkit-transition: left 0.5s;
-	transition: left 0.5s;
+	-moz-transition: left 0.5s, filter 2s;
+	-webkit-transition: left 0.5s, filter 2s;
+	transition: left 0.5s, filter 2s;
 }
 
 @include screen-size(small) {

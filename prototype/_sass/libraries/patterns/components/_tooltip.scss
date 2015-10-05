@@ -163,7 +163,7 @@
     -moz-box-shadow: rgba(0, 0, 0, 0.19922) 0px 0px 10px;
     transform: rotate(45deg);
     box-shadow: rgba(0, 0, 0, 0.19922) 0px 0px 10px;
-    @include screen-size(large) {
+    @include screen-size(small) {
       display: none;
     }
   }

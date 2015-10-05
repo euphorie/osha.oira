@@ -170,34 +170,27 @@
     list-style-type: none;
     
     li {
-      line-height: 24px;
-      a {
+      line-height: 1.5em;
+
+      > button,
+      > a {
+        background: none;
         display: block;
-        margin-left: -10px;
-        margin-right: -10px;
-        padding-left: 32px;
-        padding-right: 15px;
         color: black;
-        line-height: 20px;
+        line-height: 1.5em;
         cursor: default;
-      }
-      button {
-        display: block;
-        margin-left: -10px;
-        margin-right: -10px;
-        padding-left: 32px;
-        padding-right: 15px;
-        color: black;
-        line-height: 20px;
-        cursor: default;
+        padding: 0.2em 0 0.1em 1.6em;
+
         &:active {
           box-shadow: none;
         }
       }
-      a:before, button:before {
-        margin-left: -15px;
+
+      a:before, 
+      button:before {
+        margin-left: -1.6em;
         float: left;
-        margin-top: 5px;
+        line-height: 1.5em;
       }
     }
 
@@ -207,33 +200,21 @@
         &:before {
           content: "✓";
           float: left;
-          margin-left: -19px;
-          font: 12px fontello;
-          position: relative;
-          top: 7px;
+          margin-left: -1.5em;
+          font: 1em fontello;
         }
         color: black;
       }
+
       &:hover {
         text-decoration: none;
         background-color: rgba(0, 0, 0, 0.03);
       }
+
       a:hover {
         text-decoration: none;
       }
-      .checklist {
-        &.radio {
-          border-top: 1px solid silver;
-          border-bottom: 1px solid silver;
-          padding-left: 22px;
-          line-height: 18px;
-          padding-top: 4px;
-          padding-bottom: 4px;
-        }
-        .legend {
-          margin-bottom: 0;
-        }
-      }
+
       &.file-upload {
         position: relative;
         text-indent: 20px;

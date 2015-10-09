@@ -129,6 +129,17 @@
 		// 	padding: 10% 6%;
 		// }
 
+		.module-title {
+			font-size: 1em;
+			color: rgba(0,0,0,0.5);
+			margin-bottom: 0.8em;
+			margin-left: 2em;
+			@include screen-size(large) {
+				display: none;
+			}
+			
+		}
+
 		li {
 			position: relative;
 
@@ -296,6 +307,10 @@
 			}
 		}
 	}
+}
+
+.osc-off #steps > li .topics .module-title {
+	display: block;
 }
 
 @include screen-size(small) {

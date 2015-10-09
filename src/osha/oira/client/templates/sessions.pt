@@ -20,7 +20,7 @@
         <p i18n:translate="info_select_session">
             Select an earlier session to complete or review or
             <tal:name i18n:name="start_session"><a href="new-session.html#document-content" id="button-new-session"
-               data-pat-modal="class: large" class="pat-modal icon-plus-circle" title="Start a new session" i18n:translate="link_start_session">start a new session</a></tal:name>.
+               data-pat-modal="class: large" class="pat-modal icon-plus-circle" title="Start a new session" i18n:attributes="title" i18n:translate="link_start_session">start a new session</a></tal:name>.
         </p>
 
         <table tal:condition="sessions" id="sessionList">
@@ -33,8 +33,8 @@
                     <tal:span i18n:translate="lable_session_modified">saved on
                     <tal:block i18n:name="date">${python:tools.formatDate(session['modified'])}</tal:block></tal:span></form></td>
                 <td class="actions span-5">
-                    <a class="iconified icon-pencil pat-modal" title="Rename this session" href="${context/absolute_url}/@@rename-session?id=${session/id}#document-content" i18n:translate="label_rename">Rename</a>
-                    <a class="iconified icon-trash pat-modal" title="Delete this session" href="${context/absolute_url}/@@confirmation-delete-session.html?id=${session/id}#document-content" i18n:translate="label_delete">Delete</a>
+                    <a class="iconified icon-pencil pat-modal" title="Rename this session" href="${context/absolute_url}/@@rename-session?id=${session/id}#document-content" i18n:attributes="title" i18n:translate="label_rename">Rename</a>
+                    <a class="iconified icon-trash pat-modal" title="Delete this session" href="${context/absolute_url}/@@confirmation-delete-session.html?id=${session/id}#document-content" i18n:attributes="title" i18n:translate="label_delete">Delete</a>
                 </td>
             </tr>
             </tbody>

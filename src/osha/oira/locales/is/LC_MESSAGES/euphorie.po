@@ -403,7 +403,7 @@ msgstr "Þessi texti útskýrir hinar 2 gerðir af upplýsingaspurningum."
 #: src/osha/oira/client/templates/help.pt:25
 #: src/osha/oira/client/templates/help.pt:44
 msgid "help_header_identification"
-msgstr "2. Auðkenning"
+msgstr "2. Greining"
 
 #. Default: 2. Identification
 #: src/osha/oira/manual_translations.py:111
@@ -1143,7 +1143,7 @@ msgstr "Skiptu um lykilorð"
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
-msgstr ""
+msgstr "Bæta við áhættuflokkum"
 
 #. Default: By clicking on 'Delete account', your account will be permenantly
 #. deleted. This action is irreversable.
@@ -1416,7 +1416,7 @@ msgstr "Já, eyða lotu"
 #: src/osha/oira/content/solution.py:42 src/osha/oira/content/solution.py:59
 #: src/osha/oira/content/templates/surveygroup_add.pt:110
 msgid "button_cancel"
-msgstr "Hætt við"
+msgstr "Hætta við"
 
 #. Default: OiRA - Online interactive Risk Assessment
 #: src/osha/oira/client/templates/disclaimer.pt:12
@@ -1710,25 +1710,24 @@ msgstr "keyra prufulotu"
 #: src/osha/oira/client/templates/login_form.pt:49
 #: src/osha/oira/client/templates/new-session-test.pt:37
 msgid "label_register"
-msgstr ""
+msgstr "hér"
 
 #. Default: Want to try OiRA? You may ${tryout_link} or ${register_link} to
 #. start for real.
 #: src/osha/oira/client/templates/login.pt:24
 msgid "teaser_try_oira"
 msgstr ""
-"Viltu prófa OiRA? Þú mátt ${tryout_link} eða ${register_link} til að byrja í "
-"alvöru."
+"Viltu prófa OiRA? Þú getur ${tryout_link} eða byrjað á áhættumatinu ${register_link}."
 
 #. Default: log in
 #: src/osha/oira/client/templates/login.pt:27
 msgid "log in"
-msgstr ""
+msgstr "hér"
 
 #. Default: If you are a registered user, you can ${log_in} here.
 #: src/osha/oira/client/templates/login.pt:27
 msgid "label_login_here"
-msgstr ""
+msgstr "Ef þú ert búinn að stofna aðgang, geturðu byrjað ${log_in}."
 
 #. Default: Show more…
 #: src/osha/oira/client/templates/login.pt:34
@@ -2026,7 +2025,7 @@ msgstr "Nei"
 #. Default: New test session
 #: src/osha/oira/client/templates/new-session-test.pt:14
 msgid "label_new_session_test"
-msgstr "Ný prufulota"
+msgstr "Prófa verkfærið"
 
 #. Default: Start a new session choosing one of the following sectoral tools
 #: src/osha/oira/client/templates/new-session-test.pt:20
@@ -2070,7 +2069,7 @@ msgstr "kostir"
 #. Default: limitations
 #: src/osha/oira/client/templates/new-session-test.pt:34
 msgid "limitations"
-msgstr "takmarkanir"
+msgstr "galla"
 
 #. Default: Read here about the ${benefits}${tooltip_benefits} and
 #. ${limitations}${tooltip_limitations} of a test session.
@@ -2078,39 +2077,39 @@ msgstr "takmarkanir"
 msgid "testsession_benefits_limitations"
 msgstr ""
 "Lestu hér um ${benefits}${tooltip_benefits} og "
-"${limitations}${tooltip_limitations} prufulotu."
+"${limitations}${tooltip_limitations} þess að prófa verkfærið."
 
 #. Default: Or ${register_link} instead. Find out why you should
 #. register${tooltip_register}.
 #: src/osha/oira/client/templates/new-session-test.pt:37
 msgid "testsession_register"
 msgstr ""
-"Eða ${register_link} í staðinn. Sjáðu hvers vegna þú ættir að skrá "
+"Stofnaðu aðgang ${register_link}. Kostir þess að stofna aðgang "
 "${tooltip_register}."
 
 #. Default: Start session
 #: src/osha/oira/client/templates/new-session-test.pt:41
 #: src/osha/oira/client/templates/new-session.pt:38
 msgid "button_start_session"
-msgstr "Hefja lotu"
+msgstr "Byrja"
 
 #. Default: New session
 #: src/osha/oira/client/templates/new-session.pt:14
 msgid "header_new_session"
-msgstr "Ný lota"
+msgstr "Nýtt áhættumat"
 
 #. Default: Sign in
 #: src/osha/oira/client/templates/plain.pt:99
 #: src/osha/oira/client/templates/shell.pt:73
 #: src/osha/oira/client/templates/webhelpers.pt:36
 msgid "Sign in"
-msgstr "Innskráning"
+msgstr "stofna aðgang"
 
 #. Default: This is a test session. ${link_sign_in} to save your data.
 #: src/osha/oira/client/templates/plain.pt:99
 #: src/osha/oira/client/templates/shell.pt:73
 msgid "info_testsession"
-msgstr "Þetta er prufulota. ${link_sign_in} til að vista gögnin þín."
+msgstr "Hér er hægt að prófa verkfærið. Það verður að ${link_sign_in} til að gera áhættumat og vista það."
 
 #. Default: Info
 #: src/osha/oira/client/templates/plain.pt:99
@@ -2198,9 +2197,7 @@ msgstr "Skýrsla"
 #: src/osha/oira/client/templates/register.pt:21
 msgid "report_guest_register_intro"
 msgstr ""
-"Við biðjumst velvirðingar, en þetta er prufuútgáfa og því er ekki hægt að "
-"nota niðurhalseiginleikann. Skráðu þig inn í einu skrefi og fáðu aðgang að "
-"eftirfarandi fríðindum:"
+"Athugið! Hér er aðeins hægt að prófa verkfærið. Það er ekki hægt að vista gögn. Stofnaðu aðgang til að nota verkfærið."
 
 #. Default: It's free.
 #: src/osha/oira/client/templates/register.pt:23
@@ -2212,13 +2209,13 @@ msgstr "Það er ókeypis."
 #: src/osha/oira/client/templates/register.pt:24
 #: src/osha/oira/client/templates/tooltips.pt:27
 msgid "label_register_benefit_2"
-msgstr "Hægt er vista vinnuna utan nets."
+msgstr "Hægt er vista gögnin."
 
 #. Default: You can download a full report and an action plan.
 #: src/osha/oira/client/templates/register.pt:25
 #: src/osha/oira/client/templates/tooltips.pt:28
 msgid "label_register_benefit_3"
-msgstr "Hægt er að sækja fullbúna skýrslu og verkáætlun."
+msgstr "Hægt er að búa til skýrslu og aðgerðaáætlun."
 
 #. Default: Example of a full report in rich text format (.rtf)
 #: src/osha/oira/client/templates/register.pt:33
@@ -2805,13 +2802,13 @@ msgstr "Minni háttar"
 #: src/osha/oira/client/templates/risk_evaluation.pt:53
 #: src/osha/oira/client/templates/risk_identification.pt:70
 msgid "effect_injury_with_absence"
-msgstr "Talsvert alvarlegar"
+msgstr "Alvarlegt"
 
 #. Default: High (very high) severity
 #: src/osha/oira/client/templates/risk_evaluation.pt:55
 #: src/osha/oira/client/templates/risk_identification.pt:72
 msgid "effect_permanent_damage"
-msgstr "Mjög (sérstaklega) alvarlegar"
+msgstr "Mjög alvarlegt"
 
 #. Default: What is the severity of the damage ?
 #: src/osha/oira/client/templates/risk_evaluation.pt:60
@@ -2949,8 +2946,7 @@ msgstr "Á ekki við"
 #: src/osha/oira/client/templates/risk_identification.pt:36
 msgid "help_calculated_evaluation"
 msgstr ""
-"Vinsamlegast svaraðu eftirfarandi spurningum. Þegar svörin þín eru klár mun "
-"kerfið reikna út forgang áhættunnar. Þú getur breytt forganginum síðar."
+"Vinsamlegast svaraðu eftirfarandi spurningum. Verkfærið metur áhættuna en hægt er að breyta matinu í aðgerðaáætluninni."
 
 #. Default: The risk evaluation has been automatically done by the tool. You
 #. will be able to change the priority for this risk – if you consider it
@@ -2958,8 +2954,7 @@ msgstr ""
 #: src/osha/oira/client/templates/risk_identification.pt:143
 msgid "description_automatic_evaluation"
 msgstr ""
-"Áhættumatið hefur verið framkvæmt sjálfkrafa með verkfærinu. Þú getur breytt "
-"forgangi áhættunnar – ef þú telur þörf á því – í verkáætluninni."
+"Verkfærið metur áhættuna sjálkrafa. Hægt er að breyta forgangi áhættunar í aðgerðaáætluninni."
 
 #: src/osha/oira/client/templates/risks_overview.pt:143
 msgid "Overview of risks"
@@ -2970,7 +2965,7 @@ msgstr ""
 #: src/osha/oira/client/templates/status.pt:92
 #: src/osha/oira/client/templates/status_print.pt:85
 msgid "label_no_risk"
-msgstr "Engin áhætta"
+msgstr "Áhættan er ekki til staðar"
 
 #. Default: Risk with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:220
@@ -2984,7 +2979,7 @@ msgstr "Áhætta með aðgerð(um)"
 #: src/osha/oira/client/templates/status.pt:98
 #: src/osha/oira/client/templates/status_print.pt:91
 msgid "label_risk_without_measure"
-msgstr "Áhætta án aðgerðar"
+msgstr "Áhættan er til staðar"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/risks_overview.pt:226
@@ -2992,7 +2987,7 @@ msgstr "Áhætta án aðgerðar"
 #: src/osha/oira/client/templates/webhelpers.pt:118
 #: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "Postponed"
-msgstr "Frestað"
+msgstr "Skoðað en ekki svarað"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/risks_overview.pt:229
@@ -3000,7 +2995,7 @@ msgstr "Frestað"
 #: src/osha/oira/client/templates/webhelpers.pt:117
 #: src/osha/oira/client/templates/webhelpers.pt:129
 msgid "Unvisited"
-msgstr "Ekki heimsótt"
+msgstr "Ekki opnað"
 
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:240
@@ -3046,13 +3041,13 @@ msgstr ""
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/survey_sessions.pt:45
 msgid "link_start_session"
-msgstr "hefja nýja lotu"
+msgstr "byrja á nýju"
 
 #. Default: Select an earlier session to complete or review or
 #. ${start_session}.
 #: src/osha/oira/client/templates/sessions.pt:20
 msgid "info_select_session"
-msgstr "Veldu eldri lotu til að ljúka eða endurskoða eða ${start_session}."
+msgstr "Veldu áhættumat til að ljúka eða endurskoða eða ${start_session}."
 
 #. Default: saved on ${date}
 #: src/osha/oira/client/templates/sessions.pt:33
@@ -3115,7 +3110,7 @@ msgstr "Byrja"
 #: src/osha/oira/client/templates/status.pt:19
 #: src/osha/oira/client/templates/status_print.pt:19
 msgid "title_status_of"
-msgstr "Staða ${survey_title}"
+msgstr "Yfirlit: ${survey_title}"
 
 #. Default: Questions answered per module
 #: src/osha/oira/client/templates/status.pt:22
@@ -3155,9 +3150,7 @@ msgstr "eða…"
 #: src/osha/oira/client/templates/tooltips.pt:3
 msgid "guest_login_warning"
 msgstr ""
-"Þú ert að meta OiRA sem gestanotandi. Þú getur ekki vistað vinnuna þína né "
-"sótt skýrslur. Til að vista vinnuna þína skaltu skrá þig inn eða nýskrá þig "
-"með því að smella á tengilinn \"Innskráning\" efst til hægri."
+"Þú ert að prófa OiRA verkfærið. Þú getur ekki vistað áhættumatið né sótt skýrslur. Til að geta vistað áhættumat þarf að skrá sig inn eða stofna aðgang með því að smella á tengilinn “Innskráning” efst til hægri."
 
 #. Default: Important
 #: src/osha/oira/client/templates/tooltips.pt:8
@@ -3226,10 +3219,7 @@ msgstr "Valmyndaskipting"
 #: src/osha/oira/client/templates/tooltips.pt:37
 msgid "info_osh_hamburger"
 msgstr ""
-"Valmyndaskiptingin gerir þér kleift að fela og sýna hliðarvalmynd þannig að "
-"hún kemur aðeins upp þegar þú þarft hana. Feldu valmyndina þegar þú ert að "
-"einbeita þér að því að fylla út í verkfærinu og sýndu hana þegar þú ert að "
-"smella á milli skjáa í forritinu."
+"Valmyndaskiptingin gerir þér kleift að fela og sýna hliðarvalmynd þannig að hún kemur aðeins upp þegar þú þarft hana. Feldu valmyndina þegar þú villt."
 
 #. Default: Tip
 #: src/osha/oira/client/templates/tooltips.pt:40
@@ -3258,13 +3248,12 @@ msgstr "Hliðarvalmynd"
 #: src/osha/oira/client/templates/tooltips.pt:49
 msgid "info_osh_menu"
 msgstr ""
-"Nýju hliðarvalmyndirnar veita aðgang að grunnaðgerðum forritsins. Einnig í "
-"síma!"
+"Hliðarvalmyndir veita aðgang að grunnaðgerðum forritsins. Einnig í síma!"
 
 #. Default: Session menu
 #: src/osha/oira/client/templates/tooltips.pt:58
 msgid "header_osh_session_menu"
-msgstr "Lotuvalmynd"
+msgstr "Valmynd"
 
 #. Default: From this menu you can start a new session of an OiRA tool, or pick
 #. up a previous session to continue working on it. If you do not have an
@@ -3273,9 +3262,7 @@ msgstr "Lotuvalmynd"
 #: src/osha/oira/client/templates/tooltips.pt:61
 msgid "info_osh_session_menu"
 msgstr ""
-"Úr þessari valmynd geturðu byrjað nýja lotu með OiRA verkfærinu eða haldið "
-"áfram á vinna í fyrri lotu. Ef þú ert ekki með reikning fyrir OiRA forritið "
-"ennþá geturðu byrjað á prufulotu til að prófa núna."
+"Hér getur þú valið milli þess að byrja á nýju áhættumati eða haldið áfram með eldra áhættumat. Þótt þú hafir ekki stofnað aðgang að OiRA verkfærinu getur þú samt prófað það."
 
 #. Default: OiRA Tool was updated
 #: src/osha/oira/client/templates/update.pt:15
@@ -4277,8 +4264,7 @@ msgstr "CC leyfi"
 #: src/osha/oira/upgrade/upgrade.py:190
 msgid "description_other_risks"
 msgstr ""
-"Ef þú hefur greint áhættur sem eru ekki í verkfærinu geturðu bætt þeim við "
-"núna:"
+"Hættum sem ekki er fjallað um í verkfærinu er hægt að bæta við hér:"
 
 #. Default: <p>Would you now like to add your own defined risks to this
 #. tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks,
@@ -4287,7 +4273,7 @@ msgstr ""
 #. select 'No.'</p>
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
-msgstr ""
+msgstr "<p>Viltu taka fleiri hættur með í áhættumatið?</p><p><strong>Athugið</strong>: Til að koma í veg fyrir endurtekningar er mikilvægt að fara í gegnum allt áhættumatið áður en hættum er bætt við.</p><p>Ef engum hættum er bætt við veljið þá 'Nei.'</p>"
 
 #~ msgid "label_close_panel"
 #~ msgstr "Lokaðu glugganum"

@@ -99,7 +99,7 @@
                         data-pat-tooltip="source: ajax; class: large; position-list: tl" title="Select an existing session to review or to continue" tal:content="webhelpers/get_survey_title">Private Security EU</a>
                 </tal:if>
                 <a href="${webhelpers/session_overview_url}/new-session.html#document-content" id="button-new-session-quick"
-                    data-pat-modal="class: large" class="no-label pat-modal iconified icon-plus-circle" title="Start a new session" i18n:translate="New">New</a>
+                    data-pat-modal="class: large" class="no-label pat-modal iconified icon-plus-circle" title="Start a new session" i18n:attributes="title" i18n:translate="New">New</a>
             </tal:if>
             <metal:include tal:define="id string:session-menu" use-macro="context/@@includes/macros/osh"/>
         </header>

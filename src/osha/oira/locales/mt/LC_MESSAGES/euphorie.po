@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-09-27 17:55+0200\n"
+"POT-Creation-Date: 2015-10-10 16:33+0200\n"
 "PO-Revision-Date: 2013-12-18 09:59+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -704,7 +704,7 @@ msgstr ""
 #. Default: The current text in the fields 'Action plan', 'Prevention plan' and
 #. 'Requirements' of this measure will be overwritten. This action cannot be
 #. reverted. Are you sure you want to continue?
-#: src/osha/oira/manual_translations.py:221
+#: src/osha/oira/manual_translations.py:221 src/osha/oira/client/risk.py:229
 msgid ""
 "The current text in the fields 'Action plan', 'Prevention plan' and "
 "'Requirements' of this measure will be overwritten. This action cannot be "
@@ -834,20 +834,20 @@ msgstr "It-Tielet Tliet Xhur"
 msgid "4th Quarter"
 msgstr "Ir-Raba' Tliet Xhur"
 
-#: src/osha/oira/client/country.py:94
+#: src/osha/oira/client/country.py:134
 msgid "Session `${name}` has been deleted."
 msgstr "Sessjoni \"${name}\" tħassret."
 
-#: src/osha/oira/client/country.py:129
+#: src/osha/oira/client/country.py:169
 msgid "Save"
 msgstr "Issejvja"
 
-#: src/osha/oira/client/country.py:137
+#: src/osha/oira/client/country.py:177
 msgid "Session title has been changed to ${name}"
 msgstr "It-titlu tas-sessjoni nbidel għal ${name}"
 
 #. Default: Cancel
-#: src/osha/oira/client/country.py:141
+#: src/osha/oira/client/country.py:181
 #: src/osha/oira/client/templates/account-delete.pt:30
 #: src/osha/oira/client/templates/new-email.pt:27
 #: src/osha/oira/client/templates/rename-session.pt:30
@@ -1154,7 +1154,7 @@ msgid "title_change_password"
 msgstr "Ibdel il-password"
 
 #. Default: Added risks (by you)
-#: src/osha/oira/client/survey.py:265
+#: src/osha/oira/client/survey.py:270
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
@@ -1617,6 +1617,7 @@ msgstr "It-Tħejjija"
 #: src/osha/oira/client/templates/risk_evaluation.pt:143
 #: src/osha/oira/client/templates/shell.pt:119
 #: src/osha/oira/client/templates/shell.pt:120
+#: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_identification"
 msgstr "L-Identifikazzjoni"
 
@@ -1638,6 +1639,7 @@ msgstr "L-Identifikazzjoni"
 #: src/osha/oira/client/templates/risk_evaluation.pt:149
 #: src/osha/oira/client/templates/shell.pt:119
 #: src/osha/oira/client/templates/shell.pt:120
+#: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_evaluation"
 msgstr "Il-Valutazzjoni"
 
@@ -1659,6 +1661,7 @@ msgstr "Il-Valutazzjoni"
 #: src/osha/oira/client/templates/risk_evaluation.pt:158
 #: src/osha/oira/client/templates/shell.pt:129
 #: src/osha/oira/client/templates/shell.pt:131
+#: src/osha/oira/client/templates/webhelpers.pt:113
 msgid "label_action_plan"
 msgstr "Il-Pjan ta' Azzjoni"
 
@@ -1759,7 +1762,7 @@ msgstr ""
 
 #. Default: Show less…
 #: src/osha/oira/client/templates/login.pt:34
-#: src/osha/oira/client/templates/webhelpers.pt:312
+#: src/osha/oira/client/templates/webhelpers.pt:318
 msgid "Show less…"
 msgstr ""
 
@@ -2404,7 +2407,7 @@ msgstr ""
 #. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:214
+#: src/osha/oira/client/templates/webhelpers.pt:220
 msgid "top5_risk_not_present"
 msgstr ""
 "Dan ir-riskju mhuwiex preżenti fl-organizzazzjoni tiegħek, iżda minħabba li "
@@ -2558,7 +2561,7 @@ msgstr "Aqbeż dan l-istadju"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:223
+#: src/osha/oira/client/templates/webhelpers.pt:229
 msgid "warn_risk_present"
 msgstr "Inti weġibt b'mod negattiv għad-dikjarazzjoni t'hawn fuq."
 
@@ -3036,16 +3039,16 @@ msgstr "Riskju mingħajr miżura"
 #. Default: Postponed
 #: src/osha/oira/client/templates/risks_overview.pt:226
 #: src/osha/oira/client/templates/status.pt:101
-#: src/osha/oira/client/templates/webhelpers.pt:112
-#: src/osha/oira/client/templates/webhelpers.pt:124
+#: src/osha/oira/client/templates/webhelpers.pt:118
+#: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "Postponed"
 msgstr "Posponiment"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/risks_overview.pt:229
 #: src/osha/oira/client/templates/status.pt:104
-#: src/osha/oira/client/templates/webhelpers.pt:111
-#: src/osha/oira/client/templates/webhelpers.pt:123
+#: src/osha/oira/client/templates/webhelpers.pt:117
+#: src/osha/oira/client/templates/webhelpers.pt:129
 msgid "Unvisited"
 msgstr "Ma saritx żjara"
 
@@ -3084,6 +3087,11 @@ msgstr ""
 msgid "heading_num_todo_prio_risks"
 msgstr ""
 
+#: src/osha/oira/client/templates/sessions.pt:22
+#: src/osha/oira/client/templates/shell.pt:101
+msgid "Start a new session"
+msgstr ""
+
 #. Default: start a new session
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/survey_sessions.pt:45
@@ -3103,11 +3111,19 @@ msgstr ""
 msgid "lable_session_modified"
 msgstr "issejvjata ${date}"
 
+#: src/osha/oira/client/templates/sessions.pt:36
+msgid "Rename this session"
+msgstr ""
+
 #. Default: Rename
 #: src/osha/oira/client/templates/sessions.pt:36
 #: src/osha/oira/client/templates/survey_sessions.pt:32
 msgid "label_rename"
 msgstr "Agħti isem ġdid"
+
+#: src/osha/oira/client/templates/sessions.pt:37
+msgid "Delete this session"
+msgstr ""
 
 #: src/osha/oira/client/templates/shell.pt:91
 #: src/osha/oira/client/templates/shell.pt:93
@@ -3270,43 +3286,36 @@ msgstr ""
 
 #. Default: Tip
 #: src/osha/oira/client/templates/tooltips.pt:40
-#: src/osha/oira/client/templates/tooltips.pt:54
-#: src/osha/oira/client/templates/tooltips.pt:68
+#: src/osha/oira/client/templates/tooltips.pt:52
+#: src/osha/oira/client/templates/tooltips.pt:64
 msgid "Tip"
 msgstr "Parir"
 
 #. Default: You may switch this on screen help feature on or off at any time by
 #. clicking on the ${questionmark} at the top right on the toolbar.
 #: src/osha/oira/client/templates/tooltips.pt:41
-#: src/osha/oira/client/templates/tooltips.pt:55
-#: src/osha/oira/client/templates/tooltips.pt:69
+#: src/osha/oira/client/templates/tooltips.pt:53
+#: src/osha/oira/client/templates/tooltips.pt:65
 msgid "info_screen_help"
 msgstr ""
 "Dan tista' tattivah jew titfih mill-funzjoni tal-għajnuna fuq l-iskrin billi "
 "tikklikkja fuq il-${questionmark} min-naħa tal-lemin ta' fuq tat-toolbar."
 
-#. Default: Close panel
-#: src/osha/oira/client/templates/tooltips.pt:44
-#: src/osha/oira/client/templates/tooltips.pt:58
-#: src/osha/oira/client/templates/tooltips.pt:72
-msgid "label_close_panel"
-msgstr "Agħlaq il-panil"
-
 #. Default: Off canvas menu
-#: src/osha/oira/client/templates/tooltips.pt:48
+#: src/osha/oira/client/templates/tooltips.pt:46
 msgid "header_osh_menu"
 msgstr "Menu off canvas"
 
 #. Default: The new off canvas menu provides access to the core functions of
 #. the applications. Also on mobile!
-#: src/osha/oira/client/templates/tooltips.pt:51
+#: src/osha/oira/client/templates/tooltips.pt:49
 msgid "info_osh_menu"
 msgstr ""
 "Il-menu off canvas ġdid jipprovdi aċċess għall-funzjonjiet ewlenin tal-"
 "applikazzjonijiet. Anki fuq il-mowbajl!"
 
 #. Default: Session menu
-#: src/osha/oira/client/templates/tooltips.pt:62
+#: src/osha/oira/client/templates/tooltips.pt:58
 msgid "header_osh_session_menu"
 msgstr "Menu ta' sessjoni"
 
@@ -3314,7 +3323,7 @@ msgstr "Menu ta' sessjoni"
 #. up a previous session to continue working on it. If you do not have an
 #. account for the OiRA application yet, you can start a test session to try it
 #. out immediately.
-#: src/osha/oira/client/templates/tooltips.pt:65
+#: src/osha/oira/client/templates/tooltips.pt:61
 msgid "info_osh_session_menu"
 msgstr ""
 "Minn dan il-menu tista' tibda sessjoni ġdida tal-għodda ta' OIRA, jew aqbad "
@@ -3361,70 +3370,70 @@ msgstr "Il-Valutazzjonijiet Tiegħi"
 msgid "navigation_settings"
 msgstr "Settings"
 
-#: src/osha/oira/client/templates/webhelpers.pt:113
-#: src/osha/oira/client/templates/webhelpers.pt:125
+#: src/osha/oira/client/templates/webhelpers.pt:119
+#: src/osha/oira/client/templates/webhelpers.pt:131
 msgid "Risk not present"
 msgstr "Riskju mhux preżenti"
 
-#: src/osha/oira/client/templates/webhelpers.pt:114
-#: src/osha/oira/client/templates/webhelpers.pt:126
+#: src/osha/oira/client/templates/webhelpers.pt:120
+#: src/osha/oira/client/templates/webhelpers.pt:132
 msgid "Risk present"
 msgstr "Riskju preżenti"
 
 #. Default: Produced by ${EU-OSHA}.
-#: src/osha/oira/client/templates/webhelpers.pt:140
+#: src/osha/oira/client/templates/webhelpers.pt:146
 #: src/osha/oira/tiles/templates/footer.pt:17
 msgid "appendix_produced_by"
 msgstr "Prodotta minn ${EU-OSHA}."
 
 #. Default: About
-#: src/osha/oira/client/templates/webhelpers.pt:143
+#: src/osha/oira/client/templates/webhelpers.pt:149
 #: src/osha/oira/tiles/templates/footer.pt:20
 msgid "appendix_about"
 msgstr "Dwar"
 
 #. Default: Privacy
-#: src/osha/oira/client/templates/webhelpers.pt:145
+#: src/osha/oira/client/templates/webhelpers.pt:151
 #: src/osha/oira/tiles/templates/footer.pt:23
 msgid "appendix_privacy"
 msgstr "Privatezza"
 
 #. Default: Disclaimer
-#: src/osha/oira/client/templates/webhelpers.pt:147
+#: src/osha/oira/client/templates/webhelpers.pt:153
 #: src/osha/oira/tiles/templates/footer.pt:26
 msgid "appendix_disclaimer"
 msgstr "Ċaħda ta’ responsabbiltà"
 
 #. Default: GPL License
-#: src/osha/oira/client/templates/webhelpers.pt:149
+#: src/osha/oira/client/templates/webhelpers.pt:155
 #: src/osha/oira/tiles/templates/footer.pt:29
 msgid "appendix_gpl_license"
 msgstr "Liċenzja GPL"
 
-#: src/osha/oira/client/templates/webhelpers.pt:151
+#: src/osha/oira/client/templates/webhelpers.pt:157
 msgid "CC License"
 msgstr "Liċenzja CC"
 
 #. Default: Read more
-#: src/osha/oira/client/templates/webhelpers.pt:231
-#: src/osha/oira/client/templates/webhelpers.pt:299
-#: src/osha/oira/client/templates/webhelpers.pt:318
+#: src/osha/oira/client/templates/webhelpers.pt:237
+#: src/osha/oira/client/templates/webhelpers.pt:305
+#: src/osha/oira/client/templates/webhelpers.pt:324
 msgid "Read more"
 msgstr "Aqra aktar"
 
 #. Default: ${read_more} about this risk.
-#: src/osha/oira/client/templates/webhelpers.pt:231
+#: src/osha/oira/client/templates/webhelpers.pt:237
 msgid "label_show_more"
 msgstr "${read_more} dwar dan ir-riskju."
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:329
-#: src/osha/oira/client/templates/webhelpers.pt:358
+#: src/osha/oira/client/templates/webhelpers.pt:335
+#: src/osha/oira/client/templates/webhelpers.pt:364
 msgid "header_legal_references"
 msgstr "Referenzi legali u tal-politika"
 
 #. Default: Additional resources for assessing the risk
-#: src/osha/oira/client/templates/webhelpers.pt:336
+#: src/osha/oira/client/templates/webhelpers.pt:342
 msgid "header_additional_resources"
 msgstr "Riżorsi addizzjonali għall-valutazzjoni tar-riskju"
 
@@ -4370,6 +4379,9 @@ msgstr ""
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
 msgstr ""
+
+#~ msgid "label_close_panel"
+#~ msgstr "Agħlaq il-panil"
 
 #~ msgid "label_prevention_plan"
 #~ msgstr "Pjan ta' prevenzjoni"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-09-27 17:55+0200\n"
+"POT-Creation-Date: 2015-10-10 16:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -753,7 +753,7 @@ msgstr ""
 #. Default: The current text in the fields 'Action plan', 'Prevention plan' and
 #. 'Requirements' of this measure will be overwritten. This action cannot be
 #. reverted. Are you sure you want to continue?
-#: src/osha/oira/manual_translations.py:221
+#: src/osha/oira/manual_translations.py:221 src/osha/oira/client/risk.py:229
 msgid ""
 "The current text in the fields 'Action plan', 'Prevention plan' and "
 "'Requirements' of this measure will be overwritten. This action cannot be "
@@ -883,20 +883,20 @@ msgstr ""
 msgid "4th Quarter"
 msgstr ""
 
-#: src/osha/oira/client/country.py:94
+#: src/osha/oira/client/country.py:134
 msgid "Session `${name}` has been deleted."
 msgstr ""
 
-#: src/osha/oira/client/country.py:129
+#: src/osha/oira/client/country.py:169
 msgid "Save"
 msgstr ""
 
-#: src/osha/oira/client/country.py:137
+#: src/osha/oira/client/country.py:177
 msgid "Session title has been changed to ${name}"
 msgstr ""
 
 #. Default: Cancel
-#: src/osha/oira/client/country.py:141
+#: src/osha/oira/client/country.py:181
 #: src/osha/oira/client/templates/account-delete.pt:30
 #: src/osha/oira/client/templates/new-email.pt:27
 #: src/osha/oira/client/templates/rename-session.pt:30
@@ -1206,7 +1206,7 @@ msgid "title_change_password"
 msgstr ""
 
 #. Default: Added risks (by you)
-#: src/osha/oira/client/survey.py:265
+#: src/osha/oira/client/survey.py:270
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
@@ -1676,6 +1676,7 @@ msgstr "Vorbereitung"
 #: src/osha/oira/client/templates/risk_evaluation.pt:143
 #: src/osha/oira/client/templates/shell.pt:119
 #: src/osha/oira/client/templates/shell.pt:120
+#: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_identification"
 msgstr "Ermittlung"
 
@@ -1697,6 +1698,7 @@ msgstr "Ermittlung"
 #: src/osha/oira/client/templates/risk_evaluation.pt:149
 #: src/osha/oira/client/templates/shell.pt:119
 #: src/osha/oira/client/templates/shell.pt:120
+#: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_evaluation"
 msgstr "Bewertung"
 
@@ -1718,6 +1720,7 @@ msgstr "Bewertung"
 #: src/osha/oira/client/templates/risk_evaluation.pt:158
 #: src/osha/oira/client/templates/shell.pt:129
 #: src/osha/oira/client/templates/shell.pt:131
+#: src/osha/oira/client/templates/webhelpers.pt:113
 msgid "label_action_plan"
 msgstr "Aktionsplan"
 
@@ -1824,7 +1827,7 @@ msgstr ""
 
 #. Default: Show less…
 #: src/osha/oira/client/templates/login.pt:34
-#: src/osha/oira/client/templates/webhelpers.pt:312
+#: src/osha/oira/client/templates/webhelpers.pt:318
 msgid "Show less…"
 msgstr ""
 
@@ -2466,7 +2469,7 @@ msgstr ""
 #. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:214
+#: src/osha/oira/client/templates/webhelpers.pt:220
 msgid "top5_risk_not_present"
 msgstr ""
 "Diese Gefährdung ist in Ihrer Organisation nicht vorhanden. Da jedoch die "
@@ -2622,7 +2625,7 @@ msgstr "Ja"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:223
+#: src/osha/oira/client/templates/webhelpers.pt:229
 msgid "warn_risk_present"
 msgstr "Sie haben die obenstehende Aussage verneint."
 
@@ -3087,16 +3090,16 @@ msgstr ""
 #. Default: Postponed
 #: src/osha/oira/client/templates/risks_overview.pt:226
 #: src/osha/oira/client/templates/status.pt:101
-#: src/osha/oira/client/templates/webhelpers.pt:112
-#: src/osha/oira/client/templates/webhelpers.pt:124
+#: src/osha/oira/client/templates/webhelpers.pt:118
+#: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "Postponed"
 msgstr ""
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/risks_overview.pt:229
 #: src/osha/oira/client/templates/status.pt:104
-#: src/osha/oira/client/templates/webhelpers.pt:111
-#: src/osha/oira/client/templates/webhelpers.pt:123
+#: src/osha/oira/client/templates/webhelpers.pt:117
+#: src/osha/oira/client/templates/webhelpers.pt:129
 msgid "Unvisited"
 msgstr ""
 
@@ -3135,6 +3138,11 @@ msgstr ""
 msgid "heading_num_todo_prio_risks"
 msgstr ""
 
+#: src/osha/oira/client/templates/sessions.pt:22
+#: src/osha/oira/client/templates/shell.pt:101
+msgid "Start a new session"
+msgstr ""
+
 #. Default: start a new session
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/survey_sessions.pt:45
@@ -3153,11 +3161,19 @@ msgstr ""
 msgid "lable_session_modified"
 msgstr "Gespeichert am ${date}"
 
+#: src/osha/oira/client/templates/sessions.pt:36
+msgid "Rename this session"
+msgstr ""
+
 #. Default: Rename
 #: src/osha/oira/client/templates/sessions.pt:36
 #: src/osha/oira/client/templates/survey_sessions.pt:32
 msgid "label_rename"
 msgstr "Umbenennen"
+
+#: src/osha/oira/client/templates/sessions.pt:37
+msgid "Delete this session"
+msgstr ""
 
 #: src/osha/oira/client/templates/shell.pt:91
 #: src/osha/oira/client/templates/shell.pt:93
@@ -3305,39 +3321,32 @@ msgstr ""
 
 #. Default: Tip
 #: src/osha/oira/client/templates/tooltips.pt:40
-#: src/osha/oira/client/templates/tooltips.pt:54
-#: src/osha/oira/client/templates/tooltips.pt:68
+#: src/osha/oira/client/templates/tooltips.pt:52
+#: src/osha/oira/client/templates/tooltips.pt:64
 msgid "Tip"
 msgstr ""
 
 #. Default: You may switch this on screen help feature on or off at any time by
 #. clicking on the ${questionmark} at the top right on the toolbar.
 #: src/osha/oira/client/templates/tooltips.pt:41
-#: src/osha/oira/client/templates/tooltips.pt:55
-#: src/osha/oira/client/templates/tooltips.pt:69
+#: src/osha/oira/client/templates/tooltips.pt:53
+#: src/osha/oira/client/templates/tooltips.pt:65
 msgid "info_screen_help"
 msgstr ""
 
-#. Default: Close panel
-#: src/osha/oira/client/templates/tooltips.pt:44
-#: src/osha/oira/client/templates/tooltips.pt:58
-#: src/osha/oira/client/templates/tooltips.pt:72
-msgid "label_close_panel"
-msgstr ""
-
 #. Default: Off canvas menu
-#: src/osha/oira/client/templates/tooltips.pt:48
+#: src/osha/oira/client/templates/tooltips.pt:46
 msgid "header_osh_menu"
 msgstr ""
 
 #. Default: The new off canvas menu provides access to the core functions of
 #. the applications. Also on mobile!
-#: src/osha/oira/client/templates/tooltips.pt:51
+#: src/osha/oira/client/templates/tooltips.pt:49
 msgid "info_osh_menu"
 msgstr ""
 
 #. Default: Session menu
-#: src/osha/oira/client/templates/tooltips.pt:62
+#: src/osha/oira/client/templates/tooltips.pt:58
 msgid "header_osh_session_menu"
 msgstr ""
 
@@ -3345,7 +3354,7 @@ msgstr ""
 #. up a previous session to continue working on it. If you do not have an
 #. account for the OiRA application yet, you can start a test session to try it
 #. out immediately.
-#: src/osha/oira/client/templates/tooltips.pt:65
+#: src/osha/oira/client/templates/tooltips.pt:61
 msgid "info_osh_session_menu"
 msgstr ""
 
@@ -3388,8 +3397,8 @@ msgstr "Meine Beurteilungen"
 msgid "navigation_settings"
 msgstr "Einstellungen"
 
-#: src/osha/oira/client/templates/webhelpers.pt:113
-#: src/osha/oira/client/templates/webhelpers.pt:125
+#: src/osha/oira/client/templates/webhelpers.pt:119
+#: src/osha/oira/client/templates/webhelpers.pt:131
 #, fuzzy
 msgid "Risk not present"
 msgstr ""
@@ -3397,66 +3406,66 @@ msgstr ""
 "Organisation der Branche diese als eine der Prioritätsgefährdungen einstuft, "
 "muss sie in den Bericht aufgenommen werden."
 
-#: src/osha/oira/client/templates/webhelpers.pt:114
-#: src/osha/oira/client/templates/webhelpers.pt:126
+#: src/osha/oira/client/templates/webhelpers.pt:120
+#: src/osha/oira/client/templates/webhelpers.pt:132
 #, fuzzy
 msgid "Risk present"
 msgstr "Sie haben die obenstehende Aussage verneint."
 
 #. Default: Produced by ${EU-OSHA}.
-#: src/osha/oira/client/templates/webhelpers.pt:140
+#: src/osha/oira/client/templates/webhelpers.pt:146
 #: src/osha/oira/tiles/templates/footer.pt:17
 msgid "appendix_produced_by"
 msgstr "Produziert von ${EU-OSHA}."
 
 #. Default: About
-#: src/osha/oira/client/templates/webhelpers.pt:143
+#: src/osha/oira/client/templates/webhelpers.pt:149
 #: src/osha/oira/tiles/templates/footer.pt:20
 msgid "appendix_about"
 msgstr "Informationen"
 
 #. Default: Privacy
-#: src/osha/oira/client/templates/webhelpers.pt:145
+#: src/osha/oira/client/templates/webhelpers.pt:151
 #: src/osha/oira/tiles/templates/footer.pt:23
 msgid "appendix_privacy"
 msgstr "Datenschutzbestimmungen"
 
 #. Default: Disclaimer
-#: src/osha/oira/client/templates/webhelpers.pt:147
+#: src/osha/oira/client/templates/webhelpers.pt:153
 #: src/osha/oira/tiles/templates/footer.pt:26
 msgid "appendix_disclaimer"
 msgstr "Haftungsausschluss"
 
 #. Default: GPL License
-#: src/osha/oira/client/templates/webhelpers.pt:149
+#: src/osha/oira/client/templates/webhelpers.pt:155
 #: src/osha/oira/tiles/templates/footer.pt:29
 msgid "appendix_gpl_license"
 msgstr "GPL-Lizenz"
 
-#: src/osha/oira/client/templates/webhelpers.pt:151
+#: src/osha/oira/client/templates/webhelpers.pt:157
 msgid "CC License"
 msgstr ""
 
 #. Default: Read more
-#: src/osha/oira/client/templates/webhelpers.pt:231
-#: src/osha/oira/client/templates/webhelpers.pt:299
-#: src/osha/oira/client/templates/webhelpers.pt:318
+#: src/osha/oira/client/templates/webhelpers.pt:237
+#: src/osha/oira/client/templates/webhelpers.pt:305
+#: src/osha/oira/client/templates/webhelpers.pt:324
 msgid "Read more"
 msgstr ""
 
 #. Default: ${read_more} about this risk.
-#: src/osha/oira/client/templates/webhelpers.pt:231
+#: src/osha/oira/client/templates/webhelpers.pt:237
 msgid "label_show_more"
 msgstr ""
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:329
-#: src/osha/oira/client/templates/webhelpers.pt:358
+#: src/osha/oira/client/templates/webhelpers.pt:335
+#: src/osha/oira/client/templates/webhelpers.pt:364
 msgid "header_legal_references"
 msgstr "Rechtliche und politische Referenzen"
 
 #. Default: Additional resources for assessing the risk
-#: src/osha/oira/client/templates/webhelpers.pt:336
+#: src/osha/oira/client/templates/webhelpers.pt:342
 msgid "header_additional_resources"
 msgstr ""
 

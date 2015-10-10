@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-09-27 17:55+0200\n"
+"POT-Creation-Date: 2015-10-10 16:33+0200\n"
 "PO-Revision-Date: 2013-08-15 11:20+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -696,7 +696,7 @@ msgstr ""
 #. Default: The current text in the fields 'Action plan', 'Prevention plan' and
 #. 'Requirements' of this measure will be overwritten. This action cannot be
 #. reverted. Are you sure you want to continue?
-#: src/osha/oira/manual_translations.py:221
+#: src/osha/oira/manual_translations.py:221 src/osha/oira/client/risk.py:229
 msgid ""
 "The current text in the fields 'Action plan', 'Prevention plan' and "
 "'Requirements' of this measure will be overwritten. This action cannot be "
@@ -826,20 +826,20 @@ msgstr "3. čtvrtletí"
 msgid "4th Quarter"
 msgstr "4. čtvrtletí"
 
-#: src/osha/oira/client/country.py:94
+#: src/osha/oira/client/country.py:134
 msgid "Session `${name}` has been deleted."
 msgstr "Modul `${name}` byla smazán."
 
-#: src/osha/oira/client/country.py:129
+#: src/osha/oira/client/country.py:169
 msgid "Save"
 msgstr "Uložit"
 
-#: src/osha/oira/client/country.py:137
+#: src/osha/oira/client/country.py:177
 msgid "Session title has been changed to ${name}"
 msgstr "Název relace byl změněn na ${name}"
 
 #. Default: Cancel
-#: src/osha/oira/client/country.py:141
+#: src/osha/oira/client/country.py:181
 #: src/osha/oira/client/templates/account-delete.pt:30
 #: src/osha/oira/client/templates/new-email.pt:27
 #: src/osha/oira/client/templates/rename-session.pt:30
@@ -1141,7 +1141,7 @@ msgid "title_change_password"
 msgstr "Změnit heslo"
 
 #. Default: Added risks (by you)
-#: src/osha/oira/client/survey.py:265
+#: src/osha/oira/client/survey.py:270
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
@@ -1595,6 +1595,7 @@ msgstr "Příprava"
 #: src/osha/oira/client/templates/risk_evaluation.pt:143
 #: src/osha/oira/client/templates/shell.pt:119
 #: src/osha/oira/client/templates/shell.pt:120
+#: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_identification"
 msgstr "Identifikace"
 
@@ -1616,6 +1617,7 @@ msgstr "Identifikace"
 #: src/osha/oira/client/templates/risk_evaluation.pt:149
 #: src/osha/oira/client/templates/shell.pt:119
 #: src/osha/oira/client/templates/shell.pt:120
+#: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_evaluation"
 msgstr "Vyhodnocení"
 
@@ -1637,6 +1639,7 @@ msgstr "Vyhodnocení"
 #: src/osha/oira/client/templates/risk_evaluation.pt:158
 #: src/osha/oira/client/templates/shell.pt:129
 #: src/osha/oira/client/templates/shell.pt:131
+#: src/osha/oira/client/templates/webhelpers.pt:113
 msgid "label_action_plan"
 msgstr "Akční plán"
 
@@ -1737,7 +1740,7 @@ msgstr ""
 
 #. Default: Show less…
 #: src/osha/oira/client/templates/login.pt:34
-#: src/osha/oira/client/templates/webhelpers.pt:312
+#: src/osha/oira/client/templates/webhelpers.pt:318
 msgid "Show less…"
 msgstr ""
 
@@ -2054,13 +2057,13 @@ msgstr "Zadejte název svého vyhodnocení rizik"
 #: src/osha/oira/client/templates/survey_sessions.pt:48
 msgid "session_title_tooltip"
 msgstr ""
-"Po zahájení práce na vlastním modulu OiRA budete moci práci kdykoliv přerušit (i před dokončením modulu). Můžete "
-"znovu pokračovat později zvolením uoženého názvu modulu OiRA. "
-"Můžete uložit více než jeden modul, pokud jste jim dali různé názvy. "
-"Zapamatujte si prosím svou e-mailovou adresu a název, který jste "
-"modulu OiRA dal/a. Kliknutím na tlačítko Odhlásit se aktivně "
-"odhlásíte. Odhlásíte se také tím, když zavřete prohlížeč. Z důvodů "
-"bezpečnosti je lepší se odhlásit aktivně."
+"Po zahájení práce na vlastním modulu OiRA budete moci práci kdykoliv "
+"přerušit (i před dokončením modulu). Můžete znovu pokračovat později "
+"zvolením uoženého názvu modulu OiRA. Můžete uložit více než jeden modul, "
+"pokud jste jim dali různé názvy. Zapamatujte si prosím svou e-mailovou "
+"adresu a název, který jste modulu OiRA dal/a. Kliknutím na tlačítko Odhlásit "
+"se aktivně odhlásíte. Odhlásíte se také tím, když zavřete prohlížeč. Z "
+"důvodů bezpečnosti je lepší se odhlásit aktivně."
 
 #. Default: benefits
 #: src/osha/oira/client/templates/new-session-test.pt:34
@@ -2266,8 +2269,7 @@ msgstr ""
 #. you.
 #: src/osha/oira/client/templates/reminder.pt:23
 msgid "description_password_reminder"
-msgstr ""
-"Zadejte svoji e-mailovou adresu. Zašleme vám přihlašovací údaje."
+msgstr "Zadejte svoji e-mailovou adresu. Zašleme vám přihlašovací údaje."
 
 #: src/osha/oira/client/templates/rename-session.pt:16
 msgid "Change name of session"
@@ -2373,7 +2375,7 @@ msgstr ""
 #. organisation considers this one of the priority risks it must be included in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
-#: src/osha/oira/client/templates/webhelpers.pt:214
+#: src/osha/oira/client/templates/webhelpers.pt:220
 msgid "top5_risk_not_present"
 msgstr ""
 "Toto riziko ve vaší organizaci nehrozí, ale protože sektorová organizace "
@@ -2525,7 +2527,7 @@ msgstr "Přeskočit tento krok"
 
 #. Default: You responded negative to the above statement.
 #: src/osha/oira/client/templates/report_identification.pt:48
-#: src/osha/oira/client/templates/webhelpers.pt:223
+#: src/osha/oira/client/templates/webhelpers.pt:229
 msgid "warn_risk_present"
 msgstr "Na výše uvedené prohlášení jste odpověděl/a záporně."
 
@@ -2704,10 +2706,10 @@ msgstr ""
 "nedá vyhnout) snížení rizika; 2) konkrétní krok/y vyžadované k implementaci "
 "tohoto přístupu (k eliminaci nebo snížení rizika); 3) míru znalostí "
 "potřebných k implementaci kroku, např. \"zdravý rozum (nevyžadují se žádné "
-"znalosti BOZP)\", \"žádné specifické znalosti BOZP, ale vyžadují se minimální "
-"znalosti BOZP nebo znalosti nebo školení a/nebo konzultace s vedením společnosti\", nebo "
-"\"expert\" na prevencirizik. Můžete zde také popsat jakýkoliv jiný požadavek (pokud "
-"existuje)."
+"znalosti BOZP)\", \"žádné specifické znalosti BOZP, ale vyžadují se "
+"minimální znalosti BOZP nebo znalosti nebo školení a/nebo konzultace "
+"s vedením společnosti\", nebo \"expert\" na prevencirizik. Můžete zde také "
+"popsat jakýkoliv jiný požadavek (pokud existuje)."
 
 #. Default: Appoint someone in your company to be responsible for the
 #. implementation of this measure. This person will have the authority to take
@@ -2993,16 +2995,16 @@ msgstr "Riziko bez opatření"
 #. Default: Postponed
 #: src/osha/oira/client/templates/risks_overview.pt:226
 #: src/osha/oira/client/templates/status.pt:101
-#: src/osha/oira/client/templates/webhelpers.pt:112
-#: src/osha/oira/client/templates/webhelpers.pt:124
+#: src/osha/oira/client/templates/webhelpers.pt:118
+#: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "Postponed"
 msgstr "Odloženo"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/risks_overview.pt:229
 #: src/osha/oira/client/templates/status.pt:104
-#: src/osha/oira/client/templates/webhelpers.pt:111
-#: src/osha/oira/client/templates/webhelpers.pt:123
+#: src/osha/oira/client/templates/webhelpers.pt:117
+#: src/osha/oira/client/templates/webhelpers.pt:129
 msgid "Unvisited"
 msgstr "Nezodpovězeno"
 
@@ -3041,6 +3043,11 @@ msgstr ""
 msgid "heading_num_todo_prio_risks"
 msgstr ""
 
+#: src/osha/oira/client/templates/sessions.pt:22
+#: src/osha/oira/client/templates/shell.pt:101
+msgid "Start a new session"
+msgstr ""
+
 #. Default: start a new session
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/survey_sessions.pt:45
@@ -3061,11 +3068,19 @@ msgstr ""
 msgid "lable_session_modified"
 msgstr "uloženo dne ${date}"
 
+#: src/osha/oira/client/templates/sessions.pt:36
+msgid "Rename this session"
+msgstr ""
+
 #. Default: Rename
 #: src/osha/oira/client/templates/sessions.pt:36
 #: src/osha/oira/client/templates/survey_sessions.pt:32
 msgid "label_rename"
 msgstr "Přejmenovat"
+
+#: src/osha/oira/client/templates/sessions.pt:37
+msgid "Delete this session"
+msgstr ""
 
 #: src/osha/oira/client/templates/shell.pt:91
 #: src/osha/oira/client/templates/shell.pt:93
@@ -3148,10 +3163,10 @@ msgstr "nebo…"
 #: src/osha/oira/client/templates/tooltips.pt:3
 msgid "guest_login_warning"
 msgstr ""
-"Nyní si nástroj OiRA zkoušíte jako host. Nemůžete ukládat "
-"provedenou práci ani stahovat zprávy. Chcete-li si práci uložit, přihlaste "
-"se nebo zaregistrujte klepnutím na odkaz \"Přihlásit se\" v pravém horním "
-"rohu stránky."
+"Nyní si nástroj OiRA zkoušíte jako host. Nemůžete ukládat provedenou práci "
+"ani stahovat zprávy. Chcete-li si práci uložit, přihlaste se nebo "
+"zaregistrujte klepnutím na odkaz \"Přihlásit se\" v pravém horním rohu "
+"stránky."
 
 #. Default: Important
 #: src/osha/oira/client/templates/tooltips.pt:8
@@ -3227,43 +3242,36 @@ msgstr ""
 
 #. Default: Tip
 #: src/osha/oira/client/templates/tooltips.pt:40
-#: src/osha/oira/client/templates/tooltips.pt:54
-#: src/osha/oira/client/templates/tooltips.pt:68
+#: src/osha/oira/client/templates/tooltips.pt:52
+#: src/osha/oira/client/templates/tooltips.pt:64
 msgid "Tip"
 msgstr "Tip"
 
 #. Default: You may switch this on screen help feature on or off at any time by
 #. clicking on the ${questionmark} at the top right on the toolbar.
 #: src/osha/oira/client/templates/tooltips.pt:41
-#: src/osha/oira/client/templates/tooltips.pt:55
-#: src/osha/oira/client/templates/tooltips.pt:69
+#: src/osha/oira/client/templates/tooltips.pt:53
+#: src/osha/oira/client/templates/tooltips.pt:65
 msgid "info_screen_help"
 msgstr ""
 "Tuto funkci nápovědy na obrazovce můžete zapnout nebo vypnout klepnutím na "
 "${questionmark} v pravém horním rohu panelu nástrojů."
 
-#. Default: Close panel
-#: src/osha/oira/client/templates/tooltips.pt:44
-#: src/osha/oira/client/templates/tooltips.pt:58
-#: src/osha/oira/client/templates/tooltips.pt:72
-msgid "label_close_panel"
-msgstr "Zavřít panel"
-
 #. Default: Off canvas menu
-#: src/osha/oira/client/templates/tooltips.pt:48
+#: src/osha/oira/client/templates/tooltips.pt:46
 msgid "header_osh_menu"
 msgstr "Boční vysouvací nabídka"
 
 #. Default: The new off canvas menu provides access to the core functions of
 #. the applications. Also on mobile!
-#: src/osha/oira/client/templates/tooltips.pt:51
+#: src/osha/oira/client/templates/tooltips.pt:49
 msgid "info_osh_menu"
 msgstr ""
 "Nová boční vysouvací nabídka poskytuje přístup k hlavním funkcím aplikací. "
 "Také na mobilním telefonu!"
 
 #. Default: Session menu
-#: src/osha/oira/client/templates/tooltips.pt:62
+#: src/osha/oira/client/templates/tooltips.pt:58
 msgid "header_osh_session_menu"
 msgstr "Nabídka modulu"
 
@@ -3271,7 +3279,7 @@ msgstr "Nabídka modulu"
 #. up a previous session to continue working on it. If you do not have an
 #. account for the OiRA application yet, you can start a test session to try it
 #. out immediately.
-#: src/osha/oira/client/templates/tooltips.pt:65
+#: src/osha/oira/client/templates/tooltips.pt:61
 msgid "info_osh_session_menu"
 msgstr ""
 "Z této nabídky můžete spustit nový modul nástroje OiRA nebo pokračovat "
@@ -3317,70 +3325,70 @@ msgstr "Moje hodnocení"
 msgid "navigation_settings"
 msgstr "Nastavení"
 
-#: src/osha/oira/client/templates/webhelpers.pt:113
-#: src/osha/oira/client/templates/webhelpers.pt:125
+#: src/osha/oira/client/templates/webhelpers.pt:119
+#: src/osha/oira/client/templates/webhelpers.pt:131
 msgid "Risk not present"
 msgstr "OK"
 
-#: src/osha/oira/client/templates/webhelpers.pt:114
-#: src/osha/oira/client/templates/webhelpers.pt:126
+#: src/osha/oira/client/templates/webhelpers.pt:120
+#: src/osha/oira/client/templates/webhelpers.pt:132
 msgid "Risk present"
 msgstr "Pozornost"
 
 #. Default: Produced by ${EU-OSHA}.
-#: src/osha/oira/client/templates/webhelpers.pt:140
+#: src/osha/oira/client/templates/webhelpers.pt:146
 #: src/osha/oira/tiles/templates/footer.pt:17
 msgid "appendix_produced_by"
 msgstr "Vytvořil ${EU-OSHA}."
 
 #. Default: About
-#: src/osha/oira/client/templates/webhelpers.pt:143
+#: src/osha/oira/client/templates/webhelpers.pt:149
 #: src/osha/oira/tiles/templates/footer.pt:20
 msgid "appendix_about"
 msgstr "O"
 
 #. Default: Privacy
-#: src/osha/oira/client/templates/webhelpers.pt:145
+#: src/osha/oira/client/templates/webhelpers.pt:151
 #: src/osha/oira/tiles/templates/footer.pt:23
 msgid "appendix_privacy"
 msgstr "Důvěrnost"
 
 #. Default: Disclaimer
-#: src/osha/oira/client/templates/webhelpers.pt:147
+#: src/osha/oira/client/templates/webhelpers.pt:153
 #: src/osha/oira/tiles/templates/footer.pt:26
 msgid "appendix_disclaimer"
 msgstr "Zřeknutí se odpovědnosti"
 
 #. Default: GPL License
-#: src/osha/oira/client/templates/webhelpers.pt:149
+#: src/osha/oira/client/templates/webhelpers.pt:155
 #: src/osha/oira/tiles/templates/footer.pt:29
 msgid "appendix_gpl_license"
 msgstr "Licence GPL"
 
-#: src/osha/oira/client/templates/webhelpers.pt:151
+#: src/osha/oira/client/templates/webhelpers.pt:157
 msgid "CC License"
 msgstr "CC Licence"
 
 #. Default: Read more
-#: src/osha/oira/client/templates/webhelpers.pt:231
-#: src/osha/oira/client/templates/webhelpers.pt:299
-#: src/osha/oira/client/templates/webhelpers.pt:318
+#: src/osha/oira/client/templates/webhelpers.pt:237
+#: src/osha/oira/client/templates/webhelpers.pt:305
+#: src/osha/oira/client/templates/webhelpers.pt:324
 msgid "Read more"
 msgstr "Více informací"
 
 #. Default: ${read_more} about this risk.
-#: src/osha/oira/client/templates/webhelpers.pt:231
+#: src/osha/oira/client/templates/webhelpers.pt:237
 msgid "label_show_more"
 msgstr "${read_more} o tomto riziku."
 
 #. Default: Legal and policy references
-#: src/osha/oira/client/templates/webhelpers.pt:329
-#: src/osha/oira/client/templates/webhelpers.pt:358
+#: src/osha/oira/client/templates/webhelpers.pt:335
+#: src/osha/oira/client/templates/webhelpers.pt:364
 msgid "header_legal_references"
 msgstr "Odkazy na právní předpisy a postupy"
 
 #. Default: Additional resources for assessing the risk
-#: src/osha/oira/client/templates/webhelpers.pt:336
+#: src/osha/oira/client/templates/webhelpers.pt:342
 msgid "header_additional_resources"
 msgstr "Další zdroje pro hodnocení rizika"
 
@@ -3449,8 +3457,7 @@ msgstr "Další obsah"
 #. Default: Attach any additional content you consider helpful for the user
 #: src/osha/oira/content/risk.py:20
 msgid "intro_additional_content"
-msgstr ""
-"Připojte jakýkoli další obsah, který považujete za užitečný."
+msgstr "Připojte jakýkoli další obsah, který považujete za užitečný."
 
 #. Default: Content file
 #: src/osha/oira/content/risk.py:29 src/osha/oira/content/risk.py:41
@@ -3644,8 +3651,8 @@ msgstr "Logo externí webové stránky"
 #: src/osha/oira/content/survey.py:69
 msgid "label_enable_custom_evaluation_descriptions"
 msgstr ""
-"Jsou použitá kritéria hodnocení rizik specifická pro tento nástroj? "
-"(Pokud ne, použijí se popisy běžných kritérií)."
+"Jsou použitá kritéria hodnocení rizik specifická pro tento nástroj? (Pokud "
+"ne, použijí se popisy běžných kritérií)."
 
 #. Default: Tick this option if you would like to define your own descriptions
 #. for the criteria of the evaluation algorithm. The user will see them as
@@ -3773,8 +3780,8 @@ msgid ""
 "and it will be copied to your survey."
 msgstr ""
 "Ve vlastní analýze můžete použít obsah ze standardní knihovny, kterou "
-"poskytuje OSHA. Stačí si ze seznamu vybrat modul nebo riziko, které "
-"chcete použít, a ony se zkopírují se do vaší analýzy."
+"poskytuje OSHA. Stačí si ze seznamu vybrat modul nebo riziko, které chcete "
+"použít, a ony se zkopírují se do vaší analýzy."
 
 #: src/osha/oira/content/templates/library.pt:21
 msgid ""
@@ -4305,6 +4312,9 @@ msgstr ""
 "doporučujeme, abyste si nejprve prošli všechny předchozí moduly, pokud jste "
 "tak ještě neučinili.</p><p>Jestliže nepotřebujete přidávat žádná rizika, "
 "zvolte „Ne“.</p>"
+
+#~ msgid "label_close_panel"
+#~ msgstr "Zavřít panel"
 
 #~ msgid "label_prevention_plan"
 #~ msgstr "Plán prevence"

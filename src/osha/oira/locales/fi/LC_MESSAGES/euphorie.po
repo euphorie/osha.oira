@@ -1155,7 +1155,7 @@ msgstr "Muuta salasana"
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
-msgstr ""
+msgstr "Muut tunnistetut riskitekijät"
 
 #. Default: By clicking on 'Delete account', your account will be permenantly
 #. deleted. This action is irreversable.
@@ -1719,7 +1719,7 @@ msgstr ""
 #. Default: run a test session
 #: src/osha/oira/client/templates/login.pt:25
 msgid "label_tryout"
-msgstr "tee testi-istunto"
+msgstr "Testaa kokeiluversiota"
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
@@ -1733,18 +1733,17 @@ msgstr ""
 #: src/osha/oira/client/templates/login.pt:24
 msgid "teaser_try_oira"
 msgstr ""
-"Haluatko kokeilla OiRAa? Valitse ${tryout_link} tai ${register_link} ja "
-"aloita."
+"Haluatko kokeilla OiRAa? Valitse ${tryout_link} tai ${register_link} käyttäjäksi."
 
 #. Default: log in
 #: src/osha/oira/client/templates/login.pt:27
 msgid "log in"
-msgstr ""
+msgstr "kirjaudu sisään"
 
 #. Default: If you are a registered user, you can ${log_in} here.
 #: src/osha/oira/client/templates/login.pt:27
 msgid "label_login_here"
-msgstr ""
+msgstr "Jos olet jo rekisteröitynyt käyttäjäksi, ${log_in} tästä."
 
 #. Default: Show more…
 #: src/osha/oira/client/templates/login.pt:34
@@ -1923,11 +1922,11 @@ msgstr "Sisäänkirjautuminen"
 
 #: src/osha/oira/client/templates/measures_overview.pt:56
 msgid "Overview of measures"
-msgstr ""
+msgstr "Yhteenveto toteutettavista toimenpiteistä"
 
 #: src/osha/oira/client/templates/measures_overview.pt:57
 msgid "(measures to be implemented in the coming months)"
-msgstr ""
+msgstr "Suunnitellut toimenpiteet seuraavien kuukausien aikana"
 
 #: src/osha/oira/client/templates/measures_overview.pt:58
 #: src/osha/oira/client/templates/report_landing.pt:51
@@ -1948,11 +1947,11 @@ msgstr "Välitä tiedot asianomaisille henkilöille."
 #: src/osha/oira/client/templates/measures_overview.pt:61
 #: src/osha/oira/client/templates/report_landing.pt:114
 msgid "Monitor the measures to be implemented in the forthcoming 3 months."
-msgstr ""
+msgstr "Seuraa suunniteltujen toimenpiteiden toteutumista tulevan kolmen kuukauden aikana."
 
 #: src/osha/oira/client/templates/measures_overview.pt:72
 msgid "Measure to be implemented by"
-msgstr ""
+msgstr "Toimenpiteet toteutettuna"
 
 #. Default: Next
 #: src/osha/oira/client/templates/module_actionplan.pt:50
@@ -2042,14 +2041,14 @@ msgstr "Ei"
 #. Default: New test session
 #: src/osha/oira/client/templates/new-session-test.pt:14
 msgid "label_new_session_test"
-msgstr "Uusi testi-istunto"
+msgstr "Uusi kokeilupohja"
 
 #. Default: Start a new session choosing one of the following sectoral tools
 #: src/osha/oira/client/templates/new-session-test.pt:20
 #: src/osha/oira/client/templates/new-session.pt:20
 msgid "label_select_new_session"
 msgstr ""
-"Käynnistä uusi istunto valisemalla yksi seuraavista toimialatyökaluista"
+"Valitse yksi seuraavista toimialatyökaluista"
 
 #. Default: Enter a title for your Risk Assessment
 #: src/osha/oira/client/templates/new-session-test.pt:26
@@ -2084,7 +2083,7 @@ msgstr ""
 #. Default: benefits
 #: src/osha/oira/client/templates/new-session-test.pt:34
 msgid "benefits"
-msgstr "hyöty"
+msgstr "hyödyt"
 
 #. Default: limitations
 #: src/osha/oira/client/templates/new-session-test.pt:34
@@ -2096,7 +2095,7 @@ msgstr "rajoitukset"
 #: src/osha/oira/client/templates/new-session-test.pt:34
 msgid "testsession_benefits_limitations"
 msgstr ""
-"Lue lisää testi-istunnosta: ${benefits}${tooltip_benefits} ja "
+"Lue lisää kokeiluversiosta: ${benefits}${tooltip_benefits} ja "
 "${limitations}${tooltip_limitations} ."
 
 #. Default: Or ${register_link} instead. Find out why you should
@@ -2111,7 +2110,7 @@ msgstr ""
 #: src/osha/oira/client/templates/new-session-test.pt:41
 #: src/osha/oira/client/templates/new-session.pt:38
 msgid "button_start_session"
-msgstr "Aloita istunto"
+msgstr "Aloita"
 
 #. Default: New session
 #: src/osha/oira/client/templates/new-session.pt:14
@@ -2660,7 +2659,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:80
 msgid "Download the risks overview"
-msgstr "Lataa riskikatsaus"
+msgstr "Lataa yhteenveto riskeistä"
 
 #: src/osha/oira/client/templates/report_landing.pt:86
 #: src/osha/oira/client/templates/report_landing.pt:107
@@ -2669,7 +2668,7 @@ msgstr "Muoto: Portable Document Format (.pdf)"
 
 #: src/osha/oira/client/templates/report_landing.pt:87
 msgid "Contains: an overview of the risks identified"
-msgstr "Sisältö: yleiskatsaus tunnistettuihin riskeihin"
+msgstr "Sisältö: yhteenveto tunnistetuista riskeistä."
 
 #: src/osha/oira/client/templates/report_landing.pt:93
 #: src/osha/oira/client/templates/risks_overview.pt:147
@@ -2678,11 +2677,11 @@ msgstr "Seuraa, huolehditaanko riskeistä/toimenpiteistä asianmukaisesti."
 
 #: src/osha/oira/client/templates/report_landing.pt:101
 msgid "Download the measures overview"
-msgstr "Lataa toimenpidekatsaus."
+msgstr "Lataa yhteenveto toimenpiteistä."
 
 #: src/osha/oira/client/templates/report_landing.pt:108
 msgid "Contains: an overview of the measures to be implemented."
-msgstr "Sisältö: yleiskatsaus toteutettaviin toimenpiteisiin."
+msgstr "Sisältö: yhteenveto toteutettavista toimenpiteistä."
 
 #. Default: Measure
 #: src/osha/oira/client/templates/risk_actionplan.pt:61
@@ -2995,7 +2994,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/risks_overview.pt:143
 msgid "Overview of risks"
-msgstr ""
+msgstr "Yhteenveto tunnistetuista riskeistä"
 
 #. Default: No risk
 #: src/osha/oira/client/templates/risks_overview.pt:217
@@ -3009,14 +3008,14 @@ msgstr "Ei riskiä"
 #: src/osha/oira/client/templates/status.pt:95
 #: src/osha/oira/client/templates/status_print.pt:88
 msgid "label_risk_with_measure"
-msgstr "Riski, johon liittyy toimenpiteitä"
+msgstr "Riski, johon on määritetty toimenpiteitä"
 
 #. Default: Risk without measure
 #: src/osha/oira/client/templates/risks_overview.pt:223
 #: src/osha/oira/client/templates/status.pt:98
 #: src/osha/oira/client/templates/status_print.pt:91
 msgid "label_risk_without_measure"
-msgstr "Riski, johon ei liity toimenpiteitä"
+msgstr "Riski, josta puuttuu toimenpiteet"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/risks_overview.pt:226
@@ -3037,37 +3036,37 @@ msgstr "vastaus puuttuu"
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:240
 msgid "heading_present_risks"
-msgstr ""
+msgstr "${num_present_risks} Riskit (tällä hetkellä)"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:243
 msgid "heading_num_high_prio_risks"
-msgstr ""
+msgstr "${num_high_risks} Riskit, joiden riskitaso on korkea."
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:244
 msgid "heading_num_medium_prio_risks"
-msgstr ""
+msgstr "${num_medium_risks} Riskit, joiden riskitaso on keskitasoinen."
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:245
 msgid "heading_num_low_prio_risks"
-msgstr ""
+msgstr "${num_low_risks} Riskit, joiden riskitaso on matala."
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:256
 msgid "heading_possible_risks"
-msgstr ""
+msgstr "${num_possible_risks} Mahdolliset riskit"
 
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:259
 msgid "heading_num_postponed_prio_risks"
-msgstr ""
+msgstr "${num_postponed_risks} Riskiväittämä on arvioimatta."
 
 #. Default: ${num_todo_risks} Risks not answered
 #: src/osha/oira/client/templates/risks_overview.pt:260
 msgid "heading_num_todo_prio_risks"
-msgstr ""
+msgstr "${num_todo_risks} Riskiväittämään ei ole vastattu."
 
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/shell.pt:101
@@ -3149,7 +3148,7 @@ msgstr "Aloita"
 #: src/osha/oira/client/templates/status.pt:19
 #: src/osha/oira/client/templates/status_print.pt:19
 msgid "title_status_of"
-msgstr "Kyselyn \"${survey_title}\" tila"
+msgstr "\"${survey_title}\" riskinarvioinnin tila"
 
 #. Default: Questions answered per module
 #: src/osha/oira/client/templates/status.pt:22
@@ -3160,7 +3159,7 @@ msgstr ""
 #: src/osha/oira/client/templates/status.pt:108
 #: src/osha/oira/client/templates/status_print.pt:101
 msgid "heading_high_prio_risks"
-msgstr "Korkean prioriteetin riskit"
+msgstr "Riskit, joiden riskitaso on korkea."
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/status_print.pt:94
@@ -3189,9 +3188,7 @@ msgstr "tai…"
 #: src/osha/oira/client/templates/tooltips.pt:3
 msgid "guest_login_warning"
 msgstr ""
-"Arvioit parhaillaan OiRAa vierailijana. Et pysty tallentamaan tietoja etkä "
-"lataamaan raportteja. Tallentaaksesi työn kirjaudu sisään tai rekisteröidy "
-"klikkaamalla \"Kirjaudu sisään\" -linkkiä sivun oikeassa ylälaidassa."
+"Arvioit parhaillaan OiRAa vierailijana. Et pysty tallentamaan tietoja etkä lataamaan raportteja. Tallentaaksesi työn kirjaudu sisään tai rekisteröidy klikkaamalla \"Rekisteröityminen\" -linkkiä sivun oikeassa ylälaidassa."
 
 #. Default: Important
 #: src/osha/oira/client/templates/tooltips.pt:8
@@ -3203,7 +3200,7 @@ msgstr "Tärkeää"
 #: src/osha/oira/client/templates/tooltips.pt:8
 msgid "list_test_session_limitations1"
 msgstr ""
-"${important} Et voi tallentaa työtäsi testi-istunnossa. Menetät kaikki "
+"${important} Et voi tallentaa työtäsi kokeiluversiossa. Menetät kaikki "
 "tekemäsi muutokset, ellet rekisteröity."
 
 #. Default: You will not be able to print or download reports.
@@ -3216,8 +3213,7 @@ msgstr "Et pysty tulostamaan tai lataamaan raportteja."
 #: src/osha/oira/client/templates/tooltips.pt:10
 msgid "list_test_session_limitations3"
 msgstr ""
-"Sinulla on mahdollisuus rekisteröityä milloin tahansa testi-istunnon aikana "
-"\"Rekisteröidy\" -linkin kautta sivun ylälaidassa."
+"Voit milloin tahansa kokeiluversion käytön aikana rekisteröityä ”Rekisteröityminen” –linkin kautta sivun ylälaidassa."
 
 #. Default: Discover how easy it is to create a risk assessment with OiRA.
 #: src/osha/oira/client/templates/tooltips.pt:16
@@ -3308,9 +3304,7 @@ msgstr "Istuntovalikko"
 #: src/osha/oira/client/templates/tooltips.pt:61
 msgid "info_osh_session_menu"
 msgstr ""
-"Voit aloittaa tästä valikosta uuden istunnon OiRA-työkalussa tai valita "
-"aiemman istunnon ja jatkaa sen työstämistä. Jos sinulla ei ole vielä OiRA-"
-"sovelluksen tiliä, voit aloittaa testi-istunnon ja kokeilla sitä heti."
+"Voit luoda tästä valikosta uuden OiRA-riskinarvioinnin tai valita aiemmin tekemäsi riskinarvioinnin ja jatkaa sen työstämistä. Jos et ole vielä luonut tiliä OiRA-sovellukseen, tutustu ja testaa sovelluksen kokeiluversiota."
 
 #. Default: OiRA Tool was updated
 #: src/osha/oira/client/templates/update.pt:15
@@ -4339,7 +4333,7 @@ msgstr "CC-lisenssi"
 #: src/osha/oira/upgrade/upgrade.py:190
 msgid "description_other_risks"
 msgstr ""
-"Jos olet tunnistanut työkaluun sisältämättömiä riskejä, voit lisätä ne nyt:"
+"Jos olet tunnistanut riskitekijöitä, joita ei aiemmissa osioissa mainittu, niin voit lisätä ne riskinarviointiisi nyt:"
 
 #. Default: <p>Would you now like to add your own defined risks to this
 #. tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks,
@@ -4349,11 +4343,7 @@ msgstr ""
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
 msgstr ""
-"<p>Haluaisitko lisätä nyt itse tunnistamasi riskit työkaluun?</"
-"p><p><strong>Tärkeää:</strong> Riskien päällekkäisyyden välttämiseksi on "
-"erittäin suositeltavaa, että käyt ensin läpi kaikki aiemmat moduulit, ellet "
-"ole näin jo tehnyt.</p><p>Jos sinun ei tarvitse lisätä riskejä, valitse \"En"
-"\". </p>"
+"<p><strong>Tärkeää:</strong> On suositeltavaa, että riskien päällekkäisyyden välttämiseksi käyt ensin läpi aiemmat osiot (ellet ole näin jo tehnyt).</p>"
 
 #~ msgid "label_close_panel"
 #~ msgstr "Sulje paneeli"

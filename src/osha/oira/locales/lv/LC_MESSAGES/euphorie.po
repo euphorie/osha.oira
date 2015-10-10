@@ -1910,11 +1910,11 @@ msgstr "Ienākt"
 
 #: src/osha/oira/client/templates/measures_overview.pt:56
 msgid "Overview of measures"
-msgstr ""
+msgstr "Pārskats par veicamajiem pasākumiem"
 
 #: src/osha/oira/client/templates/measures_overview.pt:57
 msgid "(measures to be implemented in the coming months)"
-msgstr ""
+msgstr "(pasākumiem, kuri jāīsteno tuvāko mēnešu laikā)"
 
 #: src/osha/oira/client/templates/measures_overview.pt:58
 #: src/osha/oira/client/templates/report_landing.pt:51
@@ -1935,11 +1935,11 @@ msgstr "Nodot informāciju iesaistītajiem cilvēkiem."
 #: src/osha/oira/client/templates/measures_overview.pt:61
 #: src/osha/oira/client/templates/report_landing.pt:114
 msgid "Monitor the measures to be implemented in the forthcoming 3 months."
-msgstr ""
+msgstr "Noskaidrot, kuri pasākumi jāīsteno nākamajos 3 mēnešos."
 
 #: src/osha/oira/client/templates/measures_overview.pt:72
 msgid "Measure to be implemented by"
-msgstr ""
+msgstr "Pasākums, kurš jāīsteno līdz"
 
 #. Default: Next
 #: src/osha/oira/client/templates/module_actionplan.pt:50
@@ -2553,7 +2553,7 @@ msgstr "Izmantojiet pārskatu, lai būtu iespējams:"
 #: src/osha/oira/client/templates/report_landing.pt:28
 msgid "Provide evidence for supervisory authorities."
 msgstr ""
-"uzrādīt darba vides riska novērtēšanas dokumentus Valsts darba inspekcijai "
+"Uzrādītu darba vides riska novērtēšanas dokumentus Valsts darba inspekcijai "
 "vai citām uzraudzības iestādēm,"
 
 #: src/osha/oira/client/templates/report_landing.pt:29
@@ -2589,7 +2589,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:44
 msgid "Download the full report"
-msgstr "Pilna pārskata lejupielāde"
+msgstr "Lejuplādēt darba vides riska novērtējumu"
 
 #: src/osha/oira/client/templates/report_landing.pt:47
 msgid "Format: Rich Text Format (.rtf)"
@@ -2614,7 +2614,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:62
 msgid "Download the action plan"
-msgstr "Pasākumu plāna lejupielāde"
+msgstr "Lejuplādēt pasākumu plānu"
 
 #: src/osha/oira/client/templates/report_landing.pt:65
 msgid "Format: Office Open XML Workbook (.xlsx)"
@@ -2635,14 +2635,14 @@ msgid ""
 "${manage} the problems/risks in your workplace (specific tasks, expertise, "
 "responsibilities, deadlines)."
 msgstr ""
-"${manage} Veiktu preventīvos pasākumus, kas novērstu vai samazinātu Jūsu "
+"${manage} preventīvos pasākumus, kas novērstu vai samazinātu Jūsu "
 "darbavietā pastāvošās problēmas/riskus (t.sk. specifiski pasākumi, "
 "nepieciešamā papildus ekspertīze, atbildīgās personas, pasākumu izpildes "
 "termiņi)."
 
 #: src/osha/oira/client/templates/report_landing.pt:80
 msgid "Download the risks overview"
-msgstr "Lejupielādēt darba vides riska novērtējumu"
+msgstr "Lejuplādēt riska novērtējuma statusu"
 
 #: src/osha/oira/client/templates/report_landing.pt:86
 #: src/osha/oira/client/templates/report_landing.pt:107
@@ -2660,11 +2660,11 @@ msgstr "Uzraudzīt, vai riskus precīzi novērš /pasākumus īsteno."
 
 #: src/osha/oira/client/templates/report_landing.pt:101
 msgid "Download the measures overview"
-msgstr "Lejupielādēt pasākumu pārskatu"
+msgstr "Lejuplādēt drīzumā īstenojamo pasākumu sarakstu"
 
 #: src/osha/oira/client/templates/report_landing.pt:108
 msgid "Contains: an overview of the measures to be implemented."
-msgstr "Satur: īstenojamo pasākumu pārskatu."
+msgstr "Satur: īstenojamo pasākumu pārskatu sarakstu."
 
 #. Default: Measure
 #: src/osha/oira/client/templates/risk_actionplan.pt:61
@@ -2684,7 +2684,7 @@ msgstr "Tipveida pasākumi"
 #: src/osha/oira/client/templates/risk_actionplan.pt:68
 #: src/osha/oira/client/templates/risk_actionplan.pt:154
 msgid "label_select_measure"
-msgstr "Atlasiet vienu vai vairākus zināmos, plaši izplatītos līdzekļus."
+msgstr "Izvēlieties vienu tipveida pasākumu"
 
 #. Default: Add
 #: src/osha/oira/client/templates/risk_actionplan.pt:74
@@ -2966,7 +2966,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/risks_overview.pt:143
 msgid "Overview of risks"
-msgstr ""
+msgstr "Risku pārskats"
 
 #. Default: No risk
 #: src/osha/oira/client/templates/risks_overview.pt:217
@@ -3375,7 +3375,7 @@ msgstr "${read_more} par šo risku."
 #: src/osha/oira/client/templates/webhelpers.pt:329
 #: src/osha/oira/client/templates/webhelpers.pt:358
 msgid "header_legal_references"
-msgstr "Juridiski dokumenti un politikas nostādnes atsaucei"
+msgstr "Atsauces uz normatīvajiem aktiem"
 
 #. Default: Additional resources for assessing the risk
 #: src/osha/oira/client/templates/webhelpers.pt:336
@@ -4304,6 +4304,7 @@ msgstr ""
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
 msgstr ""
+"<p>Vai Jūs vēlaties pievienot papildus identificētos riska faktorus?</p><p><strong>Svarīgi</strong>: Lai izvairītos no risku atkārtošanās, mēs ļoti iesakās vispirms novērtēt visus piedāvātos riskus (ja vien Jūs to jau neesat izdarījis (usi)).</p><p>Ja Jums nav nepieciešams pieviento papildus riskus, atzīmējiet atbildi “Nē”."
 
 #~ msgid "label_prevention_plan"
 #~ msgstr "Novēršanas plāns"

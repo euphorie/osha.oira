@@ -222,6 +222,9 @@ class OSHAActionPlanView(risk.ActionPlanView):
         self.image_class = IMAGE_CLASS[number_images]
         self.risk_number = self.context.number
         lang = getattr(self.request, 'LANGUAGE', 'en')
+        if "-" in lang:
+            elems = lang.split("-")
+            lang = "{0}_{1}".format(elems[0], elems[1].upper())
         self.delete_confirmation = translate(_(
             u"Are you sure you want to delete this measure? This action can "
             u"not be reverted."),

@@ -262,6 +262,9 @@ class OSHAStatus(survey.Status):
         toc = {}
 
         lang = getattr(self.request, 'LANGUAGE', 'en')
+        if "-" in lang:
+            elems = lang.split("-")
+            lang = "{0}_{1}".format(elems[0], elems[1].upper())
         title_custom_risks = translate(_(
             'title_other_risks', default=u'Added risks (by you)'), target_language=lang)
 

@@ -758,7 +758,7 @@ msgstr ""
 #. Default: priority
 #: src/osha/oira/manual_translations.py:230
 msgid "label_fixed_priority"
-msgstr "prioriteit"
+msgstr "Prioriteit"
 
 #. Default: Please be aware that you have %s more login attempts before your
 #. account will be locked.
@@ -1174,7 +1174,7 @@ msgstr "Wachtwoord veranderen"
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
-msgstr ""
+msgstr "Bijkomende risico’s (door u toegevoegd)"
 
 #. Default: By clicking on 'Delete account', your account will be permenantly
 #. deleted. This action is irreversable.
@@ -1767,12 +1767,12 @@ msgstr ""
 #. Default: log in
 #: src/osha/oira/client/templates/login.pt:27
 msgid "log in"
-msgstr ""
+msgstr "inloggen"
 
 #. Default: If you are a registered user, you can ${log_in} here.
 #: src/osha/oira/client/templates/login.pt:27
 msgid "label_login_here"
-msgstr ""
+msgstr "Als u een geregistreerd gebruiker bent, kunt u hier ${log_in}."
 
 #. Default: Show more…
 #: src/osha/oira/client/templates/login.pt:34
@@ -2697,7 +2697,7 @@ msgstr "Download het overzicht van risico's"
 #: src/osha/oira/client/templates/report_landing.pt:86
 #: src/osha/oira/client/templates/report_landing.pt:107
 msgid "Format: Portable Document Format (.pdf)"
-msgstr "Formaat: Portable Document Format (.pdf)"
+msgstr "Format: Portable Document Format (.pdf)"
 
 #: src/osha/oira/client/templates/report_landing.pt:87
 msgid "Contains: an overview of the risks identified"
@@ -2761,17 +2761,7 @@ msgstr "Beschrijving"
 #: src/osha/oira/client/templates/risk_actionplan.pt:226
 msgid "actionplan_measure_tooltip"
 msgstr ""
-"Omschrijf: 1) wat is uw algemene aanpak om het risico te verhelpen (als het "
-"risico niet kan worden voorkomen) of te verlagen; 2) de specifieke actie(s) "
-"die is (zijn) vereist om deze aanpak (het risico verhelpen of verlagen) te "
-"implementeren; 3) het niveau van expertise dat is vereist om de maatregel te "
-"implementeren, bijvoorbeeld â€œgezond verstand (geen kennis over veiligheid "
-"en gezondheid op het werk vereist)â€, â€œgeen specifieke expertise over "
-"veiligheid en gezondheid op het werk, maar toch een minimum aan kennis over "
-"veiligheid en gezondheid op het werk of training en/of raadpleging van een "
-"begeleider gespecialiseerd in veiligheid en gezondheid op het werk vereistâ"
-"€, of â€œeen expert in veiligheid en gezondheid op het werkâ€. U kunt hier "
-"ook alle andere extra vereisten vermelden (indien die er zijn)."
+"Omschrijf: 1) wat is uw algemene aanpak om het risico te verhelpen (als het risico niet kan worden voorkomen) of te verlagen; 2) de specifieke actie(s) die is (zijn) vereist om deze aanpak (het risico verhelpen of verlagen) te implementeren; 3) het niveau van expertise dat is vereist om de maatregel te implementeren, bijvoorbeeld gezond verstand (geen kennis over veiligheid en gezondheid op het werk vereist), geen specifieke expertise over veiligheid en gezondheid op het werk, maar toch een minimum aan kennis over veiligheid en gezondheid op het werk of training en/of raadpleging van een begeleider gespecialiseerd in veiligheid en gezondheid op het werk vereist, of een expert in veiligheid en gezondheid op het werk. U kunt hier ook alle andere extra vereisten vermelden (indien die er zijn)."
 
 #. Default: Appoint someone in your company to be responsible for the
 #. implementation of this measure. This person will have the authority to take
@@ -3243,9 +3233,7 @@ msgstr "Belangrijk:"
 #: src/osha/oira/client/templates/tooltips.pt:8
 msgid "list_test_session_limitations1"
 msgstr ""
-"${important} tijdens een proefsessie kunt u niet opslaan wat u al hebt "
-"ingevoerd. Alle ingevoerde gegevens zullen verloren gaan als u zich niet "
-"registreert."
+"${important} Tijdens een proefsessie kunt u niet opslaan wat u al hebt ingevoerd. Alle ingevoerde gegevens zullen verloren gaan als u zich niet registreert."
 
 #. Default: You will not be able to print or download reports.
 #: src/osha/oira/client/templates/tooltips.pt:9
@@ -3264,7 +3252,7 @@ msgstr ""
 #: src/osha/oira/client/templates/tooltips.pt:16
 msgid "list_test_session_benefits1"
 msgstr ""
-"Ontdek hoe gemakkelijk het is om een risicobeoordeling aan te maken met OiRA."
+"Ontdek hoe gemakkelijk het is om een risicoanalyse aan te maken met OiRA."
 
 #. Default: Identify potential risks in your business and the measures to
 #. reduce them.
@@ -4386,8 +4374,7 @@ msgstr "CC-licentie"
 #: src/osha/oira/upgrade/upgrade.py:190
 msgid "description_other_risks"
 msgstr ""
-"Indien u risico's hebt vastgesteld die niet in de tool zijn opgenomen, kunt "
-"u deze nu toevoegen:"
+"Indien u risico's hebt vastgesteld die niet in de tool zijn opgenomen, kunt u deze nu toevoegen:"
 
 #. Default: <p>Would you now like to add your own defined risks to this
 #. tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks,
@@ -4396,7 +4383,8 @@ msgstr ""
 #. select 'No.'</p>
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
-msgstr ""
+msgstr "<p>Wenst u nu uw eigen gedefinieerde risico’s toe te voegen aan deze tool?
+</p><p><strong>Belangrijk:</strong> Om te vermijden dat risico’s gedupliceerd worden, raden we u ten sterkste aan om eerst alle voorgaande modules te doorlopen, als u dit nog niet gedaan hebt.</p><p>Indien u geen risico’s moet toevoegen, gelieve ‘Nee’ te selecteren.</p>"
 
 #~ msgid "label_close_panel"
 #~ msgstr "Paneel sluiten"

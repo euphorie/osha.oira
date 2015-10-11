@@ -9,6 +9,7 @@
       metal:define-macro="shell"
       i18n:domain="euphorie"
       tal:define="webhelpers nocall:context/@@webhelpers;
+                  splash_message webhelpers/splash_message;
                   client nocall:request/client;
                   base_url client/++resource++osha.oira.resources;
                   page_section webhelpers/get_phase;
@@ -44,7 +45,7 @@
     <metal:styleslot define-slot="style_slot" />
 </head>
 
-<body class="osh-on test-session osc-on osc-s-off focus-sidebar ${sidebar_default} ${python:'splash-on' if not is_anonymous else ''}" i18n:domain="euphorie" tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
+<body class="osh-on test-session osc-on osc-s-off focus-sidebar ${sidebar_default} ${python:'splash-on' if not is_anonymous and splash_message else ''}" i18n:domain="euphorie" tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
     <div id="main">
         <header id="toolbar">
             <a href="#osc" class="icon-menu pat-toggle"
@@ -175,7 +176,7 @@
     </aside>
     <tal:block replace="tile:client-analytics"/>
 
-    <div tal:define="splash_message webhelpers/splash_message" tal:condition="python:splash_message is not None" class="splash-message">
+    <div tal:condition="python:splash_message is not None" class="splash-message">
         <hr class="trigger pat-switch" data-pat-switch="selector: body; remove: splash-*; add: splash-off; store: local" />
        <article class="content">
          <h1 tal:content="structure splash_message/title">Message of the day!</h1>

@@ -42,7 +42,7 @@ else:
 if not os.path.isdir(basedir):
     usage(sys.stderr, u"The directory you provided does not exists")
 
-dirs = [x for x in os.listdir(basedir) if len(x) == 2 and os.path.isdir(x)]
+dirs = [x for x in os.listdir(basedir) if (len(x) == 2 or (len(x) == 5 and x[2] == '_')) and os.path.isdir(x)]
 houstonwehaveaproblem = False
 for dirname in dirs:
     path = "{basedir}/{dirname}/LC_MESSAGES".format(basedir=basedir, dirname=dirname)

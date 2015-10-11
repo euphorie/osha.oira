@@ -1177,7 +1177,7 @@ msgstr "Cambia password"
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
-msgstr ""
+msgstr "Rischi aggiuntivi"
 
 #. Default: By clicking on 'Delete account', your account will be permenantly
 #. deleted. This action is irreversable.
@@ -1740,7 +1740,7 @@ msgstr ""
 #. Default: run a test session
 #: src/osha/oira/client/templates/login.pt:25
 msgid "label_tryout"
-msgstr "esegui una sessione di prova"
+msgstr "eseguire una sessione di prova"
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
@@ -1755,17 +1755,17 @@ msgstr ""
 msgid "teaser_try_oira"
 msgstr ""
 "Desideri provare OiRA? Puoi ${tryout_link} oppure ${register_link} per "
-"iniziare a tutti gli effetti."
+"iniziare."
 
 #. Default: log in
 #: src/osha/oira/client/templates/login.pt:27
 msgid "log in"
-msgstr ""
+msgstr "accedi qui"
 
 #. Default: If you are a registered user, you can ${log_in} here.
 #: src/osha/oira/client/templates/login.pt:27
 msgid "label_login_here"
-msgstr ""
+msgstr "Se sei già registrato ${log_in}"
 
 #. Default: Show more…
 #: src/osha/oira/client/templates/login.pt:34
@@ -2021,7 +2021,7 @@ msgstr "Rimuovi rischio"
 #. Default: Add risk
 #: src/osha/oira/client/templates/module_customization.pt:61
 msgid "label_add_risk"
-msgstr ""
+msgstr "Aggiungi rischio"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_customization.pt:62
@@ -2105,7 +2105,7 @@ msgstr ""
 #. Default: benefits
 #: src/osha/oira/client/templates/new-session-test.pt:34
 msgid "benefits"
-msgstr "benefici"
+msgstr "vantaggi"
 
 #. Default: limitations
 #: src/osha/oira/client/templates/new-session-test.pt:34
@@ -2236,9 +2236,7 @@ msgstr "Report"
 #: src/osha/oira/client/templates/register.pt:21
 msgid "report_guest_register_intro"
 msgstr ""
-"Spiacenti: questa è una versione di prova e non è possibile utilizzare la "
-"funzione di download. Registrati con una semplice procedura e ottieni "
-"l’accesso ai seguenti benefici:"
+"Spiacenti: questa è una versione di prova e non è possibile utilizzare la funzione di download. Registrati con una semplice procedura e effettua l’accesso usufruendo dei seguenti vantaggi:"
 
 #. Default: It's free.
 #: src/osha/oira/client/templates/register.pt:23
@@ -2256,19 +2254,19 @@ msgstr "È possibile salvare il lavoro online."
 #: src/osha/oira/client/templates/register.pt:25
 #: src/osha/oira/client/templates/tooltips.pt:28
 msgid "label_register_benefit_3"
-msgstr "È possibile scaricare una relazione completa e un piano d’azione."
+msgstr "È possibile scaricare il report e il programma di miglioramento."
 
 #. Default: Example of a full report in rich text format (.rtf)
 #: src/osha/oira/client/templates/register.pt:33
 msgid "header_example_report_rft"
-msgstr "Esempio di una relazione completa in formato Rich Text Format (.rtf)"
+msgstr "Esempio di un report completo in formato Rich Text Format (.rtf)"
 
 #. Default: Example of an action plan in Office Open XML Workbook format
 #. (.xlsx)
 #: src/osha/oira/client/templates/register.pt:41
 msgid "header_example_report_xlsx"
 msgstr ""
-"Esempio di un piano d’azione in formato Office Open XML Workbook (.xlsx)"
+"Esempio di un programma di miglioramento in formato Office Open XML Workbook (.xlsx)"
 
 #. Default: Example of a risk overview report in PDF format
 #: src/osha/oira/client/templates/register.pt:51
@@ -2285,7 +2283,7 @@ msgstr ""
 #: src/osha/oira/client/templates/register.pt:70
 #: src/osha/oira/client/templates/shell.pt:63
 msgid "header_register"
-msgstr "Registro"
+msgstr "registrarti"
 
 #. Default: Desired password
 #: src/osha/oira/client/templates/register.pt:85
@@ -3016,9 +3014,7 @@ msgstr ""
 #: src/osha/oira/client/templates/risk_identification.pt:143
 msgid "description_automatic_evaluation"
 msgstr ""
-"La valutazione del rischio è stata eseguita automaticamente dallo strumento. "
-"Sarà possibile modificare, se ritenuto necessario, la priorità di questo "
-"rischio all’interno del piano d’azione."
+"Il livello di rischio per la sicurezza e la salute correlato ai pericoli identificati è stato individuato automaticamente dallo strumento. Sarà possibile modificare il livello di rischio in fase di aggiornamento della valutazione a seguito dell’implementazione delle misure di miglioramento."
 
 #: src/osha/oira/client/templates/risks_overview.pt:143
 msgid "Overview of risks"
@@ -3029,14 +3025,14 @@ msgstr ""
 #: src/osha/oira/client/templates/status.pt:92
 #: src/osha/oira/client/templates/status_print.pt:85
 msgid "label_no_risk"
-msgstr "Nessun rischio"
+msgstr "Adempimenti/rischi solo con misure obbligatorie adottate"
 
 #. Default: Risk with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:220
 #: src/osha/oira/client/templates/status.pt:95
 #: src/osha/oira/client/templates/status_print.pt:88
 msgid "label_risk_with_measure"
-msgstr "Rischio con misure intraprese"
+msgstr "Adempimenti/rischi con misure obbligatorie adottate e eventuali misure di miglioramento"
 
 #. Default: Risk without measure
 #: src/osha/oira/client/templates/risks_overview.pt:223
@@ -3051,7 +3047,7 @@ msgstr "Rischio senza misure intraprese"
 #: src/osha/oira/client/templates/webhelpers.pt:118
 #: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "Postponed"
-msgstr "Posticipato"
+msgstr "Adempimenti/rischi non ancora compilati o non pertinenti"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/risks_overview.pt:229
@@ -3216,10 +3212,7 @@ msgstr "oppure…"
 #: src/osha/oira/client/templates/tooltips.pt:3
 msgid "guest_login_warning"
 msgstr ""
-"OiRA è attualmente in fase di valutazione come utente ospite. Non sarà "
-"possibile salvare i progressi né scaricare alcuna relazione. Per salvare il "
-"lavoro, accedere o registrarsi facendo clic sul link \"Registrazione\" in "
-"alto a destra della pagina."
+"Si sta al momento utilizzando OiRA come utente ospite. Non sarà possibile salvare i progressi né scaricare alcun report. Per salvare il lavoro, accedere o registrarsi facendo clic sul link \"Registrazione\" in alto a destra della pagina."
 
 #. Default: Important
 #: src/osha/oira/client/templates/tooltips.pt:8
@@ -3237,20 +3230,19 @@ msgstr ""
 #. Default: You will not be able to print or download reports.
 #: src/osha/oira/client/templates/tooltips.pt:9
 msgid "list_test_session_limitations2"
-msgstr "Non sarà possibile stampare né scaricare le relazioni."
+msgstr "Non sarà possibile scaricare il report."
 
 #. Default: During a test session you will have the possibility at any time to
 #. register by clicking on the "Register" link at the top.
 #: src/osha/oira/client/templates/tooltips.pt:10
 msgid "list_test_session_limitations3"
 msgstr ""
-"Durante una sessione di prova, sarà possibile registrarsi in qualsiasi "
-"momento facendo clic sul link \"Registra\" in alto."
+"Durante una sessione di prova, sarà possibile registrarsi in qualsiasi momento facendo clic sul link \"Registrazione\" in alto."
 
 #. Default: Discover how easy it is to create a risk assessment with OiRA.
 #: src/osha/oira/client/templates/tooltips.pt:16
 msgid "list_test_session_benefits1"
-msgstr "Scopri quanto è facile creare una valutazione del rischio con OiRA."
+msgstr "Scopri come lo strumento rende agevole la valutazione dei rischi."
 
 #. Default: Identify potential risks in your business and the measures to
 #. reduce them.
@@ -3262,7 +3254,7 @@ msgstr ""
 #. Default: Use it for vocational training.
 #: src/osha/oira/client/templates/tooltips.pt:18
 msgid "list_test_session_benefits3"
-msgstr "Usalo per il training formativo."
+msgstr "Usalo anche per il training formativo."
 
 #. Default: You can register in one single step just by entering a valid email
 #. address.
@@ -3275,7 +3267,7 @@ msgstr ""
 #. Default: Main benefits of having an account:
 #: src/osha/oira/client/templates/tooltips.pt:24
 msgid "info_register2"
-msgstr "Benefici principali del possesso di un account:"
+msgstr "Vantaggi del possesso di un account:"
 
 #. Default: Menu toggle
 #: src/osha/oira/client/templates/tooltips.pt:34
@@ -3384,12 +3376,12 @@ msgstr "Impostazioni"
 #: src/osha/oira/client/templates/webhelpers.pt:119
 #: src/osha/oira/client/templates/webhelpers.pt:131
 msgid "Risk not present"
-msgstr "Pericolo non presente"
+msgstr "Adempimenti/rischi con misure obbligatorie adottate e eventuali misure di miglioramento"
 
 #: src/osha/oira/client/templates/webhelpers.pt:120
 #: src/osha/oira/client/templates/webhelpers.pt:132
 msgid "Risk present"
-msgstr "Pericolo presente"
+msgstr "Adempimenti/rischi solo con misure obbligatorie adottate"
 
 #. Default: Produced by ${EU-OSHA}.
 #: src/osha/oira/client/templates/webhelpers.pt:146
@@ -4389,11 +4381,7 @@ msgstr ""
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
 msgstr ""
-"<p>Aggiungere ora i rischi definiti personalmente a questo strumento?</"
-"p><p><strong>Importante:</strong> Per evitare la duplicazione dei rischi, "
-"raccomandiamo caldamente di ripassare dapprima in esame tutti i moduli "
-"precedenti, qualora l’operazione non sia ancora stata compiuta.</p><p>Se non "
-"è necessario aggiungere rischi, selezionare “No”.</p>"
+"<p>Aggiungere ora ulteriori rischi</p><p><strong>Importante:</strong> Per evitare la duplicazione dei rischi, raccomandiamo di ripassare in esame tutti i moduli precedenti, qualora tale operazione non sia ancora stata compiuta.</p>"
 
 #~ msgid "label_close_panel"
 #~ msgstr "Chiudi pannello"

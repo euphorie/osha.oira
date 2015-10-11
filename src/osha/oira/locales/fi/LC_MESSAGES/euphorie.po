@@ -836,7 +836,7 @@ msgstr "4. neljännes"
 
 #: src/osha/oira/client/country.py:134
 msgid "Session `${name}` has been deleted."
-msgstr "Istunto \"${name}\" on poistettu."
+msgstr "Riskinarviointi \"${name}\" on poistettu."
 
 #: src/osha/oira/client/country.py:169
 msgid "Save"
@@ -864,27 +864,27 @@ msgstr "Lisättyihin riskeihin ei tehty muutoksia."
 
 #: src/osha/oira/client/module.py:105
 msgid "Your new added risks have been created."
-msgstr "Uudet lisätyt riskit on luotu."
+msgstr "Uudet riskit ovat lisätty."
 
 #: src/osha/oira/client/module.py:110
 msgid "A new added risk has been created."
-msgstr "Uusi lisätty riski on luotu."
+msgstr "Uusi riski on lisätty."
 
 #: src/osha/oira/client/module.py:115
 msgid "Existing added risks have been updated."
-msgstr "Aiemmin lisättyjä riskejä on päivitetty."
+msgstr "Aiemmin lisätyt riskit on päivitetty."
 
 #: src/osha/oira/client/module.py:120
 msgid "An existing added risk has been updated."
-msgstr "Aiemmin lisättyä riskiä on päivitetty."
+msgstr "Aiemmin lisätty riski on päivitetty."
 
 #: src/osha/oira/client/module.py:125
 msgid "An added risk has been removed."
-msgstr "Lisätty riski on poistettu."
+msgstr "Riski on poistettu."
 
 #: src/osha/oira/client/module.py:128
 msgid "Added risks have been removed."
-msgstr "Lisättyjä riskejä on poistettu."
+msgstr "Riskit on poistettu."
 
 #: src/osha/oira/client/profile.py:16
 msgid "Does this happen in multiple places?"
@@ -1148,7 +1148,7 @@ msgstr ""
 #: src/osha/oira/client/settings.py:18
 #: src/osha/oira/client/templates/user-menu.pt:16
 msgid "title_change_password"
-msgstr "Muuta salasana"
+msgstr "Vaihda salasana"
 
 #. Default: Added risks (by you)
 #: src/osha/oira/client/survey.py:270
@@ -1422,7 +1422,7 @@ msgstr "Haluatko varmasti poistaa tämän istunnon? Poistoa ei voi peruuttaa."
 #. Default: Yes, delete session
 #: src/osha/oira/client/templates/confirmation-delete-session.pt:23
 msgid "button_delete_session"
-msgstr "Kyllä, poista istunto"
+msgstr "Kyllä, poista riskinarviointi"
 
 #. Default: Cancel
 #: src/osha/oira/client/templates/confirmation-delete-session.pt:24
@@ -1719,7 +1719,7 @@ msgstr ""
 #. Default: run a test session
 #: src/osha/oira/client/templates/login.pt:25
 msgid "label_tryout"
-msgstr "Testaa kokeiluversiota"
+msgstr "testaa kokeiluversiota"
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
@@ -2115,7 +2115,7 @@ msgstr "Aloita"
 #. Default: New session
 #: src/osha/oira/client/templates/new-session.pt:14
 msgid "header_new_session"
-msgstr "Uusi istunto"
+msgstr "Uusi riskinarviointi"
 
 #. Default: Sign in
 #: src/osha/oira/client/templates/plain.pt:99
@@ -2128,7 +2128,7 @@ msgstr "Kirjaudu sisään"
 #: src/osha/oira/client/templates/plain.pt:99
 #: src/osha/oira/client/templates/shell.pt:73
 msgid "info_testsession"
-msgstr "Tämä on testi-istunto. ${link_sign_in} tallentaaksesi tiedot."
+msgstr "Tämä on kokeiluversio. ${link_sign_in} tallentaaksesi tiedot."
 
 #. Default: Info
 #: src/osha/oira/client/templates/plain.pt:99
@@ -2216,7 +2216,7 @@ msgstr "Raportointi"
 #: src/osha/oira/client/templates/register.pt:21
 msgid "report_guest_register_intro"
 msgstr ""
-"Lataustoiminto ei ole valitettavasti käytettävissä kokeiluversiossa. "
+"Raportin lataustoiminto ei ole valitettavasti käytettävissä kokeiluversiossa. "
 "Rekisteröityminen vie hetken, ja saat siitä seuraavia etuja:"
 
 #. Default: It's free.
@@ -2240,7 +2240,7 @@ msgstr "Voit ladata raportin ja toimintasuunnitelman kokonaisuudessaan."
 #. Default: Example of a full report in rich text format (.rtf)
 #: src/osha/oira/client/templates/register.pt:33
 msgid "header_example_report_rft"
-msgstr "Esimerkki täydellisestä raportista rich text format -muodossa (.rtf)."
+msgstr "Esimerkki koko raportista rich text format -muodossa (.rtf)."
 
 #. Default: Example of an action plan in Office Open XML Workbook format
 #. (.xlsx)
@@ -2285,7 +2285,7 @@ msgstr ""
 #. you.
 #: src/osha/oira/client/templates/reminder.pt:23
 msgid "description_password_reminder"
-msgstr "Anna sähköpostiosoitteesi. Kirjautumistiedot lähetetään sinulle."
+msgstr "Anna sähköpostiosoitteesi. Kirjautumistiedot lähetetään antamaasi osoitteeseen."
 
 #: src/osha/oira/client/templates/rename-session.pt:16
 msgid "Change name of session"
@@ -3077,14 +3077,14 @@ msgstr ""
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/survey_sessions.pt:45
 msgid "link_start_session"
-msgstr "aloita uusi istunto"
+msgstr "luo uusi riskinarviointi"
 
 #. Default: Select an earlier session to complete or review or
 #. ${start_session}.
 #: src/osha/oira/client/templates/sessions.pt:20
 msgid "info_select_session"
 msgstr ""
-"Valitse aiempi istunto täydentääksesi tai tarkistaaksesi sitä tai "
+"Valitse aiempi riskinarviointi täydentääksesi tai tarkistaaksesi sitä tai "
 "${start_session}."
 
 #. Default: saved on ${date}
@@ -3218,7 +3218,7 @@ msgstr ""
 #. Default: Discover how easy it is to create a risk assessment with OiRA.
 #: src/osha/oira/client/templates/tooltips.pt:16
 msgid "list_test_session_benefits1"
-msgstr "Katso, miten helposti riskinarviointi tehdään OiRA-työkalun avulla."
+msgstr "Kokeile, miten helposti riskinarviointi tehdään OiRA-työkalun avulla."
 
 #. Default: Identify potential risks in your business and the measures to
 #. reduce them.
@@ -3230,7 +3230,7 @@ msgstr ""
 #. Default: Use it for vocational training.
 #: src/osha/oira/client/templates/tooltips.pt:18
 msgid "list_test_session_benefits3"
-msgstr "Käytä työkalua ammatilliseen koulutukseen."
+msgstr "Hyödynnä OiRAa ammatillisessa koulutuksessa."
 
 #. Default: You can register in one single step just by entering a valid email
 #. address.
@@ -3259,7 +3259,7 @@ msgid "info_osh_hamburger"
 msgstr ""
 "Valikon vaihtopainikkeen avulla voit piilottaa valikon: näkyviin jää "
 "piilotetun valikon kuvake, josta valikon saa tarvittaessa esille. Voit "
-"piilottaa valikon, kun keskityt täyttämään työkalua, ja tuoda sen näkyviin, "
+"piilottaa valikon, kun keskityt täyttämään riskinarviointia, ja tuoda sen näkyviin, "
 "kun siirryt sovelluksen osasta toiseen."
 
 #. Default: Tip
@@ -3707,7 +3707,7 @@ msgstr ""
 
 #: src/osha/oira/content/survey.py:104
 msgid "Frequency"
-msgstr "Yleisyys"
+msgstr "Toistuvuus"
 
 #: src/osha/oira/content/survey.py:122
 msgid "Severity"
@@ -3801,9 +3801,7 @@ msgid ""
 "surveys. Just select the module or risk you want to use in the list below "
 "and it will be copied to your survey."
 msgstr ""
-"Voit käyttää OSHAn tuottamaa vakiokirjaston sisältöä omissa kyselyissäsi. "
-"Valitse alla olevasta luettelosta moduuli tai riski, jota haluat käyttää, "
-"niin se kopioituu kyselyysi."
+"Voit käyttää OSHAn tuottamaa vakiokirjaston sisältöä omissa riskinarviointipohjissa. Valitse alla olevasta luettelosta moduuli tai riski, jota haluat käyttää, niin se kopioituu riskinarviointipohjaan."
 
 #: src/osha/oira/content/templates/library.pt:21
 msgid ""

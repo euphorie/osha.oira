@@ -824,7 +824,7 @@ msgstr "4. ársfjórðungur"
 
 #: src/osha/oira/client/country.py:134
 msgid "Session `${name}` has been deleted."
-msgstr "Lotunni `${name}` hefur verið eytt."
+msgstr "Áhættumatinu `${name}` hefur verið eytt."
 
 #: src/osha/oira/client/country.py:169
 msgid "Save"
@@ -852,7 +852,7 @@ msgstr "Engar breytingar voru gerðar á viðbættri áhættu."
 
 #: src/osha/oira/client/module.py:105
 msgid "Your new added risks have been created."
-msgstr "Nýju áhætturnar voru búnar til."
+msgstr "Nýjar hættur voru búnar til."
 
 #: src/osha/oira/client/module.py:110
 msgid "A new added risk has been created."
@@ -860,19 +860,19 @@ msgstr "Ný viðbætt áhætta hefur verið búin til."
 
 #: src/osha/oira/client/module.py:115
 msgid "Existing added risks have been updated."
-msgstr "Eldri viðbættar áhættur hafa verið uppfærðar."
+msgstr "Eldri hættum sem var bætt við hafa verið uppfærðar."
 
 #: src/osha/oira/client/module.py:120
 msgid "An existing added risk has been updated."
-msgstr "Eldri viðbætt áhætta hefur verið uppfærð."
+msgstr "Eldri hættu sem var bætt við hefur verið uppfærð."
 
 #: src/osha/oira/client/module.py:125
 msgid "An added risk has been removed."
-msgstr "Viðbætt áhætta hefur verið fjarlægð."
+msgstr "Áhætta sem bætt var við hefur verið fjarlægð."
 
 #: src/osha/oira/client/module.py:128
 msgid "Added risks have been removed."
-msgstr "Viðbættar áhættur hafa verið fjarlægðar."
+msgstr "Áhættur sem bætt var við hafa verið fjarlægðar."
 
 #: src/osha/oira/client/profile.py:16
 msgid "Does this happen in multiple places?"
@@ -1136,7 +1136,7 @@ msgstr ""
 #: src/osha/oira/client/settings.py:18
 #: src/osha/oira/client/templates/user-menu.pt:16
 msgid "title_change_password"
-msgstr "Skiptu um lykilorð"
+msgstr "Skipta um lykilorð"
 
 #. Default: Added risks (by you)
 #: src/osha/oira/client/survey.py:270
@@ -1404,7 +1404,7 @@ msgstr ""
 #. Default: Yes, delete session
 #: src/osha/oira/client/templates/confirmation-delete-session.pt:23
 msgid "button_delete_session"
-msgstr "Já, eyða lotu"
+msgstr "Já, eyða áhættumatinu"
 
 #. Default: Cancel
 #: src/osha/oira/client/templates/confirmation-delete-session.pt:24
@@ -1703,7 +1703,7 @@ msgstr ""
 #. Default: run a test session
 #: src/osha/oira/client/templates/login.pt:25
 msgid "label_tryout"
-msgstr "keyra prufulotu"
+msgstr "prófa"
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
@@ -1717,7 +1717,7 @@ msgstr "hér"
 #: src/osha/oira/client/templates/login.pt:24
 msgid "teaser_try_oira"
 msgstr ""
-"Viltu prófa OiRA? Þú getur ${tryout_link} eða byrjað á áhættumatinu ${register_link}."
+"Viltu prófa OiRA? Þú getur ${tryout_link} eða byrjað ${register_link} á áhættumatinu."
 
 #. Default: log in
 #: src/osha/oira/client/templates/login.pt:27
@@ -2197,7 +2197,7 @@ msgstr "Skýrsla"
 #: src/osha/oira/client/templates/register.pt:21
 msgid "report_guest_register_intro"
 msgstr ""
-"Athugið! Hér er aðeins hægt að prófa verkfærið. Það er ekki hægt að vista gögn. Stofnaðu aðgang til að nota verkfærið."
+"Athugið! Hér er aðeins hægt að prófa verkfærið. Það er ekki hægt að vista gögn. Stofnaðu aðgang til að nota verkfærið:"
 
 #. Default: It's free.
 #: src/osha/oira/client/templates/register.pt:23
@@ -2226,7 +2226,7 @@ msgstr "Dæmi um fullbúna skýrslu í rich text format (.rtf)"
 #. (.xlsx)
 #: src/osha/oira/client/templates/register.pt:41
 msgid "header_example_report_xlsx"
-msgstr "Dæmi um verkáætlun í Office Open XML Workbook format (.xlsx)"
+msgstr "Dæmi um aðgerðaáætlun í Office Open XML Workbook format (.xlsx)"
 
 #. Default: Example of a risk overview report in PDF format
 #: src/osha/oira/client/templates/register.pt:51
@@ -2608,7 +2608,7 @@ msgstr "Snið: Office Open XML Workbook (.xlsx)"
 #: src/osha/oira/client/templates/report_landing.pt:66
 msgid ""
 "Contains: main elements to effectively manage the risks at your workplace."
-msgstr "Inniheldur: Helstu þætti til að stýra áhættu á þínum vinnustað."
+msgstr "Inniheldur: Lausnir til að draga úr áhættu."
 
 #: src/osha/oira/client/templates/report_landing.pt:71
 msgid "Manage"
@@ -2622,7 +2622,7 @@ msgstr "${manage} og draga úr áhættu fyrir starfsfólk vinnustaðarins."
 
 #: src/osha/oira/client/templates/report_landing.pt:80
 msgid "Download the risks overview"
-msgstr "Sækja áhættuyfirlitið"
+msgstr "Sækja fullyrðingar verkfærisins"
 
 #: src/osha/oira/client/templates/report_landing.pt:86
 #: src/osha/oira/client/templates/report_landing.pt:107
@@ -2631,20 +2631,20 @@ msgstr "Snið: Portable Document Format (.pdf)"
 
 #: src/osha/oira/client/templates/report_landing.pt:87
 msgid "Contains: an overview of the risks identified"
-msgstr "Inniheldur: Yfirlit yfir þekktar áhættur"
+msgstr "Inniheldur: Yfirlit um áhættur"
 
 #: src/osha/oira/client/templates/report_landing.pt:93
 #: src/osha/oira/client/templates/risks_overview.pt:147
 msgid "Monitor whether risks / measures are properly dealt with."
-msgstr "Fylgstu með hvort áhættur / aðgerðir séu meðhöndlaðar rétt."
+msgstr "Fylgstu með hvort aðgerðir / úrbætur séu framkvæmdar."
 
 #: src/osha/oira/client/templates/report_landing.pt:101
 msgid "Download the measures overview"
-msgstr "Sæktu yfirlit yfir aðgerðir"
+msgstr "Sæktu yfirlit yfir úrbætur"
 
 #: src/osha/oira/client/templates/report_landing.pt:108
 msgid "Contains: an overview of the measures to be implemented."
-msgstr "Inniheldur: Yfirlit yfir aðgerðir til að innleiða."
+msgstr "Inniheldur: Yfirlit yfir úrbætur sem þarf að framkvæma."
 
 #. Default: Measure
 #: src/osha/oira/client/templates/risk_actionplan.pt:61
@@ -2658,7 +2658,7 @@ msgstr "Lausn"
 #: src/osha/oira/client/templates/risk_actionplan.pt:63
 #: src/osha/oira/client/templates/risk_actionplan.pt:148
 msgid "label_prefill"
-msgstr "Fyrirfram áfylling"
+msgstr "Útfyllt fyrirfram"
 
 #. Default: Select one or more of the known common measures provided.
 #: src/osha/oira/client/templates/risk_actionplan.pt:68
@@ -3041,7 +3041,7 @@ msgstr ""
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/survey_sessions.pt:45
 msgid "link_start_session"
-msgstr "byrja á nýju"
+msgstr "byrja nýtt áhættumat"
 
 #. Default: Select an earlier session to complete or review or
 #. ${start_session}.
@@ -3072,7 +3072,7 @@ msgstr ""
 #: src/osha/oira/client/templates/shell.pt:91
 #: src/osha/oira/client/templates/shell.pt:93
 msgid "Start test session"
-msgstr "Hefja nýja lotu"
+msgstr "Byrja á nýju áhættumati"
 
 #. Default: New
 #: src/osha/oira/client/templates/shell.pt:101
@@ -3150,7 +3150,7 @@ msgstr "eða…"
 #: src/osha/oira/client/templates/tooltips.pt:3
 msgid "guest_login_warning"
 msgstr ""
-"Þú ert að prófa OiRA verkfærið. Þú getur ekki vistað áhættumatið né sótt skýrslur. Til að geta vistað áhættumat þarf að skrá sig inn eða stofna aðgang með því að smella á tengilinn “Innskráning” efst til hægri."
+"Þú ert að prófa OiRA verkfærið. Þú getur ekki vistað áhættumatið né sótt skýrslur. Til að geta vistað áhættumat þarf að skrá sig inn eða stofna aðgang með því að smella á tengilinn \"Innskráning\" efst til hægri."
 
 #. Default: Important
 #: src/osha/oira/client/templates/tooltips.pt:8
@@ -3162,8 +3162,7 @@ msgstr "Mikilvægt"
 #: src/osha/oira/client/templates/tooltips.pt:8
 msgid "list_test_session_limitations1"
 msgstr ""
-"${important} Þú getur ekki vistað vinnuna í prufulotu. Öll vinnan mun tapast "
-"ef þú skráir þig ekki."
+"${important} Þú getur ekki vistað þegar þú ert að prófa verkfærið. Öll vinnan mun tapast ef þú stofnar ekki aðgang"
 
 #. Default: You will not be able to print or download reports.
 #: src/osha/oira/client/templates/tooltips.pt:9
@@ -3175,26 +3174,24 @@ msgstr "Þú munt ekki geta prentað eða sótt skýrslur."
 #: src/osha/oira/client/templates/tooltips.pt:10
 msgid "list_test_session_limitations3"
 msgstr ""
-"Í prufulotu geturðu nýskráð þig hvenær sem er með því að smella á tengilinn "
-"\"Nýskrá\" efst á síðunni."
+"Þú getur stofnað aðgang hvenær sem er með því að smella á tengilinn \"Nýskrá\" efst á síðunni."
 
 #. Default: Discover how easy it is to create a risk assessment with OiRA.
 #: src/osha/oira/client/templates/tooltips.pt:16
 msgid "list_test_session_benefits1"
-msgstr "Sjáðu hversu einfalt er að búa til áhættumat með OiRA."
+msgstr "Það er einfalt að búa til áhættumat með OiRA."
 
 #. Default: Identify potential risks in your business and the measures to
 #. reduce them.
 #: src/osha/oira/client/templates/tooltips.pt:17
 msgid "list_test_session_benefits2"
 msgstr ""
-"Uppgötvaðu mögulegar áhættur í þínu fyrirtæki og aðgerðir til að draga úr "
-"þeim."
+"Uppgötvaðu hættur í fyrirtækinu og áætlaðu aðgerðir til að draga úr þeim."
 
 #. Default: Use it for vocational training.
 #: src/osha/oira/client/templates/tooltips.pt:18
 msgid "list_test_session_benefits3"
-msgstr "Notaðu það í starfsæfingar."
+msgstr "Notaðu það með starfsfólkinu."
 
 #. Default: You can register in one single step just by entering a valid email
 #. address.
@@ -3205,7 +3202,7 @@ msgstr "Þú getur skráð þig í einu skrefi með því að slá inn gilt netf
 #. Default: Main benefits of having an account:
 #: src/osha/oira/client/templates/tooltips.pt:24
 msgid "info_register2"
-msgstr "Helstu kostir þess að vera með reikning:"
+msgstr "Helstu kostir þess að stofna aðgang:"
 
 #. Default: Menu toggle
 #: src/osha/oira/client/templates/tooltips.pt:34
@@ -3352,7 +3349,7 @@ msgstr "CC leyfi"
 #: src/osha/oira/client/templates/webhelpers.pt:305
 #: src/osha/oira/client/templates/webhelpers.pt:324
 msgid "Read more"
-msgstr "Lestu meira"
+msgstr "Lesa meira"
 
 #. Default: ${read_more} about this risk.
 #: src/osha/oira/client/templates/webhelpers.pt:237
@@ -3368,11 +3365,11 @@ msgstr "Lög og reglugerðir"
 #. Default: Additional resources for assessing the risk
 #: src/osha/oira/client/templates/webhelpers.pt:342
 msgid "header_additional_resources"
-msgstr "Viðbótaraðföng til að meta áhættuna"
+msgstr "Frekari aðstoð til að meta áhættuna"
 
 #: src/osha/oira/content/library.py:180
 msgid "Addded a copy of \"${title}\" to your OiRA tool."
-msgstr "Bætti við afrit af \"${title}\" í OiRA verkfærið."
+msgstr "Bætta við afriti af \"${title}\" í OiRA verkfærið."
 
 #: src/osha/oira/content/module.py:20 src/osha/oira/content/module.py:33
 #: src/osha/oira/content/module.py:48
@@ -3427,12 +3424,12 @@ msgstr "Breyta spurningu"
 #. Default: Additional content
 #: src/osha/oira/content/risk.py:19
 msgid "header_additional_content"
-msgstr "Viðbótarefni"
+msgstr "Annað efni"
 
 #. Default: Attach any additional content you consider helpful for the user
 #: src/osha/oira/content/risk.py:20
 msgid "intro_additional_content"
-msgstr "Festu viðbótarefni við sem þú telur að gagnist notandanum"
+msgstr "Settu inn annað efni sem þú telur að gagnist notandanum"
 
 #. Default: Content file
 #: src/osha/oira/content/risk.py:29 src/osha/oira/content/risk.py:41
@@ -3454,7 +3451,7 @@ msgstr ""
 #: src/osha/oira/content/risk.py:37 src/osha/oira/content/risk.py:49
 #: src/osha/oira/content/risk.py:61 src/osha/oira/content/risk.py:73
 msgid "label_file_caption"
-msgstr "Skýringartexti efnis"
+msgstr "Skýringartexti á efni"
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
@@ -3623,8 +3620,7 @@ msgstr "Merki fyrirtækis (logo)"
 #: src/osha/oira/content/survey.py:69
 msgid "label_enable_custom_evaluation_descriptions"
 msgstr ""
-"Eru skilyrðin sem notuð voru til að meta áhættur einskorðuð við þetta "
-"verkfæri? (Ef ekki þá er hægt að nota venjulega skilyrðalýsingu)."
+"Eru notuð önnur verkfæri til að meta áhætturnar? (Ef ekki þá er hægt að nota annað)."
 
 #. Default: Tick this option if you would like to define your own descriptions
 #. for the criteria of the evaluation algorithm. The user will see them as
@@ -3632,13 +3628,11 @@ msgstr ""
 #: src/osha/oira/content/survey.py:73
 msgid "help_enable_custom_evaluation_descriptions"
 msgstr ""
-"Hakaðu við þennan valkost ef þú vilt velja þín eigin skilyrði fyrir "
-"algóritmann á þínu mati. Notandinn mun sjá þau sem vísbendingar þegar hann "
-"svarar spurningunum til að reikna út forgang áhættu."
+"Hakaðu við þennan valkost ef þú vilt nota þína eigin aðferð til að reikna út forgang áhættu."
 
 #: src/osha/oira/content/survey.py:86
 msgid "Probability"
-msgstr "Líkindi"
+msgstr "Líkur"
 
 #. Default: Provide your custom explanation here, to override this default
 #. explanation: "${default_explanation}"Indicate how likely occurence of this
@@ -3670,7 +3664,7 @@ msgstr "Þú getur ekki eytt OiRA verkfæri sem hefur verið birt."
 #. Default: Password reset for ${site}
 #: src/osha/oira/content/user.py:73
 msgid "password_reset_subject"
-msgstr "Endurstilling lykilorðs fyrir ${site}"
+msgstr "Nýtt lykilorðs fyrir ${site}"
 
 #. Default: Edit
 #: src/osha/oira/content/templates/addbar.pt:9

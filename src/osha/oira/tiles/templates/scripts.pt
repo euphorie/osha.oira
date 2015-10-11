@@ -2,56 +2,6 @@
      meta:interpolation="false"
      tal:omit-tag="">
   <script type="text/javascript">
-// <![CDATA
-(function() {
-function getText(node) {
-    var text="";
 
-    for (var child=node.firstChild; child!==null && child.nodeType===3; child=child.nextSibling)
-      text+=child.nodeValue;
-    return text;
-}
-
-function setText(node, text) {
-    var child;
-    while (node.firstChild!==null && node.firstChild.nodeType===3)
-      node.removeChild(node.firstChild);
-    var text_node = document.createTextNode(text);
-    if (node.firstChild===null)
-      node.appendChild(text_node);
-    else
-      node.insertBefore(text_node, node.firstChild);
-}
-
-jQuery("form :input").each(function() {
-    var selector = /form\.widgets\.(.*)/.exec(this.name);
-    if (selector===null)
-        return;
-    selector=".example .example-"+selector[1];
-    var $examples = jQuery(selector);
-    if ($examples.length===0)
-        return;
-    jQuery(this)
-        .focus(function() { jQuery(selector).addClass("focus"); })
-        .blur(function() { jQuery(selector).removeClass("focus"); })
-        .keyup(function() {
-            var text = this.value;
-            jQuery(selector).each(function() {
-                var $this = jQuery(this);
-                if (!$this.data("original")) {
-                    $this.data("original", getText(this));
-                    if (!text)
-                        return;
-                }
-                if (!text)
-                    text=$this.data("original");
-                setText(this, text);
-            });
-        })
-        .keyup();
-});
-})();
-
-// ]]>
   </script>
 </div>

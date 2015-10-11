@@ -7,8 +7,6 @@ from Acquisition import aq_inner
 from five import grok
 from z3c.form import button
 from plone.directives import form
-from Products.CMFCore.interfaces import ISiteRoot
-from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.client import utils
 from euphorie.client.country import DeleteSession as EuphorieDeleteSession
@@ -16,10 +14,8 @@ from euphorie.client.country import View as EuphorieView
 from euphorie.client.country import IClientCountry
 from euphorie.client.login import Tryout
 from euphorie.client.model import SurveySession
-from euphorie.content.utils import StripMarkup
 from .interfaces import IOSHAClientSkinLayer
 from z3c.saconfig import Session
-from zope.component import getUtility
 from zope.interface import Interface
 from .. import _
 
@@ -27,45 +23,9 @@ from .. import _
 grok.templatedir("templates")
 
 
-class SplashMessage(object):
-
-    def _getLanguages(self):
-        lt = getToolByName(self.context, "portal_languages")
-        lang = lt.getPreferredLanguage()
-        if "-" in lang:
-            return [lang, lang.split("-")[0], "en"]
-        else:
-            return [lang, "en"]
-
-    def _findMOTD(self):
-        documents = getUtility(ISiteRoot).documents
-
-        motd = None
-        for lang in self._getLanguages():
-            docs = documents.get(lang, None)
-            if docs is None:
-                continue
-            motd = docs.get("motd", None)
-            if motd is not None:
-                return motd
-
-    def _updateMOTD(self):
-        motd = self._findMOTD()
-        if motd:
-            self.splash_message = dict(
-                title=StripMarkup(motd.description), text=motd.body,
-                id=motd.modification_date.strftime('%Y%m%d%H%M%S'))
-        else:
-            self.splash_message = None
-
-
-class View(EuphorieView, SplashMessage):
+class View(EuphorieView):
     grok.layer(IOSHAClientSkinLayer)
     grok.template("sessions")
-
-    def update(self):
-        super(View, self).update()
-        self._updateMOTD()
 
 
 class CreateSession(View):

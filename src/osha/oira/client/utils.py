@@ -1,9 +1,11 @@
 from .interfaces import IOSHAClientSkinLayer
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.interfaces import ISiteRoot
 from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.client import model
 from euphorie.client.sector import IClientSector
+from euphorie.content.utils import StripMarkup
 from euphorie.client.utils import WebHelpers
 from euphorie.content.survey import ISurvey
 from euphorie.decorators import reify
@@ -16,6 +18,7 @@ from plone.i18n.normalizer import idnormalizer
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.component.hooks import getSite
 from plone import api
 import htmllib
@@ -284,3 +287,33 @@ class OSHAWebHelpers(WebHelpers):
         for m in messages:
             m.id = idnormalizer.normalize(m.message)
         return messages
+
+    def _getLanguages(self):
+        lt = getToolByName(self.context, "portal_languages")
+        lang = lt.getPreferredLanguage()
+        if "-" in lang:
+            return [lang, lang.split("-")[0], "en"]
+        else:
+            return [lang, "en"]
+
+    def _findMOTD(self):
+        documents = getUtility(ISiteRoot).documents
+
+        motd = None
+        for lang in self._getLanguages():
+            docs = documents.get(lang, None)
+            if docs is None:
+                continue
+            motd = docs.get("motd", None)
+            if motd is not None:
+                return motd
+
+    def splash_message(self):
+        motd = self._findMOTD()
+        if motd:
+            message = dict(
+                title=StripMarkup(motd.description), text=motd.body,
+                id=motd.modification_date.strftime('%Y%m%d%H%M%S'))
+        else:
+            message = None
+        return message

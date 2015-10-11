@@ -59,22 +59,6 @@
     </form>
   </article>
 
-  <div tal:define="splash_message nocall:view/splash_message"
-       tal:condition="python:splash_message is not None"
-       class="pat-collapsible splash-message" data-pat-collapsible="store: local" id="splash-message-uid-${splash_message/id}">
-    <hr class="trigger" />
-    <div class="content">
-       <article class="container">
-         <h1 tal:content="structure splash_message/title">Lorem ipsum dolor sit amet</h1>
-         <tal:c content="structure splash_message/text">
-         <p>Sit amet consectetuer.</p>
-          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-          <p>- the OiRA team</p>
-        </tal:c>
-       </article>
-    </div>
-  </div>
-
 </metal:slot>
 </body>
 </html>

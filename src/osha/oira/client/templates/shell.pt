@@ -44,7 +44,7 @@
     <metal:styleslot define-slot="style_slot" />
 </head>
 
-<body class="osh-on test-session osc-on osc-s-off focus-sidebar ${sidebar_default}" i18n:domain="euphorie" tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
+<body class="osh-on test-session osc-on osc-s-off focus-sidebar ${sidebar_default} ${python:'splash-on' if not is_anonymous else ''}" i18n:domain="euphorie" tal:define="is_anonymous webhelpers/anonymous; is_outside_of_survey webhelpers/is_outside_of_survey; survey_url webhelpers/survey_url; base_url webhelpers/base_url">
     <div id="main">
         <header id="toolbar">
             <a href="#osc" class="icon-menu pat-toggle"
@@ -174,5 +174,18 @@
         </a>
     </aside>
     <tal:block replace="tile:client-analytics"/>
+
+    <div tal:define="splash_message webhelpers/splash_message" tal:condition="python:splash_message is not None" class="splash-message">
+        <hr class="trigger pat-switch" data-pat-switch="selector: body; remove: splash-*; add: splash-off; store: local" />
+       <article class="content">
+         <h1 tal:content="structure splash_message/title">Message of the day!</h1>
+           <tal:content content="structure splash_message/text">
+             <p>Sit amet consectetuer.</p>
+              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+              <p>OiRA Team</p>
+        </tal:content>
+       </article>
+    </div>
+
 </body>
 </html>

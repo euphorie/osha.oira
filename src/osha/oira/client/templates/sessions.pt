@@ -42,6 +42,24 @@
     </article>
 
 </metal:slot>
+
+<metal:slot fill-slot="splash_message_slot">
+    <div tal:condition="python:splash_message is not None" class="splash-message">
+        <hr class="trigger pat-switch" data-pat-switch="selector: body; remove: splash-*; add: splash-off-${splash_message/id}; store: local" />
+        <article class="pat-rich content">
+            <p>
+                <img src="${base_url}/++resource++oira.media/oira-logo-colour.svg" width="20%" />
+            </p>
+            <h1 tal:content="structure splash_message/title">Message of the day!</h1>
+            <tal:content content="structure splash_message/text">
+                <p>Sit amet consectetuer.</p>
+                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+                <p>OiRA Team</p>
+            </tal:content>
+       </article>
+    </div>
+</metal:slot>
+
 </body>
 </html>
 

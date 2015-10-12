@@ -70,7 +70,7 @@
 }
 
 body {
-	&[class^='splah-on'] {
+	&[class^='splash-on'] {
 		.splash-message {
 			display: block;	
 		}
@@ -84,7 +84,7 @@ body {
 		}
 	}
 
-	&[class^='splah-off'] {
+	&[class^='splash-off'] {
 		#main,
 		#osc {
 			-ms-filter: blur(0);

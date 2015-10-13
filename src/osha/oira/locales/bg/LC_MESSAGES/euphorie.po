@@ -1115,7 +1115,7 @@ msgstr "Рискове, които са били определени, но НЯ
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
 msgstr ""
-"Опасности/проблеми, които са били \"паркирани\" и все още очакват решение"
+"Опасности/проблеми, които не са били разгледани"
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
@@ -1124,8 +1124,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
 msgstr ""
-"Опасности/проблеми, които не са разглеждани или не присъстват във вашата "
-"организация"
+"Опасности/проблеми, които се управляват"
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/report.py:666
@@ -1171,7 +1170,7 @@ msgstr "Смяна на парола"
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
-msgstr ""
+msgstr "Добавени рискове (от Вас)"
 
 #. Default: By clicking on 'Delete account', your account will be permenantly
 #. deleted. This action is irreversable.
@@ -1752,17 +1751,17 @@ msgstr ""
 #: src/osha/oira/client/templates/login.pt:24
 msgid "teaser_try_oira"
 msgstr ""
-"Искате да изпробвате OiRA? Можете да използвате временна връзка ${tryout_link} към инструмента или да се регистрирате ${register_link}, за да го стартирате."
+"Искате да изпробвате OiRA? Можете да използвате временна връзка към инструмент а (${tryout_link}) или да се регистрирате, за да го стартирате (${register_link})."
 
 #. Default: log in
 #: src/osha/oira/client/templates/login.pt:27
 msgid "log in"
-msgstr ""
+msgstr "от тук"
 
 #. Default: If you are a registered user, you can ${log_in} here.
 #: src/osha/oira/client/templates/login.pt:27
 msgid "label_login_here"
-msgstr ""
+msgstr "Ако сте регистриран потребител, имате достъп до системата ${log_in}."
 
 #. Default: Show more…
 #: src/osha/oira/client/templates/login.pt:34
@@ -2017,7 +2016,7 @@ msgstr "Заличаване на риск"
 #. Default: Add risk
 #: src/osha/oira/client/templates/module_customization.pt:61
 msgid "label_add_risk"
-msgstr ""
+msgstr "Добавете риск"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_customization.pt:62
@@ -3012,7 +3011,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/risks_overview.pt:143
 msgid "Overview of risks"
-msgstr ""
+msgstr "Преглед на рисковете"
 
 #. Default: No risk
 #: src/osha/oira/client/templates/risks_overview.pt:217
@@ -3033,7 +3032,7 @@ msgstr "Риск с набелязани мерки"
 #: src/osha/oira/client/templates/status.pt:98
 #: src/osha/oira/client/templates/status_print.pt:91
 msgid "label_risk_without_measure"
-msgstr "Риск без  набелязани мерки"
+msgstr "Риск без набелязани мерки"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/risks_overview.pt:226
@@ -3054,27 +3053,27 @@ msgstr "Без отговор"
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:240
 msgid "heading_present_risks"
-msgstr ""
+msgstr "${num_present_risks} Съществуващи рискове"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:243
 msgid "heading_num_high_prio_risks"
-msgstr ""
+msgstr "${num_high_risks} Високо приоритетен риск"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:244
 msgid "heading_num_medium_prio_risks"
-msgstr ""
+msgstr "${num_medium_risks} Средно приоритетен риск"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:245
 msgid "heading_num_low_prio_risks"
-msgstr ""
+msgstr "${num_low_risks} Ниско приоритетен риск"
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:256
 msgid "heading_possible_risks"
-msgstr ""
+msgstr "${num_possible_risks} Вероятни рискове"
 
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:259
@@ -3254,7 +3253,7 @@ msgstr "Използвайте оценката за професионално 
 #: src/osha/oira/client/templates/tooltips.pt:23
 msgid "info_register1"
 msgstr ""
-"Можете да се регистрирате  чрез един единствен ход, като въведете валиден адрес на електронна поща."
+"Можете да се регистрирате чрез един единствен ход, като въведете валиден адрес на електронна поща."
 
 #. Default: Main benefits of having an account:
 #: src/osha/oira/client/templates/tooltips.pt:24

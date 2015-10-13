@@ -2,7 +2,8 @@
 layout: shell
 ---
 
-<form method="post" action="#">
+<form method="post" action="#" class="pat-scroll"
+      data-pat-scroll="selector: #content; trigger: auto; offset: 0">
 	<fieldset class="vertical">
 		<fieldset class="pat-checklist radio">
 			<legend>{{ page.title }}</legend>
@@ -12,46 +13,52 @@ layout: shell
 		</fieldset>
 	</fieldset>
 
-	<fieldset class="pat-well notice pat-depends vertical" data-pat-depends="condition: answer=no; transition: slide">
+	<fieldset class="evaluation pat-well notice pat-depends vertical" data-pat-depends="condition: answer=no; transition: slide">
 <!-- 		<h3>
 			Evaluation
 		</h3>
  -->
 	{% if page.evaluation_method == 'risk_calculated' %}
-	<p>Please answer the following questions. As a result of your answers the system will calculate the priority of the risk. You will be able to modify the priority later.</p>
+	<p class="problem-description"><strong>{{ page.problem_description }}</strong></p>
+	<p class="instruction">Please answer the following questions. As a result of your answers the system will calculate the priority of the risk. You will be able to modify the priority later.</p>
 		<fieldset class="pat-checklist radio">
-			<legend>What is the chance of this risk occurring?</legend>
+			<legend>
+				What is the chance of this risk occurring?
+				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Indicate how likely occurence of this risk is in a normal situation.</dfn>
+			</legend>
 			<label><input type="radio" name="chance" /> Small</label>
 			<label><input type="radio" name="chance" /> Medium</label>
 			<label><input type="radio" name="chance" /> Large</label>
 		</fieldset>
 		<fieldset class="pat-checklist radio">
-			<legend>How often are people exposed to this risk?</legend>
+			<legend>
+				How often are people exposed to this risk?
+				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Indicate how often this risk occurs in a normal situation.</dfn>
+			</legend>
 			<label><input type="radio" name="exposed" /> Almost never</label>
 			<label><input type="radio" name="exposed" /> Regularly</label>
 			<label><input type="radio" name="exposed" /> Continuously</label>
 		</fieldset>
 		<fieldset class="pat-checklist radio">
-			<legend>What is the severity of the damage?</legend>
+			<legend>
+				What is the severity of the damage?
+				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Indicate the default severity of this risk occurs.</dfn>
+			</legend>
 			<label><input type="radio" name="effect" /> Weak severity</label>
 			<label><input type="radio" name="effect" /> Significant severity</label>
 			<label><input type="radio" name="effect" /> High (very high) severity</label>
 		</fieldset>
 	{% elsif page.evaluation_method == 'risk_estimated'  %}
+		<p class="problem-description"><strong>{{ page.problem_description }}</strong></p>
 		<fieldset class="pat-checklist radio">
 			<legend>Select the priority of this risk</legend>
 			<label><input type="radio" name="chance" /> Low</label>
 			<label><input type="radio" name="chance" /> Medium</label>
 			<label><input type="radio" name="chance" /> High</label>
 		</fieldset>
-	{% elsif page.evaluation_method == 'risk_direct'  %}
-		<p>The priority for this risk has been set automatically, so there is no need to evaluate the risk.</p>
-	{% elsif page.evaluation_method == 'policy'  %}
-		<p>This is a <em>policy risk</em>.</p>
-		<p>This kind of risks are, strictly speaking, not risks and therefore they are not evaluated and don't reveice a priority value.</p>
-	{% elsif page.evaluation_method == 'priority'  %}
-		<p>This is a <em>high priority</em> risk.</p>
-		<p>This kind of risks are considered by the sector to be among the high risks in the sector, and so they receive automatically a priority of High.</p>
+
+	{% else %}
+		<p>The risk evaluation has been automatically done by the tool. You will be able to change the priority for this risk – if you consider it necessary – in the action plan.</p>
 	{% endif %}
 	</fieldset>
 
@@ -84,9 +91,13 @@ layout: shell
 			</div>
 		{% endif %}
 
-		{{ content | truncatewords: 50 }}
+		<section id="concise-content">
+			<p class="introduction">
+				{{ content | strip_html | truncatewords: 50 }} <a class="show-more pat-inject" href="#full-content" data-pat-inject="target: #concise-content;">Read more</a>
+			</p>
+		</section>
 
-		<div class="pat-collapsible show-more closed">
+		<!-- <div class="pat-collapsible show-more closed">
 			<p class="show-more-or-less">
 				<strong class="show-more">Read more</strong> <span class="divider">/</span> <strong class="show-less">Read less</strong> about this risk.
 			</p>
@@ -98,22 +109,40 @@ layout: shell
 			   <li>Aliquam tincidunt mauris eu risus.</li>
 			   <li>Vestibulum auctor dapibus neque.</li>
 			</ul>
-		</div>
+		</div> -->
 
 		{% if page.legal_reference %}
-			<h2>Legal and policy references</h2>
-			{{ page.legal_reference }}
+			<section class="caption pat-well">
+				<section class="pat-collapsible legal-references closed">
+					<h3>Legal and policy references</h3>
+					{{ page.legal_reference }}
+				</section>
+				<section class="pat-collapsible more-information closed">
+					<h3>Additional resources for assessing the risk</h3>
+					<ul>
+						<li class="icon-download">
+							<a href="">Lorem ipsum dolor sit.pdf</a>
+						</li>
+						<li class="icon-download">
+							<a href="">Amet consectetuer.pdf</a>
+						</li>
+					</ul>
+				</section>
+			</section>
 		{% endif %}
 
 	</article>
 
 	<fieldset class="vertical">
-		<textarea id="commentsField" name="comments" placeholder="Please leave any comments you may have on the above question" cols="70" rows="5" class="span-15"></textarea>
+		<textarea id="commentsField" name="comments" placeholder="Please leave any comments you may have on the above question" cols="70" rows="3" class="span-15"></textarea>
 	</fieldset>
 
 	<p class="buttonBar">
 		<button type="submit" name="next" value="previous" class="pat-button back">Previous</button>
 		<button type="submit" name="next" value="next" class="pat-button">Save and continue</button>
 	</p>
+	<article hidden id="full-content">
+		{{ content }}
+	</article>
 </form>
 

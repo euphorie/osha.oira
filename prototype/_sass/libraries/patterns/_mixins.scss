@@ -68,15 +68,22 @@
     margin-bottom: 2rem;
   }
 
-  ul,ol {
+  ul,
+  ol {
     li {
        margin-left: 0;
-       padding-left: 1em;
+       padding-left: 1.5em;
 
        &:before {
         content: "•";
         float: left;
-        margin-left: -1em;
+        margin-left: -1.2em;
+       }
+
+       &[class^="icon-"]:before, 
+       &[class*=" icon-"]:before {
+        line-height: inherit;
+        margin-left: -1.5em;
        }
     }
 
@@ -91,21 +98,46 @@
   }
 
   h2 {
+    font-size: 1.5em;
     line-height: 130%;
     letter-spacing: 0.05em;
     font-weight: 400;
+    margin-bottom: 0.7em;
+    letter-spacing: 0.05em;
   }
 
   h3 {
-    line-height: 130%;
+    font-size: 1em;
+    // line-height: 130%;
     letter-spacing: 0.05em;
     font-weight: 400;
+    margin-bottom: 1em;
   }
 
   img {
     max-width: 100%;
     margin: 0 auto;
     display: block;
+
+    &.float-before {
+      margin-right: 1em;
+      float: left;
+      top: 0.2em;
+      position: relative;
+    }
+
+    &.float-after {
+      margin-left: 1em;
+      float: right;
+      top: 0.2em;
+      position: relative;
+    }
+
+    @include screen-size(large) { 
+      &.medium {
+        width: 33%;
+      }
+    }
   }
 
   figure {
@@ -130,25 +162,52 @@
     margin-bottom: 2em;
     display: block;
 
+    &.pat-collapsible {
+      border-radius: 0.5em;
+      padding: 0;
+
+      .collapsible-closed,
+      .collapsible-open {
+        padding: 1em;
+      }
+
+      &.open,
+      &.closed.in-progress,
+      &.open.in-progress {
+        .panel-content {
+          padding: 1em;
+        }
+      }
+    }
+
     &.success {
         background-color: $colour-success;
         color: white;
 
         a {
           color: white;
+          text-decoration: underline;
         }
 
         input { color: $colour-base-font};
     }
+
     &.notice {
         background-color: $colour-notice;
     }
+
+    &.caption {
+        background-color: transparent;
+        border: 1px solid rgba(0,0,0,0.5)
+    }
+
     &.warning {
         background-color: $colour-warning;
         color: white;
 
         a {
           color: white;
+          text-decoration: underline;
         }
 
         input { color: $colour-base-font};

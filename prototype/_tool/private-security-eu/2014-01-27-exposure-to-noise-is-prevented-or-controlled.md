@@ -23,7 +23,7 @@ legal_reference: "<ul><li><a title='' href='http://europa.eu/legislation_summari
 evaluation_method: risk_estimated
 images:
     - url: /media/private-security-eu/gebod_-_gehoorbescherming.png
-      caption: 
+      caption:
 
 solutions:
   solution_1:
@@ -34,20 +34,4 @@ solutions:
                   present and in good condition."
 ---
 [Noise ](https://osha.europa.eu/en/topics/noise/index_html)is an unwanted
-sound.
-
-  * **Possible sources: **noise of the building’s installations, of machinery, of office equipment, detonation of ammunition during shooting practice, noise by human beings, crowds, ...
-  * Noise can cause considerable **hearing damage**. The intensity (loudness) and exposure duration determine whether noise is hazardous. **Rule of thumb:** 'private security guards should be able to hear each other at one metre distance without raising their voice'.
-  * Noise can also be a **source of annoyance and disturbance**, if it interferes with the job or if the job is very complex.
-
-**Make sure the client informs you (security company) and the private security guards **about the risks and measures in place.
-
-**Check whether the client:**
-
-  * Has identified the source(s) of the noise + limit or reduce noise at source.
-  * Ensures technical maintenance of workplaces, installations, ...
-  * Provides work signs and PPEs.
-
-Promotes working habits and behaviour that are not noisy.
-
-
+sound. Possible sources: noise of the building’s installations, of machinery, of office equipment, detonation of ammunition during shooting practice, noise by human beings, crowds, ...

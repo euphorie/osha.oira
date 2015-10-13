@@ -14,21 +14,21 @@ section: action
 			<label>This is a
 				<select>
 					<option>
-						low priority risk
+						low
 					</option>
 					<option>
-						medium priority risk
+						medium
 					</option>
 					<option>
-						high priority risk
+						high
 					</option>
-				</select> .
+				</select> priority risk.
 			</label>
 		</fieldset>
 
-		<!-- The DIV and its content below are only plotted if there are actually images. -->
+		<!-- The DIV and its content below are only plotted if there are actually images and more than 1. -->
 
-		<div class="image-collage pat-gallery pat-equaliser">
+ 		<div class="image-collage pat-gallery pat-equaliser">
 			<!-- Each image src is repeated as an image url as the value of the background image property inthe inline style on the link tag and in the HREF of the link tag. The background image should be a medium sized image, the image of the HREF should be the large, original image. -->
 
 			<!-- The class 'three' is three in case of four images, 'four' in case of three images, 'six' in case of two images and 'twelve' in case of one image. -->
@@ -49,14 +49,20 @@ section: action
 			</a>
 		</div>
 
+		<nav class="pat-gallery">
+			<a href="/media/private-security-eu/guard-walkie-talkie.jpg" style="background-image: url(/media/private-security-eu/guard-walkie-talkie.jpg)">
+				<img class="medium float-before" title="Image caption goes here" src="/media/private-security-eu/guard-walkie-talkie.jpg" alt="" />
+			</a>
+		</nav>
+
 		{{ content | truncatewords: 30 }}
 
-		<div class="pat-collapsible show-more closed">
-			<p class="show-more-or-less">
-				<strong class="show-more">Read more</strong> <span class="divider">/</span> <strong class="show-less">Read less</strong> about this risk.
-			</p>
+		<div class="pat-collapsible closed">
+			<h4>
+				More about this risk
+			</h4>
 			<p>
-				Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+				Pellentesque <a href="#">habitant morbi</a> tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
 			</p>
 			<ul>
 			   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
@@ -79,13 +85,13 @@ section: action
 				</p>
 				<ol class="add-measure-menu">
 			        <li>
-			          	<a class="pat-inject close-panel" href="#standard-solution-1" data-pat-inject="target: #fields-0" class="title"><em class="small pat-button">Add</em> Visual inspection of work areas</a>
+			          	<a class="pat-inject close-panel" href="#standard-solution-1" data-pat-inject="target: #fields-0" class="title"><em class="iconified icon-plus-circle">Add</em> Visual inspection of work areas</a>
 			        </li>
 			        <li>
-			          	<a class="pat-inject close-panel" href="#standard-solution-2" data-pat-inject="target: #fields-0"><em class="small pat-button">Add</em> Provide good equipment</a>
+			          	<a class="pat-inject close-panel" href="#standard-solution-2" data-pat-inject="target: #fields-0"><em class="iconified icon-plus-circle">Add</em> Provide good equipment</a>
 			        </li>
 			        <li>
-			          	<a class="pat-inject close-panel" href="#standard-solution-3" data-pat-inject="target: #fields-0"><em class="small pat-button">Add</em> Inform the private security guards</a>
+			          	<a class="pat-inject close-panel" href="#standard-solution-3" data-pat-inject="target: #fields-0"><em class="iconified icon-plus-circle">Add</em> Inform the private security guards</a>
 			        </li>
 			    </ol>
 			</div>
@@ -93,12 +99,10 @@ section: action
 			<fieldset class="vertical" id="fields-0">
 				<label>Description
 					<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
-					<textarea autofocus class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea>
-				</label>
-				<label>Prevention plan
+					<textarea autofocus class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="3"></textarea>
+					<br />
 					<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea>
-				</label>
-				<label>Requirements
+					<br />
 					<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3"></textarea>
 				</label>
 			</fieldset>
@@ -136,7 +140,7 @@ section: action
 		<h2>Measure #{1}</h2>
 		<p class="functions">
 			<a class="icon-pencil pat-tooltip" data-pat-tooltip="source: ajax" href="#standard-solutions-#{1}">Pre-fill</a>
-			<a class="icon-trash remove-clone">Remove</a>
+			<a class="icon-trash remove-clone">Delete this measure</a>
 		</p>
 
 		<div id="standard-solutions-#{1}" hidden>
@@ -145,13 +149,13 @@ section: action
 			</p>
 			<ol class="add-measure-menu">
 		        <li>
-		          	<a class="pat-inject close-panel" href="#standard-solution-1" data-pat-inject="target: #fields-#{1}" class="title"><em class="small pat-button">Add</em> Visual inspection of work areas</a>
+		          	<a class="pat-inject close-panel" href="#standard-solution-1" data-pat-inject="target: #fields-#{1}" class="title"><em class="iconified icon-plus-circle">Add</em> Visual inspection of work areas</a>
 		        </li>
 		        <li>
-		          	<a class="pat-inject close-panel" href="#standard-solution-2" data-pat-inject="target: #fields-#{1}"><em class="small pat-button">Add</em> Provide good equipment</a>
+		          	<a class="pat-inject close-panel" href="#standard-solution-2" data-pat-inject="target: #fields-#{1}"><em class="iconified icon-plus-circle">Add</em> Provide good equipment</a>
 		        </li>
 		        <li>
-		          	<a class="pat-inject close-panel" href="#standard-solution-3" data-pat-inject="target: #fields-#{1}"><em class="small pat-button">Add</em> Inform the private security guards</a>
+		          	<a class="pat-inject close-panel" href="#standard-solution-3" data-pat-inject="target: #fields-#{1}"><em class="iconified icon-plus-circle">Add</em> Inform the private security guards</a>
 		        </li>
 		    </ol>
 		</div>
@@ -159,12 +163,10 @@ section: action
 		<fieldset class="vertical" id="fields-#{1}">
 			<label>Description
 				<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
-				<textarea autofocus class=" actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6"></textarea>
-			</label>
-			<label>Prevention plan
+				<textarea autofocus class=" actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="3"></textarea>
+				<br />
 				<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3"></textarea>
-			</label>
-			<label>Requirements
+				<br />
 				<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3"></textarea>
 			</label>
 		</fieldset>
@@ -194,7 +196,7 @@ section: action
 	</div>
 
 	<fieldset>
-		<textarea id="commentsField" name="comments" placeholder="Please leave any further comments you may have" cols="70" rows="5"></textarea>
+		<textarea id="commentsField" name="comments" placeholder="Please leave any further comments you may have" cols="70" rows="3"></textarea>
 	</fieldset>
 
 	<div class="button-bar">
@@ -206,36 +208,33 @@ section: action
 
 	<fieldset class="vertical" id="standard-solution-1" hidden>
 		<label>Description
-			<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">Make sure a visual inspection of work areas is carried out in order to identify the potential hazards of falls and slips. Check that the anti-fall fittings and protective measures are present and in good condition.</textarea>
-		</label>
-		<label>Prevention plan
+			<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
+			<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="3">Make sure a visual inspection of work areas is carried out in order to identify the potential hazards of falls and slips. Check that the anti-fall fittings and protective measures are present and in good condition.</textarea>
+			<br />
 			<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3">Dolor sit</textarea>
-		</label>
-		<label>Requirements
+			<br />
 			<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3">Amet consectetuer</textarea>
 		</label>
 	</fieldset>
 
 	<fieldset class="vertical" id="standard-solution-2" hidden>
 		<label>Description
-			<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">Provide torches (flashlights with good beams) and suitable shoes with anti-slip soles.</textarea>
-		</label>
-		<label>Prevention plan
+			<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
+			<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="3">Provide torches (flashlights with good beams) and suitable shoes with anti-slip soles.</textarea>
+			<br >
 			<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3">Dolor sit</textarea>
-		</label>
-		<label>Requirements
+			<br >
 			<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3">Amet consectetuer</textarea>
 		</label>
 	</fieldset>
 
 	<fieldset class="vertical" id="standard-solution-3" hidden>
 		<label>Description
-			<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="6">Inform the private security guards about respecting warning signs, using the appropriate access ways, using the lights in passageways, using torches. Encourage them to report faults or other problems in the work environment.</textarea>
-		</label>
-		<label>Prevention plan
+			<dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
+			<textarea class="actionPlan" name="action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="3">Inform the private security guards about respecting warning signs, using the appropriate access ways, using the lights in passageways, using torches. Encourage them to report faults or other problems in the work environment.</textarea>
+			<br />
 			<textarea class="preventionPlan" name="prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3">Dolor sit</textarea>
-		</label>
-		<label>Requirements
+			<br />
 			<textarea class="requirements" name="requirements" placeholder="Level of expertise and/or requirements needed" rows="3">Amet consectetuer</textarea>
 		</label>
 	</fieldset>

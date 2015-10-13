@@ -1,11 +1,21 @@
 Changelog
 =========
 
-2.3.8 (unreleased)
-------------------
+2.3.10 (unreleased)
+-------------------
 
 - Nothing changed yet.
 
+
+2.3.9 (2015-09-15)
+------------------
+
+- Re-release, apparently the previous one was botched
+
+2.3.8 (2015-09-15)
+------------------
+
+- Translation updates in IS #12327
 
 2.3.7 (2015-04-01)
 ------------------

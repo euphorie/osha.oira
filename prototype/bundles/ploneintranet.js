@@ -11121,20 +11121,23 @@ define('pat-utils',[
     }
 
     function findLabel(input) {
-        for (var label=input.parentNode; label && label.nodeType!==11; label=label.parentNode)
-            if (label.tagName==="LABEL")
-                return label;
-
         var $label;
-
-        if (input.id)
-            $label = $("label[for="+input.id+"]");
-        if ($label && $label.length===0 && input.form)
-            $label = $("label[for="+input.name+"]", input.form);
-        if ($label && $label.length)
+        for (var label=input.parentNode; label && label.nodeType!==11; label=label.parentNode) {
+            if (label.tagName==="LABEL") {
+                return label;
+            }
+        }
+        if (input.id) {
+            $label = $("label[for=\""+input.id+"\"]");
+        }
+        if ($label && $label.length===0 && input.form) {
+            $label = $("label[for=\""+input.name+"\"]", input.form);
+        }
+        if ($label && $label.length) {
             return $label[0];
-        else
+        } else {
             return null;
+        }
     }
 
     // Taken from http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
@@ -12049,6 +12052,8 @@ define('pat-registry',[
     "pat-compat",
     "pat-jquery-ext"
 ], function($, logger, utils) {
+    var TEXT_NODE = 3;
+    var COMMENT_NODE = 8;
     var log = logger.getLogger("registry");
 
     var disable_re = /patterns-disable=([^&]+)/g,
@@ -12178,11 +12183,13 @@ define('pat-registry',[
     };
 
     $(document).on("patterns-injected.patterns",
-            function registry_onInject(ev, inject_config, inject_trigger) {
-                registry.scan(ev.target, null, {type: "injection", element: inject_trigger});
-                $(ev.target).trigger("patterns-injected-scanned");
-            });
-
+        function registry_onInject(ev, config, trigger_el, injected_el) {
+            if (injected_el.nodeType !== TEXT_NODE && injected_el !== COMMENT_NODE) {
+                registry.scan(injected_el, null, {type: "injection", element: trigger_el});
+                $(injected_el).trigger("patterns-injected-scanned");
+            }
+        }
+    );
     return registry;
 });
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
@@ -14103,9 +14110,14 @@ define('pat-parser',[
                 this.log.debug("Ignoring value for unknown argument " + name);
                 return;
             }
-            var spec = this.parameters[name];
+            var spec = this.parameters[name],
+                parts, i, v;
             if (spec.multiple) {
-                var parts=value.split(/,+/), i, v;
+                if (typeof value === "string") {
+                    parts = value.split(/,+/);
+                } else {
+                    parts = value;
+                }
                 value = [];
                 for (i=0; i<parts.length; i++) {
                     v = this._coerce(name, parts[i].trim());
@@ -15806,6 +15818,119 @@ define('pat-autoscale',[
     return _;
 });
 
+/**
+ * A Base pattern for creating scoped patterns. It'ssSimilar to Backbone's
+ * Model class. The advantage of this approach is that each instance of a
+ * pattern has its own local scope (closure).
+ *
+ * A new instance is created for each DOM element on which a pattern applies.
+ *
+ * You can assign values, such as $el, to `this` for an instance and they
+ * will remain unique to that instance.
+ *
+ * Older Patternslib patterns on the other hand have a single global scope for
+ * all DOM elements.
+ */
+
+define('pat-base',[
+  'jquery',
+  'pat-registry',
+  "pat-logger"
+], function($, Registry, logger) {
+    'use strict';
+    var log = logger.getLogger("Patternslib Base");
+
+    var initBasePattern = function initBasePattern($el, options, trigger) {
+        var name = this.prototype.name;
+        var log = logger.getLogger("pat." + name);
+        var pattern = $el.data('pattern-' + name);
+        if (pattern === undefined && Registry.patterns[name]) {
+            try {
+                pattern = new Registry.patterns[name]($el, options, trigger);
+            } catch (e) {
+                log.error('Failed while initializing "' + name + '" pattern.');
+            }
+            $el.data('pattern-' + name, pattern);
+        }
+        return pattern;
+    };
+
+    var Base = function($el, options, trigger) {
+        this.$el = $el;
+        this.options = $.extend(true, {}, this.defaults || {}, options || {});
+        this.init($el, options, trigger);
+        this.emit('init');
+    };
+
+    Base.prototype = {
+        constructor: Base,
+        on: function(eventName, eventCallback) {
+            this.$el.on(eventName + '.' + this.name + '.patterns', eventCallback);
+        },
+        emit: function(eventName, args) {
+            // args should be a list
+            if (args === undefined) {
+                args = [];
+            }
+            this.$el.trigger(eventName + '.' + this.name + '.patterns', args);
+        }
+    };
+
+    Base.extend = function(patternProps) {
+        /* Helper function to correctly set up the prototype chain for new patterns.
+        */
+        var parent = this;
+        var child;
+
+        // Check that the required configuration properties are given.
+        if (!patternProps) {
+            throw new Error("Pattern configuration properties required when calling Base.extend");
+        }
+
+        // The constructor function for the new subclass is either defined by you
+        // (the "constructor" property in your `extend` definition), or defaulted
+        // by us to simply call the parent's constructor.
+        if (patternProps.hasOwnProperty('constructor')) {
+            child = patternProps.constructor;
+        } else {
+            child = function() { parent.apply(this, arguments); };
+        }
+
+        // Allow patterns to be extended indefinitely
+        child.extend = Base.extend;
+
+        // Static properties required by the Patternslib registry 
+        child.init = initBasePattern;
+        child.jquery_plugin = true;
+        child.trigger = patternProps.trigger;
+
+        // Set the prototype chain to inherit from `parent`, without calling
+        // `parent`'s constructor function.
+        var Surrogate = function() { this.constructor = child; };
+        Surrogate.prototype = parent.prototype;
+        child.prototype = new Surrogate();
+
+        // Add pattern's configuration properties (instance properties) to the subclass,
+        $.extend(true, child.prototype, patternProps);
+
+        // Set a convenience property in case the parent's prototype is needed
+        // later.
+        child.__super__ = parent.prototype;
+
+        // Register the pattern in the Patternslib registry.
+        if (!patternProps.name) {
+            log.warn("This pattern without a name attribute will not be registered!");
+        } else if (!patternProps.trigger) {
+            log.warn("The pattern '"+patternProps.name+"' does not " +
+                     "have a trigger attribute, it will not be registered.");
+        } else {
+            Registry.register(child, patternProps.name);
+        }
+        return child;
+    };
+    return Base;
+});
+
 // helper functions to make all input elements
 define('pat-input-change-events',[
     "jquery",
@@ -15815,98 +15940,99 @@ define('pat-input-change-events',[
         log = logging.getLogger(namespace);
 
     var _ = {
-        setup: function($form, pat) {
-
-            if (!$form.is("form,.pat-subform")) {
-                log.error("Input change event handler can only be set on forms.");
-                return;
-            }
-
+        setup: function($el, pat) {
             if (!pat) {
                 log.error("The name of the calling pattern has to be set.");
                 return;
             }
-
             // list of patterns that installed input-change-event handlers
-            var patterns = $form.data(namespace) || [];
+            var patterns = $el.data(namespace) || [];
             log.debug("setup handlers for " + pat);
 
             if (!patterns.length) {
                 log.debug("installing handlers");
-                _.setupInputHandlers($form);
+                _.setupInputHandlers($el);
 
-                $form.on("patterns-injected." + namespace, function(event) {
+                $el.on("patterns-injected." + namespace, function(event) {
                     _.setupInputHandlers($(event.target));
                 });
             }
-
             if (patterns.indexOf(pat) === -1) {
                 patterns.push(pat);
-                $form.data(namespace, patterns);
+                $el.data(namespace, patterns);
             }
         },
 
-        setupInputHandlers: function($parent) {
-            $parent.findInclusive(":input").each(function() {
-                var $el = $(this),
-                    isText = $el.is("input:text, input[type=search], textarea");
+        setupInputHandlers: function($el) {
+            if (!$el.is(":input")) {
+                // We've been given an element that is not a form input. We
+                // therefore assume that it's a container of form inputs and
+                // register handlers for its children.
+                $el.findInclusive(":input").each(_.registerHandlersForElement);
+            } else {
+                // The element itself is an input, se we simply register a
+                // handler fot it.
+                _.registerHandlersForElement($el);
+            }
+        },
 
-                if (isText) {
-                    if ("oninput" in window) {
-                        $el.on("input." + namespace, function() {
-                            log.debug("translating input");
+        registerHandlersForElement: function() {
+            var $el = $(this),
+                isText = $el.is("input:text, input[type=search], textarea");
+
+            if (isText) {
+                if ("oninput" in window) {
+                    $el.on("input." + namespace, function() {
+                        log.debug("translating input");
+                        $el.trigger("input-change");
+                    });
+                } else {
+                    // this is the legacy code path for IE8
+                    // Work around buggy placeholder polyfill.
+                    if ($el.attr("placeholder")) {
+                        $el.on("keyup." + namespace, function() {
+                            log.debug("translating keyup");
                             $el.trigger("input-change");
                         });
                     } else {
-                        // this is the legacy code path for IE8
-                        // Work around buggy placeholder polyfill.
-                        if ($el.attr("placeholder")) {
-                            $el.on("keyup." + namespace, function() {
-                                log.debug("translating keyup");
+                        $el.on("propertychange." + namespace, function(ev) {
+                            if (ev.originalEvent.propertyName === "value") {
+                                log.debug("translating propertychange");
                                 $el.trigger("input-change");
-                            });
-                        } else {
-                            $el.on("propertychange." + namespace, function(ev) {
-                                if (ev.originalEvent.propertyName === "value") {
-                                    log.debug("translating propertychange");
-                                    $el.trigger("input-change");
-                                }
-                            });
-                        }
+                            }
+                        });
                     }
-                } else {
-                    $el.on("change." + namespace, function() {
-                        log.debug("translating change");
-                        $el.trigger("input-change");
-                    });
                 }
-
-                $el.on("blur", function() {
-                    $el.trigger("input-defocus");
+            } else {
+                $el.on("change." + namespace, function() {
+                    log.debug("translating change");
+                    $el.trigger("input-change");
                 });
+            }
+
+            $el.on("blur", function() {
+                $el.trigger("input-defocus");
             });
         },
 
-        remove: function($form, pat) {
-            var patterns = $form.data(namespace) || [];
+        remove: function($el, pat) {
+            var patterns = $el.data(namespace) || [];
             if (patterns.indexOf(pat) === -1) {
                 log.warn("input-change-events were never installed for " + pat);
             } else {
                 patterns = patterns.filter(function(e){return e!==pat;});
                 if (patterns.length) {
-                    $form.data(namespace, patterns);
+                    $el.data(namespace, patterns);
                 } else {
                     log.debug("remove handlers");
-                    $form.removeData(namespace);
-                    $form.find(":input").off("." + namespace);
-                    $form.off("." + namespace);
+                    $el.removeData(namespace);
+                    $el.find(":input").off("." + namespace);
+                    $el.off("." + namespace);
                 }
             }
         }
     };
-
     return _;
-
 });
 
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
@@ -15918,15 +16044,17 @@ define('pat-input-change-events',[
  * Copyright 2012-2013 Florian Friesdorf
  * Copyright 2012 Simplon B.V. - Wichert Akkerman
  * Copyright 2013 Marko Durkovic
+ * Copyright 2014-2015 Syslab.com GmbH - JC Brand 
  */
 define('pat-autosubmit',[
     "jquery",
     "pat-registry",
+    "pat-base",
     "pat-logger",
     "pat-parser",
     "pat-input-change-events",
     "pat-utils"
-], function($, registry, logging, Parser, input_change_events, utils) {
+], function($, registry, Base, logging, Parser, input_change_events, utils) {
     var log = logging.getLogger("autosubmit"),
         parser = new Parser("autosubmit");
 
@@ -15935,9 +16063,9 @@ define('pat-autosubmit',[
     // - defocus
     parser.addArgument("delay", "400ms");
 
-    var _ = {
+    return Base.extend({
         name: "autosubmit",
-        trigger: ".pat-autosubmit :input",
+        trigger: ".pat-autosubmit",
         parser: {
             parse: function($el, opts) {
                 var cfg = parser.parse($el, opts);
@@ -15948,69 +16076,69 @@ define('pat-autosubmit',[
             }
         },
 
-        init: function($el, opts) {
-            if ($el.length > 1)
-                return $el.each(function() { _.init($(this), opts); });
+        init: function() {
+            this.options = this.parser.parse(this.$el, arguments[1]);
+            input_change_events.setup(this.$el, "autosubmit");
+            this.registerListeners();
+            this.registerTriggers();
+            return this.$el;
+        },
 
-            // handle the form itself
-            if ($el.is("form,.pat-subform")) {
-                if ($el.data("pat-autosubmit-initialized")) {
-                    return $el;
-                }
-                input_change_events.setup($el, "autosubmit");
-                $el.on("input-change-delayed.pat-autosubmit", _.onInputChange)
-                    .data("pat-autosubmit-initialized", true);
-                return $el;
-            }
+        registerListeners: function() {
+            this.$el.on("input-change-delayed.pat-autosubmit", this.onInputChange);
+            this.registerSubformListeners();
+            this.$el.on('patterns-injected', this.registerSubformListeners.bind(this));
+        },
 
-            // make sure the form is initialized if it does not have the pat-autosubmit class
-            var $form = $el.parents("form,.pat-subform").first();
-            if (!$form.data("pat-autosubmit-initialized")) {
-                _.init($form);
-            }
+        registerSubformListeners: function(ev) {
+            /* If there are subforms, we need to listen on them as well, so
+             * that only the subform gets submitted if an element inside it
+             * changes.
+             */
+            var $el = typeof ev !== "undefined" ? $(ev.target) : this.$el;
+            $el.find(".pat-subform").each(function (idx, el) {
+                $(el).on("input-change-delayed.pat-autosubmit", this.onInputChange);
+            }.bind(this));
+        },
 
-            var cfg = _.parser.parse($el, opts),
-                isText = $el.is("input:text, input[type=search], textarea");
-
-            if (cfg.delay === "defocus" && !isText) {
+        registerTriggers: function() {
+            var isText = this.$el.is("input:text, input[type=search], textarea");
+            if (this.options.delay === "defocus" && !isText) {
                 log.error("The defocus delay value makes only sense on text input elements.");
-                return $el;
+                return this.$el;
             }
-
-            if (cfg.delay === "defocus") {
-                $el.on("input-defocus.pat-autosubmit", function() {
-                    $el.trigger("input-change-delayed");
+            if (this.options.delay === "defocus") {
+                this.$el.on("input-defocus.pat-autosubmit", function(ev) {
+                    $(ev.target).trigger("input-change-delayed");
                 });
-            } else if (cfg.delay > 0) {
-                $el.on("input-change.pat-autosubmit", utils.debounce(function() {
-                    $el.trigger("input-change-delayed");
-                }, cfg.delay));
+            } else if (this.options.delay > 0) {
+                this.$el.on("input-change.pat-autosubmit", utils.debounce(function(ev) {
+                    $(ev.target).trigger("input-change-delayed");
+                }, this.options.delay));
             } else {
-                $el.on("input-change.pat-autosubmit", function() {
-                    $el.trigger("input-change-delayed");
+                this.$el.on("input-change.pat-autosubmit", function(ev) {
+                    $(ev.target).trigger("input-change-delayed");
                 });
             }
-            return $el;
         },
 
         destroy: function($el) {
             input_change_events.remove($el, "autosubmit");
-            $el.removeData("pat-autosubmit-initialized");
-            $el.off(".pat-autosubmit")
-                .find(":input").off(".pat-autosubmit");
+            if (this.$el.is("form")) {
+                this.$el.find(".pat-subform").addBack(this.$el).each(function (idx, el) {
+                    $(el).off(".pat-autosubmit");
+                });
+            } else {
+                $el.off(".pat-autosubmit");
+            }
         },
 
         onInputChange: function(ev) {
             ev.stopPropagation();
-
             $(this).submit();
-
             log.debug("triggered by " + ev.type);
         }
-    };
-
-    registry.register(_);
-    return _;
+    });
 });
 
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
@@ -20351,119 +20479,6 @@ define('pat-chosen',[
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
 // vim: sw=4 expandtab
 ;
-/**
- * A Base pattern for creating scoped patterns. It'ssSimilar to Backbone's
- * Model class. The advantage of this approach is that each instance of a
- * pattern has its own local scope (closure).
- *
- * A new instance is created for each DOM element on which a pattern applies.
- *
- * You can assign values, such as $el, to `this` for an instance and they
- * will remain unique to that instance.
- *
- * Older Patternslib patterns on the other hand have a single global scope for
- * all DOM elements.
- */
-
-define('pat-base',[
-  'jquery',
-  'pat-registry',
-  "pat-logger"
-], function($, Registry, logger) {
-    'use strict';
-    var log = logger.getLogger("Patternslib Base");
-
-    var initBasePattern = function initBasePattern($el, options, trigger) {
-        var name = this.prototype.name;
-        var log = logger.getLogger("pat." + name);
-        var pattern = $el.data('pattern-' + name);
-        if (pattern === undefined && Registry.patterns[name]) {
-            try {
-                pattern = new Registry.patterns[name]($el, options, trigger);
-            } catch (e) {
-                log.error('Failed while initializing "' + name + '" pattern.');
-            }
-            $el.data('pattern-' + name, pattern);
-        }
-        return pattern;
-    };
-
-    var Base = function($el, options, trigger) {
-        this.$el = $el;
-        this.options = $.extend(true, {}, this.defaults || {}, options || {});
-        this.init($el, options, trigger);
-        this.emit('init');
-    };
-
-    Base.prototype = {
-        constructor: Base,
-        on: function(eventName, eventCallback) {
-            this.$el.on(eventName + '.' + this.name + '.patterns', eventCallback);
-        },
-        emit: function(eventName, args) {
-            // args should be a list
-            if (args === undefined) {
-                args = [];
-            }
-            this.$el.trigger(eventName + '.' + this.name + '.patterns', args);
-        }
-    };
-
-    Base.extend = function(patternProps) {
-        /* Helper function to correctly set up the prototype chain for new patterns.
-        */
-        var parent = this;
-        var child;
-
-        // Check that the required configuration properties are given.
-        if (!patternProps) {
-            throw new Error("Pattern configuration properties required when calling Base.extend");
-        }
-
-        // The constructor function for the new subclass is either defined by you
-        // (the "constructor" property in your `extend` definition), or defaulted
-        // by us to simply call the parent's constructor.
-        if (patternProps.hasOwnProperty('constructor')) {
-            child = patternProps.constructor;
-        } else {
-            child = function() { parent.apply(this, arguments); };
-        }
-
-        // Allow patterns to be extended indefinitely
-        child.extend = Base.extend;
-
-        // Static properties required by the Patternslib registry 
-        child.init = initBasePattern;
-        child.jquery_plugin = true;
-        child.trigger = patternProps.trigger;
-
-        // Set the prototype chain to inherit from `parent`, without calling
-        // `parent`'s constructor function.
-        var Surrogate = function() { this.constructor = child; };
-        Surrogate.prototype = parent.prototype;
-        child.prototype = new Surrogate();
-
-        // Add pattern's configuration properties (instance properties) to the subclass,
-        $.extend(true, child.prototype, patternProps);
-
-        // Set a convenience property in case the parent's prototype is needed
-        // later.
-        child.__super__ = parent.prototype;
-
-        // Register the pattern in the Patternslib registry.
-        if (!patternProps.name) {
-            log.warn("This pattern without a name attribute will not be registered!");
-        } else if (!patternProps.trigger) {
-            log.warn("The pattern '"+patternProps.name+"' does not " +
-                     "have a trigger attribute, it will not be registered.");
-        } else {
-            Registry.register(child, patternProps.name);
-        }
-        return child;
-    };
-    return Base;
-});
-
 /* pat-clone */
 define("pat-clone",[
     "jquery",
@@ -20524,8 +20539,21 @@ define("pat-clone",[
             $clone.appendTo(this.$el);
             $clone.children().addBack().contents().addBack().filter(this.incrementValues.bind(this));
             $clone.find(this.options.removeElement).on("click", this.remove.bind(this, $clone));
+
+            // IE BUG : Placeholder text becomes actual value after deep clone on textarea 
+            // https://connect.microsoft.com/IE/feedback/details/781612/placeholder-text-becomes-actual-value-after-deep-clone-on-textarea
+            if ($.browser.msie !== undefined) {
+              $(':input[placeholder]', $clone).each(function(i, item) {
+                  var $item = $(item);
+                  if ($item.attr('placeholder') === $item.val()) {
+                    $item.val('');
+                  }
+              });
+            }
+
             $clone.removeAttr("hidden");
             registry.scan($clone);
+            $clone.trigger("pat-update", {'pattern':"clone", '$el': $clone});
             if (this.num_clones >= this.options.max) {
                 $(this.options.triggerElement).hide();
             }
@@ -20923,12 +20951,12 @@ define('pat-inject',[
      * an event for each hook: pat-inject-hook-$(hook)
      */
     parser.addArgument("hooks", [], ["raptor"], true);
+    parser.addArgument("class"); // Add a class to the injected content.
+    parser.addArgument("history");
     // XXX: this should not be here but the parser would bail on
     // unknown parameters and expand/collapsible need to pass the url
     // to us
     parser.addArgument("url");
-    parser.addArgument("class");
-    parser.addArgument("history");
 
     var _ = {
         name: "inject",
@@ -21142,9 +21170,85 @@ define('pat-inject',[
             return $target;
         },
 
+        stopBubblingFromRemovedElement: function ($el, cfgs, ev) {
+            /* IE8 fix. Stop event from propagating IF $el will be removed
+            * from the DOM. With pat-inject, often $el is the target that
+            * will itself be replaced with injected content.
+            *
+            * IE8 cannot handle events bubbling up from an element removed
+            * from the DOM.
+            *
+            * See: http://stackoverflow.com/questions/7114368/why-is-jquery-remove-throwing-attr-exception-in-ie8
+            */
+            var s; // jquery selector
+            for (var i=0; i<cfgs.length; i++) {
+                s = cfgs[i].target;
+                if ($el.parents(s).addBack(s) && !ev.isPropagationStopped()) {
+                    ev.stopPropagation();
+                    return;
+                }
+            }
+        },
+
+        _performInjection: function ($el, $source, cfg, trigger) {
+            /* Called after the XHR has succeeded and we have a new $source
+             * element to inject.
+             */
+            if (cfg.sourceMod === "content") {
+                $source = $source.contents();
+            }
+            var $src;
+            // $source.clone() does not work with shived elements in IE8
+            if (document.all && document.querySelector &&
+                !document.addEventListener) {
+                $src = $source.map(function() {
+                    return $(this.outerHTML)[0];
+                });
+            } else {
+                $src = $source.clone();
+            }
+            var $target = $(this),
+                $injected = cfg.$injected || $src;
+
+            $src.findInclusive("img").on("load", function() {
+                $(this).trigger("pat-inject-content-loaded");
+            });
+            // Now the injection actually happens.
+            if (_._inject(trigger, $src, $target, cfg)) { _._afterInjection($el, $injected, cfg); }
+            // History support.
+            if ((cfg.history === "record") && ("pushState" in history)) {
+                history.pushState({'url': cfg.url}, "", cfg.url);
+            }
+        },
+
+        _afterInjection: function ($el, $injected, cfg) {
+            /* Set a class on the injected elements and fire the
+             * patterns-injected event.
+             */
+            $injected.filter(function() {
+                // setting data on textnode fails in IE8
+                return this.nodeType !== TEXT_NODE;
+            }).data("pat-injected", {origin: cfg.url});
+
+            if ($injected.length === 1 && $injected[0].nodeType == TEXT_NODE) {
+                // Only one element injected, and it was a text node.
+                // So we trigger "patterns-injected" on the parent.
+                // The event handler should check whether the
+                // injected element and the triggered element are
+                // the same.
+                $injected.parent().trigger("patterns-injected", [cfg, $el[0], $injected[0]]);
+            } else {
+                $injected.each(function () {
+                    // patterns-injected event will be triggered for each injected (non-text) element.
+                    if (this.nodeType !== TEXT_NODE) {
+                        $(this).addClass(cfg["class"]).trigger("patterns-injected", [cfg, $el[0], this]);
+                    }
+                });
+            }
+        },
+
         _onInjectSuccess: function ($el, cfgs, ev) {
-            var trigger = ev.target,
-                sources$,
+            var sources$,
                 data = ev && ev.jqxhr && ev.jqxhr.responseText;
             if (!data) {
                 log.warn("No response content, aborting", ev);
@@ -21153,73 +21257,13 @@ define('pat-inject',[
             $.each(cfgs[0].hooks || [], function (idx, hook) {
                 $el.trigger("pat-inject-hook-"+hook);
             });
-
-            function stopBubblingFromRemovedElement (ev) {
-               /* IE8 fix. Stop event from propagating IF $el will be removed
-                * from the DOM. With pat-inject, often $el is the target that
-                * will itself be replaced with injected content.
-                *
-                * IE8 cannot handle events bubbling up from an element removed
-                * from the DOM.
-                *
-                * See: http://stackoverflow.com/questions/7114368/why-is-jquery-remove-throwing-attr-exception-in-ie8
-                */
-                var s; // jquery selector
-                for (var i=0; i<cfgs.length; i++) {
-                    s = cfgs[i].target;
-                    if ($el.parents(s).addBack(s) && !ev.isPropagationStopped()) {
-                        ev.stopPropagation();
-                        return;
-                    }
-                }
-            }
-            stopBubblingFromRemovedElement(ev);
+            _.stopBubblingFromRemovedElement($el, cfgs, ev);
             sources$ = _.callTypeHandler(cfgs[0].dataType, "sources", $el, [cfgs, data, ev]);
             cfgs.forEach(function(cfg, idx) {
-                var $source = sources$[idx];
-                if (cfg.sourceMod === "content") {
-                    $source = $source.contents();
-                }
-
-                // perform injection
-                cfg.$target.each(function inject_onSuccess_perform() {
-                    var $src;
-                    // $source.clone() does not work with shived elements in IE8
-                    if (document.all && document.querySelector &&
-                        !document.addEventListener) {
-                        $src = $source.map(function() {
-                            return $(this.outerHTML)[0];
-                        });
-                    } else {
-                        $src = $source.clone();
-                    }
-
-                    var $target = $(this),
-                        $injected = cfg.$injected || $src;
-
-                    $src.findInclusive("img").on("load", function() {
-                        $(this).trigger("pat-inject-content-loaded");
-                    });
-
-                    if (_._inject(trigger, $src, $target, cfg)) {
-                        $injected.filter(function() {
-                            // setting data on textnode fails in IE8
-                            return this.nodeType !== 3; //Node.TEXT_NODE
-                        }).data("pat-injected", {origin: cfg.url});
-
-                        if ($injected[0].nodeType !== TEXT_NODE) {
-                            $injected.addClass(cfg["class"])
-                                .trigger("patterns-injected", [cfg, $el[0]]);
-                        } else { // Makes no sense adding a class to a text node.
-                            $injected.parent().trigger("patterns-injected", [cfg, $el[0]]);
-                        }
-                    }
-                    if ((cfg.history === "record") &&
-                        ("pushState" in history))
-                        history.pushState({url: cfg.url}, "", cfg.url);
+                cfg.$target.each(function() {
+                    _._performInjection.apply(this, [$el, sources$[idx], cfg, ev.target]);
                 });
             });
-
             if (cfgs[0].nextHref) {
                 $el.attr({href: (window.location.href.split("#")[0] || "") +
                             cfgs[0].nextHref});
@@ -39928,6 +39972,7 @@ var indexOf = Array.prototype.indexOf ?
             "pat-registry",
             "pat-parser",
             "pat-base",
+            "pat-utils",
             "masonry",
             "imagesloaded"
             ], function() {
@@ -39936,7 +39981,7 @@ var indexOf = Array.prototype.indexOf ?
     } else {
         factory(root.$, root.patterns, root.patterns.Parser, root.Base, root.Masonry, root.imagesLoaded);
     }
-}(this, function($, registry, Parser, Base, Masonry, imagesLoaded) {
+}(this, function($, registry, Parser, Base, utils, Masonry, imagesLoaded) {
     "use strict";
     var parser = new Parser("masonry");
     parser.addArgument("column-width");
@@ -39956,23 +40001,37 @@ var indexOf = Array.prototype.indexOf ?
         trigger: ".pat-masonry",
 
         init: function masonryInit($el, opts) {
-            var options = parser.parse(this.$el, opts);
+            this.options = parser.parse(this.$el, opts);
             $(document).trigger("clear-imagesloaded-cache");
-            this.msnry = new Masonry(this.$el[0], {
-                columnWidth:         this.getTypeCastedValue(options.columnWidth),
-                containerStyle:      options.containerStyle,
-                gutter:              this.getTypeCastedValue(options.gutter),
-                hiddenStyle:         options.hiddenStyle,
-                isFitWidth:          options.is["fit-width"],
-                isInitLayout:        false,
-                isOriginLeft:        options.is["origin-left"],
-                isOriginTOp:         options.is["origin-top"],
-                itemSelector:        options.itemSelector,
-                stamp:               options.stamp,
-                transitionDuration:  options.transitionDuration,
-                visibleStyle:        options.visibleStyle
-            });
+            this.initMasonry();
             this.$el.imagesLoaded(this.layout.bind(this));
+            // Update if something gets injected inside the pat-masonry
+            // element.
+            this.$el.on("patterns-injected.pat-masonry",
+                    utils.debounce(this.update.bind(this), 100));
+        },
+
+        initMasonry: function () {
+            this.msnry = new Masonry(this.$el[0], {
+                columnWidth:         this.getTypeCastedValue(this.options.columnWidth),
+                containerStyle:      this.options.containerStyle,
+                gutter:              this.getTypeCastedValue(this.options.gutter),
+                hiddenStyle:         this.options.hiddenStyle,
+                isFitWidth:          this.options.is["fit-width"],
+                isInitLayout:        false,
+                isOriginLeft:        this.options.is["origin-left"],
+                isOriginTOp:         this.options.is["origin-top"],
+                itemSelector:        this.options.itemSelector,
+                stamp:               this.options.stamp,
+                transitionDuration:  this.options.transitionDuration,
+                visibleStyle:        this.options.visibleStyle
+            });
+        },
+
+        update: function () {
+            this.msnry.remove();
+            this.initMasonry();
+            this.layout();
         },
 
         layout: function () {
@@ -40395,137 +40454,228 @@ define('pat-placeholder',[
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
 // vim: sw=4 expandtab
 ;
-define('pat-sortable',[
+/**
+ * Copyright 2012-2013 Syslab.com GmbH - JC Brand
+ */
+define('pat-scroll',[
     "jquery",
     "pat-registry",
+    "pat-base",
+    "pat-utils",
     "pat-logger",
-    "pat-parser"
-], function($, patterns, logger, Parser) {
-    var parser = new Parser("sortable");
+    "pat-parser",
+    "underscore"
+], function($, patterns, Base, utils, logging, Parser, _) {
+    var log = logging.getLogger("scroll"),
+        parser = new Parser("scroll");
+    parser.addArgument("trigger", "click", ["click", "auto"]);
+    parser.addArgument("direction", "top", ["top", "left"]);
+    parser.addArgument("selector");
+    parser.addArgument("offset");
 
+    return Base.extend({
+        name: "scroll",
+        trigger: ".pat-scroll",
+        jquery_plugin: true,
+
+        init: function($el, opts) {
+            this.options = parser.parse(this.$el, opts);
+            if (this.options.trigger == "auto") {
+               this.smoothScroll();
+            } else if (this.options.trigger == "click") {
+                this.$el.click(function (ev) {
+                    ev.preventDefault();
+                    this.smoothScroll();
+                }.bind(this));
+            }
+        },
+
+        smoothScroll: function() {
+            var scroll = this.options.direction == "top" ? 'scrollTop' : 'scrollLeft',
+                $el, options = {};
+            if (typeof this.options.offset != "undefined") {
+                $el = this.options.selector ? $(this.options.selector) : this.$el;
+                options[scroll] = this.options.offset;
+            } else {
+                $el = $('body');
+                options[scroll] = $(this.$el.attr('href')).offset().top;
+            }
+            $el.animate(options, 500);
+        }
+    });
+});
+
+// jshint indent: 4, browser: true, jquery: true, quotmark: double
+// vim: sw=4 expandtab
+;
+define('pat-sortable',[
+    "jquery",
+    "pat-base",
+    "pat-parser"
+], function($, Base, Parser) {
+    var parser = new Parser("sortable");
     parser.addArgument("selector", "li");
 
-    var _ = {
+    return Base.extend({
         name: "sortable",
         trigger: ".pat-sortable",
 
-        init: function($el) {
-            if ($el.length > 1)
-                return $el.each(function() { _.init($(this)); });
+        init: function ($el) {
+            this.$form = this.$el.closest('form');
+            this.options = parser.parse(this.$el, true);
+            this.recordPositions().addHandles().initScrolling();
+            this.$el.on('pat-update', this.onPatternUpdate.bind(this));
+        },
 
-            var cfgs = parser.parse($el, true);
-            $el.data("patterns.sortable", cfgs);
+        onPatternUpdate: function (ev, data) {
+            /* Handler which gets called when pat-update is triggered within
+             * the .pat-sortable element.
+             */
+            if (data.pattern == "clone") {
+                this.recordPositions();
+                data.$el.on("dragstart", this.onDragStart.bind(this));
+                data.$el.on("dragend", this.onDragEnd.bind(this));
+            }
+            return true;
+        },
 
+        recordPositions: function () {
             // use only direct descendants to support nested lists
-            var $sortables = $el.children().filter(cfgs[0].selector);
+            this.$sortables = this.$el.children().filter(this.options[0].selector);
+            this.$sortables.each(function (idx, $el) {
+                $(this).data('patterns.sortable', {'position': idx});
+            });
+            return this;
+        },
 
-            // add handles and make them draggable for HTML5 and IE8/9
-            // it has to be an "a" tag (or img) to make it draggable in IE8/9
-            var $handles = $("<a href=\"#\" class=\"handle\"></a>").appendTo($sortables);
-            if("draggable" in document.createElement("span"))
+        addHandles: function () {
+            /* Add handles and make them draggable for HTML5 and IE8/9
+             * it has to be an "a" tag (or img) to make it draggable in IE8/9
+             */
+            var $sortables_without_handles = this.$sortables.filter(function() {
+                return $(this).find('.sortable-handle').length === 0;
+            });
+            var $handles = $("<a href=\"#\" class=\"sortable-handle\">⇕</a>").appendTo($sortables_without_handles);
+            if("draggable" in document.createElement("span")) {
                 $handles.attr("draggable", true);
-            else
-                $handles.bind("selectstart", function(event) {
-                    event.preventDefault();
-                });
+            } else {
+                $handles.on("selectstart", function(event) { event.preventDefault(); });
+            }
+            $handles.on("dragstart", this.onDragStart.bind(this));
+            $handles.on("dragend", this.onDragEnd.bind(this));
+            return this;
+        },
 
+        initScrolling: function () {
             // invisible scroll activation areas
             var scrollup = $("<div id=\"pat-scroll-up\">&nbsp;</div>"),
                 scrolldn = $("<div id=\"pat-scroll-dn\">&nbsp;</div>"),
                 scroll = $().add(scrollup).add(scrolldn);
-
             scrollup.css({ top: 0 });
             scrolldn.css({ bottom: 0 });
             scroll.css({
                 position: "fixed", zIndex: 999999,
                 height: 32, left: 0, right: 0
             });
-
-            scroll.bind("dragover", function(event) {
+            scroll.on("dragover", function(event) {
                 event.preventDefault();
-                if ($("html,body").is(":animated")) return;
-
-                var newpos = $(window).scrollTop() +
-                    ($(this).attr("id")==="pat-scroll-up" ? -32 : 32);
-
+                if ($("html,body").is(":animated")) { return; }
+                var newpos = $(window).scrollTop() + ($(this).attr("id")==="pat-scroll-up" ? -32 : 32);
                 $("html,body").animate({scrollTop: newpos}, 50, "linear");
             });
+            return this;
+        },
 
-            $handles.bind("dragstart", function(event) {
-                // Firefox seems to need this set to any value
-                event.originalEvent.dataTransfer.setData("Text", "");
-                event.originalEvent.dataTransfer.effectAllowed = ["move"];
-                if ("setDragImage" in event.originalEvent.dataTransfer)
-                    event.originalEvent.dataTransfer.setDragImage(
-                        $(this).parent()[0], 0, 0);
-                $(this).parent().addClass("dragged");
+        onDragEnd: function (ev) {
+            $(".dragged").removeClass("dragged");
+            this.$sortables.unbind(".pat-sortable");
+            this.$el.unbind(".pat-sortable");
+            $("#pat-scroll-up, #pat-scroll-dn").detach();
+            this.submitChangedAmount($(ev.target).closest('.sortable'));
+        },
 
-                // Scroll the list if near the borders
-                $el.bind("dragover.pat-sortable", function(event) {
-                    event.preventDefault();
-                    if ($el.is(":animated")) return;
+        submitChangedAmount: function ($dragged) {
+            /* If we are in a form, then submit the form with the right amount
+             * that the sortable element was moved up or down.
+             */
+            var $amount_input = this.$form.find('.sortable-amount');
+            if ($amount_input.length === 0) { return; }
+            var old_position = $dragged.data('patterns.sortable').position;
+            this.recordPositions();
+            var new_position = $dragged.data('patterns.sortable').position;
+            var change = Math.abs(new_position - old_position);
+            var direction = new_position > old_position && 'down' || 'up';
+            if (this.$form.length > 0) {
+                $amount_input.val(change);
+                if (direction == 'up') {
+                    $dragged.find('.sortable-button-up').click();
+                } else {
+                    $dragged.find('.sortable-button-down').click();
+                }
+            }
+        },
 
-                    var pos = event.originalEvent.clientY + $("body").scrollTop();
+        onDragStart: function (event) {
+            var $handle = $(event.target),
+                $draggable = $handle.parent();
 
-                    if (pos - $el.offset().top < 32)
-                        $el.animate({scrollTop: $el.scrollTop()-32}, 50, "linear");
-                    else if ($el.offset().top+$el.height() - pos < 32)
-                        $el.animate({scrollTop: $el.scrollTop()+32}, 50, "linear");
-                });
+            // Firefox seems to need this set to any value
+            event.originalEvent.dataTransfer.setData("Text", "");
+            event.originalEvent.dataTransfer.effectAllowed = ["move"];
+            if ("setDragImage" in event.originalEvent.dataTransfer) {
+                event.originalEvent.dataTransfer.setDragImage($draggable[0], 0, 0);
+            }
+            $draggable.addClass("dragged");
 
-                // list elements are only drop targets when one element of the
-                // list is being dragged. avoids dragging between lists.
-                $sortables.bind("dragover.pat-sortable", function(event) {
-                    var $this = $(this),
-                        midlineY = $this.offset().top - $(document).scrollTop() +
-                            $this.height()/2;
+            // Scroll the list if near the borders
+            this.$el.on("dragover.pat-sortable", function(event) {
+                event.preventDefault();
+                if (this.$el.is(":animated")) return;
 
+                var pos = event.originalEvent.clientY + $("body").scrollTop();
+
+                if (pos - this.$el.offset().top < 32)
+                    this.$el.animate({scrollTop: this.$el.scrollTop()-32}, 50, "linear");
+                else if (this.$el.offset().top+this.$el.height() - pos < 32)
+                    this.$el.animate({scrollTop: this.$el.scrollTop()+32}, 50, "linear");
+            }.bind(this));
+
+            // list elements are only drop targets when one element of the
+            // list is being dragged. avoids dragging between lists.
+            this.$sortables.on("dragover.pat-sortable", function(event) {
+                var $this = $(this),
+                    midlineY = $this.offset().top - $(document).scrollTop() + $this.height()/2;
+
+                if ($(this).hasClass("dragged")) {
                     // bail if dropping on self
-                    if ($(this).hasClass("dragged"))
-                        return;
-
-                    $this.removeClass("drop-target-above drop-target-below");
-                    if (event.originalEvent.clientY > midlineY)
-                        $this.addClass("drop-target-below");
-                    else
-                        $this.addClass("drop-target-above");
-                    event.preventDefault();
-                });
-
-                $sortables.bind("dragleave.pat-sortable", function() {
-                    $sortables.removeClass("drop-target-above drop-target-below");
-                });
-
-                $sortables.bind("drop.pat-sortable", function(event) {
-                    if ($(this).hasClass("dragged"))
-                        return;
-
-                    if ($(this).hasClass("drop-target-below"))
-                        $(this).after($(".dragged"));
-                    else
-                        $(this).before($(".dragged"));
-                    $(this).removeClass("drop-target-above drop-target-below");
-                    event.preventDefault();
-                });
-
-                //XXX: Deactivate document scroll areas, as DnD affects only
-                //     scrolling of parent element
-                //scroll.appendTo("body");
+                    return;
+                }
+                $this.removeClass("drop-target-above drop-target-below");
+                if (event.originalEvent.clientY > midlineY)
+                    $this.addClass("drop-target-below");
+                else
+                    $this.addClass("drop-target-above");
+                event.preventDefault();
             });
 
-            $handles.bind("dragend", function() {
-                $(".dragged").removeClass("dragged");
-                $sortables.unbind(".pat-sortable");
-                $el.unbind(".pat-sortable");
-                $("#pat-scroll-up, #pat-scroll-dn").detach();
-            });
+            this.$sortables.on("dragleave.pat-sortable", function() {
+                this.$sortables.removeClass("drop-target-above drop-target-below");
+            }.bind(this));
 
-            return $el;
+            this.$sortables.on("drop.pat-sortable", function(event) {
+                var $sortable = $(this);
+                if ($sortable.hasClass("dragged"))
+                    return;
+
+                if ($sortable.hasClass("drop-target-below"))
+                    $sortable.after($(".dragged"));
+                else
+                    $sortable.before($(".dragged"));
+                $sortable.removeClass("drop-target-above drop-target-below");
+                event.preventDefault();
+            });
         }
-    };
-
-    patterns.register(_);
-    return _;
+    });
 });
 
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
@@ -43565,51 +43715,84 @@ define("parsley.extend", ["jquery"], function(){});
  */
 define('pat-validate',[
     "jquery",
-    "pat-registry",
+    "pat-parser",
+    "pat-base",
     "pat-utils",
     "parsley",
     "parsley.extend"
-], function($, patterns, utils) {
-    var validate = {
+], function($, Parser, Base, utils) {
+    var parser = new Parser("validate");
+    parser.addArgument("disable-selector"); // Elements which must be disabled if there are errors
+
+    return Base.extend({
         name: "validate",
         trigger: "form.pat-validate",
 
-        init: function($el) {
-            return $el.each(function() {
-                this.noValidate=true;
-                var parsley_form, field, i;
-
-                parsley_form=$(this).parsley({
-                    trigger: "change keyup",
-                    successClass: "valid",
-                    errorClass: "warning",
-                    errors: {
-                        classHandler: validate._classHandler,
-                        container: validate._container
-                    },
-                    messages: {
-                        beforedate:     "This date should be before another date.",
-                        onorbeforedate: "This date should be on or before another date.",
-                        afterdate:      "This date should be after another date.",
-                        onorafterdate:  "This date should be on or after another date."
-                    }
-                });
-                for (i=0; i<parsley_form.items.length; i++) {
-                    field = parsley_form.items[i];
-                    if (typeof field.UI !== "undefined") {
-                        // Parsley 1.2.x
-                        field.UI.addError = validate._addFieldError;
-                        field.UI.removeError = validate._removeFieldError;
-                        validate.parsley12 = true;
-                    } else {
-                        // Parsley 1.1.x
-                        field.addError = validate._addFieldError;
-                        field.removeError = validate._removeFieldError;
-                    }
+        init: function($el, opts) {
+            this.errors = 0;
+            this.options = parser.parse(this.$el, opts);
+            this.$el.noValidate = true;
+            var parsley_form = this.initParsley();
+            this.$el.on("pat-ajax-before.pat-validate", this.onPreSubmit);
+            this.$el.on('pat-update', this.onPatternUpdate.bind(this));
+            this.$el.on("click.pat-validate", ".close-panel", function (ev) {
+                if (!parsley_form.validate()) {
+                    ev.preventDefault();
+                    ev.stopPropagation();
                 }
-                $(this).on("pat-ajax-before.pat-validate",
-                           validate.onPreSubmit);
+            }.bind(this));
+        },
+
+        initParsley: function() {
+            var field, i;
+            var parsley_form = this.$el.parsley({
+                trigger: "change keyup",
+                successClass: "valid",
+                errorClass: "warning",
+                errors: {
+                    classHandler: this._classHandler,
+                    container: this._container
+                },
+                messages: {
+                    beforedate:     "This date should be before another date.",
+                    onorbeforedate: "This date should be on or before another date.",
+                    afterdate:      "This date should be after another date.",
+                    onorafterdate:  "This date should be on or after another date."
+                }
             });
+            var that = this;
+            function _addFieldError(error) {
+                that._addFieldError.call(that, this, error);
+            }
+            function _removeFieldError(constraintName) {
+                that._removeFieldError.call(that, this, constraintName);
+            }
+            for (i=0; i<parsley_form.items.length; i++) {
+                field = parsley_form.items[i];
+                if (typeof field.UI !== "undefined") {
+                    // Parsley 1.2.x
+                    field.UI.addError = _addFieldError;
+                    field.UI.removeError = _removeFieldError;
+                    this.parsley12 = true;
+                } else {
+                    // Parsley 1.1.x
+                    field.addError = _addFieldError;
+                    field.removeError = _removeFieldError;
+                }
+            }
+            return parsley_form;
+        },
+
+        onPatternUpdate: function (ev, data) {
+            /* Handler which gets called when pat-update is triggered within
+             * the .pat-validate element.
+             */
+            // XXX: We should also handle here general pat-inject updates.
+            if (data.pattern == "clone") {
+                this.$el.data("parsleyForm", null); // XXX: Hack. Remove old data, so that parsley rescans.
+                this.initParsley(data.$el);
+            }
+            return true;
         },
 
         // Parsley error class handler, used to determine which element will
@@ -43640,12 +43823,12 @@ define('pat-validate',[
         },
 
         // Parsley method to add an error to a field
-        _addFieldError: function(error) {
+        _addFieldError: function(parsley, error) {
             var $el;
-            if (validate.parsley12) {
-                $el = this.ParsleyInstance.element;
+            if (this.parsley12) {
+                $el = parsley.ParsleyInstance.element;
             } else {
-                $el = this.element;
+                $el = parsley.element;
             }
             var $position = $el,
                 strategy="after";
@@ -43659,8 +43842,9 @@ define('pat-validate',[
             }
 
             for (var constraintName in error) {
-                if (validate._findErrorMessages($el, constraintName).length)
+                if (this._findErrorMessages($el, constraintName).length) {
                     return;
+                }
                 var $message = $("<em/>", {"class": "validation warning message"});
                 $message.attr("data-validate-constraint", constraintName);
                 $message.text(error[constraintName]);
@@ -43673,31 +43857,36 @@ define('pat-validate',[
                         break;
                 }
             }
+            this.errors += 1;
+            $(this.options.disableSelector).prop('disabled', true).addClass('disabled');
             $position.trigger("pat-update", {pattern: "validate"});
         },
 
         // Parsley method to remove all error messages for a field
-        _removeFieldError: function(constraintName) {
+        _removeFieldError: function(parsley, constraintName) {
             var $el;
-            if (validate.parsley12) {
-                $el = this.ParsleyInstance.element;
+            if (this.parsley12) {
+                $el = parsley.ParsleyInstance.element;
             } else {
-                $el = this.element;
+                $el = parsley.element;
             }
-            var $messages = validate._findErrorMessages($el, constraintName);
+            var $messages = this._findErrorMessages($el, constraintName);
             $messages.parent().trigger("pat-update", {pattern: "validate"});
             $messages.remove();
+            if (this.errors <= 1) {
+                $(this.options.disableSelector).prop('disabled', false).removeClass('disabled');
+                this.errors = 0;
+            } else {
+                this.errors -= 1;
+            }
         },
 
         onPreSubmit: function(event, veto) {
             veto.veto |= !$(event.target).parsley("isValid");
             $(event.target).parsley("validate");
         }
-    };
+    });
 
-
-    patterns.register(validate);
-    return validate;
 });
 
 define('pat-zoom',[
@@ -43796,6 +43985,7 @@ define('patterns',[
     "pat-navigation",
     "pat-notification",
     "pat-placeholder",
+    "pat-scroll",
     "pat-sortable",
     "pat-stacks",
     "pat-subform",

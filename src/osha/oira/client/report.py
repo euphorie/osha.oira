@@ -37,9 +37,13 @@ from sqlalchemy import sql
 from z3c.saconfig import Session
 from zExceptions import NotFound
 from zope.i18n import translate
+from zope.i18nmessageid import MessageFactory
 import htmllaundry
 import logging
 import urllib
+
+
+PloneLocalesFactory = MessageFactory("plonelocales")
 
 log = logging.getLogger(__name__)
 
@@ -857,6 +861,17 @@ class MeasuresOverview(OSHAStatus):
         self.months.append(now.strftime('%b'))
         self.months.append(next_month.strftime('%b'))
         self.months.append(month_after_next.strftime('%b'))
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        if "-" in lang:
+            elems = lang.split("-")
+            lang = "{0}_{1}".format(elems[0], elems[1].upper())
+        self.monthstrings = [
+            translate(
+                PloneLocalesFactory("month_{0}_abbr".format(month.lower())),
+                target_language=lang,
+            )
+            for month in self.months
+        ]
 
         query = Session.query(model.Module, model.Risk, model.ActionPlan)\
             .filter(sql.and_(model.Module.session == self.session,

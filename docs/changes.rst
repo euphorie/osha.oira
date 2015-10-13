@@ -4,8 +4,7 @@ Changelog
 2.3.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Add new redactor CMS to OiRA
 
 2.3.9 (2015-09-15)
 ------------------

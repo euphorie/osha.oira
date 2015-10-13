@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.10 (unreleased)
+2.3.10 (2015-10-13)
 -------------------
 
 - Add new redactor CMS to OiRA

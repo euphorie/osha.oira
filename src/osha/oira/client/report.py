@@ -854,9 +854,7 @@ class MeasuresOverview(OSHAStatus):
         self.session = SessionManager.session
         lang = getattr(self.request, 'LANGUAGE', 'en')
         if "-" in lang:
-            elems = lang.split("-")
-            lang = "{0}_{1}".format(elems[0], elems[1].upper())
-
+            lang = lang.split("-")[0]
         now = datetime.now()
         next_month = datetime(now.year, now.month + 1, 1)
         month_after_next = datetime(now.year, now.month + 2, 1)

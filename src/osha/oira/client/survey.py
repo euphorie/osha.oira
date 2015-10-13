@@ -190,8 +190,7 @@ class OSHAStatus(survey.Status):
         now = datetime.now()
         lang = getattr(self.request, 'LANGUAGE', 'en')
         if "-" in lang:
-            elems = lang.split("-")
-            lang = "{0}_{1}".format(elems[0], elems[1].upper())
+            lang = lang.split("-")[0]
         self.date = "{0} {1} {2}".format(
             now.strftime('%d'),
             translate(

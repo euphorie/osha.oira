@@ -852,22 +852,24 @@ class MeasuresOverview(OSHAStatus):
 
     def update(self):
         self.session = SessionManager.session
-
-        now = datetime.now()
-        next_month = datetime(now.year, now.month + 1, 1)
-        month_after_next = datetime(now.year, now.month + 2, 1)
-        self.date = now.strftime('%d %B %Y')
-        self.months = []
-        self.months.append(now.strftime('%b'))
-        self.months.append(next_month.strftime('%b'))
-        self.months.append(month_after_next.strftime('%b'))
         lang = getattr(self.request, 'LANGUAGE', 'en')
         if "-" in lang:
             elems = lang.split("-")
             lang = "{0}_{1}".format(elems[0], elems[1].upper())
+
+        now = datetime.now()
+        next_month = datetime(now.year, now.month + 1, 1)
+        month_after_next = datetime(now.year, now.month + 2, 1)
+        self.months = []
+        self.months.append(now.strftime('%b'))
+        self.months.append(next_month.strftime('%b'))
+        self.months.append(month_after_next.strftime('%b'))
         self.monthstrings = [
             translate(
-                PloneLocalesFactory("month_{0}_abbr".format(month.lower())),
+                PloneLocalesFactory(
+                    "month_{0}_abbr".format(month.lower()),
+                    default=month,
+                ),
                 target_language=lang,
             )
             for month in self.months

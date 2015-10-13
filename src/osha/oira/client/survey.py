@@ -24,8 +24,9 @@ from sqlalchemy import orm
 from z3c.saconfig import Session
 from zope.component import getMultiAdapter
 from zope.i18n import translate
+from zope.i18nmessageid import MessageFactory
 
-
+PloneLocalesFactory = MessageFactory("plonelocales")
 grok.templatedir("templates")
 
 
@@ -187,7 +188,20 @@ class OSHAStatus(survey.Status):
         }
         self.risks_by_status = defaultdict(default_risks_by_status)
         now = datetime.now()
-        self.date = now.strftime('%d %B %Y')
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        if "-" in lang:
+            elems = lang.split("-")
+            lang = "{0}_{1}".format(elems[0], elems[1].upper())
+        self.date = "{0} {1} {2}".format(
+            now.strftime('%d'),
+            translate(
+                PloneLocalesFactory(
+                    "month_{0}".format(now.strftime('%b').lower()),
+                    default=now.strftime('%B'),
+                ),
+                target_language=lang,),
+            now.strftime('%Y')
+        )
 
     def module_query(self, sessionid, optional_modules):
         if optional_modules:

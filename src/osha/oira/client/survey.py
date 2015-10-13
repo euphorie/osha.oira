@@ -191,7 +191,7 @@ class OSHAStatus(survey.Status):
         lang = getattr(self.request, 'LANGUAGE', 'en')
         if "-" in lang:
             lang = lang.split("-")[0]
-        self.date = "{0} {1} {2}".format(
+        self.date = u"{0} {1} {2}".format(
             now.strftime('%d'),
             translate(
                 PloneLocalesFactory(

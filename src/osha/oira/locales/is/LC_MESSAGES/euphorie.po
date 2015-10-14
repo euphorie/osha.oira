@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-10 16:33+0200\n"
+"POT-Creation-Date: 2015-10-14 19:29+0200\n"
 "PO-Revision-Date: 2015-02-10 12:04+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -681,7 +681,7 @@ msgstr "Bæta við lausn"
 
 #. Default: Are you sure you want to delete this measure? This action can not
 #. be reverted.
-#: src/osha/oira/manual_translations.py:219 src/osha/oira/client/risk.py:225
+#: src/osha/oira/manual_translations.py:219 src/osha/oira/client/risk.py:228
 msgid ""
 "Are you sure you want to delete this measure? This action can not be "
 "reverted."
@@ -692,7 +692,7 @@ msgstr ""
 #. Default: The current text in the fields 'Action plan', 'Prevention plan' and
 #. 'Requirements' of this measure will be overwritten. This action cannot be
 #. reverted. Are you sure you want to continue?
-#: src/osha/oira/manual_translations.py:221 src/osha/oira/client/risk.py:229
+#: src/osha/oira/manual_translations.py:221 src/osha/oira/client/risk.py:232
 msgid ""
 "The current text in the fields 'Action plan', 'Prevention plan' and "
 "'Requirements' of this measure will be overwritten. This action cannot be "
@@ -822,20 +822,20 @@ msgstr "3. ársfjórðungur"
 msgid "4th Quarter"
 msgstr "4. ársfjórðungur"
 
-#: src/osha/oira/client/country.py:134
+#: src/osha/oira/client/country.py:94
 msgid "Session `${name}` has been deleted."
 msgstr "Áhættumatinu `${name}` hefur verið eytt."
 
-#: src/osha/oira/client/country.py:169
+#: src/osha/oira/client/country.py:129
 msgid "Save"
 msgstr "Vista"
 
-#: src/osha/oira/client/country.py:177
+#: src/osha/oira/client/country.py:137
 msgid "Session title has been changed to ${name}"
 msgstr "Heiti lotunnar hefur verið breytt í ${name}"
 
 #. Default: Cancel
-#: src/osha/oira/client/country.py:181
+#: src/osha/oira/client/country.py:141
 #: src/osha/oira/client/templates/account-delete.pt:30
 #: src/osha/oira/client/templates/new-email.pt:27
 #: src/osha/oira/client/templates/rename-session.pt:30
@@ -887,32 +887,32 @@ msgid "Enter the names of each location"
 msgstr "Færið heiti hvers staðar"
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:117
+#: src/osha/oira/client/report.py:121
 msgid "report_timeline_measure"
 msgstr "Ráðstöfun"
 
 #. Default: End date
-#: src/osha/oira/client/report.py:120
+#: src/osha/oira/client/report.py:124
 msgid "report_timeline_end_date"
 msgstr "Lokadagsetning"
 
 #. Default: Responsible
-#: src/osha/oira/client/report.py:123
+#: src/osha/oira/client/report.py:127
 msgid "report_timeline_responsible"
 msgstr "Ábyrgðaraðili"
 
 #. Default: Status (planned, in process, implemented)
-#: src/osha/oira/client/report.py:124
+#: src/osha/oira/client/report.py:128
 msgid "report_timeline_progress"
 msgstr "Staða (fyrirhuguð, í vinnslu, framkvæmd)"
 
 #. Default: Timeline
-#: src/osha/oira/client/report.py:134
+#: src/osha/oira/client/report.py:138
 msgid "report_timeline_title"
 msgstr "Tímalína"
 
 #. Default: low
-#: src/osha/oira/client/report.py:395
+#: src/osha/oira/client/report.py:399
 #: src/osha/oira/client/templates/module_customization.pt:34
 #: src/osha/oira/client/templates/module_customization.pt:51
 #: src/osha/oira/client/templates/module_customization.pt:77
@@ -925,7 +925,7 @@ msgid "risk_priority_low"
 msgstr "lágt"
 
 #. Default: medium
-#: src/osha/oira/client/report.py:397
+#: src/osha/oira/client/report.py:401
 #: src/osha/oira/client/templates/module_customization.pt:35
 #: src/osha/oira/client/templates/module_customization.pt:52
 #: src/osha/oira/client/templates/module_customization.pt:78
@@ -938,7 +938,7 @@ msgid "risk_priority_medium"
 msgstr "meðal"
 
 #. Default: high
-#: src/osha/oira/client/report.py:399
+#: src/osha/oira/client/report.py:403
 #: src/osha/oira/client/templates/module_customization.pt:36
 #: src/osha/oira/client/templates/module_customization.pt:53
 #: src/osha/oira/client/templates/module_customization.pt:79
@@ -951,7 +951,7 @@ msgid "risk_priority_high"
 msgstr "hátt"
 
 #. Default: This is a ${priority_value} priority risk.
-#: src/osha/oira/client/report.py:401
+#: src/osha/oira/client/report.py:405
 #: src/osha/oira/client/templates/module_customization.pt:32
 #: src/osha/oira/client/templates/module_customization.pt:49
 #: src/osha/oira/client/templates/module_customization.pt:75
@@ -964,18 +964,18 @@ msgid "risk_priority"
 msgstr "Áhættustig ${priority_value}"
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:433 src/osha/oira/client/report.py:458
+#: src/osha/oira/client/report.py:437 src/osha/oira/client/report.py:462
 msgid "header_measure_single"
 msgstr "Ráðstöfun"
 
 #. Default: Measure ${index}
-#: src/osha/oira/client/report.py:436
+#: src/osha/oira/client/report.py:440
 #: src/osha/oira/client/templates/report_actionplan.pt:99
 msgid "header_measure"
 msgstr "Ráðstöfun ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
-#: src/osha/oira/client/report.py:465
+#: src/osha/oira/client/report.py:469
 #: src/osha/oira/client/templates/risk_actionplan.pt:83
 #: src/osha/oira/client/templates/risk_actionplan.pt:170
 #: src/osha/oira/content/templates/solution_view.pt:22
@@ -983,7 +983,7 @@ msgid "label_measure_action_plan"
 msgstr "Almenn nálgun (Fjarlægja skal hættur eða gera þær ásættanlegar)"
 
 #. Default: Specific action(s) required to implement this approach
-#: src/osha/oira/client/report.py:467
+#: src/osha/oira/client/report.py:471
 #: src/osha/oira/client/templates/risk_actionplan.pt:88
 #: src/osha/oira/client/templates/risk_actionplan.pt:172
 #: src/osha/oira/content/templates/solution_view.pt:25
@@ -991,7 +991,7 @@ msgid "label_measure_prevention_plan"
 msgstr "Aðgerðir til að lausn komi að notum"
 
 #. Default: Level of expertise and/or requirements needed
-#: src/osha/oira/client/report.py:469
+#: src/osha/oira/client/report.py:473
 #: src/osha/oira/client/templates/risk_actionplan.pt:93
 #: src/osha/oira/client/templates/risk_actionplan.pt:174
 #: src/osha/oira/content/templates/solution_view.pt:29
@@ -999,83 +999,83 @@ msgid "label_measure_requirements"
 msgstr "Þekking og reynsla sem er nauðsynleg"
 
 #. Default: Who is responsible?
-#: src/osha/oira/client/report.py:471
+#: src/osha/oira/client/report.py:475
 #: src/osha/oira/client/templates/risk_actionplan.pt:102
 #: src/osha/oira/client/templates/risk_actionplan.pt:180
 msgid "label_action_plan_responsible"
 msgstr "Hver ber ábyrgð?"
 
 #. Default: Budget
-#: src/osha/oira/client/report.py:473
+#: src/osha/oira/client/report.py:477
 #: src/osha/oira/client/templates/risk_actionplan.pt:107
 #: src/osha/oira/client/templates/risk_actionplan.pt:185
 msgid "label_action_plan_budget"
 msgstr "Fjárveiting"
 
 #. Default: Planning start
-#: src/osha/oira/client/report.py:474
+#: src/osha/oira/client/report.py:478
 #: src/osha/oira/client/templates/risk_actionplan.pt:116
 #: src/osha/oira/client/templates/risk_actionplan.pt:192
 msgid "label_action_plan_start"
 msgstr "Framkvæmdir/úrbætur hefjast"
 
 #. Default: Planning end
-#: src/osha/oira/client/report.py:475
+#: src/osha/oira/client/report.py:479
 #: src/osha/oira/client/templates/risk_actionplan.pt:127
 #: src/osha/oira/client/templates/risk_actionplan.pt:199
 msgid "label_action_plan_end"
 msgstr "Áætluð verklok"
 
 #. Default: Consultation of workers
-#: src/osha/oira/client/report.py:526
+#: src/osha/oira/client/report.py:530
 msgid "header_oira_report_consultation"
 msgstr "Samráð við starfsmenn "
 
 #. Default: The undersigned hereby declare that the workers have been consulted
 #. on the content of this document.
-#: src/osha/oira/client/report.py:535
+#: src/osha/oira/client/report.py:539
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
 "Undirrituð/-aðir lýsa hér með yfir því að haft hefur verið samráð við "
 "starfsmenn um innihald þessa skjals."
 
 #. Default: On behalf of the employer:
-#: src/osha/oira/client/report.py:548
+#: src/osha/oira/client/report.py:552
 msgid "oira_consultation_employer"
 msgstr "f.h. atvinnuveitanda:"
 
 #. Default: On behalf of the workers:
-#: src/osha/oira/client/report.py:550
+#: src/osha/oira/client/report.py:554
 msgid "oira_consultation_workers"
 msgstr "f.h. starfsmanna:"
 
 #. Default: Date:
-#: src/osha/oira/client/report.py:559
+#: src/osha/oira/client/report.py:563
 msgid "oira_survey_date"
 msgstr "Dagsetning:"
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/client/report.py:606
+#: src/osha/oira/client/report.py:610
 msgid "header_oira_report_download"
 msgstr "OiRA skýrsla: \"${title}"
 
 #. Default: Contents
-#: src/osha/oira/client/report.py:625
+#: src/osha/oira/client/report.py:629
 #: src/osha/oira/client/templates/report_actionplan.pt:17
 #: src/osha/oira/client/templates/report_identification.pt:16
-#: src/osha/oira/client/templates/risks_overview.pt:153
+#: src/osha/oira/client/templates/risks_overview.pt:152
 msgid "toc_header"
 msgstr "Innihald"
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/client/report.py:630
+#: src/osha/oira/client/report.py:634
 #: src/osha/oira/client/templates/report_actionplan.pt:39
 #: src/osha/oira/client/templates/report_actionplan.pt:72
 msgid "header_present_risks"
 msgstr "Áhættur hafa verið greindar, metnar og komin aðgerðaáætlun"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/client/report.py:633
+#: src/osha/oira/client/report.py:637
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
@@ -1083,7 +1083,7 @@ msgstr "Áhættur hafa verið greindar en aðgerðaáætlun er EKKI tilbúin"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
-#: src/osha/oira/client/report.py:636
+#: src/osha/oira/client/report.py:640
 #: src/osha/oira/client/templates/report_actionplan.pt:55
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
@@ -1092,7 +1092,7 @@ msgstr ""
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
-#: src/osha/oira/client/report.py:639
+#: src/osha/oira/client/report.py:643
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
@@ -1101,20 +1101,20 @@ msgstr ""
 "þínu"
 
 #. Default: Action plan ${title}
-#: src/osha/oira/client/report.py:666
+#: src/osha/oira/client/report.py:670
 msgid "filename_report_actionplan"
 msgstr "Aðgerðaáætlun ${title}"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision
 #. date ${date}.
-#: src/osha/oira/client/report.py:755
+#: src/osha/oira/client/report.py:759
 msgid "report_identification_revision"
 msgstr ""
 "Þetta skjal var byggt á '${title}' frá endurskoðunardagsetningu ${date}."
 
 #. Default: This report was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/client/report.py:793
+#: src/osha/oira/client/report.py:797
 #: src/osha/oira/client/templates/report_actionplan.pt:302
 msgid "report_survey_revision"
 msgstr ""
@@ -1139,7 +1139,7 @@ msgid "title_change_password"
 msgstr "Skipta um lykilorð"
 
 #. Default: Added risks (by you)
-#: src/osha/oira/client/survey.py:270
+#: src/osha/oira/client/survey.py:281
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
@@ -1427,7 +1427,7 @@ msgstr "Hætta við"
 #: src/osha/oira/client/templates/report_actionplan.pt:13
 #: src/osha/oira/client/templates/report_identification.pt:12
 #: src/osha/oira/client/templates/risk_evaluation.pt:12
-#: src/osha/oira/client/templates/shell.pt:21
+#: src/osha/oira/client/templates/shell.pt:22
 #: src/osha/oira/client/templates/webhelpers.pt:22
 #: src/osha/oira/templates/custom_homepage.pt:20
 msgid "title_tool"
@@ -1521,7 +1521,7 @@ msgstr ""
 #. Default: Help
 #: src/osha/oira/client/templates/disclaimer.pt:67
 #: src/osha/oira/client/templates/includes.pt:2
-#: src/osha/oira/client/templates/shell.pt:154
+#: src/osha/oira/client/templates/shell.pt:155
 #: src/osha/oira/client/templates/webhelpers.pt:33
 msgid "navigation_help"
 msgstr "Aðstoð"
@@ -1570,7 +1570,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:270
 #: src/osha/oira/client/templates/report_identification.pt:85
 #: src/osha/oira/client/templates/risk_evaluation.pt:137
-#: src/osha/oira/client/templates/shell.pt:112
+#: src/osha/oira/client/templates/shell.pt:113
 msgid "label_preparation"
 msgstr "Undirbúningur"
 
@@ -1590,8 +1590,8 @@ msgstr "Undirbúningur"
 #: src/osha/oira/client/templates/report_actionplan.pt:276
 #: src/osha/oira/client/templates/report_identification.pt:91
 #: src/osha/oira/client/templates/risk_evaluation.pt:143
-#: src/osha/oira/client/templates/shell.pt:119
 #: src/osha/oira/client/templates/shell.pt:120
+#: src/osha/oira/client/templates/shell.pt:121
 #: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_identification"
 msgstr "Greining"
@@ -1612,8 +1612,8 @@ msgstr "Greining"
 #: src/osha/oira/client/templates/report_actionplan.pt:282
 #: src/osha/oira/client/templates/report_identification.pt:97
 #: src/osha/oira/client/templates/risk_evaluation.pt:149
-#: src/osha/oira/client/templates/shell.pt:119
 #: src/osha/oira/client/templates/shell.pt:120
+#: src/osha/oira/client/templates/shell.pt:121
 #: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_evaluation"
 msgstr "Mat"
@@ -1634,8 +1634,8 @@ msgstr "Mat"
 #: src/osha/oira/client/templates/report_actionplan.pt:288
 #: src/osha/oira/client/templates/report_identification.pt:103
 #: src/osha/oira/client/templates/risk_evaluation.pt:158
-#: src/osha/oira/client/templates/shell.pt:129
-#: src/osha/oira/client/templates/shell.pt:131
+#: src/osha/oira/client/templates/shell.pt:130
+#: src/osha/oira/client/templates/shell.pt:132
 #: src/osha/oira/client/templates/webhelpers.pt:113
 msgid "label_action_plan"
 msgstr "Aðgerðaáætlun"
@@ -1655,8 +1655,8 @@ msgstr "Aðgerðaáætlun"
 #: src/osha/oira/client/templates/report_actionplan.pt:294
 #: src/osha/oira/client/templates/report_identification.pt:109
 #: src/osha/oira/client/templates/risk_evaluation.pt:164
-#: src/osha/oira/client/templates/shell.pt:141
-#: src/osha/oira/client/templates/shell.pt:144
+#: src/osha/oira/client/templates/shell.pt:142
+#: src/osha/oira/client/templates/shell.pt:145
 msgid "label_report"
 msgstr "Skýrsla"
 
@@ -1717,7 +1717,8 @@ msgstr "hér"
 #: src/osha/oira/client/templates/login.pt:24
 msgid "teaser_try_oira"
 msgstr ""
-"Viltu prófa OiRA? Þú getur ${tryout_link} eða byrjað ${register_link} á áhættumatinu."
+"Viltu prófa OiRA? Þú getur ${tryout_link} eða byrjað ${register_link} á "
+"áhættumatinu."
 
 #. Default: log in
 #: src/osha/oira/client/templates/login.pt:27
@@ -1853,7 +1854,7 @@ msgstr ""
 
 #. Default: Login
 #: src/osha/oira/client/templates/login_form.pt:19
-#: src/osha/oira/client/templates/shell.pt:62
+#: src/osha/oira/client/templates/shell.pt:63
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:14
 msgid "header_login"
 msgstr "Innskráning"
@@ -1917,14 +1918,14 @@ msgstr ""
 #: src/osha/oira/client/templates/report_landing.pt:69
 #: src/osha/oira/client/templates/report_landing.pt:90
 #: src/osha/oira/client/templates/report_landing.pt:111
-#: src/osha/oira/client/templates/risks_overview.pt:144
+#: src/osha/oira/client/templates/risks_overview.pt:143
 msgid "Use it to"
 msgstr "Notaðu hana til að"
 
 #: src/osha/oira/client/templates/measures_overview.pt:60
 #: src/osha/oira/client/templates/report_landing.pt:92
 #: src/osha/oira/client/templates/report_landing.pt:113
-#: src/osha/oira/client/templates/risks_overview.pt:146
+#: src/osha/oira/client/templates/risks_overview.pt:145
 msgid "Pass information to the people concerned."
 msgstr "Komdu upplýsingum til þeirra sem málið varðar."
 
@@ -2061,6 +2062,11 @@ msgstr ""
 "Útskráning. Þú skráist einnig út ef þú lokar vafranum þínum. Af "
 "öryggisástæðum er æskilegt að skrá sig út með virkum hætti."
 
+#: src/osha/oira/client/templates/new-session-test.pt:30
+#: src/osha/oira/client/templates/new-session.pt:33
+msgid "Session name"
+msgstr ""
+
 #. Default: benefits
 #: src/osha/oira/client/templates/new-session-test.pt:34
 msgid "benefits"
@@ -2100,20 +2106,22 @@ msgstr "Nýtt áhættumat"
 
 #. Default: Sign in
 #: src/osha/oira/client/templates/plain.pt:99
-#: src/osha/oira/client/templates/shell.pt:73
+#: src/osha/oira/client/templates/shell.pt:74
 #: src/osha/oira/client/templates/webhelpers.pt:36
 msgid "Sign in"
 msgstr "stofna aðgang"
 
 #. Default: This is a test session. ${link_sign_in} to save your data.
 #: src/osha/oira/client/templates/plain.pt:99
-#: src/osha/oira/client/templates/shell.pt:73
+#: src/osha/oira/client/templates/shell.pt:74
 msgid "info_testsession"
-msgstr "Hér er hægt að prófa verkfærið. Það verður að ${link_sign_in} til að gera áhættumat og vista það."
+msgstr ""
+"Hér er hægt að prófa verkfærið. Það verður að ${link_sign_in} til að gera "
+"áhættumat og vista það."
 
 #. Default: Info
 #: src/osha/oira/client/templates/plain.pt:99
-#: src/osha/oira/client/templates/shell.pt:73
+#: src/osha/oira/client/templates/shell.pt:74
 msgid "Info"
 msgstr "Upplýsingar"
 
@@ -2197,7 +2205,8 @@ msgstr "Skýrsla"
 #: src/osha/oira/client/templates/register.pt:21
 msgid "report_guest_register_intro"
 msgstr ""
-"Athugið! Hér er aðeins hægt að prófa verkfærið. Það er ekki hægt að vista gögn. Stofnaðu aðgang til að nota verkfærið:"
+"Athugið! Hér er aðeins hægt að prófa verkfærið. Það er ekki hægt að vista "
+"gögn. Stofnaðu aðgang til að nota verkfærið:"
 
 #. Default: It's free.
 #: src/osha/oira/client/templates/register.pt:23
@@ -2241,7 +2250,7 @@ msgstr ""
 #. Default: Register
 #: src/osha/oira/client/templates/register.pt:66
 #: src/osha/oira/client/templates/register.pt:70
-#: src/osha/oira/client/templates/shell.pt:63
+#: src/osha/oira/client/templates/shell.pt:64
 msgid "header_register"
 msgstr "Stofna aðgang"
 
@@ -2634,7 +2643,7 @@ msgid "Contains: an overview of the risks identified"
 msgstr "Inniheldur: Yfirlit um áhættur"
 
 #: src/osha/oira/client/templates/report_landing.pt:93
-#: src/osha/oira/client/templates/risks_overview.pt:147
+#: src/osha/oira/client/templates/risks_overview.pt:146
 msgid "Monitor whether risks / measures are properly dealt with."
 msgstr "Fylgstu með hvort aðgerðir / úrbætur séu framkvæmdar."
 
@@ -2946,7 +2955,8 @@ msgstr "Á ekki við"
 #: src/osha/oira/client/templates/risk_identification.pt:36
 msgid "help_calculated_evaluation"
 msgstr ""
-"Vinsamlegast svaraðu eftirfarandi spurningum. Verkfærið metur áhættuna en hægt er að breyta matinu í aðgerðaáætluninni."
+"Vinsamlegast svaraðu eftirfarandi spurningum. Verkfærið metur áhættuna en "
+"hægt er að breyta matinu í aðgerðaáætluninni."
 
 #. Default: The risk evaluation has been automatically done by the tool. You
 #. will be able to change the priority for this risk – if you consider it
@@ -2954,35 +2964,36 @@ msgstr ""
 #: src/osha/oira/client/templates/risk_identification.pt:143
 msgid "description_automatic_evaluation"
 msgstr ""
-"Verkfærið metur áhættuna sjálkrafa. Hægt er að breyta forgangi áhættunar í aðgerðaáætluninni."
+"Verkfærið metur áhættuna sjálkrafa. Hægt er að breyta forgangi áhættunar í "
+"aðgerðaáætluninni."
 
-#: src/osha/oira/client/templates/risks_overview.pt:143
+#: src/osha/oira/client/templates/risks_overview.pt:142
 msgid "Overview of risks"
 msgstr ""
 
 #. Default: No risk
-#: src/osha/oira/client/templates/risks_overview.pt:217
+#: src/osha/oira/client/templates/risks_overview.pt:216
 #: src/osha/oira/client/templates/status.pt:92
 #: src/osha/oira/client/templates/status_print.pt:85
 msgid "label_no_risk"
 msgstr "Áhættan er ekki til staðar"
 
 #. Default: Risk with measure(s)
-#: src/osha/oira/client/templates/risks_overview.pt:220
+#: src/osha/oira/client/templates/risks_overview.pt:219
 #: src/osha/oira/client/templates/status.pt:95
 #: src/osha/oira/client/templates/status_print.pt:88
 msgid "label_risk_with_measure"
 msgstr "Áhætta með aðgerð(um)"
 
 #. Default: Risk without measure
-#: src/osha/oira/client/templates/risks_overview.pt:223
+#: src/osha/oira/client/templates/risks_overview.pt:222
 #: src/osha/oira/client/templates/status.pt:98
 #: src/osha/oira/client/templates/status_print.pt:91
 msgid "label_risk_without_measure"
 msgstr "Áhættan er til staðar"
 
 #. Default: Postponed
-#: src/osha/oira/client/templates/risks_overview.pt:226
+#: src/osha/oira/client/templates/risks_overview.pt:225
 #: src/osha/oira/client/templates/status.pt:101
 #: src/osha/oira/client/templates/webhelpers.pt:118
 #: src/osha/oira/client/templates/webhelpers.pt:130
@@ -2990,7 +3001,7 @@ msgid "Postponed"
 msgstr "Skoðað en ekki svarað"
 
 #. Default: Unanswered
-#: src/osha/oira/client/templates/risks_overview.pt:229
+#: src/osha/oira/client/templates/risks_overview.pt:228
 #: src/osha/oira/client/templates/status.pt:104
 #: src/osha/oira/client/templates/webhelpers.pt:117
 #: src/osha/oira/client/templates/webhelpers.pt:129
@@ -2998,42 +3009,42 @@ msgid "Unvisited"
 msgstr "Ekki opnað"
 
 #. Default: ${num_present_risks} Present Risks
-#: src/osha/oira/client/templates/risks_overview.pt:240
+#: src/osha/oira/client/templates/risks_overview.pt:239
 msgid "heading_present_risks"
 msgstr ""
 
 #. Default: ${num_high_risks} High priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:243
+#: src/osha/oira/client/templates/risks_overview.pt:242
 msgid "heading_num_high_prio_risks"
 msgstr ""
 
 #. Default: ${num_medium_risks} Medium priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:244
+#: src/osha/oira/client/templates/risks_overview.pt:243
 msgid "heading_num_medium_prio_risks"
 msgstr ""
 
 #. Default: ${num_low_risks} Low priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:245
+#: src/osha/oira/client/templates/risks_overview.pt:244
 msgid "heading_num_low_prio_risks"
 msgstr ""
 
 #. Default: ${num_possible_risks} Possible Risks
-#: src/osha/oira/client/templates/risks_overview.pt:256
+#: src/osha/oira/client/templates/risks_overview.pt:255
 msgid "heading_possible_risks"
 msgstr ""
 
 #. Default: ${num_postponed_risks} Risks postponed
-#: src/osha/oira/client/templates/risks_overview.pt:259
+#: src/osha/oira/client/templates/risks_overview.pt:258
 msgid "heading_num_postponed_prio_risks"
 msgstr ""
 
 #. Default: ${num_todo_risks} Risks not answered
-#: src/osha/oira/client/templates/risks_overview.pt:260
+#: src/osha/oira/client/templates/risks_overview.pt:259
 msgid "heading_num_todo_prio_risks"
 msgstr ""
 
 #: src/osha/oira/client/templates/sessions.pt:22
-#: src/osha/oira/client/templates/shell.pt:101
+#: src/osha/oira/client/templates/shell.pt:102
 msgid "Start a new session"
 msgstr ""
 
@@ -3069,30 +3080,30 @@ msgstr "Endurnefna"
 msgid "Delete this session"
 msgstr ""
 
-#: src/osha/oira/client/templates/shell.pt:91
-#: src/osha/oira/client/templates/shell.pt:93
+#: src/osha/oira/client/templates/shell.pt:92
+#: src/osha/oira/client/templates/shell.pt:94
 msgid "Start test session"
 msgstr "Byrja á nýju áhættumati"
 
 #. Default: New
-#: src/osha/oira/client/templates/shell.pt:101
+#: src/osha/oira/client/templates/shell.pt:102
 msgid "New"
 msgstr "Nýtt"
 
 #. Default: Status
-#: src/osha/oira/client/templates/shell.pt:149
+#: src/osha/oira/client/templates/shell.pt:150
 #: src/osha/oira/client/templates/webhelpers.pt:34
 msgid "navigation_status"
 msgstr "Staða"
 
 #. Default: Online interactive
-#: src/osha/oira/client/templates/shell.pt:165
+#: src/osha/oira/client/templates/shell.pt:166
 #: src/osha/oira/client/templates/webhelpers.pt:23
 msgid "oira_name_line_1"
 msgstr "Gagnvirkt áhættumat"
 
 #. Default: Risk Assessment
-#: src/osha/oira/client/templates/shell.pt:166
+#: src/osha/oira/client/templates/shell.pt:167
 #: src/osha/oira/client/templates/webhelpers.pt:24
 msgid "oira_name_line_2"
 msgstr " "
@@ -3150,7 +3161,9 @@ msgstr "eða…"
 #: src/osha/oira/client/templates/tooltips.pt:3
 msgid "guest_login_warning"
 msgstr ""
-"Þú ert að prófa OiRA verkfærið. Þú getur ekki vistað áhættumatið né sótt skýrslur. Til að geta vistað áhættumat þarf að skrá sig inn eða stofna aðgang með því að smella á tengilinn \"Innskráning\" efst til hægri."
+"Þú ert að prófa OiRA verkfærið. Þú getur ekki vistað áhættumatið né sótt "
+"skýrslur. Til að geta vistað áhættumat þarf að skrá sig inn eða stofna "
+"aðgang með því að smella á tengilinn \"Innskráning\" efst til hægri."
 
 #. Default: Important
 #: src/osha/oira/client/templates/tooltips.pt:8
@@ -3162,7 +3175,8 @@ msgstr "Mikilvægt"
 #: src/osha/oira/client/templates/tooltips.pt:8
 msgid "list_test_session_limitations1"
 msgstr ""
-"${important} Þú getur ekki vistað þegar þú ert að prófa verkfærið. Öll vinnan mun tapast ef þú stofnar ekki aðgang"
+"${important} Þú getur ekki vistað þegar þú ert að prófa verkfærið. Öll "
+"vinnan mun tapast ef þú stofnar ekki aðgang"
 
 #. Default: You will not be able to print or download reports.
 #: src/osha/oira/client/templates/tooltips.pt:9
@@ -3174,7 +3188,8 @@ msgstr "Þú munt ekki geta prentað eða sótt skýrslur."
 #: src/osha/oira/client/templates/tooltips.pt:10
 msgid "list_test_session_limitations3"
 msgstr ""
-"Þú getur stofnað aðgang hvenær sem er með því að smella á tengilinn \"Nýskrá\" efst á síðunni."
+"Þú getur stofnað aðgang hvenær sem er með því að smella á tengilinn \"Nýskrá"
+"\" efst á síðunni."
 
 #. Default: Discover how easy it is to create a risk assessment with OiRA.
 #: src/osha/oira/client/templates/tooltips.pt:16
@@ -3216,7 +3231,8 @@ msgstr "Valmyndaskipting"
 #: src/osha/oira/client/templates/tooltips.pt:37
 msgid "info_osh_hamburger"
 msgstr ""
-"Valmyndaskiptingin gerir þér kleift að fela og sýna hliðarvalmynd þannig að hún kemur aðeins upp þegar þú þarft hana. Feldu valmyndina þegar þú villt."
+"Valmyndaskiptingin gerir þér kleift að fela og sýna hliðarvalmynd þannig að "
+"hún kemur aðeins upp þegar þú þarft hana. Feldu valmyndina þegar þú villt."
 
 #. Default: Tip
 #: src/osha/oira/client/templates/tooltips.pt:40
@@ -3259,7 +3275,9 @@ msgstr "Valmynd"
 #: src/osha/oira/client/templates/tooltips.pt:61
 msgid "info_osh_session_menu"
 msgstr ""
-"Hér getur þú valið milli þess að byrja á nýju áhættumati eða haldið áfram með eldra áhættumat. Þótt þú hafir ekki stofnað aðgang að OiRA verkfærinu getur þú samt prófað það."
+"Hér getur þú valið milli þess að byrja á nýju áhættumati eða haldið áfram "
+"með eldra áhættumat. Þótt þú hafir ekki stofnað aðgang að OiRA verkfærinu "
+"getur þú samt prófað það."
 
 #. Default: OiRA Tool was updated
 #: src/osha/oira/client/templates/update.pt:15
@@ -3620,7 +3638,8 @@ msgstr "Merki fyrirtækis (logo)"
 #: src/osha/oira/content/survey.py:69
 msgid "label_enable_custom_evaluation_descriptions"
 msgstr ""
-"Eru notuð önnur verkfæri til að meta áhætturnar? (Ef ekki þá er hægt að nota annað)."
+"Eru notuð önnur verkfæri til að meta áhætturnar? (Ef ekki þá er hægt að nota "
+"annað)."
 
 #. Default: Tick this option if you would like to define your own descriptions
 #. for the criteria of the evaluation algorithm. The user will see them as
@@ -3628,7 +3647,8 @@ msgstr ""
 #: src/osha/oira/content/survey.py:73
 msgid "help_enable_custom_evaluation_descriptions"
 msgstr ""
-"Hakaðu við þennan valkost ef þú vilt nota þína eigin aðferð til að reikna út forgang áhættu."
+"Hakaðu við þennan valkost ef þú vilt nota þína eigin aðferð til að reikna út "
+"forgang áhættu."
 
 #: src/osha/oira/content/survey.py:86
 msgid "Probability"
@@ -4257,8 +4277,7 @@ msgstr "CC leyfi"
 #. able to add them now:
 #: src/osha/oira/upgrade/upgrade.py:190
 msgid "description_other_risks"
-msgstr ""
-"Hættum sem ekki er fjallað um í verkfærinu er hægt að bæta við hér:"
+msgstr "Hættum sem ekki er fjallað um í verkfærinu er hægt að bæta við hér:"
 
 #. Default: <p>Would you now like to add your own defined risks to this
 #. tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks,
@@ -4267,7 +4286,11 @@ msgstr ""
 #. select 'No.'</p>
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
-msgstr "<p>Viltu taka fleiri hættur með í áhættumatið?</p><p><strong>Athugið</strong>: Til að koma í veg fyrir endurtekningar er mikilvægt að fara í gegnum allt áhættumatið áður en hættum er bætt við.</p><p>Ef engum hættum er bætt við veljið þá 'Nei.'</p>"
+msgstr ""
+"<p>Viltu taka fleiri hættur með í áhættumatið?</p><p><strong>Athugið</"
+"strong>: Til að koma í veg fyrir endurtekningar er mikilvægt að fara í "
+"gegnum allt áhættumatið áður en hættum er bætt við.</p><p>Ef engum hættum er "
+"bætt við veljið þá 'Nei.'</p>"
 
 #~ msgid "label_close_panel"
 #~ msgstr "Lokaðu glugganum"

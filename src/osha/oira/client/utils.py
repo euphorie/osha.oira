@@ -26,16 +26,19 @@ import htmllib
 grok.templatedir('templates')
 
 
-NAME_TO_PHASE = dict(
-    start='preparation',
-    profile='preparation',
-    identification='identification',
-    customization='identification',
-    actionplan='actionplan',
-    report='report',
-    status='status',
-    help='help',
-)
+NAME_TO_PHASE = {
+    'start': 'preparation',
+    'profile': 'preparation',
+    'identification': 'identification',
+    'customization': 'identification',
+    'actionplan': 'actionplan',
+    'report': 'report',
+    'status': 'status',
+    'help': 'help',
+    'new-email': 'useraction',
+    'account-settings': 'useraction',
+    'account-delete': 'useraction',
+}
 
 
 def html_unescape(s):

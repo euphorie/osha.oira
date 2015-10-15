@@ -235,6 +235,18 @@ class OSHAActionPlanView(risk.ActionPlanView):
             u"'Requirements' of this measure will be overwritten. This action cannot be "
             u"reverted. Are you sure you want to continue?"),
             target_language=lang)
+        self.message_date_before = translate(_(
+            u"error_validation_before_end_date",
+            default=u"This date must be on or before the end date."),
+            target_language=lang)
+        self.message_date_after = translate(_(
+            u"error_validation_after_start_date",
+            default=u"This date must be on or after the start date."),
+            target_language=lang)
+        self.message_positive_number = translate(_(
+            u"error_validation_positive_whole_number",
+            default=u"This value must be a positive whole number."),
+            target_language=lang)
         super(risk.ActionPlanView, self).update()
 
     def extract_plans_from_request(self):

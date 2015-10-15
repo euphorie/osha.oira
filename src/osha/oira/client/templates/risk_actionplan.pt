@@ -26,6 +26,7 @@
                        message-datetime: This value must be a valid date and time;
                        message-email: This value must be a valid email address;
                        message-number: This value must be a number;
+                       message-min: ${view/message_positive_number};
                        message-required: This field is required;"
     data-pat-inject="history: record; source: #step-4; target: #step-4 &amp;&amp; source: #content; target: #content"
     data-pat-scroll="selector: #content; trigger: auto; offset: 0">
@@ -108,7 +109,7 @@
                 <em class="message error" tal:condition="exists:errors/budget" i18n:translate="error_invalid_budget">Please enter the budget in whole Euros.</em>
                 <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="actionplan_measure_budget_tooltip">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</dfn>
                 <span class="composed currency-field">
-                    <input type="number" min="0" class="currency" name="measure.budget:records" id="input-budget-${number}" value="${actionplan/budget|nothing}"/>
+                    <input type="number" min="0" class="currency" name="measure.budget:records" id="input-budget-${number}" value="${actionplan/budget|nothing}" />
                 </span>
             </label>
 
@@ -118,7 +119,7 @@
                     type="date" class="pat-date-picker"
                     name="measure.planning_start:records"
                     data-pat-date-picker="behavior: native"
-                    data-pat-validation="type: date; not-after: #planning-end-${number}; message-date: This date must be on or before the end date."
+                    data-pat-validation="type: date; not-after: #planning-end-${number}; message-date: ${view/message_date_before}"
                     id="planning-start-${number}"
                     value="${actionplan/planning_start|nothing}"/>
             </label>
@@ -129,7 +130,7 @@
                 <input
                     type="date" class="pat-date-picker" name="measure.planning_end:records"
                     data-pat-date-picker="behavior: native"
-                    data-pat-validation="type: date; not-before: #planning-start-${number}; message-date: This date must be on or after the start date."
+                    data-pat-validation="type: date; not-before: #planning-start-${number}; message-date: ${view/message_date_after}"
                     id="planning-end-${number}"
                     value="${actionplan/planning_end|nothing}"/>
             </label>
@@ -192,14 +193,14 @@
                 <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
                 <input type="date" class="pat-date-picker"
                        data-pat-date-picker="behavior: native"
-                       data-pat-validation="type: date; not-after: #planning-end-#{1}; message-date: This date must be on or before the end date."
+                       data-pat-validation="type: date; not-after: #planning-end-#{1}; message-date: ${view/message_date_before}"
                        name="measure.planning_start:records" id="planning-start-#{1}" />
 			</label>
 			<label>
                 <tal:label i18n:translate="label_action_plan_end">Planning end</tal:label>
                 <input type="date" class="pat-date-picker"
                     data-pat-date-picker="behavior: native"
-                    data-pat-validation="type:date; not-before: #planning-start-#{1}; message-date: This date must be on or after the start date."
+                    data-pat-validation="type:date; not-before: #planning-start-#{1}; message-date: ${view/message_date_after}"
                     name="measure.planning_end:records" id="planning-end-#{1}"/>
 			</label>
 		</fieldset>

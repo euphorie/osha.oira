@@ -72,7 +72,7 @@
 
     <p class="message error" tal:condition="view/error|nothing">${view/error}</p>
 
-    <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" tal:define="errors view/errors" action="${request/URL}">
+    <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" tal:define="errors view/errors" action="${request/URL}" class="pat-validation" data-pat-validation="message-email: ${view/email_message}">
       <input type="hidden" name="came_from" tal:condition="request/came_from|nothing" value="${request/came_from}"/>
       <fieldset class="vertical">
         <tal:guest_account condition="is_guest_account|nothing">

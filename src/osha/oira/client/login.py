@@ -8,6 +8,7 @@ from euphorie.client.conditions import TermsAndConditions as BaseTermsAndConditi
 from .interfaces import IOSHAClientSkinLayer
 from .model import LoginStatistics
 from osha.oira import _
+from zope.i18n import translate
 
 grok.templatedir("templates")
 
@@ -30,6 +31,17 @@ class LoginForm(Login):
 class Register(BaseRegister):
     grok.layer(IOSHAClientSkinLayer)
     grok.template("register")
+
+    def update(self):
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        if "-" in lang:
+            elems = lang.split("-")
+            lang = "{0}_{1}".format(elems[0], elems[1].upper())
+        self.email_message = translate(_(
+            u"invalid_email",
+            default=u"Please enter a valid email address."),
+            target_language=lang)
+        super(Register, self).update()
 
 
 class TermsAndConditions(BaseTermsAndConditions):

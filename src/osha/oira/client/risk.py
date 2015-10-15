@@ -1,4 +1,5 @@
 from Acquisition import aq_inner
+from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.client import model
 from euphorie.client import risk
 from euphorie.client.navigation import FindNextQuestion
@@ -260,4 +261,25 @@ class OSHAActionPlanView(risk.ActionPlanView):
                         planning_end=measure.get('planning_end')
                     )
                 )
+        nr_plans = len(new_plans)
+        if nr_plans == 1:
+            IStatusMessage(self.request).add(
+                _(u"message_measure_saved", default=u"The measure in your action plan has been saved."),
+                type='success'
+            )
+        elif nr_plans > 1:
+            IStatusMessage(self.request).add(
+                _(
+                    u"message_measures_saved",
+                    default=u"${no_of_measures} measures in your action plan have been saved.",
+                    mapping={'no_of_measures': str(nr_plans)}),
+                type='success'
+            )
+        else:
+            IStatusMessage(self.request).add(
+                _(
+                    u"message_no_measure",
+                    default=u"You did not provide any measures in your action plan."),
+                type='info'
+            )
         return new_plans

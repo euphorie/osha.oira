@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0rc1 (unreleased)
+3.0.0rc1 (2015-10-16)
 ---------------------
 
 Major rework of the User Interface, including new jekyll-based Prototype and

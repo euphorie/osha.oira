@@ -323,13 +323,13 @@ class OSHAActionPlanView(risk.ActionPlanView):
 
         if updated == 1:
             IStatusMessage(self.request).add(
-                _(u"message_measure_saved", default=u"A measure has been updated in your action plan."),
+                _(u"message_measure_updated", default=u"A measure has been updated in your action plan."),
                 type='success'
             )
         elif updated > 0:
             IStatusMessage(self.request).add(
                 _(
-                    u"message_measures_saved",
+                    u"message_measures_updated",
                     default=u"${no_of_measures} measures have been updated in your action plan.",
                     mapping={'no_of_measures': str(nr_plans)}),
                 type='success'
@@ -337,13 +337,13 @@ class OSHAActionPlanView(risk.ActionPlanView):
 
         if removed == 1:
             IStatusMessage(self.request).add(
-                _(u"message_measure_saved", default=u"A measure has been removed from your action plan."),
+                _(u"message_measure_removed", default=u"A measure has been removed from your action plan."),
                 type='success'
             )
         elif removed > 1:
             IStatusMessage(self.request).add(
                 _(
-                    u"message_measures_saved",
+                    u"message_measures_removed",
                     default=u"${no_of_measures} measures have been removed from your action plan.",
                     mapping={'no_of_measures': str(nr_plans)}),
                 type='success'

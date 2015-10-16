@@ -244,7 +244,7 @@ ul.title {margin-bottom:3em;}
                             <h4 i18n:translate="heading_num_low_prio_risks" tal:condition="python:priority == 'low'"><span i18n:name="num_low_risks">${num_low}</span> Low priority risks</h4>
                             <ul>
                                 <li tal:repeat="risk risks">
-                                    ${risk/title} <span tal:condition="risk/has_measures">(≥1 measures)</span><span tal:condition="not:risk/has_measures">(without measures)</span>
+                                    ${risk/title} <span tal:condition="risk/has_measures" i18n:translate="label_with_measures">(≥1 measures)</span><span tal:condition="not:risk/has_measures" i18n:translate="label_without_measures">(without measures)</span>
                                 </li>
                             </ul>
                         </div>

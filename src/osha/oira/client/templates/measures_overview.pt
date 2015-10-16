@@ -77,7 +77,7 @@ ul.title {margin-bottom:3em;}
 					<tbody class="prio-high" tal:condition="module/risks/high">
 						<tr class="title-line">
 							<th >
-								<h3>
+								<h3 i18n:translate="heading_high_prio_risks">
 									High priority risks
 								</h3>
 							</th>
@@ -109,7 +109,7 @@ ul.title {margin-bottom:3em;}
 					<tbody class="prio-medium" tal:condition="module/risks/medium">
 						<tr class="title-line">
 							<th>
-								<h3>
+								<h3 i18n:translate="heading_medium_prio_risks">
 									Medium priority risks
 								</h3>
 							</th>
@@ -124,7 +124,7 @@ ul.title {margin-bottom:3em;}
 					<tbody class="prio-low" tal:condition="module/risks/low">
 						<tr class="title-line">
 							<th>
-								<h3>
+								<h3 i18n:translate="heading_low_prio_risks">
 									Low priority risks
 								</h3>
 							</th>

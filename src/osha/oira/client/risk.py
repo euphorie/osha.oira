@@ -168,9 +168,10 @@ class OSHAActionPlanView(risk.ActionPlanView):
             context.comment = reply.get("comment")
             context.priority = reply.get("priority")
 
+            new_plans = self.extract_plans_from_request()
             for plan in context.action_plans:
                 session.delete(plan)
-            context.action_plans.extend(self.extract_plans_from_request())
+            context.action_plans.extend(new_plans)
             SessionManager.session.touch()
 
             if reply["next"] == "previous":
@@ -253,6 +254,11 @@ class OSHAActionPlanView(risk.ActionPlanView):
         """ Create new ActionPlan objects by parsing the Request.
         """
         new_plans = []
+        added = 0
+        updated = 0
+        existing_plans = {}
+        for plan in self.context.action_plans:
+            existing_plans[str(plan.id)] = plan
         form = self.request.form
         form["action_plans"] = []
         for i in range(0, len(form['measure'])):
@@ -262,6 +268,27 @@ class OSHAActionPlanView(risk.ActionPlanView):
             if len(measure):
                 budget = measure.get("budget")
                 budget = budget and budget.split(',')[0].split('.')[0]
+                if measure.get('id', '-1') in existing_plans:
+                    plan = existing_plans[measure.get('id')]
+                    if (
+                        measure.get("action_plan") != plan.action_plan or
+                        measure.get("prevention_plan") != plan.prevention_plan or
+                        measure.get("requirements") != plan.requirements or
+                        measure.get("responsible") != plan .responsible or
+                        budget != plan.budget or (
+                            (plan.planning_start and
+                                measure.get('planning_start') != plan.planning_start.strftime('%Y-%m-%d'))
+                            or (plan.planning_start is None and measure.get('planning_start'))
+                        ) or (
+                            (plan.planning_end and
+                                measure.get('planning_end') != plan.planning_end.strftime('%Y-%m-%d'))
+                            or (plan.planning_end is None and measure.get('planning_end'))
+                        )
+                    ):
+                        updated += 1
+                    del existing_plans[measure.get('id')]
+                else:
+                    added += 1
                 new_plans.append(
                     model.ActionPlan(
                         action_plan=measure.get("action_plan"),
@@ -273,25 +300,52 @@ class OSHAActionPlanView(risk.ActionPlanView):
                         planning_end=measure.get('planning_end')
                     )
                 )
+        removed = len(existing_plans)
         nr_plans = len(new_plans)
-        if nr_plans == 1:
+        if added == 0 and updated == 0 and removed == 0:
             IStatusMessage(self.request).add(
-                _(u"message_measure_saved", default=u"The measure in your action plan has been saved."),
+                _(u"No changes were made to measures in your action plan."),
+                type='warning'
+            )
+        if added == 1:
+            IStatusMessage(self.request).add(
+                _(u"message_measure_saved", default=u"A measure has been added to your action plan."),
                 type='success'
             )
-        elif nr_plans > 1:
+        elif added > 1:
             IStatusMessage(self.request).add(
                 _(
                     u"message_measures_saved",
-                    default=u"${no_of_measures} measures in your action plan have been saved.",
+                    default=u"${no_of_measures} measures have been added to your action plan.",
                     mapping={'no_of_measures': str(nr_plans)}),
                 type='success'
             )
-        else:
+
+        if updated == 1:
+            IStatusMessage(self.request).add(
+                _(u"message_measure_saved", default=u"A measure has been updated in your action plan."),
+                type='success'
+            )
+        elif updated > 0:
             IStatusMessage(self.request).add(
                 _(
-                    u"message_no_measure",
-                    default=u"You did not provide any measures in your action plan."),
-                type='info'
+                    u"message_measures_saved",
+                    default=u"${no_of_measures} measures have been updated in your action plan.",
+                    mapping={'no_of_measures': str(nr_plans)}),
+                type='success'
+            )
+
+        if removed == 1:
+            IStatusMessage(self.request).add(
+                _(u"message_measure_saved", default=u"A measure has been removed from your action plan."),
+                type='success'
+            )
+        elif removed > 1:
+            IStatusMessage(self.request).add(
+                _(
+                    u"message_measures_saved",
+                    default=u"${no_of_measures} measures have been removed from your action plan.",
+                    mapping={'no_of_measures': str(nr_plans)}),
+                type='success'
             )
         return new_plans

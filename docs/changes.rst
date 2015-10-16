@@ -1,7 +1,30 @@
 Changelog
 =========
 
-2.3.8 (unreleased)
+3.0.0rc2 (unreleased)
+---------------------
+
+- Nothing changed yet.
+
+
+3.0.0rc1 (2015-10-16)
+---------------------
+
+Major rework of the User Interface, including new jekyll-based Prototype and
+usage of Patternslib.
+
+
+2.3.10 (2015-10-13)
+-------------------
+
+- Add new redactor CMS to OiRA
+
+2.3.9 (2015-09-15)
+------------------
+
+- Re-release, apparently the previous one was botched
+
+2.3.8 (2015-09-15)
 ------------------
 
 - Translation updates in IS #12327

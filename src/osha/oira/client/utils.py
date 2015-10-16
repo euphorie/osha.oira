@@ -38,6 +38,7 @@ NAME_TO_PHASE = {
     'new-email': 'useraction',
     'account-settings': 'useraction',
     'account-delete': 'useraction',
+    'update': 'preparation',
 }
 
 

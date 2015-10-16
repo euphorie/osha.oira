@@ -21,6 +21,8 @@ messages_to_ignore = [
     '^msgfmt: found .*',
     '.*?warning: source file contains fuzzy translation',
     '.*?wird ignoriert',
+    '.*?ungenaue.*',
+    '^msgfmt: es sind .*',
 ]
 ignore = [re.compile(patt) for patt in messages_to_ignore]
 

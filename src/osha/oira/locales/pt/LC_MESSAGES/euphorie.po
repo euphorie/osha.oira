@@ -796,7 +796,7 @@ msgstr "Este valor deve ser um número inteiro."
 #. Default: This value must be a positive whole number.
 #: src/osha/oira/manual_translations.py:243 src/osha/oira/client/risk.py:246
 msgid "error_validation_positive_whole_number"
-msgstr "Este valor de ser um número inteiro positivo."
+msgstr "Este valor deve ser um número inteiro positivo."
 
 #. Default: This value is required.
 #: src/osha/oira/manual_translations.py:244
@@ -872,7 +872,7 @@ msgstr ""
 
 #: src/osha/oira/client/module.py:98
 msgid "No changes were made to your added risks."
-msgstr "O seus riscos adicionais não foram objeto de qualquer alteração."
+msgstr "O riscos adicionais não foram objeto de qualquer alteração."
 
 #: src/osha/oira/client/module.py:105
 msgid "Your new added risks have been created."
@@ -1020,7 +1020,7 @@ msgstr "Ação(ões) específica(s) necessária(s) para implementar esta abordag
 #: src/osha/oira/client/templates/risk_actionplan.pt:175
 #: src/osha/oira/content/templates/solution_view.pt:29
 msgid "label_measure_requirements"
-msgstr "Nível de competência e/ou requisitos necessário"
+msgstr "Nível de competência e/ou requisitos necessários"
 
 #. Default: Who is responsible?
 #: src/osha/oira/client/report.py:475
@@ -1182,7 +1182,7 @@ msgstr "Mudar palavra-passe"
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
-msgstr ""
+msgstr "Riscos adicionados (por si)"
 
 #. Default: By clicking on 'Delete account', your account will be permenantly
 #. deleted. This action is irreversable.
@@ -1211,7 +1211,7 @@ msgid "expl_actionplan_1"
 msgstr ""
 "Após a avaliação dos riscos, é necessário criar um plano de ação para gerir "
 "os riscos. Para eliminar ou reduzir os riscos, necessita determinar que "
-"medidas de prevenção ou de proteção dos trabalhadores devem ser tomadas."
+"medidas de prevenção ou de proteção devem ser tomadas."
 
 #. Default: Among the things to be considered for this step are:
 #: src/osha/oira/client/templates/actionplan.pt:25
@@ -1226,7 +1226,7 @@ msgstr "Avaliando se a tarefa é mesmo necessária"
 #. Default: removing the hazard
 #: src/osha/oira/client/templates/actionplan.pt:34
 msgid "expl_actionplan_5"
-msgstr "Removendo totalmente o perigo/problema da tarefa"
+msgstr "Removendo totalmente o perigo da tarefa"
 
 #. Default: Is a risk avoidable? Can it be removed entirely? For example, this
 #. could be achieved by: ${expl_actionplan_4_and_5}
@@ -1492,7 +1492,7 @@ msgstr "Exclusão de Responsabilidade"
 msgid "disclaimer_other_websites"
 msgstr ""
 "Esta ferramenta contém ligações a outros sítios web que não estão sob o "
-"controlo da Agência Europeia para Segurança e Saúde e das organizações "
+"controlo da Agência Europeia para Segurança e Saúde no Trabalho e das organizações "
 "envolvidas. A Agência e as organizações envolvidas não aceitam qualquer "
 "responsabilidade em relação ao conteúdo destes sítios web."
 
@@ -1539,7 +1539,7 @@ msgstr ""
 #: src/osha/oira/client/templates/disclaimer.pt:48
 msgid "disclaimer_coverage_liability"
 msgstr ""
-"Por conseguinte, EU-OSHA não aceita qualquer responsabilidade por danos e "
+"Por conseguinte, a EU-OSHA não aceita qualquer responsabilidade por danos e "
 "reclamações no caso de uma ferramenta não cobrir todos os riscos de um dado "
 "setor."
 
@@ -1557,7 +1557,7 @@ msgstr ""
 "Além disso, a Agência e as organizações envolvidas na produção da ferramenta "
 "OiRA não aceita qualquer responsabilidade por danos e reclamações "
 "resultantes da utilização da ferramenta ou incapacidade de utilização da "
-"ferramenta e dos dados nesta guardados. De forma similar, EU-OSHA não aceita "
+"ferramenta e dos dados nesta guardados. De forma similar, a EU-OSHA não aceita "
 "qualquer responsabilidade em caso de indisponibilidade da função das "
 "ferramentas OiRA para imprimir o relatório, guardar a avaliação de riscos "
 "gerada automaticamente pela ferramenta. Por isso, o empregador deve "
@@ -1740,7 +1740,7 @@ msgstr "Pode imprimir os ${list-of-risks}."
 #. Default: Start Risk Identification
 #: src/osha/oira/client/templates/identification.pt:25
 msgid "label_start_identification"
-msgstr "Iniciar a identificação de perigos/problemas"
+msgstr "Iniciar a identificação de perigos"
 
 #. Default: Welcome
 #: src/osha/oira/client/templates/login.pt:22
@@ -1750,7 +1750,7 @@ msgstr ""
 #. Default: run a test session
 #: src/osha/oira/client/templates/login.pt:25
 msgid "label_tryout"
-msgstr "realize uma sessão de teste"
+msgstr "realizar uma sessão de teste"
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
@@ -1765,7 +1765,7 @@ msgstr ""
 msgid "teaser_try_oira"
 msgstr ""
 "Quer experimentar a OiRA? Pode ${tryout_link} ou ${register_link} para "
-"começar a sério."
+"iniciar."
 
 #. Default: log in
 #: src/osha/oira/client/templates/login.pt:27
@@ -1775,7 +1775,7 @@ msgstr ""
 #. Default: If you are a registered user, you can ${log_in} here.
 #: src/osha/oira/client/templates/login.pt:27
 msgid "label_login_here"
-msgstr ""
+msgstr "Se já é um utilizador registado, pode fazer ${log_in} aqui."
 
 #. Default: Show more…
 #: src/osha/oira/client/templates/login.pt:34
@@ -2030,7 +2030,7 @@ msgstr "Eliminar risco"
 #. Default: Add another risk
 #: src/osha/oira/client/templates/module_customization.pt:61
 msgid "label_add_risk"
-msgstr ""
+msgstr "Adicionar Risco"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_customization.pt:62
@@ -2114,7 +2114,7 @@ msgstr ""
 #: src/osha/oira/client/templates/new-session-test.pt:30
 #: src/osha/oira/client/templates/new-session.pt:33
 msgid "Session name"
-msgstr ""
+msgstr "Nome da sessão"
 
 #. Default: benefits
 #: src/osha/oira/client/templates/new-session-test.pt:34
@@ -2252,9 +2252,8 @@ msgstr "Relatório"
 #: src/osha/oira/client/templates/register.pt:21
 msgid "report_guest_register_intro"
 msgstr ""
-"Lamentamos, mas esta é uma versão de teste e a função de carregamento não "
-"pode ser utilizada. Registe-se em apenas uma etapa e usufrua das seguintes "
-"vantagens:"
+"Lamentamos, mas esta é uma versão de teste e não pode ser descarregada."
+"Registe-se em apenas uma etapa e usufrua das seguintes vantagens:"
 
 #. Default: It's free.
 #: src/osha/oira/client/templates/register.pt:23
@@ -2277,31 +2276,31 @@ msgstr "Pode descarregar um relatório completo e um plano de ação."
 #. Default: Example of a full report in rich text format (.rtf)
 #: src/osha/oira/client/templates/register.pt:33
 msgid "header_example_report_rft"
-msgstr "Exemplo de um relatório completo em rich text format (.rtf)"
+msgstr "Exemplo de um relatório completo em formato rich text (.rtf)"
 
 #. Default: Example of an action plan in Office Open XML Workbook format
 #. (.xlsx)
 #: src/osha/oira/client/templates/register.pt:41
 msgid "header_example_report_xlsx"
 msgstr ""
-"Exemplo de um plano de ação em formato Office Open XML Workbook( (.xlsx)"
+"Exemplo de um plano de ação em formato Office Open XML Workbook (.xlsx)"
 
 #. Default: Example of a risk overview report in PDF format
 #: src/osha/oira/client/templates/register.pt:51
 msgid "header_example_report_risks"
-msgstr ""
+msgstr "Exemplo de um relatório de riscos em formato PDF"
 
 #. Default: Example of a measures overview report in PDF format
 #: src/osha/oira/client/templates/register.pt:59
 msgid "header_example_report_measures"
-msgstr ""
+msgstr "Exemplo de um relatório de medidas em formato PDF"
 
 #. Default: Register
 #: src/osha/oira/client/templates/register.pt:66
 #: src/osha/oira/client/templates/register.pt:70
 #: src/osha/oira/client/templates/shell.pt:64
 msgid "header_register"
-msgstr "Registo"
+msgstr "Registe-se"
 
 #. Default: Desired password
 #: src/osha/oira/client/templates/register.pt:85
@@ -2311,7 +2310,7 @@ msgstr "Palavra-passe pretendida"
 #. Default: Again password
 #: src/osha/oira/client/templates/register.pt:87
 msgid "label_password_confirm"
-msgstr "Repetir palavra-passe"
+msgstr "Repetir a palavra-passe"
 
 #. Default: Password reminder
 #: src/osha/oira/client/templates/reminder.pt:20
@@ -2323,7 +2322,7 @@ msgstr ""
 #: src/osha/oira/client/templates/reminder.pt:23
 msgid "description_password_reminder"
 msgstr ""
-"Queira inserir o seu endereço de correio eletrónico. Os seu dados de acesso "
+"Insira o seu endereço de correio eletrónico. Os seu dados de acesso "
 "ser-lhe-ão enviados."
 
 #: src/osha/oira/client/templates/rename-session.pt:16
@@ -2702,7 +2701,7 @@ msgstr "Formato: Portable Document Format (.pdf)"
 
 #: src/osha/oira/client/templates/report_landing.pt:87
 msgid "Contains: an overview of the risks identified"
-msgstr "Contém: um quadro geral dos riscos identificados."
+msgstr "Contém: um quadro geral dos perigos identificados."
 
 #: src/osha/oira/client/templates/report_landing.pt:93
 #: src/osha/oira/client/templates/risks_overview.pt:146
@@ -2769,7 +2768,7 @@ msgstr ""
 "nível de competência necessário para implementar a medida, por exemplo "
 "\"senso comum (sem conhecimento necessário da SST)\", \"nenhuma competência "
 "da SST específica, mas conhecimento mínimo da SST ou formação e/ou consulta "
-"necessárias do guia da SST \", ou \"competência SST\". Também é possível "
+"necessárias em SST \", ou \"competência SST\". Também é possível "
 "descrever aqui qualquer outro requisito adicional (se existente)."
 
 #. Default: Appoint someone in your company to be responsible for the
@@ -3230,7 +3229,7 @@ msgstr ""
 "Neste momento está a avaliar a OiRA como utilizador convidado.  Não poderá "
 "registar o seu progresso nem descarregar quaisquer relatórios. Para guardar "
 "o seu trabalho, queira iniciar uma sessão ou registar-se clicando na ligação "
-"\"Sign in\" no canto superior direito da página."
+"\"Registe-se\" no canto superior direito da página."
 
 #. Default: Important
 #: src/osha/oira/client/templates/tooltips.pt:8
@@ -3256,12 +3255,12 @@ msgstr "Não poderá imprimir ou descarregar relatórios."
 msgid "list_test_session_limitations3"
 msgstr ""
 "Durante um sessão de teste terá a possibilidade de se registar em qualquer "
-"momento clicando na ligação \"Register\" situada no topo."
+"momento clicando na ligação \"Registe-se\" situada no topo."
 
 #. Default: Discover how easy it is to create a risk assessment with OiRA.
 #: src/osha/oira/client/templates/tooltips.pt:16
 msgid "list_test_session_benefits1"
-msgstr "Descubra como á fácil criar uma avaliação de risco com a OiRA."
+msgstr "Descubra como é fácil criar uma avaliação de risco com a OiRA."
 
 #. Default: Identify potential risks in your business and the measures to
 #. reduce them.
@@ -3452,7 +3451,7 @@ msgstr "${read_more} sobre este risco."
 #: src/osha/oira/client/templates/webhelpers.pt:335
 #: src/osha/oira/client/templates/webhelpers.pt:364
 msgid "header_legal_references"
-msgstr "Referências legais e políticas"
+msgstr "Referências legais e normativas"
 
 #. Default: Additional resources for assessing the risk
 #: src/osha/oira/client/templates/webhelpers.pt:342
@@ -3847,7 +3846,7 @@ msgid ""
 "and it will be copied to your survey."
 msgstr ""
 "Pode utilizar nas suas próprias pesquisas conteúdos da biblioteca padrão "
-"fornecidos pela OSHA. Basta selecionar na lista infra o módulo ou o risco "
+"fornecidos pela EU-OSHA. Basta selecionar na lista infra o módulo ou o risco "
 "que deseja utilizar e este será copiado para a sua pesquisa."
 
 #: src/osha/oira/content/templates/library.pt:21
@@ -4380,7 +4379,8 @@ msgstr "Licença CC"
 #. able to add them now:
 #: src/osha/oira/upgrade/upgrade.py:190
 msgid "description_other_risks"
-msgstr ""
+msgstr "No caso de considerar outros riscos não contidos na ferramenta, tem a"
+"possibilidade de adicioná-los agora:"
 
 #. Default: <p>Would you now like to add your own defined risks to this
 #. tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks,
@@ -4389,7 +4389,10 @@ msgstr ""
 #. select 'No.'</p>
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
-msgstr ""
+msgstr "<p>Quer adicionar agora a esta ferramenta outros riscos?</p>"
+"<p><strong>Importante:</strong> Para não ter duplicaçao de riscos, "
+"recomendamos que primeiro explore os módulos predefinidos, se ainda não o fez.</p>"
+"<p>Se não precisa de adicionar outros riscos, por favor selecione \'Não\'.</p>"
 
 #~ msgid "label_close_panel"
 #~ msgstr "Fechar painel"

@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-01-19 12:47+0100\n"
 "Last-Translator: Robert <vansen@hotmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.6\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Generated-By: Babel 0.9.6\n"
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:36
@@ -35,7 +35,8 @@ msgstr ""
 "Beskriv ditt normala tillvägagångssätt för att eliminera eller (om risken "
 "inte går att undvika) minska risken."
 
-#. Default: Describe the specific action(s) required to implement this approach
+#. Default: Describe the specific action(s) required to implement this
+#. approach
 #. (to eliminate or to reduce the risk).
 #: src/osha/oira/manual_translations.py:7
 msgid "help_measure_prevention_plan"
@@ -51,8 +52,8 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:10
 msgid "help_measure_requirements"
 msgstr ""
-"Beskriv expertisnivån som krävs för att genomföra denna åtgärd, t.ex. \"sunt "
-"förnuft (ingen OSH-kunskap krävs)\", \"ingen särskild OSH-kunskap krävs), "
+"Beskriv expertisnivån som krävs för att genomföra denna åtgärd, t.ex. \"sunt"
+" förnuft (ingen OSH-kunskap krävs)\", \"ingen särskild OSH-kunskap krävs), "
 "med ett minimum av OSH-kunskap eller träning och/eller rådgivning behövs\", "
 "eller \"OSH-expert\". Du kan även beskriva ytterligare krav här (om någon)."
 
@@ -91,7 +92,7 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:24 src/osha/oira/client/settings.py:36
 #: src/osha/oira/client/templates/user-menu.pt:19
 msgid "Change email address"
-msgstr ""
+msgstr "Okänd e-postadress"
 
 #: src/osha/oira/manual_translations.py:25
 msgid "Delete Account"
@@ -100,8 +101,8 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:26
 #: src/osha/oira/client/templates/new-email.pt:18
 msgid ""
-"Please bear in mind that by changing the email address, your login name will "
-"also change."
+"Please bear in mind that by changing the email address, your login name will"
+" also change."
 msgstr ""
 
 #. Default: Password
@@ -184,8 +185,8 @@ msgstr ""
 msgid "help_introduction"
 msgstr ""
 "Introduktionstexten visas när man startar en ny OIRA-verktyg session. Om "
-"ingen introduktion anges kommer en standardtext att visas. Tänk på att hålla "
-"texten kort så att den får plats på små enheter som mobiltelefoner och "
+"ingen introduktion anges kommer en standardtext att visas. Tänk på att hålla"
+" texten kort så att den får plats på små enheter som mobiltelefoner och "
 "handdatorer."
 
 #. Default: This is the only version of the OiRA Tool and can therefore not be
@@ -224,7 +225,8 @@ msgstr "Lösning"
 msgid "Succesfully published the survey"
 msgstr "OiRA-verktyget har publicerats utan fel"
 
-#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
+#. Default: Succesfully created a preview for the OiRA Tool. It can be
+#. accessed
 #. at ${url}.
 #: src/osha/oira/manual_translations.py:59
 msgid ""
@@ -244,7 +246,8 @@ msgstr "Skapa en kopia av markerat OiRA-verktyg"
 #. Default: If this is to be "optional", it must be formulated so that it is
 #. answerable with YES (the end-user will have to tick a box) or NO (e.g. "Do
 #. you work with the public?"). If this is to be "repeatable", it must be
-#. formulated as a prompt to fill in multiple values (e.g. "List your different
+#. formulated as a prompt to fill in multiple values (e.g. "List your
+#. different
 #. work locations").
 #: src/osha/oira/manual_translations.py:65
 msgid "help_profilequestion_question"
@@ -269,7 +272,8 @@ msgid "help_module_optional"
 msgstr "Låter slutanvändaren hoppa över denna modul och allt inuti den."
 
 #. Default: The question to ask the end-user if this module is optional. It
-#. must be formulated so that it is answerable with YES (the end-user will have
+#. must be formulated so that it is answerable with YES (the end-user will
+#. have
 #. to tick a box) or NO
 #: src/osha/oira/manual_translations.py:74
 msgid "help_module_question"
@@ -304,7 +308,8 @@ msgstr ""
 "Detta är en kort och bekräftad redogörelse om en möjlig risk (t.ex. "
 "Byggnaden är väl underhållen.)"
 
-#. Default: This is the inverse of the affirmative statement (e.g. The building
+#. Default: This is the inverse of the affirmative statement (e.g. The
+#. building
 #. is not well maintained.)
 #: src/osha/oira/manual_translations.py:84
 msgid "help_problem_description"
@@ -508,7 +513,8 @@ msgid "help_finalwords"
 msgstr "Allmänna slutliga rekommendationer."
 
 #. Default: It is possible for you to print out the contents of the tool to
-#. enable you to look for the information at the relevant workplace (by walking
+#. enable you to look for the information at the relevant workplace (by
+#. walking
 #. around and looking at what could cause harm, or by consulting the workers
 #. and/or their representatives about problems they have encountered). You can
 #. then introduce the information into the tool.
@@ -516,9 +522,9 @@ msgstr "Allmänna slutliga rekommendationer."
 #: src/osha/oira/client/templates/identification.pt:18
 msgid "intro_print_identification_1"
 msgstr ""
-"Du kanske vill skriva ut listan över risker som du inte omedelbart kan svara "
-"på.  Ibland kan det vara viktigt att samråda med personalen över hur de ser "
-"på riskerna."
+"Du kanske vill skriva ut listan över risker som du inte omedelbart kan svara"
+" på.  Ibland kan det vara viktigt att samråda med personalen över hur de ser"
+" på riskerna."
 
 #. Default: You may also wish to distribute the contents among the workers
 #. and/or their representatives and invite them to participate in identifying
@@ -551,13 +557,15 @@ msgstr ""
 msgid "title_help_unpublished"
 msgstr ""
 
-#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
+#. Default: Succesfully created a preview for the OiRA Tool. It can be
+#. accessed
 #. at ${url} .
 #: src/osha/oira/manual_translations.py:153
 msgid "message_preview_success"
 msgstr ""
 
-#. Default: Please note that by deleting your account, you will also delete all
+#. Default: Please note that by deleting your account, you will also delete
+#. all
 #. your sessions. Please make sure you download your reports from the Report
 #. step prior to deleting your account, if you want to keep any.
 #: src/osha/oira/manual_translations.py:156
@@ -648,7 +656,8 @@ msgstr "Du kan inte radera ett OiRA-verktyg som har publicerats."
 #. Default: You can not delete a sector that contains published OiRA Tools.
 #: src/osha/oira/manual_translations.py:202
 msgid "message_not_delete_published_sector"
-msgstr "Du kan inte radera en sektor som innerhåller publicerade OiRA-verktyg."
+msgstr ""
+"Du kan inte radera en sektor som innerhåller publicerade OiRA-verktyg."
 
 #. Default: add a new OiRA Tool
 #: src/osha/oira/manual_translations.py:206
@@ -696,7 +705,8 @@ msgstr ""
 "Är du säker på att du vill radera denna åtgärd? Denna åtgärd kan inte "
 "återställas."
 
-#. Default: The current text in the fields 'Action plan', 'Prevention plan' and
+#. Default: The current text in the fields 'Action plan', 'Prevention plan'
+#. and
 #. 'Requirements' of this measure will be overwritten. This action cannot be
 #. reverted. Are you sure you want to continue?
 #: src/osha/oira/manual_translations.py:221 src/osha/oira/client/risk.py:234
@@ -723,12 +733,12 @@ msgstr "Utvärderingsfas"
 #. Default: Description
 #: src/osha/oira/manual_translations.py:228
 msgid "Description"
-msgstr ""
+msgstr "Beskrivning"
 
 #. Default: Skip evaluation
 #: src/osha/oira/manual_translations.py:229
 msgid "evalmethod_fixed"
-msgstr ""
+msgstr "Uppskattad"
 
 #. Default: priority
 #: src/osha/oira/manual_translations.py:230
@@ -739,7 +749,7 @@ msgstr ""
 #. account will be locked.
 #: src/osha/oira/manual_translations.py:231
 msgid "message_lock_warn"
-msgstr ""
+msgstr "Kontot \"${title}\" har låsts."
 
 #. Default: What is OiRA (Online Interactive Risk Assessment)?
 #: src/osha/oira/manual_translations.py:233
@@ -804,7 +814,7 @@ msgstr ""
 
 #: src/osha/oira/vocabularies.py:26 src/osha/oira/vocabularies.py:29
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: src/osha/oira/vocabularies.py:56
 #, fuzzy
@@ -855,6 +865,8 @@ msgstr ""
 #: src/osha/oira/client/login.py:69
 msgid "An email with a password reminder has been sent to your address."
 msgstr ""
+"Ett e-postmeddelande med en lösenordspåminnelse har skickats till din "
+"e-postadress."
 
 #: src/osha/oira/client/module.py:98
 msgid "No changes were made to your added risks."
@@ -1000,7 +1012,8 @@ msgstr "Standard tillvägagångssätt (för att eliminera eller minska risken)"
 #: src/osha/oira/client/templates/risk_actionplan.pt:174
 #: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
-msgstr "Särskilda åtgärder som krävs för att genomföra detta tillvägagångssätt"
+msgstr ""
+"Särskilda åtgärder som krävs för att genomföra detta tillvägagångssätt"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/report.py:473
@@ -1043,7 +1056,8 @@ msgstr "Planerat slut"
 msgid "header_oira_report_consultation"
 msgstr "Samråd med arbetstagare"
 
-#. Default: The undersigned hereby declare that the workers have been consulted
+#. Default: The undersigned hereby declare that the workers have been
+#. consulted
 #. on the content of this document.
 #: src/osha/oira/client/report.py:539
 msgid "paragraph_oira_consultation_of_workers"
@@ -1133,12 +1147,12 @@ msgstr ""
 #. situation.
 #: src/osha/oira/client/risk.py:120
 msgid "help_default_probability"
-msgstr ""
+msgstr "Ange hur trolig förekomsten av denna risk är i en normal situation."
 
 #. Default: Indicate how often this risk occurs in a normal situation.
 #: src/osha/oira/client/risk.py:123
 msgid "help_default_frequency"
-msgstr ""
+msgstr "Ange hur ofta denna risk inträffar i en normal situation."
 
 #: src/osha/oira/client/risk.py:307
 msgid "No changes were made to measures in your action plan."
@@ -1169,7 +1183,8 @@ msgstr ""
 msgid "message_measure_removed"
 msgstr ""
 
-#. Default: ${no_of_measures} measures have been removed from your action plan.
+#. Default: ${no_of_measures} measures have been removed from your action
+#. plan.
 #: src/osha/oira/client/risk.py:345
 msgid "message_measures_removed"
 msgstr ""
@@ -1185,7 +1200,7 @@ msgstr ""
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
-msgstr ""
+msgstr "Lista över alla risker."
 
 #. Default: By clicking on 'Delete account', your account will be permenantly
 #. deleted. This action is irreversable.
@@ -1204,7 +1219,7 @@ msgstr ""
 #: src/osha/oira/client/templates/new-email.pt:26
 #: src/osha/oira/client/templates/rename-session.pt:29
 msgid "Save changes"
-msgstr ""
+msgstr "Spara ändringar"
 
 #. Default: After having identified the risks, you need to put an action plan
 #. in place to manage the risks. To eliminate or reduce risks you need to
@@ -1214,8 +1229,8 @@ msgid "expl_actionplan_1"
 msgstr ""
 "Du har identifierat riskens omfattning för varje flaskhals. Under varje fas "
 "av handlingsplanen kan du fastställa prioriteringen för varje flaskhals och "
-"hur du ska hantera dem. Programmet kan föreslå en åtgärd som du kan använda, "
-"eller så kan du lägga till egna åtgärder."
+"hur du ska hantera dem. Programmet kan föreslå en åtgärd som du kan använda,"
+" eller så kan du lägga till egna åtgärder."
 
 #. Default: Among the things to be considered for this step are:
 #: src/osha/oira/client/templates/actionplan.pt:25
@@ -1252,7 +1267,8 @@ msgstr ""
 "Om vissa risker inte kan undvikas, hur kan de minskas till en nivå där de "
 "utsattas personers hälsa och säkerhet inte äventyras?"
 
-#. Default: Once you have decided how to eliminate or reduce a particular risk,
+#. Default: Once you have decided how to eliminate or reduce a particular
+#. risk,
 #. then you describe the specific action(s) required to achieve this. You
 #. should also include details of the level of expertise and/or other
 #. requirements needed for those actions to be effective.
@@ -1285,31 +1301,40 @@ msgstr "Gå till rapport"
 #. Default: Terms and conditions
 #: src/osha/oira/client/templates/conditions.pt:21
 msgid "header_terms"
-msgstr ""
+msgstr "eller…"
 
-#. Default: The terms and conditions have changed since your last visit. Please
+#. Default: The terms and conditions have changed since your last visit.
+#. Please
 #. read the new terms and conditions carefully before proceding.
 #: src/osha/oira/client/templates/conditions.pt:24
 msgid "terms_changed"
 msgstr ""
 
 #. Default: The OiRA (Online interactive Risk Assessment) application is an
-#. instrument put at your disposal by the European Agency for Safety and Health
-#. at Work (EU-OSHA). This Privacy Policy applies to all products, services and
+#. instrument put at your disposal by the European Agency for Safety and
+#. Health
+#. at Work (EU-OSHA). This Privacy Policy applies to all products, services
+#. and
 #. websites offered by EU-OSHA in the framework of the OiRA application.
 #: src/osha/oira/client/templates/conditions.pt:33
 msgid "conditions_intro1"
 msgstr ""
+"Fyll i din företagsinformation i detta formulär. Uppgifterna i detta "
+"formulär kommer även att visas i rapporten."
 
 #. Default: Your personal data is processed in line with Regulation (EC) N°
-#. 45/2001 of the European Parliament and of the Council of 18 December 2000 on
-#. the protection of individuals with regard to the processing of personal data
+#. 45/2001 of the European Parliament and of the Council of 18 December 2000
+#. on
+#. the protection of individuals with regard to the processing of personal
+#. data
 #. by the Community institutions and bodies and on the free movement of such
 #. data. Further details of the privacy policy of EU-OSHA and the full text of
 #. the Regulation can be accessed at: ${url}.
 #: src/osha/oira/client/templates/conditions.pt:37
 msgid "conditions_intro2"
 msgstr ""
+"Fyll i din företagsinformation i detta formulär. Uppgifterna i detta "
+"formulär kommer även att visas i rapporten."
 
 #. Default: The Information we collect and for what purposes
 #: src/osha/oira/client/templates/conditions.pt:41
@@ -1322,6 +1347,8 @@ msgstr ""
 #: src/osha/oira/client/templates/conditions.pt:43
 msgid "conditions_info_entry"
 msgstr ""
+"Fyll i din företagsinformation i detta formulär. Uppgifterna i detta "
+"formulär kommer även att visas i rapporten."
 
 #. Default: Email account: this is necessary to access the online application,
 #. edit the input data, and delete the OiRA account. You can enter any valid
@@ -1363,7 +1390,8 @@ msgstr ""
 
 #. Default: In addition to the above mentioned purposes, we may use the
 #. information we collect to provide, maintain, protect, and improve our
-#. services and develop new services. In any case no personal data will be used
+#. services and develop new services. In any case no personal data will be
+#. used
 #. for processing of data.
 #: src/osha/oira/client/templates/conditions.pt:64
 msgid "conditions_info_use_intro"
@@ -1374,7 +1402,8 @@ msgstr ""
 msgid "conditions_datacontroller_header"
 msgstr ""
 
-#. Default: The data controller is the European Agency for Safety and Health at
+#. Default: The data controller is the European Agency for Safety and Health
+#. at
 #. Work, Bilbao.
 #: src/osha/oira/client/templates/conditions.pt:74
 msgid "condtions_datacontroller"
@@ -1414,9 +1443,11 @@ msgid "conditions_security_header"
 msgstr ""
 
 #. Default: We take appropriate security measures to protect against
-#. unauthorized access to or unauthorized alteration, disclosure or destruction
+#. unauthorized access to or unauthorized alteration, disclosure or
+#. destruction
 #. of data. These include internal reviews of our data collection, storage and
-#. processing practices and security measures, including appropriate encryption
+#. processing practices and security measures, including appropriate
+#. encryption
 #. of communication and physical security measures to guard against
 #. unauthorized access to systems where we store personal data. IP addresses
 #. are not saved so that end-users can not be identified through their access.
@@ -1430,16 +1461,19 @@ msgid "conditions_contact_header"
 msgstr ""
 
 #. Default: EU-OSHA regularly reviews its compliance with this Privacy Policy.
-#. Any enquiries and complaints regarding our privacy policy can be sent to the
+#. Any enquiries and complaints regarding our privacy policy can be sent to
+#. the
 #. DPO of EU-OSHA at ${dpo-email} or to the EDPS at ${edps-email}.
 #: src/osha/oira/client/templates/conditions.pt:102
 msgid "conditions_contact"
 msgstr ""
+"Fyll i din företagsinformation i detta formulär. Uppgifterna i detta "
+"formulär kommer även att visas i rapporten."
 
 #. Default: Agree and continue
 #: src/osha/oira/client/templates/conditions.pt:111
 msgid "agree_and_continue"
-msgstr ""
+msgstr "Fortsätt"
 
 #. Default: Delete
 #: src/osha/oira/client/templates/confirmation-delete-session.pt:16
@@ -1507,7 +1541,8 @@ msgstr ""
 
 #. Default: The European Agency for Safety and Health at Work and the
 #. organisations involved will not be liable for any false, inaccurate,
-#. inappropriate or incomplete information stored in the OiRA tool or any other
+#. inappropriate or incomplete information stored in the OiRA tool or any
+#. other
 #. damages as a result of using the software.
 #: src/osha/oira/client/templates/disclaimer.pt:26
 msgid "disclaimer_tool_information"
@@ -1559,25 +1594,25 @@ msgstr "Hjälp"
 #. Default: Error
 #: src/osha/oira/client/templates/error.pt:15
 msgid "title_error"
-msgstr ""
+msgstr "Fel"
 
 #. Default: Not found
 #: src/osha/oira/client/templates/error_notfound.pt:15
 msgid "title_error_notfound"
-msgstr ""
+msgstr "Kunde inte hittas"
 
 #. Default: The page you requested could not be found.
 #: src/osha/oira/client/templates/error_notfound.pt:17
 msgid "expl_error_notfound"
-msgstr ""
+msgstr "Den begärda sidan kunde inte hittas."
 
 #. Default: Now that you have identified the existing hazards/problems in your
 #. company/organisation you need to evaluate the risks arising from them.
 #: src/osha/oira/client/templates/evaluation.pt:20
 msgid "help_risks_present"
 msgstr ""
-"Nu när du har identifierat befintliga risker/problem inom ditt företag/"
-"organisation måste du utvärdera riskerna som uppstår från dem."
+"Nu när du har identifierat befintliga risker/problem inom ditt "
+"företag/organisation måste du utvärdera riskerna som uppstår från dem."
 
 #. Default: Please proceed directly to the action plan step.
 #: src/osha/oira/client/templates/evaluation.pt:25
@@ -1587,12 +1622,12 @@ msgstr "Du kan fortsätta direkt till handlingsplanen."
 #. Default: Run evaluation
 #: src/osha/oira/client/templates/evaluation.pt:30
 msgid "label_run_evaluation"
-msgstr ""
+msgstr "Kör utvärdering"
 
 #. Default: Go to action plan
 #: src/osha/oira/client/templates/evaluation.pt:31
 msgid "label_jump_to_actionplan"
-msgstr ""
+msgstr "Gå till handlingsplan"
 
 #. Default: Preparation
 #: src/osha/oira/client/templates/evaluation.pt:37
@@ -1708,22 +1743,22 @@ msgstr "Registrera"
 #. Default: Help
 #: src/osha/oira/client/templates/help.pt:19
 msgid "title_help"
-msgstr ""
+msgstr "Hjälp"
 
 #. Default: Introduction
 #: src/osha/oira/client/templates/help.pt:21
 #: src/osha/oira/client/templates/help.pt:32
 msgid "help_header_introduction"
-msgstr ""
+msgstr "Introduktion"
 
 #. Default: You can print the ${list-of-risks}.
 #: src/osha/oira/client/templates/identification.pt:20
 #, fuzzy
 msgid "intro_identification"
 msgstr ""
-"Du kanske vill skriva ut listan över risker som du inte omedelbart kan svara "
-"på.  Ibland kan det vara viktigt att samråda med personalen över hur de ser "
-"på riskerna."
+"Du kanske vill skriva ut listan över risker som du inte omedelbart kan svara"
+" på.  Ibland kan det vara viktigt att samråda med personalen över hur de ser"
+" på riskerna."
 
 #. Default: Start Risk Identification
 #: src/osha/oira/client/templates/identification.pt:25
@@ -1734,7 +1769,7 @@ msgstr "Identifiering"
 #. Default: Welcome
 #: src/osha/oira/client/templates/login.pt:22
 msgid "header_welcome"
-msgstr ""
+msgstr "Välkommen"
 
 #. Default: run a test session
 #: src/osha/oira/client/templates/login.pt:25
@@ -1746,7 +1781,7 @@ msgstr ""
 #: src/osha/oira/client/templates/login_form.pt:49
 #: src/osha/oira/client/templates/new-session-test.pt:37
 msgid "label_register"
-msgstr ""
+msgstr "Registrera"
 
 #. Default: Want to try OiRA? You may ${tryout_link} or ${register_link} to
 #. start for real.
@@ -1767,13 +1802,13 @@ msgstr ""
 #. Default: Show more…
 #: src/osha/oira/client/templates/login.pt:34
 msgid "Show more…"
-msgstr ""
+msgstr "Visa mer…"
 
 #. Default: Show less…
 #: src/osha/oira/client/templates/login.pt:34
 #: src/osha/oira/client/templates/webhelpers.pt:318
 msgid "Show less…"
-msgstr ""
+msgstr "Visa mindre"
 
 #: src/osha/oira/client/templates/login.pt:38
 msgid "Who is the OiRA tool for?"
@@ -1781,8 +1816,8 @@ msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:39
 msgid ""
-"OiRA can be used by anyone wishing to assess health and safety-related risks "
-"that might exist in their workplace."
+"OiRA can be used by anyone wishing to assess health and safety-related risks"
+" that might exist in their workplace."
 msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:40
@@ -1791,9 +1826,9 @@ msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:41
 msgid ""
-"OiRA is designed specifically to support them in assessing the risks at work "
-"and helping them to produce a documented risk assessment including an action "
-"plan tailored to the business's requirements."
+"OiRA is designed specifically to support them in assessing the risks at work"
+" and helping them to produce a documented risk assessment including an "
+"action plan tailored to the business's requirements."
 msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:43
@@ -1816,8 +1851,8 @@ msgid ""
 "${identification} OiRA will present a series of potential health and safety "
 "hazards or problems that could exist in your workplace. By answering the "
 "statements/questions with either yes or no, you state if such hazards or "
-"problems are present. You can also decide to leave a question unanswered and "
-"thus put it on hold to be answered at a later stage."
+"problems are present. You can also decide to leave a question unanswered and"
+" thus put it on hold to be answered at a later stage."
 msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:48
@@ -1847,8 +1882,8 @@ msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:54
 msgid ""
-"However, you can spend whatever time you have available on an assessment and "
-"then return to it when convenient to pick up from the same point you left "
+"However, you can spend whatever time you have available on an assessment and"
+" then return to it when convenient to pick up from the same point you left "
 "off."
 msgstr ""
 
@@ -1859,7 +1894,8 @@ msgstr ""
 #: src/osha/oira/client/templates/login.pt:57
 msgid ""
 "The first thing you will be asked to do when you begin your first risk "
-"assessment is to create an OiRA account - this is a simple and quick process."
+"assessment is to create an OiRA account - this is a simple and quick "
+"process."
 msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:58
@@ -1897,7 +1933,7 @@ msgstr "Registrera"
 #. Default: request an email reminder
 #: src/osha/oira/client/templates/login_form.pt:27
 msgid "request_an_email_reminder"
-msgstr ""
+msgstr "begär en påminnelse via e-post"
 
 #. Default: Your login name and/or password were entered incorrectly. Please
 #. check and try again or ${request_an_email_reminder} of your login
@@ -1905,6 +1941,8 @@ msgstr ""
 #: src/osha/oira/client/templates/login_form.pt:25
 msgid "incorrect_login"
 msgstr ""
+"Ditt inloggningsnamn och/eller lösenord är felaktigt. Kontrollera och försök"
+" igen eller ${request_an_email_reminder} av din inloggningsinformation."
 
 #. Default: Email address
 #: src/osha/oira/client/templates/login_form.pt:37
@@ -1916,22 +1954,22 @@ msgstr "E-postadress"
 #. Default: I forgot my password
 #: src/osha/oira/client/templates/login_form.pt:40
 msgid "label_forgot_password"
-msgstr ""
+msgstr "Jag har glömt bort mitt lösenord"
 
 #. Default: Password (${forgot_link})
 #: src/osha/oira/client/templates/login_form.pt:40
 msgid "label_login_password"
-msgstr ""
+msgstr "Lösenord (${forgot_link})"
 
 #. Default: Keep me logged in.
 #: src/osha/oira/client/templates/login_form.pt:45
 msgid "label_keep_logged_in"
-msgstr ""
+msgstr "Kom ihåg mig"
 
 #. Default: Don't have an account? Then please ${register_link} first.
 #: src/osha/oira/client/templates/login_form.pt:49
 msgid "register_teaser"
-msgstr ""
+msgstr "Saknar du ett konto? Vänligen ${register_link} först."
 
 #. Default: Login
 #: src/osha/oira/client/templates/login_form.pt:55
@@ -2005,7 +2043,7 @@ msgstr "Nästa"
 #: src/osha/oira/client/templates/module_customization.pt:23
 #: src/osha/oira/client/templates/module_customization.pt:67
 msgid "Risk"
-msgstr ""
+msgstr "Risk"
 
 #: src/osha/oira/client/templates/module_customization.pt:26
 #: src/osha/oira/client/templates/module_customization.pt:44
@@ -2111,8 +2149,8 @@ msgstr ""
 "När du har startat en session med ett OiRA-verktyg kommer du att kunna "
 "stoppa den före slutet. Du kan starta den igen vid ett senare tillfälle "
 "genom att välja titeln för OiRA-verktygets session. Du kan spara mer än en "
-"session, förutsatt att du har gett dem olika namn. Kom ihåg din e-"
-"postadress, lösenord och titeln för OiRA-verktygets session. Genom att "
+"session, förutsatt att du har gett dem olika namn. Kom ihåg din "
+"e-postadress, lösenord och titeln för OiRA-verktygets session. Genom att "
 "klicka på Logga ut-knappen loggas du ut aktivt. Du loggas även ut om du "
 "stänger din webbläsare. Av säkerhetsskäl är det bättre att logga ut aktivt."
 
@@ -2178,7 +2216,8 @@ msgstr ""
 msgid "header_profile"
 msgstr "Skräddarsy riskbedömningen för din organisation"
 
-#. Default: In order to tailor the risk assessment to your organisation you may
+#. Default: In order to tailor the risk assessment to your organisation you
+#. may
 #. be asked to:
 #: src/osha/oira/client/templates/profile.pt:18
 msgid "expl_profile"
@@ -2307,9 +2346,10 @@ msgstr "Bekräfta lösenord"
 #. Default: Password reminder
 #: src/osha/oira/client/templates/reminder.pt:20
 msgid "header_password_reminder"
-msgstr ""
+msgstr "Glömt lösenord"
 
-#. Default: Please enter your email address. Your login details will be sent to
+#. Default: Please enter your email address. Your login details will be sent
+#. to
 #. you.
 #: src/osha/oira/client/templates/reminder.pt:23
 msgid "description_password_reminder"
@@ -2331,8 +2371,8 @@ msgstr ""
 msgid "report_intro"
 msgstr ""
 "Nu när du har identifierat alla risker inom din organisation och skapat en "
-"handlingsplan kan du skapa en rapport som listar alla dina resultat. Du kan, "
-"om så önskas, lägga till extra kommentarer som bör ingå i denna rapport i "
+"handlingsplan kan du skapa en rapport som listar alla dina resultat. Du kan,"
+" om så önskas, lägga till extra kommentarer som bör ingå i denna rapport i "
 "fältet nedan."
 
 #. Default: Please leave any extra comments that should be included in the
@@ -2407,14 +2447,18 @@ msgstr ""
 msgid "report_measure_budget"
 msgstr "Det finns en budget på ${amount} för denna åtgärd."
 
-#. Default: The following risks have not yet been answered. Please do so at the
+#. Default: The following risks have not yet been answered. Please do so at
+#. the
 #. soonest possibility.
 #: src/osha/oira/client/templates/report_actionplan.pt:189
 msgid "desc_unanswered_risks"
-msgstr "Följande risker har ännu inte besvarats. Gör det så snart som möjligt."
+msgstr ""
+"Följande risker har ännu inte besvarats. Gör det så snart som möjligt."
 
-#. Default: This risk is not present in your organisation, but since the sector
-#. organisation considers this one of the priority risks it must be included in
+#. Default: This risk is not present in your organisation, but since the
+#. sector
+#. organisation considers this one of the priority risks it must be included
+#. in
 #. this report.
 #: src/osha/oira/client/templates/report_actionplan.pt:260
 #: src/osha/oira/client/templates/webhelpers.pt:220
@@ -2438,8 +2482,8 @@ msgstr "Korrigera angivna fel."
 #: src/osha/oira/client/templates/report_company.pt:22
 msgid "company_details_intro"
 msgstr ""
-"Det är valfritt att lämna information nedan. Denna information är avsedd för "
-"att förbättra de verktyg och de tjänster som vi tillhandahåller. Denna "
+"Det är valfritt att lämna information nedan. Denna information är avsedd för"
+" att förbättra de verktyg och de tjänster som vi tillhandahåller. Denna "
 "information kommer inte att visas i rapporten."
 
 #. Default: Your country
@@ -2451,47 +2495,47 @@ msgstr "Huvudfärg"
 #. Default: Number of employees
 #: src/osha/oira/client/templates/report_company.pt:38
 msgid "label_employee_numbers"
-msgstr ""
+msgstr "Antal anställda"
 
 #. Default: 1 to 9 employees
 #: src/osha/oira/client/templates/report_company.pt:39
 msgid "employee_numbers_1_to_9"
-msgstr ""
+msgstr "1-9 anställda"
 
 #. Default: 10 to 49 employees
 #: src/osha/oira/client/templates/report_company.pt:40
 msgid "employee_numbers_10_to_49"
-msgstr ""
+msgstr "10-49 anställda"
 
 #. Default: 50 to 249 employees
 #: src/osha/oira/client/templates/report_company.pt:41
 msgid "employee_numbers_50_to_249"
-msgstr ""
+msgstr "50-249 anställda"
 
 #. Default: 250 or more employees
 #: src/osha/oira/client/templates/report_company.pt:42
 msgid "employee_numbers_250_or_more"
-msgstr ""
+msgstr "250 eller fler anställda"
 
 #. Default: The risk assessment was conducted by
 #: src/osha/oira/client/templates/report_company.pt:47
 msgid "label_conductor"
-msgstr ""
+msgstr "Riskbedömningen är utförd av"
 
 #. Default: own staff
 #: src/osha/oira/client/templates/report_company.pt:48
 msgid "conductor_staff"
-msgstr ""
+msgstr "egen personal"
 
 #. Default: an external consultant or service provider
 #: src/osha/oira/client/templates/report_company.pt:49
 msgid "conductor_third_party"
-msgstr ""
+msgstr "en extern konsult eller tjänsteleverantör"
 
 #. Default: both own staff and an external consultant or service provider
 #: src/osha/oira/client/templates/report_company.pt:50
 msgid "conductor_both"
-msgstr ""
+msgstr "både egen personal och extern konsult eller tjänsteleverantör"
 
 #. Default: Through which channel did you learn about this tool?
 #: src/osha/oira/client/templates/report_company.pt:55
@@ -2548,7 +2592,7 @@ msgstr ""
 #. Default: Workers were invited to participate in the risk assessment
 #: src/osha/oira/client/templates/report_company.pt:68
 msgid "label_workers_participated"
-msgstr ""
+msgstr "Namn"
 
 #. Default: Did this OiRA tool meet your needs?
 #: src/osha/oira/client/templates/report_company.pt:75
@@ -2579,9 +2623,9 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:24
 msgid ""
-"Save the report on your computer and print it. You can also modify it or add "
-"more information. Please note that changes made on your pc will NOT be saved "
-"in the OiRA tool"
+"Save the report on your computer and print it. You can also modify it or add"
+" more information. Please note that changes made on your pc will NOT be "
+"saved in the OiRA tool"
 msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:25
@@ -2604,8 +2648,8 @@ msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:31
 msgid ""
-"Record any revision if circumstances change (new machines, new workers, as a "
-"result of findings of any accident investigations, etc.)"
+"Record any revision if circumstances change (new machines, new workers, as a"
+" result of findings of any accident investigations, etc.)"
 msgstr ""
 
 #: src/osha/oira/client/templates/report_landing.pt:35
@@ -2730,15 +2774,15 @@ msgstr "Beskrivning"
 #: src/osha/oira/client/templates/risk_actionplan.pt:228
 msgid "actionplan_measure_tooltip"
 msgstr ""
-"Beskriv: 1) Vilket är ditt normala tillvägagångssätt för att eliminera eller "
-"(om risken inte går att undvika) minska risken, 2) de specifika åtgärder som "
-"krävs för att genomföra detta tillvägagångssätt (för att eliminera eller "
-"minska risken), 3) den kompetens som behövs för att genomföra åtgärden, till "
-"exempel \"sunt förnuft (inga kunskaper om arbetsmiljöfrågor krävs)\", \"inga "
-"särskilda kunskaper om arbetsmiljöfrågor, men minsta möjliga kunskap om "
-"arbetsmiljöfrågor eller utbildning och/eller samråd med arbetsmiljöfrågor "
-"krävs\", eller \"arbetsmiljöexpert\". Du kan också beskriva alla ytterligare "
-"krav här (om några)."
+"Beskriv: 1) Vilket är ditt normala tillvägagångssätt för att eliminera eller"
+" (om risken inte går att undvika) minska risken, 2) de specifika åtgärder "
+"som krävs för att genomföra detta tillvägagångssätt (för att eliminera eller"
+" minska risken), 3) den kompetens som behövs för att genomföra åtgärden, "
+"till exempel \"sunt förnuft (inga kunskaper om arbetsmiljöfrågor krävs)\", "
+"\"inga särskilda kunskaper om arbetsmiljöfrågor, men minsta möjliga kunskap "
+"om arbetsmiljöfrågor eller utbildning och/eller samråd med arbetsmiljöfrågor"
+" krävs\", eller \"arbetsmiljöexpert\". Du kan också beskriva alla "
+"ytterligare krav här (om några)."
 
 #. Default: Appoint someone in your company to be responsible for the
 #. implementation of this measure. This person will have the authority to take
@@ -2748,17 +2792,19 @@ msgstr ""
 #: src/osha/oira/client/templates/risk_actionplan.pt:183
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
-"Utse någon inom ditt företag som ansvarar för genomförandet av denna åtgärd. "
-"Denna person kommer att ha befogenhet för att vidta de åtgärder som beskrivs "
-"i planen och/eller ansvaret för att se till att de genomförs."
+"Utse någon inom ditt företag som ansvarar för genomförandet av denna åtgärd."
+" Denna person kommer att ha befogenhet för att vidta de åtgärder som "
+"beskrivs i planen och/eller ansvaret för att se till att de genomförs."
 
 #. Default: Please enter the budget in whole Euros.
 #: src/osha/oira/client/templates/risk_actionplan.pt:110
 msgid "error_invalid_budget"
 msgstr "Ange budget i euro (ental)."
 
-#. Default: Although some measures do not cost any money, most do. The measures
-#. should therefore be budgeted for; include them in the annual budget round if
+#. Default: Although some measures do not cost any money, most do. The
+#. measures
+#. should therefore be budgeted for; include them in the annual budget round
+#. if
 #. necessary.
 #: src/osha/oira/client/templates/risk_actionplan.pt:111
 #: src/osha/oira/client/templates/risk_actionplan.pt:188
@@ -3028,7 +3074,7 @@ msgstr ""
 #: src/osha/oira/client/templates/webhelpers.pt:118
 #: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "Postponed"
-msgstr ""
+msgstr "${count} frågorna har skjutits upp"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/risks_overview.pt:228
@@ -3168,7 +3214,7 @@ msgstr ""
 #. Default: Questions answered per module
 #: src/osha/oira/client/templates/status.pt:22
 msgid "header_questions_answered"
-msgstr ""
+msgstr "Besvarade frågor per modul"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/status_print.pt:94
@@ -3253,7 +3299,8 @@ msgid "header_osh_hamburger"
 msgstr ""
 
 #. Default: The menu toggle lets you hide and show the ‘off canvas’ menu so
-#. it’s only there when you need it. Hide the menu when you’re concentrating on
+#. it’s only there when you need it. Hide the menu when you’re concentrating
+#. on
 #. filling out a tool or show it when you’re clicking about between various
 #. parts of the application.
 #: src/osha/oira/client/templates/tooltips.pt:37
@@ -3267,7 +3314,8 @@ msgstr ""
 msgid "Tip"
 msgstr ""
 
-#. Default: You may switch this on screen help feature on or off at any time by
+#. Default: You may switch this on screen help feature on or off at any time
+#. by
 #. clicking on the ${questionmark} at the top right on the toolbar.
 #: src/osha/oira/client/templates/tooltips.pt:41
 #: src/osha/oira/client/templates/tooltips.pt:53
@@ -3291,9 +3339,11 @@ msgstr ""
 msgid "header_osh_session_menu"
 msgstr ""
 
-#. Default: From this menu you can start a new session of an OiRA tool, or pick
+#. Default: From this menu you can start a new session of an OiRA tool, or
+#. pick
 #. up a previous session to continue working on it. If you do not have an
-#. account for the OiRA application yet, you can start a test session to try it
+#. account for the OiRA application yet, you can start a test session to try
+#. it
 #. out immediately.
 #: src/osha/oira/client/templates/tooltips.pt:61
 msgid "info_osh_session_menu"
@@ -3482,8 +3532,8 @@ msgstr ""
 #: src/osha/oira/content/survey.py:61
 msgid "help_image_upload"
 msgstr ""
-"Ladda upp en bild. Se till att din bild är i formatet png, jpg eller gif och "
-"inte innehåller några specialtecken."
+"Ladda upp en bild. Se till att din bild är i formatet png, jpg eller gif och"
+" inte innehåller några specialtecken."
 
 #. Default: Content caption
 #: src/osha/oira/content/risk.py:37 src/osha/oira/content/risk.py:49
@@ -3497,8 +3547,8 @@ msgstr ""
 #, fuzzy
 msgid "help_evaluation_method_kinney"
 msgstr ""
-"Välj mellan metoderna UPPSKATTAD (grov uppskattning) eller BERÄKNAD "
-"( kombination av sannolikhet, frekvens och allvarlighetsgrad)."
+"Välj mellan metoderna UPPSKATTAD (grov uppskattning) eller BERÄKNAD ( "
+"kombination av sannolikhet, frekvens och allvarlighetsgrad)."
 
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of frequency and severity) method.
@@ -3506,8 +3556,8 @@ msgstr ""
 #, fuzzy
 msgid "help_evaluation_method_french"
 msgstr ""
-"Välj mellan metoderna UPPSKATTAD (grov uppskattning) eller BERÄKNAD "
-"( kombination av sannolikhet, frekvens och allvarlighetsgrad)."
+"Välj mellan metoderna UPPSKATTAD (grov uppskattning) eller BERÄKNAD ( "
+"kombination av sannolikhet, frekvens och allvarlighetsgrad)."
 
 #. Default: Save changes
 #: src/osha/oira/content/risk.py:142 src/osha/oira/content/risk.py:169
@@ -3609,7 +3659,7 @@ msgstr ""
 #: src/osha/oira/content/statistics.py:371
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
 msgid "Sector"
-msgstr ""
+msgstr "Bransch"
 
 #. Default: Global
 #: src/osha/oira/content/statistics.py:417
@@ -3633,7 +3683,8 @@ msgstr ""
 msgid "label_external_site_url"
 msgstr ""
 
-#. Default: This is the URL of an external site that is linked to. Clicking the
+#. Default: This is the URL of an external site that is linked to. Clicking
+#. the
 #. logo or the name will take the user to this URL.
 #: src/osha/oira/content/survey.py:40
 msgid "help__external_site_url"
@@ -3707,7 +3758,7 @@ msgstr ""
 #. Default: Edit
 #: src/osha/oira/content/templates/addbar.pt:9
 msgid "button_edit"
-msgstr ""
+msgstr "Redigera"
 
 #. Default: Library
 #: src/osha/oira/content/templates/addbar.pt:10
@@ -3716,16 +3767,16 @@ msgstr ""
 
 #: src/osha/oira/content/templates/addbar.pt:13
 msgid "Add Module"
-msgstr ""
+msgstr "Lägg till Modul"
 
 #: src/osha/oira/content/templates/addbar.pt:15
 msgid "Add Submodule"
-msgstr ""
+msgstr "Lägg till Delmodul"
 
 #. Default: Add ${typename}
 #: src/osha/oira/content/templates/addbar.pt:23
 msgid "button_add_factory"
-msgstr ""
+msgstr "Lägg till ${typename}"
 
 #. Default: Documentation
 #: src/osha/oira/content/templates/documentation_view.pt:12
@@ -3743,8 +3794,8 @@ msgstr "online-klient"
 msgid "intro_documenation"
 msgstr ""
 "Introduktionstexten visas när man startar en ny OIRA-verktyg session. Om "
-"ingen introduktion anges kommer en standardtext att visas. Tänk på att hålla "
-"texten kort så att den får plats på små enheter som mobiltelefoner och "
+"ingen introduktion anges kommer en standardtext att visas. Tänk på att hålla"
+" texten kort så att den får plats på små enheter som mobiltelefoner och "
 "handdatorer."
 
 #. Default: Go to the ${homepage_edit_form} to change the way the homepage
@@ -3763,8 +3814,8 @@ msgstr "appendix"
 #: src/osha/oira/content/templates/documentation_view.pt:23
 msgid "documentation_appendix"
 msgstr ""
-"Sidor som skapas i $ {appendix}-mappen är tillgängliga via länkarna i online-"
-"klientens sidfot."
+"Sidor som skapas i $ {appendix}-mappen är tillgängliga via länkarna i "
+"online-klientens sidfot."
 
 #. Default: online help
 #: src/osha/oira/content/templates/documentation_view.pt:28
@@ -3782,8 +3833,8 @@ msgstr ""
 
 #: src/osha/oira/content/templates/library.pt:17
 msgid ""
-"You can use content from the standard libary as provided by OSHA in your own "
-"surveys. Just select the module or risk you want to use in the list below "
+"You can use content from the standard libary as provided by OSHA in your own"
+" surveys. Just select the module or risk you want to use in the list below "
 "and it will be copied to your survey."
 msgstr ""
 
@@ -3978,7 +4029,7 @@ msgstr ""
 #. Default: Sectors
 #: src/osha/oira/content/templates/sectorcontainer_view.pt:12
 msgid "title_sectors"
-msgstr ""
+msgstr "Branscher"
 
 #. Default: Classification code
 #: src/osha/oira/content/templates/survey_view.pt:24
@@ -4091,7 +4142,8 @@ msgid ""
 msgstr ""
 
 #. Default: This method involves risk assessment by Severity x Exposure,
-#. whereas these have to be understood as follows; Severity of injury linked to
+#. whereas these have to be understood as follows; Severity of injury linked
+#. to
 #. hazard - Exposure (Frequency) to the hazard
 #: src/osha/oira/content/templates/surveygroup_add.pt:94
 msgid "help_survey_evaluation_algorithm_simplified"
@@ -4117,7 +4169,8 @@ msgid "header_sector_tool_version_list"
 msgstr ""
 
 #. Default: Your password must contain at least 5 characters, including at
-#. least one capital letter, one number and one special character (e.g. $, # or
+#. least one capital letter, one number and one special character (e.g. $, #
+#. or
 #. @).
 #: src/osha/oira/nuplone/pwreset.py:17
 msgid "password_policy_conditions"
@@ -4162,8 +4215,8 @@ msgstr "Detta OiRA-verktyg har inga profilfrågor."
 
 #: src/osha/oira/profiles/default/types/euphorie.profilequestion.xml:8
 msgid ""
-"The basic architecture of an Online interactive Risk Assessment consists of: "
-"- profile questions (questions defining the company profile) - modules and "
+"The basic architecture of an Online interactive Risk Assessment consists of:"
+" - profile questions (questions defining the company profile) - modules and "
 "potentially sub-modules - risks (positive statements) Profile questions are "
 "used to determine whether particular modules apply to the end user at all "
 "(OPTIONAL), or whether they should be repeated a number of times "
@@ -4178,8 +4231,8 @@ msgstr ""
 "av: - profilfrågor (frågor som definierar företagets profil) - moduler och  "
 "delmoduler - risker (bekräftade uttalanden). Profilfrågor används för att "
 "avgöra om enskilda moduler alls gäller för slutanvändaren (TILLVAL), eller "
-"om de bör upprepas ett antal gånger (REPETERBAR). Sådana frågor ställs INNAN "
-"en riskidentifiering och utvärdering påbörjas. Om slutanvändaren inte "
+"om de bör upprepas ett antal gånger (REPETERBAR). Sådana frågor ställs INNAN"
+" en riskidentifiering och utvärdering påbörjas. Om slutanvändaren inte "
 "bekräftar att en profilfråga (TILLVALl) är relevant (genom att kryssa i "
 "rutan), då kommer motsvarande modul att hoppas över helt. Om slutanvändaren "
 "anger mer än ett alternativ till en repeterbar profilfråga kommer "
@@ -4212,7 +4265,8 @@ msgstr "Är du medveten om alla risker?"
 
 #. Default: Including the risks to your employees and your equipment? What if
 #. there is an accident with one of the machines? What if an employee is
-#. exposed to hazardous substances? A risk assessment helps you to define these
+#. exposed to hazardous substances? A risk assessment helps you to define
+#. these
 #. risks and tackle them head on. A risk assessment mainly consists of two
 #. parts: a <dynamic element> with all the risks in your company and an
 #. <dynamic element> with details of how to deal with these risks. These two
@@ -4226,8 +4280,8 @@ msgstr ""
 "för farliga ämnen? En riskbedömning hjälper dig att definiera dessa risker "
 "och hantera dem direkt. En riskbedömning består huvudsakligen av två delar: "
 "en med alla risker för ditt företag och en med information för hur man "
-"hanterar dessa risker. Dessa två komponenter låter dig begränsa riskerna för "
-"dina anställda och ditt företag och därmed även den finansiella risken."
+"hanterar dessa risker. Dessa två komponenter låter dig begränsa riskerna för"
+" dina anställda och ditt företag och därmed även den finansiella risken."
 
 #. Default: The assessment is not complicated
 #: src/osha/oira/templates/default_introduction.pt:9
@@ -4269,28 +4323,41 @@ msgstr "OiRA-verktyget"
 #: src/osha/oira/templates/default_introduction.pt:16
 msgid "intro_oira_tool"
 msgstr ""
-"Detta verktyg för riskbedömning är främst avsett för mikroföretag (mindre än "
-"tio anställda) och små (mindre än 50 anställda) företag/organisationer."
+"Detta verktyg för riskbedömning är främst avsett för mikroföretag (mindre än"
+" tio anställda) och små (mindre än 50 anställda) företag/organisationer."
 
 #. Default: CC License
 #: src/osha/oira/tiles/templates/footer.pt:32
 msgid "cc-license"
 msgstr ""
 
-#. Default: In case you have identified risks not included in the tool, you are
+#. Default: In case you have identified risks not included in the tool, you
+#. are
 #. able to add them now:
 #: src/osha/oira/upgrade/upgrade.py:190
 msgid "description_other_risks"
 msgstr ""
+"Den grundläggande strukturen för en interaktiv riskbedömning online (OiRA) "
+"består av: - profilfrågor (frågor som definierar företagets profil) - "
+"moduler och eventuella delmoduler - risker (positiva rapporter) "
+"Profilfrågorna används för att avgöra om enskilda moduler överhuvudtaget "
+"gäller för slutanvändaren (TILLVAL), eller om de bör upprepas ett antal "
+"gånger (REPETERBAR). Sådana frågor ställs INNAN en riskidentifiering och "
+"utvärdering startas. Om slutanvändaren inte bekräftar att en profilfråga "
+"(tillval) är relevant (genom att kryssa i rutan), kommer motsvarande modul "
+"att hoppas över helt. Om slutanvändaren anger mer än ett alternativ till en "
+"repeterbar profilfråga kommer motsvarande modul att upprepas ett specifikt "
+"antal gånger."
 
 #. Default: <p>Would you now like to add your own defined risks to this
-#. tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks,
+#. tool?</p><p><strong>Important:</strong> In order to avoid duplicating
+#. risks,
 #. we strongly recommend you to go first through all the previous modules, if
 #. you have not done it yet.</p><p>If you don't need to add risks, please
 #. select 'No.'</p>
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
-msgstr ""
+msgstr "Lista över alla risker."
 
 #~ msgid "label_day"
 #~ msgstr "Dag"
@@ -4338,23 +4405,23 @@ msgstr ""
 
 #~ msgid "help_sector_colours"
 #~ msgstr ""
-#~ "De färger du väljer här gäller endast för klientsidans applikation. "
-#~ "Försök att välja färger som har tillräckligt hög kontrast för att hålla "
-#~ "texten på varje knapp läsbar."
+#~ "De färger du väljer här gäller endast för klientsidans applikation. Försök "
+#~ "att välja färger som har tillräckligt hög kontrast för att hålla texten på "
+#~ "varje knapp läsbar."
 
 #~ msgid "help_colour_picker"
 #~ msgstr ""
-#~ "Välj bland nedanstående färger för att välja din organisations färger. "
-#~ "Det funkar bäst att välja en mörkare färg för huvudfärgen och en ljusare "
-#~ "färg för stödfärgen."
+#~ "Välj bland nedanstående färger för att välja din organisations färger. Det "
+#~ "funkar bäst att välja en mörkare färg för huvudfärgen och en ljusare färg "
+#~ "för stödfärgen."
 
 #~ msgid "help_sector_logo"
 #~ msgstr ""
-#~ "Logotypen visas både på applikationen för klientsidan som din "
-#~ "användargrupp kommer att se samt på redaktörsmiljön i det övre vänstra "
-#~ "hörnet. Se till att din bild är i formatet png, jpg eller gif och inte "
-#~ "innehåller några specialtecken. Den nya logotypen blir inte märkbar "
-#~ "förrän efter att du har sparat ändringarna."
+#~ "Logotypen visas både på applikationen för klientsidan som din användargrupp "
+#~ "kommer att se samt på redaktörsmiljön i det övre vänstra hörnet. Se till att"
+#~ " din bild är i formatet png, jpg eller gif och inte innehåller några "
+#~ "specialtecken. Den nya logotypen blir inte märkbar förrän efter att du har "
+#~ "sparat ändringarna."
 
 #~ msgid "label_logo_selection"
 #~ msgstr "Vilken logotyp vill du visa i det övre vänstra hörnet?"
@@ -4367,9 +4434,9 @@ msgstr ""
 
 #~ msgid "logo_instructions"
 #~ msgstr ""
-#~ "Du kan få bäst resultat om du laddar upp en logotyp som ${transparent} "
-#~ "PNG-fil på minst 100 pixlar på höjden. Det är bra att ladda upp större "
-#~ "bilder, logotypen skalas automatiskt ner till rätt storlek."
+#~ "Du kan få bäst resultat om du laddar upp en logotyp som ${transparent} PNG-"
+#~ "fil på minst 100 pixlar på höjden. Det är bra att ladda upp större bilder, "
+#~ "logotypen skalas automatiskt ner till rätt storlek."
 
 #~ msgid "label_contact_person"
 #~ msgstr "Kontaktperson"

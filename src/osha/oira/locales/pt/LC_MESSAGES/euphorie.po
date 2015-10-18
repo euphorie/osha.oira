@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.23.dev0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-15 18:41+0200\n"
+"POT-Creation-Date: 2015-10-16 21:56+0200\n"
 "PO-Revision-Date: 2013-08-15 11:33+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -687,7 +687,7 @@ msgstr "Lamentamos, mas ocorreu um erro imprevisto."
 #. Default: Delete this measure
 #: src/osha/oira/manual_translations.py:214
 #: src/osha/oira/client/templates/risk_actionplan.pt:65
-#: src/osha/oira/client/templates/risk_actionplan.pt:150
+#: src/osha/oira/client/templates/risk_actionplan.pt:151
 msgid "label_remove_measure"
 msgstr "Apagar esta medida"
 
@@ -700,7 +700,7 @@ msgstr "Adicionar Medida"
 
 #. Default: Are you sure you want to delete this measure? This action can not
 #. be reverted.
-#: src/osha/oira/manual_translations.py:219 src/osha/oira/client/risk.py:229
+#: src/osha/oira/manual_translations.py:219 src/osha/oira/client/risk.py:230
 msgid ""
 "Are you sure you want to delete this measure? This action can not be "
 "reverted."
@@ -711,7 +711,7 @@ msgstr ""
 #. Default: The current text in the fields 'Action plan', 'Prevention plan' and
 #. 'Requirements' of this measure will be overwritten. This action cannot be
 #. reverted. Are you sure you want to continue?
-#: src/osha/oira/manual_translations.py:221 src/osha/oira/client/risk.py:233
+#: src/osha/oira/manual_translations.py:221 src/osha/oira/client/risk.py:234
 msgid ""
 "The current text in the fields 'Action plan', 'Prevention plan' and "
 "'Requirements' of this measure will be overwritten. This action cannot be "
@@ -794,7 +794,7 @@ msgid "error_validation_whole_number"
 msgstr "Este valor deve ser um número inteiro."
 
 #. Default: This value must be a positive whole number.
-#: src/osha/oira/manual_translations.py:243 src/osha/oira/client/risk.py:246
+#: src/osha/oira/manual_translations.py:243 src/osha/oira/client/risk.py:247
 msgid "error_validation_positive_whole_number"
 msgstr "Este valor deve ser um número inteiro positivo."
 
@@ -804,12 +804,12 @@ msgid "error_validation_required"
 msgstr "Este valor é obrigatório."
 
 #. Default: This date must be on or before the end date.
-#: src/osha/oira/manual_translations.py:245 src/osha/oira/client/risk.py:238
+#: src/osha/oira/manual_translations.py:245 src/osha/oira/client/risk.py:239
 msgid "error_validation_before_end_date"
 msgstr "Esta data deve ser igual ou anterior à data final."
 
 #. Default: This date must be on or after the start date.
-#: src/osha/oira/manual_translations.py:246 src/osha/oira/client/risk.py:242
+#: src/osha/oira/manual_translations.py:246 src/osha/oira/client/risk.py:243
 msgid "error_validation_after_start_date"
 msgstr "Esta data deve ser igual ou posterior à data inicial."
 
@@ -1000,53 +1000,53 @@ msgstr "Medida ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
 #: src/osha/oira/client/report.py:469
-#: src/osha/oira/client/templates/risk_actionplan.pt:84
-#: src/osha/oira/client/templates/risk_actionplan.pt:171
+#: src/osha/oira/client/templates/risk_actionplan.pt:85
+#: src/osha/oira/client/templates/risk_actionplan.pt:172
 #: src/osha/oira/content/templates/solution_view.pt:22
 msgid "label_measure_action_plan"
 msgstr "Abordagem geral (para eliminar ou reduzir o risco)"
 
 #. Default: Specific action(s) required to implement this approach
 #: src/osha/oira/client/report.py:471
-#: src/osha/oira/client/templates/risk_actionplan.pt:89
-#: src/osha/oira/client/templates/risk_actionplan.pt:173
+#: src/osha/oira/client/templates/risk_actionplan.pt:90
+#: src/osha/oira/client/templates/risk_actionplan.pt:174
 #: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
 msgstr "Ação(ões) específica(s) necessária(s) para implementar esta abordagem"
 
 #. Default: Level of expertise and/or requirements needed
 #: src/osha/oira/client/report.py:473
-#: src/osha/oira/client/templates/risk_actionplan.pt:94
-#: src/osha/oira/client/templates/risk_actionplan.pt:175
+#: src/osha/oira/client/templates/risk_actionplan.pt:95
+#: src/osha/oira/client/templates/risk_actionplan.pt:176
 #: src/osha/oira/content/templates/solution_view.pt:29
 msgid "label_measure_requirements"
 msgstr "Nível de competência e/ou requisitos necessários"
 
 #. Default: Who is responsible?
 #: src/osha/oira/client/report.py:475
-#: src/osha/oira/client/templates/risk_actionplan.pt:103
-#: src/osha/oira/client/templates/risk_actionplan.pt:181
+#: src/osha/oira/client/templates/risk_actionplan.pt:104
+#: src/osha/oira/client/templates/risk_actionplan.pt:182
 msgid "label_action_plan_responsible"
 msgstr "Quem é o responsável?"
 
 #. Default: Budget
 #: src/osha/oira/client/report.py:477
-#: src/osha/oira/client/templates/risk_actionplan.pt:108
-#: src/osha/oira/client/templates/risk_actionplan.pt:186
+#: src/osha/oira/client/templates/risk_actionplan.pt:109
+#: src/osha/oira/client/templates/risk_actionplan.pt:187
 msgid "label_action_plan_budget"
 msgstr "Orçamento"
 
 #. Default: Planning start
 #: src/osha/oira/client/report.py:478
-#: src/osha/oira/client/templates/risk_actionplan.pt:117
-#: src/osha/oira/client/templates/risk_actionplan.pt:193
+#: src/osha/oira/client/templates/risk_actionplan.pt:118
+#: src/osha/oira/client/templates/risk_actionplan.pt:194
 msgid "label_action_plan_start"
 msgstr "A planear o início"
 
 #. Default: Planning end
 #: src/osha/oira/client/report.py:479
-#: src/osha/oira/client/templates/risk_actionplan.pt:128
-#: src/osha/oira/client/templates/risk_actionplan.pt:200
+#: src/osha/oira/client/templates/risk_actionplan.pt:129
+#: src/osha/oira/client/templates/risk_actionplan.pt:201
 msgid "label_action_plan_end"
 msgstr "A planear o fim"
 
@@ -1156,19 +1156,38 @@ msgstr ""
 msgid "help_default_frequency"
 msgstr ""
 
-#. Default: The measure in your action plan has been saved.
-#: src/osha/oira/client/risk.py:279
+#: src/osha/oira/client/risk.py:307
+msgid "No changes were made to measures in your action plan."
+msgstr ""
+
+#. Default: A measure has been added to your action plan.
+#: src/osha/oira/client/risk.py:312
 msgid "message_measure_saved"
 msgstr ""
 
-#. Default: ${no_of_measures} measures in your action plan have been saved.
-#: src/osha/oira/client/risk.py:284
+#. Default: ${no_of_measures} measures have been added to your action plan.
+#: src/osha/oira/client/risk.py:317
 msgid "message_measures_saved"
 msgstr ""
 
-#. Default: You did not provide any measures in your action plan.
-#: src/osha/oira/client/risk.py:292
-msgid "message_no_measure"
+#. Default: A measure has been updated in your action plan.
+#: src/osha/oira/client/risk.py:326
+msgid "message_measure_updated"
+msgstr ""
+
+#. Default: ${no_of_measures} measures have been updated in your action plan.
+#: src/osha/oira/client/risk.py:331
+msgid "message_measures_updated"
+msgstr ""
+
+#. Default: A measure has been removed from your action plan.
+#: src/osha/oira/client/risk.py:340
+msgid "message_measure_removed"
+msgstr ""
+
+#. Default: ${no_of_measures} measures have been removed from your action plan.
+#: src/osha/oira/client/risk.py:345
+msgid "message_measures_removed"
 msgstr ""
 
 #. Default: Change password
@@ -1492,9 +1511,9 @@ msgstr "Exclusão de Responsabilidade"
 msgid "disclaimer_other_websites"
 msgstr ""
 "Esta ferramenta contém ligações a outros sítios web que não estão sob o "
-"controlo da Agência Europeia para Segurança e Saúde no Trabalho e das organizações "
-"envolvidas. A Agência e as organizações envolvidas não aceitam qualquer "
-"responsabilidade em relação ao conteúdo destes sítios web."
+"controlo da Agência Europeia para Segurança e Saúde no Trabalho e das "
+"organizações envolvidas. A Agência e as organizações envolvidas não aceitam "
+"qualquer responsabilidade em relação ao conteúdo destes sítios web."
 
 #. Default: The European Agency for Safety and Health at Work and the
 #. organisations involved will not be liable for any false, inaccurate,
@@ -1557,8 +1576,8 @@ msgstr ""
 "Além disso, a Agência e as organizações envolvidas na produção da ferramenta "
 "OiRA não aceita qualquer responsabilidade por danos e reclamações "
 "resultantes da utilização da ferramenta ou incapacidade de utilização da "
-"ferramenta e dos dados nesta guardados. De forma similar, a EU-OSHA não aceita "
-"qualquer responsabilidade em caso de indisponibilidade da função das "
+"ferramenta e dos dados nesta guardados. De forma similar, a EU-OSHA não "
+"aceita qualquer responsabilidade em caso de indisponibilidade da função das "
 "ferramentas OiRA para imprimir o relatório, guardar a avaliação de riscos "
 "gerada automaticamente pela ferramenta. Por isso, o empregador deve "
 "certificar-se de que tem sempre à disposição uma avaliação de riscos "
@@ -1985,6 +2004,23 @@ msgstr ""
 msgid "Measure to be implemented by"
 msgstr ""
 
+#. Default: High priority risks
+#: src/osha/oira/client/templates/measures_overview.pt:80
+#: src/osha/oira/client/templates/status.pt:108
+#: src/osha/oira/client/templates/status_print.pt:101
+msgid "heading_high_prio_risks"
+msgstr "Riscos de elevada prioridade"
+
+#. Default: Medium priority risks
+#: src/osha/oira/client/templates/measures_overview.pt:112
+msgid "heading_medium_prio_risks"
+msgstr ""
+
+#. Default: Low priority risks
+#: src/osha/oira/client/templates/measures_overview.pt:127
+msgid "heading_low_prio_risks"
+msgstr ""
+
 #. Default: Next
 #: src/osha/oira/client/templates/module_actionplan.pt:50
 #: src/osha/oira/client/templates/module_evaluation.pt:40
@@ -2012,7 +2048,7 @@ msgstr "Descrição do risco"
 #: src/osha/oira/client/templates/module_customization.pt:28
 #: src/osha/oira/client/templates/module_customization.pt:45
 #: src/osha/oira/client/templates/module_customization.pt:70
-#: src/osha/oira/client/templates/risk_actionplan.pt:210
+#: src/osha/oira/client/templates/risk_actionplan.pt:211
 #: src/osha/oira/client/templates/risk_evaluation.pt:125
 #: src/osha/oira/client/templates/risk_identification.pt:157
 msgid "label_comment"
@@ -2037,7 +2073,7 @@ msgstr "Adicionar Risco"
 #: src/osha/oira/client/templates/profile.pt:99
 #: src/osha/oira/client/templates/report.pt:41
 #: src/osha/oira/client/templates/report_company.pt:94
-#: src/osha/oira/client/templates/risk_actionplan.pt:219
+#: src/osha/oira/client/templates/risk_actionplan.pt:220
 #: src/osha/oira/client/templates/risk_evaluation.pt:121
 #: src/osha/oira/client/templates/risk_identification.pt:165
 msgid "label_save_and_continue"
@@ -2046,7 +2082,7 @@ msgstr "Guardar e continuar"
 #. Default: Previous
 #: src/osha/oira/client/templates/module_evaluation.pt:39
 #: src/osha/oira/client/templates/report_company.pt:92
-#: src/osha/oira/client/templates/risk_actionplan.pt:217
+#: src/osha/oira/client/templates/risk_actionplan.pt:218
 #: src/osha/oira/client/templates/risk_evaluation.pt:120
 #: src/osha/oira/client/templates/risk_identification.pt:164
 msgid "label_previous"
@@ -2322,8 +2358,8 @@ msgstr ""
 #: src/osha/oira/client/templates/reminder.pt:23
 msgid "description_password_reminder"
 msgstr ""
-"Insira o seu endereço de correio eletrónico. Os seu dados de acesso "
-"ser-lhe-ão enviados."
+"Insira o seu endereço de correio eletrónico. Os seu dados de acesso ser-lhe-"
+"ão enviados."
 
 #: src/osha/oira/client/templates/rename-session.pt:16
 msgid "Change name of session"
@@ -2718,7 +2754,7 @@ msgstr "Contém: um quadro geral das medidas a implementar."
 
 #. Default: Measure
 #: src/osha/oira/client/templates/risk_actionplan.pt:62
-#: src/osha/oira/client/templates/risk_actionplan.pt:147
+#: src/osha/oira/client/templates/risk_actionplan.pt:148
 #: src/osha/oira/content/templates/solution_view.pt:12
 #: src/osha/oira/profiles/default/types/euphorie.solution.xml:5
 msgid "Measure"
@@ -2726,13 +2762,13 @@ msgstr "Medida"
 
 #. Default: Pre-fill
 #: src/osha/oira/client/templates/risk_actionplan.pt:64
-#: src/osha/oira/client/templates/risk_actionplan.pt:149
+#: src/osha/oira/client/templates/risk_actionplan.pt:150
 msgid "label_prefill"
 msgstr "Preenchimento prévio"
 
 #. Default: Select one or more of the known common measures provided.
 #: src/osha/oira/client/templates/risk_actionplan.pt:69
-#: src/osha/oira/client/templates/risk_actionplan.pt:155
+#: src/osha/oira/client/templates/risk_actionplan.pt:156
 msgid "label_select_measure"
 msgstr ""
 "Selecione uma ou mais das medidas comuns conhecidas que foram fornecidas."
@@ -2743,9 +2779,9 @@ msgid "button_add"
 msgstr "Adicionar"
 
 #. Default: Description
-#: src/osha/oira/client/templates/risk_actionplan.pt:82
-#: src/osha/oira/client/templates/risk_actionplan.pt:169
-#: src/osha/oira/client/templates/risk_actionplan.pt:226
+#: src/osha/oira/client/templates/risk_actionplan.pt:83
+#: src/osha/oira/client/templates/risk_actionplan.pt:170
+#: src/osha/oira/client/templates/risk_actionplan.pt:227
 msgid "label_description"
 msgstr "Descrição"
 
@@ -2757,9 +2793,9 @@ msgstr "Descrição"
 #. OSH knowledge or training and/or consultation of OSH guidance required”, or
 #. “OSH expert”. You can also describe here any other additional requirement
 #. (if any).
-#: src/osha/oira/client/templates/risk_actionplan.pt:83
-#: src/osha/oira/client/templates/risk_actionplan.pt:170
-#: src/osha/oira/client/templates/risk_actionplan.pt:227
+#: src/osha/oira/client/templates/risk_actionplan.pt:84
+#: src/osha/oira/client/templates/risk_actionplan.pt:171
+#: src/osha/oira/client/templates/risk_actionplan.pt:228
 msgid "actionplan_measure_tooltip"
 msgstr ""
 "Descreva: 1) qual é a sua abordagem geral para eliminar ou (se o risco for "
@@ -2768,15 +2804,15 @@ msgstr ""
 "nível de competência necessário para implementar a medida, por exemplo "
 "\"senso comum (sem conhecimento necessário da SST)\", \"nenhuma competência "
 "da SST específica, mas conhecimento mínimo da SST ou formação e/ou consulta "
-"necessárias em SST \", ou \"competência SST\". Também é possível "
-"descrever aqui qualquer outro requisito adicional (se existente)."
+"necessárias em SST \", ou \"competência SST\". Também é possível descrever "
+"aqui qualquer outro requisito adicional (se existente)."
 
 #. Default: Appoint someone in your company to be responsible for the
 #. implementation of this measure. This person will have the authority to take
 #. the steps described in the Plan and/or the responsibility to ensure that
 #. they are carried out.
-#: src/osha/oira/client/templates/risk_actionplan.pt:104
-#: src/osha/oira/client/templates/risk_actionplan.pt:182
+#: src/osha/oira/client/templates/risk_actionplan.pt:105
+#: src/osha/oira/client/templates/risk_actionplan.pt:183
 msgid "actionplan_measure_responsible_tooltip"
 msgstr ""
 "Designe alguém na sua empresa como responsável pela implementação desta "
@@ -2784,15 +2820,15 @@ msgstr ""
 "e/ou responsabilidade para assegurar que os mesmos são executados."
 
 #. Default: Please enter the budget in whole Euros.
-#: src/osha/oira/client/templates/risk_actionplan.pt:109
+#: src/osha/oira/client/templates/risk_actionplan.pt:110
 msgid "error_invalid_budget"
 msgstr "Introduza o orçamento no seu todo em Euros."
 
 #. Default: Although some measures do not cost any money, most do. The measures
 #. should therefore be budgeted for; include them in the annual budget round if
 #. necessary.
-#: src/osha/oira/client/templates/risk_actionplan.pt:110
-#: src/osha/oira/client/templates/risk_actionplan.pt:187
+#: src/osha/oira/client/templates/risk_actionplan.pt:111
+#: src/osha/oira/client/templates/risk_actionplan.pt:188
 msgid "actionplan_measure_budget_tooltip"
 msgstr ""
 "Apesar de algumas medidas serem gratuitas, a maioria não. As medidas devem "
@@ -2800,7 +2836,7 @@ msgstr ""
 "orçamental anual."
 
 #. Default: Add another measure
-#: src/osha/oira/client/templates/risk_actionplan.pt:142
+#: src/osha/oira/client/templates/risk_actionplan.pt:143
 msgid "label_add"
 msgstr "Adicionar outra medida"
 
@@ -3090,6 +3126,16 @@ msgstr ""
 msgid "heading_num_low_prio_risks"
 msgstr ""
 
+#. Default: (≥1 measures)
+#: src/osha/oira/client/templates/risks_overview.pt:247
+msgid "label_with_measures"
+msgstr ""
+
+#. Default: (without measures)
+#: src/osha/oira/client/templates/risks_overview.pt:247
+msgid "label_without_measures"
+msgstr ""
+
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:255
 msgid "heading_possible_risks"
@@ -3192,12 +3238,6 @@ msgstr "Estado do ${survey_title} "
 #: src/osha/oira/client/templates/status.pt:22
 msgid "header_questions_answered"
 msgstr ""
-
-#. Default: High priority risks
-#: src/osha/oira/client/templates/status.pt:108
-#: src/osha/oira/client/templates/status_print.pt:101
-msgid "heading_high_prio_risks"
-msgstr "Riscos de elevada prioridade"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/status_print.pt:94
@@ -4379,8 +4419,9 @@ msgstr "Licença CC"
 #. able to add them now:
 #: src/osha/oira/upgrade/upgrade.py:190
 msgid "description_other_risks"
-msgstr "No caso de considerar outros riscos não contidos na ferramenta, tem a"
-"possibilidade de adicioná-los agora:"
+msgstr ""
+"No caso de considerar outros riscos não contidos na ferramenta, tem "
+"apossibilidade de adicioná-los agora:"
 
 #. Default: <p>Would you now like to add your own defined risks to this
 #. tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks,
@@ -4389,10 +4430,12 @@ msgstr "No caso de considerar outros riscos não contidos na ferramenta, tem a"
 #. select 'No.'</p>
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
-msgstr "<p>Quer adicionar agora a esta ferramenta outros riscos?</p>"
-"<p><strong>Importante:</strong> Para não ter duplicaçao de riscos, "
-"recomendamos que primeiro explore os módulos predefinidos, se ainda não o fez.</p>"
-"<p>Se não precisa de adicionar outros riscos, por favor selecione 'Não'.</p>"
+msgstr ""
+"<p>Quer adicionar agora a esta ferramenta outros riscos?</"
+"p><p><strong>Importante:</strong> Para não ter duplicaçao de riscos, "
+"recomendamos que primeiro explore os módulos predefinidos, se ainda não o "
+"fez.</p><p>Se não precisa de adicionar outros riscos, por favor selecione "
+"'Não'.</p>"
 
 #~ msgid "label_close_panel"
 #~ msgstr "Fechar painel"

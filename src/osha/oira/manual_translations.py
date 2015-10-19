@@ -228,7 +228,7 @@ _(u"label_evaluation_phase", default=u"Evaluation phase")
 _(u"Description", default=u"Description")
 _(u"evalmethod_fixed", default=u"Skip evaluation")
 _(u"label_fixed_priority", default=u"priority")
-_(u"message_lock_warn", default=u"Please be aware that you have %s more login attempts before your account will be locked.")
+# _(u"message_lock_warn", default=u"Please be aware that you have %s more login attempts before your account will be locked.")
 
 _(u"What is OiRA (Online Interactive Risk Assessment)?", default=u"What is OiRA (Online Interactive Risk Assessment)?")
 _(u"OiRA stands for Online Interactive Risk Assessment. It is a web-based tool that allows you to perform a health and safety risk assessment of your workplace.",

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-19 16:40+0200\n"
+"POT-Creation-Date: 2015-10-19 16:44+0200\n"
 "PO-Revision-Date: 2015-02-10 12:04+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -732,12 +732,6 @@ msgstr "Mati sleppt"
 msgid "label_fixed_priority"
 msgstr "Forgangur"
 
-#. Default: Please be aware that you have %s more login attempts before your
-#. account will be locked.
-#: src/osha/oira/manual_translations.py:231
-msgid "message_lock_warn"
-msgstr ""
-
 #. Default: What is OiRA (Online Interactive Risk Assessment)?
 #: src/osha/oira/manual_translations.py:233
 #: src/osha/oira/client/templates/login.pt:29
@@ -1184,12 +1178,12 @@ msgstr "Skipta um lykilorð"
 #. Default: Page
 #: src/osha/oira/client/survey.py:204
 msgid "label_page"
-msgstr ""
+msgstr "Síða"
 
 #. Default: of
 #: src/osha/oira/client/survey.py:205
 msgid "label_page_of"
-msgstr ""
+msgstr "af"
 
 #. Default: Added risks (by you)
 #: src/osha/oira/client/survey.py:283
@@ -3864,7 +3858,7 @@ msgstr "Bæta við undirflokki"
 #. Default: Add ${typename}
 #: src/osha/oira/content/templates/addbar.pt:23
 msgid "button_add_factory"
-msgstr ""
+msgstr "Add ${typename}"
 
 #. Default: Documentation
 #: src/osha/oira/content/templates/documentation_view.pt:12
@@ -4269,6 +4263,8 @@ msgstr "Útgáfur OiRA verkfærisins"
 #: src/osha/oira/nuplone/pwreset.py:17
 msgid "password_policy_conditions"
 msgstr ""
+"Your password must contain at least 5 characters, including at least one "
+"capital letter, one number and one special character (e.g. $, # or @)."
 
 #. Default: Unauthorized
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:14

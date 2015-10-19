@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-19 16:40+0200\n"
+"POT-Creation-Date: 2015-10-19 16:44+0200\n"
 "PO-Revision-Date: 2013-08-15 11:22+0200\n"
 "Last-Translator: xl <xl@hol.gr>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -774,12 +774,6 @@ msgstr "Κατ' εκτίμηση"
 msgid "label_fixed_priority"
 msgstr "προτεραιότητα"
 
-#. Default: Please be aware that you have %s more login attempts before your
-#. account will be locked.
-#: src/osha/oira/manual_translations.py:231
-msgid "message_lock_warn"
-msgstr ""
-
 #. Default: What is OiRA (Online Interactive Risk Assessment)?
 #: src/osha/oira/manual_translations.py:233
 #: src/osha/oira/client/templates/login.pt:29
@@ -1241,12 +1235,12 @@ msgstr "Αλλαγή κωδικού πρόσβασης"
 #. Default: Page
 #: src/osha/oira/client/survey.py:204
 msgid "label_page"
-msgstr ""
+msgstr "Σελίδα"
 
 #. Default: of
 #: src/osha/oira/client/survey.py:205
 msgid "label_page_of"
-msgstr ""
+msgstr "από"
 
 #. Default: Added risks (by you)
 #: src/osha/oira/client/survey.py:283
@@ -4502,6 +4496,8 @@ msgstr "Εκδόσεις Εργαλείου OiRA"
 #: src/osha/oira/nuplone/pwreset.py:17
 msgid "password_policy_conditions"
 msgstr ""
+"Your password must contain at least 5 characters, including at least one "
+"capital letter, one number and one special character (e.g. $, # or @)."
 
 #. Default: Unauthorized
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:14

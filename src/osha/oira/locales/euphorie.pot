@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-16 21:56+0200\n"
+"POT-Creation-Date: 2015-10-19 12:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -304,6 +304,7 @@ msgstr ""
 
 #. Default: Indicate the severity if this risk occurs.
 #: src/osha/oira/manual_translations.py:95 src/osha/oira/client/risk.py:126
+#: src/osha/oira/content/survey.py:26
 msgid "help_default_severity"
 msgstr ""
 
@@ -1054,46 +1055,46 @@ msgstr ""
 
 #. Default: Indicate how likely occurence of this risk is in a normal
 #. situation.
-#: src/osha/oira/client/risk.py:120
+#: src/osha/oira/client/risk.py:120 src/osha/oira/content/survey.py:20
 msgid "help_default_probability"
 msgstr ""
 
 #. Default: Indicate how often this risk occurs in a normal situation.
-#: src/osha/oira/client/risk.py:123
+#: src/osha/oira/client/risk.py:123 src/osha/oira/content/survey.py:23
 msgid "help_default_frequency"
 msgstr ""
 
-#: src/osha/oira/client/risk.py:307
+#: src/osha/oira/client/risk.py:306
 msgid "No changes were made to measures in your action plan."
 msgstr ""
 
 #. Default: A measure has been added to your action plan.
-#: src/osha/oira/client/risk.py:312
+#: src/osha/oira/client/risk.py:311
 msgid "message_measure_saved"
 msgstr ""
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
-#: src/osha/oira/client/risk.py:317
+#: src/osha/oira/client/risk.py:316
 msgid "message_measures_saved"
 msgstr ""
 
 #. Default: A measure has been updated in your action plan.
-#: src/osha/oira/client/risk.py:326
+#: src/osha/oira/client/risk.py:325
 msgid "message_measure_updated"
 msgstr ""
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
-#: src/osha/oira/client/risk.py:331
+#: src/osha/oira/client/risk.py:330
 msgid "message_measures_updated"
 msgstr ""
 
 #. Default: A measure has been removed from your action plan.
-#: src/osha/oira/client/risk.py:340
+#: src/osha/oira/client/risk.py:339
 msgid "message_measure_removed"
 msgstr ""
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
-#: src/osha/oira/client/risk.py:345
+#: src/osha/oira/client/risk.py:344
 msgid "message_measures_removed"
 msgstr ""
 
@@ -3321,7 +3322,7 @@ msgstr ""
 #. and does not contain any special characters.
 #: src/osha/oira/content/risk.py:30 src/osha/oira/content/risk.py:42
 #: src/osha/oira/content/risk.py:54 src/osha/oira/content/risk.py:66
-#: src/osha/oira/content/survey.py:61
+#: src/osha/oira/content/survey.py:71
 msgid "help_image_upload"
 msgstr ""
 
@@ -3445,80 +3446,73 @@ msgid "label_global"
 msgstr ""
 
 #. Default: Include a logo which links to an external website.
-#: src/osha/oira/content/survey.py:24
+#: src/osha/oira/content/survey.py:34
 msgid "label_external_site_enabled"
 msgstr ""
 
 #. Default: Tick this option if you would like to create a hyperlink on the
 #. OiRA tool which points to an external website. The hyperlink will be in the
 #. form of a logo image.
-#: src/osha/oira/content/survey.py:27
+#: src/osha/oira/content/survey.py:37
 msgid "help_external_site_enabled"
 msgstr ""
 
 #. Default: External site URL
-#: src/osha/oira/content/survey.py:39
+#: src/osha/oira/content/survey.py:49
 msgid "label_external_site_url"
 msgstr ""
 
 #. Default: This is the URL of an external site that is linked to. Clicking the
 #. logo or the name will take the user to this URL.
-#: src/osha/oira/content/survey.py:40
+#: src/osha/oira/content/survey.py:50
 msgid "help__external_site_url"
 msgstr ""
 
 #. Default: External site name
-#: src/osha/oira/content/survey.py:50
+#: src/osha/oira/content/survey.py:60
 msgid "label_external_site_name"
 msgstr ""
 
 #. Default: This is the name of the external site that is linked to. It will
 #. appear next to the logo.
-#: src/osha/oira/content/survey.py:51
+#: src/osha/oira/content/survey.py:61
 msgid "help_external_site_name"
 msgstr ""
 
 #. Default: External site logo
-#: src/osha/oira/content/survey.py:60
+#: src/osha/oira/content/survey.py:70
 msgid "label_external_site_logo"
 msgstr ""
 
 #. Default: The criteria applied to evaluate risks are specific of this tool?
 #. (If not, the common criteria descriptions will apply).
-#: src/osha/oira/content/survey.py:69
+#: src/osha/oira/content/survey.py:79
 msgid "label_enable_custom_evaluation_descriptions"
 msgstr ""
 
 #. Default: Tick this option if you would like to define your own descriptions
 #. for the criteria of the evaluation algorithm. The user will see them as
 #. hints when answering the questions to calculate the priority of a risk.
-#: src/osha/oira/content/survey.py:73
+#: src/osha/oira/content/survey.py:83
 msgid "help_enable_custom_evaluation_descriptions"
 msgstr ""
 
-#: src/osha/oira/content/survey.py:86
+#: src/osha/oira/content/survey.py:96
 msgid "Probability"
 msgstr ""
 
 #. Default: Provide your custom explanation here, to override this default
-#. explanation: "${default_explanation}"Indicate how likely occurence of this
-#. risk is in a normal situation.
-#. Default: Provide your custom explanation here, to override this default
-#. explanation: "${default_explanation}"Indicate how often this risk occurs in
-#. a normal situation.
-#. Default: Provide your custom explanation here, to override this default
-#. explanation: "${default_explanation}"Indicate the severity if this risk
-#. occurs.
-#: src/osha/oira/content/survey.py:87 src/osha/oira/content/survey.py:105
-#: src/osha/oira/content/survey.py:123
+#. explanation: "${default_explanation}"
+#: src/osha/oira/content/survey.py:97 src/osha/oira/content/survey.py:112
+#: src/osha/oira/content/survey.py:127
 msgid "description_criteria_explanation"
 msgstr ""
 
-#: src/osha/oira/content/survey.py:104
+#: src/osha/oira/content/survey.py:111
 msgid "Frequency"
 msgstr ""
 
-#: src/osha/oira/content/survey.py:122
+#: src/osha/oira/content/survey.py:126
 msgid "Severity"
 msgstr ""
 

@@ -301,7 +301,6 @@ class OSHAActionPlanView(risk.ActionPlanView):
                     )
                 )
         removed = len(existing_plans)
-        nr_plans = len(new_plans)
         if added == 0 and updated == 0 and removed == 0:
             IStatusMessage(self.request).add(
                 _(u"No changes were made to measures in your action plan."),

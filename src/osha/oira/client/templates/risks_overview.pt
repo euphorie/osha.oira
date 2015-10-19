@@ -11,8 +11,8 @@
       tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers"
       metal:use-macro="context/@@plain/macros/shell">
 
-<body>
-<metal:content fill-slot="content">
+
+<metal:js fill-slot="javascript_head_slot">
     <style type="text/css">
 
 .statuses .page-toc {
@@ -134,6 +134,10 @@ h3.title {margin-bottom:0.7em;}
 ul.title {margin-bottom:3em;}
 .six, .row .six {width: 49%;}
     </style>
+</metal:js>
+
+<body>
+  <metal:content fill-slot="content">
     <article class="rich">
         <p class="byline">
             ${view/date}

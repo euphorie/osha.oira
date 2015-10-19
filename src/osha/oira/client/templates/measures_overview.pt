@@ -11,9 +11,9 @@
       tal:define="client nocall:request/client; webhelpers nocall:context/@@webhelpers"
       metal:use-macro="context/@@plain/macros/shell">
 
-<body>
-    <metal:content fill-slot="content">
-        <style type="text/css">
+
+<metal:js fill-slot="javascript_head_slot">
+   <style type="text/css">
 .prio-high .risk-title, .prio-high td.month {
       color: red;
 }
@@ -47,7 +47,11 @@ p.byline {float:right;}
 h1 {line-height:130%;}
 h3.title {margin-bottom:1.2em;}
 ul.title {margin-bottom:3em;}
-        </style>
+    </style>
+</metal:js>
+
+<body>
+    <metal:content fill-slot="content">
 		<article class="pat-rich report">
             <p class="byline">
                 ${view/date}

@@ -305,7 +305,7 @@ class OSHAActionPlanView(risk.ActionPlanView):
         if added == 0 and updated == 0 and removed == 0:
             IStatusMessage(self.request).add(
                 _(u"No changes were made to measures in your action plan."),
-                type='warning'
+                type='info'
             )
         if added == 1:
             IStatusMessage(self.request).add(

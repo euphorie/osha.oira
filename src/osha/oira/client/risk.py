@@ -274,8 +274,10 @@ class OSHAActionPlanView(risk.ActionPlanView):
                         measure.get("action_plan") != plan.action_plan or
                         measure.get("prevention_plan") != plan.prevention_plan or
                         measure.get("requirements") != plan.requirements or
-                        measure.get("responsible") != plan .responsible or
-                        budget != plan.budget or (
+                        measure.get("responsible") != plan .responsible or (
+                            plan.budget and (budget != str(plan.budget))
+                            or plan.budget is None and budget
+                        ) or (
                             (plan.planning_start and
                                 measure.get('planning_start') != plan.planning_start.strftime('%Y-%m-%d'))
                             or (plan.planning_start is None and measure.get('planning_start'))

@@ -201,6 +201,8 @@ class OSHAStatus(survey.Status):
                 target_language=lang,),
             now.strftime('%Y')
         )
+        self.label_page = translate(_(u"label_page", default=u"Page"), target_language=lang)
+        self.label_page_of = translate(_(u"label_page_of", default=u"of"), target_language=lang)
 
     def module_query(self, sessionid, optional_modules):
         if optional_modules:

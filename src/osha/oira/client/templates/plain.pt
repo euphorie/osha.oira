@@ -45,7 +45,7 @@
     margin:0.5cm 0.5cm 2cm 0.5cm;
 
     @bottom-right {
-        content: "Page " counter(page) " of " counter(pages);
+        content: "${view/label_page} " counter(page) " ${view/label_page_of} " counter(pages);
         font-size: 8pt;
         font-family: sans-serif;
     }

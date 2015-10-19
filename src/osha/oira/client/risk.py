@@ -317,7 +317,7 @@ class OSHAActionPlanView(risk.ActionPlanView):
                 _(
                     u"message_measures_saved",
                     default=u"${no_of_measures} measures have been added to your action plan.",
-                    mapping={'no_of_measures': str(nr_plans)}),
+                    mapping={'no_of_measures': str(added)}),
                 type='success'
             )
 
@@ -331,7 +331,7 @@ class OSHAActionPlanView(risk.ActionPlanView):
                 _(
                     u"message_measures_updated",
                     default=u"${no_of_measures} measures have been updated in your action plan.",
-                    mapping={'no_of_measures': str(nr_plans)}),
+                    mapping={'no_of_measures': str(updated)}),
                 type='success'
             )
 
@@ -345,7 +345,7 @@ class OSHAActionPlanView(risk.ActionPlanView):
                 _(
                     u"message_measures_removed",
                     default=u"${no_of_measures} measures have been removed from your action plan.",
-                    mapping={'no_of_measures': str(nr_plans)}),
+                    mapping={'no_of_measures': str(removed)}),
                 type='success'
             )
         return new_plans

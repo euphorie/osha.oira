@@ -17,6 +17,16 @@ from .. import _
 
 grok.templatedir("templates")
 
+help_default_probability = _(
+    u"help_default_probability",
+    default=u"Indicate how likely occurence of this risk is in a normal situation.")
+help_default_frequency = _(
+    u"help_default_frequency",
+    default=u"Indicate how often this risk occurs in a normal situation.")
+help_default_severity =_(
+    u"help_default_severity",
+    default=u"Indicate the severity if this risk occurs.")
+
 
 class IOSHASurvey(form.Schema):
     """ Adds a logo, URL and name of an external reference site to a survey """
@@ -89,10 +99,7 @@ class IOSHASurvey(form.Schema):
             default=u'Provide your custom explanation here, to override this '
                     u'default explanation: "${default_explanation}"',
             mapping={
-                u'default_explanation': _(
-                    u"help_default_probability",
-                    default=u"Indicate how likely occurence of this risk is "
-                    u"in a normal situation.")}
+                u'default_explanation': help_default_probability}
         ),
         required=False,
     )
@@ -107,10 +114,7 @@ class IOSHASurvey(form.Schema):
             default=u'Provide your custom explanation here, to override this '
                     u'default explanation: "${default_explanation}"',
             mapping={
-                u'default_explanation': _(
-                    u"help_default_frequency",
-                    default=u"Indicate how often this risk occurs in a normal "
-                    u"situation.")}
+                u'default_explanation': help_default_frequency}
         ),
         required=False,
     )
@@ -125,9 +129,7 @@ class IOSHASurvey(form.Schema):
             default=u'Provide your custom explanation here, to override this '
                     u'default explanation: "${default_explanation}"',
             mapping={
-                u'default_explanation': _(
-                    u"help_default_severity",
-                    default=u"Indicate the severity if this risk occurs.")}
+                u'default_explanation': help_default_severity}
         ),
         required=False,
     )

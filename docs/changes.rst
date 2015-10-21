@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0rc2 (unreleased)
+3.0.0rc2 (2015-10-21)
 ---------------------
 
 - Translation updates

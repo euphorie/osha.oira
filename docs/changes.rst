@@ -4,8 +4,7 @@ Changelog
 3.0.0rc2 (unreleased)
 ---------------------
 
-- Nothing changed yet.
-
+- Translation updates
 
 3.0.0rc1 (2015-10-16)
 ---------------------

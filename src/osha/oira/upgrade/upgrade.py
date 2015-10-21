@@ -220,3 +220,14 @@ def install_private_resources(context):
     """
     setup = api.portal.get_tool('portal_setup')
     setup.runAllImportStepsFromProfile('profile-oira.private:default')
+
+
+def drop_constraint_no_duplicates_in_tree(context):
+    session = Session()
+    if TableExists(session, "tree"):
+        session.execute(
+            "ALTER TABLE tree DROP CONSTRAINT no_duplicates")
+        model.metadata.create_all(session.bind, checkfirst=True)
+        datamanager.mark_changed(session)
+        transaction.get().commit()
+    log.info("Removed the constraint `no_duplicates` from table tree.")

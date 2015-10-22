@@ -43,6 +43,7 @@ if not os.path.isfile(updatefile):
 orig = polib.pofile(origfile)
 update = polib.pofile(updatefile)
 
+cnt = 0
 for entry in update:
     msgid = entry.msgid
     if msgid.strip() == '':
@@ -52,8 +53,8 @@ for entry in update:
         print "WARNING! msgid '%s' not present in %s." % (msgid, origfile)
         continue
     target.msgstr = entry.msgstr
+    cnt += 1
 
 orig.save()
 
-sys.exit('Ok')
-
+sys.exit('Ok, updated {0} translations'.format(cnt))

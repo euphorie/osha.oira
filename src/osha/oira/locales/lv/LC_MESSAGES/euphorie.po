@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.6.dev0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-19 16:44+0200\n"
+"POT-Creation-Date: 2015-10-22 11:22+0200\n"
 "PO-Revision-Date: 2013-08-15 11:42+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -846,7 +846,7 @@ msgstr "Atcelt"
 #. Default: Please enter a valid email address.
 #: src/osha/oira/client/login.py:40
 msgid "invalid_email"
-msgstr ""
+msgstr "Lūdzu, ievadiet derīgu e-pasta adresi."
 
 #: src/osha/oira/client/login.py:69
 msgid "An email with a password reminder has been sent to your address."
@@ -1145,37 +1145,37 @@ msgstr "Norādiet, cik bieži šāds risks pastāv normālos apstākļos."
 
 #: src/osha/oira/client/risk.py:308
 msgid "No changes were made to measures in your action plan."
-msgstr ""
+msgstr "Pasākumu plānā netika veiktas izmaiņas."
 
 #. Default: A measure has been added to your action plan.
 #: src/osha/oira/client/risk.py:313
 msgid "message_measure_saved"
-msgstr ""
+msgstr "Pasākumu plānam ir pievienots viens pasākums."
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:318
 msgid "message_measures_saved"
-msgstr ""
+msgstr "Pasākumu plānam ir pievienoti ${no_of_measures} pasākumi."
 
 #. Default: A measure has been updated in your action plan.
 #: src/osha/oira/client/risk.py:327
 msgid "message_measure_updated"
-msgstr ""
+msgstr "Pasākumu plānam ir pievienots viens pasākums."
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:332
 msgid "message_measures_updated"
-msgstr ""
+msgstr "Pasākumu plānam ir pievienoti ${no_of_measures} pasākumi."
 
 #. Default: A measure has been removed from your action plan.
 #: src/osha/oira/client/risk.py:341
 msgid "message_measure_removed"
-msgstr ""
+msgstr "No pasākumu plāna ir dzēsts viens pasākums."
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:346
 msgid "message_measures_removed"
-msgstr ""
+msgstr "No pasākumu plāna ir dzēsti ${no_of_measures} pasākumi."
 
 #. Default: Change password
 #: src/osha/oira/client/settings.py:18
@@ -2100,12 +2100,12 @@ msgstr "Augstas prioritātes riski"
 #. Default: Medium priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:116
 msgid "heading_medium_prio_risks"
-msgstr ""
+msgstr "Vidējas prioritātes riski"
 
 #. Default: Low priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:131
 msgid "heading_low_prio_risks"
-msgstr ""
+msgstr "Zemas prioritātes riski"
 
 #. Default: Next
 #: src/osha/oira/client/templates/module_actionplan.pt:50
@@ -2152,7 +2152,7 @@ msgstr "Dzēst risku"
 #. Default: Add another risk
 #: src/osha/oira/client/templates/module_customization.pt:61
 msgid "label_add_risk"
-msgstr "Pievienot risku"
+msgstr "Pievienot citus riska faktorus"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_customization.pt:62
@@ -2234,7 +2234,7 @@ msgstr ""
 #: src/osha/oira/client/templates/new-session-test.pt:30
 #: src/osha/oira/client/templates/new-session.pt:33
 msgid "Session name"
-msgstr ""
+msgstr "Sesijas nosaukums"
 
 #. Default: benefits
 #: src/osha/oira/client/templates/new-session-test.pt:34
@@ -2409,12 +2409,12 @@ msgstr "Rīcības plāna piemērs Office Open XML formātā (.xlsx)"
 #. Default: Example of a risk overview report in PDF format
 #: src/osha/oira/client/templates/register.pt:51
 msgid "header_example_report_risks"
-msgstr ""
+msgstr "Risku pārskata piemērs PDF formātā"
 
 #. Default: Example of a measures overview report in PDF format
 #: src/osha/oira/client/templates/register.pt:59
 msgid "header_example_report_measures"
-msgstr ""
+msgstr " Risku pārskata piemērs PDF formātā "
 
 #. Default: Register
 #: src/osha/oira/client/templates/register.pt:66
@@ -3192,47 +3192,47 @@ msgstr "Neatbildēts"
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:243
 msgid "heading_present_risks"
-msgstr ""
+msgstr "${num_present_risks} esoši riski"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:246
 msgid "heading_num_high_prio_risks"
-msgstr ""
+msgstr "${num_high_risks} riski ar augstu prioritāti"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:247
 msgid "heading_num_medium_prio_risks"
-msgstr ""
+msgstr "${num_medium_risks} riski ar vidēju prioritāti"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:248
 msgid "heading_num_low_prio_risks"
-msgstr ""
+msgstr "${num_low_risks} riski ar zemu prioritāti"
 
 #. Default: (≥1 measures)
 #: src/osha/oira/client/templates/risks_overview.pt:251
 msgid "label_with_measures"
-msgstr ""
+msgstr "(≥1 pasākums)"
 
 #. Default: (without measures)
 #: src/osha/oira/client/templates/risks_overview.pt:251
 msgid "label_without_measures"
-msgstr ""
+msgstr "(bez pasākumiem)"
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:259
 msgid "heading_possible_risks"
-msgstr ""
+msgstr "${num_possible_risks} iespējami riski"
 
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:262
 msgid "heading_num_postponed_prio_risks"
-msgstr ""
+msgstr "${num_postponed_risks} riski atlikti"
 
 #. Default: ${num_todo_risks} Risks not answered
 #: src/osha/oira/client/templates/risks_overview.pt:263
 msgid "heading_num_todo_prio_risks"
-msgstr ""
+msgstr "${num_todo_risks} riski nav atbildēti"
 
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/shell.pt:102
@@ -3262,7 +3262,7 @@ msgstr "tika saglabāta ${date}"
 #: src/osha/oira/client/templates/sessions.pt:36
 #: src/osha/oira/client/templates/survey_sessions.pt:32
 msgid "Rename this session"
-msgstr ""
+msgstr "Pārsaukt sesiju"
 
 #. Default: Rename
 #: src/osha/oira/client/templates/sessions.pt:36
@@ -3273,7 +3273,7 @@ msgstr "Pārdēvēt"
 #: src/osha/oira/client/templates/sessions.pt:37
 #: src/osha/oira/client/templates/survey_sessions.pt:33
 msgid "Delete this session"
-msgstr ""
+msgstr "Dzēst sesiju"
 
 #: src/osha/oira/client/templates/shell.pt:92
 #: src/osha/oira/client/templates/shell.pt:94
@@ -3326,12 +3326,12 @@ msgstr "Atbildētie jautājumi katrā modulī"
 #. Default: Postponed
 #: src/osha/oira/client/templates/status_print.pt:94
 msgid "label_postponed"
-msgstr ""
+msgstr "Atlikts"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/status_print.pt:97
 msgid "label_unanswered"
-msgstr ""
+msgstr "Neatbildēts"
 
 #. Default: Select an earlier session to complete or review
 #: src/osha/oira/client/templates/survey_sessions.pt:20
@@ -3862,6 +3862,8 @@ msgstr "Varbūtība"
 #: src/osha/oira/content/survey.py:127
 msgid "description_criteria_explanation"
 msgstr ""
+"Norādiet savus izvēlētos paskaidrojumus, kas nomainīs piedāvātos "
+"paskaidrojumus: ${piedāvātie paskaidrojumi}"
 
 #: src/osha/oira/content/survey.py:111
 msgid "Frequency"

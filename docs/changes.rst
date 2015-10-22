@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0rc3 (unreleased)
+3.0.0rc3 (2015-10-22)
 ---------------------
 
 - Disbale remove confirmation messages

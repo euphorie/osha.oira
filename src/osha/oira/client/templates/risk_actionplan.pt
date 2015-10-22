@@ -54,7 +54,7 @@
 </article>
 
 
-<div class="measures pat-clone" data-pat-clone="template: #measure-template; remove-confirmation: ${view/delete_confirmation}" id="ActionPlanItemForm">
+<div class="measures pat-clone" data-pat-clone="template: #measure-template; remove-behaviour: none; remove-confirmation: ${view/delete_confirmation}" id="ActionPlanItemForm">
     <div class="measure clone pat-collapsible"
          tal:define="measures view/solutions|python:[]"
         tal:repeat="actionplan action_plans">
@@ -71,7 +71,7 @@
                     <li tal:repeat="measure measures">
                         <a class="pat-inject close-panel title"
                         href="#standard-solution-${repeat/measure/number}"
-                        data-pat-inject="target: #fields-0; confirm: form-data; confirm-message: ${view/override_confirmation}">
+                        data-pat-inject="target: #fields-0; confirm: never; confirm-message: ${view/override_confirmation}">
                         <em class="iconified icon-plus-circle" i18n:translate="button_add">Add</em>${measure/description}</a>
                     </li>
                 </ol>
@@ -158,7 +158,7 @@
                 <li tal:repeat="solution measures">
                     <a class="pat-inject close-panel title"
                        href="#standard-solution-${repeat/solution/number}"
-                       data-pat-inject="target: #fields-#{1}; confirm: form-data; confirm-message: ${view/override_confirmation}">
+                       data-pat-inject="target: #fields-#{1}; confirm: never; confirm-message: ${view/override_confirmation}">
                     <em class="iconified icon-plus-circle">Add</em>${solution/description}</a>
                 </li>
             </ol>

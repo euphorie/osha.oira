@@ -39,6 +39,8 @@ NAME_TO_PHASE = {
     'account-settings': 'useraction',
     'account-delete': 'useraction',
     'update': 'preparation',
+    'disclaimer': 'help',
+    'terms-and-conditions': 'help',
 }
 
 

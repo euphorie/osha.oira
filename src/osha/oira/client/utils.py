@@ -3,6 +3,7 @@ from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.statusmessages.interfaces import IStatusMessage
+from datetime import datetime
 from euphorie.client import model
 from euphorie.client.sector import IClientSector
 from euphorie.content.utils import StripMarkup
@@ -317,9 +318,13 @@ class OSHAWebHelpers(WebHelpers):
     def splash_message(self):
         motd = self._findMOTD()
         if motd:
+            now = datetime.now()
             message = dict(
                 title=StripMarkup(motd.description), text=motd.body,
-                id=motd.modification_date.strftime('%Y%m%d%H%M%S'))
+                id='{0}{1}'.format(
+                    motd.modification_date.strftime('%Y%m%d%H%M%S'),
+                    now.strftime('%Y%m%d'))
+            )
         else:
             message = None
         return message

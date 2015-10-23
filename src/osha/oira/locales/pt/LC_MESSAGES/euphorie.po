@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.23.dev0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-19 16:44+0200\n"
+"POT-Creation-Date: 2015-10-23 14:40+0200\n"
 "PO-Revision-Date: 2013-08-15 11:33+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1845,10 +1845,9 @@ msgstr "realizar uma sessão de teste"
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
-#: src/osha/oira/client/templates/login_form.pt:49
 #: src/osha/oira/client/templates/new-session-test.pt:37
 msgid "label_register"
-msgstr "Registe-se"
+msgstr "registe-se"
 
 #. Default: Want to try OiRA? You may ${tryout_link} or ${register_link} to
 #. start for real.
@@ -2066,6 +2065,11 @@ msgstr "Palavra-passe (${forgot_link})"
 #: src/osha/oira/client/templates/login_form.pt:45
 msgid "label_keep_logged_in"
 msgstr "Manter a sessão iniciada"
+
+#. Default: register
+#: src/osha/oira/client/templates/login_form.pt:49
+msgid "label_register_first"
+msgstr "registe-se"
 
 #. Default: Don't have an account? Then please ${register_link} first.
 #: src/osha/oira/client/templates/login_form.pt:49

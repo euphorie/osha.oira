@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.23\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-23 14:27+0200\n"
+"POT-Creation-Date: 2015-10-23 14:40+0200\n"
 "PO-Revision-Date: 2014-10-27 10:59+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1313,7 +1313,7 @@ msgstr ""
 #: src/osha/oira/client/templates/conditions.pt:33
 msgid "conditions_intro1"
 msgstr ""
-"Aplikacija OiRA (spletno interaktivno orodje za oceno tveganja) je "
+"Aplikacija OiRA (spletno interaktivno orodje za ocenjevanje tveganj) je "
 "instrument, ki vam ga na razpolago daje Evropska agencija za varnost in "
 "zdravje pri delu (EU-OSHA). Ta pravilnik o zasebnosti velja za vse izdelke, "
 "storitve in spletne strani, ki jih nudi EU-OSHA v okviru aplikacije OiRA."
@@ -1421,7 +1421,7 @@ msgstr ""
 #. Default: Data controller
 #: src/osha/oira/client/templates/conditions.pt:72
 msgid "conditions_datacontroller_header"
-msgstr "Revizor podatkov"
+msgstr "Revizijo podatkov"
 
 #. Default: The data controller is the European Agency for Safety and Health at
 #. Work, Bilbao.
@@ -1434,7 +1434,7 @@ msgstr ""
 #. Default: Conservation and processing of information
 #: src/osha/oira/client/templates/conditions.pt:78
 msgid "conditions_conservation_header"
-msgstr "Ohranjanje in obdelava informacij"
+msgstr "Ohranjanje in obdelavo informacij"
 
 #. Default: We keep your data, which is inaccessible for external users, until
 #. you delete your account and your session(s).
@@ -1823,7 +1823,6 @@ msgstr "zaženi poskusno sejo"
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
-#: src/osha/oira/client/templates/login_form.pt:49
 #: src/osha/oira/client/templates/new-session-test.pt:37
 msgid "label_register"
 msgstr "registriraj se"
@@ -2046,6 +2045,11 @@ msgstr "Geslo (${forgot_link})"
 #: src/osha/oira/client/templates/login_form.pt:45
 msgid "label_keep_logged_in"
 msgstr "Želim ostati prijavljen"
+
+#. Default: register
+#: src/osha/oira/client/templates/login_form.pt:49
+msgid "label_register_first"
+msgstr "registrirajte"
 
 #. Default: Don't have an account? Then please ${register_link} first.
 #: src/osha/oira/client/templates/login_form.pt:49
@@ -4492,7 +4496,7 @@ msgid "question_other_risks"
 msgstr ""
 "<p>Želite zdaj temu orodju dodati tveganja, ki ste jih opredelili sami?</"
 "p><p><strong>Pomembno:</strong> Da bi se izognili podvajanju tveganj, vam "
-"zelo priporočamo, da najprej preletite vse prejšnje module, če tega še niste "
+"zelo priporočamo, da najprej pregledate vse prejšnje module, če tega še niste "
 "storili.</p><p>Če vam tveganj ni treba dodati, izberite 'Ne'.</p>"
 
 #~ msgid "label_close_panel"

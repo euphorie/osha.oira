@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.18dev1\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-23 15:13+0200\n"
+"POT-Creation-Date: 2015-10-26 12:57+0100\n"
 "PO-Revision-Date: 2014-10-08 13:56+0200\n"
 "Last-Translator: Cristina <cr_montoya@hotmail.com>\n"
 "Language-Team: ES <LL@li.org>\n"
@@ -1161,37 +1161,37 @@ msgstr ""
 
 #: src/osha/oira/client/risk.py:308
 msgid "No changes were made to measures in your action plan."
-msgstr ""
+msgstr "No se ha introducido ningún cambio en las medidas de su plan de acción"
 
 #. Default: A measure has been added to your action plan.
 #: src/osha/oira/client/risk.py:313
 msgid "message_measure_saved"
-msgstr ""
+msgstr "Se ha añadido una medida a su plan de acción"
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:318
 msgid "message_measures_saved"
-msgstr ""
+msgstr "${no_of_measures} medidas han sido añadidas a su plan de acción"
 
 #. Default: A measure has been updated in your action plan.
 #: src/osha/oira/client/risk.py:327
 msgid "message_measure_updated"
-msgstr ""
+msgstr "Se ha actualizado una medida en su plan de acción"
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:332
 msgid "message_measures_updated"
-msgstr ""
+msgstr "${no_of_measures} medidas han sido actualizadas en su plan de acción"
 
 #. Default: A measure has been removed from your action plan.
 #: src/osha/oira/client/risk.py:341
 msgid "message_measure_removed"
-msgstr ""
+msgstr "Se ha eliminado una medida de su plan de acción"
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:346
 msgid "message_measures_removed"
-msgstr ""
+msgstr "${no_of_measures} medidas han sido eliminadas de su plan de acción"
 
 #. Default: Change password
 #: src/osha/oira/client/settings.py:18
@@ -2096,7 +2096,7 @@ msgstr "Resumen de medidas"
 
 #: src/osha/oira/client/templates/measures_overview.pt:61
 msgid "(measures to be implemented in the coming months)"
-msgstr ""
+msgstr "(medidas a implementar en los próximos meses)"
 
 #: src/osha/oira/client/templates/measures_overview.pt:62
 #: src/osha/oira/client/templates/report_landing.pt:51
@@ -2186,7 +2186,7 @@ msgstr "Eliminar riesgo"
 #. Default: Add another risk
 #: src/osha/oira/client/templates/module_customization.pt:61
 msgid "label_add_risk"
-msgstr ""
+msgstr "Añadir otro riesgo"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_customization.pt:62
@@ -3255,12 +3255,12 @@ msgstr "${num_low_risks} Riesgos de prioridad baja"
 #. Default: (≥1 measures)
 #: src/osha/oira/client/templates/risks_overview.pt:251
 msgid "label_with_measures"
-msgstr ""
+msgstr "(≥1 medidas)"
 
 #. Default: (without measures)
 #: src/osha/oira/client/templates/risks_overview.pt:251
 msgid "label_without_measures"
-msgstr ""
+msgstr "(sin medidas)"
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:259
@@ -3369,12 +3369,12 @@ msgstr "Preguntas respondidas por módulo"
 #. Default: Postponed
 #: src/osha/oira/client/templates/status_print.pt:94
 msgid "label_postponed"
-msgstr ""
+msgstr "Pospuesto"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/status_print.pt:97
 msgid "label_unanswered"
-msgstr ""
+msgstr "Sin respuesta"
 
 #. Default: Select an earlier session to complete or review
 #: src/osha/oira/client/templates/survey_sessions.pt:20
@@ -3908,6 +3908,8 @@ msgstr "Probabilidad"
 #: src/osha/oira/content/survey.py:127
 msgid "description_criteria_explanation"
 msgstr ""
+"Introduzca aquí su explicación personalizada, la cual sustituirá esta "
+"explicación por defecto: ${default_explanation}"
 
 #: src/osha/oira/content/survey.py:111
 msgid "Frequency"

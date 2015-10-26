@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-23 15:13+0200\n"
+"POT-Creation-Date: 2015-10-26 15:54+0100\n"
 "PO-Revision-Date: 2013-08-15 11:20+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -848,7 +848,7 @@ msgstr "Zrušit"
 #. Default: Please enter a valid email address.
 #: src/osha/oira/client/login.py:40
 msgid "invalid_email"
-msgstr ""
+msgstr "Vložte, prosím, platnou mailovou adresu."
 
 #: src/osha/oira/client/login.py:69
 msgid "An email with a password reminder has been sent to your address."
@@ -1141,37 +1141,39 @@ msgstr "Uveďte, jak často se riziko objevuje v běžné situaci."
 
 #: src/osha/oira/client/risk.py:308
 msgid "No changes were made to measures in your action plan."
-msgstr ""
+msgstr "Ve vašem akčním plánu nebyly provedeny žádné změny."
 
 #. Default: A measure has been added to your action plan.
 #: src/osha/oira/client/risk.py:313
 msgid "message_measure_saved"
-msgstr ""
+msgstr "Ve vašem akčním plánu bylo přidáno jedno opatření."
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:318
 msgid "message_measures_saved"
 msgstr ""
+"${no_of_measures} opatření, které byla přidána do vašeho akčního plánu."
 
 #. Default: A measure has been updated in your action plan.
 #: src/osha/oira/client/risk.py:327
 msgid "message_measure_updated"
-msgstr ""
+msgstr "Akční plán byl doplněn o zvolené opatření."
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:332
 msgid "message_measures_updated"
-msgstr ""
+msgstr "${no_of_measures} opatření, o které byl váš akční plán doplněn."
 
 #. Default: A measure has been removed from your action plan.
 #: src/osha/oira/client/risk.py:341
 msgid "message_measure_removed"
-msgstr ""
+msgstr "Opatření bylo z akčního plánu odstraněno."
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:346
 msgid "message_measures_removed"
 msgstr ""
+"${no_of_measures} opatření, která byla z vašeho akčního plánu odstraněna."
 
 #. Default: Change password
 #: src/osha/oira/client/settings.py:18
@@ -1182,19 +1184,19 @@ msgstr "Změnit heslo"
 #. Default: Page
 #: src/osha/oira/client/survey.py:204
 msgid "label_page"
-msgstr ""
+msgstr "Strana"
 
 #. Default: of
 #: src/osha/oira/client/survey.py:205
 msgid "label_page_of"
-msgstr ""
+msgstr "z"
 
 #. Default: Added risks (by you)
 #: src/osha/oira/client/survey.py:283
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
-msgstr ""
+msgstr "(Vámi) přidaná rizika"
 
 #. Default: By clicking on 'Delete account', your account will be permenantly
 #. deleted. This action is irreversable.
@@ -1826,12 +1828,12 @@ msgstr ""
 #. Default: log in
 #: src/osha/oira/client/templates/login.pt:27
 msgid "log in"
-msgstr ""
+msgstr "přihlaste se"
 
 #. Default: If you are a registered user, you can ${log_in} here.
 #: src/osha/oira/client/templates/login.pt:27
 msgid "label_login_here"
-msgstr ""
+msgstr "Jste-li registrovaný uživatel ${log_in} zde."
 
 #. Default: Show more…
 #: src/osha/oira/client/templates/login.pt:34
@@ -2057,11 +2059,11 @@ msgstr "Přihlášení"
 
 #: src/osha/oira/client/templates/measures_overview.pt:60
 msgid "Overview of measures"
-msgstr ""
+msgstr "Přehled opatření"
 
 #: src/osha/oira/client/templates/measures_overview.pt:61
 msgid "(measures to be implemented in the coming months)"
-msgstr ""
+msgstr "(opatření, která by měla být přijata v následujících měsících)"
 
 #: src/osha/oira/client/templates/measures_overview.pt:62
 #: src/osha/oira/client/templates/report_landing.pt:51
@@ -2083,10 +2085,11 @@ msgstr "Předat informace dotčeným osobám."
 #: src/osha/oira/client/templates/report_landing.pt:114
 msgid "Monitor the measures to be implemented in the forthcoming 3 months."
 msgstr ""
+"Kontrola plnění opatření, která budou přijata v následujících 3 měsících."
 
 #: src/osha/oira/client/templates/measures_overview.pt:76
 msgid "Measure to be implemented by"
-msgstr ""
+msgstr "Opatření, jehož plnění bude zabezpečeno"
 
 #. Default: High priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:84
@@ -2098,12 +2101,12 @@ msgstr "Rizika s vysokou prioritou"
 #. Default: Medium priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:116
 msgid "heading_medium_prio_risks"
-msgstr ""
+msgstr "Riziko střední závažnosti"
 
 #. Default: Low priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:131
 msgid "heading_low_prio_risks"
-msgstr ""
+msgstr "Riziko nízké závažnosti"
 
 #. Default: Next
 #: src/osha/oira/client/templates/module_actionplan.pt:50
@@ -2150,7 +2153,7 @@ msgstr "Odstranit riziko"
 #. Default: Add another risk
 #: src/osha/oira/client/templates/module_customization.pt:61
 msgid "label_add_risk"
-msgstr "Přidej riziko"
+msgstr "Přidejte další riziko"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_customization.pt:62
@@ -2232,7 +2235,7 @@ msgstr ""
 #: src/osha/oira/client/templates/new-session-test.pt:30
 #: src/osha/oira/client/templates/new-session.pt:33
 msgid "Session name"
-msgstr ""
+msgstr "Název  modulu"
 
 #. Default: benefits
 #: src/osha/oira/client/templates/new-session-test.pt:34
@@ -2405,12 +2408,12 @@ msgstr "Příklad akčního plánu jako sešit ve formátu Office Open XML (.xls
 #. Default: Example of a risk overview report in PDF format
 #: src/osha/oira/client/templates/register.pt:51
 msgid "header_example_report_risks"
-msgstr ""
+msgstr "Příklad přehledu rizik ve formátu PDF"
 
 #. Default: Example of a measures overview report in PDF format
 #: src/osha/oira/client/templates/register.pt:59
 msgid "header_example_report_measures"
-msgstr ""
+msgstr "Příklad přehledu opatření ve formátu PDF"
 
 #. Default: Register
 #: src/osha/oira/client/templates/register.pt:66
@@ -3138,7 +3141,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/risks_overview.pt:146
 msgid "Overview of risks"
-msgstr ""
+msgstr "Přehled rizik"
 
 #. Default: No risk
 #: src/osha/oira/client/templates/risks_overview.pt:220
@@ -3180,52 +3183,52 @@ msgstr "Nezodpovězeno"
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:243
 msgid "heading_present_risks"
-msgstr ""
+msgstr "${num_present_risks} Existující rizika"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:246
 msgid "heading_num_high_prio_risks"
-msgstr ""
+msgstr "${num_high_risks} Rizika vysoce závažná"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:247
 msgid "heading_num_medium_prio_risks"
-msgstr ""
+msgstr "${num_medium_risks} Rizika střední závažnosti"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:248
 msgid "heading_num_low_prio_risks"
-msgstr ""
+msgstr "${num_low_risks} Rizika nízké závažnosti"
 
 #. Default: (≥1 measures)
 #: src/osha/oira/client/templates/risks_overview.pt:251
 msgid "label_with_measures"
-msgstr ""
+msgstr "(≥1 opatření)"
 
 #. Default: (without measures)
 #: src/osha/oira/client/templates/risks_overview.pt:251
 msgid "label_without_measures"
-msgstr ""
+msgstr "(bez opatření)"
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:259
 msgid "heading_possible_risks"
-msgstr ""
+msgstr "${num_possible_risks} Možná rizika"
 
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:262
 msgid "heading_num_postponed_prio_risks"
-msgstr ""
+msgstr "${num_postponed_risks} Odložená rizika"
 
 #. Default: ${num_todo_risks} Risks not answered
 #: src/osha/oira/client/templates/risks_overview.pt:263
 msgid "heading_num_todo_prio_risks"
-msgstr ""
+msgstr "${num_todo_risks} Nevyřešená rizika"
 
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/shell.pt:102
 msgid "Start a new session"
-msgstr ""
+msgstr "Zahajte nový modul"
 
 #. Default: start a new session
 #: src/osha/oira/client/templates/sessions.pt:22
@@ -3250,7 +3253,7 @@ msgstr "uloženo dne ${date}"
 #: src/osha/oira/client/templates/sessions.pt:36
 #: src/osha/oira/client/templates/survey_sessions.pt:32
 msgid "Rename this session"
-msgstr ""
+msgstr "Přejmenujte tento modul"
 
 #. Default: Rename
 #: src/osha/oira/client/templates/sessions.pt:36
@@ -3261,7 +3264,7 @@ msgstr "Přejmenovat"
 #: src/osha/oira/client/templates/sessions.pt:37
 #: src/osha/oira/client/templates/survey_sessions.pt:33
 msgid "Delete this session"
-msgstr ""
+msgstr "Odstraňte tento modul"
 
 #: src/osha/oira/client/templates/shell.pt:92
 #: src/osha/oira/client/templates/shell.pt:94
@@ -3314,12 +3317,12 @@ msgstr "Zodpovězené otázky na jeden modul"
 #. Default: Postponed
 #: src/osha/oira/client/templates/status_print.pt:94
 msgid "label_postponed"
-msgstr ""
+msgstr "Odloženo"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/status_print.pt:97
 msgid "label_unanswered"
-msgstr ""
+msgstr "Nevyřešeno"
 
 #. Default: Select an earlier session to complete or review
 #: src/osha/oira/client/templates/survey_sessions.pt:20
@@ -3849,6 +3852,8 @@ msgstr "Pravděpodobnost"
 #: src/osha/oira/content/survey.py:127
 msgid "description_criteria_explanation"
 msgstr ""
+"Zde vložte vaše vysvětlení, které nahradí předem nastavené vysvětlení: "
+"${default_explanation}"
 
 #: src/osha/oira/content/survey.py:111
 msgid "Frequency"

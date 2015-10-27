@@ -60,30 +60,25 @@
             </dt>
             <dd>
                 <section class="graph">
-                    <p class="range answered" style="width: ${perc_ok}%"
-                        tal:attributes="title python:'%s question%s answered without a risk' % (num_ok, num_ok != 1 and 's' or '')">
+                    <p class="range answered" style="width: ${perc_ok}%">
                         <strong class="number">${num_ok}</strong>
-                        <em class="label" tal:content="python:'question%s answered without a risk' % (num_ok != 1 and 's' or '')"></em>
+                        <em class="label">questions answered without a risk</em>
                     </p>
-                    <p class="range  risk-measure" style="width: ${perc_risks_with_measures}%"
-                        tal:attributes="title python:'%s answer%s indicated a risk and have at least one measure defined in the action plan' % (num_risks_with_measures, num_risks_with_measures != 1 and 's' or '')">
+                    <p class="range risk-measure" style="width: ${perc_risks_with_measures}%">
                         <strong class="number">${num_risks_with_measures}</strong>
-                        <em class="label" tal:content="python:'answer%s indicated a risk and have at least one measure defined in the action plan' % (num_risks_with_measures != 1 and 's' or '')"></em>
+                        <em class="label">answers indicated a risk and have at least one measure defined in the action plan</em>
                     </p>
-                    <p class="range risk" style="width: ${perc_risks_without_measures}%"
-                        tal:attributes="title python:'%s answer%s indicated a risk without any measure defined in the action plan' % (num_risks_without_measures, num_risks_without_measures != 1 and 's' or '')">
+                    <p class="range risk" style="width: ${perc_risks_without_measures}%">
                         <strong class="number">${num_risks_without_measures}</strong>
-                        <em class="label" tal:content="python:'answer%s indicated a risk without any measure defined in the action plan' % (num_risks_without_measures != 1 and 's' or '')"></em>
+                        <em class="label">answers indicated a risk without any measure defined in the action plan</em>
                     </p>
-                    <p class="range postponed" style="width: ${perc_postponed}%"
-                        tal:attributes="title python:'%s questions were postponed' % num_postponed">
+                    <p class="range postponed" style="width: ${perc_postponed}%">
                         <strong class="number">${num_postponed}</strong>
-                        <em class="label" tal:content="python:'question%s were postponed' % (num_postponed != 1 and 's' or '')"></em>
+                        <em class="label">questions were postponed</em>
                     </p>
-                    <p class="range unanswered" style="width: ${perc_todo}%"
-                        tal:attributes="title python:'%s questions aren\'t answered yet' % num_todo">
+                    <p class="range unanswered" style="width: ${perc_todo}%">
                         <strong class="number">${num_todo}</strong>
-                        <em class="label" tal:content="python:'question%s aren\'t answered yet' % (num_todo != 1 and 's' or '')"></em>
+                        <em class="label">questions aren't answered yet</em>
                     </p>
                 </section>
                 <section class="row">

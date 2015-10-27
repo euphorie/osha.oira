@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-23 15:13+0200\n"
+"POT-Creation-Date: 2015-10-27 11:17+0100\n"
 "PO-Revision-Date: 2015-02-10 12:04+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1146,26 +1146,56 @@ msgstr ""
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:318
+msgid "message_measures_saved_2"
+msgstr ""
+
+#. Default: ${no_of_measures} measures have been added to your action plan.
+#: src/osha/oira/client/risk.py:326
+msgid "message_measures_saved_3_4"
+msgstr ""
+
+#. Default: ${no_of_measures} measures have been added to your action plan.
+#: src/osha/oira/client/risk.py:334
 msgid "message_measures_saved"
 msgstr ""
 
 #. Default: A measure has been updated in your action plan.
-#: src/osha/oira/client/risk.py:327
+#: src/osha/oira/client/risk.py:343
 msgid "message_measure_updated"
 msgstr ""
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
-#: src/osha/oira/client/risk.py:332
+#: src/osha/oira/client/risk.py:348
+msgid "message_measures_updated_2"
+msgstr ""
+
+#. Default: ${no_of_measures} measures have been updated in your action plan.
+#: src/osha/oira/client/risk.py:356
+msgid "message_measures_updated_3_4"
+msgstr ""
+
+#. Default: ${no_of_measures} measures have been updated in your action plan.
+#: src/osha/oira/client/risk.py:364
 msgid "message_measures_updated"
 msgstr ""
 
 #. Default: A measure has been removed from your action plan.
-#: src/osha/oira/client/risk.py:341
+#: src/osha/oira/client/risk.py:373
 msgid "message_measure_removed"
 msgstr ""
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
-#: src/osha/oira/client/risk.py:346
+#: src/osha/oira/client/risk.py:378
+msgid "message_measures_removed_3"
+msgstr ""
+
+#. Default: ${no_of_measures} measures have been removed from your action plan.
+#: src/osha/oira/client/risk.py:386
+msgid "message_measures_removed_3_4"
+msgstr ""
+
+#. Default: ${no_of_measures} measures have been removed from your action plan.
+#: src/osha/oira/client/risk.py:394
 msgid "message_measures_removed"
 msgstr ""
 
@@ -2076,7 +2106,7 @@ msgstr ""
 
 #. Default: High priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:84
-#: src/osha/oira/client/templates/status.pt:108
+#: src/osha/oira/client/templates/status.pt:115
 #: src/osha/oira/client/templates/status_print.pt:101
 msgid "heading_high_prio_risks"
 msgstr "Áhætta með miklum forgangi"
@@ -3126,85 +3156,244 @@ msgid "Overview of risks"
 msgstr ""
 
 #. Default: No risk
-#: src/osha/oira/client/templates/risks_overview.pt:220
-#: src/osha/oira/client/templates/status.pt:92
+#: src/osha/oira/client/templates/risks_overview.pt:221
+#: src/osha/oira/client/templates/status.pt:88
 #: src/osha/oira/client/templates/status_print.pt:85
 msgid "label_no_risk"
 msgstr "Áhættan er ekki til staðar"
 
-#. Default: Risk with measure(s)
+#. Default: No risks
+#: src/osha/oira/client/templates/risks_overview.pt:222
+#: src/osha/oira/client/templates/status.pt:89
+msgid "label_no_risks_2"
+msgstr ""
+
+#. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:223
+#: src/osha/oira/client/templates/status.pt:90
+msgid "label_no_risks_3_4"
+msgstr ""
+
+#. Default: No risks
+#: src/osha/oira/client/templates/risks_overview.pt:224
+#: src/osha/oira/client/templates/status.pt:91
+msgid "label_no_risks_5_or_more"
+msgstr ""
+
+#. Default: Risk with measure(s)
+#: src/osha/oira/client/templates/risks_overview.pt:228
 #: src/osha/oira/client/templates/status.pt:95
 #: src/osha/oira/client/templates/status_print.pt:88
 msgid "label_risk_with_measure"
 msgstr "Áhætta með aðgerð(um)"
 
-#. Default: Risk without measure
-#: src/osha/oira/client/templates/risks_overview.pt:226
+#. Default: Risks with measure(s)
+#: src/osha/oira/client/templates/risks_overview.pt:229
+#: src/osha/oira/client/templates/status.pt:96
+msgid "label_risks_with_measure_2"
+msgstr ""
+
+#. Default: Risks with measure(s)
+#: src/osha/oira/client/templates/risks_overview.pt:230
+#: src/osha/oira/client/templates/status.pt:97
+msgid "label_risks_with_measure_3_4"
+msgstr ""
+
+#. Default: Risks with measure(s)
+#: src/osha/oira/client/templates/risks_overview.pt:231
 #: src/osha/oira/client/templates/status.pt:98
+msgid "label_risks_with_measure_5_or_more"
+msgstr ""
+
+#. Default: Risk without measure
+#: src/osha/oira/client/templates/risks_overview.pt:235
+#: src/osha/oira/client/templates/status.pt:102
 #: src/osha/oira/client/templates/status_print.pt:91
 msgid "label_risk_without_measure"
 msgstr "Áhættan er til staðar"
 
+#. Default: Risks without measure
+#: src/osha/oira/client/templates/risks_overview.pt:236
+#: src/osha/oira/client/templates/status.pt:103
+msgid "label_risks_without_measure_2"
+msgstr ""
+
+#. Default: Risks without measure
+#: src/osha/oira/client/templates/risks_overview.pt:237
+#: src/osha/oira/client/templates/status.pt:104
+msgid "label_risks_without_measure_3_4"
+msgstr ""
+
+#. Default: Risks without measure
+#: src/osha/oira/client/templates/risks_overview.pt:238
+#: src/osha/oira/client/templates/status.pt:105
+msgid "label_risks_without_measure_5_or_more"
+msgstr ""
+
 #. Default: Postponed
-#: src/osha/oira/client/templates/risks_overview.pt:229
-#: src/osha/oira/client/templates/status.pt:101
+#: src/osha/oira/client/templates/risks_overview.pt:241
+#: src/osha/oira/client/templates/status.pt:108
 #: src/osha/oira/client/templates/webhelpers.pt:118
 #: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "Postponed"
 msgstr "Skoðað en ekki svarað"
 
 #. Default: Unanswered
-#: src/osha/oira/client/templates/risks_overview.pt:232
-#: src/osha/oira/client/templates/status.pt:104
+#: src/osha/oira/client/templates/risks_overview.pt:244
+#: src/osha/oira/client/templates/status.pt:111
 #: src/osha/oira/client/templates/webhelpers.pt:117
 #: src/osha/oira/client/templates/webhelpers.pt:129
 msgid "Unvisited"
 msgstr "Ekki opnað"
 
-#. Default: ${num_present_risks} Present Risks
-#: src/osha/oira/client/templates/risks_overview.pt:243
+#. Default: ${num_present_risks} Present Risk
+#: src/osha/oira/client/templates/risks_overview.pt:255
 msgid "heading_present_risks"
 msgstr ""
 
-#. Default: ${num_high_risks} High priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:246
+#. Default: ${num_present_risks} Present Risks
+#: src/osha/oira/client/templates/risks_overview.pt:256
+msgid "heading_present_risks_2"
+msgstr ""
+
+#. Default: ${num_present_risks} Present Risks
+#: src/osha/oira/client/templates/risks_overview.pt:257
+msgid "heading_present_risks_3_4"
+msgstr ""
+
+#. Default: ${num_present_risks} Present Risks
+#: src/osha/oira/client/templates/risks_overview.pt:258
+msgid "heading_present_risks_5_or_more"
+msgstr ""
+
+#. Default: ${num_high_risks} High priority risk
+#: src/osha/oira/client/templates/risks_overview.pt:261
 msgid "heading_num_high_prio_risks"
 msgstr ""
 
-#. Default: ${num_medium_risks} Medium priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:247
+#. Default: ${num_high_risks} High priority risks
+#: src/osha/oira/client/templates/risks_overview.pt:262
+msgid "heading_num_high_prio_risks_2"
+msgstr ""
+
+#. Default: ${num_high_risks} High priority risks
+#: src/osha/oira/client/templates/risks_overview.pt:263
+msgid "heading_num_high_prio_risks_3_4"
+msgstr ""
+
+#. Default: ${num_high_risks} High priority risks
+#: src/osha/oira/client/templates/risks_overview.pt:264
+msgid "heading_num_high_prio_risks_5_or_more"
+msgstr ""
+
+#. Default: ${num_medium_risks} Medium priority risk
+#: src/osha/oira/client/templates/risks_overview.pt:266
 msgid "heading_num_medium_prio_risks"
 msgstr ""
 
-#. Default: ${num_low_risks} Low priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:248
+#. Default: ${num_medium_risks} Medium priority risks
+#: src/osha/oira/client/templates/risks_overview.pt:267
+msgid "heading_num_medium_prio_risks_2"
+msgstr ""
+
+#. Default: ${num_medium_risks} Medium priority risks
+#: src/osha/oira/client/templates/risks_overview.pt:268
+msgid "heading_num_medium_prio_risks_3_4"
+msgstr ""
+
+#. Default: ${num_medium_risks} Medium priority risks
+#: src/osha/oira/client/templates/risks_overview.pt:269
+msgid "heading_num_medium_prio_risks_5_or_more"
+msgstr ""
+
+#. Default: ${num_low_risks} Low priority risk
+#: src/osha/oira/client/templates/risks_overview.pt:271
 msgid "heading_num_low_prio_risks"
 msgstr ""
 
+#. Default: ${num_low_risks} Low priority risks
+#: src/osha/oira/client/templates/risks_overview.pt:272
+msgid "heading_num_low_prio_risks_2"
+msgstr ""
+
+#. Default: ${num_low_risks} Low priority risks
+#: src/osha/oira/client/templates/risks_overview.pt:273
+msgid "heading_num_low_prio_risks_3_4"
+msgstr ""
+
+#. Default: ${num_low_risks} Low priority risks
+#: src/osha/oira/client/templates/risks_overview.pt:274
+msgid "heading_num_low_prio_risks_5_or_more"
+msgstr ""
+
 #. Default: (≥1 measures)
-#: src/osha/oira/client/templates/risks_overview.pt:251
+#: src/osha/oira/client/templates/risks_overview.pt:278
 msgid "label_with_measures"
 msgstr ""
 
 #. Default: (without measures)
-#: src/osha/oira/client/templates/risks_overview.pt:251
+#: src/osha/oira/client/templates/risks_overview.pt:278
 msgid "label_without_measures"
 msgstr ""
 
-#. Default: ${num_possible_risks} Possible Risks
-#: src/osha/oira/client/templates/risks_overview.pt:259
+#. Default: ${num_possible_risks} Possible Risk
+#: src/osha/oira/client/templates/risks_overview.pt:286
 msgid "heading_possible_risks"
 msgstr ""
 
-#. Default: ${num_postponed_risks} Risks postponed
-#: src/osha/oira/client/templates/risks_overview.pt:262
+#. Default: ${num_possible_risks} Possible Risks
+#: src/osha/oira/client/templates/risks_overview.pt:287
+msgid "heading_possible_risks_2"
+msgstr ""
+
+#. Default: ${num_possible_risks} Possible Risks
+#: src/osha/oira/client/templates/risks_overview.pt:288
+msgid "heading_possible_risks_3_4"
+msgstr ""
+
+#. Default: ${num_possible_risks} Possible Risks
+#: src/osha/oira/client/templates/risks_overview.pt:289
+msgid "heading_possible_risks_5_or_more"
+msgstr ""
+
+#. Default: ${num_postponed_risks} Risk postponed
+#: src/osha/oira/client/templates/risks_overview.pt:293
 msgid "heading_num_postponed_prio_risks"
 msgstr ""
 
-#. Default: ${num_todo_risks} Risks not answered
-#: src/osha/oira/client/templates/risks_overview.pt:263
+#. Default: ${num_postponed_risks} Risks postponed
+#: src/osha/oira/client/templates/risks_overview.pt:294
+msgid "heading_num_postponed_prio_risks_2"
+msgstr ""
+
+#. Default: ${num_postponed_risks} Risks postponed
+#: src/osha/oira/client/templates/risks_overview.pt:295
+msgid "heading_num_postponed_prio_risks_3_4"
+msgstr ""
+
+#. Default: ${num_postponed_risks} Risks postponed
+#: src/osha/oira/client/templates/risks_overview.pt:296
+msgid "heading_num_postponed_prio_risks_5_or_more"
+msgstr ""
+
+#. Default: ${num_todo_risks} Risk not answered
+#: src/osha/oira/client/templates/risks_overview.pt:298
 msgid "heading_num_todo_prio_risks"
+msgstr ""
+
+#. Default: ${num_todo_risks} Risks not answered
+#: src/osha/oira/client/templates/risks_overview.pt:299
+msgid "heading_num_todo_prio_risks_2"
+msgstr ""
+
+#. Default: ${num_todo_risks} Risks not answered
+#: src/osha/oira/client/templates/risks_overview.pt:300
+msgid "heading_num_todo_prio_risks_3_4"
+msgstr ""
+
+#. Default: ${num_todo_risks} Risks not answered
+#: src/osha/oira/client/templates/risks_overview.pt:301
+msgid "heading_num_todo_prio_risks_5_or_more"
 msgstr ""
 
 #: src/osha/oira/client/templates/sessions.pt:22

@@ -84,13 +84,25 @@
                 <section class="row">
                     <ul class="six columns legend">
                         <li class="answered" tal:condition="num_ok">
-                            <strong class="number">${num_ok}</strong> <em class="label" i18n:translate="label_no_risk">No risk</em>
+                            <strong class="number">${num_ok}</strong>
+                            <em tal:condition="python:num_ok==1" class="label" i18n:translate="label_no_risk">No risk</em>
+                            <em tal:condition="python:num_ok==2" class="label" i18n:translate="label_no_risks_2">No risks</em>
+                            <em tal:condition="python:num_ok in (3, 4)" class="label" i18n:translate="label_no_risks_3_4">No risks</em>
+                            <em tal:condition="python:num_ok>4" class="label" i18n:translate="label_no_risks_5_or_more">No risks</em>
                         </li>
                         <li class="risk-measure" tal:condition="num_risks_with_measures">
-                            <strong class="number">${num_risks_with_measures}</strong> <em class="label" i18n:translate="label_risk_with_measure">Risk with measure(s)</em>
+                            <strong class="number">${num_risks_with_measures}</strong>
+                            <em tal:condition="python:num_risks_with_measures==1" class="label" i18n:translate="label_risk_with_measure">Risk with measure(s)</em>
+                            <em tal:condition="python:num_risks_with_measures==2" class="label" i18n:translate="label_risks_with_measure_2">Risks with measure(s)</em>
+                            <em tal:condition="python:num_risks_with_measures in (3, 4)" class="label" i18n:translate="label_risks_with_measure_3_4">Risks with measure(s)</em>
+                            <em tal:condition="python:num_risks_with_measures>4" class="label" i18n:translate="label_risks_with_measure_5_or_more">Risks with measure(s)</em>
                         </li>
                         <li class="risk" tal:condition="num_risks_without_measures">
-                            <strong class="number">${num_risks_without_measures}</strong> <em class="label" i18n:translate="label_risk_without_measure">Risk without measure</em>
+                            <strong class="number">${num_risks_without_measures}</strong>
+                            <em tal:condition="python:num_risks_without_measures==1" class="label" i18n:translate="label_risk_without_measure">Risk without measure</em>
+                            <em tal:condition="python:num_risks_without_measures==3" class="label" i18n:translate="label_risks_without_measure_2">Risks without measure</em>
+                            <em tal:condition="python:num_risks_without_measures in (3, 4)" class="label" i18n:translate="label_risks_without_measure_3_4">Risks without measure</em>
+                            <em tal:condition="python:num_risks_without_measures>4" class="label" i18n:translate="label_risks_without_measure_5_or_more">Risks without measure</em>
                         </li>
                         <li class="postponed" tal:condition="num_postponed">
                             <strong class="number">${num_postponed}</strong> <em class="label" i18n:translate="Postponed">Postponed</em>

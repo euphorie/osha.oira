@@ -1158,12 +1158,12 @@ msgstr "V vaš načrt ukrepov ste dodali 1 nov ukrep."
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:318
 msgid "message_measures_saved_2"
-msgstr ""
+msgstr "V vaš načrt ukrepov ste dodali ${no_of_measures} novih ukrepa."
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:326
 msgid "message_measures_saved_3_4"
-msgstr ""
+msgstr "V vaš načrt ukrepov ste dodali ${no_of_measures} novih ukrepe."
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:334
@@ -1178,12 +1178,12 @@ msgstr "V vašem načrtu ukrepov ste posodobili 1 ukrep."
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:348
 msgid "message_measures_updated_2"
-msgstr ""
+msgstr "V vašem načrtu ukrepov ste posodobili ${no_of_measures} ukrepa."
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:356
 msgid "message_measures_updated_3_4"
-msgstr ""
+msgstr "V vašem načrtu ukrepov ste posodobili ${no_of_measures} ukrepe."
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:364
@@ -1198,12 +1198,12 @@ msgstr "V vašem načrtu ukrepov ste odstranili 1 ukrep."
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:378
 msgid "message_measures_removed_3"
-msgstr ""
+msgstr "V vašem načrtu ukrepov ste odstranili ${no_of_measures} ukrepa."
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:386
 msgid "message_measures_removed_3_4"
-msgstr ""
+msgstr "V vašem načrtu ukrepov ste odstranili ${no_of_measures} ukrepe."
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:394
@@ -3184,25 +3184,25 @@ msgstr "Pregled tveganj"
 #: src/osha/oira/client/templates/status.pt:88
 #: src/osha/oira/client/templates/status_print.pt:85
 msgid "label_no_risk"
-msgstr "Tveganja ni"
+msgstr "Tveganje ni"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:222
 #: src/osha/oira/client/templates/status.pt:89
 msgid "label_no_risks_2"
-msgstr ""
+msgstr "Tveganji ni"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:223
 #: src/osha/oira/client/templates/status.pt:90
 msgid "label_no_risks_3_4"
-msgstr ""
+msgstr "Tveganja ni"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:224
 #: src/osha/oira/client/templates/status.pt:91
 msgid "label_no_risks_5_or_more"
-msgstr ""
+msgstr "Tveganj ni"
 
 #. Default: Risk with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:228
@@ -3215,19 +3215,19 @@ msgstr "Tveganje z ukrepom(-i)"
 #: src/osha/oira/client/templates/risks_overview.pt:229
 #: src/osha/oira/client/templates/status.pt:96
 msgid "label_risks_with_measure_2"
-msgstr ""
+msgstr "Tveganji z ukrepom(-i)"
 
 #. Default: Risks with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:230
 #: src/osha/oira/client/templates/status.pt:97
 msgid "label_risks_with_measure_3_4"
-msgstr ""
+msgstr "Tveganja z ukrepom(-i)"
 
 #. Default: Risks with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:231
 #: src/osha/oira/client/templates/status.pt:98
 msgid "label_risks_with_measure_5_or_more"
-msgstr ""
+msgstr "Tveganj z ukrepom(-i)"
 
 #. Default: Risk without measure
 #: src/osha/oira/client/templates/risks_overview.pt:235
@@ -3240,19 +3240,19 @@ msgstr "Tveganje brez ukrepa"
 #: src/osha/oira/client/templates/risks_overview.pt:236
 #: src/osha/oira/client/templates/status.pt:103
 msgid "label_risks_without_measure_2"
-msgstr ""
+msgstr "Tveganji brez ukrepa"
 
 #. Default: Risks without measure
 #: src/osha/oira/client/templates/risks_overview.pt:237
 #: src/osha/oira/client/templates/status.pt:104
 msgid "label_risks_without_measure_3_4"
-msgstr ""
+msgstr "Tveganja brez ukrepa"
 
 #. Default: Risks without measure
 #: src/osha/oira/client/templates/risks_overview.pt:238
 #: src/osha/oira/client/templates/status.pt:105
 msgid "label_risks_without_measure_5_or_more"
-msgstr ""
+msgstr "Tveganj brez ukrepa"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/risks_overview.pt:241
@@ -3273,82 +3273,82 @@ msgstr "Neodgovorjeno"
 #. Default: ${num_present_risks} Present Risk
 #: src/osha/oira/client/templates/risks_overview.pt:255
 msgid "heading_present_risks"
-msgstr "${num_present_risks} prisotnih tveganj"
+msgstr "${num_present_risks} prisotnih tveganje"
 
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:256
 msgid "heading_present_risks_2"
-msgstr ""
+msgstr "${num_present_risks} prisotnih tveganji"
 
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:257
 msgid "heading_present_risks_3_4"
-msgstr ""
+msgstr "${num_present_risks} prisotnih tveganja"
 
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:258
 msgid "heading_present_risks_5_or_more"
-msgstr ""
+msgstr "${num_present_risks} prisotnih tveganj"
 
 #. Default: ${num_high_risks} High priority risk
 #: src/osha/oira/client/templates/risks_overview.pt:261
 msgid "heading_num_high_prio_risks"
-msgstr "${num_high_risks} tveganj visoke prioritete "
+msgstr "${num_high_risks} tveganje visoke prioritete"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:262
 msgid "heading_num_high_prio_risks_2"
-msgstr ""
+msgstr "${num_high_risks} tveganji visoke prioritete"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:263
 msgid "heading_num_high_prio_risks_3_4"
-msgstr ""
+msgstr "${num_high_risks} tveganja visoke prioritete"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:264
 msgid "heading_num_high_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_high_risks} tveganj visoke prioritete"
 
 #. Default: ${num_medium_risks} Medium priority risk
 #: src/osha/oira/client/templates/risks_overview.pt:266
 msgid "heading_num_medium_prio_risks"
-msgstr "${num_ medium _risks} tveganj srednje prioritete "
+msgstr "${num_medium_risks} tveganje srednje prioritete"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:267
 msgid "heading_num_medium_prio_risks_2"
-msgstr ""
+msgstr "${num_medium_risks} tveganji srednje prioritete"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:268
 msgid "heading_num_medium_prio_risks_3_4"
-msgstr ""
+msgstr "${num_medium_risks} tveganja srednje prioritete"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:269
 msgid "heading_num_medium_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_medium_risks} tveganj srednje prioritete"
 
 #. Default: ${num_low_risks} Low priority risk
 #: src/osha/oira/client/templates/risks_overview.pt:271
 msgid "heading_num_low_prio_risks"
-msgstr "${num_ low _risks} tveganj nizke prioritete "
+msgstr "${num_low_risks} tveganje nizke prioritete"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:272
 msgid "heading_num_low_prio_risks_2"
-msgstr ""
+msgstr "${num_low_risks} tveganji nizke prioritete"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:273
 msgid "heading_num_low_prio_risks_3_4"
-msgstr ""
+msgstr "${num_low_risks} tveganja nizke prioritete"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:274
 msgid "heading_num_low_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_low_risks} tveganj nizke prioritete"
 
 #. Default: (≥1 measures)
 #: src/osha/oira/client/templates/risks_overview.pt:278
@@ -3363,62 +3363,62 @@ msgstr "(brez ukrepov)"
 #. Default: ${num_possible_risks} Possible Risk
 #: src/osha/oira/client/templates/risks_overview.pt:286
 msgid "heading_possible_risks"
-msgstr "${num_ possible_risks} možnih tveganj "
+msgstr "${num_possible_risks} možno tveganje"
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:287
 msgid "heading_possible_risks_2"
-msgstr ""
+msgstr "${num_possible_risks} možni tveganji"
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:288
 msgid "heading_possible_risks_3_4"
-msgstr ""
+msgstr "${num_possible_risks} možna tveganja"
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:289
 msgid "heading_possible_risks_5_or_more"
-msgstr ""
+msgstr "${num_possible_risks} možnih tveganj"
 
 #. Default: ${num_postponed_risks} Risk postponed
 #: src/osha/oira/client/templates/risks_overview.pt:293
 msgid "heading_num_postponed_prio_risks"
-msgstr "${num_ postponed_risks} preloženih tveganj "
+msgstr "${num_postponed_risks} preloženo tveganje"
 
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:294
 msgid "heading_num_postponed_prio_risks_2"
-msgstr ""
+msgstr "${num_postponed_risks} preloženi tveganji"
 
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:295
 msgid "heading_num_postponed_prio_risks_3_4"
-msgstr ""
+msgstr "${num_postponed_risks} preložena tveganja"
 
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:296
 msgid "heading_num_postponed_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_postponed_risks} preloženih tveganj"
 
 #. Default: ${num_todo_risks} Risk not answered
 #: src/osha/oira/client/templates/risks_overview.pt:298
 msgid "heading_num_todo_prio_risks"
-msgstr "${num_ todo _risks} neodgovorjenih tveganj "
+msgstr "${num_todo_risks} neodgovorjeno tveganje"
 
 #. Default: ${num_todo_risks} Risks not answered
 #: src/osha/oira/client/templates/risks_overview.pt:299
 msgid "heading_num_todo_prio_risks_2"
-msgstr ""
+msgstr "${num_todo_risks} neodgovorjeni tveganji"
 
 #. Default: ${num_todo_risks} Risks not answered
 #: src/osha/oira/client/templates/risks_overview.pt:300
 msgid "heading_num_todo_prio_risks_3_4"
-msgstr ""
+msgstr "${num_todo_risks} neodgovorjena tveganja"
 
 #. Default: ${num_todo_risks} Risks not answered
 #: src/osha/oira/client/templates/risks_overview.pt:301
 msgid "heading_num_todo_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_todo_risks} neodgovorjenih tveganj"
 
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/shell.pt:102

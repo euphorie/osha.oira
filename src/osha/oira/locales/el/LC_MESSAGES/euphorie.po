@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-27 11:17+0100\n"
+"POT-Creation-Date: 2015-10-28 12:05+0100\n"
 "PO-Revision-Date: 2013-08-15 11:22+0200\n"
 "Last-Translator: xl <xl@hol.gr>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "Generated-By: Babel 0.9.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #. Default: HTML Source Code
 #: src/osha/oira/homepage.py:36
@@ -889,7 +889,7 @@ msgstr "Ακύρωση"
 #. Default: Please enter a valid email address.
 #: src/osha/oira/client/login.py:40
 msgid "invalid_email"
-msgstr ""
+msgstr "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση ηλεκτρονικού ταχυδρομείου."
 
 #: src/osha/oira/client/login.py:69
 msgid "An email with a password reminder has been sent to your address."
@@ -1195,66 +1195,67 @@ msgstr ""
 #: src/osha/oira/client/risk.py:308
 msgid "No changes were made to measures in your action plan."
 msgstr ""
+"Δεν έγιναν αλλαγές στα μέτρα που περιλαμβάνονται στο σχέδιο δράσης σας."
 
 #. Default: A measure has been added to your action plan.
 #: src/osha/oira/client/risk.py:313
 msgid "message_measure_saved"
-msgstr ""
+msgstr "Ένα νέο μέτρο έχει προστεθεί στο σχέδιο δράσης σας."
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:318
 msgid "message_measures_saved_2"
-msgstr ""
+msgstr "${no_of_measures} μέτρα προστέθηκαν στο σχέδιο δράσης σας."
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:326
 msgid "message_measures_saved_3_4"
-msgstr ""
+msgstr "${no_of_measures} μέτρα προστέθηκαν στο σχέδιο δράσης σας."
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:334
 msgid "message_measures_saved"
-msgstr ""
+msgstr "${no_of_measures} μέτρα προστέθηκαν στο σχέδιο δράσης σας."
 
 #. Default: A measure has been updated in your action plan.
 #: src/osha/oira/client/risk.py:343
 msgid "message_measure_updated"
-msgstr ""
+msgstr "Ένα μέτρο έχει επικαιροποιηθεί στο σχέδιο δράσης σας."
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:348
 msgid "message_measures_updated_2"
-msgstr ""
+msgstr "${no_of_measures} μέτρα έχουν επικαιροποιηθεί στο σχέδιο δράσης σας."
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:356
 msgid "message_measures_updated_3_4"
-msgstr ""
+msgstr "${no_of_measures} μέτρα έχουν επικαιροποιηθεί στο σχέδιο δράσης σας."
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:364
 msgid "message_measures_updated"
-msgstr ""
+msgstr "${no_of_measures} μέτρα έχουν επικαιροποιηθεί στο σχέδιο δράσης σας."
 
 #. Default: A measure has been removed from your action plan.
 #: src/osha/oira/client/risk.py:373
 msgid "message_measure_removed"
-msgstr ""
+msgstr "Ένα μέτρο έχει διαγραφεί από το σχέδιο δράσης σας."
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:378
 msgid "message_measures_removed_3"
-msgstr ""
+msgstr "${no_of_measures} μέτρα έχουν διαγραφεί από το σχέδιο δράσης σας."
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:386
 msgid "message_measures_removed_3_4"
-msgstr ""
+msgstr "${no_of_measures} μέτρα έχουν διαγραφεί από το σχέδιο δράσης σας."
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:394
 msgid "message_measures_removed"
-msgstr ""
+msgstr "${no_of_measures} μέτρα έχουν διαγραφεί από το σχέδιο δράσης σας."
 
 #. Default: Change password
 #: src/osha/oira/client/settings.py:18
@@ -1947,7 +1948,7 @@ msgstr ""
 #. Default: log in
 #: src/osha/oira/client/templates/login.pt:27
 msgid "log in"
-msgstr ""
+msgstr "σύνδεση"
 
 #. Default: If you are a registered user, you can ${log_in} here.
 #: src/osha/oira/client/templates/login.pt:27
@@ -2205,11 +2206,11 @@ msgstr "Σύνδεση"
 
 #: src/osha/oira/client/templates/measures_overview.pt:60
 msgid "Overview of measures"
-msgstr ""
+msgstr "Κατάλογος επισκόπησης των μέτρων"
 
 #: src/osha/oira/client/templates/measures_overview.pt:61
 msgid "(measures to be implemented in the coming months)"
-msgstr ""
+msgstr "(μέτρα προς εφαρμογή τους επόμενους μήνες)"
 
 #: src/osha/oira/client/templates/measures_overview.pt:62
 #: src/osha/oira/client/templates/report_landing.pt:51
@@ -2235,7 +2236,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/measures_overview.pt:76
 msgid "Measure to be implemented by"
-msgstr ""
+msgstr "Μέτρα προς εφαρμογή από"
 
 #. Default: High priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:84
@@ -2247,12 +2248,12 @@ msgstr "Κίνδυνοι υψηλής προτεραιότητας"
 #. Default: Medium priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:116
 msgid "heading_medium_prio_risks"
-msgstr ""
+msgstr "Κίνδυνοι μεσαίας επικινδυνότητας"
 
 #. Default: Low priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:131
 msgid "heading_low_prio_risks"
-msgstr ""
+msgstr "Κίνδυνοι χαμηλής επικινδυνότητας"
 
 #. Default: Next
 #: src/osha/oira/client/templates/module_actionplan.pt:50
@@ -2299,7 +2300,7 @@ msgstr "Διαγραφή κινδύνου"
 #. Default: Add another risk
 #: src/osha/oira/client/templates/module_customization.pt:61
 msgid "label_add_risk"
-msgstr "Εισαγωγή κινδύνου"
+msgstr "Προσθέστε έναν κίνδυνο"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_customization.pt:62
@@ -2388,7 +2389,7 @@ msgstr ""
 #: src/osha/oira/client/templates/new-session-test.pt:30
 #: src/osha/oira/client/templates/new-session.pt:33
 msgid "Session name"
-msgstr ""
+msgstr "Τίτλος της μελέτης Εκτίμησης Κινδύνου"
 
 #. Default: benefits
 #: src/osha/oira/client/templates/new-session-test.pt:34
@@ -2569,12 +2570,12 @@ msgstr "Παράδειγμα σχεδίου δράσης σε μορφή Office 
 #. Default: Example of a risk overview report in PDF format
 #: src/osha/oira/client/templates/register.pt:51
 msgid "header_example_report_risks"
-msgstr ""
+msgstr "Παράδειγμα της έκθεσης επισκόπησης  των κινδύνων σε μορφή PDF"
 
 #. Default: Example of a measures overview report in PDF format
 #: src/osha/oira/client/templates/register.pt:59
 msgid "header_example_report_measures"
-msgstr ""
+msgstr "Παράδειγμα της έκθεσης επισκόπησης  των μέτρων σε μορφή PDF"
 
 #. Default: Register
 #: src/osha/oira/client/templates/register.pt:66
@@ -3444,72 +3445,72 @@ msgstr "${num_present_risks} Αναγνωρισμένοι κίνδυνοι"
 #. Default: ${num_high_risks} High priority risk
 #: src/osha/oira/client/templates/risks_overview.pt:261
 msgid "heading_num_high_prio_risks"
-msgstr ""
+msgstr "${num_high_risks} Κίνδυνοι υψηλής επικινδυνότητας"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:262
 msgid "heading_num_high_prio_risks_2"
-msgstr ""
+msgstr "${num_high_risks} Κίνδυνοι υψηλής επικινδυνότητας"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:263
 msgid "heading_num_high_prio_risks_3_4"
-msgstr ""
+msgstr "${num_high_risks} Κίνδυνοι υψηλής επικινδυνότητας"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:264
 msgid "heading_num_high_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_high_risks} Κίνδυνοι υψηλής επικινδυνότητας"
 
 #. Default: ${num_medium_risks} Medium priority risk
 #: src/osha/oira/client/templates/risks_overview.pt:266
 msgid "heading_num_medium_prio_risks"
-msgstr ""
+msgstr "${num_medium_risks} Κίνδυνοι μεσαίας επικινδυνότητας"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:267
 msgid "heading_num_medium_prio_risks_2"
-msgstr ""
+msgstr "${num_medium_risks} Κίνδυνοι μεσαίας επικινδυνότητας"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:268
 msgid "heading_num_medium_prio_risks_3_4"
-msgstr ""
+msgstr "${num_medium_risks} Κίνδυνοι μεσαίας επικινδυνότητας"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:269
 msgid "heading_num_medium_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_medium_risks} Κίνδυνοι μεσαίας επικινδυνότητας"
 
 #. Default: ${num_low_risks} Low priority risk
 #: src/osha/oira/client/templates/risks_overview.pt:271
 msgid "heading_num_low_prio_risks"
-msgstr ""
+msgstr "${num_low_risks} Κίνδυνοι χαμηλής επικινδυνότητας"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:272
 msgid "heading_num_low_prio_risks_2"
-msgstr ""
+msgstr "${num_low_risks} Κίνδυνοι χαμηλής επικινδυνότητας"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:273
 msgid "heading_num_low_prio_risks_3_4"
-msgstr ""
+msgstr "${num_low_risks} Κίνδυνοι χαμηλής επικινδυνότητας"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:274
 msgid "heading_num_low_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_low_risks} Κίνδυνοι χαμηλής επικινδυνότητας"
 
 #. Default: (≥1 measures)
 #: src/osha/oira/client/templates/risks_overview.pt:278
 msgid "label_with_measures"
-msgstr ""
+msgstr "(≥1 μέτρα)"
 
 #. Default: (without measures)
 #: src/osha/oira/client/templates/risks_overview.pt:278
 msgid "label_without_measures"
-msgstr ""
+msgstr "(χωρίς αναφορά μέτρων)"
 
 #. Default: ${num_possible_risks} Possible Risk
 #: src/osha/oira/client/templates/risks_overview.pt:286
@@ -3574,7 +3575,7 @@ msgstr "${num_todo_risks} Κίνδυνοι υπό εξέταση"
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/shell.pt:102
 msgid "Start a new session"
-msgstr ""
+msgstr "Έναρξη μιας νέας μελέτης Εκτίμησης Κινδύνου"
 
 #. Default: start a new session
 #: src/osha/oira/client/templates/sessions.pt:22
@@ -3599,7 +3600,7 @@ msgstr "αποθηκεύτηκε στις ${date}"
 #: src/osha/oira/client/templates/sessions.pt:36
 #: src/osha/oira/client/templates/survey_sessions.pt:32
 msgid "Rename this session"
-msgstr ""
+msgstr "Μετονομάστε αυτή τη μελέτη Εκτίμησης Κινδύνου"
 
 #. Default: Rename
 #: src/osha/oira/client/templates/sessions.pt:36
@@ -3610,7 +3611,7 @@ msgstr "Μετονομασία"
 #: src/osha/oira/client/templates/sessions.pt:37
 #: src/osha/oira/client/templates/survey_sessions.pt:33
 msgid "Delete this session"
-msgstr ""
+msgstr "Διαγράψτε αυτή τη μελέτη Εκτίμησης Κινδύνου"
 
 #: src/osha/oira/client/templates/shell.pt:92
 #: src/osha/oira/client/templates/shell.pt:94
@@ -3664,12 +3665,12 @@ msgstr "Ερωτήσεις που απαντήθηκαν ανά ενότητα"
 #. Default: Postponed
 #: src/osha/oira/client/templates/status_print.pt:94
 msgid "label_postponed"
-msgstr ""
+msgstr "Σε εκκρεμότητα"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/status_print.pt:97
 msgid "label_unanswered"
-msgstr ""
+msgstr "Υπό εξέταση"
 
 #. Default: Select an earlier session to complete or review
 #: src/osha/oira/client/templates/survey_sessions.pt:20
@@ -4219,6 +4220,8 @@ msgstr "Πιθανότητα"
 #: src/osha/oira/content/survey.py:127
 msgid "description_criteria_explanation"
 msgstr ""
+"Για να παρακάμψετε αυτή την προεπιλεγμένη περιγραφή, εισάγετε εδώ τη δική "
+"σας περιγραφή: ${default_explanation}"
 
 #: src/osha/oira/content/survey.py:111
 msgid "Frequency"

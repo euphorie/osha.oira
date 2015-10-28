@@ -1172,12 +1172,12 @@ msgstr "Priemonė yra įtraukta į jūsų veiksmų planą."
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:318
 msgid "message_measures_saved_2"
-msgstr ""
+msgstr "${no_of_measures} priemonės yra įtrauktos į jūsų veiksmų planą."
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:326
 msgid "message_measures_saved_3_4"
-msgstr ""
+msgstr "${no_of_measures} priemonės yra įtrauktos į jūsų veiksmų planą."
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:334
@@ -1192,12 +1192,12 @@ msgstr "Priemonė jūsų veiksmų plane yra atnaujinta."
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:348
 msgid "message_measures_updated_2"
-msgstr ""
+msgstr "${no_of_measures} priemonės veiksmų plane yra atnaujintos."
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:356
 msgid "message_measures_updated_3_4"
-msgstr ""
+msgstr "${no_of_measures} priemonės veiksmų plane yra atnaujintos."
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:364
@@ -1212,12 +1212,12 @@ msgstr "Priemonė yra pašalinta iš jūsų veiksmų plano."
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:378
 msgid "message_measures_removed_3"
-msgstr ""
+msgstr "${no_of_measures} priemonės yra pašalintos iš jūsų veiksmų plano."
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:386
 msgid "message_measures_removed_3_4"
-msgstr ""
+msgstr "${no_of_measures} priemonės yra pašalintos iš jūsų veiksmų plano."
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:394
@@ -3206,19 +3206,19 @@ msgstr "Rizikos nėra (labai maža)"
 #: src/osha/oira/client/templates/risks_overview.pt:222
 #: src/osha/oira/client/templates/status.pt:89
 msgid "label_no_risks_2"
-msgstr ""
+msgstr "Rizikos nėra (labai maža)"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:223
 #: src/osha/oira/client/templates/status.pt:90
 msgid "label_no_risks_3_4"
-msgstr ""
+msgstr "Rizikos nėra (labai maža)"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:224
 #: src/osha/oira/client/templates/status.pt:91
 msgid "label_no_risks_5_or_more"
-msgstr ""
+msgstr "Rizikos nėra (labai maža)"
 
 #. Default: Risk with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:228
@@ -3231,19 +3231,19 @@ msgstr "Rizika, numatyta (-os) priemonė (-ės)"
 #: src/osha/oira/client/templates/risks_overview.pt:229
 #: src/osha/oira/client/templates/status.pt:96
 msgid "label_risks_with_measure_2"
-msgstr ""
+msgstr "Rizika, numatyta (-os) priemonė (-ės)"
 
 #. Default: Risks with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:230
 #: src/osha/oira/client/templates/status.pt:97
 msgid "label_risks_with_measure_3_4"
-msgstr ""
+msgstr "Rizika, numatyta (-os) priemonė (-ės)"
 
 #. Default: Risks with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:231
 #: src/osha/oira/client/templates/status.pt:98
 msgid "label_risks_with_measure_5_or_more"
-msgstr ""
+msgstr "Rizika, numatyta (-os) priemonė (-ės)"
 
 #. Default: Risk without measure
 #: src/osha/oira/client/templates/risks_overview.pt:235
@@ -3256,19 +3256,19 @@ msgstr "Rizika, kuriai nenumatyta (-os) priemonė (-ės)"
 #: src/osha/oira/client/templates/risks_overview.pt:236
 #: src/osha/oira/client/templates/status.pt:103
 msgid "label_risks_without_measure_2"
-msgstr ""
+msgstr "Rizika, kuriai nenumatyta (-os) priemonė (-ės)"
 
 #. Default: Risks without measure
 #: src/osha/oira/client/templates/risks_overview.pt:237
 #: src/osha/oira/client/templates/status.pt:104
 msgid "label_risks_without_measure_3_4"
-msgstr ""
+msgstr "Rizika, kuriai nenumatyta (-os) priemonė (-ės)"
 
 #. Default: Risks without measure
 #: src/osha/oira/client/templates/risks_overview.pt:238
 #: src/osha/oira/client/templates/status.pt:105
 msgid "label_risks_without_measure_5_or_more"
-msgstr ""
+msgstr "Rizika, kuriai nenumatyta (-os) priemonė (-ės)"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/risks_overview.pt:241
@@ -3294,17 +3294,17 @@ msgstr "${num_present_risks} Esamos rizikos"
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:256
 msgid "heading_present_risks_2"
-msgstr ""
+msgstr "${num_present_risks} Esamos rizikos"
 
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:257
 msgid "heading_present_risks_3_4"
-msgstr ""
+msgstr "${num_present_risks} Esamos rizikos"
 
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:258
 msgid "heading_present_risks_5_or_more"
-msgstr ""
+msgstr "${num_present_risks} Esamos rizikos"
 
 #. Default: ${num_high_risks} High priority risk
 #: src/osha/oira/client/templates/risks_overview.pt:261
@@ -3314,17 +3314,17 @@ msgstr "${num_high_risks} Didelio reikšmingumo rizikos"
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:262
 msgid "heading_num_high_prio_risks_2"
-msgstr ""
+msgstr "${num_high_risks} Didelio reikšmingumo rizikos"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:263
 msgid "heading_num_high_prio_risks_3_4"
-msgstr ""
+msgstr "${num_high_risks} Didelio reikšmingumo rizikos"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:264
 msgid "heading_num_high_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_high_risks} Didelio reikšmingumo rizikos"
 
 #. Default: ${num_medium_risks} Medium priority risk
 #: src/osha/oira/client/templates/risks_overview.pt:266
@@ -3334,17 +3334,17 @@ msgstr "${num_medium_risks} Vidutinio reikšmingumo rizikos"
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:267
 msgid "heading_num_medium_prio_risks_2"
-msgstr ""
+msgstr "${num_medium_risks} Vidutinio reikšmingumo rizikos"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:268
 msgid "heading_num_medium_prio_risks_3_4"
-msgstr ""
+msgstr "${num_medium_risks} Vidutinio reikšmingumo rizikos"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:269
 msgid "heading_num_medium_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_medium_risks} Vidutinio reikšmingumo rizikos"
 
 #. Default: ${num_low_risks} Low priority risk
 #: src/osha/oira/client/templates/risks_overview.pt:271
@@ -3354,17 +3354,17 @@ msgstr "${num_low_risks} Mažo reikšmingumo rizikos"
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:272
 msgid "heading_num_low_prio_risks_2"
-msgstr ""
+msgstr "${num_low_risks} Mažo reikšmingumo rizikos"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:273
 msgid "heading_num_low_prio_risks_3_4"
-msgstr ""
+msgstr "${num_low_risks} Mažo reikšmingumo rizikos"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:274
 msgid "heading_num_low_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_low_risks} Mažo reikšmingumo rizikos"
 
 #. Default: (≥1 measures)
 #: src/osha/oira/client/templates/risks_overview.pt:278
@@ -3384,17 +3384,17 @@ msgstr "${num_possible_risks} Galimos rizikos"
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:287
 msgid "heading_possible_risks_2"
-msgstr ""
+msgstr "${num_possible_risks} Galimos rizikos"
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:288
 msgid "heading_possible_risks_3_4"
-msgstr ""
+msgstr "${num_possible_risks} Galimos rizikos"
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:289
 msgid "heading_possible_risks_5_or_more"
-msgstr ""
+msgstr "${num_possible_risks} Galimos rizikos"
 
 #. Default: ${num_postponed_risks} Risk postponed
 #: src/osha/oira/client/templates/risks_overview.pt:293
@@ -3404,17 +3404,17 @@ msgstr "${num_postponed_risks} Atidėtos rizikos"
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:294
 msgid "heading_num_postponed_prio_risks_2"
-msgstr ""
+msgstr "${num_postponed_risks} Atidėtos rizikos"
 
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:295
 msgid "heading_num_postponed_prio_risks_3_4"
-msgstr ""
+msgstr "${num_postponed_risks} Atidėtos rizikos"
 
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:296
 msgid "heading_num_postponed_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_postponed_risks} Atidėtos rizikos"
 
 #. Default: ${num_todo_risks} Risk not answered
 #: src/osha/oira/client/templates/risks_overview.pt:298
@@ -3424,17 +3424,17 @@ msgstr "${num_todo_risks} Neatsakytos rizikos"
 #. Default: ${num_todo_risks} Risks not answered
 #: src/osha/oira/client/templates/risks_overview.pt:299
 msgid "heading_num_todo_prio_risks_2"
-msgstr ""
+msgstr "${num_todo_risks} Neatsakytos rizikos"
 
 #. Default: ${num_todo_risks} Risks not answered
 #: src/osha/oira/client/templates/risks_overview.pt:300
 msgid "heading_num_todo_prio_risks_3_4"
-msgstr ""
+msgstr "${num_todo_risks} Neatsakytos rizikos"
 
 #. Default: ${num_todo_risks} Risks not answered
 #: src/osha/oira/client/templates/risks_overview.pt:301
 msgid "heading_num_todo_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_todo_risks} Neatsakytos rizikos"
 
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/shell.pt:102

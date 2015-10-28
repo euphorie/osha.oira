@@ -4,8 +4,9 @@ Changelog
 3.0.0rc4 (unreleased)
 ---------------------
 
-- Nothing changed yet.
-
+- Especially for the Slovenian language, support 3 different plural forms on various
+  messages (exactly 2, 3-4, 5 or more).
+- Various translation updates
 
 3.0.0rc3 (2015-10-22)
 ---------------------

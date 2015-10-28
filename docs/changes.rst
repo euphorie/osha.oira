@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0rc4 (unreleased)
+3.0.0rc4 (2015-10-28)
 ---------------------
 
 - Especially for the Slovenian language, support 3 different plural forms on various

@@ -4,8 +4,7 @@ Changelog
 3.0.0rc5 (unreleased)
 ---------------------
 
-- Nothing changed yet.
-
+- More tanslation changes
 
 3.0.0rc4 (2015-10-28)
 ---------------------

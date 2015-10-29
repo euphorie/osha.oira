@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0rc5 (unreleased)
+3.0.0rc5 (2015-10-29)
 ---------------------
 
 - More tanslation changes

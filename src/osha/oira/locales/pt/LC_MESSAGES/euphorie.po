@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.23.dev0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-27 11:17+0100\n"
+"POT-Creation-Date: 2015-10-29 14:18+0100\n"
 "PO-Revision-Date: 2013-08-15 11:33+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -862,7 +862,7 @@ msgstr "Cancelar"
 #. Default: Please enter a valid email address.
 #: src/osha/oira/client/login.py:40
 msgid "invalid_email"
-msgstr ""
+msgstr "Introduza um endereço de e-mail válido"
 
 #: src/osha/oira/client/login.py:69
 msgid "An email with a password reminder has been sent to your address."
@@ -1157,67 +1157,67 @@ msgstr "Indica a frequência de ocorrência do risco numa situação normal."
 
 #: src/osha/oira/client/risk.py:308
 msgid "No changes were made to measures in your action plan."
-msgstr ""
+msgstr "Nenhuma alteração foi feita ao seu plano de ação"
 
 #. Default: A measure has been added to your action plan.
 #: src/osha/oira/client/risk.py:313
 msgid "message_measure_saved"
-msgstr ""
+msgstr "Uma medida foi adicionada ao seu plano de ação"
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:318
 msgid "message_measures_saved_2"
-msgstr ""
+msgstr "${no_of_measures} medidas foram adicionadas ao seu plano de ação"
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:326
 msgid "message_measures_saved_3_4"
-msgstr ""
+msgstr "${no_of_measures} medidas foram adicionadas ao seu plano de ação"
 
 #. Default: ${no_of_measures} measures have been added to your action plan.
 #: src/osha/oira/client/risk.py:334
 msgid "message_measures_saved"
-msgstr ""
+msgstr "${no_of_measures} medidas foram adicionadas ao seu plano de ação"
 
 #. Default: A measure has been updated in your action plan.
 #: src/osha/oira/client/risk.py:343
 msgid "message_measure_updated"
-msgstr ""
+msgstr "Uma medida foi atualizada no seu plano de ação"
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:348
 msgid "message_measures_updated_2"
-msgstr ""
+msgstr "${no_of_measures} medidas foram atualizadas no seu plano de ação"
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:356
 msgid "message_measures_updated_3_4"
-msgstr ""
+msgstr "${no_of_measures} medidas foram atualizadas no seu plano de ação"
 
 #. Default: ${no_of_measures} measures have been updated in your action plan.
 #: src/osha/oira/client/risk.py:364
 msgid "message_measures_updated"
-msgstr ""
+msgstr "${no_of_measures} medidas foram atualizadas no seu plano de ação"
 
 #. Default: A measure has been removed from your action plan.
 #: src/osha/oira/client/risk.py:373
 msgid "message_measure_removed"
-msgstr ""
+msgstr "Uma medida foi removida do seu plano de ação"
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:378
 msgid "message_measures_removed_3"
-msgstr ""
+msgstr "${no_of_measures} medidas foram removidas do seu plano de ação"
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:386
 msgid "message_measures_removed_3_4"
-msgstr ""
+msgstr "${no_of_measures} medidas foram removidas do seu plano de ação"
 
 #. Default: ${no_of_measures} measures have been removed from your action plan.
 #: src/osha/oira/client/risk.py:394
 msgid "message_measures_removed"
-msgstr ""
+msgstr "${no_of_measures} medidas foram removidas do seu plano de ação"
 
 #. Default: Change password
 #: src/osha/oira/client/settings.py:18
@@ -1888,7 +1888,7 @@ msgstr ""
 #. Default: log in
 #: src/osha/oira/client/templates/login.pt:27
 msgid "log in"
-msgstr ""
+msgstr "log in"
 
 #. Default: If you are a registered user, you can ${log_in} here.
 #: src/osha/oira/client/templates/login.pt:27
@@ -2113,11 +2113,11 @@ msgstr "Login"
 
 #: src/osha/oira/client/templates/measures_overview.pt:60
 msgid "Overview of measures"
-msgstr ""
+msgstr "Visão geral das medidas"
 
 #: src/osha/oira/client/templates/measures_overview.pt:61
 msgid "(measures to be implemented in the coming months)"
-msgstr ""
+msgstr "(medidas a serem implementadas nos próximos meses)"
 
 #: src/osha/oira/client/templates/measures_overview.pt:62
 #: src/osha/oira/client/templates/report_landing.pt:51
@@ -2138,28 +2138,28 @@ msgstr "Transmitir informações às pessoas interessadas."
 #: src/osha/oira/client/templates/measures_overview.pt:65
 #: src/osha/oira/client/templates/report_landing.pt:114
 msgid "Monitor the measures to be implemented in the forthcoming 3 months."
-msgstr ""
+msgstr "Monitorizar as medidas a serem implementadas nos próximos 3 meses"
 
 #: src/osha/oira/client/templates/measures_overview.pt:76
 msgid "Measure to be implemented by"
-msgstr ""
+msgstr "Medida a ser implementada por"
 
 #. Default: High priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:84
 #: src/osha/oira/client/templates/status.pt:115
 #: src/osha/oira/client/templates/status_print.pt:101
 msgid "heading_high_prio_risks"
-msgstr "Riscos de elevada prioridade"
+msgstr "Riscos de prioridade alta"
 
 #. Default: Medium priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:116
 msgid "heading_medium_prio_risks"
-msgstr ""
+msgstr "Riscos de prioridade média"
 
 #. Default: Low priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:131
 msgid "heading_low_prio_risks"
-msgstr ""
+msgstr "Riscos de prioridade baixa"
 
 #. Default: Next
 #: src/osha/oira/client/templates/module_actionplan.pt:50
@@ -2206,7 +2206,7 @@ msgstr "Eliminar risco"
 #. Default: Add another risk
 #: src/osha/oira/client/templates/module_customization.pt:61
 msgid "label_add_risk"
-msgstr "Adicionar Risco"
+msgstr "Adicione outro risco"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_customization.pt:62
@@ -3209,7 +3209,7 @@ msgstr ""
 
 #: src/osha/oira/client/templates/risks_overview.pt:146
 msgid "Overview of risks"
-msgstr ""
+msgstr "Visão geral dos riscos"
 
 #. Default: No risk
 #: src/osha/oira/client/templates/risks_overview.pt:221
@@ -3222,19 +3222,19 @@ msgstr "Nenhum risco"
 #: src/osha/oira/client/templates/risks_overview.pt:222
 #: src/osha/oira/client/templates/status.pt:89
 msgid "label_no_risks_2"
-msgstr ""
+msgstr "Nenhum risco"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:223
 #: src/osha/oira/client/templates/status.pt:90
 msgid "label_no_risks_3_4"
-msgstr ""
+msgstr "Nenhum risco"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:224
 #: src/osha/oira/client/templates/status.pt:91
 msgid "label_no_risks_5_or_more"
-msgstr ""
+msgstr "Nenhum risco"
 
 #. Default: Risk with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:228
@@ -3247,19 +3247,19 @@ msgstr "Risco com medida(s)"
 #: src/osha/oira/client/templates/risks_overview.pt:229
 #: src/osha/oira/client/templates/status.pt:96
 msgid "label_risks_with_measure_2"
-msgstr ""
+msgstr "Riscos com medida(s"
 
 #. Default: Risks with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:230
 #: src/osha/oira/client/templates/status.pt:97
 msgid "label_risks_with_measure_3_4"
-msgstr ""
+msgstr "Riscos com medida(s"
 
 #. Default: Risks with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:231
 #: src/osha/oira/client/templates/status.pt:98
 msgid "label_risks_with_measure_5_or_more"
-msgstr ""
+msgstr "Riscos com medida(s"
 
 #. Default: Risk without measure
 #: src/osha/oira/client/templates/risks_overview.pt:235
@@ -3272,19 +3272,19 @@ msgstr "Risco sem medida"
 #: src/osha/oira/client/templates/risks_overview.pt:236
 #: src/osha/oira/client/templates/status.pt:103
 msgid "label_risks_without_measure_2"
-msgstr ""
+msgstr "Riscos sem medida"
 
 #. Default: Risks without measure
 #: src/osha/oira/client/templates/risks_overview.pt:237
 #: src/osha/oira/client/templates/status.pt:104
 msgid "label_risks_without_measure_3_4"
-msgstr ""
+msgstr "Riscos sem medida"
 
 #. Default: Risks without measure
 #: src/osha/oira/client/templates/risks_overview.pt:238
 #: src/osha/oira/client/templates/status.pt:105
 msgid "label_risks_without_measure_5_or_more"
-msgstr ""
+msgstr "Riscos sem medida"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/risks_overview.pt:241
@@ -3305,157 +3305,157 @@ msgstr "Sem resposta"
 #. Default: ${num_present_risks} Present Risk
 #: src/osha/oira/client/templates/risks_overview.pt:255
 msgid "heading_present_risks"
-msgstr ""
+msgstr "${num_present_risks} Risco Presente"
 
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:256
 msgid "heading_present_risks_2"
-msgstr ""
+msgstr "${num_present_risks} Riscos Presentes"
 
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:257
 msgid "heading_present_risks_3_4"
-msgstr ""
+msgstr "${num_present_risks} Riscos Presentes"
 
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:258
 msgid "heading_present_risks_5_or_more"
-msgstr ""
+msgstr "${num_present_risks} Riscos Presentes"
 
 #. Default: ${num_high_risks} High priority risk
 #: src/osha/oira/client/templates/risks_overview.pt:261
 msgid "heading_num_high_prio_risks"
-msgstr ""
+msgstr "${num_high_risks} risco de prioridade alta"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:262
 msgid "heading_num_high_prio_risks_2"
-msgstr ""
+msgstr "${num_high_risks} riscos de prioridade alta"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:263
 msgid "heading_num_high_prio_risks_3_4"
-msgstr ""
+msgstr "${num_high_risks} riscos de prioridade alta"
 
 #. Default: ${num_high_risks} High priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:264
 msgid "heading_num_high_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_high_risks} riscos de prioridade alta"
 
 #. Default: ${num_medium_risks} Medium priority risk
 #: src/osha/oira/client/templates/risks_overview.pt:266
 msgid "heading_num_medium_prio_risks"
-msgstr ""
+msgstr "${num_medium_risks} risco de prioridade média"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:267
 msgid "heading_num_medium_prio_risks_2"
-msgstr ""
+msgstr "${num_medium_risks} riscos de prioridade média"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:268
 msgid "heading_num_medium_prio_risks_3_4"
-msgstr ""
+msgstr "${num_medium_risks} riscos de prioridade média"
 
 #. Default: ${num_medium_risks} Medium priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:269
 msgid "heading_num_medium_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_medium_risks} riscos de prioridade média"
 
 #. Default: ${num_low_risks} Low priority risk
 #: src/osha/oira/client/templates/risks_overview.pt:271
 msgid "heading_num_low_prio_risks"
-msgstr ""
+msgstr "${num_low_risks} risco de prioridade baixa"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:272
 msgid "heading_num_low_prio_risks_2"
-msgstr ""
+msgstr "${num_low_risks} riscos de prioridade baixa"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:273
 msgid "heading_num_low_prio_risks_3_4"
-msgstr ""
+msgstr "${num_low_risks} riscos de prioridade baixa"
 
 #. Default: ${num_low_risks} Low priority risks
 #: src/osha/oira/client/templates/risks_overview.pt:274
 msgid "heading_num_low_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_low_risks} riscos de prioridade baixa"
 
 #. Default: (≥1 measures)
 #: src/osha/oira/client/templates/risks_overview.pt:278
 msgid "label_with_measures"
-msgstr ""
+msgstr "(≥1 medidas)"
 
 #. Default: (without measures)
 #: src/osha/oira/client/templates/risks_overview.pt:278
 msgid "label_without_measures"
-msgstr ""
+msgstr "(sem medidas)"
 
 #. Default: ${num_possible_risks} Possible Risk
 #: src/osha/oira/client/templates/risks_overview.pt:286
 msgid "heading_possible_risks"
-msgstr ""
+msgstr "${num_possible_risks} Riscos Possíveis"
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:287
 msgid "heading_possible_risks_2"
-msgstr ""
+msgstr "${num_possible_risks} Riscos Possíveis"
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:288
 msgid "heading_possible_risks_3_4"
-msgstr ""
+msgstr "${num_possible_risks} Riscos Possíveis"
 
 #. Default: ${num_possible_risks} Possible Risks
 #: src/osha/oira/client/templates/risks_overview.pt:289
 msgid "heading_possible_risks_5_or_more"
-msgstr ""
+msgstr "${num_possible_risks} Riscos Possíveis"
 
 #. Default: ${num_postponed_risks} Risk postponed
 #: src/osha/oira/client/templates/risks_overview.pt:293
 msgid "heading_num_postponed_prio_risks"
-msgstr ""
+msgstr "${num_postponed_risks} riscos adiados"
 
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:294
 msgid "heading_num_postponed_prio_risks_2"
-msgstr ""
+msgstr "${num_postponed_risks} riscos adiados"
 
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:295
 msgid "heading_num_postponed_prio_risks_3_4"
-msgstr ""
+msgstr "${num_postponed_risks} riscos adiados"
 
 #. Default: ${num_postponed_risks} Risks postponed
 #: src/osha/oira/client/templates/risks_overview.pt:296
 msgid "heading_num_postponed_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_postponed_risks} riscos adiados"
 
 #. Default: ${num_todo_risks} Risk not answered
 #: src/osha/oira/client/templates/risks_overview.pt:298
 msgid "heading_num_todo_prio_risks"
-msgstr ""
+msgstr "${num_todo_risks} riscos não respondidos"
 
 #. Default: ${num_todo_risks} Risks not answered
 #: src/osha/oira/client/templates/risks_overview.pt:299
 msgid "heading_num_todo_prio_risks_2"
-msgstr ""
+msgstr "${num_todo_risks} riscos não respondidos"
 
 #. Default: ${num_todo_risks} Risks not answered
 #: src/osha/oira/client/templates/risks_overview.pt:300
 msgid "heading_num_todo_prio_risks_3_4"
-msgstr ""
+msgstr "${num_todo_risks} riscos não respondidos"
 
 #. Default: ${num_todo_risks} Risks not answered
 #: src/osha/oira/client/templates/risks_overview.pt:301
 msgid "heading_num_todo_prio_risks_5_or_more"
-msgstr ""
+msgstr "${num_todo_risks} riscos não respondidos"
 
 #: src/osha/oira/client/templates/sessions.pt:22
 #: src/osha/oira/client/templates/shell.pt:102
 msgid "Start a new session"
-msgstr ""
+msgstr "Comece uma nova sessão"
 
 #. Default: start a new session
 #: src/osha/oira/client/templates/sessions.pt:22
@@ -3479,7 +3479,7 @@ msgstr "guardada a ${date}"
 #: src/osha/oira/client/templates/sessions.pt:36
 #: src/osha/oira/client/templates/survey_sessions.pt:32
 msgid "Rename this session"
-msgstr ""
+msgstr "Dê um novo nome a esta sessão"
 
 #. Default: Rename
 #: src/osha/oira/client/templates/sessions.pt:36
@@ -3490,7 +3490,7 @@ msgstr "Mudar o nome"
 #: src/osha/oira/client/templates/sessions.pt:37
 #: src/osha/oira/client/templates/survey_sessions.pt:33
 msgid "Delete this session"
-msgstr ""
+msgstr "Apague esta sessão"
 
 #: src/osha/oira/client/templates/shell.pt:92
 #: src/osha/oira/client/templates/shell.pt:94
@@ -3502,6 +3502,7 @@ msgstr "Inicie a sessão de teste"
 msgid "New"
 msgstr "Nova"
 
+#. Default: Check your progress
 #. Default: Status
 #: src/osha/oira/client/templates/shell.pt:150
 #: src/osha/oira/client/templates/webhelpers.pt:34
@@ -3543,12 +3544,12 @@ msgstr "Perguntas respondidas por módulo"
 #. Default: Postponed
 #: src/osha/oira/client/templates/status_print.pt:94
 msgid "label_postponed"
-msgstr ""
+msgstr "Adiado"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/status_print.pt:97
 msgid "label_unanswered"
-msgstr ""
+msgstr "Não respondido"
 
 #. Default: Select an earlier session to complete or review
 #: src/osha/oira/client/templates/survey_sessions.pt:20
@@ -3794,7 +3795,7 @@ msgstr "${read_more} sobre este risco."
 msgid "header_legal_references"
 msgstr "Referências legais e normativas"
 
-#. Default: Additional resources for assessing the risk
+#. Default: Additional resources to assess the risk
 #: src/osha/oira/client/templates/webhelpers.pt:342
 msgid "header_additional_resources"
 msgstr "Recursos adicionais para a avaliação do risco"
@@ -4082,6 +4083,8 @@ msgstr "Probabilidade"
 #: src/osha/oira/content/survey.py:127
 msgid "description_criteria_explanation"
 msgstr ""
+"Substitua a explicação existente \"${default_explanation}\" pela sua "
+"explicação:"
 
 #: src/osha/oira/content/survey.py:111
 msgid "Frequency"

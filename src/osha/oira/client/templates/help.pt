@@ -14,19 +14,20 @@
       metal:use-macro="context/@@shell/macros/shell">
 
 <body>
-<metal:slot fill-slot="content">
+<metal:slot fill-slot="content"
+  tal:define="base_url string:${here/absolute_url}/help">
   <article class="rich">
     <h1 i18n:translate="title_help">Help</h1>
     <ul class="toc">
-      <li><a href="#introduction" i18n:translate="help_header_introduction">Introduction</a></li>
-      <li><a href="#authentication" i18n:translate="help_header_authentication">Registration</a></li>
-      <li><a href="#sessions" i18n:translate="help_header_sessions">Carrying out your risk assessment</a></li>
-      <li><a href="#start" i18n:translate="help_header_start">1. Preparation</a></li>
-      <li><a href="#identification" i18n:translate="help_header_identification">2. Identification</a></li>
-      <li><a href="#evaluation" i18n:translate="help_header_evaluation">3. Evaluation</a></li>
-      <li><a href="#actionplan" i18n:translate="help_header_actionplan">4. Action Plan</a></li>
-      <li><a href="#report" i18n:translate="help_header_report">5. Report</a></li>
-      <li><a href="#finalwords" i18n:translate="help_header_finalwords">What happens next?</a></li>
+      <li><a href="${base_url}#introduction" i18n:translate="help_header_introduction">Introduction</a></li>
+      <li><a href="${base_url}#authentication" i18n:translate="help_header_authentication">Registration</a></li>
+      <li><a href="${base_url}#sessions" i18n:translate="help_header_sessions">Carrying out your risk assessment</a></li>
+      <li><a href="${base_url}#start" i18n:translate="help_header_start">1. Preparation</a></li>
+      <li><a href="${base_url}#identification" i18n:translate="help_header_identification">2. Identification</a></li>
+      <li><a href="${base_url}#evaluation" i18n:translate="help_header_evaluation">3. Evaluation</a></li>
+      <li><a href="${base_url}#actionplan" i18n:translate="help_header_actionplan">4. Action Plan</a></li>
+      <li><a href="${base_url}#report" i18n:translate="help_header_report">5. Report</a></li>
+      <li><a href="${base_url}#finalwords" i18n:translate="help_header_finalwords">What happens next?</a></li>
     </ul>
 
     <h2 i18n:translate="help_header_introduction" id="introduction">Introduction</h2>

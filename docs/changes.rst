@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0rc6 (unreleased)
+3.0.0rc6 (2015-10-30)
 ---------------------
 
 - Fix anchor links on Help page

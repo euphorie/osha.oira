@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '3.0.0rc7.dev0'
+version = '3.0.0rc7'
 
 tests_require = [
         'Euphorie [tests]',

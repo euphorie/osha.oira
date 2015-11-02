@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0rc7 (unreleased)
+3.0.0rc7 (2015-11-02)
 ---------------------
 
 - Bugfix in report: month must be between 1 and 12

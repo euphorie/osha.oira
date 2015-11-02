@@ -856,8 +856,8 @@ class MeasuresOverview(OSHAStatus):
         if "-" in lang:
             lang = lang.split("-")[0]
         now = datetime.now()
-        next_month = datetime(now.year, now.month + 1, 1)
-        month_after_next = datetime(now.year, now.month + 2, 1)
+        next_month = datetime(now.year, (now.month + 1) % 12, 1)
+        month_after_next = datetime(now.year, (now.month + 2) % 12, 1)
         self.months = []
         self.months.append(now.strftime('%b'))
         self.months.append(next_month.strftime('%b'))

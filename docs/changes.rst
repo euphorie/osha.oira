@@ -4,8 +4,7 @@ Changelog
 3.0.0rc7 (unreleased)
 ---------------------
 
-- Nothing changed yet.
-
+- Bugfix in report: month must be between 1 and 12
 
 3.0.0rc6 (2015-10-30)
 ---------------------

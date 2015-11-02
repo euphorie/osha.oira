@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0rc8 (unreleased)
+3.0.0rc8 (2015-11-02)
 ---------------------
 
 - Bugfix again: month must not be 0

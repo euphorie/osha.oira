@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.30.dev0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-10-29 14:30+0100\n"
+"POT-Creation-Date: 2015-11-03 15:05+0100\n"
 "PO-Revision-Date: 2013-08-15 11:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -363,8 +363,8 @@ msgstr "Rekisteröityminen"
 
 #. Default: Registration
 #: src/osha/oira/manual_translations.py:99
-#: src/osha/oira/client/templates/help.pt:22
-#: src/osha/oira/client/templates/help.pt:35
+#: src/osha/oira/client/templates/help.pt:23
+#: src/osha/oira/client/templates/help.pt:36
 msgid "help_header_authentication"
 msgstr "Rekisteröityminen"
 
@@ -376,8 +376,8 @@ msgstr ""
 
 #. Default: Carrying out your risk assessment
 #: src/osha/oira/manual_translations.py:102
-#: src/osha/oira/client/templates/help.pt:23
-#: src/osha/oira/client/templates/help.pt:38
+#: src/osha/oira/client/templates/help.pt:24
+#: src/osha/oira/client/templates/help.pt:39
 msgid "help_header_sessions"
 msgstr "Riskien arvioinnin eteneminen"
 
@@ -393,8 +393,8 @@ msgstr "Tämän tekstin tulee kuvailla OiRA-työkalun päätoiminnot."
 
 #. Default: 1. Preparation
 #: src/osha/oira/manual_translations.py:106
-#: src/osha/oira/client/templates/help.pt:24
-#: src/osha/oira/client/templates/help.pt:41
+#: src/osha/oira/client/templates/help.pt:25
+#: src/osha/oira/client/templates/help.pt:42
 msgid "help_header_start"
 msgstr "1. Suunnittelu"
 
@@ -410,8 +410,8 @@ msgstr "Tämän tekstin tulee kuvailla profiilikysymysten 2 tyyppiä."
 
 #. Default: 2. Identification
 #: src/osha/oira/manual_translations.py:110
-#: src/osha/oira/client/templates/help.pt:25
-#: src/osha/oira/client/templates/help.pt:44
+#: src/osha/oira/client/templates/help.pt:26
+#: src/osha/oira/client/templates/help.pt:45
 msgid "help_header_identification"
 msgstr "2. Tunnistaminen"
 
@@ -427,8 +427,8 @@ msgstr "Tämän tekstin tulee kuvailla, kuinka riskien tunnistaminen toimii."
 
 #. Default: 3. Evaluation
 #: src/osha/oira/manual_translations.py:114
-#: src/osha/oira/client/templates/help.pt:26
-#: src/osha/oira/client/templates/help.pt:47
+#: src/osha/oira/client/templates/help.pt:27
+#: src/osha/oira/client/templates/help.pt:48
 msgid "help_header_evaluation"
 msgstr "3. Arviointi"
 
@@ -444,8 +444,8 @@ msgstr "Tämän tekstin tulee kuvailla, kuinka tunnistetut riskit arvioidaan."
 
 #. Default: 4. Action Plan
 #: src/osha/oira/manual_translations.py:118
-#: src/osha/oira/client/templates/help.pt:27
-#: src/osha/oira/client/templates/help.pt:50
+#: src/osha/oira/client/templates/help.pt:28
+#: src/osha/oira/client/templates/help.pt:51
 msgid "help_header_actionplan"
 msgstr "4. Toimintasuunnitelma"
 
@@ -461,8 +461,8 @@ msgstr "Tämän tekstin tulee kuvailla, kuinka toimintasuunnitelma täytetään.
 
 #. Default: 5. Report
 #: src/osha/oira/manual_translations.py:122
-#: src/osha/oira/client/templates/help.pt:28
-#: src/osha/oira/client/templates/help.pt:53
+#: src/osha/oira/client/templates/help.pt:29
+#: src/osha/oira/client/templates/help.pt:54
 msgid "help_header_report"
 msgstr "5. Raportointi"
 
@@ -486,8 +486,8 @@ msgstr "Mitä tapahtuu seuraavaksi?"
 
 #. Default: What happens next?
 #: src/osha/oira/manual_translations.py:127
-#: src/osha/oira/client/templates/help.pt:29
-#: src/osha/oira/client/templates/help.pt:56
+#: src/osha/oira/client/templates/help.pt:30
+#: src/osha/oira/client/templates/help.pt:57
 msgid "help_header_finalwords"
 msgstr "Mitä tapahtuu seuraavaksi?"
 
@@ -1818,13 +1818,13 @@ msgid "header_regions"
 msgstr "Alueet"
 
 #. Default: Help
-#: src/osha/oira/client/templates/help.pt:19
+#: src/osha/oira/client/templates/help.pt:20
 msgid "title_help"
 msgstr "Ohjeet"
 
 #. Default: Introduction
-#: src/osha/oira/client/templates/help.pt:21
-#: src/osha/oira/client/templates/help.pt:32
+#: src/osha/oira/client/templates/help.pt:22
+#: src/osha/oira/client/templates/help.pt:33
 msgid "help_header_introduction"
 msgstr "Johdanto"
 
@@ -2039,7 +2039,7 @@ msgstr ""
 #: src/osha/oira/client/templates/shell.pt:63
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:14
 msgid "header_login"
-msgstr "Sisäänkirjautuminen"
+msgstr "Kirjaudu sisään"
 
 #. Default: request an email reminder
 #: src/osha/oira/client/templates/login_form.pt:27
@@ -2462,7 +2462,7 @@ msgstr "Esimerkki toimenpiteiden yhteenvetoraportista PDF-muodossa"
 #: src/osha/oira/client/templates/register.pt:70
 #: src/osha/oira/client/templates/shell.pt:64
 msgid "header_register"
-msgstr "Rekisteröityminen"
+msgstr "Rekisteröidy käyttäjäksi"
 
 #. Default: Desired password
 #: src/osha/oira/client/templates/register.pt:85
@@ -3482,7 +3482,7 @@ msgstr "Poista tämä riskinarviointi"
 #: src/osha/oira/client/templates/shell.pt:92
 #: src/osha/oira/client/templates/shell.pt:94
 msgid "Start test session"
-msgstr "Aloita testi-istunto"
+msgstr "Testaa kokeiluversiota"
 
 #. Default: New
 #: src/osha/oira/client/templates/shell.pt:102
@@ -3493,7 +3493,7 @@ msgstr "Uusi"
 #: src/osha/oira/client/templates/shell.pt:150
 #: src/osha/oira/client/templates/webhelpers.pt:34
 msgid "navigation_status"
-msgstr "Tila"
+msgstr "Riskinarvioinnin tila"
 
 #. Default: Online interactive
 #: src/osha/oira/client/templates/shell.pt:166
@@ -3520,7 +3520,7 @@ msgstr "Aloita"
 #: src/osha/oira/client/templates/status.pt:19
 #: src/osha/oira/client/templates/status_print.pt:19
 msgid "title_status_of"
-msgstr "\"${survey_title}\" riskinarvioinnin tila"
+msgstr "\"${survey_title}\" riskinarvioinnin eteneminen"
 
 #. Default: Questions answered per module
 #: src/osha/oira/client/templates/status.pt:22
@@ -4702,7 +4702,7 @@ msgstr "CC-lisenssi"
 msgid "description_other_risks"
 msgstr ""
 "Jos olet tunnistanut riskitekijöitä, joita ei aiemmissa osioissa mainittu, "
-"niin voit lisätä ne riskinarviointiisi nyt:"
+"niin voit lisätä ne riskinarviointiisi ne valitsemalla ”Kyllä”."
 
 #. Default: <p>Would you now like to add your own defined risks to this
 #. tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks,
@@ -4712,8 +4712,9 @@ msgstr ""
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
 msgstr ""
-"<p><strong>Tärkeää:</strong> On suositeltavaa, että riskien päällekkäisyyden "
-"välttämiseksi käyt ensin läpi aiemmat osiot (ellet ole näin jo tehnyt).</p>"
+"Jos sinun ei tarvitse lisätä riskejä, valitse ”Ei”.<p><strong>Tärkeää:"
+"</strong> On suositeltavaa, että riskien päällekkäisyyden välttämiseksi käyt "
+"ensin läpi aiemmat osiot (ellet ole näin jo tehnyt).</p>"
 
 #~ msgid "label_close_panel"
 #~ msgstr "Sulje paneeli"

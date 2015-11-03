@@ -4,8 +4,7 @@ Changelog
 3.0.0rc9 (unreleased)
 ---------------------
 
-- Nothing changed yet.
-
+- More translation corrections
 
 3.0.0rc8 (2015-11-02)
 ---------------------

@@ -226,11 +226,11 @@
         <fieldset class="vertical" id="standard-solution-${repeat/solution/number}" hidden="hidden">
             <label><tal:label i18n:translate="label_description">Description</tal:label>
                 <dfn class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: content; position-list: lt" i18n:translate="actionplan_measure_tooltip">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
-                <textarea class="actionPlan" name="measure.action_plan:utf8:ustring:records" placeholder="General approach (to eliminate or reduce the risk)" rows="3">${solution/description}</textarea>
+                <textarea class="actionPlan" name="measure.action_plan:utf8:ustring:records" i18n:attributes="placeholder label_measure_action_plan" placeholder="General approach (to eliminate or reduce the risk)" rows="3">${solution/description}</textarea>
             <br />
-                <textarea class="preventionPlan" name="measure.prevention_plan:utf8:ustring:records" placeholder="Specific action(s) required to implement this approach" rows="3">${solution/action_plan}</textarea>
+                <textarea class="preventionPlan" name="measure.prevention_plan:utf8:ustring:records" i18n:attributes="placeholder label_measure_prevention_plan" placeholder="Specific action(s) required to implement this approach" rows="3">${solution/action_plan}</textarea>
             <br />
-                <textarea class="requirements" name="measure.requirements:utf8:ustring:records" placeholder="Level of expertise and/or requirements needed" rows="3">${solution/requirements}</textarea>
+                <textarea class="requirements" name="measure.requirements:utf8:ustring:records" i18n:attributes="placeholder label_measure_requirements" placeholder="Level of expertise and/or requirements needed" rows="3">${solution/requirements}</textarea>
             </label>
         </fieldset>
     </tal:loop>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-11-03 15:05+0100\n"
+"POT-Creation-Date: 2015-11-05 18:11+0100\n"
 "PO-Revision-Date: 2013-08-15 11:22+0200\n"
 "Last-Translator: xl <xl@hol.gr>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -1029,6 +1029,7 @@ msgstr "Μέτρο ${index}"
 #: src/osha/oira/client/report.py:469
 #: src/osha/oira/client/templates/risk_actionplan.pt:85
 #: src/osha/oira/client/templates/risk_actionplan.pt:172
+#: src/osha/oira/client/templates/risk_actionplan.pt:229
 #: src/osha/oira/content/templates/solution_view.pt:22
 msgid "label_measure_action_plan"
 msgstr "Γενική προσέγγιση (για την εξάλειψη ή μείωση του κινδύνου)"
@@ -1037,6 +1038,7 @@ msgstr "Γενική προσέγγιση (για την εξάλειψη ή μ�
 #: src/osha/oira/client/report.py:471
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
 #: src/osha/oira/client/templates/risk_actionplan.pt:174
+#: src/osha/oira/client/templates/risk_actionplan.pt:231
 #: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
 msgstr "Απαιτείται ειδική ενέργεια(-ες) για την εφαρμογή αυτής της προσέγγισης"
@@ -1045,6 +1047,7 @@ msgstr "Απαιτείται ειδική ενέργεια(-ες) για την 
 #: src/osha/oira/client/report.py:473
 #: src/osha/oira/client/templates/risk_actionplan.pt:95
 #: src/osha/oira/client/templates/risk_actionplan.pt:176
+#: src/osha/oira/client/templates/risk_actionplan.pt:233
 #: src/osha/oira/content/templates/solution_view.pt:29
 msgid "label_measure_requirements"
 msgstr "Απαιτήσεις"
@@ -2240,7 +2243,7 @@ msgstr "Μέτρα προς εφαρμογή από"
 
 #. Default: High priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:84
-#: src/osha/oira/client/templates/status.pt:115
+#: src/osha/oira/client/templates/status.pt:117
 #: src/osha/oira/client/templates/status_print.pt:101
 msgid "heading_high_prio_risks"
 msgstr "Κίνδυνοι υψηλής προτεραιότητας"
@@ -3333,82 +3336,82 @@ msgstr "Κατάλογος επισκόπησης των κινδύνων"
 
 #. Default: No risk
 #: src/osha/oira/client/templates/risks_overview.pt:221
-#: src/osha/oira/client/templates/status.pt:88
+#: src/osha/oira/client/templates/status.pt:90
 #: src/osha/oira/client/templates/status_print.pt:85
 msgid "label_no_risk"
 msgstr "Κανένας κίνδυνος/Ασφαλής κατάσταση"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:222
-#: src/osha/oira/client/templates/status.pt:89
+#: src/osha/oira/client/templates/status.pt:91
 msgid "label_no_risks_2"
 msgstr "Κανένας κίνδυνος/Ασφαλής κατάσταση"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:223
-#: src/osha/oira/client/templates/status.pt:90
+#: src/osha/oira/client/templates/status.pt:92
 msgid "label_no_risks_3_4"
 msgstr "Κανένας κίνδυνος/Ασφαλής κατάσταση"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:224
-#: src/osha/oira/client/templates/status.pt:91
+#: src/osha/oira/client/templates/status.pt:93
 msgid "label_no_risks_5_or_more"
 msgstr "Κανένας κίνδυνος/Ασφαλής κατάσταση"
 
 #. Default: Risk with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:228
-#: src/osha/oira/client/templates/status.pt:95
+#: src/osha/oira/client/templates/status.pt:97
 #: src/osha/oira/client/templates/status_print.pt:88
 msgid "label_risk_with_measure"
 msgstr "Κίνδυνος με αναφορά μέτρου(-ων)"
 
 #. Default: Risks with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:229
-#: src/osha/oira/client/templates/status.pt:96
+#: src/osha/oira/client/templates/status.pt:98
 msgid "label_risks_with_measure_2"
 msgstr "Κίνδυνος με αναφορά μέτρου(-ων)"
 
 #. Default: Risks with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:230
-#: src/osha/oira/client/templates/status.pt:97
+#: src/osha/oira/client/templates/status.pt:99
 msgid "label_risks_with_measure_3_4"
 msgstr "Κίνδυνος με αναφορά μέτρου(-ων)"
 
 #. Default: Risks with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:231
-#: src/osha/oira/client/templates/status.pt:98
+#: src/osha/oira/client/templates/status.pt:100
 msgid "label_risks_with_measure_5_or_more"
 msgstr "Κίνδυνος με αναφορά μέτρου(-ων)"
 
 #. Default: Risk without measure
 #: src/osha/oira/client/templates/risks_overview.pt:235
-#: src/osha/oira/client/templates/status.pt:102
+#: src/osha/oira/client/templates/status.pt:104
 #: src/osha/oira/client/templates/status_print.pt:91
 msgid "label_risk_without_measure"
 msgstr "Κίνδυνος χωρίς αναφορά μέτρου(-ων)"
 
 #. Default: Risks without measure
 #: src/osha/oira/client/templates/risks_overview.pt:236
-#: src/osha/oira/client/templates/status.pt:103
+#: src/osha/oira/client/templates/status.pt:105
 msgid "label_risks_without_measure_2"
 msgstr "Κίνδυνος χωρίς αναφορά μέτρου(-ων)"
 
 #. Default: Risks without measure
 #: src/osha/oira/client/templates/risks_overview.pt:237
-#: src/osha/oira/client/templates/status.pt:104
+#: src/osha/oira/client/templates/status.pt:106
 msgid "label_risks_without_measure_3_4"
 msgstr "Κίνδυνος χωρίς αναφορά μέτρου(-ων)"
 
 #. Default: Risks without measure
 #: src/osha/oira/client/templates/risks_overview.pt:238
-#: src/osha/oira/client/templates/status.pt:105
+#: src/osha/oira/client/templates/status.pt:107
 msgid "label_risks_without_measure_5_or_more"
 msgstr "Κίνδυνος χωρίς αναφορά μέτρου(-ων)"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/risks_overview.pt:241
-#: src/osha/oira/client/templates/status.pt:108
+#: src/osha/oira/client/templates/status.pt:110
 #: src/osha/oira/client/templates/webhelpers.pt:118
 #: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "Postponed"
@@ -3416,7 +3419,7 @@ msgstr "Κίνδυνος σε εκκρεμότητα"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/risks_overview.pt:244
-#: src/osha/oira/client/templates/status.pt:111
+#: src/osha/oira/client/templates/status.pt:113
 #: src/osha/oira/client/templates/webhelpers.pt:117
 #: src/osha/oira/client/templates/webhelpers.pt:129
 msgid "Unvisited"
@@ -3619,6 +3622,12 @@ msgid "Start test session"
 msgstr ""
 "Έναρξη της μελέτης Εκτίμησης Κινδύνου με τη δοκιμαστική έκδοση του εργαλείου"
 
+#. Default: Select an earlier session to complete or review
+#: src/osha/oira/client/templates/shell.pt:99
+#: src/osha/oira/client/templates/survey_sessions.pt:20
+msgid "header_select_session"
+msgstr "Επιλέξτε μια προγενέστερη ενότητα για ολοκλήρωση ή προεπισκόπηση"
+
 #. Default: New
 #: src/osha/oira/client/templates/shell.pt:102
 msgid "New"
@@ -3657,8 +3666,13 @@ msgstr "Έναρξη"
 msgid "title_status_of"
 msgstr "Παρούσα κατάσταση της μελέτης Εκτίμησης Κινδύνου ${survey_title}"
 
+#. Default: Status of ${survey_title}
+#: src/osha/oira/client/templates/status.pt:21
+msgid "title_with_vowel_status_of"
+msgstr "Παρούσα κατάσταση της μελέτης Εκτίμησης Κινδύνου ${survey_title}"
+
 #. Default: Questions answered per module
-#: src/osha/oira/client/templates/status.pt:22
+#: src/osha/oira/client/templates/status.pt:24
 msgid "header_questions_answered"
 msgstr "Ερωτήσεις που απαντήθηκαν ανά ενότητα"
 
@@ -3671,11 +3685,6 @@ msgstr "Σε εκκρεμότητα"
 #: src/osha/oira/client/templates/status_print.pt:97
 msgid "label_unanswered"
 msgstr "Υπό εξέταση"
-
-#. Default: Select an earlier session to complete or review
-#: src/osha/oira/client/templates/survey_sessions.pt:20
-msgid "header_select_session"
-msgstr "Επιλέξτε μια προγενέστερη ενότητα για ολοκλήρωση ή προεπισκόπηση"
 
 #. Default: or…
 #: src/osha/oira/client/templates/survey_sessions.pt:39

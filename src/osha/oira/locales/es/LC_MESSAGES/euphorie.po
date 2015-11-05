@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.18dev1\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-11-03 15:05+0100\n"
+"POT-Creation-Date: 2015-11-05 18:11+0100\n"
 "PO-Revision-Date: 2014-10-08 13:56+0200\n"
 "Last-Translator: Cristina <cr_montoya@hotmail.com>\n"
 "Language-Team: ES <LL@li.org>\n"
@@ -1002,6 +1002,7 @@ msgstr "Medida ${index}"
 #: src/osha/oira/client/report.py:469
 #: src/osha/oira/client/templates/risk_actionplan.pt:85
 #: src/osha/oira/client/templates/risk_actionplan.pt:172
+#: src/osha/oira/client/templates/risk_actionplan.pt:229
 #: src/osha/oira/content/templates/solution_view.pt:22
 msgid "label_measure_action_plan"
 msgstr "Enfoque general (para eliminar o reducir el riesgo)"
@@ -1010,6 +1011,7 @@ msgstr "Enfoque general (para eliminar o reducir el riesgo)"
 #: src/osha/oira/client/report.py:471
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
 #: src/osha/oira/client/templates/risk_actionplan.pt:174
+#: src/osha/oira/client/templates/risk_actionplan.pt:231
 #: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
 msgstr "Acciones específicas necesarias para implantar este enfoque"
@@ -1018,6 +1020,7 @@ msgstr "Acciones específicas necesarias para implantar este enfoque"
 #: src/osha/oira/client/report.py:473
 #: src/osha/oira/client/templates/risk_actionplan.pt:95
 #: src/osha/oira/client/templates/risk_actionplan.pt:176
+#: src/osha/oira/client/templates/risk_actionplan.pt:233
 #: src/osha/oira/content/templates/solution_view.pt:29
 msgid "label_measure_requirements"
 msgstr "Nivel de experiencia y/o requisitos necesarios"
@@ -2156,7 +2159,7 @@ msgstr "Medida a implantar en"
 
 #. Default: High priority risks
 #: src/osha/oira/client/templates/measures_overview.pt:84
-#: src/osha/oira/client/templates/status.pt:115
+#: src/osha/oira/client/templates/status.pt:117
 #: src/osha/oira/client/templates/status_print.pt:101
 msgid "heading_high_prio_risks"
 msgstr "Riesgos de prioridad alta"
@@ -3227,82 +3230,82 @@ msgstr "Resumen de riesgos"
 
 #. Default: No risk
 #: src/osha/oira/client/templates/risks_overview.pt:221
-#: src/osha/oira/client/templates/status.pt:88
+#: src/osha/oira/client/templates/status.pt:90
 #: src/osha/oira/client/templates/status_print.pt:85
 msgid "label_no_risk"
 msgstr "Sin riesgo"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:222
-#: src/osha/oira/client/templates/status.pt:89
+#: src/osha/oira/client/templates/status.pt:91
 msgid "label_no_risks_2"
 msgstr "Sin riesgo"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:223
-#: src/osha/oira/client/templates/status.pt:90
+#: src/osha/oira/client/templates/status.pt:92
 msgid "label_no_risks_3_4"
 msgstr "Sin riesgo"
 
 #. Default: No risks
 #: src/osha/oira/client/templates/risks_overview.pt:224
-#: src/osha/oira/client/templates/status.pt:91
+#: src/osha/oira/client/templates/status.pt:93
 msgid "label_no_risks_5_or_more"
 msgstr "Sin riesgo"
 
 #. Default: Risk with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:228
-#: src/osha/oira/client/templates/status.pt:95
+#: src/osha/oira/client/templates/status.pt:97
 #: src/osha/oira/client/templates/status_print.pt:88
 msgid "label_risk_with_measure"
 msgstr "Riesgo con medida(s)"
 
 #. Default: Risks with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:229
-#: src/osha/oira/client/templates/status.pt:96
+#: src/osha/oira/client/templates/status.pt:98
 msgid "label_risks_with_measure_2"
 msgstr "Riesgos con medida(s)"
 
 #. Default: Risks with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:230
-#: src/osha/oira/client/templates/status.pt:97
+#: src/osha/oira/client/templates/status.pt:99
 msgid "label_risks_with_measure_3_4"
 msgstr "Riesgos con medida(s)"
 
 #. Default: Risks with measure(s)
 #: src/osha/oira/client/templates/risks_overview.pt:231
-#: src/osha/oira/client/templates/status.pt:98
+#: src/osha/oira/client/templates/status.pt:100
 msgid "label_risks_with_measure_5_or_more"
 msgstr "Riesgos con medida(s)"
 
 #. Default: Risk without measure
 #: src/osha/oira/client/templates/risks_overview.pt:235
-#: src/osha/oira/client/templates/status.pt:102
+#: src/osha/oira/client/templates/status.pt:104
 #: src/osha/oira/client/templates/status_print.pt:91
 msgid "label_risk_without_measure"
 msgstr "Riesgo sin medidas"
 
 #. Default: Risks without measure
 #: src/osha/oira/client/templates/risks_overview.pt:236
-#: src/osha/oira/client/templates/status.pt:103
+#: src/osha/oira/client/templates/status.pt:105
 msgid "label_risks_without_measure_2"
 msgstr "Riesgos sin medidas"
 
 #. Default: Risks without measure
 #: src/osha/oira/client/templates/risks_overview.pt:237
-#: src/osha/oira/client/templates/status.pt:104
+#: src/osha/oira/client/templates/status.pt:106
 msgid "label_risks_without_measure_3_4"
 msgstr "Riesgos sin medidas"
 
 #. Default: Risks without measure
 #: src/osha/oira/client/templates/risks_overview.pt:238
-#: src/osha/oira/client/templates/status.pt:105
+#: src/osha/oira/client/templates/status.pt:107
 msgid "label_risks_without_measure_5_or_more"
 msgstr "Riesgos sin medidas"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/risks_overview.pt:241
-#: src/osha/oira/client/templates/status.pt:108
+#: src/osha/oira/client/templates/status.pt:110
 #: src/osha/oira/client/templates/webhelpers.pt:118
 #: src/osha/oira/client/templates/webhelpers.pt:130
 msgid "Postponed"
@@ -3310,7 +3313,7 @@ msgstr "Pospuesto"
 
 #. Default: Unanswered
 #: src/osha/oira/client/templates/risks_overview.pt:244
-#: src/osha/oira/client/templates/status.pt:111
+#: src/osha/oira/client/templates/status.pt:113
 #: src/osha/oira/client/templates/webhelpers.pt:117
 #: src/osha/oira/client/templates/webhelpers.pt:129
 msgid "Unvisited"
@@ -3512,6 +3515,12 @@ msgstr "Borrar esta sesión"
 msgid "Start test session"
 msgstr "Iniciar sesión de prueba"
 
+#. Default: Select an earlier session to complete or review
+#: src/osha/oira/client/templates/shell.pt:99
+#: src/osha/oira/client/templates/survey_sessions.pt:20
+msgid "header_select_session"
+msgstr "Seleccione una sesión anterior para completarla o revisarla"
+
 #. Default: New
 #: src/osha/oira/client/templates/shell.pt:102
 msgid "New"
@@ -3550,8 +3559,13 @@ msgstr "Iniciar"
 msgid "title_status_of"
 msgstr "Estado de ${survey_title}"
 
+#. Default: Status of ${survey_title}
+#: src/osha/oira/client/templates/status.pt:21
+msgid "title_with_vowel_status_of"
+msgstr "Estado de ${survey_title}"
+
 #. Default: Questions answered per module
-#: src/osha/oira/client/templates/status.pt:22
+#: src/osha/oira/client/templates/status.pt:24
 msgid "header_questions_answered"
 msgstr "Preguntas respondidas por módulo"
 
@@ -3564,11 +3578,6 @@ msgstr "Pospuesto"
 #: src/osha/oira/client/templates/status_print.pt:97
 msgid "label_unanswered"
 msgstr "Sin respuesta"
-
-#. Default: Select an earlier session to complete or review
-#: src/osha/oira/client/templates/survey_sessions.pt:20
-msgid "header_select_session"
-msgstr "Seleccione una sesión anterior para completarla o revisarla"
 
 #. Default: or…
 #: src/osha/oira/client/templates/survey_sessions.pt:39

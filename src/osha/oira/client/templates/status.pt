@@ -15,8 +15,10 @@
 <metal:content fill-slot="content" tal:define="language context/portal_languages/getPreferredLanguage">
     <div class="statuses language-${language}" tal:define="status python:view.status">
 
-        <article class="rich">
-            <h1><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${here/Title}</tal:name></tal:title>
+        <article class="rich" tal:define="title here/Title|string: ">
+            <h1 tal:condition="python:title.lower()[0] not in ('a', 'e', 'i', 'o', 'u')"><tal:title i18n:translate="title_status_of">Status of <tal:name i18n:name="survey_title">${title}</tal:name></tal:title>
+            </h1>
+            <h1 tal:condition="python:title.lower()[0] in ('a', 'e', 'i', 'o', 'u')"><tal:title i18n:translate="title_with_vowel_status_of">Status of <tal:name i18n:name="survey_title">${title}</tal:name></tal:title>
             </h1>
             <p class="byline">
                 <tal:translate i18n:translate="header_questions_answered">Questions answered per module</tal:translate>

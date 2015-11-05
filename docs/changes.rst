@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0rc10 (unreleased)
+3.0.0rc10 (2015-11-05)
 ----------------------
 
 - More translation corrections

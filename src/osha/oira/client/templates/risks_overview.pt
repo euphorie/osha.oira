@@ -233,7 +233,7 @@ ul.title {margin-bottom:3em;}
                         <li class="risk" tal:condition="num_risks_without_measures">
                             <strong class="number">${num_risks_without_measures}</strong>
                             <em tal:condition="python:num_risks_without_measures==1" class="label" i18n:translate="label_risk_without_measure">Risk without measure</em>
-                            <em tal:condition="python:num_risks_without_measures==3" class="label" i18n:translate="label_risks_without_measure_2">Risks without measure</em>
+                            <em tal:condition="python:num_risks_without_measures==2" class="label" i18n:translate="label_risks_without_measure_2">Risks without measure</em>
                             <em tal:condition="python:num_risks_without_measures in (3, 4)" class="label" i18n:translate="label_risks_without_measure_3_4">Risks without measure</em>
                             <em tal:condition="python:num_risks_without_measures>4" class="label" i18n:translate="label_risks_without_measure_5_or_more">Risks without measure</em>
                         </li>

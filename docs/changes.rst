@@ -4,8 +4,8 @@ Changelog
 3.0.0rc10 (unreleased)
 ----------------------
 
-- Nothing changed yet.
-
+- More translation corrections
+- Bugfixes and fixing small inconsistencies in several templates
 
 3.0.0rc9 (2015-11-04)
 ---------------------

@@ -97,7 +97,7 @@
             <tal:if condition="not:is_anonymous">
                 <tal:if condition="not:is_outside_of_survey">
                     <a href="${webhelpers/country_url}/view#content" class="dropdown pat-tooltip" id="button-sessions"
-                        data-pat-tooltip="source: ajax; class: large; position-list: tl" title="Select an existing session to review or to continue" tal:content="webhelpers/get_survey_title">Private Security EU</a>
+                        data-pat-tooltip="source: ajax; class: large; position-list: tl" title="Select an existing session to review or to continue" i18n:attributes="title header_select_session" tal:content="webhelpers/get_survey_title">Private Security EU</a>
                 </tal:if>
                 <a href="${webhelpers/session_overview_url}/new-session.html#document-content" id="button-new-session-quick"
                     data-pat-modal="class: large" class="no-label pat-modal iconified icon-plus-circle" title="Start a new session" i18n:attributes="title" i18n:translate="New">New</a>

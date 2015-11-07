@@ -1,11 +1,10 @@
 Changelog
 =========
 
-3.0.0rc11 (unreleased)
-----------------------
+3.0.0 (unreleased)
+------------------
 
-- Nothing changed yet.
-
+- Final release of OiRA in new UI
 
 3.0.0rc10 (2015-11-05)
 ----------------------

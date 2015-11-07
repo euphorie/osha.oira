@@ -4,8 +4,7 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Consistency fix in measures-overview report
 
 3.0.0 (2015-11-07)
 ------------------

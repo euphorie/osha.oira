@@ -85,7 +85,7 @@ ul.title {margin-bottom:3em;}
 									High priority risks
 								</h3>
 							</th>
-                            <td tal:repeat="month view/monthstrings" class="legend" i18n:domain="plone" i18n:translate="">
+                            <td tal:repeat="month view/months" class="legend" i18n:domain="plone" i18n:translate="">
                                 ${month}
                             </td>
 						</tr>

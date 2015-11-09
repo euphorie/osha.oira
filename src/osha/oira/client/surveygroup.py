@@ -13,3 +13,10 @@ class Edit(SchemaEditForm):
         widget = self.widgets.get('obsolete')
         widget.mode = form.interfaces.HIDDEN_MODE
         return result
+
+    def update(self):
+        if self.request.method == "POST":
+            if 'form.widgets.obsolete' in self.request.form:
+                del self.request.form['form.widgets.obsolete']
+            self.request.form['form.widgets.obsolete-empty-marker'] = '1'
+        super(Edit, self).update()

@@ -4,8 +4,8 @@ Changelog
 3.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix another unwanted effect of TNO's "obsolete" flag on surveygroups. Make sure
+  it always gets unset on save.
 
 3.0.1 (2015-11-07)
 ------------------

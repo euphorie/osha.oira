@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.2 (unreleased)
+3.0.2 (2015-11-09)
 ------------------
 
 - Fix another unwanted effect of TNO's "obsolete" flag on surveygroups. Make sure

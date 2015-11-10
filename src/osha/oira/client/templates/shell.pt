@@ -74,11 +74,7 @@
                 <tal:testsession i18n:translate="info_testsession">This is a test session. <tal:name i18n:name="link_sign_in"><a href="${base_url}/login_form?${came_from_param}#document-content" class="registration" i18n:translate="Sign in">Sign in</a></tal:name> to save your data.</tal:testsession><a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info" i18n:translate="Info">Info</a>
             </p>
             <tal:statusmsg tal:repeat="message webhelpers/messages">
-                <p class="pat-notification" data-pat-notification="type: banner"
-                   tal:attributes="id string:${message/id}-body;
-                                   data-pat-notification string:${attrs/data-pat-notification};;
-                                   class: ${message/type}"
-                   tal:content="message/message | nothing">Status message</p>
+                <p class="pat-notification ${message/type}" data-pat-notification="type: banner; close-text: ${webhelpers/closetext}" id="${message/id}-body" tal:content="message/message | nothing">Status message</p>
                 </tal:statusmsg>
 
             <metal:block define-slot="content"/>

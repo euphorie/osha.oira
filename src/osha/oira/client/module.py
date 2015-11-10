@@ -15,6 +15,8 @@ from five import grok
 from osha.oira.client import interfaces
 from sqlalchemy import sql
 from z3c.saconfig import Session
+from zope.i18n import translate
+
 
 grok.templatedir("templates")
 
@@ -82,6 +84,14 @@ class CustomizationView(grok.View, Mixin):
         self.tree = getTreeData(
             self.request, self.context, phase="identification",
             filter=model.NO_CUSTOM_RISKS_FILTER)
+
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        if "-" in lang:
+            elems = lang.split("-")
+            lang = "{0}_{1}".format(elems[0], elems[1].upper())
+        self.message_required = translate(_(
+            u"message_field_required", default=u"Please fill out this field."),
+            target_language=lang)
 
         if self.request.environ["REQUEST_METHOD"] == "POST":
             reply = self.request.form

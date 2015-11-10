@@ -14,6 +14,7 @@ from five import grok
 from mobile.sniffer.detect import detect_mobile_browser
 from mobile.sniffer.utilities import get_user_agent
 from os import path
+from osha.oira import _
 from osha.oira.client import model as oiramodel
 from plone.i18n.normalizer import idnormalizer
 from sqlalchemy import sql
@@ -21,6 +22,7 @@ from z3c.saconfig import Session
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component.hooks import getSite
+from zope.i18n import translate
 from plone import api
 import htmllib
 
@@ -328,3 +330,11 @@ class OSHAWebHelpers(WebHelpers):
         else:
             message = None
         return message
+
+    def closetext(self):
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        if "-" in lang:
+            elems = lang.split("-")
+            lang = "{0}_{1}".format(elems[0], elems[1].upper())
+        return translate(
+            _(u"button_close", default=u"Close"), target_language=lang)

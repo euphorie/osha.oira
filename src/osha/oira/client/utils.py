@@ -11,6 +11,7 @@ from euphorie.client.utils import WebHelpers
 from euphorie.content.survey import ISurvey
 from euphorie.decorators import reify
 from five import grok
+from json import dumps
 from mobile.sniffer.detect import detect_mobile_browser
 from mobile.sniffer.utilities import get_user_agent
 from os import path
@@ -22,10 +23,14 @@ from z3c.saconfig import Session
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component.hooks import getSite
+from zope.interface import Interface
+from zope.i18nmessageid import MessageFactory
 from zope.i18n import translate
 from plone import api
 import htmllib
 
+
+pl_message = MessageFactory('plonelocales')
 grok.templatedir('templates')
 
 
@@ -338,3 +343,64 @@ class OSHAWebHelpers(WebHelpers):
             lang = "{0}_{1}".format(elems[0], elems[1].upper())
         return translate(
             _(u"button_close", default=u"Close"), target_language=lang)
+
+
+class I18nJSONView(grok.View):
+    """ Override Euphorie's webhelpers to add some more utility methods.
+    """
+    grok.context(Interface)
+    grok.layer(IOSHAClientSkinLayer)
+    grok.name('date-picker-i18n.json')
+
+    def render(self):
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        if "-" in lang:
+            lang = lang.split("-")[0]
+        json = dumps({
+            "months": [
+                translate(
+                    pl_message(month),
+                    target_language=lang) for month in [
+                        "month_jan",
+                        "month_feb",
+                        "month_mar",
+                        "month_apr",
+                        "month_may",
+                        "month_jun",
+                        "month_jul",
+                        "month_aug",
+                        "month_sep",
+                        "month_oct",
+                        "month_nov",
+                        "month_dec",
+                ]
+            ],
+            "weekdays": [
+                translate(
+                    pl_message(weekday),
+                    target_language=lang) for weekday in [
+                        "weekday_sun",
+                        "weekday_mon",
+                        "weekday_tue",
+                        "weekday_wed",
+                        "weekday_thu",
+                        "weekday_fri",
+                        "weekday_sat",
+                ]
+            ],
+            "weekdaysShort": [
+                translate(
+                    pl_message(weekday_abbr),
+                    target_language=lang) for weekday_abbr in [
+                        "weekday_sun_abbr",
+                        "weekday_mon_abbr",
+                        "weekday_tue_abbr",
+                        "weekday_wed_abbr",
+                        "weekday_thu_abbr",
+                        "weekday_fri_abbr",
+                        "weekday_sat_abbr",
+                ]
+            ],
+        })
+
+        return json

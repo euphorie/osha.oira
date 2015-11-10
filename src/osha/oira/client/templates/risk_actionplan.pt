@@ -119,7 +119,7 @@
                 <input
                     type="date" class="pat-date-picker"
                     name="measure.planning_start:records"
-                    data-pat-date-picker="behavior: native"
+                    data-pat-date-picker="behavior: styled; week-numbers: show; i18n: ${webhelpers/country_url}/@@date-picker-i18n.json"
                     data-pat-validation="type: date; not-after: #planning-end-${number}; message-date: ${view/message_date_before}"
                     id="planning-start-${number}"
                     value="${actionplan/planning_start|nothing}"/>
@@ -130,7 +130,7 @@
 
                 <input
                     type="date" class="pat-date-picker" name="measure.planning_end:records"
-                    data-pat-date-picker="behavior: native"
+                    data-pat-date-picker="behavior: styled; week-numbers: show; i18n: ${webhelpers/country_url}/@@date-picker-i18n.json"
                     data-pat-validation="type: date; not-before: #planning-start-${number}; message-date: ${view/message_date_after}"
                     id="planning-end-${number}"
                     value="${actionplan/planning_end|nothing}"/>
@@ -193,14 +193,14 @@
 			<label>
                 <tal:label i18n:translate="label_action_plan_start">Planning start</tal:label>
                 <input type="date" class="pat-date-picker"
-                       data-pat-date-picker="behavior: native"
+                       data-pat-date-picker="behavior: styled; week-numbers: show; i18n: ${webhelpers/country_url}/@@date-picker-i18n.json"
                        data-pat-validation="type: date; not-after: #planning-end-#{1}; message-date: ${view/message_date_before}"
                        name="measure.planning_start:records" id="planning-start-#{1}" />
 			</label>
 			<label>
                 <tal:label i18n:translate="label_action_plan_end">Planning end</tal:label>
                 <input type="date" class="pat-date-picker"
-                    data-pat-date-picker="behavior: native"
+                    data-pat-date-picker="behavior: styled; week-numbers: show; i18n: ${webhelpers/country_url}/@@date-picker-i18n.json"
                     data-pat-validation="type:date; not-before: #planning-start-#{1}; message-date: ${view/message_date_after}"
                     name="measure.planning_end:records" id="planning-end-#{1}"/>
 			</label>

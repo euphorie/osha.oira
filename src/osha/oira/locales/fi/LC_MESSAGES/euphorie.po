@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.30.dev0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-11-05 18:11+0100\n"
+"POT-Creation-Date: 2015-11-10 15:38+0100\n"
 "PO-Revision-Date: 2013-08-15 11:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -861,43 +861,48 @@ msgstr "Kirjoita voimassaoleva sähköpostiosoite."
 msgid "An email with a password reminder has been sent to your address."
 msgstr "Salasanamuistutuksen sisältävä sähköposti on lähetetty osoitteesi."
 
-#: src/osha/oira/client/module.py:98
+#. Default: Please fill out this field.
+#: src/osha/oira/client/module.py:92 src/osha/oira/client/profile.py:40
+msgid "message_field_required"
+msgstr ""
+
+#: src/osha/oira/client/module.py:108
 msgid "No changes were made to your added risks."
 msgstr "Lisättyihin riskeihin ei tehty muutoksia."
 
-#: src/osha/oira/client/module.py:105
+#: src/osha/oira/client/module.py:115
 msgid "Your new added risks have been created."
 msgstr "Uudet riskit ovat lisätty."
 
-#: src/osha/oira/client/module.py:110
+#: src/osha/oira/client/module.py:120
 msgid "A new added risk has been created."
 msgstr "Uusi riski on lisätty."
 
-#: src/osha/oira/client/module.py:115
+#: src/osha/oira/client/module.py:125
 msgid "Existing added risks have been updated."
 msgstr "Aiemmin lisätyt riskit on päivitetty."
 
-#: src/osha/oira/client/module.py:120
+#: src/osha/oira/client/module.py:130
 msgid "An existing added risk has been updated."
 msgstr "Aiemmin lisätty riski on päivitetty."
 
-#: src/osha/oira/client/module.py:125
+#: src/osha/oira/client/module.py:135
 msgid "An added risk has been removed."
 msgstr "Riski on poistettu."
 
-#: src/osha/oira/client/module.py:128
+#: src/osha/oira/client/module.py:138
 msgid "Added risks have been removed."
 msgstr "Riskit on poistettu."
 
-#: src/osha/oira/client/profile.py:16
+#: src/osha/oira/client/profile.py:17
 msgid "Does this happen in multiple places?"
 msgstr "Tapahtuuko tätä useammassa paikassa?"
 
-#: src/osha/oira/client/profile.py:19
+#: src/osha/oira/client/profile.py:20
 msgid "Enter the name of the location"
 msgstr "Esitä sijaintipaikan nimi"
 
-#: src/osha/oira/client/profile.py:22
+#: src/osha/oira/client/profile.py:23
 msgid "Enter the names of each location"
 msgstr "Esitä jokaisen sijaintipaikan nimi"
 
@@ -1238,6 +1243,11 @@ msgstr "/"
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
 msgstr "Muut tunnistetut riskitekijät"
+
+#. Default: Close
+#: src/osha/oira/client/utils.py:340
+msgid "button_close"
+msgstr ""
 
 #. Default: By clicking on 'Delete account', your account will be permenantly
 #. deleted. This action is irreversable.
@@ -1716,7 +1726,7 @@ msgstr "Siirry toimintasuunnitelmaan"
 #: src/osha/oira/client/templates/report_actionplan.pt:270
 #: src/osha/oira/client/templates/report_identification.pt:85
 #: src/osha/oira/client/templates/risk_evaluation.pt:137
-#: src/osha/oira/client/templates/shell.pt:113
+#: src/osha/oira/client/templates/shell.pt:109
 msgid "label_preparation"
 msgstr "Suunnittelu"
 
@@ -1736,8 +1746,8 @@ msgstr "Suunnittelu"
 #: src/osha/oira/client/templates/report_actionplan.pt:276
 #: src/osha/oira/client/templates/report_identification.pt:91
 #: src/osha/oira/client/templates/risk_evaluation.pt:143
-#: src/osha/oira/client/templates/shell.pt:120
-#: src/osha/oira/client/templates/shell.pt:121
+#: src/osha/oira/client/templates/shell.pt:116
+#: src/osha/oira/client/templates/shell.pt:117
 #: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_identification"
 msgstr "Tunnistaminen"
@@ -1758,8 +1768,8 @@ msgstr "Tunnistaminen"
 #: src/osha/oira/client/templates/report_actionplan.pt:282
 #: src/osha/oira/client/templates/report_identification.pt:97
 #: src/osha/oira/client/templates/risk_evaluation.pt:149
-#: src/osha/oira/client/templates/shell.pt:120
-#: src/osha/oira/client/templates/shell.pt:121
+#: src/osha/oira/client/templates/shell.pt:116
+#: src/osha/oira/client/templates/shell.pt:117
 #: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_evaluation"
 msgstr "Arviointi"
@@ -1780,8 +1790,8 @@ msgstr "Arviointi"
 #: src/osha/oira/client/templates/report_actionplan.pt:288
 #: src/osha/oira/client/templates/report_identification.pt:103
 #: src/osha/oira/client/templates/risk_evaluation.pt:158
-#: src/osha/oira/client/templates/shell.pt:130
-#: src/osha/oira/client/templates/shell.pt:132
+#: src/osha/oira/client/templates/shell.pt:126
+#: src/osha/oira/client/templates/shell.pt:128
 #: src/osha/oira/client/templates/webhelpers.pt:113
 msgid "label_action_plan"
 msgstr "Toimintasuunnitelma"
@@ -1801,8 +1811,8 @@ msgstr "Toimintasuunnitelma"
 #: src/osha/oira/client/templates/report_actionplan.pt:294
 #: src/osha/oira/client/templates/report_identification.pt:109
 #: src/osha/oira/client/templates/risk_evaluation.pt:164
-#: src/osha/oira/client/templates/shell.pt:142
-#: src/osha/oira/client/templates/shell.pt:145
+#: src/osha/oira/client/templates/shell.pt:138
+#: src/osha/oira/client/templates/shell.pt:141
 msgid "label_report"
 msgstr "Raportti"
 
@@ -1843,7 +1853,7 @@ msgstr "Aloita riskien tunnistaminen"
 
 #. Default: Help
 #: src/osha/oira/client/templates/includes.pt:2
-#: src/osha/oira/client/templates/shell.pt:155
+#: src/osha/oira/client/templates/shell.pt:151
 #: src/osha/oira/client/templates/webhelpers.pt:33
 msgid "navigation_help"
 msgstr "Ohjeet"
@@ -2198,7 +2208,7 @@ msgstr "Lisää uusi riski"
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/module_customization.pt:62
-#: src/osha/oira/client/templates/profile.pt:99
+#: src/osha/oira/client/templates/profile.pt:98
 #: src/osha/oira/client/templates/report.pt:41
 #: src/osha/oira/client/templates/report_company.pt:94
 #: src/osha/oira/client/templates/risk_actionplan.pt:220
@@ -2389,7 +2399,7 @@ msgstr "Ei"
 
 #. Default: Remove
 #: src/osha/oira/client/templates/profile.pt:63
-#: src/osha/oira/client/templates/profile.pt:78
+#: src/osha/oira/client/templates/profile.pt:77
 #: src/osha/oira/client/templates/update.pt:51
 #: src/osha/oira/client/templates/update.pt:66
 #: src/osha/oira/content/templates/profilequestion_add.pt:102
@@ -2398,7 +2408,7 @@ msgid "Remove"
 msgstr "Poista"
 
 #. Default: Add another item
-#: src/osha/oira/client/templates/profile.pt:93
+#: src/osha/oira/client/templates/profile.pt:92
 #: src/osha/oira/client/templates/update.pt:81
 #: src/osha/oira/content/templates/profilequestion_add.pt:104
 msgid "Add another item"
@@ -3442,7 +3452,7 @@ msgid "heading_num_todo_prio_risks_5_or_more"
 msgstr "${num_todo_risks} Riskiväittämään ei ole vastattu."
 
 #: src/osha/oira/client/templates/sessions.pt:22
-#: src/osha/oira/client/templates/shell.pt:102
+#: src/osha/oira/client/templates/shell.pt:98
 msgid "Start a new session"
 msgstr "Aloita uusi riskinarviointi"
 
@@ -3482,36 +3492,36 @@ msgstr "Uusi nimi"
 msgid "Delete this session"
 msgstr "Poista tämä riskinarviointi"
 
-#: src/osha/oira/client/templates/shell.pt:92
-#: src/osha/oira/client/templates/shell.pt:94
+#: src/osha/oira/client/templates/shell.pt:88
+#: src/osha/oira/client/templates/shell.pt:90
 msgid "Start test session"
 msgstr "Testaa kokeiluversiota"
 
 #. Default: Select an earlier session to complete or review
-#: src/osha/oira/client/templates/shell.pt:99
+#: src/osha/oira/client/templates/shell.pt:95
 #: src/osha/oira/client/templates/survey_sessions.pt:20
 msgid "header_select_session"
 msgstr "Valitse aikaisempi istunto täydennettäväksi tai tarkasteltavaksi"
 
 #. Default: New
-#: src/osha/oira/client/templates/shell.pt:102
+#: src/osha/oira/client/templates/shell.pt:98
 msgid "New"
 msgstr "Uusi"
 
 #. Default: Check your progress
-#: src/osha/oira/client/templates/shell.pt:150
+#: src/osha/oira/client/templates/shell.pt:146
 #: src/osha/oira/client/templates/webhelpers.pt:34
 msgid "navigation_status"
 msgstr "Riskinarvioinnin tila"
 
 #. Default: Online interactive
-#: src/osha/oira/client/templates/shell.pt:166
+#: src/osha/oira/client/templates/shell.pt:162
 #: src/osha/oira/client/templates/webhelpers.pt:23
 msgid "oira_name_line_1"
 msgstr "Vuorovaikutteisesti verkossa"
 
 #. Default: Risk Assessment
-#: src/osha/oira/client/templates/shell.pt:167
+#: src/osha/oira/client/templates/shell.pt:163
 #: src/osha/oira/client/templates/webhelpers.pt:24
 msgid "oira_name_line_2"
 msgstr "Riskinarviointi"
@@ -3630,8 +3640,8 @@ msgstr "Valikon vaihtopainike"
 
 #. Default: The menu toggle lets you hide and show the ‘off canvas’ menu so
 #. it’s only there when you need it. Hide the menu when you’re concentrating on
-#. filling out a tool or show it when you’re clicking about between various
-#. parts of the application.
+#. filling out a tool or show it when you’re clicking between various parts of
+#. the application.
 #: src/osha/oira/client/templates/tooltips.pt:37
 msgid "info_osh_hamburger"
 msgstr ""

@@ -1,6 +1,7 @@
 from five import grok
 from euphorie.client import profile
 from euphorie.content.profilequestion import IProfileQuestion
+from zope.i18n import translate
 from .interfaces import IOSHAClientSkinLayer
 from .. import _
 
@@ -30,6 +31,16 @@ class OSHAProfile(profile.Profile):
     grok.layer(IOSHAClientSkinLayer)
     grok.template("profile")
     grok.name("profile")
+
+    def update(self):
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        if "-" in lang:
+            elems = lang.split("-")
+            lang = "{0}_{1}".format(elems[0], elems[1].upper())
+        self.message_required = translate(_(
+            u"message_field_required", default=u"Please fill out this field."),
+            target_language=lang)
+        super(OSHAProfile, self).update()
 
     def ProfileQuestions(self):
         return _questions(self.context)

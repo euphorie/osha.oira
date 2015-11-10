@@ -1244,7 +1244,7 @@ msgstr "Vaša dodana tveganja"
 #. Default: Close
 #: src/osha/oira/client/utils.py:340
 msgid "button_close"
-msgstr ""
+msgstr "Zapri"
 
 #. Default: By clicking on 'Delete account', your account will be permenantly
 #. deleted. This action is irreversable.
@@ -2504,10 +2504,7 @@ msgstr "Vpišite novo ime za to orodje OiRA "
 #: src/osha/oira/client/templates/report.pt:23
 msgid "report_intro"
 msgstr ""
-"Ko ste končali z identifikacijo vseh tveganj v vaši organizaciji in ste "
-"ustvarili načrt ukrepov, lahko ustvarite poročilo, ki bo vsebovale vse vaše "
-"rezultate. Če želite, lahko v spodnje polje vpišete morebitne dodatne "
-"opombe, ki bodo vključene v poročilo."
+"Ko ste končali z identifikacijo vseh tveganj v vaši organizaciji in ste ustvarili načrt ukrepov, lahko ustvarite poročilo, ki bo vsebovalo vse vaše rezultate in predloge."
 
 #. Default: Please leave any extra comments that should be included in the
 #. report in this field.
@@ -2607,7 +2604,7 @@ msgstr ""
 #: src/osha/oira/client/templates/report_company.pt:19
 msgid "hader_company_details"
 msgstr ""
-"Ste tik pred tem, da natisnete poročilo... Izpolnite obrazec in nadaljujte."
+"Predno natisnete poročilo, vas prosimo da po želji izpolnite še spodnji vprašalnik."
 
 #. Default: Please fix the indicated errors.
 #: src/osha/oira/client/templates/report_company.pt:21
@@ -2620,8 +2617,7 @@ msgstr "Popravite označene napake."
 #: src/osha/oira/client/templates/report_company.pt:22
 msgid "company_details_intro"
 msgstr ""
-"Spodaj lahko vnesete poljubne informacije. Te so namenjene izboljšanju "
-"orodij in storitvam. Ti podatki ne bodo prikazani v poročilu."
+"Izpolnjevanje vprašalnika je prostovoljno. Zbrani podatki bodo služili za izboljšanje orodja in podpore uporabnikom. Ti podatki ne bodo prikazani v poročilu."
 
 #. Default: Your country
 #: src/osha/oira/client/templates/report_company.pt:29
@@ -2889,7 +2885,7 @@ msgstr "Ukrep"
 #: src/osha/oira/client/templates/risk_actionplan.pt:64
 #: src/osha/oira/client/templates/risk_actionplan.pt:150
 msgid "label_prefill"
-msgstr "Izpolnite vnaprej"
+msgstr "Izberite ukrep"
 
 #. Default: Select one or more of the known common measures provided.
 #: src/osha/oira/client/templates/risk_actionplan.pt:69
@@ -3286,7 +3282,7 @@ msgstr "Neodgovorjeno"
 #. Default: ${num_present_risks} Present Risk
 #: src/osha/oira/client/templates/risks_overview.pt:255
 msgid "heading_present_risks"
-msgstr "${num_present_risks} prisotnih tveganje"
+msgstr "${num_present_risks} prisotno tveganje"
 
 #. Default: ${num_present_risks} Present Risks
 #: src/osha/oira/client/templates/risks_overview.pt:256
@@ -3720,12 +3716,12 @@ msgstr "Nastavitve"
 #: src/osha/oira/client/templates/webhelpers.pt:119
 #: src/osha/oira/client/templates/webhelpers.pt:131
 msgid "Risk not present"
-msgstr "OK"
+msgstr "Urejeno"
 
 #: src/osha/oira/client/templates/webhelpers.pt:120
 #: src/osha/oira/client/templates/webhelpers.pt:132
 msgid "Risk present"
-msgstr "Pozornost"
+msgstr "Neurejeno"
 
 #. Default: Produced by ${EU-OSHA}.
 #: src/osha/oira/client/templates/webhelpers.pt:146

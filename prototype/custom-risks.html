@@ -12,10 +12,10 @@ number: "0.0.0"
 		In this section you may add extra risks that are not mentioned in the tool.
 	</p>
 </article>
-<form action="/action-plan.html">
+<form action="/action-plan.html" class="pat-validation" novalidate="novalidate">
 	<fieldset class="custom-risks pat-clone" data-pat-clone="template: #risk-template">
 		<fieldset class="risk-set clone">
-			<textarea autofocus name="description-1" placeholder="Description of risk 1" id="description-1" cols="30" rows="6" class="description"></textarea>
+			<textarea autofocus required="required" name="description-1" placeholder="Description of risk 1" id="description-1" cols="30" rows="6" class="description"></textarea>
 
 			<label class="priority">This is a
 				<select>
@@ -42,7 +42,7 @@ number: "0.0.0"
 </form>
 
 <fieldset class="risk-set" id="risk-template" hidden>
-	<textarea autofocus name="description-#{1}" placeholder="Description of risk #{1}" id="description-#{1}" cols="30" rows="6" class="description"></textarea>
+	<textarea autofocus required="required" name="description-#{1}" placeholder="Description of risk #{1}" id="description-#{1}" cols="30" rows="6" class="description"></textarea>
 
 	<label class="priority">This is a
 		<select>

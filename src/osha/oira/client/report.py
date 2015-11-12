@@ -188,7 +188,16 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                         titles.reverse()
                         value = ', '.join(titles)
                     else:
-                        value = getattr(module, key, None)
+                        if module.zodb_path == 'custom-risks':
+                            lang = getattr(self.request, 'LANGUAGE', 'en')
+                            if "-" in lang:
+                                elems = lang.split("-")
+                                lang = "{0}_{1}".format(elems[0], elems[1].upper())
+                            value = translate(_(
+                                'title_other_risks', default=u'Added risks (by you)'),
+                                target_language=lang)
+                        else:
+                            value = getattr(module, key, None)
 
                 sheet.cell(row=row, column=column)\
                     .style.alignment.wrap_text = True  # style
@@ -344,6 +353,14 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
         self.risk_not_present_nodes = \
             utils.get_risk_not_present_nodes(self.session)
 
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        if "-" in lang:
+            elems = lang.split("-")
+            lang = "{0}_{1}".format(elems[0], elems[1].upper())
+        self.title_custom_risks = translate(_(
+            'title_other_risks', default=u'Added risks (by you)'),
+            target_language=lang)
+
     def addReportNodes(self, document, nodes, heading, toc, body):
         """ """
         t = lambda txt: "".join([
@@ -370,7 +387,9 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
         }
         for node in nodes:
             zodb_node = None
-            if getattr(node, 'is_custom_risk', None):
+            if node.zodb_path == 'custom-risks':
+                title = self.title_custom_risks
+            elif getattr(node, 'is_custom_risk', None):
                 title = node.title
             else:
                 zodb_node = survey.restrictedTraverse(node.zodb_path.split("/"))

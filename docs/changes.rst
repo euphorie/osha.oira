@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.3 (unreleased)
+3.0.3 (2015-11-13)
 ------------------
 
 - BUGFIX. In the action plan, the wrong text was being used to prefill the

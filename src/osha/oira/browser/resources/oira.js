@@ -12543,8 +12543,194 @@ define('pat-logger',[
     return log;
 });
 
+/*!
+ * jQuery Browser Plugin 0.0.8
+ * https://github.com/gabceb/jquery-browser-plugin
+ *
+ * Original jquery-browser code Copyright 2005, 2015 jQuery Foundation, Inc. and other contributors
+ * http://jquery.org/license
+ *
+ * Modifications Copyright 2015 Gabriel Cebrian
+ * https://github.com/gabceb
+ *
+ * Released under the MIT license
+ *
+ * Date: 05-07-2015
+ */
+/*global window: false */
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define('jquery.browser',['jquery'], function ($) {
+      return factory($);
+    });
+  } else if (typeof module === 'object' && typeof module.exports === 'object') {
+    // Node-like environment
+    module.exports = factory(require('jquery'));
+  } else {
+    // Browser globals
+    factory(window.jQuery);
+  }
+}(function(jQuery) {
+  "use strict";
+
+  function uaMatch( ua ) {
+    // If an UA is not provided, default to the current browser UA.
+    if ( ua === undefined ) {
+      ua = window.navigator.userAgent;
+    }
+    ua = ua.toLowerCase();
+
+    var match = /(edge)\/([\w.]+)/.exec( ua ) ||
+        /(opr)[\/]([\w.]+)/.exec( ua ) ||
+        /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+        /(version)(applewebkit)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
+        /(webkit)[ \/]([\w.]+).*(version)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
+        /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
+        /(msie) ([\w.]+)/.exec( ua ) ||
+        ua.indexOf("trident") >= 0 && /(rv)(?::| )([\w.]+)/.exec( ua ) ||
+        ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
+        [];
+
+    var platform_match = /(ipad)/.exec( ua ) ||
+        /(ipod)/.exec( ua ) ||
+        /(iphone)/.exec( ua ) ||
+        /(kindle)/.exec( ua ) ||
+        /(silk)/.exec( ua ) ||
+        /(android)/.exec( ua ) ||
+        /(windows phone)/.exec( ua ) ||
+        /(win)/.exec( ua ) ||
+        /(mac)/.exec( ua ) ||
+        /(linux)/.exec( ua ) ||
+        /(cros)/.exec( ua ) ||
+        /(playbook)/.exec( ua ) ||
+        /(bb)/.exec( ua ) ||
+        /(blackberry)/.exec( ua ) ||
+        [];
+
+    var browser = {},
+        matched = {
+          browser: match[ 5 ] || match[ 3 ] || match[ 1 ] || "",
+          version: match[ 2 ] || match[ 4 ] || "0",
+          versionNumber: match[ 4 ] || match[ 2 ] || "0",
+          platform: platform_match[ 0 ] || ""
+        };
+
+    if ( matched.browser ) {
+      browser[ matched.browser ] = true;
+      browser.version = matched.version;
+      browser.versionNumber = parseInt(matched.versionNumber, 10);
+    }
+
+    if ( matched.platform ) {
+      browser[ matched.platform ] = true;
+    }
+
+    // These are all considered mobile platforms, meaning they run a mobile browser
+    if ( browser.android || browser.bb || browser.blackberry || browser.ipad || browser.iphone ||
+      browser.ipod || browser.kindle || browser.playbook || browser.silk || browser[ "windows phone" ]) {
+      browser.mobile = true;
+    }
+
+    // These are all considered desktop platforms, meaning they run a desktop browser
+    if ( browser.cros || browser.mac || browser.linux || browser.win ) {
+      browser.desktop = true;
+    }
+
+    // Chrome, Opera 15+ and Safari are webkit based browsers
+    if ( browser.chrome || browser.opr || browser.safari ) {
+      browser.webkit = true;
+    }
+
+    // IE11 has a new token so we will assign it msie to avoid breaking changes
+    // IE12 disguises itself as Chrome, but adds a new Edge token.
+    if ( browser.rv || browser.edge ) {
+      var ie = "msie";
+
+      matched.browser = ie;
+      browser[ie] = true;
+    }
+
+    // Blackberry browsers are marked as Safari on BlackBerry
+    if ( browser.safari && browser.blackberry ) {
+      var blackberry = "blackberry";
+
+      matched.browser = blackberry;
+      browser[blackberry] = true;
+    }
+
+    // Playbook browsers are marked as Safari on Playbook
+    if ( browser.safari && browser.playbook ) {
+      var playbook = "playbook";
+
+      matched.browser = playbook;
+      browser[playbook] = true;
+    }
+
+    // BB10 is a newer OS version of BlackBerry
+    if ( browser.bb ) {
+      var bb = "blackberry";
+
+      matched.browser = bb;
+      browser[bb] = true;
+    }
+
+    // Opera 15+ are identified as opr
+    if ( browser.opr ) {
+      var opera = "opera";
+
+      matched.browser = opera;
+      browser[opera] = true;
+    }
+
+    // Stock Android browsers are marked as Safari on Android.
+    if ( browser.safari && browser.android ) {
+      var android = "android";
+
+      matched.browser = android;
+      browser[android] = true;
+    }
+
+    // Kindle browsers are marked as Safari on Kindle
+    if ( browser.safari && browser.kindle ) {
+      var kindle = "kindle";
+
+      matched.browser = kindle;
+      browser[kindle] = true;
+    }
+
+     // Kindle Silk browsers are marked as Safari on Kindle
+    if ( browser.safari && browser.silk ) {
+      var silk = "silk";
+
+      matched.browser = silk;
+      browser[silk] = true;
+    }
+
+    // Assign the name and platform variable
+    browser.name = matched.browser;
+    browser.platform = matched.platform;
+    return browser;
+  }
+
+  // Run the matching process, also assign the function to the returned object
+  // for manual, jQuery-free use if desired
+  window.jQBrowser = uaMatch( window.navigator.userAgent );
+  window.jQBrowser.uaMatch = uaMatch;
+
+  // Only assign to jQuery.browser if jQuery is loaded
+  if ( jQuery ) {
+    jQuery.browser = window.jQBrowser;
+  }
+
+  return window.jQBrowser;
+}));
+
 define('pat-utils',[
-    "jquery"
+    "jquery",
+    "jquery.browser"
 ], function($) {
 
     $.fn.safeClone = function () {
@@ -12857,6 +13043,49 @@ define('pat-utils',[
         return newURL;
     }
 
+    function removeDuplicateObjects(objs) {
+        /* Given an array of objects, remove any duplicate objects which might
+         * be present.
+         */
+        var comparator = function(v, k) {
+            return this[k] === v;
+        };
+        return _.reduce(objs, function(list, next_obj) {
+            var is_duplicate = false;
+            _.each(list, function(obj) {
+                is_duplicate = (
+                    (_.keys(obj).length === _.keys(next_obj).length) &&
+                    (!_.chain(obj).omit(comparator.bind(next_obj)).keys().value().length)
+                );
+            });
+            if (!is_duplicate) {
+                list.push(next_obj);
+            }
+            return list;
+        }, []);
+    }
+
+    function mergeStack(stack, length) {
+        /* Given a list of lists of objects (which for brevity we call a stack),
+         * return a list of objects where each object is the merge of all the
+         * corresponding original objects at that particular index.
+         *
+         * If a certain sub-list doesn't have an object at that particular
+         * index, the last object in that list is merged.
+         */
+        var results = [];
+        for (var i=0; i<length; i++) {
+            results.push({});
+        }
+        _.each(stack, function(frame) {
+            var frame_length = frame.length-1;
+            for (var x=0; x<length; x++) {
+                results[x] = $.extend(results[x] || {}, frame[(x>frame_length) ? frame_length : x]);
+            }
+        });
+        return results;
+    }
+
     var utils = {
         // pattern pimping - own module?
         jqueryPlugin: jqueryPlugin,
@@ -12869,7 +13098,9 @@ define('pat-utils',[
         elementInViewport: elementInViewport,
         removeWildcardClass: removeWildcardClass,
         hideOrShow: hideOrShow,
-        addURLQueryParameter: addURLQueryParameter
+        addURLQueryParameter: addURLQueryParameter,
+        removeDuplicateObjects: removeDuplicateObjects,
+        mergeStack: mergeStack
     };
     return utils;
 });
@@ -13664,11 +13895,8 @@ define('pat-registry',[
     "pat-compat",
     "pat-jquery-ext"
 ], function($, _, logger, utils) {
-    var TEXT_NODE = 3;
-    var COMMENT_NODE = 8;
-    var log = logger.getLogger("registry");
-
-    var disable_re = /patterns-disable=([^&]+)/g,
+    var log = logger.getLogger("registry"),
+        disable_re = /patterns-disable=([^&]+)/g,
         dont_catch_re = /patterns-dont-catch/g,
         dont_catch = false,
         disabled = {}, match;
@@ -13811,205 +14039,11 @@ define('pat-registry',[
             return true;
         }
     };
-
-    $(document).on("patterns-injected.patterns",
-        function registry_onInject(ev, config, trigger_el, injected_el) {
-            if (injected_el.nodeType !== TEXT_NODE && injected_el !== COMMENT_NODE) {
-                registry.scan(injected_el, null, {type: "injection", element: trigger_el});
-                $(injected_el).trigger("patterns-injected-scanned");
-            }
-        }
-    );
     return registry;
 });
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
 // vim: sw=4 expandtab
 ;
-/*!
- * jQuery Browser Plugin 0.0.8
- * https://github.com/gabceb/jquery-browser-plugin
- *
- * Original jquery-browser code Copyright 2005, 2015 jQuery Foundation, Inc. and other contributors
- * http://jquery.org/license
- *
- * Modifications Copyright 2015 Gabriel Cebrian
- * https://github.com/gabceb
- *
- * Released under the MIT license
- *
- * Date: 05-07-2015
- */
-/*global window: false */
-
-(function (factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define('jquery.browser',['jquery'], function ($) {
-      return factory($);
-    });
-  } else if (typeof module === 'object' && typeof module.exports === 'object') {
-    // Node-like environment
-    module.exports = factory(require('jquery'));
-  } else {
-    // Browser globals
-    factory(window.jQuery);
-  }
-}(function(jQuery) {
-  "use strict";
-
-  function uaMatch( ua ) {
-    // If an UA is not provided, default to the current browser UA.
-    if ( ua === undefined ) {
-      ua = window.navigator.userAgent;
-    }
-    ua = ua.toLowerCase();
-
-    var match = /(edge)\/([\w.]+)/.exec( ua ) ||
-        /(opr)[\/]([\w.]+)/.exec( ua ) ||
-        /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
-        /(version)(applewebkit)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
-        /(webkit)[ \/]([\w.]+).*(version)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
-        /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
-        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
-        /(msie) ([\w.]+)/.exec( ua ) ||
-        ua.indexOf("trident") >= 0 && /(rv)(?::| )([\w.]+)/.exec( ua ) ||
-        ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
-        [];
-
-    var platform_match = /(ipad)/.exec( ua ) ||
-        /(ipod)/.exec( ua ) ||
-        /(iphone)/.exec( ua ) ||
-        /(kindle)/.exec( ua ) ||
-        /(silk)/.exec( ua ) ||
-        /(android)/.exec( ua ) ||
-        /(windows phone)/.exec( ua ) ||
-        /(win)/.exec( ua ) ||
-        /(mac)/.exec( ua ) ||
-        /(linux)/.exec( ua ) ||
-        /(cros)/.exec( ua ) ||
-        /(playbook)/.exec( ua ) ||
-        /(bb)/.exec( ua ) ||
-        /(blackberry)/.exec( ua ) ||
-        [];
-
-    var browser = {},
-        matched = {
-          browser: match[ 5 ] || match[ 3 ] || match[ 1 ] || "",
-          version: match[ 2 ] || match[ 4 ] || "0",
-          versionNumber: match[ 4 ] || match[ 2 ] || "0",
-          platform: platform_match[ 0 ] || ""
-        };
-
-    if ( matched.browser ) {
-      browser[ matched.browser ] = true;
-      browser.version = matched.version;
-      browser.versionNumber = parseInt(matched.versionNumber, 10);
-    }
-
-    if ( matched.platform ) {
-      browser[ matched.platform ] = true;
-    }
-
-    // These are all considered mobile platforms, meaning they run a mobile browser
-    if ( browser.android || browser.bb || browser.blackberry || browser.ipad || browser.iphone ||
-      browser.ipod || browser.kindle || browser.playbook || browser.silk || browser[ "windows phone" ]) {
-      browser.mobile = true;
-    }
-
-    // These are all considered desktop platforms, meaning they run a desktop browser
-    if ( browser.cros || browser.mac || browser.linux || browser.win ) {
-      browser.desktop = true;
-    }
-
-    // Chrome, Opera 15+ and Safari are webkit based browsers
-    if ( browser.chrome || browser.opr || browser.safari ) {
-      browser.webkit = true;
-    }
-
-    // IE11 has a new token so we will assign it msie to avoid breaking changes
-    // IE12 disguises itself as Chrome, but adds a new Edge token.
-    if ( browser.rv || browser.edge ) {
-      var ie = "msie";
-
-      matched.browser = ie;
-      browser[ie] = true;
-    }
-
-    // Blackberry browsers are marked as Safari on BlackBerry
-    if ( browser.safari && browser.blackberry ) {
-      var blackberry = "blackberry";
-
-      matched.browser = blackberry;
-      browser[blackberry] = true;
-    }
-
-    // Playbook browsers are marked as Safari on Playbook
-    if ( browser.safari && browser.playbook ) {
-      var playbook = "playbook";
-
-      matched.browser = playbook;
-      browser[playbook] = true;
-    }
-
-    // BB10 is a newer OS version of BlackBerry
-    if ( browser.bb ) {
-      var bb = "blackberry";
-
-      matched.browser = bb;
-      browser[bb] = true;
-    }
-
-    // Opera 15+ are identified as opr
-    if ( browser.opr ) {
-      var opera = "opera";
-
-      matched.browser = opera;
-      browser[opera] = true;
-    }
-
-    // Stock Android browsers are marked as Safari on Android.
-    if ( browser.safari && browser.android ) {
-      var android = "android";
-
-      matched.browser = android;
-      browser[android] = true;
-    }
-
-    // Kindle browsers are marked as Safari on Kindle
-    if ( browser.safari && browser.kindle ) {
-      var kindle = "kindle";
-
-      matched.browser = kindle;
-      browser[kindle] = true;
-    }
-
-     // Kindle Silk browsers are marked as Safari on Kindle
-    if ( browser.safari && browser.silk ) {
-      var silk = "silk";
-
-      matched.browser = silk;
-      browser[silk] = true;
-    }
-
-    // Assign the name and platform variable
-    browser.name = matched.browser;
-    browser.platform = matched.platform;
-    return browser;
-  }
-
-  // Run the matching process, also assign the function to the returned object
-  // for manual, jQuery-free use if desired
-  window.jQBrowser = uaMatch( window.navigator.userAgent );
-  window.jQBrowser.uaMatch = uaMatch;
-
-  // Only assign to jQuery.browser if jQuery is loaded
-  if ( jQuery ) {
-    jQuery.browser = window.jQBrowser;
-  }
-
-  return window.jQBrowser;
-}));
-
 /**
  * Patterns parser - Argument parser
  *
@@ -14019,8 +14053,9 @@ define('pat-registry',[
 define('pat-parser',[
     "jquery",
     "underscore",
+    "pat-utils",
     "pat-logger"
-], function($, _, logger) {
+], function($, _, utils, logger) {
     "use strict";
 
     function ArgumentParser(name, opts) {
@@ -14275,23 +14310,22 @@ define('pat-parser',[
             var parts = this._split(parameter),
                 opts = {},
                 positional = true,
-                i, part, flag, sense;
+                i=0, part, flag, sense;
 
-            i=0;
             while (parts.length) {
                 part=parts.shift().trim();
                 if (part.slice(0, 3)==="no-") {
-                    sense=false;
+                    sense = false;
                     flag=part.slice(3);
                 } else {
-                    sense=true;
-                    flag=part;
+                    sense = true;
+                    flag = part;
                 }
                 if (flag in this.parameters && this.parameters[flag].type==="boolean") {
-                    positional=false;
+                    positional = false;
                     this._set(opts, flag, sense);
                 } else if (flag in this.enum_values) {
-                    positional=false;
+                    positional = false;
                     this._set(opts, this.enum_values[flag], flag);
                 } else if (positional)
                     this._set(opts, this.order[i], part);
@@ -14300,8 +14334,9 @@ define('pat-parser',[
                     break;
                 }
                 i++;
-                if (i>=this.order.length)
+                if (i >= this.order.length) {
                     break;
+                }
             }
             if (parts.length)
                 this.log.warn("Ignore extra arguments: " + parts.join(" "));
@@ -14322,7 +14357,7 @@ define('pat-parser',[
                 return this._parseExtendedNotation(parameter);
             }
             sep = parameter.indexOf(";");
-            if (sep===-1) {
+            if (sep === -1) {
                 return this._parseShorthandNotation(parameter);
             }
             opts = this._parseShorthandNotation(parameter.slice(0, sep));
@@ -14335,15 +14370,15 @@ define('pat-parser',[
         _defaults: function argParserDefaults($el) {
             var result = {};
             for (var name in this.parameters)
-                if (typeof this.parameters[name].value==="function")
+                if (typeof this.parameters[name].value === "function")
                     try {
-                        result[name]=this.parameters[name].value($el, name);
+                        result[name] = this.parameters[name].value($el, name);
                         this.parameters[name].type=typeof result[name];
                     } catch(e) {
                         this.log.error("Default function for " + name + " failed.");
                     }
                 else
-                    result[name]=this.parameters[name].value;
+                    result[name] = this.parameters[name].value;
             return result;
         },
 
@@ -14353,37 +14388,39 @@ define('pat-parser',[
 
             // Resolve references
             for (i=0; i<keys.length; i++) {
-                name=keys[i];
-                spec=this.parameters[name];
-                if (spec===undefined)
+                name = keys[i];
+                spec = this.parameters[name];
+                if (spec === undefined)
                     continue;
 
-                if (options[name]===spec.value &&
+                if (options[name] === spec.value &&
                         typeof spec.value==="string" && spec.value.slice(0, 1)==="$")
-                    options[name]=options[spec.value.slice(1)];
+                    options[name] = options[spec.value.slice(1)];
             }
-
             // Move options into groups and do renames
-            keys=Object.keys(options);
+            keys = Object.keys(options);
             for (i=0; i<keys.length; i++) {
-                name=keys[i];
-                spec=this.parameters[name];
-                if (spec===undefined)
+                name = keys[i];
+                spec = this.parameters[name];
+                if (spec === undefined)
                     continue;
 
                 if (spec.group)  {
                     if (typeof options[spec.group]!=="object")
-                        options[spec.group]={};
-                    target=options[spec.group];
-                } else
-                    target=options;
+                        options[spec.group] = {};
+                    target = options[spec.group];
+                } else {
+                    target = options;
+                }
 
-                if (spec.dest!==name) {
-                    target[spec.dest]=options[name];
+                if (spec.dest !== name) {
+                    target[spec.dest] = options[name];
                     delete options[name];
                 }
             }
+            return options;
         },
+
 
         parse: function argParserParse($el, options, multiple, inherit) {
             if (typeof options==="boolean" && multiple===undefined) {
@@ -14393,47 +14430,32 @@ define('pat-parser',[
             inherit = (inherit!==false);
             var stack = inherit ? [[this._defaults($el)]] : [[{}]];
             var $possible_config_providers = inherit ? $el.parents().andSelf() : $el,
-                final_length = 1,
-                i, data, frame;
-            for (i=0; i<$possible_config_providers.length; i++) {
-                data = $possible_config_providers.eq(i).attr(this.attribute);
+                final_length = 1;
+
+            _.each($possible_config_providers, function (provider) {
+                var data = $(provider).attr(this.attribute), frame, _parse;
                 if (data) {
-                    var _parse = this._parse.bind(this); // Needed to fix binding in map call
+                    _parse = this._parse.bind(this);
                     if (data.match(/&&/))
-                        frame=data.split(/\s*&&\s*/).map(_parse);
+                        frame = data.split(/\s*&&\s*/).map(_parse);
                     else
-                        frame=[_parse(data)];
+                        frame = [_parse(data)];
                     final_length = Math.max(frame.length, final_length);
                     stack.push(frame);
                 }
-            }
+            }.bind(this));
             if (typeof options==="object") {
                 if (Array.isArray(options)) {
                     stack.push(options);
-                    final_length=Math.max(options.length, final_length);
+                    final_length = Math.max(options.length, final_length);
                 } else
                     stack.push([options]);
             }
-
-            if (!multiple) {
-                final_length=1;
-            }
-            var results=[], frame_length, x, xf;
-            for (i=0; i<final_length; i++)
-                results.push({});
-
-            for (i=0; i<stack.length; i++) {
-                frame=stack[i];
-                frame_length=frame.length-1;
-
-                for (x=0; x<final_length; x++) {
-                    xf=(x>frame_length) ? frame_length : x;
-                    results[x]=$.extend(results[x], frame[xf]);
-                }
-            }
-            for (i=0; i<results.length; i++)
-                this._cleanupOptions(results[i]);
-
+            if (!multiple) { final_length = 1; }
+            var results = _.map(
+                _.compose(utils.removeDuplicateObjects, _.partial(utils.mergeStack, _, final_length))(stack),
+                this._cleanupOptions.bind(this)
+            );
             return multiple ? results : results[0];
         }
     };
@@ -15828,92 +15850,6 @@ define('pat-autofocus',[
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
 // vim: sw=4 expandtab
 ;
-/**
- * Patterns autoscale - scale elements to fit available space
- *
- * Copyright 2012 Humberto Sermeno
- * Copyright 2013 Simplon B.V. - Wichert Akkerman
- */
-define('pat-autoscale',[
-    "jquery",
-    "jquery.browser",
-    "pat-registry",
-    "pat-parser"
-], function($, dummy, registry, Parser) {
-    var parser = new Parser("auto-scale");
-    parser.addArgument("method", "scale", ["scale", "zoom"]);
-    parser.addArgument("min-width", 0);
-    parser.addArgument("max-width", 1000000);
-
-    var _ = {
-        name: "autoscale",
-        trigger: ".pat-auto-scale",
-        force_method: null,
-
-        _setup: function() {
-            if ($.browser.mozilla)
-                // See https://bugzilla.mozilla.org/show_bug.cgi?id=390936
-                _.force_method="scale";
-            else if ($.browser.msie && parseInt($.browser.version, 10)<9)
-                _.force_method="zoom";
-            $(document).ready(function() {
-                $(window).one("resize.autoscale", _.onResize);
-            });
-        },
-
-        init: function($el, opts) {
-            return $el.each(function() {
-                var $el = $(this),
-                    options = parser.parse($el, opts);
-
-                if (_.force_method!==null)
-                    options.method=_.force_method;
-
-                $el.data("patterns.auto-scale", options);
-                _.scale.apply(this, []);
-            });
-        },
-
-        scale: function() {
-            var $el = $(this),
-                options = $el.data("patterns.auto-scale"),
-                available_space, scale;
-
-            if ($el[0].tagName.toLowerCase()==="body")
-                available_space=$(window).width();
-            else
-                available_space=$el.parent().outerWidth();
-
-            available_space=Math.min(available_space, options.maxWidth);
-            available_space=Math.max(available_space, options.minWidth);
-            scale=available_space/$el.outerWidth();
-
-            switch (options.method) {
-            case "scale":
-                $el.css("transform", "scale(" + scale + ")");
-                break;
-            case "zoom":
-                $el.css("zoom", scale);
-                break;
-            }
-            $el.addClass("scaled");
-        },
-
-        onResize: function() {
-            $(_.trigger).each(_.scale);
-
-            // necassary at least for IE8
-            setTimeout(function() {
-                $(window).one("resize.autoscale", _.onResize);
-            }, 100);
-        }
-    };
-
-    _._setup();
-    registry.register(_);
-    return _;
-});
-
 define('pat-mockup-parser',[
     'jquery'
 ], function($) {
@@ -16077,6 +16013,78 @@ define('pat-base',[
         return child;
     };
     return Base;
+});
+
+/**
+ * Patterns autoscale - scale elements to fit available space
+ *
+ * Copyright 2012 Humberto Sermeno
+ * Copyright 2013 Simplon B.V. - Wichert Akkerman
+ */
+define('pat-autoscale',[
+    "jquery",
+    "jquery.browser",
+    "pat-base",
+    "pat-registry",
+    "pat-parser"
+], function($, dummy, Base, registry, Parser) {
+    var parser = new Parser("auto-scale");
+    parser.addArgument("method", "scale", ["scale", "zoom"]);
+    parser.addArgument("min-width", 0);
+    parser.addArgument("max-width", 1000000);
+
+    return Base.extend({
+        name: "autoscale",
+        trigger: ".pat-auto-scale",
+        force_method: null,
+
+        init: function($el, opts) {
+            this.options = parser.parse(this.$el, opts);
+            if (this.force_method !== null) {
+                this.options.method = this.force_method;
+            }
+            this._setup().scale();
+            return this.$el;
+        },
+
+        _setup: function() {
+            if ($.browser.mozilla) {
+                // See https://bugzilla.mozilla.org/show_bug.cgi?id=390936
+                this.force_method = "scale";
+            } else if ($.browser.msie && parseInt($.browser.version, 10) < 9) {
+                this.force_method = "zoom";
+            }
+            $(window).on("resize.autoscale",
+                _.debounce(this.scale.bind(this), 250, true)
+            );
+            $(document).on("pat-update.autoscale", _.debounce(this.scale.bind(this), 250));
+            return this;
+        },
+
+        scale: function() {
+            var available_space, scale;
+
+            if (this.$el[0].tagName.toLowerCase() === "body") {
+                available_space = $(window).width();
+            } else {
+                available_space = this.$el.parent().outerWidth();
+            }
+            available_space = Math.min(available_space, this.options.maxWidth);
+            available_space = Math.max(available_space, this.options.minWidth);
+            scale = available_space/this.$el.outerWidth();
+
+            switch (this.options.method) {
+                case "scale":
+                    this.$el.css("transform", "scale(" + scale + ")");
+                    break;
+                case "zoom":
+                    this.$el.css("zoom", scale);
+                    break;
+            }
+            this.$el.addClass("scaled");
+            return this;
+        }
+    });
 });
 
 // helper functions to make all input elements
@@ -18018,16 +18026,16 @@ define('pat-bumper',[
                 }
                 $sticker.data("pat-bumper:config", options);
 
-                this.style.position="relative";
-                if (container===null) {
+                this.style.position = "relative";
+                if (container === null) {
                     $(window).on("scroll.bumper", null, this, bumper._onScrollWindow);
                     bumper._updateStatus(this);
                 } else {
-                    if (this.offsetParent!==container) {
+                    if (this.offsetParent !== container) {
                         var old_style = container.style.position;
-                        container.style.position="relative";
-                        if (this.offsetParent!==container) {
-                            container.style.position=old_style;
+                        container.style.position = "relative";
+                        if (this.offsetParent !== container) {
+                            container.style.position = old_style;
                             log.error("The offset parent for ", this,
                                       " must be its scrolling container ", container,
                                       "but it is ", this.offsetParent);
@@ -18048,23 +18056,25 @@ define('pat-bumper',[
 
         _findScrollContainer: function bumper_findScrollContainer(el) {
             var parent = el.parentElement;
-            while (parent!==document.body && parent!==null) {
+            while (parent !== document.body && parent !== null) {
                 var overflowY = $(parent).css("overflow-y");
-                if ((overflowY==="auto" || overflowY==="scroll"))
+                if ((overflowY === "auto" || overflowY === "scroll")) {
                     return parent;
-                parent=parent.parentElement;
+                }
+                parent = parent.parentElement;
             }
             return null;
         },
 
         _markBumped: function bumper_markBumper($sticker, options, is_bumped) {
             var $target = options.selector ? $(options.selector) : $sticker,
-                todo = is_bumped ? options.bump : options.unbump;
-
-            if (todo.add)
+                todo = is_bumped ? options.bump : options.unbump;    
+            if (todo.add) {
                 $target.addClass(todo.add);
-            if (todo.remove)
+            } 
+            if (todo.remove) {
                 $target.removeClass(todo.remove);
+            }
         },
 
         _onScrollContainer: function bumper_onScrollContainer(e) {
@@ -18085,32 +18095,38 @@ define('pat-bumper',[
                 box = bumper._getBoundingBox($sticker, margin),
                 delta = {};
 
-            if (arguments.length == 1)
-              frame = bumper._getViewport();
-            else if (arguments.length == 2)
-              frame = bumper._getBoundingBox($(arguments[1]), margin);
+            // when called from onScrollWindow
+            if (arguments.length == 1) {
+                frame = bumper._getViewport();
+            // when called from onScrollContainer
+            } else if (arguments.length == 2) {
+                var $container = $(arguments[1]);
+                frame = bumper._getBoundingBox($container, 0);
+            }
 
-            delta.top=sticker.style.top ? parseFloat($sticker.css("top")) : 0;
-            delta.left=sticker.style.left ? parseFloat($sticker.css("left")) : 0;
+            delta.top = sticker.style.top ? parseFloat($sticker.css("top")) : 0;
+            delta.left = sticker.style.left ? parseFloat($sticker.css("left")) : 0;
 
-            box.top-=delta.top;
-            box.bottom-=delta.top;
-            box.left-=delta.left;
-            box.right-=delta.left;
+            box.top -= delta.top;
+            box.bottom -= delta.top;
+            box.left -= delta.left;
+            box.right -= delta.left;
 
-            if ((frame.top > box.top) && options.bumptop)
-                sticker.style.top=(frame.top - box.top) + "px";
-            else if ((frame.bottom < box.bottom) && options.bumpbottom)
-                sticker.style.top=(frame.bottom - box.bottom) + "px";
-            else
-                sticker.style.top="";
+            if ((frame.top > box.top) && options.bumptop) {
+                sticker.style.top = (frame.top - box.top) + "px";
+            } else if ((frame.bottom < box.bottom) && options.bumpbottom) {
+                sticker.style.top = (frame.bottom - box.bottom) + "px";
+            } else {
+                sticker.style.top = "";
+            }
 
-            if ((frame.left > box.left) && options.bumpleft)
-                sticker.style.left=(frame.left - box.left) + "px";
-            else if ((frame.right < box.right) && options.bumpright)
-                sticker.style.left=(frame.right - box.right) + "px";
-            else
-                sticker.style.left="";
+            if ((frame.left > box.left) && options.bumpleft) {
+                sticker.style.left = (frame.left - box.left) + "px";
+            } else if ((frame.right < box.right) && options.bumpright) {
+                sticker.style.left = (frame.right - box.right) + "px";
+            } else {
+                sticker.style.left = "";
+            }
 
             bumper._markBumped($sticker, options, !!(sticker.style.top || sticker.style.left));
         },
@@ -18123,8 +18139,8 @@ define('pat-bumper',[
                     left: $win.scrollLeft()
                 };
 
-            view.right=view.left + $win.width();
-            view.bottom=view.top + $win.height();
+            view.right = view.left + $win.width();
+            view.bottom = view.top + $win.height();
             return view;
         },
 
@@ -20627,7 +20643,7 @@ define('pat-chosen',[
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
 // vim: sw=4 expandtab
 ;
-/* pat-clone */
+/* Clone pattern */
 define("pat-clone",[
     "jquery",
     "pat-parser",
@@ -21073,14 +21089,9 @@ define('pat-htmlparser',[],function(){
 	};
 });
 
-/*
- * changes to previous injection implementations
- * - no support for data-injection anymore, switch to new data-inject
- * - no support for data-href-next anymore, switch to data-inject: next-href
- * - XXX: add support for forms, see remnants in inject1 and ajaxify
- */
 define('pat-inject',[
     "jquery",
+    "underscore",
     "pat-ajax",
     "pat-parser",
     "pat-logger",
@@ -21088,10 +21099,11 @@ define('pat-inject',[
     "pat-utils",
     "pat-htmlparser",
     "pat-jquery-ext"  // for :scrollable for autoLoading-visible
-], function($, ajax, Parser, logger, registry, utils, htmlparser) {
+], function($, _, ajax, Parser, logger, registry, utils, htmlparser) {
     var log = logger.getLogger("pat.inject"),
         parser = new Parser("inject"),
-        TEXT_NODE = 3;
+        TEXT_NODE = 3,
+        COMMENT_NODE = 8;
 
     parser.addArgument("selector");
     parser.addArgument("target");
@@ -21101,10 +21113,8 @@ define('pat-inject',[
     parser.addArgument("trigger", "default", ["default", "autoload", "autoload-visible"]);
     parser.addArgument("confirm", 'class', ['never', 'always', 'form-data', 'class']);
     parser.addArgument("confirm-message", 'Are you sure you want to leave this page?');
-    /* Once injection has completed successfully, pat-inject will trigger
-     * an event for each hook: pat-inject-hook-$(hook)
-     */
-    parser.addArgument("hooks", [], ["raptor"], true);
+    parser.addArgument("hooks", [], ["raptor"], true); // After injection, pat-inject will trigger an event for each hook: pat-inject-hook-$(hook)
+    parser.addArgument("loading-class", "injecting"); // Add a class to the target while content is still loading.
     parser.addArgument("class"); // Add a class to the injected content.
     parser.addArgument("history");
     // XXX: this should not be here but the parser would bail on
@@ -21112,53 +21122,47 @@ define('pat-inject',[
     // to us
     parser.addArgument("url");
 
-    var _ = {
+    var inject = {
         name: "inject",
         trigger: ".raptor-ui .ui-button.pat-inject, a.pat-inject, form.pat-inject, .pat-subform.pat-inject",
         init: function inject_init($el, opts) {
-            var cfgs = _.extractConfig($el, opts);
-            // if the injection shall add a history entry and HTML5 pushState
-            // is missing, then don't initialize the injection.
-            if (cfgs.some(function(e){return e.history === "record";}) &&
-                    !("pushState" in history))
+            var cfgs = inject.extractConfig($el, opts);
+            if (cfgs.some(function(e){return e.history === "record";}) && !("pushState" in history)) {
+                // if the injection shall add a history entry and HTML5 pushState
+                // is missing, then don't initialize the injection.
                 return $el;
+            }
             $el.data("pat-inject", cfgs);
 
             // In case next-href is specified the anchor's href will
             // be set to it after the injection is triggered. In case
             // the next href already exists, we do not activate the
             // injection but instead just change the anchors href.
-            //
-            // XXX: This is used in only one project for linked
-            // fullcalendars, it's sanity is wonky and we should
-            // probably solve it differently. -- Maybe it's cool
-            // after all.
             var $nexthref = $(cfgs[0].nextHref);
             if ($el.is("a") && $nexthref.length > 0) {
                 log.debug("Skipping as next href already exists", $nexthref);
                 // XXX: reconsider how the injection enters exhausted state
-                return $el.attr({href: (window.location.href.split("#")[0] || "") +
-                                 cfgs[0].nextHref});
+                return $el.attr({href: (window.location.href.split("#")[0] || "") + cfgs[0].nextHref});
             }
 
             switch (cfgs[0].trigger) {
                 case "default":
                     // setup event handlers
                     if ($el.is("form")) {
-                        $el.on("submit.pat-inject", _.onTrigger)
+                        $el.on("submit.pat-inject", inject.onTrigger)
                         .on("click.pat-inject", "[type=submit]", ajax.onClickSubmit)
-                        .on("click.pat-inject", "[type=submit][formaction], [type=image][formaction]", _.onFormActionSubmit);
+                        .on("click.pat-inject", "[type=submit][formaction], [type=image][formaction]", inject.onFormActionSubmit);
                     } else if ($el.is(".pat-subform")) {
                         log.debug("Initializing subform with injection");
                     } else {
-                        $el.on("click.pat-inject", _.onTrigger);
+                        $el.on("click.pat-inject", inject.onTrigger);
                     }
                     break;
                 case "autoload":
-                    _.onTrigger.apply($el[0], []);
+                    inject.onTrigger.apply($el[0], []);
                     break;
                 case "autoload-visible":
-                    _._initAutoloadVisible($el);
+                    inject._initAutoloadVisible($el);
                     break;
             }
 
@@ -21173,12 +21177,15 @@ define('pat-inject',[
         },
 
         onTrigger: function inject_onTrigger(ev) {
+            /* Injection has been triggered, either via form submission or a
+             * link has been clicked.
+             */
             var cfgs = $(this).data("pat-inject"),
                 $el = $(this);
             if (ev)
                 ev.preventDefault();
             $el.trigger("patterns-inject-triggered");
-            _.execute(cfgs, $el);
+            inject.execute(cfgs, $el);
         },
 
         onFormActionSubmit: function inject_onFormActionSubmit(ev) {
@@ -21188,14 +21195,16 @@ define('pat-inject',[
                 formaction = $button.attr("formaction"),
                 $form = $button.parents(".pat-inject").first(),
                 opts = {url: formaction},
-                cfgs = _.extractConfig($form, opts);
+                cfgs = inject.extractConfig($form, opts);
 
             ev.preventDefault();
             $form.trigger("patterns-inject-triggered");
-            _.execute(cfgs, $form);
+            inject.execute(cfgs, $form);
         },
 
         submitSubform: function inject_submitSubform($sub) {
+            /* This method is called from pat-subform
+             */
             var $el = $sub.parents("form"),
                 cfgs = $sub.data("pat-inject");
             try {
@@ -21203,7 +21212,7 @@ define('pat-inject',[
             } catch (e) {
                 log.error("patterns-inject-triggered", e);
             }
-            _.execute(cfgs, $el);
+            inject.execute(cfgs, $el);
         },
 
         extractConfig: function inject_extractConfig($el, opts) {
@@ -21234,6 +21243,8 @@ define('pat-inject',[
         },
 
         elementIsDirty: function(m) {
+            /* Check whether the passed in form element contains a value.
+             */
             var data = $.map(m.find(":input:not(select)"),
                 function(i) {
                     var val = $(i).val();
@@ -21242,105 +21253,139 @@ define('pat-inject',[
             return $.inArray(true, data)!==-1;
         },
 
-        verifyConfig: function inject_verifyConfig(cfgs, $el) {
-            // verify and post-process config
-            // XXX: this should return a command instead of messing around on the config
-            var url = cfgs[0].url;
+        askForConfirmation: function inject_askForConfirmation(cfgs) {
+            /* If configured to do so, show a confirmation dialog to the user.
+             * This is done before attempting to perform injection.
+             */
+            var should_confirm = false, message;
 
-            // verification for each cfg in the array needs to succeed
-            return cfgs.every(function inject_verifyConfig_each(cfg) {
-                // in case of multi-injection, all injections need to use
-                // the same url
-                if (cfg.url !== url) {
-                    log.error("Unsupported different urls for multi-inject");
-                    return false;
-                }
-
-                // defaults
-                cfg.source = cfg.source || cfg.selector;
-                cfg.target = cfg.target || cfg.selector;
-
-                if (!_._extractModifiers(cfg))
-                    return false;
-
-                // make sure target exist
-                cfg.$target = cfg.$target || (cfg.target==="self" ? $el : $(cfg.target));
-                if (cfg.$target.length === 0) {
-                    if (!cfg.target) {
-                        log.error("Need target selector", cfg);
-                        return false;
-                    }
-                    cfg.$target = _._createTarget(cfg.target);
-                    cfg.$injected = cfg.$target;
-                }
-                var confirm = false;
+            _.each(cfgs, function(cfg) {
+                var _confirm = false;
                 if (cfg.confirm == 'always') {
-                    confirm = true;
+                    _confirm = true;
                 } else if (cfg.confirm === 'form-data') {
-                    $.each(cfgs, function(idx, cfg) {
-                        confirm = _.elementIsDirty(cfg.$target) ? true : confirm;
-                    });
+                    _confirm = inject.elementIsDirty(cfg.$target);
                 } else if (cfg.confirm === 'class') {
-                    confirm = cfg.$target.hasClass('is-dirty');
+                    _confirm = cfg.$target.hasClass('is-dirty');
                 }
-                // check if target is "dirty"
-                if (confirm) {
-                    if (!window.confirm(cfg.confirmMessage)) {
-                        return false;
-                    }
+                if (_confirm) {
+                    should_confirm = true;
+                    message = cfg.confirmMessage;
                 }
-
-                // pat-inject is used to populate target in some form and when
-                // Cancel button is presed (this triggers reset event on the
-                // form) you would expect to populate with initial placeholder 
-                var $form = cfg.$target.parents('form')
-                if ($form.size() !== 0 && cfg.$target.data('initial-value') === undefined) {
-                    cfg.$target.data('initial-value', cfg.$target.html());
-                    $form.on('reset', function() {
-                        cfg.$target.html(cfg.$target.data('initial-value'))
-                    })
-                }
-
-                return true;
             });
+            if (should_confirm) {
+                if (!window.confirm(message)) {
+                    return false;
+                }
+            }
+            return true;
         },
 
-        _extractModifiers: function inject_extractModifiers(cfg) {
+        ensureTarget: function inject_ensureTarget(cfg, $el) {
+            /* Make sure that a target element exists and that it's assigned to
+             * cfg.$target.
+             */
+            // make sure target exist
+            cfg.$target = cfg.$target || (cfg.target==="self" ? $el : $(cfg.target));
+            if (cfg.$target.length === 0) {
+                if (!cfg.target) {
+                    log.error("Need target selector", cfg);
+                    return false;
+                }
+                cfg.$target = inject.createTarget(cfg.target);
+                cfg.$injected = cfg.$target;
+            }
+            return true;
+        },
+
+        verifySingleConfig: function inject_verifySingleonfig($el, url, cfg) {
+            /* Verify one of potentially multiple configs (i.e. argument lists).
+             *
+             * Extract modifiers such as ::element or ::after.
+             * Ensure that a target element exists.
+             */
+            if (cfg.url !== url) {
+                // in case of multi-injection, all injections need to use
+                // the same url
+                log.error("Unsupported different urls for multi-inject");
+                return false;
+            }
+            // defaults
+            cfg.source = cfg.source || cfg.selector;
+            cfg.target = cfg.target || cfg.selector;
+
+            if (!inject.extractModifiers(cfg)) {
+                return false;
+            }
+            if (!inject.ensureTarget(cfg, $el)) {
+                return false;
+            }
+            inject.listenForFormReset(cfg);
+            return true;
+        },
+
+        verifyConfig: function inject_verifyConfig(cfgs, $el) {
+            /* Verify and post-process all the configurations.
+             * Each "config" is an arguments list separated by the &&
+             * combination operator.
+             *
+             * In case of multi-injection, only one URL is allowed, which
+             * should be specified in the first config (i.e. arguments list).
+             *
+             * Verification for each cfg in the array needs to succeed.
+             */
+            return cfgs.every(_.partial(inject.verifySingleConfig, $el, cfgs[0].url));
+        },
+
+        listenForFormReset: function (cfg) {
+            /* if pat-inject is used to populate target in some form and when
+             * Cancel button is pressed (this triggers reset event on the
+             * form) you would expect to populate with initial placeholder
+             */
+            var $form = cfg.$target.parents('form');
+            if ($form.size() !== 0 && cfg.$target.data('initial-value') === undefined) {
+                cfg.$target.data('initial-value', cfg.$target.html());
+                $form.on('reset', function() {
+                    cfg.$target.html(cfg.$target.data('initial-value'));
+                });
+            }
+        },
+
+        extractModifiers: function inject_extractModifiers(cfg) {
+            /* The user can add modifiers to the source and target arguments.
+             * Modifiers such as ::element, ::before and ::after.
+             * We identifiy and extract these modifiers here.
+             */
             var source_re = /^(.*?)(::element)?$/,
                 target_re = /^(.*?)(::element)?(::after|::before)?$/,
                 source_match = source_re.exec(cfg.source),
                 target_match = target_re.exec(cfg.target),
                 targetMod, targetPosition;
 
-            // source content or element?
             cfg.source = source_match[1];
-            // XXX: turn into source processor
             cfg.sourceMod = source_match[2] ? "element" : "content";
-
-            // will be added while the ajax request is in progress
-            cfg.targetLoadClasses = "injecting";
-
-            // target content or element?
-            targetMod = target_match[2] ? "element" : "content";
             cfg.target = target_match[1];
-            cfg.targetLoadClasses += " injecting-" + targetMod;
+            targetMod = target_match[2] ? "element" : "content";
+            targetPosition = (target_match[3] || "::").slice(2); // position relative to target
 
-            // position relative to target
-            targetPosition = (target_match[3] || "::").slice(2);
-            if (targetPosition)
-                cfg.targetLoadClasses += " injecting-" + targetPosition;
-
+            if (cfg.loadingClass) {
+                cfg.loadingClass += " "+ cfg.loadingClass + "-" + targetMod;
+                if (targetPosition && cfg.loadingClass) {
+                    cfg.loadingClass += " " + cfg.loadingClass + "-" + targetPosition;
+                }
+            }
             cfg.action = targetMod + targetPosition;
             // Once we start detecting illegal combinations, we'll
             // return false in case of error
             return true;
         },
 
-        // create a target that matches the selector
-        //
-        // XXX: so far we only support #target and create a div with
-        // that id appended to the body.
-        _createTarget: function inject_createTarget (selector) {
+        createTarget: function inject_createTarget (selector) {
+            /* create a target that matches the selector
+             *
+             * XXX: so far we only support #target and create a div with
+             * that id appended to the body.
+             */
             var $target;
             if (selector.slice(0,1) !== "#") {
                 log.error("only id supported for non-existing target");
@@ -21395,7 +21440,7 @@ define('pat-inject',[
                 $(this).trigger("pat-inject-content-loaded");
             });
             // Now the injection actually happens.
-            if (_._inject(trigger, $src, $target, cfg)) { _._afterInjection($el, $injected, cfg); }
+            if (inject._inject(trigger, $src, $target, cfg)) { inject._afterInjection($el, $injected, cfg); }
             // History support.
             if ((cfg.history === "record") && ("pushState" in history)) {
                 history.pushState({'url': cfg.url}, "", cfg.url);
@@ -21438,17 +21483,17 @@ define('pat-inject',[
             $.each(cfgs[0].hooks || [], function (idx, hook) {
                 $el.trigger("pat-inject-hook-"+hook);
             });
-            _.stopBubblingFromRemovedElement($el, cfgs, ev);
-            sources$ = _.callTypeHandler(cfgs[0].dataType, "sources", $el, [cfgs, data, ev]);
+            inject.stopBubblingFromRemovedElement($el, cfgs, ev);
+            sources$ = inject.callTypeHandler(cfgs[0].dataType, "sources", $el, [cfgs, data, ev]);
             cfgs.forEach(function(cfg, idx) {
                 cfg.$target.each(function() {
-                    _._performInjection.apply(this, [$el, sources$[idx], cfg, ev.target]);
+                    inject._performInjection.apply(this, [$el, sources$[idx], cfg, ev.target]);
                 });
             });
             if (cfgs[0].nextHref) {
                 $el.attr({href: (window.location.href.split("#")[0] || "") +
                             cfgs[0].nextHref});
-                _.destroy($el);
+                inject.destroy($el);
             }
             $el.off("pat-ajax-success.pat-inject");
             $el.off("pat-ajax-error.pat-inject");
@@ -21464,15 +21509,21 @@ define('pat-inject',[
         },
 
         execute: function inject_execute(cfgs, $el) {
+            /* Actually execute the injection.
+             *
+             * Either by making an ajax request or by spoofing an ajax
+             * request when the content is readily available in the current page.
+             */
             // get a kinda deep copy, we scribble on it
-            cfgs = cfgs.map(function(cfg) {
-                return $.extend({}, cfg);
-            });
-            if (!_.verifyConfig(cfgs, $el)) {
+            cfgs = cfgs.map(function(cfg) { return $.extend({}, cfg); });
+            if (!inject.verifyConfig(cfgs, $el)) {
+                return;
+            }
+            if (!inject.askForConfirmation(cfgs)) {
                 return;
             }
             // possibility for spinners on targets
-            cfgs.forEach(function(cfg) { cfg.$target.addClass(cfg.targetLoadClasses); });
+            _.chain(cfgs).filter(_.property('loadingClass')).each(function(cfg) { cfg.$target.addClass(cfg.loadingClass); });
 
             $el.on("pat-ajax-success.pat-inject", this._onInjectSuccess.bind(this, $el, cfgs));
             $el.on("pat-ajax-error.pat-inject", this._onInjectError.bind(this, $el, cfgs));
@@ -21527,7 +21578,7 @@ define('pat-inject',[
         },
 
         _sourcesFromHtml: function inject_sourcesFromHtml(html, url, sources) {
-            var $html = _._parseRawHtml(html, url);
+            var $html = inject._parseRawHtml(html, url);
             return sources.map(function inject_sourcesFromHtml_map(source) {
                 if (source === "body")
                     source = "#__original_body";
@@ -21572,7 +21623,7 @@ define('pat-inject',[
             htmlparser.HTMLParser(html, {
                 start: function(tag, attrs, unary) {
                     output.push("<"+tag);
-                    link_attribute = _._link_attributes[tag.toUpperCase()];
+                    link_attribute = inject._link_attributes[tag.toUpperCase()];
                     for (i=0; i<attrs.length; i++) {
                         if (attrs[i].name.toLowerCase() === link_attribute) {
                             value = attrs[i].value;
@@ -21619,9 +21670,9 @@ define('pat-inject',[
                 "$1src=\"\" data-pat-inject-rebase-$2="
             ).trim()).wrapAll("<div>").parent();
 
-            $page.find(Object.keys(_._rebaseAttrs).join(",")).each(function() {
+            $page.find(Object.keys(inject._rebaseAttrs).join(",")).each(function() {
                 var $this = $(this),
-                    attrName = _._rebaseAttrs[this.tagName],
+                    attrName = inject._rebaseAttrs[this.tagName],
                     value = $this.attr(attrName);
 
                 if (value && value.slice(0, 2) !== "@@" && value[0] !== "#" &&
@@ -21653,7 +21704,7 @@ define('pat-inject',[
                     .replace(/<body([^>]*?)>/gi, "<div id=\"__original_body\">")
                     .replace(/<\/body([^>]*?)>/gi, "</div>");
             try {
-                clean_html = _._rebaseHTML(url, clean_html);
+                clean_html = inject._rebaseHTML(url, clean_html);
             } catch (e) {
                 log.error("Error rebasing urls", e);
             }
@@ -21677,7 +21728,7 @@ define('pat-inject',[
             // function to trigger the autoload and mark as triggered
             function trigger() {
                 $el.data("pat-inject-autoloaded", true);
-                _.onTrigger.apply($el[0], []);
+                inject.onTrigger.apply($el[0], []);
                 return true;
             }
 
@@ -21726,14 +21777,14 @@ define('pat-inject',[
 
         // XXX: simple so far to see what the team thinks of the idea
         registerTypeHandler: function inject_registerTypeHandler(type, handler) {
-            _.handlers[type] = handler;
+            inject.handlers[type] = handler;
         },
 
         callTypeHandler: function inject_callTypeHandler(type, fn, context, params) {
             type = type || "html";
 
-            if (_.handlers[type] && $.isFunction(_.handlers[type][fn])) {
-                return _.handlers[type][fn].apply(context, params);
+            if (inject.handlers[type] && $.isFunction(inject.handlers[type][fn])) {
+                return inject.handlers[type][fn].apply(context, params);
             } else {
                 return null;
             }
@@ -21743,14 +21794,23 @@ define('pat-inject',[
             "html": {
                 sources: function(cfgs, data) {
                     var sources = cfgs.map(function(cfg) { return cfg.source; });
-                    return _._sourcesFromHtml(data, cfgs[0].url, sources);
+                    return inject._sourcesFromHtml(data, cfgs[0].url, sources);
                 }
             }
         }
     };
 
-    $(document).on("patterns-injected", function(ev, cfg) {
-        cfg.$target.removeClass(cfg.targetLoadClasses);
+    $(document).on("patterns-injected.inject", function onInjected(ev, cfg, trigger, injected) {
+        /* Listen for the patterns-injected event.
+         *
+         * Remove the "loading-class" classes from all injection targets and
+         * then scan the injected content for new patterns.
+         */
+        cfg.$target.removeClass(cfg.loadingClass);
+        if (injected.nodeType !== TEXT_NODE && injected !== COMMENT_NODE) {
+            registry.scan(injected, null, {type: "injection", element: trigger});
+            $(injected).trigger("patterns-injected-scanned");
+        }
     });
 
     $(window).bind("popstate", function (event) {
@@ -21781,8 +21841,8 @@ define('pat-inject',[
         }
     }
 
-    registry.register(_);
-    return _;
+    registry.register(inject);
+    return inject;
 });
 
 // jshint indent: 4, browser: true, jquery: true, quotmark: double
@@ -29979,6 +30039,7 @@ define('pat-modal',[
     var parser = new Parser("modal");
     parser.addArgument("class");
     parser.addArgument("closing", ["close-button"], ["close-button", "outside"], true);
+    parser.addArgument("close-text", 'Close');
 
     return Base.extend({
         name: "modal",
@@ -29988,13 +30049,15 @@ define('pat-modal',[
         trigger: "div.pat-modal, a.pat-modal, form.pat-modal, .pat-modal.pat-subform",
         init: function ($el, opts, trigger) {
             this.options = parser.parse(this.$el, opts);
-            if (trigger && trigger.type === "injection")
+            if (trigger && trigger.type === "injection") {
                 $.extend(this.options, parser.parse($(trigger.element), {}, false, false));
+            }
             if (this.$el.is("div")) {
                 this._init_div1();
             } else {
                 this._init_inject1();
             }
+            $('body').addClass("modal-active");
         },
 
         _init_inject1: function () {
@@ -30016,21 +30079,25 @@ define('pat-modal',[
         },
 
         _init_div1: function () {
-            var $header = $("<div class='header' />"),
-                activeElement = document.activeElement;
+            var $header = $("<div class='header' />");
 
-            if (this.options.closing.indexOf("close-button")!==-1)
-                $("<button type='button' class='close-panel'>Close</button>").appendTo($header);
+            if (this.options.closing.indexOf("close-button")!==-1) {
+                $("<button type='button' class='close-panel'>" + this.options.closeText + "</button>").appendTo($header);
+            }
 
             // We cannot handle text nodes here
-            this.$el.children(":last, :not(:first)")
-                .wrapAll("<div class='panel-content' />");
+            var $children = this.$el.children(":last, :not(:first)");
+            if ($children.length) {
+                $children.wrapAll("<div class='panel-content' />");
+            } else {
+                this.$el.append("<div class='panel-content' />");
+            }
             $(".panel-content", this.$el).before($header);
             this.$el.children(":first:not(.header)").prependTo($header);
 
             // Restore focus in case the active element was a child of $el and
             // the focus was lost during the wrapping.
-            activeElement.focus();
+            document.activeElement.focus();
             this._init_handlers();
             this.resize();
             this.setPosition();
@@ -30040,9 +30107,9 @@ define('pat-modal',[
             var $el = this.$el;
             $(document).on("click.pat-modal", ".close-panel", this.destroy.bind(this));
             $(document).on("keyup.pat-modal", this._onKeyUp.bind(this));
-            if (this.options.closing.indexOf("outside")!==-1)
+            if (this.options.closing.indexOf("outside")!==-1) {
                 $(document).on("click.pat-modal", this._onPossibleOutsideClick.bind(this));
-
+            }
             $(window).on("resize.pat-modal-position",
                 utils.debounce(this.resize.bind(this), 400));
             $(document).on("pat-inject-content-loaded.pat-modal-position", "#pat-modal",
@@ -30115,6 +30182,7 @@ define('pat-modal',[
         destroy: function() {
             $(document).off(".pat-modal");
             this.$el.remove();
+            $('body').removeClass("modal-active");
         }
     });
 });
@@ -30265,8 +30333,6 @@ define('pat-forward',[
             event.stopPropagation();
         }
     };
-
-
     registry.register(_);
     return _;
 });
@@ -40531,6 +40597,7 @@ define('pat-notification',[
     parser.addArgument("healing", "5s");
     parser.addArgument("controls", "icons", ["icons", "buttons", "none"]);
     parser.addArgument("class");
+    parser.addArgument("close-text", 'Close');
 
     var _ = {
         name: "notification",
@@ -40590,6 +40657,7 @@ define('pat-notification',[
             _.count++;
 
             var options = parser.parse($el, opts);
+            var closetext = options.closeText;
 
             $el = $el.wrap("<div/>").parent()
                 .attr("id", "pat-notification-" + _.count)
@@ -40605,14 +40673,14 @@ define('pat-notification',[
                 options.controls = [ options.controls ];
             }
 
-            // add close icon if requsted
+            // add close icon if requested
             if (options.controls.indexOf("icons") >= 0) {
-                $el.append("<button type='button' class=.close-panel'>Close</button>");
+                $el.append("<button type='button' class=.close-panel'>" + closetext + "</button>");
             }
 
             // add close button if requested
             if (options.controls.indexOf("buttons") >= 0) {
-                $el.append("<div class='button-bar'><button type='button' class='close-panel'>Close</button></div>");
+                $el.append("<div class='button-bar'><button type='button' class='close-panel'>" + closetext + "</button></div>");
             }
 
             if ($el.find(".close-panel").length) {
@@ -40791,6 +40859,13 @@ define('pat-scroll',[
                     ev.preventDefault();
                     this.smoothScroll();
                 }.bind(this));
+                this.$el.on("pat-update", this.onPatternsUpdate.bind(this));
+            }
+        },
+
+        onPatternsUpdate: function(ev, data) {
+            if (data.originalEvent && data.originalEvent.type === "click") {
+                this.smoothScroll();
             }
         },
 
@@ -40801,7 +40876,7 @@ define('pat-scroll',[
                 $el = this.options.selector ? $(this.options.selector) : this.$el;
                 options[scroll] = this.options.offset;
             } else {
-                $el = $('body');
+                $el = $('body, html');
                 options[scroll] = $(this.$el.attr('href')).offset().top;
             }
             $el.animate(options, 500);
@@ -40819,6 +40894,11 @@ define('pat-sortable',[
 ], function($, Base, Parser) {
     var parser = new Parser("sortable");
     parser.addArgument("selector", "li");
+    parser.addArgument('drag-class', 'dragged'); // Class to apply to item that is being dragged.
+    parser.addArgument('drop'); // Callback function for when item is dropped (null)
+
+    // BBB for the mockup sortable pattern.
+    parser.addAlias('dragClass', 'drag-class');
 
     return Base.extend({
         name: "sortable",
@@ -40826,7 +40906,7 @@ define('pat-sortable',[
 
         init: function ($el) {
             this.$form = this.$el.closest('form');
-            this.options = parser.parse(this.$el, true);
+            this.options = parser.parse(this.$el, false);
             this.recordPositions().addHandles().initScrolling();
             this.$el.on('pat-update', this.onPatternUpdate.bind(this));
         },
@@ -40845,7 +40925,7 @@ define('pat-sortable',[
 
         recordPositions: function () {
             // use only direct descendants to support nested lists
-            this.$sortables = this.$el.children().filter(this.options[0].selector);
+            this.$sortables = this.$el.children().filter(this.options.selector);
             this.$sortables.each(function (idx, $el) {
                 $(this).data('patterns.sortable', {'position': idx});
             });
@@ -40863,7 +40943,7 @@ define('pat-sortable',[
             if("draggable" in document.createElement("span")) {
                 $handles.attr("draggable", true);
             } else {
-                $handles.on("selectstart", function(event) { event.preventDefault(); });
+                $handles.on("selectstart", function(ev) { ev.preventDefault(); });
             }
             $handles.on("dragstart", this.onDragStart.bind(this));
             $handles.on("dragend", this.onDragEnd.bind(this));
@@ -40881,8 +40961,8 @@ define('pat-sortable',[
                 position: "fixed", zIndex: 999999,
                 height: 32, left: 0, right: 0
             });
-            scroll.on("dragover", function(event) {
-                event.preventDefault();
+            scroll.on("dragover", function(ev) {
+                ev.preventDefault();
                 if ($("html,body").is(":animated")) { return; }
                 var newpos = $(window).scrollTop() + ($(this).attr("id")==="pat-scroll-up" ? -32 : 32);
                 $("html,body").animate({scrollTop: newpos}, 50, "linear");
@@ -40891,11 +40971,16 @@ define('pat-sortable',[
         },
 
         onDragEnd: function (ev) {
-            $(".dragged").removeClass("dragged");
+            var $dragged = $(ev.target).parent();
+            $dragged.removeClass(this.options.dragClass);
             this.$sortables.unbind(".pat-sortable");
             this.$el.unbind(".pat-sortable");
             $("#pat-scroll-up, #pat-scroll-dn").detach();
-            this.submitChangedAmount($(ev.target).closest('.sortable'));
+            var change = this.submitChangedAmount($(ev.target).closest('.sortable'));
+            // Call the optionally passed-in callback function
+            if (this.options.drop) {
+                this.options.drop($dragged, change);
+            }
         },
 
         submitChangedAmount: function ($dragged) {
@@ -40917,66 +41002,67 @@ define('pat-sortable',[
                     $dragged.find('.sortable-button-down').click();
                 }
             }
+            return change;
         },
 
-        onDragStart: function (event) {
-            var $handle = $(event.target),
-                $draggable = $handle.parent();
-
-            // Firefox seems to need this set to any value
-            event.originalEvent.dataTransfer.setData("Text", "");
-            event.originalEvent.dataTransfer.effectAllowed = ["move"];
-            if ("setDragImage" in event.originalEvent.dataTransfer) {
-                event.originalEvent.dataTransfer.setDragImage($draggable[0], 0, 0);
+        onDragStart: function (ev) {
+            var $handle = $(ev.target),
+                $dragged = $handle.parent();
+            if (typeof ev.originalEvent !== "undefined") {
+                // Firefox seems to need this set to any value
+                ev.originalEvent.dataTransfer.setData("Text", "");
+                ev.originalEvent.dataTransfer.effectAllowed = ["move"];
+                if ("setDragImage" in ev.originalEvent.dataTransfer) {
+                    ev.originalEvent.dataTransfer.setDragImage($dragged[0], 0, 0);
+                }
             }
-            $draggable.addClass("dragged");
+            $dragged.addClass(this.options.dragClass);
 
             // Scroll the list if near the borders
-            this.$el.on("dragover.pat-sortable", function(event) {
-                event.preventDefault();
+            this.$el.on("dragover.pat-sortable", function(ev) {
+                ev.preventDefault();
                 if (this.$el.is(":animated")) return;
 
-                var pos = event.originalEvent.clientY + $("body").scrollTop();
-
+                var pos = ev.originalEvent.clientY + $("body").scrollTop();
                 if (pos - this.$el.offset().top < 32)
                     this.$el.animate({scrollTop: this.$el.scrollTop()-32}, 50, "linear");
                 else if (this.$el.offset().top+this.$el.height() - pos < 32)
                     this.$el.animate({scrollTop: this.$el.scrollTop()+32}, 50, "linear");
             }.bind(this));
 
-            // list elements are only drop targets when one element of the
-            // list is being dragged. avoids dragging between lists.
-            this.$sortables.on("dragover.pat-sortable", function(event) {
-                var $this = $(this),
-                    midlineY = $this.offset().top - $(document).scrollTop() + $this.height()/2;
+            this.$sortables.on("dragover.pat-sortable", function(ev) {
+                // list elements are only drop targets when one element of the
+                // list is being dragged. avoids dragging between lists.
+                var $dropTarget = $(ev.target),
+                    midlineY = $dropTarget.offset().top - $(document).scrollTop() + $dropTarget.height()/2;
 
-                if ($(this).hasClass("dragged")) {
-                    // bail if dropping on self
+                if ($dropTarget.is($dragged)) {
                     return;
                 }
-                $this.removeClass("drop-target-above drop-target-below");
-                if (event.originalEvent.clientY > midlineY)
-                    $this.addClass("drop-target-below");
+                $dropTarget.removeClass("drop-target-above drop-target-below");
+                if (ev.originalEvent.clientY > midlineY)
+                    $dropTarget.addClass("drop-target-below");
                 else
-                    $this.addClass("drop-target-above");
-                event.preventDefault();
-            });
+                    $dropTarget.addClass("drop-target-above");
+                ev.preventDefault();
+            }.bind(this));
 
             this.$sortables.on("dragleave.pat-sortable", function() {
                 this.$sortables.removeClass("drop-target-above drop-target-below");
             }.bind(this));
 
-            this.$sortables.on("drop.pat-sortable", function(event) {
-                var $sortable = $(this);
-                if ($sortable.hasClass("dragged"))
+            this.$sortables.on("drop.pat-sortable", function(ev) {
+                var $dropTarget = $(ev.target);
+                if ($dropTarget.is($dragged)) {
                     return;
-
-                if ($sortable.hasClass("drop-target-below"))
-                    $sortable.after($(".dragged"));
-                else
-                    $sortable.before($(".dragged"));
-                $sortable.removeClass("drop-target-above drop-target-below");
-                event.preventDefault();
+                }
+                if ($dropTarget.hasClass("drop-target-below")) {
+                    $dropTarget.after($dragged);
+                } else {
+                    $dropTarget.before($dragged);
+                }
+                $dropTarget.removeClass("drop-target-above drop-target-below");
+                ev.prevDefault();
             });
         }
     });
@@ -40986,54 +41072,47 @@ define('pat-sortable',[
 // vim: sw=4 expandtab
 ;
 /**
- * Patterns stacks
+ * Stacks pattern
  *
  * Copyright 2013 Simplon B.V. - Wichert Akkerman
  */
 define('pat-stacks',[
     "jquery",
     "pat-parser",
+    "pat-base",
     "pat-logger",
     "pat-utils",
     "pat-registry"
-], function($, Parser, logging, utils, registry) {
+], function($, Parser, Base, logging, utils, registry) {
+    "use strict";
     var log = logging.getLogger("stacks"),
         parser = new Parser("stacks");
-
     parser.addArgument("selector", "> *[id]");
     parser.addArgument("transition", "none", ["none", "css", "fade", "slide"]);
     parser.addArgument("effect-duration", "fast");
     parser.addArgument("effect-easing", "swing");
 
-    var stacks = {
+    return Base.extend({
         name: "stacks",
         trigger: ".pat-stacks",
         document: document,
 
         init: function($el, opts) {
-            var fragment = this._currentFragment();
-
-            return $el.each(function() {
-                stacks._setupStack(this, opts, fragment);
-            });
+            this.options = parser.parse(this.$el, opts);
+            this._setupStack();
+            $(this.document).on("click", "a", this._onClick.bind(this));
+            return $el;
         },
 
-        _setup: function() {
-            $(this.document).on("click", "a", this._onClick);
-        },
-
-        _setupStack: function(container, options, selected) {
-            var $container = $(container),
-                $sheets, $visible, $invisible;
-            options=parser.parse($container, options);
-            $container.data("pat-stacks", options);
-            $sheets=$container.find(options.selector);
-
+        _setupStack: function() {
+            var selected = this._currentFragment(),
+                $sheets = this.$el.find(this.options.selector),
+                $visible = [],
+                $invisible;
             if ($sheets.length < 2) {
-                log.warn("Stacks pattern: must have more than one sheet.", $container[0]);
+                log.warn("Stacks pattern: must have more than one sheet.", this.$el[0]);
                 return;
             }
-            $visible = [];
             if (selected) {
                 try {
                     $visible = $sheets.filter("#"+selected);
@@ -41042,13 +41121,13 @@ define('pat-stacks',[
                 }
             }
             if (!$visible.length) {
-                $visible=$sheets.first();
-                selected=$visible[0].id;
+                $visible = $sheets.first();
+                selected = $visible[0].id;
             }
-            $invisible=$sheets.not($visible);
-            utils.hideOrShow($visible, true, {transition: "none"}, stacks.name);
-            utils.hideOrShow($invisible, false, {transition: "none"}, stacks.name);
-            stacks._updateAnchors($container, selected);
+            $invisible = $sheets.not($visible);
+            utils.hideOrShow($visible, true, {transition: "none"}, this.name);
+            utils.hideOrShow($invisible, false, {transition: "none"}, this.name);
+            this._updateAnchors(selected);
         },
 
          _base_URL: function() {
@@ -41057,59 +41136,58 @@ define('pat-stacks',[
 
         _currentFragment: function() {
             var parts = this.document.URL.split("#");
-            if (parts.length===1)
+            if (parts.length === 1) {
                 return null;
+            }
             return parts[parts.length-1];
         },
 
         _onClick: function(e) {
-            var base_url = stacks._base_URL(),
-                href_parts = e.currentTarget.href.split("#"),
-                $stack;
+            var base_url = this._base_URL(),
+                href_parts = e.currentTarget.href.split("#");
             // Check if this is an in-document link and has a fragment
-            if (base_url!==href_parts[0] || !href_parts[1])
+            if (base_url !== href_parts[0] || !href_parts[1]) {
                 return;
-            $stack=$(stacks.trigger+":has(#"+href_parts[1]+")");
-            if (!$stack.length)
+            }
+            if (!this.$el.has("#"+href_parts[1]).length) {
                 return;
+            }
             e.preventDefault();
-            stacks._updateAnchors($stack, href_parts[1]);
-            stacks._switch($stack, href_parts[1]);
+            this._updateAnchors(href_parts[1]);
+            this._switch(href_parts[1]);
+            $(e.target).trigger("pat-update", {
+                pattern: "stacks",
+                originalEvent: e
+            });
         },
 
-        _updateAnchors: function($container, selected) {
-            var options = $container.data("pat-stacks"),
-                $sheets = $container.find(options.selector),
-                base_url = stacks._base_URL();
-            for (var i=0; i<$sheets.length; i++) {
+        _updateAnchors: function(selected) {
+            var $sheets = this.$el.find(this.options.selector),
+                base_url = this._base_URL();
+            $sheets.each(function (idx, sheet) {
                 // This may appear odd, but: when querying a browser uses the
                 // original href of an anchor as it appeared in the document
-                // source, but when you access the href property you always
+                // source, but when you access the href property you always get
                 // the fully qualified version.
-                var sheet = $sheets[i],
-                    $anchors = $("a[href=\""+base_url+"#"+sheet.id+"\"],a[href=\"#"+sheet.id+"\"]");
-                if (sheet.id===selected)
+                var $anchors = $("a[href=\""+base_url+"#"+sheet.id+"\"],a[href=\"#"+sheet.id+"\"]");
+                if (sheet.id === selected) {
                     $anchors.addClass("current");
-                else
+                } else {
                     $anchors.removeClass("current");
-            }
+                }
+            });
         },
 
-        _switch: function($container, sheet_id) {
-            var options = $container.data("pat-stacks"),
-                $sheet = $container.find("#"+sheet_id),
-                $invisible;
-            if (!$sheet.length || $sheet.hasClass("visible"))
+        _switch: function(sheet_id) {
+            var $sheet = this.$el.find("#"+sheet_id);
+            if (!$sheet.length || $sheet.hasClass("visible")) {
                 return;
-            $invisible=$container.find(options.selector).not($sheet);
-            utils.hideOrShow($invisible, false, options, stacks.name);
-            utils.hideOrShow($sheet, true, options, stacks.name);
+            }
+            var $invisible = this.$el.find(this.options.selector).not($sheet);
+            utils.hideOrShow($invisible, false, this.options, this.name);
+            utils.hideOrShow($sheet, true, this.options, this.name);
         }
-    };
-
-    stacks._setup();
-    registry.register(stacks);
-    return stacks;
+    });
 });
 
 /**
@@ -41357,10 +41435,12 @@ define('pat-toggle',[
     "pat-parser",
     "pat-store"
 ], function($, patterns, logger, Parser, store) {
+    "use strict";
     var log = logger.getLogger("pat.toggle"),
         parser = new Parser("toggle");
 
     parser.addArgument("selector");
+    parser.addArgument("event");
     parser.addArgument("attr", "class");
     parser.addArgument("value");
     parser.addArgument("store", "none", ["none", "session", "local"]);
@@ -41391,9 +41471,11 @@ define('pat-toggle',[
             var classes = el.className.split(/\s+/),
                 values = this.values;
             classes=classes.filter(function(v) { return v.length && values.indexOf(v)===-1;});
-            if (value)
+            if (value) {
                 classes.push(value);
+            }
             el.className=classes.join(" ");
+            $(el).trigger("pat-update", {pattern: "toggle"});
         },
 
         next: function Toggler_next(current) {
@@ -41438,27 +41520,39 @@ define('pat-toggle',[
         init: function toggle_init($el) {
             return $el.each(function toggle_init_el() {
                 var $trigger = $(this),
+                    event_name,
                     options = toggle._validateOptions(this, parser.parse($trigger, true));
 
-                if (!options.length)
+                if (!options.length) {
                     return;
+                }
 
-                for (var i=0; i<options.length; i++)
+                for (var i=0; i<options.length; i++){
                     if (options[i].value_storage) {
                         var victims, state, last_state;
                         victims = $(options[i].selector);
-                        if (!victims.length)
+                        if (!victims.length) {
                             continue;
+                        }
                         state=options[i].toggler.get(victims[0]);
                         last_state=options[i].value_storage.get();
-                        if (state!==last_state && last_state !== null)
-                            for (var j=0; j<victims.length; j++)
+                        if (state!==last_state && last_state !== null) {
+                            for (var j=0; j<victims.length; j++) {
                                 options[i].toggler.set(victims[j], last_state);
+                            }
+                        }
+                    }
+
+                    if (options[i].event) {
+                        event_name = options[i].event;
+                    }else{
+                        event_name = 'click';
+                    }
                 }
 
                 $trigger
                     .off(".toggle")
-                    .on("click.toggle", null, options, toggle._onClick)
+                    .on(event_name + ".toggle", null, options, toggle._onClick)
                     .on("keypress.toggle", null, options, toggle._onKeyPress);
             });
         },
@@ -41493,12 +41587,10 @@ define('pat-toggle',[
                     log.error("Toggle pattern needs values for class attributes.");
                     continue;
                 }
-
                 if (i && option.store!=="none") {
                     log.warn("store option can only be set on first argument");
                     option.store="none";
                 }
-
                 if (option.store!=="none") {
                     if (!trigger.id) {
                         log.warn("state persistance requested, but element has no id");
@@ -41515,7 +41607,6 @@ define('pat-toggle',[
                 option.toggler=this._makeToggler(option);
                 correct.push(option);
             }
-
             return correct;
         },
 
@@ -41527,17 +41618,22 @@ define('pat-toggle',[
             for (var i=0; i<options.length; i++) {
                 option=options[i];
                 victims = $(option.selector);
-                if (!victims.length)
+                if (!victims.length) {
                     continue;
+                }
                 toggler=option.toggler;
                 next_state=toggler.toggle(victims[0]);
-                for (j=1; j<victims.length; j++)
+                for (j=1; j<victims.length; j++) {
                     toggler.set(victims[j], next_state);
-                if (option.value_storage)
+                }
+                if (option.value_storage) {
                     option.value_storage.set(next_state);
+                }
                 updated = true;
             }
             if (updated) {
+                // XXX: Is this necessary? pat-update gets called on changed
+                // element above.
                 $(this).trigger("pat-update", {pattern: "toggle"});
             }
             event.preventDefault();
@@ -41545,8 +41641,9 @@ define('pat-toggle',[
 
         _onKeyPress : function toggle_onKeyPress(event) {
             var keycode = event.keyCode ? event.keyCode : event.which;
-            if (keycode==="13")
+            if (keycode === "13") {
                 $(this).trigger("click", event);
+            }
         }
     };
 

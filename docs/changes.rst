@@ -4,8 +4,11 @@ Changelog
 3.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- BUGFIX. In the action plan, the wrong text was being used to prefill the
+  fields on "Standard Solutions!"
+- Translation fix in XLS and RTF reports for "custom risks"
+- Translation corrections
+- Date picker: never use native version, provide translations for pat-date-picker
 
 3.0.2 (2015-11-09)
 ------------------

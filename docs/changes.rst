@@ -4,8 +4,9 @@ Changelog
 3.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- If an anonymous user arrives (via link) on a survey and wants to start a test
+  session, then direct them to the selected survey, instead of showing the list
+  of available surveys of that sector.
 
 3.0.3 (2015-11-13)
 ------------------

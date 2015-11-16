@@ -1,4 +1,5 @@
 from .interfaces import IOSHAClientSkinLayer
+from Acquisition import aq_chain
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.interfaces import ISiteRoot
@@ -194,6 +195,18 @@ class OSHAWebHelpers(WebHelpers):
     grok.template('webhelpers')
     grok.name('webhelpers')
 
+    def __init__(self, context, request):
+        super(OSHAWebHelpers, self).__init__(context, request)
+        # If the user is anon, but has arrived on a survey. e.g. by following
+        # a direct link, save this survey in the request. This allows e.g. to
+        # directly open a guest session on a selected survey, instead of
+        # showing all the surveys of a sector
+        if self.anonymous:
+            for obj in aq_chain(aq_inner(self.context)):
+                if ISurvey.providedBy(obj):
+                    setattr(self.request, 'survey', obj)
+                    break
+
     def language_dict(self):
         site = getSite()
         ltool = getToolByName(site, 'portal_languages')
@@ -265,6 +278,11 @@ class OSHAWebHelpers(WebHelpers):
 
     @reify
     def base_url(self):
+        if self.anonymous:
+            base_url = self.country_url
+            if base_url is not None:
+                return base_url
+            return self.client_url
         return self._base_url()
 
     @reify
@@ -286,6 +304,18 @@ class OSHAWebHelpers(WebHelpers):
                 return NAME_TO_PHASE[tail]
             head, tail = path.split(head)
         return ""
+
+    @property
+    def came_from_param(self):
+        if self.came_from:
+            survey_url = self.survey_url()
+            if survey_url:
+                param = 'came_from={0}'.format(survey_url)
+            else:
+                param = 'came_from={0}'.format(self.came_from)
+        else:
+            param = ''
+        return param
 
     @reify
     def get_sector_logo(self):

@@ -14,8 +14,7 @@
                   base_url client/++resource++osha.oira.resources;
                   page_section webhelpers/get_phase;
                   sidebar_default python:page_section in ['identification', 'actionplan'] and 'sidebar-on' or 'sidebar-off';
-                  came_from webhelpers/came_from;
-                  came_from_param python:came_from and 'came_from=%s' % came_from or '';
+                  came_from_param webhelpers/came_from_param;
                   tools context/@@tools">
 
 <head>

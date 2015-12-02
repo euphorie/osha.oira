@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-11-10 15:38+0100\n"
+"POT-Creation-Date: 2015-12-01 17:33+0100\n"
 "PO-Revision-Date: 2013-09-30 15:37+0200\n"
 "Last-Translator: cath\n"
 "Language-Team: en <LL@li.org>\n"
@@ -959,8 +959,16 @@ msgstr "Etat avancement (à faire/en cours/terminé)"
 msgid "report_timeline_title"
 msgstr "Plan d'action"
 
+#. Default: Added risks (by you)
+#: src/osha/oira/client/report.py:196 src/osha/oira/client/report.py:360
+#: src/osha/oira/client/survey.py:283
+#: src/osha/oira/client/templates/module_customization.pt:15
+#: src/osha/oira/upgrade/upgrade.py:189
+msgid "title_other_risks"
+msgstr "Risques ajoutés (par vous)"
+
 #. Default: low
-#: src/osha/oira/client/report.py:399
+#: src/osha/oira/client/report.py:418
 #: src/osha/oira/client/templates/module_customization.pt:34
 #: src/osha/oira/client/templates/module_customization.pt:51
 #: src/osha/oira/client/templates/module_customization.pt:77
@@ -973,7 +981,7 @@ msgid "risk_priority_low"
 msgstr "bas"
 
 #. Default: medium
-#: src/osha/oira/client/report.py:401
+#: src/osha/oira/client/report.py:420
 #: src/osha/oira/client/templates/module_customization.pt:35
 #: src/osha/oira/client/templates/module_customization.pt:52
 #: src/osha/oira/client/templates/module_customization.pt:78
@@ -986,7 +994,7 @@ msgid "risk_priority_medium"
 msgstr "moyen"
 
 #. Default: high
-#: src/osha/oira/client/report.py:403
+#: src/osha/oira/client/report.py:422
 #: src/osha/oira/client/templates/module_customization.pt:36
 #: src/osha/oira/client/templates/module_customization.pt:53
 #: src/osha/oira/client/templates/module_customization.pt:79
@@ -999,7 +1007,7 @@ msgid "risk_priority_high"
 msgstr "élevé"
 
 #. Default: This is a ${priority_value} priority risk.
-#: src/osha/oira/client/report.py:405
+#: src/osha/oira/client/report.py:424
 #: src/osha/oira/client/templates/module_customization.pt:32
 #: src/osha/oira/client/templates/module_customization.pt:49
 #: src/osha/oira/client/templates/module_customization.pt:75
@@ -1012,18 +1020,18 @@ msgid "risk_priority"
 msgstr "Ceci est un risque prioritaire ${priority_value}."
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:437 src/osha/oira/client/report.py:462
+#: src/osha/oira/client/report.py:456 src/osha/oira/client/report.py:481
 msgid "header_measure_single"
 msgstr "Mesure"
 
 #. Default: Measure ${index}
-#: src/osha/oira/client/report.py:440
+#: src/osha/oira/client/report.py:459
 #: src/osha/oira/client/templates/report_actionplan.pt:99
 msgid "header_measure"
 msgstr "Mesure ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
-#: src/osha/oira/client/report.py:469
+#: src/osha/oira/client/report.py:488
 #: src/osha/oira/client/templates/risk_actionplan.pt:85
 #: src/osha/oira/client/templates/risk_actionplan.pt:172
 #: src/osha/oira/client/templates/risk_actionplan.pt:229
@@ -1032,7 +1040,7 @@ msgid "label_measure_action_plan"
 msgstr "Décrivez cette mesure"
 
 #. Default: Specific action(s) required to implement this approach
-#: src/osha/oira/client/report.py:471
+#: src/osha/oira/client/report.py:490
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
 #: src/osha/oira/client/templates/risk_actionplan.pt:174
 #: src/osha/oira/client/templates/risk_actionplan.pt:231
@@ -1042,7 +1050,7 @@ msgstr ""
 "Précisez les actions à mettre en place pour rendre cette mesure effective"
 
 #. Default: Level of expertise and/or requirements needed
-#: src/osha/oira/client/report.py:473
+#: src/osha/oira/client/report.py:492
 #: src/osha/oira/client/templates/risk_actionplan.pt:95
 #: src/osha/oira/client/templates/risk_actionplan.pt:176
 #: src/osha/oira/client/templates/risk_actionplan.pt:233
@@ -1053,68 +1061,68 @@ msgstr ""
 "fonction(s) de l'entreprise est (sont) à mobiliser."
 
 #. Default: Who is responsible?
-#: src/osha/oira/client/report.py:475
+#: src/osha/oira/client/report.py:494
 #: src/osha/oira/client/templates/risk_actionplan.pt:104
 #: src/osha/oira/client/templates/risk_actionplan.pt:182
 msgid "label_action_plan_responsible"
 msgstr "Qui est responsable ?"
 
 #. Default: Budget
-#: src/osha/oira/client/report.py:477
+#: src/osha/oira/client/report.py:496
 #: src/osha/oira/client/templates/risk_actionplan.pt:109
 #: src/osha/oira/client/templates/risk_actionplan.pt:187
 msgid "label_action_plan_budget"
 msgstr "Budget"
 
 #. Default: Planning start
-#: src/osha/oira/client/report.py:478
+#: src/osha/oira/client/report.py:497
 #: src/osha/oira/client/templates/risk_actionplan.pt:118
 #: src/osha/oira/client/templates/risk_actionplan.pt:194
 msgid "label_action_plan_start"
 msgstr "Date de commencement prévue"
 
 #. Default: Planning end
-#: src/osha/oira/client/report.py:479
+#: src/osha/oira/client/report.py:498
 #: src/osha/oira/client/templates/risk_actionplan.pt:129
 #: src/osha/oira/client/templates/risk_actionplan.pt:201
 msgid "label_action_plan_end"
 msgstr "Date de fin prévue"
 
 #. Default: Consultation of workers
-#: src/osha/oira/client/report.py:530
+#: src/osha/oira/client/report.py:549
 msgid "header_oira_report_consultation"
 msgstr "Consultation des salariés"
 
 #. Default: The undersigned hereby declare that the workers have been consulted
 #. on the content of this document.
-#: src/osha/oira/client/report.py:539
+#: src/osha/oira/client/report.py:558
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
 "Le soussigné déclare par le présent document que les salariés ont été "
 "consultés sur le contenu de ce document."
 
 #. Default: On behalf of the employer:
-#: src/osha/oira/client/report.py:552
+#: src/osha/oira/client/report.py:571
 msgid "oira_consultation_employer"
 msgstr "Pour le compte de l'employeur :"
 
 #. Default: On behalf of the workers:
-#: src/osha/oira/client/report.py:554
+#: src/osha/oira/client/report.py:573
 msgid "oira_consultation_workers"
 msgstr "Pour le compte des salariés :"
 
 #. Default: Date:
-#: src/osha/oira/client/report.py:563
+#: src/osha/oira/client/report.py:582
 msgid "oira_survey_date"
 msgstr "Date:"
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/client/report.py:610
+#: src/osha/oira/client/report.py:629
 msgid "header_oira_report_download"
 msgstr "Rapport OiRA : \"${title}\""
 
 #. Default: Contents
-#: src/osha/oira/client/report.py:629
+#: src/osha/oira/client/report.py:648
 #: src/osha/oira/client/templates/report_actionplan.pt:17
 #: src/osha/oira/client/templates/report_identification.pt:16
 #: src/osha/oira/client/templates/risks_overview.pt:156
@@ -1122,7 +1130,7 @@ msgid "toc_header"
 msgstr "Contenu"
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/client/report.py:634
+#: src/osha/oira/client/report.py:653
 #: src/osha/oira/client/templates/report_actionplan.pt:39
 #: src/osha/oira/client/templates/report_actionplan.pt:72
 msgid "header_present_risks"
@@ -1131,7 +1139,7 @@ msgstr ""
 "programmées"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/client/report.py:637
+#: src/osha/oira/client/report.py:656
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
@@ -1140,7 +1148,7 @@ msgstr ""
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
-#: src/osha/oira/client/report.py:640
+#: src/osha/oira/client/report.py:659
 #: src/osha/oira/client/templates/report_actionplan.pt:55
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
@@ -1148,7 +1156,7 @@ msgstr "Risques/problèmes en attente et qui restent à traiter"
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
-#: src/osha/oira/client/report.py:643
+#: src/osha/oira/client/report.py:662
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
@@ -1157,13 +1165,13 @@ msgstr ""
 "organisation."
 
 #. Default: Action plan ${title}
-#: src/osha/oira/client/report.py:670
+#: src/osha/oira/client/report.py:689
 msgid "filename_report_actionplan"
 msgstr "Plan d'action ${title}.doc"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision
 #. date ${date}.
-#: src/osha/oira/client/report.py:759
+#: src/osha/oira/client/report.py:778
 msgid "report_identification_revision"
 msgstr ""
 "Ce document s'est basé sur l'outil OiRA '${title}' de la date de révision "
@@ -1171,7 +1179,7 @@ msgstr ""
 
 #. Default: This report was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/client/report.py:797
+#: src/osha/oira/client/report.py:816
 #: src/osha/oira/client/templates/report_actionplan.pt:302
 msgid "report_survey_revision"
 msgstr ""
@@ -1272,15 +1280,8 @@ msgstr "Page"
 msgid "label_page_of"
 msgstr "sur"
 
-#. Default: Added risks (by you)
-#: src/osha/oira/client/survey.py:283
-#: src/osha/oira/client/templates/module_customization.pt:15
-#: src/osha/oira/upgrade/upgrade.py:189
-msgid "title_other_risks"
-msgstr "Risques ajoutés (par vous)"
-
 #. Default: Close
-#: src/osha/oira/client/utils.py:340
+#: src/osha/oira/client/utils.py:375
 msgid "button_close"
 msgstr ""
 
@@ -1615,7 +1616,7 @@ msgstr "Accepter et continuer"
 #. Default: Delete
 #: src/osha/oira/client/templates/confirmation-delete-session.pt:16
 #: src/osha/oira/client/templates/sessions.pt:37
-#: src/osha/oira/client/templates/survey_sessions.pt:33
+#: src/osha/oira/client/templates/survey_sessions.pt:34
 msgid "label_delete"
 msgstr "Supprimer"
 
@@ -1752,7 +1753,7 @@ msgstr "Impossible de trouver la page demandée."
 #: src/osha/oira/client/templates/report_actionplan.pt:13
 #: src/osha/oira/client/templates/report_identification.pt:12
 #: src/osha/oira/client/templates/risk_evaluation.pt:12
-#: src/osha/oira/client/templates/shell.pt:22
+#: src/osha/oira/client/templates/shell.pt:21
 #: src/osha/oira/client/templates/webhelpers.pt:22
 #: src/osha/oira/templates/custom_homepage.pt:20
 msgid "title_tool"
@@ -1790,7 +1791,7 @@ msgstr "Aller au plan d'action"
 #: src/osha/oira/client/templates/report_actionplan.pt:270
 #: src/osha/oira/client/templates/report_identification.pt:85
 #: src/osha/oira/client/templates/risk_evaluation.pt:137
-#: src/osha/oira/client/templates/shell.pt:109
+#: src/osha/oira/client/templates/shell.pt:108
 msgid "label_preparation"
 msgstr "Préparation"
 
@@ -1810,8 +1811,8 @@ msgstr "Préparation"
 #: src/osha/oira/client/templates/report_actionplan.pt:276
 #: src/osha/oira/client/templates/report_identification.pt:91
 #: src/osha/oira/client/templates/risk_evaluation.pt:143
+#: src/osha/oira/client/templates/shell.pt:115
 #: src/osha/oira/client/templates/shell.pt:116
-#: src/osha/oira/client/templates/shell.pt:117
 #: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_identification"
 msgstr "Identification"
@@ -1832,8 +1833,8 @@ msgstr "Identification"
 #: src/osha/oira/client/templates/report_actionplan.pt:282
 #: src/osha/oira/client/templates/report_identification.pt:97
 #: src/osha/oira/client/templates/risk_evaluation.pt:149
+#: src/osha/oira/client/templates/shell.pt:115
 #: src/osha/oira/client/templates/shell.pt:116
-#: src/osha/oira/client/templates/shell.pt:117
 #: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_evaluation"
 msgstr "Estimation"
@@ -1854,8 +1855,8 @@ msgstr "Estimation"
 #: src/osha/oira/client/templates/report_actionplan.pt:288
 #: src/osha/oira/client/templates/report_identification.pt:103
 #: src/osha/oira/client/templates/risk_evaluation.pt:158
-#: src/osha/oira/client/templates/shell.pt:126
-#: src/osha/oira/client/templates/shell.pt:128
+#: src/osha/oira/client/templates/shell.pt:125
+#: src/osha/oira/client/templates/shell.pt:127
 #: src/osha/oira/client/templates/webhelpers.pt:113
 msgid "label_action_plan"
 msgstr "Plan d'action"
@@ -1875,8 +1876,8 @@ msgstr "Plan d'action"
 #: src/osha/oira/client/templates/report_actionplan.pt:294
 #: src/osha/oira/client/templates/report_identification.pt:109
 #: src/osha/oira/client/templates/risk_evaluation.pt:164
-#: src/osha/oira/client/templates/shell.pt:138
-#: src/osha/oira/client/templates/shell.pt:141
+#: src/osha/oira/client/templates/shell.pt:137
+#: src/osha/oira/client/templates/shell.pt:140
 msgid "label_report"
 msgstr "Rapport"
 
@@ -1917,7 +1918,7 @@ msgstr "Commencer l'identification des risques"
 
 #. Default: Help
 #: src/osha/oira/client/templates/includes.pt:2
-#: src/osha/oira/client/templates/shell.pt:151
+#: src/osha/oira/client/templates/shell.pt:150
 #: src/osha/oira/client/templates/webhelpers.pt:33
 msgid "navigation_help"
 msgstr "Aide"
@@ -2122,7 +2123,7 @@ msgstr ""
 
 #. Default: Login
 #: src/osha/oira/client/templates/login_form.pt:19
-#: src/osha/oira/client/templates/shell.pt:63
+#: src/osha/oira/client/templates/shell.pt:62
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:14
 msgid "header_login"
 msgstr "Connexion"
@@ -2237,7 +2238,7 @@ msgstr "Risques de priorité basse"
 #: src/osha/oira/client/templates/module_identification.pt:50
 #: src/osha/oira/client/templates/register.pt:90
 #: src/osha/oira/client/templates/reminder.pt:39
-#: src/osha/oira/client/templates/survey_sessions.pt:57
+#: src/osha/oira/client/templates/survey_sessions.pt:59
 msgid "label_next"
 msgstr "Suivant"
 
@@ -2318,6 +2319,7 @@ msgstr "Non"
 
 #. Default: New test session
 #: src/osha/oira/client/templates/new-session-test.pt:14
+#: src/osha/oira/client/templates/survey_sessions.pt:47
 msgid "label_new_session_test"
 msgstr "Nouvelle session d'essai"
 
@@ -2332,7 +2334,7 @@ msgstr ""
 #. Default: Enter a title for your Risk Assessment
 #: src/osha/oira/client/templates/new-session-test.pt:26
 #: src/osha/oira/client/templates/new-session.pt:26
-#: src/osha/oira/client/templates/survey_sessions.pt:47
+#: src/osha/oira/client/templates/survey_sessions.pt:49
 msgid "label_session_title"
 msgstr "Entrez un titre pour votre évaluation des risques"
 
@@ -2346,7 +2348,7 @@ msgstr "Entrez un titre pour votre évaluation des risques"
 #. better to actively log out.
 #: src/osha/oira/client/templates/new-session-test.pt:28
 #: src/osha/oira/client/templates/new-session.pt:27
-#: src/osha/oira/client/templates/survey_sessions.pt:48
+#: src/osha/oira/client/templates/survey_sessions.pt:50
 msgid "session_title_tooltip"
 msgstr ""
 "Une fois que vous avez lancé une session d'outil OiRA, vous pourrez arrêter "
@@ -2403,21 +2405,20 @@ msgstr "Nouvelle session"
 
 #. Default: Sign in
 #: src/osha/oira/client/templates/plain.pt:196
-#: src/osha/oira/client/templates/shell.pt:74
-#: src/osha/oira/client/templates/webhelpers.pt:36
-msgid "Sign in"
+#: src/osha/oira/client/templates/shell.pt:73
+msgid "link_sign_in"
 msgstr "Ouvrir une session"
 
 #. Default: This is a test session. ${link_sign_in} to save your data.
 #: src/osha/oira/client/templates/plain.pt:196
-#: src/osha/oira/client/templates/shell.pt:74
+#: src/osha/oira/client/templates/shell.pt:73
 msgid "info_testsession"
 msgstr ""
 "Ceci est une session d'essai. ${link_sign_in} pour sauvegarder vos données."
 
 #. Default: Info
 #: src/osha/oira/client/templates/plain.pt:196
-#: src/osha/oira/client/templates/shell.pt:74
+#: src/osha/oira/client/templates/shell.pt:73
 msgid "Info"
 msgstr "Information"
 
@@ -2547,7 +2548,7 @@ msgstr "Exemple de rapport d’aperçu des mesures en format PDF"
 #. Default: Register
 #: src/osha/oira/client/templates/register.pt:66
 #: src/osha/oira/client/templates/register.pt:70
-#: src/osha/oira/client/templates/shell.pt:64
+#: src/osha/oira/client/templates/shell.pt:63
 msgid "header_register"
 msgstr "Inscription"
 
@@ -3532,13 +3533,13 @@ msgid "heading_num_todo_prio_risks_5_or_more"
 msgstr "${num_todo_risks} risques sans réponse"
 
 #: src/osha/oira/client/templates/sessions.pt:22
-#: src/osha/oira/client/templates/shell.pt:98
+#: src/osha/oira/client/templates/shell.pt:97
 msgid "Start a new session"
 msgstr "Démarrer une nouvelle session"
 
 #. Default: start a new session
 #: src/osha/oira/client/templates/sessions.pt:22
-#: src/osha/oira/client/templates/survey_sessions.pt:45
+#: src/osha/oira/client/templates/survey_sessions.pt:46
 msgid "link_start_session"
 msgstr "Commencer une nouvelle session"
 
@@ -3552,56 +3553,56 @@ msgstr ""
 
 #. Default: saved on ${date}
 #: src/osha/oira/client/templates/sessions.pt:33
-#: src/osha/oira/client/templates/survey_sessions.pt:29
+#: src/osha/oira/client/templates/survey_sessions.pt:30
 msgid "lable_session_modified"
 msgstr "sauvegardé le ${date}"
 
 #: src/osha/oira/client/templates/sessions.pt:36
-#: src/osha/oira/client/templates/survey_sessions.pt:32
+#: src/osha/oira/client/templates/survey_sessions.pt:33
 msgid "Rename this session"
 msgstr "Renommer cette session"
 
 #. Default: Rename
 #: src/osha/oira/client/templates/sessions.pt:36
-#: src/osha/oira/client/templates/survey_sessions.pt:32
+#: src/osha/oira/client/templates/survey_sessions.pt:33
 msgid "label_rename"
 msgstr "Renommer"
 
 #: src/osha/oira/client/templates/sessions.pt:37
-#: src/osha/oira/client/templates/survey_sessions.pt:33
+#: src/osha/oira/client/templates/survey_sessions.pt:34
 msgid "Delete this session"
 msgstr "supprimer cette session"
 
-#: src/osha/oira/client/templates/shell.pt:88
-#: src/osha/oira/client/templates/shell.pt:90
+#: src/osha/oira/client/templates/shell.pt:87
+#: src/osha/oira/client/templates/shell.pt:89
 msgid "Start test session"
 msgstr "Commencer une session de test"
 
 #. Default: Select an earlier session to complete or review
-#: src/osha/oira/client/templates/shell.pt:95
-#: src/osha/oira/client/templates/survey_sessions.pt:20
+#: src/osha/oira/client/templates/shell.pt:94
+#: src/osha/oira/client/templates/survey_sessions.pt:21
 msgid "header_select_session"
 msgstr "Sélectionnez une session antérieure à terminer ou à revoir"
 
 #. Default: New
-#: src/osha/oira/client/templates/shell.pt:98
+#: src/osha/oira/client/templates/shell.pt:97
 msgid "New"
 msgstr "Nouveau"
 
 #. Default: Check your progress
-#: src/osha/oira/client/templates/shell.pt:146
+#: src/osha/oira/client/templates/shell.pt:145
 #: src/osha/oira/client/templates/webhelpers.pt:34
 msgid "navigation_status"
 msgstr "Avancement"
 
 #. Default: Online interactive
-#: src/osha/oira/client/templates/shell.pt:162
+#: src/osha/oira/client/templates/shell.pt:161
 #: src/osha/oira/client/templates/webhelpers.pt:23
 msgid "oira_name_line_1"
 msgstr "Outil d'évaluation"
 
 #. Default: Risk Assessment
-#: src/osha/oira/client/templates/shell.pt:163
+#: src/osha/oira/client/templates/shell.pt:162
 #: src/osha/oira/client/templates/webhelpers.pt:24
 msgid "oira_name_line_2"
 msgstr "des risques en ligne"
@@ -3642,7 +3643,7 @@ msgid "label_unanswered"
 msgstr "Non répondu"
 
 #. Default: or…
-#: src/osha/oira/client/templates/survey_sessions.pt:39
+#: src/osha/oira/client/templates/survey_sessions.pt:40
 msgid "header_or"
 msgstr "ou…"
 
@@ -3819,6 +3820,11 @@ msgstr "Mes évaluations"
 #: src/osha/oira/client/templates/webhelpers.pt:35
 msgid "navigation_settings"
 msgstr "Paramètres"
+
+#. Default: Sign in
+#: src/osha/oira/client/templates/webhelpers.pt:36
+msgid "Sign in"
+msgstr "Ouvrir une session"
 
 #: src/osha/oira/client/templates/webhelpers.pt:119
 #: src/osha/oira/client/templates/webhelpers.pt:131

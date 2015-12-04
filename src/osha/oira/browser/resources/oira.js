@@ -12730,7 +12730,8 @@ define('pat-logger',[
 
 define('pat-utils',[
     "jquery",
-    "jquery.browser"
+    "jquery.browser",
+    "underscore"
 ], function($) {
 
     $.fn.safeClone = function () {
@@ -13086,6 +13087,54 @@ define('pat-utils',[
         return results;
     }
 
+    isElementInViewport = function (el, partial, offset) { 
+        /* returns true if element is visible to the user ie. is in the viewport. 
+         * Setting partial parameter to true, will only check if a part of the element is visible
+         * in the viewport, specifically that some part of that element is touching the top part 
+         * of the viewport. This only applies to the vertical direction, ie. doesnt check partial
+         * visibility for horizontal scrolling
+         * some code taken from:
+         * http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/7557433#7557433         
+         */
+        if (el === []) {
+            return false;
+        }
+        if (el instanceof $) {
+            el = el[0];
+        }
+        var rec = el.getBoundingClientRect(),
+            rec_values = [rec.top, rec.bottom, rec.left, rec.right];
+        if ( _.every(rec_values, function zero(v) { if ( v === 0 ){ return true;}}) ) {
+            // if every property of rec is 0, the element is invisible;
+            return false;            
+        } else if (partial) {
+            // when using getBoundingClientRect() (in the vertical case)
+            // negative means above top of viewport, positive means below top of viewport
+            // therefore for part of the element to be touching or crossing the top of the viewport
+            // rec.top must <= 0 and rec.bottom must >= 0 
+            // an optional tolerance offset can be added for when the desired element is not exactly 
+            // toucing the top of the viewport but needs to be considered as touching. 
+            if (offset === undefined) {
+                offset = 0;
+            }
+            return (
+                (rec.top <= 0+offset && rec.bottom >= 0+offset)
+                //(rec.top >= 0+offset && rec.top <= window.innerHeight) // this checks if the element
+                                                                       // touches bottom part of viewport
+                // XXX do we want to include a check for the padding of an element?
+                // using window.getComputedStyle(target).paddingTop
+            );
+        } else {           
+            // this will return true if the entire element is completely in the viewport 
+            return ( 
+                rec.top >= 0 &&
+                rec.left >= 0 &&
+                rec.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+                rec.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+            );        
+        }
+    };
+
     var utils = {
         // pattern pimping - own module?
         jqueryPlugin: jqueryPlugin,
@@ -13100,7 +13149,8 @@ define('pat-utils',[
         hideOrShow: hideOrShow,
         addURLQueryParameter: addURLQueryParameter,
         removeDuplicateObjects: removeDuplicateObjects,
-        mergeStack: mergeStack
+        mergeStack: mergeStack,
+        isElementInViewport: isElementInViewport
     };
     return utils;
 });
@@ -16128,7 +16178,7 @@ define('pat-input-change-events',[
             } else {
                 // The element itself is an input, se we simply register a
                 // handler fot it.
-                _.registerHandlersForElement($el);
+                _.registerHandlersForElement.bind($el)();
             }
         },
 
@@ -16243,7 +16293,7 @@ define('pat-autosubmit',[
         registerListeners: function() {
             this.$el.on("input-change-delayed.pat-autosubmit", this.onInputChange);
             this.registerSubformListeners();
-            this.$el.on('patterns-injected', this.registerSubformListeners.bind(this));
+            this.$el.on('patterns-injected', this.refreshListeners.bind(this));
         },
 
         registerSubformListeners: function(ev) {
@@ -16255,6 +16305,12 @@ define('pat-autosubmit',[
             $el.find(".pat-subform").each(function (idx, el) {
                 $(el).on("input-change-delayed.pat-autosubmit", this.onInputChange);
             }.bind(this));
+        },
+
+        refreshListeners: function(ev, cfg, el, injected) {
+            this.registerSubformListeners();
+            // Register change event handlers for new inputs injected into this form
+            input_change_events.setup($(injected), "autosubmit");
         },
 
         registerTriggers: function() {
@@ -20711,7 +20767,7 @@ define("pat-clone",[
             $clone.removeAttr("hidden");
             registry.scan($clone);
 
-            $clone.trigger("pat-update", {'pattern':"clone", '$el': $clone});
+            $clone.trigger("pat-update", {'pattern':"clone", 'action': 'clone', '$el': $clone});
             if (this.num_clones >= this.options.max) {
                 $(this.options.triggerElement).hide();
             }
@@ -20751,6 +20807,7 @@ define("pat-clone",[
             if (this.num_clones < this.options.max) {
                 $(this.options.triggerElement).show();
             }
+            this.$el.trigger("pat-update", {'pattern':"clone", 'action': 'remove', '$el': $el});
         }
     });
 });
@@ -21567,26 +21624,27 @@ define('pat-inject',[
                         {selector: cfg.target});
                 return false;
             }
-            if (cfg.action === "content")
+            if (cfg.action === "content") {
                 $target.empty().append($source);
-            else if (cfg.action === "element")
+            } else if (cfg.action === "element") {
                 $target.replaceWith($source);
-            else
+            } else {
                 $target[method]($source);
-
+            }
             return true;
         },
 
         _sourcesFromHtml: function inject_sourcesFromHtml(html, url, sources) {
             var $html = inject._parseRawHtml(html, url);
             return sources.map(function inject_sourcesFromHtml_map(source) {
-                if (source === "body")
+                if (source === "body") {
                     source = "#__original_body";
-
+                }
                 var $source = $html.find(source);
 
-                if ($source.length === 0)
+                if ($source.length === 0) {
                     log.warn("No source elements for selector:", source, $html);
+                }
 
                 $source.find("a[href^=\"#\"]").each(function () {
                     var href = this.getAttribute("href");
@@ -21598,12 +21656,12 @@ define('pat-inject',[
                     }
                     // Skip in-document links pointing to an id that is inside
                     // this fragment.
-                    if (href.length === 1)  // Special case for top-of-page links
+                    if (href.length === 1) { // Special case for top-of-page links
                         this.href=url;
-                    else if (!$source.find(href).length)
+                    } else if (!$source.find(href).length) {
                         this.href=url+href;
+                    }
                 });
-
                 return $source;
             });
         },
@@ -21709,21 +21767,19 @@ define('pat-inject',[
                 log.error("Error rebasing urls", e);
             }
             var $html = $("<div/>").html(clean_html);
-
-            if ($html.children().length === 0)
+            if ($html.children().length === 0) {
                 log.warn("Parsing html resulted in empty jquery object:", clean_html);
-
+            }
             return $html;
         },
 
         // XXX: hack
         _initAutoloadVisible: function inject_initAutoloadVisible($el) {
-            // ignore executed autoloads
-            if ($el.data("pat-inject-autoloaded"))
+            if ($el.data("pat-inject-autoloaded")) {
+                // ignore executed autoloads
                 return false;
-
-            var $scrollable = $el.parents(":scrollable"),
-                checkVisibility;
+            }
+            var $scrollable = $el.parents(":scrollable"), checkVisibility;
 
             // function to trigger the autoload and mark as triggered
             function trigger() {
@@ -21737,8 +21793,9 @@ define('pat-inject',[
                 // if scrollable parent and visible -> trigger it
                 // we only look at the closest scrollable parent, no nesting
                 checkVisibility = utils.debounce(function inject_checkVisibility_scrollable() {
-                    if ($el.data("patterns.autoload"))
+                    if ($el.data("patterns.autoload") || !$.contains(document, $el[0])) {
                         return false;
+                    }
                     var reltop = $el.offset().top - $scrollable.offset().top - 1000,
                         doTrigger = reltop <= $scrollable.innerHeight();
                     if (doTrigger) {
@@ -21750,27 +21807,28 @@ define('pat-inject',[
                     }
                     return false;
                 }, 100);
-                if (checkVisibility())
+                if (checkVisibility()) {
                     return true;
-
+                }
                 // wait to become visible - again only immediate scrollable parent
                 $($scrollable[0]).on("scroll", checkVisibility);
                 $(window).on("resize.pat-autoload", checkVisibility);
             } else {
                 // Use case 2: scrolling the entire page
                 checkVisibility = utils.debounce(function inject_checkVisibility_not_scrollable() {
-                    if ($el.data("patterns.autoload"))
+                    if ($el.data("patterns.autoload")) {
                         return false;
-                    if (!utils.elementInViewport($el[0]))
+                    }
+                    if (!utils.elementInViewport($el[0])) {
                         return false;
-
+                    }
                     $(window).off(".pat-autoload", checkVisibility);
                     return trigger();
                 }, 100);
-                if (checkVisibility())
+                if (checkVisibility()) {
                     return true;
-                $(window).on("resize.pat-autoload scroll.pat-autoload",
-                        checkVisibility);
+                }
+                $(window).on("resize.pat-autoload scroll.pat-autoload", checkVisibility);
             }
             return false;
         },
@@ -21782,7 +21840,6 @@ define('pat-inject',[
 
         callTypeHandler: function inject_callTypeHandler(type, fn, context, params) {
             type = type || "html";
-
             if (inject.handlers[type] && $.isFunction(inject.handlers[type][fn])) {
                 return inject.handlers[type][fn].apply(context, params);
             } else {
@@ -21840,7 +21897,6 @@ define('pat-inject',[
             log.debug(e);
         }
     }
-
     registry.register(inject);
     return inject;
 });
@@ -29846,6 +29902,7 @@ define('pat-equaliser',[
                 $container.on("pat-update.pat-equaliser", null, this, equaliser._onEvent);
                 $container.on("patterns-injected.pat-equaliser", null, this, equaliser._onEvent);
                 $(window).on("resize.pat-equaliser", null, this, utils.debounce(equaliser._onEvent, 100));
+                $container.parents('.pat-stacks').on("pat-update", null, this, utils.debounce(equaliser._onEvent, 100));
                 imagesLoaded(this, $.proxy(function() {
                     equaliser._update(this);
                 }, this));
@@ -30057,7 +30114,6 @@ define('pat-modal',[
             } else {
                 this._init_inject1();
             }
-            $('body').addClass("modal-active");
         },
 
         _init_inject1: function () {
@@ -30070,21 +30126,17 @@ define('pat-modal',[
             if (!this.$el.closest("#pat-modal")) {
                 $("#pat-modal").detach();
             }
-
             this.$el.on("pat-inject-missingSource pat-inject-missingTarget", function() {
                 $("#pat-modal").detach();
             });
-
             inject.init(this.$el, opts);
         },
 
         _init_div1: function () {
             var $header = $("<div class='header' />");
-
             if (this.options.closing.indexOf("close-button")!==-1) {
                 $("<button type='button' class='close-panel'>" + this.options.closeText + "</button>").appendTo($header);
             }
-
             // We cannot handle text nodes here
             var $children = this.$el.children(":last, :not(:first)");
             if ($children.length) {
@@ -30101,6 +30153,7 @@ define('pat-modal',[
             this._init_handlers();
             this.resize();
             this.setPosition();
+            $('body').addClass("modal-active");
         },
 
         _init_handlers: function() {
@@ -40855,17 +40908,90 @@ define('pat-scroll',[
             if (this.options.trigger == "auto") {
                this.smoothScroll();
             } else if (this.options.trigger == "click") {
-                this.$el.click(function (ev) {
-                    ev.preventDefault();
-                    this.smoothScroll();
-                }.bind(this));
-                this.$el.on("pat-update", this.onPatternsUpdate.bind(this));
+                this.$el.click(this.onClick.bind(this));
+            }
+            this.$el.on("pat-update", this.onPatternsUpdate.bind(this));
+            this.markBasedOnFragment();
+            this.on('hashchange', this.clearIfHidden.bind(this));
+            $(window).scroll(_.debounce(this.markIfVisible.bind(this), 50));
+        },
+
+        onClick: function(ev) {
+            ev.preventDefault();
+            history.pushState({}, null, this.$el.attr('href'));
+            this.smoothScroll();
+            this.markBasedOnFragment();
+            // manually trigger the hashchange event on all instances of pat-scroll
+            $('a.pat-scroll').trigger("hashchange");
+        },
+
+        markBasedOnFragment: function(ev) {
+            // Get the fragment from the URL and set the corresponding this.$el as current
+            var $target = $('#' + window.location.hash.substr(1));
+            if ($target.length > 0) {
+                this.$el.addClass("current"); // the element that was clicked on
+                $target.addClass("current");
+            }
+        },
+
+        clearIfHidden: function(ev) {
+            var active_target = '#' + window.location.hash.substr(1),
+                $active_target = $(active_target),
+                target = this.$el[0].href.split('/').pop();
+            if ($active_target.length > 0) {
+                if (active_target != target) {
+                    // if the element does not match the one listed in the url #,
+                    // clear the current class from it.
+                    var $target = $(this.$el[0].href.split('/').pop());
+                    $target.removeClass("current");
+                    this.$el.removeClass("current");
+                }
+            }
+        },
+
+        markIfVisible: function(ev) {
+            var fragment, $target, href;
+            if (this.$el.hasClass('pat-scroll-animated')) {
+                // this section is triggered when the scrolling is a result of the animate function
+                // ie. automatic scrolling as opposed to the user manually scrolling
+                this.$el.removeClass('pat-scroll-animated');
+            } else if (this.$el[0].nodeName === "A") {
+                href = this.$el[0].href;
+                fragment = href.indexOf('#') !== -1 && href.split('#').pop() || undefined;
+                if (fragment) {
+                    $target = $('#'+fragment);
+                    if ($target.length) {
+                        if (utils.isElementInViewport($target[0], true, this.options.offset)) {
+                            // check that the anchor's target is visible
+                            // if so, mark both the anchor and the target element
+                            $target.addClass("current");
+                            this.$el.addClass("current");
+                        }
+                        $(this.$el).trigger("pat-update", {pattern: "scroll"});
+                    }
+                }
             }
         },
 
         onPatternsUpdate: function(ev, data) {
-            if (data.originalEvent && data.originalEvent.type === "click") {
-                this.smoothScroll();
+            var fragment, $target, href;
+            if (data.pattern === 'stacks') {
+                if (data.originalEvent && data.originalEvent.type === "click") {
+                    this.smoothScroll();
+                }
+            } else if (data.pattern === 'scroll') {
+                href = this.$el[0].href;
+                fragment = href.indexOf('#') !== -1 && href.split('#').pop() || undefined;
+                if (fragment) {
+                    $target = $('#'+fragment);
+                    if ($target.length) {
+                        if (utils.isElementInViewport($target[0], true, this.options.offset) === false) {
+                            // if the anchor's target is invisible, remove current class from anchor and target.
+                            $target.removeClass("current");
+                            $(this.$el).removeClass("current");
+                        }
+                    }
+                }
             }
         },
 
@@ -40879,7 +41005,12 @@ define('pat-scroll',[
                 $el = $('body, html');
                 options[scroll] = $(this.$el.attr('href')).offset().top;
             }
-            $el.animate(options, 500);
+            $el.animate(options, {
+                duration: 500,
+                start: function() {
+                    $('.pat-scroll').addClass('pat-scroll-animated');
+                }
+            });
         }
     });
 });
@@ -43466,7 +43597,8 @@ define('pat-validation',[
             }
             _.each(['before', 'after'], function (relation) {
                 var isDate = validate.moment.isDate,
-                    relative = opts.not[relation], arr, constraint, $ref;
+                    relative = opts.not && opts.not[relation] || undefined,
+                    arr, constraint, $ref;
                 if (typeof relative == "undefined") {
                     return;
                 }
@@ -43574,13 +43706,16 @@ define('pat-validation',[
              * validated. Will prevent the event's default action if validation fails.
              */
             var has_errors = false, input, error, i;
-            var $single = this.$inputs.filter(':enabled:not(:checkbox):not(:radio)');
+            // Ignore invisible elements (otherwise pat-clone template
+            // elements get validated). Not aware of other cases where this
+            // might cause problems.
+            var $single = this.$inputs.filter(':visible:enabled:not(:checkbox):not(:radio)');
             var group_names = this.$inputs
                     .filter(':enabled:checkbox, :enabled:radio')
                     .map(function () { return this.getAttribute('name'); });
             var handleError = function (error) {
                 if (typeof error != "undefined") {
-                    if (!has_errors) {
+                    if (!has_errors && ev) {
                         ev.preventDefault();
                         ev.stopPropagation();
                         ev.stopImmediatePropagation();
@@ -43670,6 +43805,9 @@ define('pat-validation',[
                 this.$el.off('submit.pat-validation');
                 this.$el.off('pat-update.pat-validation');
                 this.init();
+                if (data.pattern == "clone" && data.action == "remove") {
+                    this.validateForm(ev);
+                }
             }
             return true;
         },

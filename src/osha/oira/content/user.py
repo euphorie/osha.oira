@@ -1,6 +1,8 @@
 from .. import _
+from Acquisition import aq_parent
 from Products.Archetypes.utils import IStatusMessage
 from Products.MailHost.MailHost import MailHostError
+from euphorie.content.sector import ISector
 from euphorie.content import user
 from euphorie.content.user import IUser
 from five import grok
@@ -34,6 +36,14 @@ class AccountCreatedNotification(grok.View):
     def __init__(self, context, request):
         super(AccountCreatedNotification, self).__init__(context, request)
         user = api.portal.get_tool("acl_users").getUser(context.login)
+        if ISector.providedBy(context):
+            self.context_type = u"sector"
+            self.context_title = context.Title()
+            self.contact_name = context.contact_name
+        else:
+            self.context_type = u"country"
+            self.context_title = aq_parent(context).Title()
+            self.contact_name = context.Title()
         prt = api.portal.get_tool("portal_password_reset")
         reset = prt.requestReset(user.getId())
         self.reset_url="%s/@@reset-password/%s" % (

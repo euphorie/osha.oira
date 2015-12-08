@@ -7,6 +7,9 @@ Changelog
 - If an anonymous user arrives (via link) on a survey and wants to start a test
   session, then direct them to the selected survey, instead of showing the list
   of available surveys of that sector.
+- Various translation fixes
+- Use pat-validation on custom risks form, to avoid badly translated html5
+  browser validation
 
 3.0.3 (2015-11-13)
 ------------------

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.4 (unreleased)
+3.0.4 (2015-12-08)
 ------------------
 
 - If an anonymous user arrives (via link) on a survey and wants to start a test

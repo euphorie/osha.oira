@@ -1,6 +1,7 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
-  xmlns:plone="http://namespaces.plone.org/plone">
+  xmlns:plone="http://namespaces.plone.org/plone"
+  xmlns:browser="http://namespaces.zope.org/browser">
 
     <include package="plone.behavior" file="meta.zcml" />
     <include package="plone.directives.form" file="meta.zcml" />
@@ -48,5 +49,13 @@
         factory=".statistics.ReportPeriodFactory"
         name="osha.oira.content.statistics.IReportPeriod"
         />
+
+  <browser:page
+      name="site-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".controlpanel.SiteControlPanel"
+      permission="cmf.ManagePortal"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
 
 </configure>

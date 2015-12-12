@@ -371,4 +371,8 @@
     </div>
   </metal:risklegal>
 
+  <metal:webstats_js define-macro="webstats_js" meta:interpolation="true" i18n:domain="euphorie">
+    <span tal:replace="structure webhelpers/get_webstats_js" />
+  </metal:webstats_js>
+
 </html>

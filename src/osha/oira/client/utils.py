@@ -19,6 +19,7 @@ from os import path
 from osha.oira import _
 from osha.oira.client import model as oiramodel
 from plone.i18n.normalizer import idnormalizer
+from plone.app.controlpanel.site import ISiteSchema
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.component import getMultiAdapter
@@ -206,6 +207,10 @@ class OSHAWebHelpers(WebHelpers):
                 if ISurvey.providedBy(obj):
                     setattr(self.request, 'survey', obj)
                     break
+
+    def get_webstats_js(self):
+        site = getSite()
+        return ISiteSchema(site).webstats_js
 
     def language_dict(self):
         site = getSite()

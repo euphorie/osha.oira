@@ -52,5 +52,8 @@
     </script>
     <tal:block replace="tile:scripts"/>
     <metal:block define-slot="scripts"/>
+    <tal:webstats define="layout_view nocall:context/@@layout">
+      <span tal:replace="structure layout_view/get_webstats_js" />
+    </tal:webstats>
   </body>
 </html>

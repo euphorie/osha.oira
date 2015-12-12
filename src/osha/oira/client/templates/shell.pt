@@ -172,6 +172,7 @@
     <tal:block replace="tile:client-analytics"/>
 
     <metal:splashmessageslot define-slot="splash_message_slot" />
+    <metal:call use-macro="webhelpers/macros/webstats_js" />
 
 </body>
 </html>

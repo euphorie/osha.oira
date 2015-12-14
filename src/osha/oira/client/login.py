@@ -9,6 +9,7 @@ from .interfaces import IOSHAClientSkinLayer
 from .model import LoginStatistics
 from osha.oira import _
 from zope.i18n import translate
+import os
 
 grok.templatedir("templates")
 
@@ -42,6 +43,15 @@ class Register(BaseRegister):
             default=u"Please enter a valid email address."),
             target_language=lang)
         super(Register, self).update()
+
+    def get_image_version(self, name):
+        fdir = os.path.join(
+            os.path.dirname(__file__), os.path.join('templates', 'media'))
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        fname = "{0}_{1}".format(name, lang)
+        if os.path.isfile(os.path.join(fdir, fname + '.png')):
+            return fname
+        return name
 
 
 class TermsAndConditions(BaseTermsAndConditions):

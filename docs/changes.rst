@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.5 (unreleased)
+3.0.5 (2015-12-14)
 ------------------
 
 - Make it possible to add tracking code #12889

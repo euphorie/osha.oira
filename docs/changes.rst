@@ -4,8 +4,8 @@ Changelog
 3.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Make it possible to add tracking code #12889
+- Make it possible to provide language-versions of the report screen-shots #12891
 
 3.0.4 (2015-12-08)
 ------------------

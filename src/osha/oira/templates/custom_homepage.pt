@@ -119,7 +119,7 @@
     <tal:render content="structure view/render_body"/>
     <metal:css use-macro="webhelpers/macros/appendix"/>
     <!--[if lte IE 8]><script src="${client/++resource++euphorie.behaviour}/ie6/warning.js"></script><script>window.onload=function(){e("/++resource++euphorie.behaviour/ie6/")}</script><![endif]-->
-    <tal:block replace="tile:client-analytics"/>
+    <metal:call use-macro="webhelpers/macros/webstats_js" />
     </div>
   </body>
 </html>

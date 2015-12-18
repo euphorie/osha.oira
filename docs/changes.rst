@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.6 (unreleased)
+3.0.6 (2015-12-18)
 ------------------
 
 - Translation updates

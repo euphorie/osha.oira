@@ -4,8 +4,7 @@ Changelog
 3.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Translation updates
 
 3.0.5 (2015-12-14)
 ------------------

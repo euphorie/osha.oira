@@ -188,9 +188,14 @@ class OSHAStatus(survey.Status):
         }
         self.risks_by_status = defaultdict(default_risks_by_status)
         now = datetime.now()
-        lang = getattr(self.request, 'LANGUAGE', 'en')
+        lang = date_lang = getattr(self.request, 'LANGUAGE', 'en')
+        # Special handling for Flemish, for which LANGUAGE is "nl-be". For
+        # translating the date under plone locales, we reduce to generic "nl".
+        # For the specific oira translation, we rewrite to "nl_BE"
         if "-" in lang:
-            lang = lang.split("-")[0]
+            date_lang = lang.split("-")[0]
+            elems = lang.split("-")
+            lang = "{0}_{1}".format(elems[0], elems[1].upper())
         self.date = u"{0} {1} {2}".format(
             now.strftime('%d'),
             translate(
@@ -198,7 +203,7 @@ class OSHAStatus(survey.Status):
                     "month_{0}".format(now.strftime('%b').lower()),
                     default=now.strftime('%B'),
                 ),
-                target_language=lang,),
+                target_language=date_lang,),
             now.strftime('%Y')
         )
         self.label_page = translate(_(u"label_page", default=u"Page"), target_language=lang)

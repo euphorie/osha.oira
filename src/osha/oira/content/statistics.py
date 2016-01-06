@@ -21,6 +21,7 @@ from z3c.form.interfaces import IObjectFactory
 from z3c.saconfig import Session
 from zope import interface
 from zope import schema
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.schema._bootstrapinterfaces import RequiredMissing
 from zope.schema.interfaces import IVocabularyFactory
 from zope import component
@@ -64,7 +65,7 @@ class RiskStatistics(grok.View):
 
         self.num_unidentified_risks = len(Session.query(model.Risk).filter(
                 model.Risk.identification == None).all())
-                    
+
         # Get risks which have been evaluated and of those, the ones which have
         # valid action plans
         self.num_evaluated_risks = len(Session.query(model.Risk).filter(
@@ -80,7 +81,7 @@ class RiskStatistics(grok.View):
         self.num_actioned_risks =  len(Session.query(model.Risk).filter(
             sql.exists().where(model.ActionPlan.risk_id == model.Risk.id)
         ).all())
-                
+
 
     def getNodesInSession(self, session):
         query = Session.query(model.SurveyTreeItem)\
@@ -156,6 +157,16 @@ class StatisticsSchema(form.Schema):
         required=True,
     )
     form.widget(file_format=SelectFieldWidget)
+
+    test_sessions = schema.Choice(
+        title=u"How to treat test sessions",
+        vocabulary=SimpleVocabulary([
+            SimpleTerm(0, title=u"Exclude test sessions from statistics"),
+            SimpleTerm(1, title=u"Create statistics exclusively for test sessions"),
+        ]),
+        required=True,
+        default=0,
+    )
 
 
 class WriteStatistics(grok.View):

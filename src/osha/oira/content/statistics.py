@@ -292,10 +292,12 @@ class StatisticsMixin(object):
         else:
             month = period
         file_format = data.get('file_format')
+        testsessions = data.get('test_sessions', 0)
         url = "&".join([url,
                         'year=%d' % year,
                         'month=%d' % month,
                         'quarter=%d' % quarter,
+                        'testsessions=%d' % testsessions,
                         '__format=%s' % file_format,
                         ])
         return url

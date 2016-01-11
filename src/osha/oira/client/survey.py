@@ -340,6 +340,36 @@ class OSHAStatus(survey.Status):
         """
         session = Session()
         session_id = SessionManager.id
+        # First, we need to compute the actual module paths, making sure that
+        # skipped optional modules are excluded
+        # This means top-level module paths like 001 or 001002 can be replaced
+        # by several sub-modules paths like 001002, 001003 and 001002001
+        module_query = """
+        SELECT path
+        FROM tree
+        WHERE
+            session_id={0}
+            AND type='module'
+            AND skip_children='f'
+            and tree.path similar to '({1}%)'
+            ORDER BY path
+        """.format(session_id, "%|".join(module_paths))
+        module_res = session.execute(module_query).fetchall()
+
+        def nodes(paths):
+            paths = sorted(paths, reverse=True)
+            ret = []
+            for elem in paths:
+                if not [x for x in ret if x.startswith(elem)]:
+                    ret.append(elem)
+            return ret
+        # Here we make sure that only the longest paths of sub-modules
+        # are used, but not the parents. Example
+        # (001, 002, 001001, 001003) will be turned into
+        # (001001, 001003, 002), since the parent 001 contains sub-modules,
+        # and some of those might have been de-selected, like 001002
+        filtered_module_paths = nodes([x[0] for x in module_res])
+
         child_node = orm.aliased(model.Risk)
         risks = session.query(
                     model.Module.path,
@@ -355,7 +385,7 @@ class OSHAStatus(survey.Status):
                 ).filter(
                     sql.and_(
                         model.Module.session_id == session_id,
-                        model.Module.path.in_(module_paths),
+                        model.Module.path.in_(filtered_module_paths),
                         sql.and_(
                             child_node.session_id == model.Module.session_id,
                             child_node.depth > model.Module.depth,
@@ -364,8 +394,16 @@ class OSHAStatus(survey.Status):
                     )
                 )
 
+        def _module_path(path):
+            # Due to the extended query above that replaces top-module paths
+            # with sub-module paths (if present), we need to cut back the path
+            # under which we store each risk back to the original top-level
+            # module path
+            for mp in module_paths:
+                if path.startswith(mp):
+                    return mp
         return [{
-                'module_path': risk[0],
+                'module_path': _module_path(risk[0]),
                 'id': risk[1],
                 'path': risk[2],
                 'title': risk[3],

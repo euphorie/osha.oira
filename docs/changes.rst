@@ -4,8 +4,7 @@ Changelog
 3.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix issues detected by Belgian Hout sector #12957
 
 3.0.6 (2015-12-18)
 ------------------

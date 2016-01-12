@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.7 (unreleased)
+3.0.7 (2016-01-12)
 ------------------
 
 - Fix issues detected by Belgian Hout sector #12957

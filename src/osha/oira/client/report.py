@@ -952,7 +952,11 @@ class MeasuresOverview(OSHAStatus):
             else:
                 path = module.path[:3]
             if path in main_modules:
-                main_modules[path]['risks'].update(risks)
+                for prio in risks.keys():
+                    if prio in main_modules[path]['risks']:
+                        main_modules[path]['risks'][prio].extend(risks[prio])
+                    else:
+                        main_modules[path]['risks'][prio] = risks[prio]
             else:
                 title = modules[path]['title']
                 number = modules[path]['number']

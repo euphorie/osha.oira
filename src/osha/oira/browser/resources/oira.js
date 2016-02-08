@@ -15755,6 +15755,11 @@ define('pat-ajax',[
                 ($el.is("form") ? $el.attr("action") : "")).split("#")[0];
     });
 
+    $.ajaxSetup ({
+        // Disable caching of AJAX responses
+        cache: false
+    });
+
     var _ = {
         name: "ajax",
         trigger: ".pat-ajax",
@@ -16112,7 +16117,7 @@ define('pat-autoscale',[
         },
 
         scale: function() {
-            var available_space, scale;
+            var available_space, scale, scaled_height, scaled_width;
 
             if (this.$el[0].tagName.toLowerCase() === "body") {
                 available_space = $(window).width();
@@ -16122,10 +16127,14 @@ define('pat-autoscale',[
             available_space = Math.min(available_space, this.options.maxWidth);
             available_space = Math.max(available_space, this.options.minWidth);
             scale = available_space/this.$el.outerWidth();
+            scaled_height = this.$el.outerHeight() * scale;
+            scaled_width = this.$el.outerWidth() * scale;
 
             switch (this.options.method) {
                 case "scale":
                     this.$el.css("transform", "scale(" + scale + ")");
+                    this.$el.wrap("<div class='auto-scale-wrapper'></div>");
+                    this.$el.parent().height(scaled_height).width(scaled_width);
                     break;
                 case "zoom":
                     this.$el.css("zoom", scale);
@@ -18049,12 +18058,14 @@ define("modernizr-csspositionsticky", function(){});
  */
 define('pat-bumper',[
     "jquery",
+    "underscore",
     "pat-logger",
     "pat-parser",
+    "pat-base",
     "pat-registry",
     "modernizr",
     "modernizr-csspositionsticky"
-], function($, logger, Parser, registry) {
+], function($, _, logger, Parser, Base, registry) {
     var parser = new Parser("bumper"),
         log = logger.getLogger("bumper");
 
@@ -18064,67 +18075,62 @@ define('pat-bumper',[
     parser.addArgument("bump-remove");
     parser.addArgument("unbump-add");
     parser.addArgument("unbump-remove", "bumped");
-    parser.addArgument("side", "top");
+    parser.addArgument("side", "top", ['all', 'top', 'right', 'bottom', 'left']);
 
     // XXX Handle resize
-    var bumper = {
+    return Base.extend({
         name: "bumper",
         trigger: ".pat-bumper",
 
-        init: function bumper_init($el, opts) {
-            return $el.each(function bumper_initElement() {
-                var container = bumper._findScrollContainer(this),
-                    $sticker = $(this),
-                    options = parser.parse($sticker, opts);
+        init: function initBumper($el, opts) {
+            this.options = parser.parse(this.$el, opts);
+            this.$container = this._findScrollContainer();
+            var container = this.$container[0];
 
-                if (Modernizr.csspositionsticky) {
-                    $sticker.addClass("sticky-supported");
-                }
-                $sticker.data("pat-bumper:config", options);
-
-                this.style.position = "relative";
-                if (container === null) {
-                    $(window).on("scroll.bumper", null, this, bumper._onScrollWindow);
-                    bumper._updateStatus(this);
-                } else {
-                    if (this.offsetParent !== container) {
-                        var old_style = container.style.position;
-                        container.style.position = "relative";
-                        if (this.offsetParent !== container) {
-                            container.style.position = old_style;
-                            log.error("The offset parent for ", this,
-                                      " must be its scrolling container ", container,
-                                      "but it is ", this.offsetParent);
-                            return;
-                        }
-                    }
-                    $(container).on("scroll.bumper", null, this, bumper._onScrollContainer);
-                    bumper._updateStatus(this, container);
-                }
-
-                var bumpall = (options.side.indexOf("all") > -1);
-                options.bumptop =    bumpall || (options.side.indexOf("top") > -1);
-                options.bumpright =  bumpall || (options.side.indexOf("right") > -1);
-                options.bumpbottom = bumpall || (options.side.indexOf("bottom") > -1);
-                options.bumpleft =   bumpall || (options.side.indexOf("left") > -1);
-            });
-        },
-
-        _findScrollContainer: function bumper_findScrollContainer(el) {
-            var parent = el.parentElement;
-            while (parent !== document.body && parent !== null) {
-                var overflowY = $(parent).css("overflow-y");
-                if ((overflowY === "auto" || overflowY === "scroll")) {
-                    return parent;
-                }
-                parent = parent.parentElement;
+            if (Modernizr.csspositionsticky) {
+                this.$el.addClass("sticky-supported");
             }
-            return null;
+
+            this.$el[0].style.position = "relative";
+            if (!this.$container.length) {
+                $(window).on("scroll.bumper", this._updateStatus.bind(this));
+            } else {
+                this.$container.on("scroll.bumper", this._updateStatus.bind(this));
+            }
+            this._updateStatus();
+
+            var bumpall = (this.options.side.indexOf("all") > -1);
+            this.options.bumptop =    bumpall || (this.options.side.indexOf("top") > -1);
+            this.options.bumpright =  bumpall || (this.options.side.indexOf("right") > -1);
+            this.options.bumpbottom = bumpall || (this.options.side.indexOf("bottom") > -1);
+            this.options.bumpleft =   bumpall || (this.options.side.indexOf("left") > -1);
+            return this.$el;
         },
 
-        _markBumped: function bumper_markBumper($sticker, options, is_bumped) {
-            var $target = options.selector ? $(options.selector) : $sticker,
-                todo = is_bumped ? options.bump : options.unbump;    
+        _findScrollContainer: function findScrollContainer() {
+            var $parent = this.$el.parent(),
+                overflow;
+            while (!$parent.is($(document.body)) && $parent.length) {
+                if (_.contains(['all', 'top', 'bottom'], this.options.side)) {
+                    overflow = $parent.css("overflow-y");
+                    if ((overflow === "auto" || overflow === "scroll")) {
+                        return $parent;
+                    }
+                } 
+                if (_.contains(['all', 'left', 'right'], this.options.side)) {
+                    overflow = $parent.css("overflow-x");
+                    if ((overflow === "auto" || overflow === "scroll")) {
+                        return $parent;
+                    }
+                }
+                $parent = $parent.parent();
+            }
+            return $();
+        },
+
+        _markBumped: function markBumper(is_bumped) {
+            var $target = this.options.selector ? $(this.options.selector) : this.$el,
+                todo = is_bumped ? this.options.bump : this.options.unbump;    
             if (todo.add) {
                 $target.addClass(todo.add);
             } 
@@ -18133,78 +18139,62 @@ define('pat-bumper',[
             }
         },
 
-        _onScrollContainer: function bumper_onScrollContainer(e) {
-            var container = e.currentTarget,
-                sticker = e.data;
-            bumper._updateStatus(sticker, container);
-        },
-
-        _onScrollWindow: function bumper_onScrollWindow(e) {
-            bumper._updateStatus(e.data);
-        },
-
-        _updateStatus: function(sticker) {
-            var $sticker = $(sticker),
-                options = $sticker.data("pat-bumper:config"),
-                margin = options ? options.margin : 0,
+        _updateStatus: function() {
+            var sticker = this.$el[0],
+                margin = this.options ? this.options.margin : 0,
                 frame,
-                box = bumper._getBoundingBox($sticker, margin),
+                box = this._getBoundingBox(this.$el, margin),
                 delta = {};
 
-            // when called from onScrollWindow
-            if (arguments.length == 1) {
-                frame = bumper._getViewport();
-            // when called from onScrollContainer
-            } else if (arguments.length == 2) {
-                var $container = $(arguments[1]);
-                frame = bumper._getBoundingBox($container, 0);
+            if (this.$container.length) {
+                frame = this._getBoundingBox(this.$container, 0); // Scrolling on a container
+            } else {
+                frame = this._getViewport(); // Scrolling on the window
             }
 
-            delta.top = sticker.style.top ? parseFloat($sticker.css("top")) : 0;
-            delta.left = sticker.style.left ? parseFloat($sticker.css("left")) : 0;
+            delta.top = sticker.style.top ? parseFloat(this.$el.css("top")) : 0;
+            delta.left = sticker.style.left ? parseFloat(this.$el.css("left")) : 0;
 
             box.top -= delta.top;
             box.bottom -= delta.top;
             box.left -= delta.left;
             box.right -= delta.left;
 
-            if ((frame.top > box.top) && options.bumptop) {
+            if ((frame.top > box.top) && this.options.bumptop) {
                 sticker.style.top = (frame.top - box.top) + "px";
-            } else if ((frame.bottom < box.bottom) && options.bumpbottom) {
+            } else if ((frame.bottom < box.bottom) && this.options.bumpbottom) {
                 sticker.style.top = (frame.bottom - box.bottom) + "px";
             } else {
                 sticker.style.top = "";
             }
 
-            if ((frame.left > box.left) && options.bumpleft) {
+            if ((frame.left > box.left) && this.options.bumpleft) {
                 sticker.style.left = (frame.left - box.left) + "px";
-            } else if ((frame.right < box.right) && options.bumpright) {
+            } else if ((frame.right < box.right) && this.options.bumpright) {
                 sticker.style.left = (frame.right - box.right) + "px";
             } else {
                 sticker.style.left = "";
             }
-
-            bumper._markBumped($sticker, options, !!(sticker.style.top || sticker.style.left));
+            this._markBumped(!!(sticker.style.top || sticker.style.left));
         },
 
-        // Calculates the bounding box for the current viewport
-        _getViewport: function bumper_getViewport() {
+        _getViewport: function getViewport() {
+            /* Calculates the bounding box for the current viewport
+             */
             var $win = $(window),
                 view = {
                     top: $win.scrollTop(),
                     left: $win.scrollLeft()
                 };
-
             view.right = view.left + $win.width();
             view.bottom = view.top + $win.height();
             return view;
         },
 
-        /**
-         * Calculates the bounding box for a given element, taking margins
-         * into consideration
-         */
-        _getBoundingBox: function bumper_getBoundingBox($sticker, margin) {
+        _getBoundingBox: function getBoundingBox($sticker, margin) {
+            /* Calculates the bounding box for a given element, taking margins
+             * into consideration
+             */
             var box = $sticker.offset();
             margin = margin ? margin : 0;
             box.top -= (parseFloat($sticker.css("margin-top")) || 0) + margin;
@@ -18213,11 +18203,8 @@ define('pat-bumper',[
             box.bottom = box.top + $sticker.outerHeight(true) + (2 * margin);
             return box;
         }
-    };
-    registry.register(bumper);
-    return bumper;
+    });
 });
-
 // vim: sw=4 expandtab
 ;
 /*!
@@ -26923,6 +26910,8 @@ define('pat-date-picker',[
                 "showWeekNumber": this.options.weekNumbers === "show",
                 "onSelect": function () {
                     $(this._o.field).closest("form").trigger("input-change");
+                    /* Also trigger input change on date field to support pat-autosubmit. */
+                    $(this._o.field).trigger("input-change");
                 }
             };
             if (this.options.i18n) {
@@ -30393,7 +30382,7 @@ define('pat-forward',[
 // vim: sw=4 expandtab
 
 ;
-/*! PhotoSwipe - v4.1.0 - 2015-07-11
+/*! PhotoSwipe - v4.1.1 - 2015-12-24
 * http://photoswipe.com
 * Copyright (c) 2015 Dmitry Semenov; */
 (function (root, factory) { 
@@ -30736,8 +30725,7 @@ var _options = {
 	modal: true,
 
 	// not fully implemented yet
-	scaleMode: 'fit', // TODO
-	alwaysFadeIn: false // TODO
+	scaleMode: 'fit' // TODO
 };
 framework.extend(_options, options);
 
@@ -30883,12 +30871,11 @@ var _isOpen,
 	_moveMainScroll = function(x, dragging) {
 
 		if(!_options.loop && dragging) {
-			// if of current item during scroll (float)
-			var newSlideIndexOffset = _currentItemIndex + (_slideSize.x * _currPositionIndex - x)/_slideSize.x; 
-			var delta = Math.round(x - _mainScrollPos.x);
+			var newSlideIndexOffset = _currentItemIndex + (_slideSize.x * _currPositionIndex - x) / _slideSize.x,
+				delta = Math.round(x - _mainScrollPos.x);
 
 			if( (newSlideIndexOffset < 0 && delta > 0) || 
-				(newSlideIndexOffset >= _getNumItems()-1 && delta < 0) ) {
+				(newSlideIndexOffset >= _getNumItems() - 1 && delta < 0) ) {
 				x = _mainScrollPos.x + delta * _options.mainScrollEndFriction;
 			} 
 		}
@@ -31205,7 +31192,7 @@ var publicMethods = {
 
 		var i;
 
-		self.framework = framework; // basic function
+		self.framework = framework; // basic functionality
 		self.template = template; // root DOM element of PhotoSwipe
 		self.bg = framework.getChildByClass(template, 'pswp__bg');
 
@@ -31360,7 +31347,7 @@ var publicMethods = {
 		framework.addClass(template, 'pswp--visible');
 	},
 
-	// Closes the gallery, then destroy it
+	// Close the gallery, then destroy it
 	close: function() {
 		if(!_isOpen) {
 			return;
@@ -31371,10 +31358,10 @@ var publicMethods = {
 		_shout('close');
 		_unbindEvents();
 
-		_showOrHide( self.currItem, null, true, self.destroy);
+		_showOrHide(self.currItem, null, true, self.destroy);
 	},
 
-	// destroys gallery (unbinds events, cleans up intervals and timeouts to avoid memory leaks)
+	// destroys the gallery (unbinds events, cleans up intervals and timeouts to avoid memory leaks)
 	destroy: function() {
 		_shout('destroy');
 
@@ -31391,7 +31378,7 @@ var publicMethods = {
 
 		framework.unbind(self.scrollWrap, _downEvents, self);
 
-		// we unbind lost event at the end, as closing animation may depend on it
+		// we unbind scroll event at the end, as closing animation may depend on it
 		framework.unbind(window, 'scroll', self);
 
 		_stopDragUpdateLoop();
@@ -31693,7 +31680,6 @@ var publicMethods = {
 
 		_roundPoint(destPanOffset);
 
-		// _startZoomLevel = destZoomLevel;
 		var onUpdate = function(now) {
 			if(now === 1) {
 				_currZoomLevel = destZoomLevel;
@@ -31807,12 +31793,12 @@ var _gestureStartTime,
 	
 	// find the closest parent DOM element
 	_closestElement = function(el, fn) {
-	  	if(!el) {
+	  	if(!el || el === document) {
 	  		return false;
 	  	}
 
 	  	// don't search elements above pswp__scroll-wrap
-	  	if(el.className && el.className.indexOf('pswp__scroll-wrap') > -1 ) {
+	  	if(el.getAttribute('class') && el.getAttribute('class').indexOf('pswp__scroll-wrap') > -1 ) {
 	  		return false;
 	  	}
 
@@ -32943,21 +32929,23 @@ var _showOrHideTimeout,
 		// if bounds aren't provided, just open gallery without animation
 		if(!duration || !thumbBounds || thumbBounds.x === undefined) {
 
-			var finishWithoutAnimation = function() {
-				_shout('initialZoom' + (out ? 'Out' : 'In') );
+			_shout('initialZoom' + (out ? 'Out' : 'In') );
 
-				_currZoomLevel = item.initialZoomLevel;
-				_equalizePoints(_panOffset,  item.initialPosition );
-				_applyCurrentZoomPan();
+			_currZoomLevel = item.initialZoomLevel;
+			_equalizePoints(_panOffset,  item.initialPosition );
+			_applyCurrentZoomPan();
 
-				// no transition
-				template.style.opacity = out ? 0 : 1;
-				_applyBgOpacity(1);
+			template.style.opacity = out ? 0 : 1;
+			_applyBgOpacity(1);
 
+			if(duration) {
+				setTimeout(function() {
+					onComplete();
+				}, duration);
+			} else {
 				onComplete();
-			};
-			finishWithoutAnimation();
-			
+			}
+
 			return;
 		}
 
@@ -33185,7 +33173,7 @@ var _getItemAt,
 			// if it's not image, we return zero bounds (content is not zoomable)
 			return item.bounds;
 		}
-		return false;
+		
 	},
 
 	
@@ -33201,7 +33189,7 @@ var _getItemAt,
 		if(img) {
 
 			item.imageAppended = true;
-			_setImageSize(item, img);
+			_setImageSize(item, img, (item === self.currItem && _renderMaxResolution) );
 			
 			baseDiv.appendChild(img);
 
@@ -33301,7 +33289,7 @@ _registerModule('Controller', {
 			index = _getLoopedId(index);
 			var item = _getItemAt(index);
 
-			if(!item || item.loaded || item.loading) {
+			if(!item || ((item.loaded || item.loading) && !_itemsNeedUpdate)) {
 				return;
 			}
 
@@ -33329,7 +33317,7 @@ _registerModule('Controller', {
 			_listen('beforeChange', function(diff) {
 
 				var p = _options.preload,
-					isNext = diff === null ? true : (diff > 0),
+					isNext = diff === null ? true : (diff >= 0),
 					preloadBefore = Math.min(p[0], _getNumItems() ),
 					preloadAfter = Math.min(p[1], _getNumItems() ),
 					i;
@@ -34112,7 +34100,7 @@ _registerModule('History', {
 	framework.extend(self, publicMethods); };
 	return PhotoSwipe;
 });
-/*! PhotoSwipe Default UI - 4.1.0 - 2015-07-11
+/*! PhotoSwipe Default UI - 4.1.1 - 2015-12-24
 * http://photoswipe.com
 * Copyright (c) 2015 Dmitry Semenov; */
 /**
@@ -34207,7 +34195,8 @@ var PhotoSwipeUI_Default =
 				return pswp.currItem.title || '';
 			},
 				
-			indexIndicatorSep: ' / '
+			indexIndicatorSep: ' / ',
+			fitControlsWidth: 1200
 
 		},
 		_blockControlsTap,
@@ -34231,7 +34220,7 @@ var PhotoSwipeUI_Default =
 
 			var target = e.target || e.srcElement,
 				uiElement,
-				clickedClass = target.className,
+				clickedClass = target.getAttribute('class') || '',
 				found;
 
 			for(var i = 0; i < _uiElements.length; i++) {
@@ -34263,7 +34252,7 @@ var PhotoSwipeUI_Default =
 
 		},
 		_fitControlsInViewport = function() {
-			return !pswp.likelyTouchDevice || _options.mouseUsed || screen.width > 1200;
+			return !pswp.likelyTouchDevice || _options.mouseUsed || screen.width > _options.fitControlsWidth;
 		},
 		_togglePswpClass = function(el, cName, add) {
 			framework[ (add ? 'add' : 'remove') + 'Class' ](el, 'pswp__' + cName);
@@ -34394,7 +34383,7 @@ var PhotoSwipeUI_Default =
 			}
 		},
 		_setupFullscreenAPI = function() {
-			if(_options.fullscreenEl) {
+			if(_options.fullscreenEl && !framework.features.isOldAndroid) {
 				if(!_fullscrenAPI) {
 					_fullscrenAPI = ui.getFullscreenAPI();
 				}
@@ -34688,8 +34677,8 @@ var PhotoSwipeUI_Default =
 			var t = e.target || e.srcElement;
 			if(
 				t && 
-				t.className && e.type.indexOf('mouse') > -1 && 
-				( t.className.indexOf('__caption') > 0 || (/(SMALL|STRONG|EM)/i).test(t.tagName) ) 
+				t.getAttribute('class') && e.type.indexOf('mouse') > -1 && 
+				( t.getAttribute('class').indexOf('__caption') > 0 || (/(SMALL|STRONG|EM)/i).test(t.tagName) ) 
 			) {
 				preventObj.prevent = false;
 			}
@@ -34972,6 +34961,7 @@ return PhotoSwipeUI_Default;
 
 
 });
+
 /**
  * @license RequireJS text 2.0.14 Copyright (c) 2010-2014, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.

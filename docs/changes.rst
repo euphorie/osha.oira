@@ -4,8 +4,8 @@ Changelog
 3.0.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- text changes in FR #13136
+- Updated bundle, to get rid of caching in ajax (injection) calls for IE, fixes #12977
 
 3.0.7 (2016-01-12)
 ------------------

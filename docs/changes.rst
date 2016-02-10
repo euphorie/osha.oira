@@ -4,8 +4,7 @@ Changelog
 3.0.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Cosmetic change for the start page of a tool: resize large image properly
 
 3.0.8 (2016-02-08)
 ------------------

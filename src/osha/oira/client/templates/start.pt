@@ -20,16 +20,17 @@
 <metal:slot fill-slot="content">
     <tal:block replace="tile:statusmessages"/>
 
-    <figure class="postit external-reference" tal:condition="context/external_site_logo | nothing">
-      <a href="#" tal:attributes="href context/external_site_url | nothing" target="_blank" tal:omit-tag="not:context/external_site_url | nothing">
-        <img style="cursor: pointer" src="http://client.oiraproject.eu/eu/leather-tanning/@@images/7870a759-8982-4217-858a-1348ef6edc14.jpeg" alt="" tal:attributes="src string:${context/absolute_url}/@@display-file/external_site_logo"/>
-      </a>
-      <figcaption tal:condition="context/external_site_name" i18n:translate="">
-        This OiRA tool was offered to you by <a i18n:name="external_site" href="#" tal:attributes="href context/external_site_url | nothing" tal:content="context/external_site_name" target="_blank" tal:omit-tag="not:context/external_site_url | nothing">Leather Tanning</a>
-       </figcaption>
-    </figure>
-
     <article class="rich">
+
+      <figure class="postit external-reference" tal:condition="context/external_site_logo | nothing">
+        <a href="#" tal:attributes="href context/external_site_url | nothing" target="_blank" tal:omit-tag="not:context/external_site_url | nothing">
+          <img style="cursor: pointer" src="http://client.oiraproject.eu/eu/leather-tanning/@@images/7870a759-8982-4217-858a-1348ef6edc14.jpeg" alt="" tal:attributes="src string:${context/absolute_url}/@@display-file/external_site_logo"/>
+        </a>
+        <figcaption tal:condition="context/external_site_name" i18n:translate="">
+          This OiRA tool was offered to you by <a i18n:name="external_site" href="#" tal:attributes="href context/external_site_url | nothing" tal:content="context/external_site_name" target="_blank" tal:omit-tag="not:context/external_site_url | nothing">Leather Tanning</a>
+         </figcaption>
+      </figure>
+
         <h1>${context/title}</h1>
         <tal:block condition="not:view/has_introduction">
             <metal:introduction use-macro="default_introduction/macros/default_introduction"/>

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.10 (unreleased)
+3.0.10 (2016-03-04)
 -------------------
 
 - Re-enable "outdated" warning for IE9 (text-based, multilingual) and older

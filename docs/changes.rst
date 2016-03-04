@@ -4,8 +4,8 @@ Changelog
 3.0.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Re-enable "outdated" warning for IE9 (text-based, multilingual) and older
+  (image, EN only)
 
 3.0.9 (2016-02-10)
 ------------------

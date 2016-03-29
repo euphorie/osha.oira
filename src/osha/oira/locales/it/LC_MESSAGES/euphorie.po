@@ -1099,7 +1099,7 @@ msgstr "Data:"
 #. Default: OiRA Report: "${title}"
 #: src/osha/oira/client/report.py:629
 msgid "header_oira_report_download"
-msgstr "Rapporto OiRA: \"${title}"
+msgstr "Rapporto OiRA: \"${title}\""
 
 #. Default: Contents
 #: src/osha/oira/client/report.py:648
@@ -1116,7 +1116,7 @@ msgstr "Contenuti"
 msgid "header_present_risks"
 msgstr ""
 "1. Adempimenti/rischi identificati, valutati e gestiti con misure "
-"obbligatorie adottate piano di miglioramento"
+"obbligatorie adottate e misure di miglioramento"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
 #: src/osha/oira/client/report.py:656
@@ -1124,10 +1124,11 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
 msgstr ""
-"2. Adempimenti/rischi identificati per i quali la sezione “misure "
-"obbligatorie adottate e piano di miglioramento” NON è ancora stata compilata "
-"(Attenzione identificare/valutare i rischi  e adottare le misure prima di "
-"stampare la versione definitiva del report )"
+"2. Adempimenti/rischi identificati per i quali nella sezione “misure "
+"obbligatorie adottate e piano di miglioramento” NON è stata inserita nemmeno "
+"una misura anche perché i rischi relativi non sono pertinenti "
+"(Attenzione identificare/valutare i rischi e adottare le misure prima di "
+"stampare la versione definitiva del report)"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
@@ -1137,8 +1138,9 @@ msgstr ""
 msgid "header_unanswered_risks"
 msgstr ""
 "3. Adempimenti/rischi per i quali la sezione “identificazione” non è ancora "
-"stata compilata (Attenzione identificare/valutare i rischi  e adottare le "
-"misure prima di stampare la versione definitiva del report )"
+"stata compilata oppure i rischi/adempimenti relativi non sono pertinenti "
+"(Attenzione identificare/valutare i rischi  e adottare le "
+"misure prima di stampare la versione definitiva del report)"
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation

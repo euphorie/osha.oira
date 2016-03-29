@@ -341,8 +341,8 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
             return
 
         super(OSHAActionPlanReportDownload, self).update()
-        self.nodes = self.getNodes()  # Returns all identified nodes, with or
-                                      # without action plans
+        # Returns all identified nodes, with or without action plans
+        self.nodes = self.getNodes()
 
         # Get the extra attributes as per #1517, #1518:
         self.actioned_nodes = utils.get_actioned_nodes(self.nodes)
@@ -350,8 +350,14 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
         self.unactioned_nodes = utils.get_unactioned_nodes(self.nodes)
 
         self.unanswered_nodes = utils.get_unanswered_nodes(self.session)
-        self.risk_not_present_nodes = \
-            utils.get_risk_not_present_nodes(self.session)
+        risk_not_present_nodes = utils.get_risk_not_present_nodes(self.session)
+        # From the non-present risks, filter out risks from the (un-)/actioned
+        # categories. A "priority" risk will always appear in the action plan,
+        # even if it has been answered with "Yes"
+        self.risk_not_present_nodes = [
+            n for n in risk_not_present_nodes if
+            n not in self.actioned_nodes and n not in self.unactioned_nodes
+        ]
 
         lang = getattr(self.request, 'LANGUAGE', 'en')
         if "-" in lang:

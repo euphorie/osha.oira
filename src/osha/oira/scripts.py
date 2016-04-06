@@ -2,6 +2,7 @@ from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
 from collections import OrderedDict
 from datetime import datetime
+from datetime import timedelta
 from euphorie.client.utils import CreateEmailTo
 from euphorie.content.countrymanager import ICountryManager
 from euphorie.content.sector import ISector
@@ -21,7 +22,7 @@ class OutdatedTools(ConsoleScript):
         self.portal = self.app.Plone2
         outdated_tools_view = getMultiAdapter(
             (self.portal, self.portal.REQUEST), name='outdated-tools-view')
-        outdated_tools_view(portal=self.portal)
+        outdated_tools_view()
 
 outdated_tools = OutdatedTools()
 
@@ -31,8 +32,8 @@ class OutdatedToolsView(grok.View):
     grok.require("cmf.ManagePortal")
     grok.name("outdated-tools-view")
 
-    def __call__(self, portal):
-        self.render(portal)
+    def __call__(self):
+        self.render(self.context)
 
     def render(self, portal):
         self.portal = portal
@@ -45,7 +46,9 @@ class OutdatedToolsView(grok.View):
         pc = self.context.portal_catalog
         client_path = '/'.join(self.context.getPhysicalPath() + ('client',))
         now = datetime.now()
-        one_year_ago = datetime(now.year - 1, now.month, now.day)
+        sprops = self.context.portal_properties.site_properties
+        interval = sprops.getProperty('outdated_notications_interval_days', 365)
+        one_year_ago = now - timedelta(days=interval)
         outdated_tools = pc.searchResults(
             portal_type='euphorie.survey',
             modified={'query': one_year_ago, 'range': 'max'},
@@ -105,8 +108,11 @@ class OutdatedToolsView(grok.View):
                 )
 
     def send_oira_team_notifications(self, outdated_tool_paths):
-        to_name = 'OiRA Team'
-        to_email = 'test@example.com'
+        sprops = self.context.portal_properties.site_properties
+        to_name = sprops.getProperty(
+            'outdated_notications_oira_team_name', 'OiRA Team')
+        to_email = sprops.getProperty(
+            'outdated_notications_oira_team_email', 'test@example.com')
         self.send_notification(
             to_name=to_name,
             to_address=to_email,
@@ -115,6 +121,8 @@ class OutdatedToolsView(grok.View):
 
 
     def send_notification(self, to_name=None, to_address=None, tool_paths=None):
+        if not tool_paths:
+            return
         to_name = safe_unicode(to_name)
         mailhost = getToolByName(self.context, "MailHost")
         recipient = u'{} <{}>'.format(to_name, to_address)

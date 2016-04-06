@@ -1,8 +1,10 @@
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
+from collections import OrderedDict
 from datetime import datetime
 from euphorie.client.utils import CreateEmailTo
 from euphorie.content.countrymanager import ICountryManager
+from euphorie.content.sector import ISector
 from five import grok
 from plone import api
 from plone.dexterity.utils import safe_unicode
@@ -48,6 +50,7 @@ class OutdatedToolsView(grok.View):
             portal_type='euphorie.survey',
             modified={'query': one_year_ago, 'range': 'max'},
             path={'query': client_path},
+            sort_on='path',
         )
 
         sector_tool_paths = []
@@ -62,10 +65,14 @@ class OutdatedToolsView(grok.View):
             sector_path = '/'.join(path.split('/')[:5])
             sector_paths.add(sector_path)
         for sector_path in sector_paths:
-            sector = self.context.unrestrictedTraverse(sector_path)
+            sector = self.context.unrestrictedTraverse(sector_path, False)
+            if not sector or sector.portal_type != 'euphorie.sector':
+                log.error('Missing sector: {}'.format(sector_path))
+                continue
             contact_name = sector.contact_name or ''
             contact_email = sector.contact_email
             if not contact_email:
+                log.error('No contact email address: {}'.format(sector_path))
                 continue
             sector_tools = filter(
                 lambda x: x.startswith(sector_path), outdated_tool_paths)
@@ -97,6 +104,16 @@ class OutdatedToolsView(grok.View):
                     tool_paths=country_tools,
                 )
 
+    def send_oira_team_notifications(self, outdated_tool_paths):
+        to_name = 'OiRA Team'
+        to_email = 'test@example.com'
+        self.send_notification(
+            to_name=to_name,
+            to_address=to_email,
+            tool_paths=outdated_tool_paths,
+        )
+
+
     def send_notification(self, to_name=None, to_address=None, tool_paths=None):
         to_name = safe_unicode(to_name)
         mailhost = getToolByName(self.context, "MailHost")
@@ -104,17 +121,33 @@ class OutdatedToolsView(grok.View):
         subject = u'Outdated tools'
         portal_id = self.context.getId()
         portal_url = self.context.absolute_url()
-        tool_urls = [i.replace('/'+portal_id, portal_url) for i in tool_paths]
+        paths_by_country = OrderedDict()
+        for path in tool_paths:
+            country = path.split('/')[3]
+            if country in paths_by_country:
+                paths_by_country[country].append(path)
+            else:
+                paths_by_country[country] = [path]
+        tool_details = ''
+        for country in paths_by_country.keys():
+            if len(paths_by_country.keys()) > 1:
+                tool_details += '\n' + country + ':\n'
+            else:
+                tool_details += '\n'
+            tool_urls = [
+                i.replace('/'+portal_id, portal_url)
+                for i in paths_by_country[country]
+            ]
+            tool_details += '\n'.join(tool_urls)
+            tool_details += '\n'
         body = u'''
 Dear {name},
 
 The following tool(s) have not been updated in over a year:
-
 {tools}
-
 Best regards,
 OiRA
-'''.format(name=to_name, tools=u'\n'.join(tool_urls))
+'''.format(name=to_name, tools=tool_details)
         mail = CreateEmailTo(
             self.context.email_from_name,
             self.context.email_from_address,
@@ -127,11 +160,3 @@ OiRA
         except Exception, err:
             log.error('Failed to send notification {}'.format(err))
 
-    def send_oira_team_notifications(outdated_tool_paths):
-        contact_name = 'OiRA Team'
-        contact_email = 'test@example.com'
-        self.send_notification(
-            to_name=contact_name,
-            to_address=contact_email,
-            tool_paths=outdated_tool_paths,
-        )

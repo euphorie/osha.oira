@@ -62,7 +62,6 @@ class OutdatedToolsTests(OiRATestCase):
         self.assertEqual(len(self.mail_fixture.storage), 1)
         email = self.mail_fixture.storage[0][0][0].as_string()
         self.assertTrue('/sectors/nl/sector/test-survey' in email)
-        import pdb; pdb.set_trace()
         # To: Sectör NL <sect@r.nl>
         self.assertTrue(
             'To: =?utf-8?b?U2VjdMO2ciBOTCA8c2VjdEByLm5sPg==?=' in email)

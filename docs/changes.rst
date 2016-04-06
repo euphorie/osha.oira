@@ -1,11 +1,11 @@
 Changelog
 =========
 
-3.0.11 (unreleased)
+3.0.11 (2016-04-06)
 -------------------
 
-- Nothing changed yet.
-
+- Translation changes for IT #13400
+- Bugfix in the .rtf report, don't show risks twice #13400
 
 3.0.10 (2016-03-04)
 -------------------

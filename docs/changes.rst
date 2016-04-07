@@ -4,8 +4,7 @@ Changelog
 3.0.12 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Greek translation changes (jira OIRA-150)
 
 3.0.11 (2016-04-06)
 -------------------

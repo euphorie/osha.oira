@@ -219,6 +219,11 @@ class IdentificationView(module.IdentificationView, Mixin):
                 self.request, context, filter=model.NO_CUSTOM_RISKS_FILTER)
             self.title = module.title
             self.module = module
+            number_files = 0
+            for i in range(1, 5):
+                number_files += getattr(
+                    self.module, 'file{0}'.format(i), None) and 1 or 0
+            self.has_files = number_files > 0
             self.next_is_actionplan = not FindNextQuestion(
                 context, filter=self.question_filter)
             super(IdentificationView, self).update()

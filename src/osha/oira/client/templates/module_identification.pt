@@ -27,11 +27,11 @@
         </figure>
 
 
-        <p tal:content="structure module/description">
+        <section tal:content="structure module/description">
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem
             accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
             ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-            explicabo.</p>
+            explicabo.</section>
 
         <fieldset class="pat-checklist radio" tal:condition="module/optional">
             <legend tal:content="structure module/question">question</legend>
@@ -44,6 +44,13 @@
                 <tal:span i18n:translate="label_no">No</tal:span>
             </label>
         </fieldset>
+
+        <!-- additional files -->
+        <tal:additional_files condition="view/has_files" define="risk nocall:module">
+            <section class="caption pat-well">
+                <metal:call use-macro="webhelpers/macros/additional_files" />
+            </section>
+        </tal:additional_files>
 
 
         <p class="buttonBar">

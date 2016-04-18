@@ -338,6 +338,7 @@
             of the health code.
           </tal:legal>
         </section>
+        <metal:additional_files define-macro="additional_files">
         <section class="pat-collapsible more-information closed" tal:condition="view/has_files">
           <h3 i18n:translate="header_additional_resources">Additional resources to assess the risk</h3>
           <ul>
@@ -355,6 +356,7 @@
             </li>
           </ul>
         </section>
+      </metal:additional_files>
       </section>
     </tal:block>
   </metal:risklegal>

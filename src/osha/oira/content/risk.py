@@ -13,7 +13,7 @@ from .. import _
 grok.templatedir("templates")
 
 
-class IOSHARisk(form.Schema):
+class IRiskAdditionalContent(form.Schema):
     form.fieldset(
         "additional_content",
         label=_("header_additional_content", default=u"Additional content"),
@@ -73,7 +73,7 @@ class IOSHARisk(form.Schema):
         title=_("label_file_caption", default=u"Content caption"),
         required=False)
 
-interface.alsoProvides(IOSHARisk, IFormFieldProvider)
+interface.alsoProvides(IRiskAdditionalContent, IFormFieldProvider)
 
 
 class IOSHARiskMarker(risk.IRisk):
@@ -84,22 +84,22 @@ class IOSHARiskMarker(risk.IRisk):
 interface.classImplements(risk.Risk, IOSHARiskMarker)
 
 
-class OSHARisk(MetadataBase):
-    file1 = DCFieldProperty(IOSHARisk['file1'])
-    file1_caption = DCFieldProperty(IOSHARisk['file1_caption'])
-    file2 = DCFieldProperty(IOSHARisk['file2'])
-    file2_caption = DCFieldProperty(IOSHARisk['file2_caption'])
-    file3 = DCFieldProperty(IOSHARisk['file3'])
-    file3_caption = DCFieldProperty(IOSHARisk['file3_caption'])
-    file4 = DCFieldProperty(IOSHARisk['file4'])
-    file4_caption = DCFieldProperty(IOSHARisk['file4_caption'])
+class RiskAdditionalContent(MetadataBase):
+    file1 = DCFieldProperty(IRiskAdditionalContent['file1'])
+    file1_caption = DCFieldProperty(IRiskAdditionalContent['file1_caption'])
+    file2 = DCFieldProperty(IRiskAdditionalContent['file2'])
+    file2_caption = DCFieldProperty(IRiskAdditionalContent['file2_caption'])
+    file3 = DCFieldProperty(IRiskAdditionalContent['file3'])
+    file3_caption = DCFieldProperty(IRiskAdditionalContent['file3_caption'])
+    file4 = DCFieldProperty(IRiskAdditionalContent['file4'])
+    file4_caption = DCFieldProperty(IRiskAdditionalContent['file4_caption'])
 
 
-class IOSHAFrenchRisk(risk.IFrenchRisk, IOSHARisk):
+class IOSHAFrenchRisk(risk.IFrenchRisk, IRiskAdditionalContent):
     pass
 
 
-class IOSHAKinneyRisk(risk.IKinneyRisk, IOSHARisk):
+class IOSHAKinneyRisk(risk.IKinneyRisk, IRiskAdditionalContent):
     pass
 
 

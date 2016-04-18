@@ -3,11 +3,38 @@ from zope.component import getUtility
 from plone.directives import dexterity
 from plone.dexterity.interfaces import IDexterityFTI
 from euphorie.content import MessageFactory as _
+from euphorie.content import module
 from euphorie.content.module import IModule
 from euphorie.content.module import View as ModuleView
+from zope import interface
+from .risk import IRiskAdditionalContent, RiskAdditionalContent
 from ..interfaces import IOSHAContentSkinLayer
 
 grok.templatedir("templates")
+
+
+class IOSHAModuleMarker(IModule):
+    """ Marker interface so that we can register more specific adapters for
+        OSHA's survey object.
+    """
+
+interface.classImplements(module.Module, IOSHAModuleMarker)
+
+
+class IModuleAdditionalContent(IRiskAdditionalContent):
+    """
+        We need to define our own interface, so that Risks won't inherit
+        files set on their parent module
+    """
+    pass
+
+
+class ModuleAdditionalContent(RiskAdditionalContent):
+    pass
+
+
+class IOSHAModule(IModule, IModuleAdditionalContent):
+    pass
 
 
 class View(ModuleView):
@@ -24,8 +51,13 @@ class View(ModuleView):
             return fti.Title()
 
 
-class Edit(dexterity.EditForm):
+class Edit(module.Edit):
     grok.context(IModule)
+    grok.layer(IOSHAContentSkinLayer)
+
+    def __init__(self, context, request):
+        module.Edit.__init__(self, context, request)
+        self.schema = IOSHAModule
 
     @property
     def label(self):

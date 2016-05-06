@@ -340,7 +340,8 @@
         </section>
         <metal:additional_files define-macro="additional_files">
         <section class="pat-collapsible more-information closed" tal:condition="view/has_files">
-          <h3 i18n:translate="header_additional_resources">Additional resources to assess the risk</h3>
+          <h3 tal:condition="python:risk.Type()=='Risk'" i18n:translate="header_additional_resources">Additional resources to assess the risk</h3>
+          <h3 tal:condition="python:risk.Type()=='Module'" i18n:translate="header_additional_resources_module">Additional resources for this module</h3>
           <ul>
             <li class="icon-download" tal:condition="nocall:risk/file1|nothing">
               <a href="${risk/absolute_url}/download/file1"><tal:caption condition="risk/file1_caption|nothing">${risk/file1_caption} (${risk/file1/filename})</tal:caption><tal:nocaption condition="not:risk/file1_caption|nothing">${risk/file1/filename}</tal:nocaption></a>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.1dev\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2015-12-01 17:33+0100\n"
+"POT-Creation-Date: 2016-05-30 13:40+0200\n"
 "PO-Revision-Date: 2013-08-15 11:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: bg <LL@li.org>\n"
@@ -746,6 +746,7 @@ msgstr "Фаза на оценяване"
 
 #. Default: Description
 #: src/osha/oira/manual_translations.py:228
+#: src/osha/oira/content/templates/control-panel.pt:84
 msgid "Description"
 msgstr "Описание"
 
@@ -868,11 +869,11 @@ msgid "Cancel"
 msgstr "Отмяна"
 
 #. Default: Please enter a valid email address.
-#: src/osha/oira/client/login.py:40
+#: src/osha/oira/client/login.py:41
 msgid "invalid_email"
 msgstr "Моля, въведете валиден адрес на електронна поща."
 
-#: src/osha/oira/client/login.py:69
+#: src/osha/oira/client/login.py:79
 msgid "An email with a password reminder has been sent to your address."
 msgstr " Паролата бе изпратена  на Вашия е-mail адрес."
 
@@ -947,15 +948,15 @@ msgid "report_timeline_title"
 msgstr "Времева скала"
 
 #. Default: Added risks (by you)
-#: src/osha/oira/client/report.py:196 src/osha/oira/client/report.py:360
-#: src/osha/oira/client/survey.py:283
+#: src/osha/oira/client/report.py:196 src/osha/oira/client/report.py:366
+#: src/osha/oira/client/survey.py:288
 #: src/osha/oira/client/templates/module_customization.pt:15
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
 msgstr "Добавени рискове (от Вас)"
 
 #. Default: low
-#: src/osha/oira/client/report.py:418
+#: src/osha/oira/client/report.py:424
 #: src/osha/oira/client/templates/module_customization.pt:34
 #: src/osha/oira/client/templates/module_customization.pt:51
 #: src/osha/oira/client/templates/module_customization.pt:77
@@ -968,7 +969,7 @@ msgid "risk_priority_low"
 msgstr "ниско"
 
 #. Default: medium
-#: src/osha/oira/client/report.py:420
+#: src/osha/oira/client/report.py:426
 #: src/osha/oira/client/templates/module_customization.pt:35
 #: src/osha/oira/client/templates/module_customization.pt:52
 #: src/osha/oira/client/templates/module_customization.pt:78
@@ -981,7 +982,7 @@ msgid "risk_priority_medium"
 msgstr "средно"
 
 #. Default: high
-#: src/osha/oira/client/report.py:422
+#: src/osha/oira/client/report.py:428
 #: src/osha/oira/client/templates/module_customization.pt:36
 #: src/osha/oira/client/templates/module_customization.pt:53
 #: src/osha/oira/client/templates/module_customization.pt:79
@@ -994,7 +995,7 @@ msgid "risk_priority_high"
 msgstr "високо"
 
 #. Default: This is a ${priority_value} priority risk.
-#: src/osha/oira/client/report.py:424
+#: src/osha/oira/client/report.py:430
 #: src/osha/oira/client/templates/module_customization.pt:32
 #: src/osha/oira/client/templates/module_customization.pt:49
 #: src/osha/oira/client/templates/module_customization.pt:75
@@ -1007,18 +1008,18 @@ msgid "risk_priority"
 msgstr "Това е ${priority_value} приоритетен риск."
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:456 src/osha/oira/client/report.py:481
+#: src/osha/oira/client/report.py:462 src/osha/oira/client/report.py:487
 msgid "header_measure_single"
 msgstr "Мярка"
 
 #. Default: Measure ${index}
-#: src/osha/oira/client/report.py:459
+#: src/osha/oira/client/report.py:465
 #: src/osha/oira/client/templates/report_actionplan.pt:99
 msgid "header_measure"
 msgstr "Мярка ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
-#: src/osha/oira/client/report.py:488
+#: src/osha/oira/client/report.py:494
 #: src/osha/oira/client/templates/risk_actionplan.pt:85
 #: src/osha/oira/client/templates/risk_actionplan.pt:172
 #: src/osha/oira/client/templates/risk_actionplan.pt:229
@@ -1027,7 +1028,7 @@ msgid "label_measure_action_plan"
 msgstr "Общ подход (за елиминиране или намаляване на риска)"
 
 #. Default: Specific action(s) required to implement this approach
-#: src/osha/oira/client/report.py:490
+#: src/osha/oira/client/report.py:496
 #: src/osha/oira/client/templates/risk_actionplan.pt:90
 #: src/osha/oira/client/templates/risk_actionplan.pt:174
 #: src/osha/oira/client/templates/risk_actionplan.pt:231
@@ -1036,7 +1037,7 @@ msgid "label_measure_prevention_plan"
 msgstr "Конкретни действия, които се изискват, за да бъде следван този подход"
 
 #. Default: Level of expertise and/or requirements needed
-#: src/osha/oira/client/report.py:492
+#: src/osha/oira/client/report.py:498
 #: src/osha/oira/client/templates/risk_actionplan.pt:95
 #: src/osha/oira/client/templates/risk_actionplan.pt:176
 #: src/osha/oira/client/templates/risk_actionplan.pt:233
@@ -1045,68 +1046,68 @@ msgid "label_measure_requirements"
 msgstr "Експертно ниво и/или изисквания, които са необходими"
 
 #. Default: Who is responsible?
-#: src/osha/oira/client/report.py:494
+#: src/osha/oira/client/report.py:500
 #: src/osha/oira/client/templates/risk_actionplan.pt:104
 #: src/osha/oira/client/templates/risk_actionplan.pt:182
 msgid "label_action_plan_responsible"
 msgstr "Кой носи отговорност?"
 
 #. Default: Budget
-#: src/osha/oira/client/report.py:496
+#: src/osha/oira/client/report.py:502
 #: src/osha/oira/client/templates/risk_actionplan.pt:109
 #: src/osha/oira/client/templates/risk_actionplan.pt:187
 msgid "label_action_plan_budget"
 msgstr "Бюджет"
 
 #. Default: Planning start
-#: src/osha/oira/client/report.py:497
+#: src/osha/oira/client/report.py:503
 #: src/osha/oira/client/templates/risk_actionplan.pt:118
 #: src/osha/oira/client/templates/risk_actionplan.pt:194
 msgid "label_action_plan_start"
 msgstr "Планиране на началото"
 
 #. Default: Planning end
-#: src/osha/oira/client/report.py:498
+#: src/osha/oira/client/report.py:504
 #: src/osha/oira/client/templates/risk_actionplan.pt:129
 #: src/osha/oira/client/templates/risk_actionplan.pt:201
 msgid "label_action_plan_end"
 msgstr "Планиране на края"
 
 #. Default: Consultation of workers
-#: src/osha/oira/client/report.py:549
+#: src/osha/oira/client/report.py:555
 msgid "header_oira_report_consultation"
 msgstr "Консултиране с работниците"
 
 #. Default: The undersigned hereby declare that the workers have been consulted
 #. on the content of this document.
-#: src/osha/oira/client/report.py:558
+#: src/osha/oira/client/report.py:564
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
 "Аз, долупопдписаният, декларирам с настоящото, че с работниците беше "
 "извършено консултиране относно съдържанието на този документ."
 
 #. Default: On behalf of the employer:
-#: src/osha/oira/client/report.py:571
+#: src/osha/oira/client/report.py:577
 msgid "oira_consultation_employer"
 msgstr "От страна на работодателя:"
 
 #. Default: On behalf of the workers:
-#: src/osha/oira/client/report.py:573
+#: src/osha/oira/client/report.py:579
 msgid "oira_consultation_workers"
 msgstr "От страна на работниците:"
 
 #. Default: Date:
-#: src/osha/oira/client/report.py:582
+#: src/osha/oira/client/report.py:588
 msgid "oira_survey_date"
 msgstr "Дата:"
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/client/report.py:629
+#: src/osha/oira/client/report.py:635
 msgid "header_oira_report_download"
 msgstr "OiRA доклад: \"${title}"
 
 #. Default: Contents
-#: src/osha/oira/client/report.py:648
+#: src/osha/oira/client/report.py:654
 #: src/osha/oira/client/templates/report_actionplan.pt:17
 #: src/osha/oira/client/templates/report_identification.pt:16
 #: src/osha/oira/client/templates/risks_overview.pt:156
@@ -1114,14 +1115,14 @@ msgid "toc_header"
 msgstr "Съдържание"
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/client/report.py:653
+#: src/osha/oira/client/report.py:659
 #: src/osha/oira/client/templates/report_actionplan.pt:39
 #: src/osha/oira/client/templates/report_actionplan.pt:72
 msgid "header_present_risks"
 msgstr "Рискове, които са били определени, оценени и имат план за действие"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/client/report.py:656
+#: src/osha/oira/client/report.py:662
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
@@ -1129,7 +1130,7 @@ msgstr "Рискове, които са били определени, но НЯ
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
-#: src/osha/oira/client/report.py:659
+#: src/osha/oira/client/report.py:665
 #: src/osha/oira/client/templates/report_actionplan.pt:55
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
@@ -1137,20 +1138,20 @@ msgstr "Опасности/проблеми, които не са били ра�
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
-#: src/osha/oira/client/report.py:662
+#: src/osha/oira/client/report.py:668
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
 msgstr "Опасности/проблеми, които се управляват"
 
 #. Default: Action plan ${title}
-#: src/osha/oira/client/report.py:689
+#: src/osha/oira/client/report.py:695
 msgid "filename_report_actionplan"
 msgstr "План за действие ${title}"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision
 #. date ${date}.
-#: src/osha/oira/client/report.py:778
+#: src/osha/oira/client/report.py:784
 msgid "report_identification_revision"
 msgstr ""
 "Този документ се базира на OiRA инструмента '${title}' с дата на редакция "
@@ -1158,7 +1159,7 @@ msgstr ""
 
 #. Default: This report was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/client/report.py:816
+#: src/osha/oira/client/report.py:822
 #: src/osha/oira/client/templates/report_actionplan.pt:302
 msgid "report_survey_revision"
 msgstr ""
@@ -1247,17 +1248,17 @@ msgid "title_change_password"
 msgstr "Смяна на парола"
 
 #. Default: Page
-#: src/osha/oira/client/survey.py:204
+#: src/osha/oira/client/survey.py:209
 msgid "label_page"
 msgstr "Номер на страница"
 
 #. Default: of
-#: src/osha/oira/client/survey.py:205
+#: src/osha/oira/client/survey.py:210
 msgid "label_page_of"
 msgstr "от общо"
 
 #. Default: Close
-#: src/osha/oira/client/utils.py:375
+#: src/osha/oira/client/utils.py:380
 msgid "button_close"
 msgstr "затвори"
 
@@ -1751,7 +1752,7 @@ msgstr "Към план за действие"
 #: src/osha/oira/client/templates/report_actionplan.pt:270
 #: src/osha/oira/client/templates/report_identification.pt:85
 #: src/osha/oira/client/templates/risk_evaluation.pt:137
-#: src/osha/oira/client/templates/shell.pt:108
+#: src/osha/oira/client/templates/shell.pt:118
 msgid "label_preparation"
 msgstr "Подготовка"
 
@@ -1771,8 +1772,8 @@ msgstr "Подготовка"
 #: src/osha/oira/client/templates/report_actionplan.pt:276
 #: src/osha/oira/client/templates/report_identification.pt:91
 #: src/osha/oira/client/templates/risk_evaluation.pt:143
-#: src/osha/oira/client/templates/shell.pt:115
-#: src/osha/oira/client/templates/shell.pt:116
+#: src/osha/oira/client/templates/shell.pt:125
+#: src/osha/oira/client/templates/shell.pt:126
 #: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_identification"
 msgstr "Определяне"
@@ -1793,8 +1794,8 @@ msgstr "Определяне"
 #: src/osha/oira/client/templates/report_actionplan.pt:282
 #: src/osha/oira/client/templates/report_identification.pt:97
 #: src/osha/oira/client/templates/risk_evaluation.pt:149
-#: src/osha/oira/client/templates/shell.pt:115
-#: src/osha/oira/client/templates/shell.pt:116
+#: src/osha/oira/client/templates/shell.pt:125
+#: src/osha/oira/client/templates/shell.pt:126
 #: src/osha/oira/client/templates/webhelpers.pt:111
 msgid "label_evaluation"
 msgstr "Оценяване"
@@ -1815,8 +1816,8 @@ msgstr "Оценяване"
 #: src/osha/oira/client/templates/report_actionplan.pt:288
 #: src/osha/oira/client/templates/report_identification.pt:103
 #: src/osha/oira/client/templates/risk_evaluation.pt:158
-#: src/osha/oira/client/templates/shell.pt:125
-#: src/osha/oira/client/templates/shell.pt:127
+#: src/osha/oira/client/templates/shell.pt:135
+#: src/osha/oira/client/templates/shell.pt:137
 #: src/osha/oira/client/templates/webhelpers.pt:113
 msgid "label_action_plan"
 msgstr "План за действие"
@@ -1836,8 +1837,8 @@ msgstr "План за действие"
 #: src/osha/oira/client/templates/report_actionplan.pt:294
 #: src/osha/oira/client/templates/report_identification.pt:109
 #: src/osha/oira/client/templates/risk_evaluation.pt:164
-#: src/osha/oira/client/templates/shell.pt:137
-#: src/osha/oira/client/templates/shell.pt:140
+#: src/osha/oira/client/templates/shell.pt:147
+#: src/osha/oira/client/templates/shell.pt:150
 msgid "label_report"
 msgstr "Доклад"
 
@@ -1878,7 +1879,7 @@ msgstr "Стартиране на определянето на риска"
 
 #. Default: Help
 #: src/osha/oira/client/templates/includes.pt:2
-#: src/osha/oira/client/templates/shell.pt:150
+#: src/osha/oira/client/templates/shell.pt:160
 #: src/osha/oira/client/templates/webhelpers.pt:33
 msgid "navigation_help"
 msgstr "Помощ"
@@ -2090,7 +2091,7 @@ msgstr ""
 
 #. Default: Login
 #: src/osha/oira/client/templates/login_form.pt:19
-#: src/osha/oira/client/templates/shell.pt:62
+#: src/osha/oira/client/templates/shell.pt:72
 #: src/osha/oira/nuplone/templates/error_unauthorized.pt:14
 msgid "header_login"
 msgstr "Вход"
@@ -2112,7 +2113,7 @@ msgstr ""
 
 #. Default: Email address
 #: src/osha/oira/client/templates/login_form.pt:37
-#: src/osha/oira/client/templates/register.pt:81
+#: src/osha/oira/client/templates/register.pt:91
 #: src/osha/oira/client/templates/reminder.pt:34
 msgid "label_email"
 msgstr "Имейл адрес"
@@ -2204,8 +2205,8 @@ msgstr "Средно приоритетен риск"
 #. Default: Next
 #: src/osha/oira/client/templates/module_actionplan.pt:50
 #: src/osha/oira/client/templates/module_evaluation.pt:40
-#: src/osha/oira/client/templates/module_identification.pt:50
-#: src/osha/oira/client/templates/register.pt:90
+#: src/osha/oira/client/templates/module_identification.pt:57
+#: src/osha/oira/client/templates/register.pt:100
 #: src/osha/oira/client/templates/reminder.pt:39
 #: src/osha/oira/client/templates/survey_sessions.pt:59
 msgid "label_next"
@@ -2373,13 +2374,13 @@ msgstr "Нова сесия"
 
 #. Default: Sign in
 #: src/osha/oira/client/templates/plain.pt:196
-#: src/osha/oira/client/templates/shell.pt:73
+#: src/osha/oira/client/templates/shell.pt:83
 msgid "link_sign_in"
 msgstr "Вход"
 
 #. Default: This is a test session. ${link_sign_in} to save your data.
 #: src/osha/oira/client/templates/plain.pt:196
-#: src/osha/oira/client/templates/shell.pt:73
+#: src/osha/oira/client/templates/shell.pt:83
 msgid "info_testsession"
 msgstr ""
 "Това е тестова сесия. Ползвайте връзката ${link_sign_in}, за да запазите "
@@ -2387,7 +2388,7 @@ msgstr ""
 
 #. Default: Info
 #: src/osha/oira/client/templates/plain.pt:196
-#: src/osha/oira/client/templates/shell.pt:73
+#: src/osha/oira/client/templates/shell.pt:83
 msgid "Info"
 msgstr "Информация"
 
@@ -2494,40 +2495,48 @@ msgid "label_register_benefit_3"
 msgstr "Можете да изтеглите пълен доклад и план за действие."
 
 #. Default: Example of a full report in rich text format (.rtf)
-#: src/osha/oira/client/templates/register.pt:33
+#: src/osha/oira/client/templates/register.pt:37
+#: src/osha/oira/client/templates/register.pt:38
 msgid "header_example_report_rft"
 msgstr "Примерен пълен доклад във формат rich text (.rtf)"
 
 #. Default: Example of an action plan in Office Open XML Workbook format
 #. (.xlsx)
-#: src/osha/oira/client/templates/register.pt:41
+#. Default: Example of an action plan in Office Open XML Workbook format
+#. (.xlsx)
+#: src/osha/oira/client/templates/register.pt:45
+#: src/osha/oira/client/templates/register.pt:46
 msgid "header_example_report_xlsx"
 msgstr "Примерен план за действие във формат Office Open XML Workbook (.xlsx)"
 
+#. Default: Example of a the risk overview report in PDF format
 #. Default: Example of a risk overview report in PDF format
-#: src/osha/oira/client/templates/register.pt:51
+#: src/osha/oira/client/templates/register.pt:60
+#: src/osha/oira/client/templates/register.pt:61
 msgid "header_example_report_risks"
 msgstr "Примерен доклад с преглед на рисковете във формат PDF"
 
+#. Default: Example of a the measures overview report in PDF format
 #. Default: Example of a measures overview report in PDF format
-#: src/osha/oira/client/templates/register.pt:59
+#: src/osha/oira/client/templates/register.pt:68
+#: src/osha/oira/client/templates/register.pt:69
 msgid "header_example_report_measures"
 msgstr "Примерен доклад с обзор на мерките във формат PDF"
 
 #. Default: Register
-#: src/osha/oira/client/templates/register.pt:66
-#: src/osha/oira/client/templates/register.pt:70
-#: src/osha/oira/client/templates/shell.pt:63
+#: src/osha/oira/client/templates/register.pt:76
+#: src/osha/oira/client/templates/register.pt:80
+#: src/osha/oira/client/templates/shell.pt:73
 msgid "header_register"
 msgstr "Регистрация"
 
 #. Default: Desired password
-#: src/osha/oira/client/templates/register.pt:85
+#: src/osha/oira/client/templates/register.pt:95
 msgid "label_new_password"
 msgstr "Желана парола"
 
 #. Default: Again password
-#: src/osha/oira/client/templates/register.pt:87
+#: src/osha/oira/client/templates/register.pt:97
 msgid "label_password_confirm"
 msgstr "Паролата отново"
 
@@ -3501,7 +3510,7 @@ msgid "heading_num_todo_prio_risks_5_or_more"
 msgstr "${num_todo_risks} риска са пропуснати"
 
 #: src/osha/oira/client/templates/sessions.pt:22
-#: src/osha/oira/client/templates/shell.pt:97
+#: src/osha/oira/client/templates/shell.pt:107
 msgid "Start a new session"
 msgstr "Старт на нова сесия"
 
@@ -3541,46 +3550,46 @@ msgstr "Преименуване"
 msgid "Delete this session"
 msgstr "Изтриване на тази сесия"
 
-#: src/osha/oira/client/templates/shell.pt:87
-#: src/osha/oira/client/templates/shell.pt:89
+#: src/osha/oira/client/templates/shell.pt:97
+#: src/osha/oira/client/templates/shell.pt:99
 msgid "Start test session"
 msgstr "Стартирайте тестова сесия"
 
 #. Default: Select an earlier session to complete or review
-#: src/osha/oira/client/templates/shell.pt:94
+#: src/osha/oira/client/templates/shell.pt:104
 #: src/osha/oira/client/templates/survey_sessions.pt:21
 msgid "header_select_session"
 msgstr "Изберете по-ранна сесия за довършване или за преглед"
 
 #. Default: New
-#: src/osha/oira/client/templates/shell.pt:97
+#: src/osha/oira/client/templates/shell.pt:107
 msgid "New"
 msgstr "Нова"
 
 #. Default: Check your progress
-#: src/osha/oira/client/templates/shell.pt:145
+#: src/osha/oira/client/templates/shell.pt:155
 #: src/osha/oira/client/templates/webhelpers.pt:34
 msgid "navigation_status"
 msgstr "Статус"
 
 #. Default: Online interactive
-#: src/osha/oira/client/templates/shell.pt:161
+#: src/osha/oira/client/templates/shell.pt:171
 #: src/osha/oira/client/templates/webhelpers.pt:23
 msgid "oira_name_line_1"
 msgstr "Онлайн интерактивна"
 
 #. Default: Risk Assessment
-#: src/osha/oira/client/templates/shell.pt:162
+#: src/osha/oira/client/templates/shell.pt:172
 #: src/osha/oira/client/templates/webhelpers.pt:24
 msgid "oira_name_line_2"
 msgstr "Оценка на риска"
 
-#: src/osha/oira/client/templates/start.pt:27
+#: src/osha/oira/client/templates/start.pt:29
 msgid "This OiRA tool was offered to you by ${external_site}"
 msgstr "Този инструмент OiRA Ви беше предложен от ${external_site}"
 
 #. Default: Start
-#: src/osha/oira/client/templates/start.pt:45
+#: src/osha/oira/client/templates/start.pt:46
 msgid "label_start_survey"
 msgstr "Стартиране"
 
@@ -3853,25 +3862,30 @@ msgstr "Прочетете повече ${read_more} за този риск."
 
 #. Default: Legal and policy references
 #: src/osha/oira/client/templates/webhelpers.pt:335
-#: src/osha/oira/client/templates/webhelpers.pt:364
+#: src/osha/oira/client/templates/webhelpers.pt:367
 msgid "header_legal_references"
 msgstr "Правни източници и източници от политики"
 
 #. Default: Additional resources to assess the risk
-#: src/osha/oira/client/templates/webhelpers.pt:342
+#: src/osha/oira/client/templates/webhelpers.pt:343
 msgid "header_additional_resources"
 msgstr "Допълнителни ресурси за оценка на риска"
+
+#. Default: Additional resources for this module
+#: src/osha/oira/client/templates/webhelpers.pt:344
+msgid "header_additional_resources_module"
+msgstr ""
 
 #: src/osha/oira/content/library.py:180
 msgid "Addded a copy of \"${title}\" to your OiRA tool."
 msgstr "Добавено е  копие от „файл“ \"${title}\" към вашия инструмент OiRA."
 
-#: src/osha/oira/content/module.py:20 src/osha/oira/content/module.py:33
-#: src/osha/oira/content/module.py:48
+#: src/osha/oira/content/module.py:47 src/osha/oira/content/module.py:65
+#: src/osha/oira/content/module.py:80
 msgid "Submodule"
 msgstr "Подмодул"
 
-#: src/osha/oira/content/module.py:38
+#: src/osha/oira/content/module.py:70
 msgid "Edit ${name}"
 msgstr "Редактиране на ${name}"
 
@@ -4011,66 +4025,66 @@ msgid "Edit Solution"
 msgstr "Редактиране на Мярка"
 
 #. Default: Year
-#: src/osha/oira/content/statistics.py:94
+#: src/osha/oira/content/statistics.py:95
 msgid "label_year"
 msgstr "Година"
 
 #. Default: Period
-#: src/osha/oira/content/statistics.py:99
+#: src/osha/oira/content/statistics.py:100
 msgid "label_period"
 msgstr "Период"
 
 #. Default: Report Type
-#: src/osha/oira/content/statistics.py:129
+#: src/osha/oira/content/statistics.py:130
 msgid "label_report_type"
 msgstr "Тип доклад"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:135
+#: src/osha/oira/content/statistics.py:136
 msgid "label_report_countries"
 msgstr "Държава"
 
 #. Default: Tool
-#: src/osha/oira/content/statistics.py:142
+#: src/osha/oira/content/statistics.py:143
 msgid "label_report_tools"
 msgstr "Инструмент"
 
 #. Default: Report Period
-#: src/osha/oira/content/statistics.py:149
+#: src/osha/oira/content/statistics.py:150
 msgid "label_report_period"
 msgstr "Период на доклада"
 
 #. Default: File Format
-#: src/osha/oira/content/statistics.py:154
+#: src/osha/oira/content/statistics.py:155
 msgid "label_report_file_format"
 msgstr "Файлов формат"
 
 #. Default: Statistics Reporting
-#: src/osha/oira/content/statistics.py:335
-#: src/osha/oira/content/statistics.py:369
-#: src/osha/oira/content/statistics.py:415
+#: src/osha/oira/content/statistics.py:348
+#: src/osha/oira/content/statistics.py:382
+#: src/osha/oira/content/statistics.py:428
 msgid "title_statistics"
 msgstr "Отчет на статистиката"
 
 #. Default: Country
-#: src/osha/oira/content/statistics.py:337
+#: src/osha/oira/content/statistics.py:350
 msgid "label_country"
 msgstr "Страна"
 
-#: src/osha/oira/content/statistics.py:342
-#: src/osha/oira/content/statistics.py:376
-#: src/osha/oira/content/statistics.py:421
+#: src/osha/oira/content/statistics.py:355
+#: src/osha/oira/content/statistics.py:389
+#: src/osha/oira/content/statistics.py:434
 msgid "Submit"
 msgstr "Изпращане"
 
 #. Default: Sector
-#: src/osha/oira/content/statistics.py:371
+#: src/osha/oira/content/statistics.py:384
 #: src/osha/oira/profiles/default/types/euphorie.sector.xml:7
 msgid "Sector"
 msgstr "Сектор"
 
 #. Default: Global
-#: src/osha/oira/content/statistics.py:417
+#: src/osha/oira/content/statistics.py:430
 msgid "label_global"
 msgstr "Глобален"
 
@@ -4166,7 +4180,7 @@ msgid "message_not_delete_published_surveygroup"
 msgstr "Не можете да изтриете OiRA инструмент, който е бил публикуван."
 
 #. Default: Password reset for ${site}
-#: src/osha/oira/content/user.py:73
+#: src/osha/oira/content/user.py:83
 msgid "password_reset_subject"
 msgstr "Сменена е паролата за ${site}"
 
@@ -4192,6 +4206,40 @@ msgstr "Добавяне на Подмодул"
 #: src/osha/oira/content/templates/addbar.pt:23
 msgid "button_add_factory"
 msgstr "Добавяне на ${typename}"
+
+#: src/osha/oira/content/templates/control-panel.pt:35
+#: src/osha/oira/content/templates/control-panel.pt:78
+msgid "Form name"
+msgstr ""
+
+#: src/osha/oira/content/templates/control-panel.pt:47
+msgid "label"
+msgstr ""
+
+#. Default: Required
+#: src/osha/oira/content/templates/control-panel.pt:51
+#: src/osha/oira/content/templates/control-panel.pt:103
+msgid "title_required"
+msgstr ""
+
+#. Default: *
+#. Default: (Required)
+#: src/osha/oira/content/templates/control-panel.pt:51
+#: src/osha/oira/content/templates/control-panel.pt:103
+msgid "label_required"
+msgstr ""
+
+#: src/osha/oira/content/templates/control-panel.pt:62
+msgid "<dynamic element> <dynamic element>"
+msgstr ""
+
+#: src/osha/oira/content/templates/control-panel.pt:100
+msgid "Label"
+msgstr ""
+
+#: src/osha/oira/content/templates/control-panel.pt:111
+msgid "field description"
+msgstr ""
 
 #. Default: Documentation
 #: src/osha/oira/content/templates/documentation_view.pt:12

@@ -1,11 +1,11 @@
 Changelog
 =========
 
-3.0.13 (unreleased)
+3.0.13 (2016-05-30)
 -------------------
 
-- Nothing changed yet.
-
+- Allow files to be added to modules in the backend #13455
+- Separate statistics report for guest users #12932
 
 3.0.12 (2016-04-07)
 -------------------

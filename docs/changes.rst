@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.13 (unreleased)
+3.0.13 (2016-05-30)
 -------------------
 
 - Allow files to be added to modules in the backend #13455

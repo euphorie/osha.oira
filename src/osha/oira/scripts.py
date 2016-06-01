@@ -5,9 +5,7 @@ from datetime import datetime
 from datetime import timedelta
 from euphorie.client.utils import CreateEmailTo
 from euphorie.content.countrymanager import ICountryManager
-from euphorie.content.sector import ISector
 from five import grok
-from plone import api
 from plone.dexterity.utils import safe_unicode
 from slc.zopescript.script import ConsoleScript
 from zope.component import getMultiAdapter
@@ -119,7 +117,6 @@ class OutdatedToolsView(grok.View):
             tool_paths=outdated_tool_paths,
         )
 
-
     def send_notification(self, to_name=None, to_address=None, tool_paths=None):
         if not tool_paths:
             return
@@ -143,7 +140,7 @@ class OutdatedToolsView(grok.View):
             else:
                 tool_details += '\n'
             tool_urls = [
-                i.replace('/'+portal_id, portal_url)
+                i.replace('/' + portal_id, portal_url)
                 for i in paths_by_country[country]
             ]
             tool_details += '\n'.join(tool_urls)
@@ -167,4 +164,3 @@ OiRA
             mailhost.send(mail)
         except Exception, err:
             log.error('Failed to send notification {}'.format(err))
-

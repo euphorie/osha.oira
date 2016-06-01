@@ -60,5 +60,8 @@ setup(name='osha.oira',
       entry_points="""
       [z3c.autoinclude.plugin]
       target = plone
+
+      [console_scripts]
+      outdated_tools = osha.oira.scripts:outdated_tools
       """,
       )

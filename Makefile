@@ -42,6 +42,33 @@ $(EUPHORIE_PO_FILES): $(EUPHORIE_POT)
 .po.mo:
 	msgfmt -c --statistics -o $@~ $< && mv $@~ $@
 
+
+########################################################################
+## Setup
+## You don't run these rules unless you're a prototype dev
+
+clean-proto:
+	cd prototype && make clean
+
+prototype: ## Get the latest version of the prototype
+	@if [ ! -d "prototype" ]; then \
+		git clone git@github.com:euphorie/oira.prototype.git prototype; \
+	else \
+		cd prototype && git pull; \
+	fi;
+
+jekyll: prototype
+	@echo 'DO: rm prototype/stamp-bundler to force Jekyll re-install'
+	@cd prototype && make jekyll
+
+bundle: prototype
+	cd prototype && make bundle
+
+resources-install: bundle jekyll
+	cp prototype/_site/bundles/oira.js src/osha/oira/browser/resources
+	cp -R prototype/_site/style/* src/osha/oira/browser/resources
+
+
 .PHONY: all clean check jenkins pot buildout
 .SUFFIXES:
 .SUFFIXES: .po .mo

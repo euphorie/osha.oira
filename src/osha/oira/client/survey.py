@@ -41,16 +41,16 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
     })
 
 
-class ConfirmationDeleteSurveySession(ConfirmationDeleteSession):
-    grok.context(ISurvey)
+# class ConfirmationDeleteSurveySession(ConfirmationDeleteSession):
+#     grok.context(ISurvey)
 
 
-class DeleteSurveySession(DeleteSession):
-    grok.context(ISurvey)
+# class DeleteSurveySession(DeleteSession):
+#     grok.context(ISurvey)
 
 
-class RenameSurveySession(RenameSession):
-    grok.context(ISurvey)
+# class RenameSurveySession(RenameSession):
+#     grok.context(ISurvey)
 
 
 class OSHAIdentification(survey.Identification):

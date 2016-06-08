@@ -1,20 +1,10 @@
-from .interfaces import IOSHAClientSkinLayer
-from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
+# coding=utf-8
 from euphorie.client import model
-from euphorie.client.sector import IClientSector
-from euphorie.client.utils import WebHelpers
-from euphorie.content.survey import ISurvey
 from five import grok
-from mobile.sniffer.detect import detect_mobile_browser
-from mobile.sniffer.utilities import get_user_agent
-from osha.oira import _
 from osha.oira.client import model as oiramodel
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.i18nmessageid import MessageFactory
-from zope.i18n import translate
-from plone import api
 import htmllib
 
 
@@ -173,60 +163,3 @@ def get_risk_not_present_nodes(session):
                 )))\
         .order_by(model.SurveyTreeItem.path)
     return query.all()
-
-
-class OSHAWebHelpers(WebHelpers):
-    """ Override Euphorie's webhelpers to add some more utility methods.
-    """
-    grok.layer(IOSHAClientSkinLayer)
-    grok.template('webhelpers')
-    grok.name('webhelpers')
-
-    def get_sectors_dict(self):
-        """ Returns a dictionary with keys being countries (and int. orgs) that
-            have sectors inside them and the values being the available survey
-            langauges.
-
-            We use ZCatalog directly to bypass permission checks, otherwise we
-            get zero surveys returned for anon users.
-
-            See #2556.
-        """
-        context = aq_inner(self.context)
-        sectorsfolder = getattr(context, 'sectors')
-        if not sectorsfolder:
-            return []
-
-        client = getattr(context, 'client')
-        if not client:
-            return []
-
-        resp = {}
-        ltool = getToolByName(self.context, 'portal_languages')
-        # Only the countries in the client obj should be considered, as the
-        # others are not accessible
-        for country in client.values():
-            ldict = {}
-            for sector in country.values():
-                if not IClientSector.providedBy(sector):
-                    continue
-                for survey in sector.objectValues():
-                    lang = survey.language
-                    if not lang:
-                        continue
-
-                    if not ISurvey.providedBy(survey):
-                        continue
-                    if getattr(survey, "preview", False):
-                        continue
-                    supported_langs = ltool.getSupportedLanguages()
-                    if lang not in supported_langs:
-                        base_lang = lang.split('-')[0].strip()
-                        if base_lang in supported_langs:
-                            ldict[base_lang] = 'dummy'
-                        continue
-                    ldict[lang] = 'dummy'
-
-            if ldict:
-                resp[country.id] = ldict.keys()
-        return resp

@@ -1,12 +1,13 @@
 # coding=utf-8
 from euphorie.client import model
+from euphorie.client.utils import DefaultIntroduction
 from five import grok
 from osha.oira.client import model as oiramodel
+from osha.oira.client.interfaces import IOSHAClientSkinLayer
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.i18nmessageid import MessageFactory
 import htmllib
-
 
 pl_message = MessageFactory('plonelocales')
 grok.templatedir('templates')
@@ -163,3 +164,12 @@ def get_risk_not_present_nodes(session):
                 )))\
         .order_by(model.SurveyTreeItem.path)
     return query.all()
+
+
+class OSHADefaultIntroduction(DefaultIntroduction):
+    """
+        Browser view that displays the default introduction text for a Suvey.
+        It is used when the Survey does not define its own introduction
+    """
+    grok.layer(IOSHAClientSkinLayer)
+    grok.template('default_introduction')

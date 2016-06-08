@@ -1,3 +1,4 @@
+# coding=utf-8
 from five import grok
 from euphorie.client import profile
 from euphorie.content.profilequestion import IProfileQuestion

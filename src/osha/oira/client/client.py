@@ -1,3 +1,4 @@
+# coding=utf-8
 from five import grok
 from zope.component import adapts
 from zope.interface import directlyProvidedBy

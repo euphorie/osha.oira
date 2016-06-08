@@ -1,3 +1,4 @@
+# coding=utf-8
 from euphorie.client.settings import AccountSettings
 from euphorie.client.settings import DeleteAccount
 from euphorie.client.settings import NewEmail

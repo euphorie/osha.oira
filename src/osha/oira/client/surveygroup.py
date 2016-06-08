@@ -1,7 +1,9 @@
+# coding=utf-8
 from euphorie.content import surveygroup
 from five import grok
 from plone.directives.form import SchemaEditForm
 from z3c import form
+
 
 class Edit(SchemaEditForm):
     grok.context(surveygroup.ISurveyGroup)

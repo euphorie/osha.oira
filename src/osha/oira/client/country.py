@@ -1,3 +1,4 @@
+# coding=utf-8
 import urllib
 from zope import schema
 from zope.interface import directlyProvides

@@ -1,3 +1,4 @@
+# coding=utf-8
 from sqlalchemy import schema
 from sqlalchemy import sql
 from sqlalchemy import types

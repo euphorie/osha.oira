@@ -1,3 +1,4 @@
+# coding=utf-8
 from Acquisition import aq_inner
 from AccessControl import getSecurityManager
 from cStringIO import StringIO

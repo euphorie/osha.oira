@@ -1,3 +1,4 @@
+# coding=utf-8
 from StringIO import StringIO
 from euphorie.ghost import PathGhost
 from five import grok

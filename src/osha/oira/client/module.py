@@ -1,3 +1,4 @@
+# coding=utf-8
 from Acquisition import aq_inner
 from Products.statusmessages.interfaces import IStatusMessage
 from euphorie.client import model

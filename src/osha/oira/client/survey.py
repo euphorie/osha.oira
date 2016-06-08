@@ -41,26 +41,6 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
     })
 
 
-class OSHAView(survey.View):
-    """ Override the "select existing session or start a new one" view
-    """
-    grok.require("euphorie.client.ViewSurvey")
-    grok.layer(interfaces.IOSHAClientSkinLayer)
-    grok.template("survey_sessions")
-    grok.name("index_html")
-
-
-class OSHAStart(survey.Start):
-    """ Override the 'start' page to provide our own template.
-
-        In the Jekyll prototype this is called preparation.html
-    """
-    grok.require("euphorie.client.ViewSurvey")
-    grok.layer(interfaces.IOSHAClientSkinLayer)
-    grok.template("start")
-    grok.name("start")
-
-
 class ConfirmationDeleteSurveySession(ConfirmationDeleteSession):
     grok.context(ISurvey)
 

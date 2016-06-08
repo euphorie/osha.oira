@@ -1,5 +1,4 @@
 # coding=utf-8
-from five import grok
 from zope.component import adapts
 from zope.interface import directlyProvidedBy
 from zope.interface import directlyProvides
@@ -9,14 +8,6 @@ from euphorie.client.client import IClient
 from euphorie.client.api.entry import access_api
 from ..interfaces import IProductLayer
 from .interfaces import IOSHAClientSkinLayer
-
-grok.templatedir("templates")
-
-
-class View(grok.View):
-    grok.context(IClient)
-    grok.layer(IOSHAClientSkinLayer)
-    grok.template("frontpage")
 
 
 class ClientPublishTraverser(DefaultPublishTraverse):

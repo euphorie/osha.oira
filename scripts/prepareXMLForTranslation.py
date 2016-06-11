@@ -1,4 +1,5 @@
 #!/usr/bin/env zopepy
+# -*- coding: <utf-8> -*-
 
 # Author: Wolfgang Thomas <thomas@syslab.com>
 
@@ -28,6 +29,11 @@ import sys
 
 from bs4 import BeautifulSoup
 
+
+textual_tags = ['description', 'solution-direction']
+functional_tags = [
+    'evaluation-method', 'evaluation-algorithm', 'language',
+    'show-not-applicable', 'classification-code', 'evaluation-optional']
 
 def usage(stream, msg=None):
     if msg:
@@ -94,33 +100,35 @@ fh.close()
 soup = BeautifulSoup(data, 'xml')
 
 
-# Special requirement: Strip all legal references
+# Important: fetch all the various tag entities before any action like
+# extraction is performed. Otherwise on large documents, we might run into
+# MemoryErrors, or the subsequent call to find_all will NOT find all instances
+# of a tag.
 legalrefs = soup.find_all('legal-reference')
-print "We have %d legal references" % len(legalrefs)
+images = soup.find_all('image')
+textual = soup.find_all(textual_tags)
+functional = soup.find_all(functional_tags)
+print "we have %d textual elements and %d functional" % (len(textual), len(functional))
+
+# Special requirement: Strip all legal references
 extracted = [legalref.extract() for legalref in legalrefs]
 if len(extracted):
-    # For some weird reason, images are not found any more after this step
-    # => Make a fresh soup
-    soup = BeautifulSoup(unicode(soup), 'xml')
+    print "We have stripped %d legal references" % len(extracted)
 
 # Special requirement: Strip section EN SAVOIR PLUS
 patt = re.compile(u'<(p|strong|li)>\s*EN SAVOIR PLUS\s*:*\?*\s*<.*')
-tags = ['description', 'solution-direction']
-for tag in tags:
-    entities = soup.find_all(tag)
-    [setString(entity, patt.sub(u"", entity.text)) for entity in entities]
-
+for entity in textual:
+    setString(entity, patt.sub(u"", entity.text))
 
 fh = open(input_stripped, 'w')
-fh.write(soup.encode('utf-8'))
+txt = soup.encode('utf-8')
+fh.write(txt)
 fh.close()
 
 
-images = soup.find_all('image')
-print "We have %d images" % len(images)
 extracted = [img.extract() for img in images]
-if len(extracted):
-    soup = BeautifulSoup(unicode(soup), 'xml')
+print "We have stripped %d images" % len(extracted)
+
 
 fh = open(output, 'w')
 fh.write(soup.encode('utf-8'))
@@ -129,14 +137,10 @@ fh.close()
 # Some tags of the survey contain only functional information, such
 # as true/false or calculated/evaluated
 # Strip them for the word counting
-functional_tags = (
-    'evaluation-method', 'evaluation-algorithm', 'language',
-    'show-not-applicable', 'classification-code', 'evaluation-optional')
-for tag in functional_tags:
-    entities = soup.find_all(tag)
-    extracted = [entity.extract() for entity in entities]
-    if len(extracted):
-        soup = BeautifulSoup(unicode(soup), 'xml')
+extracted = [entity.extract() for entity in functional]
+if extracted:
+    print "We have stripped %d functional elements" % len(extracted)
+
 
 # formatter=None means HTML entities are rendered as HTML tags
 text = soup.prettify(formatter=None)
@@ -148,7 +152,7 @@ text = TAG.sub(u" ", text)
 # condense whitespaces
 WHITESPACE = re.compile(u"\s+")
 text = WHITESPACE.sub(u" ", text)
-INTERPUNCTUATION = re.compile(u"\s+[.|,|;|:]\s+")
+INTERPUNCTUATION = re.compile(u"\s+(.|,|;|:|-|«|»)\s+")
 text = INTERPUNCTUATION.sub(u" ", text)
 # wrap text into lines of max 80 characters
 text = u"\n".join(wrap_str(text, 80))

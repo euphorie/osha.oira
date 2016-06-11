@@ -43,13 +43,14 @@ setup(name='osha.oira',
           # required interface.
           'collective.js.jqueryui',
           'htmllaundry',
-          'oira.private', # Private egg with nonfree redactor JS/CSS
+          'oira.private',  # Private egg with nonfree redactor JS/CSS
           'plone.autoform',
           'plone.tiles',
           'setuptools',
           'zope.publisher',
           'mobile.sniffer',
           'plone.api',
+          'beautifulsoup4',
       ],
       tests_require=tests_require,
       extras_require={

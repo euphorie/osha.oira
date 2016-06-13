@@ -1,3 +1,4 @@
+# -*- coding: <utf-8> -*-
 from five import grok
 from zope.component import getUtility
 from plone.directives import dexterity
@@ -73,6 +74,8 @@ class Edit(module.Edit):
 class Add(dexterity.AddForm):
     grok.name('euphorie.module')
     grok.context(IModule)
+
+    schema = IOSHAModule
 
     @property
     def label(self):

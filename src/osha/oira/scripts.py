@@ -31,6 +31,9 @@ class OutdatedToolsView(grok.View):
     grok.name("outdated-tools-view")
 
     def __call__(self):
+        sprops = self.context.portal_properties.site_properties
+        self.interval = sprops.getProperty(
+            'outdated_notications_interval_days', 365)
         self.render(self.context)
 
     def render(self, portal):
@@ -44,9 +47,7 @@ class OutdatedToolsView(grok.View):
         pc = self.context.portal_catalog
         client_path = '/'.join(self.context.getPhysicalPath() + ('client',))
         now = datetime.now()
-        sprops = self.context.portal_properties.site_properties
-        interval = sprops.getProperty('outdated_notications_interval_days', 365)
-        one_year_ago = now - timedelta(days=interval)
+        one_year_ago = now - timedelta(days=self.interval)
         outdated_tools = pc.searchResults(
             portal_type='euphorie.survey',
             modified={'query': one_year_ago, 'range': 'max'},
@@ -145,14 +146,20 @@ class OutdatedToolsView(grok.View):
             ]
             tool_details += '\n'.join(tool_urls)
             tool_details += '\n'
+        years = self.interval / 365
+        if years:
+            period = "over {0} year(s)".format(years)
+        else:
+            period = "over {0} month(s)".format(self.interval / 30)
+
         body = u'''
 Dear {name},
 
-The following tool(s) have not been updated in over a year:
+The following tool(s) have not been updated in {period}:
 {tools}
 Best regards,
 OiRA
-'''.format(name=to_name, tools=tool_details)
+'''.format(name=to_name, tools=tool_details, period=period)
         mail = CreateEmailTo(
             self.context.email_from_name,
             self.context.email_from_address,

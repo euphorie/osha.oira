@@ -80,10 +80,14 @@ class OutdatedToolsView(grok.View):
                 continue
             sector_tools = filter(
                 lambda x: x.startswith(sector_path), outdated_tool_paths)
+            intro = u"""
+You are receiving this notification since you are the sector manager for
+{0}""".format(sector.Title())
             self.send_notification(
                 to_name=contact_name,
                 to_address=contact_email,
                 tool_paths=sector_tools,
+                intro=intro,
             )
 
     def send_country_manager_notifications(self, outdated_tool_paths):
@@ -102,10 +106,15 @@ class OutdatedToolsView(grok.View):
                 contact_email = manager.contact_email
                 if not contact_email:
                     continue
+                intro = u"""
+You are receiving this notification since you are the country manager for
+{0}""".format(country.Title())
+
                 self.send_notification(
                     to_name=contact_name,
                     to_address=contact_email,
                     tool_paths=country_tools,
+                    intro=intro,
                 )
 
     def send_oira_team_notifications(self, outdated_tool_paths):
@@ -114,19 +123,23 @@ class OutdatedToolsView(grok.View):
             'outdated_notications_oira_team_name', 'OiRA Team')
         to_email = sprops.getProperty(
             'outdated_notications_oira_team_email', 'test@example.com')
+        intro = u"This is the summary email of all outdated tools"
         self.send_notification(
             to_name=to_name,
             to_address=to_email,
             tool_paths=outdated_tool_paths,
+            intro=intro,
         )
 
-    def send_notification(self, to_name=None, to_address=None, tool_paths=None):
+    def send_notification(
+        self, to_name=None, to_address=None, tool_paths=None, intro=""
+    ):
         if not tool_paths:
             return
         to_name = safe_unicode(to_name)
         mailhost = getToolByName(self.context, "MailHost")
         recipient = u'{} <{}>'.format(to_name, to_address)
-        subject = u'Outdated tools'
+        subject = u'OiRA: Notification on outdated tools'
         portal_id = self.context.getId()
         portal_url = self.context.absolute_url()
         paths_by_country = OrderedDict()
@@ -157,11 +170,16 @@ class OutdatedToolsView(grok.View):
         body = u'''
 Dear {name},
 
+{intro}
+
 The following tool(s) have not been updated in {period}:
 {tools}
+
+Please check if they are still up to date and republish them.
+
 Best regards,
 OiRA
-'''.format(name=to_name, tools=tool_details, period=period)
+'''.format(name=to_name, tools=tool_details, period=period, intro=intro)
         mail = CreateEmailTo(
             self.context.email_from_name,
             self.context.email_from_address,

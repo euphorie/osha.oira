@@ -82,7 +82,7 @@ class OutdatedToolsView(grok.View):
                 lambda x: x.startswith(sector_path), outdated_tool_paths)
             intro = u"""
 You are receiving this notification since you are the sector manager for
-{0}""".format(sector.Title())
+{0}""".format(safe_unicode(sector.Title()))
             self.send_notification(
                 to_name=contact_name,
                 to_address=contact_email,
@@ -108,7 +108,7 @@ You are receiving this notification since you are the sector manager for
                     continue
                 intro = u"""
 You are receiving this notification since you are the country manager for
-{0}""".format(country.Title())
+{0}""".format(safe_unicode(country.Title()))
 
                 self.send_notification(
                     to_name=contact_name,

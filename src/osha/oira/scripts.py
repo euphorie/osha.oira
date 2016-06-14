@@ -58,6 +58,8 @@ class OutdatedToolsView(grok.View):
         sector_tool_paths = []
         for tool in outdated_tools:
             sector_tool_path = tool.getPath().replace('/client/', '/sectors/')
+            if sector_tool_path.split('/')[-1] == 'preview':
+                continue
             sector_tool_paths.append(sector_tool_path)
         return sector_tool_paths
 

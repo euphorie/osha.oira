@@ -41,39 +41,6 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
     })
 
 
-# class ConfirmationDeleteSurveySession(ConfirmationDeleteSession):
-#     grok.context(ISurvey)
-
-
-# class DeleteSurveySession(DeleteSession):
-#     grok.context(ISurvey)
-
-
-# class RenameSurveySession(RenameSession):
-#     grok.context(ISurvey)
-
-
-class OSHAIdentification(survey.Identification):
-    """ Override the 'identification' page to provide our own template.
-    """
-    grok.layer(interfaces.IOSHAIdentificationPhaseSkinLayer)
-    grok.template("identification")
-    grok.name("index_html")
-
-    def update(self):
-        if redirectOnSurveyUpdate(self.request):
-            return
-
-        self.survey = survey = aq_parent(aq_inner(self.context))
-        question = FindFirstQuestion(filter=self.question_filter)
-        if question is not None:
-            self.next_url = QuestionURL(
-                survey, question, phase="identification")
-            self.tree = getTreeData(self.request, question)
-        else:
-            self.next_url = None
-
-
 class OSHAReportView(report.ReportView):
     """ Override the default view, to add a popup overlay
         asking the user if they want to participate in a survey. #2558
@@ -110,42 +77,6 @@ class OSHAReportView(report.ReportView):
             return sdict['en']
         else:
             return 'http://www.surveymonkey.com/s/OiRATool'
-
-
-class OSHAActionPlan(survey.ActionPlan):
-    """
-    Overrides the original ActionPlanReport in euphorie.client.survey.py
-    to provide our own template.
-
-    Please refer to original for more details.
-    """
-    grok.layer(interfaces.IOSHAActionPlanPhaseSkinLayer)
-    grok.template("actionplan")
-
-    def update(self):
-        if redirectOnSurveyUpdate(self.request):
-            return
-
-        self.survey = survey = aq_parent(aq_inner(self.context))
-        question = FindFirstQuestion(filter=self.question_filter)
-        if question is not None:
-            self.next_url = QuestionURL(survey, question, phase="actionplan")
-            self.tree = getTreeData(
-                self.request, question,
-                filter=self.question_filter, phase="actionplan")
-        else:
-            self.next_url = None
-
-
-class Evaluation(survey.Evaluation):
-    """
-    Override the evaluation template. Reason: we never want to show help_skip_evaluation,
-    even if evaluation_optional should be True.
-    OSHA tickets: #8963, #6175
-    """
-    grok.layer(interfaces.IOSHAEvaluationPhaseSkinLayer)
-    grok.template('evaluation')
-
 
 class OSHAStatus(survey.Status):
     """ Override the 'status' page to provide our own template.

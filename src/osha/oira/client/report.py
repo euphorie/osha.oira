@@ -19,7 +19,6 @@ from osha.oira import _
 from osha.oira.client import utils
 from osha.oira.client.interfaces import IOSHAIdentificationPhaseSkinLayer
 from osha.oira.client.interfaces import IOSHAReportPhaseSkinLayer
-from osha.oira.client.survey import OSHAStatus
 from plonetheme.nuplone.utils import formatDate
 from rtfng.Elements import PAGE_NUMBER
 from rtfng.PropertySets import BorderPropertySet
@@ -854,7 +853,7 @@ def createSection(document, survey, request):
     return section
 
 
-class RisksOverview(OSHAStatus):
+class RisksOverview(survey.Status):
     """ Implements the "Overview of Risks" report, see #10967
     """
     grok.context(PathGhost)
@@ -867,7 +866,7 @@ class RisksOverview(OSHAStatus):
             return True
 
 
-class MeasuresOverview(OSHAStatus):
+class MeasuresOverview(survey.Status):
     """ Implements the "Overview of Measures" report, see #10967
     """
     grok.context(PathGhost)

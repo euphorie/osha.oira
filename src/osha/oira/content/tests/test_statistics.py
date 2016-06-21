@@ -77,6 +77,7 @@ class TestStatistics(unittest.TestCase):
             'year=%d' % year,
             'month=%d' % month,
             'quarter=%d' % quarter,
+            'testsessions=0',
             '__format=%s' % format
         ])
         self.assertEqual(url, test_url)

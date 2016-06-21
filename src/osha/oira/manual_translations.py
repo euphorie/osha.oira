@@ -54,8 +54,8 @@ _("title_import_sector_survey", default=u"Import sector and OiRA Tool")
 _("intro_add_survey", default=u"The form will allow you to create a new OiRA "
     u"Tool revision.")
 _("label_solution_direction", default=u"Solution")
-_("Succesfully published the survey", default=u"Succesfully published the "
-    u"OiRA Tool")
+_("message_publish_success", default=u"Succesfully published the "
+    u"OiRA Tool. It can be accessed at ${url}.")
 _("Succesfully created a preview for the survey. It can be accessed at "
     u"${url} .", default=u"Succesfully created a preview for the OiRA Tool. "
     u"It can be accessed at ${url}.")

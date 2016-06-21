@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.6.dev0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2016-05-30 13:40+0200\n"
+"POT-Creation-Date: 2016-06-21 17:02+0200\n"
 "PO-Revision-Date: 2013-08-15 11:42+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -217,10 +217,10 @@ msgstr "Šī veidlapa jums ļaus izveidot jaunu OiRA rīka versiju."
 msgid "label_solution_direction"
 msgstr "Risinājums"
 
-#. Default: Succesfully published the OiRA Tool
+#. Default: Succesfully published the OiRA Tool. It can be accessed at ${url}.
 #: src/osha/oira/manual_translations.py:57
-msgid "Succesfully published the survey"
-msgstr "OiRA rīks ir veiksmīgi publicēts"
+msgid "message_publish_success"
+msgstr "OiRA rīks ir veiksmīgi publicēts. Tam var piekļūt šajā vietnē: ${url}."
 
 #. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url}.
@@ -3815,12 +3815,12 @@ msgstr "Papildu resursi šim modulim"
 msgid "Addded a copy of \"${title}\" to your OiRA tool."
 msgstr "Pievienoja \"${title}\" kopiju jūsu OiRA rīkam."
 
-#: src/osha/oira/content/module.py:47 src/osha/oira/content/module.py:65
-#: src/osha/oira/content/module.py:80
+#: src/osha/oira/content/module.py:48 src/osha/oira/content/module.py:66
+#: src/osha/oira/content/module.py:83
 msgid "Submodule"
 msgstr "Apakšmodulis"
 
-#: src/osha/oira/content/module.py:70
+#: src/osha/oira/content/module.py:71
 msgid "Edit ${name}"
 msgstr "Rediģēt ${name}"
 
@@ -4772,6 +4772,9 @@ msgstr ""
 "ļoti iesakās vispirms novērtēt visus piedāvātos riskus (ja vien Jūs to jau "
 "neesat izdarījis (usi)).</p><p>Ja Jums nav nepieciešams pieviento papildus "
 "riskus, atzīmējiet atbildi “Nē”."
+
+#~ msgid "Succesfully published the survey"
+#~ msgstr "OiRA rīks ir veiksmīgi publicēts"
 
 #~ msgid "label_close_panel"
 #~ msgstr "Aizvērt paneli"

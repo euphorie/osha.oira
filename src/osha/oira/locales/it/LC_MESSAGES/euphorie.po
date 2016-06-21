@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2016-05-30 13:40+0200\n"
+"POT-Creation-Date: 2016-06-21 17:02+0200\n"
 "PO-Revision-Date: 2013-11-26 11:57+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -223,10 +223,10 @@ msgstr "Il modulo permette di creare una nuova revisione del tool OiRA."
 msgid "label_solution_direction"
 msgstr "Soluzione"
 
-#. Default: Succesfully published the OiRA Tool
+#. Default: Succesfully published the OiRA Tool. It can be accessed at ${url}.
 #: src/osha/oira/manual_translations.py:57
-msgid "Succesfully published the survey"
-msgstr "Tool OiRA pubblicato con successo"
+msgid "message_publish_success"
+msgstr "Tool OiRA pubblicato con successo. È possibile accedere a ${url}."
 
 #. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url}.
@@ -3882,12 +3882,12 @@ msgstr "Risorce aggiuntive per questo modulo"
 msgid "Addded a copy of \"${title}\" to your OiRA tool."
 msgstr "Aggiunta copia di \"${title}\" allo strumento OiRA."
 
-#: src/osha/oira/content/module.py:47 src/osha/oira/content/module.py:65
-#: src/osha/oira/content/module.py:80
+#: src/osha/oira/content/module.py:48 src/osha/oira/content/module.py:66
+#: src/osha/oira/content/module.py:83
 msgid "Submodule"
 msgstr "Sotto-modulo"
 
-#: src/osha/oira/content/module.py:70
+#: src/osha/oira/content/module.py:71
 msgid "Edit ${name}"
 msgstr "Modificare ${name}"
 
@@ -4854,6 +4854,9 @@ msgstr ""
 "evitare la duplicazione dei rischi, raccomandiamo di ripassare in esame "
 "tutti i moduli precedenti, qualora tale operazione non sia ancora stata "
 "compiuta.</p>"
+
+#~ msgid "Succesfully published the survey"
+#~ msgstr "Tool OiRA pubblicato con successo"
 
 #~ msgid "label_close_panel"
 #~ msgstr "Chiudi pannello"

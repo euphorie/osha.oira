@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2016-05-30 13:40+0200\n"
+"POT-Creation-Date: 2016-06-21 17:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -228,17 +228,17 @@ msgstr ""
 msgid "label_solution_direction"
 msgstr "Lösung"
 
-#. Default: Succesfully published the OiRA Tool
+#. Default: Succesfully published the OiRA Tool. It can be accessed at ${url}.
 #: src/osha/oira/manual_translations.py:57
-msgid "Succesfully published the survey"
-msgstr "OiRA-Tool erfolgreich veröffentlicht."
+msgid "message_publish_success"
+msgstr "OiRA-Tool erfolgreich veröffentlicht. Es kann hier ${url} betrachtet werden."
 
 #. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url}.
 #: src/osha/oira/manual_translations.py:59
 msgid ""
 "Succesfully created a preview for the survey. It can be accessed at ${url} ."
-msgstr ""
+msgstr "Vorschau für das OiRA-Tool erfolgreich veröffentlicht. Sie kann hier ${url} betrachtet werden."
 
 #. Default: Publish the selected OiRA Tool live with its latest changes.
 #: src/osha/oira/manual_translations.py:62
@@ -3775,12 +3775,12 @@ msgstr ""
 msgid "Addded a copy of \"${title}\" to your OiRA tool."
 msgstr ""
 
-#: src/osha/oira/content/module.py:47 src/osha/oira/content/module.py:65
-#: src/osha/oira/content/module.py:80
+#: src/osha/oira/content/module.py:48 src/osha/oira/content/module.py:66
+#: src/osha/oira/content/module.py:83
 msgid "Submodule"
 msgstr "Untermodul"
 
-#: src/osha/oira/content/module.py:70
+#: src/osha/oira/content/module.py:71
 msgid "Edit ${name}"
 msgstr "${name} bearbeiten"
 
@@ -4716,6 +4716,9 @@ msgstr ""
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
 msgstr ""
+
+#~ msgid "Succesfully published the survey"
+#~ msgstr "OiRA-Tool erfolgreich veröffentlicht."
 
 #~ msgid "label_day"
 #~ msgstr "Seiteninhalt"

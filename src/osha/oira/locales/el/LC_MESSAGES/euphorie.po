@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2016-05-30 13:40+0200\n"
+"POT-Creation-Date: 2016-06-21 17:02+0200\n"
 "PO-Revision-Date: 2013-08-15 11:22+0200\n"
 "Last-Translator: xl <xl@hol.gr>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -224,10 +224,10 @@ msgstr ""
 msgid "label_solution_direction"
 msgstr "Λύση"
 
-#. Default: Succesfully published the OiRA Tool
+#. Default: Succesfully published the OiRA Tool. It can be accessed at ${url}.
 #: src/osha/oira/manual_translations.py:57
-msgid "Succesfully published the survey"
-msgstr "Επιτυχής δημοσίευση του εργαλείου OiRA"
+msgid "message_publish_success"
+msgstr "Επιτυχής δημοσίευση του εργαλείου OiRA. Μπορεί να γίνει πρόσβαση στο ${url}."
 
 #. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url}.
@@ -3980,12 +3980,12 @@ msgstr "Πρόσθετη πληροφόρηση γι’ αυτή τη θεματ
 msgid "Addded a copy of \"${title}\" to your OiRA tool."
 msgstr "Αντίγραφο του \"${title}\" προστέθηκε στο εργαλείο OiRA."
 
-#: src/osha/oira/content/module.py:47 src/osha/oira/content/module.py:65
-#: src/osha/oira/content/module.py:80
+#: src/osha/oira/content/module.py:48 src/osha/oira/content/module.py:66
+#: src/osha/oira/content/module.py:83
 msgid "Submodule"
 msgstr "Επιμέρους ενότητα"
 
-#: src/osha/oira/content/module.py:70
+#: src/osha/oira/content/module.py:71
 msgid "Edit ${name}"
 msgstr "Επεξεργασία ${name} "
 
@@ -4957,6 +4957,9 @@ msgstr ""
 "πρώτα σε όλες τις ενότητες κινδύνων (modules) αυτού του εργαλείου ώστε να "
 "αποφευχθεί η εισαγωγή κινδύνων που υπάρχουν ήδη.</p><p>Αν τελικά δεν "
 "χρειάζεται να εισάγετε πρόσθετους κινδύνους στο εργαλείο, επιλέξτε 'Όχι'.</p>"
+
+#~ msgid "Succesfully published the survey"
+#~ msgstr "Επιτυχής δημοσίευση του εργαλείου OiRA"
 
 #~ msgid "label_close_panel"
 #~ msgstr "Κλείσιμο του πάνελ"

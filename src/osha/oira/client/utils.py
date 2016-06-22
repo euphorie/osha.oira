@@ -1,6 +1,7 @@
 # coding=utf-8
 from euphorie.client import model
 from euphorie.client.utils import DefaultIntroduction
+from euphorie.client.utils import WebHelpers
 from five import grok
 from osha.oira.client import model as oiramodel
 from osha.oira.client.interfaces import IOSHAClientSkinLayer
@@ -164,6 +165,14 @@ def get_risk_not_present_nodes(session):
                 )))\
         .order_by(model.SurveyTreeItem.path)
     return query.all()
+
+
+class OSHAWebHelpers(WebHelpers):
+    """
+    Override the original WebHelpers so that we can provide our own template
+    """
+    grok.layer(IOSHAClientSkinLayer)
+    grok.template("webhelpers")
 
 
 class OSHADefaultIntroduction(DefaultIntroduction):

@@ -5,6 +5,7 @@ from euphorie.client.utils import WebHelpers
 from five import grok
 from osha.oira.client import model as oiramodel
 from osha.oira.client.interfaces import IOSHAClientSkinLayer
+from osha.oira.interfaces import IOSHAContentSkinLayer
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.i18nmessageid import MessageFactory
@@ -181,4 +182,13 @@ class OSHADefaultIntroduction(DefaultIntroduction):
         It is used when the Survey does not define its own introduction
     """
     grok.layer(IOSHAClientSkinLayer)
+    grok.template('default_introduction')
+
+
+class OSHAContentDefaultIntroduction(DefaultIntroduction):
+    """
+        Browser view that displays the default introduction text for a Suvey.
+        It is used when the Survey does not define its own introduction
+    """
+    grok.layer(IOSHAContentSkinLayer)
     grok.template('default_introduction')

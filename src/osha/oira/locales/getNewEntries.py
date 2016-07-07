@@ -68,10 +68,14 @@ def main():
         default= get_default(entry)
         if not firstpo.find(entry.msgid):
             outpo = append_entry(outpo, entry, default)
+        else:
+            old_entry = firstpo.find(entry.msgid)
+            if old_entry.msgstr == '' and entry.msgstr != '':
+                outpo = append_entry(outpo, entry, entry.msgstr)
 
     outpo.save(outfile)
     sys.exit('Found %d entries in %s that are not in %s' % (len(outpo), newfile, oldfile))
 
 if __name__ == "__main__":
     main()
-    
+

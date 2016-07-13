@@ -143,6 +143,10 @@ class OSHAActionPlanView(risk.ActionPlanView):
     grok.layer(IOSHAActionPlanPhaseSkinLayer)
     grok.template("risk_actionplan")
 
+    @property
+    def is_custom_risk(self):
+        return getattr(self.context, 'is_custom_risk', False)
+
     def update(self):
         if redirectOnSurveyUpdate(self.request):
             return

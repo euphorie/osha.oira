@@ -54,8 +54,6 @@ _("title_import_sector_survey", default=u"Import sector and OiRA Tool")
 _("intro_add_survey", default=u"The form will allow you to create a new OiRA "
     u"Tool revision.")
 _("label_solution_direction", default=u"Solution")
-_("Succesfully published the survey", default=u"Succesfully published the "
-    u"OiRA Tool")
 _("Succesfully created a preview for the survey. It can be accessed at "
     u"${url} .", default=u"Succesfully created a preview for the OiRA Tool. "
     u"It can be accessed at ${url}.")
@@ -151,6 +149,8 @@ _("title_help_unpublished", default=u"Remove this OiRA Tool from the online "
     u"client.")
 
 _("message_preview_success", default=u"Succesfully created a preview for the "
+    u"OiRA Tool. It can be accessed at ${url} .")
+_("message_publish_success", default=u"Succesfully published the "
     u"OiRA Tool. It can be accessed at ${url} .")
 
 _("warning_account_delete_surveys", default=u""

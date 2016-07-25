@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2016-07-25 09:20+0200\n"
+"POT-Creation-Date: 2016-07-25 19:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -226,25 +226,22 @@ msgstr ""
 msgid "label_solution_direction"
 msgstr "Lösung"
 
-#. Default: Succesfully published the OiRA Tool. It can be accessed at ${url}.
-#: src/osha/oira/manual_translations.py:57
-msgid "message_publish_success"
-msgstr "OiRA-Tool erfolgreich veröffentlicht. Es kann hier ${url} betrachtet werden."
-
 #. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url}.
-#: src/osha/oira/manual_translations.py:59
+#: src/osha/oira/manual_translations.py:57
 msgid ""
 "Succesfully created a preview for the survey. It can be accessed at ${url} ."
-msgstr "Vorschau für das OiRA-Tool erfolgreich veröffentlicht. Sie kann hier ${url} betrachtet werden."
+msgstr ""
+"Vorschau für das OiRA-Tool erfolgreich veröffentlicht. Sie kann hier ${url} "
+"betrachtet werden."
 
 #. Default: Publish the selected OiRA Tool live with its latest changes.
-#: src/osha/oira/manual_translations.py:62
+#: src/osha/oira/manual_translations.py:60
 msgid "help_publish"
 msgstr "Schalten Sie das OiRA-Tool inklusive der letzten Änderungen live."
 
 #. Default: Create a duplicate of the selected OiRA Tool
-#: src/osha/oira/manual_translations.py:64
+#: src/osha/oira/manual_translations.py:62
 msgid "help_add_version"
 msgstr "Duplikat des ausgewählten OiRA-Tools erstellen"
 
@@ -253,7 +250,7 @@ msgstr "Duplikat des ausgewählten OiRA-Tools erstellen"
 #. you work with the public?"). If this is to be "repeatable", it must be
 #. formulated as a prompt to fill in multiple values (e.g. "List your different
 #. work locations").
-#: src/osha/oira/manual_translations.py:65
+#: src/osha/oira/manual_translations.py:63
 msgid "help_profilequestion_question"
 msgstr ""
 "Wenn diese Frage „optional“ sein soll, muss sie als Entscheidungsfrage "
@@ -265,14 +262,14 @@ msgstr ""
 
 #. Default: Include any relevant information that may be helpful for the
 #. end-user.
-#: src/osha/oira/manual_translations.py:70
+#: src/osha/oira/manual_translations.py:68
 msgid "help_module_description"
 msgstr ""
 "Stellen Sie alle Informationen zur Verfügung, die für den Endnutzer "
 "hilfreich sein könnten."
 
 #. Default: Allows the end-user to skip this module and everything inside it.
-#: src/osha/oira/manual_translations.py:72
+#: src/osha/oira/manual_translations.py:70
 msgid "help_module_optional"
 msgstr ""
 "Mithilfe dieser Option kann der Endnutzer dieses Modul komplett überspringen."
@@ -280,7 +277,7 @@ msgstr ""
 #. Default: The question to ask the end-user if this module is optional. It
 #. must be formulated so that it is answerable with YES (the end-user will have
 #. to tick a box) or NO
-#: src/osha/oira/manual_translations.py:74
+#: src/osha/oira/manual_translations.py:72
 msgid "help_module_question"
 msgstr ""
 "Frage, die dem Endnutzer gestellt wird, wenn es sich um ein optionales Modul "
@@ -290,7 +287,7 @@ msgstr ""
 
 #. Default: This information will appear in the Action plan step and should
 #. include an overview of general solution(s) related to this module.
-#: src/osha/oira/manual_translations.py:77
+#: src/osha/oira/manual_translations.py:75
 msgid "help_solution_direction"
 msgstr ""
 "Diese Informationen werden beim Schritt „Aktionsplan“ angezeigt und sollten "
@@ -298,18 +295,18 @@ msgstr ""
 "enthalten."
 
 #. Default: Affirmative statement
-#: src/osha/oira/manual_translations.py:80
+#: src/osha/oira/manual_translations.py:78
 msgid "label_statement"
 msgstr "Positive Aussage"
 
 #. Default: Negative statement
-#: src/osha/oira/manual_translations.py:81
+#: src/osha/oira/manual_translations.py:79
 msgid "label_problem_description"
 msgstr "Negative Aussage"
 
 #. Default: This is a short affirmative statement about a possible risk (e.g.
 #. The building is well maintained.)
-#: src/osha/oira/manual_translations.py:82
+#: src/osha/oira/manual_translations.py:80
 msgid "help_statement"
 msgstr ""
 "Dies ist eine kurze positive Aussage über eine mögliche Gefährdung (z. B. "
@@ -317,7 +314,7 @@ msgstr ""
 
 #. Default: This is the inverse of the affirmative statement (e.g. The building
 #. is not well maintained.)
-#: src/osha/oira/manual_translations.py:84
+#: src/osha/oira/manual_translations.py:82
 msgid "help_problem_description"
 msgstr ""
 "Dies ist die Umkehrung einer positiven Aussage (z. B. „Das Gebäude ist in "
@@ -325,21 +322,21 @@ msgstr ""
 
 #. Default: Describe the risk. Include any relevant information that may be
 #. helpful for the end-user.
-#: src/osha/oira/manual_translations.py:86
+#: src/osha/oira/manual_translations.py:84
 msgid "help_risk_description"
 msgstr ""
 "Beschreiben Sie die Gefährdung. Stellen Sie alle Informationen zur "
 "Verfügung, die für den Endnutzer hilfreich sein können."
 
 #. Default: Priority risk
-#: src/osha/oira/manual_translations.py:88
+#: src/osha/oira/manual_translations.py:86
 msgid "risktype_top5"
 msgstr "Prioritätsgefährdung"
 
 #. Default: "Priority risk" is one of the high risks in the sector. "Risk" is
 #. related to the workplace or to the work carried out. "Policy" refers to
 #. agreements, procedures, and management decisions.
-#: src/osha/oira/manual_translations.py:89
+#: src/osha/oira/manual_translations.py:87
 msgid "help_risk_type"
 msgstr ""
 "Die „Prioritätsgefährdung“ ist eine der Gefährdungen mit hohem Risiko in der "
@@ -350,112 +347,112 @@ msgstr ""
 
 #. Default: You can help the end-user by selecting a default priority. He/she
 #. can still change the priority.
-#: src/osha/oira/manual_translations.py:93
+#: src/osha/oira/manual_translations.py:91
 msgid "help_default_priority"
 msgstr ""
 "Sie können den Endnutzer durch die Wahl einer Standardpriorität "
 "unterstützen. Er/sie hat die Möglichkeit, die Priorität zu ändern."
 
 #. Default: Indicate the severity if this risk occurs.
-#: src/osha/oira/manual_translations.py:95 src/osha/oira/content/survey.py:26
+#: src/osha/oira/manual_translations.py:93 src/osha/oira/content/survey.py:26
 msgid "help_default_severity"
 msgstr "Geben Sie den Schweregrad für das Eintreten dieser Gefährdung an."
 
 #. Default: General information on risk assessment
-#: src/osha/oira/manual_translations.py:97
+#: src/osha/oira/manual_translations.py:95
 msgid "help_help_introduction"
 msgstr "Allgemeine Informationen zur Gefährdungsbeurteilung"
 
 #. Default: Registration
-#: src/osha/oira/manual_translations.py:98
+#: src/osha/oira/manual_translations.py:96
 #, fuzzy
 msgid "label_help_authentication"
 msgstr "Dieser Text sollte den Registrierungs- und Anmeldevorgang beschreiben."
 
 #. Default: Registration
-#: src/osha/oira/manual_translations.py:99
+#: src/osha/oira/manual_translations.py:97
 #, fuzzy
 msgid "help_header_authentication"
 msgstr "Dieser Text sollte den Registrierungs- und Anmeldevorgang beschreiben."
 
 #. Default: This text should explain how to register and login.
-#: src/osha/oira/manual_translations.py:100
+#: src/osha/oira/manual_translations.py:98
 msgid "help_authentication"
 msgstr "Dieser Text sollte den Registrierungs- und Anmeldevorgang beschreiben."
 
 #. Default: Carrying out your risk assessment
-#: src/osha/oira/manual_translations.py:102
+#: src/osha/oira/manual_translations.py:100
 msgid "help_header_sessions"
 msgstr "Sitzungen"
 
 #. Default: Carrying out your risk assessment
-#: src/osha/oira/manual_translations.py:103
+#: src/osha/oira/manual_translations.py:101
 #, fuzzy
 msgid "label_help_sessions"
 msgstr "Sitzungen"
 
 #. Default: This text should describe the main functions of the OiRA Tool.
-#: src/osha/oira/manual_translations.py:104
+#: src/osha/oira/manual_translations.py:102
 msgid "help_sessions"
 msgstr "Dieser Text sollte die Hauptfunktionen des OiRA-Tools beschreiben."
 
 #. Default: 1. Preparation
-#: src/osha/oira/manual_translations.py:106
+#: src/osha/oira/manual_translations.py:104
 #, fuzzy
 msgid "help_header_start"
 msgstr "Berichterstellung"
 
 #. Default: 1. Preparation
-#: src/osha/oira/manual_translations.py:107
+#: src/osha/oira/manual_translations.py:105
 #, fuzzy
 msgid "label_help_preparation"
 msgstr "Vorbereitung"
 
 #. Default: This text should explain the 2 types of profile questions.
-#: src/osha/oira/manual_translations.py:108
+#: src/osha/oira/manual_translations.py:106
 msgid "help_preparation"
 msgstr ""
 "Dieser Text sollte die zwei unterschiedlichen Typen von Profilfragen "
 "beschreiben."
 
 #. Default: 2. Identification
-#: src/osha/oira/manual_translations.py:110
+#: src/osha/oira/manual_translations.py:108
 #, fuzzy
 msgid "help_header_identification"
 msgstr "Dieser Text sollte die Gefährdungsermittlung beschreiben."
 
 #. Default: 2. Identification
-#: src/osha/oira/manual_translations.py:111
+#: src/osha/oira/manual_translations.py:109
 #, fuzzy
 msgid "label_help_identification"
 msgstr "Ermittlung"
 
 #. Default: This text should explain how the risk identification works.
-#: src/osha/oira/manual_translations.py:112
+#: src/osha/oira/manual_translations.py:110
 msgid "help_identification"
 msgstr "Dieser Text sollte die Gefährdungsermittlung beschreiben."
 
 #. Default: 3. Evaluation
-#: src/osha/oira/manual_translations.py:114
+#: src/osha/oira/manual_translations.py:112
 #, fuzzy
 msgid "help_header_evaluation"
 msgstr ""
 "Dieser Text sollte die Bewertung der ermittelten Gefährdungen beschreiben."
 
 #. Default: 3. Evaluation
-#: src/osha/oira/manual_translations.py:115
+#: src/osha/oira/manual_translations.py:113
 #, fuzzy
 msgid "label_help_evaluation"
 msgstr "Bewertung"
 
 #. Default: This text should explain how to evaluate the identified risks.
-#: src/osha/oira/manual_translations.py:116
+#: src/osha/oira/manual_translations.py:114
 msgid "help_evaluation"
 msgstr ""
 "Dieser Text sollte die Bewertung der ermittelten Gefährdungen beschreiben."
 
 #. Default: 4. Action Plan
-#: src/osha/oira/manual_translations.py:118
+#: src/osha/oira/manual_translations.py:116
 #, fuzzy
 msgid "help_header_actionplan"
 msgstr ""
@@ -464,48 +461,48 @@ msgstr ""
 "Gefährdung."
 
 #. Default: 4. Action Plan
-#: src/osha/oira/manual_translations.py:119
+#: src/osha/oira/manual_translations.py:117
 #, fuzzy
 msgid "label_help_actionplan"
 msgstr "Aktionsplan"
 
 #. Default: This text should explain how to fill in the Action plan.
-#: src/osha/oira/manual_translations.py:120
+#: src/osha/oira/manual_translations.py:118
 msgid "help_actionplan"
 msgstr "Dieser Text sollte das Ausfüllen des Aktionsplans beschreiben."
 
 #. Default: 5. Report
-#: src/osha/oira/manual_translations.py:122
+#: src/osha/oira/manual_translations.py:120
 msgid "help_header_report"
 msgstr "5. Berichterstellung"
 
 #. Default: 5. Report
-#: src/osha/oira/manual_translations.py:123
+#: src/osha/oira/manual_translations.py:121
 #, fuzzy
 msgid "label_help_reports"
 msgstr "Bericht"
 
 #. Default: This text should describe how the report can either be saved or
 #. printed.
-#: src/osha/oira/manual_translations.py:124
+#: src/osha/oira/manual_translations.py:122
 msgid "help_reports"
 msgstr ""
 "Dieser Text sollte das Speichern bzw. Drucken des Berichts beschreiben."
 
 #. Default: What happens next?
-#: src/osha/oira/manual_translations.py:126
+#: src/osha/oira/manual_translations.py:124
 #, fuzzy
 msgid "label_help_finalwords"
 msgstr "Abschließende allgemeine Empfehlungen."
 
 #. Default: What happens next?
-#: src/osha/oira/manual_translations.py:127
+#: src/osha/oira/manual_translations.py:125
 #, fuzzy
 msgid "help_header_finalwords"
 msgstr "Abschließende allgemeine Empfehlungen."
 
 #. Default: General final recommendations.
-#: src/osha/oira/manual_translations.py:128
+#: src/osha/oira/manual_translations.py:126
 msgid "help_finalwords"
 msgstr "Abschließende allgemeine Empfehlungen."
 
@@ -514,7 +511,7 @@ msgstr "Abschließende allgemeine Empfehlungen."
 #. around and looking at what could cause harm, or by consulting the workers
 #. and/or their representatives about problems they have encountered). You can
 #. then introduce the information into the tool.
-#: src/osha/oira/manual_translations.py:131
+#: src/osha/oira/manual_translations.py:129
 msgid "intro_print_identification_1"
 msgstr ""
 "Sie können den Inhalt des Tools ausdrucken, sodass Sie am betreffenden "
@@ -529,7 +526,7 @@ msgstr ""
 #. the hazards/problems, evaluating the risks and deciding on preventive
 #. action.Their feedback should be taken into account when filling in this
 #. tool.
-#: src/osha/oira/manual_translations.py:138
+#: src/osha/oira/manual_translations.py:136
 msgid "intro_print_identification_2"
 msgstr ""
 "Sie können den Inhalt auch mit dem Personal und/oder den Vorgesetzten teilen "
@@ -539,30 +536,36 @@ msgstr ""
 "berücksichtigt werden."
 
 #. Default: contents of the tool
-#: src/osha/oira/manual_translations.py:144
+#: src/osha/oira/manual_translations.py:142
 msgid "list_of_risks"
 msgstr "Inhalt des Tools"
 
 #. Default: Start to write a new OiRA Tool. You will be asked whether you want
 #. to start off with a copy of an existing OiRA Tool.
-#: src/osha/oira/manual_translations.py:146
+#: src/osha/oira/manual_translations.py:144
 msgid "help_create_new_version"
 msgstr ""
 "Bevor Sie beginnen, ein neues OiRA-Tool zu schreiben, werden Sie gefragt, ob "
 "Sie dies basierend auf der Kopie eines bestehenden OiRA-Tools tun möchten ..."
 
 #. Default: Remove this OiRA Tool from the online client.
-#: src/osha/oira/manual_translations.py:150
+#: src/osha/oira/manual_translations.py:148
 msgid "title_help_unpublished"
 msgstr "Dieses OiRA-Tool vom Online-Client entfernen"
 
 #. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
 #. at ${url} .
-#: src/osha/oira/manual_translations.py:153
+#: src/osha/oira/manual_translations.py:151
 msgid "message_preview_success"
 msgstr ""
 "Vorschau für das OiRA-Tool erfolgreich erstellt. Sie steht unter ${url} zur "
 "Verfügung."
+
+#. Default: Succesfully published the OiRA Tool. It can be accessed at ${url} .
+#: src/osha/oira/manual_translations.py:153
+msgid "message_publish_success"
+msgstr ""
+"OiRA-Tool erfolgreich veröffentlicht. Es kann hier ${url} betrachtet werden."
 
 #. Default: Please note that by deleting your account, you will also delete all
 #. your sessions. Please make sure you download your reports from the Report
@@ -799,29 +802,9 @@ msgstr ""
 msgid "error_validation_number"
 msgstr ""
 
-#. Default: This value must be a whole number.
-#: src/osha/oira/manual_translations.py:242
-msgid "error_validation_whole_number"
-msgstr ""
-
-#. Default: This value must be a positive whole number.
-#: src/osha/oira/manual_translations.py:243
-msgid "error_validation_positive_whole_number"
-msgstr ""
-
 #. Default: This value is required.
-#: src/osha/oira/manual_translations.py:244
+#: src/osha/oira/manual_translations.py:242
 msgid "error_validation_required"
-msgstr ""
-
-#. Default: This date must be on or before the end date.
-#: src/osha/oira/manual_translations.py:245
-msgid "error_validation_before_end_date"
-msgstr ""
-
-#. Default: This date must be on or after the start date.
-#: src/osha/oira/manual_translations.py:246
-msgid "error_validation_after_start_date"
 msgstr ""
 
 #: src/osha/oira/vocabularies.py:25
@@ -1759,6 +1742,11 @@ msgstr ""
 msgid "label_email"
 msgstr "E-Mail-Adresse"
 
+#. Default: Next
+#: src/osha/oira/client/templates/reminder.pt:39
+msgid "label_next"
+msgstr ""
+
 #. Default: Cancel
 #: src/osha/oira/client/templates/reminder.pt:40
 #: src/osha/oira/content/risk.py:43 src/osha/oira/content/risk.py:65
@@ -2574,46 +2562,6 @@ msgstr "Untermodul"
 msgid "Edit ${name}"
 msgstr "${name} bearbeiten"
 
-#. Default: Question
-#: src/osha/oira/content/profilequestion.py:18
-#: src/osha/oira/content/templates/profilequestion_view.pt:23
-msgid "label_profilequestion_question"
-msgstr "Frage"
-
-#: src/osha/oira/content/profilequestion.py:19
-msgid "This question must ask users if this profile applies to them."
-msgstr ""
-
-#: src/osha/oira/content/profilequestion.py:24
-msgid "Multiple item question"
-msgstr ""
-
-#: src/osha/oira/content/profilequestion.py:30
-#: src/osha/oira/content/templates/profilequestion_view.pt:30
-msgid "Single occurance prompt"
-msgstr ""
-
-#: src/osha/oira/content/profilequestion.py:31
-msgid "This must ask to user for the name of the relevant location."
-msgstr ""
-
-#: src/osha/oira/content/profilequestion.py:38
-#: src/osha/oira/content/templates/profilequestion_view.pt:34
-msgid "Multiple occurance prompt"
-msgstr ""
-
-#: src/osha/oira/content/profilequestion.py:39
-msgid "This must ask to user for the names of all relevant locations."
-msgstr ""
-
-#: src/osha/oira/content/profilequestion.py:76
-msgid "Add Profile question"
-msgstr "Profilfrage hinzufügen"
-
-#: src/osha/oira/content/profilequestion.py:90
-msgid "Edit Profile question"
-msgstr "Profilfrage bearbeiten"
-
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
 #: src/osha/oira/content/risk.py:19
@@ -2987,7 +2935,6 @@ msgstr "Passwort"
 
 #. Default: Information
 #: src/osha/oira/content/templates/module_view.pt:22
-#: src/osha/oira/content/templates/profilequestion_view.pt:20
 #: src/osha/oira/content/templates/solution_view.pt:19
 #: src/osha/oira/content/templates/survey_view.pt:21
 msgid "header_information"
@@ -3010,128 +2957,8 @@ msgstr "Untermodule"
 
 #. Default: Risks
 #: src/osha/oira/content/templates/module_view.pt:39
-#: src/osha/oira/content/templates/profilequestion_add.pt:39
-#: src/osha/oira/content/templates/profilequestion_view.pt:47
 msgid "header_risks"
 msgstr "Gefährdungen"
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:35
-msgid ""
-"The basic architecture of an Online interactive Risk Assessment consists of:"
-msgstr ""
-
-#. Default: Profile questions
-#: src/osha/oira/content/templates/profilequestion_add.pt:37
-msgid "header_profile_questions"
-msgstr ""
-
-#. Default: ${Profile-Questions}: questions defining the company profile
-#: src/osha/oira/content/templates/profilequestion_add.pt:37
-msgid "bullet_profile_questions"
-msgstr ""
-
-#. Default: Modules
-#: src/osha/oira/content/templates/profilequestion_add.pt:38
-#: src/osha/oira/content/templates/profilequestion_view.pt:40
-msgid "header_modules"
-msgstr "Module"
-
-#. Default: ${Modules} (and potentially sub-modules): containers providing a
-#. logical structure
-#: src/osha/oira/content/templates/profilequestion_add.pt:38
-msgid "bullet_modules"
-msgstr ""
-
-#. Default: ${Risks}: positive statements, which are contained in modules.
-#: src/osha/oira/content/templates/profilequestion_add.pt:39
-msgid "bullet_risks"
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:41
-msgid ""
-"Profile questions are used to determine whether particular modules apply to "
-"the end user at all (i.e. the modules inside the profile question are "
-"OPTIONAL), and if they apply, whether they should be repeated a number of "
-"times (i.e. the modules are REPEATABLE)."
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:42
-msgid ""
-"Such questions are asked BEFORE the end-user starts the risk identification "
-"and evaluation. If the end-user does not confirm that an optional profile "
-"question is relevant (by ticking the box), then the corresponding module "
-"will be skipped entirely. If the end-user enters more than one option to a "
-"repeatable profile question then the corresponding module will be repeated "
-"the specified number of times."
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:43
-msgid "Please refer to the examples below the form."
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:62
-msgid "Client example for a single occurance."
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:65
-#: src/osha/oira/content/templates/profilequestion_add.pt:86
-msgid "Commercial manned guarding"
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:69
-#: src/osha/oira/content/templates/profilequestion_add.pt:90
-msgid "Does your organisation provide mobile patrolling?"
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:70
-#: src/osha/oira/content/templates/profilequestion_add.pt:75
-#: src/osha/oira/content/templates/profilequestion_add.pt:91
-#: src/osha/oira/content/templates/profilequestion_add.pt:96
-msgid "Yes"
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:71
-#: src/osha/oira/content/templates/profilequestion_add.pt:76
-#: src/osha/oira/content/templates/profilequestion_add.pt:92
-#: src/osha/oira/content/templates/profilequestion_add.pt:97
-msgid "No"
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:74
-#: src/osha/oira/content/templates/profilequestion_add.pt:95
-msgid "Do you offer this service in multiple locations?"
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:78
-msgid "Please enter a name for the location you would like to assess"
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:83
-msgid "Client example for multiple occurances."
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:100
-msgid "Please enter the name for each location you would like to assess"
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:102
-#: src/osha/oira/content/templates/profilequestion_add.pt:103
-msgid "Remove"
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_add.pt:104
-msgid "Add another item"
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_view.pt:26
-msgid "Multiple Item Question"
-msgstr ""
-
-#: src/osha/oira/content/templates/profilequestion_view.pt:27
-#: src/osha/oira/content/templates/profilequestion_view.pt:31
-#: src/osha/oira/content/templates/profilequestion_view.pt:35
-msgid "Not provided"
-msgstr ""
 
 #. Default: Sectors
 #: src/osha/oira/content/templates/sectorcontainer_view.pt:12
@@ -3391,6 +3218,18 @@ msgstr ""
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
 msgstr ""
+
+#~ msgid "label_profilequestion_question"
+#~ msgstr "Frage"
+
+#~ msgid "Add Profile question"
+#~ msgstr "Profilfrage hinzufügen"
+
+#~ msgid "Edit Profile question"
+#~ msgstr "Profilfrage bearbeiten"
+
+#~ msgid "header_modules"
+#~ msgstr "Module"
 
 #~ msgid "label_delete"
 #~ msgstr "Löschen"

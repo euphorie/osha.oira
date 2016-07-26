@@ -46,6 +46,7 @@ setup(name='osha.oira',
           'oira.private',  # Private egg with nonfree redactor JS/CSS
           'plone.autoform',
           'plone.tiles',
+          'requests',
           'setuptools',
           'zope.publisher',
           'mobile.sniffer',

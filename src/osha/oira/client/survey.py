@@ -16,15 +16,6 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
     })
 
 
-class OSHAActionPlan(survey.ActionPlan):
-    """
-    Overrides the original ActionPlanReport in euphorie.client.survey.py
-    to provide our own template with an extended text.
-    """
-    grok.layer(interfaces.IOSHAActionPlanPhaseSkinLayer)
-    grok.template("actionplan")
-
-
 class OSHAStatusPrint(survey.Status):
     """ Override the 'status' page to provide our own template.
     """

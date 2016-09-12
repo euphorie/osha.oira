@@ -43,7 +43,6 @@ setup(name='osha.oira',
           # required interface.
           'collective.js.jqueryui',
           'htmllaundry',
-          'oira.private', # Private egg with nonfree redactor JS/CSS
           'plone.autoform',
           'plone.tiles',
           'setuptools',

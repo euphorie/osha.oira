@@ -10,8 +10,7 @@
     </label>
 
     <textarea class="pat-redactor"
-              data-pat-redactor="show-source-button: true; buttons: html, bold, italic, unordered-list, ordered-list, outdent, indent, link;
-                        allowed-tags: p, img, ul, li, ol, strong, em, a, table, tr, td, thead, tbody, th;"
+              data-pat-redactor="buttons: bold, italic, lists, link; plugins: source, bufferbuttons; allowed-tags: p, ul, li, ol, strong, em, a;"
 
             id="${view/id}" name="${view/name}" disabled="${view/disabled}" readonly="${view/readonly}" cols="${view/cols}" rows="${view/rows}">
         <tal:content condition="view/value" replace="structure view/value"/>

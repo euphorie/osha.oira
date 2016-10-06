@@ -34,7 +34,7 @@ setup(name='osha.oira',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'Euphorie >=6.0b2',
+          'Euphorie >=9.0.0',
           'NuPlone >=1.3.9',
           'Pillow',
           'Products.statusmessages',

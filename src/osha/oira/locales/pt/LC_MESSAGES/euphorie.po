@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.23.dev0\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2016-07-25 19:40+0200\n"
+"POT-Creation-Date: 2016-10-06 17:24+0200\n"
 "PO-Revision-Date: 2013-08-15 11:33+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,74 +27,24 @@ msgstr "Código de Fonte HTML"
 msgid "Clear unsaved changes"
 msgstr "Apagar alterações não guardadas"
 
-#. Default: Describe your general approach to eliminate or (if the risk is not
-#. avoidable) reduce the risk.
-#: src/osha/oira/manual_translations.py:5
-msgid "help_measure_action_plan"
-msgstr ""
-"Descreva a sua abordagem geral para eliminar ou (se o risco for inevitável) "
-"reduzir o risco."
-
-#. Default: Describe the specific action(s) required to implement this approach
-#. (to eliminate or to reduce the risk).
-#: src/osha/oira/manual_translations.py:7
-msgid "help_measure_prevention_plan"
-msgstr ""
-"Descreva a(s) ação(ões) específica(s) necessária(s) para implementar esta "
-"abordagem (para eliminar ou reduzir o risco)."
-
-#. Default: Describe the level of expertise needed to implement the measure,
-#. for instance "common sense (no OSH knowledge required)", "no specific OSH
-#. expertise, but minimum OSH knowledge or training and/or consultation of OSH
-#. guidance required", or "OSH expert". You can also describe here any other
-#. additional requirement (if any).
-#: src/osha/oira/manual_translations.py:10
-msgid "help_measure_requirements"
-msgstr ""
-"Descreva o nível de competência necessário para implementar a medida, por "
-"exemplo \"senso comum (sem conhecimento necessário da SST)\", \"nenhuma "
-"competência da SST específica, mas conhecimento mínimo da SST ou formação e/"
-"ou consulta necessárias do guia da SST \", ou \"competência SST\". Também é "
-"possível descrever aqui qualquer outro requisito adicional (se existente)."
-
-#. Default: Measure
-#: src/osha/oira/manual_translations.py:16
-msgid "Solution"
-msgstr "Medida"
-
-#. Default: Measure
-#: src/osha/oira/manual_translations.py:17
-msgid "title_common_solution"
-msgstr "Medida"
-
-#. Default: A standard measure for a risk.
-#: src/osha/oira/manual_translations.py:18
-msgid "A solution."
-msgstr "Uma medida padrão para um risco."
-
-#. Default: Standard measures
-#: src/osha/oira/manual_translations.py:19
-msgid "header_solutions"
-msgstr "Medidas padrão"
-
 #. Default: Account data
-#: src/osha/oira/manual_translations.py:22
+#: src/osha/oira/manual_translations.py:6
 msgid "header_account_data"
 msgstr "Dados da conta"
 
-#: src/osha/oira/manual_translations.py:23
+#: src/osha/oira/manual_translations.py:7
 msgid "Email address/account name"
 msgstr "Endereço de e-mail/nome da conta"
 
-#: src/osha/oira/manual_translations.py:24
+#: src/osha/oira/manual_translations.py:8
 msgid "Change email address"
 msgstr "Alterar endereço de e-mail"
 
-#: src/osha/oira/manual_translations.py:25
+#: src/osha/oira/manual_translations.py:9
 msgid "Delete Account"
 msgstr "Apagar conta"
 
-#: src/osha/oira/manual_translations.py:26
+#: src/osha/oira/manual_translations.py:10
 msgid ""
 "Please bear in mind that by changing the email address, your login name will "
 "also change."
@@ -103,579 +53,13 @@ msgstr ""
 "também alterado."
 
 #. Default: Password
-#: src/osha/oira/manual_translations.py:27
+#: src/osha/oira/manual_translations.py:11
 msgid "header_password"
 msgstr "Palavra-passe"
 
-#. Default: Measure ${number}
-#: src/osha/oira/manual_translations.py:29
-msgid "risk_solution_header"
-msgstr "Medida ${number}"
-
-#. Default: OiRA Tools
-#: src/osha/oira/manual_translations.py:30
-msgid "nav_surveys"
-msgstr "Ferramentas OiRA"
-
-#. Default: OiRA Tool
-#: src/osha/oira/manual_translations.py:31 src/osha/oira/vocabularies.py:22
-msgid "Survey"
-msgstr "Ferramenta OiRA"
-
-#. Default: Sessions
-#: src/osha/oira/manual_translations.py:32
-msgid "label_sessions"
-msgstr "Sessões"
-
-#. Default: OiRA Tool import
-#: src/osha/oira/manual_translations.py:33
-msgid "Survey import"
-msgstr "Importar Ferramenta OiRA"
-
-#. Default: Import OiRA tool version
-#: src/osha/oira/manual_translations.py:34
-msgid "Import survey version"
-msgstr "Importar versão da ferramenta OiRA "
-
-#. Default: OiRA Tool version
-#: src/osha/oira/manual_translations.py:35
-msgid "Survey version"
-msgstr "Versão da Ferramenta OiRA "
-
-#. Default: This OiRA Tool has no profile questions.
-#: src/osha/oira/manual_translations.py:36
-msgid "no_profile_questions"
-msgstr "Esta Ferramenta OiRA não tem perguntas de perfil."
-
-#. Default: Create new OiRA Tool
-#: src/osha/oira/manual_translations.py:37
-msgid "button_create_new"
-msgstr "Criar nova Ferramenta OiRA "
-
-#. Default: Please choose a country of which you would like to view or copy an
-#. OiRA Tool.
-#: src/osha/oira/manual_translations.py:38
-#: src/osha/oira/content/templates/sectorcontainer_view.pt:31
-msgid "message_choose_country"
-msgstr ""
-"Selecione um país do qual pretende visualizar ou copiar uma Ferramenta OiRA."
-
-#. Default: Select a sector for which you would like to view or copy an OiRA
-#. Tool.
-#: src/osha/oira/manual_translations.py:40
-msgid "intro_select_sector"
-msgstr ""
-"Selecione um setor para o qual pretende visualizar ou copiar uma Ferramenta "
-"OiRA."
-
-#. Default: This is the title of this OiRA Tool version. This name is never
-#. shown to users.
-#: src/osha/oira/manual_translations.py:42
-msgid "help_survey_title"
-msgstr ""
-"Este é o título desta versão da Ferramenta OiRA. Este nome nunca é revelado "
-"aos utilizadores."
-
-#. Default: The introduction text is shown when starting a new OiRA Tool
-#. session. If no introduction is provided here a standard text will be shown.
-#. Please keep this text brief so it will easily fit on screens of small
-#. devices such as phones and PDAs.
-#: src/osha/oira/manual_translations.py:44
-msgid "help_introduction"
-msgstr ""
-"O texto de introdução é apresentado ao iniciar uma nova sessão da Ferramenta "
-"OiRA. Se a introdução não for introduzida aqui, será apresentado um texto "
-"padrão. Mantenha este texto resumido para se ajustar facilmente aos ecrãs de "
-"dispositivos pequenos como telemóveis e PDAs."
-
-#. Default: This is the only version of the OiRA Tool and can therefore not be
-#. deleted. Did you perhaps want to remove the OiRA Tool itself?
-#: src/osha/oira/manual_translations.py:48
-msgid "message_delete_no_last_survey"
-msgstr ""
-"Esta é a única versão da Ferramenta OiRA e, por isso, não pode ser apagada. "
-"Talvez pretendesse remover a Ferramenta OiRA?"
-
-#. Default: Title of imported OiRA Tool
-#: src/osha/oira/manual_translations.py:51
-msgid "label_surveygroup_title"
-msgstr "Título da Ferramenta OiRA importada"
-
-#. Default: Succesfully imported the OiRA Tool
-#: src/osha/oira/manual_translations.py:52
-msgid "upload_success"
-msgstr "Ferramenta OiRA importada com sucesso"
-
-#. Default: Import sector and OiRA Tool
-#: src/osha/oira/manual_translations.py:53
-msgid "title_import_sector_survey"
-msgstr "Importar setor e a Ferramenta OiRA"
-
-#. Default: The form will allow you to create a new OiRA Tool revision.
-#: src/osha/oira/manual_translations.py:54
-msgid "intro_add_survey"
-msgstr "O formulário permitirá criar uma nova revisão da Ferramenta OiRA."
-
-#. Default: Solution
-#: src/osha/oira/manual_translations.py:56
-msgid "label_solution_direction"
-msgstr "Solução"
-
-#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
-#. at ${url}.
-#: src/osha/oira/manual_translations.py:57
-msgid ""
-"Succesfully created a preview for the survey. It can be accessed at ${url} ."
-msgstr ""
-"Pré-visualização da Ferramenta OiRA criada com sucesso. Está acessível em "
-"${url}."
-
-#. Default: Publish the selected OiRA Tool live with its latest changes.
-#: src/osha/oira/manual_translations.py:60
-msgid "help_publish"
-msgstr ""
-"Publicar a Ferramenta OiRA selecionada com as mais recentes alterações."
-
-#. Default: Create a duplicate of the selected OiRA Tool
-#: src/osha/oira/manual_translations.py:62
-msgid "help_add_version"
-msgstr "Criar uma cópia da Ferramenta OiRA selecionada"
-
-#. Default: If this is to be "optional", it must be formulated so that it is
-#. answerable with YES (the end-user will have to tick a box) or NO (e.g. "Do
-#. you work with the public?"). If this is to be "repeatable", it must be
-#. formulated as a prompt to fill in multiple values (e.g. "List your different
-#. work locations").
-#: src/osha/oira/manual_translations.py:63
-msgid "help_profilequestion_question"
-msgstr ""
-"Se tiver de ser \"opcional\", a sua formulação deve permitir a resposta SIM "
-"(o utilizador final terá de selecionar uma caixa) ou NÃO (p.ex. \"Trabalha "
-"diretamente com o público?\"). Se tiver de ser \"repetível\", a sua "
-"formulação deve ser uma solicitação para preencher os valores múltiplos (p."
-"ex. \"Listar os diferentes locais de trabalho\")."
-
-#. Default: Include any relevant information that may be helpful for the
-#. end-user.
-#: src/osha/oira/manual_translations.py:68
-msgid "help_module_description"
-msgstr ""
-"Incluir qualquer informação relevante que possa ser útil ao utilizador final."
-
-#. Default: Allows the end-user to skip this module and everything inside it.
-#: src/osha/oira/manual_translations.py:70
-msgid "help_module_optional"
-msgstr "Permite ao utilizador final ignorar este módulo e todo o seu conteúdo."
-
-#. Default: The question to ask the end-user if this module is optional. It
-#. must be formulated so that it is answerable with YES (the end-user will have
-#. to tick a box) or NO
-#: src/osha/oira/manual_translations.py:72
-msgid "help_module_question"
-msgstr ""
-"A pergunta ao utilizador final sobre se este módulo é opcional. A sua "
-"formulação deve permitir a resposta SIM (o utilizador final terá de "
-"assinalar uma caixa) ou NÃO"
-
-#. Default: This information will appear in the Action plan step and should
-#. include an overview of general solution(s) related to this module.
-#: src/osha/oira/manual_translations.py:75
-msgid "help_solution_direction"
-msgstr ""
-"Esta informação surgirá no passo Plano de ação e deve incluir uma visão "
-"geral da(s) solução(ões) geral(is) relativa(s) a este módulo."
-
-#. Default: Affirmative statement
-#: src/osha/oira/manual_translations.py:78
-msgid "label_statement"
-msgstr "Declaração afirmativa"
-
-#. Default: Negative statement
-#: src/osha/oira/manual_translations.py:79
-msgid "label_problem_description"
-msgstr "Declaração negativa"
-
-#. Default: This is a short affirmative statement about a possible risk (e.g.
-#. The building is well maintained.)
-#: src/osha/oira/manual_translations.py:80
-msgid "help_statement"
-msgstr ""
-"Esta é uma breve declaração afirmativa sobre um risco possível (p.ex. A "
-"manutenção do edifício é correta.)"
-
-#. Default: This is the inverse of the affirmative statement (e.g. The building
-#. is not well maintained.)
-#: src/osha/oira/manual_translations.py:82
-msgid "help_problem_description"
-msgstr ""
-"Isto é o inverso da declaração afirmativa (p.ex. A manutenção do edifício é "
-"incorreta.)"
-
-#. Default: Describe the risk. Include any relevant information that may be
-#. helpful for the end-user.
-#: src/osha/oira/manual_translations.py:84
-msgid "help_risk_description"
-msgstr ""
-"Descreva o risco. Inclua qualquer informação relevante que possa ser útil ao "
-"utilizador final."
-
-#. Default: Priority risk
-#: src/osha/oira/manual_translations.py:86
-msgid "risktype_top5"
-msgstr "Prioridade do risco"
-
-#. Default: "Priority risk" is one of the high risks in the sector. "Risk" is
-#. related to the workplace or to the work carried out. "Policy" refers to
-#. agreements, procedures, and management decisions.
-#: src/osha/oira/manual_translations.py:87
-msgid "help_risk_type"
-msgstr ""
-"Prioridade do risco\" é um dos riscos elevados no setor. \"Risco\" está "
-"relacionado com o local de trabalho ou com o trabalho realizado. \"Política"
-"\" refere-se a acordos, procedimentos e decisões de gestão."
-
-#. Default: You can help the end-user by selecting a default priority. He/she
-#. can still change the priority.
-#: src/osha/oira/manual_translations.py:91
-msgid "help_default_priority"
-msgstr ""
-"Pode ajudar o utilizador final ao selecionar uma prioridade padrão. Ele/ela "
-"ainda pode alterar a prioridade."
-
-#. Default: Indicate the severity if this risk occurs.
-#: src/osha/oira/manual_translations.py:93 src/osha/oira/content/survey.py:26
-msgid "help_default_severity"
-msgstr "Indica a gravidade em caso de ocorrência do risco."
-
-#. Default: General information on risk assessment
-#: src/osha/oira/manual_translations.py:95
-msgid "help_help_introduction"
-msgstr "Informação geral sobre a avaliação de riscos"
-
-#. Default: Registration
-#: src/osha/oira/manual_translations.py:96
-msgid "label_help_authentication"
-msgstr "Registo"
-
-#. Default: Registration
-#: src/osha/oira/manual_translations.py:97
-msgid "help_header_authentication"
-msgstr "Registo"
-
-#. Default: This text should explain how to register and login.
-#: src/osha/oira/manual_translations.py:98
-msgid "help_authentication"
-msgstr "Este texto deve explicar como efetuar o registo e o login."
-
-#. Default: Carrying out your risk assessment
-#: src/osha/oira/manual_translations.py:100
-msgid "help_header_sessions"
-msgstr "Realizar a sua avaliação de riscos"
-
-#. Default: Carrying out your risk assessment
-#: src/osha/oira/manual_translations.py:101
-msgid "label_help_sessions"
-msgstr "Realizar a sua avaliação de riscos"
-
-#. Default: This text should describe the main functions of the OiRA Tool.
-#: src/osha/oira/manual_translations.py:102
-msgid "help_sessions"
-msgstr "Este texto deve descrever as funções principais da Ferramenta OiRA."
-
-#. Default: 1. Preparation
-#: src/osha/oira/manual_translations.py:104
-msgid "help_header_start"
-msgstr "1. Preparação"
-
-#. Default: 1. Preparation
-#: src/osha/oira/manual_translations.py:105
-msgid "label_help_preparation"
-msgstr "1. Preparação"
-
-#. Default: This text should explain the 2 types of profile questions.
-#: src/osha/oira/manual_translations.py:106
-msgid "help_preparation"
-msgstr "Este texto deve explicar os 2 tipos de perguntas de perfil."
-
-#. Default: 2. Identification
-#: src/osha/oira/manual_translations.py:108
-msgid "help_header_identification"
-msgstr "2. Identificação"
-
-#. Default: 2. Identification
-#: src/osha/oira/manual_translations.py:109
-msgid "label_help_identification"
-msgstr "2. Identificação"
-
-#. Default: This text should explain how the risk identification works.
-#: src/osha/oira/manual_translations.py:110
-msgid "help_identification"
-msgstr "Estes texto deve explicar como ocorre a identificação do risco."
-
-#. Default: 3. Evaluation
-#: src/osha/oira/manual_translations.py:112
-msgid "help_header_evaluation"
-msgstr "3. Avaliação"
-
-#. Default: 3. Evaluation
-#: src/osha/oira/manual_translations.py:113
-msgid "label_help_evaluation"
-msgstr "3. Avaliação"
-
-#. Default: This text should explain how to evaluate the identified risks.
-#: src/osha/oira/manual_translations.py:114
-msgid "help_evaluation"
-msgstr "Este texto deve explicar como avaliar os riscos identificados."
-
-#. Default: 4. Action Plan
-#: src/osha/oira/manual_translations.py:116
-msgid "help_header_actionplan"
-msgstr "4. Plano de Ação"
-
-#. Default: 4. Action Plan
-#: src/osha/oira/manual_translations.py:117
-msgid "label_help_actionplan"
-msgstr "4. Plano de Ação"
-
-#. Default: This text should explain how to fill in the Action plan.
-#: src/osha/oira/manual_translations.py:118
-msgid "help_actionplan"
-msgstr "Este texto deve explicar como preencher o Plano de ação."
-
-#. Default: 5. Report
-#: src/osha/oira/manual_translations.py:120
-msgid "help_header_report"
-msgstr "5. Relatório"
-
-#. Default: 5. Report
-#: src/osha/oira/manual_translations.py:121
-msgid "label_help_reports"
-msgstr "5. Relatório"
-
-#. Default: This text should describe how the report can either be saved or
-#. printed.
-#: src/osha/oira/manual_translations.py:122
-msgid "help_reports"
-msgstr "Este texto deve descrever como guardar ou imprimir o relatório."
-
-#. Default: What happens next?
-#: src/osha/oira/manual_translations.py:124
-msgid "label_help_finalwords"
-msgstr "O que acontece a seguir?"
-
-#. Default: What happens next?
-#: src/osha/oira/manual_translations.py:125
-msgid "help_header_finalwords"
-msgstr "O que acontece a seguir?"
-
-#. Default: General final recommendations.
-#: src/osha/oira/manual_translations.py:126
-msgid "help_finalwords"
-msgstr "Recomendações finais gerais."
-
-#. Default: It is possible for you to print out the contents of the tool to
-#. enable you to look for the information at the relevant workplace (by walking
-#. around and looking at what could cause harm, or by consulting the workers
-#. and/or their representatives about problems they have encountered). You can
-#. then introduce the information into the tool.
-#: src/osha/oira/manual_translations.py:129
-msgid "intro_print_identification_1"
-msgstr ""
-"É possível imprimir os conteúdos da ferramenta. No documento impresso, pode "
-"registar informação relevante que tenha identificado no local de trabalho "
-"(observando o que pode ser prejudicial ou perguntando aos trabalhadores e/ou "
-"seus representantes sobre os problemas com que se depararam). A seguir, pode "
-"introduzir a informação na ferramenta."
-
-#. Default: You may also wish to distribute the contents among the workers
-#. and/or their representatives and invite them to participate in identifying
-#. the hazards/problems, evaluating the risks and deciding on preventive
-#. action.Their feedback should be taken into account when filling in this
-#. tool.
-#: src/osha/oira/manual_translations.py:136
-msgid "intro_print_identification_2"
-msgstr ""
-"Pode também pretender distribuir o documento entre os trabalhadores e/ou os "
-"seus representantes e convidá-los a participar na identificação dos perigos/"
-"problemas, avaliar os riscos e decidir sobre as ações preventivas. As suas "
-"observações devem ser consideradas ao preencher esta ferramenta."
-
-#. Default: contents of the tool
-#: src/osha/oira/manual_translations.py:142
-msgid "list_of_risks"
-msgstr "conteúdos da ferramenta"
-
-#. Default: Start to write a new OiRA Tool. You will be asked whether you want
-#. to start off with a copy of an existing OiRA Tool.
-#: src/osha/oira/manual_translations.py:144
-msgid "help_create_new_version"
-msgstr ""
-"Comece a escrever uma nova Ferramenta OiRA. Ser-lhe-á perguntado se pretende "
-"começar com uma cópia de uma Ferramenta OiRA existente.."
-
-#. Default: Remove this OiRA Tool from the online client.
-#: src/osha/oira/manual_translations.py:148
-msgid "title_help_unpublished"
-msgstr "Remova esta Ferramenta OiRA do cliente online."
-
-#. Default: Succesfully created a preview for the OiRA Tool. It can be accessed
-#. at ${url} .
-#: src/osha/oira/manual_translations.py:151
-msgid "message_preview_success"
-msgstr ""
-"Pré-visualização criada com sucesso para a Ferramenta OiRA. Está acessível "
-"em ${url} ."
-
-#. Default: Succesfully published the OiRA Tool. It can be accessed at ${url} .
-#: src/osha/oira/manual_translations.py:153
-msgid "message_publish_success"
-msgstr "Ferramenta OiRA publicada com sucesso. Está acessível em ${url}."
-
-#. Default: Please note that by deleting your account, you will also delete all
-#. your sessions. Please make sure you download your reports from the Report
-#. step prior to deleting your account, if you want to keep any.
-#: src/osha/oira/manual_translations.py:156
-msgid "warning_account_delete_surveys"
-msgstr ""
-"Tenha em atenção que ao apagar a sua conta, também apagará todas as suas "
-"sessões. Certifique-se de que descarrega os seus relatórios a partir do "
-"passo Relatório antes de apagar a sua conta, se pretender guardar algum."
-
-#. Default: Are you sure you want to create a preview of this OiRA Tool? You
-#. can give the URL for the preview to others so they can test the OiRA Tool.
-#. To access the preview a standard OiRA client login is required.
-#: src/osha/oira/manual_translations.py:161
-msgid "intro_preview"
-msgstr ""
-"Tem a certeza de que pretende criar uma pré-visualização desta Ferramenta "
-"OiRA? Pode indicar o URL para a pré-visualização, para que a Ferramenta OiRA "
-"possa ser testada. Para aceder à pré-visualização, é necessário um login de "
-"cliente OiRA padrão."
-
-#. Default: Preview OiRA Tool
-#: src/osha/oira/manual_translations.py:166
-msgid "header_preview"
-msgstr "Pré-visualizar a Ferramenta OiRA"
-
-#. Default: After publication the OiRA Tool will be available at ${url}.
-#: src/osha/oira/manual_translations.py:168
-msgid "help_publish_url"
-msgstr "Após a publicação, a Ferramenta OiRA estará disponível em ${url}."
-
-#. Default: Are you sure you want to publish this OiRA Tool version? This will
-#. replace the current version.
-#: src/osha/oira/manual_translations.py:170
-msgid "intro_publish_other_survey_published"
-msgstr ""
-"Tem a certeza de que pretende publicar esta versão da Ferramenta OiRA? Esta "
-"substituirá a versão atual."
-
-#. Default: Are you sure you want to republish this OiRA Tool? This will make
-#. all changes made public.
-#: src/osha/oira/manual_translations.py:174
-msgid "intro_publish_survey_published"
-msgstr ""
-"Tem a certeza de que pretende publicar novamente esta Ferramenta OiRA? Isto "
-"tornará todas as alterações públicas."
-
-#. Default: Are you sure you want to publish this OiRA Tool? After publication
-#. the OiRA Tool will appear in the online client and be accessible by all
-#. users.
-#: src/osha/oira/manual_translations.py:178
-msgid "intro_publish_first_time"
-msgstr ""
-"Tem a certeza de que pretende publicar esta versão da Ferramenta OiRA? Após "
-"a publicação, a Ferramenta OiRA surgirá no cliente online e estará acessível "
-"a todos os utilizadores."
-
-#. Default: Publish OiRA Tool
-#: src/osha/oira/manual_translations.py:182
-msgid "header_publish"
-msgstr "Publicar Ferramenta OiRA"
-
-#. Default: The title of this OiRA Tool. This title is used in the OiRA Tool
-#. overview in the clients.
-#: src/osha/oira/manual_translations.py:184
-msgid "help_surveygroup_title"
-msgstr ""
-"O título desta Ferramenta OiRA. Este título é utilizado na visão geral da "
-"Ferramenta OiRA nos clientes."
-
-#. Default: This OiRA Tool is now no longer available in the client.
-#: src/osha/oira/manual_translations.py:188
-msgid "message_unpublish_success"
-msgstr "Esta Ferramenta OiRA já não se encontra disponível no cliente."
-
-#. Default: Name for OiRA Tool version
-#: src/osha/oira/manual_translations.py:190
-msgid "label_upload_survey_title"
-msgstr "Nome para a versão da Ferramenta OiRA "
-
-#. Default: Default severity
-#: src/osha/oira/manual_translations.py:192
-msgid "label_default_effect"
-msgstr "Gravidade padrão"
-
-#. Default: Are you sure you want to unpublish this OiRA Tool?
-#: src/osha/oira/manual_translations.py:194
-msgid "unpublish_confirm"
-msgstr ""
-"Tem a certeza de que pretende anular a publicação desta Ferramenta OiRA?"
-
-#. Default: Import OiRA Tool
-#: src/osha/oira/manual_translations.py:196
-msgid "menu_import"
-msgstr "Importar a Ferramenta OiRA "
-
-#. Default: You cannot delete an OiRA Tool version that is published. Please
-#. unpublish it first.
-#: src/osha/oira/manual_translations.py:198
-msgid "message_no_delete_published_survey"
-msgstr ""
-"Não é possível apagar uma versão da Ferramenta OiRA que tenha sido "
-"publicada. Anule primeiro a sua publicação."
-
-#. Default: You can not delete a sector that contains published OiRA Tools.
-#: src/osha/oira/manual_translations.py:202
-msgid "message_not_delete_published_sector"
-msgstr ""
-"Não é possível apagar um setor que contenha Ferramentas OiRA publicadas."
-
-#. Default: add a new OiRA Tool
-#: src/osha/oira/manual_translations.py:206
-msgid "add_survey"
-msgstr "adicionar uma nova Ferramenta OiRA "
-
-#. Default: There are no OiRA Tools present. You can ${add_link}.
-#: src/osha/oira/manual_translations.py:208
-msgid "no_surveys_present"
-msgstr "Não existem atualmente Ferramentas OiRA. Pode ${add_link}."
-
-#. Default: OiRA Tools
-#: src/osha/oira/manual_translations.py:210
-msgid "header_sector_survey_list"
-msgstr "Ferramentas OiRA"
-
-#. Default: We're sorry, but an unforseen error has occured.
-#: src/osha/oira/manual_translations.py:212
-#: src/osha/oira/client/templates/error.pt:17
-msgid "expl_error"
-msgstr "Lamentamos, mas ocorreu um erro imprevisto."
-
-#. Default: Delete this measure
-#: src/osha/oira/manual_translations.py:214
-msgid "label_remove_measure"
-msgstr "Apagar esta medida"
-
-#. Default: Add Measure
-#: src/osha/oira/manual_translations.py:215
-#: src/osha/oira/content/solution.py:63
-msgid "Add Solution"
-msgstr "Adicionar Medida"
-
 #. Default: Are you sure you want to delete this measure? This action can not
 #. be reverted.
-#: src/osha/oira/manual_translations.py:219
+#: src/osha/oira/manual_translations.py:16
 msgid ""
 "Are you sure you want to delete this measure? This action can not be "
 "reverted."
@@ -686,7 +70,7 @@ msgstr ""
 #. Default: The current text in the fields 'Action plan', 'Prevention plan' and
 #. 'Requirements' of this measure will be overwritten. This action cannot be
 #. reverted. Are you sure you want to continue?
-#: src/osha/oira/manual_translations.py:221
+#: src/osha/oira/manual_translations.py:18
 msgid ""
 "The current text in the fields 'Action plan', 'Prevention plan' and "
 "'Requirements' of this measure will be overwritten. This action cannot be "
@@ -696,75 +80,59 @@ msgstr ""
 "'requisitos/competência' desta medida, será substituído. O texto não poderá "
 "ser recuperado. Tem a certeza que deseja continuar?"
 
-#: src/osha/oira/manual_translations.py:223
+#: src/osha/oira/manual_translations.py:20
 msgid "Standard solutions"
 msgstr "Soluções padrão"
 
 #. Default: This option allows users to skip the evaluation phase.
-#: src/osha/oira/manual_translations.py:226
+#: src/osha/oira/manual_translations.py:23
 msgid "help_evaluation_optional"
 msgstr "A opção permite ao utilizar final ignorar o passo Avaliação."
 
 #. Default: Evaluation phase
-#: src/osha/oira/manual_translations.py:227
+#: src/osha/oira/manual_translations.py:24
 msgid "label_evaluation_phase"
 msgstr "Fase de avaliação"
 
 #. Default: Description
-#: src/osha/oira/manual_translations.py:228
+#: src/osha/oira/manual_translations.py:25
 #: src/osha/oira/content/templates/control-panel.pt:84
 msgid "Description"
 msgstr "Descrição"
 
 #. Default: Skip evaluation
-#: src/osha/oira/manual_translations.py:229
+#: src/osha/oira/manual_translations.py:26
 msgid "evalmethod_fixed"
 msgstr "Estimado"
 
 #. Default: priority
-#: src/osha/oira/manual_translations.py:230
+#: src/osha/oira/manual_translations.py:27
 msgid "label_fixed_priority"
 msgstr "prioridade"
 
-#. Default: What is OiRA (Online Interactive Risk Assessment)?
-#: src/osha/oira/manual_translations.py:233
-#: src/osha/oira/client/templates/login.pt:29
-msgid "What is OiRA (Online Interactive Risk Assessment)?"
-msgstr "O que é OiRA?"
-
-#. Default: OiRA stands for Online Interactive Risk Assessment. It is a
-#. web-based tool that allows you to perform a health and safety risk
-#. assessment of your workplace.
-#: src/osha/oira/manual_translations.py:234
-#: src/osha/oira/client/templates/login.pt:30
-msgid ""
-"OiRA stands for Online Interactive Risk Assessment. It is a web-based tool "
-"that allows you to perform a health and safety risk assessment of your "
-"workplace."
-msgstr ""
-"A ferramenta interativa de avaliação de riscos (OiRA) é uma aplicação Web "
-"que permite realizar avaliações de riscos para a segurança e a saúde no seu "
-"local de trabalho."
-
 #. Default: This value must be a valid date.
-#: src/osha/oira/manual_translations.py:239
+#: src/osha/oira/manual_translations.py:31
 msgid "error_validation_date"
 msgstr "Este valor deve ser uma data válida."
 
 #. Default: This value must be a valid email address.
-#: src/osha/oira/manual_translations.py:240
+#: src/osha/oira/manual_translations.py:32
 msgid "error_validation_email"
 msgstr "Este valor deve ser um endereço de correio eletrónico válido."
 
 #. Default: This value must be a number.
-#: src/osha/oira/manual_translations.py:241
+#: src/osha/oira/manual_translations.py:33
 msgid "error_validation_number"
 msgstr "Este valor deve ser um número."
 
 #. Default: This value is required.
-#: src/osha/oira/manual_translations.py:242
+#: src/osha/oira/manual_translations.py:34
 msgid "error_validation_required"
 msgstr "Este valor é obrigatório."
+
+#: src/osha/oira/vocabularies.py:22
+msgid "Survey"
+msgstr "Ferramenta OiRA"
 
 #: src/osha/oira/vocabularies.py:25
 msgid "EU-OSHA Overview"
@@ -795,38 +163,38 @@ msgid "4th Quarter"
 msgstr "Quarto trimestre"
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:121
+#: src/osha/oira/client/report.py:101
 msgid "report_timeline_measure"
 msgstr "Medida"
 
 #. Default: End date
-#: src/osha/oira/client/report.py:124
+#: src/osha/oira/client/report.py:104
 msgid "report_timeline_end_date"
 msgstr "Data Limite"
 
 #. Default: Responsible
-#: src/osha/oira/client/report.py:127
+#: src/osha/oira/client/report.py:107
 msgid "report_timeline_responsible"
 msgstr "Responsável"
 
 #. Default: Status (planned, in process, implemented)
-#: src/osha/oira/client/report.py:128
+#: src/osha/oira/client/report.py:108
 msgid "report_timeline_progress"
 msgstr "Estado (pendente/em curso/concluído)"
 
 #. Default: Timeline
-#: src/osha/oira/client/report.py:138
+#: src/osha/oira/client/report.py:118
 msgid "report_timeline_title"
 msgstr "Calendário"
 
 #. Default: Added risks (by you)
-#: src/osha/oira/client/report.py:196 src/osha/oira/client/report.py:366
+#: src/osha/oira/client/report.py:176 src/osha/oira/client/report.py:346
 #: src/osha/oira/upgrade/upgrade.py:189
 msgid "title_other_risks"
 msgstr "Riscos adicionados (por si)"
 
 #. Default: low
-#: src/osha/oira/client/report.py:424
+#: src/osha/oira/client/report.py:404
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -835,7 +203,7 @@ msgid "risk_priority_low"
 msgstr "baixa"
 
 #. Default: medium
-#: src/osha/oira/client/report.py:426
+#: src/osha/oira/client/report.py:406
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -844,7 +212,7 @@ msgid "risk_priority_medium"
 msgstr "média"
 
 #. Default: high
-#: src/osha/oira/client/report.py:428
+#: src/osha/oira/client/report.py:408
 #: src/osha/oira/client/templates/report_actionplan.pt:94
 #: src/osha/oira/client/templates/report_actionplan.pt:174
 #: src/osha/oira/client/templates/report_actionplan.pt:210
@@ -853,7 +221,7 @@ msgid "risk_priority_high"
 msgstr "elevada"
 
 #. Default: This is a ${priority_value} priority risk.
-#: src/osha/oira/client/report.py:430
+#: src/osha/oira/client/report.py:410
 #: src/osha/oira/client/templates/report_actionplan.pt:93
 #: src/osha/oira/client/templates/report_actionplan.pt:173
 #: src/osha/oira/client/templates/report_actionplan.pt:209
@@ -862,104 +230,103 @@ msgid "risk_priority"
 msgstr "Este é um risco de prioridade ${priority_value}."
 
 #. Default: Measure
-#: src/osha/oira/client/report.py:462 src/osha/oira/client/report.py:487
+#: src/osha/oira/client/report.py:442 src/osha/oira/client/report.py:467
 msgid "header_measure_single"
 msgstr "Medida"
 
 #. Default: Measure ${index}
-#: src/osha/oira/client/report.py:465
+#: src/osha/oira/client/report.py:445
 #: src/osha/oira/client/templates/report_actionplan.pt:99
 msgid "header_measure"
 msgstr "Medida ${index}"
 
 #. Default: General approach (to eliminate or reduce the risk)
-#: src/osha/oira/client/report.py:494
+#: src/osha/oira/client/report.py:474
 #: src/osha/oira/content/templates/solution_view.pt:22
 msgid "label_measure_action_plan"
 msgstr "Abordagem geral (para eliminar ou reduzir o risco)"
 
 #. Default: Specific action(s) required to implement this approach
-#: src/osha/oira/client/report.py:496
+#: src/osha/oira/client/report.py:476
 #: src/osha/oira/content/templates/solution_view.pt:25
 msgid "label_measure_prevention_plan"
 msgstr "Ação(ões) específica(s) necessária(s) para implementar esta abordagem"
 
 #. Default: Level of expertise and/or requirements needed
-#: src/osha/oira/client/report.py:498
+#: src/osha/oira/client/report.py:478
 #: src/osha/oira/content/templates/solution_view.pt:29
 msgid "label_measure_requirements"
 msgstr "Nível de competência e/ou requisitos necessários"
 
 #. Default: Who is responsible?
-#: src/osha/oira/client/report.py:500
+#: src/osha/oira/client/report.py:480
 msgid "label_action_plan_responsible"
 msgstr "Quem é o responsável?"
 
 #. Default: Budget
-#: src/osha/oira/client/report.py:502
+#: src/osha/oira/client/report.py:482
 msgid "label_action_plan_budget"
 msgstr "Orçamento"
 
 #. Default: Planning start
-#: src/osha/oira/client/report.py:503
+#: src/osha/oira/client/report.py:483
 msgid "label_action_plan_start"
 msgstr "A planear o início"
 
 #. Default: Planning end
-#: src/osha/oira/client/report.py:504
+#: src/osha/oira/client/report.py:484
 msgid "label_action_plan_end"
 msgstr "A planear o fim"
 
 #. Default: Consultation of workers
-#: src/osha/oira/client/report.py:555
+#: src/osha/oira/client/report.py:535
 msgid "header_oira_report_consultation"
 msgstr "Consulta aos trabalhadores"
 
 #. Default: The undersigned hereby declare that the workers have been consulted
 #. on the content of this document.
-#: src/osha/oira/client/report.py:564
+#: src/osha/oira/client/report.py:544
 msgid "paragraph_oira_consultation_of_workers"
 msgstr ""
 "Os abaixo-assinados declaram pelo presente que os trabalhadores foram "
 "consultados sobre o conteúdo deste documento."
 
 #. Default: On behalf of the employer:
-#: src/osha/oira/client/report.py:577
+#: src/osha/oira/client/report.py:557
 msgid "oira_consultation_employer"
 msgstr "Em nome do empregador:"
 
 #. Default: On behalf of the workers:
-#: src/osha/oira/client/report.py:579
+#: src/osha/oira/client/report.py:559
 msgid "oira_consultation_workers"
 msgstr "Em nome dos trabalhadores:"
 
 #. Default: Date:
-#: src/osha/oira/client/report.py:588
+#: src/osha/oira/client/report.py:568
 msgid "oira_survey_date"
 msgstr "Data:"
 
 #. Default: OiRA Report: "${title}"
-#: src/osha/oira/client/report.py:635
+#: src/osha/oira/client/report.py:615
 msgid "header_oira_report_download"
 msgstr "Relatório OiRA: \"${title}"
 
 #. Default: Contents
-#: src/osha/oira/client/report.py:654
+#: src/osha/oira/client/report.py:634
 #: src/osha/oira/client/templates/report_actionplan.pt:17
 #: src/osha/oira/client/templates/report_identification.pt:16
-#: src/osha/oira/client/templates/risks_overview.pt:156
 msgid "toc_header"
 msgstr "Conteúdos"
 
 #. Default: Risks that have been identified, evaluated and have an Action Plan
-#: src/osha/oira/client/report.py:659
+#: src/osha/oira/client/report.py:639
 #: src/osha/oira/client/templates/report_actionplan.pt:39
 #: src/osha/oira/client/templates/report_actionplan.pt:72
 msgid "header_present_risks"
 msgstr "Riscos que foram identificados, avaliados e têm um Plano de Ação"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
-#: src/osha/oira/client/report.py:662
+#: src/osha/oira/client/report.py:642
 #: src/osha/oira/client/templates/report_actionplan.pt:47
 #: src/osha/oira/client/templates/report_actionplan.pt:153
 msgid "header_unevaluated_risks"
@@ -967,7 +334,7 @@ msgstr "Riscos que foram identificados mas NÃO têm um Plano de Ação"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
-#: src/osha/oira/client/report.py:665
+#: src/osha/oira/client/report.py:645
 #: src/osha/oira/client/templates/report_actionplan.pt:55
 #: src/osha/oira/client/templates/report_actionplan.pt:187
 msgid "header_unanswered_risks"
@@ -975,7 +342,7 @@ msgstr "Riscos/problemas que ficaram \"parados\" e ainda têm de ser tratados"
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
-#: src/osha/oira/client/report.py:668
+#: src/osha/oira/client/report.py:648
 #: src/osha/oira/client/templates/report_actionplan.pt:63
 #: src/osha/oira/client/templates/report_actionplan.pt:221
 msgid "header_risks_not_present"
@@ -984,13 +351,13 @@ msgstr ""
 "organização"
 
 #. Default: Action plan ${title}
-#: src/osha/oira/client/report.py:695
+#: src/osha/oira/client/report.py:675
 msgid "filename_report_actionplan"
 msgstr "Plano de ação ${title}"
 
 #. Default: This document was based on the OiRA Tool '${title}' of revision
 #. date ${date}.
-#: src/osha/oira/client/report.py:784
+#: src/osha/oira/client/report.py:764
 msgid "report_identification_revision"
 msgstr ""
 "Este documento tem por base a Ferramenta OiRA Tool '${title}' da data de "
@@ -998,82 +365,12 @@ msgstr ""
 
 #. Default: This report was based on the OiRA Tool '${title}' of revision date
 #. ${date}.
-#: src/osha/oira/client/report.py:822
+#: src/osha/oira/client/report.py:802
 #: src/osha/oira/client/templates/report_actionplan.pt:302
 msgid "report_survey_revision"
 msgstr ""
 "Este relatório teve por base a Ferramenta OiRA '${title}' da data de revisão "
 "${date}."
-
-#. Default: After having identified the risks, you need to put an action plan
-#. in place to manage the risks. To eliminate or reduce risks you need to
-#. determine which preventive and protective measures are to be taken.
-#: src/osha/oira/client/templates/actionplan.pt:20
-msgid "expl_actionplan_1"
-msgstr ""
-"Após a avaliação dos riscos, é necessário criar um plano de ação para gerir "
-"os riscos. Para eliminar ou reduzir os riscos, necessita determinar que "
-"medidas de prevenção ou de proteção devem ser tomadas."
-
-#. Default: Among the things to be considered for this step are:
-#: src/osha/oira/client/templates/actionplan.pt:25
-msgid "expl_actionplan_2"
-msgstr "Eis alguns aspetos que devem ser considerados nesta fase:"
-
-#. Default: considering whether the task or job is necessary
-#: src/osha/oira/client/templates/actionplan.pt:33
-msgid "expl_actionplan_4"
-msgstr "Avaliando se a tarefa é mesmo necessária"
-
-#. Default: removing the hazard
-#: src/osha/oira/client/templates/actionplan.pt:34
-msgid "expl_actionplan_5"
-msgstr "Removendo totalmente o perigo da tarefa"
-
-#. Default: Is a risk avoidable? Can it be removed entirely? For example, this
-#. could be achieved by: ${expl_actionplan_4_and_5}
-#: src/osha/oira/client/templates/actionplan.pt:30
-msgid "expl_actionplan_3"
-msgstr ""
-"O risco pode ser evitado? Pode ser totalmente eliminado? Isto pode ser "
-"conseguido, por exemplo, através de: ${expl_actionplan_4_and_5}"
-
-#. Default: If certain risks are not avoidable, how can they be reduced to a
-#. level at which the health and safety of those exposed is not compromised?
-#: src/osha/oira/client/templates/actionplan.pt:37
-msgid "expl_actionplan_6"
-msgstr ""
-"Se alguns riscos não são de todo evitáveis, como poderemos reduzir estes "
-"riscos para que não comprometam a saúde e a segurança dos trabalhadores?"
-
-#. Default: Once you have decided how to eliminate or reduce a particular risk,
-#. then you describe the specific action(s) required to achieve this. You
-#. should also include details of the level of expertise and/or other
-#. requirements needed for those actions to be effective.
-#: src/osha/oira/client/templates/actionplan.pt:42
-msgid "expl_actionplan_7"
-msgstr ""
-"Após ter decidido como eliminar ou reduzir um determinado risco, deve "
-"descrever as ações específicas que são requeridas. Deve também mencionar o "
-"nível de competência e os requisitos necessários para que tais ações sejam "
-"eficazes."
-
-#. Default: No risks were identified. Please proceed directly to the report.
-#: src/osha/oira/client/templates/actionplan.pt:47
-msgid "expl_actionplan_empty"
-msgstr ""
-"Não foram identificados perigos/problemas. Avance diretamente para o "
-"relatório."
-
-#. Default: Create action plan
-#: src/osha/oira/client/templates/actionplan.pt:54
-msgid "label_create_action_plan"
-msgstr "Criar plano de ação"
-
-#. Default: Go to report
-#: src/osha/oira/client/templates/actionplan.pt:55
-msgid "label_jump_to_report"
-msgstr "Ir para relatório"
 
 #. Default: Terms and conditions
 #: src/osha/oira/client/templates/conditions.pt:21
@@ -1295,82 +592,6 @@ msgstr ""
 msgid "agree_and_continue"
 msgstr "Concordar e continuar"
 
-#. Default: Are you aware of all the risks?
-#: src/osha/oira/client/templates/default_introduction.pt:6
-msgid "header_risk_aware"
-msgstr "Conhece todos os riscos?"
-
-#. Default: Including the risks to your employees and your equipment? What if
-#. there is an accident with one of the machines? What if an employee is
-#. exposed to hazardous substances? A risk assessment helps you to define these
-#. risks and tackle them head on. A risk assessment mainly consists of two
-#. parts: a <dynamic element> with all the risks in your company and an
-#. <dynamic element> with details of how to deal with these risks. These two
-#. components allow you to limit the risks to your employees and your company,
-#. and therefore the financial risk.
-#: src/osha/oira/client/templates/default_introduction.pt:7
-msgid "intro_risk_aware"
-msgstr ""
-"Incluindo os riscos para os seus trabalhadores e equipamento? E se houver um "
-"acidente com uma das máquinas? E se um funcionário ficar exposto a "
-"substâncias perigosas? Uma avaliação de riscos ajuda-o a definir estes "
-"riscos e a enfrentá-los resolutamente. Uma avaliação de riscos é constituída "
-"principalmente por duas partes: um <elemento dinâmico> com todos os riscos "
-"na sua empresa e um <elemento dinâmico> com detalhes sobre como lidar com "
-"estes riscos. Estes dois componentes permitem limitar os riscos para os seus "
-"trabalhadores e empresa, e então o risco financeiro."
-
-#. Default: The assessment is not complicated
-#: src/osha/oira/client/templates/default_introduction.pt:9
-msgid "header_not_complicated"
-msgstr "A avaliação não é complicada"
-
-#. Default: Complicated? Not really. It just takes a bit of time. However, the
-#. RA is important. So important that it is a legal requirement. This is for
-#. good reason. If risks are not assessed or properly dealt with, a suitable
-#. risk management process cannot be started and appropriate preventive
-#. measures are unlikely to be found or put in place.
-#: src/osha/oira/client/templates/default_introduction.pt:10
-msgid "intro_not_complicated"
-msgstr ""
-"Complicada? Realmente não. Apenas leva algum tempo. No entanto, a Avaliação "
-"de Riscos é importante. Tão importante que se trata de um requisito legal. "
-"Isto é por uma boa razão. Se os riscos não forem avaliados ou tratados "
-"adequadamente, um processo adequado de gestão de riscos não pode ser "
-"iniciado e é improvável encontrar ou colocar em prática medidas preventivas "
-"apropriadas."
-
-#. Default: Consultation and participation of workers
-#: src/osha/oira/client/templates/default_introduction.pt:12
-msgid "header_consultation_of_workers"
-msgstr "Consulta e participação dos trabalhadores"
-
-#. Default: Workers or workers' representatives with specific responsibility
-#. for the safety and health of workers shall take part in a balanced way or
-#. shall be consulted in advance and in good time by the employer with regard
-#. to risk assessment
-#: src/osha/oira/client/templates/default_introduction.pt:13
-msgid "intro_consultation_of_workers"
-msgstr ""
-"Os trabalhadores ou representantes dos trabalhadores com responsabilidade "
-"específica pela segurança e saúde dos trabalhadores devem participar de uma "
-"forma equilibrada ou devem ser consultados previamente e em tempo útil pelo "
-"empregador em relaçõ à avaliação de riscos"
-
-#. Default: The OiRA tool
-#: src/osha/oira/client/templates/default_introduction.pt:15
-msgid "header_oira_tool"
-msgstr "A ferramenta OiRA"
-
-#. Default: This risk assessment tool is mainly intended for micro (less than
-#. 10 workers) and small (less than 50 workers) enterprises/organisations.
-#: src/osha/oira/client/templates/default_introduction.pt:16
-msgid "intro_oira_tool"
-msgstr ""
-"Esta ferramenta de avaliação de riscos destina-se principalmente a micro "
-"(menos de 10 trabalhadores) e pequenas (menos de 50 trabalhadores) empresas/"
-"organizações."
-
 #. Default: Disclaimer of Liability
 #: src/osha/oira/client/templates/disclaimer.pt:15
 msgid "header_disclaimer"
@@ -1456,21 +677,6 @@ msgstr ""
 "certificar-se de que tem sempre à disposição uma avaliação de riscos "
 "impresa, precisa e atualizada."
 
-#. Default: Error
-#: src/osha/oira/client/templates/error.pt:15
-msgid "title_error"
-msgstr "Erro"
-
-#. Default: Not found
-#: src/osha/oira/client/templates/error_notfound.pt:15
-msgid "title_error_notfound"
-msgstr "Não encontrado"
-
-#. Default: The page you requested could not be found.
-#: src/osha/oira/client/templates/error_notfound.pt:17
-msgid "expl_error_notfound"
-msgstr "Não foi possível encontrar a página pretendida."
-
 #. Default: Welcome
 #: src/osha/oira/client/templates/login.pt:22
 msgid "header_welcome"
@@ -1503,6 +709,20 @@ msgstr "log in"
 #: src/osha/oira/client/templates/login.pt:27
 msgid "label_login_here"
 msgstr "Se já é um utilizador registado, pode fazer ${log_in} aqui."
+
+#: src/osha/oira/client/templates/login.pt:29
+msgid "What is OiRA (Online Interactive Risk Assessment)?"
+msgstr "O que é OiRA?"
+
+#: src/osha/oira/client/templates/login.pt:30
+msgid ""
+"OiRA stands for Online Interactive Risk Assessment. It is a web-based tool "
+"that allows you to perform a health and safety risk assessment of your "
+"workplace."
+msgstr ""
+"A ferramenta interativa de avaliação de riscos (OiRA) é uma aplicação Web "
+"que permite realizar avaliações de riscos para a segurança e a saúde no seu "
+"local de trabalho."
 
 #. Default: Show more…
 #: src/osha/oira/client/templates/login.pt:34
@@ -1690,110 +910,6 @@ msgstr ""
 "entanto, pense em quem vai realizar a avaliação de riscos, de que forma os "
 "trabalhadores vão ser envolvidos na avaliação, etc.."
 
-#: src/osha/oira/client/templates/measures_overview.pt:60
-msgid "Overview of measures"
-msgstr "Visão geral das medidas"
-
-#: src/osha/oira/client/templates/measures_overview.pt:61
-msgid "(measures to be implemented in the coming months)"
-msgstr "(medidas a serem implementadas nos próximos meses)"
-
-#: src/osha/oira/client/templates/measures_overview.pt:62
-#: src/osha/oira/client/templates/report_landing.pt:51
-#: src/osha/oira/client/templates/report_landing.pt:69
-#: src/osha/oira/client/templates/report_landing.pt:90
-#: src/osha/oira/client/templates/report_landing.pt:111
-#: src/osha/oira/client/templates/risks_overview.pt:147
-msgid "Use it to"
-msgstr "Utilize-o para"
-
-#: src/osha/oira/client/templates/measures_overview.pt:64
-#: src/osha/oira/client/templates/report_landing.pt:92
-#: src/osha/oira/client/templates/report_landing.pt:113
-#: src/osha/oira/client/templates/risks_overview.pt:149
-msgid "Pass information to the people concerned."
-msgstr "Transmitir informações às pessoas interessadas."
-
-#: src/osha/oira/client/templates/measures_overview.pt:65
-#: src/osha/oira/client/templates/report_landing.pt:114
-msgid "Monitor the measures to be implemented in the forthcoming 3 months."
-msgstr "Monitorizar as medidas a serem implementadas nos próximos 3 meses"
-
-#: src/osha/oira/client/templates/measures_overview.pt:76
-msgid "Measure to be implemented by"
-msgstr "Medida a ser implementada por"
-
-#. Default: High priority risks
-#: src/osha/oira/client/templates/measures_overview.pt:84
-#: src/osha/oira/client/templates/status_print.pt:101
-msgid "heading_high_prio_risks"
-msgstr "Riscos de prioridade alta"
-
-#. Default: Medium priority risks
-#: src/osha/oira/client/templates/measures_overview.pt:116
-msgid "heading_medium_prio_risks"
-msgstr "Riscos de prioridade média"
-
-#. Default: Low priority risks
-#: src/osha/oira/client/templates/measures_overview.pt:131
-msgid "heading_low_prio_risks"
-msgstr "Riscos de prioridade baixa"
-
-#. Default: OiRA - Online interactive Risk Assessment
-#: src/osha/oira/client/templates/plain.pt:20
-#: src/osha/oira/client/templates/report_actionplan.pt:13
-#: src/osha/oira/client/templates/report_identification.pt:12
-#: src/osha/oira/client/templates/webhelpers.pt:22
-#: src/osha/oira/templates/custom_homepage.pt:20
-msgid "title_tool"
-msgstr "OiRA - Online interactive Risk Assessment"
-
-#. Default: Sign in
-#: src/osha/oira/client/templates/plain.pt:196
-msgid "link_sign_in"
-msgstr "Iniciar sessão"
-
-#. Default: This is a test session. ${link_sign_in} to save your data.
-#: src/osha/oira/client/templates/plain.pt:196
-msgid "info_testsession"
-msgstr "Esta é uma sessão de teste ${link_sign_in} para guardar os seus dados."
-
-#. Default: Info
-#: src/osha/oira/client/templates/plain.pt:196
-msgid "Info"
-msgstr "Informação"
-
-#. Default: Password reminder
-#: src/osha/oira/client/templates/reminder.pt:20
-msgid "header_password_reminder"
-msgstr "Lembrete da palavra-passe"
-
-#. Default: Please enter your email address. Your login details will be sent to
-#. you.
-#: src/osha/oira/client/templates/reminder.pt:23
-msgid "description_password_reminder"
-msgstr ""
-"Insira o seu endereço de correio eletrónico. Os seu dados de acesso ser-lhe-"
-"ão enviados."
-
-#. Default: Email address
-#: src/osha/oira/client/templates/reminder.pt:34
-msgid "label_email"
-msgstr "Endereço de e-mail"
-
-#. Default: Next
-#: src/osha/oira/client/templates/reminder.pt:39
-msgid "label_next"
-msgstr "Seguinte"
-
-#. Default: Cancel
-#: src/osha/oira/client/templates/reminder.pt:40
-#: src/osha/oira/content/risk.py:43 src/osha/oira/content/risk.py:65
-#: src/osha/oira/content/solution.py:42 src/osha/oira/content/solution.py:59
-#: src/osha/oira/content/templates/surveygroup_add.pt:110
-msgid "button_cancel"
-msgstr "Cancelar"
-
 #. Default: Reporting
 #: src/osha/oira/client/templates/report.pt:22
 msgid "header_reporting"
@@ -1822,6 +938,14 @@ msgstr "Queira por favor comentar a questão acima indicada."
 #: src/osha/oira/client/templates/report_company.pt:94
 msgid "label_save_and_continue"
 msgstr "Guardar e continuar"
+
+#. Default: OiRA - Online interactive Risk Assessment
+#: src/osha/oira/client/templates/report_actionplan.pt:13
+#: src/osha/oira/client/templates/report_identification.pt:12
+#: src/osha/oira/client/templates/webhelpers.pt:22
+#: src/osha/oira/templates/custom_homepage.pt:20
+msgid "title_tool"
+msgstr "OiRA - Online interactive Risk Assessment"
 
 #. Default: Download
 #: src/osha/oira/client/templates/report_actionplan.pt:27
@@ -2115,369 +1239,25 @@ msgstr "Ignorar este passo"
 msgid "warn_risk_present"
 msgstr "A sua resposta foi negativa à declaração em cima."
 
-#: src/osha/oira/client/templates/report_landing.pt:22
-msgid "Download and print your report"
-msgstr "Descarregue e imprima o seu relatório"
-
-#: src/osha/oira/client/templates/report_landing.pt:24
-msgid ""
-"Save the report on your computer and print it. You can also modify it or add "
-"more information. Please note that changes made on your pc will NOT be saved "
-"in the OiRA tool"
-msgstr ""
-"Guarde o relatório no seu computador e imprima-o. Pode igualmente modificá-"
-"lo ou adicionar mais informações. Queira ter em conta que as alterações "
-"efetuadas no seu computador não serão guardadas na ferramenta OiRA."
-
-#: src/osha/oira/client/templates/report_landing.pt:25
-msgid "Use the report to:"
-msgstr "Utilize o relatório para:"
-
-#: src/osha/oira/client/templates/report_landing.pt:28
-msgid "Provide evidence for supervisory authorities."
-msgstr ""
-"evidenciar junto das entidades competentes a avaliação de riscos efetuada;"
-
-#: src/osha/oira/client/templates/report_landing.pt:29
-msgid ""
-"Pass information on to the people concerned (workers, safety "
-"representatives, employers, experts in occupational safety and health, etc.)"
-msgstr ""
-"transmitir informações às pessoas envolvidas (trabalhadores, representantes "
-"dos trabalhadores para a segurança e saúde no trabalho, empregadores e "
-"técnicos de ST, …);"
-
-#: src/osha/oira/client/templates/report_landing.pt:30
-msgid "Monitor and assess whether necessary measures have been introduced."
-msgstr "acompanhar e avaliar se as medidas necessárias foram implementadas;"
-
-#: src/osha/oira/client/templates/report_landing.pt:31
-msgid ""
-"Record any revision if circumstances change (new machines, new workers, as a "
-"result of findings of any accident investigations, etc.)"
-msgstr ""
-"efetuar o registo de qualquer revisão em caso de alteração das condições de "
-"trabalho (novas máquinas, novos trabalhadores, como resultado da  análise às "
-"causas de um acidente, etc.)."
-
-#: src/osha/oira/client/templates/report_landing.pt:35
-msgid ""
-"We recommend that you always keep an updated printed version of your risk "
-"assessment (report) available in your company!"
-msgstr ""
-"Atenção! Recomendamos que tenha sempre disponível na sua empresa uma versão "
-"impressa e atualizada da sua avaliação de riscos (relatório)."
-
-#: src/osha/oira/client/templates/report_landing.pt:44
-msgid "Download the full report"
-msgstr "Descarregue o relatório completo"
-
-#: src/osha/oira/client/templates/report_landing.pt:47
-msgid "Format: Rich Text Format (.rtf)"
-msgstr "Formato: Rich Text Format (.rtf)"
-
-#: src/osha/oira/client/templates/report_landing.pt:48
-msgid ""
-"Contains: all the information and input provided by you throughout the risk "
-"assessment process."
-msgstr ""
-"Conteúdo: todas as informações e contributos que forneceu ao longo do "
-"processo de avaliação de riscos."
-
-#: src/osha/oira/client/templates/report_landing.pt:53
-msgid "Provide evidence"
-msgstr "Fornecer elementos comprovativos"
-
-#: src/osha/oira/client/templates/report_landing.pt:53
-msgid "${provide-evidence} for supervisory authorities (labour inspectorate)."
-msgstr "${provide-evidence} às autoridades competentes (inspeção do trabalho)."
-
-#: src/osha/oira/client/templates/report_landing.pt:62
-msgid "Download the action plan"
-msgstr "Descarregue o plano de ação"
-
-#: src/osha/oira/client/templates/report_landing.pt:65
-msgid "Format: Office Open XML Workbook (.xlsx)"
-msgstr "Formato: Excel (.xls);"
-
-#: src/osha/oira/client/templates/report_landing.pt:66
-msgid ""
-"Contains: main elements to effectively manage the risks at your workplace."
-msgstr ""
-"Contém: principais elementos para gerir eficazmente os riscos no seu local "
-"de trabalho."
-
-#: src/osha/oira/client/templates/report_landing.pt:71
-msgid "Manage"
-msgstr "A gestão"
-
-#: src/osha/oira/client/templates/report_landing.pt:71
-msgid ""
-"${manage} the problems/risks in your workplace (specific tasks, expertise, "
-"responsibilities, deadlines)."
-msgstr ""
-"${manage} dos riscos existentes no seu local de trabalho (tarefas "
-"específicas, competências, responsabilidades, prazos)."
-
-#: src/osha/oira/client/templates/report_landing.pt:80
-msgid "Download the risks overview"
-msgstr "Descarregue o quadro geral dos riscos"
-
-#: src/osha/oira/client/templates/report_landing.pt:86
-#: src/osha/oira/client/templates/report_landing.pt:107
-msgid "Format: Portable Document Format (.pdf)"
-msgstr "Formato: Portable Document Format (.pdf)"
-
-#: src/osha/oira/client/templates/report_landing.pt:87
-msgid "Contains: an overview of the risks identified"
-msgstr "Contém: um quadro geral dos perigos identificados."
-
-#: src/osha/oira/client/templates/report_landing.pt:93
-#: src/osha/oira/client/templates/risks_overview.pt:150
-msgid "Monitor whether risks / measures are properly dealt with."
-msgstr "Determinar se os riscos/as medidas são tratados devidamente."
-
-#: src/osha/oira/client/templates/report_landing.pt:101
-msgid "Download the measures overview"
-msgstr "Descarregue o quadro geral das medidas"
-
-#: src/osha/oira/client/templates/report_landing.pt:108
-msgid "Contains: an overview of the measures to be implemented."
-msgstr "Contém: um quadro geral das medidas a implementar."
-
-#: src/osha/oira/client/templates/risks_overview.pt:146
-msgid "Overview of risks"
-msgstr "Visão geral dos riscos"
-
-#. Default: No risk
-#: src/osha/oira/client/templates/risks_overview.pt:221
-#: src/osha/oira/client/templates/status_print.pt:85
-msgid "label_no_risk"
-msgstr "Nenhum risco"
-
-#. Default: No risks
-#: src/osha/oira/client/templates/risks_overview.pt:222
-msgid "label_no_risks_2"
-msgstr "Nenhum risco"
-
-#. Default: No risks
-#: src/osha/oira/client/templates/risks_overview.pt:223
-msgid "label_no_risks_3_4"
-msgstr "Nenhum risco"
-
-#. Default: No risks
-#: src/osha/oira/client/templates/risks_overview.pt:224
-msgid "label_no_risks_5_or_more"
-msgstr "Nenhum risco"
-
-#. Default: Risk with measure(s)
-#: src/osha/oira/client/templates/risks_overview.pt:228
-#: src/osha/oira/client/templates/status_print.pt:88
-msgid "label_risk_with_measure"
-msgstr "Risco com medida(s)"
-
-#. Default: Risks with measure(s)
-#: src/osha/oira/client/templates/risks_overview.pt:229
-msgid "label_risks_with_measure_2"
-msgstr "Riscos com medida(s"
-
-#. Default: Risks with measure(s)
-#: src/osha/oira/client/templates/risks_overview.pt:230
-msgid "label_risks_with_measure_3_4"
-msgstr "Riscos com medida(s"
-
-#. Default: Risks with measure(s)
-#: src/osha/oira/client/templates/risks_overview.pt:231
-msgid "label_risks_with_measure_5_or_more"
-msgstr "Riscos com medida(s"
-
-#. Default: Risk without measure
-#: src/osha/oira/client/templates/risks_overview.pt:235
-#: src/osha/oira/client/templates/status_print.pt:91
-msgid "label_risk_without_measure"
-msgstr "Risco sem medida"
-
-#. Default: Risks without measure
-#: src/osha/oira/client/templates/risks_overview.pt:236
-msgid "label_risks_without_measure_2"
-msgstr "Riscos sem medida"
-
-#. Default: Risks without measure
-#: src/osha/oira/client/templates/risks_overview.pt:237
-msgid "label_risks_without_measure_3_4"
-msgstr "Riscos sem medida"
-
-#. Default: Risks without measure
-#: src/osha/oira/client/templates/risks_overview.pt:238
-msgid "label_risks_without_measure_5_or_more"
-msgstr "Riscos sem medida"
-
-#. Default: Postponed
-#: src/osha/oira/client/templates/risks_overview.pt:241
-#: src/osha/oira/client/templates/webhelpers.pt:101
-msgid "Postponed"
-msgstr "Adiado"
-
-#. Default: Unanswered
-#: src/osha/oira/client/templates/risks_overview.pt:244
-#: src/osha/oira/client/templates/webhelpers.pt:100
-msgid "Unvisited"
-msgstr "Sem resposta"
-
-#. Default: ${num_present_risks} Present Risk
-#: src/osha/oira/client/templates/risks_overview.pt:255
-msgid "heading_present_risks"
-msgstr "${num_present_risks} Risco Presente"
-
-#. Default: ${num_present_risks} Present Risks
-#: src/osha/oira/client/templates/risks_overview.pt:256
-msgid "heading_present_risks_2"
-msgstr "${num_present_risks} Riscos Presentes"
-
-#. Default: ${num_present_risks} Present Risks
-#: src/osha/oira/client/templates/risks_overview.pt:257
-msgid "heading_present_risks_3_4"
-msgstr "${num_present_risks} Riscos Presentes"
-
-#. Default: ${num_present_risks} Present Risks
-#: src/osha/oira/client/templates/risks_overview.pt:258
-msgid "heading_present_risks_5_or_more"
-msgstr "${num_present_risks} Riscos Presentes"
-
-#. Default: ${num_high_risks} High priority risk
-#: src/osha/oira/client/templates/risks_overview.pt:261
-msgid "heading_num_high_prio_risks"
-msgstr "${num_high_risks} risco de prioridade alta"
-
-#. Default: ${num_high_risks} High priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:262
-msgid "heading_num_high_prio_risks_2"
-msgstr "${num_high_risks} riscos de prioridade alta"
-
-#. Default: ${num_high_risks} High priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:263
-msgid "heading_num_high_prio_risks_3_4"
-msgstr "${num_high_risks} riscos de prioridade alta"
-
-#. Default: ${num_high_risks} High priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:264
-msgid "heading_num_high_prio_risks_5_or_more"
-msgstr "${num_high_risks} riscos de prioridade alta"
-
-#. Default: ${num_medium_risks} Medium priority risk
-#: src/osha/oira/client/templates/risks_overview.pt:266
-msgid "heading_num_medium_prio_risks"
-msgstr "${num_medium_risks} risco de prioridade média"
-
-#. Default: ${num_medium_risks} Medium priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:267
-msgid "heading_num_medium_prio_risks_2"
-msgstr "${num_medium_risks} riscos de prioridade média"
-
-#. Default: ${num_medium_risks} Medium priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:268
-msgid "heading_num_medium_prio_risks_3_4"
-msgstr "${num_medium_risks} riscos de prioridade média"
-
-#. Default: ${num_medium_risks} Medium priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:269
-msgid "heading_num_medium_prio_risks_5_or_more"
-msgstr "${num_medium_risks} riscos de prioridade média"
-
-#. Default: ${num_low_risks} Low priority risk
-#: src/osha/oira/client/templates/risks_overview.pt:271
-msgid "heading_num_low_prio_risks"
-msgstr "${num_low_risks} risco de prioridade baixa"
-
-#. Default: ${num_low_risks} Low priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:272
-msgid "heading_num_low_prio_risks_2"
-msgstr "${num_low_risks} riscos de prioridade baixa"
-
-#. Default: ${num_low_risks} Low priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:273
-msgid "heading_num_low_prio_risks_3_4"
-msgstr "${num_low_risks} riscos de prioridade baixa"
-
-#. Default: ${num_low_risks} Low priority risks
-#: src/osha/oira/client/templates/risks_overview.pt:274
-msgid "heading_num_low_prio_risks_5_or_more"
-msgstr "${num_low_risks} riscos de prioridade baixa"
-
-#. Default: (≥1 measures)
-#: src/osha/oira/client/templates/risks_overview.pt:278
-msgid "label_with_measures"
-msgstr "(≥1 medidas)"
-
-#. Default: (without measures)
-#: src/osha/oira/client/templates/risks_overview.pt:278
-msgid "label_without_measures"
-msgstr "(sem medidas)"
-
-#. Default: ${num_possible_risks} Possible Risk
-#: src/osha/oira/client/templates/risks_overview.pt:286
-msgid "heading_possible_risks"
-msgstr "${num_possible_risks} Riscos Possíveis"
-
-#. Default: ${num_possible_risks} Possible Risks
-#: src/osha/oira/client/templates/risks_overview.pt:287
-msgid "heading_possible_risks_2"
-msgstr "${num_possible_risks} Riscos Possíveis"
-
-#. Default: ${num_possible_risks} Possible Risks
-#: src/osha/oira/client/templates/risks_overview.pt:288
-msgid "heading_possible_risks_3_4"
-msgstr "${num_possible_risks} Riscos Possíveis"
-
-#. Default: ${num_possible_risks} Possible Risks
-#: src/osha/oira/client/templates/risks_overview.pt:289
-msgid "heading_possible_risks_5_or_more"
-msgstr "${num_possible_risks} Riscos Possíveis"
-
-#. Default: ${num_postponed_risks} Risk postponed
-#: src/osha/oira/client/templates/risks_overview.pt:293
-msgid "heading_num_postponed_prio_risks"
-msgstr "${num_postponed_risks} riscos adiados"
-
-#. Default: ${num_postponed_risks} Risks postponed
-#: src/osha/oira/client/templates/risks_overview.pt:294
-msgid "heading_num_postponed_prio_risks_2"
-msgstr "${num_postponed_risks} riscos adiados"
-
-#. Default: ${num_postponed_risks} Risks postponed
-#: src/osha/oira/client/templates/risks_overview.pt:295
-msgid "heading_num_postponed_prio_risks_3_4"
-msgstr "${num_postponed_risks} riscos adiados"
-
-#. Default: ${num_postponed_risks} Risks postponed
-#: src/osha/oira/client/templates/risks_overview.pt:296
-msgid "heading_num_postponed_prio_risks_5_or_more"
-msgstr "${num_postponed_risks} riscos adiados"
-
-#. Default: ${num_todo_risks} Risk not answered
-#: src/osha/oira/client/templates/risks_overview.pt:298
-msgid "heading_num_todo_prio_risks"
-msgstr "${num_todo_risks} riscos não respondidos"
-
-#. Default: ${num_todo_risks} Risks not answered
-#: src/osha/oira/client/templates/risks_overview.pt:299
-msgid "heading_num_todo_prio_risks_2"
-msgstr "${num_todo_risks} riscos não respondidos"
-
-#. Default: ${num_todo_risks} Risks not answered
-#: src/osha/oira/client/templates/risks_overview.pt:300
-msgid "heading_num_todo_prio_risks_3_4"
-msgstr "${num_todo_risks} riscos não respondidos"
-
-#. Default: ${num_todo_risks} Risks not answered
-#: src/osha/oira/client/templates/risks_overview.pt:301
-msgid "heading_num_todo_prio_risks_5_or_more"
-msgstr "${num_todo_risks} riscos não respondidos"
-
 #. Default: Status of ${survey_title}
 #: src/osha/oira/client/templates/status_print.pt:19
 msgid "title_status_of"
 msgstr "Estado do ${survey_title}"
+
+#. Default: No risk
+#: src/osha/oira/client/templates/status_print.pt:85
+msgid "label_no_risk"
+msgstr "Nenhum risco"
+
+#. Default: Risk with measure(s)
+#: src/osha/oira/client/templates/status_print.pt:88
+msgid "label_risk_with_measure"
+msgstr "Risco com medida(s)"
+
+#. Default: Risk without measure
+#: src/osha/oira/client/templates/status_print.pt:91
+msgid "label_risk_without_measure"
+msgstr "Risco sem medida"
 
 #. Default: Postponed
 #: src/osha/oira/client/templates/status_print.pt:94
@@ -2488,6 +1268,11 @@ msgstr "Adiado"
 #: src/osha/oira/client/templates/status_print.pt:97
 msgid "label_unanswered"
 msgstr "Não respondido"
+
+#. Default: High priority risks
+#: src/osha/oira/client/templates/status_print.pt:101
+msgid "heading_high_prio_risks"
+msgstr "Riscos de prioridade alta"
 
 #. Default: Online interactive
 #: src/osha/oira/client/templates/webhelpers.pt:23
@@ -2528,6 +1313,14 @@ msgstr "Definições"
 #: src/osha/oira/client/templates/webhelpers.pt:36
 msgid "Sign in"
 msgstr "Iniciar sessão"
+
+#: src/osha/oira/client/templates/webhelpers.pt:100
+msgid "Unvisited"
+msgstr "Sem resposta"
+
+#: src/osha/oira/client/templates/webhelpers.pt:101
+msgid "Postponed"
+msgstr "Adiado"
 
 #: src/osha/oira/client/templates/webhelpers.pt:102
 msgid "Risk not present"
@@ -2599,15 +1392,6 @@ msgstr "Recursos adicionais para a avaliação do risco"
 msgid "header_additional_resources_module"
 msgstr "Recursos adicionais para este mòdulo"
 
-#: src/osha/oira/content/module.py:21 src/osha/oira/content/module.py:35
-#: src/osha/oira/content/module.py:50
-msgid "Submodule"
-msgstr "Submódulo"
-
-#: src/osha/oira/content/module.py:40
-msgid "Edit ${name}"
-msgstr "Editar ${name}"
-
 #. Default: Choose between ESTIMATED (rough estimation) or CALCULATED
 #. (combination of probability, frequency and severity) method.
 #: src/osha/oira/content/risk.py:19
@@ -2629,6 +1413,13 @@ msgstr ""
 #: src/osha/oira/content/solution.py:40 src/osha/oira/content/solution.py:57
 msgid "button_save_changes"
 msgstr "Guardar alterações"
+
+#. Default: Cancel
+#: src/osha/oira/content/risk.py:43 src/osha/oira/content/risk.py:65
+#: src/osha/oira/content/solution.py:42 src/osha/oira/content/solution.py:59
+#: src/osha/oira/content/templates/surveygroup_add.pt:110
+msgid "button_cancel"
+msgstr "Cancelar"
 
 #: src/osha/oira/content/risk.py:47
 msgid "Add Risk"
@@ -2661,6 +1452,11 @@ msgstr "Estatísticas"
 #: src/osha/oira/content/solution.py:46
 msgid "Edit Solution"
 msgstr "Editar Medida"
+
+#. Default: Add Measure
+#: src/osha/oira/content/solution.py:63
+msgid "Add Solution"
+msgstr "Adicionar Medida"
 
 #. Default: Year
 #: src/osha/oira/content/statistics.py:95
@@ -2736,6 +1532,11 @@ msgstr "Indica a probabilidade de ocorrência deste risco numa siutação normal
 #: src/osha/oira/content/survey.py:23
 msgid "help_default_frequency"
 msgstr "Indica a frequência de ocorrência do risco numa situação normal."
+
+#. Default: Indicate the severity if this risk occurs.
+#: src/osha/oira/content/survey.py:26
+msgid "help_default_severity"
+msgstr "Indica a gravidade em caso de ocorrência do risco."
 
 #. Default: Include a logo which links to an external website.
 #: src/osha/oira/content/survey.py:34
@@ -2972,42 +1773,28 @@ msgstr "pedir uma reposição da palavra-passe"
 msgid "message_reset_password"
 msgstr "Se esqueceu a palavra-passe, pode ${reset_password}."
 
-#. Default: Information
-#: src/osha/oira/content/templates/module_view.pt:22
-#: src/osha/oira/content/templates/solution_view.pt:19
-#: src/osha/oira/content/templates/survey_view.pt:21
-msgid "header_information"
-msgstr "Informação"
-
-#. Default: This ${number} is mandatory.
-#: src/osha/oira/content/templates/module_view.pt:23
-msgid "module_mandatory"
-msgstr "Este ${number} é obrigatório."
-
-#. Default: This ${number} is optional.
-#: src/osha/oira/content/templates/module_view.pt:27
-msgid "module_optional"
-msgstr "Este ${number} é opcional."
-
-#. Default: Submodules
-#: src/osha/oira/content/templates/module_view.pt:32
-msgid "header_submodules"
-msgstr "Submódulos"
-
-#. Default: Risks
-#: src/osha/oira/content/templates/module_view.pt:39
-msgid "header_risks"
-msgstr "Riscos"
-
 #. Default: Sectors
 #: src/osha/oira/content/templates/sectorcontainer_view.pt:12
 msgid "title_sectors"
 msgstr "Setores"
 
+#. Default: Please choose a country of which you would like to view or copy an
+#. OiRA Tool.
+#: src/osha/oira/content/templates/sectorcontainer_view.pt:31
+msgid "message_choose_country"
+msgstr ""
+"Selecione um país do qual pretende visualizar ou copiar uma Ferramenta OiRA."
+
 #: src/osha/oira/content/templates/solution_view.pt:12
 #: src/osha/oira/profiles/default/types/euphorie.solution.xml:5
 msgid "Measure"
 msgstr "Medida"
+
+#. Default: Information
+#: src/osha/oira/content/templates/solution_view.pt:19
+#: src/osha/oira/content/templates/survey_view.pt:21
+msgid "header_information"
+msgstr "Informação"
 
 #. Default: Classification code
 #: src/osha/oira/content/templates/survey_view.pt:24
@@ -3048,7 +1835,7 @@ msgstr "Como pretende começar"
 #: src/osha/oira/content/templates/surveygroup_add.pt:20
 #: src/osha/oira/content/templates/surveygroup_add.pt:86
 #: src/osha/oira/content/templates/surveygroup_add.pt:94
-#: src/osha/oira/nuplone/templates/largetextarea_input.pt:19
+#: src/osha/oira/nuplone/templates/largetextarea_input.pt:18
 #: src/osha/oira/nuplone/templates/wysiwyg_input.pt:11
 msgid "Information"
 msgstr "Informação"
@@ -3261,6 +2048,760 @@ msgstr ""
 "recomendamos que primeiro explore os módulos predefinidos, se ainda não o "
 "fez.</p><p>Se não precisa de adicionar outros riscos, por favor selecione "
 "'Não'.</p>"
+
+#~ msgid "help_measure_action_plan"
+#~ msgstr ""
+#~ "Descreva a sua abordagem geral para eliminar ou (se o risco for "
+#~ "inevitável) reduzir o risco."
+
+#~ msgid "help_measure_prevention_plan"
+#~ msgstr ""
+#~ "Descreva a(s) ação(ões) específica(s) necessária(s) para implementar esta "
+#~ "abordagem (para eliminar ou reduzir o risco)."
+
+#~ msgid "help_measure_requirements"
+#~ msgstr ""
+#~ "Descreva o nível de competência necessário para implementar a medida, por "
+#~ "exemplo \"senso comum (sem conhecimento necessário da SST)\", \"nenhuma "
+#~ "competência da SST específica, mas conhecimento mínimo da SST ou formação "
+#~ "e/ou consulta necessárias do guia da SST \", ou \"competência SST\". "
+#~ "Também é possível descrever aqui qualquer outro requisito adicional (se "
+#~ "existente)."
+
+#~ msgid "Solution"
+#~ msgstr "Medida"
+
+#~ msgid "title_common_solution"
+#~ msgstr "Medida"
+
+#~ msgid "A solution."
+#~ msgstr "Uma medida padrão para um risco."
+
+#~ msgid "header_solutions"
+#~ msgstr "Medidas padrão"
+
+#~ msgid "risk_solution_header"
+#~ msgstr "Medida ${number}"
+
+#~ msgid "nav_surveys"
+#~ msgstr "Ferramentas OiRA"
+
+#~ msgid "label_sessions"
+#~ msgstr "Sessões"
+
+#~ msgid "Survey import"
+#~ msgstr "Importar Ferramenta OiRA"
+
+#~ msgid "Import survey version"
+#~ msgstr "Importar versão da ferramenta OiRA "
+
+#~ msgid "Survey version"
+#~ msgstr "Versão da Ferramenta OiRA "
+
+#~ msgid "no_profile_questions"
+#~ msgstr "Esta Ferramenta OiRA não tem perguntas de perfil."
+
+#~ msgid "button_create_new"
+#~ msgstr "Criar nova Ferramenta OiRA "
+
+#~ msgid "intro_select_sector"
+#~ msgstr ""
+#~ "Selecione um setor para o qual pretende visualizar ou copiar uma "
+#~ "Ferramenta OiRA."
+
+#~ msgid "help_survey_title"
+#~ msgstr ""
+#~ "Este é o título desta versão da Ferramenta OiRA. Este nome nunca é "
+#~ "revelado aos utilizadores."
+
+#~ msgid "help_introduction"
+#~ msgstr ""
+#~ "O texto de introdução é apresentado ao iniciar uma nova sessão da "
+#~ "Ferramenta OiRA. Se a introdução não for introduzida aqui, será "
+#~ "apresentado um texto padrão. Mantenha este texto resumido para se ajustar "
+#~ "facilmente aos ecrãs de dispositivos pequenos como telemóveis e PDAs."
+
+#~ msgid "message_delete_no_last_survey"
+#~ msgstr ""
+#~ "Esta é a única versão da Ferramenta OiRA e, por isso, não pode ser "
+#~ "apagada. Talvez pretendesse remover a Ferramenta OiRA?"
+
+#~ msgid "label_surveygroup_title"
+#~ msgstr "Título da Ferramenta OiRA importada"
+
+#~ msgid "upload_success"
+#~ msgstr "Ferramenta OiRA importada com sucesso"
+
+#~ msgid "title_import_sector_survey"
+#~ msgstr "Importar setor e a Ferramenta OiRA"
+
+#~ msgid "intro_add_survey"
+#~ msgstr "O formulário permitirá criar uma nova revisão da Ferramenta OiRA."
+
+#~ msgid "label_solution_direction"
+#~ msgstr "Solução"
+
+#~ msgid ""
+#~ "Succesfully created a preview for the survey. It can be accessed at "
+#~ "${url} ."
+#~ msgstr ""
+#~ "Pré-visualização da Ferramenta OiRA criada com sucesso. Está acessível em "
+#~ "${url}."
+
+#~ msgid "help_publish"
+#~ msgstr ""
+#~ "Publicar a Ferramenta OiRA selecionada com as mais recentes alterações."
+
+#~ msgid "help_add_version"
+#~ msgstr "Criar uma cópia da Ferramenta OiRA selecionada"
+
+#~ msgid "help_profilequestion_question"
+#~ msgstr ""
+#~ "Se tiver de ser \"opcional\", a sua formulação deve permitir a resposta "
+#~ "SIM (o utilizador final terá de selecionar uma caixa) ou NÃO (p.ex. "
+#~ "\"Trabalha diretamente com o público?\"). Se tiver de ser \"repetível\", "
+#~ "a sua formulação deve ser uma solicitação para preencher os valores "
+#~ "múltiplos (p.ex. \"Listar os diferentes locais de trabalho\")."
+
+#~ msgid "help_module_description"
+#~ msgstr ""
+#~ "Incluir qualquer informação relevante que possa ser útil ao utilizador "
+#~ "final."
+
+#~ msgid "help_module_optional"
+#~ msgstr ""
+#~ "Permite ao utilizador final ignorar este módulo e todo o seu conteúdo."
+
+#~ msgid "help_module_question"
+#~ msgstr ""
+#~ "A pergunta ao utilizador final sobre se este módulo é opcional. A sua "
+#~ "formulação deve permitir a resposta SIM (o utilizador final terá de "
+#~ "assinalar uma caixa) ou NÃO"
+
+#~ msgid "help_solution_direction"
+#~ msgstr ""
+#~ "Esta informação surgirá no passo Plano de ação e deve incluir uma visão "
+#~ "geral da(s) solução(ões) geral(is) relativa(s) a este módulo."
+
+#~ msgid "label_statement"
+#~ msgstr "Declaração afirmativa"
+
+#~ msgid "label_problem_description"
+#~ msgstr "Declaração negativa"
+
+#~ msgid "help_statement"
+#~ msgstr ""
+#~ "Esta é uma breve declaração afirmativa sobre um risco possível (p.ex. A "
+#~ "manutenção do edifício é correta.)"
+
+#~ msgid "help_problem_description"
+#~ msgstr ""
+#~ "Isto é o inverso da declaração afirmativa (p.ex. A manutenção do edifício "
+#~ "é incorreta.)"
+
+#~ msgid "help_risk_description"
+#~ msgstr ""
+#~ "Descreva o risco. Inclua qualquer informação relevante que possa ser útil "
+#~ "ao utilizador final."
+
+#~ msgid "risktype_top5"
+#~ msgstr "Prioridade do risco"
+
+#~ msgid "help_risk_type"
+#~ msgstr ""
+#~ "Prioridade do risco\" é um dos riscos elevados no setor. \"Risco\" está "
+#~ "relacionado com o local de trabalho ou com o trabalho realizado. "
+#~ "\"Política\" refere-se a acordos, procedimentos e decisões de gestão."
+
+#~ msgid "help_default_priority"
+#~ msgstr ""
+#~ "Pode ajudar o utilizador final ao selecionar uma prioridade padrão. Ele/"
+#~ "ela ainda pode alterar a prioridade."
+
+#~ msgid "help_help_introduction"
+#~ msgstr "Informação geral sobre a avaliação de riscos"
+
+#~ msgid "label_help_authentication"
+#~ msgstr "Registo"
+
+#~ msgid "help_header_authentication"
+#~ msgstr "Registo"
+
+#~ msgid "help_authentication"
+#~ msgstr "Este texto deve explicar como efetuar o registo e o login."
+
+#~ msgid "help_header_sessions"
+#~ msgstr "Realizar a sua avaliação de riscos"
+
+#~ msgid "label_help_sessions"
+#~ msgstr "Realizar a sua avaliação de riscos"
+
+#~ msgid "help_sessions"
+#~ msgstr "Este texto deve descrever as funções principais da Ferramenta OiRA."
+
+#~ msgid "help_header_start"
+#~ msgstr "1. Preparação"
+
+#~ msgid "label_help_preparation"
+#~ msgstr "1. Preparação"
+
+#~ msgid "help_preparation"
+#~ msgstr "Este texto deve explicar os 2 tipos de perguntas de perfil."
+
+#~ msgid "help_header_identification"
+#~ msgstr "2. Identificação"
+
+#~ msgid "label_help_identification"
+#~ msgstr "2. Identificação"
+
+#~ msgid "help_identification"
+#~ msgstr "Estes texto deve explicar como ocorre a identificação do risco."
+
+#~ msgid "help_header_evaluation"
+#~ msgstr "3. Avaliação"
+
+#~ msgid "label_help_evaluation"
+#~ msgstr "3. Avaliação"
+
+#~ msgid "help_evaluation"
+#~ msgstr "Este texto deve explicar como avaliar os riscos identificados."
+
+#~ msgid "help_header_actionplan"
+#~ msgstr "4. Plano de Ação"
+
+#~ msgid "label_help_actionplan"
+#~ msgstr "4. Plano de Ação"
+
+#~ msgid "help_actionplan"
+#~ msgstr "Este texto deve explicar como preencher o Plano de ação."
+
+#~ msgid "help_header_report"
+#~ msgstr "5. Relatório"
+
+#~ msgid "label_help_reports"
+#~ msgstr "5. Relatório"
+
+#~ msgid "help_reports"
+#~ msgstr "Este texto deve descrever como guardar ou imprimir o relatório."
+
+#~ msgid "label_help_finalwords"
+#~ msgstr "O que acontece a seguir?"
+
+#~ msgid "help_header_finalwords"
+#~ msgstr "O que acontece a seguir?"
+
+#~ msgid "help_finalwords"
+#~ msgstr "Recomendações finais gerais."
+
+#~ msgid "intro_print_identification_1"
+#~ msgstr ""
+#~ "É possível imprimir os conteúdos da ferramenta. No documento impresso, "
+#~ "pode registar informação relevante que tenha identificado no local de "
+#~ "trabalho (observando o que pode ser prejudicial ou perguntando aos "
+#~ "trabalhadores e/ou seus representantes sobre os problemas com que se "
+#~ "depararam). A seguir, pode introduzir a informação na ferramenta."
+
+#~ msgid "intro_print_identification_2"
+#~ msgstr ""
+#~ "Pode também pretender distribuir o documento entre os trabalhadores e/ou "
+#~ "os seus representantes e convidá-los a participar na identificação dos "
+#~ "perigos/problemas, avaliar os riscos e decidir sobre as ações "
+#~ "preventivas. As suas observações devem ser consideradas ao preencher esta "
+#~ "ferramenta."
+
+#~ msgid "list_of_risks"
+#~ msgstr "conteúdos da ferramenta"
+
+#~ msgid "help_create_new_version"
+#~ msgstr ""
+#~ "Comece a escrever uma nova Ferramenta OiRA. Ser-lhe-á perguntado se "
+#~ "pretende começar com uma cópia de uma Ferramenta OiRA existente.."
+
+#~ msgid "title_help_unpublished"
+#~ msgstr "Remova esta Ferramenta OiRA do cliente online."
+
+#~ msgid "message_preview_success"
+#~ msgstr ""
+#~ "Pré-visualização criada com sucesso para a Ferramenta OiRA. Está "
+#~ "acessível em ${url} ."
+
+#~ msgid "message_publish_success"
+#~ msgstr "Ferramenta OiRA publicada com sucesso. Está acessível em ${url}."
+
+#~ msgid "warning_account_delete_surveys"
+#~ msgstr ""
+#~ "Tenha em atenção que ao apagar a sua conta, também apagará todas as suas "
+#~ "sessões. Certifique-se de que descarrega os seus relatórios a partir do "
+#~ "passo Relatório antes de apagar a sua conta, se pretender guardar algum."
+
+#~ msgid "intro_preview"
+#~ msgstr ""
+#~ "Tem a certeza de que pretende criar uma pré-visualização desta Ferramenta "
+#~ "OiRA? Pode indicar o URL para a pré-visualização, para que a Ferramenta "
+#~ "OiRA possa ser testada. Para aceder à pré-visualização, é necessário um "
+#~ "login de cliente OiRA padrão."
+
+#~ msgid "header_preview"
+#~ msgstr "Pré-visualizar a Ferramenta OiRA"
+
+#~ msgid "help_publish_url"
+#~ msgstr "Após a publicação, a Ferramenta OiRA estará disponível em ${url}."
+
+#~ msgid "intro_publish_other_survey_published"
+#~ msgstr ""
+#~ "Tem a certeza de que pretende publicar esta versão da Ferramenta OiRA? "
+#~ "Esta substituirá a versão atual."
+
+#~ msgid "intro_publish_survey_published"
+#~ msgstr ""
+#~ "Tem a certeza de que pretende publicar novamente esta Ferramenta OiRA? "
+#~ "Isto tornará todas as alterações públicas."
+
+#~ msgid "intro_publish_first_time"
+#~ msgstr ""
+#~ "Tem a certeza de que pretende publicar esta versão da Ferramenta OiRA? "
+#~ "Após a publicação, a Ferramenta OiRA surgirá no cliente online e estará "
+#~ "acessível a todos os utilizadores."
+
+#~ msgid "header_publish"
+#~ msgstr "Publicar Ferramenta OiRA"
+
+#~ msgid "help_surveygroup_title"
+#~ msgstr ""
+#~ "O título desta Ferramenta OiRA. Este título é utilizado na visão geral da "
+#~ "Ferramenta OiRA nos clientes."
+
+#~ msgid "message_unpublish_success"
+#~ msgstr "Esta Ferramenta OiRA já não se encontra disponível no cliente."
+
+#~ msgid "label_upload_survey_title"
+#~ msgstr "Nome para a versão da Ferramenta OiRA "
+
+#~ msgid "label_default_effect"
+#~ msgstr "Gravidade padrão"
+
+#~ msgid "unpublish_confirm"
+#~ msgstr ""
+#~ "Tem a certeza de que pretende anular a publicação desta Ferramenta OiRA?"
+
+#~ msgid "menu_import"
+#~ msgstr "Importar a Ferramenta OiRA "
+
+#~ msgid "message_no_delete_published_survey"
+#~ msgstr ""
+#~ "Não é possível apagar uma versão da Ferramenta OiRA que tenha sido "
+#~ "publicada. Anule primeiro a sua publicação."
+
+#~ msgid "message_not_delete_published_sector"
+#~ msgstr ""
+#~ "Não é possível apagar um setor que contenha Ferramentas OiRA publicadas."
+
+#~ msgid "add_survey"
+#~ msgstr "adicionar uma nova Ferramenta OiRA "
+
+#~ msgid "no_surveys_present"
+#~ msgstr "Não existem atualmente Ferramentas OiRA. Pode ${add_link}."
+
+#~ msgid "header_sector_survey_list"
+#~ msgstr "Ferramentas OiRA"
+
+#~ msgid "expl_error"
+#~ msgstr "Lamentamos, mas ocorreu um erro imprevisto."
+
+#~ msgid "label_remove_measure"
+#~ msgstr "Apagar esta medida"
+
+#~ msgid "expl_actionplan_1"
+#~ msgstr ""
+#~ "Após a avaliação dos riscos, é necessário criar um plano de ação para "
+#~ "gerir os riscos. Para eliminar ou reduzir os riscos, necessita determinar "
+#~ "que medidas de prevenção ou de proteção devem ser tomadas."
+
+#~ msgid "expl_actionplan_2"
+#~ msgstr "Eis alguns aspetos que devem ser considerados nesta fase:"
+
+#~ msgid "expl_actionplan_4"
+#~ msgstr "Avaliando se a tarefa é mesmo necessária"
+
+#~ msgid "expl_actionplan_5"
+#~ msgstr "Removendo totalmente o perigo da tarefa"
+
+#~ msgid "expl_actionplan_3"
+#~ msgstr ""
+#~ "O risco pode ser evitado? Pode ser totalmente eliminado? Isto pode ser "
+#~ "conseguido, por exemplo, através de: ${expl_actionplan_4_and_5}"
+
+#~ msgid "expl_actionplan_6"
+#~ msgstr ""
+#~ "Se alguns riscos não são de todo evitáveis, como poderemos reduzir estes "
+#~ "riscos para que não comprometam a saúde e a segurança dos trabalhadores?"
+
+#~ msgid "expl_actionplan_7"
+#~ msgstr ""
+#~ "Após ter decidido como eliminar ou reduzir um determinado risco, deve "
+#~ "descrever as ações específicas que são requeridas. Deve também mencionar "
+#~ "o nível de competência e os requisitos necessários para que tais ações "
+#~ "sejam eficazes."
+
+#~ msgid "expl_actionplan_empty"
+#~ msgstr ""
+#~ "Não foram identificados perigos/problemas. Avance diretamente para o "
+#~ "relatório."
+
+#~ msgid "label_create_action_plan"
+#~ msgstr "Criar plano de ação"
+
+#~ msgid "label_jump_to_report"
+#~ msgstr "Ir para relatório"
+
+#~ msgid "header_risk_aware"
+#~ msgstr "Conhece todos os riscos?"
+
+#~ msgid "intro_risk_aware"
+#~ msgstr ""
+#~ "Incluindo os riscos para os seus trabalhadores e equipamento? E se houver "
+#~ "um acidente com uma das máquinas? E se um funcionário ficar exposto a "
+#~ "substâncias perigosas? Uma avaliação de riscos ajuda-o a definir estes "
+#~ "riscos e a enfrentá-los resolutamente. Uma avaliação de riscos é "
+#~ "constituída principalmente por duas partes: um <elemento dinâmico> com "
+#~ "todos os riscos na sua empresa e um <elemento dinâmico> com detalhes "
+#~ "sobre como lidar com estes riscos. Estes dois componentes permitem "
+#~ "limitar os riscos para os seus trabalhadores e empresa, e então o risco "
+#~ "financeiro."
+
+#~ msgid "header_not_complicated"
+#~ msgstr "A avaliação não é complicada"
+
+#~ msgid "intro_not_complicated"
+#~ msgstr ""
+#~ "Complicada? Realmente não. Apenas leva algum tempo. No entanto, a "
+#~ "Avaliação de Riscos é importante. Tão importante que se trata de um "
+#~ "requisito legal. Isto é por uma boa razão. Se os riscos não forem "
+#~ "avaliados ou tratados adequadamente, um processo adequado de gestão de "
+#~ "riscos não pode ser iniciado e é improvável encontrar ou colocar em "
+#~ "prática medidas preventivas apropriadas."
+
+#~ msgid "header_consultation_of_workers"
+#~ msgstr "Consulta e participação dos trabalhadores"
+
+#~ msgid "intro_consultation_of_workers"
+#~ msgstr ""
+#~ "Os trabalhadores ou representantes dos trabalhadores com responsabilidade "
+#~ "específica pela segurança e saúde dos trabalhadores devem participar de "
+#~ "uma forma equilibrada ou devem ser consultados previamente e em tempo "
+#~ "útil pelo empregador em relaçõ à avaliação de riscos"
+
+#~ msgid "header_oira_tool"
+#~ msgstr "A ferramenta OiRA"
+
+#~ msgid "intro_oira_tool"
+#~ msgstr ""
+#~ "Esta ferramenta de avaliação de riscos destina-se principalmente a micro "
+#~ "(menos de 10 trabalhadores) e pequenas (menos de 50 trabalhadores) "
+#~ "empresas/organizações."
+
+#~ msgid "title_error"
+#~ msgstr "Erro"
+
+#~ msgid "title_error_notfound"
+#~ msgstr "Não encontrado"
+
+#~ msgid "expl_error_notfound"
+#~ msgstr "Não foi possível encontrar a página pretendida."
+
+#~ msgid "Overview of measures"
+#~ msgstr "Visão geral das medidas"
+
+#~ msgid "(measures to be implemented in the coming months)"
+#~ msgstr "(medidas a serem implementadas nos próximos meses)"
+
+#~ msgid "Use it to"
+#~ msgstr "Utilize-o para"
+
+#~ msgid "Pass information to the people concerned."
+#~ msgstr "Transmitir informações às pessoas interessadas."
+
+#~ msgid "Monitor the measures to be implemented in the forthcoming 3 months."
+#~ msgstr "Monitorizar as medidas a serem implementadas nos próximos 3 meses"
+
+#~ msgid "Measure to be implemented by"
+#~ msgstr "Medida a ser implementada por"
+
+#~ msgid "heading_medium_prio_risks"
+#~ msgstr "Riscos de prioridade média"
+
+#~ msgid "heading_low_prio_risks"
+#~ msgstr "Riscos de prioridade baixa"
+
+#~ msgid "link_sign_in"
+#~ msgstr "Iniciar sessão"
+
+#~ msgid "info_testsession"
+#~ msgstr ""
+#~ "Esta é uma sessão de teste ${link_sign_in} para guardar os seus dados."
+
+#~ msgid "Info"
+#~ msgstr "Informação"
+
+#~ msgid "header_password_reminder"
+#~ msgstr "Lembrete da palavra-passe"
+
+#~ msgid "description_password_reminder"
+#~ msgstr ""
+#~ "Insira o seu endereço de correio eletrónico. Os seu dados de acesso ser-"
+#~ "lhe-ão enviados."
+
+#~ msgid "label_email"
+#~ msgstr "Endereço de e-mail"
+
+#~ msgid "label_next"
+#~ msgstr "Seguinte"
+
+#~ msgid "Download and print your report"
+#~ msgstr "Descarregue e imprima o seu relatório"
+
+#~ msgid ""
+#~ "Save the report on your computer and print it. You can also modify it or "
+#~ "add more information. Please note that changes made on your pc will NOT "
+#~ "be saved in the OiRA tool"
+#~ msgstr ""
+#~ "Guarde o relatório no seu computador e imprima-o. Pode igualmente "
+#~ "modificá-lo ou adicionar mais informações. Queira ter em conta que as "
+#~ "alterações efetuadas no seu computador não serão guardadas na ferramenta "
+#~ "OiRA."
+
+#~ msgid "Use the report to:"
+#~ msgstr "Utilize o relatório para:"
+
+#~ msgid "Provide evidence for supervisory authorities."
+#~ msgstr ""
+#~ "evidenciar junto das entidades competentes a avaliação de riscos efetuada;"
+
+#~ msgid ""
+#~ "Pass information on to the people concerned (workers, safety "
+#~ "representatives, employers, experts in occupational safety and health, "
+#~ "etc.)"
+#~ msgstr ""
+#~ "transmitir informações às pessoas envolvidas (trabalhadores, "
+#~ "representantes dos trabalhadores para a segurança e saúde no trabalho, "
+#~ "empregadores e técnicos de ST, …);"
+
+#~ msgid "Monitor and assess whether necessary measures have been introduced."
+#~ msgstr "acompanhar e avaliar se as medidas necessárias foram implementadas;"
+
+#~ msgid ""
+#~ "Record any revision if circumstances change (new machines, new workers, "
+#~ "as a result of findings of any accident investigations, etc.)"
+#~ msgstr ""
+#~ "efetuar o registo de qualquer revisão em caso de alteração das condições "
+#~ "de trabalho (novas máquinas, novos trabalhadores, como resultado da  "
+#~ "análise às causas de um acidente, etc.)."
+
+#~ msgid ""
+#~ "We recommend that you always keep an updated printed version of your risk "
+#~ "assessment (report) available in your company!"
+#~ msgstr ""
+#~ "Atenção! Recomendamos que tenha sempre disponível na sua empresa uma "
+#~ "versão impressa e atualizada da sua avaliação de riscos (relatório)."
+
+#~ msgid "Download the full report"
+#~ msgstr "Descarregue o relatório completo"
+
+#~ msgid "Format: Rich Text Format (.rtf)"
+#~ msgstr "Formato: Rich Text Format (.rtf)"
+
+#~ msgid ""
+#~ "Contains: all the information and input provided by you throughout the "
+#~ "risk assessment process."
+#~ msgstr ""
+#~ "Conteúdo: todas as informações e contributos que forneceu ao longo do "
+#~ "processo de avaliação de riscos."
+
+#~ msgid "Provide evidence"
+#~ msgstr "Fornecer elementos comprovativos"
+
+#~ msgid ""
+#~ "${provide-evidence} for supervisory authorities (labour inspectorate)."
+#~ msgstr ""
+#~ "${provide-evidence} às autoridades competentes (inspeção do trabalho)."
+
+#~ msgid "Download the action plan"
+#~ msgstr "Descarregue o plano de ação"
+
+#~ msgid "Format: Office Open XML Workbook (.xlsx)"
+#~ msgstr "Formato: Excel (.xls);"
+
+#~ msgid ""
+#~ "Contains: main elements to effectively manage the risks at your workplace."
+#~ msgstr ""
+#~ "Contém: principais elementos para gerir eficazmente os riscos no seu "
+#~ "local de trabalho."
+
+#~ msgid "Manage"
+#~ msgstr "A gestão"
+
+#~ msgid ""
+#~ "${manage} the problems/risks in your workplace (specific tasks, "
+#~ "expertise, responsibilities, deadlines)."
+#~ msgstr ""
+#~ "${manage} dos riscos existentes no seu local de trabalho (tarefas "
+#~ "específicas, competências, responsabilidades, prazos)."
+
+#~ msgid "Download the risks overview"
+#~ msgstr "Descarregue o quadro geral dos riscos"
+
+#~ msgid "Format: Portable Document Format (.pdf)"
+#~ msgstr "Formato: Portable Document Format (.pdf)"
+
+#~ msgid "Contains: an overview of the risks identified"
+#~ msgstr "Contém: um quadro geral dos perigos identificados."
+
+#~ msgid "Monitor whether risks / measures are properly dealt with."
+#~ msgstr "Determinar se os riscos/as medidas são tratados devidamente."
+
+#~ msgid "Download the measures overview"
+#~ msgstr "Descarregue o quadro geral das medidas"
+
+#~ msgid "Contains: an overview of the measures to be implemented."
+#~ msgstr "Contém: um quadro geral das medidas a implementar."
+
+#~ msgid "Overview of risks"
+#~ msgstr "Visão geral dos riscos"
+
+#~ msgid "label_no_risks_2"
+#~ msgstr "Nenhum risco"
+
+#~ msgid "label_no_risks_3_4"
+#~ msgstr "Nenhum risco"
+
+#~ msgid "label_no_risks_5_or_more"
+#~ msgstr "Nenhum risco"
+
+#~ msgid "label_risks_with_measure_2"
+#~ msgstr "Riscos com medida(s"
+
+#~ msgid "label_risks_with_measure_3_4"
+#~ msgstr "Riscos com medida(s"
+
+#~ msgid "label_risks_with_measure_5_or_more"
+#~ msgstr "Riscos com medida(s"
+
+#~ msgid "label_risks_without_measure_2"
+#~ msgstr "Riscos sem medida"
+
+#~ msgid "label_risks_without_measure_3_4"
+#~ msgstr "Riscos sem medida"
+
+#~ msgid "label_risks_without_measure_5_or_more"
+#~ msgstr "Riscos sem medida"
+
+#~ msgid "heading_present_risks"
+#~ msgstr "${num_present_risks} Risco Presente"
+
+#~ msgid "heading_present_risks_2"
+#~ msgstr "${num_present_risks} Riscos Presentes"
+
+#~ msgid "heading_present_risks_3_4"
+#~ msgstr "${num_present_risks} Riscos Presentes"
+
+#~ msgid "heading_present_risks_5_or_more"
+#~ msgstr "${num_present_risks} Riscos Presentes"
+
+#~ msgid "heading_num_high_prio_risks"
+#~ msgstr "${num_high_risks} risco de prioridade alta"
+
+#~ msgid "heading_num_high_prio_risks_2"
+#~ msgstr "${num_high_risks} riscos de prioridade alta"
+
+#~ msgid "heading_num_high_prio_risks_3_4"
+#~ msgstr "${num_high_risks} riscos de prioridade alta"
+
+#~ msgid "heading_num_high_prio_risks_5_or_more"
+#~ msgstr "${num_high_risks} riscos de prioridade alta"
+
+#~ msgid "heading_num_medium_prio_risks"
+#~ msgstr "${num_medium_risks} risco de prioridade média"
+
+#~ msgid "heading_num_medium_prio_risks_2"
+#~ msgstr "${num_medium_risks} riscos de prioridade média"
+
+#~ msgid "heading_num_medium_prio_risks_3_4"
+#~ msgstr "${num_medium_risks} riscos de prioridade média"
+
+#~ msgid "heading_num_medium_prio_risks_5_or_more"
+#~ msgstr "${num_medium_risks} riscos de prioridade média"
+
+#~ msgid "heading_num_low_prio_risks"
+#~ msgstr "${num_low_risks} risco de prioridade baixa"
+
+#~ msgid "heading_num_low_prio_risks_2"
+#~ msgstr "${num_low_risks} riscos de prioridade baixa"
+
+#~ msgid "heading_num_low_prio_risks_3_4"
+#~ msgstr "${num_low_risks} riscos de prioridade baixa"
+
+#~ msgid "heading_num_low_prio_risks_5_or_more"
+#~ msgstr "${num_low_risks} riscos de prioridade baixa"
+
+#~ msgid "label_with_measures"
+#~ msgstr "(≥1 medidas)"
+
+#~ msgid "label_without_measures"
+#~ msgstr "(sem medidas)"
+
+#~ msgid "heading_possible_risks"
+#~ msgstr "${num_possible_risks} Riscos Possíveis"
+
+#~ msgid "heading_possible_risks_2"
+#~ msgstr "${num_possible_risks} Riscos Possíveis"
+
+#~ msgid "heading_possible_risks_3_4"
+#~ msgstr "${num_possible_risks} Riscos Possíveis"
+
+#~ msgid "heading_possible_risks_5_or_more"
+#~ msgstr "${num_possible_risks} Riscos Possíveis"
+
+#~ msgid "heading_num_postponed_prio_risks"
+#~ msgstr "${num_postponed_risks} riscos adiados"
+
+#~ msgid "heading_num_postponed_prio_risks_2"
+#~ msgstr "${num_postponed_risks} riscos adiados"
+
+#~ msgid "heading_num_postponed_prio_risks_3_4"
+#~ msgstr "${num_postponed_risks} riscos adiados"
+
+#~ msgid "heading_num_postponed_prio_risks_5_or_more"
+#~ msgstr "${num_postponed_risks} riscos adiados"
+
+#~ msgid "heading_num_todo_prio_risks"
+#~ msgstr "${num_todo_risks} riscos não respondidos"
+
+#~ msgid "heading_num_todo_prio_risks_2"
+#~ msgstr "${num_todo_risks} riscos não respondidos"
+
+#~ msgid "heading_num_todo_prio_risks_3_4"
+#~ msgstr "${num_todo_risks} riscos não respondidos"
+
+#~ msgid "heading_num_todo_prio_risks_5_or_more"
+#~ msgstr "${num_todo_risks} riscos não respondidos"
+
+#~ msgid "Submodule"
+#~ msgstr "Submódulo"
+
+#~ msgid "Edit ${name}"
+#~ msgstr "Editar ${name}"
+
+#~ msgid "module_mandatory"
+#~ msgstr "Este ${number} é obrigatório."
+
+#~ msgid "module_optional"
+#~ msgstr "Este ${number} é opcional."
+
+#~ msgid "header_submodules"
+#~ msgstr "Submódulos"
+
+#~ msgid "header_risks"
+#~ msgstr "Riscos"
 
 #~ msgid "error_validation_whole_number"
 #~ msgstr "Este valor deve ser um número inteiro."

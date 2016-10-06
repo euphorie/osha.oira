@@ -1,20 +1,9 @@
 Changelog
 =========
 
-4.0.0rc3 (unreleased)
----------------------
 
-- Nothing changed yet.
-
-
-4.0.0rc2 (2016-09-29)
----------------------
-
-- Nothing changed yet.
-
-
-4.0.0rc1 (2016-09-29)
----------------------
+4.0.0 (unreleased)
+------------------
 
 - Ported the new Patternlib based "OiRA 2.0" interface
   to Euphorie

@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.0 (unreleased)
+4.0.0 (2016-10-06)
 ------------------
 
 - Ported the new Patternlib based "OiRA 2.0" interface

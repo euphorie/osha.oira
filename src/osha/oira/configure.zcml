@@ -9,8 +9,8 @@
     i18n_domain="euphorie">
 
     <!-- XXX: osha.oira's translations override Euphorie's, because osha.oira's
-         ZCML slug is loaded first. This is determined in the buildout.cfg 
-         
+         ZCML slug is loaded first. This is determined in the buildout.cfg
+
         Uncomment the line below when testing Euphorie, otherwise osha.oira's
         translations will break the tests.
     -->
@@ -27,7 +27,6 @@
         />
 
     <include package="euphorie.deployment" />
-    <include package="oira.private" />
     <include package=".browser" />
     <include package=".client" />
     <include package=".content" />
@@ -52,14 +51,6 @@
         />
 
     <adapter factory=".homepage.homepage_form_factory" />
-
-    <browser:page
-        for="*"
-        name="default_introduction"
-        template="templates/default_introduction.pt"
-        permission="zope2.View"
-        layer=".interfaces.IProductLayer"
-        />
 
     <browser:page
         for=".homepage.IHomePage"

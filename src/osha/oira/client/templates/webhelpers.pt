@@ -38,19 +38,19 @@
   </metal:topnav>
 
   <metal:css define-macro="css" meta:interpolation="true"
-         tal:define="base_url client/++resource++osha.oira.resources">
+         tal:define="base_url client/++resource++euphorie.resources">
 
     <tal:block condition="webhelpers/debug_mode">
-		<link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
+    <link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
     </tal:block>
     <tal:block condition="not:webhelpers/debug_mode">
         <!-- TODO: needs to be minified -->
-		<link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
+    <link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
     </tal:block>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
   </metal:css>
 
-  <metal:javascript define-macro="javascript" meta:interpolation="true" tal:define="lib_url client/++resource++osha.oira.resources">
+  <metal:javascript define-macro="javascript" meta:interpolation="true" tal:define="lib_url client/++resource++euphorie.resources">
     <tal:block condition="webhelpers/debug_mode">
         <script type="text/javascript" src="${lib_url}/oira.js"></script>
     </tal:block>
@@ -59,24 +59,6 @@
         <script type="text/javascript" src="${lib_url}/oira.js"></script>
     </tal:block>
   </metal:javascript>
-
-  <metal:survey define-macro="survey_tree_inner_old" meta:interpolation="true">
-    <ol tal:condition="exists:tree" class="${python:'microns' if tree['leaf_module'] else None}">
-      <li tal:repeat="item tree/children"
-          title="${python:'%s. %s' % (item['number'], item['title']) if tree['leaf_module'] else None}"
-          class="${item/class}">
-        <a  tal:define="item_class item/class"
-            href="${item/url}">
-            <tal:if condition="python:not tree['leaf_module']">
-                <strong class="counter">${item/number}</strong> ${item/title}
-            </tal:if>
-        </a>
-        <tal:subtree condition="python:item['children']" define="tree python:item">
-          <metal:call use-macro="webhelpers/macros/survey_tree_inner" />
-        </tal:subtree>
-      </li>
-    </ol>
-  </metal:survey>
 
   <metal:survey define-macro="survey_tree_inner" meta:interpolation="true" tal:define="target_inject python:page_section=='identification' and 'step-2' or 'step-4'">
     <ol tal:condition="exists:tree" tal:attributes="class python:tree['leaf_module'] and 'navigation questions' or ''">
@@ -105,6 +87,7 @@
   </metal:survey>
 
   <metal:survey define-macro="survey_tree" meta:interpolation="true">
+
     <div tal:condition="exists:tree" class="topics">
       <h2 class="module-title">
         <tal:phase_identification condition="python:page_section=='identification'">
@@ -120,18 +103,6 @@
           <li class="answered risk" i18n:translate="">Risk present</li>
         </ul>
     </div>
-  </metal:survey>
-
-  <metal:survey define-macro="survey_tree_old" meta:interpolation="true">
-    <aside tal:condition="exists:tree" class="questions">
-      <metal:call use-macro="webhelpers/macros/survey_tree_inner" />
-      <ul class="legend">
-          <li class="unvisited" i18n:translate="">Unvisited</li>
-          <li class="postponed" i18n:translate="">Postponed</li>
-          <li class="answered" i18n:translate="">Risk not present</li>
-          <li class="answered risk" i18n:translate="">Risk present</li>
-        </ul>
-    </aside>
   </metal:survey>
 
   <metal:appendix define-macro="appendix" meta:interpolation="true" i18n:domain="euphorie">
@@ -224,7 +195,7 @@
       </tal:block>
       <tal:block condition="view/risk_present">
         <tal:block condition="not:use_problem_description">
-          <p class="negation" tal:condition="not:is_custom_risk">
+          <p class="negation" tal:condition="not:is_custom_risk">>
             <em><strong class="icon warning">⚠</strong>
                 <tal:span i18n:translate="warn_risk_present"> You responded negative to the above statement.</tal:span>
             </em>

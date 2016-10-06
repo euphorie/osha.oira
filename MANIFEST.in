@@ -5,8 +5,23 @@ recursive-include src *.py
 recursive-include src/osha/oira *.ini
 recursive-include src/osha/oira *.zcml
 recursive-include src/osha/oira/locales *.po
+prune src/osha/oira/locales/EUPHORIE
+recursive-include src/osha/oira *.eot
+recursive-include src/osha/oira *.gif
+recursive-include src/osha/oira *.html
+recursive-include src/osha/oira *.jpg
+recursive-include src/osha/oira *.json
+recursive-include src/osha/oira *.png
+recursive-include src/osha/oira *.svg
+recursive-include src/osha/oira *.ttf
+recursive-include src/osha/oira *.woff
+recursive-include src/osha/oira *.woff2
+recursive-include work/osha/oira *.svg
+
 graft docs
+prune work
 prune docs/.build
+prune src/Euphorie
 graft src/osha/oira/profiles
 graft src/osha/oira/templates
 graft src/osha/oira/content/templates

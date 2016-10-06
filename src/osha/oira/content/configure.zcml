@@ -28,38 +28,6 @@
         factory="z3c.form.datamanager.AttributeField"
         />
 
-    <plone:behavior
-        title="OSHA additional content on Risks fields"
-        description="Provide additional OSHA fields"
-        provides=".risk.IRiskAdditionalContent"
-        factory=".risk.RiskAdditionalContent"
-        marker=".risk.IRiskAdditionalContent"
-        for="euphorie.content.risk.IRisk"
-        />
-
-    <plone:behavior
-        title="OSHA additional content on Risks fields"
-        description="Provide additional OSHA fields"
-        provides=".module.IModuleAdditionalContent"
-        factory=".module.ModuleAdditionalContent"
-        marker=".module.IModuleAdditionalContent"
-        for="euphorie.content.module.IModule"
-        />
-
-    <adapter
-        for=".risk.IOSHARiskMarker zope.schema.interfaces.IField"
-        factory="z3c.form.datamanager.AttributeField"
-        />
-
-    <adapter
-        for=".module.IOSHAModuleMarker zope.schema.interfaces.IField"
-        factory="z3c.form.datamanager.AttributeField"
-        />
-
-    <adapter
-        factory=".profilequestion.context_proxy"
-        />
-
     <adapter
         factory=".statistics.ReportPeriodFactory"
         name="osha.oira.content.statistics.IReportPeriod"

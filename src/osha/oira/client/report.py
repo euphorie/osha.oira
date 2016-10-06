@@ -1,16 +1,13 @@
+# coding=utf-8
 from Acquisition import aq_inner
 from AccessControl import getSecurityManager
 from cStringIO import StringIO
-from collections import defaultdict
 from datetime import datetime
 from euphorie.client import model
 from euphorie.client import report
 from euphorie.client import survey
 from euphorie.client.session import SessionManager
 from euphorie.client import config
-from euphorie.content.profilequestion import IProfileQuestion
-from euphorie.content.interfaces import ICustomRisksModule
-from euphorie.ghost import PathGhost
 from five import grok
 from openpyxl.cell import get_column_letter
 from openpyxl.workbook import Workbook
@@ -18,7 +15,6 @@ from osha.oira import _
 from osha.oira.client import utils
 from osha.oira.client.interfaces import IOSHAIdentificationPhaseSkinLayer
 from osha.oira.client.interfaces import IOSHAReportPhaseSkinLayer
-from osha.oira.client.survey import OSHAStatus
 from plonetheme.nuplone.utils import formatDate
 from rtfng.Elements import PAGE_NUMBER
 from rtfng.PropertySets import BorderPropertySet
@@ -37,13 +33,10 @@ from sqlalchemy import sql
 from z3c.saconfig import Session
 from zExceptions import NotFound
 from zope.i18n import translate
-from zope.i18nmessageid import MessageFactory
 import htmllaundry
 import logging
 import urllib
 
-
-PloneLocalesFactory = MessageFactory("plonelocales")
 
 log = logging.getLogger(__name__)
 
@@ -91,19 +84,6 @@ COLUMN_ORDER = [
     ('module', 'title'),
     ('risk', 'comment'),
 ]
-
-
-class ReportLanding(grok.View):
-    """Custom report landing page.
-
-    This replaces the standard online view of the report with a page
-    offering the RTF and XLSX download options.
-    """
-    grok.context(PathGhost)
-    grok.require("euphorie.client.ViewSurvey")
-    grok.layer(IOSHAReportPhaseSkinLayer)
-    grok.template("report_landing")
-    grok.name("view")
 
 
 class ActionPlanTimeline(report.ActionPlanTimeline):
@@ -853,121 +833,3 @@ def createSection(document, survey, request):
     return section
 
 
-class RisksOverview(OSHAStatus):
-    """ Implements the "Overview of Risks" report, see #10967
-    """
-    grok.context(PathGhost)
-    grok.layer(IOSHAReportPhaseSkinLayer)
-    grok.template("risks_overview")
-    grok.name("risks_overview")
-
-    def is_skipped_from_risk_list(self, r):
-        if r['identification'] == 'yes':
-            return True
-
-
-class MeasuresOverview(OSHAStatus):
-    """ Implements the "Overview of Measures" report, see #10967
-    """
-    grok.context(PathGhost)
-    grok.layer(IOSHAReportPhaseSkinLayer)
-    grok.template("measures_overview")
-    grok.require('euphorie.client.ViewSurvey')
-    grok.name("measures_overview")
-
-    def update(self):
-        self.session = SessionManager.session
-        lang = getattr(self.request, 'LANGUAGE', 'en')
-        if "-" in lang:
-            lang = lang.split("-")[0]
-        now = datetime.now()
-        next_month = datetime(now.year, (now.month + 1) % 12 or 12, 1)
-        month_after_next = datetime(now.year, (now.month + 2) % 12 or 12, 1)
-        self.months = []
-        self.months.append(now.strftime('%b'))
-        self.months.append(next_month.strftime('%b'))
-        self.months.append(month_after_next.strftime('%b'))
-        self.monthstrings = [
-            translate(
-                PloneLocalesFactory(
-                    "month_{0}_abbr".format(month.lower()),
-                    default=month,
-                ),
-                target_language=lang,
-            )
-            for month in self.months
-        ]
-
-        query = Session.query(model.Module, model.Risk, model.ActionPlan)\
-            .filter(sql.and_(model.Module.session == self.session,
-                             model.Module.profile_index > -1))\
-            .filter(sql.not_(model.SKIPPED_PARENTS))\
-            .filter(sql.or_(model.MODULE_WITH_RISK_OR_TOP5_FILTER,
-                            model.RISK_PRESENT_OR_TOP5_FILTER))\
-            .join((model.Risk,
-                   sql.and_(model.Risk.path.startswith(model.Module.path),
-                            model.Risk.depth == model.Module.depth+1,
-                            model.Risk.session == self.session)))\
-            .join((model.ActionPlan,
-                   model.ActionPlan.risk_id == model.Risk.id))\
-            .order_by(
-                sql.case(
-                    value=model.Risk.priority,
-                    whens={'high': 0, 'medium': 1},
-                    else_=2),
-                model.Risk.path)
-        measures = [t for t in query.all() if (
-            (t[-1].planning_start is not None
-                and t[-1].planning_start.strftime('%b') in self.months) and
-            (
-                t[-1].planning_end is not None or
-                t[-1].responsible is not None or
-                t[-1].prevention_plan is not None or
-                t[-1].requirements is not None or
-                t[-1].budget is not None or
-                t[-1].action_plan is not None
-            )
-        )]
-
-        modulesdict = defaultdict(lambda: defaultdict(list))
-        for module, risk, action in measures:
-            if 'custom-risks' not in risk.zodb_path:
-                risk_obj = self.request.survey.restrictedTraverse(risk.zodb_path.split('/'))
-                title = risk_obj and risk_obj.problem_description or risk.title
-            else:
-                title = risk.title
-            modulesdict[module][risk.priority].append(
-                {'title': title,
-                 'description': action.action_plan,
-                 'months': [action.planning_start and
-                            action.planning_start.month == m.month
-                            for m in [now, next_month, month_after_next]],
-                 })
-
-        # re-use top-level module computation from the Status overview
-        modules = self.getModules()
-        main_modules = {}
-        for module, risks in sorted(modulesdict.items(), key=lambda m: m[0].zodb_path):
-            module_obj = self.request.survey.restrictedTraverse(module.zodb_path.split('/'))
-            if (
-                IProfileQuestion.providedBy(module_obj) or
-                ICustomRisksModule.providedBy(module_obj) or
-                module.depth >= 3
-            ):
-                path = module.path[:6]
-            else:
-                path = module.path[:3]
-            if path in main_modules:
-                for prio in risks.keys():
-                    if prio in main_modules[path]['risks']:
-                        main_modules[path]['risks'][prio].extend(risks[prio])
-                    else:
-                        main_modules[path]['risks'][prio] = risks[prio]
-            else:
-                title = modules[path]['title']
-                number = modules[path]['number']
-                main_modules[path] = {'name': title, 'number': number, 'risks': risks}
-
-        self.modules = []
-        for key in sorted(main_modules.keys()):
-            self.modules.append(main_modules[key])

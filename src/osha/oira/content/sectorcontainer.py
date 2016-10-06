@@ -2,7 +2,7 @@ from Acquisition import aq_inner
 from five import grok
 from euphorie.content import sectorcontainer
 from euphorie.content.utils import summarizeCountries
-from .library import get_library
+from euphorie.content.library import get_library
 from ..interfaces import IOSHAContentSkinLayer
 
 grok.templatedir("templates")

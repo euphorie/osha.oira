@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:meta="http://xml.zope.org/namespaces/meta"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
@@ -20,8 +20,8 @@
         <dfn class="infoPanel" i18n:attributes="title" title="Information" i18n:translate="help_survey_source">
             By copying an existing OiRA tool you also inherit its evaluation algorithm
         </dfn>
-        <label><input type="radio" name="source" value="scratch" checked="${python:'checked' if value=='scratch' else None}" /> <tal:span i18n:translate="survey_source_scratch">Create a new OiRA Tool from scratch</tal:span></label> 
-        <label tal:condition="view/my_group"><input type="radio" name="source" value="local" checked="${python:'checked' if value=='local' else None}"/> <tal:span i18n:translate="survey_source_local">Base my new OiRA Tool on an existing OiRA Tool of my organisation</tal:span></label> 
+        <label><input type="radio" name="source" value="scratch" checked="${python:'checked' if value=='scratch' else None}" /> <tal:span i18n:translate="survey_source_scratch">Create a new OiRA Tool from scratch</tal:span></label>
+        <label tal:condition="view/my_group"><input type="radio" name="source" value="local" checked="${python:'checked' if value=='local' else None}"/> <tal:span i18n:translate="survey_source_local">Base my new OiRA Tool on an existing OiRA Tool of my organisation</tal:span></label>
         <label><input type="radio" name="source" value="other" checked="${python:'checked' if value=='other' else None}"/> <tal:span i18n:translate="survey_source_other">Base my new OiRA Tool on an existing OiRA Tool of another organisation</tal:span></label>
       </fieldset>
 
@@ -39,7 +39,7 @@
               <tal:group repeat="group sector/groups">
                 <fieldset class="comprehensive radioList dependsOn-source-equals-local dependsOn-surveygroup.local-equals-${group/id}" tal:define="value python:request.form.get('survey.local', group['surveys'][0]['id'])">
                   <legend i18n:translate="label_choose_survey">Choose a revision of the selected OiRA Tool</legend>
-                  <label tal:repeat="survey group/surveys"><input type="radio" name="survey.local" value="${survey/id}" checked="${python:'checked' if survey['id']==value else None}"/>${survey/title} <a href="${survey/url}" class="floatAfter">View</a></label>
+                  <label tal:repeat="survey group/surveys"><input type="radio" name="survey.local.${group/id}" value="${survey/id}" checked="${python:'checked' if repeat.survey.start else None}"/>${survey/title} <a href="${survey/url}" class="floatAfter">View</a></label>
                 </fieldset>
               </tal:group>
             </tal:mysector>
@@ -75,14 +75,14 @@
             <fieldset class="comprehensive radioList dependsOn-source-equals-other dependsOn-country-equals-${country/id} dependsOn-sector.${country/id}-equals-${sector/id}.${group/id}"
               tal:define="name string:survey.${country/id}.${group/id}; value python:request.form.get(name, group['surveys'][0]['id'])">
               <legend i18n:translate="label_choose_survey">Choose a revision of the selected OiRA Tool</legend>
-              <label tal:repeat="survey group/surveys"><input type="radio" name="${name}" value="${survey/id}" checked="${python:'checked' if survey['id']==value else None}"/>${survey/title} <a href="${survey/url}" class="floatAfter">View</a></label>
+              <label tal:repeat="survey group/surveys"><input type="radio" name="${name}" value="${survey/id}" checked="{python:'checked if repeat.survey.start else None'}" />${survey/title} <a href="${survey/url}" class="floatAfter">View</a></label>
             </fieldset>
           </tal:group>
         </tal:sector>
       </tal:country>
 
     <fieldset class="dependsOn-source-equals-scratch comprehensive radioList" tal:define="widget nocall:view/widgets/evaluation_algorithm">
-    <legend>${widget/label} <sup tal:condition="widget/required" class="required">*</sup></legend> 
+    <legend>${widget/label} <sup tal:condition="widget/required" class="required">*</sup></legend>
         <dfn class="infoPanel" title="Information" i18n:translate="help_survey_evaluation_algorithm_standard" i18n:attributes="title">
         This method involves risk assessment by Severity x Exposure x Probability, whereas these have to be understood as follows; Severity of injury linked to hazard - Exposure (Frequency) to the hazard - Probability of the hazard occuring when exposed
         </dfn>
@@ -94,7 +94,7 @@
         <dfn class="infoPanel" title="Information" i18n:translate="help_survey_evaluation_algorithm_simplified" i18n:attributes="title">
         This method involves risk assessment by Severity x Exposure, whereas these have to be understood as follows; Severity of injury linked to hazard - Exposure (Frequency) to the hazard
         </dfn>
-        </div> 
+        </div>
         <label>
         <input type="radio" name="${widget/name}:list" value="french"
         checked="${python:'checked' if 'french' in widget.value else None}"/><tal:i18n

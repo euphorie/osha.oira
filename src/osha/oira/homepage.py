@@ -1,34 +1,30 @@
-from ZPublisher.BaseRequest import DefaultPublishTraverse
-from datetime import datetime
-from datetime import timedelta
-from euphorie.client.utils import setRequest
-from euphorie.content import MessageFactory as _
+import os
 from five import grok
-from json import loads
-from osha.oira.client.interfaces import IOSHAClientSkinLayer
-from osha.oira.interfaces import IOSHAContentSkinLayer
-from osha.oira.interfaces import IProductLayer
-from osha.oira.nuplone.widget import LargeTextAreaFieldWidget
-from plone import api
-from plone.app.dexterity.behaviors.metadata import IBasic
-from plone.dexterity.browser import edit
-from plone.dexterity.events import EditFinishedEvent
-from plone.directives import dexterity
-from plone.directives import form
-from plone.z3cform import layout
-from z3c.form import button
-from z3c.form.form import FormTemplateFactory
 from zope import schema
 from zope.component import adapts
 from zope.event import notify
 from zope.interface import directlyProvides
 from zope.interface import implements
 
-import logging
-import os
-import requests
+from ZPublisher.BaseRequest import DefaultPublishTraverse
 
-log = logging.getLogger(__name__)
+from z3c.form import button
+from z3c.form.form import FormTemplateFactory
+from plone.app.dexterity.behaviors.metadata import IBasic
+from plone.dexterity.browser import edit
+from plone.dexterity.events import EditFinishedEvent
+from plone.directives import dexterity
+from plone.directives import form
+from plone.z3cform import layout
+
+from euphorie.content import MessageFactory as _
+from euphorie.client.utils import setRequest
+
+from osha.oira.client.interfaces import IOSHAClientSkinLayer
+from osha.oira.interfaces import IOSHAContentSkinLayer
+from osha.oira.interfaces import IProductLayer
+from osha.oira.nuplone.widget import LargeTextAreaFieldWidget
+
 
 grok.templatedir("templates")
 
@@ -52,51 +48,12 @@ class View(grok.View):
     grok.template("custom_homepage")
     grok.name("nuplone-view")
 
-    json_url = 'http://osha.edw.ro/oira-ws/tools.json'
-
-    def get_json(self):
-        tools_json = requests.get(self.json_url)
-        return loads(tools_json.content)
-
-    @property
-    def cached_json(self):
-        now = datetime.now()
-        short_cache = now + timedelta(minutes=5)
-        long_cache = now + timedelta(minutes=15)
-        if self.request.get('invalidate-cache'):
-            mtool = api.portal.get_tool('portal_membership')
-            if mtool.checkPermission('cmf.ModifyPortalContent', self.context):
-                self.context.cache_until = now
-
-        if not hasattr(self.context, 'json'):
-            try:
-                self.context.json = self.get_json()
-                self.context.cache_until = long_cache
-            except (ValueError, AttributeError), err:
-                log.error(
-                    'Failed to retrieve tools JSON from {}: {}'
-                    .format(self.json_url, err)
-                )
-                return []
-        if now >= getattr(self.context, 'cache_until', datetime.min):
-            try:
-                self.context.json = self.get_json()
-                self.context.cache_until = long_cache
-            except (ValueError, AttributeError), err:
-                log.error(
-                    'Failed to update tools JSON from {}: {}'
-                    .format(self.json_url, err)
-                )
-                self.context.cache_until = short_cache
-        return self.context.json
-
-    @property
-    def tools(self):
-        return self.cached_json
+    def render_body(self):
+        return self.context.description
 
 
 class Edit(form.SchemaEditForm):
-    """ Override to allow us to set form title and bu tton labels """
+    """ Override to allow us to set form title and button labels """
     grok.context(IHomePage)
     grok.require("cmf.ModifyPortalContent")
     grok.layer(IOSHAContentSkinLayer)
@@ -107,7 +64,6 @@ path = lambda p: os.path.join(
 
 homepage_form_factory = FormTemplateFactory(
         path('homepage_form.pt'), form=Edit)
-
 
 class HomePagePublishTraverser(DefaultPublishTraverse):
     """Publish traverser to setup the skin layer.

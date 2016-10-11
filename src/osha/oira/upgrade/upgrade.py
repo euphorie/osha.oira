@@ -1,4 +1,4 @@
-# -*- coding: <utf-8> -*-
+#  -* coding: utf8 *-
 from euphorie.client import model
 from euphorie.client.country import IClientCountry
 from euphorie.client.publish import EnableCustomRisks
@@ -231,3 +231,9 @@ def drop_constraint_no_duplicates_in_tree(context):
         datamanager.mark_changed(session)
         transaction.get().commit()
     log.info("Removed the constraint `no_duplicates` from table tree.")
+
+
+def configure_outdated_tool_notification(context):
+    setup = api.portal.get_tool('portal_setup')
+    setup.runImportStepFromProfile(
+        'profile-osha.oira:default', 'propertiestool')

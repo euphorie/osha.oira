@@ -46,6 +46,7 @@ setup(name='osha.oira',
           'plone.autoform',
           'plone.tiles',
           'setuptools',
+          'slc.zopescript',
           'zope.publisher',
           'mobile.sniffer',
           'plone.api',
@@ -57,5 +58,8 @@ setup(name='osha.oira',
       entry_points="""
       [z3c.autoinclude.plugin]
       target = plone
+
+      [console_scripts]
+      outdated_tools = osha.oira.scripts:outdated_tools
       """,
       )

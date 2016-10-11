@@ -132,5 +132,15 @@
         handler=".upgrade.drop_constraint_no_duplicates_in_tree"/>
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+      source="11"
+      destination="12"
+      profile="osha.oira:default">
+    <genericsetup:upgradeStep
+        title="Add portal properties to configure the outdated tool notification"
+        description="Allow the OiRA Team email address, and the interval that defines when a tool is considered outdated to be configured via portal properties."
+        handler=".upgrade.configure_outdated_tool_notification"/>
+  </genericsetup:upgradeSteps>
+
 </configure>
 

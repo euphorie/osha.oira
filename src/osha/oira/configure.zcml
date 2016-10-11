@@ -59,4 +59,11 @@
         permission="cmf.ModifyPortalContent"
         />
 
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="outdated-tools-view"
+        class=".scripts.OutdatedToolsView"
+        permission="cmf.ManagePortal"
+        />
+
 </configure>

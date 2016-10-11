@@ -136,7 +136,7 @@
 
         <a tal:condition="tool/tool_url|nothing" href="${tool/tool_url}">Link to the tool</a>
         <img tal:condition="tool/author_logo|nothing" src="${tool/author_logo}"/>
-        <p tal:condition="tool/author_name|nothing">${tool/author_name}</p>
+        <img tal:condition="tool/author_name|nothing" src="${tool/author_name}"/>
       </tal:tool>
 
     <tal:render content="structure view/render_body"/>

@@ -30,10 +30,13 @@ class OutdatedToolsView(grok.View):
     grok.require("cmf.ManagePortal")
     grok.name("outdated-tools-view")
 
-    def __call__(self):
-        sprops = self.context.portal_properties.site_properties
+    def __init__(self, context=None, request=None):
+        sprops = context.portal_properties.site_properties
         self.interval = sprops.getProperty(
             'outdated_notications_interval_days', 365)
+        super(OutdatedToolsView, self).__init__(context, request)
+
+    def __call__(self):
         self.render(self.context)
 
     def render(self, portal):
@@ -163,9 +166,10 @@ You are receiving this notification since you are the country manager for
             tool_details += '\n'
         years = self.interval / 365
         if years:
-            period = "over {0} year(s)".format(years)
+            months = int((self.interval % 365) / 30.4)
+            period = "over {0} year(s) and {1} month(s)".format(years, months)
         else:
-            period = "over {0} month(s)".format(self.interval / 30)
+            period = "over {0} month(s)".format(int(self.interval / 30.4))
 
         body = u'''
 Dear {name},

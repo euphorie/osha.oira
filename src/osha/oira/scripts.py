@@ -42,7 +42,9 @@ class OutdatedToolsView(grok.View):
     def render(self, portal):
         self.portal = portal
         outdated_tool_paths = self.get_outdated_tool_paths()
-        self.send_sector_manager_notifications(outdated_tool_paths)
+        # As requested by EU-OSHA, sector managers do not get emails, only
+        # country managers.
+        # self.send_sector_manager_notifications(outdated_tool_paths)
         self.send_country_manager_notifications(outdated_tool_paths)
         self.send_oira_team_notifications(outdated_tool_paths)
 

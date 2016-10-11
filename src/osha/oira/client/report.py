@@ -77,6 +77,7 @@ COLUMN_ORDER = [
     ('measure', 'action_plan'),
     ('measure', 'prevention_plan'),
     ('measure', 'requirements'),
+    ('measure', 'planning_start'),
     ('measure', 'planning_end'),
     ('measure', 'responsible'),
     ('measure', 'budget'),
@@ -100,9 +101,12 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         'measure', 'action_plan',
         _('report_timeline_measure', default=u'Measure'))
     columns[3] = (
+        'measure', 'planning_start',
+        _('report_timeline_start_date', default=u'Start date'))
+    columns[4] = (
         'measure', 'planning_end',
         _('report_timeline_end_date', default=u'End date'))
-    columns[4] = (
+    columns[5] = (
         'measure', 'responsible',
         _('report_timeline_responsible', default=u'Responsible'))
     columns.insert(-1, (None, None, _(

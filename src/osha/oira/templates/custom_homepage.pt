@@ -147,7 +147,7 @@
               src="${request/SERVER_URL}/images/social-dialogue.png" alt="${tool/country_name}" />
           </td>
           <td>
-          <h2><a href="${tool/tool_link}">${tool/title}</a></h2>
+          <h2><a href="${tool/tool_link}" tal:content="structure tool/title">title</a></h2>
           <p tal:condition="tool/body|nothing">${tool/body}</p>
           </td>
           <td>

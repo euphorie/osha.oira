@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from datetime import datetime
 from datetime import timedelta
 from euphorie.client.utils import setRequest
@@ -24,7 +25,6 @@ from zope.event import notify
 from zope.interface import directlyProvides
 from zope.interface import implements
 from ZPublisher.BaseRequest import DefaultPublishTraverse
-
 
 import logging
 import os
@@ -60,6 +60,32 @@ class View(grok.View):
         props = api.portal.get_tool('portal_properties')
         self.json_url = props.site_properties.getProperty(
             'tools_json_url', 'http://osha.edw.ro/oira-ws/tools.json')
+
+        langs = dict()
+        cnts = dict()
+        for entry in self.context.json:
+            if not entry['language_code']:
+                continue
+            if entry['language_code'] in langs:
+                langs[entry['language_code']] += 1
+            else:
+                langs[entry['language_code']] = 1
+            if entry['country_name'] in cnts:
+                cnts[entry['country_name']] += 1
+            else:
+                cnts[entry['country_name']] = 1
+        lkeys = sorted(langs.keys())
+        langinfo = OrderedDict()
+        for lang in lkeys:
+            langinfo[lang] = langs[lang]
+        self.languages = langinfo
+
+        ckeys = sorted(cnts.keys())
+        cntinfo = OrderedDict()
+        for country in ckeys:
+            cntinfo[country] = cnts[country]
+        self.countries = cntinfo
+
         return self.render()
 
     def get_json(self):
@@ -99,6 +125,7 @@ class View(grok.View):
                 self.context.cache_until = short_cache
         return self.context.json
 
+
     @property
     def tools(self):
         return self.cached_json
@@ -106,8 +133,7 @@ class View(grok.View):
     def get_language_name(self, code=''):
         code = code or ''
         if code in self.language_info:
-            return u"{0} ({1})".format(
-                self.language_info.get(code)['native'], code.upper())
+            return self.language_info.get(code)['native']
         return u"N. a."
 
 

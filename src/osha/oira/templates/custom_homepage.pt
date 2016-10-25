@@ -49,6 +49,12 @@
       }
       #content{
       padding: 4% 6% 10% 6%;}
+      #content table#tools-listing tr{
+        vertical-align: top;
+      }
+      #content table#tools-listing td {
+        padding-bottom: 15px;
+      }
     </style>
   </head>
 
@@ -119,23 +125,32 @@
       <p>OiRA tools put at the disposal of <strong>small and micro-companies</strong> in multiple European languages. To access the tools, click on the relevant link, <strong>create your own account</strong> (no confirmation is needed) and start your risk assessment
       </p>
 
-      <tal:tool repeat="tool view/tools">
-        <h1 tal:condition="tool/country_name|nothing">${tool/country_name}</h1>
-        <span tal:condition="tool/country_code|nothing">${tool/country_code}</span>
-        31/05/2016
-        <h2 tal:condition="tool/title|nothing">${tool/title}</h2>
-        <p tal:condition="tool/body|nothing">${tool/body}</p>
-
-        EU Level:
-        <tal:country_name condition="tool/country_name|nothing">${tool/country_name}</tal:country_name>
-
-        <tal:language_name condition="tool/language_name|nothing">${tool/language_name}</tal:language_name>
-        <tal:language_code condition="tool/language_code|nothing">${tool/language_code}</tal:language_code>
-
-        <a tal:condition="tool/tool_url|nothing" href="${tool/tool_url}">Link to the tool</a>
-        <img tal:condition="tool/author_logo|nothing" src="${tool/author_logo}"/>
-        <p tal:condition="tool/author_name|nothing">${tool/author_name}</p>
-      </tal:tool>
+      <table id="tools-listing">
+        <tr>
+            <th width="1%">
+            </th>
+            <th width="15%">
+                Country
+            </th>
+            <th width="55%">
+                Sector
+            </th>
+            <th width="15%">
+                Language
+            </th>
+        </tr>
+        <tr tal:repeat="tool view/tools">
+          <td></td>
+          <td><img src="${request/SERVER_URL}/flags/${python:tool['country_name'].lower()}.jpg" alt="${tool/country_name}"></td>
+          <td>
+          <h2><a href="${tool/tool_link}">${tool/title}</h2>
+          <p tal:condition="tool/body|nothing">${tool/body}</p>
+          </td>
+          <td>
+            ${python:view.get_language_name(tool['language_code'])}
+          </td>
+        </tr>
+      </table>
 
       <metal:css use-macro="webhelpers/macros/appendix"/>
       <!--[if lte IE 8]><script src="${client/++resource++euphorie.behaviour}/ie6/warning.js"></script><script>window.onload=function(){e("/++resource++euphorie.behaviour/ie6/")}</script><![endif]-->

@@ -1,4 +1,3 @@
-from ZPublisher.BaseRequest import DefaultPublishTraverse
 from datetime import datetime
 from datetime import timedelta
 from euphorie.client.utils import setRequest
@@ -15,6 +14,7 @@ from plone.dexterity.browser import edit
 from plone.dexterity.events import EditFinishedEvent
 from plone.directives import dexterity
 from plone.directives import form
+from plone.protect.auto import safeWrite
 from plone.z3cform import layout
 from z3c.form import button
 from z3c.form.form import FormTemplateFactory
@@ -23,6 +23,8 @@ from zope.component import adapts
 from zope.event import notify
 from zope.interface import directlyProvides
 from zope.interface import implements
+from ZPublisher.BaseRequest import DefaultPublishTraverse
+
 
 import logging
 import os
@@ -60,6 +62,7 @@ class View(grok.View):
 
     @property
     def cached_json(self):
+        safeWrite(self.context, self.request)
         now = datetime.now()
         short_cache = now + timedelta(minutes=5)
         long_cache = now + timedelta(minutes=15)
@@ -92,7 +95,16 @@ class View(grok.View):
 
     @property
     def tools(self):
+        plt = api.portal.get_tool('portal_languages')
+        self.language_info = plt.getAvailableLanguageInformation()
         return self.cached_json
+
+    def get_language_name(self, code=''):
+        code = code or ''
+        if code in self.language_info:
+            return u"{0} ({1})".format(
+                self.language_info.get(code)['native'], code.upper())
+        return u"N. a."
 
 
 class Edit(form.SchemaEditForm):

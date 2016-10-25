@@ -143,7 +143,7 @@
           <td></td>
           <td><img src="${request/SERVER_URL}/flags/${python:tool['country_name'].lower()}.jpg" alt="${tool/country_name}"></td>
           <td>
-          <h2><a href="${tool/tool_link}">${tool/title}</h2>
+          <h2><a href="${tool/tool_link}">${tool/title}</a></h2>
           <p tal:condition="tool/body|nothing">${tool/body}</p>
           </td>
           <td>

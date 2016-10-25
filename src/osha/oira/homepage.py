@@ -54,7 +54,13 @@ class View(grok.View):
     grok.template("custom_homepage")
     grok.name("nuplone-view")
 
-    json_url = 'http://osha.edw.ro/oira-ws/tools.json'
+    def update(self):
+        plt = api.portal.get_tool('portal_languages')
+        self.language_info = plt.getAvailableLanguageInformation()
+        props = api.portal.get_tool('portal_properties')
+        self.json_url = props.site_properties.getProperty(
+            'tools_json_url', 'http://osha.edw.ro/oira-ws/tools.json')
+        return self.render()
 
     def get_json(self):
         tools_json = requests.get(self.json_url)
@@ -95,8 +101,6 @@ class View(grok.View):
 
     @property
     def tools(self):
-        plt = api.portal.get_tool('portal_languages')
-        self.language_info = plt.getAvailableLanguageInformation()
         return self.cached_json
 
     def get_language_name(self, code=''):

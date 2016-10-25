@@ -115,6 +115,29 @@
 
         </div>
 
+      </div>
+
+      <p>Tools developed at Member State level</p>
+      <p>OiRA tools put at the disposal of <strong>small and micro-companies</strong> in multiple European languages. To access the tools, click on the relevant link, <strong>create your own account</strong> (no confirmation is needed) and start your risk assessment
+      </p>
+
+      <tal:tool repeat="tool view/tools">
+        <h1 tal:condition="tool/country_name|nothing">${tool/country_name}</h1>
+        <span tal:condition="tool/country_code|nothing">${tool/country_code}</span>
+        31/05/2016
+        <h2 tal:condition="tool/title|nothing">${tool/title}</h2>
+        <p tal:condition="tool/body|nothing">${tool/body}</p>
+
+        EU Level:
+        <tal:country_name condition="tool/country_name|nothing">${tool/country_name}</tal:country_name>
+
+        <tal:language_name condition="tool/language_name|nothing">${tool/language_name}</tal:language_name>
+        <tal:language_code condition="tool/language_code|nothing">${tool/language_code}</tal:language_code>
+
+        <a tal:condition="tool/tool_url|nothing" href="${tool/tool_url}">Link to the tool</a>
+        <img tal:condition="tool/author_logo|nothing" src="${tool/author_logo}"/>
+        <img tal:condition="tool/author_name|nothing" src="${tool/author_name}"/>
+      </tal:tool>
 
     <tal:render content="structure view/render_body"/>
     <metal:css use-macro="webhelpers/macros/appendix"/>

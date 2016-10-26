@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      meta:interpolation="true"
+      i18n:domain="nuplone"
+      tal:define="webhelpers nocall:context/@@webhelpers;
+                  base_url string:client/++resource++osha.oira.resources;
+                  page_section webhelpers/get_phase;
+                  sidebar_default python:page_section in ['identification', 'actionplan'] and 'sidebar-on' or 'sidebar-off';
+                  client nocall:request/client;
+                  came_from webhelpers/came_from;
+                  came_from_param python:came_from and 'came_from=%s' % came_from or '';
+                  tools context/@@tools">
+
+  <head>
+    <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="${client/++resource++euphorie.media}/favicon.png" />
+
+    <tal:block condition="webhelpers/debug_mode">
+      <script type="text/javascript" src="${base_url}/oira.js"></script>
+    </tal:block>
+    <tal:block condition="not:webhelpers/debug_mode">
+      <!-- TODO: this must be minified -->
+      <script type="text/javascript" src="${base_url}/oira.js"></script>
+    </tal:block>
+
+    <tal:block condition="webhelpers/debug_mode">
+      <link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
+    </tal:block>
+    <tal:block condition="not:webhelpers/debug_mode">
+      <!-- TODO: needs to be minified -->
+      <link rel="stylesheet" href="${base_url}/screen.css" type="text/css" />
+    </tal:block>
+
+    <metal:javascriptslot define-slot="javascript_head_slot" />
+    <metal:styleslot define-slot="style_slot" />
+    <style type="text/css">
+      @media only screen and (min-width: 1280px){
+      .sidebar-off #content,.osc-off.sidebar-off #content{
+      left:0;
+      padding:4% 10% 10% 10%;}
+      }
+      #content{
+      padding: 4% 6% 10% 6%;}
+      #content table#tools-listing {
+        border-collapse: collapse;
+      }
+      #content table#tools-listing tr{
+        vertical-align: top;
+      }
+      #content table#tools-listing td {
+        padding-bottom: 15px;
+        padding-left: 5px;
+      }
+      #content table#tools-listing td img {
+        padding-top: 10px;
+      }
+      #content table#tools-listing th {
+        padding-left: 5px;
+      }
+      #content form#filter {
+      margin-top: 20px;
+      }
+      #content thead {
+        background: silver;
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body class="osh-on osc-off osc-s-off focus-sidebar ${sidebar_default}" tal:define="is_anonymous webhelpers/anonymous">
+    <header id="toolbar">
+    </header>
+    <div id="content">
+
+      <article>
+        <figure>
+          <img src="${request/SERVER_URL}/flags/oira.gif" alt="" />
+        </figure>
+      </article>
+
+      <h1 class="carousel"><span lang="en" xml:lang="en">Welcome to the Online interactive Risk Assessment tools (OiRA)</span></h1>
+
+
+      <p>&nbsp;</p>
+      <p>The OiRA project is a European-wide initiative lead  by the <a href="http://osha.europa.eu/en" title="http://osha.europa.eu/en" target="_blank">European Agency for Safety and Health at Work</a>  in partnership with National  authorities (Ministries, Labour Inspectorates, OSH institutes, etc.) and EU/National Sectoral Social Partners (employers'  and employees' organisations).</p>
+      <p>Visit the <a href="http://www.oiraproject.eu/" title="OiRA project site" target="_blank">OiRA project site</a> to know more about it.</p>
+
+      <h2>What is OiRA (Online Interactive Risk Assessment)?</h2>
+      <p>OiRA stands for Online Interactive Risk Assessment. It is a web-based tool that allows you to perform a health and safety risk assessment of your workplace.</p>
+
+      <div class="extra pat-collapsible closed show-more">
+        <p class="show-more-or-less">
+          <strong class="show-more">Show more…</strong> <span class="divider">/</span> <strong class="show-less">Show less…</strong>
+        </p>
+        <h4>Who is the OiRA tool for?</h4>
+        <div class="indented">
+          <p>OiRA can be used by anyone wishing to assess health and safety-related risks that might exist in their workplace.</p>
+          <p>However, OiRA is designed to be of most value to smaller businesses.</p>
+          <p>OiRA is designed specifically to support them in assessing the risks at work and helping them to produce a documented risk assessment including an action plan tailored to the business's requirements.</p>
+        </div>
+
+        <h4>What do I have to do?</h4>
+        <div class="indented">
+          <p>There are four main stages to complete in the assessment process:</p>
+          <ul>
+            <li><strong ><tal:span>Preparation</tal:span>:</strong> This gives you an overview of the particular assessment you are about to begin and can allow you to further customise the assessment to the specific nature of your business.</li>
+            <li><strong ><tal:span>Identification</tal:span>:</strong> OiRA will present a series of potential health and safety hazards or problems that could exist in your workplace. By answering the statements/questions with either yes or no, you state if such hazards or problems are present. You can also decide to leave a question unanswered and thus put it on hold to be answered at a later stage.</li>
+            <li><strong ><tal:span>Evaluation</tal:span>:</strong> Here you will be able to determine the level of risk attached to each of the items you identified as 'need to be addressed' in the 'Identification' stage.</li>
+            <li><strong ><tal:span>Action Plan</tal:span>:</strong> In the fourth stage of the assessment you can decide what steps you will take to address the risks you have identified previously and what resources this might require. Based on this, a report will be automatically  produced in the next step.</li>
+          </ul>
+        </div>
+
+        <h4>How long will it take?</h4>
+        <div class="indented">
+          <p>It's impossible to say how long an assessment will take in general as the tools differ according to sectors and countries.</p>
+          <p>However, you can spend whatever time you have available on an assessment and then return to it when convenient to pick up from the same point you left off.</p>
+        </div>
+
+        <h4>Why do I have to register?</h4>
+        <div class="indented">
+          <p>The first thing you will be asked to do when you begin your first risk assessment is to create an OiRA account - this is a simple and quick process.</p>
+          <p>Registering allows you to simply log in at any time to continue previous assessments or to start new ones.</p>
+          <p>You have to make sure to be in possession of a printed, accurate and up-dated risk assessment (at any time).</p>
+        </div>
+
+        <h4>Do I need to prepare?</h4>
+        <div class="indented">
+          <p>You do not need any kind of specific preparation to start using the tool, however you should take some time to think about who is going to carry out the risk assessment, how workers are going to be involved in the process, etc.</p>
+        </div>
+
+      </div>
+
+      <h2>Tools developed at Member State level</h2>
+      <p>OiRA tools put at the disposal of <strong>small and micro-companies</strong> in multiple European languages. To access the tools, click on the relevant link, <strong>create your own account</strong> (no confirmation is needed) and start your risk assessment
+      </p>
+
+      <form id="filter">
+        <fieldset >
+          <label>Filter by language:
+            <select name="language">
+              <option value="all">All languages</option>
+              <tal:langs repeat="langinfo view/languages/items">
+                <option tal:define="language python:langinfo[0]; count python:langinfo[1]" value="${language}">${python:view.get_language_name(language)} (${python:language.upper()})</option>
+              </tal:langs>
+            </select>
+          </label>
+          <label>Filter by country:
+            <select name="country">
+              <option value="all">All countries</option>
+              <tal:langs repeat="cntinfo view/countries/items">
+                <option tal:define="country python:cntinfo[0]; count python:cntinfo[1]" value="${country}">${country}</option>
+              </tal:langs>
+            </select>
+          </label>
+        </fieldset>
+      </form>
+
+      <table id="tools-listing">
+        <thead class="pat-bumper" data-pat-bumper="margin:5">
+          <tr>
+              <th width="15%">
+                  Country
+              </th>
+              <th width="55%">
+                  Sector
+              </th>
+              <th width="15%">
+                  Language
+              </th>
+          </tr>
+        </thead>
+        <tal:tools repeat="tool view/tools">
+        <tr class="pat-depends hidden" data-pat-depends="action: show; condition:(language='${tool/language_code}' or language='all') and (country='${tool/country_name}' or country='all')">
+          <td>
+            <img tal:condition="python:tool['country_name']!='EU level'" src="${request/SERVER_URL}/flags/${python:tool['country_name'].lower()}.jpg" alt="${tool/country_name}" />
+            <img tal:condition="python:tool['country_name']=='EU level'" style="width:110px"
+              src="${request/SERVER_URL}/images/social-dialogue.png" alt="${tool/country_name}" />
+          </td>
+          <td>
+          <h3 tal:condition="tool/title_alt"><a href="${tool/tool_link}" tal:content="structure tool/title_alt">title</a> (<span tal:replace="structure tool/title"/>)</h3>
+          <h3 tal:condition="not:tool/title_alt"><a href="${tool/tool_link}" tal:content="structure tool/title">title</a></h3>
+          <section id="concise-content-${tool/tool_id}">
+            <tal:intro condition="tool/body_intro">
+              <p class="introduction">
+                <tal:text replace="structure tool/body_intro">short description</tal:text> <a class="show-more pat-inject" href="${request/ACTUAL_URL}" data-pat-inject="source: #full-content-${tool/tool_id}; target: #concise-content-${tool/tool_id};" i18n:translate="Read more">Read more</a>
+              </p>
+            </tal:intro>
+            <tal:no_intro condition="not:tool/body_intro">
+              <p class="introduction">
+                <tal:text replace="structure tool/body">description</tal:text>
+              </p>
+            </tal:no_intro>
+          </section>
+          <article id="full-content-${tool/tool_id}" hidden="hidden">
+            <tal:text replace="structure tool/body">description</tal:text>
+            <p class="show-more-or-less">
+              <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description-${tool/tool_id}; target: #concise-content-${tool/tool_id}"><strong i18n:translate="Show less…" class="show-less">Show less…</strong></a>
+            </p>
+          </article>
+          <article id="short_description-${tool/tool_id}" hidden="hidden">
+            <p class="introduction">
+                <tal:text replace="structure tool/body_intro">short description</tal:text> <a class="show-more pat-inject" href="${request/ACTUAL_URL}" data-pat-inject="source: #full-content-${tool/tool_id}; target: #concise-content-${tool/tool_id};" i18n:translate="Read more">Read more</a>
+              </p>
+          </article>
+          </td>
+          <td>
+            ${python:view.get_language_name(tool['language_code'])} (${python:tool['language_code'] and tool['language_code'].upper() or 'n.a.'})
+          </td>
+        </tr>
+        </tal:tools>
+      </table>
+
+      <metal:css use-macro="webhelpers/macros/appendix"/>
+      <!--[if lte IE 8]><script src="${client/++resource++euphorie.behaviour}/ie6/warning.js"></script><script>window.onload=function(){e("/++resource++euphorie.behaviour/ie6/")}</script><![endif]-->
+      <metal:call use-macro="webhelpers/macros/webstats_js" />
+    </div>
+  </body>
+</html>

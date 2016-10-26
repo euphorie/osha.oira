@@ -1,3 +1,4 @@
+# coding=utf-8
 from collections import OrderedDict
 from datetime import datetime
 from datetime import timedelta
@@ -21,6 +22,7 @@ from z3c.form import button
 from z3c.form.form import FormTemplateFactory
 from zope import schema
 from zope.component import adapts
+from zope.component import getMultiAdapter
 from zope.event import notify
 from zope.interface import directlyProvides
 from zope.interface import implements
@@ -33,6 +35,8 @@ import requests
 log = logging.getLogger(__name__)
 
 grok.templatedir("templates")
+
+DESCRIPTION_CROP_LENGTH = 200
 
 
 class IHomePage(form.Schema, IBasic):
@@ -61,30 +65,7 @@ class View(grok.View):
         self.json_url = props.site_properties.getProperty(
             'tools_json_url', 'http://osha.edw.ro/oira-ws/tools.json')
 
-        langs = dict()
-        cnts = dict()
-        for entry in self.context.json:
-            if not entry['language_code']:
-                continue
-            if entry['language_code'] in langs:
-                langs[entry['language_code']] += 1
-            else:
-                langs[entry['language_code']] = 1
-            if entry['country_name'] in cnts:
-                cnts[entry['country_name']] += 1
-            else:
-                cnts[entry['country_name']] = 1
-        lkeys = sorted(langs.keys())
-        langinfo = OrderedDict()
-        for lang in lkeys:
-            langinfo[lang] = langs[lang]
-        self.languages = langinfo
-
-        ckeys = sorted(cnts.keys())
-        cntinfo = OrderedDict()
-        for country in ckeys:
-            cntinfo[country] = cnts[country]
-        self.countries = cntinfo
+        self.tools = self.prepare_tools()
 
         return self.render()
 
@@ -125,10 +106,42 @@ class View(grok.View):
                 self.context.cache_until = short_cache
         return self.context.json
 
+    def prepare_tools(self):
+        langs = dict()
+        cnts = dict()
+        ploneview = getMultiAdapter(
+            (self.context, self.request), name="plone")
+        tools = []
+        for entry in self.cached_json:
+            if not entry['language_code']:
+                continue
+            if entry['language_code'] in langs:
+                langs[entry['language_code']] += 1
+            else:
+                langs[entry['language_code']] = 1
+            if entry['country_name'] in cnts:
+                cnts[entry['country_name']] += 1
+            else:
+                cnts[entry['country_name']] = 1
+            if len(entry['body']) > DESCRIPTION_CROP_LENGTH:
+                entry['body_intro'] = ploneview.cropText(
+                    entry['body'], DESCRIPTION_CROP_LENGTH)
+            else:
+                entry['body_intro'] = ""
+            tools.append(entry)
+        lkeys = sorted(langs.keys())
+        langinfo = OrderedDict()
+        for lang in lkeys:
+            langinfo[lang] = langs[lang]
+        self.languages = langinfo
 
-    @property
-    def tools(self):
-        return self.cached_json
+        ckeys = sorted(cnts.keys())
+        cntinfo = OrderedDict()
+        for country in ckeys:
+            cntinfo[country] = cnts[country]
+        self.countries = cntinfo
+
+        return tools
 
     def get_language_name(self, code=''):
         code = code or ''

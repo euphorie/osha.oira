@@ -155,7 +155,7 @@
             </th>
         </tr>
         <tal:tools repeat="tool view/tools">
-        <tr class="pat-depends hidden" data-pat-depends="action: show; condition:(language='${tool/language_code}' or language='all' and country='${tool/country_name}' or country='all')">
+        <tr class="pat-depends hidden" data-pat-depends="action: show; condition:(language='${tool/language_code}' or language='all') and (country='${tool/country_name}' or country='all')">
           <td></td>
           <td>
             <img tal:condition="python:tool['country_name']!='EU level'" src="${request/SERVER_URL}/flags/${python:tool['country_name'].lower()}.jpg" alt="${tool/country_name}" />
@@ -163,8 +163,31 @@
               src="${request/SERVER_URL}/images/social-dialogue.png" alt="${tool/country_name}" />
           </td>
           <td>
-          <h2><a href="${tool/tool_link}" tal:content="structure tool/title">title</a></h2>
-          <p tal:condition="tool/body|nothing">${tool/body}</p>
+          <h2 tal:condition="tool/title_alt"><a href="${tool/tool_link}" tal:content="structure tool/title_alt">title</a> (<span tal:replace="structure tool/title"/>)</h2>
+          <h2 tal:condition="not:tool/title_alt"><a href="${tool/tool_link}" tal:content="structure tool/title">title</a></h2>
+          <section id="concise-content-${tool/tool_id}">
+            <tal:intro condition="tool/body_intro">
+              <p class="introduction">
+                <tal:text replace="structure tool/body_intro">short description</tal:text> <a class="show-more pat-inject" href="${request/ACTUAL_URL}" data-pat-inject="source: #full-content-${tool/tool_id}; target: #concise-content-${tool/tool_id};" i18n:translate="Read more">Read more</a>
+              </p>
+            </tal:intro>
+            <tal:no_intro condition="not:tool/body_intro">
+              <p class="introduction">
+                <tal:text replace="structure tool/body">description</tal:text>
+              </p>
+            </tal:no_intro>
+          </section>
+          <article id="full-content-${tool/tool_id}" hidden="hidden">
+            <tal:text replace="structure tool/body">description</tal:text>
+            <p class="show-more-or-less">
+              <a href="${request/ACTUAL_URL}" class="pat-inject" data-pat-inject="source: #short_description-${tool/tool_id}; target: #concise-content-${tool/tool_id}"><strong i18n:translate="Show less…" class="show-less">Show less…</strong></a>
+            </p>
+          </article>
+          <article id="short_description-${tool/tool_id}" hidden="hidden">
+            <p class="introduction">
+                <tal:text replace="structure tool/body_intro">short description</tal:text> <a class="show-more pat-inject" href="${request/ACTUAL_URL}" data-pat-inject="source: #full-content-${tool/tool_id}; target: #concise-content-${tool/tool_id};" i18n:translate="Read more">Read more</a>
+              </p>
+          </article>
           </td>
           <td>
             ${python:view.get_language_name(tool['language_code'])} (${python:tool['language_code'] and tool['language_code'].upper() or 'n.a.'})

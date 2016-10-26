@@ -49,14 +49,25 @@
       }
       #content{
       padding: 4% 6% 10% 6%;}
+      #content table#tools-listing {
+        border-collapse: collapse;
+      }
       #content table#tools-listing tr{
         vertical-align: top;
       }
       #content table#tools-listing td {
         padding-bottom: 15px;
+        padding-left: 5px;
+      }
+      #content table#tools-listing th {
+        padding-left: 5px;
       }
       #content form#filter {
       margin-top: 20px;
+      }
+      #content thead {
+        background: silver;
+        color: white;
       }
     </style>
   </head>
@@ -150,22 +161,21 @@
       </form>
 
       <table id="tools-listing">
-        <tr>
-            <th width="1%">
-            </th>
-            <th width="15%">
-                Country
-            </th>
-            <th width="55%">
-                Sector
-            </th>
-            <th width="15%">
-                Language
-            </th>
-        </tr>
+        <thead class="pat-bumper" data-pat-bumper="margin:5">
+          <tr>
+              <th width="15%">
+                  Country
+              </th>
+              <th width="55%">
+                  Sector
+              </th>
+              <th width="15%">
+                  Language
+              </th>
+          </tr>
+        </thead>
         <tal:tools repeat="tool view/tools">
         <tr class="pat-depends hidden" data-pat-depends="action: show; condition:(language='${tool/language_code}' or language='all') and (country='${tool/country_name}' or country='all')">
-          <td></td>
           <td>
             <img tal:condition="python:tool['country_name']!='EU level'" src="${request/SERVER_URL}/flags/${python:tool['country_name'].lower()}.jpg" alt="${tool/country_name}" />
             <img tal:condition="python:tool['country_name']=='EU level'" style="width:110px"

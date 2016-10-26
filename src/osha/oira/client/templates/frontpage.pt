@@ -8,7 +8,7 @@
       meta:interpolation="true"
       i18n:domain="nuplone"
       tal:define="webhelpers nocall:context/@@webhelpers;
-                  base_url string:client/++resource++osha.oira.resources;
+                  base_url string:++resource++euphorie.resources;
                   page_section webhelpers/get_phase;
                   sidebar_default python:page_section in ['identification', 'actionplan'] and 'sidebar-on' or 'sidebar-off';
                   client nocall:request/client;

@@ -55,6 +55,9 @@
       #content table#tools-listing td {
         padding-bottom: 15px;
       }
+      #content form#filter {
+      margin-top: 20px;
+      }
     </style>
   </head>
 
@@ -121,24 +124,30 @@
 
       </div>
 
-      <p>Tools developed at Member State level</p>
+      <h2>Tools developed at Member State level</h2>
       <p>OiRA tools put at the disposal of <strong>small and micro-companies</strong> in multiple European languages. To access the tools, click on the relevant link, <strong>create your own account</strong> (no confirmation is needed) and start your risk assessment
       </p>
 
-      <div id="filter">
-        <select name="language">
-          <option value="all">All languages</option>
-          <tal:langs repeat="langinfo view/languages/items">
-            <option tal:define="language python:langinfo[0]; count python:langinfo[1]" value="${language}">${python:view.get_language_name(language)}</option>
-          </tal:langs>
-        </select>
-        <select name="country">
-          <option value="all">All countries</option>
-          <tal:langs repeat="cntinfo view/countries/items">
-            <option tal:define="country python:cntinfo[0]; count python:cntinfo[1]" value="${country}">${country}</option>
-          </tal:langs>
-        </select>
-      </div>
+      <form id="filter">
+        <fieldset >
+          <label>Filter by language:
+            <select name="language">
+              <option value="all">All languages</option>
+              <tal:langs repeat="langinfo view/languages/items">
+                <option tal:define="language python:langinfo[0]; count python:langinfo[1]" value="${language}">${python:view.get_language_name(language)}</option>
+              </tal:langs>
+            </select>
+          </label>
+          <label>Filter by country:
+            <select name="country">
+              <option value="all">All countries</option>
+              <tal:langs repeat="cntinfo view/countries/items">
+                <option tal:define="country python:cntinfo[0]; count python:cntinfo[1]" value="${country}">${country}</option>
+              </tal:langs>
+            </select>
+          </label>
+        </fieldset>
+      </form>
 
       <table id="tools-listing">
         <tr>
@@ -163,8 +172,8 @@
               src="${request/SERVER_URL}/images/social-dialogue.png" alt="${tool/country_name}" />
           </td>
           <td>
-          <h2 tal:condition="tool/title_alt"><a href="${tool/tool_link}" tal:content="structure tool/title_alt">title</a> (<span tal:replace="structure tool/title"/>)</h2>
-          <h2 tal:condition="not:tool/title_alt"><a href="${tool/tool_link}" tal:content="structure tool/title">title</a></h2>
+          <h3 tal:condition="tool/title_alt"><a href="${tool/tool_link}" tal:content="structure tool/title_alt">title</a> (<span tal:replace="structure tool/title"/>)</h3>
+          <h3 tal:condition="not:tool/title_alt"><a href="${tool/tool_link}" tal:content="structure tool/title">title</a></h3>
           <section id="concise-content-${tool/tool_id}">
             <tal:intro condition="tool/body_intro">
               <p class="introduction">

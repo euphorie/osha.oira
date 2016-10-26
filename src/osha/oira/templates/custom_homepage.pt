@@ -145,7 +145,7 @@
             <select name="language">
               <option value="all">All languages</option>
               <tal:langs repeat="langinfo view/languages/items">
-                <option tal:define="language python:langinfo[0]; count python:langinfo[1]" value="${language}">${python:view.get_language_name(language)}</option>
+                <option tal:define="language python:langinfo[0]; count python:langinfo[1]" value="${language}">${python:view.get_language_name(language)} (${python:language.upper()})</option>
               </tal:langs>
             </select>
           </label>

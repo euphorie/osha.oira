@@ -180,9 +180,12 @@
         <tal:tools repeat="tool view/tools">
         <tr class="pat-depends hidden" data-pat-depends="action: show; condition:(language='${tool/language_code}' or language='all') and (country='${tool/country_name}' or country='all')">
           <td>
-            <img tal:condition="python:tool['country_name']!='EU level'" src="${request/SERVER_URL}/flags/${python:tool['country_name'].lower()}.jpg" alt="${tool/country_name}" />
-            <img tal:condition="python:tool['country_name']=='EU level'" style="width:110px"
-              src="${request/SERVER_URL}/flags/social-dialogue.png" alt="${tool/country_name}" />
+            <figure>
+              <img tal:condition="python:tool['country_name']!='EU level'" src="${request/SERVER_URL}/flags/${python:tool['country_name'].lower()}.jpg" alt="${tool/country_name}" />
+              <img tal:condition="python:tool['country_name']=='EU level'" style="width:90px"
+                src="${request/SERVER_URL}/flags/social-dialogue.png" alt="${tool/country_name}" />
+              <figcaption>${tool/country_name}</figcaption>
+            </figure>
           </td>
           <td>
           <h3 tal:condition="tool/title_alt"><a href="${tool/tool_link}" tal:content="structure tool/title_alt">title</a> (<span tal:replace="structure tool/title"/>)</h3>

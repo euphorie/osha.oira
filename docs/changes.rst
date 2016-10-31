@@ -5,15 +5,14 @@ Changelog
 4.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Feature/13425 outdated tool notification
+- bugfix: In the XLS Action Plan Report, show start date again
 
 4.0.0 (2016-10-06)
 ------------------
 
 - Ported the new Patternlib based "OiRA 2.0" interface
   to Euphorie
-
 
 3.0.13 (2016-05-30)
 -------------------

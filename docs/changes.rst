@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.1 (unreleased)
+4.0.1 (2016-10-31)
 ------------------
 
 - Feature/13425 outdated tool notification

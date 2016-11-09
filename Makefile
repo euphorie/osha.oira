@@ -1,5 +1,5 @@
 YUICOMPRESS	?= yui-compressor
-PYTHON		?= python2.7
+PYTHON		?= bin/python
 
 EUPHORIE_POT	= src/osha/oira/locales/euphorie.pot
 EUPHORIE_PO_FILES	= $(wildcard src/osha/oira/locales/*/LC_MESSAGES/euphorie.po)

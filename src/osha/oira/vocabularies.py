@@ -19,7 +19,7 @@ class ReportTypeVocabulary(object):
 
     def __call__(self, context):
         t = lambda txt: translate(txt, context=api.portal.get().REQUEST)
-        types = {t(_('Survey')).encode('utf-8'): 'tool'}
+        types = {t(_('OiRA Tool')).encode('utf-8'): 'tool'}
         if ISectorContainer.providedBy(context):
             types.update({
                 t(_('EU-OSHA Overview')).encode('utf-8'): 'overview',

@@ -12,8 +12,9 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
@@ -45,8 +46,8 @@ msgstr ""
 
 #: src/osha/oira/manual_translations.py:10
 msgid ""
-"Please bear in mind that by changing the email address, your login name "
-"will also change."
+"Please bear in mind that by changing the email address, your login name will "
+"also change."
 msgstr ""
 
 #. Default: Password
@@ -68,8 +69,8 @@ msgstr ""
 #: src/osha/oira/manual_translations.py:18
 msgid ""
 "The current text in the fields 'Action plan', 'Prevention plan' and "
-"'Requirements' of this measure will be overwritten. This action cannot be"
-" reverted. Are you sure you want to continue?"
+"'Requirements' of this measure will be overwritten. This action cannot be "
+"reverted. Are you sure you want to continue?"
 msgstr ""
 
 #: src/osha/oira/manual_translations.py:20
@@ -612,9 +613,9 @@ msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:30
 msgid ""
-"OiRA stands for Online Interactive Risk Assessment. It is a web-based "
-"tool that allows you to perform a health and safety risk assessment of "
-"your workplace."
+"OiRA stands for Online Interactive Risk Assessment. It is a web-based tool "
+"that allows you to perform a health and safety risk assessment of your "
+"workplace."
 msgstr ""
 
 #. Default: Show more…
@@ -634,8 +635,8 @@ msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:39
 msgid ""
-"OiRA can be used by anyone wishing to assess health and safety-related "
-"risks that might exist in their workplace."
+"OiRA can be used by anyone wishing to assess health and safety-related risks "
+"that might exist in their workplace."
 msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:40
@@ -644,9 +645,9 @@ msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:41
 msgid ""
-"OiRA is designed specifically to support them in assessing the risks at "
-"work and helping them to produce a documented risk assessment including "
-"an action plan tailored to the business's requirements."
+"OiRA is designed specifically to support them in assessing the risks at work "
+"and helping them to produce a documented risk assessment including an action "
+"plan tailored to the business's requirements."
 msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:43
@@ -666,9 +667,9 @@ msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:46
 msgid ""
-"${preparation} This gives you an overview of the particular assessment "
-"you are about to begin and can allow you to further customise the "
-"assessment to the specific nature of your business."
+"${preparation} This gives you an overview of the particular assessment you "
+"are about to begin and can allow you to further customise the assessment to "
+"the specific nature of your business."
 msgstr ""
 
 #. Default: Identification
@@ -681,12 +682,11 @@ msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:47
 msgid ""
-"${identification} OiRA will present a series of potential health and "
-"safety hazards or problems that could exist in your workplace. By "
-"answering the statements/questions with either yes or no, you state if "
-"such hazards or problems are present. You can also decide to leave a "
-"question unanswered and thus put it on hold to be answered at a later "
-"stage."
+"${identification} OiRA will present a series of potential health and safety "
+"hazards or problems that could exist in your workplace. By answering the "
+"statements/questions with either yes or no, you state if such hazards or "
+"problems are present. You can also decide to leave a question unanswered and "
+"thus put it on hold to be answered at a later stage."
 msgstr ""
 
 #. Default: Evaluation
@@ -699,9 +699,9 @@ msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:48
 msgid ""
-"${evaluation} Here you will be able to determine the level of risk "
-"attached to each of the items you identified as 'need to be addressed' in"
-" the 'Identification' stage."
+"${evaluation} Here you will be able to determine the level of risk attached "
+"to each of the items you identified as 'need to be addressed' in the "
+"'Identification' stage."
 msgstr ""
 
 #. Default: Action Plan
@@ -715,8 +715,8 @@ msgstr ""
 #: src/osha/oira/client/templates/login.pt:49
 msgid ""
 "${action-plan} In the fourth stage of the assessment you can decide what "
-"steps you will take to address the risks you have identified previously "
-"and what resources this might require. Based on this, a report will be "
+"steps you will take to address the risks you have identified previously and "
+"what resources this might require. Based on this, a report will be "
 "automatically produced in the next step."
 msgstr ""
 
@@ -726,15 +726,15 @@ msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:53
 msgid ""
-"It's impossible to say how long an assessment will take in general as the"
-" tools differ according to sectors and countries."
+"It's impossible to say how long an assessment will take in general as the "
+"tools differ according to sectors and countries."
 msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:54
 msgid ""
-"However, you can spend whatever time you have available on an assessment "
-"and then return to it when convenient to pick up from the same point you "
-"left off."
+"However, you can spend whatever time you have available on an assessment and "
+"then return to it when convenient to pick up from the same point you left "
+"off."
 msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:56
@@ -744,8 +744,7 @@ msgstr ""
 #: src/osha/oira/client/templates/login.pt:57
 msgid ""
 "The first thing you will be asked to do when you begin your first risk "
-"assessment is to create an OiRA account - this is a simple and quick "
-"process."
+"assessment is to create an OiRA account - this is a simple and quick process."
 msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:58
@@ -766,10 +765,10 @@ msgstr ""
 
 #: src/osha/oira/client/templates/login.pt:62
 msgid ""
-"You do not need any kind of specific preparation to start using the tool,"
-" however you should take some time to think about who is going to carry "
-"out the risk assessment, how workers are going to be involved in the "
-"process, etc."
+"You do not need any kind of specific preparation to start using the tool, "
+"however you should take some time to think about who is going to carry out "
+"the risk assessment, how workers are going to be involved in the process, "
+"etc."
 msgstr ""
 
 #. Default: Reporting
@@ -1673,7 +1672,8 @@ msgid "algorithm_kinney"
 msgstr ""
 
 #: src/osha/oira/content/templates/surveygroup_add.pt:92
-msgid "This is the recommended evaluation algorithm, based on the Kinney method"
+msgid ""
+"This is the recommended evaluation algorithm, based on the Kinney method"
 msgstr ""
 
 #. Default: This method involves risk assessment by Severity x Exposure,
@@ -1767,4 +1767,3 @@ msgstr ""
 #: src/osha/oira/upgrade/upgrade.py:194
 msgid "question_other_risks"
 msgstr ""
-

@@ -5,7 +5,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      i18n:domain="euphorie"
+      i18n:domain="plone"
       meta:interpolation="true"
       metal:use-macro="context/@@layout/macros/layout">
 <body>
@@ -35,7 +35,7 @@
             <legend tal:define="form_name view/form_name|nothing"
                     tal:condition="form_name"
                     tal:content="form_name"
-                    i18n:translate="">Form name</legend>
+                    >Form name</legend>
             <tal:block tal:repeat="widget view/widgets">
 
                 <div class="z3cFieldContainer"
@@ -44,14 +44,12 @@
                      tal:attributes="class python:'z3cFieldContainer'+(error and ' error' or '')">
 
                     <label tal:attributes="for widget/name">
-                      <span i18n:translate="" tal:replace="widget/label">
+                      <span tal:replace="widget/label">
                           label
                       </span>
 
                       <sup class="required"
                             title="Required"
-                            i18n:attributes="title title_required;"
-                            i18n:translate="label_required"
                             tal:condition="widget/required">
                           *
                       </sup>
@@ -60,7 +58,6 @@
                     </label>
 
                       <dfn class="infoPanel"
-                           i18n:translate=""
                            tal:condition="description">
                            <span class="title">Information</span>
                           <tal:content replace="description"></tal:content>
@@ -79,10 +76,9 @@
                     tal:condition="form_name"
                     tal:attributes="id python:'fieldsetlegend-%s' % fieldset.id"
                     tal:content="form_name"
-                    i18n:translate="">Form name</legend>
+                    >Form name</legend>
 
-            <p i18n:translate=""
-               tal:condition="fieldset/description"
+            <p tal:condition="fieldset/description"
                tal:content="fieldset/description">
                 Description
             </p>
@@ -97,19 +93,15 @@
                     <label tal:attributes="for widget/associateLabelWithInputControl|name"
                            tal:define="name widget/name">
 
-                        <span tal:replace="widget/label"
-                              i18n:translate="">Label</span>
+                        <span tal:replace="widget/label">Label</span>
 
                         <span class="fieldRequired"
                               title="Required"
-                              i18n:attributes="title title_required;"
-                              i18n:translate="label_required"
                               tal:condition="widget/required">
                             (Required)
                         </span>
 
                         <span class="formHelp"
-                             i18n:translate=""
                              tal:content="description"
                              tal:condition="description">
                             field description

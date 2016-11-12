@@ -17,7 +17,7 @@ buildout: bootstrap.py
 	$(PYTHON) bootstrap.py
 	./bin/buildout -c devel.cfg
 
-bin/test bin/pybabel: buildout devel.cfg setup.py
+bin/test: buildout devel.cfg setup.py
 	touch bin/test
 	touch bin/pybabel
 

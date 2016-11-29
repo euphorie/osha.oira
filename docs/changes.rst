@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.2 (unreleased)
+4.0.2 (2016-11-29)
 ------------------
 
 - Add translation to HR

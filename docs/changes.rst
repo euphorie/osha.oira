@@ -5,8 +5,7 @@ Changelog
 4.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Add translation to HR
 
 4.0.1 (2016-10-31)
 ------------------

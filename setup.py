@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+import monkeypatch_setup
 import os
 
 version = '4.0.3.dev0'

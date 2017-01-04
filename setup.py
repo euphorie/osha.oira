@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+import monkeypatch_setup
 import os
 
 version = '4.0.3.dev0'
@@ -53,7 +54,8 @@ setup(name='osha.oira',
       ],
       tests_require=tests_require,
       extras_require={
-          "tests": tests_require + ['plone.app.testing'],
+          "tests": tests_require + ['plone.app.testing',
+                                    'plone.app.robotframework[debug]'],
       },
       entry_points="""
       [z3c.autoinclude.plugin]

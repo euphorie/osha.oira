@@ -22,10 +22,14 @@ bin/test: buildout devel.cfg setup.py
 	touch bin/pybabel
 
 check:: bin/test $(MO_FILES)
-	bin/test
+	bin/test -t '!robot'
+
+check-robot:: bin/test $(MO_FILES)
+	bin/test -t 'robot'
 
 jenkins: bin/test $(MO_FILES)
-	bin/test --xml -s osha.oira
+	bin/test --xml -s osha.oira -t '!robot'
+
 
 pot: bin/pybabel
 	bin/pybabel extract -F babel.cfg \

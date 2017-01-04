@@ -1,8 +1,10 @@
 from plone import api
+from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
+from plone.app.testing import applyProfile
+from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from plone.app.testing import applyProfile
 from plone.testing import z2
 from zope.configuration import xmlconfig
 
@@ -44,3 +46,9 @@ OIRA_INTEGRATION_TESTING = \
         bases=(OIRA_FIXTURE,),
         name="osha.oira:Integration"
     )
+
+OIRA_SUITE_ROBOT = FunctionalTesting(
+    bases=(OIRA_FIXTURE,
+           AUTOLOGIN_LIBRARY_FIXTURE,
+           z2.ZSERVER_FIXTURE),
+    name="OIRA_SUITE_ROBOT")

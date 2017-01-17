@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.3 (unreleased)
+4.0.3 (2017-01-17)
 ------------------
 
 - Add fixture and integration for robot tests (used to be in a separate package)

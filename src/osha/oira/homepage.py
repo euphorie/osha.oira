@@ -1,4 +1,8 @@
 # coding=utf-8
+"""
+NOTE: This class & view are outdated! Please use osha.oira.client.client.View
+instead (@@frontpage)
+"""
 from collections import OrderedDict
 from datetime import datetime
 from datetime import timedelta

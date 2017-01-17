@@ -5,7 +5,8 @@ Changelog
 4.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add fixture and integration for robot tests (used to be in a separate package)
+- Switch client Homepage to display tools syndicated from community site
 
 
 4.0.2 (2016-11-29)

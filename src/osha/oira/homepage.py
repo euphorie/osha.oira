@@ -63,7 +63,7 @@ class View(grok.View):
         self.language_info = plt.getAvailableLanguageInformation()
         props = api.portal.get_tool('portal_properties')
         self.json_url = props.site_properties.getProperty(
-            'tools_json_url', 'http://osha.edw.ro/oira-ws/tools.json')
+            'tools_json_url', 'https://oiraproject.eu/oira-ws/tools.json')
 
         self.tools = self.prepare_tools()
 

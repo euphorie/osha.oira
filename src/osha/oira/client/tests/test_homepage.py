@@ -39,6 +39,7 @@ class HomepageTest(OiRATestCase):
         alsoProvides(self.request, IOSHAClientSkinLayer)
         self.view = getMultiAdapter(
             (self.portal.client, self.request), name='view')
+        self.logout()
 
     def raise_attr_error(self):
         raise AttributeError

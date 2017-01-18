@@ -49,7 +49,7 @@ class ClientPublishTraverser(DefaultPublishTraverse):
 
 
 class View(client.View):
-    """View name: @@frontpage
+    """View name: @@view
     """
     grok.layer(IOSHAClientSkinLayer)
     grok.template("frontpage")
@@ -57,17 +57,17 @@ class View(client.View):
     def update(self):
         plt = api.portal.get_tool('portal_languages')
         self.language_info = plt.getAvailableLanguageInformation()
-        props = api.portal.get_tool('portal_properties')
-        self.json_url = props.site_properties.getProperty(
-            'tools_json_url', 'https://oiraproject.eu/oira-ws/tools.json')
-
         self.tools = self.prepare_tools()
-
         return self.render()
 
     def get_json(self):
         tools_json = requests.get(self.json_url)
         return loads(tools_json.content)
+
+    @property
+    def json_url(self):
+        props = api.portal.get_tool('portal_properties')
+        return props.site_properties.getProperty('tools_json_url', None)
 
     @property
     def cached_json(self):

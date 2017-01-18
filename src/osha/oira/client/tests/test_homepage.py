@@ -35,16 +35,10 @@ class HomepageTest(OiRATestCase):
         super(HomepageTest, self).setUp()
         self.portal = self.layer.portal
         self.loginAsPortalOwner()
-        self.homepage = createContentInContainer(
-            self.portal.documents.en,
-            'oira.homepage',
-            checkConstraints=False,
-            id='homepage',
-        )
-        self.request = self.homepage.REQUEST
+        self.request = self.portal.client.REQUEST
         alsoProvides(self.request, IOSHAClientSkinLayer)
         self.view = getMultiAdapter(
-            (self.homepage, self.request), name='nuplone-view')
+            (self.portal.client, self.request), name='view')
 
     def raise_attr_error(self):
         raise AttributeError

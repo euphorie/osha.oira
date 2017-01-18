@@ -87,7 +87,7 @@ class OutdatedToolsView(grok.View):
                 lambda x: x.startswith(sector_path), outdated_tool_paths)
             intro = u"""
 You are receiving this notification since you are the sector manager for
-"{0}" """.format(safe_unicode(sector.Title()))
+"{0}". """.format(safe_unicode(sector.Title()))
             self.send_notification(
                 to_name=contact_name,
                 to_address=contact_email,
@@ -113,7 +113,7 @@ You are receiving this notification since you are the sector manager for
                     continue
                 intro = u"""
 You are receiving this notification since you are the country manager for
-"{0}" """.format(safe_unicode(country.Title()))
+"{0}". """.format(safe_unicode(country.Title()))
 
                 self.send_notification(
                     to_name=contact_name,
@@ -128,7 +128,7 @@ You are receiving this notification since you are the country manager for
             'outdated_notications_oira_team_name', 'OiRA Team')
         to_email = sprops.getProperty(
             'outdated_notications_oira_team_email', 'test@example.com')
-        intro = u"This is the summary email of all outdated tools"
+        intro = u"This is the summary email of all outdated tools."
         self.send_notification(
             to_name=to_name,
             to_address=to_email,

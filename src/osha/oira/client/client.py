@@ -10,7 +10,14 @@ from euphorie.client.client import IClient
 from five import grok
 from json import loads
 from plone import api
-from plone.protect.auto import safeWrite
+try:
+    from plone.protect.auto import safeWrite
+except ImportError:
+    # This can happen in our functional tests. We need to pin plone.protect
+    # to 2.0.2, otherwise registerUserInClient() from euphorie.client.tests.utils
+    # fails.
+    def safeWrite(context, request):
+        pass
 from zope.component import adapts
 from zope.component import getMultiAdapter
 from zope.interface import directlyProvidedBy

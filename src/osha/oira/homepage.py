@@ -20,7 +20,6 @@ from plone.dexterity.browser import edit
 from plone.dexterity.events import EditFinishedEvent
 from plone.directives import dexterity
 from plone.directives import form
-from plone.protect.auto import safeWrite
 from plone.z3cform import layout
 from z3c.form import button
 from z3c.form.form import FormTemplateFactory
@@ -79,6 +78,7 @@ class View(grok.View):
 
     @property
     def cached_json(self):
+        from plone.protect.auto import safeWrite
         safeWrite(self.context, self.request)
         now = datetime.now()
         short_cache = now + timedelta(minutes=5)

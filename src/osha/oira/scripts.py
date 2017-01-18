@@ -129,17 +129,19 @@ You are receiving this notification since you are the country manager for
         to_email = sprops.getProperty(
             'outdated_notications_oira_team_email', 'test@example.com')
         intro = u"This is the summary email of all outdated tools."
+        empty_message = u"No outdated tools were found for the requested period."
         self.send_notification(
             to_name=to_name,
             to_address=to_email,
             tool_paths=outdated_tool_paths,
             intro=intro,
+            empty_message=empty_message,
         )
 
     def send_notification(
-        self, to_name=None, to_address=None, tool_paths=None, intro=""
+        self, to_name=None, to_address=None, tool_paths=None, intro="", empty_message=None
     ):
-        if not tool_paths:
+        if not tool_paths and not empty_message:
             return
         to_name = safe_unicode(to_name)
         mailhost = getToolByName(self.context, "MailHost")
@@ -147,25 +149,28 @@ You are receiving this notification since you are the country manager for
         subject = u'OiRA: Notification on outdated tools'
         portal_id = self.context.getId()
         portal_url = self.context.absolute_url()
-        paths_by_country = OrderedDict()
-        for path in tool_paths:
-            country = path.split('/')[3]
-            if country in paths_by_country:
-                paths_by_country[country].append(path)
-            else:
-                paths_by_country[country] = [path]
-        tool_details = ''
-        for country in paths_by_country.keys():
-            if len(paths_by_country.keys()) > 1:
-                tool_details += '\n' + country + ':\n'
-            else:
+        if tool_paths:
+            paths_by_country = OrderedDict()
+            for path in tool_paths:
+                country = path.split('/')[3]
+                if country in paths_by_country:
+                    paths_by_country[country].append(path)
+                else:
+                    paths_by_country[country] = [path]
+            tool_details = ''
+            for country in paths_by_country.keys():
+                if len(paths_by_country.keys()) > 1:
+                    tool_details += '\n' + country + ':\n'
+                else:
+                    tool_details += '\n'
+                tool_urls = [
+                    i.replace('/' + portal_id, portal_url)
+                    for i in paths_by_country[country]
+                ]
+                tool_details += '\n'.join(tool_urls)
                 tool_details += '\n'
-            tool_urls = [
-                i.replace('/' + portal_id, portal_url)
-                for i in paths_by_country[country]
-            ]
-            tool_details += '\n'.join(tool_urls)
-            tool_details += '\n'
+        else:
+            tool_details = empty_message
         years = self.interval / 365
         if years:
             months = int((self.interval % 365) / 30.4)

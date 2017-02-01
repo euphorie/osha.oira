@@ -1,5 +1,6 @@
 from json import loads
 from osha.oira.client.interfaces import IOSHAClientSkinLayer
+from osha.oira.client import client
 from osha.oira.tests.base import OiRATestCase
 from plone import api
 from plone.dexterity.utils import createContentInContainer
@@ -45,36 +46,36 @@ class HomepageTest(OiRATestCase):
         raise AttributeError
 
     def test_initial_bad_json_url(self):
-        self.view.get_json = self.raise_attr_error
+        client.get_json = self.raise_attr_error
         self.assertEquals(self.view.cached_json, [])
 
     def test_initial_invalid_json(self):
-        self.view.get_json = lambda: loads('[{"auth"')
+        client.get_json = lambda: loads('[{"auth"')
         self.assertEquals(self.view.cached_json, [])
 
     def test_dont_update_cached_json(self):
-        self.view.get_json = lambda: loads('[{"a":"b"}]')
+        client.get_json = lambda: loads('[{"a":"b"}]')
         self.view.cached_json
-        self.view.get_json = lambda: loads('[]')
+        client.get_json = lambda: loads('[]')
         self.assertEquals(self.view.cached_json, [{u'a': u'b'}])
 
     def test_update_invalid_json(self):
-        self.view.get_json = lambda: loads('[{"auth"')
+        client.get_json = lambda: loads('[{"auth"')
         self.view.cached_json
-        self.view.get_json = lambda: loads('[{"a":"b"}]')
+        client.get_json = lambda: loads('[{"a":"b"}]')
         self.assertEquals(self.view.cached_json, [{u'a': u'b'}])
 
     def test_manager_can_invalidate_cache(self):
         self.loginAsPortalOwner()
-        self.view.get_json = lambda: loads('[{"a":"b"}]')
+        client.get_json = lambda: loads('[{"a":"b"}]')
         self.view.cached_json
         self.view.request['invalidate-cache'] = 1
-        self.view.get_json = lambda: loads('[{"a":"c"}]')
+        client.get_json = lambda: loads('[{"a":"c"}]')
         self.assertEquals(self.view.cached_json, [{u'a': u'c'}])
 
     def test_anon_cannot_invalidate_cache(self):
-        self.view.get_json = lambda: loads('[{"a":"b"}]')
+        client.get_json = lambda: loads('[{"a":"b"}]')
         self.view.cached_json
         self.view.request['invalidate-cache'] = 1
-        self.view.get_json = lambda: loads('[{"a":"c"}]')
+        client.get_json = lambda: loads('[{"a":"c"}]')
         self.assertEquals(self.view.cached_json, [{u'a': u'b'}])

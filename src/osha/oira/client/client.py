@@ -34,6 +34,49 @@ log = logging.getLogger(__name__)
 grok.templatedir("templates")
 
 
+def cached_tools_json(context, request):
+    safeWrite(context, request)
+    now = datetime.now()
+    short_cache = now + timedelta(minutes=5)
+    long_cache = now + timedelta(minutes=15)
+    if request.get('invalidate-cache'):
+        mtool = api.portal.get_tool('portal_membership')
+        if mtool.checkPermission('cmf.ModifyPortalContent', context):
+            context.cache_until = now
+
+    if not hasattr(context, 'json'):
+        try:
+            context.json = get_json()
+            context.cache_until = long_cache
+        except (ValueError, AttributeError), err:
+            log.error(
+                'Failed to retrieve tools JSON from {}: {}'
+                .format(get_json_url(), err)
+            )
+            return []
+    if now >= getattr(context, 'cache_until', datetime.min):
+        try:
+            context.json = get_json()
+            context.cache_until = long_cache
+        except (ValueError, AttributeError), err:
+            log.error(
+                'Failed to update tools JSON from {}: {}'
+                .format(get_json_url(), err)
+            )
+            context.cache_until = short_cache
+    return context.json
+
+
+def get_json():
+    tools_json = requests.get(get_json_url())
+    return loads(tools_json.content)
+
+
+def get_json_url():
+    props = api.portal.get_tool('portal_properties')
+    return props.site_properties.getProperty('tools_json_url', None)
+
+
 class ClientPublishTraverser(DefaultPublishTraverse):
     """Publish traverser to setup the skin layer.
 
@@ -67,47 +110,13 @@ class View(client.View):
         self.tools = self.prepare_tools()
         return self.render()
 
-    def get_json(self):
-        tools_json = requests.get(self.json_url)
-        return loads(tools_json.content)
-
     @property
     def json_url(self):
-        props = api.portal.get_tool('portal_properties')
-        return props.site_properties.getProperty('tools_json_url', None)
+        return get_json_url()
 
     @property
     def cached_json(self):
-        safeWrite(self.context, self.request)
-        now = datetime.now()
-        short_cache = now + timedelta(minutes=5)
-        long_cache = now + timedelta(minutes=15)
-        if self.request.get('invalidate-cache'):
-            mtool = api.portal.get_tool('portal_membership')
-            if mtool.checkPermission('cmf.ModifyPortalContent', self.context):
-                self.context.cache_until = now
-
-        if not hasattr(self.context, 'json'):
-            try:
-                self.context.json = self.get_json()
-                self.context.cache_until = long_cache
-            except (ValueError, AttributeError), err:
-                log.error(
-                    'Failed to retrieve tools JSON from {}: {}'
-                    .format(self.json_url, err)
-                )
-                return []
-        if now >= getattr(self.context, 'cache_until', datetime.min):
-            try:
-                self.context.json = self.get_json()
-                self.context.cache_until = long_cache
-            except (ValueError, AttributeError), err:
-                log.error(
-                    'Failed to update tools JSON from {}: {}'
-                    .format(self.json_url, err)
-                )
-                self.context.cache_until = short_cache
-        return self.context.json
+        return cached_tools_json(self.context, self.request)
 
     def prepare_tools(self):
         langs = dict()

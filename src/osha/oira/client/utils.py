@@ -1,11 +1,14 @@
 # coding=utf-8
 from euphorie.client import model
 from euphorie.client.utils import WebHelpers
+from euphorie.content.utils import StripMarkup
 from five import grok
 from osha.oira.client import model as oiramodel
+from osha.oira.client.client import cached_tools_json
 from osha.oira.client.interfaces import IOSHAClientSkinLayer
 from sqlalchemy import sql
 from z3c.saconfig import Session
+from zope.component import getMultiAdapter
 from zope.i18nmessageid import MessageFactory
 import htmllib
 
@@ -172,3 +175,23 @@ class OSHAWebHelpers(WebHelpers):
     """
     grok.layer(IOSHAClientSkinLayer)
     grok.template("webhelpers")
+
+    def __init__(self, context, request):
+        super(OSHAWebHelpers, self).__init__(context, request)
+        data = cached_tools_json(self.context, self.request)
+        survey = self._survey
+        if not survey:
+            return
+        own_path = "/".join(self._survey.getPhysicalPath()[-3:])
+        entries = [
+            entry for entry in data
+            if entry.get('tool_link', '').endswith(own_path)]
+        if len(entries):
+            entry = entries[0]
+            description = (
+                entry.get('body_alt', None) or entry.get('body') or
+                self.tool_description)
+            ploneview = getMultiAdapter(
+                (self.context, self.request), name="plone")
+            self.tool_description = ploneview.cropText(
+                StripMarkup(description), 800)

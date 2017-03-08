@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.5 (unreleased)
+4.0.5 (2017-03-08)
 ------------------
 
 - Make sure that when creating the Excel report, only present (or top5)

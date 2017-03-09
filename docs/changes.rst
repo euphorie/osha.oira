@@ -5,7 +5,8 @@ Changelog
 4.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix logic for "Make sure that when creating the Excel report, only present
+  (or top5) risks are included. Fixes OSHA MOI-178"
 
 
 4.0.5 (2017-03-08)

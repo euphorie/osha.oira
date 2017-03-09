@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.6 (unreleased)
+4.0.6 (2017-03-09)
 ------------------
 
 - Fix logic for "Make sure that when creating the Excel report, only present

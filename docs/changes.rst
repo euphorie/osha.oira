@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.7 (unreleased)
+4.0.7 (2017-03-14)
 ------------------
 
 - Fix huge performance hole, by making sure the JSON of tools is cached on

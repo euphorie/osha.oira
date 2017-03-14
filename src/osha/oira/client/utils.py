@@ -178,10 +178,10 @@ class OSHAWebHelpers(WebHelpers):
 
     def __init__(self, context, request):
         super(OSHAWebHelpers, self).__init__(context, request)
-        data = cached_tools_json(self.context, self.request)
         survey = self._survey
         if not survey:
             return
+        data = cached_tools_json(self.request.client, self.request)
         own_path = "/".join(self._survey.getPhysicalPath()[-3:])
         entries = [
             entry for entry in data

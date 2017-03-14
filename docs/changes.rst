@@ -5,7 +5,8 @@ Changelog
 4.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix huge performance hole, by making sure the JSON of tools is cached on
+  the client
 
 
 4.0.6 (2017-03-09)

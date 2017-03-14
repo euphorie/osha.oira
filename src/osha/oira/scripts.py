@@ -25,6 +25,16 @@ class OutdatedTools(ConsoleScript):
 outdated_tools = OutdatedTools()
 
 
+class WriteStatistics(ConsoleScript):
+    def run(self):
+        self.portal = self.app.Plone2
+        write_statistics_view = getMultiAdapter(
+            (self.portal, self.portal.REQUEST), name='write-statistics')
+        write_statistics_view()
+
+write_statistics = WriteStatistics()
+
+
 class OutdatedToolsView(grok.View):
     grok.context(ISiteRoot)
     grok.require("cmf.ManagePortal")
@@ -40,8 +50,18 @@ class OutdatedToolsView(grok.View):
         self.render(self.context)
 
     def render(self, portal):
+        log.write('Called outdated-tools-view')
         self.portal = portal
         outdated_tool_paths = self.get_outdated_tool_paths()
+        years = self.interval / 365
+        if years:
+            months = int((self.interval % 365) / 30.4)
+            period = "over {0} year(s) and {1} month(s)".format(years, months)
+        else:
+            period = "over {0} month(s)".format(int(self.interval / 30.4))
+        log.write(
+            '{0} outdated tools have not been updated {1}.'.format(
+                len(outdated_tool_paths), period))
         # As requested by EU-OSHA, sector managers do not get emails, only
         # country managers.
         # self.send_sector_manager_notifications(outdated_tool_paths)

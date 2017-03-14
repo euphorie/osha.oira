@@ -205,6 +205,7 @@ class WriteStatistics(grok.View):
         return info_surveys
 
     def render(self):
+        log.info('Called: write_statistics')
         dbtable_surveys = 'statistics_surveys'
         info_surveys = self.getSurveysInfo()
         # write to db
@@ -230,6 +231,8 @@ class WriteStatistics(grok.View):
             session.execute(insert)
         datamanager.mark_changed(session)
         transaction.get().commit()
+        log.info('Exported statistics on {0} surveys to the DB.'.format(
+            len(info_surveys)))
         from pprint import pformat
         return "Written:\n" + pformat(info_surveys)
 

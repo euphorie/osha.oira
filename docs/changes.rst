@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.8 (unreleased)
+4.0.8 (2017-03-14)
 ------------------
 
 - add script for write-statistics

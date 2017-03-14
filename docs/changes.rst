@@ -5,8 +5,7 @@ Changelog
 4.0.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- add script for write-statistics
 
 4.0.7 (2017-03-14)
 ------------------

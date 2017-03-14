@@ -50,7 +50,7 @@ class OutdatedToolsView(grok.View):
         self.render(self.context)
 
     def render(self, portal):
-        log.write('Called outdated-tools-view')
+        log.info('Called outdated-tools-view')
         self.portal = portal
         outdated_tool_paths = self.get_outdated_tool_paths()
         years = self.interval / 365
@@ -59,7 +59,7 @@ class OutdatedToolsView(grok.View):
             period = "over {0} year(s) and {1} month(s)".format(years, months)
         else:
             period = "over {0} month(s)".format(int(self.interval / 30.4))
-        log.write(
+        log.info(
             '{0} outdated tools have not been updated {1}.'.format(
                 len(outdated_tool_paths), period))
         # As requested by EU-OSHA, sector managers do not get emails, only

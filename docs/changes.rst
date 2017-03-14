@@ -5,8 +5,7 @@ Changelog
 4.0.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- typo
 
 4.0.8 (2017-03-14)
 ------------------

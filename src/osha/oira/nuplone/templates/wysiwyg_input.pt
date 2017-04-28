@@ -6,8 +6,8 @@
       meta:interpolation="true"
       tal:define="portal_state context/@@plone_portal_state"
       tal:omit-tag="">
-  <fieldset class="richInput">
-    <legend class="${view/@@dependencies}" lang="${portal_state/language}">${view/label}<sup tal:condition="view/required" class="required">*</sup></legend>
+  <fieldset class="richInput ${view/@@dependencies}">
+    <legend lang="${portal_state/language}">${view/label}<sup tal:condition="view/required" class="required">*</sup></legend>
     <dfn class="infoPanel"
          i18n:attributes="title"
          title="Information"

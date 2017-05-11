@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.11 (unreleased)
+4.0.11 (2017-05-11)
 -------------------
 
 - Translation fixes ES MOI-183

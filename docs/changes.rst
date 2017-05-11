@@ -5,8 +5,7 @@ Changelog
 4.0.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Prepare for "Outdated tool" notification
 
 4.0.9 (2017-03-14)
 ------------------

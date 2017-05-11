@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.10 (unreleased)
+4.0.10 (2017-05-11)
 -------------------
 
 - Prepare for "Outdated tool" notification

@@ -5,8 +5,7 @@ Changelog
 4.0.11 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Translation fixes ES MOI-183
 
 4.0.10 (2017-05-11)
 -------------------

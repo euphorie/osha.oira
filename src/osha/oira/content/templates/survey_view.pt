@@ -32,13 +32,18 @@
         <dd tal:condition="not:context/hasNotification" i18n:translate="No">No</dd>
       </dl>
 
-    <tal:block define="children view/modules_and_profile_questions">
+    <tal:block define="children view/modules_and_profile_questions;
+      sortable python:'sortable' if can_edit and len(children)>1 else None;">
       <h2 i18n:translate="header_modules_and_profile_questions">Modules and Profile Questions</h2>
 
       <p tal:condition="not:python:children" i18n:translate="no_modules">This OiRA Tool has no modules.</p>
 
       <tal:children condition="python:children">
-        <ol class="${python:'sortable' if can_edit and len(children)&gt;1 else None}" tal:condition="python:children">
+        <ol class="${sortable}" tal:condition="python:children">
+        <div class="sortable-explanation">
+          ${view/sortable_explanation}
+        </div>
+
             <li tal:repeat="child children" id="child-${child/id}">
                 <img tal:condition="not:child/is_profile_question" src="${media_url}/osha/folder_icon.png"/>
                 <img tal:condition="child/is_profile_question" src="${media_url}/osha/question.png"/>

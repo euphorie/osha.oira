@@ -18,8 +18,25 @@
     <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base-ie8.css" /> <![endif]-->
     <style type="text/css" media="all">
       ol.sortable:after {
-          content: "Change order of items by dragging the handle";
+          content: none;
        }
+      ol.sortable .sortable-explanation{
+        background-color: #fdfdc8;
+        color: #6f5a44;
+        border: 1px solid #d3d4a7;
+        padding: 4px 10px;
+        float: right;
+        width: 186px;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        margin-right: -228px;
+        display: none;
+        -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        -moz-box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+      }
     </style>
     <link rel="stylesheet" type="text/css" media="all" href="${style_url}/euphorie/base.css" />
     <!--[if IE 6]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/euphorie/base-ie6.css" /> <![endif]-->
@@ -49,6 +66,16 @@
     <script type="text/javascript">
       var plone = { portal_url : '${tools/portal/absolute_url}',
                     context_url : '${context/absolute_url}' };
+      jQuery( document ).ready(function() {
+        $("ol.sortable")
+          .mouseover(function() {
+            $("ol.sortable .sortable-explanation").show();
+          })
+          .mouseout(function() {
+            $("ol.sortable .sortable-explanation").hide();
+          });
+
+      });
     </script>
     <tal:block replace="tile:scripts"/>
     <metal:block define-slot="scripts"/>

@@ -1,9 +1,10 @@
-from zope.interface import Interface
+# -*- coding: utf-8 -*-
+from ..interfaces import IOSHAContentSkinLayer
 from five import grok
 from plone.app.controlpanel.site import ISiteSchema
 from plonetheme.nuplone.skin import layout as nuplone
 from zope.component.hooks import getSite
-from ..interfaces import IOSHAContentSkinLayer
+from zope.interface import Interface
 
 grok.templatedir("templates")
 

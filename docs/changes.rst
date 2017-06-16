@@ -5,8 +5,8 @@ Changelog
 4.0.12 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Hack-fix the layout view of the CMS so that a translated version of the
+  drag&drop help containing non-ASCII can be shown MOI-187
 
 4.0.11 (2017-05-11)
 -------------------

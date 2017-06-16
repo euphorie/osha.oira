@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.12 (unreleased)
+4.0.12 (2017-06-16)
 -------------------
 
 - Hack-fix the layout view of the CMS so that a translated version of the

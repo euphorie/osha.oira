@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: info@syslab.com\n"
-"POT-Creation-Date: 2017-06-22 18:41+0200\n"
+"POT-Creation-Date: 2017-06-22 18:43+0200\n"
 "PO-Revision-Date: 2015-02-10 12:04+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,12 +163,12 @@ msgstr "4. ársfjórðungur"
 #. Default: Measure
 #: src/osha/oira/client/report.py:102
 msgid "report_timeline_measure"
-msgstr "Ráðstöfun"
+msgstr "Úrbætur / Lausn"
 
 #. Default: Start date
 #: src/osha/oira/client/report.py:105
 msgid "report_timeline_start_date"
-msgstr ""
+msgstr "Upphafsdagur"
 
 #. Default: End date
 #: src/osha/oira/client/report.py:108
@@ -711,7 +711,7 @@ msgstr "Velkomin/n"
 #. Default: run a test session
 #: src/osha/oira/client/templates/login.pt:25
 msgid "label_tryout"
-msgstr "prófa"
+msgstr "prófað"
 
 #. Default: register
 #: src/osha/oira/client/templates/login.pt:25
@@ -753,7 +753,7 @@ msgstr ""
 #. Default: Show more…
 #: src/osha/oira/client/templates/login.pt:34
 msgid "Show more…"
-msgstr "Sýndu mér meira…"
+msgstr "Sýna meira…"
 
 #: src/osha/oira/client/templates/login.pt:38
 msgid "Who is the OiRA tool for?"
@@ -938,14 +938,14 @@ msgstr "Skýrsla"
 msgid "report_intro"
 msgstr ""
 "Nú er aðgerðaáætlun lokið og hægt er að vista skýrslu með öllum niðurstöðum. "
-"Hægt er að bæta við athugasemdum um skýrsluna. Setjið þær í reitin hér fyrir "
+"Hægt er að bæta við athugasemdum í skýrsluna. Setjið þær í reitinn hér fyrir "
 "neðan."
 
 #. Default: Please leave any extra comments that should be included in the
 #. report in this field.
 #: src/osha/oira/client/templates/report.pt:32
 msgid "label_report_comment"
-msgstr "Settu inn athugasemdir til viðbótar í þennan reit."
+msgstr "Bætið við athugasemdum í skýrsluna hér."
 
 #. Default: Save and continue
 #: src/osha/oira/client/templates/report.pt:41
@@ -1079,8 +1079,8 @@ msgstr "Skýrsla"
 #: src/osha/oira/client/templates/report_company.pt:19
 msgid "hader_company_details"
 msgstr ""
-"Viltu taka þátt í að bæta OiRA verkfærið? Vinsamlegast taktu þátt í "
-"könnuninni hér að neðan."
+"Viltu taka þátt í að bæta OiRA verkfærið? Taktu þátt í könnuninni hér að "
+"neðan."
 
 #. Default: Please fix the indicated errors.
 #: src/osha/oira/client/templates/report_company.pt:21
@@ -1093,8 +1093,7 @@ msgstr "Það þarf að lagfæra villurnar sem bent er á."
 #: src/osha/oira/client/templates/report_company.pt:22
 msgid "company_details_intro"
 msgstr ""
-"Þér er frjálst að veita upplýsingar hér að neðan. Þeim er ætlað að bæta "
-"verkfærið og þjónustuna. Þessi gögn munu ekki birtast í skýrslunni."
+"Þessar upplýsingar eiga að bæta verkfærið, þær birtast ekki í skýrslunni."
 
 #. Default: Your country
 #: src/osha/oira/client/templates/report_company.pt:29
@@ -1134,7 +1133,7 @@ msgstr "Áhættumatið var framkvæmt af"
 #. Default: own staff
 #: src/osha/oira/client/templates/report_company.pt:48
 msgid "conductor_staff"
-msgstr "eigin starfsmönnum"
+msgstr "starfsfólki vinnustaðarins"
 
 #. Default: an external consultant or service provider
 #: src/osha/oira/client/templates/report_company.pt:49
@@ -1144,8 +1143,7 @@ msgstr "utanaðkomandi ráðgjafa eða þjónustuaðila"
 #. Default: both own staff and an external consultant or service provider
 #: src/osha/oira/client/templates/report_company.pt:50
 msgid "conductor_both"
-msgstr ""
-"bæði af eigin starfsmönnum og utanaðkomandi ráðgjafa eða þjónustuveitanda"
+msgstr "bæði af eigin starfsfólki og utanaðkomandi ráðgjafa eða þjónustuaðila"
 
 #. Default: Through which channel did you learn about this tool?
 #: src/osha/oira/client/templates/report_company.pt:55
@@ -1198,7 +1196,7 @@ msgstr "eftir öðrum leiðum"
 #. Default: Workers were invited to participate in the risk assessment
 #: src/osha/oira/client/templates/report_company.pt:68
 msgid "label_workers_participated"
-msgstr "Starfsmönnum var boðið að taka þátt í áhættumatinu"
+msgstr "Starfsfólki var boðið að taka þátt í áhættumatinu"
 
 #. Default: Yes
 #: src/osha/oira/client/templates/report_company.pt:69
@@ -1254,7 +1252,7 @@ msgstr "Áhættan er ekki til staðar"
 #. Default: Risk with measure(s)
 #: src/osha/oira/client/templates/status_print.pt:88
 msgid "label_risk_with_measure"
-msgstr "Áhætta með aðgerð(um)"
+msgstr "Áhætta og áhættustig"
 
 #. Default: Risk without measure
 #: src/osha/oira/client/templates/status_print.pt:91

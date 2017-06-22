@@ -5,8 +5,7 @@ Changelog
 4.0.13 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Translation changes in IS
 
 4.0.12 (2017-06-16)
 -------------------

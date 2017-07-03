@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.13 (unreleased)
+4.0.13 (2017-07-03)
 -------------------
 
 - Translation changes in IS

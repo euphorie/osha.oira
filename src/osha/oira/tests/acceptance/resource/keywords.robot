@@ -11,6 +11,10 @@ Open OiRA EU
     #Set Selenium Speed    .3 seconds
     Go To    http://${SERVER}/eu/
 
+Terminate test
+    Run Keyword If Test Failed    Capture Page Screenshot
+    Close all browsers
+
 I am logged in as a user in OiRA EU
     Open OiRA EU
     Log in as user

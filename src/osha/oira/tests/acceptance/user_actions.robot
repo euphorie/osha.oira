@@ -6,7 +6,7 @@ Resource  resource/common.robot
 Resource  resource/keywords.robot
 
 Test Setup        Prepare test browser
-Test Teardown     Close all browsers
+Test Teardown     Terminate test
 
 *** Test Case ***
 User can register and delete account

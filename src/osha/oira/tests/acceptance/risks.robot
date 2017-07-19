@@ -6,7 +6,7 @@ Resource  resource/common.robot
 Resource  resource/keywords.robot
 
 Test Setup        Prepare test browser
-Test Teardown     Close all browsers
+Test Teardown     Terminate test
 
 *** Variable ***
 
@@ -23,7 +23,7 @@ Leather and Tanning Session
      Then I can answer the risk as Yes   1.1
      When I navigate to risk    1.2
      Then I can answer the risk as No    1.2
-     When I navigate to risk    1.4
+     When I navigate to risk    1.444
       And I can supply the information for directly estimating the risk   1.4  medium
      Then I can add a custom risk  Beware of the cat  medium
      Then I can start an action plan module

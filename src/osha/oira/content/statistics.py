@@ -242,6 +242,9 @@ class StatisticsMixin(object):
         'overview': 'usage_statistics_overview.rptdesign',
         'country': 'usage_statistics_country.rptdesign',
         'tool': 'usage_statistics_tool.rptdesign',
+        'overview_test': 'usage_statistics_overview.rptdesign',
+        'country_test': 'usage_statistics_country_testsessions.rptdesign',
+        'tool_test': 'usage_statistics_tool_testsessions.rptdesign',
     }
     pdf_data = None
 
@@ -275,14 +278,17 @@ class StatisticsMixin(object):
                 "birt_report_url not set, please contact an administrator",
                 type=u'error')
             return
+        testsessions = data.get('test_sessions', 0)
         report_type = data.get('report_type')
+        if testsessions:
+            report_type = "{}_test".format(report_type)
         filename = self.filename[report_type]
         url = "&".join([url, '__report=statistics/%s' % filename])
-        if report_type == 'country':
+        if report_type.startswith('country'):
             url = "&".join([url, 'country=%s' % data.get('countries')])
-        elif report_type == 'tool':
+        elif report_type.startswith('tool'):
             url = "&".join([url, 'tool=%s' % data.get('tools')])
-        elif report_type == 'overview':
+        elif report_type.startswith('overview'):
             url = "&".join([url, 'sector=%25'])
 
         report_period = data.get('report_period')
@@ -295,7 +301,6 @@ class StatisticsMixin(object):
         else:
             month = period
         file_format = data.get('file_format')
-        testsessions = data.get('test_sessions', 0)
         url = "&".join([url,
                         'year=%d' % year,
                         'month=%d' % month,
@@ -303,6 +308,7 @@ class StatisticsMixin(object):
                         'testsessions=%d' % testsessions,
                         '__format=%s' % file_format,
                         ])
+        log.info(url)
         return url
 
     def _handleSubmit(self):

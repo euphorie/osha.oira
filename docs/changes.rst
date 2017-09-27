@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.14 (unreleased)
+4.0.14 (2017-09-27)
 -------------------
 
 - For the statistics, we now have separate templates for the Guest reports

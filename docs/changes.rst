@@ -5,8 +5,8 @@ Changelog
 4.0.14 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- For the statistics, we now have separate templates for the Guest reports
+  Refs MOI-141
 
 4.0.13 (2017-07-03)
 -------------------

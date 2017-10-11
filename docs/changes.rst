@@ -5,7 +5,9 @@ Changelog
 4.0.15 (unreleased)
 -------------------
 
-- Nothing changed yet.
+Changed:
+
+- Translations for Croatian (HR)
 
 
 4.0.14 (2017-09-27)

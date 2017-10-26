@@ -14,6 +14,7 @@ from openpyxl.workbook import Workbook
 from osha.oira import _
 from osha.oira.client import utils
 from osha.oira.client.interfaces import IOSHAIdentificationPhaseSkinLayer
+from osha.oira.client.interfaces import IOSHAItalyReportPhaseSkinLayer
 from osha.oira.client.interfaces import IOSHAReportPhaseSkinLayer
 from plonetheme.nuplone.utils import formatDate
 from rtfng.Elements import PAGE_NUMBER
@@ -669,6 +670,121 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
         toc.append(Paragraph(LINE))
         body.append(Paragraph(LINE))
         self.addConsultationBox(body, document)
+        document.Sections.append(body)
+        # Until here...
+
+        renderer = Renderer()
+        output = StringIO()
+        renderer.Write(document, output)
+
+        filename = translate(
+            _("filename_report_actionplan",
+                default=u"Action plan ${title}",
+                mapping=dict(title=self.session.title)),
+            context=self.request,)
+        self.request.response.setHeader(
+            "Content-Disposition",
+            "attachment; filename=\"%s.rtf\"" % filename.encode("utf-8"))
+        self.request.response.setHeader("Content-Type", "application/rtf")
+        return output.getvalue()
+
+
+class OSHAItalyActionPlanReportDownload(OSHAActionPlanReportDownload):
+    """Special report for Italy"""
+    grok.layer(IOSHAItalyReportPhaseSkinLayer)
+    grok.name("download")
+    download = True
+
+    def update(self):
+        super(OSHAItalyActionPlanReportDownload, self).update()
+
+    def render(self):
+        """ Mostly a copy of the render method in OSHAActionPlanReportDownload, but with
+            some changes to handle the special reqs of Italy
+        """
+        document = report.createDocument(self.session)
+        ss = document.StyleSheet
+
+        # Define some more custom styles
+        ss.ParagraphStyles.append(
+            ParagraphStyle(
+                "RiskPriority",
+                TextStyle(
+                    TextPropertySet(
+                        font=ss.Fonts.Arial,
+                        size=22,
+                        italic=True,
+                        colour=ss.Colours.Blue)),
+                ParagraphPropertySet(left_indent=300, right_indent=300))
+        )
+        ss.ParagraphStyles.append(
+            ParagraphStyle(
+                "MeasureField",
+                TextStyle(
+                    TextPropertySet(
+                        font=ss.Fonts.Arial,
+                        size=18,
+                        underline=True)),
+                ParagraphPropertySet(left_indent=300, right_indent=300))
+        )
+        # XXX: This part is removed
+        # self.addActionPlan(document)
+
+        # XXX: and replaced with this part:
+        t = lambda txt: "".join([
+            "\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)
+        ])
+        toc = createSection(document, self.context, self.request)
+
+        body = Section()
+        heading = t(_("header_oira_report_download",
+                    default=u"OiRA Report: \"${title}\"",
+                    mapping=dict(title=self.session.title)))
+
+        toc.append(Paragraph(
+            ss.ParagraphStyles.Heading1,
+            ParagraphPropertySet(alignment=ParagraphPropertySet.CENTER),
+            heading,
+        ))
+
+        if self.session.report_comment:
+            # Add comment. #5985
+            normal_style = document.StyleSheet.ParagraphStyles.Normal
+            toc.append(Paragraph(normal_style, self.session.report_comment))
+
+        toc_props = ParagraphPropertySet()
+        toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH * 1)
+        toc_props.SetRightIndent(TabPropertySet.DEFAULT_WIDTH * 1)
+        p = Paragraph(ss.ParagraphStyles.Heading6, toc_props)
+        txt = t(_("toc_header", default=u"Contents"))
+        p.append(character.Text(txt))
+        toc.append(p)
+
+        headings = [
+            t(u"Adempimenti/rischi identificati, valutati e gestiti con misure "
+                "obbligatorie adottate e misure di miglioramento"),
+            t(u"Adempimenti/rischi non pertinenti"),
+        ]
+        # headings = [
+        #     t(_("header_present_risks",
+        #         default=u"Risks that have been identified, "
+        #                 u"evaluated and have an Action Plan")),
+        #     t(_("header_risks_not_present",
+        #         default=u"Hazards/problems that have been managed "
+        #                 u"or are not present in your organisation"))
+        # ]
+        nodes = [
+            self.actioned_nodes,
+            self.risk_not_present_nodes,
+        ]
+
+        for nodes, heading in zip(nodes, headings):
+            if not nodes:
+                continue
+            self.addReportNodes(document, nodes, heading, toc, body)
+
+        toc.append(Paragraph(LINE))
+        body.append(Paragraph(LINE))
         document.Sections.append(body)
         # Until here...
 

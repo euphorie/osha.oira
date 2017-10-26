@@ -14,6 +14,14 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
         "actionplan": interfaces.IOSHAActionPlanPhaseSkinLayer,
         "report": interfaces.IOSHAReportPhaseSkinLayer,
     })
+    survey.SurveyPublishTraverser.countries.update({
+        'it': {
+            'identification': interfaces.IOSHAItalyIdentificationPhaseSkinLayer,
+            'customization': interfaces.IOSHAItalyCustomizationPhaseSkinLayer,
+            'evaluation': interfaces.IOSHAItalyEvaluationPhaseSkinLayer,
+            'actionplan': interfaces.IOSHAItalyActionPlanPhaseSkinLayer,
+            'report': interfaces.IOSHAItalyReportPhaseSkinLayer},
+    })
 
 
 class OSHAStatusPrint(survey.Status):

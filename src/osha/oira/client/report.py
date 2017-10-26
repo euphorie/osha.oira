@@ -421,7 +421,11 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
                     t(msg)
                 ))
 
-            if getattr(node, 'identification', None) == 'no':
+            # In the report for Italy, don't print the description
+            if (
+                getattr(node, 'identification', None) == 'no' and
+                not IOSHAItalyReportPhaseSkinLayer.providedBy(self.request)
+            ):
                 if zodb_node is None:
                     description = node.title
                 else:
@@ -727,6 +731,49 @@ class OSHAItalyActionPlanReportDownload(OSHAActionPlanReportDownload):
                         underline=True)),
                 ParagraphPropertySet(left_indent=300, right_indent=300))
         )
+        ss.ParagraphStyles.append(
+            ParagraphStyle(
+                "ITTitle",
+                TextStyle(
+                    TextPropertySet(
+                        font=ss.Fonts.Arial,
+                        size=36,
+                        italic=True,
+                        bold=True)),
+                ParagraphPropertySet(left_indent=300, right_indent=300))
+        )
+        ss.ParagraphStyles.append(
+            ParagraphStyle(
+                "ITSubtitle",
+                TextStyle(
+                    TextPropertySet(
+                        font=ss.Fonts.Arial,
+                        size=32,
+                        italic=True,
+                        bold=True)),
+                ParagraphPropertySet(left_indent=300, right_indent=300))
+        )
+        ss.ParagraphStyles.append(
+            ParagraphStyle(
+                "ITSubSubtitle",
+                TextStyle(
+                    TextPropertySet(
+                        font=ss.Fonts.Arial,
+                        size=28,
+                        italic=True,
+                        bold=True)),
+                ParagraphPropertySet(left_indent=300, right_indent=300))
+        )
+        ss.ParagraphStyles.append(
+            ParagraphStyle(
+                "ITNormalBold",
+                TextStyle(
+                    TextPropertySet(
+                        font=ss.Fonts.Arial,
+                        size=24,
+                        bold=True)),
+                ParagraphPropertySet(left_indent=50, right_indent=50))
+        )
         # XXX: This part is removed
         # self.addActionPlan(document)
 
@@ -734,7 +781,8 @@ class OSHAItalyActionPlanReportDownload(OSHAActionPlanReportDownload):
         t = lambda txt: "".join([
             "\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)
         ])
-        toc = createSection(document, self.context, self.request)
+        intro = createItalianIntro(document, self.context, self.request)
+        toc = createSection(document, self.context, self.request, first_page_number=2)
 
         body = Section()
         heading = t(_("header_oira_report_download",
@@ -765,14 +813,6 @@ class OSHAItalyActionPlanReportDownload(OSHAActionPlanReportDownload):
                 "obbligatorie adottate e misure di miglioramento"),
             t(u"Adempimenti/rischi non pertinenti"),
         ]
-        # headings = [
-        #     t(_("header_present_risks",
-        #         default=u"Risks that have been identified, "
-        #                 u"evaluated and have an Action Plan")),
-        #     t(_("header_risks_not_present",
-        #         default=u"Hazards/problems that have been managed "
-        #                 u"or are not present in your organisation"))
-        # ]
         nodes = [
             self.actioned_nodes,
             self.risk_not_present_nodes,
@@ -914,11 +954,11 @@ def createIdentificationReportSection(document, survey, request):
     return section
 
 
-def createSection(document, survey, request):
+def createSection(document, survey, request, first_page_number=1):
     t = lambda txt: "".join([
         "\u%s?" % str(ord(e)) for e in translate(txt, context=request)
     ])
-    section = Section(break_type=Section.PAGE, first_page_number=1)
+    section = Section(break_type=Section.PAGE, first_page_number=first_page_number)
     footer_txt = t(
         _("report_survey_revision",
             default=u"This report was based on the OiRA Tool '${title}' "\
@@ -954,3 +994,117 @@ def createSection(document, survey, request):
     return section
 
 
+def createItalianIntro(document, survey, request):
+    t = lambda txt: "".join([
+        "\u%s?" % str(ord(e)) for e in translate(txt, context=request)
+    ])
+    ss = document.StyleSheet
+    pp = ParagraphPropertySet
+    section = Section(break_type=Section.PAGE, first_page_number=1)
+    footer_txt = t(
+        u"1) Il documento deve essere munito di “data certa” o attestata dalla "
+        "sottoscrizione del documento, ai soli fini della prova della data, "
+        "da parte del RSPP, RLS o RLST, e del medico competente, ove nominato. In "
+        "assenza di MC o RLS o RLST, la data certa va documentata con PEC o altra "
+        "forma prevista dalla legge."
+    )
+    section.append(Paragraph(LINE))
+    section.append(Paragraph(LINE))
+    section.append(Paragraph(LINE))
+    section.append(Paragraph(LINE))
+    section.append(Paragraph(
+        ss.ParagraphStyles.ITTitle,
+        pp(alignment=pp.CENTER),
+        t(u"Azienda ....................."),
+    ))
+    section.append(Paragraph(LINE))
+    section.append(Paragraph(LINE))
+    section.append(Paragraph(LINE))
+    section.append(Paragraph(LINE))
+    dots = u"……………………………………"
+    section.append(Paragraph(
+        ss.ParagraphStyles.ITSubtitle,
+        pp(alignment=pp.CENTER),
+        t(u"DOCUMENTO DI VALUTAZIONE DEI RISCHI"),
+    ))
+    section.append(Paragraph(LINE))
+    section.append(Paragraph(
+        ss.ParagraphStyles.ITSubSubtitle,
+        pp(alignment=pp.CENTER),
+        t(u"(artt. 17, 28  D.Lgs. 81/08)"),
+    ))
+    section.append(Paragraph(LINE))
+    section.append(Paragraph(LINE))
+    section.append(Paragraph(LINE))
+    section.append(Paragraph(LINE))
+
+    data1 = Table(4750, 4750)
+    c1 = Cell(Paragraph(
+        ss.ParagraphStyles.ITNormalBold,
+        pp(alignment=pp.LEFT),
+        t(u"Data (1), {}".format(dots))))
+    c2 = Cell(Paragraph(
+        ss.ParagraphStyles.ITNormalBold,
+        pp(alignment=pp.LEFT),
+        t(u"")))
+    data1.AddRow(c1, c2)
+    c1 = Cell(Paragraph(
+        ss.ParagraphStyles.ITNormalBold,
+        pp(alignment=pp.LEFT),
+        t(u"Datore di lavoro:")))
+    c2 = Cell(Paragraph(
+        ss.ParagraphStyles.ITNormalBold,
+        pp(alignment=pp.LEFT),
+        t(dots)))
+    data1.AddRow(c1, c2)
+    section.append(data1)
+    section.append(Paragraph(LINE))
+    section.append(Paragraph(
+        ss.ParagraphStyles.ITNormalBold,
+        pp(alignment=pp.CENTER),
+        t(u"Se necessario, ai soli fini della prova della data:"),
+    ))
+
+    section.append(Paragraph(LINE))
+    data2 = Table(4750, 4750)
+    c1 = Cell(Paragraph(
+        ss.ParagraphStyles.ITNormalBold,
+        pp(alignment=pp.LEFT),
+        t(u"RSPP")))
+    c2 = Cell(Paragraph(
+        ss.ParagraphStyles.ITNormalBold,
+        pp(alignment=pp.LEFT),
+        t(dots)))
+    data2.AddRow(c1, c2)
+    c1 = Cell(Paragraph(
+        ss.ParagraphStyles.ITNormalBold,
+        pp(alignment=pp.LEFT),
+        t(u"Medico Competente (ove nominato)")))
+    c2 = Cell(Paragraph(
+        ss.ParagraphStyles.ITNormalBold,
+        pp(alignment=pp.LEFT),
+        t(dots)))
+    data2.AddRow(c1, c2)
+    c1 = Cell(Paragraph(
+        ss.ParagraphStyles.ITNormalBold,
+        pp(alignment=pp.LEFT),
+        t(u"RLS/RLST")))
+    c2 = Cell(Paragraph(
+        ss.ParagraphStyles.ITNormalBold,
+        pp(alignment=pp.LEFT),
+        t(dots)))
+    data2.AddRow(c1, c2)
+    section.append(data2)
+
+    footer = Table(9500)
+    # rtfng does not like unicode footers
+    c1 = Cell(Paragraph(
+        ss.ParagraphStyles.Footer,
+        pp(alignment=pp.LEFT),
+        footer_txt))
+
+    # c2 = Cell(Paragraph(pp(alignment=pp.RIGHT), PAGE_NUMBER))
+    footer.AddRow(c1)
+    section.Footer.append(footer)
+    document.Sections.append(section)
+    return section

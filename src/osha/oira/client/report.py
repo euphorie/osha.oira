@@ -810,7 +810,7 @@ class OSHAItalyActionPlanReportDownload(OSHAActionPlanReportDownload):
 
         headings = [
             t(u"Adempimenti/rischi identificati, valutati e gestiti con misure "
-                "obbligatorie adottate e misure di miglioramento"),
+                "obbligatorie adottate ed eventuali e misure di miglioramento"),
             t(u"Adempimenti/rischi non pertinenti"),
         ]
         nodes = [
@@ -832,11 +832,9 @@ class OSHAItalyActionPlanReportDownload(OSHAActionPlanReportDownload):
         output = StringIO()
         renderer.Write(document, output)
 
-        filename = translate(
-            _("filename_report_actionplan",
-                default=u"Action plan ${title}",
-                mapping=dict(title=self.session.title)),
-            context=self.request,)
+        # Custom filename
+        filename = u"Documento di valutazione dei rischi {}".format(
+            self.session.title)
         self.request.response.setHeader(
             "Content-Disposition",
             "attachment; filename=\"%s.rtf\"" % filename.encode("utf-8"))

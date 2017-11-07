@@ -177,7 +177,6 @@ def get_italian_risk_not_present_nodes(session):
                 sql.or_(
                     model.SKIPPED_PARENTS,
                     oiramodel.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
-                    oiramodel.RISK_NOT_PRESENT_FILTER,
                     oiramodel.SKIPPED_MODULE,
                     oiramodel.UNANSWERED_RISKS_FILTER,
                 )))\

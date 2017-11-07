@@ -701,6 +701,11 @@ class OSHAItalyActionPlanReportDownload(OSHAActionPlanReportDownload):
 
     def update(self):
         super(OSHAItalyActionPlanReportDownload, self).update()
+        risk_not_present_nodes = utils.get_italian_risk_not_present_nodes(self.session)
+        self.risk_not_present_nodes = [
+            n for n in risk_not_present_nodes if
+            n not in self.actioned_nodes
+        ]
 
     def render(self):
         """ Mostly a copy of the render method in OSHAActionPlanReportDownload, but with

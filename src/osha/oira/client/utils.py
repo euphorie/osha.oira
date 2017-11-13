@@ -169,6 +169,21 @@ def get_risk_not_present_nodes(session):
     return query.all()
 
 
+def get_italian_risk_not_present_nodes(session):
+    query = Session().query(model.SurveyTreeItem)\
+        .filter(
+            sql.and_(
+                model.SurveyTreeItem.session == session,
+                sql.or_(
+                    model.SKIPPED_PARENTS,
+                    oiramodel.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
+                    oiramodel.SKIPPED_MODULE,
+                    oiramodel.UNANSWERED_RISKS_FILTER,
+                )))\
+        .order_by(model.SurveyTreeItem.path)
+    return query.all()
+
+
 class OSHAWebHelpers(WebHelpers):
     """
     Override the original WebHelpers so that we can provide our own template

@@ -5,8 +5,8 @@ Changelog
 4.0.16 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Use HTML5 doctype in all client templates
+- Special custom RTF report with its own logic and cover page for Italy
 
 4.0.15 (2017-10-12)
 -------------------

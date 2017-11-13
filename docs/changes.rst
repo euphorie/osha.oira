@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.16 (unreleased)
+4.0.16 (2017-11-13)
 -------------------
 
 - Use HTML5 doctype in all client templates

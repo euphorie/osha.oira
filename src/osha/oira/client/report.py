@@ -887,19 +887,20 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
             if node.type != "risk":
                 continue
 
-            if getattr(node, 'is_custom_node', None):
-                description = survey.restrictedTraverse(
-                        node.zodb_path.split("/")).description
-            else:
-                description = node.title
+            description = None
+            if not getattr(node, 'is_custom_node', None):
+                zope_node = survey.restrictedTraverse(
+                    node.zodb_path.split("/"))
+                description = getattr(zope_node, "description", None)
 
-            section.append(
-                Paragraph(
-                    styles.Normal,
-                    utils.html_unescape(
-                        htmllaundry.StripMarkup(description))
+            if description:
+                section.append(
+                    Paragraph(
+                        styles.Normal,
+                        utils.html_unescape(
+                            htmllaundry.StripMarkup(description))
+                    )
                 )
-            )
 
             for i in range(0, 8):
                 p = Paragraph(styles.Normal, " ")

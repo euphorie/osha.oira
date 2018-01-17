@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.17 (unreleased)
+4.0.17 (2018-01-17)
 -------------------
 
 - bugfix: in the list of risks report, show description instead of twice the title 

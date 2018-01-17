@@ -5,7 +5,8 @@ Changelog
 4.0.17 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- bugfix: in the list of risks report, show description instead of twice the title 
+- Added missing translation in LV for Excel report
 
 
 4.0.16 (2017-11-13)

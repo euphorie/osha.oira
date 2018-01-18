@@ -5,8 +5,7 @@ Changelog
 4.0.18 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- In the list of risks report, be extra careful when fetching a ZODB node
 
 4.0.17 (2018-01-17)
 -------------------

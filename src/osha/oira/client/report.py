@@ -890,9 +890,10 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
             description = legal_reference = None
             if not getattr(node, 'is_custom_node', None):
                 zope_node = survey.restrictedTraverse(
-                    node.zodb_path.split("/"))
-                description = getattr(zope_node, "description", None)
-                legal_reference = getattr(zope_node, "legal_reference", None)
+                    node.zodb_path.split("/"), None)
+                if zope_node is not None:
+                    description = getattr(zope_node, "description", None)
+                    legal_reference = getattr(zope_node, "legal_reference", None)
 
             if description:
                 section.append(

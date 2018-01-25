@@ -887,12 +887,13 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
             if node.type != "risk":
                 continue
 
-            description = None
+            description = legal_reference = None
             if not getattr(node, 'is_custom_node', None):
                 zope_node = survey.restrictedTraverse(
                     node.zodb_path.split("/"), None)
                 if zope_node is not None:
                     description = getattr(zope_node, "description", None)
+                    legal_reference = getattr(zope_node, "legal_reference", None)
 
             if description:
                 section.append(
@@ -900,6 +901,28 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
                         styles.Normal,
                         utils.html_unescape(
                             htmllaundry.StripMarkup(description))
+                    )
+                )
+
+            if legal_reference:
+                p = Paragraph(styles.Normal, " ")
+                section.append(p)
+
+                section.append(
+                    Paragraph(
+                        styles.LegalHeading,
+                        u"Legal and Policy References"
+                    )
+                )
+
+                p = Paragraph(styles.Normal, " ")
+                section.append(p)
+
+                section.append(
+                    Paragraph(
+                        styles.Normal,
+                        utils.html_unescape(
+                            htmllaundry.StripMarkup(legal_reference))
                     )
                 )
 

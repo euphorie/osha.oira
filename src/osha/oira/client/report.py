@@ -869,6 +869,7 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
             document, self.context, self.request)
 
         styles = document.StyleSheet.ParagraphStyles
+        normal_style = document.StyleSheet.ParagraphStyles.Normal
         header_styles = {
             0: styles.Heading2,
             1: styles.Heading3,
@@ -895,17 +896,12 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
                     description = getattr(zope_node, "description", None)
                     legal_reference = getattr(zope_node, "legal_reference", None)
 
-            if description:
-                section.append(
-                    Paragraph(
-                        styles.Normal,
-                        utils.html_unescape(
-                            htmllaundry.StripMarkup(description))
-                    )
-                )
+            if description and description.strip():
+                for el in report.HtmlToRtf(description, normal_style):
+                    section.append(el)
 
-            if legal_reference:
-                p = Paragraph(styles.Normal, " ")
+            if legal_reference and legal_reference.strip():
+                p = Paragraph(styles.Normal, "")
                 section.append(p)
 
                 section.append(
@@ -915,20 +911,11 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
                     )
                 )
 
-                p = Paragraph(styles.Normal, " ")
+                p = Paragraph(styles.Normal, "")
                 section.append(p)
 
-                section.append(
-                    Paragraph(
-                        styles.Normal,
-                        utils.html_unescape(
-                            htmllaundry.StripMarkup(legal_reference))
-                    )
-                )
-
-            for i in range(0, 8):
-                p = Paragraph(styles.Normal, " ")
-                section.append(p)
+                for el in report.HtmlToRtf(legal_reference, normal_style):
+                    section.append(el)
 
             tabs = TabPropertySet(
                 section.TwipsToRightMargin(),

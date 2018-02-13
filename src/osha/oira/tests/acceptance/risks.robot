@@ -185,7 +185,7 @@ I can enter two locations
     Click element  xpath=//form//h2[contains(text(), "${module}")]/../fieldset[contains(@class, 'pat-checklist radio pat-depends')]/label[contains(text(), 'Yes')]
     Input text  xpath=//form//h2[contains(text(), "${module}")]/../fieldset[contains(@class, 'group')]/fieldset[contains(@class, 'pat-clone')]/label[@class='clone']/input  ${location1}
     Click button    Add another item
-    Input text   xpath=//form//h2[contains(text(), "${module}")]/../fieldset[contains(@class, 'group')]/fieldset[contains(@class, 'pat-clone')]/label[@class='clone']/following-sibling::label/input  ${location2}
+    Input text   xpath=//form//h2[contains(text(), "${module}")]/../fieldset[contains(@class, 'group')]/fieldset[contains(@class, 'pat-clone')]/label[contains(@class, 'clone')]/following-sibling::label/input  ${location2}
     Click button    Save and continue
     Wait until page contains element    xpath=//li[@id="step-2" and @class="active"]
 

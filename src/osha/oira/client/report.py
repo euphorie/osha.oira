@@ -867,6 +867,10 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
         survey = self.request.survey
         section = createIdentificationReportSection(
             document, self.context, self.request)
+        lang = getattr(self.request, 'LANGUAGE', 'en')
+        if "-" in lang:
+            elems = lang.split("-")
+            lang = "{0}_{1}".format(elems[0], elems[1].upper())
 
         styles = document.StyleSheet.ParagraphStyles
         normal_style = document.StyleSheet.ParagraphStyles.Normal
@@ -907,7 +911,10 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
                 section.append(
                     Paragraph(
                         styles.LegalHeading,
-                        u"Legal and Policy References"
+                        translate(_(
+                            'header_legal_references',
+                            default=u'Legal and policy references'),
+                            target_language=lang),
                     )
                 )
 

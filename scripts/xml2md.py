@@ -89,6 +89,8 @@ problem_description: "{problem_description}"
 description: "{description}"
 legal_reference: "{legal_reference}"
 evaluation_method: {evaluation_method}
+measures_in_place:
+{measures_in_place}
 {image_information}
 solutions:
   solution_1:
@@ -112,7 +114,7 @@ solutions:
         evaluation_method = EVALUATION_TYPES[risk_counter]
         state = 'answered'
         risk_class = 'risk'
-        print "Risk {0} with method {1}".format(title, evaluation_method)
+        print u"Risk {0} with method {1}".format(title, evaluation_method)
     else:
         evaluation_method = random.choice(EVALUATION_TYPES)
         state = random.choice(STATES)
@@ -130,13 +132,24 @@ solutions:
         image_filename = os.path.join(dir_path, image_path)
         with open(image_filename, 'w') as img_file:
             img_file.write(base64.decodestring(image.contents[0]))
-        image_data.append(dict(url="/{0}".format(image_path), caption=image.get('caption', '')))
+        image_data.append(dict(
+            url=u"/{0}".format(image_path),
+            caption=image.get('caption', '')))
 
     if image_data:
         image_info = u"images:\n"
         for entry in image_data:
             image_info += u"    - url: {0}\n".format(entry['url'])
             image_info += u"      caption: {0}\n".format(entry['caption'])
+
+    mip = ""
+    existing_measures = _r(risk.find("existing_measures").text)
+    if existing_measures:
+        # import pdb; pdb.set_trace( )
+        for measure in existing_measures.split('\n'):
+            if measure.strip():
+                mip += u'    - label: "%s"\n      state: checked\n' % (
+                    measure.replace('&#13;', ''))
 
     fields = {
         "id": id,
@@ -150,6 +163,7 @@ solutions:
         "legal_reference": legal_reference,
         "evaluation_method": evaluation_method,
         "body": html2text(description),
+        "measures_in_place": mip,
         "image_information": image_info,
     }
 
@@ -329,6 +343,6 @@ if __name__ == "__main__":
         # Let X modules be enough
         if MAX_NUMBER_MODULES and number > (MAX_NUMBER_MODULES + MAX_NUMBER_PROFILES):
             break
-        print "Export Module '{0}'".format(module.title.text)
+        print u"Export Module '{0}'".format(module.title.text)
         create_module(module, number=str(number))
         number += 1

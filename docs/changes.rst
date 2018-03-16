@@ -5,8 +5,7 @@ Changelog
 4.0.19 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Adjust to new handling of bundle in the prototype
 
 4.0.18 (2018-01-18)
 -------------------

@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.19 (unreleased)
+4.0.19 (2018-03-16)
 -------------------
 
 - Adjust to new handling of bundle in the prototype

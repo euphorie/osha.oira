@@ -12,11 +12,11 @@ output.xml   The filename for the converted survey
 raw_text.txt The filename for the text-only file
 """
 
-import sys
-import os
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
-
 from word_wrap import wrap_str
+import os
+import re
+import sys
 
 PLACEHOLDER = 'XXXXX'
 
@@ -80,7 +80,10 @@ print "We removed %d solutions" % cnt
 
 fh = open(output, 'w')
 # fh.write(soup.prettify())
-fh.write(str(soup))
+result = str(soup)
+# replace multiple newlines by a single newline
+result = re.sub(r'(\n)+', '\n', result)
+fh.write(result)
 fh.close()
 
 # soup.text gives us the complete text without tags. Unfortunately, where tags

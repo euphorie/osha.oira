@@ -43,16 +43,44 @@ fh.close()
 soup = BeautifulSoup(data)
 
 images = soup.findAll('image')
-print "We have %d images" % len(images)
+cnt = len(images)
 [img.extract() for img in images]
+print "We removed %d images" % cnt
 
 #### # Special requirement: Also strip all legal references
-#### legalrefs = soup.findAll('legal-reference')
-#### print "We have %d legal references" % len(legalrefs)
-#### [legalref.extract() for legalref in legalrefs]
+legalrefs = soup.findAll('legal-reference')
+cnt = len(legalrefs)
+[legalref.extract() for legalref in legalrefs]
+print "We removed %d legal references" % cnt
+
+solutiondirections = soup.findAll('solution-direction')
+cnt = len(solutiondirections)
+[elem.extract() for elem in solutiondirections]
+print "We removed %d solution directions" % cnt
+
+# Now, remove all descriptions, but only if their parent is a module or risk...
+descriptions = soup.findAll('description')
+cnt = 0
+for elem in descriptions:
+    if elem.parent.name in ('module', 'risk',):
+        elem.extract()
+        cnt += 1
+print "We removed %d descriptions" % cnt
+
+# For all available soultions, only leave the 1st one in
+cnt = 0
+solutions = soup.findAll('solutions')
+for elem in solutions:
+    solution = elem.findAll('solution')
+    for subelem in solution[1:]:
+        subelem.extract()
+        cnt += 1
+print "We removed %d solutions" % cnt
+
 
 fh = open(output, 'w')
-fh.write(soup.prettify())
+# fh.write(soup.prettify())
+fh.write(str(soup))
 fh.close()
 
 # soup.text gives us the complete text without tags. Unfortunately, where tags

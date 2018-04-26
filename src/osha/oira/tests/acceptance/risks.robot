@@ -142,6 +142,7 @@ I save and continue
 
 I fill in a measure description
     [arguments]    ${description}
+    Wait until element is visible    measure.action_plan:utf8:ustring:records
     Input Text  measure.action_plan:utf8:ustring:records  ${description}
 
 I fill in a prevention plan

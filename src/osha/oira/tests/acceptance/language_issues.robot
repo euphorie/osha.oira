@@ -17,7 +17,7 @@ General Language tests
     Click Button    next
     Wait Until Page Contains    Βοήθεια
     Wait Until Page Contains    Αξιολόγηση
-    Wait Until Page Contains    Κύπρος: Κουρεία - Κομμωτήρια
+    Wait Until Page Contains    Κουρεία - Κομμωτήρια
     Wait Until Page Contains    Η εκτίμηση του κινδύνου δεν είναι περίπλοκη
     Go To    ${PROTOCOL}://${SERVER}/cy/civil-service/demosia-dioikese
     Click Button    next

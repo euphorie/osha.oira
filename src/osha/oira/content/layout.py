@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from ..interfaces import IOSHAContentSkinLayer
 from five import grok
-from plone.app.controlpanel.site import ISiteSchema
 from plonetheme.nuplone.skin import layout as nuplone
+from Products.CMFPlone.interfaces.controlpanel import ISiteSchema
 from zope.component.hooks import getSite
 from zope.interface import Interface
 

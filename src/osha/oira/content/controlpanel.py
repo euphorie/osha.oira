@@ -1,4 +1,5 @@
-from plone.app.controlpanel.site import SiteControlPanel as SiteControlPanelBase
+# coding=utf-8
+from Products.CMFPlone.controlpanel.browser.site import SiteControlPanel as SiteControlPanelBase  # noqa
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 

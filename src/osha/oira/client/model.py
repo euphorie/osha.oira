@@ -5,6 +5,7 @@ from sqlalchemy import types
 from sqlalchemy import orm
 from sqlalchemy.ext.declarative import instrument_declarative
 from euphorie.client import model
+from euphorie.client.model import metadata
 
 
 class LoginStatistics(model.BaseObject):
@@ -27,7 +28,10 @@ class LoginStatistics(model.BaseObject):
 _instrumented = False
 if not _instrumented:
     for cls in [LoginStatistics]:
-        instrument_declarative(cls, model.metadata._decl_registry, model.metadata)
+        instrument_declarative(
+            cls, metadata._decl_registry, metadata
+        )
+
     _instrumented = True
 
 node = orm.aliased(model.SurveyTreeItem)

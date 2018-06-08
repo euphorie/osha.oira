@@ -6,6 +6,8 @@
         directory="templates/media"
     />
 
+    <include package=".browser" />
+
     <adapter
         factory=".client.ClientPublishTraverser"
         provides="zope.publisher.interfaces.IPublishTraverse"

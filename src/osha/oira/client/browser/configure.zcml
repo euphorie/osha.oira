@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    >
+
+  <browser:page
+      name="webhelpers"
+      for="*"
+      permission="zope.Public"
+      class="osha.oira.client.browser.webhelpers.OSHAWebHelpers"
+      template="templates/webhelpers.pt"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+</configure>

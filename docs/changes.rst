@@ -5,8 +5,9 @@ Changelog
 4.0.20 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Activate the "Obsolete" flag on OiRA tools, so that a tool can stay published
+  and at the same time to not appear any more as available for a new session
+  in the client.
 
 4.0.19 (2018-03-16)
 -------------------

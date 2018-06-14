@@ -8,6 +8,7 @@ Changelog
 - Activate the "Obsolete" flag on OiRA tools, so that a tool can stay published
   and at the same time to not appear any more as available for a new session
   in the client.
+- Translation fixes for IT
 
 4.0.19 (2018-03-16)
 -------------------

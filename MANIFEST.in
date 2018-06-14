@@ -1,5 +1,6 @@
 include *.rst
 prune prototype
+prune src/osha/oira/tests/acceptance/resource/secrets.robot
 recursive-include src *.pot
 recursive-include src *.py
 recursive-include src/osha/oira *.ini
@@ -24,6 +25,7 @@ graft docs
 prune work
 prune docs/.build
 prune src/Euphorie
+prune src/oira.private
 graft src/osha/oira/profiles
 graft src/osha/oira/templates
 graft src/osha/oira/content/templates

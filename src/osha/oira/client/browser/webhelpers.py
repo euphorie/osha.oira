@@ -1,7 +1,9 @@
 # coding=utf-8
+from euphorie.client.browser.webhelpers import Appendix
 from euphorie.client.browser.webhelpers import WebHelpers
 from euphorie.content.utils import StripMarkup
 from osha.oira.client.client import cached_tools_json
+from plone.memoize.instance import memoize
 from zope.component import getMultiAdapter
 
 
@@ -20,12 +22,27 @@ class OSHAWebHelpers(WebHelpers):
         entries = [
             entry for entry in data
             if entry.get('tool_link', '').endswith(own_path)]
+        self.tool_entry = None
         if len(entries):
-            entry = entries[0]
+            self.tool_entry = entries[0]
+
+    @property
+    @memoize
+    def tool_description(self):
+        ploneview = getMultiAdapter(
+            (self.context, self.request), name="plone")
+
+        if getattr(self, "tool_entry", None):
             description = (
-                entry.get('body_alt', None) or entry.get('body') or
-                self.tool_description)
-            ploneview = getMultiAdapter(
-                (self.context, self.request), name="plone")
-            self.tool_description = ploneview.cropText(
-                StripMarkup(description), 800)
+                self.tool_entry.get('body_alt', None) or
+                self.tool_entry.get('body'))
+            return ploneview.cropText(StripMarkup(description), 800)
+        elif self._tool:
+            return ploneview.cropText(StripMarkup(
+                self._tool.introduction), 800)
+        return ""
+
+
+class OSHAAppendix(Appendix):
+    """ OSHA custom appendix
+    """

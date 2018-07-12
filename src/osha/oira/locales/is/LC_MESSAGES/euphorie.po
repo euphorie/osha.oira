@@ -326,14 +326,14 @@ msgstr "Innihald"
 #: src/osha/oira/client/templates/report_actionplan.pt:38
 #: src/osha/oira/client/templates/report_actionplan.pt:71
 msgid "header_present_risks"
-msgstr "Áhættur hafa verið greindar, metnar og komin aðgerðaáætlun"
+msgstr "Áhættur sem hafa verið greindar og aðgerðaáætlun útbúin fyrir þær"
 
 #. Default: Risks that have been identified but do NOT have an Action Plan
 #: src/osha/oira/client/report.py:652
 #: src/osha/oira/client/templates/report_actionplan.pt:46
 #: src/osha/oira/client/templates/report_actionplan.pt:152
 msgid "header_unevaluated_risks"
-msgstr "Áhættur hafa verið greindar en aðgerðaáætlun er EKKI tilbúin"
+msgstr "Áhættur sem hafa verið greindar en aðgerðaáætlun er ekki tilbúin"
 
 #. Default: Hazards/problems that have been "parked" and are still to be dealt
 #. with
@@ -342,7 +342,8 @@ msgstr "Áhættur hafa verið greindar en aðgerðaáætlun er EKKI tilbúin"
 #: src/osha/oira/client/templates/report_actionplan.pt:186
 msgid "header_unanswered_risks"
 msgstr ""
-"Hættur/vandamál sem hefur verið „frestað“ og enn á eftir að takast á við"
+"Hættur/vandamál sem gætu verið fyrir hendi, en á eftir að meta og vinna úr "
+"niðurstöðunum"
 
 #. Default: Hazards/problems that have been managed or are not present in your
 #. organisation
@@ -351,8 +352,8 @@ msgstr ""
 #: src/osha/oira/client/templates/report_actionplan.pt:220
 msgid "header_risks_not_present"
 msgstr ""
-"Hættur/vandamál sem unnið hefur verið að en eru ekki til staðar í fyrirtæki "
-"þínu"
+"Hættur/vandamál sem er stýrt innan ásættanlegra marka eða eru ekki fyrir hendi "
+"í fyrirtækinu"
 
 #. Default: Action plan ${title}
 #: src/osha/oira/client/report.py:685

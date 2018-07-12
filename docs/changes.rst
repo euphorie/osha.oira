@@ -5,8 +5,7 @@ Changelog
 4.0.21 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Translation fixes for IS
 
 4.0.20 (2018-06-14)
 -------------------

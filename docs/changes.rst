@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.22 (unreleased)
+4.0.22 (2018-07-13)
 -------------------
 
 - Get rid of custom homepage/frontpage; instead redirect to the country /eu

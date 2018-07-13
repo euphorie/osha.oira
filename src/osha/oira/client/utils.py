@@ -1,7 +1,9 @@
 # coding=utf-8
 from euphorie.client import model
+from euphorie.client.utils import WebHelpers
 from five import grok
 from osha.oira.client import model as oiramodel
+from osha.oira.client.interfaces import IOSHAClientSkinLayer
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.i18nmessageid import MessageFactory
@@ -178,3 +180,16 @@ def get_italian_risk_not_present_nodes(session):
         .order_by(model.SurveyTreeItem.path)
     return query.all()
 
+
+class OSHAWebHelpers(WebHelpers):
+    """
+    Override the original WebHelpers so that we can provide our own template
+    """
+    grok.layer(IOSHAClientSkinLayer)
+    grok.template("webhelpers")
+
+    def __init__(self, context, request):
+        super(OSHAWebHelpers, self).__init__(context, request)
+        survey = self._survey
+        if not survey:
+            return

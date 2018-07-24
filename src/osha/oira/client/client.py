@@ -1,10 +1,8 @@
 # coding=utf-8
 from ..interfaces import IProductLayer
 from .interfaces import IOSHAClientSkinLayer
-from collections import OrderedDict
 from datetime import datetime
 from datetime import timedelta
-from euphorie.client import client
 from euphorie.client.api.entry import access_api
 from euphorie.client.client import IClient
 from five import grok
@@ -19,7 +17,6 @@ except ImportError:
     def safeWrite(context, request):
         pass
 from zope.component import adapts
-from zope.component import getMultiAdapter
 from zope.interface import directlyProvidedBy
 from zope.interface import directlyProvides
 from zope.publisher.interfaces.browser import IBrowserSkinType
@@ -96,67 +93,3 @@ class ClientPublishTraverser(DefaultPublishTraverse):
                   if not IBrowserSkinType.providedBy(iface)]
         directlyProvides(request, IOSHAClientSkinLayer, ifaces)
         return super(ClientPublishTraverser, self).publishTraverse(request, name)
-
-
-class View(client.View):
-    """View name: @@view
-    """
-    grok.layer(IOSHAClientSkinLayer)
-    grok.template("frontpage")
-
-    def update(self):
-        plt = api.portal.get_tool('portal_languages')
-        self.language_info = plt.getAvailableLanguageInformation()
-        self.tools = self.prepare_tools()
-        return self.render()
-
-    @property
-    def json_url(self):
-        return get_json_url()
-
-    @property
-    def cached_json(self):
-        return cached_tools_json(self.context, self.request)
-
-    def prepare_tools(self):
-        langs = dict()
-        cnts = dict()
-        ploneview = getMultiAdapter(
-            (self.context, self.request), name="plone")
-        tools = []
-        for entry in self.cached_json:
-            if not entry['language_code']:
-                continue
-            if entry['language_code'] in langs:
-                langs[entry['language_code']] += 1
-            else:
-                langs[entry['language_code']] = 1
-            if entry['country_name'] in cnts:
-                cnts[entry['country_name']] += 1
-            else:
-                cnts[entry['country_name']] = 1
-            if len(entry['body']) > DESCRIPTION_CROP_LENGTH:
-                entry['body_intro'] = ploneview.cropText(
-                    entry['body'], DESCRIPTION_CROP_LENGTH)
-            else:
-                entry['body_intro'] = ""
-            tools.append(entry)
-        lkeys = sorted(langs.keys())
-        langinfo = OrderedDict()
-        for lang in lkeys:
-            langinfo[lang] = langs[lang]
-        self.languages = langinfo
-
-        ckeys = sorted(cnts.keys())
-        cntinfo = OrderedDict()
-        for country in ckeys:
-            cntinfo[country] = cnts[country]
-        self.countries = cntinfo
-
-        return tools
-
-    def get_language_name(self, code=''):
-        code = code or ''
-        if code in self.language_info:
-            return self.language_info.get(code)['native']
-        return u"N. a."

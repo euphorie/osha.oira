@@ -1,16 +1,10 @@
 # coding=utf-8
 from ..interfaces import IProductLayer
 from .interfaces import IOSHAClientSkinLayer
-from Acquisition import aq_base
-from euphorie.client import client
 from euphorie.client.api.entry import access_api
 from euphorie.client.client import IClient
-from euphorie.client.country import IClientCountry
 from five import grok
-from plone.memoize.instance import memoize
-from z3c.appconfig.interfaces import IAppConfig
 from zope.component import adapts
-from zope.component import getUtility
 from zope.interface import directlyProvidedBy
 from zope.interface import directlyProvides
 from zope.publisher.interfaces.browser import IBrowserSkinType
@@ -51,36 +45,3 @@ class ClientPublishTraverser(DefaultPublishTraverse):
                   if not IBrowserSkinType.providedBy(iface)]
         directlyProvides(request, IOSHAClientSkinLayer, ifaces)
         return super(ClientPublishTraverser, self).publishTraverse(request, name)
-
-
-class View(client.View):
-    """View name: @@view
-    """
-    grok.layer(IOSHAClientSkinLayer)
-
-    @property
-    @memoize
-    def default_country(self):
-        appconfig = getUtility(IAppConfig)
-        settings = appconfig.get('euphorie')
-        return settings.get('default_country', 'eu')
-
-    def update(self):
-
-        """ The frontpage has been disbanded. We redirect to the country that
-        is defined as the default, or pick a random country.
-        """
-        target = None
-        language = self.request.form.get("language")
-        url_param = language and "?language=%s" % language or ""
-        if self.default_country:
-            if getattr(aq_base(self.context), self.default_country, None):
-                found = getattr(self.context, self.default_country)
-                if IClientCountry.providedBy(found):
-                    target = found
-        while not target:
-            for id, found in self.context.objectItems():
-                if IClientCountry.providedBy(found):
-                    target = found
-        self.request.RESPONSE.redirect("{}{}".format(
-            target.absolute_url(), url_param))

@@ -2,11 +2,24 @@ Changelog
 =========
 
 
-4.0.20 (unreleased)
+4.0.22 (unreleased)
 -------------------
 
 - Nothing changed yet.
 
+
+4.0.21 (2018-07-12)
+-------------------
+
+- Translation fixes for IS
+
+4.0.20 (2018-06-14)
+-------------------
+
+- Activate the "Obsolete" flag on OiRA tools, so that a tool can stay published
+  and at the same time to not appear any more as available for a new session
+  in the client.
+- Translation fixes for IT
 
 4.0.19 (2018-03-16)
 -------------------

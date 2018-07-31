@@ -177,4 +177,3 @@ def get_italian_risk_not_present_nodes(session):
                 )))\
         .order_by(model.SurveyTreeItem.path)
     return query.all()
-

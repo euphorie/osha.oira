@@ -45,20 +45,6 @@
     -->
     <grok:grok package="." />
 
-    <adapter
-        factory=".homepage.HomePagePublishTraverser"
-        provides="zope.publisher.interfaces.IPublishTraverse"
-        />
-
-    <adapter factory=".homepage.homepage_form_factory" />
-
-    <browser:page
-        for=".homepage.IHomePage"
-        name="edit"
-        class=".homepage.EditView"
-        permission="cmf.ModifyPortalContent"
-        />
-
     <browser:page
         for="Products.CMFCore.interfaces.ISiteRoot"
         name="outdated-tools-view"

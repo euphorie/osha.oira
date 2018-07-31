@@ -815,7 +815,7 @@ class OSHAItalyActionPlanReportDownload(OSHAActionPlanReportDownload):
 
         headings = [
             t(u"Adempimenti/rischi identificati, valutati e gestiti con misure "
-                "obbligatorie adottate ed eventuali e misure di miglioramento"),
+                "obbligatorie adottate ed eventuali misure di miglioramento"),
             t(u"Adempimenti/rischi non pertinenti"),
         ]
         nodes = [

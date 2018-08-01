@@ -69,7 +69,7 @@ bundle: prototype
 	cd prototype && make bundle
 
 resources-install: bundle jekyll
-	cp prototype/_site/bundles/oira.js src/osha/oira/browser/resources
+	cp prototype/_site/bundles/bundle.js src/osha/oira/browser/resources/oira.js
 	cp -R prototype/_site/style/* src/osha/oira/browser/resources
 
 

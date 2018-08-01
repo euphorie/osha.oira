@@ -160,6 +160,10 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                         elif zodb_node.problem_description and \
                                 zodb_node.problem_description.strip():
                             value = zodb_node.problem_description
+                    elif key == 'number':
+                        if risk.is_custom_risk:
+                            num_elems = value.split('.')
+                            value = u".".join([u"Ω"] + num_elems[1:])
 
                 elif type == 'module':
                     if key == 'title' and module.depth > 1:
@@ -390,16 +394,21 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
             thin_edge = BorderPropertySet(
                 width=20, style=BorderPropertySet.SINGLE)
 
+            number = node.number
+            if 'custom-risks' in node.zodb_path:
+                num_elems = number.split('.')
+                number = u".".join([u"Ω"] + num_elems[1:])
+
             if node.depth == 1:
                 p = Paragraph(
                     header_styles.get(node.depth, styles.Heading6),
                     FramePropertySet(
                         thin_edge, thin_edge, thin_edge, thin_edge),
-                    u"%s %s" % (node.number, title))
+                    u"%s %s" % (number, title))
             else:
                 p = Paragraph(
                     header_styles.get(node.depth, styles.Heading6),
-                    u"%s %s" % (node.number, title))
+                    u"%s %s" % (number, title))
             body.append(p)
 
             if node.type != "risk":
@@ -883,10 +892,14 @@ class OSHAIdentificationReportDownload(report.IdentificationReportDownload):
         }
 
         for node in self.getNodes():
+            number = node.number
+            if 'custom-risks' in node.zodb_path:
+                num_elems = number.split('.')
+                number = u".".join([u"Ω"] + num_elems[1:])
             section.append(
                 Paragraph(
                     header_styles.get(node.depth, styles.Heading6),
-                    u"%s %s" % (node.number, node.title))
+                    u"%s %s" % (number, node.title))
             )
 
             if node.type != "risk":

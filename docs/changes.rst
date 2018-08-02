@@ -6,6 +6,8 @@ Changelog
 -------------------
 
 - Translation fix for LT
+- Bugfix for Italy special: make sure all overridden views for OSHA are also
+  active for Italy
 
 4.0.21 (2018-07-12)
 -------------------

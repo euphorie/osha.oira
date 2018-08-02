@@ -5,8 +5,7 @@ Changelog
 4.0.23 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Translation fix for LT
 
 4.0.22 (2018-07-13)
 -------------------

@@ -3,7 +3,6 @@ from euphorie.client.interfaces import IClientSkinLayer
 from euphorie.client.interfaces import ICustomizationPhaseSkinLayer
 from euphorie.client.interfaces import IEvaluationPhaseSkinLayer
 from euphorie.client.interfaces import IIdentificationPhaseSkinLayer
-from euphorie.client.interfaces import IItaly
 from euphorie.client.interfaces import IItalyActionPlanPhaseSkinLayer
 from euphorie.client.interfaces import IItalyCustomizationPhaseSkinLayer
 from euphorie.client.interfaces import IItalyEvaluationPhaseSkinLayer
@@ -35,17 +34,22 @@ class IOSHACustomizationPhaseSkinLayer(ICustomizationPhaseSkinLayer):
 class IOSHAReportPhaseSkinLayer(IReportPhaseSkinLayer):
     """Skin layer used during the action plan report phase."""
 
-class IOSHAItalyIdentificationPhaseSkinLayer(IItaly, IItalyIdentificationPhaseSkinLayer):
+
+class IOSHAItalyIdentificationPhaseSkinLayer(IItalyIdentificationPhaseSkinLayer, IOSHAIdentificationPhaseSkinLayer):  # noqa
     """Special for Italy"""
 
-class IOSHAItalyEvaluationPhaseSkinLayer(IItaly, IItalyEvaluationPhaseSkinLayer):
+
+class IOSHAItalyEvaluationPhaseSkinLayer(IItalyEvaluationPhaseSkinLayer, IOSHAEvaluationPhaseSkinLayer):  # noqa
     """Special for Italy"""
 
-class IOSHAItalyActionPlanPhaseSkinLayer(IItaly, IItalyActionPlanPhaseSkinLayer):
+
+class IOSHAItalyActionPlanPhaseSkinLayer(IItalyActionPlanPhaseSkinLayer, IOSHAActionPlanPhaseSkinLayer):  # noqa
     """Special for Italy"""
 
-class IOSHAItalyCustomizationPhaseSkinLayer(IItaly, IItalyCustomizationPhaseSkinLayer):
+
+class IOSHAItalyCustomizationPhaseSkinLayer(IItalyCustomizationPhaseSkinLayer, IOSHACustomizationPhaseSkinLayer):  # noqa
     """Special for Italy"""
 
-class IOSHAItalyReportPhaseSkinLayer(IItaly, IItalyReportPhaseSkinLayer):
+
+class IOSHAItalyReportPhaseSkinLayer(IItalyReportPhaseSkinLayer, IOSHAReportPhaseSkinLayer):  # noqa
     """Special for Italy"""

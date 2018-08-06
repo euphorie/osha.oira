@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.23 (unreleased)
+4.0.23 (2018-08-06)
 -------------------
 
 - Translation fix for LT

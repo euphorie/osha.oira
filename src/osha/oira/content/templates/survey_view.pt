@@ -30,6 +30,8 @@
         <dt i18n:translate="label_enable_tool_notification">Show a custom notification for this OiRA tool?</dt>
         <dd tal:condition="context/hasNotification" i18n:translate="Yes">Yes</dd>
         <dd tal:condition="not:context/hasNotification" i18n:translate="No">No</dd>
+        <dt i18n:translate="label_tool_type">Type of OiRA Tool</dt>
+        <dd>${context/get_tool_type_name}</dd>
       </dl>
 
     <tal:block define="children view/modules_and_profile_questions;

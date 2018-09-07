@@ -2,7 +2,12 @@ Changelog
 =========
 
 
-4.0.22 (unreleased)
+4.0.24 (unreleased)
+-------------------
+
+- Translation changes nl_BE
+
+4.0.23 (2018-08-06)
 -------------------
 
 - Translation fix for LT

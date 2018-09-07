@@ -5,8 +5,7 @@ Changelog
 4.0.24 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Translation changes nl_BE
 
 4.0.23 (2018-08-06)
 -------------------

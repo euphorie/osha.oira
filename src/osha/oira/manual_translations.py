@@ -27,6 +27,8 @@ _(u"evalmethod_fixed", default=u"Skip evaluation")
 _(u"label_fixed_priority", default=u"priority")
 # _(u"message_lock_warn", default=u"Please be aware that you have %s more login attempts before your account will be locked.")
 
+_(u"info_select_session", default="Select an earlier session to complete or review or ${start_session}.")
+
 # Validation error messages
 _("error_validation_date", default=u"This value must be a valid date.")
 _("error_validation_email", default=u"This value must be a valid email address.")

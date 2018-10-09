@@ -1,6 +1,3 @@
-YUICOMPRESS	?= yui-compressor
-PYTHON		?= bin/python
-
 EUPHORIE_POT	= src/osha/oira/locales/euphorie.pot
 EUPHORIE_PO_FILES	= $(wildcard src/osha/oira/locales/*/LC_MESSAGES/euphorie.po)
 PLONE_PO_FILES	= $(wildcard src/osha/oira/locales/*/LC_MESSAGES/plone.po)
@@ -14,12 +11,15 @@ clean:
 	-rm ${TARGETS}
 
 buildout: bootstrap.py
-	$(PYTHON) bootstrap.py
-	./bin/buildout -c devel.cfg
+	virtualenv -p python2.7 --clear --no-site-packages .
+	bin/pip install -r requirements.txt
 
-bin/test: buildout devel.cfg setup.py
+bin/i18ndude bin/test bin/sphinx-build: bin/buildout buildout.cfg versions.cfg devel.cfg setup.py
+	bin/buildout -c devel.cfg -t 10
+	touch bin/i18ndude
+	touch bin/sphinx-build
 	touch bin/test
-	touch bin/pybabel
+
 
 check:: bin/test $(MO_FILES)
 	bin/test -t '!robot'
@@ -31,20 +31,13 @@ jenkins: bin/test $(MO_FILES)
 	bin/test --xml -s osha.oira -t '!robot'
 
 
-pot: bin/pybabel
-	bin/pybabel extract -F babel.cfg \
-		--copyright-holder='SYSLAB.COM GmbH' \
-		--msgid-bugs-address='info@syslab.com' \
-		--charset=utf-8 \
-		src/osha > $(EUPHORIE_POT)~
-	mv $(EUPHORIE_POT)~ $(EUPHORIE_POT)
+pot: bin/i18ndude
+	i18ndude rebuild-pot --exclude="generated prototype examples" --pot $(EUPHORIE_POT) src/osha/oira --merge src/Euphorie/src/euphorie/deployment/locales/euphorie.pot --create euphorie
 	$(MAKE) $(MFLAGS) $(EUPHORIE_PO_FILES)
 
-$(EUPHORIE_PO_FILES): $(EUPHORIE_POT)
-	msgmerge --update -N $@ $<
+$(EUPHORIE_PO_FILES): src/osha/oira/locales/euphorie.pot
+	msgmerge --update -N --lang `echo $@ | awk -F"/" '{print ""$$5}'` $@ $<
 
-.po.mo:
-	msgfmt -c --statistics -o $@~ $< && mv $@~ $@
 
 
 ########################################################################
@@ -63,7 +56,7 @@ prototype: ## Get the latest version of the prototype
 
 jekyll: prototype
 	@echo 'DO: rm prototype/stamp-bundler to force Jekyll re-install'
-	@cd prototype && make jekyll
+	@cd prototype && make osha
 
 bundle: prototype
 	cd prototype && make bundle

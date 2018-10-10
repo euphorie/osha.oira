@@ -1,6 +1,11 @@
 Changelog
 =========
 
+5.0.0 (unreleased)
+------------------
+
+MAJOR upgrade to Plone 5.1. Requires Euphorie 10.0.0
+
 
 4.0.24 (unreleased)
 -------------------
@@ -40,7 +45,7 @@ Changelog
 4.0.17 (2018-01-17)
 -------------------
 
-- bugfix: in the list of risks report, show description instead of twice the title 
+- bugfix: in the list of risks report, show description instead of twice the title
 - Added missing translation in LV for Excel report
 
 

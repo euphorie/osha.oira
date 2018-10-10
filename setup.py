@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import monkeypatch_setup
 import os
 
-version = '4.0.22.dev0'
+version = '5.0.0b1.dev0'
 
 tests_require = [
         'Euphorie [tests]',
@@ -35,7 +35,7 @@ setup(name='osha.oira',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'Euphorie >=9.0.0',
+          'Euphorie >=10.0.0',
           'NuPlone >=1.3.9',
           'Pillow',
           'Products.statusmessages',

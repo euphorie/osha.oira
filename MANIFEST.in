@@ -19,6 +19,7 @@ recursive-include src/osha/oira *.woff2
 recursive-include work/osha/oira *.svg
 recursive-include src/osha/oira *.robot
 include *.sql
+include *.txt
 
 graft docs
 prune work
@@ -30,8 +31,11 @@ graft src/osha/oira/content/templates
 graft src/osha/oira/client/templates
 graft src/osha/oira/tiles/templates
 graft src/osha/oira/nuplone/templates
+graft src/osha/oira/client/browser/templates
 
-
+prune src/oira.private
+prune src/osha/oira/browser/resources/brands/daimler
+prune src/osha/oira/tests/acceptance/resource/secrets.robot
 
 # added by check_manifest.py
 include *.py

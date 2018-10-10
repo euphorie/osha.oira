@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.0.0 (unreleased)
-------------------
+5.0.0b1 (2018-10-10)
+--------------------
 
 MAJOR upgrade to Plone 5.1. Requires Euphorie 10.0.0
 

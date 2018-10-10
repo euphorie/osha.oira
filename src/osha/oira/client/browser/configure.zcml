@@ -3,11 +3,25 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     >
 
+  <!-- override some classes, but re-use the template from Euphorie -->
+  <configure package="euphorie.client.browser">
+
+    <browser:page
+        name="webhelpers"
+        for="*"
+        permission="zope.Public"
+        class="osha.oira.client.browser.webhelpers.OSHAWebHelpers"
+        template="templates/webhelpers.pt"
+        layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+        />
+
+  </configure>
+
   <browser:page
       name="appendix"
       for="*"
       permission="zope.Public"
-      class="osha.oira.client.browser.webhelpers.OSHAAppendix"
+      class=".webhelpers.OSHAAppendix"
       template="templates/appendix.pt"
       layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
       />

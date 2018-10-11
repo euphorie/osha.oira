@@ -1,14 +1,16 @@
 # coding=utf-8
-from Acquisition import aq_inner
 from AccessControl import getSecurityManager
+from Acquisition import aq_inner
+from collections import OrderedDict
 from cStringIO import StringIO
 from datetime import datetime
+from euphorie.client import config
 from euphorie.client import model
 from euphorie.client import report
 from euphorie.client import survey
 from euphorie.client.session import SessionManager
-from euphorie.client import config
 from five import grok
+from json import loads
 from openpyxl.cell import get_column_letter
 from openpyxl.workbook import Workbook
 from osha.oira import _
@@ -17,6 +19,10 @@ from osha.oira.client.interfaces import IOSHAIdentificationPhaseSkinLayer
 from osha.oira.client.interfaces import IOSHAItalyReportPhaseSkinLayer
 from osha.oira.client.interfaces import IOSHAReportPhaseSkinLayer
 from plonetheme.nuplone.utils import formatDate
+from rtfng.document import character
+from rtfng.document.base import TAB, LINE
+from rtfng.document.paragraph import Paragraph, Table, Cell
+from rtfng.document.section import Section
 from rtfng.Elements import PAGE_NUMBER
 from rtfng.PropertySets import BorderPropertySet
 from rtfng.PropertySets import FramePropertySet
@@ -26,10 +32,6 @@ from rtfng.PropertySets import TextPropertySet
 from rtfng.Renderer import Renderer
 from rtfng.Styles import ParagraphStyle
 from rtfng.Styles import TextStyle
-from rtfng.document import character
-from rtfng.document.base import TAB, LINE
-from rtfng.document.paragraph import Paragraph, Table, Cell
-from rtfng.document.section import Section
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zExceptions import NotFound
@@ -453,21 +455,64 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
             if node.comment and node.comment.strip():
                 body.append(Paragraph(styles.Comment, node.comment))
 
-            for (idx, measure) in enumerate(node.action_plans):
-                if not measure.action_plan:
-                    continue
 
-                if len(node.action_plans) == 1:
-                    heading = t(_("header_measure_single", default=u"Measure"))
-                else:
+            skip_planned_measures = False
+            if (
+                self.use_existing_measures and
+                self.tool_type in self.tti.types_existing_measures
+            ):
+                if IOSHAItalyReportPhaseSkinLayer.providedBy(self.request):
+                    skip_planned_measures = True
+                defined_measures = zodb_node.pre_defined_measures
+                try:
+                    # We try to get at least some order in: First, the pre-
+                    # defined measures that the user has confirmed, then the
+                    # additional custom-defined ones.
+                    existing_measures = OrderedDict()
+                    saved_measures = loads(node.existing_measures)
+                    for text in defined_measures:
+                        if saved_measures.get(text):
+                            existing_measures.update(
+                                {htmllaundry.StripMarkup(text): 1})
+                            saved_measures.pop(text)
+                    # Finally, add the user-defined measures as well
+                    existing_measures.update({
+                        htmllaundry.StripMarkup(key): val for (key, val)
+                        in saved_measures.items()})
+                    measures = existing_measures.keys()
+                except:
+                    measures = []
+                for (idx, measure) in enumerate(measures):
                     heading = t(
-                        _("header_measure",
-                            default=u"Measure ${index}",
-                            mapping={"index": idx + 1}))
+                        _(
+                            "label_existing_measure",
+                            default="Existing measure"
+                        )
+                    ) + " " + str(idx + 1)
+                    action_plan = model.ActionPlan()
+                    action_plan.action_plan = measure
+                    self.addMeasure(
+                        document, heading, body, action_plan, implemented=True)
 
-                self.addMeasure(document, heading, body, measure)
+            if not skip_planned_measures:
+                for (idx, measure) in enumerate(node.action_plans):
+                    if not measure.action_plan:
+                        continue
 
-    def addMeasure(self, document, heading, section, measure):
+                    if len(node.action_plans) == 1:
+                        heading = t(
+                            _("header_measure_single", default=u"Measure"))
+                    else:
+                        heading = t(
+                            _("header_measure",
+                                default=u"Measure ${index}",
+                                mapping={"index": idx + 1}))
+
+                    self.addMeasure(document, heading, body, measure)
+
+    def addMeasure(
+        self, document, heading, section, measure, implemented=False
+    ):
         """ Requirements for how the measure section should be displayed are
             in #2611
         """
@@ -483,7 +528,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
         p = Paragraph(
             styles.MeasureHeading,
             ParagraphPropertySet(left_indent=300, right_indent=300),
-            t(_("header_measure_single", default=u"Measure")))
+            heading)
         c = Cell(p, FramePropertySet(thin_edge, thin_edge, no_edge, thin_edge))
         table.AddRow(c)
 
@@ -492,26 +537,32 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
         headings = [
             t(_("label_measure_action_plan", default=u"General approach (to "
                 u"eliminate or reduce the risk)")),
-            t(_("label_measure_prevention_plan", default=u"Specific action(s) "
-                u"required to implement this approach")),
-            t(_("label_measure_requirements", default=u"Level of expertise "
-                u"and/or requirements needed")),
-            t(_("label_action_plan_responsible", default=u"Who is "
-                u"responsible?")),
-            t(_("label_action_plan_budget", default=u"Budget")),
-            t(_("label_action_plan_start", default=u"Planning start")),
-            t(_("label_action_plan_end", default=u"Planning end")),
         ]
+        if not implemented:
+            headings = headings + [
+                t(_("label_measure_prevention_plan", default=u"Specific action(s) "
+                    u"required to implement this approach")),
+                t(_("label_measure_requirements", default=u"Level of expertise "
+                    u"and/or requirements needed")),
+                t(_("label_action_plan_responsible", default=u"Who is "
+                    u"responsible?")),
+                t(_("label_action_plan_budget", default=u"Budget")),
+                t(_("label_action_plan_start", default=u"Planning start")),
+                t(_("label_action_plan_end", default=u"Planning end")),
+            ]
         m = measure
         values = [
             m.action_plan,
-            m.prevention_plan,
-            m.requirements,
-            m.responsible,
-            m.budget and str(m.budget) or '',
-            m.planning_start and formatDate(self.request, m.planning_start) or '',
-            m.planning_end and formatDate(self.request, m.planning_end) or '',
         ]
+        if not implemented:
+            values = values + [
+                m.prevention_plan,
+                m.requirements,
+                m.responsible,
+                m.budget and str(m.budget) or '',
+                m.planning_start and formatDate(self.request, m.planning_start) or '',
+                m.planning_end and formatDate(self.request, m.planning_end) or '',
+            ]
         for heading, value in zip(headings, values):
             p = Paragraph(
                 styles.MeasureField,

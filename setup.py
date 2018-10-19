@@ -39,10 +39,6 @@ setup(name='osha.oira',
           'NuPlone >=1.3.9',
           'Pillow',
           'Products.statusmessages',
-          # We seem to have a persisten utility that prevents running upgrade
-          # steps. The following package is therefore added for providing the
-          # required interface.
-          'collective.js.jqueryui',
           'htmllaundry',
           'plone.autoform',
           'plone.tiles',

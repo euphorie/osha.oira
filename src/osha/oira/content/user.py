@@ -1,3 +1,4 @@
+# coding=utf-8
 from .. import _
 from Acquisition import aq_parent
 from Products.Archetypes.utils import IStatusMessage
@@ -46,17 +47,19 @@ class AccountCreatedNotification(grok.View):
             self.contact_name = context.Title()
         prt = api.portal.get_tool("portal_password_reset")
         reset = prt.requestReset(user.getId())
-        self.reset_url="%s/@@reset-password/%s" % (
+        self.reset_url = "%s/@@reset-password/%s" % (
             api.portal.get().absolute_url(),
-            reset["randomstring"]
+            reset["randomstring"],
         )
 
 
 @grok.subscribe(IUser, IObjectAddedEvent)
 def OnUserCreation(user, event):
     if not user.contact_email:
-        log.warn(u"Could not send activation email to user '%s','" \
-                 u"no email set." % user.id)
+        log.warn(
+            u"Could not send activation email to user '%s',' no email set.",
+            user.id,
+        )
         return
     EmailActivationLink(user, event)
 
@@ -64,10 +67,14 @@ def OnUserCreation(user, event):
 def NotifyError(user, e):
     log.error(
         "MailHost error sending account activation link to: %s",
-        user.contact_email, e)
+        user.contact_email, e
+    )
     flash = IStatusMessage(user.REQUEST).addStatusMessage
-    flash(u'Could not send an account activation email to "%s".'
-          u'Please contact the site administrator.', "error")
+    flash(
+        u'Could not send an account activation email to "%s".'
+        u'Please contact the site administrator.',
+        "error",
+    )
     return
 
 
@@ -78,36 +85,44 @@ def EmailActivationLink(user, event):
     portal = api.portal.get()
     mailview = component.getMultiAdapter(
         (user, user.REQUEST),
-        name="account_created_notification"
+        name="account_created_notification",
     )
-    subject = _(u"password_reset_subject",
-                default = u"Password reset for ${site}",
-                mapping={'site':portal.title})
+    subject = _(
+        u"password_reset_subject",
+        default=u"Password reset for ${site}",
+        mapping={
+            'site': portal.title,
+        }
+    )
     email = createEmailTo(
         portal.email_from_name,
         portal.email_from_address,
         None,
         user.contact_email,
         translate(subject, context=user.REQUEST),
-        mailview()
+        mailview(),
     )
     try:
         api.portal.get_tool('MailHost').send(email)
-    except MailHostError, e:
+    except MailHostError as e:
         return NotifyError(e)
-    except socket.error, e:
+    except socket.error as e:
         return NotifyError(e[1])
     IStatusMessage(user.REQUEST).add(
-        u"An account activation email has been sent to the user.",
-        "success")
+        u"An account activation email has been sent to the user.", "success"
+    )
     user.REQUEST.response.redirect(portal.absolute_url())
 
 
 class PasswordValidator(user.PasswordValidator):
     grok.implements(IValidator)
     grok.adapts(
-            Interface, IOSHAContentSkinLayer,
-            IForm, schema.Password, IPasswordConfirmationWidget)
+        Interface,
+        IOSHAContentSkinLayer,
+        IForm,
+        schema.Password,
+        IPasswordConfirmationWidget,
+    )
 
     def validate(self, value):
         """ Don't validate when adding a country manager or sector.
@@ -115,9 +130,12 @@ class PasswordValidator(user.PasswordValidator):
             then an email with link to set their password themselves.
             Refs: #10284
         """
-        if IAddForm.providedBy(self.view) and \
-                self.view.portal_type in \
-                    ['euphorie.countrymanager', 'euphorie.sector']:
+        if (
+            IAddForm.providedBy(self.view) and self.view.portal_type in [
+                'euphorie.countrymanager',
+                'euphorie.sector',
+            ]
+        ):
             return
         return super(PasswordValidator, self).validate(value)
 

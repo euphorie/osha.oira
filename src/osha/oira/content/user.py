@@ -66,14 +66,16 @@ def OnUserCreation(user, event):
 
 def NotifyError(user, e):
     log.error(
-        "MailHost error sending account activation link to: %s",
-        user.contact_email, e
+        "%r sending account activation link to: %s",
+        e,
+        user.contact_email,
     )
     flash = IStatusMessage(user.REQUEST).addStatusMessage
     flash(
-        u'Could not send an account activation email to "%s".'
-        u'Please contact the site administrator.',
-        "error",
+        (
+            u'Could not send an account activation email to "{}".'
+            u'Please contact the site administrator.'
+        ).format("error")
     )
     return
 
@@ -94,9 +96,10 @@ def EmailActivationLink(user, event):
             'site': portal.title,
         }
     )
+
     email = createEmailTo(
-        portal.email_from_name,
-        portal.email_from_address,
+        api.portal.get_registry_record('plone.email_from_name'),
+        api.portal.get_registry_record('plone.email_from_address'),
         None,
         user.contact_email,
         translate(subject, context=user.REQUEST),
@@ -105,9 +108,9 @@ def EmailActivationLink(user, event):
     try:
         api.portal.get_tool('MailHost').send(email)
     except MailHostError as e:
-        return NotifyError(e)
+        return NotifyError(user, e)
     except socket.error as e:
-        return NotifyError(e[1])
+        return NotifyError(user, e[1])
     IStatusMessage(user.REQUEST).add(
         u"An account activation email has been sent to the user.", "success"
     )

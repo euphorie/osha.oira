@@ -15,6 +15,15 @@
         layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
         />
 
+  <browser:page
+      name="login_form"
+      for="*"
+      permission="zope.Public"
+      class="osha.oira.client.browser.login.LoginForm"
+      template="templates/login_form.pt"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
   </configure>
 
   <browser:page

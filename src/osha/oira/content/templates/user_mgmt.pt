@@ -120,6 +120,53 @@
           </tr>
         </tbody>
       </table>
+      <h2 i18n:translate="header_country_managers">LDAP managers</h2>
+      <table>
+        <thead>
+          <tr>
+            <th i18n:translate="">Name</th>
+            <th i18n:translate="">Login</th>
+            <th class="actions">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr tal:repeat="userid view/ldap_userids">
+            <tal:user define="
+                        user python:view.get_user(userid);
+                        is_manager python:view.is_manager(user);
+                      "
+            >
+              <td>${python:user.getProperty('fullname')}</td>
+              <td>${python:user.getProperty('login')}</td>
+              <td>
+                <form action="${request/getURL}"
+                      method="post"
+                >
+                  <input name="userid"
+                         type="hidden"
+                         value="${userid}"
+                  />
+                  <button class="micro floatAfter function"
+                          name="ldap_action"
+                          type="submit"
+                          value="grant"
+                          tal:condition="not:is_manager"
+                          i18n:translate=""
+                  >Grant Manager Roles</button>
+                  <button class="micro floatAfter function"
+                          name="ldap_action"
+                          type="submit"
+                          value="revoke"
+                          tal:condition="is_manager"
+                          i18n:translate=""
+                  >Revoke Manager Roles</button>
+                  <tal:csrf replace="structure context/@@authenticator/authenticator" />
+                </form>
+              </td>
+            </tal:user>
+          </tr>
+        </tbody>
+      </table>
     </metal:content>
   </body>
 </html>

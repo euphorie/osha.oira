@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      metal:use-macro="context/@@layout/macros/layout"
+      i18n:domain="euphorie"
+>
+  <body>
+    <metal:title fill-slot="title"
+                 i18n:translate=""
+    >Manage LDAP users in
+      <tal:span i18n:name="title">${here/title}</tal:span>
+    </metal:title>
+    <metal:content fill-slot="content">
+      <h2 i18n:translate="header_country_managers">LDAP users</h2>
+      <table>
+        <thead>
+          <tr>
+            <th i18n:translate="">Name</th>
+            <th i18n:translate="">Login</th>
+            <th class="actions">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr tal:repeat="userid view/ldap_userids">
+            <tal:user define="
+                        user python:view.get_user(userid);
+                        has_managed_roles python:view.has_managed_roles(user);
+                      "
+            >
+              <td>${python:user.getProperty('fullname')}</td>
+              <td>${python:user.getProperty('login')}</td>
+              <td>
+                <form action="${request/getURL}"
+                      method="post"
+                >
+                  <input name="userid"
+                         type="hidden"
+                         value="${userid}"
+                  />
+                  <button class="micro floatAfter function"
+                          name="ldap_action"
+                          type="submit"
+                          value="grant"
+                          tal:condition="not:has_managed_roles"
+                          i18n:translate=""
+                  >Grant Roles</button>
+                  <button class="micro floatAfter function"
+                          name="ldap_action"
+                          type="submit"
+                          value="revoke"
+                          tal:condition="has_managed_roles"
+                          i18n:translate=""
+                  >Revoke Roles</button>
+                  <tal:csrf replace="structure context/@@authenticator/authenticator" />
+                </form>
+              </td>
+            </tal:user>
+          </tr>
+        </tbody>
+      </table>
+      <p>This form manages the following roles</p>
+      <ul>
+        <li tal:repeat="role view/_roles">${role}</li>
+      </ul>
+    </metal:content>
+  </body>
+</html>

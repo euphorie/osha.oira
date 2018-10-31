@@ -7,6 +7,8 @@
     <include package="plone.directives.form" file="meta.zcml" />
     <include package="plone.directives.form" />
 
+    <include package=".browser" />
+
     <plone:behavior
         title="OSHA extra Sector fields"
         description="Provide additional OSHA fields"

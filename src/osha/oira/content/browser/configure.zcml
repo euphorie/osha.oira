@@ -1,0 +1,24 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    >
+
+  <browser:page
+      name="manage-ldap-users"
+      for="euphorie.content.country.ICountry"
+      permission="euphorie.content.ManageCountry"
+      class=".manage_ldap_users.ManageCountryLDAPUsersView"
+      template="templates/manage-ldap-users.pt"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="manage-ldap-users"
+      for="euphorie.content.sector.ISector"
+      permission="euphorie.content.ManageCountry"
+      class=".manage_ldap_users.ManageSectorLDAPUsersView"
+      template="templates/manage-ldap-users.pt"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+</configure>

@@ -43,8 +43,22 @@ class BaseManageLDAPUsersView(BrowserView):
         ldap = au.pasldap
         return [result['id'] for result in ldap.enumerateUsers()]
 
+    def grant_roles(self, user):
+        api.user.grant_roles(
+            user=user,
+            roles=self.sorted_roles,
+            obj=self.context,
+        )
+
+    def revoke_roles(self, user):
+        api.user.revoke_roles(
+            user=user,
+            roles=self.sorted_roles,
+            obj=self.context,
+        )
+
     def maybe_manage_local_roles(self):
-        '''
+        ''' Check the request and see if we should mange some user local roles
         '''
         ldap_action = self.request.get('ldap_action')
         if not isinstance(ldap_action, six.string_types):
@@ -56,17 +70,9 @@ class BaseManageLDAPUsersView(BrowserView):
         if not user:
             return
         if ldap_action == 'grant':
-            api.user.grant_roles(
-                user=user,
-                roles=self.sorted_roles,
-                obj=self.context,
-            )
+            self.grant_roles(user)
         elif ldap_action == 'revoke':
-            api.user.revoke_roles(
-                user=user,
-                roles=self.sorted_roles,
-                obj=self.context,
-            )
+            self.revoke_roles(user)
 
     def __call__(self):
         self.maybe_manage_local_roles()

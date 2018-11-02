@@ -9,7 +9,6 @@
       permission="euphorie.content.ManageCountry"
       class=".manage_ldap_users.ManageCountryLDAPUsersView"
       template="templates/manage-ldap-users.pt"
-      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
   <browser:page
@@ -18,7 +17,13 @@
       permission="euphorie.content.ManageCountry"
       class=".manage_ldap_users.ManageSectorLDAPUsersView"
       template="templates/manage-ldap-users.pt"
-      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="migrate-ldap-users"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      permission="cmf.ManagePortal"
+      class=".migrate_ldap_users.MigrateLDAPUsersView"
       />
 
 </configure>

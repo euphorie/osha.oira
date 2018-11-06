@@ -455,7 +455,6 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
             if node.comment and node.comment.strip():
                 body.append(Paragraph(styles.Comment, node.comment))
 
-
             skip_planned_measures = False
             if (
                 self.use_existing_measures and
@@ -463,7 +462,10 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
             ):
                 if IOSHAItalyReportPhaseSkinLayer.providedBy(self.request):
                     skip_planned_measures = True
-                defined_measures = zodb_node.pre_defined_measures
+                if zodb_node is None:
+                    defined_measures = []
+                else:
+                    defined_measures = zodb_node.pre_defined_measures
                 try:
                     # We try to get at least some order in: First, the pre-
                     # defined measures that the user has confirmed, then the

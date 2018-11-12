@@ -12,6 +12,12 @@ class BaseManageLDAPUsersView(BrowserView):
     _roles = set([])
 
     @property
+    @memoize_contextless
+    def ldap(self):
+        au = api.portal.get_tool('acl_users')
+        return au.pasldap
+
+    @property
     @memoize
     def sorted_roles(self):
         return list(sorted(self._roles))
@@ -30,6 +36,9 @@ class BaseManageLDAPUsersView(BrowserView):
             obj=self.context,
         ))
 
+    def local_roles_userids(self):
+        return sorted(self.context.__ac_local_roles__)
+
     def has_managed_roles(self, user):
         ''' Check if user has the roles we are managing here
         '''
@@ -38,10 +47,15 @@ class BaseManageLDAPUsersView(BrowserView):
     def ldap_userids(self):
         ''' Return the LDAP users
         '''
-        api.portal.show_message('ciao', self.request)
-        au = api.portal.get_tool('acl_users')
-        ldap = au.pasldap
-        return [result['id'] for result in ldap.enumerateUsers()]
+        query = self.request.form.get('SearchableText', '')
+        return self.enumerateUsersIds(query)
+
+    def enumerateUsersIds(self, query=''):
+        if not query:
+            return []
+        query = '*%s*' % query
+        results = self.ldap.enumerateUsers(query) or ()
+        return sorted(result['id'] for result in results)
 
     def grant_roles(self, user):
         api.user.grant_roles(

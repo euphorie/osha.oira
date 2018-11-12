@@ -37,7 +37,10 @@ class BaseManageLDAPUsersView(BrowserView):
         ))
 
     def local_roles_userids(self):
-        return sorted(self.context.__ac_local_roles__)
+        lr = self.context.__ac_local_roles__
+        return sorted(
+            userid for userid in lr if 'Owner' not in lr[userid]
+        )
 
     def has_managed_roles(self, user):
         ''' Check if user has the roles we are managing here

@@ -11,7 +11,7 @@
                  i18n:translate=""
     >
       Manage LDAP users in
-      <tal:span i18n:name="title">${here/title}</tal:span>
+      "<tal:span i18n:name="title">${here/title}</tal:span>"
     </metal:title>
     <metal:content fill-slot="content">
       <h2 i18n:translate="">Existing users with local roles enabled</h2>
@@ -73,8 +73,9 @@
         </metal:macro>
       </tal:existing-roles>
 
-      <h2 i18n:translate="">Search for ldap users</h2>
-      <form>
+      <h2 i18n:translate="">Search for LDAP users</h2>
+      <form style="margin: 0 0 10px;"
+          method="POST">
         <input name="SearchableText"
                type="text"
                value="${request/SearchableText|nothing}"
@@ -89,12 +90,13 @@
                         userids view/ldap_userids;
                       "
       >
-        <metal:macro use-macro="template/macros/user-table">
-        </metal:macro></tal:ldap-users>
-      <p>This form manages the following roles</p>
-      <ul>
-        <li tal:repeat="role view/_roles">${role}</li>
-      </ul>
+        <tal:users condition="userids">
+          <metal:macro use-macro="template/macros/user-table">
+          </metal:macro>
+        </tal:users>
+      </tal:ldap-users>
+      <p tal:condition="python:context.portal_type=='euphorie.country'">This form allows you to grant the <em>Country Manager</em> role for "${context/title}" to selected users.</p>
+      <p tal:condition="python:context.portal_type=='euphorie.sector'">This form allows you to grant the <em>Sector Manager</em> role for "${context/title}" to selected users.</p>
     </metal:content>
   </body>
 </html>

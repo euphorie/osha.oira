@@ -1,6 +1,9 @@
 # coding=utf-8
+from logging import getLogger
 from plone import api
 from Products.Five import BrowserView
+
+log = getLogger(__name__)
 
 
 class MigrateLDAPUsersView(BrowserView):
@@ -16,6 +19,7 @@ class MigrateLDAPUsersView(BrowserView):
                 obj,
                 self.request.clone()
             )
+            url = obj.absolute_url()
         except api.exc.InvalidParameterError:
             # This is a country manager
             view = api.content.get_view(
@@ -23,7 +27,13 @@ class MigrateLDAPUsersView(BrowserView):
                 obj.aq_parent,
                 self.request.clone()
             )
-        view.grant_roles(obj)
+            url = obj.aq_parent.absolute_url()
+        users = view.enumerateUsersIds(obj.contact_email)
+        if users:
+            user = api.user.get(users[0])
+            if user:
+                view.grant_roles(user)
+                log.info("Granted roles to %s on %s" % (users[0], url))
 
     def __call__(self):
         brains = api.content.find(

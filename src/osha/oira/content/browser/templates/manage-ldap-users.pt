@@ -34,7 +34,7 @@
                     "
                     tal:condition="nocall:user"
                 >
-                  <td>${python:user.getProperty('login') or userid}</td>
+                  <td>${python:user.getProperty('login', None) or userid}</td>
                   <td>
                     <form action="${request/getURL}"
                           method="post"

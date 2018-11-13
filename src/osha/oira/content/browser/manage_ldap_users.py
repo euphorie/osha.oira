@@ -7,6 +7,12 @@ from Products.Five import BrowserView
 import six
 
 
+class RedirectToManageLDAPUsers(BrowserView):
+    def __call__(self):
+        target = '{}/@@manage-ldap-users'.format(self.context.absolute_url())
+        return self.request.response.redirect(target)
+
+
 class BaseManageLDAPUsersView(BrowserView):
 
     _roles = set([])

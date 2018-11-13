@@ -63,19 +63,6 @@
         </fieldset>
 
         <fieldset class="concise">
-          <p class="legend" i18n:translate="label_password">Password</p>
-          <div class="z3cFieldContainer">
-            <dfn class="infoPanel" i18n:attributes="title" title="Information" i18n:translate="help_sector_password">This is the password that you need to log on to this editor environment.</dfn>
-            <fieldset class="concise">
-              <tal:widget replace="structure view/widgets/password/render" />
-            </fieldset>
-          </div>
-       <p class="message notice" style="width:100%" i18n:translate="password_policy_conditions">
-          Your password must contain at least 5 characters, including at least one capital letter, one number and one special character (e.g. $, # or @).
-        </p>
-        </fieldset>
-
-        <fieldset class="concise">
           <p class="legend" i18n:translate="label_contact_person">Contact person</p>
           <div class="z3cFieldContainer">
             <dfn class="infoPanel" i18n:attributes="title" title="Information" i18n:translate="help_sector_contactperson">Give the name of the person responsible for the OiRA tools of this sector.</dfn>

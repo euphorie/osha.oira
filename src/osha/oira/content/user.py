@@ -1,10 +1,8 @@
 # coding=utf-8
 from .. import _
 from Acquisition import aq_parent
-from Products.Archetypes.utils import IStatusMessage
-from Products.MailHost.MailHost import MailHostError
-from euphorie.content.sector import ISector
 from euphorie.content import user
+from euphorie.content.sector import ISector
 from euphorie.content.user import IUser
 from five import grok
 from os import urandom
@@ -13,6 +11,8 @@ from p01.widget.password.interfaces import IPasswordConfirmationWidget
 from plone import api
 from plone.directives import form
 from plonetheme.nuplone.utils import createEmailTo
+from Products.Archetypes.utils import IStatusMessage
+from Products.MailHost.MailHost import MailHostError
 from z3c.form.interfaces import IAddForm
 from z3c.form.interfaces import IForm
 from z3c.form.interfaces import IValidator
@@ -21,9 +21,11 @@ from zope import schema
 from zope.i18n import translate
 from zope.interface import Interface
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
+
 import logging
 import socket
 import string
+
 
 log = logging.getLogger(__name__)
 grok.templatedir("templates")
@@ -41,20 +43,23 @@ class AccountCreatedNotification(grok.View):
             self.context_type = u"sector"
             self.context_title = context.Title()
             self.contact_name = context.contact_name
+            self.reset_url = ''
         else:
             self.context_type = u"country"
             self.context_title = aq_parent(context).Title()
             self.contact_name = context.Title()
-        prt = api.portal.get_tool("portal_password_reset")
-        reset = prt.requestReset(user.getId())
-        self.reset_url = "%s/@@reset-password/%s" % (
-            api.portal.get().absolute_url(),
-            reset["randomstring"],
-        )
+            prt = api.portal.get_tool("portal_password_reset")
+            reset = prt.requestReset(user.getId())
+            self.reset_url = "%s/@@reset-password/%s" % (
+                api.portal.get().absolute_url(),
+                reset["randomstring"],
+            )
 
 
 @grok.subscribe(IUser, IObjectAddedEvent)
 def OnUserCreation(user, event):
+    if user.portal_type == 'euphorie.sector':
+        return
     if not user.contact_email:
         log.warn(
             u"Could not send activation email to user '%s',' no email set.",

@@ -14,7 +14,7 @@
       "<tal:span i18n:name="title">${here/title}</tal:span>"
     </metal:title>
     <metal:content fill-slot="content">
-      <h2 i18n:translate="">Existing users with local roles enabled</h2>
+      <h2 i18n:translate="">Existing users with local role <em tal:condition="python:context.portal_type=='euphorie.country'">Country Manager</em><em tal:condition="python:context.portal_type=='euphorie.sector'">Sector Manager</em> enabled</h2>
       <tal:existing-roles define="
                             userids view/local_roles_userids;
                           "

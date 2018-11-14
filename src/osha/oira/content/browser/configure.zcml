@@ -4,14 +4,6 @@
     >
 
   <browser:page
-      name="manage-users"
-      for="euphorie.content.country.Country"
-      permission="euphorie.content.ManageCountry"
-      class=".manage_ldap_users.RedirectToManageLDAPUsers"
-      layer="osha.oira.interfaces.IProductLayer"
-      />
-
-  <browser:page
       name="manage-ldap-users"
       for="euphorie.content.country.ICountry"
       permission="euphorie.content.ManageCountry"

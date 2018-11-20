@@ -465,7 +465,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
                 if zodb_node is None:
                     defined_measures = []
                 else:
-                    defined_measures = zodb_node.pre_defined_measures
+                    defined_measures = zodb_node.get_pre_defined_measures(self.request)
                 try:
                     # We try to get at least some order in: First, the pre-
                     # defined measures that the user has confirmed, then the

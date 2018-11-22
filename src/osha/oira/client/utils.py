@@ -89,7 +89,7 @@ def remove_empty_modules(nodes):
     return [n for n in nodes if n.id in ids]
 
 
-def get_unactioned_nodes(ls):
+def get_unactioned_nodes(ls, filter_for_measures=False):
     """ Takes a list of modules and risks and removes all risks that have been
         actioned (i.e has at least one valid action plan).
         Also remove all modules that have lost all their risks in the process
@@ -103,7 +103,11 @@ def get_unactioned_nodes(ls):
 
         elif n.type == 'risk':
             if not n.action_plans:
-                unactioned.append(n)
+                if filter_for_measures:
+                    if getattr(n, "existing_measures", None):
+                        unactioned.append(n)
+                else:
+                    unactioned.append(n)
             else:
                 # It's possible that there is an action plan object, but
                 # that it's not yet fully populated

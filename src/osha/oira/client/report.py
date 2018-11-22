@@ -465,7 +465,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
                 if zodb_node is None:
                     defined_measures = []
                 else:
-                    defined_measures = zodb_node.pre_defined_measures
+                    defined_measures = zodb_node.get_pre_defined_measures(self.request)
                 try:
                     # We try to get at least some order in: First, the pre-
                     # defined measures that the user has confirmed, then the
@@ -768,6 +768,8 @@ class OSHAItalyActionPlanReportDownload(OSHAActionPlanReportDownload):
             n for n in risk_not_present_nodes if
             n not in self.actioned_nodes
         ]
+        self.unactioned_nodes = utils.get_unactioned_nodes(
+            self.nodes, filter_for_measures=True)
 
     def render(self):
         """ Mostly a copy of the render method in OSHAActionPlanReportDownload, but with
@@ -878,10 +880,12 @@ class OSHAItalyActionPlanReportDownload(OSHAActionPlanReportDownload):
         headings = [
             t(u"Adempimenti/rischi identificati, valutati e gestiti con misure "
                 "obbligatorie adottate ed eventuali misure di miglioramento"),
+            t(u"Adempimenti/rischi solo con misure obbligatorie adottate"),
             t(u"Adempimenti/rischi non pertinenti"),
         ]
         nodes = [
             self.actioned_nodes,
+            self.unactioned_nodes,
             self.risk_not_present_nodes,
         ]
 

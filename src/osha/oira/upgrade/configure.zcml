@@ -142,5 +142,17 @@
         handler=".upgrade.configure_outdated_tool_notification"/>
   </genericsetup:upgradeSteps>
 
-</configure>
+  <genericsetup:upgradeSteps
+      source="12"
+      destination="13"
+      profile="osha.oira:default"
+      >
 
+    <genericsetup:upgradeStep
+        title="Add pas.plugins.ldap"
+        handler=".to13.install_pas_plugins_ldap"
+        />
+
+  </genericsetup:upgradeSteps>
+
+</configure>

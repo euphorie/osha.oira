@@ -4,8 +4,8 @@ Changelog
 5.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Italian report: add unactioned nodes back into the report, but only
+  if they have existing measure(s)
 
 5.0.0 (2018-11-06)
 ------------------

@@ -6,5 +6,6 @@ from ..model import LoginStatistics
 class LoginForm(login.LoginForm):
 
     def login(self, account, remember):
-        account.logins.append(LoginStatistics(account=account))
+        ls = LoginStatistics(account=account)
+        account.logins.append(ls)
         return super(LoginForm, self).login(account, remember)

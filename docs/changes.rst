@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.0.2 (unreleased)
+5.0.2 (2018-12-05)
 ------------------
 
 - Fix brown-bag release

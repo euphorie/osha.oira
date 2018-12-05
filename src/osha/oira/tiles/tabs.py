@@ -33,17 +33,17 @@ class OiRASiteRootTabsTile(SiteRootTabsTile):
         for r in self.tabs:
             if r.get('id') == 'help':
                 self.tabs.remove(r)
-        if (
-            self.is_country_manager()
-            and (
-                self.get_current_country() == self.context
-                or self.get_current_sector() == self.context
-            )
-        ):
-            custom_tab = {
-                "id": "ldapmgmt",
-                "title": _("nav_ldapmanagement", default=u"LDAP"),
-                "url": '%s/@@manage-ldap-users' % self.context.absolute_url(),
-                "class": "current" if self.get_current_url() == "ldapmgmt" else None,  # noqa: E501
-            }
-            self.tabs.insert(2, custom_tab)
+        # if (
+        #     self.is_country_manager()
+        #     and (
+        #         self.get_current_country() == self.context
+        #         or self.get_current_sector() == self.context
+        #     )
+        # ):
+        #     custom_tab = {
+        #         "id": "ldapmgmt",
+        #         "title": _("nav_ldapmanagement", default=u"LDAP"),
+        #         "url": '%s/@@manage-ldap-users' % self.context.absolute_url(),
+        #         "class": "current" if self.get_current_url() == "ldapmgmt" else None,  # noqa: E501
+        #     }
+        #     self.tabs.insert(2, custom_tab)

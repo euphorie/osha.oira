@@ -7,9 +7,7 @@ from plone.app.dexterity.behaviors.metadata import MetadataBase
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.directives import dexterity
 from plone.directives import form
-from z3c.appconfig.interfaces import IAppConfig
 from zope import schema
-from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
@@ -69,22 +67,3 @@ class SectorAdd(dexterity.AddForm):
     def update(self):
         super(SectorAdd, self).update()
         self.widgets['password'].mode = z3c.form.interfaces.HIDDEN_MODE
-
-    def create(self, data):
-        content = super(SectorAdd, self).create(data)
-
-        appconfig = getUtility(IAppConfig)
-        if not appconfig:
-            log.error("Could not get the IAppConfig utility!")
-            return content
-
-        settings = appconfig.get('euphorie')
-        main_colour = settings.get('main_colour', "#003399")
-        support_colour = settings.get('support_colour', "#996699")
-        if content.main_colour is None:
-            content.main_colour = main_colour
-
-        if content.support_colour is None:
-            content.support_colour = support_colour
-
-        return content

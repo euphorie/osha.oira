@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.0.1 (unreleased)
+5.0.1 (2018-12-05)
 ------------------
 
 - Italian report: add unactioned nodes back into the report, but only

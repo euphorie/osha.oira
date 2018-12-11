@@ -4,8 +4,7 @@ Changelog
 5.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Translation updates IS
 
 5.0.2 (2018-12-05)
 ------------------

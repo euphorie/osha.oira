@@ -39,7 +39,7 @@
           </div>
         </form>
 
-      <p i18n:translate="message_reset_password">If you forgot your password you can <a href="${context/absolute_url}/@@request-password-reset"
+      <p i18n:translate="message_reset_password">If you forgot your password you can <a href="${context/portal_url}/@@request-password-reset"
           i18n:name="reset_password" i18n:translate="reset_password">request a password reset</a>.</p>
       </tal:block>
 

@@ -155,4 +155,17 @@
 
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+      source="13"
+      destination="14"
+      profile="osha.oira:default"
+      >
+
+    <genericsetup:upgradeStep
+        title="Configure PAS plugins"
+        handler=".to14.configure_plugins"
+        />
+
+  </genericsetup:upgradeSteps>
+
 </configure>

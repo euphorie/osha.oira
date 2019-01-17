@@ -364,6 +364,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
         t = lambda txt: "".join([
             "\u%s?" % str(ord(e)) for e in translate(txt, context=self.request)
         ])
+        italy_special = IOSHAItalyReportPhaseSkinLayer.providedBy(self.request)
         ss = document.StyleSheet
         toc_props = ParagraphPropertySet()
         toc_props.SetLeftIndent(TabPropertySet.DEFAULT_WIDTH * 1)
@@ -416,7 +417,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
             if node.type != "risk":
                 continue
 
-            if node.priority:
+            if node.priority and not italy_special:
                 if node.priority == "low":
                     level = _("risk_priority_low", default=u"low")
                 elif node.priority == "medium":
@@ -435,7 +436,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
             # In the report for Italy, don't print the description
             if (
                 getattr(node, 'identification', None) == 'no' and
-                not IOSHAItalyReportPhaseSkinLayer.providedBy(self.request)
+                not italy_special
             ):
                 if zodb_node is None:
                     description = node.title
@@ -460,7 +461,7 @@ class OSHAActionPlanReportDownload(report.ActionPlanReportDownload):
                 self.use_existing_measures and
                 self.tool_type in self.tti.types_existing_measures
             ):
-                if IOSHAItalyReportPhaseSkinLayer.providedBy(self.request):
+                if italy_special:
                     skip_planned_measures = True
                 if zodb_node is None:
                     defined_measures = []

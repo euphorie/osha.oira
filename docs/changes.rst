@@ -4,7 +4,8 @@ Changelog
 5.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixes for Italian report
+- Translation updates
 
 
 5.0.3 (2018-12-11)

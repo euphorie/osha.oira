@@ -3,6 +3,11 @@ from euphorie.client.interfaces import IClientSkinLayer
 from euphorie.client.interfaces import ICustomizationPhaseSkinLayer
 from euphorie.client.interfaces import IEvaluationPhaseSkinLayer
 from euphorie.client.interfaces import IIdentificationPhaseSkinLayer
+from euphorie.client.interfaces import IFranceActionPlanPhaseSkinLayer
+from euphorie.client.interfaces import IFranceCustomizationPhaseSkinLayer
+from euphorie.client.interfaces import IFranceEvaluationPhaseSkinLayer
+from euphorie.client.interfaces import IFranceIdentificationPhaseSkinLayer
+from euphorie.client.interfaces import IFranceReportPhaseSkinLayer
 from euphorie.client.interfaces import IItalyActionPlanPhaseSkinLayer
 from euphorie.client.interfaces import IItalyCustomizationPhaseSkinLayer
 from euphorie.client.interfaces import IItalyEvaluationPhaseSkinLayer
@@ -53,3 +58,23 @@ class IOSHAItalyCustomizationPhaseSkinLayer(IItalyCustomizationPhaseSkinLayer, I
 
 class IOSHAItalyReportPhaseSkinLayer(IItalyReportPhaseSkinLayer, IOSHAReportPhaseSkinLayer):  # noqa
     """Special for Italy"""
+
+
+class IOSHAFranceIdentificationPhaseSkinLayer(IFranceIdentificationPhaseSkinLayer, IOSHAIdentificationPhaseSkinLayer):  # noqa
+    """Special for France"""
+
+
+class IOSHAFranceEvaluationPhaseSkinLayer(IFranceEvaluationPhaseSkinLayer, IOSHAEvaluationPhaseSkinLayer):  # noqa
+    """Special for France"""
+
+
+class IOSHAFranceActionPlanPhaseSkinLayer(IFranceActionPlanPhaseSkinLayer, IOSHAActionPlanPhaseSkinLayer):  # noqa
+    """Special for France"""
+
+
+class IOSHAFranceCustomizationPhaseSkinLayer(IFranceCustomizationPhaseSkinLayer, IOSHACustomizationPhaseSkinLayer):  # noqa
+    """Special for France"""
+
+
+class IOSHAFranceReportPhaseSkinLayer(IFranceReportPhaseSkinLayer, IOSHAReportPhaseSkinLayer):  # noqa
+    """Special for France"""

@@ -4,8 +4,7 @@ Changelog
 5.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Use LDAP for the CMS
 
 5.0.4 (2019-01-23)
 ------------------

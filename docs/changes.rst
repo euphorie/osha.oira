@@ -4,7 +4,7 @@ Changelog
 5.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Update privacy policy MOI-218
 
 
 5.0.5 (2019-02-04)

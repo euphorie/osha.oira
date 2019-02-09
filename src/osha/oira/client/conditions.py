@@ -9,4 +9,4 @@ grok.templatedir("templates")
 class TermsAndConditions(BaseTermsAndConditions):
     grok.name("terms-and-conditions")
     grok.layer(IOSHAClientSkinLayer)
-    grok.template("conditions")
+    grok.template("privacy-policy")

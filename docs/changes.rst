@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.0.4.1 (unreleased)
+5.0.4.1 (2019-02-09)
 --------------------
 
 - Update privacy policy MOI-218

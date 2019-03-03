@@ -5,7 +5,7 @@ Changelog
 ------------------
 
 - Update privacy policy MOI-218
-
+- update IS translations
 
 5.0.5 (2019-02-04)
 ------------------

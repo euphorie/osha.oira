@@ -51,7 +51,6 @@ class ReportView(report.ReportView):
     again. For #4436.
     """
     grok.layer(IOSHAReportPhaseSkinLayer)
-    grok.template("report")
 
     def update(self):
         self.session = SessionManager.session

@@ -10,7 +10,7 @@ all: ${TARGETS}
 clean:
 	-rm ${TARGETS}
 
-buildout: bootstrap.py
+bin/buildout: bootstrap.py
 	virtualenv -p python2.7 --clear --no-site-packages .
 	bin/pip install -r requirements.txt
 

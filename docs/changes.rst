@@ -1,11 +1,17 @@
 Changelog
 =========
 
-5.0.6 (unreleased)
+5.0.7 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+5.0.6 (2019-03-04)
 ------------------
 
 - Update privacy policy MOI-218
-
+- update IS translations
 
 5.0.5 (2019-02-04)
 ------------------

@@ -24,16 +24,14 @@
         <thead>
             <tr>
                 <th i18n:translate="">Sector</th>
-                <th i18n:translate="">Email</th>
-                <th i18n:translate="">(Login)</th>
+                <th>&nbsp;</th>
                 <th class="actions">&nbsp;</th>
             </tr>
         </thead>
         <tbody>
         <tr tal:repeat="sector view/sectors">
             <td><a href="${sector/url}">${sector/title}</a></td>
-            <td>${sector/contact_email}</td>
-            <td>${sector/login}</td>
+            <td><a class="micro button" href="${sector/url}/@@manage-ldap-users" i18n:translate="nav_ldapmanagement">Manage access</a></td>
             <td class="actions">
                 <form method="post" action="${sector/url}/@@lock">
                     <tal:csrf replace="structure context/@@authenticator/authenticator"/>
@@ -46,29 +44,8 @@
 
     <h2 i18n:translate="header_country_managers">Country managers</h2>
     <p class="message notice"
-        tal:condition="not:managers"
-        i18n:translate="country_no_managers">There are no country managers for this country.</p>
+       i18n:translate="notice_assign_country_manager">To view and assign country manager permissions, please use the <a i18n:name="ldap_tab_link" href="${context/absolute_url}/@@manage-ldap-users" i18n:translate="nav_ldapmanagement">Manage access</a> tab.</p>
 
-    <p class="message notice"
-       tal:condition="managers"
-      >The country managers on display here are only shown for history reasons. To assign country manager permissions, please use the <a href="${context/absolute_url}/@@manage-ldap-users">LDAP tab.</a></p>
-
-    <table tal:condition="managers">
-        <thead>
-            <tr>
-                <th i18n:translate="">Name</th>
-                <th i18n:translate="">Email</th>
-                <th>(Login)</th>
-            </tr>
-        </thead>
-    <tbody>
-          <tr tal:repeat="manager view/managers">
-            <td>${manager/title}</td>
-            <td>${manager/contact_email}</td>
-            <td>${manager/login}</td>
-          </tr>
-        </tbody>
-      </table>
     </metal:content>
   </body>
 </html>

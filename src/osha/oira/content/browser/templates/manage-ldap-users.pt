@@ -19,8 +19,16 @@
                             userids view/local_roles_userids;
                           "
       >
+
+      <p class="message notice"
+        tal:condition="python:context.portal_type=='euphorie.country' and not userids"
+        i18n:translate="country_no_managers">There are no country managers for this country.</p>
+      <p class="message notice"
+        tal:condition="python:context.portal_type=='euphorie.sector' and not userids"
+        i18n:translate="sector_no_managers">There are no sector managers for this sector.</p>
+
         <metal:macro define-macro="user-table">
-          <table>
+          <table tal:condition="nocall:userids">
             <thead>
               <tr>
                 <th i18n:translate="">Login</th>

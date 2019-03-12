@@ -33,6 +33,9 @@ class OiRASiteRootTabsTile(SiteRootTabsTile):
         for r in self.tabs:
             if r.get('id') == 'help':
                 self.tabs.remove(r)
+            elif r.get('id') == 'usermgmt':
+                r['title'] = _(
+                    "nav_countrymanagement", default=u"Country management")
         if (
             self.is_country_manager()
             and (
@@ -42,7 +45,7 @@ class OiRASiteRootTabsTile(SiteRootTabsTile):
         ):
             custom_tab = {
                 "id": "ldapmgmt",
-                "title": _("nav_ldapmanagement", default=u"LDAP"),
+                "title": _("nav_ldapmanagement", default=u"Manage access"),
                 "url": '%s/@@manage-ldap-users' % self.context.absolute_url(),
                 "class": "current" if self.get_current_url() == "ldapmgmt" else None,  # noqa: E501
             }

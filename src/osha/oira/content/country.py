@@ -30,7 +30,13 @@ class OSHAManageUsers(ManageUsers):
                 'contact_email': sector.contact_email
             }
             view = sector.restrictedTraverse('manage-ldap-users', None)
-            entry['managers'] = view.local_roles_userids() if view else []
+            if not view:
+                entry['managers'] = []
+            else:
+                entry['managers'] = [
+                    userid for userid in view.local_roles_userids()
+                    if view.get_user(userid)
+                ]
             self.sectors.append(entry)
 
         self.sectors.sort(key=lambda s: s["title"].lower())

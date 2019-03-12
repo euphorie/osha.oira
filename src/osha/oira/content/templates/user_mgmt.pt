@@ -15,6 +15,22 @@
     </div>
     <metal:content fill-slot="content"
         tal:define="managers view/managers">
+    <style type="text/css">
+tr.even {
+  background-color: #f0f0f0;
+}
+tr.sector td {
+padding-top: 1em;
+padding-left: 0.5em;
+}
+tr.sector.simple td {
+  padding-bottom: 1em;
+}
+tr.managers td {
+padding-left: 2em;
+padding-bottom: 1em;
+}
+    </style>
 
       <h2 i18n:translate="header_sectors">Sectors</h2>
 
@@ -29,7 +45,8 @@
             </tr>
         </thead>
         <tbody>
-        <tr tal:repeat="sector view/sectors">
+        <tal:sectors repeat="sector view/sectors">
+          <tr class="sector ${repeat/sector/even} ${python:'simple' if not sector.get('managers', None) else None}">
             <td><a href="${sector/url}">${sector/title}</a></td>
             <td><a class="micro button" href="${sector/url}/@@manage-ldap-users" i18n:translate="nav_ldapmanagement">Manage access</a></td>
             <td class="actions">
@@ -38,7 +55,14 @@
                     <a href="${sector/url}/@@edit" class="micro floatAfter function button" i18n:translate="button_edit">Edit</a>
                 </form>
             </td>
-        </tr>
+          </tr>
+          <tr tal:condition="sector/managers"
+              class="managers ${repeat/sector/even}">
+            <td colspan="3"><em>Managers</em>:
+              ${python:', '.join(sector['managers'])}
+            </td>
+          </tr>
+        </tal:sectors>
         </tbody>
     </table>
 

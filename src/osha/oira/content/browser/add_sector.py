@@ -9,7 +9,8 @@ class AddForm(DefaultAddForm):
         ''' Adds a referer to be used when a cancel button is pressed
         '''
         super(AddForm, self).updateFields()
-        self.fields = self.fields.omit('login', 'password', 'locked')
+        self.fields = self.fields.omit(
+            'login', 'password', 'locked', 'contact_name', 'contact_email')
 
 
 class AddView(DefaultAddView):

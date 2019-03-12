@@ -13,7 +13,7 @@ class OSHASettings(Settings):
     grok.template('settings')
 
     def extractData(self):
-        unwanted_fields = ('locked', 'password')
+        unwanted_fields = ('locked', 'password', 'contact_name', 'contact_email')
         self.fields = self.fields.omit(*unwanted_fields)
         for key in unwanted_fields:
             if key in self.widgets:

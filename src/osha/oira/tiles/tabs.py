@@ -37,7 +37,7 @@ class OiRASiteRootTabsTile(SiteRootTabsTile):
                 self.tabs.remove(r)
             elif r.get('id') == 'usermgmt':
                 r['title'] = _(
-                    "nav_countrymanagement", default=u"Country management")
+                    "nav_sectormanagement", default=u"Sector management")
         if (
             self.is_country_manager() and (is_sector or is_country)
         ):

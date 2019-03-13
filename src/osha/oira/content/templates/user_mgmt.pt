@@ -15,60 +15,54 @@
     </div>
     <metal:content fill-slot="content"
         tal:define="managers view/managers">
+    <style type="text/css">
+tr.even {
+  background-color: #f0f0f0;
+}
+tr.sector td {
+padding-top: 1em;
+padding-left: 0.5em;
+}
+tr.sector.simple td {
+  padding-bottom: 1em;
+}
+tr.managers td {
+padding-left: 2em;
+padding-bottom: 1em;
+}
+    </style>
 
       <h2 i18n:translate="header_sectors">Sectors</h2>
 
       <p class="message notice" tal:condition="not:view/sectors" i18n:translate="country_no_sectors">There are no sectors for this country.</p>
 
     <table tal:condition="view/sectors">
-        <thead>
-            <tr>
-                <th i18n:translate="">Sector</th>
-                <th i18n:translate="">Email</th>
-                <th i18n:translate="">(Login)</th>
-                <th class="actions">&nbsp;</th>
-            </tr>
-        </thead>
         <tbody>
-        <tr tal:repeat="sector view/sectors">
+        <tal:sectors repeat="sector view/sectors">
+          <tr class="sector ${repeat/sector/even} ${python:'simple' if not sector.get('managers', None) else None}">
             <td><a href="${sector/url}">${sector/title}</a></td>
-            <td>${sector/contact_email}</td>
-            <td>${sector/login}</td>
+            <td><a class="micro button" href="${sector/url}/@@manage-ldap-users" i18n:translate="nav_ldapmanagement_sector">Manage sector access</a></td>
             <td class="actions">
                 <form method="post" action="${sector/url}/@@lock">
                     <tal:csrf replace="structure context/@@authenticator/authenticator"/>
                     <a href="${sector/url}/@@edit" class="micro floatAfter function button" i18n:translate="button_edit">Edit</a>
                 </form>
             </td>
-        </tr>
+          </tr>
+          <tr tal:condition="sector/managers"
+              class="managers ${repeat/sector/even}">
+            <td colspan="3"><em>Managers</em>:
+              ${python:', '.join(sector['managers'])}
+            </td>
+          </tr>
+        </tal:sectors>
         </tbody>
     </table>
 
     <h2 i18n:translate="header_country_managers">Country managers</h2>
     <p class="message notice"
-        tal:condition="not:managers"
-        i18n:translate="country_no_managers">There are no country managers for this country.</p>
+       i18n:translate="notice_assign_country_manager">To view and assign country manager permissions, please use the <a i18n:name="ldap_tab_link" href="${context/absolute_url}/@@manage-ldap-users" i18n:translate="nav_ldapmanagement_country">Manage country access</a> tab.</p>
 
-    <p class="message notice"
-       tal:condition="managers"
-      >The country managers on display here are only shown for history reasons. To assign country manager permissions, please use the <a href="${context/absolute_url}/@@manage-ldap-users">LDAP tab.</a></p>
-
-    <table tal:condition="managers">
-        <thead>
-            <tr>
-                <th i18n:translate="">Name</th>
-                <th i18n:translate="">Email</th>
-                <th>(Login)</th>
-            </tr>
-        </thead>
-    <tbody>
-          <tr tal:repeat="manager view/managers">
-            <td>${manager/title}</td>
-            <td>${manager/contact_email}</td>
-            <td>${manager/login}</td>
-          </tr>
-        </tbody>
-      </table>
     </metal:content>
   </body>
 </html>

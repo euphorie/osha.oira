@@ -4,8 +4,8 @@ Changelog
 5.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Translation fixes EL
+- CMS UI updates for the user / access management, using LDAP
 
 5.0.6 (2019-03-04)
 ------------------

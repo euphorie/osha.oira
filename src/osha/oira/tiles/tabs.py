@@ -30,6 +30,8 @@ class OiRASiteRootTabsTile(SiteRootTabsTile):
 
     def update(self):
         super(OiRASiteRootTabsTile, self).update()
+        is_country = self.get_current_country() == self.context
+        is_sector = self.get_current_sector() == self.context
         for r in self.tabs:
             if r.get('id') == 'help':
                 self.tabs.remove(r)
@@ -37,15 +39,19 @@ class OiRASiteRootTabsTile(SiteRootTabsTile):
                 r['title'] = _(
                     "nav_countrymanagement", default=u"Country management")
         if (
-            self.is_country_manager()
-            and (
-                self.get_current_country() == self.context
-                or self.get_current_sector() == self.context
-            )
+            self.is_country_manager() and (is_sector or is_country)
         ):
+            if is_sector:
+                title = _(
+                    "nav_ldapmanagement_sector",
+                    default=u"Manage sector access")
+            else:
+                title = _(
+                    "nav_ldapmanagement_country",
+                    default=u"Manage country access")
             custom_tab = {
                 "id": "ldapmgmt",
-                "title": _("nav_ldapmanagement", default=u"Manage access"),
+                "title": title,
                 "url": '%s/@@manage-ldap-users' % self.context.absolute_url(),
                 "class": "current" if self.get_current_url() == "ldapmgmt" else None,  # noqa: E501
             }

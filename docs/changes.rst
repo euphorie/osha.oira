@@ -4,8 +4,7 @@ Changelog
 5.0.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Translation fixes in IT and FR
 
 5.0.7 (2019-03-13)
 ------------------

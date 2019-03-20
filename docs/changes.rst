@@ -1,11 +1,16 @@
 Changelog
 =========
 
-5.0.8 (unreleased)
+5.0.9 (unreleased)
 ------------------
 
 - Nothing changed yet.
 
+
+5.0.8 (2019-03-18)
+------------------
+
+- Translation fixes in IT and FR
 
 5.0.7 (2019-03-13)
 ------------------

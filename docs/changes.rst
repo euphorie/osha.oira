@@ -4,8 +4,7 @@ Changelog
 5.0.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix link to reset password form
 
 5.0.8 (2019-03-18)
 ------------------

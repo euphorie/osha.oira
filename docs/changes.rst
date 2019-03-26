@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.0.9 (unreleased)
+5.0.9 (2019-03-26)
 ------------------
 
 - Fix link to reset password form

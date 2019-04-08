@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.0.10 (unreleased)
+5.0.10 (2019-04-08)
 -------------------
 
 - Updated translations (PT, IS)

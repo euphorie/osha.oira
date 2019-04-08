@@ -4,8 +4,7 @@ Changelog
 5.0.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Updated translations (PT, IS)
 
 5.0.9 (2019-03-26)
 ------------------

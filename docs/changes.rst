@@ -5,6 +5,8 @@ Changelog
 -------------------
 
 - Change label "Login" to "E-mail address", Refs MPL-484
+- Follow change on Euphorie: always allow setting of evaluation algorithm when
+  creating a new Survey
 
 5.0.10 (2019-04-08)
 -------------------

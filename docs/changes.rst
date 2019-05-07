@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.0.11 (unreleased)
+5.0.11 (2019-05-07)
 -------------------
 
 - Change label "Login" to "E-mail address", Refs MPL-484

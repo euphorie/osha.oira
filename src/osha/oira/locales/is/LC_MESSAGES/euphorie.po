@@ -1141,10 +1141,6 @@ msgstr ""
 msgid "Submit"
 msgstr "Leggja fyrir"
 
-#: euphorie/content/module.py:228 euphorie/deployment/tiles/addbar.py:19
-msgid "Submodule"
-msgstr "Undirflokkur"
-
 #: euphorie/content/templates/profilequestion_add.pt:46
 msgid ""
 "Such questions are asked BEFORE the end-user starts the risk identification "
@@ -2767,11 +2763,6 @@ msgstr ""
 msgid "header_legal_references"
 msgstr "Tilvísanir í önnur gögn s.s. lög, reglur og önnur opinber gögn"
 
-#. Default: "Legend"
-#: euphorie/deployment/tiles/templates/versions.pt:76
-msgid "header_legend"
-msgstr ""
-
 #. Default: "Licenses"
 #: euphorie/client/templates/about.pt:168
 msgid "header_licenses"
@@ -2896,12 +2887,6 @@ msgstr "Birta OiRA verkfærið "
 #: euphorie/client/templates/status.pt:40
 msgid "header_questions_answered"
 msgstr "Hve mörgum spurningum var svarað í hverjum flokki"
-
-#. Default: "Register"
-#: euphorie/client/browser/templates/register.pt:74
-#: euphorie/client/templates/shell.pt:114
-msgid "header_register"
-msgstr "Stofna aðgang"
 
 #. Default: "Reporting"
 #: osha/oira/client/templates/report.pt:21
@@ -3772,12 +3757,6 @@ msgstr "Hér geturðu haft umsjón með gögnum fyrir ${client}."
 msgid "intro_documenation_client"
 msgstr "biðlari á netinu "
 
-#. Default: "You can specify how the risks priority is evaluated. For more
-#. details see the online manual."
-#: euphorie/content/risk.py:448
-msgid "intro_evaluation"
-msgstr ""
-
 #. Default: "You can print the ${list-of-risks}."
 #: euphorie/client/templates/identification.pt:20
 msgid "intro_identification"
@@ -3811,17 +3790,6 @@ msgid "intro_oira_tool"
 msgstr ""
 "Þetta tæki til áhættumats er aðallega ætlað litlum fyritækjum (með færri en "
 "10 starfsmenn) og meðalstórum fyrirtækjum (með færri en 50 starfsmenn)."
-
-#. Default: "Are you sure you want to create a preview of this OiRA Tool? You
-#. can give the URL for the preview to others so they can test the OiRA Tool.
-#. To access the preview a standard OiRA client login is required."
-#: euphorie/client/templates/preview.pt:17
-msgid "intro_preview"
-msgstr ""
-"Ertu viss um að þú viljir búa til prufueintak af þessu OiRA verkfæri? Þú "
-"getur látið aðra fá vefslóð (URL) verkfærisins þannig að þeir geti prófað "
-"það. Nauðsynlegt er að skrá sig inn með venjulegri OiRA innskráningu til að "
-"fá aðgang að forskoðuninni."
 
 #. Default: "It is possible for you to print out the contents of the tool to
 #. enable you to look for the information at the relevant workplace (by
@@ -4085,31 +4053,6 @@ msgstr ""
 #. Default: "Current / Published"
 #: euphorie/deployment/tiles/templates/versions.pt:49
 msgid "label_current_published"
-msgstr ""
-
-#. Default: "Default severity"
-#: euphorie/content/templates/risk_view.pt:68
-msgid "label_default_effect"
-msgstr "Gefnar afleiðingar"
-
-#. Default: "Default frequency"
-#: euphorie/content/risk.py:359 euphorie/content/templates/risk_view.pt:59
-msgid "label_default_frequency"
-msgstr ""
-
-#. Default: "Default priority"
-#: euphorie/content/risk.py:202 euphorie/content/templates/risk_view.pt:51
-msgid "label_default_priority"
-msgstr "sjálfgefin áhættuflokkur"
-
-#. Default: "Default probability"
-#: euphorie/content/risk.py:385 euphorie/content/templates/risk_view.pt:64
-msgid "label_default_probability"
-msgstr ""
-
-#. Default: "Default severity"
-#: euphorie/content/risk.py:337 euphorie/content/templates/risk_view.pt:57
-msgid "label_default_severity"
 msgstr ""
 
 #. Default: "Delete"
@@ -4530,11 +4473,6 @@ msgstr "Mundir þú mæla með OiRA verkfærinu fyrir önnur sambærileg fyrirt�
 #: euphorie/client/templates/report_company.pt:54
 msgid "label_referer"
 msgstr "Eftir hvaða leiðum fréttir þú af verkfærinu?"
-
-#. Default: "register"
-#: osha/oira/client/templates/login.pt:24
-msgid "label_register"
-msgstr "Stofna aðgang"
 
 #. Default: "It's free."
 #: euphorie/client/browser/templates/register.pt:21
@@ -5175,16 +5113,6 @@ msgstr ""
 msgid "missing_data"
 msgstr ""
 
-#. Default: "This ${number} is mandatory."
-#: euphorie/content/templates/module_view.pt:24
-msgid "module_mandatory"
-msgstr "Ekki er hægt að sleppa þessum ${number}."
-
-#. Default: "This ${number} is optional."
-#: euphorie/content/templates/module_view.pt:28
-msgid "module_optional"
-msgstr "Þessi ${number} er valkvæð. "
-
 #. Default: "Documents"
 #: euphorie/deployment/tiles/tabs.py:74
 msgid "nav_documents"
@@ -5681,16 +5609,6 @@ msgstr "Lágt"
 msgid "risk_priority_medium"
 msgstr "Meðal"
 
-#. Default: "Show '${na}'"
-#: euphorie/content/templates/risk_view.pt:43
-msgid "risk_show_na"
-msgstr ""
-
-#. Default: "not applicable"
-#: euphorie/content/templates/risk_view.pt:43
-msgid "risk_show_na_na"
-msgstr ""
-
 #. Default: "Measure ${number}"
 #: euphorie/content/templates/risk_view.pt:86
 msgid "risk_solution_header"
@@ -5814,14 +5732,6 @@ msgstr ""
 #: osha/oira/content/templates/surveygroup_add.pt:23
 msgid "survey_source_scratch"
 msgstr "Búa til nýtt OiRA verkfæri frá grunni"
-
-#. Default: "Want to try OiRA? You may ${tryout_link} or ${register_link} to
-#. start for real."
-#: osha/oira/client/templates/login.pt:24
-msgid "teaser_try_oira"
-msgstr ""
-"Viltu prófa OiRA? Þú getur ${tryout_link} eða byrjað ${register_link} á "
-"áhættumatinu."
 
 #. Default: "The terms and conditions have changed since your last visit.
 #. Please read the new terms and conditions carefully before proceding."

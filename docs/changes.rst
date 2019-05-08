@@ -1,11 +1,28 @@
 Changelog
 =========
 
-5.0.9 (unreleased)
-------------------
+5.0.12 (unreleased)
+-------------------
 
 - Nothing changed yet.
 
+
+5.0.11 (2019-05-07)
+-------------------
+
+- Change label "Login" to "E-mail address", Refs MPL-484
+- Follow change on Euphorie: always allow setting of evaluation algorithm when
+  creating a new Survey
+
+5.0.10 (2019-04-08)
+-------------------
+
+- Updated translations (PT, IS)
+
+5.0.9 (2019-03-26)
+------------------
+
+- Fix link to reset password form
 
 5.0.8 (2019-03-18)
 ------------------

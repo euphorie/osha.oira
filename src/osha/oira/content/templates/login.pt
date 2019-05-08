@@ -21,7 +21,7 @@
           <legend i18n:translate="legend_credentials">Credentials</legend>
           <input type="hidden" name="came_from" value="${view/came_from}"/>
           <input type="hidden" name="login_attempt" value="1"/>
-          <label><tal:span i18n:translate="label_login">Login</tal:span>
+          <label><tal:span i18n:translate="label_email">E-mail address</tal:span>
             <input class="autofocus" id="login_name" name="__ac_name" type="text" value="${request/form/__ac_name|nothing}"/></label>
           <label><tal:span i18n:translate="label_password">Password</tal:span>
             <input class="autofocus" id="login_password" name="__ac_password" type="password"/></label>

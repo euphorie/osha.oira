@@ -36,9 +36,9 @@
           <li tal:repeat="region countries" class="${region/id}"><a href="${region/url}">${region/title}</a></li>
         </ul>
         <div tal:condition="python:len(library_info)==1" class="library_info">
-          <p class="legend">Check out <a tal:define="item python:library_info[0]" tal:attributes="href item/url; title item/title">the Library of tools and modules</a>.</p>
+          <p class="legend" i18n:translate="message_goto_library">Check out <a tal:define="item python:library_info[0]" tal:attributes="href item/url; title item/title" i18n:name="library" i18n:translate="label_library">the Library of tools and modules</a>.</p>
 
-          <p class="discrete">To copy content from the Library, go to your own tool and use the "Library" button.</p>
+          <p class="discrete" i18n:translate="explanation_library">To copy content from the Library, go to your own tool and use the "Library" button.</p>
 
         </div>
       </div>

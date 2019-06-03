@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.0.12 (unreleased)
+5.0.12 (2019-06-03)
 -------------------
 
 - Try to avoid a login problem in the clieint when acl_users is cached

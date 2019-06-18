@@ -4,8 +4,7 @@ Changelog
 5.0.13 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Update IT translations
 
 5.0.12 (2019-06-03)
 -------------------

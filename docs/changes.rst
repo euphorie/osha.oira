@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.0.13 (unreleased)
+5.0.13 (2019-06-18)
 -------------------
 
 - Update IT translations

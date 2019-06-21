@@ -1,11 +1,21 @@
 Changelog
 =========
 
-5.0.12 (unreleased)
+5.0.14 (unreleased)
 -------------------
 
 - Nothing changed yet.
 
+
+5.0.13 (2019-06-18)
+-------------------
+
+- Update IT translations
+
+5.0.12 (2019-06-03)
+-------------------
+
+- Try to avoid a login problem in the clieint when acl_users is cached
 
 5.0.11 (2019-05-07)
 -------------------

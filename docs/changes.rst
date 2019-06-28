@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.0.0 (unreleased)
+6.0.0 (2019-06-28)
 ------------------
 
 New major release which depends on Euphorie >= 11.0.0

@@ -1,11 +1,11 @@
 Changelog
 =========
 
-5.0.14 (unreleased)
--------------------
+6.0.0 (unreleased)
+------------------
 
-- Nothing changed yet.
-
+New major release which depends on Euphorie >= 11.0.0
+with updated UI
 
 5.0.13 (2019-06-18)
 -------------------

@@ -2668,17 +2668,6 @@ msgstr "Minnst einu sinni á dag"
 msgid "frequency_regularly"
 msgstr "Reglulega"
 
-#. Default: "You are currently evaluating OiRA as a guest user. You will not
-#. be able to save your progress or download any reports. To save your work,
-#. please sign in or register by clicking the \"Sign in\" link at the top
-#. right of the page."
-#: euphorie/client/templates/tooltips.pt:3
-msgid "guest_login_warning"
-msgstr ""
-"Þú ert að prófa OiRA verkfærið. Þú getur ekki vistað áhættumatið né sótt "
-"skýrslur. Til að geta vistað áhættumat þarf að skrá sig inn eða stofna "
-"aðgang með því að smella á tengilinn \"Innskráning\" efst til hægri."
-
 #. Default: "You are about to print the report... please complete the optional
 #. form and then proceed."
 #: euphorie/client/templates/report_company.pt:18
@@ -3730,14 +3719,6 @@ msgstr ""
 #: osha/oira/manual_translations.py:30
 msgid "info_select_session"
 msgstr "Veldu áhættumat til að ljúka eða endurskoða eða ${start_session}."
-
-#. Default: "This is a test session. ${link_sign_in} to save your data."
-#: euphorie/client/templates/plain.pt:195
-#: euphorie/client/templates/shell.pt:124
-msgid "info_testsession"
-msgstr ""
-"Hér er hægt að prófa verkfærið. Það verður að ${link_sign_in} til að gera "
-"áhættumat og vista það."
 
 #. Default: "The form will allow you to create a new OiRA Tool revision."
 #: euphorie/content/templates/survey_add.pt:11
@@ -4872,12 +4853,6 @@ msgstr ""
 #: euphorie/client/browser/templates/new-session-test.pt:39
 msgid "limitations"
 msgstr "galla"
-
-#. Default: "Sign in"
-#: euphorie/client/templates/plain.pt:195
-#: euphorie/client/templates/shell.pt:124
-msgid "link_sign_in"
-msgstr "stofna aðgang"
 
 #. Default: "Start a new session"
 #: euphorie/client/browser/templates/session-browser-sidebar.pt:32

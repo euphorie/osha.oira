@@ -14,9 +14,9 @@
 
 <body>
 <metal:slot fill-slot="content">
+  <div id="content-pane">
   <tal:block replace="tile:statusmessages"/>
-
-  <article>
+  <article class="pat-rich">
     <h1 i18n:translate="title_privacy">OiRA Privacy policy</h1>
 
     <tal:if condition="not:is_anonymous">
@@ -102,6 +102,7 @@
       </fieldset>
     </form>
 </article>
+</div>
 
 <script type="text/javascript">
 // <![CDATA[

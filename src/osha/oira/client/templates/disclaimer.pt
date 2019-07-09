@@ -11,6 +11,8 @@
 
 <body>
 <metal:slot fill-slot="content">
+  <div id="content-pane">
+    <article class="pat-rich">
     <h1 i18n:translate="header_disclaimer">Disclaimer of Liability</h1>
 
     <p i18n:translate="disclaimer_other_websites">
@@ -57,7 +59,8 @@
         at any time, to be in possession of a printed, accurate and up-dated risk
         assessment.
     </p>
-
+</article>
+</div>
 
   </metal:slot>
   </body>

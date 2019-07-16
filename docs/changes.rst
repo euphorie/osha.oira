@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.0.1 (unreleased)
+6.0.1 (2019-07-16)
 ------------------
 
 - Translation updates

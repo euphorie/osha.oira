@@ -1,5 +1,6 @@
 # coding=utf-8
 from euphorie.client import survey
+from euphorie.client.browser import session
 from five import grok
 from osha.oira.client import interfaces
 
@@ -34,7 +35,7 @@ class OSHASurveyPublishTraverser(survey.SurveyPublishTraverser):
     )
 
 
-class OSHAStatusPrint(survey.Status):
+class OSHAStatusPrint(session.Status):
     """ Override the 'status' page to provide our own template.
     """
     grok.template("status_print")

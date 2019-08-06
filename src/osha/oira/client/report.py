@@ -1,10 +1,8 @@
 # coding=utf-8
-from AccessControl import getSecurityManager
 from Acquisition import aq_inner
 from collections import OrderedDict
 from cStringIO import StringIO
 from datetime import datetime
-from euphorie.client import config
 from euphorie.client import model
 from euphorie.client import report
 from euphorie.client import survey
@@ -38,39 +36,11 @@ from zExceptions import NotFound
 from zope.i18n import translate
 import htmllaundry
 import logging
-import urllib
 
 
 log = logging.getLogger(__name__)
 
 grok.templatedir("templates")
-
-
-class ReportView(report.ReportView):
-    """ Override so that skipped or filled in company forms are not shown
-    again. For #4436.
-    """
-    grok.layer(IOSHAReportPhaseSkinLayer)
-
-    def update(self):
-        self.session = SessionManager.session
-
-        if self.request.environ["REQUEST_METHOD"] == "POST":
-            self.session.report_comment = self.request.form.get("comment")
-
-            url = "%s/report/company" % self.request.survey.absolute_url()
-            if getattr(self.session, 'company', None) is not None and \
-                    getattr(self.session.company, 'country') is not None:
-                url = "%s/report/view" % self.request.survey.absolute_url()
-
-            user = getSecurityManager().getUser()
-            if getattr(user, 'account_type', None) == config.GUEST_ACCOUNT:
-                url = "%s/@@register?report_blurb=1&came_from=%s" % (
-                    self.request.survey.absolute_url(),
-                    urllib.quote(url, '')
-                )
-            self.request.response.redirect(url)
-            return
 
 
 COLUMN_ORDER = [

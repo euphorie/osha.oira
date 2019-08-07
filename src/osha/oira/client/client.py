@@ -1,7 +1,6 @@
 # coding=utf-8
 from ..interfaces import IProductLayer
 from .interfaces import IOSHAClientSkinLayer
-from euphorie.client.api.entry import access_api
 from euphorie.client.client import IClient
 from five import grok
 from zope.component import adapts
@@ -38,8 +37,6 @@ class ClientPublishTraverser(DefaultPublishTraverse):
         from euphorie.client.utils import setRequest
         setRequest(request)
         request.client = self.context
-        if name == 'api':
-            return access_api(request).__of__(self.context)
 
         ifaces = [iface for iface in directlyProvidedBy(request)
                   if not IBrowserSkinType.providedBy(iface)]

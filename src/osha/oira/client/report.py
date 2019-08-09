@@ -5,7 +5,7 @@ from five import grok
 from openpyxl.cell import get_column_letter
 from openpyxl.workbook import Workbook
 from osha.oira import _
-from osha.oira.client.interfaces import IOSHAReportPhaseSkinLayer
+from osha.oira.client.interfaces import IOSHAClientSkinLayer
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.i18n import translate
@@ -34,7 +34,7 @@ COLUMN_ORDER = [
 
 
 class ActionPlanTimeline(report.ActionPlanTimeline):
-    grok.layer(IOSHAReportPhaseSkinLayer)
+    grok.layer(IOSHAClientSkinLayer)
 
     combine_keys = ["prevention_plan", "requirements"]
     columns = sorted(
@@ -105,7 +105,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             column = 0
 
             if not getattr(risk, "is_custom_risk", None):
-                zodb_node = self.request.survey.restrictedTraverse(
+                zodb_node = self.context.restrictedTraverse(
                     risk.zodb_path.split("/")
                 )
             else:

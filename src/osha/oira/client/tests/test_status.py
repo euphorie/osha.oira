@@ -2,7 +2,7 @@ from euphorie.client import model
 from euphorie.client import utils
 from euphorie.ghost import PathGhost
 from osha.oira.client import interfaces
-from euphorie.client import interfaces as euphorie_interfaces
+from osha.oira.client.interfaces import IOSHAClientSkinLayer
 from osha.oira.tests.base import OiRAFunctionalTestCase
 from z3c.saconfig import Session
 from zope import component
@@ -186,7 +186,7 @@ class SurveySessionTests(OiRAFunctionalTestCase):
     def testRisksOverviewView(self):
         interface.alsoProvides(
             self.request,
-            euphorie_interfaces.IReportPhaseSkinLayer
+            IOSHAClientSkinLayer
         )
         view = component.getMultiAdapter(
             (PathGhost('casper'), self.request), name="risks_overview")

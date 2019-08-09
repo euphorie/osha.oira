@@ -8,6 +8,8 @@ tests_require = [
         'Euphorie [tests]',
         'mock',
         'collective.testcaselayer',
+        'pas.plugins.ldap',
+        'node.ext.ldap',
       ]
 
 setup(name='osha.oira',

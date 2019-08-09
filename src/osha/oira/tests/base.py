@@ -5,7 +5,7 @@ from z3c.appconfig.interfaces import IAppConfig
 from Testing.ZopeTestCase import installProduct
 from collective.testcaselayer import ptc
 from Products.PloneTestCase import PloneTestCase
-from euphorie.deployment.tests.functional import EuphorieFunctionalTestCase
+from euphorie.testing import EuphorieFunctionalTestCase
 from euphorie.client import model
 
 PloneTestCase.setupPloneSite()
@@ -22,7 +22,9 @@ class OiRATestLayer(ptc.BasePTCLayer):
         from euphorie.client import tests
         import euphorie.deployment
         import osha.oira
+        import pas.plugins.ldap
 
+        self.loadZCML("configure.zcml", package=pas.plugins.ldap)
         self.loadZCML("configure.zcml", package=euphorie.deployment)
         self.loadZCML("overrides.zcml", package=euphorie.deployment)
         self.loadZCML("configure.zcml", package=tests)
@@ -32,6 +34,7 @@ class OiRATestLayer(ptc.BasePTCLayer):
         installPackage("collective.indexing")
         installPackage("plone.app.dexterity")
         installPackage("plone.app.folder")
+        installPackage("pas.plugins.ldap")
         installPackage("euphorie.content")
         installPackage("euphorie.client")
         installPackage("euphorie.deployment")

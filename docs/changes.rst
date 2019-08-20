@@ -4,8 +4,7 @@ Changelog
 6.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Translation updates
 
 6.0.1 (2019-07-16)
 ------------------

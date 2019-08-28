@@ -1,7 +1,7 @@
 # coding=utf-8
 from Products.Five.testbrowser import Browser
 from euphorie.client import model
-from euphorie.client.interfaces import IReportPhaseSkinLayer
+from osha.oira.client.interfaces import IOSHAClientSkinLayer
 from euphorie.client.tests.test_model import createSurvey
 from euphorie.ghost import PathGhost
 from osha.oira.client import utils
@@ -491,7 +491,7 @@ class RiskQueryTests(OiRATestCase):
     def testUnactionedNodes(self):
         self.createData()
 
-        interface.alsoProvides(self.portal.REQUEST, IReportPhaseSkinLayer)
+        interface.alsoProvides(self.portal.REQUEST, IOSHAClientSkinLayer)
         view = component.getMultiAdapter(
             (PathGhost('dummy'), self.portal.REQUEST), name="download")
 

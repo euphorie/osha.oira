@@ -14,6 +14,17 @@
       "<tal:span i18n:name="title">${here/title}</tal:span>"
     </metal:title>
     <metal:content fill-slot="content">
+    <script type="text/javascript">
+    function check_role_change() {
+        var answer = confirm("Are you sure that you want to disable this Country Manager? This will remove ALL editing access!");
+        if (answer){
+            return true;
+        }
+        return false;
+    }
+    </script>
+
+
       <h2 i18n:translate="">Existing users with local role <em tal:condition="python:context.portal_type=='euphorie.country'">Country Manager</em><em tal:condition="python:context.portal_type=='euphorie.sector'">Sector Manager</em> enabled</h2>
       <tal:existing-roles define="
                             userids view/local_roles_userids;
@@ -67,8 +78,10 @@
                                 name="ldap_action"
                                 type="submit"
                                 value="revoke"
+                                id="revoke_role"
                                 tal:condition="has_managed_roles"
                                 i18n:translate=""
+                                onClick="${python:context.portal_type=='euphorie.country' and 'return check_role_change()' or None}"
                         >Revoke Roles</button>
                       </tal:button>
                       <tal:csrf replace="structure context/@@authenticator/authenticator" />

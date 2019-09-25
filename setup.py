@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import monkeypatch_setup
 import os
 
-version = '6.0.3.dev0'
+version = '6.0.3'
 
 tests_require = [
         'Euphorie [tests]',

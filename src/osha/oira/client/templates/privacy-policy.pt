@@ -104,29 +104,6 @@
 </article>
 </div>
 
-<script type="text/javascript">
-// <![CDATA[
-    function updateButton() {
-        var $conditions = $(this),
-            button = $("#agree-button")[0],
-            at_bottom;
-
-        if (!button.disabled) {
-            return;
-        }
-
-        at_bottom=(this.scrollHeight-$conditions.scrollTop())<=$conditions.innerHeight();
-        if (at_bottom) {
-            button.disabled=false;
-        }
-    }
-
-    $(document).ready(function() {
-        $("#conditions").scroll(updateButton);
-        $("#agree-button")[0].disabled=true;
-    });
-// ]]>
-</script>
 
 
   <tal:block replace="tile:client-analytics"/>

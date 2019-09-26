@@ -4,8 +4,7 @@ Changelog
 6.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- The "Agree" button on the terms and conditions page is always enabled
 
 6.0.3 (2019-09-25)
 ------------------

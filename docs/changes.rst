@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.0.4 (unreleased)
+6.0.4 (2019-09-26)
 ------------------
 
 - The "Agree" button on the terms and conditions page is always enabled

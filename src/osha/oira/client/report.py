@@ -229,7 +229,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                     or t[-1].prevention_plan is not None
                     or t[-1].requirements is not None
                     or t[-1].budget is not None
-                    or [-1].action_plan is not None
+                    or t[-1].action_plan is not None
                 )
                 and (t[1].identification == "no" or t[1].risk_type == "top5")
             )

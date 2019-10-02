@@ -4,8 +4,7 @@ Changelog
 6.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix Excel report
 
 6.0.4 (2019-09-26)
 ------------------

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.0.5 (unreleased)
+6.0.5 (2019-10-02)
 ------------------
 
 - Fix Excel report

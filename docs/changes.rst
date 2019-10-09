@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.0.6 (unreleased)
+6.0.6 (2019-10-09)
 ------------------
 
 - IT translation changes

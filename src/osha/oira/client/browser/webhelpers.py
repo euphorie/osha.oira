@@ -2,6 +2,7 @@
 from euphorie.client.browser.webhelpers import Appendix
 from euphorie.client.browser.webhelpers import WebHelpers
 from logging import getLogger
+from plone.namedfile.interfaces import INamedBlobImage
 from plone.memoize.instance import memoize
 
 log = getLogger(__name__)
@@ -19,6 +20,14 @@ class OSHAWebHelpers(WebHelpers):
 }
 """
         return css
+
+    def is_image_small(self, context, fname="image", usecase="module"):
+        # import pdb; pdb.set_trace()
+        image = getattr(context, fname, None)
+        if image and INamedBlobImage.providedBy(image):
+            x, y = image.getImageSize()
+            if x < 1000 or y < 430:
+                return True
 
 
 class OSHAAppendix(Appendix):

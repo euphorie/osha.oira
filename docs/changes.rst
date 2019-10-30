@@ -4,8 +4,8 @@ Changelog
 6.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Overwrite webhelpers and module views, so that we can support both
+  old style images and new style. MOI-274
 
 6.0.6 (2019-10-09)
 ------------------

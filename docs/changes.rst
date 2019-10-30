@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.0.7 (unreleased)
+6.0.7 (2019-10-30)
 ------------------
 
 - Overwrite webhelpers and module views, so that we can support both

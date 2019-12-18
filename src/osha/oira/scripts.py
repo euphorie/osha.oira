@@ -137,20 +137,18 @@ You are receiving this notification since you are the sector manager for
             country_tools = filter(
                 lambda x: x.startswith(country_path), outdated_tool_paths)
             country = self.context.unrestrictedTraverse(country_path)
+            view = country.restrictedTraverse('manage-ldap-users', None)
             managers = [
-                i for i in country.values() if ICountryManager.providedBy(i)]
+                    userid for userid in view.local_roles_userids()
+                    if view.get_user(userid)] if view else []
             for manager in managers:
-                contact_name = manager.Title() or ''
-                contact_email = manager.contact_email
-                if not contact_email:
-                    continue
                 intro = u"""
 You are receiving this notification since you are the country manager for
 "{0}". """.format(safe_unicode(country.Title()))
 
                 self.send_notification(
-                    to_name=contact_name,
-                    to_address=contact_email,
+                    to_name="",
+                    to_address=manager,
                     tool_paths=country_tools,
                     intro=intro,
                 )
@@ -178,7 +176,10 @@ You are receiving this notification since you are the country manager for
             return
         to_name = safe_unicode(to_name)
         mailhost = getToolByName(self.context, "MailHost")
-        recipient = u'{} <{}>'.format(to_name, to_address)
+        if to_name:
+            recipient = u'{} <{}>'.format(to_name, to_address)
+        else:
+            recipient = to_address
         subject = u'OiRA: Notification on outdated tools'
         portal_id = self.context.getId()
         portal_url = self.context.absolute_url()
@@ -223,7 +224,7 @@ Please check if they are still up to date and republish them.
 
 Best regards,
 OiRA
-'''.format(name=to_name, tools=tool_details, period=period, intro=intro)
+'''.format(name=to_name or to_address, tools=tool_details, period=period, intro=intro)
         mail = CreateEmailTo(
             self.email_from_name,
             self.email_from_address,

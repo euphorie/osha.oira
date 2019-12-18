@@ -920,7 +920,7 @@
 
 
       <tal:not_small condition="not:is_image_small">
-      <div class="image-collage pat-gallery count-${view/number_images}"
+      <div class="image-collage pat-gallery count-${view/number_images} float-before"
            tal:define="
              images risk/@@images;
            "
@@ -930,6 +930,7 @@
              thumb python:images.scale('image', scale='large', direction='thumbnail');
              large python:images.scale('image', scale='training', direction='thumbnail');
            "
+           class="image"
            href="${large/url|nothing}"
            tal:condition="large"
            title="${risk/caption|nothing}"
@@ -944,6 +945,7 @@
              thumb python:images.scale('image2', scale='large', direction='thumbnail');
              large python:images.scale('image2', scale='training', direction='thumbnail');
            "
+           class="image"
            href="${large/url|nothing}"
            tal:condition="large"
            title="${risk/caption|nothing}"
@@ -958,6 +960,7 @@
              thumb python:images.scale('image3', scale='large', direction='thumbnail');
              large python:images.scale('image3', scale='training', direction='thumbnail');
            "
+           class="image"
            href="${large/url|nothing}"
            tal:condition="large"
            title="${risk/caption|nothing}"
@@ -972,6 +975,7 @@
              thumb python:images.scale('image4', scale='large', direction='thumbnail');
              large python:images.scale('image4', scale='training', direction='thumbnail');
            "
+           class="image"
            href="${large/url|nothing}"
            tal:condition="large"
            title="${risk/caption|nothing}"

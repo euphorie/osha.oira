@@ -9,6 +9,7 @@ from five import grok
 from plone.dexterity.utils import safe_unicode
 from slc.zopescript.script import ConsoleScript
 from zope.component import getMultiAdapter
+from plone import api
 
 import logging
 
@@ -48,6 +49,18 @@ class OutdatedToolsView(grok.View):
 
     def __call__(self):
         self.render(self.context)
+
+    @property
+    def email_from_name(self):
+        return api.portal.get_registry_record(
+            'plone.email_from_name',
+        )
+
+    @property
+    def email_from_address(self):
+        return api.portal.get_registry_record(
+            'plone.email_from_address',
+        )
 
     def render(self, portal):
         log.info('Called outdated-tools-view')
@@ -212,8 +225,8 @@ Best regards,
 OiRA
 '''.format(name=to_name, tools=tool_details, period=period, intro=intro)
         mail = CreateEmailTo(
-            self.context.email_from_name,
-            self.context.email_from_address,
+            self.email_from_name,
+            self.email_from_address,
             recipient,
             subject,
             body,

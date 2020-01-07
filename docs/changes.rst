@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.0.8 (unreleased)
+6.0.8 (2020-01-07)
 ------------------
 
 - Fix outdated-tools-view to fetch sender email data the Plone 5.1 way

@@ -4,8 +4,7 @@ Changelog
 6.0.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Update FR translations
 
 6.0.8 (2020-01-07)
 ------------------

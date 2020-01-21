@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.0.9 (unreleased)
+6.0.9 (2020-01-21)
 ------------------
 
 - Update FR translations

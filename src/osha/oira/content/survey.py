@@ -11,6 +11,7 @@ from euphorie.content import survey
 from euphorie.content.interfaces import IQuestionContainer
 from euphorie.content.profilequestion import IProfileQuestion
 from euphorie.content.risk import IRisk
+from euphorie.content.solution import ISolution
 from euphorie.content.survey import get_tool_type
 from euphorie.content.utils import IToolTypesInfo
 from five import grok
@@ -335,6 +336,30 @@ class ContentsOfSurvey(IdentificationReportDocxView):
                 i += 1
                 number[depth - 1] = str(i)
                 self.AddToTree(child, depth, number)
+        elif IRisk.providedBy(node):
+            i = 0
+            depth += 1
+            number.append("0")
+            for child in node.values():
+                if not ISolution.providedBy(child):
+                    continue
+                i += 1
+                number[depth - 1] = str(i)
+                description = u"<ul>"
+                for field in ("action_plan", "prevention_plan", "requirements"):
+                    value = getattr(child, field, "") or ""
+                    if value:
+                        description = u"{0}<li>{1}</li>".format(description, value)
+                description = u"{0}</ul>".format(description)
+                self.nodes.append(
+                    Node(
+                        title=child.description,
+                        typus="Measure",
+                        depth=depth,
+                        number=".".join(number[:depth]),
+                        description=description,
+                    )
+                )
 
     def get_survey_nodes(self):
         i = 0

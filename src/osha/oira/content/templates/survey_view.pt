@@ -34,6 +34,8 @@
         <dd>${context/get_tool_type_name}</dd>
       </dl>
 
+      <p style="clear:both">You can <a href="${here/absolute_url}/survey-contents-docx">download the contents of this OiRA tool in Word format.</a></p>
+
     <tal:block define="children view/modules_and_profile_questions;
       sortable python:'sortable' if can_edit and len(children)>1 else None;">
       <h2 i18n:translate="header_modules_and_profile_questions">Modules and Profile Questions</h2>

@@ -43,4 +43,12 @@
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
+  <browser:page
+      name="survey-contents-docx"
+      for=".survey.IOSHASurveyMarker"
+      class=".survey.ContentsOfSurvey"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
 </configure>

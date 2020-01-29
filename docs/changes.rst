@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.0.10 (unreleased)
+6.0.10 (2020-01-29)
 -------------------
 
 - Add new view to CMS survey-contents-docx to create report over contents of a

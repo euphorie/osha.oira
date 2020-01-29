@@ -4,8 +4,8 @@ Changelog
 6.0.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Add new view to CMS survey-contents-docx to create report over contents of a
+  Survey
 
 6.0.9 (2020-01-21)
 ------------------

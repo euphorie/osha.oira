@@ -256,6 +256,22 @@ class ContentsOfSurveyCompiler(IdentificationReportCompiler):
                 u"%s %s" % (number, title), style="Heading %d" % (node.depth + 1)
             )
 
+            if node.typus == "Risk":
+                doc.add_paragraph(
+                    u"[%s] %s"
+                    % (
+                        translate(
+                            _(
+                                "label_problem_description",
+                                default=u"Negative statement",
+                            ),
+                            target_language=self.lang,
+                        ),
+                        node.problem_description,
+                    ),
+                    style="Measure Heading",
+                )
+
             description = node.description
 
             doc = HtmlToWord(_sanitize_html(description or ""), doc)
@@ -286,9 +302,17 @@ class Node(object):
     number = ""
     description = ""
     legal_reference = None
+    problem_description = None
 
     def __init__(
-        self, title, typus, depth, number, description="", legal_reference=None
+        self,
+        title,
+        typus,
+        depth,
+        number,
+        description="",
+        legal_reference=None,
+        problem_description=None,
     ):
         self.title = title
         self.typus = typus
@@ -296,6 +320,7 @@ class Node(object):
         self.number = number
         self.description = description
         self.legal_reference = legal_reference
+        self.problem_description = problem_description
 
 
 class ContentsOfSurvey(IdentificationReportDocxView):
@@ -309,9 +334,11 @@ class ContentsOfSurvey(IdentificationReportDocxView):
 
     def AddToTree(self, node, depth, number):
         legal_reference = None
+        problem_description = None
         if IRisk.providedBy(node):
             typus = "Risk"
             legal_reference = getattr(node, "legal_reference", None)
+            problem_description = getattr(node, "problem_description", None)
         elif IProfileQuestion.providedBy(node):
             typus = "Profile question"
         else:
@@ -324,6 +351,7 @@ class ContentsOfSurvey(IdentificationReportDocxView):
                 number=".".join(number[:depth]),
                 description=node.description,
                 legal_reference=legal_reference,
+                problem_description=problem_description,
             )
         )
 

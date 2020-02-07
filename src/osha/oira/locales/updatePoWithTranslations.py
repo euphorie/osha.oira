@@ -52,6 +52,8 @@ for entry in update:
     if not target:
         print "WARNING! msgid '%s' not present in %s." % (msgid, origfile)
         continue
+    if entry.msgstr == "" and target.msgstr != "":
+        continue
     target.msgstr = entry.msgstr
     cnt += 1
 

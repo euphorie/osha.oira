@@ -4,8 +4,7 @@ Changelog
 6.0.11 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Provide integration for showing and updating progess indicator
 
 6.0.10 (2020-01-29)
 -------------------

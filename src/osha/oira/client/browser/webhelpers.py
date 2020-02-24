@@ -29,6 +29,11 @@ class OSHAWebHelpers(WebHelpers):
             if x < 1000 or y < 430:
                 return True
 
+    @property
+    @memoize
+    def show_completion_percentage(self):
+        return True
+
 
 class OSHAAppendix(Appendix):
     """ OSHA custom appendix

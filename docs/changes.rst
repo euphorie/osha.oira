@@ -4,8 +4,7 @@ Changelog
 6.0.12 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Explicitly enable showing of progress indicator
 
 6.0.11 (2020-02-17)
 -------------------

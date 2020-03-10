@@ -20,8 +20,7 @@ grok.templatedir("templates")
 COLUMN_ORDER = [
     ("risk", "title"),
     ("risk", "priority"),
-    ("measure", "action_plan"),
-    ("measure", "prevention_plan"),
+    ("measure", "action"),
     ("measure", "requirements"),
     ("measure", "planning_start"),
     ("measure", "planning_end"),
@@ -36,7 +35,7 @@ COLUMN_ORDER = [
 class ActionPlanTimeline(report.ActionPlanTimeline):
     grok.layer(IOSHAClientSkinLayer)
 
-    combine_keys = ["prevention_plan", "requirements"]
+    combine_keys = ["requirements"]
     columns = sorted(
         (
             col
@@ -49,7 +48,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
     columns = [x for x in columns if x[1] not in combine_keys]
     columns[2] = (
         "measure",
-        "action_plan",
+        "action",
         _("report_timeline_measure", default=u"Measure"),
     )
     columns[3] = (
@@ -210,7 +209,18 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                     ),
                 )
             )
-            .join((model.ActionPlan, model.ActionPlan.risk_id == model.Risk.id))
+            .join(
+                (
+                    model.ActionPlan,
+                    sql.and_(
+                        model.ActionPlan.risk_id == model.Risk.id,
+                        sql.or_(
+                            model.ActionPlan.plan_type == 'measure_standard',
+                            model.ActionPlan.plan_type == 'measure_custom',
+                        )
+                    )
+                )
+            )
             .order_by(
                 sql.case(
                     value=model.Risk.priority, whens={"high": 0, "medium": 1}, else_=2
@@ -226,10 +236,9 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                     t[-1].planning_start is not None
                     or t[-1].planning_end is not None
                     or t[-1].responsible is not None
-                    or t[-1].prevention_plan is not None
                     or t[-1].requirements is not None
                     or t[-1].budget is not None
-                    or t[-1].action_plan is not None
+                    or t[-1].action is not None
                 )
                 and (t[1].identification == "no" or t[1].risk_type == "top5")
             )

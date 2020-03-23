@@ -4,7 +4,7 @@ Changelog
 6.0.13 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Translation updates
 
 
 6.0.12 (2020-03-03)

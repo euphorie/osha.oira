@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - Adapt to new assets structure of Euphorie 11.2.0
+- Added tools for new style statistics (metabase). SCR-188
 
 
 6.0.14 (2020-03-31)

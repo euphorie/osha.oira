@@ -194,4 +194,17 @@
 
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+      destination="15"
+      profile="osha.oira:default"
+      source="14"
+      >
+
+    <genericsetup:upgradeStep
+        title="Set up statistics database for use with metabase"
+        handler=".to15.set_up_statistics_db"
+        />
+
+  </genericsetup:upgradeSteps>
+
 </configure>

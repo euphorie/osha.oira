@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.0.14 (unreleased)
+6.0.14 (2020-03-31)
 -------------------
 
 - Update injections so that progess indicator gets updated during browsing

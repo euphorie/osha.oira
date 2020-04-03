@@ -6,24 +6,32 @@
   <!-- override some classes, but re-use the template from Euphorie -->
   <configure package="euphorie.client.browser">
 
-  <browser:page
-      name="login_form"
-      for="*"
-      permission="zope.Public"
-      class="osha.oira.client.browser.login.LoginForm"
-      template="templates/login_form.pt"
-      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
-      />
+    <browser:page
+        name="login_form"
+        for="*"
+        permission="zope.Public"
+        class="osha.oira.client.browser.login.LoginForm"
+        template="templates/login_form.pt"
+        layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+        />
+
+    <browser:page
+        name="webhelpers"
+        for="*"
+        permission="zope.Public"
+        class="osha.oira.client.browser.webhelpers.OSHAWebHelpers"
+        template="templates/webhelpers.pt"
+        layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+        />
 
   </configure>
 
-
-    <browser:page
-      name="webhelpers"
+  <browser:page
+      name="risk_macros"
       for="*"
       permission="zope.Public"
-      class=".webhelpers.OSHAWebHelpers"
-      template="templates/webhelpers.pt"
+      class=".webhelpers.WebHelpers"
+      template="templates/risk_macros.pt"
       layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
       />
 

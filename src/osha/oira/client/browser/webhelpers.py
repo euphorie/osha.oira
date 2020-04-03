@@ -22,7 +22,6 @@ class OSHAWebHelpers(WebHelpers):
         return css
 
     def is_image_small(self, context, fname="image", usecase="module"):
-        # import pdb; pdb.set_trace()
         image = getattr(context, fname, None)
         if image and INamedBlobImage.providedBy(image):
             x, y = image.getImageSize()

@@ -40,32 +40,6 @@ $(EUPHORIE_PO_FILES): src/osha/oira/locales/euphorie.pot
 
 
 
-########################################################################
-## Setup
-## You don't run these rules unless you're a prototype dev
-
-clean-proto:
-	cd prototype && make clean
-
-prototype: ## Get the latest version of the prototype
-	@if [ ! -d "prototype" ]; then \
-		git clone git@github.com:euphorie/oira.prototype.git prototype; \
-	else \
-		cd prototype && git pull; \
-	fi;
-
-jekyll: prototype
-	@echo 'DO: rm prototype/stamp-bundler to force Jekyll re-install'
-	@cd prototype && make osha
-
-bundle: prototype
-	cd prototype && make bundle
-
-resources-install: bundle jekyll
-	cp prototype/_site/bundles/bundle.js src/osha/oira/browser/resources/oira.js
-	cp -R prototype/_site/style/* src/osha/oira/browser/resources
-
-
 .PHONY: all clean check jenkins pot buildout
 .SUFFIXES:
 .SUFFIXES: .po .mo

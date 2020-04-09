@@ -3,11 +3,13 @@ from osha.oira.statistics.model import create_session
 from osha.oira.statistics.utils import UpdateStatisticsDatabases
 import argparse
 import logging
+import sys
 
 log = logging.getLogger(__name__)
 
 
 def update_statistics():
+    logging.basicConfig(stream=sys.stderr, level=0)
     parser = argparse.ArgumentParser(
         description=(
             "Update the statistics databases from the main OiRA application database. "

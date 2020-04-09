@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 
 Base = declarative_base()
 
-STATISTICS_DATABASES = ["statistics_global"]
+STATISTICS_DATABASE_PATTERN = "statistics_{suffix}"
 
 
 def get_postgres_url():

@@ -4,7 +4,6 @@ from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from datetime import datetime
-from euphorie.client import model
 from euphorie.content.country import ICountry
 from euphorie.content.sector import ISector
 from euphorie.content.sectorcontainer import ISectorContainer
@@ -14,7 +13,6 @@ from osha.oira import _
 from osha.oira.interfaces import IOSHAContentSkinLayer
 from plone import api
 from plone.directives import form
-from sqlalchemy import sql
 from z3c.form import button
 from z3c.form.browser.select import SelectFieldWidget
 from z3c.form.interfaces import IObjectFactory
@@ -32,62 +30,6 @@ import urllib2
 
 log = logging.getLogger("osha.oira/browser.statistics")
 grok.templatedir('templates')
-
-
-class RiskStatistics(grok.View):
-    """ Statistics to assess the typical amount of identified risks in ongoing
-        assessments.
-
-        See: Redmine #10969
-    """
-    grok.context(IPloneSiteRoot)
-    grok.require('cmf.ManagePortal')
-    grok.name('risk-statistics')
-    grok.template('risk_statistics')
-
-    def update(self):
-        self.num_accounts = len(Session().query(model.Account).all())
-        self.num_sessions = len(Session.query(model.SurveySession).all())
-
-        risks = Session.query(model.Risk).all()
-        self.num_risks = len(risks)
-
-        # Get risks that have been identified (either as present or not
-        # present) and unidentified risks.
-        self.num_present_risks = len(Session.query(model.Risk).filter(
-                model.Risk.identification == u"no").all())
-
-        self.num_non_present_risks = len(Session.query(model.Risk).filter(
-                model.Risk.identification == u"yes").all())
-
-        self.num_skipped_risks = len(Session.query(model.Risk).filter(
-                model.Risk.identification == u"n/a").all())
-
-        self.num_unidentified_risks = len(Session.query(model.Risk).filter(
-                model.Risk.identification == None).all())
-
-        # Get risks which have been evaluated and of those, the ones which have
-        # valid action plans
-        self.num_evaluated_risks = len(Session.query(model.Risk).filter(
-            sql.and_(
-                model.Risk.priority.in_([u"low", u"medium", u"high"]),
-                model.Risk.identification == u"no",
-                sql.not_(model.Risk.risk_type.in_([u"top5", u"policy"])),
-                sql.not_(model.Risk.skip_evaluation == True),
-            )).all())
-
-        self.num_action_plans = len(Session.query(model.ActionPlan).all())
-
-        self.num_actioned_risks =  len(Session.query(model.Risk).filter(
-            sql.exists().where(model.ActionPlan.risk_id == model.Risk.id)
-        ).all())
-
-
-    def getNodesInSession(self, session):
-        query = Session.query(model.SurveyTreeItem)\
-            .filter(model.SurveyTreeItem.session == session)\
-            .order_by(model.SurveyTreeItem.path)
-        return query.all()
 
 
 class IReportPeriod(interface.Interface):

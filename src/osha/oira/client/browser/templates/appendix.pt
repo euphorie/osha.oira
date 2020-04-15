@@ -9,9 +9,9 @@
       tal:define="webhelpers nocall:context/@@webhelpers">
 
   <metal:appendix define-macro="appendix" meta:interpolation="true" i18n:domain="euphorie">
-    <p id="appendix" tal:define="media_url client/++resource++euphorie.media">
+    <p id="appendix">
         <a href="${webhelpers/client_url}">
-          <img class="appendix_oira_logo" src="${media_url}/osha/footer_logo.png"/>
+          <img class="appendix_oira_logo" src="${style_url}/footer_logo.png"/>
         </a>
 
         <tal:block repeat="page webhelpers/appendix_documents">
@@ -31,7 +31,7 @@
         <a href="http://creativecommons.org/licenses/by-sa/2.5/"
             target="_blank"
             i18n:attributes="alt" alt="CC License">
-            <img class="creative_commons_logo" src="${media_url}/osha/creative_commons.png"/>
+            <img class="creative_commons_logo" src="${style_url}/creative_commons.png"/>
         </a>
     </p>
     <div id="browser-warning" style="display:none">This will contain the warning translated</div>

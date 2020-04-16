@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
@@ -8,11 +7,15 @@
       meta:interpolation="true"
       metal:define-macro="layout"
       i18n:domain="nuplone"
-      tal:define="tools context/@@tools">
+      tal:define="
+        tools context/@@tools;
+        resources_timestamp here/@@refresh-resources-timestamp/resources_timestamp;
+        portal_url here/portal_url;
+      ">
   <head tal:define="style_url tools/portal/++resource++NuPlone.style">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="${tools/portal/absolute_url}/++resource++euphorie.resources/redactor.min.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base.css?t=${resources_timestamp}" />
+    <link rel="stylesheet" type="text/css" media="all" href="${portal_url}/++resource++euphorie.resources/redactor.min.css?t=${resources_timestamp}" />
     <!--[if IE 6]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base-ie6.css" /> <![endif]-->
     <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base-ie7.css" /> <![endif]-->
     <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/main/base-ie8.css" /> <![endif]-->
@@ -38,7 +41,7 @@
         box-shadow: 0 2px 10px rgba(0,0,0,0.25);
       }
     </style>
-    <link rel="stylesheet" type="text/css" media="all" href="${style_url}/euphorie/base.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="${style_url}/euphorie/base.css?t=${resources_timestamp}" />
     <!--[if IE 6]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/euphorie/base-ie6.css" /> <![endif]-->
     <!--[if IE 7]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/euphorie/base-ie7.css" /> <![endif]-->
     <!--[if IE 8]> <link rel="stylesheet" type="text/css" media="all" href="${style_url}/euphorie/base-ie8.css" /> <![endif]-->
@@ -62,7 +65,7 @@
     </p>
     <tal:block replace="tile:actions"/>
     <tal:block replace="tile:footer"/>
-    <script src="${tools/portal/absolute_url}/++resource++euphorie.resources/oira.cms.min.js"></script>
+    <script src="${portal_url}/++resource++euphorie.resources/oira.cms.min.js?t=${resources_timestamp}"></script>
     <script type="text/javascript">
       var plone = { portal_url : '${tools/portal/absolute_url}',
                     context_url : '${context/absolute_url}' };

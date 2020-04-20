@@ -34,8 +34,16 @@ def update_statistics():
             "name. Example: postgres://XXXX:XXXX@localhost/{database}"
         ),
     )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=1000,
+        help=("How many rows to process in one go before committing to the database"),
+    )
     args = parser.parse_args()
     log.info("Updating statistics databases")
     session_application = create_session(args.src)
-    update_db = UpdateStatisticsDatabases(session_application, args.dst)
+    update_db = UpdateStatisticsDatabases(
+        session_application, args.dst, b_size=args.batch_size
+    )
     update_db()

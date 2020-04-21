@@ -2,6 +2,7 @@
 from euphorie.client.model import Account
 from euphorie.client.model import SurveySession
 from osha.oira.statistics.model import AccountStatistics
+from osha.oira.statistics.model import Base
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN
 from osha.oira.statistics.model import SurveySessionStatistics
@@ -35,6 +36,9 @@ class UpdateStatisticsDatabases(object):
         self.b_size = b_size
 
     def update_database(self, session_statistics, country=None):
+        log.info("Init & cleanup")
+        Base.metadata.create_all(bind=session_statistics.connection(), checkfirst=True)
+
         session_statistics.query(SurveySessionStatistics).delete()
 
         limit = self.b_size
@@ -64,7 +68,8 @@ class UpdateStatisticsDatabases(object):
             if len(rows):
                 session_statistics.add_all(rows)
                 session_statistics.commit()
-                log.info("Processed {} rows".format(offset + len(rows)))
+                if offset % 100000 == 0:
+                    log.info("Processed {} rows".format(offset + len(rows)))
             offset = offset + limit
 
         session_statistics.query(AccountStatistics).delete()
@@ -86,7 +91,8 @@ class UpdateStatisticsDatabases(object):
             if len(rows):
                 session_statistics.add_all(rows)
                 session_statistics.commit()
-                log.info("Processed {} rows".format(offset + len(rows)))
+                if offset % 100000 == 0:
+                    log.info("Processed {} rows".format(offset + len(rows)))
             offset = offset + limit
 
     def __call__(self):

@@ -66,5 +66,6 @@ setup(name='osha.oira',
       [console_scripts]
       outdated_tools = osha.oira.scripts:outdated_tools
       write_statistics = osha.oira.scripts:write_statistics
+      update_statistics = osha.oira.statistics.scripts:update_statistics
       """,
       )

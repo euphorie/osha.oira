@@ -17,7 +17,7 @@
     <metal:bar fill-slot="buttonbar"><tal:tile replace="tile:euphorie.addbar"/></metal:bar>
     <metal:content fill-slot="content"
             tal:define="can_edit python:tools.checkPermission('Modify portal content');
-                        media_url string:++resource++euphorie.media">
+                        media_url string:++resource++euphorie.resources/oira/style">
       <h2 i18n:translate="header_information">Information</h2>
 
       <dl class="grid span-9">
@@ -49,8 +49,8 @@
         </div>
 
             <li tal:repeat="child children" id="child-${child/id}">
-                <img tal:condition="not:child/is_profile_question" src="${media_url}/osha/folder_icon.png"/>
-                <img tal:condition="child/is_profile_question" src="${media_url}/osha/question.png"/>
+                <img tal:condition="not:child/is_profile_question" src="${media_url}/folder_icon.png"/>
+                <img tal:condition="child/is_profile_question" src="${media_url}/question.png"/>
                 <a href="${child/url}">${child/title}</a>
             </li>
         </ol>

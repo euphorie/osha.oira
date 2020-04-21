@@ -9,10 +9,10 @@
     <br clear="all"/>
     <p id="nuplone_appendix"
             tal:define="lang here/@@plone_portal_state/language;
-                        media_url string:++resource++euphorie.media"
+                        media_url string:++resource++euphorie.resources/oira/style"
             style="padding-bottom: 20px; padding-left: 220px; padding-top: 10em;">
 
-        <img style="margin-right: 15px" src="${media_url}/osha/footer_logo.png"/>
+        <img style="margin-right: 15px" src="${media_url}/footer_logo.png"/>
 
         <tal:span i18n:translate="appendix_produced_by">
             Produced by <a i18n:name="EU-OSHA" href="http://osha.europa.eu" target="_new">EU-OSHA</a>.</tal:span>
@@ -32,7 +32,7 @@
         <a href="http://creativecommons.org/licenses/by-sa/2.5/"
             i18n:attributes="alt"
             alt="CC License">
-            <img style="margin-right: 15px; cursor: pointer;" src="${media_url}/osha/creative_commons.png"/>
+            <img style="margin-right: 15px; cursor: pointer;" src="${media_url}/creative_commons.png"/>
         </a>
     </p>
 </span>

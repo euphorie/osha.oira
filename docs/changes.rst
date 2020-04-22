@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.1.1 (unreleased)
+6.1.1 (2020-04-22)
 ------------------
 
 - Update Statistics: Use flush instead of commit for batches.

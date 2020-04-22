@@ -43,8 +43,10 @@ class UpdateStatisticsDatabases(object):
 
         limit = self.b_size
 
-        sessions = self.session_application.query(SurveySession, Account).filter(
-            Account.id == SurveySession.account_id
+        sessions = (
+            self.session_application.query(SurveySession, Account)
+            .filter(Account.id == SurveySession.account_id)
+            .order_by(SurveySession.id)
         )
         if country is not None:
             sessions = sessions.filter(SurveySession.zodb_path.startswith(country))
@@ -75,7 +77,7 @@ class UpdateStatisticsDatabases(object):
 
         session_statistics.query(AccountStatistics).delete()
 
-        accounts = self.session_application.query(Account)
+        accounts = self.session_application.query(Account).order_by(Account.id)
         log.info("Table: account")
         offset = 0
         rows = []
@@ -96,6 +98,8 @@ class UpdateStatisticsDatabases(object):
             if offset % (100 * limit) == 0:
                 log.info("Processed {} rows".format(offset))
         log.info("Processed {} rows".format(offset))
+
+        session_statistics.commit()
 
     def __call__(self):
         for country in [None] + list_countries(self.session_application):

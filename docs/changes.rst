@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.1.0 (unreleased)
+6.1.0 (2020-04-22)
 ------------------
 
 - Adapt to new assets structure of Euphorie 11.2.0

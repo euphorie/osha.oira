@@ -40,6 +40,8 @@ class UpdateStatisticsDatabases(object):
         Base.metadata.create_all(bind=session_statistics.connection(), checkfirst=True)
 
         session_statistics.query(SurveySessionStatistics).delete()
+        session_statistics.query(AccountStatistics).delete()
+        session_statistics.commit()
 
         limit = self.b_size
 
@@ -74,8 +76,6 @@ class UpdateStatisticsDatabases(object):
             if offset % (100 * limit) == 0:
                 log.info("Processed {} rows".format(offset))
         log.info("Processed {} rows".format(offset))
-
-        session_statistics.query(AccountStatistics).delete()
 
         accounts = self.session_application.query(Account).order_by(Account.id)
         log.info("Table: account")

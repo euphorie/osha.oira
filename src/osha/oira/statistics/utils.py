@@ -43,8 +43,6 @@ class UpdateStatisticsDatabases(object):
         session_statistics.query(AccountStatistics).delete()
         session_statistics.commit()
 
-        limit = self.b_size
-
         sessions = (
             self.session_application.query(SurveySession, Account)
             .filter(Account.id == SurveySession.account_id)
@@ -53,11 +51,8 @@ class UpdateStatisticsDatabases(object):
         if country is not None:
             sessions = sessions.filter(SurveySession.zodb_path.startswith(country))
         log.info("Table: assessment")
-        offset = 0
-        rows = []
-        while offset == 0 or len(rows) != 0:
-            batch = sessions.limit(limit).offset(offset)
-            rows = [
+        for idx, (session, account) in enumerate(sessions):
+            session_statistics.add(
                 SurveySessionStatistics(
                     id=session.id,
                     start_date=session.created,
@@ -67,37 +62,24 @@ class UpdateStatisticsDatabases(object):
                     tool=session.zodb_path.split("/")[2].encode("utf-8"),
                     account_type=account.account_type,
                 )
-                for session, account in batch
-            ]
-            if len(rows):
-                session_statistics.add_all(rows)
+            )
+            if idx and idx % self.b_size == 0:
                 session_statistics.flush()
-            offset = offset + len(rows)
-            if offset % (100 * limit) == 0:
-                log.info("Processed {} rows".format(offset))
-        log.info("Processed {} rows".format(offset))
+                log.info("Processed {} rows".format(idx))
 
         accounts = self.session_application.query(Account).order_by(Account.id)
         log.info("Table: account")
-        offset = 0
-        rows = []
-        while offset == 0 or len(rows) != 0:
-            batch = accounts.limit(limit).offset(offset)
-            rows = [
+        for idx, account in enumerate(accounts):
+            session_statistics.add(
                 AccountStatistics(
                     id=account.id,
                     account_type=account.account_type,
                     creation_date=account.created or sqlalchemy.null(),
                 )
-                for account in batch
-            ]
-            if len(rows):
-                session_statistics.add_all(rows)
+            )
+            if idx and idx % self.b_size == 0:
                 session_statistics.flush()
-            offset = offset + len(rows)
-            if offset % (100 * limit) == 0:
-                log.info("Processed {} rows".format(offset))
-        log.info("Processed {} rows".format(offset))
+                log.info("Processed {} rows".format(idx))
 
     def __call__(self):
         for country in [None] + list_countries(self.session_application):

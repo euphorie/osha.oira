@@ -67,10 +67,11 @@ class UpdateStatisticsDatabases(object):
             ]
             if len(rows):
                 session_statistics.add_all(rows)
-                session_statistics.commit()
-                if offset % 100000 == 0:
-                    log.info("Processed {} rows".format(offset + len(rows)))
-            offset = offset + limit
+                session_statistics.flush()
+            offset = offset + len(rows)
+            if offset % (100 * limit) == 0:
+                log.info("Processed {} rows".format(offset))
+        log.info("Processed {} rows".format(offset))
 
         session_statistics.query(AccountStatistics).delete()
 
@@ -90,10 +91,11 @@ class UpdateStatisticsDatabases(object):
             ]
             if len(rows):
                 session_statistics.add_all(rows)
-                session_statistics.commit()
-                if offset % 100000 == 0:
-                    log.info("Processed {} rows".format(offset + len(rows)))
-            offset = offset + limit
+                session_statistics.flush()
+            offset = offset + len(rows)
+            if offset % (100 * limit) == 0:
+                log.info("Processed {} rows".format(offset))
+        log.info("Processed {} rows".format(offset))
 
     def __call__(self):
         for country in [None] + list_countries(self.session_application):

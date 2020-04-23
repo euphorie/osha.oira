@@ -81,6 +81,8 @@ class UpdateStatisticsDatabases(object):
                 session_statistics.flush()
                 log.info("Processed {} rows".format(idx))
 
+        session_statistics.commit()
+
     def __call__(self):
         for country in [None] + list_countries(self.session_application):
             database = STATISTICS_DATABASE_PATTERN.format(suffix=country or "global")

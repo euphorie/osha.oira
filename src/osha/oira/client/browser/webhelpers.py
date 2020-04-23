@@ -1,5 +1,4 @@
 # coding=utf-8
-from euphorie.client.browser.webhelpers import Appendix
 from euphorie.client.browser.webhelpers import WebHelpers
 from logging import getLogger
 from plone.namedfile.interfaces import INamedBlobImage
@@ -32,8 +31,3 @@ class OSHAWebHelpers(WebHelpers):
     @memoize
     def show_completion_percentage(self):
         return True
-
-
-class OSHAAppendix(Appendix):
-    """ OSHA custom appendix
-    """

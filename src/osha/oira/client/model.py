@@ -25,9 +25,26 @@ class LoginStatistics(model.BaseObject):
             nullable=False, index=True)
 
 
+class Certificate(model.BaseObject):
+    """
+    """
+
+    __tablename__ = "certificate"
+    id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
+    json = schema.Column(types.UnicodeText())
+    secret = schema.Column(types.UnicodeText())
+    session_id = schema.Column(
+        types.Integer(),
+        schema.ForeignKey("session.id", onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+    session = orm.relation("SurveySession", cascade="all")
+
+
 _instrumented = False
 if not _instrumented:
-    for cls in [LoginStatistics]:
+    for cls in [LoginStatistics, Certificate]:
         instrument_declarative(
             cls, metadata._decl_registry, metadata
         )

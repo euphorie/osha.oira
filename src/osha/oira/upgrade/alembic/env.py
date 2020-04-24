@@ -3,7 +3,7 @@ from alembic import context
 from euphorie.client.model import metadata
 from osha.oira.client import model  # noqa: F401
 from sqlalchemy import engine_from_config
-from sqlalchemy import pooc l
+from sqlalchemy import pool
 
 
 # this is the Alembic Config object, which provides

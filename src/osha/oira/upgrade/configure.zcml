@@ -215,12 +215,22 @@
       directory="to16"
       />
 
-  <genericsetup:upgradeDepends
-      title="Add the behavior osha.country.extrafields to euphorie.country"
-      destination="16"
-      import_profile="osha.oira.upgrade:to16"
-      profile="osha.oira:default"
-      source="15"
-      />
+  <genericsetup:upgradeSteps
+        destination="16"
+        profile="osha.oira:default"
+        source="15"
+        >
+
+      <genericsetup:upgradeDepends
+          title="Add the behavior osha.country.extrafields to euphorie.country"
+          import_profile="osha.oira.upgrade:to16"
+          />
+
+      <genericsetup:upgradeStep
+          title="Set up certificates table"
+          handler=".to16.alembic_upgrade"
+          />
+
+    </genericsetup:upgradeSteps>
 
 </configure>

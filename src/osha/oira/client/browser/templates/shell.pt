@@ -305,7 +305,7 @@
                       of the risk assessment,
                       you will be eligible for a certificate.
                     </p>
-                    <p tal:replace="structure country/certificate_text/output|XXX|nothing"></p>
+                    <p tal:replace="structure country/certificate_explanatory_sentence"></p>
                     <tal:earned condition="certificate_view/can_display_certificate_earned">
                       <p tal:condition="certificate_view/can_display_certificate_earned">
                         <strong i18n:translate="">

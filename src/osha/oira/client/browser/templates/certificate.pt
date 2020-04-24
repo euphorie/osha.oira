@@ -98,7 +98,7 @@
                        target="_blank"
                        i18n:translate=""
                     >${view/site_title}</a>.</p>
-                  <p tal:replace="structure view/country/certificate_text/output|XXX|nothing"></p>
+                  <p tal:replace="structure view/country/certificate_explanatory_sentence"></p>
                 </form>
               </div>
             </div>

@@ -4,8 +4,10 @@ from euphorie.content import MessageFactory as _
 from euphorie.content.country import ManageUsers
 from euphorie.content.sector import ISector
 from five import grok
+from htmllaundry.z3cform import HtmlText
 from osha.oira.interfaces import IOSHAContentSkinLayer
 from plone.autoform.interfaces import IFormFieldProvider
+from plone.directives import form
 from plone.supermodel import model
 from zope import schema
 from zope.interface import alsoProvides
@@ -91,6 +93,15 @@ class IOSHACountry(model.Schema):
         default=85,
         min=0,
         max=100,
+    )
+    certificate_explanatory_sentence = HtmlText(
+        title=_("Explanatory sentence"),
+        description=_("A short explanation that is shown to the user after reaching "
+                      "the initial threshold"),
+        required=False,
+    )
+    form.widget(
+        certificate_explanatory_sentence="plone.app.z3cform.wysiwyg.WysiwygFieldWidget"
     )
 
     @invariant

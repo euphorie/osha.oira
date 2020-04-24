@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      meta:interpolation="true"
+      metal:define-macro="shell"
+      i18n:domain="euphorie"
+      class="no-js"
+      lang="${language}"
+      tal:define="webhelpers nocall:context/@@webhelpers;
+                  portal_state context/plone_portal_state;
+                  language portal_state/language;
+                  dummy_header python:request.RESPONSE.appendHeader('cache-control', 'no-cache');
+                  splash_message webhelpers/splash_message;
+                  no_splash view/no_splash|nothing;
+                  tool_notification webhelpers/tool_notification;
+                  client nocall:request/client;
+                  media_url webhelpers/media_url;
+                  style_url webhelpers/style_url;
+                  page_section webhelpers/get_phase;
+                  sidebar_default python:page_section in ['identification', 'actionplan'] and 'sidebar-on' or 'sidebar-off';
+                  came_from_param webhelpers/came_from_param;
+                  initial_view request/initial_view|nothing;
+                  tools context/@@tools;
+                  variation_class python:getattr(view, 'variation_class', None);
+                ">
+
+<head>
+    <title i18n:translate="title_tool">OiRA - Online interactive Risk Assessment</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <link rel="icon" type="image/png" href="${style_url}/apple-touch-icon.png" />
+
+    <script type="text/javascript" src="${webhelpers/js_url}"></script>
+    <link rel="stylesheet" href="${webhelpers/css_url}" type="text/css" />
+
+        <meta name="description" content="${webhelpers/tool_description}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="${webhelpers/tool_name|string:OiRA - Online interactive Risk Assessment}" />
+        <meta property="og:description" content="${webhelpers/tool_description}" />
+        <meta property="og:url" content="${webhelpers/base_url}/@@tryout?${came_from_param}" />
+        <meta property="og:image" content="${style_url}/oira-tile.png" />
+
+
+
+    <metal:javascriptslot define-slot="javascript_head_slot" />
+    <metal:styleslot define-slot="style_slot" />
+    <script>
+    function openSlideFullScreen(slide) {
+      var docElm = document.documentElement;
+      if (docElm.requestFullscreen) {
+        document.getElementById(slide).requestFullscreen()
+      }
+      else if (docElm.mozRequestFullScreen) {
+        document.getElementById(slide).mozRequestFullScreen()
+      }
+      else if (docElm.webkitRequestFullScreen) {
+        document.getElementById(slide).webkitRequestFullScreen()
+      }
+      else if (docElm.msRequestFullscreen) {
+        document.getElementById(slide).msRequestFullscreen()
+      }
+    }
+    </script>
+</head>
+
+<body
+  id="body"
+  class="${python:'splash-on-' + splash_message['id'] if not is_anonymous and not no_splash and not webhelpers.is_guest_account and splash_message and not page_section else ''} ${python:'splash-on-' + tool_notification['id'] if tool_notification and initial_view else ''}  osh-off ${python: 'test-session' if webhelpers.is_guest_account else ''} osc-off osc-s-off osc-size-normal"
+  i18n:domain="euphorie"
+  tal:define="is_anonymous webhelpers/anonymous; base_url webhelpers/base_url">
+    <div id="main" class="sidebar-off">
+        <span class="hidden" id="metadata" hidden="hidden">
+            <span id="country_name">${webhelpers/country_name}</span>
+            <span id="sector_name">${webhelpers/sector_name}</span>
+            <span id="tool_name">${webhelpers/tool_name}</span>
+            <span id="language_code">${webhelpers/language_code}</span>
+        </span>
+        <header id="toolbar">
+          <tal:anon condition="python:not is_anonymous or webhelpers.is_guest_account">
+          <a href="#tree" id="toggle-tree" class="iconified pat-toggle" data-pat-toggle="selector: #main; value: sidebar-off sidebar-on;">Toggle tree</a>
+            <a href="#osc" class="iconified pat-toggle"
+               data-pat-toggle="selector: body; value: osc-on osc-off; store: local &amp;&amp; selector: body; value: osc-s-on osc-s-off; store: local"
+               id="toggle-osc"
+               i18n:attributes="title tooltip_menu_toggle"
+               title="Show/hide menu">
+                Menu
+            </a>
+
+            <p tal:condition="webhelpers/is_guest_account" id="warning-bar">
+                <tal:testsession i18n:translate="label_testsession">Test session</tal:testsession><a href="${base_url}/tooltips#test-session-active" class="icon-help-circle iconified pat-tooltip" data-pat-tooltip="source: ajax; position-list: lt; class: rich info" i18n:translate="Info">Info</a>
+            </p>
+          </tal:anon>
+
+
+            <metal:include tal:define="id string:hamburger" use-macro="context/@@includes/macros/osh"/>
+
+            <tal:if_anon condition="python:is_anonymous or webhelpers.is_guest_account">
+                <a href="${webhelpers/country_or_client_url}/login_form?${came_from_param}#document-content" class="pat-modal login" data-pat-modal="class: large" i18n:translate="header_login">Login</a>
+                <a href="${webhelpers/country_or_client_url}/register" class="registration" i18n:translate="header_register">Register</a>
+            </tal:if_anon>
+            <tal:if_not_anon condition="python: not is_anonymous and not webhelpers.is_guest_account">
+                <a href="${webhelpers/session_overview_url}/user-menu.html#menu-content"
+                  id="more-menu"
+                   class="iconified pat-tooltip pat-switch"
+                   data-pat-switch="selector: body; remove: osc-s-on; add: osc-s-off;"
+                   data-pat-tooltip="source: ajax;">More…</a>
+            </tal:if_not_anon>
+            <a href="${webhelpers/country_or_client_url}"
+              data-pat-inject="source: #content; target: #content; history: record"
+              class="home pat-inject iconified icon-home pat-switch"
+              data-pat-switch="selector: body; remove: osc-s-on; add: osc-s-off;"
+              i18n:attributes="title home_link"
+              title="Dashboard" i18n:translate="home_link">Dashboard</a>
+        </header>
+        <div id="content">
+          <aside tal:condition="python:variation_class=='variation-risk-assessment'"
+            id="tree" class="${variation_class}">
+          <metal:include tal:define="id string:tool-navigation" use-macro="context/@@includes/macros/osh"/>
+          <metal:slot define-slot="aside-navigator">
+            <ol class="navigation"
+                id="steps"
+            >
+              <tal:if_not_anon define="
+                                 tree view/tree|nothing;
+                                 session_start_view nocall:here/@@start|webhelpers/traversed_session/@@start;
+                                 can_edit webhelpers/can_edit_session;
+                                 new_session session_start_view/is_new_session;
+                               "
+                               condition="not:is_anonymous"
+              >
+                <li class="${python:(active and 'active') or (disabled and 'disabled') or None}"
+                    id="step-1"
+                    tal:define="
+                      active python:page_section == 'preparation' and 'active' or '';
+                      disabled python:page_section == '';
+                    "
+                >
+                  <a class="preparation pat-switch pat-inject"
+                     href="${webhelpers/traversed_session/absolute_url}/@@start#content"
+                     data-pat-inject="history: record"
+                     data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
+                     tal:condition="not:disabled"
+                     i18n:translate="label_preparation"
+                  >Preparation</a>
+                  <a class="preparation"
+                     tal:condition="disabled"
+                     i18n:translate="label_preparation"
+                  >Preparation</a>
+                </li>
+                <li class="${python:(active and 'active') or (disabled and 'disabled') or None}"
+                    id="step-2"
+                    tal:define="
+                      active python:page_section == 'identification';
+                      disabled python:(page_section in ('', 'preparation') and new_session) or (not can_edit);
+                    "
+                >
+                  <a class="identification pat-switch pat-inject"
+                     href="${webhelpers/traversed_session/absolute_url}/@@identification#content"
+                     data-pat-inject="history: record;"
+                     data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
+                     tal:condition="not:disabled"
+                  ><tal:identification i18n:translate="label_identification">Identification</tal:identification>
+                      +
+                    <tal:evaluation i18n:translate="label_evaluation">Evaluation</tal:evaluation></a>
+                  <a class="identification"
+                     tal:condition="disabled"
+                  ><tal:identification i18n:translate="label_identification">Identification</tal:identification>
+                      +
+                    <tal:evaluation i18n:translate="label_evaluation">Evaluation</tal:evaluation></a>
+
+                  <tal:block condition="python: active and tree">
+                    <metal:call use-macro="webhelpers/macros/survey_tree" />
+                  </tal:block>
+
+                </li>
+                <li class="${python:(active and 'active') or (disabled and 'disabled') or None}"
+                    id="step-4"
+                    tal:define="
+                      active python:page_section == 'actionplan';
+                      disabled python:(page_section in ('', 'preparation') and new_session) or (not can_edit);
+                    "
+                >
+                  <!-- The tree for the action section uses the same structure as the identification tree, with the only differences that only risks and their parent modules are shown and that the entire tree is expanded. -->
+                  <a class="action-plan pat-switch pat-inject"
+                     href="${webhelpers/traversed_session/absolute_url}/@@actionplan#content"
+                     data-pat-inject="history: record"
+                     data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
+                     tal:condition="not:disabled"
+                     i18n:translate="label_action_plan"
+                  >Action Plan</a>
+                  <a class="action-plan"
+                     tal:condition="disabled"
+                     i18n:translate="label_action_plan"
+                  >Action Plan</a>
+
+                  <tal:block condition="python: active and tree">
+                    <metal:call use-macro="webhelpers/macros/survey_tree" />
+                  </tal:block>
+                </li>
+
+                <li class="${python:(active and 'active') or (disabled and 'disabled') or None}"
+                    id="step-5"
+                    tal:define="
+                      active python:page_section == 'report';
+                      disabled python:page_section=='' or (page_section=='preparation' and new_session);
+                    "
+                >
+                  <!-- TODO: check if guest -->
+                  <a class="report pat-switch pat-inject"
+                     href="${webhelpers/traversed_session/absolute_url}/@@report#content"
+                     data-pat-inject="history: record"
+                     data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
+                     tal:condition="not:disabled"
+                     i18n:translate="label_report"
+                  >Report</a>
+                  <a class="report"
+                     tal:condition="disabled"
+                     i18n:translate="label_report"
+                  >Report</a>
+                </li>
+
+                <li class="${python:(active and 'active') or (disabled and 'disabled') or None}"
+                    id="step-6"
+                    tal:define="
+                      active python:page_section == 'training';
+                      disabled python:page_section=='' or (page_section=='preparation' and new_session);
+                    "
+                    tal:condition="webhelpers/use_training_module"
+                >
+                  <a class="training pat-inject pat-switch"
+                     href="${webhelpers/traversed_session/absolute_url}/@@training#content"
+                     data-pat-inject="history: record"
+                     data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
+                     tal:condition="not:disabled"
+                     i18n:translate="menu_training"
+                  >Training</a>
+                  <a class="training"
+                     tal:condition="disabled"
+                     i18n:translate="menu_training"
+                  >Training</a>
+                </li>
+
+
+                <li class="${python:(active and 'active') or (disabled and 'disabled') or None}"
+                    id="status"
+                    tal:define="
+                      active python: page_section == 'status' and 'active' or '';
+                      disabled python:page_section=='' or (page_section=='preparation' and new_session);
+                    "
+                >
+                  <a class="status pat-switch pat-inject"
+                     href="${webhelpers/traversed_session/absolute_url}/@@status#content"
+                     data-pat-inject="history: record; source: #content; target: #content &amp;&amp; source: #navigation; target: #navigation"
+                     data-pat-switch="selector: body; remove: focus-*; add: focus-document &amp;&amp; selector: body; remove: sidebar-on; add: sidebar-off"
+                     tal:condition="not:disabled"
+                  ><tal:translate i18n:translate="navigation_status">Status</tal:translate>
+                    <strong
+                      tal:condition="webhelpers/show_completion_percentage"
+                      class="pie-graph pat-tooltip"
+                      data-percentage="${webhelpers/traversed_session/session/completion_percentage|string:0}"
+                      data-pat-tooltip="trigger: hover; position-list: lm"
+                      title="${webhelpers/get_progress_indicator_title}"
+                        >${webhelpers/traversed_session/session/completion_percentage|string:0}%</strong>
+                  </a>
+                  <a class="status"
+                     tal:condition="disabled"
+                  ><tal:translate i18n:translate="navigation_status">Status</tal:translate>
+                    <strong
+                    tal:condition="webhelpers/show_completion_percentage"
+                    class="pie-graph pat-tooltip"
+                    data-percentage="${webhelpers/traversed_session/session/completion_percentage|string:0}"
+                    data-pat-tooltip="trigger: hover; position-list: lm"
+                    title="${webhelpers/get_progress_indicator_title}">${webhelpers/traversed_session/session/completion_percentage|string:0}%</strong>
+                  </a>
+                </li>
+              </tal:if_not_anon>
+            </ol>
+          </metal:slot>
+
+          </aside>
+          <div id="main-content" class="${variation_class}">
+            <span id="messages">
+              <tal:statusmsg tal:repeat="message webhelpers/messages">
+                  <p class="pat-notification" data-pat-notification="type: banner; class: ${message/type}; close-text: ${webhelpers/closetext}" id="${message/id}-body" tal:content="message/message | nothing">Status message</p>
+              </tal:statusmsg>
+            </span>
+
+            <metal:block define-slot="content"/>
+          </div>
+        </div>
+    </div>
+
+    <tal:anon condition="not:is_anonymous">
+
+        <!-- The aside header and sessions browser comes from a macro -->
+        <aside id="osc">
+          <a class="pat-inject icon-search"
+             hidden
+             href="${here/absolute_url}/@@session-browser-sidebar"
+             data-pat-inject="source: #osc::element; target: #osc::element; trigger: autoload;"
+             i18n:translate=""
+          >Loading Risk Assessments&hellip;</a>
+        </aside>
+      <tal:logo condition="webhelpers/show_logo">
+        <metal:logo use-macro="context/logo/macros/logo"/>
+      </tal:logo>
+    </tal:anon>
+
+
+    <tal:block replace="tile:client-analytics"/>
+
+    <metal:splashmessageslot define-slot="splash_message_slot" />
+
+    <metal:call use-macro="webhelpers/macros/webstats_js" />
+
+
+</body>
+</html>

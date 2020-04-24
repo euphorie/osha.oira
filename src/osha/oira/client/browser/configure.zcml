@@ -27,6 +27,14 @@
   </configure>
 
   <browser:page
+      name="shell"
+      for="*"
+      permission="zope.Public"
+      template="templates/shell.pt"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
       name="risk_macros"
       for="*"
       permission="zope.Public"

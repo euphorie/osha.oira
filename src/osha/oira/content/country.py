@@ -1,9 +1,17 @@
 # coding=utf-8
 from Acquisition import aq_inner
+from euphorie.content import MessageFactory as _
 from euphorie.content.country import ManageUsers
 from euphorie.content.sector import ISector
 from five import grok
 from osha.oira.interfaces import IOSHAContentSkinLayer
+from plone.autoform.interfaces import IFormFieldProvider
+from plone.supermodel import model
+from zope import schema
+from zope.interface import alsoProvides
+from zope.interface import Invalid
+from zope.interface import invariant
+
 
 grok.templatedir("templates")
 
@@ -49,3 +57,48 @@ class OSHAManageUsers(ManageUsers):
                          for manager in country.values()
                          if ICountryManager.providedBy(manager)]
         self.managers.sort(key=lambda s: s["title"].lower())
+
+class IOSHACountry(model.Schema):
+    """ Additional fields for the OSHA countries
+    """
+
+    certificates_enabled = schema.Bool(
+        title=_("Enable certificates"),
+        description=_(
+            "By checking this fields user that complete a session up to a completion threshold "
+            "will earn a certificate"
+        ),
+        default=False,
+    )
+    certificate_initial_threshold = schema.Int(
+        title=_("Certificate initial threshold"),
+        description=_(
+            "After a session completion rate is greater than this limit "
+            "the user will be informed about the possibility to earn a certificate. "
+            "It only makes sense when certificates are enabled"
+        ),
+        default=10,
+        min=0,
+        max=100,
+    )
+    certificate_completion_threshold = schema.Int(
+        title=_("Certificate completion threshold"),
+        description=_(
+            "After a session completion rate is greater than this limit "
+            "the user will earn a certificate. "
+            "It only makes sense when certificates are enabled"
+        ),
+        default=85,
+        min=0,
+        max=100,
+    )
+
+    @invariant
+    def threshold_invariant(data):
+        if data.certificate_initial_threshold >= data.certificate_completion_threshold:
+            raise Invalid(
+                _(u"Completion threshold has to be greater than the initial threshold")
+            )
+
+
+alsoProvides(IOSHACountry, IFormFieldProvider)

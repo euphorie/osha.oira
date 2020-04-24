@@ -207,4 +207,20 @@
 
   </genericsetup:upgradeSteps>
 
+  <genericsetup:registerProfile
+      name="to16"
+      title="Upgrade profile to add the behavior osha.country.extrafields to euphorie.country"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      directory="to16"
+      />
+
+  <genericsetup:upgradeDepends
+      title="Add the behavior osha.country.extrafields to euphorie.country"
+      destination="16"
+      import_profile="osha.oira.upgrade:to16"
+      profile="osha.oira:default"
+      source="15"
+      />
+
 </configure>

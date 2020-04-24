@@ -278,6 +278,52 @@
                     data-pat-tooltip="trigger: hover; position-list: lm"
                     title="${webhelpers/get_progress_indicator_title}">${webhelpers/traversed_session/session/completion_percentage|string:0}%</strong>
                   </a>
+                  <div class="status-sentinel pat-message notice"
+                       tal:define="
+                         certificate_view nocall: webhelpers/traversed_session/@@certificate;
+                         country python: certificate_view.country;
+                       "
+                       tal:condition="certificate_view/can_display_certificate_notice"
+                  >
+                    <form class="pat-inject"
+                          action="${request/getURL}#status"
+                          tal:condition="XXX|nothing"
+                    >
+                      <button class="close-panel"
+                              type="submit"
+                              i18n:translate=""
+                      >Hide this message</button>
+                    </form>
+                    <p tal:condition="certificate_view/can_display_certificate_teaser"
+                       i18n:translate=""
+                    >
+                      You have completed
+                      <tal:name i18n:name="completed">${certificate_view/completion_percentage}%</tal:name>
+                      of the risk assessment.
+                      When you have completed
+                      <tal:name i18n:name="required">${country/certificate_completion_threshold}%</tal:name>
+                      of the risk assessment,
+                      you will be eligible for a certificate.
+                    </p>
+                    <p tal:replace="structure country/certificate_text/output|XXX|nothing"></p>
+                    <tal:earned condition="certificate_view/can_display_certificate_earned">
+                      <p tal:condition="certificate_view/can_display_certificate_earned">
+                        <strong i18n:translate="">
+                          <tal:name i18n:name="required">${certificate_view/completion_percentage}%</tal:name>
+                          Complete!
+                        </strong>
+                        <tal:i18n i18n:translate="">
+                        You have earned a certificate for this tool.
+                        </tal:i18n>
+                      </p>
+                      <p class="button-bar">
+                        <a class="pat-button pat-inject"
+                           href="${here/absolute_url}/@@certificate"
+                           data-pat-inject="history: record"
+                        >View certificate</a>
+                      </p>
+                    </tal:earned>
+                  </div>
                 </li>
               </tal:if_not_anon>
             </ol>

@@ -35,6 +35,15 @@
       />
 
   <browser:page
+      name="certificate"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      permission="zope2.View"
+      class=".certificate.Certificate"
+      template="templates/certificate.pt"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
       name="risk_macros"
       for="*"
       permission="zope.Public"

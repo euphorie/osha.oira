@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      metal:use-macro="context/@@shell/macros/shell"
+      i18n:domain="euphorie"
+>
+
+  <body>
+    <metal:slot fill-slot="content">
+      <div id="content-pane">
+        <div class="container">
+          <div class="row">
+            <div class="seven columns">
+              <a class="certificate-container"
+                 id="certificate"
+                 href="${here/portal_url}/@@certificates/${view/certificate_uid|XXX|nothing}"
+                 target="_blank"
+              >
+                <article class="style-8 type-public certificate pat-auto-scale">
+                  <img class="certificate-backdrop"
+                       src="${here/portal_url}/++resource++euphorie.resources/oira/certificates/certificate-8.svg"
+                  />
+                  <h1 class="certificate-title"
+                      i18n:translate=""
+                  >Certificate</h1>
+                  <p class="certificate-title-byline"
+                     i18n:translate=""
+                  >This certificate is presented to</p>
+                  <p class="certificate-user-name"
+                     i18n:translate=""
+                  >${view/certificate/title}</p>
+                  <p class="certificate-achievement"
+                     i18n:translate=""
+                  >
+                    For conducting a risk assessment with the tool
+                    <strong class="certificate-tool-name"
+                            i18n:name="title"
+                    >
+                      &ldquo;${here/session/title}&rdquo;
+                    </strong>
+                    on
+                    <time class="certificate-date"
+                          i18n:name="date"
+                    >
+                      7 September 2019
+                    </time>.
+                  </p>
+                </article>
+              </a>
+            </div>
+            <div class="five columns">
+              <div class="pat-message notice"
+                   id="message-box"
+              >
+                <form class="pat-form pat-validation"
+                      action="${request/getURL}/#message-box"
+                >
+
+                  <fieldset class="pat-inject pat-autosubmit pat-subform vertical">
+                    <label class="pat-subform pat-inject"
+                           data-pat-inject="source: #certificate; target: #certificate;"
+                    >
+                      <tal:i18n i18n:translate="">
+                        Name on certificate
+                      </tal:i18n>
+                      <input name="title"
+                             placeholder="Your company name"
+                             required
+                             type="text"
+                             value="${view/certificate/title}"
+                      />
+                    </label>
+                    <fieldset class="pat-checklist">
+                      <label>
+                        <input name="public"
+                               type="checkbox"
+                        />
+                        <tal:i18n i18n:translate="">Make public</tal:i18n>
+                      </label>
+                    </fieldset>
+                    <button hidden
+                            type="submit"
+                            i18n:translate=""
+                    >
+                      Send
+                    </button>
+                  </fieldset>
+                  <p i18n:translate="">
+                    Your certificate for
+                    <strong i18n:name="title">&ldquo;${view/certificate/title}&rdquo;</strong>
+                    is private unless you choose to make it public.
+                    By ticking the &ldquo;Make public&rdquo; tickbox above, your certificate will be published on the official
+                    <a href="${here/XXX|nothing}https://oiraproject.eu/en/certificates/"
+                       target="_blank"
+                       i18n:translate=""
+                    >${view/site_title}</a>.</p>
+                  <p tal:replace="structure view/country/certificate_text/output|XXX|nothing"></p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </metal:slot>
+  </body>
+</html>

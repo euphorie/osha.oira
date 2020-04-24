@@ -9,6 +9,8 @@ log = getLogger(__name__)
 
 class OSHAWebHelpers(WebHelpers):
 
+    show_completion_percentage = True
+
     @memoize
     def styles_override(self):
 
@@ -26,8 +28,3 @@ class OSHAWebHelpers(WebHelpers):
             x, y = image.getImageSize()
             if x < 1000 or y < 430:
                 return True
-
-    @property
-    @memoize
-    def show_completion_percentage(self):
-        return True

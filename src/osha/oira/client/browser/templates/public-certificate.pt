@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      metal:use-macro="context/@@layout/macros/layout"
+      i18n:domain="euphorie"
+>
+  <metal:content fill-slot="content">
+    <metal:certificate define-macro="certificate">
+      <article class="style-8 type-public certificate pat-auto-scale"
+               tal:define="
+                 certificate view/certificate;
+               "
+      >
+        <img class="certificate-backdrop"
+             src="${here/portal_url}/++resource++euphorie.resources/oira/certificates/certificate-8.svg"
+        />
+        <h1 class="certificate-title"
+            i18n:translate=""
+        >Certificate</h1>
+        <p class="certificate-title-byline"
+           i18n:translate=""
+        >This certificate is presented to</p>
+        <p class="certificate-user-name"
+           i18n:translate=""
+        >${certificate/title}</p>
+        <p class="certificate-achievement"
+           i18n:translate=""
+        >
+          For conducting a risk assessment with the tool
+          <strong class="certificate-tool-name"
+                  i18n:name="title"
+          >
+          &ldquo;${view/session/title}&rdquo;
+          </strong>
+          on
+          <time class="certificate-date"
+                i18n:name="date"
+          >
+          ${certificate/hr_date}
+          </time>.
+        </p>
+      </article>
+    </metal:certificate>
+  </metal:content>
+</html>

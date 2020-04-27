@@ -1,11 +1,19 @@
 # coding=utf-8
+from euphorie.client import model
+from euphorie.client.model import metadata
+from logging import getLogger
+from plone import api
+from Products.CMFPlone.i18nl10n import monthname_msgid
+from sqlalchemy import orm
 from sqlalchemy import schema
 from sqlalchemy import sql
 from sqlalchemy import types
-from sqlalchemy import orm
 from sqlalchemy.ext.declarative import instrument_declarative
-from euphorie.client import model
-from euphorie.client.model import metadata
+
+import json
+
+
+logger = getLogger(__name__)
 
 
 class LoginStatistics(model.BaseObject):
@@ -40,6 +48,30 @@ class Certificate(model.BaseObject):
         index=True,
     )
     session = orm.relation("SurveySession", cascade="all")
+
+    @property
+    def json_data(self):
+        try:
+            return json.loads(self.json)
+        except (TypeError, ValueError):
+            return {}
+
+    @property
+    def title(self):
+        return self.json_data.get("title", u"")
+
+    @property
+    def hr_date(self):
+        date = self.json_data.get("date", u"").split("-")
+        if not date:
+            return u""
+        try:
+            date[1] = api.portal.translate(
+                monthname_msgid(date[1]), domain="plonelocales"
+            )
+        except Exception:
+            logger.error("Not a valid date %r", date)
+        return u" ".join(reversed(date))
 
 
 _instrumented = False

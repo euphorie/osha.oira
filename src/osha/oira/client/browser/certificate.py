@@ -2,8 +2,11 @@
 from osha.oira.client import model
 from plone import api
 from plone.memoize.view import memoize
+from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from z3c.saconfig import Session
+from zope.interface import implementer
+from zope.publisher.interfaces import IPublishTraverse
 
 import json
 import uuid
@@ -76,6 +79,13 @@ class Certificate(BrowserView):
 
     @property
     @memoize
+    def session(self):
+        """ Find the certificate associated to this session
+        """
+        return self.webhelpers.traversed_session.session
+
+    @property
+    @memoize
     def certificate_json(self):
         try:
             return json.loads(self.certificate.json)
@@ -85,11 +95,13 @@ class Certificate(BrowserView):
     def maybe_update(self):
         if self.request.method != "POST":
             return
-        known_keys = (
-            "title",
-        )
+        known_keys = ("title",)
         values = self.certificate_json
-        new_values = {key: self.request.form.get(key) for key in known_keys if key in self.request.form}
+        new_values = {
+            key: self.request.form.get(key)
+            for key in known_keys
+            if key in self.request.form
+        }
 
         if self.request.form.get("public"):
             self.certificate.secret = uuid.uuid4().hex
@@ -102,7 +114,39 @@ class Certificate(BrowserView):
         values.update(new_values)
         self.certificate.json = json.dumps(values)
 
-
     def __call__(self):
         self.maybe_update()
         return super(Certificate, self).__call__()
+
+
+@implementer(IPublishTraverse)
+class PublicCertificate(BrowserView):
+    """ View to publish a public certificate once the hash is known
+    """
+
+    def publishTraverse(self, request, name):
+        self.secret = name
+        return self
+
+    @property
+    def certificate(self):
+        return (
+            Session.query(model.Certificate)
+            .filter(model.Certificate.secret == safe_unicode(self.secret))
+            .one()
+        )
+
+    @property
+    @memoize
+    def session(self):
+        """ Find the certificate associated to this session
+        """
+        return self.certificate.session
+
+    @property
+    @memoize
+    def certificate_json(self):
+        try:
+            return json.loads(self.certificate.json)
+        except (TypeError, ValueError):
+            return {}

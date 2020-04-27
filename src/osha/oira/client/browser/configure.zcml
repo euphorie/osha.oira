@@ -43,6 +43,15 @@
       layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
       />
 
+  <!-- Certificates are not protected -->
+  <browser:page
+      name="certificates"
+      for="*"
+      permission="zope.Public"
+      class=".certificate.PublicCertificate"
+      template="templates/public-certificate.pt"
+      />
+
   <browser:page
       name="risk_macros"
       for="*"

@@ -1,7 +1,12 @@
 # coding=utf-8
+from osha.oira.client import model
 from plone import api
-from Products.Five import BrowserView
 from plone.memoize.view import memoize
+from Products.Five import BrowserView
+from z3c.saconfig import Session
+
+import json
+import uuid
 
 
 class Certificate(BrowserView):
@@ -9,6 +14,11 @@ class Certificate(BrowserView):
     @memoize
     def webhelpers(self):
         return api.content.get_view("webhelpers", self.context, self.request)
+
+    @property
+    @memoize
+    def site_title(self):
+        return api.portal.get_registry_record("plone.site_title")
 
     @property
     @memoize
@@ -56,13 +66,43 @@ class Certificate(BrowserView):
     @property
     @memoize
     def certificate(self):
-        return {
-            "title": self.request.form.get("title") or "DSakdsaj",
-        }
+        """ Find the certificate associated to this session
+        """
+        return (
+            Session.query(model.Certificate)
+            .filter(model.Certificate.session_id == self.webhelpers.session_id)
+            .one()
+        )
 
     @property
     @memoize
-    def site_title(self):
-        """
-        """
-        return "Oira ciao"
+    def certificate_json(self):
+        try:
+            return json.loads(self.certificate.json)
+        except (TypeError, ValueError):
+            return {}
+
+    def maybe_update(self):
+        if self.request.method != "POST":
+            return
+        known_keys = (
+            "title",
+        )
+        values = self.certificate_json
+        new_values = {key: self.request.form.get(key) for key in known_keys if key in self.request.form}
+
+        if self.request.form.get("public"):
+            self.certificate.secret = uuid.uuid4().hex
+        else:
+            self.certificate.secret = None
+
+        if new_values == {key: self.certificate_json.get(key) for key in new_values}:
+            return
+
+        values.update(new_values)
+        self.certificate.json = json.dumps(values)
+
+
+    def __call__(self):
+        self.maybe_update()
+        return super(Certificate, self).__call__()

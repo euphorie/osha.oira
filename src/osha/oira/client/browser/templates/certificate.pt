@@ -17,8 +17,9 @@
             <div class="seven columns">
               <a class="certificate-container"
                  id="certificate"
-                 href="${here/portal_url}/@@certificates/${view/certificate_uid|XXX|nothing}"
+                 href="${here/portal_url}/@@certificates/${view/certificate/secret}"
                  target="_blank"
+                 tal:omit-tag="not:view/certificate/secret"
               >
                 <article class="style-8 type-public certificate pat-auto-scale">
                   <img class="certificate-backdrop"
@@ -32,7 +33,7 @@
                   >This certificate is presented to</p>
                   <p class="certificate-user-name"
                      i18n:translate=""
-                  >${view/certificate/title}</p>
+                  >${request/title|view/certificate_json/title|nothing}</p>
                   <p class="certificate-achievement"
                      i18n:translate=""
                   >
@@ -58,6 +59,7 @@
               >
                 <form class="pat-form pat-validation"
                       action="${request/getURL}/#message-box"
+                      method="post"
                 >
 
                   <fieldset class="pat-inject pat-autosubmit pat-subform vertical">
@@ -68,15 +70,17 @@
                         Name on certificate
                       </tal:i18n>
                       <input name="title"
+                             disabled="disabled"
                              placeholder="Your company name"
                              required
                              type="text"
-                             value="${view/certificate/title}"
+                             value="${request/title|view/certificate_json/title|nothing}"
                       />
                     </label>
                     <fieldset class="pat-checklist">
                       <label>
-                        <input name="public"
+                        <input checked="${python: 'checked' if view.certificate.secret else None}"
+                               name="public"
                                type="checkbox"
                         />
                         <tal:i18n i18n:translate="">Make public</tal:i18n>
@@ -91,10 +95,10 @@
                   </fieldset>
                   <p i18n:translate="">
                     Your certificate for
-                    <strong i18n:name="title">&ldquo;${view/certificate/title}&rdquo;</strong>
+                    <strong i18n:name="title">&ldquo;${view/certificate_json/title|nothing}&rdquo;</strong>
                     is private unless you choose to make it public.
                     By ticking the &ldquo;Make public&rdquo; tickbox above, your certificate will be published on the official
-                    <a href="${here/XXX|nothing}https://oiraproject.eu/en/certificates/"
+                    <a href="${here/portal_url}/@@certificates"
                        target="_blank"
                        i18n:translate=""
                     >${view/site_title}</a>.</p>

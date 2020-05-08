@@ -17,7 +17,8 @@
     <metal:bar fill-slot="buttonbar"><tal:tile replace="tile:euphorie.addbar"/></metal:bar>
     <metal:content fill-slot="content"
             tal:define="can_edit python:tools.checkPermission('Modify portal content');
-                        media_url string:++resource++euphorie.resources/oira/style">
+                        media_url string:++resource++euphorie.resources/oira/style;
+                        integrated_action_plan python:getattr(context, 'integrated_action_plan', False);">
       <h2 i18n:translate="header_information">Information</h2>
 
       <dl class="grid span-9">
@@ -33,8 +34,8 @@
         <dt i18n:translate="label_tool_type">Type of OiRA Tool</dt>
         <dd>${context/get_tool_type_name}</dd>
         <dt i18n:translate="label_integrated_action_plan">Integrated Action Plan</dt>
-        <dd tal:condition="context/integrated_action_plan" i18n:translate="Yes">Yes</dd>
-        <dd tal:condition="not:context/integrated_action_plan" i18n:translate="No">No</dd>
+        <dd tal:condition="integrated_action_plan" i18n:translate="Yes">Yes</dd>
+        <dd tal:condition="not:integrated_action_plan" i18n:translate="No">No</dd>
       </dl>
 
       <p style="clear:both">You can <a href="${here/absolute_url}/survey-contents-docx">download the contents of this OiRA tool in Word format.</a></p>

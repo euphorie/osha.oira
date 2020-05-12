@@ -150,3 +150,28 @@ class PublicCertificate(BrowserView):
             return json.loads(self.certificate.json)
         except (TypeError, ValueError):
             return {}
+
+
+class RemoveCertificateBox(BrowserView):
+    @property
+    @memoize
+    def webhelpers(self):
+        return api.content.get_view("webhelpers", self.context, self.request)
+
+    def maybe_update(self):
+        if self.request.method != "POST":
+            return
+
+        if not self.webhelpers.show_certificate_status_box():
+            # Already added
+            return
+
+        Session.add(
+            model.UsersNotInterestedInCertificateStatusBox(
+                account_id=self.webhelpers.get_current_account().id
+            )
+        )
+
+    def __call__(self):
+        self.maybe_update()
+        return super(RemoveCertificateBox, self).__call__()

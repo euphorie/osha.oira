@@ -32,6 +32,19 @@ class LoginStatistics(model.BaseObject):
             server_default=sql.text('CURRENT_TIMESTAMP'),
             nullable=False, index=True)
 
+class UsersNotInterestedInCertificateStatusBox(model.BaseObject):
+    """
+    """
+
+    __tablename__ = "users_not_interested_in_certificate_status_box"
+    account_id = schema.Column(
+        types.Integer(),
+        schema.ForeignKey(model.Account.id, onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
+        primary_key=True,
+    )
+
+
 
 class Certificate(model.BaseObject):
     """
@@ -76,7 +89,7 @@ class Certificate(model.BaseObject):
 
 _instrumented = False
 if not _instrumented:
-    for cls in [LoginStatistics, Certificate]:
+    for cls in [LoginStatistics, Certificate, UsersNotInterestedInCertificateStatusBox]:
         instrument_declarative(
             cls, metadata._decl_registry, metadata
         )

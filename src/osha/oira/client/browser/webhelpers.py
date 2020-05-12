@@ -3,6 +3,7 @@ from datetime import date
 from euphorie.client.browser.webhelpers import WebHelpers
 from logging import getLogger
 from osha.oira.client.model import Certificate
+from osha.oira.client.model import UsersNotInterestedInCertificateStatusBox
 from plone import api
 from plone.memoize.instance import memoize
 from plone.namedfile.interfaces import INamedBlobImage
@@ -72,3 +73,13 @@ class OSHAWebHelpers(WebHelpers):
         ).update_completion_percentage(session)
         self.maybe_create_earned_certificate()
         return completion_percentage
+
+    def show_certificate_status_box(self):
+        """ Check if the current user should see his own certificate status box
+        """
+        account_id = self.get_current_account().id
+        return (
+            Session.query(UsersNotInterestedInCertificateStatusBox)
+            .filter(UsersNotInterestedInCertificateStatusBox.account_id == account_id)
+            .count()
+        ) == 0

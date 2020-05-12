@@ -1,10 +1,10 @@
 Changelog
 =========
 
-6.1.2 (unreleased)
+6.2.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Adapt to action plan improvements from Euphorie
 
 
 6.1.1 (2020-04-22)

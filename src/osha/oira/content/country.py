@@ -9,6 +9,7 @@ from osha.oira.interfaces import IOSHAContentSkinLayer
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.directives import form
 from plone.supermodel import model
+from plonetheme.nuplone.z3cform.directives import depends
 from zope import schema
 from zope.interface import alsoProvides
 from zope.interface import Invalid
@@ -60,6 +61,7 @@ class OSHAManageUsers(ManageUsers):
                          if ICountryManager.providedBy(manager)]
         self.managers.sort(key=lambda s: s["title"].lower())
 
+
 class IOSHACountry(model.Schema):
     """ Additional fields for the OSHA countries
     """
@@ -67,37 +69,48 @@ class IOSHACountry(model.Schema):
     certificates_enabled = schema.Bool(
         title=_("Enable certificates"),
         description=_(
-            "By checking this fields user that complete a session up to a completion threshold "
-            "will earn a certificate"
+            "If enabled, users will be able to obtain an official certificate of "
+            "completion once they reach the threshold defined below."
         ),
         default=False,
     )
+    depends("IOSHACountry.certificate_initial_threshold",
+            "IOSHACountry.certificates_enabled",
+            "on")
     certificate_initial_threshold = schema.Int(
         title=_("Certificate initial threshold"),
         description=_(
-            "After a session completion rate is greater than this limit "
+            "After a session completion rate is greater than this limit, "
             "the user will be informed about the possibility to earn a certificate. "
-            "It only makes sense when certificates are enabled"
         ),
         default=10,
         min=0,
         max=100,
     )
+
+    depends("IOSHACountry.certificate_completion_threshold",
+            "IOSHACountry.certificates_enabled",
+            "on")
     certificate_completion_threshold = schema.Int(
         title=_("Certificate completion threshold"),
         description=_(
             "After a session completion rate is greater than this limit "
-            "the user will earn a certificate. "
-            "It only makes sense when certificates are enabled"
+            "the user will earn a certificate."
         ),
         default=85,
         min=0,
         max=100,
     )
+    depends("IOSHACountry.certificate_explanatory_sentence",
+            "IOSHACountry.certificates_enabled",
+            "on")
     certificate_explanatory_sentence = HtmlText(
         title=_("Explanatory sentence"),
-        description=_("A short explanation that is shown to the user after reaching "
-                      "the initial threshold"),
+        description=_(
+            "A short explanation that is shown to the user after reaching the initial "
+            "threshold. You can use this to point to an external website that provides "
+            "more information."
+        ),
         required=False,
     )
     form.widget(

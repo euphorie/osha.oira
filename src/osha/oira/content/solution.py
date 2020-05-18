@@ -1,11 +1,12 @@
-from five import grok
+# coding=utf-8
+from .. import _
+from ..interfaces import IOSHAContentSkinLayer
+from euphorie.content.solution import Add as BaseAdd
+from euphorie.content.solution import Edit as BaseEdit
 from euphorie.content.solution import ISolution
 from euphorie.content.solution import View as BaseView
-from plone.directives import form
-from plone.directives import dexterity
+from five import grok
 from plonetheme.nuplone.skin.interfaces import NuPloneSkin
-from ..interfaces import IOSHAContentSkinLayer
-from .. import _
 
 grok.templatedir("templates")
 
@@ -21,6 +22,7 @@ class View(BaseView):
         works for all other content types but not for solution.
         !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         """
+
     grok.context(ISolution)
     grok.require("zope2.View")
     grok.layer(NuPloneSkin)
@@ -28,8 +30,9 @@ class View(BaseView):
     grok.template("solution_view")
 
 
-class SolutionEdit(form.SchemaEditForm):
+class SolutionEdit(BaseEdit):
     """ Override to allow us to set form title and button labels """
+
     grok.context(ISolution)
     grok.require("cmf.ModifyPortalContent")
     grok.layer(IOSHAContentSkinLayer)
@@ -37,26 +40,25 @@ class SolutionEdit(form.SchemaEditForm):
 
     def updateFields(self):
         super(SolutionEdit, self).updateFields()
-        self.buttons['save'].title = _(
-            u'button_save_changes', default=u"Save changes")
-        self.buttons['cancel'].title = _(u'button_cancel', default=u"Cancel")
+        self.buttons["save"].title = _(u"button_save_changes", default=u"Save changes")
+        self.buttons["cancel"].title = _(u"button_cancel", default=u"Cancel")
 
     @property
     def label(self):
         return _(u"Edit Solution", default=u"Edit Measure")
 
 
-class SolutionAdd(dexterity.AddForm):
+class SolutionAdd(BaseAdd):
     """ Override to allow us to set form title and button labels """
+
     grok.context(ISolution)
     grok.name("euphorie.solution")
     grok.require("euphorie.content.AddNewRIEContent")
 
     def updateFields(self):
         super(SolutionAdd, self).updateFields()
-        self.buttons['save'].title = _(
-            u'button_save_changes', default=u"Save changes")
-        self.buttons['cancel'].title = _(u'button_cancel', default=u"Cancel")
+        self.buttons["save"].title = _(u"button_save_changes", default=u"Save changes")
+        self.buttons["cancel"].title = _(u"button_cancel", default=u"Cancel")
 
     @property
     def label(self):

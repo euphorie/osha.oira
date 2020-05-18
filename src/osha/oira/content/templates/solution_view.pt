@@ -14,19 +14,13 @@
 
 
     <metal:content fill-slot="content" tal:define="can_edit python:tools.checkPermission('Modify portal content')">
-      <p tal:replace="structure context/description">A description of the solution</p>
-
-      <h2 i18n:translate="header_information">Information</h2>
+      <p style="font-size:130%" tal:content="structure context/description">A description of the solution</p>
 
       <dl class="grid span-9">
-        <dt i18n:translate="label_measure_action_plan">General approach (to eliminate or reduce the risk)</dt>
-        <dd>${context/action_plan}</dd>
-        <tal:block condition="context/prevention_plan">
-          <dt i18n:translate="label_measure_prevention_plan">Specific action(s) required to implement this approach</dt>
-          <dd>${context/prevention_plan}</dd>
-        </tal:block>
+        <dt i18n:translate="label_description">Description</dt>
+        <dd>${context/action}</dd>
         <tal:block condition="context/requirements">
-          <dt i18n:translate="label_measure_requirements">Level of expertise and/or requirements needed</dt>
+          <dt i18n:translate="label_expertise">Expertise</dt>
           <dd>${context/requirements}</dd>
         </tal:block>
       </dl>

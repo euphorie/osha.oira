@@ -14,11 +14,12 @@
       <div id="content-pane">
         <div class="container">
           <div class="row">
-            <div class="seven columns certificate-update-target-1">
+            <div class="seven columns">
+
               <a class="certificate-container"
-                 href="${here/portal_url}/@@certificates/${view/certificate/secret}"
+                 id="certificate"
+                 href="${python:'%s/@@certificates/%s' %(here.portal_url(), view.certificate.secret) if view.certificate.secret else None}"
                  target="_blank"
-                 tal:omit-tag="not:view/certificate/secret"
               >
                 <metal:certificate use-macro="here/certificates/macros/certificate" />
               </a>
@@ -32,9 +33,10 @@
                       method="post"
                 >
 
-                  <fieldset class="pat-inject pat-autosubmit pat-subform vertical">
+                  <fieldset class="pat-inject pat-autosubmit pat-subform vertical"
+                            data-pat-inject="source: #certificate::element; target: #certificate::element; &amp;&amp; source: #message-box; target: #message-box;">
                     <label class="pat-subform pat-inject"
-                           data-pat-inject="source: .certificate-update-target-1; target: .certificate-update-target-1 &amp;&amp; source: .certificate-update-target-2; target: .certificate-update-target-2;"
+                           data-pat-inject="source: #certificate; target: #certificate;"
                     >
                       <tal:i18n i18n:translate="">
                         Name on certificate
@@ -63,17 +65,38 @@
                       Send
                     </button>
                   </fieldset>
-                  <p class="certificate-update-target-2"
-                     i18n:translate=""
-                  >
-                    Your certificate for
-                    <strong i18n:name="title">&ldquo;${view/certificate_json/title|nothing}&rdquo;</strong>
-                    is private unless you choose to make it public.
-                    By ticking the &ldquo;Make public&rdquo; tickbox above, your certificate will be published on the official
-                    <a href="${here/portal_url}/@@certificates"
-                       target="_blank"
-                       i18n:translate=""
-                    >${view/site_title}</a>.</p>
+
+                  <tal:private condition="not:view/certificate/secret">
+                    <p i18n:translate="">
+                      Your certificate for
+                      <strong i18n:name="title">&ldquo;${view/session/title}&rdquo;</strong>
+                      is private unless you choose to make it public.
+                      By ticking the &ldquo;Make public&rdquo; tickbox above, your certificate will be published on the official
+                      <a href="https://oiraproject.eu"
+                         target="_blank"
+                         i18n:name="site_title"
+                         i18n:translate=""
+                      >OiRA website</a>.
+                    </p>
+                  </tal:private>
+                  <tal:public condition="view/certificate/secret">
+                    <p i18n:translate="">
+                      Your certificate for
+                      <strong i18n:name="title">&ldquo;${view/session/title}&rdquo;</strong>
+                      is
+                      <a href="${here/portal_url}/@@certificates/${view/certificate/secret}"
+                         target="_blank"
+                         i18n:name="site_title"
+                         i18n:translate=""
+                      >publically visible</a> on the OIRA website.
+                    </p>
+                    <p i18n:translate="">
+                      Copy the following link to anyone to whom it may concern as proof that you've conducted this risk assessment.
+                    </p>
+                    <fieldset class="vertical">
+                      <textarea rows="2" class="copy-box">${here/portal_url}/@@certificates/${view/certificate/secret}</textarea>
+                    </fieldset>
+                  </tal:public>
                   <p tal:replace="structure view/country/certificate_explanatory_sentence"></p>
                 </form>
               </div>

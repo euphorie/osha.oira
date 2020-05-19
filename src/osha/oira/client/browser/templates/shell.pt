@@ -306,17 +306,17 @@
                         of the risk assessment,
                         you will be eligible for a certificate.
                       </p>
+                      <p tal:condition="certificate_view/can_display_certificate_earned">
+                        <strong i18n:translate="">
+                          <tal:name i18n:name="required">${certificate_view/completion_percentage}%</tal:name>
+                          Complete!
+                        </strong>
+                        <tal:i18n i18n:translate="">
+                        You have earned a certificate for this tool.
+                        </tal:i18n>
+                      </p>
                       <p tal:replace="structure country/certificate_explanatory_sentence"></p>
                       <tal:earned condition="certificate_view/can_display_certificate_earned">
-                        <p tal:condition="certificate_view/can_display_certificate_earned">
-                          <strong i18n:translate="">
-                            <tal:name i18n:name="required">${certificate_view/completion_percentage}%</tal:name>
-                            Complete!
-                          </strong>
-                          <tal:i18n i18n:translate="">
-                          You have earned a certificate for this tool.
-                          </tal:i18n>
-                        </p>
                         <p class="button-bar">
                           <a class="pat-button pat-inject"
                             href="${webhelpers/traversed_session/absolute_url}/@@certificate"

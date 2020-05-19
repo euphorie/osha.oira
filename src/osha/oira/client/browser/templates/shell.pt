@@ -254,31 +254,31 @@
                       disabled python:page_section=='' or (page_section=='preparation' and new_session);
                     "
                 >
-                  <tal:if_not_disabled_by_userpreference condition="webhelpers/show_certificate_status_box">
-                    <a class="status pat-switch pat-inject"
-                      href="${webhelpers/traversed_session/absolute_url}/@@status#content"
-                      data-pat-inject="history: record; source: #content; target: #content &amp;&amp; source: #navigation; target: #navigation"
-                      data-pat-switch="selector: body; remove: focus-*; add: focus-document &amp;&amp; selector: body; remove: sidebar-on; add: sidebar-off"
-                      tal:condition="not:disabled"
-                    ><tal:translate i18n:translate="navigation_status">Status</tal:translate>
-                      <strong
-                        tal:condition="webhelpers/show_completion_percentage"
-                        class="pie-graph pat-tooltip"
-                        data-percentage="${webhelpers/traversed_session/session/completion_percentage|string:0}"
-                        data-pat-tooltip="trigger: hover; position-list: lm"
-                        title="${webhelpers/get_progress_indicator_title}"
-                          >${webhelpers/traversed_session/session/completion_percentage|string:0}%</strong>
-                    </a>
-                    <a class="status"
-                      tal:condition="disabled"
-                    ><tal:translate i18n:translate="navigation_status">Status</tal:translate>
-                      <strong
+                  <a class="status pat-switch pat-inject"
+                    href="${webhelpers/traversed_session/absolute_url}/@@status#content"
+                    data-pat-inject="history: record; source: #content; target: #content &amp;&amp; source: #navigation; target: #navigation"
+                    data-pat-switch="selector: body; remove: focus-*; add: focus-document &amp;&amp; selector: body; remove: sidebar-on; add: sidebar-off"
+                    tal:condition="not:disabled"
+                  ><tal:translate i18n:translate="navigation_status">Status</tal:translate>
+                    <strong
                       tal:condition="webhelpers/show_completion_percentage"
                       class="pie-graph pat-tooltip"
                       data-percentage="${webhelpers/traversed_session/session/completion_percentage|string:0}"
                       data-pat-tooltip="trigger: hover; position-list: lm"
-                      title="${webhelpers/get_progress_indicator_title}">${webhelpers/traversed_session/session/completion_percentage|string:0}%</strong>
-                    </a>
+                      title="${webhelpers/get_progress_indicator_title}"
+                        >${webhelpers/traversed_session/session/completion_percentage|string:0}%</strong>
+                  </a>
+                  <a class="status"
+                    tal:condition="disabled"
+                  ><tal:translate i18n:translate="navigation_status">Status</tal:translate>
+                    <strong
+                    tal:condition="webhelpers/show_completion_percentage"
+                    class="pie-graph pat-tooltip"
+                    data-percentage="${webhelpers/traversed_session/session/completion_percentage|string:0}"
+                    data-pat-tooltip="trigger: hover; position-list: lm"
+                    title="${webhelpers/get_progress_indicator_title}">${webhelpers/traversed_session/session/completion_percentage|string:0}%</strong>
+                  </a>
+                  <tal:if_not_disabled_by_userpreference condition="webhelpers/show_certificate_status_box">
                     <div class="status-sentinel pat-message notice"
                         tal:define="
                           certificate_view nocall: webhelpers/traversed_session/@@certificate;

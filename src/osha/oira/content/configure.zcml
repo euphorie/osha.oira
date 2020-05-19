@@ -18,6 +18,12 @@
         />
 
     <plone:behavior
+        name="osha.country.extrafields"
+        title="OSHA extra Country fields"
+        provides=".country.IOSHACountry"
+        />
+
+    <plone:behavior
         title="OSHA extra Survey fields"
         description="Provide additional OSHA fields"
         provides=".survey.IOSHASurvey"

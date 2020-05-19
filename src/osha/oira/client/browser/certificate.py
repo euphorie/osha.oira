@@ -174,4 +174,7 @@ class RemoveCertificateBox(BrowserView):
 
     def __call__(self):
         self.maybe_update()
-        return super(RemoveCertificateBox, self).__call__()
+        # Redirect to Report, since this is a cheap view, to get the main navigation
+        self.request.RESPONSE.redirect(
+            "{session}/@@report".format(session=self.context.absolute_url())
+        )

@@ -52,6 +52,15 @@
       layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
       />
 
+  <browser:page
+      name="status"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      permission="euphorie.client.ViewSurvey"
+      class="euphorie.client.browser.session.Status"
+      template="templates/status.pt"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
   <!-- Certificates are not protected -->
   <browser:page
       name="certificates"

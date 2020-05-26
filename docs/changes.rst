@@ -4,7 +4,7 @@ Changelog
 6.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Update Statistics: Exclude guest accounts from assessment statistics. SCR-384
 
 
 6.2.0 (2020-05-12)

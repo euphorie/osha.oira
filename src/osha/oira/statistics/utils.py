@@ -46,6 +46,7 @@ class UpdateStatisticsDatabases(object):
         sessions = (
             self.session_application.query(SurveySession, Account)
             .filter(Account.id == SurveySession.account_id)
+            .filter(Account.account_type != "guest")
             .order_by(SurveySession.id)
         )
         if country is not None:

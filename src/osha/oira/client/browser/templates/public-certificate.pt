@@ -6,41 +6,67 @@
       i18n:domain="euphorie"
 >
   <metal:content fill-slot="content">
-    <metal:certificate define-macro="certificate">
-      <article class="style-8 type-public certificate pat-auto-scale"
-               tal:define="
-                 certificate view/certificate;
-               "
-      >
-        <img class="certificate-backdrop"
-             src="${here/portal_url}/++resource++euphorie.resources/oira/certificates/certificate-8.svg"
-        />
-        <h1 class="certificate-title"
-            i18n:translate=""
-        >Certificate</h1>
-        <p class="certificate-title-byline"
-           i18n:translate=""
-        >This certificate is presented to</p>
-        <p class="certificate-user-name"
-           i18n:translate=""
-        >${certificate/title}</p>
-        <p class="certificate-achievement"
-           i18n:translate=""
-        >
-          For conducting a risk assessment with the tool
-          <strong class="certificate-tool-name"
-                  i18n:name="title"
+    <style>
+      .certificate-metadata p{
+        margin: 0 1em 1em;
+      }
+    </style>
+    <div class="row">
+      <div class="seven columns">
+        <metal:certificate define-macro="certificate">
+          <article class="style-8 type-public certificate pat-auto-scale"
+                   tal:define="
+                     certificate view/certificate;
+                   "
           >
-          &ldquo;${view/session/title}&rdquo;
-          </strong>
-          on
-          <time class="certificate-date"
-                i18n:name="date"
-          >
-          ${certificate/hr_date}
-          </time>.
+            <img class="certificate-backdrop"
+                 src="${here/portal_url}/++resource++euphorie.resources/oira/certificates/certificate-8.svg"
+            />
+            <h1 class="certificate-title"
+                i18n:translate=""
+            >Certificate</h1>
+            <p class="certificate-title-byline"
+               i18n:translate=""
+            >This certificate is presented to</p>
+            <p class="certificate-user-name"
+               i18n:translate=""
+            >${certificate/title}</p>
+            <p class="certificate-achievement"
+               i18n:translate=""
+            >
+              For conducting a risk assessment with the tool
+              <strong class="certificate-tool-name"
+                      i18n:name="title"
+              >
+              &ldquo;${view/session/title}&rdquo;
+              </strong>
+              on
+              <time class="certificate-date"
+                    i18n:name="date"
+              >
+                ${certificate/hr_date}
+              </time>.
+            </p>
+          </article>
+        </metal:certificate>
+      </div>
+      <div class="five columns certificate-metadata">
+        <p>
+          <strong i18n:translate="">Tool</strong>:
+          ${view/session/title}
         </p>
-      </article>
-    </metal:certificate>
+        <p>
+          <strong i18n:translate="">Date</strong>:
+          ${view/certificate/hr_date}
+        </p>
+        <p>
+          <strong i18n:translate="">Completed</strong>:
+          ${view/session/completion_percentage}%
+        </p>
+        <metal:extra_fields use-macro="view/country_adapter/macros/extra_metadata"
+                            tal:condition="nocall:view/country_adapter"
+        />
+      </div>
+    </div>
   </metal:content>
 </html>

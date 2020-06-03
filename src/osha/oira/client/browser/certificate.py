@@ -176,6 +176,23 @@ class PublicCertificate(BrowserView):
         except (TypeError, ValueError):
             return {}
 
+    @property
+    @memoize
+    def country_adapter(self):
+        """ Try to get a specific adapter for this country
+        that will be used to show and handle additional fields in the certificate
+
+        The adapter should be a view like @@certificate_fr_specific
+        """
+        try:
+            return api.content.get_view(
+                "certificate_%s_specific" % self.session.zodb_path.partition("/")[0],
+                self.context,
+                self.request,
+            )
+        except api.exc.InvalidParameterError:
+            pass
+
 
 class RemoveCertificateBox(BrowserView):
     @property

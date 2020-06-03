@@ -45,11 +45,10 @@
 
   <browser:page
       name="certificate_fr_specific"
-      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      for="*"
       permission="zope2.View"
       class=".fr.Certificate"
       template="templates/certificate_fr_specific.pt"
-      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
       />
 
   <browser:page

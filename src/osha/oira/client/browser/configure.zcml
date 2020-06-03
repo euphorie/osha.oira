@@ -44,6 +44,14 @@
       />
 
   <browser:page
+      name="certificate_fr_specific"
+      for="*"
+      permission="zope2.View"
+      class=".fr.Certificate"
+      template="templates/certificate_fr_specific.pt"
+      />
+
+  <browser:page
       name="status"
       for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
       permission="euphorie.client.ViewSurvey"

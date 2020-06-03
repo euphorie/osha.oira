@@ -20,6 +20,32 @@ class Certificate(BrowserView):
 
     @property
     @memoize
+    def country_adapter(self):
+        """ Try to get a specific adapter for this country
+        that will be used to show and handle additional fields in the certificate
+
+        The adapter should be a view like @@certificate_fr_specific
+        """
+        try:
+            return api.content.get_view(
+                "certificate_%s_specific" % self.webhelpers.country,
+                self.context,
+                self.request,
+            )
+        except api.exc.InvalidParameterError:
+            pass
+
+    @property
+    @memoize
+    def known_field_names(self):
+        """ Return the field names we expect to have in the form
+
+        By default we expect to have a title
+        """
+        return ("title",) + getattr(self.country_adapter, "extra_known_field_names", ())
+
+    @property
+    @memoize
     def site_title(self):
         return api.portal.get_registry_record("plone.site_title")
 
@@ -95,11 +121,10 @@ class Certificate(BrowserView):
     def maybe_update(self):
         if self.request.method != "POST":
             return
-        known_keys = ("title",)
         values = self.certificate_json
         new_values = {
             key: self.request.form.get(key)
-            for key in known_keys
+            for key in self.known_field_names
             if key in self.request.form
         }
 
@@ -150,6 +175,23 @@ class PublicCertificate(BrowserView):
             return json.loads(self.certificate.json)
         except (TypeError, ValueError):
             return {}
+
+    @property
+    @memoize
+    def country_adapter(self):
+        """ Try to get a specific adapter for this country
+        that will be used to show and handle additional fields in the certificate
+
+        The adapter should be a view like @@certificate_fr_specific
+        """
+        try:
+            return api.content.get_view(
+                "certificate_%s_specific" % self.session.zodb_path.partition("/")[0],
+                self.context,
+                self.request,
+            )
+        except api.exc.InvalidParameterError:
+            pass
 
 
 class RemoveCertificateBox(BrowserView):

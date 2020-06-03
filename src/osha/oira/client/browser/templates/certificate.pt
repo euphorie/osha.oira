@@ -15,7 +15,6 @@
         <div class="container">
           <div class="row">
             <div class="seven columns">
-
               <a class="certificate-container"
                  id="certificate"
                  href="${python:'%s/@@certificates/%s' %(here.portal_url(), view.certificate.secret) if view.certificate.secret else None}"
@@ -34,7 +33,8 @@
                 >
 
                   <fieldset class="pat-inject pat-autosubmit pat-subform vertical"
-                            data-pat-inject="source: #certificate::element; target: #certificate::element; &amp;&amp; source: #message-box; target: #message-box;">
+                            data-pat-inject="source: #certificate::element; target: #certificate::element; &amp;&amp; source: #message-box; target: #message-box;"
+                  >
                     <label class="pat-subform pat-inject"
                            data-pat-inject="source: #certificate; target: #certificate;"
                     >
@@ -49,6 +49,9 @@
                              value="${request/title|view/certificate_json/title|nothing}"
                       />
                     </label>
+                    <metal:extra_fields use-macro="view/country_adapter/macros/extra_fields"
+                                        tal:condition="nocall:view/country_adapter"
+                    />
                     <fieldset class="pat-checklist">
                       <label>
                         <input checked="${python: 'checked' if view.certificate.secret else None}"
@@ -88,13 +91,16 @@
                          target="_blank"
                          i18n:name="site_title"
                          i18n:translate=""
-                      >publically visible</a> on the OIRA website.
+                      >publically visible</a>
+                       on the OIRA website.
                     </p>
                     <p i18n:translate="">
                       Copy the following link to anyone to whom it may concern as proof that you've conducted this risk assessment.
                     </p>
                     <fieldset class="vertical">
-                      <textarea rows="2" class="copy-box">${here/portal_url}/@@certificates/${view/certificate/secret}</textarea>
+                      <textarea class="copy-box"
+                                rows="2"
+                      >${here/portal_url}/@@certificates/${view/certificate/secret}</textarea>
                     </fieldset>
                   </tal:public>
                   <p tal:replace="structure view/country/certificate_explanatory_sentence"></p>

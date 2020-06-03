@@ -1,0 +1,39 @@
+<tal:i18n xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          xmlns:metal="http://xml.zope.org/namespaces/metal"
+          xmlns:tal="http://xml.zope.org/namespaces/tal"
+          i18n:domain="euphorie"
+>
+  <metal:macro define-macro="extra_fields">
+    <label>
+      <tal:i18n i18n:translate="">
+      Departement / Region
+      </tal:i18n>
+      <input disabled="${python: 'disabled' if view.certificate.secret else None}"
+             name="dept_or_region"
+             type="text"
+             value="${request/dept_or_region|view/certificate_json/dept_or_region|nothing}"
+      />
+    </label>
+    <label>
+      <tal:i18n i18n:translate="">
+      SIRET number
+      </tal:i18n>
+      <input disabled="${python: 'disabled' if view.certificate.secret else None}"
+             name="siret"
+             type="text"
+             value="${request/siret|view/certificate_json/siret|nothing}"
+      />
+    </label>
+    <label>
+      <tal:i18n i18n:translate="">
+      Contact name
+      </tal:i18n>
+      <input disabled="${python: 'disabled' if view.certificate.secret else None}"
+             name="contact"
+             type="text"
+             value="${request/contact|view/certificate_json/contact|nothing}"
+      />
+    </label>
+  </metal:macro>
+</tal:i18n>

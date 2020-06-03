@@ -4,6 +4,7 @@ Changelog
 6.2.1 (unreleased)
 ------------------
 
+- Allow certificate to be customized. SCR-382
 - Update Statistics: Exclude guest accounts from assessment statistics. SCR-384
 
 

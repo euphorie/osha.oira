@@ -38,18 +38,15 @@
   </metal:macro>
 
   <metal:macro define-macro="extra_metadata">
-    <p>
-      <strong i18n:translate="">Dept</strong>:
-      ${view/certificate_json/dept_or_region|nothing}
-    </p>
-    <p>
-      <strong i18n:translate="">SIRET</strong>:
-      ${view/certificate_json/siret|nothing}
-    </p>
-    <p>
-      <strong i18n:translate="">Contact</strong>:
-      ${view/certificate_json/contact|nothing}
-    </p>
+    <dt i18n:translate="">Departement / Region</dt>
+    <dd>${view/certificate_json/dept_or_region|nothing}</dd>
+
+    <dt i18n:translate="">SIRET number</dt>
+    <dd>${view/certificate_json/siret|nothing}</dd>
+
+    <dt i18n:translate="">Contact name</dt>
+    <dd>${view/certificate_json/contact|nothing}</dd>
+
   </metal:macro>
 
 </tal:i18n>

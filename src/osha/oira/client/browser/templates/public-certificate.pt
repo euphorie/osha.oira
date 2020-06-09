@@ -2,17 +2,12 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
-      metal:use-macro="context/@@layout/macros/layout"
+      metal:use-macro="context/@@shell-for-iframe/macros/shell-for-iframe"
       i18n:domain="euphorie"
 >
   <metal:content fill-slot="content">
-    <style>
-      .certificate-metadata p{
-        margin: 0 1em 1em;
-      }
-    </style>
-    <div class="row">
-      <div class="seven columns">
+    <div class="published-certificate">
+      <div class="certificate-view">
         <metal:certificate define-macro="certificate">
           <article class="style-8 type-public certificate pat-auto-scale"
                    tal:define="
@@ -50,22 +45,21 @@
           </article>
         </metal:certificate>
       </div>
-      <div class="five columns certificate-metadata">
-        <p>
-          <strong i18n:translate="">Tool</strong>:
-          ${view/session/title}
-        </p>
-        <p>
-          <strong i18n:translate="">Date</strong>:
-          ${view/certificate/hr_date}
-        </p>
-        <p>
-          <strong i18n:translate="">Completed</strong>:
-          ${view/session/completion_percentage}%
-        </p>
-        <metal:extra_fields use-macro="view/country_adapter/macros/extra_metadata"
-                            tal:condition="nocall:view/country_adapter"
-        />
+      <div class="certificate-data">
+        <dl class="pat-grid-list">
+
+          <dt i18n:translate="">Tool</dt>
+          <dd>${view/session/title}</dd>
+
+          <dt i18n:translate="">Date</dt>
+          <dd>${view/certificate/hr_date}</dd>
+
+          <dt i18n:translate="">Completed</dt>
+          <dd>${view/session/completion_percentage}%</dd>
+          <metal:extra_fields use-macro="view/country_adapter/macros/extra_metadata"
+                              tal:condition="nocall:view/country_adapter"
+          />
+        </dl>
       </div>
     </div>
   </metal:content>

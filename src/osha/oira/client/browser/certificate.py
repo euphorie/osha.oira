@@ -68,7 +68,7 @@ class Certificate(BrowserView):
         """
         country = self.country
         return (
-            country.certificates_enabled
+            getattr(country, "certificates_enabled", False)
             and self.completion_percentage > country.certificate_initial_threshold
         )
 
@@ -77,7 +77,7 @@ class Certificate(BrowserView):
         """
         country = self.country
         return (
-            country.certificates_enabled
+            getattr(country, "certificates_enabled", False)
             and country.certificate_initial_threshold
             <= self.completion_percentage
             < country.certificate_completion_threshold
@@ -88,7 +88,7 @@ class Certificate(BrowserView):
         """
         country = self.country
         return (
-            country.certificates_enabled
+            getattr(country, "certificates_enabled", False)
             and self.completion_percentage >= country.certificate_completion_threshold
         )
 

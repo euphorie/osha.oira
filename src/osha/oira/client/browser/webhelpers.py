@@ -47,7 +47,7 @@ class OSHAWebHelpers(WebHelpers):
         )
         country = certificate_view.country
 
-        if not country.certificates_enabled:
+        if not getattr(country, "certificates_enabled", False):
             return
 
         session = self.traversed_session.session

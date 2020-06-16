@@ -374,7 +374,7 @@ class ContentsOfSurvey(IdentificationReportDocxView):
                 i += 1
                 number[depth - 1] = str(i)
                 description = u"<ul>"
-                for field in ("action_plan", "prevention_plan", "requirements"):
+                for field in ("action", "requirements"):
                     value = getattr(child, field, "") or ""
                     if value:
                         description = u"{0}<li>{1}</li>".format(description, value)

@@ -6,6 +6,7 @@ Changelog
 
 - Allow certificate to be customized. SCR-382
 - Update Statistics: Exclude guest accounts from assessment statistics. SCR-384
+- fix CMS tool-contents report reg. new Action Plan
 
 
 6.2.0 (2020-05-12)

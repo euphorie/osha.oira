@@ -167,7 +167,12 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                     continue
 
                 if value is not None:
-                    sheet.cell(row=row, column=column).value = value
+                    cell = sheet.cell(row=row, column=column)
+                    if key == 'number':
+                        # force sting
+                        cell.set_value_explicit(value)
+                    else:
+                        cell.value = value
                 column += 1
         return book
 

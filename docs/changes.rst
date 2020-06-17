@@ -4,8 +4,7 @@ Changelog
 6.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Excel report: make sure risk numbers are always treated as string
 
 6.2.1 (2020-06-17)
 ------------------

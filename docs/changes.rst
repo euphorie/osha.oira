@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.3 (unreleased)
+6.2.3 (2020-06-26)
 ------------------
 
 - Translation updates

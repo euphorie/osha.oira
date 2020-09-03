@@ -18,7 +18,7 @@
 
       <dl class="grid span-9">
         <dt i18n:translate="label_description">Description</dt>
-        <dd>${context/action}</dd>
+        <dd><div class="pat-markdown" tal:content="structure python:view.render_md(context.action)"></div></dd>
         <tal:block condition="context/requirements">
           <dt i18n:translate="label_expertise">Expertise</dt>
           <dd>${context/requirements}</dd>

@@ -233,4 +233,21 @@
 
     </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+        destination="17"
+        profile="osha.oira:default"
+        source="16"
+        >
+
+      <genericsetup:upgradeStep
+          title="Populate setting for measures text handling (CMS)"
+          handler=".to17.set_handle_measures_text_in_cms"
+          />
+      <genericsetup:upgradeStep
+          title="Populate setting for measures text handling (Client)"
+          handler=".to17.set_handle_measures_text_in_client"
+          />
+
+  </genericsetup:upgradeSteps>
+
 </configure>

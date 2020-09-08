@@ -185,6 +185,10 @@ class OSHASurveyEditForm(dexterity.EditForm):
             description_probability.mode = z3c.form.interfaces.HIDDEN_MODE
         return result
 
+    def updateFields(self):
+        super(OSHASurveyEditForm, self).updateFields()
+        self.fields["measures_text_handling"].field.default = "full"
+
 
 class OSHASurveyView(survey.View):
     grok.layer(IOSHAContentSkinLayer)

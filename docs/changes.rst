@@ -4,7 +4,8 @@ Changelog
 6.2.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Translation updates
+- expose country code in public certificate
 
 
 6.2.5 (2020-07-17)

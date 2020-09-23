@@ -4,8 +4,7 @@ Changelog
 6.2.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Translation updates
 
 6.2.6 (2020-09-15)
 ------------------

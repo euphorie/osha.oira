@@ -121,6 +121,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         alignment_basic = ws1["A1"].alignment.copy()
         alignment_basic.wrap_text = True
         alignment_basic.vertical = "center"
+        alignment_basic.horizontal = "left"
         alignment_header = copy(alignment_basic)
         alignment_header.horizontal = "center"
         alignment_centered = copy(alignment_basic)
@@ -212,7 +213,6 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                         else:
                             value = getattr(module, key, None)
 
-                ws1.cell(row=row, column=column).alignment = alignment_basic
                 if key in self.combine_keys and value is not None:
                     # osha wants to combine action_plan (col 3),
                     # prevention_plan and requirements in one cell
@@ -221,13 +221,16 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                     ws1.cell(row=row, column=5).value += "\r\n" + value
                     continue
 
+                cell = ws1.cell(row=row, column=column)
                 if value is not None:
-                    cell = ws1.cell(row=row, column=column)
                     if key == 'number':
                         # force sting
                         cell.set_explicit_value(value)
                     else:
                         cell.value = value
+                    if key == "budget":
+                        cell.style = "Comma"
+                cell.alignment = alignment_basic
                 column += 1
         ws1.freeze_panes = 'A4'
         return book

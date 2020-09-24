@@ -1,11 +1,14 @@
 # coding=utf-8
+from copy import copy
 from euphorie.client import model
 from euphorie.client import report
 from five import grok
-from openpyxl.cell import get_column_letter
+from openpyxl.styles import PatternFill
+from openpyxl.utils import get_column_letter
 from openpyxl.workbook import Workbook
 from osha.oira import _
 from osha.oira.client.interfaces import IOSHAClientSkinLayer
+from plonetheme.nuplone.utils import formatDate
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.i18n import translate
@@ -35,39 +38,48 @@ COLUMN_ORDER = [
 class ActionPlanTimeline(report.ActionPlanTimeline):
     grok.layer(IOSHAClientSkinLayer)
 
+    title_extra = ""
     combine_keys = ["requirements"]
-    columns = sorted(
+    extra_cols = [
         (
-            col
-            for col in report.ActionPlanTimeline.columns
-            if (col[0], col[1]) in COLUMN_ORDER
+            "measure",
+            "requirements",
+            _(
+                "label_measure_requirements",
+                default=u"Level of expertise and/or requirements needed",
+            ),
         ),
-        key=lambda d, co=COLUMN_ORDER: co.index((d[0], d[1])),
-    )
-    extra_cols = [x for x in columns if x[1] in combine_keys]
-    columns = [x for x in columns if x[1] not in combine_keys]
-    columns[2] = (
-        "measure",
-        "action",
-        _("report_timeline_measure", default=u"Measure"),
-    )
-    columns[3] = (
-        "measure",
-        "planning_start",
-        _("report_timeline_start_date", default=u"Start date"),
-    )
-    columns[4] = (
-        "measure",
-        "planning_end",
-        _("report_timeline_end_date", default=u"End date"),
-    )
-    columns[5] = (
-        "measure",
-        "responsible",
-        _("report_timeline_responsible", default=u"Responsible"),
-    )
-    columns.insert(
-        -1,
+    ]
+
+    columns = [
+        ("module", "title", _("label_section", default=u"Section")),
+        ("risk", "title", _("report_timeline_risk_title", default=u"Description of the risk")),
+        ("risk", "number", _("label_risk_number", default=u"Risk number")),
+        ("risk", "priority", _("report_timeline_priority", default=u"Priority")),
+        (
+            "measure",
+            "action",
+            _(
+                "report_timeline_measure",
+                default=u"Measure",
+            ),
+        ),
+        (
+            "measure",
+            "planning_start",
+            _("report_timeline_start_date", default=u"Start date"),
+        ),
+        (
+            "measure",
+            "planning_end",
+            _("report_timeline_end_date", default=u"End date"),
+        ),
+        (
+            "measure",
+            "responsible",
+            _("report_timeline_responsible", default=u"Responsible"),
+        ),
+        ("measure", "budget", _("label_action_plan_budget", default=u"Budget")),
         (
             None,
             None,
@@ -76,32 +88,77 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                 default=u"Status (planned, in process, implemented)",
             ),
         ),
-    )
+        ("risk", "comment", _("report_timeline_comment", default=u"Comments")),
+    ]
 
     def create_workbook(self):
         """Create an Excel workbook containing the all risks and measures.
         """
         t = lambda txt: translate(txt, context=self.request)
+        survey = self.webhelpers._survey
         book = Workbook()
-        sheet = book.worksheets[0]
-        sheet.title = t(_("report_timeline_title", default=u"Timeline"))
-        sheet.default_column_dimension.auto_size = True
+        ws1 = book.active
+        ws1.title = t(_("report_timeline_title", default=u"Timeline"))
 
-        for (column, (type, key, title)) in enumerate(self.columns):
+        header_text = (
+            u"{title}{extra} - {action_plan}".format(
+                title=survey.title,
+                extra=self.title_extra.strip(),
+                action_plan=t(_("label_action_plan", default=u"Action Plan")),
+            )
+        )
+        ws1["A1"] = header_text
+
+        font_basic = ws1["A1"].font
+        font_large = copy(font_basic)
+        font_large.size = 18
+        ws1["A1"].font = font_large
+        ws1.merge_cells("A1:F1")
+
+        font_bold = copy(font_basic)
+        font_bold.bold = True
+
+        alignment_basic = ws1["A1"].alignment.copy()
+        alignment_basic.wrap_text = True
+        alignment_basic.vertical = "center"
+        alignment_header = copy(alignment_basic)
+        alignment_header.horizontal = "center"
+        alignment_centered = copy(alignment_basic)
+        alignment_centered.horizontal = "center"
+
+        ws1["A2"] = t(_("label_title", default=u"Title"))
+        ws1["A2"].font = font_bold
+        ws1["B2"] = self.session.title
+        ws1["B2"].fill = PatternFill("solid", fgColor="DDDDDD")
+        ws1.merge_cells("B2:C2")
+        ws1["E2"] = t(_(u"label_report_date", default=u"Date of editing"))
+        ws1["E2"].font = font_bold
+        ws1["F2"] = formatDate(self.request, survey.published[2])
+        ws1["F2"].fill = PatternFill("solid", fgColor="DDDDDD")
+        for cell in tuple(ws1.iter_rows(2, 2))[0]:
+            cell.alignment = alignment_basic
+        ws1.row_dimensions[2].height = 30
+
+        for (column, (type, key, title)) in enumerate(self.columns, 1):
             if key in self.combine_keys:
                 continue
-            cell = sheet.cell(row=0, column=column)
+            cell = ws1.cell(row=3, column=column)
             cell.value = t(title)
-            cell.style.font.bold = True
-            cell.style.alignment.wrap_text = True
-            letter = get_column_letter(column + 1)
-            if title == "report_timeline_measure":
-                sheet.column_dimensions[letter].width = len(cell.value) + 50
+            cell.font = font_bold
+            cell.alignment = alignment_header
+            # Light baby blue background color
+            cell.fill = PatternFill("solid", fgColor="97CDDD")
+            letter = get_column_letter(column)
+            if title in ("report_timeline_measure", "report_timeline_risk_title"):
+                ws1.column_dimensions[letter].width = len(cell.value) + 50
+            elif title in ("label_risk_number", ):
+                ws1.column_dimensions[letter].width = len(cell.value)
             else:
-                sheet.column_dimensions[letter].width = len(cell.value) + 5
+                ws1.column_dimensions[letter].width = len(cell.value) + 5
+        ws1.row_dimensions[3].height = 60
 
-        for (row, (module, risk, measure)) in enumerate(self.get_measures(), 1):
-            column = 0
+        for (row, (module, risk, measure)) in enumerate(self.get_measures(), 4):
+            column = 1
 
             if not getattr(risk, "is_custom_risk", None):
                 zodb_node = self.context.restrictedTraverse(
@@ -155,25 +212,24 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                         else:
                             value = getattr(module, key, None)
 
-                sheet.cell(
-                    row=row, column=column
-                ).style.alignment.wrap_text = True  # style
+                ws1.cell(row=row, column=column).alignment = alignment_basic
                 if key in self.combine_keys and value is not None:
                     # osha wants to combine action_plan (col 3),
                     # prevention_plan and requirements in one cell
-                    if not sheet.cell(row=row, column=2).value:
-                        sheet.cell(row=row, column=2).value = u""
-                    sheet.cell(row=row, column=2).value += "\r\n" + value
+                    if not ws1.cell(row=row, column=5).value:
+                        ws1.cell(row=row, column=5).value = u""
+                    ws1.cell(row=row, column=5).value += "\r\n" + value
                     continue
 
                 if value is not None:
-                    cell = sheet.cell(row=row, column=column)
+                    cell = ws1.cell(row=row, column=column)
                     if key == 'number':
                         # force sting
-                        cell.set_value_explicit(value)
+                        cell.set_explicit_value(value)
                     else:
                         cell.value = value
                 column += 1
+        ws1.freeze_panes = 'A4'
         return book
 
     def get_measures(self):

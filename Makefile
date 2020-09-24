@@ -11,7 +11,7 @@ clean:
 	-rm ${TARGETS}
 
 bin/buildout: bootstrap.py
-	virtualenv -p python2.7 --clear --no-site-packages .
+	virtualenv -p python2.7 .
 	bin/pip install -r requirements.txt
 
 bin/i18ndude bin/test bin/sphinx-build: bin/buildout buildout.cfg versions.cfg devel.cfg setup.py

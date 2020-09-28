@@ -247,7 +247,27 @@
           title="Populate setting for measures text handling (Client)"
           handler=".to17.set_handle_measures_text_in_client"
           />
+  </genericsetup:upgradeSteps>
 
+
+  <genericsetup:registerProfile
+      name="to_0018"
+      title="Add config option for setting public certificate URL"
+      description=""
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      directory="to_0018"
+      />
+
+  <genericsetup:upgradeSteps
+        destination="18"
+        profile="osha.oira:default"
+        source="17"
+        >
+    <genericsetup:upgradeDepends
+        title="Add config option for setting public certificate URL"
+        import_profile="osha.oira.upgrade:to_0018"
+        />
   </genericsetup:upgradeSteps>
 
 </configure>

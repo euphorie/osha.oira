@@ -21,6 +21,11 @@ class Certificate(BrowserView):
 
     @property
     @memoize
+    def public_server_url(self):
+        return api.portal.get_registry_record("osha.oira.certificate.public_server")
+
+    @property
+    @memoize
     def country_adapter(self):
         """ Try to get a specific adapter for this country
         that will be used to show and handle additional fields in the certificate
@@ -56,6 +61,11 @@ class Certificate(BrowserView):
         """ The country inside /sectors that contains the certificates configuration
         """
         return api.portal.get().sectors[self.webhelpers.country]
+
+    @property
+    @memoize
+    def language(self):
+        return self.webhelpers._survey.language
 
     @property
     @memoize

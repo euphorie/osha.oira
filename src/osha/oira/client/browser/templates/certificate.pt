@@ -88,7 +88,7 @@
                       Your certificate for
                       <strong i18n:name="title">&ldquo;${view/session/title}&rdquo;</strong>
                       is
-                      <a href="${here/portal_url}/@@certificates/${view/certificate/secret}"
+                      <a href="${view/public_server_url}/${view/language}/certificates?id=${view/certificate/secret}"
                          target="_blank"
                          i18n:name="site_title"
                          i18n:translate=""
@@ -101,7 +101,7 @@
                     <fieldset class="vertical">
                       <textarea class="copy-box"
                                 rows="2"
-                      >${here/portal_url}/@@certificates/${view/certificate/secret}</textarea>
+                      >${view/public_server_url}/${view/language}/certificates?id=${view/certificate/secret}</textarea>
                     </fieldset>
                   </tal:public>
                   <p tal:replace="structure view/country/certificate_explanatory_sentence"></p>

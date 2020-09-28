@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<registry>
+  <record name="osha.oira.certificate.public_server">
+    <field type="plone.registry.field.TextLine">
+      <default>https://oiraproject.eu</default>
+      <title>URL under which a public certificate can be viewed on the OiRA community site</title>
+      <description>The URL shown to the end-user will be something like https://oiraproject.eu/fr/certificates?id=1234 . The language, view name (certificates) and id will be generated automatically. Just put here the URL of the site.</description>
+      <required>False</required>
+    </field>
+    <value purge="false">https://oiraproject.eu</value>
+  </record>
+</registry>

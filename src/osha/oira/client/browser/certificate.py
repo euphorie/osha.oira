@@ -155,11 +155,14 @@ class PublicCertificate(BrowserView):
 
     @property
     def certificate(self):
-        return (
+        if not getattr(self, "secret", None):
+            return None
+        query = (
             Session.query(model.Certificate)
             .filter(model.Certificate.secret == safe_unicode(self.secret))
-            .one()
         )
+        if query.count():
+            return query.one()
 
     @property
     @memoize

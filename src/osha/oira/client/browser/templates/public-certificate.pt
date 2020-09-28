@@ -6,47 +6,57 @@
       i18n:domain="euphorie"
 >
   <metal:content fill-slot="content">
-    <div class="published-certificate">
+    <div class="published-certificate"
+         tal:define="
+           certificate view/certificate;
+         "
+    >
       <div class="certificate-view">
         <metal:certificate define-macro="certificate">
-          <article class="style-8 type-public certificate pat-auto-scale"
-                   tal:define="
-                     certificate view/certificate;
-                   "
+          <tal:certificate define="
+                             certificate certificate|view/certificate;
+                           "
           >
-            <img class="certificate-backdrop"
-                 src="${here/portal_url}/++resource++euphorie.resources/oira/certificates/certificate-8.svg"
-            />
-            <h1 class="certificate-title"
-                i18n:translate=""
-            >Certificate</h1>
-            <p class="certificate-title-byline"
-               i18n:translate=""
-            >This certificate is presented to</p>
-            <p class="certificate-user-name"
-               i18n:translate=""
-            >${certificate/title}</p>
-            <p class="certificate-achievement"
-               i18n:translate=""
+            <article class="style-8 type-public certificate pat-auto-scale"
+                     tal:condition="certificate"
             >
-              For conducting a risk assessment with the tool
-              <strong class="certificate-tool-name"
-                      i18n:name="title"
+
+              <img class="certificate-backdrop"
+                   src="${here/portal_url}/++resource++euphorie.resources/oira/certificates/certificate-8.svg"
+              />
+              <h1 class="certificate-title"
+                  i18n:translate=""
+              >Certificate</h1>
+              <p class="certificate-title-byline"
+                 i18n:translate=""
+              >This certificate is presented to</p>
+              <p class="certificate-user-name"
+                 i18n:translate=""
+              >${certificate/title}</p>
+              <p class="certificate-achievement"
+                 i18n:translate=""
               >
-              &ldquo;${view/session/title}&rdquo;
-              </strong>
-              on
-              <time class="certificate-date"
-                    i18n:name="date"
-              >
-                ${certificate/hr_date}
-              </time>.
-            </p>
-          </article>
+                For conducting a risk assessment with the tool
+                <strong class="certificate-tool-name"
+                        i18n:name="title"
+                >
+                &ldquo;${view/session/title}&rdquo;
+                </strong>
+                on
+                <time class="certificate-date"
+                      i18n:name="date"
+                >
+                  ${certificate/hr_date}
+                </time>.
+              </p>
+            </article>
+          </tal:certificate>
         </metal:certificate>
       </div>
       <div class="certificate-data">
-        <dl class="pat-grid-list">
+        <dl class="pat-grid-list"
+            tal:condition="certificate"
+        >
 
           <dt i18n:translate="">Tool</dt>
           <dd>${view/session/title}</dd>
@@ -60,13 +70,18 @@
 
           <tal:comment condition="nothing">
           Unclear about whether to show the percentage. Might be a political decision not to.
-          <dt i18n:translate="">Completed</dt>
-          <dd>${view/session/completion_percentage}%</dd>
+            <dt i18n:translate="">Completed</dt>
+            <dd>${view/session/completion_percentage}%</dd>
           </tal:comment>
           <metal:extra_fields use-macro="view/country_adapter/macros/extra_metadata"
                               tal:condition="nocall:view/country_adapter"
           />
         </dl>
+        <article class="pat-rich"
+                 tal:condition="not:certificate"
+        >
+          <p i18n:translate="">The certificate you have requested is not available.</p>
+        </article>
       </div>
     </div>
   </metal:content>

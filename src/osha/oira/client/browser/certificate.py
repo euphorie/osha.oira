@@ -1,4 +1,5 @@
 # coding=utf-8
+from euphorie.client import utils
 from osha.oira.client import model
 from plone import api
 from plone.memoize.view import memoize
@@ -157,9 +158,8 @@ class PublicCertificate(BrowserView):
     def certificate(self):
         if not getattr(self, "secret", None):
             return None
-        query = (
-            Session.query(model.Certificate)
-            .filter(model.Certificate.secret == safe_unicode(self.secret))
+        query = Session.query(model.Certificate).filter(
+            model.Certificate.secret == safe_unicode(self.secret)
         )
         if query.count():
             return query.one()
@@ -170,6 +170,21 @@ class PublicCertificate(BrowserView):
         """ Find the certificate associated to this session
         """
         return self.certificate.session
+
+    @property
+    @memoize
+    def survey(self):
+        try:
+            return self.context.restrictedTraverse(str(self.session.zodb_path))
+        except:
+            return None
+
+    @property
+    @memoize
+    def language(self):
+        if self.survey:
+            return self.survey.language
+        return "en"
 
     @property
     @memoize
@@ -195,6 +210,10 @@ class PublicCertificate(BrowserView):
             )
         except api.exc.InvalidParameterError:
             pass
+
+    def __call__(self):
+        utils.setLanguage(self.request, self.context, self.language)
+        return super(PublicCertificate, self).__call__()
 
 
 class RemoveCertificateBox(BrowserView):

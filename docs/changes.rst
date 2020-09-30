@@ -4,8 +4,8 @@ Changelog
 6.2.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Certificates: add registry setting for the public URL
+- Certificates: better error handling
 
 6.2.7 (2020-09-23)
 ------------------

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.8 (unreleased)
+6.2.8 (2020-09-30)
 ------------------
 
 - Certificates: add registry setting for the public URL

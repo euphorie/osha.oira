@@ -80,7 +80,7 @@ class Certificate(BrowserView):
         country = self.country
         return (
             getattr(country, "certificates_enabled", False)
-            and self.completion_percentage > country.certificate_initial_threshold
+            and self.completion_percentage >= country.certificate_initial_threshold
         )
 
     def can_display_certificate_teaser(self):

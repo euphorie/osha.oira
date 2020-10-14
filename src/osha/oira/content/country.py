@@ -78,7 +78,7 @@ class IOSHACountry(model.Schema):
             "IOSHACountry.certificates_enabled",
             "on")
     certificate_initial_threshold = schema.Int(
-        title=_("Certificate initial threshold"),
+        title=_("Certificate initial threshold (in percent)"),
         description=_(
             "After a session completion rate is greater than this limit, "
             "the user will be informed about the possibility to earn a certificate. "
@@ -92,7 +92,7 @@ class IOSHACountry(model.Schema):
             "IOSHACountry.certificates_enabled",
             "on")
     certificate_completion_threshold = schema.Int(
-        title=_("Certificate completion threshold"),
+        title=_("Certificate completion threshold (in percent)"),
         description=_(
             "After a session completion rate is greater than this limit "
             "the user will earn a certificate."

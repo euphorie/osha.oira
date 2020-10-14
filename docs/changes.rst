@@ -4,8 +4,7 @@ Changelog
 6.2.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Update HR translations
 
 6.2.8 (2020-09-30)
 ------------------

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.9 (unreleased)
+6.2.9 (2020-10-14)
 ------------------
 
 - Update HR translations

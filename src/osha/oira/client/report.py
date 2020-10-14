@@ -250,6 +250,8 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
 
                     column += 1
         ws1.freeze_panes = "A4"
+        ws1.set_printer_settings(
+            paper_size=ws1.PAPERSIZE_A4, orientation="landscape")
         return book
 
     def get_measures(self):

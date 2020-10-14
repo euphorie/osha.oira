@@ -3,6 +3,8 @@ from copy import copy
 from euphorie.client import model
 from euphorie.client import report
 from five import grok
+from openpyxl.styles import Border
+from openpyxl.styles import Side
 from openpyxl.styles import PatternFill
 from openpyxl.utils import get_column_letter
 from openpyxl.workbook import Workbook
@@ -13,7 +15,6 @@ from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.i18n import translate
 import logging
-
 
 log = logging.getLogger(__name__)
 
@@ -113,7 +114,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         font_large = copy(font_basic)
         font_large.size = 18
         ws1["A1"].font = font_large
-        ws1.merge_cells("A1:F1")
+        ws1.merge_cells("A1:K1")
 
         font_bold = copy(font_basic)
         font_bold.bold = True
@@ -126,6 +127,9 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         alignment_header.horizontal = "center"
         alignment_centered = copy(alignment_basic)
         alignment_centered.horizontal = "center"
+
+        b_thin = Side(border_style="thin", color="000000")
+        b_double = Side(border_style="medium", color="000000")
 
         ws1["A2"] = t(_("label_title", default=u"Title"))
         ws1["A2"].font = font_bold
@@ -149,6 +153,9 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             cell.alignment = alignment_header
             # Light baby blue background color
             cell.fill = PatternFill("solid", fgColor="97CDDD")
+            cell.border = Border(
+                top=b_double, left=b_double, right=b_double, bottom=b_double
+            )
             letter = get_column_letter(column)
             if title in ("report_timeline_measure", "report_timeline_risk_title"):
                 ws1.column_dimensions[letter].width = len(cell.value) + 50
@@ -212,26 +219,29 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                             )
                         else:
                             value = getattr(module, key, None)
+                if key in self.combine_keys:
+                    if value is not None:
+                        # osha wants to combine action_plan (col 5 / E),
+                        # and requirements in one cell
+                        if not ws1.cell(row=row, column=5).value:
+                            ws1.cell(row=row, column=5).value = u""
+                        ws1.cell(row=row, column=5).value += "\r\n" + value
+                else:
+                    cell = ws1.cell(row=row, column=column)
+                    if value is not None:
+                        if key == 'number':
+                            # force string
+                            cell.set_explicit_value(value)
+                        else:
+                            cell.value = value
+                        if key == "budget":
+                            cell.style = "Comma"
+                    cell.alignment = alignment_basic
+                    cell.border = Border(
+                        top=b_thin, left=b_thin, right=b_thin, bottom=b_thin
+                    )
 
-                if key in self.combine_keys and value is not None:
-                    # osha wants to combine action_plan (col 3),
-                    # prevention_plan and requirements in one cell
-                    if not ws1.cell(row=row, column=5).value:
-                        ws1.cell(row=row, column=5).value = u""
-                    ws1.cell(row=row, column=5).value += "\r\n" + value
-                    continue
-
-                cell = ws1.cell(row=row, column=column)
-                if value is not None:
-                    if key == 'number':
-                        # force sting
-                        cell.set_explicit_value(value)
-                    else:
-                        cell.value = value
-                    if key == "budget":
-                        cell.style = "Comma"
-                cell.alignment = alignment_basic
-                column += 1
+                    column += 1
         ws1.freeze_panes = 'A4'
         return book
 

@@ -3,13 +3,15 @@ from copy import copy
 from euphorie.client import model
 from euphorie.client import report
 from five import grok
+from openpyxl.drawing.image import Image
 from openpyxl.styles import Border
-from openpyxl.styles import Side
 from openpyxl.styles import PatternFill
+from openpyxl.styles import Side
 from openpyxl.utils import get_column_letter
 from openpyxl.workbook import Workbook
 from osha.oira import _
 from osha.oira.client.interfaces import IOSHAClientSkinLayer
+from pkg_resources import resource_filename
 from plonetheme.nuplone.utils import formatDate
 from sqlalchemy import sql
 from z3c.saconfig import Session
@@ -114,6 +116,11 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         font_large = copy(font_basic)
         font_large.size = 18
         ws1["A1"].font = font_large
+
+        image_filename = resource_filename("osha.oira.client", "resources/oira-logo-colour.png")
+        logo = Image(image_filename)
+        ws1.add_image(logo, 'K1')
+        ws1.row_dimensions[1].height = 70
         ws1.merge_cells("A1:K1")
 
         font_bold = copy(font_basic)
@@ -125,8 +132,8 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         alignment_basic.horizontal = "left"
         alignment_header = copy(alignment_basic)
         alignment_header.horizontal = "center"
-        alignment_centered = copy(alignment_basic)
-        alignment_centered.horizontal = "center"
+
+        ws1.cell(row=1, column=1).alignment = alignment_basic
 
         b_thin = Side(border_style="thin", color="000000")
         b_double = Side(border_style="medium", color="000000")
@@ -242,7 +249,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                     )
 
                     column += 1
-        ws1.freeze_panes = 'A4'
+        ws1.freeze_panes = "A4"
         return book
 
     def get_measures(self):

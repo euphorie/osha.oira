@@ -4,8 +4,7 @@ Changelog
 6.2.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Added EL translations for certificate
 
 6.2.9 (2020-10-14)
 ------------------

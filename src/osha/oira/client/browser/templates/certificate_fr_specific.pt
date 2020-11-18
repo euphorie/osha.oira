@@ -16,9 +16,7 @@
       />
     </label>
     <label>
-      <tal:i18n i18n:translate="">
-      SIRET number
-      </tal:i18n>
+      <tal:i18n i18n:translate="label_company_identification_number">SIRET number</tal:i18n>
       <input disabled="${python: 'disabled' if view.certificate.secret else None}"
              name="siret"
              type="text"
@@ -41,7 +39,7 @@
     <dt i18n:translate="">Departement / Region</dt>
     <dd>${view/certificate_json/dept_or_region|nothing}</dd>
 
-    <dt i18n:translate="">SIRET number</dt>
+    <dt i18n:translate="label_company_identification_number">SIRET number</dt>
     <dd>${view/certificate_json/siret|nothing}</dd>
 
     <dt i18n:translate="">Contact name</dt>

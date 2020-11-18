@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.10 (unreleased)
+6.2.10 (2020-11-18)
 -------------------
 
 - Added EL translations for certificate

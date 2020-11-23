@@ -4,8 +4,7 @@ Changelog
 6.2.11 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Re-formatted Excel report
 
 6.2.10 (2020-11-18)
 -------------------

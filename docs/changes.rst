@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.11 (unreleased)
+6.2.11 (2020-11-23)
 -------------------
 
 - Re-formatted Excel report

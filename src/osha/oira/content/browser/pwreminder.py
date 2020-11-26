@@ -1,11 +1,8 @@
 # coding=utf-8
-from ..interfaces import IOSHAContentSkinLayer
 from Acquisition import aq_inner
 from euphorie.content import MessageFactory as _
-from five import grok
 from plonetheme.nuplone import MessageFactory as __
-from plonetheme.nuplone.skin import pwreminder
-from Products.CMFCore.interfaces import ISiteRoot
+from plonetheme.nuplone.browser import pwreminder
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PasswordResetTool import InvalidRequestError
 from Products.statusmessages.interfaces import IStatusMessage
@@ -13,11 +10,15 @@ from z3c.form.button import buttonAndHandler
 from zope.i18n import translate
 
 
+class RequestPasswordForm(pwreminder.RequestPasswordForm):
+    """Override so that we can change some labels"""
+
+    def updateFields(self):
+        super(RequestPasswordForm, self).updateFields()
+        self.fields["login"].field.title = __(u"label_email", default=u"E-mail address")
+
+
 class PasswordReset(pwreminder.PasswordReset):
-    grok.context(ISiteRoot)
-    grok.name("reset-password")
-    grok.require("zope2.Public")
-    grok.layer(IOSHAContentSkinLayer)
 
     orig_description = pwreminder.PasswordReset.description
     extra_description = _(
@@ -43,6 +44,10 @@ class PasswordReset(pwreminder.PasswordReset):
             ]
         )
         return description
+
+    def updateFields(self):
+        super(PasswordReset, self).updateFields()
+        self.fields["login"].field.title = __(u"label_email", default=u"E-mail address")
 
     @buttonAndHandler(_("button_change", default="Change"), name="change")
     def handleChange(self, action):

@@ -2,7 +2,6 @@
 from ..interfaces import IProductLayer
 from .interfaces import IOSHAClientSkinLayer
 from euphorie.client.client import IClient
-from five import grok
 from zope.component import adapts
 from zope.interface import directlyProvidedBy
 from zope.interface import directlyProvides
@@ -24,9 +23,6 @@ except ImportError:
 
 DESCRIPTION_CROP_LENGTH = 200
 log = logging.getLogger(__name__)
-
-
-grok.templatedir("templates")
 
 
 class ClientPublishTraverser(DefaultPublishTraverse):

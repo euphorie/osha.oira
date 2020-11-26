@@ -1,8 +1,7 @@
-from ..interfaces import IOSHAContentSkinLayer
-from euphorie.content import export
-from euphorie.content import upload
+# coding=utf-8
+from euphorie.content.browser import export
+from euphorie.content.browser import upload
 from euphorie.content.profilequestion import IProfileQuestion
-from five import grok
 from lxml import etree
 
 
@@ -13,11 +12,9 @@ PQ_FIELDS = [
 ]
 
 
-class ExportSurvey(export.ExportSurvey):
-    grok.layer(IOSHAContentSkinLayer)
-
+class OSHAExportSurvey(export.ExportSurvey):
     def exportProfileQuestion(self, parent, profile):
-        node = super(ExportSurvey, self).exportProfileQuestion(parent, profile)
+        node = super(OSHAExportSurvey, self).exportProfileQuestion(parent, profile)
         for field in PQ_FIELDS:
             value = getattr(profile, field, None)
             if value:
@@ -40,15 +37,6 @@ class SurveyImporter(ImporterMixin, upload.SurveyImporter):
     pass
 
 
-class SectorImporter(ImporterMixin, upload.SectorImporter):
-    pass
+class OSHAImportSurvey(upload.ImportSurvey):
 
-
-class ImportSurvey(upload.ImportSurvey):
-    grok.layer(IOSHAContentSkinLayer)
     importer_factory = SurveyImporter
-
-
-class ImportSector(upload.ImportSector):
-    grok.layer(IOSHAContentSkinLayer)
-    importer_factory = SectorImporter

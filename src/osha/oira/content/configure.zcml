@@ -10,14 +10,6 @@
     <include package=".browser" />
 
     <plone:behavior
-        title="OSHA extra Sector fields"
-        description="Provide additional OSHA fields"
-        provides=".sector.IOSHASector"
-        factory=".sector.OSHASector"
-        for="plone.dexterity.interfaces.IDexterityContent"
-        />
-
-    <plone:behavior
         name="osha.country.extrafields"
         title="OSHA extra Country fields"
         provides=".country.IOSHACountry"
@@ -36,11 +28,6 @@
         factory="z3c.form.datamanager.AttributeField"
         />
 
-    <adapter
-        factory=".statistics.ReportPeriodFactory"
-        name="osha.oira.content.statistics.IReportPeriod"
-        />
-
   <browser:page
       name="site-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -56,5 +43,17 @@
       permission="zope2.View"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
+
+  <!-- override some classes, but re-use the template from NuPlone -->
+  <configure package="plonetheme.nuplone.skin">
+    <browser:page
+        name="sitemenu"
+        for="*"
+        class="osha.oira.content.sitemenu.Sitemenu"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+        permission="zope2.Public"
+        template="templates/sitemenu.pt"
+        />
+  </configure>
 
 </configure>

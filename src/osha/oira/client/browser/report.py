@@ -1,8 +1,7 @@
 # coding=utf-8
 from copy import copy
 from euphorie.client import model
-from euphorie.client import report
-from five import grok
+from euphorie.client.browser import report
 from openpyxl.drawing.image import Image
 from openpyxl.styles import Border
 from openpyxl.styles import PatternFill
@@ -10,7 +9,6 @@ from openpyxl.styles import Side
 from openpyxl.utils import get_column_letter
 from openpyxl.workbook import Workbook
 from osha.oira import _
-from osha.oira.client.interfaces import IOSHAClientSkinLayer
 from pkg_resources import resource_filename
 from plonetheme.nuplone.utils import formatDate
 from sqlalchemy import sql
@@ -21,8 +19,6 @@ import logging
 
 
 log = logging.getLogger(__name__)
-
-grok.templatedir("templates")
 
 
 COLUMN_ORDER = [
@@ -41,7 +37,6 @@ COLUMN_ORDER = [
 
 
 class ActionPlanTimeline(report.ActionPlanTimeline):
-    grok.layer(IOSHAClientSkinLayer)
 
     title_extra = ""
     combine_keys = ["requirements"]

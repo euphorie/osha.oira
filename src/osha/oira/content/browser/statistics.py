@@ -1,16 +1,10 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-from euphorie.content.country import ICountry
-from euphorie.content.sector import ISector
-from euphorie.content.sectorcontainer import ISectorContainer
-from euphorie.content.surveygroup import ISurveyGroup
-from five import grok
 from osha.oira import _
-from osha.oira.interfaces import IOSHAContentSkinLayer
 from plone import api
 from plone.directives import form
-from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.utils import safe_unicode
+from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
@@ -37,7 +31,6 @@ if sys.version_info[0] >= 3:
 
 
 log = logging.getLogger("osha.oira/browser.statistics")
-grok.templatedir("templates")
 
 
 class IReportPeriod(interface.Interface):
@@ -95,8 +88,7 @@ class StatisticsSchema(form.Schema):
     form.widget(tools=SelectFieldWidget)
 
     report_period = schema.Object(
-        title=_(u"label_report_period", default=u"Report Period"),
-        schema=IReportPeriod,
+        title=_(u"label_report_period", default=u"Report Period"), schema=IReportPeriod
     )
 
     file_format = schema.Choice(
@@ -119,11 +111,7 @@ class StatisticsSchema(form.Schema):
     )
 
 
-class WriteStatistics(grok.View):
-    grok.context(IPloneSiteRoot)
-    grok.require("cmf.ManagePortal")
-    grok.name("write-statistics")
-
+class WriteStatistics(BrowserView):
     def getSurveysInfo(self):
         info_surveys = []
         surveys = component.getUtility(
@@ -311,10 +299,6 @@ class CountryStatistics(form.SchemaForm, StatisticsMixin):
     tools inside their respective countries, but nowhere else..
     """
 
-    grok.context(ICountry)
-    grok.name("show-statistics")
-    grok.require("cmf.ModifyPortalContent")
-    grok.layer(IOSHAContentSkinLayer)
     schema = StatisticsSchema
     ignoreContext = True
     label = _("title_statistics", default="Statistics Reporting")
@@ -347,10 +331,6 @@ class SectorStatistics(form.SchemaForm, StatisticsMixin):
     sector, but nowhere else.
     """
 
-    grok.context(ISector)
-    grok.name("show-statistics")
-    grok.require("cmf.ModifyPortalContent")
-    grok.layer(IOSHAContentSkinLayer)
     schema = StatisticsSchema
     ignoreContext = True
     label = _("title_statistics", default="Statistics Reporting")
@@ -384,20 +364,9 @@ class SectorStatistics(form.SchemaForm, StatisticsMixin):
             return self.template()
 
 
-class SectorStatisticsTool(SectorStatistics):
-    grok.context(ISurveyGroup)
-    grok.name("show-statistics")
-    grok.require("cmf.ModifyPortalContent")
-    grok.layer(IOSHAContentSkinLayer)
-
-
 class GlobalStatistics(form.SchemaForm, StatisticsMixin):
     """Site managers can access statistics for the whole site."""
 
-    grok.context(ISectorContainer)
-    grok.name("show-statistics")
-    grok.require("cmf.ModifyPortalContent")
-    grok.layer(IOSHAContentSkinLayer)
     schema = StatisticsSchema
     ignoreContext = True
     label = _("title_statistics", default="Statistics Reporting")

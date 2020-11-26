@@ -1,5 +1,4 @@
 from .. import _
-from ..interfaces import IOSHAContentSkinLayer
 from datetime import date
 from docx.api import Document
 from euphorie.client.docx.compiler import _sanitize_html
@@ -14,25 +13,18 @@ from euphorie.content.risk import IRisk
 from euphorie.content.solution import ISolution
 from euphorie.content.survey import get_tool_type
 from euphorie.content.utils import IToolTypesInfo
-from five import grok
 from plone.app.dexterity.behaviors.metadata import DCFieldProperty
 from plone.app.dexterity.behaviors.metadata import MetadataBase
 from plone.autoform.interfaces import IFormFieldProvider
-from plone.directives import dexterity
 from plone.directives import form
 from plone.namedfile import field as filefield
 from plonetheme.nuplone.utils import formatDate
 from plonetheme.nuplone.z3cform.directives import depends
 from zope import interface
 from zope import schema
-from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.i18n import translate
 
-import z3c.form
-
-
-grok.templatedir("templates")
 
 help_default_probability = _(
     u"help_default_probability",
@@ -200,44 +192,6 @@ class OSHASurvey(MetadataBase):
     description_probability = DCFieldProperty(IOSHASurvey["description_probability"])
     description_frequency = DCFieldProperty(IOSHASurvey["description_frequency"])
     description_severity = DCFieldProperty(IOSHASurvey["description_severity"])
-
-
-class OSHASurveyEditForm(dexterity.EditForm):
-    grok.context(survey.ISurvey)
-    grok.layer(IOSHAContentSkinLayer)
-
-    def updateWidgets(self):
-        result = super(OSHASurveyEditForm, self).updateWidgets()
-        evaluation_optional = self.widgets.get("evaluation_optional")
-        evaluation_optional.mode = z3c.form.interfaces.HIDDEN_MODE
-        if self.context.aq_parent.evaluation_algorithm == "french":
-            description_probability = self.widgets.get(
-                "IOSHASurvey.description_probability"
-            )
-            description_probability.mode = z3c.form.interfaces.HIDDEN_MODE
-        return result
-
-    def updateFields(self):
-        super(OSHASurveyEditForm, self).updateFields()
-        self.fields["measures_text_handling"].field.default = "full"
-
-
-class OSHASurveyView(survey.View):
-    grok.layer(IOSHAContentSkinLayer)
-    grok.template("survey_view")
-
-    def modules_and_profile_questions(self):
-        return [self._morph(child) for child in self.context.values()]
-
-    def _morph(self, child):
-        state = getMultiAdapter((child, self.request), name="plone_context_state")
-
-        return dict(
-            id=child.id,
-            title=child.title,
-            url=state.view_url(),
-            is_profile_question=IProfileQuestion.providedBy(child),
-        )
 
 
 class ContentsOfSurveyCompiler(IdentificationReportCompiler):

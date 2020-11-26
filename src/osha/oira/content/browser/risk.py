@@ -1,10 +1,6 @@
-from .. import _
-from ..interfaces import IOSHAContentSkinLayer
-from euphorie.content import risk
-from five import grok
-
-
-grok.templatedir("templates")
+# coding=utf-8
+from euphorie.content.browser import risk
+from osha.oira import _
 
 
 class OSHAFormMixin:
@@ -33,14 +29,11 @@ class OSHAFormMixin:
             )
 
 
-class Add(risk.Add, OSHAFormMixin):
+class AddForm(risk.AddForm, OSHAFormMixin):
     """Override to allow us to dynamically set field descriptions"""
 
-    grok.context(risk.IRisk)
-    grok.layer(IOSHAContentSkinLayer)
-
     def updateFields(self):
-        super(Add, self).updateFields()
+        super(AddForm, self).updateFields()
         self.setDynamicDescriptions()
         self.buttons["save"].title = _(u"button_save_changes", default=u"Save changes")
         self.buttons["cancel"].title = _(u"button_cancel", default=u"Cancel")
@@ -50,18 +43,15 @@ class Add(risk.Add, OSHAFormMixin):
         return _(u"Add Risk")
 
 
-class Edit(risk.Edit, OSHAFormMixin):
+class AddView(risk.AddView):
+    form = AddForm
+
+
+class EditForm(risk.EditForm, OSHAFormMixin):
     """Override to allow us to dynamically set field descriptions"""
 
-    grok.context(risk.IRisk)
-    grok.layer(IOSHAContentSkinLayer)
-
-    def __init__(self, context, request):
-        risk.Edit.__init__(self, context, request)
-        self.evaluation_algorithm = context.evaluation_algorithm()
-
     def updateFields(self):
-        super(Edit, self).updateFields()
+        super(EditForm, self).updateFields()
         self.setDynamicDescriptions()
         self.buttons["save"].title = _(u"button_save_changes", default=u"Save changes")
         self.buttons["cancel"].title = _(u"button_cancel", default=u"Cancel")

@@ -46,7 +46,32 @@
   <!-- XXX: Uncomment the line below when testing Euphorie, to avoid
          osha.oira's customizations
     -->
-  <grok:grok package="." />
+  <grok:grok package=".client.client" />
+  <grok:grok package=".client.report" />
+  <grok:grok package=".client.survey" />
+  <grok:grok package=".client.disclaimer" />
+  <grok:grok package=".client.conditions" />
+  <grok:grok package=".client.utils" />
+
+  <grok:grok package=".content.countrymanager" />
+  <grok:grok package=".content.layout" />
+  <grok:grok package=".content.login" />
+  <grok:grok package=".content.risk" />
+  <grok:grok package=".content.sector" />
+  <grok:grok package=".content.sectorcontainer" />
+  <grok:grok package=".content.sitemenu" />
+  <grok:grok package=".content.solution" />
+  <grok:grok package=".content.statistics" />
+  <grok:grok package=".content.survey" />
+  <grok:grok package=".content.surveygroup" />
+  <grok:grok package=".content.user" />
+
+  <grok:grok package=".nuplone.pwreset" />
+  <grok:grok package=".nuplone.contact" />
+  <grok:grok package=".nuplone.error" />
+
+  <grok:grok package=".scripts" />
+  <grok:grok package=".vocabularies" />
 
   <browser:page
       name="outdated-tools-view"

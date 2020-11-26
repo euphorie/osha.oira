@@ -43,4 +43,15 @@
       factory=".add_sector.AddView"
       />
 
+  <!-- Country -->
+  <browser:page
+      name="manage-users"
+      for="euphorie.content.country.ICountry"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      class=".country.OSHAManageUsers"
+      permission="euphorie.content.ManageCountry"
+      template="templates/user_mgmt.pt"
+      />
+
+
 </configure>

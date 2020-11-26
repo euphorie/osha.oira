@@ -26,21 +26,219 @@
       class=".migrate_ldap_users.MigrateLDAPUsersView"
       />
 
+  <!-- Country -->
   <browser:page
-      name="edit"
-      for="euphorie.content.sector.Sector"
-      permission="cmf.ModifyPortalContent"
-      class=".edit_sector.OSHASettings"
-      layer="osha.oira.interfaces.IProductLayer"
+      name="manage-users"
+      for="euphorie.content.country.ICountry"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      class=".country.OSHAManageUsers"
+      permission="euphorie.content.ManageCountry"
+      template="templates/user_mgmt.pt"
       />
 
+  <!-- Survey -->
+  <browser:page
+      name="nuplone-view"
+      for="euphorie.content.survey.ISurvey"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      class=".survey.SurveyView"
+      permission="zope2.View"
+      template="templates/survey_view.pt"
+      />
+
+  <browser:page
+      name="edit"
+      for="euphorie.content.survey.ISurvey"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      class=".survey.EditForm"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <browser:page
+      name="export"
+      for="euphorie.content.survey.ISurvey"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      permission="zope2.View"
+      class=".export.OSHAExportSurvey"
+      />
+
+  <!-- SurveyGroup -->
+  <adapter
+      for="Products.CMFCore.interfaces.IFolderish
+           osha.oira.interfaces.IOSHAContentSkinLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      factory=".surveygroup.AddView"
+      name="euphorie.surveygroup"/>
+
+  <configure package="plonetheme.nuplone.skin">
+    <browser:page
+        name="delete"
+        for="euphorie.content.surveygroup.ISurveyGroup"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+        class="osha.oira.content.browser.surveygroup.Delete"
+        template="templates/delete.pt"
+        permission="zope2.View"
+        />
+  </configure>
+
+  <!-- Sector -->
   <adapter
       name="euphorie.sector"
       provides="zope.publisher.interfaces.browser.IBrowserPage"
       for="euphorie.content.country.ICountry
            osha.oira.interfaces.IProductLayer
            plone.dexterity.interfaces.IDexterityFTI"
-      factory=".add_sector.AddView"
+      factory=".sector.AddView"
+      />
+
+  <browser:page
+      name="edit"
+      for="euphorie.content.sector.Sector"
+      permission="cmf.ModifyPortalContent"
+      class=".sector.EditForm"
+      layer="osha.oira.interfaces.IProductLayer"
+      />
+
+  <browser:page
+      name="upload"
+      for="euphorie.content.sector.ISector"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      permission="euphorie.content.AddNewRIEContent"
+      class=".export.OSHAImportSurvey"
+      />
+
+  <!-- SectorContainer -->
+  <browser:page
+      name="nuplone-view"
+      for="euphorie.content.sectorcontainer.ISectorContainer"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      class=".sectorcontainer.SectorContainerView"
+      permission="zope2.View"
+      template="templates/sectorcontainer_view.pt"
+      />
+
+  <!-- Risk -->
+    <adapter
+        for="Products.CMFCore.interfaces.IFolderish
+             osha.oira.interfaces.IOSHAContentSkinLayer
+             plone.dexterity.interfaces.IDexterityFTI"
+        provides="zope.publisher.interfaces.browser.IBrowserPage"
+        factory=".risk.AddView"
+        name="euphorie.risk"/>
+
+  <browser:page
+      name="edit"
+      for="euphorie.content.risk.IRisk"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      class=".risk.EditForm"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <!-- Solution -->
+  <browser:page
+      name="nuplone-view"
+      for="euphorie.content.solution.ISolution"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      class=".solution.SolutionView"
+      permission="zope2.View"
+      template="templates/solution_view.pt"
+      />
+
+    <adapter
+        for="Products.CMFCore.interfaces.IFolderish
+             osha.oira.interfaces.IOSHAContentSkinLayer
+             plone.dexterity.interfaces.IDexterityFTI"
+        provides="zope.publisher.interfaces.browser.IBrowserPage"
+        factory=".solution.AddView"
+        name="euphorie.solution"/>
+
+  <browser:page
+      name="edit"
+      for="euphorie.content.solution.ISolution"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      class=".solution.EditForm"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <!-- CountryMananager -->
+    <adapter
+        for="Products.CMFCore.interfaces.IFolderish
+             osha.oira.interfaces.IOSHAContentSkinLayer
+             plone.dexterity.interfaces.IDexterityFTI"
+        provides="zope.publisher.interfaces.browser.IBrowserPage"
+        factory=".countrymanager.AddView"
+        name="euphorie.countrymanager"/>
+    <class class=".countrymanager.AddView">
+        <require
+            permission="euphorie.content.AddNewRIEContent"
+            interface="zope.publisher.interfaces.browser.IBrowserPage"
+            />
+    </class>
+
+  <!-- Login -->
+  <browser:page
+      name="login"
+      for="*"
+      permission="zope2.Public"
+      class="plonetheme.nuplone.browser.login.Login"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      template="templates/login.pt"
+      />
+  <browser:page
+      name="request-password-reset"
+      for="Products.CMFCore.interfaces.ISiteRoot"
+      permission="zope2.Public"
+      class=".pwreminder.RequestPasswordForm"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+  <browser:page
+      name="reset-password"
+      for="Products.CMFCore.interfaces.ISiteRoot"
+      permission="zope2.Public"
+      class=".pwreminder.PasswordReset"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <!-- Statistics -->
+    <adapter
+        factory=".statistics.ReportPeriodFactory"
+        name="osha.oira.content.statistics.IReportPeriod"
+        />
+  <browser:page
+      name="write-statistics"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      permission="cmf.ManagePortal"
+      class=".statistics.WriteStatistics"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+  <browser:page
+      name="show-statistics"
+      for="euphorie.content.country.ICountry"
+      permission="cmf.ModifyPortalContent"
+      class=".statistics.CountryStatistics"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+  <browser:page
+      name="show-statistics"
+      for="euphorie.content.sector.ISector"
+      permission="cmf.ModifyPortalContent"
+      class=".statistics.SectorStatistics"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+  <browser:page
+      name="show-statistics"
+      for="euphorie.content.surveygroup.ISurveyGroup"
+      permission="cmf.ModifyPortalContent"
+      class=".statistics.SectorStatistics"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+  <browser:page
+      name="show-statistics"
+      for="euphorie.content.sectorcontainer.ISectorContainer"
+      permission="cmf.ModifyPortalContent"
+      class=".statistics.GlobalStatistics"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
 </configure>

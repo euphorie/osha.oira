@@ -1,8 +1,7 @@
 # coding=utf-8
 from copy import copy
 from euphorie.client import model
-from euphorie.client import report
-from five import grok
+from euphorie.client.browser import report
 from openpyxl.drawing.image import Image
 from openpyxl.styles import Border
 from openpyxl.styles import PatternFill
@@ -10,7 +9,6 @@ from openpyxl.styles import Side
 from openpyxl.utils import get_column_letter
 from openpyxl.workbook import Workbook
 from osha.oira import _
-from osha.oira.client.interfaces import IOSHAClientSkinLayer
 from pkg_resources import resource_filename
 from plonetheme.nuplone.utils import formatDate
 from sqlalchemy import sql
@@ -19,8 +17,6 @@ from zope.i18n import translate
 import logging
 
 log = logging.getLogger(__name__)
-
-grok.templatedir("templates")
 
 
 COLUMN_ORDER = [
@@ -39,7 +35,6 @@ COLUMN_ORDER = [
 
 
 class ActionPlanTimeline(report.ActionPlanTimeline):
-    grok.layer(IOSHAClientSkinLayer)
 
     title_extra = ""
     combine_keys = ["requirements"]
@@ -56,7 +51,11 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
 
     columns = [
         ("module", "title", _("label_section", default=u"Section")),
-        ("risk", "title", _("report_timeline_risk_title", default=u"Description of the risk")),
+        (
+            "risk",
+            "title",
+            _("report_timeline_risk_title", default=u"Description of the risk"),
+        ),
         ("risk", "number", _("label_risk_number", default=u"Risk number")),
         ("risk", "priority", _("report_timeline_priority", default=u"Priority")),
         (
@@ -95,20 +94,17 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
     ]
 
     def create_workbook(self):
-        """Create an Excel workbook containing the all risks and measures.
-        """
+        """Create an Excel workbook containing the all risks and measures."""
         t = lambda txt: translate(txt, context=self.request)
         survey = self.webhelpers._survey
         book = Workbook()
         ws1 = book.active
         ws1.title = t(_("report_timeline_title", default=u"Timeline"))
 
-        header_text = (
-            u"{title}{extra} - {action_plan}".format(
-                title=survey.title,
-                extra=self.title_extra.strip(),
-                action_plan=t(_("label_action_plan", default=u"Action Plan")),
-            )
+        header_text = u"{title}{extra} - {action_plan}".format(
+            title=survey.title,
+            extra=self.title_extra.strip(),
+            action_plan=t(_("label_action_plan", default=u"Action Plan")),
         )
         ws1["A1"] = header_text
 
@@ -117,9 +113,11 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         font_large.size = 18
         ws1["A1"].font = font_large
 
-        image_filename = resource_filename("osha.oira.client", "resources/oira-logo-colour.png")
+        image_filename = resource_filename(
+            "osha.oira.client", "resources/oira-logo-colour.png"
+        )
         logo = Image(image_filename)
-        ws1.add_image(logo, 'K1')
+        ws1.add_image(logo, "K1")
         ws1.row_dimensions[1].height = 70
         ws1.merge_cells("A1:K1")
 
@@ -166,7 +164,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             letter = get_column_letter(column)
             if title in ("report_timeline_measure", "report_timeline_risk_title"):
                 ws1.column_dimensions[letter].width = len(cell.value) + 50
-            elif title in ("label_risk_number", ):
+            elif title in ("label_risk_number",):
                 ws1.column_dimensions[letter].width = len(cell.value)
             else:
                 ws1.column_dimensions[letter].width = len(cell.value) + 5
@@ -176,9 +174,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             column = 1
 
             if not getattr(risk, "is_custom_risk", None):
-                zodb_node = self.context.restrictedTraverse(
-                    risk.zodb_path.split("/")
-                )
+                zodb_node = self.context.restrictedTraverse(risk.zodb_path.split("/"))
             else:
                 zodb_node = None
 
@@ -236,7 +232,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                 else:
                     cell = ws1.cell(row=row, column=column)
                     if value is not None:
-                        if key == 'number':
+                        if key == "number":
                             # force string
                             cell.set_explicit_value(value)
                         else:
@@ -250,8 +246,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
 
                     column += 1
         ws1.freeze_panes = "A4"
-        ws1.set_printer_settings(
-            paper_size=ws1.PAPERSIZE_A4, orientation="landscape")
+        ws1.set_printer_settings(paper_size=ws1.PAPERSIZE_A4, orientation="landscape")
         return book
 
     def get_measures(self):
@@ -298,10 +293,10 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                     sql.and_(
                         model.ActionPlan.risk_id == model.Risk.id,
                         sql.or_(
-                            model.ActionPlan.plan_type == 'measure_standard',
-                            model.ActionPlan.plan_type == 'measure_custom',
-                        )
-                    )
+                            model.ActionPlan.plan_type == "measure_standard",
+                            model.ActionPlan.plan_type == "measure_custom",
+                        ),
+                    ),
                 )
             )
             .order_by(

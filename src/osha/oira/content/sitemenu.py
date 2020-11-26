@@ -1,20 +1,19 @@
+# coding=utf-8
 from Acquisition import aq_inner
-from five import grok
+from euphorie.deployment.browser import sitemenu
 from osha.oira import _
-from osha.oira.interfaces import IOSHAContentSkinLayer
-from euphorie.deployment.browser.sitemenu import EuphorieSitemenu
 from zope.component import getMultiAdapter
 from zope.component.interfaces import ComponentLookupError
 
 
-class Sitemenu(EuphorieSitemenu):
-    grok.layer(IOSHAContentSkinLayer)
+class Sitemenu(sitemenu.Sitemenu):
 
+    @property
     def actions(self):
         """ See plonetheme.nuplone.skin.sitemenu.py
             Add extra 'statistics' action.
         """
-        menu = super(Sitemenu, self).actions() or {}
+        menu = super(Sitemenu, self).actions or {}
         children = menu.get("children")
         if not children:
             return None

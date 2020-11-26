@@ -62,5 +62,14 @@
       class=".export.OSHAExportSurvey"
       />
 
+  <!-- Sector -->
+  <browser:page
+      name="upload"
+      for="euphorie.content.sector.ISector"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      permission="euphorie.content.AddNewRIEContent"
+      class=".export.OSHAImportSurvey"
+      />
+
 
 </configure>

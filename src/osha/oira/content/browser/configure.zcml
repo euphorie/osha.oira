@@ -53,5 +53,14 @@
       template="templates/user_mgmt.pt"
       />
 
+  <!-- Survey -->
+  <browser:page
+      name="export"
+      for="euphorie.content.survey.ISurvey"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      permission="zope2.View"
+      class=".export.OSHAExportSurvey"
+      />
+
 
 </configure>

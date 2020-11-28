@@ -71,5 +71,22 @@
       class=".export.OSHAImportSurvey"
       />
 
+  <!-- Risk -->
+    <adapter
+        for="Products.CMFCore.interfaces.IFolderish
+             osha.oira.interfaces.IOSHAContentSkinLayer
+             plone.dexterity.interfaces.IDexterityFTI"
+        provides="zope.publisher.interfaces.browser.IBrowserPage"
+        factory=".risk.AddView"
+        name="euphorie.risk"/>
+
+  <browser:page
+      name="edit"
+      for="euphorie.content.risk.IRisk"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      class=".risk.EditForm"
+      permission="cmf.ModifyPortalContent"
+      />
+
 
 </configure>

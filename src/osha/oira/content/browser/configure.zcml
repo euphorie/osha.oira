@@ -98,5 +98,31 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <!-- Solution -->
+  <browser:page
+      name="nuplone-view"
+      for="euphorie.content.solution.ISolution"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      class=".solution.SolutionView"
+      permission="zope2.View"
+      template="templates/solution_view.pt"
+      />
+
+    <adapter
+        for="Products.CMFCore.interfaces.IFolderish
+             osha.oira.interfaces.IOSHAContentSkinLayer
+             plone.dexterity.interfaces.IDexterityFTI"
+        provides="zope.publisher.interfaces.browser.IBrowserPage"
+        factory=".solution.AddView"
+        name="euphorie.solution"/>
+
+  <browser:page
+      name="edit"
+      for="euphorie.content.solution.ISolution"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      class=".solution.EditForm"
+      permission="cmf.ModifyPortalContent"
+      />
+
 
 </configure>

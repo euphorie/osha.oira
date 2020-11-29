@@ -71,6 +71,16 @@
       class=".export.OSHAImportSurvey"
       />
 
+  <!-- SectorContainer -->
+  <browser:page
+      name="nuplone-view"
+      for="euphorie.content.sectorcontainer.ISectorContainer"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      class=".sectorcontainer.SectorContainerView"
+      permission="zope2.View"
+      template="templates/sectorcontainer_view.pt"
+      />
+
   <!-- Risk -->
     <adapter
         for="Products.CMFCore.interfaces.IFolderish

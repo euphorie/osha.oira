@@ -10,14 +10,6 @@
     <include package=".browser" />
 
     <plone:behavior
-        title="OSHA extra Sector fields"
-        description="Provide additional OSHA fields"
-        provides=".sector.IOSHASector"
-        factory=".sector.OSHASector"
-        for="plone.dexterity.interfaces.IDexterityContent"
-        />
-
-    <plone:behavior
         name="osha.country.extrafields"
         title="OSHA extra Country fields"
         provides=".country.IOSHACountry"

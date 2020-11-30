@@ -62,6 +62,15 @@
       class=".export.OSHAExportSurvey"
       />
 
+  <!-- SurveyGroup -->
+  <adapter
+      for="Products.CMFCore.interfaces.IFolderish
+           osha.oira.interfaces.IOSHAContentSkinLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      factory=".surveygroup.AddView"
+      name="euphorie.surveygroup"/>
+
   <!-- Sector -->
   <adapter
       name="euphorie.sector"

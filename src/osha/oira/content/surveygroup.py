@@ -1,55 +1,10 @@
 from five import grok
-from zope.site.hooks import getSite
 from Acquisition import aq_parent
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from plonetheme.nuplone.skin import actions
 from plonetheme.nuplone.utils import getPortal
 from euphorie.content import MessageFactory as _
 from euphorie.content import surveygroup
-from euphorie.content.survey import ISurvey
-from ..interfaces import IOSHAContentSkinLayer
-
-grok.templatedir("templates")
-
-
-class View(surveygroup.View):
-    grok.layer(IOSHAContentSkinLayer)
-    grok.name("nuplone-view")
-    grok.template("surveygroup_view")
-
-    def surveys(self):
-        templates = [dict(title=survey.title, url=survey.absolute_url())
-                      for survey in self.context.values()
-                      if ISurvey.providedBy(survey)]
-        return templates
-
-View.render = None
-
-
-class AddForm(surveygroup.AddForm):
-    """ """
-    grok.context(surveygroup.ISurveyGroup)
-    grok.name("euphorie.surveygroup")
-    grok.require("euphorie.content.AddNewRIEContent")
-    grok.layer(IOSHAContentSkinLayer)
-    template = ViewPageTemplateFile("templates/surveygroup_add.pt")
-
-    def createAndAdd(self, data):
-        """ #3036: Set a 'default' value on the Survey that was newly created in the
-            SurveyGroup.
-        """
-        obj = super(AddForm, self).createAndAdd(data)
-        try:
-            surveys = obj.objectValues("Dexterity Container")
-        except IndexError:
-            return obj
-
-        macro = getSite().unrestrictedTraverse('default_introduction')()
-        for survey in surveys:
-            survey.introduction = macro
-            survey.reindexObject()
-        return obj
 
 
 class Delete(actions.Delete):

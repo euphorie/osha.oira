@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      i18n:domain="euphorie"
+      id="conditions"
+      meta:interpolation="true"
+      tal:define="webhelpers nocall:context/@@webhelpers;
+                  tools nocall:context/@@tools;
+                  client nocall:request/client"
+      metal:use-macro="context/@@shell/macros/shell">
+
+<body>
+<metal:slot fill-slot="content">
+  <div id="content-pane">
+  <tal:block replace="tile:statusmessages"/>
+  <article class="pat-rich">
+    <h1 i18n:translate="title_privacy">OiRA Privacy policy</h1>
+
+    <tal:if condition="not:is_anonymous">
+    <p class="message warning" i18n:translate="terms_changed" tal:condition="view/terms_changed">
+    The terms and conditions have changed since your last visit. Please read the new terms and conditions carefully before proceding.
+    </p>
+    </tal:if>
+
+    <form action="${request/getURL}" method="POST" class="concise">
+      <fieldset class="vertical">
+        <input type="hidden" name="came_from" value="${view/came_from}" tal:condition="view/came_from"/>
+        <div id="conditions" class="conditions" i18n:translate="text_terms_and_conditions">
+<h2>Organisational part of the Agency entrusted with the processing of personal data</h2>
+<p>William COCKBURN (information(at)osha.europa.eu)</p>
+<h2>Purpose</h2>
+<p>The purpose of the processing operation is the creation of and log-in to your OiRA (Online interactive Risk Assessment) account. The OiRA application is an instrument put at your disposal by the European Agency for Safety and Health at Work (EU-OSHA). This privacy policy applies to all products, services and websites offered by EU-OSHA in the framework of the OiRA application.</p>
+<h2>Legal basis</h2>
+<p>Council Regulation (EU) 2019/126 of the European Parliament and of the Council of 16 January 2019 establishing the European Agency for Safety and Health at Work (EU-OSHA), and repealing Council Regulation (EC) No 2062/94.</p>
+<h2>Type of data processed</h2>
+<p>- E-mail address: an email is necessary to access the online application, edit the input data, and delete the OiRA account. You can enter any e-mail address.</p>
+<p>- Any information you provide in the free text fields of the application of the OiRA tools and in the action plan of your risk assessments - (e.g. when you input a measure to tackle a risk, the person responsible for that measure, etc). The input of information in the free text fields just as any other personal data put into the tool is done voluntarily and based on consent.</p>
+<p>This website collects web statistics with Matomo that is entirely hosted in EU-OSHA’s servers, located in the European Union. The IP address is received by Matomo for geographical statistic purpose only (country, region and city).</p>
+<p>The OiRA software does collect statistics from logged in users based on aggregated data on number of accounts and risk assessments per tool by country, broken down to months.</p>
+<h2>Lawfulness of processing</h2>
+<p>The processing is based on Article 5.1 (d),(a) of <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2018.295.01.0039.01.ENG&toc=OJ:L:2018:295:TOC" target="terms">Regulation (EU) 2018/1725</a> of the European Parliament and of the Council of 23 October 2018 on the protection of natural persons with regard to the processing of personal data by the Union institutions, bodies, offices and agencies and on the free movement of such data (hereinafter the Regulation).</p>
+<h2>Data recipients</h2>
+<p>Personal data is only accessed by EU-OSHA’s technical providers based on request from the users in case of technical problems.</p>
+<h2>The data subject’s rights</h2>
+<p>Data subjects have the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject or, where applicable, the right to object to processing or the right to withdraw consent at any time without affecting the lawfulness of processing based on consent before its withdrawal (Articles 17, 18, 19, 20, 22, 23 and 24 of the Regulation).</p>
+<p>Any requests to exercise one of those rights should be directed per email to information(at)osha.europa.eu, mentioning the organisational part of the Agency entrusted with the processing operation as indicated in this privacy statement and the name of the processing operation, including in the subject the words “data protection”.</p>
+<p>Data subjects’ rights can be restricted only in the cases foreseen in Art 25 of the Regulation.</p>
+<h2>Information on the conservation period of data</h2>
+<p>We keep your data which is inaccessible for external users until you delete your account and/or your session(s). EU-OSHA stores data on our servers located in EU territory.</p>
+<h2>Security measures</h2>
+<p>We take appropriate security measures to protect against unauthorised access to or unauthorised alteration, disclosure or destruction of data. These include internal reviews of our data collection, storage and processing practices, appropriate encryption of communication and physical security measures to guard against unauthorised access to systems where we store personal data.</p>
+<h2>Request for information</h2>
+<p>For any further information regarding the handling of their personal data, data subjects can address their request to EU-OSHA Data Protection Officer at: dpo(at)osha.europa.eu.</p>
+<h2>Recourse to the EDPS</h2>
+<p>Data subjects are entitled to make recourse to the European Data Protection Supervisor: <a href="http://www.edps.europa.eu" target="terms">http://www.edps.europa.eu</a>, should they consider that the processing operations do not comply with the Regulation.</p>
+<h2>Date when processing starts</h2>
+<p>Date of creation of the OiRA account.</p>
+<p><em>Privacy statement last updated: 12/5/2019 3:29:56 PM</em></p>
+
+        </div>
+        <p class="buttonBar" tal:condition="not:is_anonymous">
+          <!-- the javascript for disabling does not work, therefore I leave the button enabled for now
+            To reenable, add disable="disabled" to the button, and uncomment the line that sets disabled
+            in the Javascript below.
+          -->
+          <button id="agree-button" class="pat-button" type="submit" value="agree" i18n:translate="agree_and_continue">Agree and continue</button>
+        </p>
+      </fieldset>
+    </form>
+</article>
+</div>
+
+
+
+  <tal:block replace="tile:client-analytics"/>
+  </metal:slot>
+  </body>
+</html>
+

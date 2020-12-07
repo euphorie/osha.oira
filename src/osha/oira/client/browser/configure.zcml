@@ -26,6 +26,16 @@
 
   </configure>
 
+
+  <browser:page
+      name="terms-and-conditions"
+      for="*"
+      permission="zope2.Public"
+      class=".conditions.TermsAndConditions"
+      template="templates/privacy_policy.pt"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
   <browser:page
       name="remove-certificate-status-box"
       for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"

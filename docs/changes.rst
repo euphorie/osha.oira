@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.12 (unreleased)
+6.2.12 (2020-12-07)
 -------------------
 
 - Translated privacy policy

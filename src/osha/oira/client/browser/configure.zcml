@@ -121,4 +121,12 @@
       layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
       />
 
+  <browser:page
+      name="timeline"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      permission="euphorie.client.ViewSurvey"
+      class=".report.ActionPlanTimeline"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
 </configure>

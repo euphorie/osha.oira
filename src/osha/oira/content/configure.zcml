@@ -49,4 +49,16 @@
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
+  <!-- override some classes, but re-use the template from NuPlone -->
+  <configure package="plonetheme.nuplone.skin">
+    <browser:page
+        name="sitemenu"
+        for="*"
+        class="osha.oira.content.sitemenu.Sitemenu"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+        permission="zope2.Public"
+        template="templates/sitemenu.pt"
+        />
+  </configure>
+
 </configure>

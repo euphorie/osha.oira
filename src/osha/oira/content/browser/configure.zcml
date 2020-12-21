@@ -150,6 +150,21 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <!-- CountryMananager -->
+    <adapter
+        for="Products.CMFCore.interfaces.IFolderish
+             osha.oira.interfaces.IOSHAContentSkinLayer
+             plone.dexterity.interfaces.IDexterityFTI"
+        provides="zope.publisher.interfaces.browser.IBrowserPage"
+        factory=".countrymanager.AddView"
+        name="euphorie.countrymanager"/>
+    <class class=".countrymanager.AddView">
+        <require
+            permission="euphorie.content.AddNewRIEContent"
+            interface="zope.publisher.interfaces.browser.IBrowserPage"
+            />
+    </class>
+
   <!-- Login -->
   <browser:page
       name="login"

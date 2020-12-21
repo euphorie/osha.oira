@@ -150,5 +150,28 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <!-- Login -->
+  <browser:page
+      name="login"
+      for="*"
+      permission="zope2.Public"
+      class="plonetheme.nuplone.browser.login.Login"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      template="templates/login.pt"
+      />
+  <browser:page
+      name="request-password-reset"
+      for="Products.CMFCore.interfaces.ISiteRoot"
+      permission="zope2.Public"
+      class=".pwreminder.RequestPasswordForm"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+  <browser:page
+      name="reset-password"
+      for="Products.CMFCore.interfaces.ISiteRoot"
+      permission="zope2.Public"
+      class=".pwreminder.PasswordReset"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
 
 </configure>

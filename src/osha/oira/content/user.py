@@ -3,7 +3,7 @@ from euphorie.content import user
 from euphorie.content.user import IUser
 from five import grok
 from os import urandom
-from osha.oira.content.statistics import IOSHAContentSkinLayer
+from osha.oira.interfaces import IOSHAContentSkinLayer
 from p01.widget.password.interfaces import IPasswordConfirmationWidget
 from plone.directives import form
 from Products.Archetypes.utils import IStatusMessage

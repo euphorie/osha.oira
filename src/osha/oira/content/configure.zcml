@@ -28,11 +28,6 @@
         factory="z3c.form.datamanager.AttributeField"
         />
 
-    <adapter
-        factory=".statistics.ReportPeriodFactory"
-        name="osha.oira.content.statistics.IReportPeriod"
-        />
-
   <browser:page
       name="site-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"

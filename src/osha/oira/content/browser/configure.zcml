@@ -189,4 +189,45 @@
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
+  <!-- Statistics -->
+    <adapter
+        factory=".statistics.ReportPeriodFactory"
+        name="osha.oira.content.statistics.IReportPeriod"
+        />
+  <browser:page
+      name="write-statistics"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      permission="cmf.ManagePortal"
+      class=".statistics.WriteStatistics"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+  <browser:page
+      name="show-statistics"
+      for="euphorie.content.country.ICountry"
+      permission="cmf.ModifyPortalContent"
+      class=".statistics.CountryStatistics"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+  <browser:page
+      name="show-statistics"
+      for="euphorie.content.sector.ISector"
+      permission="cmf.ModifyPortalContent"
+      class=".statistics.SectorStatistics"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+  <browser:page
+      name="show-statistics"
+      for="euphorie.content.surveygroup.ISurveyGroup"
+      permission="cmf.ModifyPortalContent"
+      class=".statistics.SectorStatistics"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+  <browser:page
+      name="show-statistics"
+      for="euphorie.content.sectorcontainer.ISectorContainer"
+      permission="cmf.ModifyPortalContent"
+      class=".statistics.GlobalStatistics"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
 </configure>

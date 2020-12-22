@@ -1,6 +1,5 @@
 # coding=utf-8
 from euphorie.client import model
-from five import grok
 from osha.oira.client import model as oiramodel
 from sqlalchemy import sql
 from z3c.saconfig import Session
@@ -8,7 +7,6 @@ from zope.i18nmessageid import MessageFactory
 import htmllib
 
 pl_message = MessageFactory('plonelocales')
-grok.templatedir('templates')
 
 
 NAME_TO_PHASE = {

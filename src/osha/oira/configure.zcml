@@ -43,10 +43,6 @@
       handler=".dbconfig.dbconfig"
       />
 
-  <!-- XXX: Uncomment the line below when testing Euphorie, to avoid
-         osha.oira's customizations
-    -->
-  <grok:grok package=".client.client" />
   <grok:grok package=".client.survey" />
   <grok:grok package=".client.disclaimer" />
   <grok:grok package=".client.utils" />

@@ -51,8 +51,35 @@
   <grok:grok package=".client.disclaimer" />
   <grok:grok package=".client.utils" />
 
-  <grok:grok package=".scripts" />
-  <grok:grok package=".vocabularies" />
+  <!-- Vocabularies -->
+  <utility
+    component=".vocabularies.ReportTypeVocabularyFactory"
+    name="osha.oira.report_type"
+    />
+  <utility
+    component=".vocabularies.ReportYearVocabularyFactory"
+    name="osha.oira.report_year"
+    />
+  <utility
+    component=".vocabularies.ReportPeriodVocabularyFactory"
+    name="osha.oira.report_period"
+    />
+  <utility
+    component=".vocabularies.ToolVersionsVocabularyFactory"
+    name="osha.oira.toolversions"
+    />
+  <utility
+    component=".vocabularies.PublishedToolsVocabularyFactory"
+    name="osha.oira.publishedtools"
+    />
+  <utility
+    component=".vocabularies.CountriesVocabularyFactory"
+    name="osha.oira.countries"
+    />
+  <utility
+    component=".vocabularies.ReportFileFormatVocabularyFactory"
+    name="osha.oira.report_file_format"
+    />
 
   <browser:page
       name="outdated-tools-view"

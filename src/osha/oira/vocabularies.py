@@ -11,11 +11,12 @@ from plone import api
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.i18n import translate
+from zope.interface import implementer
 
 
+@implementer(IVocabularyFactory)
 class ReportTypeVocabulary(object):
     """ """
-    grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
         t = lambda txt: translate(txt, context=api.portal.get().REQUEST)
@@ -29,25 +30,23 @@ class ReportTypeVocabulary(object):
             types.update({t(_('Country')).encode('utf-8'): 'country'})
         return SimpleVocabulary.fromItems(types.items())
 
-grok.global_utility(ReportTypeVocabulary,
-                    name='osha.oira.report_type')
+ReportTypeVocabularyFactory = ReportTypeVocabulary()
 
 
+@implementer(IVocabularyFactory)
 class ReportYearVocabulary(object):
     """ """
-    grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
         return SimpleVocabulary.fromValues(
             range(datetime.now().year, 2010, -1))
 
-grok.global_utility(ReportYearVocabulary,
-                    name='osha.oira.report_year')
+ReportYearVocabularyFactory = ReportYearVocabulary()
 
 
+@implementer(IVocabularyFactory)
 class ReportPeriodVocabulary(object):
     """ """
-    grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
         t = lambda txt: translate(txt, context=site.REQUEST)
@@ -65,13 +64,12 @@ class ReportPeriodVocabulary(object):
             for (token, value) in items]
         return SimpleVocabulary(terms)
 
-grok.global_utility(ReportPeriodVocabulary,
-                    name='osha.oira.report_period')
+ReportPeriodVocabularyFactory = ReportPeriodVocabulary()
 
 
+@implementer(IVocabularyFactory)
 class ToolVersionsVocabulary(object):
     """ """
-    grok.implements(IVocabularyFactory)
 
     def getToolVersionsInSector(self, sector):
         tools = []
@@ -102,13 +100,12 @@ class ToolVersionsVocabulary(object):
             tools += self.getToolVersionsInCountry(country)
         return tools
 
-grok.global_utility(ToolVersionsVocabulary,
-                    name='osha.oira.toolversions')
+ToolVersionsVocabularyFactory = ToolVersionsVocabulary()
 
 
+@implementer(IVocabularyFactory)
 class PublishedToolsVocabulary(object):
     """ """
-    grok.implements(IVocabularyFactory)
 
     def getToolsInSector(self, sector):
         tools = []
@@ -141,13 +138,12 @@ class PublishedToolsVocabulary(object):
             tools += self.getToolsInSector(aq_parent(context))
         return SimpleVocabulary.fromValues(tools)
 
-grok.global_utility(PublishedToolsVocabulary,
-                    name='osha.oira.publishedtools')
+PublishedToolsVocabularyFactory = PublishedToolsVocabulary()
 
 
+@implementer(IVocabularyFactory)
 class CountriesVocabulary(object):
     """ """
-    grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
         countries = {}
@@ -183,13 +179,12 @@ class CountriesVocabulary(object):
                 })
         return SimpleVocabulary.fromItems(sorted(countries.items()))
 
-grok.global_utility(CountriesVocabulary,
-                    name='osha.oira.countries')
+CountriesVocabularyFactory = CountriesVocabulary()
 
 
+@implementer(IVocabularyFactory)
 class ReportFileFormatVocabulary(object):
     """ """
-    grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
         formats = [SimpleTerm('xls', token='Excel'),
@@ -197,5 +192,4 @@ class ReportFileFormatVocabulary(object):
                    ]
         return SimpleVocabulary(formats)
 
-grok.global_utility(ReportFileFormatVocabulary,
-                    name='osha.oira.report_file_format')
+ReportFileFormatVocabularyFactory = ReportFileFormatVocabulary()

@@ -1,15 +1,13 @@
-from Products.CMFCore.interfaces import ISiteRoot
-from Products.CMFCore.utils import getToolByName
 from collections import OrderedDict
 from datetime import datetime
 from datetime import timedelta
 from euphorie.client.utils import CreateEmailTo
-from euphorie.content.countrymanager import ICountryManager
-from five import grok
+from plone import api
 from plone.dexterity.utils import safe_unicode
+from Products.CMFCore.utils import getToolByName
+from Products.Five import BrowserView
 from slc.zopescript.script import ConsoleScript
 from zope.component import getMultiAdapter
-from plone import api
 
 import logging
 
@@ -36,10 +34,7 @@ class WriteStatistics(ConsoleScript):
 write_statistics = WriteStatistics()
 
 
-class OutdatedToolsView(grok.View):
-    grok.context(ISiteRoot)
-    grok.require("cmf.ManagePortal")
-    grok.name("outdated-tools-view")
+class OutdatedToolsView(BrowserView):
 
     def __init__(self, context=None, request=None):
         sprops = context.portal_properties.site_properties

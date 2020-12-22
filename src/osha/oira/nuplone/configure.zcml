@@ -20,5 +20,14 @@
     template="templates/wysiwyg_input.pt"
     />
 
+  <browser:page
+      name="index.html"
+      for="zExceptions.Unauthorized"
+      class="plonetheme.nuplone.skin.error.Unauthorized"
+      permission="zope2.Public"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      template="templates/error_unauthorized.pt"
+      />
+
 </configure>
 

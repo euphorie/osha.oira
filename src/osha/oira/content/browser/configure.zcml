@@ -71,6 +71,17 @@
       factory=".surveygroup.AddView"
       name="euphorie.surveygroup"/>
 
+  <configure package="plonetheme.nuplone.skin">
+    <browser:page
+        name="delete"
+        for="euphorie.content.surveygroup.ISurveyGroup"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+        class="osha.oira.content.browser.surveygroup.Delete"
+        template="templates/delete.pt"
+        permission="zope2.View"
+        />
+  </configure>
+
   <!-- Sector -->
   <adapter
       name="euphorie.sector"

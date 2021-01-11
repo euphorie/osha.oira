@@ -1,8 +1,14 @@
 Changelog
 =========
 
-6.2.14 (unreleased)
--------------------
+7.0.0 (unreleased)
+------------------
+
+This branch will prepare for the migration to Plone5.2 and ultimately to python3.
+A big milestone will be the removal of Grok.
+
+6.2.14 (unnreleased)
+--------------------
 
 - Translation updates
 

@@ -270,4 +270,24 @@
         />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:registerProfile
+      name="to_0019"
+      title="Switch from Appconfig to registry"
+      description=""
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      directory="to_0019"
+      />
+
+  <genericsetup:upgradeSteps
+        destination="19"
+        profile="osha.oira:default"
+        source="18"
+        >
+    <genericsetup:upgradeDepends
+        title="Switch from Appconfig to registry"
+        import_profile="osha.oira.upgrade:to_0019"
+        />
+  </genericsetup:upgradeSteps>
+
 </configure>

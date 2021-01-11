@@ -1,0 +1,51 @@
+<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="euphorie"
+>
+  <record name="euphorie.client_url">
+    <value purge="false">https://oiraproject.eu/oira-tools/</value>
+  </record>
+  <record name="euphorie.allow_guest_accounts">
+    <value purge="false">True</value>
+  </record>
+  <record name="euphorie.allow_social_sharing">
+    <value purge="false">True</value>
+  </record>
+  <record name="euphorie.allow_user_defined_risks">
+    <value purge="false">True</value>
+  </record>
+  <record name="euphorie.default_country">
+    <value purge="false">eu</value>
+  </record>
+  <record name="euphorie.library">
+    <value purge="false">/sectors/eu/library</value>
+  </record>
+  <record name="euphorie.max_login_attempts">
+    <value purge="false">3</value>
+  </record>
+  <record name="euphorie.smartprintng_url">
+    <value purge="false">http://194.30.15.179:6543</value>
+  </record>
+  <record name="euphorie.terms_and_conditions">
+    <value purge="false">True</value>
+  </record>
+  <record name="euphorie.use_clone_feature">
+    <value purge="false">True</value>
+  </record>
+  <record name="euphorie.use_existing_measures">
+    <value purge="false">True</value>
+  </record>
+  <record name="euphorie.use_involve_phase">
+    <value purge="false">True</value>
+  </record>
+  <record name="euphorie.use_integrated_action_plan">
+    <value purge="false">True</value>
+  </record>
+  <record name="plonetheme.nuplone.appconfigtile_actions">
+    <value purge="false">{
+  "tiles": "\neuphorie.search\neuphorie.versions [view_type=='view' and context.portal_type in ['euphorie.module', 'euphorie.risk', 'euphorie.solution', 'euphorie.survey', 'euphorie.surveygroup'] ]\nlanguage",
+  "type": "group",
+  "id": "portlets",
+  "wrapper": "div"
+}</value>
+  </record>
+</registry>

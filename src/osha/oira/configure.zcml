@@ -35,8 +35,6 @@
   <include package=".upgrade" />
   <include package=".statistics" />
 
-  <appconfig file="config.ini" />
-
   <subscriber
       for="zope.processlifetime.IProcessStarting"
       handler=".dbconfig.dbconfig"

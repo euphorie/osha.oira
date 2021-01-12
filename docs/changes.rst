@@ -4,8 +4,7 @@ Changelog
 6.2.14 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Translation updates
 
 6.2.13 (2020-12-15)
 -------------------

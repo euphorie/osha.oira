@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.23.dev0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-01-12 09:41+0000\n"
+"POT-Creation-Date: 2021-01-12 11:55+0000\n"
 "PO-Revision-Date: 2013-08-15 11:33+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,7 +82,7 @@ msgstr "${provide-evidence} às autoridades competentes (inspeção do trabalho)
 #: osha/oira/client/browser/templates/certificate_macros.pt:43
 #: osha/oira/client/browser/templates/status.pt:52
 msgid "${required} Complete!"
-msgstr ""
+msgstr "${required} concluído!"
 
 #: euphorie/client/browser/templates/webhelpers.pt:309
 msgid "${view/description_probability}"
@@ -454,11 +454,12 @@ msgstr ""
 msgid "Continue to report"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:98
+#: osha/oira/client/browser/templates/certificate.pt:99
 msgid ""
 "Copy the following link to anyone to whom it may concern as proof that "
 "you've conducted this risk assessment."
 msgstr ""
+"Copie o link a seguir para qualquer pessoa a quem possa interessar como prova de que fez esta avaliação de risco."
 
 #: osha/oira/client/browser/templates/public-certificate.pt:63
 #: osha/oira/vocabularies.py:26
@@ -812,9 +813,9 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:62
+#: osha/oira/client/browser/templates/certificate.pt:63
 msgid "Make public"
-msgstr ""
+msgstr "Tornar público"
 
 #: euphorie/client/templates/report_landing.pt:121
 msgid "Manage"
@@ -885,7 +886,7 @@ msgstr ""
 
 #: osha/oira/client/browser/templates/certificate.pt:42
 msgid "Name on certificate"
-msgstr ""
+msgstr "Nome no certificado"
 
 #: euphorie/deployment/tiles/configure.zcml:48
 msgid "Navigation tree for sector management"
@@ -968,7 +969,7 @@ msgstr ""
 "que permite realizar avaliações de riscos para a segurança e a saúde no seu "
 "local de trabalho."
 
-#: osha/oira/client/browser/templates/certificate.pt:79
+#: osha/oira/client/browser/templates/certificate.pt:80
 msgid "OiRA website"
 msgstr ""
 
@@ -1220,7 +1221,7 @@ msgstr ""
 msgid "Sector workflow"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:65
+#: osha/oira/client/browser/templates/certificate.pt:66
 msgid "Send"
 msgstr ""
 
@@ -1540,7 +1541,7 @@ msgstr ""
 #: osha/oira/client/browser/templates/certificate_macros.pt:53
 #: osha/oira/client/browser/templates/status.pt:63
 msgid "View certificate"
-msgstr ""
+msgstr "Ver certificado"
 
 #: euphorie/client/templates/report_landing.pt:65
 msgid ""
@@ -1612,11 +1613,13 @@ msgid ""
 "completed ${required} of the risk assessment, you will be eligible for a "
 "certificate."
 msgstr ""
+"Concluiu ${completed} da avaliação de riscos. Quando tiver concluído "
+"${required} da avaliação de riscos, terá direito a um certificado."
 
 #: osha/oira/client/browser/templates/certificate_macros.pt:46
 #: osha/oira/client/browser/templates/status.pt:55
 msgid "You have earned a certificate for this tool."
-msgstr ""
+msgstr "Ganhou um certificado por concluir esta ferramenta."
 
 #: euphorie/client/browser/templates/login.pt:125
 msgid ""
@@ -1624,16 +1627,20 @@ msgid ""
 "dated risk assessment (at any time)."
 msgstr "Assegure-se sempre de que dispõe de uma versão impressa, atualizada."
 
-#: osha/oira/client/browser/templates/certificate.pt:91
+#: osha/oira/client/browser/templates/certificate.pt:92
 msgid "Your certificate for ${title} is ${site_title} on the OIRA website."
-msgstr ""
+msgstr "O certificado para ${title} está ou é ${site_title} no site OIRA."
 
-#: osha/oira/client/browser/templates/certificate.pt:79
+#: osha/oira/client/browser/templates/certificate.pt:80
 msgid ""
 "Your certificate for ${title} is private unless you choose to make it "
 "public. By ticking the &ldquo;Make public&rdquo; tickbox above, your "
 "certificate will be published on the official ${site_title}."
 msgstr ""
+
+#: osha/oira/client/browser/templates/certificate.pt:45
+msgid "Your company name"
+msgstr "Nome da empresa"
 
 #: euphorie/client/settings.py:354
 msgid "Your email address has been updated."
@@ -3239,7 +3246,7 @@ msgstr ""
 #. Default: "Certification"
 #: osha/oira/client/browser/templates/status.pt:31
 msgid "heading_certification"
-msgstr ""
+msgstr "Certificação"
 
 #. Default: "Comments"
 #: euphorie/client/browser/templates/webhelpers.pt:600
@@ -5717,9 +5724,9 @@ msgstr "Pequena"
 msgid "progress_indicator_title"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:91
+#: osha/oira/client/browser/templates/certificate.pt:92
 msgid "publically visible"
-msgstr ""
+msgstr "divulgado"
 
 #. Default: "<p>Would you now like to add your own defined risks to this tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks, we strongly recommend you to go first through all the previous modules, if you have not done it yet.</p><p>If you don't need to add risks, please select 'No.'</p>"
 #: osha/oira/upgrade/upgrade.py:194

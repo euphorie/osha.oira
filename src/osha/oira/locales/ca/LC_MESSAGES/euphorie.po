@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.6.dev0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-01-12 09:41+0000\n"
+"POT-Creation-Date: 2021-01-12 11:55+0000\n"
 "PO-Revision-Date: 2013-08-15 11:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -455,7 +455,7 @@ msgstr ""
 msgid "Continue to report"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:98
+#: osha/oira/client/browser/templates/certificate.pt:99
 msgid ""
 "Copy the following link to anyone to whom it may concern as proof that "
 "you've conducted this risk assessment."
@@ -811,7 +811,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:62
+#: osha/oira/client/browser/templates/certificate.pt:63
 msgid "Make public"
 msgstr ""
 
@@ -974,7 +974,7 @@ msgstr ""
 "permet realitzar l’avaluació de riscos laborals del vostre centre de treball "
 "o empresa."
 
-#: osha/oira/client/browser/templates/certificate.pt:79
+#: osha/oira/client/browser/templates/certificate.pt:80
 msgid "OiRA website"
 msgstr ""
 
@@ -1224,7 +1224,7 @@ msgstr ""
 msgid "Sector workflow"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:65
+#: osha/oira/client/browser/templates/certificate.pt:66
 msgid "Send"
 msgstr ""
 
@@ -1630,15 +1630,19 @@ msgstr ""
 "Assegureu-vos de disposar en tot moment de la darrera versió de l’avaluació "
 "de riscos actualitzada i impresa."
 
-#: osha/oira/client/browser/templates/certificate.pt:91
+#: osha/oira/client/browser/templates/certificate.pt:92
 msgid "Your certificate for ${title} is ${site_title} on the OIRA website."
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:79
+#: osha/oira/client/browser/templates/certificate.pt:80
 msgid ""
 "Your certificate for ${title} is private unless you choose to make it "
 "public. By ticking the &ldquo;Make public&rdquo; tickbox above, your "
 "certificate will be published on the official ${site_title}."
+msgstr ""
+
+#: osha/oira/client/browser/templates/certificate.pt:45
+msgid "Your company name"
 msgstr ""
 
 #: euphorie/client/settings.py:354
@@ -5724,7 +5728,7 @@ msgstr "Baixa"
 msgid "progress_indicator_title"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:91
+#: osha/oira/client/browser/templates/certificate.pt:92
 msgid "publically visible"
 msgstr ""
 
@@ -6081,7 +6085,80 @@ msgstr ""
 #: osha/oira/client/browser/templates/privacy_policy.pt:31
 msgid "text_terms_and_conditions"
 msgstr ""
-"<h2>Part organitzativa de l’Agència Europea per a la Seguretat i la Salut en el Treball (EU-OSHA), a la qual s’ha confiat el tractament de dades personals</h2><p>William Cockburn [information(at)osha.europa.eu]</p><h2>Finalitat</h2><p>L’objectiu de l’operació de processament és crear un compte d’OIRA (Avaluació interactiva de riscos en línia) i iniciar-hi una sessió. L’aplicació OIRA és un instrument que posa a la vostra disposició l’Agència Europea per a la Seguretat i la Salut en el Treball (EU-OSHA). Aquesta política de privacitat s’aplica a tots els productes, serveis i webs que ofereix l’EU-OSHA en el marc de l’aplicació OIRA.</p><h2>Fonament jurídic</h2><p>Reglament (UE) 2019/126 del Parlament Europeu i del Consell, de 16 de gener de 2019, pel qual es crea l’Agència Europea per a la Seguretat i la Salut en el Treball (EU-OSHA) i es deroga el Reglament (CE ) núm. 2062/94 del Consell.</p><h2>Tipus de dades tractades</h2><p>- Adreça de correu electrònic: cal un correu electrònic per accedir a l’aplicació en línia, modificar les dades introduïdes i eliminar el compte d’OIRA. Podeu introduir-hi diverses adreces de correu electrònic.</p><p>- Qualsevol informació que es faciliti en els camps de text lliure de l’aplicació OIRA i en el pla d’acció de les avaluacions de riscos (per exemple, en introduir-hi una mesura per abordar un risc, la persona responsable d’aquesta mesura, etc.). La introducció d’informació en els camps de text lliure, així com qualsevol altra dada personal que es proporcioni, es fa de manera voluntària i es basa en el consentiment.</p><p>Aquest web recopila estadístiques web amb el programa Matomo, allotjat en els servidors de l’EU-OSHA, ubicats a la Unió Europea. Matomo rep l’adreça IP únicament amb finalitats estadístiques geogràfiques (país, regió i ciutat).</p><p>El programari OIRA recull estadístiques dels usuaris registrats a partir de dades agregades sobre el nombre de comptes i les avaluacions de riscos per eina i per país, desglossats per mesos.</p><h2>Licitud del tractament de dades</h2><p>El tractament es basa en l’article 5, apartat 1.d), del <a href='https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2018.295.01.0039.01.ENG&toc=OJ:L:2018:295:TOC' target='terms'>Reglament (UE) 2018/1725</a> del Parlament Europeu i del Consell, de 23 d’octubre de 2018, relatiu a la protecció de les persones físiques pel que fa al tractament de dades personals per les institucions, òrgans i organismes de la Unió, i a la lliure circulació d’aquestes dades (en endavant, el Reglament).</p><h2>Destinataris de les dades tractades</h2><p>Els proveïdors tècnics de l’EU-OSHA només tenen accés a les dades personals a petició dels usuaris en cas de problemes tècnics.</p><h2>Drets de les persones interessades</h2><p>Les persones interessades tenen dret a sol·licitar al responsable del tractament l’accés i la rectificació o supressió de les seves dades personals o la limitació del tractament en relació amb la persona interessada o, si escau, tenen el dret a oposar-s’hi o a retirar-ne el consentiment en qualsevol moment, sense que això afecti la licitud del tractament basat en el consentiment previ a la retirada (articles 17, 18, 19, 20, 22, 23 i 24 del Reglament).</p><p>Qualsevol sol·licitud per exercir un dels drets esmentats s’ha d’adreçar, per correu electrònic, a information (at) osha.europa.eu, esmentant la part organitzativa de l’Agència que s’encarrega de l’operació del tractament, com assenyala aquesta declaració de privacitat, i el nom de l’operació del tractament, incloent-hi les paraules «protecció de dades» en l’assumpte.</p><p>Els drets de les persones interessades només es poden restringir en els casos que preveu l’article 25 del Reglament.</p><h2>Informació sobre el període de conservació de les dades personals</h2><p>Conservem les vostres dades personals, a les quals no poden accedir els usuaris externs, fins que elimineu el vostre compte o la sessió corresponent. L’EU-OSHA emmagatzema les dades en els seus servidors, ubicats a la Unió Europea.</p><h2>Mesures de seguretat</h2><p>L’EU-OSHA adopta les mesures de seguretat adequades per garantir la protecció davant l’accés no autoritzat a les dades o davant la seva modificació, divulgació o destrucció no autoritzades. Entre aquestes mesures cal esmentar les accions següents: revisions internes de les seves dades, pràctiques d’emmagatzematge i tractament, xifrat adequat de la comunicació i mesures de seguretat físiques per garantir la protecció davant accessos no autoritzats als sistemes en què s’emmagatzemen dades personals.</p><h2>Sol·licitud d’informació</h2><p>Per a qualsevol informació relacionada amb el tractament de les vostres dades personals, podeu adreçar una sol·licitud al responsable de protecció de dades de l’EU-OSHA a: DPO (at) osha.europa.eu.</p><h2>Recursos davant el SEPD</h2><p>Les persones interessades tenen dret a presentar un recurs davant el Supervisor Europeu de Protecció de Dades (SEPD) a <a href='http://www.edps.europa.eu' target='terms'>http://www.edps.europa.eu</a>, en el cas que considerin que les operacions de tractament de les dades no compleixen el que disposa el Reglament.</p><h2>Data d’inici del tractament</h2><p>Data de creació del compte d’OIRA.</p><p><em>Darrera actualització de la declaració de privacitat: 20.6.2019 a les 16.32.04 h</em></p>"
+"<h2>Part organitzativa de l’Agència Europea per a la Seguretat i la Salut en "
+"el Treball (EU-OSHA), a la qual s’ha confiat el tractament de dades "
+"personals</h2><p>William Cockburn [information(at)osha.europa.eu]</"
+"p><h2>Finalitat</h2><p>L’objectiu de l’operació de processament és crear un "
+"compte d’OIRA (Avaluació interactiva de riscos en línia) i iniciar-hi una "
+"sessió. L’aplicació OIRA és un instrument que posa a la vostra disposició "
+"l’Agència Europea per a la Seguretat i la Salut en el Treball (EU-OSHA). "
+"Aquesta política de privacitat s’aplica a tots els productes, serveis i webs "
+"que ofereix l’EU-OSHA en el marc de l’aplicació OIRA.</p><h2>Fonament "
+"jurídic</h2><p>Reglament (UE) 2019/126 del Parlament Europeu i del Consell, "
+"de 16 de gener de 2019, pel qual es crea l’Agència Europea per a la "
+"Seguretat i la Salut en el Treball (EU-OSHA) i es deroga el Reglament (CE ) "
+"núm. 2062/94 del Consell.</p><h2>Tipus de dades tractades</h2><p>- Adreça de "
+"correu electrònic: cal un correu electrònic per accedir a l’aplicació en "
+"línia, modificar les dades introduïdes i eliminar el compte d’OIRA. Podeu "
+"introduir-hi diverses adreces de correu electrònic.</p><p>- Qualsevol "
+"informació que es faciliti en els camps de text lliure de l’aplicació OIRA i "
+"en el pla d’acció de les avaluacions de riscos (per exemple, en introduir-hi "
+"una mesura per abordar un risc, la persona responsable d’aquesta mesura, "
+"etc.). La introducció d’informació en els camps de text lliure, així com "
+"qualsevol altra dada personal que es proporcioni, es fa de manera voluntària "
+"i es basa en el consentiment.</p><p>Aquest web recopila estadístiques web "
+"amb el programa Matomo, allotjat en els servidors de l’EU-OSHA, ubicats a la "
+"Unió Europea. Matomo rep l’adreça IP únicament amb finalitats estadístiques "
+"geogràfiques (país, regió i ciutat).</p><p>El programari OIRA recull "
+"estadístiques dels usuaris registrats a partir de dades agregades sobre el "
+"nombre de comptes i les avaluacions de riscos per eina i per país, "
+"desglossats per mesos.</p><h2>Licitud del tractament de dades</h2><p>El "
+"tractament es basa en l’article 5, apartat 1.d), del <a href='https://eur-"
+"lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2018.295.01.0039.01."
+"ENG&toc=OJ:L:2018:295:TOC' target='terms'>Reglament (UE) 2018/1725</a> del "
+"Parlament Europeu i del Consell, de 23 d’octubre de 2018, relatiu a la "
+"protecció de les persones físiques pel que fa al tractament de dades "
+"personals per les institucions, òrgans i organismes de la Unió, i a la "
+"lliure circulació d’aquestes dades (en endavant, el Reglament).</"
+"p><h2>Destinataris de les dades tractades</h2><p>Els proveïdors tècnics de "
+"l’EU-OSHA només tenen accés a les dades personals a petició dels usuaris en "
+"cas de problemes tècnics.</p><h2>Drets de les persones interessades</"
+"h2><p>Les persones interessades tenen dret a sol·licitar al responsable del "
+"tractament l’accés i la rectificació o supressió de les seves dades "
+"personals o la limitació del tractament en relació amb la persona "
+"interessada o, si escau, tenen el dret a oposar-s’hi o a retirar-ne el "
+"consentiment en qualsevol moment, sense que això afecti la licitud del "
+"tractament basat en el consentiment previ a la retirada (articles 17, 18, "
+"19, 20, 22, 23 i 24 del Reglament).</p><p>Qualsevol sol·licitud per exercir "
+"un dels drets esmentats s’ha d’adreçar, per correu electrònic, a information "
+"(at) osha.europa.eu, esmentant la part organitzativa de l’Agència que "
+"s’encarrega de l’operació del tractament, com assenyala aquesta declaració "
+"de privacitat, i el nom de l’operació del tractament, incloent-hi les "
+"paraules «protecció de dades» en l’assumpte.</p><p>Els drets de les persones "
+"interessades només es poden restringir en els casos que preveu l’article 25 "
+"del Reglament.</p><h2>Informació sobre el període de conservació de les "
+"dades personals</h2><p>Conservem les vostres dades personals, a les quals no "
+"poden accedir els usuaris externs, fins que elimineu el vostre compte o la "
+"sessió corresponent. L’EU-OSHA emmagatzema les dades en els seus servidors, "
+"ubicats a la Unió Europea.</p><h2>Mesures de seguretat</h2><p>L’EU-OSHA "
+"adopta les mesures de seguretat adequades per garantir la protecció davant "
+"l’accés no autoritzat a les dades o davant la seva modificació, divulgació o "
+"destrucció no autoritzades. Entre aquestes mesures cal esmentar les accions "
+"següents: revisions internes de les seves dades, pràctiques d’emmagatzematge "
+"i tractament, xifrat adequat de la comunicació i mesures de seguretat "
+"físiques per garantir la protecció davant accessos no autoritzats als "
+"sistemes en què s’emmagatzemen dades personals.</p><h2>Sol·licitud "
+"d’informació</h2><p>Per a qualsevol informació relacionada amb el tractament "
+"de les vostres dades personals, podeu adreçar una sol·licitud al responsable "
+"de protecció de dades de l’EU-OSHA a: DPO (at) osha.europa.eu.</"
+"p><h2>Recursos davant el SEPD</h2><p>Les persones interessades tenen dret a "
+"presentar un recurs davant el Supervisor Europeu de Protecció de Dades "
+"(SEPD) a <a href='http://www.edps.europa.eu' target='terms'>http://www.edps."
+"europa.eu</a>, en el cas que considerin que les operacions de tractament de "
+"les dades no compleixen el que disposa el Reglament.</p><h2>Data d’inici del "
+"tractament</h2><p>Data de creació del compte d’OIRA.</p><p><em>Darrera "
+"actualització de la declaració de privacitat: 20.6.2019 a les 16.32.04 h</"
+"em></p>"
 
 #. Default: "OiRA"
 #: euphorie/content/templates/colour-preview.pt:51

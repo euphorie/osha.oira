@@ -48,6 +48,7 @@
                              required
                              type="text"
                              value="${request/title|view/certificate_json/title|nothing}"
+                             i18n:attributes="placeholder"
                       />
                     </label>
                     <metal:extra_fields use-macro="view/country_adapter/macros/extra_fields"

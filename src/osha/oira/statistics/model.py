@@ -5,9 +5,11 @@ from sqlalchemy import create_engine
 from sqlalchemy import schema
 from sqlalchemy import types
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.sql import functions
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.sql import functions
+
 import logging
+
 
 log = logging.getLogger(__name__)
 
@@ -37,8 +39,7 @@ def create_session(database_url):
 
 
 class AccountStatistics(Base):
-    """Statistically relevant data concerning an account.
-    """
+    """Statistically relevant data concerning an account."""
 
     __tablename__ = "account"
 
@@ -52,8 +53,7 @@ class AccountStatistics(Base):
 
 
 class SurveySessionStatistics(Base):
-    """Statistically relevant data concerning a session.
-    """
+    """Statistically relevant data concerning a session."""
 
     __tablename__ = "assessment"
 

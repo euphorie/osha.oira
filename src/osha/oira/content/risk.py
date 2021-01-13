@@ -1,46 +1,49 @@
-from five import grok
-from euphorie.content import risk
-from ..interfaces import IOSHAContentSkinLayer
 from .. import _
+from ..interfaces import IOSHAContentSkinLayer
+from euphorie.content import risk
+from five import grok
+
 
 grok.templatedir("templates")
 
 
 class OSHAFormMixin:
     """ """
-    def setDynamicDescriptions(self):
-        """ Set the evaluation_method description depending on the evaluation
-            algorithm (Kinney or French)
-        """
-        evalgroup = self.groups[self.order.index('header_evaluation')]
-        evalfield = evalgroup.fields.get('evaluation_method')
-        if self.evaluation_algorithm == 'kinney':
-            evalfield.field.description = \
-                _("help_evaluation_method_kinney",
-                default="Choose between ESTIMATED (rough estimation) or "
-                        "CALCULATED (combination of probability, frequency "
-                        "and severity) method.")
 
-        elif self.evaluation_algorithm == 'french':
-            evalfield.field.description = \
-                _("help_evaluation_method_french",
+    def setDynamicDescriptions(self):
+        """Set the evaluation_method description depending on the evaluation
+        algorithm (Kinney or French)
+        """
+        evalgroup = self.groups[self.order.index("header_evaluation")]
+        evalfield = evalgroup.fields.get("evaluation_method")
+        if self.evaluation_algorithm == "kinney":
+            evalfield.field.description = _(
+                "help_evaluation_method_kinney",
                 default="Choose between ESTIMATED (rough estimation) or "
-                        "CALCULATED (combination of frequency "
-                        "and severity) method.")
+                "CALCULATED (combination of probability, frequency "
+                "and severity) method.",
+            )
+
+        elif self.evaluation_algorithm == "french":
+            evalfield.field.description = _(
+                "help_evaluation_method_french",
+                default="Choose between ESTIMATED (rough estimation) or "
+                "CALCULATED (combination of frequency "
+                "and severity) method.",
+            )
 
 
 class Add(risk.Add, OSHAFormMixin):
-    """ Override to allow us to dynamically set field descriptions
-    """
+    """Override to allow us to dynamically set field descriptions"""
+
     grok.context(risk.IRisk)
     grok.layer(IOSHAContentSkinLayer)
 
     def updateFields(self):
         super(Add, self).updateFields()
         self.setDynamicDescriptions()
-        self.buttons['save'].title = _(
-            u'button_save_changes', default=u"Save changes")
-        self.buttons['cancel'].title = _(u'button_cancel', default=u"Cancel")
+        self.buttons["save"].title = _(u"button_save_changes", default=u"Save changes")
+        self.buttons["cancel"].title = _(u"button_cancel", default=u"Cancel")
 
     @property
     def label(self):
@@ -48,8 +51,8 @@ class Add(risk.Add, OSHAFormMixin):
 
 
 class Edit(risk.Edit, OSHAFormMixin):
-    """ Override to allow us to dynamically set field descriptions
-    """
+    """Override to allow us to dynamically set field descriptions"""
+
     grok.context(risk.IRisk)
     grok.layer(IOSHAContentSkinLayer)
 
@@ -60,6 +63,5 @@ class Edit(risk.Edit, OSHAFormMixin):
     def updateFields(self):
         super(Edit, self).updateFields()
         self.setDynamicDescriptions()
-        self.buttons['save'].title = _(
-            u'button_save_changes', default=u"Save changes")
-        self.buttons['cancel'].title = _(u'button_cancel', default=u"Cancel")
+        self.buttons["save"].title = _(u"button_save_changes", default=u"Save changes")
+        self.buttons["cancel"].title = _(u"button_cancel", default=u"Cancel")

@@ -1,6 +1,8 @@
-from zope.i18nmessageid import MessageFactory
 from logging import getLogger
-import patch_passwordreset
+from zope.i18nmessageid import MessageFactory
+
+import patch_passwordreset  # noqa: F401
+
 
 _ = MessageFactory("euphorie")
 log = getLogger(__name__)

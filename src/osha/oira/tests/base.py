@@ -1,12 +1,14 @@
-import os.path
-from zope.component import getUtility
-from z3c.saconfig import Session
-from z3c.appconfig.interfaces import IAppConfig
-from Testing.ZopeTestCase import installProduct
 from collective.testcaselayer import ptc
-from Products.PloneTestCase import PloneTestCase
-from euphorie.testing import EuphorieFunctionalTestCase
 from euphorie.client import model
+from euphorie.testing import EuphorieFunctionalTestCase
+from Products.PloneTestCase import PloneTestCase
+from Testing.ZopeTestCase import installProduct
+from z3c.appconfig.interfaces import IAppConfig
+from z3c.saconfig import Session
+from zope.component import getUtility
+
+import os.path
+
 
 PloneTestCase.setupPloneSite()
 
@@ -61,6 +63,7 @@ class OiRATestLayer(ptc.BasePTCLayer):
     def testTearDown(self):
         Session.remove()
         model.metadata.drop_all(Session.bind)
+
 
 OiRALayer = OiRATestLayer([ptc.ptc_layer])
 

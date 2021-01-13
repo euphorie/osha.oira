@@ -3,7 +3,7 @@ from Products.Five import BrowserView
 
 
 class Certificate(BrowserView):
-    """ This helper view instructs the @@certificate view on additional fields
+    """This helper view instructs the @@certificate view on additional fields
     our certificate form should have.
 
     In addition it provides a macros to provide additional markup that

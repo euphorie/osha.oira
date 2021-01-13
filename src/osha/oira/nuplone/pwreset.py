@@ -24,26 +24,31 @@ class PasswordReset(pwreminder.PasswordReset):
         u"password_policy_conditions",
         default=u"Your password must contain at least 5 characters, "
         u"including at least one capital letter, one number and "
-        u"one special character (e.g. $, # or @).")
+        u"one special character (e.g. $, # or @).",
+    )
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
         self.language = getToolByName(
-            context, 'portal_languages').getPreferredLanguage()
+            context, "portal_languages"
+        ).getPreferredLanguage()
 
     @property
     def description(self):
-        description = u" ".join([
-            translate(self.orig_description, target_language=self.language),
-            translate(self.extra_description, target_language=self.language)])
+        description = u" ".join(
+            [
+                translate(self.orig_description, target_language=self.language),
+                translate(self.extra_description, target_language=self.language),
+            ]
+        )
         return description
 
     @buttonAndHandler(_("button_change", default="Change"), name="change")
     def handleChange(self, action):
-        ''' Override the default behavior to call the requestPassword method
+        """Override the default behavior to call the requestPassword method
         passing the username and not the id
-        '''
+        """
         data, errors = self.extractData()
         if errors:
             self.status = self.formErrorsMessage
@@ -57,8 +62,9 @@ class PasswordReset(pwreminder.PasswordReset):
             flash(
                 __(
                     "user_name_wrong",
-                    u"The login name you have provided does not match the username from the password-reset email. Please check your spelling."  # noqa: E501
-                ), "error"
+                    u"The login name you have provided does not match the username from the password-reset email. Please check your spelling.",  # noqa: E501
+                ),
+                "error",
             )
             return
         # osha Patch: we need to translate the reset request
@@ -74,14 +80,17 @@ class PasswordReset(pwreminder.PasswordReset):
                 # The osha patch is taking the username instead of the id
                 # original code was:
                 # user.getId(), self.randomstring, data["password"]
-                user.getUserName(), self.randomstring, data["password"]
+                user.getUserName(),
+                self.randomstring,
+                data["password"],
             )
         except InvalidRequestError:
             flash(
                 __(
                     "user_name_wrong",
-                    u"The login name you have provided does not match the username from the password-reset email. Please check your spelling."  # noqa: E501
-                ), "error"
+                    u"The login name you have provided does not match the username from the password-reset email. Please check your spelling.",  # noqa: E501
+                ),
+                "error",
             )
             return
 

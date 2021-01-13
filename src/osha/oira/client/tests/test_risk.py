@@ -1,15 +1,15 @@
 # coding=utf-8
 
-from Products.Five.testbrowser import Browser
 from euphorie.client.tests.utils import addSurvey
 from euphorie.client.tests.utils import registerUserInClient
 from osha.oira.tests.base import OiRAFunctionalTestCase
+from Products.Five.testbrowser import Browser
 
 
 class EuphorieRiskTests(OiRAFunctionalTestCase):
-
     def testShowFrenchEvaluation(self):
         from euphorie.content.tests.utils import BASIC_SURVEY
+
         # Test for http://code.simplon.biz/tracker/tno-euphorie/ticket/150
         self.loginAsPortalOwner()
         addSurvey(self.portal, BASIC_SURVEY)
@@ -36,5 +36,6 @@ class EuphorieRiskTests(OiRAFunctionalTestCase):
         browser.getControl(name="severity:int").value = ["10"]
         browser.getControl("next").click()
         browser.open(
-                "http://nohost/plone/client/nl/ict/software-development/actionplan/1/1")
+            "http://nohost/plone/client/nl/ict/software-development/actionplan/1/1"
+        )
         self.assertEqual(browser.getControl(name="priority").value, ["high"])

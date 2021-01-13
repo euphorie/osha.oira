@@ -6,14 +6,15 @@ from Products.CMFCore.interfaces import ISiteRoot
 from zope.i18nmessageid import MessageFactory
 from zope.interface import Interface
 
+
 MF = MessageFactory("nuplone")
 
 grok.templatedir("templates")
 
 
 class Login(login.Login):
-    """ Override so that we can have our own template.
-    """
+    """Override so that we can have our own template."""
+
     grok.context(Interface)
     grok.layer(IOSHAContentSkinLayer)
     grok.name("login")
@@ -21,16 +22,15 @@ class Login(login.Login):
 
 
 class OSHARequestPasswordForm(pwreminder.RequestPasswordForm):
-    """ Override so that we can change some labels
-    """
+    """Override so that we can change some labels"""
+
     grok.context(ISiteRoot)
     grok.layer(IOSHAContentSkinLayer)
     grok.name("request-password-reset")
 
     def updateFields(self):
         super(OSHARequestPasswordForm, self).updateFields()
-        self.fields["login"].field.title = MF(
-            u"label_email", default=u"E-mail address")
+        self.fields["login"].field.title = MF(u"label_email", default=u"E-mail address")
 
 
 # XXX

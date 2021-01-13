@@ -11,7 +11,7 @@ import re
 class OiRASiteRootTabsTile(SiteRootTabsTile):
 
     _custom_current_map = [
-        (re.compile(r"/sectors/[a-z]+/(.*)@@manage-ldap-users"), 'ldapmgmt'),
+        (re.compile(r"/sectors/[a-z]+/(.*)@@manage-ldap-users"), "ldapmgmt"),
     ]
 
     @property
@@ -33,26 +33,23 @@ class OiRASiteRootTabsTile(SiteRootTabsTile):
         is_country = self.get_current_country() == self.context
         is_sector = self.get_current_sector() == self.context
         for r in self.tabs:
-            if r.get('id') == 'help':
+            if r.get("id") == "help":
                 self.tabs.remove(r)
-            elif r.get('id') == 'usermgmt':
-                r['title'] = _(
-                    "nav_sectormanagement", default=u"Sector management")
-        if (
-            self.is_country_manager() and (is_sector or is_country)
-        ):
+            elif r.get("id") == "usermgmt":
+                r["title"] = _("nav_sectormanagement", default=u"Sector management")
+        if self.is_country_manager() and (is_sector or is_country):
             if is_sector:
-                title = _(
-                    "nav_ldapmanagement_sector",
-                    default=u"Manage sector access")
+                title = _("nav_ldapmanagement_sector", default=u"Manage sector access")
             else:
                 title = _(
-                    "nav_ldapmanagement_country",
-                    default=u"Manage country access")
+                    "nav_ldapmanagement_country", default=u"Manage country access"
+                )
             custom_tab = {
                 "id": "ldapmgmt",
                 "title": title,
-                "url": '%s/@@manage-ldap-users' % self.context.absolute_url(),
-                "class": "current" if self.get_current_url() == "ldapmgmt" else None,  # noqa: E501
+                "url": "%s/@@manage-ldap-users" % self.context.absolute_url(),
+                "class": "current"
+                if self.get_current_url() == "ldapmgmt"
+                else None,  # noqa: E501
             }
             self.tabs.insert(2, custom_tab)

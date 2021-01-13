@@ -1,11 +1,11 @@
-from zope.interface import Interface
-from plonetheme.nuplone.skin.interfaces import NuPloneSkin
 from osha.oira.nuplone.interfaces import IOiRAFormLayer
+from plonetheme.nuplone.skin.interfaces import NuPloneSkin
+from zope.interface import Interface
 
 
 class IProductLayer(Interface):
     """Marker interface for requests indicating the osha.oira
-       package has been installed.
+    package has been installed.
     """
 
 

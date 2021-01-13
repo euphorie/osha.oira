@@ -6,8 +6,10 @@ from osha.oira.statistics.model import Base
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN
 from osha.oira.statistics.model import SurveySessionStatistics
+
 import logging
 import sqlalchemy
+
 
 log = logging.getLogger(__name__)
 

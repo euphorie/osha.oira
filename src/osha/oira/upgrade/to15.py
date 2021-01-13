@@ -3,7 +3,9 @@ from osha.oira.statistics import model
 from osha.oira.statistics.utils import list_statistics_databases
 from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
+
 import logging
+
 
 log = logging.getLogger(__name__)
 

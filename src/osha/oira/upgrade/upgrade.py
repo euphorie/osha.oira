@@ -13,21 +13,23 @@ from z3c.appconfig.utils import asBool
 from z3c.saconfig import Session
 from zope.component.hooks import getSite
 from zope.sqlalchemy import datamanager
+
 import datetime
 import logging
 import transaction
 import zope.component
 
+
 log = logging.getLogger(__name__)
 
 
 def renew_survey_published_date(context):
-    """ Update the published attr of surveys to set the date to now.
-        This will force all surveys to redirect to the @@update page from where
-        users' session trees can be updated.
+    """Update the published attr of surveys to set the date to now.
+    This will force all surveys to redirect to the @@update page from where
+    users' session trees can be updated.
     """
     site = getSite()
-    client = getattr(site, 'client')
+    client = getattr(site, "client")
     # Loop through all client surveys
     for country in client.objectValues():
         for sector in country.objectValues():
@@ -39,7 +41,10 @@ def renew_survey_published_date(context):
                 published = getattr(survey, "published", None)
                 if isinstance(published, tuple):
                     survey.published = (
-                        published[0], published[1], datetime.datetime.now())
+                        published[0],
+                        published[1],
+                        datetime.datetime.now(),
+                    )
                 else:
                     # BBB: Euphorie 1.x did not use a tuple to store extra
                     # information.
@@ -50,17 +55,19 @@ def add_custom_homepage(context):
     """ """
     site = getSite()
     try:
-        container = site.unrestrictedTraverse('documents/en')
+        container = site.unrestrictedTraverse("documents/en")
     except [AttributeError, KeyError]:
-        log.error('Could not navigate to documents/en folder. '
-                  'Abort creation of custom homepage.')
+        log.error(
+            "Could not navigate to documents/en folder. "
+            "Abort creation of custom homepage."
+        )
 
     content = utils.createContentInContainer(
         container,
-        'oira.homepage',
+        "oira.homepage",
         checkConstraints=False,
         id="homepage",
-        title='OiRA Homepage'
+        title="OiRA Homepage",
     )
     content.description = """\
 <!-- The header and footer of the homepage is fixed and cannot be changed.
@@ -71,11 +78,11 @@ Add here any HTML code that you'd like to be rendered in the body of
 def reset_evaluation_flag(context):
     """ """
     site = getSite()
-    ps = site.portal_catalog(portal_type='euphorie.survey')
+    ps = site.portal_catalog(portal_type="euphorie.survey")
     for p in ps:
         try:
             survey = p.getObject()
-        except:
+        except Exception:
             continue
         else:
             if survey.evaluation_optional:
@@ -84,8 +91,7 @@ def reset_evaluation_flag(context):
 
 
 def sql_create_all(context):
-    """Add all missing SQL tables and indices.
-    """
+    """Add all missing SQL tables and indices."""
     session = Session()
     transaction.get().commit()
     model.metadata.create_all(session.bind, checkfirst=True)
@@ -96,7 +102,8 @@ def alter_time_column(context):
     session = Session()
     if TableExists(session, "statistics_login"):
         session.execute(
-            "ALTER TABLE statistics_login ALTER COLUMN time SET DEFAULT CURRENT_TIMESTAMP")
+            "ALTER TABLE statistics_login ALTER COLUMN time SET DEFAULT CURRENT_TIMESTAMP"  # noqa: E501
+        )
         model.metadata.create_all(session.bind, checkfirst=True)
         datamanager.mark_changed(session)
         transaction.get().commit()
@@ -106,28 +113,29 @@ def alter_time_column(context):
 def remove_birt_file_format(context):
     site = getSite()
     sprops = site.portal_properties.site_properties
-    url = sprops.getProperty('birt_report_url')
-    base, query = url.split('?')
+    url = sprops.getProperty("birt_report_url")
+    base, query = url.split("?")
     if not query:
         return
-    params = query.split('&')
-    if '__format=pdf' in params:
-        params.remove('__format=pdf')
-        newurl = '?'.join([base, '&'.join(params)])
-        sprops.manage_changeProperties({'birt_report_url': newurl})
+    params = query.split("&")
+    if "__format=pdf" in params:
+        params.remove("__format=pdf")
+        newurl = "?".join([base, "&".join(params)])
+        sprops.manage_changeProperties({"birt_report_url": newurl})
 
 
 def update_types_information(context):
     """ Reimport types to activate new behavior """
-    setup = api.portal.get_tool('portal_setup')
-    setup.runImportStepFromProfile('profile-osha.oira:default', 'typeinfo')
+    setup = api.portal.get_tool("portal_setup")
+    setup.runImportStepFromProfile("profile-osha.oira:default", "typeinfo")
 
 
 def increase_statistics_surveys_path_column(context):
     session = Session()
     if TableExists(session, "statistics_surveys"):
         session.execute(
-            "ALTER TABLE statistics_surveys ALTER COLUMN zodb_path TYPE varchar(512)")
+            "ALTER TABLE statistics_surveys ALTER COLUMN zodb_path TYPE varchar(512)"
+        )
         model.metadata.create_all(session.bind, checkfirst=True)
         datamanager.mark_changed(session)
         transaction.get().commit()
@@ -137,8 +145,7 @@ def increase_statistics_surveys_path_column(context):
 def increase_sessions_path_column(context):
     session = Session()
     if TableExists(session, "session"):
-        session.execute(
-            "ALTER TABLE session ALTER COLUMN zodb_path TYPE varchar(512)")
+        session.execute("ALTER TABLE session ALTER COLUMN zodb_path TYPE varchar(512)")
         model.metadata.create_all(session.bind, checkfirst=True)
         datamanager.mark_changed(session)
         transaction.get().commit()
@@ -149,18 +156,16 @@ def reset_surveygroup_obsolete(context):
     """ """
     log.info('Reset "obsolete" flag from surveygroups.')
     site = getSite()
-    brains = site.portal_catalog(portal_type='euphorie.surveygroup')
+    brains = site.portal_catalog(portal_type="euphorie.surveygroup")
     for brain in brains:
         try:
             surveygroup = brain.getObject()
-        except:
-            log.warning("Stale catalog entry for brain {0}".format(
-                brain.getPath()))
+        except Exception:
+            log.warning("Stale catalog entry for brain {0}".format(brain.getPath()))
             continue
         else:
-            if getattr(surveygroup, 'obsolete', False):
-                log.info("Survey {0} was obsolete".format(
-                    surveygroup.absolute_url()))
+            if getattr(surveygroup, "obsolete", False):
+                log.info("Survey {0} was obsolete".format(surveygroup.absolute_url()))
                 surveygroup.obsolete = False
                 surveygroup.reindexObject()
 
@@ -171,7 +176,8 @@ def enable_custom_risks_on_all_modules(context):
     if not asBool(appconfig["euphorie"].get("allow_user_defined_risks")):
         log.warning(
             "Custom risks are not enabled. Set 'allow_user_defined_risks' to "
-            "true in euphorie.ini for enabling them.")
+            "true in euphorie.ini for enabling them."
+        )
         return
     portal = api.portal.get()
     client = portal.client
@@ -184,49 +190,59 @@ def enable_custom_risks_on_all_modules(context):
                         try:
                             is_new = EnableCustomRisks(survey)
                             count += 1
-                            custom = getattr(survey, 'custom-risks', None)
+                            custom = getattr(survey, "custom-risks", None)
                             if custom:
-                                custom.title = _(u'title_other_risks', default=u"Added risks (by you)")
+                                custom.title = _(
+                                    u"title_other_risks",
+                                    default=u"Added risks (by you)",
+                                )
                                 custom.description = _(
                                     u"description_other_risks",
-                                    default=u"In case you have identified risks not included in "
-                                    u"the tool, you are able to add them now:")
+                                    default=u"In case you have identified risks not included in "  # noqa: E501
+                                    u"the tool, you are able to add them now:",
+                                )
                                 custom.question = _(
                                     u"question_other_risks",
-                                    default=u"<p>Would you now like to add your own defined risks "
-                                    u"to this tool?</p><p><strong>Important:</strong> In "
-                                    u"order to avoid duplicating risks, we strongly recommend you "
-                                    u"to go first through all the previous modules, if you have not "
-                                    u"done it yet.</p><p>If you don't need to add risks, please select 'No.'</p>")
+                                    default=u"<p>Would you now like to add your own defined risks "  # noqa: E501
+                                    u"to this tool?</p><p><strong>Important:</strong> In "  # noqa: E501
+                                    u"order to avoid duplicating risks, we strongly recommend you "  # noqa: E501
+                                    u"to go first through all the previous modules, if you have not "  # noqa: E501
+                                    u"done it yet.</p><p>If you don't need to add risks, please select 'No.'</p>",  # noqa: E501
+                                )
                             if is_new:
                                 survey.published = (
-                                    survey.id, survey.title, datetime.datetime.now())
-                        except Exception, e:
-                            log.error("Could not enable custom risks for module. %s" % e)
-    log.info('All %d published surveys can now have custom risks.' % count)
+                                    survey.id,
+                                    survey.title,
+                                    datetime.datetime.now(),
+                                )
+                        except Exception as e:
+                            log.error(
+                                "Could not enable custom risks for module. %s" % e
+                            )
+    log.info("All %d published surveys can now have custom risks." % count)
     session = Session()
     if TableExists(session, "tree"):
         session.execute(
-            "UPDATE tree SET title = 'title_other_risks' WHERE zodb_path ='custom-risks'")
+            "UPDATE tree SET title = 'title_other_risks' WHERE zodb_path ='custom-risks'"  # noqa: E501
+        )
         model.metadata.create_all(session.bind, checkfirst=True)
         datamanager.mark_changed(session)
         transaction.get().commit()
-        log.info('Set correct title on all exisiting sessions for custom risks module.')
+        log.info("Set correct title on all exisiting sessions for custom risks module.")
 
 
 def install_private_resources(context):
-    """ Install the oira.private egg, which contains non-free JS and CSS
-        resources.
+    """Install the oira.private egg, which contains non-free JS and CSS
+    resources.
     """
-    setup = api.portal.get_tool('portal_setup')
-    setup.runAllImportStepsFromProfile('profile-oira.private:default')
+    setup = api.portal.get_tool("portal_setup")
+    setup.runAllImportStepsFromProfile("profile-oira.private:default")
 
 
 def drop_constraint_no_duplicates_in_tree(context):
     session = Session()
     if TableExists(session, "tree"):
-        session.execute(
-            "ALTER TABLE tree DROP CONSTRAINT no_duplicates")
+        session.execute("ALTER TABLE tree DROP CONSTRAINT no_duplicates")
         model.metadata.create_all(session.bind, checkfirst=True)
         datamanager.mark_changed(session)
         transaction.get().commit()
@@ -234,6 +250,5 @@ def drop_constraint_no_duplicates_in_tree(context):
 
 
 def configure_outdated_tool_notification(context):
-    setup = api.portal.get_tool('portal_setup')
-    setup.runImportStepFromProfile(
-        'profile-osha.oira:default', 'propertiestool')
+    setup = api.portal.get_tool("portal_setup")
+    setup.runImportStepFromProfile("profile-osha.oira:default", "propertiestool")

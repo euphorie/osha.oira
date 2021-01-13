@@ -7,21 +7,24 @@ new po file.
 
 usage:                  %(program)s first.po second.pot out.po
 first.po                A po/pot file with
-second.pot              A po/pot file with updated default translations (e.g. via extraction)
+second.pot              A po/pot file with updated default translations
+                            (e.g. via extraction)
 out.po                  A name for the output po file
 --ignore-translated     Ignore translated entries. Only untranslated and fuzzy
                         entries will be returned.
 """
 
-import sys
+from findDirtyTranslations import append_entry
+from findDirtyTranslations import get_default
+
 import os
-import re
 import polib
+import re
+import sys
+
 
 patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
 
-from findDirtyTranslations import get_default
-from findDirtyTranslations import append_entry
 
 def usage(stream, msg=None):
     if msg:
@@ -30,6 +33,7 @@ def usage(stream, msg=None):
     program = os.path.basename(sys.argv[0])
     print >> stream, __doc__ % {"program": program}
     sys.exit(0)
+
 
 def main():
     if len(sys.argv) < 4:
@@ -65,13 +69,15 @@ def main():
             # Ignore outcommented entries
             continue
 
-        default= get_default(entry)
+        default = get_default(entry)
         if not firstpo.find(entry.msgid):
             outpo = append_entry(outpo, entry, default)
 
     outpo.save(outfile)
-    sys.exit('Found %d entries in %s that are not in %s' % (len(outpo), newfile, oldfile))
+    sys.exit(
+        "Found %d entries in %s that are not in %s" % (len(outpo), newfile, oldfile)
+    )
+
 
 if __name__ == "__main__":
     main()
-    

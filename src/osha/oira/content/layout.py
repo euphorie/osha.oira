@@ -6,6 +6,7 @@ from Products.CMFPlone.interfaces.controlpanel import ISiteSchema
 from zope.component.hooks import getSite
 from zope.interface import Interface
 
+
 grok.templatedir("templates")
 
 

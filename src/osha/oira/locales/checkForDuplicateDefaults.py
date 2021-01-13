@@ -10,10 +10,11 @@ file.po   A po to check
 --debug   Print debug statistics.
 """
 
-import sys
 import os
-import re
 import polib
+import re
+import sys
+
 
 patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
 
@@ -25,6 +26,7 @@ def usage(stream, msg=None):
     program = os.path.basename(sys.argv[0])
     print >> stream, __doc__ % {"program": program}
     sys.exit(0)
+
 
 if len(sys.argv) < 2:
     usage(sys.stderr, "\nERROR: Not enough arguments")
@@ -44,11 +46,11 @@ for entry in po:
     counter += 1
     match = patt.match(entry.comment)
     if match:
-        default = match.group(1).replace('\n', ' ')
+        default = match.group(1).replace("\n", " ")
         if "Default:" in default:
-            print "ERROR! There seems to be a duplicate Default entry for msgid '%s'" % entry.msgid
+            print "ERROR! There seems to be a duplicate Default entry for msgid '%s'" % entry.msgid  # noqa: E501
     else:
         if debug:
             print "WARNING! No Default translation for msgid '%s'." % entry.msgid
 
-sys.exit('Finished, checked all %d entries.' % counter)
+sys.exit("Finished, checked all %d entries." % counter)

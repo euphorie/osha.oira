@@ -1,14 +1,16 @@
-from five import grok
-from lxml import etree
+from ..interfaces import IOSHAContentSkinLayer
 from euphorie.content import export
 from euphorie.content import upload
 from euphorie.content.profilequestion import IProfileQuestion
-from ..interfaces import IOSHAContentSkinLayer
+from five import grok
+from lxml import etree
 
 
-PQ_FIELDS = ['label_multiple_present',
-             'label_single_occurance',
-             'label_multiple_occurances']
+PQ_FIELDS = [
+    "label_multiple_present",
+    "label_single_occurance",
+    "label_multiple_occurances",
+]
 
 
 class ExportSurvey(export.ExportSurvey):
@@ -19,7 +21,7 @@ class ExportSurvey(export.ExportSurvey):
         for field in PQ_FIELDS:
             value = getattr(profile, field, None)
             if value:
-                etree.SubElement(node, field.replace('_', '-')).text = value
+                etree.SubElement(node, field.replace("_", "-")).text = value
         return node
 
 
@@ -28,8 +30,9 @@ class ImporterMixin(object):
         profile = upload.SurveyImporter.ImportProfileQuestion(self, node, survey)
         if IProfileQuestion.providedBy(profile):
             for field in PQ_FIELDS:
-                setattr(profile, field,
-                        upload.el_unicode(node, field.replace('_', '-')))
+                setattr(
+                    profile, field, upload.el_unicode(node, field.replace("_", "-"))
+                )
         return profile
 
 

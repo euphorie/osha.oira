@@ -2,7 +2,7 @@
 # Authors: Wolfgang Thomas <thomas@syslab.com>
 #          JC Brand <brand@syslab.com>
 
-"""%(program)s: For every untranslated or fuzzy entry, 
+"""%(program)s: For every untranslated or fuzzy entry,
 copy its "Default" string for its value. If no default value exists, copy its
 msgid.
 
@@ -11,13 +11,14 @@ file.po                 The po file
 outfile.po              The po file to be written to
 """
 
-import sys
-import os
-import re
-import polib
-
-from findDirtyTranslations import get_default
 from findDirtyTranslations import append_entry
+from findDirtyTranslations import get_default
+
+import os
+import polib
+import re
+import sys
+
 
 patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
 
@@ -64,8 +65,8 @@ def main():
     print "Found %d entries that need to be updated" % len(outpo)
     print "--------------------------------------------------------"
 
-    sys.exit('Finished sucessfully')
+    sys.exit("Finished sucessfully")
+
 
 if __name__ == "__main__":
     main()
-

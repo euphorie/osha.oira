@@ -1,8 +1,10 @@
 # coding=utf-8
-import logging
-from zope.interface import Interface
-from five import grok
 from .interfaces import IOSHAClientSkinLayer
+from five import grok
+from zope.interface import Interface
+
+import logging
+
 
 log = logging.getLogger(__name__)
 grok.templatedir("templates")

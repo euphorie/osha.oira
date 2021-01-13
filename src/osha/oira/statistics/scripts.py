@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.utils import UpdateStatisticsDatabases
+
 import argparse
 import logging
 import sys
+
 
 log = logging.getLogger(__name__)
 

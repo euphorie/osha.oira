@@ -3,7 +3,9 @@ from euphorie.client.model import Session as EuphorieSession
 from osha.oira.statistics.model import get_postgres_url
 from osha.oira.statistics.utils import UpdateStatisticsDatabases
 from Products.Five import BrowserView
+
 import logging
+
 
 log = logging.getLogger(__name__)
 

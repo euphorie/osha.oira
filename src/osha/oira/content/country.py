@@ -25,6 +25,7 @@ class OSHAManageUsers(ManageUsers):
 
     def update(self):
         from euphorie.content.countrymanager import ICountryManager
+
         super(OSHAManageUsers, self).update()
         country = aq_inner(self.context)
         self.sectors = []
@@ -32,39 +33,43 @@ class OSHAManageUsers(ManageUsers):
             if not ISector.providedBy(sector):
                 continue
             entry = {
-                'id': sector.id,
-                'login': sector.login,
-                'password': sector.password,
-                'title': sector.title,
-                'url': sector.absolute_url(),
-                'locked': sector.locked,
-                'contact_email': sector.contact_email
+                "id": sector.id,
+                "login": sector.login,
+                "password": sector.password,
+                "title": sector.title,
+                "url": sector.absolute_url(),
+                "locked": sector.locked,
+                "contact_email": sector.contact_email,
             }
-            view = sector.restrictedTraverse('manage-ldap-users', None)
+            view = sector.restrictedTraverse("manage-ldap-users", None)
             if not view:
-                entry['managers'] = []
+                entry["managers"] = []
             else:
-                entry['managers'] = [
-                    userid for userid in view.local_roles_userids()
+                entry["managers"] = [
+                    userid
+                    for userid in view.local_roles_userids()
                     if view.get_user(userid)
                 ]
             self.sectors.append(entry)
 
         self.sectors.sort(key=lambda s: s["title"].lower())
-        self.managers = [{'id': manager.id,
-                          'login': manager.login,
-                          'title': manager.title,
-                          'url': manager.absolute_url(),
-                          'locked': manager.locked,
-                          'contact_email': manager.contact_email}
-                         for manager in country.values()
-                         if ICountryManager.providedBy(manager)]
+        self.managers = [
+            {
+                "id": manager.id,
+                "login": manager.login,
+                "title": manager.title,
+                "url": manager.absolute_url(),
+                "locked": manager.locked,
+                "contact_email": manager.contact_email,
+            }
+            for manager in country.values()
+            if ICountryManager.providedBy(manager)
+        ]
         self.managers.sort(key=lambda s: s["title"].lower())
 
 
 class IOSHACountry(model.Schema):
-    """ Additional fields for the OSHA countries
-    """
+    """Additional fields for the OSHA countries"""
 
     certificates_enabled = schema.Bool(
         title=_("Enable certificates"),
@@ -74,9 +79,11 @@ class IOSHACountry(model.Schema):
         ),
         default=False,
     )
-    depends("IOSHACountry.certificate_initial_threshold",
-            "IOSHACountry.certificates_enabled",
-            "on")
+    depends(
+        "IOSHACountry.certificate_initial_threshold",
+        "IOSHACountry.certificates_enabled",
+        "on",
+    )
     certificate_initial_threshold = schema.Int(
         title=_("Certificate initial threshold (in percent)"),
         description=_(
@@ -88,9 +95,11 @@ class IOSHACountry(model.Schema):
         max=100,
     )
 
-    depends("IOSHACountry.certificate_completion_threshold",
-            "IOSHACountry.certificates_enabled",
-            "on")
+    depends(
+        "IOSHACountry.certificate_completion_threshold",
+        "IOSHACountry.certificates_enabled",
+        "on",
+    )
     certificate_completion_threshold = schema.Int(
         title=_("Certificate completion threshold (in percent)"),
         description=_(
@@ -101,9 +110,11 @@ class IOSHACountry(model.Schema):
         min=0,
         max=100,
     )
-    depends("IOSHACountry.certificate_explanatory_sentence",
-            "IOSHACountry.certificates_enabled",
-            "on")
+    depends(
+        "IOSHACountry.certificate_explanatory_sentence",
+        "IOSHACountry.certificates_enabled",
+        "on",
+    )
     certificate_explanatory_sentence = HtmlText(
         title=_("Explanatory sentence"),
         description=_(

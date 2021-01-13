@@ -5,27 +5,29 @@ from osha.oira.client import model as oiramodel
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.i18nmessageid import MessageFactory
+
 import htmllib
 
-pl_message = MessageFactory('plonelocales')
-grok.templatedir('templates')
+
+pl_message = MessageFactory("plonelocales")
+grok.templatedir("templates")
 
 
 NAME_TO_PHASE = {
-    'start': 'preparation',
-    'profile': 'preparation',
-    'identification': 'identification',
-    'customization': 'identification',
-    'actionplan': 'actionplan',
-    'report': 'report',
-    'status': 'status',
-    'help': 'help',
-    'new-email': 'useraction',
-    'account-settings': 'useraction',
-    'account-delete': 'useraction',
-    'update': 'preparation',
-    'disclaimer': 'help',
-    'terms-and-conditions': 'help',
+    "start": "preparation",
+    "profile": "preparation",
+    "identification": "identification",
+    "customization": "identification",
+    "actionplan": "actionplan",
+    "report": "report",
+    "status": "status",
+    "help": "help",
+    "new-email": "useraction",
+    "account-settings": "useraction",
+    "account-delete": "useraction",
+    "update": "preparation",
+    "disclaimer": "help",
+    "terms-and-conditions": "help",
 }
 
 
@@ -37,20 +39,20 @@ def html_unescape(s):
 
 
 def remove_empty_modules(nodes):
-    """ Takes a list of modules and risks.
+    """Takes a list of modules and risks.
 
-        Removes modules that don't have any risks in them.
-        Modules with submodules (with risks) must however be kept.
+    Removes modules that don't have any risks in them.
+    Modules with submodules (with risks) must however be kept.
 
-        How it works:
-        -------------
-        Use the 'grow' method to create a tree datastructure that
-        mirrors the actual layout of modules and risks.
+    How it works:
+    -------------
+    Use the 'grow' method to create a tree datastructure that
+    mirrors the actual layout of modules and risks.
 
-        Then 'prune' it by removing all branches that end in modules.
+    Then 'prune' it by removing all branches that end in modules.
 
-        Lastly flatten the tree back into a list and use it to filter the
-        original list.
+    Lastly flatten the tree back into a list and use it to filter the
+    original list.
     """
     tree = {}
     ids = []
@@ -75,7 +77,7 @@ def remove_empty_modules(nodes):
             if tree[k]:
                 prune(tree[k])
 
-            if not tree[k] and k[1] == 'module':
+            if not tree[k] and k[1] == "module":
                 del tree[k]
 
     def flatten(tree):
@@ -90,18 +92,18 @@ def remove_empty_modules(nodes):
 
 
 def get_unactioned_nodes(ls, filter_for_measures=False):
-    """ Takes a list of modules and risks and removes all risks that have been
-        actioned (i.e has at least one valid action plan).
-        Also remove all modules that have lost all their risks in the process
+    """Takes a list of modules and risks and removes all risks that have been
+    actioned (i.e has at least one valid action plan).
+    Also remove all modules that have lost all their risks in the process
 
-        See https://syslab.com/proj/issues/2885
+    See https://syslab.com/proj/issues/2885
     """
     unactioned = []
     for n in ls:
-        if n.type == 'module':
+        if n.type == "module":
             unactioned.append(n)
 
-        elif n.type == 'risk':
+        elif n.type == "risk":
             if not n.action_plans:
                 if filter_for_measures:
                     if getattr(n, "existing_measures", None):
@@ -111,50 +113,57 @@ def get_unactioned_nodes(ls, filter_for_measures=False):
             else:
                 # It's possible that there is an action plan object, but
                 # that it's not yet fully populated
-                if n.action_plans[0] is None or \
-                        n.action_plans[0].action_plan is None:
+                if n.action_plans[0] is None or n.action_plans[0].action_plan is None:
                     unactioned.append(n)
 
     return remove_empty_modules(unactioned)
 
 
 def get_actioned_nodes(ls):
-    """ Takes a list of modules and risks and removes all risks that are *not*
-        actioned (i.e does not have at least one valid action plan)
-        Also remove all modules that have lost all their risks in the process.
+    """Takes a list of modules and risks and removes all risks that are *not*
+    actioned (i.e does not have at least one valid action plan)
+    Also remove all modules that have lost all their risks in the process.
 
-        See https://syslab.com/proj/issues/2885
+    See https://syslab.com/proj/issues/2885
     """
     actioned = []
     for n in ls:
-        if n.type == 'module':
+        if n.type == "module":
             actioned.append(n)
 
-        if n.type == 'risk' and len(n.action_plans):
-                # It's possible that there is an action plan object, but
-                # it's not yet fully populated
-                plans = [p.action_plan for p in n.action_plans]
-                if plans[0] is not None:
-                    actioned.append(n)
+        if n.type == "risk" and len(n.action_plans):
+            # It's possible that there is an action plan object, but
+            # it's not yet fully populated
+            plans = [p.action_plan for p in n.action_plans]
+            if plans[0] is not None:
+                actioned.append(n)
 
     return remove_empty_modules(actioned)
 
 
 def get_unanswered_nodes(session):
-    query = Session().query(model.SurveyTreeItem)\
+    query = (
+        Session()
+        .query(model.SurveyTreeItem)
         .filter(
             sql.and_(
                 model.SurveyTreeItem.session == session,
                 sql.or_(
                     oiramodel.MODULE_WITH_UNANSWERED_RISKS_FILTER,
-                    oiramodel.UNANSWERED_RISKS_FILTER),
-                sql.not_(model.SKIPPED_PARENTS)))\
+                    oiramodel.UNANSWERED_RISKS_FILTER,
+                ),
+                sql.not_(model.SKIPPED_PARENTS),
+            )
+        )
         .order_by(model.SurveyTreeItem.path)
+    )
     return query.all()
 
 
 def get_risk_not_present_nodes(session):
-    query = Session().query(model.SurveyTreeItem)\
+    query = (
+        Session()
+        .query(model.SurveyTreeItem)
         .filter(
             sql.and_(
                 model.SurveyTreeItem.session == session,
@@ -163,13 +172,18 @@ def get_risk_not_present_nodes(session):
                     oiramodel.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
                     oiramodel.RISK_NOT_PRESENT_FILTER,
                     oiramodel.SKIPPED_MODULE,
-                )))\
+                ),
+            )
+        )
         .order_by(model.SurveyTreeItem.path)
+    )
     return query.all()
 
 
 def get_italian_risk_not_present_nodes(session):
-    query = Session().query(model.SurveyTreeItem)\
+    query = (
+        Session()
+        .query(model.SurveyTreeItem)
         .filter(
             sql.and_(
                 model.SurveyTreeItem.session == session,
@@ -178,6 +192,9 @@ def get_italian_risk_not_present_nodes(session):
                     oiramodel.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
                     oiramodel.SKIPPED_MODULE,
                     oiramodel.UNANSWERED_RISKS_FILTER,
-                )))\
+                ),
+            )
+        )
         .order_by(model.SurveyTreeItem.path)
+    )
     return query.all()

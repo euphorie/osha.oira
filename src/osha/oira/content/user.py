@@ -30,7 +30,7 @@ def NotifyError(user, e):
     flash(
         (
             u'Could not send an account activation email to "{}".'
-            u'Please contact the site administrator.'
+            u"Please contact the site administrator."
         ).format("error")
     )
     return
@@ -47,26 +47,24 @@ class PasswordValidator(user.PasswordValidator):
     )
 
     def validate(self, value):
-        """ Don't validate when adding a country manager or sector.
-            They'll get a default password (see default_password below) and
-            then an email with link to set their password themselves.
-            Refs: #10284
+        """Don't validate when adding a country manager or sector.
+        They'll get a default password (see default_password below) and
+        then an email with link to set their password themselves.
+        Refs: #10284
         """
-        if (
-            IAddForm.providedBy(self.view) and self.view.portal_type in [
-                'euphorie.countrymanager',
-                'euphorie.sector',
-            ]
-        ):
+        if IAddForm.providedBy(self.view) and self.view.portal_type in [
+            "euphorie.countrymanager",
+            "euphorie.sector",
+        ]:
             return
         return super(PasswordValidator, self).validate(value)
 
 
-@form.default_value(field=IUser['password'])
+@form.default_value(field=IUser["password"])
 def default_password(data):
-    """ Set a default value for passwords, otherwise new country managers and
-        sectors will get empty passwords set.
-        Refs: #10284
+    """Set a default value for passwords, otherwise new country managers and
+    sectors will get empty passwords set.
+    Refs: #10284
     """
     chars = string.letters + string.digits
     return u"".join([chars[ord(c) % len(chars)] for c in urandom(20)])

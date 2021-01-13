@@ -13,10 +13,11 @@ orig.po   A po file that should be updated with new translations
 update.po The po file that contains new translations to go into orig.po
 """
 
-import sys
 import os
-import re
 import polib
+import re
+import sys
+
 
 patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
 
@@ -28,6 +29,7 @@ def usage(stream, msg=None):
     program = os.path.basename(sys.argv[0])
     print >> stream, __doc__ % {"program": program}
     sys.exit(0)
+
 
 if len(sys.argv) < 3:
     usage(sys.stderr, "\nERROR: Not enough arguments")
@@ -46,7 +48,7 @@ update = polib.pofile(updatefile)
 cnt = 0
 for entry in update:
     msgid = entry.msgid
-    if msgid.strip() == '':
+    if msgid.strip() == "":
         continue
     target = orig.find(msgid)
     if not target:
@@ -59,4 +61,4 @@ for entry in update:
 
 orig.save()
 
-sys.exit('Ok, updated {0} translations'.format(cnt))
+sys.exit("Ok, updated {0} translations".format(cnt))

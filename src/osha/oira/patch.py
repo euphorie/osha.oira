@@ -1,25 +1,29 @@
 # -*- coding: UTF-8 -*-
 from DateTime import DateTime
-from Products.CMFPlone.utils import safe_unicode
 from datetime import datetime
-from plone.i18n.locales import languages
 from plone.app.dexterity.behaviors.metadata import DCFieldProperty
 from plone.app.upgrade.v43 import alphas
+from plone.i18n.locales import languages
+from Products.CMFPlone.utils import safe_unicode
 from zope.schema.interfaces import ISequence
 from zope.schema.interfaces import IText
 
 
 # See: https://projects.syslab.com/issues/5978
 _combinedlanguagelist = {
-    u'nl-be': {u'name': 'Dutch (Belgium)', u'native': 'Nederlands (BE)', u'flag': u'/++resource++country-flags/be.gif'},
+    u"nl-be": {
+        u"name": "Dutch (Belgium)",
+        u"native": "Nederlands (BE)",
+        u"flag": u"/++resource++country-flags/be.gif",
+    },
 }
 # convert the utf-8 encoded values to unicode
 for code in _combinedlanguagelist:
     value = _combinedlanguagelist[code]
-    if u'name' in value:
-        value[u'name'] = unicode(value[u'name'], 'utf-8')
-    if u'native' in value:
-        value[u'native'] = unicode(value[u'native'], 'utf-8')
+    if u"name" in value:
+        value[u"name"] = unicode(value[u"name"], "utf-8")
+    if u"native" in value:
+        value[u"native"] = unicode(value[u"native"], "utf-8")
 
 languages._combinedlanguagelist.update(_combinedlanguagelist)
 
@@ -51,7 +55,7 @@ def __get__(self, inst, klass):
     attribute = getattr(inst.context, self._get_name, _marker)
     if attribute is _marker:
         field = self._field.bind(inst)
-        attribute = getattr(field, 'default', _marker)
+        attribute = getattr(field, "default", _marker)
         if attribute is _marker:
             raise AttributeError(self._field.__name__)
     elif callable(attribute):
@@ -70,10 +74,9 @@ def __get__(self, inst, klass):
 
     if ISequence.providedBy(self._field):
         if IText.providedBy(self._field.value_type):
-            return type(attribute)(
-                safe_unicode(item) for item in attribute
-            )
+            return type(attribute)(safe_unicode(item) for item in attribute)
 
     return attribute
+
 
 DCFieldProperty.__get__ = __get__

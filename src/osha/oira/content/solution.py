@@ -8,20 +8,21 @@ from euphorie.content.solution import View as BaseView
 from five import grok
 from plonetheme.nuplone.skin.interfaces import NuPloneSkin
 
+
 grok.templatedir("templates")
 
 
 class View(BaseView):
-    """ Override so that we can use out own template (only needed for one
-        translation).
-        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        XXX: If the view is bound to IOSHAContentSkinLayer instead of NuPloneSkin,
-        then it will NOT be used.
-        Only by giving it the SAME layer as the view it is supposed to override
-        can we make sure this view is actually used. I have no idea why this
-        works for all other content types but not for solution.
-        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        """
+    """Override so that we can use out own template (only needed for one
+    translation).
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    XXX: If the view is bound to IOSHAContentSkinLayer instead of NuPloneSkin,
+    then it will NOT be used.
+    Only by giving it the SAME layer as the view it is supposed to override
+    can we make sure this view is actually used. I have no idea why this
+    works for all other content types but not for solution.
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    """
 
     grok.context(ISolution)
     grok.require("zope2.View")

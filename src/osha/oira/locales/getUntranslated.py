@@ -15,13 +15,15 @@ output.po   The name of a po file that will be created by this script.
             with the default translation.
 """
 
-import sys
 import os
-import re
 import polib
+import re
+import sys
+
 
 patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
 noprefill = False
+
 
 def usage(stream, msg=None):
     if msg:
@@ -30,6 +32,7 @@ def usage(stream, msg=None):
     program = os.path.basename(sys.argv[0])
     print >> stream, __doc__ % {"program": program}
     sys.exit(0)
+
 
 if len(sys.argv) < 3:
     usage(sys.stderr, "\nERROR: Not enough arguments")
@@ -55,15 +58,24 @@ for entry in po.untranslated_entries():
     # not see comments in their translation program.
     default = entry.msgid
     if match:
-        default = match.group(1).replace('\n', ' ')
+        default = match.group(1).replace("\n", " ")
         if "Default:" in default:
-            print "ERROR! There seems to be a duplicate Default entry for msgid '%s'" % entry.msgid
+            print(
+                "ERROR! There seems to be a duplicate Default entry for msgid "
+                "'%s'" % entry.msgid
+            )
     if noprefill:
-        default = u''
-    newpo.append(polib.POEntry(msgid=entry.msgid, msgstr=default, occurrences=entry.occurrences,
-        comment=entry.comment))
+        default = u""
+    newpo.append(
+        polib.POEntry(
+            msgid=entry.msgid,
+            msgstr=default,
+            occurrences=entry.occurrences,
+            comment=entry.comment,
+        )
+    )
     cnt += 1
 
 newpo.save(output)
 
-sys.exit('Ok, found %d untranslated.' % cnt)
+sys.exit("Ok, found %d untranslated." % cnt)

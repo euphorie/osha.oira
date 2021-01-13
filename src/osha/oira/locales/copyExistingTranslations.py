@@ -15,10 +15,11 @@ reference.po  A pot file that is the basis for the update to local.po
 existing.po   A po file that contains already existing translations
 """
 
-import sys
 import os
-import re
 import polib
+import re
+import sys
+
 
 patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
 
@@ -30,6 +31,7 @@ def usage(stream, msg=None):
     program = os.path.basename(sys.argv[0])
     print >> stream, __doc__ % {"program": program}
     sys.exit(0)
+
 
 if len(sys.argv) < 4:
     usage(sys.stderr, "\nERROR: Not enough arguments")
@@ -52,11 +54,11 @@ existing = polib.pofile(existingfile)
 
 cnt = 0
 for entry in reference:
-    default_reference = default_existing = u''
+    default_reference = default_existing = u""
     # fist, extract the default translation of the reference (POT) file
     match_reference = patt.match(entry.comment)
     if match_reference:
-        default_reference = match_reference.group(1).replace('\n', ' ')
+        default_reference = match_reference.group(1).replace("\n", " ")
     else:
         # print "WARNING! msgid '%s' in REFERENCE file does not have a " \
         #     "default translation." % entry.msgid
@@ -68,19 +70,26 @@ for entry in reference:
         if target_existing:
             match_existing = patt.match(target_existing.comment)
             if match_existing:
-                default_existing = match_existing.group(1).replace('\n', ' ')
+                default_existing = match_existing.group(1).replace("\n", " ")
             else:
-                print "WARNING! msgid '%s' in EXISTING file does not have a " \
-                     "default translation." % entry.msgid
+                print(
+                    "WARNING! msgid '%s' in EXISTING file does not have a "
+                    "default translation." % entry.msgid
+                )
                 default_existing = target_existing.msgid
-            if (default_existing == default_reference and
-                    target_existing.msgstr != '' and target_local.msgstr == ''):
+            if (
+                default_existing == default_reference
+                and target_existing.msgstr != ""
+                and target_local.msgstr == ""
+            ):
                 target_local.msgstr = target_existing.msgstr
-                print u"UPDATED '%s' with translation '%s'" % (
-                    entry.msgid, target_existing.msgstr)
+                print(
+                    u"UPDATED '%s' with translation '%s'"
+                    % (entry.msgid, target_existing.msgstr)
+                )
                 cnt += 1
 
-print "Found and updated %d matching translations" % cnt
+print("Found and updated %d matching translations" % cnt)
 
 local.save()
-sys.exit('Ok')
+sys.exit("Ok")

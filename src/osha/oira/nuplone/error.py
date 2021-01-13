@@ -1,6 +1,7 @@
+from ..interfaces import IOSHAContentSkinLayer
 from five import grok
 from plonetheme.nuplone.skin import error
-from ..interfaces import IOSHAContentSkinLayer
+
 
 grok.templatedir("templates")
 

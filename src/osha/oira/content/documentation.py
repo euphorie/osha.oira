@@ -1,6 +1,7 @@
-from five import grok
-from euphorie.content.documentation import IDocumentationFolder
 from .. import interfaces
+from euphorie.content.documentation import IDocumentationFolder
+from five import grok
+
 
 grok.templatedir("templates")
 

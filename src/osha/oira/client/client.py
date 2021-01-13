@@ -8,7 +8,10 @@ from zope.interface import directlyProvidedBy
 from zope.interface import directlyProvides
 from zope.publisher.interfaces.browser import IBrowserSkinType
 from ZPublisher.BaseRequest import DefaultPublishTraverse
+
 import logging
+
+
 try:
     from plone.protect.auto import safeWrite
 except ImportError:
@@ -17,6 +20,7 @@ except ImportError:
     # fails.
     def safeWrite(context, request):
         pass
+
 
 DESCRIPTION_CROP_LENGTH = 200
 log = logging.getLogger(__name__)
@@ -31,14 +35,19 @@ class ClientPublishTraverser(DefaultPublishTraverse):
     This traverser marks the request with IOSHAClientSkinLayer when the
     client is traversed and the osha.oira product is installed.
     """
+
     adapts(IClient, IProductLayer)
 
     def publishTraverse(self, request, name):
         from euphorie.client.utils import setRequest
+
         setRequest(request)
         request.client = self.context
 
-        ifaces = [iface for iface in directlyProvidedBy(request)
-                  if not IBrowserSkinType.providedBy(iface)]
+        ifaces = [
+            iface
+            for iface in directlyProvidedBy(request)
+            if not IBrowserSkinType.providedBy(iface)
+        ]
         directlyProvides(request, IOSHAClientSkinLayer, ifaces)
         return super(ClientPublishTraverser, self).publishTraverse(request, name)

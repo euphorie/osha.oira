@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.14 (unreleased)
+6.2.14 (2021-01-19)
 -------------------
 
 - Translation updates

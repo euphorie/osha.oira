@@ -11,6 +11,7 @@ file.po                 The po file
 outfile.po              The po file to be written to
 """
 
+from __future__ import print_function
 from findDirtyTranslations import append_entry
 from findDirtyTranslations import get_default
 
@@ -25,10 +26,10 @@ patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
 
 def usage(stream, msg=None):
     if msg:
-        print >> stream, msg
-        print >> stream
+        print(msg, file=stream)
+        print("\n", file=stream)
     program = os.path.basename(sys.argv[0])
-    print >> stream, __doc__ % {"program": program}
+    print(__doc__ % {"program": program}, file=stream)
     sys.exit(0)
 
 
@@ -58,12 +59,12 @@ def main():
         outpo = append_entry(outpo, entry, default)
 
     outpo.save(outfile)
-    print "--------------------------------------------------------"
-    print "SOME STATS TO HELP WITH DOUBLE-CHECKING:"
-    print "Untranslated entries in old.po: %d" % len(pofile.untranslated_entries())
-    print "Fuzzy entries in old.po: %d" % len(pofile.fuzzy_entries())
-    print "Found %d entries that need to be updated" % len(outpo)
-    print "--------------------------------------------------------"
+    print("--------------------------------------------------------")
+    print("SOME STATS TO HELP WITH DOUBLE-CHECKING:")
+    print("Untranslated entries in old.po: %d" % len(pofile.untranslated_entries()))
+    print("Fuzzy entries in old.po: %d" % len(pofile.fuzzy_entries()))
+    print("Found %d entries that need to be updated" % len(outpo))
+    print("--------------------------------------------------------")
 
     sys.exit("Finished sucessfully")
 

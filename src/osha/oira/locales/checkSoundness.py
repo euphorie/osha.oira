@@ -10,6 +10,8 @@ directory:  Path to a directory that contains the 2-letter language directories.
             Defaults to current directory.
 """
 
+from __future__ import print_function
+
 import os
 import re
 import subprocess
@@ -30,10 +32,10 @@ ignore = [re.compile(patt) for patt in messages_to_ignore]
 
 def usage(stream, msg=None):
     if msg:
-        print >> stream, msg
-        print >> stream
+        print(msg, file=stream)
+        print("\n", file=stream)
     program = os.path.basename(sys.argv[0])
-    print >> stream, __doc__ % {"program": program}
+    print(__doc__ % {"program": program}, file=stream)
     sys.exit(0)
 
 
@@ -77,8 +79,8 @@ for dirname in dirs:
                     problems.append(line)
 
             if problems:
-                print "\n%s/%s" % (path, name)
-                print "\n".join(problems)
+                print("\n%s/%s" % (path, name))
+                print("\n".join(problems))
                 houstonwehaveaproblem = True
 
 if houstonwehaveaproblem:

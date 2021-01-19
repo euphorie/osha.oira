@@ -24,9 +24,10 @@
 
 import string
 
+
 def wrap_str(str, max):
     ll = []
-    lines = string.split(str, '\n')
+    lines = string.split(str, "\n")
     if len(lines) > 1:
         return wrap_list(lines, max)
     words = string.split(lines[0])
@@ -44,21 +45,23 @@ def wrap_str(str, max):
             cw = cw + 1
         if cw == 0:
             # must break word in middle
-            ll.append(words[cw][:max-1] + '+')
-            words[cw] = words[cw][max-1:]
+            ll.append(words[cw][: max - 1] + "+")
+            words[cw] = words[cw][max - 1 :]
         else:
             ll.append(string.join(words[:cw]))
             words = words[cw:]
     return ll
 
+
 def wrap_list(lines, max):
     ll = []
-    for l in lines:
+    for line in lines:
         if len(ll):
-            ll.append('')
-        ll = ll + wrap_str(l, max)
+            ll.append("")
+        ll = ll + wrap_str(line, max)
     return ll
 
+
 #
-#EOF
+# EOF
 ##

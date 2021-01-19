@@ -42,8 +42,8 @@ SURVEY = """<sector xmlns="http://xml.simplon.biz/euphorie/survey/1.0">
 def addSurvey(portal, xml_survey):
     """Add a survey to the portal. This function requires that you are already
     loggin in as portal owner."""
-    from euphorie.content import upload
     from euphorie.client import publish
+    from euphorie.content import upload
 
     importer = upload.SectorImporter(portal.sectors.nl)
     sector = importer(xml_survey, None, None, None, u"test import")

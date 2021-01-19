@@ -55,15 +55,11 @@ class OutdatedToolsView(grok.View):
 
     @property
     def email_from_name(self):
-        return api.portal.get_registry_record(
-            "plone.email_from_name",
-        )
+        return api.portal.get_registry_record("plone.email_from_name")
 
     @property
     def email_from_address(self):
-        return api.portal.get_registry_record(
-            "plone.email_from_address",
-        )
+        return api.portal.get_registry_record("plone.email_from_address")
 
     def render(self, portal):
         log.info("Called outdated-tools-view")
@@ -250,13 +246,9 @@ OiRA
             name=to_name or to_address, tools=tool_details, period=period, intro=intro
         )
         mail = CreateEmailTo(
-            self.email_from_name,
-            self.email_from_address,
-            recipient,
-            subject,
-            body,
+            self.email_from_name, self.email_from_address, recipient, subject, body
         )
         try:
             mailhost.send(mail)
-        except Exception, err:
+        except Exception as err:
             log.error("Failed to send notification {}".format(err))

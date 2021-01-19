@@ -15,6 +15,8 @@ reference.po  A pot file that is the basis for the update to local.po
 existing.po   A po file that contains already existing translations
 """
 
+from __future__ import print_function
+
 import os
 import polib
 import re
@@ -26,10 +28,10 @@ patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
 
 def usage(stream, msg=None):
     if msg:
-        print >> stream, msg
-        print >> stream
+        print(msg, file=stream)
+        print("\n", file=stream)
     program = os.path.basename(sys.argv[0])
-    print >> stream, __doc__ % {"program": program}
+    print(__doc__ % {"program": program}, file=stream)
     sys.exit(0)
 
 

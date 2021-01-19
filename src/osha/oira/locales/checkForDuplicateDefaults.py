@@ -10,6 +10,8 @@ file.po   A po to check
 --debug   Print debug statistics.
 """
 
+from __future__ import print_function
+
 import os
 import polib
 import re
@@ -21,10 +23,10 @@ patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
 
 def usage(stream, msg=None):
     if msg:
-        print >> stream, msg
-        print >> stream
+        print(msg, file=stream)
+        print("\n", file=stream)
     program = os.path.basename(sys.argv[0])
-    print >> stream, __doc__ % {"program": program}
+    print(__doc__ % {"program": program}, file=stream)
     sys.exit(0)
 
 
@@ -48,9 +50,12 @@ for entry in po:
     if match:
         default = match.group(1).replace("\n", " ")
         if "Default:" in default:
-            print "ERROR! There seems to be a duplicate Default entry for msgid '%s'" % entry.msgid  # noqa: E501
+            print(
+                "ERROR! There seems to be a duplicate Default entry for msgid '%s'"
+                % entry.msgid
+            )  # noqa: E501
     else:
         if debug:
-            print "WARNING! No Default translation for msgid '%s'." % entry.msgid
+            print("WARNING! No Default translation for msgid '%s'." % entry.msgid)
 
 sys.exit("Finished, checked all %d entries." % counter)

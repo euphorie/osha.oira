@@ -13,6 +13,8 @@ orig.po   A po file that should be updated with new translations
 update.po The po file that contains new translations to go into orig.po
 """
 
+from __future__ import print_function
+
 import os
 import polib
 import re
@@ -24,10 +26,10 @@ patt = re.compile("""Default:.?["\' ](.*?)(["\']$|$)""", re.S)
 
 def usage(stream, msg=None):
     if msg:
-        print >> stream, msg
-        print >> stream
+        print(msg, file=stream)
+        print("\n", file=stream)
     program = os.path.basename(sys.argv[0])
-    print >> stream, __doc__ % {"program": program}
+    print(__doc__ % {"program": program}, file=stream)
     sys.exit(0)
 
 
@@ -52,7 +54,7 @@ for entry in update:
         continue
     target = orig.find(msgid)
     if not target:
-        print "WARNING! msgid '%s' not present in %s." % (msgid, origfile)
+        print("WARNING! msgid '%s' not present in %s." % (msgid, origfile))
         continue
     if entry.msgstr == "" and target.msgstr != "":
         continue

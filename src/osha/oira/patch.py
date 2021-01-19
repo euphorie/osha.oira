@@ -1,12 +1,18 @@
 # -*- coding: UTF-8 -*-
-from DateTime import DateTime
 from datetime import datetime
+from DateTime import DateTime
 from plone.app.dexterity.behaviors.metadata import DCFieldProperty
 from plone.app.upgrade.v43 import alphas
 from plone.i18n.locales import languages
 from Products.CMFPlone.utils import safe_unicode
 from zope.schema.interfaces import ISequence
 from zope.schema.interfaces import IText
+
+import sys
+
+
+if sys.version_info[0] >= 3:
+    unicode = str
 
 
 # See: https://projects.syslab.com/issues/5978

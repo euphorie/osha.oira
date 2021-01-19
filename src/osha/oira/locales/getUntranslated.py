@@ -15,6 +15,8 @@ output.po   The name of a po file that will be created by this script.
             with the default translation.
 """
 
+from __future__ import print_function
+
 import os
 import polib
 import re
@@ -27,10 +29,10 @@ noprefill = False
 
 def usage(stream, msg=None):
     if msg:
-        print >> stream, msg
-        print >> stream
+        print(msg, file=stream)
+        print("\n", file=stream)
     program = os.path.basename(sys.argv[0])
-    print >> stream, __doc__ % {"program": program}
+    print(__doc__ % {"program": program}, file=stream)
     sys.exit(0)
 
 

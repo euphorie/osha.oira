@@ -109,10 +109,11 @@
                     >
                       Unpublish
                     </button>
-                    <button class="pat-button"
+                    <button class="pat-button disabled pat-depends"
                             name="public"
                             type="submit"
                             value="on"
+                            data-pat-depends="condition: title; action: enable"
                             tal:condition="not:view/certificate/secret"
                             i18n:translate="button_publish"
                     >

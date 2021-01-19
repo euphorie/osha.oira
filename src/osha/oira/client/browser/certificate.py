@@ -111,8 +111,11 @@ class Certificate(BrowserView):
     @property
     @memoize
     def session(self):
-        """Find the certificate associated to this session"""
         return self.webhelpers.traversed_session.session
+
+    @property
+    def session_url(self):
+        return self.webhelpers.traversed_session.absolute_url()
 
     @property
     @memoize

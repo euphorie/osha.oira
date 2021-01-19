@@ -5,18 +5,23 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       meta:interpolation="true"
+      tal:define="
+        webhelpers nocall:context/@@webhelpers;
+      "
       i18n:domain="euphorie"
-      tal:define="webhelpers nocall:context/@@webhelpers"
-      >
+>
 
-  <metal:status_box define-macro="status_box" meta:interpolation="true" i18n:domain="euphorie">
+  <metal:status_box define-macro="status_box"
+                    meta:interpolation="true"
+                    i18n:domain="euphorie"
+  >
     <tal:if_not_disabled_by_userpreference condition="webhelpers/show_certificate_status_box">
       <div class="status-sentinel pat-message notice"
-          tal:define="
-            certificate_view nocall: webhelpers/traversed_session/@@certificate;
-            country python: certificate_view.country;
-          "
-          tal:condition="certificate_view/can_display_certificate_notice"
+           tal:define="
+             certificate_view nocall: webhelpers/traversed_session/@@certificate;
+             country python: certificate_view.country;
+           "
+           tal:condition="certificate_view/can_display_certificate_notice"
       >
         <form class="pat-inject"
               action="${webhelpers/traversed_session/absolute_url}/@@remove-certificate-status-box#status"
@@ -28,7 +33,7 @@
           >Hide this message</button>
         </form>
         <p tal:condition="certificate_view/can_display_certificate_teaser"
-          i18n:translate=""
+           i18n:translate=""
         >
           You have completed
           <tal:name i18n:name="completed">${certificate_view/completion_percentage}%</tal:name>
@@ -51,9 +56,9 @@
         <tal:earned condition="certificate_view/can_display_certificate_earned">
           <p class="button-bar">
             <a class="pat-button pat-inject"
-              href="${webhelpers/traversed_session/absolute_url}/@@certificate"
-              data-pat-inject="history: record"
-              i18n:translate=""
+               href="${webhelpers/traversed_session/absolute_url}/@@certificate"
+               data-pat-inject="history: record"
+               i18n:translate=""
             >View certificate</a>
           </p>
         </tal:earned>

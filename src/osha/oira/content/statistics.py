@@ -27,8 +27,13 @@ from zope.schema.vocabulary import SimpleVocabulary
 from zope.sqlalchemy import datamanager
 
 import logging
+import sys
 import transaction
 import urllib2
+
+
+if sys.version_info[0] >= 3:
+    basestring = str
 
 
 log = logging.getLogger("osha.oira/browser.statistics")

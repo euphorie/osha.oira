@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
-import subprocess
-
 import os
+import subprocess
 import sys
 import time
 
@@ -43,7 +42,7 @@ for lang in langs:
             "euphorie.pot --fuzzy --untranslated --output=dirty/osha.oira_%(lang)s.po"
             % dict(lang=lang)
         )
-        print "executing for language ", lang
+        print("executing for language ", lang)
         p = subprocess.Popen(cmdline, shell=True)
         sts = os.waitpid(p.pid, 0)[1]
         time.sleep(0.5)

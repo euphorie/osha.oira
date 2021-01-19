@@ -20,8 +20,9 @@ TEST_INI = os.path.join(os.path.dirname(__file__), "test.ini")
 
 class OiRATestLayer(ptc.BasePTCLayer):
     def afterSetUp(self):
-        from Testing.ZopeTestCase import installPackage
         from euphorie.client import tests
+        from Testing.ZopeTestCase import installPackage
+
         import euphorie.deployment
         import osha.oira
         import pas.plugins.ldap

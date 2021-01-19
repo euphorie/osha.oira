@@ -10,6 +10,7 @@ input.po    A po file that contains text to be translated
 output.txt  File name where the extracted text will be dumped
 """
 
+from __future__ import print_function
 from StringIO import StringIO
 
 import os
@@ -24,10 +25,10 @@ noprefill = False
 
 def usage(stream, msg=None):
     if msg:
-        print >> stream, msg
-        print >> stream
+        print(msg, file=stream)
+        print("\n", file=stream)
     program = os.path.basename(sys.argv[0])
-    print >> stream, __doc__ % {"program": program}
+    print(__doc__ % {"program": program}, file=stream)
     sys.exit(0)
 
 

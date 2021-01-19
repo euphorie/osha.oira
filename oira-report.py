@@ -14,24 +14,24 @@ from lxml.html import builder as E
 report = E.HTML(
     E.HEAD(
         E.LINK(
-            href=("http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/"
-                  "bootstrap-combined.min.css"),
+            href=(
+                "http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/"
+                "bootstrap-combined.min.css"
+            ),
             rel="stylesheet",
         ),
         E.TITLE("OiRA Testing Report"),
-        E.META(name="viewport", content="width=device-width, initial-scale=1.0")
+        E.META(name="viewport", content="width=device-width, initial-scale=1.0"),
     ),
     E.BODY(
         E.DIV(
             E.CLASS("container"),
-            E.DIV(
-                E.CLASS("page-header"),
-                E.H1("OiRA Testing Report",)
-            ) ,
+            E.DIV(E.CLASS("page-header"), E.H1("OiRA Testing Report")),
             id="content-area",
-        ),
+        )
     ),
 )
+
 
 def format_msg(msg, status):
     if msg.text is not None:
@@ -47,21 +47,21 @@ def format_msg(msg, status):
                     E.CLASS("thumbnails"),
                     E.LI(
                         E.CLASS("span4"),
-                        E.A(E.CLASS("thumbnail"),
-                            E.IMG(src=href),
-                            href=href,
-                        ),
-                    )
+                        E.A(E.CLASS("thumbnail"), E.IMG(src=href), href=href),
+                    ),
                 )
             else:
                 return E.P(msg.text)
         else:
             return E.P(msg.text)
 
+
 content_area = report.get_element_by_id("content-area")
+
+
 def process_robot_output(robot_output):
     root = etree.parse(robot_output).getroot()
-    print "one time"
+    print("one time")
     for suite in root.xpath("//suite[@source]"):
         suite_id = suite.get("id", "")
         suite_container = E.DIV(E.CLASS("suite span12"), id=suite_id)
@@ -74,12 +74,11 @@ def process_robot_output(robot_output):
             test_container = E.DIV(E.CLASS("span6"))
             test_name = test.get("name", "")
 
-            test_container.append(E.H4(test_name),)
+            test_container.append(E.H4(test_name))
 
-            doc = "".join([
-                doc.text for doc in test.xpath("./doc")
-                if doc.text is not None
-            ])
+            doc = "".join(
+                [doc.text for doc in test.xpath("./doc") if doc.text is not None]
+            )
             test_container.append(E.P(doc))
 
             status_tags = test.xpath("./status")
@@ -93,45 +92,29 @@ def process_robot_output(robot_output):
                     btn_class = "btn-danger"
                     text_class = "text-error"
 
-            btn_id = test_id+"-btn"
+            btn_id = test_id + "-btn"
             test_container.append(
-                E.BUTTON(
-                    status,
-                    E.CLASS("btn "+btn_class),
-                    type="button",
-                    id=btn_id,
-                )
+                E.BUTTON(status, E.CLASS("btn " + btn_class), type="button", id=btn_id)
             )
 
             btn = test_container.get_element_by_id(btn_id)
-            btn.set("data-target", "#"+test_id)
+            btn.set("data-target", "#" + test_id)
             btn.set("data-toggle", "collapse")
 
-
-            messages = E.DIV(
-                E.CLASS("collapse "+ text_class),
-                id = test_id,
-            )
+            messages = E.DIV(E.CLASS("collapse " + text_class), id=test_id)
             for kw in test.xpath("./kw"):
                 for msg in kw.xpath(".//msg"):
                     messages.append(format_msg(msg, status=status))
-                if kw.get("name") == \
-                   "Selenium2Library.Wait Until Page Contains":
-                    text_check = [
-                        "text" in doc.text for doc in kw.xpath(".//doc")]
+                if kw.get("name") == "Selenium2Library.Wait Until Page Contains":
+                    text_check = ["text" in doc.text for doc in kw.xpath(".//doc")]
                     if text_check:
-                        text_match = " ".join(
-                            [arg.text for arg in kw.xpath(".//arg")])
-                    messages.append(
-                        E.P("Checking the page contains: "+text_match))
+                        text_match = " ".join([arg.text for arg in kw.xpath(".//arg")])
+                    messages.append(E.P("Checking the page contains: " + text_match))
             test_container.append(messages)
 
             # Two columns per row
             if i % 2 == 0 or i == len(tests):
-                row = E.DIV(
-                    E.CLASS("row"),
-                    test_container,
-                )
+                row = E.DIV(E.CLASS("row"), test_container)
                 suite_container.append(row)
             else:
                 row.append(test_container)
@@ -141,15 +124,14 @@ def process_robot_output(robot_output):
     # ScrollSpy might be nice
     # report.body.set("data-spy","scroll")
     # report.body.set("data-target", ".suite")
-    report.append(
-        E.SCRIPT(
-            src="http://code.jquery.com/jquery-1.9.1.min.js"
-        ))
+    report.append(E.SCRIPT(src="http://code.jquery.com/jquery-1.9.1.min.js"))
 
     report.append(
         E.SCRIPT(
-            src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"
-        ))
+            src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"  # noqa: E501
+        )
+    )
+
 
 if __name__ == "__main__":
     robot_output = open("output.xml", "r")

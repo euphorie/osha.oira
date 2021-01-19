@@ -5,6 +5,14 @@
 
 usage:  %(program)s input.xml output/directory
 """
+from __future__ import print_function
+from BeautifulSoup import BeautifulSoup
+from BeautifulSoup import BeautifulStoneSoup
+from datetime import datetime
+from datetime import timedelta
+from html2text import html2text
+from xml.sax.saxutils import unescape
+
 import base64
 import codecs
 import os
@@ -13,15 +21,16 @@ import re
 import sys
 import unicodedata
 
-from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
-from html2text import html2text
-from datetime import datetime
-from datetime import timedelta
-from xml.sax.saxutils import unescape
 
-STATES = ['answered', 'postponed', 'unvisited']
-EVALUATION_TYPES = ['risk_calculated', 'risk_estimated', 'risk_direct', 'priority', 'policy']
-LOCATIONS = [u'Abby Road', u'Baker Street']
+STATES = ["answered", "postponed", "unvisited"]
+EVALUATION_TYPES = [
+    "risk_calculated",
+    "risk_estimated",
+    "risk_direct",
+    "priority",
+    "policy",
+]
+LOCATIONS = [u"Abby Road", u"Baker Street"]
 
 MAX_NUMBER_MODULES = 1
 MAX_NUMBER_PROFILES = 2
@@ -30,25 +39,28 @@ MAX_NUMBER_SUBMODULES = 3
 
 def usage(stream, msg=None):
     if msg:
-        print >> stream, msg
-        print >> stream
+        print(msg, file=stream)
+        print("\n", file=stream)
     program = os.path.basename(sys.argv[0])
-    print >> stream, __doc__ % {"program": program}
+    print(__doc__ % {"program": program}, file=stream)
     sys.exit(0)
 
 
 def str2filename(text):
-    stripped_text = re.sub("[()\[\]{}/.,;:!?]", "", text)
-    stripped_text = unicodedata.normalize('NFKD', stripped_text).encode(
-        'ascii', 'ignore')
+    stripped_text = re.sub("[()\\[\\]{}/.,;:!?]", "", text)
+    stripped_text = unicodedata.normalize("NFKD", stripped_text).encode(
+        "ascii", "ignore"
+    )
     return stripped_text.lower().replace(" ", "-")
 
 
 def escape2markdown(text):
     """Convert escaped html to markdown"""
     html = BeautifulStoneSoup(
-        text, convertEntities=BeautifulStoneSoup.XML_ENTITIES).text
+        text, convertEntities=BeautifulStoneSoup.XML_ENTITIES
+    ).text
     return html2text(html)
+
 
 # Hack to order entries by date
 current_date = datetime(2014, 1, 1)
@@ -74,7 +86,7 @@ def increment_number(num):
 
 
 def _r(t):
-    return t.replace('"', '\'')
+    return t.replace('"', "'")
 
 
 def create_risk(risk, parent_id=None, number="1"):
@@ -108,48 +120,51 @@ solutions:
     problem_description = _r(risk.find("problem-description").text)
     description = unescape(_r(risk.find("description").text))
     legal_reference_node = risk.find("legal-reference")
-    legal_reference = legal_reference_node and unescape(_r(legal_reference_node.text)) or ""
+    legal_reference = (
+        legal_reference_node and unescape(_r(legal_reference_node.text)) or ""
+    )
     global risk_counter
     if risk_counter < len(EVALUATION_TYPES):
         evaluation_method = EVALUATION_TYPES[risk_counter]
-        state = 'answered'
-        risk_class = 'risk'
-        print u"Risk {0} with method {1}".format(title, evaluation_method)
+        state = "answered"
+        risk_class = "risk"
+        print(u"Risk {0} with method {1}".format(title, evaluation_method))
     else:
         evaluation_method = random.choice(EVALUATION_TYPES)
         state = random.choice(STATES)
-        risk_class = state == 'answered' and random.choice(['risk', '']) or ''
+        risk_class = state == "answered" and random.choice(["risk", ""]) or ""
     classes = "{} {}".format(state, risk_class)
     # solutions = risk.find("solutions").text
     # xxx handle the sub solutions
     risk_counter += 1
 
-    images = risk.findAll('image')
+    images = risk.findAll("image")
     image_data = []
     image_info = u""
     for image in images:
-        image_path = os.path.join(media_path, image['filename'])
+        image_path = os.path.join(media_path, image["filename"])
         image_filename = os.path.join(dir_path, image_path)
-        with open(image_filename, 'w') as img_file:
+        with open(image_filename, "w") as img_file:
             img_file.write(base64.decodestring(image.contents[0]))
-        image_data.append(dict(
-            url=u"/{0}".format(image_path),
-            caption=image.get('caption', '')))
+        image_data.append(
+            dict(url=u"/{0}".format(image_path), caption=image.get("caption", ""))
+        )
 
     if image_data:
         image_info = u"images:\n"
         for entry in image_data:
-            image_info += u"    - url: {0}\n".format(entry['url'])
-            image_info += u"      caption: {0}\n".format(entry['caption'])
+            image_info += u"    - url: {0}\n".format(entry["url"])
+            image_info += u"      caption: {0}\n".format(entry["caption"])
 
     mip = ""
     existing_measures = _r(risk.find("existing_measures").text)
     if existing_measures:
         # import pdb; pdb.set_trace( )
-        for measure in existing_measures.split('\n'):
+        for measure in existing_measures.split("\n"):
             if measure.strip():
                 mip += u'    - label: "%s"\n      state: checked\n' % (
-                    measure.replace('&#13;', ''))
+                    measure.replace("&#13;", "")
+                )
 
     fields = {
         "id": id,
@@ -187,20 +202,21 @@ title: {title}{module}
     id = str2filename(title)
     description = module.find("description").text
 
-    images = module.findAll('image')
+    images = module.findAll("image")
     image_info = ""
     if images:
-        image_path = os.path.join(media_path, images[0]['filename'])
+        image_path = os.path.join(media_path, images[0]["filename"])
         image_filename = os.path.join(dir_path, image_path)
-        with open(image_filename, 'w') as img_file:
+        with open(image_filename, "w") as img_file:
             img_file.write(base64.decodestring(images[0].contents[0]))
         image_info = u"images:\n    - url: /{0}\n      caption: {1}\n".format(
-            image_path, images[0].get('caption', ''))
+            image_path, images[0].get("caption", "")
+        )
 
     fields = {
         "id": id,
         "title": title,
-        "number": number + '.0',
+        "number": number + ".0",
         "parent_id": parent_id,
         "module": "\nmodule: {}".format(parent_id) if parent_id else "",
         "body": escape2markdown(description),
@@ -241,7 +257,8 @@ parent_id: {parent_id}
         location_name=location_name,
         location_number=location_number,
         parent_id=parent_id,
-        fid=id)
+        fid=id,
+    )
     write_md(id, content)
 
 
@@ -264,7 +281,9 @@ title: {title}{images}
     fields = {
         "id": id,
         "title": title,
-        "number": len(locations) and "{0}.0.0.0".format(number) or "{0}.0.0".format(number),
+        "number": len(locations)
+        and "{0}.0.0.0".format(number)
+        or "{0}.0.0".format(number),
         "images": "",
         "body": escape2markdown(description),
     }
@@ -306,7 +325,7 @@ if __name__ == "__main__":
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
 
-    with open(input, 'r') as xml:
+    with open(input, "r") as xml:
         soup = BeautifulSoup(xml.read())
 
     survey = soup.find("survey")
@@ -316,7 +335,7 @@ if __name__ == "__main__":
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
 
-    media_path = os.path.join('media', survey_id)
+    media_path = os.path.join("media", survey_id)
     media_file_path = os.path.join(dir_path, media_path)
     if not os.path.exists(media_file_path):
         os.makedirs(media_file_path)
@@ -324,15 +343,16 @@ if __name__ == "__main__":
     number = 1
     profile_number = 1
 
-    profile_questions = survey.findChildren("profile-question",
-                                            recursive=False)
+    profile_questions = survey.findChildren("profile-question", recursive=False)
     for profile_question in profile_questions:
         # Let X modules be enough
         if MAX_NUMBER_PROFILES and number > MAX_NUMBER_PROFILES:
             break
-        print "Export Profile Question '{0}'".format(profile_question.title.text)
+        print("Export Profile Question '{0}'".format(profile_question.title.text))
         if profile_number > 1:
-            create_profile_question(profile_question, number=str(number), locations=LOCATIONS)
+            create_profile_question(
+                profile_question, number=str(number), locations=LOCATIONS
+            )
         else:
             create_profile_question(profile_question, number=str(number))
         number += 1
@@ -343,6 +363,6 @@ if __name__ == "__main__":
         # Let X modules be enough
         if MAX_NUMBER_MODULES and number > (MAX_NUMBER_MODULES + MAX_NUMBER_PROFILES):
             break
-        print u"Export Module '{0}'".format(module.title.text)
+        print(u"Export Module '{0}'".format(module.title.text))
         create_module(module, number=str(number))
         number += 1

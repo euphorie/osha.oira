@@ -1,6 +1,7 @@
 from plone.namedfile.interfaces import INamedFile
-from ZODB.POSException import POSKeyError
 from Products.CMFCore.interfaces import IFolderish
+from ZODB.POSException import POSKeyError
+
 
 """
 Usage:
@@ -19,13 +20,13 @@ def check_annotation_blobs(context):
     ann = getattr(context, "__annotations__", None)
     if not ann:
         return
-    scales = context.__annotations__.get('plone.scale', {})
+    scales = context.__annotations__.get("plone.scale", {})
     for key, item in scales.items():
-        img = item.get('data')
+        img = item.get("data")
         if img:
             try:
                 img.getSize()
-            except:
+            except Exception:
                 scales.pop(key)
                 trouble = True
     return trouble
@@ -40,7 +41,10 @@ def check_dexterity_blobs(context):
                 try:
                     value.getSize()
                 except POSKeyError:
-                    print "Found damaged Dexterity plone.app.NamedFile %s on %s" % (key, context.absolute_url())
+                    print(
+                        "Found damaged Dexterity plone.app.NamedFile %s on %s"
+                        % (key, context.absolute_url())
+                    )
                     trouble = True
                     setattr(context, key, None)
     return trouble
@@ -48,12 +52,12 @@ def check_dexterity_blobs(context):
 
 def fix_blobs(context):
     if check_dexterity_blobs(context):
-        print "Bad blobs found on %s" % context.absolute_url()
+        print("Bad blobs found on %s" % context.absolute_url())
 
 
 def fix_annotation_blobs(context):
     if check_annotation_blobs(context):
-        print "Bad annotation blobs found on %s" % context.absolute_url()
+        print("Bad annotation blobs found on %s" % context.absolute_url())
 
 
 def recurse(tree):
@@ -70,7 +74,10 @@ def recurse(tree):
 #         pt = getattr(sub_node, "portal_type", "")
 #         if pt == "euphorie.survey":
 #             yield sub_node
-#         if pt in ("euphorie.country", "euphorie.sector", "euphorie.sectorcontainer", "euphorie.surveygroup"):
+#         if pt in (
+#           "euphorie.country", "euphorie.sector", "euphorie.sectorcontainer",
+#           "euphorie.surveygroup"
+#         ):
 #             for sub_sub_node in walk(sub_node):
 #                 yield sub_sub_node
 

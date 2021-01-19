@@ -16,9 +16,9 @@ import datetime
 
 class EuphorieReportTests(OiRAFunctionalTestCase):
     def testUnicodeReportFilename(self):
-        from euphorie.content.tests.utils import BASIC_SURVEY
         from euphorie.client.tests.utils import addSurvey
         from euphorie.client.tests.utils import registerUserInClient
+        from euphorie.content.tests.utils import BASIC_SURVEY
 
         # Test for http://code.simplon.biz/tracker/euphorie/ticket/156
         self.loginAsPortalOwner()
@@ -45,9 +45,9 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
         )
 
     def testInvalidDateDoesNotBreakRendering(self):
-        from euphorie.content.tests.utils import BASIC_SURVEY
         from euphorie.client.tests.utils import addSurvey
         from euphorie.client.tests.utils import registerUserInClient
+        from euphorie.content.tests.utils import BASIC_SURVEY
 
         # Test for http://code.simplon.biz/tracker/tno-euphorie/ticket/150
         self.loginAsPortalOwner()
@@ -79,9 +79,9 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
         # No errors = success
 
     def testCountryDefaultsToCurrentCountry(self):
-        from euphorie.content.tests.utils import BASIC_SURVEY
         from euphorie.client.tests.utils import addSurvey
         from euphorie.client.tests.utils import registerUserInClient
+        from euphorie.content.tests.utils import BASIC_SURVEY
 
         self.loginAsPortalOwner()
         addSurvey(self.portal, BASIC_SURVEY)
@@ -100,9 +100,9 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
         self.assertEqual(browser.getControl(name="form.widgets.country").value, ["nl"])
 
     def testCompanySettingsRoundTrip(self):
-        from euphorie.content.tests.utils import BASIC_SURVEY
         from euphorie.client.tests.utils import addSurvey
         from euphorie.client.tests.utils import registerUserInClient
+        from euphorie.content.tests.utils import BASIC_SURVEY
 
         self.loginAsPortalOwner()
         addSurvey(self.portal, BASIC_SURVEY)

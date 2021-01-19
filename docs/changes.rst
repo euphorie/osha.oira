@@ -5,6 +5,7 @@ Changelog
 -------------------
 
 - Translation updates
+- A "Print" to certificate
 
 6.2.13 (2020-12-15)
 -------------------

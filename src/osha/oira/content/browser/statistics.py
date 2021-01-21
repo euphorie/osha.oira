@@ -2,12 +2,14 @@
 from datetime import datetime
 from osha.oira import _
 from plone import api
-from plone.directives import form
+from plone.autoform import directives
+from plone.supermodel import model
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
+from z3c.form import form
 from z3c.form.browser.select import SelectFieldWidget
 from z3c.form.interfaces import IObjectFactory
 from z3c.saconfig import Session
@@ -66,7 +68,7 @@ class ReportPeriodFactory(object):
         return ReportPeriod(value)
 
 
-class StatisticsSchema(form.Schema):
+class StatisticsSchema(model.Schema):
     report_type = schema.Choice(
         title=_(u"label_report_type", default=u"Report Type"),
         vocabulary="osha.oira.report_type",
@@ -78,14 +80,14 @@ class StatisticsSchema(form.Schema):
         vocabulary="osha.oira.countries",
         required=True,
     )
-    form.widget(countries=SelectFieldWidget)
+    directives.widget(countries=SelectFieldWidget)
 
     tools = schema.Choice(
         title=_(u"label_report_tools", default=u"Tool"),
         vocabulary="osha.oira.publishedtools",
         required=True,
     )
-    form.widget(tools=SelectFieldWidget)
+    directives.widget(tools=SelectFieldWidget)
 
     report_period = schema.Object(
         title=_(u"label_report_period", default=u"Report Period"), schema=IReportPeriod
@@ -96,7 +98,7 @@ class StatisticsSchema(form.Schema):
         vocabulary="osha.oira.report_file_format",
         required=True,
     )
-    form.widget(file_format=SelectFieldWidget)
+    directives.widget(file_format=SelectFieldWidget)
 
     test_sessions = schema.Choice(
         title=u"How to treat test sessions",
@@ -294,7 +296,7 @@ class StatisticsMixin(object):
         return bool(voc.by_value)
 
 
-class CountryStatistics(form.SchemaForm, StatisticsMixin):
+class CountryStatistics(form.Form, StatisticsMixin):
     """Country managers can access statistics for their countries and
     tools inside their respective countries, but nowhere else..
     """
@@ -326,7 +328,7 @@ class CountryStatistics(form.SchemaForm, StatisticsMixin):
             return self.template()
 
 
-class SectorStatistics(form.SchemaForm, StatisticsMixin):
+class SectorStatistics(form.Form, StatisticsMixin):
     """Sector accounts/managers can access statistics for tools in their
     sector, but nowhere else.
     """
@@ -364,7 +366,7 @@ class SectorStatistics(form.SchemaForm, StatisticsMixin):
             return self.template()
 
 
-class GlobalStatistics(form.SchemaForm, StatisticsMixin):
+class GlobalStatistics(form.Form, StatisticsMixin):
     """Site managers can access statistics for the whole site."""
 
     schema = StatisticsSchema

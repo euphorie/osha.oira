@@ -1,8 +1,8 @@
 # coding=utf-8
 from euphorie.content import MessageFactory as _
 from htmllaundry.z3cform import HtmlText
+from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
-from plone.directives import form
 from plone.supermodel import model
 from plonetheme.nuplone.z3cform.directives import depends
 from zope import schema
@@ -67,7 +67,7 @@ class IOSHACountry(model.Schema):
         ),
         required=False,
     )
-    form.widget(
+    directives.widget(
         certificate_explanatory_sentence="plone.app.z3cform.wysiwyg.WysiwygFieldWidget"
     )
 

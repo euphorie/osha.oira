@@ -3,10 +3,6 @@
   xmlns:plone="http://namespaces.plone.org/plone"
   xmlns:browser="http://namespaces.zope.org/browser">
 
-    <include package="plone.behavior" file="meta.zcml" />
-    <include package="plone.directives.form" file="meta.zcml" />
-    <include package="plone.directives.form" />
-
     <include package=".browser" />
 
     <plone:behavior

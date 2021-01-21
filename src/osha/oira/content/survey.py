@@ -16,8 +16,8 @@ from euphorie.content.utils import IToolTypesInfo
 from plone.app.dexterity.behaviors.metadata import DCFieldProperty
 from plone.app.dexterity.behaviors.metadata import MetadataBase
 from plone.autoform.interfaces import IFormFieldProvider
-from plone.directives import form
 from plone.namedfile import field as filefield
+from plone.supermodel import model
 from plonetheme.nuplone.utils import formatDate
 from plonetheme.nuplone.z3cform.directives import depends
 from zope import interface
@@ -39,7 +39,7 @@ help_default_severity = _(
 )
 
 
-class IOSHASurvey(form.Schema):
+class IOSHASurvey(model.Schema):
     """ Adds a logo, URL and name of an external reference site to a survey """
 
     enable_external_site_link = schema.Bool(

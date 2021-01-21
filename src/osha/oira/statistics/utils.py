@@ -81,6 +81,15 @@ class UpdateStatisticsDatabases(object):
         session_statistics.query(AccountStatistics).delete()
 
         accounts = self.session_application.query(Account).order_by(Account.id)
+        if country is not None:
+            accounts = (
+                accounts.filter(Account.id == SurveySession.account_id)
+                .filter(SurveySession.zodb_path.startswith(country))
+                .group_by(Account.id)
+                .group_by(
+                    sqlalchemy.func.substr(SurveySession.zodb_path, 0, len(country) + 1)
+                )
+            )
         log.info("Table: account")
         offset = 0
         rows = []

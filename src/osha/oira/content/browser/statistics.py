@@ -8,6 +8,8 @@ from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
+from urllib.error import URLError
+from urllib.request import urlopen
 from z3c.form import button
 from z3c.form import form
 from z3c.form.browser.select import SelectFieldWidget
@@ -16,6 +18,7 @@ from z3c.saconfig import Session
 from zope import component
 from zope import interface
 from zope import schema
+from zope.interface import implementer
 from zope.schema._bootstrapinterfaces import RequiredMissing
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
@@ -25,7 +28,6 @@ from zope.sqlalchemy import datamanager
 import logging
 import sys
 import transaction
-import urllib2
 
 
 if sys.version_info[0] >= 3:
@@ -47,9 +49,8 @@ class IReportPeriod(interface.Interface):
     )
 
 
+@implementer(IReportPeriod)
 class ReportPeriod(object):
-    interface.implements(IReportPeriod)
-
     def __init__(self, value):
         self.year = value["year"]
         self.period = value["period"]
@@ -58,9 +59,8 @@ class ReportPeriod(object):
 @component.adapter(
     interface.Interface, interface.Interface, interface.Interface, interface.Interface
 )
+@implementer(IObjectFactory)
 class ReportPeriodFactory(object):
-    interface.implements(IObjectFactory)
-
     def __init__(self, context, request, form, widget):
         pass
 
@@ -273,8 +273,8 @@ class StatisticsMixin(object):
         if url is None:
             return
         try:
-            page = urllib2.urlopen(url)
-        except urllib2.URLError:
+            page = urlopen(url)
+        except URLError:
             IStatusMessage(self.request).add(
                 "Statistics server could not be contacted, please try again " "later",
                 type=u"error",

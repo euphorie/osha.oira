@@ -10,7 +10,7 @@ from z3c.form.widget import FieldWidget
 from z3c.form.widget import Widget
 from zope.component import adapter
 from zope.interface import implementer
-from zope.interface import implementsOnly
+from zope.interface import implementer_only
 from zope.schema.interfaces import IChoice
 from zope.schema.interfaces import IText
 
@@ -34,10 +34,9 @@ def ChoiceWidgetFactory(field, request):
     return FieldWidget(field, widget(request))
 
 
+@implementer_only(ILargeTextAreaWidget)
 class LargeTextAreaWidget(TextAreaWidget, Widget):
     """Textarea widget implementation."""
-
-    implementsOnly(ILargeTextAreaWidget)
 
     klass = u"textarea-widget"
     value = u""

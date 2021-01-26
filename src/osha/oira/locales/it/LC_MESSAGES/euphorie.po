@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-01-12 11:55+0000\n"
+"POT-Creation-Date: 2021-01-26 11:42+0000\n"
 "PO-Revision-Date: 2013-11-26 11:57+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,6 +29,7 @@ msgstr ""
 "impiegare a tal fine. Alla fine del processo sarà possibile stampare il "
 "report finale."
 
+#: osha/oira/client/browser/templates/certificate-print.pt:57
 #: osha/oira/client/browser/templates/public-certificate.pt:33
 msgid "${certificate/title}"
 msgstr ""
@@ -80,7 +81,7 @@ msgstr ""
 "${provide-evidence} rispetto a tutti i pericoli e rischi indicati dalla "
 "strumento e le misure inserite."
 
-#: osha/oira/client/browser/templates/certificate_macros.pt:43
+#: osha/oira/client/browser/templates/certificate_macros.pt:48
 #: osha/oira/client/browser/templates/status.pt:52
 msgid "${required} Complete!"
 msgstr ""
@@ -93,19 +94,19 @@ msgstr ""
 msgid "(measures to be implemented in the coming months)"
 msgstr "misure da implementare nel corrente mese"
 
-#: osha/oira/vocabularies.py:59
+#: osha/oira/vocabularies.py:63
 msgid "1st Quarter"
 msgstr "1° quarto"
 
-#: osha/oira/vocabularies.py:60
+#: osha/oira/vocabularies.py:64
 msgid "2nd Quarter"
 msgstr "2° quarto"
 
-#: osha/oira/vocabularies.py:61
+#: osha/oira/vocabularies.py:65
 msgid "3rd Quarter"
 msgstr "3° quarto"
 
-#: osha/oira/vocabularies.py:62
+#: osha/oira/vocabularies.py:66
 msgid "4th Quarter"
 msgstr "4° quarto"
 
@@ -155,7 +156,7 @@ msgstr ""
 msgid "A sector is national organisation for a specific type of industry."
 msgstr ""
 
-#: osha/oira/content/country.py:109
+#: osha/oira/content/country.py:120
 msgid ""
 "A short explanation that is shown to the user after reaching the initial "
 "threshold. You can use this to point to an external website that provides "
@@ -215,12 +216,12 @@ msgstr "Aggiungere modulo"
 msgid "Add Profile question"
 msgstr "Aggiungere domanda sul profilo"
 
-#: osha/oira/content/risk.py:47
+#: osha/oira/content/risk.py:50
 msgid "Add Risk"
 msgstr "Aggiungere rischio"
 
 #. Default: "Add Measure"
-#: osha/oira/content/solution.py:65
+#: osha/oira/content/solution.py:66
 msgid "Add Solution"
 msgstr "Aggiungere misura"
 
@@ -245,13 +246,13 @@ msgstr ""
 msgid "Additional Measure"
 msgstr ""
 
-#: osha/oira/content/country.py:96
+#: osha/oira/content/country.py:105
 msgid ""
 "After a session completion rate is greater than this limit the user will "
 "earn a certificate."
 msgstr ""
 
-#: osha/oira/content/country.py:82
+#: osha/oira/content/country.py:89
 msgid ""
 "After a session completion rate is greater than this limit, the user will be "
 "informed about the possibility to earn a certificate. "
@@ -292,7 +293,7 @@ msgid "Are you sure you want to continue? This action can not be reverted."
 msgstr ""
 
 #. Default: "Are you sure you want to delete this measure? This action can not be reverted."
-#: osha/oira/manual_translations.py:16
+#: osha/oira/manual_translations.py:19
 msgid ""
 "Are you sure you want to delete this measure? This action can not be "
 "reverted."
@@ -358,19 +359,20 @@ msgstr ""
 msgid "Candidate country"
 msgstr ""
 
+#: osha/oira/client/browser/templates/certificate-print.pt:51
 #: osha/oira/client/browser/templates/public-certificate.pt:27
 msgid "Certificate"
 msgstr ""
 
-#: osha/oira/content/country.py:95
+#: osha/oira/content/country.py:104
 msgid "Certificate completion threshold (in percent)"
 msgstr ""
 
-#: osha/oira/content/country.py:81
+#: osha/oira/content/country.py:88
 msgid "Certificate initial threshold (in percent)"
 msgstr ""
 
-#: osha/oira/manual_translations.py:8
+#: osha/oira/manual_translations.py:9
 msgid "Change email address"
 msgstr "Modificare indirizzo e-mail"
 
@@ -398,15 +400,17 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
+#: osha/oira/client/browser/templates/certificate-print.pt:88
 #: osha/oira/client/browser/templates/public-certificate.pt:65
 msgid "Company name"
 msgstr ""
 
-#: osha/oira/client/browser/templates/public-certificate.pt:73
+#: osha/oira/client/browser/templates/certificate-print.pt:98
+#: osha/oira/client/browser/templates/public-certificate.pt:76
 msgid "Completed"
 msgstr ""
 
-#: osha/oira/content/country.py:124
+#: osha/oira/content/country.py:135
 msgid "Completion threshold has to be greater than the initial threshold"
 msgstr ""
 
@@ -414,7 +418,7 @@ msgstr ""
 msgid "Confirm OiRA email address change"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate_fr_specific.pt:27
+#: osha/oira/client/browser/templates/certificate_fr_specific.pt:19
 msgid "Contact name"
 msgstr ""
 
@@ -455,14 +459,15 @@ msgstr ""
 msgid "Continue to report"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:99
+#: osha/oira/client/browser/templates/certificate.pt:100
 msgid ""
 "Copy the following link to anyone to whom it may concern as proof that "
 "you've conducted this risk assessment."
 msgstr ""
 
+#: osha/oira/client/browser/templates/certificate-print.pt:86
 #: osha/oira/client/browser/templates/public-certificate.pt:63
-#: osha/oira/vocabularies.py:26
+#: osha/oira/vocabularies.py:29
 msgid "Country"
 msgstr "Paese"
 
@@ -486,11 +491,12 @@ msgstr ""
 msgid "Creative Commons License"
 msgstr ""
 
-#: osha/oira/client/browser/templates/public-certificate.pt:68
+#: osha/oira/client/browser/templates/certificate-print.pt:93
+#: osha/oira/client/browser/templates/public-certificate.pt:70
 msgid "Date"
 msgstr ""
 
-#: osha/oira/manual_translations.py:9
+#: osha/oira/manual_translations.py:10
 msgid "Delete Account"
 msgstr "Eliminare Account"
 
@@ -525,7 +531,7 @@ msgid "Describe the risk..."
 msgstr ""
 
 #. Default: "Description"
-#: osha/oira/manual_translations.py:25
+#: osha/oira/manual_translations.py:35
 msgid "Description"
 msgstr "Descrizione"
 
@@ -590,7 +596,7 @@ msgstr ""
 msgid "EU member state"
 msgstr ""
 
-#: osha/oira/vocabularies.py:25
+#: osha/oira/vocabularies.py:28
 msgid "EU-OSHA Overview"
 msgstr "Panoramica EU-OSHA"
 
@@ -603,15 +609,15 @@ msgid "Edit Profile question"
 msgstr "Modificare la domanda sul profilo"
 
 #. Default: "Edit Measure"
-#: osha/oira/content/solution.py:48
+#: osha/oira/content/solution.py:49
 msgid "Edit Solution"
 msgstr "Modificare misura"
 
-#: osha/oira/manual_translations.py:7
+#: osha/oira/manual_translations.py:8
 msgid "Email address/account name"
 msgstr "Indirizzo e-mail/nome dell'account"
 
-#: osha/oira/content/country.py:70
+#: osha/oira/content/country.py:75
 msgid "Enable certificates"
 msgstr ""
 
@@ -650,7 +656,7 @@ msgstr ""
 msgid "Expand sidebar"
 msgstr ""
 
-#: osha/oira/content/country.py:108
+#: osha/oira/content/country.py:119
 msgid "Explanatory sentence"
 msgstr ""
 
@@ -666,6 +672,7 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
+#: osha/oira/client/browser/templates/certificate-print.pt:70
 #: osha/oira/client/browser/templates/public-certificate.pt:46
 msgid "For conducting a risk assessment with the tool ${title} on ${date}."
 msgstr ""
@@ -678,7 +685,7 @@ msgstr "Formato: Office Open XML Workbook (.xlsx)"
 msgid "Format: Portable Document Format (.pdf)"
 msgstr "Formato: Portable Document Format (.pdf)"
 
-#: osha/oira/content/survey.py:126
+#: osha/oira/content/survey.py:151
 msgid "Frequency"
 msgstr "Frequenza"
 
@@ -706,7 +713,7 @@ msgstr ""
 msgid "Hide archived risk assessments"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate_macros.pt:25
+#: osha/oira/client/browser/templates/certificate_macros.pt:30
 msgid "Hide this message"
 msgstr ""
 
@@ -740,7 +747,7 @@ msgstr ""
 msgid "Identifier"
 msgstr ""
 
-#: osha/oira/content/country.py:71
+#: osha/oira/content/country.py:76
 msgid ""
 "If enabled, users will be able to obtain an official certificate of "
 "completion once they reach the threshold defined below."
@@ -809,10 +816,6 @@ msgstr ""
 
 #: osha/oira/content/browser/templates/manage-ldap-users.pt:45
 msgid "Login"
-msgstr ""
-
-#: osha/oira/client/browser/templates/certificate.pt:63
-msgid "Make public"
 msgstr ""
 
 #: euphorie/client/templates/report_landing.pt:121
@@ -921,7 +924,7 @@ msgstr ""
 msgid "Official OiRA Logo"
 msgstr ""
 
-#: osha/oira/vocabularies.py:22
+#: osha/oira/vocabularies.py:24
 msgid "OiRA Tool"
 msgstr ""
 
@@ -969,7 +972,7 @@ msgstr ""
 "disponibile sul web che permette di eseguire la valutazione dei rischi per "
 "la salute e la sicurezza sul proprio luogo di lavoro."
 
-#: osha/oira/client/browser/templates/certificate.pt:80
+#: osha/oira/client/browser/templates/certificate.pt:81
 msgid "OiRA website"
 msgstr ""
 
@@ -1021,7 +1024,7 @@ msgstr ""
 msgid "Pass information to the people concerned."
 msgstr "Trasferire le informazioni alle persone interessate."
 
-#: osha/oira/manual_translations.py:10
+#: osha/oira/manual_translations.py:11
 msgid ""
 "Please bear in mind that by changing the email address, your login name will "
 "also change."
@@ -1062,7 +1065,7 @@ msgstr ""
 msgid "Potential candidate country"
 msgstr ""
 
-#: osha/oira/content/survey.py:111
+#: osha/oira/content/survey.py:135
 msgid "Probability"
 msgstr "Probabilità"
 
@@ -1201,7 +1204,7 @@ msgid "Search for LDAP users"
 msgstr ""
 
 #. Default: "Sector"
-#: osha/oira/content/statistics.py:335
+#: osha/oira/content/statistics.py:357
 #: osha/oira/profiles/default/types/euphorie.sector.xml
 msgid "Sector"
 msgstr "Settore"
@@ -1238,7 +1241,7 @@ msgstr "Il titolo della sessione è stato modificato a ${name}"
 msgid "Setup a standard Euphorie website"
 msgstr ""
 
-#: osha/oira/content/survey.py:141
+#: osha/oira/content/survey.py:167
 msgid "Severity"
 msgstr "Gravità"
 
@@ -1279,7 +1282,7 @@ msgstr ""
 msgid "Standard solution"
 msgstr ""
 
-#: osha/oira/manual_translations.py:20
+#: osha/oira/manual_translations.py:27
 msgid "Standard solutions"
 msgstr "Misure standard"
 
@@ -1292,7 +1295,7 @@ msgstr ""
 msgid "Starting a test session is not available in this OiRA application."
 msgstr ""
 
-#: osha/oira/content/statistics.py:306
+#: osha/oira/content/statistics.py:326
 msgid "Submit"
 msgstr "Inviare"
 
@@ -1356,12 +1359,12 @@ msgstr ""
 "L'architettura di base di una valutazione interattiva online dei rischi "
 "consiste in:"
 
-#: osha/oira/client/browser/templates/public-certificate.pt:83
+#: osha/oira/client/browser/templates/public-certificate.pt:86
 msgid "The certificate you have requested is not available."
 msgstr ""
 
 #. Default: "The current text in the fields 'Action plan', 'Prevention plan' and 'Requirements' of this measure will be overwritten. This action cannot be reverted. Are you sure you want to continue?"
-#: osha/oira/manual_translations.py:18
+#: osha/oira/manual_translations.py:23
 msgid ""
 "The current text in the fields 'Action plan', 'Prevention plan' and "
 "'Requirements' of this measure will be overwritten. This action cannot be "
@@ -1424,6 +1427,7 @@ msgstr ""
 msgid "This OiRA tool was offered to you by ${external_site}"
 msgstr "Questo strumento OiRA vi viene offerto da ${external_site}"
 
+#: osha/oira/client/browser/templates/certificate-print.pt:54
 #: osha/oira/client/browser/templates/public-certificate.pt:30
 msgid "This certificate is presented to"
 msgstr ""
@@ -1537,7 +1541,7 @@ msgstr ""
 msgid "Various javascript utility methods"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate_macros.pt:53
+#: osha/oira/client/browser/templates/certificate_macros.pt:58
 #: osha/oira/client/browser/templates/status.pt:63
 msgid "View certificate"
 msgstr ""
@@ -1562,7 +1566,7 @@ msgstr "Cosa è OiRA (Online Interactive Risk Assessment)?"
 msgid "Who is the OiRA tool for?"
 msgstr "A cosa serve lo strumento OiRA?"
 
-#: osha/oira/vocabularies.py:56
+#: osha/oira/vocabularies.py:61
 msgid "Whole year"
 msgstr "Intero anno"
 
@@ -1603,7 +1607,7 @@ msgid ""
 "this risk assessment in various forms in the ${download_section}."
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate_macros.pt:37
+#: osha/oira/client/browser/templates/certificate_macros.pt:42
 #: osha/oira/client/browser/templates/status.pt:46
 msgid ""
 "You have completed ${completed} of the risk assessment. When you have "
@@ -1611,7 +1615,7 @@ msgid ""
 "certificate."
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate_macros.pt:46
+#: osha/oira/client/browser/templates/certificate_macros.pt:51
 #: osha/oira/client/browser/templates/status.pt:55
 msgid "You have earned a certificate for this tool."
 msgstr ""
@@ -1624,14 +1628,14 @@ msgstr ""
 "È necessario essere (sempre) in possesso di una valutazione del rischio "
 "stampata, accurata ed aggiornata."
 
-#: osha/oira/client/browser/templates/certificate.pt:92
+#: osha/oira/client/browser/templates/certificate.pt:93
 msgid "Your certificate for ${title} is ${site_title} on the OIRA website."
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:80
+#: osha/oira/client/browser/templates/certificate.pt:81
 msgid ""
 "Your certificate for ${title} is private unless you choose to make it "
-"public. By ticking the &ldquo;Make public&rdquo; tickbox above, your "
+"public. If you click the &ldquo;Publish&rdquo; button below, your "
 "certificate will be published on the official ${site_title}."
 msgstr ""
 
@@ -1909,12 +1913,12 @@ msgstr ""
 
 #. Default: "Cancel"
 #: osha/oira/content/browser/templates/settings.pt:67
-#: osha/oira/content/risk.py:43 osha/oira/content/solution.py:44
+#: osha/oira/content/risk.py:46 osha/oira/content/solution.py:45
 msgid "button_cancel"
 msgstr "Annullare"
 
 #. Default: "Change"
-#: osha/oira/nuplone/pwreset.py:42
+#: osha/oira/nuplone/pwreset.py:47
 msgid "button_change"
 msgstr ""
 
@@ -1970,13 +1974,12 @@ msgid "button_preview"
 msgstr ""
 
 #. Default: "Print"
-#: euphorie/client/templates/report_identification.pt:35
+#: osha/oira/client/browser/templates/certificate.pt:130
 msgid "button_print"
 msgstr ""
 
 #. Default: "Publish"
-#: euphorie/client/publish.py:256
-#: euphorie/deployment/tiles/templates/versions.pt:26
+#: osha/oira/client/browser/templates/certificate.pt:120
 msgid "button_publish"
 msgstr ""
 
@@ -1987,7 +1990,7 @@ msgstr ""
 
 #. Default: "Save changes"
 #: osha/oira/content/browser/templates/settings.pt:66
-#: osha/oira/content/risk.py:41 osha/oira/content/solution.py:43
+#: osha/oira/content/risk.py:45 osha/oira/content/solution.py:44
 msgid "button_save_changes"
 msgstr "Salvare le modifiche"
 
@@ -2014,8 +2017,7 @@ msgid "button_unlock"
 msgstr ""
 
 #. Default: "Unpublish"
-#: euphorie/content/templates/unpublish.pt:23
-#: euphorie/deployment/tiles/templates/versions.pt:34
+#: osha/oira/client/browser/templates/certificate.pt:112
 msgid "button_unpublish"
 msgstr ""
 
@@ -2263,7 +2265,7 @@ msgstr ""
 "valutazione a seguito dell’implementazione delle misure di miglioramento."
 
 #. Default: "Provide your custom explanation here, to override this default explanation: \"${default_explanation}\""
-#: osha/oira/content/survey.py:112
+#: osha/oira/content/survey.py:136
 msgid "description_criteria_explanation"
 msgstr ""
 "Puoi inserire tuoi commenti sostituendoli a quanto presente: "
@@ -2280,7 +2282,7 @@ msgid "description_measures_text_handling"
 msgstr ""
 
 #. Default: "In case you have identified risks not included in the tool, you are able to add them now:"
-#: osha/oira/upgrade/upgrade.py:190
+#: osha/oira/upgrade/upgrade.py:199
 msgid "description_other_risks"
 msgstr ""
 "Qualora siano stati identificati rischi non inclusi in questo strumento, è "
@@ -2546,17 +2548,17 @@ msgid "error_validation_before_end_date"
 msgstr "Questa data deve essere uguale o precedente alla data di fine."
 
 #. Default: "This value must be a valid date."
-#: osha/oira/manual_translations.py:33
+#: osha/oira/manual_translations.py:46
 msgid "error_validation_date"
 msgstr "Questo valore deve essere una data valida."
 
 #. Default: "This value must be a valid email address."
-#: osha/oira/manual_translations.py:34
+#: osha/oira/manual_translations.py:47
 msgid "error_validation_email"
 msgstr "Questo valore deve essere un indirizzo e-mail valido."
 
 #. Default: "This value must be a number."
-#: osha/oira/manual_translations.py:35
+#: osha/oira/manual_translations.py:48
 msgid "error_validation_number"
 msgstr "Questo valore deve essere un numero."
 
@@ -2566,7 +2568,7 @@ msgid "error_validation_positive_whole_number"
 msgstr "Questo valore deve essere un numero intero positivo."
 
 #. Default: "This value is required."
-#: osha/oira/manual_translations.py:36
+#: osha/oira/manual_translations.py:49
 msgid "error_validation_required"
 msgstr "Questo valore è obbligatorio."
 
@@ -2581,7 +2583,7 @@ msgid "evalmethod_direct"
 msgstr ""
 
 #. Default: "Skip evaluation"
-#: osha/oira/manual_translations.py:26
+#: osha/oira/manual_translations.py:36
 msgid "evalmethod_fixed"
 msgstr "Saltare valutazione"
 
@@ -2692,7 +2694,7 @@ msgid "filename_report_timeline"
 msgstr ""
 
 #. Default: "Contents of OIRA tool ${title}"
-#: osha/oira/content/survey.py:420
+#: osha/oira/content/survey.py:450
 msgid "filename_tool_contents"
 msgstr ""
 
@@ -2785,7 +2787,7 @@ msgstr ""
 "facoltativo per poi procedere."
 
 #. Default: "Account data"
-#: osha/oira/manual_translations.py:6
+#: osha/oira/manual_translations.py:7
 msgid "header_account_data"
 msgstr "Dati dell'account"
 
@@ -2880,7 +2882,7 @@ msgid "header_launch"
 msgstr ""
 
 #. Default: "Legal and policy references"
-#: osha/oira/content/survey.py:291
+#: osha/oira/content/survey.py:323
 msgid "header_legal_references"
 msgstr "Riferimenti normativi"
 
@@ -2952,8 +2954,8 @@ msgstr "Consultazione dei lavoratori"
 msgid "header_oira_report_download"
 msgstr "Rapporto OiRA: \"${title}\""
 
-#. Default: "The OiRA tool"
-#: euphorie/client/templates/default_introduction.pt:15
+#. Default: "Tool"
+#: osha/oira/client/browser/templates/certificate-print.pt:84
 msgid "header_oira_tool"
 msgstr "Lo strumento OiRA"
 
@@ -2983,7 +2985,7 @@ msgid "header_osh_tool_navigation"
 msgstr ""
 
 #. Default: "Password"
-#: osha/oira/manual_translations.py:11
+#: osha/oira/manual_translations.py:14
 msgid "header_password"
 msgstr "Password"
 
@@ -3410,7 +3412,7 @@ msgid "help__default_reports"
 msgstr ""
 
 #. Default: "This is the URL of an external site that is linked to. Clicking the logo or the name will take the user to this URL."
-#: osha/oira/content/survey.py:65
+#: osha/oira/content/survey.py:74
 msgid "help__external_site_url"
 msgstr ""
 "Questo è l'indirizzo di un sito esterno collegato. L'utente sarà inviato a "
@@ -3463,7 +3465,7 @@ msgstr ""
 "con una copia di un tool OiRA esistente."
 
 #. Default: "Indicate how often this risk occurs in a normal situation."
-#: osha/oira/content/survey.py:38
+#: osha/oira/content/survey.py:41
 msgid "help_default_frequency"
 msgstr ""
 "Indicare la frequenza che questo rischio si verifica in una situazione "
@@ -3477,19 +3479,19 @@ msgstr ""
 "L'utente finale ha poi la possibilità di modificare il grado di priorità."
 
 #. Default: "Indicate how likely occurence of this risk is in a normal situation."
-#: osha/oira/content/survey.py:35
+#: osha/oira/content/survey.py:37
 msgid "help_default_probability"
 msgstr ""
 "Indicare quanto sia possibile che questo rischio si verifichi in una "
 "situazione normale."
 
 #. Default: "Indicate the severity if this risk occurs."
-#: osha/oira/content/survey.py:41
+#: osha/oira/content/survey.py:45
 msgid "help_default_severity"
 msgstr "Indicare la gravità che questo rischio potrebbe comportare."
 
 #. Default: "Tick this option if you would like to define your own descriptions for the criteria of the evaluation algorithm. The user will see them as hints when answering the questions to calculate the priority of a risk."
-#: osha/oira/content/survey.py:98
+#: osha/oira/content/survey.py:117
 msgid "help_enable_custom_evaluation_descriptions"
 msgstr ""
 "Contrassegnare questa opzione se si desidera definire le proprie descrizioni "
@@ -3508,21 +3510,21 @@ msgid "help_evaluation_method"
 msgstr ""
 
 #. Default: "Choose between ESTIMATED (rough estimation) or CALCULATED (combination of frequency and severity) method."
-#: osha/oira/content/risk.py:26
+#: osha/oira/content/risk.py:28
 msgid "help_evaluation_method_french"
 msgstr ""
 "Scegliere tra STIMA (stima approssimativa) o metodo CALCOLATO (combinazione "
 "di frequenza e gravità)."
 
 #. Default: "Choose between ESTIMATED (rough estimation) or CALCULATED (combination of probability, frequency and severity) method."
-#: osha/oira/content/risk.py:19
+#: osha/oira/content/risk.py:20
 msgid "help_evaluation_method_kinney"
 msgstr ""
 "Scegliere tra STIMA (stima approssimativa) o metodo CALCOLATO (combinazione "
 "di probabilità, frequenza e gravità)."
 
 #. Default: "This option allows users to skip the evaluation phase."
-#: osha/oira/manual_translations.py:23
+#: osha/oira/manual_translations.py:30
 msgid "help_evaluation_optional"
 msgstr "Quest'opzione permette agli utenti di saltare la fase di valutazione."
 
@@ -3532,14 +3534,14 @@ msgid "help_existing_measures"
 msgstr ""
 
 #. Default: "Tick this option if you would like to create a hyperlink on the OiRA tool which points to an external website. The hyperlink will be in the form of a logo image."
-#: osha/oira/content/survey.py:52
+#: osha/oira/content/survey.py:58
 msgid "help_external_site_enabled"
 msgstr ""
 "Cliccare questa opzione se si desidera collegare via link lo strumento OiRA "
 "a un sito esterno. Il collegamento sarà sotto forma di un logo."
 
 #. Default: "This is the name of the external site that is linked to. It will appear next to the logo."
-#: osha/oira/content/survey.py:76
+#: osha/oira/content/survey.py:88
 msgid "help_external_site_name"
 msgstr ""
 "Questo è il nome del sito esterno collegato. Esso apparirà accanto al logo."
@@ -3606,7 +3608,7 @@ msgstr ""
 "Questo testo dovrebbe spiegare come funziona l'identificazione del rischio."
 
 #. Default: "Upload an image. Make sure your image is of format png, jpg or gif and does not contain any special characters."
-#: osha/oira/content/survey.py:86
+#: osha/oira/content/survey.py:101
 msgid "help_image_upload"
 msgstr ""
 "Caricare un'immagine. Assicurarsi che l'immagine sia in formato png, jpg o "
@@ -3758,7 +3760,7 @@ msgstr ""
 "rischio (ad esempio: L'edificio è ben curato.)"
 
 #. Default: "Level 1: Basic statistics about the use of the OiRA tool. Level 2: More detailed statistics regarding the risks"
-#: osha/oira/content/sector.py:25
+#: osha/oira/content/sector.py:28
 msgid "help_statistics_level"
 msgstr ""
 "Livello 1: Statistiche di base sull'utilizzo del tool OiRA. Livello 2: "
@@ -3888,7 +3890,7 @@ msgstr ""
 "barra degli strumenti."
 
 #. Default: "Select an earlier session to complete or review or ${start_session}."
-#: osha/oira/manual_translations.py:30
+#: osha/oira/manual_translations.py:40
 msgid "info_select_session"
 msgstr ""
 "Selezionare una sessione precedente da completare o rivedere, oppure "
@@ -4090,12 +4092,12 @@ msgid "label_account_locked"
 msgstr ""
 
 #. Default: "Action Plan"
-#: osha/oira/client/report.py:110
+#: osha/oira/client/report.py:114
 msgid "label_action_plan"
 msgstr ""
 
 #. Default: "Budget"
-#: osha/oira/client/report.py:85
+#: osha/oira/client/report.py:91
 msgid "label_action_plan_budget"
 msgstr "Budget (campo facoltativo)"
 
@@ -4182,8 +4184,10 @@ msgstr ""
 msgid "label_company_country"
 msgstr "Il vostro Paese"
 
-#. Default: "SIRET number"
-#: osha/oira/client/browser/templates/certificate_fr_specific.pt:19
+#. Default: "Company identification number"
+#: osha/oira/client/browser/templates/certificate-print.pt:90
+#: osha/oira/client/browser/templates/certificate.pt:55
+#: osha/oira/client/browser/templates/public-certificate.pt:68
 msgid "label_company_identification_number"
 msgstr ""
 
@@ -4208,7 +4212,7 @@ msgid "label_contact_person"
 msgstr ""
 
 #. Default: "Country"
-#: osha/oira/content/statistics.py:301
+#: osha/oira/content/statistics.py:321
 msgid "label_country"
 msgstr "Paese"
 
@@ -4295,7 +4299,7 @@ msgid "label_employee_numbers"
 msgstr "Numero degli impiegati"
 
 #. Default: "The criteria applied to evaluate risks are specific of this tool? (If not, the common criteria descriptions will apply)."
-#: osha/oira/content/survey.py:94
+#: osha/oira/content/survey.py:111
 msgid "label_enable_custom_evaluation_descriptions"
 msgstr ""
 "I criteri applicati per la valutazione dei rischi sono specifici di questo "
@@ -4325,7 +4329,7 @@ msgid "label_evaluation_optional"
 msgstr ""
 
 #. Default: "Evaluation phase"
-#: osha/oira/manual_translations.py:24
+#: osha/oira/manual_translations.py:34
 msgid "label_evaluation_phase"
 msgstr "Fase di valutazione"
 
@@ -4340,22 +4344,22 @@ msgid "label_expertise"
 msgstr ""
 
 #. Default: "Include a logo which links to an external website."
-#: osha/oira/content/survey.py:49
+#: osha/oira/content/survey.py:54
 msgid "label_external_site_enabled"
 msgstr "Aggiungere un link che conduce ad un sito web esterno."
 
 #. Default: "External site logo"
-#: osha/oira/content/survey.py:85
+#: osha/oira/content/survey.py:100
 msgid "label_external_site_logo"
 msgstr "Logo del sito esterno"
 
 #. Default: "External site name"
-#: osha/oira/content/survey.py:75
+#: osha/oira/content/survey.py:87
 msgid "label_external_site_name"
 msgstr "Nome del sito esterno"
 
 #. Default: "External site URL"
-#: osha/oira/content/survey.py:64
+#: osha/oira/content/survey.py:73
 msgid "label_external_site_url"
 msgstr "URL sito esterno"
 
@@ -4375,7 +4379,7 @@ msgid "label_file_caption"
 msgstr "Didascalia del contenuto"
 
 #. Default: "priority"
-#: osha/oira/manual_translations.py:27
+#: osha/oira/manual_translations.py:37
 msgid "label_fixed_priority"
 msgstr "priorità"
 
@@ -4395,7 +4399,7 @@ msgid "label_general_information"
 msgstr ""
 
 #. Default: "Global"
-#: osha/oira/content/statistics.py:381
+#: osha/oira/content/statistics.py:404
 msgid "label_global"
 msgstr "Globale"
 
@@ -4551,7 +4555,7 @@ msgid "label_measure_prevention_plan"
 msgstr "Misura specifica"
 
 #. Default: "Level of expertise and/or requirements needed"
-#: osha/oira/client/report.py:50
+#: osha/oira/client/report.py:52
 msgid "label_measure_requirements"
 msgstr "Livello di esperienza o requisiti necessari"
 
@@ -4673,7 +4677,7 @@ msgid "label_password_confirm"
 msgstr "Ripetere password"
 
 #. Default: "Period"
-#: osha/oira/content/statistics.py:42
+#: osha/oira/content/statistics.py:50
 msgid "label_period"
 msgstr "Periodo"
 
@@ -4706,7 +4710,7 @@ msgid "label_print_tool_preview"
 msgstr ""
 
 #. Default: "Negative statement"
-#: osha/oira/content/survey.py:268
+#: osha/oira/content/survey.py:300
 msgid "label_problem_description"
 msgstr "Dichiarazione negativa"
 
@@ -4783,22 +4787,22 @@ msgstr ""
 "inclusi nel Report."
 
 #. Default: "Country"
-#: osha/oira/content/statistics.py:78
+#: osha/oira/content/statistics.py:84
 msgid "label_report_countries"
 msgstr "Paese"
 
 #. Default: "Date of editing"
-#: osha/oira/client/report.py:146
+#: osha/oira/client/report.py:151
 msgid "label_report_date"
 msgstr ""
 
 #. Default: "File Format"
-#: osha/oira/content/statistics.py:97
+#: osha/oira/content/statistics.py:103
 msgid "label_report_file_format"
 msgstr "Formato del file"
 
 #. Default: "Report Period"
-#: osha/oira/content/statistics.py:92
+#: osha/oira/content/statistics.py:98
 msgid "label_report_period"
 msgstr "Periodo del rapporto"
 
@@ -4808,12 +4812,12 @@ msgid "label_report_staff"
 msgstr ""
 
 #. Default: "Tool"
-#: osha/oira/content/statistics.py:85
+#: osha/oira/content/statistics.py:91
 msgid "label_report_tools"
 msgstr "Tool"
 
 #. Default: "Report Type"
-#: osha/oira/content/statistics.py:72
+#: osha/oira/content/statistics.py:78
 msgid "label_report_type"
 msgstr "Tipo di rapporto"
 
@@ -4823,7 +4827,7 @@ msgid "label_risk_always_present"
 msgstr ""
 
 #. Default: "Risk number"
-#: osha/oira/client/report.py:60
+#: osha/oira/client/report.py:66
 msgid "label_risk_number"
 msgstr ""
 
@@ -4896,7 +4900,7 @@ msgid "label_save_and_finish"
 msgstr ""
 
 #. Default: "Section"
-#: osha/oira/client/report.py:58
+#: osha/oira/client/report.py:60
 msgid "label_section"
 msgstr ""
 
@@ -4991,7 +4995,7 @@ msgid "label_statement"
 msgstr "Dichiarazione affermativa"
 
 #. Default: "Statistics Level"
-#: osha/oira/content/sector.py:24
+#: osha/oira/content/sector.py:27
 msgid "label_statistics_level"
 msgstr "Livello delle statistiche"
 
@@ -5046,7 +5050,7 @@ msgid "label_timeline_priority_medium"
 msgstr ""
 
 #. Default: "Title"
-#: osha/oira/client/report.py:141
+#: osha/oira/client/report.py:146
 msgid "label_title"
 msgstr ""
 
@@ -5131,7 +5135,7 @@ msgid "label_workers_participated"
 msgstr "I lavoratori sono invitati a partecipare alla valutazione dei rischi"
 
 #. Default: "Year"
-#: osha/oira/content/statistics.py:37
+#: osha/oira/content/statistics.py:45
 msgid "label_year"
 msgstr "Anno"
 
@@ -5271,7 +5275,7 @@ msgid "menu_import"
 msgstr "Importare strumento OiRA"
 
 #. Default: "Statistics"
-#: osha/oira/content/sitemenu.py:39
+#: osha/oira/content/sitemenu.py:40
 msgid "menu_statistics"
 msgstr "Statistiche"
 
@@ -5338,7 +5342,7 @@ msgstr ""
 "Non è possibile eliminare un settore che contiene un tool OiRA pubblicato."
 
 #. Default: "You can not delete an OiRA tool that has been published."
-#: osha/oira/content/surveygroup.py:81
+#: osha/oira/content/surveygroup.py:86
 msgid "message_not_delete_published_surveygroup"
 msgstr "Non è possibile eliminare un tool OiRA che è già stato pubblicato."
 
@@ -5395,12 +5399,12 @@ msgid "nav_help"
 msgstr ""
 
 #. Default: "Manage country access"
-#: osha/oira/content/templates/user_mgmt.pt:64 osha/oira/tiles/tabs.py:49
+#: osha/oira/content/templates/user_mgmt.pt:64 osha/oira/tiles/tabs.py:44
 msgid "nav_ldapmanagement_country"
 msgstr ""
 
 #. Default: "Manage sector access"
-#: osha/oira/content/templates/user_mgmt.pt:44 osha/oira/tiles/tabs.py:45
+#: osha/oira/content/templates/user_mgmt.pt:44 osha/oira/tiles/tabs.py:42
 msgid "nav_ldapmanagement_sector"
 msgstr ""
 
@@ -5563,7 +5567,7 @@ msgstr ""
 "capital letter, one number and one special character (e.g. $, # or @)."
 
 #. Default: "Your password has been reset."
-#: osha/oira/nuplone/pwreset.py:88
+#: osha/oira/nuplone/pwreset.py:97
 msgid "password_reset"
 msgstr ""
 
@@ -5721,12 +5725,12 @@ msgstr "Piccolo"
 msgid "progress_indicator_title"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:92
+#: osha/oira/client/browser/templates/certificate.pt:93
 msgid "publically visible"
 msgstr ""
 
 #. Default: "<p>Would you now like to add your own defined risks to this tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks, we strongly recommend you to go first through all the previous modules, if you have not done it yet.</p><p>If you don't need to add risks, please select 'No.'</p>"
-#: osha/oira/upgrade/upgrade.py:194
+#: osha/oira/upgrade/upgrade.py:204
 msgid "question_other_risks"
 msgstr ""
 
@@ -5829,47 +5833,47 @@ msgstr ""
 "revisione del ${date}."
 
 #. Default: "Comments"
-#: osha/oira/client/report.py:94
+#: osha/oira/client/report.py:100
 msgid "report_timeline_comment"
 msgstr ""
 
 #. Default: "End date"
-#: osha/oira/client/report.py:78
+#: osha/oira/client/report.py:84
 msgid "report_timeline_end_date"
 msgstr "Data di termine"
 
 #. Default: "Measure"
-#: osha/oira/client/report.py:65
+#: osha/oira/client/report.py:71
 msgid "report_timeline_measure"
 msgstr "Misura"
 
 #. Default: "Priority"
-#: osha/oira/client/report.py:61
+#: osha/oira/client/report.py:67
 msgid "report_timeline_priority"
 msgstr ""
 
 #. Default: "Status (planned, in process, implemented)"
-#: osha/oira/client/report.py:89
+#: osha/oira/client/report.py:95
 msgid "report_timeline_progress"
 msgstr "Stato (in pianificazione, in procedimento, concluso)"
 
 #. Default: "Responsible"
-#: osha/oira/client/report.py:83
+#: osha/oira/client/report.py:89
 msgid "report_timeline_responsible"
 msgstr "Responsabile"
 
 #. Default: "Description of the risk"
-#: osha/oira/client/report.py:59
+#: osha/oira/client/report.py:64
 msgid "report_timeline_risk_title"
 msgstr ""
 
 #. Default: "Start date"
-#: osha/oira/client/report.py:73
+#: osha/oira/client/report.py:79
 msgid "report_timeline_start_date"
 msgstr ""
 
 #. Default: "Timeline"
-#: osha/oira/client/report.py:104
+#: osha/oira/client/report.py:109
 msgid "report_timeline_title"
 msgstr "Timeline"
 
@@ -6232,7 +6236,7 @@ msgid "title_import_sector_survey"
 msgstr "Importare settore e strumento OiRA"
 
 #. Default: "Added risks (by you)"
-#: osha/oira/client/report.py:224 osha/oira/upgrade/upgrade.py:189
+#: osha/oira/client/report.py:227 osha/oira/upgrade/upgrade.py:195
 msgid "title_other_risks"
 msgstr "Rischi aggiuntivi"
 
@@ -6258,7 +6262,7 @@ msgid "title_sectors"
 msgstr "Settori"
 
 #. Default: "Statistics Reporting"
-#: osha/oira/content/statistics.py:299
+#: osha/oira/content/statistics.py:320
 msgid "title_statistics"
 msgstr "Rapporto delle statistiche"
 
@@ -6268,9 +6272,7 @@ msgid "title_status_of"
 msgstr "Stato di ${survey_title}"
 
 #. Default: "OiRA - Online interactive Risk Assessment"
-#: euphorie/client/browser/country.py:263
-#: euphorie/client/browser/templates/modal-template.pt:19
-#: euphorie/client/browser/templates/webhelpers.pt:37
+#: osha/oira/client/browser/templates/certificate-print.pt:22
 msgid "title_tool"
 msgstr "OiRA - Online interactive Risk Assessment"
 

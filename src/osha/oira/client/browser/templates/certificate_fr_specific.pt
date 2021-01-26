@@ -16,14 +16,6 @@
       />
     </label>
     <label>
-      <tal:i18n i18n:translate="label_company_identification_number">SIRET number</tal:i18n>
-      <input disabled="${python: 'disabled' if view.certificate.secret else None}"
-             name="siret"
-             type="text"
-             value="${request/siret|view/certificate_json/siret|nothing}"
-      />
-    </label>
-    <label>
       <tal:i18n i18n:translate="">
       Contact name
       </tal:i18n>
@@ -38,9 +30,6 @@
   <metal:macro define-macro="extra_metadata">
     <dt i18n:translate="">Departement / Region</dt>
     <dd>${view/certificate_json/dept_or_region|nothing}</dd>
-
-    <dt i18n:translate="label_company_identification_number">SIRET number</dt>
-    <dd>${view/certificate_json/siret|nothing}</dd>
 
     <dt i18n:translate="">Contact name</dt>
     <dd>${view/certificate_json/contact|nothing}</dd>

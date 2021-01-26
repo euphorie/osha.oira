@@ -48,7 +48,9 @@ class Certificate(BrowserView):
 
         By default we expect to have a title
         """
-        return ("title",) + getattr(self.country_adapter, "extra_known_field_names", ())
+        return ("title", "company_identification_number") + getattr(
+            self.country_adapter, "extra_known_field_names", ()
+        )
 
     @property
     @memoize

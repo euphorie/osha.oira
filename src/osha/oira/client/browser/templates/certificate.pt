@@ -51,6 +51,14 @@
                              i18n:attributes="placeholder"
                       />
                     </label>
+                    <label>
+                      <tal:i18n i18n:translate="label_company_identification_number">Company identification number</tal:i18n>
+                      <input disabled="${python: 'disabled' if view.certificate.secret else None}"
+                             name="company_identification_number"
+                             type="text"
+                             value="${request/company_identification_number|view/certificate_json/company_identification_number|nothing}"
+                      />
+                    </label>
                     <metal:extra_fields use-macro="view/country_adapter/macros/extra_fields"
                                         tal:condition="nocall:view/country_adapter"
                     />
@@ -69,7 +77,7 @@
                         Your certificate for
                         <strong i18n:name="title">&ldquo;${view/session/title}&rdquo;</strong>
                         is private unless you choose to make it public.
-                        By ticking the &ldquo;Make public&rdquo; tickbox above, your certificate will be published on the official
+                        If you click the &ldquo;Publish&rdquo; button below, your certificate will be published on the official
                         <a href="https://oiraproject.eu"
                            target="_blank"
                            i18n:name="site_title"

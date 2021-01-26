@@ -58,15 +58,18 @@
             tal:condition="certificate"
         >
 
-          <dt i18n:translate="">Tool</dt>
+          <dt i18n:translate="">OiRA tool</dt>
           <dd>${view/session/title}</dd>
           <dt i18n:translate="">Country</dt>
           <dd>${python:view.session.country.upper()}</dd>
           <dt i18n:translate="">Company name</dt>
           <dd>${view/certificate/title}</dd>
 
+          <dt i18n:translate="label_company_identification_number">Company identification number</dt>
+          <dd>${view/certificate_json/company_identification_number|nothing}</dd>
           <dt i18n:translate="">Date</dt>
           <dd>${view/certificate/hr_date}</dd>
+
 
           <tal:comment condition="nothing">
           Unclear about whether to show the percentage. Might be a political decision not to.

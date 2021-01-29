@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.15 (unreleased)
+6.2.15 (2021-01-29)
 -------------------
 
 - Statistics: Added company (questionnaire).

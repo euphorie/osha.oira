@@ -4,7 +4,8 @@ Changelog
 6.2.15 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Statistics: Added company (questionnaire).
+- Statistics: Filter users by country.
 
 
 6.2.14 (2021-01-19)

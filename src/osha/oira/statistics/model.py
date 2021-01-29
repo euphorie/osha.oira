@@ -2,7 +2,6 @@
 from App.config import getConfiguration
 from euphorie.client.enum import Enum
 from sqlalchemy import create_engine
-from sqlalchemy import orm
 from sqlalchemy import schema
 from sqlalchemy import types
 from sqlalchemy.ext.declarative import declarative_base

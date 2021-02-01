@@ -8,8 +8,6 @@ from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
-from urllib.error import URLError
-from urllib.request import urlopen
 from z3c.form import button
 from z3c.form import form
 from z3c.form.browser.select import SelectFieldWidget
@@ -26,8 +24,17 @@ from zope.schema.vocabulary import SimpleVocabulary
 from zope.sqlalchemy import datamanager
 
 import logging
+import six
 import sys
 import transaction
+
+
+if six.PY2:
+    from urllib2 import URLError
+    from urllib2 import urlopen
+else:
+    from urllib.error import URLError
+    from urllib.request import urlopen
 
 
 if sys.version_info[0] >= 3:

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.16 (unreleased)
+6.2.16 (2021-02-02)
 -------------------
 
 - Statistics: Removed foreign key that caused an error.

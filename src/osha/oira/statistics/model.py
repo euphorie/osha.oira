@@ -76,7 +76,6 @@ class CompanyStatistics(Base):
     id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
     session_id = schema.Column(
         types.Integer(),
-        schema.ForeignKey("assessment.id", onupdate="CASCADE", ondelete="CASCADE"),
         nullable=False,
         index=True,
     )

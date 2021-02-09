@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-01-26 11:42+0000\n"
+"POT-Creation-Date: 2021-02-04 11:31+0000\n"
 "PO-Revision-Date: 2013-08-15 11:22+0200\n"
 "Last-Translator: xl <xl@hol.gr>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -411,11 +411,6 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate-print.pt:88
-#: osha/oira/client/browser/templates/public-certificate.pt:65
-msgid "Company name"
-msgstr "Επωνυμία επιχείρησης ή οργανισμού / επιμέρους μονάδας"
-
 #: osha/oira/client/browser/templates/certificate-print.pt:98
 #: osha/oira/client/browser/templates/public-certificate.pt:76
 msgid "Completed"
@@ -508,11 +503,6 @@ msgstr ""
 
 #: euphorie/client/templates/about.pt:181
 msgid "Creative Commons License"
-msgstr ""
-
-#: osha/oira/client/browser/templates/certificate-print.pt:93
-#: osha/oira/client/browser/templates/public-certificate.pt:70
-msgid "Date"
 msgstr ""
 
 #: osha/oira/manual_translations.py:10
@@ -919,7 +909,7 @@ msgstr ""
 
 #: osha/oira/client/browser/templates/certificate.pt:42
 msgid "Name on certificate"
-msgstr "Ονοματεπώνυμο εργοδότη στο Πιστοποιητικό"
+msgstr "Επωνυμία επιχείρησης ή οργανισμού στο Πιστοποιητικό"
 
 #: euphorie/deployment/tiles/configure.zcml:48
 msgid "Navigation tree for sector management"
@@ -956,7 +946,7 @@ msgstr ""
 
 #: osha/oira/vocabularies.py:24
 msgid "OiRA Tool"
-msgstr ""
+msgstr "Εργαλείο OiRA"
 
 #: euphorie/content/upload.py:138
 msgid "OiRA Tool import"
@@ -1473,8 +1463,7 @@ msgstr "Το παρόν εργαλείο OiRA σάς παρέχεται από $
 #: osha/oira/client/browser/templates/public-certificate.pt:30
 msgid "This certificate is presented to"
 msgstr ""
-"Με το παρόν πιστοποιείται ότι ο/η εργοδότης/-τρια της επιχείρησης ή "
-"οργανισμού / επιμέρους μονάδας με την επωνυμία"
+"Με το παρόν πιστοποιείται ότι η/ο επιχείρηση/οργανισμός με την επωνυμία"
 
 #: euphorie/client/settings.py:301
 msgid "This email address is not available."
@@ -1538,10 +1527,6 @@ msgstr "Συμβουλή"
 #: euphorie/client/browser/templates/help-menu.pt:19
 #: euphorie/client/browser/templates/user-menu.pt:30
 msgid "Toggle on screen help"
-msgstr ""
-
-#: osha/oira/client/browser/templates/public-certificate.pt:61
-msgid "Tool"
 msgstr ""
 
 #: euphorie/content/behaviour/configure.zcml:33
@@ -1673,8 +1658,8 @@ msgstr ""
 msgid "You have earned a certificate for this tool."
 msgstr ""
 "Δικαιούστε να λάβετε τώρα το Πιστοποιητικό για την εκπόνηση της Μελέτης "
-"Εκτίμησης Επαγγελματικού Κινδύνου με χρήση του παρόντος κλαδικού εργαλείου "
-"OiRA."
+"Εκτίμησης Επαγγελματικού Κινδύνου με χρήση του παρόντος κλαδικού ψηφιακού "
+"εργαλείου OiRA."
 
 #: euphorie/client/browser/templates/login.pt:125
 msgid ""
@@ -1697,10 +1682,14 @@ msgid ""
 "public. If you click the &ldquo;Publish&rdquo; button below, your "
 "certificate will be published on the official ${site_title}."
 msgstr ""
+"Το OiRA πιστοποιητικό σας “${title}” είναι για ιδιωτική χρήση, εκτός και αν "
+"εσείς επιλέξετε να το δημοσιοποιήσετε. Επιλέγοντας το κουμπί "
+"“Δημοσιοποίηση”, το πιστοποιητικό σας θα δημοσιοποιηθεί στον επίσημο "
+"ιστότοπο για το πρόγραμμα και τα εργαλεία  ${site_title}."
 
 #: osha/oira/client/browser/templates/certificate.pt:45
 msgid "Your company name"
-msgstr ""
+msgstr "Επωνυμία επιχείρησης ή οργανισμού"
 
 #: euphorie/client/settings.py:354
 msgid "Your email address has been updated."
@@ -3026,8 +3015,8 @@ msgstr "Παροχή συμβουλών στους εργαζομένους "
 msgid "header_oira_report_download"
 msgstr "Έκθεση OiRA: \"${title}"
 
-#. Default: "Tool"
-#: osha/oira/client/browser/templates/certificate-print.pt:84
+#. Default: "The OiRA tool"
+#: euphorie/client/templates/default_introduction.pt:15
 msgid "header_oira_tool"
 msgstr "Το εργαλείο OiRA"
 
@@ -4297,6 +4286,12 @@ msgstr "Χώρα σας"
 msgid "label_company_identification_number"
 msgstr "ΑΦΜ επιχείρησης ή οργανισμού"
 
+#. Default: "Company name"
+#: osha/oira/client/browser/templates/certificate-print.pt:88
+#: osha/oira/client/browser/templates/public-certificate.pt:65
+msgid "label_company_name"
+msgstr "Επωνυμία επιχείρησης ή οργανισμού / επιμέρους μονάδας"
+
 #. Default: "The risk assessment was conducted by"
 #: euphorie/client/company.py:48 euphorie/client/templates/report_company.pt:47
 msgid "label_conductor"
@@ -4341,6 +4336,12 @@ msgstr ""
 #: euphorie/deployment/tiles/templates/versions.pt:49
 msgid "label_current_published"
 msgstr ""
+
+#. Default: "Date"
+#: osha/oira/client/browser/templates/certificate-print.pt:93
+#: osha/oira/client/browser/templates/public-certificate.pt:70
+msgid "label_date"
+msgstr "Ημερομηνία"
 
 #. Default: "Default severity"
 #: euphorie/content/templates/risk_view.pt:68
@@ -4760,6 +4761,12 @@ msgstr "Όχι, απαιτούνται περισσότερα μέτρα"
 #: euphorie/content/utils.py:131
 msgid "label_not_sufficient_integrated_ap"
 msgstr ""
+
+#. Default: "OiRA tool"
+#: osha/oira/client/browser/templates/certificate-print.pt:84
+#: osha/oira/client/browser/templates/public-certificate.pt:61
+msgid "label_oira_tool"
+msgstr "Εργαλείο OiRA"
 
 #. Default: "Current Password"
 #: euphorie/client/settings.py:47
@@ -6526,18 +6533,11 @@ msgstr ""
 msgid "yes"
 msgstr ""
 
+#~ msgid "heading_certificates"
+#~ msgstr "Πιστοποιητικά"
+
 #~ msgid "Make public"
 #~ msgstr "Δημοσιοποίηση"
-
-#~ msgid ""
-#~ "Your certificate for ${title} is private unless you choose to make it "
-#~ "public. By ticking the &ldquo;Make public&rdquo; tickbox above, your "
-#~ "certificate will be published on the official ${site_title}."
-#~ msgstr ""
-#~ "Το πιστοποιητικό  σας για ${title} είναι για ιδιωτική χρήση, εκτός και αν "
-#~ "εσείς επιλέξετε να το δημοσιοποιήσετε. Επιλέγοντας το κουμπί "
-#~ "“Δημοσιοποίηση”, το πιστοποιητικό σας θα δημοσιοποιηθεί στον επίσημο "
-#~ "ιστότοπο για το πρόγραμμα και τα εργαλεία ${site_title}."
 
 #~ msgid "A new added risk has been created."
 #~ msgstr "Ένας νέος πρόσθετος κίνδυνος ενσωματώθηκε στο εργαλείο OiRA."

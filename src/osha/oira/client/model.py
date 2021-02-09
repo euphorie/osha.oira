@@ -1,4 +1,5 @@
 # coding=utf-8
+from datetime import datetime
 from euphorie.client import model
 from euphorie.client.model import metadata
 from logging import getLogger
@@ -89,6 +90,13 @@ class Certificate(model.BaseObject):
         except Exception:
             logger.error("Not a valid date %r", date)
         return u" ".join(reversed(date))
+
+    @property
+    def hr_date_plain(self):
+        date = self.json_data.get("date", u"")
+        if not date:
+            return u""
+        return datetime.strptime(date, "%Y-%m-%d")
 
 
 _instrumented = False

@@ -73,9 +73,9 @@
 
                   <article class="pat-rich">
                     <tal:private condition="not:view/certificate/secret">
-                      <p i18n:translate="">
+                      <p i18n:translate="info_certificate_is_private">
                         Your certificate for
-                        <strong i18n:name="title">&ldquo;${view/session/title}&rdquo;</strong>
+                        &ldquo;<strong i18n:name="title">${view/session/title}</strong>&rdquo;
                         is private unless you choose to make it public.
                         If you click the &ldquo;Publish&rdquo; button below, your certificate will be published on the official
                         <a href="https://oiraproject.eu"
@@ -86,9 +86,9 @@
                       </p>
                     </tal:private>
                     <tal:public condition="view/certificate/secret">
-                      <p i18n:translate="">
+                      <p i18n:translate="info_certificate_is_public">
                         Your certificate for
-                        <strong i18n:name="title">&ldquo;${view/session/title}&rdquo;</strong>
+                        &ldquo;<strong i18n:name="title">${view/session/title}</strong>&rdquo;
                         is
                         <a href="${view/public_server_url}/${view/language}/certificates?id=${view/certificate/secret}"
                            target="_blank"

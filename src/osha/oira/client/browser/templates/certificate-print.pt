@@ -65,11 +65,9 @@
              i18n:translate=""
           >
             For conducting a risk assessment with the tool
-            <strong class="certificate-tool-name"
+            &ldquo;<strong class="certificate-tool-name"
                     i18n:name="title"
-            >
-            &ldquo;${view/session/title}&rdquo;
-            </strong>
+            >${view/session/title}</strong>&rdquo;
             on
             <time class="certificate-date pat-display-time"
                   datetime="${value}"

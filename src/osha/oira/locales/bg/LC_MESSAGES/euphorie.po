@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.1dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-01-26 11:42+0000\n"
+"POT-Creation-Date: 2021-02-10 11:32+0000\n"
 "PO-Revision-Date: 2013-08-15 11:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: bg <LL@li.org>\n"
@@ -30,8 +30,8 @@ msgstr ""
 "вероятно да са Ви необходими.  Въз основа на тази информация на следващия "
 "етап автоматично се генерира доклад."
 
-#: osha/oira/client/browser/templates/certificate-print.pt:57
-#: osha/oira/client/browser/templates/public-certificate.pt:33
+#: osha/oira/client/browser/templates/certificate-print.pt:60
+#: osha/oira/client/browser/templates/public-certificate.pt:36
 msgid "${certificate/title}"
 msgstr ""
 
@@ -358,8 +358,8 @@ msgstr ""
 msgid "Candidate country"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate-print.pt:51
-#: osha/oira/client/browser/templates/public-certificate.pt:27
+#: osha/oira/client/browser/templates/certificate-print.pt:54
+#: osha/oira/client/browser/templates/public-certificate.pt:30
 msgid "Certificate"
 msgstr ""
 
@@ -399,13 +399,8 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate-print.pt:88
-#: osha/oira/client/browser/templates/public-certificate.pt:65
-msgid "Company name"
-msgstr ""
-
-#: osha/oira/client/browser/templates/certificate-print.pt:98
-#: osha/oira/client/browser/templates/public-certificate.pt:76
+#: osha/oira/client/browser/templates/certificate-print.pt:112
+#: osha/oira/client/browser/templates/public-certificate.pt:90
 msgid "Completed"
 msgstr ""
 
@@ -466,8 +461,8 @@ msgid ""
 "you've conducted this risk assessment."
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate-print.pt:86
-#: osha/oira/client/browser/templates/public-certificate.pt:63
+#: osha/oira/client/browser/templates/certificate-print.pt:92
+#: osha/oira/client/browser/templates/public-certificate.pt:69
 #: osha/oira/vocabularies.py:29
 msgid "Country"
 msgstr "Държава"
@@ -490,11 +485,6 @@ msgstr ""
 
 #: euphorie/client/templates/about.pt:181
 msgid "Creative Commons License"
-msgstr ""
-
-#: osha/oira/client/browser/templates/certificate-print.pt:93
-#: osha/oira/client/browser/templates/public-certificate.pt:70
-msgid "Date"
 msgstr ""
 
 #: osha/oira/manual_translations.py:10
@@ -673,9 +663,11 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate-print.pt:70
-#: osha/oira/client/browser/templates/public-certificate.pt:46
-msgid "For conducting a risk assessment with the tool ${title} on ${date}."
+#: osha/oira/client/browser/templates/certificate-print.pt:71
+#: osha/oira/client/browser/templates/public-certificate.pt:47
+msgid ""
+"For conducting a risk assessment with the tool &ldquo;${title}&rdquo; on "
+"${date}."
 msgstr ""
 
 #: euphorie/client/templates/report_landing.pt:115
@@ -1367,7 +1359,7 @@ msgstr ""
 "Основната структура на Инструмента за онлайн интерактивна оценка на риска се "
 "състои от:"
 
-#: osha/oira/client/browser/templates/public-certificate.pt:86
+#: osha/oira/client/browser/templates/public-certificate.pt:100
 msgid "The certificate you have requested is not available."
 msgstr ""
 
@@ -1434,8 +1426,8 @@ msgstr ""
 msgid "This OiRA tool was offered to you by ${external_site}"
 msgstr "Този инструмент OiRA Ви беше предложен от ${external_site}"
 
-#: osha/oira/client/browser/templates/certificate-print.pt:54
-#: osha/oira/client/browser/templates/public-certificate.pt:30
+#: osha/oira/client/browser/templates/certificate-print.pt:57
+#: osha/oira/client/browser/templates/public-certificate.pt:33
 msgid "This certificate is presented to"
 msgstr ""
 
@@ -1499,10 +1491,6 @@ msgstr "Съвет"
 #: euphorie/client/browser/templates/help-menu.pt:19
 #: euphorie/client/browser/templates/user-menu.pt:30
 msgid "Toggle on screen help"
-msgstr ""
-
-#: osha/oira/client/browser/templates/public-certificate.pt:61
-msgid "Tool"
 msgstr ""
 
 #: euphorie/content/behaviour/configure.zcml:33
@@ -1644,17 +1632,6 @@ msgid ""
 msgstr ""
 "Уверете се, че разполагате с разпечатана, точна и актуализирана оценка за "
 "риска (по всяко време)."
-
-#: osha/oira/client/browser/templates/certificate.pt:93
-msgid "Your certificate for ${title} is ${site_title} on the OIRA website."
-msgstr ""
-
-#: osha/oira/client/browser/templates/certificate.pt:81
-msgid ""
-"Your certificate for ${title} is private unless you choose to make it "
-"public. If you click the &ldquo;Publish&rdquo; button below, your "
-"certificate will be published on the official ${site_title}."
-msgstr ""
 
 #: osha/oira/client/browser/templates/certificate.pt:45
 msgid "Your company name"
@@ -2983,8 +2960,8 @@ msgstr "Консултиране с работниците"
 msgid "header_oira_report_download"
 msgstr "OiRA доклад: \"${title}"
 
-#. Default: "Tool"
-#: osha/oira/client/browser/templates/certificate-print.pt:84
+#. Default: "The OiRA tool"
+#: euphorie/client/templates/default_introduction.pt:15
 msgid "header_oira_tool"
 msgstr "Инструментът OiRA"
 
@@ -3841,6 +3818,16 @@ msgstr ""
 "опитайте отново или ${request_an_email_reminder} за Вашата информация за "
 "вход."
 
+#. Default: "Your certificate for &ldquo;${title}&rdquo; is private unless you choose to make it public. If you click the &ldquo;Publish&rdquo; button below, your certificate will be published on the official ${site_title}."
+#: osha/oira/client/browser/templates/certificate.pt:81
+msgid "info_certificate_is_private"
+msgstr ""
+
+#. Default: "Your certificate for &ldquo;${title}&rdquo; is ${site_title} on the OIRA website."
+#: osha/oira/client/browser/templates/certificate.pt:93
+msgid "info_certificate_is_public"
+msgstr ""
+
 #. Default: "The menu toggle lets you hide and show the risk assessment browser to find previously made risk assessments. Hide the menu when you are concentrating on making a risk assessment or show it when you are clicking about between various parts of the application."
 #: euphorie/client/templates/tooltips.pt:46
 msgid "info_osh_hamburger"
@@ -4215,10 +4202,16 @@ msgid "label_company_country"
 msgstr "Вашата страна"
 
 #. Default: "Company identification number"
-#: osha/oira/client/browser/templates/certificate-print.pt:90
+#: osha/oira/client/browser/templates/certificate-print.pt:96
 #: osha/oira/client/browser/templates/certificate.pt:55
-#: osha/oira/client/browser/templates/public-certificate.pt:68
+#: osha/oira/client/browser/templates/public-certificate.pt:74
 msgid "label_company_identification_number"
+msgstr ""
+
+#. Default: "Company name"
+#: osha/oira/client/browser/templates/certificate-print.pt:94
+#: osha/oira/client/browser/templates/public-certificate.pt:71
+msgid "label_company_name"
 msgstr ""
 
 #. Default: "The risk assessment was conducted by"
@@ -4264,6 +4257,12 @@ msgstr ""
 #. Default: "Current / Published"
 #: euphorie/deployment/tiles/templates/versions.pt:49
 msgid "label_current_published"
+msgstr ""
+
+#. Default: "Date"
+#: osha/oira/client/browser/templates/certificate-print.pt:99
+#: osha/oira/client/browser/templates/public-certificate.pt:76
+msgid "label_date"
 msgstr ""
 
 #. Default: "Default severity"
@@ -4681,6 +4680,12 @@ msgstr ""
 #. Default: "No, more measures are required <strong>(to be added below)</strong>"
 #: euphorie/content/utils.py:131
 msgid "label_not_sufficient_integrated_ap"
+msgstr ""
+
+#. Default: "OiRA tool"
+#: osha/oira/client/browser/templates/certificate-print.pt:90
+#: osha/oira/client/browser/templates/public-certificate.pt:67
+msgid "label_oira_tool"
 msgstr ""
 
 #. Default: "Current Password"

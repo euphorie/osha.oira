@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.23.dev0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-01-26 11:42+0000\n"
+"POT-Creation-Date: 2021-02-10 11:32+0000\n"
 "PO-Revision-Date: 2013-08-15 11:33+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,8 +30,8 @@ msgstr ""
 "necessários. A ferramenta pode elaborar automaticamente um relatório da "
 "avaliação de riscos."
 
-#: osha/oira/client/browser/templates/certificate-print.pt:57
-#: osha/oira/client/browser/templates/public-certificate.pt:33
+#: osha/oira/client/browser/templates/certificate-print.pt:60
+#: osha/oira/client/browser/templates/public-certificate.pt:36
 msgid "${certificate/title}"
 msgstr ""
 
@@ -356,10 +356,10 @@ msgstr ""
 msgid "Candidate country"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate-print.pt:51
-#: osha/oira/client/browser/templates/public-certificate.pt:27
+#: osha/oira/client/browser/templates/certificate-print.pt:54
+#: osha/oira/client/browser/templates/public-certificate.pt:30
 msgid "Certificate"
-msgstr ""
+msgstr "Certificado"
 
 #: osha/oira/content/country.py:104
 msgid "Certificate completion threshold (in percent)"
@@ -397,13 +397,8 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate-print.pt:88
-#: osha/oira/client/browser/templates/public-certificate.pt:65
-msgid "Company name"
-msgstr ""
-
-#: osha/oira/client/browser/templates/certificate-print.pt:98
-#: osha/oira/client/browser/templates/public-certificate.pt:76
+#: osha/oira/client/browser/templates/certificate-print.pt:112
+#: osha/oira/client/browser/templates/public-certificate.pt:90
 msgid "Completed"
 msgstr ""
 
@@ -463,11 +458,11 @@ msgid ""
 "Copy the following link to anyone to whom it may concern as proof that "
 "you've conducted this risk assessment."
 msgstr ""
-"Copie o link a seguir para qualquer pessoa a quem possa interessar como "
-"prova de que fez esta avaliação de risco."
+"Copie o link que se segue para provar a quem possa interessar que realizou "
+"esta avaliação de riscos."
 
-#: osha/oira/client/browser/templates/certificate-print.pt:86
-#: osha/oira/client/browser/templates/public-certificate.pt:63
+#: osha/oira/client/browser/templates/certificate-print.pt:92
+#: osha/oira/client/browser/templates/public-certificate.pt:69
 #: osha/oira/vocabularies.py:29
 msgid "Country"
 msgstr "País"
@@ -490,11 +485,6 @@ msgstr ""
 
 #: euphorie/client/templates/about.pt:181
 msgid "Creative Commons License"
-msgstr ""
-
-#: osha/oira/client/browser/templates/certificate-print.pt:93
-#: osha/oira/client/browser/templates/public-certificate.pt:70
-msgid "Date"
 msgstr ""
 
 #: osha/oira/manual_translations.py:10
@@ -673,10 +663,14 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate-print.pt:70
-#: osha/oira/client/browser/templates/public-certificate.pt:46
-msgid "For conducting a risk assessment with the tool ${title} on ${date}."
+#: osha/oira/client/browser/templates/certificate-print.pt:71
+#: osha/oira/client/browser/templates/public-certificate.pt:47
+msgid ""
+"For conducting a risk assessment with the tool &ldquo;${title}&rdquo; on "
+"${date}."
 msgstr ""
+"Por ter realizado a sua avaliação de riscos com a ferramenta “${title}” em "
+"${date}."
 
 #: euphorie/client/templates/report_landing.pt:115
 msgid "Format: Office Open XML Workbook (.xlsx)"
@@ -975,7 +969,7 @@ msgstr ""
 
 #: osha/oira/client/browser/templates/certificate.pt:81
 msgid "OiRA website"
-msgstr ""
+msgstr "sítio oficial OiRA"
 
 #: euphorie/content/profiles/default/workflows/sector/definition.xml
 msgid ""
@@ -1362,7 +1356,7 @@ msgstr ""
 "A arquitetura de base de um instrumento interativo em linha de avaliação de "
 "risco consiste em:"
 
-#: osha/oira/client/browser/templates/public-certificate.pt:86
+#: osha/oira/client/browser/templates/public-certificate.pt:100
 msgid "The certificate you have requested is not available."
 msgstr ""
 
@@ -1429,10 +1423,10 @@ msgstr ""
 msgid "This OiRA tool was offered to you by ${external_site}"
 msgstr "Esta ferramenta OiRA foi-lhe oferecida por ${external_site}"
 
-#: osha/oira/client/browser/templates/certificate-print.pt:54
-#: osha/oira/client/browser/templates/public-certificate.pt:30
+#: osha/oira/client/browser/templates/certificate-print.pt:57
+#: osha/oira/client/browser/templates/public-certificate.pt:33
 msgid "This certificate is presented to"
-msgstr ""
+msgstr "Este certificado é emitido à"
 
 #: euphorie/client/settings.py:301
 msgid "This email address is not available."
@@ -1495,10 +1489,6 @@ msgstr "Dica"
 #: euphorie/client/browser/templates/help-menu.pt:19
 #: euphorie/client/browser/templates/user-menu.pt:30
 msgid "Toggle on screen help"
-msgstr ""
-
-#: osha/oira/client/browser/templates/public-certificate.pt:61
-msgid "Tool"
 msgstr ""
 
 #: euphorie/content/behaviour/configure.zcml:33
@@ -1631,17 +1621,6 @@ msgid ""
 "You have to make sure to be in possession of a printed, accurate and up-"
 "dated risk assessment (at any time)."
 msgstr "Assegure-se sempre de que dispõe de uma versão impressa, atualizada."
-
-#: osha/oira/client/browser/templates/certificate.pt:93
-msgid "Your certificate for ${title} is ${site_title} on the OIRA website."
-msgstr "O certificado para ${title} está ou é ${site_title} no site OIRA."
-
-#: osha/oira/client/browser/templates/certificate.pt:81
-msgid ""
-"Your certificate for ${title} is private unless you choose to make it "
-"public. If you click the &ldquo;Publish&rdquo; button below, your "
-"certificate will be published on the official ${site_title}."
-msgstr ""
 
 #: osha/oira/client/browser/templates/certificate.pt:45
 msgid "Your company name"
@@ -2969,8 +2948,8 @@ msgstr "Consulta aos trabalhadores"
 msgid "header_oira_report_download"
 msgstr "Relatório OiRA: \"${title}"
 
-#. Default: "Tool"
-#: osha/oira/client/browser/templates/certificate-print.pt:84
+#. Default: "The OiRA tool"
+#: euphorie/client/templates/default_introduction.pt:15
 msgid "header_oira_tool"
 msgstr "A ferramenta OiRA"
 
@@ -3820,6 +3799,20 @@ msgstr ""
 "Verifique os mesmos e tente novamente ou ${request_an_email_reminder} da sua "
 "informação de login."
 
+#. Default: "Your certificate for &ldquo;${title}&rdquo; is private unless you choose to make it public. If you click the &ldquo;Publish&rdquo; button below, your certificate will be published on the official ${site_title}."
+#: osha/oira/client/browser/templates/certificate.pt:81
+msgid "info_certificate_is_private"
+msgstr ""
+"O seu certificado para “${title}” é confidencial, a menos que opte por torná-"
+"lo público. Se clicar no botão “Publicar” abaixo, o seu certificado será "
+"publicado no ${site_title}."
+
+#. Default: "Your certificate for &ldquo;${title}&rdquo; is ${site_title} on the OIRA website."
+#: osha/oira/client/browser/templates/certificate.pt:93
+msgid "info_certificate_is_public"
+msgstr ""
+"O seu certificado para “${title}” está ${site_title} no sítio oficial OiRA."
+
 #. Default: "The menu toggle lets you hide and show the risk assessment browser to find previously made risk assessments. Hide the menu when you are concentrating on making a risk assessment or show it when you are clicking about between various parts of the application."
 #: euphorie/client/templates/tooltips.pt:46
 msgid "info_osh_hamburger"
@@ -4192,11 +4185,17 @@ msgid "label_company_country"
 msgstr "O seu país"
 
 #. Default: "Company identification number"
-#: osha/oira/client/browser/templates/certificate-print.pt:90
+#: osha/oira/client/browser/templates/certificate-print.pt:96
 #: osha/oira/client/browser/templates/certificate.pt:55
-#: osha/oira/client/browser/templates/public-certificate.pt:68
+#: osha/oira/client/browser/templates/public-certificate.pt:74
 msgid "label_company_identification_number"
-msgstr ""
+msgstr "Número de Identificação de Pessoa Coletiva (NIPC)"
+
+#. Default: "Company name"
+#: osha/oira/client/browser/templates/certificate-print.pt:94
+#: osha/oira/client/browser/templates/public-certificate.pt:71
+msgid "label_company_name"
+msgstr "Nome da empresa"
 
 #. Default: "The risk assessment was conducted by"
 #: euphorie/client/company.py:48 euphorie/client/templates/report_company.pt:47
@@ -4242,6 +4241,12 @@ msgstr ""
 #: euphorie/deployment/tiles/templates/versions.pt:49
 msgid "label_current_published"
 msgstr ""
+
+#. Default: "Date"
+#: osha/oira/client/browser/templates/certificate-print.pt:99
+#: osha/oira/client/browser/templates/public-certificate.pt:76
+msgid "label_date"
+msgstr "Data"
 
 #. Default: "Default severity"
 #: euphorie/content/templates/risk_view.pt:68
@@ -4655,6 +4660,12 @@ msgstr "Não, são necessárias mais medidas"
 #. Default: "No, more measures are required <strong>(to be added below)</strong>"
 #: euphorie/content/utils.py:131
 msgid "label_not_sufficient_integrated_ap"
+msgstr ""
+
+#. Default: "OiRA tool"
+#: osha/oira/client/browser/templates/certificate-print.pt:90
+#: osha/oira/client/browser/templates/public-certificate.pt:67
+msgid "label_oira_tool"
 msgstr ""
 
 #. Default: "Current Password"
@@ -5727,11 +5738,11 @@ msgstr "Pequena"
 #. Default: "${completion_percentage}% Complete"
 #: euphorie/client/browser/webhelpers.py:278
 msgid "progress_indicator_title"
-msgstr ""
+msgstr "${completion_percentage}% concluído"
 
 #: osha/oira/client/browser/templates/certificate.pt:93
 msgid "publically visible"
-msgstr "divulgado"
+msgstr "publicamente visível"
 
 #. Default: "<p>Would you now like to add your own defined risks to this tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks, we strongly recommend you to go first through all the previous modules, if you have not done it yet.</p><p>If you don't need to add risks, please select 'No.'</p>"
 #: osha/oira/upgrade/upgrade.py:204
@@ -6391,6 +6402,9 @@ msgstr ""
 #: euphorie/content/templates/risk_view.pt:44
 msgid "yes"
 msgstr ""
+
+#~ msgid "Your certificate for ${title} is ${site_title} on the OIRA website."
+#~ msgstr "O certificado para ${title} está ou é ${site_title} no site OIRA."
 
 #~ msgid "Make public"
 #~ msgstr "Tornar público"

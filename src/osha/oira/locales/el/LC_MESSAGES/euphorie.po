@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Euphorie 2.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-02-04 11:31+0000\n"
+"POT-Creation-Date: 2021-02-10 11:32+0000\n"
 "PO-Revision-Date: 2013-08-15 11:22+0200\n"
 "Last-Translator: xl <xl@hol.gr>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -36,8 +36,8 @@ msgstr ""
 "βήμα  θα συνταχθεί αυτόματα από το εργαλείο η έκθεση (μελέτη Εκτίμησης "
 "Κινδύνου)."
 
-#: osha/oira/client/browser/templates/certificate-print.pt:57
-#: osha/oira/client/browser/templates/public-certificate.pt:33
+#: osha/oira/client/browser/templates/certificate-print.pt:60
+#: osha/oira/client/browser/templates/public-certificate.pt:36
 msgid "${certificate/title}"
 msgstr ""
 
@@ -370,8 +370,8 @@ msgstr ""
 msgid "Candidate country"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate-print.pt:51
-#: osha/oira/client/browser/templates/public-certificate.pt:27
+#: osha/oira/client/browser/templates/certificate-print.pt:54
+#: osha/oira/client/browser/templates/public-certificate.pt:30
 msgid "Certificate"
 msgstr "Πιστοποιητικό"
 
@@ -411,8 +411,8 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate-print.pt:98
-#: osha/oira/client/browser/templates/public-certificate.pt:76
+#: osha/oira/client/browser/templates/certificate-print.pt:112
+#: osha/oira/client/browser/templates/public-certificate.pt:90
 msgid "Completed"
 msgstr ""
 
@@ -479,8 +479,8 @@ msgstr ""
 "την επιχείρηση ή τον οργανισμό σας, με χρήση του παρόντος κλαδικού εργαλείου "
 "OiRA."
 
-#: osha/oira/client/browser/templates/certificate-print.pt:86
-#: osha/oira/client/browser/templates/public-certificate.pt:63
+#: osha/oira/client/browser/templates/certificate-print.pt:92
+#: osha/oira/client/browser/templates/public-certificate.pt:69
 #: osha/oira/vocabularies.py:29
 msgid "Country"
 msgstr "Χώρα"
@@ -681,12 +681,14 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate-print.pt:70
-#: osha/oira/client/browser/templates/public-certificate.pt:46
-msgid "For conducting a risk assessment with the tool ${title} on ${date}."
+#: osha/oira/client/browser/templates/certificate-print.pt:71
+#: osha/oira/client/browser/templates/public-certificate.pt:47
+msgid ""
+"For conducting a risk assessment with the tool &ldquo;${title}&rdquo; on "
+"${date}."
 msgstr ""
 "Ολοκλήρωσε την εκπόνηση της Μελέτης Εκτίμησης Επαγγελματικού Κινδύνου με το "
-"κλαδικό ψηφιακό εργαλείο ${title} την ${date}."
+"κλαδικό ψηφιακό εργαλείο “${title}” την ${date}."
 
 #: euphorie/client/templates/report_landing.pt:115
 msgid "Format: Office Open XML Workbook (.xlsx)"
@@ -998,7 +1000,7 @@ msgstr ""
 
 #: osha/oira/client/browser/templates/certificate.pt:81
 msgid "OiRA website"
-msgstr ""
+msgstr "επίσημο ιστότοπο"
 
 #: euphorie/content/profiles/default/workflows/sector/definition.xml
 msgid ""
@@ -1388,7 +1390,7 @@ msgstr ""
 "Η βασική αρχιτεκτονική μιας επιγραμμικής διαδραστικής εκτίμησης κινδύνου "
 "αποτελείται από:"
 
-#: osha/oira/client/browser/templates/public-certificate.pt:86
+#: osha/oira/client/browser/templates/public-certificate.pt:100
 msgid "The certificate you have requested is not available."
 msgstr ""
 
@@ -1459,8 +1461,8 @@ msgstr ""
 msgid "This OiRA tool was offered to you by ${external_site}"
 msgstr "Το παρόν εργαλείο OiRA σάς παρέχεται από ${external_site}"
 
-#: osha/oira/client/browser/templates/certificate-print.pt:54
-#: osha/oira/client/browser/templates/public-certificate.pt:30
+#: osha/oira/client/browser/templates/certificate-print.pt:57
+#: osha/oira/client/browser/templates/public-certificate.pt:33
 msgid "This certificate is presented to"
 msgstr ""
 "Με το παρόν πιστοποιείται ότι η/ο επιχείρηση/οργανισμός με την επωνυμία"
@@ -1669,23 +1671,6 @@ msgstr ""
 "Σε κάθε περίπτωση, πρέπει να βεβαιωθείτε ότι έχετε ανά πάσα στιγμή στη "
 "διάθεσή σας μιαν τυπωμένη, αξιόπιστη, ολοκληρωμένη ως προς το περιεχόμενό "
 "της και επικαιροποιημένη μελέτη Εκτίμησης Κινδύνου (νομική απαίτηση)."
-
-#: osha/oira/client/browser/templates/certificate.pt:93
-msgid "Your certificate for ${title} is ${site_title} on the OIRA website."
-msgstr ""
-"Το πιστοποιητικό  σας για ${title} έχει ${site_title} στον επίσημο ιστότοπο "
-"για το πρόγραμμα και τα εργαλεία OIRA."
-
-#: osha/oira/client/browser/templates/certificate.pt:81
-msgid ""
-"Your certificate for ${title} is private unless you choose to make it "
-"public. If you click the &ldquo;Publish&rdquo; button below, your "
-"certificate will be published on the official ${site_title}."
-msgstr ""
-"Το OiRA πιστοποιητικό σας “${title}” είναι για ιδιωτική χρήση, εκτός και αν "
-"εσείς επιλέξετε να το δημοσιοποιήσετε. Επιλέγοντας το κουμπί "
-"“Δημοσιοποίηση”, το πιστοποιητικό σας θα δημοσιοποιηθεί στον επίσημο "
-"ιστότοπο για το πρόγραμμα και τα εργαλεία  ${site_title}."
 
 #: osha/oira/client/browser/templates/certificate.pt:45
 msgid "Your company name"
@@ -3900,6 +3885,22 @@ msgstr ""
 "Παρακαλώ ελέγξτε και προσπαθήστε ξανά ή ${request_an_email_reminder} σχετικά "
 "με τα στοιχεία σύνδεσής σας."
 
+#. Default: "Your certificate for &ldquo;${title}&rdquo; is private unless you choose to make it public. If you click the &ldquo;Publish&rdquo; button below, your certificate will be published on the official ${site_title}."
+#: osha/oira/client/browser/templates/certificate.pt:81
+msgid "info_certificate_is_private"
+msgstr ""
+"Το OiRA πιστοποιητικό σας “${title}” είναι για ιδιωτική χρήση, εκτός και αν "
+"εσείς επιλέξετε να το δημοσιοποιήσετε. Επιλέγοντας το κουμπί "
+"“Δημοσιοποίηση”, το πιστοποιητικό σας θα δημοσιοποιηθεί στον ${site_title} "
+"για το πρόγραμμα και τα εργαλεία OIRA."
+
+#. Default: "Your certificate for &ldquo;${title}&rdquo; is ${site_title} on the OIRA website."
+#: osha/oira/client/browser/templates/certificate.pt:93
+msgid "info_certificate_is_public"
+msgstr ""
+"Το πιστοποιητικό σας για “${title}” έχει ${site_title} στον επίσημο ιστότοπο "
+"για το πρόγραμμα και τα εργαλεία OIRA."
+
 #. Default: "The menu toggle lets you hide and show the risk assessment browser to find previously made risk assessments. Hide the menu when you are concentrating on making a risk assessment or show it when you are clicking about between various parts of the application."
 #: euphorie/client/templates/tooltips.pt:46
 msgid "info_osh_hamburger"
@@ -4280,15 +4281,15 @@ msgid "label_company_country"
 msgstr "Χώρα σας"
 
 #. Default: "Company identification number"
-#: osha/oira/client/browser/templates/certificate-print.pt:90
+#: osha/oira/client/browser/templates/certificate-print.pt:96
 #: osha/oira/client/browser/templates/certificate.pt:55
-#: osha/oira/client/browser/templates/public-certificate.pt:68
+#: osha/oira/client/browser/templates/public-certificate.pt:74
 msgid "label_company_identification_number"
 msgstr "ΑΦΜ επιχείρησης ή οργανισμού"
 
 #. Default: "Company name"
-#: osha/oira/client/browser/templates/certificate-print.pt:88
-#: osha/oira/client/browser/templates/public-certificate.pt:65
+#: osha/oira/client/browser/templates/certificate-print.pt:94
+#: osha/oira/client/browser/templates/public-certificate.pt:71
 msgid "label_company_name"
 msgstr "Επωνυμία επιχείρησης ή οργανισμού / επιμέρους μονάδας"
 
@@ -4338,8 +4339,8 @@ msgid "label_current_published"
 msgstr ""
 
 #. Default: "Date"
-#: osha/oira/client/browser/templates/certificate-print.pt:93
-#: osha/oira/client/browser/templates/public-certificate.pt:70
+#: osha/oira/client/browser/templates/certificate-print.pt:99
+#: osha/oira/client/browser/templates/public-certificate.pt:76
 msgid "label_date"
 msgstr "Ημερομηνία"
 
@@ -4763,8 +4764,8 @@ msgid "label_not_sufficient_integrated_ap"
 msgstr ""
 
 #. Default: "OiRA tool"
-#: osha/oira/client/browser/templates/certificate-print.pt:84
-#: osha/oira/client/browser/templates/public-certificate.pt:61
+#: osha/oira/client/browser/templates/certificate-print.pt:90
+#: osha/oira/client/browser/templates/public-certificate.pt:67
 msgid "label_oira_tool"
 msgstr "Εργαλείο OiRA"
 
@@ -5853,7 +5854,7 @@ msgstr "Χαμηλή"
 #. Default: "${completion_percentage}% Complete"
 #: euphorie/client/browser/webhelpers.py:278
 msgid "progress_indicator_title"
-msgstr ""
+msgstr "Έχετε ολοκληρώσει τη μελέτη σε ποσοστό ${completion_percentage}%"
 
 #: osha/oira/client/browser/templates/certificate.pt:93
 msgid "publically visible"
@@ -6532,6 +6533,26 @@ msgstr ""
 #: euphorie/content/templates/risk_view.pt:44
 msgid "yes"
 msgstr ""
+
+#~ msgid "For conducting a risk assessment with the tool ${title} on ${date}."
+#~ msgstr ""
+#~ "Ολοκλήρωσε την εκπόνηση της Μελέτης Εκτίμησης Επαγγελματικού Κινδύνου με "
+#~ "το κλαδικό ψηφιακό εργαλείο ${title} την ${date}."
+
+#~ msgid "Your certificate for ${title} is ${site_title} on the OIRA website."
+#~ msgstr ""
+#~ "Το πιστοποιητικό  σας για ${title} έχει ${site_title} στον επίσημο "
+#~ "ιστότοπο για το πρόγραμμα και τα εργαλεία OIRA."
+
+#~ msgid ""
+#~ "Your certificate for ${title} is private unless you choose to make it "
+#~ "public. If you click the &ldquo;Publish&rdquo; button below, your "
+#~ "certificate will be published on the official ${site_title}."
+#~ msgstr ""
+#~ "Το OiRA πιστοποιητικό σας “${title}” είναι για ιδιωτική χρήση, εκτός και "
+#~ "αν εσείς επιλέξετε να το δημοσιοποιήσετε. Επιλέγοντας το κουμπί "
+#~ "“Δημοσιοποίηση”, το πιστοποιητικό σας θα δημοσιοποιηθεί στον επίσημο "
+#~ "ιστότοπο για το πρόγραμμα και τα εργαλεία  ${site_title}."
 
 #~ msgid "heading_certificates"
 #~ msgstr "Πιστοποιητικά"

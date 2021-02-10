@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.17 (unreleased)
+6.2.17 (2021-02-10)
 -------------------
 
 - Certificate: better localized date formatting (pat-display-time)

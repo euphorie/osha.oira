@@ -67,7 +67,7 @@
             For conducting a risk assessment with the tool
             &ldquo;<strong class="certificate-tool-name"
                     i18n:name="title"
-            >${view/session/title}</strong>&rdquo;
+            >${view/tool_name}</strong>&rdquo;
             on
             <time class="certificate-date pat-display-time"
                   datetime="${value}"
@@ -89,7 +89,7 @@
         >
 
           <dt i18n:translate="label_oira_tool">OiRA tool</dt>
-          <dd>${view/session/title}</dd>
+          <dd>${view/tool_name}</dd>
           <dt i18n:translate="">Country</dt>
           <dd>${python:view.session.country.upper()}</dd>
           <dt i18n:translate="label_company_name">Company name</dt>

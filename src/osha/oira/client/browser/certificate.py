@@ -120,6 +120,10 @@ class Certificate(BrowserView):
         return self.webhelpers.traversed_session.absolute_url()
 
     @property
+    def tool_name(self):
+        return self.webhelpers.tool_name
+
+    @property
     @memoize
     def certificate_json(self):
         try:
@@ -184,6 +188,10 @@ class PublicCertificate(BrowserView):
             return self.context.restrictedTraverse(str(self.session.zodb_path))
         except Exception:
             return None
+
+    @property
+    def tool_name(self):
+        return self.survey.Title() if self.survey else ""
 
     @property
     @memoize

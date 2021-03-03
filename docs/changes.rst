@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.18 (unreleased)
+6.2.18 (2021-03-03)
 -------------------
 
 - fix bug in certificates: we need to use the Tool's name, not the

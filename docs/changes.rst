@@ -4,7 +4,8 @@ Changelog
 6.2.18 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- fix bug in certificates: we need to use the Tool's name, not the
+  session name given by the user
 
 
 6.2.17 (2021-02-10)

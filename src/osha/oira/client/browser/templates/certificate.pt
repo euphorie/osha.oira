@@ -51,6 +51,14 @@
                              i18n:attributes="placeholder"
                       />
                     </label>
+                    <label>
+                      <tal:i18n i18n:translate="label_company_identification_number">Company identification number</tal:i18n>
+                      <input disabled="${python: 'disabled' if view.certificate.secret else None}"
+                             name="company_identification_number"
+                             type="text"
+                             value="${request/company_identification_number|view/certificate_json/company_identification_number|nothing}"
+                      />
+                    </label>
                     <metal:extra_fields use-macro="view/country_adapter/macros/extra_fields"
                                         tal:condition="nocall:view/country_adapter"
                     />
@@ -65,11 +73,11 @@
 
                   <article class="pat-rich">
                     <tal:private condition="not:view/certificate/secret">
-                      <p i18n:translate="">
+                      <p i18n:translate="info_certificate_is_private">
                         Your certificate for
-                        <strong i18n:name="title">&ldquo;${view/session/title}&rdquo;</strong>
+                        &ldquo;<strong i18n:name="title">${view/tool_name}</strong>&rdquo;
                         is private unless you choose to make it public.
-                        By ticking the &ldquo;Make public&rdquo; tickbox above, your certificate will be published on the official
+                        If you click the &ldquo;Publish&rdquo; button below, your certificate will be published on the official
                         <a href="https://oiraproject.eu"
                            target="_blank"
                            i18n:name="site_title"
@@ -78,9 +86,9 @@
                       </p>
                     </tal:private>
                     <tal:public condition="view/certificate/secret">
-                      <p i18n:translate="">
+                      <p i18n:translate="info_certificate_is_public">
                         Your certificate for
-                        <strong i18n:name="title">&ldquo;${view/session/title}&rdquo;</strong>
+                        &ldquo;<strong i18n:name="title">${view/tool_name}</strong>&rdquo;
                         is
                         <a href="${view/public_server_url}/${view/language}/certificates?id=${view/certificate/secret}"
                            target="_blank"
@@ -109,10 +117,11 @@
                     >
                       Unpublish
                     </button>
-                    <button class="pat-button"
+                    <button class="pat-button disabled pat-depends"
                             name="public"
                             type="submit"
                             value="on"
+                            data-pat-depends="condition: title; action: enable"
                             tal:condition="not:view/certificate/secret"
                             i18n:translate="button_publish"
                     >

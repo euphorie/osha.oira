@@ -15,7 +15,6 @@ from zope.sqlalchemy import datamanager
 import datetime
 import logging
 import transaction
-import zope.component
 
 
 log = logging.getLogger(__name__)

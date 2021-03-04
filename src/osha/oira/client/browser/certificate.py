@@ -48,7 +48,9 @@ class Certificate(BrowserView):
 
         By default we expect to have a title
         """
-        return ("title",) + getattr(self.country_adapter, "extra_known_field_names", ())
+        return ("title", "company_identification_number") + getattr(
+            self.country_adapter, "extra_known_field_names", ()
+        )
 
     @property
     @memoize
@@ -118,6 +120,10 @@ class Certificate(BrowserView):
         return self.webhelpers.traversed_session.absolute_url()
 
     @property
+    def tool_name(self):
+        return self.webhelpers.tool_name
+
+    @property
     @memoize
     def certificate_json(self):
         try:
@@ -182,6 +188,10 @@ class PublicCertificate(BrowserView):
             return self.context.restrictedTraverse(str(self.session.zodb_path))
         except Exception:
             return None
+
+    @property
+    def tool_name(self):
+        return self.survey.Title() if self.survey else ""
 
     @property
     @memoize

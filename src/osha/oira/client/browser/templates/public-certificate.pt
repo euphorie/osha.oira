@@ -5,10 +5,13 @@
       metal:use-macro="context/@@shell-for-iframe/macros/shell-for-iframe"
       i18n:domain="euphorie"
 >
+
+
   <metal:content fill-slot="content">
     <div class="published-certificate"
          tal:define="
            certificate view/certificate;
+           language here/plone_portal_state/language;
          "
     >
       <div class="certificate-view">
@@ -37,16 +40,19 @@
                  i18n:translate=""
               >
                 For conducting a risk assessment with the tool
-                <strong class="certificate-tool-name"
+                &ldquo;<strong class="certificate-tool-name"
                         i18n:name="title"
-                >
-                &ldquo;${view/session/title}&rdquo;
-                </strong>
+                >${view/tool_name}</strong>&rdquo;
                 on
-                <time class="certificate-date"
+                <time class="certificate-date pat-display-time"
+                      datetime="${value}"
+                      data-pat-display-time="output-format: Do MMMM YYYY; locale: ${language}"
+                      tal:define="
+                        value certificate/hr_date_plain;
+                      "
                       i18n:name="date"
                 >
-                  ${certificate/hr_date}
+                  ${value}
                 </time>.
               </p>
             </article>
@@ -58,15 +64,26 @@
             tal:condition="certificate"
         >
 
-          <dt i18n:translate="">Tool</dt>
-          <dd>${view/session/title}</dd>
+          <dt i18n:translate="label_oira_tool">OiRA tool</dt>
+          <dd>${view/tool_name}</dd>
           <dt i18n:translate="">Country</dt>
           <dd>${python:view.session.country.upper()}</dd>
-          <dt i18n:translate="">Company name</dt>
+          <dt i18n:translate="label_company_name">Company name</dt>
           <dd>${view/certificate/title}</dd>
 
-          <dt i18n:translate="">Date</dt>
-          <dd>${view/certificate/hr_date}</dd>
+          <dt i18n:translate="label_company_identification_number">Company identification number</dt>
+          <dd>${view/certificate_json/company_identification_number|nothing}</dd>
+          <dt i18n:translate="label_date">Date</dt>
+          <dd><time class="certificate-date pat-display-time"
+                  datetime="${value}"
+                  data-pat-display-time="output-format: Do MMMM YYYY; locale: ${language}"
+                  tal:define="
+                    value certificate/hr_date_plain;
+                  "
+            >
+                  ${value}
+            </time></dd>
+
 
           <tal:comment condition="nothing">
           Unclear about whether to show the percentage. Might be a political decision not to.

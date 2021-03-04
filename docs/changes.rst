@@ -7,10 +7,43 @@ Changelog
 This branch will prepare for the migration to Plone5.2 and ultimately to python3.
 A big milestone will be the removal of Grok.
 
-6.2.14 (unnreleased)
---------------------
+6.2.19 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+6.2.18 (2021-03-03)
+-------------------
+
+- fix bug in certificates: we need to use the Tool's name, not the
+  session name given by the user
+
+
+6.2.17 (2021-02-10)
+-------------------
+
+- Certificate: better localized date formatting (pat-display-time)
+- Translation updates
+
+6.2.16 (2021-02-02)
+-------------------
+
+- Statistics: Removed foreign key that caused an error.
+
+
+6.2.15 (2021-01-29)
+-------------------
+
+- Statistics: Added company (questionnaire).
+- Statistics: Filter users by country.
+
+
+6.2.14 (2021-01-19)
+-------------------
 
 - Translation updates
+- A "Print" to certificate
 
 6.2.13 (2020-12-15)
 -------------------

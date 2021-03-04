@@ -10,4 +10,4 @@ class Certificate(BrowserView):
     for the certificate view
     """
 
-    extra_known_field_names = ("dept_or_region", "siret", "contact")
+    extra_known_field_names = ("dept_or_region", "contact")

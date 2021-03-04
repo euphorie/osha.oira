@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-01-12 11:55+0000\n"
+"POT-Creation-Date: 2021-02-10 11:32+0000\n"
 "PO-Revision-Date: 2015-02-10 12:04+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,8 @@ msgstr ""
 "að lokum til skýrslu með þeim tillögum sem valdar voru eða skigreindar af "
 "notanda."
 
-#: osha/oira/client/browser/templates/public-certificate.pt:33
+#: osha/oira/client/browser/templates/certificate-print.pt:60
+#: osha/oira/client/browser/templates/public-certificate.pt:36
 msgid "${certificate/title}"
 msgstr ""
 
@@ -75,10 +76,10 @@ msgstr ""
 msgid "${provide-evidence} for supervisory authorities (labour inspectorate)."
 msgstr "${provide-evidence}"
 
-#: osha/oira/client/browser/templates/certificate_macros.pt:43
+#: osha/oira/client/browser/templates/certificate_macros.pt:48
 #: osha/oira/client/browser/templates/status.pt:52
 msgid "${required} Complete!"
-msgstr ""
+msgstr "${required} af áhættumatinu hefur verið fyllt út."
 
 #: euphorie/client/browser/templates/webhelpers.pt:309
 msgid "${view/description_probability}"
@@ -88,19 +89,19 @@ msgstr ""
 msgid "(measures to be implemented in the coming months)"
 msgstr "(Aðgerðir sem ráðast þarf í á næstu mánuðum)"
 
-#: osha/oira/vocabularies.py:59
+#: osha/oira/vocabularies.py:63
 msgid "1st Quarter"
 msgstr "1. ársfjórðungur"
 
-#: osha/oira/vocabularies.py:60
+#: osha/oira/vocabularies.py:64
 msgid "2nd Quarter"
 msgstr "2. ársfjórðungur"
 
-#: osha/oira/vocabularies.py:61
+#: osha/oira/vocabularies.py:65
 msgid "3rd Quarter"
 msgstr "3. ársfjórðungur"
 
-#: osha/oira/vocabularies.py:62
+#: osha/oira/vocabularies.py:66
 msgid "4th Quarter"
 msgstr "4. ársfjórðungur"
 
@@ -150,7 +151,7 @@ msgstr "Skrá nýja áhættu hér."
 msgid "A sector is national organisation for a specific type of industry."
 msgstr ""
 
-#: osha/oira/content/country.py:109
+#: osha/oira/content/country.py:120
 msgid ""
 "A short explanation that is shown to the user after reaching the initial "
 "threshold. You can use this to point to an external website that provides "
@@ -210,12 +211,12 @@ msgstr "Bæta við flokki"
 msgid "Add Profile question"
 msgstr "Bæta við spurningu um starfsemi"
 
-#: osha/oira/content/risk.py:47
+#: osha/oira/content/risk.py:50
 msgid "Add Risk"
 msgstr "Bæta við áhættu"
 
 #. Default: "Add Measure"
-#: osha/oira/content/solution.py:65
+#: osha/oira/content/solution.py:66
 msgid "Add Solution"
 msgstr "Bæta við tillögu að úrbótum"
 
@@ -240,13 +241,13 @@ msgstr ""
 msgid "Additional Measure"
 msgstr ""
 
-#: osha/oira/content/country.py:96
+#: osha/oira/content/country.py:105
 msgid ""
 "After a session completion rate is greater than this limit the user will "
 "earn a certificate."
 msgstr ""
 
-#: osha/oira/content/country.py:82
+#: osha/oira/content/country.py:89
 msgid ""
 "After a session completion rate is greater than this limit, the user will be "
 "informed about the possibility to earn a certificate. "
@@ -290,7 +291,7 @@ msgid "Are you sure you want to continue? This action can not be reverted."
 msgstr ""
 
 #. Default: "Are you sure you want to delete this measure? This action can not be reverted."
-#: osha/oira/manual_translations.py:16
+#: osha/oira/manual_translations.py:19
 msgid ""
 "Are you sure you want to delete this measure? This action can not be "
 "reverted."
@@ -358,19 +359,20 @@ msgstr ""
 msgid "Candidate country"
 msgstr ""
 
-#: osha/oira/client/browser/templates/public-certificate.pt:27
+#: osha/oira/client/browser/templates/certificate-print.pt:54
+#: osha/oira/client/browser/templates/public-certificate.pt:30
 msgid "Certificate"
-msgstr ""
+msgstr "Vottorð"
 
-#: osha/oira/content/country.py:95
+#: osha/oira/content/country.py:104
 msgid "Certificate completion threshold (in percent)"
 msgstr ""
 
-#: osha/oira/content/country.py:81
+#: osha/oira/content/country.py:88
 msgid "Certificate initial threshold (in percent)"
 msgstr ""
 
-#: osha/oira/manual_translations.py:8
+#: osha/oira/manual_translations.py:9
 msgid "Change email address"
 msgstr "Breyta tölvupóstfangi"
 
@@ -398,15 +400,12 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: osha/oira/client/browser/templates/public-certificate.pt:65
-msgid "Company name"
-msgstr ""
-
-#: osha/oira/client/browser/templates/public-certificate.pt:73
+#: osha/oira/client/browser/templates/certificate-print.pt:112
+#: osha/oira/client/browser/templates/public-certificate.pt:90
 msgid "Completed"
 msgstr ""
 
-#: osha/oira/content/country.py:124
+#: osha/oira/content/country.py:135
 msgid "Completion threshold has to be greater than the initial threshold"
 msgstr ""
 
@@ -414,7 +413,7 @@ msgstr ""
 msgid "Confirm OiRA email address change"
 msgstr "Staðfestið breytt OiRA tölvupóstfang"
 
-#: osha/oira/client/browser/templates/certificate_fr_specific.pt:27
+#: osha/oira/client/browser/templates/certificate_fr_specific.pt:19
 msgid "Contact name"
 msgstr ""
 
@@ -456,14 +455,15 @@ msgstr ""
 msgid "Continue to report"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate.pt:99
+#: osha/oira/client/browser/templates/certificate.pt:100
 msgid ""
 "Copy the following link to anyone to whom it may concern as proof that "
 "you've conducted this risk assessment."
 msgstr ""
 
-#: osha/oira/client/browser/templates/public-certificate.pt:63
-#: osha/oira/vocabularies.py:26
+#: osha/oira/client/browser/templates/certificate-print.pt:92
+#: osha/oira/client/browser/templates/public-certificate.pt:69
+#: osha/oira/vocabularies.py:29
 msgid "Country"
 msgstr "Land"
 
@@ -487,11 +487,7 @@ msgstr ""
 msgid "Creative Commons License"
 msgstr ""
 
-#: osha/oira/client/browser/templates/public-certificate.pt:68
-msgid "Date"
-msgstr ""
-
-#: osha/oira/manual_translations.py:9
+#: osha/oira/manual_translations.py:10
 msgid "Delete Account"
 msgstr "Eyða reikningi"
 
@@ -526,7 +522,7 @@ msgid "Describe the risk..."
 msgstr ""
 
 #. Default: "Description"
-#: osha/oira/manual_translations.py:25
+#: osha/oira/manual_translations.py:35
 msgid "Description"
 msgstr "Lýsing"
 
@@ -592,7 +588,7 @@ msgstr "Evrópusambandslönd"
 msgid "EU member state"
 msgstr "Evrópusambandsland"
 
-#: osha/oira/vocabularies.py:25
+#: osha/oira/vocabularies.py:28
 msgid "EU-OSHA Overview"
 msgstr "Yfirlit yfir Evrópsku vinnuverndarstofnunina (OSHA)"
 
@@ -605,15 +601,15 @@ msgid "Edit Profile question"
 msgstr "Breyta spurningu um starfsemi"
 
 #. Default: "Edit Measure"
-#: osha/oira/content/solution.py:48
+#: osha/oira/content/solution.py:49
 msgid "Edit Solution"
 msgstr "Breyta lausn"
 
-#: osha/oira/manual_translations.py:7
+#: osha/oira/manual_translations.py:8
 msgid "Email address/account name"
 msgstr "Tölvupóstfang/Notendaheiti"
 
-#: osha/oira/content/country.py:70
+#: osha/oira/content/country.py:75
 msgid "Enable certificates"
 msgstr ""
 
@@ -652,7 +648,7 @@ msgstr ""
 msgid "Expand sidebar"
 msgstr ""
 
-#: osha/oira/content/country.py:108
+#: osha/oira/content/country.py:119
 msgid "Explanatory sentence"
 msgstr ""
 
@@ -668,9 +664,12 @@ msgstr ""
 msgid "Folder"
 msgstr "Mappa"
 
-#: osha/oira/client/browser/templates/public-certificate.pt:46
-msgid "For conducting a risk assessment with the tool ${title} on ${date}."
-msgstr ""
+#: osha/oira/client/browser/templates/certificate-print.pt:71
+#: osha/oira/client/browser/templates/public-certificate.pt:47
+msgid ""
+"For conducting a risk assessment with the tool &ldquo;${title}&rdquo; on "
+"${date}."
+msgstr "Hefur framkvæmt áhættumat með verkfærinu “${title}” Þann ${date}."
 
 #: euphorie/client/templates/report_landing.pt:115
 msgid "Format: Office Open XML Workbook (.xlsx)"
@@ -680,7 +679,7 @@ msgstr "Snið: Office Open XML Workbook (.xlsx)"
 msgid "Format: Portable Document Format (.pdf)"
 msgstr "Snið: Portable Document Format (.pdf)"
 
-#: osha/oira/content/survey.py:126
+#: osha/oira/content/survey.py:151
 msgid "Frequency"
 msgstr "Tíðni"
 
@@ -708,7 +707,7 @@ msgstr ""
 msgid "Hide archived risk assessments"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate_macros.pt:25
+#: osha/oira/client/browser/templates/certificate_macros.pt:30
 msgid "Hide this message"
 msgstr ""
 
@@ -743,7 +742,7 @@ msgstr ""
 msgid "Identifier"
 msgstr ""
 
-#: osha/oira/content/country.py:71
+#: osha/oira/content/country.py:76
 msgid ""
 "If enabled, users will be able to obtain an official certificate of "
 "completion once they reach the threshold defined below."
@@ -813,10 +812,6 @@ msgstr ""
 #: osha/oira/content/browser/templates/manage-ldap-users.pt:45
 msgid "Login"
 msgstr "Innskráning"
-
-#: osha/oira/client/browser/templates/certificate.pt:63
-msgid "Make public"
-msgstr ""
 
 #: euphorie/client/templates/report_landing.pt:121
 msgid "Manage"
@@ -890,7 +885,7 @@ msgstr "Nafn"
 
 #: osha/oira/client/browser/templates/certificate.pt:42
 msgid "Name on certificate"
-msgstr ""
+msgstr "Nafn fyrirtækis"
 
 #: euphorie/deployment/tiles/configure.zcml:48
 msgid "Navigation tree for sector management"
@@ -925,7 +920,7 @@ msgstr ""
 msgid "Official OiRA Logo"
 msgstr "Opinbert merki OiRA (Logo)"
 
-#: osha/oira/vocabularies.py:22
+#: osha/oira/vocabularies.py:24
 msgid "OiRA Tool"
 msgstr "OiRA verkfæri"
 
@@ -975,9 +970,9 @@ msgstr ""
 "= Online interactive Risk Assessment. OiRA gerir þér kleift að framkvæma "
 "áhættumat fyrir vinnustaðinn þinn."
 
-#: osha/oira/client/browser/templates/certificate.pt:80
+#: osha/oira/client/browser/templates/certificate.pt:81
 msgid "OiRA website"
-msgstr ""
+msgstr "vefsíðu OiRA"
 
 #: euphorie/content/profiles/default/workflows/sector/definition.xml
 msgid ""
@@ -1027,7 +1022,7 @@ msgstr ""
 msgid "Pass information to the people concerned."
 msgstr "Að koma upplýsingum til þeirra sem málið varðar."
 
-#: osha/oira/manual_translations.py:10
+#: osha/oira/manual_translations.py:11
 msgid ""
 "Please bear in mind that by changing the email address, your login name will "
 "also change."
@@ -1068,7 +1063,7 @@ msgstr ""
 msgid "Potential candidate country"
 msgstr ""
 
-#: osha/oira/content/survey.py:111
+#: osha/oira/content/survey.py:135
 msgid "Probability"
 msgstr "Líkur"
 
@@ -1204,7 +1199,7 @@ msgid "Search for LDAP users"
 msgstr ""
 
 #. Default: "Sector"
-#: osha/oira/content/statistics.py:335
+#: osha/oira/content/statistics.py:357
 #: osha/oira/profiles/default/types/euphorie.sector.xml
 msgid "Sector"
 msgstr "Atvinnugrein"
@@ -1241,7 +1236,7 @@ msgstr "Heiti áhættumatsins hefur verið breytt í ${name}"
 msgid "Setup a standard Euphorie website"
 msgstr ""
 
-#: osha/oira/content/survey.py:141
+#: osha/oira/content/survey.py:167
 msgid "Severity"
 msgstr "Alvarleiki"
 
@@ -1282,7 +1277,7 @@ msgstr ""
 msgid "Standard solution"
 msgstr ""
 
-#: osha/oira/manual_translations.py:20
+#: osha/oira/manual_translations.py:27
 msgid "Standard solutions"
 msgstr "Almennar lausnir"
 
@@ -1295,7 +1290,7 @@ msgstr ""
 msgid "Starting a test session is not available in this OiRA application."
 msgstr ""
 
-#: osha/oira/content/statistics.py:306
+#: osha/oira/content/statistics.py:326
 msgid "Submit"
 msgstr "Senda"
 
@@ -1355,12 +1350,12 @@ msgid ""
 "The basic architecture of an Online interactive Risk Assessment consists of:"
 msgstr "Grunnuppbygging gagnvirks áhættumats á netinu samanstendur af: "
 
-#: osha/oira/client/browser/templates/public-certificate.pt:83
+#: osha/oira/client/browser/templates/public-certificate.pt:100
 msgid "The certificate you have requested is not available."
 msgstr ""
 
 #. Default: "The current text in the fields 'Action plan', 'Prevention plan' and 'Requirements' of this measure will be overwritten. This action cannot be reverted. Are you sure you want to continue?"
-#: osha/oira/manual_translations.py:18
+#: osha/oira/manual_translations.py:23
 msgid ""
 "The current text in the fields 'Action plan', 'Prevention plan' and "
 "'Requirements' of this measure will be overwritten. This action cannot be "
@@ -1423,9 +1418,10 @@ msgstr ""
 msgid "This OiRA tool was offered to you by ${external_site}"
 msgstr "Þetta OiRA verkfæri var þér útvegað af ${external_site}"
 
-#: osha/oira/client/browser/templates/public-certificate.pt:30
+#: osha/oira/client/browser/templates/certificate-print.pt:57
+#: osha/oira/client/browser/templates/public-certificate.pt:33
 msgid "This certificate is presented to"
-msgstr ""
+msgstr "Þetta vottorð staðfestir að (fyrirtæki)"
 
 #: euphorie/client/settings.py:301
 msgid "This email address is not available."
@@ -1491,10 +1487,6 @@ msgstr "Ábending"
 msgid "Toggle on screen help"
 msgstr "Virkja aðstoð á skjá"
 
-#: osha/oira/client/browser/templates/public-certificate.pt:61
-msgid "Tool"
-msgstr ""
-
 #: euphorie/content/behaviour/configure.zcml:33
 msgid "Unique id for content"
 msgstr ""
@@ -1537,10 +1529,10 @@ msgstr ""
 msgid "Various javascript utility methods"
 msgstr ""
 
-#: osha/oira/client/browser/templates/certificate_macros.pt:53
+#: osha/oira/client/browser/templates/certificate_macros.pt:58
 #: osha/oira/client/browser/templates/status.pt:63
 msgid "View certificate"
-msgstr ""
+msgstr "Skoða vottorð"
 
 #: euphorie/client/templates/report_landing.pt:65
 msgid ""
@@ -1562,7 +1554,7 @@ msgstr "Hvað er OiRA? (OiRA er rafrænt gagnvirkt áhættumat)"
 msgid "Who is the OiRA tool for?"
 msgstr "Fyrir hverja er OiRA verkfærið?"
 
-#: osha/oira/vocabularies.py:56
+#: osha/oira/vocabularies.py:61
 msgid "Whole year"
 msgstr "Heilt ár"
 
@@ -1608,18 +1600,20 @@ msgstr ""
 "Þú getur ekki breytt þessu áhættumati, en þú getur hlaðið því niður í "
 "mismunandi útgáfum í ${download_section}."
 
-#: osha/oira/client/browser/templates/certificate_macros.pt:37
+#: osha/oira/client/browser/templates/certificate_macros.pt:42
 #: osha/oira/client/browser/templates/status.pt:46
 msgid ""
 "You have completed ${completed} of the risk assessment. When you have "
 "completed ${required} of the risk assessment, you will be eligible for a "
 "certificate."
 msgstr ""
+"Þú hefur lokið ${completed} af áhættumatinu. Þegar þú hefur lokið "
+"${required} af áhættumatinu getur þú fengið vottorð um áhættumat frá OiRA."
 
-#: osha/oira/client/browser/templates/certificate_macros.pt:46
+#: osha/oira/client/browser/templates/certificate_macros.pt:51
 #: osha/oira/client/browser/templates/status.pt:55
 msgid "You have earned a certificate for this tool."
-msgstr ""
+msgstr "Þú getur fengið vottorð um áhættumat frá OiRA."
 
 #: euphorie/client/browser/templates/login.pt:125
 msgid ""
@@ -1627,20 +1621,9 @@ msgid ""
 "dated risk assessment (at any time)."
 msgstr "&nbsp;"
 
-#: osha/oira/client/browser/templates/certificate.pt:92
-msgid "Your certificate for ${title} is ${site_title} on the OIRA website."
-msgstr ""
-
-#: osha/oira/client/browser/templates/certificate.pt:80
-msgid ""
-"Your certificate for ${title} is private unless you choose to make it "
-"public. By ticking the &ldquo;Make public&rdquo; tickbox above, your "
-"certificate will be published on the official ${site_title}."
-msgstr ""
-
 #: osha/oira/client/browser/templates/certificate.pt:45
 msgid "Your company name"
-msgstr ""
+msgstr "Nafn fyrirtækis"
 
 #: euphorie/client/settings.py:354
 msgid "Your email address has been updated."
@@ -1912,12 +1895,12 @@ msgstr ""
 
 #. Default: "Cancel"
 #: osha/oira/content/browser/templates/settings.pt:67
-#: osha/oira/content/risk.py:43 osha/oira/content/solution.py:44
+#: osha/oira/content/risk.py:46 osha/oira/content/solution.py:45
 msgid "button_cancel"
 msgstr "Hætta við"
 
 #. Default: "Change"
-#: osha/oira/nuplone/pwreset.py:42
+#: osha/oira/nuplone/pwreset.py:47
 msgid "button_change"
 msgstr ""
 
@@ -1973,13 +1956,12 @@ msgid "button_preview"
 msgstr "Búa til prufueintak"
 
 #. Default: "Print"
-#: euphorie/client/templates/report_identification.pt:35
+#: osha/oira/client/browser/templates/certificate.pt:130
 msgid "button_print"
 msgstr "Prenta"
 
 #. Default: "Publish"
-#: euphorie/client/publish.py:256
-#: euphorie/deployment/tiles/templates/versions.pt:26
+#: osha/oira/client/browser/templates/certificate.pt:120
 msgid "button_publish"
 msgstr "Gefa út"
 
@@ -1990,7 +1972,7 @@ msgstr "Fjarlægja núverandi ráðstöfun til úrbóta"
 
 #. Default: "Save changes"
 #: osha/oira/content/browser/templates/settings.pt:66
-#: osha/oira/content/risk.py:41 osha/oira/content/solution.py:43
+#: osha/oira/content/risk.py:45 osha/oira/content/solution.py:44
 msgid "button_save_changes"
 msgstr "Vista breytingar"
 
@@ -2017,8 +1999,7 @@ msgid "button_unlock"
 msgstr ""
 
 #. Default: "Unpublish"
-#: euphorie/content/templates/unpublish.pt:23
-#: euphorie/deployment/tiles/templates/versions.pt:34
+#: osha/oira/client/browser/templates/certificate.pt:112
 msgid "button_unpublish"
 msgstr ""
 
@@ -2254,7 +2235,7 @@ msgstr ""
 "aðgerðaáætluninni."
 
 #. Default: "Provide your custom explanation here, to override this default explanation: \"${default_explanation}\""
-#: osha/oira/content/survey.py:112
+#: osha/oira/content/survey.py:136
 msgid "description_criteria_explanation"
 msgstr ""
 "Settu inn þinn útskýringartexta í stað þess sem fyrir er: "
@@ -2271,7 +2252,7 @@ msgid "description_measures_text_handling"
 msgstr ""
 
 #. Default: "In case you have identified risks not included in the tool, you are able to add them now:"
-#: osha/oira/upgrade/upgrade.py:190
+#: osha/oira/upgrade/upgrade.py:199
 msgid "description_other_risks"
 msgstr "Hættum sem ekki er fjallað um í verkfærinu er hægt að bæta við hér:"
 
@@ -2548,17 +2529,17 @@ msgid "error_validation_before_end_date"
 msgstr "Þessi dagsetning þarf að vera sama dag eða á eftir lokadagsetningu."
 
 #. Default: "This value must be a valid date."
-#: osha/oira/manual_translations.py:33
+#: osha/oira/manual_translations.py:46
 msgid "error_validation_date"
 msgstr "Þetta þarf að vera gild dagsetning."
 
 #. Default: "This value must be a valid email address."
-#: osha/oira/manual_translations.py:34
+#: osha/oira/manual_translations.py:47
 msgid "error_validation_email"
 msgstr "Þetta þarf að vera gilt netfang."
 
 #. Default: "This value must be a number."
-#: osha/oira/manual_translations.py:35
+#: osha/oira/manual_translations.py:48
 msgid "error_validation_number"
 msgstr "Hér þarf að vera tölustafur."
 
@@ -2568,7 +2549,7 @@ msgid "error_validation_positive_whole_number"
 msgstr "Þetta þarf að vera heiltala stærri en núll."
 
 #. Default: "This value is required."
-#: osha/oira/manual_translations.py:36
+#: osha/oira/manual_translations.py:49
 msgid "error_validation_required"
 msgstr "Þetta gildi er áskilið."
 
@@ -2583,7 +2564,7 @@ msgid "evalmethod_direct"
 msgstr "Áætlað"
 
 #. Default: "Skip evaluation"
-#: osha/oira/manual_translations.py:26
+#: osha/oira/manual_translations.py:36
 msgid "evalmethod_fixed"
 msgstr "Mati sleppt"
 
@@ -2716,7 +2697,7 @@ msgid "filename_report_timeline"
 msgstr "Tímalínan fyrir ${title}"
 
 #. Default: "Contents of OIRA tool ${title}"
-#: osha/oira/content/survey.py:420
+#: osha/oira/content/survey.py:450
 msgid "filename_tool_contents"
 msgstr ""
 
@@ -2809,7 +2790,7 @@ msgstr ""
 "að neðan."
 
 #. Default: "Account data"
-#: osha/oira/manual_translations.py:6
+#: osha/oira/manual_translations.py:7
 msgid "header_account_data"
 msgstr "Upplýsingar um aðgang"
 
@@ -2900,7 +2881,7 @@ msgid "header_launch"
 msgstr ""
 
 #. Default: "Legal and policy references"
-#: osha/oira/content/survey.py:291
+#: osha/oira/content/survey.py:323
 msgid "header_legal_references"
 msgstr "Tilvísanir í önnur gögn s.s. lög, reglur og önnur opinber gögn"
 
@@ -3003,7 +2984,7 @@ msgid "header_osh_tool_navigation"
 msgstr ""
 
 #. Default: "Password"
-#: osha/oira/manual_translations.py:11
+#: osha/oira/manual_translations.py:14
 msgid "header_password"
 msgstr "Lykilorð"
 
@@ -3255,7 +3236,7 @@ msgstr ""
 #. Default: "Certification"
 #: osha/oira/client/browser/templates/status.pt:31
 msgid "heading_certification"
-msgstr ""
+msgstr "Vottun"
 
 #. Default: "Comments"
 #: euphorie/client/browser/templates/webhelpers.pt:600
@@ -3428,7 +3409,7 @@ msgid "help__default_reports"
 msgstr ""
 
 #. Default: "This is the URL of an external site that is linked to. Clicking the logo or the name will take the user to this URL."
-#: osha/oira/content/survey.py:65
+#: osha/oira/content/survey.py:74
 msgid "help__external_site_url"
 msgstr ""
 "Slóð ytra vefsvæðis sem er tengd. Ef smellt er á merki fyrirtækis eða nafn "
@@ -3483,7 +3464,7 @@ msgstr ""
 "viljir byrja með afrit af OiRA verkfæri sem er þegar til staðar."
 
 #. Default: "Indicate how often this risk occurs in a normal situation."
-#: osha/oira/content/survey.py:38
+#: osha/oira/content/survey.py:41
 msgid "help_default_frequency"
 msgstr "Tilgreindu hversu oft þessi áhætta kemur upp við venjulegar aðstæður."
 
@@ -3495,17 +3476,17 @@ msgstr ""
 "(forgangsröð). Hann eða hún getur breytt forgangsröðinni að vild."
 
 #. Default: "Indicate how likely occurence of this risk is in a normal situation."
-#: osha/oira/content/survey.py:35
+#: osha/oira/content/survey.py:37
 msgid "help_default_probability"
 msgstr "Hversu líklegt er að þessi áhætta komi upp við venjulegar aðstæður?"
 
 #. Default: "Indicate the severity if this risk occurs."
-#: osha/oira/content/survey.py:41
+#: osha/oira/content/survey.py:45
 msgid "help_default_severity"
 msgstr "Hversu alvarlegt verður atvikið ef það gerist?"
 
 #. Default: "Tick this option if you would like to define your own descriptions for the criteria of the evaluation algorithm. The user will see them as hints when answering the questions to calculate the priority of a risk."
-#: osha/oira/content/survey.py:98
+#: osha/oira/content/survey.py:117
 msgid "help_enable_custom_evaluation_descriptions"
 msgstr ""
 "Hakaðu við þennan valkost ef þú vilt nota þína eigin lýsingu á aðferð til að "
@@ -3527,21 +3508,21 @@ msgstr ""
 "ekki mögulegur."
 
 #. Default: "Choose between ESTIMATED (rough estimation) or CALCULATED (combination of frequency and severity) method."
-#: osha/oira/content/risk.py:26
+#: osha/oira/content/risk.py:28
 msgid "help_evaluation_method_french"
 msgstr ""
 "Veldu á milli ÁÆTLAÐ (gróflega) eða REIKNAÐ (samband af líkum, og "
 "alvarleika)."
 
 #. Default: "Choose between ESTIMATED (rough estimation) or CALCULATED (combination of probability, frequency and severity) method."
-#: osha/oira/content/risk.py:19
+#: osha/oira/content/risk.py:20
 msgid "help_evaluation_method_kinney"
 msgstr ""
 "Veldu á milli ÁÆTLAÐ (gróflega) eða REIKNAÐ (samband af tíðni, líkum og "
 "afleiðingum)"
 
 #. Default: "This option allows users to skip the evaluation phase."
-#: osha/oira/manual_translations.py:23
+#: osha/oira/manual_translations.py:30
 msgid "help_evaluation_optional"
 msgstr "Þessi valkostur leyfir notandanum að sleppa mati á áhættunni."
 
@@ -3555,14 +3536,14 @@ msgstr ""
 "ráðstöfunum/aðgerðum sem ekki eiga við um viðkomandi vinnustað"
 
 #. Default: "Tick this option if you would like to create a hyperlink on the OiRA tool which points to an external website. The hyperlink will be in the form of a logo image."
-#: osha/oira/content/survey.py:52
+#: osha/oira/content/survey.py:58
 msgid "help_external_site_enabled"
 msgstr ""
 "Hakaðu við ef þú kýst að tengjast OiRA verkfærinu á ytra vefsvæði. "
 "Tengillinn verður í formi myndar af merki fyrirtækis (logo)."
 
 #. Default: "This is the name of the external site that is linked to. It will appear next to the logo."
-#: osha/oira/content/survey.py:76
+#: osha/oira/content/survey.py:88
 msgid "help_external_site_name"
 msgstr ""
 "Nafn ytra vefsvæðis sem tengst er við. Það birtist nálægt merki fyrirtækis "
@@ -3629,7 +3610,7 @@ msgid "help_identification"
 msgstr "Þessi texti útskýrir hvernig greining áhættunnar fer fram."
 
 #. Default: "Upload an image. Make sure your image is of format png, jpg or gif and does not contain any special characters."
-#: osha/oira/content/survey.py:86
+#: osha/oira/content/survey.py:101
 msgid "help_image_upload"
 msgstr ""
 "Mynd sett inn. Myndin þarf að vera á forminu png, jpg eða gif og má ekki "
@@ -3775,7 +3756,7 @@ msgstr ""
 "er vel við haldið)"
 
 #. Default: "Level 1: Basic statistics about the use of the OiRA tool. Level 2: More detailed statistics regarding the risks"
-#: osha/oira/content/sector.py:25
+#: osha/oira/content/sector.py:28
 msgid "help_statistics_level"
 msgstr ""
 "1. stig: Einfaldar tölfræðilegar upplýsingar um notkun OiRA verkfærisins. 2. "
@@ -3828,6 +3809,19 @@ msgid "incorrect_login"
 msgstr ""
 "Rangt notendanafn eða lykilorð. Athugaðu málið og reyndu aftur eða fáðu "
 "{request_an_email_reminder} um innskráningarupplýsingar þínar."
+
+#. Default: "Your certificate for &ldquo;${title}&rdquo; is private unless you choose to make it public. If you click the &ldquo;Publish&rdquo; button below, your certificate will be published on the official ${site_title}."
+#: osha/oira/client/browser/templates/certificate.pt:81
+msgid "info_certificate_is_private"
+msgstr ""
+"Vottorðið þitt fyrir “${title}” er eingöngu sýnilegt á þínum síðum, nema þú "
+"ákveðir að birta það opinberlega. Ef þú hakar við “Publish (gefa út)” "
+"hnappinn hér fyrir neðan verður vottorðið gefið út á ${site_title}."
+
+#. Default: "Your certificate for &ldquo;${title}&rdquo; is ${site_title} on the OIRA website."
+#: osha/oira/client/browser/templates/certificate.pt:93
+msgid "info_certificate_is_public"
+msgstr "Vottorð þitt fyrir “${title}” er ${site_title} OiRA."
 
 #. Default: "The menu toggle lets you hide and show the risk assessment browser to find previously made risk assessments. Hide the menu when you are concentrating on making a risk assessment or show it when you are clicking about between various parts of the application."
 #: euphorie/client/templates/tooltips.pt:46
@@ -3889,7 +3883,7 @@ msgstr ""
 "að smella á ${questionmark} efst í hægra horni verkfærastikunnar."
 
 #. Default: "Select an earlier session to complete or review or ${start_session}."
-#: osha/oira/manual_translations.py:30
+#: osha/oira/manual_translations.py:40
 msgid "info_select_session"
 msgstr "Veldu áhættumat til að ljúka eða endurskoða eða ${start_session}."
 
@@ -4090,12 +4084,12 @@ msgid "label_account_locked"
 msgstr ""
 
 #. Default: "Action Plan"
-#: osha/oira/client/report.py:110
+#: osha/oira/client/report.py:114
 msgid "label_action_plan"
 msgstr "Aðgerðaáætlun"
 
 #. Default: "Budget"
-#: osha/oira/client/report.py:85
+#: osha/oira/client/report.py:91
 msgid "label_action_plan_budget"
 msgstr "Áætlaður kostnaður"
 
@@ -4180,10 +4174,18 @@ msgstr ""
 msgid "label_company_country"
 msgstr "Ísland"
 
-#. Default: "SIRET number"
-#: osha/oira/client/browser/templates/certificate_fr_specific.pt:19
+#. Default: "Company identification number"
+#: osha/oira/client/browser/templates/certificate-print.pt:96
+#: osha/oira/client/browser/templates/certificate.pt:55
+#: osha/oira/client/browser/templates/public-certificate.pt:74
 msgid "label_company_identification_number"
-msgstr ""
+msgstr "Kennitala fyrirtækis"
+
+#. Default: "Company name"
+#: osha/oira/client/browser/templates/certificate-print.pt:94
+#: osha/oira/client/browser/templates/public-certificate.pt:71
+msgid "label_company_name"
+msgstr "Nafn fyrirtækis"
 
 #. Default: "The risk assessment was conducted by"
 #: euphorie/client/company.py:48 euphorie/client/templates/report_company.pt:47
@@ -4206,7 +4208,7 @@ msgid "label_contact_person"
 msgstr ""
 
 #. Default: "Country"
-#: osha/oira/content/statistics.py:301
+#: osha/oira/content/statistics.py:321
 msgid "label_country"
 msgstr "Land"
 
@@ -4231,6 +4233,12 @@ msgstr ""
 #: euphorie/deployment/tiles/templates/versions.pt:49
 msgid "label_current_published"
 msgstr ""
+
+#. Default: "Date"
+#: osha/oira/client/browser/templates/certificate-print.pt:99
+#: osha/oira/client/browser/templates/public-certificate.pt:76
+msgid "label_date"
+msgstr "Dagsetning"
 
 #. Default: "Default severity"
 #: euphorie/content/templates/risk_view.pt:68
@@ -4295,7 +4303,7 @@ msgid "label_employee_numbers"
 msgstr "Fjöldi starfsmanna"
 
 #. Default: "The criteria applied to evaluate risks are specific of this tool? (If not, the common criteria descriptions will apply)."
-#: osha/oira/content/survey.py:94
+#: osha/oira/content/survey.py:111
 msgid "label_enable_custom_evaluation_descriptions"
 msgstr ""
 "Aðferðin sem valin er til að meta áhættuna er sérstaklega skilgreind fyrir "
@@ -4324,7 +4332,7 @@ msgid "label_evaluation_optional"
 msgstr ""
 
 #. Default: "Evaluation phase"
-#: osha/oira/manual_translations.py:24
+#: osha/oira/manual_translations.py:34
 msgid "label_evaluation_phase"
 msgstr "Matsfasi"
 
@@ -4339,22 +4347,22 @@ msgid "label_expertise"
 msgstr ""
 
 #. Default: "Include a logo which links to an external website."
-#: osha/oira/content/survey.py:49
+#: osha/oira/content/survey.py:54
 msgid "label_external_site_enabled"
 msgstr "Bættu við nafni/merki (logo) fyrirtækis til að tengjast ytra vefsvæði."
 
 #. Default: "External site logo"
-#: osha/oira/content/survey.py:85
+#: osha/oira/content/survey.py:100
 msgid "label_external_site_logo"
 msgstr "Merki fyrirtækis (logo)"
 
 #. Default: "External site name"
-#: osha/oira/content/survey.py:75
+#: osha/oira/content/survey.py:87
 msgid "label_external_site_name"
 msgstr "Nafn ytra vefsvæðis"
 
 #. Default: "External site URL"
-#: osha/oira/content/survey.py:64
+#: osha/oira/content/survey.py:73
 msgid "label_external_site_url"
 msgstr "Slóð ytra vefsvæðis"
 
@@ -4374,7 +4382,7 @@ msgid "label_file_caption"
 msgstr "Skýringartexti um innihald"
 
 #. Default: "priority"
-#: osha/oira/manual_translations.py:27
+#: osha/oira/manual_translations.py:37
 msgid "label_fixed_priority"
 msgstr "Forgangur"
 
@@ -4394,7 +4402,7 @@ msgid "label_general_information"
 msgstr ""
 
 #. Default: "Global"
-#: osha/oira/content/statistics.py:381
+#: osha/oira/content/statistics.py:404
 msgid "label_global"
 msgstr "Hnattrænt"
 
@@ -4552,7 +4560,7 @@ msgid "label_measure_prevention_plan"
 msgstr "Sérstakar aðgerðir til að innleiða úrbæturnar."
 
 #. Default: "Level of expertise and/or requirements needed"
-#: osha/oira/client/report.py:50
+#: osha/oira/client/report.py:52
 msgid "label_measure_requirements"
 msgstr "Þekking og reynsla sem er nauðsynleg"
 
@@ -4648,6 +4656,12 @@ msgstr "Ekki er þörf á fleiri úrbótaaðgerðum"
 msgid "label_not_sufficient_integrated_ap"
 msgstr ""
 
+#. Default: "OiRA tool"
+#: osha/oira/client/browser/templates/certificate-print.pt:90
+#: osha/oira/client/browser/templates/public-certificate.pt:67
+msgid "label_oira_tool"
+msgstr "OiRA verkfæri"
+
 #. Default: "Current Password"
 #: euphorie/client/settings.py:47
 msgid "label_old_password"
@@ -4674,7 +4688,7 @@ msgid "label_password_confirm"
 msgstr "Staðfesta lykilorð"
 
 #. Default: "Period"
-#: osha/oira/content/statistics.py:42
+#: osha/oira/content/statistics.py:50
 msgid "label_period"
 msgstr "Tímabil"
 
@@ -4707,7 +4721,7 @@ msgid "label_print_tool_preview"
 msgstr ""
 
 #. Default: "Negative statement"
-#: osha/oira/content/survey.py:268
+#: osha/oira/content/survey.py:300
 msgid "label_problem_description"
 msgstr "Neikvæð yfirlýsing"
 
@@ -4782,22 +4796,22 @@ msgid "label_report_comment"
 msgstr "Bætið við athugasemdum í skýrsluna hér."
 
 #. Default: "Country"
-#: osha/oira/content/statistics.py:78
+#: osha/oira/content/statistics.py:84
 msgid "label_report_countries"
 msgstr "Land"
 
 #. Default: "Date of editing"
-#: osha/oira/client/report.py:146
+#: osha/oira/client/report.py:151
 msgid "label_report_date"
 msgstr ""
 
 #. Default: "File Format"
-#: osha/oira/content/statistics.py:97
+#: osha/oira/content/statistics.py:103
 msgid "label_report_file_format"
 msgstr "Skráarsnið "
 
 #. Default: "Report Period"
-#: osha/oira/content/statistics.py:92
+#: osha/oira/content/statistics.py:98
 msgid "label_report_period"
 msgstr "Tímabil skýrslu"
 
@@ -4807,12 +4821,12 @@ msgid "label_report_staff"
 msgstr ""
 
 #. Default: "Tool"
-#: osha/oira/content/statistics.py:85
+#: osha/oira/content/statistics.py:91
 msgid "label_report_tools"
 msgstr "Verkfæri"
 
 #. Default: "Report Type"
-#: osha/oira/content/statistics.py:72
+#: osha/oira/content/statistics.py:78
 msgid "label_report_type"
 msgstr "Tegund skýrslu "
 
@@ -4822,7 +4836,7 @@ msgid "label_risk_always_present"
 msgstr "Áhættan er alltaf til staðar"
 
 #. Default: "Risk number"
-#: osha/oira/client/report.py:60
+#: osha/oira/client/report.py:66
 msgid "label_risk_number"
 msgstr "Tilvísunar númer"
 
@@ -4895,7 +4909,7 @@ msgid "label_save_and_finish"
 msgstr ""
 
 #. Default: "Section"
-#: osha/oira/client/report.py:58
+#: osha/oira/client/report.py:60
 msgid "label_section"
 msgstr "Flokkur"
 
@@ -4989,7 +5003,7 @@ msgid "label_statement"
 msgstr "Jákvæð yfirlýsing"
 
 #. Default: "Statistics Level"
-#: osha/oira/content/sector.py:24
+#: osha/oira/content/sector.py:27
 msgid "label_statistics_level"
 msgstr "Tölfræðistig"
 
@@ -5044,7 +5058,7 @@ msgid "label_timeline_priority_medium"
 msgstr "Meðal"
 
 #. Default: "Title"
-#: osha/oira/client/report.py:141
+#: osha/oira/client/report.py:146
 msgid "label_title"
 msgstr "Heiti"
 
@@ -5129,7 +5143,7 @@ msgid "label_workers_participated"
 msgstr "Starfsfólki var boðið að taka þátt í áhættumatinu"
 
 #. Default: "Year"
-#: osha/oira/content/statistics.py:37
+#: osha/oira/content/statistics.py:45
 msgid "label_year"
 msgstr "Ár"
 
@@ -5270,7 +5284,7 @@ msgid "menu_import"
 msgstr "Flytja inn OiRA verkfæri"
 
 #. Default: "Statistics"
-#: osha/oira/content/sitemenu.py:39
+#: osha/oira/content/sitemenu.py:40
 msgid "menu_statistics"
 msgstr "Tölulegar upplýsingar"
 
@@ -5335,7 +5349,7 @@ msgid "message_not_delete_published_sector"
 msgstr "Þú getur ekki eytt atvinnusviði sem inniheldur útgefin OiRA verkfæri."
 
 #. Default: "You can not delete an OiRA tool that has been published."
-#: osha/oira/content/surveygroup.py:81
+#: osha/oira/content/surveygroup.py:86
 msgid "message_not_delete_published_surveygroup"
 msgstr "Þú getur ekki eytt OiRA verkfæri sem hefur verið birt."
 
@@ -5389,12 +5403,12 @@ msgid "nav_help"
 msgstr ""
 
 #. Default: "Manage country access"
-#: osha/oira/content/templates/user_mgmt.pt:64 osha/oira/tiles/tabs.py:49
+#: osha/oira/content/templates/user_mgmt.pt:64 osha/oira/tiles/tabs.py:44
 msgid "nav_ldapmanagement_country"
 msgstr ""
 
 #. Default: "Manage sector access"
-#: osha/oira/content/templates/user_mgmt.pt:44 osha/oira/tiles/tabs.py:45
+#: osha/oira/content/templates/user_mgmt.pt:44 osha/oira/tiles/tabs.py:42
 msgid "nav_ldapmanagement_sector"
 msgstr ""
 
@@ -5558,7 +5572,7 @@ msgstr ""
 "minnsta kosti einn hástaf, einn tölustaf og eitt tákn (s.s. $, # or @)."
 
 #. Default: "Your password has been reset."
-#: osha/oira/nuplone/pwreset.py:88
+#: osha/oira/nuplone/pwreset.py:97
 msgid "password_reset"
 msgstr ""
 
@@ -5716,14 +5730,14 @@ msgstr "Litlar"
 #. Default: "${completion_percentage}% Complete"
 #: euphorie/client/browser/webhelpers.py:278
 msgid "progress_indicator_title"
-msgstr ""
+msgstr "${completion_percentage}% af áhættumatinu hefur verið fyllt út."
 
-#: osha/oira/client/browser/templates/certificate.pt:92
+#: osha/oira/client/browser/templates/certificate.pt:93
 msgid "publically visible"
-msgstr ""
+msgstr "sýnilegt öllum á vefsíðu"
 
 #. Default: "<p>Would you now like to add your own defined risks to this tool?</p><p><strong>Important:</strong> In order to avoid duplicating risks, we strongly recommend you to go first through all the previous modules, if you have not done it yet.</p><p>If you don't need to add risks, please select 'No.'</p>"
-#: osha/oira/upgrade/upgrade.py:194
+#: osha/oira/upgrade/upgrade.py:204
 msgid "question_other_risks"
 msgstr ""
 "<p>Viltu taka fleiri hættur með í áhættumatið?</p><p><strong>Athugið</"
@@ -5818,47 +5832,47 @@ msgstr ""
 "${date}."
 
 #. Default: "Comments"
-#: osha/oira/client/report.py:94
+#: osha/oira/client/report.py:100
 msgid "report_timeline_comment"
 msgstr "Athugasemdir"
 
 #. Default: "End date"
-#: osha/oira/client/report.py:78
+#: osha/oira/client/report.py:84
 msgid "report_timeline_end_date"
 msgstr "Lokadagsetning"
 
 #. Default: "Measure"
-#: osha/oira/client/report.py:65
+#: osha/oira/client/report.py:71
 msgid "report_timeline_measure"
 msgstr "Ráðstöfun til úrbóta"
 
 #. Default: "Priority"
-#: osha/oira/client/report.py:61
+#: osha/oira/client/report.py:67
 msgid "report_timeline_priority"
 msgstr "Forgangur"
 
 #. Default: "Status (planned, in process, implemented)"
-#: osha/oira/client/report.py:89
+#: osha/oira/client/report.py:95
 msgid "report_timeline_progress"
 msgstr "Staða (fyrirhuguð, í vinnslu, framkvæmd)"
 
 #. Default: "Responsible"
-#: osha/oira/client/report.py:83
+#: osha/oira/client/report.py:89
 msgid "report_timeline_responsible"
 msgstr "Ábyrgðaraðili"
 
 #. Default: "Description of the risk"
-#: osha/oira/client/report.py:59
+#: osha/oira/client/report.py:64
 msgid "report_timeline_risk_title"
 msgstr "Áhætta"
 
 #. Default: "Start date"
-#: osha/oira/client/report.py:73
+#: osha/oira/client/report.py:79
 msgid "report_timeline_start_date"
 msgstr "Upphafsdagur"
 
 #. Default: "Timeline"
-#: osha/oira/client/report.py:104
+#: osha/oira/client/report.py:109
 msgid "report_timeline_title"
 msgstr "Tímalína"
 
@@ -6211,7 +6225,7 @@ msgid "title_import_sector_survey"
 msgstr "Flytja inn atvinnusvið og OiRA verkfæri"
 
 #. Default: "Added risks (by you)"
-#: osha/oira/client/report.py:224 osha/oira/upgrade/upgrade.py:189
+#: osha/oira/client/report.py:227 osha/oira/upgrade/upgrade.py:195
 msgid "title_other_risks"
 msgstr "Aðrar áhættur á vinnustaðnum (ef við á)"
 
@@ -6237,7 +6251,7 @@ msgid "title_sectors"
 msgstr "Atvinnugreinar"
 
 #. Default: "Statistics Reporting"
-#: osha/oira/content/statistics.py:299
+#: osha/oira/content/statistics.py:320
 msgid "title_statistics"
 msgstr "Skýrsla m tölfræðilegar upplýsingar "
 
@@ -6247,9 +6261,7 @@ msgid "title_status_of"
 msgstr "Staða: ${survey_title}"
 
 #. Default: "OiRA - Online interactive Risk Assessment"
-#: euphorie/client/browser/country.py:263
-#: euphorie/client/browser/templates/modal-template.pt:19
-#: euphorie/client/browser/templates/webhelpers.pt:37
+#: osha/oira/client/browser/templates/certificate-print.pt:22
 msgid "title_tool"
 msgstr ""
 "OiRA - Online interactive Risk Assessment (gagnvirkt áhættumat á netinu)"

@@ -41,6 +41,9 @@ class UpdateStatisticsDatabases(object):
 
     def update_database(self, country=None):
         log.info("Init & cleanup")
+        Base.metadata.drop_all(
+            bind=self.session_statistics.connection(), checkfirst=True
+        )
         Base.metadata.create_all(
             bind=self.session_statistics.connection(), checkfirst=True
         )
@@ -52,8 +55,6 @@ class UpdateStatisticsDatabases(object):
         self.session_statistics.commit()
 
     def update_assessment(self, country=None):
-        self.session_statistics.query(SurveySessionStatistics).delete()
-
         sessions = (
             self.session_application.query(SurveySession, Account)
             .filter(Account.id == SurveySession.account_id)
@@ -83,8 +84,6 @@ class UpdateStatisticsDatabases(object):
         self._process_batch(assessment_rows)
 
     def update_account(self, country=None):
-        self.session_statistics.query(AccountStatistics).delete()
-
         accounts = self.session_application.query(Account).order_by(Account.id)
         if country is not None:
             accounts = (
@@ -112,8 +111,6 @@ class UpdateStatisticsDatabases(object):
         self._process_batch(account_rows)
 
     def update_company(self, country=None):
-        self.session_statistics.query(CompanyStatistics).delete()
-
         companies = self.session_application.query(Company)
         if country is not None:
             companies = companies.filter(Company.country == country)

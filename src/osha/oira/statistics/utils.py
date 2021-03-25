@@ -75,6 +75,7 @@ class UpdateStatisticsDatabases(object):
                     country=session.zodb_path.split("/")[0].encode("utf-8"),
                     sector=session.zodb_path.split("/")[1].encode("utf-8"),
                     tool=session.zodb_path.split("/")[2].encode("utf-8"),
+                    account_id=account.id,
                     account_type=account.account_type,
                 )
                 for session, account in batch

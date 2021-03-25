@@ -64,6 +64,7 @@ class SurveySessionStatistics(Base):
     country = schema.Column(types.String(512), nullable=False)
     sector = schema.Column(types.String(512), nullable=False)
     tool = schema.Column(types.String(512), nullable=False)
+    account_id = schema.Column(types.Integer(), nullable=True)
     account_type = schema.Column(
         Enum([u"guest", u"converted", "full"]), default="full", nullable=True
     )

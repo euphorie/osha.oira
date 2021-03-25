@@ -60,6 +60,7 @@ class SurveySessionStatistics(Base):
     id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
     start_date = schema.Column(types.DateTime, nullable=False, default=functions.now())
     completion_percentage = schema.Column(types.Integer, nullable=True, default=0)
+    path = schema.Column(types.String(512), nullable=False)
     country = schema.Column(types.String(512), nullable=False)
     sector = schema.Column(types.String(512), nullable=False)
     tool = schema.Column(types.String(512), nullable=False)

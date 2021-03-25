@@ -71,6 +71,7 @@ class UpdateStatisticsDatabases(object):
                     id=session.id,
                     start_date=session.created,
                     completion_percentage=session.completion_percentage,
+                    path=session.zodb_path,
                     country=session.zodb_path.split("/")[0].encode("utf-8"),
                     sector=session.zodb_path.split("/")[1].encode("utf-8"),
                     tool=session.zodb_path.split("/")[2].encode("utf-8"),

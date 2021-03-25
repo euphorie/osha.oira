@@ -81,12 +81,12 @@ class CompanyStatistics(Base):
     )
 
     country = schema.Column(types.String(3))
-    employees = schema.Column(Enum([None, "1-9", "10-49", "50-249", "250+"]))
-    conductor = schema.Column(Enum([None, "staff", "third-party", "both"]))
+    employees = schema.Column(Enum(["no answer", "1-9", "10-49", "50-249", "250+"]))
+    conductor = schema.Column(Enum(["no answer", "staff", "third-party", "both"]))
     referer = schema.Column(
         Enum(
             [
-                None,
+                "no answer",
                 "employers-organisation",
                 "trade-union",
                 "national-public-institution",
@@ -96,6 +96,6 @@ class CompanyStatistics(Base):
             ]
         )
     )
-    workers_participated = schema.Column(types.Boolean())
-    needs_met = schema.Column(types.Boolean())
-    recommend_tool = schema.Column(types.Boolean())
+    workers_participated = schema.Column(Enum(["no answer", "yes", "no"]))
+    needs_met = schema.Column(Enum(["no answer", "yes", "no"]))
+    recommend_tool = schema.Column(Enum(["no answer", "yes", "no"]))

@@ -118,19 +118,28 @@ class UpdateStatisticsDatabases(object):
         if country is not None:
             companies = companies.filter(Company.country == country)
 
+        def yes_no(boolean):
+            if boolean is None:
+                return "no answer"
+            elif boolean:
+                return "yes"
+            else:
+                return "no"
+
         def company_rows(offset):
             batch = companies.limit(self.b_size).offset(offset)
+
             rows = [
                 CompanyStatistics(
                     id=company.id,
                     session_id=company.session_id,
                     country=company.country,
-                    employees=company.employees,
-                    conductor=company.conductor,
-                    referer=company.referer,
-                    workers_participated=company.workers_participated,
-                    needs_met=company.needs_met,
-                    recommend_tool=company.recommend_tool,
+                    employees=company.employees or "no answer",
+                    conductor=company.conductor or "no answer",
+                    referer=company.referer or "no answer",
+                    workers_participated=yes_no(company.workers_participated),
+                    needs_met=yes_no(company.needs_met),
+                    recommend_tool=yes_no(company.recommend_tool),
                 )
                 for company in batch
             ]

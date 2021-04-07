@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from euphorie.client.model import Account
 from euphorie.client.model import Company
+from euphorie.client.model import Session as EuphorieSession
 from euphorie.client.model import SurveySession
+from osha.oira.client.model import SurveyStatistics
 from osha.oira.statistics.model import AccountStatistics
 from osha.oira.statistics.model import Base
 from osha.oira.statistics.model import CompanyStatistics
@@ -173,3 +176,40 @@ class UpdateStatisticsDatabases(object):
                 continue
             self.session_statistics.close()
             log.info("Updated {}".format(database))
+
+
+def handle_tool_workflow(obj, event):
+    update_tool_info(obj)
+
+
+def update_tool_info(survey):
+    creation_date = survey.created()
+    if not isinstance(creation_date, datetime):
+        try:
+            creation_date = creation_date.asdatetime()
+        except AttributeError:
+            log.warn("Cannot handle creation date {}".format(creation_date))
+            creation_date = None
+
+    zodb_path = "/".join(survey.getPhysicalPath()[-4:])
+    published = survey.aq_parent.published == survey.id
+    published_date = None
+    if published:
+        if isinstance(survey.published, datetime):
+            published_date = survey.published
+        elif isinstance(survey.published, tuple):
+            published_date = survey.published[2]
+
+    EuphorieSession.query(SurveyStatistics).filter(
+        SurveyStatistics.zodb_path == zodb_path
+    ).delete()
+
+    EuphorieSession.add(
+        SurveyStatistics(
+            zodb_path=zodb_path,
+            language=survey.Language(),
+            published=published,
+            published_date=published_date,
+            creation_date=creation_date,
+        )
+    )

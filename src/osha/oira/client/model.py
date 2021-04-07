@@ -40,6 +40,18 @@ class LoginStatistics(model.BaseObject):
     )
 
 
+class SurveyStatistics(model.BaseObject):
+    """Data table to store survey (tool) information."""
+
+    __tablename__ = "statistics_surveys"
+
+    zodb_path = schema.Column(types.String(512), primary_key=True)
+    language = schema.Column(types.String(128), nullable=True)
+    published = schema.Column(types.Boolean(), nullable=True)
+    published_date = schema.Column(types.DateTime, nullable=True)
+    creation_date = schema.Column(types.DateTime, nullable=True)
+
+
 class UsersNotInterestedInCertificateStatusBox(model.BaseObject):
     """"""
 
@@ -101,7 +113,12 @@ class Certificate(model.BaseObject):
 
 _instrumented = False
 if not _instrumented:
-    for cls in [LoginStatistics, Certificate, UsersNotInterestedInCertificateStatusBox]:
+    for cls in [
+        LoginStatistics,
+        SurveyStatistics,
+        Certificate,
+        UsersNotInterestedInCertificateStatusBox,
+    ]:
         instrument_declarative(cls, metadata._decl_registry, metadata)
 
     _instrumented = True

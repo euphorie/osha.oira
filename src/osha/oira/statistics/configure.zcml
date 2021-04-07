@@ -5,5 +5,10 @@
 
   <include package=".browser" />
 
-</configure>
+  <subscriber
+      for="euphorie.content.survey.ISurvey
+           Products.CMFCore.WorkflowCore.ActionSucceededEvent"
+      handler=".utils.handle_tool_workflow"
+      />
 
+</configure>

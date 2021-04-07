@@ -4,13 +4,14 @@ from euphorie.client.model import Account
 from euphorie.client.model import Company
 from euphorie.client.model import Session as EuphorieSession
 from euphorie.client.model import SurveySession
-from osha.oira.client.model import SurveyStatistics
+from osha.oira.client.model import SurveyStatistics as Survey
 from osha.oira.statistics.model import AccountStatistics
 from osha.oira.statistics.model import Base
 from osha.oira.statistics.model import CompanyStatistics
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN
 from osha.oira.statistics.model import SurveySessionStatistics
+from osha.oira.statistics.model import SurveyStatistics
 
 import logging
 import sqlalchemy
@@ -51,11 +52,44 @@ class UpdateStatisticsDatabases(object):
             bind=self.session_statistics.connection(), checkfirst=True
         )
 
+        self.update_tool(country=country)
         self.update_assessment(country=country)
         self.update_account(country=country)
         self.update_company(country=country)
 
         self.session_statistics.commit()
+
+    def update_tool(self, country=None):
+        tools = (
+            self.session_application.query(
+                Survey,
+                sqlalchemy.func.count(
+                    sqlalchemy.func.distinct(SurveySession.account_id)
+                ),
+            )
+            .filter(Survey.zodb_path == SurveySession.zodb_path)
+            .filter(Survey.published)
+            .group_by(Survey.zodb_path)
+            .order_by(Survey.zodb_path)
+        )
+        if country is not None:
+            tools = tools.filter(Survey.zodb_path.startswith(country))
+
+        def tool_rows(offset):
+            batch = tools.limit(self.b_size).offset(offset)
+            rows = [
+                SurveyStatistics(
+                    zodb_path=tool.zodb_path,
+                    published_date=tool.published_date,
+                    years_online=(datetime.now() - tool.published_date).days / 365,
+                    num_users=num_users,
+                )
+                for tool, num_users in batch
+            ]
+            return rows
+
+        log.info("Table: tool")
+        self._process_batch(tool_rows)
 
     def update_assessment(self, country=None):
         sessions = (
@@ -191,7 +225,9 @@ def update_tool_info(survey):
             log.warn("Cannot handle creation date {}".format(creation_date))
             creation_date = None
 
-    zodb_path = "/".join(survey.getPhysicalPath()[-4:])
+    # cut out the part of the ZODB path that's used in postgresql
+    # (country / sector / tool)
+    zodb_path = "/".join(survey.getPhysicalPath()[-4:-1])
     published = survey.aq_parent.published == survey.id
     published_date = None
     if published:
@@ -200,12 +236,10 @@ def update_tool_info(survey):
         elif isinstance(survey.published, tuple):
             published_date = survey.published[2]
 
-    EuphorieSession.query(SurveyStatistics).filter(
-        SurveyStatistics.zodb_path == zodb_path
-    ).delete()
+    EuphorieSession.query(Survey).filter(Survey.zodb_path == zodb_path).delete()
 
     EuphorieSession.add(
-        SurveyStatistics(
+        Survey(
             zodb_path=zodb_path,
             language=survey.Language(),
             published=published,

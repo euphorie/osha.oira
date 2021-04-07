@@ -52,6 +52,17 @@ class AccountStatistics(Base):
     )
 
 
+class SurveyStatistics(Base):
+    """Statistically relevant data concerning a survey (tool)."""
+
+    __tablename__ = "tool"
+
+    zodb_path = schema.Column(types.String(512), primary_key=True)
+    published_date = schema.Column(types.DateTime, nullable=True)
+    years_online = schema.Column(types.Integer(), nullable=True)
+    num_users = schema.Column(types.Integer(), nullable=True)
+
+
 class SurveySessionStatistics(Base):
     """Statistically relevant data concerning a session."""
 

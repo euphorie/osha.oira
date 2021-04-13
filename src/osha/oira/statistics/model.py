@@ -52,6 +52,17 @@ class AccountStatistics(Base):
     )
 
 
+class SurveyStatistics(Base):
+    """Statistically relevant data concerning a survey (tool)."""
+
+    __tablename__ = "tool"
+
+    zodb_path = schema.Column(types.String(512), primary_key=True)
+    published_date = schema.Column(types.DateTime, nullable=True)
+    years_online = schema.Column(types.Integer(), nullable=True)
+    num_users = schema.Column(types.Integer(), nullable=True)
+
+
 class SurveySessionStatistics(Base):
     """Statistically relevant data concerning a session."""
 
@@ -60,9 +71,11 @@ class SurveySessionStatistics(Base):
     id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
     start_date = schema.Column(types.DateTime, nullable=False, default=functions.now())
     completion_percentage = schema.Column(types.Integer, nullable=True, default=0)
+    path = schema.Column(types.String(512), nullable=False)
     country = schema.Column(types.String(512), nullable=False)
     sector = schema.Column(types.String(512), nullable=False)
     tool = schema.Column(types.String(512), nullable=False)
+    account_id = schema.Column(types.Integer(), nullable=True)
     account_type = schema.Column(
         Enum([u"guest", u"converted", "full"]), default="full", nullable=True
     )
@@ -81,12 +94,12 @@ class CompanyStatistics(Base):
     )
 
     country = schema.Column(types.String(3))
-    employees = schema.Column(Enum([None, "1-9", "10-49", "50-249", "250+"]))
-    conductor = schema.Column(Enum([None, "staff", "third-party", "both"]))
+    employees = schema.Column(Enum(["no answer", "1-9", "10-49", "50-249", "250+"]))
+    conductor = schema.Column(Enum(["no answer", "staff", "third-party", "both"]))
     referer = schema.Column(
         Enum(
             [
-                None,
+                "no answer",
                 "employers-organisation",
                 "trade-union",
                 "national-public-institution",
@@ -96,6 +109,6 @@ class CompanyStatistics(Base):
             ]
         )
     )
-    workers_participated = schema.Column(types.Boolean())
-    needs_met = schema.Column(types.Boolean())
-    recommend_tool = schema.Column(types.Boolean())
+    workers_participated = schema.Column(Enum(["no answer", "yes", "no"]))
+    needs_met = schema.Column(Enum(["no answer", "yes", "no"]))
+    recommend_tool = schema.Column(Enum(["no answer", "yes", "no"]))

@@ -7,10 +7,16 @@ Changelog
 This branch will prepare for the migration to Plone5.2 and ultimately to python3.
 A big milestone will be the removal of Grok.
 
-6.2.19 (unreleased)
+6.2.20 (unreleased)
 -------------------
 
 - Nothing changed yet.
+
+
+6.2.19 (2021-04-13)
+-------------------
+
+- Statistics: Update tool info in postgresql when workflow state changes.
 
 
 6.2.18 (2021-03-03)

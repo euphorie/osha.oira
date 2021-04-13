@@ -6,8 +6,15 @@
   <browser:page
       name="update-statistics"
       for="plone.app.layout.navigation.interfaces.INavigationRoot"
-      permission="cmf.ManagePortal"
       class=".views.UpdateStatistics"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+      name="update-tool-info"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      class=".views.UpdateToolInfo"
+      permission="cmf.ManagePortal"
       />
 
 </configure>

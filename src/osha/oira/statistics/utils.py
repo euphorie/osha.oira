@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from euphorie.client.model import Account
 from euphorie.client.model import Company
+from euphorie.client.model import Session as EuphorieSession
 from euphorie.client.model import SurveySession
+from osha.oira.client.model import SurveyStatistics as Survey
 from osha.oira.statistics.model import AccountStatistics
 from osha.oira.statistics.model import Base
 from osha.oira.statistics.model import CompanyStatistics
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN
 from osha.oira.statistics.model import SurveySessionStatistics
+from osha.oira.statistics.model import SurveyStatistics
 
 import logging
 import sqlalchemy
@@ -41,19 +45,53 @@ class UpdateStatisticsDatabases(object):
 
     def update_database(self, country=None):
         log.info("Init & cleanup")
+        Base.metadata.drop_all(
+            bind=self.session_statistics.connection(), checkfirst=True
+        )
         Base.metadata.create_all(
             bind=self.session_statistics.connection(), checkfirst=True
         )
 
+        self.update_tool(country=country)
         self.update_assessment(country=country)
         self.update_account(country=country)
         self.update_company(country=country)
 
         self.session_statistics.commit()
 
-    def update_assessment(self, country=None):
-        self.session_statistics.query(SurveySessionStatistics).delete()
+    def update_tool(self, country=None):
+        tools = (
+            self.session_application.query(
+                Survey,
+                sqlalchemy.func.count(
+                    sqlalchemy.func.distinct(SurveySession.account_id)
+                ),
+            )
+            .filter(Survey.zodb_path == SurveySession.zodb_path)
+            .filter(Survey.published)
+            .group_by(Survey.zodb_path)
+            .order_by(Survey.zodb_path)
+        )
+        if country is not None:
+            tools = tools.filter(Survey.zodb_path.startswith(country))
 
+        def tool_rows(offset):
+            batch = tools.limit(self.b_size).offset(offset)
+            rows = [
+                SurveyStatistics(
+                    zodb_path=tool.zodb_path,
+                    published_date=tool.published_date,
+                    years_online=(datetime.now() - tool.published_date).days / 365,
+                    num_users=num_users,
+                )
+                for tool, num_users in batch
+            ]
+            return rows
+
+        log.info("Table: tool")
+        self._process_batch(tool_rows)
+
+    def update_assessment(self, country=None):
         sessions = (
             self.session_application.query(SurveySession, Account)
             .filter(Account.id == SurveySession.account_id)
@@ -70,9 +108,11 @@ class UpdateStatisticsDatabases(object):
                     id=session.id,
                     start_date=session.created,
                     completion_percentage=session.completion_percentage,
+                    path=session.zodb_path,
                     country=session.zodb_path.split("/")[0].encode("utf-8"),
                     sector=session.zodb_path.split("/")[1].encode("utf-8"),
                     tool=session.zodb_path.split("/")[2].encode("utf-8"),
+                    account_id=account.id,
                     account_type=account.account_type,
                 )
                 for session, account in batch
@@ -83,8 +123,6 @@ class UpdateStatisticsDatabases(object):
         self._process_batch(assessment_rows)
 
     def update_account(self, country=None):
-        self.session_statistics.query(AccountStatistics).delete()
-
         accounts = self.session_application.query(Account).order_by(Account.id)
         if country is not None:
             accounts = (
@@ -112,25 +150,32 @@ class UpdateStatisticsDatabases(object):
         self._process_batch(account_rows)
 
     def update_company(self, country=None):
-        self.session_statistics.query(CompanyStatistics).delete()
-
         companies = self.session_application.query(Company)
         if country is not None:
             companies = companies.filter(Company.country == country)
 
+        def yes_no(boolean):
+            if boolean is None:
+                return "no answer"
+            elif boolean:
+                return "yes"
+            else:
+                return "no"
+
         def company_rows(offset):
             batch = companies.limit(self.b_size).offset(offset)
+
             rows = [
                 CompanyStatistics(
                     id=company.id,
                     session_id=company.session_id,
                     country=company.country,
-                    employees=company.employees,
-                    conductor=company.conductor,
-                    referer=company.referer,
-                    workers_participated=company.workers_participated,
-                    needs_met=company.needs_met,
-                    recommend_tool=company.recommend_tool,
+                    employees=company.employees or "no answer",
+                    conductor=company.conductor or "no answer",
+                    referer=company.referer or "no answer",
+                    workers_participated=yes_no(company.workers_participated),
+                    needs_met=yes_no(company.needs_met),
+                    recommend_tool=yes_no(company.recommend_tool),
                 )
                 for company in batch
             ]
@@ -165,3 +210,40 @@ class UpdateStatisticsDatabases(object):
                 continue
             self.session_statistics.close()
             log.info("Updated {}".format(database))
+
+
+def handle_tool_workflow(obj, event):
+    update_tool_info(obj)
+
+
+def update_tool_info(survey):
+    creation_date = survey.created()
+    if not isinstance(creation_date, datetime):
+        try:
+            creation_date = creation_date.asdatetime()
+        except AttributeError:
+            log.warn("Cannot handle creation date {}".format(creation_date))
+            creation_date = None
+
+    # cut out the part of the ZODB path that's used in postgresql
+    # (country / sector / tool)
+    zodb_path = "/".join(survey.getPhysicalPath()[-4:-1])
+    published = survey.aq_parent.published == survey.id
+    published_date = None
+    if published:
+        if isinstance(survey.published, datetime):
+            published_date = survey.published
+        elif isinstance(survey.published, tuple):
+            published_date = survey.published[2]
+
+    EuphorieSession.query(Survey).filter(Survey.zodb_path == zodb_path).delete()
+
+    EuphorieSession.add(
+        Survey(
+            zodb_path=zodb_path,
+            language=survey.Language(),
+            published=published,
+            published_date=published_date,
+            creation_date=creation_date,
+        )
+    )

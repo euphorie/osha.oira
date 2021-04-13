@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.19 (unreleased)
+6.2.19 (2021-04-13)
 -------------------
 
 - Statistics: Update tool info in postgresql when workflow state changes.

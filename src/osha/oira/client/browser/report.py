@@ -266,6 +266,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         """
         query = (
             Session.query(model.Module, model.Risk, model.ActionPlan)
+            .select_from(model.Module)
             .filter(
                 sql.and_(
                     model.Module.session == self.session,
@@ -279,16 +280,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                     model.RISK_PRESENT_OR_TOP5_FILTER,
                 )
             )
-            .join(
-                (
-                    model.Risk,
-                    sql.and_(
-                        model.Risk.path.startswith(model.Module.path),
-                        model.Risk.depth == model.Module.depth + 1,
-                        model.Risk.session == self.session,
-                    ),
-                )
-            )
+            .join(model.Risk, model.Risk.parent_id == model.Module.id)
             .join(
                 (
                     model.ActionPlan,

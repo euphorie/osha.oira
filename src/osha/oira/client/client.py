@@ -2,7 +2,7 @@
 from ..interfaces import IProductLayer
 from .interfaces import IOSHAClientSkinLayer
 from euphorie.client.client import IClient
-from zope.component import adapts
+from zope.component import adapter
 from zope.interface import directlyProvidedBy
 from zope.interface import directlyProvides
 from zope.publisher.interfaces.browser import IBrowserSkinType
@@ -25,14 +25,13 @@ DESCRIPTION_CROP_LENGTH = 200
 log = logging.getLogger(__name__)
 
 
+@adapter(IClient, IProductLayer)
 class ClientPublishTraverser(DefaultPublishTraverse):
     """Publish traverser to setup the skin layer.
 
     This traverser marks the request with IOSHAClientSkinLayer when the
     client is traversed and the osha.oira product is installed.
     """
-
-    adapts(IClient, IProductLayer)
 
     def publishTraverse(self, request, name):
         from euphorie.client.utils import setRequest

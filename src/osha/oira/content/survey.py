@@ -359,10 +359,19 @@ class Node(object):
         self.problem_description = problem_description
 
 
+class MockWebHelpers(object):
+    can_view_session = True
+
+
 class ContentsOfSurvey(IdentificationReportDocxView):
 
     _compiler = ContentsOfSurveyCompiler
     nodes = []
+    # Webhelpers are actually not needed for _this_ computation. But the
+    # parent class's __call__ method checks if the user can_view_session. In the
+    # context of client, that makes sense. Here, there is no session to check for,
+    # so we override that check.
+    webhelpers = MockWebHelpers()
 
     def __init__(self, request, context):
         super(ContentsOfSurvey, self).__init__(request, context)

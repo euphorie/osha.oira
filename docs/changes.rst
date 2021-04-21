@@ -4,8 +4,8 @@ Changelog
 6.2.20 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Fix a bug in the CMS-facing contents-of-tool Word export
+- Translation updates
 
 6.2.19 (2021-04-13)
 -------------------

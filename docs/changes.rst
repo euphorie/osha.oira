@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.20 (unreleased)
+6.2.20 (2021-04-21)
 -------------------
 
 - Fix a bug in the CMS-facing contents-of-tool Word export

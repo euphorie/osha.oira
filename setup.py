@@ -5,7 +5,7 @@ import monkeypatch_setup  # noqa: F401
 import os
 
 
-version = "6.2.20"
+version = "6.2.21.dev0"
 
 tests_require = [
     "Euphorie [tests]",

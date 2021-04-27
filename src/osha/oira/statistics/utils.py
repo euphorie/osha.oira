@@ -66,6 +66,7 @@ class UpdateStatisticsDatabases(object):
                 sqlalchemy.func.count(
                     sqlalchemy.func.distinct(SurveySession.account_id)
                 ),
+                sqlalchemy.func.count(SurveySession.id),
             )
             .filter(Survey.zodb_path == SurveySession.zodb_path)
             .filter(Survey.published)
@@ -83,8 +84,9 @@ class UpdateStatisticsDatabases(object):
                     published_date=tool.published_date,
                     years_online=(datetime.now() - tool.published_date).days / 365,
                     num_users=num_users,
+                    num_assessments=num_assessments,
                 )
-                for tool, num_users in batch
+                for tool, num_users, num_assessments in batch
             ]
             return rows
 

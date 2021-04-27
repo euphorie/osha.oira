@@ -152,9 +152,11 @@ class UpdateStatisticsDatabases(object):
         self._process_batch(account_rows)
 
     def update_company(self, country=None):
-        companies = self.session_application.query(Company)
+        companies = self.session_application.query(
+            Company, SurveySession.zodb_path
+        ).filter(Company.session_id == SurveySession.id)
         if country is not None:
-            companies = companies.filter(Company.country == country)
+            companies = companies.filter(SurveySession.zodb_path.startswith(country))
 
         def yes_no(boolean):
             if boolean is None:
@@ -179,7 +181,7 @@ class UpdateStatisticsDatabases(object):
                     needs_met=yes_no(company.needs_met),
                     recommend_tool=yes_no(company.recommend_tool),
                 )
-                for company in batch
+                for company, zodb_path in batch
             ]
             return rows
 

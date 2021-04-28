@@ -1,7 +1,7 @@
 Changelog
 =========
 
-6.2.21 (unreleased)
+6.2.21 (2021-04-28)
 -------------------
 
 - Statistics: Filter questionnaire data by session zodb_path instead of answer

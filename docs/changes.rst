@@ -4,8 +4,8 @@ Changelog
 6.2.21 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Statistics: Filter questionnaire data by session zodb_path instead of answer
+  to the "country" question.
 
 6.2.20 (2021-04-21)
 -------------------

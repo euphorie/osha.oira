@@ -61,6 +61,7 @@ class SurveyStatistics(Base):
     published_date = schema.Column(types.DateTime, nullable=True)
     years_online = schema.Column(types.Integer(), nullable=True)
     num_users = schema.Column(types.Integer(), nullable=True)
+    num_assessments = schema.Column(types.Integer(), nullable=True)
 
 
 class SurveySessionStatistics(Base):

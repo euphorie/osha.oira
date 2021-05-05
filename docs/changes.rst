@@ -7,11 +7,23 @@ Changelog
 This branch will prepare for the migration to Plone5.2 and ultimately to python3.
 A big milestone will be the removal of Grok.
 
-6.2.20 (unreleased)
+6.2.22 (unreleased)
 -------------------
 
 - Nothing changed yet.
 
+
+6.2.21 (2021-04-28)
+-------------------
+
+- Statistics: Filter questionnaire data by session zodb_path instead of answer
+  to the "country" question.
+
+6.2.20 (2021-04-21)
+-------------------
+
+- Fix a bug in the CMS-facing contents-of-tool Word export
+- Translation updates
 
 6.2.19 (2021-04-13)
 -------------------

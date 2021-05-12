@@ -4,7 +4,7 @@ Changelog
 6.2.22 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Update Statistics: Order results to keep them stable during batching.
 
 
 6.2.21 (2021-04-28)

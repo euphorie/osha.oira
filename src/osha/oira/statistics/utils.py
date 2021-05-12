@@ -152,9 +152,11 @@ class UpdateStatisticsDatabases(object):
         self._process_batch(account_rows)
 
     def update_company(self, country=None):
-        companies = self.session_application.query(
-            Company, SurveySession.zodb_path
-        ).filter(Company.session_id == SurveySession.id)
+        companies = (
+            self.session_application.query(Company, SurveySession.zodb_path)
+            .filter(Company.session_id == SurveySession.id)
+            .order_by(Company.id)
+        )
         if country is not None:
             companies = companies.filter(SurveySession.zodb_path.startswith(country))
 

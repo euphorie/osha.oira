@@ -9,8 +9,9 @@
       i18n:domain="nuplone"
       tal:define="
         tools context/@@tools;
-        resources_timestamp here/@@refresh-resources-timestamp/resources_timestamp;
-        portal_url here/portal_url;
+        portal python:tools.portal;
+        resources_timestamp portal/@@get-resources-timestamp|nothing;
+        portal_url portal/portal_url;
       ">
   <head tal:define="style_url tools/portal/++resource++NuPlone.style">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

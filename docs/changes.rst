@@ -4,8 +4,8 @@ Changelog
 6.2.23 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Use the @@get-resources-timestamp view from Euphorie to invalidate static resources
+  [ale-rt]
 
 6.2.22 (2021-05-12)
 -------------------

@@ -11,6 +11,7 @@
   <body>
     <metal:title metal:fill-slot="title" i18n:translate="title_login">Login</metal:title>
     <metal:content fill-slot="content">
+        <p class="message notice">Please note that OiRA will not be available for maintenance reasons on 29 and 30 May 2021!</p>
         <p tal:condition="not:view/anonymous" class="notice message" i18n:translate="message_already_logged_in">
             You are already logged in. Please logout first before trying to login again.
         </p>

@@ -4,7 +4,7 @@ Changelog
 6.2.23 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Display a downtime message for the python 3 migration.
 
 
 6.2.22 (2021-05-12)

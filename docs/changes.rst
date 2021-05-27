@@ -4,8 +4,11 @@ Changelog
 7.0.0 (unreleased)
 ------------------
 
-This branch will prepare for the migration to Plone5.2 and ultimately to python3.
-A big milestone will be the removal of Grok.
+MAJOR BREAKING CHANGE
+
+This version requires Plone 5.2 and is intended to run in Python 3.8
+All traces of Grok have been removed.
+
 
 6.2.22 (unreleased)
 -------------------

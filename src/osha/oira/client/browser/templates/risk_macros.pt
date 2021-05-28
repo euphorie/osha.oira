@@ -19,7 +19,7 @@
             Information
       </h3>
       <tal:small condition="is_image_small">
-        <div class="image-collage pat-gallery pat-equaliser image-count-${view/number_images}"
+        <div class="image-collage pat-gallery count-${view/number_images} float-before"
              tal:define="
                images risk/@@images;
              "
@@ -31,7 +31,7 @@
 
           <!-- Notice that each image has an image caption in the title tag. -->
           <tal:many condition="python:view.number_images &gt; 1">
-            <div class="${view/image_class} columns"
+            <tal:image
                  tal:define="
                    thumb python:images.scale('image', width=590, height=800, direction='thumbnail');
                    large python:images.scale('image', width=590, height=1900, direction='thumbnail');
@@ -40,14 +40,14 @@
                  tal:on-error="nothing"
             >
               <a href="${large/url|nothing}"
-                 style="background-image: url(${large/url|nothing})"
+                 class="image"
                  title="${risk/caption|nothing}"
               ><img alt=""
                      src="${thumb/url}"
                 />
               </a>
-            </div>
-            <div class="${view/image_class} columns"
+            </tal:image>
+            <tal:image
                  tal:define="
                    thumb python:images.scale('image2', width=590, height=800, direction='thumbnail');
                    large python:images.scale('image2', width=590, height=1900, direction='thumbnail');
@@ -56,14 +56,14 @@
                  tal:on-error="nothing"
             >
               <a href="${large/url|nothing}"
-                 style="background-image: url(${large/url|nothing})"
+                 class="image"
                  title="${risk/caption2|nothing}"
               ><img alt=""
                      src="${thumb/url}"
                 />
               </a>
-            </div>
-            <div class="${view/image_class} columns"
+            </tal:image>
+            <tal:image
                  tal:define="
                    thumb python:images.scale('image3', width=590, height=800, direction='thumbnail');
                    large python:images.scale('image3', width=590, height=1900, direction='thumbnail');
@@ -72,14 +72,14 @@
                  tal:on-error="nothing"
             >
               <a href="${large/url|nothing}"
-                 style="background-image: url(${large/url|nothing})"
+                 class="image"
                  title="${risk/caption3|nothing}"
               ><img alt=""
                      src="${thumb/url}"
                 />
               </a>
-            </div>
-            <div class="${view/image_class} columns"
+            </tal:image>
+            <tal:image
                  tal:define="
                    thumb python:images.scale('image4', width=590, height=800, direction='thumbnail');
                    large python:images.scale('image4', width=590, height=1900, direction='thumbnail');
@@ -88,13 +88,13 @@
                  tal:on-error="nothing"
             >
               <a href="${large/url|nothing}"
-                 style="background-image: url(${large/url|nothing})"
+                 class="image"
                  title="${risk/caption4|nothing}"
               ><img alt=""
                      src="${thumb/url}"
                 />
               </a>
-            </div>
+            </tal:image>
           </tal:many>
           <tal:single condition="python:view.number_images == 1"
                       tal:on-error="nothing"

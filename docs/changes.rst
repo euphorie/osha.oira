@@ -1,7 +1,7 @@
 Changelog
 =========
 
-7.0.1 (unreleased)
+7.0.1 (2021-05-29)
 ------------------
 
 - Fix display issue with gallery images on Risk pages

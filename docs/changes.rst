@@ -4,8 +4,8 @@ Changelog
 7.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix display issue with gallery images on Risk pages
+- Fix a file naming issue in the contents of tool (CMS) download
 
 7.0.0 (2021-05-27)
 ------------------

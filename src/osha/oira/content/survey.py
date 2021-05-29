@@ -415,5 +415,4 @@ class ContentsOfSurvey(IdentificationReportDocxView):
             default=u"Contents of OIRA tool ${title}",
             mapping=dict(title=self.context.title),
         )
-        filename = translate(filename, context=self.request)
-        return filename.encode("utf8") + ".docx"
+        return "{}.docx".format(translate(filename, context=self.request))

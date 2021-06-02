@@ -4,8 +4,7 @@ Changelog
 7.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Try to fix display issues in the CMS by using upper case version of Title and Desctipion
 
 7.0.1 (2021-05-29)
 ------------------

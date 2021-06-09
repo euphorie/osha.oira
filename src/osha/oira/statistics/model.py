@@ -114,3 +114,4 @@ class CompanyStatistics(Base):
     needs_met = schema.Column(Enum(["no answer", "yes", "no"]))
     recommend_tool = schema.Column(Enum(["no answer", "yes", "no"]))
     timestamp = schema.Column(types.DateTime(), nullable=True)
+    zodb_path = schema.Column(types.String(512), nullable=False)

@@ -183,6 +183,7 @@ class UpdateStatisticsDatabases(object):
                     needs_met=yes_no(company.needs_met),
                     recommend_tool=yes_no(company.recommend_tool),
                     timestamp=company.timestamp,
+                    zodb_path=zodb_path,
                 )
                 for company, zodb_path in batch
             ]

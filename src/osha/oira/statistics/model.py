@@ -113,3 +113,4 @@ class CompanyStatistics(Base):
     workers_participated = schema.Column(Enum(["no answer", "yes", "no"]))
     needs_met = schema.Column(Enum(["no answer", "yes", "no"]))
     recommend_tool = schema.Column(Enum(["no answer", "yes", "no"]))
+    timestamp = schema.Column(types.DateTime(), nullable=True)

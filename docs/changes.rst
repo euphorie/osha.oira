@@ -4,7 +4,7 @@ Changelog
 7.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Statistics: include time stampd and zodb_path for questionnaire data
 
 
 7.0.2 (2021-06-02)

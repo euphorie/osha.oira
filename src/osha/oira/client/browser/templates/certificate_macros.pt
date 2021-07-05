@@ -11,59 +11,69 @@
       i18n:domain="euphorie"
 >
 
+  <metal:status_icon define-macro="status_icon"
+                     meta:interpolation="true"
+                     i18n:domain="euphorie"
+  >
+    <tal:if_not_disabled_by_userpreference condition="webhelpers/show_certificate_status_box">
+      <a class="icon progress pat-tooltip"
+         href="#status-sentinel"
+         data-pat-inject="history: record"
+         data-pat-tooltip="class: rich info; trigger: click; source: ajax; position-list: tr"
+         tal:condition="not:disabled"
+      >
+        <strong class="pie-graph"
+                title="${webhelpers/get_progress_indicator_title}"
+                data-percentage="${webhelpers/traversed_session/session/completion_percentage|string:0}"
+                tal:condition="webhelpers/show_completion_percentage"
+        >${webhelpers/traversed_session/session/completion_percentage|string:0}%</strong>
+      </a>
+    </tal:if_not_disabled_by_userpreference>
+  </metal:status_icon>
   <metal:status_box define-macro="status_box"
                     meta:interpolation="true"
                     i18n:domain="euphorie"
   >
-    <tal:if_not_disabled_by_userpreference condition="webhelpers/show_certificate_status_box">
-      <div class="status-sentinel pat-message notice"
-           tal:define="
-             certificate_view nocall: webhelpers/traversed_session/@@certificate;
-             country python: certificate_view.country;
-           "
-           tal:condition="certificate_view/can_display_certificate_notice"
+    <div id="status-sentinel"
+         hidden
+         tal:define="
+           certificate_view nocall: webhelpers/traversed_session/@@certificate;
+           country python: certificate_view.country;
+         "
+         tal:condition="certificate_view/can_display_certificate_notice"
+    >
+      <p tal:condition="certificate_view/can_display_certificate_teaser"
+         i18n:translate=""
       >
-        <form class="pat-inject"
-              action="${webhelpers/traversed_session/absolute_url}/@@remove-certificate-status-box#status"
-              method="POST"
-        >
-          <button class="close-panel"
-                  type="submit"
-                  i18n:translate=""
-          >Hide this message</button>
-        </form>
-        <p tal:condition="certificate_view/can_display_certificate_teaser"
-           i18n:translate=""
-        >
           You have completed
-          <tal:name i18n:name="completed">${certificate_view/completion_percentage}%</tal:name>
+        <tal:name i18n:name="completed">${certificate_view/completion_percentage}%</tal:name>
           of the risk assessment.
           When you have completed
-          <tal:name i18n:name="required">${country/certificate_completion_threshold}%</tal:name>
+        <tal:name i18n:name="required">${country/certificate_completion_threshold}%</tal:name>
           of the risk assessment,
           you will be eligible for a certificate.
-        </p>
-        <p tal:condition="certificate_view/can_display_certificate_earned">
-          <strong i18n:translate="">
-            <tal:name i18n:name="required">${certificate_view/completion_percentage}%</tal:name>
+      </p>
+      <p tal:condition="certificate_view/can_display_certificate_earned">
+        <strong i18n:translate="">
+          <tal:name i18n:name="required">${certificate_view/completion_percentage}%</tal:name>
             Complete!
-          </strong>
-          <tal:i18n i18n:translate="">
+        </strong>
+        <tal:i18n i18n:translate="">
           You have earned a certificate for this tool.
-          </tal:i18n>
+        </tal:i18n>
+      </p>
+      <p tal:replace="structure country/certificate_explanatory_sentence"></p>
+      <tal:earned condition="certificate_view/can_display_certificate_earned">
+        <p class="button-bar">
+          <a class="pat-button pat-inject"
+             href="${webhelpers/traversed_session/absolute_url}/@@certificate"
+             data-pat-inject="history: record"
+             i18n:translate=""
+          >View certificate</a>
         </p>
-        <p tal:replace="structure country/certificate_explanatory_sentence"></p>
-        <tal:earned condition="certificate_view/can_display_certificate_earned">
-          <p class="button-bar">
-            <a class="pat-button pat-inject"
-               href="${webhelpers/traversed_session/absolute_url}/@@certificate"
-               data-pat-inject="history: record"
-               i18n:translate=""
-            >View certificate</a>
-          </p>
-        </tal:earned>
-      </div>
-    </tal:if_not_disabled_by_userpreference>
+      </tal:earned>
+    </div>
+
 
   </metal:status_box>
 </html>

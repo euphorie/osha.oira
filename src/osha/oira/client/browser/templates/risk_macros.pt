@@ -9,13 +9,15 @@
 >
 
   <metal:riskinfo define-macro="riskinfo">
-    <article class="pat-rich pat-collapsible risk-module ${default_state|nothing}"
+    <article class="pat-rich pat-collapsible risk-module ${default_state|nothing} form-panel"
              tal:define="
                is_image_small python:webhelpers.is_image_small(risk);
              "
              tal:condition="view/show_info"
     >
-      <h3 i18n:translate="header_information">
+      <h3 class="form-separation-header"
+          i18n:translate="header_information"
+      >
             Information
       </h3>
       <tal:small condition="is_image_small">

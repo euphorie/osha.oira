@@ -31,64 +31,60 @@
 
           <!-- Notice that each image has an image caption in the title tag. -->
           <tal:many condition="python:view.number_images &gt; 1">
-            <tal:image
-                 tal:define="
-                   thumb python:images.scale('image', width=590, height=800, direction='thumbnail');
-                   large python:images.scale('image', width=590, height=1900, direction='thumbnail');
-                 "
-                 tal:condition="large"
-                 tal:on-error="nothing"
+            <tal:image tal:define="
+                         thumb python:images.scale('image', width=590, height=800, direction='thumbnail');
+                         large python:images.scale('image', width=590, height=1900, direction='thumbnail');
+                       "
+                       tal:condition="large"
+                       tal:on-error="nothing"
             >
-              <a href="${large/url|nothing}"
-                 class="image"
+              <a class="image"
+                 href="${large/url|nothing}"
                  title="${risk/caption|nothing}"
               ><img alt=""
                      src="${thumb/url}"
                 />
               </a>
             </tal:image>
-            <tal:image
-                 tal:define="
-                   thumb python:images.scale('image2', width=590, height=800, direction='thumbnail');
-                   large python:images.scale('image2', width=590, height=1900, direction='thumbnail');
-                 "
-                 tal:condition="large"
-                 tal:on-error="nothing"
+            <tal:image tal:define="
+                         thumb python:images.scale('image2', width=590, height=800, direction='thumbnail');
+                         large python:images.scale('image2', width=590, height=1900, direction='thumbnail');
+                       "
+                       tal:condition="large"
+                       tal:on-error="nothing"
             >
-              <a href="${large/url|nothing}"
-                 class="image"
+              <a class="image"
+                 href="${large/url|nothing}"
                  title="${risk/caption2|nothing}"
               ><img alt=""
                      src="${thumb/url}"
                 />
               </a>
             </tal:image>
-            <tal:image
-                 tal:define="
-                   thumb python:images.scale('image3', width=590, height=800, direction='thumbnail');
-                   large python:images.scale('image3', width=590, height=1900, direction='thumbnail');
-                 "
-                 tal:condition="large"
-                 tal:on-error="nothing"
+            <tal:image tal:define="
+                         thumb python:images.scale('image3', width=590, height=800, direction='thumbnail');
+                         large python:images.scale('image3', width=590, height=1900, direction='thumbnail');
+                       "
+                       tal:condition="large"
+                       tal:on-error="nothing"
             >
-              <a href="${large/url|nothing}"
-                 class="image"
+              <a class="image"
+                 href="${large/url|nothing}"
                  title="${risk/caption3|nothing}"
               ><img alt=""
                      src="${thumb/url}"
                 />
               </a>
             </tal:image>
-            <tal:image
-                 tal:define="
-                   thumb python:images.scale('image4', width=590, height=800, direction='thumbnail');
-                   large python:images.scale('image4', width=590, height=1900, direction='thumbnail');
-                 "
-                 tal:condition="large"
-                 tal:on-error="nothing"
+            <tal:image tal:define="
+                         thumb python:images.scale('image4', width=590, height=800, direction='thumbnail');
+                         large python:images.scale('image4', width=590, height=1900, direction='thumbnail');
+                       "
+                       tal:condition="large"
+                       tal:on-error="nothing"
             >
-              <a href="${large/url|nothing}"
-                 class="image"
+              <a class="image"
+                 href="${large/url|nothing}"
                  title="${risk/caption4|nothing}"
               ><img alt=""
                      src="${thumb/url}"
@@ -208,8 +204,7 @@
         <tal:not-custom condition="not:is_custom_risk">
           <tal:get define="
                      images risk/@@images;
-                   "
-          >
+                   ">
             <!-- Each image src is repeated as an image url as the value of the background image property inthe inline style on the link tag and in the HREF of the link tag. The background image should be a medium sized image, the image of the HREF should be the large, original image. -->
 
 
@@ -296,8 +291,7 @@
         <tal:not-custom condition="not:is_custom_risk">
           <tal:get define="
                      images risk/@@images;
-                   "
-          >
+                   ">
             <tal:many condition="python:view.number_images &gt; 1">
               <a class="image"
                  href="${large/url|nothing}"

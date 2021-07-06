@@ -62,6 +62,15 @@
       />
 
   <browser:page
+      name="status-tooltip"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      permission="zope2.View"
+      class=".certificate.Certificate"
+      template="templates/status-tooltip.pt"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
       name="certificate-print"
       for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
       permission="zope2.View"

@@ -5,7 +5,7 @@ from euphorie.client.model import Account
 from z3c.saconfig import Session
 
 
-class LoginForm(login.LoginForm):
+class Login(login.Login):
     def login(self, account, remember):
         # Fetch the account again, to circumvent caching
         session = Session()

@@ -10,8 +10,8 @@
         name="login_form"
         for="*"
         permission="zope.Public"
-        class="osha.oira.client.browser.login.LoginForm"
-        template="templates/login_form.pt"
+        class="osha.oira.client.browser.login.Login"
+        template="templates/login.pt"
         layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
         />
 

@@ -92,7 +92,7 @@
 
         <p class="button-bar" tal:condition="module/optional">
             <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="pat-button continue">Previous</button>
-            <button type="submit" name="next" value="next" i18n:translate="label_next" class="pat-button continue">Next</button>
+            <button type="submit" name="next" value="next" i18n:translate="label_next" class="pat-button default continue">Next</button>
         </p>
 
 
@@ -100,7 +100,7 @@
 </div>
         <p class="button-bar" id="nav-bar" tal:condition="not:module/optional">
             <button type="submit" name="next" value="previous" i18n:translate="label_previous" class="pat-button back">Previous</button>
-            <button type="submit" name="next" value="next" i18n:translate="label_next" class="pat-button continue">Next</button>
+            <button type="submit" name="next" value="next" i18n:translate="label_next" class="pat-button default continue">Next</button>
         </p>
 </form>
 </metal:slot>

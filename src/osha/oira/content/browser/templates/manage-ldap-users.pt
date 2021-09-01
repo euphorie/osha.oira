@@ -8,10 +8,8 @@
 >
   <body>
     <metal:title fill-slot="title"
-                 i18n:translate=""
     >
-      Manage LDAP users in
-      "<tal:span i18n:name="title">${here/title}</tal:span>"
+      Manage LDAP users in {here/title}
     </metal:title>
     <metal:content fill-slot="content">
     <script type="text/javascript">
@@ -25,7 +23,7 @@
     </script>
 
 
-      <h2 i18n:translate="">Existing users with local role <em tal:condition="python:context.portal_type=='euphorie.country'">Country Manager</em><em tal:condition="python:context.portal_type=='euphorie.sector'">Sector Manager</em> enabled</h2>
+      <h2>Existing users with local role <em tal:condition="python:context.portal_type=='euphorie.country'">Country Manager</em><em tal:condition="python:context.portal_type=='euphorie.sector'">Sector Manager</em> enabled</h2>
       <tal:existing-roles define="
                             userids view/local_roles_userids;
                           "
@@ -33,16 +31,16 @@
 
       <p class="message notice"
         tal:condition="python:context.portal_type=='euphorie.country' and not userids"
-        i18n:translate="country_no_managers">There are no country managers for this country.</p>
+        >There are no country managers for this country.</p>
       <p class="message notice"
         tal:condition="python:context.portal_type=='euphorie.sector' and not userids"
-        i18n:translate="sector_no_managers">There are no sector managers for this sector.</p>
+        >There are no sector managers for this sector.</p>
 
         <metal:macro define-macro="user-table">
           <table tal:condition="nocall:userids">
             <thead>
               <tr>
-                <th i18n:translate="">Login</th>
+                <th>Login</th>
                 <th class="actions">&nbsp;</th>
               </tr>
             </thead>
@@ -72,7 +70,6 @@
                                 type="submit"
                                 value="grant"
                                 tal:condition="not:has_managed_roles"
-                                i18n:translate=""
                         >Grant Roles</button>
                         <button class="micro floatAfter function"
                                 name="ldap_action"
@@ -80,7 +77,6 @@
                                 value="revoke"
                                 id="revoke_role"
                                 tal:condition="has_managed_roles"
-                                i18n:translate=""
                                 onClick="${python:context.portal_type=='euphorie.country' and 'return check_role_change()' or None}"
                         >Revoke Roles</button>
                       </tal:button>
@@ -94,7 +90,7 @@
         </metal:macro>
       </tal:existing-roles>
 
-      <h2 i18n:translate="">Search for LDAP users</h2>
+      <h2>Search for LDAP users</h2>
       <form style="margin: 0 0 10px;"
           method="POST">
         <input name="SearchableText"
@@ -104,7 +100,6 @@
         <button name="search-ldap"
                 type="submit"
                 value="1"
-                i18n:translate=""
         >Search</button>
       </form>
       <tal:ldap-users define="

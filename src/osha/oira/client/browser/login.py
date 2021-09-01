@@ -12,4 +12,4 @@ class Login(login.Login):
         account = session.query(Account).filter(Account.id == account.id).one()
         ls = LoginStatistics(account=account)
         account.logins.append(ls)
-        return super(LoginForm, self).login(account, remember)
+        return super(Login, self).login(account, remember)

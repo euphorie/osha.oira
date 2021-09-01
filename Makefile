@@ -32,7 +32,7 @@ jenkins: bin/test $(MO_FILES)
 
 
 pot: bin/i18ndude
-	i18ndude rebuild-pot --exclude="generated prototype examples" --pot $(EUPHORIE_POT) src/osha/oira --merge src/Euphorie/src/euphorie/deployment/locales/euphorie.pot --create euphorie
+	i18ndude rebuild-pot --exclude="generated prototype examples" --pot $(EUPHORIE_POT) src/osha/oira --create euphorie
 	$(MAKE) $(MFLAGS) $(EUPHORIE_PO_FILES)
 
 $(EUPHORIE_PO_FILES): src/osha/oira/locales/euphorie.pot

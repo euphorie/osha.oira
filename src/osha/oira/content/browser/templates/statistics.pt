@@ -19,50 +19,15 @@
 <metal:content fill-slot="content">
     <div class="introduction">
         <p>
-            Note: All reports are only 100% accurate for the month they were generated in. Any data about the past is to be treated as an indication only. In particular, numbers for a given month may decrease in subsequent reports. This includes the "Accumulated" sections in all reports as well as any report for which a reporting period more than one month in the past is selected.
+            The statistics for OiRA are now available under a separate source. You can log in with the same account as you logged in here.
         </p>
         <p>
-            The reason for this is that assessments are not fully tracked over time due to data protection. Older data may be overwritten when assessments are repeatedly modified, meaning that assessments will no longer be counted for past months if they have been modified during the current month.
-        </p>
-    </div>
-    <form class="concise statisticsParametersForm" action="${request/getURL}" enctype="${view/enctype}" method="${view/method}" id="${view/id}">
-        <tal:loop_widgets repeat="widget view/widgets/values">
-            <fieldset tal:attributes="id string:fieldset-${widget/id}">
-                <tal:widget replace="structure widget/render" />
-            </fieldset>
-        </tal:loop_widgets>
+            The global statistics are available here:<br/><a href="https://test.oiraproject.eu/statistics/global/" target="_statistics">https://test.oiraproject.eu/statistics/global/</a></p>
 
-        <div class="buttonBar" tal:define="actions view/actions/values|nothing" tal:condition="actions">
-          <tal:action repeat="action actions" replace="structure action/render" />
-        </div>
-    </form>
+            <p>The country-specific statistics are available here:<br/><a href="https://test.oiraproject.eu/statistics/countries/" target="_statistics">https://test.oiraproject.eu/statistics/countries/</a>
+         </p>
+    </div>
+
     </metal:content>
-    <metal:scripts fill-slot="scripts">
-    <script type="text/javascript">
-        function toggle(value) {
-            if (value == 'Country') {
-                jQuery('#fieldset-form-widgets-tools').hide();
-                jQuery('#fieldset-form-widgets-countries').show('fast');
-            } else if (value in {'Tool':true, 'OiRA Tool': true}) {
-                jQuery('#fieldset-form-widgets-tools').show('fast');
-                jQuery('#fieldset-form-widgets-countries').hide();
-            } else {
-                jQuery('#fieldset-form-widgets-tools').hide();
-                jQuery('#fieldset-form-widgets-countries').hide();
-            }
-        }
-        jQuery(document).ready(function () {
-            $('button.remove.jsOnly').hide();
-            var $selected = jQuery('#fieldset-form-widgets-report_type input:radio:checked');
-            if ($selected.length === 0) {
-                $selected = jQuery('#fieldset-form-widgets-report_type input.hidden-widget');
-            }
-            toggle($selected.attr('value'));
-            jQuery('#fieldset-form-widgets-report_type input:radio').change(function (ev) {
-                toggle(ev.target.value);
-            });
-        });
-    </script>
-    </metal:scripts>
   </body>
 </html>

@@ -1,74 +1,14 @@
 # coding=utf-8
 from Acquisition import aq_parent
-from datetime import datetime
 from euphorie.content import utils
 from euphorie.content.country import ICountry
 from euphorie.content.sector import ISector
 from euphorie.content.sectorcontainer import ISectorContainer
 from euphorie.content.surveygroup import ISurveyGroup
-from osha.oira import _
 from plone import api
-from zope.i18n import translate
 from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-
-
-@implementer(IVocabularyFactory)
-class ReportTypeVocabulary(object):
-    """ """
-
-    def __call__(self, context):
-        t = lambda txt: translate(txt, context=api.portal.get().REQUEST)  # noqa: E731
-        types = {t(_("OiRA Tool")).encode("utf-8"): "tool"}
-        if ISectorContainer.providedBy(context):
-            types.update(
-                {
-                    t(_("EU-OSHA Overview")).encode("utf-8"): "overview",
-                    t(_("Country")): "country",
-                }
-            )
-        elif ICountry.providedBy(context):
-            types.update({t(_("Country")).encode("utf-8"): "country"})
-        return SimpleVocabulary.fromItems(types.items())
-
-
-ReportTypeVocabularyFactory = ReportTypeVocabulary()
-
-
-@implementer(IVocabularyFactory)
-class ReportYearVocabulary(object):
-    """ """
-
-    def __call__(self, context):
-        return SimpleVocabulary.fromValues(range(datetime.now().year, 2010, -1))
-
-
-ReportYearVocabularyFactory = ReportYearVocabulary()
-
-
-@implementer(IVocabularyFactory)
-class ReportPeriodVocabulary(object):
-    """ """
-
-    def __call__(self, context):
-        t = lambda txt: translate(txt, context=site.REQUEST)  # noqa: E731
-        site = api.portal.get()
-        cal = site.REQUEST.locale.dates.calendars["gregorian"]
-        items = [(t(_(u"Whole year")), 0)]
-        items += [(m.encode("utf-8"), i + 1) for i, m in enumerate(cal.getMonthNames())]
-        items += [(t(_(u"1st Quarter")).encode("utf-8"), i + 2)]
-        items += [(t(_(u"2nd Quarter")).encode("utf-8"), i + 3)]
-        items += [(t(_(u"3rd Quarter")).encode("utf-8"), i + 4)]
-        items += [(t(_(u"4th Quarter")).encode("utf-8"), i + 5)]
-        terms = [
-            SimpleVocabulary.createTerm(value, value, token) for (token, value) in items
-        ]
-        return SimpleVocabulary(terms)
-
-
-ReportPeriodVocabularyFactory = ReportPeriodVocabulary()
 
 
 @implementer(IVocabularyFactory)
@@ -193,18 +133,3 @@ class CountriesVocabulary(object):
 
 
 CountriesVocabularyFactory = CountriesVocabulary()
-
-
-@implementer(IVocabularyFactory)
-class ReportFileFormatVocabulary(object):
-    """ """
-
-    def __call__(self, context):
-        formats = [
-            SimpleTerm("xls", token="Excel"),
-            SimpleTerm("pdf", token="PDF"),
-        ]
-        return SimpleVocabulary(formats)
-
-
-ReportFileFormatVocabularyFactory = ReportFileFormatVocabulary()

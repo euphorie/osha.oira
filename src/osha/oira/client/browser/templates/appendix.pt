@@ -11,16 +11,16 @@
   <metal:appendix define-macro="appendix" meta:interpolation="true" i18n:domain="euphorie">
     <p id="appendix">
         <tal:block repeat="page webhelpers/appendix_documents">
-          <a href="${page/url}">${page/title}</a>
+          <a class="appendix-segment" href="${page/url}">${page/title}</a>
         </tal:block>
         <a href="http://osha.europa.eu"
            target="_blank"
            i18n:translate="appendix_produced_by"
         >Produced by EU-OSHA.</a>
-        <a href="http://www.oiraproject.eu/" target="_blank" i18n:translate="appendix_about">About</a>
-        <a href="${webhelpers/client_url}/terms-and-conditions" target="_blank"  i18n:translate="appendix_privacy">Privacy</a>
-        <a href="${webhelpers/client_url}/disclaimer" target="_blank" i18n:translate="appendix_disclaimer">Disclaimer</a>
-        <a href="http://www.gnu.org/licenses/gpl.html" target="_blank" i18n:translate="appendix_gpl_license">GPL License</a>
+        <a class="appendix-segment" href="http://www.oiraproject.eu/" target="_blank" i18n:translate="appendix_about">About</a>
+        <a class="appendix-segment" href="${webhelpers/client_url}/terms-and-conditions" target="_blank"  i18n:translate="appendix_privacy">Privacy</a>
+        <a class="appendix-segment" href="${webhelpers/client_url}/disclaimer" target="_blank" i18n:translate="appendix_disclaimer">Disclaimer</a>
+        <a class="appendix-segment" href="http://www.gnu.org/licenses/gpl.html" target="_blank" i18n:translate="appendix_gpl_license">GPL License</a>
     </p>
     <div id="browser-warning" style="display:none">This will contain the warning translated</div>
   </metal:appendix>

@@ -24,7 +24,7 @@
               </a>
             </div>
             <div class="five columns">
-              <div class="pat-message notice"
+              <div class="pat-well info"
                    id="message-box"
               >
                 <form class="pat-form pat-validation"
@@ -101,9 +101,11 @@
                         Copy the following link to anyone to whom it may concern as proof that you've conducted this risk assessment.
                       </p>
                       <fieldset class="vertical">
-                        <textarea class="copy-box"
-                                  rows="2"
-                        >${view/public_server_url}/${view/language}/certificates?id=${view/certificate/secret}</textarea>
+                        <label>
+                          <textarea class="copy-box"
+                                    rows="2"
+                          >${view/public_server_url}/${view/language}/certificates?id=${view/certificate/secret}</textarea>
+                        </label>
                       </fieldset>
                     </tal:public>
                     <p tal:replace="structure view/country/certificate_explanatory_sentence"></p>
@@ -117,7 +119,7 @@
                     >
                       Unpublish
                     </button>
-                    <button class="pat-button disabled pat-depends"
+                    <button class="pat-button default disabled pat-depends"
                             name="public"
                             type="submit"
                             value="on"

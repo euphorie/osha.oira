@@ -4,8 +4,7 @@ Changelog
 7.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Cosmetic issue
 
 7.0.3 (2021-06-09)
 ------------------

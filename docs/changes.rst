@@ -1,7 +1,7 @@
 Changelog
 =========
 
-7.0.4 (unreleased)
+7.0.4 (2021-09-15)
 ------------------
 
 - Cosmetic issue

@@ -1,5 +1,6 @@
 # coding=utf-8
 from euphorie.client import utils
+from euphorie.content.utils import getRegionTitle
 from osha.oira.client import model
 from plone import api
 from plone.memoize.view import memoize
@@ -122,6 +123,10 @@ class Certificate(BrowserView):
     @property
     def tool_name(self):
         return self.webhelpers.tool_name
+
+    @property
+    def country_name(self):
+        return getRegionTitle(self.request, self.session.country.upper())
 
     @property
     @memoize

@@ -199,6 +199,10 @@ class PublicCertificate(BrowserView):
         return self.survey.Title() if self.survey else ""
 
     @property
+    def country_name(self):
+        return getRegionTitle(self.request, self.session.country.upper())
+
+    @property
     @memoize
     def language(self):
         if self.survey:

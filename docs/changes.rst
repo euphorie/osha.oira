@@ -4,8 +4,8 @@ Changelog
 7.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Get rid of a wrong translation for the report-comment placeholder. Let the default
+  from Euphorie become active again.
 
 7.0.4 (2021-09-15)
 ------------------

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-7.0.5 (unreleased)
+7.0.5 (2021-09-29)
 ------------------
 
 - Get rid of a wrong translation for the report-comment placeholder. Let the default

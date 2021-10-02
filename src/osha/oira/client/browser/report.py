@@ -145,7 +145,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         ws1.merge_cells("B2:C2")
         ws1["E2"] = t(_(u"label_report_date", default=u"Date of editing"))
         ws1["E2"].font = font_bold
-        ws1["F2"] = formatDate(self.request, survey.published[2])
+        ws1["F2"] = formatDate(self.request, self.session.modified)
         ws1["F2"].fill = PatternFill("solid", fgColor="DDDDDD")
         for cell in tuple(ws1.iter_rows(2, 2))[0]:
             cell.alignment = alignment_basic

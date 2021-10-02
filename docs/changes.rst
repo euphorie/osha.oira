@@ -4,8 +4,7 @@ Changelog
 7.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix a problem in the Excel report, MOI-488
 
 7.0.5 (2021-09-29)
 ------------------

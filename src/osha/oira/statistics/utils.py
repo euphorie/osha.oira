@@ -70,6 +70,8 @@ class UpdateStatisticsDatabases(object):
             )
             .filter(Survey.zodb_path == SurveySession.zodb_path)
             .filter(Survey.published)
+            .filter(Account.id == SurveySession.account_id)
+            .filter(Account.account_type != "guest")
             .group_by(Survey.zodb_path)
             .order_by(Survey.zodb_path)
         )

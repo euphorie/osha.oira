@@ -7,7 +7,13 @@
 
   <subscriber
       for="euphorie.content.survey.ISurvey
-           Products.CMFCore.WorkflowCore.ActionSucceededEvent"
+           euphorie.content.interfaces.IObjectPublishedEvent"
+      handler=".utils.handle_tool_workflow"
+      />
+
+  <subscriber
+      for="euphorie.content.survey.ISurvey
+           euphorie.content.interfaces.ISurveyUnpublishEvent"
       handler=".utils.handle_tool_workflow"
       />
 

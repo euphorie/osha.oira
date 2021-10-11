@@ -223,11 +223,16 @@ class UpdateStatisticsDatabases(object):
 
 
 def handle_tool_workflow(obj, event):
-    update_tool_info(obj)
+    surveygroup = obj.aq_parent
+    update_tool_info(surveygroup)
 
 
-def update_tool_info(survey):
-    creation_date = survey.created()
+def update_tool_info(surveygroup):
+    survey = None
+    if surveygroup.published:
+        survey = surveygroup.get(surveygroup.published)
+
+    creation_date = survey.created() if survey else surveygroup.created()
     if not isinstance(creation_date, datetime):
         try:
             creation_date = creation_date.asdatetime()
@@ -237,10 +242,9 @@ def update_tool_info(survey):
 
     # cut out the part of the ZODB path that's used in postgresql
     # (country / sector / tool)
-    zodb_path = "/".join(survey.getPhysicalPath()[-4:-1])
-    published = survey.aq_parent.published == survey.id
+    zodb_path = "/".join(surveygroup.getPhysicalPath()[-3:])
     published_date = None
-    if published:
+    if surveygroup.published and survey:
         if isinstance(survey.published, datetime):
             published_date = survey.published
         elif isinstance(survey.published, tuple):
@@ -251,8 +255,8 @@ def update_tool_info(survey):
     EuphorieSession.add(
         Survey(
             zodb_path=zodb_path,
-            language=survey.Language(),
-            published=published,
+            language=survey.Language() if survey else surveygroup.Language(),
+            published=bool(surveygroup.published),
             published_date=published_date,
             creation_date=creation_date,
         )

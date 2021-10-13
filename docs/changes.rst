@@ -1,7 +1,7 @@
 Changelog
 =========
 
-7.0.6 (unreleased)
+7.0.6 (2021-10-13)
 ------------------
 
 - Fix a problem in the Excel report, MOI-488

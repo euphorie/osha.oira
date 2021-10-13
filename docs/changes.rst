@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - Fix a problem in the Excel report, MOI-488
+- Fix inconsisten lookup of publioshed surveys for the statistics, MOI-483
 
 7.0.5 (2021-09-29)
 ------------------

@@ -1,11 +1,28 @@
 Changelog
 =========
 
-7.0.4 (unreleased)
+7.0.7 (unreleased)
 ------------------
 
 - Nothing changed yet.
 
+
+7.0.6 (2021-10-13)
+------------------
+
+- Fix a problem in the Excel report, MOI-488
+- Fix inconsisten lookup of publioshed surveys for the statistics, MOI-483
+
+7.0.5 (2021-09-29)
+------------------
+
+- Get rid of a wrong translation for the report-comment placeholder. Let the default
+  from Euphorie become active again.
+
+7.0.4 (2021-09-15)
+------------------
+
+- Cosmetic issue
 
 7.0.3 (2021-06-09)
 ------------------

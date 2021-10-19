@@ -61,9 +61,13 @@ WHERE guest_accounts.id = account.id
 
     def __call__(self):
         session.execute("BEGIN;")
+        count_sql = "select count(*) from account where account_type = 'guest'"
+        old_count = session.execute(count_sql).first()
+        logger.warning(f"Current number of test sessions: {old_count[0]}")
         result = session.execute(self.sql)
-        logger.info(result)
         session.execute("COMMIT;")
+        new_count = session.execute(count_sql).first()
+        logger.warning(f"New number of test sessions: {new_count[0]}")
 
 
 clean_up_guest_sessions = CleanUpGuestSessions()

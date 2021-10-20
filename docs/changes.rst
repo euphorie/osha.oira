@@ -4,8 +4,7 @@ Changelog
 7.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Added a script that removes stale guest sessions
 
 7.0.6 (2021-10-13)
 ------------------

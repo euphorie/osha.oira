@@ -200,17 +200,14 @@
     opacity: 0;
 }
       </style>
-      <div class="image-collage pat-gallery pat-equaliser"
+      <div class="image-collage pat-gallery count-${view/number_images}"
            tal:condition="view/number_images"
       >
         <tal:not-custom condition="not:is_custom_risk">
           <tal:get define="
                      images risk/@@images;
                    ">
-            <!-- Each image src is repeated as an image url as the value of the background image property inthe inline style on the link tag and in the HREF of the link tag. The background image should be a medium sized image, the image of the HREF should be the large, original image. -->
 
-
-            <!-- Notice that each image has an image caption in the title tag. -->
             <a class="${view/image_class} columns"
                href="${large/url|nothing}"
                style="background-image: url(${large/url|nothing}); background-repeat: no-repeat;"
@@ -221,8 +218,10 @@
                "
                tal:condition="thumb"
                tal:on-error="nothing"
-            ><img alt=""
-                   src="${thumb/url|nothing}"
+            ><img class="fixed-aspect-ratio"
+                   alt=""
+                   src="${style_url}/placeholder-16x9.png"
+                   style="background-image: url(${large/url|nothing})"
               />
             </a>
             <a class="${view/image_class} columns"
@@ -235,8 +234,10 @@
                "
                tal:condition="thumb"
                tal:on-error="nothing"
-            ><img alt=""
-                   src="${thumb/url|nothing}"
+            ><img class="fixed-aspect-ratio"
+                   alt=""
+                   src="${style_url}/placeholder-16x9.png"
+                   style="background-image: url(${large/url|nothing})"
               />
             </a>
             <a class="${view/image_class} columns"
@@ -249,8 +250,10 @@
                "
                tal:condition="thumb"
                tal:on-error="nothing"
-            ><img alt=""
-                   src="${thumb/url|nothing}"
+            ><img class="fixed-aspect-ratio"
+                   alt=""
+                   src="${style_url}/placeholder-16x9.png"
+                   style="background-image: url(${large/url|nothing})"
               />
             </a>
             <a class="${view/image_class} columns"
@@ -263,8 +266,10 @@
                "
                tal:condition="thumb"
                tal:on-error="nothing"
-            ><img alt=""
-                   src="${thumb/url|nothing}"
+            ><img class="fixed-aspect-ratio"
+                   alt=""
+                   src="${style_url}/placeholder-16x9.png"
+                   style="background-image: url(${large/url|nothing})"
               />
             </a>
           </tal:get>

@@ -63,23 +63,23 @@ cnt = len(solutiondirections)
 print("We removed %d solution directions" % cnt)
 
 # Now, remove all descriptions, but only if their parent is a module or risk...
-descriptions = soup.findAll("description")
-cnt = 0
-for elem in descriptions:
-    if elem.parent.name in ("module", "risk"):
-        elem.extract()
-        cnt += 1
-print("We removed %d descriptions" % cnt)
+#descriptions = soup.findAll("description")
+#cnt = 0
+#for elem in descriptions:
+#    if elem.parent.name in ("module", "risk"):
+#        elem.extract()
+#        cnt += 1
+#print("We removed %d descriptions" % cnt)
 
 # For all available soultions, only leave the 1st one in
-cnt = 0
-solutions = soup.findAll("solutions")
-for elem in solutions:
-    solution = elem.findAll("solution")
-    for subelem in solution[1:]:
-        subelem.extract()
-        cnt += 1
-print("We removed %d solutions" % cnt)
+#cnt = 0
+#solutions = soup.findAll("solutions")
+#for elem in solutions:
+#    solution = elem.findAll("solution")
+#    for subelem in solution[1:]:
+#        subelem.extract()
+#        cnt += 1
+#print("We removed %d solutions" % cnt)
 
 
 fh = open(output, "w")

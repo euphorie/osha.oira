@@ -153,7 +153,7 @@ MODULE_WITH_UNANSWERED_RISKS_FILTER = sql.and_(
                 node.session_id == model.SurveyTreeItem.session_id,
                 node.id == model.Risk.sql_risk_id,
                 node.type == "risk",
-                model.Risk.identification == None,
+                model.Risk.identification == None,  # noqa: E711
                 node.depth > model.SurveyTreeItem.depth,
                 node.path.like(model.SurveyTreeItem.path + "%"),
             )

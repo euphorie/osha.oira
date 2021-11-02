@@ -106,15 +106,6 @@
       />
 
   <browser:page
-      name="risk_macros"
-      for="*"
-      permission="zope.Public"
-      class=".webhelpers.WebHelpers"
-      template="templates/risk_macros.pt"
-      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
-      />
-
-  <browser:page
       name="certificate_macros"
       for="*"
       permission="euphorie.client.ViewSurvey"

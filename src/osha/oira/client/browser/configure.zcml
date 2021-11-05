@@ -146,4 +146,107 @@
       layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
       />
 
+  <!-- Training -->
+  <browser:page
+      name="training"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      class=".training.OSHATrainingView"
+      template="templates/training.pt"
+      permission="euphorie.client.ViewSurvey"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
+      name="training_slide"
+      for="euphorie.client.model.Risk"
+      class=".training.OSHATrainingSlide"
+      template="templates/training-slide.pt"
+      permission="zope.Public"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
+      name="training_slide"
+      for="euphorie.client.model.Module"
+      class=".training.OSHATrainingSlide"
+      template="templates/training-slide.pt"
+      permission="zope.Public"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
+      name="slide_question_intro"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      class=".training.SlideQuestionIntro"
+      template="templates/slide_question_intro.pt"
+      permission="euphorie.client.ViewSurvey"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+
+  <browser:page
+      name="slide_question"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      class=".training.SlideQuestion"
+      template="templates/slide_question.pt"
+      permission="euphorie.client.ViewSurvey"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
+      name="slide_question_success"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      class=".training.SlideQuestionSuccess"
+      template="templates/slide_question_success.pt"
+      permission="euphorie.client.ViewSurvey"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
+      name="slide_question_try_again"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      class=".training.SlideQuestionTryAgain"
+      template="templates/slide_question_try_again.pt"
+      permission="euphorie.client.ViewSurvey"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
+      name="training-certificate-inner"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      class=".training.SlideQuestionSuccess"
+      template="templates/training_certificate_inner.pt"
+      permission="euphorie.client.ViewSurvey"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
+      name="certificate-view"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      class=".training.SlideQuestionSuccess"
+      template="templates/training_certificate_view.pt"
+      permission="euphorie.client.ViewSurvey"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
+      name="training_certificate"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      class=".training.SlideQuestionSuccess"
+      template="templates/training_certificate.pt"
+      permission="euphorie.client.ViewSurvey"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
+      name="portlet-my-trainings"
+      for="euphorie.client.country.IClientCountry"
+      class=".training.MyTrainingsPortlet"
+      template="templates/portlet-my-trainings.pt"
+      permission="zope2.View"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+
+
 </configure>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      metal:use-macro="context/@@shell/macros/shell"
+      tal:define="
+        client nocall:request/client;
+        webhelpers nocall:context/@@webhelpers;
+        slide_data view/slide_data|python:[];
+      "
+      i18n:domain="euphorie"
+>
+
+  <body>
+    <metal:slot fill-slot="content"
+                tal:define="
+                  view_name string:@@${view/__name__};
+                  can_edit webhelpers/can_edit_session;
+                  counter python:0;
+                  slide_total_count view/slide_total_count;
+                  count_offset python:1;
+                  question_intro_url view/question_intro_url;
+                "
+    >
+      <div class="${python:'bereichsbezogene-gbu' if view.session.brand!='external' else None}"
+           id="content-pane"
+      >
+        <tal:block replace="tile:statusmessages" />
+
+        <div class="canvas-toolbar"
+             tal:condition="nocall:slide_data"
+        >
+
+          <div class="pat-collapsible context-menu closed align-right float-after"
+               id="more-menu"
+               data-pat-collapsible="close-trigger: *:not(#more-menu)"
+          >
+            <strong class="context-menu-label iconified more-menu-trigger pat-button collapsible-closed"
+                    tal:condition="python:view.session.brand=='external'"
+                    i18n:translate=""
+            >More&hellip;</strong>
+            <ul class="menu"
+                tal:condition="python:view.session.brand=='external'"
+            >
+              <li>
+                <a class="icon-download"
+                   href="${here/absolute_url}/@@pptx"
+                   i18n:translate=""
+                >Download as PowerPoint file</a>
+              </li>
+              <tal:comment condition="nothing">
+                Since the `disabled` class does not work in pat-collapsible, manually set the style attribute on the a-tag.
+                This needs to be removed once the "share training" will be implemented
+              </tal:comment>
+
+            </ul>
+          </div>
+
+          <button class="pat-button pat-fullscreen float-after"
+                  data-pat-fullscreen="selector:#slide-0"
+          ><tal:training condition="question_intro_url"
+                          i18n:translate=""
+            >Take training</tal:training><tal:notraining condition="not:question_intro_url"
+                            i18n:translate=""
+            >Run slideshow</tal:notraining></button>
+
+        </div>
+
+        <form class="slide-show"
+              action="${context/absolute_url}/${view_name}"
+              method="post"
+              tal:condition="nocall:slide_data"
+        >
+
+          <div class="presentation-slide"
+               id="slide-0"
+          >
+            <section class="slide-content template-cover pat-auto-scale"
+                     data-pat-auto-scale="size: contain"
+            >
+              <h1 class="slide-title">
+              ${view/session/title}
+              </h1>
+              <tal:image condition="view/title_image">
+                <figure class="illustration"><img src="${context/aq_parent/absolute_url}/images/external_site_logo/training_title" /></figure>
+              </tal:image>
+              <tal:noimage condition="not:view/title_image">
+                <img src="${media_url}/daimler-powerpoint-hero-1.jpg" />
+              </tal:noimage>
+            </section>
+            <a class="pat-inject slide-nav-next"
+               href="#slide-1"
+               data-pat-inject="target: #slide-0"
+               i18n:translate="label_next"
+            >Next</a>
+          </div>
+
+          <tal:items repeat="slide_path slide_data/keys">
+            <tal:slides define="
+                          slide_info python:slide_data[slide_path];
+                          item python:slide_info['item'];
+                          training_view python:slide_info['training_view'];
+                          slides python:slide_info['slides'];
+                        "
+                        repeat="slide slides"
+            >
+              <div class="presentation-slide"
+                   id="slide-${python:counter}"
+                   tal:define="
+                     slide_template slide/slide_template;
+                     global counter python:counter+1;
+                     content_item nocall:training_view/zodb_elem;
+                     slide_type slide/slide_type;
+                   "
+              >
+                <metal:call use-macro="training_view/macros/slide_content" />
+                <tal:first condition="python:counter==1">
+                  <a class="pat-inject slide-nav-prev"
+                     href="${context/absolute_url}/${view_name}#slide-${python:counter - 1}"
+                     data-pat-inject="target: #slide-0"
+                     i18n:translate="label_previous"
+                  >Previous</a>
+                </tal:first>
+                <tal:others condition="python:counter&gt;1">
+                  <a class="pat-inject slide-nav-prev"
+                     href="#slide-${python:counter - 1}"
+                     data-pat-inject="target: #slide-0"
+                     i18n:translate="label_previous"
+                  >Previous</a>
+                </tal:others>
+                <tal:next tal:define="
+                            last_item repeat/slide_path/end;
+                            last_slide repeat/slide/end;
+                          ">
+                  <a class="pat-inject slide-nav-next"
+                     href="#slide-${python:counter + 1}"
+                     data-pat-inject="target: #slide-0"
+                     tal:condition="python:not last_item or not last_slide"
+                     i18n:translate="label_next"
+                  >Next</a>
+
+                  <a class="pat-inject slide-nav-next"
+                     href="${view/question_intro_url}"
+                     data-pat-inject="source: #slide-0; target: #slide-0"
+                     tal:condition="python:not (not last_item or not last_slide) and question_intro_url"
+                     i18n:translate="label_next"
+                  >Next</a>
+                </tal:next>
+              </div>
+
+
+            </tal:slides>
+          </tal:items>
+        </form>
+
+        <tal:nodata condition="not:slide_data">
+          <h2 i18n:translate="">No training content is available</h2>
+        </tal:nodata>
+
+      </div>
+    </metal:slot>
+  </body>
+</html>

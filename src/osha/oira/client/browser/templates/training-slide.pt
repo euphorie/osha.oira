@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      i18n:domain="euphorie"
+>
+
+  <metal:slide define-macro="training_slide"
+               meta:interpolation="true"
+               i18n:domain="euphorie"
+  >
+    <fieldset class="pat-collapsible risk-module form-panel closed"
+              id="training_notes"
+              tal:define="
+                webhelpers nocall:context/@@webhelpers;
+                view_name string:@@${view/__name__};
+                can_edit webhelpers/can_edit_session;
+                training_view nocall:here/@@training_slide;
+                slides python:training_view.slides(standalone=True);
+                slide_path nothing;
+                slide_total_count python:len(slides);
+                count_offset python:0;
+              "
+              tal:condition="webhelpers/use_training_module"
+    >
+      <h3 class="form-separation-header"
+          i18n:translate="header_training"
+      >
+          Training notes
+      </h3>
+
+      <div class="panel-content">
+        <tal:slides repeat="slide slides">
+          <div class="presentation-slide"
+               tal:define="
+                 slide_template slide/slide_template;
+                 counter repeat/slide/number;
+                 content_item nocall:training_view/zodb_elem;
+                 slide_type slide/slide_type;
+               "
+          >
+            <metal:slidecontent define-macro="slide_content">
+              <tal:define define="
+                            scales content_item/@@images|nothing;
+                            id_extra python:counter and '-%s' % counter or '';
+                            name_extra python:slide_path and '-%s' % slide_path or '';
+                            session_url webhelpers/traversed_session/absolute_url;
+                            risk_type training_view/risk_type;
+                          ">
+                <section class="mode-view slide-content ${slide_template} pat-auto-scale"
+                         id="slide-content${id_extra}"
+                         style="${python: slide_type=='module' and scales and 'background-image: url({}/@@images/image/training)'.format(content_item.absolute_url()) or None}"
+                         data-pat-auto-scale="size: contain"
+                >
+                  <!-- MODULE SLIDE -->
+                  <tal:module condition="python:slide_type=='module'">
+                    <h1 class="slide-title">
+                        ${training_view/number} ${training_view/slide_title}
+                    </h1>
+                    <section class="slide-body pat-rich">
+
+                      <section class="information">
+                      </section>
+
+                    </section>
+                  </tal:module>
+
+                  <!-- RISK SLIDE -->
+                  <tal:risk condition="python:slide_type=='risk'">
+                    <p class="toggle pat-switch"
+                       data-pat-switch="selector: #slide-content${id_extra}; add: mode-view; remove: mode-*"
+                       i18n:translate=""
+                    >Click to edit</p>
+                    <h1 class="slide-title">
+                        ${training_view/number} ${training_view/slide_title}
+                    </h1>
+                    <section class="slide-body pat-rich">
+                      <section class="column-1">
+                        <tal:real-risk condition="not:training_view/is_custom">
+                          <figure class="illustration"
+                                  tal:condition="nocall:training_view/image"
+                          >
+                            <img class="fixed-aspect-ratio"
+                                 alt=""
+                                 src="${webhelpers/style_url}/placeholder-16x9.png"
+                                 style="background-image: url(${content_item/absolute_url}/images/image/training)"
+                            />
+                          </figure>
+                        </tal:real-risk>
+                        <tal:custom-risk condition="training_view/is_custom">
+                          <figure class="illustration"
+                                  tal:condition="nocall:training_view/image"
+                          >
+                            <img src="${session_url}/${python: '/'.join(training_view.context.short_path)}/@@image-display/training_export?name=${training_view/context/image_filename}" />
+                          </figure>
+                        </tal:custom-risk>
+                        <tal:default condition="python:risk_type!='policy'">
+                          <section class="slide-description"
+                                   tal:condition="training_view/description"
+                          >
+                            <tal:text replace="structure training_view/description">description</tal:text>
+                          </section>
+                        </tal:default>
+                      </section>
+
+
+                      <section class="column-2"
+                               tal:define="
+                                 training_notes training_view/training_notes|nothing;
+                               "
+                      >
+
+                        <tal:default condition="python:risk_type!='policy'">
+                          <tal:risk_measures>
+                            <div class="slide-measures mode-view"
+                                 id="slide-content${id_extra}-slide-measures"
+                            >
+                              <section class="pat-rich ${python:'pat-switch' if can_edit else None}"
+                                       data-pat-switch="selector: #slide-content${id_extra}; add: mode-edit-measures; remove: mode-view"
+                                       tal:define="
+                                         measures slide/content;
+                                       "
+                              >
+                                <h4 i18n:translate="label_existing_measures">Existing measures</h4>
+
+                                <ul class="${python:'measure-list' if can_edit else 'measure-list-read-only'}"
+                                    id="training-measures${id_extra}"
+                                    tal:condition="measures"
+                                >
+                                  <tal:measures tal:repeat="measure_id measures">
+                                    <li tal:condition="python:measures[measure_id]['active']"
+                                        tal:content="structure python:measures[measure_id]['action']"
+                                    >measure</li>
+                                  </tal:measures>
+                                </ul>
+                                <tal:comment condition="nothing">
+                                  NOTE: the source for the following pat-inject is hard-coded to '#training-measures-1'.
+                                  This is because the feedback we get back will always be the @@training_slide called for a single
+                                  risk. And that means that the `class="measure-list"` element will always have an id that ends with 1 (being the only slide). This "magic" happens because the TrainingView only returns the
+                                  slide for the risk indiciated by the parameter handle_training_measures_for below.
+                                </tal:comment>
+                                <fieldset class="pat-checklist pat-inject pat-autosubmit edit-measures pat-subform"
+                                          data-pat-inject="url: ${here/absolute_url}/${view_name}; source: #training-measures-1; target: #training-measures${id_extra};"
+                                          tal:condition="can_edit"
+                                >
+                                  <label tal:repeat="measure_id measures">
+                                    <input checked="${python:'checked' if measures[measure_id]['active'] else None}"
+                                           name="measure-${measure_id}"
+                                           type="checkbox"
+                                    />
+                                    <tal:measure replace="structure python:measures[measure_id]['action']" />
+                                  </label>
+                                  <input name="handle_training_measures_for"
+                                         type="hidden"
+                                         value="${python:name_extra or 1}"
+                                  />
+                                </fieldset>
+                              </section>
+                            </div>
+                          </tal:risk_measures>
+
+
+                          <div class="training-notes">
+                            <fieldset class="content-mirror pat-inject pat-autosubmit pat-subform"
+                                      data-pat-inject="url: ${here/absolute_url}/${view_name}; source: #training-notes-preview${id_extra}; target: #training-notes-preview${id_extra};"
+                                      tal:condition="can_edit"
+                            >
+                              <p class="notes output"
+                                 id="training-content-preview${id_extra}"
+                              ><em class="placeholder"
+                                    tal:condition="not:training_notes"
+                                    i18n:translate="label_training_notes"
+                                >Please enter any notes that you want to add for the training&hellip;</em><tal:notes condition="training_notes">${training_notes}</tal:notes></p>
+                              <textarea class="pat-content-mirror pat-switch"
+                                        name="training_notes${name_extra}"
+                                        placeholder="Please enter any notes that you want to add for the training…"
+                                        data-pat-content-mirror="target: #training-content-preview${id_extra}"
+                                        data-pat-switch="selector: #slide-content${id_extra}; add: mode-edit-notes; remove: mode-view"
+                                        i18n:attributes="placeholder label_training_notes"
+                              >${training_notes}</textarea>
+                              <input name="handle_training_notes"
+                                     type="hidden"
+                                     value="1"
+                              />
+                            </fieldset>
+
+                            <div class="${python:'training-notes-preview' if can_edit else 'training-notes-preview-read-only'}"
+                                 id="training-notes-preview${id_extra}"
+                            >
+                              <p tal:condition="python: not training_notes and can_edit"><em class="placeholder"
+                                    i18n:translate="label_training_notes"
+                                >Please enter any notes that you want to add for the training&hellip;</em></p>
+                              <pre class="pat-markdown"
+                                   tal:condition="training_notes"
+                              >
+    ${training_notes}
+                              </pre>
+                            </div>
+
+                          </div>
+                        </tal:default>
+                        <tal:policy condition="python:risk_type=='policy'">
+                          <section class="slide-description"
+                                   tal:condition="training_view/description"
+                          >
+                            <tal:text replace="structure training_view/description">description</tal:text>
+                          </section>
+                        </tal:policy>
+                      </section>
+                    </section>
+                  </tal:risk>
+
+
+                  <footer class="slide-footer">
+                    <p class="organisation-name">
+                      <strong>Daimler AG</strong>
+                    </p>
+                    <p class="colofon">
+                        ${training_view/webhelpers/traversed_session/Title} /
+                        ${training_view/department} /
+                        ${training_view/slide_date} /
+                      <tal:i18n i18n:translate="label_page">Page</tal:i18n>
+                       ${python: counter + count_offset}
+                      <tal:i18n i18n:translate="label_page_of">of</tal:i18n>
+                       ${slide_total_count}
+                    </p>
+                  </footer>
+
+                </section></tal:define>
+            </metal:slidecontent>
+          </div>
+        </tal:slides>
+      </div>
+    </fieldset>
+  </metal:slide>
+</html>

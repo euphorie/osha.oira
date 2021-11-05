@@ -241,4 +241,14 @@
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
+   <!-- Training -->
+  <browser:page
+      name="nuplone-view"
+      for="osha.oira.content.training_question.ITrainingQuestion"
+      class="euphorie.content.browser.surveygroup.SurveyGroupView"
+      template="templates/training_question.pt"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
 </configure>

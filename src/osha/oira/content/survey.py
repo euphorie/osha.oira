@@ -166,6 +166,17 @@ class IOSHASurvey(model.Schema):
         required=False,
     )
 
+    enable_web_training = schema.Bool(
+        title=_("label_enable_web_training", default=u"Enable Web Based Training?"),
+        description=_(
+            "help_enable_web_training",
+            default=u"If this option is activated, users will be able to take an "
+            "online training with this OiRA tool. A successful training will be "
+            "recorded and shown with a certificate on the user's dashbooard.",
+        ),
+        required=False,
+    )
+
 
 interface.alsoProvides(IOSHASurvey, IFormFieldProvider)
 
@@ -192,6 +203,7 @@ class OSHASurvey(MetadataBase):
     description_probability = DCFieldProperty(IOSHASurvey["description_probability"])
     description_frequency = DCFieldProperty(IOSHASurvey["description_frequency"])
     description_severity = DCFieldProperty(IOSHASurvey["description_severity"])
+    enable_web_training = DCFieldProperty(IOSHASurvey["enable_web_training"])
 
 
 class ContentsOfSurveyCompiler(IdentificationReportCompiler):

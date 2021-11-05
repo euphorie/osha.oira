@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      metal:use-macro="context/@@shell/macros/shell"
+      i18n:domain="euphorie"
+>
+
+  <metal:slot fill-slot="content">
+    <div id="content-pane">
+      <tal:block replace="tile:statusmessages" />
+      <div class="presentation-slide"
+           id="slide-0"
+      >
+        <section class="mode-view slide-content pat-auto-scale template-certificate"
+                 id="slide-content-questions-intro"
+                 data-pat-auto-scale="size: contain"
+        >
+          <section class="slide-body">
+            <form accept-charset="UTF-8"
+                  action="${here/absolute_url}/@@${view/__name__}"
+                  method="post"
+            >
+              <tal:certificate replace="structure here/@@training-certificate-inner" />
+              <section class="information">
+                <div class="pat-rich">
+                  <p i18n:translate="label_training_congratulations">
+                  Congratulations, you have now earned your certificate for this topic.
+                  </p>
+                  <p i18n:translate="label_training_achievement_listed">
+                  Your achievement will be listed under &ldquo;My trainings&rdquo; in the training portlet on the dashboard. From there you can always view or print your certificate if you like.
+                  </p>
+                </div>
+                <fieldset class="pat-checklist pat-subform pat-autosubmit">
+                  <label class="discrete">
+                    <input checked="${python:'checked' if view.training_status=='success' else None}"
+                           name="legal_crap"
+                           type="checkbox"
+                    />
+                    <tal:1i8n i18n:translate="label_training_legal_crap">I have participated in the yearly instruction on &ldquo;<tal:i18n i18n:name="tool_name">${view/survey_title}</tal:i18n>&rdquo;, and I hereby confirm that I have understood the presented contents. In case of questions or doubts I can ask my supervisor.
+                    </tal:1i8n>
+                  </label>
+                </fieldset>
+              </section>
+              <p class="button-bar">
+                <button class="pat-button pat-inject pat-depends close-fullscreen"
+                        href="${here/absolute_url}/@@training#slide-0"
+                        name="close_with_certificate"
+                        type="submit"
+                        data-pat-depends="legal_crap enable"
+                        i18n:translate="label_finish_with_certificate"
+                >Finish and earn certificate</button>
+
+                <a class="pat-button pat-depends"
+                   href="${here/absolute_url}/@@training_certificate"
+                   target="new"
+                   data-pat-depends="legal_crap enable"
+                   i18n:translate=""
+                >Print</a>
+
+                <button class="pat-button pat-inject float-after close-fullscreen"
+                        href="${here/absolute_url}/@@training#slide-0"
+                        name="close_no_certificate"
+                        type="submit"
+                        i18n:translate=""
+                >Close</button>
+              </p>
+            </form>
+          </section>
+        </section>
+      </div>
+    </div>
+  </metal:slot>
+</html>

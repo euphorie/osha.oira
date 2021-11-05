@@ -5,6 +5,7 @@ from euphorie.client.model import metadata
 from logging import getLogger
 from plone import api
 from Products.CMFPlone.i18nl10n import monthname_msgid
+from sqlalchemy import func
 from sqlalchemy import orm
 from sqlalchemy import schema
 from sqlalchemy import sql
@@ -111,6 +112,37 @@ class Certificate(model.BaseObject):
         return datetime.strptime(date, "%Y-%m-%d")
 
 
+class Training(model.BaseObject):
+    """Data table to record trainings"""
+
+    __tablename__ = "training"
+
+    id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
+    time = schema.Column(types.DateTime(), nullable=True, default=func.now())
+    account_id = schema.Column(
+        types.Integer(),
+        schema.ForeignKey(model.Account.id, onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
+    )
+    account = orm.relation(
+        model.Account,
+        backref=orm.backref("training", cascade="all, delete, delete-orphan"),
+    )
+    session_id = schema.Column(
+        types.Integer(),
+        schema.ForeignKey("session.id", onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
+    )
+    session = orm.relation(
+        "SurveySession",
+        cascade="all,delete-orphan",
+        single_parent=True,
+        backref=orm.backref("training", uselist=False, cascade="all"),
+    )
+    answers = schema.Column(types.Unicode, default=u"[]")
+    status = schema.Column(types.Unicode)
+
+
 _instrumented = False
 if not _instrumented:
     for cls in [
@@ -118,6 +150,7 @@ if not _instrumented:
         SurveyStatistics,
         Certificate,
         UsersNotInterestedInCertificateStatusBox,
+        Training,
     ]:
         instrument_declarative(cls, metadata._decl_registry, metadata)
 

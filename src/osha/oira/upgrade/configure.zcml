@@ -290,4 +290,28 @@
         />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:registerProfile
+      name="to_0020"
+      title="Add the Training Question type"
+      description=""
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      directory="to_0020"
+      />
+
+  <genericsetup:upgradeSteps
+        destination="20"
+        profile="osha.oira:default"
+        source="19">
+    <genericsetup:upgradeDepends
+        title="Add the Training Question type"
+        import_profile="osha.oira.upgrade:to_0020"
+        />
+    <genericsetup:upgradeStep
+          title="Create table for training"
+          handler=".to20.alembic_upgrade"
+          />
+    </genericsetup:upgradeSteps>
+
+
 </configure>

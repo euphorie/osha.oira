@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.23.dev0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-10-25 10:39+0000\n"
+"POT-Creation-Date: 2021-11-10 08:29+0000\n"
 "PO-Revision-Date: 2014-07-25 12:20+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -195,10 +195,6 @@ msgstr ""
 
 #: osha/oira/content/survey.py:127
 msgid "Probability"
-msgstr ""
-
-#: osha/oira/client/browser/templates/risk_macros.pt:433
-msgid "Read more"
 msgstr ""
 
 #. Default: "Sector"
@@ -495,7 +491,6 @@ msgid "header_disclaimer"
 msgstr "Disclaimer of Liability"
 
 #. Default: "Information"
-#: osha/oira/client/browser/templates/risk_macros.pt:18
 #: osha/oira/content/browser/templates/survey_view.pt:22
 msgid "header_information"
 msgstr "Information"
@@ -870,11 +865,6 @@ msgstr ""
 msgid "label_sector_description"
 msgstr ""
 
-#. Default: "${read_more} about this risk."
-#: osha/oira/client/browser/templates/risk_macros.pt:433
-msgid "label_show_more"
-msgstr ""
-
 #. Default: "How would you like to start"
 #: osha/oira/content/browser/templates/surveygroup_add.pt:18
 msgid "label_survey_source"
@@ -1087,23 +1077,14 @@ msgstr ""
 msgid "title_tool"
 msgstr "OiRA - Online interactive Risk Assessment"
 
-#. Default: "This risk is not present in your organisation, but since the sector organisation considers this one of the priority risks it must be included in this report."
-#: osha/oira/client/browser/templates/risk_macros.pt:403
-msgid "top5_risk_not_present"
-msgstr ""
-"This risk is not present in your organisation, but since the sector "
-"organisation considers this one of the priority risks it must be included in "
-"this report."
+#~ msgid "top5_risk_not_present"
+#~ msgstr ""
+#~ "This risk is not present in your organisation, but since the sector "
+#~ "organisation considers this one of the priority risks it must be included "
+#~ "in this report."
 
-#. Default: "This risk has not yet been assessed, but since it is considered \"high priority\" by the OiRA tool developers, it will always be included in the action plan. Please go to the identification and answer the statement."
-#: osha/oira/client/browser/templates/risk_macros.pt:408
-msgid "top5_risk_not_present_postponed"
-msgstr ""
-
-#. Default: "You responded negative to the above statement."
-#: osha/oira/client/browser/templates/risk_macros.pt:421
-msgid "warn_risk_present"
-msgstr "You responded negative to the above statement."
+#~ msgid "warn_risk_present"
+#~ msgstr "You responded negative to the above statement."
 
 #~ msgid "A measure that can be taken to mitigate a risk."
 #~ msgstr "A measure that can be taken to mitigate a risk."

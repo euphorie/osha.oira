@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.6.dev0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-10-25 10:39+0000\n"
+"POT-Creation-Date: 2021-11-10 08:29+0000\n"
 "PO-Revision-Date: 2013-08-15 11:24+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -196,10 +196,6 @@ msgstr ""
 msgid "Probability"
 msgstr "Probabilitat"
 
-#: osha/oira/client/browser/templates/risk_macros.pt:433
-msgid "Read more"
-msgstr "Més informació"
-
 #. Default: "Sector"
 #: osha/oira/content/browser/statistics.py:346
 msgid "Sector"
@@ -272,7 +268,8 @@ msgstr ""
 #: osha/oira/client/browser/templates/status-tooltip.pt:16
 msgid ""
 "You have completed ${view/completion_percentage}% of the risk assessment."
-msgstr "Heu completat el ${view/completion_percentage}% de l'avaluació de riscos."
+msgstr ""
+"Heu completat el ${view/completion_percentage}% de l'avaluació de riscos."
 
 #: osha/oira/client/browser/templates/status-tooltip.pt:35
 #: osha/oira/client/browser/templates/status.pt:55
@@ -498,7 +495,6 @@ msgid "header_disclaimer"
 msgstr "Avís d'exempció de responsabilitat"
 
 #. Default: "Information"
-#: osha/oira/client/browser/templates/risk_macros.pt:18
 #: osha/oira/content/browser/templates/survey_view.pt:22
 msgid "header_information"
 msgstr "Informació"
@@ -876,11 +872,6 @@ msgstr ""
 msgid "label_sector_description"
 msgstr ""
 
-#. Default: "${read_more} about this risk."
-#: osha/oira/client/browser/templates/risk_macros.pt:433
-msgid "label_show_more"
-msgstr "${read_more} sobre aquest risc."
-
 #. Default: "How would you like to start"
 #: osha/oira/content/browser/templates/surveygroup_add.pt:18
 msgid "label_survey_source"
@@ -1097,23 +1088,20 @@ msgstr "Informe estadístic"
 msgid "title_tool"
 msgstr "OiRA: avaluació de riscos interactiva en línia"
 
-#. Default: "This risk is not present in your organisation, but since the sector organisation considers this one of the priority risks it must be included in this report."
-#: osha/oira/client/browser/templates/risk_macros.pt:403
-msgid "top5_risk_not_present"
-msgstr ""
-"Aquest risc no existeix a la seva organització però, com que l'organització "
-"sectorial el considera un dels riscos prioritaris, cal incloure'l en aquest "
-"informe."
+#~ msgid "Read more"
+#~ msgstr "Més informació"
 
-#. Default: "This risk has not yet been assessed, but since it is considered \"high priority\" by the OiRA tool developers, it will always be included in the action plan. Please go to the identification and answer the statement."
-#: osha/oira/client/browser/templates/risk_macros.pt:408
-msgid "top5_risk_not_present_postponed"
-msgstr ""
+#~ msgid "label_show_more"
+#~ msgstr "${read_more} sobre aquest risc."
 
-#. Default: "You responded negative to the above statement."
-#: osha/oira/client/browser/templates/risk_macros.pt:421
-msgid "warn_risk_present"
-msgstr "Ha respost a l'afirmació anterior de forma negativa."
+#~ msgid "top5_risk_not_present"
+#~ msgstr ""
+#~ "Aquest risc no existeix a la seva organització però, com que "
+#~ "l'organització sectorial el considera un dels riscos prioritaris, cal "
+#~ "incloure'l en aquest informe."
+
+#~ msgid "warn_risk_present"
+#~ msgstr "Ha respost a l'afirmació anterior de forma negativa."
 
 #~ msgid "agree_and_continue"
 #~ msgstr "D'acord i continua"

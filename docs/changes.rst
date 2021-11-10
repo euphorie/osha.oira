@@ -4,7 +4,7 @@ Changelog
 7.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- More logging in statistics updater.
 
 
 7.0.6 (2021-10-13)

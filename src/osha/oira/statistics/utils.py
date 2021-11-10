@@ -43,8 +43,23 @@ class UpdateStatisticsDatabases(object):
         self.statistics_url = statistics_url
         self.b_size = b_size
 
+    def log_counts(self):
+        num_tools = self.session_statistics.query(SurveyStatistics).count()
+        num_assessments = self.session_statistics.query(SurveySessionStatistics).count()
+        num_accounts = self.session_statistics.query(AccountStatistics).count()
+        num_questionnaires = self.session_statistics.query(CompanyStatistics).count()
+        log.info(
+            "Tools: %s, Assessments: %s, Accounts: %s, Questionnaires: %s",
+            num_tools,
+            num_assessments,
+            num_accounts,
+            num_questionnaires,
+        )
+
     def update_database(self, country=None):
         log.info("Init & cleanup")
+        self.log_counts()
+
         Base.metadata.drop_all(
             bind=self.session_statistics.connection(), checkfirst=True
         )
@@ -58,6 +73,9 @@ class UpdateStatisticsDatabases(object):
         self.update_company(country=country)
 
         self.session_statistics.commit()
+
+        log.info("New statistics written")
+        self.log_counts()
 
     def update_tool(self, country=None):
         tools = (

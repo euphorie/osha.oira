@@ -10,6 +10,7 @@ version = "7.0.7.dev0"
 tests_require = [
     "Euphorie [tests]",
     "mock",
+    "alchemy_mock",
     "collective.testcaselayer",
     "pas.plugins.ldap",
     "node.ext.ldap",

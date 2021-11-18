@@ -24,6 +24,15 @@
         layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
         />
 
+    <browser:page
+        name="view"
+        for="euphorie.client.country.IClientCountry"
+        class="osha.oira.client.browser.country.OSHASessionsView"
+        template="templates/sessions-dashboard.pt"
+        permission="zope2.View"
+        layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+        />
+
   </configure>
 
 

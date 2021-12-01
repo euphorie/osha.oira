@@ -13,11 +13,11 @@
          country python: view.country;
        "
   >
-    <p tal:condition="not:view/can_display_certificate_notice" i18n:translate="">
-          You have completed ${view/completion_percentage}% of the risk assessment.
+    <p tal:condition="not:view/can_display_certificate_notice" i18n:translate="info_survey_completion">
+          You have completed <tal:name i18n:name="completed">${view/completion_percentage}</tal:name>% of the risk assessment.
     </p>
     <p tal:condition="view/can_display_certificate_teaser"
-       i18n:translate=""
+       i18n:translate="info_survey_completion_certificate"
     >
           You have completed
       <tal:name i18n:name="completed">${view/completion_percentage}%</tal:name>
@@ -28,7 +28,7 @@
           you will be eligible for a certificate.
     </p>
     <p tal:condition="view/can_display_certificate_earned">
-      <strong i18n:translate="">
+      <strong i18n:translate="info_survey_complete_certificate">
         <tal:name i18n:name="required">${view/completion_percentage}%</tal:name>
             Complete!
       </strong>

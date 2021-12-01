@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 0.21dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-11-10 08:29+0000\n"
+"POT-Creation-Date: 2021-12-01 11:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,6 @@ msgstr ""
 #: osha/oira/client/browser/templates/certificate-print.pt:61
 #: osha/oira/client/browser/templates/public-certificate.pt:36
 msgid "${certificate/title}"
-msgstr ""
-
-#: osha/oira/client/browser/templates/status-tooltip.pt:32
-#: osha/oira/client/browser/templates/status.pt:52
-msgid "${required} Complete!"
 msgstr ""
 
 #: osha/oira/content/country.py:63
@@ -256,19 +251,6 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: osha/oira/client/browser/templates/status-tooltip.pt:26
-#: osha/oira/client/browser/templates/status.pt:46
-msgid ""
-"You have completed ${completed} of the risk assessment. When you have "
-"completed ${required} of the risk assessment, you will be eligible for a "
-"certificate."
-msgstr ""
-
-#: osha/oira/client/browser/templates/status-tooltip.pt:16
-msgid ""
-"You have completed ${view/completion_percentage}% of the risk assessment."
-msgstr ""
-
 #: osha/oira/client/browser/templates/status-tooltip.pt:35
 #: osha/oira/client/browser/templates/status.pt:55
 msgid "You have earned a certificate for this tool."
@@ -276,6 +258,11 @@ msgstr ""
 
 #: osha/oira/client/browser/templates/certificate.pt:45
 msgid "Your company name"
+msgstr ""
+
+#. Default: "Agree and continue"
+#: osha/oira/client/browser/templates/privacy_policy.pt:69
+msgid "agree_and_continue"
 msgstr ""
 
 #. Default: "Simplified two criteria"
@@ -641,6 +628,23 @@ msgstr ""
 msgid "info_select_session"
 msgstr ""
 
+#. Default: "${required} Complete!"
+#: osha/oira/client/browser/templates/status-tooltip.pt:32
+#: osha/oira/client/browser/templates/status.pt:52
+msgid "info_survey_complete_certificate"
+msgstr ""
+
+#. Default: "You have completed ${completed}% of the risk assessment."
+#: osha/oira/client/browser/templates/status-tooltip.pt:17
+msgid "info_survey_completion"
+msgstr ""
+
+#. Default: "You have completed ${completed} of the risk assessment. When you have completed ${required} of the risk assessment, you will be eligible for a certificate."
+#: osha/oira/client/browser/templates/status-tooltip.pt:26
+#: osha/oira/client/browser/templates/status.pt:46
+msgid "info_survey_completion_certificate"
+msgstr ""
+
 #. Default: "This form will allow you to create a new OiRA Tool."
 #: osha/oira/content/browser/templates/surveygroup_add.pt:11
 msgid "intro_add_surveygroup"
@@ -804,9 +808,8 @@ msgstr ""
 
 #. Default: "Period"
 #: osha/oira/content/browser/statistics.py:54
-#, fuzzy
 msgid "label_period"
-msgstr "Vorhergehende"
+msgstr "Zeitraum"
 
 #. Default: "Previous"
 #: osha/oira/client/browser/templates/module_identification.pt:95
@@ -820,11 +823,8 @@ msgstr "Negative Aussage"
 
 #. Default: "Country"
 #: osha/oira/content/browser/statistics.py:86
-#, fuzzy
 msgid "label_report_countries"
-msgstr ""
-"Bitte geben Sie jegliche zusätzliche Kommentare, die in den Bericht "
-"aufgenommen werden sollen, in dieses Feld ein."
+msgstr "Land"
 
 #. Default: "Date of editing"
 #: osha/oira/client/browser/report.py:146
@@ -833,29 +833,23 @@ msgstr ""
 
 #. Default: "File Format"
 #: osha/oira/content/browser/statistics.py:104
-#, fuzzy
 msgid "label_report_file_format"
-msgstr ""
-"Bitte geben Sie jegliche zusätzliche Kommentare, die in den Bericht "
-"aufgenommen werden sollen, in dieses Feld ein."
+msgstr "Dateiformat"
 
 #. Default: "Report Period"
 #: osha/oira/content/browser/statistics.py:100
-#, fuzzy
 msgid "label_report_period"
-msgstr "Bericht"
+msgstr "Zeitraum des Berichts"
 
 #. Default: "Tool"
 #: osha/oira/content/browser/statistics.py:93
-#, fuzzy
 msgid "label_report_tools"
-msgstr "Bericht"
+msgstr "OiRA Wekrzeug"
 
 #. Default: "Report Type"
 #: osha/oira/content/browser/statistics.py:80
-#, fuzzy
 msgid "label_report_type"
-msgstr "Bericht"
+msgstr "Art des Berichts"
 
 #. Default: "Risk number"
 #: osha/oira/client/browser/report.py:61
@@ -919,9 +913,8 @@ msgstr ""
 
 #. Default: "Statistics"
 #: osha/oira/content/sitemenu.py:38
-#, fuzzy
 msgid "menu_statistics"
-msgstr "Statistikebene"
+msgstr "Statistik"
 
 #. Default: "Please choose a country of which you would like to view or copy an OiRA Tool."
 #: osha/oira/content/browser/templates/sectorcontainer_view.pt:31
@@ -1007,11 +1000,8 @@ msgstr ""
 
 #. Default: "Measure"
 #: osha/oira/client/browser/report.py:66
-#, fuzzy
 msgid "report_timeline_measure"
-msgstr ""
-"${responsible} ist verantwortlich für diese Aufgabe mit Beginn am ${start} "
-"und Ende am ${end}."
+msgstr "Maßnahme"
 
 #. Default: "Priority"
 #: osha/oira/client/browser/report.py:62
@@ -1025,9 +1015,8 @@ msgstr ""
 
 #. Default: "Responsible"
 #: osha/oira/client/browser/report.py:84
-#, fuzzy
 msgid "report_timeline_responsible"
-msgstr "${responsible} ist verantwortlich für diese Aufgabe."
+msgstr "Verantwortlich"
 
 #. Default: "Description of the risk"
 #: osha/oira/client/browser/report.py:59
@@ -1066,6 +1055,11 @@ msgstr "Vollständig neues OiRA-Tool erstellen"
 #. Default: "The terms and conditions have changed since your last visit. Please read the new terms and conditions carefully before proceding."
 #: osha/oira/client/browser/templates/privacy_policy.pt:23
 msgid "terms_changed"
+msgstr ""
+
+#. Default: "<h2>Organisational part of the Agency entrusted with the processing of personal data</h2> <p>William COCKBURN (information(at)osha.europa.eu)</p> <h2>Purpose</h2> <p>The purpose of the processing operation is the creation of and log-in to your OiRA (Online interactive Risk Assessment) account. The OiRA application is an instrument put at your disposal by the European Agency for Safety and Health at Work (EU-OSHA). This privacy policy applies to all products, services and websites offered by EU-OSHA in the framework of the OiRA application.</p> <h2>Legal basis</h2> <p>Council Regulation (EU) 2019/126 of the European Parliament and of the Council of 16 January 2019 establishing the European Agency for Safety and Health at Work (EU-OSHA), and repealing Council Regulation (EC) No 2062/94.</p> <h2>Type of data processed</h2> <p>- E-mail address: an email is necessary to access the online application, edit the input data, and delete the OiRA account. You can enter any e-mail address.</p> <p>- Any information you provide in the free text fields of the application of the OiRA tools and in the action plan of your risk assessments - (e.g. when you input a measure to tackle a risk, the person responsible for that measure, etc). The input of information in the free text fields just as any other personal data put into the tool is done voluntarily and based on consent.</p> <p>This website collects web statistics with Matomo that is entirely hosted in EU-OSHA’s servers, located in the European Union. The IP address is received by Matomo for geographical statistic purpose only (country, region and city).</p> <p>The OiRA software does collect statistics from logged in users based on aggregated data on number of accounts and risk assessments per tool by country, broken down to months.</p> <h2>Lawfulness of processing</h2> <p>The processing is based on Article 5.1 (d),(a) of <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2018.295.01.0039.01.ENG&toc=OJ:L:2018:295:TOC\" target=\"terms\">Regulation (EU) 2018/1725</a> of the European Parliament and of the Council of 23 October 2018 on the protection of natural persons with regard to the processing of personal data by the Union institutions, bodies, offices and agencies and on the free movement of such data (hereinafter the Regulation).</p> <h2>Data recipients</h2> <p>Personal data is only accessed by EU-OSHA’s technical providers based on request from the users in case of technical problems.</p> <h2>The data subject’s rights</h2> <p>Data subjects have the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject or, where applicable, the right to object to processing or the right to withdraw consent at any time without affecting the lawfulness of processing based on consent before its withdrawal (Articles 17, 18, 19, 20, 22, 23 and 24 of the Regulation).</p> <p>Any requests to exercise one of those rights should be directed per email to information(at)osha.europa.eu, mentioning the organisational part of the Agency entrusted with the processing operation as indicated in this privacy statement and the name of the processing operation, including in the subject the words “data protection”.</p> <p>Data subjects’ rights can be restricted only in the cases foreseen in Art 25 of the Regulation.</p> <h2>Information on the conservation period of data</h2> <p>We keep your data which is inaccessible for external users until you delete your account and/or your session(s). EU-OSHA stores data on our servers located in EU territory.</p> <h2>Security measures</h2> <p>We take appropriate security measures to protect against unauthorised access to or unauthorised alteration, disclosure or destruction of data. These include internal reviews of our data collection, storage and processing practices, appropriate encryption of communication and physical security measures to guard against unauthorised access to systems where we store personal data.</p> <h2>Request for information</h2> <p>For any further information regarding the handling of their personal data, data subjects can address their request to EU-OSHA Data Protection Officer at: dpo(at)osha.europa.eu.</p> <h2>Recourse to the EDPS</h2> <p>Data subjects are entitled to make recourse to the European Data Protection Supervisor: <a href=\"http://www.edps.europa.eu\" target=\"terms\">http://www.edps.europa.eu</a>, should they consider that the processing operations do not comply with the Regulation.</p> <h2>Date when processing starts</h2> <p>Date of creation of the OiRA account.</p> <p><em>Privacy statement last updated: 12/5/2019 3:29:56 PM</em></p>"
+#: osha/oira/client/browser/templates/privacy_policy.pt:31
+msgid "text_terms_and_conditions"
 msgstr ""
 
 #. Default: "Added risks (by you)"
@@ -1129,18 +1123,15 @@ msgstr ""
 #~ msgid "OiRA Tool version"
 #~ msgstr "OiRA-Tool-Version"
 
-#, fuzzy
 #~ msgid "Profile question"
 #~ msgstr "In diesem OiRA-Tool sind keine Profilfragen hinterlegt."
 
-#, fuzzy
 #~ msgid "Risk not present"
 #~ msgstr ""
 #~ "Diese Gefährdung ist in Ihrer Organisation nicht vorhanden. Da jedoch die "
 #~ "Organisation der Branche diese als eine der Prioritätsgefährdungen "
 #~ "einstuft, muss sie in den Bericht aufgenommen werden."
 
-#, fuzzy
 #~ msgid "Risk present"
 #~ msgstr "Sie haben die obenstehende Aussage verneint."
 
@@ -1156,7 +1147,6 @@ msgstr ""
 #~ msgid "Survey version"
 #~ msgstr "OiRA-Tool-Version"
 
-#, fuzzy
 #~ msgid "Whole year"
 #~ msgstr "Jahr"
 
@@ -1260,7 +1250,6 @@ msgstr ""
 #~ "Es wurden keine Gefährdungen ermittelt. Fahren Sie direkt mit dem Bericht "
 #~ "fort."
 
-#, fuzzy
 #~ msgid "expl_error"
 #~ msgstr ""
 #~ "Um die Gefährdungsbeurteilung an Ihre Organisation anzupassen, kann die "
@@ -1300,28 +1289,24 @@ msgstr ""
 #~ msgid "frequency_french_not_often"
 #~ msgstr "Nicht sehr häufig"
 
-#, fuzzy
 #~ msgid "frequency_french_not_often_help"
 #~ msgstr "Nicht sehr häufig"
 
 #~ msgid "frequency_french_often"
 #~ msgstr "Häufig"
 
-#, fuzzy
 #~ msgid "frequency_french_often_help"
 #~ msgstr "Häufig"
 
 #~ msgid "frequency_french_rare"
 #~ msgstr "Selten"
 
-#, fuzzy
 #~ msgid "frequency_french_rare_help"
 #~ msgstr "Selten"
 
 #~ msgid "frequency_french_regularly"
 #~ msgstr "Sehr häufig oder regelmäßig"
 
-#, fuzzy
 #~ msgid "frequency_french_regularly_help"
 #~ msgstr "Sehr häufig oder regelmäßig"
 
@@ -1336,7 +1321,6 @@ msgstr ""
 #~ msgid "header_consultation_of_workers"
 #~ msgstr "Rücksprache mit dem Personal und Teilnahme des Personals"
 
-#, fuzzy
 #~ msgid "header_login"
 #~ msgstr "Regionen"
 
@@ -1447,28 +1431,23 @@ msgstr ""
 #~ msgid "help_finalwords"
 #~ msgstr "Abschließende allgemeine Empfehlungen."
 
-#, fuzzy
 #~ msgid "help_header_actionplan"
 #~ msgstr ""
 #~ "Beschreiben Sie Ihre allgemeine Vorgehensweise zur Vermeidung bzw. "
 #~ "Reduzierung (wenn sich die Gefährdung nicht vermeiden lässt) einer "
 #~ "Gefährdung."
 
-#, fuzzy
 #~ msgid "help_header_authentication"
 #~ msgstr ""
 #~ "Dieser Text sollte den Registrierungs- und Anmeldevorgang beschreiben."
 
-#, fuzzy
 #~ msgid "help_header_evaluation"
 #~ msgstr ""
 #~ "Dieser Text sollte die Bewertung der ermittelten Gefährdungen beschreiben."
 
-#, fuzzy
 #~ msgid "help_header_finalwords"
 #~ msgstr "Abschließende allgemeine Empfehlungen."
 
-#, fuzzy
 #~ msgid "help_header_identification"
 #~ msgstr "Dieser Text sollte die Gefährdungsermittlung beschreiben."
 
@@ -1478,7 +1457,6 @@ msgstr ""
 #~ msgid "help_header_sessions"
 #~ msgstr "Sitzungen"
 
-#, fuzzy
 #~ msgid "help_header_start"
 #~ msgstr "Berichterstellung"
 
@@ -1610,7 +1588,6 @@ msgstr ""
 #~ "rechtzeitig vom Arbeitgeber in den Prozess der Gefährdungsbeurteilung "
 #~ "einbezogen werden."
 
-#, fuzzy
 #~ msgid "intro_documenation"
 #~ msgstr ""
 #~ "Der Einführungstext wird beim Start einer neuen OiRA-Tool-Sitzung "
@@ -1622,7 +1599,6 @@ msgstr ""
 #~ msgid "intro_documenation_client"
 #~ msgstr "Online-Client"
 
-#, fuzzy
 #~ msgid "intro_identification"
 #~ msgstr ""
 #~ "Sie können den Inhalt des Tools ausdrucken, sodass Sie am betreffenden "
@@ -1745,7 +1721,6 @@ msgstr ""
 #~ msgid "label_create_action_plan"
 #~ msgstr "Aktionsplan erstellen"
 
-#, fuzzy
 #~ msgid "label_default_effect"
 #~ msgstr "Löschen"
 
@@ -1758,36 +1733,28 @@ msgstr ""
 #~ msgid "label_evaluation"
 #~ msgstr "Bewertung"
 
-#, fuzzy
 #~ msgid "label_help_actionplan"
 #~ msgstr "Aktionsplan"
 
-#, fuzzy
 #~ msgid "label_help_authentication"
 #~ msgstr ""
 #~ "Dieser Text sollte den Registrierungs- und Anmeldevorgang beschreiben."
 
-#, fuzzy
 #~ msgid "label_help_evaluation"
 #~ msgstr "Bewertung"
 
-#, fuzzy
 #~ msgid "label_help_finalwords"
 #~ msgstr "Abschließende allgemeine Empfehlungen."
 
-#, fuzzy
 #~ msgid "label_help_identification"
 #~ msgstr "Ermittlung"
 
-#, fuzzy
 #~ msgid "label_help_preparation"
 #~ msgstr "Vorbereitung"
 
-#, fuzzy
 #~ msgid "label_help_reports"
 #~ msgstr "Bericht"
 
-#, fuzzy
 #~ msgid "label_help_sessions"
 #~ msgstr "Sitzungen"
 
@@ -1797,7 +1764,6 @@ msgstr ""
 #~ msgid "label_jump_to_report"
 #~ msgstr "Gehe zu Bericht"
 
-#, fuzzy
 #~ msgid "label_login"
 #~ msgstr "Nein"
 
@@ -1819,7 +1785,6 @@ msgstr ""
 #~ msgid "label_not_applicable"
 #~ msgstr "Nicht anwendbar"
 
-#, fuzzy
 #~ msgid "label_password"
 #~ msgstr "Gewünschtes Passwort"
 
@@ -1835,7 +1800,6 @@ msgstr ""
 #~ msgid "label_referer"
 #~ msgstr "Wo haben Sie von diesem Tool erfahren?"
 
-#, fuzzy
 #~ msgid "label_remove_measure"
 #~ msgstr ""
 #~ "Wählen Sie eine oder mehrere der angebotenen bekannten, allgemeinen "
@@ -1860,14 +1824,12 @@ msgstr ""
 #~ msgid "label_session_title"
 #~ msgstr "Namen für Ihre Gefährdungsbeurteilung eingeben"
 
-#, fuzzy
 #~ msgid "label_skip"
 #~ msgstr "Ja"
 
 #~ msgid "label_solution_direction"
 #~ msgstr "Lösung"
 
-#, fuzzy
 #~ msgid "label_start_identification"
 #~ msgstr "Ermittlung"
 
@@ -2033,28 +1995,24 @@ msgstr ""
 #~ msgid "severity_not_severe"
 #~ msgstr "Nicht sehr hoch"
 
-#, fuzzy
 #~ msgid "severity_not_severe_help"
 #~ msgstr "Nicht sehr hoch"
 
 #~ msgid "severity_severe"
 #~ msgstr "Hoch"
 
-#, fuzzy
 #~ msgid "severity_severe_help"
 #~ msgstr "Hoch"
 
 #~ msgid "severity_very_severe"
 #~ msgstr "Sehr hoch"
 
-#, fuzzy
 #~ msgid "severity_very_severe_help"
 #~ msgstr "Sehr hoch"
 
 #~ msgid "severity_weak"
 #~ msgstr "Niedrig"
 
-#, fuzzy
 #~ msgid "severity_weak_help"
 #~ msgstr "Niedrig"
 
@@ -2110,7 +2068,6 @@ msgstr ""
 #~ msgid "header_select_session"
 #~ msgstr "Frühere Sitzung zum Beenden oder zur Vorschau auswählen"
 
-#, fuzzy
 #~ msgid "label_add"
 #~ msgstr "Tag"
 
@@ -2175,25 +2132,20 @@ msgstr ""
 #~ msgid "Clear unsaved changes"
 #~ msgstr "Nicht gespeicherte Änderungen verwerfen"
 
-#, fuzzy
 #~ msgid "title_login"
 #~ msgstr ""
 #~ "OiRA – Online interactive Risk Assessment – das interaktive Online-"
 #~ "Werkzeug zur Gefährdungsbeurteilung"
 
-#, fuzzy
 #~ msgid "button_login"
 #~ msgstr "Drucken"
 
-#, fuzzy
 #~ msgid "reset_password"
 #~ msgstr "Passwort"
 
-#, fuzzy
 #~ msgid "message_reset_password"
 #~ msgstr "Passwort"
 
-#, fuzzy
 #~ msgid "header_error_unauthorized"
 #~ msgstr "Maßnahme ${index}"
 

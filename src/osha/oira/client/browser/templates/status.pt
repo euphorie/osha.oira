@@ -37,7 +37,7 @@
                   ${webhelpers/get_progress_indicator_title}
               </h3>
               <p tal:condition="certificate_view/can_display_certificate_teaser"
-                 i18n:translate=""
+                 i18n:translate="info_survey_completion_certificate"
               >
                 You have completed
                 <tal:name i18n:name="completed">${certificate_view/completion_percentage}%</tal:name>
@@ -48,7 +48,7 @@
                 you will be eligible for a certificate.
               </p>
               <p tal:condition="certificate_view/can_display_certificate_earned">
-                <strong i18n:translate="">
+                <strong i18n:translate="info_survey_complete_certificate">
                   <tal:name i18n:name="required">${certificate_view/completion_percentage}%</tal:name>
                   Complete!
                 </strong>

@@ -219,7 +219,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                                 elems = lang.split("-")
                                 lang = "{0}_{1}".format(elems[0], elems[1].upper())
                             value = translate(
-                                _("title_other_risks", default=u"Added risks (by you)"),
+                                _("Custom risks", default=u"Custom risks"),
                                 target_language=lang,
                             )
                         else:

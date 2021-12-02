@@ -215,30 +215,30 @@
   <browser:page
       name="show-statistics"
       for="euphorie.content.country.ICountry"
-      permission="cmf.ModifyPortalContent"
-      class=".statistics.CountryStatistics"
+      permission="euphorie.content.ManageCountry"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      template="templates/statistics.pt"
       />
   <browser:page
       name="show-statistics"
       for="euphorie.content.sector.ISector"
-      permission="cmf.ModifyPortalContent"
-      class=".statistics.SectorStatistics"
+      permission="euphorie.content.ManageCountry"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      template="templates/statistics.pt"
       />
   <browser:page
       name="show-statistics"
       for="euphorie.content.surveygroup.ISurveyGroup"
-      permission="cmf.ModifyPortalContent"
-      class=".statistics.SectorStatistics"
+      permission="euphorie.content.ManageCountry"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      template="templates/statistics.pt"
       />
   <browser:page
       name="show-statistics"
       for="euphorie.content.sectorcontainer.ISectorContainer"
       permission="cmf.ModifyPortalContent"
-      class=".statistics.GlobalStatistics"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      template="templates/statistics.pt"
       />
 
 </configure>

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.0.0 (unreleased)
+8.0.0 (2021-12-08)
 ------------------
 
 BREAKING CHANGE: ui freshup. Requires Euphorie >= 13.0.0

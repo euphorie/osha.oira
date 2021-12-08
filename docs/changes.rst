@@ -1,8 +1,10 @@
 Changelog
 =========
 
-7.0.8 (unreleased)
+8.0.0 (unreleased)
 ------------------
+
+BREAKING CHANGE: ui freshup. Requires Euphorie >= 13.0.0
 
 - More logging in statistics updater.
 

@@ -5,7 +5,7 @@ import monkeypatch_setup  # noqa: F401
 import os
 
 
-version = "7.0.8.dev0"
+version = "8.0.0.dev0"
 
 tests_require = [
     "Euphorie [tests]",
@@ -44,7 +44,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        "Euphorie >=12.0.0",
+        "Euphorie >=13.0.0",
         "NuPlone >=2.0.0",
         "Pillow",
         "Products.statusmessages",

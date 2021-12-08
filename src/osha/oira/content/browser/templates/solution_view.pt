@@ -14,7 +14,7 @@
 
 
     <metal:content fill-slot="content" tal:define="can_edit python:tools.checkPermission('Modify portal content')">
-      <p style="font-size:130%" tal:content="structure context/Description">A description of the solution</p>
+      <p style="font-size:130%" tal:content="structure python:view.render_md(context.Description())">A description of the solution</p>
 
       <dl class="grid span-9">
         <dt i18n:translate="label_description">Description</dt>

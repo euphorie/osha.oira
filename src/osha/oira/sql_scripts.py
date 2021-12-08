@@ -64,7 +64,7 @@ WHERE guest_accounts.id = account.id
         count_sql = "select count(*) from account where account_type = 'guest'"
         old_count = session.execute(count_sql).first()
         logger.warning(f"Current number of test sessions: {old_count[0]}")
-        result = session.execute(self.sql)
+        session.execute(self.sql)
         session.execute("COMMIT;")
         new_count = session.execute(count_sql).first()
         logger.warning(f"New number of test sessions: {new_count[0]}")

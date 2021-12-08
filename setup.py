@@ -5,7 +5,7 @@ import monkeypatch_setup  # noqa: F401
 import os
 
 
-version = "7.0.7.dev0"
+version = "7.0.8.dev0"
 
 tests_require = [
     "Euphorie [tests]",
@@ -72,5 +72,6 @@ setup(
       outdated_tools = osha.oira.scripts:outdated_tools
       write_statistics = osha.oira.scripts:write_statistics
       update_statistics = osha.oira.statistics.scripts:update_statistics
+      clean_up_guest_sessions = osha.oira.sql_scripts:clean_up_guest_sessions
       """,
 )

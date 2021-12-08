@@ -1,11 +1,16 @@
 Changelog
 =========
 
-7.0.7 (unreleased)
+7.0.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- More logging in statistics updater.
 
+
+7.0.7 (2021-10-20)
+------------------
+
+- Added a script that removes stale guest sessions
 
 7.0.6 (2021-10-13)
 ------------------

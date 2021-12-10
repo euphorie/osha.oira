@@ -1,5 +1,6 @@
 from lxml import etree
-from pathlib import posixpath
+from pkg_resources import resource_exists
+from pkg_resources import resource_stream
 from plone.namedfile.file import NamedBlobImage
 from tempfile import TemporaryDirectory
 from urllib.parse import unquote
@@ -7,7 +8,6 @@ from zope.component.hooks import setSite
 
 import logging
 import requests
-import sys
 import transaction
 import urllib.request
 
@@ -16,11 +16,6 @@ log = logging.getLogger(__name__)
 
 BASE_URL = "https://oiraproject.eu"
 
-
-if len(sys.argv) > 3:
-    images_path = posixpath.abspath(sys.argv[3])
-else:
-    images_path = posixpath.abspath(".")
 
 app = locals()["app"]
 setSite(app["Plone2"])
@@ -56,14 +51,14 @@ for page_num in range(26):
         else:
             name = basename
         filename = "{} 300.png".format(name)
-        filepath = posixpath.join(images_path, filename)
         blob_image = None
-        if not posixpath.exists(filepath):
+        if not resource_exists("osha.oira.data", "/".join(("OiRA-Icons", filename))):
             log.warning(
                 "Image file not found: {} ({}). Attempting download".format(
-                    filepath, sourcename
+                    filename, sourcename
                 )
             )
+            continue
             with TemporaryDirectory(prefix="euphorieimage") as tmpdir:
                 temp_file_path = f"{tmpdir}/{filename}"
                 urllib.request.urlretrieve(
@@ -80,7 +75,9 @@ for page_num in range(26):
                     )
                     continue
         else:
-            with open(filepath, "rb") as imagefile:
+            with resource_stream(
+                "osha.oira.data", "/".join(("OiRA-Icons", filename))
+            ) as imagefile:
                 blob_image = NamedBlobImage(data=imagefile.read(), filename=filename)
 
         if not blob_image:

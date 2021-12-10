@@ -290,4 +290,15 @@
         />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+        destination="20"
+        profile="osha.oira:default"
+        source="19"
+        >
+      <genericsetup:upgradeStep
+          title="Add images to tools"
+          handler=".to20.map_images"
+          />
+  </genericsetup:upgradeSteps>
+
 </configure>

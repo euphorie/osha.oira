@@ -4,8 +4,7 @@ Changelog
 8.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Upgrade step for adding tool images
 
 8.0.0 (2021-12-08)
 ------------------

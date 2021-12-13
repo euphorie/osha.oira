@@ -23,7 +23,7 @@ class AddView(solution.AddView):
 
 
 class EditForm(solution.EditForm):
-    """ Override to allow us to set form title and button labels """
+    """Override to allow us to set form title and button labels"""
 
     def updateFields(self):
         super(EditForm, self).updateFields()

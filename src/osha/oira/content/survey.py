@@ -40,7 +40,7 @@ help_default_severity = _(
 
 
 class IOSHASurvey(model.Schema):
-    """ Adds a logo, URL and name of an external reference site to a survey """
+    """Adds a logo, URL and name of an external reference site to a survey"""
 
     enable_external_site_link = schema.Bool(
         title=_(

@@ -122,7 +122,7 @@ def remove_birt_file_format(context):
 
 
 def update_types_information(context):
-    """ Reimport types to activate new behavior """
+    """Reimport types to activate new behavior"""
     setup = api.portal.get_tool("portal_setup")
     setup.runImportStepFromProfile("profile-osha.oira:default", "typeinfo")
 

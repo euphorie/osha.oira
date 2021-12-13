@@ -2,8 +2,8 @@
 from euphorie.client.model import Session as EuphorieSession
 from euphorie.content.surveygroup import ISurveyGroup
 from osha.oira.statistics.model import get_postgres_url
-from osha.oira.statistics.utils import UpdateStatisticsDatabases
 from osha.oira.statistics.utils import update_tool_info
+from osha.oira.statistics.utils import UpdateStatisticsDatabases
 from plone import api
 from Products.Five import BrowserView
 

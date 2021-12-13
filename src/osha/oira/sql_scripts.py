@@ -1,19 +1,19 @@
 # coding=utf-8
 from euphorie.client import model
 from pkg_resources import resource_filename
-from Zope2.App import zcml
 from z3c.saconfig import Session
+from Zope2.App import zcml
 
 import logging
 import sys
+
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 stdout = logging.StreamHandler(sys.stdout)
 stderr = logging.StreamHandler(sys.stderr)
 formatter = logging.Formatter(
-    "%(asctime)s %(levelname)s %(name)s %(message)s",
-    "%Y-%m-%d %H:%M:%S"
+    "%(asctime)s %(levelname)s %(name)s %(message)s", "%Y-%m-%d %H:%M:%S"
 )
 stdout.setFormatter(formatter)
 stdout.setLevel(logging.INFO)

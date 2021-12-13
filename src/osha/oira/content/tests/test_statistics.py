@@ -1,7 +1,6 @@
 from euphorie.content.country import ICountry
 from euphorie.content.sector import ISector
-from osha.oira.content import statistics
-from osha.oira.content.statistics import ReportPeriod
+from osha.oira.content.browser import statistics
 from osha.oira.interfaces import IOSHAContentSkinLayer
 from osha.oira.testing import OIRA_INTEGRATION_TESTING
 from plone import api
@@ -11,7 +10,7 @@ from zope.component import getUtility
 from zope.interface.declarations import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
 
-import unittest2 as unittest
+import unittest
 
 
 class TestStatistics(unittest.TestCase):
@@ -27,7 +26,7 @@ class TestStatistics(unittest.TestCase):
     def __test_stats_url(self, context, country, period, year, rtype, format):
         tool = "be/xxxx/xxxx/2010-08-05"
         view = getMultiAdapter((context, context.REQUEST), name="show-statistics")
-        report_period = ReportPeriod({"year": year, "period": period})
+        report_period = statistics.ReportPeriod({"year": year, "period": period})
         data = {
             "countries": country,
             "report_period": report_period,

@@ -57,6 +57,7 @@ setup(
         "requests",
         "setuptools",
         "slc.zopescript",
+        "zope.app.publication",
         "zope.publisher",
     ],
     tests_require=tests_require,

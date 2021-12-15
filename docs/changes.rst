@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.0.2 (unreleased)
+8.0.2 (2021-12-15)
 ------------------
 
 - Translation fixes

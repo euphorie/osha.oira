@@ -4,8 +4,8 @@ Changelog
 8.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Translation fixes
+- CMS: the "statistics" page now points to the external statistics page (metabase)
 
 8.0.1 (2021-12-13)
 ------------------

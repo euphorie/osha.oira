@@ -106,14 +106,6 @@
       />
 
   <browser:page
-      name="certificate_macros"
-      for="*"
-      permission="euphorie.client.ViewSurvey"
-      template="templates/certificate_macros.pt"
-      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
-      />
-
-  <browser:page
       name="identification"
       for="euphorie.client.model.Module"
       permission="euphorie.client.ViewSurvey"

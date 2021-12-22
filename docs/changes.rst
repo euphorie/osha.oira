@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.0.3 (unreleased)
+8.0.3 (2021-12-22)
 ------------------
 
 - Adjust to changes in Euphorie (moved certificate macros there)

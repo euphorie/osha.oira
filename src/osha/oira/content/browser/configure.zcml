@@ -201,10 +201,6 @@
       />
 
   <!-- Statistics -->
-    <adapter
-        factory=".statistics.ReportPeriodFactory"
-        name="osha.oira.content.statistics.IReportPeriod"
-        />
   <browser:page
       name="write-statistics"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -218,6 +214,7 @@
       permission="cmf.ModifyPortalContent"
       class=".statistics.CountryStatistics"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      template="templates/statistics.pt"
       />
   <browser:page
       name="show-statistics"
@@ -225,6 +222,7 @@
       permission="cmf.ModifyPortalContent"
       class=".statistics.SectorStatistics"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      template="templates/statistics.pt"
       />
   <browser:page
       name="show-statistics"
@@ -232,6 +230,7 @@
       permission="cmf.ModifyPortalContent"
       class=".statistics.SectorStatistics"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      template="templates/statistics.pt"
       />
   <browser:page
       name="show-statistics"
@@ -239,6 +238,7 @@
       permission="cmf.ModifyPortalContent"
       class=".statistics.GlobalStatistics"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      template="templates/statistics.pt"
       />
 
 </configure>

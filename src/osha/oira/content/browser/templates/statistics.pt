@@ -10,8 +10,8 @@
       id="statistics"
       metal:use-macro="context/@@layout/macros/layout">
 <head>
-<metal:title fill-slot="title"><span i18n:translate="" tal:content="view/label" tal:omit-tag=""></span> -
-    <span i18n:translate="" tal:content="view/label_detail" tal:omit-tag=""></span>
+<metal:title fill-slot="title" tal:define="title_detail view/title_detail|nothing"><span i18n:translate="" tal:content="view/label" tal:omit-tag=""></span> -
+    <span i18n:translate="" tal:content="view/label_detail" tal:omit-tag=""></span><tal:detail condition="title_detail">: ${title_detail}</tal:detail>
   </metal:title>
 </head>
 

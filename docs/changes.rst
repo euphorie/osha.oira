@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.0.4 (unreleased)
+8.0.4 (2022-01-05)
 ------------------
 
 - CMS: the "statistics" page was further simplified and a bug was fixed

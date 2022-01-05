@@ -4,8 +4,8 @@ Changelog
 8.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- CMS: the "statistics" page was further simplified and a bug was fixed
+  Refs: #MOI-527
 
 8.0.3 (2021-12-22)
 ------------------

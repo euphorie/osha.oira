@@ -10,6 +10,7 @@ version = "8.0.5.dev0"
 tests_require = [
     "Euphorie [tests]",
     "mock",
+    "alchemy_mock",
     "collective.testcaselayer",
     "pas.plugins.ldap",
     "node.ext.ldap",

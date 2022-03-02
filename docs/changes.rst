@@ -4,7 +4,7 @@ Changelog
 8.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added "about" page.
 
 
 8.0.4 (2022-01-05)

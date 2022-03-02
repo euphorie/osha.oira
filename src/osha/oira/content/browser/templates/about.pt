@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      metal:use-macro="context/@@layout/macros/layout"
+      i18n:domain="euphorie"
+>
+  <body>
+    <metal:title fill-slot="title">
+      <h1>About OiRA</h1>
+    </metal:title>
+
+    <metal:content fill-slot="content">
+      <div class="main-content">
+        <h2>Versions</h2>
+        <ul>
+          <li tal:repeat="version view/versions">${version}</li>
+        </ul>
+
+      </div>
+    </metal:content>
+  </body>
+
+</html>

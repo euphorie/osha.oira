@@ -241,4 +241,12 @@
       template="templates/statistics.pt"
       />
 
+  <browser:page
+      name="about.html"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      class=".about.About"
+      permission="cmf.ManagePortal"
+      template="templates/about.pt"
+      />
+
 </configure>

@@ -11,7 +11,7 @@ class About(BrowserView):
 
     @property
     def packages(self):
-        return ["Euphorie", "osha.oira"]
+        return ["Euphorie", "osha.oira", "NuPlone"]
 
     def get_version(self, package):
         try:

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.1.0 (unreleased)
+8.1.0 (2022-03-16)
 ------------------
 
 - Added "about" page.

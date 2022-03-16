@@ -5,7 +5,7 @@ import monkeypatch_setup  # noqa: F401
 import os
 
 
-version = "8.0.5.dev0"
+version = "8.1.0.dev0"
 
 tests_require = [
     "Euphorie [tests]",
@@ -29,8 +29,9 @@ setup(
         "Framework :: Plone",
         "Framework :: Plone :: 5.1",
         "License :: OSI Approved :: GNU General Public License (GPL)",
-        "Programming Language :: Python :: 2 :: Only",
-        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
@@ -45,7 +46,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        "Euphorie >=13.0.0",
+        "Euphorie >=14.0.0",
         "htmllaundry",
         "mobile.sniffer",
         "NuPlone >=2.0.0",

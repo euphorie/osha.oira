@@ -1,10 +1,13 @@
 Changelog
 =========
 
-8.0.5 (unreleased)
+8.1.0 (unreleased)
 ------------------
 
 - Added "about" page.
+- Guard against XSS in several views
+- Adjust to Euphorie changes from version 14.0.0
+- Drop support for python2
 
 
 8.0.4 (2022-01-05)

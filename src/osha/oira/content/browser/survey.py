@@ -1,23 +1,7 @@
 # coding=utf-8
 from euphorie.content.browser import survey
-from euphorie.content.profilequestion import IProfileQuestion
-from zope.component import getMultiAdapter
 
 import z3c.form
-
-
-class SurveyView(survey.SurveyView):
-    def modules_and_profile_questions(self):
-        return [self._morph(child) for child in self.context.values()]
-
-    def _morph(self, child):
-        state = getMultiAdapter((child, self.request), name="plone_context_state")
-        return {
-            "id": child.id,
-            "title": child.title,
-            "url": state.view_url(),
-            "is_profile_question": IProfileQuestion.providedBy(child),
-        }
 
 
 class EditForm(survey.EditForm):

@@ -38,15 +38,6 @@
 
   <!-- Survey -->
   <browser:page
-      name="nuplone-view"
-      for="euphorie.content.survey.ISurvey"
-      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
-      class=".survey.SurveyView"
-      permission="zope2.View"
-      template="templates/survey_view.pt"
-      />
-
-  <browser:page
       name="edit"
       for="euphorie.content.survey.ISurvey"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"

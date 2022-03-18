@@ -4,8 +4,8 @@ Changelog
 8.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- The "Survey view" and the Word-export of the tool contents in the CMS have
+  been moved to Euphorie.
 
 8.1.0 (2022-03-16)
 ------------------

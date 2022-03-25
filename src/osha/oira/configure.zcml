@@ -28,7 +28,6 @@
 
   <include package="pas.plugins.ldap" />
   <include package="euphorie.deployment" />
-  <include package=".browser" />
   <include package=".client" />
   <include package=".content" />
   <include package=".tiles" />
@@ -54,6 +53,12 @@
     component=".vocabularies.CountriesVocabularyFactory"
     name="osha.oira.countries"
     />
+
+  <interface
+      interface=".interfaces.IOSHAContentSkinLayer"
+      type="zope.publisher.interfaces.browser.IBrowserSkinType"
+      name="OiRA"
+      />
 
   <browser:page
       name="outdated-tools-view"

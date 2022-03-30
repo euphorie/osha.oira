@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.1.1 (unreleased)
+8.1.1 (2022-03-30)
 ------------------
 
 - The "Survey view" and the Word-export of the tool contents in the CMS have

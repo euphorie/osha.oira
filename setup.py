@@ -49,7 +49,7 @@ setup(
         "Euphorie >=14.0.0",
         "htmllaundry",
         "mobile.sniffer",
-        "NuPlone >=2.0.0",
+        "NuPlone >=2.1.0",
         "pas.plugins.ldap",
         "Pillow",
         "plone.api",

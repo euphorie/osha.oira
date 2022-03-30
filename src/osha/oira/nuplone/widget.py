@@ -38,8 +38,8 @@ def ChoiceWidgetFactory(field, request):
 class LargeTextAreaWidget(TextAreaWidget, Widget):
     """Textarea widget implementation."""
 
-    klass = u"textarea-widget"
-    value = u""
+    klass = "textarea-widget"
+    value = ""
 
 
 @adapter(IText, IOSHAContentSkinLayer)

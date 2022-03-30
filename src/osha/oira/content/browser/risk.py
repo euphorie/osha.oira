@@ -35,12 +35,12 @@ class AddForm(risk.AddForm, OSHAFormMixin):
     def updateFields(self):
         super(AddForm, self).updateFields()
         self.setDynamicDescriptions()
-        self.buttons["save"].title = _(u"button_save_changes", default=u"Save changes")
-        self.buttons["cancel"].title = _(u"button_cancel", default=u"Cancel")
+        self.buttons["save"].title = _("button_save_changes", default="Save changes")
+        self.buttons["cancel"].title = _("button_cancel", default="Cancel")
 
     @property
     def label(self):
-        return _(u"Add Risk")
+        return _("Add Risk")
 
 
 class AddView(risk.AddView):
@@ -53,5 +53,5 @@ class EditForm(risk.EditForm, OSHAFormMixin):
     def updateFields(self):
         super(EditForm, self).updateFields()
         self.setDynamicDescriptions()
-        self.buttons["save"].title = _(u"button_save_changes", default=u"Save changes")
-        self.buttons["cancel"].title = _(u"button_cancel", default=u"Cancel")
+        self.buttons["save"].title = _("button_save_changes", default="Save changes")
+        self.buttons["cancel"].title = _("button_cancel", default="Cancel")

@@ -32,10 +32,10 @@ class Sitemenu(sitemenu.Sitemenu):
             getMultiAdapter((context, request), name="show-statistics")
         except ComponentLookupError:
             return
-        menu = {"title": _("menu_admin", default=u"Admin")}
+        menu = {"title": _("menu_admin", default="Admin")}
         menu["children"] = [
             {
-                "title": _("menu_statistics", default=u"Statistics"),
+                "title": _("menu_statistics", default="Statistics"),
                 "url": "%s/@@show-statistics" % context.absolute_url(),
             }
         ]

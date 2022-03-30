@@ -45,7 +45,7 @@ class AccountStatistics(Base):
 
     id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
     account_type = schema.Column(
-        Enum([u"guest", u"converted", "full"]), default="full", nullable=True
+        Enum(["guest", "converted", "full"]), default="full", nullable=True
     )
     creation_date = schema.Column(
         types.DateTime, nullable=True, default=functions.now()
@@ -78,7 +78,7 @@ class SurveySessionStatistics(Base):
     tool = schema.Column(types.String(512), nullable=False)
     account_id = schema.Column(types.Integer(), nullable=True)
     account_type = schema.Column(
-        Enum([u"guest", u"converted", "full"]), default="full", nullable=True
+        Enum(["guest", "converted", "full"]), default="full", nullable=True
     )
 
 

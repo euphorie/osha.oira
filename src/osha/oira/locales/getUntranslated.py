@@ -67,7 +67,7 @@ for entry in po.untranslated_entries():
                 "'%s'" % entry.msgid
             )
     if noprefill:
-        default = u""
+        default = ""
     newpo.append(
         polib.POEntry(
             msgid=entry.msgid,

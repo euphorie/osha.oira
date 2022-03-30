@@ -36,14 +36,12 @@ class OiRASiteRootTabsTile(SiteRootTabsTile):
             if r.get("id") == "help":
                 self.tabs.remove(r)
             elif r.get("id") == "usermgmt":
-                r["title"] = _("nav_sectormanagement", default=u"Sector management")
+                r["title"] = _("nav_sectormanagement", default="Sector management")
         if self.is_country_manager() and (is_sector or is_country):
             if is_sector:
-                title = _("nav_ldapmanagement_sector", default=u"Manage sector access")
+                title = _("nav_ldapmanagement_sector", default="Manage sector access")
             else:
-                title = _(
-                    "nav_ldapmanagement_country", default=u"Manage country access"
-                )
+                title = _("nav_ldapmanagement_country", default="Manage country access")
             custom_tab = {
                 "id": "ldapmgmt",
                 "title": title,

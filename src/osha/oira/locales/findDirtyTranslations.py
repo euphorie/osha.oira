@@ -122,7 +122,7 @@ def main():
             # Ignore commented out entries
             continue
 
-        default_old = default_new = u""
+        default_old = default_new = ""
         # fist, extract the default translation of the new (POT) file
         default_new = get_default(entry)
         # string to put as translation:

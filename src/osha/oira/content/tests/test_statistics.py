@@ -44,9 +44,9 @@ class TestStatistics(unittest.TestCase):
         message = _decodeCookieValue(cookie["value"])[0]
         self.assertEqual(
             message.message,
-            u"birt_report_url not set, please contact " u"an administrator",
+            "birt_report_url not set, please contact " "an administrator",
         )
-        self.assertEqual(message.type, u"error")
+        self.assertEqual(message.type, "error")
 
         # Now set the statistics server URL and test
         sprops = api.portal.get_tool(name="portal_properties").site_properties

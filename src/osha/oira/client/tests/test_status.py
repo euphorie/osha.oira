@@ -46,7 +46,7 @@ def addSurvey(portal, xml_survey):
     from euphorie.content import upload
 
     importer = upload.SectorImporter(portal.sectors.nl)
-    sector = importer(xml_survey, None, None, None, u"test import")
+    sector = importer(xml_survey, None, None, None, "test import")
     survey = sector.values()[0]["test-import"]
     publisher = publish.PublishSurvey(survey, portal.REQUEST)
     publisher.publish()
@@ -54,10 +54,10 @@ def addSurvey(portal, xml_survey):
 
 def createSurveySession():
     sqlsession = Session()
-    account = model.Account(loginname=u"jane", password=u"secret")
+    account = model.Account(loginname="jane", password="secret")
     sqlsession.add(account)
     session = model.SurveySession(
-        title=u"Session", zodb_path="ict/software-development", account=account
+        title="Session", zodb_path="ict/software-development", account=account
     )
     sqlsession.add(session)
     sqlsession.flush()
@@ -72,7 +72,7 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         self.survey = self.portal.client.nl["ict"]["software-development"]
 
         class DummyObj(object):
-            problem_description = u"A Tricky Problem"
+            problem_description = "A Tricky Problem"
 
         self.survey.restrictedTraverse = lambda path: DummyObj()
         self.request = self.portal.REQUEST
@@ -84,12 +84,12 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         self.module = model.Module(
             zodb_path="1",
             path="001001",
-            title=u"Shops are clean - Somerset West",
+            title="Shops are clean - Somerset West",
         )
         self.risk1 = model.Risk(
             zodb_path="504/277/444",
             risk_id="1",
-            title=u"Le conducteur est-il prot\xe9g\xe9 des autres v\xe9hicules lorsqu'il circule au sol ?",  # noqa: E501
+            title="Le conducteur est-il prot\xe9g\xe9 des autres v\xe9hicules lorsqu'il circule au sol ?",  # noqa: E501
             priority="medium",
             identification="no",
             path="001001001",
@@ -97,7 +97,7 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         self.risk2 = model.Risk(
             zodb_path="504/277/444",
             risk_id="1",
-            title=u"Le conducteur effectue-t-il toutes ses man\u0153uvres d'accroche/d\xe9croche depuis le sol ?",  # noqa: E501
+            title="Le conducteur effectue-t-il toutes ses man\u0153uvres d'accroche/d\xe9croche depuis le sol ?",  # noqa: E501
             priority="high",
             identification="no",
             path="001001002",
@@ -105,7 +105,7 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         self.risk3_no = model.Risk(
             zodb_path="504/277/385",
             risk_id="1",
-            title=u"Le conducteur descend-il de sa cabine en utilisant les marches ?",
+            title="Le conducteur descend-il de sa cabine en utilisant les marches ?",
             priority="low",
             identification="no",
             path="001001003",
@@ -113,7 +113,7 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         self.risk3_yes = model.Risk(
             zodb_path="504/277/385",
             risk_id="1",
-            title=u"Le conducteur descend-il de sa cabine en utilisant les marches ?",
+            title="Le conducteur descend-il de sa cabine en utilisant les marches ?",
             priority="low",
             identification="yes",
             path="001001003",
@@ -121,7 +121,7 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         self.risk4 = model.Risk(
             zodb_path="504/277/383",
             risk_id="1",
-            title=u"Un autre risque ?",
+            title="Un autre risque ?",
             priority="medium",
             identification=None,
             path="001001004",
@@ -129,7 +129,7 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         self.risk5 = model.Risk(
             zodb_path="504/277/444",
             risk_id="1",
-            title=u"Encore un autre risque ?",
+            title="Encore un autre risque ?",
             priority="low",
             identification=None,
             path="001001005",
@@ -138,15 +138,15 @@ class SurveySessionTests(OiRAFunctionalTestCase):
 
     def _getModules(self):
         return {
-            u"001001": {
+            "001001": {
                 "ok": 0,
-                "path": u"001001",
+                "path": "001001",
                 "postponed": 0,
                 "risk_with_measures": 0,
                 "risk_without_measures": 0,
-                "title": u"Shops are clean - Somerset West",
+                "title": "Shops are clean - Somerset West",
                 "todo": 0,
-                "url": u"http://oira:4080/Plone2/client/fr/transportroutier/transporoutier-2-parametres/identification/1/1",  # noqa: E501
+                "url": "http://oira:4080/Plone2/client/fr/transportroutier/transporoutier-2-parametres/identification/1/1",  # noqa: E501
             }
         }
 
@@ -169,22 +169,22 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         view.getModules = self._getModules
         view.getRisks = self._getRisks
         view.tocdata = {
-            u"001001": {
-                "path": u"001001",
-                "title": u"Shops are clean - Somerset West",
+            "001001": {
+                "path": "001001",
+                "title": "Shops are clean - Somerset West",
                 "locations": [],
                 "number": 1,
             }
         }
         view.getStatus()
-        self.assertEquals(view.status[0]["title"], u"Shops are clean - Somerset West")
+        self.assertEquals(view.status[0]["title"], "Shops are clean - Somerset West")
         self.assertEquals(view.status[0]["risk_without_measures"], 2)
         self.assertEquals(view.status[0]["risk_with_measures"], 0)
         self.assertEquals(view.status[0]["postponed"], 1)
         self.assertEquals(view.status[0]["todo"], 1)
         self.assertEquals(view.status[0]["ok"], 1)
         self.assertEquals(view.percentage_ok, 20)
-        self.assertEquals(len(view.risks_by_status[u"001001"]["present"]["high"]), 1)
+        self.assertEquals(len(view.risks_by_status["001001"]["present"]["high"]), 1)
 
     def testRisksOverviewView(self):
         interface.alsoProvides(self.request, IOSHAClientSkinLayer)
@@ -195,18 +195,18 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         view.getModules = self._getModules
         view.getRisks = self._getRisks
         view.tocdata = {
-            u"001001": {
-                "path": u"001001",
-                "title": u"Shops are clean - Somerset West",
+            "001001": {
+                "path": "001001",
+                "title": "Shops are clean - Somerset West",
                 "locations": [],
                 "number": 1,
             }
         }
         view.getStatus()
-        self.assertEquals(len(view.risks_by_status[u"001001"]["present"]["high"]), 1)
-        self.assertEquals(len(view.risks_by_status[u"001001"]["present"]["medium"]), 1)
-        self.assertEquals(len(view.risks_by_status[u"001001"]["present"]["low"]), 1)
+        self.assertEquals(len(view.risks_by_status["001001"]["present"]["high"]), 1)
+        self.assertEquals(len(view.risks_by_status["001001"]["present"]["medium"]), 1)
+        self.assertEquals(len(view.risks_by_status["001001"]["present"]["low"]), 1)
         self.assertEquals(
-            len(view.risks_by_status[u"001001"]["possible"]["postponed"]), 1
+            len(view.risks_by_status["001001"]["possible"]["postponed"]), 1
         )
-        self.assertEquals(len(view.risks_by_status[u"001001"]["possible"]["todo"]), 1)
+        self.assertEquals(len(view.risks_by_status["001001"]["possible"]["todo"]), 1)

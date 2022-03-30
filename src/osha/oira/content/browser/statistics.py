@@ -110,13 +110,13 @@ class CountryStatistics(StatisticsMixin):
     """
 
     label = _("title_statistics", default="Statistics Reporting")
-    label_detail = _("label_country", default=u"Country")
+    label_detail = _("label_country", default="Country")
 
     def __call__(self):
         if not self._is_tool_available():
             IStatusMessage(self.request).add(
                 "No statistics are available as no tools have been published yet",
-                type=u"warning",
+                type="warning",
             )
 
         return self.index()
@@ -128,13 +128,13 @@ class SectorStatistics(StatisticsMixin):
     """
 
     label = _("title_statistics", default="Statistics Reporting")
-    label_detail = _("Sector", default=u"Sector")
+    label_detail = _("Sector", default="Sector")
 
     def __call__(self):
         if not self._is_tool_available():
             IStatusMessage(self.request).add(
                 "No statistics are available as no tools have been published yet",
-                type=u"warning",
+                type="warning",
             )
 
         return self.index()
@@ -144,5 +144,5 @@ class GlobalStatistics(StatisticsMixin):
     """Site managers can access statistics for the whole site."""
 
     label = _("title_statistics", default="Statistics Reporting")
-    label_detail = _("label_global", default=u"Global")
+    label_detail = _("label_global", default="Global")
     title_detail = None

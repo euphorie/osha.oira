@@ -41,7 +41,7 @@ class Delete(actions.Delete):
             api.portal.show_message(
                 _(
                     "message_not_delete_published_surveygroup",
-                    default=u"You can not delete an OiRA tool that has been published.",
+                    default="You can not delete an OiRA tool that has been published.",
                 ),
                 self.request,
                 "error",

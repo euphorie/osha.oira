@@ -10,12 +10,12 @@ class SolutionView(solution.SolutionView):
 class AddForm(solution.AddForm):
     def updateFields(self):
         super(AddForm, self).updateFields()
-        self.buttons["save"].title = _(u"button_save_changes", default=u"Save changes")
-        self.buttons["cancel"].title = _(u"button_cancel", default=u"Cancel")
+        self.buttons["save"].title = _("button_save_changes", default="Save changes")
+        self.buttons["cancel"].title = _("button_cancel", default="Cancel")
 
     @property
     def label(self):
-        return _(u"Add Solution", default=u"Add Measure")
+        return _("Add Solution", default="Add Measure")
 
 
 class AddView(solution.AddView):
@@ -27,9 +27,9 @@ class EditForm(solution.EditForm):
 
     def updateFields(self):
         super(EditForm, self).updateFields()
-        self.buttons["save"].title = _(u"button_save_changes", default=u"Save changes")
-        self.buttons["cancel"].title = _(u"button_cancel", default=u"Cancel")
+        self.buttons["save"].title = _("button_save_changes", default="Save changes")
+        self.buttons["cancel"].title = _("button_cancel", default="Cancel")
 
     @property
     def label(self):
-        return _(u"Edit Solution", default=u"Edit Measure")
+        return _("Edit Solution", default="Edit Measure")

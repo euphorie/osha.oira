@@ -11,15 +11,15 @@ from zope import schema
 
 
 help_default_probability = _(
-    u"help_default_probability",
-    default=u"Indicate how likely occurence of this risk is in a normal situation.",
+    "help_default_probability",
+    default="Indicate how likely occurence of this risk is in a normal situation.",
 )
 help_default_frequency = _(
-    u"help_default_frequency",
-    default=u"Indicate how often this risk occurs in a normal situation.",
+    "help_default_frequency",
+    default="Indicate how often this risk occurs in a normal situation.",
 )
 help_default_severity = _(
-    u"help_default_severity", default=u"Indicate the severity if this risk occurs."
+    "help_default_severity", default="Indicate the severity if this risk occurs."
 )
 
 
@@ -29,14 +29,14 @@ class IOSHASurvey(model.Schema):
     enable_external_site_link = schema.Bool(
         title=_(
             "label_external_site_enabled",
-            default=u"Include a logo which links to an external " u"website.",
+            default="Include a logo which links to an external " "website.",
         ),
         description=_(
             "help_external_site_enabled",
-            default=u"Tick this option if you would like to create "
-            u"a hyperlink on the OiRA tool which points to an "
-            u"external website. The hyperlink will be in the form "
-            u"of a logo image.",
+            default="Tick this option if you would like to create "
+            "a hyperlink on the OiRA tool which points to an "
+            "external website. The hyperlink will be in the form "
+            "of a logo image.",
         ),
         required=False,
         default=False,
@@ -46,12 +46,12 @@ class IOSHASurvey(model.Schema):
         "IOSHASurvey.external_site_url", "IOSHASurvey.enable_external_site_link", "on"
     )
     external_site_url = schema.URI(
-        title=_("label_external_site_url", default=u"External site URL"),
+        title=_("label_external_site_url", default="External site URL"),
         description=_(
             "help__external_site_url",
-            default=u"This is the URL of an external site that is "
-            u"linked to. Clicking the logo or the name will take "
-            u"the user to this URL.",
+            default="This is the URL of an external site that is "
+            "linked to. Clicking the logo or the name will take "
+            "the user to this URL.",
         ),
         required=False,
     )
@@ -60,11 +60,11 @@ class IOSHASurvey(model.Schema):
         "IOSHASurvey.external_site_name", "IOSHASurvey.enable_external_site_link", "on"
     )
     external_site_name = schema.TextLine(
-        title=_("label_external_site_name", default=u"External site name"),
+        title=_("label_external_site_name", default="External site name"),
         description=_(
             "help_external_site_name",
-            default=u"This is the name of the external site that is "
-            u"linked to. It will appear next to the logo.",
+            default="This is the name of the external site that is "
+            "linked to. It will appear next to the logo.",
         ),
         required=False,
     )
@@ -73,12 +73,12 @@ class IOSHASurvey(model.Schema):
         "IOSHASurvey.external_site_logo", "IOSHASurvey.enable_external_site_link", "on"
     )
     external_site_logo = filefield.NamedBlobImage(
-        title=_("label_external_site_logo", default=u"External site logo"),
+        title=_("label_external_site_logo", default="External site logo"),
         description=_(
             "help_image_upload",
-            default=u"Upload an image. Make sure your image is of format "
-            u"png, jpg or gif and does not contain any special "
-            u"characters.",
+            default="Upload an image. Make sure your image is of format "
+            "png, jpg or gif and does not contain any special "
+            "characters.",
         ),
         required=False,
     )
@@ -86,17 +86,17 @@ class IOSHASurvey(model.Schema):
     enable_custom_evaluation_descriptions = schema.Bool(
         title=_(
             "label_enable_custom_evaluation_descriptions",
-            default=u"The criteria applied to evaluate risks are specific "
-            u"of this tool? (If not, the common criteria descriptions "
-            u"will apply).",
+            default="The criteria applied to evaluate risks are specific "
+            "of this tool? (If not, the common criteria descriptions "
+            "will apply).",
         ),
         description=_(
             "help_enable_custom_evaluation_descriptions",
-            default=u"Tick this option if you would like to define "
-            u"your own descriptions for the criteria of the "
-            u"evaluation algorithm. The user will see them as hints "
-            u"when answering the questions to calculate the "
-            u"priority of a risk.",
+            default="Tick this option if you would like to define "
+            "your own descriptions for the criteria of the "
+            "evaluation algorithm. The user will see them as hints "
+            "when answering the questions to calculate the "
+            "priority of a risk.",
         ),
         required=False,
         default=False,
@@ -108,12 +108,12 @@ class IOSHASurvey(model.Schema):
         "on",
     )
     description_probability = schema.Text(
-        title=_(u"Probability"),
+        title=_("Probability"),
         description=_(
-            u"description_criteria_explanation",
-            default=u"Provide your custom explanation here, to override this "
-            u'default explanation: "${default_explanation}"',
-            mapping={u"default_explanation": help_default_probability},
+            "description_criteria_explanation",
+            default="Provide your custom explanation here, to override this "
+            'default explanation: "${default_explanation}"',
+            mapping={"default_explanation": help_default_probability},
         ),
         required=False,
     )
@@ -124,12 +124,12 @@ class IOSHASurvey(model.Schema):
         "on",
     )
     description_frequency = schema.Text(
-        title=_(u"Frequency"),
+        title=_("Frequency"),
         description=_(
-            u"description_criteria_explanation",
-            default=u"Provide your custom explanation here, to override this "
-            u'default explanation: "${default_explanation}"',
-            mapping={u"default_explanation": help_default_frequency},
+            "description_criteria_explanation",
+            default="Provide your custom explanation here, to override this "
+            'default explanation: "${default_explanation}"',
+            mapping={"default_explanation": help_default_frequency},
         ),
         required=False,
     )
@@ -140,12 +140,12 @@ class IOSHASurvey(model.Schema):
         "on",
     )
     description_severity = schema.Text(
-        title=_(u"Severity"),
+        title=_("Severity"),
         description=_(
-            u"description_criteria_explanation",
-            default=u"Provide your custom explanation here, to override this "
-            u'default explanation: "${default_explanation}"',
-            mapping={u"default_explanation": help_default_severity},
+            "description_criteria_explanation",
+            default="Provide your custom explanation here, to override this "
+            'default explanation: "${default_explanation}"',
+            mapping={"default_explanation": help_default_severity},
         ),
         required=False,
     )

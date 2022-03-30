@@ -28,7 +28,7 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
         browser.open(survey_url)
         registerUserInClient(browser)
         # Create a new survey session
-        browser.getControl(name="title:utf8:ustring").value = u"Sessiøn".encode("utf-8")
+        browser.getControl(name="title:utf8:ustring").value = "Sessiøn".encode("utf-8")
         browser.getControl(name="next").click()
         # Start the survey
         browser.getForm().submit()
@@ -57,7 +57,7 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
         browser.open(survey_url)
         registerUserInClient(browser)
         # Create a new survey session
-        browser.getControl(name="title:utf8:ustring").value = u"Sessiøn".encode("utf-8")
+        browser.getControl(name="title:utf8:ustring").value = "Sessiøn".encode("utf-8")
         browser.getControl(name="next").click()
         # Start the survey
         browser.getForm().submit()
@@ -67,7 +67,7 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
         risk.identification = "no"
         risk.action_plans.append(
             model.ActionPlan(
-                action_plan=u"Do something awesome",
+                action_plan="Do something awesome",
                 planning_start=datetime.date(1, 2, 3),
             )
         )
@@ -90,7 +90,7 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
         browser.open(survey_url)
         registerUserInClient(browser)
         # Create a new survey session
-        browser.getControl(name="title:utf8:ustring").value = u"Sessiøn".encode("utf-8")
+        browser.getControl(name="title:utf8:ustring").value = "Sessiøn".encode("utf-8")
         browser.getControl(name="next").click()
         # Start the survey
         browser.getForm().submit()
@@ -111,7 +111,7 @@ class EuphorieReportTests(OiRAFunctionalTestCase):
         browser.open(survey_url)
         registerUserInClient(browser)
         # Create a new survey session
-        browser.getControl(name="title:utf8:ustring").value = u"Sessiøn".encode("utf-8")
+        browser.getControl(name="title:utf8:ustring").value = "Sessiøn".encode("utf-8")
         browser.getControl(name="next").click()
         # Start the survey
         browser.getForm().submit()
@@ -151,10 +151,10 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
 
     def createSurveySession(self):
         self.sqlsession = Session()
-        account = model.Account(loginname=u"jane", password=u"secret")
+        account = model.Account(loginname="jane", password="secret")
         self.sqlsession.add(account)
         self.session = model.SurveySession(
-            title=u"Session", zodb_path="nl/dining/survey", account=account
+            title="Session", zodb_path="nl/dining/survey", account=account
         )
         self.sqlsession.add(self.session)
         self.sqlsession.flush()
@@ -165,7 +165,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         session = self.createSurveySession()
         module = model.Module(
             depth=1,
-            title=u"Root Module",
+            title="Root Module",
             module_id="1",
             zodb_path="1",
             skip_children=False,
@@ -175,7 +175,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
 
         nested_module1 = model.Module(
             depth=2,
-            title=u"Nested Module 1",
+            title="Nested Module 1",
             module_id="2",
             zodb_path="1/1",
             skip_children=False,
@@ -185,7 +185,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
 
         nested_module2 = model.Module(
             depth=3,
-            title=u"Nested Module 2",
+            title="Nested Module 2",
             module_id="3",
             zodb_path="1/1/1",
             skip_children=False,
@@ -195,15 +195,15 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
 
         risk = model.Risk(
             depth=4,
-            title=u"Floors are washed",
+            title="Floors are washed",
             risk_id="1",
             zodb_path="1/1/1/1",
             type="risk",
-            priority=u"low",
+            priority="low",
             identification="no",
             action_plans=[
                 model.ActionPlan(
-                    action_plan=u"Do something awesome",
+                    action_plan="Do something awesome",
                     planning_start=datetime.date(2013, 3, 4),
                 )
             ],
@@ -216,7 +216,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         self.assertEqual(len(measures), 1)
         self.assertEqual(
             measures[0][0].title,
-            u"Nested Module 2",
+            "Nested Module 2",
         )
 
     def test_get_measures_with_profile_questions(self):
@@ -224,7 +224,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         session = self.createSurveySession()
         question = model.Module(
             depth=1,
-            title=u"(Repeatable Module) Do you have multiple shops?",
+            title="(Repeatable Module) Do you have multiple shops?",
             module_id="1",
             zodb_path="1",
             skip_children=False,
@@ -234,8 +234,8 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
 
         i = 0
         for module_title in [
-            u"(Repeating instance) Somerset West",
-            u"(Repeating instance) Stellenbosch",
+            "(Repeating instance) Somerset West",
+            "(Repeating instance) Stellenbosch",
         ]:
 
             answer = model.Module(
@@ -251,15 +251,15 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
             answer.addChild(
                 model.Risk(
                     depth=3,
-                    title=u"Hands are washed",
+                    title="Hands are washed",
                     risk_id="1",
                     zodb_path="1/2",
                     type="risk",
-                    priority=u"low",
+                    priority="low",
                     identification="no",
                     action_plans=[
                         model.ActionPlan(
-                            action_plan=u"Do something awesome",
+                            action_plan="Do something awesome",
                             planning_start=datetime.date(2013, 3, 4),
                         )
                     ],
@@ -274,11 +274,11 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         self.assertEqual(len(measures), 2)
         self.assertEqual(
             measures[0][0].title,
-            u"(Repeating instance) Somerset West",
+            "(Repeating instance) Somerset West",
         )
         self.assertEqual(
             measures[1][0].title,
-            u"(Repeating instance) Stellenbosch",
+            "(Repeating instance) Stellenbosch",
         )
 
     def test_get_measures_with_profile_questions_and_submodules(self):
@@ -286,7 +286,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         session = self.createSurveySession()
         question = model.Module(
             depth=1,
-            title=u"(Repeatable Module) Do you have multiple shops?",
+            title="(Repeatable Module) Do you have multiple shops?",
             module_id="1",
             zodb_path="1",
             skip_children=False,
@@ -296,8 +296,8 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
 
         i = 0
         for module_title in [
-            u"(Repeating instance) Somerset West",
-            u"(Repeating instance) Stellenbosch",
+            "(Repeating instance) Somerset West",
+            "(Repeating instance) Stellenbosch",
         ]:
 
             location_path = "%s/%d" % (question.zodb_path, i)
@@ -314,7 +314,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
             submodule_path = "%s/1" % location_path
             submodule = model.Module(
                 depth=2,
-                title=u"Nested Module 1",
+                title="Nested Module 1",
                 module_id="2",
                 zodb_path="%s/1" % location_path,
                 skip_children=False,
@@ -325,15 +325,15 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
             submodule.addChild(
                 model.Risk(
                     depth=4,
-                    title=u"Hands are washed",
+                    title="Hands are washed",
                     risk_id="1",
                     zodb_path="%s/%d" % (submodule_path, i),
                     type="risk",
-                    priority=u"low",
+                    priority="low",
                     identification="no",
                     action_plans=[
                         model.ActionPlan(
-                            action_plan=u"Do something awesome",
+                            action_plan="Do something awesome",
                             planning_start=datetime.date(2013, 3, 4),
                         )
                     ],
@@ -347,30 +347,30 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         self.assertEqual(len(measures), 2)
         self.assertEqual(
             measures[0][0].title,
-            u"Nested Module 1",
+            "Nested Module 1",
         )
         self.assertEqual(
             measures[1][0].title,
-            u"Nested Module 1",
+            "Nested Module 1",
         )
 
     def test_get_measures_order_by_priority(self):
         session = self.createSurveySession()
         module = model.Module(
-            title=u"Root", module_id="1", zodb_path="1", skip_children=False
+            title="Root", module_id="1", zodb_path="1", skip_children=False
         )
         session.addChild(module)
         module.addChild(
             model.Risk(
-                title=u"Risk 1",
+                title="Risk 1",
                 risk_id="2",
                 zodb_path="1/2",
                 type="risk",
-                priority=u"low",
+                priority="low",
                 identification="no",
                 action_plans=[
                     model.ActionPlan(
-                        action_plan=u"Do something awesome",
+                        action_plan="Do something awesome",
                         planning_start=datetime.date(2013, 3, 4),
                     )
                 ],
@@ -378,15 +378,15 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         )
         module.addChild(
             model.Risk(
-                title=u"Risk 2",
+                title="Risk 2",
                 risk_id="3",
                 zodb_path="1/3",
                 type="risk",
-                priority=u"high",
+                priority="high",
                 identification="no",
                 action_plans=[
                     model.ActionPlan(
-                        action_plan=u"Do something awesome",
+                        action_plan="Do something awesome",
                         planning_start=datetime.date(2013, 5, 2),
                     )
                 ],
@@ -394,15 +394,15 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         )
         module.addChild(
             model.Risk(
-                title=u"Risk 3",
+                title="Risk 3",
                 risk_id="4",
                 zodb_path="1/4",
                 type="risk",
-                priority=u"medium",
+                priority="medium",
                 identification="no",
                 action_plans=[
                     model.ActionPlan(
-                        action_plan=u"Do something awesome",
+                        action_plan="Do something awesome",
                         planning_start=datetime.date(2013, 4, 1),
                     )
                 ],
@@ -414,7 +414,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         measures = view.get_measures()
         self.assertEqual(
             [risk.priority for (m, risk, measure) in measures],
-            [u"high", u"medium", u"low"],
+            ["high", "medium", "low"],
         )
 
 
@@ -434,13 +434,13 @@ class RiskQueryTests(OiRATestCase):
                 "depth": 1,
                 "module_id": 1,
                 "has_description": True,
-                "path": u"001",
+                "path": "001",
                 "postponed": None,
                 "profile_index": -1,
                 "skip_children": False,
-                "title": u"What is the sound of one hand clapping?",
-                "type": u"module",
-                "zodb_path": u"173",
+                "title": "What is the sound of one hand clapping?",
+                "type": "module",
+                "zodb_path": "173",
             }
         )
         self.survey_session.addChild(self.q1)
@@ -450,13 +450,13 @@ class RiskQueryTests(OiRATestCase):
                 "depth": 2,
                 "module_id": 2,
                 "has_description": True,
-                "path": u"001001",
+                "path": "001001",
                 "postponed": None,
                 "profile_index": 0,
                 "skip_children": False,
-                "title": u"Stellenbosch",
-                "type": u"module",
-                "zodb_path": u"173",
+                "title": "Stellenbosch",
+                "type": "module",
+                "zodb_path": "173",
             }
         )
         self.q1.addChild(self.mod1)
@@ -468,13 +468,13 @@ class RiskQueryTests(OiRATestCase):
                 "identification": "no",
                 "action_plans": [],
                 "has_description": True,
-                "path": u"001001001",
+                "path": "001001001",
                 "postponed": False,
                 "profile_index": 0,
                 "skip_children": False,
-                "title": u"Hands are washed",
-                "type": u"risk",
-                "zodb_path": u"173/euphorie.risk",
+                "title": "Hands are washed",
+                "type": "risk",
+                "zodb_path": "173/euphorie.risk",
             }
         )
         self.mod1.addChild(self.r1)
@@ -484,13 +484,13 @@ class RiskQueryTests(OiRATestCase):
                 "depth": 2,
                 "module_id": 3,
                 "has_description": True,
-                "path": u"001002",
+                "path": "001002",
                 "postponed": None,
                 "profile_index": 1,
                 "skip_children": False,
-                "title": u"Somerset West",
-                "type": u"module",
-                "zodb_path": u"173",
+                "title": "Somerset West",
+                "type": "module",
+                "zodb_path": "173",
             }
         )
         self.q1.addChild(self.mod2)
@@ -502,13 +502,13 @@ class RiskQueryTests(OiRATestCase):
                 "identification": "yes",
                 "action_plans": [],
                 "has_description": True,
-                "path": u"001002001",
+                "path": "001002001",
                 "postponed": False,
                 "profile_index": 1,
                 "skip_children": False,
-                "title": u"Hands are washed",
-                "type": u"risk",
-                "zodb_path": u"173/euphorie.risk",
+                "title": "Hands are washed",
+                "type": "risk",
+                "zodb_path": "173/euphorie.risk",
             }
         )
         self.mod2.addChild(self.r2)

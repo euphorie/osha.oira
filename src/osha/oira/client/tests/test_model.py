@@ -15,12 +15,12 @@ class ModelQueryTests(DatabaseTests):
     def createData(self):
         (self.session, self.survey) = createSurvey()
         self.mod1 = model.Module(
-            title=u"Module 1", module_id="1", zodb_path="1", skip_children=True
+            title="Module 1", module_id="1", zodb_path="1", skip_children=True
         )
 
         self.survey.addChild(self.mod1)
 
-        self.q1 = model.Risk(title=u"Risk 1", risk_id="1", zodb_path="1/1", type="risk")
+        self.q1 = model.Risk(title="Risk 1", risk_id="1", zodb_path="1/1", type="risk")
         self.mod1.addChild(self.q1)
 
     def testUnansweredNodes(self):

@@ -57,7 +57,7 @@ for entry in po:
                 "ERROR! There seems to be a duplicate Default entry for msgid "
                 "'%s'" % entry.msgid
             )
-    out.write(u"%s\n" % txt)
+    out.write("%s\n" % txt)
 
 
 fh = open(output, "w")

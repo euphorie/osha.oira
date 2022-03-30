@@ -88,26 +88,26 @@ class Certificate(model.BaseObject):
 
     @property
     def title(self):
-        return self.json_data.get("title", u"")
+        return self.json_data.get("title", "")
 
     @property
     def hr_date(self):
-        date = self.json_data.get("date", u"").split("-")
+        date = self.json_data.get("date", "").split("-")
         if not date:
-            return u""
+            return ""
         try:
             date[1] = api.portal.translate(
                 monthname_msgid(date[1]), domain="plonelocales"
             )
         except Exception:
             logger.error("Not a valid date %r", date)
-        return u" ".join(reversed(date))
+        return " ".join(reversed(date))
 
     @property
     def hr_date_plain(self):
-        date = self.json_data.get("date", u"")
+        date = self.json_data.get("date", "")
         if not date:
-            return u""
+            return ""
         return datetime.strptime(date, "%Y-%m-%d")
 
 

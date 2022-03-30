@@ -15,17 +15,17 @@ class RequestPasswordForm(pwreminder.RequestPasswordForm):
 
     def updateFields(self):
         super(RequestPasswordForm, self).updateFields()
-        self.fields["login"].field.title = __(u"label_email", default=u"E-mail address")
+        self.fields["login"].field.title = __("label_email", default="E-mail address")
 
 
 class PasswordReset(pwreminder.PasswordReset):
 
     orig_description = pwreminder.PasswordReset.description
     extra_description = _(
-        u"password_policy_conditions",
-        default=u"Your password must contain at least 5 characters, "
-        u"including at least one capital letter, one number and "
-        u"one special character (e.g. $, # or @).",
+        "password_policy_conditions",
+        default="Your password must contain at least 5 characters, "
+        "including at least one capital letter, one number and "
+        "one special character (e.g. $, # or @).",
     )
 
     def __init__(self, context, request):
@@ -37,7 +37,7 @@ class PasswordReset(pwreminder.PasswordReset):
 
     @property
     def description(self):
-        description = u" ".join(
+        description = " ".join(
             [
                 translate(self.orig_description, target_language=self.language),
                 translate(self.extra_description, target_language=self.language),
@@ -47,7 +47,7 @@ class PasswordReset(pwreminder.PasswordReset):
 
     def updateFields(self):
         super(PasswordReset, self).updateFields()
-        self.fields["login"].field.title = __(u"label_email", default=u"E-mail address")
+        self.fields["login"].field.title = __("label_email", default="E-mail address")
 
     @buttonAndHandler(_("button_change", default="Change"), name="change")
     def handleChange(self, action):
@@ -67,7 +67,7 @@ class PasswordReset(pwreminder.PasswordReset):
             flash(
                 __(
                     "user_name_wrong",
-                    u"The login name you have provided does not match the username from the password-reset email. Please check your spelling.",  # noqa: E501
+                    "The login name you have provided does not match the username from the password-reset email. Please check your spelling.",  # noqa: E501
                 ),
                 "error",
             )
@@ -93,12 +93,12 @@ class PasswordReset(pwreminder.PasswordReset):
             flash(
                 __(
                     "user_name_wrong",
-                    u"The login name you have provided does not match the username from the password-reset email. Please check your spelling.",  # noqa: E501
+                    "The login name you have provided does not match the username from the password-reset email. Please check your spelling.",  # noqa: E501
                 ),
                 "error",
             )
             return
 
-        flash(_("password_reset", u"Your password has been reset."), "success")
+        flash(_("password_reset", "Your password has been reset."), "success")
         portal_url = aq_inner(self.context).absolute_url()
         self.request.response.redirect("%s/@@login" % portal_url)

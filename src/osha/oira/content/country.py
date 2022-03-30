@@ -75,7 +75,7 @@ class IOSHACountry(model.Schema):
     def threshold_invariant(data):
         if data.certificate_initial_threshold >= data.certificate_completion_threshold:
             raise Invalid(
-                _(u"Completion threshold has to be greater than the initial threshold")
+                _("Completion threshold has to be greater than the initial threshold")
             )
 
 

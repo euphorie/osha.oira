@@ -116,7 +116,7 @@ class OutdatedToolsView(BrowserView):
             sector_tools = filter(
                 lambda x: x.startswith(sector_path), outdated_tool_paths
             )
-            intro = u"""
+            intro = """
 You are receiving this notification since you are the sector manager for
 "{0}". """.format(
                 safe_unicode(sector.Title())
@@ -149,7 +149,7 @@ You are receiving this notification since you are the sector manager for
                 else []
             )
             for manager in managers:
-                intro = u"""
+                intro = """
 You are receiving this notification since you are the country manager for
 "{0}". """.format(
                     safe_unicode(country.Title())
@@ -168,8 +168,8 @@ You are receiving this notification since you are the country manager for
         to_email = sprops.getProperty(
             "outdated_notications_oira_team_email", "test@example.com"
         )
-        intro = u"This is the summary email of all outdated tools."
-        empty_message = u"No outdated tools were found for the requested period."
+        intro = "This is the summary email of all outdated tools."
+        empty_message = "No outdated tools were found for the requested period."
         self.send_notification(
             to_name=to_name,
             to_address=to_email,
@@ -191,10 +191,10 @@ You are receiving this notification since you are the country manager for
         to_name = safe_unicode(to_name)
         mailhost = getToolByName(self.context, "MailHost")
         if to_name:
-            recipient = u"{} <{}>".format(to_name, to_address)
+            recipient = "{} <{}>".format(to_name, to_address)
         else:
             recipient = to_address
-        subject = u"OiRA: Notification on outdated tools"
+        subject = "OiRA: Notification on outdated tools"
         portal_id = self.context.getId()
         portal_url = self.context.absolute_url()
         if tool_paths:
@@ -226,7 +226,7 @@ You are receiving this notification since you are the country manager for
         else:
             period = "over {0} month(s)".format(int(self.interval / 30.4))
 
-        body = u"""
+        body = """
 Dear {name},
 
 {intro}

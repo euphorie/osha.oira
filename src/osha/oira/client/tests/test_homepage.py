@@ -53,13 +53,13 @@ class HomepageTest(OiRATestCase):
         client.get_json = lambda: loads('[{"a":"b"}]')
         self.view.cached_json
         client.get_json = lambda: loads("[]")
-        self.assertEquals(self.view.cached_json, [{u"a": u"b"}])
+        self.assertEquals(self.view.cached_json, [{"a": "b"}])
 
     def test_update_invalid_json(self):
         client.get_json = lambda: loads('[{"auth"')
         self.view.cached_json
         client.get_json = lambda: loads('[{"a":"b"}]')
-        self.assertEquals(self.view.cached_json, [{u"a": u"b"}])
+        self.assertEquals(self.view.cached_json, [{"a": "b"}])
 
     def test_manager_can_invalidate_cache(self):
         self.loginAsPortalOwner()
@@ -67,11 +67,11 @@ class HomepageTest(OiRATestCase):
         self.view.cached_json
         self.view.request["invalidate-cache"] = 1
         client.get_json = lambda: loads('[{"a":"c"}]')
-        self.assertEquals(self.view.cached_json, [{u"a": u"c"}])
+        self.assertEquals(self.view.cached_json, [{"a": "c"}])
 
     def test_anon_cannot_invalidate_cache(self):
         client.get_json = lambda: loads('[{"a":"b"}]')
         self.view.cached_json
         self.view.request["invalidate-cache"] = 1
         client.get_json = lambda: loads('[{"a":"c"}]')
-        self.assertEquals(self.view.cached_json, [{u"a": u"b"}])
+        self.assertEquals(self.view.cached_json, [{"a": "b"}])

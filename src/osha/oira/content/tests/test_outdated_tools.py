@@ -12,8 +12,8 @@ class OutdatedToolsTests(OiRATestCase):
         super(OutdatedToolsTests, self).afterSetUp()
         self.loginAsPortalOwner()
         sector = createSector(self.portal)
-        sector.contact_name = u"Sectör NL"
-        sector.contact_email = u"sect@r.nl"
+        sector.contact_name = "Sectör NL"
+        sector.contact_email = "sect@r.nl"
 
         survey = addSurvey(sector, BASIC_SURVEY)
         nl = sector.aq_parent
@@ -21,13 +21,13 @@ class OutdatedToolsTests(OiRATestCase):
         nl.invokeFactory(
             "euphorie.countrymanager",
             "nl-cm-1",
-            title=u"Country Mänager 1",
+            title="Country Mänager 1",
             contact_email="invalid_email1",
         )
         nl.invokeFactory(
             "euphorie.countrymanager",
             "nl-cm-2",
-            title=u"Country Mänager 2",
+            title="Country Mänager 2",
             contact_email="invalid_email2",
         )
 

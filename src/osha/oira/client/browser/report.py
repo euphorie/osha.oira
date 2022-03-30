@@ -46,53 +46,53 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             "requirements",
             _(
                 "label_measure_requirements",
-                default=u"Level of expertise and/or requirements needed",
+                default="Level of expertise and/or requirements needed",
             ),
         ),
     ]
 
     columns = [
-        ("module", "title", _("label_section", default=u"Section")),
+        ("module", "title", _("label_section", default="Section")),
         (
             "risk",
             "title",
-            _("report_timeline_risk_title", default=u"Description of the risk"),
+            _("report_timeline_risk_title", default="Description of the risk"),
         ),
-        ("risk", "number", _("label_risk_number", default=u"Risk number")),
-        ("risk", "priority", _("report_timeline_priority", default=u"Priority")),
+        ("risk", "number", _("label_risk_number", default="Risk number")),
+        ("risk", "priority", _("report_timeline_priority", default="Priority")),
         (
             "measure",
             "action",
             _(
                 "report_timeline_measure",
-                default=u"Measure",
+                default="Measure",
             ),
         ),
         (
             "measure",
             "planning_start",
-            _("report_timeline_start_date", default=u"Start date"),
+            _("report_timeline_start_date", default="Start date"),
         ),
         (
             "measure",
             "planning_end",
-            _("report_timeline_end_date", default=u"End date"),
+            _("report_timeline_end_date", default="End date"),
         ),
         (
             "measure",
             "responsible",
-            _("report_timeline_responsible", default=u"Responsible"),
+            _("report_timeline_responsible", default="Responsible"),
         ),
-        ("measure", "budget", _("label_action_plan_budget", default=u"Budget")),
+        ("measure", "budget", _("label_action_plan_budget", default="Budget")),
         (
             None,
             None,
             _(
                 "report_timeline_progress",
-                default=u"Status (planned, in process, implemented)",
+                default="Status (planned, in process, implemented)",
             ),
         ),
-        ("risk", "comment", _("report_timeline_comment", default=u"Comments")),
+        ("risk", "comment", _("report_timeline_comment", default="Comments")),
     ]
 
     def create_workbook(self):
@@ -101,12 +101,12 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         survey = self.webhelpers._survey
         book = Workbook()
         ws1 = book.active
-        ws1.title = t(_("report_timeline_title", default=u"Timeline"))
+        ws1.title = t(_("report_timeline_title", default="Timeline"))
 
-        header_text = u"{title}{extra} - {action_plan}".format(
+        header_text = "{title}{extra} - {action_plan}".format(
             title=survey.title,
             extra=self.title_extra.strip(),
-            action_plan=t(_("label_action_plan", default=u"Action Plan")),
+            action_plan=t(_("label_action_plan", default="Action Plan")),
         )
         ws1["A1"] = header_text
 
@@ -138,12 +138,12 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         b_thin = Side(border_style="thin", color="000000")
         b_double = Side(border_style="medium", color="000000")
 
-        ws1["A2"] = t(_("label_title", default=u"Title"))
+        ws1["A2"] = t(_("label_title", default="Title"))
         ws1["A2"].font = font_bold
         ws1["B2"] = self.session.title
         ws1["B2"].fill = PatternFill("solid", fgColor="DDDDDD")
         ws1.merge_cells("B2:C2")
-        ws1["E2"] = t(_(u"label_report_date", default=u"Date of editing"))
+        ws1["E2"] = t(_("label_report_date", default="Date of editing"))
         ws1["E2"].font = font_bold
         ws1["F2"] = formatDate(self.request, self.session.modified)
         ws1["F2"].fill = PatternFill("solid", fgColor="DDDDDD")
@@ -199,7 +199,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                     elif key == "number":
                         if risk.is_custom_risk:
                             num_elems = value.split(".")
-                            value = u".".join([u"Ω"] + num_elems[1:])
+                            value = ".".join(["Ω"] + num_elems[1:])
 
                 elif type == "module":
                     if key == "title" and module.depth > 1:
@@ -219,7 +219,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                                 elems = lang.split("-")
                                 lang = "{0}_{1}".format(elems[0], elems[1].upper())
                             value = translate(
-                                _("Custom risks", default=u"Custom risks"),
+                                _("Custom risks", default="Custom risks"),
                                 target_language=lang,
                             )
                         else:
@@ -229,7 +229,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                         # osha wants to combine action_plan (col 5 / E),
                         # and requirements in one cell
                         if not ws1.cell(row=row, column=5).value:
-                            ws1.cell(row=row, column=5).value = u""
+                            ws1.cell(row=row, column=5).value = ""
                         ws1.cell(row=row, column=5).value += "\r\n" + value
                 else:
                     cell = ws1.cell(row=row, column=column)
@@ -320,7 +320,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
 def node_title(node, zodbnode):
     # 2885: Non-present risks and unanswered risks are shown affirmatively,
     # i.e 'title'
-    if node.type != "risk" or node.identification in [u"n/a", u"yes", None]:
+    if node.type != "risk" or node.identification in ["n/a", "yes", None]:
         return node.title
     # The other two groups of risks are shown negatively, i.e
     # 'problem_description'

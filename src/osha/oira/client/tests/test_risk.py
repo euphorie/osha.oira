@@ -15,12 +15,12 @@ class EuphorieRiskTests(OiRAFunctionalTestCase):
         addSurvey(self.portal, BASIC_SURVEY)
         browser = Browser()
         survey = self.portal.client.nl["ict"]["software-development"]
-        survey.evaluation_algorithm = u"french"
+        survey.evaluation_algorithm = "french"
         survey["1"]["2"].type = "risk"
         browser.open(survey.absolute_url())
         registerUserInClient(browser)
         # Create a new survey session
-        browser.getControl(name="title:utf8:ustring").value = u"Sessiøn".encode("utf-8")
+        browser.getControl(name="title:utf8:ustring").value = "Sessiøn".encode("utf-8")
         browser.getControl(name="next").click()
         # Start the survey
         browser.getForm().submit()

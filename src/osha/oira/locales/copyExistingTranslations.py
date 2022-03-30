@@ -56,7 +56,7 @@ existing = polib.pofile(existingfile)
 
 cnt = 0
 for entry in reference:
-    default_reference = default_existing = u""
+    default_reference = default_existing = ""
     # fist, extract the default translation of the reference (POT) file
     match_reference = patt.match(entry.comment)
     if match_reference:
@@ -86,7 +86,7 @@ for entry in reference:
             ):
                 target_local.msgstr = target_existing.msgstr
                 print(
-                    u"UPDATED '%s' with translation '%s'"
+                    "UPDATED '%s' with translation '%s'"
                     % (entry.msgid, target_existing.msgstr)
                 )
                 cnt += 1

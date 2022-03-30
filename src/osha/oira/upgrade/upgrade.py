@@ -189,21 +189,21 @@ def enable_custom_risks_on_all_modules(context):
                             custom = getattr(survey, "custom-risks", None)
                             if custom:
                                 custom.title = _(
-                                    u"title_other_risks",
-                                    default=u"Added risks (by you)",
+                                    "title_other_risks",
+                                    default="Added risks (by you)",
                                 )
                                 custom.description = _(
-                                    u"description_other_risks",
-                                    default=u"In case you have identified risks not included in "  # noqa: E501
-                                    u"the tool, you are able to add them now:",
+                                    "description_other_risks",
+                                    default="In case you have identified risks not included in "  # noqa: E501
+                                    "the tool, you are able to add them now:",
                                 )
                                 custom.question = _(
-                                    u"question_other_risks",
-                                    default=u"<p>Would you now like to add your own defined risks "  # noqa: E501
-                                    u"to this tool?</p><p><strong>Important:</strong> In "  # noqa: E501
-                                    u"order to avoid duplicating risks, we strongly recommend you "  # noqa: E501
-                                    u"to go first through all the previous modules, if you have not "  # noqa: E501
-                                    u"done it yet.</p><p>If you don't need to add risks, please select 'No.'</p>",  # noqa: E501
+                                    "question_other_risks",
+                                    default="<p>Would you now like to add your own defined risks "  # noqa: E501
+                                    "to this tool?</p><p><strong>Important:</strong> In "  # noqa: E501
+                                    "order to avoid duplicating risks, we strongly recommend you "  # noqa: E501
+                                    "to go first through all the previous modules, if you have not "  # noqa: E501
+                                    "done it yet.</p><p>If you don't need to add risks, please select 'No.'</p>",  # noqa: E501
                                 )
                             if is_new:
                                 survey.published = (

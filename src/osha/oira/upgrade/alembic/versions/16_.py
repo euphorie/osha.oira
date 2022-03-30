@@ -23,7 +23,7 @@ def upgrade():
         "users_not_interested_in_certificate_status_box",
         sa.Column("account_id", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(
-            ["account_id"], [u"account.id"], onupdate="CASCADE", ondelete="CASCADE"
+            ["account_id"], ["account.id"], onupdate="CASCADE", ondelete="CASCADE"
         ),
         sa.PrimaryKeyConstraint("account_id"),
     )

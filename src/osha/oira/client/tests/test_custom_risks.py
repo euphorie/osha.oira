@@ -12,11 +12,11 @@ class NoCustomRisksFilterTests(DatabaseTests):
     def testQuerying(self):
         (self.session, self.survey) = createSurvey()
         self.mod1 = model.Module(
-            title=u"Module 1", module_id="1", zodb_path="1", skip_children=False
+            title="Module 1", module_id="1", zodb_path="1", skip_children=False
         )
         self.survey.addChild(self.mod1)
         self.q1 = model.Risk(
-            title=u"Risk 1",
+            title="Risk 1",
             risk_id="1",
             zodb_path="1/1",
             type="risk",
@@ -26,7 +26,7 @@ class NoCustomRisksFilterTests(DatabaseTests):
         self.assertEqual(self.query().count(), 2)
 
         self.q2 = model.Risk(
-            title=u"Risk 2",
+            title="Risk 2",
             risk_id="2",
             zodb_path="1/2",
             type="risk",
@@ -37,7 +37,7 @@ class NoCustomRisksFilterTests(DatabaseTests):
         self.assertEqual(self.query().count(), 2)
 
         self.q2 = model.Risk(
-            title=u"Risk 3",
+            title="Risk 3",
             risk_id="2",
             zodb_path="1/3",
             type="risk",

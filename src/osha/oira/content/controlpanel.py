@@ -1,7 +1,6 @@
 # coding=utf-8
 # fmt: off
-from Products.CMFPlone.controlpanel.browser.site import \
-    SiteControlPanel as SiteControlPanelBase  # noqa: E501
+from Products.CMFPlone.controlpanel.browser.site import SiteControlPanel as SiteControlPanelBase  # noqa: E501
 # fmt: on
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 

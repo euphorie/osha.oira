@@ -57,7 +57,7 @@ class SurveyStatistics(Base):
 
     __tablename__ = "tool"
 
-    zodb_path = schema.Column(types.String(512), primary_key=True)
+    tool_path = schema.Column(types.String(512), primary_key=True)
     published_date = schema.Column(types.DateTime, nullable=True)
     years_online = schema.Column(types.Integer(), nullable=True)
     num_users = schema.Column(types.Integer(), nullable=True)
@@ -72,7 +72,7 @@ class SurveySessionStatistics(Base):
     id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
     start_date = schema.Column(types.DateTime, nullable=False, default=functions.now())
     completion_percentage = schema.Column(types.Integer, nullable=True, default=0)
-    path = schema.Column(types.String(512), nullable=False)
+    tool_path = schema.Column(types.String(512), nullable=False)
     country = schema.Column(types.String(512), nullable=False)
     sector = schema.Column(types.String(512), nullable=False)
     tool = schema.Column(types.String(512), nullable=False)
@@ -114,4 +114,4 @@ class CompanyStatistics(Base):
     needs_met = schema.Column(Enum(["no answer", "yes", "no"]))
     recommend_tool = schema.Column(Enum(["no answer", "yes", "no"]))
     timestamp = schema.Column(types.DateTime(), nullable=True)
-    zodb_path = schema.Column(types.String(512), nullable=False)
+    tool_path = schema.Column(types.String(512), nullable=False)

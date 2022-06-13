@@ -137,8 +137,6 @@ class UpdateStatisticsDatabases(object):
                     completion_percentage=session.completion_percentage,
                     tool_path=session.zodb_path,
                     country=session.zodb_path.split("/")[0],
-                    sector=session.zodb_path.split("/")[1],
-                    tool=session.zodb_path.split("/")[2],
                     account_id=account.id,
                     account_type=account.account_type,
                 )
@@ -199,7 +197,6 @@ class UpdateStatisticsDatabases(object):
             rows = [
                 CompanyStatistics(
                     id=company.id,
-                    session_id=company.session_id,
                     country=company.country,
                     employees=company.employees or "no answer",
                     conductor=company.conductor or "no answer",
@@ -207,7 +204,7 @@ class UpdateStatisticsDatabases(object):
                     workers_participated=yes_no(company.workers_participated),
                     needs_met=yes_no(company.needs_met),
                     recommend_tool=yes_no(company.recommend_tool),
-                    timestamp=company.timestamp,
+                    date=company.timestamp,
                     tool_path=zodb_path,
                 )
                 for company, zodb_path in batch

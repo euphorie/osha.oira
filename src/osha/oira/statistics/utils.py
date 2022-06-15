@@ -15,6 +15,7 @@ from osha.oira.statistics.model import SurveyStatistics
 
 import logging
 import sqlalchemy
+import transaction
 
 
 log = logging.getLogger(__name__)
@@ -58,7 +59,11 @@ class UpdateStatisticsDatabases(object):
 
     def update_database(self, country=None):
         log.info("Init & cleanup")
-        self.log_counts()
+        try:
+            self.log_counts()
+        except Exception as e:
+            log.warning("Could not count rows: %s", e)
+            self.session_statistics.rollback()
 
         Base.metadata.drop_all(
             bind=self.session_statistics.connection(), checkfirst=True
@@ -100,7 +105,7 @@ class UpdateStatisticsDatabases(object):
             batch = tools.limit(self.b_size).offset(offset)
             rows = [
                 SurveyStatistics(
-                    zodb_path=tool.zodb_path,
+                    tool_path=tool.zodb_path,
                     published_date=tool.published_date,
                     years_online=(datetime.now() - tool.published_date).days / 365,
                     num_users=num_users,
@@ -130,10 +135,8 @@ class UpdateStatisticsDatabases(object):
                     id=session.id,
                     start_date=session.created,
                     completion_percentage=session.completion_percentage,
-                    path=session.zodb_path,
+                    tool_path=session.zodb_path,
                     country=session.zodb_path.split("/")[0],
-                    sector=session.zodb_path.split("/")[1],
-                    tool=session.zodb_path.split("/")[2],
                     account_id=account.id,
                     account_type=account.account_type,
                 )
@@ -194,7 +197,6 @@ class UpdateStatisticsDatabases(object):
             rows = [
                 CompanyStatistics(
                     id=company.id,
-                    session_id=company.session_id,
                     country=company.country,
                     employees=company.employees or "no answer",
                     conductor=company.conductor or "no answer",
@@ -202,8 +204,8 @@ class UpdateStatisticsDatabases(object):
                     workers_participated=yes_no(company.workers_participated),
                     needs_met=yes_no(company.needs_met),
                     recommend_tool=yes_no(company.recommend_tool),
-                    timestamp=company.timestamp,
-                    zodb_path=zodb_path,
+                    date=company.timestamp,
+                    tool_path=zodb_path,
                 )
                 for company, zodb_path in batch
             ]

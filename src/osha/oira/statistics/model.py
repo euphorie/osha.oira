@@ -57,7 +57,7 @@ class SurveyStatistics(Base):
 
     __tablename__ = "tool"
 
-    zodb_path = schema.Column(types.String(512), primary_key=True)
+    tool_path = schema.Column(types.String(512), primary_key=True)
     published_date = schema.Column(types.DateTime, nullable=True)
     years_online = schema.Column(types.Integer(), nullable=True)
     num_users = schema.Column(types.Integer(), nullable=True)
@@ -69,17 +69,15 @@ class SurveySessionStatistics(Base):
 
     __tablename__ = "assessment"
 
-    id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
-    start_date = schema.Column(types.DateTime, nullable=False, default=functions.now())
+    tool_path = schema.Column(types.String(512), nullable=False)
     completion_percentage = schema.Column(types.Integer, nullable=True, default=0)
-    path = schema.Column(types.String(512), nullable=False)
-    country = schema.Column(types.String(512), nullable=False)
-    sector = schema.Column(types.String(512), nullable=False)
-    tool = schema.Column(types.String(512), nullable=False)
-    account_id = schema.Column(types.Integer(), nullable=True)
     account_type = schema.Column(
         Enum(["guest", "converted", "full"]), default="full", nullable=True
     )
+    start_date = schema.Column(types.DateTime, nullable=False, default=functions.now())
+    country = schema.Column(types.String(512), nullable=False)
+    id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
+    account_id = schema.Column(types.Integer(), nullable=True)
 
 
 class CompanyStatistics(Base):
@@ -88,12 +86,6 @@ class CompanyStatistics(Base):
     __tablename__ = "company"
 
     id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
-    session_id = schema.Column(
-        types.Integer(),
-        nullable=False,
-        index=True,
-    )
-
     country = schema.Column(types.String(3))
     employees = schema.Column(Enum(["no answer", "1-9", "10-49", "50-249", "250+"]))
     conductor = schema.Column(Enum(["no answer", "staff", "third-party", "both"]))
@@ -113,5 +105,5 @@ class CompanyStatistics(Base):
     workers_participated = schema.Column(Enum(["no answer", "yes", "no"]))
     needs_met = schema.Column(Enum(["no answer", "yes", "no"]))
     recommend_tool = schema.Column(Enum(["no answer", "yes", "no"]))
-    timestamp = schema.Column(types.DateTime(), nullable=True)
-    zodb_path = schema.Column(types.String(512), nullable=False)
+    date = schema.Column(types.DateTime(), nullable=True)
+    tool_path = schema.Column(types.String(512), nullable=False)

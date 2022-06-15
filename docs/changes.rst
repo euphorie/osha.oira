@@ -4,7 +4,7 @@ Changelog
 8.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Updated statistics export.
 
 
 8.1.2 (2022-06-15)

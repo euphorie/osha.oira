@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.1.3 (unreleased)
+8.1.3 (2022-06-15)
 ------------------
 
 - Updated statistics export.

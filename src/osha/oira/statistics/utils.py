@@ -15,7 +15,6 @@ from osha.oira.statistics.model import SurveyStatistics
 
 import logging
 import sqlalchemy
-import transaction
 
 
 log = logging.getLogger(__name__)

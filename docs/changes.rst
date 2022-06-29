@@ -4,7 +4,7 @@ Changelog
 8.1.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Updated translations.
 
 
 8.1.3 (2022-06-15)

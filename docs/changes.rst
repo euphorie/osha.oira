@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.1.5 (unreleased)
+8.1.5 (2022-07-13)
 ------------------
 
 - Updated translations.

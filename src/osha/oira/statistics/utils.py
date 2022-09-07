@@ -133,7 +133,6 @@ class UpdateStatisticsDatabases(object):
                 SurveySessionStatistics(
                     id=session.id,
                     start_date=session.created,
-                    completion_percentage=session.completion_percentage,
                     tool_path=session.zodb_path,
                     country=session.zodb_path.split("/")[0],
                     account_id=account.id,

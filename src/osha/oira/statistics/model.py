@@ -70,7 +70,6 @@ class SurveySessionStatistics(Base):
     __tablename__ = "assessment"
 
     tool_path = schema.Column(types.String(512), nullable=False)
-    completion_percentage = schema.Column(types.Integer, nullable=True, default=0)
     account_type = schema.Column(
         Enum(["guest", "converted", "full"]), default="full", nullable=True
     )

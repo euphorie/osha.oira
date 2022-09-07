@@ -4,7 +4,7 @@ Changelog
 8.1.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Removed completion_percentage reference from statistics. Fixes error in update_statistics.
 
 
 8.1.5 (2022-07-13)

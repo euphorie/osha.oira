@@ -134,6 +134,7 @@ class UpdateStatisticsDatabases(object):
                     id=session.id,
                     start_date=session.created,
                     tool_path=session.zodb_path,
+                    completion_percentage=session.completion_percentage,
                     country=session.zodb_path.split("/")[0],
                     account_id=account.id,
                     account_type=account.account_type,

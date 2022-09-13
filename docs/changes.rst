@@ -4,7 +4,7 @@ Changelog
 8.1.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Restored and fixed completion_percentage.
 
 
 8.1.6 (2022-09-07)

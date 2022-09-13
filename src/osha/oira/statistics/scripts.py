@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from euphorie.client import model
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.utils import UpdateStatisticsDatabases
 
@@ -45,6 +46,12 @@ def update_statistics():
     args = parser.parse_args()
     log.info("Updating statistics databases")
     session_application = create_session(args.src)
+
+    # XXX Patching Session because otherwise completion_percentage fails with
+    # zope.interface.interfaces.ComponentLookupError:
+    # (<InterfaceClass z3c.saconfig.interfaces.IScopedSession>, '')
+    model.Session = session_application
+
     update_db = UpdateStatisticsDatabases(
         session_application, args.dst, b_size=args.batch_size
     )

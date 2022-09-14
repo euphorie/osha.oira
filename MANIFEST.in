@@ -40,6 +40,7 @@ prune src/oira.private
 prune src/osha/oira/browser/resources/brands/daimler
 prune src/osha/oira/tests/acceptance/resource/secrets.robot
 prune *pyc
+global-exclude *.pyc
 
 # added by check_manifest.py
 include *.py
@@ -61,3 +62,6 @@ recursive-include src *.map
 
 # added by check_manifest.py
 recursive-include etc *.ini
+
+exclude .pep8
+exclude .pre-commit-config.yaml

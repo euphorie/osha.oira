@@ -64,12 +64,9 @@ class UpdateStatisticsDatabases(object):
             log.warning("Could not count rows: %s", e)
             self.session_statistics.rollback()
 
-        Base.metadata.drop_all(
-            bind=self.session_statistics.connection(), checkfirst=True
-        )
-        Base.metadata.create_all(
-            bind=self.session_statistics.connection(), checkfirst=True
-        )
+        self.session_statistics.query(SurveyStatistics).delete()
+        self.session_statistics.query(AccountStatistics).delete()
+        self.session_statistics.query(CompanyStatistics).delete()
 
         self.update_tool(country=country)
         self.update_assessment(country=country)
@@ -118,8 +115,18 @@ class UpdateStatisticsDatabases(object):
         self._process_batch(tool_rows)
 
     def update_assessment(self, country=None):
+        log.info("Table: assessment")
+        latest_session_id = (
+            self.session_statistics.query(
+                sqlalchemy.func.max(SurveySessionStatistics.id)
+            ).first()[0]
+            or -1
+        )
+        if latest_session_id > -1:
+            log.info(f"Skipping assessments up to and including ID {latest_session_id}")
         sessions = (
             self.session_application.query(SurveySession, Account)
+            .filter(SurveySession.id > latest_session_id)
             .filter(Account.id == SurveySession.account_id)
             .filter(Account.account_type != "guest")
             .order_by(SurveySession.id)
@@ -143,7 +150,6 @@ class UpdateStatisticsDatabases(object):
             ]
             return rows
 
-        log.info("Table: assessment")
         self._process_batch(assessment_rows)
 
     def update_account(self, country=None):

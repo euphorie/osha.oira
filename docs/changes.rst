@@ -4,7 +4,7 @@ Changelog
 8.1.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Statistics: Don't clear the assessment statistics every time but update only missing rows.
 
 
 8.1.7 (2022-09-13)

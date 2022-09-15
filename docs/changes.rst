@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.1.9 (unreleased)
+8.1.9 (2022-09-15)
 ------------------
 
 - Statistics: More efficient computation of completion_percentage.

@@ -4,7 +4,8 @@ Changelog
 8.1.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Hide the organisation tab
+  [ale-rt]
 
 
 8.1.9 (2022-09-15)

@@ -19,6 +19,15 @@ class OSHAWebHelpers(WebHelpers):
 
     show_completion_percentage = True
 
+    @property
+    def dashboard_tabs(self):
+        """ XXX For the moment hide the organisations tab
+        """
+        return [
+            tab for tab in super(OSHAWebHelpers, self).dashboard_tabs
+            if tab != "organisation"
+        ]
+
     @memoize
     def styles_override(self):
 

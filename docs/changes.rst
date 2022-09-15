@@ -4,13 +4,14 @@ Changelog
 8.1.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Statistics: More efficient computation of completion_percentage.
+- Reverted: Statistics: Don’t clear the assessment statistics every time but update only missing rows.
 
 
 8.1.8 (2022-09-14)
 ------------------
 
-- Nothing changed yet.
+- Statistics: Don’t clear the assessment statistics every time but update only missing rows.
 
 
 8.1.7 (2022-09-13)

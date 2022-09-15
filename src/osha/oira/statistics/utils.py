@@ -2,8 +2,10 @@
 from datetime import datetime
 from euphorie.client.model import Account
 from euphorie.client.model import Company
+from euphorie.client.model import Risk
 from euphorie.client.model import Session as EuphorieSession
 from euphorie.client.model import SurveySession
+from euphorie.client.model import SurveyTreeItem
 from osha.oira.client.model import SurveyStatistics as Survey
 from osha.oira.statistics.model import AccountStatistics
 from osha.oira.statistics.model import Base
@@ -118,10 +120,38 @@ class UpdateStatisticsDatabases(object):
         self._process_batch(tool_rows)
 
     def update_assessment(self, country=None):
+        module_query = (
+            self.session_application.query(SurveyTreeItem).filter(
+                SurveyTreeItem.type == "module"
+            )
+        ).order_by(SurveyTreeItem.path)
+
+        good_module_ids = set()
+        bad_module_ids = set()
+        for module in module_query:
+            if module.parent_id in bad_module_ids or module.skip_children:
+                bad_module_ids.add(module.id)
+            else:
+                good_module_ids.add(module.id)
+
+        active_risks = (
+            self.session_application.query(
+                Risk.id, Risk.identification, Risk.session_id
+            )
+            .filter(Risk.parent_id.in_(good_module_ids))
+            .subquery()
+        )
         sessions = (
-            self.session_application.query(SurveySession, Account)
-            .filter(Account.id == SurveySession.account_id)
+            self.session_application.query(
+                SurveySession,
+                Account,
+                sqlalchemy.func.count(active_risks.c.id),
+                sqlalchemy.func.count(active_risks.c.identification),
+            )
+            .outerjoin(active_risks, active_risks.c.session_id == SurveySession.id)
+            .outerjoin(SurveySession.account)
             .filter(Account.account_type != "guest")
+            .group_by(Account.id, SurveySession.id)
             .order_by(SurveySession.id)
         )
         if country is not None:
@@ -134,12 +164,16 @@ class UpdateStatisticsDatabases(object):
                     id=session.id,
                     start_date=session.created,
                     tool_path=session.zodb_path,
-                    completion_percentage=session.completion_percentage,
+                    completion_percentage=int(
+                        round(answered_risks / total_risks * 100.0)
+                    )
+                    if total_risks
+                    else 0,
                     country=session.zodb_path.split("/")[0],
                     account_id=account.id,
                     account_type=account.account_type,
                 )
-                for session, account in batch
+                for session, account, total_risks, answered_risks in batch
             ]
             return rows
 

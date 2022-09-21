@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>20</version>
+  <!-- There is no version element in this file because the version is managed by
+    ftw.upgrade in the package osha.oira.upgrade
+  -->
   <dependencies>
     <dependency>profile-pas.plugins.ldap:default</dependency>
+    <dependency>profile-ftw.upgrade:default</dependency>
   </dependencies>
 </metadata>

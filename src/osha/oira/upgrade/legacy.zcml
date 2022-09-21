@@ -1,0 +1,304 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="plone"
+    >
+
+  <genericsetup:upgradeSteps
+      destination="2"
+      profile="osha.oira:default"
+      source="1"
+      >
+
+    <genericsetup:upgradeStep
+        title="renew_survey_published_date"
+        description="Update the published attr of surveys to set the date to now. This will force all surveys to redirect to the @@update page from where users' session trees can be updated."
+        handler=".upgrade.renew_survey_published_date"
+        />
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="3"
+      profile="osha.oira:default"
+      source="2"
+      >
+
+    <genericsetup:upgradeStep
+        title="add_custom_homepage"
+        description=" Add a homepage with which allows OSHA to create a custom homepage."
+        handler=".upgrade.add_custom_homepage"
+        />
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="4"
+      profile="osha.oira:default"
+      source="3"
+      >
+
+    <genericsetup:upgradeStep
+        title="disable skip evaluation flag"
+        description="OiRA does not expose the 'Skip evaluation' flag anymore. Make sure it's unset for all surveys. "
+        handler=".upgrade.reset_evaluation_flag"
+        />
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="5"
+      profile="osha.oira:default"
+      source="4"
+      >
+
+    <genericsetup:upgradeStep
+        title="Add login statistics stable"
+        description="Add a SQL table to store login records for client accounts."
+        handler=".upgrade.sql_create_all"
+        />
+
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="6"
+      profile="osha.oira:default"
+      source="5"
+      >
+
+    <genericsetup:upgradeStep
+        title="Alter time column, to set its default value."
+        description="The default value for the time column must be the current timestamp, not null."
+        handler=".upgrade.alter_time_column"
+        />
+
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="7"
+      profile="osha.oira:default"
+      source="6"
+      >
+
+    <genericsetup:upgradeStep
+        title="Remove __format=pdf from birt_report_url"
+        description="BIRT report file format is now chosen in the statistics form and should not be set in the birt_report_url"
+        handler=".upgrade.remove_birt_file_format"
+        />
+
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="8"
+      profile="osha.oira:default"
+      source="7"
+      >
+
+    <genericsetup:upgradeStep
+        title="Reimport types to activate new behavior"
+        description="New behavior IOSHASurvey has been added and needs activation"
+        handler=".upgrade.update_types_information"
+        />
+
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="9"
+      profile="osha.oira:default"
+      source="8"
+      >
+
+    <genericsetup:upgradeStep
+        title="Increase path field in statistics table"
+        description="Paths might be longer than 128 characters"
+        handler=".upgrade.increase_statistics_surveys_path_column"
+        />
+
+    <genericsetup:upgradeStep
+        title="Increase path field in sessions table"
+        description="Paths might be longer than 128 characters"
+        handler=".upgrade.increase_sessions_path_column"
+        />
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="10"
+      profile="osha.oira:default"
+      source="9"
+      >
+
+    <genericsetup:upgradeStep
+        title="Reset 'obsolete' flag on surveygroups"
+        description="In Oct 2013 this flag was added to Euphorie for TNO; though never used in OiRA, we apparently have some surveygroups marked as obsolete, preventing them from being shown."
+        handler=".upgrade.reset_surveygroup_obsolete"
+        />
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="11"
+      profile="osha.oira:default"
+      source="10"
+      >
+
+    <genericsetup:upgradeStep
+        title="Allow custom risks on modules"
+        description="All published tools are updated to allow users to add custom risks in them. This step requires allow_user_defined_risks=True in euphorie.ini."
+        handler=".upgrade.enable_custom_risks_on_all_modules"
+        />
+
+    <genericsetup:upgradeStep
+        title="Install non-free resourcess"
+        description="Install the oira.private egg, which contains non-free Javascript and CSS files"
+        handler=".upgrade.install_private_resources"
+        />
+
+    <genericsetup:upgradeStep
+        title="Drop constraint `no_duplicates` from table `tree`"
+        description="Required for supporting custom risks"
+        handler=".upgrade.drop_constraint_no_duplicates_in_tree"
+        />
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="12"
+      profile="osha.oira:default"
+      source="11"
+      >
+    <genericsetup:upgradeStep
+        title="Add portal properties to configure the outdated tool notification"
+        description="Allow the OiRA Team email address, and the interval that defines when a tool is considered outdated to be configured via portal properties."
+        handler=".upgrade.configure_outdated_tool_notification"
+        />
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="13"
+      profile="osha.oira:default"
+      source="12"
+      >
+
+    <genericsetup:upgradeStep
+        title="Add pas.plugins.ldap"
+        handler=".to13.install_pas_plugins_ldap"
+        />
+
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="14"
+      profile="osha.oira:default"
+      source="13"
+      >
+
+    <genericsetup:upgradeStep
+        title="Configure PAS plugins"
+        handler=".to14.configure_plugins"
+        />
+
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      destination="15"
+      profile="osha.oira:default"
+      source="14"
+      >
+
+    <genericsetup:upgradeStep
+        title="Set up statistics database for use with metabase"
+        handler=".to15.set_up_statistics_db"
+        />
+
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:registerProfile
+      name="to16"
+      title="Upgrade profile to add the behavior osha.country.extrafields to euphorie.country"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      directory="to16"
+      />
+
+  <genericsetup:upgradeSteps
+        destination="16"
+        profile="osha.oira:default"
+        source="15"
+        >
+
+      <genericsetup:upgradeDepends
+          title="Add the behavior osha.country.extrafields to euphorie.country"
+          import_profile="osha.oira.upgrade:to16"
+          />
+
+      <genericsetup:upgradeStep
+          title="Set up certificates table"
+          handler=".to16.alembic_upgrade"
+          />
+
+    </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+        destination="17"
+        profile="osha.oira:default"
+        source="16"
+        >
+
+      <genericsetup:upgradeStep
+          title="Populate setting for measures text handling (CMS)"
+          handler=".to17.set_handle_measures_text_in_cms"
+          />
+      <genericsetup:upgradeStep
+          title="Populate setting for measures text handling (Client)"
+          handler=".to17.set_handle_measures_text_in_client"
+          />
+  </genericsetup:upgradeSteps>
+
+
+  <genericsetup:registerProfile
+      name="to_0018"
+      title="Add config option for setting public certificate URL"
+      description=""
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      directory="to_0018"
+      />
+
+  <genericsetup:upgradeSteps
+        destination="18"
+        profile="osha.oira:default"
+        source="17"
+        >
+    <genericsetup:upgradeDepends
+        title="Add config option for setting public certificate URL"
+        import_profile="osha.oira.upgrade:to_0018"
+        />
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:registerProfile
+      name="to_0019"
+      title="Switch from Appconfig to registry"
+      description=""
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      directory="to_0019"
+      />
+
+  <genericsetup:upgradeSteps
+        destination="19"
+        profile="osha.oira:default"
+        source="18"
+        >
+    <genericsetup:upgradeDepends
+        title="Switch from Appconfig to registry"
+        import_profile="osha.oira.upgrade:to_0019"
+        />
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+        destination="20"
+        profile="osha.oira:default"
+        source="19"
+        >
+      <genericsetup:upgradeStep
+          title="Add images to tools"
+          handler=".to20.map_images"
+          />
+  </genericsetup:upgradeSteps>
+
+</configure>

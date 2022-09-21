@@ -1,10 +1,11 @@
 Changelog
 =========
 
-8.1.10 (unreleased)
--------------------
+8.2.0 (unreleased)
+------------------
 
-- Nothing changed yet.
+- Change the way certificates are created #156
+  [ale-rt]
 
 
 8.1.9 (2022-09-15)

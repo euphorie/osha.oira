@@ -8,12 +8,12 @@ from euphorie.client.model import SurveySession
 from euphorie.client.model import SurveyTreeItem
 from osha.oira.client.model import SurveyStatistics as Survey
 from osha.oira.statistics.model import AccountStatistics
-from osha.oira.statistics.model import Base
 from osha.oira.statistics.model import CompanyStatistics
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN
 from osha.oira.statistics.model import SurveySessionStatistics
 from osha.oira.statistics.model import SurveyStatistics
+from plone.memoize.instance import memoizedproperty
 
 import logging
 import sqlalchemy
@@ -66,13 +66,6 @@ class UpdateStatisticsDatabases(object):
             log.warning("Could not count rows: %s", e)
             self.session_statistics.rollback()
 
-        Base.metadata.drop_all(
-            bind=self.session_statistics.connection(), checkfirst=True
-        )
-        Base.metadata.create_all(
-            bind=self.session_statistics.connection(), checkfirst=True
-        )
-
         self.update_tool(country=country)
         self.update_assessment(country=country)
         self.update_account(country=country)
@@ -84,6 +77,16 @@ class UpdateStatisticsDatabases(object):
         self.log_counts()
 
     def update_tool(self, country=None):
+        log.info("Table: tool")
+        latest_published_date = (
+            self.session_statistics.query(
+                sqlalchemy.func.max(SurveyStatistics.published_date)
+            ).first()[0]
+            or datetime.min
+        )
+        if latest_published_date > datetime.min:
+            log.info(f"Skipping tools up to and including {latest_published_date}")
+
         tools = (
             self.session_application.query(
                 Survey,
@@ -92,6 +95,7 @@ class UpdateStatisticsDatabases(object):
                 ),
                 sqlalchemy.func.count(SurveySession.id),
             )
+            .filter(Survey.published_date > latest_published_date)
             .filter(Survey.zodb_path == SurveySession.zodb_path)
             .filter(Survey.published)
             .filter(Account.id == SurveySession.account_id)
@@ -104,22 +108,32 @@ class UpdateStatisticsDatabases(object):
 
         def tool_rows(offset):
             batch = tools.limit(self.b_size).offset(offset)
-            rows = [
-                SurveyStatistics(
+            handled = 0
+            for tool, num_users, num_assessments in batch:
+                existing = (
+                    self.session_statistics.query(SurveyStatistics)
+                    .filter(SurveyStatistics.tool_path == tool.zodb_path)
+                    .first()
+                )
+                attribs = dict(
                     tool_path=tool.zodb_path,
                     published_date=tool.published_date,
                     years_online=(datetime.now() - tool.published_date).days / 365,
                     num_users=num_users,
                     num_assessments=num_assessments,
                 )
-                for tool, num_users, num_assessments in batch
-            ]
-            return rows
+                if existing:
+                    for name, value in attribs.items():
+                        setattr(existing, name, value)
+                else:
+                    self.session_statistics.add(SurveyStatistics(**attribs))
+                handled = handled + 1
+            return handled
 
-        log.info("Table: tool")
         self._process_batch(tool_rows)
 
-    def update_assessment(self, country=None):
+    @memoizedproperty
+    def active_risks(self):
         module_query = (
             self.session_application.query(SurveyTreeItem).filter(
                 SurveyTreeItem.type == "module"
@@ -141,6 +155,20 @@ class UpdateStatisticsDatabases(object):
             .filter(Risk.parent_id.in_(good_module_ids))
             .subquery()
         )
+        return active_risks
+
+    def update_assessment(self, country=None):
+        log.info("Table: assessment")
+        latest_modified_date = (
+            self.session_statistics.query(
+                sqlalchemy.func.max(SurveySessionStatistics.modified)
+            ).first()[0]
+            or datetime.min
+        )
+        if latest_modified_date > datetime.min:
+            log.info(f"Skipping assessments up to and including {latest_modified_date}")
+
+        active_risks = self.active_risks
         sessions = (
             self.session_application.query(
                 SurveySession,
@@ -148,6 +176,7 @@ class UpdateStatisticsDatabases(object):
                 sqlalchemy.func.count(active_risks.c.id),
                 sqlalchemy.func.count(active_risks.c.identification),
             )
+            .filter(SurveySession.modified > latest_modified_date)
             .outerjoin(active_risks, active_risks.c.session_id == SurveySession.id)
             .outerjoin(SurveySession.account)
             .filter(Account.account_type != "guest")
@@ -159,10 +188,18 @@ class UpdateStatisticsDatabases(object):
 
         def assessment_rows(offset):
             batch = sessions.limit(self.b_size).offset(offset)
-            rows = [
-                SurveySessionStatistics(
+            handled = 0
+            for session, account, total_risks, answered_risks in batch:
+                existing = (
+                    self.session_statistics.query(SurveySessionStatistics)
+                    .filter(SurveySessionStatistics.id == session.id)
+                    .first()
+                )
+
+                attribs = dict(
                     id=session.id,
                     start_date=session.created,
+                    modified=session.modified,
                     tool_path=session.zodb_path,
                     completion_percentage=int(
                         round(answered_risks / total_risks * 100.0)
@@ -173,15 +210,32 @@ class UpdateStatisticsDatabases(object):
                     account_id=account.id,
                     account_type=account.account_type,
                 )
-                for session, account, total_risks, answered_risks in batch
-            ]
-            return rows
+                if existing:
+                    for name, value in attribs.items():
+                        setattr(existing, name, value)
+                else:
+                    self.session_statistics.add(SurveySessionStatistics(**attribs))
+                handled = handled + 1
+            return handled
 
-        log.info("Table: assessment")
         self._process_batch(assessment_rows)
 
     def update_account(self, country=None):
-        accounts = self.session_application.query(Account).order_by(Account.id)
+        log.info("Table: account")
+        latest_creation_date = (
+            self.session_statistics.query(
+                sqlalchemy.func.max(AccountStatistics.creation_date)
+            ).first()[0]
+            or datetime.min
+        )
+        if latest_creation_date > datetime.min:
+            log.info(f"Skipping accounts up to and including {latest_creation_date}")
+
+        accounts = (
+            self.session_application.query(Account)
+            .filter(Account.created > latest_creation_date)
+            .order_by(Account.id)
+        )
         if country is not None:
             accounts = (
                 accounts.filter(Account.id == SurveySession.account_id)
@@ -202,19 +256,31 @@ class UpdateStatisticsDatabases(object):
                 )
                 for account in batch
             ]
-            return rows
+            self.session_statistics.add_all(rows)
+            return len(rows)
 
-        log.info("Table: account")
         self._process_batch(account_rows)
 
     def update_company(self, country=None):
-        companies = (
-            self.session_application.query(Company, SurveySession.zodb_path)
-            .filter(Company.session_id == SurveySession.id)
-            .order_by(Company.id)
+        log.info("Table: company")
+        latest_date = (
+            self.session_statistics.query(
+                sqlalchemy.func.max(CompanyStatistics.date)
+            ).first()[0]
+            or datetime.min
         )
+        companies = self.session_application.query(Company, SurveySession.zodb_path)
+
+        if latest_date > datetime.min:
+            log.info(f"Skipping company responses up to and including {latest_date}")
+            companies = companies.filter(Company.timestamp > latest_date)
+
         if country is not None:
             companies = companies.filter(SurveySession.zodb_path.startswith(country))
+
+        companies = companies.filter(Company.session_id == SurveySession.id).order_by(
+            Company.id
+        )
 
         def yes_no(boolean):
             if boolean is None:
@@ -226,9 +292,14 @@ class UpdateStatisticsDatabases(object):
 
         def company_rows(offset):
             batch = companies.limit(self.b_size).offset(offset)
-
-            rows = [
-                CompanyStatistics(
+            handled = 0
+            for company, zodb_path in batch:
+                existing = (
+                    self.session_statistics.query(CompanyStatistics)
+                    .filter(CompanyStatistics.id == company.id)
+                    .first()
+                )
+                attribs = dict(
                     id=company.id,
                     country=company.country,
                     employees=company.employees or "no answer",
@@ -240,22 +311,24 @@ class UpdateStatisticsDatabases(object):
                     date=company.timestamp,
                     tool_path=zodb_path,
                 )
-                for company, zodb_path in batch
-            ]
-            return rows
+                if existing:
+                    for name, value in attribs.items():
+                        setattr(existing, name, value)
+                else:
+                    self.session_statistics.add(CompanyStatistics(**attribs))
+                handled = handled + 1
+            return handled
 
-        log.info("Table: company")
         self._process_batch(company_rows)
 
-    def _process_batch(self, rows_callback):
+    def _process_batch(self, batch_callback):
         offset = 0
-        rows = []
-        while offset == 0 or len(rows) != 0:
-            rows = rows_callback(offset)
-            if len(rows):
-                self.session_statistics.add_all(rows)
+        num_rows = 0
+        while offset == 0 or num_rows != 0:
+            num_rows = batch_callback(offset)
+            if num_rows:
                 self.session_statistics.flush()
-            offset = (offset + len(rows)) if len(rows) else -1
+            offset = (offset + num_rows) if num_rows else -1
             if offset % (100 * self.b_size) == 0:
                 log.info("Processed {} rows".format(offset))
 

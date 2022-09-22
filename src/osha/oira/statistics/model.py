@@ -75,6 +75,7 @@ class SurveySessionStatistics(Base):
         Enum(["guest", "converted", "full"]), default="full", nullable=True
     )
     start_date = schema.Column(types.DateTime, nullable=False, default=functions.now())
+    modified = schema.Column(types.DateTime, nullable=True)
     country = schema.Column(types.String(512), nullable=False)
     id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
     account_id = schema.Column(types.Integer(), nullable=True)

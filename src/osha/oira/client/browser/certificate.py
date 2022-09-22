@@ -1,12 +1,15 @@
 # coding=utf-8
+from datetime import date
 from euphorie.client import utils
 from euphorie.content.utils import getRegionTitle
 from osha.oira.client import model
 from plone import api
 from plone.memoize.view import memoize
+from plone.protect.interfaces import IDisableCSRFProtection
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from z3c.saconfig import Session
+from zope.interface import alsoProvides
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 
@@ -93,13 +96,39 @@ class Certificate(BrowserView):
             < country.certificate_completion_threshold
         )
 
+    def maybe_create_earned_certificate(self):
+        """Check if certificates are enabled in this country and if
+        the user has earned the certificate for this session.
+        In case the user needs a certificate, it will be created.
+        """
+        session = self.webhelpers.traversed_session.session
+
+        if (
+            Session.query(model.Certificate)
+            .filter(model.Certificate.session_id == session.session_id)
+            .count()
+        ):
+            return
+
+        # TODO: get rid of this write on read
+        alsoProvides(self.request, IDisableCSRFProtection)
+        Session.add(
+            model.Certificate(
+                session_id=session.session_id,
+                json=json.dumps({"date": date.today().strftime("%Y-%m-%d")}),
+            )
+        )
+
     def can_display_certificate_earned(self):
         """Condition to show the link to the certificate view"""
         country = self.country
-        return (
+        threshold_fullfilled = (
             getattr(country, "certificates_enabled", False)
             and self.completion_percentage >= country.certificate_completion_threshold
         )
+        if threshold_fullfilled:
+            self.maybe_create_earned_certificate()
+        return threshold_fullfilled
 
     @property
     @memoize

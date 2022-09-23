@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.2.0 (unreleased)
+8.2.0 (2022-09-23)
 ------------------
 
 - Change the way certificates are created #156

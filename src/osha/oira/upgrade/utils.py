@@ -1,16 +1,33 @@
 # coding=utf-8
 from alembic import command
+from alembic import op
 from alembic.config import Config
 from euphorie.client.model import Session
 from logging import getLogger
 from osha.oira.statistics.model import get_postgres_url
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN
-from osha.oira.statistics.utils import create_session
 from osha.oira.statistics.utils import list_countries
 from pkg_resources import resource_filename
+from sqlalchemy import inspect
 
 
 logger = getLogger(__name__)
+
+
+def has_table(name):
+    """Utility function that can be used in alembic upgrades
+    to check if a table exists
+    """
+    return name in inspect(op.get_bind()).get_table_names()
+
+
+def has_column(table_name, column_name):
+    """Utility function that can be used in alembic upgrades
+    to check if a column exists
+    """
+    bind = op.get_bind()
+    columns = inspect(bind).get_columns(table_name)
+    return any(column["name"] == column_name for column in columns)
 
 
 def alembic_upgrade_to(revision):

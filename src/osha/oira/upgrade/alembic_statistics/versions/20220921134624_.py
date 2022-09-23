@@ -6,7 +6,7 @@ Create Date: 2022-09-21 11:42:25.215599
 
 """
 from alembic import op
-from euphorie.deployment.upgrade.utils import has_column
+from osha.oira.upgrade.utils import has_column
 
 import sqlalchemy as sa
 

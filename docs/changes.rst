@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.2.1 (unreleased)
+8.2.1 (2022-09-23)
 ------------------
 
 - Fixed upgrade

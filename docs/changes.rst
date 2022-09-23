@@ -4,7 +4,7 @@ Changelog
 8.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed upgrade
 
 
 8.2.0 (2022-09-23)

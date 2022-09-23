@@ -85,7 +85,7 @@ class UpdateStatisticsDatabases(object):
             or datetime.min
         )
         if latest_published_date > datetime.min:
-            log.info(f"Skipping tools up to and including {latest_published_date}")
+            log.info("Skipping tools up to and including %s", latest_published_date)
 
         tools = (
             self.session_application.query(
@@ -166,7 +166,9 @@ class UpdateStatisticsDatabases(object):
             or datetime.min
         )
         if latest_modified_date > datetime.min:
-            log.info(f"Skipping assessments up to and including {latest_modified_date}")
+            log.info(
+                "Skipping assessments up to and including %s", latest_modified_date
+            )
 
         active_risks = self.active_risks
         sessions = (
@@ -229,7 +231,7 @@ class UpdateStatisticsDatabases(object):
             or datetime.min
         )
         if latest_creation_date > datetime.min:
-            log.info(f"Skipping accounts up to and including {latest_creation_date}")
+            log.info("Skipping accounts up to and including %s", latest_creation_date)
 
         accounts = (
             self.session_application.query(Account)
@@ -272,7 +274,7 @@ class UpdateStatisticsDatabases(object):
         companies = self.session_application.query(Company, SurveySession.zodb_path)
 
         if latest_date > datetime.min:
-            log.info(f"Skipping company responses up to and including {latest_date}")
+            log.info("Skipping company responses up to and including %s", latest_date)
             companies = companies.filter(Company.timestamp > latest_date)
 
         if country is not None:
@@ -330,22 +332,22 @@ class UpdateStatisticsDatabases(object):
                 self.session_statistics.flush()
             offset = (offset + num_rows) if num_rows else -1
             if offset % (100 * self.b_size) == 0:
-                log.info("Processed {} rows".format(offset))
+                log.info("Processed %r rows", offset)
 
     def __call__(self):
         for country in [None] + list_countries(self.session_application):
             database = STATISTICS_DATABASE_PATTERN.format(suffix=country or "global")
-            log.info("Updating {}".format(database))
+            log.info("Updating %r", database)
             self.session_statistics = create_session(
                 self.statistics_url.format(database=database)
             )
             try:
                 self.update_database(country=country)
             except sqlalchemy.exc.SQLAlchemyError as e:
-                log.warn("Could not update {0}: {1}".format(database, e))
+                log.warning("Could not update %r: %r", database, e)
                 continue
             self.session_statistics.close()
-            log.info("Updated {}".format(database))
+            log.info("Updated %r", database)
 
 
 def handle_tool_workflow(obj, event):
@@ -363,7 +365,7 @@ def update_tool_info(surveygroup):
         try:
             creation_date = creation_date.asdatetime()
         except AttributeError:
-            log.warn("Cannot handle creation date {}".format(creation_date))
+            log.warning("Cannot handle creation date %r", creation_date)
             creation_date = None
 
     # cut out the part of the ZODB path that's used in postgresql

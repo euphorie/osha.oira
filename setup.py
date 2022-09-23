@@ -47,6 +47,7 @@ setup(
     zip_safe=False,
     install_requires=[
         "Euphorie >=14.0.0",
+        "ftw.upgrade",
         "htmllaundry",
         "mobile.sniffer",
         "NuPlone >=2.1.0",

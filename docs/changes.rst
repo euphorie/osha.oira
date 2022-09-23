@@ -7,6 +7,7 @@ Changelog
 - Change the way certificates are created #156
   [ale-rt]
 - Statistics: Incremental updates
+- Support rich text in measure description (action).
 
 
 8.1.9 (2022-09-15)

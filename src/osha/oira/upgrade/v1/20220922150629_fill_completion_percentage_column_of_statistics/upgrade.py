@@ -28,6 +28,7 @@ class FillCompletionPercentageColumnOfStatistics(UpgradeStep):
         handled = 0
         batch = base_query.limit(b_size)
         while batch.count() > 0:
+            handled_batch = 0
             for statistics_session in batch:
                 application_session = (
                     Session.query(SurveySession)
@@ -38,9 +39,12 @@ class FillCompletionPercentageColumnOfStatistics(UpgradeStep):
                     statistics_session.completion_percentage = (
                         application_session.completion_percentage
                     )
-                    handled = handled + 1
+                    handled_batch = handled_batch + 1
             session_statistics.commit()
+            handled = handled + handled_batch
             logger.info("Handled %r sessions", handled)
+            if handled_batch == 0:
+                break
             # Because we've committed, the rows we've updated are already reflected in
             # the next query. They don't match the query filter any more, so we don't
             # need to use an offset.

@@ -24,7 +24,7 @@ def upgrade(engine_name):
     if not has_column("assessment", "completion_percentage"):
         op.add_column(
             "assessment",
-            sa.Column("completion_percentage", sa.Interger(), nullable=True, default=0),
+            sa.Column("completion_percentage", sa.Integer(), nullable=True, default=0),
         )
 
 

@@ -358,10 +358,16 @@ class UpdateStatisticsDatabases(object):
     def __call__(self):
         for country in [None] + list_countries(self.session_application):
             database = STATISTICS_DATABASE_PATTERN.format(suffix=country or "global")
-            log.info("Updating %r", database)
             self.session_statistics = create_session(
                 self.statistics_url.format(database=database)
             )
+            try:
+                self.session_statistics.connection()
+            except sqlalchemy.exc.OperationalError as oe:
+                log.warning("Could not update %r: %r", database, oe)
+                continue
+
+            log.info("Updating %r", database)
             try:
                 self.update_database(country=country)
             except sqlalchemy.exc.SQLAlchemyError as e:

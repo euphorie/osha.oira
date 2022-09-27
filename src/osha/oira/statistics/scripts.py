@@ -4,6 +4,7 @@ from osha.oira.statistics.model import create_session
 from osha.oira.statistics.utils import UpdateStatisticsDatabases
 
 import argparse
+import datetime
 import logging
 import sys
 
@@ -38,6 +39,16 @@ def update_statistics():
         ),
     )
     parser.add_argument(
+        "--since",
+        type=lambda d: datetime.datetime.strptime(d, "%Y-%m-%d"),
+        help=(
+            "Start date for statistics update. Entries newer than this date will be "
+            "synchronized. Can only be used to specify dates earlier than the default "
+            "to prevent gaps in the data. "
+            "Default is latest entry date in statistics database."
+        ),
+    )
+    parser.add_argument(
         "--batch-size",
         type=int,
         default=1000,
@@ -63,6 +74,7 @@ def update_statistics():
     update_db = UpdateStatisticsDatabases(
         session_application,
         args.dst,
+        since=args.since,
         b_size=args.batch_size,
         optimize_cp_query=args.optimize_cp_query,
     )

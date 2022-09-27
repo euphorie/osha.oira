@@ -41,12 +41,18 @@ def list_statistics_databases(session_application):
 
 class UpdateStatisticsDatabases(object):
     def __init__(
-        self, session_application, statistics_url, b_size=1000, optimize_cp_query=False
+        self,
+        session_application,
+        statistics_url,
+        b_size=1000,
+        optimize_cp_query=False,
+        since=None,
     ):
         self.session_application = session_application
         self.statistics_url = statistics_url
         self.b_size = b_size
         self.optimize_cp_query = optimize_cp_query
+        self.since = since
 
     def log_counts(self):
         num_tools = self.session_statistics.query(SurveyStatistics).count()
@@ -81,14 +87,16 @@ class UpdateStatisticsDatabases(object):
 
     def update_tool(self, country=None):
         log.info("Table: tool")
-        latest_published_date = (
+        since = (
             self.session_statistics.query(
                 sqlalchemy.func.max(SurveyStatistics.published_date)
             ).first()[0]
             or datetime.min
         )
-        if latest_published_date > datetime.min:
-            log.info("Skipping tools up to and including %s", latest_published_date)
+        if self.since and self.since < since:
+            since = self.since
+        if since > datetime.min:
+            log.info("Skipping tools up to and including %s", since)
 
         tools = (
             self.session_application.query(
@@ -98,7 +106,7 @@ class UpdateStatisticsDatabases(object):
                 ),
                 sqlalchemy.func.count(SurveySession.id),
             )
-            .filter(Survey.published_date > latest_published_date)
+            .filter(Survey.published_date > since)
             .filter(Survey.zodb_path == SurveySession.zodb_path)
             .filter(Survey.published)
             .filter(Account.id == SurveySession.account_id)
@@ -162,16 +170,16 @@ class UpdateStatisticsDatabases(object):
 
     def update_assessment(self, country=None):
         log.info("Table: assessment")
-        latest_modified_date = (
+        since = (
             self.session_statistics.query(
                 sqlalchemy.func.max(SurveySessionStatistics.modified)
             ).first()[0]
             or datetime.min
         )
-        if latest_modified_date > datetime.min:
-            log.info(
-                "Skipping assessments up to and including %s", latest_modified_date
-            )
+        if self.since and self.since < since:
+            since = self.since
+        if since > datetime.min:
+            log.info("Skipping assessments up to and including %s", since)
 
         if self.optimize_cp_query:
             active_risks = self.active_risks
@@ -188,7 +196,7 @@ class UpdateStatisticsDatabases(object):
             )
 
         sessions = (
-            sessions.filter(SurveySession.modified > latest_modified_date)
+            sessions.filter(SurveySession.modified > since)
             .outerjoin(SurveySession.account)
             .filter(Account.account_type != "guest")
             .group_by(Account.id, SurveySession.id)
@@ -245,18 +253,20 @@ class UpdateStatisticsDatabases(object):
 
     def update_account(self, country=None):
         log.info("Table: account")
-        latest_creation_date = (
+        since = (
             self.session_statistics.query(
                 sqlalchemy.func.max(AccountStatistics.creation_date)
             ).first()[0]
             or datetime.min
         )
-        if latest_creation_date > datetime.min:
-            log.info("Skipping accounts up to and including %s", latest_creation_date)
+        if self.since and self.since < since:
+            since = self.since
+        if since > datetime.min:
+            log.info("Skipping accounts up to and including %s", since)
 
         accounts = (
             self.session_application.query(Account)
-            .filter(Account.created > latest_creation_date)
+            .filter(Account.created > since)
             .order_by(Account.id)
         )
         if country is not None:
@@ -295,7 +305,7 @@ class UpdateStatisticsDatabases(object):
 
     def update_company(self, country=None):
         log.info("Table: company")
-        latest_date = (
+        since = (
             self.session_statistics.query(
                 sqlalchemy.func.max(CompanyStatistics.date)
             ).first()[0]
@@ -303,9 +313,11 @@ class UpdateStatisticsDatabases(object):
         )
         companies = self.session_application.query(Company, SurveySession.zodb_path)
 
-        if latest_date > datetime.min:
-            log.info("Skipping company responses up to and including %s", latest_date)
-            companies = companies.filter(Company.timestamp > latest_date)
+        if self.since and self.since < since:
+            since = self.since
+        if since > datetime.min:
+            log.info("Skipping company responses up to and including %s", since)
+            companies = companies.filter(Company.timestamp > since)
 
         if country is not None:
             companies = companies.filter(SurveySession.zodb_path.startswith(country))

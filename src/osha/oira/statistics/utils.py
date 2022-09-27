@@ -40,10 +40,13 @@ def list_statistics_databases(session_application):
 
 
 class UpdateStatisticsDatabases(object):
-    def __init__(self, session_application, statistics_url, b_size=1000):
+    def __init__(
+        self, session_application, statistics_url, b_size=1000, optimize_cp_query=False
+    ):
         self.session_application = session_application
         self.statistics_url = statistics_url
         self.b_size = b_size
+        self.optimize_cp_query = optimize_cp_query
 
     def log_counts(self):
         num_tools = self.session_statistics.query(SurveyStatistics).count()
@@ -170,16 +173,22 @@ class UpdateStatisticsDatabases(object):
                 "Skipping assessments up to and including %s", latest_modified_date
             )
 
-        active_risks = self.active_risks
-        sessions = (
-            self.session_application.query(
+        if self.optimize_cp_query:
+            active_risks = self.active_risks
+            sessions = self.session_application.query(
                 SurveySession,
                 Account,
                 sqlalchemy.func.count(active_risks.c.id),
                 sqlalchemy.func.count(active_risks.c.identification),
+            ).outerjoin(active_risks, active_risks.c.session_id == SurveySession.id)
+        else:
+            sessions = self.session_application.query(
+                SurveySession,
+                Account,
             )
-            .filter(SurveySession.modified > latest_modified_date)
-            .outerjoin(active_risks, active_risks.c.session_id == SurveySession.id)
+
+        sessions = (
+            sessions.filter(SurveySession.modified > latest_modified_date)
             .outerjoin(SurveySession.account)
             .filter(Account.account_type != "guest")
             .group_by(Account.id, SurveySession.id)
@@ -188,10 +197,24 @@ class UpdateStatisticsDatabases(object):
         if country is not None:
             sessions = sessions.filter(SurveySession.zodb_path.startswith(country))
 
+        def _completion_percentage(session, total_risks, answered_risks):
+            if self.optimize_cp_query:
+                return (
+                    int(round(answered_risks / total_risks * 100.0))
+                    if total_risks
+                    else 0
+                )
+            return session.completion_percentage
+
         def assessment_rows(offset):
             batch = sessions.limit(self.b_size).offset(offset)
             handled = 0
-            for session, account, total_risks, answered_risks in batch:
+            for row in batch:
+                if self.optimize_cp_query:
+                    session, account, total_risks, answered_risks = row
+                else:
+                    session, account = row
+                    total_risks = answered_risks = None
                 existing = (
                     self.session_statistics.query(SurveySessionStatistics)
                     .filter(SurveySessionStatistics.id == session.id)
@@ -203,11 +226,9 @@ class UpdateStatisticsDatabases(object):
                     start_date=session.created,
                     modified=session.modified,
                     tool_path=session.zodb_path,
-                    completion_percentage=int(
-                        round(answered_risks / total_risks * 100.0)
-                    )
-                    if total_risks
-                    else 0,
+                    completion_percentage=_completion_percentage(
+                        session, total_risks, answered_risks
+                    ),
                     country=session.zodb_path.split("/")[0],
                     account_id=account.id,
                     account_type=account.account_type,

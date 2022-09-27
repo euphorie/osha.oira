@@ -43,6 +43,14 @@ def update_statistics():
         default=1000,
         help=("How many rows to process in one go before committing to the database"),
     )
+    parser.add_argument(
+        "--optimize-cp-query",
+        action="store_true",
+        help=(
+            "Use separate query for calculating completion percentage instead of "
+            "method on session object. Faster when updating a lot of sessions."
+        ),
+    )
     args = parser.parse_args()
     log.info("Updating statistics databases")
     session_application = create_session(args.src)
@@ -53,6 +61,9 @@ def update_statistics():
     model.Session = session_application
 
     update_db = UpdateStatisticsDatabases(
-        session_application, args.dst, b_size=args.batch_size
+        session_application,
+        args.dst,
+        b_size=args.batch_size,
+        optimize_cp_query=args.optimize_cp_query,
     )
     update_db()

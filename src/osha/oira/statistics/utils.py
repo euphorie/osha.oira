@@ -271,16 +271,25 @@ class UpdateStatisticsDatabases(object):
 
         def account_rows(offset):
             batch = accounts.limit(self.b_size).offset(offset)
-            rows = [
-                AccountStatistics(
+            handled = 0
+            for account in batch:
+                existing = (
+                    self.session_statistics.query(AccountStatistics)
+                    .filter(AccountStatistics.id == account.id)
+                    .first()
+                )
+                attribs = dict(
                     id=account.id,
                     account_type=account.account_type,
                     creation_date=account.created or sqlalchemy.null(),
                 )
-                for account in batch
-            ]
-            self.session_statistics.add_all(rows)
-            return len(rows)
+                if existing:
+                    for name, value in attribs.items():
+                        setattr(existing, name, value)
+                else:
+                    self.session_statistics.add(AccountStatistics(**attribs))
+                handled = handled + 1
+            return handled
 
         self._process_batch(account_rows)
 

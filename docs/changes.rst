@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.2.2 (unreleased)
+8.2.2 (2022-09-27)
 ------------------
 
 - Statistics fixes and performance improvements.

@@ -12,7 +12,6 @@ log = getLogger(__name__)
 
 class OSHAWebHelpers(WebHelpers):
 
-    hide_organisation_tab = True
     show_completion_percentage = True
 
     @memoize

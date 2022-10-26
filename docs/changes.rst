@@ -4,8 +4,7 @@ Changelog
 8.2.3 (unreleased)
 ------------------
 
-- Tweak the session dashboard to not show the organisation tab
-  [ale-rt]
+- Nothing changed yet.
 
 
 8.2.2 (2022-09-27)

@@ -4,7 +4,9 @@ Changelog
 8.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Mailing lists json view.
+  `#739 <https://github.com/syslabcom/scrum/issues/739>`_.
+  [reinhardt]
 
 
 8.2.2 (2022-09-27)

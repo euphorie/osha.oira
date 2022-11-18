@@ -1,5 +1,4 @@
 from alembic import context
-from logging.config import fileConfig
 from osha.oira.statistics.model import Base
 from sqlalchemy import engine_from_config
 from sqlalchemy import exc
@@ -16,7 +15,8 @@ USE_TWOPHASE = False
 config = context.config
 
 # Interpret the config file for Python logging.
-# This line sets up loggers basically.
+# These lines set up loggers basically.
+# from logging.config import fileConfig
 # fileConfig(config.config_file_name)
 logger = logging.getLogger("alembic.env")
 
@@ -126,7 +126,7 @@ def run_migrations_online():
 
         for rec in engines.values():
             rec["transaction"].commit()
-    except:
+    except Exception:
         for rec in engines.values():
             rec["transaction"].rollback()
         raise

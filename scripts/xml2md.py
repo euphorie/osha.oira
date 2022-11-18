@@ -30,7 +30,7 @@ EVALUATION_TYPES = [
     "priority",
     "policy",
 ]
-LOCATIONS = [u"Abby Road", u"Baker Street"]
+LOCATIONS = ["Abby Road", "Baker Street"]
 
 MAX_NUMBER_MODULES = 1
 MAX_NUMBER_PROFILES = 2
@@ -79,7 +79,7 @@ def write_md(id, content):
 
 
 def increment_number(num):
-    """ 2.3.4 -> 2.3.5 """
+    """2.3.4 -> 2.3.5"""
     num_list = num.split(".")
     incremented_num_list = num_list[:-1] + [str(int(num_list[-1:].pop()) + 1)]
     return ".".join(incremented_num_list)
@@ -90,7 +90,7 @@ def _r(t):
 
 
 def create_risk(risk, parent_id=None, number="1"):
-    risk_template = u"""---
+    risk_template = """---
 layout: risk
 fid: {id}
 classes: {classes}
@@ -128,7 +128,7 @@ solutions:
         evaluation_method = EVALUATION_TYPES[risk_counter]
         state = "answered"
         risk_class = "risk"
-        print(u"Risk {0} with method {1}".format(title, evaluation_method))
+        print("Risk {0} with method {1}".format(title, evaluation_method))
     else:
         evaluation_method = random.choice(EVALUATION_TYPES)
         state = random.choice(STATES)
@@ -140,21 +140,21 @@ solutions:
 
     images = risk.findAll("image")
     image_data = []
-    image_info = u""
+    image_info = ""
     for image in images:
         image_path = os.path.join(media_path, image["filename"])
         image_filename = os.path.join(dir_path, image_path)
         with open(image_filename, "w") as img_file:
             img_file.write(base64.decodestring(image.contents[0]))
         image_data.append(
-            dict(url=u"/{0}".format(image_path), caption=image.get("caption", ""))
+            dict(url="/{0}".format(image_path), caption=image.get("caption", ""))
         )
 
     if image_data:
-        image_info = u"images:\n"
+        image_info = "images:\n"
         for entry in image_data:
-            image_info += u"    - url: {0}\n".format(entry["url"])
-            image_info += u"      caption: {0}\n".format(entry["caption"])
+            image_info += "    - url: {0}\n".format(entry["url"])
+            image_info += "      caption: {0}\n".format(entry["caption"])
 
     mip = ""
     existing_measures = _r(risk.find("existing_measures").text)
@@ -162,7 +162,7 @@ solutions:
         # import pdb; pdb.set_trace( )
         for measure in existing_measures.split("\n"):
             if measure.strip():
-                mip += u'    - label: "%s"\n      state: checked\n' % (
+                mip += '    - label: "%s"\n      state: checked\n' % (
                     measure.replace("&#13;", "")
                 )
 
@@ -187,7 +187,7 @@ solutions:
 
 
 def create_module(module, parent_id=None, number="1"):
-    module_template = u"""---
+    module_template = """---
 layout: module
 fid: {id}
 number: "{number}"
@@ -209,7 +209,7 @@ title: {title}{module}
         image_filename = os.path.join(dir_path, image_path)
         with open(image_filename, "w") as img_file:
             img_file.write(base64.decodestring(images[0].contents[0]))
-        image_info = u"images:\n    - url: /{0}\n      caption: {1}\n".format(
+        image_info = "images:\n    - url: /{0}\n      caption: {1}\n".format(
             image_path, images[0].get("caption", "")
         )
 
@@ -246,7 +246,7 @@ title: {title}{module}
 
 def create_location(location_number, location_name, parent_id):
     id = str2filename(location_name)
-    content = u"""---
+    content = """---
 layout: location
 fid: {fid}
 number: {location_number}
@@ -263,7 +263,7 @@ parent_id: {parent_id}
 
 
 def create_profile_question(profile_question, number="1", locations=[]):
-    question_template = u"""---
+    question_template = """---
 layout: profile
 fid: {id}
 number: "{number}"
@@ -363,6 +363,6 @@ if __name__ == "__main__":
         # Let X modules be enough
         if MAX_NUMBER_MODULES and number > (MAX_NUMBER_MODULES + MAX_NUMBER_PROFILES):
             break
-        print(u"Export Module '{0}'".format(module.title.text))
+        print("Export Module '{0}'".format(module.title.text))
         create_module(module, number=str(number))
         number += 1

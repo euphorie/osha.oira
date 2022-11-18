@@ -67,7 +67,7 @@ for tag in tags:
                 txt = line.string
             txt = txt.strip()
             contents.append(txt)
-        entity.setString(u"".join(contents))
+        entity.setString("".join(contents))
 
 
 fh = open(output, "w")

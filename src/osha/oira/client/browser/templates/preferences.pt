@@ -57,6 +57,119 @@
                 </tal:widget>
               </div>
             </fieldset>
+
+            <fieldset class="form-panel pat-collapsible true section horizontal"
+                      id="label-mailings"
+                      data-pat-collapsible="store: local; scroll-selector: self; scroll-offset: 100px"
+            >
+
+              <h3 class="form-separation-header"
+                  i18n:translate="label_mailings"
+              >Mailings
+              </h3>
+              <fieldset class="pat-checklist group checkbox">
+                <legend i18n:translate="label_subscriptions">Subscriptions</legend>
+                <label class="disabled">
+                  <input checked
+                         disabled
+                         name=""
+                         type="checkbox"
+                  />
+
+                  <strong class="label-fragment-title"
+                          i18n:translate="label_functional_emails"
+                  >Functional e-mails</strong>
+                  <p class="label-fragment-description"
+                     i18n:translate="description_functional_emails"
+                  >
+							E-mails, such as password reset e-mails, that might be needed to guarantee your access to OiRA.
+                  </p>
+
+                </label>
+                <br />
+
+                <label class="">
+                  <input checked="${python:'checked' if view.has_general_subscription else None}"
+                         name="mailings.general:boolean:record"
+                         type="checkbox"
+                         value="true"
+                  />
+
+                  <strong class="label-fragment-title"
+                          i18n:translate="label_general_news"
+                  >General OiRA news</strong>
+                  <p class="label-fragment-description"
+                     i18n:translate="description_general_news"
+                  >
+							Occasional newsletters with updates about the OiRA application.
+                  </p>
+
+                </label>
+                <br />
+
+                <label class="">
+                  <input checked="${python:'checked' if view.has_country_subscription else None}"
+                         name="mailings.country:boolean:record"
+                         type="checkbox"
+                         value="true"
+                  />
+
+                  <strong class="label-fragment-title"
+                          i18n:translate="label_country_news"
+                  >News for my country</strong>
+                  <p class="label-fragment-description"
+                     i18n:translate="description_country_news"
+                  >
+							Receive news about OiRA specifically for your country.
+                  </p>
+
+                </label>
+                <br />
+
+                <tal:future replace="nothing">
+                  <!-- TODO: sector and tool mailing lists -->
+                  <label class="">
+                    <input name="mailings.sector:boolean:record"
+                           type="checkbox"
+                           value="true"
+                    />
+
+                    <strong class="label-fragment-title"
+                            i18n:translate="label_sector_news"
+                    >News for my sector</strong>
+                    <p class="label-fragment-description"
+                       i18n:translate="description_sector_news"
+                    >
+							News about the sector or sectors that I'm active in.
+                    </p>
+
+                  </label>
+                  <br />
+
+                  <label class=""
+                         tal:repeat="tool view/my_tools"
+                  >
+                    <input name=""
+                           type="checkbox"
+                           value="true"
+                    />
+
+                    <strong class="label-fragment-title"
+                            i18n:translate="label_sector_news"
+                    >${tool/title}</strong>
+                    <p class="label-fragment-description"
+                       i18n:translate="description_sector_news"
+                    >
+							News about the tool &lsquo;${tool/title}&rsquo;.
+                    </p>
+
+                  </label>
+                  <br />
+                </tal:future>
+              </fieldset>
+
+            </fieldset>
+
           </div>
         </form>
       </div>

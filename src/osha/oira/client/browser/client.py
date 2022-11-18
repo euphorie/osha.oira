@@ -10,7 +10,7 @@ class MailingListsJson(BrowserView):
     @property
     def results(self):
         """
-        List of mailing list UID/names
+        List of "mailing list" path/names.
 
         The format fits pat-autosuggest.
         There is a special label for the "all" list.
@@ -32,11 +32,14 @@ class MailingListsJson(BrowserView):
             sort_on="sortable_title",
         )
         results.extend(
-            [{"id": brain.UID, "text": brain.Title} for brain in brains]
+            [{"id": brain.getPath(), "text": brain.Title} for brain in brains]
         )
         return results
 
     def __call__(self):
-        """Json list of mailing list UID/names"""
+        """Returns a json meant to be consumed by pat-autosuggest.
+
+        The json lists container that will be used to generate "mailing lists"
+        """
         self.request.response.setHeader("Content-type", "application/json")
         return dumps(self.results)

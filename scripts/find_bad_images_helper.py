@@ -61,7 +61,7 @@ def fix_annotation_blobs(context):
 
 
 def recurse(tree):
-    """ Walk through all the content on a Plone site """
+    """Walk through all the content on a Plone site"""
     for id, child in tree.contentItems():
         fix_blobs(child)
         fix_annotation_blobs(child)

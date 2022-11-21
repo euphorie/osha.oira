@@ -1,0 +1,43 @@
+<div class="canvas-banner"
+     tal:define="
+       preferences_url string:${here/absolute_url}/@@preferences#content;
+     "
+     tal:condition="view/available"
+     i18n:domain="euphorie"
+>
+  <article class="banner-body">
+    <a class="pat-inject image-link"
+       href="${preferences_url}"
+    >
+      <img alt="Preferences"
+           src="${here/portal_url}/++resource++euphorie.resources/oira/style/mail-tunnel.jpg"
+           i18n:attributes="alt"
+      />
+    </a>
+    <section class="banner-text">
+      <p i18n:translate="">
+        Keep up to breast with the latest developments by signing up for our newsletter on your
+        <a class="pat-inject"
+           href="${preferences_url}"
+           i18n:name="target"
+           i18n:translate=""
+        >personal preferences page</a>.
+      </p>
+      <form class="button-bar pat-inject"
+            action="${here/absolute_url}/@@dashboard-banner#content"
+            method="post"
+      >
+        <a class="pat-inject pat-button default"
+           href="${preferences_url}"
+           i18n:translate=""
+        >Sign up</a>
+        <button class="pat-button"
+                name="hide_banner"
+                type="submit"
+                value="1"
+                i18n:translate=""
+        >Hide this message</button>
+      </form>
+    </section>
+  </article>
+</div>

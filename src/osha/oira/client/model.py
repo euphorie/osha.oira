@@ -122,6 +122,17 @@ class NewsletterSubscription(model.BaseObject):
     )
     zodb_path = schema.Column(types.String(512), nullable=False)
 
+class NewsletterSetting(model.BaseObject):
+    __tablename__ = "newsletter_setting"
+
+    id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
+    account_id = schema.Column(
+        types.Integer(),
+        schema.ForeignKey(model.Account.id, onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
+    )
+    value = schema.Column(types.String(512), nullable=False)
+
 
 _instrumented = False
 if not _instrumented:
@@ -131,6 +142,7 @@ if not _instrumented:
         Certificate,
         UsersNotInterestedInCertificateStatusBox,
         NewsletterSubscription,
+        NewsletterSetting,
     ]:
         instrument_declarative(cls, metadata._decl_registry, metadata)
 

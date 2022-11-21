@@ -62,7 +62,12 @@ class OSHAPreferences(Preferences):
     @property
     def has_country_subscription(self):
         # TODO: User could have multiple countries, but there's only one checkbox
-        return self.existing_subscriptions.get(self.context.getId())
+        # If I have two countries but am only subscribed to one of them, then
+        # this will say I am subscribed to my country. However, saving the form will add
+        # a subscription to the other country, even though I haven't changed anything.
+        return any(
+            (self.existing_subscriptions.get(country) for country in self.my_countries)
+        )
 
     @button.buttonAndHandler(_("Save"), name="save")
     def handleSave(self, action):

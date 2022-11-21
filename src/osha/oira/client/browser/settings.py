@@ -1,7 +1,7 @@
 from euphorie.client.browser.settings import Preferences
 from euphorie.client.model import get_current_account
 from osha.oira import _
-from osha.oira.client.model import NewsletterSubscription
+from osha.oira.client.model import NewsletterSetting
 from plone import api
 from plone.memoize.view import memoize
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -46,18 +46,15 @@ class OSHAPreferences(Preferences):
 
     @property
     @memoize
-    def existing_subscriptions(self):
-        existing_subscriptions = Session.query(NewsletterSubscription).filter(
-            NewsletterSubscription.account_id == get_current_account().getId()
+    def existing_settings(self):
+        existing_settings = Session.query(NewsletterSetting).filter(
+            NewsletterSetting.account_id == get_current_account().getId()
         )
-        return {
-            subscription.zodb_path: subscription
-            for subscription in existing_subscriptions
-        }
+        return {setting.value: setting for setting in existing_settings}
 
     @property
     def has_general_subscription(self):
-        return self.existing_subscriptions.get("general")
+        return self.existing_settings.get("general")
 
     @property
     def has_country_subscription(self):
@@ -66,7 +63,7 @@ class OSHAPreferences(Preferences):
         # this will say I am subscribed to my country. However, saving the form will add
         # a subscription to the other country, even though I haven't changed anything.
         return any(
-            (self.existing_subscriptions.get(country) for country in self.my_countries)
+            (self.existing_settings.get(country) for country in self.my_countries)
         )
 
     @button.buttonAndHandler(_("Save"), name="save")
@@ -76,29 +73,29 @@ class OSHAPreferences(Preferences):
 
         wants_general_subscription = mailings.get("general", False)
         if wants_general_subscription:
-            if "general" not in self.existing_subscriptions:
+            if "general" not in self.existing_settings:
                 Session.add(
-                    NewsletterSubscription(
+                    NewsletterSetting(
                         account_id=get_current_account().getId(),
-                        zodb_path="general",
+                        value="general",
                     )
                 )
         else:
-            if "general" in self.existing_subscriptions:
-                Session.delete(self.existing_subscriptions["general"])
+            if "general" in self.existing_settings:
+                Session.delete(self.existing_settings["general"])
 
         wants_country_subscription = mailings.get("country", False)
         if wants_country_subscription:
             for country_id in self.my_countries:
-                if country_id not in self.existing_subscriptions:
+                if country_id not in self.existing_settings:
                     Session.add(
-                        NewsletterSubscription(
+                        NewsletterSetting(
                             account_id=get_current_account().getId(),
-                            zodb_path=country_id,
+                            value=country_id,
                         )
                     )
         else:
             for country_id in self.my_countries:
-                if country_id in self.existing_subscriptions:
-                    Session.delete(self.existing_subscriptions[country_id])
+                if country_id in self.existing_settings:
+                    Session.delete(self.existing_settings[country_id])
         self.request.__annotations__.pop("plone.memoize", None)

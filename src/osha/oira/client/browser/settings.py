@@ -1,12 +1,10 @@
 from euphorie.client.browser.settings import Preferences
-from euphorie.client.model import Account
 from euphorie.client.model import get_current_account
 from osha.oira import _
 from osha.oira.client.model import NewsletterSubscription
 from plone import api
 from plone.memoize.view import memoize
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from sqlalchemy import sql
 from z3c.form import button
 from z3c.saconfig import Session
 
@@ -41,18 +39,16 @@ class OSHAPreferences(Preferences):
         # TODO
         return set()
 
-    @property
-    @memoize
-    def my_tools(self):
-        return {s.tool for s in self.my_sessions}
+    # @property
+    # @memoize
+    # def my_tools(self):
+    #     return {s.zodb_path for s in self.my_sessions}
 
     @property
     @memoize
     def existing_subscriptions(self):
-        existing_subscriptions = (
-            Session.query(NewsletterSubscription)
-            .filter(Account.id == NewsletterSubscription.account_id)
-            .filter(Account.id == get_current_account().getId())
+        existing_subscriptions = Session.query(NewsletterSubscription).filter(
+            NewsletterSubscription.account_id == get_current_account().getId()
         )
         return {
             subscription.zodb_path: subscription

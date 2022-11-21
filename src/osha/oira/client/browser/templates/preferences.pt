@@ -107,7 +107,9 @@
                 </label>
                 <br />
 
-                <label class="">
+                <label class=""
+                       tal:condition="view/my_countries"
+                >
                   <input checked="${python:'checked' if view.has_country_subscription else None}"
                          name="mailings.country:boolean:record"
                          type="checkbox"

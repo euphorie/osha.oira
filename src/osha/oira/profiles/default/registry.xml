@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <registry>
   <record name="osha.oira.certificate.public_server">
     <field type="plone.registry.field.TextLine">
@@ -8,5 +8,13 @@
       <required>False</required>
     </field>
     <value purge="false">https://oiraproject.eu</value>
+  </record>
+  <record name="osha.oira.mailings.token">
+    <field type="plone.registry.field.TextLine">
+      <title>Mailing lists access token</title>
+      <description>Shared secret for accessing email addresses subscribed to mailing lists</description>
+      <required>False</required>
+    </field>
+    <value />
   </record>
 </registry>

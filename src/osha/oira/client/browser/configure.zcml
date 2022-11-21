@@ -154,4 +154,12 @@
       layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
       />
 
+  <browser:page
+      name="group-to-addresses"
+      for="euphorie.client.client.IClient"
+      class=".client.GroupToAddresses"
+      permission="zope2.View"
+      layer="plonetheme.nuplone.skin.interfaces.NuPloneSkin"
+      />
+
 </configure>

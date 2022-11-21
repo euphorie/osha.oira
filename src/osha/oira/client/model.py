@@ -119,9 +119,8 @@ class NewsletterSubscription(model.BaseObject):
         types.Integer(),
         schema.ForeignKey(model.Account.id, onupdate="CASCADE", ondelete="CASCADE"),
         nullable=False,
-        primary_key=True,
     )
-    zodb_path = schema.Column(types.String(512), primary_key=True)
+    zodb_path = schema.Column(types.String(512), nullable=False)
 
 
 _instrumented = False

@@ -20,20 +20,22 @@ class MailingListsJson(BrowserView):
         The format fits pat-autosuggest.
         There is a special label for the "all" list.
         """
-        # TODO: require query.
-        # q = self.request.get("q", "").strip().lower()
-        # if not q:
-        #     return []
+        q = self.request.get("q", "").strip().lower()
+        if not q:
+            return []
 
+        results = []
         catalog = api.portal.get_tool(name="portal_catalog")
-        all_users = {"id": "all", "text": "All OiRA users"}
-        # if q in all_users["id"] or q in all_users["text"].lower():
+        all_users = {"id": "general", "text": "All OiRA users"}
+        if q in all_users["id"] or q in all_users["text"].lower():
+            results.append(all_users)
 
-        results = [all_users]
-
-        # FIXME: SearchableText="de*" doesn't return Germany
+        # FIXME: Search for native names of countries,
+        # e.g. `q=de` doesn't return Germany
         brains = catalog(
-            portal_type="euphorie.clientcountry",
+            portal_type=["euphorie.clientcountry", "euphorie.survey"],
+            Title=f"*{q}*",
+            path="/".join(self.context.getPhysicalPath()),
             sort_on="sortable_title",
         )
         client_path = "/".join(self.context.getPhysicalPath())

@@ -39,10 +39,10 @@ class OSHAPreferences(Preferences):
         # TODO
         return set()
 
-    # @property
-    # @memoize
-    # def my_tools(self):
-    #     return {s.zodb_path for s in self.my_sessions}
+    @property
+    @memoize
+    def my_tools(self):
+        return {s.zodb_path for s in self.my_sessions}
 
     @property
     @memoize
@@ -101,4 +101,20 @@ class OSHAPreferences(Preferences):
             for country_id in self.my_countries:
                 if country_id in self.existing_subscriptions:
                     Session.delete(self.existing_subscriptions[country_id])
+
+        wants_tool_subscriptions = mailings.get("tool", [])
+        for tool_id in self.my_tools:
+            if tool_id in wants_tool_subscriptions:
+                if tool_id not in self.existing_subscriptions:
+                    Session.add(
+                        NewsletterSubscription(
+                            account_id=get_current_account().getId(),
+                            zodb_path=tool_id,
+                        )
+                    )
+            else:
+                if tool_id in self.existing_subscriptions:
+                    Session.delete(self.existing_subscriptions[tool_id])
+        # TODO: Remove subscriptions for deleted assessments
+
         self.request.__annotations__.pop("plone.memoize", None)

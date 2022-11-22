@@ -147,27 +147,29 @@
 
                   </label>
                   <br />
-
-                  <label class=""
-                         tal:repeat="tool view/my_tools"
-                  >
-                    <input name=""
-                           type="checkbox"
-                           value="true"
-                    />
-
-                    <strong class="label-fragment-title"
-                            i18n:translate="label_sector_news"
-                    >${tool/title}</strong>
-                    <p class="label-fragment-description"
-                       i18n:translate="description_sector_news"
-                    >
-							News about the tool &lsquo;${tool/title}&rsquo;.
-                    </p>
-
-                  </label>
-                  <br />
                 </tal:future>
+
+                <label class=""
+                       tal:repeat="tool view/my_tools"
+                >
+                  <input checked="${python: 'checked' if tool in view.existing_subscriptions else None}"
+                         name="mailings.tool:list:record"
+                         type="checkbox"
+                         value="${tool}"
+                  />
+
+                  <tal:comment replace="nothing">TODO: Show the title instead of the path</tal:comment>
+                  <strong class="label-fragment-title"
+                          i18n:translate="label_sector_news"
+                  >${tool}</strong>
+                  <p class="label-fragment-description"
+                     i18n:translate="description_sector_news"
+                  >
+							News about the tool &lsquo;${tool}&rsquo;.
+                  </p>
+
+                </label>
+                <br />
               </fieldset>
 
             </fieldset>

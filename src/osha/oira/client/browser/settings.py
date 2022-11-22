@@ -39,10 +39,10 @@ class OSHAPreferences(Preferences):
         # TODO
         return set()
 
-    # @property
-    # @memoize
-    # def my_tools(self):
-    #     return {s.zodb_path for s in self.my_sessions}
+    @property
+    @memoize
+    def my_tools(self):
+        return {s.zodb_path for s in self.my_sessions}
 
     @property
     @memoize
@@ -69,6 +69,19 @@ class OSHAPreferences(Preferences):
             (self.existing_subscriptions.get(country) for country in self.my_countries)
         )
 
+    def subscribe(self, zodb_path):
+        if zodb_path not in self.existing_subscriptions:
+            Session.add(
+                NewsletterSubscription(
+                    account_id=get_current_account().getId(),
+                    zodb_path=zodb_path,
+                )
+            )
+
+    def unsubscribe(self, zodb_path):
+        if zodb_path in self.existing_subscriptions:
+            Session.delete(self.existing_subscriptions[zodb_path])
+
     @button.buttonAndHandler(_("Save"), name="save")
     def handleSave(self, action):
         super().handleSave(self, action)
@@ -76,29 +89,23 @@ class OSHAPreferences(Preferences):
 
         wants_general_subscription = mailings.get("general", False)
         if wants_general_subscription:
-            if "general" not in self.existing_subscriptions:
-                Session.add(
-                    NewsletterSubscription(
-                        account_id=get_current_account().getId(),
-                        zodb_path="general",
-                    )
-                )
+            self.subscribe("general")
         else:
-            if "general" in self.existing_subscriptions:
-                Session.delete(self.existing_subscriptions["general"])
+            self.unsubscribe("general")
 
         wants_country_subscription = mailings.get("country", False)
         if wants_country_subscription:
             for country_id in self.my_countries:
-                if country_id not in self.existing_subscriptions:
-                    Session.add(
-                        NewsletterSubscription(
-                            account_id=get_current_account().getId(),
-                            zodb_path=country_id,
-                        )
-                    )
+                self.subscribe(country_id)
         else:
             for country_id in self.my_countries:
-                if country_id in self.existing_subscriptions:
-                    Session.delete(self.existing_subscriptions[country_id])
+                self.unsubscribe(country_id)
+
+        for tool_id in self.my_tools:
+            if tool_id in mailings:
+                self.subscribe(tool_id)
+            else:
+                self.unsubscribe(tool_id)
+        # TODO: Remove subscriptions for deleted assessments
+
         self.request.__annotations__.pop("plone.memoize", None)

@@ -26,7 +26,7 @@ class MailingListsJson(BrowserView):
 
         results = []
         catalog = api.portal.get_tool(name="portal_catalog")
-        all_users = {"id": "general", "text": "All OiRA users"}
+        all_users = {"id": "general", "text": "All users"}
         if q in all_users["id"] or q in all_users["text"].lower():
             results.append(all_users)
 

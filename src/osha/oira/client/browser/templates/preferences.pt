@@ -153,9 +153,9 @@
                        tal:repeat="tool view/my_tools"
                 >
                   <input checked="${python: 'checked' if tool in view.existing_subscriptions else None}"
-                         name="mailings.tool:list:record"
+                         name="mailings.${tool}:boolean:record"
                          type="checkbox"
-                         value="${tool}"
+                         value="true"
                   />
 
                   <tal:comment replace="nothing">TODO: Show the title instead of the path</tal:comment>

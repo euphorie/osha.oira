@@ -171,4 +171,17 @@
       layer="plonetheme.nuplone.skin.interfaces.NuPloneSkin"
       />
 
+  <configure package="euphorie.client.browser">
+    <browser:page
+        name="start"
+        for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+        class="osha.oira.client.browser.session.OSHAStart"
+        template="templates/start.pt"
+        permission="euphorie.client.ViewSurvey"
+        layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+        />
+  </configure>
+
+  <adapter factory=".session.OSHAStartExtender" />
+
 </configure>

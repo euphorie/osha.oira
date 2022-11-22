@@ -111,6 +111,18 @@ class Certificate(model.BaseObject):
         return datetime.strptime(date, "%Y-%m-%d")
 
 
+class NewsletterSubscription(model.BaseObject):
+    __tablename__ = "newsletter_subscription"
+
+    id = schema.Column(types.Integer(), primary_key=True, autoincrement=True)
+    account_id = schema.Column(
+        types.Integer(),
+        schema.ForeignKey(model.Account.id, onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
+    )
+    zodb_path = schema.Column(types.String(512), nullable=False)
+
+
 _instrumented = False
 if not _instrumented:
     for cls in [
@@ -118,6 +130,7 @@ if not _instrumented:
         SurveyStatistics,
         Certificate,
         UsersNotInterestedInCertificateStatusBox,
+        NewsletterSubscription,
     ]:
         instrument_declarative(cls, metadata._decl_registry, metadata)
 

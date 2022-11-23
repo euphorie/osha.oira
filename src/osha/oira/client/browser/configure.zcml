@@ -147,6 +147,15 @@
       />
 
   <browser:page
+      name="mailing-lists-resolve.json"
+      for="euphorie.client.client.IClient"
+      permission="zope2.View"
+      class=".client.MailingListsJson"
+      attribute="paths_to_mailing_lists"
+      layer="plonetheme.nuplone.skin.interfaces.NuPloneSkin"
+      />
+
+  <browser:page
       name="dashboard-banner"
       for="euphorie.client.country.IClientCountry"
       class=".dashboard_banner.View"

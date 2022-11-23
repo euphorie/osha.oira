@@ -13,6 +13,38 @@ class MailingListsJson(BrowserView):
     """Mailing lists (countries, in the future also sectors and tools)"""
 
     @property
+    def paths_to_mailing_lists(self):
+        """Return a list of path/title pairs for given paths, seperated by
+        comma.
+
+        This is used to pre-fill pat-auto-suggest with existing values.
+        """
+        q = self.request.get("q", "").strip()
+        if not q:
+            return []
+
+        client_path = "/".join(self.context.getPhysicalPath())
+        paths = list(map(lambda x: f"{client_path}/{x}", q.split(",")))
+        results = []
+        catalog = api.portal.get_tool(name="portal_catalog")
+        if "general" in paths:
+            results.append({"id": "general", "text": "All users"})
+
+        brains = catalog(
+            portal_type=["euphorie.clientcountry", "euphorie.survey"],
+            path={"query": paths, "depth": 0, "operator": "or"},
+            sort_on="sortable_title",
+        )
+        results.extend(
+            [
+                {"id": path.relpath(brain.getPath(), client_path), "text": brain.Title}
+                for brain in brains
+            ]
+        )
+        self.request.response.setHeader("Content-type", "application/json")
+        return dumps(results)
+
+    @property
     def results(self):
         """List of "mailing list" path/names.
 

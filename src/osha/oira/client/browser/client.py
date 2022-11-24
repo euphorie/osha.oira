@@ -5,6 +5,7 @@ from os import path
 from osha.oira.client.model import NewsletterSubscription
 from plone import api
 from Products.Five import BrowserView
+from sqlalchemy import sql
 from z3c.saconfig import Session
 from zExceptions import Unauthorized
 
@@ -65,20 +66,21 @@ class GroupToAddresses(BrowserView):
             raise Unauthorized("Invalid token")
         return token
 
-    def get_addresses_for_group(self, group_path):
+    def get_addresses_for_groups(self, group_paths):
         subscribers = (
             Session.query(Account.loginname)
             .filter(Account.id == NewsletterSubscription.account_id)
-            .filter(NewsletterSubscription.zodb_path == group_path)
+            .filter(NewsletterSubscription.zodb_path.in_(group_paths))
+            .group_by(Account.loginname)
         )
         return [s.loginname for s in subscribers]
 
     @property
     def results(self):
-        group_path = self.request.get("group", "")
-        if not group_path:
+        groups = self.request.get("groups", "")
+        if not groups:
             return []
-        return self.get_addresses_for_group(group_path)
+        return self.get_addresses_for_groups(groups.split(","))
 
     def __call__(self):
         """Json list of email addresses subscribed to given group path

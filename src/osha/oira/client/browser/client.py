@@ -17,7 +17,7 @@ class MailingListsJson(BrowserView):
     def _get_entry(self, list_id, title):
         encoded_title = b64encode(title.encode("utf-8")).decode("utf-8")
         return {
-            "id": f"{list_id}|{encoded_title}".format(list_id, encoded_title),
+            "id": "|".join((list_id, encoded_title)),
             "text": title,
         }
 

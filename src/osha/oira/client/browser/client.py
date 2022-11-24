@@ -54,6 +54,7 @@ class MailingListsJson(BrowserView):
         The json lists container that will be used to generate "mailing lists"
         """
         self.request.response.setHeader("Content-type", "application/json")
+        self.request.response.setHeader("Access-Control-Allow-Origin", "*")
         return dumps(self.results)
 
 

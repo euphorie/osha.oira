@@ -1,4 +1,5 @@
 # coding=utf-8
+from base64 import b64encode
 from euphorie.client.model import Account
 from json import dumps
 from os import path
@@ -12,6 +13,13 @@ from zExceptions import Unauthorized
 
 class MailingListsJson(BrowserView):
     """Mailing lists (countries, in the future also sectors and tools)"""
+
+    def _get_entry(self, list_id, title):
+        encoded_title = b64encode(title.encode("utf-8")).decode("utf-8")
+        return {
+            "id": "|".join((list_id, encoded_title)),
+            "text": title,
+        }
 
     @property
     def results(self):
@@ -27,7 +35,7 @@ class MailingListsJson(BrowserView):
 
         results = []
         catalog = api.portal.get_tool(name="portal_catalog")
-        all_users = {"id": "general", "text": "All users"}
+        all_users = self._get_entry("general", "All users")
         if q in all_users["id"] or q in all_users["text"].lower():
             results.append(all_users)
 
@@ -42,7 +50,7 @@ class MailingListsJson(BrowserView):
         client_path = "/".join(self.context.getPhysicalPath())
         results.extend(
             [
-                {"id": path.relpath(brain.getPath(), client_path), "text": brain.Title}
+                self._get_entry(path.relpath(brain.getPath(), client_path), brain.Title)
                 for brain in brains
             ]
         )

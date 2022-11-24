@@ -1,4 +1,5 @@
 # coding=utf-8
+from base64 import b64encode
 from euphorie.client.model import Account
 from json import dumps
 from os import path
@@ -42,7 +43,13 @@ class MailingListsJson(BrowserView):
         client_path = "/".join(self.context.getPhysicalPath())
         results.extend(
             [
-                {"id": path.relpath(brain.getPath(), client_path), "text": brain.Title}
+                {
+                    "id": "{}|{}".format(
+                        path.relpath(brain.getPath(), client_path),
+                        b64encode(brain.Title.encode("utf-8")).decode("utf-8"),
+                    ),
+                    "text": brain.Title,
+                }
                 for brain in brains
             ]
         )

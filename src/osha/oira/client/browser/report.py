@@ -10,6 +10,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.workbook import Workbook
 from osha.oira import _
 from pkg_resources import resource_filename
+from plone import api
 from plonetheme.nuplone.utils import formatDate
 from sqlalchemy import sql
 from z3c.saconfig import Session
@@ -172,6 +173,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                 ws1.column_dimensions[letter].width = len(cell.value) + 5
         ws1.row_dimensions[3].height = 60
 
+        portal_transforms = api.portal.get_tool("portal_transforms")
         for (row, (module, risk, measure)) in enumerate(self.get_measures(), 4):
             column = 1
 
@@ -184,6 +186,8 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                 value = None
                 if type == "measure":
                     value = getattr(measure, key, None)
+                    if key == "action":
+                        value = portal_transforms.convertToData("text/plain", value)
                 elif type == "risk":
                     value = getattr(risk, key, None)
                     if key == "priority":

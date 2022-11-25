@@ -4,9 +4,21 @@ from osha.oira import _
 from osha.oira.client.model import NewsletterSubscription
 from plone import api
 from plone.memoize.view import memoize
+from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from z3c.form import button
 from z3c.saconfig import Session
+
+
+class OSHAPreferencesRedirect(BrowserView):
+    def __call__(self):
+        country = (
+            api.portal.get_registry_record("euphorie.default_country", default="")
+            or "eu"
+        )
+        return self.request.response.redirect(
+            f"{self.context.absolute_url()}/{country}/@@preferences"
+        )
 
 
 class OSHAPreferences(Preferences):

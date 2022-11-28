@@ -157,6 +157,13 @@
 
   <browser:page
       name="preferences"
+      for="euphorie.client.client.IClient"
+      class=".settings.OSHAPreferencesRedirect"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      name="preferences"
       for="euphorie.client.country.IClientCountry"
       permission="euphorie.client.ViewSurvey"
       class=".settings.OSHAPreferences"

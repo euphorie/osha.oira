@@ -161,7 +161,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         return self.session
 
     def test_get_measures_with_nested_modules(self):
-        """ """
+        """"""
         session = self.createSurveySession()
         module = model.Module(
             depth=1,
@@ -220,7 +220,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         )
 
     def test_get_measures_with_profile_questions(self):
-        """Test for #7322 and #8850"""
+        """Test for #7322 and #8850."""
         session = self.createSurveySession()
         question = model.Module(
             depth=1,
@@ -282,7 +282,7 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
         )
 
     def test_get_measures_with_profile_questions_and_submodules(self):
-        """ """
+        """"""
         session = self.createSurveySession()
         question = model.Module(
             depth=1,
@@ -419,11 +419,11 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
 
 
 class RiskQueryTests(OiRATestCase):
-    """Test #7547
+    """Test #7547.
 
     A risk with evaluation method 'fixed' (i.e. skip_evaluation=true)
-    and which has been identified, should appear in the final report
-    as identified but without action plan.
+    and which has been identified, should appear in the final report as
+    identified but without action plan.
     """
 
     def createData(self):

@@ -44,7 +44,7 @@ class TestStatistics(unittest.TestCase):
         message = _decodeCookieValue(cookie["value"])[0]
         self.assertEqual(
             message.message,
-            "birt_report_url not set, please contact " "an administrator",
+            "birt_report_url not set, please contact an administrator",
         )
         self.assertEqual(message.type, "error")
 

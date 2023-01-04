@@ -1,7 +1,7 @@
 from json import loads
 from osha.oira.client import client
 from osha.oira.client.interfaces import IOSHAClientSkinLayer
-from osha.oira.tests.base import OiRATestCase
+from osha.oira.testing import OiRAIntegrationTestCase
 from zope.component import getMultiAdapter
 from zope.interface import alsoProvides
 
@@ -28,12 +28,10 @@ JSON = """[{
 """
 
 
-class HomepageTest(OiRATestCase):
+class HomepageTest(OiRAIntegrationTestCase):
     def setUp(self):
-        super(HomepageTest, self).setUp()
-        self.portal = self.layer.portal
+        super().setUp()
         self.loginAsPortalOwner()
-        self.request = self.portal.client.REQUEST
         alsoProvides(self.request, IOSHAClientSkinLayer)
         self.view = getMultiAdapter((self.portal.client, self.request), name="view")
         self.logout()

@@ -3,11 +3,14 @@ Creating and publishing an OiRA Tool
 
 Before we can start we must set up our test environment:
 
+>>> app = layer['app']
+>>> portal = layer['portal']
+
 >>> from euphorie.content.tests import utils
 >>> sector=utils.createSector(portal, "hiswa", title=u"HISWA",
 ...       login="hiswa", password="hiswa")
->>> from Products.Five.testbrowser import Browser
->>> browser=Browser()
+>>> from plone.testing.zope import Browser
+>>> browser=Browser(app)
 >>> browser.handleErrors=False
 >>> portal.error_log._ignored_exceptions=()
 

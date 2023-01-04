@@ -1,39 +1,7 @@
-# coding=utf-8
 from euphorie.client import model
 from osha.oira.client import model as oiramodel
 from sqlalchemy import sql
 from z3c.saconfig import Session
-from zope.i18nmessageid import MessageFactory
-
-import htmllib
-
-
-pl_message = MessageFactory("plonelocales")
-
-
-NAME_TO_PHASE = {
-    "start": "preparation",
-    "profile": "preparation",
-    "identification": "identification",
-    "customization": "identification",
-    "actionplan": "actionplan",
-    "report": "report",
-    "status": "status",
-    "help": "help",
-    "new-email": "useraction",
-    "account-settings": "useraction",
-    "account-delete": "useraction",
-    "update": "preparation",
-    "disclaimer": "help",
-    "terms-and-conditions": "help",
-}
-
-
-def html_unescape(s):
-    p = htmllib.HTMLParser(None)
-    p.save_bgn()
-    p.feed(s)
-    return p.save_end()
 
 
 def remove_empty_modules(nodes):
@@ -59,7 +27,8 @@ def remove_empty_modules(nodes):
         for i in range(0, len(nodes)):
             node = nodes[i]
             inserted = False
-            for k in tree.keys():
+            keys = list(tree.keys())
+            for k in keys:
                 if node.path.startswith(k[0]):
                     if tree[k]:
                         grow(tree[k], [node])
@@ -71,7 +40,8 @@ def remove_empty_modules(nodes):
                 tree[(node.path, node.type, node.id)] = {}
 
     def prune(tree):
-        for k in tree.keys():
+        keys = list(tree.keys())
+        for k in keys:
             if tree[k]:
                 prune(tree[k])
 
@@ -79,7 +49,8 @@ def remove_empty_modules(nodes):
                 del tree[k]
 
     def flatten(tree):
-        for k in tree.keys():
+        keys = list(tree.keys())
+        for k in keys:
             ids.append(k[2])
             flatten(tree[k])
 
@@ -89,38 +60,10 @@ def remove_empty_modules(nodes):
     return [n for n in nodes if n.id in ids]
 
 
-def get_unactioned_nodes(ls, filter_for_measures=False):
-    """Takes a list of modules and risks and removes all risks that have been
-    actioned (i.e has at least one valid action plan).
-    Also remove all modules that have lost all their risks in the process
-
-    See https://syslab.com/proj/issues/2885
-    """
-    unactioned = []
-    for n in ls:
-        if n.type == "module":
-            unactioned.append(n)
-
-        elif n.type == "risk":
-            if not n.action_plans:
-                if filter_for_measures:
-                    if getattr(n, "existing_measures", None):
-                        unactioned.append(n)
-                else:
-                    unactioned.append(n)
-            else:
-                # It's possible that there is an action plan object, but
-                # that it's not yet fully populated
-                if n.action_plans[0] is None or n.action_plans[0].action_plan is None:
-                    unactioned.append(n)
-
-    return remove_empty_modules(unactioned)
-
-
 def get_actioned_nodes(ls):
     """Takes a list of modules and risks and removes all risks that are *not*
-    actioned (i.e does not have at least one valid action plan)
-    Also remove all modules that have lost all their risks in the process.
+    actioned (i.e does not have at least one valid action plan) Also remove all
+    modules that have lost all their risks in the process.
 
     See https://syslab.com/proj/issues/2885
     """
@@ -170,26 +113,6 @@ def get_risk_not_present_nodes(session):
                     oiramodel.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
                     oiramodel.RISK_NOT_PRESENT_FILTER,
                     oiramodel.SKIPPED_MODULE,
-                ),
-            )
-        )
-        .order_by(model.SurveyTreeItem.path)
-    )
-    return query.all()
-
-
-def get_italian_risk_not_present_nodes(session):
-    query = (
-        Session()
-        .query(model.SurveyTreeItem)
-        .filter(
-            sql.and_(
-                model.SurveyTreeItem.session == session,
-                sql.or_(
-                    model.SKIPPED_PARENTS,
-                    oiramodel.MODULE_WITH_RISKS_NOT_PRESENT_FILTER,
-                    oiramodel.SKIPPED_MODULE,
-                    oiramodel.UNANSWERED_RISKS_FILTER,
                 ),
             )
         )

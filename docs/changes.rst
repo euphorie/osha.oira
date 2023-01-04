@@ -4,6 +4,8 @@ Changelog
 8.2.3 (unreleased)
 ------------------
 
+- Fix osha.oira test suite.
+  [thet]
 - Mailing lists json view.
   `#739 <https://github.com/syslabcom/scrum/issues/739>`_.
   [reinhardt]

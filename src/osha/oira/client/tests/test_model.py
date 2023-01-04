@@ -1,15 +1,15 @@
 from euphorie.client import model
-from euphorie.client.tests.database import DatabaseTests
-from euphorie.client.tests.utils import createSurvey
-from osha.oira.client import utils
+from euphorie.client.tests.test_model import createSurvey
+from osha.oira.client.tests import utils
+from osha.oira.testing import OiRAIntegrationTestCase
 
 
-class ModelQueryTests(DatabaseTests):
+class ModelQueryTests(OiRAIntegrationTestCase):
     """Test #7947:
 
-    An optional module, that's marked by the user as not
-    applicable, should appear under a query for "risks determined as not
-    present". Its contents should NOT appear as unanswered risks.
+    An optional module, that's marked by the user as not applicable,
+    should appear under a query for "risks determined as not present".
+    Its contents should NOT appear as unanswered risks.
     """
 
     def createData(self):

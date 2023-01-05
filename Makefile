@@ -10,7 +10,7 @@ all: ${TARGETS}
 clean:
 	-rm ${TARGETS}
 
-bin/buildout: bootstrap.py
+bin/buildout:
 	python3.8 -m venv .
 	bin/pip install -r requirements.txt
 

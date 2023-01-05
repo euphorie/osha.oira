@@ -122,6 +122,7 @@ class NewsletterSubscription(model.BaseObject):
     )
     zodb_path = schema.Column(types.String(512), nullable=False)
 
+
 class NewsletterSetting(model.BaseObject):
     __tablename__ = "newsletter_setting"
 

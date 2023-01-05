@@ -1,6 +1,5 @@
-# coding=utf-8
 from osha.oira import interfaces
-from osha.oira.tests.base import OiRATestCase
+from osha.oira.testing import OiRAIntegrationTestCase
 from plonetheme.nuplone.z3cform.widget import SingleRadioWidget
 from z3c.form.browser.select import SelectWidget
 from z3c.form.interfaces import IFieldWidget
@@ -11,7 +10,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 import zope.component
 
 
-class OiRARiskTests(OiRATestCase):
+class OiRARiskTests(OiRAIntegrationTestCase):
     def _create(self, container, *args, **kwargs):
         newid = container.invokeFactory(*args, **kwargs)
         return getattr(container, newid)
@@ -47,7 +46,7 @@ class OiRARiskTests(OiRATestCase):
 
             # Test EditForm
             risk = self._create(module, "euphorie.risk", "risk")
-            form = risk.unrestrictedTraverse("@@edit").form_instance
+            form = risk.unrestrictedTraverse("@@edit")
             form.updateFields()
             self.assertEqual(
                 form.schema.get("evaluation_method").description,

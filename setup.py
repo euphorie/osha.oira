@@ -7,15 +7,6 @@ import os
 
 version = "8.2.3.dev0"
 
-tests_require = [
-    "Euphorie [tests]",
-    "mock",
-    "alchemy_mock",
-    "collective.testcaselayer",
-    "pas.plugins.ldap",
-    "node.ext.ldap",
-]
-
 setup(
     name="osha.oira",
     version=version,
@@ -63,10 +54,15 @@ setup(
         "zope.app.publication",
         "zope.publisher",
     ],
-    tests_require=tests_require,
     extras_require={
-        "tests": tests_require
-        + ["plone.app.testing", "plone.app.robotframework[debug]"],
+        "tests": [
+            "alchemy_mock",
+            "Euphorie [tests]",
+            "node.ext.ldap",
+            "pas.plugins.ldap",
+            "plone.app.robotframework[debug]",
+            "plone.app.testing",
+        ],
     },
     entry_points="""
       [z3c.autoinclude.plugin]

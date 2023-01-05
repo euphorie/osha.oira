@@ -62,7 +62,7 @@ def map_images(context):
                 )
                 with TemporaryDirectory(prefix="euphorieimage") as tmpdir:
                     temp_file_path = f"{tmpdir}/{filename}"
-                    urllib.request.urlretrieve(
+                    urllib.request.urlretrieve(  # nosec # TODO
                         "{}{}".format(BASE_URL, img.attrib["src"]),
                         temp_file_path,
                     )

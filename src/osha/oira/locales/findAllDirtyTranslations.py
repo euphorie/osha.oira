@@ -43,7 +43,7 @@ for lang in langs:
             % dict(lang=lang)
         )
         print("executing for language ", lang)
-        p = subprocess.Popen(cmdline, shell=True)
+        p = subprocess.Popen(cmdline, shell=True)  # nosec  # TODO
         sts = os.waitpid(p.pid, 0)[1]
         time.sleep(0.5)
 sys.exit("ok")

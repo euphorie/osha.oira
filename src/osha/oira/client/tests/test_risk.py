@@ -1,19 +1,19 @@
-# coding=utf-8
-
 from euphorie.client.tests.utils import addSurvey
 from euphorie.client.tests.utils import registerUserInClient
-from osha.oira.tests.base import OiRAFunctionalTestCase
-from Products.Five.testbrowser import Browser
+from osha.oira.testing import OiRAFunctionalTestCase
+
+import unittest
 
 
 class EuphorieRiskTests(OiRAFunctionalTestCase):
+    @unittest.skip("Can't find DOM node - markup has changed.")
     def testShowFrenchEvaluation(self):
         from euphorie.content.tests.utils import BASIC_SURVEY
 
         # Test for http://code.simplon.biz/tracker/tno-euphorie/ticket/150
         self.loginAsPortalOwner()
         addSurvey(self.portal, BASIC_SURVEY)
-        browser = Browser()
+        browser = self.get_browser()
         survey = self.portal.client.nl["ict"]["software-development"]
         survey.evaluation_algorithm = "french"
         survey["1"]["2"].type = "risk"

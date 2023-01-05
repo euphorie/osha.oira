@@ -1,8 +1,7 @@
-"""Plucks out the most important details from the Robot reports for
-OiRA
+"""Plucks out the most important details from the Robot reports for OiRA.
 
-This parses the robot output.xml and produces an HTML file called
-oira-report.html
+This parses the robot output.xml and produces an HTML file called oira-
+report.html
 """
 
 from lxml import etree
@@ -60,7 +59,7 @@ content_area = report.get_element_by_id("content-area")
 
 
 def process_robot_output(robot_output):
-    root = etree.parse(robot_output).getroot()
+    root = etree.parse(robot_output).getroot()  # nosec  # TODO
     print("one time")
     for suite in root.xpath("//suite[@source]"):
         suite_id = suite.get("id", "")

@@ -6,7 +6,6 @@ from os import path
 from osha.oira.client.model import NewsletterSubscription
 from plone import api
 from Products.Five import BrowserView
-from sqlalchemy import sql
 from z3c.saconfig import Session
 from zExceptions import Unauthorized
 
@@ -23,11 +22,10 @@ class MailingListsJson(BrowserView):
 
     @property
     def results(self):
-        """
-        List of "mailing list" path/names.
+        """List of "mailing list" path/names.
 
-        The format fits pat-autosuggest.
-        There is a special label for the "all" list.
+        The format fits pat-autosuggest. There is a special label for
+        the "all" list.
         """
         q = self.request.get("q", "").strip().lower()
         if not q:
@@ -59,7 +57,8 @@ class MailingListsJson(BrowserView):
     def __call__(self):
         """Returns a json meant to be consumed by pat-autosuggest.
 
-        The json lists container that will be used to generate "mailing lists"
+        The json lists container that will be used to generate "mailing
+        lists"
         """
         self.request.response.setHeader("Content-type", "application/json")
         self.request.response.setHeader("Access-Control-Allow-Origin", "*")
@@ -67,7 +66,7 @@ class MailingListsJson(BrowserView):
 
 
 class GroupToAddresses(BrowserView):
-    """Resolve email addresses subscribed to the given mailing list"""
+    """Resolve email addresses subscribed to the given mailing list."""
 
     def get_token(self):
         token = api.portal.get_registry_record("osha.oira.mailings.token")
@@ -95,7 +94,8 @@ class GroupToAddresses(BrowserView):
         """Json list of email addresses subscribed to given group path
         (parameter `group`).
 
-        Group paths are relative to the client, i.e. only ids ("fr") for countries.
+        Group paths are relative to the client, i.e. only ids ("fr") for
+        countries.
         """
         token = self.request.get("token", "")
         if token != self.get_token():

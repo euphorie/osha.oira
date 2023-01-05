@@ -1,9 +1,9 @@
 from euphorie.client import model
-from euphorie.client.tests.database import DatabaseTests
-from euphorie.client.tests.utils import createSurvey
+from euphorie.client.tests.test_model import createSurvey
+from osha.oira.testing import OiRAIntegrationTestCase
 
 
-class NoCustomRisksFilterTests(DatabaseTests):
+class NoCustomRisksFilterTests(OiRAIntegrationTestCase):
     def query(self):
         return self.session.query(model.SurveyTreeItem).filter(
             model.NO_CUSTOM_RISKS_FILTER

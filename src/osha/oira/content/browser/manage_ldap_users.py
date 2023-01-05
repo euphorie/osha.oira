@@ -1,15 +1,11 @@
-# coding=utf-8
 from plone import api
 from plone.memoize.view import memoize
 from plone.memoize.view import memoize_contextless
 from Products.Five import BrowserView
 
-import six
-
 
 class BaseManageLDAPUsersView(BrowserView):
-
-    _roles = set([])
+    _roles = set()
 
     @property
     @memoize_contextless
@@ -24,9 +20,8 @@ class BaseManageLDAPUsersView(BrowserView):
 
     @memoize_contextless
     def get_user(self, userid):
-        """Takes the user info as returned by the enumerateUsers method
-        and resolve the user
-        """
+        """Takes the user info as returned by the enumerateUsers method and
+        resolve the user."""
         return api.user.get(userid=userid)
 
     @memoize
@@ -43,11 +38,11 @@ class BaseManageLDAPUsersView(BrowserView):
         return sorted(userid for userid in lr if "Owner" not in lr[userid])
 
     def has_managed_roles(self, user):
-        """Check if user has the roles we are managing here"""
+        """Check if user has the roles we are managing here."""
         return not (self._roles - self.get_local_roles(user))
 
     def ldap_userids(self):
-        """Return the LDAP users"""
+        """Return the LDAP users."""
         query = self.request.form.get("SearchableText", "")
         return self.enumerateUsersIds(query)
 
@@ -73,12 +68,13 @@ class BaseManageLDAPUsersView(BrowserView):
         )
 
     def maybe_manage_local_roles(self):
-        """Check the request and see if we should mange some user local roles"""
+        """Check the request and see if we should mange some user local
+        roles."""
         ldap_action = self.request.get("ldap_action")
-        if not isinstance(ldap_action, six.string_types):
+        if not isinstance(ldap_action, str):
             return
         userid = self.request.get("userid")
-        if not isinstance(userid, six.string_types):
+        if not isinstance(userid, str):
             return
         user = self.get_user(userid)
         if not user:
@@ -90,11 +86,10 @@ class BaseManageLDAPUsersView(BrowserView):
 
     def __call__(self):
         self.maybe_manage_local_roles()
-        return super(BaseManageLDAPUsersView, self).__call__()
+        return super().__call__()
 
 
 class ManageCountryLDAPUsersView(BaseManageLDAPUsersView):
-
     _roles = {
         "Contributor",
         "CountryManager",

@@ -20,7 +20,7 @@ class EuphorieRiskTests(OiRAFunctionalTestCase):
         browser.open(survey.absolute_url())
         registerUserInClient(browser)
         # Create a new survey session
-        browser.getControl(name="title:utf8:ustring").value = "Sessiøn".encode("utf-8")
+        browser.getControl(name="title:utf8:ustring").value = "Sessiøn".encode()
         browser.getControl(name="next").click()
         # Start the survey
         browser.getForm().submit()

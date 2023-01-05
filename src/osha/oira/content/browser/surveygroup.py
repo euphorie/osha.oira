@@ -1,4 +1,3 @@
-# coding=utf-8
 from Acquisition import aq_parent
 from euphorie.content import MessageFactory as _
 from euphorie.content.browser import surveygroup
@@ -8,7 +7,6 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class AddForm(surveygroup.AddForm):
-
     template = ViewPageTemplateFile("templates/surveygroup_add.pt")
 
 

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
 from euphorie.client.model import Account
 from euphorie.client.model import Company
@@ -23,12 +22,10 @@ log = logging.getLogger(__name__)
 
 
 def list_countries(session_application):
-    countries = set(
-        [
-            result[0].split("/")[0]
-            for result in session_application.query(SurveySession.zodb_path).distinct()
-        ]
-    )
+    countries = {
+        result[0].split("/")[0]
+        for result in session_application.query(SurveySession.zodb_path).distinct()
+    }
     return list(countries)
 
 
@@ -39,7 +36,7 @@ def list_statistics_databases(session_application):
     ]
 
 
-class UpdateStatisticsDatabases(object):
+class UpdateStatisticsDatabases:
     def __init__(
         self,
         session_application,

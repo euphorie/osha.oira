@@ -1,4 +1,3 @@
-# coding=utf-8
 from AccessControl import Unauthorized
 from Acquisition import aq_inner
 from euphorie.deployment.browser import sitemenu
@@ -10,7 +9,7 @@ class Sitemenu(sitemenu.Sitemenu):
     def actions(self):
         """See plonetheme.nuplone.skin.sitemenu.py Add extra 'statistics'
         action."""
-        menu = super(Sitemenu, self).actions or {}
+        menu = super().actions or {}
         children = menu.get("children")
         if not children:
             return None

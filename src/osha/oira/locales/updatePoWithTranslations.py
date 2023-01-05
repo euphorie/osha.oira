@@ -13,7 +13,6 @@ orig.po   A po file that should be updated with new translations
 update.po The po file that contains new translations to go into orig.po
 """
 
-from __future__ import print_function
 
 import os
 import polib
@@ -54,7 +53,7 @@ for entry in update:
         continue
     target = orig.find(msgid)
     if not target:
-        print("WARNING! msgid '%s' not present in %s." % (msgid, origfile))
+        print(f"WARNING! msgid '{msgid}' not present in {origfile}.")
         continue
     if entry.msgstr == "" and target.msgstr != "":
         continue
@@ -63,4 +62,4 @@ for entry in update:
 
 orig.save()
 
-sys.exit("Ok, updated {0} translations".format(cnt))
+sys.exit(f"Ok, updated {cnt} translations")

@@ -1,4 +1,3 @@
-# coding=utf-8
 from euphorie.content import MessageFactory as _
 from htmllaundry.z3cform import HtmlText
 from plone.autoform import directives
@@ -12,7 +11,7 @@ from zope.interface import invariant
 
 
 class IOSHACountry(model.Schema):
-    """Additional fields for the OSHA countries"""
+    """Additional fields for the OSHA countries."""
 
     certificates_enabled = schema.Bool(
         title=_("Enable certificates"),

@@ -1,4 +1,3 @@
-# coding=utf-8
 from Acquisition import aq_inner
 from euphorie.content import MessageFactory as _
 from plonetheme.nuplone import MessageFactory as __
@@ -11,15 +10,14 @@ from zope.i18n import translate
 
 
 class RequestPasswordForm(pwreminder.RequestPasswordForm):
-    """Override so that we can change some labels"""
+    """Override so that we can change some labels."""
 
     def updateFields(self):
-        super(RequestPasswordForm, self).updateFields()
+        super().updateFields()
         self.fields["login"].field.title = __("label_email", default="E-mail address")
 
 
 class PasswordReset(pwreminder.PasswordReset):
-
     orig_description = pwreminder.PasswordReset.description
     extra_description = _(
         "password_policy_conditions",
@@ -46,14 +44,13 @@ class PasswordReset(pwreminder.PasswordReset):
         return description
 
     def updateFields(self):
-        super(PasswordReset, self).updateFields()
+        super().updateFields()
         self.fields["login"].field.title = __("label_email", default="E-mail address")
 
     @buttonAndHandler(_("button_change", default="Change"), name="change")
     def handleChange(self, action):
         """Override the default behavior to call the requestPassword method
-        passing the username and not the id
-        """
+        passing the username and not the id."""
         data, errors = self.extractData()
         if errors:
             self.status = self.formErrorsMessage

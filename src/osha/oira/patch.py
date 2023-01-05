@@ -1,4 +1,3 @@
-# -*- coding: UTF-8 -*-
 from datetime import datetime
 from DateTime import DateTime
 from plone.app.dexterity.behaviors.metadata import DCFieldProperty

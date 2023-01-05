@@ -21,7 +21,6 @@ new.pot          A po/pot file with updated default translations (e.g. via extra
                  with the default translation.
 """
 
-from __future__ import print_function
 
 import os
 import polib
@@ -76,7 +75,6 @@ def append_entry(pofile, entry, default):
 
 
 def main():
-
     include_untranslated = False
     include_fuzzy = False
     debug = False

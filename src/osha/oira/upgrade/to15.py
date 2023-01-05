@@ -17,4 +17,4 @@ def set_up_statistics_db(context):
         try:
             model.Base.metadata.create_all(bind=engine, checkfirst=True)
         except SQLAlchemyError as e:
-            log.warn("Could not set up {0}: {1}".format(database, e))
+            log.warn(f"Could not set up {database}: {e}")

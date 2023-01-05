@@ -5,7 +5,6 @@
 
 usage:  %(program)s input.xml output/directory
 """
-from __future__ import print_function
 from BeautifulSoup import BeautifulSoup
 from BeautifulSoup import BeautifulStoneSoup
 from datetime import datetime
@@ -55,7 +54,7 @@ def str2filename(text):
 
 
 def escape2markdown(text):
-    """Convert escaped html to markdown"""
+    """Convert escaped html to markdown."""
     html = BeautifulStoneSoup(
         text, convertEntities=BeautifulStoneSoup.XML_ENTITIES
     ).text
@@ -128,12 +127,12 @@ solutions:
         evaluation_method = EVALUATION_TYPES[risk_counter]
         state = "answered"
         risk_class = "risk"
-        print("Risk {0} with method {1}".format(title, evaluation_method))
+        print(f"Risk {title} with method {evaluation_method}")
     else:
         evaluation_method = random.choice(EVALUATION_TYPES)
         state = random.choice(STATES)
         risk_class = state == "answered" and random.choice(["risk", ""]) or ""
-    classes = "{} {}".format(state, risk_class)
+    classes = f"{state} {risk_class}"
     # solutions = risk.find("solutions").text
     # xxx handle the sub solutions
     risk_counter += 1
@@ -146,15 +145,13 @@ solutions:
         image_filename = os.path.join(dir_path, image_path)
         with open(image_filename, "w") as img_file:
             img_file.write(base64.decodestring(image.contents[0]))
-        image_data.append(
-            dict(url="/{0}".format(image_path), caption=image.get("caption", ""))
-        )
+        image_data.append(dict(url=f"/{image_path}", caption=image.get("caption", "")))
 
     if image_data:
         image_info = "images:\n"
         for entry in image_data:
-            image_info += "    - url: {0}\n".format(entry["url"])
-            image_info += "      caption: {0}\n".format(entry["caption"])
+            image_info += "    - url: {}\n".format(entry["url"])
+            image_info += "      caption: {}\n".format(entry["caption"])
 
     mip = ""
     existing_measures = _r(risk.find("existing_measures").text)
@@ -172,7 +169,7 @@ solutions:
         "classes": classes.strip(),
         "number": number,
         "parent_id": parent_id,
-        "module": "\nmodule: {}".format(parent_id) if parent_id else "",
+        "module": f"\nmodule: {parent_id}" if parent_id else "",
         "description": description,
         "problem_description": problem_description,
         "legal_reference": legal_reference,
@@ -209,7 +206,7 @@ title: {title}{module}
         image_filename = os.path.join(dir_path, image_path)
         with open(image_filename, "w") as img_file:
             img_file.write(base64.decodestring(images[0].contents[0]))
-        image_info = "images:\n    - url: /{0}\n      caption: {1}\n".format(
+        image_info = "images:\n    - url: /{}\n      caption: {}\n".format(
             image_path, images[0].get("caption", "")
         )
 
@@ -218,7 +215,7 @@ title: {title}{module}
         "title": title,
         "number": number + ".0",
         "parent_id": parent_id,
-        "module": "\nmodule: {}".format(parent_id) if parent_id else "",
+        "module": f"\nmodule: {parent_id}" if parent_id else "",
         "body": escape2markdown(description),
         "image_information": image_info,
     }
@@ -228,7 +225,7 @@ title: {title}{module}
 
     sub_modules = module.findChildren("module", recursive=False)
     sub_number = number + ".1"
-    sub_id = parent_id and "{0}-{1}".format(parent_id, id) or id
+    sub_id = parent_id and f"{parent_id}-{id}" or id
     sub_count = 0
     for sub_module in sub_modules:
         create_module(sub_module, parent_id=sub_id, number=sub_number)
@@ -281,9 +278,7 @@ title: {title}{images}
     fields = {
         "id": id,
         "title": title,
-        "number": len(locations)
-        and "{0}.0.0.0".format(number)
-        or "{0}.0.0".format(number),
+        "number": len(locations) and f"{number}.0.0.0" or f"{number}.0.0",
         "images": "",
         "body": escape2markdown(description),
     }
@@ -294,10 +289,10 @@ title: {title}{images}
     sub_modules = profile_question.findChildren("module", recursive=False)
     if len(locations):
         for i in range(len(locations)):
-            location_number = "{0}.{1}.0.0".format(number, i + 1)
+            location_number = f"{number}.{i + 1}.0.0"
             create_location(location_number, locations[i], parent_id=id)
-            sub_number = "{0}.{1}.1".format(number, i + 1)
-            location_id = "{0}-{1}".format(id, str2filename(locations[i]))
+            sub_number = f"{number}.{i + 1}.1"
+            location_id = f"{id}-{str2filename(locations[i])}"
             sub_count = 0
             for sub_module in sub_modules:
                 create_module(sub_module, parent_id=location_id, number=sub_number)
@@ -325,7 +320,7 @@ if __name__ == "__main__":
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
 
-    with open(input, "r") as xml:
+    with open(input) as xml:
         soup = BeautifulSoup(xml.read())
 
     survey = soup.find("survey")
@@ -348,7 +343,7 @@ if __name__ == "__main__":
         # Let X modules be enough
         if MAX_NUMBER_PROFILES and number > MAX_NUMBER_PROFILES:
             break
-        print("Export Profile Question '{0}'".format(profile_question.title.text))
+        print(f"Export Profile Question '{profile_question.title.text}'")
         if profile_number > 1:
             create_profile_question(
                 profile_question, number=str(number), locations=LOCATIONS
@@ -363,6 +358,6 @@ if __name__ == "__main__":
         # Let X modules be enough
         if MAX_NUMBER_MODULES and number > (MAX_NUMBER_MODULES + MAX_NUMBER_PROFILES):
             break
-        print("Export Module '{0}'".format(module.title.text))
+        print(f"Export Module '{module.title.text}'")
         create_module(module, number=str(number))
         number += 1

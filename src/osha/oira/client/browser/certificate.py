@@ -1,4 +1,3 @@
-# coding=utf-8
 from datetime import date
 from euphorie.client import utils
 from euphorie.content.utils import getRegionTitle
@@ -31,8 +30,8 @@ class Certificate(BrowserView):
     @property
     @memoize
     def country_adapter(self):
-        """Try to get a specific adapter for this country
-        that will be used to show and handle additional fields in the certificate
+        """Try to get a specific adapter for this country that will be used to
+        show and handle additional fields in the certificate.
 
         The adapter should be a view like @@certificate_fr_specific
         """
@@ -48,7 +47,7 @@ class Certificate(BrowserView):
     @property
     @memoize
     def known_field_names(self):
-        """Return the field names we expect to have in the form
+        """Return the field names we expect to have in the form.
 
         By default we expect to have a title
         """
@@ -64,7 +63,8 @@ class Certificate(BrowserView):
     @property
     @memoize
     def country(self):
-        """The country inside /sectors that contains the certificates configuration"""
+        """The country inside /sectors that contains the certificates
+        configuration."""
         return api.portal.get().sectors[self.webhelpers.country]
 
     @property
@@ -75,11 +75,11 @@ class Certificate(BrowserView):
     @property
     @memoize
     def completion_percentage(self):
-        """Report how much of the session the user has completed"""
+        """Report how much of the session the user has completed."""
         return self.webhelpers.traversed_session.session.completion_percentage or 0
 
     def can_display_certificate_notice(self):
-        """Condition to show the certificate yellow box below the pie chart"""
+        """Condition to show the certificate yellow box below the pie chart."""
         country = self.country
         return (
             getattr(country, "certificates_enabled", False)
@@ -87,7 +87,8 @@ class Certificate(BrowserView):
         )
 
     def can_display_certificate_teaser(self):
-        """Condition to show the invite for the user to earn the certificate"""
+        """Condition to show the invite for the user to earn the
+        certificate."""
         country = self.country
         return (
             getattr(country, "certificates_enabled", False)
@@ -97,8 +98,9 @@ class Certificate(BrowserView):
         )
 
     def maybe_create_earned_certificate(self):
-        """Check if certificates are enabled in this country and if
-        the user has earned the certificate for this session.
+        """Check if certificates are enabled in this country and if the user
+        has earned the certificate for this session.
+
         In case the user needs a certificate, it will be created.
         """
         session = self.webhelpers.traversed_session.session
@@ -120,7 +122,7 @@ class Certificate(BrowserView):
         )
 
     def can_display_certificate_earned(self):
-        """Condition to show the link to the certificate view"""
+        """Condition to show the link to the certificate view."""
         country = self.country
         threshold_fullfilled = (
             getattr(country, "certificates_enabled", False)
@@ -133,7 +135,7 @@ class Certificate(BrowserView):
     @property
     @memoize
     def certificate(self):
-        """Find the certificate associated to this session"""
+        """Find the certificate associated to this session."""
         return (
             Session.query(model.Certificate)
             .filter(model.Certificate.session_id == self.webhelpers.session_id)
@@ -188,12 +190,12 @@ class Certificate(BrowserView):
 
     def __call__(self):
         self.maybe_update()
-        return super(Certificate, self).__call__()
+        return super().__call__()
 
 
 @implementer(IPublishTraverse)
 class PublicCertificate(BrowserView):
-    """View to publish a public certificate once the hash is known"""
+    """View to publish a public certificate once the hash is known."""
 
     def publishTraverse(self, request, name):
         self.secret = name
@@ -212,7 +214,7 @@ class PublicCertificate(BrowserView):
     @property
     @memoize
     def session(self):
-        """Find the certificate associated to this session"""
+        """Find the certificate associated to this session."""
         return self.certificate.session
 
     @property
@@ -249,8 +251,8 @@ class PublicCertificate(BrowserView):
     @property
     @memoize
     def country_adapter(self):
-        """Try to get a specific adapter for this country
-        that will be used to show and handle additional fields in the certificate
+        """Try to get a specific adapter for this country that will be used to
+        show and handle additional fields in the certificate.
 
         The adapter should be a view like @@certificate_fr_specific
         """
@@ -265,7 +267,7 @@ class PublicCertificate(BrowserView):
 
     def __call__(self):
         utils.setLanguage(self.request, self.context, self.language)
-        return super(PublicCertificate, self).__call__()
+        return super().__call__()
 
 
 class RemoveCertificateBox(BrowserView):
@@ -291,6 +293,4 @@ class RemoveCertificateBox(BrowserView):
     def __call__(self):
         self.maybe_update()
         # Redirect to Report, since this is a cheap view, to get the main navigation
-        self.request.RESPONSE.redirect(
-            "{session}/@@report".format(session=self.context.absolute_url())
-        )
+        self.request.RESPONSE.redirect(f"{self.context.absolute_url()}/@@report")

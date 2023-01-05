@@ -1,4 +1,3 @@
-# coding=utf-8
 from Acquisition import aq_parent
 from euphorie.content import utils
 from euphorie.content.country import ICountry
@@ -12,8 +11,8 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 
 @implementer(IVocabularyFactory)
-class ToolVersionsVocabulary(object):
-    """ """
+class ToolVersionsVocabulary:
+    """"""
 
     def getToolVersionsInSector(self, sector):
         tools = []
@@ -51,8 +50,8 @@ ToolVersionsVocabularyFactory = ToolVersionsVocabulary()
 
 
 @implementer(IVocabularyFactory)
-class PublishedToolsVocabulary(object):
-    """ """
+class PublishedToolsVocabulary:
+    """"""
 
     def getToolsInSector(self, sector):
         tools = []
@@ -91,8 +90,8 @@ PublishedToolsVocabularyFactory = PublishedToolsVocabulary()
 
 
 @implementer(IVocabularyFactory)
-class CountriesVocabulary(object):
-    """ """
+class CountriesVocabulary:
+    """"""
 
     def __call__(self, context):
         countries = {}

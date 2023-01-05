@@ -11,7 +11,6 @@ file.po                 The po file
 outfile.po              The po file to be written to
 """
 
-from __future__ import print_function
 from findDirtyTranslations import append_entry
 from findDirtyTranslations import get_default
 

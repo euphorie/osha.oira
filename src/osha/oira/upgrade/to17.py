@@ -1,4 +1,3 @@
-# -*- coding: UTF-8 -*-
 from euphorie.client.sector import IClientSector
 from euphorie.content.survey import ISurvey
 from plone import api
@@ -18,8 +17,7 @@ def walk(node):
         if ISurvey.providedBy(sub_node):
             yield sub_node
         if IDexterityContainer.providedBy(sub_node):
-            for sub_sub_node in walk(sub_node):
-                yield sub_sub_node
+            yield from walk(sub_node)
 
 
 def _set_skip_evaluation(walker):
@@ -46,18 +44,16 @@ def _set_skip_evaluation(walker):
 
 
 def set_handle_measures_text_in_cms(context):
-
     site = api.portal.get()
     section = "sectors"
     walker = walk(getattr(site, section))
-    log.info('Iterating over section "{}"'.format(section))
+    log.info(f'Iterating over section "{section}"')
     _set_skip_evaluation(walker)
 
 
 def set_handle_measures_text_in_client(context):
-
     site = api.portal.get()
     section = "client"
     walker = walk(getattr(site, section))
-    log.info('Iterating over section "{}"'.format(section))
+    log.info(f'Iterating over section "{section}"')
     _set_skip_evaluation(walker)

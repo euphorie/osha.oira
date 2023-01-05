@@ -1,4 +1,3 @@
-# coding=utf-8
 from plone import api
 from Products.PlonePAS.interfaces.plugins import IUserManagement
 from Products.PluggableAuthService.interfaces.plugins import IPropertiesPlugin

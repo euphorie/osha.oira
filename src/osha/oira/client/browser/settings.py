@@ -22,7 +22,7 @@ class OSHAPreferencesRedirect(BrowserView):
 
 
 class OSHAPreferences(Preferences):
-    """ """
+    """"""
 
     template = ViewPageTemplateFile("templates/preferences.pt")
 
@@ -78,7 +78,7 @@ class OSHAPreferences(Preferences):
         # this will say I am subscribed to my country. However, saving the form will add
         # a subscription to the other country, even though I haven't changed anything.
         return any(
-            (self.existing_subscriptions.get(country) for country in self.my_countries)
+            self.existing_subscriptions.get(country) for country in self.my_countries
         )
 
     def subscribe(self, zodb_path):

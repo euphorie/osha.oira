@@ -1,4 +1,3 @@
-# coding=utf-8
 from euphorie.content import MessageFactory as _
 from euphorie.content.sector import ISector
 from euphorie.deployment.tiles.tabs import SiteRootTabsTile
@@ -9,7 +8,6 @@ import re
 
 
 class OiRASiteRootTabsTile(SiteRootTabsTile):
-
     _custom_current_map = [
         (re.compile(r"/sectors/[a-z]+/(.*)@@manage-ldap-users"), "ldapmgmt"),
     ]
@@ -19,7 +17,7 @@ class OiRASiteRootTabsTile(SiteRootTabsTile):
     def current_map(self):
         current_map = []
         current_map.extend(self._custom_current_map)
-        current_map.extend(super(OiRASiteRootTabsTile, self).current_map)
+        current_map.extend(super().current_map)
         return current_map
 
     @memoize
@@ -29,7 +27,7 @@ class OiRASiteRootTabsTile(SiteRootTabsTile):
                 return obj
 
     def update(self):
-        super(OiRASiteRootTabsTile, self).update()
+        super().update()
         is_country = self.get_current_country() == self.context
         is_sector = self.get_current_sector() == self.context
         for r in self.tabs:

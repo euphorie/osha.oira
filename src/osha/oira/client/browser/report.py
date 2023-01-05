@@ -1,4 +1,3 @@
-# coding=utf-8
 from copy import copy
 from euphorie.client import model
 from euphorie.client.browser import report
@@ -38,7 +37,6 @@ COLUMN_ORDER = [
 
 
 class ActionPlanTimeline(report.ActionPlanTimeline):
-
     title_extra = ""
     combine_keys = ["requirements"]
     extra_cols = [
@@ -221,7 +219,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                             lang = getattr(self.request, "LANGUAGE", "en")
                             if "-" in lang:
                                 elems = lang.split("-")
-                                lang = "{0}_{1}".format(elems[0], elems[1].upper())
+                                lang = f"{elems[0]}_{elems[1].upper()}"
                             value = translate(
                                 _("Custom risks", default="Custom risks"),
                                 target_language=lang,

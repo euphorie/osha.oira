@@ -12,7 +12,6 @@ output.xml   The filename for the converted survey
 raw_text.txt The filename for the text-only file
 """
 
-from __future__ import print_function
 from BeautifulSoup import BeautifulSoup
 from BeautifulSoup import BeautifulStoneSoup
 from word_wrap import wrap_str
@@ -40,7 +39,7 @@ input = sys.argv[1]
 output = sys.argv[2]
 txtfile = sys.argv[3]
 
-fh = open(input, "r")
+fh = open(input)
 data = fh.read()
 fh.close()
 
@@ -104,7 +103,7 @@ tags = (
 )
 for tag in tags:
     entities = soup.findAll(tag)
-    [entity.setString("%s %s " % (entity.text, PLACEHOLDER)) for entity in entities]
+    [entity.setString(f"{entity.text} {PLACEHOLDER} ") for entity in entities]
 
 # Some tags of the survey contain only functional information, such
 # as true/false or calculated/evaluated
@@ -127,7 +126,7 @@ newsoup = BeautifulSoup("<html>%s</html>" % txt)
 html_tags = ("a", "p", "strong", "em", "li", "td")
 for tag in html_tags:
     entities = newsoup.findAll(tag)
-    [entity.setString("%s %s " % (entity.text, PLACEHOLDER)) for entity in entities]
+    [entity.setString(f"{entity.text} {PLACEHOLDER} ") for entity in entities]
 
 text = newsoup.text.replace("xml version='1.0' encoding='%SOUP-ENCODING%'", "")
 text = text.encode("utf-8")

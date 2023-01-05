@@ -1,4 +1,3 @@
-# coding=utf-8
 from logging import getLogger
 from plone import api
 from Products.Five import BrowserView
@@ -8,10 +7,10 @@ log = getLogger(__name__)
 
 
 class MigrateLDAPUsersView(BrowserView):
-    """View that allows LDAP users to have roles in countries and sectors"""
+    """View that allows LDAP users to have roles in countries and sectors."""
 
     def grant_roles(self, obj):
-        """Grant the proper local roles to this object"""
+        """Grant the proper local roles to this object."""
         try:
             view = api.content.get_view("manage-ldap-users", obj, self.request.clone())
             url = obj.absolute_url()
@@ -26,7 +25,7 @@ class MigrateLDAPUsersView(BrowserView):
             user = api.user.get(users[0])
             if user:
                 view.grant_roles(user)
-                log.info("Granted roles to %s on %s" % (users[0], url))
+                log.info(f"Granted roles to {users[0]} on {url}")
 
     def __call__(self):
         brains = api.content.find(

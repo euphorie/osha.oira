@@ -10,7 +10,6 @@ input.po    A po file that contains text to be translated
 output.txt  File name where the extracted text will be dumped
 """
 
-from __future__ import print_function
 from StringIO import StringIO
 
 import os

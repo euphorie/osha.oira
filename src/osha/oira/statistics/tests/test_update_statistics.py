@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from alchemy_mock.mocking import AlchemyMagicMock
 from alchemy_mock.mocking import UnifiedAlchemyMagicMock
 from alchemy_mock.mocking import UnorderedCall

@@ -7,6 +7,5 @@ class IOiRAFormLayer(INuPloneFormLayer):
 
 
 class ILargeTextAreaWidget(ITextAreaWidget):
-    """Interface for a custom widget for the Homepage's description,
-    which is used for manual (non-wysiwyg) editing of HTML.
-    """
+    """Interface for a custom widget for the Homepage's description, which is
+    used for manual (non-wysiwyg) editing of HTML."""

@@ -15,7 +15,6 @@ reference.po  A pot file that is the basis for the update to local.po
 existing.po   A po file that contains already existing translations
 """
 
-from __future__ import print_function
 
 import os
 import polib

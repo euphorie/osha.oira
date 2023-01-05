@@ -5,12 +5,12 @@ from z3c.saconfig import Session
 
 
 class View(BrowserView):
-    """View for the dashboard banner"""
+    """View for the dashboard banner."""
 
     _value = "call-for-action-banner-disabled"
 
     def available(self):
-        """Check if the user already closed the banner in the past"""
+        """Check if the user already closed the banner in the past."""
         account = get_current_account()
         if not account:
             return False

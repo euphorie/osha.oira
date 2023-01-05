@@ -250,12 +250,10 @@ class UpdateStatisticsDatabases:
 
     def update_account(self, country=None):
         log.info("Table: account")
-        since = (
-            self.session_statistics.query(
-                sqlalchemy.func.max(AccountStatistics.creation_date)
-            ).first()[0]
-            or datetime.min
-        )
+        existing = self.session_statistics.query(
+            sqlalchemy.func.max(AccountStatistics.creation_date)
+        ).first()
+        since = existing[0] if existing else datetime.min
         if self.since and self.since < since:
             since = self.since
         if since > datetime.min:

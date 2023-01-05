@@ -10,6 +10,8 @@ Changelog
   `#739 <https://github.com/syslabcom/scrum/issues/739>`_.
   [reinhardt]
 - Support rich text in measure description (action).
+- Update statistics: Fix for empty database.
+  [reinhardt]
 
 
 8.2.2 (2022-09-27)

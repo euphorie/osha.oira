@@ -1,10 +1,12 @@
-from alchemy_mock.mocking import AlchemyMagicMock
 from alchemy_mock.mocking import UnifiedAlchemyMagicMock
 from alchemy_mock.mocking import UnorderedCall
+from datetime import datetime
 from euphorie.client.model import Account
+from osha.oira.statistics.model import AccountStatistics
 from osha.oira.statistics.utils import UpdateStatisticsDatabases
 from unittest import mock
 
+import sqlalchemy
 import unittest
 
 
@@ -25,10 +27,7 @@ class StatisticsUnifiedAlchemyMagicMock(UnifiedAlchemyMagicMock):
 
 
 class TestUpdateStatistics(unittest.TestCase):
-    @unittest.skip(
-        "Fails with: TypeError: '>' not supported between instances of 'AlchemyMagicMock' and 'datetime.datetime'"  # noqa: E501
-    )
-    def test_update_account(self):
+    def test_update_account_empty(self):
         mock_session_application = StatisticsUnifiedAlchemyMagicMock(
             data=[
                 (
@@ -44,11 +43,30 @@ class TestUpdateStatistics(unittest.TestCase):
         )
 
         updater = UpdateStatisticsDatabases(mock_session_application, "")
-        updater.session_statistics = AlchemyMagicMock()
+        updater.session_statistics = StatisticsUnifiedAlchemyMagicMock()
         updater.update_account()
 
-        updater.session_statistics.add_all.assert_called()
-        self.assertEqual(updater.session_statistics.add_all.call_args.args[0][0].id, 1)
+        updater.session_statistics.add.assert_called()
+        self.assertEqual(updater.session_statistics.add.call_args.args[0].id, 1)
         self.assertEqual(
-            updater.session_statistics.add_all.call_args.args[0][0].account_type, "full"
+            updater.session_statistics.add.call_args.args[0].account_type, "full"
         )
+
+    def test_update_account_already_up_to_date(self):
+        mock_session_application = StatisticsUnifiedAlchemyMagicMock()
+
+        updater = UpdateStatisticsDatabases(mock_session_application, "")
+        updater.session_statistics = StatisticsUnifiedAlchemyMagicMock(
+            data=[
+                (
+                    [
+                        mock.call.query(
+                            sqlalchemy.func.max(AccountStatistics.creation_date)
+                        ),
+                    ],
+                    [[datetime.now()]],
+                ),
+            ]
+        )
+        updater.update_account()
+        updater.session_statistics.add.assert_not_called()

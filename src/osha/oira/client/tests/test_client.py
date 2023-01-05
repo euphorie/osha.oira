@@ -9,4 +9,4 @@ class ClientTest(OiRAFunctionalTestCase):
 
         browser = self.get_browser()
         browser.open(self.portal.client.absolute_url())
-        self.assertEquals(IOSHAClientSkinLayer.providedBy(locals.request), True)
+        self.assertEqual(IOSHAClientSkinLayer.providedBy(locals.request), True)

@@ -1,4 +1,3 @@
-# coding=utf-8
 from euphorie.client import model
 from pkg_resources import resource_filename
 from z3c.saconfig import Session
@@ -32,8 +31,7 @@ model.metadata.create_all(Session.bind, checkfirst=True)
 session = Session()
 
 
-class CleanUpGuestSessions(object):
-
+class CleanUpGuestSessions:
     sql = """
 WITH old_guest_sessions AS (
     SELECT session.id, count(tree.id) AS num_risks

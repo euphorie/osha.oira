@@ -1,4 +1,3 @@
-# coding=utf-8
 from euphorie.content.browser import solution
 from osha.oira import _
 
@@ -9,7 +8,7 @@ class SolutionView(solution.SolutionView):
 
 class AddForm(solution.AddForm):
     def updateFields(self):
-        super(AddForm, self).updateFields()
+        super().updateFields()
         self.buttons["save"].title = _("button_save_changes", default="Save changes")
         self.buttons["cancel"].title = _("button_cancel", default="Cancel")
 
@@ -23,10 +22,10 @@ class AddView(solution.AddView):
 
 
 class EditForm(solution.EditForm):
-    """Override to allow us to set form title and button labels"""
+    """Override to allow us to set form title and button labels."""
 
     def updateFields(self):
-        super(EditForm, self).updateFields()
+        super().updateFields()
         self.buttons["save"].title = _("button_save_changes", default="Save changes")
         self.buttons["cancel"].title = _("button_cancel", default="Cancel")
 

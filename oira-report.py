@@ -68,7 +68,7 @@ def process_robot_output(robot_output):
 
         tests = suite.xpath(".//test")
         for i, test in enumerate(tests):
-            test_id = "{0}".format(test.get("id", ""))
+            test_id = "{}".format(test.get("id", ""))
 
             test_container = E.DIV(E.CLASS("span6"))
             test_name = test.get("name", "")
@@ -133,7 +133,7 @@ def process_robot_output(robot_output):
 
 
 if __name__ == "__main__":
-    robot_output = open("output.xml", "r")
+    robot_output = open("output.xml")
     process_robot_output(robot_output)
 
     report_output = open("oira-report.html", "w")

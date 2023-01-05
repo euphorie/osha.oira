@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from euphorie.client.model import Session as EuphorieSession
 from euphorie.content.surveygroup import ISurveyGroup
 from osha.oira.statistics.model import get_postgres_url

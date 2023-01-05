@@ -37,12 +37,12 @@ def map_images(context):
                     "/".join(("/Plone2/sectors", path))
                 )
             except KeyError:
-                log.warning("Tool not found: {}".format(path))
+                log.warning(f"Tool not found: {path}")
                 continue
 
             img = elem.find(".//div[@class='views-field views-field-field-image']/img")
             if img is None:
-                log.warning("No image for {}".format(path))
+                log.warning(f"No image for {path}")
                 continue
             sourcename = img.attrib["src"].split("/")[-1]
             basename = unquote(sourcename.split(".")[0]).strip()
@@ -50,7 +50,7 @@ def map_images(context):
                 name = " ".join([part for part in basename.split(" ")[:-1]])
             else:
                 name = basename
-            filename = "{} 300.png".format(name)
+            filename = f"{name} 300.png"
             blob_image = None
             if not resource_exists(
                 "osha.oira.data", "/".join(("OiRA-Icons", filename))
@@ -73,7 +73,7 @@ def map_images(context):
                             )
                     except Exception as e:
                         log.warning(
-                            "Unable to download image from website. Error: {}".format(e)
+                            f"Unable to download image from website. Error: {e}"
                         )
                         continue
             else:

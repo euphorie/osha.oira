@@ -7,7 +7,7 @@ import pkg_resources
 
 
 class About(BrowserView):
-    """ """
+    """"""
 
     @property
     def packages(self):

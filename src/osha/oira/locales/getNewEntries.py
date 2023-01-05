@@ -14,7 +14,6 @@ out.po                  A name for the output po file
                         entries will be returned.
 """
 
-from __future__ import print_function
 from findDirtyTranslations import append_entry
 from findDirtyTranslations import get_default
 

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
 from osha.oira import _
 from Products.CMFPlone.utils import safe_unicode
@@ -77,16 +76,14 @@ class WriteStatistics(BrowserView):
             return "'%s'" % value
 
         for line in info_surveys:
-            insert = """INSERT INTO %s VALUES %s;""" % (
+            insert = """INSERT INTO {} VALUES {};""".format(
                 dbtable_surveys,
                 "(%s)" % ", ".join(map(pg_format, map(clean, line))),
             )
             session.execute(insert)
         datamanager.mark_changed(session)
         transaction.get().commit()
-        log.info(
-            "Exported statistics on {0} surveys to the DB.".format(len(info_surveys))
-        )
+        log.info(f"Exported statistics on {len(info_surveys)} surveys to the DB.")
         from pprint import pformat
 
         return "Written:\n" + pformat(info_surveys)
@@ -105,9 +102,8 @@ class StatisticsMixin(BrowserView):
 
 
 class CountryStatistics(StatisticsMixin):
-    """Country managers can access statistics for their countries and
-    tools inside their respective countries, but nowhere else..
-    """
+    """Country managers can access statistics for their countries and tools
+    inside their respective countries, but nowhere else.."""
 
     label = _("title_statistics", default="Statistics Reporting")
     label_detail = _("label_country", default="Country")
@@ -124,8 +120,7 @@ class CountryStatistics(StatisticsMixin):
 
 class SectorStatistics(StatisticsMixin):
     """Sector accounts/managers can access statistics for tools in their
-    sector, but nowhere else.
-    """
+    sector, but nowhere else."""
 
     label = _("title_statistics", default="Statistics Reporting")
     label_detail = _("Sector", default="Sector")

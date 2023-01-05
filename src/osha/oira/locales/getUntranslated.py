@@ -15,7 +15,6 @@ output.po   The name of a po file that will be created by this script.
             with the default translation.
 """
 
-from __future__ import print_function
 
 import os
 import polib

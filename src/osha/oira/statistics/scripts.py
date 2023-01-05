@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from euphorie.client import model
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.utils import UpdateStatisticsDatabases

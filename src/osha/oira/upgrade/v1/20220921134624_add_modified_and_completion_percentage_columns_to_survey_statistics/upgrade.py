@@ -19,9 +19,9 @@ class AddModifiedAndCompletionPercentageColumnsToSurveyStatistics(UpgradeStep):
     """Add modified and completion percentage columns to survey statistics."""
 
     def update_newest_session(self, country, session_statistics):
-        """Make sure that the newest session is present in the statistics database and
-        has a modified date so that update_statistics knows where to pick up.
-        """
+        """Make sure that the newest session is present in the statistics
+        database and has a modified date so that update_statistics knows where
+        to pick up."""
         if session_statistics.query(SurveySessionStatistics).count() <= 0:
             # if the statistics DB is empty we need to do a full update_statistics
             # run anyway

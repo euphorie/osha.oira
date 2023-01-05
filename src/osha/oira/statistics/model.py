@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from App.config import getConfiguration
 from euphorie.client.enum import Enum
 from sqlalchemy import create_engine

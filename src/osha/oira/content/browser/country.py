@@ -1,4 +1,3 @@
-# coding=utf-8
 from euphorie.content.browser.country import ManageUsers
 from euphorie.content.countrymanager import ICountryManager
 from euphorie.content.sector import ISector

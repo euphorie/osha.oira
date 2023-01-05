@@ -1,15 +1,13 @@
-# coding=utf-8
 from euphorie.content.browser import risk
 from osha.oira import _
 
 
 class OSHAFormMixin:
-    """ """
+    """"""
 
     def setDynamicDescriptions(self):
         """Set the evaluation_method description depending on the evaluation
-        algorithm (Kinney or French)
-        """
+        algorithm (Kinney or French)"""
         evalgroup = self.groups[self.order.index("header_evaluation")]
         evalfield = evalgroup.fields.get("evaluation_method")
         if self.evaluation_algorithm == "kinney":
@@ -30,10 +28,10 @@ class OSHAFormMixin:
 
 
 class AddForm(risk.AddForm, OSHAFormMixin):
-    """Override to allow us to dynamically set field descriptions"""
+    """Override to allow us to dynamically set field descriptions."""
 
     def updateFields(self):
-        super(AddForm, self).updateFields()
+        super().updateFields()
         self.setDynamicDescriptions()
         self.buttons["save"].title = _("button_save_changes", default="Save changes")
         self.buttons["cancel"].title = _("button_cancel", default="Cancel")
@@ -48,10 +46,10 @@ class AddView(risk.AddView):
 
 
 class EditForm(risk.EditForm, OSHAFormMixin):
-    """Override to allow us to dynamically set field descriptions"""
+    """Override to allow us to dynamically set field descriptions."""
 
     def updateFields(self):
-        super(EditForm, self).updateFields()
+        super().updateFields()
         self.setDynamicDescriptions()
         self.buttons["save"].title = _("button_save_changes", default="Save changes")
         self.buttons["cancel"].title = _("button_cancel", default="Cancel")

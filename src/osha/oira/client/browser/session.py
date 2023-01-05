@@ -19,7 +19,10 @@ logger = getLogger(__name__)
 
 
 class IOSHAStartExtender(Interface):
-    """Add a some fields, ie. a checkbox that allows to subscribe to the newsletter"""
+    """Add a some fields, ie.
+
+    a checkbox that allows to subscribe to the newsletter
+    """
 
     tool_subscription = schema.Bool(
         title=_(
@@ -36,18 +39,18 @@ class IOSHAStartExtender(Interface):
 @implementer(IFormExtender)
 @adapter(Interface, IOSHAClientSkinLayer, Start)
 class OSHAStartExtender(FormExtender):
-
     fields = Fields(IOSHAStartExtender)
 
     @memoize
     def update(self):
-        """Omit the group id field if we are not the creator"""
+        """Omit the group id field if we are not the creator."""
         self.add(self.fields)
 
 
 class OSHAStart(Start):
     def get_tool_subscriptions(self):
         """In principle we can have multiple rows.
+
         Normally it is 0 or 1.
         """
         account = self.webhelpers.get_current_account()
@@ -63,8 +66,7 @@ class OSHAStart(Start):
 
     def set_tool_subscription(self, value):
         """Check if we need to save or delete the subscription from the tool
-        bound to the current session
-        """
+        bound to the current session."""
         if value:
             if not self.is_tool_subscription_enabled():
                 account = self.webhelpers.get_current_account()
@@ -79,11 +81,11 @@ class OSHAStart(Start):
                 Session.delete(subscription)
 
     def updateWidgets(self):
-        super(OSHAStart, self).updateWidgets()
+        super().updateWidgets()
         if not self.is_tool_subscription_enabled():
             self.widgets["tool_subscription"].value = []
 
     def _set_data(self, data):
         tool_subscription = bool(data.pop("tool_subscription", None))
         self.set_tool_subscription(tool_subscription)
-        super(OSHAStart, self)._set_data(data)
+        super()._set_data(data)

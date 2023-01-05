@@ -1,4 +1,3 @@
-#  -* coding: utf8 *-
 from euphorie.client import model
 from euphorie.client.browser.publish import EnableCustomRisks
 from euphorie.client.country import IClientCountry
@@ -22,8 +21,9 @@ log = logging.getLogger(__name__)
 
 def renew_survey_published_date(context):
     """Update the published attr of surveys to set the date to now.
-    This will force all surveys to redirect to the @@update page from where
-    users' session trees can be updated.
+
+    This will force all surveys to redirect to the @@update page from
+    where users' session trees can be updated.
     """
     site = getSite()
     client = getattr(site, "client")
@@ -49,7 +49,7 @@ def renew_survey_published_date(context):
 
 
 def add_custom_homepage(context):
-    """ """
+    """"""
     site = getSite()
     try:
         container = site.unrestrictedTraverse("documents/en")
@@ -73,7 +73,7 @@ Add here any HTML code that you'd like to be rendered in the body of
 
 
 def reset_evaluation_flag(context):
-    """ """
+    """"""
     site = getSite()
     ps = site.portal_catalog(portal_type="euphorie.survey")
     for p in ps:
@@ -122,7 +122,7 @@ def remove_birt_file_format(context):
 
 
 def update_types_information(context):
-    """Reimport types to activate new behavior"""
+    """Reimport types to activate new behavior."""
     setup = api.portal.get_tool("portal_setup")
     setup.runImportStepFromProfile("profile-osha.oira:default", "typeinfo")
 
@@ -150,7 +150,7 @@ def increase_sessions_path_column(context):
 
 
 def reset_surveygroup_obsolete(context):
-    """ """
+    """"""
     log.info('Reset "obsolete" flag from surveygroups.')
     site = getSite()
     brains = site.portal_catalog(portal_type="euphorie.surveygroup")
@@ -158,17 +158,17 @@ def reset_surveygroup_obsolete(context):
         try:
             surveygroup = brain.getObject()
         except Exception:
-            log.warning("Stale catalog entry for brain {0}".format(brain.getPath()))
+            log.warning(f"Stale catalog entry for brain {brain.getPath()}")
             continue
         else:
             if getattr(surveygroup, "obsolete", False):
-                log.info("Survey {0} was obsolete".format(surveygroup.absolute_url()))
+                log.info(f"Survey {surveygroup.absolute_url()} was obsolete")
                 surveygroup.obsolete = False
                 surveygroup.reindexObject()
 
 
 def enable_custom_risks_on_all_modules(context):
-    """ """
+    """"""
     if not api.portal.get_registry_record("euphorie.allow_user_defined_risks"):
         log.warning(
             "Custom risks are not enabled. Set 'allow_user_defined_risks' to "
@@ -229,8 +229,7 @@ def enable_custom_risks_on_all_modules(context):
 
 def install_private_resources(context):
     """Install the oira.private egg, which contains non-free JS and CSS
-    resources.
-    """
+    resources."""
     setup = api.portal.get_tool("portal_setup")
     setup.runAllImportStepsFromProfile("profile-oira.private:default")
 

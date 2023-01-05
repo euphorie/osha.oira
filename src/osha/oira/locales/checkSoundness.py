@@ -10,7 +10,6 @@ directory:  Path to a directory that contains the 2-letter language directories.
             Defaults to current directory.
 """
 
-from __future__ import print_function
 
 import os
 import re
@@ -56,10 +55,10 @@ dirs = [
 ]
 houstonwehaveaproblem = False
 for dirname in dirs:
-    path = "{basedir}/{dirname}/LC_MESSAGES".format(basedir=basedir, dirname=dirname)
+    path = f"{basedir}/{dirname}/LC_MESSAGES"
     names = [x for x in os.listdir(path) if x.endswith("po") and not x.startswith("._")]
     for name in names:
-        args = ["msgfmt", "-C", "%s/%s" % (path, name)]
+        args = ["msgfmt", "-C", f"{path}/{name}"]
         out, err = subprocess.Popen(
             args, stdout=subprocess.PIPE, stderr=subprocess.PIPE
         ).communicate()
@@ -79,7 +78,7 @@ for dirname in dirs:
                     problems.append(line)
 
             if problems:
-                print("\n%s/%s" % (path, name))
+                print(f"\n{path}/{name}")
                 print("\n".join(problems))
                 houstonwehaveaproblem = True
 

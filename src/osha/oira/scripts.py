@@ -1,4 +1,3 @@
-# coding=utf-8
 from collections import OrderedDict
 from datetime import datetime
 from datetime import timedelta
@@ -44,7 +43,7 @@ class OutdatedToolsView(BrowserView):
     def __init__(self, context=None, request=None):
         sprops = context.portal_properties.site_properties
         self.interval = sprops.getProperty("outdated_notications_interval_days", 365)
-        super(OutdatedToolsView, self).__init__(context, request)
+        super().__init__(context, request)
 
     def __call__(self):
         self.render(self.context)
@@ -64,11 +63,11 @@ class OutdatedToolsView(BrowserView):
         years = self.interval / 365
         if years:
             months = int((self.interval % 365) / 30.4)
-            period = "over {0} year(s) and {1} month(s)".format(years, months)
+            period = f"over {years} year(s) and {months} month(s)"
         else:
-            period = "over {0} month(s)".format(int(self.interval / 30.4))
+            period = f"over {int(self.interval / 30.4)} month(s)"
         log.info(
-            "{0} outdated tools have not been updated {1}.".format(
+            "{} outdated tools have not been updated {}.".format(
                 len(outdated_tool_paths), period
             )
         )
@@ -106,19 +105,19 @@ class OutdatedToolsView(BrowserView):
         for sector_path in sector_paths:
             sector = self.context.unrestrictedTraverse(sector_path, False)
             if not sector or sector.portal_type != "euphorie.sector":
-                log.error("Missing sector: {}".format(sector_path))
+                log.error(f"Missing sector: {sector_path}")
                 continue
             contact_name = sector.contact_name or ""
             contact_email = sector.contact_email
             if not contact_email:
-                log.error("No contact email address: {}".format(sector_path))
+                log.error(f"No contact email address: {sector_path}")
                 continue
             sector_tools = filter(
                 lambda x: x.startswith(sector_path), outdated_tool_paths
             )
             intro = """
 You are receiving this notification since you are the sector manager for
-"{0}". """.format(
+"{}". """.format(
                 safe_unicode(sector.Title())
             )
             self.send_notification(
@@ -151,7 +150,7 @@ You are receiving this notification since you are the sector manager for
             for manager in managers:
                 intro = """
 You are receiving this notification since you are the country manager for
-"{0}". """.format(
+"{}". """.format(
                     safe_unicode(country.Title())
                 )
 
@@ -191,7 +190,7 @@ You are receiving this notification since you are the country manager for
         to_name = safe_unicode(to_name)
         mailhost = getToolByName(self.context, "MailHost")
         if to_name:
-            recipient = "{} <{}>".format(to_name, to_address)
+            recipient = f"{to_name} <{to_address}>"
         else:
             recipient = to_address
         subject = "OiRA: Notification on outdated tools"
@@ -222,9 +221,9 @@ You are receiving this notification since you are the country manager for
         years = self.interval / 365
         if years:
             months = int((self.interval % 365) / 30.4)
-            period = "over {0} year(s) and {1} month(s)".format(years, months)
+            period = f"over {years} year(s) and {months} month(s)"
         else:
-            period = "over {0} month(s)".format(int(self.interval / 30.4))
+            period = f"over {int(self.interval / 30.4)} month(s)"
 
         body = """
 Dear {name},
@@ -247,4 +246,4 @@ OiRA
         try:
             mailhost.send(mail)
         except Exception as err:
-            log.error("Failed to send notification {}".format(err))
+            log.error(f"Failed to send notification {err}")

@@ -1,4 +1,3 @@
-# coding=utf-8
 from euphorie.client.browser.webhelpers import WebHelpers
 from logging import getLogger
 from osha.oira.client.model import UsersNotInterestedInCertificateStatusBox
@@ -11,13 +10,11 @@ log = getLogger(__name__)
 
 
 class OSHAWebHelpers(WebHelpers):
-
     show_completion_percentage = True
 
     @memoize
     def styles_override(self):
-
-        css = super(OSHAWebHelpers, self).styles_override
+        css = super().styles_override
         css += """
 #osc .miller-columns .browser .item .object-name {
     color: inherit;
@@ -33,7 +30,8 @@ class OSHAWebHelpers(WebHelpers):
                 return True
 
     def show_certificate_status_box(self):
-        """Check if the current user should see his own certificate status box"""
+        """Check if the current user should see his own certificate status
+        box."""
         account_id = self.get_current_account().id
         return (
             Session.query(UsersNotInterestedInCertificateStatusBox)

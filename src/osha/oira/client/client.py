@@ -1,4 +1,3 @@
-# coding=utf-8
 from ..interfaces import IProductLayer
 from .interfaces import IOSHAClientSkinLayer
 from euphorie.client.client import IClient
@@ -45,4 +44,4 @@ class ClientPublishTraverser(DefaultPublishTraverse):
             if not IBrowserSkinType.providedBy(iface)
         ]
         directlyProvides(request, IOSHAClientSkinLayer, ifaces)
-        return super(ClientPublishTraverser, self).publishTraverse(request, name)
+        return super().publishTraverse(request, name)

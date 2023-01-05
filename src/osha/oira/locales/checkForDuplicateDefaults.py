@@ -10,7 +10,6 @@ file.po   A po to check
 --debug   Print debug statistics.
 """
 
-from __future__ import print_function
 
 import os
 import polib

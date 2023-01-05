@@ -1,4 +1,3 @@
-# coding=utf-8
 from euphorie.content.browser import export
 from euphorie.content.browser import upload
 from euphorie.content.profilequestion import IProfileQuestion
@@ -14,7 +13,7 @@ PQ_FIELDS = [
 
 class OSHAExportSurvey(export.ExportSurvey):
     def exportProfileQuestion(self, parent, profile):
-        node = super(OSHAExportSurvey, self).exportProfileQuestion(parent, profile)
+        node = super().exportProfileQuestion(parent, profile)
         for field in PQ_FIELDS:
             value = getattr(profile, field, None)
             if value:
@@ -22,7 +21,7 @@ class OSHAExportSurvey(export.ExportSurvey):
         return node
 
 
-class ImporterMixin(object):
+class ImporterMixin:
     def ImportProfileQuestion(self, node, survey):
         profile = upload.SurveyImporter.ImportProfileQuestion(self, node, survey)
         if IProfileQuestion.providedBy(profile):
@@ -38,5 +37,4 @@ class SurveyImporter(ImporterMixin, upload.SurveyImporter):
 
 
 class OSHAImportSurvey(upload.ImportSurvey):
-
     importer_factory = SurveyImporter

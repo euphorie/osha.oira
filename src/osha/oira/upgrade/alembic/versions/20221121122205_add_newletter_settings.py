@@ -1,9 +1,8 @@
-"""Add newletter settings
+"""Add newletter settings.
 
 Revision ID: 20221121122205
 Revises: 20221118124144
 Create Date: 2022-11-21 11:49:15.054453
-
 """
 from alembic import op
 from euphorie.deployment.upgrade.utils import has_table

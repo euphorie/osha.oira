@@ -24,7 +24,7 @@ help_default_severity = _(
 
 
 class IOSHASurvey(model.Schema):
-    """Adds a logo, URL and name of an external reference site to a survey"""
+    """Adds a logo, URL and name of an external reference site to a survey."""
 
     enable_external_site_link = schema.Bool(
         title=_(
@@ -156,8 +156,7 @@ interface.alsoProvides(IOSHASurvey, IFormFieldProvider)
 
 class IOSHASurveyMarker(survey.ISurvey):
     """Marker interface so that we can register more specific adapters for
-    OSHA's survey object.
-    """
+    OSHA's survey object."""
 
 
 interface.classImplements(survey.Survey, IOSHASurveyMarker)

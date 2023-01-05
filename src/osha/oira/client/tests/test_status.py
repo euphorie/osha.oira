@@ -74,7 +74,7 @@ class SurveySessionTests(OiRAFunctionalTestCase):
         addSurvey(self.portal, SURVEY)
         self.survey = self.portal.client.nl["ict"]["software-development"]
 
-        class DummyObj(object):
+        class DummyObj:
             problem_description = "A Tricky Problem"
 
         self.survey.restrictedTraverse = lambda path: DummyObj()
@@ -181,11 +181,11 @@ class SurveySessionTests(OiRAFunctionalTestCase):
             }
         }
         view.getStatus()
-        self.assertEquals(view.status[0]["title"], "Shops are clean - Somerset West")
-        self.assertEquals(view.status[0]["risk_without_measures"], 2)
-        self.assertEquals(view.status[0]["risk_with_measures"], 0)
-        self.assertEquals(view.status[0]["postponed"], 1)
-        self.assertEquals(view.status[0]["todo"], 1)
-        self.assertEquals(view.status[0]["ok"], 1)
-        self.assertEquals(view.percentage_ok, 20)
-        self.assertEquals(len(view.risks_by_status["001001"]["present"]["high"]), 1)
+        self.assertEqual(view.status[0]["title"], "Shops are clean - Somerset West")
+        self.assertEqual(view.status[0]["risk_without_measures"], 2)
+        self.assertEqual(view.status[0]["risk_with_measures"], 0)
+        self.assertEqual(view.status[0]["postponed"], 1)
+        self.assertEqual(view.status[0]["todo"], 1)
+        self.assertEqual(view.status[0]["ok"], 1)
+        self.assertEqual(view.percentage_ok, 20)
+        self.assertEqual(len(view.risks_by_status["001001"]["present"]["high"]), 1)

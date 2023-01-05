@@ -1,4 +1,3 @@
-# coding=utf-8
 from ..model import LoginStatistics
 from euphorie.client.browser import login
 from euphorie.client.model import Account
@@ -12,4 +11,4 @@ class Login(login.Login):
         account = session.query(Account).filter(Account.id == account.id).one()
         ls = LoginStatistics(account=account)
         account.logins.append(ls)
-        return super(Login, self).login(account, remember)
+        return super().login(account, remember)

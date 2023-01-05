@@ -11,7 +11,6 @@ output.xml   The filename for the fixed survey
 """
 
 # from BeautifulSoup import BeautifulStoneSoup
-from __future__ import print_function
 from BeautifulSoup import BeautifulSoup
 from BeautifulSoup import Tag
 from xml.sax.saxutils import escape
@@ -37,7 +36,7 @@ if len(sys.argv) < 3:
 input = sys.argv[1]
 output = sys.argv[2]
 
-fh = open(input, "r")
+fh = open(input)
 data = fh.read()
 fh.close()
 

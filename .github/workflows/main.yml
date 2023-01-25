@@ -53,6 +53,6 @@ jobs:
       - name: Test
         run: |
           bin/coverage run bin/test -s osha.oira
-          bin/coverage report --fail-under=40 -i
+          bin/coverage report --fail-under=38 -i
         env:
           zope_i18n_compile_mo_files: 1

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.2.3 (unreleased)
+8.2.3 (2023-01-26)
 ------------------
 
 - Fix osha.oira test suite.

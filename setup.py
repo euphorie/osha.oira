@@ -46,6 +46,7 @@ setup(
         "Pillow",
         "plone.api",
         "plone.autoform",
+        "plone.formwidget.recaptcha",
         "plone.tiles",
         "Products.statusmessages",
         "requests",

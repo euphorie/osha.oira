@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.2.4 (unreleased)
+8.2.4 (2023-02-16)
 ------------------
 
 - Add a recaptcha in the password reset form

@@ -1,20 +1,43 @@
 from Acquisition import aq_inner
 from euphorie.content import MessageFactory as _
+from plone import api
+from plone.autoform import directives
+from plone.formwidget.recaptcha.widget import ReCaptchaFieldWidget
 from plonetheme.nuplone import MessageFactory as __
 from plonetheme.nuplone.browser import pwreminder
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PasswordResetTool import InvalidRequestError
 from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form.button import buttonAndHandler
+from zope import schema
 from zope.i18n import translate
 
 
+class IOshaRequestPasswordReset(pwreminder.IRequestPasswordReset):
+
+    # Add the recaptcha widget
+    directives.widget("captcha", ReCaptchaFieldWidget)
+    captcha = schema.TextLine(title="ReCaptcha", description="", required=False)
+
+
 class RequestPasswordForm(pwreminder.RequestPasswordForm):
-    """Override so that we can change some labels."""
+    """Override so that we can change some labels and add the captcha."""
+
+    schema = IOshaRequestPasswordReset
 
     def updateFields(self):
         super().updateFields()
         self.fields["login"].field.title = __("label_email", default="E-mail address")
+
+    @buttonAndHandler(_("button_send", default="Send"), name="send")
+    def handleSend(self, action):
+        captcha = api.content.get_view("recaptcha", self.context, self.request)
+        if not captcha.verify():
+            api.portal.show_message(
+                "Please verify that you are not a robot", self.request, type="error"
+            )
+            return
+        return super().handleSend(self, action)
 
 
 class PasswordReset(pwreminder.PasswordReset):

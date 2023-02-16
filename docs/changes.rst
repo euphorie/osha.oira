@@ -4,7 +4,9 @@ Changelog
 8.2.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add a recaptcha in the password reset form
+  (`#990 <https://github.com/syslabcom/scrum/issues/990>`_).
+  [ale-rt]
 
 
 8.2.3 (2023-01-26)
@@ -1664,5 +1666,3 @@ Bugfixes
 ----------------
 
 * Initial release
-
-

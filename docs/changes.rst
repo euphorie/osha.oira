@@ -4,7 +4,9 @@ Changelog
 8.2.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Statistics: Exclude accounts with certain domains
+  (`#923 <https://github.com/syslabcom/scrum/issues/923>`_).
+  [reinhardt]
 
 
 8.2.4 (2023-02-16)

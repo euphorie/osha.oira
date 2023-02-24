@@ -261,9 +261,36 @@ class UpdateStatisticsDatabases:
         if since > datetime.min:
             log.info("Skipping accounts up to and including %s", since)
 
+        exclude_domains = [
+            "inrs.fr",
+            "inail.it",
+            "werk.belgie.be",
+            "gli.government.bg",
+            "mrosp.hr",
+            "dli.mlsi.gov.cy",
+            "ttl.fi",
+            "ypakp.gr",
+            "vdi.gov.lv",
+            "vdi.lt",
+            "gov.mt",
+            "act.gov.pt",
+            "gov.si",
+            "gencat.cat",
+            "mpsv.cz",
+            "vubp.cz",
+            "ip.gov.sk",
+            "tim.gov.hu",
+            "ver.is",
+        ]
         accounts = (
             self.session_application.query(Account)
             .filter(Account.created > since)
+            .filter(
+                sqlalchemy.and_(
+                    sqlalchemy.not_(Account.loginname.like(f"%@{domain}"))
+                    for domain in exclude_domains
+                )
+            )
             .order_by(Account.id)
         )
         if country is not None:

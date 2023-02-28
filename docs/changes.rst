@@ -4,6 +4,9 @@ Changelog
 8.2.5 (unreleased)
 ------------------
 
+- Statistics: Add newsletter statistics.
+  (`#925 <https://github.com/syslabcom/scrum/issues/925>`_).
+  [reinhardt]
 - Statistics: Exclude accounts with certain domains
   (`#923 <https://github.com/syslabcom/scrum/issues/923>`_).
   [reinhardt]

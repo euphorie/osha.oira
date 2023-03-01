@@ -4,6 +4,8 @@ Changelog
 8.2.5 (unreleased)
 ------------------
 
+- Statistics: Fix updating tool statistics.
+  [reinhardt]
 - Statistics: Exclude accounts with certain domains
   (`#923 <https://github.com/syslabcom/scrum/issues/923>`_).
   [reinhardt]

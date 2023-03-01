@@ -106,16 +106,6 @@ class UpdateStatisticsDatabases:
 
     def update_tool(self, country=None):
         log.info("Table: tool")
-        since = (
-            self.session_statistics.query(
-                sqlalchemy.func.max(SurveyStatistics.published_date)
-            ).first()[0]
-            or datetime.min
-        )
-        if self.since and self.since < since:
-            since = self.since
-        if since > datetime.min:
-            log.info("Skipping tools up to and including %s", since)
 
         tools = (
             self.session_application.query(
@@ -125,7 +115,6 @@ class UpdateStatisticsDatabases:
                 ),
                 sqlalchemy.func.count(SurveySession.id),
             )
-            .filter(Survey.published_date > since)
             .filter(Survey.zodb_path == SurveySession.zodb_path)
             .filter(Survey.published)
             .filter(Account.id == SurveySession.account_id)

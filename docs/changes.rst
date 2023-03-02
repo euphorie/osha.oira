@@ -4,6 +4,8 @@ Changelog
 8.2.5 (unreleased)
 ------------------
 
+- Statistics: Fix updating tool statistics.
+  [reinhardt]
 - Statistics: Add newsletter statistics.
   (`#925 <https://github.com/syslabcom/scrum/issues/925>`_).
   [reinhardt]

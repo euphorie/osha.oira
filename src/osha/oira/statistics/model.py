@@ -80,6 +80,14 @@ class SurveySessionStatistics(Base):
     account_id = schema.Column(types.Integer(), nullable=True)
 
 
+class NewsletterStatistics(Base):
+    """Statistics on the newsletter subscriptions."""
+
+    __tablename__ = "newsletter"
+    zodb_path = schema.Column(types.String(512), primary_key=True, nullable=False)
+    count = schema.Column(types.Integer(), default=0)
+
+
 class CompanyStatistics(Base):
     """Statistically relevant data concerning a company."""
 

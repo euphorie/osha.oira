@@ -5,10 +5,12 @@ from euphorie.client.model import Risk
 from euphorie.client.model import Session as EuphorieSession
 from euphorie.client.model import SurveySession
 from euphorie.client.model import SurveyTreeItem
+from osha.oira.client.model import NewsletterSubscription
 from osha.oira.client.model import SurveyStatistics as Survey
 from osha.oira.statistics.model import AccountStatistics
 from osha.oira.statistics.model import CompanyStatistics
 from osha.oira.statistics.model import create_session
+from osha.oira.statistics.model import NewsletterStatistics
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN
 from osha.oira.statistics.model import SurveySessionStatistics
 from osha.oira.statistics.model import SurveyStatistics
@@ -97,6 +99,7 @@ class UpdateStatisticsDatabases:
         self.update_tool(country=country)
         self.update_assessment(country=country)
         self.update_account(country=country)
+        self.update_newsletter(country=country)
         self.update_company(country=country)
 
         self.session_statistics.commit()
@@ -328,6 +331,43 @@ class UpdateStatisticsDatabases:
             return handled
 
         self._process_batch(account_rows)
+
+    def update_newsletter(self, country=None):
+        log.info("Table: newsletter")
+        subscriptions = (
+            self.session_application.query(
+                NewsletterSubscription.zodb_path,
+                sqlalchemy.func.count(NewsletterSubscription.zodb_path),
+            )
+            .group_by(NewsletterSubscription.zodb_path)
+            .order_by(NewsletterSubscription.zodb_path)
+        )
+        # XXX Exclude domains?
+        if country is not None:
+            subscriptions = subscriptions.filter(
+                NewsletterSubscription.zodb_path.startswith(country)
+            )
+
+        def newsletter_rows(offset):
+            batch = subscriptions.limit(self.b_size).offset(offset)
+            handled = 0
+            for zodb_path, count in batch:
+                existing = (
+                    self.session_statistics.query(NewsletterStatistics)
+                    .filter(NewsletterStatistics.zodb_path == zodb_path)
+                    .first()
+                )
+                if existing:
+                    if existing.count != count:
+                        existing.count = count
+                else:
+                    self.session_statistics.add(
+                        NewsletterStatistics(zodb_path=zodb_path, count=count)
+                    )
+                handled = handled + 1
+            return handled
+
+        self._process_batch(newsletter_rows)
 
     def update_company(self, country=None):
         log.info("Table: company")

@@ -2,11 +2,30 @@ from base64 import b64encode
 from euphorie.client.model import Account
 from json import dumps
 from os import path
+from osha.oira import _
 from osha.oira.client.model import NewsletterSubscription
 from plone import api
 from Products.Five import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from z3c.saconfig import Session
 from zExceptions import Unauthorized
+
+import hashlib
+import re
+
+
+class OSHAClientRedirect(BrowserView):
+    def __call__(self):
+        # XXX get the user's country instead of the default one
+        # so that they see their assessments
+        country = (
+            api.portal.get_registry_record("euphorie.default_country", default="")
+            or "eu"
+        )
+        return self.request.response.redirect(
+            f"{self.context.absolute_url()}/{country}/@@{self.__name__}?"
+            f"{self.request.get('QUERY_STRING')}"
+        )
 
 
 class MailingListsJson(BrowserView):
@@ -102,3 +121,60 @@ class GroupToAddresses(BrowserView):
 
         self.request.response.setHeader("Content-type", "application/json")
         return dumps(self.results)
+
+
+class NewsletterUnsubscribe(BrowserView):
+    """Unsubscribe a user from a mailing list.
+
+    This should work without logging in, i.e. via an authentication token.
+    """
+
+    index = ViewPageTemplateFile("templates/unsubscribe.pt")
+
+    def get_token(self):
+        token = api.portal.get_registry_record("osha.oira.mailings.token")
+        if not token:
+            raise Unauthorized("Invalid token")
+        return token
+
+    @property
+    def group_title(self):
+        group = self.request.form.get("group")
+        if group == "general":
+            return _("label_general_news", default="General OiRA News")
+        group_obj = self.context.aq_parent.unrestrictedTraverse(group)
+        return group_obj.title
+
+    def unsubscribe(self, email, group):
+        existing_subscriptions = (
+            Session.query(NewsletterSubscription)
+            .filter(Account.id == NewsletterSubscription.account_id)
+            .filter(Account.loginname == email)
+        )
+        if group:
+            existing_subscriptions = existing_subscriptions.filter(
+                NewsletterSubscription.zodb_path == group
+            )
+        for subscription in existing_subscriptions:
+            Session.delete(subscription)
+
+    def __call__(self):
+        email = self.request.form.get("email")
+        group = self.request.form.get("group")
+        token = self.request.form.get("token")
+
+        self.success = False
+
+        email_regex = re.compile(r"[A-Za-z0-9@.]*")
+        if not email_regex.fullmatch(email):
+            return self.index()
+        group_regex = re.compile(r"[A-Za-z0-9/\-_]*")
+        if group and not group_regex.fullmatch(group):
+            return self.index()
+
+        message = "|".join((email, group or "*", self.get_token()))
+        digest = hashlib.sha256(message.encode()).hexdigest()
+        if digest == token:
+            self.unsubscribe(email, group)
+            self.success = True
+        return self.index()

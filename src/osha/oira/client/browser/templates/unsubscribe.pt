@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      metal:use-macro="context/@@shell/macros/shell"
+      i18n:domain="euphorie"
+>
+  <body>
+    <metal:content fill-slot="content">
+      <div class="pat-scroll-box scroll-position-top"
+           id="content-pane"
+      >
+        <article>
+          <p tal:condition="not:view/success"
+             i18n:translate="unsubscribe_invalid"
+          >
+            This link is invalid or has expired.
+          </p>
+
+          <tal:success tal:define="
+                         group request/group|nothing;
+                       "
+                       tal:condition="view/success"
+          >
+            <p tal:condition="group"
+               i18n:translate="unsubscribe_success"
+            >
+            You have been unsubscribed from the
+              <strong i18n:name="group">${view/group_title}</strong>
+            newsletter.
+            </p>
+            <p tal:condition="not:group"
+               i18n:translate="unsubscribe_all_success"
+            >
+            You have been unsubscribed from all newsletters.
+            </p>
+          </tal:success>
+
+          <p i18n:translate="link_preferences">
+            Manage your newsletter subsriptions on your
+            <a href="${here/absolute_url}/@@preferences"
+               i18n:name="target"
+               i18n:translate=""
+            >personal preferences page</a>.
+          </p>
+        </article>
+
+      </div>
+    </metal:content>
+  </body>
+</html>

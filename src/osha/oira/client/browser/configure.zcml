@@ -146,10 +146,6 @@
       layer="plonetheme.nuplone.skin.interfaces.NuPloneSkin"
       />
 
-  <!--
-    Temporary disable the newsletter specific code
-    See: https://github.com/syslabcom/scrum/issues/887
-
   <browser:page
       name="dashboard-banner"
       for="euphorie.client.country.IClientCountry"
@@ -209,7 +205,5 @@
   </configure>
 
   <adapter factory=".session.OSHAStartExtender" />
-
-  -->
 
 </configure>

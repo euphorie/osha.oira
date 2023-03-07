@@ -4,6 +4,9 @@ Changelog
 8.2.5 (unreleased)
 ------------------
 
+- Newsletter: Add a tool banner
+  (`#1025 <https://github.com/syslabcom/scrum/issues/1025>`_).
+  [ale-rt]
 - Statistics: Fix updating tool statistics.
   [reinhardt]
 - Statistics: Add newsletter statistics.

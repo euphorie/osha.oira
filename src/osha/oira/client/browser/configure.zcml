@@ -156,6 +156,15 @@
       />
 
   <browser:page
+      name="tool-banner"
+      for="euphorie.content.survey.ISurvey"
+      class=".dashboard_banner.View"
+      template="templates/dashboard-banner.pt"
+      permission="euphorie.client.ViewSurvey"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
       name="preferences"
       for="euphorie.client.client.IClient"
       class=".client.OSHAClientRedirect"

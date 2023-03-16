@@ -46,23 +46,26 @@ class MailingListsJson(BrowserView):
         the "all" list.
         """
         q = self.request.get("q", "").strip().lower()
-        if not q:
-            return []
 
         results = []
         catalog = api.portal.get_tool(name="portal_catalog")
         all_users = self._get_entry("general", "All users")
-        if q in all_users["id"] or q in all_users["text"].lower():
+        if not q or q in all_users["id"] or q in all_users["text"].lower():
             results.append(all_users)
 
         # FIXME: Search for native names of countries,
         # e.g. `q=de` doesn't return Germany
-        brains = catalog(
-            portal_type=["euphorie.clientcountry", "euphorie.survey"],
-            Title=f"*{q}*",
-            path="/".join(self.context.getPhysicalPath()),
-            sort_on="sortable_title",
-        )
+        query = {
+            "portal_type": ["euphorie.clientcountry", "euphorie.survey"],
+            "path": "/".join(self.context.getPhysicalPath()),
+            "sort_on": "sortable_title",
+        }
+
+        # Filter for query string if given. Else return all results.
+        if q:
+            query["Title"] = f"*{q}*"
+
+        brains = catalog(**query)
         client_path = "/".join(self.context.getPhysicalPath())
         results.extend(
             [
@@ -126,7 +129,8 @@ class GroupToAddresses(BrowserView):
 class NewsletterUnsubscribe(BrowserView):
     """Unsubscribe a user from a mailing list.
 
-    This should work without logging in, i.e. via an authentication token.
+    This should work without logging in, i.e. via an authentication
+    token.
     """
 
     index = ViewPageTemplateFile("templates/unsubscribe.pt")

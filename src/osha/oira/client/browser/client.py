@@ -70,11 +70,8 @@ class MailingListsJson(BrowserView):
             print(api.user.get_current().getUserId())
 
             if (
-                not q
-                or q in all_users["id"]
-                or q in all_users["text"].lower()
-                and api.user.has_permission("Manage portal content")
-            ):
+                not q or q in all_users["id"] or q in all_users["text"].lower()
+            ) and api.user.has_permission("Manage portal content"):
                 results.append(all_users)
 
             # FIXME: Search for native names of countries,
@@ -93,17 +90,25 @@ class MailingListsJson(BrowserView):
 
             brains = catalog(**query)
 
+            sectors = api.portal.get().sectors
+
             def filter_items(brain):
                 obj = brain.getObject()
 
                 if getattr(obj, "preview", False) or getattr(obj, "obsolete", False):
                     return False
 
-                if api.user.has_permission("Euphorie: Manage country", obj=obj):
+                counterpart = sectors.restrictedTraverse(
+                    brain.getPath().split("/")[3:], None
+                )
+                if not counterpart:
+                    return False
+
+                if api.user.has_permission("Euphorie: Manage country", obj=counterpart):
                     return True
 
                 return {"Manager", "Sector", "CountryManager"} & set(
-                    api.user.get_roles(obj=obj)
+                    api.user.get_roles(obj=counterpart)
                 )
 
             filtered_brains = filter(filter_items, brains)

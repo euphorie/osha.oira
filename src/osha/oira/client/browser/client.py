@@ -65,6 +65,7 @@ class MailingListsJson(BrowserView):
             "portal_type": ["euphorie.clientcountry", "euphorie.survey"],
             "path": "/".join(self.context.getPhysicalPath()),
             "sort_on": "sortable_title",
+            "review_state": "published",
         }
 
         # Filter for query string if given. Else return all results.

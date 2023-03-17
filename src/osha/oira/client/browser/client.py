@@ -74,8 +74,12 @@ class MailingListsJson(BrowserView):
 
         brains = catalog(**query)
 
-        def check_roles(brain):
+        def filter_items(brain):
             obj = brain.getObject()
+
+            if getattr(obj, "preview", False) or getattr(obj, "obsolete", False):
+                return False
+
             if api.user.has_permission("Euphorie: Manage country", obj=obj):
                 return True
 
@@ -83,7 +87,7 @@ class MailingListsJson(BrowserView):
                 api.user.get_roles(obj=obj)
             )
 
-        filtered_brains = filter(check_roles, brains)
+        filtered_brains = filter(filter_items, brains)
 
         client_path = "/".join(self.context.getPhysicalPath())
         cnt = len(results)

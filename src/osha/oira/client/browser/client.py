@@ -50,7 +50,13 @@ class MailingListsJson(BrowserView):
         results = []
         catalog = api.portal.get_tool(name="portal_catalog")
         all_users = self._get_entry("general", "All users")
-        if not q or q in all_users["id"] or q in all_users["text"].lower():
+
+        if (
+            not q
+            or q in all_users["id"]
+            or q in all_users["text"].lower()
+            and api.user.has_permission("Manage portal content")
+        ):
             results.append(all_users)
 
         # FIXME: Search for native names of countries,
@@ -67,21 +73,26 @@ class MailingListsJson(BrowserView):
 
         brains = catalog(**query)
 
-        filtered_brains = filter(
-            lambda brain: api.user.has_permission(
-                "Euphorie: Manage country", obj=brain.getObject()
+        def check_roles(brain):
+            obj = brain.getObject()
+            if api.user.has_permission("Euphorie: Manage country", obj=obj):
+                return True
+
+            return {"Manager", "Sector", "CountryManager"} & set(
+                api.user.get_roles(obj=obj)
             )
-            or "Sector" in api.user.get_roles(obj=brain.getObject()),
-            brains,
-        )
+
+        filtered_brains = filter(check_roles, brains)
 
         client_path = "/".join(self.context.getPhysicalPath())
-        results.extend(
-            [
+        cnt = len(results)
+        for brain in filtered_brains:
+            if cnt > 10:
+                break
+            cnt += 1
+            results.append(
                 self._get_entry(path.relpath(brain.getPath(), client_path), brain.Title)
-                for brain in filtered_brains
-            ]
-        )
+            )
         return results
 
     def __call__(self):

@@ -66,11 +66,20 @@ class MailingListsJson(BrowserView):
             query["Title"] = f"*{q}*"
 
         brains = catalog(**query)
+
+        filtered_brains = filter(
+            lambda brain: api.user.has_permission(
+                "Euphorie: Manage country", obj=brain.getObject()
+            )
+            or "Sector" in api.user.get_roles(obj=brain.getObject()),
+            brains,
+        )
+
         client_path = "/".join(self.context.getPhysicalPath())
         results.extend(
             [
                 self._get_entry(path.relpath(brain.getPath(), client_path), brain.Title)
-                for brain in brains
+                for brain in filtered_brains
             ]
         )
         return results

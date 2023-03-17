@@ -45,59 +45,81 @@ class MailingListsJson(BrowserView):
         The format fits pat-autosuggest. There is a special label for
         the "all" list.
         """
+        user_id = self.request.get("user_id")
+        if not user_id:
+            raise Unauthorized("Invalid user_id")
+        ticket = self.request.get("ticket")
+        if not ticket:
+            raise Unauthorized("Invalid ticket")
+
+        token = api.portal.get_registry_record("osha.oira.mailings.token", default="")
+
+        payload = "|".join([user_id, token])
+        expected = hashlib.sha1(payload.encode()).hexdigest()
+
+        if ticket != expected:
+            raise Unauthorized("Invalid ticket")
+
         q = self.request.get("q", "").strip().lower()
 
         results = []
         catalog = api.portal.get_tool(name="portal_catalog")
         all_users = self._get_entry("general", "All users")
 
-        if (
-            not q
-            or q in all_users["id"]
-            or q in all_users["text"].lower()
-            and api.user.has_permission("Manage portal content")
-        ):
-            results.append(all_users)
+        with api.env.adopt_user(user_id):
+            print(api.user.get_current().getUserId())
 
-        # FIXME: Search for native names of countries,
-        # e.g. `q=de` doesn't return Germany
-        query = {
-            "portal_type": ["euphorie.clientcountry", "euphorie.survey"],
-            "path": "/".join(self.context.getPhysicalPath()),
-            "sort_on": "sortable_title",
-            "review_state": "published",
-        }
+            if (
+                not q
+                or q in all_users["id"]
+                or q in all_users["text"].lower()
+                and api.user.has_permission("Manage portal content")
+            ):
+                results.append(all_users)
 
-        # Filter for query string if given. Else return all results.
-        if q:
-            query["Title"] = f"*{q}*"
+            # FIXME: Search for native names of countries,
+            # e.g. `q=de` doesn't return Germany
+            # TODO: also search for "euphorie.clientsector"?
+            query = {
+                "portal_type": ["euphorie.clientcountry", "euphorie.survey"],
+                "path": "/".join(self.context.getPhysicalPath()),
+                "sort_on": "sortable_title",
+                "review_state": "published",
+            }
 
-        brains = catalog(**query)
+            # Filter for query string if given. Else return all results.
+            if q:
+                query["Title"] = f"*{q}*"
 
-        def filter_items(brain):
-            obj = brain.getObject()
+            brains = catalog(**query)
 
-            if getattr(obj, "preview", False) or getattr(obj, "obsolete", False):
-                return False
+            def filter_items(brain):
+                obj = brain.getObject()
 
-            if api.user.has_permission("Euphorie: Manage country", obj=obj):
-                return True
+                if getattr(obj, "preview", False) or getattr(obj, "obsolete", False):
+                    return False
 
-            return {"Manager", "Sector", "CountryManager"} & set(
-                api.user.get_roles(obj=obj)
-            )
+                if api.user.has_permission("Euphorie: Manage country", obj=obj):
+                    return True
 
-        filtered_brains = filter(filter_items, brains)
+                return {"Manager", "Sector", "CountryManager"} & set(
+                    api.user.get_roles(obj=obj)
+                )
 
-        client_path = "/".join(self.context.getPhysicalPath())
-        cnt = len(results)
-        for brain in filtered_brains:
-            if cnt > 10:
-                break
-            cnt += 1
-            results.append(
-                self._get_entry(path.relpath(brain.getPath(), client_path), brain.Title)
-            )
+            filtered_brains = filter(filter_items, brains)
+
+            client_path = "/".join(self.context.getPhysicalPath())
+            cnt = len(results)
+            for brain in filtered_brains:
+                if cnt > 10:
+                    break
+                cnt += 1
+                results.append(
+                    self._get_entry(
+                        path.relpath(brain.getPath(), client_path), brain.Title
+                    )
+                )
+
         return results
 
     def __call__(self):

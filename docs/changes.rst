@@ -4,6 +4,9 @@ Changelog
 8.2.5 (unreleased)
 ------------------
 
+- Clean up the old guest sessions
+  (`#1029 <https://github.com/syslabcom/scrum/issues/1029>`_).
+  [ale-rt]
 - Statistics: Fix updating tool statistics.
   [reinhardt]
 - Statistics: Add newsletter statistics.

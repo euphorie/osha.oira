@@ -55,7 +55,7 @@ class MailingListsJson(BrowserView):
         token = api.portal.get_registry_record("osha.oira.mailings.token", default="")
 
         payload = "|".join([user_id, token])
-        expected = hashlib.sha1(payload.encode()).hexdigest()
+        expected = hashlib.blake2b(payload.encode()).hexdigest()
 
         if ticket != expected:
             raise Unauthorized("Invalid ticket")

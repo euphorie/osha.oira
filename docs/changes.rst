@@ -6,6 +6,8 @@ Changelog
 
 - Newsletter: Add a tool banner
   (`#1025 <https://github.com/syslabcom/scrum/issues/1025>`_).
+- Clean up the old guest sessions
+  (`#1029 <https://github.com/syslabcom/scrum/issues/1029>`_).
   [ale-rt]
 - Statistics: Fix updating tool statistics.
   [reinhardt]

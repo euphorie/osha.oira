@@ -57,12 +57,36 @@ WHERE guest_accounts.id = account.id
   AND guest_accounts.num_sessions = 0;
 """
 
+    remove_obsolete_sessions_sql = """
+select count(*) from account where account_type = 'guest' and loginname like 'guest-{year}-%';
+delete from
+    account
+where
+    id = any(
+        array(
+            select
+                id
+            from
+                account
+            where
+                account_type = 'guest'
+                and loginname like 'guest-{year}-%'
+            order by
+                id
+            limit
+                1000
+        )
+    );
+select count(*) from account where account_type = 'guest' and loginname like 'guest-{year}-%';
+"""  # noqa: E501
+
     def __call__(self):
         session.execute("BEGIN;")
         count_sql = "select count(*) from account where account_type = 'guest'"
         old_count = session.execute(count_sql).first()
         logger.warning(f"Current number of test sessions: {old_count[0]}")
         session.execute(self.sql)
+        session.execute(self.remove_obsolete_sessions_sql.format(year=2020))
         session.execute("COMMIT;")
         new_count = session.execute(count_sql).first()
         logger.warning(f"New number of test sessions: {new_count[0]}")

@@ -1,6 +1,8 @@
 from base64 import b64encode
 from euphorie.client.model import Account
+from euphorie.client.model import SurveySession
 from json import dumps
+from json import loads
 from os import path
 from osha.oira import _
 from osha.oira.client.model import NewsletterSubscription
@@ -170,6 +172,38 @@ class GroupToAddresses(BrowserView):
         Group paths are relative to the client, i.e. only ids ("fr") for
         countries.
         """
+        token = self.request.get("token", "")
+        if token != self.get_token():
+            raise Unauthorized("Invalid token")
+
+        self.request.response.setHeader("Content-type", "application/json")
+        return dumps(self.results)
+
+
+class RecipientLanguageMapping(BrowserView):
+    @property
+    def results(self):
+        recipients = self.request.get("recipients", "[]")
+        recipients = loads(recipients)
+        query = (
+            Session.query(Account.loginname, SurveySession.zodb_path)
+            .filter(Account.loginname.in_(recipients))
+            .distinct()
+        )
+
+        return {
+            account: path.partition("/")[0]
+            for account, path in query
+            if path.partition("/")[0] != "eu"
+        }
+
+    def get_token(self):
+        token = api.portal.get_registry_record("osha.oira.mailings.token")
+        if not token:
+            raise Unauthorized("Invalid token")
+        return token
+
+    def __call__(self):
         token = self.request.get("token", "")
         if token != self.get_token():
             raise Unauthorized("Invalid token")

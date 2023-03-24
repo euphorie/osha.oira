@@ -187,10 +187,10 @@ class RecipientLanguageMapping(BrowserView):
         recipients = loads(recipients)
         query = (
             Session.query(Account.loginname, SurveySession.zodb_path)
+            .join(SurveySession, Account.id == SurveySession.account_id)
             .filter(Account.loginname.in_(recipients))
             .distinct()
         )
-
         return {
             account: path.partition("/")[0]
             for account, path in query

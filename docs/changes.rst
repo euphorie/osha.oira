@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.2.5 (unreleased)
+8.2.5 (2023-03-27)
 ------------------
 
 - Clean up the old guest sessions

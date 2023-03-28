@@ -1,6 +1,7 @@
 from base64 import b64encode
 from euphorie.client.model import Account
 from euphorie.client.model import SurveySession
+from euphorie.content.country import ICountry
 from json import dumps
 from json import loads
 from os import path
@@ -30,8 +31,8 @@ class OSHAClientRedirect(BrowserView):
         )
 
 
-class MailingListsJson(BrowserView):
-    """Mailing lists (countries, in the future also sectors and tools)"""
+class BaseJson(BrowserView):
+    """Base for Quaive/OiRA json interface"""
 
     def _get_entry(self, list_id, title):
         encoded_title = b64encode(title.encode("utf-8")).decode("utf-8")
@@ -40,13 +41,9 @@ class MailingListsJson(BrowserView):
             "text": title,
         }
 
-    @property
-    def results(self):
-        """List of "mailing list" path/names.
-
-        The format fits pat-autosuggest. There is a special label for
-        the "all" list.
-        """
+    def validate_ticket(self):
+        """Authenticate the user specified by request parameters `user_id` and
+        `ticket`"""
         user_id = self.request.get("user_id")
         if not user_id:
             raise Unauthorized("Invalid user_id")
@@ -61,6 +58,30 @@ class MailingListsJson(BrowserView):
 
         if ticket != expected:
             raise Unauthorized("Invalid ticket")
+
+    def __call__(self):
+        """Returns a json meant to be consumed by pat-autosuggest.
+
+        The json lists container that will be used to generate "mailing
+        lists"
+        """
+        self.validate_ticket()
+        self.request.response.setHeader("Content-type", "application/json")
+        self.request.response.setHeader("Access-Control-Allow-Origin", "*")
+        return dumps(self.results)
+
+
+class MailingListsJson(BaseJson):
+    """Mailing lists (countries and tools, in the future also sectors)"""
+
+    @property
+    def results(self):
+        """List of "mailing list" path/names.
+
+        The format fits pat-autosuggest. There is a special label for
+        the "all" list.
+        """
+        user_id = self.request.get("user_id")
 
         q = self.request.get("q", "").strip().lower()
 
@@ -129,15 +150,32 @@ class MailingListsJson(BrowserView):
 
         return results
 
-    def __call__(self):
-        """Returns a json meant to be consumed by pat-autosuggest.
 
-        The json lists container that will be used to generate "mailing
-        lists"
+class LogosJson(BaseJson):
+    @property
+    def results(self):
+        """List of country logo URLs and country names.
+
+        The format fits pat-autosuggest.
         """
-        self.request.response.setHeader("Content-type", "application/json")
-        self.request.response.setHeader("Access-Control-Allow-Origin", "*")
-        return dumps(self.results)
+        user_id = self.request.get("user_id")
+        user = api.user.get(username=user_id)
+        sectors = api.portal.get().sectors
+        results = []
+        for country in sectors.objectValues():
+            if (
+                ICountry.providedBy(country)
+                and api.user.has_permission(
+                    "Euphorie: Manage country", user=user, obj=country
+                )
+                and country.image
+            ):
+                images = api.content.get_view(
+                    context=country, request=self.request, name="images"
+                )
+                scale = images.scale(fieldname="image", scale="large")
+                results.append(self._get_entry(scale.url, country.title))
+        return results
 
 
 class GroupToAddresses(BrowserView):

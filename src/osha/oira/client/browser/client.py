@@ -229,10 +229,15 @@ class RecipientLanguageMapping(BrowserView):
             .filter(Account.loginname.in_(recipients))
             .distinct()
         )
+
+        def get_country_and_language(zodb_path):
+            country = zodb_path.partition("/")[0]
+            # XXX Language should come from user preferences in the future
+            language = country if country != "eu" else api.portal.get_default_language()
+            return {"country": country, "language": language}
+
         return {
-            account: path.partition("/")[0]
-            for account, path in query
-            if path.partition("/")[0] != "eu"
+            account: get_country_and_language(zodb_path) for account, zodb_path in query
         }
 
     def get_token(self):

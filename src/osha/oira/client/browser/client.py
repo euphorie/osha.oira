@@ -230,10 +230,12 @@ class RecipientLanguageMapping(BrowserView):
             .distinct()
         )
 
+        default_language = api.portal.get_default_language()
+
         def get_country_and_language(zodb_path):
             country = zodb_path.partition("/")[0]
             # XXX Language should come from user preferences in the future
-            language = country if country != "eu" else api.portal.get_default_language()
+            language = country if country != "eu" else default_language
             return {"country": country, "language": language}
 
         return {

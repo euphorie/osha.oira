@@ -1,7 +1,13 @@
 Changelog
 =========
 
-8.2.5 (unreleased)
+8.2.6 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+8.2.5 (2023-03-27)
 ------------------
 
 - Newsletter: Add a tool banner

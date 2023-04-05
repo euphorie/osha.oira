@@ -14,7 +14,6 @@ from z3c.saconfig import Session
 from zExceptions import Unauthorized
 
 import hashlib
-import re
 
 
 class OSHAClientRedirect(BrowserView):
@@ -298,13 +297,6 @@ class NewsletterUnsubscribe(BrowserView):
         token = self.request.form.get("token")
 
         self.success = False
-
-        email_regex = re.compile(r"[A-Za-z0-9@.]*")
-        if not email_regex.fullmatch(email):
-            return self.index()
-        group_regex = re.compile(r"[A-Za-z0-9/\-_]*")
-        if group and not group_regex.fullmatch(group):
-            return self.index()
 
         message = "|".join((email, group or "*", self.get_token()))
         digest = hashlib.sha256(message.encode()).hexdigest()

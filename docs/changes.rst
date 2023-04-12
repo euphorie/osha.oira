@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.2.6 (unreleased)
+8.2.6 (2023-04-12)
 ------------------
 
 - Fix the header in the form that manages the ldap users

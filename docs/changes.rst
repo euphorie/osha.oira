@@ -1,10 +1,17 @@
 Changelog
 =========
 
-8.2.6 (unreleased)
+8.2.7 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+8.2.6 (2023-04-12)
+------------------
+
+- Fix the header in the form that manages the ldap users
+  [ale-rt]
 
 
 8.2.5 (2023-03-27)

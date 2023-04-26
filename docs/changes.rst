@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.2.7 (unreleased)
+8.3.0 (2023-04-26)
 ------------------
 
 - Newsletter support

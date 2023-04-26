@@ -1,6 +1,9 @@
 from base64 import b64encode
 from euphorie.client.model import Account
+from euphorie.client.model import SurveySession
+from euphorie.content.country import ICountry
 from json import dumps
+from json import loads
 from os import path
 from osha.oira import _
 from osha.oira.client.model import NewsletterSubscription
@@ -11,7 +14,6 @@ from z3c.saconfig import Session
 from zExceptions import Unauthorized
 
 import hashlib
-import re
 
 
 class OSHAClientRedirect(BrowserView):
@@ -28,8 +30,8 @@ class OSHAClientRedirect(BrowserView):
         )
 
 
-class MailingListsJson(BrowserView):
-    """Mailing lists (countries, in the future also sectors and tools)"""
+class BaseJson(BrowserView):
+    """Base for Quaive/OiRA json interface"""
 
     def _get_entry(self, list_id, title):
         encoded_title = b64encode(title.encode("utf-8")).decode("utf-8")
@@ -38,39 +40,23 @@ class MailingListsJson(BrowserView):
             "text": title,
         }
 
-    @property
-    def results(self):
-        """List of "mailing list" path/names.
+    def validate_ticket(self):
+        """Authenticate the user specified by request parameters `user_id` and
+        `ticket`"""
+        user_id = self.request.get("user_id")
+        if not user_id:
+            raise Unauthorized("Invalid user_id")
+        ticket = self.request.get("ticket")
+        if not ticket:
+            raise Unauthorized("Invalid ticket")
 
-        The format fits pat-autosuggest. There is a special label for
-        the "all" list.
-        """
-        q = self.request.get("q", "").strip().lower()
-        if not q:
-            return []
+        token = api.portal.get_registry_record("osha.oira.mailings.token", default="")
 
-        results = []
-        catalog = api.portal.get_tool(name="portal_catalog")
-        all_users = self._get_entry("general", "All users")
-        if q in all_users["id"] or q in all_users["text"].lower():
-            results.append(all_users)
+        payload = "|".join([user_id, token])
+        expected = hashlib.blake2b(payload.encode()).hexdigest()
 
-        # FIXME: Search for native names of countries,
-        # e.g. `q=de` doesn't return Germany
-        brains = catalog(
-            portal_type=["euphorie.clientcountry", "euphorie.survey"],
-            Title=f"*{q}*",
-            path="/".join(self.context.getPhysicalPath()),
-            sort_on="sortable_title",
-        )
-        client_path = "/".join(self.context.getPhysicalPath())
-        results.extend(
-            [
-                self._get_entry(path.relpath(brain.getPath(), client_path), brain.Title)
-                for brain in brains
-            ]
-        )
-        return results
+        if ticket != expected:
+            raise Unauthorized("Invalid ticket")
 
     def __call__(self):
         """Returns a json meant to be consumed by pat-autosuggest.
@@ -78,9 +64,116 @@ class MailingListsJson(BrowserView):
         The json lists container that will be used to generate "mailing
         lists"
         """
+        self.validate_ticket()
         self.request.response.setHeader("Content-type", "application/json")
         self.request.response.setHeader("Access-Control-Allow-Origin", "*")
         return dumps(self.results)
+
+
+class MailingListsJson(BaseJson):
+    """Mailing lists (countries and tools, in the future also sectors)"""
+
+    @property
+    def results(self):
+        """List of "mailing list" path/names.
+
+        The format fits pat-autosuggest. There is a special label for
+        the "all" list.
+        """
+        user_id = self.request.get("user_id")
+
+        q = self.request.get("q", "").strip().lower()
+
+        results = []
+        catalog = api.portal.get_tool(name="portal_catalog")
+        all_users = self._get_entry("general", "All users")
+
+        with api.env.adopt_user(user_id):
+            print(api.user.get_current().getUserId())
+
+            if (
+                not q or q in all_users["id"] or q in all_users["text"].lower()
+            ) and api.user.has_permission("Manage portal content"):
+                results.append(all_users)
+
+            # FIXME: Search for native names of countries,
+            # e.g. `q=de` doesn't return Germany
+            # TODO: also search for "euphorie.clientsector"?
+            query = {
+                "portal_type": ["euphorie.clientcountry", "euphorie.survey"],
+                "path": "/".join(self.context.getPhysicalPath()),
+                "sort_on": "sortable_title",
+            }
+
+            # Filter for query string if given. Else return all results.
+            if q:
+                query["Title"] = f"*{q}*"
+
+            brains = catalog(**query)
+
+            sectors = api.portal.get().sectors
+
+            def filter_items(brain):
+                obj = brain.getObject()
+
+                if getattr(obj, "preview", False) or getattr(obj, "obsolete", False):
+                    return False
+
+                counterpart = sectors.restrictedTraverse(
+                    brain.getPath().split("/")[3:], None
+                )
+                if not counterpart:
+                    return False
+
+                if api.user.has_permission("Euphorie: Manage country", obj=counterpart):
+                    return True
+
+                return {"Manager", "Sector", "CountryManager"} & set(
+                    api.user.get_roles(obj=counterpart)
+                )
+
+            filtered_brains = filter(filter_items, brains)
+
+            client_path = "/".join(self.context.getPhysicalPath())
+            cnt = len(results)
+            for brain in filtered_brains:
+                if cnt > 10:
+                    break
+                cnt += 1
+                results.append(
+                    self._get_entry(
+                        path.relpath(brain.getPath(), client_path), brain.Title
+                    )
+                )
+
+        return results
+
+
+class LogosJson(BaseJson):
+    @property
+    def results(self):
+        """List of country logo URLs and country names.
+
+        The format fits pat-autosuggest.
+        """
+        user_id = self.request.get("user_id")
+        user = api.user.get(username=user_id)
+        sectors = api.portal.get().sectors
+        results = []
+        for country in sectors.objectValues():
+            if (
+                ICountry.providedBy(country)
+                and api.user.has_permission(
+                    "Euphorie: Manage country", user=user, obj=country
+                )
+                and country.image
+            ):
+                images = api.content.get_view(
+                    context=country, request=self.request, name="images"
+                )
+                scale = images.scale(fieldname="image", scale="large")
+                results.append(self._get_entry(scale.url, country.title))
+        return results
 
 
 class GroupToAddresses(BrowserView):
@@ -123,10 +216,50 @@ class GroupToAddresses(BrowserView):
         return dumps(self.results)
 
 
+class RecipientLanguageMapping(BrowserView):
+    @property
+    def results(self):
+        recipients = self.request.get("recipients", "[]")
+        recipients = loads(recipients)
+        query = (
+            Session.query(Account.loginname, SurveySession.zodb_path)
+            .join(SurveySession, Account.id == SurveySession.account_id)
+            .filter(Account.loginname.in_(recipients))
+            .distinct()
+        )
+
+        default_language = api.portal.get_default_language()
+
+        def get_country_and_language(zodb_path):
+            country = zodb_path.partition("/")[0]
+            # XXX Language should come from user preferences in the future
+            language = country if country != "eu" else default_language
+            return {"country": country, "language": language}
+
+        return {
+            account: get_country_and_language(zodb_path) for account, zodb_path in query
+        }
+
+    def get_token(self):
+        token = api.portal.get_registry_record("osha.oira.mailings.token")
+        if not token:
+            raise Unauthorized("Invalid token")
+        return token
+
+    def __call__(self):
+        token = self.request.get("token", "")
+        if token != self.get_token():
+            raise Unauthorized("Invalid token")
+
+        self.request.response.setHeader("Content-type", "application/json")
+        return dumps(self.results)
+
+
 class NewsletterUnsubscribe(BrowserView):
     """Unsubscribe a user from a mailing list.
 
-    This should work without logging in, i.e. via an authentication token.
+    This should work without logging in, i.e. via an authentication
+    token.
     """
 
     index = ViewPageTemplateFile("templates/unsubscribe.pt")
@@ -164,13 +297,6 @@ class NewsletterUnsubscribe(BrowserView):
         token = self.request.form.get("token")
 
         self.success = False
-
-        email_regex = re.compile(r"[A-Za-z0-9@.]*")
-        if not email_regex.fullmatch(email):
-            return self.index()
-        group_regex = re.compile(r"[A-Za-z0-9/\-_]*")
-        if group and not group_regex.fullmatch(group):
-            return self.index()
 
         message = "|".join((email, group or "*", self.get_token()))
         digest = hashlib.sha256(message.encode()).hexdigest()

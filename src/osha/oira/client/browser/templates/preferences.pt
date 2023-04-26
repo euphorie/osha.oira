@@ -165,7 +165,7 @@
                   <p class="label-fragment-description"
                      i18n:translate="description_sector_news"
                   >
-							News about the tool &lsquo;${tool}&rsquo;.
+                    News about the tool &lsquo;<tal:i18n i18n:name="tool">${tool}</tal:i18n>&rsquo;.
                   </p>
 
                 </label>

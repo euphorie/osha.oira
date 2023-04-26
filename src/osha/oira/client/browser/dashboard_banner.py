@@ -1,3 +1,4 @@
+from euphorie.client.country import IClientCountry
 from euphorie.client.model import get_current_account
 from osha.oira.client.model import NewsletterSetting
 from Products.Five import BrowserView
@@ -8,6 +9,13 @@ class View(BrowserView):
     """View for the dashboard banner."""
 
     _value = "call-for-action-banner-disabled"
+
+    @property
+    def preferences_url(self):
+        for obj in self.context.aq_chain:
+            if IClientCountry.providedBy(obj):
+                return f"{obj.absolute_url()}/@@preferences#content"
+        return ""
 
     def available(self):
         """Check if the user already closed the banner in the past."""

@@ -17,6 +17,8 @@ Changelog
 8.2.5 (2023-03-27)
 ------------------
 
+- Newsletter: Add a tool banner
+  (`#1025 <https://github.com/syslabcom/scrum/issues/1025>`_).
 - Clean up the old guest sessions
   (`#1029 <https://github.com/syslabcom/scrum/issues/1029>`_).
   [ale-rt]

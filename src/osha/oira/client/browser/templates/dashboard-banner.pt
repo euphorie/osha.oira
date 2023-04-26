@@ -1,6 +1,6 @@
 <div class="canvas-banner"
      tal:define="
-       preferences_url string:${here/absolute_url}/@@preferences#content;
+       preferences_url view/preferences_url;
      "
      tal:condition="view/available"
      i18n:domain="euphorie"
@@ -24,7 +24,7 @@
         >personal preferences page</a>.
       </p>
       <form class="button-bar pat-inject"
-            action="${here/absolute_url}/@@dashboard-banner#content"
+            action="${here/absolute_url}/@@${view/__name__}#content"
             method="post"
       >
         <a class="pat-inject pat-button default"

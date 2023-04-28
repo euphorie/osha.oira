@@ -4,36 +4,54 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       meta:interpolation="true"
-      i18n:domain="euphorie">
+      i18n:domain="euphorie"
+>
 
-    <br clear="all"/>
-    <p id="nuplone_appendix"
-            tal:define="lang here/@@plone_portal_state/language;
-                        media_url string:++resource++euphorie.resources/oira/style"
-            style="padding-bottom: 20px; padding-left: 220px; padding-top: 10em;">
+  <br clear="all" />
+  <p id="nuplone_appendix"
+     style="padding-bottom: 20px; padding-left: 220px; padding-top: 10em;"
+     tal:define="
+       lang here/@@plone_portal_state/language;
+       media_url string:++resource++euphorie.resources/oira/style;
+     "
+  >
 
-        <img style="margin-right: 15px" src="${media_url}/footer_logo.png"/>
+    <img src="${media_url}/footer_logo.png"
+         style="margin-right: 15px"
+    />
 
-        <tal:span i18n:translate="appendix_produced_by">
-            Produced by EU-OSHA.</tal:span>
+    <tal:span i18n:translate="appendix_produced_by">
+      Produced by EU-OSHA.</tal:span>
         |
-        <a tal:attributes="href string:http://client.oiraproject.eu/about?set_language=$lang"
-           i18n:translate="appendix_about">About</a>
+    <a tal:attributes="
+         href string:http://client.oiraproject.eu/about?set_language=$lang;
+       "
+       i18n:translate="appendix_about"
+    >About</a>
         |
-        <a tal:attributes="href string:http://client.oiraproject.eu/terms-and-conditions?set_language=$lang"
-           i18n:translate="appendix_privacy">Privacy</a>
+    <a tal:attributes="
+         href string:http://client.oiraproject.eu/terms-and-conditions?set_language=$lang;
+       "
+       i18n:translate="appendix_privacy"
+    >Privacy</a>
         |
-        <a tal:attributes="href string:http://client.oiraproject.eu/disclaimer?set_language=$lang"
-           i18n:translate="appendix_disclaimer">Disclaimer</a>
+    <a tal:attributes="
+         href string:http://client.oiraproject.eu/disclaimer?set_language=$lang;
+       "
+       i18n:translate="appendix_disclaimer"
+    >Disclaimer</a>
         |
-        <a href="http://www.gnu.org/licenses/gpl.html"
-            i18n:translate="appendix_gpl_license">GPL License</a>
+    <a href="http://www.gnu.org/licenses/gpl.html"
+       i18n:translate="appendix_gpl_license"
+    >GPL License</a>
         |
-        <a href="http://creativecommons.org/licenses/by-sa/2.5/"
-            i18n:attributes="alt"
-            alt="CC License">
-            <img style="margin-right: 15px; cursor: pointer;" src="${media_url}/creative_commons.png"/>
-        </a>
-    </p>
+    <a alt="CC License"
+       href="http://creativecommons.org/licenses/by-sa/2.5/"
+       i18n:attributes="alt"
+    >
+      <img src="${media_url}/creative_commons.png"
+           style="margin-right: 15px; cursor: pointer;"
+      />
+    </a>
+  </p>
 </span>
-

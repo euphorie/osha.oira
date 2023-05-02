@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.3.1 (unreleased)
+8.3.1 (2023-05-02)
 ------------------
 
 - Fix the footer link to terms and conditions.

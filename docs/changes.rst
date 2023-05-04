@@ -4,7 +4,7 @@ Changelog
 8.3.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Update translations.
 
 
 8.3.1 (2023-05-02)

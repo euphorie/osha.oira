@@ -1,42 +1,62 @@
 <div class="canvas-banner"
-     tal:define="
-       preferences_url view/preferences_url;
-     "
+     id="canvas-banner"
      tal:condition="view/available"
      i18n:domain="euphorie"
 >
-  <article class="banner-body">
+  <article class="banner-body"
+           tal:define="
+             message view/message;
+             num_messages python:len(view.messages);
+           "
+  >
     <a class="pat-inject image-link"
-       href="${preferences_url}"
+       href="${message/url}"
     >
-      <img alt="Preferences"
-           src="${here/portal_url}/++resource++euphorie.resources/oira/style/mail-tunnel.jpg"
+      <img alt="${message/img_alt}"
+           src="${here/portal_url}/${message/img_src}"
            i18n:attributes="alt"
       />
     </a>
     <section class="banner-text">
-      <p i18n:translate="">
-        Keep updated with the latest developments by signing up for our newsletter on your
-        <a class="pat-inject"
-           href="${preferences_url}"
-           i18n:name="target"
-           i18n:translate=""
-        >personal preferences page</a>.
+      <p class="float-after banner-counter"
+         tal:condition="python:num_messages &gt; 1"
+      >
+        ${python:view.message_id + 1}/${num_messages}
       </p>
+      <p tal:content="structure message/text"></p>
       <form class="button-bar pat-inject"
             action="${here/absolute_url}/@@${view/__name__}#content"
             method="post"
       >
         <a class="pat-inject pat-button default"
-           href="${preferences_url}"
-           i18n:translate=""
-        >Sign up</a>
+           href="${message/url}"
+        >${message/button_text}</a>
         <button class="pat-button"
                 name="hide_banner"
                 type="submit"
                 value="1"
                 i18n:translate=""
         >Hide this message</button>
+        <div class="float-after button-set clustered"
+             tal:define="
+               previous_id python: (view.message_id - 1) % num_messages;
+               next_id python: (view.message_id + 1) % num_messages;
+             "
+             tal:condition="python:num_messages &gt; 1"
+        >
+          <a class="pat-inject pat-button no-label icon icon-angle-left"
+             href="${here/absolute_url}/@@${view/__name__}?message=${previous_id}#canvas-banner"
+             i18n:translate="label_previous_tip"
+          >Previous tip</a>
+          <a class="pat-inject pat-button no-label icon icon-angle-right"
+             href="${here/absolute_url}/@@${view/__name__}?message=${next_id}#canvas-banner"
+             i18n:translate="label_next_tip"
+          >Next tip</a>
+        </div>
+        <input name="value"
+               type="hidden"
+               value="${message/disabled_key}"
+        />
       </form>
     </section>
   </article>

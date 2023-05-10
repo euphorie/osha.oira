@@ -4,6 +4,8 @@ Changelog
 8.3.2 (unreleased)
 ------------------
 
+- Message of the day: Duplication
+  (`#1137 <https://github.com/syslabcom/scrum/issues/1137>`_).
 - Update translations.
 
 

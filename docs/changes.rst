@@ -7,6 +7,7 @@ Changelog
 - Message of the day: Duplication
   (`#1137 <https://github.com/syslabcom/scrum/issues/1137>`_).
 - Update translations.
+- Do not break when the session is displayed read_only
 
 
 8.3.1 (2023-05-02)

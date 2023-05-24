@@ -3,6 +3,7 @@ from euphorie.client.browser.session import Start
 from logging import getLogger
 from osha.oira.client.interfaces import IOSHAClientSkinLayer
 from osha.oira.client.model import NewsletterSubscription
+from plone import api
 from plone.memoize.view import memoize
 from plone.z3cform.fieldsets.extensible import FormExtender
 from plone.z3cform.fieldsets.interfaces import IFormExtender
@@ -41,10 +42,16 @@ class IOSHAStartExtender(Interface):
 class OSHAStartExtender(FormExtender):
     fields = Fields(IOSHAStartExtender)
 
+    @property
+    @memoize
+    def webhelpers(self):
+        return api.content.get_view("webhelpers", self.context, self.request)
+
     @memoize
     def update(self):
         """Omit the group id field if we are not the creator."""
-        self.add(self.fields)
+        if self.webhelpers.can_edit_session:
+            self.add(self.fields)
 
 
 class OSHAStart(Start):
@@ -82,8 +89,9 @@ class OSHAStart(Start):
 
     def updateWidgets(self):
         super().updateWidgets()
-        if not self.is_tool_subscription_enabled():
-            self.widgets["tool_subscription"].value = []
+        if "tool_subscription" in self.widgets:
+            if not self.is_tool_subscription_enabled():
+                self.widgets["tool_subscription"].value = []
 
     def _set_data(self, data):
         tool_subscription = bool(data.pop("tool_subscription", None))

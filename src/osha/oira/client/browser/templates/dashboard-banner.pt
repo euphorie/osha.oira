@@ -30,6 +30,7 @@
       >
         <a class="pat-inject pat-button default"
            href="${message/url}"
+           data-pat-inject="${message/data_pat_inject}"
         >${message/button_text}</a>
         <button class="pat-button"
                 name="hide_banner"

@@ -43,6 +43,10 @@ class View(BrowserView):
                         "feature."
                     )
                 ),
+                "data_pat_inject": (
+                    "source: #content; target: #content; "
+                    "history: record; scroll: #duplication"
+                ),
                 "disabled_key": "duplication-banner-disabled",
             },
             {
@@ -56,6 +60,9 @@ class View(BrowserView):
                         "our newsletter on your ${target}",
                         mapping={"target": preferences_link},
                     )
+                ),
+                "data_pat_inject": (
+                    "source: #content; target: #content; history: record"
                 ),
                 "disabled_key": "call-for-action-banner-disabled",
             },

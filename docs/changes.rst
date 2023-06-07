@@ -4,6 +4,10 @@ Changelog
 8.3.2 (unreleased)
 ------------------
 
+- Show solution descriptions (also known as measure titles) in the Excel action plan,
+  except for France and Italy
+  (`#1245 <https://github.com/syslabcom/scrum/issues/1245>`_)
+  [reinhardt]
 - Message of the day: Duplication
   (`#1137 <https://github.com/syslabcom/scrum/issues/1137>`_).
 - Update translations.

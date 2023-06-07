@@ -10,6 +10,7 @@ from openpyxl.workbook import Workbook
 from osha.oira import _
 from pkg_resources import resource_filename
 from plone import api
+from plone.memoize.view import memoize
 from plonetheme.nuplone.utils import formatDate
 from sqlalchemy import sql
 from z3c.saconfig import Session
@@ -93,6 +94,14 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         ),
         ("risk", "comment", _("report_timeline_comment", default="Comments")),
     ]
+
+    @property
+    @memoize
+    def use_solution_description(self):
+        country = self.webhelpers.country
+        if country in ["it", "fr"]:
+            return False
+        return True
 
     def create_workbook(self):
         """Create an Excel workbook containing the all risks and measures."""
@@ -185,6 +194,13 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                 if type == "measure":
                     value = getattr(measure, key, None)
                     if key == "action":
+                        if (
+                            self.use_solution_description
+                            and zodb_node
+                            and measure.solution_id in zodb_node
+                        ):
+                            description = zodb_node[measure.solution_id].description
+                            value = f"{description}\n{value}"
                         value = portal_transforms.convertToData("text/plain", value)
                 elif type == "risk":
                     value = getattr(risk, key, None)

@@ -148,71 +148,98 @@ if not _instrumented:
 
     _instrumented = True
 
-node = orm.aliased(model.SurveyTreeItem)
-SKIPPED_MODULE = sql.exists().where(
-    sql.and_(
-        model.SurveyTreeItem.type == "module",
-        node.session_id == model.SurveyTreeItem.session_id,
-        node.skip_children == True,  # noqa: E712
+
+def _SKIPPED_MODULE_factory():
+    node = orm.aliased(model.SurveyTreeItem)
+    return sql.exists().where(
+        sql.and_(
+            model.SurveyTreeItem.type == "module",
+            node.session_id == model.SurveyTreeItem.session_id,
+            node.skip_children == True,  # noqa: E712
+        )
     )
-)
 
-UNANSWERED_RISKS_FILTER = sql.and_(
-    model.SurveyTreeItem.type == "risk",
-    sql.exists(
-        sql.select([model.Risk.sql_risk_id]).where(
-            sql.and_(
-                model.Risk.sql_risk_id == model.SurveyTreeItem.id,
-                model.Risk.identification == None,  # noqa: E711
+
+SKIPPED_MODULE = _SKIPPED_MODULE_factory()
+
+
+def _UNANSWERED_RISKS_FILTER_factory():
+    Risk_ = orm.aliased(model.Risk)
+    return sql.and_(
+        model.SurveyTreeItem.type == "risk",
+        sql.exists(
+            sql.select([Risk_.sql_risk_id]).where(
+                sql.and_(
+                    Risk_.sql_risk_id == model.SurveyTreeItem.id,
+                    Risk_.identification == None,  # noqa: E711
+                )
             )
-        )
-    ),
-)
+        ),
+    )
 
-MODULE_WITH_UNANSWERED_RISKS_FILTER = sql.and_(
-    model.SurveyTreeItem.type == "module",
-    model.SurveyTreeItem.skip_children == False,  # noqa: E/12
-    sql.exists(
-        sql.select([node.id]).where(
-            sql.and_(
-                node.session_id == model.SurveyTreeItem.session_id,
-                node.id == model.Risk.sql_risk_id,
-                node.type == "risk",
-                model.Risk.identification == None,  # noqa: E711
-                node.depth > model.SurveyTreeItem.depth,
-                node.path.like(model.SurveyTreeItem.path + "%"),
+
+UNANSWERED_RISKS_FILTER = _UNANSWERED_RISKS_FILTER_factory()
+
+
+def MODULE_WITH_UNANSWERED_RISKS_FILTER_factory():
+    node = orm.aliased(model.SurveyTreeItem)
+    return sql.and_(
+        model.SurveyTreeItem.type == "module",
+        model.SurveyTreeItem.skip_children == False,  # noqa: E/12
+        sql.exists(
+            sql.select([node.id]).where(
+                sql.and_(
+                    node.session_id == model.SurveyTreeItem.session_id,
+                    node.id == model.Risk.sql_risk_id,
+                    node.type == "risk",
+                    model.Risk.identification == None,  # noqa: E711
+                    node.depth > model.SurveyTreeItem.depth,
+                    node.path.like(model.SurveyTreeItem.path + "%"),
+                )
             )
-        )
-    ),
-)
+        ),
+    )
 
-MODULE_WITH_RISKS_NOT_PRESENT_FILTER = sql.and_(
-    model.SurveyTreeItem.type == "module",
-    model.SurveyTreeItem.skip_children == False,  # noqa: E712
-    sql.exists(
-        sql.select([node.id]).where(
-            sql.and_(
-                node.session_id == model.SurveyTreeItem.session_id,
-                node.id == model.Risk.sql_risk_id,
-                node.type == "risk",
-                model.Risk.identification == "yes",
-                node.depth > model.SurveyTreeItem.depth,
-                node.path.like(model.SurveyTreeItem.path + "%"),
+
+MODULE_WITH_UNANSWERED_RISKS_FILTER = MODULE_WITH_UNANSWERED_RISKS_FILTER_factory()
+
+
+def MODULE_WITH_RISKS_NOT_PRESENT_FILTER_factory():
+    node = orm.aliased(model.SurveyTreeItem)
+    return sql.and_(
+        model.SurveyTreeItem.type == "module",
+        model.SurveyTreeItem.skip_children == False,  # noqa: E712
+        sql.exists(
+            sql.select([node.id]).where(
+                sql.and_(
+                    node.session_id == model.SurveyTreeItem.session_id,
+                    node.id == model.Risk.sql_risk_id,
+                    node.type == "risk",
+                    model.Risk.identification == "yes",
+                    node.depth > model.SurveyTreeItem.depth,
+                    node.path.like(model.SurveyTreeItem.path + "%"),
+                )
             )
-        )
-    ),
-)
+        ),
+    )
 
-RISK_NOT_PRESENT_FILTER = sql.and_(
-    model.SurveyTreeItem.type == "risk",
-    sql.exists(
-        sql.select([model.Risk.sql_risk_id]).where(
-            sql.and_(
-                model.Risk.sql_risk_id == model.SurveyTreeItem.id,
-                model.Risk.identification == "yes",
+
+MODULE_WITH_RISKS_NOT_PRESENT_FILTER = MODULE_WITH_RISKS_NOT_PRESENT_FILTER_factory()
+
+
+def RISK_NOT_PRESENT_FILTER_factory():
+    Risk_ = orm.aliased(model.Risk)
+    return sql.and_(
+        model.SurveyTreeItem.type == "risk",
+        sql.exists(
+            sql.select([Risk_.sql_risk_id]).where(
+                sql.and_(
+                    Risk_.sql_risk_id == model.SurveyTreeItem.id,
+                    Risk_.identification == "yes",
+                )
             )
-        )
-    ),
-)
+        ),
+    )
 
-del node
+
+RISK_NOT_PRESENT_FILTER = RISK_NOT_PRESENT_FILTER_factory()

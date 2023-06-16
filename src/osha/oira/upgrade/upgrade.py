@@ -3,7 +3,7 @@ from euphorie.client.browser.publish import EnableCustomRisks
 from euphorie.client.country import IClientCountry
 from euphorie.client.sector import IClientSector
 from euphorie.content.survey import ISurvey
-from euphorie.deployment.upgrade.utils import TableExists
+from euphorie.deployment.upgrade.utils import has_table
 from osha.oira import _
 from plone import api
 from plone.dexterity import utils
@@ -97,7 +97,7 @@ def sql_create_all(context):
 
 def alter_time_column(context):
     session = Session()
-    if TableExists(session, "statistics_login"):
+    if has_table("statistics_login"):
         session.execute(
             "ALTER TABLE statistics_login ALTER COLUMN time SET DEFAULT CURRENT_TIMESTAMP"  # noqa: E501
         )
@@ -129,7 +129,7 @@ def update_types_information(context):
 
 def increase_statistics_surveys_path_column(context):
     session = Session()
-    if TableExists(session, "statistics_surveys"):
+    if has_table("statistics_surveys"):
         session.execute(
             "ALTER TABLE statistics_surveys ALTER COLUMN zodb_path TYPE varchar(512)"
         )
@@ -141,7 +141,7 @@ def increase_statistics_surveys_path_column(context):
 
 def increase_sessions_path_column(context):
     session = Session()
-    if TableExists(session, "session"):
+    if has_table("session"):
         session.execute("ALTER TABLE session ALTER COLUMN zodb_path TYPE varchar(512)")
         model.metadata.create_all(session.bind, checkfirst=True)
         datamanager.mark_changed(session)
@@ -217,7 +217,7 @@ def enable_custom_risks_on_all_modules(context):
                             )
     log.info("All %d published surveys can now have custom risks." % count)
     session = Session()
-    if TableExists(session, "tree"):
+    if has_table("tree"):
         session.execute(
             "UPDATE tree SET title = 'title_other_risks' WHERE zodb_path ='custom-risks'"  # noqa: E501
         )
@@ -236,7 +236,7 @@ def install_private_resources(context):
 
 def drop_constraint_no_duplicates_in_tree(context):
     session = Session()
-    if TableExists(session, "tree"):
+    if has_table("tree"):
         session.execute("ALTER TABLE tree DROP CONSTRAINT no_duplicates")
         model.metadata.create_all(session.bind, checkfirst=True)
         datamanager.mark_changed(session)

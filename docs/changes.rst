@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.3.3 (unreleased)
+8.4.0 (unreleased)
 ------------------
 
 - Show solution descriptions (also known as measure titles) in the Excel action plan,

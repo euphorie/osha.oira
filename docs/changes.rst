@@ -1,6 +1,12 @@
 Changelog
 =========
 
+8.3.2 (unreleased)
+------------------
+
+- Update french translations
+
+
 8.3.1 (2023-05-02)
 ------------------
 

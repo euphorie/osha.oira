@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-03-07 12:11+0000\n"
+"POT-Creation-Date: 2023-06-19 11:38+0000\n"
 "PO-Revision-Date: 2013-12-18 09:59+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:61
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:36
-msgid "${certificate/title}"
-msgstr ""
 
 #: osha.oira/src/osha/oira/content/country.py:62
 msgid ""
@@ -58,7 +53,7 @@ msgid ""
 msgstr ""
 "Żgur li tixtieq tħassar din il-miżura? Din l-azzjoni mhijiex riversibbli."
 
-#: osha.oira/src/osha/oira/tiles/templates/footer.pt:32
+#: osha.oira/src/osha/oira/tiles/templates/footer.pt:48
 msgid "CC License"
 msgstr "Liċenzja CC"
 
@@ -79,8 +74,8 @@ msgstr ""
 msgid "Change email address"
 msgstr "Ibdel l-indirizz elettroniku"
 
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:113
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:90
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:111
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:88
 msgid "Completed"
 msgstr ""
 
@@ -98,13 +93,13 @@ msgid ""
 "you've conducted this risk assessment."
 msgstr ""
 
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:93
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:69
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:91
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:67
 msgid "Country"
 msgstr "Pajjiż"
 
 #. Default: "Custom risks"
-#: osha.oira/src/osha/oira/client/browser/report.py:224
+#: osha.oira/src/osha/oira/client/browser/report.py:240
 msgid "Custom risks"
 msgstr ""
 
@@ -138,8 +133,8 @@ msgstr ""
 msgid "Explanatory sentence"
 msgstr ""
 
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:72
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:47
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:70
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:45
 msgid ""
 "For conducting a risk assessment with the tool &ldquo;${title}&rdquo; on "
 "${date}."
@@ -164,11 +159,17 @@ msgstr ""
 msgid "Information"
 msgstr "Informazzjoni"
 
-#: osha.oira/src/osha/oira/client/browser/templates/dashboard-banner.pt:20
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:58
 msgid ""
 "Keep updated with the latest developments by signing up for our newsletter "
 "on your ${target}."
-msgstr "Żomm ruħek aġġornat bl-aħħar żviluppi billi tirreġistra għan-newsletter tagħna fuq ${target}."
+msgstr ""
+"Żomm ruħek aġġornat bl-aħħar żviluppi billi tirreġistra għan-newsletter "
+"tagħna fuq ${target}."
+
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:39
+msgid "Learn more…"
+msgstr ""
 
 #: osha.oira/src/osha/oira/content/browser/templates/solution_view.pt:12
 msgid "Measure"
@@ -190,6 +191,10 @@ msgstr ""
 msgid "OiRA website"
 msgstr ""
 
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:34
+msgid "Photocopier"
+msgstr ""
+
 #: osha.oira/src/osha/oira/manual_translations.py:11
 msgid ""
 "Please bear in mind that by changing the email address, your login name will "
@@ -198,7 +203,7 @@ msgstr ""
 "Żomm f'moħħok li meta tibdel l-indirizz elettroniku, l-isem tal-login "
 "tiegħek jinbidel ukoll."
 
-#: osha.oira/src/osha/oira/client/browser/templates/dashboard-banner.pt:12
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:54
 msgid "Preferences"
 msgstr ""
 
@@ -224,7 +229,7 @@ msgstr ""
 msgid "Severity"
 msgstr "Severità"
 
-#: osha.oira/src/osha/oira/client/browser/templates/dashboard-banner.pt:30
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:56
 msgid "Sign up"
 msgstr "Irreġistra"
 
@@ -232,7 +237,7 @@ msgstr "Irreġistra"
 msgid "Standard solutions"
 msgstr "Soluzzjonijiet standard"
 
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:100
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:98
 msgid "The certificate you have requested is not available."
 msgstr ""
 
@@ -265,6 +270,10 @@ msgstr ""
 "Dan huwa l-algoritmu ta' valutazzjoni rakkomandat, ibbażat fuq il-metodu "
 "Kinney"
 
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:41
+msgid "Tip: Re-use existing risk assessments with the duplication feature."
+msgstr ""
+
 #: osha.oira/src/osha/oira/client/browser/templates/status-tooltip.pt:44
 #: osha.oira/src/osha/oira/client/browser/templates/status.pt:63
 msgid "View certificate"
@@ -295,32 +304,26 @@ msgid "algorithm_kinney"
 msgstr "It-tliet kriterji standard"
 
 #. Default: "About"
-#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:21
-#: osha.oira/src/osha/oira/tiles/templates/footer.pt:20
+#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:29
+#: osha.oira/src/osha/oira/tiles/templates/footer.pt:26
 msgid "appendix_about"
 msgstr "Dwar"
 
 #. Default: "Disclaimer"
-#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:23
-#: osha.oira/src/osha/oira/tiles/templates/footer.pt:26
+#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:39
+#: osha.oira/src/osha/oira/tiles/templates/footer.pt:38
 msgid "appendix_disclaimer"
 msgstr "Ċaħda ta’ responsabbiltà"
 
 #. Default: "GPL License"
-#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:24
-#: osha.oira/src/osha/oira/tiles/templates/footer.pt:29
+#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:44
+#: osha.oira/src/osha/oira/tiles/templates/footer.pt:44
 msgid "appendix_gpl_license"
 msgstr "Liċenzja GPL"
 
-#. Default: "Privacy"
-#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:22
-#: osha.oira/src/osha/oira/tiles/templates/footer.pt:23
-msgid "appendix_privacy"
-msgstr "Privatezza"
-
 #. Default: "Produced by EU-OSHA."
-#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:16
-#: osha.oira/src/osha/oira/tiles/templates/footer.pt:17
+#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:24
+#: osha.oira/src/osha/oira/tiles/templates/footer.pt:23
 msgid "appendix_produced_by"
 msgstr "Prodotta minn EU-OSHA."
 
@@ -399,7 +402,9 @@ msgstr ""
 #. Default: "E-mails, such as password reset e-mails, that might be needed to guarantee your access to OiRA."
 #: osha.oira/src/osha/oira/client/browser/templates/preferences.pt:82
 msgid "description_functional_emails"
-msgstr "E-mails, bħal e-mails ta' reset tal-password, li jistgħu jkunu meħtieġa biex jiggarantixxu l-aċċess tiegħek għall-OiRA."
+msgstr ""
+"E-mails, bħal e-mails ta' reset tal-password, li jistgħu jkunu meħtieġa biex "
+"jiggarantixxu l-aċċess tiegħek għall-OiRA."
 
 #. Default: "Occasional news with updates about the OiRA application."
 #: osha.oira/src/osha/oira/client/browser/templates/preferences.pt:101
@@ -414,7 +419,7 @@ msgstr ""
 "żżidhom issa:"
 
 #. Default: "News about the tool &lsquo;${tool}&rsquo;."
-#: osha.oira/src/osha/oira/client/browser/templates/preferences.pt:165
+#: osha.oira/src/osha/oira/client/browser/templates/preferences.pt:168
 msgid "description_sector_news"
 msgstr "Aħbarijiet dwar l-għodda &lsquo;${tool}&rsquo;."
 
@@ -690,12 +695,12 @@ msgid "intro_add_surveygroup"
 msgstr "Din il-formola tippermettilek toħloq Għodda tal-OiRA ġdida."
 
 #. Default: "Action Plan"
-#: osha.oira/src/osha/oira/client/browser/report.py:108
+#: osha.oira/src/osha/oira/client/browser/report.py:117
 msgid "label_action_plan"
 msgstr "Il-Pjan ta' Azzjoni"
 
 #. Default: "Budget"
-#: osha.oira/src/osha/oira/client/browser/report.py:85
+#: osha.oira/src/osha/oira/client/browser/report.py:86
 msgid "label_action_plan_budget"
 msgstr "Baġit"
 
@@ -715,15 +720,15 @@ msgid "label_choose_surveygroup"
 msgstr "Agħżel Għodda tal-OiRA"
 
 #. Default: "Company identification number"
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:97
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:95
 #: osha.oira/src/osha/oira/client/browser/templates/certificate.pt:55
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:74
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:72
 msgid "label_company_identification_number"
 msgstr ""
 
 #. Default: "Company name"
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:95
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:71
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:93
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:69
 msgid "label_company_name"
 msgstr ""
 
@@ -737,9 +742,15 @@ msgstr "Pajjiż"
 msgid "label_country_news"
 msgstr "Aħbarijiet għal pajjiżi"
 
+#. Default: "Data protection notice"
+#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:34
+#: osha.oira/src/osha/oira/tiles/templates/footer.pt:32
+msgid "label_data_protection_notice"
+msgstr ""
+
 #. Default: "Date"
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:100
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:76
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:98
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:74
 msgid "label_date"
 msgstr ""
 
@@ -796,7 +807,7 @@ msgid "label_functional_emails"
 msgstr "E-mails funzjonali"
 
 #. Default: "General OiRA news"
-#: osha.oira/src/osha/oira/client/browser/client.py:144
+#: osha.oira/src/osha/oira/client/browser/client.py:277
 #: osha.oira/src/osha/oira/client/browser/templates/preferences.pt:98
 msgid "label_general_news"
 msgstr "Aħbarijiet ġenerali tal-OiRA"
@@ -827,7 +838,7 @@ msgid "label_mailings"
 msgstr "Posta Elettronika"
 
 #. Default: "Level of expertise and/or requirements needed"
-#: osha.oira/src/osha/oira/client/browser/report.py:46
+#: osha.oira/src/osha/oira/client/browser/report.py:47
 msgid "label_measure_requirements"
 msgstr "Livell ta' kompetenza u/jew rekwiżiti meħtieġa"
 
@@ -837,14 +848,19 @@ msgstr "Livell ta' kompetenza u/jew rekwiżiti meħtieġa"
 msgid "label_next"
 msgstr "Li jmiss"
 
+#. Default: "Next tip"
+#: osha.oira/src/osha/oira/client/browser/templates/dashboard-banner.pt:51
+msgid "label_next_tip"
+msgstr ""
+
 #. Default: "No"
 #: osha.oira/src/osha/oira/client/browser/templates/module_identification.pt:124
 msgid "label_no"
 msgstr "Le"
 
 #. Default: "OiRA tool"
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:91
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:67
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:89
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:65
 msgid "label_oira_tool"
 msgstr ""
 
@@ -853,18 +869,23 @@ msgstr ""
 msgid "label_previous"
 msgstr "Preċedenti"
 
+#. Default: "Previous tip"
+#: osha.oira/src/osha/oira/client/browser/templates/dashboard-banner.pt:47
+msgid "label_previous_tip"
+msgstr ""
+
 #. Default: "Date of editing"
-#: osha.oira/src/osha/oira/client/browser/report.py:145
+#: osha.oira/src/osha/oira/client/browser/report.py:154
 msgid "label_report_date"
 msgstr ""
 
 #. Default: "Risk number"
-#: osha.oira/src/osha/oira/client/browser/report.py:60
+#: osha.oira/src/osha/oira/client/browser/report.py:61
 msgid "label_risk_number"
 msgstr ""
 
 #. Default: "Section"
-#: osha.oira/src/osha/oira/client/browser/report.py:54
+#: osha.oira/src/osha/oira/client/browser/report.py:55
 msgid "label_section"
 msgstr ""
 
@@ -889,12 +910,12 @@ msgid "label_survey_source"
 msgstr "Kif tixtieq tibda"
 
 #. Default: "Title"
-#: osha.oira/src/osha/oira/client/browser/report.py:140
+#: osha.oira/src/osha/oira/client/browser/report.py:149
 msgid "label_title"
 msgstr ""
 
 #. Default: "Send me occasional e-mails with news about this tool"
-#: osha.oira/src/osha/oira/client/browser/session.py:28
+#: osha.oira/src/osha/oira/client/browser/session.py:29
 msgid "label_tool_subscription"
 msgstr "Ibgħatli e-mails okkażjonali b'aħbarijiet dwar din l-għodda"
 
@@ -986,7 +1007,7 @@ msgstr ""
 msgid "password_reset"
 msgstr ""
 
-#: osha.oira/src/osha/oira/client/browser/templates/dashboard-banner.pt:20
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:24
 #: osha.oira/src/osha/oira/client/browser/templates/unsubscribe.pt:42
 msgid "personal preferences page"
 msgstr "il-paġna tal-preferenzi personali tiegħek"
@@ -1001,47 +1022,47 @@ msgid "question_other_risks"
 msgstr ""
 
 #. Default: "Comments"
-#: osha.oira/src/osha/oira/client/browser/report.py:94
+#: osha.oira/src/osha/oira/client/browser/report.py:95
 msgid "report_timeline_comment"
 msgstr ""
 
 #. Default: "End date"
-#: osha.oira/src/osha/oira/client/browser/report.py:78
+#: osha.oira/src/osha/oira/client/browser/report.py:79
 msgid "report_timeline_end_date"
 msgstr "Data tat-tmiem"
 
 #. Default: "Measure"
-#: osha.oira/src/osha/oira/client/browser/report.py:65
+#: osha.oira/src/osha/oira/client/browser/report.py:66
 msgid "report_timeline_measure"
 msgstr "Miżura"
 
 #. Default: "Priority"
-#: osha.oira/src/osha/oira/client/browser/report.py:61
+#: osha.oira/src/osha/oira/client/browser/report.py:62
 msgid "report_timeline_priority"
 msgstr ""
 
 #. Default: "Status (planned, in process, implemented)"
-#: osha.oira/src/osha/oira/client/browser/report.py:89
+#: osha.oira/src/osha/oira/client/browser/report.py:90
 msgid "report_timeline_progress"
 msgstr "Stat (ippjanata, għaddeja, implimentata)"
 
 #. Default: "Responsible"
-#: osha.oira/src/osha/oira/client/browser/report.py:83
+#: osha.oira/src/osha/oira/client/browser/report.py:84
 msgid "report_timeline_responsible"
 msgstr "Responsabbli"
 
 #. Default: "Description of the risk"
-#: osha.oira/src/osha/oira/client/browser/report.py:58
+#: osha.oira/src/osha/oira/client/browser/report.py:59
 msgid "report_timeline_risk_title"
 msgstr ""
 
 #. Default: "Start date"
-#: osha.oira/src/osha/oira/client/browser/report.py:73
+#: osha.oira/src/osha/oira/client/browser/report.py:74
 msgid "report_timeline_start_date"
 msgstr "Id-data tal-bidu"
 
 #. Default: "Timeline"
-#: osha.oira/src/osha/oira/client/browser/report.py:103
+#: osha.oira/src/osha/oira/client/browser/report.py:112
 msgid "report_timeline_title"
 msgstr "Skeda ta' żmien"
 
@@ -1193,6 +1214,9 @@ msgstr "Din il-link mhix valida jew skadiet."
 #: osha.oira/src/osha/oira/client/browser/templates/unsubscribe.pt:30
 msgid "unsubscribe_success"
 msgstr ""
+
+#~ msgid "appendix_privacy"
+#~ msgstr "Privatezza"
 
 #~ msgid "No"
 #~ msgstr "Le"

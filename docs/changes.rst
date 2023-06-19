@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.3.2 (unreleased)
+8.3.3 (unreleased)
 ------------------
 
 - Show solution descriptions (also known as measure titles) in the Excel action plan,
@@ -12,6 +12,12 @@ Changelog
   (`#1137 <https://github.com/syslabcom/scrum/issues/1137>`_).
 - Update translations.
 - Do not break when the session is displayed read_only
+
+
+8.3.2 (2023-06-19)
+------------------
+
+- Update french translations
 
 
 8.3.1 (2023-05-02)

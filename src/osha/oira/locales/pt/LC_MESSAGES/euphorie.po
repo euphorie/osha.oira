@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osha.oira 1.2.23.dev0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-03-07 12:11+0000\n"
+"POT-Creation-Date: 2023-06-19 11:38+0000\n"
 "PO-Revision-Date: 2013-08-15 11:33+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 "X-Generator: Poedit 1.5.4\n"
-
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:61
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:36
-msgid "${certificate/title}"
-msgstr ""
 
 #: osha.oira/src/osha/oira/content/country.py:62
 msgid ""
@@ -60,7 +55,7 @@ msgstr ""
 "Tem a certeza de que pretende apagar esta medida? Esta ação não pode ser "
 "invertida."
 
-#: osha.oira/src/osha/oira/tiles/templates/footer.pt:32
+#: osha.oira/src/osha/oira/tiles/templates/footer.pt:48
 msgid "CC License"
 msgstr "Licença CC "
 
@@ -81,8 +76,8 @@ msgstr ""
 msgid "Change email address"
 msgstr "Alterar endereço de e-mail"
 
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:113
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:90
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:111
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:88
 msgid "Completed"
 msgstr ""
 
@@ -102,13 +97,13 @@ msgstr ""
 "Copie o link que se segue para provar a quem possa interessar que realizou "
 "esta avaliação de riscos."
 
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:93
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:69
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:91
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:67
 msgid "Country"
 msgstr "País"
 
 #. Default: "Custom risks"
-#: osha.oira/src/osha/oira/client/browser/report.py:224
+#: osha.oira/src/osha/oira/client/browser/report.py:240
 msgid "Custom risks"
 msgstr ""
 
@@ -142,8 +137,8 @@ msgstr ""
 msgid "Explanatory sentence"
 msgstr ""
 
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:72
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:47
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:70
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:45
 msgid ""
 "For conducting a risk assessment with the tool &ldquo;${title}&rdquo; on "
 "${date}."
@@ -170,11 +165,17 @@ msgstr ""
 msgid "Information"
 msgstr "Informação"
 
-#: osha.oira/src/osha/oira/client/browser/templates/dashboard-banner.pt:20
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:58
 msgid ""
 "Keep updated with the latest developments by signing up for our newsletter "
 "on your ${target}."
-msgstr "Mantenha-se atualizado sobre os últimos desenvolvimentos inscrevendo-se na newsletter, na sua área pessoal, em ${target}."
+msgstr ""
+"Mantenha-se atualizado sobre os últimos desenvolvimentos inscrevendo-se na "
+"newsletter, na sua área pessoal, em ${target}."
+
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:39
+msgid "Learn more…"
+msgstr ""
 
 #: osha.oira/src/osha/oira/content/browser/templates/solution_view.pt:12
 msgid "Measure"
@@ -196,6 +197,10 @@ msgstr ""
 msgid "OiRA website"
 msgstr "sítio oficial OiRA"
 
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:34
+msgid "Photocopier"
+msgstr ""
+
 #: osha.oira/src/osha/oira/manual_translations.py:11
 msgid ""
 "Please bear in mind that by changing the email address, your login name will "
@@ -204,7 +209,7 @@ msgstr ""
 "Tenha em atenção que ao alterar o endereço de e-mail, o nome de login será "
 "também alterado."
 
-#: osha.oira/src/osha/oira/client/browser/templates/dashboard-banner.pt:12
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:54
 msgid "Preferences"
 msgstr ""
 
@@ -230,7 +235,7 @@ msgstr ""
 msgid "Severity"
 msgstr "Gravidade"
 
-#: osha.oira/src/osha/oira/client/browser/templates/dashboard-banner.pt:30
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:56
 msgid "Sign up"
 msgstr "Inscreva-se"
 
@@ -238,7 +243,7 @@ msgstr "Inscreva-se"
 msgid "Standard solutions"
 msgstr "Soluções padrão"
 
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:100
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:98
 msgid "The certificate you have requested is not available."
 msgstr ""
 
@@ -270,6 +275,10 @@ msgid ""
 msgstr ""
 "Este é o algoritmos de avaliação recomendado, com base no método Kinney "
 
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:41
+msgid "Tip: Re-use existing risk assessments with the duplication feature."
+msgstr ""
+
 #: osha.oira/src/osha/oira/client/browser/templates/status-tooltip.pt:44
 #: osha.oira/src/osha/oira/client/browser/templates/status.pt:63
 msgid "View certificate"
@@ -300,32 +309,26 @@ msgid "algorithm_kinney"
 msgstr "Três critérios padrão"
 
 #. Default: "About"
-#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:21
-#: osha.oira/src/osha/oira/tiles/templates/footer.pt:20
+#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:29
+#: osha.oira/src/osha/oira/tiles/templates/footer.pt:26
 msgid "appendix_about"
 msgstr "Sobre"
 
 #. Default: "Disclaimer"
-#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:23
-#: osha.oira/src/osha/oira/tiles/templates/footer.pt:26
+#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:39
+#: osha.oira/src/osha/oira/tiles/templates/footer.pt:38
 msgid "appendix_disclaimer"
 msgstr "Isenção de responsabilidade"
 
 #. Default: "GPL License"
-#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:24
-#: osha.oira/src/osha/oira/tiles/templates/footer.pt:29
+#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:44
+#: osha.oira/src/osha/oira/tiles/templates/footer.pt:44
 msgid "appendix_gpl_license"
 msgstr "Licença GPL "
 
-#. Default: "Privacy"
-#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:22
-#: osha.oira/src/osha/oira/tiles/templates/footer.pt:23
-msgid "appendix_privacy"
-msgstr "Privacidade"
-
 #. Default: "Produced by EU-OSHA."
-#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:16
-#: osha.oira/src/osha/oira/tiles/templates/footer.pt:17
+#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:24
+#: osha.oira/src/osha/oira/tiles/templates/footer.pt:23
 msgid "appendix_produced_by"
 msgstr "Elaborada por EU-OSHA."
 
@@ -403,7 +406,9 @@ msgstr ""
 #. Default: "E-mails, such as password reset e-mails, that might be needed to guarantee your access to OiRA."
 #: osha.oira/src/osha/oira/client/browser/templates/preferences.pt:82
 msgid "description_functional_emails"
-msgstr "E-mails, tais como e-mails de redefinição de palavra-passe, podem ser necessários para garantir o seu acesso à OiRA."
+msgstr ""
+"E-mails, tais como e-mails de redefinição de palavra-passe, podem ser "
+"necessários para garantir o seu acesso à OiRA."
 
 #. Default: "Occasional news with updates about the OiRA application."
 #: osha.oira/src/osha/oira/client/browser/templates/preferences.pt:101
@@ -418,7 +423,7 @@ msgstr ""
 "apossibilidade de adicioná-los agora:"
 
 #. Default: "News about the tool &lsquo;${tool}&rsquo;."
-#: osha.oira/src/osha/oira/client/browser/templates/preferences.pt:165
+#: osha.oira/src/osha/oira/client/browser/templates/preferences.pt:168
 msgid "description_sector_news"
 msgstr "Notícias sobre a ferramenta &lsquo;${tool}&rsquo;."
 
@@ -693,12 +698,12 @@ msgid "intro_add_surveygroup"
 msgstr "Este formulário permite criar uma nova Ferramenta OiRA."
 
 #. Default: "Action Plan"
-#: osha.oira/src/osha/oira/client/browser/report.py:108
+#: osha.oira/src/osha/oira/client/browser/report.py:117
 msgid "label_action_plan"
 msgstr "Plano de Ação"
 
 #. Default: "Budget"
-#: osha.oira/src/osha/oira/client/browser/report.py:85
+#: osha.oira/src/osha/oira/client/browser/report.py:86
 msgid "label_action_plan_budget"
 msgstr "Orçamento"
 
@@ -718,15 +723,15 @@ msgid "label_choose_surveygroup"
 msgstr "Escolher uma Ferramenta OiRA"
 
 #. Default: "Company identification number"
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:97
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:95
 #: osha.oira/src/osha/oira/client/browser/templates/certificate.pt:55
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:74
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:72
 msgid "label_company_identification_number"
 msgstr "Número de Identificação de Pessoa Coletiva (NIPC)"
 
 #. Default: "Company name"
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:95
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:71
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:93
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:69
 msgid "label_company_name"
 msgstr "Nome da empresa"
 
@@ -740,9 +745,15 @@ msgstr "País"
 msgid "label_country_news"
 msgstr "Notícias nacionais"
 
+#. Default: "Data protection notice"
+#: osha.oira/src/osha/oira/client/browser/templates/appendix.pt:34
+#: osha.oira/src/osha/oira/tiles/templates/footer.pt:32
+msgid "label_data_protection_notice"
+msgstr ""
+
 #. Default: "Date"
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:100
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:76
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:98
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:74
 msgid "label_date"
 msgstr "Data"
 
@@ -799,7 +810,7 @@ msgid "label_functional_emails"
 msgstr "E-mail utilizado na OiRA"
 
 #. Default: "General OiRA news"
-#: osha.oira/src/osha/oira/client/browser/client.py:144
+#: osha.oira/src/osha/oira/client/browser/client.py:277
 #: osha.oira/src/osha/oira/client/browser/templates/preferences.pt:98
 msgid "label_general_news"
 msgstr "Notícias gerais da OiRA"
@@ -830,7 +841,7 @@ msgid "label_mailings"
 msgstr "Correio eletrónico"
 
 #. Default: "Level of expertise and/or requirements needed"
-#: osha.oira/src/osha/oira/client/browser/report.py:46
+#: osha.oira/src/osha/oira/client/browser/report.py:47
 msgid "label_measure_requirements"
 msgstr "Nível de competência e/ou requisitos necessários"
 
@@ -840,14 +851,19 @@ msgstr "Nível de competência e/ou requisitos necessários"
 msgid "label_next"
 msgstr "Seguinte"
 
+#. Default: "Next tip"
+#: osha.oira/src/osha/oira/client/browser/templates/dashboard-banner.pt:51
+msgid "label_next_tip"
+msgstr ""
+
 #. Default: "No"
 #: osha.oira/src/osha/oira/client/browser/templates/module_identification.pt:124
 msgid "label_no"
 msgstr "Não"
 
 #. Default: "OiRA tool"
-#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:91
-#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:67
+#: osha.oira/src/osha/oira/client/browser/templates/certificate-print.pt:89
+#: osha.oira/src/osha/oira/client/browser/templates/public-certificate.pt:65
 msgid "label_oira_tool"
 msgstr ""
 
@@ -856,18 +872,23 @@ msgstr ""
 msgid "label_previous"
 msgstr "Anterior"
 
+#. Default: "Previous tip"
+#: osha.oira/src/osha/oira/client/browser/templates/dashboard-banner.pt:47
+msgid "label_previous_tip"
+msgstr ""
+
 #. Default: "Date of editing"
-#: osha.oira/src/osha/oira/client/browser/report.py:145
+#: osha.oira/src/osha/oira/client/browser/report.py:154
 msgid "label_report_date"
 msgstr ""
 
 #. Default: "Risk number"
-#: osha.oira/src/osha/oira/client/browser/report.py:60
+#: osha.oira/src/osha/oira/client/browser/report.py:61
 msgid "label_risk_number"
 msgstr ""
 
 #. Default: "Section"
-#: osha.oira/src/osha/oira/client/browser/report.py:54
+#: osha.oira/src/osha/oira/client/browser/report.py:55
 msgid "label_section"
 msgstr ""
 
@@ -892,12 +913,12 @@ msgid "label_survey_source"
 msgstr "Como pretende começar"
 
 #. Default: "Title"
-#: osha.oira/src/osha/oira/client/browser/report.py:140
+#: osha.oira/src/osha/oira/client/browser/report.py:149
 msgid "label_title"
 msgstr ""
 
 #. Default: "Send me occasional e-mails with news about this tool"
-#: osha.oira/src/osha/oira/client/browser/session.py:28
+#: osha.oira/src/osha/oira/client/browser/session.py:29
 msgid "label_tool_subscription"
 msgstr "Receber e-mails ocasionais com notícias sobre esta ferramenta"
 
@@ -909,7 +930,8 @@ msgstr "Sim"
 #. Default: "Manage your newsletter subsriptions on your ${target}."
 #: osha.oira/src/osha/oira/client/browser/templates/unsubscribe.pt:42
 msgid "link_preferences"
-msgstr "Pode gerir as subscrições das newsletters na sua área pessoal, em ${target}."
+msgstr ""
+"Pode gerir as subscrições das newsletters na sua área pessoal, em ${target}."
 
 #. Default: "You may get the best results if you upload a logo as a ${transparent} PNG file of at least 100 pixels in height. Uploading larger images is fine, the logo will be scaled down to the right size automatically."
 #: osha.oira/src/osha/oira/content/browser/templates/sector_edit.pt:61
@@ -988,7 +1010,7 @@ msgstr "A sua palavra-passe para confirmação"
 msgid "password_reset"
 msgstr ""
 
-#: osha.oira/src/osha/oira/client/browser/templates/dashboard-banner.pt:20
+#: osha.oira/src/osha/oira/client/browser/dashboard_banner.py:24
 #: osha.oira/src/osha/oira/client/browser/templates/unsubscribe.pt:42
 msgid "personal preferences page"
 msgstr "configurações"
@@ -1003,47 +1025,47 @@ msgid "question_other_risks"
 msgstr ""
 
 #. Default: "Comments"
-#: osha.oira/src/osha/oira/client/browser/report.py:94
+#: osha.oira/src/osha/oira/client/browser/report.py:95
 msgid "report_timeline_comment"
 msgstr ""
 
 #. Default: "End date"
-#: osha.oira/src/osha/oira/client/browser/report.py:78
+#: osha.oira/src/osha/oira/client/browser/report.py:79
 msgid "report_timeline_end_date"
 msgstr "Data Limite"
 
 #. Default: "Measure"
-#: osha.oira/src/osha/oira/client/browser/report.py:65
+#: osha.oira/src/osha/oira/client/browser/report.py:66
 msgid "report_timeline_measure"
 msgstr "Medida"
 
 #. Default: "Priority"
-#: osha.oira/src/osha/oira/client/browser/report.py:61
+#: osha.oira/src/osha/oira/client/browser/report.py:62
 msgid "report_timeline_priority"
 msgstr ""
 
 #. Default: "Status (planned, in process, implemented)"
-#: osha.oira/src/osha/oira/client/browser/report.py:89
+#: osha.oira/src/osha/oira/client/browser/report.py:90
 msgid "report_timeline_progress"
 msgstr "Estado (pendente/em curso/concluído)"
 
 #. Default: "Responsible"
-#: osha.oira/src/osha/oira/client/browser/report.py:83
+#: osha.oira/src/osha/oira/client/browser/report.py:84
 msgid "report_timeline_responsible"
 msgstr "Responsável"
 
 #. Default: "Description of the risk"
-#: osha.oira/src/osha/oira/client/browser/report.py:58
+#: osha.oira/src/osha/oira/client/browser/report.py:59
 msgid "report_timeline_risk_title"
 msgstr ""
 
 #. Default: "Start date"
-#: osha.oira/src/osha/oira/client/browser/report.py:73
+#: osha.oira/src/osha/oira/client/browser/report.py:74
 msgid "report_timeline_start_date"
 msgstr "Data de início"
 
 #. Default: "Timeline"
-#: osha.oira/src/osha/oira/client/browser/report.py:103
+#: osha.oira/src/osha/oira/client/browser/report.py:112
 msgid "report_timeline_title"
 msgstr "Calendário"
 
@@ -1192,6 +1214,9 @@ msgstr "Esta ligação é inválida ou expirou."
 #: osha.oira/src/osha/oira/client/browser/templates/unsubscribe.pt:30
 msgid "unsubscribe_success"
 msgstr ""
+
+#~ msgid "appendix_privacy"
+#~ msgstr "Privacidade"
 
 #~ msgid "No"
 #~ msgstr "Não"

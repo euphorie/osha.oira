@@ -57,7 +57,7 @@ class View(BrowserView):
                 "text": api.portal.translate(
                     _(
                         "Keep updated with the latest developments by signing up for "
-                        "our newsletter on your ${target}",
+                        "our newsletter on your ${target}.",
                         mapping={"target": preferences_link},
                     )
                 ),

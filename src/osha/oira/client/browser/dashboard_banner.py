@@ -27,6 +27,23 @@ class View(BrowserView):
         )
         return [
             {
+                "img_src": "++resource++euphorie.resources/oira/style/mail-tunnel.jpg",
+                "img_alt": api.portal.translate(_("Preferences")),
+                "url": self.preferences_url,
+                "button_text": api.portal.translate(_("Sign up")),
+                "text": api.portal.translate(
+                    _(
+                        "Keep updated with the latest developments by signing up for "
+                        "our newsletter on your ${target}.",
+                        mapping={"target": preferences_link},
+                    )
+                ),
+                "data_pat_inject": (
+                    "source: #content; target: #content; history: record"
+                ),
+                "disabled_key": "call-for-action-banner-disabled",
+            },
+            {
                 "img_src": (
                     "++resource++euphorie.resources/oira/style/"
                     "andrea-piacquadio-copier.jpg"
@@ -48,23 +65,6 @@ class View(BrowserView):
                     "history: record; scroll: #duplication"
                 ),
                 "disabled_key": "duplication-banner-disabled",
-            },
-            {
-                "img_src": "++resource++euphorie.resources/oira/style/mail-tunnel.jpg",
-                "img_alt": api.portal.translate(_("Preferences")),
-                "url": self.preferences_url,
-                "button_text": api.portal.translate(_("Sign up")),
-                "text": api.portal.translate(
-                    _(
-                        "Keep updated with the latest developments by signing up for "
-                        "our newsletter on your ${target}.",
-                        mapping={"target": preferences_link},
-                    )
-                ),
-                "data_pat_inject": (
-                    "source: #content; target: #content; history: record"
-                ),
-                "disabled_key": "call-for-action-banner-disabled",
             },
         ]
 

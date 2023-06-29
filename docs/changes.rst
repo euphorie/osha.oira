@@ -1,7 +1,13 @@
 Changelog
 =========
 
-8.3.2 (unreleased)
+8.3.3 (unreleased)
+------------------
+
+- Change the URL used to serve the header images for the newsletters
+
+
+8.3.2 (2023-06-19)
 ------------------
 
 - Update french translations

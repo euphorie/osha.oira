@@ -231,4 +231,12 @@
 
   <adapter factory=".session.OSHAStartExtender" />
 
+  <browser:page
+      name="mail_header_image"
+      for="euphorie.client.country.IClientCountry"
+      class=".client.MailHeaderImage"
+      permission="zope.Public"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
 </configure>

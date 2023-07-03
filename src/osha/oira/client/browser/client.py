@@ -174,6 +174,7 @@ class LogosJson(BaseJson):
                     "Euphorie: Manage country", user=user, obj=country
                 )
                 and country.image
+                and country.id in client_folder
             ):
                 client_country = client_folder[country.id]
                 url = f"{client_country.absolute_url()}/@@mail_header_image/{country.image.filename}"  # noqa: E501

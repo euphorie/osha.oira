@@ -11,6 +11,7 @@ Changelog
 - Message of the day: Duplication
   (`#1137 <https://github.com/syslabcom/scrum/issues/1137>`_).
 - Update translations.
+- Change the URL used to serve the header images for the newsletters
 - Do not break when the session is displayed read_only
 
 

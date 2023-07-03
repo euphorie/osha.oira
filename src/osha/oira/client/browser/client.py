@@ -8,12 +8,18 @@ from os import path
 from osha.oira import _
 from osha.oira.client.model import NewsletterSubscription
 from plone import api
+from plone.scale.scale import scaleImage
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from z3c.saconfig import Session
 from zExceptions import Unauthorized
+from zope.interface import implementer
+from zope.publisher.interfaces import IPublishTraverse
 
 import hashlib
+
+
+_marker = object()
 
 
 class OSHAClientRedirect(BrowserView):
@@ -160,6 +166,7 @@ class LogosJson(BaseJson):
         user = api.user.get(username=user_id)
         sectors = api.portal.get().sectors
         results = []
+        client_folder = api.portal.get().client
         for country in sectors.objectValues():
             if (
                 ICountry.providedBy(country)
@@ -167,13 +174,45 @@ class LogosJson(BaseJson):
                     "Euphorie: Manage country", user=user, obj=country
                 )
                 and country.image
+                and country.id in client_folder
             ):
-                images = api.content.get_view(
-                    context=country, request=self.request, name="images"
-                )
-                scale = images.scale(fieldname="image", scale="large")
-                results.append(self._get_entry(scale.url, country.title))
+                client_country = client_folder[country.id]
+                url = f"{client_country.absolute_url()}/@@mail_header_image/{country.image.filename}"  # noqa: E501
+                results.append(self._get_entry(url, country.title))
         return results
+
+
+@implementer(IPublishTraverse)
+class MailHeaderImage(BrowserView):
+    def publishTraverse(self, request, name):
+        # URL looks like /eu/filename.jpg
+        # The first time we enter here name is "eu" and we want to record it
+        # in self._country.
+        # The following times we are not interested in the name anymore
+        if getattr(self, "country", _marker) is _marker:
+            self._country = name
+        return self
+
+    @property
+    def country(self):
+        return api.portal.get().sectors[self.context.id]
+
+    @property
+    def scaled_image(self):
+        """Return the scaled image"""
+        image = self.country.image
+        width, height = image.getImageSize()
+        ratio = width / height
+        return scaleImage(image.data, width=int(100 * ratio), height=100)[0]
+
+    def __call__(self):
+        """
+        Take the image field and scale it to 100px using PIL
+        """
+        data = self.scaled_image
+        self.request.response.setHeader("Content-type", self.country.image.contentType)
+        self.request.response.setHeader("Content-length", len(data))
+        return data
 
 
 class GroupToAddresses(BrowserView):

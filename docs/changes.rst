@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.3.3 (unreleased)
+8.3.3 (2023-07-03)
 ------------------
 
 - Change the URL used to serve the header images for the newsletters

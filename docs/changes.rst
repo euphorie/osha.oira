@@ -4,7 +4,8 @@ Changelog
 9.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added an upgrade step to enable the locking feature
+  [ale-rt]
 
 
 9.0.0 (2023-07-25)

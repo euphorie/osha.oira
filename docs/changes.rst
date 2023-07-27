@@ -1,7 +1,7 @@
 Changelog
 =========
 
-9.0.1 (unreleased)
+9.0.1 (2023-07-27)
 ------------------
 
 - Added an upgrade step to enable the locking feature

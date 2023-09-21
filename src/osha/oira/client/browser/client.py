@@ -6,6 +6,7 @@ from json import dumps
 from json import loads
 from os import path
 from osha.oira import _
+from osha.oira.client.interfaces import IOSHAClientSkinLayer
 from osha.oira.client.model import NewsletterSubscription
 from plone import api
 from plone.scale.scale import scaleImage
@@ -14,6 +15,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from z3c.saconfig import Session
 from zExceptions import Unauthorized
 from zope.interface import implementer
+from zope.interface import noLongerProvides
 from zope.publisher.interfaces import IPublishTraverse
 
 import hashlib
@@ -93,6 +95,9 @@ class MailingListsJson(BaseJson):
         results = []
         catalog = api.portal.get_tool(name="portal_catalog")
         all_users = self._get_entry("general", "All users")
+
+        # Make sure we don't get a client user - we want to check backend permissions
+        noLongerProvides(self.request, IOSHAClientSkinLayer)
 
         with api.env.adopt_user(user_id):
             print(api.user.get_current().getUserId())

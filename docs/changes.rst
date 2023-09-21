@@ -4,7 +4,9 @@ Changelog
 9.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Mailing lists: Fix for user handling
+  (`#1557 <https://github.com/syslabcom/scrum/issues/1557>`_)
+  [reinhardt]
 
 
 9.0.1 (2023-07-27)

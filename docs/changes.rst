@@ -1,7 +1,7 @@
 Changelog
 =========
 
-9.0.2 (unreleased)
+9.0.2 (2023-09-25)
 ------------------
 
 - Mailing lists: Fix for user handling

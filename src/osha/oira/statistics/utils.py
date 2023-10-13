@@ -339,6 +339,8 @@ class UpdateStatisticsDatabases:
                 NewsletterSubscription.zodb_path,
                 sqlalchemy.func.count(NewsletterSubscription.zodb_path),
             )
+            .join(Account)
+            .filter(Account.account_type != "guest")
             .group_by(NewsletterSubscription.zodb_path)
             .order_by(NewsletterSubscription.zodb_path)
         )

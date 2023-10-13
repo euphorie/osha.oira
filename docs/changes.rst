@@ -4,7 +4,9 @@ Changelog
 9.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Statistics: Exclude guest user newsletter subscriptions
+  (`#1637 <https://github.com/syslabcom/scrum/issues/1637>`_)
+  [reinhardt]
 
 
 9.0.2 (2023-09-25)

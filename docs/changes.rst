@@ -1,7 +1,7 @@
 Changelog
 =========
 
-9.0.3 (unreleased)
+9.0.3 (2023-10-25)
 ------------------
 
 - Statistics: Exclude guest user newsletter subscriptions

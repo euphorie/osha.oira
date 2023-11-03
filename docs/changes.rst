@@ -5,6 +5,9 @@ Changelog
 ------------------
 
 - Drop python 3.7 support
+- Initialize statistics for Slovakia
+  (`#1686 <https://github.com/syslabcom/scrum/issues/1686>`_)
+  [reinhardt]
 
 
 9.0.3 (2023-10-25)

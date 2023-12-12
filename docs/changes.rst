@@ -1,7 +1,7 @@
 Changelog
 =========
 
-9.0.4 (unreleased)
+9.0.4 (2023-12-12)
 ------------------
 
 - Drop python 3.7 support

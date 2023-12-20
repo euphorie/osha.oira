@@ -445,6 +445,7 @@ class UpdateStatisticsDatabases:
                 log.info("Processed %r rows", offset)
 
     def __call__(self):
+        error = False
         for country in [None] + list_countries(self.session_application):
             database = STATISTICS_DATABASE_PATTERN.format(suffix=country or "global")
             self.session_statistics = create_session(
@@ -454,6 +455,7 @@ class UpdateStatisticsDatabases:
                 self.session_statistics.connection()
             except sqlalchemy.exc.OperationalError as oe:
                 log.warning("Could not update %r: %r", database, oe)
+                error = True
                 continue
 
             log.info("Updating %r", database)
@@ -461,9 +463,11 @@ class UpdateStatisticsDatabases:
                 self.update_database(country=country)
             except sqlalchemy.exc.SQLAlchemyError as e:
                 log.warning("Could not update %r: %r", database, e)
+                error = True
                 continue
             self.session_statistics.close()
             log.info("Updated %r", database)
+        return "OK" if not error else "FAIL"
 
 
 def handle_tool_workflow(obj, event):

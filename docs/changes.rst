@@ -4,7 +4,9 @@ Changelog
 9.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Statistics: Improved monitoring
+  (`#1822 <https://github.com/syslabcom/scrum/issues/1822>`_)
+  [reinhardt]
 
 
 9.0.4 (2023-12-12)

@@ -77,4 +77,6 @@ def update_statistics():
         b_size=args.batch_size,
         optimize_cp_query=args.optimize_cp_query,
     )
-    update_db()
+    output = update_db()
+    if "OK" not in output:
+        sys.exit(1)

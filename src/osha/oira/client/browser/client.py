@@ -125,7 +125,10 @@ class MailingListsJson(BaseJson):
 
             # Filter for query string if given. Else return all results.
             if q:
-                query["Title"] = f"*{q}*"
+                if "/" not in q:
+                    query["Title"] = f"*{q}*"
+                else:
+                    query["path"] = "/".join((query["path"], q))
 
             brains = catalog(**query)
 

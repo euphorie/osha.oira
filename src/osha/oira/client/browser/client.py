@@ -81,6 +81,13 @@ class BaseJson(BrowserView):
 class MailingListsJson(BaseJson):
     """Mailing lists (countries and tools, in the future also sectors)"""
 
+    def _get_entry(self, list_id, title):
+        encoded_title = b64encode(title.encode("utf-8")).decode("utf-8")
+        return {
+            "id": "|".join((list_id, encoded_title)),
+            "text": f"{title} ({list_id})" if "/" in list_id else title,
+        }
+
     @property
     def results(self):
         """List of "mailing list" path/names.

@@ -65,6 +65,64 @@ class TestMailingLists(EuphorieIntegrationTestCase):
             results,
         )
 
+    def test_mailing_lists_batching(self):
+        request = self.request.clone()
+        request.form = {"user_id": "admin", "page_limit": "2"}
+        with mock.patch.object(
+            MailingListsJson,
+            "addresses_view",
+            return_value=GroupToAddresses(context=self.portal.client, request=request),
+        ):
+            view = MailingListsJson(context=self.portal.client, request=request)
+            results = view.results
+
+        # Result = 3, because the "general" mailing list is always added
+        # on page one for admin users.
+        self.assertEqual(len(results), 3)
+        self.assertEqual(
+            results[0],
+            {"id": "general|QWxsIHVzZXJz", "text": "All users [0 subscribers]"},
+        )
+        self.assertEqual(
+            results[1],
+            {
+                "id": "nl/test/second-survey|U2Vjb25kIFN1cnZleQ==",
+                "text": "Second Survey (nl/test/second-survey) [0 subscribers]",
+            },
+        )
+        self.assertEqual(
+            results[2],
+            {
+                "id": "nl/ict/software-development|U29mdHdhcmUgZGV2ZWxvcG1lbnQ=",
+                "text": "Software development (nl/ict/software-development) [0 subscribers]",  # noqa: E501
+            },
+        )
+
+        request.form = {"user_id": "admin", "page_limit": "2", "page": "2"}
+        with mock.patch.object(
+            MailingListsJson,
+            "addresses_view",
+            return_value=GroupToAddresses(context=self.portal.client, request=request),
+        ):
+            view = MailingListsJson(context=self.portal.client, request=request)
+            results = view.results
+
+        self.assertEqual(len(results), 2)
+        self.assertEqual(
+            results[0],
+            {
+                "id": "nl-nl|VGhlIE5ldGhlcmxhbmRzIChubCk=",
+                "text": "The Netherlands (nl) [0 subscribers]",
+            },
+        )
+        self.assertEqual(
+            results[1],
+            {
+                "id": "nl-fr|VGhlIE5ldGhlcmxhbmRzIChmcik=",
+                "text": "The Netherlands (fr) [0 subscribers]",
+            },
+        )
+
     def test_group_to_addresses(self):
         user = Account(loginname="leni@example.nl", password="secret")
         Session.add(user)

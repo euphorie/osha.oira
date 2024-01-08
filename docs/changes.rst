@@ -1,7 +1,7 @@
 Changelog
 =========
 
-9.0.5 (unreleased)
+9.0.5 (2024-01-08)
 ------------------
 
 - Statistics: Improved monitoring

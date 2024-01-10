@@ -4,7 +4,9 @@ Changelog
 9.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Mailing lists: Allow searching for path. Show path in result.
+  (`#1638 <https://github.com/syslabcom/scrum/issues/1638>`_)
+  [reinhardt]
 
 
 9.0.5 (2024-01-08)

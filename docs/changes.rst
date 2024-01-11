@@ -4,7 +4,9 @@ Changelog
 9.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Mailing lists: Language specific lists for countries
+  (`#1621 <https://github.com/syslabcom/scrum/issues/1621>`_)
+  [reinhardt]
 
 
 9.0.5 (2024-01-08)

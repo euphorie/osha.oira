@@ -7,8 +7,10 @@ from json import loads
 from os import path
 from osha.oira import _
 from osha.oira.client.interfaces import IOSHAClientSkinLayer
+from osha.oira.client.model import NewsletterSetting
 from osha.oira.client.model import NewsletterSubscription
 from plone import api
+from plone.memoize.view import memoize
 from plone.scale.scale import scaleImage
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -82,11 +84,50 @@ class MailingListsJson(BaseJson):
     """Mailing lists (countries and tools, in the future also sectors)"""
 
     @property
+    @memoize
+    def client_path(self):
+        return "/".join(self.context.getPhysicalPath())
+
+    def _get_mailing_lists_for(self, brain):
+        if brain.portal_type != "euphorie.clientcountry":
+            return [
+                self._get_entry(
+                    path.relpath(brain.getPath(), self.client_path), brain.Title
+                )
+            ]
+        languages = set()
+        tools = api.content.find(
+            path=brain.getPath(),
+            portal_type="euphorie.survey",
+            review_state="published",
+        )
+        # No filter for non-obsolete -
+        # if we get unexpected languages we can try adding that
+        for tool in tools:
+            language = tool.Language
+            if language:
+                if "-" in language:
+                    language = language.split("-")[0]
+                if language and language != "None":
+                    languages.add(language)
+
+        return [
+            self._get_entry(
+                "-".join((brain.getId, language)), f"{brain.Title} ({language})"
+            )
+            for language in languages
+        ]
+
+    @property
     def results(self):
         """List of "mailing list" path/names.
 
-        The format fits pat-autosuggest. There is a special label for
-        the "all" list.
+        The format fits pat-autosuggest.
+
+        The mailing list IDs are relative paths.
+        Countries have one mailing list per language.
+        The language is appended with a '-', e.g. "be-fr".
+        There is a special ID for the "all users" list.
         """
         user_id = self.request.get("user_id")
 
@@ -145,17 +186,12 @@ class MailingListsJson(BaseJson):
 
             filtered_brains = filter(filter_items, brains)
 
-            client_path = "/".join(self.context.getPhysicalPath())
             cnt = len(results)
             for brain in filtered_brains:
                 if cnt > 10:
                     break
                 cnt += 1
-                results.append(
-                    self._get_entry(
-                        path.relpath(brain.getPath(), client_path), brain.Title
-                    )
-                )
+                results.extend(self._get_mailing_lists_for(brain))
 
         return results
 
@@ -230,13 +266,32 @@ class GroupToAddresses(BrowserView):
         return token
 
     def get_addresses_for_groups(self, group_paths):
-        subscribers = (
+        subscribers = []
+        other = []
+        for group_id in group_paths:
+            if "/" in group_id or "-" not in group_id:
+                other.append(group_id)
+                continue
+            # Special handling for language specific mailing lists, e.g. "be-fr"
+            country, lang = group_id.split("-")
+            country_subscribers = (
+                Session.query(Account.loginname)
+                .filter(Account.id == NewsletterSubscription.account_id)
+                .filter(NewsletterSubscription.zodb_path == (country))
+                .filter(Account.id == NewsletterSetting.account_id)
+                .filter(NewsletterSetting.value == f"language:{lang}")
+                .group_by(Account.loginname)
+            )
+            subscribers.extend([s.loginname for s in country_subscribers])
+
+        other_subscribers = (
             Session.query(Account.loginname)
             .filter(Account.id == NewsletterSubscription.account_id)
-            .filter(NewsletterSubscription.zodb_path.in_(group_paths))
+            .filter(NewsletterSubscription.zodb_path.in_(other))
             .group_by(Account.loginname)
         )
-        return [s.loginname for s in subscribers]
+        subscribers.extend([s.loginname for s in other_subscribers])
+        return subscribers
 
     @property
     def results(self):
@@ -249,8 +304,9 @@ class GroupToAddresses(BrowserView):
         """Json list of email addresses subscribed to given group path
         (parameter `group`).
 
-        Group paths are relative to the client, i.e. only ids ("fr") for
-        countries.
+        Group paths are relative to the client, e.g. "be/agriculture/agriculture".
+        For countries the ID is combined with a language, e.g. "be-fr".
+        See also `MailingListsJson`
         """
         token = self.request.get("token", "")
         if token != self.get_token():

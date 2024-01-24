@@ -83,6 +83,13 @@ class BaseJson(BrowserView):
 class MailingListsJson(BaseJson):
     """Mailing lists (countries and tools, in the future also sectors)"""
 
+    def _get_entry(self, list_id, title):
+        encoded_title = b64encode(title.encode("utf-8")).decode("utf-8")
+        return {
+            "id": "|".join((list_id, encoded_title)),
+            "text": f"{title} ({list_id})" if "/" in list_id else title,
+        }
+
     @property
     @memoize
     def client_path(self):
@@ -159,7 +166,10 @@ class MailingListsJson(BaseJson):
 
             # Filter for query string if given. Else return all results.
             if q:
-                query["Title"] = f"*{q}*"
+                if "/" not in q:
+                    query["Title"] = f"*{q}*"
+                else:
+                    query["path"] = "/".join((query["path"], q))
 
             brains = catalog(**query)
 

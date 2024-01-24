@@ -51,7 +51,7 @@ class TestMailingLists(EuphorieIntegrationTestCase):
         self.assertIn(
             {
                 "id": "nl/ict/software-development|U29mdHdhcmUgZGV2ZWxvcG1lbnQ=",
-                "text": "Software development",
+                "text": "Software development (nl/ict/software-development)",
             },
             results,
         )

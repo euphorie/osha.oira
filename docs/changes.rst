@@ -4,6 +4,9 @@ Changelog
 9.0.6 (unreleased)
 ------------------
 
+- Mailing lists: Language specific lists for countries
+  (`#1621 <https://github.com/syslabcom/scrum/issues/1621>`_)
+  [reinhardt]
 - Mailing lists: Allow searching for path. Show path in result.
   (`#1638 <https://github.com/syslabcom/scrum/issues/1638>`_)
   [reinhardt]

@@ -68,6 +68,14 @@ class BaseJson(BrowserView):
         if ticket != expected:
             raise Unauthorized("Invalid ticket")
 
+    @property
+    def page(self):
+        return int(self.request.get("page", "1"))
+
+    @property
+    def page_limit(self):
+        return int(self.request.get("page_limit", "10"))
+
     def __call__(self):
         """Returns a json meant to be consumed by pat-autosuggest.
 
@@ -148,10 +156,9 @@ class MailingListsJson(BaseJson):
         noLongerProvides(self.request, IOSHAClientSkinLayer)
 
         with api.env.adopt_user(user_id):
-            print(api.user.get_current().getUserId())
-
             if (
-                not q or q in all_users["id"] or q in all_users["text"].lower()
+                self.page == 1
+                and (not q or q in all_users["id"] or q in all_users["text"].lower())
             ) and api.user.has_permission("Manage portal content"):
                 results.append(all_users)
 
@@ -197,8 +204,9 @@ class MailingListsJson(BaseJson):
             filtered_brains = filter(filter_items, brains)
 
             cnt = len(results)
-            for brain in filtered_brains:
-                if cnt > 10:
+            batch_start = (self.page - 1) * self.page_limit
+            for brain in list(filtered_brains)[batch_start:]:
+                if cnt >= self.page_limit:
                     break
                 cnt += 1
                 results.extend(self._get_mailing_lists_for(brain))

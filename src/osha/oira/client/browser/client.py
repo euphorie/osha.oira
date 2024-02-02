@@ -115,7 +115,6 @@ class MailingListsJson(BaseJson):
         tools = api.content.find(
             path=brain.getPath(),
             portal_type="euphorie.survey",
-            review_state="published",
         )
         # No filter for non-obsolete -
         # if we get unexpected languages we can try adding that
@@ -205,11 +204,7 @@ class MailingListsJson(BaseJson):
 
             filtered_brains = filter(filter_items, brains)
 
-            cnt = len(results)
             for brain in filtered_brains:
-                if cnt > 10:
-                    break
-                cnt += 1
                 results.extend(self._get_mailing_lists_for(brain))
 
         return results

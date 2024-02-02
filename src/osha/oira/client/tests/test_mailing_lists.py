@@ -22,11 +22,10 @@ class TestMailingLists(EuphorieIntegrationTestCase):
                         <language>fr</language>
                         </survey>
                     </sector>"""
+
         with api.env.adopt_user("admin"):
             addSurvey(self.portal, BASIC_SURVEY)
             addSurvey(self.portal, survey)
-        self.portal.client.nl.ict["software-development"].reindexObject()
-        self.portal.client.nl.test["second-survey"].reindexObject()
 
     def test_mailing_lists(self):
         request = self.request.clone()

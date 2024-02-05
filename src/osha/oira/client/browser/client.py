@@ -326,6 +326,8 @@ class RecipientLanguageMapping(BrowserView):
     def results(self):
         recipients = self.request.get("recipients", "[]")
         recipients = loads(recipients)
+        if not recipients:
+            return {}
         query = (
             Session.query(Account.loginname, SurveySession.zodb_path)
             .join(SurveySession, Account.id == SurveySession.account_id)

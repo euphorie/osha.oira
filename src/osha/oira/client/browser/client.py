@@ -195,11 +195,7 @@ class MailingListsJson(BaseJson):
 
             filtered_brains = filter(filter_items, brains)
 
-            cnt = len(results)
             for brain in filtered_brains:
-                if cnt > 10:
-                    break
-                cnt += 1
                 results.extend(self._get_mailing_lists_for(brain))
 
         return results

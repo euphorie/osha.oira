@@ -1,7 +1,7 @@
 Changelog
 =========
 
-9.0.6 (unreleased)
+9.1.0 (2024-02-05)
 ------------------
 
 - Mailing lists: Language specific lists for countries

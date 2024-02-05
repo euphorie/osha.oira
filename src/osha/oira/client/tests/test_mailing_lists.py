@@ -8,6 +8,7 @@ from osha.oira.client.browser.client import GroupToAddresses
 from osha.oira.client.browser.client import MailingListsJson
 from osha.oira.client.model import NewsletterSubscription
 from plone import api
+from unittest import mock
 from z3c.saconfig import Session
 from zope.interface import alsoProvides
 
@@ -30,27 +31,36 @@ class TestMailingLists(EuphorieIntegrationTestCase):
     def test_mailing_lists(self):
         request = self.request.clone()
         request.form = {"user_id": "admin"}
-        view = MailingListsJson(context=self.portal.client, request=request)
-        results = view.results
-        self.assertIn({"id": "general|QWxsIHVzZXJz", "text": "All users"}, results)
+        with mock.patch.object(
+            MailingListsJson,
+            "addresses_view",
+            return_value=GroupToAddresses(context=self.portal.client, request=request),
+        ):
+            view = MailingListsJson(context=self.portal.client, request=request)
+            results = view.results
+        self.assertIn(
+            {"id": "general|QWxsIHVzZXJz", "text": "All users [0 subscribers]"}, results
+        )
         self.assertIn(
             {
                 "id": "nl-nl|VGhlIE5ldGhlcmxhbmRzIChubCk=",
-                "text": "The Netherlands (nl)",
+                "text": "The Netherlands (nl) [0 subscribers]",
             },
             results,
         )
         self.assertIn(
             {
                 "id": "nl-fr|VGhlIE5ldGhlcmxhbmRzIChmcik=",
-                "text": "The Netherlands (fr)",
+                "text": "The Netherlands (fr) [0 subscribers]",
             },
             results,
         )
         self.assertIn(
             {
                 "id": "nl/ict/software-development|U29mdHdhcmUgZGV2ZWxvcG1lbnQ=",
-                "text": "Software development (nl/ict/software-development)",
+                "text": (
+                    "Software development (nl/ict/software-development) [0 subscribers]"
+                ),
             },
             results,
         )

@@ -83,11 +83,20 @@ class BaseJson(BrowserView):
 class MailingListsJson(BaseJson):
     """Mailing lists (countries and tools, in the future also sectors)"""
 
+    @property
+    @memoize
+    def addresses_view(self):
+        return api.content.get_view(
+            context=self.context, request=self.request, name="group-to-addresses"
+        )
+
     def _get_entry(self, list_id, title):
         encoded_title = b64encode(title.encode("utf-8")).decode("utf-8")
+        num_subscribers = len(self.addresses_view.get_addresses_for_groups([list_id]))
+        path_or_nothing = f" ({list_id})" if "/" in list_id else ""
         return {
             "id": "|".join((list_id, encoded_title)),
-            "text": f"{title} ({list_id})" if "/" in list_id else title,
+            "text": f"{title}{path_or_nothing} [{num_subscribers} subscribers]",
         }
 
     @property

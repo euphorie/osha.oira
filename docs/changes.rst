@@ -10,7 +10,9 @@ Changelog
 - Mailing lists: Allow searching for path. Show path in result.
   (`#1638 <https://github.com/syslabcom/scrum/issues/1638>`_)
   [reinhardt]
-
+- Mailing lists: Show number of subscribers.
+  (`#1898 <https://github.com/syslabcom/scrum/issues/1898>`_)
+  [reinhardt]
 
 9.0.5 (2024-01-08)
 ------------------

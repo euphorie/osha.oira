@@ -106,7 +106,6 @@ class MailingListsJson(BaseJson):
         tools = api.content.find(
             path=brain.getPath(),
             portal_type="euphorie.survey",
-            review_state="published",
         )
         # No filter for non-obsolete -
         # if we get unexpected languages we can try adding that

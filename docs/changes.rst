@@ -1,10 +1,12 @@
 Changelog
 =========
 
-9.1.1 (unreleased)
+9.1.1 (2024-02-06)
 ------------------
 
-- Nothing changed yet.
+- Mailing lists: More robust parameter handling
+  (`#1621 <https://github.com/syslabcom/scrum/issues/1621>`_)
+  [reinhardt]
 
 
 9.1.0 (2024-02-05)

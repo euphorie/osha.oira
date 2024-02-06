@@ -3,6 +3,7 @@ from euphorie.client.model import Account
 from euphorie.client.model import SurveySession
 from euphorie.content.country import ICountry
 from json import dumps
+from json import JSONDecodeError
 from json import loads
 from os import path
 from osha.oira import _
@@ -333,8 +334,12 @@ class GroupToAddresses(BrowserView):
 class RecipientLanguageMapping(BrowserView):
     @property
     def results(self):
-        recipients = self.request.get("recipients", "[]")
-        recipients = loads(recipients)
+        recipients = self.request.get("recipients", [])
+        if recipients and isinstance(recipients, str):
+            try:
+                recipients = loads(recipients)
+            except (TypeError, JSONDecodeError):
+                recipients = [recipients]
         if not recipients:
             return {}
         query = (

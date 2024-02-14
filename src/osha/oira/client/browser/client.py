@@ -157,7 +157,7 @@ class MailingListsJson(BaseJson):
         noLongerProvides(self.request, IOSHAClientSkinLayer)
 
         with api.env.adopt_user(user_id):
-            print(api.user.get_current().getUserId())
+            user = api.user.get_current()
 
             if (
                 not q or q in all_users["id"] or q in all_users["text"].lower()
@@ -170,6 +170,7 @@ class MailingListsJson(BaseJson):
             query = {
                 "portal_type": ["euphorie.clientcountry", "euphorie.survey"],
                 "path": "/".join(self.context.getPhysicalPath()),
+                "managerRolesAndUsers": catalog._listAllowedRolesAndUsers(user),
                 "sort_on": "sortable_title",
             }
 
@@ -182,30 +183,7 @@ class MailingListsJson(BaseJson):
 
             brains = catalog(**query)
 
-            sectors = api.portal.get().sectors
-
-            def filter_items(brain):
-                obj = brain.getObject()
-
-                if getattr(obj, "preview", False) or getattr(obj, "obsolete", False):
-                    return False
-
-                counterpart = sectors.restrictedTraverse(
-                    brain.getPath().split("/")[3:], None
-                )
-                if not counterpart:
-                    return False
-
-                if api.user.has_permission("Euphorie: Manage country", obj=counterpart):
-                    return True
-
-                return {"Manager", "Sector", "CountryManager"} & set(
-                    api.user.get_roles(obj=counterpart)
-                )
-
-            filtered_brains = filter(filter_items, brains)
-
-            for brain in filtered_brains:
+            for brain in brains:
                 results.extend(self._get_mailing_lists_for(brain))
 
         return results

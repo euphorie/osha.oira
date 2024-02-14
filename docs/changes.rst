@@ -4,7 +4,9 @@ Changelog
 9.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Mailing lists: Performance improvement
+  (`#1941 <https://github.com/syslabcom/scrum/issues/1941>`_)
+  [reinhardt]
 
 
 9.1.1 (2024-02-06)

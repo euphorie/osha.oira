@@ -12,5 +12,9 @@
         factory=".client.ClientPublishTraverser"
         provides="zope.publisher.interfaces.IPublishTraverse"
         />
+    <adapter
+        factory=".indexers.managerRolesAndUsers"
+        name="managerRolesAndUsers"
+        />
 
 </configure>

@@ -16,6 +16,13 @@ def is_in_client(obj):
 
 @indexer(Interface)
 def managerRolesAndUsers(client_obj):
+    """For client objects, index the roles and users that have the
+    `Euphorie: Manage country` permission on the object's counterpart in the admin
+    section, i.e. not the permissions on the object itself are relevant, but its base
+    that was copied via the "publish to client" feature.
+
+    Used in regulating access to mailing lists.
+    Modeled after `allowedRolesAndUsers` from standard Plone."""
     if not is_in_client(client_obj):
         return None
 

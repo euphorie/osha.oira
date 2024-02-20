@@ -1,7 +1,7 @@
 Changelog
 =========
 
-9.1.2 (unreleased)
+9.1.2 (2024-02-20)
 ------------------
 
 - Mailing lists: Performance improvement

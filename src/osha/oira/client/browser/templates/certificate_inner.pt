@@ -1,0 +1,7 @@
+<tal:wrapper tal:define="
+               language here/plone_portal_state/language;
+             "
+             i18n:domain="euphorie"
+>
+  <metal:certificate use-macro="here/certificates/macros/certificate" />
+</tal:wrapper>

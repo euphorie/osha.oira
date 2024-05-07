@@ -4,7 +4,9 @@ Changelog
 9.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Show company certificates in overview
+  (`#2142 <https://github.com/syslabcom/scrum/issues/2142>`_)
+  [reinhardt]
 
 
 9.1.2 (2024-02-20)

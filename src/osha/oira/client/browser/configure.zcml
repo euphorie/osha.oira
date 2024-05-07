@@ -24,6 +24,15 @@
         layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
         />
 
+    <browser:page
+        name="certificates"
+        for="euphorie.client.country.IClientCountry"
+        class="osha.oira.client.browser.certificates.OSHAView"
+        template="templates/certificates.pt"
+        permission="euphorie.client.ViewSurvey"
+        layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+        />
+
   </configure>
 
 
@@ -57,6 +66,15 @@
       for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
       class=".certificate.Certificate"
       template="templates/certificate.pt"
+      permission="zope2.View"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
+
+  <browser:page
+      name="certificate-inner"
+      for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
+      class=".certificate.Certificate"
+      template="templates/certificate_inner.pt"
       permission="zope2.View"
       layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
       />

@@ -41,6 +41,14 @@ class OSHAWebHelpers(WebHelpers):
 
     @property
     @memoize
+    def show_certificates_tab(self):
+        country = self.country
+        return self.use_training_module or getattr(
+            country, "certificates_enabled", False
+        )
+
+    @property
+    @memoize
     def custom_js(self):
         survey_path = self.survey_zodb_path()
         if survey_path == "es/covid/covid-19-es":

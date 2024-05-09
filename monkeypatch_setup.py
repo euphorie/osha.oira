@@ -18,7 +18,7 @@ orig_os_walk = os.walk
 
 
 def patched_os_walk(path, *args, **kwargs):
-    for (dirpath, dirnames, filenames) in orig_os_walk(path, *args, **kwargs):
+    for dirpath, dirnames, filenames in orig_os_walk(path, *args, **kwargs):
         if ".git" in dirnames:
             # We're probably in our own root directory.
             #            print("MONKEY PATCH: omitting a few directories like var/...")

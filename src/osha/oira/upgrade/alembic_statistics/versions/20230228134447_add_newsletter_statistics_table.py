@@ -5,6 +5,7 @@ Revises: 20220921134624
 Create Date: 2023-02-28 13:48:49.647245
 
 """
+
 from alembic import op
 from osha.oira.upgrade.utils import has_table
 

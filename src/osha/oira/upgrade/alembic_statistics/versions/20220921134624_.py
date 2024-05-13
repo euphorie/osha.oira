@@ -4,6 +4,7 @@ Revision ID: 20220921134624
 Revises:
 Create Date: 2022-09-21 11:42:25.215599
 """
+
 from alembic import op
 from osha.oira.upgrade.utils import has_column
 

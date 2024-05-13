@@ -159,7 +159,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             cell.alignment = alignment_basic
         ws1.row_dimensions[2].height = 30
 
-        for (column, (type, key, title)) in enumerate(self.columns, 1):
+        for column, (type, key, title) in enumerate(self.columns, 1):
             if key in self.combine_keys:
                 continue
             cell = ws1.cell(row=3, column=column)
@@ -181,7 +181,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         ws1.row_dimensions[3].height = 60
 
         portal_transforms = api.portal.get_tool("portal_transforms")
-        for (row, (module, risk, measure)) in enumerate(self.get_measures(), 4):
+        for row, (module, risk, measure) in enumerate(self.get_measures(), 4):
             column = 1
 
             if not getattr(risk, "is_custom_risk", None):
@@ -189,7 +189,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
             else:
                 zodb_node = None
 
-            for (type, key, title) in self.columns + self.extra_cols:
+            for type, key, title in self.columns + self.extra_cols:
                 value = None
                 if type == "measure":
                     value = getattr(measure, key, None)

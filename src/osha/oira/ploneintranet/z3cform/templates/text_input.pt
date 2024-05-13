@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:omit-tag=""
+      i18n:domain="nuplone"
+>
+
+  <label title="${view/field/description}">
+    <span tal:replace="view/label"></span>
+    <input class="${view/klass}"
+           id="${view/id}"
+           disabled="${view/disabled}"
+           maxlength="${view/maxlength}"
+           name="${view/name}"
+           readonly="${view/readonly}"
+           size="${view/size}"
+           type="${view/type|string:text}"
+           value="${view/value}"
+    />
+  </label>
+  <section class="help"
+           tal:condition="view/error"
+  >
+    <div class="pat-message warning"
+         tal:content="structure view/error/render"
+    ></div>
+  </section>
+</html>

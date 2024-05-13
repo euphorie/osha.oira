@@ -1,0 +1,136 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    >
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.ISingleCheckBoxWidget"
+      template="templates/checkbox_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.ICheckBoxWidget"
+      template="templates/checkboxlist_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.IPasswordWidget"
+      template="templates/password_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.IRadioWidget"
+      template="templates/radio_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.ISelectWidget"
+      template="templates/select_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.ISubmitWidget"
+      template="templates/submit_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.ITextWidget"
+      template="templates/text_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.ITextAreaWidget"
+      template="templates/textarea_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.ITextLinesWidget"
+      template="templates/textlines_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.ITextLinesWidget"
+      template="templates/textlines_display.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="display"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.IMultiWidget"
+      template="templates/multi_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.IObjectWidget"
+      template="templates/object_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="plone.app.z3cform.wysiwyg.widget.IWysiwygWidget"
+      template="templates/wysiwyg_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="z3c.form.interfaces.IOrderedSelectWidget"
+      template="templates/orderedselect_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="plone.formwidget.namedfile.interfaces.INamedFileWidget"
+      template="templates/namedfile_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..quaive_edit.QuaiveEditFormMixin"
+      widget="plone.formwidget.namedfile.interfaces.INamedImageWidget"
+      template="templates/namedimage_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+</configure>

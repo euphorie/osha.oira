@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      class="comprehensive filefield ${view/@@dependencies}"
+      meta:interpolation="true"
+      tal:define="
+        download_url view/download_url;
+      "
+      i18n:domain="nuplone"
+>
+  <fieldset class="group ${view/@@dependencies}">
+    <legend>${view/label}</legend>
+    <dfn class="infoPanel"
+         title="Information"
+         tal:define="
+           description view/field/description;
+         "
+         tal:condition="description"
+         i18n:attributes="title"
+    >${description}</dfn>
+    <input class="${view/klass}"
+           id="${view/id}"
+           disabled="${view/disabled}"
+           name="${view/name}"
+           readonly="${view/readonly}"
+           type="file"
+    />
+    <tal:has-image condition="view/allow_nochange"><img class="floatAfter"
+           alt=""
+           src="${scale/url}"
+           width="${scale/width}"
+           tal:define="
+             images context/@@images;
+             scale python:images.scale(view.field.getName(), height=64, width=64, direction='thumbnail');
+           "
+           tal:condition="scale"
+      />
+      <label><input name="${view/name}.action"
+               type="checkbox"
+               value="remove"
+        />
+        <tal:span i18n:translate="">Remove image</tal:span></label>
+    </tal:has-image>
+    <section class="help"
+             tal:condition="view/error"
+    >
+      <div class="pat-message warning"
+           tal:content="structure view/error/render"
+      ></div>
+    </section>
+  </fieldset>
+</html>

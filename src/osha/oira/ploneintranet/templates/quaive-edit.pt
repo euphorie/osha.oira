@@ -13,6 +13,7 @@
     <div class="container"
          id="quaive-content"
     >
+      <h3>${view/label}</h3>
       <p class="message ${python:'error' if view.widgets.errors else 'notice'}"
          tal:define="
            status view/status;
@@ -59,6 +60,14 @@
 
 
       </form>
+      <a class="float-after pat-button"
+         href="${here/absolute_url}/@@edit"
+         target="_blank"
+         i18n:translate=""
+      >
+        <!-- TODO: Remove me -->
+        Edit on OiRA
+      </a>
     </div>
   </metal:content>
 </html>

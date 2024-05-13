@@ -4,11 +4,9 @@
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <div class="z3cFieldContainer ${view/@@dependencies}">
-    <legend>${view/label}
-      <sup class="required"
-           tal:condition="view/required"
-      >*</sup></legend>
+  <fieldset class="group ${view/@@dependencies}">
+
+    <legend>${view/label}</legend>
     <label class="${python:'error' if view.error is not None else None}">
       <textarea class="${view/klass}"
                 id="${view/id}"
@@ -19,16 +17,21 @@
                 rows="${view/rows}"
                 tal:content="structure view/value"
       ></textarea>
-      <tal:error condition="view/error"
-                 replace="structure view/error/render|nothing"
-      /></label>
-    <dfn class="infoPanel"
-         title="Information"
-         tal:define="
-           description view/field/description;
-         "
-         tal:condition="description"
-         i18n:attributes="title"
-    >${description}</dfn>
-  </div>
+      <dfn class="infoPanel"
+           title="Information"
+           tal:define="
+             description view/field/description;
+           "
+           tal:condition="description"
+           i18n:attributes="title"
+      >${description}</dfn>
+    </label></fieldset>
+
+  <section class="help"
+           tal:condition="view/error"
+  >
+    <div class="pat-message warning"
+         tal:content="structure view/error/render"
+    ></div>
+  </section>
 </html>

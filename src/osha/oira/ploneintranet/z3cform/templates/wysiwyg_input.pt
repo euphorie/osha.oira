@@ -7,9 +7,9 @@
       i18n:domain="nuplone"
 >
   <fieldset class="group ${view/@@dependencies}">
-  <legend title="${view/field/description}">
-    <span tal:replace="view/label"></span>
-  </legend>
+    <legend title="${view/field/description}">
+      <span tal:replace="view/label"></span>
+    </legend>
     <textarea class="${view/klass} pat-tiptap"
               id="${view/id}"
               cols="${view/cols}"
@@ -18,16 +18,16 @@
               readonly="${view/readonly}"
               rows="${view/rows}"
     >${view/value}</textarea>
-  <dfn class="infoPanel"
-       title="Information"
-       tal:define="
-         description view/field/description;
-       "
-       tal:condition="description"
-       tal:content="description"
-       i18n:attributes="title"
-  ></dfn>
-</fieldset>
+    <dfn class="infoPanel"
+         title="Information"
+         tal:define="
+           description view/field/description;
+         "
+         tal:condition="description"
+         tal:content="description"
+         i18n:attributes="title"
+    ></dfn>
+  </fieldset>
 
   <section class="help"
            tal:condition="view/error"

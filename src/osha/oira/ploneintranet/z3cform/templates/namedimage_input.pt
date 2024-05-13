@@ -36,11 +36,13 @@
            "
            tal:condition="scale"
       />
-      <label><input name="${view/name}.action"
+      <label class="pat-checklist">
+        <input name="${view/name}.action"
                type="checkbox"
                value="remove"
         />
-        <tal:span i18n:translate="">Remove image</tal:span></label>
+        <tal:span i18n:translate="">Remove image</tal:span>
+      </label>
     </tal:has-image>
     <section class="help"
              tal:condition="view/error"

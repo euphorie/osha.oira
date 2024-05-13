@@ -4,29 +4,25 @@
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <div class="z3cFieldContainer ${view/@@dependencies}">
-    <label class="${python:'error' if view.error is not None else None}">${view/label}
-      <sup class="required"
-           tal:condition="view/required"
-      >*</sup>
-      <select class="${view/klass}"
-              id="${view/id}"
-              multiple="${view/multiple}"
-              name="${view/name}"
-              size="${view/size}"
-      >
-        <tal:item repeat="item view/items"><option id="${item/id}"
-                  selected="${python:'selected' if selected else None}"
-                  value="${item/value}"
-                  tal:define="
-                    selected item/selected;
-                  "
-          >${item/content}</option></tal:item>
-      </select>
-      <tal:error condition="view/error"
-                 replace="structure view/error/render|nothing"
-      />
-    </label>
+  <fieldset class="group ${view/@@dependencies}${python:' error' if view.error is not None else ''}">
+    <legend>${view/label}</legend>
+    <select class="${view/klass}"
+            id="${view/id}"
+            multiple="${view/multiple}"
+            name="${view/name}"
+            size="${view/size}"
+    >
+      <tal:item repeat="item view/items"><option id="${item/id}"
+                selected="${python:'selected' if selected else None}"
+                value="${item/value}"
+                tal:define="
+                  selected item/selected;
+                "
+        >${item/content}</option></tal:item>
+    </select>
+    <tal:error condition="view/error"
+               replace="structure view/error/render|nothing"
+    />
     <dfn class="infoPanel"
          title="Information"
          tal:define="
@@ -39,5 +35,5 @@
            type="hidden"
            value="1"
     />
-  </div>
+  </fieldset>
 </html>

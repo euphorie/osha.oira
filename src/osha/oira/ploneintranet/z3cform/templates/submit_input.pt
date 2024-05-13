@@ -1,0 +1,11 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:omit-tag=""
+>
+  <button class="${view/klass}"
+          id="${view/id}"
+          name="${view/name}"
+          type="submit"
+          value="${view/value}"
+  >${view/title}</button>
+</html>

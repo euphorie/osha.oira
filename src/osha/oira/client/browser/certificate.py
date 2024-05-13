@@ -189,6 +189,8 @@ class Certificate(BrowserView):
         self.certificate.json = json.dumps(values)
 
     def __call__(self):
+        if not self.webhelpers.can_view_session:
+            return self.request.response.redirect(self.webhelpers.client_url)
         self.maybe_update()
         return super().__call__()
 

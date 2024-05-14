@@ -7,6 +7,9 @@ Changelog
 - Show company certificates in overview
   (`#2142 <https://github.com/syslabcom/scrum/issues/2142>`_)
   [reinhardt]
+- Show certificates on assessment status page
+  (`#2143 <https://github.com/syslabcom/scrum/issues/2143>`_)
+  [reinhardt]
 
 
 9.1.2 (2024-02-20)

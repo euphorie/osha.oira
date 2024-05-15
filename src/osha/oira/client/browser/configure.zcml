@@ -64,7 +64,7 @@
   <browser:page
       name="certificate"
       for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
-      class=".certificate.Certificate"
+      class=".certificate.OSHACertificate"
       template="templates/certificate.pt"
       permission="zope2.View"
       layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
@@ -73,7 +73,7 @@
   <browser:page
       name="certificate-inner"
       for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
-      class=".certificate.Certificate"
+      class=".certificate.OSHACertificate"
       template="templates/certificate_inner.pt"
       permission="zope2.View"
       layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
@@ -82,7 +82,7 @@
   <browser:page
       name="status-tooltip"
       for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
-      class=".certificate.Certificate"
+      class=".certificate.OSHACertificate"
       template="templates/status-tooltip.pt"
       permission="zope2.View"
       layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
@@ -91,7 +91,7 @@
   <browser:page
       name="certificate-print"
       for="euphorie.client.adapters.session_traversal.ITraversedSurveySession"
-      class=".certificate.Certificate"
+      class=".certificate.OSHACertificate"
       template="templates/certificate-print.pt"
       permission="zope2.View"
       layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"

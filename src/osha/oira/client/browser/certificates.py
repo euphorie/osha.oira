@@ -25,6 +25,14 @@ class OSHAView(View):
                 link = f"{traversed_session.absolute_url()}/@@certificate"
                 content = certificate_view()
                 certificates.setdefault(year, []).append(
-                    {"link": link, "content": content}
+                    {
+                        "link": link,
+                        "content": content,
+                        "date": certificate_view.certificate.hr_date_plain,
+                    }
                 )
+        for year, year_certificates in certificates.items():
+            certificates[year] = sorted(
+                year_certificates, key=lambda c: c["date"], reverse=True
+            )
         return certificates.items()

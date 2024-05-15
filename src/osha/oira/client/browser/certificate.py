@@ -1,5 +1,6 @@
 from datetime import date
 from euphorie.client import utils
+from euphorie.client.browser.certificate import Certificate
 from euphorie.content.utils import getRegionTitle
 from osha.oira.client import model
 from plone import api
@@ -16,7 +17,7 @@ import json
 import uuid
 
 
-class Certificate(BrowserView):
+class OSHACertificate(Certificate):
     @property
     @memoize
     def webhelpers(self):
@@ -156,6 +157,29 @@ class Certificate(BrowserView):
         if organisation:
             return organisation_view.get_organisation_title(organisation)
         return organisation_view.default_organisation_title
+    
+    @property
+    @memoize
+    def certificates(self):
+        """Get all certificates associated with this session for display."""
+        certificates = super().certificates
+        certificate_view = api.content.get_view(
+            name="certificate-inner",
+            context=self.context,
+            request=self.request,
+        )
+        if certificate_view.can_display_certificate_earned():
+            link = f"{self.context.absolute_url()}/@@certificate"
+            content = certificate_view()
+            certificates.insert(
+                0,
+                {
+                    "link": link,
+                    "content": content,
+                    "date": certificate_view.certificate.hr_date_plain,
+                },
+            )
+        return certificates
 
     @property
     @memoize

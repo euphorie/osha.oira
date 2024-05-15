@@ -44,8 +44,6 @@ class OiRASiteRootTabsTile(SiteRootTabsTile):
                 "id": "ldapmgmt",
                 "title": title,
                 "url": "%s/@@manage-ldap-users" % self.context.absolute_url(),
-                "class": "current"
-                if self.get_current_url() == "ldapmgmt"
-                else None,  # noqa: E501
+                "class": "current" if self.get_current_url() == "ldapmgmt" else None,
             }
             self.tabs.insert(2, custom_tab)

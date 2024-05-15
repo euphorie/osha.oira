@@ -79,4 +79,12 @@
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
+  <browser:page
+      name="quaive-create-euphorie.sector"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieSectorView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
 </configure>

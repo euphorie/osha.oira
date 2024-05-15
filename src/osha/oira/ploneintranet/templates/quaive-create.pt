@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      metal:use-macro="context/@@layout/macros/layout"
+      i18n:domain="nuplone"
+>
+
+  <metal:title fill-slot="title">${view/label}</metal:title>
+  <metal:content fill-slot="content">
+    <div class="container"
+         id="quaive-content"
+    >
+      <h3>${view/label}</h3>
+      <p class="message ${python:'error' if view.widgets.errors else 'notice'}"
+         tal:define="
+           status view/status;
+         "
+         tal:condition="status"
+         tal:content="status"
+         i18n:domain="plone"
+      >Form-global message</p>
+      <p class="discrete"
+         tal:condition="python:getattr(view, 'description', None)"
+      >${view/description}</p>
+
+      <form class="pat-form pat-inject"
+            id="${view/id}"
+            action="${request/getURL}"
+            enctype="${view/enctype}"
+            method="${view/method}"
+            data-pat-inject="source: #quaive-content; target: #quaive-content"
+      >
+        <div class="button-bar"
+             tal:define="
+               actions view/actions/values|nothing;
+             "
+             tal:condition="actions"
+        >
+          <tal:action repeat="action actions">
+            <button class="pat-button float-after ${python: 'default' if repeat.action.index == 0 else ''}"
+                    name="${action/name}"
+                    type="submit"
+                    value="${action/title}"
+            >
+                    ${action/title}
+            </button>
+          </tal:action>
+
+        </div>
+
+        <fieldset class="form-panel section horizontal">
+          <tal:widget tal:repeat="widget view/widgets/values"
+                      content="structure widget/render"
+          >
+          </tal:widget>
+        </fieldset>
+
+
+      </form>
+    </div>
+  </metal:content>
+</html>

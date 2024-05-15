@@ -145,6 +145,21 @@ class OSHACertificate(Certificate):
 
     @property
     @memoize
+    def certificate_title(self):
+        if self.certificate.title:
+            return self.certificate.title
+        organisation_view = api.content.get_view(
+            name="organisation",
+            context=self.webhelpers.country_obj,
+            request=self.request,
+        )
+        organisation = self.session.account.organisation
+        if organisation:
+            return organisation_view.get_organisation_title(organisation)
+        return organisation_view.default_organisation_title
+    
+    @property
+    @memoize
     def certificates(self):
         """Get all certificates associated with this session for display."""
         certificates = super().certificates
@@ -234,6 +249,11 @@ class PublicCertificate(BrowserView):
         )
         if query.count():
             return query.one()
+
+    @property
+    @memoize
+    def certificate_title(self):
+        return self.certificate.title
 
     @property
     @memoize

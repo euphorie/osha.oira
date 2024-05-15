@@ -5,9 +5,12 @@ from osha.oira.content.browser.risk import EditForm as RiskEditForm
 from osha.oira.content.browser.sector import EditForm as SectorEditForm
 from osha.oira.content.browser.solution import EditForm as SolutionEditForm
 from osha.oira.content.browser.survey import EditForm as SurveyEditForm
+from osha.oira.ploneintranet.interfaces import IQuaiveForm
 from plone.dexterity.browser.edit import DefaultEditForm
+from zope.interface import implementer
 
 
+@implementer(IQuaiveForm)
 class QuaiveEditFormMixin:
     @property
     def template(self):

@@ -21,11 +21,10 @@
                      country python: certificate_view.country;
                    "
       >
-        <metal:certificate fill-slot="certificate"
-                           tal:condition="certificate_view/can_display_certificate_notice"
-        >
+        <metal:certificate fill-slot="certificate">
           <div class="page-module"
                id="section-certification"
+               tal:condition="python: certificate_view.can_display_certificate_notice() or certificate_view.certificates"
           >
             <section class="pat-rich">
               <h2 i18n:translate="heading_certification">
@@ -58,15 +57,27 @@
               </p>
               <p tal:replace="structure country/certificate_explanatory_sentence"></p>
             </section>
-            <tal:earned condition="certificate_view/can_display_certificate_earned">
-              <p class="button-bar">
-                <a class="pat-button pat-inject"
-                   href="${webhelpers/traversed_session/absolute_url}/@@certificate"
-                   data-pat-inject="history: record"
-                   i18n:translate=""
-                >View certificate</a>
-              </p>
-            </tal:earned>
+            <tal:certificates condition="certificate_view/certificates|nothing">
+              <div class="pat-rich">
+                <h3 i18n:translate="">Awarded certificates</h3>
+                <p i18n:translate="">
+                        The following certificates were awarded for this assessment.
+                </p>
+              </div>
+              <div class="certificate-overview col-3">
+                <tal:certificates tal:repeat="info certificate_view/certificates">
+                  <figure class="certificate-preview">
+                    <a class="certificate pat-auto-scale pat-inject"
+                       href="${info/link}"
+                       data-pat-inject="source: #content; target: #content; history: record"
+                       tal:condition="nocall:info/content"
+                    >
+                      <tal:certificate replace="structure info/content" />
+                    </a>
+                  </figure>
+                </tal:certificates>
+              </div>
+            </tal:certificates>
           </div>
         </metal:certificate>
       </metal:macro>

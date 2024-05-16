@@ -58,7 +58,7 @@
           <p class="certificate-title-byline"
              i18n:translate=""
           >This certificate is presented to</p>
-          <p class="certificate-user-name">${certificate/title}</p>
+          <p class="certificate-user-name">${view/certificate_title}</p>
           <p class="certificate-achievement"
              i18n:translate=""
           >
@@ -91,7 +91,7 @@
           <dt i18n:translate="">Country</dt>
           <dd>${view/country_name}</dd>
           <dt i18n:translate="label_company_name">Company name</dt>
-          <dd>${certificate/title}</dd>
+          <dd>${view/certificate_title}</dd>
           <dt i18n:translate="label_company_identification_number">Company identification number</dt>
           <dd>${view/certificate_json/company_identification_number|nothing}</dd>
 

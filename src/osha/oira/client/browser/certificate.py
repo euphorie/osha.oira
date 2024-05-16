@@ -1,5 +1,7 @@
 from datetime import date
 from euphorie.client import utils
+from euphorie.client.browser.certificate import Certificate
+from euphorie.client.browser.certificate import CertificateOverview
 from euphorie.content.utils import getRegionTitle
 from osha.oira.client import model
 from plone import api
@@ -16,7 +18,7 @@ import json
 import uuid
 
 
-class Certificate(BrowserView):
+class OSHACertificate(Certificate):
     @property
     @memoize
     def webhelpers(self):
@@ -144,6 +146,44 @@ class Certificate(BrowserView):
 
     @property
     @memoize
+    def certificate_title(self):
+        if self.certificate.title:
+            return self.certificate.title
+        organisation_view = api.content.get_view(
+            name="organisation",
+            context=self.webhelpers.country_obj,
+            request=self.request,
+        )
+        organisation = self.session.account.organisation
+        if organisation:
+            return organisation_view.get_organisation_title(organisation)
+        return organisation_view.default_organisation_title
+
+    @property
+    @memoize
+    def certificates(self):
+        """Get all certificates associated with this session for display."""
+        certificates = super().certificates
+        certificate_view = api.content.get_view(
+            name="certificate-inner",
+            context=self.context,
+            request=self.request,
+        )
+        if certificate_view.can_display_certificate_earned():
+            link = f"{self.context.absolute_url()}/@@certificate"
+            content = certificate_view()
+            certificates.insert(
+                0,
+                {
+                    "link": link,
+                    "content": content,
+                    "date": certificate_view.certificate.hr_date_plain,
+                },
+            )
+        return certificates
+
+    @property
+    @memoize
     def session(self):
         return self.webhelpers.traversed_session.session
 
@@ -189,8 +229,45 @@ class Certificate(BrowserView):
         self.certificate.json = json.dumps(values)
 
     def __call__(self):
+        if not self.webhelpers.can_view_session:
+            return self.request.response.redirect(self.webhelpers.client_url)
         self.maybe_update()
         return super().__call__()
+
+
+class OSHACertificateOverview(CertificateOverview):
+    """Also show company certificates"""
+
+    @property
+    @memoize
+    def certificates(self):
+        certificates = dict(super().certificates)
+        assessments_view = api.content.get_view(
+            name="assessments", context=self.context, request=self.request
+        )
+        for session in assessments_view.sessions:
+            traversed_session = session.traversed_session
+            certificate_view = api.content.get_view(
+                name="certificate-inner",
+                context=traversed_session,
+                request=self.request,
+            )
+            if certificate_view.can_display_certificate_earned():
+                year = certificate_view.certificate.hr_date_plain.year
+                link = f"{traversed_session.absolute_url()}/@@certificate"
+                content = certificate_view()
+                certificates.setdefault(year, []).append(
+                    {
+                        "link": link,
+                        "content": content,
+                        "date": certificate_view.certificate.hr_date_plain,
+                    }
+                )
+        for year, year_certificates in certificates.items():
+            certificates[year] = sorted(
+                year_certificates, key=lambda c: c["date"], reverse=True
+            )
+        return certificates.items()
 
 
 @implementer(IPublishTraverse)
@@ -210,6 +287,11 @@ class PublicCertificate(BrowserView):
         )
         if query.count():
             return query.one()
+
+    @property
+    @memoize
+    def certificate_title(self):
+        return self.certificate.title
 
     @property
     @memoize

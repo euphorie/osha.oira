@@ -61,7 +61,7 @@
                              placeholder="Your company name"
                              required
                              type="text"
-                             value="${request/title|view/certificate_json/title|nothing}"
+                             value="${request/title|view/certificate_title|nothing}"
                              i18n:attributes="placeholder"
                       />
                     </label>

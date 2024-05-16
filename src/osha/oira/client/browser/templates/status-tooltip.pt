@@ -13,8 +13,11 @@
          country python: view.country;
        "
   >
-    <p tal:condition="not:view/can_display_certificate_notice" i18n:translate="info_survey_completion">
-          You have completed <tal:name i18n:name="completed">${view/completion_percentage}</tal:name>% of the risk assessment.
+    <p tal:condition="not:view/can_display_certificate_notice"
+       i18n:translate="info_survey_completion"
+    >
+          You have completed
+      <tal:name i18n:name="completed">${view/completion_percentage}</tal:name>% of the risk assessment.
     </p>
     <p tal:condition="view/can_display_certificate_teaser"
        i18n:translate="info_survey_completion_certificate"
@@ -39,15 +42,15 @@
     <p tal:condition="view/can_display_certificate_notice"
        tal:replace="structure country/certificate_explanatory_sentence"
     ></p>
-    <tal:earned condition="view/can_display_certificate_earned">
-      <p class="button-bar">
-        <a class="pat-button pat-inject"
-           href="${context/absolute_url}/@@certificate"
-           data-pat-inject="history: record"
-           i18n:translate=""
-        >View certificate</a>
-      </p>
-    </tal:earned>
+    <p i18n:translate="info_status_details">
+      View the
+      <a class="pat-inject close-panel"
+         href="${context/absolute_url}/@@status#content"
+         i18n:name="link_status_screen"
+         i18n:translate="label_status_screen"
+      >Status screen</a>
+       for more details.
+    </p>
   </div>
 
 </html>

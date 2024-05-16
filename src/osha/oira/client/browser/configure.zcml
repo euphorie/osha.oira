@@ -27,7 +27,7 @@
     <browser:page
         name="certificates"
         for="euphorie.client.country.IClientCountry"
-        class="osha.oira.client.browser.certificates.OSHAView"
+        class="osha.oira.client.browser.certificate.OSHACertificateOverview"
         template="templates/certificates.pt"
         permission="euphorie.client.ViewSurvey"
         layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"

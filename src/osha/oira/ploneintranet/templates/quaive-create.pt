@@ -31,7 +31,7 @@
             action="${request/getURL}"
             enctype="${view/enctype}"
             method="${view/method}"
-            data-pat-inject="source: #quaive-content; target: #quaive-content"
+            data-pat-inject="source: #quaive-content; target: #quaive-content; history: record &amp;&amp; source: #sidebar-oira; target: #sidebar-oira"
       >
         <div class="button-bar"
              tal:define="

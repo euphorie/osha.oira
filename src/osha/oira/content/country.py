@@ -1,5 +1,4 @@
 from euphorie.content import MessageFactory as _
-from htmllaundry.z3cform import HtmlText
 from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
@@ -8,6 +7,15 @@ from zope import schema
 from zope.interface import alsoProvides
 from zope.interface import Invalid
 from zope.interface import invariant
+
+try:
+    # This needs a merge of https://github.com/euphorie/Euphorie/pull/739
+    from euphorie.htmllaundry.z3cform import HtmlText
+except ImportError:
+    # BBB This may not work with lxml 5.2+ (Plone 6.0.11+).
+    # On those versions it needs a merge and release of this PR:
+    # https://github.com/syslabcom/htmllaundry/pull/2
+    from htmllaundry.z3cform import HtmlText
 
 
 class IOSHACountry(model.Schema):

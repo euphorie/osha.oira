@@ -4,7 +4,7 @@
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <fieldset class="group">
+  <fieldset class="group ${view/@@dependencies}">
     <legend>${python: view.items[0]['label']}</legend>
     <label class="pat-checklist"
            tal:repeat="item view/items"

@@ -1,0 +1,162 @@
+<fieldset class="${view/klass} pat-subform pat-autosubmit pat-inject"
+          id="${widget_id}-wrapper"
+          data-pat-inject="source: #${widget_id}-wrapper; target: #${widget_id}-wrapper; url: ${request/getURL}/++widget++source_selection/render; history: none;"
+          tal:define="
+            widget_id string:${view/id};
+            countries view/form/buildSurveyTree;
+          "
+>
+  <fieldset class="group pat-checklist"
+            tal:define="
+              value python:request.form.get('source', 'scratch');
+            "
+  >
+    <legend i18n:translate="label_survey_source">How would you like to start</legend>
+    <label>
+      <input checked="${python:'checked' if value=='scratch' else None}"
+             name="source"
+             type="radio"
+             value="scratch"
+      />
+      <tal:span i18n:translate="survey_source_scratch">Create a new OiRA Tool from scratch</tal:span>
+    </label>
+    <label tal:condition="view/form/my_group">
+      <input checked="${python:'checked' if value=='local' else None}"
+             name="source"
+             type="radio"
+             value="local"
+      />
+      <tal:span i18n:translate="survey_source_local">Base my new OiRA Tool on an existing OiRA
+        Tool of my organisation</tal:span>
+    </label>
+    <label>
+      <input checked="${python:'checked' if value=='other' else None}"
+             name="source"
+             type="radio"
+             value="other"
+      />
+      <tal:span i18n:translate="survey_source_other">Base my new OiRA Tool on an existing OiRA
+        Tool of another organisation</tal:span>
+    </label>
+  </fieldset>
+  <tal:countries repeat="country countries">
+    <tal:mycountry condition="python:country['id']==view.form.my_country">
+      <tal:sectors repeat="sector country/sectors">
+        <tal:mysector condition="python:sector['id']==view.form.my_sector">
+          <fieldset class="group pat-checklist"
+                    tal:condition="python: request.get('source') == 'local'"
+          >
+            <p class="legend"
+               i18n:translate="label_choose_surveygroup"
+            >Choose an OiRA Tool</p>
+            <select name="surveygroup.local"
+                    tal:define="
+                      value python:request.form.get('surveygroup.local');
+                    "
+            >
+              <tal:group repeat="group sector/groups">
+                <option selected="${python:'selected' if value==group['id'] else None}"
+                        value="${group/id}"
+                >${group/title}</option>
+              </tal:group>
+            </select>
+          </fieldset>
+          <tal:group repeat="group sector/groups">
+            <fieldset class="group pat-checklist"
+                      tal:define="
+                        value python:request.form.get('survey.local', group['surveys'][0]['id']);
+                      "
+                      tal:condition="python: request.get('source') == 'local' and request.get('surveygroup.local') == group['id']"
+            >
+              <legend i18n:translate="label_choose_survey">Choose a revision of
+                the selected OiRA Tool</legend>
+              <label tal:repeat="survey group/surveys"><input checked="${python:'checked' if repeat.survey.start else None}"
+                       name="survey.local.${group/id}"
+                       type="radio"
+                       value="${survey/id}"
+                />${survey/title}
+                <a class="floatAfter"
+                   href="${survey/url}"
+                >FIXME: View</a></label>
+            </fieldset>
+          </tal:group>
+        </tal:mysector>
+      </tal:sectors>
+    </tal:mycountry>
+  </tal:countries>
+
+  <fieldset class="group pat-checklist"
+            tal:condition="python: request.get('source') == 'other'"
+  >
+    <p class="legend"
+       i18n:translate="label_choose_country"
+    >Choose a country</p>
+    <select id="country"
+            name="country"
+            tal:define="
+              value python:request.form.get('country', view.form.my_country);
+            "
+    >
+      <option></option>
+      <option selected="${python:'selected' if value==country['id'] else None}"
+              value="${country/id}"
+              tal:repeat="country countries"
+      >${country/title}</option>
+    </select>
+  </fieldset>
+
+  <tal:country repeat="country countries">
+    <fieldset class="group"
+              tal:condition="python: request.get('source') == 'other' and request.get('country', view.form.my_country) == country['id']"
+    >
+      <p class="legend"
+         i18n:translate="label_choose_surveygroup"
+      >Choose an OiRA Tool</p>
+
+      <select name="${name}"
+              tal:define="
+                name string:sector.${country/id};
+                value python:request.form.get(name, '%s.%s' % (view.form.my_sector, view.form.my_group));
+              "
+      >
+        <tal:sector repeat="sector country/sectors">
+          <optgroup label="${sector/title}">
+            <tal:group repeat="group sector/groups">
+              <option selected="${python:'selected' if value==ovalue else None}"
+                      value="${ovalue}"
+                      tal:define="
+                        ovalue string:${sector/id}.${group/id};
+                      "
+              >
+                ${group/title}</option>
+            </tal:group>
+          </optgroup>
+        </tal:sector>
+      </select>
+    </fieldset>
+
+    <tal:sector repeat="sector country/sectors">
+      <tal:group repeat="group sector/groups">
+        <fieldset class="group pat-checklist dependsOn-source-equals-other dependsOn-country-equals-${country/id} dependsOn-sector.${country/id}-equals-${sector/id}.${group/id}"
+                  tal:define="
+                    name string:survey.${country/id}.${group/id};
+                    value python:request.form.get(name, group['surveys'][0]['id']);
+                  "
+                  tal:condition="python: request.get('source') == 'other' and request.get('country') == country['id'] and request.get('sector.%s' % country['id']) == '%s.%s' % (sector['id'], group['id'])"
+        >
+          <legend i18n:translate="label_choose_survey">Choose a revision of the
+            selected OiRA Tool</legend>
+          <label tal:repeat="survey group/surveys"><input checked="${python:'checked' if repeat.survey.start else None}"
+                   name="${name}"
+                   type="radio"
+                   value="${survey/id}"
+            />${survey/title}
+            <a class="floatAfter"
+               href="${survey/url}"
+            >View</a></label>
+        </fieldset>
+      </tal:group>
+    </tal:sector>
+  </tal:country>
+
+</fieldset>

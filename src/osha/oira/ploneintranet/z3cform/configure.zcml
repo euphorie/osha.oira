@@ -133,4 +133,12 @@
       mode="input"
       />
 
+  <z3c:widgetTemplate
+      view="..interfaces.IQuaiveForm"
+      widget="euphorie.content.widgets.survey_source_selection.ISurveySourceSelectionWidget"
+      template="templates/survey_source_selection.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
 </configure>

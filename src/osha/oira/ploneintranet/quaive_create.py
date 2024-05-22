@@ -1,10 +1,10 @@
 from euphorie.content.browser.country import AddView as EuphorieCountryAddView
 from euphorie.content.browser.module import AddView as EuphorieModuleAddView
 from euphorie.content.browser.survey import AddView as EuphorieSurveyAddView
+from euphorie.content.browser.surveygroup import AddView as EuphorieSurveyGroupAddView
 from osha.oira.content.browser.risk import AddView as EuphorieRiskAddView
 from osha.oira.content.browser.sector import AddView as EuphorieSectorAddView
 from osha.oira.content.browser.solution import AddView as EuphorieSolutionAddView
-from osha.oira.content.browser.surveygroup import AddView as EuphorieSurveyGroupAddView
 from osha.oira.ploneintranet.interfaces import IQuaiveForm
 from plone import api
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile

@@ -54,14 +54,6 @@
       />
 
   <!-- SurveyGroup -->
-  <adapter
-      for="Products.CMFCore.interfaces.IFolderish
-           osha.oira.interfaces.IOSHAContentSkinLayer
-           plone.dexterity.interfaces.IDexterityFTI"
-      provides="zope.publisher.interfaces.browser.IBrowserPage"
-      factory=".surveygroup.AddView"
-      name="euphorie.surveygroup"/>
-
   <configure package="plonetheme.nuplone.skin">
     <browser:page
         name="delete"

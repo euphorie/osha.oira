@@ -1,17 +1,7 @@
 from Acquisition import aq_parent
 from euphorie.content import MessageFactory as _
-from euphorie.content.browser import surveygroup
 from plone import api
 from plonetheme.nuplone.skin import actions
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-
-class AddForm(surveygroup.AddForm):
-    template = ViewPageTemplateFile("templates/surveygroup_add.pt")
-
-
-class AddView(surveygroup.AddView):
-    form = AddForm
 
 
 class Delete(actions.Delete):

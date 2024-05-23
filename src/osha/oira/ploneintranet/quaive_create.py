@@ -15,24 +15,6 @@ from zope.interface import implementer
 class QuaiveCreateFormMixin:
     template = ViewPageTemplateFile("templates/quaive-create.pt")
 
-    def nextURL(self):
-        """We want to redirect to the quaive edit form
-
-        We try to sniff from the referer where to redirect the user to.
-
-        If we fail, we server the default.
-        """
-        referer = self.request.getHeader("HTTP_REFERER")
-        if referer:
-            referer = referer.replace("@@", "")
-            if "/panel-oira-remote-create/" in referer:
-                referer = referer.partition("?")[0]
-                base_url, path = referer.partition("/panel-oira-remote-create/")[::2]
-                new_obj_id = self.immediate_view.rpartition("/")[-1]
-                return f"{base_url}/@@oira-edit/{path}/{new_obj_id}"
-
-        return super().nextURL()
-
 
 class QuaiveCreateViewMixin:
     def __init__(self, context, request):

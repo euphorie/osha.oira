@@ -106,7 +106,7 @@
   </fieldset>
 
   <tal:country repeat="country countries">
-    <fieldset class="group"
+    <fieldset class="pat-checklist group"
               tal:condition="python: request.get('source') == 'other' and request.get('country', view.form.my_country) == country['id']"
     >
       <p class="legend"
@@ -142,7 +142,7 @@
                     name string:survey.${country/id}.${group/id};
                     value python:request.form.get(name, group['surveys'][0]['id']);
                   "
-                  tal:condition="python: request.get('source') == 'other' and request.get('country') == country['id'] and request.get('sector.%s' % country['id']) == '%s.%s' % (sector['id'], group['id'])"
+                  tal:condition="python: request.get('source') == 'other' and request.get('country', view.form.my_country) == country['id'] and request.get('sector.%s' % country['id'], '%s.%s' % (view.form.my_sector, view.form.my_group)) == '%s.%s' % (sector['id'], group['id'])"
         >
           <legend i18n:translate="label_choose_survey">Choose a revision of the
             selected OiRA Tool</legend>

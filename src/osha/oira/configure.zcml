@@ -56,12 +56,6 @@
     name="osha.oira.countries"
     />
 
-  <interface
-      interface=".interfaces.IOSHAContentSkinLayer"
-      type="zope.publisher.interfaces.browser.IBrowserSkinType"
-      name="OiRA"
-      />
-
   <browser:page
       name="outdated-tools-view"
       for="Products.CMFCore.interfaces.ISiteRoot"

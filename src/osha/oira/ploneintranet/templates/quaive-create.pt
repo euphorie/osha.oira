@@ -28,7 +28,7 @@
 
       <form class="pat-form pat-inject"
             id="${view/id}"
-            action="${request/getURL}"
+            action="${python: request.get('quaive_edit_url') or request.getURL()}"
             enctype="${view/enctype}"
             method="${view/method}"
             data-pat-inject="source: #quaive-content; target: #quaive-content; history: record &amp;&amp; source: #sidebar-oira; target: #sidebar-oira"

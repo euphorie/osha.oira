@@ -1,9 +1,7 @@
-from osha.oira import interfaces
 from osha.oira.testing import OiRAIntegrationTestCase
 from plonetheme.nuplone.z3cform.widget import SingleRadioWidget
 from z3c.form.browser.select import SelectWidget
 from z3c.form.interfaces import IFieldWidget
-from zope.interface import alsoProvides
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -31,10 +29,6 @@ class OiRARiskTests(OiRAIntegrationTestCase):
         self.loginAsPortalOwner()
         for risk_type in ["kinney", "french"]:
             module = self.createModule(risk_type, "sector-" + risk_type)
-            # Merely installing the OiRA skin doesn't set it's layer on the
-            # request. This happens during IBeforeTraverseEvent, so we have to do
-            # here manually
-            alsoProvides(self.portal.REQUEST, interfaces.IOSHAContentSkinLayer)
 
             # Test AddForm
             form = module.unrestrictedTraverse("++add++euphorie.risk").form_instance
@@ -58,7 +52,6 @@ class OiRARiskTests(OiRAIntegrationTestCase):
         """#1537 The Choice fields must be uniform and all radio buttons."""
         self.loginAsPortalOwner()
         module = self.createModule()
-        alsoProvides(self.portal.REQUEST, interfaces.IOSHAContentSkinLayer)
         form = module.unrestrictedTraverse("++add++euphorie.risk").form_instance
         form.updateFields()
 

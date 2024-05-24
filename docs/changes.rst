@@ -1,8 +1,13 @@
 Changelog
 =========
 
-9.1.3 (unreleased)
-------------------
+10.0.0 (unreleased)
+-------------------
+
+- Get rid of the htmllaundry dependency, replace it with the
+  equivalent code from Euphorie.
+  Declare support for Plone 6.
+  [ale-rt]
 
 - Show company certificates in overview
   (`#2142 <https://github.com/syslabcom/scrum/issues/2142>`_)

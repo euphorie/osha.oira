@@ -5,7 +5,7 @@ import monkeypatch_setup  # noqa: F401
 import os
 
 
-version = "9.1.3.dev0"
+version = "10.0.0.dev0"
 
 setup(
     name="osha.oira",
@@ -18,7 +18,8 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 5.1",
+        "Framework :: Plone :: 5.2",
+        "Framework :: Plone :: 6.0",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",
@@ -38,7 +39,6 @@ setup(
     install_requires=[
         "Euphorie >=14.0.0",
         "ftw.upgrade",
-        "htmllaundry",
         "mobile.sniffer",
         "NuPlone >=2.1.0",
         "pas.plugins.ldap",

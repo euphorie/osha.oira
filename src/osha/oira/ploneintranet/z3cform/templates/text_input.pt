@@ -13,6 +13,7 @@
            maxlength="${view/maxlength}"
            name="${view/name}"
            readonly="${view/readonly}"
+           required="${python: view.required and 'required' or None}"
            size="${view/size}"
            type="${view/type|string:text}"
            value="${view/value}"

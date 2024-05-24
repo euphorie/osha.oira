@@ -1,9 +1,7 @@
-from osha.oira import interfaces
 from osha.oira.testing import OiRAIntegrationTestCase
 from plonetheme.nuplone.z3cform.widget import SingleRadioWidget
 from z3c.form.browser.select import SelectWidget
 from z3c.form.interfaces import IFieldWidget
-from zope.interface import alsoProvides
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -24,6 +22,27 @@ class OiRARiskTests(OiRAIntegrationTestCase):
         survey = self._create(surveygroup, "euphorie.survey", "survey")
         return self._create(survey, "euphorie.module", "module")
 
+    def test_request_layers(self):
+        """Test that request layers are set up correctly."""
+        from osha.oira.interfaces import IOSHAContentSkinLayer
+        from zope.interface import noLongerProvides
+
+        # Given we have the IOSHAContentSkinLayer we get the AddView defined in
+        # out custom package
+        self.assertTrue(IOSHAContentSkinLayer.providedBy(self.request))
+        self.assertEqual(
+            repr(self.portal.restrictedTraverse("++add++euphorie.risk").__class__),
+            "<class 'osha.oira.content.browser.risk.AddView'>",
+        )
+
+        # If we remove the IOSHAContentSkinLayer we get the AddView
+        # that comes from euphorie
+        noLongerProvides(self.request, IOSHAContentSkinLayer)
+        self.assertEqual(
+            repr(self.portal.restrictedTraverse("++add++euphorie.risk").__class__),
+            "<class 'euphorie.content.browser.risk.AddView'>",
+        )
+
     def testDynamicDescription(self):
         """#3343: Customize infoBubble description according to calculation
         method.
@@ -31,10 +50,6 @@ class OiRARiskTests(OiRAIntegrationTestCase):
         self.loginAsPortalOwner()
         for risk_type in ["kinney", "french"]:
             module = self.createModule(risk_type, "sector-" + risk_type)
-            # Merely installing the OiRA skin doesn't set it's layer on the
-            # request. This happens during IBeforeTraverseEvent, so we have to do
-            # here manually
-            alsoProvides(self.portal.REQUEST, interfaces.IOSHAContentSkinLayer)
 
             # Test AddForm
             form = module.unrestrictedTraverse("++add++euphorie.risk").form_instance
@@ -58,7 +73,6 @@ class OiRARiskTests(OiRAIntegrationTestCase):
         """#1537 The Choice fields must be uniform and all radio buttons."""
         self.loginAsPortalOwner()
         module = self.createModule()
-        alsoProvides(self.portal.REQUEST, interfaces.IOSHAContentSkinLayer)
         form = module.unrestrictedTraverse("++add++euphorie.risk").form_instance
         form.updateFields()
 

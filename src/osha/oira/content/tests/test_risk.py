@@ -22,6 +22,27 @@ class OiRARiskTests(OiRAIntegrationTestCase):
         survey = self._create(surveygroup, "euphorie.survey", "survey")
         return self._create(survey, "euphorie.module", "module")
 
+    def test_request_layers(self):
+        """Test that request layers are set up correctly."""
+        from osha.oira.interfaces import IOSHAContentSkinLayer
+        from zope.interface import noLongerProvides
+
+        # Given we have the IOSHAContentSkinLayer we get the AddView defined in
+        # out custom package
+        self.assertTrue(IOSHAContentSkinLayer.providedBy(self.request))
+        self.assertEqual(
+            repr(self.portal.restrictedTraverse("++add++euphorie.risk").__class__),
+            "<class 'osha.oira.content.browser.risk.AddView'>",
+        )
+
+        # If we remove the IOSHAContentSkinLayer we get the AddView
+        # that comes from euphorie
+        noLongerProvides(self.request, IOSHAContentSkinLayer)
+        self.assertEqual(
+            repr(self.portal.restrictedTraverse("++add++euphorie.risk").__class__),
+            "<class 'euphorie.content.browser.risk.AddView'>",
+        )
+
     def testDynamicDescription(self):
         """#3343: Customize infoBubble description according to calculation
         method.

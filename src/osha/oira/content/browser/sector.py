@@ -1,7 +1,6 @@
 from euphorie.content.browser import sector
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.browser.add import DefaultAddView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class AddForm(DefaultAddForm):
@@ -20,12 +19,9 @@ class AddView(DefaultAddView):
 
 
 class EditForm(sector.EditForm):
-    template = ViewPageTemplateFile("templates/sector_edit.pt")
 
-    def extractData(self):
-        unwanted_fields = ("locked", "password", "contact_name", "contact_email")
-        self.fields = self.fields.omit(*unwanted_fields)
-        for key in unwanted_fields:
-            if key in self.widgets:
-                del self.widgets[key]
-        return super().extractData()
+    def updateFields(self):
+        super().updateFields()
+        self.fields = self.fields.omit(
+            "title", "login", "locked", "password", "contact_name", "contact_email"
+        )

@@ -8,6 +8,7 @@ from zope.interface import alsoProvides
 from zope.interface import Invalid
 from zope.interface import invariant
 
+
 try:
     # This needs a merge of https://github.com/euphorie/Euphorie/pull/739
     from euphorie.htmllaundry.z3cform import HtmlText

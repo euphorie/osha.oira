@@ -9,6 +9,9 @@ Changelog
   Declare support for Plone 6.
   [ale-rt]
 
+- Remove an unused behavior.
+  [ale-rt]
+
 - Show company certificates in overview
   (`#2142 <https://github.com/syslabcom/scrum/issues/2142>`_)
   [reinhardt]

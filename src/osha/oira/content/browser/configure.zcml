@@ -84,6 +84,14 @@
       />
 
   <browser:page
+      name="edit2"
+      for="euphorie.content.sector.Sector"
+      permission="cmf.ModifyPortalContent"
+      class=".sector.EditForm2"
+      layer="osha.oira.interfaces.IProductLayer"
+      />
+
+  <browser:page
       name="upload"
       for="euphorie.content.sector.ISector"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"

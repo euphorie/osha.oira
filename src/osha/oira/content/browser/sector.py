@@ -22,10 +22,17 @@ class AddView(DefaultAddView):
 class EditForm(sector.EditForm):
     template = ViewPageTemplateFile("templates/sector_edit.pt")
 
-    def extractData(self):
-        unwanted_fields = ("locked", "password", "contact_name", "contact_email")
-        self.fields = self.fields.omit(*unwanted_fields)
-        for key in unwanted_fields:
-            if key in self.widgets:
-                del self.widgets[key]
-        return super().extractData()
+    def updateFields(self):
+        super().updateFields()
+        self.fields = self.fields.omit(
+            "locked", "password", "contact_name", "contact_email"
+        )
+
+
+class EditForm2(sector.EditForm):
+
+    def updateFields(self):
+        super().updateFields()
+        self.fields = self.fields.omit(
+            "title", "login", "locked", "password", "contact_name", "contact_email"
+        )

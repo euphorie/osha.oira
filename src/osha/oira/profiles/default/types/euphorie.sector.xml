@@ -26,7 +26,6 @@
  <property name="behaviors">
   <element value="plone.app.content.interfaces.INameFromTitle" />
   <element value="euphorie.content.behaviour.uniqueid.IIdGenerationRoot" />
-  <element value="osha.oira.sector.IOSHASector" />
  </property>
 
  <!-- View information -->
@@ -53,4 +52,3 @@
   <permission value="Modify portal content"/>
  </action>
 </object>
-

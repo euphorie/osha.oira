@@ -48,6 +48,7 @@ setup(
         "plone.formwidget.recaptcha",
         "plone.restapi",
         "plone.tiles",
+        "Products.MemcachedManager",
         "Products.statusmessages",
         "requests",
         "setuptools",

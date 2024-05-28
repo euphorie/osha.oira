@@ -29,3 +29,7 @@ repos:
     rev: 1.0.0
     hooks:
       - id: check-po
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.35.1
+    hooks:
+      - id: yamllint

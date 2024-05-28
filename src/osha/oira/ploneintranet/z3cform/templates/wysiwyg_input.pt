@@ -6,11 +6,87 @@
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <fieldset class="group ${view/@@dependencies}">
+  <fieldset class="group ${view/@@dependencies} pat-rich">
     <legend title="${view/field/description}">
       <span tal:replace="view/label"></span>
     </legend>
+
+    <div class="editor-toolbar tiptap canvas-toolbar"
+         id="texteditor-toolbar-${view/id}">
+
+      <button class="button-undo icon icon-ccw pat-tooltip"
+              type="button"
+              data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+              i18n:translate=""
+      >Undo</button>
+
+      <button class="button-redo icon icon-cw pat-tooltip"
+              type="button"
+              data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+              i18n:translate=""
+      >Redo</button>
+
+      <a class="icon icon-html5 button-source pat-modal pat-tooltip"
+         href="#tiptap-modal-source-editor--fieldname-${view/id}"
+         data-pat-modal="class: medium panel html-source-editor panel-html-source-editor"
+         data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+         i18n:translate=""
+      >Code</a>
+
+      <button class="icon icon-bold button-bold pat-tooltip"
+              type="button"
+              data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+              i18n:translate=""
+      >Bold</button>
+      <button class="icon icon-italic button-italic pat-tooltip"
+              type="button"
+              data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+              i18n:translate=""
+      >Italic</button>
+
+      <div class="pat-collapsible pat-context-menu closed align-left no-label icon-list"
+           id="list-menu"
+           type="button"
+           data-pat-collapsible="close-trigger: .pat-context-menu:not(#list-menu),.close-menu;"
+      >
+        <strong class="context-menu-label menu-trigger pat-tooltip"
+                data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                i18n:translate=""
+        >Lists</strong>
+        <p class="close-menu"
+           i18n:translate=""
+        >Close</p>
+        <ul class="menu-list">
+          <li>
+            <button class="button-unordered-list icon-list-bullet"
+                    type="button"
+                    i18n:translate=""
+            >Bullet list</button>
+          </li>
+          <li>
+            <button class="button-ordered-list icon-list-numbered"
+                    type="button"
+                    i18n:translate=""
+            >Ordered list</button>
+          </li>
+        </ul>
+      </div>
+
+      <a class="icon icon-link button-link pat-modal pat-tooltip"
+         href="#tiptap-modal-hyperlink--fieldname-${view/id}"
+         data-pat-modal="class: medium panel panel-hyperlink"
+         data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+         i18n:translate=""
+      >Hyperlink</a>
+    </div>
+
     <textarea class="${view/klass} pat-tiptap"
+              data-pat-tiptap="
+                toolbar-external: #texteditor-toolbar-${view/id};
+                link-panel: #tiptap-model-hyperlink--fieldname-${view/id} .link-panel;
+                link-menu: #tiptap-context-menu-hyperlink--fieldname-${view/id};
+                source-panel: #tiptap-model-source-editor--fieldname-${view/id} .source-panel;
+              "
               id="${view/id}"
               cols="${view/cols}"
               disabled="${view/disabled}"
@@ -27,6 +103,111 @@
          tal:content="description"
          i18n:attributes="title"
     ></dfn>
+
+  <!-- modal source editor -->
+  <template id="tiptap-modal-source-editor--fieldname-${view/id}">
+    <h1>Edit HTML</h1>
+    <div class="panel-body source-panel">
+      <div class="container">
+        <div class="html-source-panel-content">
+          <form>
+            <textarea class="pat-autofocus"
+                      name="tiptap-source"
+            ></textarea>
+          </form>
+        </div>
+        <div class="buttons button-bar pat-bumper"
+             id="modal-button-bar"
+        >
+          <button class="pat-button default close-panel icon-ok-circle"
+                  name="tiptap-confirm"
+                  type="button"
+                  i18n:translate=""
+          >Apply</button>
+          <button class="pat-button close-panel icon-cancel-circle"
+                  type="button"
+                  i18n:translate=""
+          >Cancel</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+    <!-- modal link editor -->
+    <template id="tiptap-modal-hyperlink--fieldname-${view/id}">
+      <h1>Edit Link</h1>
+      <div class="panel-body link-panel">
+        <div class="container">
+          <form class="pat-form">
+            <fieldset class="vertical">
+              <fieldset class="group url">
+                <legend i18n:translate="">URL</legend>
+                <span class="button-field type-url">
+                  <input class="pat-autofocus"
+                         name="tiptap-href"
+                         oninput="if (this.value) { this.nextElementSibling.href = this.value; } else { this.nextElementSibling.removeAttribute('href'); }"
+                         type="url"
+                         value=""
+                  />
+                  <a class="follow"
+                     id="event-url-follow-button"
+                     href=""
+                     target="_blank"
+                     title="Visit linked web page"
+                     i18n:attributes="title"
+                     i18n:translate=""
+                  >Follow</a>
+                </span>
+              </fieldset>
+              <label>
+                <tal:i18n i18n:translate="">Link text</tal:i18n>
+                <input name="tiptap-text"
+                       type="text"
+                />
+              </label>
+            </fieldset>
+          </form>
+          <div class="buttons button-bar pat-bumper"
+               id="modal-button-bar"
+          >
+            <button class="pat-button default close-panel icon-ok-circle"
+                    name="tiptap-confirm"
+                    type="submit"
+                    i18n:translate=""
+            >Insert</button>
+            <button class="pat-button close-panel icon-cancel-circle"
+                    type="button"
+                    i18n:translate=""
+            >Cancel</button>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- context menu link -->
+    <template id="tiptap-context-menu-hyperlink--fieldname-${view/id}">
+      <ul class="menu tiptap-link-context-menu">
+        <li>
+          <a class="icon-link close-panel tiptap-open-new-link"
+             href=""
+             target="_blank"
+             i18n:translate=""
+          >Visit linked web page</a>
+        </li>
+        <li>
+          <a class="icon-pencil close-panel tiptap-edit-link"
+             i18n:translate=""
+          >Edit link</a>
+        </li>
+        <li>
+          <a class="icon-unlink close-panel tiptap-unlink"
+             i18n:translate=""
+          >Unlink</a>
+        </li>
+      </ul>
+    </template>
+
+
   </fieldset>
 
   <section class="help"

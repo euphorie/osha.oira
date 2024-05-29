@@ -36,11 +36,6 @@
   <include package=".upgrade" />
   <include package=".statistics" />
 
-  <subscriber
-      for="zope.processlifetime.IProcessStarting"
-      handler=".dbconfig.dbconfig"
-      />
-
   <!-- Vocabularies -->
   <utility
     component=".vocabularies.ToolVersionsVocabularyFactory"

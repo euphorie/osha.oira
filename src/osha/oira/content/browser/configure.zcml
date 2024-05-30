@@ -240,4 +240,11 @@
       template="templates/about.pt"
       />
 
+  <browser:page
+      name="map-images"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      class=".map_images.MapImages"
+      permission="cmf.ManagePortal"
+      />
+
 </configure>

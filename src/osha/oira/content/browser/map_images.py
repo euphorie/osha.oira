@@ -123,3 +123,4 @@ class MapImages(BrowserView):
                         except Exception as e:
                             log.exception(e)
                             continue
+        return "OK"

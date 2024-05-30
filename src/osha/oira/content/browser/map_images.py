@@ -1,10 +1,10 @@
 from lxml import etree
 from pathlib import posixpath
+from plone import api
 from plone.namedfile.file import NamedBlobImage
 from Products.Five import BrowserView
 from urllib.parse import unquote
 from urllib.parse import urlparse
-from zope.component.hooks import setSite
 
 import logging
 import requests
@@ -28,9 +28,9 @@ class MapImages(BrowserView):
         else:
             images_path = posixpath.abspath(".")
 
-        app = locals()["app"]
-        setSite(app["Plone2"])
-        wt = app["Plone2"]["portal_workflow"]
+        portal = api.portal.get()
+        sectors = portal.sectors
+        wt = api.portal.get_tool("portal_workflow")
 
         def get_filename():
             sourcename = urlparse(img.attrib["src"]).path.split("/")[-1]
@@ -68,9 +68,7 @@ class MapImages(BrowserView):
                     continue
 
                 try:
-                    surveygroup = app.unrestrictedTraverse(
-                        "/".join(("/Plone2/sectors", path))
-                    )
+                    surveygroup = sectors.unrestrictedTraverse(path)
                 except KeyError:
                     log.warning(f"Tool not found: {path}")
                     continue

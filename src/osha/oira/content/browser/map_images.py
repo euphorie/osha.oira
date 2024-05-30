@@ -9,7 +9,6 @@ from zope.component.hooks import setSite
 import logging
 import requests
 import sys
-import transaction
 import urllib.request
 
 
@@ -126,5 +125,3 @@ class MapImages(BrowserView):
                         except Exception as e:
                             log.exception(e)
                             continue
-
-        transaction.commit()

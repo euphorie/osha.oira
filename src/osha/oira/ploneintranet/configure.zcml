@@ -128,6 +128,14 @@
       />
 
   <browser:page
+      name="quaive-create-euphorie.profilequestion"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieProfileQuestionView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
       name="quaive-create-euphorie.solution"
       for="*"
       class=".quaive_create.QuaiveCreateEuphorieSolutionView"

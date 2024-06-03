@@ -12,6 +12,10 @@ Changelog
 - Remove an unused behavior.
   [ale-rt]
 
+- Add a "map-images" view to add images to the surveys.
+  The view used to be a script in the old oira buildout.
+  [ale-rt]
+
 - Show company certificates in overview
   (`#2142 <https://github.com/syslabcom/scrum/issues/2142>`_)
   [reinhardt]

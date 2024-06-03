@@ -21,7 +21,8 @@ class MapImages(BrowserView):
     def __call__(self):
         log = logging.getLogger(__name__)
 
-        BASE_URL = "https://oiraproject.eu"
+        log.info("Updating tool images")
+        BASE_URL = "https://oira.osha.europa.eu"
 
         if len(sys.argv) > 3:
             images_path = posixpath.abspath(sys.argv[3])
@@ -45,8 +46,9 @@ class MapImages(BrowserView):
         for page_num in range(255):
             url = (
                 "{}/en/oira-tools?search_api_fulltext=&sort_by=title"
-                "&page={}".format(BASE_URL, page_num)
+                "&page=%2C{}".format(BASE_URL, page_num)
             )
+            log.info("Scanning %s", url)
             page = requests.get(url).text
             tree = etree.HTML(page)
             tool_elements = tree.findall(
@@ -56,7 +58,7 @@ class MapImages(BrowserView):
                 log.warning(f"Stopping at page {page_num} (no more tools found)")
                 break
             for elem in tool_elements:
-                link = elem.find(".//div[@class='tool-link']/a")
+                link = elem.find('.//div[@class="button-risk"]/a')
                 if link is not None:
                     path = "/".join(
                         urlparse(unquote(link.attrib["href"]))
@@ -78,9 +80,7 @@ class MapImages(BrowserView):
                     log.warning(f"Already has image: {path}")
                     continue
 
-                img = elem.find(
-                    ".//div[@class='views-field views-field-field-image']//img"
-                )
+                img = elem.find(".//div[@class='content-view-oira-tools-view']/img")
                 if img is None:
                     log.warning(f"No image for {path}")
                     continue

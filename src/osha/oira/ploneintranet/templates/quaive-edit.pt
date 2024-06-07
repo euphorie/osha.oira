@@ -48,7 +48,7 @@
                     ${action/title}
             </button>
           </tal:action>
-          <tal:versions condition="python:context.portal_type in ('euphorie.survey', 'euphorie.surveygroup')">
+          <tal:versions condition="python:context.portal_type == 'euphorie.survey'">
             <a
                 class="float-after pat-button pat-inject"
                 href="${url}"

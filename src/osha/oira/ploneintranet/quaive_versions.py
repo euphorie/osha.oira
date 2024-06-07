@@ -15,7 +15,3 @@ class QuaiveEditFormMixin:
 
 class SurveyQuaiveVersionsForm(QuaiveEditFormMixin, DefaultEditForm):
     """Custom edit form designed to be embedded in Quaive"""
-
-
-class SurveyGroupQuaiveVersionsForm(QuaiveEditFormMixin, DefaultEditForm):
-    """Custom edit form designed to be embedded in Quaive"""

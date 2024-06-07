@@ -2,9 +2,11 @@ from lxml import etree
 from pathlib import posixpath
 from plone import api
 from plone.namedfile.file import NamedBlobImage
+from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five import BrowserView
 from urllib.parse import unquote
 from urllib.parse import urlparse
+from zope.interface import alsoProvides
 
 import logging
 import requests
@@ -123,4 +125,6 @@ class MapImages(BrowserView):
                         except Exception as e:
                             log.exception(e)
                             continue
+
+        alsoProvides(self.request, IDisableCSRFProtection)
         return "OK"

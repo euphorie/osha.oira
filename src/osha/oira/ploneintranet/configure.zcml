@@ -88,6 +88,14 @@
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
+  <browser:page
+      name="quaive-publish"
+      for="euphorie.content.survey.ISurvey"
+      class=".quaive_publish.PublishSurveyQuaiveForm"
+      template="templates/quaive-edit.pt"
+      permission="euphorie.client.PublishSurvey"
+      layer="plonetheme.nuplone.skin.interfaces.NuPloneSkin"
+      />
 
   <browser:page
       name="quaive-create-euphorie.sector"

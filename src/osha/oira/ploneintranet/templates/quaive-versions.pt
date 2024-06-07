@@ -12,12 +12,66 @@
   <metal:content fill-slot="content">
     <div
         id="quaive-content"
-        class="container"
+        class="container portaltype-${context/portal_type}"
         >
       <h3>${view/label}</h3>
+      <p
+          class="message ${python:'error' if view.widgets.errors else 'notice'}"
+          tal:condition="status"
+          tal:content="status"
+          tal:define="            status view/status;          "
+          i18n:domain="plone"
+          >Form-global message</p>
+      <p
+          class="discrete"
+          tal:condition="python:getattr(view, 'description', None)"
+          >${view/description}</p>
 
-      <div tal:replace="structure context/@@euphorie.versions" />
+      <form
+          id="${view/id}"
+          class="pat-form pat-inject"
+          action="${request/getURL}"
+          enctype="${view/enctype}"
+          method="${view/method}"
+          data-pat-inject="#content #quaive-content &amp;&amp; #quaive-content #quaive-content"
+          >
+        <div
+            class="button-bar"
+            tal:condition="actions"
+            tal:define="                actions view/actions/values|nothing;              "
+            >
+          <tal:action repeat="action actions">
+            <button
+                name="${action/name}"
+                class="pat-button float-after ${python: 'default' if repeat.action.index == 0 else ''}"
+                type="submit"
+                value="${action/title}"
+                >
+                    ${action/title}
+            </button>
+          </tal:action>
 
+        </div>
+
+        <fieldset class="form-panel section horizontal">
+          <tal:widget
+              content="structure widget/render"
+              tal:repeat="widget view/widgets/values"
+              >
+</tal:widget>
+        </fieldset>
+
+
+      </form>
+      <a
+          class="float-after pat-button"
+          href="${here/absolute_url}/@@edit"
+          target="_blank"
+          i18n:translate=""
+          >
+        <!-- TODO: Remove me -->
+        Edit on OiRA
+      </a>
     </div>
   </metal:content>
 </html>

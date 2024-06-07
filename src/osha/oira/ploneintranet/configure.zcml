@@ -80,6 +80,25 @@
       />
 
   <browser:page
+      name="quaive-versions"
+      for="euphorie.content.survey.ISurvey"
+      class=".quaive_versions.SurveyQuaiveVersionsForm"
+      template="templates/quaive-versions.pt"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+
+  <browser:page
+      name="quaive-versions"
+      for="euphorie.content.surveygroup.ISurveyGroup"
+      class=".quaive_versions.SurveyGroupQuaiveVersionsForm"
+      template="templates/quaive-versions.pt"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
       name="quaive-create-euphorie.sector"
       for="*"
       class=".quaive_create.QuaiveCreateEuphorieSectorView"

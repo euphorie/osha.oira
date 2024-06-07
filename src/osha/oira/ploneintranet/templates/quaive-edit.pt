@@ -10,7 +10,7 @@
 
   <metal:title fill-slot="title">${view/label}</metal:title>
   <metal:content fill-slot="content">
-    <div class="container"
+    <div class="container portaltype-${context/portal_type}"
          id="quaive-content"
     >
       <h3>${view/label}</h3>
@@ -48,6 +48,15 @@
                     ${action/title}
             </button>
           </tal:action>
+          <tal:versions condition="python:context.portal_type in ('euphorie.survey', 'euphorie.surveygroup')">
+            <a
+                class="float-after pat-button pat-inject"
+                href="${url}"
+                tal:define="url python:request.getURL().replace('quaive-edit', 'quaive-versions')"
+                data-pat-inject="source: #quaive-content; target: #quaive-content"
+                i18n:translate=""
+                >Edit Oira tool version</a>
+          </tal:versions>
 
         </div>
 

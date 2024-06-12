@@ -41,6 +41,7 @@ setup(
         "ftw.upgrade",
         "mobile.sniffer",
         "NuPlone >=2.1.0",
+        "oira.statistics.deployment",
         "pas.plugins.ldap",
         "Pillow",
         "plone.api",

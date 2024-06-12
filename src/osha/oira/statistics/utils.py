@@ -5,15 +5,15 @@ from euphorie.client.model import Risk
 from euphorie.client.model import Session as EuphorieSession
 from euphorie.client.model import SurveySession
 from euphorie.client.model import SurveyTreeItem
+from oira.statistics.deployment.model import AccountStatistics
+from oira.statistics.deployment.model import CompanyStatistics
+from oira.statistics.deployment.model import NewsletterStatistics
+from oira.statistics.deployment.model import SurveySessionStatistics
+from oira.statistics.deployment.model import SurveyStatistics
 from osha.oira.client.model import NewsletterSubscription
 from osha.oira.client.model import SurveyStatistics as Survey
-from osha.oira.statistics.model import AccountStatistics
-from osha.oira.statistics.model import CompanyStatistics
 from osha.oira.statistics.model import create_session
-from osha.oira.statistics.model import NewsletterStatistics
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN
-from osha.oira.statistics.model import SurveySessionStatistics
-from osha.oira.statistics.model import SurveyStatistics
 from plone.memoize.instance import memoizedproperty
 
 import logging

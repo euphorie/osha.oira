@@ -1,5 +1,5 @@
 from alembic import context
-from osha.oira.statistics.model import Base
+from oira.statistics.deployment.model import Base
 from sqlalchemy import engine_from_config
 from sqlalchemy import exc
 from sqlalchemy import pool

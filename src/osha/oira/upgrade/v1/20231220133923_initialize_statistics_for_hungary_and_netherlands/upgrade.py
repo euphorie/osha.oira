@@ -1,5 +1,5 @@
 from ftw.upgrade import UpgradeStep
-from osha.oira.statistics.model import Base
+from oira.statistics.deployment.model import Base
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.model import get_postgres_url
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN

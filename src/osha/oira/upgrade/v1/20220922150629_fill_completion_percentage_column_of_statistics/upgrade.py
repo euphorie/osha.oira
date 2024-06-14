@@ -1,6 +1,5 @@
 from euphorie.client.model import SurveySession
 from ftw.upgrade import UpgradeStep
-from oira.statistics.deployment.model import SurveySessionStatistics
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.model import get_postgres_url
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN
@@ -9,6 +8,12 @@ from sqlalchemy import exc
 from z3c.saconfig import Session
 
 import logging
+
+
+try:
+    from oira.statistics.deployment.model import SurveySessionStatistics
+except ImportError:
+    SurveySessionStatistics = None
 
 
 logger = logging.getLogger(__name__)
@@ -53,6 +58,10 @@ class FillCompletionPercentageColumnOfStatistics(UpgradeStep):
             logger.info("%r is up to date", country or "global")
 
     def __call__(self):
+        if SurveySessionStatistics is None:
+            logger.info("Could not import statistics code, skipping upgrade")
+            return
+
         url_base = get_postgres_url()
         for country in [None] + list_countries(Session()):
             url = url_base.format(

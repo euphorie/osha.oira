@@ -1,8 +1,6 @@
 from euphorie.client.model import Account
 from euphorie.client.model import SurveySession
 from ftw.upgrade import UpgradeStep
-from oira.statistics.deployment.model import AccountStatistics
-from oira.statistics.deployment.model import SurveySessionStatistics
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.model import get_postgres_url
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN
@@ -13,6 +11,13 @@ from z3c.saconfig import Session
 
 import logging
 import sqlalchemy
+
+
+try:
+    from oira.statistics.deployment.model import AccountStatistics
+    from oira.statistics.deployment.model import SurveySessionStatistics
+except ImportError:
+    SurveySessionStatistics = None
 
 
 logger = logging.getLogger(__name__)
@@ -84,6 +89,9 @@ class RemovePartnerAccountsFromStatistics(UpgradeStep):
         self.remove_partner_sessions(country, session_statistics)
 
     def __call__(self):
+        if SurveySessionStatistics is None:
+            logger.info("Could not import statistics code, skipping upgrade")
+            return
         url_base = get_postgres_url()
         for country in [None] + list_countries(Session()):
             url = url_base.format(

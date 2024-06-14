@@ -5,11 +5,6 @@ from euphorie.client.model import Risk
 from euphorie.client.model import Session as EuphorieSession
 from euphorie.client.model import SurveySession
 from euphorie.client.model import SurveyTreeItem
-from oira.statistics.deployment.model import AccountStatistics
-from oira.statistics.deployment.model import CompanyStatistics
-from oira.statistics.deployment.model import NewsletterStatistics
-from oira.statistics.deployment.model import SurveySessionStatistics
-from oira.statistics.deployment.model import SurveyStatistics
 from osha.oira.client.model import NewsletterSubscription
 from osha.oira.client.model import SurveyStatistics as Survey
 from osha.oira.statistics.model import create_session
@@ -18,6 +13,18 @@ from plone.memoize.instance import memoizedproperty
 
 import logging
 import sqlalchemy
+
+
+try:
+    from oira.statistics.deployment.model import AccountStatistics
+    from oira.statistics.deployment.model import CompanyStatistics
+    from oira.statistics.deployment.model import NewsletterStatistics
+    from oira.statistics.deployment.model import SurveySessionStatistics
+    from oira.statistics.deployment.model import SurveyStatistics
+
+    have_statistics = True
+except ImportError:
+    have_statistics = False
 
 
 log = logging.getLogger(__name__)
@@ -445,6 +452,9 @@ class UpdateStatisticsDatabases:
                 log.info("Processed %r rows", offset)
 
     def __call__(self):
+        if not have_statistics:
+            log.warn("Could not update statistics! Import failed")
+            return "FAIL"
         error = False
         for country in [None] + list_countries(self.session_application):
             database = STATISTICS_DATABASE_PATTERN.format(suffix=country or "global")

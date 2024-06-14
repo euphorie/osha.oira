@@ -41,7 +41,6 @@ setup(
         "ftw.upgrade",
         "mobile.sniffer",
         "NuPlone >=2.1.0",
-        "oira.statistics.deployment",
         "pas.plugins.ldap",
         "Pillow",
         "plone.api",
@@ -65,6 +64,9 @@ setup(
             "pas.plugins.ldap",
             "plone.app.robotframework[debug]",
             "plone.app.testing",
+        ],
+        "statistics": [
+            "oira.statistics.deployment",
         ],
     },
     entry_points="""

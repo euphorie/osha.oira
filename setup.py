@@ -58,15 +58,11 @@ setup(
     ],
     extras_require={
         "tests": [
-            "alchemy_mock",
             "Euphorie [tests]",
             "node.ext.ldap",
             "pas.plugins.ldap",
             "plone.app.robotframework[debug]",
             "plone.app.testing",
-        ],
-        "statistics": [
-            "oira.statistics.deployment",
         ],
     },
     entry_points="""
@@ -76,7 +72,6 @@ setup(
       [console_scripts]
       outdated_tools = osha.oira.scripts:outdated_tools
       write_statistics = osha.oira.scripts:write_statistics
-      update_statistics = osha.oira.statistics.scripts:update_statistics
       clean_up_guest_sessions = osha.oira.sql_scripts:clean_up_guest_sessions
       """,
 )

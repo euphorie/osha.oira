@@ -4,13 +4,6 @@
     >
 
   <browser:page
-      name="update-statistics"
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
-      class=".views.UpdateStatistics"
-      permission="cmf.ManagePortal"
-      />
-
-  <browser:page
       name="update-tool-info"
       for="plone.app.layout.navigation.interfaces.INavigationRoot"
       class=".views.UpdateToolInfo"

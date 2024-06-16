@@ -3,13 +3,17 @@ from ftw.upgrade import UpgradeStep
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.model import get_postgres_url
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN
-from osha.oira.statistics.model import SurveySessionStatistics
 from osha.oira.statistics.utils import list_countries
-from osha.oira.upgrade.utils import alembic_upgrade_statistics_to
 from sqlalchemy import exc
 from z3c.saconfig import Session
 
 import logging
+
+
+try:
+    from oira.statistics.deployment.model import SurveySessionStatistics
+except ImportError:
+    SurveySessionStatistics = None
 
 
 logger = logging.getLogger(__name__)
@@ -49,7 +53,13 @@ class AddModifiedAndCompletionPercentageColumnsToSurveyStatistics(UpgradeStep):
             logger.warning("No matching sessions found for %r", country)
 
     def __call__(self):
-        alembic_upgrade_statistics_to(self.target_version)
+        if SurveySessionStatistics is None:
+            logger.info("Could not import statistics code, skipping upgrade")
+            return
+        logger.info(
+            "Removed alembic upgrade - statistics database upgrades are now handled in "
+            "oira.statistics.deployment"
+        )
         url_base = get_postgres_url()
         for country in [None] + list_countries(Session()):
             url = url_base.format(

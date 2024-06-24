@@ -23,6 +23,10 @@ Changelog
   (`#2143 <https://github.com/syslabcom/scrum/issues/2143>`_)
   [reinhardt]
 
+- Remove the file ``omega-sql-tmp.sql`` that apparently was
+  pushed by mistake.
+  [ale-rt]
+
 
 9.1.2 (2024-02-20)
 ------------------

@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:meta="http://xml.zope.org/namespaces/meta"
@@ -9,33 +8,38 @@
       metal:use-macro="context/@@layout/macros/layout"
       i18n:domain="euphorie"
 >
+  <head>
+    <metal:meta use-macro="webhelpers/macros/headers" />
+  </head>
   <body>
     <metal:title metal:fill-slot="title"
                  i18n:translate="title_unpublish"
     >Unpublish "<tal:span i18n:name="title">${context/title}</tal:span>"</metal:title>
     <metal:content fill-slot="content">
-      <form class="concise"
-            action="${request/getURL}"
-            method="post"
+      <form action="${request/getURL}"
+            enctype="${view/enctype}"
+            method="${view/method}"
+            class="pat-form pat-inject"
+            data-pat-inject="#content #quaive-content &amp;&amp; #quaive-content #quaive-content"
       >
-        <fieldset>
-          <span tal:replace="structure context/@@authenticator/authenticator"></span>
-        </fieldset>
-
         <p i18n:translate="unpublish_confirm">Are you sure you want to unpublish this OiRA Tool?</p>
 
-        <div class="buttonBar">
-          <button class="cancel"
-                  name="action"
-                  type="submit"
-                  value="cancel"
-                  i18n:translate="button_cancel"
-          >Cancel</button>
-          <button name="action"
-                  type="submit"
-                  value="unpublish"
-                  i18n:translate="button_unpublish"
-          >Unpublish</button>
+        <div class="buttonBar"
+             tal:define="
+               actions view/actions/values|nothing;
+             "
+             tal:condition="actions"
+        >
+        <tal:action repeat="action actions">
+          <button
+              name="${action/name}"
+              class="pat-button float-after ${python: 'default' if repeat.action.index == 0 else ''}"
+              type="submit"
+              value="${action/title}"
+              >
+                  ${action/title}
+          </button>
+        </tal:action>
         </div>
       </form>
     </metal:content>

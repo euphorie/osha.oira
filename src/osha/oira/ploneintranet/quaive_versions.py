@@ -1,4 +1,3 @@
-from Acquisition import aq_parent
 from euphorie.client import MessageFactory as _
 from osha.oira.ploneintranet.quaive_mixin import QuaiveEditFormMixin
 from z3c.form import button
@@ -18,8 +17,9 @@ class SurveyQuaiveVersionsForm(QuaiveEditFormMixin, form.Form):
 
     @button.buttonAndHandler(_("button_unpublish", default="Unpublish"))
     def handleUnpublish(self, action):
-        parent_url = aq_parent(self.context).absolute_url()
-        self.request.response.redirect(f"{parent_url}/@@quaive-unpublish")
+        self.request.response.redirect(
+            f"{self.context.absolute_url()}/@@quaive-unpublish"
+        )
 
     @button.buttonAndHandler(_("button_cancel", default="Cancel"))
     def handleCancel(self, action):

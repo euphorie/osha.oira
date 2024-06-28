@@ -19,6 +19,8 @@
       <form action="${request/getURL}"
             enctype="${view/enctype}"
             method="${view/method}"
+            class="pat-form pat-inject"
+            data-pat-inject="#content #quaive-content &amp;&amp; #quaive-content #quaive-content"
       >
         <p tal:condition="not:view/is_surveygroup_published"
            i18n:translate="intro_publish_first_time"
@@ -50,9 +52,16 @@
              "
              tal:condition="actions"
         >
-          <tal:action repeat="action actions"
-                      replace="structure action/render"
-          />
+        <tal:action repeat="action actions">
+          <button
+              name="${action/name}"
+              class="pat-button float-after ${python: 'default' if repeat.action.index == 0 else ''}"
+              type="submit"
+              value="${action/title}"
+              >
+                  ${action/title}
+          </button>
+        </tal:action>
         </div>
       </form>
     </metal:content>

@@ -1,19 +1,25 @@
+from euphorie.client import MessageFactory as _
 from euphorie.client.browser.publish import PublishSurvey
+from osha.oira.ploneintranet.quaive_mixin import QuaiveEditFormMixin
+from z3c.form import button
 
 
-# from osha.oira.ploneintranet.quaive_mixin import QuaiveEditFormMixin
-
-
-class PublishSurveyQuaiveForm(PublishSurvey):
+class PublishSurveyQuaiveForm(QuaiveEditFormMixin, PublishSurvey):
     """Custom edit form designed to be embedded in Quaive
-
-    Actually, there is nothing custom yet.
-    We probably want to use QuaiveEditFormMixin, but then we need our own template,
-    or use quaive-edit.pt and get this to show the PublishSurvey form,
-    but then we need to make make some changes in
-    euphorie.client.browser.templates/publish.pt so that the various texts there
-    are available in the PublishSurvey class, as a label or something.  I mean
-    texts like "Are you sure you want to publish this OiRA Tool?", or "republish".
-    That should be doable in a way that is fine for standard Euphorie as well,
-    but takes a bit of time.
     """
+
+    def nextURL(self):
+        return f"{self.context.absolute_url()}/@@quaive-edit"
+
+    @button.buttonAndHandler(_("button_publish", default="Publish"))
+    def handlePublish(self, action):
+        # Call our super.  Due to the @button we need to add 'self' in the call.
+        # The super calls 'self.publish', adds a status message, and redirects to
+        # the standard view.  We want a different redirect.  And note that currently
+        # the status message is not shown in Quaive.
+        super().handlePublish(self, action)
+        self.request.response.redirect(self.nextURL())
+
+    @button.buttonAndHandler(_("button_cancel", default="Cancel"))
+    def handleCancel(self, action):
+        self.request.response.redirect(self.nextURL())

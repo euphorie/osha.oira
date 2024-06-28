@@ -10,3 +10,8 @@ class QuaiveEditFormMixin:
 
     def nextURL(self):
         return f"{self.context.absolute_url()}/@@{self.__name__}"
+
+    @property
+    def is_edit_form(self):
+        """Is this the main edit form or is it some other form?"""
+        return self.__name__ == "quaive-edit"

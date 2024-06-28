@@ -48,7 +48,7 @@
                     ${action/title}
             </button>
           </tal:action>
-          <tal:versions condition="python:context.portal_type == 'euphorie.survey'">
+          <tal:versions condition="python:context.portal_type == 'euphorie.survey' and view.is_edit_form">
             <a
                 class="float-after pat-button pat-inject"
                 href="${url}"

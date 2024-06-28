@@ -12,12 +12,20 @@ Changelog
 - Remove an unused behavior.
   [ale-rt]
 
+- Add a "map-images" view to add images to the surveys.
+  The view used to be a script in the old oira buildout.
+  [ale-rt]
+
 - Show company certificates in overview
   (`#2142 <https://github.com/syslabcom/scrum/issues/2142>`_)
   [reinhardt]
 - Show certificates on assessment status page
   (`#2143 <https://github.com/syslabcom/scrum/issues/2143>`_)
   [reinhardt]
+
+- Remove the file ``omega-sql-tmp.sql`` that apparently was
+  pushed by mistake.
+  [ale-rt]
 
 
 9.1.2 (2024-02-20)

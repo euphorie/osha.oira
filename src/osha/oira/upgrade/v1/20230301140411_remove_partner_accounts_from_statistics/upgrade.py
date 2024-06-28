@@ -1,13 +1,10 @@
 from euphorie.client.model import Account
 from euphorie.client.model import SurveySession
 from ftw.upgrade import UpgradeStep
-from osha.oira.statistics.model import AccountStatistics
 from osha.oira.statistics.model import create_session
 from osha.oira.statistics.model import get_postgres_url
 from osha.oira.statistics.model import STATISTICS_DATABASE_PATTERN
-from osha.oira.statistics.model import SurveySessionStatistics
 from osha.oira.statistics.utils import list_countries
-from osha.oira.statistics.utils import UpdateStatisticsDatabases
 from sqlalchemy import exc
 from z3c.saconfig import Session
 
@@ -15,7 +12,36 @@ import logging
 import sqlalchemy
 
 
+try:
+    from oira.statistics.deployment.model import AccountStatistics
+    from oira.statistics.deployment.model import SurveySessionStatistics
+except ImportError:
+    SurveySessionStatistics = None
+
+
 logger = logging.getLogger(__name__)
+
+exclude_domains = [
+    "inrs.fr",
+    "inail.it",
+    "werk.belgie.be",
+    "gli.government.bg",
+    "mrosp.hr",
+    "dli.mlsi.gov.cy",
+    "ttl.fi",
+    "ypakp.gr",
+    "vdi.gov.lv",
+    "vdi.lt",
+    "gov.mt",
+    "act.gov.pt",
+    "gov.si",
+    "gencat.cat",
+    "mpsv.cz",
+    "vubp.cz",
+    "ip.gov.sk",
+    "tim.gov.hu",
+    "ver.is",
+]
 
 
 class RemovePartnerAccountsFromStatistics(UpgradeStep):
@@ -26,8 +52,7 @@ class RemovePartnerAccountsFromStatistics(UpgradeStep):
             Session.query(Account.id, Account.loginname)
             .filter(
                 sqlalchemy.or_(
-                    Account.loginname.like(f"%@{domain}")
-                    for domain in UpdateStatisticsDatabases.exclude_domains
+                    Account.loginname.like(f"%@{domain}") for domain in exclude_domains
                 )
             )
             .order_by(Account.id)
@@ -57,8 +82,7 @@ class RemovePartnerAccountsFromStatistics(UpgradeStep):
             .outerjoin(SurveySession.account)
             .filter(
                 sqlalchemy.or_(
-                    Account.loginname.like(f"%@{domain}")
-                    for domain in UpdateStatisticsDatabases.exclude_domains
+                    Account.loginname.like(f"%@{domain}") for domain in exclude_domains
                 )
             )
             .order_by(SurveySession.id)
@@ -84,6 +108,9 @@ class RemovePartnerAccountsFromStatistics(UpgradeStep):
         self.remove_partner_sessions(country, session_statistics)
 
     def __call__(self):
+        if SurveySessionStatistics is None:
+            logger.info("Could not import statistics code, skipping upgrade")
+            return
         url_base = get_postgres_url()
         for country in [None] + list_countries(Session()):
             url = url_base.format(

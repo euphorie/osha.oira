@@ -10,17 +10,17 @@ class SurveyQuaiveVersionsForm(QuaiveEditFormMixin, form.Form):
 
     label = _("label_survey_publishing", default="Publishing this survey")
 
-    @button.buttonAndHandler(_("button_cancel", default="Cancel"))
-    def handleCancel(self, action):
-        self.request.response.redirect(f"{self.context.absolute_url()}/@@quaive-edit")
+    @button.buttonAndHandler(_("button_publish", default="Publish"))
+    def handlePublish(self, action):
+        self.request.response.redirect(
+            f"{self.context.absolute_url()}/@@quaive-publish"
+        )
 
     @button.buttonAndHandler(_("button_unpublish", default="Unpublish"))
     def handleUnpublish(self, action):
         parent_url = aq_parent(self.context).absolute_url()
         self.request.response.redirect(f"{parent_url}/@@quaive-unpublish")
 
-    @button.buttonAndHandler(_("button_publish", default="Publish"))
-    def handlePublish(self, action):
-        self.request.response.redirect(
-            f"{self.context.absolute_url()}/@@quaive-publish"
-        )
+    @button.buttonAndHandler(_("button_cancel", default="Cancel"))
+    def handleCancel(self, action):
+        self.request.response.redirect(f"{self.context.absolute_url()}/@@quaive-edit")

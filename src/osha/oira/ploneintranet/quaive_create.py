@@ -1,6 +1,5 @@
 from euphorie.content.browser.country import AddView as EuphorieCountryAddView
 from euphorie.content.browser.module import AddView as EuphorieModuleAddView
-from euphorie.content.browser.profilequestion import AddView as EuphorieProfileQuestionAddView
 from euphorie.content.browser.survey import AddView as EuphorieSurveyAddView
 from euphorie.content.browser.surveygroup import AddView as EuphorieSurveyGroupAddView
 from osha.oira.content.browser.risk import AddView as EuphorieRiskAddView
@@ -10,6 +9,11 @@ from osha.oira.ploneintranet.interfaces import IQuaiveForm
 from plone import api
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import implementer
+
+
+from euphorie.content.browser.profilequestion import (  # isort:skip
+    AddView as EuphorieProfileQuestionAddView,
+)
 
 
 @implementer(IQuaiveForm)
@@ -78,11 +82,15 @@ class QuaiveCreateEuphorieModuleView(QuaiveCreateViewMixin, EuphorieModuleAddVie
     form = QuaiveCreateEuphorieModuleForm
 
 
-class QuaiveCreateEuphorieProfileQuestionForm(QuaiveCreateFormMixin, EuphorieProfileQuestionAddView.form):
+class QuaiveCreateEuphorieProfileQuestionForm(
+    QuaiveCreateFormMixin, EuphorieProfileQuestionAddView.form
+):
     pass
 
 
-class QuaiveCreateEuphorieProfileQuestionView(QuaiveCreateViewMixin, EuphorieProfileQuestionAddView):
+class QuaiveCreateEuphorieProfileQuestionView(
+    QuaiveCreateViewMixin, EuphorieProfileQuestionAddView
+):
     form = QuaiveCreateEuphorieProfileQuestionForm
 
 

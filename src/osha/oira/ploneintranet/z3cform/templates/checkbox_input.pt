@@ -4,11 +4,11 @@
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <fieldset class="group ${view/@@dependencies}">
-    <legend>${python: view.items[0]['label']}</legend>
-    <label class="pat-checklist"
-           tal:repeat="item view/items"
-    ><input class="${view/klass}"
+  <fieldset class="pat-toggle-switch group ${view/@@dependencies}">
+    <p class="legend">
+      ${python: view.items[0]['label']}
+    </p>
+    <label tal:repeat="item view/items">${view/field/label_content|nothing}<input class="${view/klass}"
              id="${view/id}"
              checked="${python:'checked' if checked else None}"
              disabled="${view/disabled}"
@@ -27,5 +27,18 @@
            type="hidden"
            value="1"
     />
+    <dfn class="help-icon pat-tooltip tooltip-inactive"
+         aria-expanded="false"
+         data-pat-tooltip="class: info; trigger: click; source: content; position-list: tl"
+         tal:define="
+           hidden python:view.mode == 'hidden';
+           description view/field/description;
+         "
+         tal:condition="python:description and not hidden"
+         tal:content="description"
+    >
+    </dfn>
+
   </fieldset>
+
 </html>

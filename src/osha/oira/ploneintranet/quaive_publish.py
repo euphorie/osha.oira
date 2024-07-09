@@ -5,8 +5,7 @@ from z3c.form import button
 
 
 class PublishSurveyQuaiveForm(QuaiveEditFormMixin, PublishSurvey):
-    """Custom edit form designed to be embedded in Quaive
-    """
+    """Custom edit form designed to be embedded in Quaive"""
 
     def nextURL(self):
         return f"{self.context.absolute_url()}/@@quaive-edit"

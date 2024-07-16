@@ -4,36 +4,42 @@
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <fieldset class="group ${view/@@dependencies}${python:' error' if view.error is not None else ''}">
-    <legend>${view/label}</legend>
-    <select class="${view/klass}"
-            id="${view/id}"
-            multiple="${view/multiple}"
-            name="${view/name}"
-            size="${view/size}"
+  <label class="pat-select has-value ${view/@@dependencies}${python:' error' if view.error is not None else ''}"
+         data-option="English"
+         data-option-value
+         data-value
+  >
+	${view/label}
+    <select class="has-value"
+            name=""
+            data-value
     >
-      <tal:item repeat="item view/items"><option id="${item/id}"
-                selected="${python:'selected' if selected else None}"
-                value="${item/value}"
-                tal:define="
-                  selected item/selected;
-                "
-        >${item/content}</option></tal:item>
+      <option class=""
+              id="${item/id}"
+              disabled="${view/disabled}"
+              name="${view/name}"
+              readonly="${view/readonly|nothing}"
+              selected="${python:'selected' if item.get('selected', False) else None}"
+              value="${item/value}"
+              tal:repeat="item view/items"
+      >
+					${item/content}
+      </option>
+
     </select>
     <tal:error condition="view/error"
                replace="structure view/error/render|nothing"
     />
-    <dfn class="infoPanel"
-         title="Information"
+    <dfn class="help-icon pat-tooltip tooltip-inactive"
+         aria-expanded="false"
+         data-pat-tooltip="class: info; trigger: click; source: content; position-list: tl"
          tal:define="
+           hidden python:view.mode == 'hidden';
            description view/field/description;
          "
-         tal:condition="description"
-         i18n:attributes="title"
-    >${description}</dfn>
-    <input name="${view/name}-empty-marker"
-           type="hidden"
-           value="1"
-    />
-  </fieldset>
+         tal:condition="python:description and not hidden"
+         tal:content="description"
+    >
+    </dfn>
+  </label>
 </html>

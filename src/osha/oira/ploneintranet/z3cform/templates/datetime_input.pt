@@ -4,60 +4,23 @@
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <fieldset class="comprehensive date-eu ${view/@@dependencies}{python:' error' if view.error is not None else ''}">
-    <legend>${view/label}
-      <sup class="required"
-           tal:condition="view/required"
-      >*</sup></legend>
-    <dfn class="infoPanel"
-         title="Information"
+  <label class="${view/@@dependencies}{python:' error' if view.error is not None else ''}">
+    ${view/label}
+    <input id="${view/id}"
+           name="${view/name}"
+           type="datetime-local"
+           value="${view/value}"
+    />
+    <dfn class="help-icon pat-tooltip tooltip-inactive"
+         aria-expanded="false"
+         data-pat-tooltip="class: info; trigger: click; source: content; position-list: tl"
          tal:define="
+           hidden python:view.mode == 'hidden';
            description view/field/description;
          "
-         tal:condition="description"
-         i18n:attributes="title"
-    >${description}</dfn>
-    <input name="${view/name}-empty-marker"
-           type="hidden"
-           value="1"
-    />
-    <label class="day"
-           for="${view/id}-day"
-           i18n:translate="label_day"
-    >Day</label>
-    <input id="${view/id}-day"
-           disabled="${view/disabled}"
-           maxlength="2"
-           name="${view/name}-day"
-           readonly="${view/readonly}"
-           type="text"
-           value="${view/day}"
-    />
-    <label class="month"
-           for="${view/id}-month"
-           i18n:translate="label_month"
-    >Month</label>
-    <select id="${view/id}-month"
-            disabled="${view/disabled}"
-            name="${view/name}-month"
-            readonly="${view/readonly}"
+         tal:condition="python:description and not hidden"
+         tal:content="description"
     >
-      <option selected="${python:'selected' if month['selected'] else None}"
-              value="${month/value}"
-              tal:repeat="month view/months"
-      >${month/name}</option>
-    </select>
-    <label class="year"
-           for="${view/id}-year"
-           i18n:translate="label_year"
-    >Year</label>
-    <input id="${view/id}-year"
-           disabled="${view/disabled}"
-           maxlength="2"
-           name="${view/name}-year"
-           readonly="${view/readonly}"
-           type="text"
-           value="${view/year}"
-    />
-  </fieldset>
+    </dfn>
+  </label>
 </html>

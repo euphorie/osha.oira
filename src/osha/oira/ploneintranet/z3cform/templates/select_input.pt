@@ -11,13 +11,12 @@
   >
 	${view/label}
     <select class="has-value"
-            name=""
+            name="${view/name}"
             data-value
     >
       <option class=""
               id="${item/id}"
               disabled="${view/disabled}"
-              name="${view/name}"
               readonly="${view/readonly|nothing}"
               selected="${python:'selected' if item.get('selected', False) else None}"
               value="${item/value}"

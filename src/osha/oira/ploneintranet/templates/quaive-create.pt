@@ -5,6 +5,9 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       meta:interpolation="true"
       metal:use-macro="context/@@layout/macros/layout"
+      tal:define="
+        actions view/actions/values|nothing;
+      "
       i18n:domain="nuplone"
 >
 
@@ -13,19 +16,6 @@
     <div class="container"
          id="quaive-content"
     >
-      <h3>${view/label}</h3>
-      <p class="message ${python:'error' if view.widgets.errors else 'notice'}"
-         tal:define="
-           status view/status;
-         "
-         tal:condition="status"
-         tal:content="status"
-         i18n:domain="plone"
-      >Form-global message</p>
-      <p class="discrete"
-         tal:condition="python:getattr(view, 'description', None)"
-      >${view/description}</p>
-
       <form class="pat-form pat-inject"
             id="${view/id}"
             action="${python: request.get('quaive_edit_url') or request.getURL()}"
@@ -33,32 +23,60 @@
             method="${view/method}"
             data-pat-inject="source: #quaive-content; target: #quaive-content; history: record &amp;&amp; source: #sidebar-oira; target: #sidebar-oira &amp;&amp; source: #button-level-up-contacts; target: #button-level-up-contacts"
       >
-        <div class="button-bar"
-             tal:define="
-               actions view/actions/values|nothing;
-             "
-             tal:condition="actions"
+        <div class="pat-toolbar sticky"
+             id="sector-toolbar"
         >
-          <tal:action repeat="action actions">
-            <button class="pat-button float-after ${python: 'default' if repeat.action.index == 0 else ''}"
-                    name="${action/name}"
-                    type="submit"
-                    value="${action/title}"
+          <div class="toolbar-functions-area pat-inject pat-form pat-autosubmit"
+               id="toolbar-functions-area-assessments"
+          >
+            <div class="toolbar-section quick-functions"
+                 id="sector-toolbar-quick-functions"
             >
-                    ${action/title}
-            </button>
-          </tal:action>
+              <tal:action repeat="action actions">
+                <button class="pat-button float-after ${python: 'default' if repeat.action.index == 0 else ''}"
+                        name="${action/name}"
+                        type="submit"
+                        value="${action/title}"
+                >
+                  ${action/title}
+                </button>
+              </tal:action>
 
+            </div>
+          </div>
         </div>
 
-        <fieldset class="form-panel section horizontal">
-          <tal:widget tal:repeat="widget view/widgets/values"
-                      content="structure widget/render"
-          >
-          </tal:widget>
-        </fieldset>
+        <div class="container">
+          <div class="pat-well">
+            <div class="well-title-group">
+              <h2 class="well-header">${view/label}</h2>
+              <div class="buttons">
+                <dfn class="icon help help-icon pat-tooltip tooltip-active-click"
+                     data-pat-tooltip="class: info; trigger: click; source: content; position-list: tl"
+                     tal:condition="python:getattr(view, 'description', None)"
+                >
+                  ${view/description}
+                </dfn>
+              </div>
+            </div>
 
+            <p class="message ${python:'error' if view.widgets.errors else 'notice'}"
+               tal:define="
+                 status view/status;
+               "
+               tal:condition="status"
+               tal:content="status"
+               i18n:domain="plone"
+            >Form-global message</p>
 
+            <fieldset class="form-panel section horizontal">
+              <tal:widget tal:repeat="widget view/widgets/values"
+                          content="structure widget/render"
+              >
+              </tal:widget>
+            </fieldset>
+          </div>
+        </div>
       </form>
     </div>
   </metal:content>

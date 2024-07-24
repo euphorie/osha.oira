@@ -18,7 +18,7 @@ from euphorie.content.browser.profilequestion import (  # isort:skip
 
 @implementer(IQuaiveForm)
 class QuaiveCreateFormMixin:
-    template = ViewPageTemplateFile("templates/quaive-create.pt")
+    template = ViewPageTemplateFile("templates/quaive-form.pt")
 
 
 class QuaiveCreateViewMixin:

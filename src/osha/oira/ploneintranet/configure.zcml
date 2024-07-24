@@ -10,7 +10,7 @@
       name="quaive-edit"
       for="euphorie.content.country.ICountry"
       class=".quaive_edit.CountryQuaiveEditForm"
-      template="templates/quaive-edit.pt"
+      template="templates/quaive-form.pt"
       permission="cmf.ModifyPortalContent"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
@@ -19,7 +19,7 @@
       name="quaive-edit"
       for="euphorie.content.module.IModule"
       class=".quaive_edit.ModuleQuaiveEditForm"
-      template="templates/quaive-edit.pt"
+      template="templates/quaive-form.pt"
       permission="cmf.ModifyPortalContent"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
@@ -28,7 +28,7 @@
       name="quaive-edit"
       for="euphorie.content.profilequestion.IProfileQuestion"
       class=".quaive_edit.ProfileQuestionQuaiveEditForm"
-      template="templates/quaive-edit.pt"
+      template="templates/quaive-form.pt"
       permission="cmf.ModifyPortalContent"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
@@ -37,7 +37,7 @@
       name="quaive-edit"
       for="euphorie.content.risk.IRisk"
       class=".quaive_edit.RiskQuaiveEditForm"
-      template="templates/quaive-edit.pt"
+      template="templates/quaive-form.pt"
       permission="cmf.ModifyPortalContent"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
@@ -46,7 +46,7 @@
       name="quaive-edit"
       for="euphorie.content.sector.ISector"
       class=".quaive_edit.SectorQuaiveEditForm"
-      template="templates/quaive-edit.pt"
+      template="templates/quaive-form.pt"
       permission="cmf.ModifyPortalContent"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
@@ -55,7 +55,7 @@
       name="quaive-edit"
       for="euphorie.content.solution.ISolution"
       class=".quaive_edit.SolutionQuaiveEditForm"
-      template="templates/quaive-edit.pt"
+      template="templates/quaive-form.pt"
       permission="cmf.ModifyPortalContent"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
@@ -64,7 +64,7 @@
       name="quaive-edit"
       for="euphorie.content.survey.ISurvey"
       class=".quaive_edit.SurveyQuaiveEditForm"
-      template="templates/quaive-edit.pt"
+      template="templates/quaive-form.pt"
       permission="cmf.ModifyPortalContent"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
@@ -74,7 +74,7 @@
       name="quaive-edit"
       for="euphorie.content.surveygroup.ISurveyGroup"
       class=".quaive_edit.SurveyGroupQuaiveEditForm"
-      template="templates/quaive-edit.pt"
+      template="templates/quaive-form.pt"
       permission="cmf.ModifyPortalContent"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />

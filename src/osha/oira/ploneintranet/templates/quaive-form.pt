@@ -13,15 +13,15 @@
 
   <metal:title fill-slot="title">${view/label}</metal:title>
   <metal:content fill-slot="content">
-    <div class="container portaltype-${context/portal_type}"
+    <div class="container"
          id="quaive-content"
     >
       <form class="pat-form pat-inject"
             id="${view/id}"
-            action="${request/getURL}"
+            action="${python: request.get('quaive_edit_url') or request.getURL()}"
             enctype="${view/enctype}"
             method="${view/method}"
-            data-pat-inject="source: #quaive-content; target: #quaive-content"
+            data-pat-inject="source: #quaive-content; target: #quaive-content; history: record &amp;&amp; source: #sidebar-oira; target: #sidebar-oira &amp;&amp; source: #button-level-up-contacts; target: #button-level-up-contacts"
       >
         <div class="pat-toolbar sticky"
              id="sector-toolbar"
@@ -32,16 +32,8 @@
             <div class="toolbar-section quick-functions"
                  id="sector-toolbar-quick-functions"
             >
-              <a class="float-after pat-button"
-                 href="${here/absolute_url}/@@edit"
-                 target="_blank"
-                 i18n:translate=""
-              >
-                <!-- TODO: Remove me -->
-                Edit on OiRA
-              </a>
-              <tal:action repeat="action python:reversed(actions)">
-                <button class="pat-button float-after ${python: 'default' if repeat.action.end else ''}"
+              <tal:action repeat="action actions">
+                <button class="pat-button float-after ${python: 'default' if repeat.action.index == 0 else ''}"
                         name="${action/name}"
                         type="submit"
                         value="${action/title}"
@@ -49,24 +41,9 @@
                   ${action/title}
                 </button>
               </tal:action>
+
             </div>
           </div>
-        </div>
-
-        <div class="button-bar"
-             tal:condition="actions"
-        >
-          <!-- TODO: This stuff has to be moved -->
-          <tal:versions condition="python:context.portal_type == 'euphorie.survey' and view.is_edit_form">
-            <a class="float-after pat-button pat-inject"
-               href="${url}"
-               data-pat-inject="source: #quaive-content; target: #quaive-content"
-               tal:define="
-                 url python:request.getURL().replace('quaive-edit', 'quaive-versions');
-               "
-               i18n:translate=""
-            >Publishing options</a>
-          </tal:versions>
         </div>
 
         <div class="container">

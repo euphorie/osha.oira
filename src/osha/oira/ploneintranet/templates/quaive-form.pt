@@ -32,15 +32,9 @@
             <div class="toolbar-section quick-functions"
                  id="sector-toolbar-quick-functions"
             >
-              <tal:action repeat="action actions">
-                <button class="pat-button float-after ${python: 'default' if repeat.action.index == 0 else ''}"
-                        name="${action/name}"
-                        type="submit"
-                        value="${action/title}"
-                >
-                  ${action/title}
-                </button>
-              </tal:action>
+              <tal:action repeat="action python: reversed(actions)"
+                replace="structure action/render"
+              />
 
             </div>
           </div>

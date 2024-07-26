@@ -1,3 +1,4 @@
+from Acquisition import aq_base
 from Acquisition import aq_chain
 from Acquisition import aq_inner
 from plone.restapi.serializer.converters import json_compatible
@@ -31,13 +32,18 @@ class ToolVersionsGet(Service):
         # in sync.  So instead of 'api.content.get_state(obj=survey)',
         # let's report what the state is meant to be.
         review_state = "published" if published_on_client else "draft"
+        # The 'published' attribute should be the date of publication of this
+        # survey, but we could inherit this attribute from the surveygroup,
+        # where it would contain the id of the client-published tool version.
+        # So do not inherit this.
+        published_date = getattr(aq_base(survey), "published", None)
         return {
             "@id": survey.absolute_url(),
             "id": survey.id,
             "title": survey.Title(),
             "created": json_compatible(survey.created()),
             "modified": json_compatible(survey.modified()),
-            "published": json_compatible(survey.published),
+            "published": json_compatible(published_date),
             "review_state": review_state,
         }
 

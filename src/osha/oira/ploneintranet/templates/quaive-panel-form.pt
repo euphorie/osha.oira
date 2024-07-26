@@ -1,0 +1,81 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      metal:use-macro="context/@@layout/macros/layout"
+      tal:define="
+        actions view/actions/values|nothing;
+      "
+      i18n:domain="nuplone"
+>
+
+  <metal:title fill-slot="title" />
+  <metal:content fill-slot="content">
+    <div class="modal-panel-contents"
+         id="quaive-content"
+    >
+      <div class="modal-panel-header">
+        <h1 class="modal-panel-title">${view/label}</h1>
+      </div>
+
+      <form class="pat-inject pat-form modal-panel-body"
+            id="${view/id}"
+            action="${python: request.get('quaive_edit_url') or request.getURL()}"
+            enctype="${view/enctype}"
+            method="${view/method}"
+            data-pat-inject=" source: #application-body::element; target: #application-body::element"
+      >
+
+        <fieldset class="horizontal">
+          <tal:widget tal:repeat="widget view/widgets/values"
+                      content="structure widget/render"
+          />
+        </fieldset>
+
+        <div class="modal-panel-footer modal-panel-main-button-bar pat-button-bar pat-bumper bumped bumped-right bumped-left">
+          <tal:action repeat="action actions"
+                      replace="structure action/render"
+          />
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <div class="container">
+      <div class="pat-well">
+        <div class="well-title-group">
+          <h2 class="well-header">${view/label}</h2>
+          <div class="buttons">
+            <dfn class="icon help help-icon pat-tooltip tooltip-active-click"
+                 data-pat-tooltip="class: info; trigger: click; source: content; position-list: tl"
+                 tal:condition="python:getattr(view, 'description', None)"
+            >
+              ${view/description}
+            </dfn>
+          </div>
+        </div>
+
+        <p class="message ${python:'error' if view.widgets.errors else 'notice'}"
+           tal:define="
+             status view/status;
+           "
+           tal:condition="status"
+           tal:content="status"
+           i18n:domain="plone"
+        >Form-global message</p>
+
+        <fieldset class="form-panel section horizontal">
+          <tal:widget tal:repeat="widget view/widgets/values"
+                      content="structure widget/render"
+          >
+          </tal:widget>
+        </fieldset>
+
+      </div>
+    </div>
+  </metal:content>
+</html>

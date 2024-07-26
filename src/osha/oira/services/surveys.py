@@ -1,6 +1,5 @@
 from Acquisition import aq_chain
 from Acquisition import aq_inner
-from plone import api
 from plone.restapi.serializer.converters import json_compatible
 from plone.restapi.services import Service
 
@@ -25,14 +24,21 @@ class ToolVersionsGet(Service):
     """
 
     def get_survey_info(self, survey):
+        # Is this survey the tool version that is published on the client?
+        published_on_client = self.published_tool_version_id == survey.id
+        # Note that if 'published_on_client' is true, the review_state
+        # should be 'published', otherwise 'draft', but this is not always
+        # in sync.  So instead of 'api.content.get_state(obj=survey)',
+        # let's report what the state is meant to be.
+        review_state = "published" if published_on_client else "draft"
         return {
             "@id": survey.absolute_url(),
             "id": survey.id,
             "title": survey.Title(),
-            "review_state": api.content.get_state(obj=survey),
             "created": json_compatible(survey.created()),
             "modified": json_compatible(survey.modified()),
             "published": json_compatible(survey.published),
+            "review_state": review_state,
         }
 
     def reply(self):
@@ -60,9 +66,14 @@ class ToolVersionsGet(Service):
             # We are outside of a survey group, nothing to see here.
             return result
 
+        # The 'published' attribute of the surveygroup has the id of the tool
+        # version that is currently published on the OiRA client side.
+        self.published_tool_version_id = getattr(surveygroup, "published", None)
+
         result["surveygroup"] = {
             "@id": surveygroup.absolute_url(),
             "title": surveygroup.Title(),
+            "published_tool_version_id": self.published_tool_version_id,
         }
         if survey:
             current_survey_id = survey.id
@@ -70,10 +81,6 @@ class ToolVersionsGet(Service):
         else:
             current_survey_id = None
         items = []
-        # TODO Can we know which survey is the main currently published one?
-        # When publishing a survey you get this question: "Are you sure you want
-        # to publish this OiRA Tool version? This will replace the current version."
-        # But afterwards both the old and new version have review_state 'published'.
         for survey in surveygroup.contentValues():
             if survey.id == current_survey_id:
                 # This is the survey on which path we are.

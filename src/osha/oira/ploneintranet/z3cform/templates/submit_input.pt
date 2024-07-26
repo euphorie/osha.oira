@@ -5,7 +5,7 @@
         is_secondary python: 'secondary' in view.klass.split();
       "
 >
-  <button class="pat-button float-after ${python: 'default' if not is_secondary else ''}"
+  <button class="pat-button ${python: 'default' if not is_secondary else ''}"
           id="${view/id}"
           name="${view/name}"
           type="submit"

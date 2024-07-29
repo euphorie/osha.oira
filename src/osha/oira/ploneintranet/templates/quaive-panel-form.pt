@@ -32,6 +32,11 @@
           <tal:widget tal:repeat="widget view/widgets/values"
                       content="structure widget/render"
           />
+          <input name="oira_type"
+                 type="hidden"
+                 value="${python: view.__name__.rpartition('-')[-1]}"
+          />
+
         </fieldset>
 
         <div class="modal-panel-footer modal-panel-main-button-bar pat-button-bar pat-bumper bumped bumped-right bumped-left">
@@ -44,38 +49,5 @@
 
     </div>
 
-
-    <div class="container">
-      <div class="pat-well">
-        <div class="well-title-group">
-          <h2 class="well-header">${view/label}</h2>
-          <div class="buttons">
-            <dfn class="icon help help-icon pat-tooltip tooltip-active-click"
-                 data-pat-tooltip="class: info; trigger: click; source: content; position-list: tl"
-                 tal:condition="python:getattr(view, 'description', None)"
-            >
-              ${view/description}
-            </dfn>
-          </div>
-        </div>
-
-        <p class="message ${python:'error' if view.widgets.errors else 'notice'}"
-           tal:define="
-             status view/status;
-           "
-           tal:condition="status"
-           tal:content="status"
-           i18n:domain="plone"
-        >Form-global message</p>
-
-        <fieldset class="form-panel section horizontal">
-          <tal:widget tal:repeat="widget view/widgets/values"
-                      content="structure widget/render"
-          >
-          </tal:widget>
-        </fieldset>
-
-      </div>
-    </div>
   </metal:content>
 </html>

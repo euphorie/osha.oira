@@ -1,16 +1,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
-      tal:omit-tag=""
       tal:define="
         is_secondary python: 'secondary' in view.klass.split();
       "
+      tal:omit-tag=""
 >
-  <button class="pat-button ${python: 'default' if not is_secondary else ''}"
+  <button class="pat-button close-panel ${python: 'default' if not is_secondary else ''}"
           id="${view/id}"
+          formnovalidate="${python: 'formnovalidate' if is_secondary else None}"
           name="${view/name}"
           type="submit"
           value="${view/value}"
-          formnovalidate="${python: 'formnovalidate' if is_secondary else None}"
-          >${view/title}</button>
+  >${view/title}</button>
 
 </html>

@@ -42,7 +42,11 @@
   <tal:countries repeat="country countries">
     <tal:mycountry condition="python:country['id']==view.form.my_country">
       <tal:sectors repeat="sector country/sectors">
-        <tal:mysector condition="python:sector['id']==view.form.my_sector">
+        <tal:mysector tal:define="
+                        default_surveygroup_id python:sector['groups'][0]['id'];
+                      "
+                      condition="python:sector['id']==view.form.my_sector"
+        >
           <fieldset class="group pat-checklist"
                     tal:condition="python: request.get('source') == 'local'"
           >
@@ -64,9 +68,10 @@
           <tal:group repeat="group sector/groups">
             <fieldset class="group pat-checklist"
                       tal:define="
-                        value python:request.form.get('survey.local', group['surveys'][0]['id']);
+                        default_survey_id python:group['surveys'][0]['id'];
+                        value python:request.form.get('survey.local', default_survey_id);
                       "
-                      tal:condition="python: request.get('source') == 'local' and request.get('surveygroup.local') == group['id']"
+                      tal:condition="python: request.get('source') == 'local' and request.get('surveygroup.local', default_surveygroup_id) == group['id']"
             >
               <legend i18n:translate="label_choose_survey">Choose a revision of
                 the selected OiRA Tool</legend>

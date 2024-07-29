@@ -21,7 +21,10 @@
             action="${python: request.get('quaive_edit_url') or request.getURL()}"
             enctype="${view/enctype}"
             method="${view/method}"
-            data-pat-inject="source: #quaive-content; target: #quaive-content; &amp;&amp; source: #sidebar-oira; target: #sidebar-oira &amp;&amp; source: #button-level-up-contacts; target: #button-level-up-contacts"
+            data-pat-inject="
+              source: #application-body; target: #application-body; history: record; &amp;&amp;
+              source: #sidebar-assessments; target: #sidebar-assessments
+            "
       >
         <div class="pat-toolbar sticky"
              id="sector-toolbar"
@@ -33,7 +36,7 @@
                  id="sector-toolbar-quick-functions"
             >
               <tal:action repeat="action python: reversed(actions)"
-                replace="structure action/render"
+                          replace="structure action/render"
               />
 
             </div>
@@ -72,7 +75,6 @@
 
           </div>
         </div>
-
       </form>
     </div>
   </metal:content>

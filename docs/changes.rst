@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.0.0 (unreleased)
+10.0.0 (2024-07-31)
 -------------------
 
 - Get rid of the htmllaundry dependency, replace it with the

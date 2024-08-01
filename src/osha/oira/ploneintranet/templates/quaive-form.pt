@@ -75,6 +75,10 @@
 
           </div>
         </div>
+        <input name="oira_type"
+               type="hidden"
+               value="${python: view.__name__.rpartition('-')[-1]}"
+        />
       </form>
     </div>
   </metal:content>

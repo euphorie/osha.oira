@@ -18,7 +18,7 @@ from euphorie.content.browser.profilequestion import (  # isort:skip
 
 @implementer(IQuaiveForm)
 class QuaiveCreateFormMixin:
-    template = ViewPageTemplateFile("templates/quaive-form.pt")
+    template = ViewPageTemplateFile("templates/quaive-panel-form.pt")
 
 
 class QuaiveCreateViewMixin:
@@ -47,7 +47,7 @@ class QuaiveCreateEuphorieCountryView(QuaiveCreateViewMixin, EuphorieCountryAddV
 
 
 class QuaiveCreateEuphorieRiskForm(QuaiveCreateFormMixin, EuphorieRiskAddView.form):
-    pass
+    template = ViewPageTemplateFile("templates/quaive-form.pt")
 
 
 class QuaiveCreateEuphorieRiskView(QuaiveCreateViewMixin, EuphorieRiskAddView):
@@ -75,7 +75,7 @@ class QuaiveCreateEuphorieSurveyView(QuaiveCreateViewMixin, EuphorieSurveyAddVie
 
 
 class QuaiveCreateEuphorieModuleForm(QuaiveCreateFormMixin, EuphorieModuleAddView.form):
-    pass
+    template = ViewPageTemplateFile("templates/quaive-form.pt")
 
 
 class QuaiveCreateEuphorieModuleView(QuaiveCreateViewMixin, EuphorieModuleAddView):
@@ -85,7 +85,7 @@ class QuaiveCreateEuphorieModuleView(QuaiveCreateViewMixin, EuphorieModuleAddVie
 class QuaiveCreateEuphorieProfileQuestionForm(
     QuaiveCreateFormMixin, EuphorieProfileQuestionAddView.form
 ):
-    pass
+    template = ViewPageTemplateFile("templates/quaive-form.pt")
 
 
 class QuaiveCreateEuphorieProfileQuestionView(
@@ -97,7 +97,7 @@ class QuaiveCreateEuphorieProfileQuestionView(
 class QuaiveCreateEuphorieSolutionForm(
     QuaiveCreateFormMixin, EuphorieSolutionAddView.form
 ):
-    pass
+    template = ViewPageTemplateFile("templates/quaive-form.pt")
 
 
 class QuaiveCreateEuphorieSolutionView(QuaiveCreateViewMixin, EuphorieSolutionAddView):

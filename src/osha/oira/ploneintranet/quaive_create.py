@@ -67,7 +67,7 @@ class QuaiveCreateEuphorieSurveyGroupView(
 
 
 class QuaiveCreateEuphorieSurveyForm(QuaiveCreateFormMixin, EuphorieSurveyAddView.form):
-    pass
+    template = ViewPageTemplateFile("templates/quaive-form.pt")
 
 
 class QuaiveCreateEuphorieSurveyView(QuaiveCreateViewMixin, EuphorieSurveyAddView):

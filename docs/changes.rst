@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.0.1 (unreleased)
+10.0.1 (2024-08-02)
 -------------------
 
 - Show certificate overview if “Enable certificates” is active in the country

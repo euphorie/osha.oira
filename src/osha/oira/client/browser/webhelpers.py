@@ -42,7 +42,7 @@ class OSHAWebHelpers(WebHelpers):
     @property
     @memoize
     def show_certificates_tab(self):
-        country = self.country
+        country = self.content_country_obj
         return self.use_training_module or getattr(
             country, "certificates_enabled", False
         )

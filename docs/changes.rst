@@ -4,7 +4,9 @@ Changelog
 10.0.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Show certificate overview if “Enable certificates” is active in the country
+  (`#2485 <https://github.com/syslabcom/scrum/issues/2485>`_)
+  [reinhardt]
 
 
 10.0.0 (2024-07-31)

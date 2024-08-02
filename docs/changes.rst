@@ -1,7 +1,21 @@
 Changelog
 =========
 
-10.0.0 (unreleased)
+10.0.2 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+10.0.1 (2024-08-02)
+-------------------
+
+- Show certificate overview if “Enable certificates” is active in the country
+  (`#2485 <https://github.com/syslabcom/scrum/issues/2485>`_)
+  [reinhardt]
+
+
+10.0.0 (2024-07-31)
 -------------------
 
 - Get rid of the htmllaundry dependency, replace it with the

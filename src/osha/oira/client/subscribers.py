@@ -36,9 +36,16 @@ def update_user_languages_subscriber(target, args, kwargs):
     if "zodb_path" not in kwargs:
         return
     # kwargs["account_id"] can refer to the account of the session being cloned
-    account = get_current_account()
-    if not account:
+    try:
+        account = get_current_account()
+        if not account:
+            return
+        client = api.portal.get().client
+    except api.exc.CannotGetPortalError:
+        # In corner cases (usually unit tests) we may not have a portal.
+        # `get_current_account` will then fail, but maybe someone has mocked
+        # this call, so we catch the error on a few lines.
+        # See https://github.com/euphorie/Euphorie/pull/757
         return
-    client = api.portal.get().client
     tool = client.restrictedTraverse(str(kwargs["zodb_path"]), None)
     update_user_languages(account.id, tool)

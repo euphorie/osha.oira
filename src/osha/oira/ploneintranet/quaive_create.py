@@ -29,7 +29,7 @@ class QuaiveCreateViewMixin:
 
 
 class QuaiveCreateEuphorieSectorForm(QuaiveCreateFormMixin, EuphorieSectorAddView.form):
-    pass
+    template = ViewPageTemplateFile("templates/quaive-form.pt")
 
 
 class QuaiveCreateEuphorieSectorView(QuaiveCreateViewMixin, EuphorieSectorAddView):

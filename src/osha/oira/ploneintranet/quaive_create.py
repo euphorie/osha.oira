@@ -8,6 +8,7 @@ from osha.oira.content.browser.solution import AddView as EuphorieSolutionAddVie
 from osha.oira.ploneintranet.interfaces import IQuaiveForm
 from plone import api
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.interface import alsoProvides
 from zope.interface import implementer
 
 
@@ -19,6 +20,12 @@ from euphorie.content.browser.profilequestion import (  # isort:skip
 @implementer(IQuaiveForm)
 class QuaiveCreateFormMixin:
     template = ViewPageTemplateFile("templates/quaive-panel-form.pt")
+
+    def update(self):
+        super().update()
+        for group in self.groups:
+            #  This is needed to pick up the custom Quaive widgets
+            alsoProvides(group, IQuaiveForm)
 
 
 class QuaiveCreateViewMixin:

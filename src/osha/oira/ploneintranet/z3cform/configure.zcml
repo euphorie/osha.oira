@@ -149,4 +149,12 @@
       mode="input"
       />
 
+  <browser:page
+      name="quaive_form_macros"
+      for="*"
+      template="templates/quaive_form_macros.pt"
+      permission="zope2.View"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      />
+
 </configure>

@@ -8,6 +8,7 @@ from osha.oira.content.browser.solution import AddView as EuphorieSolutionAddVie
 from osha.oira.ploneintranet.interfaces import IQuaiveForm
 from plone import api
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.i18nmessageid import MessageFactory
 from zope.interface import alsoProvides
 from zope.interface import implementer
 
@@ -15,6 +16,8 @@ from zope.interface import implementer
 from euphorie.content.browser.profilequestion import (  # isort:skip
     AddView as EuphorieProfileQuestionAddView,
 )
+
+_ = MessageFactory("nuplone")
 
 
 @implementer(IQuaiveForm)
@@ -37,6 +40,20 @@ class QuaiveCreateViewMixin:
 
 class QuaiveCreateEuphorieSectorForm(QuaiveCreateFormMixin, EuphorieSectorAddView.form):
     template = ViewPageTemplateFile("templates/quaive-form.pt")
+
+    def updateWidgets(self):
+        super().updateWidgets()
+        self.widgets["logo"].field.description = _(
+            "help_sector_logo",
+            default=(
+                "The logo will appear on the client side app "
+                "that your user group will see. "
+                "Make sure your image is of format png, jpg or gif "
+                "and does not contain any special characters. "
+                "The new logo will only become visible "
+                "after you've saved your changes and published the OiRA tool."
+            ),
+        )
 
 
 class QuaiveCreateEuphorieSectorView(QuaiveCreateViewMixin, EuphorieSectorAddView):

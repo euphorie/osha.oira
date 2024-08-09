@@ -1,8 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
-      meta:interpolation="true"
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
@@ -16,17 +15,7 @@
               readonly="${view/readonly}"
               rows="${view/rows}"
     >${view/value}</textarea>
-    <dfn class="help-icon pat-tooltip tooltip-inactive"
-         aria-expanded="false"
-         data-pat-tooltip="class: info; trigger: click; source: content; position-list: tl"
-         tal:define="
-           hidden python:view.mode == 'hidden';
-           description view/field/description;
-         "
-         tal:condition="python:description and not hidden"
-         tal:content="description"
-    >
-    </dfn>
+    <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
 
   </label>
 

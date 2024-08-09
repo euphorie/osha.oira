@@ -1,4 +1,6 @@
-<fieldset class="${view/klass} pat-subform pat-autosubmit pat-inject"
+<fieldset xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          xmlns:tal="http://xml.zope.org/namespaces/tal"
+          class="${view/klass} pat-subform pat-autosubmit pat-inject"
           id="${widget_id}-wrapper"
           data-pat-inject="source: #${widget_id}-wrapper; target: #${widget_id}-wrapper; url: ${request/getURL}/++widget++source_selection/render; history: none;"
           tal:define="

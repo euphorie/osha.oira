@@ -23,7 +23,7 @@ class QuaiveCreateFormMixin:
 
     def update(self):
         super().update()
-        for group in self.groups:
+        for group in getattr(self, "groups", []):
             #  This is needed to pick up the custom Quaive widgets
             alsoProvides(group, IQuaiveForm)
 

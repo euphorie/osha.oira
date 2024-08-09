@@ -97,11 +97,10 @@
       layer="plonetheme.nuplone.skin.interfaces.NuPloneSkin"
       />
 
-  <!-- In Euphorie, @@unpublish is only registered for the survey group. -->
   <browser:page
       name="quaive-unpublish"
-      for="euphorie.content.survey.ISurvey"
-      class=".quaive_unpublish.UnpublishSurveyQuaiveForm"
+      for="euphorie.content.surveygroup.ISurveyGroup"
+      class=".quaive_unpublish.UnpublishSurveyGroup"
       template="templates/quaive-unpublish.pt"
       permission="cmf.ModifyPortalContent"
       layer="plonetheme.nuplone.skin.interfaces.NuPloneSkin"

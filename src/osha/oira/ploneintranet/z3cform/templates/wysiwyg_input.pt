@@ -1,8 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
-      meta:interpolation="true"
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
@@ -12,7 +11,8 @@
     </legend>
 
     <div class="editor-toolbar tiptap canvas-toolbar"
-         id="texteditor-toolbar-${view/id}">
+         id="texteditor-toolbar-${view/id}"
+    >
 
       <button class="button-undo icon icon-ccw pat-tooltip"
               type="button"
@@ -81,57 +81,49 @@
     </div>
 
     <textarea class="${view/klass} pat-tiptap"
-              data-pat-tiptap="
-                toolbar-external: #texteditor-toolbar-${view/id};
-                link-panel: #tiptap-model-hyperlink--fieldname-${view/id} .link-panel;
-                link-menu: #tiptap-context-menu-hyperlink--fieldname-${view/id};
-                source-panel: #tiptap-model-source-editor--fieldname-${view/id} .source-panel;
-              "
               id="${view/id}"
               cols="${view/cols}"
               disabled="${view/disabled}"
               name="${view/name}"
               readonly="${view/readonly}"
               rows="${view/rows}"
+              data-pat-tiptap="
+                toolbar-external: #texteditor-toolbar-${view/id};
+                link-panel: #tiptap-model-hyperlink--fieldname-${view/id} .link-panel;
+                link-menu: #tiptap-context-menu-hyperlink--fieldname-${view/id};
+                source-panel: #tiptap-model-source-editor--fieldname-${view/id} .source-panel;
+              "
     >${view/value}</textarea>
-    <dfn class="infoPanel"
-         title="Information"
-         tal:define="
-           description view/field/description;
-         "
-         tal:condition="description"
-         tal:content="description"
-         i18n:attributes="title"
-    ></dfn>
+    <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
 
-  <!-- modal source editor -->
-  <template id="tiptap-modal-source-editor--fieldname-${view/id}">
-    <h1>Edit HTML</h1>
-    <div class="panel-body source-panel">
-      <div class="container">
-        <div class="html-source-panel-content">
-          <form>
-            <textarea class="pat-autofocus"
-                      name="tiptap-source"
-            ></textarea>
-          </form>
-        </div>
-        <div class="buttons button-bar pat-bumper"
-             id="modal-button-bar"
-        >
-          <button class="pat-button default close-panel icon-ok-circle"
-                  name="tiptap-confirm"
-                  type="button"
-                  i18n:translate=""
-          >Apply</button>
-          <button class="pat-button close-panel icon-cancel-circle"
-                  type="button"
-                  i18n:translate=""
-          >Cancel</button>
+    <!-- modal source editor -->
+    <template id="tiptap-modal-source-editor--fieldname-${view/id}">
+      <h1>Edit HTML</h1>
+      <div class="panel-body source-panel">
+        <div class="container">
+          <div class="html-source-panel-content">
+            <form>
+              <textarea class="pat-autofocus"
+                        name="tiptap-source"
+              ></textarea>
+            </form>
+          </div>
+          <div class="buttons button-bar pat-bumper"
+               id="modal-button-bar"
+          >
+            <button class="pat-button default close-panel icon-ok-circle"
+                    name="tiptap-confirm"
+                    type="button"
+                    i18n:translate=""
+            >Apply</button>
+            <button class="pat-button close-panel icon-cancel-circle"
+                    type="button"
+                    i18n:translate=""
+            >Cancel</button>
+          </div>
         </div>
       </div>
-    </div>
-  </template>
+    </template>
 
     <!-- modal link editor -->
     <template id="tiptap-modal-hyperlink--fieldname-${view/id}">

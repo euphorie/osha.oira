@@ -6,7 +6,7 @@
   <plone:service
       method="GET"
       factory=".surveys.ToolVersionsGet"
-      for="plone.dexterity.interfaces.IDexterityContainer"
+      for="euphorie.content.surveygroup.ISurveyGroup"
       permission="zope2.View"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       name="@tool-versions"

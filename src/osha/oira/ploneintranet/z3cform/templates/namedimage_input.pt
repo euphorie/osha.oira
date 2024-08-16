@@ -7,10 +7,13 @@
       meta:interpolation="true"
       tal:define="
         download_url view/download_url;
+        dependencies nocall:view/@@dependencies;
       "
       i18n:domain="nuplone"
 >
-  <fieldset class="group ${view/@@dependencies}">
+  <fieldset class="group ${dependencies/ploneintranet_classes}"
+            data-pat-depends="${dependencies/data_pat_depends}"
+  >
     <legend>${view/label}</legend>
     <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
     <input class="${view/klass}"

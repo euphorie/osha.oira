@@ -2,10 +2,15 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        dependencies nocall:view/@@dependencies;
+      "
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <fieldset class="pat-toggle-switch group ${view/@@dependencies}">
+  <fieldset class="pat-toggle-switch group ${dependencies/ploneintranet_classes}"
+            data-pat-depends="${dependencies/data_pat_depends}"
+  >
     <p class="legend">
       ${python: view.items[0]['label']}
     </p>

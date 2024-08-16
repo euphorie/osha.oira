@@ -2,10 +2,15 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        dependencies nocall:view/@@dependencies;
+      "
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <fieldset class="group ${view/@@dependencies} pat-rich">
+  <fieldset class="group pat-rich ${dependencies/ploneintranet_classes}"
+            data-pat-depends="${dependencies/data_pat_depends}"
+  >
     <legend title="${view/field/description}">
       <span tal:replace="view/label"></span>
     </legend>

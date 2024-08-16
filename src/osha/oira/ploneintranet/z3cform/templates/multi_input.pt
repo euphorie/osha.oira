@@ -2,10 +2,15 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        dependencies nocall:view/@@dependencies;
+      "
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <fieldset class="concise multiWidget ${view/@@dependencies}">
+  <fieldset class="concise multiWidget ${dependencies/ploneintranet_classes}"
+            data-pat-depends="${dependencies/data_pat_depends}"
+  >
     <legend>${view/label}
       <sup class="required"
            tal:condition="view/required"

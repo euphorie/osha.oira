@@ -2,10 +2,15 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        dependencies nocall:view/@@dependencies;
+      "
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <label class="${view/@@dependencies}${python:' error' if view.error is not None else ''}">
+  <label class="${dependencies/ploneintranet_classes}"
+         data-pat-depends="${dependencies/data_pat_depends}"
+  >
     ${view/label}
     <input id="${view/id}"
            name="${view/name}"

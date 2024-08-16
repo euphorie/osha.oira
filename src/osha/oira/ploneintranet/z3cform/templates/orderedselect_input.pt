@@ -2,13 +2,18 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        dependencies nocall:view/@@dependencies;
+      "
       tal:omit-tag=""
 >
   <script src="++resource++orderedselect_input.js"
           type="text/javascript"
   ></script>
 
-  <fieldset class="concicse ${view/@@dependencies}${python:' error' if view.error is not None else ''}">
+  <fieldset class="concicse ${dependencies/ploneintranet_classes}"
+            data-pat-depends="${dependencies/data_pat_depends}"
+  >
     <legend>${view/label}
       <sup class="required"
            tal:condition="view/required"

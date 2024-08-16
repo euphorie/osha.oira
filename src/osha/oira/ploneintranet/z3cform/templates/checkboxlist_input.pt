@@ -4,13 +4,12 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       tal:define="
         dependencies nocall:view/@@dependencies;
-        data_pat_depends python:dependencies.data_pat_depends;
       "
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <fieldset class="group ${python: dependencies.ploneintranet_classes}"
-            data-pat-depends="${data_pat_depends}"
+  <fieldset class="group ${dependencies/ploneintranet_classes}"
+            data-pat-depends="${dependencies/data_pat_depends}"
   >
     <p class="legend">${view/label}</p>
     <div class="pat-checklist">

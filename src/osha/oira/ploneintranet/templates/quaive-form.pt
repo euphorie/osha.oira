@@ -84,18 +84,25 @@
                 close-trigger: .collapse-all-sections;"
                tal:repeat="group view/groups|nothing"
           >
-            <h2 class="well-header">${group/label}</h2>
+            <div class="well-title-group">
+              <h2 class="well-header">
+              ${group/label}
+                <div class="buttons">
+                  <dfn class="icon help help-icon pat-tooltip tooltip-active-click"
+                       data-pat-tooltip="class: info; trigger: click; source: content; position-list: tl"
+                       tal:define="
+                         description group/description;
+                       "
+                       tal:condition="description"
+                  >
+                  ${description}
+                  </dfn>
+                </div>
+              </h2>
+            </div>
             <div class="panel-content"
                  style=""
             >
-              <div class="pat-rich">
-                <p class="discrete"
-                   tal:define="
-                     description group/description;
-                   "
-                   tal:condition="description"
-                >${description}</p>
-              </div>
               <fieldset class="horizontal">
                 <tal:widget tal:repeat="widget group/widgets/values"
                             content="structure widget/render"

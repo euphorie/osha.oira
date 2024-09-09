@@ -66,9 +66,17 @@
                i18n:domain="plone"
             >Form-global message</p>
             <fieldset class="form-panel section horizontal">
-              <tal:widget tal:repeat="widget view/widgets/values"
-                          content="structure widget/render"
-              >
+              <tal:widget tal:repeat="widget view/widgets/values">
+                <tal:widget define="
+                              error nocall: widget/error|nothing;
+                            ">
+                  ${structure: widget/render}
+                  <p class="pat-notice error"
+                     tal:condition="python: error"
+                  >
+                    ${structure: error/render}
+                  </p>
+                </tal:widget>
               </tal:widget>
             </fieldset>
 
@@ -104,9 +112,17 @@
                  style=""
             >
               <fieldset class="horizontal">
-                <tal:widget tal:repeat="widget group/widgets/values"
-                            content="structure widget/render"
-                >
+                <tal:widget tal:repeat="widget group/widgets/values">
+                  <tal:widget define="
+                                error nocall: widget/error|nothing;
+                              ">
+                    ${structure: widget/render}
+                    <p class="pat-notice error"
+                       tal:condition="python: error"
+                    >
+                      ${structure: error/render}
+                    </p>
+                  </tal:widget>
                 </tal:widget>
               </fieldset>
             </div>

@@ -49,9 +49,6 @@
 
         </tal:item>
       </tal:items>
-      <tal:error condition="view/error"
-                 replace="structure view/error/render|nothing"
-      />
       <input name="${view/name}-empty-marker"
              type="hidden"
              value="1"

@@ -83,8 +83,13 @@
                        value="${survey/id}"
                 />${survey/title}
                 <a class="floatAfter"
-                   href="${survey/url}"
-                >FIXME: View</a></label>
+                    href="${python: request['HTTP_REFERER'].partition('@@')[0] + '@@oira-edit-survey/' + '/'.join(survey['url'].split('/')[-4:])}"
+                    target="_blank"
+                    i18n:translate="label_view_revision_in_new_window"
+                >
+                  View revision in new window
+              </a>
+              </label>
             </fieldset>
           </tal:group>
         </tal:mysector>
@@ -159,8 +164,13 @@
                    value="${survey/id}"
             />${survey/title}
             <a class="floatAfter"
-               href="${survey/url}"
-            >View</a></label>
+               href="${python: request['HTTP_REFERER'].partition('@@')[0] + '@@oira-edit-survey/' + '/'.join(survey['url'].split('/')[-4:])}"
+               target="_blank"
+               i18n:translate="label_view_revision_in_new_window"
+            >
+              View revision in new window
+            </a>
+          </label>
         </fieldset>
       </tal:group>
     </tal:sector>

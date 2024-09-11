@@ -13,9 +13,7 @@
 
   <metal:title fill-slot="title">${view/label}</metal:title>
   <metal:content fill-slot="content">
-    <div class="container"
-         id="quaive-content"
-    >
+    <div id="quaive-content">
       <form class="pat-form pat-inject"
             id="${view/id}"
             action="${python: request.get('quaive_edit_url') or request.getURL()}"
@@ -65,7 +63,7 @@
                tal:content="status"
                i18n:domain="plone"
             >Form-global message</p>
-            <fieldset class="form-panel section horizontal">
+            <fieldset class="section horizontal">
               <tal:widget tal:repeat="widget view/widgets/values">
                 <tal:widget define="
                               error nocall: widget/error|nothing;

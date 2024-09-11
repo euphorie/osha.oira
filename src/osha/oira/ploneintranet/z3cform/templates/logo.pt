@@ -55,9 +55,6 @@
           PNG file of at least 100 pixels in height. Uploading larger images is fine, the logo will be scaled down to the right size automatically.
         </p>
       </fieldset>
-      <tal:error condition="view/error"
-                 replace="structure view/error/render|nothing"
-      />
       <input name="${view/name}.action-empty-marker"
              type="hidden"
              value="1"

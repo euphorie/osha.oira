@@ -28,7 +28,4 @@
          readonly="${view/readonly}"
          type="file"
   />
-  <tal:error condition="view/error"
-             replace="structure view/error/render|nothing"
-  />
 </fieldset>

@@ -28,9 +28,6 @@
       </option>
 
     </select>
-    <tal:error condition="view/error"
-               replace="structure view/error/render|nothing"
-    />
     <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
   </label>
 </html>

@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        dependencies nocall:view/@@dependencies;
+      "
+      tal:omit-tag=""
+      i18n:domain="nuplone"
+>
+  <tal:comment condition="nothing">
+    This is a conditional text area widget.
+
+    It is used to display a textarea that is only visible when a certain condition is met.
+    The condition is defined in the schema of the form.
+
+    Never set the required attribute to true here.
+    Backend validation takes care of that.
+
+    If you set the required attributehere, the form will not submit if the textarea is not visible
+    and pat-validation is active.
+  </tal:comment>
+  <label class="${dependencies/ploneintranet_classes}"
+         title="${view/field/description}"
+         data-pat-depends="${dependencies/data_pat_depends}"
+  >
+    ${view/label}
+    <textarea class="${view/klass}"
+              id="${view/id}"
+              cols="${view/cols}"
+              disabled="${view/disabled}"
+              name="${view/name}"
+              readonly="${view/readonly}"
+              required="${never_set_as_required_backend_validation_takes_care_of_that|nothing}"
+              rows="${view/rows}"
+    >${view/value}</textarea>
+    <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
+
+  </label>
+
+</html>

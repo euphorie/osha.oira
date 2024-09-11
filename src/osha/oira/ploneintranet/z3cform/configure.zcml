@@ -63,6 +63,14 @@
 
   <z3c:widgetTemplate
       view="..interfaces.IQuaiveForm"
+      widget="euphorie.content.dependency.IConditionalTextWidget"
+      template="templates/conditional_text_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..interfaces.IQuaiveForm"
       widget="z3c.form.interfaces.ITextAreaWidget"
       template="templates/textarea_input.pt"
       layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
@@ -73,6 +81,14 @@
       view="..interfaces.IQuaiveForm"
       widget="z3c.form.interfaces.ITextLinesWidget"
       template="templates/textarea_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+  <z3c:widgetTemplate
+      view="..interfaces.IQuaiveForm"
+      widget="euphorie.content.dependency.IConditionalHtmlTextWidget"
+      template="templates/conditional_textarea_input.pt"
       layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
       mode="input"
       />

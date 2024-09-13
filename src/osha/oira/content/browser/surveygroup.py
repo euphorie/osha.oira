@@ -1,9 +1,15 @@
 from Acquisition import aq_parent
 from euphorie.content import MessageFactory as _
 from plone import api
-from plone.base.utils import base_hasattr
 from plonetheme.nuplone.skin import actions
 from Products.Five import BrowserView
+
+
+try:
+    from plone.base.utils import base_hasattr
+except ImportError:
+    # BBB for Plone 5.2
+    from Products.CMFPlone.utils import base_hasattr
 
 
 class Delete(actions.Delete):

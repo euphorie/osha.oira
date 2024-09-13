@@ -79,6 +79,14 @@
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
+  <browser:page
+      name="survey-group-introduction"
+      for="euphorie.content.surveygroup.ISurveyGroup"
+      class=".surveygroup.SurveyGroupIntroduction"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
   <!-- Sector -->
   <adapter
       name="euphorie.sector"

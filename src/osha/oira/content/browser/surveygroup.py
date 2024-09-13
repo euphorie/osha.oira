@@ -1,9 +1,15 @@
-from Acquisition import aq_base
 from Acquisition import aq_parent
 from euphorie.content import MessageFactory as _
 from plone import api
 from plonetheme.nuplone.skin import actions
 from Products.Five import BrowserView
+
+
+try:
+    from plone.base.utils import base_hasattr
+except ImportError:
+    # BBB for Plone 5.2
+    from Products.CMFPlone.utils import base_hasattr
 
 
 class Delete(actions.Delete):
@@ -41,8 +47,14 @@ class Delete(actions.Delete):
         return True
 
 
-class SurveyGroupImage(BrowserView):
-    """Return the image of the surveygroup."""
+class SurveyGroupAttribute(BrowserView):
+    """Base view to return an attribute of a surveygroup from its surveys.
+
+    We want to show both an 'image' and 'introduction' for a survey group,
+    and we can get them from one of its surveys.
+    """
+
+    attribute_name = ""
 
     @property
     def surveys(self):
@@ -60,28 +72,54 @@ class SurveyGroupImage(BrowserView):
             if obj.getId() != published:
                 yield obj
 
-    def get_obj_image_url(self, obj):
-        """Return the URL of the image of the given object.
+    def get_obj_attribute(self, obj):
+        """Return the attribute of the given object."""
+        if not obj:
+            return
+        if not base_hasattr(obj, self.attribute_name):
+            return
+        return getattr(obj, self.attribute_name)
+
+
+class SurveyGroupImage(SurveyGroupAttribute):
+    """Return the image of the surveygroup."""
+
+    attribute_name = "image"
+
+    def __call__(self):
+        """Check all the surveys, if they have an image, redirect to that image.
 
         The image is set by a cron script,
         see e.g. https://github.com/syslabcom/scrum/issues/2552.
 
         This might change in the future.
-        """
-        if obj and aq_base(obj.image):
-            return f"{obj.absolute_url()}/@@images/image"
-
-    def __call__(self):
-        """Check all the surveys, if they have an image, redirect to that image.
 
         Return a fallback if it does not exist.
         """
         for survey in self.surveys:
-            image_url = self.get_obj_image_url(survey)
-            if image_url:
+            if self.get_obj_attribute(survey):
+                image_url = f"{survey.absolute_url()}/@@images/image"
                 return self.request.response.redirect(image_url)
 
         self.request.response.redirect(
             f"{api.portal.get().absolute_url()}"
             f"/++resource++osha.oira.content/clipboard.svg"
         )
+
+
+class SurveyGroupIntroduction(SurveyGroupAttribute):
+    """Return the introduction of the surveygroup."""
+
+    attribute_name = "introduction"
+
+    def __call__(self):
+        """Check all the surveys, if they have an introduction, show it.
+
+        We only need to return the contents of the field, which is expected
+        to be html.
+        """
+        for survey in self.surveys:
+            value = self.get_obj_attribute(survey)
+            if value:
+                return value
+        return ""

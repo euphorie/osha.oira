@@ -83,6 +83,7 @@ class BaseManageLDAPUsersView(BrowserView):
             self.grant_roles(user)
         elif ldap_action == "revoke":
             self.revoke_roles(user)
+        self.context.reindexObject(idxs=["managerRolesAndUsers"])
 
     def __call__(self):
         self.maybe_manage_local_roles()

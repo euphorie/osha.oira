@@ -4,7 +4,9 @@ Changelog
 10.0.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Update admin index when managing ldap users. 
+  (`#2640 <https://github.com/syslabcom/scrum/issues/2640>`_)
+  [reinhardt]
 
 
 10.0.1 (2024-08-02)

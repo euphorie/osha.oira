@@ -134,6 +134,24 @@ class MailingListsJson(BaseJson):
             for language in languages
         ]
 
+    def filter_permission(self, brains, query, user):
+        """Pick those elements from `brains` where the `user` has manager permissions
+        on the element's counterpart in the CMS (`sectors` folder).
+        The `query` must be the one that was used to retrieve the `brains` from the
+        catalog and is modified to yield the corresponding items in the CMS.
+        """
+        catalog = api.portal.get_tool(name="portal_catalog")
+        query["portal_type"] = ["euphorie.country", "euphorie.surveygroup"]
+        query["path"] = ("/".join(api.portal.get().sectors.getPhysicalPath()),)
+        query["managerRolesAndUsers"] = catalog._listAllowedRolesAndUsers(user)
+        admin_brains = catalog(**query)
+        admin_paths = [result.getPath() for result in admin_brains]
+        return [
+            brain
+            for brain in brains
+            if brain.getPath().replace("client", "sectors") in admin_paths
+        ]
+
     @property
     def results(self):
         """List of "mailing list" path/names.
@@ -170,7 +188,6 @@ class MailingListsJson(BaseJson):
             query = {
                 "portal_type": ["euphorie.clientcountry", "euphorie.survey"],
                 "path": "/".join(self.context.getPhysicalPath()),
-                "managerRolesAndUsers": catalog._listAllowedRolesAndUsers(user),
                 "sort_on": "sortable_title",
             }
 
@@ -181,7 +198,7 @@ class MailingListsJson(BaseJson):
                 else:
                     query["path"] = "/".join((query["path"], q))
 
-            brains = catalog(**query)
+            brains = self.filter_permission(catalog(**query), query, user)
 
             for brain in brains:
                 results.extend(self._get_mailing_lists_for(brain))

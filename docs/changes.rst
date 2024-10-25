@@ -1,7 +1,13 @@
 Changelog
 =========
 
-10.0.2 (unreleased)
+10.0.3 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+10.0.2 (2024-10-18)
 -------------------
 
 - Update admin index when managing ldap users. 

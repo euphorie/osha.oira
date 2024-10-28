@@ -15,6 +15,11 @@ except ImportError:
 class ToolVersionsGet(Service):
     """Get info from the oira tool (survey group) and its versions (surveys)."""
 
+    @property
+    def default_image_url(self):
+        portal_url = api.portal.get().absolute_url()
+        return f"{portal_url}/++resource++osha.oira.content/clipboard.svg"
+
     def get_survey_info(self, survey):
         # Is this survey the tool version that is published on the client?
         published_on_client = self.published_tool_version_id == survey.id
@@ -84,8 +89,3 @@ class ToolVersionsGet(Service):
             result["image_url"] = self.default_image_url
 
         return result
-
-    @property
-    def default_image_url(self):
-        portal_url = api.portal.get().absolute_url()
-        return f"{portal_url}/++resource++osha.oira.content/clipboard.svg"

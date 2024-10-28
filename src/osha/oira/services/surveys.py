@@ -1,7 +1,15 @@
 from Acquisition import aq_base
 from Acquisition import aq_inner
+from plone import api
 from plone.restapi.serializer.converters import json_compatible
 from plone.restapi.services import Service
+
+
+try:
+    from plone.base.utils import base_hasattr
+except ImportError:
+    # BBB for Plone 5.2
+    from Products.CMFPlone.utils import base_hasattr
 
 
 class ToolVersionsGet(Service):
@@ -43,11 +51,41 @@ class ToolVersionsGet(Service):
             "title": surveygroup.Title(),
             "published_tool_version_id": self.published_tool_version_id,
             "@type": surveygroup.portal_type,
+            # We will try to get the next ones from one of the surveys.
+            "image_url": "",
+            "summary": "",
+            "introduction": "",
         }
 
         # Now add info for each tool version.
         items = []
-        for survey in surveygroup.contentValues():
+        surveys = surveygroup.contentValues()
+        for survey in surveys:
             items.append(self.get_survey_info(survey))
         result["versions"] = items
+
+        # Get some more info from the published survey, or from the first one.
+        survey = (
+            surveygroup.get(self.published_tool_version_id)
+            if self.published_tool_version_id
+            else None
+        )
+        if survey is None and surveys:
+            survey = surveys[0]
+        if survey is not None:
+            if base_hasattr(survey, "image") and survey.image:
+                # The survey has a not inherited image attribute and it is not empty.
+                result["image_url"] = f"{survey.absolute_url()}/@@images/image"
+            if base_hasattr(survey, "introduction"):
+                result["introduction"] = survey.introduction
+            # The description field always exists.
+            result["summary"] = survey.Description()
+        if not result["image_url"]:
+            result["image_url"] = self.default_image_url
+
         return result
+
+    @property
+    def default_image_url(self):
+        portal_url = api.portal.get().absolute_url()
+        return f"{portal_url}/++resource++osha.oira.content/clipboard.svg"

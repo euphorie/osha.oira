@@ -204,7 +204,9 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                         value = portal_transforms.convertToData("text/plain", value)
                 elif type == "risk":
                     value = getattr(risk, key, None)
-                    if key == "priority":
+                    if key == "comment":
+                        value = portal_transforms.convertToData("text/plain", value)
+                    elif key == "priority":
                         value = self.priority_name(value)
                     elif key == "title":
                         if zodb_node is None:

@@ -4,6 +4,10 @@ Changelog
 10.0.3 (unreleased)
 -------------------
 
+- Also update admin index for sectors and tools when managing ldap users. 
+  (`#2640 <https://github.com/syslabcom/scrum/issues/2640>`_)
+  [reinhardt]
+
 - Action Plan: Strip HTML from comments
   (`#2763 <https://github.com/syslabcom/scrum/issues/2763>`_)
   [reinhardt]

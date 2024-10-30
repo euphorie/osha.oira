@@ -3,6 +3,11 @@ from plone.memoize.view import memoize
 from plone.memoize.view import memoize_contextless
 from Products.Five import BrowserView
 
+import logging
+
+
+logger = logging.getLogger(__name__)
+
 
 class BaseManageLDAPUsersView(BrowserView):
     _roles = set()
@@ -67,6 +72,20 @@ class BaseManageLDAPUsersView(BrowserView):
             obj=self.context,
         )
 
+    def reindex_manager_roles(self, obj):
+        """Reindex `managerRolesAndUsers` index for `obj` and its contents recursively.
+        Based on Products.CMFCore.CMFCatalogAware.CatalogAware.reindexObjectSecurity
+        """
+        catalog = api.portal.get_tool("portal_catalog")
+        path = "/".join(obj.getPhysicalPath())
+        for brain in catalog.unrestrictedSearchResults(path=path):
+            try:
+                ob = brain._unrestrictedGetObject()
+            except (AttributeError, KeyError):
+                # don't fail on catalog inconsistency
+                continue
+            ob.reindexObject(idxs=["managerRolesAndUsers"])
+
     def maybe_manage_local_roles(self):
         """Check the request and see if we should mange some user local
         roles."""
@@ -83,7 +102,7 @@ class BaseManageLDAPUsersView(BrowserView):
             self.grant_roles(user)
         elif ldap_action == "revoke":
             self.revoke_roles(user)
-        self.context.reindexObject(idxs=["managerRolesAndUsers"])
+        self.reindex_manager_roles(self.context)
 
     def __call__(self):
         self.maybe_manage_local_roles()

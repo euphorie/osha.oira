@@ -1,7 +1,13 @@
 Changelog
 =========
 
-10.0.3 (unreleased)
+10.0.4 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+10.0.3 (2024-10-30)
 -------------------
 
 - Also update admin index for sectors and tools when managing ldap users. 

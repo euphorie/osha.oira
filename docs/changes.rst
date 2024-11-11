@@ -1,10 +1,12 @@
 Changelog
 =========
 
-10.0.4 (unreleased)
+10.0.4 (2024-11-11)
 -------------------
 
-- Nothing changed yet.
+- Action Plan: Strip whitespace when stripping HTML from comments
+  (`#2763 <https://github.com/syslabcom/scrum/issues/2763>`_)
+  [reinhardt]
 
 
 10.0.3 (2024-10-30)

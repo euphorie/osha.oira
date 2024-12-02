@@ -179,7 +179,7 @@ class MailingListsJson(BaseJson):
 
             if (
                 not q or q in all_users["id"] or q in all_users["text"].lower()
-            ) and api.user.has_permission("Manage portal content"):
+            ) and api.user.has_permission("Manage portal"):
                 results.append(all_users)
 
             # FIXME: Search for native names of countries,

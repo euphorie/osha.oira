@@ -4,6 +4,9 @@ Changelog
 10.0.5 (unreleased)
 -------------------
 
+- Fix permission name
+  [ale-rt]
+
 - Fix some portal types that were not migrated from Atchetypes to Dexterity
   (`#2888 <https://github.com/syslabcom/scrum/issues/2888>`_)
   [ale-rt]

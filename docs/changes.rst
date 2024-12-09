@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.0.5 (unreleased)
+10.0.5 (2024-12-09)
 -------------------
 
 - Fix permission name

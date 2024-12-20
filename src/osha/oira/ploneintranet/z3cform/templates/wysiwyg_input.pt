@@ -15,76 +15,6 @@
       <span tal:replace="view/label"></span>
     </legend>
 
-    <div class="editor-toolbar tiptap canvas-toolbar"
-         id="texteditor-toolbar-${view/id}"
-    >
-
-      <button class="button-undo icon icon-ccw pat-tooltip"
-              type="button"
-              data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
-              i18n:translate=""
-      >Undo</button>
-
-      <button class="button-redo icon icon-cw pat-tooltip"
-              type="button"
-              data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
-              i18n:translate=""
-      >Redo</button>
-
-      <a class="icon icon-html5 button-source pat-modal pat-tooltip"
-         href="#tiptap-modal-source-editor--fieldname-${view/id}"
-         data-pat-modal="class: medium panel html-source-editor panel-html-source-editor"
-         data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
-         i18n:translate=""
-      >Code</a>
-
-      <button class="icon icon-bold button-bold pat-tooltip"
-              type="button"
-              data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
-              i18n:translate=""
-      >Bold</button>
-      <button class="icon icon-italic button-italic pat-tooltip"
-              type="button"
-              data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
-              i18n:translate=""
-      >Italic</button>
-
-      <div class="pat-collapsible pat-context-menu closed align-left no-label icon-list"
-           id="list-menu"
-           type="button"
-           data-pat-collapsible="close-trigger: .pat-context-menu:not(#list-menu),.close-menu;"
-      >
-        <strong class="context-menu-label menu-trigger pat-tooltip"
-                data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
-                i18n:translate=""
-        >Lists</strong>
-        <p class="close-menu"
-           i18n:translate=""
-        >Close</p>
-        <ul class="menu-list">
-          <li>
-            <button class="button-unordered-list icon-list-bullet"
-                    type="button"
-                    i18n:translate=""
-            >Bullet list</button>
-          </li>
-          <li>
-            <button class="button-ordered-list icon-list-numbered"
-                    type="button"
-                    i18n:translate=""
-            >Ordered list</button>
-          </li>
-        </ul>
-      </div>
-
-      <a class="icon icon-link button-link pat-modal pat-tooltip"
-         href="#tiptap-modal-hyperlink--fieldname-${view/id}"
-         data-pat-modal="class: medium panel panel-hyperlink"
-         data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
-         i18n:translate=""
-      >Hyperlink</a>
-    </div>
-
     <textarea class="${view/klass} pat-tiptap"
               id="${view/id}"
               cols="${view/cols}"
@@ -93,7 +23,7 @@
               readonly="${view/readonly}"
               rows="${view/rows}"
               data-pat-tiptap="
-                toolbar-external: #texteditor-toolbar-${view/id};
+                toolbar-external: #assessment-toolbar;
                 link-panel: #tiptap-model-hyperlink--fieldname-${view/id} .link-panel;
                 link-menu: #tiptap-context-menu-hyperlink--fieldname-${view/id};
                 source-panel: #tiptap-model-source-editor--fieldname-${view/id} .source-panel;

@@ -6,6 +6,17 @@
 
   <include package=".z3cform" />
 
+  <configure package="euphorie.client.browser">
+    <browser:page
+        name="webhelpers"
+        for="*"
+        class="osha.oira.client.browser.webhelpers.OSHAWebHelpers"
+        template="templates/webhelpers.pt"
+        permission="zope.Public"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+        />
+  </configure>
+
   <browser:page
       name="quaive-edit"
       for="euphorie.content.country.ICountry"

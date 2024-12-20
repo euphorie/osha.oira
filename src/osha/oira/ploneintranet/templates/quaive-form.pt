@@ -7,6 +7,7 @@
       metal:use-macro="context/@@layout/macros/layout"
       tal:define="
         actions view/actions/values|nothing;
+        webhelpers nocall:context/@@webhelpers;
       "
       i18n:domain="nuplone"
 >
@@ -24,22 +25,18 @@
               source: #sidebar-assessments; target: #sidebar-assessments
             "
       >
-        <div class="pat-toolbar sticky"
-             id="sector-toolbar"
-        >
-          <div class="toolbar-functions-area pat-inject pat-form pat-autosubmit"
-               id="toolbar-functions-area-assessments"
-          >
+
+        <metal:toolbar use-macro="webhelpers/macros/toolbar">
+          <metal:actions fill-slot="page-actions">
             <div class="toolbar-section quick-functions"
                  id="sector-toolbar-quick-functions"
             >
               <tal:action repeat="action python: reversed(actions)"
                           replace="structure action/render"
               />
-
             </div>
-          </div>
-        </div>
+          </metal:actions>
+        </metal:toolbar>
 
         <div class="container">
           <div class="pat-well">

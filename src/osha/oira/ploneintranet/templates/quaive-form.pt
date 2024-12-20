@@ -24,19 +24,202 @@
               source: #sidebar-assessments; target: #sidebar-assessments
             "
       >
-        <div class="pat-toolbar sticky"
-             id="sector-toolbar"
-        >
-          <div class="toolbar-functions-area pat-inject pat-form pat-autosubmit"
-               id="toolbar-functions-area-assessments"
-          >
+
+        <!--! Editing toolbar -->
+        <div class="pat-toolbar sticky">
+          <div class="toolbar-functions-area">
+
+            <div class="toolbar-section editor">
+              <div class="editor-toolbar tiptap"
+                    id="editor-toolbar">
+
+                <div class="pat-collapsible pat-context-menu formatting-menu align-left no-label icon-paragraph closed"
+                     data-pat-collapsible="
+                        store: none;
+                        scroll-selector: none;
+                        trigger: #context-menu-trigger-formatting-editor-toolbar;
+                        close-trigger: .context-menu:not(.formatting-menu),.close-menu;"
+                >
+                  <strong class="context-menu-label menu-trigger pat-tooltip"
+                          id="context-menu-trigger-formatting-editor-toolbar"
+                          data-pat-tooltip="
+                            trigger: hover;
+                            source: content;
+                            position-list: tm;
+                            class: label"
+                          i18n:translate=""
+                  >Formatting</strong>
+                  <div class="panel-content">
+                    <p class="close-menu">Close</p>
+                    <ul class="menu-list">
+                      <li>
+                        <button class="button-heading-level-2 icon-header"
+                                type="button"
+                        >Header level 2</button>
+                      </li>
+                      <li>
+                        <button class="button-heading-level-3 icon-header"
+                                type="button"
+                        >Header level 3</button>
+                      </li>
+                      <li>
+                        <button class="button-heading-level-4 icon-header"
+                                type="button"
+                        >Header level 4</button>
+                      </li>
+                      <li>
+                        <button class="button-paragraph icon-paragraph"
+                                type="button"
+                        >Normal</button>
+                      </li>
+                      <li>
+                        <button class="button-blockquote icon-quote-left"
+                                type="button"
+                        >Quote</button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <button class="icon icon-bold button-bold pat-tooltip"
+                        type="button"
+                        data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                >Bold</button>
+
+                <button class="icon icon-italic button-italic pat-tooltip"
+                        type="button"
+                        data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                >Italic</button>
+
+                <button class="icon icon-strike button-strike pat-tooltip"
+                        type="button"
+                        data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                >Strikethrough</button>
+
+                <a class="icon icon-link button-link pat-modal pat-tooltip"
+                   href="#tiptap-modal-hyperlink"
+                   data-pat-modal="class: medium panel panel-hyperlink"
+                   data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                >Hyperlink</a>
+
+                <button class="button-horizontal-rule icon icon-minus pat-tooltip"
+                        type="button"
+                        data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                >Horizontal line</button>
+
+                <div class="pat-collapsible pat-context-menu list-menu closed align-left no-label icon-list"
+                     type="button"
+                     data-pat-collapsible="
+                        store: none;
+                        scroll-selector: none;
+                        trigger: #context-menu-trigger-list-editor-toolbar;
+                        close-trigger: .context-menu:not(.list-menu),.close-menu;"
+                >
+                  <strong class="context-menu-label menu-trigger pat-tooltip"
+                          id="context-menu-trigger-list-editor-toolbar"
+                          data-pat-tooltip="
+                            trigger: hover;
+                            source: content;
+                            position-list: tm;
+                            class: label"
+                  >Lists</strong>
+                  <div class="panel-content">
+                    <p class="close-menu">Close</p>
+                    <ul class="menu-list">
+                      <li>
+                        <button class="button-unordered-list icon-list-bullet"
+                                type="button"
+                        >Bullet list</button>
+                      </li>
+                      <li>
+                        <button class="button-ordered-list icon-list-numbered"
+                                type="button"
+                        >Ordered liste</button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <a class="icon icon-picture-1 button-image pat-modal pat-tooltip"
+                   href="#tiptap-modal-image"
+                   data-pat-modal="class: large panel image-picker"
+                   data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                >Picture</a>
+
+                <a class="icon icon-video button-embed pat-modal pat-tooltip"
+                   href="#tiptap-modal-embed"
+                   data-pat-modal="class: medium panel embed-video"
+                   data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                >Video</a>
+
+                <div class="pat-collapsible pat-context-menu closed align-right table-menu no-label icon-table"
+                     id="table-menu-editor-toolbar"
+                     data-pat-collapsible="
+                        store: none;
+                        scroll-selector: none;
+                        trigger: #context-menu-trigger-table-editor-toolbar;
+                        close-trigger: .context-menu:not(.table-menu),.close-menu;"
+                >
+                  <strong class="context-menu-label menu-trigger pat-tooltip"
+                          id="context-menu-trigger-table-editor-toolbar"
+                          data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                  >Table</strong>
+                  <div class="panel-content">
+                    <p class="close-menu">Close</p>
+                    <ul class="menu-list">
+                      <li>
+                        <button class="button-table-create icon-plus-squared"
+                                type="button"
+                        >New table</button>
+                      </li>
+                      <li>
+                        <button class="button-table-remove icon-minus-squared"
+                                type="button"
+                        >Remove table</button>
+                      </li>
+                      <li>
+                        <button class="button-table-add-column-left icon-add-column-left"
+                                type="button"
+                        >Add left column</button>
+                      </li>
+                      <li>
+                        <button class="button-table-add-column-right icon-add-column"
+                                type="button"
+                        >Add right columnt</button>
+                      </li>
+                      <li>
+                        <button class="button-table-remove-column icon-remove-column"
+                                type="button"
+                        >Remove column</button>
+                      </li>
+                      <li>
+                        <button class="button-table-add-row-above icon-add-row-above"
+                                type="button"
+                        >Add top row</button>
+                      </li>
+                      <li>
+                        <button class="button-table-add-row-below icon-add-row"
+                                type="button"
+                        >Add bottom row</button>
+                      </li>
+                      <li>
+                        <button class="button-table-remove-row icon-remove-row"
+                                type="button"
+                        >Remove row</button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
             <div class="toolbar-section quick-functions"
-                 id="sector-toolbar-quick-functions"
+                 id="module-toolbar-quick-functions"
             >
               <tal:action repeat="action python: reversed(actions)"
                           replace="structure action/render"
               />
-
             </div>
           </div>
         </div>
@@ -131,6 +314,223 @@
                value="${python: view.__name__.rpartition('-')[-1]}"
         />
       </form>
+
+      <!-- modal image editor -->
+      <template id="tiptap-modal-image">
+        <h1>Edit Image</h1>
+        <div class="panel-body image-panel">
+          <div class="container">
+            <form class="pat-form">
+              <fieldset class="horizontal">
+                <label class="image-url">
+                  <tal:i18n i18n:translate="">Image URL</tal:i18n>
+                  <span class="button-field type-url">
+                    <input class="pat-autofocus"
+                           name="tiptap-src"
+                           oninput="if (this.value) { this.nextElementSibling.href = this.value; } else { this.nextElementSibling.removeAttribute('href'); }"
+                           type="url"
+                           value=""
+                    />
+                    <a class="follow"
+                       id="event-url-follow-button"
+                       href=""
+                       target="_blank"
+                       title="Visit linked web page"
+                       i18n:attributes="title"
+                       i18n:translate=""
+                    >Follow</a>
+                  </span>
+                </label>
+                <label class="image-title">
+                  <tal:i18n i18n:translate="">Title</tal:i18n>
+                  <input name="tiptap-title"
+                         type="text"
+                  />
+                </label>
+                <label class="image-alt">
+                  <tal:i18n i18n:translate="">Alternative text</tal:i18n>
+                  <input name="tiptap-alt"
+                         type="text"
+                  />
+                </label>
+                <label class="image-caption">
+                  <tal:i18n i18n:translate="">Image caption</tal:i18n>
+                  <textarea name="tiptap-caption"></textarea>
+                </label>
+              </fieldset>
+            </form>
+            <div class="buttons button-bar pat-bumper">
+              <button class="pat-button default close-panel icon-ok-circle"
+                      name="tiptap-confirm"
+                      type="submit"
+                      i18n:translate=""
+              >Insert</button>
+              <button class="pat-button close-panel icon-cancel-circle"
+                      type="button"
+                      i18n:translate=""
+              >Cancel</button>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <!-- context menu image -->
+      <template id="context-menu-image">
+        <ul class="menu tiptap-image-context-menu">
+          <li>
+            <button
+              type="button"
+              class="close-panel tiptap-edit-image">Edit image</button>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="close-panel tiptap-remove-image">Remove image</button>
+          </li>
+        </ul>
+      </template>
+
+      <!-- modal embed editor -->
+      <template id="tiptap-modal-embed">
+        <h1>Edit Embed</h1>
+        <div class="panel-body embed-panel">
+          <div class="container">
+            <form class="pat-form">
+              <fieldset class="horizontal">
+                <label class="embed-url">
+                  <tal:i18n i18n:translate="">Video/Audio URL</tal:i18n>
+                  <span class="button-field type-url">
+                    <input class="pat-autofocus"
+                           name="tiptap-src"
+                           oninput="if (this.value) { this.nextElementSibling.href = this.value; } else { this.nextElementSibling.removeAttribute('href'); }"
+                           type="url"
+                           value=""
+                    />
+                    <a class="follow"
+                       id="event-url-follow-button"
+                       href=""
+                       target="_blank"
+                       title="Visit linked web page"
+                       i18n:attributes="title"
+                       i18n:translate=""
+                    >Follow</a>
+                  </span>
+                </label>
+                <label class="embed-title">
+                  <tal:i18n i18n:translate="">Title</tal:i18n>
+                  <input name="tiptap-title"
+                         type="text"
+                  />
+                </label>
+                <label class="embed-caption">
+                  <tal:i18n i18n:translate="">Video/Audio caption</tal:i18n>
+                  <textarea name="tiptap-caption"></textarea>
+                </label>
+              </fieldset>
+            </form>
+            <div class="buttons button-bar pat-bumper">
+              <button class="pat-button default close-panel icon-ok-circle"
+                      name="tiptap-confirm"
+                      type="submit"
+                      i18n:translate=""
+              >Insert</button>
+              <button class="pat-button close-panel icon-cancel-circle"
+                      type="button"
+                      i18n:translate=""
+              >Cancel</button>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <!-- context menu embed -->
+      <template id="context-menu-embed">
+        <ul class="menu tiptap-embed-context-menu">
+          <li>
+            <button
+              type="button"
+              class="close-panel tiptap-edit-embed">Edit embed</button>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="close-panel tiptap-remove-embed">Remove embed</button>
+          </li>
+        </ul>
+      </template>
+
+      <!-- modal link editor -->
+      <template id="tiptap-modal-hyperlink">
+        <h1>Edit Link</h1>
+        <div class="panel-body embed-panel">
+          <div class="container">
+            <form class="pat-form">
+              <fieldset class="horizontal">
+                <label class="url">
+                  <tal:i18n i18n:translate="">URL</tal:i18n>
+                  <span class="button-field type-url">
+                    <input class="pat-autofocus"
+                           name="tiptap-href"
+                           oninput="if (this.value) { this.nextElementSibling.href = this.value; } else { this.nextElementSibling.removeAttribute('href'); }"
+                           type="url"
+                           value=""
+                    />
+                    <a class="follow"
+                       id="event-url-follow-button"
+                       href=""
+                       target="_blank"
+                       title="Visit linked web page"
+                       i18n:attributes="title"
+                       i18n:translate=""
+                    >Follow</a>
+                  </span>
+                </label>
+                <label class="url--text">
+                  <tal:i18n i18n:translate="">Link text</tal:i18n>
+                  <input name="tiptap-text"
+                         type="text"
+                  />
+                </label>
+              </fieldset>
+            </form>
+            <div class="buttons button-bar pat-bumper">
+              <button class="pat-button default close-panel icon-ok-circle"
+                      name="tiptap-confirm"
+                      type="submit"
+                      i18n:translate=""
+              >Insert</button>
+              <button class="pat-button close-panel icon-cancel-circle"
+                      type="button"
+                      i18n:translate=""
+              >Cancel</button>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <!-- context menu link -->
+      <template id="tiptap-context-menu-hyperlink">
+        <ul class="menu tiptap-link-context-menu">
+          <li>
+            <a class="icon-link close-panel tiptap-open-new-link"
+               href=""
+               target="_blank"
+               i18n:translate=""
+            >Visit linked web page</a>
+          </li>
+          <li>
+            <a class="icon-pencil close-panel tiptap-edit-link"
+               i18n:translate=""
+            >Edit link</a>
+          </li>
+          <li>
+            <a class="icon-unlink close-panel tiptap-unlink"
+               i18n:translate=""
+            >Unlink</a>
+          </li>
+        </ul>
+      </template>
+
     </div>
   </metal:content>
 </html>

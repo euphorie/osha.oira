@@ -225,73 +225,88 @@
         </div>
 
         <div class="container">
-          <div class="pat-well">
+
+          <div class="pat-well pat-collapsible borderless open"
+               id="fieldset--${view/id}"
+               data-pat-collapsible="
+                   trigger: #well-header--${view/id};
+                   store: local;
+                   scroll-selector: self;
+                   scroll-offset: 120px;
+               "
+          >
             <div class="well-title-group">
-              <h2 class="well-header">${view/label}</h2>
+              <h2 class="well-header"
+                  id="well-header--${view/id}">
+                  ${view/label}
+              </h2>
               <div class="buttons">
                 <dfn class="icon help help-icon pat-tooltip tooltip-active-click"
                      data-pat-tooltip="class: info; trigger: click; source: content; position-list: tl"
-                     tal:condition="python:getattr(view, 'description', None)"
+                     tal:define="
+                       description view/description;
+                     "
+                     tal:condition="description"
                 >
-                  ${view/description}
+                    ${description}
                 </dfn>
               </div>
             </div>
 
-            <p class="message ${python:'error' if view.widgets.errors else 'notice'}"
-               tal:define="
-                 status view/status;
-               "
-               tal:condition="status"
-               tal:content="status"
-               i18n:domain="plone"
-            >Form-global message</p>
-            <fieldset class="section horizontal">
-              <tal:widget tal:repeat="widget view/widgets/values">
-                <tal:widget define="
-                              error nocall: widget/error|nothing;
-                            ">
-                  ${structure: widget/render}
-                  <p class="pat-notice error"
-                     tal:condition="python: error"
-                  >
-                    ${structure: error/render}
-                  </p>
+            <div class="panel-content">
+              <p class="message ${python:'error' if view.widgets.errors else 'notice'}"
+                 tal:define="
+                   status view/status;
+                 "
+                 tal:condition="status"
+                 tal:content="status"
+                 i18n:domain="plone"
+              >Form-global message</p>
+              <fieldset class="section horizontal">
+                <tal:widget tal:repeat="widget view/widgets/values">
+                  <tal:widget define="
+                                error nocall: widget/error|nothing;
+                              ">
+                    ${structure: widget/render}
+                    <p class="pat-notice error"
+                       tal:condition="python: error"
+                    >
+                      ${structure: error/render}
+                    </p>
+                  </tal:widget>
                 </tal:widget>
-              </tal:widget>
-            </fieldset>
-
+              </fieldset>
+            </div>
           </div>
 
-          <div class="pat-page-module type-planned-measures pat-well pat-collapsible borderless open"
+          <div class="pat-well pat-collapsible borderless closed"
                id="fieldset-${group/__name__}"
                data-pat-collapsible="
-                store: local;
-                scroll-selector: self;
-                scroll-offset: 120px;
-                open-trigger: .expand-all-sections;
-                close-trigger: .collapse-all-sections;"
+                   trigger: #well-header--${group/__name__};
+                   store: local;
+                   scroll-selector: self;
+                   scroll-offset: 120px;
+               "
                tal:repeat="group view/groups|nothing"
           >
             <div class="well-title-group">
-              <h2 class="well-header">
-              ${group/label}
-                <div class="buttons">
-                  <dfn class="icon help help-icon pat-tooltip tooltip-active-click"
-                       data-pat-tooltip="class: info; trigger: click; source: content; position-list: tl"
-                       tal:define="
-                         description group/description;
-                       "
-                       tal:condition="description"
-                  >
-                  ${description}
-                  </dfn>
-                </div>
+              <h2 class="well-header"
+                  id="well-header--${group/__name__}">
+                  ${group/label}
               </h2>
+              <div class="buttons">
+                <dfn class="icon help help-icon pat-tooltip tooltip-active-click"
+                     data-pat-tooltip="class: info; trigger: click; source: content; position-list: tl"
+                     tal:define="
+                       description group/description;
+                     "
+                     tal:condition="description"
+                >
+                    ${description}
+                </dfn>
+              </div>
             </div>
-            <div class="panel-content"
-                 style=""
-            >
+            <div class="panel-content">
               <fieldset class="horizontal">
                 <tal:widget tal:repeat="widget group/widgets/values">
                   <tal:widget define="

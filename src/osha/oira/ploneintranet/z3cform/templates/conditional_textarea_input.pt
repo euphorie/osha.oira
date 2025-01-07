@@ -31,7 +31,7 @@
               disabled="${view/disabled}"
               name="${view/name}"
               readonly="${view/readonly}"
-              required="${never_set_as_required_backend_validation_takes_care_of_that|nothing}"
+              required="${python: view.required and 'required' or None}"
               rows="${view/rows}"
     >${view/value}</textarea>
     <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />

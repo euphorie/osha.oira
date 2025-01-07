@@ -4,7 +4,10 @@ Changelog
 10.0.4 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Restore the required state of conditional input fields.
+  pat-depends disables hidden input fields in action-mode "enable" and "both" since Patternslib 9.10.
+  Ref: scrum-2615.
+  [thet]
 
 
 10.0.3 (2024-10-30)

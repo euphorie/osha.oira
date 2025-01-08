@@ -35,9 +35,9 @@ jobs:
             ~/.cache/pip
             **/eggs
             **/downloads
-          key: ${{ runner.os }}-cache-${{ hashFiles('setup.*', '*.cfg') }}-${{ matrix.config[0] }}  # yamllint disable-line rule:line-length
+          key: ${{ runner.os }}-XXX-cache-${{ hashFiles('setup.*', '*.cfg') }}-${{ matrix.config[0] }}  # yamllint disable-line rule:line-length
           restore-keys: |
-            ${{ runner.os }}-cache-
+            ${{ runner.os }}-XXX-cache-
       - name: Install dependencies
         run: |
           sudo locale-gen en_US.UTF-8 nl_NL@euro

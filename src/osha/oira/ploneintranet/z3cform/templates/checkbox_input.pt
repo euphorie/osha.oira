@@ -4,28 +4,37 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       tal:define="
         dependencies nocall:view/@@dependencies;
+        label view/field/label_content|nothing;
       "
       tal:omit-tag=""
       i18n:domain="nuplone"
 >
-  <fieldset class="pat-toggle-switch group ${dependencies/ploneintranet_classes}"
+
+  <fieldset class="pat-form-field-toggle group ${dependencies/ploneintranet_classes}"
             data-pat-depends="${dependencies/data_pat_depends}"
   >
-    <p class="legend">
+    <legend>
       ${python: view.items[0]['label']}
-    </p>
-    <label tal:repeat="item view/items">${view/field/label_content|nothing}<input class="${view/klass}"
+    </legend>
+    <label class="pat-toggle-switch"
+           tal:repeat="item view/items"
+    >
+      <tal:if condition="label">
+          ${label}
+      </tal:if>
+      <tal:if condition="not:label">
+        <tal:i18n i18n:translate="">On</tal:i18n>
+      </tal:if>
+      <input class="${view/klass}"
              id="${view/id}"
-             checked="${python:'checked' if checked else None}"
+             checked="${python:'checked' if item['checked'] else None}"
              disabled="${view/disabled}"
              name="${item/name}"
              readonly="${view/readonly}"
              type="checkbox"
              value="${item/value}"
-             tal:define="
-               checked item/checked;
-             "
-      /></label>
+      />
+    </label>
     <input name="${view/name}-empty-marker"
            type="hidden"
            value="1"

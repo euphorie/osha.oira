@@ -23,7 +23,8 @@
            readonly="${view/readonly}"
            type="file"
     />
-    <tal:has-image condition="view/allow_nochange"><img class="floatAfter"
+    <tal:has-image condition="view/allow_nochange">
+      <img class="floatAfter"
            alt=""
            src="${scale/url}"
            width="${scale/width}"

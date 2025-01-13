@@ -4,7 +4,8 @@ Changelog
 10.0.6 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Support openpyxl 3.x
+  [reinhardt]
 
 
 10.0.5 (2024-12-09)

@@ -1,11 +1,13 @@
 Changelog
 =========
 
-10.0.6 (unreleased)
+10.1.0 (unreleased)
 -------------------
 
 - Support openpyxl 3.x
   [reinhardt]
+- Remove support and testing infrastructure for Plone 5.2.
+  [thet]
 
 
 10.0.5 (2024-12-09)

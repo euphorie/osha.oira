@@ -4,7 +4,8 @@ Changelog
 10.0.6 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Drop Plone 5.2 support
+  [reinhardt]
 
 
 10.0.5 (2024-12-09)

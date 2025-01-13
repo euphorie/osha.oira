@@ -14,8 +14,7 @@ jobs:
     strategy:
       matrix:
         config:
-          - ["Py3.8-Plone5.2", "3.8", "5.2"]
-          - ["Py3.8-Plone6.0", "3.8", "6.0"]
+          - ["Py3.8-Plone6.0", "3.8"]
     runs-on: ubuntu-latest
     name: ${{ matrix.config[0] }}
     steps:
@@ -42,17 +41,13 @@ jobs:
         run: |
           sudo locale-gen en_US.UTF-8 nl_NL@euro
           python -m venv .
-          ln -s requirements-${{ matrix.config[2] }}.txt requirements.txt
           bin/pip install -r requirements.txt
-          ln -s versions-${{ matrix.config[2] }}.cfg versions.cfg
           bin/buildout -c .github.cfg
       - name: Pre commit
         uses: pre-commit/action@v2.0.0
-        if: ${{ matrix.config[2] == '5.2' }}
       - name: Code Analysis
         run: |
           bin/code-analysis
-        if: ${{ matrix.config[2] == '5.2' }}
       - name: Test
         run: |
           bin/coverage run bin/test -s osha.oira

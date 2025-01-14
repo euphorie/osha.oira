@@ -139,7 +139,7 @@ class MailingListsJson(BaseJson):
             self._get_entry(
                 "-".join((brain.getId, language)), f"{brain.Title} ({language})"
             )
-            for language in languages
+            for language in sorted(languages)
         ]
 
     def filter_permission(self, brains, query, user):

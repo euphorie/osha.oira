@@ -111,15 +111,15 @@ class TestMailingLists(EuphorieIntegrationTestCase):
         self.assertEqual(
             results[0],
             {
-                "id": "nl-nl|VGhlIE5ldGhlcmxhbmRzIChubCk=",
-                "text": "The Netherlands (nl) [0 subscribers]",
+                "id": "nl-fr|VGhlIE5ldGhlcmxhbmRzIChmcik=",
+                "text": "The Netherlands (fr) [0 subscribers]",
             },
         )
         self.assertEqual(
             results[1],
             {
-                "id": "nl-fr|VGhlIE5ldGhlcmxhbmRzIChmcik=",
-                "text": "The Netherlands (fr) [0 subscribers]",
+                "id": "nl-nl|VGhlIE5ldGhlcmxhbmRzIChubCk=",
+                "text": "The Netherlands (nl) [0 subscribers]",
             },
         )
 

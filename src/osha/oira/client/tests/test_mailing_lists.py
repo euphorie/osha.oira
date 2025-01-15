@@ -19,7 +19,7 @@ class TestMailingLists(EuphorieIntegrationTestCase):
         survey = """<sector xmlns="http://xml.simplon.biz/euphorie/survey/1.0">
                       <title>Test</title>
                       <survey>
-                        <title>Second Survey</title>
+                        <title>Software development</title>
                         <language>fr</language>
                         </survey>
                     </sector>"""
@@ -86,15 +86,15 @@ class TestMailingLists(EuphorieIntegrationTestCase):
         self.assertEqual(
             results[1],
             {
-                "id": "nl/test/second-survey|U2Vjb25kIFN1cnZleQ==",
-                "text": "Second Survey (nl/test/second-survey) [0 subscribers]",
+                "id": "nl/ict/software-development|U29mdHdhcmUgZGV2ZWxvcG1lbnQ=",
+                "text": "Software development (nl/ict/software-development) [0 subscribers]",  # noqa: E501
             },
         )
         self.assertEqual(
             results[2],
             {
-                "id": "nl/ict/software-development|U29mdHdhcmUgZGV2ZWxvcG1lbnQ=",
-                "text": "Software development (nl/ict/software-development) [0 subscribers]",  # noqa: E501
+                "id": "nl/test/software-development|U29mdHdhcmUgZGV2ZWxvcG1lbnQ=",
+                "text": "Software development (nl/test/software-development) [0 subscribers]",  # noqa: E501
             },
         )
 
@@ -111,15 +111,15 @@ class TestMailingLists(EuphorieIntegrationTestCase):
         self.assertEqual(
             results[0],
             {
-                "id": "nl-nl|VGhlIE5ldGhlcmxhbmRzIChubCk=",
-                "text": "The Netherlands (nl) [0 subscribers]",
+                "id": "nl-fr|VGhlIE5ldGhlcmxhbmRzIChmcik=",
+                "text": "The Netherlands (fr) [0 subscribers]",
             },
         )
         self.assertEqual(
             results[1],
             {
-                "id": "nl-fr|VGhlIE5ldGhlcmxhbmRzIChmcik=",
-                "text": "The Netherlands (fr) [0 subscribers]",
+                "id": "nl-nl|VGhlIE5ldGhlcmxhbmRzIChubCk=",
+                "text": "The Netherlands (nl) [0 subscribers]",
             },
         )
 

@@ -6,6 +6,9 @@ Changelog
 
 - Remove support and testing infrastructure for Plone 5.2.
   [thet]
+- Mailing Lists: Support batching
+  (`#2316 <https://github.com/syslabcom/scrum/issues/2316>`_)
+  [thet, reinhardt]
 
 
 10.0.5 (2024-12-09)

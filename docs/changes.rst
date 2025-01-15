@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.1.0 (unreleased)
+10.1.0 (2025-01-15)
 -------------------
 
 - Remove support and testing infrastructure for Plone 5.2.

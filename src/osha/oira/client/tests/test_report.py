@@ -239,7 +239,6 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
             "(Repeating instance) Somerset West",
             "(Repeating instance) Stellenbosch",
         ]:
-
             answer = model.Module(
                 depth=2,
                 title=module_title,
@@ -300,7 +299,6 @@ class ActionPlanTimelineTests(OiRAFunctionalTestCase):
             "(Repeating instance) Somerset West",
             "(Repeating instance) Stellenbosch",
         ]:
-
             location_path = "%s/%d" % (question.zodb_path, i)
             location = model.Module(
                 depth=3,
@@ -551,3 +549,106 @@ class RiskQueryTests(OiRAIntegrationTestCase):
     def testRiskNotPresentNodes(self):
         self.createData()
         self.assertEqual(len(utils.get_risk_not_present_nodes(self.survey_session)), 3)
+
+
+class UnansweredQueryTests(OiRAIntegrationTestCase):
+    """Test #2800.
+
+    Only risks with `identification` == None are returned as unanswered.
+    """
+
+    def createData(self):
+        (self.session, self.survey_session) = createSurvey()
+
+        self.q1 = model.Module(
+            **{
+                "depth": 1,
+                "module_id": 1,
+                "has_description": True,
+                "path": "001",
+                "postponed": None,
+                "profile_index": -1,
+                "skip_children": False,
+                "title": "What is the sound of one hand clapping?",
+                "type": "module",
+                "zodb_path": "173",
+            }
+        )
+        self.survey_session.addChild(self.q1)
+
+        self.mod1 = model.Module(
+            **{
+                "depth": 2,
+                "module_id": 2,
+                "has_description": True,
+                "path": "001001",
+                "postponed": None,
+                "profile_index": 0,
+                "skip_children": False,
+                "title": "Stellenbosch",
+                "type": "module",
+                "zodb_path": "173",
+            }
+        )
+        self.q1.addChild(self.mod1)
+
+        self.r1 = model.Risk(
+            **{
+                "risk_id": 1,
+                "depth": 3,
+                "identification": "no",
+                "action_plans": [],
+                "has_description": True,
+                "path": "001001001",
+                "postponed": False,
+                "profile_index": 0,
+                "skip_children": False,
+                "title": "Hands are washed",
+                "type": "risk",
+                "zodb_path": "173/euphorie.risk",
+            }
+        )
+        self.mod1.addChild(self.r1)
+
+        self.mod2 = model.Module(
+            **{
+                "depth": 2,
+                "module_id": 3,
+                "has_description": True,
+                "path": "001002",
+                "postponed": None,
+                "profile_index": 1,
+                "skip_children": False,
+                "title": "Somerset West",
+                "type": "module",
+                "zodb_path": "173",
+            }
+        )
+        self.q1.addChild(self.mod2)
+
+        self.r2 = model.Risk(
+            **{
+                "risk_id": 1,
+                "depth": 3,
+                "identification": None,
+                "action_plans": [],
+                "has_description": True,
+                "path": "001002001",
+                "postponed": False,
+                "profile_index": 1,
+                "skip_children": False,
+                "title": "Hands are washed",
+                "type": "risk",
+                "zodb_path": "173/euphorie.risk",
+            }
+        )
+        self.mod2.addChild(self.r2)
+
+    def testUnansweredNodes(self):
+        self.createData()
+        risks = [
+            node
+            for node in utils.get_unanswered_nodes(self.survey_session)
+            if node.type == "risk"
+        ]
+        self.assertEqual(len(risks), 1)

@@ -1,16 +1,45 @@
 Changelog
 =========
 
-10.0.4 (unreleased)
+10.1.1 (unreleased)
 -------------------
 
 - Nothing changed yet.
 
 
+10.1.0 (2025-01-15)
+-------------------
+
+- Remove support and testing infrastructure for Plone 5.2.
+  [thet]
+- Mailing Lists: Support batching
+  (`#2316 <https://github.com/syslabcom/scrum/issues/2316>`_)
+  [thet, reinhardt]
+
+
+10.0.5 (2024-12-09)
+-------------------
+
+- Fix permission name
+  [ale-rt]
+
+- Fix some portal types that were not migrated from Atchetypes to Dexterity
+  (`#2888 <https://github.com/syslabcom/scrum/issues/2888>`_)
+  [ale-rt]
+
+
+10.0.4 (2024-11-11)
+-------------------
+
+- Action Plan: Strip whitespace when stripping HTML from comments
+  (`#2763 <https://github.com/syslabcom/scrum/issues/2763>`_)
+  [reinhardt]
+
+
 10.0.3 (2024-10-30)
 -------------------
 
-- Also update admin index for sectors and tools when managing ldap users. 
+- Also update admin index for sectors and tools when managing ldap users.
   (`#2640 <https://github.com/syslabcom/scrum/issues/2640>`_)
   [reinhardt]
 
@@ -22,7 +51,7 @@ Changelog
 10.0.2 (2024-10-18)
 -------------------
 
-- Update admin index when managing ldap users. 
+- Update admin index when managing ldap users.
   (`#2640 <https://github.com/syslabcom/scrum/issues/2640>`_)
   [reinhardt]
 

@@ -69,6 +69,14 @@ class BaseJson(BrowserView):
         if ticket != expected:
             raise Unauthorized("Invalid ticket")
 
+    @property
+    def page(self):
+        return int(self.request.get("page", "1"))
+
+    @property
+    def page_limit(self):
+        return int(self.request.get("page_limit", "10"))
+
     def __call__(self):
         """Returns a json meant to be consumed by pat-autosuggest.
 
@@ -131,7 +139,7 @@ class MailingListsJson(BaseJson):
             self._get_entry(
                 "-".join((brain.getId, language)), f"{brain.Title} ({language})"
             )
-            for language in languages
+            for language in sorted(languages)
         ]
 
     def filter_permission(self, brains, query, user):
@@ -178,8 +186,9 @@ class MailingListsJson(BaseJson):
             user = api.user.get_current()
 
             if (
-                not q or q in all_users["id"] or q in all_users["text"].lower()
-            ) and api.user.has_permission("Manage portal content"):
+                self.page == 1
+                and (not q or q in all_users["id"] or q in all_users["text"].lower())
+            ) and api.user.has_permission("Manage portal"):
                 results.append(all_users)
 
             # FIXME: Search for native names of countries,
@@ -188,7 +197,7 @@ class MailingListsJson(BaseJson):
             query = {
                 "portal_type": ["euphorie.clientcountry", "euphorie.survey"],
                 "path": "/".join(self.context.getPhysicalPath()),
-                "sort_on": "sortable_title",
+                "sort_on": ("sortable_title", "path"),
             }
 
             # Filter for query string if given. Else return all results.
@@ -198,7 +207,9 @@ class MailingListsJson(BaseJson):
                 else:
                     query["path"] = "/".join((query["path"], q))
 
-            brains = self.filter_permission(catalog(**query), query, user)
+            b_start = (self.page - 1) * self.page_limit
+            brains = catalog(**query, b_start=b_start, b_size=self.page_limit)
+            brains = self.filter_permission(brains, query, user)
 
             for brain in brains:
                 results.extend(self._get_mailing_lists_for(brain))

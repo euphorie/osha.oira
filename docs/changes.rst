@@ -4,8 +4,9 @@ Changelog
 10.1.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Prevent the choice widget to throw the error:
+  ``TypeError: object of type 'CatalogSource' has no len()``
+  [ale-rt]
 
 10.1.0 (2025-01-15)
 -------------------

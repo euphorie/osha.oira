@@ -5,7 +5,7 @@ import monkeypatch_setup  # noqa: F401
 import os
 
 
-version = "10.1.1.dev0"
+version = "11.0.0.dev0"
 
 setup(
     name="osha.oira",
@@ -21,7 +21,8 @@ setup(
         "Framework :: Plone :: 6.0",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
@@ -55,6 +56,7 @@ setup(
         "zope.app.publication",
         "zope.publisher",
     ],
+    python_requires=">=3.11,<3.13",
     extras_require={
         "tests": [
             "Euphorie [tests]",

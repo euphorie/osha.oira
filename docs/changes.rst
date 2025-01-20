@@ -1,10 +1,11 @@
 Changelog
 =========
 
-10.1.1 (unreleased)
+11.0.0 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Require Python 3.11 and 3.12 as Euphorie does
+  [ale-rt]
 
 
 10.1.0 (2025-01-15)

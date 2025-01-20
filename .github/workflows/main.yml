@@ -14,7 +14,8 @@ jobs:
     strategy:
       matrix:
         config:
-          - ["Py3.8-Plone6.0", "3.8"]
+          - ["Py3.11-Plone6.0", "3.11"]
+          - ["Py3.12-Plone6.0", "3.12"]
     runs-on: ubuntu-latest
     name: ${{ matrix.config[0] }}
     steps:
@@ -45,9 +46,6 @@ jobs:
           bin/buildout -c .github.cfg
       - name: Pre commit
         uses: pre-commit/action@v2.0.0
-      - name: Code Analysis
-        run: |
-          bin/code-analysis
       - name: Test
         run: |
           bin/coverage run bin/test -s osha.oira

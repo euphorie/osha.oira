@@ -26,7 +26,7 @@ class NavigationService(Service):
     def fix_node(self, node):
         """Prepare a node for serialization"""
         banned_keys = [
-            "brain",  # now serializable
+            "brain",  # not serializable
             "parent",  # creates a circular reference
         ]
         for key in banned_keys:

@@ -37,6 +37,7 @@ class NavigationService(Service):
         mapping = {
             "portal_type": "@type",
             "url": "@id",
+            "children": "items",
         }
         for old_key, new_key in mapping.items():
             if old_key in node:
@@ -47,8 +48,8 @@ class NavigationService(Service):
             node["@type"] = node["@type"].replace("-", ".")
 
         # Recurse into children
-        if "children" in node:
-            for child in node["children"]:
+        if "items" in node:
+            for child in node["items"]:
                 self.fix_node(child)
 
         return node

@@ -33,7 +33,7 @@ class NavigationService(Service):
             if key in node:
                 del node[key]
 
-        # Rename keys to math plone.restapi standards
+        # Rename keys to match plone.restapi standards
         mapping = {
             "portal_type": "@type",
             "url": "@id",

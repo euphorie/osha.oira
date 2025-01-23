@@ -1,15 +1,22 @@
 Changelog
 =========
 
-10.1.1 (unreleased)
+11.0.0 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Prevent the choice widget to throw the error:
+  ``TypeError: object of type 'CatalogSource' has no len()``
+  [ale-rt]
+
+- Require Python 3.11 and 3.12 as Euphorie does
+  [ale-rt]
 
 
 10.1.0 (2025-01-15)
 -------------------
 
+- Support openpyxl 3.x
+  [reinhardt]
 - Remove support and testing infrastructure for Plone 5.2.
   [thet]
 - Mailing Lists: Support batching

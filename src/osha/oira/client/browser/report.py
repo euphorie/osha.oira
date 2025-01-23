@@ -258,11 +258,7 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                 else:
                     cell = ws1.cell(row=row, column=column)
                     if value is not None:
-                        if key == "number":
-                            # force string
-                            cell.set_explicit_value(value)
-                        else:
-                            cell.value = value
+                        cell.value = value
                         if key == "budget":
                             cell.style = "Comma"
                     cell.alignment = alignment_basic

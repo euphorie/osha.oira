@@ -1,6 +1,7 @@
 from ..interfaces import IOSHAContentSkinLayer
 from .interfaces import ILargeTextAreaWidget
 from .interfaces import IOiRAFormLayer
+from plone.app.vocabularies.catalog import CatalogSource
 from plonetheme.nuplone.z3cform.utils import getVocabulary
 from plonetheme.nuplone.z3cform.widget import SingleRadioWidget
 from z3c.form.browser.select import SelectWidget
@@ -27,7 +28,11 @@ def ChoiceWidgetFactory(field, request):
     We increase min here
     """
     vocabulary = getVocabulary(field)
-    if vocabulary is None or len(vocabulary) > 6:
+    if (
+        vocabulary is None
+        or isinstance(vocabulary, CatalogSource)
+        or len(vocabulary) > 6
+    ):
         widget = SelectWidget
     else:
         widget = SingleRadioWidget

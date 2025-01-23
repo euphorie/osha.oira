@@ -4,6 +4,10 @@ Changelog
 11.0.0 (unreleased)
 -------------------
 
+- Prevent the choice widget to throw the error:
+  ``TypeError: object of type 'CatalogSource' has no len()``
+  [ale-rt]
+
 - Require Python 3.11 and 3.12 as Euphorie does
   [ale-rt]
 

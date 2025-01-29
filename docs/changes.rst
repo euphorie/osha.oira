@@ -11,6 +11,10 @@ Changelog
 - Require Python 3.11 and 3.12 as Euphorie does
   [ale-rt]
 
+- Add country manager mailing lists
+  (`#2636 <https://github.com/syslabcom/scrum/issues/2636>`_)
+  [reinhardt]
+
 
 10.1.0 (2025-01-15)
 -------------------

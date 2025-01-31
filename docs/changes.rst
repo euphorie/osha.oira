@@ -4,6 +4,9 @@ Changelog
 11.0.0 (unreleased)
 -------------------
 
+- Add ``@tool-versions`` REST API endpoint.
+  [maurits]
+
 - Prevent the choice widget to throw the error:
   ``TypeError: object of type 'CatalogSource' has no len()``
   [ale-rt]

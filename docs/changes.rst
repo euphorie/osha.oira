@@ -10,6 +10,9 @@ Changelog
 - Remove the registration of the ``oira.media`` browser resource directory.
   [ale-rt]
 
+- Add ``quaive-publish`` page with the text for publishing a survey to the client.
+  [maurits]
+
 - Add views to create or edit content from within Quaive.
   [maurits]
 

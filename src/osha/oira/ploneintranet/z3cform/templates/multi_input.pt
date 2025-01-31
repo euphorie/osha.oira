@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        dependencies nocall:view/@@dependencies;
+      "
+      tal:omit-tag=""
+      i18n:domain="nuplone"
+>
+  <fieldset class="concise multiWidget ${dependencies/ploneintranet_classes}"
+            data-pat-depends="${dependencies/data_pat_depends}"
+  >
+    <legend>${view/label}
+      <sup class="required"
+           tal:condition="view/required"
+      >*</sup></legend>
+    <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
+    <input type="hidden"
+           tal:replace="structure view/counterMarker"
+    />
+    <tal:field repeat="widget view/widgets"><tal:widget condition="python:widget.mode!='hidden'"
+                  replace="structure widget/render"
+      /></tal:field>
+    <button class="add jsOnly"
+            type="button"
+            value="${view/form/action}/++widget++${view/field/__name__}/new-entry"
+            i18n:translate=""
+    >Add new</button>
+  </fieldset>
+</html>

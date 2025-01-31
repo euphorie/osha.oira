@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        dependencies nocall:view/@@dependencies;
+      "
+      tal:omit-tag=""
+      i18n:domain="nuplone"
+>
+  <label class="pat-select ${dependencies/ploneintranet_classes}"
+         data-pat-depends="${dependencies/data_pat_depends}"
+  >
+  	${view/label}
+    <select class="has-value"
+            name="${view/name}"
+            data-value
+    >
+      <option class=""
+              id="${item/id}"
+              disabled="${view/disabled}"
+              readonly="${view/readonly|nothing}"
+              selected="${python:'selected' if item.get('selected', False) else None}"
+              value="${item/value}"
+              tal:repeat="item view/items"
+      >
+					${item/content}
+      </option>
+
+    </select>
+    <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
+  </label>
+</html>

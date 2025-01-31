@@ -1,0 +1,81 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:omit-tag=""
+      i18n:domain="nuplone"
+>
+  <p class="message ${python:'error' if view.widgets.errors else 'notice'}"
+     tal:define="
+       status view/status;
+     "
+     tal:condition="status"
+     i18n:domain="plone"
+     i18n:translate=""
+  >${status}</p>
+  <tal:errors define="
+                errors view/widgets/errors;
+              "
+              condition="errors"
+  >
+    <tal:error repeat="error errors">
+      <p class="message field error"
+         tal:condition="not:nocall:error/widget"
+         tal:content="structure error/message"
+         i18n:domain="plone"
+         i18n:translate=""
+      >
+                  Error
+      </p>
+    </tal:error>
+  </tal:errors>
+  <p class="discrete"
+     tal:condition="python:getattr(view, 'description', None)"
+  >${view/description}</p>
+  <form class="concise"
+        id="${view/id}"
+        action="${request/getURL}"
+        enctype="${view/enctype}"
+        method="${view/method}"
+  >
+    <fieldset>
+      <tal:widget repeat="widget view/widgets/values"
+                  replace="structure widget/render"
+      />
+    </fieldset>
+
+    <tal:groupform condition="python:getattr(view, 'groups', None)">
+      <fieldset class="${group/layout|nothing}"
+                tal:repeat="group view/groups"
+      >
+        <legend tal:define="
+                  legend group/label;
+                "
+                tal:condition="legend"
+                i18n:domain="plone"
+                i18n:translate=""
+        >${legend}</legend>
+        <p class="discrete"
+           tal:define="
+             description group/description;
+           "
+           tal:condition="description"
+        >${description}</p>
+        <tal:widget repeat="widget group/widgets/values">
+          <tal:render replace="structure widget/render" />
+        </tal:widget>
+      </fieldset>
+    </tal:groupform>
+
+    <div class="buttonBar"
+         tal:define="
+           actions view/actions/values|nothing;
+         "
+         tal:condition="actions"
+    >
+      <tal:action repeat="action actions"
+                  replace="structure action/render"
+      />
+    </div>
+  </form>
+</html>

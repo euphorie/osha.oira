@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        dependencies nocall:view/@@dependencies;
+      "
+      tal:omit-tag=""
+      i18n:domain="nuplone"
+>
+  <fieldset class="concise ${dependencies/ploneintranet_classes}"
+            data-pat-depends="${dependencies/data_pat_depends}"
+  >
+    <legend>${view/label}
+      <sup class="required"
+           tal:condition="view/required"
+      >*</sup></legend>
+    <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
+    <tal:field repeat="widget view/subform/widgets/values"
+               replace="structure widget/render"
+    />
+    <input name="${view/name}-empty-marker"
+           type="hidden"
+           value="1"
+    />
+    <button class="remove jsOnly micro floatAfter"
+            type="button"
+            i18n:translate=""
+    >Remove</button>
+  </fieldset>
+</html>

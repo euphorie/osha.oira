@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        dependencies nocall:view/@@dependencies;
+      "
+      tal:omit-tag=""
+      i18n:domain="nuplone"
+>
+
+  <fieldset class="group ${dependencies/ploneintranet_classes}"
+            data-pat-depends="${dependencies/data_pat_depends}"
+  >
+    <legend title="${view/field/description}">
+      ${view/label}
+    </legend>
+
+    <div class="pat-rich-editor toolbar-detached">
+      <div class="pat-rich">
+
+        <textarea class="${view/klass} pat-tiptap"
+                  id="${view/id}"
+                  cols="${view/cols}"
+                  disabled="${view/disabled}"
+                  name="${view/name}"
+                  readonly="${view/readonly}"
+                  rows="${view/rows}"
+                  data-pat-tiptap="
+                      toolbar-external: #editor-toolbar;
+                      link-panel: #tiptap-modal-hyperlink .link-panel;
+                      link-menu: #tiptap-context-menu-hyperlink;
+                      image-panel: #tiptap-modal-image .image-panel;
+                      image-menu: #context-menu-image;
+                      embed-panel: #tiptap-modal-embed .embed-panel;
+                      embed-menu: #context-menu-embed;
+                  "
+        >${view/value}</textarea>
+
+      </div>
+    </div>
+
+    <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
+
+  </fieldset>
+
+</html>

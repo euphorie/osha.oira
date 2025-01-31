@@ -3,6 +3,12 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     >
 
+  <browser:resourceDirectory
+      name="osha.oira.content"
+      directory="resources"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
   <browser:page
       name="manage-ldap-users"
       for="euphorie.content.country.ICountry"
@@ -64,6 +70,22 @@
         permission="zope2.View"
         />
   </configure>
+
+  <browser:page
+      name="survey-group-image"
+      for="euphorie.content.surveygroup.ISurveyGroup"
+      class=".surveygroup.SurveyGroupImage"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="survey-group-introduction"
+      for="euphorie.content.surveygroup.ISurveyGroup"
+      class=".surveygroup.SurveyGroupIntroduction"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
 
   <!-- Sector -->
   <adapter

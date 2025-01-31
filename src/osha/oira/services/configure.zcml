@@ -12,4 +12,13 @@
       name="@tool-versions"
       />
 
+  <plone:service
+      method="GET"
+      factory=".navigation.NavigationService"
+      permission="zope2.View"
+      for="*"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      name="@navtree"
+      />
+
 </configure>

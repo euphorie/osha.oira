@@ -4,6 +4,9 @@ Changelog
 11.0.0 (unreleased)
 -------------------
 
+- Add ``@navtree`` REST API endpoint.
+  [maurits]
+
 - Add ``@tool-versions`` REST API endpoint.
   [maurits]
 

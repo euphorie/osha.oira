@@ -79,4 +79,68 @@
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
+  <browser:page
+      name="quaive-create-euphorie.sector"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieSectorView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.country"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieCountryView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.risk"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieRiskView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.surveygroup"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieSurveyGroupView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.survey"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieSurveyView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.module"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieModuleView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.profilequestion"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieProfileQuestionView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.solution"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieSolutionView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
 </configure>

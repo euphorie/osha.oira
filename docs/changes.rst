@@ -10,6 +10,9 @@ Changelog
 - Remove the registration of the ``oira.media`` browser resource directory.
   [ale-rt]
 
+- Add views to create or edit content from within Quaive.
+  [maurits]
+
 - Add ``@navtree`` REST API endpoint.
   [maurits]
 

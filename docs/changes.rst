@@ -7,6 +7,12 @@ Changelog
 - Remove the registration of the ``oira.media`` browser resource directory.
   [ale-rt]
 
+- Add ``@navtree`` REST API endpoint.
+  [maurits]
+
+- Add ``@tool-versions`` REST API endpoint.
+  [maurits]
+
 - Prevent the choice widget to throw the error:
   ``TypeError: object of type 'CatalogSource' has no len()``
   [ale-rt]

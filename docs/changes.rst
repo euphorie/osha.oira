@@ -4,6 +4,9 @@ Changelog
 11.0.0 (unreleased)
 -------------------
 
+- Remove the registration of the ``oira.media`` browser resource directory.
+  [ale-rt]
+
 - Prevent the choice widget to throw the error:
   ``TypeError: object of type 'CatalogSource' has no len()``
   [ale-rt]

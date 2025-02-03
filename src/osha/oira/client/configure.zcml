@@ -1,11 +1,6 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:browser="http://namespaces.zope.org/browser">
 
-    <browser:resourceDirectory
-        name="oira.media"
-        directory="templates/media"
-    />
-
     <include package=".browser" />
 
     <adapter

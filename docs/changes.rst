@@ -4,6 +4,9 @@ Changelog
 11.0.0 (unreleased)
 -------------------
 
+- Add an optimized image that is used in the dashboard banner
+  [ale-rt]
+
 - Remove the registration of the ``oira.media`` browser resource directory.
   [ale-rt]
 

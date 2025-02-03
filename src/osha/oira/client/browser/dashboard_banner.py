@@ -27,7 +27,7 @@ class View(BrowserView):
         )
         return [
             {
-                "img_src": "++resource++euphorie.resources/oira/style/mail-tunnel.jpg",
+                "img_src": "++resource++osha.oira.client/mail-tunnel.jpg",
                 "img_alt": api.portal.translate(_("Preferences")),
                 "url": self.preferences_url,
                 "button_text": api.portal.translate(_("Sign up")),
@@ -44,10 +44,7 @@ class View(BrowserView):
                 "disabled_key": "call-for-action-banner-disabled",
             },
             {
-                "img_src": (
-                    "++resource++euphorie.resources/oira/style/"
-                    "andrea-piacquadio-copier.jpg"
-                ),
+                "img_src": "++resource++osha.oira.client/andrea-piacquadio-copier.jpg",
                 "img_alt": api.portal.translate(_("Photocopier")),
                 "url": (
                     f"{country_url}/++resource++euphorie.resources/oira/help/"

@@ -47,7 +47,7 @@ class View(BrowserView):
                 "img_src": "++resource++osha.oira.client/andrea-piacquadio-copier.jpg",
                 "img_alt": api.portal.translate(_("Photocopier")),
                 "url": (
-                    f"{country_url}/++resource++euphorie.resources/oira/help/"
+                    f"{country_url}/++resource++euphorie.resources/assets/oira/help/"
                     f"{help_language}/pages/3-carrying-out-a-risk-assessment.html"
                 ),
                 "button_text": api.portal.translate(_("Learn more…")),

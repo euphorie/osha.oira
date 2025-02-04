@@ -140,6 +140,10 @@ class MailingListsJson(BaseJson):
                 "-".join((brain.getId, language)), f"{brain.Title} ({language})"
             )
             for language in sorted(languages)
+        ] + [
+            self._get_entry(
+                f"{brain.getId}-managers", f"{brain.Title} country managers"
+            )
         ]
 
     def filter_permission(self, brains, query, user):
@@ -286,8 +290,30 @@ class GroupToAddresses(BrowserView):
             raise Unauthorized("Invalid token")
         return token
 
+    def get_addresses_per_language(self, country, lang):
+        country_subscribers = (
+            Session.query(Account.loginname)
+            .filter(Account.id == NewsletterSubscription.account_id)
+            .filter(NewsletterSubscription.zodb_path == (country))
+            .filter(Account.id == NewsletterSetting.account_id)
+            .filter(NewsletterSetting.value == f"language:{lang}")
+            .group_by(Account.loginname)
+        )
+        return {s.loginname for s in country_subscribers}
+
+    def get_addresses_of_country_managers(self, country):
+        sectors = api.portal.get().sectors
+        country_obj = sectors.get(country)
+        if not country_obj:
+            return set()
+        return {
+            entry[0]
+            for entry in country_obj.get_local_roles()
+            if "CountryManager" in entry[1]
+        }
+
     def get_addresses_for_groups(self, group_paths):
-        subscribers = []
+        subscribers = set()
         other = []
         for group_id in group_paths:
             if "/" in group_id or "-" not in group_id:
@@ -295,15 +321,11 @@ class GroupToAddresses(BrowserView):
                 continue
             # Special handling for language specific mailing lists, e.g. "be-fr"
             country, lang = group_id.split("-")
-            country_subscribers = (
-                Session.query(Account.loginname)
-                .filter(Account.id == NewsletterSubscription.account_id)
-                .filter(NewsletterSubscription.zodb_path == (country))
-                .filter(Account.id == NewsletterSetting.account_id)
-                .filter(NewsletterSetting.value == f"language:{lang}")
-                .group_by(Account.loginname)
-            )
-            subscribers.extend([s.loginname for s in country_subscribers])
+            if lang == "managers":
+                # Not actually a language, but the special country managers test list
+                subscribers |= self.get_addresses_of_country_managers(country)
+            else:
+                subscribers |= self.get_addresses_per_language(country, lang)
 
         other_subscribers = (
             Session.query(Account.loginname)
@@ -311,7 +333,7 @@ class GroupToAddresses(BrowserView):
             .filter(NewsletterSubscription.zodb_path.in_(other))
             .group_by(Account.loginname)
         )
-        subscribers.extend([s.loginname for s in other_subscribers])
+        subscribers |= {s.loginname for s in other_subscribers}
         return subscribers
 
     @property
@@ -319,7 +341,7 @@ class GroupToAddresses(BrowserView):
         groups = self.request.get("groups", "")
         if not groups:
             return []
-        return self.get_addresses_for_groups(groups.split(","))
+        return list(self.get_addresses_for_groups(groups.split(",")))
 
     def __call__(self):
         """Json list of email addresses subscribed to given group path

@@ -107,7 +107,7 @@ class TestMailingLists(EuphorieIntegrationTestCase):
             view = MailingListsJson(context=self.portal.client, request=request)
             results = view.results
 
-        self.assertEqual(len(results), 2)
+        self.assertEqual(len(results), 3)
         self.assertEqual(
             results[0],
             {
@@ -120,6 +120,13 @@ class TestMailingLists(EuphorieIntegrationTestCase):
             {
                 "id": "nl-nl|VGhlIE5ldGhlcmxhbmRzIChubCk=",
                 "text": "The Netherlands (nl) [0 subscribers]",
+            },
+        )
+        self.assertEqual(
+            results[2],
+            {
+                "id": "nl-managers|VGhlIE5ldGhlcmxhbmRzIGNvdW50cnkgbWFuYWdlcnM=",
+                "text": "The Netherlands country managers [0 subscribers]",
             },
         )
 

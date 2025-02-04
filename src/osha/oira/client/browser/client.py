@@ -299,21 +299,21 @@ class GroupToAddresses(BrowserView):
             .filter(NewsletterSetting.value == f"language:{lang}")
             .group_by(Account.loginname)
         )
-        return [s.loginname for s in country_subscribers]
+        return {s.loginname for s in country_subscribers}
 
     def get_addresses_of_country_managers(self, country):
         sectors = api.portal.get().sectors
         country_obj = sectors.get(country)
         if not country_obj:
-            return []
-        return [
+            return set()
+        return {
             entry[0]
             for entry in country_obj.get_local_roles()
             if "CountryManager" in entry[1]
-        ]
+        }
 
     def get_addresses_for_groups(self, group_paths):
-        subscribers = []
+        subscribers = set()
         other = []
         for group_id in group_paths:
             if "/" in group_id or "-" not in group_id:
@@ -323,9 +323,9 @@ class GroupToAddresses(BrowserView):
             country, lang = group_id.split("-")
             if lang == "managers":
                 # Not actually a language, but the special country managers test list
-                subscribers.extend(self.get_addresses_of_country_managers(country))
+                subscribers |= self.get_addresses_of_country_managers(country)
             else:
-                subscribers.extend(self.get_addresses_per_language(country, lang))
+                subscribers |= self.get_addresses_per_language(country, lang)
 
         other_subscribers = (
             Session.query(Account.loginname)
@@ -333,7 +333,7 @@ class GroupToAddresses(BrowserView):
             .filter(NewsletterSubscription.zodb_path.in_(other))
             .group_by(Account.loginname)
         )
-        subscribers.extend([s.loginname for s in other_subscribers])
+        subscribers |= {s.loginname for s in other_subscribers}
         return subscribers
 
     @property
@@ -341,7 +341,7 @@ class GroupToAddresses(BrowserView):
         groups = self.request.get("groups", "")
         if not groups:
             return []
-        return self.get_addresses_for_groups(groups.split(","))
+        return list(self.get_addresses_for_groups(groups.split(",")))
 
     def __call__(self):
         """Json list of email addresses subscribed to given group path

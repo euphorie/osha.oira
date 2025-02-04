@@ -110,20 +110,24 @@ class MailingListsJson(BaseJson):
 
     @property
     @memoize
-    def client_path(self):
-        return "/".join(self.context.getPhysicalPath())
+    def sectors_path(self):
+        return "/".join(api.portal.get().sectors.getPhysicalPath())
 
     def _get_mailing_lists_for(self, brain):
-        if brain.portal_type != "euphorie.clientcountry":
+        if brain.portal_type != "euphorie.country":
+            # For surveys we use the path and title of the parent (the surveygroup)
+            parent = brain.getObject().aq_parent
             return [
                 self._get_entry(
-                    path.relpath(brain.getPath(), self.client_path), brain.Title
+                    path.relpath("/".join(parent.getPhysicalPath()), self.sectors_path),
+                    parent.Title(),
                 )
             ]
         languages = set()
         tools = api.content.find(
             path=brain.getPath(),
             portal_type="euphorie.survey",
+            review_state="published",
         )
         # No filter for non-obsolete -
         # if we get unexpected languages we can try adding that
@@ -144,24 +148,6 @@ class MailingListsJson(BaseJson):
             self._get_entry(
                 f"{brain.getId}-managers", f"{brain.Title} country managers"
             )
-        ]
-
-    def filter_permission(self, brains, query, user):
-        """Pick those elements from `brains` where the `user` has manager permissions
-        on the element's counterpart in the CMS (`sectors` folder).
-        The `query` must be the one that was used to retrieve the `brains` from the
-        catalog and is modified to yield the corresponding items in the CMS.
-        """
-        catalog = api.portal.get_tool(name="portal_catalog")
-        query["portal_type"] = ["euphorie.country", "euphorie.surveygroup"]
-        query["path"] = ("/".join(api.portal.get().sectors.getPhysicalPath()),)
-        query["managerRolesAndUsers"] = catalog._listAllowedRolesAndUsers(user)
-        admin_brains = catalog(**query)
-        admin_paths = [result.getPath() for result in admin_brains]
-        return [
-            brain
-            for brain in brains
-            if brain.getPath().replace("client", "sectors") in admin_paths
         ]
 
     @property
@@ -197,10 +183,12 @@ class MailingListsJson(BaseJson):
 
             # FIXME: Search for native names of countries,
             # e.g. `q=de` doesn't return Germany
-            # TODO: also search for "euphorie.clientsector"?
+            # TODO: also search for "euphorie.sector"?
             query = {
-                "portal_type": ["euphorie.clientcountry", "euphorie.survey"],
-                "path": "/".join(self.context.getPhysicalPath()),
+                "portal_type": ["euphorie.country", "euphorie.survey"],
+                "path": "/".join(api.portal.get().sectors.getPhysicalPath()),
+                "managerRolesAndUsers": catalog._listAllowedRolesAndUsers(user),
+                "review_state": "published",
                 "sort_on": ("sortable_title", "path"),
             }
 
@@ -213,7 +201,6 @@ class MailingListsJson(BaseJson):
 
             b_start = (self.page - 1) * self.page_limit
             brains = catalog(**query, b_start=b_start, b_size=self.page_limit)
-            brains = self.filter_permission(brains, query, user)
 
             for brain in brains:
                 results.extend(self._get_mailing_lists_for(brain))

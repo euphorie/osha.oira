@@ -27,6 +27,10 @@ Changelog
   (`#2636 <https://github.com/syslabcom/scrum/issues/2636>`_)
   [reinhardt]
 
+- Mailing Lists fixes
+  (`#3124 <https://github.com/syslabcom/scrum/issues/3124>`_)
+  [reinhardt]
+
 
 10.1.0 (2025-01-15)
 -------------------

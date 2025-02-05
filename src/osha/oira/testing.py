@@ -22,6 +22,8 @@ class OiRAFixture(EuphorieFixture):
     def setUpPloneSite(self, portal):
         super().setUpPloneSite(portal)
         self.applyProfile(portal, "osha.oira:default")
+        if "pasldap" in portal.acl_users:
+            portal.acl_users.manage_delObjects(["pasldap"])
 
 
 OIRA_FIXTURE = OiRAFixture()

@@ -306,11 +306,12 @@ class GroupToAddresses(BrowserView):
         country_obj = sectors.get(country)
         if not country_obj:
             return set()
-        return {
-            entry[0]
-            for entry in country_obj.get_local_roles()
-            if "CountryManager" in entry[1]
+        users = {
+            api.user.get(username=userid)
+            for userid, roles in country_obj.get_local_roles()
+            if "CountryManager" in roles
         }
+        return {(user.getProperty("email") or user.getId()) for user in users if user}
 
     def get_addresses_for_groups(self, group_paths):
         subscribers = set()

@@ -1,0 +1,33 @@
+<fieldset xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          xmlns:metal="http://xml.zope.org/namespaces/metal"
+          xmlns:tal="http://xml.zope.org/namespaces/tal"
+          class="group ${dependencies/ploneintranet_classes}"
+          data-pat-depends="${dependencies/data_pat_depends}"
+          tal:define="
+            download_url view/download_url;
+            dependencies nocall:view/@@dependencies;
+          "
+          i18n:domain="nuplone"
+>
+  <p class="legend">${view/label}</p>
+  <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
+  <tal:has-file condition="view/allow_nochange">
+    <p class="floatAfter" i18n:ignore="">
+      <a href="${view/download_url}">${view/filename}</a>
+      (${view/file_size})
+    </p>
+    <label><input name="${view/name}.action"
+             type="checkbox"
+             value="remove"
+      />
+      <tal:span i18n:translate="">Remove file</tal:span></label>
+  </tal:has-file>
+  <input class="${view/klass}"
+         id="${view/id}"
+         disabled="${view/disabled}"
+         name="${view/name}"
+         readonly="${view/readonly}"
+         type="file"
+  />
+</fieldset>

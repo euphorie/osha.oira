@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        dependencies nocall:view/@@dependencies;
+      "
+      tal:omit-tag=""
+      i18n:domain="nuplone"
+>
+  <fieldset class="group ${dependencies/ploneintranet_classes}"
+            data-pat-depends="${dependencies/data_pat_depends}"
+  >
+    <p class="legend">${view/label}</p>
+    <div class="pat-checklist">
+
+      <tal:items repeat="item view/items">
+        <tal:item define="
+                    term python: view.terms.getTermByToken(item['value']);
+                    description term/description|nothing;
+                    extra_help term/extra_help|nothing;
+                  ">
+          <label>
+            ${item/label}
+            <input id="${item/id}"
+                   checked="${python:'checked' if checked else None}"
+                   disabled="${view/disabled}"
+                   name="${item/name}"
+                   readonly="${view/readonly}"
+                   type="radio"
+                   value="${item/value}"
+                   tal:define="
+                     checked item/checked;
+                   "
+            />
+            <dfn class="help-icon pat-tooltip tooltip-inactive"
+                 aria-expanded="false"
+                 title="Information"
+                 data-pat-tooltip="class: info; trigger: click; source: content; position-list: tl"
+                 tal:condition="extra_help"
+                 i18n:attributes="title"
+            >${extra_help}</dfn>
+          </label>
+          <p class="pat-message notice"
+             tal:condition="description"
+          >
+            ${description}
+          </p>
+
+        </tal:item>
+      </tal:items>
+      <input name="${view/name}-empty-marker"
+             type="hidden"
+             value="1"
+      />
+    </div>
+    <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
+
+  </fieldset>
+</html>

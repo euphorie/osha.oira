@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        is_secondary python: 'secondary' in view.klass.split();
+      "
+      tal:omit-tag=""
+>
+  <button class="pat-button ${python: 'icon-ok-circle default' if not is_secondary else 'icon-cancel-circle'}"
+          id="${view/id}"
+          formnovalidate="${python: 'formnovalidate' if is_secondary else None}"
+          name="${view/name}"
+          type="submit"
+          value="${view/value}"
+  >${view/title}</button>
+
+</html>

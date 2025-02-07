@@ -1,0 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      metal:use-macro="context/@@layout/macros/layout"
+      i18n:domain="nuplone"
+>
+  <metal:title fill-slot="title">${view/label}</metal:title>
+  <metal:content fill-slot="content">
+    <tal:form replace="structure view/contents" />
+  </metal:content>
+</html>

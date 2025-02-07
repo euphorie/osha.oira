@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="
+        dependencies nocall:view/@@dependencies;
+        label view/field/label_content|nothing;
+      "
+      tal:omit-tag=""
+      i18n:domain="nuplone"
+>
+
+  <fieldset class="pat-form-field-toggle group ${dependencies/ploneintranet_classes}"
+            data-pat-depends="${dependencies/data_pat_depends}"
+  >
+    <legend>
+      ${python: view.items[0]['label']}
+    </legend>
+    <label class="pat-toggle-switch"
+           tal:repeat="item view/items"
+    >
+      <tal:if condition="label">
+          ${label}
+      </tal:if>
+      <tal:if condition="not:label">
+        <tal:i18n i18n:translate="">On</tal:i18n>
+      </tal:if>
+      <input class="${view/klass}"
+             id="${view/id}"
+             checked="${python:'checked' if item['checked'] else None}"
+             disabled="${view/disabled}"
+             name="${item/name}"
+             readonly="${view/readonly}"
+             type="checkbox"
+             value="${item/value}"
+      />
+    </label>
+    <input name="${view/name}-empty-marker"
+           type="hidden"
+           value="1"
+    />
+    <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
+
+  </fieldset>
+
+</html>

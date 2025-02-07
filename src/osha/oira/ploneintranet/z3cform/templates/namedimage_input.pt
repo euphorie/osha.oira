@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      class="comprehensive filefield ${view/@@dependencies}"
+      meta:interpolation="true"
+      tal:define="
+        download_url view/download_url;
+        dependencies nocall:view/@@dependencies;
+      "
+      i18n:domain="nuplone"
+>
+  <fieldset class="group ${dependencies/ploneintranet_classes}"
+            data-pat-depends="${dependencies/data_pat_depends}"
+  >
+    <legend>${view/label}</legend>
+    <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
+    <input class="${view/klass}"
+           id="${view/id}"
+           disabled="${view/disabled}"
+           name="${view/name}"
+           readonly="${view/readonly}"
+           type="file"
+    />
+    <tal:has-image condition="view/allow_nochange">
+      <img class="floatAfter"
+           alt=""
+           src="${scale/url}"
+           width="${scale/width}"
+           tal:define="
+             images context/@@images;
+             scale python:images.scale(view.field.getName(), height=64, width=64, direction='thumbnail');
+           "
+           tal:condition="scale"
+      />
+      <label class="pat-checklist">
+        <input name="${view/name}.action"
+               type="checkbox"
+               value="remove"
+        />
+        <tal:span i18n:translate="">Remove image</tal:span>
+      </label>
+    </tal:has-image>
+  </fieldset>
+</html>

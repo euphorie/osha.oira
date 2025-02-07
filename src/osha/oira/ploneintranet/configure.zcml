@@ -1,0 +1,155 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="euphorie"
+    >
+
+  <include package=".z3cform" />
+
+  <browser:page
+      name="quaive-edit"
+      for="euphorie.content.country.ICountry"
+      class=".quaive_edit.CountryQuaiveEditForm"
+      template="templates/quaive-form.pt"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-edit"
+      for="euphorie.content.module.IModule"
+      class=".quaive_edit.ModuleQuaiveEditForm"
+      template="templates/quaive-form.pt"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-edit"
+      for="euphorie.content.profilequestion.IProfileQuestion"
+      class=".quaive_edit.ProfileQuestionQuaiveEditForm"
+      template="templates/quaive-form.pt"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-edit"
+      for="euphorie.content.risk.IRisk"
+      class=".quaive_edit.RiskQuaiveEditForm"
+      template="templates/quaive-form.pt"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-edit"
+      for="euphorie.content.sector.ISector"
+      class=".quaive_edit.SectorQuaiveEditForm"
+      template="templates/quaive-form.pt"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-edit"
+      for="euphorie.content.solution.ISolution"
+      class=".quaive_edit.SolutionQuaiveEditForm"
+      template="templates/quaive-form.pt"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-edit"
+      for="euphorie.content.survey.ISurvey"
+      class=".quaive_edit.SurveyQuaiveEditForm"
+      template="templates/quaive-form.pt"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+
+  <browser:page
+      name="quaive-edit"
+      for="euphorie.content.surveygroup.ISurveyGroup"
+      class=".quaive_edit.SurveyGroupQuaiveEditForm"
+      template="templates/quaive-form.pt"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-publish"
+      for="euphorie.content.survey.ISurvey"
+      class=".quaive_publish.PublishSurveyQuaiveForm"
+      template="templates/quaive-publish.pt"
+      permission="euphorie.client.PublishSurvey"
+      layer="plonetheme.nuplone.skin.interfaces.NuPloneSkin"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.sector"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieSectorView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.country"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieCountryView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.risk"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieRiskView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.surveygroup"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieSurveyGroupView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.survey"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieSurveyView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.module"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieModuleView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.profilequestion"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieProfileQuestionView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-create-euphorie.solution"
+      for="*"
+      class=".quaive_create.QuaiveCreateEuphorieSolutionView"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+</configure>

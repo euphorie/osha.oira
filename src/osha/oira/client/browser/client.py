@@ -146,23 +146,17 @@ class MailingListsJson(BaseJson):
             )
         ]
 
-    def filter_permission(self, brains, query, user):
-        """Pick those elements from `brains` where the `user` has manager permissions
-        on the element's counterpart in the CMS (`sectors` folder).
-        The `query` must be the one that was used to retrieve the `brains` from the
-        catalog and is modified to yield the corresponding items in the CMS.
-        """
+    def get_user_countries(self, user):
+        """Get IDs of countries where the `user` has manager permissions."""
         catalog = api.portal.get_tool(name="portal_catalog")
-        query["portal_type"] = ["euphorie.country", "euphorie.surveygroup"]
-        query["path"] = ("/".join(api.portal.get().sectors.getPhysicalPath()),)
-        query["managerRolesAndUsers"] = catalog._listAllowedRolesAndUsers(user)
-        admin_brains = catalog(**query)
-        admin_paths = [result.getPath() for result in admin_brains]
-        return [
-            brain
-            for brain in brains
-            if brain.getPath().replace("client", "sectors") in admin_paths
-        ]
+        query = {
+            "portal_type": ["euphorie.country"],
+            "path": "/".join(api.portal.get().sectors.getPhysicalPath()),
+            "managerRolesAndUsers": catalog._listAllowedRolesAndUsers(user),
+            "sort_on": "path",
+        }
+        brains = catalog(**query)
+        return [brain.getId for brain in brains]
 
     @property
     def results(self):
@@ -171,7 +165,7 @@ class MailingListsJson(BaseJson):
         The format fits pat-autosuggest.
 
         The mailing list IDs are relative paths.
-        Countries have one mailing list per language.
+        Countries have one mailing list per language and one country manager list.
         The language is appended with a '-', e.g. "be-fr".
         There is a special ID for the "all users" list.
         """
@@ -181,18 +175,30 @@ class MailingListsJson(BaseJson):
 
         results = []
         catalog = api.portal.get_tool(name="portal_catalog")
-        all_users = self._get_entry("general", "All users")
+
+        client_path = "/".join(self.context.getPhysicalPath())
 
         # Make sure we don't get a client user - we want to check backend permissions
         noLongerProvides(self.request, IOSHAClientSkinLayer)
 
+        is_admin = False
+        # Global managers see all lists, country managers see their country lists
         with api.env.adopt_user(user_id):
             user = api.user.get_current()
+            is_admin = api.user.has_permission("Manage portal")
+            if is_admin:
+                paths = [client_path]
+            else:
+                user_countries = self.get_user_countries(user)
+                if not user_countries:
+                    return []
+                paths = ["/".join((client_path, country)) for country in user_countries]
 
+            all_users = self._get_entry("general", "All users")
             if (
                 self.page == 1
                 and (not q or q in all_users["id"] or q in all_users["text"].lower())
-            ) and api.user.has_permission("Manage portal"):
+            ) and is_admin:
                 results.append(all_users)
 
             # FIXME: Search for native names of countries,
@@ -200,20 +206,29 @@ class MailingListsJson(BaseJson):
             # TODO: also search for "euphorie.clientsector"?
             query = {
                 "portal_type": ["euphorie.clientcountry", "euphorie.survey"],
-                "path": "/".join(self.context.getPhysicalPath()),
+                "path": paths,
                 "sort_on": ("sortable_title", "path"),
             }
 
-            # Filter for query string if given. Else return all results.
-            if q:
-                if "/" not in q:
-                    query["Title"] = f"*{q}*"
-                else:
-                    query["path"] = "/".join((query["path"], q))
-
             b_start = (self.page - 1) * self.page_limit
-            brains = catalog(**query, b_start=b_start, b_size=self.page_limit)
-            brains = self.filter_permission(brains, query, user)
+
+            # Filter for query string if given. Else return all results.
+            if not q or "/" not in q:
+                # only do catalog batching if q is not a path query
+                query["b_start"] = b_start
+                query["b_size"] = self.page_limit
+                if q:
+                    query["Title"] = f"*{q}*"
+
+            brains = catalog(**query)
+
+            if "/" in q:
+                # special path query handling so that partial paths match
+                # e.g. fr/hotel should match fr/hotellerie-restauration
+                q_path = "/".join((client_path, q.strip("/")))
+                brains = [
+                    brain for brain in brains if brain.getPath().startswith(q_path)
+                ][b_start : b_start + self.page_limit]
 
             for brain in brains:
                 results.extend(self._get_mailing_lists_for(brain))

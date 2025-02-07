@@ -50,31 +50,36 @@
                           i18n:translate=""
                   >Formatting</strong>
                   <div class="panel-content">
-                    <p class="close-menu">Close</p>
+                    <p class="close-menu" i18n:translate="">Close</p>
                     <ul class="menu-list">
                       <li>
                         <button class="button-heading-level-2 icon-header"
                                 type="button"
+                                i18n:translate=""
                         >Header level 2</button>
                       </li>
                       <li>
                         <button class="button-heading-level-3 icon-header"
                                 type="button"
+                                i18n:translate=""
                         >Header level 3</button>
                       </li>
                       <li>
                         <button class="button-heading-level-4 icon-header"
                                 type="button"
+                                i18n:translate=""
                         >Header level 4</button>
                       </li>
                       <li>
                         <button class="button-paragraph icon-paragraph"
                                 type="button"
+                                i18n:translate=""
                         >Normal</button>
                       </li>
                       <li>
                         <button class="button-blockquote icon-quote-left"
                                 type="button"
+                                i18n:translate=""
                         >Quote</button>
                       </li>
                     </ul>
@@ -84,27 +89,32 @@
                 <button class="icon icon-bold button-bold pat-tooltip"
                         type="button"
                         data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                        i18n:translate=""
                 >Bold</button>
 
                 <button class="icon icon-italic button-italic pat-tooltip"
                         type="button"
                         data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                        i18n:translate=""
                 >Italic</button>
 
                 <button class="icon icon-strike button-strike pat-tooltip"
                         type="button"
                         data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                        i18n:translate=""
                 >Strikethrough</button>
 
                 <a class="icon icon-link button-link pat-modal pat-tooltip"
                    href="#tiptap-modal-hyperlink"
                    data-pat-modal="class: medium panel panel-hyperlink"
                    data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                   i18n:translate=""
                 >Hyperlink</a>
 
                 <button class="button-horizontal-rule icon icon-minus pat-tooltip"
                         type="button"
                         data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                        i18n:translate=""
                 >Horizontal line</button>
 
                 <div class="pat-collapsible pat-context-menu list-menu closed align-left no-label icon-list"
@@ -122,19 +132,22 @@
                             source: content;
                             position-list: tm;
                             class: label"
+                          i18n:translate=""
                   >Lists</strong>
                   <div class="panel-content">
-                    <p class="close-menu">Close</p>
+                    <p class="close-menu" i18n:translate="">Close</p>
                     <ul class="menu-list">
                       <li>
                         <button class="button-unordered-list icon-list-bullet"
                                 type="button"
+                                i18n:translate=""
                         >Bullet list</button>
                       </li>
                       <li>
                         <button class="button-ordered-list icon-list-numbered"
                                 type="button"
-                        >Ordered liste</button>
+                                i18n:translate=""
+                        >Ordered list</button>
                       </li>
                     </ul>
                   </div>
@@ -144,12 +157,14 @@
                    href="#tiptap-modal-image"
                    data-pat-modal="class: large panel image-picker"
                    data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                   i18n:translate=""
                 >Picture</a>
 
                 <a class="icon icon-video button-embed pat-modal pat-tooltip"
                    href="#tiptap-modal-embed"
                    data-pat-modal="class: medium panel embed-video"
                    data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                   i18n:translate=""
                 >Video</a>
 
                 <div class="pat-collapsible pat-context-menu closed align-right table-menu no-label icon-table"
@@ -163,48 +178,57 @@
                   <strong class="context-menu-label menu-trigger pat-tooltip"
                           id="context-menu-trigger-table-editor-toolbar"
                           data-pat-tooltip="trigger: hover; source: content; position-list: tm; class: label"
+                          i18n:translate=""
                   >Table</strong>
                   <div class="panel-content">
-                    <p class="close-menu">Close</p>
+                    <p class="close-menu" i18n:translate="">Close</p>
                     <ul class="menu-list">
                       <li>
                         <button class="button-table-create icon-plus-squared"
                                 type="button"
+                                i18n:translate=""
                         >New table</button>
                       </li>
                       <li>
                         <button class="button-table-remove icon-minus-squared"
                                 type="button"
+                                i18n:translate=""
                         >Remove table</button>
                       </li>
                       <li>
                         <button class="button-table-add-column-left icon-add-column-left"
                                 type="button"
+                                i18n:translate=""
                         >Add left column</button>
                       </li>
                       <li>
                         <button class="button-table-add-column-right icon-add-column"
                                 type="button"
-                        >Add right columnt</button>
+                                i18n:translate=""
+                        >Add right column</button>
                       </li>
                       <li>
                         <button class="button-table-remove-column icon-remove-column"
                                 type="button"
+                                i18n:translate=""
                         >Remove column</button>
                       </li>
                       <li>
                         <button class="button-table-add-row-above icon-add-row-above"
                                 type="button"
+                                i18n:translate=""
                         >Add top row</button>
                       </li>
                       <li>
                         <button class="button-table-add-row-below icon-add-row"
                                 type="button"
+                                i18n:translate=""
                         >Add bottom row</button>
                       </li>
                       <li>
                         <button class="button-table-remove-row icon-remove-row"
                                 type="button"
+                                i18n:translate=""
                         >Remove row</button>
                       </li>
                     </ul>
@@ -332,7 +356,7 @@
 
       <!-- modal image editor -->
       <template id="tiptap-modal-image">
-        <h1>Edit Image</h1>
+        <h1 i18n:translate="">Edit Image</h1>
         <div class="panel-body image-panel">
           <div class="container">
             <form class="pat-form">
@@ -395,19 +419,21 @@
           <li>
             <button
               type="button"
-              class="close-panel tiptap-edit-image">Edit image</button>
+              class="close-panel tiptap-edit-image"
+              i18n:translate="">Edit image</button>
           </li>
           <li>
             <button
               type="button"
-              class="close-panel tiptap-remove-image">Remove image</button>
+              class="close-panel tiptap-remove-image"
+              i18n:translate="">Remove image</button>
           </li>
         </ul>
       </template>
 
       <!-- modal embed editor -->
       <template id="tiptap-modal-embed">
-        <h1>Edit Embed</h1>
+        <h1 i18n:translate="">Edit Embed</h1>
         <div class="panel-body embed-panel">
           <div class="container">
             <form class="pat-form">
@@ -464,19 +490,23 @@
           <li>
             <button
               type="button"
-              class="close-panel tiptap-edit-embed">Edit embed</button>
+              class="close-panel tiptap-edit-embed"
+              i18n:translate=""
+              >Edit embed</button>
           </li>
           <li>
             <button
               type="button"
-              class="close-panel tiptap-remove-embed">Remove embed</button>
+              class="close-panel tiptap-remove-embed"
+              i18n:translate=""
+              >Remove embed</button>
           </li>
         </ul>
       </template>
 
       <!-- modal link editor -->
       <template id="tiptap-modal-hyperlink">
-        <h1>Edit Link</h1>
+        <h1 i18n:translate="">Edit Link</h1>
         <div class="panel-body embed-panel">
           <div class="container">
             <form class="pat-form">

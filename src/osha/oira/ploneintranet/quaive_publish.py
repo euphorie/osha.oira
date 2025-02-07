@@ -7,6 +7,8 @@ class PublishSurveyQuaiveForm(QuaiveEditFormMixin, PublishSurvey):
 
     Note: this only displays some text, it does not actually do anything.
     This text snippets are copied from 'euphorie.client.browser.templates.publish.pt'.
+    TODO It could be nice to have these texts shared.
+
     The logic for which text snippets to show, is defined in the PublishSurvey
     view that we inherit from.
 

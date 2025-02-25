@@ -4,7 +4,8 @@ Changelog
 11.0.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix manifest
+  [ale-rt]
 
 
 11.0.0 (2025-02-25)

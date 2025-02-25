@@ -50,18 +50,15 @@ include babel.cfg
 include buildout.cfg
 include devel.cfg
 include versions.cfg
+recursive-include etc *.ini
 recursive-include scripts *.py
-recursive-include src *.rst
-recursive-include src *.sh
-recursive-include src *.txt
-
-# added by check_manifest.py
 recursive-include src *.css
 recursive-include src *.js
 recursive-include src *.map
-
-# added by check_manifest.py
-recursive-include etc *.ini
+recursive-include src *.pt
+recursive-include src *.rst
+recursive-include src *.sh
+recursive-include src *.txt
 
 exclude .pep8
 exclude .pre-commit-config.yaml

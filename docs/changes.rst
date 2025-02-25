@@ -1,7 +1,7 @@
 Changelog
 =========
 
-11.0.0 (unreleased)
+11.0.0 (2025-02-25)
 -------------------
 
 - Add an optimized image that is used in the dashboard banner

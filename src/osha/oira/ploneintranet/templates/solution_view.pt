@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      metal:use-macro="context/@@quaive-layout/macros/layout"
+      i18n:domain="euphorie"
+>
+  <body>
+
+    <metal:define fill-slot="quaive-title">
+      <div class="pat-rich quaive-page-head"
+           id="page-head"
+      >
+        <h1 i18n:translate="">Measure</h1>
+      </div>
+    </metal:define>
+
+    <metal:slot fill-slot="quaive-body">
+      <div class="pat-rich">
+        <p tal:replace="structure python:context.Description()"></p>
+      </div>
+
+      <dl class="grid span-9">
+        <dt i18n:translate="label_description">Description</dt>
+        <dd>
+          <div class="pat-markdown"
+               tal:content="structure python:view.render_md(context.action)"
+          ></div></dd>
+        <tal:block condition="context/requirements">
+          <dt i18n:translate="label_expertise">Expertise</dt>
+          <dd>${context/requirements}</dd>
+        </tal:block>
+      </dl>
+
+    </metal:slot>
+  </body>
+</html>

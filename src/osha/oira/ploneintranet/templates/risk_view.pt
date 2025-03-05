@@ -1,0 +1,140 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      metal:use-macro="context/@@quaive-layout/macros/layout"
+      i18n:domain="euphorie"
+>
+  <body>
+
+    <metal:define fill-slot="quaive-title">
+      <div class="pat-rich quaive-page-head"
+           id="page-head"
+      >
+        <h1>${context/aq_parent/Title}</h1>
+      </div>
+    </metal:define>
+
+    <metal:slot fill-slot="quaive-body">
+      <div class="pat-rich introduction"
+           tal:define="
+             images context/@@images;
+           "
+      >
+        <img class="span-4 floatAfter"
+             alt=""
+             src="${scale/url}"
+             title="${context/caption}"
+             width="${scale/width}"
+             tal:define="
+               scale python:images.scale('image', width=190, direction='down');
+             "
+             tal:condition="scale"
+             tal:on-error="nothing"
+        />
+        <p tal:replace="structure python:view.get_safe_html(context.Description())">Van belang is dat de spuitlans de juiste lengte heeft om rechtopstaand te werken. Een gebogen spuitlans geeft een hogere polsbelasting en wordt daarom afgeraden.</p>
+        <ul class="additionalImages"
+            tal:condition="python:context.image2 or context.image3 or context.image4"
+        >
+          <li tal:define="
+                scale python:images.scale('image2', width=190, direction='down');
+              "
+              tal:condition="scale"
+              tal:on-error="nothing"
+          ><img class="span-4"
+                 alt=""
+                 src="${scale/url}"
+                 title="${context/caption2}"
+                 width="${scale/width}"
+            /></li>
+          <li tal:define="
+                scale python:images.scale('image3', width=190, direction='down');
+              "
+              tal:condition="scale"
+              tal:on-error="nothing"
+          ><img class="span-4"
+                 alt=""
+                 src="${scale/url}"
+                 title="${context/caption3}"
+                 width="${scale/width}"
+            /></li>
+          <li tal:define="
+                scale python:images.scale('image4', width=190, direction='down');
+              "
+              tal:condition="scale"
+              tal:on-error="nothing"
+          ><img class="span-4"
+                 alt=""
+                 src="${scale/url}"
+                 title="${context/caption4}"
+                 width="${scale/width}"
+            /></li>
+        </ul>
+      </div>
+
+      <blockquote class="surveyQuestion">
+        <p tal:content="context/title">Er kan gebruik worden gemaakt van rechte spuitlansen van verschillende lengte.</p>
+      </blockquote>
+
+      <dl class="grid span-13">
+        <dt i18n:translate="label_risk_type">Risk type</dt>
+        <dd tal:content="view/risk_type">Risk</dd>
+        <dt i18n:translate="label_problem_description">Negative statement</dt>
+        <dd tal:content="context/problem_description">Er bestaat geen mogelijkheid om gebruik te maken van rechte spuitlansen van verschillende lengte.</dd>
+        <dt i18n:translate="risk_show_na">Show '<em i18n:name="na"
+              i18n:translate="risk_show_na_na"
+          >not applicable</em>'</dt>
+        <dd tal:condition="context/show_notapplicable"
+            i18n:translate="yes"
+        >Yes</dd>
+        <dd tal:condition="not:context/show_notapplicable"
+            i18n:translate="no"
+        >No</dd>
+        <tal:block condition="python:context.type=='risk'">
+          <dt i18n:translate="label_evaluation_method">Evaluation method</dt>
+          <dd tal:content="view/evaluation_method">Calculated</dd>
+
+          <tal:block condition="python:context.evaluation_method=='direct'">
+            <dt i18n:translate="label_default_priority">Default priority</dt>
+            <dd tal:content="view/default_priority">Low</dd>
+          </tal:block>
+
+          <tal:block condition="python:context.evaluation_method=='calculated'">
+            <tal:french condition="python:view.evaluation_algorithm=='french'">
+              <dt i18n:translate="label_default_severity">Default severity</dt>
+              <dd>${view/default_severity}</dd>
+              <dt i18n:translate="label_default_frequency">Default frequency</dt>
+              <dd>${view/default_frequency}</dd>
+            </tal:french>
+
+            <tal:kinney condition="python:view.evaluation_algorithm=='kinney'">
+              <dt i18n:translate="label_default_probability">Default probability</dt>
+              <dd tal:content="view/default_probability">Low</dd>
+              <dt i18n:translate="label_default_frequency">Default frequency</dt>
+              <dd tal:content="view/default_frequency">Low</dd>
+              <dt i18n:translate="label_default_effect">Default severity</dt>
+              <dd tal:content="view/default_effect">Low</dd>
+            </tal:kinney>
+          </tal:block>
+          <tal:scaled_answers condition="context/use_scaled_answer|nothing">
+            <dt i18n:translate="">Use scaled answers instead of Yes/No</dt>
+            <dd>
+              <ul><li tal:repeat="answer view/scaled_answers">${answer/text} (${answer/value})</li></ul>
+            </dd>
+          </tal:scaled_answers>
+        </tal:block>
+      </dl>
+      <hr class="clear" />
+      <div class="message notice floatBefore"
+           tal:condition="python:context.legal_reference"
+      >
+        <h4 i18n:translate="label_legal_reference">Legal and policy references</h4>
+        <p tal:replace="structure python:view.get_safe_html(context.legal_reference)">
+          Rechte spuitlansen van verschillende lengte aanschaffen en gebruiken. Zie ook www.fytostat.nl.</p>
+      </div>
+
+    </metal:slot>
+  </body>
+</html>

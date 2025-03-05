@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      metal:use-macro="context/@@quaive-layout/macros/layout"
+      i18n:domain="euphorie"
+>
+  <body>
+    <metal:slot fill-slot="quaive-body">
+      <div class="module-illustrations"
+           tal:define="
+             images context/@@images;
+             scale python:images.scale('image', height=510, width=510, direction='thumbnail');
+           "
+           tal:condition="scale"
+      >
+        <figure class="module-illustration">
+          <img alt=""
+               src="${scale/url}"
+          />
+          <figcaption></figcaption>
+        </figure>
+      </div>
+
+      <div class="pat-rich">
+        <p tal:replace="structure python:context.Description()">Van belang is dat de spuitlans de
+          juiste lengte heeft om rechtopstaand te werken. Een gebogen spuitlans geeft een hogere
+          polsbelasting en wordt daarom afgeraden.</p>
+      </div>
+
+      <h2 i18n:translate="header_information">Information</h2>
+      <p tal:condition="not:context/optional"
+         i18n:translate="module_mandatory"
+      >
+        This
+        <tal:span i18n:name="number">${view/portal_type}</tal:span>
+        is mandatory.
+      </p>
+
+      <p tal:condition="context/optional"
+         i18n:translate="module_optional"
+      >
+        This
+        <tal:span i18n:name="number">${view/portal_type}</tal:span>
+        is optional.
+      </p>
+    </metal:slot>
+  </body>
+</html>

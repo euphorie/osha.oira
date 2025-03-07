@@ -24,6 +24,15 @@
 
   <browser:page
       name="quaive-view"
+      for="euphorie.content.survey.ISurvey"
+      class="euphorie.content.browser.survey.SurveyView"
+      template="templates/survey_view.pt"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-view"
       for="euphorie.content.module.IModule"
       class="euphorie.content.browser.module.ModuleView"
       template="templates/module_view.pt"

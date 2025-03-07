@@ -29,6 +29,7 @@
       <div class="tool-home-tile">
         <a class="pat-inject"
            href="OIRA_CREATOR_APP_URL/@@oira-edit/${python:'/'.join(context.getPhysicalPath()[3:])}#content"
+           data-pat-inject="#document-body::element; scroll: top; history: record"
            tal:condition="python: can_edit"
         >
           <figure class="tool-icon">

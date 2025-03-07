@@ -5,136 +5,338 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       meta:interpolation="true"
       metal:use-macro="context/@@quaive-layout/macros/layout"
+      tal:define="
+        tool_type_data python: view.tool_type_data;
+      "
       i18n:domain="euphorie"
 >
-  <body>
+  <tal:comment condition="python:False">
+     This is the risk view template. It is used to display ahow
+    a risk would be displayed in the client. Thhis template is inspired from by
+    euphorie.client.browser:templates/risk_identification.pt, which uses the macros: -
+    `@@webhelpers/macros/risk_identification` - `@@webhelpers/macros/risk_evaluation` -
+    `@@webhelpers/macros/risk_comments` - `@@webhelpers/macros/legal_references` -
+    `@@webhelpers/macros/additional_files` - `@@webhelpers/macros/training_configuration`
+    <body>
 
-    <metal:define fill-slot="quaive-title">
-      <div class="pat-rich quaive-page-head"
-           id="page-head"
-      >
-        <h1>${context/aq_parent/Title}</h1>
-      </div>
-    </metal:define>
+      <metal:slot fill-slot="quaive-body">
 
-    <metal:slot fill-slot="quaive-body">
-      <div class="pat-rich introduction"
-           tal:define="
-             images context/@@images;
-           "
-      >
-        <img class="span-4 floatAfter"
-             alt=""
-             src="${scale/url}"
-             title="${context/caption}"
-             width="${scale/width}"
-             tal:define="
-               scale python:images.scale('image', width=190, direction='down');
-             "
-             tal:condition="scale"
-             tal:on-error="nothing"
-        />
-        <p tal:replace="structure python:view.get_safe_html(context.Description())">Van belang is dat de spuitlans de juiste lengte heeft om rechtopstaand te werken. Een gebogen spuitlans geeft een hogere polsbelasting en wordt daarom afgeraden.</p>
-        <ul class="additionalImages"
-            tal:condition="python:context.image2 or context.image3 or context.image4"
-        >
-          <li tal:define="
-                scale python:images.scale('image2', width=190, direction='down');
+        <form class="pat-form">
+
+          <fieldset class="measures-in-place pat-checklist"
+                    id="action-plan-item-form"
+          >
+            <tal:comment condition="python:False">
+              This has no equivalent in any place, just in proto.
+            </tal:comment>
+            <article class="pat-rich">
+              <p i18n:translate="label_measures_in_place">
+                Select or add any measures that are
+                <strong i18n:name="already_implemented">already implemented</strong>.
+              </p>
+            </article>
+
+            <div class="label"
+                 tal:repeat="solution view/solutions"
+            >
+              <label class="label-fragment-title unchecked">
+                <input type="checkbox" />
+                ${solution/description}
+              </label>
+              <div class="label-fragment-description pat-rich"
+                   tal:condition="python:getattr(solution, 'action', None)"
+                   tal:content="structure python:solution.action"
+              ></div>
+
+            </div>
+            <div class="button-bar">
+              <button class="add-clone pat-button icon-plus focus"
+                      id="clone-existing-measure"
+                      disabled
+                      title="Add another measure"
+                      type="button"
+                      i18n:translate="label_add_another_measure"
+              >Add another already implemented measure</button>
+            </div>
+
+
+
+          </fieldset>
+          <fieldset class="vertical">
+
+            <tal:comment condition="python:False">
+              This comes from the `@@webhelpers/macros/risk_identification` macro.
+            </tal:comment>
+
+            <fieldset class="pat-checklist radio pat-rich"
+                      tal:define="
+                        always_present python:here.risk_always_present;
+                      "
+            >
+              <tal:existing condition="python:always_present">
+                <p tal:condition="tool_type_data/intro_questions"
+                   tal:content="structure tool_type_data/intro_questions"
+                ></p>
+              </tal:existing>
+              <p class="byline"
+                 tal:condition="python:always_present"
+                 i18n:translate="explanation_risk_always_present"
+              >This risk was automatically set as
+                being present. You cannot change this.</p>
+              <tal:answers condition="not:always_present">
+                <input name="answer:default"
+                       type="hidden"
+                       value="postponed"
+                />
+
+                <!-- scaled answers -->
+                <tal:scaled_answers condition="here/use_scaled_answer|nothing">
+                  <label tal:repeat="answer view/scaled_answers">
+                    <input checked="${python:'checked' if context.scaled_answer==value else None}"
+                           name="scaled_answer"
+                           type="radio"
+                           value="${value}"
+                           tal:define="
+                             value answer/value;
+                           "
+                    />
+                    ${answer/text}
+                  </label>
+                  <label class="not-applicable"
+                         tal:condition="here/show_notapplicable|nothing"
+                  >
+                    <input checked="${python:'checked' if context.scaled_answer=='n/a' else None}"
+                           name="sMeasuresn/a"
+                    />
+                    <tal:answer replace="structure view/answer_na" />
+                  </label>
+
+                </tal:scaled_answers>
+
+                <!-- Yes/No -->
+                <tal:yes_no condition="not:here/use_scaled_answer|nothing">
+
+                  <label class="yes">
+                    <input name="answer"
+                           type="radio"
+                           value="yes"
+                    />
+                    <tal:answer replace="structure tool_type_data/answer_yes" />
+                  </label>
+                  <label class="no">
+                    <input name="answer"
+                           type="radio"
+                           value="no"
+                    />
+                    <tal:answer replace="structure tool_type_data/answer_no" />
+                  </label>
+                  <label class="not-applicable"
+                         tal:condition="here/show_notapplicable|nothing"
+                  >
+                    <input name="answer"
+                           type="radio"
+                           value="n/a"
+                    />
+                    <tal:answer replace="structure tool_type_data/answer_na" />
+                  </label>
+
+                </tal:yes_no>
+
+              </tal:answers>
+              <tal:always_present condition="always_present">
+                <input name="answer"
+                       type="hidden"
+                       value="no"
+                />
+              </tal:always_present>
+            </fieldset>
+
+            <tal:comment condition="python:False">
+              The `@@webhelpers/macros/risk_identification` macro copied code ends here.
+            </tal:comment>
+
+            <tal:comment condition="python:False">
+              This comes from the `@@webhelpers/macros/risk_identification` macro.
+            </tal:comment>
+
+            <tal:action_plan tal:condition="NOTE|nothing">
+               NOTE: this section is not rendered
+    because of this comment https://github.com/syslabcom/scrum/issues/3059#issuecomment-2706083665
+              <div class="pat-collapsible close risk-module pat-depends hidden form-panel"
+                   id="panel-action-plan"
+              >
+                <h3 class="form-separation-header"
+                    i18n:translate="header_measures"
+                >
+                  Measures
+                </h3>
+              </div>
+            </tal:action_plan>
+
+          </fieldset>
+
+          <div class="pat-page-module type-information pat-well pat-collapsible borderless open"
+               id="${python: here.getId()}-information"
+               data-pat-collapsible="
+                store: local;
+                scroll-selector: self;
+                scroll-offset: 120px;
+                open-trigger: .expand-all-sections;
+                close-trigger: .collapse-all-sections;
               "
-              tal:condition="scale"
-              tal:on-error="nothing"
-          ><img class="span-4"
-                 alt=""
-                 src="${scale/url}"
-                 title="${context/caption2}"
-                 width="${scale/width}"
-            /></li>
-          <li tal:define="
-                scale python:images.scale('image3', width=190, direction='down');
-              "
-              tal:condition="scale"
-              tal:on-error="nothing"
-          ><img class="span-4"
-                 alt=""
-                 src="${scale/url}"
-                 title="${context/caption3}"
-                 width="${scale/width}"
-            /></li>
-          <li tal:define="
-                scale python:images.scale('image4', width=190, direction='down');
-              "
-              tal:condition="scale"
-              tal:on-error="nothing"
-          ><img class="span-4"
-                 alt=""
-                 src="${scale/url}"
-                 title="${context/caption4}"
-                 width="${scale/width}"
-            /></li>
-        </ul>
-      </div>
+          >
 
-      <blockquote class="surveyQuestion">
-        <p tal:content="context/title">Er kan gebruik worden gemaakt van rechte spuitlansen van verschillende lengte.</p>
-      </blockquote>
+            <h2 class="well-header"
+                i18n:translate="header_information"
+            >Information</h2>
 
-      <dl class="grid span-13">
-        <dt i18n:translate="label_risk_type">Risk type</dt>
-        <dd tal:content="view/risk_type">Risk</dd>
-        <dt i18n:translate="label_problem_description">Negative statement</dt>
-        <dd tal:content="context/problem_description">Er bestaat geen mogelijkheid om gebruik te maken van rechte spuitlansen van verschillende lengte.</dd>
-        <dt i18n:translate="risk_show_na">Show '<em i18n:name="na"
-              i18n:translate="risk_show_na_na"
-          >not applicable</em>'</dt>
-        <dd tal:condition="context/show_notapplicable"
-            i18n:translate="yes"
-        >Yes</dd>
-        <dd tal:condition="not:context/show_notapplicable"
-            i18n:translate="no"
-        >No</dd>
-        <tal:block condition="python:context.type=='risk'">
-          <dt i18n:translate="label_evaluation_method">Evaluation method</dt>
-          <dd tal:content="view/evaluation_method">Calculated</dd>
+            <div class="panel-content">
+              <div class="pat-rich">
+                <tal:text replace="structure python:here.description">description</tal:text>
+              </div>
 
-          <tal:block condition="python:context.evaluation_method=='direct'">
-            <dt i18n:translate="label_default_priority">Default priority</dt>
-            <dd tal:content="view/default_priority">Low</dd>
-          </tal:block>
+              <div class="risk-illustrations pat-gallery"
+                   tal:define="
+                     images here/@@images;
+                   "
+                   tal:condition="python: here.image or here.image2 or here.image3 or here.image4"
+              >
 
-          <tal:block condition="python:context.evaluation_method=='calculated'">
-            <tal:french condition="python:view.evaluation_algorithm=='french'">
-              <dt i18n:translate="label_default_severity">Default severity</dt>
-              <dd>${view/default_severity}</dd>
-              <dt i18n:translate="label_default_frequency">Default frequency</dt>
-              <dd>${view/default_frequency}</dd>
-            </tal:french>
+                <figure class="illustration"
+                        tal:define="
+                          large python:images.scale('image', scale='training', direction='thumbnail');
+                        "
+                        tal:condition="large"
+                >
+                  <a href="${large/url|nothing}"
+                     title="${here/caption|nothing}"
+                  >
+                    <img alt=""
+                         src="${large/url|nothing}"
+                    />
+                  </a>
+                </figure>
+                <figure class="illustration"
+                        tal:define="
+                          large python:images.scale('image2', scale='training', direction='thumbnail');
+                        "
+                        tal:condition="large"
+                >
+                  <a href="${large/url|nothing}"
+                     title="${here/caption|nothing}"
+                  >
+                    <img alt=""
+                         src="${large/url|nothing}"
+                    />
+                  </a>
+                </figure>
+                <figure class="illustration"
+                        tal:define="
+                          large python:images.scale('image3', scale='training', direction='thumbnail');
+                        "
+                        tal:condition="large"
+                >
+                  <a href="${large/url|nothing}"
+                     title="${here/caption|nothing}"
+                  >
+                    <img alt=""
+                         src="${large/url|nothing}"
+                    />
+                  </a>
+                </figure>
+                <figure class="illustration"
+                        tal:define="
+                          large python:images.scale('image4', scale='training', direction='thumbnail');
+                        "
+                        tal:condition="large"
+                >
+                  <a href="${large/url|nothing}"
+                     title="${here/caption|nothing}"
+                  >
+                    <img alt=""
+                         src="${large/url|nothing}"
+                    />
+                  </a>
+                </figure>
+              </div>
+            </div>
+          </div>
 
-            <tal:kinney condition="python:view.evaluation_algorithm=='kinney'">
-              <dt i18n:translate="label_default_probability">Default probability</dt>
-              <dd tal:content="view/default_probability">Low</dd>
-              <dt i18n:translate="label_default_frequency">Default frequency</dt>
-              <dd tal:content="view/default_frequency">Low</dd>
-              <dt i18n:translate="label_default_effect">Default severity</dt>
-              <dd tal:content="view/default_effect">Low</dd>
-            </tal:kinney>
-          </tal:block>
-          <tal:scaled_answers condition="context/use_scaled_answer|nothing">
-            <dt i18n:translate="">Use scaled answers instead of Yes/No</dt>
-            <dd>
-              <ul><li tal:repeat="answer view/scaled_answers">${answer/text} (${answer/value})</li></ul>
-            </dd>
-          </tal:scaled_answers>
-        </tal:block>
-      </dl>
-      <hr class="clear" />
-      <div class="message notice floatBefore"
-           tal:condition="python:context.legal_reference"
-      >
-        <h4 i18n:translate="label_legal_reference">Legal and policy references</h4>
-        <p tal:replace="structure python:view.get_safe_html(context.legal_reference)">
-          Rechte spuitlansen van verschillende lengte aanschaffen en gebruiken. Zie ook www.fytostat.nl.</p>
-      </div>
+          <div class="pat-page-module type-resources pat-well pat-collapsible borderless open"
+               id="${python: here.getId()}-resources"
+               data-pat-collapsible="
+              store: local;
+              scroll-selector: self;
+              scroll-offset: 120px;
+              open-trigger: .expand-all-sections;
+              close-trigger: .collapse-all-sections;
+            "
+               tal:condition="python: here.legal_reference or here.file1 or here.file2 or here.file3 or here.file4"
+          >
 
-    </metal:slot>
-  </body>
+            <h2 class="well-header"
+                i18n:translate="header_resources"
+            >Resources</h2>
+
+            <div class="panel-content">
+              <section class="legal-references pat-rich"
+                       tal:condition="python:here.legal_reference"
+              >
+                <h4 i18n:translate="label_legal_reference">Legal and policy references</h4>
+                <tal:legal_references replace="structure python:here.legal_reference" />
+              </section>
+
+              <section class="more-information"
+                       tal:condition="python: here.file1 or here.file2 or here.file3 or here.file4"
+              >
+                <h4 tal:condition="python:here.Type()=='Risk'"
+                    i18n:translate="header_additional_resources"
+                >Additional resources to assess the risk</h4>
+                <h4 tal:condition="python:here.Type()=='Module'"
+                    i18n:translate="header_additional_resources_module"
+                >Additional resources for this module</h4>
+                <ul>
+                  <li class="icon-download"
+                      tal:condition="nocall:here/file1|nothing"
+                  >
+                    <a href="${here/absolute_url}/download/file1">
+                      <tal:caption condition="here/file1_caption|nothing">${here/file1_caption} (${here/file1/filename})</tal:caption>
+                      <tal:nocaption condition="not:here/file1_caption|nothing">${here/file1/filename}</tal:nocaption>
+                    </a>
+                  </li>
+                  <li class="icon-download"
+                      tal:condition="nocall:here/file2|nothing"
+                  >
+                    <a href="${here/absolute_url}/download/file2">
+                      <tal:caption condition="here/file2_caption|nothing">${here/file2_caption} (${here/file2/filename})</tal:caption>
+                      <tal:nocaption condition="not:here/file2_caption|nothing">${here/file2/filename}</tal:nocaption>
+                    </a>
+                  </li>
+                  <li class="icon-download"
+                      tal:condition="nocall:here/file3|nothing"
+                  >
+                    <a href="${here/absolute_url}/download/file3">
+                      <tal:caption condition="here/file3_caption|nothing">${here/file3_caption} (${here/file3/filename})</tal:caption>
+                      <tal:nocaption condition="not:here/file3_caption|nothing">${here/file3/filename}</tal:nocaption>
+                    </a>
+                  </li>
+                  <li class="icon-download"
+                      tal:condition="nocall:here/file4|nothing"
+                  >
+                    <a href="${here/absolute_url}/download/file4">
+                      <tal:caption condition="here/file4_caption|nothing">${here/file4_caption} (${here/file4/filename})</tal:caption>
+                      <tal:nocaption condition="not:here/file4_caption|nothing">${here/file4/filename}</tal:nocaption>
+                    </a>
+                  </li>
+                </ul>
+              </section>
+
+            </div>
+          </div>
+
+        </form>
+
+      </metal:slot>
+    </body>
+  </tal:comment>
 </html>

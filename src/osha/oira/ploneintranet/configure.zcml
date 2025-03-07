@@ -43,7 +43,7 @@
   <browser:page
       name="quaive-view"
       for="euphorie.content.risk.IRisk"
-      class="euphorie.content.browser.risk.RiskView"
+      class=".quaive_view.QuaiveRiskView"
       template="templates/risk_view.pt"
       permission="zope2.View"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"

@@ -1,3 +1,5 @@
+from euphorie.content.browser.risk import RiskView
+from euphorie.content.solution import ISolution
 from logging import getLogger
 from plone.supermodel.model import SchemaClass
 from Products.Five import BrowserView
@@ -38,3 +40,14 @@ class BaseQuaiveView(BrowserView):
         return self.context.restrictedTraverse("@@nuplone-view")().replace(
             'id="mainContent"', 'id="quaive-content"'
         )
+
+
+class QuaiveRiskView(RiskView):
+
+    @property
+    def solutions(self):
+        return [
+            solution
+            for solution in self.my_context.values()
+            if ISolution.providedBy(solution)
+        ]

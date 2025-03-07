@@ -56,7 +56,9 @@
 
           <section class="body"
                    id="tool-body-text"
-                   tal:define="introduction python: (getattr(context, 'introduction', '') or '').strip()"
+                   tal:define="
+                     introduction python: (getattr(context, 'introduction', '') or '').strip();
+                   "
                    tal:condition="python: introduction"
           >
             <p tal:replace="structure introduction"></p>

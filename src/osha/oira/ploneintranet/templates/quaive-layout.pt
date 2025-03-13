@@ -1,0 +1,142 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      metal:define-macro="layout"
+      metal:use-macro="context/@@layout/macros/layout"
+      i18n:domain="euphorie"
+>
+  <body>
+
+    <metal:title fill-slot="title" />
+    <metal:bar fill-slot="buttonbar" />
+
+    <metal:content fill-slot="content"
+                   tal:define="
+                     can_edit python:tools.checkPermission('Modify portal content');
+                     can_add python:tools.checkPermission('Add portal content');
+                   "
+    >
+
+      <div id="quaive-content">
+
+        <metal:define define-slot="quaive-toolbar">
+          <div class="pat-toolbar sticky"
+               id="module-toolbar"
+          >
+            <div class="toolbar-functions-area pat-inject pat-form pat-autosubmit"
+                 id="toolbar-functions-area-assessments"
+            >
+              <div class="toolbar-section view-options"
+                   id="module-toolbar-view-options"
+              >
+              </div>
+              <div class="toolbar-section quick-functions"
+                   id="module-toolbar-quick-functions"
+              >
+                <a class="icon more pat-tooltip tooltip-inactive"
+                   aria-expanded="false"
+                   href="#more-menu-oira-module"
+                   data-pat-tooltip="
+                        source: ajax;
+                        position-list: tr;"
+                   tal:condition="XXX|nothing"
+                >
+                    More&hellip;
+                </a>
+                <template id="more-menu-oira-module">
+                  <ul class="menu">
+                    <li tal:condition="XXX|nothing">
+                      <a class="icon-direction"
+                         href="#"
+                      >Move</a>
+                    </li>
+                    <li tal:condition="XXX|nothing">
+                      <a class="pat-inject icon-updown-circle close-panel"
+                         href="/apps/assessments/panel-reorder-items"
+                         tabindex="0"
+                         data-pat-inject="
+                            source: #pat-modal-panel-space;
+                            target: #pat-modal-panel-space;
+                            url: /apps/assessments/panel-reorder-items;"
+                      >Reorder
+                        items</a>
+                    </li>
+                    <li tal:condition="XXX|nothing">
+                      <a class="pat-inject icon-trash close-panel"
+                         href="/apps/assessments/panel-delete-module"
+                         tabindex="0"
+                         data-pat-inject="
+                            source: #pat-modal-panel-space;
+                            target: #pat-modal-panel-space;
+                            url: /apps/assessments/panel-delete-module;"
+                      >Delete
+                        module</a>
+                    </li>
+                  </ul>
+                </template>
+                <a class="icon create pat-tooltip tooltip-inactive"
+                   aria-expanded="false"
+                   href="#module-risk-create-menu"
+                   data-pat-tooltip="
+                        source: ajax;
+                        class: toolbar-menu;
+                        position-list: tl"
+                ></a>
+                <template id="module-risk-create-menu">
+                  <ul class="menu">
+                    <li>
+                      <a class="icon-cubes pat-inject"
+                         href="/apps/assessments/new-module.html"
+                         data-pat-inject="
+                                    history: record;
+                                    scroll: top"
+                      >New
+                        submodule</a>
+                    </li>
+                    <li>
+                      <a class="icon-attention pat-inject"
+                         href="/apps/assessments/new-risk.html"
+                         data-pat-inject="
+                                    history: record;
+                                    scroll: top"
+                      >New
+                        risk</a>
+                    </li>
+                    <li>
+                      <a class="icon-import pat-modal"
+                         href="/apps/assessments/panel-insert-from-tool.html"
+                         data-pat-inject="
+                                    source: #application-body-assessments;
+                                    target: #application-body-assessments;
+                                    history: record;
+                                    scroll: top"
+                      >Insert
+                        from other tool</a>
+                    </li>
+                  </ul>
+                </template>
+                <a class="default pat-button edit pat-inject"
+                   href="OIRA_CREATOR_APP_URL/@@oira-edit/${python:'/'.join(context.getPhysicalPath()[3:])}"
+                   tal:condition="can_edit"
+                >
+                  Edit</a>
+              </div>
+            </div>
+          </div>
+        </metal:define>
+
+        <metal:define define-slot="quaive-title">
+          <div class="pat-rich quaive-page-head"
+               id="page-head"
+          >
+            <h1>${context/Title}</h1>
+          </div>
+        </metal:define>
+
+        <metal:define define-slot="quaive-body" />
+
+      </div>
+    </metal:content>
+  </body>
+</html>

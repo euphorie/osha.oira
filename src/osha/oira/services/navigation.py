@@ -47,6 +47,10 @@ class NavigationService(Service):
         if "@type" in node:
             node["@type"] = node["@type"].replace("-", ".")
 
+        # Fix the solutions (AKA measure title) which is always `Measure`
+        if "@type" == "euphorie-solution" and node.get("description"):
+            node["title"] = node["description"]
+
         # Recurse into children
         if "items" in node:
             for child in node["items"]:

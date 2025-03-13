@@ -24,9 +24,7 @@
                   <h4>
                     Description
                   </h4>
-                  <p class="pat-markdown">
-                    ${python: here.action}
-                  </p>
+                  <pre class="pat-markdown">${python: here.action}</pre>
                 </tal:field>
                 <tal:field condition="python: here.requirements">
                   <h4>

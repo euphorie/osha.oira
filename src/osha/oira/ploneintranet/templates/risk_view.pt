@@ -59,8 +59,6 @@
               >Add another already implemented measure</button>
             </div>
 
-
-
           </fieldset>
           <fieldset class="vertical">
 
@@ -155,25 +153,53 @@
               The `@@webhelpers/macros/risk_identification` macro copied code ends here.
             </tal:comment>
 
-            <tal:comment condition="python:False">
-              This comes from the `@@webhelpers/macros/risk_identification` macro.
-            </tal:comment>
-
-            <tal:action_plan tal:condition="NOTE|nothing">
-               NOTE: this section is not rendered
-    because of this comment https://github.com/syslabcom/scrum/issues/3059#issuecomment-2706083665
-              <div class="pat-collapsible close risk-module pat-depends hidden form-panel"
-                   id="panel-action-plan"
-              >
-                <h3 class="form-separation-header"
-                    i18n:translate="header_measures"
-                >
-                  Measures
-                </h3>
-              </div>
-            </tal:action_plan>
-
           </fieldset>
+
+          <div class="pat-page-module type-planned-measures pat-well pat-collapsible borderless"
+               data-pat-collapsible="
+                  store: local;
+                  scroll-selector: self;
+                  scroll-offset: 120px;
+                  open-trigger: .expand-all-sections;
+                  close-trigger: .collapse-all-sections;
+               "
+          >
+
+            <h2 class="well-header collapsible-open" i18n:translate="">Planned measures</h2>
+
+            <div class="panel-content">
+              <div class="pat-rich">
+                <p i18n:translate="">
+                  Select or describe any further measure to reduce the risk.
+                </p>
+              </div>
+              <div class="measures pat-clone pat-switch">
+                <tal:repeat repeat="solution view/solutions">
+                  <div class="measure pat-collapsible open">
+                    <h2 class="collapsible-open">${python: solution.Description()}</h2>
+                    <div class="panel-content">
+                      <section class="pat-rich">
+                        <tal:field condition="python: solution.action">
+                          <h4>
+                            Description
+                          </h4>
+                          <pre class="pat-markdown">${python: solution.action}</pre>
+                        </tal:field>
+                        <tal:field condition="python: solution.requirements">
+                          <h4>
+                            Expertise
+                          </h4>
+                          <p>
+                            ${python: solution.requirements}
+                          </p>
+                        </tal:field>
+                      </section>
+                    </div>
+                  </div>
+                </tal:repeat>
+              </div>
+            </div>
+          </div>
 
           <div class="pat-page-module type-information pat-well pat-collapsible borderless open"
                id="${python: here.getId()}-information"

@@ -10,29 +10,37 @@
   <body>
 
     <metal:define fill-slot="quaive-title">
-      <div class="pat-rich quaive-page-head"
-           id="page-head"
-      >
-        <h1 i18n:translate="">Measure</h1>
-      </div>
     </metal:define>
 
     <metal:slot fill-slot="quaive-body">
-      <div class="pat-rich">
-        <p tal:replace="structure python:context.Description()"></p>
-      </div>
 
-      <dl class="grid span-9">
-        <dt i18n:translate="label_description">Description</dt>
-        <dd>
-          <div class="pat-markdown"
-               tal:content="structure python:view.render_md(context.action)"
-          ></div></dd>
-        <tal:block condition="context/requirements">
-          <dt i18n:translate="label_expertise">Expertise</dt>
-          <dd>${context/requirements}</dd>
-        </tal:block>
-      </dl>
+      <div class="pat-page-module type-planned-measures pat-well borderless open">
+        <div class="measures">
+          <div class="measure pat-collapsible open">
+            <h2 class="collapsible-open">${python: here.Description()}</h2>
+            <div class="panel-content">
+              <section class="pat-rich">
+                <tal:field condition="python: here.action">
+                  <h4>
+                    Description
+                  </h4>
+                  <p class="pat-markdown">
+                    ${python: here.action}
+                  </p>
+                </tal:field>
+                <tal:field condition="python: here.requirements">
+                  <h4>
+                    Expertise
+                  </h4>
+                  <p>
+                    ${python: here.requirements}
+                  </p>
+                </tal:field>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </metal:slot>
   </body>

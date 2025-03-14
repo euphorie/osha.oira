@@ -4,6 +4,9 @@ Changelog
 11.0.2 (unreleased)
 -------------------
 
+- Add quaive-create and quaive-edit views for training questions.
+  [maurits]
+
 - Add some country information in ``@tool-versions`` REST API endpoint.
   [maurits]
 

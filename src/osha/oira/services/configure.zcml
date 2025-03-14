@@ -14,6 +14,15 @@
 
   <plone:service
       method="GET"
+      factory=".training.TrainingService"
+      for="euphorie.content.survey.ISurvey"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      name="@training"
+      />
+
+  <plone:service
+      method="GET"
       factory=".navigation.NavigationService"
       permission="zope2.View"
       for="*"

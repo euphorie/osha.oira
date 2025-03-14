@@ -4,6 +4,9 @@ Changelog
 11.0.2 (unreleased)
 -------------------
 
+- Add ``@training`` REST API endpoint for surveys.
+  [maurits]
+
 - Add quaive-create and quaive-edit views for training questions.
   [maurits]
 

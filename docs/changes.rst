@@ -4,7 +4,8 @@ Changelog
 11.0.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Add some country information in ``@tool-versions`` REST API endpoint.
+  [maurits]
 
 
 11.0.1 (2025-02-25)

@@ -7,6 +7,7 @@ from osha.oira.content.browser.sector import AddView as EuphorieSectorAddView
 from osha.oira.content.browser.solution import AddView as EuphorieSolutionAddView
 from osha.oira.ploneintranet.interfaces import IQuaiveForm
 from plone import api
+from plone.dexterity.browser.add import DefaultAddView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.i18nmessageid import MessageFactory
 from zope.interface import alsoProvides
@@ -116,6 +117,18 @@ class QuaiveCreateEuphorieProfileQuestionView(
     QuaiveCreateViewMixin, EuphorieProfileQuestionAddView
 ):
     form = QuaiveCreateEuphorieProfileQuestionForm
+
+
+class QuaiveCreateEuphorieTrainingQuestionForm(
+    QuaiveCreateFormMixin, DefaultAddView.form
+):
+    # There is no separate add view for training questions.
+    template = ViewPageTemplateFile("templates/quaive-form.pt")
+
+
+class QuaiveCreateEuphorieTrainingQuestionView(QuaiveCreateViewMixin, DefaultAddView):
+    # There is no separate add view for training questions.
+    form = QuaiveCreateEuphorieTrainingQuestionForm
 
 
 class QuaiveCreateEuphorieSolutionForm(

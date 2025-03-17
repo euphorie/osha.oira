@@ -1,5 +1,6 @@
 from Acquisition import aq_base
 from Acquisition import aq_inner
+from Acquisition import aq_parent
 from plone import api
 from plone.base.utils import base_hasattr
 from plone.restapi.serializer.converters import json_compatible
@@ -7,7 +8,10 @@ from plone.restapi.services import Service
 
 
 class ToolVersionsGet(Service):
-    """Get info from the oira tool (survey group) and its versions (surveys)."""
+    """Get info from the oira tool (survey group) and its versions (surveys).
+
+    And we can use a bit of info from the country as well.
+    """
 
     @property
     def default_image_url(self):
@@ -54,6 +58,13 @@ class ToolVersionsGet(Service):
             "image_url": "",
             "summary": "",
             "introduction": "",
+        }
+
+        # Add info about the country.
+        country = aq_parent(aq_parent(surveygroup))
+        result["country"] = {
+            "enable_web_training": country.enable_web_training,
+            "enable_consultancy": country.enable_consultancy,
         }
 
         # Now add info for each tool version.

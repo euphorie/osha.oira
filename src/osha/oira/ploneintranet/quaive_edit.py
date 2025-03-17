@@ -21,6 +21,10 @@ class ProfileQuestionQuaiveEditForm(QuaiveEditFormMixin, ProfileQuestionEditForm
     """Custom edit form designed to be embedded in Quaive"""
 
 
+class TrainingQuestionQuaiveEditForm(QuaiveEditFormMixin, DefaultEditForm):
+    """Custom edit form designed to be embedded in Quaive"""
+
+
 class RiskQuaiveEditForm(QuaiveEditFormMixin, RiskEditForm):
     """Custom edit form designed to be embedded in Quaive"""
 

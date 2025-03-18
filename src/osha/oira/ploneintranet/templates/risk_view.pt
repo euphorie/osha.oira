@@ -165,7 +165,9 @@
                "
           >
 
-            <h2 class="well-header collapsible-open" i18n:translate="">Planned measures</h2>
+            <h2 class="well-header collapsible-open"
+                i18n:translate=""
+            >Planned measures</h2>
 
             <div class="panel-content">
               <div class="pat-rich">
@@ -199,6 +201,34 @@
                 </tal:repeat>
               </div>
             </div>
+          </div>
+
+          <div class="risk-module pat-well notice pat-depends vertical evaluation"
+               id="evaluation"
+               data-pat-depends="condition: answer=no; transition: slide"
+          >
+            <p class="problem-description"><strong>${here/title}</strong></p>
+            <fieldset class="pat-checklist radio"
+                      disabled="disabled"
+            >
+              <p i18n:translate="header_risk_priority">Select the priority of this risk</p>
+              <label><input checked="checked"
+                       name="priority"
+                       type="radio"
+                       value="low"
+                />
+                <tal:span i18n:translate="priority_low">Low</tal:span></label>
+              <label><input name="priority"
+                       type="radio"
+                       value="medium"
+                />
+                <tal:span i18n:translate="priority_medium">Medium</tal:span></label>
+              <label><input name="priority"
+                       type="radio"
+                       value="high"
+                />
+                <tal:span i18n:translate="priority_high">High</tal:span></label>
+            </fieldset>
           </div>
 
           <div class="pat-page-module type-information pat-well pat-collapsible borderless open"

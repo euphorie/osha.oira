@@ -38,6 +38,7 @@
                    images nocall:here/@@images;
                    scale python: images.scale('image', 'large');
                  "
+                 tal:condition="python: scale"
             />
           </figure>
         </a>

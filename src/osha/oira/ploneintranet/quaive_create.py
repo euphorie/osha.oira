@@ -25,6 +25,10 @@ _ = MessageFactory("nuplone")
 class QuaiveCreateFormMixin:
     template = ViewPageTemplateFile("templates/quaive-panel-form.pt")
 
+    @property
+    def oira_type(self):
+        return self.__name__.rpartition("-")[-1]
+
     def update(self):
         super().update()
         for group in getattr(self, "groups", []):

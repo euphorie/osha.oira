@@ -4,6 +4,9 @@ Changelog
 11.0.2 (unreleased)
 -------------------
 
+- navtree service: filter out training questions.
+  [maurits]
+
 - Add ``@training`` REST API endpoint for surveys.
   [maurits]
 

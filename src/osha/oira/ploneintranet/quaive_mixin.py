@@ -9,6 +9,10 @@ class QuaiveEditFormMixin:
     def template(self):
         return self.index
 
+    @property
+    def oira_type(self):
+        return self.context.portal_type
+
     def nextURL(self):
         return f"{self.context.absolute_url()}/@@{self.__name__}"
 

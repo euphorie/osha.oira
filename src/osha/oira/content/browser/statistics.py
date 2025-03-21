@@ -1,6 +1,6 @@
 from datetime import datetime
 from osha.oira import _
-from Products.CMFPlone.utils import safe_unicode
+from plone.base.utils import safe_bytes
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from z3c.saconfig import Session
@@ -10,12 +10,7 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope.sqlalchemy import datamanager
 
 import logging
-import sys
 import transaction
-
-
-if sys.version_info[0] >= 3:
-    basestring = str
 
 
 log = logging.getLogger("osha.oira/browser.statistics")
@@ -64,8 +59,8 @@ class WriteStatistics(BrowserView):
         session.execute("""DELETE FROM %s;""" % dbtable_surveys)
 
         def clean(value):
-            if isinstance(value, basestring):
-                return safe_unicode(value).strip().encode("utf-8")
+            if isinstance(value, str):
+                return safe_bytes(value.strip())
             return value
 
         def pg_format(value):

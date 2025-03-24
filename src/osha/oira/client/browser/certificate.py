@@ -7,7 +7,6 @@ from osha.oira.client import model
 from plone import api
 from plone.memoize.view import memoize
 from plone.protect.interfaces import IDisableCSRFProtection
-from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from z3c.saconfig import Session
 from zope.interface import alsoProvides
@@ -283,7 +282,7 @@ class PublicCertificate(BrowserView):
         if not getattr(self, "secret", None):
             return None
         query = Session.query(model.Certificate).filter(
-            model.Certificate.secret == safe_unicode(self.secret)
+            model.Certificate.secret == self.secret
         )
         if query.count():
             return query.one()

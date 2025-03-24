@@ -21,18 +21,21 @@ class NavigationService(Service):
 
     It also fixes the portal_type which is returned normalized
     with a dash instead of a dot.
+
+    Filter out training questions: we don't want to see them in the side bar.
+    They are shown in the training section.
     """
+
+    ignored_portal_types = {
+        "euphorie.training_question",
+    }
+    banned_keys = [
+        "brain",  # not serializable
+        "parent",  # creates a circular reference
+    ]
 
     def fix_node(self, node):
         """Prepare a node for serialization"""
-        banned_keys = [
-            "brain",  # not serializable
-            "parent",  # creates a circular reference
-        ]
-        for key in banned_keys:
-            if key in node:
-                del node[key]
-
         # Rename keys to match plone.restapi standards
         mapping = {
             "portal_type": "@type",
@@ -46,6 +49,13 @@ class NavigationService(Service):
         # Fix the portal_type
         if "@type" in node:
             node["@type"] = node["@type"].replace("-", ".")
+            if node["@type"] in self.ignored_portal_types:
+                # Completely ignore this node.
+                return
+
+        for key in self.banned_keys:
+            if key in node:
+                del node[key]
 
         # Fix the solutions (AKA measure title) which is always `Measure`
         if "@type" == "euphorie-solution" and node.get("description"):
@@ -53,8 +63,8 @@ class NavigationService(Service):
 
         # Recurse into children
         if "items" in node:
-            for child in node["items"]:
-                self.fix_node(child)
+            tree = [self.fix_node(child) for child in node["items"]]
+            node["items"] = list(filter(None, tree))
 
         return node
 
@@ -65,6 +75,7 @@ class NavigationService(Service):
         navtree_tile = api.content.get_view("navtree", self.context, self.request)
         navtree_tile.update()
         tree = [self.fix_node(node) for node in navtree_tile.tree]
+        tree = list(filter(None, tree))
         return {
             "@id": self.request.getURL(),
             "items": tree,

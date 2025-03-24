@@ -34,7 +34,7 @@
           />
           <input name="oira_type"
                  type="hidden"
-                 value="${python: view.__name__.rpartition('-')[-1]}"
+                 value="${python: view.oira_type}"
           />
 
         </fieldset>

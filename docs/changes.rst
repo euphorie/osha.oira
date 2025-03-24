@@ -4,6 +4,12 @@ Changelog
 11.0.2 (unreleased)
 -------------------
 
+- Fix hidden ``oira_type`` on edit views.
+  [maurits]
+
+- navtree service: filter out training questions.
+  [maurits]
+
 - Add ``@training`` REST API endpoint for surveys.
   [maurits]
 

@@ -3,7 +3,6 @@ from datetime import datetime
 from datetime import timedelta
 from euphorie.client.utils import CreateEmailTo
 from plone import api
-from plone.dexterity.utils import safe_unicode
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from slc.zopescript.script import ConsoleScript
@@ -118,7 +117,7 @@ class OutdatedToolsView(BrowserView):
             intro = """
 You are receiving this notification since you are the sector manager for
 "{}". """.format(
-                safe_unicode(sector.Title())
+                sector.Title()
             )
             self.send_notification(
                 to_name=contact_name,
@@ -151,7 +150,7 @@ You are receiving this notification since you are the sector manager for
                 intro = """
 You are receiving this notification since you are the country manager for
 "{}". """.format(
-                    safe_unicode(country.Title())
+                    country.Title()
                 )
 
                 self.send_notification(
@@ -187,7 +186,6 @@ You are receiving this notification since you are the country manager for
     ):
         if not tool_paths and not empty_message:
             return
-        to_name = safe_unicode(to_name)
         mailhost = getToolByName(self.context, "MailHost")
         if to_name:
             recipient = f"{to_name} <{to_address}>"

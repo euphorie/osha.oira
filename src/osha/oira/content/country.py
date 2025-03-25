@@ -19,6 +19,12 @@ except ImportError:
     from htmllaundry.z3cform import HtmlText
 
 
+try:
+    from plonetheme.nuplone.z3cform.widget import WysiwygFieldWidget
+except ImportError:
+    from plone.app.z3cform.wysiwyg import WysiwygFieldWidget
+
+
 class IOSHACountry(model.Schema):
     """Additional fields for the OSHA countries."""
 
@@ -75,9 +81,7 @@ class IOSHACountry(model.Schema):
         ),
         required=False,
     )
-    directives.widget(
-        certificate_explanatory_sentence="plone.app.z3cform.wysiwyg.WysiwygFieldWidget"
-    )
+    directives.widget(certificate_explanatory_sentence=WysiwygFieldWidget)
 
     @invariant
     def threshold_invariant(data):

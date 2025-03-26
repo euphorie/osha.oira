@@ -23,7 +23,7 @@ class View(BrowserView):
         help_language = self.webhelpers.help_language
         link_text = api.portal.translate(_("personal preferences page"))
         preferences_link = (
-            f'<a class="pat-inject" href="{self.preferences_url}">{link_text}</a>.'
+            f'<a class="pat-inject" href="{self.preferences_url}">{link_text}</a>'
         )
         return [
             {

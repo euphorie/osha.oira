@@ -18,6 +18,15 @@
     widget="plone.app.z3cform.wysiwyg.widget.IWysiwygWidget"
     layer=".interfaces.IOiRAFormLayer"
     template="templates/wysiwyg_input.pt"
+    zcml:condition="not-installed plonetheme.nuplone.z3cform.widget.IWysiwygWidget"
+    />
+
+  <z3c:widgetTemplate
+    mode="input"
+    widget="plonetheme.nuplone.z3cform.widget.IWysiwygWidget"
+    layer=".interfaces.IOiRAFormLayer"
+    template="templates/wysiwyg_input.pt"
+    zcml:condition="installed plonetheme.nuplone.z3cform.widget.IWysiwygWidget"
     />
 
   <browser:page

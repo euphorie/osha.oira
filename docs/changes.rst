@@ -4,6 +4,9 @@ Changelog
 11.0.2 (unreleased)
 -------------------
 
+- Use the plonetheme.nuplone.z3cform.widget.WysiwygWidget if available
+  [ale-rt]
+
 - Fix hidden ``oira_type`` on edit views.
   [maurits]
 

@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      metal:use-macro="context/@@quaive-layout/macros/layout"
+      i18n:domain="euphorie"
+>
+
+  <tal:comment condition="python: False">
+    Most of the markup in this file is similar to the one found in:
+
+    euphorie.client.browser:templates/tool_sessions.pt
+
+    Compared to proto, we do add a section.body.
+    To me it appears like it just makes sense.
+  </tal:comment>
+
+  <body>
+
+    <metal:slot fill-slot="quaive-toolbar">
+    </metal:slot>
+
+    <metal:slot fill-slot="quaive-title">
+    </metal:slot>
+
+    <metal:slot fill-slot="quaive-body">
+      <div class="tool-home-tile">
+        <a class="pat-inject"
+           href="OIRA_CREATOR_APP_URL/@@oira-edit/${python:'/'.join(context.getPhysicalPath()[3:])}#content"
+           data-pat-inject="#document-body::element; scroll: top; history: record"
+           tal:condition="python: can_edit"
+        >
+          <figure class="tool-icon">
+            <img src="${python: scale.url}"
+                 tal:define="
+                   images nocall:here/@@images;
+                   scale python: images.scale('image', 'large');
+                 "
+                 tal:condition="python: scale"
+            />
+          </figure>
+        </a>
+        <div class="pat-rich tool-text">
+          <h1 class="tool-title">
+            ${python: here.Title()}
+          </h1>
+
+          <section class="summary"
+                   tal:condition="python: (here.Description() or '').strip()"
+          >
+            <p>
+              ${python: here.Description()}
+            </p>
+          </section>
+
+          <section class="body"
+                   id="tool-body-text"
+                   tal:define="
+                     introduction python: (getattr(context, 'introduction', '') or '').strip();
+                   "
+                   tal:condition="python: introduction"
+          >
+            <p tal:replace="structure introduction"></p>
+          </section>
+
+        </div>
+      </div>
+    </metal:slot>
+  </body>
+</html>

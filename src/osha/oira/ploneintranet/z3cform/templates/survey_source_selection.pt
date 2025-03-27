@@ -83,7 +83,7 @@
                        value="${survey/id}"
                 />${survey/title}
                 <a class="floatAfter"
-                    href="${python: request['HTTP_REFERER'].partition('@@')[0] + '@@oira-edit-survey/' + '/'.join(survey['url'].split('/')[-4:])}"
+                    href="${python: request['HTTP_REFERER'].partition('@@')[0] + '@@oira-view/' + '/'.join(survey['url'].split('/')[-4:])}"
                     target="_blank"
                     i18n:translate="label_view_revision_in_new_window"
                 >
@@ -164,7 +164,7 @@
                    value="${survey/id}"
             />${survey/title}
             <a class="floatAfter"
-               href="${python: request['HTTP_REFERER'].partition('@@')[0] + '@@oira-edit-survey/' + '/'.join(survey['url'].split('/')[-4:])}"
+               href="${python: request['HTTP_REFERER'].partition('@@')[0] + '@@oira-view/' + '/'.join(survey['url'].split('/')[-4:])}"
                target="_blank"
                i18n:translate="label_view_revision_in_new_window"
             >

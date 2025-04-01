@@ -1,7 +1,7 @@
 Changelog
 =========
 
-11.0.2 (unreleased)
+11.0.2 (2025-04-01)
 -------------------
 
 - Use the plonetheme.nuplone.z3cform.widget.WysiwygWidget if available

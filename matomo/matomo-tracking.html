@@ -1,5 +1,7 @@
 <!-- Tracking -->
 <script type="text/javascript">
+var _paq = _paq || [];
+
 async function() {
     const hostname_production = "oira.osha.europa.eu";
     const hostname_staging = "test-oira.osha.europa.eu";
@@ -17,8 +19,6 @@ async function() {
     const site_id = mode_production ? "11" : "9";
 
     let previous_url = location.href;
-
-    const _paq = _paq || [];
 
     /**
      * Initialize download buttons tracking without the session id.

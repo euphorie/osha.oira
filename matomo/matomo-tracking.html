@@ -16,6 +16,8 @@ async function() {
     const tracking_domain = (mode_production ? "*.oira.osha.europa.eu" : "*.test-oira.osha.europa.eu") + "/oira-tools/";
     const site_id = mode_production ? "11" : "9";
 
+    let previous_url = location.href;
+
     const _paq = _paq || [];
 
     /**
@@ -79,6 +81,9 @@ async function() {
         // Custom variables
         _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
 
+        // Set the URL to be tracked
+        _paq.push(["setCustomUrl", location.href]);
+
         /* retrieve custom variable content */
         const country = tracking_dimensions['country_name'];
         const sector = tracking_dimensions['sector_name'];
@@ -125,6 +130,17 @@ async function() {
     await compile_tracking_variables();
     // Initialize base tracking
     base_tracking_initialization();
+
+    document.addEventListener("patterns-injected-delayed", function() {
+        if (previous_url !== location.href) {
+            // Only track if the URL has changed
+            previous_url = location.href;
+            // reload tracking variables after navigating without a page reload.
+            compile_tracking_variables();
+        }
+    });
+
+
 }();
 </script>
 <!-- End tracking code -->

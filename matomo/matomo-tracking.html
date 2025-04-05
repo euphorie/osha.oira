@@ -1,0 +1,71 @@
+<!-- Piwik -->
+<script type="text/javascript">
+    var _paq = _paq || [];
+
+    /**
+     * Initialize download buttons tracking without the session id.
+     * This uses delegated event handlers which also allows to track links
+     * injected dynamically by JavaScript after this script was invoked.
+    */
+    function initialize_download_buttons() {
+        const download_button_selector = "a.pat-button.download";
+
+        // Delegated event handler to disable automatic download link tracking
+        // for the report download links.
+        // NOTE: This needs Matomo version 5+
+        document.addEventListener("mousedown", function(event) {
+            const el = event.target.closest(download_button_selector);
+            if (el) {
+                el.setAttribute('data-matomo-ignore', 'true');
+            }
+        }, { capture: true });
+
+        // Manually trigger tracking with a cleaned-up URL which does not include the session.
+        document.addEventListener("click", function(event) {
+            const el = event.target.closest(download_button_selector);
+            if (el) {
+                // Remove the session ID from the URL
+                const download_url = el.href.replace(/\+\+session\+\+.*\//, "");
+                // Trigger tracking.
+                _paq.push(["trackEvent", "Download", "manual", download_url]);
+            }
+        });
+    }
+
+    // Initialize download buttons tracking
+    initialize_download_buttons();
+
+    (function() {
+        // Custom variables
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setDomains", ["*.osha.europa.eu","*.osha.europa.eu"]]);
+        _paq.push(["trackPageView"]);
+        _paq.push(["enableLinkTracking"]);
+
+        var country = document.getElementById('country_name').innerHTML;
+        var sector = document.getElementById('sector_name').innerHTML;
+        var tool = document.getElementById('tool_name').innerHTML;
+        var language =  document.getElementById('language_code').innerHTML;
+
+        _paq.push(["setCustomVariable", 1, "Activity", "3.1. Online interactive Risk Assessment (OiRA) tool", "visit"]);
+        _paq.push(["setCustomVariable", 2, "Country", country, "visit"]);
+        _paq.push(["setCustomVariable", 3, "Sector", sector, "visit"]);
+        _paq.push(["setCustomVariable", 4, "Tool", tool, "visit"]);
+
+        _paq.push(['setCustomDimension', 1, "-3.1. Online interactive Risk Assessment (OiRA) tool"]);
+        _paq.push(['setCustomDimension', 2, country]);
+        _paq.push(['setCustomDimension', 3, sector]);
+        _paq.push(['setCustomDimension', 4, tool]);
+        _paq.push(['setCustomDimension', 5, language]);   
+
+        // Main Matomo variables
+        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik.osha.europa.eu/piwik/";
+        _paq.push(["setTrackerUrl", u+"piwik.php"]);
+        _paq.push(["setSiteId", "11"]);
+
+        // Add the piwik.js script to the page
+        var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+        g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+<!-- End Piwik Code -->

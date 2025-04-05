@@ -1,6 +1,22 @@
-<!-- Piwik -->
+<!-- Tracking -->
 <script type="text/javascript">
-    var _paq = _paq || [];
+async function() {
+    const hostname_production = "oira.osha.europa.eu";
+    const hostname_staging = "test-oira.osha.europa.eu";
+    const hostname_development = "localhost";
+    const mode_production = location.hostname === hostname_production;
+    const mode_staging = location.hostname === hostname_staging;
+    const mode_development = location.hostname === hostname_development;
+    const tracking_endpoint_url = (
+        mode_development ?
+            "http://localhost:8080/Plone/piwikmock.php" :
+            "https://piwik.osha.europa.eu/piwik/piwik.php"
+    );
+    const tacking_script_url = "https://piwik.osha.europa.eu/piwik/piwik.js";
+    const tracking_domain = (mode_production ? "*.oira.osha.europa.eu" : "*.test-oira.osha.europa.eu") + "/oira-tools/";
+    const site_id = mode_production ? "11" : "9";
+
+    const _paq = _paq || [];
 
     /**
      * Initialize download buttons tracking without the session id.
@@ -20,20 +36,54 @@
         }, { capture: true });
     }
 
-    // Initialize download buttons tracking
-    initialize_download_buttons();
+    async function load_tracking_dimensions() {
+        try {
+            const url_elems = window.location.href.split("?");
+            const urlParts = url_elems[0].split("/");
+            if (urlParts[urlParts.length - 1] === "") {
+                urlParts.pop();  // Remove trailing slash if present
+            }
+            urlParts[urlParts.length - 1] = "@@piwikvars.json";
+            let vars_url = urlParts.join("/");
+            if (url_elems.length >1) {
+                vars_url = vars_url + '?' + url_elems[1];
+            }
+            console.log(vars_url);
 
-    (function() {
+            const response = await fetch(vars_url, {
+                headers: { "Accept": "application/json" },
+            });
+            if (!response.ok) {
+                throw new Error("HTTP " + response.status);
+            }
+
+            const data = await response.json();
+            console.log("📌 Loaded Piwik Variables:", data);
+            return data;
+        } catch (error) {
+            console.error("❌ Error loading Piwik variables:", error);
+            return null;
+        }
+    }
+
+    async function compile_tracking_variables() {
+        // Wait for JSON data before proceeding
+        const tracking_dimensions = await load_tracking_dimensions();
+
+        if (!tracking_dimensions) {
+            console.error("❌ No Piwik data loaded, skipping tracking.");
+            return;
+        }
+        console.log("✅ Matomo tracking initialized with custom variables.");
+
         // Custom variables
         _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-        _paq.push(["setDomains", ["*.osha.europa.eu","*.osha.europa.eu"]]);
-        _paq.push(["trackPageView"]);
-        _paq.push(["enableLinkTracking"]);
 
-        var country = document.getElementById('country_name').innerHTML;
-        var sector = document.getElementById('sector_name').innerHTML;
-        var tool = document.getElementById('tool_name').innerHTML;
-        var language =  document.getElementById('language_code').innerHTML;
+        /* retrieve custom variable content */
+        const country = tracking_dimensions['country_name'];
+        const sector = tracking_dimensions['sector_name'];
+        const tool = tracking_dimensions['tool_name'];
+        const language = tracking_dimensions['language_code'];
 
         _paq.push(["setCustomVariable", 1, "Activity", "3.1. Online interactive Risk Assessment (OiRA) tool", "visit"]);
         _paq.push(["setCustomVariable", 2, "Country", country, "visit"]);
@@ -44,16 +94,37 @@
         _paq.push(['setCustomDimension', 2, country]);
         _paq.push(['setCustomDimension', 3, sector]);
         _paq.push(['setCustomDimension', 4, tool]);
-        _paq.push(['setCustomDimension', 5, language]);   
+        _paq.push(['setCustomDimension', 5, language]);
 
+        // Queue or invoke (if tracking script is already loaded) the tracking request
+        _paq.push(["trackPageView"]);
+    }
+
+    function base_tracking_initialization() {
         // Main Matomo variables
-        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik.osha.europa.eu/piwik/";
-        _paq.push(["setTrackerUrl", u+"piwik.php"]);
-        _paq.push(["setSiteId", "11"]);
+        _paq.push(["enableLinkTracking"]);
+        _paq.push(["setDomains", tracking_domain]);
+        _paq.push(["setTrackerUrl", tracking_endpoint_url]);
+        _paq.push(["setSiteId", site_id]);
 
-        // Add the piwik.js script to the page
-        var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
-        g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
-    })();
+        // Create tracking script element
+        const tracking_script = document.createElement("script");
+        tracking_script.type="text/javascript";
+        tracking_script.defer=true;
+        tracking_script.async=true;
+        tracking_script.src= tracking_script_url;
+
+        // Add the tracking script to the page
+        const sibling = document.getElementsByTagName("script")[0];
+        sibling.parentNode.insertBefore(tracking_script, sibling);
+    }
+
+    // Initialize download buttons tracking
+    initialize_download_buttons();
+    // Compile tracking variables
+    await compile_tracking_variables();
+    // Initialize base tracking
+    base_tracking_initialization();
+}();
 </script>
-<!-- End Piwik Code -->
+<!-- End tracking code -->

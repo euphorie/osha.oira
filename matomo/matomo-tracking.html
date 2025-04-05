@@ -9,27 +9,15 @@
     */
     function initialize_download_buttons() {
         const download_button_selector = "a.pat-button.download";
-
-        // Delegated event handler to disable automatic download link tracking
-        // for the report download links.
-        // NOTE: This needs Matomo version 5+
+        // Delegated event handler to set the custom url befor automatic download tracking.
         document.addEventListener("mousedown", function(event) {
             const el = event.target.closest(download_button_selector);
             if (el) {
-                el.setAttribute('data-matomo-ignore', 'true');
+                const download_url = el.href.replace(/\+\+session\+\+.*\//, "");
+                // Set the custom URL before automatic tracking
+                _paq.push(['setCustomUrl', download_url]);
             }
         }, { capture: true });
-
-        // Manually trigger tracking with a cleaned-up URL which does not include the session.
-        document.addEventListener("click", function(event) {
-            const el = event.target.closest(download_button_selector);
-            if (el) {
-                // Remove the session ID from the URL
-                const download_url = el.href.replace(/\+\+session\+\+.*\//, "");
-                // Trigger tracking.
-                _paq.push(["trackEvent", "Download", "manual", download_url]);
-            }
-        });
     }
 
     // Initialize download buttons tracking

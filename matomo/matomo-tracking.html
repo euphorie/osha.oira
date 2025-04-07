@@ -2,7 +2,7 @@
 <script type="text/javascript">
 var _paq = _paq || [];
 
-async function() {
+(async function () {
     const hostname_production = "oira.osha.europa.eu";
     const hostname_staging = "test-oira.osha.europa.eu";
     const hostname_development = "localhost";
@@ -14,7 +14,7 @@ async function() {
             "http://localhost:8080/Plone/piwikmock.php" :
             "https://piwik.osha.europa.eu/piwik/piwik.php"
     );
-    const tacking_script_url = "https://piwik.osha.europa.eu/piwik/piwik.js";
+    const tracking_script_url = "https://piwik.osha.europa.eu/piwik/piwik.js";
     const tracking_domain = (mode_production ? "*.oira.osha.europa.eu" : "*.test-oira.osha.europa.eu") + "/oira-tools/";
     const site_id = mode_production ? "11" : "9";
 
@@ -141,6 +141,6 @@ async function() {
     });
 
 
-}();
+})();
 </script>
 <!-- End tracking code -->

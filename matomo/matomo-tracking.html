@@ -18,6 +18,13 @@ var _paq = _paq || [];
     const tracking_domain = (mode_production ? "*.oira.osha.europa.eu" : "*.test-oira.osha.europa.eu") + "/oira-tools/";
     const site_id = mode_production ? "11" : "9";
 
+    console.debug("mode_production", mode_production);
+    console.debug("mode_staging", mode_staging);
+    console.debug("mode_development", mode_development);
+    console.debug("tracking_endpoint_url", tracking_endpoint_url);
+    console.debug("tracking_domain", tracking_domain);
+    console.debug("site_id", site_id);
+
     let previous_url = location.href;
 
     /**

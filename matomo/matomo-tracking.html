@@ -43,6 +43,16 @@ var _paq = _paq || [];
 
     let previous_url = location.href;
 
+
+    /**
+     * Clean a URL by removing the session id.
+     */
+    function clean_url(url) {
+        // Remove the session id from the URL
+        const tracked_url = url.replace(/\+\+session\+\+.*\//, "");
+        return tracked_url;
+    }
+
     /**
      * Initialize download buttons tracking without the session id.
      * This uses delegated event handlers which also allows to track links
@@ -73,9 +83,8 @@ var _paq = _paq || [];
                 return;
             }
 
-            const tracked_url = el.href.replace(/\+\+session\+\+.*\//, "");
             // Trigger tracking.
-            _paq.push(["trackLink", tracked_url, link_type]);
+            _paq.push(["trackLink", clean_url(el.href), link_type]);
 
         }, { capture: true });
     }
@@ -133,7 +142,8 @@ var _paq = _paq || [];
         _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
 
         // Set the URL to be tracked
-        _paq.push(["setCustomUrl", location.href]);
+        _paq.push(["setCustomUrl", clean_url(window.location.href)]);
+        _paq.push(["setReferrerUrl", clean_url(document.referrer)]);
 
         /* retrieve custom variable content */
         const country = tracking_dimensions.country_name;

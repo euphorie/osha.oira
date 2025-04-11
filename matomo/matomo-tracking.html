@@ -62,8 +62,8 @@ var _paq = _paq || [];
         // We do our own link tracking.
         //_paq.push(["enableLinkTracking"]);
 
-        const download_button_selector = "a.pat-button.download";
-        // Delegated event handler to set the custom url befor automatic download tracking.
+        // Delegated event handler - this also tracks content which is injected
+        // after the initial page load.
         document.addEventListener("click", function(event) {
             const el = event.target.closest("a");
             if (!el) {

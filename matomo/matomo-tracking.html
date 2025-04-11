@@ -34,12 +34,12 @@ var _paq = _paq || [];
     ].join(", ");
     const outbound_url_selector = `a[href^="${window.location.origin}"]:not([href^="#"]):not([href^="."])`;
 
-    console.debug("mode_production", mode_production);
-    console.debug("mode_staging", mode_staging);
-    console.debug("mode_development", mode_development);
-    console.debug("tracking_endpoint_url", tracking_endpoint_url);
-    console.debug("tracking_domain", tracking_domain);
-    console.debug("site_id", site_id);
+    console.debug("Matomo: mode_production", mode_production);
+    console.debug("Matomo: mode_staging", mode_staging);
+    console.debug("Matomo: mode_development", mode_development);
+    console.debug("Matomo: tracking_endpoint_url", tracking_endpoint_url);
+    console.debug("Matomo: tracking_domain", tracking_domain);
+    console.debug("Matomo: site_id", site_id);
 
     let previous_url = location.href;
 
@@ -101,7 +101,6 @@ var _paq = _paq || [];
             if (url_elems.length >1) {
                 vars_url = vars_url + '?' + url_elems[1];
             }
-            console.log(vars_url);
 
             const response = await fetch(vars_url, {
                 headers: { "Accept": "application/json" },
@@ -111,22 +110,25 @@ var _paq = _paq || [];
             }
 
             const data = await response.json();
-            console.log("📌 Loaded Piwik Variables:", data);
+            console.debug("Matomo: 📌 Loaded Piwik Variables:", data);
             return data;
         } catch (error) {
-            console.error("❌ Error loading Piwik variables:", error);
+            console.error("Matomo: ❌ Error loading Piwik variables:", error);
             return null;
         }
     }
 
     async function compile_tracking_variables() {
+        console.debug("Matomo: Tracking triggered.");
+
+
         // Wait for JSON data before proceeding
         // TODO: ENABLE for scrum-3351
         //const tracking_dimensions = await load_tracking_dimensions();
         const tracking_dimensions = {};
 
         if (!tracking_dimensions) {
-            console.error("❌ No Piwik data loaded, skipping tracking.");
+            console.error("Matomo: ❌ No Piwik data loaded, skipping tracking.");
 
             // Fall back to tracking dimensions from the template.
             // TODO: this code can probably be removed when scrum-3351 is rolled-out.
@@ -136,7 +138,7 @@ var _paq = _paq || [];
             tracking_dimensions.language_code = document.getElementById('language_code').innerHTML;
             //return;
         }
-        console.log("✅ Matomo tracking initialized with custom variables.");
+        console.debug("Matomo: ✅ tracking initialized with custom variables.");
 
         // Custom variables
         _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
@@ -194,6 +196,7 @@ var _paq = _paq || [];
     document.addEventListener("patterns-injected-delayed", function() {
         // Track page injections with history changes.
         if (previous_url !== location.href) {
+            console.debug("Matomo: pat-inject triggered tracking.");
             // Only track if the URL has changed
             previous_url = location.href;
             // reload tracking variables after navigating without a page reload.

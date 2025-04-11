@@ -18,6 +18,22 @@ var _paq = _paq || [];
     const tracking_domain = (mode_production ? "*.oira.osha.europa.eu" : "*.test-oira.osha.europa.eu") + "/oira-tools/";
     const site_id = mode_production ? "11" : "9";
 
+    const download_url_selectors = [
+        "a.pat-button.download",
+        "[href='*@@pdf']",
+        "[href='*@@timeline']",
+        "[href='*.docx']",
+        "[href='*.xlsx']",
+        "[href='*.pptx']",
+        "[href='*.pdf']",
+        "[href='*.gif']",
+        "[href='*.jpeg']",
+        "[href='*.jpg']",
+        "[href='*.png']",
+        "[href='*.zip']",
+    ].join(", ");
+    const outbound_url_selector = `a[href^="${window.location.origin}"]:not([href^="#"]):not([href^="."])`;
+
     console.debug("mode_production", mode_production);
     console.debug("mode_staging", mode_staging);
     console.debug("mode_development", mode_development);
@@ -32,16 +48,35 @@ var _paq = _paq || [];
      * This uses delegated event handlers which also allows to track links
      * injected dynamically by JavaScript after this script was invoked.
     */
-    function initialize_download_buttons() {
+    function initialize_link_tracking() {
+        // We do our own link tracking.
+        //_paq.push(["enableLinkTracking"]);
+
         const download_button_selector = "a.pat-button.download";
         // Delegated event handler to set the custom url befor automatic download tracking.
-        document.addEventListener("mousedown", function(event) {
-            const el = event.target.closest(download_button_selector);
-            if (el) {
-                const download_url = el.href.replace(/\+\+session\+\+.*\//, "");
-                // Set the custom URL before automatic tracking
-                _paq.push(['setCustomUrl', download_url]);
+        document.addEventListener("click", function(event) {
+            const el = event.target.closest("a");
+            if (!el) {
+                // No link was clicked
+                return;
             }
+
+            let link_type;
+            if (el.matches(download_url_selectors)) {
+                // Download URL
+                link_type = "download";
+            } else if (el.matches(outbound_url_selector)) {
+                // Outbound URL
+                link_type = "link";
+            } else {
+                // Not a tracked link
+                return;
+            }
+
+            const tracked_url = el.href.replace(/\+\+session\+\+.*\//, "");
+            // Trigger tracking.
+            _paq.push(["trackLink", tracked_url, link_type]);
+
         }, { capture: true });
     }
 
@@ -123,7 +158,6 @@ var _paq = _paq || [];
 
     function base_tracking_initialization() {
         // Main Matomo variables
-        _paq.push(["enableLinkTracking"]);
         _paq.push(["setDomains", tracking_domain]);
         _paq.push(["setTrackerUrl", tracking_endpoint_url]);
         _paq.push(["setSiteId", site_id]);
@@ -141,13 +175,14 @@ var _paq = _paq || [];
     }
 
     // Initialize download buttons tracking
-    initialize_download_buttons();
+    initialize_link_tracking();
     // Compile tracking variables
     await compile_tracking_variables();
     // Initialize base tracking
     base_tracking_initialization();
 
     document.addEventListener("patterns-injected-delayed", function() {
+        // Track page injections with history changes.
         if (previous_url !== location.href) {
             // Only track if the URL has changed
             previous_url = location.href;

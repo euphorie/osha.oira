@@ -77,11 +77,20 @@ var _paq = _paq || [];
 
     async function compile_tracking_variables() {
         // Wait for JSON data before proceeding
-        const tracking_dimensions = await load_tracking_dimensions();
+        // TODO: ENABLE for scrum-3351
+        //const tracking_dimensions = await load_tracking_dimensions();
+        const tracking_dimensions = {};
 
         if (!tracking_dimensions) {
             console.error("❌ No Piwik data loaded, skipping tracking.");
-            return;
+
+            // Fall back to tracking dimensions from the template.
+            // TODO: this code can probably be removed when scrum-3351 is rolled-out.
+            tracking_dimensions.country_name = document.getElementById('country_name').innerHTML;
+            tracking_dimensions.sector_name = document.getElementById('sector_name').innerHTML;
+            tracking_dimensions.tool_name = document.getElementById('tool_name').innerHTML;
+            tracking_dimensions.language_code = document.getElementById('language_code').innerHTML;
+            //return;
         }
         console.log("✅ Matomo tracking initialized with custom variables.");
 
@@ -92,10 +101,10 @@ var _paq = _paq || [];
         _paq.push(["setCustomUrl", location.href]);
 
         /* retrieve custom variable content */
-        const country = tracking_dimensions['country_name'];
-        const sector = tracking_dimensions['sector_name'];
-        const tool = tracking_dimensions['tool_name'];
-        const language = tracking_dimensions['language_code'];
+        const country = tracking_dimensions.country_name;
+        const sector = tracking_dimensions.sector_name;
+        const tool = tracking_dimensions.tool_name;
+        const language = tracking_dimensions.language_code;
 
         _paq.push(["setCustomVariable", 1, "Activity", "3.1. Online interactive Risk Assessment (OiRA) tool", "visit"]);
         _paq.push(["setCustomVariable", 2, "Country", country, "visit"]);

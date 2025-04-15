@@ -1,6 +1,7 @@
 from euphorie.content.browser.country import EditForm as CountryEditForm
 from euphorie.content.browser.module import EditForm as ModuleEditForm
 from euphorie.content.browser.profilequestion import EditForm as ProfileQuestionEditForm
+from osha.oira import _
 from osha.oira.content.browser.risk import EditForm as RiskEditForm
 from osha.oira.content.browser.sector import EditForm as SectorEditForm
 from osha.oira.content.browser.solution import EditForm as SolutionEditForm
@@ -39,6 +40,8 @@ class SolutionQuaiveEditForm(QuaiveEditFormMixin, SolutionEditForm):
 
 class SurveyQuaiveEditForm(QuaiveEditFormMixin, SurveyEditForm):
     """Custom edit form designed to be embedded in Quaive"""
+
+    label = _("Configuration")
 
 
 class SurveyGroupQuaiveEditForm(QuaiveEditFormMixin, DefaultEditForm):

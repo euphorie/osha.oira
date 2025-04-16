@@ -7,6 +7,66 @@
   <include package=".z3cform" />
 
   <browser:page
+      name="quaive-layout"
+      for="*"
+      template="templates/quaive-layout.pt"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-view"
+      for="*"
+      class=".quaive_view.BaseQuaiveView"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-view"
+      for="euphorie.content.survey.ISurvey"
+      class="euphorie.content.browser.survey.SurveyView"
+      template="templates/survey_view.pt"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-view"
+      for="euphorie.content.module.IModule"
+      class="euphorie.content.browser.module.ModuleView"
+      template="templates/module_view.pt"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-view"
+      for="euphorie.content.risk.IRisk"
+      class=".quaive_view.QuaiveRiskView"
+      template="templates/risk_view.pt"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-view"
+      for="euphorie.content.solution.ISolution"
+      class="osha.oira.content.browser.solution.SolutionView"
+      template="templates/solution_view.pt"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
+      name="quaive-view"
+      for="euphorie.content.training_question.ITrainingQuestion"
+      template="templates/training_question_view.pt"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
       name="quaive-edit"
       for="euphorie.content.country.ICountry"
       class=".quaive_edit.CountryQuaiveEditForm"

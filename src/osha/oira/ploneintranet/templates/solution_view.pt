@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      metal:use-macro="context/@@quaive-layout/macros/layout"
+      i18n:domain="euphorie"
+>
+  <body>
+
+    <metal:define fill-slot="quaive-title">
+    </metal:define>
+
+    <metal:slot fill-slot="quaive-body">
+
+      <div class="pat-page-module type-planned-measures pat-well borderless open">
+        <div class="measures">
+          <div class="measure pat-collapsible open">
+            <h2 class="collapsible-open">${python: here.Description()}</h2>
+            <div class="panel-content">
+              <section class="pat-rich">
+                <tal:field condition="python: here.action">
+                  <h4>
+                    Description
+                  </h4>
+                  <pre class="pat-markdown">${python: here.action}</pre>
+                </tal:field>
+                <tal:field condition="python: here.requirements">
+                  <h4>
+                    Expertise
+                  </h4>
+                  <p>
+                    ${python: here.requirements}
+                  </p>
+                </tal:field>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </metal:slot>
+  </body>
+</html>

@@ -57,6 +57,10 @@ class NavigationService(Service):
             if key in node:
                 del node[key]
 
+        # Fix the solutions (AKA measure title) which is always `Measure`
+        if "@type" == "euphorie-solution" and node.get("description"):
+            node["title"] = node["description"]
+
         # Recurse into children
         if "items" in node:
             tree = [self.fix_node(child) for child in node["items"]]

@@ -11,6 +11,10 @@ Changelog
 - Modify the form survey version to update the tool title and obsolete field
   [ale-rt]
 
+- Add a new ``@search-with-version-description`` endpoint to search for
+  surveys and return the survey version description
+  instead of the survey group description.
+  [ale-rt]
 
 11.0.2 (2025-04-01)
 -------------------

@@ -47,7 +47,7 @@ jobs:
           bin/pip install -r "requirements-${{ matrix.config[1] }}.txt"
           bin/buildout -c .github-${{ matrix.config[1] }}.cfg
       - name: Pre commit
-        uses: pre-commit/action@v2.0.0
+        uses: pre-commit/action@v3.0.0
       - name: Test
         run: |
           bin/coverage run bin/test -s osha.oira

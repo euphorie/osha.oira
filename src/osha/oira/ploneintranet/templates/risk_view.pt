@@ -7,12 +7,15 @@
       metal:use-macro="context/@@quaive-layout/macros/layout"
       tal:define="
         tool_type_data python: view.tool_type_data;
+        show_existing_measures python: view.show_existing_measures;
       "
       i18n:domain="euphorie"
 >
   <tal:comment condition="python:False">
      This is the risk view template.
      It is used to display how a risk would be displayed in the client.
+
+     view: osha.oira.ploneintranet.quaive_view.QuaiveRiskView
 
      This template is inspired by euphorie.client.browser:templates/risk_identification.pt,
      which uses the macros:
@@ -31,6 +34,7 @@
 
         <fieldset class="measures-in-place pat-checklist"
                   id="action-plan-item-form"
+                  tal:condition="python:show_existing_measures"
         >
           <tal:comment condition="python:False">
               This has no equivalent in any place, just in proto.
@@ -169,6 +173,7 @@
                   open-trigger: .expand-all-sections;
                   close-trigger: .collapse-all-sections;
                "
+             tal:condition="python: not show_existing_measures"
         >
 
           <h2 class="well-header collapsible-open"

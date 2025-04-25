@@ -67,6 +67,14 @@
       />
 
   <browser:page
+      name="quaive-view"
+      for="euphorie.content.profilequestion.IProfileQuestion"
+      template="templates/profile_question_view.pt"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
       name="quaive-edit"
       for="euphorie.content.country.ICountry"
       class=".quaive_edit.CountryQuaiveEditForm"

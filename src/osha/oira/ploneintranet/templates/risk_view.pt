@@ -114,7 +114,9 @@
                        tal:condition="here/show_notapplicable|nothing"
                 >
                   <input checked="${python:'checked' if context.scaled_answer=='n/a' else None}"
-                         name="sMeasuresn/a"
+                         name="scaled_answer"
+                         type="radio"
+                         value="n/a"
                   />
                   <tal:answer replace="structure view/answer_na" />
                 </label>
@@ -214,33 +216,10 @@
           </div>
         </div>
 
-        <div class="risk-module pat-well notice pat-depends vertical evaluation"
-             id="evaluation"
-             data-pat-depends="condition: answer=no; transition: slide"
-        >
-          <p class="problem-description"><strong>${here/title}</strong></p>
-          <fieldset class="pat-checklist radio"
-                    disabled="disabled"
-          >
-            <p i18n:translate="header_risk_priority">Select the priority of this risk</p>
-            <label><input checked="checked"
-                     name="priority"
-                     type="radio"
-                     value="low"
-              />
-              <tal:span i18n:translate="priority_low">Low</tal:span></label>
-            <label><input name="priority"
-                     type="radio"
-                     value="medium"
-              />
-              <tal:span i18n:translate="priority_medium">Medium</tal:span></label>
-            <label><input name="priority"
-                     type="radio"
-                     value="high"
-              />
-              <tal:span i18n:translate="priority_high">High</tal:span></label>
-          </fieldset>
-        </div>
+        <tal:comment condition="python:False">
+          We had a conditional section for showing evaluation when additional measures were needed.
+          But we choose not to show this.
+        </tal:comment>
 
         <div class="pat-page-module type-information pat-well pat-collapsible borderless open"
              id="${python: here.getId()}-information"

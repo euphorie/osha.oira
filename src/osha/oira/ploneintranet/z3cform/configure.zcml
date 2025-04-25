@@ -123,16 +123,16 @@
       template="templates/wysiwyg_input.pt"
       layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
       mode="input"
-      zcml:condition="not-installed plonetheme.nuplone.z3cform.widget.IWysiwygWidget"
+      zcml:condition="not-installed plonetheme.nuplone.z3cform.wysiwyg"
       />
 
   <z3c:widgetTemplate
       view="..interfaces.IQuaiveForm"
-      widget="plonetheme.nuplone.z3cform.widget.IWysiwygWidget"
+      widget="plonetheme.nuplone.z3cform.wysiwyg.IWysiwygWidget"
       template="templates/wysiwyg_input.pt"
       layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
       mode="input"
-      zcml:condition="installed plonetheme.nuplone.z3cform.widget.IWysiwygWidget"
+      zcml:condition="installed plonetheme.nuplone.z3cform.wysiwyg"
       />
 
   <z3c:widgetTemplate

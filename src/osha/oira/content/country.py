@@ -20,7 +20,7 @@ except ImportError:
 
 
 try:
-    from plonetheme.nuplone.z3cform.widget import WysiwygFieldWidget
+    from plonetheme.nuplone.z3cform.wysiwyg import WysiwygFieldWidget
 except ImportError:
     from plone.app.z3cform.wysiwyg import WysiwygFieldWidget
 

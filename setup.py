@@ -41,7 +41,7 @@ setup(
         "Euphorie >=14.0.0",
         "ftw.upgrade",
         "mobile.sniffer",
-        "NuPlone >=2.1.0",
+        "NuPlone >= 4.0.1",
         "pas.plugins.ldap",
         "Pillow",
         "plone.api",

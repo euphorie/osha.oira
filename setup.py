@@ -5,7 +5,7 @@ import monkeypatch_setup  # noqa: F401
 import os
 
 
-version = "11.0.3.dev0"
+version = "12.0.0.dev0"
 
 setup(
     name="osha.oira",
@@ -18,12 +18,12 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 6.0",
         "Framework :: Plone :: 6.1",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],

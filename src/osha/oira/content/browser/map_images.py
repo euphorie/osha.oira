@@ -1,5 +1,4 @@
 from lxml import etree
-from pathlib import posixpath
 from plone import api
 from plone.namedfile.file import NamedBlobImage
 from plone.protect.interfaces import IDisableCSRFProtection
@@ -9,6 +8,7 @@ from urllib.parse import urlparse
 from zope.interface import alsoProvides
 
 import logging
+import os
 import requests
 import sys
 import urllib.request
@@ -27,9 +27,9 @@ class MapImages(BrowserView):
         BASE_URL = "https://oira.osha.europa.eu"
 
         if len(sys.argv) > 3:
-            images_path = posixpath.abspath(sys.argv[3])
+            images_path = os.path.abspath(sys.argv[3])
         else:
-            images_path = posixpath.abspath(".")
+            images_path = os.path.abspath(".")
 
         portal = api.portal.get()
         sectors = portal.sectors
@@ -87,9 +87,9 @@ class MapImages(BrowserView):
                     log.warning(f"No image for {path}")
                     continue
                 filename = get_filename()
-                filepath = posixpath.join(images_path, filename)
+                filepath = os.path.join(images_path, filename)
                 blob_image = None
-                if not posixpath.exists(filepath):
+                if not os.path.exists(filepath):
                     log.warning(
                         "{}: Image file not found: {} ({}). Attempting download".format(
                             path, filepath, img.attrib["src"]

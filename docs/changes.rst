@@ -1,8 +1,11 @@
 Changelog
 =========
 
-11.0.3 (unreleased)
+12.0.0 (unreleased)
 -------------------
+
+- Only test and support Plone 6.1 and Python 3.11+.
+  [ale-rt]
 
 - Directly use the WYSIWYG widget from plonetheme.nuplone 4.0.1.
   Ref: scrum-3433.

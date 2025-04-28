@@ -3,6 +3,7 @@ from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
 from plonetheme.nuplone.z3cform.directives import depends
+from plonetheme.nuplone.z3cform.widget import WysiwygFieldWidget
 from zope import schema
 from zope.interface import alsoProvides
 from zope.interface import Invalid
@@ -17,12 +18,6 @@ except ImportError:
     # On those versions it needs a merge and release of this PR:
     # https://github.com/syslabcom/htmllaundry/pull/2
     from htmllaundry.z3cform import HtmlText
-
-
-try:
-    from plonetheme.nuplone.z3cform.widget import WysiwygFieldWidget
-except ImportError:
-    from plone.app.z3cform.wysiwyg import WysiwygFieldWidget
 
 
 class IOSHACountry(model.Schema):

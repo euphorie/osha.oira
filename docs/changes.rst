@@ -4,6 +4,10 @@ Changelog
 11.0.3 (unreleased)
 -------------------
 
+- Directly use the WYSIWYG widget from plonetheme.nuplone 4.0.1.
+  Ref: scrum-3433.
+  [thet]
+
 - Remove the polyfills-loader.js script. Loading the few polyfills we need in
   Patternslib is done by Patternslib itself.
   [thet]

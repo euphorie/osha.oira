@@ -156,14 +156,6 @@
       mode="input"
       />
 
-  <z3c:widgetTemplate
-      view="..interfaces.IQuaiveForm"
-      widget="euphorie.content.widgets.logo.LogoWidget"
-      template="templates/logo.pt"
-      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
-      mode="input"
-      />
-
   <browser:page
       name="quaive_form_macros"
       for="*"

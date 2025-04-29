@@ -15,8 +15,7 @@
       ${view/label}
     </legend>
     <div class="pat-checklist">
-      <label class="pat-toggle-switch"
-             tal:repeat="item view/items"
+      <label tal:repeat="item view/items"
       >
         <tal:if condition="item/label">
             ${item/label}

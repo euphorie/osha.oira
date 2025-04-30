@@ -1,7 +1,7 @@
 Changelog
 =========
 
-12.0.0 (unreleased)
+12.0.0 (2025-04-30)
 -------------------
 
 - Only test and support Plone 6.1 and Python 3.11+.

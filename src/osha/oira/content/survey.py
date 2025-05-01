@@ -1,8 +1,10 @@
 from .. import _
 from euphorie.content import survey
+from euphorie.content.utils import StripMarkup
 from plone.app.dexterity.behaviors.metadata import DCFieldProperty
 from plone.app.dexterity.behaviors.metadata import MetadataBase
 from plone.autoform.interfaces import IFormFieldProvider
+from plone.indexer import indexer
 from plone.namedfile import field as filefield
 from plone.supermodel import model
 from plonetheme.nuplone.z3cform.directives import depends
@@ -175,3 +177,20 @@ class OSHASurvey(MetadataBase):
     description_probability = DCFieldProperty(IOSHASurvey["description_probability"])
     description_frequency = DCFieldProperty(IOSHASurvey["description_frequency"])
     description_severity = DCFieldProperty(IOSHASurvey["description_severity"])
+
+
+@indexer(survey.ISurvey)
+def SearchableTextIndexer(obj):
+    return " ".join(
+        [
+            obj.title,
+            StripMarkup(obj.description),
+            StripMarkup(obj.introduction),
+            obj.classification_code or "",
+            obj.tool_notification_title or "",
+            StripMarkup(obj.tool_notification_message),
+            obj.description_probability or "",
+            obj.description_frequency or "",
+            obj.description_severity or "",
+        ]
+    )

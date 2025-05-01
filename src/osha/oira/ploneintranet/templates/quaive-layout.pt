@@ -15,6 +15,7 @@
                    tal:define="
                      can_edit python:tools.checkPermission('Modify portal content');
                      can_add python:tools.checkPermission('Add portal content');
+                     path python:'/'.join(context.getPhysicalPath()[3:]);
                    "
     >
 
@@ -40,7 +41,6 @@
                    data-pat-tooltip="
                         source: ajax;
                         position-list: tr;"
-                   tal:condition="XXX|nothing"
                 >
                     More&hellip;
                 </a>
@@ -51,71 +51,43 @@
                          href="#"
                       >Move</a>
                     </li>
-                    <li tal:condition="XXX|nothing">
+                    <li>
                       <a class="pat-inject icon-updown-circle close-panel"
-                         href="/apps/assessments/panel-reorder-items"
-                         tabindex="0"
+                         href="${reorder_panel_url}"
                          data-pat-inject="
-                            source: #pat-modal-panel-space;
-                            target: #pat-modal-panel-space;
-                            url: /apps/assessments/panel-reorder-items;"
-                      >Reorder
-                        items</a>
+                          source: #pat-modal-panel-space;
+                          target: #pat-modal-panel-space;
+                          url: ${reorder_panel_url};"
+                         tal:define="
+                           reorder_panel_url string:OIRA_CREATOR_APP_URL/@@app-assessments-reorder-tool-items/${path};
+                         "
+                         i18n:translate=""
+                      >Reorder items</a>
                     </li>
-                    <li tal:condition="XXX|nothing">
+                    <li>
                       <a class="pat-inject icon-trash close-panel"
-                         href="/apps/assessments/panel-delete-module"
+                         href="${delete_panel_url}"
                          tabindex="0"
                          data-pat-inject="
                             source: #pat-modal-panel-space;
                             target: #pat-modal-panel-space;
-                            url: /apps/assessments/panel-delete-module;"
-                      >Delete
-                        module</a>
+                            url: ${delete_panel_url};"
+                         tal:define="
+                           delete_panel_url string:OIRA_CREATOR_APP_URL/@@app-assessments-delete-item/${path};
+                         "
+                         i18n:translate=""
+                      >Delete</a>
                     </li>
                   </ul>
                 </template>
                 <a class="icon create pat-tooltip tooltip-inactive"
                    aria-expanded="false"
-                   href="#module-risk-create-menu"
+                   href="OIRA_CREATOR_APP_URL/@@app-assessment-add-menu/${path}#main-new-menu-assessments"
                    data-pat-tooltip="
                         source: ajax;
                         class: toolbar-menu;
                         position-list: tl"
                 ></a>
-                <template id="module-risk-create-menu">
-                  <ul class="menu">
-                    <li>
-                      <a class="icon-cubes pat-inject"
-                         href="/apps/assessments/new-module.html"
-                         data-pat-inject="
-                                    history: record;
-                                    scroll: top"
-                      >New
-                        submodule</a>
-                    </li>
-                    <li>
-                      <a class="icon-attention pat-inject"
-                         href="/apps/assessments/new-risk.html"
-                         data-pat-inject="
-                                    history: record;
-                                    scroll: top"
-                      >New
-                        risk</a>
-                    </li>
-                    <li>
-                      <a class="icon-import pat-modal"
-                         href="/apps/assessments/panel-insert-from-tool.html"
-                         data-pat-inject="
-                                    source: #application-body-assessments;
-                                    target: #application-body-assessments;
-                                    history: record;
-                                    scroll: top"
-                      >Insert
-                        from other tool</a>
-                    </li>
-                  </ul>
-                </template>
                 <a class="default pat-button edit pat-inject"
                    href="OIRA_CREATOR_APP_URL/@@oira-edit/${python:'/'.join(context.getPhysicalPath()[3:])}"
                    tal:condition="can_edit"

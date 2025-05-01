@@ -23,6 +23,10 @@ Changelog
   instead of the survey group description.
   [ale-rt]
 
+- Add all text fields the to SearchableText to improve search results
+  [cillianderoiste]
+
+
 11.0.2 (2025-04-01)
 -------------------
 

@@ -1,6 +1,6 @@
-from plone.indexer import indexer
 from euphorie.content.profilequestion import IProfileQuestion
 from euphorie.content.utils import StripMarkup
+from plone.indexer import indexer
 
 
 @indexer(IProfileQuestion)

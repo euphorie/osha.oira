@@ -1,5 +1,5 @@
-from plone.indexer import indexer
 from euphorie.content.training_question import ITrainingQuestion
+from plone.indexer import indexer
 
 
 @indexer(ITrainingQuestion)

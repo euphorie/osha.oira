@@ -1,0 +1,26 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  xmlns:browser="http://namespaces.zope.org/browser">
+
+  <adapter
+      factory=".risk.SearchableTextIndexer"
+      name="SearchableText"
+      />
+
+  <adapter
+      factory=".module.SearchableTextIndexer"
+      name="SearchableText"
+      />
+
+  <adapter
+      factory=".profilequestion.SearchableTextIndexer"
+      name="SearchableText"
+      />
+
+  <adapter
+      factory=".survey.SearchableTextIndexer"
+      name="SearchableText"
+      />
+
+</configure>

@@ -31,6 +31,8 @@ Changelog
   instead of the survey group description.
   [ale-rt]
 
+- Add all text fields the to SearchableText to improve search results
+  [cillianderoiste]
 - #3453: Add @@survey-publication-count to list the number of times
   each Surey has been published.
   [cillianderoiste]

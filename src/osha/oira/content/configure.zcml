@@ -45,4 +45,9 @@
         />
   </configure>
 
+  <adapter
+      factory=".training_question.SearchableTextIndexer"
+      name="SearchableText"
+      />
+
 </configure>

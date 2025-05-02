@@ -4,7 +4,9 @@ Changelog
 12.0.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Implement content toolbar in quaive-view.
+  Ref: scrum-3129.
+  [maurits]
 
 
 12.0.0 (2025-04-30)

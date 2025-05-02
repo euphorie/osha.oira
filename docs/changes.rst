@@ -1,7 +1,15 @@
 Changelog
 =========
 
-12.0.0 (unreleased)
+12.0.1 (unreleased)
+-------------------
+
+- Implement content toolbar in quaive-view.
+  Ref: scrum-3129.
+  [maurits]
+
+
+12.0.0 (2025-04-30)
 -------------------
 
 - Only test and support Plone 6.1 and Python 3.11+.
@@ -25,7 +33,9 @@ Changelog
 
 - Add all text fields the to SearchableText to improve search results
   [cillianderoiste]
-
+- #3453: Add @@survey-publication-count to list the number of times
+  each Surey has been published.
+  [cillianderoiste]
 
 11.0.2 (2025-04-01)
 -------------------

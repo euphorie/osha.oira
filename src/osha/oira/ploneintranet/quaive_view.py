@@ -5,15 +5,41 @@ from euphorie.content.utils import IToolTypesInfo
 from euphorie.content.utils import ToolTypesInfo
 from logging import getLogger
 from plone import api
+from plone.base.utils import base_hasattr
+from plone.dexterity.interfaces import IDexterityFTI
 from plone.memoize.view import memoize
 from plone.memoize.view import memoize_contextless
 from plone.supermodel.model import SchemaClass
 from Products.Five import BrowserView
 from zope.component import getUtility
+from zope.component import queryUtility
 from zope.interface import providedBy
 
 
 logger = getLogger(__name__)
+
+
+class QuaiveHelpers(BrowserView):
+
+    @property
+    @memoize
+    def allowed_content_types(self):
+        """Which content types are addable on the context?
+
+        Main use case: check if at least one content type can be added.
+        Otherwise there is no need to show an Add menu.
+        """
+        fti = queryUtility(IDexterityFTI, name=self.context.portal_type)
+        if fti is None:
+            return []
+        return fti.allowed_content_types
+
+    @property
+    @memoize
+    def has_contents(self):
+        if not base_hasattr(self.context, "contentIds"):
+            return False
+        return bool(self.context.contentIds())
 
 
 class BaseQuaiveView(BrowserView):

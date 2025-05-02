@@ -31,6 +31,10 @@ Changelog
   instead of the survey group description.
   [ale-rt]
 
+- #3453: Add @@survey-publication-count to list the number of times
+  each Surey has been published.
+  [cillianderoiste]
+
 11.0.2 (2025-04-01)
 -------------------
 

@@ -1,11 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       tal:define="
-        is_secondary python: 'secondary' in view.klass.split();
+        is_primary python: set(view.klass.split()).intersection({'btn-primary'});
+        is_secondary python: not is_primary and set(view.klass.split()).intersection({'secondary', 'btn-secondary'});
       "
       tal:omit-tag=""
 >
-  <button class="pat-button ${python: 'icon-ok-circle default' if not is_secondary else 'icon-cancel-circle'}"
+  <button class="pat-button ${python: 'icon-ok-circle default' if not is_secondary else 'icon-cancel-circle'} ${view/klass}"
           id="${view/id}"
           formnovalidate="${python: 'formnovalidate' if is_secondary else None}"
           name="${view/name}"

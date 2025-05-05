@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
+
+  <plone:behavior
+      name="euphorie.related_images"
+      title="Related images behavior"
+      description="Adds fields to manage related images"
+      provides=".related_images.IRelatedImagesBehavior"
+      />
+
+</configure>

@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    >
+
+  <z3c:widgetTemplate
+      field="osha.oira.behaviors.related_images.IRelatedImagesField"
+      widget="z3c.form.interfaces.IMultiWidget"
+      template="templates/related_images_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
+</configure>

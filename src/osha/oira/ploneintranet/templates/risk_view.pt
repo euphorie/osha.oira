@@ -246,64 +246,18 @@
 
             <div class="risk-illustrations pat-gallery"
                  tal:define="
-                   images here/@@images;
+                   information_images view/information_images;
                  "
-                 tal:condition="python: here.image or here.image2 or here.image3 or here.image4"
+                 tal:condition="python: information_images"
             >
-
               <figure class="illustration"
-                      tal:define="
-                        large python:images.scale('image', scale='training', direction='thumbnail');
-                      "
-                      tal:condition="large"
+                      tal:repeat="information_image information_images"
               >
-                <a href="${large/url|nothing}"
-                   title="${here/caption|nothing}"
+                <a href="${information_image/url}"
+                   title="${information_image/title}"
                 >
                   <img alt=""
-                       src="${large/url|nothing}"
-                  />
-                </a>
-              </figure>
-              <figure class="illustration"
-                      tal:define="
-                        large python:images.scale('image2', scale='training', direction='thumbnail');
-                      "
-                      tal:condition="large"
-              >
-                <a href="${large/url|nothing}"
-                   title="${here/caption|nothing}"
-                >
-                  <img alt=""
-                       src="${large/url|nothing}"
-                  />
-                </a>
-              </figure>
-              <figure class="illustration"
-                      tal:define="
-                        large python:images.scale('image3', scale='training', direction='thumbnail');
-                      "
-                      tal:condition="large"
-              >
-                <a href="${large/url|nothing}"
-                   title="${here/caption|nothing}"
-                >
-                  <img alt=""
-                       src="${large/url|nothing}"
-                  />
-                </a>
-              </figure>
-              <figure class="illustration"
-                      tal:define="
-                        large python:images.scale('image4', scale='training', direction='thumbnail');
-                      "
-                      tal:condition="large"
-              >
-                <a href="${large/url|nothing}"
-                   title="${here/caption|nothing}"
-                >
-                  <img alt=""
-                       src="${large/url|nothing}"
+                       src="${information_image/url}"
                   />
                 </a>
               </figure>

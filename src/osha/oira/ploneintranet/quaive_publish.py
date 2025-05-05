@@ -1,3 +1,4 @@
+from euphorie.client.browser.publish import PreviewSurvey
 from euphorie.client.browser.publish import PublishSurvey
 from osha.oira.ploneintranet.quaive_mixin import QuaiveEditFormMixin
 
@@ -51,4 +52,12 @@ class PublishSurveyQuaiveForm(QuaiveEditFormMixin, PublishSurvey):
     I think this should change the review state of the previous survey to
     'draft' though.  Or really of all sibling surveys (tool versions).
     But that may be too drastic.
+    """
+
+
+class PreviewSurveyQuaiveForm(QuaiveEditFormMixin, PreviewSurvey):
+    """Page for previewing a survey, designed to be embedded in Quaive.
+
+    The messages in the template are copied from
+    'euphorie.client.browser.templates.preview.pt'.
     """

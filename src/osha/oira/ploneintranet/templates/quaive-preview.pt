@@ -1,0 +1,13 @@
+<div id="quaive-content"
+     i18n:domain="euphorie"
+>
+  <p i18n:translate="intro_preview">Are you sure you want to create a preview of this OiRA Tool? You
+    can give the URL for the preview to others so they can test the OiRA Tool.
+    To access the preview a standard OiRA client login is required.
+  </p>
+
+  <p i18n:translate="help_preview_url">The preview will be available at
+    <strong i18n:name="url">${view/preview_url}</strong>.</p>
+
+  <span tal:replace="structure context/@@authenticator/authenticator"></span>
+</div>

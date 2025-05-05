@@ -92,6 +92,7 @@
                 ></a>
                 <a class="default pat-button edit pat-inject"
                    href="OIRA_CREATOR_APP_URL/@@oira-edit/${python:'/'.join(context.getPhysicalPath()[3:])}"
+                   data-pat-inject="history: record"
                    tal:condition="can_edit"
                 >
                   Edit</a>

@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:omit-tag=""
+      i18n:domain="euphorie"
+>
+
+  <p class="pat-message info"
+     i18n:translate=""
+  >
+    ${view/label}
+  </p>
+
+  <fieldset class="vertical gallery-images has-value"
+            id="gallery-images-assessments"
+  >
+    <input class="sortable-amount"
+           name="pat-sortable-amount"
+           type="hidden"
+           value="1"
+    />
+
+    <ol class="pat-sortable pat-sortable-blocks images"
+        data-pat-sortable="selector: .gallery-item"
+    >
+
+      <li class="sortable-item gallery-item"
+          tal:repeat="related_image view/widgets"
+      >
+        <div class="sortable-item-fields field-cluster layout-image-caption">
+          <tal:replace replace="structure python: view.get_image_tag(repeat.related_image.index)" />
+          <input name="${python: related_image.widgets['image'].name}"
+                 type="hidden"
+                 value="${python: related_image.widgets['image'].value}"
+          />
+          <input name="${python: related_image.name}-empty-marker"
+                 type="hidden"
+                 value="1"
+          />
+          <input name="${python: view.name}-position"
+                 type="hidden"
+                 value="${python: repeat.related_image.index}"
+          />
+          <label>
+            <tal:i18n i18n:translate="">Caption</tal:i18n>
+            <textarea name="${python: related_image.widgets['caption'].name}"
+                      placeholder="${python: related_image.widgets['caption'].field.description}"
+            >${python: related_image.widgets['caption'].value}</textarea>
+          </label>
+        </div>
+        <!-- <pat-sortable-panel-button-cluster> -->
+        <span class="button-cluster">
+          <button class="sortable-button-up small pat-button"
+                  name="up"
+                  tabindex="0"
+                  type="submit"
+                  value="up"
+          >Up</button>
+          <button class="sortable-button-down small pat-button"
+                  name="item_1_down"
+                  tabindex="0"
+                  type="submit"
+                  value="item_1_down"
+          >down</button>
+        </span>
+
+        <button class="remove-clone"
+                tabindex="0"
+                type="button"
+        >Remove</button>
+
+      </li>
+
+    </ol>
+
+    <input tal:replace="structure view/counterMarker" />
+
+    <div class="pat-button-bar">
+      <a class="icon-plus pat-button pat-modal"
+         href="${python: view.context.absolute_url()}/@@panel-select-image-image-bank#document-content"
+         data-pat-modal="class: large panel image-picker application-news"
+         i18n:translate="label_select_from_image_bank"
+      >
+        Select from Image bank
+      </a>
+    </div>
+  </fieldset>
+</html>

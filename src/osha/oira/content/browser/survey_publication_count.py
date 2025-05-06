@@ -18,7 +18,7 @@ def get_survey_details():
         review_history = wft.getInfoFor(survey, "review_history")
         count = 0
         for entry in review_history:
-            if entry["action"] == "publish":
+            if entry["action"] in ["publish", "update"]:
                 count += 1
         if count:
             split_path = brain.getPath().split("/")

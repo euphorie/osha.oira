@@ -1,0 +1,1 @@
+@@survey-publication-count: when counting the number of times a Survey has been republished, include the "update" action along with "publish".

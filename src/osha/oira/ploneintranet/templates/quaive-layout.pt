@@ -15,7 +15,7 @@
                    tal:define="
                      can_edit python:tools.checkPermission('Modify portal content');
                      helpers nocall:context/@@quaive-helpers;
-                     can_add python:tools.checkPermission('Add portal content') and helpers.allowed_content_types;
+                     can_add python:helpers.can_add;
                      path python:'/'.join(context.getPhysicalPath()[3:]);
                    "
     >

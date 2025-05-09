@@ -5,39 +5,69 @@ from euphorie.content.utils import IToolTypesInfo
 from euphorie.content.utils import ToolTypesInfo
 from logging import getLogger
 from plone import api
-from plone.base.utils import base_hasattr
-from plone.dexterity.interfaces import IDexterityFTI
 from plone.memoize.view import memoize
 from plone.memoize.view import memoize_contextless
 from plone.supermodel.model import SchemaClass
+from Products.CMFCore.permissions import AddPortalContent
 from Products.Five import BrowserView
 from zope.component import getUtility
-from zope.component import queryUtility
 from zope.interface import providedBy
 
 
 logger = getLogger(__name__)
+
+try:
+    # This imports a private function, so let's catch an ImportError.
+    from plone.app.content.browser.folderfactories import _allowedTypes
+except ImportError:
+    logger.warning(
+        "Import of private function failed: "
+        "plone.app.content.browser.folderfactories._allowedTypes"
+    )
+    _allowedTypes = None
 
 
 class QuaiveHelpers(BrowserView):
 
     @property
     @memoize
-    def allowed_content_types(self):
-        """Which content types are addable on the context?
+    def can_add(self):
+        """Can the user add content here?
 
-        Main use case: check if at least one content type can be added.
+        The user must have the 'Add portal content' permission.
+        And at least one content type must be addable on the context.
         Otherwise there is no need to show an Add menu.
+
+        The code for checking if types can be added, is adapted from
+        the plone_contentmenu_factory in plone.app.contentmenu.
         """
-        fti = queryUtility(IDexterityFTI, name=self.context.portal_type)
-        if fti is None:
-            return []
-        return fti.allowed_content_types
+        context = self.context
+        if not api.user.has_permission(AddPortalContent, obj=context):
+            return False
+        # First check if we are folderish, otherwise
+        # context.allowedContentTypes will be inherited from our parent.
+        context_state = api.content.get_view(
+            "plone_context_state",
+            context,
+            self.request,
+        )
+        if not context_state.is_structural_folder():
+            return False
+        if _allowedTypes is None:
+            return bool(context.allowedContentTypes())
+        # This does the same as the previous line, except that it is
+        # cached on the request.
+        return bool(_allowedTypes(self.request, context))
 
     @property
     @memoize
     def has_contents(self):
-        if not base_hasattr(self.context, "contentIds"):
+        context_state = api.content.get_view(
+            "plone_context_state",
+            self.context,
+            self.request,
+        )
+        if not context_state.is_structural_folder():
             return False
         return bool(self.context.contentIds())
 

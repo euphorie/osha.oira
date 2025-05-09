@@ -276,4 +276,14 @@
       permission="cmf.ManagePortal"
       />
 
+
+  <browser:page
+      name="context-search"
+      for="*"
+      class=".search.OshaContextSearch"
+      template="templates/context_search.pt"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
 </configure>

@@ -174,6 +174,15 @@
       />
 
   <browser:page
+      name="quaive-preview"
+      for="euphorie.content.survey.ISurvey"
+      class="osha.oira.ploneintranet.quaive_publish.PreviewSurveyQuaiveForm"
+      template="templates/quaive-preview.pt"
+      permission="euphorie.client.PublishSurvey"
+      layer="plonetheme.nuplone.skin.interfaces.NuPloneSkin"
+      />
+
+  <browser:page
       name="quaive-create-euphorie.sector"
       for="*"
       class=".quaive_create.QuaiveCreateEuphorieSectorView"

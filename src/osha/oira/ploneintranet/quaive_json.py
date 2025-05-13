@@ -37,10 +37,12 @@ class SurveyLinks(BrowserView):
             yield {
                 "title": obj.Title(),
                 "url": obj.absolute_url(),
-                "path": ".".join(
+                "path": "/".join(
                     obj.getPhysicalPath()[len(self.context.getPhysicalPath()) :]
                 ),
-                "links": {index: url for index, url in enumerate(links)},
+                # store the url in a nested dicationary, because we will later
+                # want to augment that dictionary with status information
+                "links": {index: {"url": url} for index, url in enumerate(links)},
             }
         if hasattr(obj, "objectIds"):
             # reimplement objectValues() with deterministic sort order of sections

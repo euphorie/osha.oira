@@ -15,6 +15,14 @@
       />
 
   <browser:page
+      name="quaive-helpers"
+      for="*"
+      class=".quaive_view.QuaiveHelpers"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
       name="quaive-view"
       for="*"
       class=".quaive_view.BaseQuaiveView"

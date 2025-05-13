@@ -11,7 +11,7 @@
       "
       i18n:domain="nuplone"
 >
-  <fieldset class="group ${dependencies/ploneintranet_classes}"
+  <fieldset class="group pat-form-field-image ${dependencies/ploneintranet_classes}"
             data-pat-depends="${dependencies/data_pat_depends}"
   >
     <legend>${view/label}</legend>
@@ -24,16 +24,18 @@
            type="file"
     />
     <tal:has-image condition="view/allow_nochange">
-      <img class="floatAfter"
-           alt=""
-           src="${scale/url}"
-           width="${scale/width}"
-           tal:define="
-             images context/@@images;
-             scale python:images.scale(view.field.getName(), height=64, width=64, direction='thumbnail');
-           "
-           tal:condition="scale"
-      />
+      <figure class="pat-image" style="margin-top: 1em; margin-bottom: 0.5em;">
+        <picture class="pat-picture">
+          <img src="${scale/url}"
+              alt=""
+              tal:define="
+                images context/@@images;
+                scale python:images.scale(view.field.getName(), direction='2col');
+              "
+              tal:condition="scale"
+          />
+        </picture>
+      </figure>
       <label class="pat-checklist">
         <input name="${view/name}.action"
                type="checkbox"

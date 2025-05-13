@@ -10,6 +10,10 @@ Changelog
 12.0.0 (2025-04-30)
 -------------------
 
+- Remove the custom logo widget for ploneintranet.
+  Improve the default image widget.
+  [ale-rt]
+
 - Only test and support Plone 6.1 and Python 3.11+.
   [ale-rt]
 

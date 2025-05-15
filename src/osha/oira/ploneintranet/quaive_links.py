@@ -4,6 +4,7 @@ from Products.Five import BrowserView
 import json
 import re
 
+
 class SurveyLinks(BrowserView):
     attributes_checked = [
         "description",
@@ -21,8 +22,9 @@ class SurveyLinks(BrowserView):
     )
 
     def extract_links(self, obj):
-        """For the survey and each subobject in its content tree, list external hyperlinks
-        if it has them. Take care to return a datastructure with a deterministic sort order.
+        """For the survey and each subobject in its content tree, list external
+        hyperlinks if it has them. Take care to return a datastructure with a
+        deterministic sort order.
         """
         links = []
         for attrib in self.attributes_checked:
@@ -55,4 +57,3 @@ class SurveyLinks(BrowserView):
 
     def __call__(self):
         return json.dumps(self.sections)
-

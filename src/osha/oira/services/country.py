@@ -11,7 +11,7 @@ class Tools(Service):
         country = self.context.getId()
         for sector in ctv.sectors:
             groups = []
-            sector_path = "/".join([country, sector["id"]])
+            sector_path = f"{country}/{sector['id']}"
             for group in ctv.get_tools(sector["id"]):
                 group_path = "/".join([sector_path, group["id"]])
                 surveys = []

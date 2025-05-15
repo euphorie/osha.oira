@@ -43,7 +43,7 @@
       method="GET"
       factory=".country.Tools"
       permission="zope2.View"
-      for="*"
+      for="euphorie.content.country.ICountry"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       name="@country-tools"
       />

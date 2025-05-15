@@ -21,7 +21,7 @@
           <tr>
             <th tal:repeat="fieldname fieldnames" tal:content="fieldname"/>
           </tr>
-          <tr tal:repeat="row view/get_survey_details">
+          <tr tal:repeat="row view/survey_details">
             <td tal:repeat="value python:row[col] for col in fieldnames" tal:content="value"/>
           </tr>
         </table>

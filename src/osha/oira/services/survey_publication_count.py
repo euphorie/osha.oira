@@ -9,8 +9,7 @@ class SurveyPublicationCountService(Service):
         view = api.content.get_view(
             "survey-publication-count", self.context, self.request
         )
-        view()
         return {
             "@id": self.request.getURL(),
-            "items": view.rows,
+            "items": view.survey_details,
         }

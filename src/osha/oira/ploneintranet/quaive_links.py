@@ -40,7 +40,7 @@ class SurveyLinks(BrowserView):
                 ),
                 # store the url in a nested dicationary, because we will later
                 # want to augment that dictionary with status information
-                "links": {index: {"url": url} for index, url in enumerate(links)},
+                "links": [{"url": url} for url in links],
             }
         if hasattr(obj, "objectIds"):
             # reimplement objectValues() with deterministic sort order of sections
@@ -51,12 +51,7 @@ class SurveyLinks(BrowserView):
     # Return always the current up-to-date contents.
     @property
     def sections(self):
-        return {
-            "sections": {
-                index: section
-                for index, section in enumerate(self.extract_links(self.context))
-            }
-        }
+        return {"sections": list(self.extract_links(self.context))}
 
     def __call__(self):
         return json.dumps(self.sections)

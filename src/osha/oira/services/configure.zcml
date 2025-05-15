@@ -41,7 +41,7 @@
 
   <plone:service
       method="GET"
-      factory=".country.Tools"
+      factory=".country.CountryToolsService"
       permission="zope2.View"
       for="euphorie.content.country.ICountry"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"

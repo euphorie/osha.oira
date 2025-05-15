@@ -1,10 +1,8 @@
 from Acquisition import aq_base
 from Products.Five import BrowserView
-from plone.memoize import ram
 
 import json
 import re
-import time
 
 class SurveyLinks(BrowserView):
     attributes_checked = [
@@ -49,12 +47,9 @@ class SurveyLinks(BrowserView):
             for child_id in sorted(obj.objectIds()):
                 yield from self.extract_links(obj[child_id])
 
-
-    def _cache_key(fun, self):
-        return (self.context.getPhysicalPath(), time.time() // (60*60*4))
-
+    # Explicitly not cached. Let the consumer take care of that.
+    # Return always the current up-to-date contents.
     @property
-    @ram.cache(_cache_key)
     def sections(self):
         return {
             "sections": {

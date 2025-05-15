@@ -10,7 +10,8 @@ class SurveyPublicationCount(BrowserView):
 
     fieldnames = ["country", "path", "count"]
 
-    def get_survey_details(self):
+    @property
+    def survey_details(self):
         details = []
         pc = api.portal.get_tool("portal_catalog")
         wft = api.portal.get_tool("portal_workflow")
@@ -43,7 +44,7 @@ class SurveyPublicationCountCSV(SurveyPublicationCount):
         csvfile = StringIO()
         writer = csv.DictWriter(csvfile, fieldnames=self.fieldnames)
         writer.writeheader()
-        for row in self.get_survey_details():
+        for row in self.survey_details:
             writer.writerow(row)
         csvfile.seek(0)
         self.request.response.setHeader("Content-type", "text/csv")

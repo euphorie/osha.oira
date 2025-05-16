@@ -39,4 +39,13 @@
       name="@navtree"
       />
 
+  <plone:service
+      method="GET"
+      factory=".survey_publication_count.SurveyPublicationCountService"
+      permission="cmf.ManagePortal"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      name="@survey-publication-count"
+      />
+
 </configure>

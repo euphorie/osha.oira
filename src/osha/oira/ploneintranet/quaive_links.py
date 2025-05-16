@@ -31,7 +31,7 @@ class SurveyLinks(BrowserView):
         for attrib in self.attributes_checked:
             value = getattr(obj, attrib, "")
             if value:
-                links.add(self.url_regex.findall(value))
+                links.update(self.url_regex.findall(value))
         if links:
             yield {
                 "title": obj.Title(),

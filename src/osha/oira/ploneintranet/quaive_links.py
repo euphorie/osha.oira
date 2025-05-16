@@ -26,13 +26,12 @@ class SurveyLinks(BrowserView):
         hyperlinks if it has them. Take care to return a datastructure with a
         deterministic sort order.
         """
-        links = []
+        obj = aq_base(obj)
+        links = set()
         for attrib in self.attributes_checked:
-            value = getattr(aq_base(obj), attrib, "")
+            value = getattr(obj, attrib, "")
             if value:
-                links.extend(self.url_regex.findall(value))
-        # enforce deterministic sort order of links
-        links.sort()
+                links.add(self.url_regex.findall(value))
         if links:
             yield {
                 "title": obj.Title(),
@@ -40,9 +39,11 @@ class SurveyLinks(BrowserView):
                 "path": "/".join(
                     obj.getPhysicalPath()[len(self.context.getPhysicalPath()) :]
                 ),
-                # store the url in a nested dicationary, because we will later
-                # want to augment that dictionary with status information
-                "links": [{"url": url} for url in links],
+                # Store the url in a nested dictionary, because we will later
+                # want to augment that dictionary with status information.
+                # Enforce deterministic sort order of links to make that access
+                # stable.
+                "links": [{"url": url} for url in sorted(links)],
             }
         if hasattr(obj, "objectIds"):
             # reimplement objectValues() with deterministic sort order of sections
@@ -56,4 +57,5 @@ class SurveyLinks(BrowserView):
         return {"sections": list(self.extract_links(self.context))}
 
     def __call__(self):
+        self.request.response.setHeader("Content-type", "application/json")
         return json.dumps(self.sections)

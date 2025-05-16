@@ -10,13 +10,13 @@ class CountryToolsService(Service):
         ctv = api.content.get_view("country-tools", self.context, self.request)
         country = self.context.getId()
         for sector in ctv.sectors:
-            groups = []
+            surveygroups = []
             sector_path = f"{country}/{sector['id']}"
-            for group in ctv.get_tools(sector["id"]):
-                group_path = f"{sector_path}/{group['id']}"
+            for surveygroup in ctv.get_tools(sector["id"]):
+                surveygroup_path = f"{sector_path}/{surveygroup['id']}"
                 surveys = []
-                for survey in group["surveys"]:
-                    survey_path = f"{group_path}/{survey['id']}"
+                for survey in surveygroup["surveys"]:
+                    survey_path = f"{surveygroup_path}/{survey['id']}"
                     surveys.append(
                         {
                             "id": survey["id"],
@@ -26,12 +26,12 @@ class CountryToolsService(Service):
                             "is_published": survey["published"],
                         }
                     )
-                groups.append(
+                surveygroups.append(
                     {
-                        "id": group["id"],
-                        "path": group_path,
-                        "title": group["title"],
-                        "is_obsolete": group["obsolete"],
+                        "id": surveygroup["id"],
+                        "path": surveygroup_path,
+                        "title": surveygroup["title"],
+                        "is_obsolete": surveygroup["obsolete"],
                         "surveys": surveys,
                     }
                 )
@@ -40,7 +40,7 @@ class CountryToolsService(Service):
                     "id": sector["id"],
                     "path": sector_path,
                     "title": sector["title"],
-                    "surveygroups": groups,
+                    "surveygroups": surveygroups,
                 }
             )
         return {

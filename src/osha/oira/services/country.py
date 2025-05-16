@@ -40,7 +40,7 @@ class CountryToolsService(Service):
                     "id": sector["id"],
                     "path": sector_path,
                     "title": sector["title"],
-                    "groups": groups,
+                    "surveygroups": groups,
                 }
             )
         return {

@@ -55,8 +55,11 @@
             </label>
             <div class="label-fragment-description pat-rich"
                  tal:condition="python:getattr(solution, 'action', None)"
-                 tal:content="structure python:solution.action"
-            ></div>
+            >
+              <pre class="pat-markdown"
+                   tal:content="structure python:solution.action"
+              ></pre>
+            </div>
 
           </div>
           <div class="button-bar">

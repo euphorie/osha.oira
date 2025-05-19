@@ -5,7 +5,29 @@ Changelog
    You should create a file in the news directory instead.
    For helpful instructions, please see:
    https://github.com/plone/plone.releaser/blob/master/ADD-A-NEWS-ITEM.rst
+
 .. towncrier release notes start
+
+12.1.0 (2025-05-19)
+-------------------
+
+New features:
+
+
+- @@context-search: Add the description and the path to the result object below the title (`Issue #345 <https://github.com/syslabcom/scrum/issues/345>`_)
+- Implement content toolbar in quaive-view.
+  [maurits] (`Issue #3129 <https://github.com/syslabcom/scrum/issues/3129>`_)
+- @@survey-publication-count: when counting the number of times a Survey has been republished, include the "update" action along with "publish". (`Issue #3453 <https://github.com/syslabcom/scrum/issues/3453>`_)
+- Add a @@links.json view on a survey to power a links status report in quaive.osha. (`Issue #3454 <https://github.com/syslabcom/scrum/issues/3454>`_)
+- Add @country-tools, a rest-api service equivalent of @@country-tools (`Issue #3488 <https://github.com/syslabcom/scrum/issues/3488>`_)
+- Add @survey-publication-count restapi service. This returns the data from @@survey-publication-count as JSON. (`Issue #3488 <https://github.com/syslabcom/scrum/issues/3488>`_)
+
+
+Internal:
+
+
+- Switch to towncrier for managing changelog entries
+
 
 12.0.0 (2025-04-30)
 -------------------

@@ -26,10 +26,10 @@ class SurveyLinks(BrowserView):
         hyperlinks if it has them. Take care to return a datastructure with a
         deterministic sort order.
         """
-        obj = aq_base(obj)
+        _obj = aq_base(obj)
         links = set()
         for attrib in self.attributes_checked:
-            value = getattr(obj, attrib, "")
+            value = getattr(_obj, attrib, "")
             if value:
                 links.update(self.url_regex.findall(value))
         if links:

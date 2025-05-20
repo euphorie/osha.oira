@@ -12,9 +12,9 @@ var _paq = _paq || [];
     const tracking_endpoint_url = (
         mode_development ?
             "http://localhost:8080/Plone/piwikmock.php" :
-            "https://piwik.osha.europa.eu/piwik/piwik.php"
+            "https://piwik.osha.europa.eu/piwik/matomo.php"
     );
-    const tracking_script_url = "https://piwik.osha.europa.eu/piwik/piwik.js";
+    const tracking_script_url = "https://piwik.osha.europa.eu/piwik/matomo.js";
     const tracking_domain = (mode_production ? "*.oira.osha.europa.eu" : "*.test-oira.osha.europa.eu") + "/oira-tools/";
     const site_id = mode_production ? "9" : "11";
 
@@ -177,7 +177,6 @@ var _paq = _paq || [];
         // Create tracking script element
         const tracking_script = document.createElement("script");
         tracking_script.type="text/javascript";
-        tracking_script.defer=true;
         tracking_script.async=true;
         tracking_script.src= tracking_script_url;
 

@@ -1,0 +1,209 @@
+<!-- Tracking -->
+<script type="text/javascript">
+var _paq = _paq || [];
+
+(async function () {
+    const hostname_production = "oira.osha.europa.eu";
+    const hostname_staging = "test-oira.osha.europa.eu";
+    const hostname_development = "localhost";
+    const mode_production = location.hostname === hostname_production;
+    const mode_staging = location.hostname === hostname_staging;
+    const mode_development = location.hostname === hostname_development;
+    const tracking_endpoint_url = (
+        mode_development ?
+            "http://localhost:8080/Plone/piwikmock.php" :
+            "https://piwik.osha.europa.eu/piwik/matomo.php"
+    );
+    const tracking_script_url = "https://piwik.osha.europa.eu/piwik/matomo.js";
+    const tracking_domain = (mode_production ? "*.oira.osha.europa.eu" : "*.test-oira.osha.europa.eu") + "/oira-tools/";
+    const site_id = mode_production ? "9" : "11";
+
+    const download_url_selectors = [
+        "a.pat-button.download",
+        "[href='*@@pdf']",
+        "[href='*@@timeline']",
+        "[href='*.docx']",
+        "[href='*.xlsx']",
+        "[href='*.pptx']",
+        "[href='*.pdf']",
+        "[href='*.gif']",
+        "[href='*.jpeg']",
+        "[href='*.jpg']",
+        "[href='*.png']",
+        "[href='*.zip']",
+    ].join(", ");
+    const outbound_url_selector = `a[href^="${window.location.origin}"]:not([href^="#"]):not([href^="."])`;
+
+    console.debug("Matomo: mode_production", mode_production);
+    console.debug("Matomo: mode_staging", mode_staging);
+    console.debug("Matomo: mode_development", mode_development);
+    console.debug("Matomo: tracking_endpoint_url", tracking_endpoint_url);
+    console.debug("Matomo: tracking_domain", tracking_domain);
+    console.debug("Matomo: site_id", site_id);
+
+    let previous_url = location.href;
+
+
+    /**
+     * Clean a URL by removing the session id.
+     */
+    function clean_url(url) {
+        // Remove the session id from the URL
+        const tracked_url = url.replace(/\+\+session\+\+.*\//, "");
+        return tracked_url;
+    }
+
+    /**
+     * Initialize download buttons tracking without the session id.
+     * This uses delegated event handlers which also allows to track links
+     * injected dynamically by JavaScript after this script was invoked.
+    */
+    function initialize_link_tracking() {
+        // We do our own link tracking.
+        //_paq.push(["enableLinkTracking"]);
+
+        // Delegated event handler - this also tracks content which is injected
+        // after the initial page load.
+        document.addEventListener("click", function(event) {
+            const el = event.target.closest("a");
+            if (!el) {
+                // No link was clicked
+                return;
+            }
+
+            let link_type;
+            if (el.matches(download_url_selectors)) {
+                // Download URL
+                link_type = "download";
+            } else if (el.matches(outbound_url_selector)) {
+                // Outbound URL
+                link_type = "link";
+            } else {
+                // Not a tracked link
+                return;
+            }
+
+            // Trigger tracking.
+            _paq.push(["trackLink", clean_url(el.href), link_type]);
+
+        }, { capture: true });
+    }
+
+    async function load_tracking_dimensions() {
+        try {
+            const url_elems = window.location.href.split("?");
+            const urlParts = url_elems[0].split("/");
+            if (urlParts[urlParts.length - 1] === "") {
+                urlParts.pop();  // Remove trailing slash if present
+            }
+            urlParts[urlParts.length - 1] = "@@piwikvars.json";
+            let vars_url = urlParts.join("/");
+            if (url_elems.length >1) {
+                vars_url = vars_url + '?' + url_elems[1];
+            }
+
+            const response = await fetch(vars_url, {
+                headers: { "Accept": "application/json" },
+            });
+            if (!response.ok) {
+                throw new Error("HTTP " + response.status);
+            }
+
+            const data = await response.json();
+            console.debug("Matomo: 📌 Loaded Piwik Variables:", data);
+            return data;
+        } catch (error) {
+            console.error("Matomo: ❌ Error loading Piwik variables:", error);
+            return null;
+        }
+    }
+
+    async function compile_tracking_variables() {
+        console.debug("Matomo: Tracking triggered.");
+
+
+        // Wait for JSON data before proceeding
+        // TODO: ENABLE for scrum-3351
+        //const tracking_dimensions = await load_tracking_dimensions();
+        const tracking_dimensions = {};
+
+        if (!tracking_dimensions) {
+            console.error("Matomo: ❌ No Piwik data loaded, skipping tracking.");
+
+            // Fall back to tracking dimensions from the template.
+            // TODO: this code can probably be removed when scrum-3351 is rolled-out.
+            tracking_dimensions.country_name = document.getElementById('country_name').innerHTML;
+            tracking_dimensions.sector_name = document.getElementById('sector_name').innerHTML;
+            tracking_dimensions.tool_name = document.getElementById('tool_name').innerHTML;
+            tracking_dimensions.language_code = document.getElementById('language_code').innerHTML;
+            //return;
+        }
+        console.debug("Matomo: ✅ tracking initialized with custom variables.");
+
+        // Custom variables
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+
+        // Set the URL to be tracked
+        _paq.push(["setCustomUrl", clean_url(window.location.href)]);
+        _paq.push(["setReferrerUrl", clean_url(document.referrer)]);
+
+        /* retrieve custom variable content */
+        const country = tracking_dimensions.country_name;
+        const sector = tracking_dimensions.sector_name;
+        const tool = tracking_dimensions.tool_name;
+        const language = tracking_dimensions.language_code;
+
+        _paq.push(["setCustomVariable", 1, "Activity", "3.1. Online interactive Risk Assessment (OiRA) tool", "visit"]);
+        _paq.push(["setCustomVariable", 2, "Country", country, "visit"]);
+        _paq.push(["setCustomVariable", 3, "Sector", sector, "visit"]);
+        _paq.push(["setCustomVariable", 4, "Tool", tool, "visit"]);
+
+        _paq.push(['setCustomDimension', 1, "-3.1. Online interactive Risk Assessment (OiRA) tool"]);
+        _paq.push(['setCustomDimension', 2, country]);
+        _paq.push(['setCustomDimension', 3, sector]);
+        _paq.push(['setCustomDimension', 4, tool]);
+        _paq.push(['setCustomDimension', 5, language]);
+
+        // Queue or invoke (if tracking script is already loaded) the tracking request
+        _paq.push(["trackPageView"]);
+    }
+
+    function base_tracking_initialization() {
+        // Main Matomo variables
+        _paq.push(["setDomains", tracking_domain]);
+        _paq.push(["setTrackerUrl", tracking_endpoint_url]);
+        _paq.push(["setSiteId", site_id]);
+
+        // Create tracking script element
+        const tracking_script = document.createElement("script");
+        tracking_script.type="text/javascript";
+        tracking_script.async=true;
+        tracking_script.src= tracking_script_url;
+
+        // Add the tracking script to the page
+        const sibling = document.getElementsByTagName("script")[0];
+        sibling.parentNode.insertBefore(tracking_script, sibling);
+    }
+
+    // Initialize download buttons tracking
+    initialize_link_tracking();
+    // Compile tracking variables
+    await compile_tracking_variables();
+    // Initialize base tracking
+    base_tracking_initialization();
+
+    document.addEventListener("patterns-injected-delayed", function() {
+        // Track page injections with history changes.
+        if (previous_url !== location.href) {
+            console.debug("Matomo: pat-inject triggered tracking.");
+            // Only track if the URL has changed
+            previous_url = location.href;
+            // reload tracking variables after navigating without a page reload.
+            compile_tracking_variables();
+        }
+    });
+
+
+})();
+</script>
+<!-- End tracking code -->

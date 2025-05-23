@@ -1,0 +1,101 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      tal:define="
+        actions view/actions/values|nothing;
+      "
+      i18n:domain="nuplone"
+>
+  <div class="modal-panel-contents"
+       id="quaive-content"
+  >
+    <div class="pat-modal image-picker application-assessments large panel"
+         id="document-content"
+    >
+      <h1 class="panel-class-panel">
+          Image
+      </h1>
+      <form class="pat-form wizard-box panel-class-panel pat-inject"
+            action="${request/getURL}"
+            data-pat-inject="source: #gallery-images-assessments; target: #gallery-images-assessments"
+      >
+        <div class="panel-body"
+             id="modal-panel-body"
+        >
+          <div class="container">
+            <div class="canvas-toolbar"
+                 id="image-bank-selection-panel-toolbar"
+                 tal:condition="TODO|nothing"
+            >
+              <div class="canvas-toolbar-section view-options">
+              </div>
+              <div class="canvas-toolbar-section navigation pat-navigation"
+                   id="assessments-toolbar-navigation"
+              >
+                <nav class="pat-tabs pat-button-cluster pat-navigation"
+                     id="homescreen-sections-image-bank"
+                >
+                  <a class="pat-inject current"
+                     href="/apps/image-bank/index#directory-image-bank"
+                     data-pat-inject="history: record; source: #directory-image-bank; target: #directory-image-bank &amp;&amp; source: #toolbar-functions-area-image-bank::element; target: #toolbar-functions-area-image-bank::element"
+                  >Shared</a>
+                  <a href="#">Private</a>
+                  <a href="#">Flickr</a>
+                  <a class="pat-inject"
+                     href="/apps/image-bank/pexels#directory-image-bank"
+                     data-pat-inject="history: record; source: #directory-image-bank; target: #directory-image-bank &amp;&amp; source: #toolbar-functions-area-image-bank::element; target: #toolbar-functions-area-image-bank::element"
+                  >Pexels</a>
+                  <a href="#">Pixx.io</a>
+                </nav>
+              </div>
+              <div class="canvas-toolbar-section quick-functions">
+                <label class="canvas-toolbar-function canvas-toolbar-search-field pat-inject pat-autosubmit"
+                       id="image-picker-search-field"
+                       data-pat-inject="url: /apps/news/panel-select-image-image-bank#image-panel-content"
+                >
+                  <input placeholder="Search images"
+                         type="search"
+                  />
+                </label>
+              </div>
+            </div>
+
+            <div class="image-panel-content"
+                 id="image-panel-content"
+            >
+              <fieldset class="pat-checklist free-form radio image-selector col-6 cropping-contain has-value checked"
+                        data-pat-checklist="
+                          select: #image-bank-selection-panel-toolbar-selection-toggles .select-all;
+                          deselect: #image-bank-selection-panel-toolbar-selection-toggles .deselect-all"
+              >
+                <label class="item image has-value checked"
+                       title="${image/Title}"
+                       tal:repeat="image view/available_images"
+                >
+                  <input class="has-value"
+                         name="${python: view.widgets['uids'].name}"
+                         type="radio"
+                         value="${image/UID}"
+                  />
+                  <img alt="${image/Description}"
+                       src="${python: view.get_image_scale(image)}"
+                  />
+                </label>
+              </fieldset>
+            </div>
+            <div class="buttons pat-button-bar pat-bumper"
+                 id="modal-button-bar"
+            >
+              <tal:action repeat="action python: actions"
+                          replace="structure action/render"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</html>

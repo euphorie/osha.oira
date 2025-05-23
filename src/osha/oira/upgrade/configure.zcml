@@ -14,6 +14,11 @@
       directory="v1"
       />
 
+  <upgrade-step:directory
+      profile="osha.oira:default"
+      directory="v12"
+      />
+
   <include file="legacy.zcml" />
 
 </configure>

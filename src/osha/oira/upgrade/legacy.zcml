@@ -5,9 +5,9 @@
     >
 
   <genericsetup:upgradeSteps
-      destination="2"
       profile="osha.oira:default"
       source="1"
+      destination="2"
       >
 
     <genericsetup:upgradeStep
@@ -18,9 +18,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="3"
       profile="osha.oira:default"
       source="2"
+      destination="3"
       >
 
     <genericsetup:upgradeStep
@@ -31,9 +31,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="4"
       profile="osha.oira:default"
       source="3"
+      destination="4"
       >
 
     <genericsetup:upgradeStep
@@ -44,9 +44,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="5"
       profile="osha.oira:default"
       source="4"
+      destination="5"
       >
 
     <genericsetup:upgradeStep
@@ -58,9 +58,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="6"
       profile="osha.oira:default"
       source="5"
+      destination="6"
       >
 
     <genericsetup:upgradeStep
@@ -72,9 +72,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="7"
       profile="osha.oira:default"
       source="6"
+      destination="7"
       >
 
     <genericsetup:upgradeStep
@@ -86,9 +86,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="8"
       profile="osha.oira:default"
       source="7"
+      destination="8"
       >
 
     <genericsetup:upgradeStep
@@ -100,9 +100,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="9"
       profile="osha.oira:default"
       source="8"
+      destination="9"
       >
 
     <genericsetup:upgradeStep
@@ -119,9 +119,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="10"
       profile="osha.oira:default"
       source="9"
+      destination="10"
       >
 
     <genericsetup:upgradeStep
@@ -132,9 +132,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="11"
       profile="osha.oira:default"
       source="10"
+      destination="11"
       >
 
     <genericsetup:upgradeStep
@@ -157,9 +157,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="12"
       profile="osha.oira:default"
       source="11"
+      destination="12"
       >
     <genericsetup:upgradeStep
         title="Add portal properties to configure the outdated tool notification"
@@ -169,9 +169,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="13"
       profile="osha.oira:default"
       source="12"
+      destination="13"
       >
 
     <genericsetup:upgradeStep
@@ -182,9 +182,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="14"
       profile="osha.oira:default"
       source="13"
+      destination="14"
       >
 
     <genericsetup:upgradeStep
@@ -195,9 +195,9 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-      destination="15"
       profile="osha.oira:default"
       source="14"
+      destination="15"
       >
 
     <genericsetup:upgradeStep
@@ -216,37 +216,37 @@
       />
 
   <genericsetup:upgradeSteps
-        destination="16"
-        profile="osha.oira:default"
-        source="15"
-        >
+      profile="osha.oira:default"
+      source="15"
+      destination="16"
+      >
 
-      <genericsetup:upgradeDepends
-          title="Add the behavior osha.country.extrafields to euphorie.country"
-          import_profile="osha.oira.upgrade:to16"
-          />
+    <genericsetup:upgradeDepends
+        title="Add the behavior osha.country.extrafields to euphorie.country"
+        import_profile="osha.oira.upgrade:to16"
+        />
 
-      <genericsetup:upgradeStep
-          title="Set up certificates table"
-          handler=".to16.alembic_upgrade"
-          />
+    <genericsetup:upgradeStep
+        title="Set up certificates table"
+        handler=".to16.alembic_upgrade"
+        />
 
-    </genericsetup:upgradeSteps>
+  </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-        destination="17"
-        profile="osha.oira:default"
-        source="16"
-        >
+      profile="osha.oira:default"
+      source="16"
+      destination="17"
+      >
 
-      <genericsetup:upgradeStep
-          title="Populate setting for measures text handling (CMS)"
-          handler=".to17.set_handle_measures_text_in_cms"
-          />
-      <genericsetup:upgradeStep
-          title="Populate setting for measures text handling (Client)"
-          handler=".to17.set_handle_measures_text_in_client"
-          />
+    <genericsetup:upgradeStep
+        title="Populate setting for measures text handling (CMS)"
+        handler=".to17.set_handle_measures_text_in_cms"
+        />
+    <genericsetup:upgradeStep
+        title="Populate setting for measures text handling (Client)"
+        handler=".to17.set_handle_measures_text_in_client"
+        />
   </genericsetup:upgradeSteps>
 
 
@@ -260,10 +260,10 @@
       />
 
   <genericsetup:upgradeSteps
-        destination="18"
-        profile="osha.oira:default"
-        source="17"
-        >
+      profile="osha.oira:default"
+      source="17"
+      destination="18"
+      >
     <genericsetup:upgradeDepends
         title="Add config option for setting public certificate URL"
         import_profile="osha.oira.upgrade:to_0018"
@@ -280,10 +280,10 @@
       />
 
   <genericsetup:upgradeSteps
-        destination="19"
-        profile="osha.oira:default"
-        source="18"
-        >
+      profile="osha.oira:default"
+      source="18"
+      destination="19"
+      >
     <genericsetup:upgradeDepends
         title="Switch from Appconfig to registry"
         import_profile="osha.oira.upgrade:to_0019"
@@ -291,14 +291,14 @@
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeSteps
-        destination="20"
-        profile="osha.oira:default"
-        source="19"
-        >
-      <genericsetup:upgradeStep
-          title="Add images to tools"
-          handler=".to20.map_images"
-          />
+      profile="osha.oira:default"
+      source="19"
+      destination="20"
+      >
+    <genericsetup:upgradeStep
+        title="Add images to tools"
+        handler=".to20.map_images"
+        />
   </genericsetup:upgradeSteps>
 
 </configure>

@@ -1,14 +1,14 @@
-<?xml version="1.0"?>
-<object name="euphorie.risk" meta_type="Dexterity FTI"
-   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-   >
+<?xml version="1.0" encoding="utf-8"?>
+<object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        meta_type="Dexterity FTI"
+        name="euphorie.risk"
+>
 
- <!-- List of enabled behaviors -->
- <property name="behaviors">
-  <element value="euphorie.content.behaviour.publish.IPublishRemovalProtection" />
-  <element value="osha.oira.content.module.IModuleAdditionalContent" />
-  <element value="euphorie.content.behaviour.uniqueid.INameFromUniqueId" />
- </property>
+  <!-- List of enabled behaviors -->
+  <property name="behaviors">
+    <element value="euphorie.content.behaviour.publish.IPublishRemovalProtection" />
+    <element value="osha.oira.content.module.IModuleAdditionalContent" />
+    <element value="euphorie.content.behaviour.uniqueid.INameFromUniqueId" />
+  </property>
 
 </object>
-

@@ -33,8 +33,8 @@
   <plone:service
       method="GET"
       factory=".navigation.NavigationService"
-      permission="zope2.View"
       for="*"
+      permission="zope2.View"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       name="@navtree"
       />
@@ -42,8 +42,8 @@
   <plone:service
       method="GET"
       factory=".country.CountryToolsService"
-      permission="zope2.View"
       for="euphorie.content.country.ICountry"
+      permission="zope2.View"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       name="@country-tools"
       />
@@ -51,8 +51,8 @@
   <plone:service
       method="GET"
       factory=".survey_publication_count.SurveyPublicationCountService"
-      permission="cmf.ManagePortal"
       for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      permission="cmf.ManagePortal"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       name="@survey-publication-count"
       />

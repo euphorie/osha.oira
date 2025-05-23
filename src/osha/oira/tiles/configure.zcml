@@ -1,50 +1,54 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:tales="http://namespaces.zope.org/tales"
-    i18n_domain="osha.oira">
+    i18n_domain="osha.oira"
+    >
 
-    <include package="plone.tiles" file="meta.zcml" />
-    <include package="plone.tiles" />
+  <include
+      package="plone.tiles"
+      file="meta.zcml"
+      />
+  <include package="plone.tiles" />
 
+  <plone:tile
+      name="osha.oira.footer"
+      title="OiRA Footer"
+      for="*"
+      class=".tiles.FooterTile"
+      template="templates/footer.pt"
+      permission="zope.Public"
+      add_permission="cmf.ManagePortal"
+      layer="..interfaces.IProductLayer"
+      />
+
+  <plone:tile
+      name="osha.scripts"
+      title="Javascript utilities"
+      description="Various javascript utility methods"
+      class="plone.tiles.Tile"
+      template="templates/scripts.pt"
+      permission="zope.Public"
+      add_permission="cmf.ManagePortal"
+      />
+
+  <configure package="plonetheme.nuplone.tiles">
     <plone:tile
-        name="osha.oira.footer"
-        title="OiRA Footer"
-        add_permission="cmf.ManagePortal"
-        class=".tiles.FooterTile"
-        template="templates/footer.pt"
+        name="tabs"
+        class="osha.oira.tiles.tabs.OiRASiteRootTabsTile"
+        template="templates/tabs.pt"
         permission="zope.Public"
-        layer="..interfaces.IProductLayer"
-        for="*"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
         />
+  </configure>
 
-    <plone:tile
-        name="osha.scripts"
-        title="Javascript utilities"
-        description="Various javascript utility methods"
-        add_permission="cmf.ManagePortal"
-        class="plone.tiles.Tile"
-        template="templates/scripts.pt"
-        permission="zope.Public"
-        />
-
-    <configure package="plonetheme.nuplone.tiles">
-        <plone:tile
-            name="tabs"
-            layer="osha.oira.interfaces.IOSHAContentSkinLayer"
-            class="osha.oira.tiles.tabs.OiRASiteRootTabsTile"
-            template="templates/tabs.pt"
-            permission="zope.Public"
-            />
-    </configure>
-
-    <plone:tile
-        name="statusmessages"
-        class="plonetheme.nuplone.tiles.messages.StatusmessagesTile"
-        template="templates/messages.pt"
-        layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
-        permission="zope.Public"
-        />
+  <plone:tile
+      name="statusmessages"
+      class="plonetheme.nuplone.tiles.messages.StatusmessagesTile"
+      template="templates/messages.pt"
+      permission="zope.Public"
+      layer="osha.oira.client.interfaces.IOSHAClientSkinLayer"
+      />
 
 </configure>

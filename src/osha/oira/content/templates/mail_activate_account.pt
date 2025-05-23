@@ -1,8 +1,14 @@
-<tal:vars define="manager nocall:view/context">Dear <tal:name replace="view/contact_name"/>,
+<tal:vars define="
+            manager nocall:view/context;
+          ">Dear
+  <tal:name replace="view/contact_name" />,
 
-An account has been created for your <tal:type replace="view/context_type"/> "<tal:sector replace="view/context_title"/>" in the admin interface of the OiRA site.
+An account has been created for your
+  <tal:type replace="view/context_type" />
+  "<tal:sector replace="view/context_title" />" in the admin interface of the OiRA site.
 
-Your username for logging in is: <tal:username replace="manager/login"/>.
+Your username for logging in is:
+  <tal:username replace="manager/login" />.
 
 Please choose your password by clicking here: ${view/reset_url}
 

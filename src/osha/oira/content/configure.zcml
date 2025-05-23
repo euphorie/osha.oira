@@ -1,28 +1,30 @@
 <configure
-  xmlns="http://namespaces.zope.org/zope"
-  xmlns:plone="http://namespaces.plone.org/plone"
-  xmlns:browser="http://namespaces.zope.org/browser">
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
 
-    <include package=".browser" />
+  <include package=".browser" />
 
-    <plone:behavior
-        name="osha.country.extrafields"
-        title="OSHA extra Country fields"
-        provides=".country.IOSHACountry"
-        />
+  <plone:behavior
+      name="osha.country.extrafields"
+      title="OSHA extra Country fields"
+      provides=".country.IOSHACountry"
+      />
 
-    <plone:behavior
-        title="OSHA extra Survey fields"
-        description="Provide additional OSHA fields"
-        provides=".survey.IOSHASurvey"
-        factory=".survey.OSHASurvey"
-        for="plone.dexterity.interfaces.IDexterityContent"
-        />
+  <plone:behavior
+      title="OSHA extra Survey fields"
+      description="Provide additional OSHA fields"
+      factory=".survey.OSHASurvey"
+      provides=".survey.IOSHASurvey"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      />
 
-    <adapter
-        for=".survey.IOSHASurveyMarker zope.schema.interfaces.IField"
-        factory="z3c.form.datamanager.AttributeField"
-        />
+  <adapter
+      factory="z3c.form.datamanager.AttributeField"
+      for=".survey.IOSHASurveyMarker
+           zope.schema.interfaces.IField"
+      />
 
   <browser:page
       name="site-controlpanel"
@@ -39,9 +41,9 @@
         name="sitemenu"
         for="*"
         class="osha.oira.content.sitemenu.Sitemenu"
-        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
-        permission="zope2.Public"
         template="templates/sitemenu.pt"
+        permission="zope2.Public"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
         />
   </configure>
 

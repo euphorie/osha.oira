@@ -4,7 +4,10 @@
     i18n_domain="plone"
     >
 
-  <include package="ftw.upgrade" file="meta.zcml" />
+  <include
+      package="ftw.upgrade"
+      file="meta.zcml"
+      />
 
   <upgrade-step:directory
       profile="osha.oira:default"

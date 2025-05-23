@@ -13,7 +13,9 @@
   <p class="legend">${view/label}</p>
   <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
   <tal:has-file condition="view/allow_nochange">
-    <p class="floatAfter" i18n:ignore="">
+    <p class="floatAfter"
+       i18n:ignore=""
+    >
       <a href="${view/download_url}">${view/filename}</a>
       (${view/file_size})
     </p>

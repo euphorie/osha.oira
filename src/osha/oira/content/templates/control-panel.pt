@@ -1,145 +1,199 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:meta="http://xml.zope.org/namespaces/meta"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      i18n:domain="plone"
       meta:interpolation="true"
-      metal:use-macro="context/@@layout/macros/layout">
-<body>
+      metal:use-macro="context/@@layout/macros/layout"
+      i18n:domain="plone"
+>
+  <body>
 
-<metal:main fill-slot="content"
-  tal:define="portal_url nocall:here/portal_url">
+    <metal:main fill-slot="content"
+                tal:define="
+                  portal_url nocall:here/portal_url;
+                "
+    >
 
-    <form action="."
-          metal:define-macro="master"
-          tal:define="is_fieldsets view/is_fieldsets"
-          tal:attributes="action request/URL;
-                          class python: is_fieldsets and 'edit-form enableFormTabbing enableUnloadProtection' or default"
-          method="post"
-          class="concise"
-          enctype="multipart/form-data"
-          id="zc.page.browser_form">
+      <form class="concise"
+            id="zc.page.browser_form"
+            action="."
+            enctype="multipart/form-data"
+            metal:define-macro="master"
+            method="post"
+            tal:define="
+              is_fieldsets view/is_fieldsets;
+            "
+            tal:attributes="
+              action request/URL;
+              class python: is_fieldsets and 'edit-form enableFormTabbing enableUnloadProtection' or default;
+            "
+      >
 
-        <input type="hidden"
-               name="fieldset.current"
+        <input name="fieldset.current"
+               type="hidden"
                value=""
-               tal:attributes="value request/fieldset.current | string:" />
+               tal:attributes="
+                 value request/fieldset.current | string:;
+               "
+        />
 
-        <div metal:define-slot="extra_info" tal:replace="nothing">
+        <div metal:define-slot="extra_info"
+             tal:replace="nothing"
+        >
         </div>
 
         <fieldset tal:condition="not: is_fieldsets">
-            <legend tal:define="form_name view/form_name|nothing"
-                    tal:condition="form_name"
-                    tal:content="form_name"
-                    >Form name</legend>
-            <tal:block tal:repeat="widget view/widgets">
+          <legend tal:define="
+                    form_name view/form_name|nothing;
+                  "
+                  tal:condition="form_name"
+                  tal:content="form_name"
+          >Form name</legend>
+          <tal:block tal:repeat="widget view/widgets">
 
-                <div class="z3cFieldContainer"
-                     tal:define="description widget/hint;
-                                 error widget/error"
-                     tal:attributes="class python:'z3cFieldContainer'+(error and ' error' or '')">
+            <div class="z3cFieldContainer"
+                 tal:define="
+                   description widget/hint;
+                   error widget/error;
+                 "
+                 tal:attributes="
+                   class python:'z3cFieldContainer'+(error and ' error' or '');
+                 "
+            >
 
-                    <label tal:attributes="for widget/name">
-                      <span tal:replace="widget/label">
+              <label tal:attributes="
+                       for widget/name;
+                     ">
+                <span tal:replace="widget/label">
                           label
-                      </span>
+                </span>
 
-                      <sup class="required"
-                            title="Required"
-                            tal:condition="widget/required">
+                <sup class="required"
+                     title="Required"
+                     tal:condition="widget/required"
+                >
                           *
-                      </sup>
-                    <div class="widget" tal:replace="structure widget">
-                    </div>
-                    </label>
-
-                      <dfn class="infoPanel"
-                           tal:condition="description">
-                           <span class="title">Information</span>
-                          <tal:content replace="description"></tal:content>
-                      </dfn>
-
+                </sup>
+                <div class="widget"
+                     tal:replace="structure widget"
+                >
                 </div>
+              </label>
 
-            </tal:block>
+              <dfn class="infoPanel"
+                   tal:condition="description"
+              >
+                <span class="title">Information</span>
+                <tal:content replace="description" />
+              </dfn>
+
+            </div>
+
+          </tal:block>
 
         </fieldset>
 
-        <fieldset tal:attributes="id python:'fieldset-%s' % fieldset.id"
-                  tal:condition="is_fieldsets"
-                  tal:repeat="fieldset view/form_fields/fieldsets">
-            <legend tal:define="form_name fieldset/label"
-                    tal:condition="form_name"
-                    tal:attributes="id python:'fieldsetlegend-%s' % fieldset.id"
-                    tal:content="form_name"
-                    >Form name</legend>
+        <fieldset tal:condition="is_fieldsets"
+                  tal:repeat="fieldset view/form_fields/fieldsets"
+                  tal:attributes="
+                    id python:'fieldset-%s' % fieldset.id;
+                  "
+        >
+          <legend tal:define="
+                    form_name fieldset/label;
+                  "
+                  tal:condition="form_name"
+                  tal:content="form_name"
+                  tal:attributes="
+                    id python:'fieldsetlegend-%s' % fieldset.id;
+                  "
+          >Form name</legend>
 
-            <p tal:condition="fieldset/description"
-               tal:content="fieldset/description">
+          <p tal:condition="fieldset/description"
+             tal:content="fieldset/description"
+          >
                 Description
-            </p>
+          </p>
 
-            <tal:block tal:repeat="widget fieldset/widgets">
+          <tal:block tal:repeat="widget fieldset/widgets">
 
-                <div class="field"
-                     tal:define="description widget/hint;
-                                 error widget/error"
-                     tal:attributes="class python:'field'+(error and ' error' or '')">
+            <div class="field"
+                 tal:define="
+                   description widget/hint;
+                   error widget/error;
+                 "
+                 tal:attributes="
+                   class python:'field'+(error and ' error' or '');
+                 "
+            >
 
-                    <label tal:attributes="for widget/associateLabelWithInputControl|name"
-                           tal:define="name widget/name">
+              <label tal:define="
+                       name widget/name;
+                     "
+                     tal:attributes="
+                       for widget/associateLabelWithInputControl|name;
+                     "
+              >
 
-                        <span tal:replace="widget/label">Label</span>
+                <span tal:replace="widget/label">Label</span>
 
-                        <span class="fieldRequired"
-                              title="Required"
-                              tal:condition="widget/required">
+                <span class="fieldRequired"
+                      title="Required"
+                      tal:condition="widget/required"
+                >
                             (Required)
-                        </span>
+                </span>
 
-                        <span class="formHelp"
-                             tal:content="description"
-                             tal:condition="description">
+                <span class="formHelp"
+                      tal:condition="description"
+                      tal:content="description"
+                >
                             field description
-                        </span>
-                    </label>
+                </span>
+              </label>
 
-                    <div tal:condition="error"
-                         tal:content="structure error">
+              <div tal:condition="error"
+                   tal:content="structure error"
+              >
                         The Error
-                    </div>
+              </div>
 
-                    <div class="widget" tal:content="structure widget">
-                        <input type="text" />
-                    </div>
-                </div>
+              <div class="widget"
+                   tal:content="structure widget"
+              >
+                <input type="text" />
+              </div>
+            </div>
 
-            </tal:block>
+          </tal:block>
 
         </fieldset>
 
 
         <div class="visualClear"><!-- --></div>
 
-        <div id="actionsView" class="formControls">
-            <span class="actionButtons"
-                  tal:condition="view/availableActions"
-                  metal:define-slot="bottom_buttons">
-                <input tal:repeat="action view/actions"
-                       tal:replace="structure action/render" />
-            </span>
+        <div class="formControls"
+             id="actionsView"
+        >
+          <span class="actionButtons"
+                metal:define-slot="bottom_buttons"
+                tal:condition="view/availableActions"
+          >
+            <input tal:repeat="action view/actions"
+                   tal:replace="structure action/render"
+            />
+          </span>
         </div>
 
         <input tal:replace="structure context/@@authenticator/authenticator" />
 
-    </form>
+      </form>
 
 
-</metal:main>
-</body>
+    </metal:main>
+  </body>
 
 </html>

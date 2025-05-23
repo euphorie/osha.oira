@@ -1,33 +1,32 @@
 <configure
-  xmlns="http://namespaces.zope.org/zope"
-  xmlns:browser="http://namespaces.zope.org/browser"
-  xmlns:z3c="http://namespaces.zope.org/z3c"
-  >
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    >
 
   <adapter factory=".widget.ChoiceWidgetFactory" />
 
   <z3c:widgetTemplate
-    mode="input"
-    widget=".interfaces.ILargeTextAreaWidget"
-    layer=".interfaces.IOiRAFormLayer"
-    template="templates/largetextarea_input.pt"
-    />
+      widget=".interfaces.ILargeTextAreaWidget"
+      template="templates/largetextarea_input.pt"
+      layer=".interfaces.IOiRAFormLayer"
+      mode="input"
+      />
 
   <z3c:widgetTemplate
-    mode="input"
-    widget="plonetheme.nuplone.z3cform.widget.IWysiwygWidget"
-    layer=".interfaces.IOiRAFormLayer"
-    template="templates/wysiwyg_input.pt"
-    />
+      widget="plonetheme.nuplone.z3cform.widget.IWysiwygWidget"
+      template="templates/wysiwyg_input.pt"
+      layer=".interfaces.IOiRAFormLayer"
+      mode="input"
+      />
 
   <browser:page
       name="index.html"
       for="zExceptions.Unauthorized"
       class="plonetheme.nuplone.skin.error.Unauthorized"
+      template="templates/error_unauthorized.pt"
       permission="zope2.Public"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
-      template="templates/error_unauthorized.pt"
       />
 
 </configure>
-

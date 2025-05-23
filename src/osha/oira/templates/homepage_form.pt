@@ -5,35 +5,69 @@
       xmlns:meta="http://xml.zope.org/namespaces/meta"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
-      i18n:domain="nuplone"
       meta:interpolation="true"
-      metal:use-macro="context/@@layout/macros/layout">
+      metal:use-macro="context/@@layout/macros/layout"
+      i18n:domain="nuplone"
+>
 
   <metal:title fill-slot="title">${view/label}</metal:title>
   <metal:content fill-slot="content">
-    <p tal:define="status view/status"
+    <p class="message ${python:'error' if view.widgets.errors else 'notice'}"
+       tal:define="
+         status view/status;
+       "
        tal:condition="status"
-       class="message ${python:'error' if view.widgets.errors else 'notice'}"
-       tal:content="status" i18n:domain="plone">Form-global message</p>
-    <p class="discrete" tal:condition="python:getattr(view, 'description', None)">${view/description}</p>
+       tal:content="status"
+       i18n:domain="plone"
+    >Form-global message</p>
+    <p class="discrete"
+       tal:condition="python:getattr(view, 'description', None)"
+    >${view/description}</p>
 
-    <form class="concise" action="${request/getURL}" enctype="${view/enctype}" method="${view/method}" id="${view/id}">
+    <form class="concise"
+          id="${view/id}"
+          action="${request/getURL}"
+          enctype="${view/enctype}"
+          method="${view/method}"
+    >
       <fieldset>
-        <tal:widget repeat="widget view/widgets/values" replace="structure widget/render" />
+        <tal:widget repeat="widget view/widgets/values"
+                    replace="structure widget/render"
+        />
       </fieldset>
 
       <tal:groupform condition="python:getattr(view, 'groups', None)">
-        <fieldset tal:repeat="group view/groups" class="${group/layout|nothing}">
-          <legend i18n:domain="plone" i18n:translate="" tal:define="legend group/label" tal:condition="legend">${legend}</legend>
-          <p class="discrete" tal:define="description group/description" tal:condition="description">${description}</p>
+        <fieldset class="${group/layout|nothing}"
+                  tal:repeat="group view/groups"
+        >
+          <legend tal:define="
+                    legend group/label;
+                  "
+                  tal:condition="legend"
+                  i18n:domain="plone"
+                  i18n:translate=""
+          >${legend}</legend>
+          <p class="discrete"
+             tal:define="
+               description group/description;
+             "
+             tal:condition="description"
+          >${description}</p>
           <tal:widget repeat="widget group/widgets/values">
             <tal:render replace="structure widget/render" />
           </tal:widget>
         </fieldset>
       </tal:groupform>
 
-      <div class="buttonBar" tal:define="actions view/actions/values|nothing" tal:condition="actions">
-        <tal:action repeat="action actions" replace="structure action/render" />
+      <div class="buttonBar"
+           tal:define="
+             actions view/actions/values|nothing;
+           "
+           tal:condition="actions"
+      >
+        <tal:action repeat="action actions"
+                    replace="structure action/render"
+        />
       </div>
     </form>
   </metal:content>

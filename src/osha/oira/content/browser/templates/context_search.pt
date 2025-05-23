@@ -28,9 +28,14 @@
             <ul>
               <li tal:repeat="result view/results">
                 <a href="${result/url}"><em class="discrete">[${result/typ}]</em>
-                ${result/title}</a>
-                <div><a href="${result/url}" tal:content="result/path"/></div>
-                <p class="fragment" tal:condition="result/description" tal:content="result/description"/>
+                  ${result/title}</a>
+                <div><a href="${result/url}"
+                     tal:content="result/path"
+                  ></a></div>
+                <p class="fragment"
+                   tal:condition="result/description"
+                   tal:content="result/description"
+                ></p>
               </li>
             </ul>
           </tal:block>

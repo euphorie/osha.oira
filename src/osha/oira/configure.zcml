@@ -40,17 +40,17 @@
 
   <!-- Vocabularies -->
   <utility
-    component=".vocabularies.ToolVersionsVocabularyFactory"
-    name="osha.oira.toolversions"
-    />
+      name="osha.oira.toolversions"
+      component=".vocabularies.ToolVersionsVocabularyFactory"
+      />
   <utility
-    component=".vocabularies.PublishedToolsVocabularyFactory"
-    name="osha.oira.publishedtools"
-    />
+      name="osha.oira.publishedtools"
+      component=".vocabularies.PublishedToolsVocabularyFactory"
+      />
   <utility
-    component=".vocabularies.CountriesVocabularyFactory"
-    name="osha.oira.countries"
-    />
+      name="osha.oira.countries"
+      component=".vocabularies.CountriesVocabularyFactory"
+      />
 
   <interface
       interface=".interfaces.IOSHAContentSkinLayer"
@@ -61,8 +61,8 @@
   <browser:page
       name="outdated-tools-view"
       for="Products.CMFCore.interfaces.ISiteRoot"
-      permission="cmf.ManagePortal"
       class=".scripts.OutdatedToolsView"
+      permission="cmf.ManagePortal"
       />
 
 </configure>

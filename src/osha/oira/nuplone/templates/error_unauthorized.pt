@@ -5,42 +5,72 @@
       xmlns:meta="http://xml.zope.org/namespaces/meta"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
-      i18n:domain="nuplone"
       meta:interpolation="true"
-      tal:define="tools context/@@tools"
-      metal:use-macro="context/@@layout/macros/layout">
+      metal:use-macro="context/@@layout/macros/layout"
+      tal:define="
+        tools context/@@tools;
+      "
+      i18n:domain="nuplone"
+>
   <body>
     <metal:title fill-slot="title">
-      <tal:title tal:condition="tools/anonymous" i18n:translate="header_login">Login</tal:title><tal:title tal:condition="not:tools/anonymous" i18n:translate="header_error_unauthorized">Unauthorized</tal:title>
+      <tal:title tal:condition="tools/anonymous"
+                 i18n:translate="header_login"
+      >Login</tal:title><tal:title tal:condition="not:tools/anonymous"
+                 i18n:translate="header_error_unauthorized"
+      >Unauthorized</tal:title>
     </metal:title>
 
     <metal:content fill-slot="content">
-      <p class="message notice" tal:condition="not:tools/anonymous" i18n:translate="message_error_unauthorized">
+      <p class="message notice"
+         tal:condition="not:tools/anonymous"
+         i18n:translate="message_error_unauthorized"
+      >
         I am afraid you are not authorised to do this.
       </p>
 
       <tal:block condition="tools/anonymous">
-        <p class="message notice" i18n:translate="message_error_not_logged_in">
+        <p class="message notice"
+           i18n:translate="message_error_not_logged_in"
+        >
           You need to be logged in to access this page.
         </p>
 
-        <form class="concise" action="${tools/portal_url}/@@login" method="post">
+        <form class="concise"
+              action="${tools/portal_url}/@@login"
+              method="post"
+        >
           <fieldset>
             <legend i18n:translate="legend_credentials">Credentials</legend>
-            <input type="hidden" name="login_attempt" value="1"/>
+            <input name="login_attempt"
+                   type="hidden"
+                   value="1"
+            />
             <label><tal:span i18n:translate="label_email">E-mail address</tal:span>
-              <input name="__ac_name" type="text" id="login_name"/></label>
+              <input id="login_name"
+                     name="__ac_name"
+                     type="text"
+              /></label>
             <label><tal:span i18n:translate="label_password">Password</tal:span>
-              <input name="__ac_password" type="password" id="login_password"/></label>
+              <input id="login_password"
+                     name="__ac_password"
+                     type="password"
+              /></label>
           </fieldset>
 
           <div class="buttonBar">
-            <button type="submit" id="login_submit" i18n:translate="button_login">Login</button>
+            <button id="login_submit"
+                    type="submit"
+                    i18n:translate="button_login"
+            >Login</button>
           </div>
         </form>
 
-      <p i18n:translate="message_reset_password">If you forgot your password you can <a href="${context/portal_url}/@@request-password-reset"
-          i18n:name="reset_password" i18n:translate="reset_password">request a password reset</a>.</p>
+        <p i18n:translate="message_reset_password">If you forgot your password you can
+          <a href="${context/portal_url}/@@request-password-reset"
+             i18n:name="reset_password"
+             i18n:translate="reset_password"
+          >request a password reset</a>.</p>
       </tal:block>
 
     </metal:content>

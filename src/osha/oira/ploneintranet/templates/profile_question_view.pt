@@ -11,7 +11,7 @@
     <metal:slot fill-slot="quaive-body">
 
       <div class="pat-rich">
-        <p tal:replace="structure python:context.Description()"/>
+        <p tal:replace="structure python:context.Description()"></p>
       </div>
 
       <dl class="pat-grid-list">

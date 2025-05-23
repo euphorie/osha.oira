@@ -83,12 +83,12 @@
                 </template>
                 <a class="icon create pat-tooltip tooltip-inactive"
                    aria-expanded="false"
-                   tal:condition="can_add"
                    href="OIRA_CREATOR_APP_URL/@@app-assessment-add-menu/${path}#main-new-menu-assessments"
                    data-pat-tooltip="
                         source: ajax;
                         class: toolbar-menu;
                         position-list: tl"
+                   tal:condition="can_add"
                 ></a>
                 <a class="default pat-button edit pat-inject"
                    href="OIRA_CREATOR_APP_URL/@@oira-edit/${python:'/'.join(context.getPhysicalPath()[3:])}"

@@ -1,26 +1,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:meta="http://xml.zope.org/namespaces/meta"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      i18n:domain="nuplone"
       meta:interpolation="true"
-      tal:define="portal_state context/@@plone_portal_state"
-      tal:omit-tag="">
+      tal:define="
+        portal_state context/@@plone_portal_state;
+      "
+      tal:omit-tag=""
+      i18n:domain="nuplone"
+>
   <fieldset class="richInput ${view/@@dependencies}">
-    <legend lang="${portal_state/language}">${view/label}<sup tal:condition="view/required" class="required">*</sup></legend>
+    <legend lang="${portal_state/language}">${view/label}<sup class="required"
+           tal:condition="view/required"
+      >*</sup></legend>
     <dfn class="infoPanel"
-         i18n:attributes="title"
          title="Information"
-         tal:define="description view/field/description"
+         tal:define="
+           description view/field/description;
+         "
          tal:condition="description"
-         tal:content="description"/>
-    <label for="${view/id}" class="superImpose" i18n:translate="">Please enter text here</label>
+         tal:content="description"
+         i18n:attributes="title"
+    ></dfn>
+    <label class="superImpose"
+           for="${view/id}"
+           i18n:translate=""
+    >Please enter text here</label>
     <textarea class="pat-redactor"
+              id="${view/id}"
+              cols="${view/cols}"
+              disabled="${view/disabled}"
+              name="${view/name}"
+              readonly="${view/readonly}"
+              rows="${view/rows}"
               data-pat-redactor="buttons: undo, redo, html, bold, italic, lists, link; plugins: ; show-source-button: true"
-            id="${view/id}" name="${view/name}" disabled="${view/disabled}" readonly="${view/readonly}" cols="${view/cols}" rows="${view/rows}">
-        <tal:content condition="view/value" replace="structure view/value"/>
+    >
+      <tal:content condition="view/value"
+                   replace="structure view/value"
+      />
     </textarea>
-    <tal:error condition="view/error" replace="structure view/error/render|nothing"/>
+    <tal:error condition="view/error"
+               replace="structure view/error/render|nothing"
+    />
   </fieldset>
 </html>
-

@@ -17,12 +17,18 @@
 
     <metal:content fill-slot="content">
       <div class="main-content">
-        <table tal:define="fieldnames view/fieldnames">
+        <table tal:define="
+                 fieldnames view/fieldnames;
+               ">
           <tr>
-            <th tal:repeat="fieldname fieldnames" tal:content="fieldname"/>
+            <th tal:repeat="fieldname fieldnames"
+                tal:content="fieldname"
+            ></th>
           </tr>
           <tr tal:repeat="row view/survey_details">
-            <td tal:repeat="value python:row[col] for col in fieldnames" tal:content="value"/>
+            <td tal:repeat="value python:row[col] for col in fieldnames"
+                tal:content="value"
+            ></td>
           </tr>
         </table>
       </div>

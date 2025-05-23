@@ -31,7 +31,8 @@
 
             <div class="toolbar-section editor">
               <div class="editor-toolbar tiptap"
-                    id="editor-toolbar">
+                   id="editor-toolbar"
+              >
 
                 <div class="pat-collapsible pat-context-menu formatting-menu align-left no-label icon-paragraph closed"
                      data-pat-collapsible="
@@ -50,7 +51,9 @@
                           i18n:translate=""
                   >Formatting</strong>
                   <div class="panel-content">
-                    <p class="close-menu" i18n:translate="">Close</p>
+                    <p class="close-menu"
+                       i18n:translate=""
+                    >Close</p>
                     <ul class="menu-list">
                       <li>
                         <button class="button-heading-level-2 icon-header"
@@ -135,7 +138,9 @@
                           i18n:translate=""
                   >Lists</strong>
                   <div class="panel-content">
-                    <p class="close-menu" i18n:translate="">Close</p>
+                    <p class="close-menu"
+                       i18n:translate=""
+                    >Close</p>
                     <ul class="menu-list">
                       <li>
                         <button class="button-unordered-list icon-list-bullet"
@@ -181,7 +186,9 @@
                           i18n:translate=""
                   >Table</strong>
                   <div class="panel-content">
-                    <p class="close-menu" i18n:translate="">Close</p>
+                    <p class="close-menu"
+                       i18n:translate=""
+                    >Close</p>
                     <ul class="menu-list">
                       <li>
                         <button class="button-table-create icon-plus-squared"
@@ -261,7 +268,8 @@
           >
             <div class="well-title-group">
               <h2 class="well-header"
-                  id="well-header--${view/id}">
+                  id="well-header--${view/id}"
+              >
                   ${view/label}
               </h2>
               <div class="buttons">
@@ -315,7 +323,8 @@
           >
             <div class="well-title-group">
               <h2 class="well-header"
-                  id="well-header--${group/__name__}">
+                  id="well-header--${group/__name__}"
+              >
                   ${group/label}
               </h2>
               <div class="buttons">
@@ -417,16 +426,16 @@
       <template id="context-menu-image">
         <ul class="menu tiptap-image-context-menu">
           <li>
-            <button
-              type="button"
-              class="close-panel tiptap-edit-image"
-              i18n:translate="">Edit image</button>
+            <button class="close-panel tiptap-edit-image"
+                    type="button"
+                    i18n:translate=""
+            >Edit image</button>
           </li>
           <li>
-            <button
-              type="button"
-              class="close-panel tiptap-remove-image"
-              i18n:translate="">Remove image</button>
+            <button class="close-panel tiptap-remove-image"
+                    type="button"
+                    i18n:translate=""
+            >Remove image</button>
           </li>
         </ul>
       </template>
@@ -488,18 +497,16 @@
       <template id="context-menu-embed">
         <ul class="menu tiptap-embed-context-menu">
           <li>
-            <button
-              type="button"
-              class="close-panel tiptap-edit-embed"
-              i18n:translate=""
-              >Edit embed</button>
+            <button class="close-panel tiptap-edit-embed"
+                    type="button"
+                    i18n:translate=""
+            >Edit embed</button>
           </li>
           <li>
-            <button
-              type="button"
-              class="close-panel tiptap-remove-embed"
-              i18n:translate=""
-              >Remove embed</button>
+            <button class="close-panel tiptap-remove-embed"
+                    type="button"
+                    i18n:translate=""
+            >Remove embed</button>
           </li>
         </ul>
       </template>

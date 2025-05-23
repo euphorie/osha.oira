@@ -5,35 +5,70 @@
       xmlns:meta="http://xml.zope.org/namespaces/meta"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
-      i18n:domain="nuplone"
+      meta:interpolation="true"
       metal:use-macro="context/@@layout/macros/layout"
-      meta:interpolation="true">
+      i18n:domain="nuplone"
+>
   <body>
-    <metal:title metal:fill-slot="title" i18n:translate="title_login">Login</metal:title>
+    <metal:title metal:fill-slot="title"
+                 i18n:translate="title_login"
+    >Login</metal:title>
     <metal:content fill-slot="content">
-        <p tal:condition="not:view/anonymous" class="notice message" i18n:translate="message_already_logged_in">
+      <p class="notice message"
+         tal:condition="not:view/anonymous"
+         i18n:translate="message_already_logged_in"
+      >
             You are already logged in. Please logout first before trying to login again.
-        </p>
-        <p tal:condition="view/failed" class="notice message" i18n:translate="message_invalid_login">Invalid login.</p>
+      </p>
+      <p class="notice message"
+         tal:condition="view/failed"
+         i18n:translate="message_invalid_login"
+      >Invalid login.</p>
 
-      <form tal:condition="view/anonymous" class="concise" action="${view/action}" method="post" id="loginForm">
+      <form class="concise"
+            id="loginForm"
+            action="${view/action}"
+            method="post"
+            tal:condition="view/anonymous"
+      >
         <fieldset>
           <legend i18n:translate="legend_credentials">Credentials</legend>
-          <input type="hidden" name="came_from" value="${view/came_from}"/>
-          <input type="hidden" name="login_attempt" value="1"/>
+          <input name="came_from"
+                 type="hidden"
+                 value="${view/came_from}"
+          />
+          <input name="login_attempt"
+                 type="hidden"
+                 value="1"
+          />
           <label><tal:span i18n:translate="label_email">E-mail address</tal:span>
-            <input class="autofocus" id="login_name" name="__ac_name" type="text" value="${request/form/__ac_name|nothing}"/></label>
+            <input class="autofocus"
+                   id="login_name"
+                   name="__ac_name"
+                   type="text"
+                   value="${request/form/__ac_name|nothing}"
+            /></label>
           <label><tal:span i18n:translate="label_password">Password</tal:span>
-            <input class="autofocus" id="login_password" name="__ac_password" type="password"/></label>
+            <input class="autofocus"
+                   id="login_password"
+                   name="__ac_password"
+                   type="password"
+            /></label>
         </fieldset>
 
         <div class="buttonBar">
-          <button type="submit" id="login_submit" i18n:translate="button_login">Login</button>
+          <button id="login_submit"
+                  type="submit"
+                  i18n:translate="button_login"
+          >Login</button>
         </div>
       </form>
 
-      <p i18n:translate="message_reset_password">If you forgot your password you can <a href="${context/portal_url}/@@request-password-reset"
-          i18n:name="reset_password" i18n:translate="reset_password">request a password reset</a>.</p>
+      <p i18n:translate="message_reset_password">If you forgot your password you can
+        <a href="${context/portal_url}/@@request-password-reset"
+           i18n:name="reset_password"
+           i18n:translate="reset_password"
+        >request a password reset</a>.</p>
     </metal:content>
   </body>
 </html>

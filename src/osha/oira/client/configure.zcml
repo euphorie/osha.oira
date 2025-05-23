@@ -1,20 +1,22 @@
-<configure xmlns="http://namespaces.zope.org/zope"
-           xmlns:browser="http://namespaces.zope.org/browser">
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    >
 
-    <include package=".browser" />
+  <include package=".browser" />
 
-    <browser:resourceDirectory
-        name="osha.oira.client"
-        directory="resources"
-        />
+  <browser:resourceDirectory
+      name="osha.oira.client"
+      directory="resources"
+      />
 
-    <adapter
-        factory=".client.ClientPublishTraverser"
-        provides="zope.publisher.interfaces.IPublishTraverse"
-        />
-    <adapter
-        factory=".indexers.managerRolesAndUsers"
-        name="managerRolesAndUsers"
-        />
+  <adapter
+      factory=".client.ClientPublishTraverser"
+      provides="zope.publisher.interfaces.IPublishTraverse"
+      />
+  <adapter
+      factory=".indexers.managerRolesAndUsers"
+      name="managerRolesAndUsers"
+      />
 
 </configure>

@@ -24,15 +24,17 @@
            type="file"
     />
     <tal:has-image condition="view/allow_nochange">
-      <figure class="pat-image" style="margin-top: 1em; margin-bottom: 0.5em;">
+      <figure class="pat-image"
+              style="margin-top: 1em; margin-bottom: 0.5em;"
+      >
         <picture class="pat-picture">
-          <img src="${scale/url}"
-              alt=""
-              tal:define="
-                images context/@@images;
-                scale python:images.scale(view.field.getName(), direction='2col');
-              "
-              tal:condition="scale"
+          <img alt=""
+               src="${scale/url}"
+               tal:define="
+                 images context/@@images;
+                 scale python:images.scale(view.field.getName(), direction='2col');
+               "
+               tal:condition="scale"
           />
         </picture>
       </figure>

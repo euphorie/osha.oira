@@ -12,146 +12,147 @@
   <body>
     <metal:slot fill-slot="content">
       <div id="content-pane">
-      <div class="pat-toolbar"
-           id="certificate-toolbar"
-      >
-        <div class="toolbar-section quick-navigation"
-             tal:define="
-               country nocall:here/webhelpers/country_obj;
-             "
+        <div class="pat-toolbar"
+             id="certificate-toolbar"
         >
-          <a class="pat-back-button pat-inject"
-             href="${country/absolute_url}/certificates"
-             data-pat-inject="history: record; source: #content; target: #content;"
-             i18n:translate="label_certificates"
-          >Certificates</a>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="seven columns">
-              <a class="certificate-container"
-                 id="certificate"
-                 href="${python:'%s/@@certificates/%s' %(here.portal_url(), view.certificate.secret) if view.certificate.secret else None}"
-                 target="_blank"
-              >
-                <metal:certificate use-macro="here/certificates/macros/certificate" />
-              </a>
-            </div>
-            <div class="five columns">
-              <div class="pat-well info"
-                   id="message-box"
-              >
-                <form class="pat-form pat-validation"
-                      action="${request/getURL}/#message-box"
-                      method="post"
+          <div class="toolbar-section quick-navigation"
+               tal:define="
+                 country nocall:here/webhelpers/country_obj;
+               "
+          >
+            <a class="pat-back-button pat-inject"
+               href="${country/absolute_url}/certificates"
+               data-pat-inject="history: record; source: #content; target: #content;"
+               i18n:translate="label_certificates"
+            >Certificates</a>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="seven columns">
+                <a class="certificate-container"
+                   id="certificate"
+                   href="${python:'%s/@@certificates/%s' %(here.portal_url(), view.certificate.secret) if view.certificate.secret else None}"
+                   target="_blank"
                 >
-
-                  <fieldset class="pat-inject pat-autosubmit pat-subform vertical"
-                            data-pat-autosubmit="1500ms"
-                            data-pat-inject="source: #certificate::element; target: #certificate::element; &amp;&amp; source: #message-box; target: #message-box;"
+                  <metal:certificate use-macro="here/certificates/macros/certificate" />
+                </a>
+              </div>
+              <div class="five columns">
+                <div class="pat-well info"
+                     id="message-box"
+                >
+                  <form class="pat-form pat-validation"
+                        action="${request/getURL}/#message-box"
+                        method="post"
                   >
-                    <label class="pat-subform pat-inject"
-                           data-pat-inject="source: #certificate; target: #certificate;"
+
+                    <fieldset class="pat-inject pat-autosubmit pat-subform vertical"
+                              data-pat-autosubmit="1500ms"
+                              data-pat-inject="source: #certificate::element; target: #certificate::element; &amp;&amp; source: #message-box; target: #message-box;"
                     >
-                      <tal:i18n i18n:translate="">
+                      <label class="pat-subform pat-inject"
+                             data-pat-inject="source: #certificate; target: #certificate;"
+                      >
+                        <tal:i18n i18n:translate="">
                         Name on certificate
-                      </tal:i18n>
-                      <input disabled="${python: 'disabled' if view.certificate.secret else None}"
-                             name="title"
-                             placeholder="Your company name"
-                             required
-                             type="text"
-                             value="${request/title|view/certificate_title|nothing}"
-                             i18n:attributes="placeholder"
+                        </tal:i18n>
+                        <input disabled="${python: 'disabled' if view.certificate.secret else None}"
+                               name="title"
+                               placeholder="Your company name"
+                               required
+                               type="text"
+                               value="${request/title|view/certificate_title|nothing}"
+                               i18n:attributes="placeholder"
+                        />
+                      </label>
+                      <label>
+                        <tal:i18n i18n:translate="label_company_identification_number">Company identification number</tal:i18n>
+                        <input disabled="${python: 'disabled' if view.certificate.secret else None}"
+                               name="company_identification_number"
+                               type="text"
+                               value="${request/company_identification_number|view/certificate_json/company_identification_number|nothing}"
+                        />
+                      </label>
+                      <metal:extra_fields use-macro="view/country_adapter/macros/extra_fields"
+                                          tal:condition="nocall:view/country_adapter"
                       />
-                    </label>
-                    <label>
-                      <tal:i18n i18n:translate="label_company_identification_number">Company identification number</tal:i18n>
-                      <input disabled="${python: 'disabled' if view.certificate.secret else None}"
-                             name="company_identification_number"
-                             type="text"
-                             value="${request/company_identification_number|view/certificate_json/company_identification_number|nothing}"
-                      />
-                    </label>
-                    <metal:extra_fields use-macro="view/country_adapter/macros/extra_fields"
-                                        tal:condition="nocall:view/country_adapter"
-                    />
 
-                    <button hidden
-                            type="submit"
-                            i18n:translate=""
-                    >
+                      <button hidden
+                              type="submit"
+                              i18n:translate=""
+                      >
                       Send
-                    </button>
-                  </fieldset>
+                      </button>
+                    </fieldset>
 
-                  <article class="pat-rich">
-                    <tal:private condition="not:view/certificate/secret">
-                      <p i18n:translate="info_certificate_is_private">
+                    <article class="pat-rich">
+                      <tal:private condition="not:view/certificate/secret">
+                        <p i18n:translate="info_certificate_is_private">
                         Your certificate for
-                        &ldquo;<strong i18n:name="title">${view/tool_name}</strong>&rdquo;
+                          &ldquo;<strong i18n:name="title">${view/tool_name}</strong>&rdquo;
                         is private unless you choose to make it public.
                         If you click the &ldquo;Publish&rdquo; button below, your certificate will be published on the official
-                        <a href="https://oiraproject.eu"
-                           target="_blank"
-                           i18n:name="site_title"
-                           i18n:translate=""
-                        >OiRA website</a>.
-                      </p>
-                    </tal:private>
-                    <tal:public condition="view/certificate/secret">
-                      <p i18n:translate="info_certificate_is_public">
+                          <a href="https://oiraproject.eu"
+                             target="_blank"
+                             i18n:name="site_title"
+                             i18n:translate=""
+                          >OiRA website</a>.
+                        </p>
+                      </tal:private>
+                      <tal:public condition="view/certificate/secret">
+                        <p i18n:translate="info_certificate_is_public">
                         Your certificate for
-                        &ldquo;<strong i18n:name="title">${view/tool_name}</strong>&rdquo;
+                          &ldquo;<strong i18n:name="title">${view/tool_name}</strong>&rdquo;
                         is
-                        <a href="${view/public_server_url}/${view/language}/certificates?id=${view/certificate/secret}"
-                           target="_blank"
-                           i18n:name="site_title"
-                           i18n:translate=""
-                        >publically visible</a>
+                          <a href="${view/public_server_url}/${view/language}/certificates?id=${view/certificate/secret}"
+                             target="_blank"
+                             i18n:name="site_title"
+                             i18n:translate=""
+                          >publically visible</a>
                          on the OIRA website.
-                      </p>
-                      <p i18n:translate="">
+                        </p>
+                        <p i18n:translate="">
                         Copy the following link to anyone to whom it may concern as proof that you've conducted this risk assessment.
-                      </p>
-                      <fieldset class="vertical">
-                        <label>
-                          <textarea class="copy-box"
-                                    rows="2"
-                          >${view/public_server_url}/${view/language}/certificates?id=${view/certificate/secret}</textarea>
-                        </label>
-                      </fieldset>
-                    </tal:public>
-                    <p tal:replace="structure view/country/certificate_explanatory_sentence"></p>
-                  </article>
-                  <div class="button-bar">
-                    <button class="pat-button"
-                            name="public"
-                            type="submit"
-                            tal:condition="view/certificate/secret"
-                            i18n:translate="button_unpublish"
-                    >
+                        </p>
+                        <fieldset class="vertical">
+                          <label>
+                            <textarea class="copy-box"
+                                      rows="2"
+                            >${view/public_server_url}/${view/language}/certificates?id=${view/certificate/secret}</textarea>
+                          </label>
+                        </fieldset>
+                      </tal:public>
+                      <p tal:replace="structure view/country/certificate_explanatory_sentence"></p>
+                    </article>
+                    <div class="button-bar">
+                      <button class="pat-button"
+                              name="public"
+                              type="submit"
+                              tal:condition="view/certificate/secret"
+                              i18n:translate="button_unpublish"
+                      >
                       Unpublish
-                    </button>
-                    <button class="pat-button default disabled pat-depends"
-                            name="public"
-                            type="submit"
-                            value="on"
-                            data-pat-depends="condition: title; action: enable"
-                            tal:condition="not:view/certificate/secret"
-                            i18n:translate="button_publish"
-                    >
+                      </button>
+                      <button class="pat-button default disabled pat-depends"
+                              name="public"
+                              type="submit"
+                              value="on"
+                              data-pat-depends="condition: title; action: enable"
+                              tal:condition="not:view/certificate/secret"
+                              i18n:translate="button_publish"
+                      >
                       Publish
-                    </button>
-                    <a class="pat-button"
-                       href="${view/session_url}/@@certificate-print"
-                       target="print"
-                       i18n:translate="button_print"
-                    >
+                      </button>
+                      <a class="pat-button"
+                         href="${view/session_url}/@@certificate-print"
+                         target="print"
+                         i18n:translate="button_print"
+                      >
                       Print
-                    </a>
-                  </div>
-                </form>
+                      </a>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>

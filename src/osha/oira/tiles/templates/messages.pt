@@ -1,9 +1,12 @@
 <div xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:meta="http://xml.zope.org/namespaces/meta"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      meta:interpolation="true"
-      tal:omit-tag="">
+     xmlns:meta="http://xml.zope.org/namespaces/meta"
+     xmlns:metal="http://xml.zope.org/namespaces/metal"
+     xmlns:tal="http://xml.zope.org/namespaces/tal"
+     meta:interpolation="true"
+     tal:omit-tag=""
+>
 
-  <p tal:repeat="message view/messages" class="message ${message/type}">${message/message}</p>
+  <p class="message ${message/type}"
+     tal:repeat="message view/messages"
+  >${message/message}</p>
 </div>

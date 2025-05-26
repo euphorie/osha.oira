@@ -8,6 +8,40 @@ Changelog
 
 .. towncrier release notes start
 
+12.2.0 (2025-05-26)
+-------------------
+
+New features:
+
+
+- OiRA Matomo: Add tracking snippet.
+
+  This tracking snippet deactivates automatic link tracking for the report
+  download buttons and tracks them manually.
+  It removes the session id segment from the URL so that all downloads can be
+  grouped together in Matomo and to not reveal DSGVO relevant data.
+
+  Also:
+
+  - Load dimensions from server.
+  - Track after location change.
+  - Implement custom link tracking.
+  - Remove all session ids from any URLs, including current URL and referrer URL.
+
+  Note: This does not add the tracking snippet to the portal automatically, but
+  only provides the code to add it manually through-the-web.
+
+  Ref: scrum-3351
+  Ref: scrum-3249 (`Issue #3249 <https://github.com/syslabcom/scrum/issues/3249>`_)
+
+
+Bug fixes:
+
+
+- Render existing measures tooltip markdown (`Issue #3537 <https://github.com/syslabcom/scrum/issues/3537>`_)
+- Remove a behavior (osha.oira.content.risk.IRiskAdditionalContent) that could be resolved [ale-rt]
+
+
 12.1.0 (2025-05-19)
 -------------------
 

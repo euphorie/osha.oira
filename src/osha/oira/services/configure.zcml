@@ -51,7 +51,7 @@
   <plone:service
       method="GET"
       factory=".survey_publication_count.SurveyPublicationCountService"
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      for="euphorie.content.sectorcontainer.ISectorContainer"
       permission="cmf.ManagePortal"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       name="@survey-publication-count"

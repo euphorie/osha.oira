@@ -77,21 +77,21 @@
             >
               <legend i18n:translate="label_choose_survey">Choose a revision of
                 the selected OiRA Tool</legend>
-              <label tal:repeat="survey group/surveys">
-                <span class="label-fragment-title">
-                  <input checked="${python:'checked' if repeat.survey.start else None}"
-                         name="survey.local.${group/id}"
-                         type="radio"
-                         value="${survey/id}"
-                  />${survey/title}
-                  <br /><a class="floatAfter"
-                     href="${python: request['HTTP_REFERER'].partition('@@')[0] + '@@oira-view/' + '/'.join(survey['url'].split('/')[-4:])}"
-                     target="_blank"
-                     i18n:translate="label_view_revision_in_new_window"
-                  >
+              <label class="label-fragment-title"
+                     tal:repeat="survey group/surveys"
+              >
+                <input checked="${python:'checked' if repeat.survey.start else None}"
+                       name="survey.local.${group/id}"
+                       type="radio"
+                       value="${survey/id}"
+                />${survey/title}
+                <br /><a class="floatAfter"
+                   href="${python: request['HTTP_REFERER'].partition('@@')[0] + '@@oira-view/' + '/'.join(survey['url'].split('/')[-4:])}"
+                   target="_blank"
+                   i18n:translate="label_view_revision_in_new_window"
+                >
                     View revision in new window
-                  </a>
-                </span>
+                </a>
               </label>
             </fieldset>
           </tal:group>
@@ -161,21 +161,21 @@
         >
           <legend i18n:translate="label_choose_survey">Choose a revision of the
             selected OiRA Tool</legend>
-          <label tal:repeat="survey group/surveys">
-            <span class="label-fragment-title">
-              <input checked="${python:'checked' if repeat.survey.start else None}"
-                     name="${name}"
-                     type="radio"
-                     value="${survey/id}"
-              />${survey/title}
-              <br /><a class="floatAfter"
-                 href="${python: request['HTTP_REFERER'].partition('@@')[0] + '@@oira-view/' + '/'.join(survey['url'].split('/')[-4:])}"
-                 target="_blank"
-                 i18n:translate="label_view_revision_in_new_window"
-              >
+          <label class="label-fragment-title"
+                 tal:repeat="survey group/surveys"
+          >
+            <input checked="${python:'checked' if repeat.survey.start else None}"
+                   name="${name}"
+                   type="radio"
+                   value="${survey/id}"
+            />${survey/title}
+            <br /><a class="floatAfter"
+               href="${python: request['HTTP_REFERER'].partition('@@')[0] + '@@oira-view/' + '/'.join(survey['url'].split('/')[-4:])}"
+               target="_blank"
+               i18n:translate="label_view_revision_in_new_window"
+            >
                 View revision in new window
-              </a>
-            </span>
+            </a>
           </label>
         </fieldset>
       </tal:group>

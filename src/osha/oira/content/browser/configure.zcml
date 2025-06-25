@@ -266,7 +266,7 @@
 
   <browser:page
       name="survey-publication-count"
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      for="euphorie.content.sectorcontainer.ISectorContainer"
       class=".survey_publication_count.SurveyPublicationCount"
       template="templates/survey_publication_count.pt"
       permission="cmf.ManagePortal"
@@ -274,7 +274,7 @@
 
   <browser:page
       name="survey-publication-count.csv"
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      for="euphorie.content.sectorcontainer.ISectorContainer"
       class=".survey_publication_count.SurveyPublicationCountCSV"
       permission="cmf.ManagePortal"
       />

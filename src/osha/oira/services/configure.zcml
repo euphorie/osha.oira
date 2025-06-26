@@ -57,4 +57,13 @@
       name="@survey-publication-count"
       />
 
+  <plone:service
+      method="POST"
+      factory=".upload.Upload"
+      for="euphorie.content.sector.ISector"
+      permission="euphorie.content.AddNewRIEContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      name="@upload"
+      />
+
 </configure>

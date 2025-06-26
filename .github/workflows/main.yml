@@ -49,6 +49,8 @@ jobs:
         uses: pre-commit/action@v3.0.0
       - name: Test
         run: |
+          bin/pip install \
+              git+https://github.com/ale-rt/horse-with-no-namespace.git@main
           bin/coverage run bin/test -s osha.oira
           bin/coverage report --fail-under=38 -i
         env:

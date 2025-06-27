@@ -57,7 +57,7 @@ setup(
         "zope.app.publication",
         "zope.publisher",
     ],
-    python_requires=">=3.11,<3.13",
+    python_requires=">=3.11",
     extras_require={
         "tests": [
             "Euphorie [tests]",

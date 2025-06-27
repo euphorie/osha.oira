@@ -121,11 +121,8 @@ var _paq = _paq || [];
     async function compile_tracking_variables() {
         console.debug("Matomo: Tracking triggered.");
 
-
         // Wait for JSON data before proceeding
-        // TODO: ENABLE for scrum-3351
-        //const tracking_dimensions = await load_tracking_dimensions();
-        const tracking_dimensions = {};
+        const tracking_dimensions = await load_tracking_dimensions();
 
         if (!tracking_dimensions) {
             console.error("Matomo: ❌ No Piwik data loaded, skipping tracking.");

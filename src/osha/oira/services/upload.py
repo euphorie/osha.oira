@@ -11,12 +11,13 @@ class Upload(Service):
 
     def reply(self):
         data = json_body(self.request)
-        surveygroup_title = data.get("surveygroup_title", "")
-        survey_title = data.get("survey_title", "OiRA Tool import")
         upload = data.get("upload", None)
-        is_etranslate_compatible = data.get("is_etranslate_compatible", False)
         if upload is None:
             self.request.response.setStatus(400)
+
+        surveygroup_title = data.get("surveygroup_title", "")
+        survey_title = data.get("survey_title", "OiRA Tool import")
+        is_etranslate_compatible = data.get("is_etranslate_compatible", False)
             return {"error": {"type": "Missing xml file"}}
         upload_view = api.content.get_view("upload", self.context, self.request)
         importer = upload_view.importer_factory(self.context)

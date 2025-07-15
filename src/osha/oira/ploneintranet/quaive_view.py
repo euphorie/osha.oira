@@ -141,3 +141,65 @@ class QuaiveRiskView(RiskView):
             for solution in self.my_context.values()
             if ISolution.providedBy(solution)
         ]
+
+    @property
+    def information_images(self):
+        """Return the images that should go in the information content well.
+
+        Returns a list of dicts with a URL and a title.
+        """
+        risk_images_view = api.content.get_view(
+            name="images", context=self.context, request=self.request
+        )
+        image_scale = "training"
+        images = []
+        # For legacy reasons we can the images coming from four couple of fields:
+        # 1. image/caption
+        # 2. image2/caption2
+        # 3. image3/caption3
+        # 4. image4/caption4
+        if self.context.image:
+            images.append(
+                {
+                    "url": risk_images_view.scale("image", scale=image_scale).url,
+                    "title": self.context.image_caption or None,
+                }
+            )
+        if self.context.image2:
+            images.append(
+                {
+                    "url": risk_images_view.scale("image2", scale=image_scale).url,
+                    "title": self.context.caption2 or None,
+                }
+            )
+        if self.context.image3:
+            images.append(
+                {
+                    "url": risk_images_view.scale("image3", scale=image_scale).url,
+                    "title": self.context.caption3 or None,
+                }
+            )
+        if self.context.image4:
+            images.append(
+                {
+                    "url": risk_images_view.scale("image4", scale=image_scale).url,
+                    "title": self.context.caption4 or None,
+                }
+            )
+
+        # The modern and preferred approach is to use
+        # a list field with captioned images.
+        related_images = self.context.related_images or []
+        for relation in related_images:
+            image = relation.image.to_object
+            if image:
+                images_view = api.content.get_view(
+                    name="images", context=image, request=self.request
+                )
+                images.append(
+                    {
+                        "url": images_view.scale("image", scale=image_scale).url,
+                        "title": relation.caption or None,
+                    }
+                )
+        return images

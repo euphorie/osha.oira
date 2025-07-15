@@ -22,8 +22,8 @@ Bug fixes:
 
 - fixed markup so that radio inputs with complex labels don't wrap.
   [pilz] (`Issue #2594 <https://github.com/syslabcom/scrum/issues/2594>`_)
-- Register @@survey-publication-count @survey-publication-count.csv for the sector container, rather than the root, to make them easier to call from quaive.
 
+- Register @@survey-publication-count @survey-publication-count.csv for the sector container, rather than the root, to make them easier to call from quaive.
   See: https://github.com/quaive/quaive.osha/pull/166 (`Issue #3488 <https://github.com/syslabcom/scrum/issues/3488>`_)
 
 

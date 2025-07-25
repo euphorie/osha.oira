@@ -156,6 +156,14 @@
       mode="input"
       />
 
+  <z3c:widgetTemplate
+      view="..interfaces.IQuaiveForm"
+      widget=".miller_columns.IPIContentBrowserWidget"
+      template="templates/miller_columns_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
   <browser:page
       name="quaive_form_macros"
       for="*"

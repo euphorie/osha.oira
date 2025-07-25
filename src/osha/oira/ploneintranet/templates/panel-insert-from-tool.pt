@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      metal:use-macro="context/@@layout/macros/layout"
+      tal:define="
+        actions view/actions/values|nothing;
+      "
+      i18n:domain="nuplone"
+>
+
+  <metal:title fill-slot="title" />
+  <metal:content fill-slot="content">
+
+    <div id="pat-modal-panel-space">
+      <dialog class="large pat-modal-panel"
+              id="pat-modal-panel"
+              open
+      >
+
+        <div class="modal-panel-contents"
+             id="quaive-content"
+        >
+          <div class="modal-panel-header">
+            <h1 class="modal-panel-title">${view/label}</h1>
+          </div>
+
+          <form class="pat-inject pat-form modal-panel-body"
+                id="${view/id}"
+                action="${python:request.getURL()}"
+                enctype="${view/enctype}"
+                method="${view/method}"
+                data-pat-inject="
+                  source: #application-body::element;
+                "
+          >
+
+            <article class="pat-rich">
+              <p>${view/description}</p>
+            </article>
+
+            <tal:widget tal:repeat="widget view/widgets/values"
+                        content="structure widget/render"
+            />
+
+            <div class="modal-panel-footer modal-panel-main-button-bar pat-button-bar pat-bumper bumped bumped-right bumped-left">
+              <tal:action repeat="action actions"
+                          replace="structure action/render"
+              />
+            </div>
+
+          </form>
+
+        </div>
+      </dialog>
+    </div>
+
+  </metal:content>
+</html>

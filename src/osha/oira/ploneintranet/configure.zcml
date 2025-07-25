@@ -262,4 +262,13 @@
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
+  <browser:page
+      name="panel-insert-from-tool"
+      for="*"
+      class=".quaive_insert.PanelInsertFromToolView"
+      template="templates/panel-insert-from-tool.pt"
+      permission="cmf.AddPortalContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
 </configure>

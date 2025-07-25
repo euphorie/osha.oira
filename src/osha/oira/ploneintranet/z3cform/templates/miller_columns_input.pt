@@ -1,0 +1,132 @@
+<metal:page define-macro="master">
+  <html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        xmlns:metal="http://xml.zope.org/namespaces/metal"
+        xmlns:tal="http://xml.zope.org/namespaces/tal"
+        lang="en"
+        xml:lang="en"
+        tal:define="
+          depth python:int(request.form.get('depth', 0));
+          widget_url python: view.widget_url;
+        "
+        i18n:domain="nuplone"
+  >
+    <body>
+
+      <fieldset class="group ueber-selector">
+        <fieldset class="pat-miller-columns">
+          <div class="pat-miller-columns-column-set"
+               id="column-set-${depth}"
+               tal:define="
+                 preview nocall:view/preview;
+               "
+          >
+            <a class="pat-scroll assistive-text"
+               href="#miller-column-${depth}"
+               data-pat-scroll="
+                  direction: left;
+                  trigger: auto;
+                  selector: #miller-column-${depth}"
+            >Jump to content</a>
+            <fieldset class="pat-miller-columns-column pat-autosubmit pat-subform pat-inject"
+                      id="miller-column-contents-${depth}"
+                      data-pat-inject="
+                                scroll: top;
+                                url: ${widget_url};
+                                source: #column-set-${next_depth};
+                                target: #miller-column-${next_depth}
+                                "
+                      tal:define="
+                        next_depth python:depth + 1;
+                      "
+            >
+
+              <div class="miller-columns-item-preview"
+                   tal:condition="python: preview"
+              >
+                <tal:preview define="
+                               portal_type preview/portal_type;
+                               type_title python:view.type_title(portal_type);
+                               image preview/image/scales/preview|nothing;
+                             ">
+                  <h1 class="title">
+                            ${preview/Title|type_title}
+                  </h1>
+                  <figure class="illustration"
+                          tal:condition="image"
+                  >
+                    <img alt=""
+                         src="${image/download}"
+                    />
+                  </figure>
+                  <p class="description"
+                     tal:content="structure preview/Description"
+                  ></p>
+                  <dl class="pat-grid-list">
+                    <dt i18n:translate="">
+                              Type
+                    </dt>
+                    <dd>
+                              ${type_title}
+                    </dd>
+                    <dt i18n:translate="">
+                              Items
+                    </dt>
+                    <dd>
+                              ${python:len(view.results)}
+                    </dd>
+                    <dt i18n:translate="">
+                              Created
+                    </dt>
+                    <dd tal:define="
+                          toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+                          created preview/created;
+                        ">
+                              ${python:toLocalizedTime(created)}
+                    </dd>
+                  </dl>
+
+                </tal:preview>
+              </div>
+
+              <tal:results repeat="(item, selectable) view/results">
+                <label class="pat-miller-columns-column-item type-${python:view.portal_type_to_icon(portal_type)}"
+                       tabindex="0"
+                       tal:define="
+                         portal_type item/portal_type;
+                       "
+                >
+                          ${item/Title}
+                  <input name="${python:view.name if selectable else 'next_container_uid'}"
+                         type="radio"
+                         value="${item/UID}"
+                  />
+                </label>
+              </tal:results>
+
+              <input name="depth"
+                     type="hidden"
+                     value="${next_depth}"
+              />
+              <button class="assistive-text"
+                      type="submit"
+              >
+                        Update
+              </button>
+            </fieldset>
+            <div class="pat-miller-columns-column-set"
+                 id="miller-column-${python:depth + 1}"
+            >
+              <div class="pat-miller-columns-column placeholder">
+                <p hidden>
+                          Select a folder or a document above.
+                </p>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </fieldset>
+
+    </body>
+  </html>
+</metal:page>

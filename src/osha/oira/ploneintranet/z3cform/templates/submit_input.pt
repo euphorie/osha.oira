@@ -5,11 +5,11 @@
       "
       tal:omit-tag=""
 >
-  <button class="pat-button ${python: 'icon-ok-circle default' if not is_secondary else 'icon-cancel-circle'}"
+  <button class="pat-button ${python: 'icon-ok-circle default' if not is_secondary else 'icon-cancel-circle'} ${view/klass}"
           id="${view/id}"
           formnovalidate="${python: 'formnovalidate' if is_secondary else None}"
           name="${view/name}"
-          type="submit"
+          type="${python: getattr(view, 'type_override', 'submit')}"
           value="${view/value}"
   >${view/title}</button>
 

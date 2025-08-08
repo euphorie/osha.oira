@@ -271,4 +271,12 @@
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
+  <browser:page
+      name="quaive-upload-survey"
+      for="euphorie.content.sector.ISector"
+      class=".quaive_upload.ImportSurvey"
+      permission="euphorie.content.AddNewRIEContent"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
 </configure>

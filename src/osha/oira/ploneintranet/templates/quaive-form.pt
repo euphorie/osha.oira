@@ -360,6 +360,7 @@
         <input name="oira_type"
                type="hidden"
                value="${python: view.oira_type}"
+               tal:condition="view/oira_type|nothing"
         />
       </form>
 

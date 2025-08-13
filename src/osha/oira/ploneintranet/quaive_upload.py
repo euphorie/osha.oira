@@ -10,6 +10,6 @@ _ = MessageFactory("nuplone")
 
 @implementer(IQuaiveForm)
 class ImportSurvey(EuphorieImportSurvey):
-    template = ViewPageTemplateFile("templates/quaive-form.pt")
+    template = ViewPageTemplateFile("templates/quaive-panel-form.pt")
     label = _("menu_import", default="Import OiRA Tool")
     description = ""

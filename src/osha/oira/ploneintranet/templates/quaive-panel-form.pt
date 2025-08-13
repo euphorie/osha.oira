@@ -29,9 +29,18 @@
       >
 
         <fieldset class="horizontal">
-          <tal:widget tal:repeat="widget view/widgets/values"
-                      content="structure widget/render"
-          />
+          <tal:widget tal:repeat="widget view/widgets/values">
+            <tal:widget define="
+                          error nocall: widget/error|nothing;
+                        ">
+                    ${structure: widget/render}
+              <p class="pat-notice error"
+                 tal:condition="python: error"
+              >
+                      ${structure: error/render}
+              </p>
+            </tal:widget>
+          </tal:widget>
           <input name="oira_type"
                  type="hidden"
                  value="${python: view.oira_type}"

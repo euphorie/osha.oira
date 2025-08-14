@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      metal:use-macro="context/@@quaive-layout/macros/layout"
+      i18n:domain="euphorie"
+>
+  <tal:comment condition="python:False">
+     This is the choice view template.
+     It is used to display how a choice would be displayed in the client.
+
+     view: osha.oira.ploneintranet.quaive_view.QuaiveRiskView
+
+     This template is inspired by euphorie.client.browser:templates/choice_identification.pt
+  </tal:comment>
+  <body>
+
+    <metal:slot fill-slot="quaive-body">
+
+      <form class="pat-form">
+        <fieldset class="pat-checklist">
+          <article class="pat-rich">
+            <tal:description content="structure python:context.description">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
+            ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+              explicabo.</tal:description>
+          </article>
+
+          <label class="label-fragment-title"
+                 tal:repeat="option context/objectValues"
+          >
+            <fieldset>
+              <input name="answer"
+                     type="${python: 'checkbox' if context.allow_multiple_options else 'radio'}"
+              />${option/title}
+            </fieldset>
+          </label>
+        </fieldset>
+      </form>
+
+    </metal:slot>
+  </body>
+
+</html>

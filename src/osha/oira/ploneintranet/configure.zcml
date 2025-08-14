@@ -1,6 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="euphorie"
     >
 
@@ -56,6 +57,16 @@
       permission="zope2.View"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
+
+  <configure zcml:condition="installed euphorie.content.choice">
+    <browser:page
+        name="quaive-view"
+        for="euphorie.content.choice.IChoice"
+        template="templates/choice_view.pt"
+        permission="zope2.View"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+        />
+  </configure>
 
   <browser:page
       name="quaive-view"
@@ -126,6 +137,17 @@
       permission="cmf.ModifyPortalContent"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
+
+  <configure zcml:condition="installed euphorie.content.choice">
+    <browser:page
+        name="quaive-edit"
+        for="euphorie.content.choice.IChoice"
+        class=".quaive_edit.ChoiceQuaiveEditForm"
+        template="templates/quaive-form.pt"
+        permission="cmf.ModifyPortalContent"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+        />
+  </configure>
 
   <browser:page
       name="quaive-edit"

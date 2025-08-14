@@ -80,6 +80,14 @@ class SurveyGroupImage(SurveyGroupAttribute):
 
     attribute_name = "image"
 
+    @property
+    def image_url(self) -> str:
+        """Return the image URL of the survey group."""
+        for survey in self.surveys:
+            if self.get_obj_attribute(survey):
+                return f"{survey.absolute_url()}/@@images/image"
+        return ""
+
     def __call__(self):
         """Check all the surveys, if they have an image, redirect to that image.
 
@@ -90,10 +98,9 @@ class SurveyGroupImage(SurveyGroupAttribute):
 
         Return a fallback if it does not exist.
         """
-        for survey in self.surveys:
-            if self.get_obj_attribute(survey):
-                image_url = f"{survey.absolute_url()}/@@images/image"
-                return self.request.response.redirect(image_url)
+        image_url = self.image_url
+        if image_url:
+            return self.request.response.redirect(image_url)
 
         self.request.response.redirect(
             f"{api.portal.get().absolute_url()}"

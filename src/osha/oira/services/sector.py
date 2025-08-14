@@ -27,6 +27,7 @@ class SearchWithVersionDescriptionGet(SearchGet):
             survey_group_image_view: SurveyGroupImage = api.content.get_view(
                 "survey-group-image", survey_group, self.request
             )
+            item["image_url"] = survey_group_image_view.image_url
             survey_version = next(survey_group_image_view.surveys, None)
             if survey_version is not None:
                 item["description"] = survey_version.description

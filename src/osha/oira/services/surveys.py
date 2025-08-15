@@ -1,7 +1,6 @@
 from Acquisition import aq_base
 from Acquisition import aq_inner
 from Acquisition import aq_parent
-from plone import api
 from plone.base.utils import base_hasattr
 from plone.restapi.serializer.converters import json_compatible
 from plone.restapi.services import Service
@@ -12,11 +11,6 @@ class ToolVersionsGet(Service):
 
     And we can use a bit of info from the country as well.
     """
-
-    @property
-    def default_image_url(self):
-        portal_url = api.portal.get().absolute_url()
-        return f"{portal_url}/++resource++osha.oira.content/clipboard.svg"
 
     def get_survey_info(self, survey):
         # Is this survey the tool version that is published on the client?
@@ -90,7 +84,5 @@ class ToolVersionsGet(Service):
                 result["introduction"] = survey.introduction
             # The description field always exists.
             result["summary"] = survey.Description()
-        if not result["image_url"]:
-            result["image_url"] = self.default_image_url
 
         return result

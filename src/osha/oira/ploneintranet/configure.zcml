@@ -66,6 +66,14 @@
         permission="zope2.View"
         layer="osha.oira.interfaces.IOSHAContentSkinLayer"
         />
+
+    <browser:page
+        name="quaive-view"
+        for="euphorie.content.option.IOption"
+        template="templates/option_view.pt"
+        permission="zope2.View"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+        />
   </configure>
 
   <browser:page
@@ -143,6 +151,15 @@
         name="quaive-edit"
         for="euphorie.content.choice.IChoice"
         class=".quaive_edit.ChoiceQuaiveEditForm"
+        template="templates/quaive-form.pt"
+        permission="cmf.ModifyPortalContent"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+        />
+
+    <browser:page
+        name="quaive-edit"
+        for="euphorie.content.option.IOption"
+        class=".quaive_edit.OptionQuaiveEditForm"
         template="templates/quaive-form.pt"
         permission="cmf.ModifyPortalContent"
         layer="osha.oira.interfaces.IOSHAContentSkinLayer"

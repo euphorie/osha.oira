@@ -3,6 +3,7 @@ from euphorie.content.browser.module import EditForm as ModuleEditForm
 from euphorie.content.browser.profilequestion import EditForm as ProfileQuestionEditForm
 from osha.oira import _
 from osha.oira.content.browser.choice import EditForm as ChoiceEditForm
+from osha.oira.content.browser.option import EditForm as OptionEditForm
 from osha.oira.content.browser.risk import EditForm as RiskEditForm
 from osha.oira.content.browser.sector import EditForm as SectorEditForm
 from osha.oira.content.browser.solution import EditForm as SolutionEditForm
@@ -34,6 +35,10 @@ class RiskQuaiveEditForm(QuaiveEditFormMixin, RiskEditForm):
 
 
 class ChoiceQuaiveEditForm(QuaiveEditFormMixin, ChoiceEditForm):
+    """Custom edit form designed to be embedded in Quaive"""
+
+
+class OptionQuaiveEditForm(QuaiveEditFormMixin, OptionEditForm):
     """Custom edit form designed to be embedded in Quaive"""
 
 

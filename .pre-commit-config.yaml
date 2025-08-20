@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.19.1
+    rev: v3.20.0
     hooks:
       - id: pyupgrade
         args: [--py37-plus]
@@ -13,11 +13,11 @@ repos:
     hooks:
       - id: isort
   - repo: https://github.com/PyCQA/flake8
-    rev: 7.2.0
+    rev: 7.3.0
     hooks:
       - id: flake8
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.8.3
+    rev: 1.8.6
     hooks:
       - id: bandit
         exclude: /tests/
@@ -26,7 +26,7 @@ repos:
           - --confidence-level=medium
           - --skip=B608
   - repo: https://github.com/collective/zpretty
-    rev: 3.1.0
+    rev: 3.1.1
     hooks:
       - id: zpretty
         exclude: src/euphorie/client/resources

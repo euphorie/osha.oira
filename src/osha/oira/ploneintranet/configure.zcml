@@ -310,6 +310,32 @@
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
+  <configure zcml:condition="installed euphorie.content.choice">
+    <browser:page
+        name="quaive-create-euphorie.choice"
+        for="*"
+        class=".quaive_create.QuaiveCreateEuphorieChoiceView"
+        permission="cmf.AddPortalContent"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+        />
+
+    <browser:page
+        name="quaive-create-euphorie.option"
+        for="*"
+        class=".quaive_create.QuaiveCreateEuphorieOptionView"
+        permission="cmf.AddPortalContent"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+        />
+
+    <browser:page
+        name="quaive-create-euphorie.recommendation"
+        for="*"
+        class=".quaive_create.QuaiveCreateEuphorieRecommendationView"
+        permission="cmf.AddPortalContent"
+        layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+        />
+  </configure>
+
   <browser:page
       name="links.json"
       for="euphorie.content.survey.ISurvey"

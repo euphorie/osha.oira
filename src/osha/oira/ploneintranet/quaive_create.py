@@ -2,6 +2,9 @@ from euphorie.content.browser.country import AddView as EuphorieCountryAddView
 from euphorie.content.browser.module import AddView as EuphorieModuleAddView
 from euphorie.content.browser.survey import AddView as EuphorieSurveyAddView
 from euphorie.content.browser.surveygroup import AddView as EuphorieSurveyGroupAddView
+from osha.oira.content.browser.choice import AddView as EuphorieChoiceAddView
+from osha.oira.content.browser.option import AddView as EuphorieOptionAddView
+from osha.oira.content.browser.recommendation import AddView as EuphorieRecommendationAddView  # noqa: E501
 from osha.oira.content.browser.risk import AddView as EuphorieRiskAddView
 from osha.oira.content.browser.sector import AddView as EuphorieSectorAddView
 from osha.oira.content.browser.solution import AddView as EuphorieSolutionAddView
@@ -143,3 +146,31 @@ class QuaiveCreateEuphorieSolutionForm(
 
 class QuaiveCreateEuphorieSolutionView(QuaiveCreateViewMixin, EuphorieSolutionAddView):
     form = QuaiveCreateEuphorieSolutionForm
+
+
+class QuaiveCreateEuphorieChoiceForm(QuaiveCreateFormMixin, EuphorieChoiceAddView.form):
+    template = ViewPageTemplateFile("templates/quaive-form.pt")
+
+
+class QuaiveCreateEuphorieChoiceView(QuaiveCreateViewMixin, EuphorieChoiceAddView):
+    form = QuaiveCreateEuphorieChoiceForm
+
+
+class QuaiveCreateEuphorieOptionForm(QuaiveCreateFormMixin, EuphorieOptionAddView.form):
+    template = ViewPageTemplateFile("templates/quaive-form.pt")
+
+
+class QuaiveCreateEuphorieOptionView(QuaiveCreateViewMixin, EuphorieOptionAddView):
+    form = QuaiveCreateEuphorieOptionForm
+
+
+class QuaiveCreateEuphorieRecommendationForm(
+    QuaiveCreateFormMixin, EuphorieRecommendationAddView.form
+):
+    template = ViewPageTemplateFile("templates/quaive-form.pt")
+
+
+class QuaiveCreateEuphorieRecommendationView(
+    QuaiveCreateViewMixin, EuphorieRecommendationAddView
+):
+    form = QuaiveCreateEuphorieRecommendationForm

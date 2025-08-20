@@ -25,7 +25,8 @@ class OSHAWebHelpers(WebHelpers):
     @property
     def custom_css(self):
         """No sidebar for OSHA OiRA"""
-        return """#toggle-osc { display: none !important;}"""
+        return """<style type="text/css">
+#toggle-osc { display: none !important;}</style>"""
 
     def is_image_small(self, context, fname="image", usecase="module"):
         image = getattr(context, fname, None)

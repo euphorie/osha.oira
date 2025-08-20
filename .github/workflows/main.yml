@@ -39,14 +39,15 @@ jobs:
           key: ${{ runner.os }}-cache-${{ hashFiles('setup.*', '*.cfg') }}-${{ matrix.config[0] }}  # yamllint disable-line rule:line-length
           restore-keys: |
             ${{ runner.os }}-cache-
+      - name: Pre commit
+        uses: pre-commit/action@v3.0.0
+        if: ${{ matrix.config[2] == '3.12' }}
       - name: Install dependencies
         run: |
           sudo locale-gen en_US.UTF-8 nl_NL@euro
           python -m venv .
           bin/pip install -r "requirements-${{ matrix.config[1] }}.txt"
           bin/buildout -c .github-${{ matrix.config[1] }}.cfg
-      - name: Pre commit
-        uses: pre-commit/action@v3.0.0
       - name: Test
         run: |
           bin/coverage run bin/test -s osha.oira

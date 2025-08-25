@@ -246,18 +246,18 @@
 
             <div class="risk-illustrations pat-gallery"
                  tal:define="
-                   information_images view/information_images;
+                   information_scales_and_captions view/information_scales_and_captions;
                  "
-                 tal:condition="python: information_images"
+                 tal:condition="python: information_scales_and_captions"
             >
               <figure class="illustration"
-                      tal:repeat="information_image information_images"
+                      tal:repeat="scale_and_caption information_scales_and_captions"
               >
-                <a href="${information_image/url}"
-                   title="${information_image/title}"
+                <a href="${scale_and_caption/url}"
+                   title="${scale_and_caption/caption}"
                 >
                   <img alt=""
-                       src="${information_image/url}"
+                       src="${scale_and_caption/url}"
                   />
                 </a>
               </figure>

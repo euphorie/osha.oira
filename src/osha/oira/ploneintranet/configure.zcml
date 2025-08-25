@@ -279,4 +279,13 @@
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
       />
 
+  <browser:page
+      name="panel-select-image-image-bank"
+      for="*"
+      class=".image_bank.ImageBankPanel"
+      template="templates/panel-select-image-image-bank.pt"
+      permission="cmf.ModifyPortalContent"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      />
+
 </configure>

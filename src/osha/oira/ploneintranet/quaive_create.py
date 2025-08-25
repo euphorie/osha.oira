@@ -4,7 +4,6 @@ from euphorie.content.browser.survey import AddView as EuphorieSurveyAddView
 from euphorie.content.browser.surveygroup import AddView as EuphorieSurveyGroupAddView
 from osha.oira.content.browser.choice import AddView as EuphorieChoiceAddView
 from osha.oira.content.browser.option import AddView as EuphorieOptionAddView
-from osha.oira.content.browser.recommendation import AddView as EuphorieRecommendationAddView  # noqa: E501
 from osha.oira.content.browser.risk import AddView as EuphorieRiskAddView
 from osha.oira.content.browser.sector import AddView as EuphorieSectorAddView
 from osha.oira.content.browser.solution import AddView as EuphorieSolutionAddView
@@ -17,6 +16,9 @@ from zope.interface import alsoProvides
 from zope.interface import implementer
 
 
+from osha.oira.content.browser.recommendation import (  # isort:skip
+    AddView as EuphorieRecommendationAddView,
+)
 from euphorie.content.browser.profilequestion import (  # isort:skip
     AddView as EuphorieProfileQuestionAddView,
 )

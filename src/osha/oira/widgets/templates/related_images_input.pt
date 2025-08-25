@@ -40,8 +40,8 @@
            type="hidden"
            value="${python: related_image.widgets['caption'].value}"
     />
-    <input tal:replace="structure view/counterMarker" />
   </tal:for>
 
+  <input tal:replace="structure view/counterMarker" />
 
 </html>

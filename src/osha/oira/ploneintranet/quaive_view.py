@@ -7,6 +7,7 @@ from logging import getLogger
 from plone import api
 from plone.memoize.view import memoize
 from plone.memoize.view import memoize_contextless
+from plone.namedfile.scaling import ImageScaling
 from plone.supermodel.model import SchemaClass
 from Products.CMFCore.permissions import AddPortalContent
 from Products.Five import BrowserView
@@ -107,6 +108,11 @@ class BaseQuaiveView(BrowserView):
 
 class QuaiveRiskView(RiskView):
 
+    image_scale_options = {
+        "scale": "training",
+        "pre": True,
+    }
+
     @property
     def tool_type(self):
         return get_tool_type(self.my_context)
@@ -142,50 +148,51 @@ class QuaiveRiskView(RiskView):
             if ISolution.providedBy(solution)
         ]
 
+    def get_scale_url(self, context, image_field: str) -> str:
+        """Return the scale to use for the given image field."""
+        images_view: ImageScaling = api.content.get_view(
+            name="images", context=context, request=self.request
+        )  # type: ignore
+        return images_view.scale(image_field, **self.image_scale_options).url
+
     @property
-    def information_images(self):
+    def legacy_information_scales_and_captions(self) -> list[dict]:
+        """Return the images that should go in the information content well
+        coming from the legacy fields:
+
+        1. image and image_caption
+        2. image2 and caption2
+        3. image3 and caption3
+        4. image4 and caption4
+        """
+        legacy_fields = [
+            ("image", "image_caption"),
+            ("image2", "caption2"),
+            ("image3", "caption3"),
+            ("image4", "caption4"),
+        ]
+        scales_and_captions = []
+        for image_field, caption_field in legacy_fields:
+            image = getattr(self.context, image_field, None)
+            caption = getattr(self.context, caption_field, None)
+            if image:
+                scale = {
+                    "url": self.get_scale_url(self.context, image_field),
+                    "caption": caption or None,
+                }
+                scales_and_captions.append(scale)
+        return scales_and_captions
+
+    @property
+    def information_scales_and_captions(self):
         """Return the images that should go in the information content well.
 
-        Returns a list of dicts with a URL and a title.
+        Returns a list of dicts with a scale URL and a title.
         """
-        risk_images_view = api.content.get_view(
-            name="images", context=self.context, request=self.request
-        )
-        image_scale = "training"
-        images = []
-        # For legacy reasons we can the images coming from four couple of fields:
-        # 1. image/caption
-        # 2. image2/caption2
-        # 3. image3/caption3
-        # 4. image4/caption4
-        if self.context.image:
-            images.append(
-                {
-                    "url": risk_images_view.scale("image", scale=image_scale).url,
-                    "title": self.context.image_caption or None,
-                }
-            )
-        if self.context.image2:
-            images.append(
-                {
-                    "url": risk_images_view.scale("image2", scale=image_scale).url,
-                    "title": self.context.caption2 or None,
-                }
-            )
-        if self.context.image3:
-            images.append(
-                {
-                    "url": risk_images_view.scale("image3", scale=image_scale).url,
-                    "title": self.context.caption3 or None,
-                }
-            )
-        if self.context.image4:
-            images.append(
-                {
-                    "url": risk_images_view.scale("image4", scale=image_scale).url,
-                    "title": self.context.caption4 or None,
-                }
-            )
+        scales_and_captions = []
+
+        # Add images stored in legacy fields that will be removed one day
+        scales_and_captions.extend(self.legacy_information_scales_and_captions)
 
         # The modern and preferred approach is to use
         # a list field with captioned images.
@@ -193,13 +200,10 @@ class QuaiveRiskView(RiskView):
         for relation in related_images:
             image = relation.image.to_object
             if image:
-                images_view = api.content.get_view(
-                    name="images", context=image, request=self.request
-                )
-                images.append(
-                    {
-                        "url": images_view.scale("image", scale=image_scale).url,
-                        "title": relation.caption or None,
-                    }
-                )
-        return images
+                scale = {
+                    "url": self.get_scale_url(image, "image"),
+                    "caption": relation.caption or None,
+                }
+                scales_and_captions.append(scale)
+
+        return scales_and_captions

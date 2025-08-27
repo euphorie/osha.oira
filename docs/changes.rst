@@ -8,6 +8,26 @@ Changelog
 
 .. towncrier release notes start
 
+12.4.0 (2025-08-27)
+-------------------
+
+New features:
+
+
+- Insert content from other tool using Miller columns. (`Issue #2380 <https://github.com/syslabcom/scrum/issues/2380>`_)
+- Do not force anymore a default image for a tool (`Issue #2573 <https://github.com/syslabcom/scrum/issues/2573>`_)
+- Add `quaive-upload-survey`, as Quaive wrapper around the `upload` view.
+  This is a form for uploading an XML of a survey. (`Issue #3489 <https://github.com/syslabcom/scrum/issues/3489>`_)
+- Fixing the custom_css style statement to be wrapped in style tags.
+
+
+Bug fixes:
+
+
+- Setup the proper memcached variables.
+  We need memcached to discriminated the cached entries based on AUTHENTICATED_USER and SERVER_URL (`Issue #3450 <https://github.com/syslabcom/scrum/issues/3450>`_)
+
+
 12.3.0 (2025-07-15)
 -------------------
 

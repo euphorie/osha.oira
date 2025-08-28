@@ -272,6 +272,14 @@
       />
 
   <browser:page
+      name="quaive-export-survey"
+      for="euphorie.content.survey.ISurvey"
+      class=".quaive_export.ExportSurvey"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
       name="quaive-upload-survey"
       for="euphorie.content.sector.ISector"
       class=".quaive_upload.ImportSurvey"

@@ -13,3 +13,5 @@ class ExportSurvey(EuphorieExportSurvey):
     template = ViewPageTemplateFile("templates/quaive-form.pt")
     label = _("Export OiRA Tool")
     description = ""
+    # We don't want to use pat-inject.  It interferes with the download.
+    use_injection = False

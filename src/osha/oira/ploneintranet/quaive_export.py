@@ -9,7 +9,7 @@ _ = MessageFactory("nuplone")
 
 
 @implementer(IQuaiveForm)
-class ExportSurvey(EuphorieExportSurvey):
+class QuaiveExportSurvey(EuphorieExportSurvey):
     template = ViewPageTemplateFile("templates/quaive-form.pt")
     label = _("Export OiRA Tool")
     description = ""

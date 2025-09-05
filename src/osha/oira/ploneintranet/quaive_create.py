@@ -5,13 +5,11 @@ from euphorie.content.browser.surveygroup import AddView as EuphorieSurveyGroupA
 from osha.oira.content.browser.risk import AddView as EuphorieRiskAddView
 from osha.oira.content.browser.sector import AddView as EuphorieSectorAddView
 from osha.oira.content.browser.solution import AddView as EuphorieSolutionAddView
-from osha.oira.ploneintranet.interfaces import IQuaiveForm
+from osha.oira.ploneintranet.quaive_mixin import QuaiveCreateFormMixin
 from plone import api
 from plone.dexterity.browser.add import DefaultAddView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.i18nmessageid import MessageFactory
-from zope.interface import alsoProvides
-from zope.interface import implementer
 
 
 from euphorie.content.browser.profilequestion import (  # isort:skip
@@ -19,21 +17,6 @@ from euphorie.content.browser.profilequestion import (  # isort:skip
 )
 
 _ = MessageFactory("nuplone")
-
-
-@implementer(IQuaiveForm)
-class QuaiveCreateFormMixin:
-    template = ViewPageTemplateFile("templates/quaive-panel-form.pt")
-
-    @property
-    def oira_type(self):
-        return self.__name__.rpartition("-")[-1]
-
-    def update(self):
-        super().update()
-        for group in getattr(self, "groups", []):
-            #  This is needed to pick up the custom Quaive widgets
-            alsoProvides(group, IQuaiveForm)
 
 
 class QuaiveCreateViewMixin:

@@ -8,6 +8,15 @@ Changelog
 
 .. towncrier release notes start
 
+12.5.0 (2025-09-15)
+-------------------
+
+New features:
+
+
+- Add quaive-export-survey view. (`Issue #3604 <https://github.com/syslabcom/scrum/issues/3604>`_)
+
+
 12.4.0 (2025-08-27)
 -------------------
 

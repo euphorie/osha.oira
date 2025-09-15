@@ -5,7 +5,7 @@ import monkeypatch_setup  # noqa: F401
 import os
 
 
-version = "12.5.0"
+version = "12.5.1.dev0"
 
 setup(
     name="osha.oira",

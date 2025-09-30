@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+12.5.1 (2025-09-30)
+-------------------
+
+Bug fixes:
+
+
+- Fix the training settings after the introduction of the new setting `enable_test_questions`.
+  [ale-rt] (`Issue #3989 <https://github.com/syslabcom/scrum/issues/3989>`_)
+
+
 12.5.0 (2025-09-15)
 -------------------
 

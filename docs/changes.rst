@@ -8,6 +8,22 @@ Changelog
 
 .. towncrier release notes start
 
+12.5.2 (2025-10-07)
+-------------------
+
+New features:
+
+
+- Add lv translations for the password reset email (`Issue #3572 <https://github.com/syslabcom/scrum/issues/3572>`_)
+
+
+Bug fixes:
+
+
+- Refine the upgrade step to fix the training settings after the introduction of the new setting `enable_test_questions`. Also take into account the client sessions.
+  [ale-rt] (`Issue #3989 <https://github.com/syslabcom/scrum/issues/3989>`_) (`Issue #3989 <https://github.com/syslabcom/scrum/issues/3989>`_)
+
+
 12.5.1 (2025-09-30)
 -------------------
 

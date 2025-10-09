@@ -14,6 +14,7 @@
   >
     <legend title="${view/field/description}">
       ${view/label}
+      <tal:required condition="view/required">*</tal:required>
     </legend>
 
     <div class="pat-rich-editor toolbar-detached">

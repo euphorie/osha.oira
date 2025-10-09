@@ -14,7 +14,10 @@
   <fieldset class="group pat-form-field-image ${dependencies/ploneintranet_classes}"
             data-pat-depends="${dependencies/data_pat_depends}"
   >
-    <legend>${view/label}</legend>
+    <legend>
+      ${view/label}
+      <tal:required condition="view/required">*</tal:required>
+    </legend>
     <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
     <input class="${view/klass}"
            id="${view/id}"

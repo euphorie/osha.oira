@@ -10,7 +10,10 @@
           "
           i18n:domain="nuplone"
 >
-  <p class="legend">${view/label}</p>
+  <p class="legend">
+    ${view/label}
+    <tal:required condition="view/required">*</tal:required>
+  </p>
   <metal:help use-macro="view/@@quaive_form_macros/help_tooltip" />
   <tal:has-file condition="view/allow_nochange">
     <p class="floatAfter"

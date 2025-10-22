@@ -12,6 +12,7 @@
          data-pat-depends="${dependencies/data_pat_depends}"
   >
     ${view/label}
+    <tal:required condition="view/required">*</tal:required>
     <input id="${view/id}"
            name="${view/name}"
            type="datetime-local"

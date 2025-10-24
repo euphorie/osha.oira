@@ -89,6 +89,16 @@
                 </tal:preview>
               </div>
 
+              <div class="miller-columns-item-preview"
+                   tal:condition="python: not preview and not view.results"
+              >
+                <p class="description"
+                   i18n:translate="label_not_addable_no_items"
+                >
+                    Selected item is not addable and contains no relevant items.
+                </p>
+              </div>
+
               <tal:results repeat="(item, selectable) view/results">
                 <label class="pat-miller-columns-column-item type-${python:view.portal_type_to_icon(portal_type)}"
                        tabindex="0"

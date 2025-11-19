@@ -13,8 +13,10 @@ class SurveyLinks(BrowserView):
         "introduction",
         "legal_reference",
         "prevention_plan",
+        "recommendation",
         "requirements",
         "solution_direction",
+        "text",
     ]
     url_regex = re.compile(
         r"https?://[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b"

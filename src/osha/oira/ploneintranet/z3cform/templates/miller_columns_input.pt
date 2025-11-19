@@ -73,7 +73,7 @@
                               Items
                     </dt>
                     <dd>
-                              ${python:len(view.results)}
+                              ${python:view.preview_children_count}
                     </dd>
                     <dt i18n:translate="">
                               Created

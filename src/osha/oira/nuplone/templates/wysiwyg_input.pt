@@ -34,11 +34,11 @@
               readonly="${view/readonly}"
               rows="${view/rows}"
               data-pat-redactor="buttons: undo, redo, html, bold, italic, lists, link; plugins: ; show-source-button: true"
-    >
-      <tal:content condition="view/value"
-                   replace="structure view/value"
-      />
-    </textarea>
+              tal:define="
+                value view/value;
+              "
+              tal:content="structure python: value or ''"
+    ></textarea>
     <tal:error condition="view/error"
                replace="structure view/error/render|nothing"
     />

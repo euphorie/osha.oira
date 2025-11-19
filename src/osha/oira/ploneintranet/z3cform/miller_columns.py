@@ -76,7 +76,10 @@ class PIContentBrowserWidget(ContentBrowserWidget):
         """
         # First get all folderish items.
         folders = api.content.find(
-            context=self.source_object, is_folderish=True, depth=1
+            context=self.source_object,
+            is_folderish=True,
+            depth=1,
+            sort_on="getObjPositionInParent",
         )
 
         # Then get all selectable items.  The results may overlap with the folders.
@@ -87,6 +90,7 @@ class PIContentBrowserWidget(ContentBrowserWidget):
             "context": self.source_object,
             "depth": 1,
             "portal_type": allowed_portal_types,
+            "sort_on": "getObjPositionInParent",
         }
         # Get the search parameters from the widget.
         query.update(self.query)
@@ -102,6 +106,12 @@ class PIContentBrowserWidget(ContentBrowserWidget):
                 # Remove the uid, so we can avoid duplication when including
                 # the rest of the selectable items later.
                 selectable_uids.remove(folder.UID)
+            else:
+                # Does the folder contain allowed portal types anywhere?
+                if not api.content.find(
+                    path=folder.getPath(), portal_type=allowed_portal_types
+                ):
+                    continue
             results.append((folder, folder_selectable))
 
         # If any selectable items are left, include them.
@@ -129,6 +139,16 @@ class PIContentBrowserWidget(ContentBrowserWidget):
             return
         # Note: this may be None if the UID does not actually exist.
         return api.content.get(UID=preview)
+
+    @property
+    def preview_children_count(self):
+        """How many child objects does the preview object have?"""
+        if not self.preview:
+            return None
+        # If we want to report all children on any depth:
+        # return len(api.content.find(context=self.preview)) - 1
+        # But only direct children should be good:
+        return len(api.content.find(context=self.preview, depth=1))
 
     def type_title(self, portal_type):
         """Map the portal_type to a user friendly title."""

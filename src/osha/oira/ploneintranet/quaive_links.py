@@ -7,14 +7,16 @@ import re
 
 class SurveyLinks(BrowserView):
     attributes_checked = [
-        "description",
-        "introduction",
-        "solution_direction",
-        "legal_reference",
         "action",
         "action_plan",
+        "description",
+        "introduction",
+        "legal_reference",
         "prevention_plan",
+        "recommendation",
         "requirements",
+        "solution_direction",
+        "text",
     ]
     url_regex = re.compile(
         r"https?://[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b"

@@ -24,6 +24,9 @@ class TrainingService(Service):
         result = {
             "@id": self.request.getURL(),
             "enable_web_training": self.context.enable_web_training,
+            "enable_test_questions": getattr(
+                self.context, "enable_test_questions", False
+            ),
             "questions": questions,
         }
         return result

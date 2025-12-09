@@ -8,6 +8,33 @@ Changelog
 
 .. towncrier release notes start
 
+12.5.3 (2025-12-09)
+-------------------
+
+Bug fixes:
+
+
+- Add a required marker to the Ploneintranet form fields (`Issue #3838 <https://github.com/syslabcom/scrum/issues/3838>`_)
+- Miller columns: prevent empty column when there is nothing to see.
+  [maurits] (`Issue #3987 <https://github.com/syslabcom/scrum/issues/3987>`_)
+- Survey Links: Extend link list for link checker for more HTML fields.
+  Add the following HTML fields, so that they are included in link checking:
+  - text (content type euphorie.recommendation)
+  - recommendation (content type euphorie.module)
+  Ref: scrum-4138
+  [thet] (`Issue #4138 <https://github.com/syslabcom/scrum/issues/4138>`_)
+- Miller columns: only show folders when they contain allowed content types anywhere.
+  And show the items in the same order as in their folder.
+  [maurits] (`Issue #4139 <https://github.com/syslabcom/scrum/issues/4139>`_)
+
+
+Internal:
+
+
+- Expose ``survey.enable_test_questions`` in the ``@training`` JSON endpoint.
+  Ref: https://github.com/syslabcom/scrum/issues/4172
+
+
 12.5.2 (2025-10-07)
 -------------------
 

@@ -54,6 +54,7 @@ setup(
         "requests",
         "setuptools",
         "slc.zopescript",
+        "urlextract",
         "zope.app.publication",
         "zope.publisher",
     ],

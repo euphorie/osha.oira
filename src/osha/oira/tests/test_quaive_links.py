@@ -1,0 +1,66 @@
+from osha.oira.ploneintranet.quaive_links import SurveyLinks
+from osha.oira.testing import OIRA_INTEGRATION_TESTING
+from plone import api
+
+import unittest
+
+
+class TestOiraLinksStatusView(unittest.TestCase):
+    layer = OIRA_INTEGRATION_TESTING
+
+    def setUp(self):
+        """Custom shared utility setup for tests."""
+        self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
+
+    def test_url_extraction(self):
+        testurl_1 = "https://pypi.org/project/urlextract/"
+        testurl_2 = "https://ok.net/%20including%20encoded%20whitespace/@@view"
+        testurl_3 = "https://ååå.éëþüú.is/óö«/áßð.æíï"
+        # Only matches https://test.com/, as whitespace isn't supported.
+        testurl_4 = "https://test.com/ including some whitespace/@@view"
+
+        text = """
+        それも将来始めてこの干渉人に対してのの頃に罹りないん。ほとんど多年を創設
+        方もしばしばその意味なですだけをするてっんには反抗もつましでて、ちょっと
+        にも考えますなくますた。事をしないはずはどうしても場合にむしろですでしょ
+        """
+
+        # Set up text including multiple test urls.
+        description = (
+            text
+            + testurl_1
+            + text
+            + testurl_2
+            + text
+            + testurl_3
+            + ","  # should not include punctuation characters.
+            + text
+            + testurl_4
+            + testurl_4
+            + text
+            + testurl_4
+        )
+
+        with api.env.adopt_user("admin"):
+            # Let's just test on a simple document instead of a full survey to
+            # avoid setting up all the boiler plate.
+            document = api.content.create(
+                self.portal,
+                type="Document",
+                id="test",
+                title="Test",
+                description=description,
+            )
+
+        view = SurveyLinks(document, self.request.clone())
+        result = list(view.extract_links(document))
+        self.assertEqual(result[0]["url"], "http://nohost/plone/test")
+        self.assertEqual(result[0]["title"], "Test")
+        self.assertEqual(len(result[0]["links"]), 4)
+        # Stable sorting, therefore not in the same order as in the document.
+        self.assertEqual(result[0]["links"][0]["url"], testurl_1)
+        # No support for unencoded whitespace in URLs.
+        self.assertEqual(result[0]["links"][1]["url"], "https://test.com/")
+        self.assertEqual(result[0]["links"][2]["url"], testurl_2)
+        self.assertEqual(result[0]["links"][3]["url"], testurl_3)

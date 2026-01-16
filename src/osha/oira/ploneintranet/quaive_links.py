@@ -18,10 +18,7 @@ class SurveyLinks(BrowserView):
         "solution_direction",
         "text",
     ]
-    url_regex = re.compile(
-        r"https?://[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b"
-        r"(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)"
-    )
+    url_regex = re.compile(r"https?://[^\s]+(?<![.!,?\"':;])", re.UNICODE)
 
     def extract_links(self, obj):
         """For the survey and each subobject in its content tree, list external

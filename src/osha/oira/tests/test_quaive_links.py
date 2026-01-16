@@ -19,6 +19,9 @@ class TestOiraLinksStatusView(unittest.TestCase):
         testurl_3 = "https://ååå.éëþüú.is/óö«/áßð.æíï"
         # Only matches https://test.com/, as whitespace isn't supported.
         testurl_4 = "https://test.com/ including some whitespace/@@view"
+        # also correctly parse URLs which are quoted.
+        testurl_5 = 'https://test2.com/"'
+        testurl_6 = "https://test3.com/'"
 
         text = """
         それも将来始めてこの干渉人に対してのの頃に罹りないん。ほとんど多年を創設
@@ -40,6 +43,10 @@ class TestOiraLinksStatusView(unittest.TestCase):
             + testurl_4
             + text
             + testurl_4
+            + " "
+            + testurl_5
+            + " "
+            + testurl_6
         )
 
         with api.env.adopt_user("admin"):
@@ -57,10 +64,12 @@ class TestOiraLinksStatusView(unittest.TestCase):
         result = list(view.extract_links(document))
         self.assertEqual(result[0]["url"], "http://nohost/plone/test")
         self.assertEqual(result[0]["title"], "Test")
-        self.assertEqual(len(result[0]["links"]), 4)
+        self.assertEqual(len(result[0]["links"]), 6)
         # Stable sorting, therefore not in the same order as in the document.
-        self.assertEqual(result[0]["links"][0]["url"], testurl_1)
+        self.assertEqual(result[0]["links"][0]["url"], testurl_2)
+        self.assertEqual(result[0]["links"][1]["url"], testurl_1)
         # No support for unencoded whitespace in URLs.
-        self.assertEqual(result[0]["links"][1]["url"], "https://test.com/")
-        self.assertEqual(result[0]["links"][2]["url"], testurl_2)
-        self.assertEqual(result[0]["links"][3]["url"], testurl_3)
+        self.assertEqual(result[0]["links"][2]["url"], "https://test.com/")
+        self.assertEqual(result[0]["links"][3]["url"], testurl_5)
+        self.assertEqual(result[0]["links"][4]["url"], testurl_6)
+        self.assertEqual(result[0]["links"][5]["url"], testurl_3)

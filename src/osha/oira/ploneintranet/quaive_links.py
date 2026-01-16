@@ -1,8 +1,8 @@
 from Acquisition import aq_base
 from Products.Five import BrowserView
-from urlextract import URLExtract
 
 import json
+import re
 
 
 class SurveyLinks(BrowserView):
@@ -18,6 +18,7 @@ class SurveyLinks(BrowserView):
         "solution_direction",
         "text",
     ]
+    url_regex = re.compile(r"https?://[^\s]+(?<![.!,?])")
 
     def extract_links(self, obj):
         """For the survey and each subobject in its content tree, list external
@@ -26,11 +27,10 @@ class SurveyLinks(BrowserView):
         """
         _obj = aq_base(obj)
         links = set()
-        extractor = URLExtract()
         for attrib in self.attributes_checked:
             value = getattr(_obj, attrib, "")
             if value:
-                links.update(extractor.find_urls(value))
+                links.update(self.url_regex.findall(value))
         if links:
             yield {
                 "title": obj.Title(),

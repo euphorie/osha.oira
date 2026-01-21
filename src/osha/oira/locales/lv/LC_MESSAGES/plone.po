@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: lv\n"
+"Language-Name: Latvian\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+
+#. Default: "The following link will take you to a page where you can reset your password for ${site_name} site: ${reset_url}"
+#: CMFPlone/browser/login/templates/mail_password_template.pt:23
+msgid "mailtemplate_text_linkreset"
+msgstr "Šī saite jūs novirzīs uz lapu, kur varat atiestatīt savu paroli ${site_name} vietnē: ${reset_url}"
+
+#. Default: "(This link is valid for ${hours} hours)"
+#: CMFPlone/browser/login/templates/mail_password_template.pt:28
+msgid "mailtemplate_text_expirationdate_linkreset"
+msgstr "(Šī saite ir derīga ${hours} stundas)"
+
+#. Default: "If you didn't expect to receive this email, please ignore it. Your password has not been changed. Request made from IP address ${ipaddress}"
+#: CMFPlone/browser/login/templates/mail_password_template.pt:36
+msgid "mailtemplate_tracking_information"
+msgstr "Ja negaidījāt šo e-pastu, lūdzu, ignorējiet to. Jūsu parole nav tikusi mainīta. Pieprasījums veikts no IP adreses ${ipaddress}"

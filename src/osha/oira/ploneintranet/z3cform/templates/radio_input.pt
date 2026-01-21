@@ -11,7 +11,10 @@
   <fieldset class="group ${dependencies/ploneintranet_classes}"
             data-pat-depends="${dependencies/data_pat_depends}"
   >
-    <p class="legend">${view/label}</p>
+    <p class="legend">
+      ${view/label}
+      <tal:required condition="view/required">*</tal:required>
+    </p>
     <div class="pat-checklist">
 
       <tal:items repeat="item view/items">

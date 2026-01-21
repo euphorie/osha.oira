@@ -73,7 +73,7 @@
                               Items
                     </dt>
                     <dd>
-                              ${python:len(view.results)}
+                              ${python:view.preview_children_count}
                     </dd>
                     <dt i18n:translate="">
                               Created
@@ -87,6 +87,16 @@
                   </dl>
 
                 </tal:preview>
+              </div>
+
+              <div class="miller-columns-item-preview"
+                   tal:condition="python: not preview and not view.results"
+              >
+                <p class="description"
+                   i18n:translate="label_not_addable_no_items"
+                >
+                    Selected item is not addable and contains no relevant items.
+                </p>
               </div>
 
               <tal:results repeat="(item, selectable) view/results">

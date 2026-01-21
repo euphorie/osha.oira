@@ -286,14 +286,38 @@
             </div>
 
             <div class="panel-content">
-              <p class="message ${python:'error' if view.widgets.errors else 'notice'}"
-                 tal:define="
-                   status view/status;
-                 "
-                 tal:condition="status"
-                 tal:content="status"
-                 i18n:domain="plone"
-              >Form-global message</p>
+              <div class="message ${python:'error' if errors else 'notice'}"
+                   tal:define="
+                     status view/status;
+                     errors view/widgets/errors;
+                   "
+                   tal:condition="status"
+                   i18n:domain="plone"
+              >
+                <p>
+                  <tal:icon tal:define="
+                              icons nocall: context/@@iconresolver;
+                            "
+                            tal:replace="structure python:icons.tag('plone-statusmessage-error', tag_alt='Error', tag_class='statusmessage-icon mb-1 me-2')"
+                            i18n:attributes="alt"
+                  />
+                  <span class="content"
+                        tal:content="structure status | nothing"
+                        i18n:translate=""
+                  >
+                    The error status message.
+                  </span>
+                </p>
+                <ul tal:define="
+                      display_errors python:[e for e in errors if not getattr(e, 'widget', None)];
+                    "
+                    tal:condition="display_errors"
+                >
+                  <li tal:repeat="error display_errors">
+                    ${error/message}
+                  </li>
+                </ul>
+              </div>
               <fieldset class="section horizontal">
                 <tal:widget tal:repeat="widget view/widgets/values">
                   <tal:widget define="

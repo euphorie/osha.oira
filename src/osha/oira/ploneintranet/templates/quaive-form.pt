@@ -286,38 +286,32 @@
             </div>
 
             <div class="panel-content">
-              <div class="message ${python:'error' if errors else 'notice'}"
-                   tal:define="
-                     status view/status;
-                     errors view/widgets/errors;
-                   "
-                   tal:condition="status"
-                   i18n:domain="plone"
+
+              <p class="pat-message ${python:'error' if view.widgets.errors else 'notice'}"
+                 tal:define="
+                   status view/status;
+                 "
+                 tal:condition="status"
+                 i18n:domain="plone"
+                 i18n:translate=""
+              >${status}</p>
+              <tal:errors define="
+                            errors view/widgets/errors;
+                          "
+                          condition="errors"
               >
-                <p>
-                  <tal:icon tal:define="
-                              icons nocall: context/@@iconresolver;
-                            "
-                            tal:replace="structure python:icons.tag('plone-statusmessage-error', tag_alt='Error', tag_class='statusmessage-icon mb-1 me-2')"
-                            i18n:attributes="alt"
-                  />
-                  <span class="content"
-                        tal:content="structure status | nothing"
-                        i18n:translate=""
+                <tal:error repeat="error errors">
+                  <p class="pat-message error"
+                     tal:condition="not:nocall:error/widget"
+                     tal:content="structure error/message"
+                     i18n:domain="plone"
+                     i18n:translate=""
                   >
-                    The error status message.
-                  </span>
-                </p>
-                <ul tal:define="
-                      display_errors python:[e for e in errors if not getattr(e, 'widget', None)];
-                    "
-                    tal:condition="display_errors"
-                >
-                  <li tal:repeat="error display_errors">
-                    ${error/message}
-                  </li>
-                </ul>
-              </div>
+                  ${structure: error/message}
+                  </p>
+                </tal:error>
+              </tal:errors>
+
               <fieldset class="section horizontal">
                 <tal:widget tal:repeat="widget view/widgets/values">
                   <tal:widget define="

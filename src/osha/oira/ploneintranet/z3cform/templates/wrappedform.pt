@@ -25,7 +25,7 @@
          i18n:domain="plone"
          i18n:translate=""
       >
-                  Error
+        ${structure: error/message}
       </p>
     </tal:error>
   </tal:errors>

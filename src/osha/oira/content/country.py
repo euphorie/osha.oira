@@ -45,6 +45,7 @@ class IOSHACountry(model.Schema):
         default=10,
         min=0,
         max=100,
+        required=False,
     )
 
     depends(
@@ -61,6 +62,7 @@ class IOSHACountry(model.Schema):
         default=85,
         min=0,
         max=100,
+        required=False,
     )
     depends(
         "IOSHACountry.certificate_explanatory_sentence",
@@ -80,6 +82,21 @@ class IOSHACountry(model.Schema):
 
     @invariant
     def threshold_invariant(data):
+        if data.certificates_enabled is False:
+            return
+
+        if (
+            data.certificate_initial_threshold is None
+            and data.certificate_completion_threshold is None
+        ):
+            raise Invalid(_("Initial threshold and completion threshold are missing."))
+
+        if data.certificate_initial_threshold is None:
+            raise Invalid(_("Initial threshold is missing."))
+
+        if data.certificate_completion_threshold is None:
+            raise Invalid(_("Completion threshold is missing."))
+
         if data.certificate_initial_threshold >= data.certificate_completion_threshold:
             raise Invalid(
                 _("Completion threshold has to be greater than the initial threshold")

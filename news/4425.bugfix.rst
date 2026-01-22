@@ -1,0 +1,8 @@
+Fix country edit form with disabled certificates.
+
+Set the optional certificate thresholds to non-required and validate
+them if they should be included. This fixes a problem where the country
+edit form could not be saved in Quaive with certificates disabled.
+
+Ref: https://github.com/syslabcom/scrum/issues/4425
+[thet]

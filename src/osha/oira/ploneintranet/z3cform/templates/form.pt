@@ -15,9 +15,20 @@
          status view/status;
        "
        tal:condition="status"
-       tal:content="status"
-       i18n:domain="plone"
-    >Form-global message</p>
+    >${status}</p>
+    <tal:errors define="
+                  errors view/widgets/errors;
+                "
+                condition="errors"
+    >
+      <tal:error repeat="error errors">
+        <p class="message field error"
+           tal:condition="not:nocall:error/widget"
+        >
+        ${structure: error/message}
+        </p>
+      </tal:error>
+    </tal:errors>
     <p class="discrete"
        tal:condition="python:getattr(view, 'description', None)"
     >${view/description}</p>

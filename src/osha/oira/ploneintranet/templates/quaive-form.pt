@@ -286,14 +286,27 @@
             </div>
 
             <div class="panel-content">
-              <p class="message ${python:'error' if view.widgets.errors else 'notice'}"
+
+              <p class="pat-message ${python:'error' if view.widgets.errors else 'notice'}"
                  tal:define="
                    status view/status;
                  "
                  tal:condition="status"
-                 tal:content="status"
-                 i18n:domain="plone"
-              >Form-global message</p>
+              >${status}</p>
+              <tal:errors define="
+                            errors view/widgets/errors;
+                          "
+                          condition="errors"
+              >
+                <tal:error repeat="error errors">
+                  <p class="pat-message error"
+                     tal:condition="not:nocall:error/widget"
+                  >
+                  ${structure: error/message}
+                  </p>
+                </tal:error>
+              </tal:errors>
+
               <fieldset class="section horizontal">
                 <tal:widget tal:repeat="widget view/widgets/values">
                   <tal:widget define="

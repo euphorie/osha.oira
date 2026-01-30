@@ -18,7 +18,11 @@ class SurveyLinks(BrowserView):
         "solution_direction",
         "text",
     ]
-    url_regex = re.compile(r"https?://[^\s]+(?<![.!,?\"':;])", re.UNICODE)
+    url_regex = re.compile(r"https?://[^\s<>\"'\[\](){}]+", re.UNICODE)
+
+    def clean_url(self, url):
+        """Strip trailing punctuation that's likely not part of the URL."""
+        return url.rstrip(".,;:!?")
 
     def extract_links(self, obj):
         """For the survey and each subobject in its content tree, list external
@@ -30,7 +34,8 @@ class SurveyLinks(BrowserView):
         for attrib in self.attributes_checked:
             value = getattr(_obj, attrib, "")
             if value:
-                links.update(self.url_regex.findall(value))
+                urls = [self.clean_url(url) for url in self.url_regex.findall(value)]
+                links.update(urls)
         if links:
             yield {
                 "title": obj.Title(),

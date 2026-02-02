@@ -13,7 +13,7 @@ class TestOiraLinksStatusView(unittest.TestCase):
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
 
-    def test_url_extraction(self):
+    def test_url_extraction_with_unicode(self):
         testurl_1 = "https://ok.net/%20including%20encoded%20whitespace/@@view"
         testurl_2 = "https://pypi.org/project/urlextract/"
         # Only matches https://test.com/, as unquoted whitespace isn't supported.
@@ -31,7 +31,7 @@ class TestOiraLinksStatusView(unittest.TestCase):
 
         # Set up text including multiple test urls.
         # Mix the order of the URLs to also test the stable ordering.
-        description = (
+        description: str = (
             text
             + testurl_2
             + text
@@ -59,7 +59,7 @@ class TestOiraLinksStatusView(unittest.TestCase):
             )
 
         view = SurveyLinks(document, self.request.clone())
-        result = list(view.extract_links(document))
+        result: list = list(view.extract_links(document))
         self.assertEqual(result[0]["url"], "http://nohost/plone/test")
         self.assertEqual(result[0]["title"], "Test")
         self.assertEqual(len(result[0]["links"]), 5)
@@ -71,3 +71,27 @@ class TestOiraLinksStatusView(unittest.TestCase):
         self.assertEqual(result[0]["links"][2]["url"], "https://test.com/")
         self.assertEqual(result[0]["links"][3]["url"], testurl_4)
         self.assertEqual(result[0]["links"][4]["url"], testurl_5)
+
+    def test_url_extraction_with_escaped_characters(self):
+        testurl = "https://pypi.org/project/osha.oira/?a=1&amp;b=2&amp;c=3"
+        testurl_unescaped = "https://pypi.org/project/osha.oira/?a=1&b=2&c=3"
+
+        text = "それも将来始めてこの干渉人"
+
+        description: str = text + " " + testurl + " " + text
+
+        with api.env.adopt_user("admin"):
+            # Let's just test on a simple document instead of a full survey to
+            # avoid setting up all the boiler plate.
+            document = api.content.create(
+                self.portal,
+                type="Document",
+                id="test",
+                title="Test",
+                description=description,
+            )
+
+        view = SurveyLinks(document, self.request.clone())
+        result: list = list(view.extract_links(document))
+        self.assertEqual(len(result[0]["links"]), 1)
+        self.assertEqual(result[0]["links"][0]["url"], testurl_unescaped)

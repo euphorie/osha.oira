@@ -1,4 +1,5 @@
 from Acquisition import aq_base
+from html import unescape
 from Products.Five import BrowserView
 
 import json
@@ -21,8 +22,12 @@ class SurveyLinks(BrowserView):
     url_regex = re.compile(r"https?://[^\s<>\"'\[\](){}]+", re.UNICODE)
 
     def clean_url(self, url):
-        """Strip trailing punctuation that's likely not part of the URL."""
-        return url.rstrip(".,;:!?")
+        """Clean the URL."""
+        # HTML entity encoded to unescaped, e.g. `&amp;` to `&`
+        url = unescape(url)
+        # Strip trailing punctuation that's likely not part of the URL.
+        url = url.rstrip(".,;:!?")
+        return url
 
     def extract_links(self, obj):
         """For the survey and each subobject in its content tree, list external

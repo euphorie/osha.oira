@@ -1,0 +1,6 @@
+URL extraction: Unescape URLs.
+
+HTML snippets from HTML text editors are stored with their escaped HTML
+entities. When we want to check the individual URLs used in that HTML snippet,
+we need to unescape HTML entities in URLs, like `&amp;` to `&`, as used in
+query strings, which are like all HTML content encoded to HTML entities.

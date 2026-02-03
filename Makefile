@@ -2,8 +2,9 @@ EUPHORIE_POT	= src/osha/oira/locales/euphorie.pot
 EUPHORIE_PO_FILES	= $(wildcard src/osha/oira/locales/*/LC_MESSAGES/euphorie.po)
 PLONE_PO_FILES	= $(wildcard src/osha/oira/locales/*/LC_MESSAGES/plone.po)
 MO_FILES	= $(EUPHORIE_PO_FILES:.po=.mo) $(PLONE_PO_FILES:.po=.mo)
-
 TARGETS		= $(MO_FILES)
+TWINE_REPOSITORY ?= pypi
+
 
 all: ${TARGETS}
 
@@ -43,3 +44,13 @@ $(EUPHORIE_PO_FILES): src/osha/oira/locales/euphorie.pot
 .PHONY: all clean check jenkins pot buildout
 .SUFFIXES:
 .SUFFIXES: .po .mo
+
+
+.PHONY: release
+release:
+	@echo "Releasing to $(TWINE_REPOSITORY)"
+	@echo 'run `make release TWINE_REPOSITORY=<name>` to override'
+	TWINE_REPOSITORY=$(TWINE_REPOSITORY) uvx \
+		--from zest-releaser \
+		--with zest-releaser'[recommended]' \
+		--with zestreleaser-towncrier fullrelease

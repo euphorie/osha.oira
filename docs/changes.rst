@@ -8,6 +8,32 @@ Changelog
 
 .. towncrier release notes start
 
+12.5.4 (2026-02-03)
+-------------------
+
+Bug fixes:
+
+
+- URL extraction: Support unicode in URLs. (`Issue #4313.fix-url-extraction <https://github.com/syslabcom/scrum/issues/4313.fix-url-extraction>`_)
+- URL extraction: Unescape URLs.
+
+  HTML snippets from HTML text editors are stored with their escaped HTML
+  entities. When we want to check the individual URLs used in that HTML snippet,
+  we need to unescape HTML entities in URLs, like `&amp;` to `&`, as used in
+  query strings, which are like all HTML content encoded to HTML entities. (`Issue #4313.unescape-urls <https://github.com/syslabcom/scrum/issues/4313.unescape-urls>`_)
+- Fix country edit form with disabled certificates.
+
+  Set the optional certificate thresholds to non-required and validate
+  them if they should be included. This fixes a problem where the country
+  edit form could not be saved in Quaive with certificates disabled.
+
+  Ref: https://github.com/syslabcom/scrum/issues/4425
+  [thet] (`Issue #4425 <https://github.com/syslabcom/scrum/issues/4425>`_)
+- Show individual widget errors in the form template.
+
+  Ref: https://github.com/syslabcom/scrum/issues/4425 (`Issue #4425 <https://github.com/syslabcom/scrum/issues/4425>`_)
+
+
 12.5.3 (2025-12-09)
 -------------------
 

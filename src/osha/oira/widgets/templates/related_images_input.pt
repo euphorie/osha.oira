@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:omit-tag=""
+      i18n:domain="euphorie"
+>
+  <tal:comment condition="nothing">
+    <!--
+      This template is used to render the input widget for the related images field
+      in the nuplone backend.
+
+      In order to not duplicate the effort of providing a UI for the nuplone backend,
+      we prevent editing this field.
+      We still need to display the fields hidden to avoid losing them on save.
+    -->
+  </tal:comment>
+
+  <div class="message notice"
+       style="max-width: 500px;"
+  >
+    <tal:i18n i18n:translate="">This field is not editable with the classic backend.</tal:i18n>
+    <br />
+    <tal:i18n i18n:translate="">It is only editable with the new backend ("OiRA Creator").</tal:i18n>
+  </div>
+
+  <tal:for repeat="related_image view/widgets">
+    <input name="${python: related_image.widgets['image'].name}"
+           type="hidden"
+           value="${python: related_image.widgets['image'].value}"
+    />
+    <input name="${python: related_image.name}-empty-marker"
+           type="hidden"
+           value="1"
+    />
+    <input name="${python: view.name}-position"
+           type="hidden"
+           value="${python: repeat.related_image.index}"
+    />
+    <input name="${python: related_image.widgets['caption'].name}"
+           type="hidden"
+           value="${python: related_image.widgets['caption'].value}"
+    />
+  </tal:for>
+
+  <input tal:replace="structure view/counterMarker" />
+
+</html>

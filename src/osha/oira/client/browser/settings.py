@@ -15,6 +15,15 @@ class OSHAPreferences(Preferences):
     template = ViewPageTemplateFile("templates/preferences.pt")
 
     @property
+    def show_language_preferences(self):
+        # TODO Remove this method once we have a Euphorie release that has it.
+        try:
+            return super().show_language_preferences
+        except AttributeError:
+            # Our euphorie version does not support setting language preferences.
+            return False
+
+    @property
     @memoize
     def webhelpers(self):
         return api.content.get_view("webhelpers", self.context, self.request)
@@ -107,5 +116,8 @@ class OSHAPreferences(Preferences):
             else:
                 self.unsubscribe(tool_id)
         # TODO: Remove subscriptions for deleted assessments
+
+        if self.show_language_preferences:
+            self.update_language_preferences()
 
         self.request.__annotations__.pop("plone.memoize", None)

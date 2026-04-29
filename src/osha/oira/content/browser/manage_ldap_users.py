@@ -2,17 +2,12 @@ from plone import api
 from plone.memoize.view import memoize
 from plone.memoize.view import memoize_contextless
 from Products.Five import BrowserView
+from Products.PluggableAuthService.interfaces.plugins import IUserEnumerationPlugin
 
 import logging
-import os
 
 
 logger = logging.getLogger(__name__)
-# When testing locally, you may not have LDAP configured.  You can switch to
-# searching for users in source_users by setting an environment variable.
-OIRA_SOURCE_USERS_INSTEAD_OF_LDAP = int(
-    os.getenv("OIRA_SOURCE_USERS_INSTEAD_OF_LDAP", 0)
-)
 
 
 class BaseManageLDAPUsersView(BrowserView):
@@ -60,13 +55,16 @@ class BaseManageLDAPUsersView(BrowserView):
     def enumerateUsersIds(self, query=""):
         if not query:
             return []
-        if OIRA_SOURCE_USERS_INSTEAD_OF_LDAP:
-            logger.warning("Querying source users instead of LDAP for %s", query)
-            au = api.portal.get_tool("acl_users")
-            results = au.source_users.enumerateUsers(query) or ()
-        else:
+        if self.ldap.is_plugin_active(IUserEnumerationPlugin):
             query = "*%s*" % query
             results = self.ldap.enumerateUsers(query) or ()
+        else:
+            logger.warning(
+                "LDAP plugin inactive for user enumeration. "
+                "Querying source_users instead."
+            )
+            au = api.portal.get_tool("acl_users")
+            results = au.source_users.enumerateUsers(query) or ()
         return sorted(result["id"] for result in results)
 
     def grant_roles(self, user):

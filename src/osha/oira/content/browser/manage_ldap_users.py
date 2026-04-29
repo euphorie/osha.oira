@@ -75,6 +75,11 @@ class BaseManageLDAPUsersView(BrowserView):
     def reindex_manager_roles(self, obj):
         """Reindex `managerRolesAndUsers` index for `obj` and its contents recursively.
         Based on Products.CMFCore.CMFCatalogAware.CatalogAware.reindexObjectSecurity
+
+        Note by Maurits on 2026-04-29:
+        The managerRolesAndUsers index is only used in the mailing-lists.json view,
+        and then only to query for countries that the user has these manager rights
+        for.  So I doubt the reindexing of children is useful here.
         """
         catalog = api.portal.get_tool("portal_catalog")
         path = "/".join(obj.getPhysicalPath())
@@ -84,7 +89,7 @@ class BaseManageLDAPUsersView(BrowserView):
             except (AttributeError, KeyError):
                 # don't fail on catalog inconsistency
                 continue
-            ob.reindexObject(idxs=["managerRolesAndUsers"])
+            ob.reindexObject(idxs=["managerRolesAndUsers"], update_metadata=0)
 
     def maybe_manage_local_roles(self):
         """Check the request and see if we should mange some user local

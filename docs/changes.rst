@@ -8,6 +8,32 @@ Changelog
 
 .. towncrier release notes start
 
+12.6.0 (2026-05-06)
+-------------------
+
+New features:
+
+
+- Support setting language preferences in the user settings.
+  Only when Euphorie supports it.  [maurits] (`Issue #3642 <https://github.com/syslabcom/scrum/issues/3642>`_)
+- Backport changes from `euphorie` in the preferences page. (`Issue #4764 <https://github.com/syslabcom/scrum/issues/4764>`_)
+
+
+Bug fixes:
+
+
+- Fix layout after using panel-insert-from-tool in OiRA Creator.  [maurits] (`Issue #4731 <https://github.com/syslabcom/scrum/issues/4731>`_)
+- Don't update catalog metadata when granting/revoking country/sector manager role.
+  [maurits]
+
+
+Internal:
+
+
+- Refactor and improve the `@@map_images` view. @ale-rt (`Issue #4776 <https://github.com/syslabcom/scrum/issues/4776>`_)
+- Remove the obsolete checkSoundness.py script as it was replaced by pre-commit. @ale-rt (`Issue #4776 <https://github.com/syslabcom/scrum/issues/4776>`_)
+
+
 12.5.4 (2026-02-03)
 -------------------
 

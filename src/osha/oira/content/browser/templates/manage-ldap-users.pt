@@ -53,8 +53,13 @@
                 >
                   <td>${python:user.getProperty('login', None) or userid}</td>
                   <td>
-                    <form action="${request/getURL}"
+                    <form class="pat-inject"
+                          action="${request/getURL}"
                           method="post"
+                          data-pat-inject="
+                            source: #mainContent::element;
+                            target: #mainContent::element;
+                          "
                     >
                       <input name="userid"
                              type="hidden"
@@ -64,13 +69,13 @@
                                     has_managed_roles python:view.has_managed_roles(user);
                                   ">
 
-                        <button class="micro floatAfter function"
+                        <button class="micro floatAfter function pat-button"
                                 name="ldap_action"
                                 type="submit"
                                 value="grant"
                                 tal:condition="not:has_managed_roles"
                         >Grant Roles</button>
-                        <button class="micro floatAfter function"
+                        <button class="micro floatAfter function pat-button"
                                 id="revoke_role"
                                 name="ldap_action"
                                 onclick="${python:context.portal_type=='euphorie.country' and 'return check_role_change()' or None}"
@@ -90,14 +95,20 @@
       </tal:existing-roles>
 
       <h2>Search for LDAP users</h2>
-      <form method="POST"
+      <form class="pat-inject"
+            method="POST"
             style="margin: 0 0 10px;"
+            data-pat-inject="
+              source: #mainContent::element;
+              target: #mainContent::element;
+            "
       >
         <input name="SearchableText"
                type="text"
                value="${request/SearchableText|nothing}"
         />
-        <button name="search-ldap"
+        <button class="pat-button"
+                name="search-ldap"
                 type="submit"
                 value="1"
         >Search</button>

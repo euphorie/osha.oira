@@ -1,3 +1,4 @@
+from pas.plugins.ldap.plugin import LDAPPlugin
 from plone import api
 from plone.memoize.view import memoize
 from plone.memoize.view import memoize_contextless
@@ -54,8 +55,14 @@ class BaseManageLDAPUsersView(BrowserView):
     def enumerateUsersIds(self, query=""):
         if not query:
             return []
-        query = "*%s*" % query
-        results = self.ldap.enumerateUsers(query) or ()
+        # For a real LDAP plugin we need '*query*', but in development or on
+        # a test server you may have a fake LDAP plugin (same plugin as
+        # source_users), and then you need 'query'.
+        if isinstance(self.ldap, LDAPPlugin):
+            results = self.ldap.enumerateUsers(f"*{query}*")
+        else:
+            results = self.ldap.enumerateUsers(query)
+        results = results or ()
         return sorted(result["id"] for result in results)
 
     def grant_roles(self, user):

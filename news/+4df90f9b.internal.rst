@@ -1,0 +1,3 @@
+Manage LDAP users (country/sector managers): only do `*query*` if we have a real LDAP plugin.
+Fall back to the unchanged `query`, allowing you to have a fake LDAP for local testing.
+[maurits]

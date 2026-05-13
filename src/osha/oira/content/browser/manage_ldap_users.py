@@ -2,7 +2,6 @@ from plone import api
 from plone.memoize.view import memoize
 from plone.memoize.view import memoize_contextless
 from Products.Five import BrowserView
-from Products.PluggableAuthService.interfaces.plugins import IUserEnumerationPlugin
 
 import logging
 
@@ -55,16 +54,14 @@ class BaseManageLDAPUsersView(BrowserView):
     def enumerateUsersIds(self, query=""):
         if not query:
             return []
-        if self.ldap.is_plugin_active(IUserEnumerationPlugin):
-            query = "*%s*" % query
-            results = self.ldap.enumerateUsers(query) or ()
-        else:
-            logger.warning(
-                "LDAP plugin inactive for user enumeration. "
-                "Querying source_users instead."
-            )
-            au = api.portal.get_tool("acl_users")
-            results = au.source_users.enumerateUsers(query) or ()
+        # For a real LDAP plugin we need '*query*', but in development or on
+        # a test server you may have a fake LDAP plugin (same plugin as
+        # source_users), and then you need 'query'.
+        results = (
+            self.ldap.enumerateUsers(f"*{query}*")
+            or self.ldap.enumerateUsers(query)
+            or ()
+        )
         return sorted(result["id"] for result in results)
 
     def grant_roles(self, user):

@@ -557,6 +557,15 @@
                          type="text"
                   />
                 </label>
+                <fieldset class="pat-checklist">
+                  <label>
+                    <tal:i18n i18n:translate="label_new_window">Open link in new window</tal:i18n>
+                    <input name="tiptap-target"
+                           type="checkbox"
+                           value="_blank"
+                    />
+                  </label>
+                </fieldset>
               </fieldset>
             </form>
             <div class="buttons button-bar pat-bumper">

@@ -1,4 +1,3 @@
-from setuptools import find_packages
 from setuptools import setup
 
 import monkeypatch_setup  # noqa: F401
@@ -32,9 +31,6 @@ setup(
     author_email="info@syslab.com",
     url="http://www.oiraproject.eu/",
     license="GPL",
-    packages=find_packages("src"),
-    package_dir={"": "src"},
-    namespace_packages=["osha"],
     include_package_data=True,
     zip_safe=False,
     install_requires=[
@@ -52,7 +48,6 @@ setup(
         "Products.MemcachedManager",
         "Products.statusmessages",
         "requests",
-        "setuptools",
         "slc.zopescript",
         "zope.app.publication",
         "zope.publisher",

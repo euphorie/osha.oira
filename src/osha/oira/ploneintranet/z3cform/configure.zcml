@@ -164,12 +164,27 @@
       mode="input"
       />
 
+  <z3c:widgetTemplate
+      view="..interfaces.IQuaiveForm"
+      field="osha.oira.behaviors.related_images.IRelatedImagesField"
+      widget="z3c.form.interfaces.IMultiWidget"
+      template="templates/related_images_input.pt"
+      layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      mode="input"
+      />
+
   <browser:page
       name="quaive_form_macros"
       for="*"
       template="templates/quaive_form_macros.pt"
       permission="zope2.View"
       layer="osha.oira.nuplone.interfaces.IOiRAFormLayer"
+      />
+
+  <adapter
+      factory=".widgets.RelatedImagesFieldWidget"
+      for="osha.oira.behaviors.related_images.IRelatedImagesField
+           osha.oira.nuplone.interfaces.IOiRAFormLayer"
       />
 
 </configure>

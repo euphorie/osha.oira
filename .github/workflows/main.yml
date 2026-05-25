@@ -15,8 +15,9 @@ jobs:
       matrix:
         config:
           - ["Py3.11-Plone6.1", "6.1", "3.11"]
-          - ["Py3.12-Plone6.1", "6.1", "3.12"]
           - ["Py3.13-Plone6.1", "6.1", "3.13"]
+          - ["Py3.11-Plone6.2", "6.2", "3.11"]
+          - ["Py3.14-Plone6.2", "6.2", "3.14"]
     runs-on: ubuntu-latest
     name: ${{ matrix.config[0] }}
     steps:

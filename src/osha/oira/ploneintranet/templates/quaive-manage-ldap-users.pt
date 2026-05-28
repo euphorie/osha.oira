@@ -1,0 +1,121 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      metal:use-macro="context/@@layout/macros/layout"
+      i18n:domain="euphorie"
+>
+  <body>
+    <metal:title fill-slot="title">
+      Manage LDAP users in ${here/Title}
+    </metal:title>
+    <metal:content fill-slot="content">
+      <script type="text/javascript">
+    function check_role_change() {
+        var answer = confirm("Are you sure that you want to disable this Country Manager? This will remove ALL editing access!");
+        if (answer){
+            return true;
+        }
+        return false;
+    }
+      </script>
+
+
+      <h2>Existing users with local role
+        <em tal:condition="python:context.portal_type=='euphorie.country'">Country Manager</em><em tal:condition="python:context.portal_type=='euphorie.sector'">Sector Manager</em>
+        enabled</h2>
+      <tal:existing-roles define="
+                            userids view/local_roles_userids;
+                          ">
+
+        <p class="message notice"
+           tal:condition="python:context.portal_type=='euphorie.country' and not userids"
+        >There are no country managers for this country.</p>
+        <p class="message notice"
+           tal:condition="python:context.portal_type=='euphorie.sector' and not userids"
+        >There are no sector managers for this sector.</p>
+
+        <metal:macro define-macro="user-table">
+          <table tal:condition="nocall:userids">
+            <thead>
+              <tr>
+                <th>Login</th>
+                <th class="actions">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tal:user repeat="userid userids">
+                <tr tal:define="
+                      user python:view.get_user(userid);
+                    "
+                    tal:condition="nocall:user"
+                >
+                  <td>${python:user.getProperty('login', None) or userid}</td>
+                  <td>
+                    <form action="${request/getURL}"
+                          method="post"
+                    >
+                      <input name="userid"
+                             type="hidden"
+                             value="${userid}"
+                      />
+                      <tal:button define="
+                                    has_managed_roles python:view.has_managed_roles(user);
+                                  ">
+
+                        <button class="micro floatAfter function"
+                                name="ldap_action"
+                                type="submit"
+                                value="grant"
+                                tal:condition="not:has_managed_roles"
+                        >Grant Roles</button>
+                        <button class="micro floatAfter function"
+                                id="revoke_role"
+                                name="ldap_action"
+                                onclick="${python:context.portal_type=='euphorie.country' and 'return check_role_change()' or None}"
+                                type="submit"
+                                value="revoke"
+                                tal:condition="has_managed_roles"
+                        >Revoke Roles</button>
+                      </tal:button>
+                      <tal:csrf replace="structure context/@@authenticator/authenticator" />
+                    </form>
+                  </td>
+                </tr>
+              </tal:user>
+            </tbody>
+          </table>
+        </metal:macro>
+      </tal:existing-roles>
+
+      <h2>Search for LDAP users</h2>
+      <form method="POST"
+            style="margin: 0 0 10px;"
+      >
+        <input name="SearchableText"
+               type="text"
+               value="${request/SearchableText|nothing}"
+        />
+        <button name="search-ldap"
+                type="submit"
+                value="1"
+        >Search</button>
+      </form>
+      <tal:ldap-users define="
+                        userids view/ldap_userids;
+                      ">
+        <tal:users condition="userids">
+          <metal:macro use-macro="template/macros/user-table">
+          </metal:macro>
+        </tal:users>
+      </tal:ldap-users>
+      <p tal:condition="python:context.portal_type=='euphorie.country'">This form allows you to grant the
+        <em>Country Manager</em>
+        role for "${context/title}" to selected users.</p>
+      <p tal:condition="python:context.portal_type=='euphorie.sector'">This form allows you to grant the
+        <em>Sector Manager</em>
+        role for "${context/title}" to selected users.</p>
+    </metal:content>
+  </body>
+</html>

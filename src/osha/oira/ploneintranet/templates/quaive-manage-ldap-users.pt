@@ -7,13 +7,19 @@
       i18n:domain="euphorie"
 >
   <body>
-    <metal:content fill-slot="content">
-      <h3>
-        Manage LDAP users in ${here/Title}
+    <metal:content fill-slot="content"
+                   tal:define="
+                     role python:'Country Manager' if context.portal_type=='euphorie.country' else 'Sector Manager';
+                   "
+    >
+      <h3 i18n:translate="manage_ldap_users_context">
+        Manage LDAP users in
+        <tal:title i18n:name="context">${here/Title}</tal:title>
       </h3>
 
-      <p>Existing users with local role
-        <em tal:condition="python:context.portal_type=='euphorie.country'">Country Manager</em><em tal:condition="python:context.portal_type=='euphorie.sector'">Sector Manager</em>
+      <p i18n:translate="existing_users_local_role">
+        Existing users with local role
+        <em i18n:name="role">${role}</em>
         enabled</p>
       <tal:existing-roles define="
                             userids view/local_roles_userids;
@@ -21,9 +27,11 @@
 
         <p class="message notice"
            tal:condition="python:context.portal_type=='euphorie.country' and not userids"
+           i18n:translate=""
         >There are no country managers for this country.</p>
         <p class="message notice"
            tal:condition="python:context.portal_type=='euphorie.sector' and not userids"
+           i18n:translate=""
         >There are no sector managers for this sector.</p>
 
         <metal:macro define-macro="user-table">
@@ -64,6 +72,7 @@
                               type="submit"
                               value="grant"
                               tal:condition="not:has_managed_roles"
+                              i18n:translate=""
                       >Grant Roles</button>
                       <button class="micro function pat-button icon-trash"
                               id="revoke_role"
@@ -72,6 +81,7 @@
                               type="submit"
                               value="revoke"
                               tal:condition="has_managed_roles"
+                              i18n:translate=""
                       >Revoke Roles</button>
                     </tal:button>
                     <tal:csrf replace="structure context/@@authenticator/authenticator" />
@@ -83,7 +93,9 @@
         </metal:macro>
       </tal:existing-roles>
 
-      <h3 style="margin-top: 0.5em">Search for LDAP users</h3>
+      <h3 style="margin-top: 0.5em"
+          i18n:translate=""
+      >Search for LDAP users</h3>
       <fieldset class="horizontal pat-form">
         <form class="pat-inject"
               method="POST"
@@ -106,6 +118,7 @@
                     style="width: 100%"
                     type="submit"
                     value="1"
+                    i18n:translate=""
             >Search</button>
           </span>
         </form>
@@ -118,12 +131,13 @@
           </metal:macro>
         </tal:users>
       </tal:ldap-users>
-      <p tal:condition="python:context.portal_type=='euphorie.country'">This form allows you to grant the
-        <em>Country Manager</em>
-        role for "${context/title}" to selected users.</p>
-      <p tal:condition="python:context.portal_type=='euphorie.sector'">This form allows you to grant the
-        <em>Sector Manager</em>
-        role for "${context/title}" to selected users.</p>
+      <p tal:condition="python:context.portal_type=='euphorie.country'"
+         i18n:translate="form_grants_manager_rights"
+      >This form allows you to grant the
+        <em i18n:name="role">${role}</em>
+        role for
+        <tal:title i18n:name="context">${context/title}</tal:title>
+        to selected users.</p>
     </metal:content>
   </body>
 </html>

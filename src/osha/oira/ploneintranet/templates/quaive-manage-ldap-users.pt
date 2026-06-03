@@ -1,0 +1,143 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      metal:use-macro="context/@@layout/macros/layout"
+      i18n:domain="euphorie"
+>
+  <body>
+    <metal:content fill-slot="content"
+                   tal:define="
+                     role python:'Country Manager' if context.portal_type=='euphorie.country' else 'Sector Manager';
+                   "
+    >
+      <h3 i18n:translate="manage_ldap_users_context">
+        Manage LDAP users in
+        <tal:title i18n:name="context">${here/Title}</tal:title>
+      </h3>
+
+      <p i18n:translate="existing_users_local_role">
+        Existing users with local role
+        <em i18n:name="role">${role}</em>
+        enabled</p>
+      <tal:existing-roles define="
+                            userids view/local_roles_userids;
+                          ">
+
+        <p class="message notice"
+           tal:condition="python:context.portal_type=='euphorie.country' and not userids"
+           i18n:translate=""
+        >There are no country managers for this country.</p>
+        <p class="message notice"
+           tal:condition="python:context.portal_type=='euphorie.sector' and not userids"
+           i18n:translate=""
+        >There are no sector managers for this sector.</p>
+
+        <metal:macro define-macro="user-table">
+          <tal:users tal:condition="nocall:userids">
+            <tal:user repeat="userid userids">
+              <fieldset class="horizontal pat-form"
+                        tal:define="
+                          user python:view.get_user(userid);
+                        "
+                        tal:condition="nocall:user"
+              >
+                <span class="field-cluster layout-inline">
+                  <span class="output-field"
+                        style="display: inline-block; width: 66%; margin-top: 0.1em"
+                  >
+                      ${python:user.getProperty('login', None) or userid}
+                  </span>
+                  <form class="pat-inject float-after"
+                        action="${request/getURL}"
+                        method="post"
+                        style="width:33%"
+                        data-pat-inject="
+                            source: #mainContent::element;
+                            target: #mainContent::element;
+                          "
+                  >
+                    <input name="userid"
+                           type="hidden"
+                           value="${userid}"
+                    />
+                    <tal:button define="
+                                  has_managed_roles python:view.has_managed_roles(user);
+                                ">
+
+                      <button class="micro function pat-button default alert icon-ok-circle"
+                              name="ldap_action"
+                              style="width:100%; padding-bottom: 0.15em"
+                              type="submit"
+                              value="grant"
+                              tal:condition="not:has_managed_roles"
+                              i18n:translate=""
+                      >Grant Roles</button>
+                      <button class="micro function pat-button icon-trash"
+                              id="revoke_role"
+                              name="ldap_action"
+                              style="width:100%; padding-bottom: 0.15em"
+                              type="submit"
+                              value="revoke"
+                              tal:condition="has_managed_roles"
+                              i18n:translate=""
+                      >Revoke Roles</button>
+                    </tal:button>
+                    <tal:csrf replace="structure context/@@authenticator/authenticator" />
+                  </form>
+                </span>
+              </fieldset>
+            </tal:user>
+          </tal:users>
+        </metal:macro>
+      </tal:existing-roles>
+
+      <h3 style="margin-top: 0.5em"
+          i18n:translate=""
+      >Search for LDAP users</h3>
+      <fieldset class="horizontal pat-form">
+        <form class="pat-inject"
+              method="POST"
+              style="margin: 0 0 10px;"
+              data-pat-inject="
+              source: #mainContent::element;
+              target: #mainContent::element;
+            "
+        >
+          <input class="pat-button output-field"
+                 name="SearchableText"
+                 style="display: inline-block; width: 66%; margin-top: 0em"
+                 type="text"
+                 value="${request/SearchableText|nothing}"
+          />
+          <span style="width:33%; float: right; padding-bottom: 0.15em">
+
+            <button class="micro function pat-button icon-search"
+                    name="search-ldap"
+                    style="width: 100%"
+                    type="submit"
+                    value="1"
+                    i18n:translate=""
+            >Search</button>
+          </span>
+        </form>
+      </fieldset>
+      <tal:ldap-users define="
+                        userids view/ldap_userids;
+                      ">
+        <tal:users condition="userids">
+          <metal:macro use-macro="template/macros/user-table">
+          </metal:macro>
+        </tal:users>
+      </tal:ldap-users>
+      <p tal:condition="python:context.portal_type=='euphorie.country'"
+         i18n:translate="form_grants_manager_rights"
+      >This form allows you to grant the
+        <em i18n:name="role">${role}</em>
+        role for
+        <tal:title i18n:name="context">${context/title}</tal:title>
+        to selected users.</p>
+    </metal:content>
+  </body>
+</html>

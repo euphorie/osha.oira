@@ -6,7 +6,6 @@ from transaction import commit
 
 import logging
 
-
 log = logging.getLogger(__name__)
 
 countries_with_simple_measures = ["it", "lt", "lv", "mt", "fr"]

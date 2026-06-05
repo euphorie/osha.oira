@@ -3,7 +3,6 @@ from setuptools import setup
 import monkeypatch_setup  # noqa: F401
 import os
 
-
 version = "13.0.0.dev0"
 
 setup(

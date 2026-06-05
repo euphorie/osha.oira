@@ -9,7 +9,6 @@ from ZPublisher.BaseRequest import DefaultPublishTraverse
 
 import logging
 
-
 try:
     from plone.protect.auto import safeWrite
 except ImportError:

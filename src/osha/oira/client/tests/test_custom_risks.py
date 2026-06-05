@@ -10,7 +10,7 @@ class NoCustomRisksFilterTests(OiRAIntegrationTestCase):
         )
 
     def testQuerying(self):
-        (self.session, self.survey) = createSurvey()
+        self.session, self.survey = createSurvey()
         self.mod1 = model.Module(
             title="Module 1", module_id="1", zodb_path="1", skip_children=False
         )

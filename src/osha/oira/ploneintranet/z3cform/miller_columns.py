@@ -17,7 +17,6 @@ from zope.schema.interfaces import IChoice
 
 import logging
 
-
 logger = logging.getLogger(__name__)
 
 

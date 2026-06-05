@@ -12,7 +12,6 @@ from zope.sqlalchemy import datamanager
 import logging
 import transaction
 
-
 log = logging.getLogger("osha.oira/browser.statistics")
 
 

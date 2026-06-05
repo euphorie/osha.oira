@@ -11,7 +11,6 @@ from plone.dexterity.browser.add import DefaultAddView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.i18nmessageid import MessageFactory
 
-
 from euphorie.content.browser.profilequestion import (  # isort:skip
     AddView as EuphorieProfileQuestionAddView,
 )

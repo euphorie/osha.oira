@@ -10,7 +10,6 @@ from euphorie.deployment.upgrade.utils import has_table
 
 import sqlalchemy as sa
 
-
 # revision identifiers, used by Alembic.
 revision = "20221118124144"
 down_revision = "16"

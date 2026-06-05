@@ -5,11 +5,11 @@ repos:
       - id: pyupgrade
         args: [--py37-plus]
   - repo: https://github.com/ambv/black
-    rev: 25.11.0
+    rev: 26.5.1
     hooks:
       - id: black
   - repo: https://github.com/pycqa/isort
-    rev: 7.0.0
+    rev: 9.0.0a3
     hooks:
       - id: isort
   - repo: https://github.com/PyCQA/flake8
@@ -17,7 +17,7 @@ repos:
     hooks:
       - id: flake8
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.9.1
+    rev: 1.9.4
     hooks:
       - id: bandit
         exclude: /tests/
@@ -26,7 +26,7 @@ repos:
           - --confidence-level=medium
           - --skip=B608
   - repo: https://github.com/collective/zpretty
-    rev: 3.1.1
+    rev: 4.0.1
     hooks:
       - id: zpretty
         exclude: src/euphorie/client/resources
@@ -35,6 +35,6 @@ repos:
     hooks:
       - id: check-po
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.37.1
+    rev: v1.38.0
     hooks:
       - id: yamllint

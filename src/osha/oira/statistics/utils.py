@@ -5,7 +5,6 @@ from osha.oira.client.model import SurveyStatistics as Survey
 
 import logging
 
-
 log = logging.getLogger(__name__)
 
 

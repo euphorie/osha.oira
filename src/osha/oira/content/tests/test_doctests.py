@@ -7,7 +7,6 @@ import logging
 import os.path
 import unittest
 
-
 logger = logging.getLogger("osha.oira.tests.test_doctests")
 
 

@@ -4,7 +4,6 @@ from sqlalchemy.orm import sessionmaker
 
 import logging
 
-
 log = logging.getLogger(__name__)
 
 STATISTICS_DATABASE_PATTERN = "statistics_{suffix}"

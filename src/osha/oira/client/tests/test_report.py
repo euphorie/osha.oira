@@ -426,7 +426,7 @@ class RiskQueryTests(OiRAIntegrationTestCase):
     """
 
     def createData(self):
-        (self.session, self.survey_session) = createSurvey()
+        self.session, self.survey_session = createSurvey()
 
         self.q1 = model.Module(
             **{
@@ -558,7 +558,7 @@ class UnansweredQueryTests(OiRAIntegrationTestCase):
     """
 
     def createData(self):
-        (self.session, self.survey_session) = createSurvey()
+        self.session, self.survey_session = createSurvey()
 
         self.q1 = model.Module(
             **{

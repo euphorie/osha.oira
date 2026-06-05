@@ -8,7 +8,6 @@ from lxml import etree
 from lxml import html
 from lxml.html import builder as E
 
-
 # A plain template with Bootstrap
 report = E.HTML(
     E.HEAD(

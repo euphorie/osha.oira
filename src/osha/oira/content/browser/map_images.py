@@ -14,7 +14,6 @@ import logging
 import os
 import requests
 
-
 log = logging.getLogger(__name__)
 
 

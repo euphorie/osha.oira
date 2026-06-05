@@ -6,7 +6,6 @@ from logging import getLogger
 from pkg_resources import resource_filename
 from sqlalchemy import inspect
 
-
 logger = getLogger(__name__)
 
 

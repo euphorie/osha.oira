@@ -6,7 +6,6 @@ from Products.Five import BrowserView
 
 import logging
 
-
 logger = logging.getLogger(__name__)
 
 

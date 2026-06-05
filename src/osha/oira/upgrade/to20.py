@@ -10,7 +10,6 @@ import logging
 import requests
 import urllib.request
 
-
 BASE_URL = "https://oiraproject.eu"
 
 log = logging.getLogger(__name__)

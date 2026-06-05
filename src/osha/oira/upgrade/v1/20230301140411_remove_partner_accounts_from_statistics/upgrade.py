@@ -11,7 +11,6 @@ from z3c.saconfig import Session
 import logging
 import sqlalchemy
 
-
 try:
     from oira.statistics.deployment.model import AccountStatistics
     from oira.statistics.deployment.model import SurveySessionStatistics

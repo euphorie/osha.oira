@@ -6,7 +6,6 @@ from Zope2.App import zcml
 import logging
 import sys
 
-
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 stdout = logging.StreamHandler(sys.stdout)

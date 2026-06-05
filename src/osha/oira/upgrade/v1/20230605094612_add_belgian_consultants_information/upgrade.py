@@ -1,7 +1,6 @@
 from ftw.upgrade import UpgradeStep
 from plone import api
 
-
 body_french = (
     "<p>Tous les entreprises doivent être affiliées à un service externe pour la "
     "prévention et la protection au travail (SEPPT). Ce service est composé de deux "

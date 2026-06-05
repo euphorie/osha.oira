@@ -5,7 +5,6 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.i18nmessageid import MessageFactory
 from zope.interface import implementer
 
-
 _ = MessageFactory("nuplone")
 
 

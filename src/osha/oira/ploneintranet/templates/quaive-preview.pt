@@ -1,7 +1,37 @@
 <div id="quaive-content"
      i18n:domain="euphorie"
 >
-  <p i18n:translate="intro_preview">Are you sure you want to create a preview of this OiRA Tool? You
+  <p style="padding-bottom: 1em"
+     tal:condition="python:view.existing_preview_version_id"
+  >
+    <span i18n:translate="help_preview_existing">
+      There is already a preview of this OiRA Tool at
+      <strong i18n:name="url">${view/preview_url}</strong>.
+    </span>
+    <span tal:condition="python:view.existing_preview_version_id == context.id"
+          i18n:translate="help_preview_existing_ours"
+    >
+      You can update this if you want.
+    </span>
+    <span tal:condition="python:view.existing_preview_version_id != context.id"
+          i18n:translate="help_preview_existing_other"
+    >
+      The preview is for a different version:
+      <a href="${info/url}"
+         tal:define="
+           info python:view.current_preview_survey_info;
+         "
+         i18n:name="tool_title"
+      >
+        ${info/title}
+      </a>.
+      You can override this with the current version if you want.
+    </span>
+    <br />
+  </p>
+  <p style="padding-bottom: 1em"
+     i18n:translate="intro_preview"
+  >Are you sure you want to create a preview of this OiRA Tool? You
     can give the URL for the preview to others so they can test the OiRA Tool.
     To access the preview a standard OiRA client login is required.
   </p>

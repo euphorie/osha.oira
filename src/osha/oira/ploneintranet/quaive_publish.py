@@ -1,5 +1,8 @@
+from Acquisition import aq_parent
+from euphorie.client.browser.publish import CopyToClient
 from euphorie.client.browser.publish import PreviewSurvey
 from euphorie.client.browser.publish import PublishSurvey
+from functools import cached_property
 from osha.oira.ploneintranet.quaive_mixin import QuaiveEditFormMixin
 
 
@@ -61,3 +64,39 @@ class PreviewSurveyQuaiveForm(QuaiveEditFormMixin, PreviewSurvey):
     The messages in the template are copied from
     'euphorie.client.browser.templates.preview.pt'.
     """
+
+    @cached_property
+    def existing_preview_version_id(self):
+        """Get the tool version id of the existing preview, if any.
+
+        Per tool (survey group) only ONE tool version (survey) can have a
+        preview.  The tool version id is stored in the version attribute
+        of the copy.
+        """
+        copy = CopyToClient(self.context, preview=True, readonly=True)
+        if copy is None:
+            return None
+        return copy.version
+
+    @cached_property
+    def current_preview_survey_info(self):
+        """Info on survey corresponding to current preview.
+
+        Should normally only be called when the current survey does not
+        correspond to the preview.  It should return info from one of our
+        siblings then.
+
+        I wanted to simply return the survey, but if something went wrong in
+        the past, I guess the preview might point to a survey that no longer
+        exists.
+        So return a dictionary
+        """
+        version_id = self.existing_preview_version_id
+        if not version_id:
+            return {"title": "", "url": ""}
+        parent = aq_parent(self.context)
+        survey = getattr(parent, version_id, None)
+        title = version_id if survey is None else survey.Title()
+        parent_path = "/".join(parent.getPhysicalPath()[3:])
+        url = f"OIRA_CREATOR_APP_URL/@@oira-edit/{parent_path}/{version_id}"
+        return {"title": title, "url": url}

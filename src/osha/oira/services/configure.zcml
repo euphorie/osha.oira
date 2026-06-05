@@ -5,6 +5,15 @@
 
   <plone:service
       method="GET"
+      factory=".actions.OSHAActionsGet"
+      for="zope.interface.Interface"
+      permission="zope2.View"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      name="@actions"
+      />
+
+  <plone:service
+      method="GET"
       factory=".surveys.ToolVersionsGet"
       for="euphorie.content.surveygroup.ISurveyGroup"
       permission="zope2.View"

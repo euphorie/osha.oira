@@ -2,7 +2,6 @@
 
 from euphorie.content import MessageFactory as _
 
-
 # euphorie/client/templates/account-settings.pt
 _("header_account_data", default="Account data")
 _("Email address/account name")

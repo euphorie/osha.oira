@@ -10,7 +10,6 @@ from zope.component import getMultiAdapter
 
 import logging
 
-
 log = logging.getLogger(__name__)
 
 
@@ -116,9 +115,7 @@ class OutdatedToolsView(BrowserView):
             )
             intro = """
 You are receiving this notification since you are the sector manager for
-"{}". """.format(
-                sector.Title()
-            )
+"{}". """.format(sector.Title())
             self.send_notification(
                 to_name=contact_name,
                 to_address=contact_email,
@@ -149,9 +146,7 @@ You are receiving this notification since you are the sector manager for
             for manager in managers:
                 intro = """
 You are receiving this notification since you are the country manager for
-"{}". """.format(
-                    country.Title()
-                )
+"{}". """.format(country.Title())
 
                 self.send_notification(
                     to_name="",
@@ -235,9 +230,7 @@ Please check if they are still up to date and republish them.
 
 Best regards,
 OiRA
-""".format(
-            name=to_name or to_address, tools=tool_details, period=period, intro=intro
-        )
+""".format(name=to_name or to_address, tools=tool_details, period=period, intro=intro)
         mail = CreateEmailTo(
             self.email_from_name, self.email_from_address, recipient, subject, body
         )

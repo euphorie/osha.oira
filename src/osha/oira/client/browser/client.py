@@ -23,7 +23,6 @@ from zope.publisher.interfaces import IPublishTraverse
 
 import hashlib
 
-
 _marker = object()
 
 

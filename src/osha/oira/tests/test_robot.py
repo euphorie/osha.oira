@@ -6,7 +6,6 @@ import os
 import robotsuite
 import unittest
 
-
 logger = logging.getLogger("osha.oira.tests.test_robot")
 
 

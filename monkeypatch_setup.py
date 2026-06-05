@@ -2,7 +2,6 @@
 # https://bitbucket.org/pypa/setuptools/issues/450/egg_info-command-is-very-slow-if-there-are
 import os
 
-
 TO_OMIT = [
     "var",
     ".git",

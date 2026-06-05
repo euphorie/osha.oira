@@ -11,7 +11,6 @@ from plonetheme.nuplone.z3cform.directives import depends
 from zope import interface
 from zope import schema
 
-
 help_default_probability = _(
     "help_default_probability",
     default="Indicate how likely occurence of this risk is in a normal situation.",

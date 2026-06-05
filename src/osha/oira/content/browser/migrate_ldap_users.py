@@ -2,7 +2,6 @@ from logging import getLogger
 from plone import api
 from Products.Five import BrowserView
 
-
 log = getLogger(__name__)
 
 

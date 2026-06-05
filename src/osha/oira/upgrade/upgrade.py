@@ -15,7 +15,6 @@ import datetime
 import logging
 import transaction
 
-
 log = logging.getLogger(__name__)
 
 

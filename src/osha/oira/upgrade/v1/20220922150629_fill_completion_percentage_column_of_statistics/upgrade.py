@@ -9,7 +9,6 @@ from z3c.saconfig import Session
 
 import logging
 
-
 try:
     from oira.statistics.deployment.model import SurveySessionStatistics
 except ImportError:

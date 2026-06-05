@@ -5,7 +5,6 @@ from plone.memoize.instance import memoize
 from plone.namedfile.interfaces import INamedBlobImage
 from z3c.saconfig import Session
 
-
 log = getLogger(__name__)
 
 

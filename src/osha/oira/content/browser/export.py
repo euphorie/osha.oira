@@ -3,7 +3,6 @@ from euphorie.content.browser import upload
 from euphorie.content.profilequestion import IProfileQuestion
 from lxml import etree
 
-
 PQ_FIELDS = [
     "label_multiple_present",
     "label_single_occurance",

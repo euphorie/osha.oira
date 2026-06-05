@@ -2,7 +2,6 @@ from euphorie.client.browser import module
 from logging import getLogger
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-
 logger = getLogger(__name__)
 
 

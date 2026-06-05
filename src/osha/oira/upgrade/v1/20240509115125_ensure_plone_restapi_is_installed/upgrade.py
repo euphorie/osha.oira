@@ -1,7 +1,6 @@
 from ftw.upgrade import UpgradeStep
 from plone import api
 
-
 try:
     from plone.base.utils import get_installer
 except ImportError:

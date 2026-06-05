@@ -2,7 +2,6 @@ from ftw.upgrade import UpgradeStep
 
 import logging
 
-
 logger = logging.getLogger(__name__)
 
 

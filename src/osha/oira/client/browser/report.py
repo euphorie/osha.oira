@@ -18,7 +18,6 @@ from zope.i18n import translate
 
 import logging
 
-
 log = logging.getLogger(__name__)
 
 

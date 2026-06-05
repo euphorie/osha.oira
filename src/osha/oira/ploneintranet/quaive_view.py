@@ -13,7 +13,6 @@ from Products.Five import BrowserView
 from zope.component import getUtility
 from zope.interface import providedBy
 
-
 logger = getLogger(__name__)
 
 try:

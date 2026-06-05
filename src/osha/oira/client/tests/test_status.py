@@ -8,7 +8,6 @@ from zope import interface
 
 import unittest
 
-
 SURVEY = """<sector xmlns="http://xml.simplon.biz/euphorie/survey/1.0">
              <title>ICT</title>
              <survey>

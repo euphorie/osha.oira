@@ -12,7 +12,6 @@ from sqlalchemy.ext.declarative import instrument_declarative
 
 import json
 
-
 logger = getLogger(__name__)
 
 

@@ -6,7 +6,9 @@
   >
     <span i18n:translate="help_preview_existing">
       There is already a preview of this OiRA Tool at
-      <strong i18n:name="url">${view/preview_url}</strong>.
+      <a href="${view/preview_url}"
+         i18n:name="url"
+      ><strong>${view/preview_url}</strong></a>.
     </span>
     <span tal:condition="python:view.existing_preview_version_id == context.id"
           i18n:translate="help_preview_existing_ours"
@@ -37,7 +39,10 @@
   </p>
 
   <p i18n:translate="help_preview_url">The preview will be available at
-    <strong i18n:name="url">${view/preview_url}</strong>.</p>
+    <a href="${view/preview_url}"
+       i18n:name="url"
+    ><strong>${view/preview_url}</strong></a>.
+  </p>
 
   <span tal:replace="structure context/@@authenticator/authenticator"></span>
 </div>

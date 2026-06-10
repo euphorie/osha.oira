@@ -8,6 +8,48 @@ Changelog
 
 .. towncrier release notes start
 
+13.0.0 (2026-06-10)
+-------------------
+
+Breaking changes:
+
+
+- Replace ``pkg_resources`` namespace with PEP 420 native namespace. (`Issue #3928 <https://github.com/syslabcom/scrum/issues/3928>`_)
+
+
+New features:
+
+
+- Add quaive-manage-ldap-users.  [maurits] (`Issue #4282 <https://github.com/syslabcom/scrum/issues/4282>`_)
+- Augment the @actions endpoint with the actions coming from the tabs tile. (`Issue #4282 <https://github.com/syslabcom/scrum/issues/4282>`_)
+- Quaive create preview: show info about already existing preview.  [maurits] (`Issue #4608 <https://github.com/syslabcom/scrum/issues/4608>`_)
+- Change the tiptap link edit panel to have a "Open web page in new window" option.
+  @thet (`Issue #4753 <https://github.com/syslabcom/scrum/issues/4753>`_)
+
+
+Bug fixes:
+
+
+- Update translataions. @angeldasangel (`Issue #4828 <https://github.com/syslabcom/scrum/issues/4828>`_)
+
+
+Internal:
+
+
+- Remove the /scripts folder that contains code not used in years and with broken imports. @ale-rt (`Issue #4776 <https://github.com/syslabcom/scrum/issues/4776>`_)
+- Remove Makefile targets that are not used anymore and some scripts related to translation management. @ale-rt (`Issue #4776 <https://github.com/syslabcom/scrum/issues/4776>`_)
+- Remove the `scripts/xml2md.py` script. @ale-rt (`Issue #4776 <https://github.com/syslabcom/scrum/issues/4776>`_)
+- Manage LDAP users (country/sector managers): only do `*query*` if we have a real LDAP plugin.
+  Fall back to the unchanged `query`, allowing you to have a fake LDAP for local testing.
+  [maurits]
+
+
+Tests
+
+
+- Test the package on Plone 6.2 / Python 3.14. @ale-rt
+
+
 12.6.0 (2026-05-06)
 -------------------
 

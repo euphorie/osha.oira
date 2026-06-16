@@ -8,6 +8,15 @@ Changelog
 
 .. towncrier release notes start
 
+13.0.1 (2026-06-16)
+-------------------
+
+Bug fixes:
+
+
+- Quaive publish: make the link in the modal clickable.  [maurits] (`Issue #4608 <https://github.com/syslabcom/scrum/issues/4608>`_)
+
+
 13.0.0 (2026-06-10)
 -------------------
 

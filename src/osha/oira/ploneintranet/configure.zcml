@@ -288,6 +288,15 @@
       />
 
   <browser:page
+      name="quaive-manage-users"
+      for="euphorie.content.country.ICountry"
+      class="osha.oira.content.browser.country.OSHAManageUsers"
+      template="templates/quaive-manage-users.pt"
+      permission="euphorie.content.ManageCountry"
+      layer="osha.oira.interfaces.IOSHAContentSkinLayer"
+      />
+
+  <browser:page
       name="quaive-manage-ldap-users"
       for="euphorie.content.country.ICountry"
       class="osha.oira.content.browser.manage_ldap_users.ManageCountryLDAPUsersView"

@@ -98,6 +98,7 @@
       >Search for LDAP users</h3>
       <fieldset class="horizontal pat-form">
         <form class="pat-inject"
+              action="${request/getURL}"
               method="POST"
               style="margin: 0 0 10px;"
               data-pat-inject="

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:meta="http://xml.zope.org/namespaces/meta"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      meta:interpolation="true"
+      metal:use-macro="context/@@layout/macros/layout"
+      i18n:domain="euphorie"
+>
+  <body>
+    <metal:content fill-slot="content"
+                   tal:define="
+                     managers view/managers;
+                   "
+    >
+
+      <h3 i18n:translate="header_sectors">Sectors</h3>
+
+      <p class="message notice"
+         tal:condition="not:view/sectors"
+         i18n:translate="country_no_sectors"
+      >There are no sectors for this country.</p>
+
+      <table tal:condition="view/sectors">
+        <tbody>
+          <tal:sectors repeat="sector view/sectors">
+            <fieldset class="horizontal pat-form"
+                      style="margin-bottom: 0.5em"
+            >
+              <p>
+                  ${sector/title}
+                <a class="pat-inject pat-tooltip icon-pencil close-panel"
+                   href="${sector/url}/@@quaive-manage-ldap-users"
+                   title="Manage sector access"
+                   data-pat-inject="
+                            source: #mainContent::element;
+                            target: #mainContent::element;
+                          "
+                   data-pat-tooltip="trigger: hover;  position-list: lm"
+                   i18n:attributes="title"
+                ></a>
+              </p>
+              <p style="margin-left: 0.5em"
+                 tal:condition="sector/managers"
+              >
+                <em i18n:translate="">Managers</em>:
+              ${python:', '.join(sector['managers'])}
+              </p>
+            </fieldset>
+          </tal:sectors>
+        </tbody>
+      </table>
+
+      <h3 i18n:translate="header_country_managers">Country managers</h3>
+      <p class="message notice"
+         i18n:translate="notice_assign_country_manager"
+      >To view and assign country manager permissions, please use the
+        <a class="pat-inject"
+           href="${context/absolute_url}/@@quaive-manage-ldap-users"
+           data-pat-inject="
+                    source: #mainContent::element;
+                    target: #mainContent::element;
+                  "
+           i18n:name="ldap_tab_link"
+           i18n:translate="nav_ldapmanagement_country"
+        >Manage country access</a>
+        form.</p>
+
+    </metal:content>
+  </body>
+</html>

@@ -1,8 +1,8 @@
 from euphorie.client.browser.webhelpers import WebHelpers
 from logging import getLogger
 from osha.oira.client.model import UsersNotInterestedInCertificateStatusBox
+from osha.oira.utils import is_image_small
 from plone.memoize.instance import memoize
-from plone.namedfile.interfaces import INamedBlobImage
 from z3c.saconfig import Session
 
 log = getLogger(__name__)
@@ -28,11 +28,7 @@ class OSHAWebHelpers(WebHelpers):
 #toggle-osc { display: none !important;}</style>"""
 
     def is_image_small(self, context, fname="image", usecase="module"):
-        image = getattr(context, fname, None)
-        if image and INamedBlobImage.providedBy(image):
-            x, y = image.getImageSize()
-            if x < 1000 or y < 430:
-                return True
+        return is_image_small(context, fname=fname)
 
     def show_certificate_status_box(self):
         """Check if the current user should see his own certificate status

@@ -32,7 +32,7 @@
               <p>
                   ${sector/title}
                 <a class="pat-inject pat-tooltip icon-pencil close-panel"
-                   href="${sector/url}/@@quaive-manage-ldap-users"
+                   href="OIRA_CREATOR_APP_URL/@@app-assessments-manage-access/${context/id}/${sector/id}"
                    title="Manage sector access"
                    data-pat-inject="
                             source: #mainContent::element;
@@ -58,7 +58,7 @@
          i18n:translate="notice_assign_country_manager"
       >To view and assign country manager permissions, please use the
         <a class="pat-inject"
-           href="${context/absolute_url}/@@quaive-manage-ldap-users"
+           href="OIRA_CREATOR_APP_URL/@@app-assessments-manage-access/${context/id}"
            data-pat-inject="
                     source: #mainContent::element;
                     target: #mainContent::element;

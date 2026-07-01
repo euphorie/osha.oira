@@ -8,21 +8,40 @@
       i18n:domain="euphorie"
 >
   <body>
-    <metal:slot fill-slot="quaive-body">
-      <div class="module-illustrations"
-           tal:define="
-             images context/@@images;
-             scale python:images.scale('image', height=510, width=510, direction='thumbnail');
-           "
-           tal:condition="scale"
+    <metal:slot fill-slot="quaive-body"
+                tal:define="
+                  is_image_small python:view.is_image_small();
+                "
+    >
+      <figure id="hero"
+              title="${context/caption|nothing}"
+              tal:define="
+                images context/@@images;
+                scale python:images.scale('image', width=590, height=1900, direction='thumbnail') if is_image_small else images.scale('image', scale='training', direction='thumbnail');
+              "
+              tal:condition="scale"
       >
-        <figure class="module-illustration">
-          <img alt=""
-               src="${scale/url}"
-          />
-          <figcaption></figcaption>
-        </figure>
-      </div>
+        <img alt=""
+             src="${scale/url}"
+             title="${context/caption|nothing}"
+             tal:condition="is_image_small"
+        />
+        <img alt=""
+             src="${portal_url}/++resource++euphorie.resources/assets/oira/style/placeholder-21x9.png"
+             style="
+                background-size: cover;
+                background-position: center center;
+                width: 100%;
+                background-color: #e7f2fb;
+                background-image: url(${scale/url|nothing});
+              "
+             title="${context/caption|nothing}"
+             tal:condition="not:is_image_small"
+        />
+        <figcaption tal:condition="context/caption|nothing">
+              ${context/caption|nothing}
+        </figcaption>
+      </figure>
 
       <div class="pat-rich">
         <p tal:replace="structure python:context.Description()">Van belang is dat de spuitlans de

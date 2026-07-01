@@ -1,9 +1,11 @@
+from euphorie.content.browser.module import ModuleView
 from euphorie.content.browser.risk import RiskView
 from euphorie.content.solution import ISolution
 from euphorie.content.survey import get_tool_type
 from euphorie.content.utils import IToolTypesInfo
 from euphorie.content.utils import ToolTypesInfo
 from logging import getLogger
+from osha.oira.utils import is_image_small
 from plone import api
 from plone.memoize.view import memoize
 from plone.memoize.view import memoize_contextless
@@ -140,3 +142,9 @@ class QuaiveRiskView(RiskView):
             for solution in self.my_context.values()
             if ISolution.providedBy(solution)
         ]
+
+
+class QuaiveModuleView(ModuleView):
+
+    def is_image_small(self):
+        return is_image_small(self.context)

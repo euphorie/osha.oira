@@ -42,7 +42,7 @@
   <browser:page
       name="quaive-view"
       for="euphorie.content.module.IModule"
-      class="euphorie.content.browser.module.ModuleView"
+      class=".quaive_view.QuaiveModuleView"
       template="templates/module_view.pt"
       permission="zope2.View"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"

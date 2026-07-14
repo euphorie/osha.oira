@@ -1,24 +1,22 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:upgrade-step="http://namespaces.zope.org/ftw.upgrade"
+    xmlns:upgrade-step="http://namespaces.zope.org/collective.ftw.upgrade"
     i18n_domain="plone"
     >
 
   <include
-      package="ftw.upgrade"
+      package="collective.ftw.upgrade"
       file="meta.zcml"
       />
 
   <upgrade-step:directory
-      profile="osha.oira:default"
       directory="v1"
+      profile="osha.oira:default"
       />
 
   <upgrade-step:directory
-      profile="osha.oira:default"
       directory="v12"
+      profile="osha.oira:default"
       />
-
-  <include file="legacy.zcml" />
 
 </configure>

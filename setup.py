@@ -3,7 +3,7 @@ from setuptools import setup
 import monkeypatch_setup  # noqa: F401
 import os
 
-version = "13.1.1.dev0"
+version = "14.0.0.dev0"
 
 setup(
     name="osha.oira",
@@ -35,8 +35,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        "Euphorie >=14.0.0",
-        "ftw.upgrade",
+        "Euphorie >=20.0.0",
+        "collective.ftw.upgrade",
         "mobile.sniffer",
         "NuPlone >= 4.0.1",
         "pas.plugins.ldap",

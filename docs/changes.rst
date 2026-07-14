@@ -8,6 +8,21 @@ Changelog
 
 .. towncrier release notes start
 
+13.1.0 (2026-07-14)
+-------------------
+
+New features:
+
+
+- Add Quaive version of manage-users.  [maurits] (`Issue #4889 <https://github.com/syslabcom/scrum/issues/4889>`_)
+
+
+Bug fixes:
+
+
+- Oira Creator: let image scaling within a module look the same as on the client side.  [maurits] (`Issue #4755 <https://github.com/syslabcom/scrum/issues/4755>`_)
+
+
 13.0.1 (2026-06-16)
 -------------------
 

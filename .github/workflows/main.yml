@@ -42,7 +42,7 @@ jobs:
             ${{ runner.os }}-cache-
       - name: Pre commit
         uses: pre-commit/action@v3.0.0
-        if: ${{ matrix.config[2] == '3.12' }}
+        if: ${{ matrix.config[2] == '3.14' }}
       - name: Install dependencies
         run: |
           sudo locale-gen en_US.UTF-8 nl_NL@euro

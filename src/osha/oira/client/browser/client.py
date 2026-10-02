@@ -61,6 +61,8 @@ class BaseJson(BrowserView):
             raise Unauthorized("Invalid ticket")
 
         token = api.portal.get_registry_record("osha.oira.mailings.token", default="")
+        if not token:
+            raise Unauthorized("Invalid token: should not be empty")
 
         payload = "|".join([user_id, token])
         expected = hashlib.blake2b(payload.encode()).hexdigest()

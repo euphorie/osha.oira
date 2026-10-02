@@ -41,7 +41,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cache-
       - name: Pre commit
-        uses: pre-commit/action@v3.0.0
+        uses: pre-commit/action@v3.0.1
         if: ${{ matrix.config[2] == '3.14' }}
       - name: Install dependencies
         run: |

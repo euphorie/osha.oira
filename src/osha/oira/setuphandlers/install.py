@@ -1,4 +1,5 @@
 from plone import api
+from uuid import uuid4
 
 
 def _setup_memcached():
@@ -30,6 +31,14 @@ def _setup_memcached():
     memcached.manage_editProps(memcached.title, settings)
 
 
+def _setup_default_token():
+    """Setup default token for OIRA mailings
+    if the token is not already set in the registry.
+    """
+    if not api.portal.get_registry_record("osha.oira.mailings.token", default=""):
+        api.portal.set_registry_record("osha.oira.mailings.token", uuid4().hex)
+
+
 def post_install(context):
     """Post-install script for the OIRA package.
 
@@ -37,3 +46,4 @@ def post_install(context):
     to perform any necessary setup or configuration tasks.
     """
     _setup_memcached()
+    _setup_default_token()

@@ -7,13 +7,6 @@
   <adapter factory=".widget.ChoiceWidgetFactory" />
 
   <z3c:widgetTemplate
-      widget=".interfaces.ILargeTextAreaWidget"
-      template="templates/largetextarea_input.pt"
-      layer=".interfaces.IOiRAFormLayer"
-      mode="input"
-      />
-
-  <z3c:widgetTemplate
       widget="plonetheme.nuplone.z3cform.widget.IWysiwygWidget"
       template="templates/wysiwyg_input.pt"
       layer=".interfaces.IOiRAFormLayer"

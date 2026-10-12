@@ -3,30 +3,54 @@
 var _paq = window._paq = window._paq || [];
 
 (async function () {
-    const hostname_production = "oira.osha.europa.eu";
-    const hostname_staging = "test-oira.osha.europa.eu";
-    const hostname_development = "localhost";
-    const mode_production = location.hostname === hostname_production;
-    const mode_staging = location.hostname === hostname_staging;
-    const mode_development = location.hostname === hostname_development;
-    const tracking_endpoint_url = (
-        mode_development ?
-            "http://localhost:8080/Plone/piwikmock.php" :
-            "https://piwik.osha.europa.eu/piwik/matomo.php"
-    );
-    const tracking_script_url = "https://piwik.osha.europa.eu/piwik/matomo.js";
-    const tracking_domain = (mode_production ? "*.oira.osha.europa.eu" : "*.test-oira.osha.europa.eu") + "/oira-tools/";
-    const site_id = mode_production ? "9" : "11";
 
-    const download_path_pattern = /(?:@@pdf|@@timeline|\.(?:docx|xlsx|pptx|pdf|gif|jpe?g|png|zip))$/i;
+    const tracking_url_map = {
+      // hostname : site id
+      // production
+      "oira.osha.europa.eu": "9",
+      // DSE production
+      "eguides.osha.europa.eu": "25",
+      // staging
+      "test-oira.osha.europa.eu": "11",
+      // dse staging
+      "test-eguides.osha.europa.eu": "11",
+      // development
+      "localhost": "11",
+    };
 
-    console.debug("Matomo: mode_production", mode_production);
-    console.debug("Matomo: mode_staging", mode_staging);
-    console.debug("Matomo: mode_development", mode_development);
-    console.debug("Matomo: tracking_endpoint_url", tracking_endpoint_url);
-    console.debug("Matomo: tracking_domain", tracking_domain);
+    const tracking_url_map_matomo5 = {
+      // hostname : site id
+      // production
+      "oira.osha.europa.eu": "9",
+      // DSE production
+      "eguides.osha.europa.eu": "25",
+      // staging
+      "test-oira.osha.europa.eu": "11",
+      // dse staging
+      "test-eguides.osha.europa.eu": "11",
+      // development
+      "localhost": "11",
+    };
+
+    const site_id = tracking_url_map[window.location.hostname];
+    const site_id_matomo5 = tracking_url_map_matomo5[window.location.hostname];
+
+    if (! site_id) {
+        // unconfigured URL. ignore and return.
+        console.warn("Matomo: no site_id found - exiting.");
+        return;
+    }
     console.debug("Matomo: site_id", site_id);
 
+    const is_development = window.location.hostname === "localhost";
+
+    const tracking_script_url = "https://piwik.osha.europa.eu/piwik/matomo.js";
+
+    const tracking_endpoint_url = "https://piwik.osha.europa.eu/piwik/matomo.php";
+    const tracking_endpoint_url_matomo5 = "https://webstats.osha.europa.eu/matomo.php";
+    const tracking_endpoint_url_development = "http://localhost:8080/Plone/piwikmock.php";
+
+    const download_path_pattern = /(?:@@pdf|@@timeline|\.(?:docx|xlsx|pptx|pdf|gif|jpe?g|png|zip))$/i;
     let previous_url = location.href;
 
 
@@ -176,9 +200,26 @@ var _paq = window._paq = window._paq || [];
 
     function base_tracking_initialization() {
         // Main Matomo variables
-        _paq.push(["setDomains", tracking_domain]);
-        _paq.push(["setTrackerUrl", tracking_endpoint_url]);
-        _paq.push(["setSiteId", site_id]);
+
+        if (is_development) {
+            // Development
+            _paq.push(["setTrackerUrl", tracking_endpoint_url_development]);
+            _paq.push(["setSiteId", site_id]);
+        } else {
+            // Production
+
+            // Default Matomo (Currently 3)
+            _paq.push(["setTrackerUrl", tracking_endpoint_url]);
+            _paq.push(["setSiteId", site_id]);
+
+            // Matomo 5 testing tracker
+            _paq.push([
+                "addTracker",
+                tracking_endpoint_url_matomo5,
+                site_id_matomo5
+            ]);
+        }
+
         // Link tracking is handled below so that dynamically injected links
         // and the custom URL cleanup follow the same code path.
 

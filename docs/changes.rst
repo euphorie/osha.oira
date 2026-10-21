@@ -8,6 +8,37 @@ Changelog
 
 .. towncrier release notes start
 
+14.0.0 (2026-10-21)
+-------------------
+
+Breaking changes:
+
+
+- Switch to collective.ftw.upgrade and remove legacy upgrades.
+  @ale-rt (`Issue #4970 <https://github.com/syslabcom/scrum/issues/4970>`_)
+
+
+Bug fixes:
+
+
+- Ensure that we have a mailing list token setup.
+  @ale-rt (`Issue #5262 <https://github.com/syslabcom/scrum/issues/5262>`_)
+
+
+Internal:
+
+
+- Remove an unused widget.
+  @ale-rt (`Issue #5261 <https://github.com/syslabcom/scrum/issues/5261>`_)
+
+
+Tests
+
+
+- Test against python-ldap 3.4.8.
+  @ale-rt (`Issue #5269 <https://github.com/syslabcom/scrum/issues/5269>`_)
+
+
 13.1.0 (2026-07-14)
 -------------------
 

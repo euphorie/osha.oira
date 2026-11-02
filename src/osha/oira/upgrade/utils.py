@@ -2,8 +2,8 @@ from alembic import command
 from alembic import op
 from alembic.config import Config
 from euphorie.client.model import Session
+from importlib.resources import files
 from logging import getLogger
-from pkg_resources import resource_filename
 from sqlalchemy import inspect
 
 logger = getLogger(__name__)
@@ -24,7 +24,7 @@ def has_column(table_name, column_name):
 
 
 def alembic_upgrade_to(revision):
-    script_location = resource_filename("osha.oira.upgrade", "alembic")
+    script_location = str(files("osha.oira.upgrade").joinpath("alembic"))
     url = Session().bind.engine.url.__to_string__(hide_password=False)
     alembic_cfg = Config()
     alembic_cfg.set_main_option("script_location", script_location)

@@ -1,9 +1,9 @@
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version
 from plone import api
 from plone.memoize.view import memoize
 from Products.CMFPlone.utils import get_installer
 from Products.Five import BrowserView
-
-import pkg_resources
 
 
 class About(BrowserView):
@@ -15,10 +15,9 @@ class About(BrowserView):
 
     def get_version(self, package):
         try:
-            version = pkg_resources.get_distribution(package).version
-        except pkg_resources.DistributionNotFound:
-            version = "N/A"
-        return version
+            return version(package)
+        except PackageNotFoundError:
+            return "N/A"
 
     @property
     @memoize

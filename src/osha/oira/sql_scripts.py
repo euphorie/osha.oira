@@ -1,5 +1,5 @@
 from euphorie.client import model
-from pkg_resources import resource_filename
+from importlib.resources import files
 from z3c.saconfig import Session
 from Zope2.App import zcml
 
@@ -21,7 +21,7 @@ stderr.setLevel(logging.ERROR)
 logger.addHandler(stderr)
 
 if sys.argv[0].endswith("/bin/test"):
-    config = resource_filename("euphorie.client.tests", "configure.zcml")
+    config = str(files("euphorie.client.tests").joinpath("configure.zcml"))
 else:
     config = "parts/instance/etc/package-includes/999-additional-overrides.zcml"  # noqa: E501
 

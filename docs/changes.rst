@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+14.0.1 (2026-11-03)
+-------------------
+
+Internal:
+
+
+- Replace the deprecated ``pkg_resources`` APIs with their standard-library
+  ``importlib`` equivalents. (`Issue #5377 <https://github.com/syslabcom/scrum/issues/5377>`_)
+
+
 14.0.0 (2026-10-21)
 -------------------
 

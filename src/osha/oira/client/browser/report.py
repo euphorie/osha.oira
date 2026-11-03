@@ -1,6 +1,7 @@
 from copy import copy
 from euphorie.client import model
 from euphorie.client.browser import report
+from importlib.resources import files
 from openpyxl.drawing.image import Image
 from openpyxl.styles import Border
 from openpyxl.styles import PatternFill
@@ -8,7 +9,6 @@ from openpyxl.styles import Side
 from openpyxl.utils import get_column_letter
 from openpyxl.workbook import Workbook
 from osha.oira import _
-from pkg_resources import resource_filename
 from plone import api
 from plone.memoize.view import memoize
 from plonetheme.nuplone.utils import formatDate
@@ -122,8 +122,8 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         font_large.size = 18
         ws1["A1"].font = font_large
 
-        image_filename = resource_filename(
-            "osha.oira.client", "resources/oira-logo-colour.png"
+        image_filename = str(
+            files("osha.oira.client").joinpath("resources", "oira-logo-colour.png")
         )
         logo = Image(image_filename)
         ws1.add_image(logo, "K1")

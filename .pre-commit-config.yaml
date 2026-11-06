@@ -1,40 +1,112 @@
+# Generated from:
+# https://github.com/plone/meta/tree/2.x/src/plone/meta/default
+# See the inline comments on how to expand/tweak this configuration file
+ci:
+    autofix_prs: false
+    autoupdate_schedule: monthly
+
 repos:
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.21.2
+-   repo: https://github.com/asottile/pyupgrade
+    rev: v3.22.0
     hooks:
-      - id: pyupgrade
-        args: [--py37-plus]
-  - repo: https://github.com/ambv/black
-    rev: 26.5.1
+    -   id: pyupgrade
+        args: [--py311-plus]
+-   repo: https://github.com/pycqa/isort
+    rev: 9.0.2
     hooks:
-      - id: black
-  - repo: https://github.com/pycqa/isort
-    rev: 9.0.0a3
+    -   id: isort
+-   repo: https://github.com/psf/black-pre-commit-mirror
+    rev: 26.10.1
     hooks:
-      - id: isort
-  - repo: https://github.com/PyCQA/flake8
-    rev: 7.3.0
+    -   id: black
+-   repo: https://github.com/collective/zpretty
+    rev: 4.0.3
     hooks:
-      - id: flake8
-  - repo: https://github.com/PyCQA/bandit
-    rev: 1.9.4
+    -   id: zpretty
+
+##
+# Add extra configuration options in .meta.toml:
+#  [pre_commit]
+#  zpretty_extra_lines = """
+#  _your own configuration lines_
+#  """
+##
+-   repo: https://github.com/PyCQA/flake8
+    rev: 7.4.1
     hooks:
-      - id: bandit
-        exclude: /tests/
-        args:
-          - --severity-level=medium
-          - --confidence-level=medium
-          - --skip=B608
-  - repo: https://github.com/collective/zpretty
-    rev: 4.0.1
+    -   id: flake8
+
+##
+# Add extra configuration options in .meta.toml:
+#  [pre_commit]
+#  flake8_extra_lines = """
+#  _your own configuration lines_
+#  """
+##
+-   repo: https://github.com/codespell-project/codespell
+    rev: v2.4.3
     hooks:
-      - id: zpretty
-        exclude: src/euphorie/client/resources
-  - repo: https://github.com/syslabcom/slc.pre-commit
-    rev: 1.0.0
+    -   id: codespell
+        additional_dependencies:
+          - tomli
+
+##
+# Add extra configuration options in .meta.toml:
+#  [pre_commit]
+#  codespell_extra_lines = """
+#  _your own configuration lines_
+#  """
+##
+-   repo: https://github.com/mgedmin/check-manifest
+    rev: "0.51"
     hooks:
-      - id: check-po
-  - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.38.0
+    -   id: check-manifest
+-   repo: https://github.com/regebro/pyroma
+    rev: "5.1b2"
     hooks:
-      - id: yamllint
+    -   id: pyroma
+-   repo: https://github.com/mgedmin/check-python-versions
+    rev: "0.25.0"
+    hooks:
+    -   id: check-python-versions
+        args: ['--only', 'setup.py,tox.ini']
+-   repo: https://github.com/collective/i18ndude
+    rev: "6.3.0"
+    hooks:
+    -   id: i18ndude
+
+
+##
+# Add extra configuration options in .meta.toml:
+#  [pre_commit]
+#  i18ndude_extra_lines = """
+#  _your own configuration lines_
+#  """
+##
+
+- repo: https://github.com/PyCQA/bandit
+  rev: 1.9.4
+  hooks:
+    - id: bandit
+      exclude: /tests/
+      args:
+        - --severity-level=medium
+        - --confidence-level=medium
+        - --skip=B608
+- repo: https://github.com/syslabcom/slc.pre-commit
+  rev: 1.0.0
+  hooks:
+    - id: check-po
+- repo: https://github.com/adrienverge/yamllint.git
+  rev: v1.38.0
+  hooks:
+    - id: yamllint
+      exclude: ^(\.pre-commit-config\.yaml|\.github/workflows/test-matrix\.yml)$
+
+##
+# Add extra configuration options in .meta.toml:
+#  [pre_commit]
+#  extra_lines = """
+#  _your own configuration lines_
+#  """
+##

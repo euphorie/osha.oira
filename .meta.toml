@@ -39,6 +39,9 @@ skip_test_extra = true
 test_extras ="""
   tests
 """
+test_deps_additional = """
+  Euphorie@git+https://github.com/euphorie/Euphorie.git@main
+"""
 
 [tox.test_matrix]
 "6.2" = ["3.14", "3.11"]

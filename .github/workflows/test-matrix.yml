@@ -41,6 +41,8 @@ jobs:
           tox.ini
           pyproject.toml
         python-version: ${{ matrix.config[0] }}
+    - name: install OS packages
+      run: sudo apt-get install -y libldap2-dev libsasl2-dev
 
 ##
 # Add extra configuration options in .meta.toml:

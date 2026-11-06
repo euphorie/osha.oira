@@ -31,7 +31,7 @@ extra_lines = """
   rev: v1.38.0
   hooks:
     - id: yamllint
-      exclude: ^(\\.pre-commit-config\\.yaml|\\.github/workflows/test-matrix\\.yml)$
+      exclude: ^(\\.pre-commit-config\\.yaml|\\.github/workflows/.*\\.yml)$
 """
 
 [tox]
@@ -46,3 +46,6 @@ test_deps_additional = """
 [tox.test_matrix]
 "6.2" = ["3.14", "3.11"]
 "6.3" = ["3.15", "3.13", "3.12"]
+
+[github]
+os_dependencies = "libldap2-dev libsasl2-dev"

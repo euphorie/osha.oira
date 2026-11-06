@@ -42,6 +42,9 @@ test_extras ="""
 test_deps_additional = """
   Euphorie@git+https://github.com/euphorie/Euphorie.git@main
 """
+testenv_options = """
+pass_env = PLAYWRIGHT_HOST_PLATFORM_OVERRIDE
+"""
 
 [tox.test_matrix]
 "6.2" = ["3.14", "3.11"]
@@ -49,3 +52,8 @@ test_deps_additional = """
 
 [github]
 os_dependencies = "libldap2-dev libsasl2-dev"
+jobs = ["dependencies", "release_ready"]
+extra_lines_after_os_dependencies = """
+    - name: Set Playwright host platform
+      run: echo 'PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64' >> "$GITHUB_ENV"
+"""

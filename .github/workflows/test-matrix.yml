@@ -43,6 +43,8 @@ jobs:
         python-version: ${{ matrix.config[0] }}
     - name: install OS packages
       run: sudo apt-get install -y libldap2-dev libsasl2-dev
+    - name: Set Playwright host platform
+      run: echo 'PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64' >> "$GITHUB_ENV"
 
 ##
 # Add extra configuration options in .meta.toml:

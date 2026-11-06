@@ -41,7 +41,7 @@ SURVEY = """<sector xmlns="http://xml.simplon.biz/euphorie/survey/1.0">
 def addSurvey(portal, xml_survey):
     """Add a survey to the portal.
 
-    This function requires that you are already loggin in as portal
+    This function requires that you are already logged in as portal
     owner.
     """
     from euphorie.client.browser import publish

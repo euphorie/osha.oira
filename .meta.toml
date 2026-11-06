@@ -6,6 +6,7 @@ template = "default"
 commit-id = "2.12.0"
 
 [pyproject]
+codespell_skip = "*.pot,*.pt,*.robot,*.txt"
 # These requirements are used through configuration or other packages; the
 # old htmllaundry import is an optional compatibility fallback.
 dependencies_ignores = "['htmllaundry', 'mobile.sniffer', 'node.ext.ldap', 'Pillow', 'Products.MemcachedManager', 'zope.app.publication']"

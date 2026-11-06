@@ -13,7 +13,7 @@ from zope import schema
 
 help_default_probability = _(
     "help_default_probability",
-    default="Indicate how likely occurence of this risk is in a normal situation.",
+    default="Indicate how likely occurrence of this risk is in a normal situation.",
 )
 help_default_frequency = _(
     "help_default_frequency",

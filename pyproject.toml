@@ -4,6 +4,8 @@
 [build-system]
 requires = ["setuptools>=68.2,<83", "wheel"]
 
+
+
 [tool.towncrier]
 directory = "news/"
 filename = "CHANGES.rst"
@@ -72,7 +74,7 @@ target-version = ["py311"]
 
 [tool.codespell]
 ignore-words-list = "discreet,assertin,thet,"
-skip = "*.po,"
+skip = "*.po,*.pot,*.pt,*.robot,*.txt"
 ##
 # Add extra configuration options in .meta.toml:
 #  [pyproject]

@@ -54,7 +54,7 @@ class MapImages(BrowserView):
         sourcename = urlparse(img.attrib["src"]).path.split("/")[-1]
         basename = unquote(sourcename.split(".")[0]).strip()
         if " " in basename:
-            name = " ".join([part for part in basename.split(" ")[:-1]])
+            name = " ".join([*basename.split(" ")[:-1]])
         else:
             name = basename
         filename = f"{name} 300.png"

@@ -7,8 +7,11 @@
       i18n:domain="euphorie"
 >
   <body>
-    <metal:title fill-slot="title">
-      Manage LDAP users in ${here/Title}
+    <metal:title fill-slot="title"
+                 i18n:translate=""
+    >
+      Manage LDAP users in
+      <tal:title i18n:name="title">${here/Title}</tal:title>
     </metal:title>
     <metal:content fill-slot="content">
       <script type="text/javascript">
@@ -22,8 +25,12 @@
       </script>
 
 
-      <h2>Existing users with local role
-        <em tal:condition="python:context.portal_type=='euphorie.country'">Country Manager</em><em tal:condition="python:context.portal_type=='euphorie.sector'">Sector Manager</em>
+      <h2 i18n:translate="">Existing users with local role
+        <em i18n:name="role"><tal:country tal:condition="python:context.portal_type=='euphorie.country'"
+                       i18n:translate=""
+          >Country Manager</tal:country><tal:sector tal:condition="python:context.portal_type=='euphorie.sector'"
+                      i18n:translate=""
+          >Sector Manager</tal:sector></em>
         enabled</h2>
       <tal:existing-roles define="
                             userids view/local_roles_userids;
@@ -31,16 +38,18 @@
 
         <p class="message notice"
            tal:condition="python:context.portal_type=='euphorie.country' and not userids"
+           i18n:translate=""
         >There are no country managers for this country.</p>
         <p class="message notice"
            tal:condition="python:context.portal_type=='euphorie.sector' and not userids"
+           i18n:translate=""
         >There are no sector managers for this sector.</p>
 
         <metal:macro define-macro="user-table">
           <table tal:condition="nocall:userids">
             <thead>
               <tr>
-                <th>Login</th>
+                <th i18n:translate="">Login</th>
                 <th class="actions">&nbsp;</th>
               </tr>
             </thead>
@@ -69,6 +78,7 @@
                                 type="submit"
                                 value="grant"
                                 tal:condition="not:has_managed_roles"
+                                i18n:translate=""
                         >Grant Roles</button>
                         <button class="micro floatAfter function"
                                 id="revoke_role"
@@ -77,6 +87,7 @@
                                 type="submit"
                                 value="revoke"
                                 tal:condition="has_managed_roles"
+                                i18n:translate=""
                         >Revoke Roles</button>
                       </tal:button>
                       <tal:csrf replace="structure context/@@authenticator/authenticator" />
@@ -89,7 +100,7 @@
         </metal:macro>
       </tal:existing-roles>
 
-      <h2>Search for LDAP users</h2>
+      <h2 i18n:translate="">Search for LDAP users</h2>
       <form method="POST"
             style="margin: 0 0 10px;"
       >
@@ -100,6 +111,7 @@
         <button name="search-ldap"
                 type="submit"
                 value="1"
+                i18n:translate=""
         >Search</button>
       </form>
       <tal:ldap-users define="
@@ -110,12 +122,20 @@
           </metal:macro>
         </tal:users>
       </tal:ldap-users>
-      <p tal:condition="python:context.portal_type=='euphorie.country'">This form allows you to grant the
-        <em>Country Manager</em>
-        role for "${context/title}" to selected users.</p>
-      <p tal:condition="python:context.portal_type=='euphorie.sector'">This form allows you to grant the
-        <em>Sector Manager</em>
-        role for "${context/title}" to selected users.</p>
+      <p tal:condition="python:context.portal_type=='euphorie.country'"
+         i18n:translate=""
+      >This form allows you to grant the
+        <em i18n:name="role"
+            i18n:translate=""
+        >Country Manager</em>
+        role for "<tal:title i18n:name="title">${context/title}</tal:title>" to selected users.</p>
+      <p tal:condition="python:context.portal_type=='euphorie.sector'"
+         i18n:translate=""
+      >This form allows you to grant the
+        <em i18n:name="role"
+            i18n:translate=""
+        >Sector Manager</em>
+        role for "<tal:title i18n:name="title">${context/title}</tal:title>" to selected users.</p>
     </metal:content>
   </body>
 </html>

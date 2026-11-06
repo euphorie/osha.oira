@@ -42,6 +42,7 @@
                    data-pat-tooltip="
                         source: ajax;
                         position-list: tr;"
+                   i18n:translate=""
                 >
                     More&hellip;
                 </a>
@@ -50,6 +51,7 @@
                     <li tal:condition="XXX|nothing">
                       <a class="icon-direction"
                          href="#"
+                         i18n:translate=""
                       >Move</a>
                     </li>
                     <li tal:condition="python:helpers.has_contents">
@@ -93,6 +95,7 @@
                 <a class="default pat-button edit pat-inject"
                    href="OIRA_CREATOR_APP_URL/@@oira-edit/${python:'/'.join(context.getPhysicalPath()[3:])}"
                    tal:condition="can_edit"
+                   i18n:translate=""
                 >
                   Edit</a>
               </div>

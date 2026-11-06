@@ -98,7 +98,7 @@ class BaseManageLDAPUsersView(BrowserView):
             ob.reindexObject(idxs=["managerRolesAndUsers"], update_metadata=0)
 
     def maybe_manage_local_roles(self):
-        """Check the request and see if we should mange some user local
+        """Check the request and see if we should manage some user local
         roles."""
         ldap_action = self.request.get("ldap_action")
         if not isinstance(ldap_action, str):

@@ -777,7 +777,7 @@ BREAKING CHANGE: ui freshup. Requires Euphorie >= 13.0.0
 ------------------
 
 - Fix a problem in the Excel report, MOI-488
-- Fix inconsisten lookup of publioshed surveys for the statistics, MOI-483
+- Fix inconsistent lookup of publioshed surveys for the statistics, MOI-483
 
 7.0.5 (2021-09-29)
 ------------------
@@ -966,7 +966,7 @@ All traces of Grok have been removed.
 6.0.14 (2020-03-31)
 -------------------
 
-- Update injections so that progess indicator gets updated during browsing
+- Update injections so that progress indicator gets updated during browsing
 
 6.0.13 (2020-03-23)
 -------------------
@@ -982,7 +982,7 @@ All traces of Grok have been removed.
 6.0.11 (2020-02-17)
 -------------------
 
-- Provide integration for showing and updating progess indicator
+- Provide integration for showing and updating progress indicator
 
 6.0.10 (2020-01-29)
 -------------------
@@ -1397,7 +1397,7 @@ Changed:
 3.0.0rc5 (2015-10-29)
 ---------------------
 
-- More tanslation changes
+- More translation changes
 
 3.0.0rc4 (2015-10-28)
 ---------------------
@@ -1409,7 +1409,7 @@ Changed:
 3.0.0rc3 (2015-10-22)
 ---------------------
 
-- Disbale remove confirmation messages
+- Disable remove confirmation messages
 
 3.0.0rc2 (2015-10-21)
 ---------------------
@@ -1489,7 +1489,7 @@ usage of Patternslib.
 2.2.16 (2014-07-08)
 -------------------
 
-- Translation corections in PT #10379
+- Translation corrections in PT #10379
 
 2.2.15 (2014-07-07)
 -------------------
@@ -1554,7 +1554,7 @@ usage of Patternslib.
 - #7947 Fixed: Optional module wrongly reflected in report [jcbrand]
 - Correction in FR. Refs #8583 [jcbrand]
 - Fixed navigation for profile question #7547 [jcbrand]
-- Fixed #7253: Investigation on Evaulation Mandatory [jcbrand]
+- Fixed #7253: Investigation on Evaluation Mandatory [jcbrand]
 - Translation fixes: #8801, #8810, #8583, #8964 [pilz]
 - Avoid SQL error when updating Oira tool session #9039 [jcbrand]
 
@@ -1647,7 +1647,7 @@ Feature changes
 ~~~~~~~~~~~~~~~
 
 - Added Hungarian translations #7091 [pysailor]
-- Changed title for statistics report to re-use existing translations [pysailor]
+- Changed title for statistics report to reuse existing translations [pysailor]
 - Include the top-level module in the downloadble action plan spreadsheet. [jcbrand]
 - allow choosing file format (pdf/xls) in statistics form, refs #7169 [reinhardt]
 
@@ -1762,7 +1762,7 @@ Bugfixes
 - Correct display of error messages on the risk action plan form.
 - Add upgrade step to set default value for ``time`` column used for statistics.
   Fixes error upon client login under certain circumstances.
-- Update HELP trnaslations for FR and EL. #5648
+- Update HELP translations for FR and EL. #5648
 - Fix unicode error when adding profiles in client. #4403
 
 
@@ -1943,7 +1943,7 @@ Bugfixes
 1.2.21 (2012-10-29)
 -------------------
 
-- Added missing i18n:translate statments in risk_actionplan (copied from the
+- Added missing i18n:translate statements in risk_actionplan (copied from the
   Euphorie version) [thomasw]
 
 1.2.20 (2012-10-29)
@@ -2039,7 +2039,7 @@ Bugfixes
 1.2.5 (2012-07-23)
 ------------------
 
-- Renabled links on questions in the sidebar. For #5187. [jcbrand]
+- Re-enabled links on questions in the sidebar. For #5187. [jcbrand]
 - Implement custom homepage functionality. For #5055. [jcbrand]
 
 1.2.4 (2012-06-28)
@@ -2190,7 +2190,7 @@ Bugfixes
 0.12 (2011-05-05)
 -----------------
 
-- Restructure package to faciliate automated tested.
+- Restructure package to facilitate automated tested.
 - #2556 Backported the frontpage fixes from Cornelis. [jcbrand]
 - #2754 Modules should be movable before profile questions. [jcbrand]
 - #2611 Changed headings in the final report [jcbrand]
@@ -2281,8 +2281,8 @@ Bugfixes
 0.3 (2011-02-23)
 ----------------
 
-- during the xml import, langauge values might still include trailing and leading spaces.
-  For the frontpage langauge detection, we need to strip them.
+- during the xml import, language values might still include trailing and leading spaces.
+  For the frontpage language detection, we need to strip them.
   [pilz]
 - Bugfix for identification download report generation. [jcbrand]
 

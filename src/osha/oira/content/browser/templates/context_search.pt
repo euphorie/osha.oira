@@ -8,7 +8,9 @@
       i18n:domain="euphorie"
 >
   <body>
-    <metal:title metal:fill-slot="title">Search results</metal:title>
+    <metal:title metal:fill-slot="title"
+                 i18n:translate=""
+    >Search results</metal:title>
     <metal:content fill-slot="content">
       <form action="${context/absolute_url}/@@context-search"
             method="GET"
@@ -27,7 +29,9 @@
               results found.</p>
             <ul>
               <li tal:repeat="result view/results">
-                <a href="${result/url}"><em class="discrete">[${result/typ}]</em>
+                <a href="${result/url}"><em class="discrete"
+                      i18n:ignore=""
+                  >[${result/typ}]</em>
                   ${result/title}</a>
                 <div><a href="${result/url}"
                      tal:content="result/path"

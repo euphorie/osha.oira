@@ -1,6 +1,8 @@
 <tal:vars define="
             manager nocall:view/context;
-          ">Dear
+          "
+          i18n:ignore=""
+>Dear
   <tal:name replace="view/contact_name" />,
 
 An account has been created for your

@@ -53,7 +53,7 @@ class View(BrowserView):
                 "button_text": api.portal.translate(_("Learn more…")),
                 "text": api.portal.translate(
                     _(
-                        "Tip: Re-use existing risk assessments with the duplication "
+                        "Tip: Reuse existing risk assessments with the duplication "
                         "feature."
                     )
                 ),

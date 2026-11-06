@@ -11,7 +11,9 @@
       "
       i18n:domain="euphorie"
 >
-  <tal:comment condition="python:False">
+  <tal:comment condition="python:False"
+               i18n:ignore=""
+  >
      This is the risk view template.
      It is used to display how a risk would be displayed in the client.
 
@@ -36,7 +38,9 @@
                   id="action-plan-item-form"
                   tal:condition="python:show_existing_measures"
         >
-          <tal:comment condition="python:False">
+          <tal:comment condition="python:False"
+                       i18n:ignore=""
+          >
               This has no equivalent in any place, just in proto.
           </tal:comment>
           <article class="pat-rich">
@@ -68,6 +72,7 @@
                     disabled
                     title="Add another measure"
                     type="button"
+                    i18n:attributes="title"
                     i18n:translate="label_add_another_measure"
             >Add another already implemented measure</button>
           </div>
@@ -75,7 +80,9 @@
         </fieldset>
         <fieldset class="vertical">
 
-          <tal:comment condition="python:False">
+          <tal:comment condition="python:False"
+                       i18n:ignore=""
+          >
               This comes from the `@@webhelpers/macros/risk_identification` macro.
           </tal:comment>
 
@@ -164,7 +171,9 @@
             </tal:always_present>
           </fieldset>
 
-          <tal:comment condition="python:False">
+          <tal:comment condition="python:False"
+                       i18n:ignore=""
+          >
               The `@@webhelpers/macros/risk_identification` macro copied code ends here.
           </tal:comment>
 
@@ -198,13 +207,13 @@
                   <div class="panel-content">
                     <section class="pat-rich">
                       <tal:field condition="python: solution.action">
-                        <h4>
+                        <h4 i18n:translate="">
                             Description
                         </h4>
                         <pre class="pat-markdown">${python: solution.action}</pre>
                       </tal:field>
                       <tal:field condition="python: solution.requirements">
-                        <h4>
+                        <h4 i18n:translate="">
                             Expertise
                         </h4>
                         <p>
@@ -219,7 +228,9 @@
           </div>
         </div>
 
-        <tal:comment condition="python:False">
+        <tal:comment condition="python:False"
+                     i18n:ignore=""
+        >
           We had a conditional section for showing evaluation when additional measures were needed.
           But we choose not to show this.
         </tal:comment>
@@ -349,7 +360,9 @@
                     tal:condition="nocall:here/file1|nothing"
                 >
                   <a href="${here/absolute_url}/download/file1">
-                    <tal:caption condition="here/file1_caption|nothing">${here/file1_caption} (${here/file1/filename})</tal:caption>
+                    <tal:caption condition="here/file1_caption|nothing"
+                                 i18n:ignore=""
+                    >${here/file1_caption} (${here/file1/filename})</tal:caption>
                     <tal:nocaption condition="not:here/file1_caption|nothing">${here/file1/filename}</tal:nocaption>
                   </a>
                 </li>
@@ -357,7 +370,9 @@
                     tal:condition="nocall:here/file2|nothing"
                 >
                   <a href="${here/absolute_url}/download/file2">
-                    <tal:caption condition="here/file2_caption|nothing">${here/file2_caption} (${here/file2/filename})</tal:caption>
+                    <tal:caption condition="here/file2_caption|nothing"
+                                 i18n:ignore=""
+                    >${here/file2_caption} (${here/file2/filename})</tal:caption>
                     <tal:nocaption condition="not:here/file2_caption|nothing">${here/file2/filename}</tal:nocaption>
                   </a>
                 </li>
@@ -365,7 +380,9 @@
                     tal:condition="nocall:here/file3|nothing"
                 >
                   <a href="${here/absolute_url}/download/file3">
-                    <tal:caption condition="here/file3_caption|nothing">${here/file3_caption} (${here/file3/filename})</tal:caption>
+                    <tal:caption condition="here/file3_caption|nothing"
+                                 i18n:ignore=""
+                    >${here/file3_caption} (${here/file3/filename})</tal:caption>
                     <tal:nocaption condition="not:here/file3_caption|nothing">${here/file3/filename}</tal:nocaption>
                   </a>
                 </li>
@@ -373,7 +390,9 @@
                     tal:condition="nocall:here/file4|nothing"
                 >
                   <a href="${here/absolute_url}/download/file4">
-                    <tal:caption condition="here/file4_caption|nothing">${here/file4_caption} (${here/file4/filename})</tal:caption>
+                    <tal:caption condition="here/file4_caption|nothing"
+                                 i18n:ignore=""
+                    >${here/file4_caption} (${here/file4/filename})</tal:caption>
                     <tal:nocaption condition="not:here/file4_caption|nothing">${here/file4/filename}</tal:nocaption>
                   </a>
                 </li>

@@ -74,6 +74,7 @@
                 <sup class="required"
                      title="Required"
                      tal:condition="widget/required"
+                     i18n:attributes="title"
                 >
                           *
                 </sup>
@@ -86,7 +87,9 @@
               <dfn class="infoPanel"
                    tal:condition="description"
               >
-                <span class="title">Information</span>
+                <span class="title"
+                      i18n:translate=""
+                >Information</span>
                 <tal:content replace="description" />
               </dfn>
 
@@ -143,6 +146,8 @@
                 <span class="fieldRequired"
                       title="Required"
                       tal:condition="widget/required"
+                      i18n:attributes="title"
+                      i18n:translate=""
                 >
                             (Required)
                 </span>

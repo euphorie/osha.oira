@@ -1,4 +1,4 @@
-from ftw.upgrade import UpgradeStep
+from collective.ftw.upgrade import UpgradeStep
 from osha.oira.setuphandlers.install import _setup_memcached
 
 

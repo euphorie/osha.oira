@@ -8,7 +8,9 @@
       i18n:domain="euphorie"
 >
 
-  <tal:comment condition="python: False">
+  <tal:comment condition="python: False"
+               i18n:ignore=""
+  >
     Most of the markup in this file is similar to the one found in:
 
     euphorie.client.browser:templates/tool_sessions.pt

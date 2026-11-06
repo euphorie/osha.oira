@@ -7,12 +7,16 @@
       i18n:domain="euphorie"
 >
   <body>
-    <metal:title fill-slot="title">
+    <metal:title fill-slot="title"
+                 i18n:translate=""
+    >
       Survey Publication Count
     </metal:title>
 
     <metal:buttonbar fill-slot="buttonbar">
-      <a href="${context/absolute_url}/@@survey-publication-count.csv">Download</a>
+      <a href="${context/absolute_url}/@@survey-publication-count.csv"
+         i18n:translate=""
+      >Download</a>
     </metal:buttonbar>
 
     <metal:content fill-slot="content">

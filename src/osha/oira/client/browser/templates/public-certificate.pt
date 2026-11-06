@@ -85,7 +85,7 @@
           <tal:comment condition="nothing">
           Unclear about whether to show the percentage. Might be a political decision not to.
             <dt i18n:translate="">Completed</dt>
-            <dd>${view/session/completion_percentage}%</dd>
+            <dd i18n:ignore="">${view/session/completion_percentage}%</dd>
           </tal:comment>
           <metal:extra_fields use-macro="view/country_adapter/macros/extra_metadata"
                               tal:condition="nocall:view/country_adapter"

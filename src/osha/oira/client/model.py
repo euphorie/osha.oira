@@ -8,7 +8,6 @@ from sqlalchemy import orm
 from sqlalchemy import schema
 from sqlalchemy import sql
 from sqlalchemy import types
-from sqlalchemy.ext.declarative import instrument_declarative
 
 import json
 
@@ -26,7 +25,7 @@ class LoginStatistics(model.BaseObject):
         nullable=False,
         index=True,
     )
-    account = orm.relation(
+    account = orm.relationship(
         model.Account,
         backref=orm.backref("logins", cascade="all, delete, delete-orphan"),
     )
@@ -75,7 +74,7 @@ class Certificate(model.BaseObject):
         nullable=False,
         index=True,
     )
-    session = orm.relation("SurveySession", cascade="all")
+    session = orm.relationship(model.SurveySession, cascade="all")
 
     @property
     def json_data(self):
@@ -135,6 +134,7 @@ class NewsletterSetting(model.BaseObject):
 
 _instrumented = False
 if not _instrumented:
+    mapper_registry = orm.registry(metadata=metadata)
     for cls in [
         LoginStatistics,
         SurveyStatistics,
@@ -143,8 +143,8 @@ if not _instrumented:
         NewsletterSubscription,
         NewsletterSetting,
     ]:
-        instrument_declarative(cls, metadata._decl_registry, metadata)
-
+        mapper_registry.map_declaratively(cls)
+    orm.configure_mappers()
     _instrumented = True
 
 
@@ -163,14 +163,14 @@ SKIPPED_MODULE = _SKIPPED_MODULE_factory()
 
 
 def _UNANSWERED_RISKS_FILTER_factory():
-    Risk_ = orm.aliased(model.Risk)
+    Risk_ = model.Risk.__table__.alias()
     return sql.and_(
         model.SurveyTreeItem.type == "risk",
         sql.exists(
-            sql.select([Risk_.sql_risk_id]).where(
+            sql.select(Risk_.c.id).where(
                 sql.and_(
-                    Risk_.sql_risk_id == model.SurveyTreeItem.id,
-                    Risk_.identification == None,  # noqa: E711
+                    Risk_.c.id == model.SurveyTreeItem.id,
+                    Risk_.c.identification == None,  # noqa: E711
                 )
             )
         ),
@@ -186,12 +186,12 @@ def MODULE_WITH_UNANSWERED_RISKS_FILTER_factory():
         model.SurveyTreeItem.type == "module",
         model.SurveyTreeItem.skip_children == False,  # noqa: E/12
         sql.exists(
-            sql.select([node.id]).where(
+            sql.select(node.id).where(
                 sql.and_(
                     node.session_id == model.SurveyTreeItem.session_id,
-                    node.id == model.Risk.sql_risk_id,
+                    node.id == model.Risk.__table__.c.id,
                     node.type == "risk",
-                    model.Risk.identification == None,  # noqa: E711
+                    model.Risk.__table__.c.identification == None,  # noqa: E711
                     node.depth > model.SurveyTreeItem.depth,
                     node.path.like(model.SurveyTreeItem.path + "%"),
                 )
@@ -209,12 +209,12 @@ def MODULE_WITH_RISKS_NOT_PRESENT_FILTER_factory():
         model.SurveyTreeItem.type == "module",
         model.SurveyTreeItem.skip_children == False,  # noqa: E712
         sql.exists(
-            sql.select([node.id]).where(
+            sql.select(node.id).where(
                 sql.and_(
                     node.session_id == model.SurveyTreeItem.session_id,
-                    node.id == model.Risk.sql_risk_id,
+                    node.id == model.Risk.__table__.c.id,
                     node.type == "risk",
-                    model.Risk.identification == "yes",
+                    model.Risk.__table__.c.identification == "yes",
                     node.depth > model.SurveyTreeItem.depth,
                     node.path.like(model.SurveyTreeItem.path + "%"),
                 )
@@ -227,14 +227,14 @@ MODULE_WITH_RISKS_NOT_PRESENT_FILTER = MODULE_WITH_RISKS_NOT_PRESENT_FILTER_fact
 
 
 def RISK_NOT_PRESENT_FILTER_factory():
-    Risk_ = orm.aliased(model.Risk)
+    Risk_ = model.Risk.__table__.alias()
     return sql.and_(
         model.SurveyTreeItem.type == "risk",
         sql.exists(
-            sql.select([Risk_.sql_risk_id]).where(
+            sql.select(Risk_.c.id).where(
                 sql.and_(
-                    Risk_.sql_risk_id == model.SurveyTreeItem.id,
-                    Risk_.identification == "yes",
+                    Risk_.c.id == model.SurveyTreeItem.id,
+                    Risk_.c.identification == "yes",
                 )
             )
         ),

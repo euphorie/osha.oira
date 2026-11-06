@@ -12,6 +12,7 @@ from osha.oira import _
 from plone import api
 from plone.memoize.view import memoize
 from plonetheme.nuplone.utils import formatDate
+from sqlalchemy import orm
 from sqlalchemy import sql
 from z3c.saconfig import Session
 from zope.i18n import translate
@@ -283,8 +284,9 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
         This implementation differs from Euphorie in its ordering:
         it sorts on risk priority instead of start date.
         """
+        risk = orm.aliased(model.Risk, flat=True)
         query = (
-            Session.query(model.Module, model.Risk, model.ActionPlan)
+            Session.query(model.Module, risk, model.ActionPlan)
             .select_from(model.Module)
             .filter(
                 sql.and_(
@@ -299,24 +301,20 @@ class ActionPlanTimeline(report.ActionPlanTimeline):
                     model.RISK_PRESENT_OR_TOP5_FILTER,
                 )
             )
-            .join(model.Risk, model.Risk.parent_id == model.Module.id)
+            .join(risk, risk.parent_id == model.Module.id)
             .join(
-                (
-                    model.ActionPlan,
-                    sql.and_(
-                        model.ActionPlan.risk_id == model.Risk.id,
-                        sql.or_(
-                            model.ActionPlan.plan_type == "measure_standard",
-                            model.ActionPlan.plan_type == "measure_custom",
-                        ),
+                model.ActionPlan,
+                sql.and_(
+                    model.ActionPlan.risk_id == risk.id,
+                    sql.or_(
+                        model.ActionPlan.plan_type == "measure_standard",
+                        model.ActionPlan.plan_type == "measure_custom",
                     ),
-                )
+                ),
             )
             .order_by(
-                sql.case(
-                    value=model.Risk.priority, whens={"high": 0, "medium": 1}, else_=2
-                ),
-                model.Risk.path,
+                sql.case({"high": 0, "medium": 1}, value=risk.priority, else_=2),
+                risk.path,
             )
         )
         return [

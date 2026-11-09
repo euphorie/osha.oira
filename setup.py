@@ -3,7 +3,7 @@ from setuptools import setup
 import monkeypatch_setup  # noqa: F401
 import os
 
-version = "15.0.0"
+version = "15.0.1.dev0"
 
 setup(
     name="osha.oira",

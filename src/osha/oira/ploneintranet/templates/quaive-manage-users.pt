@@ -45,8 +45,8 @@
               <p style="margin-left: 0.5em"
                  tal:condition="sector/managers"
               >
-                <em i18n:translate="">Managers</em>:
-              ${python:', '.join(sector['managers'])}
+                <em i18n:translate="">Managers</em><tal:block i18n:ignore="">:
+                  ${python:', '.join(sector['managers'])}</tal:block>
               </p>
             </fieldset>
           </tal:sectors>

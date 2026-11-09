@@ -23,23 +23,26 @@
       <span tal:content="view/label_detail"
             tal:omit-tag=""
             i18n:translate=""
-      ></span><tal:detail condition="title_detail">: ${title_detail}</tal:detail>
+      ></span><tal:detail condition="title_detail"
+                  i18n:ignore=""
+      >: ${title_detail}</tal:detail>
     </metal:title>
   </head>
 
   <body>
     <metal:content fill-slot="content">
       <div class="introduction">
-        <p>
+        <p i18n:translate="">
             The statistics for OiRA are now available under a separate source. You can log in with the same account as you logged in here.
         </p>
-        <p>
-          The global statistics are available here:<br /><a href="https://oiraproject.eu/statistics/global/"
+        <p><span i18n:translate="">The global statistics are available here:</span><br /><a href="https://oiraproject.eu/statistics/global/"
              target="_statistics"
+             i18n:ignore=""
           >https://oiraproject.eu/statistics/global/</a></p>
 
-        <p>The country-specific statistics are available here:<br /><a href="https://oiraproject.eu/statistics/countries/"
+        <p><span i18n:translate="">The country-specific statistics are available here:</span><br /><a href="https://oiraproject.eu/statistics/countries/"
              target="_statistics"
+             i18n:ignore=""
           >https://oiraproject.eu/statistics/countries/</a>
         </p>
       </div>

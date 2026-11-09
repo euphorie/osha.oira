@@ -1,4 +1,4 @@
-"""Add newletter settings.
+"""Add newsletter settings.
 
 Revision ID: 20221121122205
 Revises: 20221118124144

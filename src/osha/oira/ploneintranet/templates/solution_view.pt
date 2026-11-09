@@ -21,13 +21,13 @@
             <div class="panel-content">
               <section class="pat-rich">
                 <tal:field condition="python: here.action">
-                  <h4>
+                  <h4 i18n:translate="">
                     Description
                   </h4>
                   <pre class="pat-markdown">${python: here.action}</pre>
                 </tal:field>
                 <tal:field condition="python: here.requirements">
-                  <h4>
+                  <h4 i18n:translate="">
                     Expertise
                   </h4>
                   <p>

@@ -1,0 +1,59 @@
+# Generated from:
+# https://github.com/plone/meta/tree/2.x/src/plone/meta/default
+# See the inline comments on how to expand/tweak this configuration file
+[meta]
+template = "default"
+commit-id = "2.12.0"
+
+[pyproject]
+codespell_skip = "*.pot,*.pt,*.robot,*.txt"
+# These requirements are used through configuration or other packages; the
+# old htmllaundry import is an optional compatibility fallback.
+dependencies_ignores = "['htmllaundry', 'mobile.sniffer', 'node.ext.ldap', 'Pillow', 'Products.MemcachedManager', 'zope.app.publication']"
+dependencies_mappings = ["NuPlone = ['plonetheme.nuplone']"]
+
+[pre_commit]
+extra_lines = """
+- repo: https://github.com/PyCQA/bandit
+  rev: 1.9.4
+  hooks:
+    - id: bandit
+      exclude: /tests/
+      args:
+        - --severity-level=medium
+        - --confidence-level=medium
+        - --skip=B608
+- repo: https://github.com/syslabcom/slc.pre-commit
+  rev: 1.0.0
+  hooks:
+    - id: check-po
+- repo: https://github.com/adrienverge/yamllint.git
+  rev: v1.38.0
+  hooks:
+    - id: yamllint
+      exclude: ^(\\.pre-commit-config\\.yaml|\\.github/workflows/.*\\.yml)$
+"""
+
+[tox]
+skip_test_extra = true
+test_extras ="""
+  tests
+"""
+test_deps_additional = """
+  Euphorie@git+https://github.com/euphorie/Euphorie.git@main
+"""
+testenv_options = """
+pass_env = PLAYWRIGHT_HOST_PLATFORM_OVERRIDE
+"""
+
+[tox.test_matrix]
+"6.2" = ["3.14", "3.11"]
+"6.3" = ["3.15", "3.13", "3.12"]
+
+[github]
+os_dependencies = "libldap2-dev libsasl2-dev"
+jobs = ["dependencies", "release_ready"]
+extra_lines_after_os_dependencies = """
+    - name: Set Playwright host platform
+      run: echo 'PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64' >> "$GITHUB_ENV"
+"""

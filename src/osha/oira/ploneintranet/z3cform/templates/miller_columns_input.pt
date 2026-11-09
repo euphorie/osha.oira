@@ -27,6 +27,7 @@
                   direction: left;
                   trigger: auto;
                   selector: #miller-column-${depth}"
+               i18n:translate=""
             >Jump to content</a>
             <fieldset class="pat-miller-columns-column pat-autosubmit pat-subform pat-inject"
                       id="miller-column-contents-${depth}"
@@ -120,6 +121,7 @@
               />
               <button class="assistive-text"
                       type="submit"
+                      i18n:translate=""
               >
                         Update
               </button>
@@ -128,7 +130,9 @@
                  id="miller-column-${python:depth + 1}"
             >
               <div class="pat-miller-columns-column placeholder">
-                <p hidden>
+                <p hidden
+                   i18n:translate=""
+                >
                           Select a folder or a document above.
                 </p>
               </div>

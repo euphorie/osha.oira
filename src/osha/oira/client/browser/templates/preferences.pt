@@ -36,9 +36,11 @@
           <div class="container"
                id="app-content-preferences"
           >
+
             <fieldset class="form-panel pat-collapsible true section horizontal has-value open focus"
                       id="patterns-label-personal-details"
                       data-pat-collapsible="store: local; scroll-selector: self; scroll-offset: 100px"
+                      tal:condition="view/show_personal_details"
             >
               <h3 class="form-separation-header collapsible-open"
                   i18n:translate="title_personal_details"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<registry>
+
+  <!-- Delete the manually set plone.webstats_js registry entry. We're
+  including the matomo script now from a zope resource separate file. -->
+  <record name="plone.webstats_js">
+    <value />
+  </record>
+
+</registry>

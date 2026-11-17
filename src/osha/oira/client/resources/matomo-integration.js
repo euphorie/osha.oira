@@ -161,48 +161,77 @@ var _paq = (window._paq = window._paq || []);
     }
   }
 
-  async function compile_tracking_variables() {
+  // Serializes the tracker updates, so that page views are recorded in
+  // navigation order even if the dimensions requests complete out of order.
+  let tracking_chain = Promise.resolve();
+
+  // The URL of the last tracked page view. It is used as referrer for
+  // in-page navigations, where `document.referrer` does not change.
+  let last_tracked_url = null;
+
+  function track_page_view() {
     console.debug("Matomo: Tracking triggered.");
 
-    const document_title = `${document.domain}/${document.title}`;
+    // Capture the page context synchronously, before anything is awaited.
+    // Navigation can happen while the dimensions are loading.
     const url = clean_url(window.location.href);
-    const referrer_url = clean_url(document.referrer);
-    const activity = "-3.1. Online interactive Risk Assessment (OiRA) tool";
-    const activity_var = "3.1. Online interactive Risk Assessment (OiRA) tool";
-
-    // Fall back to tracking dimensions from the template.
-    // NOTE: Loaded before fetch to avoid timing issues. If navigation happens
-    // while fetching from remote, then the dimensions from the new page would
-    // be used.
-    // TODO: this code can probably be removed when scrum-3351 is rolled-out.
-    const get_template_value = (id) =>
-      document.getElementById(id)?.textContent?.trim() || "";
-    let tracking_dimensions = {
-      country_name: get_template_value("country_name"),
-      sector_name: get_template_value("sector_name"),
-      tool_name: get_template_value("tool_name"),
-      language_code: get_template_value("language_code"),
+    const context = {
+      document_title: `${document.domain}/${document.title}`,
+      url: url,
+      referrer_url: last_tracked_url ?? clean_url(document.referrer),
+      // Fall back to tracking dimensions from the template.
+      // NOTE: The #metadata element is outside of the injected #content, so
+      // after in-page navigations these values are those of the initially
+      // loaded page.
+      // TODO: this code can probably be removed when scrum-3351 is rolled-out.
+      fallback_dimensions: {
+        country_name: get_template_value("country_name"),
+        sector_name: get_template_value("sector_name"),
+        tool_name: get_template_value("tool_name"),
+        language_code: get_template_value("language_code"),
+      },
     };
+    last_tracked_url = url;
 
-    // Load tracking dimensions.
-    let _tracking_dimensions = await load_tracking_dimensions();
-    if (_tracking_dimensions) {
-      tracking_dimensions = _tracking_dimensions;
-    } else {
+    // Start the request now, so that it refers to the captured page.
+    const dimensions_request = load_tracking_dimensions();
+
+    // Wait for previous page views to be tracked before tracking this one.
+    tracking_chain = tracking_chain
+      .then(() => dimensions_request)
+      .then((tracking_dimensions) =>
+        push_page_view(context, tracking_dimensions),
+      )
+      .catch((error) => {
+        console.error("Matomo: ❌ Error tracking page view:", error);
+      });
+    return tracking_chain;
+  }
+
+  function get_template_value(id) {
+    return document.getElementById(id)?.textContent?.trim() || "";
+  }
+
+  function push_page_view(context, tracking_dimensions) {
+    if (!tracking_dimensions) {
       console.warn(
         "Matomo: No Piwik data loaded, using template values for tracking.",
       );
+      tracking_dimensions = context.fallback_dimensions;
     }
 
-    /* retrieve custom variable content */
+    const activity = "-3.1. Online interactive Risk Assessment (OiRA) tool";
+    const activity_var = "3.1. Online interactive Risk Assessment (OiRA) tool";
     const country = tracking_dimensions.country_name;
     const sector = tracking_dimensions.sector_name;
     const tool = tracking_dimensions.tool_name;
     const language = tracking_dimensions.language_code;
 
-    _paq.push(["setDocumentTitle", document_title]);
-    _paq.push(["setCustomUrl", url]);
-    _paq.push(["setReferrerUrl", referrer_url]);
+    // Set all tracker fields and track the page view without awaiting in
+    // between, so that no other page view can interfere.
+    _paq.push(["setDocumentTitle", context.document_title]);
+    _paq.push(["setCustomUrl", context.url]);
+    _paq.push(["setReferrerUrl", context.referrer_url]);
     _paq.push(["setCustomDimension", 1, activity]);
     _paq.push(["setCustomDimension", 2, country]);
     _paq.push(["setCustomDimension", 3, sector]);
@@ -218,6 +247,7 @@ var _paq = (window._paq = window._paq || []);
 
     // Queue or invoke (if tracking script is already loaded) the tracking request
     _paq.push(["trackPageView"]);
+    console.debug("Matomo: ✅ Page view tracked:", context.url);
   }
 
   function base_tracking_initialization() {
@@ -258,9 +288,8 @@ var _paq = (window._paq = window._paq || []);
   // The page view still waits for dimensions or the template fallback.
   base_tracking_initialization();
 
-  // Quick! register the tracking event handler before potentially costly
-  // initial compile_tracking_variables, so that navigation during that time can
-  // also be tracked.
+  // Register the navigation handler before tracking the initial page view, so
+  // that navigation during the initial dimensions request is tracked too.
   let previous_url = location.href;
   document.addEventListener("patterns-injected-delayed", function () {
     // Track page injections with history changes.
@@ -268,13 +297,10 @@ var _paq = (window._paq = window._paq || []);
       console.debug("Matomo: pat-inject triggered tracking.");
       // Only track if the URL has changed
       previous_url = location.href;
-      // Keep tracking values while loading the next page's dimensions.
-      // compile_tracking_variables overwrites all values before tracking
-      // the new page view.
-      compile_tracking_variables();
+      track_page_view();
     }
   });
 
-  // Compile tracking variables
-  await compile_tracking_variables();
+  // Track the initial page view.
+  await track_page_view();
 })();

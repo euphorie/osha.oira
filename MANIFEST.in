@@ -22,8 +22,9 @@ include *.sql
 include *.txt
 
 graft docs
+prune AGENTS.md
+prune CLAUDE.md
 prune work
-prune matomo
 prune news
 prune docs/.build
 prune src/Euphorie

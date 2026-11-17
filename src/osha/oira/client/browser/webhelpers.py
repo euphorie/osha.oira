@@ -1,11 +1,25 @@
 from euphorie.client.browser.webhelpers import WebHelpers
+from functools import cache
 from logging import getLogger
 from osha.oira.client.model import UsersNotInterestedInCertificateStatusBox
 from osha.oira.utils import is_image_small
+from pathlib import Path
+from plone import api
 from plone.memoize.instance import memoize
 from z3c.saconfig import Session
 
+import hashlib
+
 log = getLogger(__name__)
+
+MATOMO_JS = Path(__file__).parent.parent / "resources" / "matomo-integration.js"
+
+
+@cache
+def _matomo_unique_key():
+    """Cache-busting key; same `++webresource++` convention as Plone's bundles."""
+    digest = hashlib.sha256(MATOMO_JS.read_bytes()).hexdigest()[:16]
+    return f"++webresource++{digest}"
 
 
 class OSHAWebHelpers(WebHelpers):
@@ -63,3 +77,14 @@ class OSHAWebHelpers(WebHelpers):
             return """<script> (function(h,o,t,j,a,r){ h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)}; h._hjSettings={hjid:2105952,hjsv:6}; a=o.getElementsByTagName('head')[0]; r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv; a.appendChild(r); })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv='); </script>"""  # noqa: E501
         else:
             return ""
+
+    def get_webstats_js(self):
+        """Return the webstats_js plus our own matomo-integration.js file with
+        a `++webresource++<CACHEKEY>` cache key.
+        """
+        webstats_js = api.portal.get_registry_record("plone.webstats_js") or ""
+        src = (
+            f"{self.portal_url}/{_matomo_unique_key()}"
+            "/++resource++osha.oira.client/matomo-integration.js"
+        )
+        return webstats_js + f'\n<script async src="{src}"></script>\n'

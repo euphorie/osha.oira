@@ -58,7 +58,6 @@ var _paq = (window._paq = window._paq || []);
 
   const download_path_pattern =
     /(?:@@pdf|@@timeline|\.(?:docx|xlsx|pptx|pdf|gif|jpe?g|png|zip))$/i;
-  let previous_url = location.href;
 
   /**
    * Clean a URL by removing the session id.
@@ -165,33 +164,35 @@ var _paq = (window._paq = window._paq || []);
   async function compile_tracking_variables() {
     console.debug("Matomo: Tracking triggered.");
 
-    // Wait for JSON data before proceeding
-    let tracking_dimensions = await load_tracking_dimensions();
+    const document_title = `${document.domain}/${document.title}`;
+    const url = clean_url(window.location.href);
+    const referrer_url = clean_url(document.referrer);
+    const activity = "-3.1. Online interactive Risk Assessment (OiRA) tool";
+    const activity_var = "3.1. Online interactive Risk Assessment (OiRA) tool";
 
-    if (!tracking_dimensions) {
+    // Fall back to tracking dimensions from the template.
+    // NOTE: Loaded before fetch to avoid timing issues. If navigation happens
+    // while fetching from remote, then the dimensions from the new page would
+    // be used.
+    // TODO: this code can probably be removed when scrum-3351 is rolled-out.
+    const get_template_value = (id) =>
+      document.getElementById(id)?.textContent?.trim() || "";
+    let tracking_dimensions = {
+      country_name: get_template_value("country_name"),
+      sector_name: get_template_value("sector_name"),
+      tool_name: get_template_value("tool_name"),
+      language_code: get_template_value("language_code"),
+    };
+
+    // Load tracking dimensions.
+    let _tracking_dimensions = await load_tracking_dimensions();
+    if (_tracking_dimensions) {
+      tracking_dimensions = _tracking_dimensions;
+    } else {
       console.warn(
         "Matomo: No Piwik data loaded, using template values for tracking.",
       );
-
-      // Fall back to tracking dimensions from the template.
-      // TODO: this code can probably be removed when scrum-3351 is rolled-out.
-      const get_template_value = (id) =>
-        document.getElementById(id)?.textContent?.trim() || "";
-      tracking_dimensions = {
-        country_name: get_template_value("country_name"),
-        sector_name: get_template_value("sector_name"),
-        tool_name: get_template_value("tool_name"),
-        language_code: get_template_value("language_code"),
-      };
     }
-    console.debug("Matomo: ✅ tracking initialized with custom variables.");
-
-    // Custom variables
-    _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-
-    // Set the URL to be tracked
-    _paq.push(["setCustomUrl", clean_url(window.location.href)]);
-    _paq.push(["setReferrerUrl", clean_url(document.referrer)]);
 
     /* retrieve custom variable content */
     const country = tracking_dimensions.country_name;
@@ -199,27 +200,21 @@ var _paq = (window._paq = window._paq || []);
     const tool = tracking_dimensions.tool_name;
     const language = tracking_dimensions.language_code;
 
-    _paq.push([
-      "setCustomVariable",
-      1,
-      "Activity",
-      "3.1. Online interactive Risk Assessment (OiRA) tool",
-      "visit",
-    ]);
-    _paq.push(["setCustomVariable", 2, "Country", country, "visit"]);
-    _paq.push(["setCustomVariable", 3, "Sector", sector, "visit"]);
-    _paq.push(["setCustomVariable", 4, "Tool", tool, "visit"]);
-
-    // Custom variables are retained for compatibility with existing Matomo reports.
-    _paq.push([
-      "setCustomDimension",
-      1,
-      "-3.1. Online interactive Risk Assessment (OiRA) tool",
-    ]);
+    _paq.push(["setDocumentTitle", document_title]);
+    _paq.push(["setCustomUrl", url]);
+    _paq.push(["setReferrerUrl", referrer_url]);
+    _paq.push(["setCustomDimension", 1, activity]);
     _paq.push(["setCustomDimension", 2, country]);
     _paq.push(["setCustomDimension", 3, sector]);
     _paq.push(["setCustomDimension", 4, tool]);
     _paq.push(["setCustomDimension", 5, language]);
+
+    // Custom variables
+    // These are kept for compatibility with existing Matomo reports.
+    _paq.push(["setCustomVariable", 1, "Activity", activity_var, "visit"]);
+    _paq.push(["setCustomVariable", 2, "Country", country, "visit"]);
+    _paq.push(["setCustomVariable", 3, "Sector", sector, "visit"]);
+    _paq.push(["setCustomVariable", 4, "Tool", tool, "visit"]);
 
     // Queue or invoke (if tracking script is already loaded) the tracking request
     _paq.push(["trackPageView"]);
@@ -262,9 +257,11 @@ var _paq = (window._paq = window._paq || []);
   // Load the tracker in parallel with the dimensions request.
   // The page view still waits for dimensions or the template fallback.
   base_tracking_initialization();
-  // Compile tracking variables
-  await compile_tracking_variables();
 
+  // Quick! register the tracking event handler before potentially costly
+  // initial compile_tracking_variables, so that navigation during that time can
+  // also be tracked.
+  let previous_url = location.href;
   document.addEventListener("patterns-injected-delayed", function () {
     // Track page injections with history changes.
     if (previous_url !== location.href) {
@@ -277,4 +274,7 @@ var _paq = (window._paq = window._paq || []);
       compile_tracking_variables();
     }
   });
+
+  // Compile tracking variables
+  await compile_tracking_variables();
 })();

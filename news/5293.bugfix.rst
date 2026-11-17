@@ -1,0 +1,5 @@
+Matomo: Preserve page context while loading tracking dimensions.
+Register navigation tracking before the initial dimensions request and snapshot
+page metadata before fetching. Retain legacy reporting values and document the
+accepted response-ordering limitation.
+Ref: ADR 0002

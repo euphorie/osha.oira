@@ -1,4 +1,3 @@
 Matomo: Move integration script to own resource.
 This will reduce the payload per page view, as the script can be cached by the
 browser. Also, browsers won't report "unsafe-inline" CSP error.
-Ref: ADR 0001

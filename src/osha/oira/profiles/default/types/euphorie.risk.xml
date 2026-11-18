@@ -5,9 +5,18 @@
 >
 
   <!-- List of enabled behaviors -->
-  <property name="behaviors">
+  <property name="behaviors"
+            purge="False"
+  >
     <element value="osha.oira.content.risk.IRiskAdditionalContent" />
     <element value="euphorie.content.behaviour.uniqueid.INameFromUniqueId" />
+    <element value="euphorie.related_images" />
+  </property>
+
+  <property name="allowed_content_types"
+            purge="False"
+  >
+    <element value="Image" />
   </property>
 
 </object>

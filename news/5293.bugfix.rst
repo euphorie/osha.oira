@@ -1,6 +1,0 @@
-Matomo: Preserve page context while loading tracking dimensions.
-Register navigation tracking before the initial dimensions request and snapshot
-page metadata before fetching.
-Track page views in navigation order, even if the dimensions requests complete
-out of order, and use the previous page as referrer for in-page navigations.
-Retain legacy reporting values.

@@ -156,7 +156,7 @@ var _paq = (window._paq = window._paq || []);
       console.debug("Matomo: 📌 Loaded Piwik Variables:", data);
       return data;
     } catch (error) {
-      console.error("Matomo: ❌ Error loading Piwik variables:", error);
+      console.debug("Matomo: ❌ Error loading Piwik variables:", error);
       return null;
     }
   }
@@ -214,7 +214,7 @@ var _paq = (window._paq = window._paq || []);
 
   function push_page_view(context, tracking_dimensions) {
     if (!tracking_dimensions) {
-      console.warn(
+      console.debug(
         "Matomo: No Piwik data loaded, using template values for tracking.",
       );
       tracking_dimensions = context.fallback_dimensions;

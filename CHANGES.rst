@@ -1,3 +1,12 @@
+15.1.1 (2026-11-25)
+-------------------
+
+Bug fixes:
+
+
+- Matomo: Emit debug messages instead of errors when Piwik variables loadings fails. @thet (#5293)
+
+
 15.1.0 (2026-11-25)
 -------------------
 

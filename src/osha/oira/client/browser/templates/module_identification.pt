@@ -48,7 +48,7 @@
                       title="${module/caption|nothing}"
                       tal:define="
                         images module/@@images;
-                        large python:images.scale('image', width=590, height=1900, direction='thumbnail');
+                        large python:images.scale('image', width=590, height=1900, mode='scale');
                       "
                       tal:condition="large"
                       tal:on-error="nothing"
@@ -68,7 +68,7 @@
                       title="${module/caption|nothing}"
                       tal:define="
                         images module/@@images;
-                        large python:images.scale('image', scale='training', direction='thumbnail');
+                        large python:images.scale('image', scale='training', mode='scale');
                       "
                       tal:condition="large"
                       tal:on-error="nothing"

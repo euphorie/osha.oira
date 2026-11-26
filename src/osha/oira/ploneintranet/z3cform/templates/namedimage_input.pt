@@ -35,7 +35,7 @@
                src="${scale/url}"
                tal:define="
                  images context/@@images;
-                 scale python:images.scale(view.field.getName(), direction='2col');
+                 scale python:images.scale(view.field.getName(), scale='2col', mode='scale');
                "
                tal:condition="scale"
           />

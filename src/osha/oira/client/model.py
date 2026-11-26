@@ -3,7 +3,7 @@ from euphorie.client import model
 from euphorie.client.model import metadata
 from logging import getLogger
 from plone import api
-from Products.CMFPlone.i18nl10n import monthname_msgid
+from plone.base.i18nl10n import monthname_msgid
 from sqlalchemy import orm
 from sqlalchemy import schema
 from sqlalchemy import sql

@@ -48,7 +48,6 @@ setup(
         "plone.api",
         "plone.app.content",
         "plone.app.dexterity",
-        "plone.app.layout",
         "plone.app.vocabularies",
         "plone.app.z3cform",
         "plone.autoform",

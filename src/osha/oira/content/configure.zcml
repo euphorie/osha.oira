@@ -28,7 +28,7 @@
 
   <browser:page
       name="site-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      for="plone.base.interfaces.IPloneSiteRoot"
       class=".controlpanel.SiteControlPanel"
       permission="cmf.ManagePortal"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"

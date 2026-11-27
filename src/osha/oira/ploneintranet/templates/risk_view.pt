@@ -264,7 +264,7 @@
 
               <figure class="illustration"
                       tal:define="
-                        large python:images.scale('image', scale='training', direction='thumbnail');
+                        large python:images.scale('image', scale='training', mode='scale');
                       "
                       tal:condition="large"
               >
@@ -278,7 +278,7 @@
               </figure>
               <figure class="illustration"
                       tal:define="
-                        large python:images.scale('image2', scale='training', direction='thumbnail');
+                        large python:images.scale('image2', scale='training', mode='scale');
                       "
                       tal:condition="large"
               >
@@ -292,7 +292,7 @@
               </figure>
               <figure class="illustration"
                       tal:define="
-                        large python:images.scale('image3', scale='training', direction='thumbnail');
+                        large python:images.scale('image3', scale='training', mode='scale');
                       "
                       tal:condition="large"
               >
@@ -306,7 +306,7 @@
               </figure>
               <figure class="illustration"
                       tal:define="
-                        large python:images.scale('image4', scale='training', direction='thumbnail');
+                        large python:images.scale('image4', scale='training', mode='scale');
                       "
                       tal:condition="large"
               >

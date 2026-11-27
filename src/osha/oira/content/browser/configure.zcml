@@ -27,7 +27,7 @@
 
   <browser:page
       name="migrate-ldap-users"
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      for="plone.base.interfaces.INavigationRoot"
       class=".migrate_ldap_users.MigrateLDAPUsersView"
       permission="cmf.ManagePortal"
       />
@@ -211,7 +211,7 @@
   <!-- Statistics -->
   <browser:page
       name="write-statistics"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      for="plone.base.interfaces.IPloneSiteRoot"
       class=".statistics.WriteStatistics"
       permission="cmf.ManagePortal"
       layer="osha.oira.interfaces.IOSHAContentSkinLayer"
@@ -251,7 +251,7 @@
 
   <browser:page
       name="about.html"
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      for="plone.base.interfaces.INavigationRoot"
       class=".about.About"
       template="templates/about.pt"
       permission="cmf.ManagePortal"
@@ -259,7 +259,7 @@
 
   <browser:page
       name="map-images"
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      for="plone.base.interfaces.INavigationRoot"
       class=".map_images.MapImages"
       permission="cmf.ManagePortal"
       />

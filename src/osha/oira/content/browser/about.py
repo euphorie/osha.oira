@@ -1,8 +1,8 @@
 from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version
 from plone import api
+from plone.base.utils import get_installer
 from plone.memoize.view import memoize
-from Products.CMFPlone.utils import get_installer
 from Products.Five import BrowserView
 
 

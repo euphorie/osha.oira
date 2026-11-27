@@ -17,7 +17,7 @@
               title="${context/caption|nothing}"
               tal:define="
                 images context/@@images;
-                scale python:images.scale('image', width=590, height=1900, direction='thumbnail') if is_image_small else images.scale('image', scale='training', direction='thumbnail');
+                scale python:images.scale('image', width=590, height=1900, mode='scale') if is_image_small else images.scale('image', scale='training', mode='scale');
               "
               tal:condition="scale"
       >

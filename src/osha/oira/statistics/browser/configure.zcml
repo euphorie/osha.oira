@@ -5,7 +5,7 @@
 
   <browser:page
       name="update-tool-info"
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      for="plone.base.interfaces.INavigationRoot"
       class=".views.UpdateToolInfo"
       permission="cmf.ManagePortal"
       />

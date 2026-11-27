@@ -1,0 +1,29 @@
+Add a new behavior to link images on a risk
+
+TODO: we still have lots of issues, please do not merge until these are fixed.
+
+
+About image management
+
+- [ ] I could not find in proto how to add a new image, I had to add the images manually
+      (calling ``/++add++Image``)
+- [ ] There is no clear way to manage uploaded images (editing, deleting, ...)
+
+About the relation management:
+
+- [ ] Only one relation can be picked at a time
+- [ ] Removing a relation is not yet implemented
+- [ ] When sorting the relations some injection happens (it should not)
+- [ ] When sorting the relations the images are (apparently) not sorted,
+      but reloading the page shows them in the proper order
+
+Minor UI issues:
+
+- [ ] The picker that opens in the panel has not the proper classes in the buttons
+- [ ] We do not have a proper macro for the tabbed panels
+- [ ] There is no page to display the image view
+- [ ] In the navigation tree we do not have an icon for the image
+
+Rest API issues:
+
+- [ ] The ``related_images`` field is not serialized as ``null``

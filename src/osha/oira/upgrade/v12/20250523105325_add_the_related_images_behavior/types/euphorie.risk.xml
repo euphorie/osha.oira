@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        meta_type="Dexterity FTI"
+        name="euphorie.risk"
+>
+
+  <property name="behaviors"
+            purge="False"
+  >
+    <element value="euphorie.related_images" />
+  </property>
+
+  <property name="allowed_content_types"
+            purge="False"
+  >
+    <element value="Image" />
+  </property>
+
+</object>

@@ -152,7 +152,14 @@ var _paq = (window._paq = window._paq || []);
         throw new Error("HTTP " + response.status);
       }
 
-      const data = await response.json();
+      // Get the response and parse as JSON, but first check, if the response is
+      // empty.
+      const body = await response.text();
+      if (!body.trim()) {
+        return null;
+      }
+      const data = JSON.parse(body);
+
       console.debug("Matomo: 📌 Loaded Piwik Variables:", data);
       return data;
     } catch (error) {
